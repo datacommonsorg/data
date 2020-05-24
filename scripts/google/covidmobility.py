@@ -1,5 +1,6 @@
 from random import random
-
+import sys
+sys.path.insert(1, '../../')
 import util.county_to_dcid as county_to_dcid
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.name_to_alpha2 as name_to_alpha2
