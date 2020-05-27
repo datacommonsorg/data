@@ -48,7 +48,7 @@ can be represented as:
 
 ```
 Node: Observation_MedianAge_SanAntonio_TX_2014
-typeOf: dcs:`StatVarObservation`
+typeOf: dcs:StatVarObservation
 variableMeasured: dcid:MedianAge
 observationAbout: dcid:geoId/4865000
 observationDate: "2014"
@@ -84,7 +84,7 @@ from the `StatVarObservation` for its own `populationType` and `location` values
 
 ```
 Node: StatisticalPopulation_People_SanAntonio_TX
-typeOf: dcid:`StatisticalPopulation`
+typeOf: dcid:StatisticalPopulation
 populationType: dcid:Person
 location: dcid:geoId/4865000
 ```
@@ -97,7 +97,7 @@ the `StatVarObservation` as its own `.*Value` property and value.
 
 ```
 Node: Observation_MedianAge_SanAntonio_TX_2014
-typeOf: schema:`Observation`
+typeOf: schema:Observation
 measuredProperty: dcs:age
 medianValue: 39.4
 observedNode: l:StatisticalPopulation_People_SanAntonio_TX
