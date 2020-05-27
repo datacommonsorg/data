@@ -49,7 +49,7 @@ TEMPLATE_MCF_TEMPLATE = """
 Node: E:COVIDTracking_States->E{index}
 typeOf: StatVarObservation
 variableMeasured: {stat_var}
-observationAbout: C:COVIDTracking_States->GeoID
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
 value: C:COVIDTracking_States->{stat_var}
 """
