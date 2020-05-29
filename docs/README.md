@@ -1,4 +1,4 @@
-# Data Commons Documentation
+# Contributing to Data Commons
 
 ## Getting Started
 
