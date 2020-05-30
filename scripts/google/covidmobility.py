@@ -198,12 +198,20 @@ class CovidMobility:
         :param measured_value: Value of the observation.
         :return: Observation Node MCF String
         """
+<<<<<<< HEAD
 
         # Remove any whitespace
         node_id: str = "Node: " + observed_node + date.replace("-", "")
         # if node_id == "Node: BroomfieldCountyColoradoUnitedStatesWorkplace20200403":
         #     print("EXITING")
         #     exit()
+=======
+        observed_node_ascii =  ''.join([i if ord(i) < 128 else '_' for i in observed_node])
+        measured_value = measured_value.replace('-', '')
+        date = date.replace('-', '').replace('/', '')
+        # Remove any whitespace
+        node_id: str = f"Node: {observed_node_ascii}_{date}_{measured_value}\n".replace(" ", "")
+>>>>>>> 7ac7121cda5492735865110a69009638009ff55e
 
         return (f"{node_id}\n"
                 "typeOf: schema:Observation\n"
