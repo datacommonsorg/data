@@ -66,16 +66,18 @@ class CovidMobility:
         :arg row_data: the row data represented as a dictionary.
         """
         location_name: str = row_data['sub_region_2'] + row_data['sub_region_1'] + row_data['country']
+        location_name = ''.join([i if ord(i) < 128 else '_' for i in location_name])
+        location_name = location_name.replace(" ", "")
         location_dcid: str = row_data['dcid']
 
         self.mobility_locations[location_dcid] = {}
         self.mobility_locations[location_dcid]["place_categories"] = {
-            "RetailAndRecreation": f"{location_name}_RetailAndRecreation",
-            "GroceryAndPharmacy": f"{location_name}_GroceryAndPharmacy",
-            "Park": f"{location_name}_Park",
-            "TransitStation": f"{location_name}_TransitStation",
-            "Workplace": f"{location_name}_Workplace",
-            "Residential": f"{location_name}_Residential"
+            "RetailAndRecreation": f"{location_name}RetailAndRecreation",
+            "GroceryAndPharmacy": f"{location_name}GroceryAndPharmacy",
+            "Park": f"{location_name}Park",
+            "TransitStation": f"{location_name}TransitStation",
+            "Workplace": f"{location_name}Workplace",
+            "Residential": f"{location_name}Residential"
         }
 
     @staticmethod
@@ -89,11 +91,15 @@ class CovidMobility:
         :except KeyError if any of the regions aren't hashable
         """
 
-        # If key doesn't exist in the dictionary, it will throw an KeyError Exception.
+        # If key doesn't exist in the dictionary, it will throw a KeyError Exception.
         if sub_region_2:
+            if country_code != 'US':
+                raise KeyError('Not a US region.')
             state_alpha_code: str = name_to_alpha2.USSTATE_MAP[sub_region_1]
             dcid: str = county_to_dcid.COUNTY_MAP[state_alpha_code][sub_region_2]
         elif sub_region_1:
+            if country_code != 'US':
+                raise KeyError('Not a US region.')
             region_alpha_code: str = name_to_alpha2.USSTATE_MAP[sub_region_1]
             dcid: str = alpha2_to_dcid.USSTATE_MAP[region_alpha_code]
         else:
@@ -176,6 +182,8 @@ class CovidMobility:
                 if not measured_value:
                     continue
 
+                print(row_data)
+
                 observation_node: str = self.get_observation_node(observed_node=observation_node_id,
                                                                   date=row_data['date'],
                                                                   measured_value=measured_value)
@@ -190,13 +198,15 @@ class CovidMobility:
         :param measured_value: Value of the observation.
         :return: Observation Node MCF String
         """
-        observed_node_ascii =  ''.join([i if ord(i) < 128 else '_' for i in observed_node])
-        measured_value = measured_value.replace('-', '')
-        date = date.replace('-', '').replace('/', '')
-        # Remove any whitespace
-        node_id: str = f"Node: {observed_node_ascii}_{date}_{measured_value}\n".replace(" ", "")
 
-        return (f"{node_id}"
+        # Remove any whitespace
+        node_id: str = "Node: " + observed_node + date.replace("-", "")
+        # if node_id == "Node: BroomfieldCountyColoradoUnitedStatesWorkplace20200403":
+        #     print("EXITING")
+        #     exit()
+
+
+        return (f"{node_id}\n"
                 "typeOf: schema:Observation\n"
                 f"observedNode: l:{observed_node}\n"
                 f'observationDate: "{date}"\n'
@@ -206,4 +216,4 @@ class CovidMobility:
 
 
 if __name__ == '__main__':
-    CovidMobility('./covidmobility.csv', less_output=True)
+    CovidMobility('./input.csv', less_output=False)
