@@ -1,0 +1,11 @@
+import: {
+  import_name: "covid19mobility"
+  provenance_url: "https://www.google.com/covid19/mobility/"
+  provenance_description: "Shows how visits and length of stay at different places have changed over time compared to a baseline"
+  mcf_url: "gs://unresolved_mcf/covid_mobility/unresolved_mcf.mcf"
+  mcf_url: "gs://resolved_mcf/covid_mobility/covidmobility.mcf"
+  start_date: "2020-02-15"
+  end_date: "2020-05-29"
+  update_frequency: "P1D"
+  next_release_date: "2020-05-30"
+}
