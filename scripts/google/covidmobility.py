@@ -206,4 +206,4 @@ class CovidMobility:
 
 
 if __name__ == '__main__':
-    CovidMobility('/Users/eduardomorales/Downloads/Global_Mobility_Report.csv', less_output=False)
+    CovidMobility('./covidmobility.csv', less_output=True)
