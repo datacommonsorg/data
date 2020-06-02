@@ -88,7 +88,7 @@ in the local namespace, we use the prefix `l`.
 
 #### Special Namespaces
 
-The Data Commons graph is built on top of schema.org vocabulary and its Data
+The Data Commons graph is built on top of Schema.org vocabulary and its Data
 Commons extensions. To facilitate references to terms from these schemas, the
 prefixes `schema` and `dcs` are reserved for these vocabularies.
 
@@ -104,8 +104,8 @@ entities by their Data Commons ID (DCID).
 
 *   Curator reference: `<prefix-string>:` prefix
 *   Local ID reference: `l:` prefix
-*   schema.org schema reference: `schema:` prefix
-*   datacommons.org schema addition reference: `dcs:` prefix
+*   Schema.org schema reference: `schema:` prefix
+*   Data Commons schema addition reference: `dcs:` prefix
 *   DCID reference: `dcid:` prefix
 
 The last three are functionally identical, and the difference exists only as
@@ -116,7 +116,7 @@ corresponding DCIDs, while for the last three, we won't.
 #### Referencing Examples
 
 Here are MCF nodes for a city, county, and state, demonstrating usage of local ID,
-DCID, schema.org schema, and datacommons.org schema referencing:
+DCID, Schema.org schema, and Data Commons schema referencing:
 
 ```
 Node: USCity_0600001
@@ -248,7 +248,7 @@ containedInPlace: geoId/06
 
 #### DCID and Name Conventions
 
-- For non-schema entities, do not use underscores in identifier or DCID fields,
+- For non-schema entities, do not use underscores in identifier or DCID fields.
 
 - For classes, the DCID and name must follow PascalCasing. This
 means first letter is upper-cased.
@@ -316,6 +316,6 @@ Where E is short for "Entity" and "C" is short for "Column".
 
 Contributors need not worry about the process of using template MCF to convert
 datasets to instance MCF, but roughly, for each row of the dataset, we create
-all the nodes in the template MCF specification, subbing in values from the
+all the nodes in the template MCF specification, substituting values from the
 specified columns for each property.
 

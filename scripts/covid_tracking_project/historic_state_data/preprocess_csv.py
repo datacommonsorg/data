@@ -44,17 +44,23 @@ with open('COVIDTracking_States.csv', 'w', newline='') as f_out:
       writer.writerow(processed_dict)
 
 # Automate Template MCF generation since there are 18 Statitical Variables.
+TEMPLATE_MCF_GEO = """
+Node: E:COVIDTracking_States->E0
+typeOf: dcs:State
+dcid: C:COVIDTracking_States->GeoId
+"""
 
 TEMPLATE_MCF_TEMPLATE = """
 Node: E:COVIDTracking_States->E{index}
-typeOf: StatVarObservation
-variableMeasured: {stat_var}
-observationAbout: C:COVIDTracking_States->GeoId
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+observationAbout: E:COVIDTracking_States->E0
 observationDate: C:COVIDTracking_States->Date
 value: C:COVIDTracking_States->{stat_var}
 """
 
 stat_vars = output_columns[2:]
-with open('COVIDTracking_States.mcf', 'w', newline='') as f_out:
+with open('COVIDTracking_States.tmcf', 'w', newline='') as f_out:
+  f_out.write(TEMPLATE_MCF_GEO)
   for i in range(len(stat_vars)):
     f_out.write(TEMPLATE_MCF_TEMPLATE.format_map({'index': i+1, 'stat_var': output_columns[2:][i]}))

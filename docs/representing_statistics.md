@@ -14,7 +14,7 @@ The most commonly used high-level schema types for representing statistical data
 - [`Class`](https://schema.org/Class)
 - [`Property`](https://schema.org/Property)
 - [`StatisticalPopulation`](https://schema.org/StatisticalPopulation)
-- [`Observation`](https://schema.org/`Observation`)
+- [`Observation`](https://schema.org/Observation)
 
 - [`Curator`](https://browser.datacommons.org/kg?dcid=Curator)
 - [`Provenance`](https://browser.datacommons.org/kg?dcid=Provenance)
@@ -79,8 +79,8 @@ statType: dcs:medianValue
 unit: dcs:Year
 ```
 
-The `StatisticalPopulation` extracts the `populationType` and `observationAbout` values
-from the `StatVarObservation` for its own `populationType` and `location` values.
+The `StatisticalPopulation` extracts the `StatVarObservation`'s
+`populationType` and `observationAbout` for its own `populationType` and `location`.
 
 ```
 Node: StatisticalPopulation_People_SanAntonio_TX
@@ -89,19 +89,19 @@ populationType: dcid:Person
 location: dcid:geoId/4865000
 ```
 
-The `Observation` copies the `StatisticalVariable`'s `measuredProperty`,
-`measurementMethod`, `measurementQualifier`, `unit`, etc.
-and the `StatVarObservation`'s `observationDate`. It also extracts the
-`statType`value from the `StatisticalVariable` and the `value` value from
-the `StatVarObservation` as its own `.*Value` property and value.
+The `Observation` copies the `StatVarObservation`'s `observationDate`
+and the `StatisticalVariable`'s `measuredProperty`,
+`measurementMethod`, `measurementQualifier`, `unit`, etc. It also extracts the
+`StatisticalVariable`'s `statType` and the `StatVarObservation`'s `value`
+as its own `.*Value` property and value.
 
 ```
 Node: Observation_MedianAge_SanAntonio_TX_2014
 typeOf: schema:Observation
-measuredProperty: dcs:age
-medianValue: 39.4
 observedNode: l:StatisticalPopulation_People_SanAntonio_TX
 observationDate: "2014"
+measuredProperty: dcs:age
+medianValue: 39.4
 ```
 
 Any leftover properties, if applicable, such as:
