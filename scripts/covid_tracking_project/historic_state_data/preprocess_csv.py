@@ -46,7 +46,7 @@ with open('COVIDTracking_States.csv', 'w', newline='') as f_out:
 # Automate Template MCF generation since there are 18 Statitical Variables.
 TEMPLATE_MCF_GEO = """
 Node: E:COVIDTracking_States->E0
-typeOf: dcs:State
+typeOf: schema:State
 dcid: C:COVIDTracking_States->GeoId
 """
 
