@@ -14,6 +14,7 @@
 
 from random import random
 import sys
+
 sys.path.insert(1, '../../')
 import util.county_to_dcid as county_to_dcid
 import util.alpha2_to_dcid as alpha2_to_dcid
@@ -30,8 +31,9 @@ class CovidMobility:
     Converts a Google COVID-19 Mobility Report CSV file to MCF.
     :arg input_file: Google COVID-19 Mobility Report CSV file (11 rows in total).
     """
-
-    def __init__(self, input_file: str, less_output: bool = False) -> None:
+    def __init__(self, input_file: str = None, less_output: bool = False) -> None:
+        if not input_file:
+            return
         self.input_csv: str = input_file
         self.less_output = less_output
 
@@ -71,7 +73,6 @@ class CovidMobility:
                     print('Skipped: ' + str(row_as_list))
                     continue
                 self.data.append(row_data)
-
                 self.generate_node_id_for_row(row_data)
 
     def generate_node_id_for_row(self, row_data: dict) -> None:
@@ -104,7 +105,6 @@ class CovidMobility:
         :return location_dcid
         :except KeyError if any of the regions aren't hashable
         """
-
         # If key doesn't exist in the dictionary, it will throw a KeyError Exception.
         if sub_region_2:
             if country_code != 'US':
@@ -196,8 +196,6 @@ class CovidMobility:
                 if not measured_value:
                     continue
 
-                print(row_data)
-
                 observation_node: str = self.get_observation_node(observed_node=observation_node_id,
                                                                   date=row_data['date'],
                                                                   measured_value=measured_value)
@@ -215,10 +213,6 @@ class CovidMobility:
 
         # Remove any whitespace
         node_id: str = "Node: " + observed_node + date.replace("-", "")
-        # if node_id == "Node: BroomfieldCountyColoradoUnitedStatesWorkplace20200403":
-        #     print("EXITING")
-        #     exit()
-
 
         return (f"{node_id}\n"
                 "typeOf: schema:Observation\n"
