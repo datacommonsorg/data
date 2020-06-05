@@ -151,7 +151,8 @@ where cause of death was chronic kidney disease", etc. are enumerations of varia
 specific population. The clauses "In 2016, there were 99999" and "In 2017, there
 were 999" are observations on those populations.
 
-In Data Commons, we define `StatisticalPopulation`s and `Observation`s.
+In Data Commons, we use `StatisticalPopulation` and `Observation` types to model
+these statements.
 
 #### Representing `StatisticalPopulation`s
 
@@ -240,7 +241,7 @@ encodes the count of deaths by chronic kidney disease in Travis County, TX
 in the year 2017.
 
 The `observationPeriod` "P1Y" means "period 1 year", formatted according to
-[ISO 8601 duration specifications](https://en.wikipedia.org/wiki/ISO_8601#Durations)).
+[ISO 8601 duration specifications](https://en.wikipedia.org/wiki/ISO_8601#Durations).
 
 `Observation`s can also have properties related to the measurement technique,
 margin of error, etc. To elaborate on ExampleObs1 above, we can have:
