@@ -133,12 +133,12 @@ triples using this `StatisticalVariable` and `StatVarObservation` format.
 
 ### `StatisticalPopulation` and `Observation`
 
-Prelude: we'd like to emphasize that `StatisticalPopulation` and `Observation` types are being deemphasized in favor of `StatisticalVariable` and `StatVarObservation`. However, it is still useful to understand these types as they are, as of June 2020, still the final representation in the graph. Understanding `StatisticalPopulation` and `Observation` may also aid in a deeper understanding of `StatisticalVariable` and `StatVarObservation`.
+Prelude: we'd like to emphasize that `StatisticalPopulation` and `Observation` types are being deemphasized in favor of `StatisticalVariable` and `StatVarObservation`. However, it is still useful to understand these types since they are still (as of June 2020) the final representation in the graph. Understanding `StatisticalPopulation` and `Observation` may also aid in a deeper understanding of `StatisticalVariable` and `StatVarObservation`.
 
 <!-- Adapted from https://docs.google.com/document/d/139jXakeQk4ChwCkGjqq5wJfCPMDnwIV94oCH-JzJrhM/edit?usp=sharing by R.V. Guha -->
 
-Sometimes, we want to make statements (aggregate statistical reports) not about
-particular entities but about sets of entities of a particular type that have
+Sometimes, we want to make statements not about
+particular entities but about sets of entities of a particular type that share
 some properties, such as:
 
 1.  In 2016, there were 99999 people in USA, who were male,
@@ -155,7 +155,7 @@ In Data Commons, we define `StatisticalPopulation`s and `Observation`s.
 
 #### Representing `StatisticalPopulation`s
 
-A `StatisticalPopulation` is a set of instances of a certain given type that
+A `StatisticalPopulation` is a set of instances of a certain type that
 satisfy some set of constraints. The property `populationType` is used to
 specify the type. Any property that can be used on instances of that type can
 appear on the `StatisticalPopulation`. An instance of `StatisticalPopulation` whose
@@ -186,7 +186,7 @@ causeOfDeath: XYZ
 encodes the clause "deaths in Travis County where the cause of death was
 XYZ".
 
-StatisticalPopulationExample1(&2) is an abstract set in the sense that it does
+StatisticalPopulationExample1(&2) is an abstract set--it does
 not correspond to a particular set of people who satisfy that constraint at a
 certain point in time, but rather, to an abstract specification, about which we
 can make observations that are grounded at a particular point in time. We now
@@ -259,6 +259,6 @@ marginOfError: 2
 measurementMethod: CensusACS5yrSurvey
 ```
 
-to indicate that the margin of error is 2, and the measurement was made
-using the
+to indicate that the measurement's margin of error is 2, and that it was
+measured using the
 [ACS 5-year estimates](https://www.census.gov/programs-surveys/acs/guidance/estimates.html).
