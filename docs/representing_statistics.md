@@ -133,7 +133,7 @@ triples using this `StatisticalVariable` and `StatVarObservation` format.
 
 ### `StatisticalPopulation` and `Observation`
 
-Prelude: we'd like to emphasize that `StatisticalPopulation` and `Observation` types are being deemphasized in favor of `StatisticalVariable` and `StatVarObservation`. However, it is still useful to understand these types since they are still (as of June 2020) the final representation in the graph. Understanding `StatisticalPopulation` and `Observation` may also aid in a deeper understanding of `StatisticalVariable` and `StatVarObservation`.
+> Prelude: we'd like to emphasize that `StatisticalPopulation` and `Observation` types are being deemphasized in favor of `StatisticalVariable` and `StatVarObservation`. However, it is still useful to understand these types since they are still (as of June 2020) the final representation in the graph. Understanding `StatisticalPopulation` and `Observation` may also aid in a deeper understanding of `StatisticalVariable` and `StatVarObservation`.
 
 <!-- Adapted from https://docs.google.com/document/d/139jXakeQk4ChwCkGjqq5wJfCPMDnwIV94oCH-JzJrhM/edit?usp=sharing by R.V. Guha -->
 
@@ -144,10 +144,10 @@ some properties, such as:
 1.  In 2016, there were 99999 people in USA, who were male,
     married, with a median age of 22.
 2.  In 2017, there were 999 deaths in Travis County where the cause of death was
-    XYZ.
+    chronic kidney disease.
 
 The clauses "number of people who are male, hispanic" and "number of deaths
-where cause of death was XYZ", etc. are enumerations of variables about a
+where cause of death was chronic kidney disease", etc. are enumerations of variables about a
 specific population. The clauses "In 2016, there were 99999" and "In 2017, there
 were 999" are observations on those populations.
 
@@ -166,7 +166,7 @@ value v1, property p2 with value v2, etc.
 For the two examples above, the MCF node
 
 ```
-Node: dcid:StatisticalPopulationExample1
+Node: StatisticalPopulationExample1
 typeOf: schema:StatisticalPopulation
 populationType: schema:Person
 location: dcid:country/USA
@@ -177,16 +177,16 @@ encodes the clause "people in USA, who were male, married",
 and the MCF node
 
 ```
-Node: dcid:StatisticalPopulationExample2
+Node: StatisticalPopulationExample2
 typeOf: schema:StatisticalPopulation
 populationType: dcs:MortalityEvent
 location: dcid:geoId/48453
-causeOfDeath: XYZ
+causeOfDeath: dcs:ChronicKidneyDisease
 ```
 encodes the clause "deaths in Travis County where the cause of death was
-XYZ".
+chronic kidney disease".
 
-StatisticalPopulationExample1(&2) is an abstract set--it does
+Each `StatisticalPopulation` is an abstract set--it does
 not correspond to a particular set of people who satisfy that constraint at a
 certain point in time, but rather, to an abstract specification, about which we
 can make observations that are grounded at a particular point in time. We now
@@ -207,17 +207,17 @@ particular time. The principal properties of an `Observation` are
 For the same two examples, the MCF nodes
 
 ```
-Node: dcid:Obs1
+Node: ExampleObs1
 type: schema:Observation
-observedNode: l:SP1
+observedNode: l:StatisticalPopulationExample1
 measuredProperty: dcs:count
 measuredValue: 99999
 observationDate: "2016"
 observationPeriod: "P1Y"
 
-Node: dcid:Obs2
+Node: ExampleObs2
 type: schema:Observation
-observedNode: l:SP1
+observedNode: l:StatisticalPopulationExample1
 measuredProperty: dcs:age
 medianValue: 999
 unit: dcs:Year
@@ -228,35 +228,33 @@ encode the count and median age statistics for married males in the USA in
 the year 2016, and the MCF node
 
 ```
-Node: dcid:Obs3
+Node: ExampleObs3
 typeOf: schema:Observation
-observedNode: l:SP2
+observedNode: l:StatisticalPopulationExample2
 measuredProperty: dcs:count
 measuredValue: 22
 observationDate: "2017"
 observationPeriod: "P1Y"
 ```
-encodes the count of deaths by XYZ in Travis County, TX in the year 2017.
+encodes the count of deaths by chronic kidney disease in Travis County, TX
+in the year 2017.
 
-The `observationPeriod` "P1Y" means "period 1 year". The format for
-`observationPeriod` is "P" for "Period", a number describing how many of: "Y"
-for "years", "M" for "months", "D" for "days", "m" for "minutes", and "s" for
-seconds (following the unit representations from
-[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)).
+The `observationPeriod` "P1Y" means "period 1 year", formatted according to
+[ISO 8601 duration specifications](https://en.wikipedia.org/wiki/ISO_8601#Durations)).
 
 `Observation`s can also have properties related to the measurement technique,
-margin of error, etc. To elaborate on Obs1 above, we can have:
+margin of error, etc. To elaborate on ExampleObs1 above, we can have:
 
 ```
-Node: dcid:Obs1
+Node: ExampleObs1
 type: schema:Observation
 observedNode: l:SP1
-measuredProperty: count
+measuredProperty: dcs:count
 measuredValue: 99999
 observationDate: "2016"
 observationPeriod: "P1Y"
 marginOfError: 2
-measurementMethod: CensusACS5yrSurvey
+measurementMethod: dcs:CensusACS5yrSurvey
 ```
 
 to indicate that the measurement's margin of error is 2, and that it was
