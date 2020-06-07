@@ -38,7 +38,7 @@ new_columns_1 = ['GeoId', 'CACountyName', 'CALicensedHealthcareFacilityBedFACID'
                  'CALicensedHealthcareFacilityBedCapacity']
 
 # start process dataset and also add one new column called 'ALicensedHealthcareFacilityCountyId'.
-with open('CA_licensed_healthcare_facility_types_and_counts.csv', 'w', newline='') as f_out:
+with open('CA_Licensed_Healthcare_Facility_Types_And_Counts.csv', 'w', newline='') as f_out:
     writer = csv.DictWriter(f_out, fieldnames=new_columns_1, lineterminator='\n')
     with open('temp_data.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
