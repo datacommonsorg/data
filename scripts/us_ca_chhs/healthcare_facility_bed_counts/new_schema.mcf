@@ -1,0 +1,70 @@
+
+# -----------------New Schema------------------------
+Node: dcid:MedicalResource
+Name: "Medical Resource"
+typeOf: schema:Class
+description: "Resources used for medical healthcare."
+
+Node: dcid:HospitalBed
+subClassOf: dcs:MedicalResource
+description: "Hospital bed resources for patients"
+
+Node: dcid:GeneralAcuteCare
+subClassOf: dcs:MedicalSpecialty
+description: "A medical specialty, by which a patient receives active but short-term treatment for a severe injury or episode of illness, an urgent medical condition, or during recovery from surgery."
+
+# healthcare facility type Enum definition
+Node: dcid:MedicalFacilityTypeEnum
+typeOf: schema:Class
+name: "MedicalFacilityTypeEnum"
+subClassOf: schema:Enumeration
+description: "Type of licensed healthcare facility"
+
+# healthcare facility type
+Node: dcid:SkilledNursingFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Skilled Nursing Facility"
+
+Node: dcid:IntermediateCareFacility-dd/h/n/cn/iid
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Intermediate Care Facility-dd/h/n/cn/iid"
+
+Node: dcid:CongregateLivingHealthFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Congregate Living Health Facility"
+
+Node: dcid:IntermediateCareFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Intermediate Care Facility"
+
+Node: dcid:HospiceFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Hospice Facility"
+
+Node: dcid:GeneralAcuteCareHospital
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "General Acute Care Hospital"
+
+Node: dcid:AcutePsychiatricHospital
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Acute Psychiatric Hospital"
+
+Node: dcid:Hospice
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Hospice"
+
+Node: dcid:PediatricDayHealth&RespiteCareFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Pediatric Day Health & Respite Care Facility"
+
+Node: dcid:ChronicDialysisClinic
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Chronic Dialysis Clinic"
+
+Node: dcid:ChemicalDependencyRecoveryHospital
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Chemical Dependency Recovery Hospital"
+
+Node: dcid:CorrectionalTreatmentCenter
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "Correctional Treatment Center"
