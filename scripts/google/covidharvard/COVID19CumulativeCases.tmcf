@@ -1,0 +1,5 @@
+Node: dcid:COVID19CumulativeCases
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalTest
+statType: dcs:measuredValue
+measuredProperty: dcs:cumulativeCount

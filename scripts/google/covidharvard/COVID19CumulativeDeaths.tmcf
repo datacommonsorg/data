@@ -1,0 +1,5 @@
+Node: dcid:COVID19CumulativeDeaths
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalTest
+statType: dcs:measuredValue
+measuredProperty: dcs:cumulativeCount
