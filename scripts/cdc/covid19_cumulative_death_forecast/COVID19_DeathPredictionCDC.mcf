@@ -1,0 +1,58 @@
+Node: E:COVID19DeathPredictionCDC->E0
+typeof: schema:State
+dcid: C:COVID19DeathPredictionCDC->location
+
+Node: E:COVID19DeathPredictionCDC->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19CummulativeDeathPrediction
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+predictionDate: C:COVID19DeathPredictionCDC->forecast_date
+value: C:COVID19DeathPredictionCDC->point
+measurementMethod: C:COVID19DeathPredictionCDC->model
+
+Node: E:COVID19DeathPredictionCDC->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19CummulativeDeathPredictionQuantile_0.025
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+predictionDate: C:COVID19DeathPredictionCDC->forecast_date
+value: C:COVID19DeathPredictionCDC->quantile_0.025
+measurementMethod: C:COVID19DeathPredictionCDC->model
+
+Node: E:COVID19DeathPredictionCDC->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19CummulativeDeathPredictionQuantile_0.975
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+predictionDate: C:COVID19DeathPredictionCDC->forecast_date
+value: C:COVID19DeathPredictionCDC->quantile_0.975
+measurementMethod: C:COVID19DeathPredictionCDC->model
+
+Node: E:COVID19DeathPredictionCDC->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19IncreasedDeathPrediction
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+predictionDate: C:COVID19DeathPredictionCDC->forecast_date
+value: C:COVID19DeathPredictionCDC->point
+measurementMethod: C:COVID19DeathPredictionCDC->model
+
+Node: E:COVID19DeathPredictionCDC->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19IncreasedDeathPredictionQuantile_0.025
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+predictionDate: C:COVID19DeathPredictionCDC->forecast_date
+value: C:COVID19DeathPredictionCDC->quantile_0.025
+measurementMethod: C:COVID19DeathPredictionCDC->model
+
+Node: E:COVID19DeathPredictionCDC->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19IncreasedDeathPredictionQuantile_0.975
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+predictionDate: C:COVID19DeathPredictionCDC->forecast_date
+value: C:COVID19DeathPredictionCDC->quantile_0.975
+measurementMethod: C:COVID19DeathPredictionCDC->model
+
