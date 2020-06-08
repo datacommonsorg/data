@@ -5,16 +5,18 @@ This script generates the template MCF for COVID19_death_forecast_CDC
 
 def main():
    NAME = "COVID19DeathPredictionCDC"
-   GEO = "Node: E:" + NAME + "->E0\n" +\
-   	"typeof: schema:State\n" +\
+   GEO = "Node: E:" + NAME + "->E0\n" + \
+   	"typeof: schema:State\n" + \
    	"dcid: C:" + NAME + "->location\n\n"
-   TEMPLATE = "Node: E:" + NAME +"->E{}\n" +\
-   	"typeOf: dcs:StatVarObservation\n" +\
-   	"variableMeasured: dcs:COVID19{}DeathPrediction{}\n" +\
-   	"observationAbout: E:" + NAME + "->E0\n" +\
-   	"observationDate: C:" + NAME + "->target_date\n" +\
-   	"predictionDate: C:" + NAME + "->forecast_date\n" +\
-   	"value: C:" + NAME +"->{}\n" +\
+   
+   TEMPLATE = "Node: E:" + NAME +"->E{}\n" + \
+   	"typeOf: dcs:StatVarObservation\n" + \
+   	"dcid: C:" + NAME + "->countType\n" + \
+   	"variableMeasured: dcs:COVID19{}DeathPrediction{}\n" + \
+   	"observationAbout: E:" + NAME + "->E0\n" + \
+   	"observationDate: C:" + NAME + "->target_date\n" + \
+   	"predictionDate: C:" + NAME + "->forecast_date\n" + \
+   	"value: C:" + NAME +"->{}\n" + \
    	"measurementMethod: C:"+ NAME + "->model\n\n"
    
    idx = 1
