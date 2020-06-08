@@ -1,15 +1,17 @@
-
 # -----------------New Schema------------------------
 Node: dcid:MedicalResource
 name: "Medical Resource"
 typeOf: schema:Class
-description: "Resources used for medical healthcare."
+subClassOf: schema:MedicalEntity
+description: "Resources used for medical healthcare, such as bed counts."
 
 Node: dcid:HospitalBed
+typeOf: schema:Class
 subClassOf: dcs:MedicalResource
 description: "Hospital bed resources for patients"
 
 Node: dcid:GeneralAcuteCare
+typeOf: schema:Class
 subClassOf: dcs:MedicalSpecialty
 description: "A medical specialty, by which a patient receives active but short-term treatment for a severe injury or episode of illness, an urgent medical condition, or during recovery from surgery."
 
@@ -18,7 +20,7 @@ Node: dcid:MedicalFacilityTypeEnum
 typeOf: schema:Class
 name: "MedicalFacilityTypeEnum"
 subClassOf: schema:Enumeration
-description: "Type of licensed healthcare facility"
+description: "Types of licensed healthcare facility"
 
 # healthcare facility types
 Node: dcid:SkilledNursingFacility
