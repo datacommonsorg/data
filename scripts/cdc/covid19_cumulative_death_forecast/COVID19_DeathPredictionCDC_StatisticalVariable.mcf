@@ -1,30 +1,315 @@
 Node: dcid:COVID19CumulativeDeathPrediction
-typeof: schema:StatisticalVariable
+typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19CumulativeDeathPredictionQuantile_0.025
-typeof: schema:StatisticalVariable
+typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19CumulativeDeathPredictionQuantile_0.975
-typeof: schema:StatisticalVariable
+typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19IncreasedDeathPrediction
-typeof: schema:StatisticalVariable
+typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19IncreasedDeathPredictionQuantile_0.025
-typeof: schema:StatisticalVariable
+typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19IncreasedDeathPredictionQuantile_0.975
-typeof: schema:StatisticalVariable
+typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 statType: dcs:MeasuredValue
+
+Node: dcid:COVID19DeathPredictionModel_Auquan
+name: Auquan
+typeOf: dcs:MeasurementMethodEnum
+description: Auquan Data Science
+
+Node: dcid:COVID19DeathPredictionModel_Ensemble
+name: Ensemble
+typeOf: dcs:MeasurementMethodEnum
+description: University of Massachusetts, Amherst
+
+Node: dcid:COVID19DeathPredictionModel_Columbia
+name: Columbia
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+
+Node: dcid:COVID19DeathPredictionModel_Geneva
+name: Geneva
+typeOf: dcs:MeasurementMethodEnum
+description: University of Geneva / Swiss Data Science Center
+
+Node: dcid:COVID19DeathPredictionModel_GA_Tech
+name: GA_Tech
+typeOf: dcs:MeasurementMethodEnum
+description: Georgia Institute of Technology, College of Computing
+
+Node: dcid:COVID19DeathPredictionModel_Imperial
+name: Imperial
+typeOf: dcs:MeasurementMethodEnum
+description: Imperial College, London
+
+Node: dcid:COVID19DeathPredictionModel_ISU
+name: ISU
+typeOf: dcs:MeasurementMethodEnum
+description: Iowa State University
+
+Node: dcid:COVID19DeathPredictionModel_JHU
+name: JHU
+typeOf: dcs:MeasurementMethodEnum
+description: Johns Hopkins University
+
+Node: dcid:COVID19DeathPredictionModel_LANL
+name: LANL
+typeOf: dcs:MeasurementMethodEnum
+description: Los Alamos National Laboratory
+
+Node: dcid:COVID19DeathPredictionModel_MIT
+name: MIT
+typeOf: dcs:MeasurementMethodEnum
+description: Massachusetts Institute of Technology
+
+Node: dcid:COVID19DeathPredictionModel_MOBS
+name: MOBS
+typeOf: dcs:MeasurementMethodEnum
+description: Northeastern University, Laboratory for the Modeling of Biological and Socio-technical Systems
+
+Node: dcid:COVID19DeathPredictionModel_UA
+name: UA
+typeOf: dcs:MeasurementMethodEnum
+description: University of Arizona
+
+Node: dcid:COVID19DeathPredictionModel_UCLA
+name: UCLA
+typeOf: dcs:MeasurementMethodEnum
+description: University of California, Los Angeles
+
+Node: dcid:COVID19DeathPredictionModel_UMass-MB
+name: UMass-MB
+typeOf: dcs:MeasurementMethodEnum
+description: University of Massachusetts, Amherst
+
+Node: dcid:COVID19DeathPredictionModel_ERDC
+name: ERDC
+typeOf: dcs:MeasurementMethodEnum
+description: US Army Engineer Research and Development Center
+
+Node: dcid:COVID19DeathPredictionModel_UT
+name: UT
+typeOf: dcs:MeasurementMethodEnum
+description: University of Texas, Austin
+
+Node: dcid:COVID19DeathPredictionModel_YYG
+name: YYG
+typeOf: dcs:MeasurementMethodEnum
+description: Youyang Gu
+
+Node: dcid:COVID19DeathPredictionModel_CAN
+name: CAN
+typeOf: dcs:MeasurementMethodEnum
+description: COVID Act Now
+
+Node: dcid:COVID19DeathPredictionModel_IHME
+name: IHME
+typeOf: dcs:MeasurementMethodEnum
+description: Institute of Health Metrics and Evaluation
+
+Node: dcid:COVID19DeathPredictionModel_Imperial1
+name: Imperial1
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_Imperial2
+name: Imperial2
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_NotreDame
+name: NotreDame
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UChicago
+name: UChicago
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_Imperial-ensemble1
+name: Imperial-ensemble1
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_Imperial-ensemble2
+name: Imperial-ensemble2
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_100
+name: UChicago_100
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_40
+name: UChicago_40
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_60
+name: UChicago_60
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_80
+name: UChicago_80
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_COVIDhub-ensemble
+name: COVIDhub-ensemble
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU-80contact
+name: CU-80contact
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU-80contact_1x
+name: CU-80contact_1x
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU-80contactw
+name: CU-80contactw
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_Geneva-DeterministicGrowth
+name: Geneva-DeterministicGrowth
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_GT-DeepCOVID
+name: GT-DeepCOVID
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_IHME-CurveFit
+name: IHME-CurveFit
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_LANL-GrowthRate
+name: LANL-GrowthRate
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_MIT_CovidAnalytics-DELPHI
+name: MIT_CovidAnalytics-DELPHI
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_MOBS_NEU-GLEAM_COVID
+name: MOBS_NEU-GLEAM_COVID
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_NotreDame-FRED
+name: NotreDame-FRED
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UCLA-SuEIR
+name: UCLA-SuEIR
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UMass-MechBayes
+name: UMass-MechBayes
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UT-Mobility
+name: UT-Mobility
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_YYG-ParamSearch
+name: YYG-ParamSearch
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU-60contact
+name: CU-60contact
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU-70contact
+name: CU-70contact
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_observed data
+name: observed data
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_University of Geneva
+name: University of Geneva
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU 40% contact reduction
+name: CU 40% contact reduction
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU 30% contact reduction
+name: CU 30% contact reduction
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU 20% contact reduction
+name: CU 20% contact reduction
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_UT Austin
+name: UT Austin
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_ensemble forecast
+name: ensemble forecast
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+
+Node: dcid:COVID19DeathPredictionModel_CovidSim
+name: CovidSim
+typeOf: dcs:MeasurementMethodEnum
+description: COVID-19 Simulator Consortium
+
+Node: dcid:COVID19DeathPredictionModel_GT_CHHS
+name: GT_CHHS
+typeOf: dcs:MeasurementMethodEnum
+description: Georgia Institute of Technology, Center for Health and Humanitarian Systems
+
+Node: dcid:COVID19DeathPredictionModel_PSI
+name: PSI
+typeOf: dcs:MeasurementMethodEnum
+description: Predictive Science Inc.
+
+Node: dcid:COVID19DeathPredictionModel_SWC
+name: SWC
+typeOf: dcs:MeasurementMethodEnum
+description: Snyder Wilson Consulting
 

@@ -6,7 +6,7 @@ This script generates the template MCF for COVID19_death_forecast_CDC
 def main():
    NAME = "COVID19DeathPredictionCDC"
    GEO = "Node: E:" + NAME + "->E0\n" + \
-   	"typeof: schema:State\n" + \
+   	"typeOf: schema:State\n" + \
    	"dcid: C:" + NAME + "->location\n\n"
    
    TEMPLATE = "Node: E:" + NAME +"->E{}\n" + \
