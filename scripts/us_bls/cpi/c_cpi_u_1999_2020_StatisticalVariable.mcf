@@ -1,0 +1,8 @@
+Node: dcid:US_C-CPI-U
+name: "US_C-CPI-U"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ConsumerGoodsAndServices
+measuredProperty: dcs:price
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+unit: dcs:IndexPointBasePeriod1999-12=100

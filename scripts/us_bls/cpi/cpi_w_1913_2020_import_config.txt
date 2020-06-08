@@ -1,0 +1,10 @@
+import: {
+    import_name: "cpi_w_1913_2020"
+    provenance_url: "https://www.bls.gov/cpi/"
+    provenance_description: "U.S. Bureau of Labor Statistics Consumer Price Index"
+    mcf_url: "gs://resolved_mcf/external_tables/cpi_w_1913_2020/nodes.mcf-00000-of-00001",
+    start_date: "1913-01"
+    end_date: "2020-04"
+    update_frequency: "P1M"
+    next_release_date: "2020-06-10"
+}
