@@ -94,6 +94,7 @@ TEMPLATE_MCF_TEMPLATE_1 = """
 Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
 typeOf: StatVarObservation
 variableMeasured: HealthcareFacilityBedCount
+observationDate: "2020-06-01"
 observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
 healthcareFacilityBedType: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedType
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedCapacity
@@ -177,6 +178,7 @@ TEMPLATE_MCF_TEMPLATE_2 = """
 Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
+observationDate: "2020-04-13"
 observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
 value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->{stat_var}
 """
