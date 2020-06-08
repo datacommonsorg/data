@@ -49,13 +49,19 @@ def main():
 	CDC_prediction["weeks"] = target[0].astype(int)
 	pd.options.mode.chained_assignment = None
 	
+<<<<<<< HEAD
 	#convert "target" into "target_date" for data without "target_date"
 	grouped_missing_date = CDC_prediction[CDC_prediction["target_date"] == "NaT"].groupby(["weeks"]) 
+=======
+	#convert "target" into "target_end_date" for data without "target_week_end_date"
+	grouped_missing_date = CDC_prediction[CDC_prediction["target_date"].isnull()].groupby(["weeks"]) 
+>>>>>>> 42a9a3c... correct col names
 	for _,missingdate in grouped_missing_date:
 	   week = missingdate["weeks"].unique()[0]
 	   predicted_date = pd.to_datetime(missingdate["forecast_date"])+ pd.Timedelta("{} days".format(week*7))
 	   CDC_prediction["target_date"].loc[predicted_date.index] = predicted_date.dt.strftime("%Y-%m-%d")
 	CDC_prediction = CDC_prediction.drop(columns = ["target", "weeks"])
+	
 
 	# split the cummulative death and increasing death data
 	CDC_prediction_cum = CDC_prediction[CDC_prediction["countType"] == "cum"].reset_index(drop = True).drop(columns = ["countType"])
