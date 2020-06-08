@@ -1,31 +1,37 @@
 Node: dcid:COVID19CumulativeDeathPrediction
 typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
+measuredProperty: dcs:cumulativeCount
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19CumulativeDeathPredictionQuantile_0.025
 typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
+measuredProperty: dcs:cumulativeCount
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19CumulativeDeathPredictionQuantile_0.975
 typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
+measuredProperty: dcs:cumulativeCount
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19IncreasedDeathPrediction
 typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
+measuredProperty: dcs:count
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19IncreasedDeathPredictionQuantile_0.025
 typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
+measuredProperty: dcs:count
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19IncreasedDeathPredictionQuantile_0.975
 typeOf: schema:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
+measuredProperty: dcs:count
 statType: dcs:MeasuredValue
 
 Node: dcid:COVID19DeathPredictionModel_Auquan
