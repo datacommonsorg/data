@@ -1,5 +1,5 @@
 Node: E:COVID19DeathPredictionCDC->E0
-typeof: schema:State
+typeOf: schema:State
 dcid: C:COVID19DeathPredictionCDC->location
 
 Node: E:COVID19DeathPredictionCDC->E1
