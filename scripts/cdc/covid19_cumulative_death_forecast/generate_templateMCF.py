@@ -1,6 +1,6 @@
 # Lint as: python3
 """
-This scripte generates the template MCF for COVID19_death_forecast_CDC
+This script generates the template MCF for COVID19_death_forecast_CDC
 """
 
 def main():
