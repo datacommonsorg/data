@@ -1,17 +1,9 @@
-# Dataset 1
-Node: dcid:HealthcareFacilityBedCount
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HospitalBed
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-# Dataset 2
 Node: dcid:HospitalCount
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Hospital
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-facilityType: dcs:GeneralAcuteCareHospital
+medicalSpecialty: dcs:GeneralAcuteCare
 
 Node: dcid:GeneralAcuteCareHospitalBedCount
 typeOf: dcs:StatisticalVariable

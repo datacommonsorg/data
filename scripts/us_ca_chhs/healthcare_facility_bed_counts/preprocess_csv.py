@@ -17,7 +17,6 @@ import csv
 import os
 from preprocess_csv_helper import preserve_leading_zero
 from preprocess_csv_helper import generate_dcid_for_county
-from preprocess_csv_helper import get_camel_formatting_name
 
 # Read two datasets
 df1 = pd.read_excel('https://data.chhs.ca.gov/dataset/09b8ad0e-aca6-4147-b78d-bdaad872f30b/resource/0997fa8e-ef7c-43f2-8b9a-94672935fa60/download/healthcare_facility_beds.xlsx',
@@ -37,6 +36,21 @@ new_columns_1 = ['GeoId', 'CACountyName', 'CALicensedHealthcareFacilityBedFACID'
                  'CALicensedHealthcareFacilityType', 'CALicensedHealthcareFacilityBedType',
                  'CALicensedHealthcareFacilityBedCapacity']
 
+FDR_to_type = {
+    'SKILLED NURSING FACILITY': 'SkilledNursingFacility',
+    'INTERMEDIATE CARE FACILITY-DD/H/N/CN/IID': 'IntermediateCareFacility',
+    'CONGREGATE LIVING HEALTH FACILITY': 'CongregateLivingHealthFacility',
+    'INTERMEDIATE CARE FACILITY': 'IntermediateCareFacility',
+    'HOSPICE FACILITY': 'HospiceFacility',
+    'GENERAL ACUTE CARE HOSPITAL': 'GeneralAcuteCareFacility',
+    'ACUTE PSYCHIATRIC HOSPITAL': 'AcutePsychiatricFacility',
+    'HOSPICE': 'HospiceFacility',
+    'PEDIATRIC DAY HEALTH & RESPITE CARE FACILITY': 'PediatricDayHealth&RespiteCareFacility',
+    'CHRONIC DIALYSIS CLINIC': 'ChronicDialysisFacility',
+    'CHEMICAL DEPENDENCY RECOVERY HOSPITAL': 'ChemicalDependencyRecoveryFacility',
+    'CORRECTIONAL TREATMENT CENTER': 'CorrectionalTreatmentCenterFacility'
+}
+
 # start process dataset and also add one new column called 'ALicensedHealthcareFacilityCountyId'.
 with open('CA_Licensed_Healthcare_Facility_Types_And_Counts.csv', 'w', newline='') as f_out:
     writer = csv.DictWriter(f_out, fieldnames=new_columns_1, lineterminator='\n')
@@ -50,7 +64,7 @@ with open('CA_Licensed_Healthcare_Facility_Types_And_Counts.csv', 'w', newline='
                 'CACountyName': row_dict['COUNTY_NAME'],
                 'CALicensedHealthcareFacilityBedFACID': 'ELMS/' + preserve_leading_zero(row_dict['FACID']),
                 'CALicensedHealthcareFacilityName': row_dict['FACNAME'],
-                'CALicensedHealthcareFacilityType': get_camel_formatting_name(row_dict['FAC_FDR']),
+                'CALicensedHealthcareFacilityType': FDR_to_type[row_dict['FAC_FDR']],
                 'CALicensedHealthcareFacilityBedType': row_dict['BED_CAPACITY_TYPE'],
                 'CALicensedHealthcareFacilityBedCapacity': row_dict['BED_CAPACITY']
             }
@@ -143,7 +157,7 @@ with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.csv', 'w'
             processed_dict = {
                 'GeoId': county_to_geoID[row_dict['COUNTY_NAME']],
                 'CACountyName': row_dict['COUNTY_NAME'],
-                'CALicensedHealthcareFacilityType': get_camel_formatting_name(row_dict['FAC_FDR']),
+                'CALicensedHealthcareFacilityType': FDR_to_type[row_dict['FAC_FDR']],
                 'HospitalCount': row_dict['FACILITY_COUNT'],
                 'GeneralAcuteCareHospitalBedCount': row_dict['BED_CAPACITY'],
                 'GeneralAcuteCareHospitalAcutePsychiatricCareBedCount': row_dict['ACUTE PSYCHIATRIC CARE'],
