@@ -1,7 +1,7 @@
 
 # -----------------New Schema------------------------
 Node: dcid:MedicalResource
-Name: "Medical Resource"
+name: "Medical Resource"
 typeOf: schema:Class
 description: "Resources used for medical healthcare."
 
