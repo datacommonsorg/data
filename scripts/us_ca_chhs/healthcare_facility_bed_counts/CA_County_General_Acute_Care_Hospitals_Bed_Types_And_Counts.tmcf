@@ -7,11 +7,13 @@ dcid: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->GeoId
 Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:HospitalCount
+observationDate: "2020-04-13"
 observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
 value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->HospitalCount
 
 Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E2
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:GeneralAcuteCareHospitalBedCount
+observationDate: "2020-04-13"
 observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
 value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->GeneralAcuteCareHospitalBedCount

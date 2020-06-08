@@ -21,6 +21,7 @@ containedIn: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
 typeOf: StatVarObservation
 variableMeasured: HealthcareFacilityBedCount
+observationDate: "2020-06-01"
 observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
 healthcareFacilityBedType: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedType
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedCapacity
