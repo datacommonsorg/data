@@ -39,7 +39,7 @@ def main():
 	CDC_observation = CDC_observation.drop(columns = ["forecast_date", "quantile_0.025", "quantile_0.975"])
 	CDC_prediction = CDC_prediction[CDC_prediction["target"] != "observed"].reset_index(drop = True)
 
-	# Combine target and target_week_end_date
+	# Combine target and target_date
 	target = CDC_prediction["target"].str.split(' ', expand = True)
 	assert target.isnull().sum().sum() == 0 
 	assert target[1].unique() == ["wk"] and target[2].unique() == ["ahead"] and target[4].unique() == ["death"]
@@ -49,7 +49,7 @@ def main():
 	CDC_prediction["weeks"] = target[0].astype(int)
 	pd.options.mode.chained_assignment = None
 	
-	#convert "target" into "target_end_date" for data without "target_week_end_date"
+	#convert "target" into "target_date" for data without "target_date"
 	grouped_missing_date = CDC_prediction[CDC_prediction["target_date"] == "NaT"].groupby(["weeks"]) 
 	for _,missingdate in grouped_missing_date:
 	   week = missingdate["weeks"].unique()[0]
