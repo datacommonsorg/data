@@ -1,0 +1,11 @@
+# Run Go tests, lint, etc.
+steps:
+
+- id: go_test
+  # https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/go
+  name: "golang"
+  entrypoint: "go"
+  env: ["GO111MODULE=on"]
+  args: ["go", "test", "./..."]
+
+# TODO: Add go linter, any other useful Go tools.

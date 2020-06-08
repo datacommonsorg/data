@@ -1,0 +1,16 @@
+# Run Python tests, lint, etc.
+steps:
+
+- id: python_install
+  name: python:3.7
+  entrypoint: python3
+  args: ["python", "-m" , "pip" , "install" , "-t" , "." , "-r" , "requirements.txt"]
+
+- id: python_test
+  name: python:3.7
+  entrypoint: python3
+  args: ["python", "-m", "unittest", "discover", "-v", "-s", ".", "-p", "*_test.py"]
+  waitFor:
+  - install
+
+# TODO: Add Python linter, any other useful code health tools.
