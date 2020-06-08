@@ -1,0 +1,10 @@
+import: {
+    import_name: "treasury_constant_maturity_rates"
+    provenance_url: "https://www.federalreserve.gov/releases/h15/"
+    provenance_description: "U.S. Federal Reserve Constant Maturity Rates"
+    mcf_url: "gs://resolved_mcf/external_tables/treasury_constant_maturity_rates_1/nodes.mcf-00000-of-00001",
+    start_date: "1962-01-02"
+    end_date: "2020-05-28"
+    update_frequency: "P1D"
+    next_release_date: "2020-05-29"
+}
