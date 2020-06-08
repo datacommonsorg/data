@@ -1,0 +1,236 @@
+Node: Miami-DadeCountyFloridaUnitedStatesRetailAndRecreation
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:RetailAndRecreation
+
+Node: Miami-DadeCountyFloridaUnitedStatesGroceryAndPharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryAndPharmacy
+
+Node: Miami-DadeCountyFloridaUnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: Miami-DadeCountyFloridaUnitedStatesTransitStation
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransitStation
+
+Node: Miami-DadeCountyFloridaUnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: Miami-DadeCountyFloridaUnitedStatesResidential
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residential
+
+Node: UnitedStatesRetailAndRecreation
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:RetailAndRecreation
+
+Node: UnitedStatesGroceryAndPharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryAndPharmacy
+
+Node: UnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: UnitedStatesTransitStation
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransitStation
+
+Node: UnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: UnitedStatesResidential
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residential
+
+Node: AlabamaUnitedStatesRetailAndRecreation
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:RetailAndRecreation
+
+Node: AlabamaUnitedStatesGroceryAndPharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryAndPharmacy
+
+Node: AlabamaUnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: AlabamaUnitedStatesTransitStation
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransitStation
+
+Node: AlabamaUnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: AlabamaUnitedStatesResidential
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residential
+
+Node: Miami-DadeCountyFloridaUnitedStatesRetailAndRecreation2/15/20
+typeOf: schema:Observation
+observedNode: l:Miami-DadeCountyFloridaUnitedStatesRetailAndRecreation
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -1
+unit: dcs:Percent
+
+Node: Miami-DadeCountyFloridaUnitedStatesGroceryAndPharmacy2/15/20
+typeOf: schema:Observation
+observedNode: l:Miami-DadeCountyFloridaUnitedStatesGroceryAndPharmacy
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -2
+unit: dcs:Percent
+
+Node: Miami-DadeCountyFloridaUnitedStatesPark2/15/20
+typeOf: schema:Observation
+observedNode: l:Miami-DadeCountyFloridaUnitedStatesPark
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -3
+unit: dcs:Percent
+
+Node: Miami-DadeCountyFloridaUnitedStatesWorkplace2/15/20
+typeOf: schema:Observation
+observedNode: l:Miami-DadeCountyFloridaUnitedStatesWorkplace
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -4
+unit: dcs:Percent
+
+Node: UnitedStatesRetailAndRecreation2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesRetailAndRecreation
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 1
+unit: dcs:Percent
+
+Node: UnitedStatesGroceryAndPharmacy2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesGroceryAndPharmacy
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 2
+unit: dcs:Percent
+
+Node: UnitedStatesPark2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesPark
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 3
+unit: dcs:Percent
+
+Node: UnitedStatesTransitStation2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesTransitStation
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -4
+unit: dcs:Percent
+
+Node: UnitedStatesWorkplace2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesWorkplace
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -5
+unit: dcs:Percent
+
+Node: UnitedStatesResidential2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesResidential
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -6
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesRetailAndRecreation2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesRetailAndRecreation
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 1
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesGroceryAndPharmacy2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesGroceryAndPharmacy
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 2
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesPark2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesPark
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 3
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesTransitStation2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesTransitStation
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 4
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesWorkplace2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesWorkplace
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 5
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesResidential2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesResidential
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 6
+unit: dcs:Percent
+

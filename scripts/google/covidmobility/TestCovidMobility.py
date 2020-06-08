@@ -2,7 +2,7 @@ import unittest
 from covidmobility import CovidMobility
 
 
-#NOTE: More testing will be added soon.
+# NOTE: More testing will be added soon.
 
 
 class TestStringMethods(unittest.TestCase):
