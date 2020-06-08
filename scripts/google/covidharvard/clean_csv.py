@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
 class CovidHarvard:
     def __init__(self, confirmed_csv: str, deaths_csv: str, region: 'County' or 'State'):
@@ -31,7 +32,7 @@ class CovidHarvard:
 
 
     def convert_fips_to_dcid(self, df, region):
-        dcid_format = "{:02}" if region == "County" else "{:06}"
+        dcid_format = "{:02}" if region == "State" else "{:05}"
         df['fips'] = df.fips.map(dcid_format.format)
         df['dcid'] = 'geoId/' + df['fips'].astype(str)
         return df
@@ -48,7 +49,14 @@ class CovidHarvard:
         COVID19CumulativeDeaths = []
         for dcid in confirmed.index:
             for date in confirmed:
-                print(dcid, date)
+                date_iso = date
+                if '/' in date:
+                    date_split = date.split('/')
+                    date_iso = datetime(int(date_split[2]), int(date_split[0]), int(date_split[1])).isoformat()
+                    date_iso = date_iso.split('T')[0]
+
+                print(dcid, date_iso)
+
                 if not date in confirmed or not dcid in confirmed[date]:
                     confirmed_val = np.nan
                 else:
@@ -59,17 +67,17 @@ class CovidHarvard:
                 else:
                     deaths_val = deaths[date][dcid]
 
-                Date.append(date)
+                Date.append(date_iso)
                 GeoId.append(dcid)
                 COVID19CumulativeCases.append(confirmed_val)
                 COVID19CumulativeDeaths.append(deaths_val)
-
-        return pd.DataFrame(
-            {
+        return pd.DataFrame({
                 "Date": Date,
                 "GeoId": GeoId,
                 "COVID19CumulativeCases": COVID19CumulativeCases,
                 "COVID19CumulativeDeaths": COVID19CumulativeDeaths
             })
 
-CovidHarvard('./input/US_County_Confirmed.csv', './input/US_County_Deaths.csv', region='County')
+CovidHarvard(confirmed_csv='./input/US_State_Confirmed.csv',
+             deaths_csv='./input/US_State_Deaths.csv',
+             region='State')
