@@ -25,5 +25,5 @@
    number of columns as the number of constant maturities provided and an extra
    column for dates. "date" column is of the form "YYYY-MM-DD". The other
    interest rate columns are numeric.
-2. [mcf.py](mcf.py) writes out the instance and template MCFs.
+2. [generate_mcf.py](generate_mcf.py) writes out the instance and template MCFs.
 3. [maturity.py](maturity.py) lists the maturities included in the dataset. 

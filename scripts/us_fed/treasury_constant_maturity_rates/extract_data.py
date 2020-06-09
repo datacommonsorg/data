@@ -1,9 +1,14 @@
+'''
+Extracts the data portion out of the constant maturity rate csv file downloaded
+from Federal Reserve.
+'''
+
 USAGE = '''
 python3 extract_data.py [path]
     "path": Path to the raw csv containing rates at all maturities.
 
 Example: python3 extract_data.py FRB_H15.csv
-    This will extract the data out of the raw csv and store it in
+    This will extract the data out of "FRB_H15.csv" and store it in
     "treasury_constant_maturity_rates.csv".
     The output table has the same number of columns as the number of constant
     maturities provided and an extra column for dates.

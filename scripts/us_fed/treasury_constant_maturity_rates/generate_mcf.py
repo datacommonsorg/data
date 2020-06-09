@@ -1,5 +1,9 @@
+'''
+Generates the instance and template MCFs.
+'''
+
 USAGE = '''
-python3 mcf.py
+python3 generate_mcf.py
     Writes out the instance MCFs to "treasury_constant_maturity_rates.mcf" and
     template MCFs to "treasury_constant_maturity_rates.tmcf" in the current
     working directory.
