@@ -1,0 +1,42 @@
+
+Node: dcid:NumJobOpening
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumVoluntarySeparation
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumLayoff
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumOtherSeparation
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
