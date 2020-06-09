@@ -6,7 +6,7 @@ steps:
   name: "golang"
   entrypoint: "go"
   env: ["GO111MODULE=on"]
-  args: ["go", "test", "./..."]
+  args: ["test", "./..."]
 
 # TODO: Add go linter, any other useful Go tools.
 - id: go_linter
