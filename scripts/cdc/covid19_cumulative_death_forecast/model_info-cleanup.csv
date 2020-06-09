@@ -18,39 +18,24 @@ UT,"University of Texas, Austin",https://covid-19.tacc.utexas.edu/projections/,T
 YYG,Youyang Gu,http://covid19-projections.com/about/,The model accounts for individual state-by-state re-openings and their impact on infections and deaths.,SEIS mechanistic model
 CAN,COVID Act Now,https://covidactnow.org/?s=43246,These projections do not make specific assumptions about which interventions have been implemented or will remain in place.,SEIR model
 IHME,Institute of Health Metrics and Evaluation,https://covid19.healthdata.org/united-states-of-america,Projections are adjusted to reflect differences in aggregate population mobility and community mitigation policies.,Combination of a mechanistic disease transmission model and a curve-fitting approach
-Imperial1,,,,
-Imperial2,,,,
-NotreDame,,,,
-UChicago,,,,
-Imperial-ensemble1,,,,
-Imperial-ensemble2,,,,
-UChicago_100,,,,
-UChicago_40,,,,
-UChicago_60,,,,
-UChicago_80,,,,
+Imperial1,"Imperial College, London",https://mrc-ide.github.io/covid19-short-term-forecasts/index.html,These projections do not make any specific assumptions about which interventions have been or will remain in place.,"Ensembles of mechanistic transmission models, fit to different parameter assumptions."
+Imperial2,"Imperial College, London",https://mrc-ide.github.io/covid19-short-term-forecasts/index.html,These projections do not make any specific assumptions about which interventions have been or will remain in place.,"Ensembles of mechanistic transmission models, fit to different parameter assumptions."
+NotreDame,Notre Dame University,https://github.com/confunguido/covid19_ND_forecasting,The model accounts for each state’s school-closure and stay-at-home policies.,Agent-based model
+UChicago_10,University of Chicago,https://github.com/cobeylab/covid_IL,These forecasts assume that the transmission rate will increase by 10% when stay-at-home policies are lifted.,Age-structured SEIR model
+UChicago_100,University of Chicago,https://github.com/cobeylab/covid_IL,"These forecasts assume a reduction in social contacts of 100%, 80%, 60%, or 40% for the projected time period.",Age-structured SEIR model
+UChicago_40,University of Chicago,https://github.com/cobeylab/covid_IL,"These forecasts assume a reduction in social contacts of 100%, 80%, 60%, or 40% for the projected time period.",Age-structured SEIR model
+UChicago_60,University of Chicago,https://github.com/cobeylab/covid_IL,"These forecasts assume a reduction in social contacts of 100%, 80%, 60%, or 40% for the projected time period.",Age-structured SEIR model
+UChicago_80,University of Chicago,https://github.com/cobeylab/covid_IL,"These forecasts assume a reduction in social contacts of 100%, 80%, 60%, or 40% for the projected time period.",Age-structured SEIR model
 COVIDhub-ensemble,,,,
-CU-80contact,,,,
-CU-80contact_1x,,,,
-CU-80contactw,,,,
-Geneva-DeterministicGrowth,,,,
-GT-DeepCOVID,,,,
-IHME-CurveFit,,,,
-LANL-GrowthRate,,,,
-MIT_CovidAnalytics-DELPHI,,,,
-MOBS_NEU-GLEAM_COVID,,,,
-NotreDame-FRED,,,,
-UCLA-SuEIR,,,,
-UMass-MechBayes,,,,
-UT-Mobility,,,,
-YYG-ParamSearch,,,,
-CU-60contact,,,,
-CU-70contact,,,,
+CU-80contact,Columbia University,https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c," These models are based on assumptions about how levels of social distancing will change in the future. All start by assuming a weekly 20% reduction in the contact rate for each week when the epidemic growth rate is increasing. Additionally, the CU-20-1x and CU-20W models assume a 10% increase in contact rates once businesses re-open, applied either at one time or weekly, respectively.",Metapopulation SEIR model
+CU-80contact_1x,Columbia University,https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c," These models are based on assumptions about how levels of social distancing will change in the future. All start by assuming a weekly 20% reduction in the contact rate for each week when the epidemic growth rate is increasing. Additionally, the CU-20-1x and CU-20W models assume a 10% increase in contact rates once businesses re-open, applied either at one time or weekly, respectively.",Metapopulation SEIR model
+CU-80contactw,Columbia University,https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c," These models are based on assumptions about how levels of social distancing will change in the future. All start by assuming a weekly 20% reduction in the contact rate for each week when the epidemic growth rate is increasing. Additionally, the CU-20-1x and CU-20W models assume a 10% increase in contact rates once businesses re-open, applied either at one time or weekly, respectively.",Metapopulation SEIR model
+CU-60contact,Columbia University,https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c," These models are based on assumptions about how levels of social distancing will change in the future. All start by assuming a weekly 20% reduction in the contact rate for each week when the epidemic growth rate is increasing. Additionally, the CU-20-1x and CU-20W models assume a 10% increase in contact rates once businesses re-open, applied either at one time or weekly, respectively.",Metapopulation SEIR model
+CU-70contact,Columbia University,https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c," These models are based on assumptions about how levels of social distancing will change in the future. All start by assuming a weekly 20% reduction in the contact rate for each week when the epidemic growth rate is increasing. Additionally, the CU-20-1x and CU-20W models assume a 10% increase in contact rates once businesses re-open, applied either at one time or weekly, respectively.",Metapopulation SEIR model
 observed data,,,,
-University of Geneva,,,,
-CU 40% contact reduction,,,,
-CU 30% contact reduction,,,,
-CU 20% contact reduction,,,,
-UT Austin,,,,
+CU 40% contact reduction,Columbia University,https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c,"These models are based on assumptions of reducing the number of contacts per case. Three different adaptive scenarios of contact reduction are projected: 20%, 30%, and 40% contact reduction in US counties with at least 10 cases. Additional reductions are implemented with additional new cases, and all social distancing interventions remain in place until the end of the projection.",Metapopulation SEIR model
+CU 30% contact reduction,Columbia University,https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c,"These models are based on assumptions of reducing the number of contacts per case. Three different adaptive scenarios of contact reduction are projected: 20%, 30%, and 40% contact reduction in US counties with at least 10 cases. Additional reductions are implemented with additional new cases, and all social distancing interventions remain in place until the end of the projection.",Metapopulation SEIR model
+CU 20% contact reduction,Columbia University,https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c,"These models are based on assumptions of reducing the number of contacts per case. Three different adaptive scenarios of contact reduction are projected: 20%, 30%, and 40% contact reduction in US counties with at least 10 cases. Additional reductions are implemented with additional new cases, and all social distancing interventions remain in place until the end of the projection.",Metapopulation SEIR model
 ensemble forecast,,,,
 CovidSim,COVID-19 Simulator Consortium,https://www.covid19sim.org/team,These projections assume that contact rates will increase by 20% after stay-at-home orders are lifted.,SEIR model
 GT_CHHS,"Georgia Institute of Technology, Center for Health and Humanitarian Systems",https://github.com/pkeskinocak/COVID19GA,"This model assumes that once stay-at-home orders are lifted, contact rates will gradually increase.  It also assumes that households containing symptomatic cases will self-quarantine.",Agent-based model

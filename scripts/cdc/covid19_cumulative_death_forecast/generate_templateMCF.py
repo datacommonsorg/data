@@ -11,7 +11,6 @@ def main():
    
    TEMPLATE = "Node: E:" + NAME +"->E{}\n" + \
    	"typeOf: dcs:StatVarObservation\n" + \
-   	"dcid: C:" + NAME + "->countType\n" + \
    	"variableMeasured: dcs:COVID19{}DeathPrediction{}\n" + \
    	"observationAbout: E:" + NAME + "->E0\n" + \
    	"observationDate: C:" + NAME + "->target_date\n" + \
@@ -20,17 +19,16 @@ def main():
    	"measurementMethod: C:"+ NAME + "->model\n\n"
    
    idx = 1
-   countTypes = ["Cummulative", "Increased"]
+   countTypes = ["Cummulative", "Incremental"]
    variable = ["", "Quantile_0.025", "Quantile_0.975"]
-   varColumns = ["point", "quantile_0.025", "quantile_0.975"]
-   
+   columns = [["cumulativeCount", "quantile_0.025", "quantile_0.975"],
+              ["incrementalCount", "quantile_0.025", "quantile_0.975"]]
    with open('./COVID19_DeathPredictionCDC.mcf', 'w', newline='') as f_out:
        f_out.write(GEO)
-       for cnt in countTypes:
-           for var, varColumn in zip(variable, varColumns):
-               f_out.write(TEMPLATE.format(idx, cnt, var, varColumn))
+       for cnt in range(2):
+           for var in range(3):
+               f_out.write(TEMPLATE.format(idx, countTypes[cnt], variable[var], columns[cnt][var]))
                idx += 1
-       
        
 if __name__ == '__main__':
     main()

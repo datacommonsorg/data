@@ -11,7 +11,14 @@ def main():
 	current_path = os.getcwd()
 	data_path = os.path.join(current_path, 'CSV_original/')
 	CDC_prediction = pd.concat([pd.read_csv(os.path.join(data_path, file)) for file in os.listdir(data_path) if file[-4:] == '.csv'])
-	CDC_prediction = CDC_prediction.rename(columns={"target_week_end_date": "target_date"})
+	CDC_prediction = CDC_prediction.rename(columns={"target_week_end_date": "target_date", "point": "cumulativeCount"})
+	
+	#resolve the inconsistency in model names, especially in data on 2020-05-04 and 2020-04-27
+	model_rename = {"UChicago":"UChicago_10", "Geneva-DeterministicGrowth": "Geneva", "GT-DeepCOVID": "GA_Tech", "IHME-CurveFit":"IHME",\
+                "LANL-GrowthRate":"LANL", "MIT_CovidAnalytics-DELPHI":"MIT", "MOBS_NEU-GLEAM_COVID":"MOBS","NotreDame-FRED":"NotreDame",\
+                "UCLA-SuEIR":"UCLA", "UMass-MechBayes":"UMass-MB", "UT-Mobility":"UT", "UT Austin":"UT", "YYG-ParamSearch":"YYG",\
+                "University of Geneva":"Geneva", "Imperial-ensemble1":"Imperial1", "Imperial-ensemble2": "Imperial2"}
+	CDC_prediction["model"] = CDC_prediction["model"].map(model_rename).fillna(CDC_prediction["model"])                
 
 	#map the abbreviation of state to full name
 	state_map_path =  os.path.join(current_path,'mapping/state_abbrev.json')
@@ -45,9 +52,12 @@ def main():
 	assert target[1].unique() == ["wk"] and target[2].unique() == ["ahead"] and target[4].unique() == ["death"]
         
 	# save the countType: cummulative or increase (cum / inc)
-	CDC_prediction["countType"] = target[3]
-	CDC_prediction["weeks"] = target[0].astype(int)
 	pd.options.mode.chained_assignment = None
+	
+	CDC_prediction["incrementalCount"] = CDC_prediction["cumulativeCount"]
+	CDC_prediction["incrementalCount"][target[3] == "cum"] = None 
+	CDC_prediction["cumulativeCount"][target[3] == "inc"] = None
+	CDC_prediction["weeks"] = target[0].astype(int)
 	grouped_missing_date = CDC_prediction[CDC_prediction["target_date"] == "NaT"].groupby(["weeks"]) 
 	
         # assign date extracted from "target" to "target_date"
