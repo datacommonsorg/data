@@ -1,3 +1,10 @@
+Node: dcid:predictionDate
+name: predictionData
+typeOf: schema:Property
+domainIncludes: dcs:Observation
+rangeIncludes: dcs:Date
+description: the date the prediction was made
+
 Node: dcid:COVID19DeathPredictionModel_Auquan
 name: Auquan
 typeOf: dcs:MeasurementMethodEnum
