@@ -9,3 +9,6 @@ steps:
   args: ["go", "test", "./..."]
 
 # TODO: Add go linter, any other useful Go tools.
+- id: go_linter
+  name: "golangci/golangci-lint"
+  args: ["golangci-lint","run"]
