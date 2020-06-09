@@ -74,3 +74,4 @@ variableMeasured: dcs:US_Treasury_30_Year_Constant_Maturity_Rate
 observationAbout: dcid:country/USA
 observationDate: C:treasury_constant_maturity_rates->date
 value: C:treasury_constant_maturity_rates->30-Year
+

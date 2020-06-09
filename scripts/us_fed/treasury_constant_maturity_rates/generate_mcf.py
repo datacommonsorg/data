@@ -18,10 +18,10 @@ def main():
         'Node: dcid:US_Treasury_{maturity_underscore}_Constant_Maturity_Rate\n'
         'name: "US_Treasury_{maturity_underscore}_Constant_Maturity_Rate"\n'
         'typeOf: dcs:StatisticalVariable\n'
-        'populationType: dcs:TreasurySecurities\n'
+        'populationType: dcs:Treasury{security_type}\n'
         'measuredProperty: dcs:interestRate\n'
         'statType: dcs:measuredValue\n'
-        'measurementMethod: dcs:{maturity_hyphen}ConstantMaturity\n'
+        'measurementMethod: dcs:{maturity_no_hyphen}ConstantMaturity\n'
         'unit: dcs:Percent\n'
     )
     template_template = (
@@ -38,7 +38,7 @@ def main():
          open("treasury_constant_maturity_rates.tmcf", "w") as tmcf_f:
 
         index = 1
-        for maturity in MATURITIES:
+        for maturity, security_type in MATURITIES.items():
             maturity_hyphen = maturity.title()
             maturity_underscore = maturity_hyphen.replace("-", "_")
             format_dict = {
@@ -46,6 +46,8 @@ def main():
                 "index": index,
                 "maturity_underscore": maturity_underscore,
                 "maturity_hyphen": maturity_hyphen,
+                "maturity_no_hyphen": maturity_hyphen.replace("-", ""),
+                "security_type": security_type
             }
             
             mcf_f.write(variable_template.format_map(format_dict))
