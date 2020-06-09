@@ -9,3 +9,7 @@ func PrintHello() {
 func PrintWorld() {
 	fmt.Printf("World")
 }
+
+func ShouldTriggerLint() {
+	fmt.Printf("missing func comments")
+}
