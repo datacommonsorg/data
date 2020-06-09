@@ -19,7 +19,7 @@ def main():
    	"measurementMethod: C:"+ NAME + "->model\n\n"
    
    idx = 1
-   countTypes = ["Cummulative", "Incremental"]
+   countTypes = ["Cumulative", "Incremental"]
    variable = ["", "Quantile_0.025", "Quantile_0.975"]
    columns = [["cumulativeCount", "quantile_0.025", "quantile_0.975"],
               ["incrementalCount", "quantile_0.025", "quantile_0.975"]]
