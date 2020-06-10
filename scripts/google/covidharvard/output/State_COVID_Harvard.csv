@@ -1,4 +1,4 @@
-Date,GeoId,HaravardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardCOVI19IncrementalCases,HarvardCOVID19IncrementalDeaths
+Date,GeoId,HaravardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardCOVID19IncrementalCases,HarvardCOVID19IncrementalDeaths
 2020-01-21,geoId/01,0,0,,
 2020-01-22,geoId/01,0,0,0.0,0.0
 2020-01-23,geoId/01,0,0,0.0,0.0
