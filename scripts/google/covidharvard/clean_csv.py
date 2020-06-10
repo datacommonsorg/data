@@ -91,7 +91,7 @@ class CovidHarvard:
                 "GeoId": GeoId,
                 "HaravardCOVID19CumulativeCases": COVID19CumulativeCases,
                 "HarvardCOVID19CumulativeDeaths": COVID19CumulativeDeaths,
-                "HarvardCOVI19IncrementalCases": COVID19IncrementalCases,
+                "HarvardCOVID19IncrementalCases": COVID19IncrementalCases,
                 "HarvardCOVID19IncrementalDeaths": COVID19IncrementalDeaths,
             })
 
