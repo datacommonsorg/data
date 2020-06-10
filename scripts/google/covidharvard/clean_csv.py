@@ -95,6 +95,6 @@ class CovidHarvard:
                 "HarvardCOVID19IncrementalDeaths": COVID19IncrementalDeaths,
             })
 
-CovidHarvard(confirmed_cumulative_csv='./input/US_County_Confirmed.csv',
-             deaths_cumulative_csv='./input/US_County_Deaths.csv',
-             region='County')
+CovidHarvard(confirmed_cumulative_csv='./input/US_State_Confirmed.csv',
+             deaths_cumulative_csv='./input/US_State_Deaths.csv',
+             region='State')
