@@ -1,17 +1,31 @@
-Node: E:COVIDTracking_States->E0
+Node: E:HarvardCOVID19Tracking_States->E0
 typeOf: schema: State
-dcid: C:COVIDTracking_States->GeoId
+dcid: C:HarvardCOVID19Tracking_States->GeoId
 
-Node:E:CovidTracking_States->E1
+Node:E:HarvardCOVID19Tracking_States->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: COVID19CumulativeCases
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeRecovered
+variableMeasured: HarvardCOVID19CumulativeCases
+observationAbout: E:HarvardCOVID19Tracking_States->E0
+observationDate: C:HarvardCOVID19Tracking_States->Date
+value: C:HarvardCOVID19Tracking_States->HarvardCOVID19CumulativeCases
 
-Node:E:CovidTracking_States->E2
+Node:E:HarvardCOVID19Tracking_States->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: COVID19CumulativeDeaths
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeDeaths
+variableMeasured: HarvardCOVID19CumulativeDeaths
+observationAbout: E:HarvardCOVID19Tracking_States->E0
+observationDate: C:HarvardCOVID19Tracking_States->Date
+value: C:HarvardCOVID19Tracking_States->HarvardCOVID19CumulativeDeaths
+
+Node:E:HarvardCOVID19Tracking_States->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: HarvardCOVID19IncrementalCases
+observationAbout: E:HarvardCOVID19Tracking_States->E0
+observationDate: C:HarvardCOVID19Tracking_States->Date
+value: C:HarvardCOVID19Tracking_States->HarvardCOVID19IncrementalCases
+
+Node:E:HarvardCOVID19Tracking_States->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: HarvardCOVID19IncrementalDeaths
+observationAbout: E:HarvardCOVID19Tracking_States->E0
+observationDate: C:HarvardCOVID19Tracking_States->Date
+value: C:HarvardCOVID19Tracking_States->HarvardCOVID19IncrementalDeaths
