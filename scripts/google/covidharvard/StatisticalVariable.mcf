@@ -1,17 +1,27 @@
-Node: dcid:COVID19CumulativeCases
+Node: dcid:HarvardCOVID19CumulativeCases
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
+measurementMethod: dcs:HarvardCOVID19
 
-Node: dcid:COVID19CumulativeDeaths
+Node: dcid:HarvardCOVID19CumulativeDeaths
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
+measurementMethod: dcs:HarvardCOVID19
 
-Node: dcid:COVID19CumulativeRecovered
+Node: dcid:HarvardCOVID19IncrementalCases
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
+measurementMethod: dcs:dcDerivedStat/HarvardCOVID19
+
+Node: dcid:HarvardCOVID19IncrementalDeaths
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalTest
+statType: dcs:measuredValue
+measuredProperty: dcs:incrementalCount
+measurementMethod: dcs:dcDerivedStat/HarvardCOVID19
