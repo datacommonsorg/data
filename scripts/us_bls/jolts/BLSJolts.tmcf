@@ -1,67 +1,12 @@
+
 Node: E:BLSJolts->E0
 typeOf: Country
 dcid: country/USA
 
 Node: E:BLSJolts->E1
-typeOf: NAICSEnum
-dcid: C:BLSJolts->Industry
-
-Node: E:BLSJolts->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:NumJobOpening
+variableMeasured: C:BLSJolts->StatisticalVariable
 observationDate: C:BLSJolts->Date
 observationPeriod: P1M
 observationAbout: E:BLSJolts->E0
-measurementMethod: C:BLSJolts->seasonalAdjustment
-industry: E:BLSJolts->E1
-value: C:BLSJolts->NumJobOpening
-
-Node: E:BLSJolts->E3
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:NumJobHire
-observationDate: C:BLSJolts->Date
-observationPeriod: P1M
-observationAbout: E:BLSJolts->E0
-measurementMethod: C:BLSJolts->seasonalAdjustment
-industry: E:BLSJolts->E1
-value: C:BLSJolts->NumJobHire
-
-Node: E:BLSJolts->E4
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Turnover
-observationDate: C:BLSJolts->Date
-observationPeriod: P1M
-observationAbout: E:BLSJolts->E0
-measurementMethod: C:BLSJolts->seasonalAdjustment
-industry: E:BLSJolts->E1
-value: C:BLSJolts->Turnover
-
-Node: E:BLSJolts->E5
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:NumVoluntarySeparation
-observationDate: C:BLSJolts->Date
-observationPeriod: P1M
-observationAbout: E:BLSJolts->E0
-measurementMethod: C:BLSJolts->seasonalAdjustment
-industry: E:BLSJolts->E1
-value: C:BLSJolts->NumVoluntarySeparation
-
-Node: E:BLSJolts->E6
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:NumLayoff
-observationDate: C:BLSJolts->Date
-observationPeriod: P1M
-observationAbout: E:BLSJolts->E0
-measurementMethod: C:BLSJolts->seasonalAdjustment
-industry: E:BLSJolts->E1
-value: C:BLSJolts->NumLayoff
-
-Node: E:BLSJolts->E7
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:NumOtherSeparation
-observationDate: C:BLSJolts->Date
-observationPeriod: P1M
-observationAbout: E:BLSJolts->E0
-measurementMethod: C:BLSJolts->seasonalAdjustment
-industry: E:BLSJolts->E1
-value: C:BLSJolts->NumOtherSeparation
+value: C:BLSJolts->Value

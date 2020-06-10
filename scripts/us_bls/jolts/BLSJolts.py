@@ -39,6 +39,8 @@ def web_to_pandas(url, sep):
 
     # Otherwise add a new row
     else:
+      # If a row is missing a trailing column then pad it 
+      cols_in_line.extend((df.shape[1] - len(cols_in_line)) * [""])
       df = df.append(pd.DataFrame([cols_in_line], columns=df.columns), ignore_index=True)
 
   return df
@@ -70,18 +72,8 @@ assert columns_match(total_quits)
 assert columns_match(total_layoffs)
 assert columns_match(total_other_seps)
 
-
-### Step 2) Create Statistical Variable Schemas
-SAMPLE_STAT_VAR = """
-Node: dcid:{STAT_CLASS}
-typeOf: StatisticalVariable
-populationType: {POPULATION}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-turnoverType: dcs:{TURNOVER_TYPE}
-"""
-
-# StatVarName, PopulationType, TurnoverType (if present), corresponding dataframe
+### Step 2) Combine and clean dataset
+# Additional information about each dataframe
 schema_mapping = [
   ("NumJobOpening", "JobPosting", "", job_openings),
   ("NumJobHire", "JobHire", "", job_hires),
@@ -91,42 +83,21 @@ schema_mapping = [
   ("NumOtherSeparation", "LaborTurnover", "OtherSeparation", total_other_seps),
 ]
 
-# Output the schema mapping to a new file
-with open("BLSJolts_StatisticalVariables.mcf", "w", newline="") as f_out:
-  for schema_name, pop_type, sep_type, _ in schema_mapping:
-    # Create new schema object
-    stat_var_schema = SAMPLE_STAT_VAR
-
-    # Remove separation type entry if not includes
-    if sep_type == "":
-      stat_var_schema = stat_var_schema.replace("turnoverType: dcs:{TURNOVER_TYPE}", "")
-
-    # Replace all other fields
-    stat_var_schema = stat_var_schema.replace("{STAT_CLASS}", schema_name)   \
-                                    .replace("{POPULATION}", pop_type)      \
-                                    .replace("{TURNOVER_TYPE}", sep_type)
-
-    f_out.write(stat_var_schema)
-
-    if OUTPUT_MCF_TO_CONSOLE:
-      print(stat_var_schema)
-
-
-### Step 3) Assemble cleaned csv
+# Combine datasets into a single dataframe including origin of data
 jolts_df = pd.DataFrame()
+COLUMNS_TO_KEEP = ['series_id', 'year', 'period', 'value']
 
-# Replace generic 'value' column in each dataset to match StatisticalVariable naming
-for schema_name, _, _, df in schema_mapping:
-  # Rename generic df to match StatisticalVariable 
-  df[schema_name] = df['value']
-  df = df.drop('value', axis=1)
-
+for schema_name, population_type, separation_type, df in schema_mapping:
+  df = df.loc[:, COLUMNS_TO_KEEP]
+  df['statistical_variable'] = schema_name
+  df['population_type'] = population_type
+  df['separation_type'] = separation_type
   jolts_df = jolts_df.append(df)
 
 # Drop non-monthly data
 jolts_df = jolts_df.drop(jolts_df.query("period == 'M13'").index)
 
-# Change data to ISO Format (YYYY-MM)
+# Change date to ISO Format (YYYY-MM)
 def period_year_to_iso_8601(row):
   month = row['period'].lstrip("M")
   year = row['year']
@@ -137,63 +108,87 @@ jolts_df['Date'] = jolts_df.apply(period_year_to_iso_8601, axis=1)
 # Add relevant columns from series information
 jolts_df = jolts_df.merge(series_desc[['industry_code', 'region_code', 'seasonal', 'ratelevel_code']], left_on=["series_id"], right_index=True)
 
-# Refactor industry
-jolts_df['Industry'] = jolts_df['industry_code'].apply(lambda code: f"NAICS/{code}")
+# Drop rate data
+jolts_df = jolts_df.drop(jolts_df.query("ratelevel_code != 'L'").index)
 
 # Drop non-national data
 jolts_df = jolts_df.drop(jolts_df.query("region_code != '00'").index)
 
-# Now we need to combine the 6 rows for each data entry into a single row for the same data
-columns_to_drop = ['series_id', 'year', 'period', 'industry_code', 'region_code', 'seasonal', 'ratelevel_code', 'footnote_codes']
-adj_seasonal_df = jolts_df.query("seasonal == 'S' and ratelevel_code == 'L'").drop(columns_to_drop, axis=1)
-unadj_seasonal_df = jolts_df.query("seasonal == 'U' and ratelevel_code == 'L'").drop(columns_to_drop, axis=1)
+# Map industry and seasonal adjustment to statistical variable name
+UNIQUE_INDUSTRIES = list(jolts_df['industry_code'].unique())
+SEPARATION_TYPES = ["Adjusted", "Unadjusted"]
 
-# Squash into single row 
-adj_seasonal_df = adj_seasonal_df.groupby(['Date', 'Industry']).first().reset_index()
-unadj_seasonal_df = unadj_seasonal_df.groupby(['Date', 'Industry']).first().reset_index()
+def mapRowToStatisticalVariable(row):
+  base_stat_var = row['statistical_variable']
+  industry_code = row['industry_code']
+  seasonal_adjustment = SEPARATION_TYPES[0] if row['seasonal'] == "S" else SEPARATION_TYPES[1]
 
-# Recombine
-adj_seasonal_df['seasonalAdjustment'] = 'BLSSeasonallyAdjusted'
-unadj_seasonal_df['seasonalAdjustment'] = 'BLSSeasonallyUnadjusted'
-jolts_df = pd.concat([adj_seasonal_df, unadj_seasonal_df], axis=0)
+  return f"dcs:{base_stat_var}_NAICS{industry_code}_{seasonal_adjustment}"
 
-# Export as CSV
-jolts_df.to_csv("BLSJolts.csv", index=False, encoding="utf-8")
+# Build map to StatisticalVariable
+jolts_df['StatisticalVariable'] = jolts_df.apply(mapRowToStatisticalVariable, axis=1)
+jolts_df['Value'] = jolts_df['value']
 
-### Step 3) Create Template MCF
+# Output final cleaned CSV
+FINAL_COLUMNS = ['Date', 'StatisticalVariable', 'Value']
+output_csv = jolts_df.loc[:, FINAL_COLUMNS]
+output_csv.to_csv("BLSJolts.csv", index=False, encoding="utf-8")
+
+### Step 3) Create StatisticalVariables  (6 job variables * 28 industries * 2 adjustments)
+SAMPLE_STAT_VAR = """
+Node: dcid:{STAT_CLASS}/NAICS{INDUSTRY}/{ADJUSTMENT}
+typeOf: StatisticalVariable
+populationType: {POPULATION}
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:{TURNOVER_TYPE}
+"""
+
+# Output the schema mapping to a new file
+with open("BLSJolts_StatisticalVariables.mcf", "w", newline="") as f_out:
+  for schema_name, pop_type, sep_type, _ in schema_mapping:
+    for industry_code in UNIQUE_INDUSTRIES:
+      for separation_type in SEPARATION_TYPES:
+        # Create new schema object
+        stat_var_schema = SAMPLE_STAT_VAR
+
+        # Remove separation type entry if not includes
+        if sep_type == "":
+          stat_var_schema = stat_var_schema.replace("turnoverType: dcs:{TURNOVER_TYPE}", "")
+
+        # Replace all other fields
+        stat_var_schema = stat_var_schema.replace("{STAT_CLASS}", schema_name)   \
+                                         .replace("{INDUSTRY}", industry_code)   \
+                                         .replace("{ADJUSTMENT}", separation_type)   \
+                                         .replace("{POPULATION}", pop_type)      \
+                                         .replace("{TURNOVER_TYPE}", sep_type)
+
+        f_out.write(stat_var_schema)
+
+        if OUTPUT_MCF_TO_CONSOLE:
+          print(stat_var_schema)
+
+### Step 4) Create Template MCF
 BASE_MCFS = """
 Node: E:BLSJolts->E0
 typeOf: Country
 dcid: country/USA
-
-Node: E:BLSJolts->E1
-typeOf: NAICSEnum
-dcid: C:BLSJolts->Industry
 """
 
 SAMPLE_TEMPLATE_MCF = """
-Node: E:BLSJolts->E{NUM}
+Node: E:BLSJolts->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{STATVARMEASURED}
+variableMeasured: C:BLSJolts->StatisticalVariable
 observationDate: C:BLSJolts->Date
 observationPeriod: P1M
 observationAbout: E:BLSJolts->E0
-measurementMethod: C:BLSJolts->seasonalAdjustment
-industry: E:BLSJolts->E1
-value: C:BLSJolts->{STATVARMEASURED}
+value: C:BLSJolts->Value
 """
 
 with open('BLSJolts.tmcf', 'w', newline='') as f_out:
   f_out.write(BASE_MCFS)
+  f_out.write(SAMPLE_TEMPLATE_MCF)
 
   if OUTPUT_MCF_TO_CONSOLE:
     print(BASE_MCFS)
-
-  for index, var in enumerate(schema_mapping):
-    stat_var_name, _, _, _ = var
-    updated_schema = SAMPLE_TEMPLATE_MCF
-    updated_schema = updated_schema.replace("{NUM}", str(index+2)).replace("{STATVARMEASURED}", stat_var_name)
-    f_out.write(updated_schema)
-
-    if OUTPUT_MCF_TO_CONSOLE:
-      print(updated_schema)
+    print(SAMPLE_TEMPLATE_MCF)

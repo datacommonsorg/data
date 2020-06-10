@@ -1,40 +1,2350 @@
 
-Node: dcid:NumJobOpening
+Node: dcid:NumJobOpening/NAICS000000/Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 
-Node: dcid:NumJobHire
+Node: dcid:NumJobOpening/NAICS000000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS100000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS100000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS110099/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS110099/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS230000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS230000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS300000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS300000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS320000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS320000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS340000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS340000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS400000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS400000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS420000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS420000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS440000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS440000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS480099/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS480099/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS510000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS510000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS510099/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS510099/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS520000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS520000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS530000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS530000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS540099/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS540099/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS600000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS600000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS610000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS610000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS620000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS620000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS700000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS700000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS710000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS710000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS720000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS720000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS810000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS810000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS900000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS900000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS910000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS910000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS920000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS920000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS923000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS923000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS929000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobOpening/NAICS929000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS000000/Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 
-Node: dcid:Turnover
+Node: dcid:NumJobHire/NAICS000000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS100000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS100000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS110099/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS110099/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS230000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS230000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS300000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS300000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS320000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS320000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS340000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS340000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS400000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS400000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS420000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS420000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS440000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS440000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS480099/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS480099/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS510000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS510000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS510099/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS510099/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS520000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS520000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS530000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS530000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS540099/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS540099/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS600000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS600000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS610000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS610000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS620000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS620000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS700000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS700000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS710000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS710000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS720000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS720000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS810000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS810000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS900000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS900000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS910000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS910000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS920000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS920000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS923000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS923000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS929000/Adjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumJobHire/NAICS929000/Unadjusted
+typeOf: StatisticalVariable
+populationType: JobHire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS000000/Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 
-Node: dcid:NumVoluntarySeparation
+Node: dcid:Turnover/NAICS000000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS100000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS100000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS110099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS110099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS230000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS230000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS300000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS300000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS320000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS320000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS340000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS340000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS400000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS400000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS420000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS420000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS440000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS440000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS480099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS480099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS510000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS510000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS510099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS510099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS520000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS520000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS530000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS530000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS540099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS540099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS600000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS600000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS610000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS610000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS620000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS620000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS700000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS700000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS710000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS710000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS720000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS720000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS810000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS810000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS900000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS900000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS910000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS910000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS920000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS920000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS923000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS923000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS929000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:Turnover/NAICS929000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+
+Node: dcid:NumVoluntarySeparation/NAICS000000/Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumLayoff
+Node: dcid:NumVoluntarySeparation/NAICS000000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS100000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS100000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS110099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS110099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS230000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS230000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS300000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS300000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS320000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS320000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS340000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS340000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS400000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS400000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS420000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS420000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS440000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS440000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS480099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS480099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS510000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS510000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS510099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS510099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS520000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS520000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS530000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS530000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS540099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS540099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS600000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS600000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS610000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS610000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS620000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS620000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS700000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS700000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS710000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS710000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS720000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS720000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS810000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS810000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS900000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS900000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS910000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS910000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS920000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS920000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS923000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS923000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS929000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumVoluntarySeparation/NAICS929000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:VoluntarySeparation
+
+Node: dcid:NumLayoff/NAICS000000/Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 turnoverType: dcs:Layoff
 
-Node: dcid:NumOtherSeparation
+Node: dcid:NumLayoff/NAICS000000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS100000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS100000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS110099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS110099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS230000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS230000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS300000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS300000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS320000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS320000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS340000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS340000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS400000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS400000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS420000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS420000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS440000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS440000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS480099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS480099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS510000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS510000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS510099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS510099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS520000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS520000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS530000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS530000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS540099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS540099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS600000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS600000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS610000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS610000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS620000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS620000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS700000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS700000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS710000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS710000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS720000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS720000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS810000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS810000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS900000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS900000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS910000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS910000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS920000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS920000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS923000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS923000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS929000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumLayoff/NAICS929000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:Layoff
+
+Node: dcid:NumOtherSeparation/NAICS000000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS000000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS100000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS100000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS110099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS110099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS230000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS230000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS300000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS300000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS320000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS320000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS340000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS340000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS400000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS400000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS420000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS420000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS440000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS440000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS480099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS480099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS510000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS510000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS510099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS510099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS520000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS520000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS530000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS530000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS540099/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS540099/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS600000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS600000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS610000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS610000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS620000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS620000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS700000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS700000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS710000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS710000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS720000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS720000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS810000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS810000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS900000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS900000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS910000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS910000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS920000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS920000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS923000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS923000/Unadjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS929000/Adjusted
+typeOf: StatisticalVariable
+populationType: LaborTurnover
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+turnoverType: dcs:OtherSeparation
+
+Node: dcid:NumOtherSeparation/NAICS929000/Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
