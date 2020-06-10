@@ -6,49 +6,65 @@ import sys
 import pandas as pd
 import os 
 
+def loadColnames(filename:str):
+   # get the model and target from file
+   colnames = []
+   with open(filename, 'r') as filehandle:
+    for line in filehandle:
+        # remove linebreak which is the last character of the string
+        row = line[:-1].split(",")
+        # add item to the list
+        colnames.append(row)
+   return colnames
+
 def generate_templateMCF() -> None:
+   colnames = loadColnames("./colnames.txt")
+   
    NAME = "COVID19DeathPredictionCDC"
-   GEO = "Node: E:" + NAME + "->E0\n" + \
+   GEO_TEMPLATE = "Node: E:" + NAME + "->E{index_geo}\n" + \
    	"typeOf: schema:State\n" + \
-   	"dcid: C:" + NAME + "->location\n\n"
+   	"dcid: C:" + NAME + "->{prefix}_location\n\n"
    
-   TEMPLATE = "Node: E:" + NAME +"->E{}\n" + \
+   TEMPLATE = "Node: E:" + NAME +"->E{index}\n" + \
    	"typeOf: dcs:StatVarObservation\n" + \
-   	"variableMeasured: dcs:COVID19{}DeathPrediction{}\n" + \
-   	"observationAbout: E:" + NAME + "->E0\n" + \
-   	"observationDate: C:" + NAME + "->target_date\n" + \
-   	"predictionDate: C:" + NAME + "->forecast_date\n" + \
-   	"value: C:" + NAME +"->{}\n" + \
-   	"measurementMethod: C:"+ NAME + "->model\n\n"
+   	"variableMeasured: dcs:COVID19_{prefix}{variable}\n" + \
+   	"observationAbout: E:" + NAME + "->E{index_geo}\n" + \
+   	"observationDate: C:" + NAME + "->{prefix}_target_date\n" + \
+   	"value: C:" + NAME +"->{prefix}{colvariable}\n\n"
    
-   idx = 1
-   countTypes = ["Cumulative", "Incremental"]
-   variable = ["", "Quantile_0.025", "Quantile_0.975"]
-   columns = [["cumulativeCount", "quantile_0.025", "quantile_0.975"],
-              ["incrementalCount", "quantile_0.025", "quantile_0.975"]]
+   idx = 0
+   variable = ["", "_quantile_0.025", "_quantile_0.975"]
+
    with open('./COVID19_DeathPredictionCDC.mcf', 'w', newline='') as f_out:
-       f_out.write(GEO)
-       for cnt in range(2):
-           for var in range(3):
-               f_out.write(TEMPLATE.format(idx, countTypes[cnt], variable[var], columns[cnt][var]))
-               idx += 1
+       for model, target in colnames:
+         idx_geo = idx
+         prefix = model + "_" + target
+         f_out.write(GEO_TEMPLATE.format_map({"index_geo": idx_geo, "prefix": prefix}))
+         idx += 1
+         for var in variable:
+           colvar = var
+           f_out.write(TEMPLATE.format_map({"index": idx,"prefix": prefix, "variable": var, "index_geo":idx_geo, "colvariable":colvar}))
+           idx += 1
                
 def generate_StatisticalVariables()->None:
-    STATVAR_TEMPLATE = "Node: dcid:COVID19{}DeathPrediction{}\n" + \
+    colnames = loadColnames("./colnames.txt")
+    STATVAR_TEMPLATE = "Node: dcid:COVID19_{prefix}{variable}\n" + \
     	"typeOf: schema:StatisticalVariable\n" + \
     	"populationType: dcs:MedicalConditionIncident\n" + \
-    	"measuredProperty: dcs:{}\n" + \
+    	"measuredProperty: dcs:{countType}\n" + \
+    	"measurementMethod: {prefix}{variable}\n" + \
     	"statType: dcs:MeasuredValue\n\n"
-    countTypes = ["Cumulative", "Incremental"]
-    measuredProperty = ["cumulativeCount", "incrementalCount"]
-    variable = ["", "Quantile_0.025", "Quantile_0.975"]
-
+    
+    variable = ["", "_quantile_0.025", "_quantile_0.975"]
     with open('./COVID19_DeathPredictionCDC_StatisticalVariable.mcf', 'w', newline='') as f_out:
-        
-        #write the statistical variables
-        for cnt,meas in zip(countTypes, measuredProperty):
+        for model, target in colnames:
+            prefix = model + "_" + target
+            if "inc" in target:
+               countType = "incrementalCount"
+            else:
+               countType = "cumulativeCount"
             for var in variable:
-                f_out.write(STATVAR_TEMPLATE.format(cnt, var, meas))
+                f_out.write(STATVAR_TEMPLATE.format_map({"prefix":prefix, "variable":var, "countType":countType}))
                          
     return
     
