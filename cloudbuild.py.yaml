@@ -11,6 +11,6 @@ steps:
   entrypoint: python3
   args: ["python", "-m", "unittest", "discover", "-v", "-s", ".", "-p", "*_test.py"]
   waitFor:
-  - install
+  - python_install
 
 # TODO: Add Python linter, any other useful code health tools.
