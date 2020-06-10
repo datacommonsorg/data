@@ -4,12 +4,12 @@ steps:
 - id: python_install
   name: python:3.7
   entrypoint: python3
-  args: ["python", "-m" , "pip" , "install" , "-t" , "." , "-r" , "requirements.txt"]
+  args: ["-m" , "pip" , "install" , "-t" , "." , "-r" , "requirements.txt"]
 
 - id: python_test
   name: python:3.7
   entrypoint: python3
-  args: ["python", "-m", "unittest", "discover", "-v", "-s", ".", "-p", "*_test.py"]
+  args: ["-m", "unittest", "discover", "-v", "-s", ".", "-p", "*_test.py"]
   waitFor:
   - python_install
 
