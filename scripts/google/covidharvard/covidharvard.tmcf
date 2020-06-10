@@ -15,10 +15,3 @@ variableMeasured: COVID19CumulativeDeaths
 observationAbout: E:COVIDTracking_States->E0
 observationDate: C:COVIDTracking_States->Date
 value: C:COVIDTracking_States->COVID19CumulativeDeaths
-
-Node:E:CovidTracking_States->E3
-typeOf: dcs:StatVarObservation
-variableMeasured: COVID19CumulativeRecovered
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeRecovered
