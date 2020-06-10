@@ -89,7 +89,7 @@ class CovidHarvard:
         return pd.DataFrame({
                 "Date": Date,
                 "GeoId": GeoId,
-                "HaravardCOVID19CumulativeCases": COVID19CumulativeCases,
+                "HarvardCOVID19CumulativeCases": COVID19CumulativeCases,
                 "HarvardCOVID19CumulativeDeaths": COVID19CumulativeDeaths,
                 "HarvardCOVID19IncrementalCases": COVID19IncrementalCases,
                 "HarvardCOVID19IncrementalDeaths": COVID19IncrementalDeaths,
