@@ -19,16 +19,13 @@ Example of CPI-U: python3 xlsx2csv.py cpi_u_1913_2020.xlsx
 
 
 def read_xlsx(path):
-    ''' Reads in the xlsx file and converts it to a DataFrame of two columns:
-    "date" and "cpi".
-    "date" is of the form "YYYY-MM" and "cpi" is numeric.
+    ''' Reads in the xlsx file and converts it to a DataFrame of two columns.
 
-    In the xlsx files provided by BLS,
-    header starts at Row 12 (counting fromone).
-    Rows 1-11 are descriptions of the dataset.
-    Column A is the index (year).
-    Columns B-M are the 12 columns that correspond to the 12 months in a year,
-    so each row represents a year and contains the CPIs for that year.
+    In the xlsx files provided by BLS, header starts at Row 12
+    (counting fromone). Rows 1-11 are descriptions of the dataset.
+    Column A is the index (year). Columns B-M are the 12 columns that
+    correspond to the 12 months in a year, so each row represents a year and
+    contains the CPIs for that year.
 
     Args:
         path: Path to an xlsx PPI data file from BLS
