@@ -1,6 +1,13 @@
 # Run Go tests, lint, etc.
 steps:
 
+- id: go_build
+  # https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/go
+  name: "golang"
+  entrypoint: "go"
+  env: ["GO111MODULE=on"]
+  args: ["build", "./..."]
+
 - id: go_test
   # https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/go
   #name: "golang"
