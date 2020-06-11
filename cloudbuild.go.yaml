@@ -11,13 +11,13 @@ steps:
   name: "golang"
   entrypoint: "go"
   #env: ["GO111MODULE=on"]
-  args: ["test", "..."]
+  args: ["test", "./..."]
 
 - id: go_vet
   name: "golang"
   entrypoint: "go"
   #env: ["GO111MODULE=on"]
-  args: ["vet", "..."]
+  args: ["vet", "./..."]
 
 - id: check_go_fmt
   name: "golang"
