@@ -19,5 +19,5 @@ func ShouldTriggerLint() {
 }
 
 func BrokenCode() {
-	fmt.Brintf("invalid go"
+	fmt.Brintf("invalid go")
 }
