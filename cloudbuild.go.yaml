@@ -5,18 +5,18 @@ steps:
   # https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/go
   name: "golang"
   entrypoint: "go"
-  env: ["GO111MODULE=on"]
+  #  env: ["GO111MODULE=on"]
   args: ["build", "./..."]
 
 - id: go_test
   # https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/go
-  #name: "golang"
-  #entrypoint: "go"
+  name: "golang"
+  entrypoint: "go"
   #env: ["GO111MODULE=on"]
-  #args: ["test", "./..."]
-  name: mirror.gcr.io/library/golang
-  env: ['GO111MODULE=on']
-  args: ['go', 'test', './...']
+  args: ["test", "./..."]
+  #name: mirror.gcr.io/library/golang
+  #env: ['GO111MODULE=on']
+  #args: ['go', 'test', './...']
 
 # TODO: Add go linter, any other useful Go tools.
 - id: go_linter
