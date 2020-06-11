@@ -5,8 +5,7 @@ Here we only import the three subsets of the ontologies: "interaction detection 
 
 ## Database format
 
-![Tree With Multiple Parent Nodes]
-(./graph/multipleParent.png)
+![Tree With Multiple Parent Nodes](./graph/multipleParent.png)
 
 [todo] a graph showing the tree structure of the database
 

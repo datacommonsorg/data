@@ -1,28 +1,48 @@
-Node: dcid:psimiPartOf
+Node: dcid:interactionDetectionMethod
 typeOf: schema:Property
-name: "psimiPartOf"
-description: "This class is a part of the structure of another class."
-rangeIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
-domainIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
+name: "interactionDetectionMethod"
+description: "The interaction detection method used in the experiment"
+rangeIncludes: dcs:InteractionDetectionMethodEnum
+domainIncludes: dcs:MolecularInteractionOntology
 
-Node: dcid:synonym
+Node: dcid:interactionType
 typeOf: schema:Property
-name: "synonym"
+name: "interactionType"
+description: "The molecular interaction type"
+rangeIncludes: dcs:InteractionTypeEnum
+domainIncludes: dcs:MolecularInteractionOntology
+
+Node: dcid:interactionSource
+typeOf: schema:Property
+name: "interactionSource"
+description: "The database where the interaction record extracted"
+rangeIncludes: dcs:InteractionSourceEnum
+domainIncludes: dcs:MolecularInteractionOntology
+
+Node: dcid:alias
+typeOf: schema:Property
+name: "alias"
 description: "Alternative names of the class."
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
+domainIncludes: dcs:MolecularInteractionOntology
+
+Node: dcid:psimi
+typeOf: schema:Property
+name: "psimi"
+description: "The identifier for Proteomics Standards Initiative Molecular Interaction."
+rangeIncludes: schema:Text
+domainIncludes: dcs:MolecularInteractionOntology
 
 Node: dcid:isObsolete
 typeOf: schema:Property
 name: "isObsolete"
 description: "To show that the term is obsolete."
 rangeIncludes: schema:Boolean
-domainIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
+domainIncludes: dcs:MolecularInteractionOntology
 
-Node: dcid:pubID
+Node: dcid:publications
 typeOf: schema:Property
-name: "pubID"
+name: "publications"
 description: "Source and ID of the reference."
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
-
+domainIncludes: dcs:MolecularInteractionOntology
