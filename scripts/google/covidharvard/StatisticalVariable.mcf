@@ -3,6 +3,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
+medicalStatus: dcs:ConfirmedCase
 measurementMethod: dcs:HarvardCOVID19
 
 Node: dcid:HarvardCOVID19CumulativeDeaths
@@ -10,6 +11,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
+medicalStatus: dcs:PatientDeceased
 measurementMethod: dcs:HarvardCOVID19
 
 Node: dcid:HarvardCOVID19IncrementalCases
@@ -17,6 +19,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 measuredProperty: dcs:incrementalCount
+medicalStatus: dcs:ConfirmedCase
 measurementMethod: dcs:dcDerivedStat/HarvardCOVID19
 
 Node: dcid:HarvardCOVID19IncrementalDeaths
@@ -24,4 +27,5 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 measuredProperty: dcs:incrementalCount
+medicalStatus: dcs:PatientDeceased
 measurementMethod: dcs:dcDerivedStat/HarvardCOVID19
