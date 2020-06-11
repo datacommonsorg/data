@@ -1,0 +1,28 @@
+Node: dcid:psimiPartOf
+typeOf: schema:Property
+name: "psimiPartOf"
+description: "This class is a part of the structure of another class."
+rangeIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
+domainIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
+
+Node: dcid:synonym
+typeOf: schema:Property
+name: "synonym"
+description: "Alternative names of the class."
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
+
+Node: dcid:isObsolete
+typeOf: schema:Property
+name: "isObsolete"
+description: "To show that the term is obsolete."
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
+
+Node: dcid:pubID
+typeOf: schema:Property
+name: "pubID"
+description: "Source and ID of the reference."
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteomicsStandardInitiativeMolecularInteraction
+
