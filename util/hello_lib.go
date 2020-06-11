@@ -17,7 +17,3 @@ func PrintWorld() {
 func ShouldTriggerLint() {
 	fmt.Printf("missing func comments")
 }
-
-func BrokenCode() {
-	fmt.Brintf("invalid go")
-}
