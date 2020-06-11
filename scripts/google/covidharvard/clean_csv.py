@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
+
 class CovidHarvard:
     def __init__(self, confirmed_cumulative_csv: str, deaths_cumulative_csv: str, region: 'County' or 'State'):
         if region != 'State' and region != 'County':
@@ -30,7 +31,6 @@ class CovidHarvard:
         print("Exporting to ./output directory")
         combined.to_csv(f"./output/{region}_COVID_Harvard.csv", index=False)
 
-
     def convert_fips_to_dcid(self, df, region):
         dcid_format = "{:02}" if region == "State" else "{:05}"
         df['fips'] = df.fips.map(dcid_format.format)
@@ -38,7 +38,9 @@ class CovidHarvard:
         return df
 
     def drop_unecessary_columns(self, df):
-        df = df.drop(['fips', 'NAME', 'POP70', 'HHD70', 'POP80', 'HHD80', 'POP90', 'HHD90', 'POP00', 'HHD00', 'POP10', 'HHD10'], axis=1)
+        df = df.drop(
+            ['fips', 'NAME', 'POP70', 'HHD70', 'POP80', 'HHD80', 'POP90', 'HHD90', 'POP00', 'HHD00', 'POP10', 'HHD10'],
+            axis=1)
         df = df.set_index("dcid")
         return df
 
@@ -57,8 +59,8 @@ class CovidHarvard:
         return df[date][dcid]
 
     def combine_dfs(self, confirmed, deaths):
-        confirmed_incremental = confirmed.T.diff().T
-        deaths_incremental = deaths.T.diff().T
+        confirmed_incremental = confirmed.T.diff().T.fillna(0)
+        deaths_incremental = deaths.T.diff().T.fillna(0)
         Date = []
         GeoId = []
         COVID19CumulativeCases, COVID19CumulativeDeaths = [], []
@@ -66,7 +68,7 @@ class CovidHarvard:
         for dcid in confirmed.index:
             for date in confirmed:
                 date_iso = date
-                # Somtimes the data is in the form of XX/XX/XX, let's convert it to ISO
+                # Sometimes the data is in the form of XX/XX/XX, let's convert it to ISO
                 if '/' in date:
                     date_split = date.split('/')
                     date_iso = datetime(int(date_split[2]), int(date_split[0]), int(date_split[1])).isoformat()
@@ -87,14 +89,15 @@ class CovidHarvard:
                 COVID19IncrementalDeaths.append(deaths_incremental_value)
 
         return pd.DataFrame({
-                "Date": Date,
-                "GeoId": GeoId,
-                "HarvardCOVID19CumulativeCases": COVID19CumulativeCases,
-                "HarvardCOVID19CumulativeDeaths": COVID19CumulativeDeaths,
-                "HarvardCOVID19IncrementalCases": COVID19IncrementalCases,
-                "HarvardCOVID19IncrementalDeaths": COVID19IncrementalDeaths,
-            })
+            "Date": Date,
+            "GeoId": GeoId,
+            "HarvardCOVID19CumulativeCases": COVID19CumulativeCases,
+            "HarvardCOVID19CumulativeDeaths": COVID19CumulativeDeaths,
+            "HarvardCOVID19IncrementalCases": COVID19IncrementalCases,
+            "HarvardCOVID19IncrementalDeaths": COVID19IncrementalDeaths,
+        })
 
-CovidHarvard(confirmed_cumulative_csv='./input/US_State_Confirmed.csv',
-             deaths_cumulative_csv='./input/US_State_Deaths.csv',
-             region='State')
+
+CovidHarvard(confirmed_cumulative_csv='./input/US_County_Confirmed.csv',
+             deaths_cumulative_csv='./input/US_County_Deaths.csv',
+             region='County')

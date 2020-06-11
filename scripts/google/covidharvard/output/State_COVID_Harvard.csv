@@ -1,5 +1,5 @@
 Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardCOVID19IncrementalCases,HarvardCOVID19IncrementalDeaths
-2020-01-21,geoId/01,0,0,,
+2020-01-21,geoId/01,0,0,0.0,0.0
 2020-01-22,geoId/01,0,0,0.0,0.0
 2020-01-23,geoId/01,0,0,0.0,0.0
 2020-01-24,geoId/01,0,0,0.0,0.0
@@ -132,7 +132,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/01,17359,618,328.0,8.0
 2020-05-31,geoId/01,17952,630,593.0,12.0
 2020-06-01,geoId/01,18534,646,582.0,16.0
-2020-01-21,geoId/02,0,0,,
+2020-01-21,geoId/02,0,0,0.0,0.0
 2020-01-22,geoId/02,0,0,0.0,0.0
 2020-01-23,geoId/02,0,0,0.0,0.0
 2020-01-24,geoId/02,0,0,0.0,0.0
@@ -265,7 +265,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/02,441,8,5.0,0.0
 2020-05-31,geoId/02,469,8,28.0,0.0
 2020-06-01,geoId/02,476,8,7.0,0.0
-2020-01-21,geoId/04,0,0,,
+2020-01-21,geoId/04,0,0,0.0,0.0
 2020-01-22,geoId/04,0,0,0.0,0.0
 2020-01-23,geoId/04,0,0,0.0,0.0
 2020-01-24,geoId/04,0,0,0.0,0.0
@@ -398,7 +398,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/04,19255,903,790.0,18.0
 2020-05-31,geoId/04,19936,906,681.0,3.0
 2020-06-01,geoId/04,20123,918,187.0,12.0
-2020-01-21,geoId/05,0,0,,
+2020-01-21,geoId/05,0,0,0.0,0.0
 2020-01-22,geoId/05,0,0,0.0,0.0
 2020-01-23,geoId/05,0,0,0.0,0.0
 2020-01-24,geoId/05,0,0,0.0,0.0
@@ -531,7 +531,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/05,7013,133,236.0,1.0
 2020-05-31,geoId/05,7253,133,240.0,0.0
 2020-06-01,geoId/05,7443,133,190.0,0.0
-2020-01-21,geoId/06,0,0,,
+2020-01-21,geoId/06,0,0,0.0,0.0
 2020-01-22,geoId/06,0,0,0.0,0.0
 2020-01-23,geoId/06,0,0,0.0,0.0
 2020-01-24,geoId/06,0,0,0.0,0.0
@@ -664,7 +664,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/06,110100,4214,3057.0,70.0
 2020-05-31,geoId/06,113114,4242,3014.0,28.0
 2020-06-01,geoId/06,115643,4287,2529.0,45.0
-2020-01-21,geoId/08,0,0,,
+2020-01-21,geoId/08,0,0,0.0,0.0
 2020-01-22,geoId/08,0,0,0.0,0.0
 2020-01-23,geoId/08,0,0,0.0,0.0
 2020-01-24,geoId/08,0,0,0.0,0.0
@@ -797,7 +797,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/08,26084,1443,482.0,6.0
 2020-05-31,geoId/08,26364,1445,280.0,2.0
 2020-06-01,geoId/08,26563,1458,199.0,13.0
-2020-01-21,geoId/09,0,0,,
+2020-01-21,geoId/09,0,0,0.0,0.0
 2020-01-22,geoId/09,0,0,0.0,0.0
 2020-01-23,geoId/09,0,0,0.0,0.0
 2020-01-24,geoId/09,0,0,0.0,0.0
@@ -930,7 +930,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/09,42022,3912,260.0,44.0
 2020-05-31,geoId/09,42201,3944,179.0,32.0
 2020-06-01,geoId/09,42740,3970,539.0,26.0
-2020-01-21,geoId/10,0,0,,
+2020-01-21,geoId/10,0,0,0.0,0.0
 2020-01-22,geoId/10,0,0,0.0,0.0
 2020-01-23,geoId/10,0,0,0.0,0.0
 2020-01-24,geoId/10,0,0,0.0,0.0
@@ -1063,7 +1063,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/10,9422,361,186.0,5.0
 2020-05-31,geoId/10,9498,366,76.0,5.0
 2020-06-01,geoId/10,9605,368,107.0,2.0
-2020-01-21,geoId/11,0,0,,
+2020-01-21,geoId/11,0,0,0.0,0.0
 2020-01-22,geoId/11,0,0,0.0,0.0
 2020-01-23,geoId/11,0,0,0.0,0.0
 2020-01-24,geoId/11,0,0,0.0,0.0
@@ -1196,7 +1196,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/11,8717,462,179.0,2.0
 2020-05-31,geoId/11,8801,466,84.0,4.0
 2020-06-01,geoId/11,8857,468,56.0,2.0
-2020-01-21,geoId/12,0,0,,
+2020-01-21,geoId/12,0,0,0.0,0.0
 2020-01-22,geoId/12,0,0,0.0,0.0
 2020-01-23,geoId/12,0,0,0.0,0.0
 2020-01-24,geoId/12,0,0,0.0,0.0
@@ -1329,7 +1329,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/12,55416,2446,927.0,34.0
 2020-05-31,geoId/12,56155,2450,739.0,4.0
 2020-06-01,geoId/12,56822,2459,667.0,9.0
-2020-01-21,geoId/13,0,0,,
+2020-01-21,geoId/13,0,0,0.0,0.0
 2020-01-22,geoId/13,0,0,0.0,0.0
 2020-01-23,geoId/13,0,0,0.0,0.0
 2020-01-24,geoId/13,0,0,0.0,0.0
@@ -1462,7 +1462,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/13,44336,1973,448.0,20.0
 2020-05-31,geoId/13,45051,2019,715.0,46.0
 2020-06-01,geoId/13,45757,2057,706.0,38.0
-2020-01-21,geoId/15,0,0,,
+2020-01-21,geoId/15,0,0,0.0,0.0
 2020-01-22,geoId/15,0,0,0.0,0.0
 2020-01-23,geoId/15,0,0,0.0,0.0
 2020-01-24,geoId/15,0,0,0.0,0.0
@@ -1595,7 +1595,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/15,641,17,2.0,0.0
 2020-05-31,geoId/15,642,17,1.0,0.0
 2020-06-01,geoId/15,642,17,0.0,0.0
-2020-01-21,geoId/16,0,0,,
+2020-01-21,geoId/16,0,0,0.0,0.0
 2020-01-22,geoId/16,0,0,0.0,0.0
 2020-01-23,geoId/16,0,0,0.0,0.0
 2020-01-24,geoId/16,0,0,0.0,0.0
@@ -1728,7 +1728,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/16,2840,82,36.0,0.0
 2020-05-31,geoId/16,2855,82,15.0,0.0
 2020-06-01,geoId/16,2908,83,53.0,1.0
-2020-01-21,geoId/17,0,0,,
+2020-01-21,geoId/17,0,0,0.0,0.0
 2020-01-22,geoId/17,0,0,0.0,0.0
 2020-01-23,geoId/17,0,0,0.0,0.0
 2020-01-24,geoId/17,1,0,1.0,0.0
@@ -1861,7 +1861,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/17,119290,5368,1496.0,60.0
 2020-05-31,geoId/17,120588,5426,1298.0,58.0
 2020-06-01,geoId/17,121666,5458,1078.0,32.0
-2020-01-21,geoId/18,0,0,,
+2020-01-21,geoId/18,0,0,0.0,0.0
 2020-01-22,geoId/18,0,0,0.0,0.0
 2020-01-23,geoId/18,0,0,0.0,0.0
 2020-01-24,geoId/18,0,0,0.0,0.0
@@ -1994,7 +1994,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/18,35064,2125,665.0,15.0
 2020-05-31,geoId/18,35429,2134,365.0,9.0
 2020-06-01,geoId/18,35684,2142,255.0,8.0
-2020-01-21,geoId/19,0,0,,
+2020-01-21,geoId/19,0,0,0.0,0.0
 2020-01-22,geoId/19,0,0,0.0,0.0
 2020-01-23,geoId/19,0,0,0.0,0.0
 2020-01-24,geoId/19,0,0,0.0,0.0
@@ -2127,7 +2127,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/19,19336,531,317.0,6.0
 2020-05-31,geoId/19,19621,537,285.0,6.0
 2020-06-01,geoId/19,19789,558,168.0,21.0
-2020-01-21,geoId/20,0,0,,
+2020-01-21,geoId/20,0,0,0.0,0.0
 2020-01-22,geoId/20,0,0,0.0,0.0
 2020-01-23,geoId/20,0,0,0.0,0.0
 2020-01-24,geoId/20,0,0,0.0,0.0
@@ -2260,7 +2260,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/20,9847,209,21.0,0.0
 2020-05-31,geoId/20,9878,211,31.0,2.0
 2020-06-01,geoId/20,10103,217,225.0,6.0
-2020-01-21,geoId/21,0,0,,
+2020-01-21,geoId/21,0,0,0.0,0.0
 2020-01-22,geoId/21,0,0,0.0,0.0
 2020-01-23,geoId/21,0,0,0.0,0.0
 2020-01-24,geoId/21,0,0,0.0,0.0
@@ -2393,7 +2393,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/21,9887,441,199.0,7.0
 2020-05-31,geoId/21,9937,441,50.0,0.0
 2020-06-01,geoId/21,10150,445,213.0,4.0
-2020-01-21,geoId/22,0,0,,
+2020-01-21,geoId/22,0,0,0.0,0.0
 2020-01-22,geoId/22,0,0,0.0,0.0
 2020-01-23,geoId/22,0,0,0.0,0.0
 2020-01-24,geoId/22,0,0,0.0,0.0
@@ -2526,7 +2526,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/22,39682,2785,775.0,19.0
 2020-05-31,geoId/22,40021,2791,339.0,6.0
 2020-06-01,geoId/22,40452,2801,431.0,10.0
-2020-01-21,geoId/23,0,0,,
+2020-01-21,geoId/23,0,0,0.0,0.0
 2020-01-22,geoId/23,0,0,0.0,0.0
 2020-01-23,geoId/23,0,0,0.0,0.0
 2020-01-24,geoId/23,0,0,0.0,0.0
@@ -2659,7 +2659,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/23,2282,89,56.0,4.0
 2020-05-31,geoId/23,2325,89,43.0,0.0
 2020-06-01,geoId/23,2349,89,24.0,0.0
-2020-01-21,geoId/24,0,0,,
+2020-01-21,geoId/24,0,0,0.0,0.0
 2020-01-22,geoId/24,0,0,0.0,0.0
 2020-01-23,geoId/24,0,0,0.0,0.0
 2020-01-24,geoId/24,0,0,0.0,0.0
@@ -2792,7 +2792,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/24,52662,2509,1031.0,43.0
 2020-05-31,geoId/24,53456,2532,794.0,23.0
 2020-06-01,geoId/24,54035,2552,579.0,20.0
-2020-01-21,geoId/25,0,0,,
+2020-01-21,geoId/25,0,0,0.0,0.0
 2020-01-22,geoId/25,0,0,0.0,0.0
 2020-01-23,geoId/25,0,0,0.0,0.0
 2020-01-24,geoId/25,0,0,0.0,0.0
@@ -2925,7 +2925,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/25,96301,6768,789.0,50.0
 2020-05-31,geoId/25,96965,6846,664.0,78.0
 2020-06-01,geoId/25,100805,7035,3840.0,189.0
-2020-01-21,geoId/26,0,0,,
+2020-01-21,geoId/26,0,0,0.0,0.0
 2020-01-22,geoId/26,0,0,0.0,0.0
 2020-01-23,geoId/26,0,0,0.0,0.0
 2020-01-24,geoId/26,0,0,0.0,0.0
@@ -3058,7 +3058,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/26,56848,5463,259.0,57.0
 2020-05-31,geoId/26,57355,5491,507.0,28.0
 2020-06-01,geoId/26,58435,5525,1080.0,34.0
-2020-01-21,geoId/27,0,0,,
+2020-01-21,geoId/27,0,0,0.0,0.0
 2020-01-22,geoId/27,0,0,0.0,0.0
 2020-01-23,geoId/27,0,0,0.0,0.0
 2020-01-24,geoId/27,0,0,0.0,0.0
@@ -3191,7 +3191,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/27,24200,1036,659.0,30.0
 2020-05-31,geoId/27,24860,1050,660.0,14.0
 2020-06-01,geoId/27,25218,1060,358.0,10.0
-2020-01-21,geoId/28,0,0,,
+2020-01-21,geoId/28,0,0,0.0,0.0
 2020-01-22,geoId/28,0,0,0.0,0.0
 2020-01-23,geoId/28,0,0,0.0,0.0
 2020-01-24,geoId/28,0,0,0.0,0.0
@@ -3324,7 +3324,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/28,15229,723,439.0,13.0
 2020-05-31,geoId/28,15501,734,272.0,11.0
 2020-06-01,geoId/28,15752,739,251.0,5.0
-2020-01-21,geoId/29,0,0,,
+2020-01-21,geoId/29,0,0,0.0,0.0
 2020-01-22,geoId/29,0,0,0.0,0.0
 2020-01-23,geoId/29,0,0,0.0,0.0
 2020-01-24,geoId/29,0,0,0.0,0.0
@@ -3457,7 +3457,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/29,13118,782,169.0,42.0
 2020-05-31,geoId/29,13297,784,179.0,2.0
 2020-06-01,geoId/29,13523,786,226.0,2.0
-2020-01-21,geoId/30,0,0,,
+2020-01-21,geoId/30,0,0,0.0,0.0
 2020-01-22,geoId/30,0,0,0.0,0.0
 2020-01-23,geoId/30,0,0,0.0,0.0
 2020-01-24,geoId/30,0,0,0.0,0.0
@@ -3590,7 +3590,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/30,505,17,12.0,0.0
 2020-05-31,geoId/30,515,17,10.0,0.0
 2020-06-01,geoId/30,519,17,4.0,0.0
-2020-01-21,geoId/31,0,0,,
+2020-01-21,geoId/31,0,0,0.0,0.0
 2020-01-22,geoId/31,0,0,0.0,0.0
 2020-01-23,geoId/31,0,0,0.0,0.0
 2020-01-24,geoId/31,0,0,0.0,0.0
@@ -3723,7 +3723,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/31,13905,177,251.0,0.0
 2020-05-31,geoId/31,14101,178,196.0,1.0
 2020-06-01,geoId/31,14345,183,244.0,5.0
-2020-01-21,geoId/32,0,0,,
+2020-01-21,geoId/32,0,0,0.0,0.0
 2020-01-22,geoId/32,0,0,0.0,0.0
 2020-01-23,geoId/32,0,0,0.0,0.0
 2020-01-24,geoId/32,0,0,0.0,0.0
@@ -3856,7 +3856,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/32,8519,417,144.0,2.0
 2020-05-31,geoId/32,8628,421,109.0,4.0
 2020-06-01,geoId/32,8701,422,73.0,1.0
-2020-01-21,geoId/33,0,0,,
+2020-01-21,geoId/33,0,0,0.0,0.0
 2020-01-22,geoId/33,0,0,0.0,0.0
 2020-01-23,geoId/33,0,0,0.0,0.0
 2020-01-24,geoId/33,0,0,0.0,0.0
@@ -3989,7 +3989,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/33,4545,242,53.0,4.0
 2020-05-31,geoId/33,4651,245,106.0,3.0
 2020-06-01,geoId/33,4685,245,34.0,0.0
-2020-01-21,geoId/34,0,0,,
+2020-01-21,geoId/34,0,0,0.0,0.0
 2020-01-22,geoId/34,0,0,0.0,0.0
 2020-01-23,geoId/34,0,0,0.0,0.0
 2020-01-24,geoId/34,0,0,0.0,0.0
@@ -4122,7 +4122,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/34,159608,11634,764.0,103.0
 2020-05-31,geoId/34,160445,11698,837.0,64.0
 2020-06-01,geoId/34,160918,11721,473.0,23.0
-2020-01-21,geoId/35,0,0,,
+2020-01-21,geoId/35,0,0,0.0,0.0
 2020-01-22,geoId/35,0,0,0.0,0.0
 2020-01-23,geoId/35,0,0,0.0,0.0
 2020-01-24,geoId/35,0,0,0.0,0.0
@@ -4255,7 +4255,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/35,7624,351,131.0,7.0
 2020-05-31,geoId/35,7689,356,65.0,5.0
 2020-06-01,geoId/35,7800,362,111.0,6.0
-2020-01-21,geoId/36,0,0,,
+2020-01-21,geoId/36,0,0,0.0,0.0
 2020-01-22,geoId/36,0,0,0.0,0.0
 2020-01-23,geoId/36,0,0,0.0,0.0
 2020-01-24,geoId/36,0,0,0.0,0.0
@@ -4388,7 +4388,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/36,374471,29612,1363.0,77.0
 2020-05-31,geoId/36,375575,29699,1104.0,87.0
 2020-06-01,geoId/36,376520,29766,945.0,67.0
-2020-01-21,geoId/37,0,0,,
+2020-01-21,geoId/37,0,0,0.0,0.0
 2020-01-22,geoId/37,0,0,0.0,0.0
 2020-01-23,geoId/37,0,0,0.0,0.0
 2020-01-24,geoId/37,0,0,0.0,0.0
@@ -4521,7 +4521,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/37,27761,903,1026.0,15.0
 2020-05-31,geoId/37,28686,911,925.0,8.0
 2020-06-01,geoId/37,29368,923,682.0,12.0
-2020-01-21,geoId/38,0,0,,
+2020-01-21,geoId/38,0,0,0.0,0.0
 2020-01-22,geoId/38,0,0,0.0,0.0
 2020-01-23,geoId/38,0,0,0.0,0.0
 2020-01-24,geoId/38,0,0,0.0,0.0
@@ -4654,7 +4654,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/38,2557,63,34.0,1.0
 2020-05-31,geoId/38,2580,64,23.0,1.0
 2020-06-01,geoId/38,2628,64,48.0,0.0
-2020-01-21,geoId/39,0,0,,
+2020-01-21,geoId/39,0,0,0.0,0.0
 2020-01-22,geoId/39,0,0,0.0,0.0
 2020-01-23,geoId/39,0,0,0.0,0.0
 2020-01-24,geoId/39,0,0,0.0,0.0
@@ -4787,7 +4787,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/39,35034,2149,468.0,18.0
 2020-05-31,geoId/39,35513,2155,479.0,6.0
 2020-06-01,geoId/39,35984,2206,471.0,51.0
-2020-01-21,geoId/40,0,0,,
+2020-01-21,geoId/40,0,0,0.0,0.0
 2020-01-22,geoId/40,0,0,0.0,0.0
 2020-01-23,geoId/40,0,0,0.0,0.0
 2020-01-24,geoId/40,0,0,0.0,0.0
@@ -4920,7 +4920,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/40,6418,334,80.0,5.0
 2020-05-31,geoId/40,6506,334,88.0,0.0
 2020-06-01,geoId/40,6573,334,67.0,0.0
-2020-01-21,geoId/41,0,0,,
+2020-01-21,geoId/41,0,0,0.0,0.0
 2020-01-22,geoId/41,0,0,0.0,0.0
 2020-01-23,geoId/41,0,0,0.0,0.0
 2020-01-24,geoId/41,0,0,0.0,0.0
@@ -5053,7 +5053,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/41,4185,153,54.0,2.0
 2020-05-31,geoId/41,4243,153,58.0,0.0
 2020-06-01,geoId/41,4302,154,59.0,1.0
-2020-01-21,geoId/42,0,0,,
+2020-01-21,geoId/42,0,0,0.0,0.0
 2020-01-22,geoId/42,0,0,0.0,0.0
 2020-01-23,geoId/42,0,0,0.0,0.0
 2020-01-24,geoId/42,0,0,0.0,0.0
@@ -5186,7 +5186,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/42,75789,5537,716.0,70.0
 2020-05-31,geoId/42,76218,5555,429.0,18.0
 2020-06-01,geoId/42,76734,5574,516.0,19.0
-2020-01-21,geoId/44,0,0,,
+2020-01-21,geoId/44,0,0,0.0,0.0
 2020-01-22,geoId/44,0,0,0.0,0.0
 2020-01-23,geoId/44,0,0,0.0,0.0
 2020-01-24,geoId/44,0,0,0.0,0.0
@@ -5319,7 +5319,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/44,14819,711,184.0,18.0
 2020-05-31,geoId/44,14928,718,109.0,7.0
 2020-06-01,geoId/44,14991,720,63.0,2.0
-2020-01-21,geoId/45,0,0,,
+2020-01-21,geoId/45,0,0,0.0,0.0
 2020-01-22,geoId/45,0,0,0.0,0.0
 2020-01-23,geoId/45,0,0,0.0,0.0
 2020-01-24,geoId/45,0,0,0.0,0.0
@@ -5452,7 +5452,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/45,11394,487,263.0,4.0
 2020-05-31,geoId/45,11861,494,467.0,7.0
 2020-06-01,geoId/45,12148,500,287.0,6.0
-2020-01-21,geoId/46,0,0,,
+2020-01-21,geoId/46,0,0,0.0,0.0
 2020-01-22,geoId/46,0,0,0.0,0.0
 2020-01-23,geoId/46,0,0,0.0,0.0
 2020-01-24,geoId/46,0,0,0.0,0.0
@@ -5585,7 +5585,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/46,4960,62,94.0,3.0
 2020-05-31,geoId/46,4993,62,33.0,0.0
 2020-06-01,geoId/46,5034,62,41.0,0.0
-2020-01-21,geoId/47,0,0,,
+2020-01-21,geoId/47,0,0,0.0,0.0
 2020-01-22,geoId/47,0,0,0.0,0.0
 2020-01-23,geoId/47,0,0,0.0,0.0
 2020-01-24,geoId/47,0,0,0.0,0.0
@@ -5718,7 +5718,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/47,22676,360,477.0,4.0
 2020-05-31,geoId/47,22832,360,156.0,0.0
 2020-06-01,geoId/47,23242,361,410.0,1.0
-2020-01-21,geoId/48,0,0,,
+2020-01-21,geoId/48,0,0,0.0,0.0
 2020-01-22,geoId/48,0,0,0.0,0.0
 2020-01-23,geoId/48,0,0,0.0,0.0
 2020-01-24,geoId/48,0,0,0.0,0.0
@@ -5851,7 +5851,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/48,63396,1676,1323.0,31.0
 2020-05-31,geoId/48,64974,1683,1578.0,7.0
 2020-06-01,geoId/48,66081,1695,1107.0,12.0
-2020-01-21,geoId/49,0,0,,
+2020-01-21,geoId/49,0,0,0.0,0.0
 2020-01-22,geoId/49,0,0,0.0,0.0
 2020-01-23,geoId/49,0,0,0.0,0.0
 2020-01-24,geoId/49,0,0,0.0,0.0
@@ -5984,7 +5984,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/49,9551,112,269.0,5.0
 2020-05-31,geoId/49,9829,113,278.0,1.0
 2020-06-01,geoId/49,10026,113,197.0,0.0
-2020-01-21,geoId/50,0,0,,
+2020-01-21,geoId/50,0,0,0.0,0.0
 2020-01-22,geoId/50,0,0,0.0,0.0
 2020-01-23,geoId/50,0,0,0.0,0.0
 2020-01-24,geoId/50,0,0,0.0,0.0
@@ -6117,7 +6117,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/50,977,55,2.0,0.0
 2020-05-31,geoId/50,981,55,4.0,0.0
 2020-06-01,geoId/50,983,55,2.0,0.0
-2020-01-21,geoId/51,0,0,,
+2020-01-21,geoId/51,0,0,0.0,0.0
 2020-01-22,geoId/51,0,0,0.0,0.0
 2020-01-23,geoId/51,0,0,0.0,0.0
 2020-01-24,geoId/51,0,0,0.0,0.0
@@ -6250,7 +6250,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/51,43611,1370,1078.0,12.0
 2020-05-31,geoId/51,44607,1375,996.0,5.0
 2020-06-01,geoId/51,45398,1392,791.0,17.0
-2020-01-21,geoId/53,1,0,,
+2020-01-21,geoId/53,1,0,0.0,0.0
 2020-01-22,geoId/53,1,0,0.0,0.0
 2020-01-23,geoId/53,1,0,0.0,0.0
 2020-01-24,geoId/53,1,0,0.0,0.0
@@ -6383,7 +6383,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/53,22347,1126,238.0,6.0
 2020-05-31,geoId/53,22543,1126,196.0,0.0
 2020-06-01,geoId/53,23001,1133,458.0,7.0
-2020-01-21,geoId/54,0,0,,
+2020-01-21,geoId/54,0,0,0.0,0.0
 2020-01-22,geoId/54,0,0,0.0,0.0
 2020-01-23,geoId/54,0,0,0.0,0.0
 2020-01-24,geoId/54,0,0,0.0,0.0
@@ -6516,7 +6516,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/54,1989,75,17.0,1.0
 2020-05-31,geoId/54,2010,75,21.0,0.0
 2020-06-01,geoId/54,2028,76,18.0,1.0
-2020-01-21,geoId/55,0,0,,
+2020-01-21,geoId/55,0,0,0.0,0.0
 2020-01-22,geoId/55,0,0,0.0,0.0
 2020-01-23,geoId/55,0,0,0.0,0.0
 2020-01-24,geoId/55,0,0,0.0,0.0
@@ -6649,7 +6649,7 @@ Date,GeoId,HarvardCOVID19CumulativeCases,HarvardCOVID19CumulativeDeaths,HarvardC
 2020-05-30,geoId/55,18249,588,465.0,19.0
 2020-05-31,geoId/55,18418,594,169.0,6.0
 2020-06-01,geoId/55,18556,597,138.0,3.0
-2020-01-21,geoId/56,0,0,,
+2020-01-21,geoId/56,0,0,0.0,0.0
 2020-01-22,geoId/56,0,0,0.0,0.0
 2020-01-23,geoId/56,0,0,0.0,0.0
 2020-01-24,geoId/56,0,0,0.0,0.0
