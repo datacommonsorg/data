@@ -10,6 +10,9 @@ def main():
   #Step 0: load and combine the data into single dataFrame
   CDC_prediction = pd.concat([pd.read_csv(os.path.join("./CSV_original", file)) for file in os.listdir("./CSV_original") if file[-4:] == '.csv']).reset_index(drop = True)
   CDC_prediction = CDC_prediction.rename(columns={"target_week_end_date": "target_date"})
+   
+  #drop the quantiles for now, come back later
+  CDC_prediction = CDC_prediction.drop(columns = ["quantile_0.025", "quantile_0.975"])
 
   #Step 1: resolve the inconsistency in model names, especially in data on 2020-05-04 and 2020-04-27
   model_rename = {"UChicago":"UChicago_10", "Geneva-DeterministicGrowth": "Geneva", "GT-DeepCOVID": "GA_Tech", "IHME-CurveFit":"IHME",\
@@ -65,35 +68,26 @@ def main():
   #Step 5: split the "point" value based on "model" and "target"
   grouped_CDC = CDC_prediction.groupby(["model", "target"])
   prefixes = []
-  splited_CDC = pd.DataFrame()
-  
+
   for _, prediction in grouped_CDC:
     #get the "model" and "target" and store it for generating tMCF
     modelname = prediction["model"].unique()[0]
     targets = prediction["target"].unique()[0].split(" ")
     if len(targets) == 5:
-      target = targets[0]+"Weeks"+ "_" + targets[3]
+      target = targets[0]+"Weeks" + targets[3][0].capitalize()+targets[3][1:]
     else:#observed data
       target = prediction["target"].unique()[0]
-    prefix = modelname + "_" + target
+    colname = modelname + "_" + target
     prefixes.append([modelname, target])
     
     #split the columns
-    cols = ["target_date","location","point","quantile_0.025", "quantile_0.975"]
-    cols_map = {}
-    for col in cols:
-      if col == "point":
-        cols_map["point"] = prefix
-      else:
-        cols_map[col] = prefix + "_" + col
-    prediction = prediction[cols]
-    prediction = prediction.rename(columns = cols_map).reset_index(drop = True)
-    splited_CDC=splited_CDC.join(prediction, how = "outer")
- 
+    CDC_prediction[colname] = None
+    CDC_prediction[colname].loc[prediction.index] = prediction["point"]
+  CDC_prediction = CDC_prediction.drop(columns = ["point", "model", "target"])
   
   #Step 6: save the data
   save_path = "./forecast_death-2020-04-13to2020-06-01.csv"
-  splited_CDC.to_csv(save_path, index = False)
+  CDC_prediction.to_csv(save_path, index = False)
   with open('colnames.txt', 'w') as filehandle:
     for model,target in prefixes:
         filehandle.write("{},{}\n".format(model,target))

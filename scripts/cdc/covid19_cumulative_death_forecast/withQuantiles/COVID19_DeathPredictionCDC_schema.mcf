@@ -1,0 +1,259 @@
+Node: dcid:predictionDate
+name: predictionData
+typeOf: schema:Property
+domainIncludes: dcs:Observation
+rangeIncludes: dcs:Date
+description: the date the prediction was made
+
+Node: dcid:COVID19DeathPredictionModel_Auquan
+name: Auquan
+typeOf: dcs:MeasurementMethodEnum
+description: Auquan Data Science
+url: https://covid19-infection-model.auquan.com/
+
+Node: dcid:COVID19DeathPredictionModel_Ensemble
+name: Ensemble
+typeOf: dcs:MeasurementMethodEnum
+description: University of Massachusetts, Amherst
+url: https://reichlab.io/
+
+Node: dcid:COVID19DeathPredictionModel_Columbia
+name: Columbia
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_Geneva
+name: Geneva
+typeOf: dcs:MeasurementMethodEnum
+description: University of Geneva / Swiss Data Science Center
+url: https://renkulab.shinyapps.io/COVID-19-Epidemic-Forecasting/
+
+Node: dcid:COVID19DeathPredictionModel_GA_Tech
+name: GA_Tech
+typeOf: dcs:MeasurementMethodEnum
+description: Georgia Institute of Technology, College of Computing
+url: https://www.cc.gatech.edu/~badityap/covid.html
+
+Node: dcid:COVID19DeathPredictionModel_Imperial
+name: Imperial
+typeOf: dcs:MeasurementMethodEnum
+description: Imperial College, London
+url: https://mrc-ide.github.io/covid19-short-term-forecasts/index.html
+
+Node: dcid:COVID19DeathPredictionModel_ISU
+name: ISU
+typeOf: dcs:MeasurementMethodEnum
+description: Iowa State University
+url: http://www.covid19dashboard.us/
+
+Node: dcid:COVID19DeathPredictionModel_JHU
+name: JHU
+typeOf: dcs:MeasurementMethodEnum
+description: Johns Hopkins University
+url: https://github.com/HopkinsIDD/COVIDScenarioPipeline
+
+Node: dcid:COVID19DeathPredictionModel_LANL
+name: LANL
+typeOf: dcs:MeasurementMethodEnum
+description: Los Alamos National Laboratory
+url: https://covid-19.bsvgateway.org/
+
+Node: dcid:COVID19DeathPredictionModel_MIT
+name: MIT
+typeOf: dcs:MeasurementMethodEnum
+description: Massachusetts Institute of Technology
+url: https://www.covidanalytics.io/projections
+
+Node: dcid:COVID19DeathPredictionModel_MOBS
+name: MOBS
+typeOf: dcs:MeasurementMethodEnum
+description: Northeastern University, Laboratory for the Modeling of Biological and Socio-technical Systems
+url: https://covid19.gleamproject.org/
+
+Node: dcid:COVID19DeathPredictionModel_UA
+name: UA
+typeOf: dcs:MeasurementMethodEnum
+description: University of Arizona
+url: https://doi.org/10.1016/j.epidem.2016.10.002
+
+Node: dcid:COVID19DeathPredictionModel_UCLA
+name: UCLA
+typeOf: dcs:MeasurementMethodEnum
+description: University of California, Los Angeles
+url: https://covid19.uclaml.org/
+
+Node: dcid:COVID19DeathPredictionModel_UMass-MB
+name: UMass-MB
+typeOf: dcs:MeasurementMethodEnum
+description: University of Massachusetts, Amherst
+url: https://reichlab.io/
+
+Node: dcid:COVID19DeathPredictionModel_ERDC
+name: ERDC
+typeOf: dcs:MeasurementMethodEnum
+description: US Army Engineer Research and Development Center
+url: https://github.com/erdc-cv19/covid19-forecast-hub
+
+Node: dcid:COVID19DeathPredictionModel_UT
+name: UT
+typeOf: dcs:MeasurementMethodEnum
+description: University of Texas, Austin
+url: https://covid-19.tacc.utexas.edu/projections/
+
+Node: dcid:COVID19DeathPredictionModel_YYG
+name: YYG
+typeOf: dcs:MeasurementMethodEnum
+description: Youyang Gu
+url: http://covid19-projections.com/about/
+
+Node: dcid:COVID19DeathPredictionModel_CAN
+name: CAN
+typeOf: dcs:MeasurementMethodEnum
+description: COVID Act Now
+url: https://covidactnow.org/?s=43246
+
+Node: dcid:COVID19DeathPredictionModel_IHME
+name: IHME
+typeOf: dcs:MeasurementMethodEnum
+description: Institute of Health Metrics and Evaluation
+url: https://covid19.healthdata.org/united-states-of-america
+
+Node: dcid:COVID19DeathPredictionModel_Imperial1
+name: Imperial1
+typeOf: dcs:MeasurementMethodEnum
+description: Imperial College, London
+url: https://mrc-ide.github.io/covid19-short-term-forecasts/index.html
+
+Node: dcid:COVID19DeathPredictionModel_Imperial2
+name: Imperial2
+typeOf: dcs:MeasurementMethodEnum
+description: Imperial College, London
+url: https://mrc-ide.github.io/covid19-short-term-forecasts/index.html
+
+Node: dcid:COVID19DeathPredictionModel_NotreDame
+name: NotreDame
+typeOf: dcs:MeasurementMethodEnum
+description: Notre Dame University
+url: https://github.com/confunguido/covid19_ND_forecasting
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_10
+name: UChicago_10
+typeOf: dcs:MeasurementMethodEnum
+description: University of Chicago
+url: https://github.com/cobeylab/covid_IL
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_100
+name: UChicago_100
+typeOf: dcs:MeasurementMethodEnum
+description: University of Chicago
+url: https://github.com/cobeylab/covid_IL
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_40
+name: UChicago_40
+typeOf: dcs:MeasurementMethodEnum
+description: University of Chicago
+url: https://github.com/cobeylab/covid_IL
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_60
+name: UChicago_60
+typeOf: dcs:MeasurementMethodEnum
+description: University of Chicago
+url: https://github.com/cobeylab/covid_IL
+
+Node: dcid:COVID19DeathPredictionModel_UChicago_80
+name: UChicago_80
+typeOf: dcs:MeasurementMethodEnum
+description: University of Chicago
+url: https://github.com/cobeylab/covid_IL
+
+Node: dcid:COVID19DeathPredictionModel_COVIDhub-ensemble
+name: COVIDhub-ensemble
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+url: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU-80contact
+name: CU-80contact
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_CU-80contact_1x
+name: CU-80contact_1x
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_CU-80contactw
+name: CU-80contactw
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_CU-60contact
+name: CU-60contact
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_CU-70contact
+name: CU-70contact
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_observed data
+name: observed data
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+url: nan
+
+Node: dcid:COVID19DeathPredictionModel_CU 40% contact reduction
+name: CU 40% contact reduction
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_CU 30% contact reduction
+name: CU 30% contact reduction
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_CU 20% contact reduction
+name: CU 20% contact reduction
+typeOf: dcs:MeasurementMethodEnum
+description: Columbia University
+url: https://columbia.maps.arcgis.com/apps/webappviewer/index.html?id=ade6ba85450c4325a12a5b9c09ba796c
+
+Node: dcid:COVID19DeathPredictionModel_ensemble forecast
+name: ensemble forecast
+typeOf: dcs:MeasurementMethodEnum
+description: nan
+url: nan
+
+Node: dcid:COVID19DeathPredictionModel_CovidSim
+name: CovidSim
+typeOf: dcs:MeasurementMethodEnum
+description: COVID-19 Simulator Consortium
+url: https://www.covid19sim.org/team
+
+Node: dcid:COVID19DeathPredictionModel_GT_CHHS
+name: GT_CHHS
+typeOf: dcs:MeasurementMethodEnum
+description: Georgia Institute of Technology, Center for Health and Humanitarian Systems
+url: https://github.com/pkeskinocak/COVID19GA
+
+Node: dcid:COVID19DeathPredictionModel_PSI
+name: PSI
+typeOf: dcs:MeasurementMethodEnum
+description: Predictive Science Inc.
+url: https://github.com/predsci/DRAFT
+
+Node: dcid:COVID19DeathPredictionModel_SWC
+name: SWC
+typeOf: dcs:MeasurementMethodEnum
+description: Snyder Wilson Consulting
+url: https://github.com/tsnyder701/terminus
+
