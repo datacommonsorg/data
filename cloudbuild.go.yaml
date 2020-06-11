@@ -13,7 +13,22 @@ steps:
   #env: ["GO111MODULE=on"]
   args: ["test", "./..."]
 
-# TODO: Add go linter, any other useful Go tools.
+- id: go_vet
+  name: "golang"
+  entrypoint: "go"
+  #env: ["GO111MODULE=on"]
+  args: ["test", "./..."]
+
+- id: check_go_fmt
+  name: "golang"
+  entrypoint: "go"
+  #env: ["GO111MODULE=on"]
+  args: ["test", "./..."]
+
 - id: go_linter
   name: "golangci/golangci-lint"
-  args: ["golangci-lint", "run", " --enable-all"]
+  args: ["golangci-lint", " --enable-all", "run" ]
+
+
+# TODO: Add any other useful Go tools.
+
