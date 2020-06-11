@@ -1,5 +1,19 @@
 # Scripts for importing ontology dataset from the European Bioinformatics Institute (EMBL-EBI)
 
+```
+proteinInteractionEBI
+│   README.md
+│   parseEBI.ipynb
+|   parseEBI.py
+|   mi.owl
+│
+└───graph
+│   │   multipleParent.png
+│   │   originalDataSample.png
+│   │   ontologyTree.png
+
+```
+
 This directory stores all scripts used to import datasets from the European Bioinformatics Institute (EMBL-EBI). 
 Here we only import the three subsets of the ontologies: "interaction detection method", "interaction type" and "database citation", which are commonly used in protein-protein interactions. 
 
@@ -15,26 +29,36 @@ The original data file (mi.owl) uses "is_a" and "part_of" as the relation proper
 
 ![Original Data Sample](./graph/originalDataSample.png)
 
-We make each term as an enumeration node of three subtrees with root nodes as: "database citation", "interaction detection method", and "interaction type". There are two main concerns that we didn't import all the nodes. First, we focus on the ontologies in protein-protein interaction and these three categories are the most commonly used. Secondly, importing too many general terms may cause the confusion in our dataCommons knowledge graph.  
+We make each term as an enumeration node of three subtrees with root nodes as: "database citation", "interaction detection method", and "interaction type". There are two main concerns that we didn't import all the nodes. First, we focus on the ontologies in protein-protein interaction and these three categories are the most commonly used. Secondly, importing too many general terms may cause the confusion in our dataCommons knowledge graph. 
+
+We also left out the properties named "synonym", "subset", "created_by" and "creation_date" which contain the data that don't play important roles in our nodes of protein-protein interaction currently. If needed we will import these properties in the future. 
 
 
 ## Algorithm for parsing the file
 
-Parsing Steps:
+### Parsing Steps
+
 1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used to access nodes as well. 
-2. save all the tree nodes in the subtree of the three nodes into three set with depth first search:
-    id: MI:0001 name: interaction detection method
-    id: MI:0190 name: interaction type
-    id: MI:0444 name: database citation
+2. save all the tree nodes in the subtree of the three nodes into three set with depth first search: 
+- id: MI:0001 name: interaction detection method 
+- id: MI:0190 name: interaction type  
+- id: MI:0444 name: database citation 
+
 3. save the nodes in the three sets to the corresponding enumeration schema
-"""
 
-## Schema Overview
+## Schema overview
 
-### New Properties: 
-interactionDetectionMethod, interactionType, interactionSource, alias, psimi, isObsolete, publications.
+### New Class 
 
-### New Enumeration Schema:
-BiomedicalOntologySubsetEnum, InteractionTypeEnum, InteractionDetectionMethodEnum, InteractionSourceEnum.
+MolecularInteraction
+
+### New Properties 
+
+psimiId, publicationId
+(interactionDetectionMethod, interactionType, interactionSource) for mint
+
+### New Enumeration
+
+InteractionTypeEnum, InteractionDetectionMethodEnum, InteractionSourceEnum.
 
 
