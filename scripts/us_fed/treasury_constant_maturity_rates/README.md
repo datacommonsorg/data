@@ -12,7 +12,7 @@
    column for dates. "date" column is of the form "YYYY-MM-DD". The other
    interest rate columns are numeric.
 
-## Instance MCFs
+## StatisticalVariable Instance MCFs
 1. [treasury_constant_maturity_rates.mcf](treasury_constant_maturity_rates.mcf)
 
 ## Template MCFs
