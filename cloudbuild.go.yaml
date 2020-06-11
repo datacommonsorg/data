@@ -26,7 +26,7 @@ steps:
 
 - id: go_linter
   name: "golangci/golangci-lint"
-  args: ["golangci-lint", " --enable-all", "run" ]
+  args: ["golangci-lint", "run"]
 
 
 # TODO: Add any other useful Go tools.
