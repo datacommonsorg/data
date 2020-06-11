@@ -3,6 +3,8 @@ package util
 import "fmt"
 
 func Hello() string {
+	var x string
+
 	return "Hello World"
 }
 
@@ -11,9 +13,9 @@ func PrintHello() {
 }
 
 func PrintWorld() {
-	fmt.Printf("World")
+	fmt.Printf(  "World")
 }
 
 func ShouldTriggerLint() {
-	fmt.Printf("missing func comments")
+		fmt.Printf("missing func comments")
 }

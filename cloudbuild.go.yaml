@@ -5,25 +5,24 @@ steps:
   name: "golang"
   entrypoint: "go"
   #  env: ["GO111MODULE=on"]
-  args: ["build", "./..."]
+  args: ["build", "..."]
 
 - id: go_test
   name: "golang"
   entrypoint: "go"
   #env: ["GO111MODULE=on"]
-  args: ["test", "./..."]
+  args: ["test", "..."]
 
 - id: go_vet
   name: "golang"
   entrypoint: "go"
   #env: ["GO111MODULE=on"]
-  args: ["test", "./..."]
+  args: ["vet", "..."]
 
 - id: check_go_fmt
   name: "golang"
-  entrypoint: "go"
   #env: ["GO111MODULE=on"]
-  args: ["test", "./..."]
+  args: ["gofmt", "-l", "-e", "-d", "."]
 
 - id: go_linter
   name: "golangci/golangci-lint"
