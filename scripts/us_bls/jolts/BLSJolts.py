@@ -116,12 +116,12 @@ jolts_df = jolts_df.drop(jolts_df.query("region_code != '00'").index)
 
 # Map industry and seasonal adjustment to statistical variable name
 UNIQUE_INDUSTRIES = list(jolts_df['industry_code'].unique())
-SEPARATION_TYPES = ["Adjusted", "Unadjusted"]
+ADJUSTED_TYPES = [("Adjusted", "BLSSeasonallyAdjusted"), ("Unadjusted", "BLSSeasonallyUnadjusted")]
 
 def mapRowToStatisticalVariable(row):
   base_stat_var = row['statistical_variable']
   industry_code = row['industry_code']
-  seasonal_adjustment = SEPARATION_TYPES[0] if row['seasonal'] == "S" else SEPARATION_TYPES[1]
+  seasonal_adjustment = "Adjusted" if row['seasonal'] == "S" else "Unadjusted"
 
   return f"dcs:{base_stat_var}_NAICS{industry_code}_{seasonal_adjustment}"
 
@@ -136,11 +136,13 @@ output_csv.to_csv("BLSJolts.csv", index=False, encoding="utf-8")
 
 ### Step 3) Create StatisticalVariables  (6 job variables * 28 industries * 2 adjustments)
 SAMPLE_STAT_VAR = """
-Node: dcid:{STAT_CLASS}/NAICS{INDUSTRY}/{ADJUSTMENT}
+Node: dcid:{STAT_CLASS}_NAICS{INDUSTRY}_{ADJUSTMENT}
 typeOf: StatisticalVariable
 populationType: {POPULATION}
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: {BLS_ADJUSTMENT}
+naics: dcid:NAICS/{INDUSTRY}
 turnoverType: dcs:{TURNOVER_TYPE}
 """
 
@@ -148,7 +150,7 @@ turnoverType: dcs:{TURNOVER_TYPE}
 with open("BLSJolts_StatisticalVariables.mcf", "w", newline="") as f_out:
   for schema_name, pop_type, sep_type, _ in schema_mapping:
     for industry_code in UNIQUE_INDUSTRIES:
-      for separation_type in SEPARATION_TYPES:
+      for adjusted_dcid_map, adjusted_schema in ADJUSTED_TYPES:
         # Create new schema object
         stat_var_schema = SAMPLE_STAT_VAR
 
@@ -159,7 +161,8 @@ with open("BLSJolts_StatisticalVariables.mcf", "w", newline="") as f_out:
         # Replace all other fields
         stat_var_schema = stat_var_schema.replace("{STAT_CLASS}", schema_name)   \
                                          .replace("{INDUSTRY}", industry_code)   \
-                                         .replace("{ADJUSTMENT}", separation_type)   \
+                                         .replace("{ADJUSTMENT}", adjusted_dcid_map)   \
+                                         .replace("{BLS_ADJUSTMENT}", adjusted_schema)   \
                                          .replace("{POPULATION}", pop_type)      \
                                          .replace("{TURNOVER_TYPE}", sep_type)
 

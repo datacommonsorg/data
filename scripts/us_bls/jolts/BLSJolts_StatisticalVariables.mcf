@@ -1,2352 +1,3024 @@
 
-Node: dcid:NumJobOpening/NAICS000000/Adjusted
+Node: dcid:NumJobOpening_NAICS000000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/000000
 
 
-Node: dcid:NumJobOpening/NAICS000000/Unadjusted
+Node: dcid:NumJobOpening_NAICS000000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/000000
 
 
-Node: dcid:NumJobOpening/NAICS100000/Adjusted
+Node: dcid:NumJobOpening_NAICS100000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/100000
 
 
-Node: dcid:NumJobOpening/NAICS100000/Unadjusted
+Node: dcid:NumJobOpening_NAICS100000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/100000
 
 
-Node: dcid:NumJobOpening/NAICS110099/Adjusted
+Node: dcid:NumJobOpening_NAICS110099_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/110099
 
 
-Node: dcid:NumJobOpening/NAICS110099/Unadjusted
+Node: dcid:NumJobOpening_NAICS110099_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/110099
 
 
-Node: dcid:NumJobOpening/NAICS230000/Adjusted
+Node: dcid:NumJobOpening_NAICS230000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/230000
 
 
-Node: dcid:NumJobOpening/NAICS230000/Unadjusted
+Node: dcid:NumJobOpening_NAICS230000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/230000
 
 
-Node: dcid:NumJobOpening/NAICS300000/Adjusted
+Node: dcid:NumJobOpening_NAICS300000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/300000
 
 
-Node: dcid:NumJobOpening/NAICS300000/Unadjusted
+Node: dcid:NumJobOpening_NAICS300000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/300000
 
 
-Node: dcid:NumJobOpening/NAICS320000/Adjusted
+Node: dcid:NumJobOpening_NAICS320000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/320000
 
 
-Node: dcid:NumJobOpening/NAICS320000/Unadjusted
+Node: dcid:NumJobOpening_NAICS320000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/320000
 
 
-Node: dcid:NumJobOpening/NAICS340000/Adjusted
+Node: dcid:NumJobOpening_NAICS340000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/340000
 
 
-Node: dcid:NumJobOpening/NAICS340000/Unadjusted
+Node: dcid:NumJobOpening_NAICS340000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/340000
 
 
-Node: dcid:NumJobOpening/NAICS400000/Adjusted
+Node: dcid:NumJobOpening_NAICS400000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/400000
 
 
-Node: dcid:NumJobOpening/NAICS400000/Unadjusted
+Node: dcid:NumJobOpening_NAICS400000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/400000
 
 
-Node: dcid:NumJobOpening/NAICS420000/Adjusted
+Node: dcid:NumJobOpening_NAICS420000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/420000
 
 
-Node: dcid:NumJobOpening/NAICS420000/Unadjusted
+Node: dcid:NumJobOpening_NAICS420000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/420000
 
 
-Node: dcid:NumJobOpening/NAICS440000/Adjusted
+Node: dcid:NumJobOpening_NAICS440000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/440000
 
 
-Node: dcid:NumJobOpening/NAICS440000/Unadjusted
+Node: dcid:NumJobOpening_NAICS440000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/440000
 
 
-Node: dcid:NumJobOpening/NAICS480099/Adjusted
+Node: dcid:NumJobOpening_NAICS480099_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/480099
 
 
-Node: dcid:NumJobOpening/NAICS480099/Unadjusted
+Node: dcid:NumJobOpening_NAICS480099_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/480099
 
 
-Node: dcid:NumJobOpening/NAICS510000/Adjusted
+Node: dcid:NumJobOpening_NAICS510000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510000
 
 
-Node: dcid:NumJobOpening/NAICS510000/Unadjusted
+Node: dcid:NumJobOpening_NAICS510000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510000
 
 
-Node: dcid:NumJobOpening/NAICS510099/Adjusted
+Node: dcid:NumJobOpening_NAICS510099_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510099
 
 
-Node: dcid:NumJobOpening/NAICS510099/Unadjusted
+Node: dcid:NumJobOpening_NAICS510099_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510099
 
 
-Node: dcid:NumJobOpening/NAICS520000/Adjusted
+Node: dcid:NumJobOpening_NAICS520000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/520000
 
 
-Node: dcid:NumJobOpening/NAICS520000/Unadjusted
+Node: dcid:NumJobOpening_NAICS520000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/520000
 
 
-Node: dcid:NumJobOpening/NAICS530000/Adjusted
+Node: dcid:NumJobOpening_NAICS530000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/530000
 
 
-Node: dcid:NumJobOpening/NAICS530000/Unadjusted
+Node: dcid:NumJobOpening_NAICS530000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/530000
 
 
-Node: dcid:NumJobOpening/NAICS540099/Adjusted
+Node: dcid:NumJobOpening_NAICS540099_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/540099
 
 
-Node: dcid:NumJobOpening/NAICS540099/Unadjusted
+Node: dcid:NumJobOpening_NAICS540099_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/540099
 
 
-Node: dcid:NumJobOpening/NAICS600000/Adjusted
+Node: dcid:NumJobOpening_NAICS600000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/600000
 
 
-Node: dcid:NumJobOpening/NAICS600000/Unadjusted
+Node: dcid:NumJobOpening_NAICS600000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/600000
 
 
-Node: dcid:NumJobOpening/NAICS610000/Adjusted
+Node: dcid:NumJobOpening_NAICS610000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/610000
 
 
-Node: dcid:NumJobOpening/NAICS610000/Unadjusted
+Node: dcid:NumJobOpening_NAICS610000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/610000
 
 
-Node: dcid:NumJobOpening/NAICS620000/Adjusted
+Node: dcid:NumJobOpening_NAICS620000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/620000
 
 
-Node: dcid:NumJobOpening/NAICS620000/Unadjusted
+Node: dcid:NumJobOpening_NAICS620000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/620000
 
 
-Node: dcid:NumJobOpening/NAICS700000/Adjusted
+Node: dcid:NumJobOpening_NAICS700000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/700000
 
 
-Node: dcid:NumJobOpening/NAICS700000/Unadjusted
+Node: dcid:NumJobOpening_NAICS700000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/700000
 
 
-Node: dcid:NumJobOpening/NAICS710000/Adjusted
+Node: dcid:NumJobOpening_NAICS710000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/710000
 
 
-Node: dcid:NumJobOpening/NAICS710000/Unadjusted
+Node: dcid:NumJobOpening_NAICS710000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/710000
 
 
-Node: dcid:NumJobOpening/NAICS720000/Adjusted
+Node: dcid:NumJobOpening_NAICS720000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/720000
 
 
-Node: dcid:NumJobOpening/NAICS720000/Unadjusted
+Node: dcid:NumJobOpening_NAICS720000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/720000
 
 
-Node: dcid:NumJobOpening/NAICS810000/Adjusted
+Node: dcid:NumJobOpening_NAICS810000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/810000
 
 
-Node: dcid:NumJobOpening/NAICS810000/Unadjusted
+Node: dcid:NumJobOpening_NAICS810000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/810000
 
 
-Node: dcid:NumJobOpening/NAICS900000/Adjusted
+Node: dcid:NumJobOpening_NAICS900000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/900000
 
 
-Node: dcid:NumJobOpening/NAICS900000/Unadjusted
+Node: dcid:NumJobOpening_NAICS900000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/900000
 
 
-Node: dcid:NumJobOpening/NAICS910000/Adjusted
+Node: dcid:NumJobOpening_NAICS910000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/910000
 
 
-Node: dcid:NumJobOpening/NAICS910000/Unadjusted
+Node: dcid:NumJobOpening_NAICS910000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/910000
 
 
-Node: dcid:NumJobOpening/NAICS920000/Adjusted
+Node: dcid:NumJobOpening_NAICS920000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/920000
 
 
-Node: dcid:NumJobOpening/NAICS920000/Unadjusted
+Node: dcid:NumJobOpening_NAICS920000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/920000
 
 
-Node: dcid:NumJobOpening/NAICS923000/Adjusted
+Node: dcid:NumJobOpening_NAICS923000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/923000
 
 
-Node: dcid:NumJobOpening/NAICS923000/Unadjusted
+Node: dcid:NumJobOpening_NAICS923000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/923000
 
 
-Node: dcid:NumJobOpening/NAICS929000/Adjusted
+Node: dcid:NumJobOpening_NAICS929000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/929000
 
 
-Node: dcid:NumJobOpening/NAICS929000/Unadjusted
+Node: dcid:NumJobOpening_NAICS929000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/929000
 
 
-Node: dcid:NumJobHire/NAICS000000/Adjusted
+Node: dcid:NumJobHire_NAICS000000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/000000
 
 
-Node: dcid:NumJobHire/NAICS000000/Unadjusted
+Node: dcid:NumJobHire_NAICS000000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/000000
 
 
-Node: dcid:NumJobHire/NAICS100000/Adjusted
+Node: dcid:NumJobHire_NAICS100000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/100000
 
 
-Node: dcid:NumJobHire/NAICS100000/Unadjusted
+Node: dcid:NumJobHire_NAICS100000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/100000
 
 
-Node: dcid:NumJobHire/NAICS110099/Adjusted
+Node: dcid:NumJobHire_NAICS110099_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/110099
 
 
-Node: dcid:NumJobHire/NAICS110099/Unadjusted
+Node: dcid:NumJobHire_NAICS110099_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/110099
 
 
-Node: dcid:NumJobHire/NAICS230000/Adjusted
+Node: dcid:NumJobHire_NAICS230000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/230000
 
 
-Node: dcid:NumJobHire/NAICS230000/Unadjusted
+Node: dcid:NumJobHire_NAICS230000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/230000
 
 
-Node: dcid:NumJobHire/NAICS300000/Adjusted
+Node: dcid:NumJobHire_NAICS300000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/300000
 
 
-Node: dcid:NumJobHire/NAICS300000/Unadjusted
+Node: dcid:NumJobHire_NAICS300000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/300000
 
 
-Node: dcid:NumJobHire/NAICS320000/Adjusted
+Node: dcid:NumJobHire_NAICS320000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/320000
 
 
-Node: dcid:NumJobHire/NAICS320000/Unadjusted
+Node: dcid:NumJobHire_NAICS320000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/320000
 
 
-Node: dcid:NumJobHire/NAICS340000/Adjusted
+Node: dcid:NumJobHire_NAICS340000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/340000
 
 
-Node: dcid:NumJobHire/NAICS340000/Unadjusted
+Node: dcid:NumJobHire_NAICS340000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/340000
 
 
-Node: dcid:NumJobHire/NAICS400000/Adjusted
+Node: dcid:NumJobHire_NAICS400000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/400000
 
 
-Node: dcid:NumJobHire/NAICS400000/Unadjusted
+Node: dcid:NumJobHire_NAICS400000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/400000
 
 
-Node: dcid:NumJobHire/NAICS420000/Adjusted
+Node: dcid:NumJobHire_NAICS420000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/420000
 
 
-Node: dcid:NumJobHire/NAICS420000/Unadjusted
+Node: dcid:NumJobHire_NAICS420000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/420000
 
 
-Node: dcid:NumJobHire/NAICS440000/Adjusted
+Node: dcid:NumJobHire_NAICS440000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/440000
 
 
-Node: dcid:NumJobHire/NAICS440000/Unadjusted
+Node: dcid:NumJobHire_NAICS440000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/440000
 
 
-Node: dcid:NumJobHire/NAICS480099/Adjusted
+Node: dcid:NumJobHire_NAICS480099_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/480099
 
 
-Node: dcid:NumJobHire/NAICS480099/Unadjusted
+Node: dcid:NumJobHire_NAICS480099_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/480099
 
 
-Node: dcid:NumJobHire/NAICS510000/Adjusted
+Node: dcid:NumJobHire_NAICS510000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510000
 
 
-Node: dcid:NumJobHire/NAICS510000/Unadjusted
+Node: dcid:NumJobHire_NAICS510000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510000
 
 
-Node: dcid:NumJobHire/NAICS510099/Adjusted
+Node: dcid:NumJobHire_NAICS510099_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510099
 
 
-Node: dcid:NumJobHire/NAICS510099/Unadjusted
+Node: dcid:NumJobHire_NAICS510099_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510099
 
 
-Node: dcid:NumJobHire/NAICS520000/Adjusted
+Node: dcid:NumJobHire_NAICS520000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/520000
 
 
-Node: dcid:NumJobHire/NAICS520000/Unadjusted
+Node: dcid:NumJobHire_NAICS520000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/520000
 
 
-Node: dcid:NumJobHire/NAICS530000/Adjusted
+Node: dcid:NumJobHire_NAICS530000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/530000
 
 
-Node: dcid:NumJobHire/NAICS530000/Unadjusted
+Node: dcid:NumJobHire_NAICS530000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/530000
 
 
-Node: dcid:NumJobHire/NAICS540099/Adjusted
+Node: dcid:NumJobHire_NAICS540099_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/540099
 
 
-Node: dcid:NumJobHire/NAICS540099/Unadjusted
+Node: dcid:NumJobHire_NAICS540099_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/540099
 
 
-Node: dcid:NumJobHire/NAICS600000/Adjusted
+Node: dcid:NumJobHire_NAICS600000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/600000
 
 
-Node: dcid:NumJobHire/NAICS600000/Unadjusted
+Node: dcid:NumJobHire_NAICS600000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/600000
 
 
-Node: dcid:NumJobHire/NAICS610000/Adjusted
+Node: dcid:NumJobHire_NAICS610000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/610000
 
 
-Node: dcid:NumJobHire/NAICS610000/Unadjusted
+Node: dcid:NumJobHire_NAICS610000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/610000
 
 
-Node: dcid:NumJobHire/NAICS620000/Adjusted
+Node: dcid:NumJobHire_NAICS620000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/620000
 
 
-Node: dcid:NumJobHire/NAICS620000/Unadjusted
+Node: dcid:NumJobHire_NAICS620000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/620000
 
 
-Node: dcid:NumJobHire/NAICS700000/Adjusted
+Node: dcid:NumJobHire_NAICS700000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/700000
 
 
-Node: dcid:NumJobHire/NAICS700000/Unadjusted
+Node: dcid:NumJobHire_NAICS700000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/700000
 
 
-Node: dcid:NumJobHire/NAICS710000/Adjusted
+Node: dcid:NumJobHire_NAICS710000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/710000
 
 
-Node: dcid:NumJobHire/NAICS710000/Unadjusted
+Node: dcid:NumJobHire_NAICS710000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/710000
 
 
-Node: dcid:NumJobHire/NAICS720000/Adjusted
+Node: dcid:NumJobHire_NAICS720000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/720000
 
 
-Node: dcid:NumJobHire/NAICS720000/Unadjusted
+Node: dcid:NumJobHire_NAICS720000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/720000
 
 
-Node: dcid:NumJobHire/NAICS810000/Adjusted
+Node: dcid:NumJobHire_NAICS810000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/810000
 
 
-Node: dcid:NumJobHire/NAICS810000/Unadjusted
+Node: dcid:NumJobHire_NAICS810000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/810000
 
 
-Node: dcid:NumJobHire/NAICS900000/Adjusted
+Node: dcid:NumJobHire_NAICS900000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/900000
 
 
-Node: dcid:NumJobHire/NAICS900000/Unadjusted
+Node: dcid:NumJobHire_NAICS900000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/900000
 
 
-Node: dcid:NumJobHire/NAICS910000/Adjusted
+Node: dcid:NumJobHire_NAICS910000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/910000
 
 
-Node: dcid:NumJobHire/NAICS910000/Unadjusted
+Node: dcid:NumJobHire_NAICS910000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/910000
 
 
-Node: dcid:NumJobHire/NAICS920000/Adjusted
+Node: dcid:NumJobHire_NAICS920000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/920000
 
 
-Node: dcid:NumJobHire/NAICS920000/Unadjusted
+Node: dcid:NumJobHire_NAICS920000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/920000
 
 
-Node: dcid:NumJobHire/NAICS923000/Adjusted
+Node: dcid:NumJobHire_NAICS923000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/923000
 
 
-Node: dcid:NumJobHire/NAICS923000/Unadjusted
+Node: dcid:NumJobHire_NAICS923000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/923000
 
 
-Node: dcid:NumJobHire/NAICS929000/Adjusted
+Node: dcid:NumJobHire_NAICS929000_Adjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/929000
 
 
-Node: dcid:NumJobHire/NAICS929000/Unadjusted
+Node: dcid:NumJobHire_NAICS929000_Unadjusted
 typeOf: StatisticalVariable
 populationType: JobHire
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/929000
 
 
-Node: dcid:Turnover/NAICS000000/Adjusted
+Node: dcid:Turnover_NAICS000000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/000000
 
 
-Node: dcid:Turnover/NAICS000000/Unadjusted
+Node: dcid:Turnover_NAICS000000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/000000
 
 
-Node: dcid:Turnover/NAICS100000/Adjusted
+Node: dcid:Turnover_NAICS100000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/100000
 
 
-Node: dcid:Turnover/NAICS100000/Unadjusted
+Node: dcid:Turnover_NAICS100000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/100000
 
 
-Node: dcid:Turnover/NAICS110099/Adjusted
+Node: dcid:Turnover_NAICS110099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/110099
 
 
-Node: dcid:Turnover/NAICS110099/Unadjusted
+Node: dcid:Turnover_NAICS110099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/110099
 
 
-Node: dcid:Turnover/NAICS230000/Adjusted
+Node: dcid:Turnover_NAICS230000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/230000
 
 
-Node: dcid:Turnover/NAICS230000/Unadjusted
+Node: dcid:Turnover_NAICS230000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/230000
 
 
-Node: dcid:Turnover/NAICS300000/Adjusted
+Node: dcid:Turnover_NAICS300000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/300000
 
 
-Node: dcid:Turnover/NAICS300000/Unadjusted
+Node: dcid:Turnover_NAICS300000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/300000
 
 
-Node: dcid:Turnover/NAICS320000/Adjusted
+Node: dcid:Turnover_NAICS320000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/320000
 
 
-Node: dcid:Turnover/NAICS320000/Unadjusted
+Node: dcid:Turnover_NAICS320000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/320000
 
 
-Node: dcid:Turnover/NAICS340000/Adjusted
+Node: dcid:Turnover_NAICS340000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/340000
 
 
-Node: dcid:Turnover/NAICS340000/Unadjusted
+Node: dcid:Turnover_NAICS340000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/340000
 
 
-Node: dcid:Turnover/NAICS400000/Adjusted
+Node: dcid:Turnover_NAICS400000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/400000
 
 
-Node: dcid:Turnover/NAICS400000/Unadjusted
+Node: dcid:Turnover_NAICS400000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/400000
 
 
-Node: dcid:Turnover/NAICS420000/Adjusted
+Node: dcid:Turnover_NAICS420000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/420000
 
 
-Node: dcid:Turnover/NAICS420000/Unadjusted
+Node: dcid:Turnover_NAICS420000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/420000
 
 
-Node: dcid:Turnover/NAICS440000/Adjusted
+Node: dcid:Turnover_NAICS440000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/440000
 
 
-Node: dcid:Turnover/NAICS440000/Unadjusted
+Node: dcid:Turnover_NAICS440000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/440000
 
 
-Node: dcid:Turnover/NAICS480099/Adjusted
+Node: dcid:Turnover_NAICS480099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/480099
 
 
-Node: dcid:Turnover/NAICS480099/Unadjusted
+Node: dcid:Turnover_NAICS480099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/480099
 
 
-Node: dcid:Turnover/NAICS510000/Adjusted
+Node: dcid:Turnover_NAICS510000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510000
 
 
-Node: dcid:Turnover/NAICS510000/Unadjusted
+Node: dcid:Turnover_NAICS510000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510000
 
 
-Node: dcid:Turnover/NAICS510099/Adjusted
+Node: dcid:Turnover_NAICS510099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510099
 
 
-Node: dcid:Turnover/NAICS510099/Unadjusted
+Node: dcid:Turnover_NAICS510099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510099
 
 
-Node: dcid:Turnover/NAICS520000/Adjusted
+Node: dcid:Turnover_NAICS520000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/520000
 
 
-Node: dcid:Turnover/NAICS520000/Unadjusted
+Node: dcid:Turnover_NAICS520000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/520000
 
 
-Node: dcid:Turnover/NAICS530000/Adjusted
+Node: dcid:Turnover_NAICS530000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/530000
 
 
-Node: dcid:Turnover/NAICS530000/Unadjusted
+Node: dcid:Turnover_NAICS530000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/530000
 
 
-Node: dcid:Turnover/NAICS540099/Adjusted
+Node: dcid:Turnover_NAICS540099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/540099
 
 
-Node: dcid:Turnover/NAICS540099/Unadjusted
+Node: dcid:Turnover_NAICS540099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/540099
 
 
-Node: dcid:Turnover/NAICS600000/Adjusted
+Node: dcid:Turnover_NAICS600000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/600000
 
 
-Node: dcid:Turnover/NAICS600000/Unadjusted
+Node: dcid:Turnover_NAICS600000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/600000
 
 
-Node: dcid:Turnover/NAICS610000/Adjusted
+Node: dcid:Turnover_NAICS610000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/610000
 
 
-Node: dcid:Turnover/NAICS610000/Unadjusted
+Node: dcid:Turnover_NAICS610000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/610000
 
 
-Node: dcid:Turnover/NAICS620000/Adjusted
+Node: dcid:Turnover_NAICS620000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/620000
 
 
-Node: dcid:Turnover/NAICS620000/Unadjusted
+Node: dcid:Turnover_NAICS620000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/620000
 
 
-Node: dcid:Turnover/NAICS700000/Adjusted
+Node: dcid:Turnover_NAICS700000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/700000
 
 
-Node: dcid:Turnover/NAICS700000/Unadjusted
+Node: dcid:Turnover_NAICS700000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/700000
 
 
-Node: dcid:Turnover/NAICS710000/Adjusted
+Node: dcid:Turnover_NAICS710000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/710000
 
 
-Node: dcid:Turnover/NAICS710000/Unadjusted
+Node: dcid:Turnover_NAICS710000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/710000
 
 
-Node: dcid:Turnover/NAICS720000/Adjusted
+Node: dcid:Turnover_NAICS720000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/720000
 
 
-Node: dcid:Turnover/NAICS720000/Unadjusted
+Node: dcid:Turnover_NAICS720000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/720000
 
 
-Node: dcid:Turnover/NAICS810000/Adjusted
+Node: dcid:Turnover_NAICS810000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/810000
 
 
-Node: dcid:Turnover/NAICS810000/Unadjusted
+Node: dcid:Turnover_NAICS810000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/810000
 
 
-Node: dcid:Turnover/NAICS900000/Adjusted
+Node: dcid:Turnover_NAICS900000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/900000
 
 
-Node: dcid:Turnover/NAICS900000/Unadjusted
+Node: dcid:Turnover_NAICS900000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/900000
 
 
-Node: dcid:Turnover/NAICS910000/Adjusted
+Node: dcid:Turnover_NAICS910000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/910000
 
 
-Node: dcid:Turnover/NAICS910000/Unadjusted
+Node: dcid:Turnover_NAICS910000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/910000
 
 
-Node: dcid:Turnover/NAICS920000/Adjusted
+Node: dcid:Turnover_NAICS920000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/920000
 
 
-Node: dcid:Turnover/NAICS920000/Unadjusted
+Node: dcid:Turnover_NAICS920000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/920000
 
 
-Node: dcid:Turnover/NAICS923000/Adjusted
+Node: dcid:Turnover_NAICS923000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/923000
 
 
-Node: dcid:Turnover/NAICS923000/Unadjusted
+Node: dcid:Turnover_NAICS923000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/923000
 
 
-Node: dcid:Turnover/NAICS929000/Adjusted
+Node: dcid:Turnover_NAICS929000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/929000
 
 
-Node: dcid:Turnover/NAICS929000/Unadjusted
+Node: dcid:Turnover_NAICS929000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/929000
 
 
-Node: dcid:NumVoluntarySeparation/NAICS000000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS000000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/000000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS000000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS000000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/000000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS100000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS100000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/100000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS100000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS100000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/100000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS110099/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS110099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/110099
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS110099/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS110099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/110099
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS230000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS230000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/230000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS230000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS230000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/230000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS300000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS300000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/300000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS300000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS300000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/300000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS320000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS320000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/320000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS320000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS320000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/320000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS340000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS340000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/340000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS340000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS340000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/340000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS400000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS400000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/400000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS400000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS400000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/400000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS420000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS420000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/420000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS420000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS420000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/420000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS440000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS440000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/440000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS440000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS440000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/440000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS480099/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS480099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/480099
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS480099/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS480099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/480099
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS510000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS510000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS510000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS510000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS510099/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS510099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510099
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS510099/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS510099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510099
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS520000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS520000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/520000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS520000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS520000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/520000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS530000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS530000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/530000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS530000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS530000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/530000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS540099/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS540099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/540099
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS540099/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS540099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/540099
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS600000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS600000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/600000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS600000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS600000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/600000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS610000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS610000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/610000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS610000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS610000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/610000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS620000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS620000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/620000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS620000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS620000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/620000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS700000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS700000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/700000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS700000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS700000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/700000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS710000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS710000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/710000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS710000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS710000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/710000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS720000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS720000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/720000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS720000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS720000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/720000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS810000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS810000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/810000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS810000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS810000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/810000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS900000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS900000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/900000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS900000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS900000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/900000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS910000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS910000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/910000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS910000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS910000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/910000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS920000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS920000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/920000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS920000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS920000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/920000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS923000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS923000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/923000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS923000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS923000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/923000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS929000/Adjusted
+Node: dcid:NumVoluntarySeparation_NAICS929000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/929000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumVoluntarySeparation/NAICS929000/Unadjusted
+Node: dcid:NumVoluntarySeparation_NAICS929000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/929000
 turnoverType: dcs:VoluntarySeparation
 
-Node: dcid:NumLayoff/NAICS000000/Adjusted
+Node: dcid:NumLayoff_NAICS000000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/000000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS000000/Unadjusted
+Node: dcid:NumLayoff_NAICS000000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/000000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS100000/Adjusted
+Node: dcid:NumLayoff_NAICS100000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/100000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS100000/Unadjusted
+Node: dcid:NumLayoff_NAICS100000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/100000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS110099/Adjusted
+Node: dcid:NumLayoff_NAICS110099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/110099
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS110099/Unadjusted
+Node: dcid:NumLayoff_NAICS110099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/110099
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS230000/Adjusted
+Node: dcid:NumLayoff_NAICS230000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/230000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS230000/Unadjusted
+Node: dcid:NumLayoff_NAICS230000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/230000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS300000/Adjusted
+Node: dcid:NumLayoff_NAICS300000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/300000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS300000/Unadjusted
+Node: dcid:NumLayoff_NAICS300000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/300000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS320000/Adjusted
+Node: dcid:NumLayoff_NAICS320000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/320000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS320000/Unadjusted
+Node: dcid:NumLayoff_NAICS320000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/320000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS340000/Adjusted
+Node: dcid:NumLayoff_NAICS340000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/340000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS340000/Unadjusted
+Node: dcid:NumLayoff_NAICS340000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/340000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS400000/Adjusted
+Node: dcid:NumLayoff_NAICS400000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/400000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS400000/Unadjusted
+Node: dcid:NumLayoff_NAICS400000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/400000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS420000/Adjusted
+Node: dcid:NumLayoff_NAICS420000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/420000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS420000/Unadjusted
+Node: dcid:NumLayoff_NAICS420000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/420000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS440000/Adjusted
+Node: dcid:NumLayoff_NAICS440000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/440000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS440000/Unadjusted
+Node: dcid:NumLayoff_NAICS440000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/440000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS480099/Adjusted
+Node: dcid:NumLayoff_NAICS480099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/480099
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS480099/Unadjusted
+Node: dcid:NumLayoff_NAICS480099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/480099
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS510000/Adjusted
+Node: dcid:NumLayoff_NAICS510000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS510000/Unadjusted
+Node: dcid:NumLayoff_NAICS510000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS510099/Adjusted
+Node: dcid:NumLayoff_NAICS510099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510099
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS510099/Unadjusted
+Node: dcid:NumLayoff_NAICS510099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510099
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS520000/Adjusted
+Node: dcid:NumLayoff_NAICS520000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/520000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS520000/Unadjusted
+Node: dcid:NumLayoff_NAICS520000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/520000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS530000/Adjusted
+Node: dcid:NumLayoff_NAICS530000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/530000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS530000/Unadjusted
+Node: dcid:NumLayoff_NAICS530000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/530000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS540099/Adjusted
+Node: dcid:NumLayoff_NAICS540099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/540099
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS540099/Unadjusted
+Node: dcid:NumLayoff_NAICS540099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/540099
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS600000/Adjusted
+Node: dcid:NumLayoff_NAICS600000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/600000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS600000/Unadjusted
+Node: dcid:NumLayoff_NAICS600000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/600000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS610000/Adjusted
+Node: dcid:NumLayoff_NAICS610000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/610000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS610000/Unadjusted
+Node: dcid:NumLayoff_NAICS610000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/610000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS620000/Adjusted
+Node: dcid:NumLayoff_NAICS620000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/620000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS620000/Unadjusted
+Node: dcid:NumLayoff_NAICS620000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/620000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS700000/Adjusted
+Node: dcid:NumLayoff_NAICS700000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/700000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS700000/Unadjusted
+Node: dcid:NumLayoff_NAICS700000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/700000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS710000/Adjusted
+Node: dcid:NumLayoff_NAICS710000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/710000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS710000/Unadjusted
+Node: dcid:NumLayoff_NAICS710000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/710000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS720000/Adjusted
+Node: dcid:NumLayoff_NAICS720000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/720000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS720000/Unadjusted
+Node: dcid:NumLayoff_NAICS720000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/720000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS810000/Adjusted
+Node: dcid:NumLayoff_NAICS810000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/810000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS810000/Unadjusted
+Node: dcid:NumLayoff_NAICS810000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/810000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS900000/Adjusted
+Node: dcid:NumLayoff_NAICS900000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/900000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS900000/Unadjusted
+Node: dcid:NumLayoff_NAICS900000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/900000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS910000/Adjusted
+Node: dcid:NumLayoff_NAICS910000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/910000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS910000/Unadjusted
+Node: dcid:NumLayoff_NAICS910000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/910000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS920000/Adjusted
+Node: dcid:NumLayoff_NAICS920000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/920000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS920000/Unadjusted
+Node: dcid:NumLayoff_NAICS920000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/920000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS923000/Adjusted
+Node: dcid:NumLayoff_NAICS923000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/923000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS923000/Unadjusted
+Node: dcid:NumLayoff_NAICS923000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/923000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS929000/Adjusted
+Node: dcid:NumLayoff_NAICS929000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/929000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumLayoff/NAICS929000/Unadjusted
+Node: dcid:NumLayoff_NAICS929000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/929000
 turnoverType: dcs:Layoff
 
-Node: dcid:NumOtherSeparation/NAICS000000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS000000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/000000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS000000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS000000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/000000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS100000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS100000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/100000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS100000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS100000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/100000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS110099/Adjusted
+Node: dcid:NumOtherSeparation_NAICS110099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/110099
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS110099/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS110099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/110099
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS230000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS230000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/230000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS230000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS230000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/230000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS300000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS300000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/300000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS300000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS300000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/300000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS320000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS320000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/320000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS320000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS320000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/320000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS340000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS340000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/340000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS340000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS340000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/340000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS400000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS400000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/400000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS400000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS400000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/400000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS420000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS420000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/420000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS420000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS420000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/420000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS440000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS440000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/440000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS440000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS440000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/440000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS480099/Adjusted
+Node: dcid:NumOtherSeparation_NAICS480099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/480099
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS480099/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS480099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/480099
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS510000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS510000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS510000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS510000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS510099/Adjusted
+Node: dcid:NumOtherSeparation_NAICS510099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/510099
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS510099/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS510099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/510099
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS520000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS520000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/520000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS520000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS520000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/520000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS530000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS530000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/530000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS530000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS530000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/530000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS540099/Adjusted
+Node: dcid:NumOtherSeparation_NAICS540099_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/540099
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS540099/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS540099_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/540099
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS600000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS600000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/600000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS600000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS600000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/600000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS610000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS610000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/610000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS610000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS610000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/610000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS620000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS620000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/620000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS620000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS620000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/620000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS700000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS700000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/700000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS700000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS700000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/700000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS710000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS710000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/710000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS710000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS710000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/710000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS720000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS720000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/720000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS720000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS720000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/720000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS810000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS810000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/810000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS810000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS810000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/810000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS900000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS900000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/900000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS900000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS900000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/900000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS910000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS910000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/910000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS910000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS910000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/910000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS920000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS920000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/920000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS920000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS920000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/920000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS923000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS923000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/923000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS923000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS923000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/923000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS929000/Adjusted
+Node: dcid:NumOtherSeparation_NAICS929000_Adjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyAdjusted
+naics: dcid:NAICS/929000
 turnoverType: dcs:OtherSeparation
 
-Node: dcid:NumOtherSeparation/NAICS929000/Unadjusted
+Node: dcid:NumOtherSeparation_NAICS929000_Unadjusted
 typeOf: StatisticalVariable
 populationType: LaborTurnover
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementMethod: BLSSeasonallyUnadjusted
+naics: dcid:NAICS/929000
 turnoverType: dcs:OtherSeparation
