@@ -6,14 +6,119 @@ dcid: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->GeoId
 
 Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:HospitalCount
+variableMeasured: dcs:NumGeneralAcuteCareHospital
 observationDate: "2020-04-13"
 observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
-value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->HospitalCount
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospital
 
 Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:GeneralAcuteCareHospitalBedCount
+variableMeasured: dcs:NumGeneralAcuteCareHospitalBed
 observationDate: "2020-04-13"
 observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
-value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->GeneralAcuteCareHospitalBedCount
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalAcutePsychiatricCareBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalAcutePsychiatricCareBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalAcuteRespiratoryCareBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalAcuteRespiratoryCareBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalBurnBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalBurnBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalChemicalDependencyRecoveryBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalChemicalDependencyRecoveryBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalCoronaryCareBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalCoronaryCareBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalIntensiveCareBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalIntensiveCareBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalIntensiveCareNewbornNurseryBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalIntensiveCareNewbornNurseryBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalIntermediateCareBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalIntermediateCareBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalLaborAndDeliveryBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalLaborAndDeliveryBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalPediatricBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalPediatricBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalPediatricIntensiveCareUnitBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalPediatricIntensiveCareUnitBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalPerinatalBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalPerinatalBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalRehabilitationBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalRehabilitationBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalRenalTransplantBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalRenalTransplantBed
+
+Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumGeneralAcuteCareHospitalUnspecifiedGeneralAcuteCareBed
+observationDate: "2020-04-13"
+observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->NumGeneralAcuteCareHospitalUnspecifiedGeneralAcuteCareBed

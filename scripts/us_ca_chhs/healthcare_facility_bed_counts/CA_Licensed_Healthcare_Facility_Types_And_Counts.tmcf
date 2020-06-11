@@ -9,8 +9,13 @@ Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E1
 typeOf: dcs:MedicalFacilityTypeEnum
 dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityType
 
-# facility node, containedIn County.
+# bedType node.
 Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+typeOf: dcs:HospitalBed
+dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedType
+
+# facility node, containedIn County.
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
 healthcareFacilityName: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityName
 typeOf: schema:Hospital
 dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedFACID
@@ -18,10 +23,10 @@ healthcareFacilityType: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E1
 containedIn: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 
 # StatVarObservation node, observationAbout facility.
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E4
 typeOf: StatVarObservation
 variableMeasured: HealthcareFacilityBedCount
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
-healthcareFacilityBedType: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedType
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
+bedType: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedCapacity

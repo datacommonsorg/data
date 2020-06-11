@@ -17,6 +17,7 @@ import csv
 import os
 from preprocess_csv_helper import preserve_leading_zero
 from preprocess_csv_helper import generate_dcid_for_county
+from preprocess_csv_helper import get_camel_formatting_name
 
 # Read two datasets
 df1 = pd.read_excel('https://data.chhs.ca.gov/dataset/09b8ad0e-aca6-4147-b78d-bdaad872f30b/resource/0997fa8e-ef7c-43f2-8b9a-94672935fa60/download/healthcare_facility_beds.xlsx',
@@ -45,10 +46,39 @@ FDR_to_type = {
     'GENERAL ACUTE CARE HOSPITAL': 'GeneralAcuteCareFacility',
     'ACUTE PSYCHIATRIC HOSPITAL': 'AcutePsychiatricFacility',
     'HOSPICE': 'HospiceFacility',
-    'PEDIATRIC DAY HEALTH & RESPITE CARE FACILITY': 'PediatricDayHealth&RespiteCareFacility',
+    'PEDIATRIC DAY HEALTH & RESPITE CARE FACILITY': 'PediatricDayHealthAndRespiteCareFacility',
     'CHRONIC DIALYSIS CLINIC': 'ChronicDialysisFacility',
     'CHEMICAL DEPENDENCY RECOVERY HOSPITAL': 'ChemicalDependencyRecoveryFacility',
     'CORRECTIONAL TREATMENT CENTER': 'CorrectionalTreatmentCenterFacility'
+}
+
+bed_type_dict = {
+    'SKILLED NURSING': 'SkilledNursingBed',
+    'SPECIAL TREATMENT PROGRAM': 'SpecialTreatmentProgramBed',
+    'INTERMEDIATE CARE/DD HABILITATIVE': 'IntermediateCareHabilitativeBed',
+    'INTERMEDIATE CARE/DD NURSING': 'IntermediateCareNursingBed',
+    'CONGREGATE LIVING HEALTH FACILITY': 'CongregateLivingHealthFacilityBed',
+    'INTERMEDIATE CARE': 'IntermediateCareBed',
+    'HOSPICE': 'HospiceBed',
+    'CORONARY CARE': 'CoronaryCareBed',
+    'INTENSIVE CARE': 'IntensiveCareBed',
+    'INTENSIVE CARE NEWBORN NURSERY': 'IntensiveCareNewbornNurseryBed',
+    'PERINATAL': 'PerinatalBed',
+    'UNSPECIFIED GENERAL ACUTE CARE': 'UnspecifiedGeneralAcuteCareBed',
+    'BURN': 'BurnBed',
+    'PEDIATRIC': 'PediatricBed',
+    'RENAL TRANSPLANT': 'RenalTransplantBed',
+    'REHABILITATION': 'RehabilitationBed',
+    'ACUTE RESPIRATORY CARE': 'AcuteRespiratoryCareBed',
+    'ACUTE PSYCHIATRIC CARE': 'AcutePsychiatricCareBed',
+    'CHEMICAL DEPENDENCY RECOVERY': 'ChemicalDependencyRecoveryBed',
+    'PEDIATRIC INTENSIVE CARE UNIT': 'PediatricIntensiveCareUnitBed',
+    'LABOR AND DELIVERY': 'LaborAndDeliveryBed',
+    'INTERMEDIATE CARE/DD': 'IntermediateCareDevelopmentallyDisabledBed',
+    'PSYCHIATRIC HEALTH': 'PsychiatricHealthBed',
+    'PEDI. DAY & RESPITE CARE': 'PediatricDayAndRespiteCareBed',
+    'DIALYSIS STATIONS': 'DialysisStationsBed',
+    'CORRECTIONAL TREATMENT CENTER': 'CorrectionalTreatmentCenterBed',
 }
 
 # start process dataset and also add one new column called 'ALicensedHealthcareFacilityCountyId'.
@@ -65,7 +95,7 @@ with open('CA_Licensed_Healthcare_Facility_Types_And_Counts.csv', 'w', newline='
                 'CALicensedHealthcareFacilityBedFACID': 'ELMS/' + preserve_leading_zero(row_dict['FACID']),
                 'CALicensedHealthcareFacilityName': row_dict['FACNAME'],
                 'CALicensedHealthcareFacilityType': FDR_to_type[row_dict['FAC_FDR']],
-                'CALicensedHealthcareFacilityBedType': row_dict['BED_CAPACITY_TYPE'],
+                'CALicensedHealthcareFacilityBedType': bed_type_dict[row_dict['BED_CAPACITY_TYPE']],
                 'CALicensedHealthcareFacilityBedCapacity': row_dict['BED_CAPACITY']
             }
 
@@ -90,11 +120,18 @@ typeOf: dcs:MedicalFacilityTypeEnum
 dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityType
 """
 
-# Facility
-# facility containedIn a county
+# bedType Node
+TEMPLATE_MCF_BED_TYPE_1 = """
+# bedType node.
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+typeOf: dcs:HospitalBed
+dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedType
+"""
+
+# Facility node, facility containedIn a county
 TEMPLATE_MCF_FAC_1 = """
 # facility node, containedIn County.
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
 healthcareFacilityName: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityName
 typeOf: schema:Hospital
 dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedFACID
@@ -105,21 +142,21 @@ containedIn: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 # observation node, observationAbout facility
 TEMPLATE_MCF_TEMPLATE_1 = """
 # StatVarObservation node, observationAbout facility.
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E4
 typeOf: StatVarObservation
 variableMeasured: HealthcareFacilityBedCount
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
-healthcareFacilityBedType: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedType
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
+bedType: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedCapacity
 """
 
 with open('CA_Licensed_Healthcare_Facility_Types_And_Counts.tmcf', 'w', newline='') as f_out:
     f_out.write(TEMPLATE_MCF_GEO_1)
     f_out.write(TEMPLATE_MCF_FAC_TYPE_1)
+    f_out.write(TEMPLATE_MCF_BED_TYPE_1)
     f_out.write(TEMPLATE_MCF_FAC_1)
     f_out.write(TEMPLATE_MCF_TEMPLATE_1)
-
 
 # Proprocess for dataset2 and output tmcf file.
 
@@ -128,23 +165,24 @@ tempDF2 = pd.read_excel(
     sheet_name='CA_COUNTY_GACH_BED_COUNTS')
 tempDF2.to_csv('temp_data2.csv')
 
+# ------ To Be changed----------------------------------------------------------
 new_columns_2 = ['GeoId', 'CACountyName', 'CALicensedHealthcareFacilityType',
-                 'HospitalCount', 'GeneralAcuteCareHospitalBedCount',
-                 'GeneralAcuteCareHospitalAcutePsychiatricCareBedCount',
-                 'GeneralAcuteCareHospitalAcuteRespiratoryCareBedCount',
-                 'GeneralAcuteCareHospitalBURNBedCount',
-                 'GeneralAcuteCareHospitalChemicalDependencyRecoveryBedCount',
-                 'GeneralAcuteCareHospitalCoronaryCareBedCount',
-                 'GeneralAcuteCareHospitalIntensiveCareBedCount',
-                 'GeneralAcuteCareHospitalIntensiveCareNewbornNurseryBedCount',
-                 'GeneralAcuteCareHospitalIntermediateCareBedCount',
-                 'GeneralAcuteCareHospitalLaborAndDeliveryBedCount',
-                 'GeneralAcuteCareHospitalPediatricBedCount',
-                 'GeneralAcuteCareHospitalPediatricIntensiveCareUnitBedCount',
-                 'GeneralAcuteCareHospitalPerinatalBedCount',
-                 'GeneralAcuteCareHospitalRehabilitationBedCount',
-                 'GeneralAcuteCareHospitalRenalTransplantBedCount',
-                 'GeneralAcuteCareHospitalUnspecifiedGeneralAcuteCareBedCount']
+                 'NumGeneralAcuteCareHospital', 'NumGeneralAcuteCareHospitalBed',
+                 'NumGeneralAcuteCareHospitalAcutePsychiatricCareBed',
+                 'NumGeneralAcuteCareHospitalAcuteRespiratoryCareBed',
+                 'NumGeneralAcuteCareHospitalBurnBed',
+                 'NumGeneralAcuteCareHospitalChemicalDependencyRecoveryBed',
+                 'NumGeneralAcuteCareHospitalCoronaryCareBed',
+                 'NumGeneralAcuteCareHospitalIntensiveCareBed',
+                 'NumGeneralAcuteCareHospitalIntensiveCareNewbornNurseryBed',
+                 'NumGeneralAcuteCareHospitalIntermediateCareBed',
+                 'NumGeneralAcuteCareHospitalLaborAndDeliveryBed',
+                 'NumGeneralAcuteCareHospitalPediatricBed',
+                 'NumGeneralAcuteCareHospitalPediatricIntensiveCareUnitBed',
+                 'NumGeneralAcuteCareHospitalPerinatalBed',
+                 'NumGeneralAcuteCareHospitalRehabilitationBed',
+                 'NumGeneralAcuteCareHospitalRenalTransplantBed',
+                 'NumGeneralAcuteCareHospitalUnspecifiedGeneralAcuteCareBed']
 
 # start process dataset and also add one new column called 'ALicensedHealthcareFacilityCountyId'.
 with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.csv', 'w', newline='') as f_out:
@@ -158,23 +196,23 @@ with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.csv', 'w'
                 'GeoId': county_to_geoID[row_dict['COUNTY_NAME']],
                 'CACountyName': row_dict['COUNTY_NAME'],
                 'CALicensedHealthcareFacilityType': FDR_to_type[row_dict['FAC_FDR']],
-                'HospitalCount': row_dict['FACILITY_COUNT'],
-                'GeneralAcuteCareHospitalBedCount': row_dict['BED_CAPACITY'],
-                'GeneralAcuteCareHospitalAcutePsychiatricCareBedCount': row_dict['ACUTE PSYCHIATRIC CARE'],
-                'GeneralAcuteCareHospitalAcuteRespiratoryCareBedCount': row_dict['ACUTE RESPIRATORY CARE'],
-                'GeneralAcuteCareHospitalBURNBedCount': row_dict['BURN'],
-                'GeneralAcuteCareHospitalChemicalDependencyRecoveryBedCount': row_dict['CHEMICAL DEPENDENCY RECOVERY'],
-                'GeneralAcuteCareHospitalCoronaryCareBedCount': row_dict['CORONARY CARE'],
-                'GeneralAcuteCareHospitalIntensiveCareBedCount': row_dict['INTENSIVE CARE'],
-                'GeneralAcuteCareHospitalIntensiveCareNewbornNurseryBedCount': row_dict['INTENSIVE CARE NEWBORN NURSERY'],
-                'GeneralAcuteCareHospitalIntermediateCareBedCount': row_dict['INTERMEDIATE CARE'],
-                'GeneralAcuteCareHospitalLaborAndDeliveryBedCount': row_dict['LABOR AND DELIVERY'],
-                'GeneralAcuteCareHospitalPediatricBedCount': row_dict['PEDIATRIC'],
-                'GeneralAcuteCareHospitalPediatricIntensiveCareUnitBedCount': row_dict['PEDIATRIC INTENSIVE CARE UNIT'],
-                'GeneralAcuteCareHospitalPerinatalBedCount': row_dict['PERINATAL'],
-                'GeneralAcuteCareHospitalRehabilitationBedCount': row_dict['REHABILITATION'],
-                'GeneralAcuteCareHospitalRenalTransplantBedCount': row_dict['RENAL TRANSPLANT'],
-                'GeneralAcuteCareHospitalUnspecifiedGeneralAcuteCareBedCount': row_dict['UNSPECIFIED GENERAL ACUTE CARE']
+                'NumGeneralAcuteCareHospital': row_dict['FACILITY_COUNT'],
+                'NumGeneralAcuteCareHospitalBed': row_dict['BED_CAPACITY'],
+                'NumGeneralAcuteCareHospitalAcutePsychiatricCareBed': row_dict['ACUTE PSYCHIATRIC CARE'],
+                'NumGeneralAcuteCareHospitalAcuteRespiratoryCareBed': row_dict['ACUTE RESPIRATORY CARE'],
+                'NumGeneralAcuteCareHospitalBurnBed': row_dict['BURN'],
+                'NumGeneralAcuteCareHospitalChemicalDependencyRecoveryBed': row_dict['CHEMICAL DEPENDENCY RECOVERY'],
+                'NumGeneralAcuteCareHospitalCoronaryCareBed': row_dict['CORONARY CARE'],
+                'NumGeneralAcuteCareHospitalIntensiveCareBed': row_dict['INTENSIVE CARE'],
+                'NumGeneralAcuteCareHospitalIntensiveCareNewbornNurseryBed': row_dict['INTENSIVE CARE NEWBORN NURSERY'],
+                'NumGeneralAcuteCareHospitalIntermediateCareBed': row_dict['INTERMEDIATE CARE'],
+                'NumGeneralAcuteCareHospitalLaborAndDeliveryBed': row_dict['LABOR AND DELIVERY'],
+                'NumGeneralAcuteCareHospitalPediatricBed': row_dict['PEDIATRIC'],
+                'NumGeneralAcuteCareHospitalPediatricIntensiveCareUnitBed': row_dict['PEDIATRIC INTENSIVE CARE UNIT'],
+                'NumGeneralAcuteCareHospitalPerinatalBed': row_dict['PERINATAL'],
+                'NumGeneralAcuteCareHospitalRehabilitationBed': row_dict['REHABILITATION'],
+                'NumGeneralAcuteCareHospitalRenalTransplantBed': row_dict['RENAL TRANSPLANT'],
+                'NumGeneralAcuteCareHospitalUnspecifiedGeneralAcuteCareBed': row_dict['UNSPECIFIED GENERAL ACUTE CARE']
             }
 
             writer.writerow(processed_dict)
@@ -197,7 +235,7 @@ observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts-
 value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->{stat_var}
 """
 
-stat_vars = new_columns_2[3:5]
+stat_vars = new_columns_2[3:]
 
 with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.tmcf', 'w', newline='') as f_out:
     f_out.write(TEMPLATE_MCF_GEO_2)
