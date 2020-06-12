@@ -27,7 +27,6 @@
 Run "python3 generate_csv_and_mcf.py --help" for usage.
 '''
 
-import requests
 
 from absl import app
 from absl import flags
