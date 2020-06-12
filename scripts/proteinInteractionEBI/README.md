@@ -6,7 +6,7 @@ proteinInteractionEBI
 │   parseEBI.ipynb
 |   parseEBI.py
 |   mi.owl
-|   BioOntologySchema.txt (contains all the schemas to be imported to KG)
+|   BioOntologySchema.mcf (contains all the schemas to be imported to KG)
 |   handwrittenSchema.txt (contains only schema MCF)
 │
 └───graph
