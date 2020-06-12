@@ -27,6 +27,7 @@
 Run "python3 generate_csv_and_mcf.py --help" for usage.
 '''
 
+import requests
 
 from absl import app
 from absl import flags
@@ -55,6 +56,11 @@ MATURITIES = frozendict({
     "7-year": "Note", "10-year": "Note", "20-year": "Bond", "30-year": "Bond"
 })
 
+# URL of the raw csv
+CSV_URL = "https://www.federalreserve.gov/datadownload/Output.aspx?rel=H15&"\
+          "series=bf17364827e38702b42a58cf8eaa3f78&lastobs=&from=&to="\
+          "&filetype=csv&label=include&layout=seriescolumn&type=package"
+
 
 def generate_csv():
     '''Generates the csv containing the data portion of the constant
@@ -64,8 +70,9 @@ def generate_csv():
     header_rows = 5
     name_template = "Market yield on U.S. Treasury securities at {}   constant"\
                     " maturity, quoted on investment basis"
-    in_df = pd.read_csv(FLAGS.path, na_values="ND")
-
+    
+    in_df = pd.read_csv(CSV_URL, na_values="ND")
+    
     out_df["date"] = in_df["Series Description"][header_rows:]
     for maturity in MATURITIES:
         column_name = name_template.format(maturity)
