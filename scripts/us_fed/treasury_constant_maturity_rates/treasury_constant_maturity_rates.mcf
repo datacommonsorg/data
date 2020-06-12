@@ -1,0 +1,99 @@
+Node: dcid:US_Treasury_1_Month_Constant_Maturity_Rate
+name: "US_Treasury_1_Month_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryBill
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:1MonthConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_3_Month_Constant_Maturity_Rate
+name: "US_Treasury_3_Month_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryBill
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:3MonthConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_6_Month_Constant_Maturity_Rate
+name: "US_Treasury_6_Month_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryBill
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:6MonthConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_1_Year_Constant_Maturity_Rate
+name: "US_Treasury_1_Year_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryBill
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:1YearConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_2_Year_Constant_Maturity_Rate
+name: "US_Treasury_2_Year_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryNote
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:2YearConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_3_Year_Constant_Maturity_Rate
+name: "US_Treasury_3_Year_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryNote
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:3YearConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_5_Year_Constant_Maturity_Rate
+name: "US_Treasury_5_Year_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryNote
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:5YearConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_7_Year_Constant_Maturity_Rate
+name: "US_Treasury_7_Year_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryNote
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:7YearConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_10_Year_Constant_Maturity_Rate
+name: "US_Treasury_10_Year_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryNote
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:10YearConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_20_Year_Constant_Maturity_Rate
+name: "US_Treasury_20_Year_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryBond
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:20YearConstantMaturity
+unit: dcs:Percent
+
+Node: dcid:US_Treasury_30_Year_Constant_Maturity_Rate
+name: "US_Treasury_30_Year_Constant_Maturity_Rate"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TreasuryBond
+measuredProperty: dcs:interestRate
+statType: dcs:measuredValue
+measurementMethod: dcs:30YearConstantMaturity
+unit: dcs:Percent
+
