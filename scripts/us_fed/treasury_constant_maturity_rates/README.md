@@ -20,10 +20,10 @@
    ](treasury_constant_maturity_rates.tmcf)
 
 ## Scripts
-1. [extract.py](extract.py) extracts the data out of the raw csv and stores it
-   in "treasury_constant_maturity_rates.csv". The output table has the same
-   number of columns as the number of constant maturities provided and an extra
-   column for dates. "date" column is of the form "YYYY-MM-DD". The other
-   interest rate columns are numeric.
-2. [generate_mcf.py](generate_mcf.py) writes out the instance and template MCFs.
-3. [maturity.py](maturity.py) lists the maturities included in the dataset. 
+1. [generate_csv_and_mcf.py](generate_csv_and_mcf.py)
+   1. extracts the data out of the raw csv and stores it in
+      "treasury_constant_maturity_rates.csv".
+      The output table has the same number of columns as the number of constant
+      maturities provided and an extra column for dates. "date" column is of the
+      form "YYYY-MM-DD". The other interest rate columns are numeric.
+   2. generates the template and StatisticalVariable instance MCFs.
