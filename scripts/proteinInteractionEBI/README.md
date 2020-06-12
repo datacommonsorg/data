@@ -33,7 +33,7 @@ The original data file (mi.owl) uses "is_a" and "part_of" as the relation proper
 
 We make each term as an enumeration node of three subtrees with root nodes as: "database citation", "interaction detection method", and "interaction type". There are two main concerns that we didn't import all the nodes. First, we focus on the ontologies in protein-protein interaction and these three categories are the most commonly used. Secondly, importing too many general terms may cause the confusion in our dataCommons knowledge graph. 
 
-We also left out the properties named "synonym", "subset", "created_by" and "creation_date" which contain the data that don't play important roles in our nodes of protein-protein interaction currently. If needed we will import these properties in the future. 
+We also left out the properties named "synonym", "subset", "created_by" and "creation_date" which contain the data that don't play important roles in our nodes of protein-protein interaction currently. If needed we will import these properties in the future. Property "identifier" of each enumeration instance contains a PSI-MI identifier. 
 
 
 ## Algorithm for parsing data file: mi.owl
@@ -52,14 +52,6 @@ We also left out the properties named "synonym", "subset", "created_by" and "cre
 
 ## Schema overview
 
-### New Class 
-
-ProteinProteinInteraction
-
-### New Properties 
-
-psimiId, publicationId
-(interactionDetectionMethod, interactionType, interactionSource) for mint
 
 ### New Enumeration
 
