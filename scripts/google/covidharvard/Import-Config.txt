@@ -1,0 +1,15 @@
+import: {
+  import_name: "HarvardCOVID19"
+  provenance_url: "https://www.covidtracking.com"
+  provenance_description: "The COVID Tracking Project reports data on..."
+  # Path to the resolved MCF. Can be a repeated field.
+  mcf_url: "gs://resolved_mcf/external_tables/HarvardCOVID19States/*.mcf"
+  mcf_url: "gs://resolved_mcf/external_tables/HarvardCOVID19Counties/*.mcf"
+  # First date of imported data.
+  start_date: "2020-01-21"
+  # Last date of imported data.
+  end_date: "2020-05-31"
+  # Source data release schedule.
+  update_frequency: "P1D"
+  next_release_date: "2020-06-01"
+}
