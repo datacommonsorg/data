@@ -1,1404 +1,1638 @@
-Node: dcid:COVID19_Auquan_1WeeksCum
+Node: dcid:Auquan_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Auquan_1Week
 
-Node: dcid:COVID19_Auquan_2WeeksCum
+Node: dcid:Auquan_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Auquan_2Week
 
-Node: dcid:COVID19_Auquan_3WeeksCum
+Node: dcid:Auquan_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Auquan_3Week
 
-Node: dcid:COVID19_Auquan_4WeeksCum
+Node: dcid:Auquan_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Auquan_4Week
 
-Node: dcid:COVID19_CAN_1WeeksCum
+Node: dcid:CAN_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CAN_1Week
 
-Node: dcid:COVID19_CAN_2WeeksCum
+Node: dcid:CAN_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CAN_2Week
 
-Node: dcid:COVID19_CAN_3WeeksCum
+Node: dcid:CAN_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CAN_3Week
 
-Node: dcid:COVID19_CAN_4WeeksCum
+Node: dcid:CAN_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CAN_4Week
 
-Node: dcid:COVID19_COVIDhub-ensemble_1WeeksCum
+Node: dcid:COVIDhub-ensemble_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_COVIDhub-ensemble_1Week
 
-Node: dcid:COVID19_COVIDhub-ensemble_1WeeksInc
+Node: dcid:COVIDhub-ensemble_1WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_COVIDhub-ensemble_1Week
 
-Node: dcid:COVID19_COVIDhub-ensemble_2WeeksCum
+Node: dcid:COVIDhub-ensemble_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_COVIDhub-ensemble_2Week
 
-Node: dcid:COVID19_COVIDhub-ensemble_2WeeksInc
+Node: dcid:COVIDhub-ensemble_2WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_COVIDhub-ensemble_2Week
 
-Node: dcid:COVID19_COVIDhub-ensemble_3WeeksCum
+Node: dcid:COVIDhub-ensemble_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_COVIDhub-ensemble_3Week
 
-Node: dcid:COVID19_COVIDhub-ensemble_3WeeksInc
+Node: dcid:COVIDhub-ensemble_3WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_COVIDhub-ensemble_3Week
 
-Node: dcid:COVID19_COVIDhub-ensemble_4WeeksCum
+Node: dcid:COVIDhub-ensemble_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_COVIDhub-ensemble_4Week
 
-Node: dcid:COVID19_COVIDhub-ensemble_4WeeksInc
+Node: dcid:COVIDhub-ensemble_4WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_COVIDhub-ensemble_4Week
 
-Node: dcid:COVID19_CU-60contact_1WeeksCum
+Node: dcid:CU-60contact_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-60contact_1Week
 
-Node: dcid:COVID19_CU-60contact_2WeeksCum
+Node: dcid:CU-60contact_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-60contact_2Week
 
-Node: dcid:COVID19_CU-60contact_3WeeksCum
+Node: dcid:CU-60contact_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-60contact_3Week
 
-Node: dcid:COVID19_CU-60contact_4WeeksCum
+Node: dcid:CU-60contact_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-60contact_4Week
 
-Node: dcid:COVID19_CU-60contact_5WeeksCum
+Node: dcid:CU-60contact_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-60contact_5Week
 
-Node: dcid:COVID19_CU-60contact_6WeeksCum
+Node: dcid:CU-60contact_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-60contact_6Week
 
-Node: dcid:COVID19_CU-70contact_1WeeksCum
+Node: dcid:CU-70contact_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-70contact_1Week
 
-Node: dcid:COVID19_CU-70contact_2WeeksCum
+Node: dcid:CU-70contact_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-70contact_2Week
 
-Node: dcid:COVID19_CU-70contact_3WeeksCum
+Node: dcid:CU-70contact_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-70contact_3Week
 
-Node: dcid:COVID19_CU-70contact_4WeeksCum
+Node: dcid:CU-70contact_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-70contact_4Week
 
-Node: dcid:COVID19_CU-70contact_5WeeksCum
+Node: dcid:CU-70contact_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-70contact_5Week
 
-Node: dcid:COVID19_CU-70contact_6WeeksCum
+Node: dcid:CU-70contact_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-70contact_6Week
 
-Node: dcid:COVID19_CU-80contact_1WeeksCum
+Node: dcid:CU-80contact_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_1Week
 
-Node: dcid:COVID19_CU-80contact_2WeeksCum
+Node: dcid:CU-80contact_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_2Week
 
-Node: dcid:COVID19_CU-80contact_3WeeksCum
+Node: dcid:CU-80contact_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_3Week
 
-Node: dcid:COVID19_CU-80contact_4WeeksCum
+Node: dcid:CU-80contact_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_4Week
 
-Node: dcid:COVID19_CU-80contact_5WeeksCum
+Node: dcid:CU-80contact_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_5Week
 
-Node: dcid:COVID19_CU-80contact_6WeeksCum
+Node: dcid:CU-80contact_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_6Week
 
-Node: dcid:COVID19_CU-80contact_1x_1WeeksCum
+Node: dcid:CU-80contact_1x_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_1x_1Week
 
-Node: dcid:COVID19_CU-80contact_1x_2WeeksCum
+Node: dcid:CU-80contact_1x_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_1x_2Week
 
-Node: dcid:COVID19_CU-80contact_1x_3WeeksCum
+Node: dcid:CU-80contact_1x_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_1x_3Week
 
-Node: dcid:COVID19_CU-80contact_1x_4WeeksCum
+Node: dcid:CU-80contact_1x_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_1x_4Week
 
-Node: dcid:COVID19_CU-80contact_1x_5WeeksCum
+Node: dcid:CU-80contact_1x_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_1x_5Week
 
-Node: dcid:COVID19_CU-80contact_1x_6WeeksCum
+Node: dcid:CU-80contact_1x_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contact_1x_6Week
 
-Node: dcid:COVID19_CU-80contactw_1WeeksCum
+Node: dcid:CU-80contactw_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contactw_1Week
 
-Node: dcid:COVID19_CU-80contactw_2WeeksCum
+Node: dcid:CU-80contactw_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contactw_2Week
 
-Node: dcid:COVID19_CU-80contactw_3WeeksCum
+Node: dcid:CU-80contactw_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contactw_3Week
 
-Node: dcid:COVID19_CU-80contactw_4WeeksCum
+Node: dcid:CU-80contactw_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contactw_4Week
 
-Node: dcid:COVID19_CU-80contactw_5WeeksCum
+Node: dcid:CU-80contactw_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contactw_5Week
 
-Node: dcid:COVID19_CU-80contactw_6WeeksCum
+Node: dcid:CU-80contactw_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU-80contactw_6Week
 
-Node: dcid:COVID19_CU20%contactreduction_1WeeksCum
+Node: dcid:CU20%contactreduction_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU20%contactreduction_1Week
 
-Node: dcid:COVID19_CU20%contactreduction_2WeeksCum
+Node: dcid:CU20%contactreduction_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU20%contactreduction_2Week
 
-Node: dcid:COVID19_CU20%contactreduction_3WeeksCum
+Node: dcid:CU20%contactreduction_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU20%contactreduction_3Week
 
-Node: dcid:COVID19_CU20%contactreduction_4WeeksCum
+Node: dcid:CU20%contactreduction_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU20%contactreduction_4Week
 
-Node: dcid:COVID19_CU30%contactreduction_1WeeksCum
+Node: dcid:CU30%contactreduction_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU30%contactreduction_1Week
 
-Node: dcid:COVID19_CU30%contactreduction_2WeeksCum
+Node: dcid:CU30%contactreduction_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU30%contactreduction_2Week
 
-Node: dcid:COVID19_CU30%contactreduction_3WeeksCum
+Node: dcid:CU30%contactreduction_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU30%contactreduction_3Week
 
-Node: dcid:COVID19_CU30%contactreduction_4WeeksCum
+Node: dcid:CU30%contactreduction_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU30%contactreduction_4Week
 
-Node: dcid:COVID19_CU40%contactreduction_1WeeksCum
+Node: dcid:CU40%contactreduction_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU40%contactreduction_1Week
 
-Node: dcid:COVID19_CU40%contactreduction_2WeeksCum
+Node: dcid:CU40%contactreduction_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU40%contactreduction_2Week
 
-Node: dcid:COVID19_CU40%contactreduction_3WeeksCum
+Node: dcid:CU40%contactreduction_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU40%contactreduction_3Week
 
-Node: dcid:COVID19_CU40%contactreduction_4WeeksCum
+Node: dcid:CU40%contactreduction_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CU40%contactreduction_4Week
 
-Node: dcid:COVID19_Columbia_1WeeksCum
+Node: dcid:Columbia_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Columbia_1Week
 
-Node: dcid:COVID19_Columbia_2WeeksCum
+Node: dcid:Columbia_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Columbia_2Week
 
-Node: dcid:COVID19_Columbia_3WeeksCum
+Node: dcid:Columbia_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Columbia_3Week
 
-Node: dcid:COVID19_Columbia_4WeeksCum
+Node: dcid:Columbia_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Columbia_4Week
 
-Node: dcid:COVID19_CovidSim_1WeeksCum
+Node: dcid:CovidSim_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CovidSim_1Week
 
-Node: dcid:COVID19_CovidSim_2WeeksCum
+Node: dcid:CovidSim_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CovidSim_2Week
 
-Node: dcid:COVID19_CovidSim_3WeeksCum
+Node: dcid:CovidSim_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CovidSim_3Week
 
-Node: dcid:COVID19_CovidSim_4WeeksCum
+Node: dcid:CovidSim_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_CovidSim_4Week
 
-Node: dcid:COVID19_ERDC_1WeeksCum
+Node: dcid:ERDC_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ERDC_1Week
 
-Node: dcid:COVID19_ERDC_2WeeksCum
+Node: dcid:ERDC_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ERDC_2Week
 
-Node: dcid:COVID19_ERDC_3WeeksCum
+Node: dcid:ERDC_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ERDC_3Week
 
-Node: dcid:COVID19_ERDC_4WeeksCum
+Node: dcid:ERDC_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ERDC_4Week
 
-Node: dcid:COVID19_Ensemble_1WeeksCum
+Node: dcid:Ensemble_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Ensemble_1Week
 
-Node: dcid:COVID19_Ensemble_2WeeksCum
+Node: dcid:Ensemble_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Ensemble_2Week
 
-Node: dcid:COVID19_Ensemble_3WeeksCum
+Node: dcid:Ensemble_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Ensemble_3Week
 
-Node: dcid:COVID19_Ensemble_4WeeksCum
+Node: dcid:Ensemble_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Ensemble_4Week
 
-Node: dcid:COVID19_GA_Tech_1WeeksCum
+Node: dcid:GA_Tech_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GA_Tech_1Week
 
-Node: dcid:COVID19_GA_Tech_1WeeksInc
+Node: dcid:GA_Tech_1WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GA_Tech_1Week
 
-Node: dcid:COVID19_GA_Tech_2WeeksCum
+Node: dcid:GA_Tech_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GA_Tech_2Week
 
-Node: dcid:COVID19_GA_Tech_2WeeksInc
+Node: dcid:GA_Tech_2WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GA_Tech_2Week
 
-Node: dcid:COVID19_GA_Tech_3WeeksCum
+Node: dcid:GA_Tech_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GA_Tech_3Week
 
-Node: dcid:COVID19_GA_Tech_4WeeksCum
+Node: dcid:GA_Tech_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GA_Tech_4Week
 
-Node: dcid:COVID19_GT_CHHS_1WeeksCum
+Node: dcid:GT_CHHS_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GT_CHHS_1Week
 
-Node: dcid:COVID19_GT_CHHS_2WeeksCum
+Node: dcid:GT_CHHS_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GT_CHHS_2Week
 
-Node: dcid:COVID19_GT_CHHS_3WeeksCum
+Node: dcid:GT_CHHS_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GT_CHHS_3Week
 
-Node: dcid:COVID19_GT_CHHS_4WeeksCum
+Node: dcid:GT_CHHS_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_GT_CHHS_4Week
 
-Node: dcid:COVID19_Geneva_1WeeksCum
+Node: dcid:Geneva_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Geneva_1Week
 
-Node: dcid:COVID19_IHME_1WeeksCum
+Node: dcid:IHME_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_1Week
 
-Node: dcid:COVID19_IHME_10WeeksCum
+Node: dcid:IHME_10WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_10Week
 
-Node: dcid:COVID19_IHME_11WeeksCum
+Node: dcid:IHME_11WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_11Week
 
-Node: dcid:COVID19_IHME_12WeeksCum
+Node: dcid:IHME_12WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_12Week
 
-Node: dcid:COVID19_IHME_13WeeksCum
+Node: dcid:IHME_13WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_13Week
 
-Node: dcid:COVID19_IHME_14WeeksCum
+Node: dcid:IHME_14WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_14Week
 
-Node: dcid:COVID19_IHME_15WeeksCum
+Node: dcid:IHME_15WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_15Week
 
-Node: dcid:COVID19_IHME_16WeeksCum
+Node: dcid:IHME_16WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_16Week
 
-Node: dcid:COVID19_IHME_2WeeksCum
+Node: dcid:IHME_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_2Week
 
-Node: dcid:COVID19_IHME_3WeeksCum
+Node: dcid:IHME_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_3Week
 
-Node: dcid:COVID19_IHME_4WeeksCum
+Node: dcid:IHME_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_4Week
 
-Node: dcid:COVID19_IHME_5WeeksCum
+Node: dcid:IHME_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_5Week
 
-Node: dcid:COVID19_IHME_6WeeksCum
+Node: dcid:IHME_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_6Week
 
-Node: dcid:COVID19_IHME_7WeeksCum
+Node: dcid:IHME_7WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_7Week
 
-Node: dcid:COVID19_IHME_8WeeksCum
+Node: dcid:IHME_8WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_8Week
 
-Node: dcid:COVID19_IHME_9WeeksCum
+Node: dcid:IHME_9WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_IHME_9Week
 
-Node: dcid:COVID19_ISU_1WeeksCum
+Node: dcid:ISU_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ISU_1Week
 
-Node: dcid:COVID19_ISU_2WeeksCum
+Node: dcid:ISU_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ISU_2Week
 
-Node: dcid:COVID19_ISU_3WeeksCum
+Node: dcid:ISU_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ISU_3Week
 
-Node: dcid:COVID19_ISU_4WeeksCum
+Node: dcid:ISU_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ISU_4Week
 
-Node: dcid:COVID19_Imperial_1WeeksCum
+Node: dcid:Imperial_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Imperial_1Week
 
-Node: dcid:COVID19_Imperial1_1WeeksCum
+Node: dcid:Imperial1_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Imperial1_1Week
 
-Node: dcid:COVID19_Imperial1_1WeeksInc
+Node: dcid:Imperial1_1WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Imperial1_1Week
 
-Node: dcid:COVID19_Imperial2_1WeeksCum
+Node: dcid:Imperial2_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Imperial2_1Week
 
-Node: dcid:COVID19_Imperial2_1WeeksInc
+Node: dcid:Imperial2_1WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_Imperial2_1Week
 
-Node: dcid:COVID19_JHU_1WeeksCum
+Node: dcid:JHU_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_JHU_1Week
 
-Node: dcid:COVID19_JHU_2WeeksCum
+Node: dcid:JHU_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_JHU_2Week
 
-Node: dcid:COVID19_JHU_3WeeksCum
+Node: dcid:JHU_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_JHU_3Week
 
-Node: dcid:COVID19_JHU_4WeeksCum
+Node: dcid:JHU_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_JHU_4Week
 
-Node: dcid:COVID19_LANL_1WeeksCum
+Node: dcid:LANL_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_LANL_1Week
 
-Node: dcid:COVID19_LANL_2WeeksCum
+Node: dcid:LANL_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_LANL_2Week
 
-Node: dcid:COVID19_LANL_3WeeksCum
+Node: dcid:LANL_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_LANL_3Week
 
-Node: dcid:COVID19_LANL_4WeeksCum
+Node: dcid:LANL_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_LANL_4Week
 
-Node: dcid:COVID19_LANL_5WeeksCum
+Node: dcid:LANL_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_LANL_5Week
 
-Node: dcid:COVID19_LANL_6WeeksCum
+Node: dcid:LANL_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_LANL_6Week
 
-Node: dcid:COVID19_LANL_7WeeksCum
+Node: dcid:LANL_7WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_LANL_7Week
 
-Node: dcid:COVID19_MIT_1WeeksCum
+Node: dcid:MIT_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MIT_1Week
 
-Node: dcid:COVID19_MIT_2WeeksCum
+Node: dcid:MIT_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MIT_2Week
 
-Node: dcid:COVID19_MIT_3WeeksCum
+Node: dcid:MIT_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MIT_3Week
 
-Node: dcid:COVID19_MIT_4WeeksCum
+Node: dcid:MIT_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MIT_4Week
 
-Node: dcid:COVID19_MIT_5WeeksCum
+Node: dcid:MIT_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MIT_5Week
 
-Node: dcid:COVID19_MIT_6WeeksCum
+Node: dcid:MIT_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MIT_6Week
 
-Node: dcid:COVID19_MOBS_1WeeksCum
+Node: dcid:MOBS_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MOBS_1Week
 
-Node: dcid:COVID19_MOBS_1WeeksInc
+Node: dcid:MOBS_1WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MOBS_1Week
 
-Node: dcid:COVID19_MOBS_2WeeksCum
+Node: dcid:MOBS_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MOBS_2Week
 
-Node: dcid:COVID19_MOBS_2WeeksInc
+Node: dcid:MOBS_2WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MOBS_2Week
 
-Node: dcid:COVID19_MOBS_3WeeksCum
+Node: dcid:MOBS_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MOBS_3Week
 
-Node: dcid:COVID19_MOBS_3WeeksInc
+Node: dcid:MOBS_3WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MOBS_3Week
 
-Node: dcid:COVID19_MOBS_4WeeksCum
+Node: dcid:MOBS_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MOBS_4Week
 
-Node: dcid:COVID19_MOBS_4WeeksInc
+Node: dcid:MOBS_4WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_MOBS_4Week
 
-Node: dcid:COVID19_NotreDame_1WeeksCum
+Node: dcid:NotreDame_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_1Week
 
-Node: dcid:COVID19_NotreDame_1WeeksInc
+Node: dcid:NotreDame_1WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_1Week
 
-Node: dcid:COVID19_NotreDame_2WeeksCum
+Node: dcid:NotreDame_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_2Week
 
-Node: dcid:COVID19_NotreDame_2WeeksInc
+Node: dcid:NotreDame_2WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_2Week
 
-Node: dcid:COVID19_NotreDame_3WeeksCum
+Node: dcid:NotreDame_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_3Week
 
-Node: dcid:COVID19_NotreDame_3WeeksInc
+Node: dcid:NotreDame_3WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_3Week
 
-Node: dcid:COVID19_NotreDame_4WeeksCum
+Node: dcid:NotreDame_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_4Week
 
-Node: dcid:COVID19_NotreDame_4WeeksInc
+Node: dcid:NotreDame_4WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_4Week
 
-Node: dcid:COVID19_NotreDame_5WeeksCum
+Node: dcid:NotreDame_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_5Week
 
-Node: dcid:COVID19_NotreDame_5WeeksInc
+Node: dcid:NotreDame_5WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_5Week
 
-Node: dcid:COVID19_NotreDame_6WeeksCum
+Node: dcid:NotreDame_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_6Week
 
-Node: dcid:COVID19_NotreDame_6WeeksInc
+Node: dcid:NotreDame_6WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_NotreDame_6Week
 
-Node: dcid:COVID19_PSI_1WeeksCum
+Node: dcid:PSI_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_PSI_1Week
 
-Node: dcid:COVID19_PSI_2WeeksCum
+Node: dcid:PSI_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_PSI_2Week
 
-Node: dcid:COVID19_PSI_3WeeksCum
+Node: dcid:PSI_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_PSI_3Week
 
-Node: dcid:COVID19_PSI_4WeeksCum
+Node: dcid:PSI_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_PSI_4Week
 
-Node: dcid:COVID19_SWC_1WeeksCum
+Node: dcid:SWC_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_SWC_1Week
 
-Node: dcid:COVID19_SWC_2WeeksCum
+Node: dcid:SWC_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_SWC_2Week
 
-Node: dcid:COVID19_SWC_3WeeksCum
+Node: dcid:SWC_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_SWC_3Week
 
-Node: dcid:COVID19_SWC_4WeeksCum
+Node: dcid:SWC_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_SWC_4Week
 
-Node: dcid:COVID19_UA_1WeeksCum
+Node: dcid:UA_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UA_1Week
 
-Node: dcid:COVID19_UA_2WeeksCum
+Node: dcid:UA_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UA_2Week
 
-Node: dcid:COVID19_UA_3WeeksCum
+Node: dcid:UA_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UA_3Week
 
-Node: dcid:COVID19_UA_4WeeksCum
+Node: dcid:UA_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UA_4Week
 
-Node: dcid:COVID19_UCLA_1WeeksCum
+Node: dcid:UCLA_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_1Week
 
-Node: dcid:COVID19_UCLA_10WeeksCum
+Node: dcid:UCLA_10WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_10Week
 
-Node: dcid:COVID19_UCLA_11WeeksCum
+Node: dcid:UCLA_11WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_11Week
 
-Node: dcid:COVID19_UCLA_12WeeksCum
+Node: dcid:UCLA_12WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_12Week
 
-Node: dcid:COVID19_UCLA_13WeeksCum
+Node: dcid:UCLA_13WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_13Week
 
-Node: dcid:COVID19_UCLA_14WeeksCum
+Node: dcid:UCLA_14WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_14Week
 
-Node: dcid:COVID19_UCLA_2WeeksCum
+Node: dcid:UCLA_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_2Week
 
-Node: dcid:COVID19_UCLA_3WeeksCum
+Node: dcid:UCLA_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_3Week
 
-Node: dcid:COVID19_UCLA_4WeeksCum
+Node: dcid:UCLA_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_4Week
 
-Node: dcid:COVID19_UCLA_5WeeksCum
+Node: dcid:UCLA_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_5Week
 
-Node: dcid:COVID19_UCLA_6WeeksCum
+Node: dcid:UCLA_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_6Week
 
-Node: dcid:COVID19_UCLA_7WeeksCum
+Node: dcid:UCLA_7WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_7Week
 
-Node: dcid:COVID19_UCLA_8WeeksCum
+Node: dcid:UCLA_8WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_8Week
 
-Node: dcid:COVID19_UCLA_9WeeksCum
+Node: dcid:UCLA_9WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UCLA_9Week
 
-Node: dcid:COVID19_UChicago_10_1WeeksCum
+Node: dcid:UChicago_10_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_10_1Week
 
-Node: dcid:COVID19_UChicago_10_2WeeksCum
+Node: dcid:UChicago_10_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_10_2Week
 
-Node: dcid:COVID19_UChicago_10_3WeeksCum
+Node: dcid:UChicago_10_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_10_3Week
 
-Node: dcid:COVID19_UChicago_10_4WeeksCum
+Node: dcid:UChicago_10_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_10_4Week
 
-Node: dcid:COVID19_UChicago_100_1WeeksCum
+Node: dcid:UChicago_100_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_100_1Week
 
-Node: dcid:COVID19_UChicago_100_2WeeksCum
+Node: dcid:UChicago_100_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_100_2Week
 
-Node: dcid:COVID19_UChicago_100_3WeeksCum
+Node: dcid:UChicago_100_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_100_3Week
 
-Node: dcid:COVID19_UChicago_100_4WeeksCum
+Node: dcid:UChicago_100_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_100_4Week
 
-Node: dcid:COVID19_UChicago_40_1WeeksCum
+Node: dcid:UChicago_40_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_40_1Week
 
-Node: dcid:COVID19_UChicago_40_2WeeksCum
+Node: dcid:UChicago_40_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_40_2Week
 
-Node: dcid:COVID19_UChicago_40_3WeeksCum
+Node: dcid:UChicago_40_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_40_3Week
 
-Node: dcid:COVID19_UChicago_40_4WeeksCum
+Node: dcid:UChicago_40_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_40_4Week
 
-Node: dcid:COVID19_UChicago_60_1WeeksCum
+Node: dcid:UChicago_60_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_60_1Week
 
-Node: dcid:COVID19_UChicago_60_2WeeksCum
+Node: dcid:UChicago_60_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_60_2Week
 
-Node: dcid:COVID19_UChicago_60_3WeeksCum
+Node: dcid:UChicago_60_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_60_3Week
 
-Node: dcid:COVID19_UChicago_60_4WeeksCum
+Node: dcid:UChicago_60_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_60_4Week
 
-Node: dcid:COVID19_UChicago_80_1WeeksCum
+Node: dcid:UChicago_80_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_80_1Week
 
-Node: dcid:COVID19_UChicago_80_2WeeksCum
+Node: dcid:UChicago_80_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_80_2Week
 
-Node: dcid:COVID19_UChicago_80_3WeeksCum
+Node: dcid:UChicago_80_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_80_3Week
 
-Node: dcid:COVID19_UChicago_80_4WeeksCum
+Node: dcid:UChicago_80_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UChicago_80_4Week
 
-Node: dcid:COVID19_UMass-MB_1WeeksCum
+Node: dcid:UMass-MB_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UMass-MB_1Week
 
-Node: dcid:COVID19_UMass-MB_2WeeksCum
+Node: dcid:UMass-MB_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UMass-MB_2Week
 
-Node: dcid:COVID19_UMass-MB_3WeeksCum
+Node: dcid:UMass-MB_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UMass-MB_3Week
 
-Node: dcid:COVID19_UMass-MB_4WeeksCum
+Node: dcid:UMass-MB_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UMass-MB_4Week
 
-Node: dcid:COVID19_UT_1WeeksCum
+Node: dcid:UT_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_1Week
 
-Node: dcid:COVID19_UT_1WeeksInc
+Node: dcid:UT_1WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_1Week
 
-Node: dcid:COVID19_UT_2WeeksCum
+Node: dcid:UT_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_2Week
 
-Node: dcid:COVID19_UT_2WeeksInc
+Node: dcid:UT_2WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_2Week
 
-Node: dcid:COVID19_UT_3WeeksCum
+Node: dcid:UT_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_3Week
 
-Node: dcid:COVID19_UT_3WeeksInc
+Node: dcid:UT_3WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_3Week
 
-Node: dcid:COVID19_UT_4WeeksCum
+Node: dcid:UT_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_4Week
 
-Node: dcid:COVID19_UT_4WeeksInc
+Node: dcid:UT_4WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_4Week
 
-Node: dcid:COVID19_UT_5WeeksCum
+Node: dcid:UT_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_5Week
 
-Node: dcid:COVID19_UT_5WeeksInc
+Node: dcid:UT_5WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_5Week
 
-Node: dcid:COVID19_UT_6WeeksCum
+Node: dcid:UT_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_6Week
 
-Node: dcid:COVID19_UT_6WeeksInc
+Node: dcid:UT_6WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_UT_6Week
 
-Node: dcid:COVID19_YYG_1WeeksCum
+Node: dcid:YYG_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_1Week
 
-Node: dcid:COVID19_YYG_1WeeksInc
+Node: dcid:YYG_1WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_1Week
 
-Node: dcid:COVID19_YYG_10WeeksCum
+Node: dcid:YYG_10WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_10Week
 
-Node: dcid:COVID19_YYG_10WeeksInc
+Node: dcid:YYG_10WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_10Week
 
-Node: dcid:COVID19_YYG_2WeeksCum
+Node: dcid:YYG_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_2Week
 
-Node: dcid:COVID19_YYG_2WeeksInc
+Node: dcid:YYG_2WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_2Week
 
-Node: dcid:COVID19_YYG_3WeeksCum
+Node: dcid:YYG_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_3Week
 
-Node: dcid:COVID19_YYG_3WeeksInc
+Node: dcid:YYG_3WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_3Week
 
-Node: dcid:COVID19_YYG_4WeeksCum
+Node: dcid:YYG_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_4Week
 
-Node: dcid:COVID19_YYG_4WeeksInc
+Node: dcid:YYG_4WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_4Week
 
-Node: dcid:COVID19_YYG_5WeeksCum
+Node: dcid:YYG_5WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_5Week
 
-Node: dcid:COVID19_YYG_5WeeksInc
+Node: dcid:YYG_5WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_5Week
 
-Node: dcid:COVID19_YYG_6WeeksCum
+Node: dcid:YYG_6WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_6Week
 
-Node: dcid:COVID19_YYG_6WeeksInc
+Node: dcid:YYG_6WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_6Week
 
-Node: dcid:COVID19_YYG_7WeeksCum
+Node: dcid:YYG_7WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_7Week
 
-Node: dcid:COVID19_YYG_7WeeksInc
+Node: dcid:YYG_7WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_7Week
 
-Node: dcid:COVID19_YYG_8WeeksCum
+Node: dcid:YYG_8WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_8Week
 
-Node: dcid:COVID19_YYG_8WeeksInc
+Node: dcid:YYG_8WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_8Week
 
-Node: dcid:COVID19_YYG_9WeeksCum
+Node: dcid:YYG_9WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_9Week
 
-Node: dcid:COVID19_YYG_9WeeksInc
+Node: dcid:YYG_9WeekForecastCovid19IncrDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_YYG_9Week
 
-Node: dcid:COVID19_ensembleforecast_1WeeksCum
+Node: dcid:ensembleforecast_1WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ensembleforecast_1Week
 
-Node: dcid:COVID19_ensembleforecast_2WeeksCum
+Node: dcid:ensembleforecast_2WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ensembleforecast_2Week
 
-Node: dcid:COVID19_ensembleforecast_3WeeksCum
+Node: dcid:ensembleforecast_3WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ensembleforecast_3Week
 
-Node: dcid:COVID19_ensembleforecast_4WeeksCum
+Node: dcid:ensembleforecast_4WeekForecastCovid19CumuDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_ensembleforecast_4Week
 
-Node: dcid:COVID19_observeddata_observed
+Node: dcid:observeddata_observedCovid19Death
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
+measurementMethod: dcs:COVIDDeathPrediction_observeddata_observedCovid19
 

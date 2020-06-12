@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+# python3
+
+"""
+This script preprocesses all the CSV files in "./CSV_original" for data import.
+"""
 
 import pandas as pd
 import json
@@ -10,7 +15,7 @@ def main():
   #Step 0: load and combine the data into single dataFrame
   CDC_prediction = pd.concat([pd.read_csv(os.path.join("./CSV_original", file)) for file in os.listdir("./CSV_original") if file[-4:] == '.csv']).reset_index(drop = True)
   CDC_prediction = CDC_prediction.rename(columns={"target_week_end_date": "target_date"})
-   
+
   #drop the quantiles for now, come back later
   CDC_prediction = CDC_prediction.drop(columns = ["quantile_0.025", "quantile_0.975"])
 
@@ -25,12 +30,12 @@ def main():
 
   #Step 2: convert the "location_name" to dcid in Data Commons
     #map the abbreviation of state to full name
-  state_map_path = './mapping/state_abbrev.json'
+  state_map_path = './utility/state_abbrev.json'
   with open(state_map_path, 'r') as file:
     state_map = json.load(file)
 
     #map the name of location to dcid
-  dcid_map_path = './mapping/state_dcid.json'
+  dcid_map_path = './utility/state_dcid.json'
   with open(dcid_map_path, 'r') as file:
     dcid_map = json.load(file)
     for key, value in state_map.items():
@@ -62,35 +67,38 @@ def main():
   for _,missingdate in grouped_missing_date:
     week = missingdate["weeks"].unique()[0]
     predicted_date = pd.to_datetime(missingdate["forecast_date"])+ pd.Timedelta("{} days".format(week*7))
-    #print(predicted_date.index)
     CDC_prediction["target_date"].loc[predicted_date.index] = predicted_date.dt.strftime("%Y-%m-%d")
 
   #Step 5: split the "point" value based on "model" and "target"
   grouped_CDC = CDC_prediction.groupby(["model", "target"])
-  prefixes = []
+  prefixes = [] #stores the model name and correponding prediction date info, used for generation of template MCF and statistical variables
 
   for _, prediction in grouped_CDC:
-    #get the "model" and "target" and store it for generating tMCF
+    #generate the column names
     modelname = prediction["model"].unique()[0]
     targets = prediction["target"].unique()[0].split(" ")
     if len(targets) == 5:
-      target = targets[0]+"Weeks" + targets[3][0].capitalize()+targets[3][1:]
-    else:#observed data
-      target = prediction["target"].unique()[0]
+      if targets[3] == "cum":
+        countType = "Cumu"
+      if targets[3] == "inc":
+        countType = "Incr"
+      target = targets[0]+ "WeekForecastCovid19" + countType + "Death"
+    else:#target = "observed"
+      target = prediction["target"].unique()[0] + "Covid19Death"
     colname = modelname + "_" + target
     prefixes.append([modelname, target])
-    
+
     #split the columns
     CDC_prediction[colname] = None
     CDC_prediction[colname].loc[prediction.index] = prediction["point"]
   CDC_prediction = CDC_prediction.drop(columns = ["point", "model", "target"])
-  
+
   #Step 6: save the data
   save_path = "./forecast_death-2020-04-13to2020-06-01.csv"
   CDC_prediction.to_csv(save_path, index = False)
-  with open('colnames.txt', 'w') as filehandle:
+  with open('./utility/colnames.txt', 'w') as filehandle:
     for model,target in prefixes:
         filehandle.write("{},{}\n".format(model,target))
 
 if __name__ == "__main__":
-    main()
+  main()
