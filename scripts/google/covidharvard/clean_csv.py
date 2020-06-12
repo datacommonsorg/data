@@ -1,6 +1,20 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+from datetime import datetime
 import pandas as pd
 import numpy as np
-from datetime import datetime
 
 
 class CovidHarvard:
@@ -14,7 +28,7 @@ class CovidHarvard:
             deaths_cumulative_csv (str): Raw CSV file from Harvard source.
             region (str): "County" or "State" depending on the CSV file imported.
         """
-        if region != 'State' and region != 'County':
+        if region not in ['State', 'County']:
             raise Exception("Invalid region!")
 
         print("Reading CSVs")
@@ -35,13 +49,15 @@ class CovidHarvard:
         deaths_cumulative_df = self.drop_unecessary_columns(deaths_cumulative_df)
 
         print("Combining DataFrames into one")
-        combined = self.combine_dfs(confirmed_cumulative=confirmed_cumulative_df, deaths_cumulative=deaths_cumulative_df)
+        combined = self.combine_dfs(confirmed_cumulative=confirmed_cumulative_df,
+                                    deaths_cumulative=deaths_cumulative_df)
 
         print("Exporting to ./output directory")
         combined.to_csv(f"./output/{region}_COVID_Harvard.csv", index=False)
 
     def convert_fips_to_geoId(self, df: pd.DataFrame, region: str) -> pd.DataFrame:
-        """The CSV files are in fips format, let's convert it to a geoId in the format of geoId/XX or geoId/XXXXX
+        """The CSV files are in fips format.
+        Let's convert it to a geoId in the formatof geoId/XX or geoId/XXXXX
 
         Args:
             df (Pandas DataFrame): The Pandas Dataframe containing the fips.
@@ -111,7 +127,8 @@ class CovidHarvard:
             deaths_cumulative (Pandas DataFrame): the DataFrame containing the cumulative deaths
 
         Returns:
-            [Pandas DataFrame]: The DataFrame containing cumulative cases/deaths and incremental cases/deaths.
+            [Pandas DataFrame]: The DataFrame containing cumulative cases/deaths
+            and incremental cases/deaths.
         """
         confirmed_incremental: pd.DataFrame = confirmed_cumulative.T.diff().T.fillna(0)
         deaths_incremental: pd.DataFrame = deaths_cumulative.T.diff().T.fillna(0)
@@ -125,14 +142,24 @@ class CovidHarvard:
                 # Sometimes the data is in the form of XX/XX/XX, let's convert it to ISO
                 if '/' in date:
                     date_split = date.split('/')
-                    date_iso = datetime(int(date_split[2]), int(date_split[0]), int(date_split[1])).isoformat()
+                    date_iso = datetime(int(date_split[2]),
+                                        int(date_split[0]),
+                                        int(date_split[1])).isoformat()
                     date_iso = date_iso.split('T')[0]
 
                 # Get the values from the corresponding DataFrames
-                confirmed_cumulative_value = self.get_value(df=confirmed_cumulative, geoId=geoId, date=date)
-                deaths_cumulative_value = self.get_value(df=deaths_cumulative, geoId=geoId, date=date)
-                confirmed_incremental_value = self.get_value(df=confirmed_incremental, geoId=geoId, date=date)
-                deaths_incremental_value = self.get_value(df=deaths_incremental, geoId=geoId, date=date)
+                confirmed_cumulative_value = self.get_value(df=confirmed_cumulative,
+                                                            geoId=geoId,
+                                                            date=date)
+                deaths_cumulative_value = self.get_value(df=deaths_cumulative,
+                                                         geoId=geoId,
+                                                         date=date)
+                confirmed_incremental_value = self.get_value(df=confirmed_incremental,
+                                                             geoId=geoId,
+                                                             date=date)
+                deaths_incremental_value = self.get_value(df=deaths_incremental,
+                                                          geoId=geoId,
+                                                          date=date)
 
                 # Append the values to the correspondingb lists.
                 # Instead of directly appending to the DataFrame, this is done for speed.
