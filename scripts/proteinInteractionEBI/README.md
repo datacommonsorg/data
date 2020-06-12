@@ -34,15 +34,17 @@ We make each term as an enumeration node of three subtrees with root nodes as: "
 We also left out the properties named "synonym", "subset", "created_by" and "creation_date" which contain the data that don't play important roles in our nodes of protein-protein interaction currently. If needed we will import these properties in the future. 
 
 
-## Algorithm for parsing the file
+## Algorithm for parsing data file: mi.owl
 
 ### Parsing Steps
 
 1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used to access nodes as well. 
-2. save all the tree nodes in the subtree of the three nodes into three set with depth first search: 
+2. nodes of three subtrees will be imported, and roots of the subtrees are:
 - id: MI:0001 name: interaction detection method 
 - id: MI:0190 name: interaction type  
 - id: MI:0444 name: database citation 
+
+  Depth-first search was run on each root to collect the node values separately.
 
 3. save the nodes in the three sets to the corresponding enumeration schema
 
@@ -50,7 +52,7 @@ We also left out the properties named "synonym", "subset", "created_by" and "cre
 
 ### New Class 
 
-MolecularInteraction
+MolecularInteraction, ProteinProteinInteraction
 
 ### New Properties 
 

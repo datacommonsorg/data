@@ -1,0 +1,37 @@
+Node: dcid:ProteinProteinInteraction
+typeOf: schema:Class
+name:"ProteinProteinInteraction"
+subClassOf: dcs:Protein
+description: "An interaction between proteins."
+
+Node: dcid:psimiId
+typeOf: schema:Property
+name: "psimiId"
+description: "The identifier for Proteomics Standards Initiative Molecular Interaction."
+rangeIncludes: schema:Text
+domainIncludes:dcs:InteractionTypeEnum,dcs:InteractionDetectionMethodEnum,dcs:InteractionSourceEnum
+
+Node: dcid:publicationId
+typeOf: schema:Property
+name: "publicationId"
+description: "Source and ID of the reference."
+rangeIncludes: schema:Text
+domainIncludes: dcs:InteractionTypeEnum,dcs:InteractionDetectionMethodEnum,dcs:InteractionSourceEnum,dcs:ProteinProteinInteraction
+
+Node: dcid:InteractionTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionTypeEnum"
+description: "The interaction type enumeration in biomedical ontologies."
+
+Node: dcid:InteractionDetectionMethodEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionDetectionMethodEnum"
+description: "The detection method enumeration in biomedical ontologies."
+
+Node: dcid:InteractionSourceEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionSourceEnum"
+description: "The interaction source database enumeration in biomedical ontologies."
