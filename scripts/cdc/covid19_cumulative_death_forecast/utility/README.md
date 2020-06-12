@@ -7,5 +7,5 @@
 [1]: https://github.com/qlj-lijuan/data/tree/master/scripts/cdc/covid19_cumulative_death_forecast/utility/state_abbrev.json
 [2]: https://github.com/qlj-lijuan/data/tree/master/scripts/cdc/covid19_cumulative_death_forecast/utility/state_dcid.json
 [3]: https://github.com/qlj-lijuan/data/tree/master/scripts/cdc/covid19_cumulative_death_forecast/utility/colnames.txt
-[4]: https://github.com/qlj-lijuan/data/tree/master/scripts/cdc/covid19_cumulative_death_forecast/utility/model_info_cleanup.csv
+[4]: https://github.com/qlj-lijuan/data/tree/master/scripts/cdc/covid19_cumulative_death_forecast/utility/model_info-cleanup.csv
 [5]: https://github.com/qlj-lijuan/data/tree/master/scripts/cdc/covid19_cumulative_death_forecast/utility/test.py
