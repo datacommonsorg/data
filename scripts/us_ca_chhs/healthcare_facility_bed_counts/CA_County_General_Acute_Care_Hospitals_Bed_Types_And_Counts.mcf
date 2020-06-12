@@ -12,7 +12,7 @@ populationType: dcs:HospitalBed
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:NumGeneralAcuteCareHospitalAcutePsychiatricCareBeds
+Node: dcid:NumGeneralAcuteCareHospitalAcutePsychiatricCareBed
 typeOf: dcs:StatisticalVariable
 populationType: dcs:HospitalBed
 statType: dcs:measuredValue

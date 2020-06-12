@@ -165,7 +165,6 @@ tempDF2 = pd.read_excel(
     sheet_name='CA_COUNTY_GACH_BED_COUNTS')
 tempDF2.to_csv('temp_data2.csv')
 
-# ------ To Be changed----------------------------------------------------------
 new_columns_2 = ['GeoId', 'CACountyName', 'CALicensedHealthcareFacilityType',
                  'NumGeneralAcuteCareHospital', 'NumGeneralAcuteCareHospitalBed',
                  'NumGeneralAcuteCareHospitalAcutePsychiatricCareBed',
