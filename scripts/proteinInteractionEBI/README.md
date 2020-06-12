@@ -6,6 +6,8 @@ proteinInteractionEBI
 │   parseEBI.ipynb
 |   parseEBI.py
 |   mi.owl
+|   BioOntologySchema.txt (contains all the schemas to be imported to KG)
+|   handwrittenSchema.txt (contains only schema MCF)
 │
 └───graph
 │   │   multipleParent.png
@@ -40,9 +42,9 @@ We also left out the properties named "synonym", "subset", "created_by" and "cre
 
 1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used to access nodes as well. 
 2. nodes of three subtrees will be imported, and roots of the subtrees are:
-- id: MI:0001 name: interaction detection method 
-- id: MI:0190 name: interaction type  
-- id: MI:0444 name: database citation 
+- "id: MI:0001 name: interaction detection method" 
+- "id: MI:0190 name: interaction type"  
+- "id: MI:0444 name: database citation" 
 
   Depth-first search was run on each root to collect the node values separately.
 
@@ -52,7 +54,7 @@ We also left out the properties named "synonym", "subset", "created_by" and "cre
 
 ### New Class 
 
-MolecularInteraction, ProteinProteinInteraction
+ProteinProteinInteraction
 
 ### New Properties 
 
