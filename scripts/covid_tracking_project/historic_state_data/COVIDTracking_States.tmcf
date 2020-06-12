@@ -1,6 +1,6 @@
 
 Node: E:COVIDTracking_States->E0
-typeOf: dcs:State
+typeOf: schema:State
 dcid: C:COVIDTracking_States->GeoId
 
 Node: E:COVIDTracking_States->E1
