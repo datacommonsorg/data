@@ -1,0 +1,8 @@
+Node: dcid:US_CPI-W
+name: "US_CPI-W"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ConsumerGoodsAndServices
+measuredProperty: dcs:price
+statType: dcs:measuredValue
+consumer: dcs:UrbanWageEarnerAndClericalWorker
+unit: dcs:IndexPointBasePeriod1982-84=100

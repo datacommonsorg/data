@@ -1,0 +1,6 @@
+Node: E:cpi_u_1913_2020->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_CPI-U
+observationAbout: dcid:country/USA
+observationDate: C:cpi_u_1913_2020->date
+value: C:cpi_u_1913_2020->cpi
