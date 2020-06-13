@@ -1,0 +1,17 @@
+Node: dcid:InteractionTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionTypeEnum"
+description: "The interaction type enumeration in biomedical ontologies."
+
+Node: dcid:InteractionDetectionMethodEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionDetectionMethodEnum"
+description: "The detection method enumeration in biomedical ontologies."
+
+Node: dcid:InteractionSourceEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionSourceEnum"
+description: "The interaction source database enumeration in biomedical ontologies."

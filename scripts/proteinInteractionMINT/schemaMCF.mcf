@@ -1,0 +1,33 @@
+Node: dcid:ProteinProteinInteraction
+name: "ProteinProteinInteraction"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "The Interaction between proteins."
+
+Node: dcid:interactingProtein
+typeOf: schema:Property
+name: "interactingProtein"
+description: "The participant proteins in protein-protein interaction."
+rangeIncludes: dcs:Protein
+domainIncludes: dcs:ProteinProteinInteraction
+
+Node: dcid:interactionDetectionMethod
+typeOf: schema:Property
+name: "interactionDetectionMethod"
+description: "The interaction detection method used in the experiment"
+rangeIncludes: dcs:InteractionDetectionMethodEnum
+domainIncludes: dcs:ProteinProteinInteraction
+
+Node: dcid:interactionType
+typeOf: schema:Property
+name: "interactionType"
+description: "The molecular interaction type"
+rangeIncludes: dcs:InteractionTypeEnum
+domainIncludes: dcs:ProteinProteinInteraction
+
+Node: dcid:interactionSource
+typeOf: schema:Property
+name: "interactionSource"
+description: "The database where the interaction record extracted"
+rangeIncludes: dcs:InteractionSourceEnum
+domainIncludes: dcs:ProteinProteinInteraction
