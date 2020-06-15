@@ -1,60 +1,47 @@
-# Scripts for importing ontology dataset from the European Bioinformatics Institute (EMBL-EBI)
+# Scripts for importing ontology dataset from the Molecular INTeraction database (MINT)
 
 ```
 proteinInteractionEBI
 │   README.md
-│   parseEBI.ipynb
-|   parseEBI.py
-|   mi.owl
-|   BioOntologySchema.mcf (contains all the schemas to be imported to KG)
-|   handwrittenSchema.txt (contains only schema MCF)
+│   parseMINT.ipynb
+|   parseMINT.py
+|   BioMINTSchema.mcf (contains schema MCF and part of instances to be imported to KG)
+|   schemaMCF.txt (contains only schema MCF)
 │
 └───graph
-│   │   multipleParent.png
-│   │   originalDataSample.png
-│   │   ontologyTree.png
+│   │   MINTexample.png
 
 ```
 
-This directory stores all scripts used to import datasets from the European Bioinformatics Institute (EMBL-EBI). 
-Here we only import the three subsets of the ontologies: "interaction detection method", "interaction type" and "database citation", which are commonly used in protein-protein interactions. 
+This directory stores all scripts used to import datasets from the Molecular INTeraction database (MINT). MINT contains publicly available protein-protein interactions and uses the Molecular Interaction Ontology of the Proteomics Standard Initiative (PSI-MI).
 
 ## Database format
 
-The ontologies dictionary has a tree structure. Note here that one parent node can have multiple child nodes and one child node can have multiple parent nodes as well.
+The data can be downloaded at https://mint.bio.uniroma2.it/index.php/download/ 
 
-![Tree Structure](./graph/ontologyTree.png)
+The downloaded data is tab-separated format.
 
-![Multiple Parent Node](./graph/multipleParent.png)
+The dataset contains information for the interaction and the participant. A full interaction example from the website is https://mint.bio.uniroma2.it/index.php/detailed-curation/?id=MINT-4409840. The features of each participant such as "Biological role", "interactor type" are not included in the downloadable database thus we didn't import these features to in Data Commons. The information available in the downloadable database is shown in the graph.  
 
-The original data file (mi.owl) uses "is_a" and "part_of" as the relation property to connect the child node to the parent node, however we don't distinguish these two and a property "specializationOf" is used for the child-parent connection.
+![A MINT Record](./graph/MINTexample.png)
 
-![Original Data Sample](./graph/originalDataSample.png)
-
-We make each term as an enumeration node of three subtrees with root nodes as: "database citation", "interaction detection method", and "interaction type". There are two main concerns that we didn't import all the nodes. First, we focus on the ontologies in protein-protein interaction and these three categories are the most commonly used. Secondly, importing too many general terms may cause the confusion in our dataCommons knowledge graph. 
-
-We also left out the properties named "synonym", "subset", "created_by" and "creation_date" which contain the data that don't play important roles in our nodes of protein-protein interaction currently. If needed we will import these properties in the future. Property "identifier" of each enumeration instance contains a PSI-MI identifier. 
+A protein-protein interaction instance connects to partipant proteins through property "interactingProtein", connects to detection methods throught property "interactionDetectionMethod", connects to interaction type throught property "interactionType", connects to the source database throught property "interactionSource", connects to related publications throught property "references" and connects to related database record through property "identifier". The objects of "interactionType", "interactionDetectionMethod" and "interactionSource" are enumeration instances from EMBL-EBI Molecular Interaction Ontology. The objects of "interactingProtein" are protein instances from UniPort.
 
 
-## Algorithm for parsing data file: mi.owl
-
-### Parsing Steps
-
-1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used to access nodes as well. 
-2. nodes of three subtrees will be imported, and roots of the subtrees are:
-- "id: MI:0001 name: interaction detection method" 
-- "id: MI:0190 name: interaction type"  
-- "id: MI:0444 name: database citation" 
-
-  Depth-first search was run on each root to collect the node values separately.
-
-3. save the nodes in the three sets to the corresponding enumeration schema
 
 ## Schema overview
 
 
-### New Enumeration
+### New class
 
-InteractionTypeEnum, InteractionDetectionMethodEnum, InteractionSourceEnum.
+ProteinProteinInteraction.
+
+### New properties
+
+interactingProtein, interactionType, interactionSource.
 
 
+## Reference
+
+Licata, Luana, et al. "MINT, the molecular interaction database: 2012 update." Nucleic acids research 40.D1 (2012): D857-D861.
+https://academic.oup.com/nar/article/40/D1/D857/2903552
