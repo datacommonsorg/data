@@ -20,3 +20,9 @@ To generate `COVIDTracking_States.tmcf` and `COVIDTracking_States.csv`, run:
 ```bash
 python3 preprocess_csv.py
 ```
+
+To run the test file `preprocess_csv_test.py`, run:
+
+```bash
+python3 -m unittest preprocess_csv_test
+```
