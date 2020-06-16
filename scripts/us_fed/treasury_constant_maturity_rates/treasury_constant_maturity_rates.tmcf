@@ -1,0 +1,77 @@
+Node: E:treasury_constant_maturity_rates->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_1_Month_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->1-Month
+
+Node: E:treasury_constant_maturity_rates->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_3_Month_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->3-Month
+
+Node: E:treasury_constant_maturity_rates->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_6_Month_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->6-Month
+
+Node: E:treasury_constant_maturity_rates->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_1_Year_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->1-Year
+
+Node: E:treasury_constant_maturity_rates->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_2_Year_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->2-Year
+
+Node: E:treasury_constant_maturity_rates->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_3_Year_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->3-Year
+
+Node: E:treasury_constant_maturity_rates->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_5_Year_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->5-Year
+
+Node: E:treasury_constant_maturity_rates->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_7_Year_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->7-Year
+
+Node: E:treasury_constant_maturity_rates->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_10_Year_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->10-Year
+
+Node: E:treasury_constant_maturity_rates->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_20_Year_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->20-Year
+
+Node: E:treasury_constant_maturity_rates->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_Treasury_30_Year_Constant_Maturity_Rate
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->30-Year
+
