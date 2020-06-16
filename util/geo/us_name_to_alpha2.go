@@ -23,9 +23,11 @@ import "strings"
 // Note that the alpha-2 here is not to be confused with from ISO 3166-1 Alpha-2 or
 // ISO 3166-2 codes.
 func USNameToAlpha2(name string) string {
-	// transform string to ideally match thw way its stored in the mapping.
+	// transform the input to ideally match the way its stored in the mapping.
 	name = strings.ReplaceAll(name, " ", "")
 	name = strings.ReplaceAll(name, ".", "")
+	// TODO: any other pieces that would likely be seen in the wild that
+	// should be dropped before the lookup?  '_', ',' ?
 
 	// If there is a match it is returned, otherwise the empty string is returned.
 	return usStateToAlpha2Map[strings.ToLower(name)]

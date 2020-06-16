@@ -1,21 +1,17 @@
-/*
-Copyright 2020 Google LLC
+// Copyright 2020 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-// Package geo holds mappings and uitility methods useful for Data Commons
-// import code written in Go.
 package geo
 
 // CountryCodeToDCID maps ISO 3166-1 Alpha-2 codes to Data Commons DCID's.
@@ -271,9 +267,10 @@ var CountryCodeToDCID = map[string]string{
 	"ZW": "country/ZWE",
 }
 
-// USStateToDCID maps US state two-letter identifiers to Data Commons DCIDs.
-// TODO: Add mapping from standard ISO 3166-2 codes to DCIDs.
-var USStateToDCID = map[string]string{
+// USStateCodeToDCID maps US state two-letter identifiers to Data Commons DCIDs.
+// TODO: Add mapping from standard ISO 3166-2 codes, and other instances of
+// identifiers used to DCIDs.
+var USStateCodeToDCID = map[string]string{
 	"AL": "geoId/01",
 	"AK": "geoId/02",
 	"AZ": "geoId/04",
