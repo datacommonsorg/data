@@ -55,7 +55,7 @@ interactingProtein, interactionType, interactionSource.
 
 ## Notes and Caveats
 
-There are 133,168 records in MINT database. Here we imported 129,568 records in to Data Commons. The 3,582 records that we didn't import have problematic protein identifers that we cannot connect them to UniProt right now.
+There are 133,168 records in the MINT database. Here we imported 129,568 records to Data Commons. The 3,582 records that we didn't import have problematic protein identifiers that we cannot connect them to UniProt right now.
 
 ## Reference
 
