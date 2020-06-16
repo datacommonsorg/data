@@ -67,7 +67,7 @@ populationType: schema:Person
 statType: dcs:medianValue
 ```
 
-> Note: Data Commons is in the middle of migrating `measurementMethod` from a `StatisticalVariable` property to a `StatVarObservation` property. You may find that the [`MedianAge`](https://browser.datacommons.org/kg?dcid=MedianAge) node still has `measurementMethod` and `unit`, but please do not emulate that behavior.
+> Note: Data Commons is in the process of migrating `measurementMethod` and `unit` from being `StatisticalVariable` properties to `StatVarObservation` properties. You may see that the [`MedianAge`](https://browser.datacommons.org/kg?dcid=MedianAge) node still has `measurementMethod` and `unit`, but please do not emulate that behavior.
 
 ## Mapping `StatisticalVariable` and `StatVarObservation` to `StatisticalPopulation` and `Observation`
 
@@ -90,7 +90,7 @@ location: dcid:geoId/4865000
 ```
 
 The `Observation` copies the `StatVarObservation`'s `observationDate`, `observationPeriod`, `measurementMethod`, and `unit` (when applicable),
-and the `StatisticalVariable`'s `measuredProperty`, `measurementQualifier`, etc. (when applicalbe). It also extracts the
+and the `StatisticalVariable`'s `measuredProperty`, `measurementQualifier`, etc. (when applicable). It also extracts the
 `StatisticalVariable`'s `statType` and the `StatVarObservation`'s `value`
 as its own `.*Value` property and value.
 
