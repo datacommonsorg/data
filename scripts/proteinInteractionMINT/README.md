@@ -28,6 +28,19 @@ The dataset contains information for the interaction and the participant protein
 A protein-protein interaction instance connects to partipant proteins through property "interactingProtein", connects to detection methods through property "interactionDetectionMethod", connects to interaction type through property "interactionType", connects to the source database through property "interactionSource", connects to related publications through property "references" and connects to related database records through property "identifier". The objects of "interactionType", "interactionDetectionMethod" and "interactionSource" are enumeration instances from EMBL-EBI Molecular Interaction Ontology database. The objects of "interactingProtein" are protein instances from UniPort.
 
 
+## Links to Dev Browser
+
+ProteinProteinInteraction class node 
+
+https://datcom-browser-dev2.googleplex.com/kg?dcid=ProteinProteinInteraction
+
+ProteinProteinInteraction instance nodes
+
+https://datcom-browser-dev2.googleplex.com/kg?dcid=LITD1_HUMAN_REPS1_HUMAN&db=
+
+https://datcom-browser-dev2.googleplex.com/kg?dcid=AMPH_HUMAN_AP2A_RAT&db= 
+
+ 
 
 ## Schema overview
 
@@ -40,8 +53,15 @@ ProteinProteinInteraction.
 
 interactingProtein, interactionType, interactionSource.
 
+## Notes and Caveats
+
+There are 133,168 records in MINT database. Here we imported 129,568 records in to Data Commons. The 3,582 records that we didn't import have problematic protein identifers that we cannot connect them to UniProt right now.
 
 ## Reference
 
 Licata, Luana, et al. "MINT, the molecular interaction database: 2012 update." Nucleic acids research 40.D1 (2012): D857-D861.
 https://academic.oup.com/nar/article/40/D1/D857/2903552
+
+## TODO
+
+Complete parseMINT.py.

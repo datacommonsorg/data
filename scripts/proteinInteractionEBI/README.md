@@ -59,4 +59,6 @@ We also left out the properties named "synonym", "subset", "created_by" and "cre
 
 InteractionTypeEnum, InteractionDetectionMethodEnum, InteractionSourceEnum.
 
+## TODO
 
+Complete parseEBI.py.
