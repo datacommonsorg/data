@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Package util holds mappings and uitility methods useful for Data Commons
+// Package geo holds mappings and uitility methods useful for Data Commons
 // import code written in Go.
-package util
+package geo
 
 // CountryCodeToDCID maps ISO 3166-1 Alpha-2 codes to Data Commons DCID's.
 var CountryCodeToDCID = map[string]string{
