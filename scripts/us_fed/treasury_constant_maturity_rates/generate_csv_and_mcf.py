@@ -90,7 +90,6 @@ def generate_mcf():
         'populationType: dcs:Treasury{security_type}\n'
         'measuredProperty: dcs:interestRate\n'
         'statType: dcs:measuredValue\n'
-        'measurementMethod: dcs:{maturity_no_hyphen}ConstantMaturity\n'
         'unit: dcs:Percent\n'
     )
     template_template = (
@@ -98,6 +97,7 @@ def generate_mcf():
         'typeOf: dcs:StatVarObservation\n'
         'variableMeasured: dcs:US_Treasury_{maturity_underscore}_Constant_'\
         'Maturity_Rate\n'
+        'measurementMethod: dcs:{maturity_no_hyphen}ConstantMaturity\n'
         'observationAbout: dcid:country/USA\n'
         'observationDate: C:{filename}->date\n'
         'value: C:{filename}->{maturity_hyphen}\n'
