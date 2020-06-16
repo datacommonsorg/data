@@ -21,11 +21,11 @@ The data can be downloaded at https://mint.bio.uniroma2.it/index.php/download/
 
 The downloaded data is tab-separated format.
 
-The dataset contains information for the interaction and the participant. A full interaction example from the website is https://mint.bio.uniroma2.it/index.php/detailed-curation/?id=MINT-4409840. The features of each participant such as "Biological role", "interactor type" are not included in the downloadable database thus we didn't import these features to in Data Commons. The information available in the downloadable database is shown in the graph.  
+The dataset contains information for the interaction and the participant proteins. A full interaction example from the website is https://mint.bio.uniroma2.it/index.php/detailed-curation/?id=MINT-4409840. The features of each participant such as "Biological role", "Interactor type" are not included in the downloadable database thus we didn't import these features to Data Commons. The information available in the downloadable database is shown in the graph below.  
 
 ![A MINT Record](./graph/MINTexample.png)
 
-A protein-protein interaction instance connects to partipant proteins through property "interactingProtein", connects to detection methods throught property "interactionDetectionMethod", connects to interaction type throught property "interactionType", connects to the source database throught property "interactionSource", connects to related publications throught property "references" and connects to related database record through property "identifier". The objects of "interactionType", "interactionDetectionMethod" and "interactionSource" are enumeration instances from EMBL-EBI Molecular Interaction Ontology. The objects of "interactingProtein" are protein instances from UniPort.
+A protein-protein interaction instance connects to partipant proteins through property "interactingProtein", connects to detection methods through property "interactionDetectionMethod", connects to interaction type through property "interactionType", connects to the source database through property "interactionSource", connects to related publications through property "references" and connects to related database records through property "identifier". The objects of "interactionType", "interactionDetectionMethod" and "interactionSource" are enumeration instances from EMBL-EBI Molecular Interaction Ontology database. The objects of "interactingProtein" are protein instances from UniPort.
 
 
 
