@@ -1,6 +1,7 @@
 numpy
-file:util/alpha2_to_dcid
-file:util/mcf_template_filler
-file:util/name_to_alpha2
-file:util/sharding_writer
+pandas
+#file:util/alpha2_to_dcid
+#file:util/mcf_template_filler
+#file:util/name_to_alpha2
+#file:util/sharding_writer
 
