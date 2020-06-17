@@ -1,0 +1,4 @@
+Node: dcid:IndiaState
+name: "India_State"
+typeof: dcs:StatisticalVariable
+populationType: dcs:State
