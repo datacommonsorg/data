@@ -1,0 +1,57 @@
+Node: dcid:AssociationSourceEnum
+name: "AssociationSourceEnum"
+subClassOf: schema:Enumeration
+description: "How the association between a disease and a gene was made."
+typeOf: schema:Class
+
+Node: dcid:AssociationSourceTextMining
+name: "Text Mining"
+typeOf: dcs:AssociationSourceEnum
+
+Node: dcid:AssociationSourceExperiment
+name: "Experiment"
+typeOf: dcs:AssociationSourceEnum
+
+Node: dcid:AssociationSourceClinical
+name: "Clinical"
+typeOf: dcs:AssociationSourceEnum
+
+Node: dcid:DiseaseGeneAssociationStatusEnum
+name: "DiseaseGeneAssociationStatusEnum"
+subClassOf: schema:Enumeration
+description: "The status of the association between the disease and the gene."
+typeOf: schema:Class
+
+Node: dcid:DiseaseGeneAssociationStatusCurated
+name: "Curated"
+typeOf: dcs:DiseaseGeneAssociationStatusEnum
+
+Node: dcid:MeSHDescriptorClassEnum
+name: "MeSHDescriptorClassEnum"
+subClassOf: schema:Enumeration
+description: "This record type plays a central role in MeSH vocabulary as a unit of indexing and retrieval. These descriptors are organized into a numbered tree structure or hierarchy that allows users to browse in an orderly fashion from broader to narrower topics."
+typeOf: schema:Class
+descriptionUrl: "https://www.nlm.nih.gov/mesh/intro_record_types.html"
+
+Node: dcid:MeSHDescriptorClassTopical
+name: "Topical Descriptor"
+typeOf: dcs:MeSHDescriptorClassEnum
+description: "These records are topical headings that are used to index citations in NLM's MEDLINE database, for cataloging of publications, and other databases, and are searchable in PubMed as [MH]. Most Descriptors indicate the subject of an indexed item, such as a journal article, that is, what the article is about. Descriptors are generally updated on an annual basis but may, on occasion, be updated more frequently."
+descriptionUrl: "https://www.nlm.nih.gov/mesh/intro_record_types.html"
+
+Node: dcid:MeSHDescriptorClassPublicationType
+name: "Publication Type"
+typeOf: dcs:MeSHDescriptorClassEnum
+description: "These records indicate what the indexed item is, i.e., its genre, rather than what it is about, for example, Historical Article. They may include Publication Components, such as Charts; Publication Formats, such as Editorial; and Study Characteristics, such as Clinical Trial. They function as metadata, rather than being about the content. These records are searchable in PubMed as Publication Type [PT], and the terms in MEDLINE records are labeled as "PT" or <PublicationType> rather than "MH" or <MeSHHeading>. They are listed in category V of the MeSH Tree Structures (https://www.nlm.nih.gov/mesh/intro_trees.html). A list is available of publication types with scope notes (https://www.nlm.nih.gov/mesh/pubtypes.html)."
+descriptionUrl: "https://www.nlm.nih.gov/mesh/intro_record_types.html"
+
+Node: dcid:MeSHDescriptorClassGender
+name: "Gender Descriptor"
+typeOf: dcs:MeSHDescriptorClassEnum
+description: "Descriptors which include stating the gender as male or female."
+
+Node: dcid:MeSHDescriptorClassGeographic
+name: "Geographic Descriptor"
+typeOf: dcs:MeSHDescriptorClassEnum
+description: "Descriptors which include continents, regions, countries, states, and other geographic subdivisions. They are not used to characterize subject content but rather physical location. They are listed in category Z of the MeSH Tree Structures."
+descriptionUrl: "https://www.nlm.nih.gov/mesh/intro_record_types.html"
