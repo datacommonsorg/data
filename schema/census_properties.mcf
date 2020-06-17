@@ -1,0 +1,361 @@
+# Current Census properties (/cns/jv-d/home/datcom/tjann/census/pop_counters/topics-values.csv)
+
+Node: abilityToSpeakEnglish
+dcid: "abilityToSpeakEnglish"
+typeOf: schema:Property
+name: "abilityToSpeakEnglish"
+
+## age in schema.org
+
+Node: armedForcesStatus
+typeOf: schema:Property
+dcid: "armedForcesStatus"
+name: "armedForcesStatus"
+description: "Describes whether a person is currently serving in the armed forces or is a civilian."
+rangeIncludes: dcs:USC_ArmedForcesStatusEnum
+domainIncludes: dcs:Person
+
+Node: cashRentStatusProperty
+typeOf: schema:Property
+dcid: "cashRentStatus"
+name: "cashRentStatus"
+description: "Describes whether Housing units that are renter occupied, are with or without payment of cash rent. The unit may be owned by friends or relatives without charge"
+rangeIncludes: dcs:CashRentEnum
+domainIncludes: dcs:HousingUnit
+
+Node: citizenship
+dcid: "citizenship"
+rangeIncludes: dcs:USC_CitizenshipEnum
+name: "citizenship"
+typeOf: schema:Property
+domainIncludes: schema:Person
+
+Node: collegeOrGraduateSchoolEnrollment
+dcid: "collegeOrGraduateSchoolEnrollment"
+name: "collegeOrGraduateSchoolEnrollment"
+typeOf: schema:Property
+domainIncludes: schema:Person
+rangeIncludes: dcs:USC_CollegeOrGraduateSchoolEnrollmentEnum
+
+Node: detailedLevelOfSchool
+dcid: "detailedLevelOfSchool"
+typeOf: schema:Property
+name: "detailedLevelOfSchool"
+domainIncludes: schema:Person
+rangeIncludes: dcs:USC_DetailedLevelOfSchoolEnum
+
+Node: educationalAttainment
+dcid: "educationalAttainment"
+name: "educationalAttainment"
+typeOf: schema:Property
+domainIncludes: schema:Person
+rangeIncludes: dcs:USC_EducationalAttainmentEnum
+
+## gender in schema.org
+
+Node: grossRent
+dcid: "grossRent"
+typeOf: schema:Property
+name: "grossRent"
+
+Node: healthInsurance
+typeOf: schema:Property
+dcid: "healthInsurance"
+name: "healthInsurance"
+description: "This property describes the status of Health Insurance of a person"
+rangeIncludes: dcs:USC_HealthInsuranceEnum
+domainIncludes: schema:Person
+
+Node: homeValue
+typeOf: schema:Property
+dcid: "homeValue"
+name: "homeValue"
+description: "Estimated market value of a housing unit"
+rangeIncludes: schema:Quantity
+domainIncludes: dcs:HousingUnit
+
+Node: householderAge
+typeOf: schema:Property
+dcid: "householderAge"
+name: "householderAge"
+description: "Age of the Householder. The householder refers to the person (or one of the people) in whose name the housing unit is owned or rented (maintained). The person designated as the householder is the "reference person" to whom the relationship of all other household members, if any, is recorded"
+rangeIncludes: dcs:Quantity, schema:Number
+domainIncludes: dcs:Household
+
+Node: householderRace
+typeOf: schema:Property
+dcid: "householderRace"
+name: "householderRace"
+description: "Race of the Householder. The householder refers to the person (or one of the people) in whose name the housing unit is owned or rented (maintained). The person designated as the householder is the "reference person" to whom the relationship of all other household members, if any, is recorded"
+rangeIncludes: dcs:RaceCodeEnum
+domainIncludes: dcs:Household
+
+Node: income
+dcid: "income"
+typeOf: schema:Property
+rangeIncludes: schema:Number, dcs:Quantity, dcs:Percentile
+name: "income"
+domainIncludes: schema:Person
+
+Node: incomeStatus
+typeOf: schema:Property
+dcid: "incomeStatus"
+name: "incomeStatus"
+description: "Describes whether a person has income or not, over a given period, usually in the previous 12 months."
+rangeIncludes: dcs:IncomeStatusEnum
+domainIncludes: schema:Person
+
+Node: institutionalization
+typeOf: schema:Property
+dcid: "institutionalization"
+name: "institutionalization"
+description: "The institutionalized population is persons residing in institutional group quarters such as adult correctional facilities, juvenile facilities, skilled-nursing facilities, mental (psychiatric) hospitals and in-patient hospice facilities. People who ineligible, unable, or unlikely to participate in the labor force"
+rangeIncludes: dcs:InstitutionalizationEnum
+domainIncludes: schema:Person
+
+Node: languageSpokenAtHome
+dcid: "languageSpokenAtHome"
+typeOf: schema:Property
+name: "languageSpokenAtHome"
+
+Node: levelOfSchool
+dcid: "levelOfSchool"
+name: "levelOfSchool"
+typeOf: schema:Property
+
+Node: maritalStatus
+dcid: "maritalStatus"
+rangeIncludes: dcs:USC_MaritalStatusEnum
+name: "maritalStatus"
+typeOf: schema:Property
+domainIncludes: schema:Person
+
+Node: nativity
+dcid: "nativity"
+name: "nativity"
+typeOf: schema:Property
+
+## numberOfRooms in schema.org
+
+Node: occupancyStatus
+dcid: "occupancyStatus"
+name: "occupancyStatus"
+typeOf: schema:Property
+
+Node: occupancyTenure
+typeOf: schema:Property
+dcid: "occupancyTenure"
+name: "occupancyTenure"
+description: "Describes whether Housing units are owner occupied or renter occupied"
+rangeIncludes: dcs:OccupancyTenureEnum
+domainIncludes: dcs:HousingUnit
+
+Node: placeOfBirth
+dcid: "placeOfBirth"
+name: "placeOfBirth"
+typeOf: schema:Property
+
+Node: povertyStatus
+dcid: "povertyStatus"
+domainIncludes: schema:Person
+name: "povertyStatus"
+rangeIncludes: dcs:USC_PovertyStatusEnum
+typeOf: schema:Property
+
+## race defined in K12 (we probably want to move it to dcschema?)
+
+Node: schoolEnrollment
+dcid: "schoolEnrollment"
+name: "schoolEnrollment"
+rangeIncludes: dcs:USC_SchoolEnrollmentEnum
+domainIncludes: schema:Person
+typeOf: schema:Property
+
+Node: spouseAbsentReason
+dcid: "spouseAbsentReason"
+typeOf: schema:Property
+name: "spouseAbsentReason"
+
+Node: spousePresent
+dcid: "spousePresent"
+typeOf: schema:Property
+name: "spousePresent"
+
+Node: typeOfSchool
+dcid: "typeOfSchool"
+name: "typeOfSchool"
+typeOf: schema:Property
+
+Node: veteranStatus
+typeOf: schema:Property
+dcid: "veteranStatus"
+name: "veteranStatus"
+description: "This property idenfifies if person is a veteran. A veteran is someone who served in the active military, naval or air service, and was discharged or released under conditions other than dishonorable."
+rangeIncludes: dcs:VeteranStatusEnum
+domainIncludes: schema:Person
+
+Node: workExperience
+typeOf: schema:Property
+dcid: "workExperience"
+name: "workExperience"
+description: "Describes whether a person has worked, over a given period, usually in the previous 12 months."
+rangeIncludes: dcs:WorkExperienceEnum
+domainIncludes: schema:Person
+
+# Additions from USC Economic Census
+
+Node: dcid:receiptsOrRevenue
+typeOf: schema:Property
+name: "receiptsOrRevenue"
+rangeIncludes: dcs:Quantity
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:shipmentsOrReceipts
+typeOf: schema:Property
+name: "shipmentsOrReceipts"
+rangeIncludes: dcs:Quantity
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:revenue
+typeOf: schema:Property
+name: "revenue"
+rangeIncludes: dcs:Quantity
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:receiptsBillingsOrSales
+typeOf: schema:Property
+name: "receiptsBillingsOrSales"
+rangeIncludes: dcs:Quantity
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:sales
+typeOf: schema:Property
+name: "sales"
+description: "Revenue from selling goods or services."
+rangeIncludes: dcs:Quantity
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:receipts
+typeOf: schema:Property
+name: "receipts"
+rangeIncludes: dcs:Quantity
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:payrollStatus
+typeOf: schema:Property
+name: "payrollStatus"
+description: "Describes whether a business pays employees."
+rangeIncludes: dcs:PayrollStatusEnum
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:taxStatus
+typeOf: schema:Property
+name: "taxStatus"
+description: "In the US, this describes a corporation's tax status with the IRS."
+rangeIncludes: dcs:TaxStatusEnum
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:businessOperationType
+typeOf: schema:Property
+name: "businessOperationType"
+description: "Describes the type of business operations an establishment is involved with."
+rangeIncludes: dcs:BusinessOperationTypeEnum
+domainIncludes: dcs:USCEstablishment
+
+Node: dcid:ownerRace
+typeOf: schema:Property
+name: "ownerRace"
+description: "Identifies the race of majority owner for a firm or business. In case of a single owner, this identifies race of the owner."
+rangeIncludes: dcs:RaceCodeEnum
+domainIncludes: dcs:USCFirm
+
+Node: dcid:ownerGender
+typeOf: schema:Property
+name: "majorityOwnerGender"
+description: "Identifies the gender of majority owner for a firm or business. In case of single owner, this identifies gender of the owner."
+rangeIncludes: dcs:USC_OwnerGenderEnum
+domainIncludes: dcs:USCFirm
+
+Node: dcid:mortgageStatus
+typeOf: schema:Property
+name: "mortgageStatus"
+description: "The status of the mortgage on a housing unit."
+domainIncludes: dcs:HousingUnit
+rangeIncludes: dcs:USC_MortgageStatusEnum
+
+Node: dcid:commuteTime
+typeOf: schema:Property
+name: "commuteTime"
+description: "The time it takes for a person to get to and from work."
+domainIncludes: dcs:Person
+rangeIncludes: dcs:TimeUnitOfMeasure
+
+Node: dcid:placeOfWork
+typeOf: schema:Property
+name: "placeOfWork"
+description: "The kind of place where a person works."
+domainIncludes: dcs:Person
+rangeIncludes: dcs:USC_PlaceOfWorkEnum
+
+Node: dcid:residentStatus
+typeOf: schema:Property
+name: "residentStatus"
+description: "The status of a person's residence in a place, e.g. \"lived in the same house 1 year ago.\""
+domainIncludes: dcs:Person
+rangeIncludes: dcs:USC_ResidentStatusEnum
+
+Node: dcid:facilities
+typeOf: schema:Property
+name: "facilities"
+description: "Facilities available in a building, e.g. plumbing facilities, kitchen facilities."
+domainIncludes: dcs:HousingUnit
+rangeIncludes: dcs:USC_FacilitiesEnum
+
+Node: dcid:internetAccessStatus
+typeOf: schema:Property
+name: "internetAccessStatus"
+description: "The status of a household's internet access."
+domainIncludes: dcs:Household
+rangeIncludes: dcs:USC_InternetAccessStatusEnum
+
+Node: dcid:periodOfMilitaryService
+typeOf: schema:Property
+name: "periodOfMilitaryService"
+description: "The period that a person served in the military."
+domainIncludes: dcs:Person
+rangeIncludes: dcs:USC_PeriodOfMilitaryServiceEnum
+
+Node: dcid:propertyTax
+typeOf: schema:Property
+name: "propertyTax"
+description: "The amount of property tax paid."
+domainIncludes: dcs:HousingUnit
+rangeIncludes: schema:Quantity, dcs:QuantityRange
+
+Node: dcid:commuteMode
+typeOf: schema:Property
+name: "commuteMode"
+description: "The way a person gets to work, e.g. carpooling or driving alone."
+domainIncludes: dcs:Person
+rangeIncludes: dcs:USC_CommuteModeEnum
+
+Node: dcid:dateBuilt
+typeOf: schema:Property
+name: "dateBuilt"
+description: "The date that a building was built."
+domainIncludes: dcs:HousingUnit
+rangeIncludes: schema:DateTime
+
+Node: dcid:structureType
+typeOf: schema:HousingUnit
+name: "structureType"
+description: "The type of a structure, e.g. 1-unit housing unit, mobile home."
+domainIncludes: dcs:HousingUnit
+rangeIncludes: dcs:USC_HousingStructureTypeEnum
+
+Node: dcid:vehiclesAvailable
+typeOf: schema:Property
+name: "vehiclesAvailable"
+description: "Number of vehicles available at a place."
+domainIncludes: dcs:Household
+rangeIncludes: schema:Quantity, dcs:QuantityRange
