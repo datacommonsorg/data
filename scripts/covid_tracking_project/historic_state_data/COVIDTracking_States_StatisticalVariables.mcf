@@ -87,6 +87,7 @@ medicalStatus: dcs:PatientHospitalized
 Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
+medicalCondition: dcs:COVID_19
 statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
 medicalStatus: dcs:PatientHospitalized
