@@ -1,0 +1,153 @@
+Node: dcid:EconomicMetricEnum
+name: "EconomicMetricEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Type of economic metric."
+
+Node: dcid:RealValue
+name: "RealValue"
+typeOf: dcs:EconomicMetricEnum
+description: "Measurement is evaluated against the price of goods or services at a different time to adjust for inflation. This adjustment could be via a chained volume series (https://en.wikipedia.org/wiki/Chained_volume_series) or a fixed-weight method."
+descriptionUrl: "https://en.wikipedia.org/wiki/Real_versus_nominal_value_(economics)"
+
+Node: dcid:Nominal
+name: "Nominal"
+typeOf: dcs:EconomicMetricEnum
+description: "Measurement is evaluated at current market prices, without adjusting for inflation."
+descriptionUrl: "https://en.wikipedia.org/wiki/Real_versus_nominal_value_(economics)"
+
+Node: dcid:PurchasingPowerParity
+name: "PurchasingPowerParity"
+typeOf: dcs:EconomicMetricEnum
+description: "Represents prices of different areas using a common good or goods to contrast the real purchasing power between different currencies."
+descriptionUrl: "https://en.wikipedia.org/wiki/Purchasing_power_parity"
+
+Node: dcid:emittedThing
+name: "emittedThing"
+typeOf: schema:Property
+domainIncludes: dcs:Emissions
+rangeIncludes: dcs:GasType
+description: "Type of emission, such as carbon dioxide."
+
+Node: dcid:Emissions
+name: "Emissions"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "The production and discharge of something."
+
+Node: dcid:GasType
+name: "GasType"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Type of gas. For example, carbon dioxide."
+
+Node: dcid:CarbonDioxide
+name: "CarbonDioxide"
+typeOf: dcs:GasType
+description: "A colorless gas consisting of a carbon atom covalently double bonded to two oxygen atoms."
+descriptionUrl: "https://en.wikipedia.org/wiki/Carbon_dioxide"
+
+Node: dcid:consumedThing
+name: "consumedThing"
+typeOf: schema:Property
+domainIncludes: dcs:Consumption
+rangeIncludes: dcs:PublicUtilityType
+description: "Type of consumption, such as energy."
+
+Node: dcid:Consumption
+name: "Consumption"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "The usage or consumption of something."
+
+Node: dcid:PublicUtilityType
+name: "PublicUtilityType"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Type of public utility, like eletricity, energy."
+
+Node: dcid:Electricity
+name: "Electricity"
+typeOf: schema:PublicUtilityType
+
+Node: dcid:Energy
+name: "Energy"
+typeOf: schema:PublicUtilityType
+description: "Consumable energy of different forms (electrical, nuclear, etc.)."
+
+Node: dcid:EconomicActivity
+name: "EconomicActivity"
+typeOf: schema:Class
+subClassOf: schema:Intangible
+description: "The activity of making, providing, purchasing, or selling goods or services."
+
+Node: dcid:activitySource
+name: "activitySource"
+typeOf: schema:Property
+domainIncludes: dcs:EconomicActivity
+rangeIncludes: dcs:EconomicActivitySourceEnum
+description: "The source of economic activity. For example, GDP & GNI."
+
+Node: dcid:EconomicActivitySourceEnum
+name: "EconomicActivitySourceEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "The source of economic activity. For example, GDP & GNI."
+
+Node: dcid:GrossDomesticProduction
+name: "GrossDomesticProduction"
+typeOf: schema:EconomicActivitySourceEnum
+description: "A monetary measure of the market value of all the final goods and services produced in a specific time period."
+descriptionUrl: "https://en.wikipedia.org/wiki/Gross_domestic_product"
+
+Node: dcid:GrossNationalIncome
+name: "GrossNationalIncome"
+typeOf: schema:EconomicActivitySourceEnum
+description: "The total domestic and foreign output claimed by residents of a country."
+descriptionUrl: "https://en.wikipedia.org/wiki/Gross_national_income"
+
+Node: dcid:GrossValueAdded
+name: "GrossValueAdded"
+typeOf: schema:EconomicActivitySourceEnum
+description: "The measure of the value of goods and services produced in an area, industry or sector of an economy."
+descriptionUrl: "https://en.wikipedia.org/wiki/Gross_value_added"
+
+Node: dcid:isInternetUser
+name: "isInternetUser"
+typeOf: schema:Property
+domainIncludes: schema:Person
+rangeIncludes: schema:Boolean
+description: "Represents whether a person is considered as an Internet user."
+
+Node: dcid:lifeExpectancy
+name: "lifeExpectancy"
+rangeIncludes: schema:Float
+domainIncludes: schema:StatisticalPopulation
+typeOf: schema:Property
+description: "The number of years a newborn infant would live if prevailing patterns of mortality at the time of its birth were to stay the same throughout its life."
+descriptionUrl: "https://data.worldbank.org/indicator/SP.DYN.LE00.IN"
+
+Node: dcid:fertilityRate
+name: "fertilityRate"
+rangeIncludes: schema:Float
+domainIncludes: schema:StatisticalPopulation
+typeOf: schema:Property
+description: "The number of children that would be born to a woman if she were to live to the end of her childbearing years and bear children in accordance with age-specific fertility rates of the specified year."
+descriptionUrl: "https://data.worldbank.org/indicator/SP.DYN.TFRT.IN"
+
+Node: dcid:InternationalDollar
+name: "InternationalDollar"
+typeOf: dcid:UnitOfMeasure
+description: "A hypothetical unit of currency that has the same purchasing power parity that the U.S. dollar had in the United States at a given point in time."
+descriptionUrl: "https://en.wikipedia.org/wiki/International_United_States_dollar"
+
+Node: dcid:ChainedUSDollarBaseYr2012
+typeOf: dcs:UnitOfMeasure
+name: "ChainedUSDollarBaseYr2012"
+description: "The official currency of the United States of America, adjusted for inflation by year-over-year chaining with respect to the base year 2012."
+descriptionUrl: https://www.bea.gov/help/glossary/chained-dollar-estimates
+
+Node: dcid:ConstantPriceUSDollar2015
+typeOf: dcs:UnitOfMeasure
+name: "ConstantPriceUSDollar2015"
+description: "The value of the official currency of the United States of America in the year 2015."

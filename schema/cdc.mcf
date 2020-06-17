@@ -1,0 +1,196 @@
+Node: dcid:healthOutcome
+typeOf: schema:Property
+name: "healthOutcome"
+description: "This property describes a health outcome such as diabetes."
+rangeIncludes: dcs:HealthOutcomeEnum
+domainIncludes: schema:Person
+
+Node: dcid:healthPrevention
+typeOf: schema:Property
+name: "healthPrevention"
+description: "This property describes preventive health measures such as going or not going to a dentist."
+rangeIncludes: dcs:HealthPreventionEnum
+domainIncludes: schema:Person
+
+Node: dcid:healthBehavior
+typeOf: schema:Property
+name: "healthBehavior"
+description: "This property describes health-relevant behaviours exhibited by a person such as exercising regularly."
+rangeIncludes: dcs:HealthBehaviorEnum
+domainIncludes: schema:Person
+
+Node: dcid:HealthCategoryEnum
+name: "HealthCategoryEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Categories of health-related measures: Health Outcomes, Prevention, Behaviors."
+
+Node: dcid:HealthBehaviorEnum
+name: "HealthBehaviorEnum"
+typeOf: schema:Class
+description: "Categories of health-relevant behaviors."
+subClassOf:  dcs:HealthCategoryEnum
+
+Node: dcid:HealthOutcomeEnum
+name: "HealthOutcomeEnum"
+typeOf: schema:Class
+description: "Categories of health outcomes."
+subClassOf:  dcs:HealthCategoryEnum
+
+Node: dcid:HealthPreventionEnum
+name: "HealthPreventionEnum"
+typeOf: schema:Class
+description: "Categories of health preventions."
+subClassOf:  dcs:HealthCategoryEnum
+
+Node: dcid:Diabetes
+name: "Diabetes"
+typeOf: dcs:HealthOutcomeEnum
+description: "Diagnosed with diabetes."
+
+Node: dcid:CoronaryHeartDisease
+name: "CoronaryHeartDisease"
+typeOf: dcs:HealthOutcomeEnum
+
+Node: dcid:DentalVisit
+name: "DentalVisit"
+typeOf: dcs:HealthPreventionEnum
+description: "Visits to dentist or dental clinic."
+
+Node: dcid:Smoking
+name: "Smoking"
+typeOf: dcs:HealthBehaviorEnum
+description: "Currently smokes cigarettes."
+
+Node: dcid:HighBloodPressure
+name: "HighBloodPressure"
+typeOf: dcs:HealthOutcomeEnum
+
+Node: dcid:Arthritis
+name: "Arthritis"
+typeOf: dcs:HealthOutcomeEnum
+
+Node: dcid:ChronicKidneyDisease
+name: "ChronicKidneyDisease"
+typeOf: dcs:HealthOutcomeEnum
+
+Node: dcid:PhysicalHealthNotGood
+name: "PhysicalHealthNotGood"
+typeOf: dcs:HealthOutcomeEnum
+description: "Physical health not good for >=14 days."
+
+Node: dcid:CorePreventiveServices
+name: "CorePreventiveServices"
+typeOf: dcs:HealthPreventionEnum
+description: "Up to date on a core set of clinical preventive services: Flu shot past year, PPV shot ever, Colorectal cancer screening, and if female, Mammogram past 2 years."
+
+Node: dcid:Asthma
+name: "Asthma"
+typeOf: dcs:HealthOutcomeEnum
+description: "Currently has asthma."
+
+Node: dcid:SleepLessThan7Hours
+name: "SleepLessThan7Hours"
+typeOf: dcs:HealthBehaviorEnum
+description: "Sleeping less than 7 hours."
+
+Node: dcid:CancerExcludingSkinCancer
+name: "CancerExcludingSkinCancer"
+typeOf: dcs:HealthOutcomeEnum
+description: "Cancer (excluding skin cancer)."
+
+Node: dcid:BingeDrinking
+name: "BingeDrinking"
+typeOf: dcs:HealthBehaviorEnum
+
+Node: dcid:HighCholesterol
+name: "HighCholesterol"
+typeOf: dcs:HealthOutcomeEnum
+
+Node: dcid:NoHealthInsurance
+name: "NoHealthInsurance"
+typeOf: dcs:HealthPreventionEnum
+description: "Currently without health insurance."
+
+Node: dcid:WithHealthInsurance
+name: "WithHealthInsurance"
+typeOf: dcs:HealthPreventionEnum
+description: "Currently with health insurance."
+
+Node: dcid:PapSmearTest
+name: "PapSmearTest"
+typeOf: dcs:HealthPreventionEnum
+description: "Papanicolaou smear use."
+
+Node: dcid:AnnualCheckup
+name: "AnnualCheckup"
+typeOf: dcs:HealthPreventionEnum
+description: "Visit to doctor for annual checkup."
+
+Node: dcid:TakingBloodPressureMedication
+name: "TakingBloodPressureMedication"
+typeOf: dcs:HealthPreventionEnum
+description: "Taking medicine for high blood pressure control."
+
+Node: dcid:MentalHealthNotGood
+name: "MentalHealthNotGood"
+typeOf: dcs:HealthOutcomeEnum
+description: "Mental health not good for >=14 days."
+
+Node: dcid:Obesity
+name: "Obesity"
+typeOf: dcs:HealthBehaviorEnum
+
+Node: dcid:AllTeethLoss
+name: "AllTeethLoss"
+typeOf: dcs:HealthOutcomeEnum
+
+Node: dcid:Mammography
+name: "Mammography"
+typeOf: dcs:HealthPreventionEnum
+
+Node: dcid:CholesterolScreening
+name: "CholesterolScreening"
+typeOf: dcs:HealthPreventionEnum
+
+Node: dcid:PhysicalInactivity
+name: "PhysicalInactivity"
+typeOf: dcs:HealthBehaviorEnum
+description: "No leisure-time physical activity."
+
+Node: dcid:ColorectalCancerScreening
+name: "ColorectalCancerScreening"
+typeOf: dcs:HealthPreventionEnum
+description: "Fecal occult blood test, sigmoidoscopy, or colonoscopy."
+
+Node: dcid:ChronicObstructivePulmonaryDisease
+name: "ChronicObstructivePulmonaryDisease"
+typeOf: dcs:HealthOutcomeEnum
+description: "Chronic obstructive pulmonary disease."
+
+Node: dcid:Stroke
+name: "Stroke"
+typeOf: dcs:HealthOutcomeEnum
+
+Node: dcid:AdjustmentTypeEnum
+typeOf: dcs:Class
+subClassOf: schema:Enumeration
+name: "AdjustmentTypeEnum"
+description: "An enumeration of measurements methods distinguishing the type of adjustments made to a measurement."
+
+Node: dcid:CrudePrevalence
+typeOf: dcs:AdjustmentTypeEnum
+name: "CrudePrevalence"
+description: "Indicates crude or non adjusted prevalance (often used for health outcomes)."
+
+Node: dcid:AgeAdjustedPrevalence
+typeOf: dcs:AdjustmentTypeEnum
+name: "AgeAdjustedPrevalence"
+description: "Indicates age-adjusted prevalance (often used for health outcomes)."
+
+Node: dcid:particulateMatter2.5
+name: "particulateMatter2.5"
+typeOf: schema:Property
+rangeIncludes: dcs:Number
+description: "Particulate matter (PM) - is made up of particles (tiny pieces) of solids or liquids that are in the air, like dust, dirt, soot, smoke, and drops of liquid. Fine (smaller) particles, called PM2.5, are more dangerous because they can get into the deep parts of a person's lungs - or even into their blood."
+domainIncludes: dcs:Place

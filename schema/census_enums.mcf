@@ -1,0 +1,1516 @@
+
+Node: USC_AbilityToSpeakEnglishEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_AbilityToSpeakEnglishEnum"
+name: "USC_AbilityToSpeakEnglishEnum"
+
+Node: SpeakEnglishNotWell
+typeOf: dcs:USC_AbilityToSpeakEnglishEnum
+dcid: "SpeakEnglishNotWell"
+name: "SpeakEnglishNotWell"
+
+Node: SpeakEnglishWell
+typeOf: dcs:USC_AbilityToSpeakEnglishEnum
+dcid: "SpeakEnglishWell"
+name: "SpeakEnglishWell"
+
+Node: SpeakEnglishLessThanVeryWell
+typeOf: dcs:USC_AbilityToSpeakEnglishEnum
+dcid: "SpeakEnglishLessThanVeryWell"
+name: "SpeakEnglishLessThanVeryWell"
+
+Node: SpeakEnglishVeryWell
+typeOf: dcs:USC_AbilityToSpeakEnglishEnum
+dcid: "SpeakEnglishVeryWell"
+name: "SpeakEnglishVeryWell"
+
+Node: SpeakEnglishNotAtAll
+typeOf: dcs:USC_AbilityToSpeakEnglishEnum
+dcid: "SpeakEnglishNotAtAll"
+name: "SpeakEnglishNotAtAll"
+
+Node: USC_ArmedForcesStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_ArmedForcesStatusEnum"
+name: "USC_ArmedForcesStatusEnum"
+
+Node: Civilian
+typeOf: dcs:USC_ArmedForcesStatusEnum
+dcid: "Civilian"
+name: "Civilian"
+
+Node: dcid:InArmedForces
+typeOf: dcs:USC_ArmedForcesStatusEnum
+name: "InArmedForces"
+
+Node: USC_CashRentStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_CashRentStatusEnum"
+name: "USC_CashRentStatusEnum"
+
+Node: NoCashRent
+typeOf: dcs:USC_CashRentStatusEnum
+dcid: "NoCashRent"
+name: "NoCashRent"
+
+Node: WithCashRent
+typeOf: dcs:USC_CashRentStatusEnum
+dcid: "WithCashRent"
+name: "WithCashRent"
+
+Node: USC_CitizenshipEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_CitizenshipEnum"
+name: "USC_CitizenshipEnum"
+
+Node: USCitizenBornInTheUnitedStates
+typeOf: dcs:USC_CitizenshipEnum
+dcid: "USCitizenBornInTheUnitedStates"
+name: "USCitizenBornInTheUnitedStates"
+
+Node: NotAUSCitizen
+typeOf: dcs:USC_CitizenshipEnum
+dcid: "NotAUSCitizen"
+name: "NotAUSCitizen"
+
+Node: USCitizenBornAbroadOfAmericanParents
+typeOf: dcs:USC_CitizenshipEnum
+dcid: "USCitizenBornAbroadOfAmericanParents"
+name: "USCitizenBornAbroadOfAmericanParents"
+
+Node: USCitizenByNaturalization
+typeOf: dcs:USC_CitizenshipEnum
+dcid: "USCitizenByNaturalization"
+name: "USCitizenByNaturalization"
+
+Node: USCitizenBornInPuertoRicoOrUSIslandAreas
+typeOf: dcs:USC_CitizenshipEnum
+dcid: "USCitizenBornInPuertoRicoOrUSIslandAreas"
+name: "USCitizenBornInPuertoRicoOrUSIslandAreas"
+
+Node: USC_CollegeOrGraduateSchoolEnrollmentEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_CollegeOrGraduateSchoolEnrollmentEnum"
+name: "USC_CollegeOrGraduateSchoolEnrollmentEnum"
+
+Node: EnrolledInPublicCollegeOrGraduateSchool
+typeOf: dcs:USC_CollegeOrGraduateSchoolEnrollmentEnum
+dcid: "EnrolledInPublicCollegeOrGraduateSchool"
+name: "EnrolledInPublicCollegeOrGraduateSchool"
+
+Node: NotEnrolledInCollegeOrGraduateSchool
+typeOf: dcs:USC_CollegeOrGraduateSchoolEnrollmentEnum
+dcid: "NotEnrolledInCollegeOrGraduateSchool"
+name: "NotEnrolledInCollegeOrGraduateSchool"
+
+Node: EnrolledInPrivateCollegeOrGraduateSchool
+typeOf: dcs:USC_CollegeOrGraduateSchoolEnrollmentEnum
+dcid: "EnrolledInPrivateCollegeOrGraduateSchool"
+name: "EnrolledInPrivateCollegeOrGraduateSchool"
+
+Node: USC_DetailedLevelOfSchoolEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_DetailedLevelOfSchoolEnum"
+name: "USC_DetailedLevelOfSchoolEnum"
+
+Node: EnrolledInKindergarten
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInKindergarten"
+name: "EnrolledInKindergarten"
+
+Node: GraduateOrProfessionalSchool
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "GraduateOrProfessionalSchool"
+name: "GraduateOrProfessionalSchool"
+
+Node: EnrolledInGrade12
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade12"
+name: "EnrolledInGrade12"
+
+Node: EnrolledInGrade11
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade11"
+name: "EnrolledInGrade11"
+
+Node: EnrolledInGrade10
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade10"
+name: "EnrolledInGrade10"
+
+Node: EnrolledInCollegeUndergraduateYears
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInCollegeUndergraduateYears"
+name: "EnrolledInCollegeUndergraduateYears"
+
+Node: EnrolledInGrade9
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade9"
+name: "EnrolledInGrade9"
+
+Node: EnrolledInGrade8
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade8"
+name: "EnrolledInGrade8"
+
+Node: EnrolledInGrade3
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade3"
+name: "EnrolledInGrade3"
+
+Node: EnrolledInGrade2
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade2"
+name: "EnrolledInGrade2"
+
+Node: EnrolledInGrade1
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade1"
+name: "EnrolledInGrade1"
+
+Node: EnrolledInNurserySchoolPreschool
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInNurserySchoolPreschool"
+name: "EnrolledInNurserySchoolPreschool"
+
+Node: EnrolledInGrade7
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade7"
+name: "EnrolledInGrade7"
+
+Node: EnrolledInGrade6
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade6"
+name: "EnrolledInGrade6"
+
+Node: EnrolledInGrade5
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade5"
+name: "EnrolledInGrade5"
+
+Node: EnrolledInGrade4
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+dcid: "EnrolledInGrade4"
+name: "EnrolledInGrade4"
+
+Node: USC_EducationalAttainmentEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_EducationalAttainmentEnum"
+name: "USC_EducationalAttainmentEnum"
+
+Node: BachelorsDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "BachelorsDegree"
+name: "BachelorsDegree"
+
+Node: SomeCollege1OrMoreYearsNoDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "SomeCollege1OrMoreYearsNoDegree"
+name: "SomeCollege1OrMoreYearsNoDegree"
+
+Node: LessThanHighSchoolGraduate
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "LessThanHighSchoolGraduate"
+name: "LessThanHighSchoolGraduate"
+
+Node: 7ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "7ThGrade"
+name: "7ThGrade"
+
+Node: SomeCollegeLessThan1Year
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "SomeCollegeLessThan1Year"
+name: "SomeCollegeLessThan1Year"
+
+Node: RegularHighSchoolDiploma
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "RegularHighSchoolDiploma"
+name: "RegularHighSchoolDiploma"
+
+Node: 6ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "6ThGrade"
+name: "6ThGrade"
+
+Node: 12ThGradeNoDiploma
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "12ThGradeNoDiploma"
+name: "12ThGradeNoDiploma"
+
+Node: MastersDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "MastersDegree"
+name: "MastersDegree"
+
+Node: SomeCollegeNoDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "SomeCollegeNoDegree"
+name: "SomeCollegeNoDegree"
+
+Node: LessThan9ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "LessThan9ThGrade"
+name: "LessThan9ThGrade"
+
+Node: 4ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "4ThGrade"
+name: "4ThGrade"
+
+Node: 2NdGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "2NdGrade"
+name: "2NdGrade"
+
+Node: AssociatesDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "AssociatesDegree"
+name: "AssociatesDegree"
+
+Node: DoctorateDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "DoctorateDegree"
+name: "DoctorateDegree"
+
+Node: 10ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "10ThGrade"
+name: "10ThGrade"
+
+Node: SomeCollegeOrAssociatesDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "SomeCollegeOrAssociatesDegree"
+name: "SomeCollegeOrAssociatesDegree"
+
+Node: HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "HighSchoolGraduateIncludesEquivalency"
+name: "HighSchoolGraduateIncludesEquivalency"
+
+Node: BachelorsDegreeOrHigher
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "BachelorsDegreeOrHigher"
+name: "BachelorsDegreeOrHigher"
+
+# Added during ACS-ED import.
+Node: HighSchoolGraduateOrHigher
+name: "HighSchoolGraduateOrHigher"
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "HighSchoolGraduateOrHigher"
+
+Node: GedOrAlternativeCredential
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "GedOrAlternativeCredential"
+name: "GedOrAlternativeCredential"
+
+Node: LessThanHighSchoolDiploma
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "LessThanHighSchoolDiploma"
+name: "LessThanHighSchoolDiploma"
+
+Node: GraduateOrProfessionalDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "GraduateOrProfessionalDegree"
+name: "GraduateOrProfessionalDegree"
+
+Node: 5ThAnd6ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "5ThAnd6ThGrade"
+name: "5ThAnd6ThGrade"
+
+Node: 5ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "5ThGrade"
+name: "5ThGrade"
+
+Node: 9ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "9ThGrade"
+name: "9ThGrade"
+
+Node: 11ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "11ThGrade"
+name: "11ThGrade"
+
+Node: ProfessionalSchoolDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "ProfessionalSchoolDegree"
+name: "ProfessionalSchoolDegree"
+
+Node: 3RdGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "3RdGrade"
+name: "3RdGrade"
+
+Node: 1StGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "1StGrade"
+name: "1StGrade"
+
+Node: 7ThAnd8ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "7ThAnd8ThGrade"
+name: "7ThAnd8ThGrade"
+
+Node: Kindergarten
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "Kindergarten"
+name: "Kindergarten"
+
+Node: 8ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "8ThGrade"
+name: "8ThGrade"
+
+Node: NoSchoolingCompleted
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "NoSchoolingCompleted"
+name: "NoSchoolingCompleted"
+
+Node: NurserySchool
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "NurserySchool"
+name: "NurserySchool"
+
+Node: 9ThTo12ThGradeNoDiploma
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "9ThTo12ThGradeNoDiploma"
+name: "9ThTo12ThGradeNoDiploma"
+
+Node: NurseryTo4ThGrade
+typeOf: dcs:USC_EducationalAttainmentEnum
+dcid: "NurseryTo4ThGrade"
+name: "NurseryTo4ThGrade"
+
+Node: USC_HealthInsuranceEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_HealthInsuranceEnum"
+name: "USC_HealthInsuranceEnum"
+
+Node: NoPrivateHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+dcid: "NoPrivateHealthInsurance"
+name: "NoPrivateHealthInsurance"
+
+Node: WithHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+dcid: "WithHealthInsurance"
+name: "WithHealthInsurance"
+
+Node: NoPublicHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+dcid: "NoPublicHealthInsurance"
+name: "NoPublicHealthInsurance"
+
+Node: WithPublicHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+dcid: "WithPublicHealthInsurance"
+name: "WithPublicHealthInsurance"
+
+Node: MedicaidOrCHIP
+typeOf: dcs:USC_HealthInsuranceEnum
+dcid: "MedicaidOrCHIP"
+name: "MedicaidOrCHIP"
+
+Node: OtherHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+dcid: "OtherHealthInsurance"
+name: "OtherHealthInsurance"
+description: "Other Health Insurance is defined as having Medicare, military-related health care, or any other type of health insurance."
+
+Node: WithPrivateHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+dcid: "WithPrivateHealthInsurance"
+name: "WithPrivateHealthInsurance"
+
+Node: NoHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+dcid: "NoHealthInsurance"
+name: "NoHealthInsurance"
+
+Node: dcid:WithEmployerBasedHealthInsuranceOnly
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithEmployerBasedHealthInsuranceOnly"
+
+Node: dcid:WithTricareMilitaryHealthCoverageOnly
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithTricareMilitaryHealthCoverageOnly"
+
+Node: dcid:WithVAHealthCareOnly
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithVAHealthCareOnly"
+
+Node: dcid:WithMedicaidOrMeansTestedPublicCoverageOnly
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithMedicaidOrMeansTestedPublicCoverageOnly"
+
+Node: dcid:WithTwoOrMoreTypesOfHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithTwoOrMoreTypesOfHealthInsurance"
+
+Node: dcid:WithDirectPurchaseHealthInsuranceOnly
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithDirectPurchaseHealthInsuranceOnly"
+
+Node: dcid:WithMedicareCoverageOnly
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithMedicareCoverageOnly"
+
+Node: dcid:WithPublicCoverage
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithPublicCoverage"
+
+Node: dcid:WithOneTypeOfHealthInsurance
+typeOf: dcs:USC_HealthInsuranceEnum
+name: "WithOneTypeOfHealthInsurance"
+
+Node: USC_IncomeStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_IncomeStatusEnum"
+name: "USC_IncomeStatusEnum"
+
+Node: WithIncome
+typeOf: dcs:USC_IncomeStatusEnum
+dcid: "WithIncome"
+name: "WithIncome"
+
+Node: WithEarnings
+typeOf: dcs:USC_IncomeStatusEnum
+dcid: "WithEarnings"
+name: "WithEarnings"
+
+Node: NoIncome
+typeOf: dcs:USC_IncomeStatusEnum
+dcid: "NoIncome"
+name: "NoIncome"
+
+Node: USC_InstitutionalizationEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_InstitutionalizationEnum"
+name: "USC_InstitutionalizationEnum"
+
+Node: USC_NonInstitutionalized
+typeOf: dcs:USC_InstitutionalizationEnum
+dcid: "USC_NonInstitutionalized"
+name: "USC_NonInstitutionalized"
+
+Node: USC_LanguageSpokenAtHomeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_LanguageSpokenAtHomeEnum"
+name: "USC_LanguageSpokenAtHomeEnum"
+
+Node: Telugu
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Telugu"
+name: "Telugu"
+
+Node: OtherLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "OtherLanguages"
+name: "OtherLanguages"
+
+Node: OtherNativeLanguagesOfNorthAmerica
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "OtherNativeLanguagesOfNorthAmerica"
+name: "OtherNativeLanguagesOfNorthAmerica"
+
+Node: Arabic
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Arabic"
+name: "Arabic"
+
+Node: Hebrew
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Hebrew"
+name: "Hebrew"
+
+Node: Portuguese
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Portuguese"
+name: "Portuguese"
+
+Node: ChineseInclMandarinCantonese
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "ChineseInclMandarinCantonese"
+name: "ChineseInclMandarinCantonese"
+
+Node: Japanese
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum, dcs:RaceCodeEnum
+dcid: "Japanese"
+name: "Japanese"
+
+Node: Greek
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Greek"
+name: "Greek"
+
+Node: IlocanoSamoanHawaiianOrOtherAustronesianLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "IlocanoSamoanHawaiianOrOtherAustronesianLanguages"
+name: "IlocanoSamoanHawaiianOrOtherAustronesianLanguages"
+
+Node: Polish
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Polish"
+name: "Polish"
+
+Node: SwahiliOrOtherLanguagesOfCentralEasternAndSouthernAfrica
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "SwahiliOrOtherLanguagesOfCentralEasternAndSouthernAfrica"
+name: "SwahiliOrOtherLanguagesOfCentralEasternAndSouthernAfrica"
+
+Node: Urdu
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Urdu"
+name: "Urdu"
+
+Node: Italian
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Italian"
+name: "Italian"
+
+Node: SerboCroatian
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "SerboCroatian"
+name: "SerboCroatian"
+
+Node: MalayalamKannadaOrOtherDravidianLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "MalayalamKannadaOrOtherDravidianLanguages"
+name: "MalayalamKannadaOrOtherDravidianLanguages"
+
+Node: YorubaTwiIgboOrOtherLanguagesOfWesternAfrica
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "YorubaTwiIgboOrOtherLanguagesOfWesternAfrica"
+name: "YorubaTwiIgboOrOtherLanguagesOfWesternAfrica"
+
+Node: Korean
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum, dcs:RaceCodeEnum
+dcid: "Korean"
+name: "Korean"
+
+Node: TagalogInclFilipino
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "TagalogInclFilipino"
+name: "TagalogInclFilipino"
+
+Node: LanguageOtherThanEnglish
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "LanguageOtherThanEnglish"
+name: "LanguageOtherThanEnglish"
+
+Node: Hmong
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Hmong"
+name: "Hmong"
+
+Node: FrenchInclCajun
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "FrenchInclCajun"
+name: "FrenchInclCajun"
+
+Node: Vietnamese
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum, dcs:RaceCodeEnum
+dcid: "Vietnamese"
+name: "Vietnamese"
+
+Node: AsianAndPacificIslandLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "AsianAndPacificIslandLanguages"
+name: "AsianAndPacificIslandLanguages"
+
+Node: Hindi
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Hindi"
+name: "Hindi"
+
+Node: Bengali
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Bengali"
+name: "Bengali"
+
+Node: UkrainianOrOtherSlavicLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "UkrainianOrOtherSlavicLanguages"
+name: "UkrainianOrOtherSlavicLanguages"
+
+Node: ThaiLaoOrOtherTaiKadaiLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "ThaiLaoOrOtherTaiKadaiLanguages"
+name: "ThaiLaoOrOtherTaiKadaiLanguages"
+
+Node: Khmer
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Khmer"
+name: "Khmer"
+
+Node: Punjabi
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Punjabi"
+name: "Punjabi"
+
+Node: Gujarati
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Gujarati"
+name: "Gujarati"
+
+Node: Navajo
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Navajo"
+name: "Navajo"
+
+Node: OtherLanguagesOfAsia
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "OtherLanguagesOfAsia"
+name: "OtherLanguagesOfAsia"
+
+Node: PersianInclFarsiDari
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "PersianInclFarsiDari"
+name: "PersianInclFarsiDari"
+
+Node: Russian
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Russian"
+name: "Russian"
+
+Node: AmharicSomaliOrOtherAfroAsiaticLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "AmharicSomaliOrOtherAfroAsiaticLanguages"
+name: "AmharicSomaliOrOtherAfroAsiaticLanguages"
+
+Node: Haitian
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Haitian"
+name: "Haitian"
+
+Node: German
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "German"
+name: "German"
+
+Node: Armenian
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Armenian"
+name: "Armenian"
+
+Node: OtherIndoEuropeanLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "OtherIndoEuropeanLanguages"
+name: "OtherIndoEuropeanLanguages"
+
+Node: Tamil
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Tamil"
+name: "Tamil"
+
+Node: OtherAndUnspecifiedLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "OtherAndUnspecifiedLanguages"
+name: "OtherAndUnspecifiedLanguages"
+
+Node: NepaliMarathiOrOtherIndicLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "NepaliMarathiOrOtherIndicLanguages"
+name: "NepaliMarathiOrOtherIndicLanguages"
+
+Node: OnlyEnglish
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "OnlyEnglish"
+name: "OnlyEnglish"
+
+Node: YiddishPennsylvaniaDutchOrOtherWestGermanicLanguages
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "YiddishPennsylvaniaDutchOrOtherWestGermanicLanguages"
+name: "YiddishPennsylvaniaDutchOrOtherWestGermanicLanguages"
+
+Node: Spanish
+typeOf: dcs:USC_LanguageSpokenAtHomeEnum
+dcid: "Spanish"
+name: "Spanish"
+
+Node: USC_LevelOfSchoolEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_LevelOfSchoolEnum"
+name: "USC_LevelOfSchoolEnum"
+
+Node: EnrolledInGraduateOrProfessionalSchool
+typeOf: dcs:USC_LevelOfSchoolEnum
+dcid: "EnrolledInGraduateOrProfessionalSchool"
+name: "EnrolledInGraduateOrProfessionalSchool"
+
+Node: EnrolledInKindergarten
+typeOf: dcs:USC_LevelOfSchoolEnum
+dcid: "EnrolledInKindergarten"
+name: "EnrolledInKindergarten"
+
+Node: EnrolledInGrade9ToGrade12
+typeOf: dcs:USC_LevelOfSchoolEnum
+dcid: "EnrolledInGrade9ToGrade12"
+name: "EnrolledInGrade9ToGrade12"
+
+Node: EnrolledInCollegeUndergraduateYears
+typeOf: dcs:USC_LevelOfSchoolEnum
+dcid: "EnrolledInCollegeUndergraduateYears"
+name: "EnrolledInCollegeUndergraduateYears"
+
+Node: EnrolledInGrade5ToGrade8
+typeOf: dcs:USC_LevelOfSchoolEnum
+dcid: "EnrolledInGrade5ToGrade8"
+name: "EnrolledInGrade5ToGrade8"
+
+Node: GraduateOrProfessionalSchool
+typeOf: dcs:USC_LevelOfSchoolEnum
+dcid: "GraduateOrProfessionalSchool"
+name: "GraduateOrProfessionalSchool"
+
+Node: EnrolledInNurserySchoolPreschool
+typeOf: dcs:USC_LevelOfSchoolEnum
+dcid: "EnrolledInNurserySchoolPreschool"
+name: "EnrolledInNurserySchoolPreschool"
+
+Node: EnrolledInGrade1ToGrade4
+typeOf: dcs:USC_LevelOfSchoolEnum
+dcid: "EnrolledInGrade1ToGrade4"
+name: "EnrolledInGrade1ToGrade4"
+
+Node: USC_MaritalStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_MaritalStatusEnum"
+name: "USC_MaritalStatusEnum"
+
+Node: Separated
+typeOf: dcs:USC_MaritalStatusEnum
+dcid: "Separated"
+name: "Separated"
+
+Node: NeverMarried
+typeOf: dcs:USC_MaritalStatusEnum
+dcid: "NeverMarried"
+name: "NeverMarried"
+
+Node: Widowed
+typeOf: dcs:USC_MaritalStatusEnum
+dcid: "Widowed"
+name: "Widowed"
+
+Node: Divorced
+typeOf: dcs:USC_MaritalStatusEnum
+dcid: "Divorced"
+name: "Divorced"
+
+Node: NowMarried
+typeOf: dcs:USC_MaritalStatusEnum
+dcid: "NowMarried"
+name: "NowMarried"
+
+Node: MarriedAndNotSeparated
+typeOf: dcs:USC_MaritalStatusEnum
+dcid: "MarriedAndNotSeparated"
+name: "MarriedAndNotSeparated"
+
+Node: USC_NativityEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_NativityEnum"
+name: "USC_NativityEnum"
+
+Node: USC_ForeignBorn
+typeOf: dcs:USC_NativityEnum
+dcid: "USC_ForeignBorn"
+name: "USC_ForeignBorn"
+
+Node: USC_Native
+typeOf: dcs:USC_NativityEnum
+dcid: "USC_Native"
+name: "USC_Native"
+
+Node: USC_OccupancyStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_OccupancyStatusEnum"
+name: "USC_OccupancyStatusEnum"
+
+Node: OccupiedHousingUnit
+typeOf: dcs:USC_OccupancyStatusEnum
+dcid: "OccupiedHousingUnit"
+name: "OccupiedHousingUnit"
+
+Node: VacantHousingUnit
+typeOf: dcs:USC_OccupancyStatusEnum
+dcid: "VacantHousingUnit"
+name: "VacantHousingUnit"
+
+Node: USC_OccupancyTenureEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_OccupancyTenureEnum"
+name: "USC_OccupancyTenureEnum"
+
+Node: RenterOccupied
+typeOf: dcs:USC_OccupancyTenureEnum
+dcid: "RenterOccupied"
+name: "RenterOccupied"
+
+Node: OwnerOccupied
+typeOf: dcs:USC_OccupancyTenureEnum
+dcid: "OwnerOccupied"
+name: "OwnerOccupied"
+
+Node: USC_PlaceOfBirthEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_PlaceOfBirthEnum"
+name: "USC_PlaceOfBirthEnum"
+
+Node: BornInStateOfResidence
+typeOf: dcs:USC_PlaceOfBirthEnum
+dcid: "BornInStateOfResidence"
+name: "BornInStateOfResidence"
+
+Node: NativeBornOutsideTheUnitedStates
+typeOf: dcs:USC_PlaceOfBirthEnum
+dcid: "NativeBornOutsideTheUnitedStates"
+name: "NativeBornOutsideTheUnitedStates"
+
+Node: BornInOtherStateInTheUnitedStates
+typeOf: dcs:USC_PlaceOfBirthEnum
+dcid: "BornInOtherStateInTheUnitedStates"
+name: "BornInOtherStateInTheUnitedStates"
+
+Node: ForeignBorn
+typeOf: dcs:USC_PlaceOfBirthEnum
+dcid: "ForeignBorn"
+name: "ForeignBorn"
+
+Node: USC_PovertyStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_PovertyStatusEnum"
+name: "USC_PovertyStatusEnum"
+
+Node: AbovePovertyLevelInThePast12Months
+typeOf: dcs:USC_PovertyStatusEnum
+dcid: "AbovePovertyLevelInThePast12Months"
+name: "AbovePovertyLevelInThePast12Months"
+
+Node: BelowPovertyLevelInThePast12Months
+typeOf: dcs:USC_PovertyStatusEnum
+dcid: "BelowPovertyLevelInThePast12Months"
+name: "BelowPovertyLevelInThePast12Months"
+
+Node: AbovePovertyLevelButLessThanTwicePovertyLevel
+typeOf: dcs:USC_PovertyStatusEnum
+specializationOf: dcs:AbovePovertyLevelInThePast12Months
+dcid: "AbovePovertyLevelButLessThanTwicePovertyLevel"
+name: "AbovePovertyLevelButLessThanTwicePovertyLevel"
+
+Node: AboveTwicePovertyLevel
+typeOf: dcs:USC_PovertyStatusEnum
+specializationOf: dcs:AbovePovertyLevelInThePast12Months
+dcid: "AboveTwicePovertyLevel"
+name: "AboveTwicePovertyLevel"
+
+
+Node: RaceCodeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "RaceCodeEnum"
+name: "RaceCodeEnum"
+
+Node: WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:RaceCodeEnum
+dcid: "WhiteAloneOrInCombinationWithOneOrMoreOtherRaces"
+name: "WhiteAloneOrInCombinationWithOneOrMoreOtherRaces"
+
+Node: WhiteAlone
+typeOf: dcs:RaceCodeEnum
+dcid: "WhiteAlone"
+name: "WhiteAlone"
+
+Node: BlackOrAfricanAmericanAlone
+typeOf: dcs:RaceCodeEnum
+dcid: "BlackOrAfricanAmericanAlone"
+name: "BlackOrAfricanAmericanAlone"
+
+Node: BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:RaceCodeEnum
+dcid: "BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces"
+name: "BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces"
+
+Node: AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:RaceCodeEnum
+dcid: "AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces"
+name: "AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces"
+
+Node: AsianAlone
+typeOf: dcs:RaceCodeEnum
+dcid: "AsianAlone"
+name: "AsianAlone"
+
+Node: SomeOtherRaceAlone
+typeOf: dcs:RaceCodeEnum
+dcid: "SomeOtherRaceAlone"
+name: "SomeOtherRaceAlone"
+
+Node: WhiteAloneNotHispanicOrLatino
+typeOf: dcs:RaceCodeEnum
+dcid: "WhiteAloneNotHispanicOrLatino"
+name: "WhiteAloneNotHispanicOrLatino"
+
+Node: TwoOrMoreRaces
+typeOf: dcs:RaceCodeEnum
+dcid: "TwoOrMoreRaces"
+name: "TwoOrMoreRaces"
+
+Node: AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:RaceCodeEnum
+dcid: "AmericanIndianOrAlaskaNativeAlone"
+name: "AmericanIndianOrAlaskaNativeAlone"
+
+Node: HispanicOrLatino
+typeOf: dcs:RaceCodeEnum
+dcid: "HispanicOrLatino"
+name: "HispanicOrLatino"
+
+Node: NotHispanicOrLatino
+typeOf: dcs:RaceCodeEnum
+dcid: "NotHispanicOrLatino"
+name: "NotHispanicOrLatino"
+
+Node: AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:RaceCodeEnum
+dcid: "AsianAloneOrInCombinationWithOneOrMoreOtherRaces"
+name: "AsianAloneOrInCombinationWithOneOrMoreOtherRaces"
+
+Node: NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:RaceCodeEnum
+dcid: "NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces"
+name: "NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces"
+
+Node: AmericanIndianAndAlaskaNativeAlone
+typeOf: dcs:RaceCodeEnum
+dcid: "AmericanIndianAndAlaskaNativeAlone"
+name: "AmericanIndianAndAlaskaNativeAlone"
+
+Node: NativeHawaiianAndOtherPacificIslanderAlone
+typeOf: dcs:RaceCodeEnum
+dcid: "NativeHawaiianAndOtherPacificIslanderAlone"
+name: "NativeHawaiianAndOtherPacificIslanderAlone"
+
+Node: NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:RaceCodeEnum
+dcid: "NativeHawaiianOrOtherPacificIslanderAlone"
+name: "NativeHawaiianOrOtherPacificIslanderAlone"
+
+Node: dcid:AsianIndian
+typeOf: dcs:RaceCodeEnum
+name: "AsianIndian"
+
+Node: dcid:Chinese
+typeOf: dcs:RaceCodeEnum
+name: "Chinese"
+
+Node: dcid:Filipino
+typeOf: dcs:RaceCodeEnum
+name: "Filipno"
+
+Node: dcid:GuamanianOrChamorro
+typeOf: dcs:RaceCodeEnum
+name: "GuamanianOrChamorro"
+
+Node: dcid:Samoan
+typeOf: dcs:RaceCodeEnum
+name: "Samoan"
+
+Node: dcid:NativeHawaiian
+typeOf: dcs:RaceCodeEnum
+name: "NativeHawaiian"
+
+Node: dcid:OtherAsian
+typeOf: dcs:RaceCodeEnum
+name: "OtherAsian"
+
+Node: dcid:OtherPacificIslander
+typeOf: dcs:RaceCodeEnum
+name: "OtherPacificIslander"
+
+Node: dcid:USC_RacialMinority
+typeOf: dcs:RaceCodeEnum
+name: "USC_RacialMinority"
+
+Node: dcid:USC_RacialNonMinority
+typeOf: dcs:RaceCodeEnum
+name: "USC_RacialNonMinority"
+
+Node: SomeOtherRaceAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:RaceCodeEnum
+dcid: "SomeOtherRaceAloneOrInCombinationWithOneOrMoreOtherRaces"
+name: "SomeOtherRaceAloneOrInCombinationWithOneOrMoreOtherRaces"
+
+Node: USC_SchoolEnrollmentEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_SchoolEnrollmentEnum"
+name: "USC_SchoolEnrollmentEnum"
+
+Node: NotEnrolledInSchool
+typeOf: dcs:USC_SchoolEnrollmentEnum
+dcid: "NotEnrolledInSchool"
+name: "NotEnrolledInSchool"
+
+Node: EnrolledInPublicSchool
+typeOf: dcs:USC_SchoolEnrollmentEnum
+dcid: "EnrolledInPublicSchool"
+name: "EnrolledInPublicSchool"
+
+Node: EnrolledInSchool
+typeOf: dcs:USC_SchoolEnrollmentEnum
+dcid: "EnrolledInSchool"
+name: "EnrolledInSchool"
+
+Node: EnrolledInPrivateSchool
+typeOf: dcs:USC_SchoolEnrollmentEnum
+dcid: "EnrolledInPrivateSchool"
+name: "EnrolledInPrivateSchool"
+
+Node: USC_SpouseAbsentReasonEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_SpouseAbsentReasonEnum"
+name: "USC_SpouseAbsentReasonEnum"
+
+Node: Other
+typeOf: dcs:USC_SpouseAbsentReasonEnum
+dcid: "Other"
+name: "Other"
+
+Node: Separated
+typeOf: dcs:USC_SpouseAbsentReasonEnum
+dcid: "Separated"
+name: "Separated"
+
+Node: USC_SpousePresentEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_SpousePresentEnum"
+name: "USC_SpousePresentEnum"
+
+Node: MarriedSpousePresent
+typeOf: dcs:USC_SpousePresentEnum
+dcid: "MarriedSpousePresent"
+name: "MarriedSpousePresent"
+
+Node: MarriedSpouseAbsent
+typeOf: dcs:USC_SpousePresentEnum
+dcid: "MarriedSpouseAbsent"
+name: "MarriedSpouseAbsent"
+
+Node: USC_TypeOfSchoolEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_TypeOfSchoolEnum"
+name: "USC_TypeOfSchoolEnum"
+
+Node: PublicSchool
+typeOf: dcs:USC_TypeOfSchoolEnum
+dcid: "PublicSchool"
+name: "PublicSchool"
+
+Node: PrivateSchool
+typeOf: dcs:USC_TypeOfSchoolEnum
+dcid: "PrivateSchool"
+name: "PrivateSchool"
+
+Node: USC_VeteranStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_VeteranStatusEnum"
+name: "USC_VeteranStatusEnum"
+
+Node: Veteran
+typeOf: dcs:USC_VeteranStatusEnum
+dcid: "Veteran"
+name: "Veteran"
+
+Node: Nonveteran
+typeOf: dcs:USC_VeteranStatusEnum
+dcid: "Nonveteran"
+name: "Nonveteran"
+
+Node: USC_WorkExperienceEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_WorkExperienceEnum"
+name: "USC_WorkExperienceEnum"
+
+Node: USC_WorkedFullTime
+typeOf: dcs:USC_WorkExperienceEnum
+dcid: "USC_WorkedFullTime"
+name: "USC_WorkedFullTime"
+
+Node: USC_NotWorkedFullTime
+typeOf: dcs:USC_WorkExperienceEnum
+dcid: "USC_NotWorkedFullTime"
+name: "USC_NotWorkedFullTime"
+
+# Additions from USC Economic Census
+
+Node: dcid:PayrollStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "PayrollStatusEnum"
+
+Node: dcid:WithPayroll
+typeOf: dcs:PayrollStatusEnum
+name: "WithPayroll"
+
+Node: dcid:TaxStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "TaxStatusEnum"
+
+Node: dcid:ExemptFromFederalIncomeTax
+typeOf: dcs:TaxStatusEnum
+name: "ExemptFromFederalIncomeTax"
+
+Node: dcid:SubjectToFederalIncomeTax
+typeOf: dcs:TaxStatusEnum
+name: "SubjectToFederalIncomeTax"
+
+Node: dcid:BusinessOperationTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "BusinessOperationTypeEnum"
+
+Node: dcid:ManufacturerSalesOffice
+typeOf: dcs:BusinessOperationTypeEnum
+name: "ManufacturerSalesOffice"
+description: "Branch and office establishments related to manufacturer sales."
+
+Node: dcid:ECON_MerchantWholesaler
+typeOf: dcs:BusinessOperationTypeEnum
+name: "ECON_MerchantWholesaler"
+description: "Establishments related to merchant wholesale, excluding manufacturer sales branches and offices."
+
+Node: dcid:USC_OwnerGenderEnum
+typeOf: schema:Class
+subClassOf: schema:GenderType
+name: "USC_OwnerGenderEnum"
+
+Node: dcid:USC_EquallyMaleFemaleOwned
+typeOf: dcs:USC_OwnerGenderEnum
+name: "USC_EquallyMaleFemaleOwned"
+
+Node: dcid:USC_WorkStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_WorkStatusEnum"
+
+Node: dcid:USC_ResidenceTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_ResidenceTypeEnum"
+
+Node: dcid:JuvenileFacilities
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "JuvenileFacilities"
+
+Node: dcid:NursingFacilities
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "NursingFacilities"
+
+Node: dcid:GroupQuarters
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "GroupQuarters"
+
+Node: dcid:AdultCorrectionalFacilities
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "AdultCorrectionalFacilities"
+
+Node: dcid:Household
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "Household"
+
+Node: dcid:NoninstitutionalizedGroupQuarters
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "NoninstitutionalizedGroupQuarters"
+
+Node: dcid:InstitutionalizedGroupQuarters
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "InstitutionalizedGroupQuarters"
+
+Node: dcid:CollegeOrUniversityStudentHousing
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "CollegeOrUniversityStudentHousing"
+
+Node: dcid:MilitaryQuartersOrMilitaryShips
+typeOf: dcs:USC_ResidenceTypeEnum
+name: "MilitaryQuartersOrMilitaryShips"
+
+Node: dcid:USC_InternetSubscriptionTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_InternetSubscriptionTypeEnum"
+
+Node: dcid:DialUpInternetOnly
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "DialUpInternetOnly"
+
+Node: dcid:BroadbandInternetSuchAsCableFiberOpticOrDsl
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "BroadbandInternetSuchAsCableFiberOpticOrDsl"
+
+Node: dcid:BroadbandOfAnyType
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "BroadbandOfAnyType"
+
+Node: dcid:BroadbandInternetSuchAsCableFiberOpticOrDslOnly
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "BroadbandInternetSuchAsCableFiberOpticOrDslOnly"
+
+Node: dcid:CellularDataPlan
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "CellularDataPlan"
+
+Node: dcid:CellularDataPlanWithNoOtherTypeOfInternetSubscription
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "CellularDataPlanWithNoOtherTypeOfInternetSubscription"
+
+Node: dcid:OtherServiceWithNoOtherTypeOfInternetSubscription
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "OtherServiceWithNoOtherTypeOfInternetSubscription"
+
+Node: dcid:SatelliteInternetService
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "SatelliteInternetService"
+
+Node: dcid:SatelliteInternetServiceWithNoOtherTypeOfInternetSubscription
+typeOf: dcs:USC_InternetSubscriptionTypeEnum
+name: "SatelliteInternetServiceWithNoOtherTypeOfInternetSubscription"
+
+Node: USC_InternetAccessStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_InternetAccessStatusEnum"
+name: "USC_InternetAccessStatusEnum"
+
+Node: WithInternetSubscription
+typeOf: dcs:USC_InternetAccessStatusEnum
+dcid: "WithInternetSubscription"
+name: "WithInternetSubscription"
+
+Node: dcid:InternetWithoutSubscription
+typeOf: dcs:USC_InternetAccessStatusEnum
+name: "InternetWithoutSubscription"
+
+Node: NoInternetAccess
+typeOf: dcs:USC_InternetAccessStatusEnum
+dcid: "NoInternetAccess"
+name: "NoInternetAccess"
+
+Node: USC_HasComputerEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_HasComputerEnum"
+name: "USC_HasComputerEnum"
+
+Node: USC_DisabilityStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+dcid: "USC_DisabilityStatusEnum"
+name: "USC_DisabilityStatusEnum"
+
+Node: NoDisability
+typeOf: dcs:USC_DisabilityStatusEnum
+dcid: "NoDisability"
+name: "NoDisability"
+
+Node: WithDisability
+typeOf: dcs:USC_DisabilityStatusEnum
+dcid: "WithDisability"
+name: "WithDisability"
+
+Node: dcid:USC_MortgageStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_MortgageStatusEnum"
+
+Node: dcid:WithoutMortgage
+typeOf: dcs:USC_MortgageStatusEnum
+dcid: "WithoutMortgage"
+name: "WithoutMortgage"
+
+Node: dcid:WithMortgage
+typeOf: dcs:USC_DisabilityStatusEnum
+dcid: "WithMortgage"
+name: "WithMortgage"
+
+Node: dcid:USC_PlaceOfWorkEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_PlaceOfWorkEnum"
+
+Node: dcid:OutsideOfHome
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "OutsideOfHome"
+
+Node: dcid:USC_ResidentStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_ResidentStatusEnum"
+
+Node: dcid:DifferentHouse1YearAgo
+typeOf: dcs:USC_ResidentStatusEnum
+name: "DifferentHouse1YearAgo"
+
+Node: dcid:SameHouse1YearAgo
+typeOf: dcs:USC_ResidentStatusEnum
+name: "SameHouse1YearAgo"
+
+Node: dcid:USC_FacilitiesEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_FacilitiesEnum"
+
+Node: dcid:CompletePlumbingFacilities
+typeOf: dcs:USC_FacilitiesEnum
+name: "CompletePlumbingFacilities"
+
+Node: dcid:IncompletePlumbingFacilities
+typeOf: dcs:USC_FacilitiesEnum
+name: "IncompletePlumbingFacilities"
+
+Node: dcid:CompleteKitchenFacilities
+typeOf: dcs:USC_FacilitiesEnum
+name: "CompleteKitchenFacilities"
+
+Node: dcid:IncompleteKitchenFacilities
+typeOf: dcs:USC_FacilitiesEnum
+name: "IncompleteKitchenFacilities"
+
+Node: dcid:USC_PeriodOfMilitaryServiceEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_PeriodOfMilitaryServiceEnum"
+
+Node: dcid:USC_BetweenGulfWarAndVietnamEra
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_BetweenGulfWarAndVietnamEra"
+
+Node: dcid:USC_BetweenKoreanWarAndWorldWar2
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_BetweenKoreanWarAndWorldWar2"
+
+Node: dcid:USC_BetweenVietnamEraAndKoreanWar
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_BetweenVietnamEraAndKoreanWar"
+
+Node: dcid:USC_GulfWarAug1990ToAug2001&USC_VietnamEra
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_GulfWarAug1990ToAug2001&USC_VietnamEra"
+
+Node: dcid:USC_GulfWarAug1990ToAug2001
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_GulfWarAug1990ToAug2001"
+
+Node: dcid:USC_GulfWarAug1990ToAug2001&USC_GulfWarSep2001OrLater&USC_VietnamEra
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_GulfWarAug1990ToAug2001&USC_GulfWarSep2001OrLater&USC_VietnamEra"
+
+Node: dcid:USC_GulfWarAug1990ToAug2001&USC_GulfWarSep2001OrLater
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_GulfWarAug1990ToAug2001&USC_GulfWarSep2001OrLater"
+
+Node: dcid:USC_GulfWarSep2001OrLater
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_GulfWarSep2001OrLater"
+
+Node: dcid:USC_KoreanWar&USC_WorldWar2
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_KoreanWar&USC_WorldWar2"
+
+Node: dcid:USC_KoreanWar
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_KoreanWar"
+
+Node: dcid:USC_BeforeWorldWar2
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_BeforeWorldWar2"
+
+Node: dcid:USC_KoreanWar&USC_VietnamEra&USC_WorldWar2
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_KoreanWar&USC_VietnamEra&USC_WorldWar2"
+
+Node: dcid:USC_KoreanWar&USC_VietnamEra
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_KoreanWar&USC_VietnamEra"
+
+Node: dcid:USC_VietnamEra
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_VietnamEra"
+
+Node: dcid:USC_WorldWar2
+typeOf: dcs:USC_PeriodOfMilitaryServiceEnum
+name: "USC_WorldWar2"
+
+Node: dcid:USC_CommuteModeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_CommuteModeEnum"
+
+Node: dcid:USC_CarTruckOrVanCarpooled
+typeOf: dcs:USC_CommuteModeEnum
+name: "USC_CarTruckOrVanCarpooled"
+
+Node: dcid:USC_CarTruckOrVanDroveAlone
+typeOf: dcs:USC_CommuteModeEnum
+name: "USC_CarTruckOrVanDroveAlone"
+
+Node: dcid:USC_PublicTransportationExcludingTaxicab
+typeOf: dcs:USC_CommuteModeEnum
+name: "USC_PublicTransportationExcludingTaxicab"
+
+Node: dcid:USC_TaxicabMotorcycleBicycleOrOtherMeans
+typeOf: dcs:USC_CommuteModeEnum
+name: "USC_TaxicabMotorcycleBicycleOrOtherMeans"
+
+Node: dcid:USC_Walked
+typeOf: dcs:USC_CommuteModeEnum
+name: "USC_Walked"
+
+Node: dcid:USC_WorkedAtHome
+typeOf: dcs:USC_CommuteModeEnum
+name: "USC_WorkedAtHome"
+
+Node: dcid:USC_HousingStructureTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "USC_HousingStructureTypeEnum"
+
+Node: dcid:SingleUnit
+typeOf: dcs:USC_HousingStructureTypeEnum
+name: "SingleUnit"
+
+Node: dcid:TwoOrMoreUnits
+typeOf: dcs:USC_HousingStructureTypeEnum
+name: "TwoOrMoreUnits"
+
+Node: dcid:MobileHomesAndAllOtherTypesOfUnits
+typeOf: dcs:USC_HousingStructureTypeEnum
+name: "MobileHomesAndAllOtherTypesOfUnits"
