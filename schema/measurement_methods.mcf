@@ -1,0 +1,18 @@
+# File started on Jun 17, 2020 to start consolidating measurement method nodes
+# in one place.
+#
+# Reminder:
+# measurementMethod should describe how the data was MEASURED.
+# measurementQualifier should describe how the data was POST-PROCESSED.
+
+Node: dcid:MeasurementMethodEnum
+name: "MeasurementMethodEnum"
+subClassOf: schema:Enumeration
+description: "Measurement methods used by various observations in Data Commons."
+typeOf: schema:Class
+
+Node: dcid:StatisticSourceEnum
+name: "StatisticSourceEnum"
+subClassOf: schema:Enumeration
+description: "Measurement methods used solely for distinguishing observations that come from different sources about the same statistic."
+typeOf: schema:Class
