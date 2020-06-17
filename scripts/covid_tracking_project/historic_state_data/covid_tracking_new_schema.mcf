@@ -1,0 +1,45 @@
+Node: dcid:CovidTrackingProject
+name: "CovidTrackingProject"
+typeOf: dcs:MeasurementMethodEnum
+
+Node: dcid:MedicalTest
+name: "MedicalTest"
+typeOf: schema:Class
+subClassOf: dcs:MedicalProcedure
+
+# An enumeration for medical test results.
+
+Node: dcid:MedicalTestResultTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "MedicalTestResultTypeEnum"
+
+Node: dcid:Positive
+typeOf: dcs:MedicalTestResultTypeEnum
+name: "Positive"
+
+Node: dcid:Negative
+typeOf: dcs:MedicalTestResultTypeEnum
+name: "Negative"
+
+Node: dcid:Pending
+typeOf: dcs:MedicalTestResultTypeEnum
+name: "Pending"
+
+# PatientDeceased is already in the enumeration, no need to add.
+
+Node: dcid:PatientRecovered
+name: "PatientRecovered"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientHospitalized
+name: "PatientHospitalized"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientInICU
+name: "PatientInICU"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientOnVentilator
+name: "PatientOnVentilator"
+typeOf: dcs:MedicalStatusEnum
