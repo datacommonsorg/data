@@ -1326,3 +1326,31 @@ name: ConfirmedCase
 Node: dcid:ConfirmedOrProbableCase
 typeOf: dcs:MedicalStatusEnum
 name: ConfirmedOrProbableCase
+
+Node: dcid:PatientRecovered
+name: "PatientRecovered"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientHospitalized
+name: "PatientHospitalized"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientInICU
+name: "PatientInICU"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientOnVentilator
+name: "PatientOnVentilator"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:Positive
+typeOf: dcs:MedicalTestResultEnum
+name: "Positive"
+
+Node: dcid:Negative
+typeOf: dcs:MedicalTestResultEnum
+name: "Negative"
+
+Node: dcid:Pending
+typeOf: dcs:MedicalTestResultEnum
+name: "Pending"
