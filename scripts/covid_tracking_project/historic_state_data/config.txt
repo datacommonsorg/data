@@ -1,7 +1,7 @@
 import: {
     import_name: "COVIDTracking_States"
     provenance_url: "https://www.covidtracking.com"
-    provenance_description: "COVID-19 related data in US states level."
+    provenance_description: "The data is from COVID Tracking Project. This project contains COVID-19 related data in US states level."
     # Path to the resolved MCF.
     mcf_url: "gs://resolved_mcf/external_tables/covid_tracking_fix/nodes.mcf-00000-of-00001"
     # First date of imported data.
