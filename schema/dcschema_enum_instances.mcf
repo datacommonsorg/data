@@ -1345,16 +1345,16 @@ typeOf: dcs:MedicalStatusEnum
 
 Node: dcid:CovidTrackingProject
 name: "CovidTrackingProject"
-typeOf: dcs:MeasurementMethodEnum
+typeOf: dcs:StatisticSourceEnum
 
 Node: dcid:Positive
-typeOf: dcs:MedicalTestResultTypeEnum
+typeOf: dcs:MedicalTestResultEnum
 name: "Positive"
 
 Node: dcid:Negative
-typeOf: dcs:MedicalTestResultTypeEnum
+typeOf: dcs:MedicalTestResultEnum
 name: "Negative"
 
 Node: dcid:Pending
-typeOf: dcs:MedicalTestResultTypeEnum
+typeOf: dcs:MedicalTestResultEnum
 name: "Pending"
