@@ -194,3 +194,4 @@ url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php
 Node: dcid:MagnitudeUnknown
 typeOf: dcs:EarthquakeMagnitudeTypeEnum
 name: "Unknown"
+

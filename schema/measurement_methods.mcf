@@ -19,3 +19,4 @@ typeOf: schema:Class
 Node: dcid:CovidTrackingProject
 name: "CovidTrackingProject"
 typeOf: dcs:StatisticSourceEnum
+

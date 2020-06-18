@@ -15226,3 +15226,4 @@ dcid: dcs:BLSSeasonallyUnadjusted
 typeOf: dcs:SeasonalAdjustmentEnum
 name: "BLSSeasonallyUnadjusted"
 description: "Indicates raw time series data without adjustments to eliminate the effect of intrayear variations"
+

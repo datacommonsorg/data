@@ -388,3 +388,4 @@ Node: dcid:MedicalTestResultEnum
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 name: "MedicalTestResultEnum"
+

@@ -214,3 +214,4 @@ typeOf: schema:Property
 rangeIncludes: dcs:PharmacologicClassTypeEnum
 domainIncludes: dcs:PharmacologicClass
 description: "The class type associated with the active moiety for a pharmacologic class."
+
