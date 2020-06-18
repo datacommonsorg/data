@@ -18,11 +18,12 @@ def translate():
     "Common Code numeric format", "Numeric Common Code with 110 provinces (from 2010 to 2016)", \
     "Numeric Common Code with 107 provinces (from 2006 to 2009)", "Numerical Common Code with 103 provinces (from 1995 to 2005)", \
     "Cadastral code of the municipality", "Legal population 2011 (09/10/2011)", "NUTS1", "NUTS2(3)", "NUTS3"]
-  data.to_csv(FILE_PATH_en, encoding = 'utf-8')
+  data.to_csv(FILE_PATH_en, encoding = 'utf-8', index = False)
   
 def preprocess():
-  pass
+  data = pd.read_csv(FILE_PATH_en)
+  print(data.head(5))
   
   
 if __name__ == "__main__":
-  translate()
+  preprocess()
