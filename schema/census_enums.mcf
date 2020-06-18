@@ -1514,3 +1514,4 @@ name: "TwoOrMoreUnits"
 Node: dcid:MobileHomesAndAllOtherTypesOfUnits
 typeOf: dcs:USC_HousingStructureTypeEnum
 name: "MobileHomesAndAllOtherTypesOfUnits"
+

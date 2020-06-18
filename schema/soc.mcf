@@ -7321,3 +7321,4 @@ typeOf: dcs:SOCv2018Enum
 name: "Military Specific Occupations"
 description: "SOC 2018 includes 6 high-level aggregations of SOC codes. highLevelAggregation-6 includes 2018 SOC major groups 55: Military Specific Occupations."
 descriptionUrl: "https://www.bls.gov/soc/2018/soc_2018_user_guide.pdf"
+

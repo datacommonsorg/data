@@ -1354,3 +1354,4 @@ name: "Negative"
 Node: dcid:Pending
 typeOf: dcs:MedicalTestResultEnum
 name: "Pending"
+

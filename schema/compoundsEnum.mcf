@@ -108,3 +108,4 @@ Node: dcid:PharmacologicClassTypePE
 name: "PE"
 description: "Physiologic Effect"
 typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+

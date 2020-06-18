@@ -194,3 +194,4 @@ typeOf: schema:Property
 rangeIncludes: dcs:Number
 description: "Particulate matter (PM) - is made up of particles (tiny pieces) of solids or liquids that are in the air, like dust, dirt, soot, smoke, and drops of liquid. Fine (smaller) particles, called PM2.5, are more dangerous because they can get into the deep parts of a person's lungs - or even into their blood."
 domainIncludes: dcs:Place
+

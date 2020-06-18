@@ -359,3 +359,4 @@ name: "vehiclesAvailable"
 description: "Number of vehicles available at a place."
 domainIncludes: dcs:Household
 rangeIncludes: schema:Quantity, dcs:QuantityRange
+
