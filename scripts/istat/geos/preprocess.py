@@ -37,10 +37,10 @@ def preprocess():
   region_data = data[["Region Code", "NUTS2(3)", "Region name"]].rename(columns= {"NUTS2(3)":"NUTS2"}).drop_duplicates()
   province_data.to_csv("ISTAT_ProvinceCode_NUTS3.csv", index = False)
   region_data.to_csv("ISTAT_RegionCode_NUTS2.csv", index = False)
-  
   #find the regions/provinces that does not make one-to-one map from ISTAT to NUTS
   except_region = find_duplicates(region_data)
   except_province = find_duplicates(province_data)
+  pd.concat([except_province,except_region], axis = 1, ignore_index = False).to_csv("ISTAT_exceptions.csv", index = False)
   
 if __name__ == "__main__":
   preprocess()
