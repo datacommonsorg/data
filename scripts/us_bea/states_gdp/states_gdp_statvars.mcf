@@ -1,5 +1,6 @@
 Node: dcid:US_State_Quarterly_GDP
 typeOf: dcs:StatisticalVariable
 populationType: dcs:GDPRate
+measuredProperty: dcs:gdp
 measurementQualifier: dcs:inflationAdjusted
 unit: dcs:MillionsOfChained2012Dollars
