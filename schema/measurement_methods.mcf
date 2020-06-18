@@ -1,5 +1,4 @@
-# File started on Jun 17, 2020 to start consolidating measurement method nodes
-# in one place.
+# File to consolidate all measurementMethod values.
 #
 # Reminder:
 # measurementMethod should describe how the data was MEASURED.
@@ -13,6 +12,6 @@ typeOf: schema:Class
 
 Node: dcid:StatisticSourceEnum
 name: "StatisticSourceEnum"
-subClassOf: schema:Enumeration
+subClassOf: dcs:MeasurementMethodEnum
 description: "Measurement methods used solely for distinguishing observations that come from different sources about the same statistic."
 typeOf: schema:Class
