@@ -1,0 +1,770 @@
+## TYPES
+Node: dcid:OceanicBasin
+typeOf: schema:Class
+name: "OceanicBasin"
+subClassOf: schema:Landform
+description: "In hydrology, an oceanic basin may be anywhere on Earth that is covered by seawater but geologically ocean basins are large geologic basins that are below sea level."
+descriptionUrl: "https://en.wikipedia.org/wiki/Oceanic_basin"
+
+Node: dcid:MeteorologicalEvent
+typeOf: schema:Class
+name: "MeteorologicalEvent"
+subClassOf: dcs:Event
+description: "Meteorological or atmospheric events include lightning and seasons; violent meteorological events are commonly known as storms."
+
+Node: dcid:CycloneEvent
+typeOf: schema:Class
+name: "CycloneEvent"
+subClassOf: dcs:MeteorologicalEvent
+description: "A cyclone is a type of storm with a large scale air mass that rotates around a strong center of low atmospheric pressure."
+
+Node: dcid:WildlandFireEvent
+typeOf: schema:Class
+name: "WildlandFireEvent"
+subClassOf: dcs:Event
+description: "Wildland fire is any non-structure fire that occurs in an area in which development is essentially non-existent, except for roads, railroads, power lines, and similar transportation facilities."
+descriptionUrl: "https://www.nifc.gov/prevEdu/comm_guide/ch2.html"
+
+Node: dcid:StormEpisode
+typeOf: schema:Class
+name: "StormEpisode"
+subClassOf: dcs:MeteorologicalEvent
+description: "A continuous disturbance of the atmosphere marked by wind and usually by rain, snow, hail, sleet, or thunder and lightning."
+
+Node: dcid:StormEvent
+typeOf: schema:Class
+name: "StormEvent"
+subClassOf: dcs:StormEpisode
+description: "A singular event of rain, snow, hail, sleet, etc. within a storm episode."
+
+## STORM EVENT TYPES
+Node: dcid:ColdWindChillEvent
+typeOf: schema:Class
+name: "ColdWindChillEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:SleetEvent
+typeOf: schema:Class
+name: "SleetEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:VolcanicAshfallEvent
+typeOf: schema:Class
+name: "VolcanicAshfallEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:ExtremeColdWindChillEvent
+typeOf: schema:Class
+name: "ExtremeColdWindChillEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineHurricaneTyphoonEvent
+typeOf: schema:Class
+name: "MarineHurricaneTyphoonEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineThunderstormWindEvent
+typeOf: schema:Class
+name: "MarineThunderstormWindEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:IceStormEvent
+typeOf: schema:Class
+name: "IceStormEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:BlizzardEvent
+typeOf: schema:Class
+name: "BlizzardEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineLightningEvent
+typeOf: schema:Class
+name: "MarineLightningEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:FrostFreezeEvent
+typeOf: schema:Class
+name: "FrostFreezeEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:TropicalDepressionEvent
+typeOf: schema:Class
+name: "TropicalDepressionEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:HighSurfEvent
+typeOf: schema:Class
+name: "HighSurfEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineStrongWindEvent
+typeOf: schema:Class
+name: "MarineStrongWindEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:WaterspoutEvent
+typeOf: schema:Class
+name: "WaterspoutEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:DustStormEvent
+typeOf: schema:Class
+name: "DustStormEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:DroughtEvent
+typeOf: schema:Class
+name: "DroughtEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:AvalancheEvent
+typeOf: schema:Class
+name: "AvalancheEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:DenseSmokeEvent
+typeOf: schema:Class
+name: "DenseSmokeEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:DebrisFlowEvent
+typeOf: schema:Class
+name: "DebrisFlowEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineHailEvent
+typeOf: schema:Class
+name: "MarineHailEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:FreezingFogEvent
+typeOf: schema:Class
+name: "FreezingFogEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:DustDevilEvent
+typeOf: schema:Class
+name: "DustDevilEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:RipCurrentEvent
+typeOf: schema:Class
+name: "RipCurrentEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:FunnelCloudEvent
+typeOf: schema:Class
+name: "FunnelCloudEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineTropicalDepressionEvent
+typeOf: schema:Class
+name: "MarineTropicalDepressionEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:AstronomicalLowTideEvent
+typeOf: schema:Class
+name: "AstronomicalLowTideEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:HurricaneTyphoonEvent
+typeOf: schema:Class
+name: "HurricaneTyphoonEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:StrongWindEvent
+typeOf: schema:Class
+name: "StrongWindEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:LandslideEvent
+typeOf: schema:Class
+name: "LandslideEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:HurricaneEvent
+typeOf: schema:Class
+name: "HurricaneEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:LakeEffectSnowEvent
+typeOf: schema:Class
+name: "LakeEffectSnowEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:HeatEvent
+typeOf: schema:Class
+name: "HeatEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:SneakerwaveEvent
+typeOf: schema:Class
+name: "SneakerwaveEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:HighWindEvent
+typeOf: schema:Class
+name: "HighWindEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:FlashFloodEvent
+typeOf: schema:Class
+name: "FlashFloodEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:TsunamiEvent
+typeOf: schema:Class
+name: "TsunamiEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineDenseFogEvent
+typeOf: schema:Class
+name: "MarineDenseFogEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:StormSurgeTideEvent
+typeOf: schema:Class
+name: "StormSurgeTideEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:LakeshoreFloodEvent
+typeOf: schema:Class
+name: "LakeshoreFloodEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:ThunderstormWindEvent
+typeOf: schema:Class
+name: "ThunderstormWindEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:LightningEvent
+typeOf: schema:Class
+name: "LightningEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:ExcessiveHeatEvent
+typeOf: schema:Class
+name: "ExcessiveHeatEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:DenseFogEvent
+typeOf: schema:Class
+name: "DenseFogEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:HeavyRainEvent
+typeOf: schema:Class
+name: "HeavyRainEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:WildfireEvent
+typeOf: schema:Class
+name: "WildfireEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineHighWindEvent
+typeOf: schema:Class
+name: "MarineHighWindEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:CoastalFloodEvent
+typeOf: schema:Class
+name: "CoastalFloodEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:WinterStormEvent
+typeOf: schema:Class
+name: "WinterStormEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:TropicalStormEvent
+typeOf: schema:Class
+name: "TropicalStormEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:FloodEvent
+typeOf: schema:Class
+name: "FloodEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:MarineTropicalStormEvent
+typeOf: schema:Class
+name: "MarineTropicalStormEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:TornadoEvent
+typeOf: schema:Class
+name: "TornadoEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:HailEvent
+typeOf: schema:Class
+name: "HailEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:WinterWeatherEvent
+typeOf: schema:Class
+name: "WinterWeatherEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:SeicheEvent
+typeOf: schema:Class
+name: "SeicheEvent"
+subClassOf: dcs:StormEvent
+
+Node: dcid:HeavySnowEvent
+typeOf: schema:Class
+name: "HeavySnowEvent"
+subClassOf: dcs:StormEvent
+
+## CYCLONE CLASSIFICATION ENUMS
+Node: dcid:CycloneTypeEnum
+typeOf: schema:Class
+name: "CycloneTypeEnum"
+subClassOf: schema:Enumeration
+description: "Different classifications of cyclones."
+
+Node: dcid:TropicalCyclone
+typeOf: dcs:CycloneTypeEnum
+name: "TropicalCyclone"
+description: "A warm-core non-frontal synoptic-scale cyclone, originating over tropical or subtropical waters, with organized deep convection and a closed surface wind circulation about a well-defined low-pressure center. Once formed, a tropical cyclone is maintained by the extraction of heat energy from the ocean at high temperature and heat export at the low temperatures of the upper troposphere."
+descriptionUrl: "https://www.nhc.noaa.gov/aboutgloss.shtml"
+
+Node: dcid:TropicalDepression
+typeOf: dcs:CycloneTypeEnum
+name: "TropicalDepression"
+description: "A tropical cyclone of tropical depression intensity (< 34 knots)."
+descriptionUrl: "https://www.aoml.noaa.gov/hrd/hurdat/hurdat2-format.pdf"
+
+Node: dcid:TropicalStorm
+typeOf: dcs:CycloneTypeEnum
+name: "TropicalStorm"
+description: "A tropical cyclone of tropical storm intensity (34-63 knots)."
+descriptionUrl: "https://www.aoml.noaa.gov/hrd/hurdat/hurdat2-format.pdf"
+
+Node: dcid:Hurricane
+typeOf: dcs:CycloneTypeEnum
+name: "Hurricane"
+location: dcid:AtlanticOcean, dcid:NortheasternPacificOcean
+description: "A severe (wind speeds over 64 knots) tropical cyclone. The Atlantic Ocean and northeastern Pacific Ocean equivalent of Typhoon."
+descriptionUrl: "https://www.aoml.noaa.gov/hrd/hurdat/hurdat2-format.pdf"
+
+Node: dcid:ExtratropicalCyclone
+typeOf: dcs:CycloneTypeEnum
+name: "ExtratropicalCyclone"
+description: "A cyclone of any intensity for which the primary energy source is baroclinic, that is, results from the temperature contrast between warm and cold air masses."
+descriptionUrl: "https://www.nhc.noaa.gov/aboutgloss.shtml"
+
+Node: dcid:SubtropicalCyclone
+typeOf: dcs:CycloneTypeEnum
+name: "SubtropicalCyclone"
+description: "A non-frontal low-pressure system that has characteristics of both tropical and extratropical cyclones."
+descriptionUrl: "https://www.nhc.noaa.gov/aboutgloss.shtml"
+
+Node: dcid:SubtropicalDepression
+typeOf: dcs:CycloneTypeEnum
+name: "SubtropicalDepression"
+description: "A subtropical cyclone of subtropical depression intensity (< 34 knots)."
+descriptionUrl: "https://www.aoml.noaa.gov/hrd/hurdat/hurdat2-format.pdf"
+
+Node: dcid:SubtropicalStorm
+typeOf: dcs:CycloneTypeEnum
+name: "SubtropicalStorm"
+description: "A subtropical cyclone of subtropical storm intensity (> 34 knots)."
+descriptionUrl: "https://www.aoml.noaa.gov/hrd/hurdat/hurdat2-format.pdf"
+
+Node: dcid:RemnantLow
+typeOf: dcs:CycloneTypeEnum
+name: "RemnantLow"
+description: "A low-pressure system that is neither a tropical cyclone, a subtropical cyclone, nor an extratropical cyclone (of any intensity)."
+descriptionUrl: "https://www.aoml.noaa.gov/hrd/hurdat/hurdat2-format.pdf"
+
+Node: dcid:TropicalWave
+typeOf: dcs:CycloneTypeEnum
+name: "TropicalWave"
+description: "A trough or cyclonic curvature maximum in the trade-wind easterlies (of any intensity). The wave may reach maximum amplitude in the lower middle troposphere."
+descriptionUrl: "https://www.aoml.noaa.gov/hrd/hurdat/hurdat2-format.pdf"
+
+Node: dcid:TropicalDisturbance
+typeOf: dcs:CycloneTypeEnum
+name: "TropicalDisturbance"
+description: "A discrete tropical weather system of apparently organized convection -- generally 100 to 300 nmi in diameter -- originating in the tropics or subtropics, having a nonfrontal migratory character, and maintaining its identity for 24 hours or more. It may or may not be associated with a detectable perturbation of the wind field."
+descriptionUrl: "https://www.nhc.noaa.gov/aboutgloss.shtml"
+
+Node: dcid:Typhoon
+typeOf: dcs:CycloneTypeEnum
+name: "Typhoon"
+description: "A severe (wind speeds over 64 knots) tropical cyclone. The northwest Pacific Ocean equivalent of Hurricane."
+
+## TORNADO INTENSITY ENUMS
+Node: dcid:TornadoIntensityEnum
+name: "TornadoIntensityEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Classifications of tornado intensity."
+
+Node: dcid:TornadoIntensityEF0
+name: "TornadoIntensityEF0"
+typeOf: dcs:TornadoIntensityEnum
+description: "Enhanced Fujita Scale classification EF0 – Light Damage (40 – 72 mph)"
+descriptionUrl: "http://www1.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Export-Format.docx"
+
+Node: dcid:TornadoIntensityEF1
+name: "TornadoIntensityEF1"
+typeOf: dcs:TornadoIntensityEnum
+description: "Enhanced Fujita Scale classification EF1 – Moderate Damage (73 – 112 mph)"
+descriptionUrl: "http://www1.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Export-Format.docx"
+
+Node: dcid:TornadoIntensityEF2
+name: "TornadoIntensityEF2"
+typeOf: dcs:TornadoIntensityEnum
+description: "Enhanced Fujita Scale classification EF2 – Significant damage (113 – 157 mph)"
+descriptionUrl: "http://www1.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Export-Format.docx"
+
+Node: dcid:TornadoIntensityEF3
+name: "TornadoIntensityEF3"
+typeOf: dcs:TornadoIntensityEnum
+description: "Enhanced Fujita Scale classification EF3 – Severe Damage (158 – 206 mph)"
+descriptionUrl: "http://www1.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Export-Format.docx"
+
+Node: dcid:TornadoIntensityEF4
+name: "TornadoIntensityEF4"
+typeOf: dcs:TornadoIntensityEnum
+description: "Enhanced Fujita Scale classification EF4 – Devastating Damage (207 – 260 mph)"
+descriptionUrl: "http://www1.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Export-Format.docx"
+
+Node: dcid:TornadoIntensityEF5
+name: "TornadoIntensityEF5"
+typeOf: dcs:TornadoIntensityEnum
+description: "Enhanced Fujita Scale classification EF5 – Incredible Damage (261 – 318 mph)"
+descriptionUrl: "http://www1.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Export-Format.docx"
+
+## OTHER ENUMS
+Node: dcid:WindSpeedMagnitudeTypeEnum
+name: "WindSpeedMagnitudeTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Types of wind speed magnitude measurements."
+
+Node: dcid:WindEstimatedGust
+name: "WindEstimatedGust"
+typeOf: dcs:WindSpeedMagnitudeTypeEnum
+
+Node: dcid:EstimatedSustainedWind
+name: "EstimatedSustainedWind"
+typeOf: dcs:WindSpeedMagnitudeTypeEnum
+
+Node: dcid:MeasuredSustainedWind
+name: "MeasuredSustainedWind"
+typeOf: dcs:WindSpeedMagnitudeTypeEnum
+
+Node: dcid:WindMeasuredGust
+name: "WindMeasuredGust"
+typeOf: dcs:WindSpeedMagnitudeTypeEnum
+
+Node: dcid:PrecipitationTypeEnum
+name: "PrecipitationTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Types of precipitation. E.g. hail, snow, rain."
+
+Node: dcid:Hail
+name: "Hail"
+typeOf: dcs:PrecipitationTypeEnum
+
+Node: dcid:FloodCauseEnum
+name: "FloodCauseEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Possible flood causes."
+
+Node: dcid:HeavyRain
+name: "HeavyRain"
+typeOf: dcs:FloodCauseEnum
+
+Node: dcid:HeavyRainOrSnowMelt
+name: "HeavyRainOrSnowMelt"
+typeOf: dcs:FloodCauseEnum
+
+Node: dcid:HeavyRainOrTropicalSystem
+name: "HeavyRainOrTropicalSystem"
+typeOf: dcs:FloodCauseEnum
+
+Node: dcid:HeavyRainOrBurnArea
+name: "HeavyRainOrBurnArea"
+typeOf: dcs:FloodCauseEnum
+
+Node: dcid:IceJam
+name: "IceJam"
+typeOf: dcs:FloodCauseEnum
+
+Node: dcid:DamOrLeveeBreak
+name: "DamOrLeveeBreak"
+typeOf: dcs:FloodCauseEnum
+
+Node: dcid:PlannedDamRelease
+name: "PlannedDamRelease"
+typeOf: dcs:FloodCauseEnum
+
+## PROPERTIES
+Node: dcid:windSpeed
+typeOf: schema:Property
+name: "windSpeed"
+domainIncludes: dcs:MeteorologicalEvent, dcs:WildlandFireEvent
+rangeIncludes: schema:Quantity
+
+Node: dcid:windSpeedType
+typeOf: schema:Property
+name: "windSpeedType"
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: dcs:WindSpeedMagnitudeTypeEnum
+
+Node: dcid:barometricPressure
+typeOf: schema:Property
+name: "barometricPressure"
+domainIncludes: dcs:CycloneEvent
+rangeIncludes: schema:Quantity
+
+Node: dcid:classification
+typeOf: schema:Property
+name: "classification"
+domainIncludes: dcs:MeteorologicalEvent, dcs:WildlandFireEvent
+rangeIncludes: dcs:CycloneTypeEnum, dcs:FireIncidentTypeEnum, dcs:TornadoIntensityEnum
+description: "A variable classification of a thing."
+
+Node: dcid:maxWindSpeed
+typeOf: schema:Property
+name: "maxWindSpeed"
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Quantity
+description: "Maximum recorded or estimated windspeed."
+
+Node: dcid:minPressure
+typeOf: schema:Property
+name: "minPressure"
+domainIncludes: dcs:CycloneEvent
+rangeIncludes: schema:Quantity
+description: "Minimum recorded or estimated pressure."
+
+Node: dcid:maxClassification
+typeOf: schema:Property
+name: "maxClassification"
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: dcs:CycloneTypeEnum, dcs:TornadoIntensityEnum
+description: "Maximum classification level of a MeteorologicalEvent."
+
+Node: dcid:precipitationAccumulation
+typeOf: schema:Property
+name: "precipitationAccumulation"
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Quantity
+description: "The amount of precipitation accumulated over the course of a meteorological event."
+
+Node: dcid:precipitationType
+typeOf: schema:Property
+name: "precipitationType"
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: dcs:PrecipitationTypeEnum
+
+Node: dcid:subEventOf
+typeOf: schema:Property
+name: "subEventOf"
+domainIncludes: schema:Event
+rangeIncludes: schema:Event
+
+Node: dcid:directInjuries
+name: "directInjuries"
+typeOf: schema:Property
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Number
+
+Node: dcid:indirectInjuries
+name: "indirectInjuries"
+typeOf: schema:Property
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Number
+
+Node: dcid:directDeaths
+name: "directDeaths"
+typeOf: schema:Property
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Number
+
+Node: dcid:indirectDeaths
+name: "indirectDeaths"
+typeOf: schema:Property
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Number
+
+Node: dcid:propertyDamage
+name: "propertyDamage"
+typeOf: schema:Property
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Quantity
+
+Node: dcid:cropDamage
+name: "cropDamage"
+typeOf: schema:Property
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Quantity
+
+Node: dcid:startLocation
+name: "startLocation"
+typeOf: schema:Property
+subPropertyOf: schema:location
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:GeoCoordinates, schema:Place
+
+Node: dcid:endLocation
+name: "endLocation"
+typeOf: schema:Property
+subPropertyOf: schema:location
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:GeoCoordinates, schema:Place
+
+Node: dcid:lengthTraveled
+name: "lengthTraveled"
+typeOf: schema:Property
+domainIncludes: dcs:MeteorologicalEvent
+rangeIncludes: schema:Quantity
+description: "Measure of the path length traveled by a meteorological phenomenom, such as a tornado."
+
+Node: dcid:distanceToLand
+typeOf: schema:Property
+name: "distanceToLand"
+domainIncludes: dcs:CycloneEvent
+rangeIncludes: schema:Quantity
+description: "Distance to land from the center of cyclone."
+
+Node: dcid:cycloneTrackType
+typeOf: schema:Property
+name: "cycloneTrackType"
+domainIncludes: dcs:CycloneEvent
+rangeIncludes: dcs:CycloneTrackTypeEnum
+description: "Type of cyclone track record."
+
+Node: dcid:CycloneTrackTypeEnum
+typeOf: schema:Class
+name: "CycloneTrackTypeEnum"
+subClassOf: schema:Enumeration
+description: "Types of cyclone track records."
+
+Node: dcid:MainCycloneTrack
+typeOf: dcs:CycloneTrackTypeEnum
+name: "MainCycloneTrack"
+description: "Primary track associated with a storm system. This is a track that has had some reanalysis and is higher quality than provisional data."
+descriptionUrl: "https://www.ncdc.noaa.gov/ibtracs/pdf/IBTrACS_v04_column_documentation.pdf"
+
+Node: dcid:ProvisionalCycloneTrack
+typeOf: dcs:CycloneTrackTypeEnum
+name: "ProvisionalCycloneTrack"
+description: "Real time data used to populate the position and other parameters of this system. This is a provisional track that will be replaced when reanalysis of the storm is performed (usually within 2 years of the storm's occurence)."
+descriptionUrl: "https://www.ncdc.noaa.gov/ibtracs/pdf/IBTrACS_v04_column_documentation.pdf"
+
+Node: dcid:ProvisionalSpurCycloneTrack
+typeOf: dcs:CycloneTrackTypeEnum
+name: "ProvisionalSpurCycloneTrack"
+description: "Real time data (see ProvisionalCycloneTrack) but due to differences in positions between various inputs, algorithm can not identify accurate position. When counting storms, these should not likely be counted. These should be rare for PROVISIONAL data."
+descriptionUrl: "https://www.ncdc.noaa.gov/ibtracs/pdf/IBTrACS_v04_column_documentation.pdf"
+
+Node: dcid:SpurCycloneTrack
+typeOf: dcs:CycloneTrackTypeEnum
+name: "SpurCycloneTrack"
+description: "Usually short lived tracks associated with a main track and often represents alternate positions at the beginning of a system. Can also represent actual system interactions (e.g., Fujiwhara interactions)."
+descriptionUrl: "https://www.ncdc.noaa.gov/ibtracs/pdf/IBTrACS_v04_column_documentation.pdf"
+
+# Fire schema
+
+## Fire type enums
+Node: dcid:FireIncidentTypeEnum
+name: "FireIncidentTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Types of incidents and planned events to which the interagency wildland fire community responds."
+descriptionUrl: "https://www.nwcg.gov/data-standards-approved"
+
+Node: dcid:Wildfire
+name: "Wildfire"
+typeOf: dcs:FireIncidentTypeEnum
+description: "An unplanned, unwanted wildland fire including unauthorized human-caused fires, escaped wildland fire use events, escaped prescribed fire projects, and all other wildland fires where the objective is to put the fire out (NIFC.gov)."
+descriptionUrl: "https://www.nifc.gov/prevEdu/comm_guide/ch2.html"
+
+Node: dcid:WildlandFireUse
+name: "WildlandFireUse"
+typeOf: dcs:FireIncidentTypeEnum
+description: "The application of the appropriate management response to naturallyignited wildland fires to accomplish specific resource management objectives in pre-defined designated areas outlined in Fire Management Plans (NIFC.gov)."
+descriptionUrl: "https://www.nifc.gov/prevEdu/comm_guide/ch2.html"
+
+Node: dcid:PrescribedFire
+name: "PrescribedFire"
+typeOf: dcs:FireIncidentTypeEnum
+description: "Any fire ignited by management actions to meet specific objectives, e.g., the establishment/maintenance of healthy forests and grasslands or the enhancement of certain wildlife habitat. Prescribed fire is a well-established practice on public and private lands throughout the world, and is based on years of scientific research. Resource managers carefully calculate meteorological factors, fuels, slope of land, and other relevant conditions in planning prescribed fires. Utmost care is taken to protect human life and property, manage impacts of smoke, protect historical and archeological resources, and protect the ecological integrity of the physical and biological resources (NIFC.gov)."
+descriptionUrl: "https://www.nifc.gov/prevEdu/comm_guide/ch2.html"
+
+Node: dcid:ComplexFire
+name: "ComplexFire"
+typeOf: dcs:FireIncidentTypeEnum
+
+## Fire cause enums
+Node: dcid:FireCauseEnum
+name: "FireCauseEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Possible fire causes."
+
+Node: dcid:FireCauseHuman
+name: "FireCauseHuman"
+typeOf: dcs:FireCauseEnum
+
+Node: dcid:FireCauseLightning
+name: "FireCauseLightning"
+typeOf: dcs:FireCauseEnum
+
+Node: dcid:FireCauseNatural
+name: "FireCauseNatural"
+typeOf: dcs:FireCauseEnum
+
+Node: dcid:FireCauseUnknown
+name: "FireCauseUnknown"
+typeOf: dcs:FireCauseEnum
+
+Node: dcid:FireCauseOther
+name: "FireCauseOther"
+typeOf: dcs:FireCauseEnum
+
+## properties
+
+Node: dcid:cause
+typeOf: schema:Property
+name: "cause"
+domainIncludes: dcs:WildlandFireEvent, dcs:MeteorologicalEvent
+rangeIncludes: dcs:FireCauseEnum, dcs:FloodCauseEnum
+
+Node: dcid:discoveryDate
+typeOf: schema:Property
+domainIncludes: dcs:WildlandFireEvent
+rangeIncludes: schema:DateTime
+name: "discoveryDate"
+description: "The date the fire was confirmed to exist or was reported as discovered."
+descriptionUrl: "https://www.nwcg.gov/data-standards-approved"
+
+Node: dcid:controlledDate
+typeOf: schema:Property
+domainIncludes: dcs:WildlandFireEvent
+rangeIncludes: schema:DateTime
+name: "controlledDate"
+description: "When the fire was declared controlled, where controlled is defined as: The completion of control line around a fire, any spot fires therefrom, and any interior islands to be saved; burned out any unburned area adjacent to the fire side of control lines; and cool down all hot spots that are immediate threats to the control line, until the lines can be reasonably expected to hold under the foreseeable conditions."
+descriptionUrl: "https://www.nwcg.gov/data-standards-approved"
+
+Node: dcid:surfaceArea
+typeOf: schema:Property
+domainIncludes: dcs:WildlandFireEvent
+rangeIncludes: schema:DateTime
+name: "surfaceArea"
+
+Node: dcid:totalDamage
+name: "totalDamage"
+typeOf: schema:Property
+domainIncludes: dcs:WildlandFireEvent
+rangeIncludes: schema:Quantity
