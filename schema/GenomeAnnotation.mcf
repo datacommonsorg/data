@@ -1,0 +1,886 @@
+Node: dcid:BiologicalElement
+name: "BiologicalElement"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "Biological entities."
+
+Node: dcid:GenomeAnnotation
+name: "GenomeAnnotation"
+typeOf: schema:Class
+subClassOf: dcs:BiologicalElement
+description: "Entities or properties of the genome."
+
+Node: dcid:GeneticAssociation
+name: "GeneticAssociation"
+typeOf: schema:Class
+subClassOf: dcs:BiologicalElement
+description: "Genetic associations with phenotypes."
+
+Node: dcid:Species
+name: "Species"
+typeOf: schema:Class
+subClassOf: dcs:BiologicalElement
+description: "The scientific name (Genus species) of a group of living organisms consisting of similar individuals capable of exchanging genes or interbreeding in the wild."
+
+Node: dcid:GenomeAssembly
+name: "GenomeAssembly"
+typeOf: schema:Class
+subClassOf: dcs:GenomeAnnotation
+description:  "The reference genome to which the associated nucleotides have been aligned."
+
+Node: dcid:Nucleotide
+name: "Nucleotide"
+typeOf: schema:Class
+subClassOf: dcs:GenomeAnnotation
+description: "A recorded nucleotide on the positive strand of a denoted genome assembly."
+
+Node: dcid:Chromosome
+name: "Chromosome"
+typeOf: schema:Class
+subClassOf: dcs:GenomeAnnotation
+description: "A threadlike structure of nucleic acids and protein found in the nucleus of most living cells, carrying genetic information in the form of genes."
+
+Node: dcid:RNATranscript
+name: "RNATranscript"
+typeOf: schema:Class
+subClassOf: dcs:GenomeAnnotation
+description: "Recorded transcript. Unique identifier (GENCODE transcript ID for GENCODE Basic)."
+
+Node: dcid:Gene
+name: "Gene"
+typeOf: schema:Class
+subClassOf: dcs:GenomeAnnotation
+description: "Gene symbol of a gene, which is the basic hereditary unit of life."
+sameAs: "https://bioportal.bioontology.org/ontologies/OGG"
+
+Node: dcid:GeneticVariant
+name: "GeneticVariant"
+typeOf: schema:Class
+subClassOf: dcs:GenomeAnnotation
+description:  "A single-nucleotide polymorphism, which is a substitution of a single nucleotide that occurs at a specific position in the genome, where each variation is present to some appreciable degree within a population. These are defined by dbSNP and includes small indels as well."
+sameAs: "http://rohsdb.usc.edu/GBshape/cgi-bin/hgTables?db=hg19&hgta_group=varRep&hgta_track=snp137&hgta_table=snp137&hgta_doSchema=describe+table+schema"
+
+Node: dcid:GeneticVariantGeneAssociation
+name: "GeneticVariantGeneAssociation"
+typeOf: schema:Class
+subClassOf: dcs:GeneticAssociation
+description:  "An association between a genetic variant and a gene in a given tissue. This is determined by performing a regression analysis on paired genome sequencing and RNA-sequencing across a population."
+sameAs: "https://storage.googleapis.com/gtex_analysis_v6p/single_tissue_eqtl_data/README_eQTL_v6p.txt"
+
+Node: Position
+typeOf: dcs:UnitOfMeasure
+name: "Position"
+dcid: "Position"
+subClassOf: schema:Thing
+description: "The location of an entity."
+
+Node: dcid:BasePairs
+typeOf: dcs:UnitOfMeasure
+name: "BasePairs"
+subClassOf: schema:Thing
+description: "The number of pairs of complementary bases in a double-stranded nucleic acid molecule (DNA), consisting of a purine in one strand linked by hydrogen bonds to a pyrimidine in the other."
+
+Node: dcid:frequency
+typeOf: schema:Property
+domainIncludes: schema:Observation
+rangeIncludes: schema:Number
+name: "frequency"
+
+Node: dcid:Allele
+typeOf: schema:Class
+subClassOf: dcs:GenomeAnnotation
+name: "Allele"
+
+Node: dcid:commonName
+name: "commonName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: schema:Thing
+description: "The vernacular name of a thing."
+
+Node: dcid:scientificName
+name: "scientificName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Species
+description: "The scientific name of a species."
+
+Node: dcid:ofSpecies
+name: "ofSpecies"
+typeOf: schema:Property
+rangeIncludes: dcs:Species
+domainIncludes: dcs:GenomeAnnotation,dcs:Disease
+description: "Species"
+
+Node: dcid:genomeAssemblyYear
+name: "genomeAssemblyYear"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GenomeAssembly
+description:"The year in which the genome assembly was released."
+
+Node: dcid:nucleicAcid
+name: "nucleicAcid"
+typeOf: schema:Property
+rangeIncludes: dcs:NucleicAcidEnum
+domainIncludes: dcs:Nucleotide
+description: "The nucleic acid molecule on the positive strand."
+
+Node: dcid:chromosomeSize
+name: "chromosomeSize"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:Chromosome
+description: "The number of nucleotides in a given chromosome."
+
+Node: dcid:inChromosome
+name: "inChromosome"
+typeOf: schema:Property
+rangeIncludes: dcs:Chromosome,schema:Text
+domainIncludes: dcs:GenomeAnnotation
+description: "A threadlike structure of nucleic acids and protein found in the nucleus of most living cells, carrying genetic information in the form of genes."
+
+Node: dcid:inGenomeAssembly
+name: "inGenomeAssembly"
+typeOf: schema:Property
+rangeIncludes: dcs:GenomeAssembly
+domainIncludes: dcs:GenomeAnnotation
+description: "Genome assembly."
+
+Node: dcid:genomicPosition
+name: "genomicPosition"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:Nucleotide,dcs:GeneticVariant
+description: "The genomic position of the nucleotide."
+
+Node: dcid:refSeqID
+name: "refSeqID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:RNATranscript,dcs:Gene,dcs:Protein
+description: "A nucleotide sequence or protein annotated and curated by the National Center for Biotechnology Information."
+
+Node: dcid:transcriptionCoordinates
+name: "transcriptionCoordinates"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:RNATranscript
+description: "Specifies the genomic coordinates associated with the transcription of a given RefSeq Accession number."
+
+Node: codingCoordinates
+dcid:codingCoordinates
+name: "codingCoordinates"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:RNATranscript
+description: "Specifies the genomic position of the genomic coordinates of the coding region associated with a given RefSeq Accession number."
+
+Node: exonCoordinates
+dcid:exonCoordinates
+name: "exonCoordinates"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:RNATranscript
+description: "Specifies the genomic position of the coordinates of exons associated with a given RefSeq Accession number."
+
+Node: strandOrientation
+dcid:strandOrientation
+name: "strandOrientation"
+typeOf: schema:Property
+rangeIncludes: dcs:StrandOrientationEnum
+domainIncludes: dcs:GenomeAnnotation
+description: "The strand on which a given annotation is located."
+
+Node: dcid:geneID
+name: "geneID"
+typeOf: schema:Property
+rangeIncludes: dcs:Gene
+domainIncludes: dcs:GeneticVariant,dcs:DiseaseGeneAssociation,dcs:GeneticVariantGeneAssociation,dcs:Protein
+description: "Link out to the Gene node associated with the current node."
+
+Node: dcid:geneSymbol
+name: "geneSymbol"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene,dcs:GeneticVariant,dcs:DiseaseGeneAssociation,dcs:GeneticVariantGeneAssociation,dcs:Protein
+description: "Original gene symbol."
+
+Node: dcid:makesProtein
+name: "makesProtein"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:RNATranscript,dcs:Protein
+description: "UniProt display ID, UniProt accession, or RefSeq protein ID representing the protein made by the corresponding gene or RNA transcript."
+
+Node: dcid:exonFrame
+name: "exonFrame"
+typeOf: schema:Property
+rangeIncludes: dcs:ExonFramesEnum
+domainIncludes: dcs:RNATranscript
+description: "Exon frame {0,1,2}, or -1 if no frame for exon."
+
+Node: dcid:genomicCoordinates
+name: "genomicCoordinates"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:Gene
+description: "Start position (0 based). End position (non-inclusive). Represents the genomic coordinates of an object of interest."
+
+Node: dcid:mRNA
+name: "mRNA"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+description: "mRNA associated with a gene."
+
+Node: dcid:ncbiProteinAccessionNumber
+name: "ncbiProteinAccessionNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene,dcs:Protein
+description: "NCBI protein accession number."
+
+Node: dcid:hasRNATranscript
+name: "hasRNATranscript"
+typeOf: schema:Property
+rangeIncludes: dcs:RNATranscript
+domainIncludes: dcs:Gene
+description: "Recorded transcript. UCSC Gene ID."
+
+Node: dcid:ncbiTaxonID
+name: "ncbiTaxonID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:Gene
+description: "NCBI Taxonomy database identifier."
+
+Node: dcid:ncbiGeneID
+name: "ncbiGeneID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:Gene,dcs:GeneticVariant
+description: "NCBI Entrez Gene database identifier."
+
+Node: dcid:ncbiLocusTag
+name: "ncbiLocusTag"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+description: "Identifiers that are systematically applied to every gene in a genome."
+
+Node: dcid:omimID
+name: "omimID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene,dcs:GeneticVariant
+description: "OMIM database identifier."
+
+Node: dcid:hgncID
+name: "hgncID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+description: "HUGO Gene Nomenclature Committee identifier."
+
+Node: dcid:ensemblID
+name: "ensemblID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene,dcs:GeneticVariantGeneAssociation,dcs:Protein
+description: "Ensembl ID, which describes a particular gene or protein as documented https://m.ensembl.org/Help/Faq?id=488."
+
+Node: dcid:mapLocation
+name: "mapLocation"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+description: "The location of the gene on the chromosome."
+
+Node: dcid:fullName
+name: "fullName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+description: "The full name of the gene."
+
+Node: dcid:typeOfGene
+name: "typeOfGene"
+typeOf: schema:Property
+rangeIncludes: dcs:TypeOfGeneEnum
+domainIncludes: dcs:Gene
+description: "The type of gene."
+
+Node: dcid:nomenclatureStatus
+name: "nomenclatureStatus"
+typeOf: schema:Property
+rangeIncludes:  dcs:NomenclatureStatusEnum
+domainIncludes: dcs:Gene
+description: "The status of the name from the nomenclature committee: official, interim, or NCBI-supplied."
+
+Node: dcid:modificationDate
+name: "modificationDate"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+description: "The date of last modification on the NCBI database."
+
+Node: dcid:referenceSNPClusterID
+name: "referenceSNPClusterID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant,dcs:GeneticVariantGeneAssociation
+description: "The accession number used to refer to a specific single nucleotide polymorphism (SNP)."
+
+Node: dcid:geneticVariantID
+name: "geneticVariantID"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariant
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "Link out to GeneticVariant node associated with the current node."
+
+Node: dcid:referenceAlleleNCBI
+name: "referenceAlleleNCBI"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "Reference genomic sequence from dbSNP."
+
+Node: dcid:referenceAlleleUCSC
+name: "refUCSC"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "Reference genomic sequence from UCSC."
+
+Node: dcid:observedAllele
+name: "observedAllele"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant,dcs:GeneticVariantGeneAssociation
+description: "The sequences of the observed alleles from rs-fasta files. This is formated as major allele/minor allele."
+
+Node: dcid:molecularType
+name: "molecularType"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariantMolTypeEnum
+domainIncludes: dcs:GeneticVariant
+description: "Sample type from exemplar submitted GeneticVariants (cDNA, genomic, mitochondrial, or unknown)."
+
+Node: dcid:geneticVariantClass
+name: "class"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariantClassEnum
+domainIncludes: dcs:GeneticVariant
+description: "Class of variant: single_nucleotide_variant, deletion, insertion, in-del, named, mixed, mnp, het, microsatellite, inversion, copy_number_loss, variation, duplication, or copy_number_gain."
+
+Node: dcid:geneticVariantValidationStatus
+name: "validationStatus"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariantValidationStatusEnum
+domainIncludes: dcs:GeneticVariant
+description: "Validation status of the SNP."
+
+Node: dcid:averageHeterozygosity
+name: "averageHeterozygosity"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Average heterozygosity from all observations. Note: may be computed on small number of samples."
+
+Node: dcid:averageHeterozygositySE
+name: "averageHeterozygositySE"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Standard Error for the average heterozygosity."
+
+Node: dcid:geneticVariantFunctionalCategory
+name: "functionalCategory"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariantFunctionalCategoryEnum
+domainIncludes: dcs:GeneticVariant
+description: "Functional category of the genetic variant (coding-synon, splice_5', missense, frameshift, near_gene_5', 3'_UTR, near_gene_3', nonsense, splice_3', intron, cds_reference, 5'_UTR, unknown, cds_indel, stop_loss, 5' UTR, or ncRNA.)"
+
+Node: dcid:geneticVariantLocType
+name: "locType"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariantLocTypeEnum
+domainIncludes: dcs:GeneticVariant
+description: "Type of mapping inferred from size on reference; may not agree with class."
+
+Node: dcid:geneticVariantAlignmentQuality
+name: "alignmentQuality"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariantAlignmentQualityEnum
+domainIncludes: dcs:GeneticVariant
+description: "The quality of the alignment: unique mapping, non-unique, and many matches (1, 2, or 3+)."
+
+Node: dcid:geneticVariantExceptions
+name: "exceptions"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariantExceptionEnum
+domainIncludes: dcs:GeneticVariant
+description: "Unusual conditions noted by UCSC that may indicate a problem with the data."
+
+Node: dcid:geneticVariantSubmitterCount
+name: "submitterCount"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Number of distinct submitter handles for submitted SNPs for this ref SNP."
+
+Node: dcid:submitter
+name: "submitter"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "List of submitter handles."
+
+Node: dcid:numberOfAllelesWithFreq
+name: "numberOfAllelesWithFreq"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Number of observed alleles with frequency data."
+
+Node: dcid:geneticVariantAttribute
+name: "geneticVariantAttribute"
+typeOf: schema:Property
+rangeIncludes: dcs:GeneticVariantAttributeEnum
+domainIncludes: dcs:GeneticVariant
+description: "Genetic variant attributes extracted from dbSNP's SNP_bitfield table: clinically associated, MAF >5% in some populations, MAF >5% in all populations, has OMIM OMIA, microattribute tpa, submitted by locus-specific database, genotype conflict, rs cluster non-overlapping alleles, observed mismatch, pharmGKB, published, 3D structure, submitter link out, other variant with exact mapping, assembly specific,mutant, validated, included in high density kit, genotypes available, 1000 Genomes Phase 1, 1000 Genomes Phase 3, included in clinical diagnostic assay, withdrawn by some not all submitters, or common SNP."
+
+Node: dcid:dbSNPBuildID
+name: "dbSNPBuildID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "First dbSNP Build for RS."
+
+Node: dcid:alleleOrigin
+name: "alleleOrigin"
+typeOf: schema:Property
+rangeIncludes: dcs:VariantAlleleOriginEnum
+domainIncludes: dcs:GeneticVariant
+description: "Variant Allele Origin: unspecified, germline, somatic, both, inherited, paternal, maternal, uni-parental, bi-parental, not_tested, tested_inconclusive, de-novo, or other."
+
+Node: dcid:suspectReasonCode
+name: "suspectReasonCode"
+typeOf: schema:Property
+rangeIncludes: dcs:VariantSuspectReasonCodesEnum
+domainIncludes: dcs:GeneticVariant
+description: "Variant Suspect Reason Codes: unspecified, Paralog, byEST, oldAlign, Para_EST, 1kg_failed, or other."
+
+Node: dcid:clinVarAlleleID
+name: "clinVarAlleleID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "ClinVar Allele ID."
+
+Node: dcid:diseaseDescription
+name: "diseaseDescription"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "ClinVar's preferred disease name for the concept specified by disease identifiers."
+
+Node: dcid:diseaseName
+name: "diseaseName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "ClinVar's preferred disease name for the concept specified by disease identifiers."
+
+Node: dcid:medGenID
+name: "medGenID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "ID for organized information related to human medical genetics, such as attributes of conditions with a genetic contribution."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/medgen/"
+
+Node: dcid:orphaNumber
+name: "orphaNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "Orphanet rare disease nomenclature"
+descriptionUrl: "https://www.orpha.net/consor/cgi-bin/index.php"
+
+Node: dcid:humanPhenotypeOntologyID
+name: "humanPhenotypeOntologyID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "The Human Phenotype Ontology (HPO)"
+descriptionUrl: "https://hpo.jax.org/app/"
+
+Node: dcid:snomedCT
+name: "snomedCT"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "SNOMED CT (Systematized Nomenclature of Medicine -- Clinical Terms) is a standardized, multilingual vocabulary of clinical terminology that is used by physicians and other health care providers for the electronic exchange of clinical health information."
+descriptionUrl: "http://www.snomed.org/"
+
+Node: dcid:experimentalFactorOntologyID
+name: "experimentalFactorOntologyID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "The Experimental Factor Ontology (EFO) provides a systematic description of many experimental variables available in EBI databases, and for external projects such as the NHGRI GWAS catalog."
+descriptionUrl: "https://www.ebi.ac.uk/efo/"
+
+Node: dcid:medicalSubjectHeadingID
+name: "medicalSubjectHeadingID"
+typeOf: schema:Property
+rangeIncludes: schema:Number,dcs:MeSHDescriptor
+domainIncludes: dcs:GeneticVariant,dcs:Disease
+description: "Medical Subject Heading"
+descriptionUrl: "https://meshb.nlm.nih.gov/search"
+
+Node: dcid:humanGenomeVariationSocietyNomenclature
+name: "humanGenomeVariationSocietyNomenclature"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Variant names from the Human Genome Variation Society"
+descriptionUrl: "https://varnomen.hgvs.org/"
+
+Node: dcid:pharmGKBID
+name: "pharmGKBID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers."
+descriptionUrl: "https://www.pharmgkb.org/"
+
+Node: dcid:medicalGeneticSummariesID
+name: "medicalGeneticSummariesID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Medical Genetics Summaries is a growing collection of summaries which describe the impact that specific sequence variations have on health. The summaries review genetic variants that underlie inherited conditions, affect the risk of developing a disease in the future, or influence how an individual may respond to a specific drug."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/books/NBK61999/"
+
+Node: dcid:geneReviewsID
+name: "geneReviewsID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "GeneReviews, an international point-of-care resource for busy clinicians, provides clinically relevant and medically actionable information for inherited conditions in a standardized journal-style format, covering diagnosis, management, and genetic counseling for patients and their families. Each chapter in GeneReviews is written by one or more experts on the specific condition or disease and goes through a rigorous editing and peer review process before being published online."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/books/NBK1116/"
+
+Node: dcid:geneticTestingRegistryID
+name: "geneticTestingRegistryID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "The Genetic Testing Registry (GTR) provides a central location for voluntary submission of genetic test information by providers. The scope includes the test's purpose, methodology, validity, evidence of the test's usefulness, and laboratory contacts and credentials. The overarching goal of the GTR is to advance the public health and research into the genetic basis of health and disease."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/gtr/"
+
+Node: dcid:geneticsHomeReferenceID
+name: "geneticsHomeReferenceID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Genetics Home Reference (GHR) provides consumer-friendly information about the effects of genetic variation on human health."
+descriptionUrl: "https://ghr.nlm.nih.gov/"
+
+Node: dcid:clinVarReviewStatus
+name: "clinVarReviewStatus"
+typeOf: schema:Property
+rangeIncludes: dcs:ClinVarReviewStatusEnum
+domainIncludes: dcs:GeneticVariant
+description: "ClinVar review status: no assertion criteria provided, reviewed by expert panel, conflicting interpretations, criteria provided, non interpretation for the single variant, practice guideline, no conflicts, multiple submitters, or single_submitter."
+
+Node: dcid:clinicalSignificanceConflicting
+name: "clinicalSignificanceConflicting"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "Conflicting clinical significance for this single variant."
+
+Node: dcid:clinicalSignificance
+name: "clinicalSignificance"
+typeOf: schema:Property
+rangeIncludes: dcs:ClinSigEnum
+domainIncludes: dcs:GeneticVariant
+description: "Clinical significance for this single variant: other, affects, uncertain_significance, pathogenic, risk_factor, benign, conflicting_interpretations_of_pathogenicity, association, likely_pathogenic, protective, likely_benign, not_provided, association_not_found, drug_response, pathogenic/likely_pathogenic,benign/likely_benign, unknown, untested, or histocompatibility."
+
+Node: dcid:sequenceOntologyID
+name: "sequenceOntologyID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "Sequence Ontology ID: http://www.sequenceontology.org/"
+
+Node: dcid:clinicalSource
+name: "clinicalSource"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "The variant's clinical sources reported as tag-value pairs of database and variant identifier."
+
+Node: dcid:clinVarID
+name: "clinVarID"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "ClinVar Variation ID."
+
+Node: dcid:variationType
+name: "variationType"
+typeOf: schema:Property
+rangeIncludes: dcs:VariationTypeEnum
+domainIncludes: dcs:GeneticVariant
+description: "Variation type of alternate allele."
+
+Node: dcid:variationEndCI
+name: "variationEndCI"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Confidence interval around END for imprecise variants."
+
+Node: dcid:variationPositionCI
+name: "variationPositionCI"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Confidence interval around POS for imprecise variants."
+
+Node: dcid:geneticVariantImpercise
+name: "geneticVariantImpercise"
+typeOf: schema:Property
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:GeneticVariant
+description: "Boolean of whether a variant is flagged as an imprecise structural variation."
+
+Node: dcid:geneticVariantLength
+name: "geneticVariantLength"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Difference in length between REF and ALT alleles (bp)."
+
+Node: dcid:translocationToChromosome
+name: "translocationToChromosome"
+typeOf: schema:Property
+rangeIncludes: dcs:Chromosome
+domainIncludes: dcs:GeneticVariant
+description: "Second (To) Chromosome in a translocation pair."
+
+Node: dcid:alleleType
+name: "alleleType"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "The allele of a genetic variant observed within a population."
+
+Node: dcid:clinicalSignificanceType
+name: "clinicalSignificanceType"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "A type of clinical significance report observed for a genetic variant."
+
+Node: dcid:hg38GenomicLocation
+name: "hg38GenomicLocation"
+typeOf: schema:Property
+rangeIncludes: dcs:QuantityRange
+domainIncludes: dcs:GeneticVariant
+description: "The genomic location of a genetic variant using the hg38 assembly. [chr start stop]."
+
+Node: dcid:hg19GenomicLocation
+name: "hg19GenomicLocation"
+typeOf: schema:Property
+rangeIncludes: dcs:QuantityRange
+domainIncludes: dcs:GeneticVariant
+description: "The genomic location of a genetic variant using the hg19 assembly. [chr start stop]."
+
+Node: dcid:mm10GenomicLocation
+name: "mm10GenomicLocation"
+typeOf: schema:Property
+rangeIncludes: dcs:QuantityRange
+domainIncludes: dcs:GeneticVariant
+description: "The genomic location of a genetic variant using the mm10 assembly. [chr start stop]."
+
+Node: dcid:mm9GenomicLocation
+name: "mm9GenomicLocation"
+typeOf: schema:Property
+rangeIncludes: dcs:QuantityRange
+domainIncludes: dcs:GeneticVariant
+description: "The genomic location of a genetic variant using the mm9 assembly. [chr start stop]."
+
+Node: dcid:hg19GenomicPosition
+name: "hg19GenomicPosition"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "The genomic position of a genetic variant using the hg19 assembly."
+
+Node: dcid:hg38GenomicPosition
+name: "hg38GenomicPosition"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant,dcs:GeneticVariantGeneAssociation
+description: "The genomic position of a genetic variant using the hg38 assembly."
+
+Node: dcid:clinVarQualityScore
+name: "clinVarQualityScore"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
+description: "Phred-scaled quality score for the assertion made in ALT. i.e. -10log10 prob(call in ALT is wrong)."
+
+Node: dcid:clinVarFilterStatus
+name: "clinVarFilterStatus"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "Filter status: PASS if this position has passed all filters, i.e., a call is made at this position. Otherwise, if the filters that the site failed are recorded."
+
+Node: dcid:dbVarID
+name: "dbVarID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "Accessions from dbVar for the genetic variant"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/dbvar/"
+
+Node: dcid:hg38DistanceFromTranscriptionStartSite
+name: "hg38DistanceFromTranscriptionStartSite"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "In the hg38 genome assembly, the distance in base pairs between the associated genetic variant and gene."
+
+Node: dcid:hg19DistanceFromTranscriptionStartSite
+name: "hg19DistanceFromTranscriptionStartSite"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "In the hg19 genome assembly, the distance in base pairs between the associated genetic variant and gene."
+
+Node: dcid:minorAlleleSampleNumber
+name: "minorAlleleSampleNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The number of samples carrying the minor allele."
+
+Node: dcid:minorAlleleCount
+name: "minorAlleleCount"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "Total number of minor alleles across individuals."
+
+Node: dcid:pValueNominal
+name: "pValueNominal"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The nominal p-value associated with the most significant variant for this gene."
+
+Node: dcid:minimalPValueNominal
+name: "minimalPValueNominal"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The smallest nominal p-value for the gene."
+
+Node: dcid:pValueBeta
+name: "pValueBeta"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The beta-approximated permutation p-value."
+
+Node: dcid:pValueNominalThreshold
+name: "pValueNominalThreshold"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The nominal p-value threshold for calling a variant-gene pair significant for the gene."
+
+Node: dcid:variantNumber
+name: "variantNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The number of variants in cis-window (1 Mbp) with the associated gene."
+
+Node: dcid:betaDistributionShapes
+name: "betaShapeDistribution"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The shape parameters of the fitted Beta distribution: B(shape1, shape2)."
+
+Node: dcid:trueDegreesOfFreedom
+name: "trueDegreesOfFreedom"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The effective degrees of freedom the Beta distribution approximation."
+
+Node: dcid:pValueTrueDegreesOfFreedom
+name: "pValueTrueDegreesOfFreedom"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The p-value of the effective degrees of freedom the Beta distribution approximation."
+
+Node: dcid:numberOfAlternativeAlleles
+name: "numberOfAlternativeAlleles"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The number of alternative alleles observed at the genetic variant site."
+
+Node: dcid:pValuePermutation
+name: "pValuePermutation"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The permutation p-value."
+
+Node: dcid:qValue
+name: "qValue"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The Storey q-value derived from pval_beta."
+
+Node: dcid:log2AllelicFoldChange
+name: "log2AllelicFoldChange"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The allelic Fold Change in log2 of the change in gene expression of samples with or without the minor allele."
+
+Node: dcid:log2AllelicFoldChangeConfidenceInterval
+name: "log2AllelicFoldChangeConfidenceInterval"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The 95% confidence interval of the allelic Fold Change in log2 of the change in gene expression of samples with or without the minor allele: [lowerCI upperCI]."
+
+Node: dcid:tissue
+name: "tissue"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "The tissue in which the association between the genetic variant and the gene was made."
+
+Node: dcid:gtexID
+name: "gtexID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariantGeneAssociation
+description: "An ID denoting a unique gene and genetic variant association within the GTEx database."
+

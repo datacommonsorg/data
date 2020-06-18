@@ -1,0 +1,22 @@
+# File to consolidate all measurementMethod values.
+#
+# Reminder:
+# measurementMethod should describe how the data was MEASURED.
+# measurementQualifier should describe how the data was POST-PROCESSED.
+
+Node: dcid:MeasurementMethodEnum
+name: "MeasurementMethodEnum"
+subClassOf: schema:Enumeration
+description: "Measurement methods used by various observations in Data Commons."
+typeOf: schema:Class
+
+Node: dcid:StatisticSourceEnum
+name: "StatisticSourceEnum"
+subClassOf: dcs:MeasurementMethodEnum
+description: "Measurement methods used solely for distinguishing observations that come from different sources about the same statistic."
+typeOf: schema:Class
+
+Node: dcid:CovidTrackingProject
+name: "CovidTrackingProject"
+typeOf: dcs:StatisticSourceEnum
+
