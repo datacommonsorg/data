@@ -88,7 +88,7 @@ class StateGdpDataLoader:
         df['ObservationPeriod'] = df['TimePeriod'].apply(date_to_obs_period)
 
         # Created GeoId column.
-        df['GeoId'] = df['GeoFips'].apply(lambda id: "geoId" + id[:2])
+        df['GeoId'] = df['GeoFips'].apply(lambda id: "geoId/" + id[:2])
 
         # Gets rid of unused columns
         df = df.drop(columns=['Code', 'UNIT_MULT', 'TimePeriod', 'GeoFips'])

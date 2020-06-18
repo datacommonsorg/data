@@ -1,0 +1,7 @@
+Node: E:states_gdp->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:US_State_Quarterly_GDP
+observationAbout: C:states_gdp->GeoId
+observationDate: C:states_gdp->ObservationDate
+observationPeriod: C:states_gdp->ObservationPeriod
+value: C:treasury_constant_maturity_rates->1-Month
