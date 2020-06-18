@@ -55,3 +55,4 @@ name: "Geographic Descriptor"
 typeOf: dcs:MeSHDescriptorClassEnum
 description: "Descriptors which include continents, regions, countries, states, and other geographic subdivisions. They are not used to characterize subject content but rather physical location. They are listed in category Z of the MeSH Tree Structures."
 descriptionUrl: "https://www.nlm.nih.gov/mesh/intro_record_types.html"
+

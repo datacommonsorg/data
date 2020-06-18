@@ -883,3 +883,4 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:GeneticVariantGeneAssociation
 description: "An ID denoting a unique gene and genetic variant association within the GTEx database."
+

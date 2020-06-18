@@ -253,3 +253,4 @@ specializationOf: dcs:FamilyHousehold
 
 Node: dcid:NonfamilyHousehold
 typeOf: dcs:HouseholdTypeEnum
+

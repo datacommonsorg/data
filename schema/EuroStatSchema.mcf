@@ -56,3 +56,4 @@ name: "debtor"
 typeOf: schema:Property
 domainIncludes: dcs:Debt
 rangeIncludes: schema:AdministrativeArea, schema:Person
+

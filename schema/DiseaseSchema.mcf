@@ -297,3 +297,4 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:DiseaseSymptomAssociation
 description: "A PubMed identifier for a publication containing reference to a disease and symptom."
+

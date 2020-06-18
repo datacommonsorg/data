@@ -891,3 +891,4 @@ typeOf: schema:Class
 subClassOf: schema:Person
 description: "A person who is either a householder who has a child, the spouse of a householder who has a child, or an identified parent in a subfamily with a child. The child must live in the household with the parent in order for the parent to be identified."
 descriptionUrl: "https://nces.ed.gov/programs/edge/Demographic/ACSparents"
+
