@@ -43,7 +43,7 @@ statistic, or measure.
 represents an actual measurement of a `StatisticalVariable` in a given place and time.
 
 The statement "According to the US Census ACS 5 Year Estimates,
-the median age of people in San Antonio, Texas in 2014 was 39.4."
+the median age of people in San Antonio, Texas in 2014 was 39.4 years."
 can be represented as:
 
 ```
@@ -53,34 +53,31 @@ variableMeasured: dcid:MedianAge
 observationAbout: dcid:geoId/4865000
 observationDate: "2014"
 value: 39.4
+unit: dcs:Year
+measurementMethod: dcs:CensusACS5yrSurvey
 ```
 
-Where [`MedianAge`](https://browser.datacommons.org/kg?dcid=MedianAge)
-is a `StatisticalVariable` schema node that only needs to be defined once.
-
-
-## Mapping `StatisticalVariable` and `StatVarObservation` to `StatisticalPopulation` and `Observation`
-
-The information encoded in `Observation_MedianAge_SanAntonio_TX_2014`
-and `MedianAge` are sufficient for translating into `StatisticalPopulation`
-and `Observation` representations, and we go through this exercise to
-illustrate the value of `StatisticalVariable` and `StatVarObservation`.
-This is for background educational purposes only. If you are not familiar
-with Schema.org's `StatisticalPopulation` and `Observation`, please see
-the [Appendix](#appendix) for a brief overview.
-
-For convenience, we copy the MCF for
-[`MedianAge`](https://browser.datacommons.org/kg?dcid=MedianAge) here:
+Where `MedianAge` is a `StatisticalVariable` schema node that only needs to be defined once:
 
 ```
 Node: dcid:MedianAge	
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:age
-measurementMethod: dcs:CensusACS5yrSurvey
 populationType: schema:Person
 statType: dcs:medianValue
-unit: dcs:Year
 ```
+
+> Note: Data Commons is in the process of migrating `measurementMethod` and `unit` from being `StatisticalVariable` properties to `StatVarObservation` properties. You may see that the [`MedianAge`](https://browser.datacommons.org/kg?dcid=MedianAge) node still has `measurementMethod` and `unit`, but please do not emulate that behavior.
+
+## Mapping `StatisticalVariable` and `StatVarObservation` to `StatisticalPopulation` and `Observation`
+
+The information encoded in `MedianAge` and `Observation_MedianAge_SanAntonio_TX_2014`
+are sufficient for translating into `StatisticalPopulation`
+and `Observation` representations, and we go through this exercise to
+illustrate the value of `StatisticalVariable` and `StatVarObservation`.
+This is for background educational purposes only. If you are not familiar
+with Schema.org's `StatisticalPopulation` and `Observation`, please see
+the [Appendix](#appendix) for a brief overview.
 
 The `StatisticalPopulation` extracts the `StatVarObservation`'s
 `populationType` and `observationAbout` for its own `populationType` and `location`.
@@ -92,9 +89,8 @@ populationType: dcid:Person
 location: dcid:geoId/4865000
 ```
 
-The `Observation` copies the `StatVarObservation`'s `observationDate`
-and the `StatisticalVariable`'s `measuredProperty`,
-`measurementMethod`, `measurementQualifier`, `unit`, etc. It also extracts the
+The `Observation` copies the `StatVarObservation`'s `observationDate`, `observationPeriod`, `measurementMethod`, and `unit` (when applicable),
+and the `StatisticalVariable`'s `measuredProperty`, `measurementQualifier`, etc. (when applicable). It also extracts the
 `StatisticalVariable`'s `statType` and the `StatVarObservation`'s `value`
 as its own `.*Value` property and value.
 
@@ -105,9 +101,11 @@ observedNode: l:StatisticalPopulation_People_SanAntonio_TX
 observationDate: "2014"
 measuredProperty: dcs:age
 medianValue: 39.4
+unit: dcs:Year
+measurementMethod: dcs:CensusACS5yrSurvey
 ```
 
-Any leftover properties, if applicable, such as:
+Finally, any leftover properties, if applicable, such as:
 
 ```
 gender: schema:Female
@@ -120,7 +118,7 @@ from the `StatisticalVariable` would be appended to the `StatisticalPopulation`.
 
 Instead of having a `StatisticalPopulation` for each City, County, State, etc. that has
 data on the median age of its population, we have one `StatisticalVariable`. Similarly,
-instead of recoding `measuredProperty`, `measurementMethod`, `unit`, etc. in each place
+instead of recoding `measuredProperty`, `measurementQualifier`, and `measurement_denominator` in each place
 and year with an `Observation`, that information is encoded once in the `StatisticalVariable`.
 
 The `StatisticalVariable` also makes consuming Data Commons data

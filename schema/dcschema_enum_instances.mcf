@@ -1343,10 +1343,6 @@ Node: dcid:PatientOnVentilator
 name: "PatientOnVentilator"
 typeOf: dcs:MedicalStatusEnum
 
-Node: dcid:CovidTrackingProject
-name: "CovidTrackingProject"
-typeOf: dcs:StatisticSourceEnum
-
 Node: dcid:Positive
 typeOf: dcs:MedicalTestResultEnum
 name: "Positive"
