@@ -27,20 +27,20 @@ def find_duplicates(df):
     for val in dup_vals:
       duplicated = pd.concat([duplicated, df[df[col]==val]], ignore_index = True)
   duplicated = duplicated.drop_duplicates()
+  #print(duplicated)
   return duplicated
       
 def preprocess():
   data = pd.read_csv(FILE_PATH_en)
-  province_data = data[["Province Code (Historic) (1)", "NUTS3"]].rename(\
-    columns = {"Province Code (Historic) (1)": "Province Code"}).drop_duplicates()
-  region_data = data[["Region Code", "NUTS2(3)"]].rename(columns= {"NUTS2(3)":"NUTS2"}).drop_duplicates()
+  province_data = data[["Province Code (Historic) (1)", "NUTS3","Name of the supra-municipal territorial unit (valid for statistical purposes)", "Automotive abbreviation"]].rename(\
+    columns = {"Province Code (Historic) (1)": "Province Code","Name of the supra-municipal territorial unit (valid for statistical purposes)":"Province name", "Automotive abbreviation":"Province Abbreviation"}).drop_duplicates()
+  region_data = data[["Region Code", "NUTS2(3)", "Region name"]].rename(columns= {"NUTS2(3)":"NUTS2"}).drop_duplicates()
   province_data.to_csv("ISTAT_ProvinceCode_NUTS3.csv", index = False)
   province_data.to_csv("ISTAT_RegionCode_NUTS2.csv", index = False)
   
   #find the regions/provinces that does not make one-to-one map from ISTAT to NUTS
   except_region = find_duplicates(region_data)
   except_province = find_duplicates(province_data)
-  
   
 if __name__ == "__main__":
   preprocess()
