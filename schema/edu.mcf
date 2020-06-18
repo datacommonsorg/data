@@ -1,0 +1,893 @@
+# CLASS for K12 Institutions
+
+Node: dcid:Student
+typeOf: schema:Class
+subClassOf: schema:Person
+name: "Student"
+description: "Individual studying in an educational institutions like school or college"
+
+Node: dcid:Faculty
+typeOf: schema:Class
+subClassOf: schema:Person
+name: "Faculty"
+description: "Individual who is teaching in an educational institution like school or college"
+
+Node: dcid:SchoolDistrict
+typeOf: schema:Class
+subClassOf: schema:AdministrativeArea
+name: "SchoolDistrict"
+description: "Administrive area that covers multiple specified educational institutions like school or college, and governed by an educational agency"
+
+# ENUMERATIONS Type for K12 Institutions. Enumeration values would be added to the schema by a script
+
+Node: dcid:USLocalitiesEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "US Localities"
+description: "Enumerations of US Localities"
+
+Node: dcid:CharterSchoolEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "Charter School Status"
+description: "Enumerations of different charter types for schools"
+
+Node: dcid:MagnetSchoolEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "Magnet School Status"
+description: "Enumerations of different magnet types for schools"
+
+Node: dcid:SchoolGradeLevelEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "School Grade Level"
+description: "Enumerations of different grade levels in school"
+
+Node: dcid:Kindergarten
+typeOf: dcs:SchoolGradeLevelEnum
+name: "Kindergarten"
+
+Node: dcid:SchoolGrade1
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade1"
+description: "First Grade level in school."
+
+Node: dcid:SchoolGrade2
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade2"
+description: "Second Grade level in school."
+
+Node: dcid:SchoolGrade3
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade3"
+description: "Third Grade level in school."
+
+Node: dcid:SchoolGrade4
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade4"
+description: "Fourth Grade level in school."
+
+Node: dcid:SchoolGrade5
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade5"
+description: "Fifth Grade level in school."
+
+Node: dcid:SchoolGrade6
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade6"
+description: "Sixth Grade level in school."
+
+Node: dcid:SchoolGrade7
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade7"
+description: "Seventh Grade level in school."
+
+Node: dcid:SchoolGrade8
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade8"
+description: "Eighth Grade level in school."
+
+Node: dcid:SchoolGrade9
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade9"
+description: "Ninth Grade level in school."
+
+Node: dcid:SchoolGrade10
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade10"
+description: "Tenth Grade level in school."
+
+Node: dcid:SchoolGrade11
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade11"
+description: "Eleventh Grade level in school."
+
+Node: dcid:SchoolGrade12
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade12"
+description: "Twelfth Grade level in school."
+
+Node: dcid:SchoolGrade13
+typeOf: dcs:SchoolGradeLevelEnum
+name: "SchoolGrade13"
+description: "Thirteenth Grade level in school."
+
+Node: dcid:AdultEducation
+typeOf: dcs:SchoolGradeLevelEnum
+name: "AdultEducation"
+description: "Adult Education."
+
+Node: dcid:PreKindergarten
+typeOf: dcs:SchoolGradeLevelEnum
+name: "PreKindergarten"
+description: "Pre-Kindergarten level in school."
+
+Node: dcid:NCESUngradedClasses
+typeOf: dcs:SchoolGradeLevelEnum
+name: "NCESUngradedClasses"
+description: "No Grade Level"
+
+Node: dcid:LunchTypeEnum
+typeOf: dcs:Class
+subClassOf: schema:Enumeration
+name: "Lunch Type"
+description: "Enumerations of different types of lunch eligiblity for students based on income as determined by National School Lunch Act"
+
+Node: dcid:FreeLunch
+name: "FreeLunch"
+typeOf: dcs:LunchTypeEnum
+description: "Student receives lunch with no cost"
+
+Node: dcid:NotFreeLunch
+name: "NotFreeLunch"
+typeOf: dcs:LunchTypeEnum
+description: "Student lunch is not completely free. This status includes reduced lunch price as well"
+
+Node: dcid:ReducedLunch
+name: "ReducedLunch"
+typeOf: dcs:LunchTypeEnum
+description: "Student lunch price has been reduced"
+
+Node: dcid:NotReducedLunch
+name: "NotReducedLunch"
+typeOf: dcs:LunchTypeEnum
+description: "Student lunch price is either free or the original price"
+
+Node: dcid:NotFreeOrReducedLunch
+name: "NotFreeOrReducedLunch"
+typeOf: dcs:LunchTypeEnum
+description: "Student lunch is the original price"
+
+Node: dcid:FreeOrReducedLunch
+name: "FreeOrReducedLunch"
+typeOf: dcs:LunchTypeEnum
+description: "Student lunch is not the original price"
+
+# PROPERTIES for PostalAddress
+
+Node: dcid:postalCodeExtension
+typeOf: schema:Property
+name: "postalCodeExtension"
+rangeIncludes: dcs:Text
+domainIncludes: schema:PostalAddress
+description: "Secondary postal ZIP code for mailing address"
+
+
+# PROPERTIES for SchoolDistrict, School
+
+Node: dcid:schoolStateID
+typeOf: schema:Property
+name: "schoolStateID"
+rangeIncludes: dcs:Text
+domainIncludes: dcs:SchoolDistrict, schema:School
+description: "Identifier provided to Schools and School Districts by the State"
+
+Node: dcid:ncesId
+typeOf: schema:Property
+name: "ncesId"
+rangeIncludes: dcs:Text
+domainIncludes: dcs:SchoolDistrict,schema:School
+description: "Identifier provided to Schools and School Districts by US National Center for Educational Statistics"
+
+
+# PROPERTIES for School
+
+Node: dcid:ncesLocale
+typeOf: schema:Property
+name: "ncesLocale"
+rangeIncludes: dcs:USLocalitiesEnum
+domainIncludes: schema:School
+description: "Identifier provided to School that identifies type of locality of the school"
+
+Node: dcid:schoolDistrict
+typeOf: schema:Property
+name: "schoolDistrict"
+rangeIncludes: dcs:SchoolDistrict
+domainIncludes: schema:School
+description: "Administrative District that the School belongs to"
+
+Node: dcid:charterStatus
+typeOf: schema:Property
+name: "charterStatus"
+rangeIncludes: dcs:CharterSchoolEnum
+domainIncludes: schema:School
+description: "Describes the charter status of a School as defined by US National Center for Educational Statistics"
+
+Node: dcid:magnetStatus
+typeOf: schema:Property
+name: "magnetStatus"
+rangeIncludes: dcs:MagnetSchoolEnum
+domainIncludes: schema:School
+description: "Describes the magnet status of a School as defined by US National Center for Educational Statistics"
+
+
+Node: dcid:highestGrade
+typeOf: schema:Property
+name: "highestGrade"
+rangeIncludes: dcs:SchoolGradeLevelEnum
+domainIncludes: schema:School, dcs:SchoolDistrict
+description: "Describes the highest grade level offered by School, grade as defined by US National Center for Educational Statistics"
+
+Node: dcid:lowestGrade
+typeOf: schema:Property
+name: "lowestGrade"
+rangeIncludes: dcs:SchoolGradeLevelEnum
+domainIncludes: schema:School, dcs:SchoolDistrict
+description: "Describes the lowest grade level offered by School, grade as defined by US National Center for Educational Statistics"
+
+# PROPERTIES for Students
+
+Node: dcid:schoolGradeLevel
+typeOf: schema:Property
+name: "schoolGradeLevel"
+rangeIncludes: dcs:SchoolGradeLevelEnum
+rangeIncludes: dcs:SchoolLevelEnum
+domainIncludes: dcs:Student
+description: "Describes the grade level of the student in school. For example, SchoolGrade2 defines the student to be in second grade."
+
+# OBSERVATION, Measured Property, for Students, Faculty
+
+Node: dcid:studentTeacherRatio
+typeOf: schema:Property
+name: "studentTeacherRatio"
+rangeIncludes: schema:Number
+domainIncludes: dcs:Student, dcs:Faculty
+description: "Describes the ratio of student to teachers in the school"
+
+Node: dcid:schoolSubject
+typeOf: schema:Property
+name: "schoolSubject"
+rangeIncludes: dcs:SchoolSubjectEnum
+domainIncludes: dcs:Student, dcs:AcademicAssessmentEvent
+description: "Describes a school subject."
+
+# School Subject Enum
+Node: dcid:SchoolSubjectEnum
+name: "School Subject"
+subClassOf: schema:Enumeration
+typeOf: schema:Class
+description: "Describes the different subjects taught in school"
+
+Node: dcid:Mathematics
+name: "Mathematics"
+typeOf: dcs:SchoolSubjectEnum
+
+Node: dcid:EnglishLanguageArts
+name: "EnglishLanguageArts"
+typeOf: dcs:SchoolSubjectEnum
+
+# Achievement scale metrics
+Node: dcid:cohortScaleAchievement
+name: "cohortScaleAchievement"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: schema:Student
+description: "Refers to the cohort scale academic achievement. The scores are standardized relative to state-subject-year-grade-specific distributions. Cohort scale then divides by the scores by the standard deviation for the given cohort."
+
+Node: dcid:gradeCohortScaleAchievement
+name: "gradeCohortScaleAchievement"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: schema:Student
+description: "Refers to the grade cohort scale academic achievement. The scores are standardized so that a one unit difference corresponds to a grade level difference for a given cohort."
+
+Node: dcid:stateReferencedAchievement
+name: "stateReferencedAchievement"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: schema:Student
+description: "Refers to the Statewide Standard Deviation scale academic achievement. Standardized so that for a given state-grade-year-subject group, the mean is 0. Scores are only comparable within the same group."
+
+Node: dcid:naepTestScoreScaleAchievement
+name: "naepTestScoreScaleAchievement"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: schema:Student
+description: "Scores are standardized according to the National Assessment of Education Progress scale. Scores are independently scaled for each subject."
+
+# Enum for the different kinds of faculty at a school
+Node: dcid:FacultyTypeEnum
+name: "Faculty Type"
+subClassOf: schema:Enumeration
+typeOf: schema:Class
+
+Node: dcid:ElementaryTeacher
+name: "ElementaryTeacher"
+typeOf: dcs:FacultyTypeEnum
+
+Node: dcid:Teacher
+name: "Teacher"
+typeOf: dcs:FacultyTypeEnum
+
+Node: dcid:InstructionalAide
+name: "InstructionalAide"
+typeOf: dcs:FacultyTypeEnum
+
+Node: dcid:InstructionalCoordinatorOrSupervisor
+name: "InstructionalCoordinatorOrSupervisor"
+typeOf: dcs:FacultyTypeEnum
+
+Node: dcid:ElementaryGuidanceCounselor
+name: "ElementaryGuidanceCounselor"
+typeOf: dcs:FacultyTypeEnum
+
+Node: dcid:facultyType
+typeOf: schema:Property
+name: "facultyType"
+description: "The specific kind of faculty member. For example, Instructional Aide"
+rangeIncludes: dcs:FacultyTypeEnum
+domainIncludes: dcs:Faculty
+
+# Household properties
+Node: dcid:HasChildrenStatusEnum
+description: "Describes whether or not there are children"
+name: "Has Children Status"
+subClassOf: schema:Enumeration
+typeOf: schema:Class
+
+Node: dcid:HasChildren
+name: "HasChildren"
+description: "There are children"
+typeOf: dcid:HasChildrenStatusEnum
+
+Node: dcid:NoChildren
+name: "NoChildren"
+description: "No children"
+typeOf: dcid:HasChildrenStatusEnum
+
+Node: dcid:hasChildren
+typeOf: schema:Property
+name: "hasChildren"
+description: "Whether or not there are children"
+rangeIncludes: dcs:HasChildrenStatusEnum
+domainIncludes: dcs:Household, dcs:Person
+
+Node: dcid:StatisticalInferenceMethodEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "StatisticalInferenceMethodEnum"
+description: "An enumeration of the different kinds of statistical inference methods."
+
+Node: dcid:OrdinaryLeastSquares
+name: "OrdinaryLeastSquares"
+typeOf: dcs:StatisticalInferenceMethodEnum
+description: "Using the ordinary least squares method to infer variables."
+
+Node: dcid:EmpiricalBayes
+name: "EmpiricalBayes"
+typeOf: dcs:StatisticalInferenceMethodEnum
+description: "Using the empirical Bayes method to infer variables."
+
+Node: dcid:AcademicAssessmentEvent
+typeOf: schema:Class
+subClassOf: dcs:Event
+name: "AcademicAssessmentEvent"
+description: "Occurrence of an academic assessment for an examinee."
+
+## Properties of AcademicAssessmentEvent.
+
+Node: dcid:assessmentType
+typeOf: schema:Property
+name: "assessmentType"
+description: "The type of an academic assessment."
+domainIncludes: dcs:AcademicAssessmentEvent
+rangeIncludes: dcs:AcademicAssessmentTypeEnum
+
+## AcademicAssessmentTypeEnum definition.
+
+Node: dcid:AcademicAssessmentTypeEnum
+typeOf: schema:Class
+name: "AcademicAssessmentTypeEnum"
+subClassOf: schema:Enumeration
+description: "Type of an academic assessment."
+
+Node: dcid:MichiganStudentTestOfEducationalProgress
+typeOf: dcs:AcademicAssessmentTypeEnum
+name: "Michigan Student Test of Educational Progress"
+# PROPERTIES for School
+# School defined in /cns/jv-d/home/datcom/v3_mcf/schema/K12SchemaExtensions.mcf
+
+Node: dcid:schoolLevelCode
+typeOf: schema:Property
+supersededBy: dcs:schoolGradeLevel
+name: schoolLevelCode
+rangeIncludes: dcid:SchoolLevelEnum
+domainIncludes: schema:School
+description: "School Level code is calculated from the school's corresponding low and high grade span values. The codes are: 1- Primary (low grade = PK-03; high grade = PK-08) 2- Middle (low grade = 04-07; high grade = 04-09) 3- High (low grade = 07-12; high grade = 12 only) 4- Other (any other configuration not falling within the above three categories, including Ungraded)"
+
+Node: dcid:publicSchoolType
+typeOf: schema:Property
+name: publicSchoolType
+rangeIncludes: dcid:PublicSchoolTypeEnum
+domainIncludes: schema:School
+description: "School Type is a classification of schools conducting elementary and/or secondary instruction programs according to the ordinary or special instructional needs of students. Four categories of schools are: Regular School: A public elementary/secondary school that does not focus primarily on vocational, special, or alternative education. Special Education School: Public elementary/secondary school that focuses primarily on education of one or more of the following types of students: hard of hearing, deaf, speech-impaired, health-impaired, orthopedically impaired, intellectual disability, seriously emotionally disturbed, multi-handicapped, visually handicapped, or deaf and blind, and adapts curriculum, materials or instructions for students served. Vocational School: Public elementary/secondary school that focuses primarily on vocational education, and provides education in one or more semi-skilled technical operations. Other/Alternative School: A public elementary/secondary school that addresses the needs of students which typically cannot be met in a regular school, provides nontraditional education, serves as an adjunct to a regular school, and falls outside of the categories of regular, special education, or vocational education."
+
+Node: dcid:titleISchoolStatus
+typeOf: schema:Property
+name: titleISchoolStatus
+rangeIncludes: dcs:TitleISchoolStatusEnum
+domainIncludes: schema:School
+description: "A Title I eligible school is a school designated under appropriate state and federal regulations as being high poverty and eligible for participation in programs authorized by Title I."
+
+Node: dcid:lunchEligibility
+typeOf: schema:Property
+rangeIncludes: dcs:LunchTypeEnum
+domainIncludes: dcs:Student
+description: "Describes whether a student is eligible for Free Lunch or Reduced lunch or Full priced lunch, under the National School Lunch Act"
+
+# extend the location property so that the domain includes school and
+# school district, we were making School and SchoolDistrict extend place
+# so we could add location information but this is cleaner
+Node: dcid:location
+typeOf: schema:Property
+domainIncludes: dcs:SchoolDistrict, dcs:School
+
+# PROPERTIES for Student
+# Student defined in /cns/jv-d/home/datcom/v3_mcf/schema/K12SchemaExtensions.mcf
+
+Node: dcid:nationalSchoolLunchProgram
+typeOf: schema:Property
+name: nationalSchoolLunchProgram
+rangeIncludes: dcs:NationalSchoolLunchProgramEnum
+domainIncludes: dcs:Student
+
+# Extend race property to have RaceCodeEnum in the range
+
+Node: dcid:race
+typeOf: schema:Property
+rangeIncludes: dcs:RaceCodeEnum
+domainIncludes: schema:Person
+
+## Charter School Enum
+# Enum Already Defined in /cns/jv-d/home/datcom/v3_mcf/schema/K12SchemaExtensions.mcf
+
+Node: dcid:NCES_CharterNo
+typeOf: dcs:CharterSchoolEnum
+name: NCES_CharterNo
+
+Node: dcid:NCES_CharterYes
+typeOf: dcs:CharterSchoolEnum
+name: NCES_CharterYes
+
+Node: dcid:NCES_CharterDataNotApplicable
+typeOf: dcs:CharterSchoolEnum
+name: NCES_CharterDataNotApplicable
+
+Node: dcid:NCES_CharterDataMissing
+typeOf: dcs:CharterSchoolEnum
+name: NCES_CharterDataMissing
+
+Node: dcid:NCES_CharterDataQualityIssue
+typeOf: dcs:CharterSchoolEnum
+name: NCES_CharterDataQualityIssue
+
+## Lunch Eligibility Enum
+# Enum Already Defined in /cns/jv-d/home/datcom/v3_mcf/schema/K12SchemaExtensions.mcf
+
+Node: dcid:DirectCertificationLunch
+name: DirectCertificationLunch
+typeOf: dcs:LunchTypeEnum
+description: "The unduplicated count of students in membership whose National School Lunch Program (NSLP) eligibility has been determined through direct certification."
+
+
+## Magnet School Enum
+# Enum Already Defined in /cns/jv-d/home/datcom/v3_mcf/schema/K12SchemaExtensions.mcf
+
+Node: dcid:NCES_MagnetNo
+typeOf: dcs:MagnetSchoolEnum
+name: NCES_MagnetNo
+
+Node: dcid:NCES_MagnetYes
+typeOf: dcs:MagnetSchoolEnum
+name: NCES_MagnetYes
+
+Node: dcid:NCES_MagnetDataNotApplicable
+typeOf: dcs:MagnetSchoolEnum
+name: NCES_MagnetDataNotApplicable
+
+Node: dcid:NCES_MagnetDataMissing
+typeOf: dcs:MagnetSchoolEnum
+name: NCES_MagnetDataMissing
+
+Node: dcid:NCES_MagnetDataQualityIssue
+typeOf: dcs:MagnetSchoolEnum
+name: NCES_MagnetDataQualityIssue
+
+## NCES Grade Enum
+# Enum Already Defined in /cns/jv-d/home/datcom/v3_mcf/schema/K12SchemaExtensions.mcf
+
+Node: dcid:NCES_GradeDataNotApplicable
+typeOf: dcs:SchoolGradeLevelEnum
+name: NCES_GradeDataNotApplicable
+
+Node: dcid:NCES_GradeDataMissing
+typeOf: dcs:SchoolGradeLevelEnum
+name: NCES_GradeDataMissing
+
+Node: dcid:NCES_GradeDataQualityIssue
+typeOf: dcs:SchoolGradeLevelEnum
+name: NCES_GradeDataQualityIssue
+
+## School Level Enum
+
+Node: dcid:SchoolLevelEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: SchoolLevelEnum
+description: "School Level code is calculated from the school's corresponding low and high grade span values. The codes are: 1- Primary (low grade = PK-03; high grade = PK-08), 2- Middle (low grade = 04-07; high grade = 04-09), 3- High (low grade = 07-12; high grade = 12 only), 4- Other (any other configuration not falling within the above three categories, including Ungraded)"
+
+Node: dcid:PrimarySchool
+typeOf: dcs:SchoolLevelEnum
+name: PrimarySchool
+
+Node: dcid:MiddleSchool
+typeOf: dcs:SchoolLevelEnum
+name: MiddleSchool
+
+Node: dcid:HighSchool
+typeOf: dcs:SchoolLevelEnum
+name: HighSchool
+
+Node: dcid:NCES_SchoolLevelOther
+typeOf: dcs:SchoolLevelEnum
+name: "School Level Other"
+
+Node: dcid:NCES_SchoolLevelDataMissing
+typeOf: dcs:SchoolLevelEnum
+name: NCES_SchoolLevelDataMissing
+
+Node: dcid:NCES_SchoolLevelDataNotApplicable
+typeOf: dcs:SchoolLevelEnum
+name: NCES_SchoolLevelDataNotApplicable
+
+Node: dcid:NCES_SchoolLevelDataQualityIssue
+typeOf: dcs:SchoolLevelEnum
+name: NCES_SchoolLevelDataQualityIssue
+
+## Public School Type Enum
+
+Node: dcid:PublicSchoolTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: PublicSchoolTypeEnum
+description: "School Type is a classification of schools conducting elementary and/or secondary instruction programs according to the ordinary or special instructional needs of students. Four categories of schools are: Regular School: A public elementary/secondary school that does not focus primarily on vocational, special, or alternative education. Special Education School: Public elementary/secondary school that focuses primarily on education of one or more of the following types of students: hard of hearing, deaf, speech-impaired, health-impaired, orthopedically impaired, intellectual disability, seriously emotionally disturbed, multi-handicapped, visually handicapped, or deaf and blind, and adapts curriculum, materials or instructions for students served. Vocational School: Public elementary/secondary school that focuses primarily on vocational education, and provides education in one or more semi-skilled technical operations. Other/Alternative School: A public elementary/secondary school that addresses the needs of students which typically cannot be met in a regular school, provides nontraditional education, serves as an adjunct to a regular school, and falls outside of the categories of regular, special education, or vocational education."
+
+Node: dcid:NCES_PublicSchoolTypeRegular
+typeOf: dcs:PublicSchoolTypeEnum
+name: NCES_PublicSchoolTypeRegular
+
+Node: dcid:NCES_PublicSchoolTypeSpecialEducation
+typeOf: dcs:PublicSchoolTypeEnum
+name: NCES_PublicSchoolTypeSpecialEducation
+
+Node: dcid:NCES_PublicSchoolTypeVocational
+typeOf: dcs:PublicSchoolTypeEnum
+name: NCES_PublicSchoolTypeVocational
+
+Node: dcid:NCES_PublicSchoolTypeOther
+typeOf: dcs:PublicSchoolTypeEnum
+name: NCES_PublicSchoolTypeOther
+
+Node: dcid:NCES_PublicSchoolTypeDataMissing
+typeOf: dcs:PublicSchoolTypeEnum
+name: NCES_PublicSchoolTypeDataMissing
+
+Node: dcid:NCES_PublicSchoolTypeDataNotApplicable
+typeOf: dcs:PublicSchoolTypeEnum
+name: NCES_PublicSchoolTypeDataMissing
+
+Node: dcid:NCES_PublicSchoolTypeDataQualityIssue
+typeOf: dcs:PublicSchoolTypeEnum
+name: NCES_PublicSchoolTypeDataQualityIssue
+
+## USLocalitiesEnum
+# Enum defined in /cns/jv-d/home/datcom/v3_mcf/schema/K12SchemaExtensions.mcf
+
+Node: dcid:NCES_CityLarge
+typeOf: dcs:USLocalitiesEnum
+name: NCES_CityLarge
+description: "(11): Territory inside an Urbanized Area and inside a Principal City with population of 250,000 or more."
+
+Node: dcid:NCES_CityMidsize
+typeOf: dcs:USLocalitiesEnum
+name: NCES_CityMidsize
+description : "(12): Territory inside an Urbanized Area and inside a Principal City with population less than 250,000 and greater than or equal to 100,000."
+
+Node: dcid:NCES_CitySmall
+typeOf: dcs:USLocalitiesEnum
+name: NCES_CitySmall
+description: "(13): Territory inside an Urbanized Area and inside a Principal City with population less than 100,000."
+
+Node: dcid:NCES_SuburbLarge
+typeOf: dcs:USLocalitiesEnum
+name: NCES_SuburbLarge
+description: "(21): Territory outside a Principal City and inside an Urbanized Area with population of 250,000 or more."
+
+Node: dcid:NCES_SuburbMidsize
+typeOf: dcs:USLocalitiesEnum
+name: NCES_SuburbMidsize
+description: "(22): Territory outside a Principal City and inside an Urbanized Area with population less than 250,000 and greater than or equal to 100,000."
+
+Node: dcid:NCES_SuburbSmall
+typeOf: dcs:USLocalitiesEnum
+name: NCES_SuburbSmall
+description: "(23): Territory outside a Principal City and inside an Urbanized Area with population less than 100,000."
+
+Node: dcid:NCES_TownFringe
+typeOf: dcs:USLocalitiesEnum
+name: NCES_TownFringe
+description: "(31): Territory inside an Urban Cluster that is less than or equal to 10 miles from an Urbanized Area."
+
+Node: dcid:NCES_TownDistant
+typeOf: dcs:USLocalitiesEnum
+name: NCES_TownDistant
+description: "(32): Territory inside an Urban Cluster that is more than 10 miles and less than or equal to 35 miles from an Urbanized Area."
+
+Node: dcid:NCES_TownRemote
+typeOf: dcs:USLocalitiesEnum
+name: NCES_TownRemote
+description: "(33): Territory inside an Urban Cluster that is more than 35 miles from an Urbanized Area"
+
+Node: dcid:NCES_RuralFringe
+typeOf: dcs:USLocalitiesEnum
+name: NCES_RuralFringe
+description: "(41): Census-defined rural territory that is less than or equal to 5 miles from an Urbanized Area,as well as rural territory that is less than or equal to 2.5 miles from an Urban Cluster."
+
+Node: dcid:NCES_RuralDistant
+typeOf: dcs:USLocalitiesEnum
+name: NCES_RuralDistant
+description: "(42) Census-defined rural territory that is more than 5 miles but less than or equal to 25 miles from an Urbanized Area,as well as rural territory that is more than 2.5 miles but less than or equal to 10 miles from an Urban Cluster."
+
+Node: dcid:NCES_RuralRemote
+typeOf: dcs:USLocalitiesEnum
+name: NCES_RuralRemote
+description: "(43): Census-defined rural territory that is more than 25 miles from an Urbanized Area and also more than 10 miles from an Urban Cluster."
+
+Node: dcid:NCES_LocaleDataNotApplicable
+typeOf: dcs:USLocalitiesEnum
+name: NCES_LocaleDataNotApplicable
+description: "NCES locale data is not applicable"
+
+Node: dcid:NCES_LocaleDataMissing
+typeOf: dcs:USLocalitiesEnum
+name: NCES_LocaleDataMissing
+description: "NCES locale data is missing"
+
+Node: dcid:NCES_LocaleDataQualityIssue
+typeOf: dcs:USLocalitiesEnum
+name: NCES_LocaleDataQualityIssue
+description: "NCES locale data quality issue"
+
+Node: dcid:AmericanIndianOrAlaskaNative
+typeOf: dcs:RaceCodeEnum
+name: AmericanIndianOrAlaskaNative
+
+Node: dcid:Asian
+typeOf: dcs:RaceCodeEnum
+name: Asian
+
+Node: dcid:Black
+typeOf: dcs:RaceCodeEnum
+name: Black
+
+Node: dcid:HawaiianNativeOrPacificIslander
+typeOf: dcs:RaceCodeEnum
+name: HawaiianNativeOrPacificIslander
+
+Node: dcid:HispanicOrLatino
+typeOf: dcs:RaceCodeEnum
+name: HispanicOrLatino
+
+Node: dcid:TwoOrMoreRaces
+typeOf: dcs:RaceCodeEnum
+name: TwoOrMoreRaces
+
+Node: dcid:White
+typeOf: dcs:RaceCodeEnum
+name: White
+
+## National School Lunch Program Enum
+
+Node: dcid:NationalSchoolLunchProgramEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: NationalSchoolLunchProgramEnum
+description: "This variable indicates whether a school participates in the National School Lunch Program, and, if so, under what special provisions. The Healthy, Hunger-Free Kids Act of 2010 (PL 111-296) includes provisions for determining free and reduced-price lunch (FRL) eligibility that may affect the reliability and availability of the FRL counts reported to EDFacts (FS033). Under provisions 2 and 3 of the law, annual certification of individual students is not required. A new provision, the Community Eligibility Option (CEO or Provision 4), eliminates the requirement for individual eligibility information once a school has determined a baseline percentage of FRL eligible students. These changes may result in missing or out of date FRL counts. Education researchers frequently use FRL eligibility as an indicator of student socioeconomic status (SES). The NSLP status provides these researchers with an indication of the reliability of the FRL counts reported in this file."
+
+Node: dcid:NCES_NationalSchoolLunchProgramNo
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramNo
+
+Node: dcid:NCES_NationalSchoolLunchProgramYesWithoutAnyProvisionOrCEO
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramYesWithoutAnyProvisionOrCEO
+
+Node: dcid:NCES_NationalSchoolLunchProgramYesUnderCEO
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramYesUnderCEO
+
+Node: dcid:NCES_NationalSchoolLunchProgramYesUnderProvision1
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramYesUnderProvision1
+
+Node: dcid:NCES_NationalSchoolLunchProgramYesUnderProvision2
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramYesUnderProvision2
+
+Node: dcid:NCES_NationalSchoolLunchProgramYesUnderProvision3
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramYesUnderProvision3
+
+Node: dcid:NCES_NationalSchoolLunchProgramDataNotApplicable
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramDataNotApplicable
+
+Node: dcid:NCES_NationalSchoolLunchProgramDataMissing
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramDataMissing
+
+Node: dcid:NCES_NationalSchoolLunchProgramDataQualityIssue
+typeOf: dcs:NationalSchoolLunchProgramEnum
+name: NCES_NationalSchoolLunchProgramDataQualityIssue
+
+## Title I School Status Enum
+
+Node: dcid:TitleISchoolStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: TitleISchoolStatusEnum
+description: "A school designated under appropriate state and federal regulations as being high poverty and eligible for participation in programs authorized by Title I."
+
+Node: dcid:NCES_TitleISchoolStatusTASNoTASProgram
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolStatusTASNoProgram
+description: "School is eligible for Title I Targeted Assistance (TAS) but provides no program"
+
+Node: dcid:NCES_TitleISchoolStatusTASAndTASProgram
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolStatusTASAndProgram
+description: "School is eligible for Title I Targeted Assistance (TAS) and provides TAS program"
+
+Node: dcid:NCES_TitleISchoolStatusSWPAndTASProgram
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolStatusSWPAndTASProgram
+description: "School is eligible for Title I Schoolwide program (SWP) and provides TAS program"
+
+Node: dcid:NCES_TitleISchoolStatusSWPNoTASProgram
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolStatusSWPNoTASProgram
+description: "School is eligible for Title I Schoolwide program (SWP) but provides no program"
+
+Node: dcid:NCES_TitleISchoolStatusSWPAndSWPProgram
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolStatusSWPAndSWPProgram
+description: "School is eligible for Title I Schoolwide program (SWP) and provides SWP program"
+
+Node: dcid:NCES_TitleISchoolStatusNotEligible
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolStatusNotEligible
+description: "School is not eligible for either Title I Targeted Assistance (TAS) or Schoolwide program (SWP)."
+
+Node: dcid:NCES_TitleISchoolStatusDataNotApplicable
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolStatusDataNotApplicable
+
+Node: dcid:NCES_TitleISchoolStatusDataMissing
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolStatusDataMissing
+
+Node: dcid:NCES_TitleISchoolDataQualityIssue
+typeOf: dcs:TitleISchoolStatusEnum
+name: NCES_TitleISchoolDataQualityIssue
+
+Node: dcid:CensusACS5yrSurveyEducationTabulation
+name: "CensusACS5yrSurveyEducationTabulation"
+typeOf: dcs:CensusSurveyEnum
+description: "NCES collaborates with the U.S. Census Bureau to create a variety of custom ACS data files that describe the condition of school-age children in the U.S., states, and school districts. The custom NCES files are updated annually and based on ACS five-year period estimates."
+descriptionUrl: "https://nces.ed.gov/programs/edge/Demographic/ACS"
+
+Node: dcid:memberStatus
+name: "memberStatus"
+typeOf: schema:Property
+domainIncludes: dcs:Household, dcs:HousingUnit
+rangeIncludes: dcs:HousingMemberStatusEnum
+
+Node: dcid:HousingMemberStatusEnum
+name: "HousingMemberStatusEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "An enumeration of housing member statuses."
+
+Node: dcid:WithACSEDChild
+name: "WithACSEDChild"
+typeOf: dcs:HousingMemberStatusEnum
+
+Node: dcid:childSchoolEnrollment
+name: "childSchoolEnrollment"
+typeOf: schema:Property
+domainIncludes: schema:Person, dcs:Household, dcs:HousingUnit
+rangeIncludes: dcs:USC_SchoolEnrollmentEnum
+
+Node: dcid:householdType
+name: "householdType"
+typeOf: schema:Property
+domainIncludes: dcs:Household
+rangeIncludes: dcs:HouseholdTypeEnum
+
+Node: dcid:HouseholdTypeEnum
+name: "HouseholdTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "An enumeration of household types."
+
+Node: dcid:FamilyHousehold
+name: "FamilyHousehold"
+typeOf: dcs:HouseholdTypeEnum
+description: "A family household."
+
+Node: dcid:MarriedCoupleFamilyHousehold
+name: "MarriedCoupleFamilyHousehold"
+typeOf: dcs:HouseholdTypeEnum
+description: "A family household with a married couple."
+
+Node: dcid:SingleFatherFamilyHousehold
+name: "SingleFatherFamilyHousehold"
+typeOf: dcs:HouseholdTypeEnum
+description: "A family household with a single father and no wife present."
+
+Node: dcid:SingleMotherFamilyHousehold
+name: "SingleMotherFamilyHousehold"
+typeOf: dcs:HouseholdTypeEnum
+description: "A family household with a single mother and no husband present."
+
+Node: dcid:benefitsStatus
+name: "benefitsStatus"
+typeOf: schema:Property
+domainIncludes: dcs:Household, schema:Person
+rangeIncludes: dcs:BenefitsStatusEnum
+
+Node: dcid:BenefitsStatusEnum
+name: "BenefitsStatusEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "An enumeration of benefits statuses."
+
+Node: dcid:WithFoodStampsInThePast12Months
+name: "WithFoodStampsInThePast12Months"
+typeOf: dcs:BenefitsStatusEnum
+description: "Having collected food stamps benefits in the past 12 months."
+
+Node: dcid:ACSEDChild
+name: "ACSEDChild"
+typeOf: schema:Class
+subClassOf: schema:Person
+description: "A person age 0 to 17 (at time of survey response) or a person age 18 or 19 who is not a high school graduate (based on the educational attainment response in the ACS questionnaire)."
+descriptionUrl: "https://nces.ed.gov/programs/edge/Demographic/ACSchildren"
+
+Node: dcid:ACSEDParent
+name: "ACSEDParent"
+typeOf: schema:Class
+subClassOf: schema:Person
+description: "A person who is either a householder who has a child, the spouse of a householder who has a child, or an identified parent in a subfamily with a child. The child must live in the household with the parent in order for the parent to be identified."
+descriptionUrl: "https://nces.ed.gov/programs/edge/Demographic/ACSparents"

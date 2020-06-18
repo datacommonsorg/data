@@ -1,0 +1,196 @@
+## Types.
+
+Node: dcid:GeologicalEvent
+typeOf: schema:Class
+subClassOf: schema:Event
+name: "GeologicalEvent"
+description: "Events that occur due to a change of the earth either on or below its surface."
+
+Node: dcid:EarthquakeEvent
+typeOf: schema:Class
+subClassOf: dcs:GeologicalEvent
+name: "EarthquakeEvent"
+description: "Occurrence of an earthquake event."
+
+## Properties of EarthquakeEvent.
+
+Node: dcid:occurrenceTime
+typeOf: schema:Property
+name: "occurrenceTime"
+description: "Time of occurrence of an earthquake event, in ISO 8601 format."
+domainIncludes: dcs:EarthquakeEvent
+rangeIncludes: schema:Date
+
+Node: dcid:affectedPlace
+typeOf: schema:Property
+name: "affectedPlace"
+description: "A place like a country or a state affected by a natural disaster."
+domainIncludes: dcs:EarthquakeEvent, dcs:MeteorologicalEvent
+rangeIncludes: schema:Place
+
+Node: dcid:magnitude
+typeOf: schema:Property
+name: "magnitude"
+description: "Magnitude of some phenomenom, like an earthquake or a gust of wind. The associated scale is magnitudeType."
+domainIncludes: dcs:EarthquakeEvent, dcs:MeteorologicalEvent
+rangeIncludes: schema:Number, dcs:Quantity
+
+Node: dcid:magnitudeType
+typeOf: schema:Property
+name: "magnitudeType"
+description: "Magnitude of an earthquake. The associated scale is magnitudeType."
+domainIncludes: dcs:EarthquakeEvent, dcs:MeteorologicalEvent
+rangeIncludes: dcs:EarthquakeMagnitudeTypeEnum, dcs:WindSpeedMagnitudeTypeEnum
+
+Node: dcid:magnitudeError
+typeOf: schema:Property
+name: "magnitudeError"
+description: "Uncertainty of reported magnitude of an earthquake event. Takes values [0, 100]."
+domainIncludes: dcs:EarthquakeEvent
+rangeIncludes: dcs:Number
+
+Node: dcid:depth
+typeOf: schema:Property
+name: "depth"
+description: "Depth measurement of a natural event."
+domainIncludes: dcs:EarthquakeEvent
+rangeIncludes: schema:Quantity
+
+Node: dcid:depthError
+typeOf: schema:Property
+name: "depthError"
+description: "Uncertainty of reported depth of a natural event."
+domainIncludes: dcs:EarthquakeEvent
+rangeIncludes: schema:Quantity
+
+Node: dcid:reviewStatus
+typeOf: schema:Property
+name: "reviewStatus"
+description: "Review status of a natural event."
+domainIncludes: dcs:EarthquakeEvent
+rangeIncludes: dcs:EventReviewStatusEnum
+
+
+## EventReviewStatusEnum defintion.
+
+Node: dcid:EventReviewStatusEnum
+typeOf: schema:Class
+name: "EventReviewStatusEnum"
+subClassOf: schema:Enumeration
+description: "Review status of an occurrence of an event like earthquake. Indicates whether the event was automatically generated, was verified or altered by a human, or was deleted."
+
+Node: dcid:ReviewedEvent
+typeOf: dcs:EventReviewStatusEnum
+name: "ReviewedEvent"
+description: "The event was reviewed by a human."
+
+Node: dcid:UnreviewedAutomatedEvent
+typeOf: dcs:EventReviewStatusEnum
+name: "UnreviewedAutomatedEvent"
+description: "The event was automatically processed and was not reviewed by a human."
+
+Node: dcid:DeletedEvent
+typeOf: dcs:EventReviewStatusEnum
+name: "DeletedEvent"
+description: "Deleted event."
+
+
+## EarthquakeMagnitudeTypeEnum definition.
+
+Node: dcid:EarthquakeMagnitudeTypeEnum
+typeOf: schema:Class
+name: "EarthquakeMagnitudeTypeEnum"
+subClassOf: schema:Enumeration
+description: "Type of method or algorithm used to calculate an earthquake's magnitude."
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+# NOTE: "M" and "fa" were not defined in USGS glossary. The names are a best
+# guess from https://en.wikipedia.org/wiki/Seismic_magnitude_scales
+Node: dcid:MagnitudeMfa
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mfa (Felt area)"
+
+Node: dcid:MagnitudeM
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "M (Generic Magnitude)"
+
+# NOTE: This is also not really described in the source or elsewhere. There
+# are only 46 events with this though.
+Node: dcid:MagnitudeMa
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Ma"
+
+Node: dcid:MagnitudeMb
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mb (Short-period body wave)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+# NOTE: "mc" was not defined in USGS glossary. This si a best guess from
+# https://en.wikipedia.org/wiki/Seismic_magnitude_scales
+Node: dcid:MagnitudeMc
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mc (Coda magnitude scale)"
+
+Node: dcid:MagnitudeMd
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Md (Duration based)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMh
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mh (Non-standard method)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMl
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Ml (Local or Richter Magnitude)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMlr
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mlr (Revised local magnitude)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMs
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Ms (Surface wave near 20 seconds)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMLg
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "MLg (Short-period surface wave)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMw
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mw (Moment magnitude scale)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMwb
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mwb (Moment body wave)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMwc
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mwc (Moment centroid)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMwp
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mwp (Moment integrated P-wave)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMwr
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mwr (Moment regional)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeMww
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Mww (Moment W-phase)"
+url: "https://earthquake.usgs.gov/learn/topics/mag-intensity/magnitude-types.php"
+
+Node: dcid:MagnitudeUnknown
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+name: "Unknown"

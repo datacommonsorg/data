@@ -1,0 +1,255 @@
+################################################################################
+
+# WARNING: HANDLE THIS FILE WITH CARE.
+# This file must contain all enum specialization relationships (minus BLS).
+# Changes to this file likely affect the output of the super enum aggregator.
+# Do not put specializationOf triples in any other MCF, lest they be dropped.
+# BLS is an exception, as it is large and does not need super enum aggregation.
+
+################################################################################
+
+# USC_DetailedLevelOfSchoolEnum from census_enums.mcf
+# USC_DetailedLevelOfSchoolEnum is range of detailedLevelOfSchool
+
+# TODO(tjann): migrate most of USC_DetailedLevelOfSchoolEnum
+# to use the SchoolGradeLevelEnum enums.
+
+Node: dcid:EnrolledInGrade12
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:HighSchool
+
+Node: dcid:EnrolledInGrade11
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:HighSchool
+
+Node: dcid:EnrolledInGrade10
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:HighSchool
+
+Node: dcid:EnrolledInGrade9
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:HighSchool
+
+Node: dcid:EnrolledInGrade8
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:MiddleSchool
+
+Node: dcid:EnrolledInGrade7
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:MiddleSchool
+
+Node: dcid:EnrolledInGrade6
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:MiddleSchool
+
+Node: dcid:EnrolledInGrade5
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:EnrolledInGrade4
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:EnrolledInGrade3
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:EnrolledInGrade2
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:EnrolledInGrade1
+typeOf: dcs:USC_DetailedLevelOfSchoolEnum
+specializationOf: dcs:PrimarySchool
+
+
+# SchoolGradeLevelEnums from K12SchemaExtensions.mcf
+# SchoolGradeLevelEnums is range of schoolGradeLevel
+
+Node: dcid:Kindergarten
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:SchoolGrade1
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:SchoolGrade2
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:SchoolGrade3
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:SchoolGrade4
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:SchoolGrade5
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:PrimarySchool
+
+Node: dcid:SchoolGrade6
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:MiddleSchool
+
+Node: dcid:SchoolGrade7
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:MiddleSchool
+
+Node: dcid:SchoolGrade8
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:MiddleSchool
+
+Node: dcid:SchoolGrade9
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:HighSchool
+
+Node: dcid:SchoolGrade10
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:HighSchool
+
+Node: dcid:SchoolGrade11
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:HighSchool
+
+Node: dcid:SchoolGrade12
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:HighSchool
+
+Node: dcid:SchoolGrade13
+typeOf: dcs:SchoolGradeLevelEnum
+specializationOf: dcs:HighSchool
+
+# USC_EducationalAttainmentEnum from census_enums.mcf
+# USC_EducationalAttainmentEnum is range of educationalAttainment
+
+Node: dcid:BachelorsDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+specializationOf: dcs:BachelorsDegreeOrHigher
+
+Node: dcid:MastersDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+specializationOf: dcs:BachelorsDegreeOrHigher
+
+Node: dcid:DoctorateDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+specializationOf: dcs:BachelorsDegreeOrHigher
+
+Node: dcid:ProfessionalSchoolDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+specializationOf: dcs:BachelorsDegreeOrHigher
+
+Node: dcid:GraduateOrProfessionalDegree
+typeOf: dcs:USC_EducationalAttainmentEnum
+specializationOf: dcs:BachelorsDegreeOrHigher
+
+# *CrimeTypeEnum from dcschema_enum_instances.mcf
+# USC_DetailedLevelOfSchoolEnum is range of detailedLevelOfSchool
+
+Node: dcid:LarcenyTheft
+typeOf: dcs:PropertyCrimeTypeEnum
+specializationOf: dcs:PropertyCrime
+
+Node: dcid:Burglary
+typeOf: dcs:PropertyCrimeTypeEnum
+specializationOf: dcs:PropertyCrime
+
+Node: dcid:MotorVehicleTheft
+specializationOf: dcs:PropertyCrime
+typeOf: dcs:PropertyCrimeTypeEnum
+
+Node: dcid:AggravatedAssault
+typeOf: dcs:ViolentCrimeTypeEnum
+specializationOf: dcs:ViolentCrime
+
+Node: dcid:ForcibleRape
+typeOf: dcs:ViolentCrimeTypeEnum
+specializationOf: dcs:ViolentCrime
+
+Node: dcid:MurderAndNonNegligentManslaughter
+typeOf: dcs:ViolentCrimeTypeEnum
+specializationOf: dcs:ViolentCrime
+
+Node: dcid:Robbery
+typeOf: dcs:ViolentCrimeTypeEnum
+specializationOf: dcs:ViolentCrime
+
+
+# EarthquakeMagnitudeTypeEnum from earthquake.mcf
+# EarthquakeMagnitudeTypeEnum is range of magnitudeType
+
+Node: dcid:MagnitudeMlr
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+specializationOf: dcs:MagnitudeMl
+
+Node: dcid:MagnitudeMwb
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+specializationOf: dcs:MagnitudeMw
+
+Node: dcid:MagnitudeMwc
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+specializationOf: dcs:MagnitudeMw
+
+Node: dcid:MagnitudeMwp
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+specializationOf: dcs:MagnitudeMw
+
+Node: dcid:MagnitudeMwr
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+specializationOf: dcs:MagnitudeMw
+
+Node: dcid:MagnitudeMww
+typeOf: dcs:EarthquakeMagnitudeTypeEnum
+specializationOf: dcs:MagnitudeMw
+
+
+# CycloneTypeEnum from natural_phenomena.mcf
+# CycloneTypeEnum is range of classification and maxClassification
+
+Node: dcid:TropicalDepression
+typeOf: dcs:CycloneTypeEnum
+specializationOf: dcs:TropicalCyclone
+
+Node: dcid:TropicalStorm
+typeOf: dcs:CycloneTypeEnum
+specializationOf: dcs:TropicalCyclone
+
+Node: dcid:Hurricane
+typeOf: dcs:CycloneTypeEnum
+specializationOf: dcs:TropicalCyclone
+
+Node: dcid:SubtropicalDepression
+typeOf: dcs:CycloneTypeEnum
+specializationOf: dcs:SubtropicalCyclone
+
+Node: dcid:SubtropicalStorm
+typeOf: dcs:CycloneTypeEnum
+specializationOf: dcs:SubtropicalCyclone
+
+Node: dcid:Typhoon
+typeOf: dcs:CycloneTypeEnum
+specializationOf: dcs:TropicalCyclone
+
+# HouseholdTypeEnum from edu.mcf as well as from census.gov
+# HouseholdTypeEnum is range of householdType
+
+Node: dcid:MarriedCoupleFamilyHousehold
+typeOf: dcs:HouseholdTypeEnum
+specializationOf: dcs:FamilyHousehold
+
+Node: dcid:SingleFatherFamilyHousehold
+typeOf: dcs:HouseholdTypeEnum
+specializationOf: dcs:FamilyHousehold
+
+Node: dcid:SingleMotherFamilyHousehold
+typeOf: dcs:HouseholdTypeEnum
+specializationOf: dcs:FamilyHousehold
+
+Node: dcid:OtherFamilyHousehold
+typeOf: dcs:HouseholdTypeEnum
+specializationOf: dcs:FamilyHousehold
+
+Node: dcid:NonfamilyHousehold
+typeOf: dcs:HouseholdTypeEnum

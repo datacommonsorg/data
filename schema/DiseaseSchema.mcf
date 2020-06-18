@@ -1,0 +1,299 @@
+Node: dcid:Disease
+name: "Disease"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "Disease - a defined disorder with a set of symptoms that effect the biological processes of a living entity and is not the direct result of physical injury."
+sameAs: "https://disease-ontology.org/"
+
+Node: dcid:DiseaseGeneAssociation
+name: "DiseaseGeneAssociation"
+typeOf: schema:Class
+subClassOf: dcs:Disease
+description: "The association of a disease with a gene."
+
+Node: dcid:MeSHDescriptor
+name: "MeSHDescriptor"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "Cluster of one or more concepts used for subject indexing and retrieval. Identified uniquely by a DescriptorUI and DescriptorName. A Descriptor. A Descriptor record. Also known as Main Heading. (Note that this differs from the MEDLINE MeshHeading element. For example, the MEDLINE element includes both the Descriptor name and the Qualifier name assigned to a citation.)."
+sameAs: "https://www.nlm.nih.gov/mesh/xml_data_elements.html#DescriptorRecord"
+
+Node: dcid:MeSHTerm
+name: "MeSHTerm"
+typeOf: schema:Class
+subClassOf: dcs:MeSHDescriptor
+description: "Alpha-numeric string which comprises the basic unit of the MeSH vocabulary. Also functions as the name of a Descriptor and concept. The term itself is the String element."
+sameAs: "https://www.nlm.nih.gov/mesh/xml_data_elements.html#Term"
+
+Node: dcid:MeSHConcept
+name: "MeSHConcept"
+typeOf: schema:Class
+subClassOf: dcs:MeSHDescriptor
+description: "The bearer of linguistic meaning in MeSH as defined by the ScopeNote, comprising a DescriptorRecord or SupplementalRecord or QualifierRecord, and consisting of Term elements. One of the three main objects in the MeSH XML (the others being the record, and term). A single record will have one or more concepts, one of which is the preferred concept of the record. A Concept will have one or more terms, one of which is the preferred term for the concept. Referred to uniquely by both a ConceptUI and a ConceptName."
+sameAs: "https://www.nlm.nih.gov/mesh/xml_data_elements.html#Concept"
+
+Node: dcid:DiseaseSymptomAssociation
+name: "DiseaseSymptomAssociation"
+typeOf: schema:Class
+subClassOf: dcs:Disease
+description: "The association of a disease with a symptom."
+
+Node: dcid:diseaseOntologyID
+name: "diseaseOntologyID"
+typeOf: schema:Property
+rangeIncludes: dcs:Disease
+domainIncludes: dcs:Disease
+description: "The disease ontology identifier for the disease specified by http://disease-ontology.org/."
+
+Node: dcid:associationSource
+name: "associationSource"
+typeOf: schema:Property
+rangeIncludes: dcs:AssociationSourceEnum
+domainIncludes: dcs:DiseaseGeneAssociation
+description: "How the association between a disease and a gene was made."
+
+Node: dcid:associationIdentifier
+name: "associationIdentifier"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:DiseaseGeneAssociation
+description: "Identifier for disease-gene association source."
+
+Node: dcid:associationScore
+name: "associationScore"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseGeneAssociation
+description: "The score for the association between the disease and the gene."
+
+Node: dcid:associationConfidenceInterval
+name: "associationConfidenceInterval"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseGeneAssociation
+description: "The confidence interval of the score for the association between the disease and the gene."
+
+Node: dcid:associationStatus
+name: "associationStatus"
+typeOf: schema:Property
+rangeIncludes: dcs:DiseaseGeneAssociationStatusEnum
+domainIncludes: dcs:DiseaseGeneAssociation
+description: "The status of the association between the disease and the gene."
+
+Node: dcid:experimentSampleCount
+name: "experimentSampleCount"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseGeneAssociation
+description: "The number of samples in the experiment associating a gene with a disease ontology ID."
+
+Node: dcid:experimentPValue
+name: "experimentPValue"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseGeneAssociation
+description: "The p-value of the experiment associating a gene with a disease ontology ID."
+
+Node: dcid:descriptorID
+name: "descriptorID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHDescriptor
+description: "Descriptor Unique Identifier."
+
+Node: dcid:descriptorName
+name: "descriptorName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHDescriptor
+description: "A term that uniquely refers to its descriptor record."
+
+Node: dcid:descriptorClass
+name: "descriptorClass"
+typeOf: schema:Property
+rangeIncludes: dcs:MeSHDescriptorClassEnum,schema:GenderType
+domainIncludes: dcs:MeSHDescriptor
+description: "This record type plays a central role in MeSH vocabulary as a unit of indexing and retrieval. These descriptors are organized into a numbered tree structure or hierarchy that allows users to browse in an orderly fashion from broader to narrower topics."
+descriptionUrl: "https://www.nlm.nih.gov/mesh/intro_record_types.html"
+
+Node: dcid:nlmClassificationNumber
+name: "nlmClassificationNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHDescriptor
+description: "Classification Number provided by the NLM Cataloging and Metadata Management Section (CAMMS)."
+
+Node: dcid:publicMeSHNote
+name: "publicMeSHNote"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHDescriptor
+description: "Free-text information about the history of changes in the record."
+
+Node: dcid:seeRelatedDescriptor
+name: "seeRelatedDescriptor"
+typeOf: schema:Property
+rangeIncludes: dcs:MeSHDescriptor
+domainIncludes: dcs:MeSHDescriptor
+description: "Reference to a specific Descriptor to which a user is referred by a 'see related' cross-reference."
+
+Node: dcid:treeNumber
+name: "treeNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHDescriptor
+description: "Alpha-numeric string referring to location within a descriptor hierarchy."
+
+Node: dcid:treeParent
+name: "treeParent"
+typeOf: schema:Property
+rangeIncludes: dcs:MeSHDescriptor
+domainIncludes: dcs:MeSHDescriptor
+description: "The MeSH descriptor that is one level higher in the tree number hierarchy."
+
+Node: dcid:conceptID
+name: "conceptID"
+typeOf: schema:Property
+rangeIncludes: dcs:MeSHDescriptor
+domainIncludes: dcs:MeSHConcept,dcs:MeSHDescriptor
+description: "Concept Unique Identifier."
+
+Node: dcid:conceptName
+name: "conceptName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHConcept
+description: "The term that uniquely names the Concept."
+
+Node: dcid:preferredConceptStatus
+name: "preferredConceptStatus"
+typeOf: schema:Property
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:MeSHConcept
+description: "Whether concept is the preferred concept of the descriptor."
+
+Node: dcid:chemicalAbstractsTypeN1Name
+name: "chemicalAbstractsTypeN1Name"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHConcept
+description: "Chemical Abstracts Type N1 name for the concept."
+
+Node: dcid:registryNumber
+name: "registryNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHConcept
+description: "Registry number associated with a MeSH concepts in one of the following formats EC, CAS, or FDA UNII."
+
+Node: dcid:relatedRegistryNumber
+name: "relatedRegistryNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHConcept
+description: "Registry number for concepts which do not have their own descriptor."
+
+Node: dcid:scopeNote
+name: "scopeNote"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHConcept
+description: "Free-text narrative giving the scope and meaning of the concept."
+
+Node: dcid:termID
+name: "termID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHTerm
+description: "Term unique identifier."
+
+Node: dcid:termName
+name: "termName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHTerm
+description: "The string that constitutes a term."
+
+Node: dcid:conceptPreferredTermStatus
+name: "conceptPreferredTermStatus"
+typeOf: schema:Property
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:MeSHTerm
+description: "Whether a term is the preferred term of the concept."
+
+Node: dcid:permutedTermStatus
+name: "permutedTermStatus"
+typeOf: schema:Property
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:MeSHTerm
+description: "Whether term is created automatically in the MeSH editing application as a variant of another term in the descriptor."
+
+Node: dcid:lexicalTag
+name: "lexicalTag"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHTerm
+description: "Lexical category of term."
+
+Node: dcid:recordPreferredTermStatus
+name: "recordPreferredTermStatus"
+typeOf: schema:Property
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:MeSHTerm
+description: "Whether term is the preferred term of the descriptor."
+
+Node: dcid:entryVersion
+name: "entryVersion"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:MeSHTerm
+description: "Custom short form of a MeSHTerm used for NLM indexing and searching."
+
+Node: dcid:associationCooccurrence
+name: "associationCooccurrence"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseSymptomAssociation
+description: "The number of PubMed publications common to a disease and symptom association."
+
+Node: dcid:associationExpectedCooccurrence
+name: "associationExpectedCooccurrence"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseSymptomAssociation
+description: "The expected number of PubMed publications common to a disease and symptom association."
+
+Node: dcid:associationPublicationCount
+name: "associationPublicationCount"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseSymptomAssociation
+description: "The number of PubMed publications expected to be common to a disease and symptom."
+
+Node: dcid:associationEnrichment
+name: "associationEnrichment"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseSymptomAssociation
+description: "The enrichment of publication cooccurrence associating a disease and symptom."
+
+Node: dcid:associationOddsRatio
+name: "associationOddsRatio"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseSymptomAssociation
+description: "The odds of actual publication cooccurrence rate associating a disease and symptom."
+
+Node: dcid:associationFisherTest
+name: "associationFisherTest"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:DiseaseSymptomAssociation
+description: "Fisher test value for non-random association of a disease and symptom."
+
+Node: dcid:associationPMID
+name: "associationPMID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:DiseaseSymptomAssociation
+description: "A PubMed identifier for a publication containing reference to a disease and symptom."

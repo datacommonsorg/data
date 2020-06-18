@@ -1,0 +1,998 @@
+Node: dcid:NucleicAcidEnum
+name: "NucleicAcidEnum"
+subClassOf: schema:Enumeration
+description: "A (Adenine), T (Thymine), G (Guanine), C (Cytosine), and N (unknown) nucleic acid status."
+typeOf: schema:Class
+
+Node: dcid:NucleicAcidStatusA
+name: "A"
+typeOf: dcs:NucleicAcidEnum
+
+Node: dcid:NucleicAcidStatusT
+name: "T"
+typeOf: dcs:NucleicAcidEnum
+
+Node: dcid:NucleicAcidStatusG
+name: "G"
+typeOf: dcs:NucleicAcidEnum
+
+Node: dcid:NucleicAcidStatusC
+name: "C"
+typeOf: dcs:NucleicAcidEnum
+
+Node: dcid:NucleicAcidStatusN
+name: "N"
+typeOf: dcs:NucleicAcidEnum
+
+Node: dcid:StrandOrientationEnum
+name: "StrandOrientationEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Denotes if the gene is on the forward (+) or reverse (-) DNA strands."
+
+Node: dcid:StrandOrientationPositive
+name: "Positive"
+typeOf: dcs:StrandOrientationEnum
+
+Node: dcid:StrandOrientationNegative
+name: "Negative"
+typeOf: dcs:StrandOrientationEnum
+
+Node: dcid:ExonFramesEnum
+name: "ExonFramesEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Denotes the exon frame {0,1,2}, or none if no frame for the exon."
+
+Node: dcid:ExonFrame0
+name: "Frame0"
+typeOf: dcs:ExonFramesEnum
+
+Node: dcid:ExonFrame1
+name: "Frame1"
+typeOf: dcs:ExonFramesEnum
+
+Node: dcid:ExonFrame2
+name: "Frame2"
+typeOf: dcs:ExonFramesEnum
+
+Node: dcid:ExonFrameNone
+name: "None"
+typeOf: dcs:ExonFramesEnum
+
+Node: dcid:NomenclatureStatusEnum
+name: "NomenclatureStatuEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "The status of the name from the nomenclature committee: official, interim, or NCBI-supplied."
+
+Node: dcid:NomenclatureStatusOfficial
+name: "Official"
+typeOf: dcs:NomenclatureStatusEnum
+
+Node: dcid:NomenclatureStatusInterim
+name: "Interim"
+typeOf: dcs:NomenclatureStatusEnum
+
+Node: dcid:NomenclatureStatusNCBIsupplied
+name: "NCBI Supplied"
+typeOf: dcs:NomenclatureStatusEnum
+
+Node: dcid:TypeOfGeneEnum
+name: "TypeOfGeneEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "The type of gene as specified by NCBI: biological-region, ncRNA, other, protein-coding, pseudo, rRNA, scRNA, snRNA, snoRNA, tRNA, miscRNA, or unknown."
+
+Node: dcid:TypeOfGeneBiologicalRegion
+name: "BiologicalRegion"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGenencRNA
+name: "ncRNA"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGeneOther
+name: "Other"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGeneProteinCoding
+name: "ProteinCoding"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGenePseudo
+name: "Pseudo"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGenerRNA
+name: "rRNA"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGenescRNA
+name: "scRNA"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGenesnRNA
+name: "snRNA"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGenesnoRNA
+name: "snoRNA"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGenetRNA
+name: "tRNA"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGenemiscRNA
+name: "miscRNA"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:TypeOfGeneUnknown
+name: "Unknown"
+typeOf: dcs:TypeOfGeneEnum
+
+Node: dcid:GeneticVariantMolTypeEnum
+name: "GeneticVariantMolTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Sample type from exemplar submitted GeneticVariants (cDNA, genomic, mitochondrial, or unknown)."
+
+Node: dcid:GeneticVariantMolTypecDNA
+name: "cDNA"
+typeOf: dcs:GeneticVariantMolTypeEnum
+
+Node: dcid:GeneticVariantMolTypeGenomic
+name: "Genomic"
+typeOf: dcs:GeneticVariantMolTypeEnum
+
+Node: dcid:GeneticVariantMolTypeMitochondrial
+name: "Mitochondrial"
+typeOf: dcs:GeneticVariantMolTypeEnum
+
+Node: dcid:GeneticVariantMolTypeUnknown
+name: "Unknown"
+typeOf: dcs:GeneticVariantMolTypeEnum
+
+Node: dcid:GeneticVariantClassEnum
+name: "GeneticVariantClassEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Class of variant: single nucleotide variant, deletion, insertion, in-del, named, mixed, mnp, het, microsatellite, inversion, copy number variation, variation, duplication, inversion, copy number loss, or copy number gain."
+
+Node: dcid:GeneticVariantClassSingle
+name: "Single Nucleotide Variant"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassDeletion
+name: "Deletion"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassInsertion
+name: "Insertion"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassIn-del
+name: "InDel"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassNamed
+name: "Named"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassMixed
+name: "Mixed"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassMNP
+name: "MNP"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassHet
+name: "Het"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassMicrosatellite
+name: "microsatellite"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassInversion
+name: "Inversion"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassCopyNumberVariation
+name: "CopyNumberVariation"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassVariation
+name: "Variation"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassDuplication
+name: "Duplication"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassCopyNumberGain
+name: "CopyNumberGain"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantClassCopyNumberLoss
+name: "Copy Number Loss"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:dcid:GeneticVariantClassInversion
+name: "Inversion"
+typeOf: dcs:GeneticVariantClassEnum
+
+Node: dcid:GeneticVariantValidationStatusEnum
+name: "GeneticVariantValidationStatusEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Validation status of the genetic variant: cluster, frequency, 1000genomes, HapMap, 2hit-2allele, submitter, or unknown."
+
+Node: dcid:GeneticVariantValidationStatusFrequency
+name: "Frequency"
+typeOf: dcs:GeneticVariantValidationStatusEnum
+
+Node: dcid:GeneticVariantValidationStatusCluster
+name: "Cluster"
+typeOf: dcs:GeneticVariantValidationStatusEnum
+
+Node: dcid:GeneticVariantValidationStatus1000genomes
+name: "1000 Genomes"
+typeOf: dcs:GeneticVariantValidationStatusEnum
+
+Node: dcid:GeneticVariantValidationStatusHapMap
+name: "HapMap"
+typeOf: dcs:GeneticVariantValidationStatusEnum
+
+Node: dcid:GeneticVariantValidationStatusUnknown
+name: "uUknown"
+typeOf: dcs:GeneticVariantValidationStatusEnum
+
+Node: dcid:GeneticVariantValidationStatus2hit-2allele
+name: "2hit-2allele"
+typeOf: dcs:GeneticVariantValidationStatusEnum
+
+Node: dcid:GeneticVariantValidationStatusSubmitter
+name: "Submitter"
+typeOf: dcs:GeneticVariantValidationStatusEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryEnum
+name: "GeneticVariantFunctionalCategoryEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Functional category of the genetic variant (coding-synon, splice_5', missense, frameshift, near_gene_5', 3'_UTR, near_gene_3', nonsense, splice_3', intron, cds_reference, 5'_UTR, unknown, cds_indel, stop_loss, 5' UTR, or ncRNA.)"
+
+Node: dcid:GeneticVariantFunctionalCategoryncRNA
+name: "ncRNA"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryCodingSynon
+name: "Coding Synonomous"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategorySplice5
+name: "Splice 5'"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+description: "In donor splice site"
+
+Node: dcid:GeneticVariantFunctionalCategoryMissense
+name: "Missense"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryFrameshift
+name: "Frameshift"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryNearGene5
+name: "Near Gene 5'"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryUTR3
+name: "3' UTR"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryUTR5
+name: "5' UTR"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryNearGene3
+name: "Near Gene 3'"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryNonsense
+name: "Nonsense"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategorySplice3
+name: "Splice 3'"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+description: "In acceptor splice"
+
+Node: dcid:GeneticVariantFunctionalCategoryIntron
+name: "Intron"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryCDSReference
+name: "cds Reference"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryUTR5
+name: "5' UTR"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryUnknown
+name: "Unknown"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCategoryStopLoss
+name: "Stop Loss"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantFunctionalCDSIndel
+name: "cds Indel"
+typeOf: dcs:GeneticVariantFunctionalCategoryEnum
+
+Node: dcid:GeneticVariantLocTypeEnum
+name: "GeneticVariantLocTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Type of mapping inferred from size on reference; may not agree with class: between, exact, fuzzy, range, range deletion, range insertion, or range substitution."
+
+Node: dcid:GeneticVariantLocTypeBetween
+name: "Between"
+typeOf: dcs:GeneticVariantLocTypeEnum
+
+Node: dcid:GeneticVariantLocTypeExact
+name: "Exact"
+typeOf: dcs:GeneticVariantLocTypeEnum
+
+Node: dcid:GeneticVariantLocTypeRange
+name: "Range"
+typeOf: dcs:GeneticVariantLocTypeEnum
+
+Node: dcid:GeneticVariantLocTypeRangeDeletion
+name: "RangeDeletion"
+typeOf: dcs:GeneticVariantLocTypeEnum
+
+Node: dcid:GeneticVariantLocTypeRangeInsertion
+name: "RangeInsertion"
+typeOf: dcs:GeneticVariantLocTypeEnum
+
+Node: dcid:GeneticVariantLocTypeRangeSubstitution
+name: "RangeSubstituation"
+typeOf: dcs:GeneticVariantLocTypeEnum
+
+Node: dcid:GeneticVariantLocTypeFuzzy
+name: "Fuzzy"
+typeOf: dcs:GeneticVariantLocTypeEnum
+
+Node: dcid:GeneticVariantAlignmentQualityEnum
+name: "GeneticVariantAlignmentQualityEnumm"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "The quality of the alignment: unique mapping, non-unique, and many matches (1, 2, or 3+)."
+
+Node: dcid:GeneticVariantAlignmentQualityOne
+name: "Unique Mapping"
+typeOf: dcs:GeneticVariantAlignmentQualityEnum
+
+Node: dcid:GeneticVariantAlignmentQualityTwo
+name: "Non-unique Mapping"
+typeOf: dcs:GeneticVariantAlignmentQualityEnum
+
+Node: dcid:GeneticVariantAlignmentQualityThree
+name: "Many Matches"
+typeOf: dcs:GeneticVariantAlignmentQualityEnum
+
+Node: dcid:GeneticVariantAttributeEnum
+name: "GeneticVariantAttributeEnumm"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Genetic variant attributes extracted from dbSNP's SNP_bitfield table: clinically associated, MAF >5% in some populations, MAF >5% in all populations, has OMIM OMIA, microattribute tpa, submitted by locus-specific database, genotype conflict, rs cluster non-overlapping alleles, observed mismatch, reference present, pharmGKB, published, 3D structure, submitter link out, other variant with exact mapping, assembly specific, mutant, validated, included in high density kit, genotypes available, 1000 Genomes Phase 1, 1000 Genomes Phase 3, included in clinical diagnostic assay, withdrawn by some not all submitters, or common SNP."
+
+Node: dcid:GeneticVariantAttributeClinicallyAssociated
+name: "Clinically Associated"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Variant is Precious(Clinical,Pubmed Cited)."
+
+Node: dcid:GeneticVariantAttributeMAF5SomePop
+name: "MAF >5% In Some Populations"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: ">5% minor allele frequency in 1+ populations."
+
+Node: dcid:GeneticVariantAttributeMAF5AllPop
+name: "MAF >5% In All Populations"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: ">5% minor allele frequency in each and all populations."
+
+Node: dcid:GeneticVariantAttributOMIMOMIA
+name: "Has OMIM OMIA"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Has OMIM/OMIA."
+
+Node: dcid:GeneticVariantAttributeMicroattributeTPA
+name: "Microattribute TPA"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Microattribution/third-party annotation(TPA:GWAS,PAGE)."
+
+Node: dcid:GeneticVariantAttrbuteSubmittedByLSDB
+name: "Submitted By Locus Specific Database"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Submitted from a locus-specific database."
+
+Node: dcid:GeneticVariantAttributeGenotypeConflict
+name: "Genotype Conflict"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Has Assembly conflict. This is for non-unique and many matches that maps to different chromosomes on different assemblies."
+
+Node: dcid:GeneticVariantAttributersCluster
+name: "rs Cluster Non-overlapping Alleles"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Rs cluster has non-overlapping allele sets. True when rs set has more than 2 alleles from different submissions and these sets share no alleles in common."
+
+Node: dcid:GeneticVariantAttributeObservedMismatch
+name: "Observed Mismatch"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Contig allele not present in variant allele list. The reference sequence allele at the mapped position is not present in the variant allele list, adjusted for orientation."
+
+Node: dcid:GeneticVariantAttributeReferencePresent
+name: "Reference Present"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "A coding region variation where one allele in the set is identical to the reference sequence."
+
+Node: dcid:GeneticVariantAttributePharmGKB
+name: "PharmGKB"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Provisional Third Party Annotation(TPA) (currently rs from PHARMGKB who will give phenotype data)."
+
+Node: dcid:GeneticVariantAttributePublished
+name: "Published"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Links exist to PubMed Central article."
+
+Node: dcid:GeneticVariantAttribute3DStructure
+name: "3D Structure"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Has 3D structure - SNP3D table."
+
+Node: dcid:GeneticVariantAttributeSubmitterLinkOut
+name: "Submitter Link Out"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Has SubmitterLinkOut - From SNP->SubSNP->Batch.link_out."
+
+Node: dcid:GeneticVariantAttributeOtherVariant
+name: "Other Variant With Exact Mapping"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Has other variant with exactly the same set of mapped positions on NCBI reference assembly."
+
+Node: dcid:GeneticVariantAttributeAssembly
+name: "Assembly Specific"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Is Assembly specific. This is set if the variant only maps to one assembly."
+
+Node: dcid:GeneticVariantAttributeMutant
+name: "Mutant"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Is mutation (journal citation, explicit fact): a low frequency variation that is cited in journal and other reputable sources."
+
+Node: dcid:GeneticVariantAttributeValidated
+name: "Validated"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Is Validated. This bit is set if the variant has 2+ minor allele count based on frequency or genotype data."
+
+Node: dcid:GeneticVariantAttributeHighDensityKit
+name: "Included In High Density Kit(s)"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Marker is on high density genotyping kit (50K density or greater). The variant may have phenotype associations present in dbGaP."
+
+Node: dcid:GeneticVariantAttributeGenotypesAvailable
+name: "Genotypes Available"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Genotypes available. The variant has individual genotype (in SubInd table)."
+
+Node: dcid:GeneticVariantAttribute1000GenomesPhase1
+name: "1000 Genomes Phase 1"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "1000 Genome phase 1 (incl. June Interim phase 1)."
+
+Node: dcid:GeneticVariantAttribute1000GenomesPhase3
+name: "1000 Genomes Phase 3"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "1000 Genome phase 3."
+
+Node: dcid:GeneticVariantAttributeSomeWithdrawn
+name: "Withdrawn by some but not all submitters"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Is Withdrawn by submitter If one member ss is withdrawn by submitter, then this bit is set. If all member ss' are withdrawn, then the rs is deleted to SNPHistory."
+
+Node: dcid:GeneticVariantAttributeClinicalDiagnosticAssay
+name: "Included In Clinical Diagnostic Kit(s)"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "Variation is interrogated in a clinical diagnostic assay."
+
+Node: dcid:GeneticVariantAttributeCommonSNP
+name: "Common SNP"
+typeOf: dcs:GeneticVariantAttributeEnum
+description: "RS is a common SNP. A common SNP is one that has at least one 1000Genomes population with a minor allele of frequency >= 1% and for which 2 or more founders contribute to that minor allele frequency."
+
+Node: dcid:GeneticVariantExceptionEnum
+name: "GeneticVariantExceptionEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Unusual conditions noted by UCSC that may indicate a problem with the data: RefAlleleMismatch, RefAlleleRevComp, DuplicateObserved, MixedObserved, FlankMismatchGenomeLonger, FlankMismatchGenomeEqual, FlankMismatchGenomeShorter, NamedDeletionZeroSpan, NamedInsertionNonzeroSpan, SingleClassLongerSpan, SingleClassZeroSpan, SingleClassTriAllelic, SingleClassQuadAllelic, ObservedWrongFormat, ObservedTooLong, ObservedContainsIupac, 'ObservedMismatch, MultipleAlignments, NonIntegerChromCount, AlleleFreqSumNot1, SingleAlleleFreq, or InconsistentAlleles."
+
+Node: dcid:GeneticVariantExceptionRefAlleleMismatch
+name: "Reference Allele Mismatch"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionRefAlleleRevComp
+name: "Reference Allele Reverse Complement"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionDuplicateObserved
+name: "Duplicate Observed"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionMixedObserved
+name: "Mixed Observed"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionFlankMismatchGenomeLonger
+name: "Flank Mismatch Genome Longer"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionFlankMismatchGenomeEqual
+name: "Flank Mismatch Genome Equal"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionFlankMismatchGenomeShorter
+name: "Flank Mismatch Genome Shorter"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionNamedDeletionZeroSpan
+name: "Named Deletion Zero Span"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionNamedInsertionNonzeroSpan
+name: "Named Insertion Non-Zero Span"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionSingleClassLongerSpan
+name: "Single Class Longer Span"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionSingleClassZeroSpan
+name: "Single Class Zero Span"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionSingleClassTriAllelic
+name: "Single Class Tri-allelic"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionSingleClassQuadAllelic
+name: "Single Class Quad-allelic"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionObservedWrongFormat
+name: "Observed Wrong Format"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionObservedTooLong
+name: "Observed Too Long"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionObservedContainsIUPAC
+name: "Observed Contains IUPAC"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionObservedMismatch
+name: "Observed Mismatch"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionMultipleAlignments
+name: "Multiple Alignments"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionNonIntegerChromCount
+name: "Non-integer Chomosome Count"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionAlleleFreqSumNot1
+name: "Allele Frequency Sum Not 1"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionSingleAlleleFreq
+name: "Single Allele Frequency"
+typeOf: dcs:GeneticVariantExceptionEnum
+
+Node: dcid:GeneticVariantExceptionInconsistentAlleles
+name: "Inconsistent Alleles"
+typeOf: dcs:GeneticVariantExceptionEnum
+description: "Inconsistent genotype submission for at least one sample."
+
+Node: dcid:VariantAlleleOriginEnum
+name: "VariantAlleleOriginEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Variant Allele Origin: unspecified, germline, somatic, both, inherited, paternal, maternal, uni-parental, bi-parental, not_tested, tested_inconclusive, de-novo, or other."
+
+Node: dcid:VariantAlleleOriginUnspecified
+name: "Unspecified"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginGermline
+name: "Germline"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginSomatic
+name: "Somatic"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginBoth
+name: "Both"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginInherited
+name: "Inherited"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginPaternal
+name: "Paternal"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginMaternal
+name: "Maternal"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginDeNovo
+name: "de novo"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginBiParental
+name: "Bi-parental"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginUniParental
+name: "Uni-parental"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginNotTested
+name: "Not Tested"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginTestedInconclusive
+name: "Tested Inconclusive"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantAlleleOriginOther
+name: "Other"
+typeOf: dcs:VariantAlleleOriginEnum
+
+Node: dcid:VariantSuspectReasonCodesEnum
+name: "VariantSuspectReasonCodesEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Variant Suspect Reason Codes: unspecified, Paralog, byEST, oldAlign, Para_EST, 1kg_failed, or other."
+
+Node: dcid:VariantSuspectReasonCodesUnspecified
+name: "Unspecified"
+typeOf: dcs:VariantSuspectReasonCodesEnum
+
+Node: dcid:VariantSuspectReasonCodesParalog
+name: "Paralog"
+typeOf: dcs:VariantSuspectReasonCodesEnum
+
+Node: dcid:VariantSuspectReasonCodesByEST
+name: "ByEST"
+typeOf: dcs:VariantSuspectReasonCodesEnum
+
+Node: dcid:VariantSuspectReasonCodesOldAlign
+name: "OldAlign"
+typeOf: dcs:VariantSuspectReasonCodesEnum
+
+Node: dcid:VariantSuspectReasonCodesParaEST
+name: "ParaEST"
+typeOf: dcs:VariantSuspectReasonCodesEnum
+
+Node: dcid:VariantSuspectReasonCodes1kgFailed
+name: "1kgFailed"
+typeOf: dcs:VariantSuspectReasonCodesEnum
+
+Node: dcid:VariantSuspectReasonCodesOther
+name: "Other"
+typeOf: dcs:VariantSuspectReasonCodesEnum
+
+Node: dcid:ClinVarReviewStatusEnum
+name: "ClinVarReviewStatusEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "ClinVar review status: no assertion criteria provided, reviewed by expert panel, conflicting interpretations, criteria provided, non interpretation for the single variant, practice guideline, no conflicts, multiple submitters, or single_submitter."
+
+Node: dcid:ClinVarReviewStatusNoCriteria
+name: "No Assertion Criteria Provided"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinVarReviewStatusReviewed
+name: "Reviewed By Expert Panel"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinVarReviewStatusConflictingInterpretations
+name: "Conflicting Interpretations"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinVarReviewStatusCriteriaProvided
+name: "Criteria Provided"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinVarReviewStatusNoInterpretation
+name: "Non-interpretation For The Single Variant"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinVarReviewStatusPracticeGuideline
+name: "Practice Guideline"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinVarReviewStatusNoConflicts
+name: "No Conflicts"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinVarReviewStatusMultipleSubmitters
+name: "Multiple Submitters"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinVarReviewStatusSingleSubmitter
+name: "Single Submitter"
+typeOf: dcs:ClinVarReviewStatusEnum
+
+Node: dcid:ClinSigEnum
+name: "ClinSigEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Clinical significance for this single variant: other, affects, uncertain significance, pathogenic, risk_factor, benign, conflicting interpretations of pathogenicity, association, likely pathogenic, protective, likely benign, not provided, association not found, drug response, pathogenic/likely pathogenic, benign/likely benign, unknown, untested, or histocompatibility."
+
+Node: dcid:ClinSigOther
+name: "Other"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigAffects
+name: "Affects"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigUncertain
+name: "Uncertain Significance"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigPathogenic
+name: "Pathogenic"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigRiskFactor
+name: "Risk Factor"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigBenign
+name: "Benign"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigConflictingPathogenicity
+name: "Conflicting Interpretations Of Pathogenicity"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigAssociation
+name: "Association"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigLikelyPathogenic
+name: "Likely Pathogenic"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigProtective
+name: "Protective"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigLikelyBenign
+name: "Likely Benign"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigNotProvided
+name: "Not Provided"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigAssociationNotFound
+name: "Association Not Found"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigDrugResponse
+name: "Drug Response"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigPathogenicLikelyPathogenic
+name: "Pathogenic/Likely Pathogenic"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigBenignLikelyBenign
+name: "Benign/Likely Benign"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigUnknown
+name: "Unknown"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigUntested
+name: "Untested"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:ClinSigHistocompatability
+name: "Histocompatibility"
+typeOf: dcs:ClinSigEnum
+
+Node: dcid:VariationTypeEnum
+name: "VariationTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Variation type of alternate allele."
+
+Node: dcid:VariationTypeCNV
+name: "Copy Number Variable Region"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeDEL
+name: "Deletion Relative To The Reference"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeDUP
+name: "Region of Elevated Copy Number Relative to the Reference"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeINS
+name: "Insertion of Sequence Relative to the Reference"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeINV
+name: "Inversion of Reference Sequence"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeDupTandem
+name: "Tandem Duplication"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeInsertME
+name: "Insertion of a Mobile Element Relative to the Reference"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeDelME
+name: "Deletion of a Mobile Element Relative to the Reference"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeInsertMEALU
+name: "Insertion of an Alu Mobile Element Relative to the Reference"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeInsertDelALU
+name: "DeletionOfAnAluMobileElementRelativeToTheReference"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeInsertNovel
+name: "Insertion of Sequence that Does Not Map to the Reference"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeSNV
+name: "Single Nucleotide Variation"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeMNV
+name: "Multiple Nucleotide Variations"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeDIV
+name: "Deletion Insertion Variation"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeHeterozygous
+name: "Heterozygous"
+typeOf: dcs:VariationTypeEnum
+description: "Variable, but undefined at nucleotide level."
+
+Node: dcid:VariationTypeSTR
+name: "Short Tandem (microsatellite) Repeat"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeNamed
+name: "Insertion/deletion variation of named repetitive element"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeNoVariation
+name: "No Variation"
+typeOf: dcs:VariationTypeEnum
+description: "Sequence scanned for variation, but none observed."
+
+Node: dcid:VariationTypeMixed
+name: "Mixed"
+typeOf: dcs:VariationTypeEnum
+description: "Cluster contains submissions from 2 or more allelic classes."
+
+Node: dcid:VariationTypeException
+name: "Exception"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:VariationTypeINDEL
+name: "insertion-deletion"
+typeOf: dcs:VariationTypeEnum
+
+Node: dcid:GenVarSourceEnum
+name: "GenVarSourceEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Sources for observations of genetic variant allele and population frequencies: GenVarSourceUCSCGenomeBrowser, GenVarSourceTheHumanGeneomeProject, GenVarSourceExomeAggregationConsortium, GenVarSourceGOExomeSequencingProject, GenVarSourceTOPMed, GenVarSource1000Genomes, GenVarSourceGnomAD, GenVarSourceGnomADexomes, or GenVarSourcePAGEstudy."
+
+Node: dcid:GenVarSourceUCSCGenomeBrowser
+name: " UCSC Genome Browser"
+url: "https://genome.ucsc.edu/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceTheHumanGenomeProject
+name: "The Human Genome Project"
+url: "https://www.genome.gov/human-genome-project"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceExomeAggregationConsortium
+name: "Exome Aggregation Consortium"
+url: "http://exac.broadinstitute.org/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceGOExomeSequencingProject
+name: "GO Exome Sequencing Project"
+url: "https://esp.gs.washington.edu/drupal/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceTOPMed
+name: "Trans-Omics for Precision Medicine (TOPMed) Program"
+url: "https://www.nhlbi.nih.gov/science/trans-omics-precision-medicine-topmed-program"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSource1000Genomes
+name: "1000 Genomes Project"
+url: "https://www.internationalgenome.org/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceGnomAD
+name: "Genome Aggregation Database"
+url: "https://www.gnomad.broadinstitute.org/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceGnomADexomes
+name: "Genome Aggregation Database Exams"
+url: "https://www.gnomad.broadinstitute.org/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourcePAGEStudy
+name: "Population Architecture using Genomics and Epidemiology Study"
+url: "https://www.pagestudy.org/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceNSDD
+name: "Northern Sweden Diet Database"
+url: "https://snd.gu.se/en/catalogue/study/ext0131"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceTwinsUK
+name: "Twins UK"
+url: "https://twinsuk.ac.uk/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceALSPAC
+name: "Avon Longitudinal Study of Parents and Children"
+url: "http://www.bristol.ac.uk/alspac/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceVietnameseGenomeProject
+name: "Vietnamese Genetic Variation Database"
+url: "https://genomes.vn/"
+typeOf: dcs:GenVarSourceEnum
+
+Node: dcid:GenVarSourceEstonianGenomeProject
+name: "Estonian Genome Project"
+url: "https://genomics.ut.ee/en/about-us/estonian-genome-centre/"
+typeOf: dcs:GenVarSourceEnum
