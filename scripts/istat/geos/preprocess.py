@@ -20,9 +20,26 @@ def translate():
     "Cadastral code of the municipality", "Legal population 2011 (09/10/2011)", "NUTS1", "NUTS2(3)", "NUTS3"]
   data.to_csv(FILE_PATH_en, encoding = 'utf-8', index = False)
   
+def find_duplicates(df):
+  duplicated = pd.DataFrame(columns = df.columns)
+  for col in df.columns:
+    dup_vals = df[df[col].duplicated()][col].unique()
+    for val in dup_vals:
+      duplicated = pd.concat([duplicated, df[df[col]==val]], ignore_index = True)
+  duplicated = duplicated.drop_duplicates()
+  return duplicated
+      
 def preprocess():
   data = pd.read_csv(FILE_PATH_en)
-  print(data.head(5))
+  province_data = data[["Province Code (Historic) (1)", "NUTS3"]].rename(\
+    columns = {"Province Code (Historic) (1)": "Province Code"}).drop_duplicates()
+  region_data = data[["Region Code", "NUTS2(3)"]].rename(columns= {"NUTS2(3)":"NUTS2"}).drop_duplicates()
+  province_data.to_csv("ISTAT_ProvinceCode_NUTS3.csv")
+  province_data.to_csv("ISTAT_RegionCode_NUTS2.csv")
+  
+  #find the regions/provinces that does not make one-to-one map from ISTAT to NUTS
+  except_region = find_duplicates(region_data)
+  except_province = find_duplicates(province_data)
   
   
 if __name__ == "__main__":
