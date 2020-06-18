@@ -383,3 +383,8 @@ typeOf: schema:Class
 subClassOf: schema:Enumeration
 name: "MedicalStatusEnum"
 description: "Medical status of a medical incident, indicating whether the patient is hospitalized, tested, deceased, etc."
+
+Node: dcid:MedicalTestResultEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "MedicalTestResultEnum"

@@ -2220,3 +2220,8 @@ typeOf: schema:Property
 name: "censusACSTableId"
 description: "American Census Survey table ID."
 domainIncludes: dcs:StatisticalVariable
+
+Node: dcid:MedicalTest
+name: "MedicalTest"
+typeOf: schema:Class
+subClassOf: dcs:MedicalProcedure
