@@ -84,20 +84,20 @@ def generate_mcf():
     '''Generates the template and StatisticalVariable instance MCFs'''
 
     variable_template = ( 
-        'Node: dcid:US_Treasury_{maturity_underscore}_Constant_Maturity_Rate\n'
-        'name: "US_Treasury_{maturity_underscore}_Constant_Maturity_Rate"\n'
+        'Node: dcid:InterestRate_Treasury{security_type}_{maturity_no_hypen}\n'
+        'name: "InterestRate_Treasury{security_type}_{maturity_no_hypen}"\n'
         'typeOf: dcs:StatisticalVariable\n'
-        'populationType: dcs:Treasury{security_type}\n'
         'measuredProperty: dcs:interestRate\n'
+        'populationType: dcs:Treasury{security_type}\n'
+        'maturity: [{maturity_space}]\n'
         'statType: dcs:measuredValue\n'
-        'measurementMethod: dcs:{maturity_no_hyphen}ConstantMaturity\n'
-        'unit: dcs:Percent\n'
     )
     template_template = (
         'Node: E:{filename}->E{index}\n'
         'typeOf: dcs:StatVarObservation\n'
-        'variableMeasured: dcs:US_Treasury_{maturity_underscore}_Constant_'\
-        'Maturity_Rate\n'
+        'variableMeasured: dcs:InterestRate_Treasury{security_type}_{maturity_no_hypen}\n'
+        'measurementMethod: dcs:ConstantMaturityRate\n'
+        'unit: dcs:Percent\n'
         'observationAbout: dcid:country/USA\n'
         'observationDate: C:{filename}->date\n'
         'value: C:{filename}->{maturity_hyphen}\n'
@@ -109,14 +109,17 @@ def generate_mcf():
         index = 1
         for maturity, security_type in MATURITIES.items():
             maturity_hyphen = maturity.title()
+            maturity_no_hypen = maturity_hyphen.replace("-", "")
+            maturity_space = maturity_hyphen.replace("-", " ")
             maturity_underscore = maturity_hyphen.replace("-", "_")
             format_dict = {
                 "filename": "treasury_constant_maturity_rates",
                 "index": index,
                 "maturity_underscore": maturity_underscore,
                 "maturity_hyphen": maturity_hyphen,
-                "maturity_no_hyphen": maturity_hyphen.replace("-", ""),
-                "security_type": security_type
+                "security_type": security_type,
+                "maturity_no_hypen": maturity_no_hypen,
+                "maturity_space": maturity_space
             }
             
             mcf_f.write(variable_template.format_map(format_dict))
