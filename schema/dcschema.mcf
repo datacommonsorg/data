@@ -241,11 +241,11 @@ dcid: "employmentStatus"
 typeOf: schema:Property
 name: "employmentStatus"
 
-Node: geonamesId
-dcid: "geonamesId"
+Node: geoNamesId
+dcid: "geoNamesId"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-name: "geonamesId"
+name: "geoNamesId"
 domainIncludes: schema:Thing
 
 Node: dcid:observationPeriod
