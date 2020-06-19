@@ -84,18 +84,18 @@ def generate_mcf():
     '''Generates the template and StatisticalVariable instance MCFs'''
 
     variable_template = ( 
-        'Node: dcid:InterestRate_Treasury{security_type}_{maturity}\n'
-        'name: "InterestRate_Treasury{security_type}_{maturity}"\n'
+        'Node: dcid:InterestRate_Treasury{security_type}_{maturity_no_hypen}\n'
+        'name: "InterestRate_Treasury{security_type}_{maturity_no_hypen}"\n'
         'typeOf: dcs:StatisticalVariable\n'
         'measuredProperty: dcs:interestRate\n'
         'populationType: dcs:Treasury{security_type}\n'
-        'maturity: {maturity}\n'
+        'maturity: [{maturity_space}]\n'
         'statType: dcs:measuredValue\n'
     )
     template_template = (
         'Node: E:{filename}->E{index}\n'
         'typeOf: dcs:StatVarObservation\n'
-        'variableMeasured: dcs:InterestRate_Treasury{security_type}_{maturity}\n'
+        'variableMeasured: dcs:InterestRate_Treasury{security_type}_{maturity_no_hypen}\n'
         'measurementMethod: dcs:ConstantMaturityRate\n'
         'unit: dcs:Percent\n'
         'observationAbout: dcid:country/USA\n'
@@ -110,6 +110,7 @@ def generate_mcf():
         for maturity, security_type in MATURITIES.items():
             maturity_hyphen = maturity.title()
             maturity_no_hypen = maturity_hyphen.replace("-", "")
+            maturity_space = maturity_hyphen.replace("-", " ")
             maturity_underscore = maturity_hyphen.replace("-", "_")
             format_dict = {
                 "filename": "treasury_constant_maturity_rates",
@@ -117,7 +118,8 @@ def generate_mcf():
                 "maturity_underscore": maturity_underscore,
                 "maturity_hyphen": maturity_hyphen,
                 "security_type": security_type,
-                "maturity": maturity_no_hypen
+                "maturity_no_hypen": maturity_no_hypen,
+                "maturity_space": maturity_space
             }
             
             mcf_f.write(variable_template.format_map(format_dict))
