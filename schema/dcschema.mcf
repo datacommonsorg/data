@@ -2230,4 +2230,4 @@ Node: dcid:digitalElevationModel
 typeOf: schema:Property
 name: "digitalElevationModel"
 descriptionUrl: "http://download.geonames.org/export/dump/readme.txt"
-description: "Average elevation based on Digital Elevation Model (DEM), in meters, integer."
+description: "Average elevation based on Digital Elevation Model (DEM)."
