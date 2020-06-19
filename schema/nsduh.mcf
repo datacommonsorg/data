@@ -1,0 +1,379 @@
+Node: dcid:UsageOccurrenceEnum
+typeOf: schema:Class
+name: "UsageOccurrenceEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:PastYear
+typeOf: dcid:UsageOccurrenceEnum
+name: "PastYear"
+
+Node: dcid:PastMonth
+typeOf: dcid:UsageOccurrenceEnum
+name: "PastMonth"
+
+Node: dcid:Lifetime
+typeOf: dcid:UsageOccurrenceEnum
+name: "Lifetime"
+
+Node: dcid:PriorToPastYear
+typeOf: dcid:UsageOccurrenceEnum
+name: "PriorToPastYear"
+
+Node: dcid:LifetimeButNotPastYear
+typeOf: dcid:UsageOccurrenceEnum
+name: "LifetimeButNotPastYear"
+
+Node: dcid:Never
+typeOf: dcid:UsageOccurrenceEnum
+name: "Never"
+
+Node: dcid:SubstanceTypeEnum
+typeOf: schema:Class
+name: "SubstanceTypeEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:IllicitDrug
+typeOf: dcid:SubstanceTypeEnum
+name: "IllicitDrug"
+description: "Illicit Drug Use includes the misuse of prescription psychotherapeutics or the use of marijuana, cocaine (including crack), heroin, hallucinogens, inhalants, or methamphetamine."
+
+Node: dcid:Marijuana
+typeOf: dcid:SubstanceTypeEnum
+name: "Marijuana"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:IllicitDrugsOtherThanMarijuana
+typeOf: dcid:SubstanceTypeEnum
+name: "IllicitDrugsOtherThanMarijuana"
+
+Node: dcid:Cocaine
+typeOf: dcid:SubstanceTypeEnum
+name: "Cocaine"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:Crack
+typeOf: dcid:SubstanceTypeEnum
+name: "Crack"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:Heroin
+typeOf: dcid:SubstanceTypeEnum
+name: "Heroin"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:Hallucinogens
+typeOf: dcid:SubstanceTypeEnum
+name: "Hallucinogens"
+specializationOf: dcs:IllicitDrug
+description: "Includes LSD, PCP, Ecstasy and others."
+
+Node: dcid:LSD
+typeOf: dcid:SubstanceTypeEnum
+name: "LSD"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:PCP
+typeOf: dcid:SubstanceTypeEnum
+name: "PCP"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:Ecstasy
+typeOf: dcid:SubstanceTypeEnum
+name: "Ecstasy"
+
+Node: dcid:Inhalants
+typeOf: dcid:SubstanceTypeEnum
+name: "Inhalants"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:Methamphetamine
+typeOf: dcid:SubstanceTypeEnum
+name: "Methamphetamine"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:Alcohol
+typeOf: dcid:SubstanceTypeEnum
+name: "Alcohol"
+
+Node: dcid:TobaccoProducts
+typeOf: dcid:SubstanceTypeEnum
+name: "TobaccoProducts"
+
+Node: dcid:Cigarettes
+typeOf: dcid:SubstanceTypeEnum
+name: "Cigarettes"
+
+Node: dcid:Cigars
+typeOf: dcid:SubstanceTypeEnum
+name: "Cigars"
+
+Node: dcid:SmokelessTobacco
+typeOf: dcid:SubstanceTypeEnum
+name: "SmokelessTobacco"
+
+Node: dcid:PipeTobacco
+typeOf: dcid:SubstanceTypeEnum
+name: "PipeTobacco"
+
+Node: dcid:Opioids
+typeOf: dcid:SubstanceTypeEnum
+name: "Opioids"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:MisusedPsychotherapeutics
+typeOf: dcid:SubstanceTypeEnum
+name: "MisusedPsychotherapeutics"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:MisusedPainRelievers
+typeOf: dcid:SubstanceTypeEnum
+name: "MisusedPainRelievers"
+
+Node: dcid:MisusedTranquilizersOrSedatives
+typeOf: dcid:SubstanceTypeEnum
+name: "MisusedTranquilizersOrSedatives"
+
+Node: dcid:MisusedTranquilizers
+typeOf: dcid:SubstanceTypeEnum
+name: "MisusedTranquilizers"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:MisusedStimulants
+typeOf: dcid:SubstanceTypeEnum
+name: "MisusedStimulants"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:MisusedSedatives
+typeOf: dcid:SubstanceTypeEnum
+name: "MisusedSedatives"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:MisusedBenzodiazepines
+typeOf: dcid:SubstanceTypeEnum
+name: "MisusedBenzodiazepines"
+specializationOf: dcs:IllicitDrug
+
+Node: dcid:UsageFrequencyEnum
+typeOf: schema:Class
+name: "UsageFrequencyEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:OnceAMonth
+typeOf: dcid:UsageFrequencyEnum
+name: "OnceAMonth"
+
+Node: dcid:OnceOrTwice
+typeOf: dcid:UsageFrequencyEnum
+name: "OnceOrTwice"
+
+Node: dcid:OnceOrTwiceAWeek
+typeOf: dcid:UsageFrequencyEnum
+name: "OnceOrTwiceAWeek"
+
+Node: dcid:FiveOrMoreDrinksOnceOrTwiceAWeek
+typeOf: dcid:UsageFrequencyEnum
+name: "FiveOrMoreDrinksOnceOrTwiceAWeek"
+
+Node: dcid:OneOrMorePacksPerDay
+typeOf: dcid:UsageFrequencyEnum
+name: "OneOrMorePacksPerDay"
+
+Node: dcid:FourOrFiveDrinksNearlyEveryDay
+typeOf: dcid:UsageFrequencyEnum
+name: "FourOrFiveDrinksNearlyEveryDay"
+
+Node: dcid:DailyUsage
+typeOf: dcid:UsageFrequencyEnum
+name: "DailyUsage"
+
+Node: dcid:AlcoholUsageEnum
+typeOf: schema:Class
+name: "AlcoholUsageEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:AnyAlcoholUse
+typeOf: dcid:AlcoholUsageEnum
+name: "AnyAlcoholUse"
+
+Node: dcid:BingeAlcoholUse
+typeOf: dcid:AlcoholUsageEnum
+name: "BingeAlcoholUse"
+description: "Since 2015, binge alcohol use for females has been defined as drinking four or more drinks on the same occasion on at least 1 day in the past 30 days."
+
+Node: dcid:HeavyAlcoholUse
+typeOf: dcid:AlcoholUsageEnum
+name: "HeavyAlcoholUse"
+description: "Heavy Alcohol Use is defined as binge drinking on the same occasion on each of 5 or more days in the past 30 days; all heavy alcohol users are also binge alcohol users."
+
+Node: dcid:TreatmentStatusEnum
+typeOf: schema:Class
+name: "TreatmentStatusEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:ReceivedTreatmentInPastYear
+typeOf: dcid:TreatmentStatusEnum
+name: "ReceivedTreatmentInPastYear"
+
+Node: dcid:NeededButDidNotReceiveTreatmentInPastYear
+typeOf: dcid:TreatmentStatusEnum
+name: "NeededButDidNotReceiveTreatmentInPastYear"
+
+Node: dcid:CountyClassificationEnum
+typeOf: schema:Class
+name: "CountyClassificationEnum"
+subClassOf: schema:Enumeration
+description: "County type is based on the \"Rural-Urban Continuum Codes\" developed by the U.S. Department of Agriculture. See https://www.ers.usda.gov/data-products/rural-urban-continuum-codes.aspx"
+
+Node: dcid:USDA_LargeMetro
+typeOf: dcid:CountyClassificationEnum
+name: "USDA_LargeMetro"
+description: "Large metropolitan statistical areas have a total population of 1 million or more."
+
+Node: dcid:USDA_SmallMetro
+typeOf: dcid:CountyClassificationEnum
+name: "USDA_SmallMetro"
+description: "Small metropolitan statistical areas have a total population of fewer than 1 million."
+
+Node: dcid:USDA_Nonmetro
+typeOf: dcid:CountyClassificationEnum
+name: "USDA_Nonmetro"
+description: "Nonmetropolitan counties were classified according to the aggregate size of their urban population. Nonmetropolitan areas include counties in micropolitan statistical areas and counties outside of both metropolitan and micropolitan statistical areas and are classified as follows: \"urbanized,\" \"less urbanized,\" and \"completely rural.\""
+
+Node: dcid:USDA_NonmetroUrbanized
+typeOf: dcid:CountyClassificationEnum
+name: "USDA_NonmetroUrbanized"
+description: "Nonmetropolitan county with a population of 20,000 or more in urbanized areas."
+
+Node: dcid:USDA_NonmetroLessUrbanized
+typeOf: dcid:CountyClassificationEnum
+name: "USDA_NonmetroLessUrbanized"
+description: "Nonmetropolitan county with a population of at least 2,500 but fewer than 20,000 in urbanized areas."
+
+Node: dcid:USDA_NonmetroCompletelyRural
+typeOf: dcid:CountyClassificationEnum
+name: "USDA_NonmetroCompletelyRural"
+description: "Nonmetropolitan county with a population of fewer than 2,500 in urbanized areas."
+
+Node: dcid:AvailabilityToObtainEnum
+typeOf: schema:Class
+name: "AvailabilityToObtainEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:ApproachedInPastMonthBySomeoneSellingDrugs
+typeOf: dcid:AvailabilityToObtainEnum
+name: "ApproachedInPastMonthBySomeoneSellingDrugs"
+
+Node: dcid:FairlyOrVeryEasyToObtain
+typeOf: dcid:AvailabilityToObtainEnum
+name: "FairlyOrVeryEasyToObtain"
+
+Node: dcid:FairlyOrVeryDifficultOrProbablyImpossibleToObtain
+typeOf: dcid:AvailabilityToObtainEnum
+name: "FairlyOrVeryDifficultOrProbablyImpossibleToObtain"
+
+Node: dcid:SubstanceUseDisorderEnum
+typeOf: schema:Class
+name: "SubstanceUseDisorderEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:AnySubstanceUseDisorder
+typeOf: dcid:SubstanceUseDisorderEnum
+name: "AnySubstanceUseDisorder"
+
+Node: dcid:NoSubstanceUseDisorder
+typeOf: dcid:SubstanceUseDisorderEnum
+name: "NoSubstanceUseDisorder"
+
+Node: dcid:SubstanceDependence
+typeOf: dcid:SubstanceUseDisorderEnum
+name: "SubstanceDependence"
+
+Node: dcid:SubstanceAbuse
+typeOf: dcid:SubstanceUseDisorderEnum
+name: "SubstanceAbuse"
+
+Node: dcid:SAMHSA_EmploymentEnum
+typeOf: schema:Class
+name: "SAMHSA_EmploymentEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:SAMHSA_EmployedFullTime
+typeOf: dcid:SAMHSA_EmploymentEnum
+name: "SAMHSA_EmployedFullTime"
+
+Node: dcid:SAMHSA_EmployedPartTime
+typeOf: dcid:SAMHSA_EmploymentEnum
+name: "SAMHSA_EmployedPartTime"
+
+Node: dcid:SAMHSA_Unemployed
+typeOf: dcid:SAMHSA_EmploymentEnum
+name: "SAMHSA_Unemployed"
+
+Node: dcid:SAMHSA_EmployedOther
+typeOf: dcid:SAMHSA_EmploymentEnum
+name: "SAMHSA_EmployedOther"
+
+Node: dcid:substanceUsageOccurrence
+typeOf: schema:Property
+name: "substanceUsageOccurrence"
+description: "When the substance usage occurred."
+rangeIncludes: dcs:UsageOccurrenceEnum
+domainIncludes: dcs:Person
+
+Node: dcid:substanceUsed
+typeOf: schema:Property
+name: "substanceUsed"
+description: "What type of substance's usage is measured."
+rangeIncludes: dcs:SubstanceTypeEnum
+domainIncludes: dcs:Person
+
+Node: dcid:perceivedGreatRisk
+typeOf: schema:Property
+name: "perceivedGreatRisk"
+description: "Respondents that perceived great risk or harm from use or misuse of particular substance."
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:Person
+
+Node: dcid:initialSubstanceUse
+typeOf: schema:Property
+name: "initialSubstanceUse"
+description: "When the initial incident of use of substance occurred."
+rangeIncludes: dcs:UsageOccurrenceEnum
+domainIncludes: dcs:Person
+
+Node: dcid:substanceUsageFrequency
+typeOf: schema:Property
+name: "substanceUsageFrequency"
+rangeIncludes: dcs:UsageFrequencyEnum
+domainIncludes: dcs:Person
+
+Node: dcid:alcoholUsage
+typeOf: schema:Property
+name: "alcoholUsage"
+rangeIncludes: dcs:AlcoholUsageEnum
+domainIncludes: dcs:Person
+
+Node: dcid:treatmentStatus
+typeOf: schema:Property
+name: "treatmentStatus"
+rangeIncludes: dcs:TreatmentStatusEnum
+domainIncludes: dcs:Person
+
+Node: dcid:placeOfResidenceClassification
+typeOf: schema:Property
+name: "placeOfResidenceClassification"
+rangeIncludes: dcs:CountyClassificationEnum
+domainIncludes: dcs:Person
+
+Node: dcid:perceivedAvailabilityToObtain
+typeOf: schema:Property
+name: "perceivedAvailabilityToObtain"
+rangeIncludes: dcs:AvailabilityToObtainEnum
+domainIncludes: dcs:Person
+
+Node: dcid:substanceUseDisorder
+typeOf: schema:Property
+name: "substanceUseDisorder"
+rangeIncludes: dcs:SubstanceUseDisorderEnum
+domainIncludes: dcs:Person
+
