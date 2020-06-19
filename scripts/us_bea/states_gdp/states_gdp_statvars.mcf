@@ -1,6 +1,7 @@
-Node: dcid:us_state_quarterly_GDP
+Node: dcid:InflationAdjustedGDP
 typeOf: dcs:StatisticalVariable
-populationType: dcs:GDPRate
-measuredProperty: dcs:gdp
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
 measurementQualifier: dcs:inflationAdjusted
-unit: dcs:MillionsOfChained2012Dollars
+measurementQualifier: dcs:chained

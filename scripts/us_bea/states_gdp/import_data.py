@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 Pulls data from the US Bureau of Economic Analysis (BEA) on quarterly GDP
-per State. Saves output as CSV.
+per US state. Saves output as a CSV file.
 
     Typical usage:
 
@@ -25,18 +25,7 @@ from absl import flags
 import requests
 import pandas as pd
 
-# TODO (fpernice): switch to POST python call.
-MY_KEY = 'D431C2CE-8BD2-4D9E-AD7A-00F95CAB60CE'
 QUARTERLY_GDP_TABLE = 'SQGDP1'
-
-REQUEST = """http://apps.bea.gov/api/data/?&\
-UserID={key}&\
-method=GetData&\
-datasetname=Regional&\
-TableName={table}&\
-GeoFIPS=STATE&\
-LineCode=1&\
-ResultFormat=json&"""
 
 US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas',
              'California', 'Colorado', 'Connecticut', 'Delaware',
@@ -51,20 +40,41 @@ US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas',
              'West Virginia', 'Wisconsin', 'Wyoming']
 
 
-class StateGdpDataLoader:
+class StateGDPDataLoader:
     """Pulls GDP state data from BEA.
 
     Attributes:
         response: Raw response from BEA API in JSON format.
-        df: DataFrame with the cleaned data.
+        df: DataFrame (DF) with the cleaned data.
     """
-    def __init__(self, request):
+
+    # TODO(fpernice): Switch to POST python call.
+    MY_KEY = 'D431C2CE-8BD2-4D9E-AD7A-00F95CAB60CE'
+
+    REQUEST = """http://apps.bea.gov/api/data/?&\
+    UserID={key}&\
+    method=GetData&\
+    datasetname=Regional&\
+    TableName={table}&\
+    GeoFIPS=STATE&\
+    LineCode=1&\
+    ResultFormat=json&"""
+
+    def __init__(self, table):
         """Makes Http request, cleans the data and stores it in instance DF."""
-        self.response = json.loads(requests.get(request).text)
+        request = self.REQUEST.format(key=self.MY_KEY, table=table)
+        request = request.replace(" ", "")
+        try:
+            self.response = json.loads(requests.get(request).text)
+        except json.decoder.JSONDecodeError:
+            print("API Request failed.")
+            print("Response value = {}".format(requests.get(request).text))
+            return
+
         df = pd.DataFrame(self.response['BEAAPI']['Results']['Data'])
 
         # Filters out columns that are not US States (e.g. New England).
-        # TODO: Add non-state entities.
+        # TODO(fpernice): Add non-state entities.
         df = df[df['GeoName'].isin(US_STATES)]
 
         qtr_month_map = {
@@ -73,6 +83,7 @@ class StateGdpDataLoader:
             'Q3':'09',
             'Q4':'12'
         }
+
         # Changes date format to reflect the last month in the desired quarter
         def date_to_obs_date(date):
             """Converts date format e.g. 2005Q3 to e.g. 2005-09."""
@@ -87,11 +98,12 @@ class StateGdpDataLoader:
 
         df['DataValue'] = df['DataValue'].apply(clean_data_val)
 
-        # Creates GeoId column.
+        # Creates GeoId column. We get lucky that Data Commons's geoIds
+        # equal US FIPS state codes.
         df['GeoId'] = df['GeoFips'].apply(lambda id: "geoId/" + id[:2])
 
         # Gets rid of unused columns
-        df = df.drop(columns=['Code', 'UNIT_MULT', 'TimePeriod', 'GeoFips'])
+        df = df[['GeoId', 'ObservationDate', 'DataValue']]
 
         self.df = df
 
@@ -100,14 +112,10 @@ class StateGdpDataLoader:
         self.df.to_csv(filename)
 
 
-def main(argv):
-    del argv # not currently used.
-    loader = StateGdpDataLoader(REQUEST.format(
-        key=MY_KEY,
-        table=QUARTERLY_GDP_TABLE
-    ))
+def main():
+    loader = StateGDPDataLoader(table=QUARTERLY_GDP_TABLE)
     loader.save_csv()
 
 
 if __name__ == '__main__':
-    app.run(main)
+    main()

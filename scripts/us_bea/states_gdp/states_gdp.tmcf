@@ -1,7 +1,8 @@
 Node: E:states_gdp->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:us_state_quarterly_GDP
+variableMeasured: dcs:InflationAdjustedGDP
 observationAbout: C:states_gdp->GeoId
 observationDate: C:states_gdp->ObservationDate
 observationPeriod: "P3M"
 value: C:states_gdp->DataValue
+unit: dcs:MillionsOfChained2012Dollars

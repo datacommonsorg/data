@@ -1,15 +1,14 @@
 import: {
-  import_name: "COVIDTracking_States"
-  provenance_url: "https://www.covidtracking.com"
-  provenance_description: "The COVID Tracking Project reports data on..."
+  import_name: "USStatesQuarterlyGDP"
+  provenance_url: "https://www.bea.gov/data/gdp/gdp-state"
+  provenance_description: "Quarterly data on inflation-adjusted GDP at a State level in the US"
   # Path to the resolved MCF. Can be a repeated field.
-  mcf_url: "gs://resolved_mcf/external_tables/COVIDTracking_States/*.mcf"
-  mcf_url: "gs://resolved_mcf/external_tables/COVIDTracking_US/*.mcf"
+  mcf_url: "gs://resolved_mcf/external_tables/USStateQuarterlyGDPs062020v5/nodes.mcf-00000-of-00001"
   # First date of imported data.
-  start_date: "2020-01-01"
+  start_date: "2015-03-01"
   # Last date of imported data.
-  end_date: "2020-05-28"
+  end_date: "2019-12-01"
   # Source data release schedule.
-  update_frequency: "P1D"
-  next_release_date: "2020-05-29"
+  update_frequency: "Quarterly"
+  next_release_date: "2020-07-07"
 }
