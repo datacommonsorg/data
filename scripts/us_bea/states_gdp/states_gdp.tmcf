@@ -1,7 +1,7 @@
 Node: E:states_gdp->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:US_State_Quarterly_GDP
+variableMeasured: dcs:us_state_quarterly_GDP
 observationAbout: C:states_gdp->GeoId
 observationDate: C:states_gdp->ObservationDate
-observationPeriod: C:states_gdp->ObservationPeriod
+observationPeriod: "P3M"
 value: C:states_gdp->DataValue

@@ -1,4 +1,4 @@
-Node: dcid:US_State_Quarterly_GDP
+Node: dcid:us_state_quarterly_GDP
 typeOf: dcs:StatisticalVariable
 populationType: dcs:GDPRate
 measuredProperty: dcs:gdp

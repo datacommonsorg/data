@@ -25,10 +25,7 @@ from absl import flags
 import requests
 import pandas as pd
 
-# currently not used, but left here for mcf generation flags.
-FLAGS = flags.FLAGS
-
-# TODO (fpernice): replace this by Google-level key.
+# TODO (fpernice): switch to POST python call.
 MY_KEY = 'D431C2CE-8BD2-4D9E-AD7A-00F95CAB60CE'
 QUARTERLY_GDP_TABLE = 'SQGDP1'
 
@@ -76,18 +73,21 @@ class StateGdpDataLoader:
             'Q3':'09',
             'Q4':'12'
         }
-        # Changes date format to include both observation date and period
+        # Changes date format to reflect the last month in the desired quarter
         def date_to_obs_date(date):
             """Converts date format e.g. 2005Q3 to e.g. 2005-09."""
             return date[:4] + "-" + qtr_month_map[date[4:]]
         df['ObservationDate'] = df['TimePeriod'].apply(date_to_obs_date)
 
-        def date_to_obs_period(date):
-            """Converts quarter format e.g. 2005Q3 to e.g. P3M."""
-            return "P{}M".format(date[-1:])
-        df['ObservationPeriod'] = df['TimePeriod'].apply(date_to_obs_period)
+        def clean_data_val(data):
+            """Removes separating comma in DataValue column and converts to
+            float.
+            """
+            return float(data.replace(",", ""))
 
-        # Created GeoId column.
+        df['DataValue'] = df['DataValue'].apply(clean_data_val)
+
+        # Creates GeoId column.
         df['GeoId'] = df['GeoFips'].apply(lambda id: "geoId/" + id[:2])
 
         # Gets rid of unused columns
