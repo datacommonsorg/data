@@ -54,5 +54,4 @@ value: C:COVIDTracking_US->{stat_var}
 stat_vars = output_columns[1:]
 with open('COVIDTracking_US.tmcf', 'w', newline='') as f_out:
   for i in range(len(stat_vars)):
-    # print(TEMPLATE_MCF_TEMPLATE.format_map({'index': i, 'stat_var': output_columns[1:][i]}))
     f_out.write(TEMPLATE_MCF_TEMPLATE.format_map({'index': i, 'stat_var': output_columns[1:][i]}))
