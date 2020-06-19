@@ -565,7 +565,7 @@ MI:2186: Alut
 MI:2187: Ri
 MI:2188: ParClip
 MI:2189: Avexis
-MI:2191: Clip
+MI:2191: ClipInteraction
 MI:2192: ClipSeq
 MI:2193: Iclip
 MI:2194: Crac

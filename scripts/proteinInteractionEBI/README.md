@@ -7,7 +7,7 @@ proteinInteractionEBI
 |   parseEBI.py
 |   mi.owl
 |   BioOntologySchema.mcf (contains all the schemas to be imported to KG)
-|   handwrittenSchema.txt (contains only schema MCF)
+|   schemaMCF.mcf (contains only schema MCF)
 │
 └───graph
 │   │   multipleParent.png
