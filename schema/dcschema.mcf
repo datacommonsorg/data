@@ -184,6 +184,12 @@ typeOf: schema:Class
 description: "A level-4 administrative subdivision of a country, e.g. wards in South Africa."
 subClassOf: schema:AdministrativeArea
 
+Node: dcid:AdministrativeArea5
+name: "Administrative Area Level 5"
+typeOf: schema:Class
+description: "A level-5 administrative subdivision of a country"
+subClassOf: schema:AdministrativeArea
+
 Node: rentAsked
 dcid: "rentAsked"
 name: "rentAsked"
