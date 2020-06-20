@@ -241,11 +241,11 @@ dcid: "employmentStatus"
 typeOf: schema:Property
 name: "employmentStatus"
 
-Node: geonamesId
-dcid: "geonamesId"
+Node: geoNamesId
+dcid: "geoNamesId"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-name: "geonamesId"
+name: "geoNamesId"
 domainIncludes: schema:Thing
 
 Node: dcid:observationPeriod
@@ -2226,3 +2226,8 @@ name: "MedicalTest"
 typeOf: schema:Class
 subClassOf: dcs:MedicalProcedure
 
+Node: dcid:digitalElevationModel
+typeOf: schema:Property
+name: "digitalElevationModel"
+descriptionUrl: "http://download.geonames.org/export/dump/readme.txt"
+description: "Average elevation based on Digital Elevation Model (DEM)."

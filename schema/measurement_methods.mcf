@@ -20,3 +20,7 @@ Node: dcid:CovidTrackingProject
 name: "CovidTrackingProject"
 typeOf: dcs:StatisticSourceEnum
 
+Node: dcid:GeoNamesTotalPopulation
+typeOf: dcs:StatisticSourceEnum
+name: "GeoNamesTotalPopulation"
+description: "Measurement method for total population measured by geonames.org."
