@@ -168,16 +168,9 @@ typeOf: dcs:MedicalFacilityTypeEnum
 dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityType
 """
 
-# bedType Node
-TEMPLATE_MCF_BED_TYPE_1 = """
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
-typeOf: dcs:HospitalBed
-dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedType
-"""
-
 # Facility node, facility containedIn a county
 TEMPLATE_MCF_FAC_1 = """
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
 healthcareFacilityName: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityName
 typeOf: schema:Hospital
 dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedFACID
@@ -198,12 +191,11 @@ value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->{stat_var}
 with open('CA_Licensed_Healthcare_Facility_Types_And_Counts.tmcf', 'w', newline='') as f_out:
     f_out.write(TEMPLATE_MCF_GEO_1)
     f_out.write(TEMPLATE_MCF_FAC_TYPE_1)
-    f_out.write(TEMPLATE_MCF_BED_TYPE_1)
     f_out.write(TEMPLATE_MCF_FAC_1)
 
     stat_vars = new_columns[4:]
     for i in range(len(stat_vars)):
-        f_out.write(TEMPLATE_MCF_TEMPLATE_1.format_map({'index': i + 4, 'stat_var': stat_vars[i]}))
+        f_out.write(TEMPLATE_MCF_TEMPLATE_1.format_map({'index': i + 3, 'stat_var': stat_vars[i]}))
 
 # Proprocess for dataset2 and output tmcf file.
 
