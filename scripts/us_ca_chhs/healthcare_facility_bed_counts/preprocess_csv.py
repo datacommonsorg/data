@@ -184,7 +184,7 @@ Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E{index}
 typeOf: StatVarObservation
 variableMeasured: {stat_var}
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->{stat_var}
 """
 
