@@ -129,9 +129,7 @@ func NewWriter(basePath, extension string, opts ...Option) io.WriteCloser {
 
 	// If the user accidentally includes the dot before the extension,
 	// chop it off since we insert it when making the filenames.
-	if strings.HasPrefix(w.extension, ".") {
-		w.extension = w.extension[1:]
-	}
+	strings.TrimPrefix(w.extension, ".")
 
 	// Check opts and set any the user has chosen to set explicitly.
 	for _, o := range opts {

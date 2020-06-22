@@ -50,16 +50,19 @@ const (
 
 	// sampleMCF is a simple string that will have the x replaced with a
 	// counter when being generated as filler.
-	sampleMCF = `
-Node: dcid:UnitTest_Generated_Node_{x}_Entry
-name: "UnitTest_Generated_Node_{x}_Entry"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TotalPopulation
-measuredProperty: dcs:measuredProperty
-statType: dcs:measuredValue
-measurementMethod: dcs:UnitTestingGenerated
-unit: dcs:Percent
-`
+	// TODO(rsned): Uncomment when generateMCF is implemented.
+	/*
+			sampleMCF = `
+		Node: dcid:UnitTest_Generated_Node_{x}_Entry
+		name: "UnitTest_Generated_Node_{x}_Entry"
+		typeOf: dcs:StatisticalVariable
+		populationType: dcs:TotalPopulation
+		measuredProperty: dcs:measuredProperty
+		statType: dcs:measuredValue
+		measurementMethod: dcs:UnitTestingGenerated
+		unit: dcs:Percent
+		`
+	*/
 )
 
 // generateRawString generates a regular set of characters up to the given
