@@ -36,7 +36,7 @@ Node: dcid:confidenceScore
 typeOf: schema:Property
 name: "confidenceScore"
 description: "The confidence score of a protein-protein interaction and the source in which it is recorded."
-rangeIncludes: schema:Text
+rangeIncludes: schema:Quantity
 domainIncludes: dcs:ProteinProteinInteraction
 
 
@@ -143,4 +143,3 @@ Node: dcid:IntActMiScore
 typeOf: ConfidenceScoreTypeEnum
 name: “IntactMiScore”
 description: ”The confidence score of a protein-protein interaction given in IntAct Molecular Interaction Database.”
-
