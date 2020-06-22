@@ -1,4 +1,4 @@
-Node: dcid:Count_HospitalBed_SkillNursingBed
+Node: dcid:Count_HospitalBed_SkilledNursingBed
 typeOf: dcs:StatisticalVariable
 populationType: dcs:HospitalBed
 statType: dcs:measuredValue

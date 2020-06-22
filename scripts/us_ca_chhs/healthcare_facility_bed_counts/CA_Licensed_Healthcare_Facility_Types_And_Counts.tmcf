@@ -16,10 +16,10 @@ containedIn: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 
 Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
 typeOf: StatVarObservation
-variableMeasured: Count_HospitalBed_SkillNursingBed
+variableMeasured: Count_HospitalBed_SkilledNursingBed
 observationDate: "2020-06-01"
 observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
-value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_SkillNursingBed
+value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_SkilledNursingBed
 
 Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E4
 typeOf: StatVarObservation
