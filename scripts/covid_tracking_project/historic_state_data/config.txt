@@ -7,8 +7,8 @@ import: {
     # First date of imported data.
     start_date: "2020-01-22"
     # Last date of imported data.
-    end_date: "2020-06-16"
+    end_date: "2020-06-22"
     # Source data release schedule.
     update_frequency: "P1D"
-    next_release_date: "2020-06-17"
+    next_release_date: "2020-06-23"
 }
