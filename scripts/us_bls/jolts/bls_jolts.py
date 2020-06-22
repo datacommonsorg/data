@@ -38,7 +38,7 @@ CODE_MAPPINGS = {
  '400000': '400000:Trade, transportation, and utilities', # New Code
  '420000': '42',
  '440000': '44',
- '480099': '480099:Transportation, warehousing, and utilities', # New Code
+ '480099': '480099:Transportation warehousing, and utilities', # New Code
  '510000': '51',
  '510099': '510099:Financial activities', # New Code
  '520000': '52',
@@ -55,7 +55,7 @@ CODE_MAPPINGS = {
  '910000': '910000:Federal', # New Code
  '920000': '92',
  '923000': '923000:State and local government education', # New Code
- '929000': '929000:State and local government, excluding education'# New Code
+ '929000': '929000:State and local government excluding education'# New Code
 }
 
 STATISTICAL_VARIABLE_FILE = "BLSJolts_StatisticalVariables.mcf"
@@ -141,10 +141,10 @@ def generate_cleaned_dataframe():
 
   # Combine datasets into a single dataframe including origin of data
   jolts_df = pd.DataFrame()
-  COLUMNS_TO_KEEP = ['series_id', 'year', 'period', 'value']
+  columns_to_keep = ['series_id', 'year', 'period', 'value']
 
   for schema_name, population_type, separation_type, df in schema_mapping:
-    df = df.loc[:, COLUMNS_TO_KEEP]
+    df = df.loc[:, columns_to_keep]
     df['statistical_variable'] = schema_name
     df['population_type'] = population_type
     df['separation_type'] = separation_type
@@ -181,12 +181,10 @@ def generate_cleaned_dataframe():
     # New Jolts code
     if ":" in mapped_code:
       JOLTS_CODE = mapped_code.split(":")[0]
-      row['code_type'] = "BLS_JOLTS"
-      row['industry_code'] = JOLTS_CODE
+      row['industry_code'] = "JOLTS_" + JOLTS_CODE
 
     # NAICS
     else:
-      row['code_type'] = "NAICS"
       row['industry_code'] = mapped_code
     
     return row
@@ -196,10 +194,9 @@ def generate_cleaned_dataframe():
   def map_row_to_statistical_variable(row):
     """ Maps a row of the dataframe to the Statistical Variable that describes it """
     base_stat_var = row['statistical_variable']
-    code_type = row['code_type']
     industry_code = row['industry_code']
 
-    return f"dcs:{base_stat_var}_{code_type}{industry_code}"
+    return f"dcs:{base_stat_var}_NAICS_{industry_code}"
 
   # Build map to Statistical Variable
   jolts_df['SeasonalAdjustment'] = jolts_df['seasonal'].apply(lambda adjustment: "Adjusted" if adjustment == "S" else "Unadjusted")
@@ -217,27 +214,17 @@ def create_bls_nodes():
   This method creates the statistical variables file and writes to it.
   """
 
-  BLS_JOLTS_ENUM = """
-  Node: dcid:BLS_JOLTSEnum
-  typeOf: Class
-  subClassOf: Enumeration
-  description: Combinations of NAICS codes used by BLS JOLTs.
-  name: BLS_JOLTSEnum
-  """
-
-  TEMPLATE_BLS = """
-  Node: dcid:BLS_JOLTS/{JOLTS_CODE}
-  typeOf: BLS_JOLTSEnum
+  template_bls = """
+  Node: dcid:NAICS/JOLTS_{JOLTS_CODE}
+  typeOf: NAICSEnum
   name: {JOLTS_NAME}
   """
 
   with open(STATISTICAL_VARIABLE_FILE, "w+", newline="") as f_out:
-    f_out.write(BLS_JOLTS_ENUM)
-
     for _, new_code in CODE_MAPPINGS.items():
       if ":" in new_code:
         jolts_code, jolts_name = new_code.split(":")
-        f_out.write(TEMPLATE_BLS.format_map({"JOLTS_CODE": jolts_code, "JOLTS_NAME": jolts_name}))
+        f_out.write(template_bls.format_map({"JOLTS_CODE": jolts_code, "JOLTS_NAME": jolts_name}))
 
 def create_statistical_variables(jolts_df, schema_mapping):
   """ Creates Statistical Variable nodes.
@@ -252,31 +239,29 @@ def create_statistical_variables(jolts_df, schema_mapping):
       schema_mapping: The schema mapping created by generate_cleaned_dataframe
   """
 
-  TEMPLATE_STAT_VAR = """
-  Node: dcid:{STAT_CLASS}_{CODE_TYPE}{INDUSTRY}
+  template_stat_var = """
+  Node: dcid:{STAT_CLASS}_NAICS_{INDUSTRY}
   typeOf: StatisticalVariable
   populationType: {POPULATION}
   statType: dcs:measuredValue
   measuredProperty: dcs:count
-  naics: dcid:{CODE_TYPE}/{INDUSTRY}
+  naics: dcid:NAICS/{INDUSTRY}
   turnoverType: dcs:{TURNOVER_TYPE}
   """
 
   # Map industry and seasonal adjustment to statistical variable name
-  industry_code_types = ["NAICS", "BLS_JOLTS"]
   adjustment_types = [("Adjusted", "BLSSeasonallyAdjusted"), ("Unadjusted", "BLSSeasonallyUnadjusted")]
 
   # Output the schema mapping to a new file
   with open(STATISTICAL_VARIABLE_FILE, "a+", newline="") as f_out:
     for schema_name, pop_type, sep_type, _ in schema_mapping:
 
-      for industry_code_type in industry_code_types:
-        unique_industries = list(jolts_df.query(f"code_type == '{industry_code_type}'")['industry_code'].unique())
+        unique_industries = list(jolts_df['industry_code'].unique())
 
         for industry_code in unique_industries:
           for adjusted_dcid_map, adjusted_schema in adjustment_types:
             # Create new schema object
-            stat_var_schema = TEMPLATE_STAT_VAR
+            stat_var_schema = template_stat_var
 
             # Remove separation type entry if not includes
             if sep_type == "":
@@ -285,7 +270,6 @@ def create_statistical_variables(jolts_df, schema_mapping):
             # Replace all other fields
             stat_var_schema = stat_var_schema.replace("{STAT_CLASS}", schema_name)   \
                                             .replace("{INDUSTRY}", industry_code)   \
-                                            .replace("{CODE_TYPE}", industry_code_type)   \
                                             .replace("{ADJUSTMENT}", adjusted_dcid_map)   \
                                             .replace("{BLS_ADJUSTMENT}", adjusted_schema)   \
                                             .replace("{POPULATION}", pop_type)      \
@@ -304,8 +288,8 @@ def main(argv):
   jolts_df, schema_mapping = generate_cleaned_dataframe()
 
   # Output final cleaned CSV
-  FINAL_COLUMNS = ['Date', 'StatisticalVariable', 'SeasonalAdjustment', 'Value']
-  output_csv = jolts_df.loc[:, FINAL_COLUMNS]
+  final_columns = ['Date', 'StatisticalVariable', 'SeasonalAdjustment', 'Value']
+  output_csv = jolts_df.loc[:, final_columns]
   output_csv.to_csv("BLSJolts.csv", index=False, encoding="utf-8")
 
   # Create new JOLTS nodes
