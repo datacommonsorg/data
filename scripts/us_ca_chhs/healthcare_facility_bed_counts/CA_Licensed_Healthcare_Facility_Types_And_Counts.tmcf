@@ -1,190 +1,182 @@
 
 Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
-typeOf: schema:County
-dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->GeoId
-
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E1
-typeOf: dcs:MedicalFacilityTypeEnum
-dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityType
-
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
 healthcareFacilityName: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityName
 typeOf: schema:Hospital
 dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedFACID
-healthcareFacilityType: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E1
-containedIn: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
+healthcareFacilityType: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityType
+containedIn: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->GeoId
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E1
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_SkilledNursingBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_SkilledNursingBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E4
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_SpecialTreatmentProgramBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_SpecialTreatmentProgramBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E5
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E3
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_IntermediateCareHabilitativeBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_IntermediateCareHabilitativeBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E6
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E4
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_IntermediateCareNursingBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_IntermediateCareNursingBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E7
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E5
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_CongregateLivingHealthFacilityBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_CongregateLivingHealthFacilityBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E8
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E6
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_IntermediateCareBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_IntermediateCareBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E9
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E7
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_CoronaryCareBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_CoronaryCareBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E10
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E8
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_IntensiveCareBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_IntensiveCareBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E11
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E9
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_IntensiveCareNewbornNurseryBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_IntensiveCareNewbornNurseryBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E12
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E10
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_PerinatalBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_PerinatalBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E13
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E11
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_UnspecifiedGeneralAcuteCareBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_UnspecifiedGeneralAcuteCareBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E14
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E12
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_BurnBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_BurnBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E15
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E13
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_PediatricBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_PediatricBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E16
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E14
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_RenalTransplantBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_RenalTransplantBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E17
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E15
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_RehabilitationBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_RehabilitationBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E18
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E16
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_AcuteRespiratoryCareBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_AcuteRespiratoryCareBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E19
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E17
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_AcutePsychiatricCareBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_AcutePsychiatricCareBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E20
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E18
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_ChemicalDependencyRecoveryBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_ChemicalDependencyRecoveryBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E21
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E19
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_PediatricIntensiveCareUnitBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_PediatricIntensiveCareUnitBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E22
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E20
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_LaborAndDeliveryBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_LaborAndDeliveryBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E23
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E21
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_IntermediateCareDevelopmentallyDisabledBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_IntermediateCareDevelopmentallyDisabledBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E24
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E22
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_PsychiatricHealthBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_PsychiatricHealthBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E25
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E23
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_PediatricDayAndRespiteCareBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_PediatricDayAndRespiteCareBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E26
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E24
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_DialysisStationsBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_DialysisStationsBed
 
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E27
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E25
 typeOf: StatVarObservation
 variableMeasured: Count_HospitalBed_CorrectionalTreatmentCenterBed
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Count_HospitalBed_CorrectionalTreatmentCenterBed

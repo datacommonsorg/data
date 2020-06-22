@@ -118,10 +118,10 @@ for index, row_dict in df1.iterrows():
         elmsId_to_index[elmsId] = real_index
         real_index = real_index + 1
         new_row = {
-            'GeoId': county_to_geoID[row_dict['COUNTY_NAME']],
+            'GeoId': 'dcid:' + county_to_geoID[row_dict['COUNTY_NAME']],
             'CALicensedHealthcareFacilityBedFACID': 'ELMS/' + elmsId,
             'CALicensedHealthcareFacilityName': row_dict['FACNAME'],
-            'CALicensedHealthcareFacilityType': FDR_to_type[row_dict['FAC_FDR']],
+            'CALicensedHealthcareFacilityType': 'dcs:' + FDR_to_type[row_dict['FAC_FDR']],
             'Count_HospitalBed_SkilledNursingBed': None,
             'Count_HospitalBed_SpecialTreatmentProgramBed': None,
             'Count_HospitalBed_IntermediateCareHabilitativeBed': None,
@@ -154,28 +154,14 @@ for index, row_dict in df1.iterrows():
 new_df.to_csv('CA_Licensed_Healthcare_Facility_Types_And_Counts.csv')
 
 # Output as a tmcf file.
-# county node
-TEMPLATE_MCF_GEO_1 = """
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
-typeOf: schema:County
-dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->GeoId
-"""
-
-# facility type
-TEMPLATE_MCF_FAC_TYPE_1 = """
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E1
-typeOf: dcs:MedicalFacilityTypeEnum
-dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityType
-"""
-
 # Facility node, facility containedIn a county
 TEMPLATE_MCF_FAC_1 = """
-Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 healthcareFacilityName: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityName
 typeOf: schema:Hospital
 dcid: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityBedFACID
-healthcareFacilityType: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E1
-containedIn: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
+healthcareFacilityType: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->CALicensedHealthcareFacilityType
+containedIn: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->GeoId
 """
 
 # observation node, observationAbout facility
@@ -184,18 +170,16 @@ Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E{index}
 typeOf: StatVarObservation
 variableMeasured: {stat_var}
 observationDate: "2020-06-01"
-observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E2
+observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->{stat_var}
 """
 
 with open('CA_Licensed_Healthcare_Facility_Types_And_Counts.tmcf', 'w', newline='') as f_out:
-    f_out.write(TEMPLATE_MCF_GEO_1)
-    f_out.write(TEMPLATE_MCF_FAC_TYPE_1)
     f_out.write(TEMPLATE_MCF_FAC_1)
 
     stat_vars = new_columns[4:]
     for i in range(len(stat_vars)):
-        f_out.write(TEMPLATE_MCF_TEMPLATE_1.format_map({'index': i + 3, 'stat_var': stat_vars[i]}))
+        f_out.write(TEMPLATE_MCF_TEMPLATE_1.format_map({'index': i + 1, 'stat_var': stat_vars[i]}))
 
 # Proprocess for dataset2 and output tmcf file.
 
@@ -232,7 +216,7 @@ with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.csv', 'w'
 
         for row_dict in reader:
             processed_dict = {
-                'GeoId': county_to_geoID[row_dict['COUNTY_NAME']],
+                'GeoId': 'dcid:' + county_to_geoID[row_dict['COUNTY_NAME']],
                 'CACountyName': row_dict['COUNTY_NAME'],
                 'CALicensedHealthcareFacilityType': FDR_to_type[row_dict['FAC_FDR']],
                 'Count_Hosptital_GeneralAcuteCare': row_dict['FACILITY_COUNT'],
@@ -258,25 +242,17 @@ with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.csv', 'w'
 
 os.remove('temp_data2.csv')
 
-# County node.
-TEMPLATE_MCF_GEO_2 = """
-Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
-typeOf: schema:County
-dcid: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->GeoId
-"""
-
 TEMPLATE_MCF_TEMPLATE_2 = """
 Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 observationDate: "2020-04-13"
-observationAbout: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E0
+observationAbout: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->GeoId
 value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->{stat_var}
 """
 
 stat_vars = new_columns_2[3:]
 
 with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.tmcf', 'w', newline='') as f_out:
-    f_out.write(TEMPLATE_MCF_GEO_2)
     for i in range(len(stat_vars)):
-        f_out.write(TEMPLATE_MCF_TEMPLATE_2.format_map({'index': i + 1, 'stat_var':stat_vars[i]}))
+        f_out.write(TEMPLATE_MCF_TEMPLATE_2.format_map({'index': i, 'stat_var':stat_vars[i]}))
