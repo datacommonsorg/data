@@ -131,21 +131,22 @@ def generate_cleaned_dataframe():
   # Additional information about each dataframe
   # Tuple Format: Statistical Variable name, Stat Var population, Stat Var Turnover Type If Relevant, Dataframe for Stat Var 
   schema_mapping = [
-    ("NumJobOpening", "JobPosting", "", job_openings),
-    ("NumJobHire", "JobHire", "", job_hires),
-    ("Turnover", "LaborTurnover", "", total_seps),
-    ("NumVoluntarySeparation", "LaborTurnover", "VoluntarySeparation", total_quits),
-    ("NumLayoff", "LaborTurnover", "Layoff", total_layoffs),
-    ("NumOtherSeparation", "LaborTurnover", "OtherSeparation", total_other_seps),
+    ("NumJobOpening", "JobPosting", "", "", job_openings),
+    ("NumJobHire", "Worker", "Hired", "", job_hires),
+    ("Turnover", "Worker", "Separated", "", total_seps),
+    ("NumVoluntarySeparation", "Worker", "Separated", "VoluntarySeparation", total_quits),
+    ("NumLayoff", "Worker", "Separated", "Layoff", total_layoffs),
+    ("NumOtherSeparation", "Worker", "Separated", "OtherSeparation", total_other_seps),
   ]
 
   # Combine datasets into a single dataframe including origin of data
   jolts_df = pd.DataFrame()
   columns_to_keep = ['series_id', 'year', 'period', 'value']
 
-  for schema_name, population_type, separation_type, df in schema_mapping:
+  for schema_name, population_type, job_change_status, separation_type, df in schema_mapping:
     df = df.loc[:, columns_to_keep]
     df['statistical_variable'] = schema_name
+    df['job_change_status'] = job_change_status
     df['population_type'] = population_type
     df['separation_type'] = separation_type
     jolts_df = jolts_df.append(df)
@@ -243,6 +244,7 @@ def create_statistical_variables(jolts_df, schema_mapping):
   Node: dcid:{STAT_CLASS}_NAICS_{INDUSTRY}
   typeOf: StatisticalVariable
   populationType: {POPULATION}
+  jobChangeStatus: dcs:{JOB_CHANGE_STATUS}
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/{INDUSTRY}
@@ -254,7 +256,7 @@ def create_statistical_variables(jolts_df, schema_mapping):
 
   # Output the schema mapping to a new file
   with open(STATISTICAL_VARIABLE_FILE, "a+", newline="") as f_out:
-    for schema_name, pop_type, sep_type, _ in schema_mapping:
+    for schema_name, pop_type, job_change_status, sep_type, _ in schema_mapping:
 
         unique_industries = list(jolts_df['industry_code'].unique())
 
@@ -267,12 +269,16 @@ def create_statistical_variables(jolts_df, schema_mapping):
             if sep_type == "":
               stat_var_schema = stat_var_schema.replace("turnoverType: dcs:{TURNOVER_TYPE}", "")
 
+            if job_change_status == "":
+              stat_var_schema = stat_var_schema.replace("jobChangeStatus: dcs:{JOB_CHANGE_STATUS}", "")
+
             # Replace all other fields
             stat_var_schema = stat_var_schema.replace("{STAT_CLASS}", schema_name)   \
                                             .replace("{INDUSTRY}", industry_code)   \
                                             .replace("{ADJUSTMENT}", adjusted_dcid_map)   \
                                             .replace("{BLS_ADJUSTMENT}", adjusted_schema)   \
                                             .replace("{POPULATION}", pop_type)      \
+                                            .replace("{JOB_CHANGE_STATUS}", job_change_status)      \
                                             .replace("{TURNOVER_TYPE}", sep_type)
 
           f_out.write(stat_var_schema)

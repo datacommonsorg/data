@@ -21,11 +21,11 @@
   
   Node: dcid:NAICS/JOLTS_400000
   typeOf: NAICSEnum
-  name: Trade transportation and utilities
+  name: Trade, transportation, and utilities
   
   Node: dcid:NAICS/JOLTS_480099
   typeOf: NAICSEnum
-  name: Transportation warehousing and utilities
+  name: Transportation warehousing, and utilities
   
   Node: dcid:NAICS/JOLTS_510099
   typeOf: NAICSEnum
@@ -62,6 +62,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_000000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_000000
@@ -70,6 +71,7 @@
   Node: dcid:NumJobOpening_NAICS_10
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/10
@@ -78,6 +80,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_110099
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_110099
@@ -86,6 +89,7 @@
   Node: dcid:NumJobOpening_NAICS_23
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/23
@@ -94,6 +98,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_300000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_300000
@@ -102,6 +107,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_320000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_320000
@@ -110,6 +116,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_340000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_340000
@@ -118,6 +125,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_400000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_400000
@@ -126,6 +134,7 @@
   Node: dcid:NumJobOpening_NAICS_42
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/42
@@ -134,6 +143,7 @@
   Node: dcid:NumJobOpening_NAICS_44
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/44
@@ -142,6 +152,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_480099
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_480099
@@ -150,6 +161,7 @@
   Node: dcid:NumJobOpening_NAICS_51
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/51
@@ -158,6 +170,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_510099
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_510099
@@ -166,6 +179,7 @@
   Node: dcid:NumJobOpening_NAICS_52
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/52
@@ -174,6 +188,7 @@
   Node: dcid:NumJobOpening_NAICS_53
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/53
@@ -182,6 +197,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_540099
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_540099
@@ -190,6 +206,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_600000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_600000
@@ -198,6 +215,7 @@
   Node: dcid:NumJobOpening_NAICS_61
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/61
@@ -206,6 +224,7 @@
   Node: dcid:NumJobOpening_NAICS_62
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/62
@@ -214,6 +233,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_700000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_700000
@@ -222,6 +242,7 @@
   Node: dcid:NumJobOpening_NAICS_71
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/71
@@ -230,6 +251,7 @@
   Node: dcid:NumJobOpening_NAICS_72
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/72
@@ -238,6 +260,7 @@
   Node: dcid:NumJobOpening_NAICS_81
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/81
@@ -246,6 +269,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_900000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_900000
@@ -254,6 +278,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_910000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_910000
@@ -262,6 +287,7 @@
   Node: dcid:NumJobOpening_NAICS_92
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/92
@@ -270,6 +296,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_923000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_923000
@@ -278,6 +305,7 @@
   Node: dcid:NumJobOpening_NAICS_JOLTS_929000
   typeOf: StatisticalVariable
   populationType: JobPosting
+  
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_929000
@@ -285,7 +313,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_000000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_000000
@@ -293,7 +322,8 @@
   
   Node: dcid:NumJobHire_NAICS_10
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/10
@@ -301,7 +331,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_110099
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_110099
@@ -309,7 +340,8 @@
   
   Node: dcid:NumJobHire_NAICS_23
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/23
@@ -317,7 +349,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_300000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_300000
@@ -325,7 +358,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_320000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_320000
@@ -333,7 +367,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_340000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_340000
@@ -341,7 +376,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_400000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_400000
@@ -349,7 +385,8 @@
   
   Node: dcid:NumJobHire_NAICS_42
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/42
@@ -357,7 +394,8 @@
   
   Node: dcid:NumJobHire_NAICS_44
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/44
@@ -365,7 +403,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_480099
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_480099
@@ -373,7 +412,8 @@
   
   Node: dcid:NumJobHire_NAICS_51
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/51
@@ -381,7 +421,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_510099
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_510099
@@ -389,7 +430,8 @@
   
   Node: dcid:NumJobHire_NAICS_52
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/52
@@ -397,7 +439,8 @@
   
   Node: dcid:NumJobHire_NAICS_53
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/53
@@ -405,7 +448,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_540099
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_540099
@@ -413,7 +457,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_600000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_600000
@@ -421,7 +466,8 @@
   
   Node: dcid:NumJobHire_NAICS_61
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/61
@@ -429,7 +475,8 @@
   
   Node: dcid:NumJobHire_NAICS_62
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/62
@@ -437,7 +484,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_700000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_700000
@@ -445,7 +493,8 @@
   
   Node: dcid:NumJobHire_NAICS_71
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/71
@@ -453,7 +502,8 @@
   
   Node: dcid:NumJobHire_NAICS_72
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/72
@@ -461,7 +511,8 @@
   
   Node: dcid:NumJobHire_NAICS_81
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/81
@@ -469,7 +520,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_900000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_900000
@@ -477,7 +529,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_910000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_910000
@@ -485,7 +538,8 @@
   
   Node: dcid:NumJobHire_NAICS_92
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/92
@@ -493,7 +547,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_923000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_923000
@@ -501,7 +556,8 @@
   
   Node: dcid:NumJobHire_NAICS_JOLTS_929000
   typeOf: StatisticalVariable
-  populationType: JobHire
+  populationType: Worker
+  jobChangeStatus: dcs:Hired
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_929000
@@ -509,7 +565,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_000000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_000000
@@ -517,7 +574,8 @@
   
   Node: dcid:Turnover_NAICS_10
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/10
@@ -525,7 +583,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_110099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_110099
@@ -533,7 +592,8 @@
   
   Node: dcid:Turnover_NAICS_23
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/23
@@ -541,7 +601,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_300000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_300000
@@ -549,7 +610,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_320000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_320000
@@ -557,7 +619,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_340000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_340000
@@ -565,7 +628,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_400000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_400000
@@ -573,7 +637,8 @@
   
   Node: dcid:Turnover_NAICS_42
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/42
@@ -581,7 +646,8 @@
   
   Node: dcid:Turnover_NAICS_44
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/44
@@ -589,7 +655,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_480099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_480099
@@ -597,7 +664,8 @@
   
   Node: dcid:Turnover_NAICS_51
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/51
@@ -605,7 +673,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_510099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_510099
@@ -613,7 +682,8 @@
   
   Node: dcid:Turnover_NAICS_52
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/52
@@ -621,7 +691,8 @@
   
   Node: dcid:Turnover_NAICS_53
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/53
@@ -629,7 +700,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_540099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_540099
@@ -637,7 +709,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_600000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_600000
@@ -645,7 +718,8 @@
   
   Node: dcid:Turnover_NAICS_61
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/61
@@ -653,7 +727,8 @@
   
   Node: dcid:Turnover_NAICS_62
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/62
@@ -661,7 +736,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_700000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_700000
@@ -669,7 +745,8 @@
   
   Node: dcid:Turnover_NAICS_71
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/71
@@ -677,7 +754,8 @@
   
   Node: dcid:Turnover_NAICS_72
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/72
@@ -685,7 +763,8 @@
   
   Node: dcid:Turnover_NAICS_81
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/81
@@ -693,7 +772,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_900000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_900000
@@ -701,7 +781,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_910000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_910000
@@ -709,7 +790,8 @@
   
   Node: dcid:Turnover_NAICS_92
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/92
@@ -717,7 +799,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_923000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_923000
@@ -725,7 +808,8 @@
   
   Node: dcid:Turnover_NAICS_JOLTS_929000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_929000
@@ -733,7 +817,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_000000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_000000
@@ -741,7 +826,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_10
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/10
@@ -749,7 +835,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_110099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_110099
@@ -757,7 +844,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_23
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/23
@@ -765,7 +853,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_300000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_300000
@@ -773,7 +862,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_320000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_320000
@@ -781,7 +871,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_340000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_340000
@@ -789,7 +880,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_400000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_400000
@@ -797,7 +889,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_42
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/42
@@ -805,7 +898,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_44
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/44
@@ -813,7 +907,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_480099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_480099
@@ -821,7 +916,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_51
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/51
@@ -829,7 +925,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_510099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_510099
@@ -837,7 +934,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_52
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/52
@@ -845,7 +943,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_53
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/53
@@ -853,7 +952,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_540099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_540099
@@ -861,7 +961,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_600000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_600000
@@ -869,7 +970,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_61
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/61
@@ -877,7 +979,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_62
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/62
@@ -885,7 +988,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_700000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_700000
@@ -893,7 +997,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_71
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/71
@@ -901,7 +1006,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_72
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/72
@@ -909,7 +1015,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_81
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/81
@@ -917,7 +1024,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_900000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_900000
@@ -925,7 +1033,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_910000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_910000
@@ -933,7 +1042,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_92
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/92
@@ -941,7 +1051,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_923000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_923000
@@ -949,7 +1060,8 @@
   
   Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_929000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_929000
@@ -957,7 +1069,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_000000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_000000
@@ -965,7 +1078,8 @@
   
   Node: dcid:NumLayoff_NAICS_10
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/10
@@ -973,7 +1087,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_110099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_110099
@@ -981,7 +1096,8 @@
   
   Node: dcid:NumLayoff_NAICS_23
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/23
@@ -989,7 +1105,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_300000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_300000
@@ -997,7 +1114,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_320000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_320000
@@ -1005,7 +1123,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_340000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_340000
@@ -1013,7 +1132,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_400000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_400000
@@ -1021,7 +1141,8 @@
   
   Node: dcid:NumLayoff_NAICS_42
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/42
@@ -1029,7 +1150,8 @@
   
   Node: dcid:NumLayoff_NAICS_44
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/44
@@ -1037,7 +1159,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_480099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_480099
@@ -1045,7 +1168,8 @@
   
   Node: dcid:NumLayoff_NAICS_51
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/51
@@ -1053,7 +1177,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_510099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_510099
@@ -1061,7 +1186,8 @@
   
   Node: dcid:NumLayoff_NAICS_52
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/52
@@ -1069,7 +1195,8 @@
   
   Node: dcid:NumLayoff_NAICS_53
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/53
@@ -1077,7 +1204,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_540099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_540099
@@ -1085,7 +1213,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_600000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_600000
@@ -1093,7 +1222,8 @@
   
   Node: dcid:NumLayoff_NAICS_61
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/61
@@ -1101,7 +1231,8 @@
   
   Node: dcid:NumLayoff_NAICS_62
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/62
@@ -1109,7 +1240,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_700000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_700000
@@ -1117,7 +1249,8 @@
   
   Node: dcid:NumLayoff_NAICS_71
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/71
@@ -1125,7 +1258,8 @@
   
   Node: dcid:NumLayoff_NAICS_72
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/72
@@ -1133,7 +1267,8 @@
   
   Node: dcid:NumLayoff_NAICS_81
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/81
@@ -1141,7 +1276,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_900000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_900000
@@ -1149,7 +1285,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_910000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_910000
@@ -1157,7 +1294,8 @@
   
   Node: dcid:NumLayoff_NAICS_92
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/92
@@ -1165,7 +1303,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_923000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_923000
@@ -1173,7 +1312,8 @@
   
   Node: dcid:NumLayoff_NAICS_JOLTS_929000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_929000
@@ -1181,7 +1321,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_000000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_000000
@@ -1189,7 +1330,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_10
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/10
@@ -1197,7 +1339,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_110099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_110099
@@ -1205,7 +1348,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_23
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/23
@@ -1213,7 +1357,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_300000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_300000
@@ -1221,7 +1366,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_320000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_320000
@@ -1229,7 +1375,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_340000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_340000
@@ -1237,7 +1384,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_400000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_400000
@@ -1245,7 +1393,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_42
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/42
@@ -1253,7 +1402,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_44
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/44
@@ -1261,7 +1411,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_480099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_480099
@@ -1269,7 +1420,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_51
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/51
@@ -1277,7 +1429,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_510099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_510099
@@ -1285,7 +1438,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_52
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/52
@@ -1293,7 +1447,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_53
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/53
@@ -1301,7 +1456,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_540099
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_540099
@@ -1309,7 +1465,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_600000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_600000
@@ -1317,7 +1474,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_61
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/61
@@ -1325,7 +1483,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_62
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/62
@@ -1333,7 +1492,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_700000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_700000
@@ -1341,7 +1501,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_71
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/71
@@ -1349,7 +1510,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_72
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/72
@@ -1357,7 +1519,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_81
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/81
@@ -1365,7 +1528,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_900000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_900000
@@ -1373,7 +1537,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_910000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_910000
@@ -1381,7 +1546,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_92
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/92
@@ -1389,7 +1555,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_923000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_923000
@@ -1397,7 +1564,8 @@
   
   Node: dcid:NumOtherSeparation_NAICS_JOLTS_929000
   typeOf: StatisticalVariable
-  populationType: LaborTurnover
+  populationType: Worker
+  jobChangeStatus: dcs:Separated
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/JOLTS_929000
