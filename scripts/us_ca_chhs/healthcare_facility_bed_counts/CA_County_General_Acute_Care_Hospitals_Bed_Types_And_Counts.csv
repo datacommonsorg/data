@@ -1,0 +1,59 @@
+GeoId,CACountyName,CALicensedHealthcareFacilityType,Count_Hosptital_GeneralAcuteCare,Count_HospitalBed_GeneralAcuteCare,Count_HospitalBed_GeneralAcuteCare_AcutePsychiatricCareBed,Count_HospitalBed_GeneralAcuteCare_AcuteRespiratoryCareBed,Count_HospitalBed_GeneralAcuteCare_BurnBed,Count_HospitalBed_GeneralAcuteCare_ChemicalDependencyRecoveryBed,Count_HospitalBed_GeneralAcuteCare_CoronaryCareBed,Count_HospitalBed_GeneralAcuteCare_IntensiveCareBed,Count_HospitalBed_GeneralAcuteCare_IntensiveCareNewbornNurseryBed,Count_HospitalBed_GeneralAcuteCare_IntermediateCareBed,Count_HospitalBed_GeneralAcuteCare_LaborAndDeliveryBed,Count_HospitalBed_GeneralAcuteCare_PediatricBed,Count_HospitalBed_GeneralAcuteCare_PediatricIntensiveCareUnitBed,Count_HospitalBed_GeneralAcuteCare_PerinatalBed,Count_HospitalBed_GeneralAcuteCare_RehabilitationBed,Count_HospitalBed_GeneralAcuteCare_RenalTransplantBed,Count_HospitalBed_GeneralAcuteCare_UnspecifiedGeneralAcuteCareBed
+geoId/06003,ALPINE,GeneralAcuteCareFacility,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+geoId/06091,SIERRA,GeneralAcuteCareFacility,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+geoId/06101,SUTTER,GeneralAcuteCareFacility,1,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14
+geoId/06051,MONO,GeneralAcuteCareFacility,1,17,0,0,0,0,0,2,0,0,0,0,0,2,0,0,13
+geoId/06043,MARIPOSA,GeneralAcuteCareFacility,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18
+geoId/06049,MODOC,GeneralAcuteCareFacility,2,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20
+geoId/06009,CALAVERAS,GeneralAcuteCareFacility,1,25,0,0,0,0,0,8,0,0,0,0,0,0,0,0,17
+geoId/06035,LASSEN,GeneralAcuteCareFacility,1,25,0,0,0,0,0,0,0,0,0,0,0,4,0,0,21
+geoId/06069,SAN BENITO,GeneralAcuteCareFacility,1,25,0,0,0,0,0,4,0,0,0,0,0,6,0,0,15
+geoId/06105,TRINITY,GeneralAcuteCareFacility,1,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25
+geoId/06027,INYO,GeneralAcuteCareFacility,2,29,0,0,0,0,0,4,0,0,0,0,0,5,0,0,20
+geoId/06063,PLUMAS,GeneralAcuteCareFacility,3,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35
+geoId/06011,COLUSA,GeneralAcuteCareFacility,1,42,0,0,0,0,0,6,0,0,0,0,0,0,0,0,36
+geoId/06021,GLENN,GeneralAcuteCareFacility,1,47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47
+geoId/06015,DEL NORTE,GeneralAcuteCareFacility,1,49,0,0,0,0,0,6,0,0,0,0,0,4,10,0,29
+geoId/06005,AMADOR,GeneralAcuteCareFacility,1,52,0,0,0,0,0,6,0,0,0,0,0,8,0,0,38
+geoId/06093,SISKIYOU,GeneralAcuteCareFacility,2,61,0,0,0,0,0,8,0,0,0,0,0,8,0,0,45
+geoId/06033,LAKE,GeneralAcuteCareFacility,2,62,0,0,0,0,0,8,0,0,0,0,0,7,0,0,47
+geoId/06103,TEHAMA,GeneralAcuteCareFacility,1,76,0,0,0,0,0,8,0,0,0,0,0,2,0,0,66
+geoId/06109,TUOLUMNE,GeneralAcuteCareFacility,2,84,0,0,0,0,0,6,0,0,0,0,0,7,0,0,71
+geoId/06113,YOLO,GeneralAcuteCareFacility,2,122,0,0,0,0,0,14,4,0,0,7,0,19,0,0,78
+geoId/06057,NEVADA,GeneralAcuteCareFacility,2,137,0,0,0,0,2,8,0,0,0,0,0,14,0,0,113
+geoId/06045,MENDOCINO,GeneralAcuteCareFacility,3,143,0,0,0,0,0,16,4,0,0,0,0,23,0,0,100
+geoId/06031,KINGS,GeneralAcuteCareFacility,1,173,0,0,0,0,0,22,0,0,0,0,0,31,0,0,120
+geoId/06017,EL DORADO,GeneralAcuteCareFacility,2,174,0,0,0,0,0,28,0,0,0,0,0,27,0,0,119
+geoId/06115,YUBA,GeneralAcuteCareFacility,1,221,0,0,0,0,0,24,6,0,0,0,0,12,0,0,179
+geoId/06047,MERCED,GeneralAcuteCareFacility,2,226,0,0,0,0,0,24,0,0,0,0,0,42,0,0,160
+geoId/06025,IMPERIAL,GeneralAcuteCareFacility,2,268,0,0,0,0,0,28,7,0,0,24,0,33,0,0,176
+geoId/06023,HUMBOLDT,GeneralAcuteCareFacility,5,275,0,0,0,0,4,26,5,0,0,0,0,29,15,0,196
+geoId/06055,NAPA,GeneralAcuteCareFacility,2,351,0,0,0,0,0,48,6,0,0,0,0,29,14,0,254
+geoId/06087,SANTA CRUZ,GeneralAcuteCareFacility,3,356,0,0,0,0,9,13,24,0,0,8,0,41,20,0,241
+geoId/06007,BUTTE,GeneralAcuteCareFacility,5,425,0,0,0,0,6,47,6,0,0,4,0,28,40,0,294
+geoId/06041,MARIN,GeneralAcuteCareFacility,4,448,0,0,0,0,4,30,8,0,0,9,0,22,0,0,375
+geoId/06079,SAN LUIS OBISPO,GeneralAcuteCareFacility,4,449,0,0,0,0,6,48,22,0,0,6,0,33,20,0,314
+geoId/06039,MADERA,GeneralAcuteCareFacility,2,464,0,0,0,0,0,52,116,0,0,134,0,23,20,0,119
+geoId/06089,SHASTA,GeneralAcuteCareFacility,5,574,21,0,0,0,10,70,16,0,0,19,0,31,0,0,407
+geoId/06095,SOLANO,GeneralAcuteCareFacility,5,676,0,0,0,0,0,82,32,0,0,0,0,103,48,0,411
+geoId/06053,MONTEREY,GeneralAcuteCareFacility,4,678,0,0,0,0,17,30,34,0,0,26,0,65,37,0,469
+geoId/06097,SONOMA,GeneralAcuteCareFacility,8,722,0,0,0,0,10,72,35,0,0,15,0,56,16,0,518
+geoId/06061,PLACER,GeneralAcuteCareFacility,3,732,0,0,0,0,12,58,64,0,0,41,0,93,55,0,409
+geoId/06107,TULARE,GeneralAcuteCareFacility,4,732,0,0,0,0,0,65,19,0,0,20,0,113,45,0,470
+geoId/06083,SANTA BARBARA,GeneralAcuteCareFacility,6,848,0,0,0,0,20,79,43,0,0,63,0,85,38,0,520
+geoId/06081,SAN MATEO,GeneralAcuteCareFacility,8,1062,0,0,0,0,14,96,19,0,0,7,0,85,0,0,841
+geoId/06077,SAN JOAQUIN,GeneralAcuteCareFacility,7,1114,0,10,0,0,21,80,75,0,0,29,0,71,8,0,820
+geoId/06111,VENTURA,GeneralAcuteCareFacility,10,1353,0,0,0,0,43,123,83,0,7,26,8,108,63,0,892
+geoId/06099,STANISLAUS,GeneralAcuteCareFacility,8,1378,0,0,0,0,24,92,87,0,0,32,0,149,50,0,944
+geoId/06029,KERN,GeneralAcuteCareFacility,12,1510,0,0,7,0,26,155,77,0,0,66,0,144,86,0,949
+geoId/06013,CONTRA COSTA,GeneralAcuteCareFacility,9,1637,0,0,0,0,6,169,103,0,0,31,0,188,62,0,1078
+geoId/06019,FRESNO,GeneralAcuteCareFacility,9,1750,0,0,10,0,35,149,104,0,0,8,0,183,32,0,1229
+geoId/06075,SAN FRANCISCO,GeneralAcuteCareFacility,13,2747,0,0,16,0,34,326,179,0,0,146,8,158,109,0,1771
+geoId/06067,SACRAMENTO,GeneralAcuteCareFacility,10,2867,0,0,22,0,38,376,156,0,0,108,0,213,69,10,1875
+geoId/06001,ALAMEDA,GeneralAcuteCareFacility,18,2979,18,0,0,0,50,291,182,12,0,195,0,275,98,0,1858
+geoId/06065,RIVERSIDE,GeneralAcuteCareFacility,21,3623,0,0,0,21,46,378,119,0,0,111,0,337,12,3,2596
+geoId/06085,SANTA CLARA,GeneralAcuteCareFacility,14,3868,0,0,8,0,67,462,267,0,0,253,0,421,179,0,2211
+geoId/06071,SAN BERNARDINO,GeneralAcuteCareFacility,25,4003,0,0,14,0,42,486,226,0,0,208,10,354,146,0,2517
+geoId/06059,ORANGE,GeneralAcuteCareFacility,35,6050,66,0,15,109,101,614,324,0,0,242,8,635,141,6,3789
+geoId/06073,SAN DIEGO,GeneralAcuteCareFacility,24,6509,62,7,8,0,138,596,399,0,0,49,0,510,190,8,4542
+geoId/06037,LOS ANGELES,GeneralAcuteCareFacility,92,21556,37,24,40,12,409,2108,1199,0,6,1082,0,1779,955,6,13899

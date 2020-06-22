@@ -1,0 +1,118 @@
+
+Node: dcid:NumGeneralAcuteCareHospital
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Hospital
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalSpecialty: dcs:GeneralAcuteCare
+
+Node: dcid:NumGeneralAcuteCareHospitalBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:NumGeneralAcuteCareHospitalAcutePsychiatricCareBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:AcutePsychiatricCareBed
+
+Node: dcid:NumGeneralAcuteCareHospitalAcuteRespiratoryCareBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:AcuteRespiratoryCareBed
+
+Node: dcid:NumGeneralAcuteCareHospitalBurnBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:BurnBed
+
+Node: dcid:NumGeneralAcuteCareHospitalChemicalDependencyRecoveryBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:ChemicalDependencyRecoveryBed
+
+Node: dcid:NumGeneralAcuteCareHospitalCoronaryCareBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:CoronaryCareBed
+
+Node: dcid:NumGeneralAcuteCareHospitalIntensiveCareBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:IntensiveCareBed
+
+Node: dcid:NumGeneralAcuteCareHospitalIntensiveCareNewbornNurseryBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:IntensiveCareNewbornNurseryBed
+
+Node: dcid:NumGeneralAcuteCareHospitalIntermediateCareBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:IntermediateCareBed
+
+Node: dcid:NumGeneralAcuteCareHospitalLaborAndDeliveryBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:LaborAndDeliveryBed
+
+Node: dcid:NumGeneralAcuteCareHospitalPediatricBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:PediatricBed
+
+Node: dcid:NumGeneralAcuteCareHospitalPediatricIntensiveCareUnitBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:PediatricIntensiveCareUnitBed
+
+Node: dcid:NumGeneralAcuteCareHospitalPerinatalBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:PerinatalBed
+
+Node: dcid:NumGeneralAcuteCareHospitalRehabilitationBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:RehabilitationBed
+
+Node: dcid:NumGeneralAcuteCareHospitalRenalTransplantBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:RenalTransplantBed
+
+Node: dcid:NumGeneralAcuteCareHospitalUnspecifiedGeneralAcuteCareBed
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HospitalBed
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+bedType: dcs:UnspecifiedGeneralAcuteCareBed

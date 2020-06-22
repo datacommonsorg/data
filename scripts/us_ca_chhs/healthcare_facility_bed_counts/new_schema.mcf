@@ -1,0 +1,170 @@
+# -----------------New Schema------------------------
+Node: dcid:MedicalResource
+name: "Medical Resource"
+typeOf: schema:Class
+subClassOf: schema:MedicalEntity
+description: "Resources used for medical healthcare."
+
+Node: dcid:GeneralAcuteCare
+typeOf: schema:MedicalSpecialty
+description: "A medical specialty, by which a patient receives active but short-term treatment for a severe injury or episode of illness, an urgent medical condition, or during recovery from surgery."
+
+# healthcare facility type Enum definition
+Node: dcid:MedicalFacilityTypeEnum
+typeOf: schema:Class
+name: "MedicalFacilityTypeEnum"
+subClassOf: schema:Enumeration
+description: "Type of licensed healthcare facility"
+
+# healthcare facility types
+Node: dcid:SkilledNursingFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "SkilledNursingFacility"
+
+Node: dcid:CongregateLivingHealthFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "CongregateLivingHealthFacility"
+
+Node: dcid:IntermediateCareFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "IntermediateCareFacility"
+
+Node: dcid:HospiceFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "HospiceFacility"
+
+Node: dcid:GeneralAcuteCareFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "GeneralAcuteCareFacility"
+
+Node: dcid:AcutePsychiatricFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "AcutePsychiatricFacility"
+
+Node: dcid:PediatricDayHealthAndRespiteCareFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "PediatricDayHealthAndRespiteCareFacility"
+
+Node: dcid:ChronicDialysisFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "ChronicDialysisFacility"
+
+Node: dcid:ChemicalDependencyRecoveryFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "ChemicalDependencyRecoveryFacility"
+
+Node: dcid:CorrectionalTreatmentCenterFacility
+typeOf: dcs:MedicalFacilityTypeEnum
+name: "CorrectionalTreatmentCenterFacility"
+
+# BedType Enum
+Node: dcid:HospitalBed
+typeOf: schema:Class
+name: "Hospital Bed Enum"
+subClassOf: schema:Enumeration, dcs:MedicalResource
+description: "Type of licensed healthcare facility beds"
+
+# BedType Enumerations
+Node: dcid:SkilledNursingBed
+typeOf: dcs:HospitalBed
+name: "SkilledNursingBed"
+
+Node: dcid:SpecialTreatmentProgramBed
+typeOf: dcs:HospitalBed
+name: "SpecialTreatmentProgramBed"
+
+Node: dcid:IntermediateCareHabilitativeBed
+typeOf: dcs:HospitalBed
+name: "IntermediateCareHabilitativeBed"
+
+Node: dcid:IntermediateCareNursingBed
+typeOf: dcs:HospitalBed
+name: "IntermediateCareNursingBed"
+
+Node: dcid:CongregateLivingHealthFacilityBed
+typeOf: dcs:HospitalBed
+name: "CongregateLivingHealthFacilityBed"
+
+Node: dcid:IntermediateCareBed
+typeOf: dcs:HospitalBed
+name: "IntermediateCareBed"
+
+Node: dcid:HospiceBed
+typeOf: dcs:HospitalBed
+name: "HospiceBed"
+
+Node: dcid:CoronaryCareBed
+typeOf: dcs:HospitalBed
+name: "CoronaryCareBed"
+
+Node: dcid:IntensiveCareBed
+typeOf: dcs:HospitalBed
+name: "IntensiveCareBed"
+
+Node: dcid:IntensiveCareNewbornNurseryBed
+typeOf: dcs:HospitalBed
+name: "IntensiveCareNewbornNurseryBed"
+
+Node: dcid:PerinatalBed
+typeOf: dcs:HospitalBed
+name: "PerinatalBed"
+
+Node: dcid:UnspecifiedGeneralAcuteCareBed
+typeOf: dcs:HospitalBed
+name: "UnspecifiedGeneralAcuteCareBed"
+
+Node: dcid:BurnBed
+typeOf: dcs:HospitalBed
+name: "BurnBed"
+
+Node: dcid:PediatricBed
+typeOf: dcs:HospitalBed
+name: "PediatricBed"
+
+Node: dcid:RenalTransplantBed
+typeOf: dcs:HospitalBed
+name: "RenalTransplantBed"
+
+Node: dcid:RehabilitationBed
+typeOf: dcs:HospitalBed
+name: "RehabilitationBed"
+
+Node: dcid:AcuteRespiratoryCareBed
+typeOf: dcs:HospitalBed
+name: "AcuteRespiratoryCareBed"
+
+Node: dcid:AcutePsychiatricCareBed
+typeOf: dcs:HospitalBed
+name: "AcutePsychiatricCareBed"
+
+Node: dcid:ChemicalDependencyRecoveryBed
+typeOf: dcs:HospitalBed
+name: "ChemicalDependencyRecoveryBed"
+
+Node: dcid:PediatricIntensiveCareUnitBed
+typeOf: dcs:HospitalBed
+name: "PediatricIntensiveCareUnitBed"
+
+Node: dcid:LaborAndDeliveryBed
+typeOf: dcs:HospitalBed
+name: "LaborAndDeliveryBed"
+
+Node: dcid:IntermediateCareDevelopmentallyDisabledBed
+typeOf: dcs:HospitalBed
+name: "IntermediateCareDevelopmentallyDisabledBed"
+
+Node: dcid:PsychiatricHealthBed
+typeOf: dcs:HospitalBed
+name: "PsychiatricHealthBed"
+
+Node: dcid:PediatricDayAndRespiteCareBed
+typeOf: dcs:HospitalBed
+name: "PediatricDayAndRespiteCareBed"
+
+Node: dcid:DialysisStationsBed
+typeOf: dcs:HospitalBed
+name: "DialysisStationsBed"
+
+Node: dcid:CorrectionalTreatmentCenterBed
+typeOf: dcs:HospitalBed
+name: "CorrectionalTreatmentCenterBed"
