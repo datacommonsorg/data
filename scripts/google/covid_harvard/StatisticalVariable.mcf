@@ -1,0 +1,27 @@
+Node: dcid:HarvardCOVID19CumulativeCases
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalCondition
+statType: dcs:measuredValue
+measuredProperty: dcs:cumulativeCount
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:HarvardCOVID19CumulativeDeaths
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalCondition
+statType: dcs:measuredValue
+measuredProperty: dcs:cumulativeCount
+medicalStatus: dcs:PatientDeceased
+
+Node: dcid:HarvardCOVID19IncrementalCases
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalCondition
+statType: dcs:measuredValue
+measuredProperty: dcs:incrementalCount
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:HarvardCOVID19IncrementalDeaths
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalCondition
+statType: dcs:measuredValue
+measuredProperty: dcs:incrementalCount
+medicalStatus: dcs:PatientDeceased
