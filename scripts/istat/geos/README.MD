@@ -6,6 +6,7 @@ This directory contains artifacts required for importing the the ISTAT data into
 * [Elenco-codici-statistici-e-denominazioni-al-01_01_2020_it.csv][1]: original CSV file
 * [Elenco-codici-statistici-e-denominazioni-al-01_01_2020_en.csv][2]: original CSV file with column names translated into English
 * [preprocess.py](./preprocess.py): script for cleaning the orginal CSV files and transform into desired format of CSV files for importing into DataCommons
+* [test.py](./test.py): test functions for the template mcf
 * cleaned csv file: 
     * [ISTAT_region.csv](./ISTAT_region.csv)
     * [ISTAT_province.csv](./ISTAT_province.csv)

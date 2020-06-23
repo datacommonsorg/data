@@ -1,4 +1,3 @@
-import sys
 import pandas as pd
 
 def testColnames(csv_path, tmcf_path):
@@ -9,11 +8,10 @@ def testColnames(csv_path, tmcf_path):
            col_name = line[:-1].split("->")[1]
            assert(col_name in cols)
            
-def main(argv):
-  if len(argv) != 2:
-    print("specify which function to test:")
-    print("Colnames")
-  testColnames(argv[0], argv[1])
-   
-if __name__ == '__main__':
-  main(sys.argv[1:])
+def main():
+  testColnames("ISTAT_region.csv", "ISTAT_region.tmcf")
+  testColnames("ISTAT_province.csv", "ISTAT_province.tmcf")
+  testColnames("ISTAT_municipal.csv", "ISTAT_municipal.tmcf")
+
+if __name__== "__main__":
+  main()
