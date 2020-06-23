@@ -15,7 +15,7 @@
 from random import random
 import sys
 
-sys.path.insert(1, '../../')
+sys.path.insert(1, '../../../')
 import util.county_to_dcid as county_to_dcid
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.name_to_alpha2 as name_to_alpha2
@@ -35,7 +35,7 @@ class CovidMobility:
         if not input_file:
             return
         self.input_csv: str = input_file
-        self.less_output = less_output
+        self.less_output: bool = less_output
 
         self.mobility_locations: dict = {}
         self.data: list = []
@@ -54,10 +54,10 @@ class CovidMobility:
         """
         with open(self.input_csv, 'r+') as f:
             # Ignore the first row from csv, since it's the column titles.
-            rows = f.read().split("\n")[1:]
+            rows: list = f.read().split("\n")[1:] # Read columns from input_csv
 
             for row in rows:
-                # If parameter less_output==True, then only output less than 1% of the data.
+                # If flag less_ouput is enabled, then only output less than 1% of the data.
                 if self.less_output and skip_value(skip_pct=0.99999):
                     continue
 
@@ -81,18 +81,18 @@ class CovidMobility:
         :arg row_data: the row data represented as a dictionary.
         """
         location_name: str = row_data['sub_region_2'] + row_data['sub_region_1'] + row_data['country']
-        location_name = ''.join([i if ord(i) < 128 else '_' for i in location_name])
-        location_name = location_name.replace(" ", "")
+        location_name: str = ''.join([i if ord(i) < 128 else '_' for i in location_name])
+        location_name: str = location_name.replace(" ", "")
         location_dcid: str = row_data['dcid']
 
         self.mobility_locations[location_dcid] = {}
         self.mobility_locations[location_dcid]["place_categories"] = {
-            "RetailAndRecreation": f"{location_name}RetailAndRecreation",
-            "GroceryAndPharmacy": f"{location_name}GroceryAndPharmacy",
+            "LocalBusiness": f"{location_name}LocalBusiness",
+            "GroceryStore&Pharmacy": f"{location_name}GroceryStore&Pharmacy",
             "Park": f"{location_name}Park",
-            "TransitStation": f"{location_name}TransitStation",
+            "TransportHub": f"{location_name}TransportHub",
             "Workplace": f"{location_name}Workplace",
-            "Residential": f"{location_name}Residential"
+            "Residence": f"{location_name}Residence"
         }
 
     @staticmethod
@@ -105,17 +105,20 @@ class CovidMobility:
         :return location_dcid
         :except KeyError if any of the regions aren't hashable
         """
-        # If key doesn't exist in the dictionary, it will throw a KeyError Exception.
+
+        # Counties
         if sub_region_2:
             if country_code != 'US':
-                raise KeyError('Not a US region.')
+                raise KeyError('sub_region_2 is only supported for US Counties.')
             state_alpha_code: str = name_to_alpha2.USSTATE_MAP[sub_region_1]
             dcid: str = county_to_dcid.COUNTY_MAP[state_alpha_code][sub_region_2]
+        # States or Provinces
         elif sub_region_1:
             if country_code != 'US':
-                raise KeyError('Not a US region.')
+                raise KeyError('sub_region_1 is only supported for US States.')
             region_alpha_code: str = name_to_alpha2.USSTATE_MAP[sub_region_1]
             dcid: str = alpha2_to_dcid.USSTATE_MAP[region_alpha_code]
+        # Countries
         else:
             dcid: str = alpha2_to_dcid.COUNTRY_MAP[country_code]
         return dcid
@@ -128,12 +131,14 @@ class CovidMobility:
         :except KeyError if there is no dcid for given place.
         """
 
+        # Store values as variables
         country_code: str = row[0]
-        country: str = row[1].replace(' ', '')
-        sub_region_1: str = row[2].replace(' ', '')
+        country: str = row[1].replace(' ', '') # Get rid of any whitespaces in the name
+        sub_region_1: str = row[2].replace(' ', '') # Get rid of any whitespaces in the name
         sub_region_2: str = row[3]
         dcid: str = self.get_dcid_from_region(sub_region_2, sub_region_1, country_code)
 
+        # Return a dictionary of the row
         return {
             'dcid': dcid,
             'country_code': country_code,
@@ -141,12 +146,12 @@ class CovidMobility:
             'sub_region_1': sub_region_1,
             'sub_region_2': sub_region_2,
             'date': row[4],
-            'RetailAndRecreation': row[5],
-            'GroceryAndPharmacy': row[6],
+            'LocalBusiness': row[5],
+            'GroceryStore&Pharmacy': row[6],
             'Park': row[7],
-            'TransitStation': row[8],
+            'TransportHub': row[8],
             'Workplace': row[9],
-            'Residential': row[10]
+            'Residence': row[10]
         }
 
     def write_statistical_pop_node(self) -> None:
@@ -159,13 +164,13 @@ class CovidMobility:
 
             for category_name in place_categories:
                 node_id: str = place_categories[category_name]
-                statistical_pop_node: str = self.get_statistical_pop_nodes(local_id=node_id,
+                statistical_pop_node: str = self.generate_statistical_pop_nodes(local_id=node_id,
                                                                            location_dcid=f"{location_dcid}",
                                                                            place_category=category_name)
                 self.output_file.write(statistical_pop_node + '\n\n')
 
     @staticmethod
-    def get_statistical_pop_nodes(local_id: str, location_dcid: str, place_category: str) -> str:
+    def generate_statistical_pop_nodes(local_id: str, location_dcid: str, place_category: str) -> str:
         """
         Returns the MCF string representation of a statistical population node.
         :param local_id: unique local id for the node.
@@ -196,13 +201,13 @@ class CovidMobility:
                 if not measured_value:
                     continue
 
-                observation_node: str = self.get_observation_node(observed_node=observation_node_id,
+                observation_node: str = self.generate_observation_node(observed_node=observation_node_id,
                                                                   date=row_data['date'],
                                                                   measured_value=measured_value)
                 self.output_file.write(observation_node + '\n\n')
 
     @staticmethod
-    def get_observation_node(observed_node: str, date: str, measured_value: str) -> str:
+    def generate_observation_node(observed_node: str, date: str, measured_value: str) -> str:
         """
         Returns the MCF string representation of an observation node.
         :param observed_node: The unique local ID of the reference node.
@@ -224,4 +229,4 @@ class CovidMobility:
 
 
 if __name__ == '__main__':
-    CovidMobility('./input.csv', less_output=False)
+    CovidMobility('./input.csv', less_output=True)

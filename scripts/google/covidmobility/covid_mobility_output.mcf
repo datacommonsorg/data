@@ -1,236 +1,340 @@
-Node: Miami-DadeCountyFloridaUnitedStatesRetailAndRecreation
+Node: PapuaNewGuineaLocalBusiness
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/12086
+location: dcid:country/PNG
 populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:RetailAndRecreation
+placeCategory: dcs:LocalBusiness
 
-Node: Miami-DadeCountyFloridaUnitedStatesGroceryAndPharmacy
+Node: PapuaNewGuineaGroceryStore&Pharmacy
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/12086
+location: dcid:country/PNG
 populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:GroceryAndPharmacy
+placeCategory: dcs:GroceryStore&Pharmacy
 
-Node: Miami-DadeCountyFloridaUnitedStatesPark
+Node: PapuaNewGuineaPark
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/12086
-populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:Park
-
-Node: Miami-DadeCountyFloridaUnitedStatesTransitStation
-typeOf: schema:StatisticalPopulation
-location: dcid:geoId/12086
-populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:TransitStation
-
-Node: Miami-DadeCountyFloridaUnitedStatesWorkplace
-typeOf: schema:StatisticalPopulation
-location: dcid:geoId/12086
-populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:Workplace
-
-Node: Miami-DadeCountyFloridaUnitedStatesResidential
-typeOf: schema:StatisticalPopulation
-location: dcid:geoId/12086
-populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:Residential
-
-Node: UnitedStatesRetailAndRecreation
-typeOf: schema:StatisticalPopulation
-location: dcid:country/USA
-populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:RetailAndRecreation
-
-Node: UnitedStatesGroceryAndPharmacy
-typeOf: schema:StatisticalPopulation
-location: dcid:country/USA
-populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:GroceryAndPharmacy
-
-Node: UnitedStatesPark
-typeOf: schema:StatisticalPopulation
-location: dcid:country/USA
+location: dcid:country/PNG
 populationType: dcs:PlaceVisitEvent
 placeCategory: dcs:Park
 
-Node: UnitedStatesTransitStation
+Node: PapuaNewGuineaTransportHub
 typeOf: schema:StatisticalPopulation
-location: dcid:country/USA
+location: dcid:country/PNG
 populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:TransitStation
+placeCategory: dcs:TransportHub
 
-Node: UnitedStatesWorkplace
+Node: PapuaNewGuineaWorkplace
 typeOf: schema:StatisticalPopulation
-location: dcid:country/USA
+location: dcid:country/PNG
 populationType: dcs:PlaceVisitEvent
 placeCategory: dcs:Workplace
 
-Node: UnitedStatesResidential
+Node: PapuaNewGuineaResidence
 typeOf: schema:StatisticalPopulation
-location: dcid:country/USA
+location: dcid:country/PNG
 populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:Residential
+placeCategory: dcs:Residence
 
-Node: AlabamaUnitedStatesRetailAndRecreation
+Node: WaldoCountyMaineUnitedStatesLocalBusiness
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/01
+location: dcid:geoId/23027
 populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:RetailAndRecreation
+placeCategory: dcs:LocalBusiness
 
-Node: AlabamaUnitedStatesGroceryAndPharmacy
+Node: WaldoCountyMaineUnitedStatesGroceryStore&Pharmacy
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/01
+location: dcid:geoId/23027
 populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:GroceryAndPharmacy
+placeCategory: dcs:GroceryStore&Pharmacy
 
-Node: AlabamaUnitedStatesPark
+Node: WaldoCountyMaineUnitedStatesPark
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/01
+location: dcid:geoId/23027
 populationType: dcs:PlaceVisitEvent
 placeCategory: dcs:Park
 
-Node: AlabamaUnitedStatesTransitStation
+Node: WaldoCountyMaineUnitedStatesTransportHub
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/01
+location: dcid:geoId/23027
 populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:TransitStation
+placeCategory: dcs:TransportHub
 
-Node: AlabamaUnitedStatesWorkplace
+Node: WaldoCountyMaineUnitedStatesWorkplace
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/01
+location: dcid:geoId/23027
 populationType: dcs:PlaceVisitEvent
 placeCategory: dcs:Workplace
 
-Node: AlabamaUnitedStatesResidential
+Node: WaldoCountyMaineUnitedStatesResidence
 typeOf: schema:StatisticalPopulation
-location: dcid:geoId/01
+location: dcid:geoId/23027
 populationType: dcs:PlaceVisitEvent
-placeCategory: dcs:Residential
+placeCategory: dcs:Residence
 
-Node: Miami-DadeCountyFloridaUnitedStatesRetailAndRecreation2/15/20
+Node: TippahCountyMississippiUnitedStatesLocalBusiness
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/28139
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:LocalBusiness
+
+Node: TippahCountyMississippiUnitedStatesGroceryStore&Pharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/28139
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryStore&Pharmacy
+
+Node: TippahCountyMississippiUnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/28139
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: TippahCountyMississippiUnitedStatesTransportHub
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/28139
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransportHub
+
+Node: TippahCountyMississippiUnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/28139
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: TippahCountyMississippiUnitedStatesResidence
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/28139
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residence
+
+Node: ScottsBluffCountyNebraskaUnitedStatesLocalBusiness
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/31157
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:LocalBusiness
+
+Node: ScottsBluffCountyNebraskaUnitedStatesGroceryStore&Pharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/31157
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryStore&Pharmacy
+
+Node: ScottsBluffCountyNebraskaUnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/31157
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: ScottsBluffCountyNebraskaUnitedStatesTransportHub
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/31157
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransportHub
+
+Node: ScottsBluffCountyNebraskaUnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/31157
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: ScottsBluffCountyNebraskaUnitedStatesResidence
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/31157
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residence
+
+Node: HancockCountyOhioUnitedStatesLocalBusiness
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/39063
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:LocalBusiness
+
+Node: HancockCountyOhioUnitedStatesGroceryStore&Pharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/39063
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryStore&Pharmacy
+
+Node: HancockCountyOhioUnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/39063
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: HancockCountyOhioUnitedStatesTransportHub
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/39063
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransportHub
+
+Node: HancockCountyOhioUnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/39063
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: HancockCountyOhioUnitedStatesResidence
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/39063
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residence
+
+Node: PapuaNewGuineaLocalBusiness20200416
 typeOf: schema:Observation
-observedNode: l:Miami-DadeCountyFloridaUnitedStatesRetailAndRecreation
-observationDate: "2/15/20"
+observedNode: l:PapuaNewGuineaLocalBusiness
+observationDate: "2020-04-16"
 measuredProperty: dcs:covid19MobilityTrend
-measuredValue: -1
+measuredValue: -13
 unit: dcs:Percent
 
-Node: Miami-DadeCountyFloridaUnitedStatesGroceryAndPharmacy2/15/20
+Node: PapuaNewGuineaGroceryStore&Pharmacy20200416
 typeOf: schema:Observation
-observedNode: l:Miami-DadeCountyFloridaUnitedStatesGroceryAndPharmacy
-observationDate: "2/15/20"
-measuredProperty: dcs:covid19MobilityTrend
-measuredValue: -2
-unit: dcs:Percent
-
-Node: Miami-DadeCountyFloridaUnitedStatesPark2/15/20
-typeOf: schema:Observation
-observedNode: l:Miami-DadeCountyFloridaUnitedStatesPark
-observationDate: "2/15/20"
-measuredProperty: dcs:covid19MobilityTrend
-measuredValue: -3
-unit: dcs:Percent
-
-Node: Miami-DadeCountyFloridaUnitedStatesWorkplace2/15/20
-typeOf: schema:Observation
-observedNode: l:Miami-DadeCountyFloridaUnitedStatesWorkplace
-observationDate: "2/15/20"
-measuredProperty: dcs:covid19MobilityTrend
-measuredValue: -4
-unit: dcs:Percent
-
-Node: UnitedStatesRetailAndRecreation2/15/20
-typeOf: schema:Observation
-observedNode: l:UnitedStatesRetailAndRecreation
-observationDate: "2/15/20"
-measuredProperty: dcs:covid19MobilityTrend
-measuredValue: 1
-unit: dcs:Percent
-
-Node: UnitedStatesGroceryAndPharmacy2/15/20
-typeOf: schema:Observation
-observedNode: l:UnitedStatesGroceryAndPharmacy
-observationDate: "2/15/20"
-measuredProperty: dcs:covid19MobilityTrend
-measuredValue: 2
-unit: dcs:Percent
-
-Node: UnitedStatesPark2/15/20
-typeOf: schema:Observation
-observedNode: l:UnitedStatesPark
-observationDate: "2/15/20"
-measuredProperty: dcs:covid19MobilityTrend
-measuredValue: 3
-unit: dcs:Percent
-
-Node: UnitedStatesTransitStation2/15/20
-typeOf: schema:Observation
-observedNode: l:UnitedStatesTransitStation
-observationDate: "2/15/20"
-measuredProperty: dcs:covid19MobilityTrend
-measuredValue: -4
-unit: dcs:Percent
-
-Node: UnitedStatesWorkplace2/15/20
-typeOf: schema:Observation
-observedNode: l:UnitedStatesWorkplace
-observationDate: "2/15/20"
-measuredProperty: dcs:covid19MobilityTrend
-measuredValue: -5
-unit: dcs:Percent
-
-Node: UnitedStatesResidential2/15/20
-typeOf: schema:Observation
-observedNode: l:UnitedStatesResidential
-observationDate: "2/15/20"
+observedNode: l:PapuaNewGuineaGroceryStore&Pharmacy
+observationDate: "2020-04-16"
 measuredProperty: dcs:covid19MobilityTrend
 measuredValue: -6
 unit: dcs:Percent
 
-Node: AlabamaUnitedStatesRetailAndRecreation2/15/20
+Node: PapuaNewGuineaPark20200416
 typeOf: schema:Observation
-observedNode: l:AlabamaUnitedStatesRetailAndRecreation
-observationDate: "2/15/20"
+observedNode: l:PapuaNewGuineaPark
+observationDate: "2020-04-16"
 measuredProperty: dcs:covid19MobilityTrend
-measuredValue: 1
+measuredValue: -15
 unit: dcs:Percent
 
-Node: AlabamaUnitedStatesGroceryAndPharmacy2/15/20
+Node: PapuaNewGuineaTransportHub20200416
 typeOf: schema:Observation
-observedNode: l:AlabamaUnitedStatesGroceryAndPharmacy
-observationDate: "2/15/20"
+observedNode: l:PapuaNewGuineaTransportHub
+observationDate: "2020-04-16"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -32
+unit: dcs:Percent
+
+Node: PapuaNewGuineaWorkplace20200416
+typeOf: schema:Observation
+observedNode: l:PapuaNewGuineaWorkplace
+observationDate: "2020-04-16"
 measuredProperty: dcs:covid19MobilityTrend
 measuredValue: 2
 unit: dcs:Percent
 
-Node: AlabamaUnitedStatesPark2/15/20
+Node: PapuaNewGuineaResidence20200416
 typeOf: schema:Observation
-observedNode: l:AlabamaUnitedStatesPark
-observationDate: "2/15/20"
+observedNode: l:PapuaNewGuineaResidence
+observationDate: "2020-04-16"
 measuredProperty: dcs:covid19MobilityTrend
-measuredValue: 3
+measuredValue: 9
 unit: dcs:Percent
 
-Node: AlabamaUnitedStatesTransitStation2/15/20
+Node: WaldoCountyMaineUnitedStatesLocalBusiness20200313
 typeOf: schema:Observation
-observedNode: l:AlabamaUnitedStatesTransitStation
-observationDate: "2/15/20"
+observedNode: l:WaldoCountyMaineUnitedStatesLocalBusiness
+observationDate: "2020-03-13"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -8
+unit: dcs:Percent
+
+Node: WaldoCountyMaineUnitedStatesGroceryStore&Pharmacy20200313
+typeOf: schema:Observation
+observedNode: l:WaldoCountyMaineUnitedStatesGroceryStore&Pharmacy
+observationDate: "2020-03-13"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 10
+unit: dcs:Percent
+
+Node: WaldoCountyMaineUnitedStatesWorkplace20200313
+typeOf: schema:Observation
+observedNode: l:WaldoCountyMaineUnitedStatesWorkplace
+observationDate: "2020-03-13"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -2
+unit: dcs:Percent
+
+Node: WaldoCountyMaineUnitedStatesResidence20200313
+typeOf: schema:Observation
+observedNode: l:WaldoCountyMaineUnitedStatesResidence
+observationDate: "2020-03-13"
 measuredProperty: dcs:covid19MobilityTrend
 measuredValue: 4
 unit: dcs:Percent
 
-Node: AlabamaUnitedStatesWorkplace2/15/20
+Node: TippahCountyMississippiUnitedStatesWorkplace20200530
 typeOf: schema:Observation
-observedNode: l:AlabamaUnitedStatesWorkplace
-observationDate: "2/15/20"
+observedNode: l:TippahCountyMississippiUnitedStatesWorkplace
+observationDate: "2020-05-30"
 measuredProperty: dcs:covid19MobilityTrend
-measuredValue: 5
+measuredValue: 16
 unit: dcs:Percent
 
-Node: AlabamaUnitedStatesResidential2/15/20
+Node: ScottsBluffCountyNebraskaUnitedStatesLocalBusiness20200225
 typeOf: schema:Observation
-observedNode: l:AlabamaUnitedStatesResidential
-observationDate: "2/15/20"
+observedNode: l:ScottsBluffCountyNebraskaUnitedStatesLocalBusiness
+observationDate: "2020-02-25"
 measuredProperty: dcs:covid19MobilityTrend
-measuredValue: 6
+measuredValue: -4
+unit: dcs:Percent
+
+Node: ScottsBluffCountyNebraskaUnitedStatesGroceryStore&Pharmacy20200225
+typeOf: schema:Observation
+observedNode: l:ScottsBluffCountyNebraskaUnitedStatesGroceryStore&Pharmacy
+observationDate: "2020-02-25"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -7
+unit: dcs:Percent
+
+Node: ScottsBluffCountyNebraskaUnitedStatesWorkplace20200225
+typeOf: schema:Observation
+observedNode: l:ScottsBluffCountyNebraskaUnitedStatesWorkplace
+observationDate: "2020-02-25"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 1
+unit: dcs:Percent
+
+Node: ScottsBluffCountyNebraskaUnitedStatesResidence20200225
+typeOf: schema:Observation
+observedNode: l:ScottsBluffCountyNebraskaUnitedStatesResidence
+observationDate: "2020-02-25"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 2
+unit: dcs:Percent
+
+Node: HancockCountyOhioUnitedStatesLocalBusiness20200217
+typeOf: schema:Observation
+observedNode: l:HancockCountyOhioUnitedStatesLocalBusiness
+observationDate: "2020-02-17"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 4
+unit: dcs:Percent
+
+Node: HancockCountyOhioUnitedStatesGroceryStore&Pharmacy20200217
+typeOf: schema:Observation
+observedNode: l:HancockCountyOhioUnitedStatesGroceryStore&Pharmacy
+observationDate: "2020-02-17"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 2
+unit: dcs:Percent
+
+Node: HancockCountyOhioUnitedStatesTransportHub20200217
+typeOf: schema:Observation
+observedNode: l:HancockCountyOhioUnitedStatesTransportHub
+observationDate: "2020-02-17"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -1
+unit: dcs:Percent
+
+Node: HancockCountyOhioUnitedStatesWorkplace20200217
+typeOf: schema:Observation
+observedNode: l:HancockCountyOhioUnitedStatesWorkplace
+observationDate: "2020-02-17"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -12
+unit: dcs:Percent
+
+Node: HancockCountyOhioUnitedStatesResidence20200217
+typeOf: schema:Observation
+observedNode: l:HancockCountyOhioUnitedStatesResidence
+observationDate: "2020-02-17"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 4
 unit: dcs:Percent
 
