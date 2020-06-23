@@ -3,10 +3,7 @@
 ```
 proteinInteractionEBI
 │   README.md
-│   parseEBI.ipynb
 |   parseEBI.py
-|   mi.owl (database file downloaded)
-|   BioOntologySchema.mcf (contains all the schemas to be imported to KG)
 |   schemaMCF.mcf (contains only schema MCF)
 |   psimi2dcid.txt (contains paired PSI-MI identifiers and DCID, This file will be used to parse MINT.)
 │
