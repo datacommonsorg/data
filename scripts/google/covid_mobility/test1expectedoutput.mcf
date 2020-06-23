@@ -1,0 +1,236 @@
+Node: Miami-DadeCountyFloridaUnitedStatesLocalBusiness
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:LocalBusiness
+
+Node: Miami-DadeCountyFloridaUnitedStatesGroceryStore&Pharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryStore&Pharmacy
+
+Node: Miami-DadeCountyFloridaUnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: Miami-DadeCountyFloridaUnitedStatesTransportHub
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransportHub
+
+Node: Miami-DadeCountyFloridaUnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: Miami-DadeCountyFloridaUnitedStatesResidence
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/12086
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residence
+
+Node: UnitedStatesLocalBusiness
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:LocalBusiness
+
+Node: UnitedStatesGroceryStore&Pharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryStore&Pharmacy
+
+Node: UnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: UnitedStatesTransportHub
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransportHub
+
+Node: UnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: UnitedStatesResidence
+typeOf: schema:StatisticalPopulation
+location: dcid:country/USA
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residence
+
+Node: AlabamaUnitedStatesLocalBusiness
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:LocalBusiness
+
+Node: AlabamaUnitedStatesGroceryStore&Pharmacy
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:GroceryStore&Pharmacy
+
+Node: AlabamaUnitedStatesPark
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Park
+
+Node: AlabamaUnitedStatesTransportHub
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:TransportHub
+
+Node: AlabamaUnitedStatesWorkplace
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Workplace
+
+Node: AlabamaUnitedStatesResidence
+typeOf: schema:StatisticalPopulation
+location: dcid:geoId/01
+populationType: dcs:PlaceVisitEvent
+placeCategory: dcs:Residence
+
+Node: Miami-DadeCountyFloridaUnitedStatesLocalBusiness2/15/20
+typeOf: schema:Observation
+observedNode: l:Miami-DadeCountyFloridaUnitedStatesLocalBusiness
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -1
+unit: dcs:Percent
+
+Node: Miami-DadeCountyFloridaUnitedStatesGroceryStore&Pharmacy2/15/20
+typeOf: schema:Observation
+observedNode: l:Miami-DadeCountyFloridaUnitedStatesGroceryStore&Pharmacy
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -2
+unit: dcs:Percent
+
+Node: Miami-DadeCountyFloridaUnitedStatesPark2/15/20
+typeOf: schema:Observation
+observedNode: l:Miami-DadeCountyFloridaUnitedStatesPark
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -3
+unit: dcs:Percent
+
+Node: Miami-DadeCountyFloridaUnitedStatesWorkplace2/15/20
+typeOf: schema:Observation
+observedNode: l:Miami-DadeCountyFloridaUnitedStatesWorkplace
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -4
+unit: dcs:Percent
+
+Node: UnitedStatesLocalBusiness2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesLocalBusiness
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 1
+unit: dcs:Percent
+
+Node: UnitedStatesGroceryStore&Pharmacy2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesGroceryStore&Pharmacy
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 2
+unit: dcs:Percent
+
+Node: UnitedStatesPark2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesPark
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 3
+unit: dcs:Percent
+
+Node: UnitedStatesTransportHub2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesTransportHub
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -4
+unit: dcs:Percent
+
+Node: UnitedStatesWorkplace2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesWorkplace
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -5
+unit: dcs:Percent
+
+Node: UnitedStatesResidence2/15/20
+typeOf: schema:Observation
+observedNode: l:UnitedStatesResidence
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: -6
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesLocalBusiness2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesLocalBusiness
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 1
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesGroceryStore&Pharmacy2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesGroceryStore&Pharmacy
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 2
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesPark2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesPark
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 3
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesTransportHub2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesTransportHub
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 4
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesWorkplace2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesWorkplace
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 5
+unit: dcs:Percent
+
+Node: AlabamaUnitedStatesResidence2/15/20
+typeOf: schema:Observation
+observedNode: l:AlabamaUnitedStatesResidence
+observationDate: "2/15/20"
+measuredProperty: dcs:covid19MobilityTrend
+measuredValue: 6
+unit: dcs:Percent
+
