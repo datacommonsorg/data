@@ -21,26 +21,76 @@ def translate():
   data.to_csv(FILE_PATH_en, encoding = 'utf-8', index = False)
   
 def find_duplicates(df):
+  #find not one-to-one mapping from ISTAT to NUTS
   duplicated = pd.DataFrame(columns = df.columns)
   for col in df.columns:
     dup_vals = df[df[col].duplicated()][col].unique()
     for val in dup_vals:
       duplicated = pd.concat([duplicated, df[df[col]==val]], ignore_index = True)
   duplicated = duplicated.drop_duplicates()
-  #print(duplicated)
+  print(duplicated)
   return duplicated
       
 def preprocess():
+
   data = pd.read_csv(FILE_PATH_en)
-  province_data = data[["Province Code (Historic) (1)", "NUTS3","Name of the supra-municipal territorial unit (valid for statistical purposes)", "Automotive abbreviation"]].rename(\
-    columns = {"Province Code (Historic) (1)": "Province Code","Name of the supra-municipal territorial unit (valid for statistical purposes)":"Province name", "Automotive abbreviation":"Province Abbreviation"}).drop_duplicates()
-  region_data = data[["Region Code", "NUTS2(3)", "Region name"]].rename(columns= {"NUTS2(3)":"NUTS2"}).drop_duplicates()
-  province_data.to_csv("ISTAT_ProvinceCode_NUTS3.csv", index = False)
-  region_data.to_csv("ISTAT_RegionCode_NUTS2.csv", index = False)
-  #find the regions/provinces that does not make one-to-one map from ISTAT to NUTS
-  except_region = find_duplicates(region_data)
-  except_province = find_duplicates(province_data)
-  pd.concat([except_province,except_region], axis = 1, ignore_index = False).to_csv("ISTAT_exceptions.csv", index = False)
+  columns_rename = {"Province Code (Historic) (1)": "Province Code","Name of the supra-municipal territorial unit (valid for statistical purposes)":"Province name", "Automotive abbreviation":"Province Abbreviation", "NUTS2(3)":"NUTS2","Common Code numeric format":"Municipal Code", "Name in Italian":"Municipal Name"}
+  data = data.rename(columns = columns_rename)
   
+  #correct some of the mismatch of NUTS code and names
+  reorg = [("ITG2A", 91, "OG", "Ogliastra"), ("ITG28", 95, "OR", "Oristano"), ("ITG27", 92, "CA","Cargliari"),
+       ("ITG29", 90, "OT", "Olbia-Tempio")]
+  for (nuts3, province_code, province_abbrev, province_name) in reorg:
+    data.loc[data[data["NUTS3"] == nuts3].index, "Province Code"] = province_code
+    data.loc[data[data["NUTS3"] == nuts3].index, "Province Abbreviation"] = province_abbrev
+    data.loc[data[data["NUTS3"] == nuts3].index, "Province name"] = province_name
+  data.loc[data[data["Province name"] == "Napoli"].index, "Province Abbreviation"] = "NA"
+  
+  region_data = data[["Region Code", "NUTS2", "Region name"]].drop_duplicates()
+  region_data["NUTS2"] = "nuts/" + region_data["NUTS2"]
+  region_data["Region Code"] = region_data["Region Code"].astype(str).str.zfill(2)
+  region_data.loc[region_data[region_data["NUTS2"] == "nuts/ITH1"].index, "Region name"] = "Provincia Autonoma di Bolzano/Bozen"
+  region_data.loc[region_data[region_data["NUTS2"] == "nuts/ITH2"].index, "Region name"] = "Provincia Autonoma di Trento"
+  region_data.to_csv("ISTAT_region.csv", index = False)
+  
+  province_data = data[["Province Code", "NUTS3","Province name", "Province Abbreviation"]].drop_duplicates()
+  province_data["NUTS3"] = "nuts/" + province_data["NUTS3"]
+  province_data["Province Code"] = province_data["Province Code"].astype(str).str.zfill(3)
+  province_data.to_csv("ISTAT_province.csv", index = False)
+  
+  municipal_data = data[["Municipal Code", "Municipal Name", "NUTS3"]].drop_duplicates()
+  municipal_data["NUTS3"] = "dcid:nuts/" + municipal_data["NUTS3"]
+  municipal_data["Municipal Code"] = municipal_data["Municipal Code"].astype(str).str.zfill(6)
+  municipal_data.to_csv("ISTAT_municipal.csv", index = False)
+
+def generate_tmcf():
+  region_TEMPLATE = "Node: E:ISTAT->E0\n" +\
+                 "typeOf: dcs:EurostatNUTS2\n" +\
+                 "dcid: C:ISTAT->NUTS2\n" +\
+                 "name: C:ISTAT->Region name\n" +\
+                 "istatId: C:ISTAT->Region Code\n\n"
+                 
+  province_TEMPLATE = "Node: E:ISTAT->E0\n" +\
+                      "typeOf: dcs:EurostatNUTS3\n" +\
+                      "dcid: C:ISTAT->NUTS3\n" +\
+                      "name: C:ISTAT->Province name\n" +\
+                      "istatId: C:ISTAT->Province Code\n" +\
+                      "abbreviation: C:ISTAT->Province Abbreviation\n\n"
+                      
+  municipal_TEMPLATE = "Node: E:ISTAT->E0\n" +\
+                       "typeOf: dcs:AdministrativeArea3\n" +\
+                       "istatId: C:ISTAT->Municipal Code\n" +\
+                       "name: C:ISTAT->Municipal Name\n" +\
+                       "containedInPlace: C:ISTAT->NUTS3\n\n"
+                      
+  with open("./ISTAT_region.tmcf", 'w') as f_out:
+    f_out.write(region_TEMPLATE)
+  with open("./ISTAT_province.tmcf", 'w') as f_out:
+    f_out.write(province_TEMPLATE)
+  with open("./ISTAT_municipal.tmcf", 'w') as f_out:
+    f_out.write(municipal_TEMPLATE)
+    
 if __name__ == "__main__":
   preprocess()
+  generate_tmcf()
+  
