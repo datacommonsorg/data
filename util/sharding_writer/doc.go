@@ -4,7 +4,7 @@ commonly used in Data Commons imports into comfortable sized pieces.
 
 The Writer implements io.Writer, io.StringWriter, io.ByteWriter, and io.Closer.
 
-The default instance of the writer will use 100 MB a the file size to split on. e.g.,
+The default instance of the writer will use 100 MB as the file size to split on, e.g.,
 
 	w := sharding_writer.NewWriter(filename, extension)
 
