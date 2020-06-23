@@ -46,7 +46,7 @@ Node: E:COVIDTracking_US->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:CovidTrackingProject
-observationAbout: dcs:country/USA
+observationAbout: dcid:country/USA
 observationDate: C:COVIDTracking_US->Date
 value: C:COVIDTracking_US->{stat_var}
 """
