@@ -22,8 +22,8 @@ Node: dcid:interactionType
 typeOf: schema:Property
 name: "interactionType"
 description: "The molecular interaction type."
-rangeIncludes: dcs:InteractionTypeEnum
-domainIncludes: dcs:ProteinProteinInteraction
+rangeIncludes: dcs:InteractionTypeEnum,dcs:ChemicalCompoundProteinInteractionTypeEnum
+domainIncludes: dcs:ProteinProteinInteraction,dcs:ChemicalCompoundProteinInteraction
 
 Node: dcid:interactionSource
 typeOf: schema:Property
