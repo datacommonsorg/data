@@ -5,9 +5,10 @@ proteinInteractionEBI
 │   README.md
 │   parseEBI.ipynb
 |   parseEBI.py
-|   mi.owl
+|   mi.owl (database file downloaded)
 |   BioOntologySchema.mcf (contains all the schemas to be imported to KG)
 |   schemaMCF.mcf (contains only schema MCF)
+|   psimi2dcid.txt (contains paired PSI-MI identifiers and DCID, This file will be used to parse MINT.)
 │
 └───graph
 │   │   multipleParent.png
@@ -18,6 +19,16 @@ proteinInteractionEBI
 
 This directory stores all scripts used to import datasets from the European Bioinformatics Institute (EMBL-EBI). 
 Here we only import the three subsets of the ontologies: "interaction detection method", "interaction type" and "database citation", which are commonly used in protein-protein interactions. 
+
+## Usage
+
+To generate 'BioOntologySchema.mcf' which contains all the schemas and "psimi2dcid.txt" which contains paired PSI-MI identifiers and DCID, you need to prepare the schema mcf ('schemaMCF.mcf') first, then run:
+
+'''bash
+python3 parseEBI.py ./mi.owl ./schemaMCF.mcf
+'''
+
+If new reference sources which are not properties in dcs occur, 'BioEBINewSource.txt' containing such information will be generated as well.
 
 ## Database format
 
@@ -59,6 +70,6 @@ We also left out the properties named "synonym", "subset", "created_by" and "cre
 
 InteractionTypeEnum, InteractionDetectionMethodEnum, InteractionSourceEnum.
 
-## TODO
+### New Properties
 
-Complete parseEBI.py.
+goID, residID
