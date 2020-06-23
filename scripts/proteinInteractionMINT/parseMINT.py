@@ -1,14 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[484]:
-
-
 import collections
+import math
 import re
-
-
-# In[398]:
+import sys
 
 
 def getReferences(term):
@@ -41,9 +37,7 @@ def getReferences(term):
     else:
         newReference[source] = idNum
         newSourceMap = None
-    return (propertyLine, newSourceMap)
-    
-    
+    return (propertyLine, newSourceMap) 
     
 def getIdentifier(term):
     """Convert identifier string to the corresponding identifier property schema
@@ -122,11 +116,6 @@ def getConfidence(term):
         
     return (propertyLine, newSourceMap)
 
-    
-
-
-# In[399]:
-
 
 def getProteinDcid(mintAliases):
     """Takes a string from the mint database, return the dcid of the protein.
@@ -141,18 +130,11 @@ def getProteinDcid(mintAliases):
         return None
 
 
-# In[400]:
-
-
 def checkUniprot(alias):
     """
     Return True if the protein has UniProt identifier
-    """
-    
+    """ 
     return len(alias)==1 or alias.split(":")[0] == "uniprotkb"
-
-
-# In[401]:
 
 
 def checkDcid(alias):
@@ -174,14 +156,10 @@ def checkDcid(alias):
     if "display_long" in aliasDic:
         dcid = aliasDic["display_long"]
         if re.search("[\W]+", dcid)!=None or len(dcid.split("_"))!=2:
-            return 0
-        
+            return 0    
     else:
         return 2
         
-
-
-# In[452]:
 
 
 def getPropertyContent(content, prefix):
@@ -194,7 +172,6 @@ def getPropertyContent(content, prefix):
         
         "dcs:bio/UniProt_CWH41_YEAST,dcs:bio/UniProt_RPN3_YEAST"
     """
-
     if not content:
         return None
     itemList = []
@@ -220,10 +197,7 @@ def getCurLine(keyName, valueList, prefix):
     return curLine
 
 
-# In[489]:
-
-
-def getSchemaFromText(term, newSourceMap):
+def getSchemaFromText(term, newSourceMap, psimi2dcid):
     
     """
     Args: 
@@ -340,202 +314,116 @@ def getSchemaFromText(term, newSourceMap):
     return "\n".join(schemaPieceList), newSourceMap
 
 
-# In[477]:
-
-
-with open('./mint_database', 'r') as fp:
-    file = fp.read()
-# read the file which has paired PSI-MI and DCID. This file was generated from EBI MI Ontology
-with open('../proteinInteractionEBI/psimi2dcid.txt','r') as fp:
-    p2d = fp.read()
-
-
-# In[478]:
-
-
-lines = file.split('\n')
-
-
-# In[479]:
-
-
-psimi2dcid = {}
-p2d = [line.split(": ") for line in p2d.split("\n")]
-for line in p2d:
-    psimi2dcid[line[0]] = line[1]
-
-
-# In[490]:
-
-
-with open('schemaMCF.mcf','r') as fp:
-    schema = fp.read()
-# read the schema MCF file and subtitute the non ascii quotes.
-schema = schema.replace("“",'"')
-schema = schema.replace("”",'"')
-
-
-# In[481]:
-
-
-newSourceMap = {"references":{}, "identifier":{}, "confidence":{}}
-schemaList = []
-schemaList.append(schema)
-wrongDcid = []
-failed = []
-noUniprot = []
-for line in lines:
-    if len(line) == 0:
-        continue    
-    term = line.split('\t') 
-    # check if the record has the correct UniProt Protein Name
-    c1, c2 = checkDcid(term[4]), checkDcid(term[5])
-    if c1==0 or c2==0:
-        wrongDcid.append(line)
-        continue
+def main(argv):
     
-    # check if the record has Uniprot Identifier
-    u1, u2 = checkUniprot(term[0]), checkUniprot(term[1])
-    if not u1 or not u2:
-        noUniprot.append(line)
-        continue
+    dbFile = argv[0]
+    schemaMCF = argv[1]
+    psimi2dcidFile = argv[2]
+    parts = int(argv[3])
     
-    # catch the record when an unusual format occurs
-    try:
-        schema, newSourceMap = getSchemaFromText(term, newSourceMap)
-    except:
-        failed.append(line)
-        continue
+    with open(dbFile, 'r') as fp:
+        file = fp.read()
         
-    if schema:
-        schemaList.append(schema)
+    # read the file which has paired PSI-MI and DCID. This file was generated from EBI MI Ontology
+    with open(psimi2dcidFile,'r') as fp:
+        p2d = fp.read()
 
 
-# In[493]:
+    lines = file.split('\n')
 
 
-# the number of records we didn't import
-fCount = 0
-for alist in [wrongDcid,noUniprot,failed]:
-    print(len(alist))
-    fCount += len(alist)
+    psimi2dcid = {}
+    p2d = [line.split(": ") for line in p2d.split("\n")]
+    for line in p2d:
+        psimi2dcid[line[0]] = line[1]
 
 
-# In[483]:
+    with open(schemaMCF,'r') as fp:
+        schema = fp.read()
+    # read the schema MCF file and subtitute the non ascii quotes.
+    schema = schema.replace("“",'"')
+    schema = schema.replace("”",'"')
 
 
-schemaEnumText = "\n\n".join(schemaList[:20])
-with open('BioMINTSchema.mcf','w') as fp:
-    fp.write(schemaEnumText)
+    newSourceMap = {"references":{}, "identifier":{}, "confidence":{}}
+    schemaList = []
+    schemaList.append(schema)
+    wrongDcid = []
+    failed = []
+    noUniprot = []
+    for line in lines:
+        if len(line) == 0:
+            continue    
+        term = line.split('\t') 
+        # check if the record has the correct UniProt Protein Name
+        c1, c2 = checkDcid(term[4]), checkDcid(term[5])
+        if c1==0 or c2==0:
+            wrongDcid.append(line)
+            continue
+
+        # check if the record has Uniprot Identifier
+        u1, u2 = checkUniprot(term[0]), checkUniprot(term[1])
+        if not u1 or not u2:
+            noUniprot.append(line)
+            continue
+
+        # catch the record when an unusual format occurs
+#         try:
+        schema, newSourceMap = getSchemaFromText(term, newSourceMap, psimi2dcid)
+#         except:
+#             failed.append(line)
+#             continue
+
+        if schema:
+            schemaList.append(schema)
 
 
-# In[488]:
+    # the number of records we didn't import
+    fCount = 0
+    for alist in [wrongDcid,noUniprot,failed]:
+        fCount += len(alist)
 
 
-schemaEnumText = "\n\n".join(schemaList[:20])
-if wrongDcid:
-    with open('BioMINTFailedDcid.txt','w') as fp:
-        fp.write("\n".join(wrongDcid))
-if noUniprot:
-    with open('BioMINTNoUniprot.txt','w') as fp:
-        fp.write("\n".join(noUniprot))
-if failed:
-    with open('BioMINTParseFailed.txt','w') as fp:
-        fp.write("\n".join(failed))
-
-writeList = []
-for sourceType in newSourceMap:
-    if not newSourceMap[sourceType]: continue
-    writeList.append(sourceType)
-    for source in newSourceMap[sourceType]:
-        line = source + ": " + newSourceMap[sourceType][source]
-        writeList.append(sourceType)
-    writeList.append("\n")
-if writeList:
-    with open('BioMINTNewSource.txt','w') as fp:
-        fp.write("\n".join(writeList))
-
-
-# In[498]:
-
-
-print(str(len(schemaList)-1) + " records have been successfully parsed to schema. " + str(fCount) + " records failed the parsing and have been saved to corresponding files.")
-
-
-# ## The part below is to show all the source names and examples of confidence, publications and references. 
-
-# In[ ]:
-
-
-# the whole schema is too large to upload to dev browser at once. Split into 3 parts.
-count = 1
-for i in range(0,len(schemaList), 44375):
-    schemaEnumText = "\n\n".join(schemaList[i:i+44375])   
-    with open('BioMINTSchema_part'+str(count)+'.mcf','w') as fp:
+    schemaEnumText = "\n\n".join(schemaList[:20])
+    with open('BioMINTSchemaPreview.mcf','w') as fp:
         fp.write(schemaEnumText)
-    count += 1
 
 
-# In[499]:
+    schemaEnumText = "\n\n".join(schemaList[:20])
+    if wrongDcid:
+        with open('BioMINTFailedDcid.txt','w') as fp:
+            fp.write("\n".join(wrongDcid))
+    if noUniprot:
+        with open('BioMINTNoUniprot.txt','w') as fp:
+            fp.write("\n".join(noUniprot))
+    if failed:
+        with open('BioMINTParseFailed.txt','w') as fp:
+            fp.write("\n".join(failed))
+
+    writeList = []
+    for sourceType in newSourceMap:
+        if not newSourceMap[sourceType]: continue
+        writeList.append(sourceType)
+        for source in newSourceMap[sourceType]:
+            line = source + ": " + newSourceMap[sourceType][source]
+            writeList.append(sourceType)
+        writeList.append("\n")
+    if writeList:
+        with open('BioMINTNewSource.txt','w') as fp:
+            fp.write("\n".join(writeList))
+    # the whole schema is too large to upload to dev browser at once. Split into parts.
+    count = 1
+    step = math.ceil(len(schemaList)/float(parts))
+    for i in range(0,len(schemaList), step):
+        schemaEnumText = "\n\n".join(schemaList[i:i+step])   
+        with open('BioMINTSchema_part'+str(count)+'.mcf','w') as fp:
+            fp.write(schemaEnumText)
+        count += 1
+    
+    print(str(len(schemaList)-1) + " records have been successfully parsed to schema. " + str(fCount) + " records failed the parsing and have been saved to corresponding files.")
 
 
-# Show all the publications and identifier source examples.
+if __name__ == "__main__":
+    main(sys.argv[1:])
 
-publications = {}
-identifier = {}
-pCount = collections.defaultdict(int)
-iCount = collections.defaultdict(int)
-for line in lines:
-    if len(line) == 0:
-        continue
-    term = line.split('\t')
-    try:
-        ps = term[8].split("|")
-    except:
-        print(term[8])
-    for p in ps:
-        if p.split(":")[0] not in publications:
-            publications[p.split(":")[0]] = "".join(p.split(":")[1:])
-        pCount[p.split(":")[0]] += 1
-    ids = term[13].split("|") 
-    for i in ids:
-        if i.split(":")[0] not in identifier:
-            identifier[i.split(":")[0]] = "".join(i.split(":")[1:])
-        iCount[i.split(":")[0]] += 1
-
-
-# In[500]:
-
-
-publications, identifier
-
-
-# In[501]:
-
-
-publications.keys()
-
-
-# In[502]:
-
-
-identifier.keys()
-
-
-# In[503]:
-
-
-pCount
-
-
-# In[504]:
-
-
-iCount
-
-
-# In[37]:
-
-
-confidenceSetCount
 

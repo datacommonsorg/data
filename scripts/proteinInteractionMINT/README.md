@@ -5,7 +5,7 @@ proteinInteractionEBI
 │   README.md
 │   parseMINT.ipynb
 |   parseMINT.py
-|   BioMINTSchema.mcf (contains schema MCF and part of instances to be imported to KG)
+|   BioMINTSchemaPreview.mcf (contains schema MCF and part of instances to be imported to KG)
 |   schemaMCF.txt (contains only schema MCF)
 │
 └───graph
@@ -14,6 +14,18 @@ proteinInteractionEBI
 ```
 
 This directory stores all scripts used to import datasets from the Molecular INTeraction database (MINT). MINT contains publicly available protein-protein interactions and uses the Molecular Interaction Ontology of the Proteomics Standard Initiative (PSI-MI).
+
+## Usage
+
+To generate 'BioMINTSchema_part1.mcf' etc. which contain all the schemas, you need to prepare the schema mcf ('schemaMCF.mcf') first, then run:
+
+```bash
+python3 parseMINT.py mint_database schemaMCF.mcf ../proteinInteractionEBI/psimi2dcid.txt 3
+```
+
+Then number at the last postion is how many parts you want the schema to be saved to.
+
+If new reference sources which are not properties in dcs occur, 'BioMINTNewSource.txt' containing such information will be generated as well. The interaction information of the records which don't have the correct UniProt name will be saved to 'BioMINTFailedDcid.txt',  which don't have correct UniProt Identifiers will be saved to 'BioMINTNoUniprot.txt', and which failed the parsing will be saved to 'BioMINTParseFailed.txt'. 
 
 ## Database format
 
@@ -51,7 +63,7 @@ ProteinProteinInteraction.
 
 ### New properties
 
-interactingProtein, interactionType, interactionSource.
+interactingProtein, interactionType, interactionSource, pubMedID, imexID, mintID, digitalObjectID, rcsbPDBID, intActID, electronMicroscopyDataBankID, worldWideProteinDataBankID, rcsbPDBID, reactomePathwayID, proteinDataBankInEuropeID    
 
 ## Notes and Caveats
 
@@ -62,6 +74,3 @@ There are 133,167 records in the MINT database. Here we imported 129,585 records
 Licata, Luana, et al. "MINT, the molecular interaction database: 2012 update." Nucleic acids research 40.D1 (2012): D857-D861.
 https://academic.oup.com/nar/article/40/D1/D857/2903552
 
-## TODO
-
-Complete parseMINT.py.

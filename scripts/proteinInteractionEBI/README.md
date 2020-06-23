@@ -24,9 +24,9 @@ Here we only import the three subsets of the ontologies: "interaction detection 
 
 To generate 'BioOntologySchema.mcf' which contains all the schemas and "psimi2dcid.txt" which contains paired PSI-MI identifiers and DCID, you need to prepare the schema mcf ('schemaMCF.mcf') first, then run:
 
-'''bash
+```bash
 python3 parseEBI.py ./mi.owl ./schemaMCF.mcf
-'''
+```
 
 If new reference sources which are not properties in dcs occur, 'BioEBINewSource.txt' containing such information will be generated as well.
 
@@ -72,4 +72,4 @@ InteractionTypeEnum, InteractionDetectionMethodEnum, InteractionSourceEnum.
 
 ### New Properties
 
-goID, residID
+goID, residID, psimiID
