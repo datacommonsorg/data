@@ -12,6 +12,6 @@ python3 preprocess_csv.py
 
 #### Note:
 
-`COVIDTracking_US.mcf` is actually the same with `COVIDTracking_States.mcf`, so we don't need to actually check it.
+`COVIDTracking_US_StatisticalVariables.mcf` is actually the same as `COVIDTracking_States_StatisticalVariables.mcf` in /historic_state_data/ folder, so we don't need to check it here.
 
 Also, will have a future version to combine US level and states level data together. Coming soon.
