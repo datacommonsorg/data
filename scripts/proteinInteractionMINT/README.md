@@ -3,9 +3,7 @@
 ```
 proteinInteractionEBI
 │   README.md
-│   parseMINT.ipynb
 |   parseMINT.py
-|   BioMINTSchemaPreview.mcf (contains schema MCF and part of instances to be imported to KG)
 |   schemaMCF.txt (contains only schema MCF)
 │
 └───graph
