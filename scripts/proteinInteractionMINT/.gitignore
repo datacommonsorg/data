@@ -1,3 +1,4 @@
 mint_database
 BioMINTSchema_*
 BioMINTSchema*txt
+BioMINTFailedDcid.txt BioMINTNoUniprot.txt BioMINTParseFailed.txt
