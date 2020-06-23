@@ -8,6 +8,7 @@ variableMeasured: HarvardCOVID19CumulativeCases
 observationAbout: E:HarvardCOVID19Tracking_States->E0
 observationDate: C:HarvardCOVID19Tracking_States->Date
 value: C:HarvardCOVID19Tracking_States->HarvardCOVID19CumulativeCases
+measurementMethod: dcs:HarvardCOVID19
 
 Node:E:HarvardCOVID19Tracking_States->E2
 typeOf: dcs:StatVarObservation
@@ -15,6 +16,7 @@ variableMeasured: HarvardCOVID19CumulativeDeaths
 observationAbout: E:HarvardCOVID19Tracking_States->E0
 observationDate: C:HarvardCOVID19Tracking_States->Date
 value: C:HarvardCOVID19Tracking_States->HarvardCOVID19CumulativeDeaths
+measurementMethod: dcs:HarvardCOVID19
 
 Node:E:HarvardCOVID19Tracking_States->E3
 typeOf: dcs:StatVarObservation
@@ -22,6 +24,8 @@ variableMeasured: HarvardCOVID19IncrementalCases
 observationAbout: E:HarvardCOVID19Tracking_States->E0
 observationDate: C:HarvardCOVID19Tracking_States->Date
 value: C:HarvardCOVID19Tracking_States->HarvardCOVID19IncrementalCases
+measurementMethod: dcs:dcDerivedStat/HarvardCOVID19
+
 
 Node:E:HarvardCOVID19Tracking_States->E4
 typeOf: dcs:StatVarObservation
@@ -29,3 +33,4 @@ variableMeasured: HarvardCOVID19IncrementalDeaths
 observationAbout: E:HarvardCOVID19Tracking_States->E0
 observationDate: C:HarvardCOVID19Tracking_States->Date
 value: C:HarvardCOVID19Tracking_States->HarvardCOVID19IncrementalDeaths
+measurementMethod: dcs:dcDerivedStat/HarvardCOVID19
