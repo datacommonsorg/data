@@ -388,8 +388,6 @@ def main(argv):
     with open('BioMINTSchemaPreview.mcf','w') as fp:
         fp.write(schemaEnumText)
 
-
-    schemaEnumText = "\n\n".join(schemaList[:20])
     if wrongDcid:
         with open('BioMINTFailedDcid.txt','w') as fp:
             fp.write("\n".join(wrongDcid))
