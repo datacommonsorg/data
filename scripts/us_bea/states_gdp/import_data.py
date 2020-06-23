@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+ # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,10 @@ per US state. Saves output as a CSV file.
 
     python3 import_data.py
 """
-import json
-from absl import app
-from absl import flags
-import requests
+from urllib.request import urlopen
 import pandas as pd
-
-QUARTERLY_GDP_TABLE = 'SQGDP1'
+import io
+import zipfile
 
 US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas',
              'California', 'Colorado', 'Connecticut', 'Delaware',
@@ -44,38 +41,40 @@ class StateGDPDataLoader:
     """Pulls GDP state data from BEA.
 
     Attributes:
-        response: Raw response from BEA API in JSON format.
         df: DataFrame (DF) with the cleaned data.
     """
+    ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
+    FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
 
-    # TODO(fpernice): Switch to POST python call.
-    MY_KEY = 'D431C2CE-8BD2-4D9E-AD7A-00F95CAB60CE'
+    def __init__(self):
+        """Downloads the data, cleans it and stores it in instance DF."""
+        # Open zip file from link.
+        resp = urlopen(self.ZIP_LINK)
 
-    REQUEST = """http://apps.bea.gov/api/data/?&\
-    UserID={key}&\
-    method=GetData&\
-    datasetname=Regional&\
-    TableName={table}&\
-    GeoFIPS=STATE&\
-    LineCode=1&\
-    ResultFormat=json&"""
+        # Read the file, interpret it as bytes, and create a ZipFile instance
+        # from it for easy handling.
+        zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
 
-    def __init__(self, table):
-        """Makes Http request, cleans the data and stores it in instance DF."""
-        request = self.REQUEST.format(key=self.MY_KEY, table=table)
-        request = request.replace(" ", "")
-        try:
-            self.response = json.loads(requests.get(request).text)
-        except json.decoder.JSONDecodeError:
-            print("API Request failed.")
-            print("Response value = {}".format(requests.get(request).text))
-            return
+        # Open the specific desired file (CSV) from the folder, and decode it.
+        # This results in a string representation of the file. Then clean it
+        # by removing " characters inserted in the decoding process.
+        data = zip_file.open(self.FILE).read().decode('utf-8').replace('"', '')
 
-        df = pd.DataFrame(self.response['BEAAPI']['Results']['Data'])
+        # Turn the string representation of the file into a DF.
+        data = [line.split(",") for line in data.split("\n")]
+        df = pd.DataFrame(data[1:], columns=data[0])
 
         # Filters out columns that are not US States (e.g. New England).
         # TODO(fpernice): Add non-state entities.
         df = df[df['GeoName'].isin(US_STATES)]
+
+        # Gets columns that represent quarters, e.g. 2015:Q2.
+        all_quarters = [q for q in df.columns if q[:2] == "20"]
+
+        # Convert table from wide to long format.
+        df = pd.melt(df, id_vars=['GeoFIPS', 'Unit'],
+                     value_vars=all_quarters,
+                     var_name='Quarter')
 
         qtr_month_map = {
             'Q1':'03',
@@ -84,28 +83,35 @@ class StateGDPDataLoader:
             'Q4':'12'
         }
 
-        # Changes date format to reflect the last month in the desired quarter
         def date_to_obs_date(date):
-            """Converts date format e.g. 2005Q3 to e.g. 2005-09."""
-            return date[:4] + "-" + qtr_month_map[date[4:]]
-        df['ObservationDate'] = df['TimePeriod'].apply(date_to_obs_date)
+            """Converts date format e.g. 2005:Q3 to e.g. 2005-09."""
+            date = date.replace("\r", "")
+            return date[:4] + "-" + qtr_month_map[date[5:]]
+        df['Quarter'] = df['Quarter'].apply(date_to_obs_date)
 
         def clean_data_val(data):
-            """Removes separating comma in DataValue column and converts to
-            float.
+            """Removes '\r' characters in value column and converts to float."""
+            return float(data.replace("\r", ""))
+        df['value'] = df['value'].apply(clean_data_val)
+
+        def convert_geoid(fips_code):
+            """Creates GeoId column. We get lucky that Data Commons's geoIds
+            equal US FIPS state codes.
             """
-            return float(data.replace(",", ""))
+            return "geoId/" + fips_code.replace(" ", "")[:2]
+        df['GeoId'] = df['GeoFIPS'].apply(convert_geoid)
 
-        df['DataValue'] = df['DataValue'].apply(clean_data_val)
-
-        # Creates GeoId column. We get lucky that Data Commons's geoIds
-        # equal US FIPS state codes.
-        df['GeoId'] = df['GeoFips'].apply(lambda id: "geoId/" + id[:2])
-
-        # Gets rid of unused columns
-        df = df[['GeoId', 'ObservationDate', 'DataValue']]
-
-        self.df = df
+        # Set the instance DF to have one row per geoId/Quarter pair, with
+        # different measurement methods as columns. This facilitates the
+        # design of TMCFs.
+        self.df = df[df['Unit'] == "Millions of chained 2012 dollars"]
+        self.df.set_index(['GeoId', 'Quarter'])
+        self.df["millions_of_chained_2012_dollars"] = self.df['value']
+        quality_indices = df[df['Unit'] == "Quantity index"]
+        self.df["Quantity_index"] = quality_indices['value'].values
+        current_usd = df[df['Unit'] == "Millions of current dollars"]['value']
+        self.df["millions_of_current_dollars"] = current_usd.values
+        self.df = self.df.drop(["GeoFIPS", "Unit", "value"], axis=1)
 
     def save_csv(self, filename='states_gdp.csv'):
         """Saves instance DF to specified csv file."""
@@ -113,7 +119,7 @@ class StateGDPDataLoader:
 
 
 def main():
-    loader = StateGDPDataLoader(table=QUARTERLY_GDP_TABLE)
+    loader = StateGDPDataLoader()
     loader.save_csv()
 
 
