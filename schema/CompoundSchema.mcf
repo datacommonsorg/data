@@ -356,6 +356,7 @@ name: "psimiID"
 description: "The identifier for Proteomics Standards Initiative Molecular Interaction."
 rangeIncludes: schema:Text
 domainIncludes:dcs:InteractionTypeEnum,dcs:InteractionDetectionMethodEnum,dcs:InteractionSourceEnum
+url: "http://www.psidev.info/groups/molecular-interactions"
 
 Node: dcid:goID
 typeOf: schema:Property
