@@ -9,6 +9,6 @@ import: {
   # Last date of imported data.
   end_date: "2019-12-01"
   # Source data release schedule.
-  update_frequency: "Quarterly"
+  update_frequency: "P3M"
   next_release_date: "2020-07-07"
 }

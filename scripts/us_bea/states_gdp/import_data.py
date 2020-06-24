@@ -20,11 +20,15 @@ per US state. Saves output as a CSV file.
     python3 import_data.py
 """
 from urllib.request import urlopen
+from absl import app
 import pandas as pd
 import io
 import zipfile
 import csv
 import re
+
+# Suppress annoying pandas DF copy warnings.
+pd.options.mode.chained_assignment = None # default='warn'
 
 US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas',
              'California', 'Colorado', 'Connecticut', 'Delaware',
@@ -50,19 +54,7 @@ class StateGDPDataLoader:
 
     def __init__(self):
         """Downloads the data, cleans it and stores it in instance DF."""
-        # Open zip file from link.
-        resp = urlopen(self.ZIP_LINK)
-
-        # Read the file, interpret it as bytes, and create a ZipFile instance
-        # from it for easy handling.
-        zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
-
-        # Open the specific desired file (CSV) from the folder, and decode it.
-        # This results in a string representation of the file. Interpret that
-        # as a CSV, and read it into a DF.
-        data = zip_file.open(self.FILE).read().decode('utf-8')
-        data = list(csv.reader(data.splitlines()))
-        df = pd.DataFrame(data[1:], columns=data[0])
+        df = self.download_data()
 
         # Filters out columns that are not US States (e.g. New England).
         # TODO(fpernice): Add non-state entities.
@@ -86,14 +78,8 @@ class StateGDPDataLoader:
 
         def date_to_obs_date(date):
             """Converts date format e.g. 2005:Q3 to e.g. 2005-09."""
-            date = date.replace("\r", "")
             return date[:4] + "-" + qtr_month_map[date[5:]]
         df['Quarter'] = df['Quarter'].apply(date_to_obs_date)
-
-        def clean_data_val(data):
-            """Removes '\r' characters in value column and converts to float."""
-            return float(data.replace("\r", ""))
-        df['value'] = df['value'].apply(clean_data_val)
 
         def convert_geoid(fips_code):
             """Creates GeoId column. We get lucky that Data Commons's geoIds
@@ -116,15 +102,33 @@ class StateGDPDataLoader:
         self.df["millions_of_current_dollars"] = current_usd.values
         self.df = self.df.drop(["GeoFIPS", "Unit", "value"], axis=1)
 
+    def download_data(self):
+        """Downloads zip, extracts the desired CSV, and puts it into a DF."""
+        # Open zip file from link.
+        resp = urlopen(self.ZIP_LINK)
+
+        # Read the file, interpret it as bytes, and create a ZipFile instance
+        # from it for easy handling.
+        zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
+
+        # Open the specific desired file (CSV) from the folder, and decode it.
+        # This results in a string representation of the file. Interpret that
+        # as a CSV, and read it into a DF.
+        data = zip_file.open(self.FILE).read().decode('utf-8')
+        data = list(csv.reader(data.splitlines()))
+        df = pd.DataFrame(data[1:], columns=data[0])
+        return df
+
     def save_csv(self, filename='states_gdp.csv'):
         """Saves instance DF to specified csv file."""
         self.df.to_csv(filename)
 
 
-def main():
+def main(argv):
+    del argv # unused
     loader = StateGDPDataLoader()
     loader.save_csv()
 
 
 if __name__ == '__main__':
-    main()
+    app.run(main)
