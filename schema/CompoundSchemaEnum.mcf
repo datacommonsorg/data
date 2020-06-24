@@ -129,3 +129,37 @@ Node: dcid:ConfidentProtein
 name: dcid:ConfidentProtein
 typeOf: dcs:ProteinTypeEnum
 description: "Indication if the identity of the binding partners is reliable. Sometimes it is unclear from a publication which isoform of a protein was used in an experiment, in which cases the protein may be misassigned-although not entirely wrong."
+
+Node: dcid:InteractionTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionTypeEnum"
+description: "The interaction type enumeration in biomedical ontologies."
+
+Node: dcid:InteractionDetectionMethodEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionDetectionMethodEnum"
+description: "The detection method enumeration in biomedical ontologies."
+
+Node: dcid:InteractionSourceEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionSourceEnum"
+description: "The interaction source database enumeration in biomedical ontologies."
+
+Node: dcid:ConfidenceScoreTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "ConfidenceScoreTypeEnum"
+description: "The confidence score type enumeration in the protein-protein interaction records."
+
+Node: dcid:AuthorScore
+typeOf: ConfidenceScoreTypeEnum
+name: "AuthorScore"
+description: "The confidence score of a protein-protein interaction given by author."
+
+Node: dcid:IntActMiScore
+typeOf: ConfidenceScoreTypeEnum
+name: "IntactMiScore"
+description: "The confidence score of a protein-protein interaction given in IntAct Molecular Interaction Database."
