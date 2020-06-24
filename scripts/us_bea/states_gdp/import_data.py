@@ -23,6 +23,8 @@ from urllib.request import urlopen
 import pandas as pd
 import io
 import zipfile
+import csv
+import re
 
 US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas',
              'California', 'Colorado', 'Connecticut', 'Delaware',
@@ -56,20 +58,19 @@ class StateGDPDataLoader:
         zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
 
         # Open the specific desired file (CSV) from the folder, and decode it.
-        # This results in a string representation of the file. Then clean it
-        # by removing " characters inserted in the decoding process.
-        data = zip_file.open(self.FILE).read().decode('utf-8').replace('"', '')
-
-        # Turn the string representation of the file into a DF.
-        data = [line.split(",") for line in data.split("\n")]
+        # This results in a string representation of the file. Interpret that
+        # as a CSV, and read it into a DF.
+        data = zip_file.open(self.FILE).read().decode('utf-8')
+        data = list(csv.reader(data.splitlines()))
         df = pd.DataFrame(data[1:], columns=data[0])
 
         # Filters out columns that are not US States (e.g. New England).
         # TODO(fpernice): Add non-state entities.
         df = df[df['GeoName'].isin(US_STATES)]
 
-        # Gets columns that represent quarters, e.g. 2015:Q2.
-        all_quarters = [q for q in df.columns if q[:2] == "20"]
+        # Gets columns that represent quarters, e.g. 2015:Q2, by matching
+        # against a regular expression.
+        all_quarters = [q for q in df.columns if re.match(r"....:Q.", q)]
 
         # Convert table from wide to long format.
         df = pd.melt(df, id_vars=['GeoFIPS', 'Unit'],
@@ -98,7 +99,9 @@ class StateGDPDataLoader:
             """Creates GeoId column. We get lucky that Data Commons's geoIds
             equal US FIPS state codes.
             """
-            return "geoId/" + fips_code.replace(" ", "")[:2]
+            fips_code = fips_code.replace('"', "")
+            fips_code = fips_code.replace(" ", "")
+            return "geoId/" + fips_code[:2]
         df['GeoId'] = df['GeoFIPS'].apply(convert_geoid)
 
         # Set the instance DF to have one row per geoId/Quarter pair, with
