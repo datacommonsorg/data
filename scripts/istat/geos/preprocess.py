@@ -58,17 +58,6 @@ def translate(file_path):
     data.to_csv(file_path_en, encoding='utf-8', index=False)
     return file_path_en
 
-def find_duplicates(data):
-    """find not one-to-one mapping from ISTAT to NUTS"""
-    duplicated = pd.DataFrame(columns=data.columns)
-    for col in data.columns:
-        dup_vals = data[data[col].duplicated()][col].unique()
-    for val in dup_vals:
-        duplicated = pd.concat([duplicated, data[data[col] == val]], ignore_index=True)
-    duplicated = duplicated.drop_duplicates()
-    print(duplicated)
-    return duplicated
-
 def preprocess(file_path):
     """"preprocess the csv file for importing into Data Commons"""
     data = pd.read_csv(file_path)
