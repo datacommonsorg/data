@@ -368,11 +368,11 @@ def main(argv):
             continue
 
         # catch the record when an unusual format occurs
-#         try:
-        schema, newSourceMap = getSchemaFromText(term, newSourceMap, psimi2dcid)
-#         except:
-#             failed.append(line)
-#             continue
+        try:
+            schema, newSourceMap = getSchemaFromText(term, newSourceMap, psimi2dcid)
+        except:
+            failed.append(line)
+            continue
 
         if schema:
             schemaList.append(schema)
