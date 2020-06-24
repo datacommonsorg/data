@@ -16,7 +16,7 @@ If new reference sources which are not properties in dcs occur, 'BioEBINewSource
 ## Database format
 
 Data is available for download from
-https://www.ebi.ac.uk/ols/ontologies/mi. 
+http://psidev.info/groups/controlled-vocabularies. It can also be browsed at https://www.ebi.ac.uk/ols/ontologies/mi. 
 The ontologies dictionary has a tree structure. Note here that one parent node can have multiple child nodes and one child node can have multiple parent nodes as well.
 
 ![Tree Structure](./graph/ontologyTree.png)
