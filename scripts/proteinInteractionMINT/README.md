@@ -46,9 +46,9 @@ https://datcom-browser-dev2.googleplex.com/kg?dcid=ProteinProteinInteraction
 
 ProteinProteinInteraction instance nodes
 
-https://datcom-browser-dev2.googleplex.com/kg?dcid=LITD1_HUMAN_REPS1_HUMAN&db=
+https://datcom-browser-dev2.googleplex.com/kg?dcid=bio/CCR1_HUMAN_PRIO_HUMAN&db=
 
-https://datcom-browser-dev2.googleplex.com/kg?dcid=AMPH_HUMAN_AP2A_RAT&db= 
+https://datcom-browser-dev2.googleplex.com/kg?dcid=bio/NUDC1_HUMAN_F91A1_HUMAN&db= 
 
  
 
