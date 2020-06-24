@@ -3,49 +3,49 @@ name: "ChemicalCompound"
 typeOf: schema:Class
 subClassOf: schema:Thing
 description: "Chemical compound."
-sameAs: "https://www.ebi.ac.uk/chembl/"
+url: "https://www.ebi.ac.uk/chembl/"
 
 Node: dcid:ChemicalCompoundProteinInteraction
 name: "ChemicalCompoundProteinInteraction"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Interaction between a compound and a protein."
-sameAs: "https://www.ebi.ac.uk/chembl/"
+url: "https://www.ebi.ac.uk/chembl/"
 
 Node: dcid:ChemicalCompoundDiseaseTreatment
 name: "ChemicalCompoundDiseaseTreatment"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Compound associated with the treatment of a given disease."
-sameAs: "https://www.ebi.ac.uk/chembl/"
+url: "https://www.ebi.ac.uk/chembl/"
 
 Node: dcid:ChemicalCompoundDiseaseContraindication
 name: "ChemicalCompoundDiseaseContraindication"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Compound that is inadvisable to be used to treat a given disease."
-sameAs: "https://www.ebi.ac.uk/chembl/"
+url: "https://www.ebi.ac.uk/chembl/"
 
 Node: dcid:Protein
 name: "Protein"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "A class of nitrogenous organic compounds that are composed of large molecules called amino acids. These are essential for life in all living organisms."
-sameAs: "https://www.uniprot.org/"
+url: "https://www.uniprot.org/"
 
 Node: dcid:SideEffect
 name: "SideEffect"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Unintended effect of administering a drug."
-sameAs: "http://sideeffects.embl.de/"
+url: "http://sideeffects.embl.de/"
 
 Node: dcid:PharmacologicClass
 name: "PharmacologicClass"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Pharmacologic class is a group of active moieties that share scientifically documented properties."
-sameAs: "https://www.fda.gov/industry/structured-product-labeling-resources/pharmacologic-class"
+url: "https://www.fda.gov/industry/structured-product-labeling-resources/pharmacologic-class"
 
 Node: dcid:ProteinProteinInteraction
 name: "ProteinProteinInteraction"
