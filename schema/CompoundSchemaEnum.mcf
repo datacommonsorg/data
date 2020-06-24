@@ -1,0 +1,131 @@
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnum
+name: "CompoundProteinInteractionTypeEnum"
+subClassOf: schema:Enumeration
+description: "Method by which a compound interacts with a protein."
+typeOf: schema:Class
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumModulator
+name: "Modulator"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumStabiliser
+name: "Stabiliser"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumInverseAgonist
+name: "Inverse Agonist"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumDegrader
+name: "Degrader"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumBindingAgent
+name: "Binding Agent"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumAgonist
+name: "Agonist"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumNegativeModulator
+name: "Negative Modulator"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumOther
+name: "Other"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumBlocker
+name: "Blocker"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumPositiveAllostericModulator
+name: "Positive Allosteric Modulator"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumPartialAgonist
+name: "Partial Agonist"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumAntagonist
+name: "Antagonist"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumCrossLinkingAgent
+name: "Cross-linking Agent"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumInhibitor
+name: "Inhibitor"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumReleasingAgent
+name: "Releasing Agent"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumNegativeAllostericModulator
+name: "Negative Allosteric Modulator"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumOpener
+name: "Opener"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumProteolyticEnzyme
+name: "Proteolytic Enzyme"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumSubstrate
+name: "Substrate"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumPositiveModulator
+name: "Positive Modulator"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ChemicalCompoundProteinInteractionTypeEnumActivator
+name: "Activator"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:PharmacologicClassTypeEnum
+name: "PharmacologicClassTypeEnum"
+subClassOf: schema:Enumeration
+description: "The class type associated with the active moiety for a pharmacologic class."
+typeOf: schema:Class
+
+Node: dcid:PharmacologicClassTypeChemicalOrIngredient
+name: "ChemicalOrIngredient"
+description: "Chemical structure and classification containing chemicals or other drug ingredients."
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:PharmacologicClassTypeMoA
+name: "MoA"
+description: "Mechanism of Action"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:PharmacologicClassTypePE
+name: "PE"
+description: "Physiologic Effect"
+typeOf: dcs:ChemicalCompoundProteinInteractionTypeEnum
+
+Node: dcid:ProteinTypeEnum
+name:  "ProteinTypeEnum"
+subClassOf: schema:Enumeration
+typeOf: schema:Class
+description: "Represents the different types of proteins in the protein-protein interaction."
+
+Node: dcid:TaggedProtein
+name: "TaggedProtein"
+typeOf: dcs:ProteinTypeEnum
+description: "The protein is tagged in the protein-protein interaction."
+
+Node: dcid:OverexpressedProtein
+name: dcid:"OverexpressedProtein"
+typeOf: dcs:ProteinTypeEnum
+description: "The protein is overexpressed in the protein-protein interaction."
+
+Node: dcid:ConfidentProtein
+name: dcid:ConfidentProtein
+typeOf: dcs:ProteinTypeEnum
+description: "Indication if the identity of the binding partners is reliable. Sometimes it is unclear from a publication which isoform of a protein was used in an experiment, in which cases the protein may be misassigned-although not entirely wrong."
