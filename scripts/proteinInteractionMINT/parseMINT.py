@@ -7,7 +7,7 @@ import re
 import sys
 
 
-def getReferences(term):
+def get_references(term):
     """Convert reference string to the corresponding reference property schema
     
     Args:
@@ -39,7 +39,7 @@ def getReferences(term):
         newSourceMap = None
     return (propertyLine, newSourceMap) 
     
-def getIdentifier(term):
+def get_identifier(term):
     """Convert identifier string to the corresponding identifier property schema
     
     Args:
@@ -79,7 +79,7 @@ def getIdentifier(term):
         propertyLine = None
     return (propertyLine, newSourceMap)
     
-def getConfidence(term):
+def get_confidence(term):
     """Convert confidence string to the corresponding confidence property schema
 
     Args:
@@ -117,7 +117,7 @@ def getConfidence(term):
     return (propertyLine, newSourceMap)
 
 
-def getProteinDcid(mintAliases):
+def get_protein_dcid(mintAliases):
     """Takes a string from the mint database, return the dcid of the protein.
     Args: 
         mintAliases: a line contains the aliases of the protein. The capitalized "display_long" name is the
@@ -130,14 +130,14 @@ def getProteinDcid(mintAliases):
         return None
 
 
-def checkUniprot(alias):
+def check_uniprot(alias):
     """
     Return True if the protein has UniProt identifier
     """ 
     return len(alias)==1 or alias.split(":")[0] == "uniprotkb"
 
 
-def checkDcid(alias):
+def check_dcid(alias):
     """
     if alias == '-': return 1
     elif it contains the "display_long" name, which is the protein name in UniProt, and if it
@@ -162,7 +162,7 @@ def checkDcid(alias):
         
 
 
-def getPropertyContent(content, prefix):
+def get_property_content(content, prefix):
     """Add the prefix to each object in the content and return the concatenated string with "," separator.
     Args:
         content: the list containing property objects
@@ -180,7 +180,7 @@ def getPropertyContent(content, prefix):
 
     return ",".join(itemList)
 
-def getCurLine(keyName, valueList, prefix):
+def get_cur_line(keyName, valueList, prefix):
     """Return the line of property schema from objects, property name and prefix
     Args:
         keyName: property name
@@ -191,13 +191,13 @@ def getCurLine(keyName, valueList, prefix):
         
         "interactingProtein: dcs:bio/UniProt_CWH41_YEAST,dcs:bio/UniProt_RPN3_YEAST"
     """
-    propertyContent = getPropertyContent(valueList, prefix)
+    propertyContent = get_property_content(valueList, prefix)
     if not propertyContent: return None
     curLine = keyName + ": " + propertyContent 
     return curLine
 
 
-def getSchemaFromText(term, newSourceMap, psimi2dcid):
+def get_schema_from_text(term, newSourceMap, psimi2dcid):
     
     """
     Args: 
@@ -227,10 +227,10 @@ def getSchemaFromText(term, newSourceMap, psimi2dcid):
         
     """
     termDic = collections.defaultdict(list)
-    protein = getProteinDcid(term[4])
+    protein = get_protein_dcid(term[4])
     if protein:
         termDic['interactingProtein'].append(protein)
-    protein = getProteinDcid(term[5])
+    protein = get_protein_dcid(term[5])
     if protein:
         termDic['interactingProtein'].append(protein)
     detectionMethod = psimi2dcid[term[6].split(":\"")[1].split("(")[0][:-1]]
@@ -272,19 +272,19 @@ def getSchemaFromText(term, newSourceMap, psimi2dcid):
 
     for key in keyList:
         if key in set(["interactionDetectionMethod", "interactionType", "interactionSource"]):
-            curLine = getCurLine(key, termDic[key], "dcs:")
+            curLine = get_cur_line(key, termDic[key], "dcs:")
             if curLine:
                 schemaPieceList.append(curLine)
             
         elif key=="interactingProtein" and termDic[key]:
-            curLine = getCurLine(key, termDic[key], "dcs:bio/UniProt_")
+            curLine = get_cur_line(key, termDic[key], "dcs:bio/UniProt_")
             if curLine:
                 schemaPieceList.append(curLine)
 
         elif key=="references" and termDic[key]:
             for term in termDic[key]:
                 if term:
-                    curLine, newReferenceMap = getReferences(term)
+                    curLine, newReferenceMap = get_references(term)
                     if curLine:
                         schemaPieceList.append(curLine)
                     if newReferenceMap:
@@ -293,7 +293,7 @@ def getSchemaFromText(term, newSourceMap, psimi2dcid):
         elif key=="identifier" and termDic[key]:
             for term in termDic[key]:
                 if term:                  
-                    curLine, newIdentifierMap = getIdentifier(term)
+                    curLine, newIdentifierMap = get_identifier(term)
                     if curLine:
                         schemaPieceList.append(curLine)
                     if newIdentifierMap:
@@ -303,7 +303,7 @@ def getSchemaFromText(term, newSourceMap, psimi2dcid):
             itemList = []
             for term in termDic[key]:
                 if term: 
-                    item, newConfidenceSource = getConfidence(term)
+                    item, newConfidenceSource = get_confidence(term)
                     itemList.append(item)
             if itemList:
                 curLine = "confidenceScore: " +  ",".join(itemList)        
@@ -317,9 +317,9 @@ def getSchemaFromText(term, newSourceMap, psimi2dcid):
 def main(argv):
     
     dbFile = argv[0]
-    schemaMCF = argv[1]
-    psimi2dcidFile = argv[2]
-    parts = int(argv[3])
+    #schemaMCF = argv[1]
+    psimi2dcidFile = argv[1]
+    parts = int(argv[2])
     
     with open(dbFile, 'r') as fp:
         file = fp.read()
@@ -337,17 +337,8 @@ def main(argv):
     for line in p2d:
         psimi2dcid[line[0]] = line[1]
 
-
-    with open(schemaMCF,'r') as fp:
-        schema = fp.read()
-    # read the schema MCF file and subtitute the non ascii quotes.
-    schema = schema.replace("“",'"')
-    schema = schema.replace("”",'"')
-
-
     newSourceMap = {"references":{}, "identifier":{}, "confidence":{}}
     schemaList = []
-    schemaList.append(schema)
     wrongDcid = []
     failed = []
     noUniprot = []
@@ -356,20 +347,20 @@ def main(argv):
             continue    
         term = line.split('\t') 
         # check if the record has the correct UniProt Protein Name
-        c1, c2 = checkDcid(term[4]), checkDcid(term[5])
+        c1, c2 = check_dcid(term[4]), check_dcid(term[5])
         if c1==0 or c2==0:
             wrongDcid.append(line)
             continue
 
         # check if the record has Uniprot Identifier
-        u1, u2 = checkUniprot(term[0]), checkUniprot(term[1])
+        u1, u2 = check_uniprot(term[0]), check_uniprot(term[1])
         if not u1 or not u2:
             noUniprot.append(line)
             continue
 
         # catch the record when an unusual format occurs
         try:
-            schema, newSourceMap = getSchemaFromText(term, newSourceMap, psimi2dcid)
+            schema, newSourceMap = get_schema_from_text(term, newSourceMap, psimi2dcid)
         except:
             failed.append(line)
             continue
@@ -383,11 +374,21 @@ def main(argv):
     for alist in [wrongDcid,noUniprot,failed]:
         fCount += len(alist)
 
-
-    schemaEnumText = "\n\n".join(schemaList[:20])
-    with open('BioMINTSchemaPreview.mcf','w') as fp:
-        fp.write(schemaEnumText)
-
+    if parts == 1:
+        schemaEnumText = "\n\n".join(schemaList)
+        with open('BioMINTDataSchema.mcf','w') as fp:
+            fp.write(schemaEnumText)
+        
+    else:
+         # the whole schema is too large to upload to dev browser at once. Split into parts.
+        count = 1
+        step = math.ceil(len(schemaList)/float(parts))
+        for i in range(0,len(schemaList), step):
+            schemaEnumText = "\n\n".join(schemaList[i:i+step])   
+            with open('BioMINTDataSchema_part'+str(count)+'.mcf','w') as fp:
+                fp.write(schemaEnumText)
+            count += 1
+        
     if wrongDcid:
         with open('BioMINTFailedDcid.txt','w') as fp:
             fp.write("\n".join(wrongDcid))
@@ -408,20 +409,9 @@ def main(argv):
         writeList.append("\n")
     if writeList:
         with open('BioMINTNewSource.txt','w') as fp:
-            fp.write("\n".join(writeList))
-    # the whole schema is too large to upload to dev browser at once. Split into parts.
-    count = 1
-    step = math.ceil(len(schemaList)/float(parts))
-    for i in range(0,len(schemaList), step):
-        schemaEnumText = "\n\n".join(schemaList[i:i+step])   
-        with open('BioMINTSchema_part'+str(count)+'.mcf','w') as fp:
-            fp.write(schemaEnumText)
-        count += 1
-    
-    print(str(len(schemaList)-1) + " records have been successfully parsed to schema. " + str(fCount) + " records failed the parsing and have been saved to corresponding files.")
+            fp.write("\n".join(writeList)) 
+    print(str(len(schemaList)) + " records have been successfully parsed to schema. " + str(fCount) + " records failed the parsing and have been saved to corresponding files.")
 
 
 if __name__ == "__main__":
     main(sys.argv[1:])
-
-

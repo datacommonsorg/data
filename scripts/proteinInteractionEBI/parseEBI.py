@@ -6,7 +6,7 @@ import re
 import sys
 
 
-def getClassNameHelper(astring):
+def get_class_name_helper(astring):
     """Convert a name string to format: ThisIsAnUnusualName.
     
     Take a space delimited string, return a class name such as ThisIsAnUnusualName 
@@ -18,18 +18,18 @@ def getClassNameHelper(astring):
     className = nonLegit.sub('', jointName)
     return className
 
-def getClassName(astring):
-    return getClassNameHelper(astring)
+def get_class_name(astring):
+    return get_class_name_helper(astring)
 
-def getPropertyName(astring):
+def get_property_name(astring):
     """Convert a name string to format: thisIsAnUnusualName.
     Take a space delimited string, return a property name such as thisIsAnUnusualName 
     """
-    className = getClassNameHelper(astring)
+    className = get_class_name_helper(astring)
     return className[0].lower()+className[1:]
 
 
-def getReferences(term):
+def get_references(term):
     """Convert reference string to the corresponding reference property schema
     
     Args:
@@ -73,7 +73,7 @@ class Node(object):
         self.parentList = []
         self.childList = []
         
-def getParentIdList(termList):
+def get_parent_id_list(termList):
     """Takes a list with string elements of a node, return a list containing string identifiers of its parent nodes. 
     Args:
         termList: for example:
@@ -112,7 +112,7 @@ class GetTreeValues(object):
     def __init__(self):
         self.nodeValuesSet = set()
 
-    def getSubsetId(self, node):
+    def get_subset_id(self, node):
         """Takes the string identifer such as "MI:1349" as the root node value
             returns all the tree node values as a set."""
         # reset the value set to be empty every function call
@@ -129,7 +129,7 @@ class GetTreeValues(object):
             self.dfs(child)
 
 
-def getSchemaFromText(term, id2node, newSourceMap, id2className,interactionTypeIdSet,detectionMethodIdSet,interactionSourceIdset):
+def get_schema_from_text(term, id2node, newSourceMap, id2className,interactionTypeIdSet,detectionMethodIdSet,interactionSourceIdset):
     
     """Takes a list with each item containing the information, return a list: [data schema, PSI-MI, DCID] 
     Args:
@@ -212,7 +212,7 @@ def getSchemaFromText(term, id2node, newSourceMap, id2className,interactionTypeI
             itemList = []
             for i in range(len(termDic[key])):
                 if termDic[key][i]!="": 
-                    curLine, newReferenceMap = getReferences(termDic[key][i])
+                    curLine, newReferenceMap = get_references(termDic[key][i])
                     if curLine:
                         schemaPieceList.append(curLine)
                     if newReferenceMap:
@@ -228,13 +228,15 @@ def getSchemaFromText(term, id2node, newSourceMap, id2className,interactionTypeI
                 itemList.append( "dcs:" + termDic[key][i])
             curLine = "specializationOf: " +  ",".join(itemList)
             schemaPieceList.append(curLine)
-
+            
+    curLine = "descriptionUrl: \"http://psidev.info/groups/controlled-vocabularies\""
+    schemaPieceList.append(curLine)
+    
     return "\n".join(schemaPieceList), termDic['id'][0], dcid, newSourceMap
 
 
 def main(argv):
     dbFile = argv[0]
-    schemaMCF = argv[1]
     with open(dbFile, 'r') as fp:
         file = fp.read()
     # clip exists in dcs already. Substitute with ClipInteraction
@@ -260,7 +262,7 @@ def main(argv):
             continue
         # idString example: "MI:0000"
         idString = termText.split("\n")[1].split(" ")[1]
-        className = getClassName(termText.split("\n")[2].split(": ")[1])
+        className = get_class_name(termText.split("\n")[2].split(": ")[1])
         id2className[idString] = className
         id2node[idString] = Node(idString)
 
@@ -270,16 +272,16 @@ def main(argv):
             continue
         termList = termText.split("\n")
         idString = termList[1].split(" ")[1]
-        parentIdList = getParentIdList(termList[1:])
+        parentIdList = get_parent_id_list(termList[1:])
         for pId in parentIdList:
             id2node[pId].childList.append(id2node[idString])
             id2node[idString].parentList.append(id2node[pId])
 
     # get the idStrings for the three target set
     dfsCaller = GetTreeValues()
-    interactionTypeIdSet = dfsCaller.getSubsetId(id2node["MI:0001"]) # root id: MI:0001 
-    detectionMethodIdSet = dfsCaller.getSubsetId(id2node["MI:0190"])# root id: MI:0190
-    interactionSourceIdset = dfsCaller.getSubsetId(id2node["MI:0444"]) # root id: MI:0444
+    interactionTypeIdSet = dfsCaller.get_subset_id(id2node["MI:0001"]) # root id: MI:0001 
+    detectionMethodIdSet = dfsCaller.get_subset_id(id2node["MI:0190"])# root id: MI:0190
+    interactionSourceIdset = dfsCaller.get_subset_id(id2node["MI:0444"]) # root id: MI:0444
 
     # delete root node value from the set
     interactionTypeIdSet.remove("MI:0001")
@@ -287,32 +289,28 @@ def main(argv):
     interactionSourceIdset.remove("MI:0444")
 
     setList = [interactionTypeIdSet, detectionMethodIdSet,interactionSourceIdset]
-    print("They schema amount of each Enum: interactionType, detectionMethod,interactionSource are ")
+    print("The schema amount of each Enum: interactionType, detectionMethod,interactionSource are ")
     print([len(s) for s in setList])
 
     schemaList = []
     psimi2dcid = []
     newSourceMap = {"references":{}}
-    with open(schemaMCF, 'r') as fp:
-        schema = fp.read()
-    schema = schema.replace("“",'"')
-    schema = schema.replace("”",'"')
-
-    schemaList.append(schema)
     for termText in fileTerms:
         if not termText.startswith("[Term]"):
             continue
         term = termText.split("\n")[1:]
-        schemaRes = getSchemaFromText(term,id2node,newSourceMap,id2className,
+        schemaRes = get_schema_from_text(term,id2node,newSourceMap,id2className,
                                       interactionTypeIdSet,detectionMethodIdSet,interactionSourceIdset)
         if schemaRes:
             schema, psimi, dcid, newSourceMap  = schemaRes
             schemaList.append(schema)
             psimi2dcid.append(psimi+': ' + dcid)
     schemaEnumText = "\n\n".join(schemaList)
+    schema = "# This schema file is generated by parseEBI.py. Please don't edit.\n"
+    schemaEnumText = schema + schemaEnumText
 
     # dev browser imported name: BioOntologySchema
-    with open('BioOntologySchema.mcf','w') as fp:
+    with open('BioOntologySchemaEnum.mcf','w') as fp:
         fp.write(schemaEnumText)
     with open('psimi2dcid.txt','w') as fp:
         fp.write("\n".join(psimi2dcid))

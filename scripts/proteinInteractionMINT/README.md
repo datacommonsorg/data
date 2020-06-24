@@ -1,27 +1,16 @@
 # Scripts for importing ontology dataset from the Molecular INTeraction database (MINT)
 
-```
-proteinInteractionEBI
-│   README.md
-|   parseMINT.py
-|   schemaMCF.txt (contains only schema MCF)
-│
-└───graph
-│   │   MINTexample.png
-
-```
-
 This directory stores all scripts used to import datasets from the Molecular INTeraction database (MINT). MINT contains publicly available protein-protein interactions and uses the Molecular Interaction Ontology of the Proteomics Standard Initiative (PSI-MI).
 
 ## Usage
 
-To generate 'BioMINTSchema_part1.mcf' etc. which contain all the schemas, you need to prepare the schema mcf ('schemaMCF.mcf') first, then run:
+To generate the data schema from MINT, run:
 
 ```bash
-python3 parseMINT.py mint_database schemaMCF.mcf ../proteinInteractionEBI/psimi2dcid.txt 3
+python3 parseMINT.py mint_database ../proteinInteractionEBI/psimi2dcid.txt 1
 ```
 
-Then number at the last postion is how many parts you want the schema to be saved to.
+Then number at the last postion is how many parts you want the schema to be saved to. If "1" the schemas will be saved to 'BioMINTDataSchema.mcf', or 'BioMINTDataSchema_part1.mcf', etc. if other numbers.  
 
 If new reference sources which are not properties in dcs occur, 'BioMINTNewSource.txt' containing such information will be generated as well. The interaction information of the records which don't have the correct UniProt name will be saved to 'BioMINTFailedDcid.txt',  which don't have correct UniProt Identifiers will be saved to 'BioMINTNoUniprot.txt', and which failed the parsing will be saved to 'BioMINTParseFailed.txt'. 
 
