@@ -3,10 +3,6 @@ import: {
   provenance_url: "https://www.istat.it/it/archivio/6789"
   provenance_description: "ISTAT code for territorial units in Italy"
   mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/istat-region/nodes.mcf-00000-of-00001"
-  # First date of imported data.
-  start_date: "2020-06-23"
-  # Last date of imported data.
-  end_date: "2020-06-23"
   # Source data release schedule.
   update_frequency: "P1Y"
   next_release_date: "2021-02-20"
@@ -17,25 +13,17 @@ import: {
   provenance_url: "https://www.istat.it/it/archivio/6789"
   provenance_description: "ISTAT code for territorial units in Italy"
   mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/istat_province/nodes.mcf-00000-of-00001"
-  # First date of imported data.
-  start_date: "2020-06-23"
-  # Last date of imported data.
-  end_date: "2020-06-23"
   # Source data release schedule.
   update_frequency: "P1Y"
   next_release_date: "2021-02-20"
 }
 
-import: {
-  import_name: "istat_municipal"
-  provenance_url: "https://www.istat.it/it/archivio/6789"
-  provenance_description: "ISTAT code for territorial units in Italy"
-  mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/istat_municipal/nodes.mcf-00000-of-00001"
-  # First date of imported data.
-  start_date: "2020-06-23"
-  # Last date of imported data.
-  end_date: "2020-06-23"
-  # Source data release schedule.
-  update_frequency: "P1Y"
-  next_release_date: "2021-02-20"
-}
+//import: {
+//  import_name: "istat_municipal"
+//  provenance_url: "https://www.istat.it/it/archivio/6789"
+//  provenance_description: "ISTAT code for territorial units in Italy"
+//  mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/istat_municipal/nodes.mcf-00000-of-00001"
+//  # Source data release schedule.
+//  update_frequency: "P1Y"
+//  next_release_date: "2021-02-20"
+//}
