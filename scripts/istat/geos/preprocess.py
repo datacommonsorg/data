@@ -11,14 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""Preprocess the ISTAT geo code to NUTS code for importing into Data Commons"""
+"""Download and preprocess the ItalySTAT geo code into Data Commons.
+   The dataset contains ISTAT code at regional, provinces, municipal levels
+   respectively.
+"""
 
 import zipfile
 import io
 import os
 import requests
 import pandas as pd
+
 
 URL = "https://www.istat.it/storage/codici-unita-amministrative/"+\
     "Elenco-codici-statistici-e-denominazioni-delle-unita-territoriali.zip"
@@ -56,11 +59,10 @@ def translate(file_path):
         "Legal population 2011 (09/10/2011)", "NUTS1", "NUTS2(3)", "NUTS3"]
     file_path_en = file_path.replace('_it.csv', '_en.csv')
     data.to_csv(file_path_en, encoding='utf-8', index=False)
-    return file_path_en
+    return data
 
-def preprocess(file_path):
+def preprocess(data):
     """"preprocess the csv file for importing into Data Commons"""
-    data = pd.read_csv(file_path)
     columns_rename = {"Province Code (Historic) (1)": "Province Code",\
         "Name of the supra-municipal territorial unit (valid for statistical purposes)":\
         "Province name", "Automotive abbreviation":"Province Abbreviation",\
@@ -69,6 +71,12 @@ def preprocess(file_path):
     data = data.rename(columns=columns_rename)
 
     # correct some of the mismatch of NUTS code and names
+    # e.g. some areas with NUTS code: "ITG2A", province code "91" has the
+    # province name of : "Nuoro". However, the correct name of "ITG2A" should be
+    # "Ogliastra". We rename it to "Ogliastra". The reason why we assume the
+    # NUTS code is right and the name is wrong, but not the oppositte way, is that
+    # if it's the opposite way, areas such as "Ogliastra" will be missing.
+    
     reorg = [("ITG2A", 91, "OG", "Ogliastra"), ("ITG28", 95, "OR", "Oristano"),\
             ("ITG27", 92, "CA", "Cargliari"), ("ITG29", 90, "OT", "Olbia-Tempio")]
     for (nuts3, province_code, province_abbrev, province_name) in reorg:
@@ -84,20 +92,20 @@ def preprocess(file_path):
         "Provincia Autonoma di Bolzano/Bozen"
     region_data.loc[region_data[region_data["NUTS2"] == "nuts/ITH2"].index, "Region name"]\
         = "Provincia Autonoma di Trento"
-    region_data.to_csv("ISTAT_region.csv", index=False)
+    region_data.to_csv("./cleaned/ISTAT_region.csv", index=False)
 
     province_data = data[["Province Code", "NUTS3", "Province name", \
         "Province Abbreviation"]].drop_duplicates()
     province_data["NUTS3"] = "nuts/" + province_data["NUTS3"]
     province_data["Province Code"] = province_data["Province Code"].astype(str).str.zfill(3)
-    province_data.to_csv("ISTAT_province.csv", index=False)
+    province_data.to_csv("./cleaned/ISTAT_province.csv", index=False)
 
     municipal_data = data[["Municipal Code", "Municipal Name", "NUTS3"]].drop_duplicates()
     municipal_data["NUTS3"] = "dcid:nuts/" + municipal_data["NUTS3"]
     municipal_data["Municipal Code"] = municipal_data["Municipal Code"].astype(str).str.zfill(6)
-    municipal_data.to_csv("ISTAT_municipal.csv", index=False)
+    municipal_data.to_csv("./cleaned/ISTAT_municipal.csv", index=False)
 
 if __name__ == "__main__":
     FILE_PATH_IT = download(URL)
-    FILE_PATH_EN = translate(FILE_PATH_IT)
-    preprocess(FILE_PATH_EN)
+    data = translate(FILE_PATH_IT)
+    preprocess(data)
