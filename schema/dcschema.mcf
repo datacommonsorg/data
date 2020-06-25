@@ -2237,3 +2237,9 @@ typeOf: schema:Property
 name: "digitalElevationModel"
 descriptionUrl: "http://download.geonames.org/export/dump/readme.txt"
 description: "Average elevation based on Digital Elevation Model (DEM)."
+
+Node: dcid:MedicalResource
+name: "Medical Resource"
+typeOf: schema:Class
+subClassOf: schema:MedicalEntity
+description: "Resources used for medical healthcare."
