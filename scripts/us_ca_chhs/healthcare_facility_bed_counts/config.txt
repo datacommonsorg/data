@@ -1,0 +1,14 @@
+import: {
+    import_name:"us_ca_chhs"
+    provenance_url: "https://data.chhs.ca.gov/dataset/healthcare-facility-bed-types-and-counts"
+    provenance_description: "This whole dataset is about licensed healthcare facility bed types and counts in California. It gives some statistics value for healthcare facilities and hospital beds counts in CA."
+
+    # Path to the resolved MCF
+    # For dataset 1
+    mcf_url: "gs://resolved_mcf/external_tables/us_ca_chhs_1/nodes.mcf-00000-of-00001"
+    # For dataset 2
+    mcf_url: "gs://resolved_mcf/external_tables/us_ca_chhs_2_wri/nodes.mcf-00000-of-00001"
+
+    # First date of imported data
+    start_date: "2020-06-01"
+}

@@ -389,3 +389,14 @@ typeOf: schema:Class
 subClassOf: schema:Enumeration
 name: "MedicalTestResultEnum"
 
+Node: dcid:MedicalFacilityTypeEnum
+typeOf: schema:Class
+name: "MedicalFacilityTypeEnum"
+subClassOf: schema:Enumeration
+description: "Type of licensed healthcare facility"
+
+Node: dcid:HospitalBed
+typeOf: schema:Class
+name: "Hospital Bed Enum"
+subClassOf: schema:Enumeration, dcs:MedicalResource
+description: "Type of licensed healthcare facility beds"
