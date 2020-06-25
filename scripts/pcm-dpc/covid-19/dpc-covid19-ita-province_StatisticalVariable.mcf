@@ -1,8 +1,0 @@
-Node: dcid:COVID19_CumulativePositiveCase
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
-measuredProperty: dcs:cumulativeCount
-statType: dcs:measuredValue
-medicalStatus: dcs:PositiveCase
-

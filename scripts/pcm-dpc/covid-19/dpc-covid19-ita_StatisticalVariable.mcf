@@ -1,4 +1,4 @@
-Node: dcid:COVID19_HospitalizedsWithSymptoms
+Node: dcid:COVID19_Italy_HospitalizedsWithSymptoms
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
@@ -6,7 +6,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:HospitalizedsWithSymptoms
 
-Node: dcid:COVID19_IntensiveCare
+Node: dcid:COVID19_Italy_IntensiveCare
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
@@ -14,7 +14,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:IntensiveCare
 
-Node: dcid:COVID19_Hospitalized
+Node: dcid:COVID19_Italy_Hospitalized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
@@ -22,7 +22,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:Hospitalized
 
-Node: dcid:COVID19_PeopleInHomeIsolation
+Node: dcid:COVID19_Italy_PeopleInHomeIsolation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
@@ -30,7 +30,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:PeopleInHomeIsolation
 
-Node: dcid:COVID19_ActiveCase
+Node: dcid:COVID19_Italy_ActiveCase
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
@@ -38,23 +38,15 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:ActiveCase
 
-Node: dcid:COVID19_IncrementalPositiveCase
+Node: dcid:COVID19_Italy_IncrementalActiveCase
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
 measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
-medicalStatus: dcs:PositiveCase
+medicalStatus: dcs:IncrementalActiveCase
 
-Node: dcid:COVID19_IncrementalActiveCase
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
-measuredProperty: dcs:incrementalCount
-statType: dcs:measuredValue
-medicalStatus: dcs:ActiveCase
-
-Node: dcid:COVID19_CumulativeRecovered
+Node: dcid:COVID19_Italy_CumulativeRecovered
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
@@ -62,7 +54,7 @@ measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
 medicalStatus: dcs:Recovered
 
-Node: dcid:COVID19_CumulativeDeath
+Node: dcid:COVID19_Italy_CumulativeDeath
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
@@ -70,7 +62,7 @@ measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
 medicalStatus: dcs:Death
 
-Node: dcid:COVID19_CumulativePositiveCase
+Node: dcid:COVID19_Italy_CumulativePositiveCase
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
@@ -78,19 +70,26 @@ measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
 medicalStatus: dcs:PositiveCase
 
-Node: dcid:COVID19_CumulativeTestsPerformed
+Node: dcid:COVID19_Italy_IncrementalPositiveCase
 typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalTest
+populationType: dcs:MedicalConditionIncident
 incidentType: dcs:COVID_19
-measuredProperty: dcs:cumulativeCount
+measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
-medicalStatus: dcs:TestsPerformed
+medicalStatus: dcs:IncrementalPositiveCase
 
-Node: dcid:COVID19_CumulativeTestedPeople
+Node: dcid:COVID19_Italy_CumulativeTestsPerformed
 typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalTest
+populationType: dcs:MedicaltTest
 incidentType: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
-medicalStatus: dcs:TestedPeople
+
+Node: dcid:COVID19_Italy_CumulativeTestedPeople
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+incidentType: dcs:COVID_19
+measuredProperty: dcs:cumulativeCount
+medicalStatus: dcs:Tested
+statType: dcs:measuredValue
 

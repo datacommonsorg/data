@@ -1,90 +1,87 @@
 Node: E:pcm-dpc->E0
-typeOf: dcs:State
-dcid: C:pcm-dpc->Location
-name: C:pcm-dpc->RegionName
-latitude: C:pcm-dpc->Latitude
-longitude: C:pcm-dpc->Longitude
+typeOf: dcs:EurostatNUTS2
+istatId: C:pcm-dpc->Location
 
 Node: E:pcm-dpc->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_HospitalizedsWithSymptoms
+variableMeasured: dcs:COVID19_Italy_HospitalizedsWithSymptoms
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->HospitalizedsWithSymptoms
 
 Node: E:pcm-dpc->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_IntensiveCare
+variableMeasured: dcs:COVID19_Italy_IntensiveCare
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->IntensiveCare
 
 Node: E:pcm-dpc->E3
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Hospitalized
+variableMeasured: dcs:COVID19_Italy_Hospitalized
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->Hospitalized
 
 Node: E:pcm-dpc->E4
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_PeopleInHomeIsolation
+variableMeasured: dcs:COVID19_Italy_PeopleInHomeIsolation
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->PeopleInHomeIsolation
 
 Node: E:pcm-dpc->E5
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_ActiveCase
+variableMeasured: dcs:COVID19_Italy_ActiveCase
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->ActiveCase
 
 Node: E:pcm-dpc->E6
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_IncrementalPositiveCase
+variableMeasured: dcs:COVID19_Italy_IncrementalPositiveCase
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->IncrementalPositiveCase
 
 Node: E:pcm-dpc->E7
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_IncrementalActiveCase
+variableMeasured: dcs:COVID19_Italy_IncrementalActiveCase
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->IncrementalActiveCase
 
 Node: E:pcm-dpc->E8
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_CumulativeRecovered
+variableMeasured: dcs:COVID19_Italy_CumulativeRecovered
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativeRecovered
 
 Node: E:pcm-dpc->E9
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_CumulativeDeath
+variableMeasured: dcs:COVID19_Italy_CumulativeDeath
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativeDeath
 
 Node: E:pcm-dpc->E10
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_CumulativePositiveCase
+variableMeasured: dcs:COVID19_Italy_CumulativePositiveCase
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativePositiveCase
 
 Node: E:pcm-dpc->E11
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_CumulativeTestsPerformed
+variableMeasured: dcs:COVID19_Italy_CumulativeTestsPerformed
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativeTestsPerformed
 
 Node: E:pcm-dpc->E12
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_CumulativeTestedPeople
+variableMeasured: dcs:COVID19_Italy_CumulativeTestedPeople
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativeTestedPeople
