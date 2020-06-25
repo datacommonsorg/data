@@ -11,8 +11,4 @@ import: {
 
     # First date of imported data
     start_date: "2020-06-01"
-    # Last date of imported data, leave it blank for now because there are only one date available, we can update regularly later to get a time sequence data.
-
-    # Source data release schedule. Leave it blank for now as there is no description on website.
-
 }

@@ -23,7 +23,7 @@ from preprocess_csv_helper import generate_dcid_for_county
 df1 = pd.read_excel('https://data.chhs.ca.gov/dataset/09b8ad0e-aca6-4147-b78d-bdaad872f30b/resource/0997fa8e-ef7c-43f2-8b9a-94672935fa60/download/healthcare_facility_beds.xlsx',
                     converters={'FACID': lambda x: str(x)})
 
-new_columns = ['GeoId',
+new_columns = ['GeoId', 'Date',
                'CALicensedHealthcareFacilityBedFACID',
                'CALicensedHealthcareFacilityName',
                'CALicensedHealthcareFacilityType',
@@ -119,6 +119,7 @@ for index, row_dict in df1.iterrows():
         real_index = real_index + 1
         new_row = {
             'GeoId': 'dcid:' + county_to_geoID[row_dict['COUNTY_NAME']],
+            'Date': '2020-06-01',
             'CALicensedHealthcareFacilityBedFACID': 'ELMS/' + elmsId,
             'CALicensedHealthcareFacilityName': row_dict['FACNAME'],
             'CALicensedHealthcareFacilityType': 'dcs:' + FDR_to_type[row_dict['FAC_FDR']],
@@ -169,7 +170,7 @@ TEMPLATE_MCF_TEMPLATE_1 = """
 Node: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E{index}
 typeOf: StatVarObservation
 variableMeasured: {stat_var}
-observationDate: "2020-06-01"
+observationDate: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->Date
 observationAbout: E:CA_Licensed_Healthcare_Facility_Types_And_Counts->E0
 value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->{stat_var}
 """
@@ -177,7 +178,7 @@ value: C:CA_Licensed_Healthcare_Facility_Types_And_Counts->{stat_var}
 with open('CA_Licensed_Healthcare_Facility_Types_And_Counts.tmcf', 'w', newline='') as f_out:
     f_out.write(TEMPLATE_MCF_FAC_1)
 
-    stat_vars = new_columns[4:]
+    stat_vars = new_columns[5:]
     for i in range(len(stat_vars)):
         f_out.write(TEMPLATE_MCF_TEMPLATE_1.format_map({'index': i + 1, 'stat_var': stat_vars[i]}))
 
@@ -188,8 +189,9 @@ tempDF2 = pd.read_excel(
     sheet_name='CA_COUNTY_GACH_BED_COUNTS')
 tempDF2.to_csv('temp_data2.csv')
 
-new_columns_2 = ['GeoId', 'CACountyName', 'CALicensedHealthcareFacilityType',
-                 'Count_Hosptital_GeneralAcuteCare',
+new_columns_2 = ['GeoId', 'Date',
+                 'CACountyName', 'CALicensedHealthcareFacilityType',
+                 'Count_Hospital_GeneralAcuteCare',
                  'Count_HospitalBed_GeneralAcuteCare',
                  'Count_HospitalBed_GeneralAcuteCare_AcutePsychiatricCareBed',
                  'Count_HospitalBed_GeneralAcuteCare_AcuteRespiratoryCareBed',
@@ -217,9 +219,10 @@ with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.csv', 'w'
         for row_dict in reader:
             processed_dict = {
                 'GeoId': 'dcid:' + county_to_geoID[row_dict['COUNTY_NAME']],
+                'Date': '2020-04-13',
                 'CACountyName': row_dict['COUNTY_NAME'],
                 'CALicensedHealthcareFacilityType': FDR_to_type[row_dict['FAC_FDR']],
-                'Count_Hosptital_GeneralAcuteCare': row_dict['FACILITY_COUNT'],
+                'Count_Hospital_GeneralAcuteCare': row_dict['FACILITY_COUNT'],
                 'Count_HospitalBed_GeneralAcuteCare': row_dict['BED_CAPACITY'],
                 'Count_HospitalBed_GeneralAcuteCare_AcutePsychiatricCareBed': row_dict['ACUTE PSYCHIATRIC CARE'],
                 'Count_HospitalBed_GeneralAcuteCare_AcuteRespiratoryCareBed': row_dict['ACUTE RESPIRATORY CARE'],
@@ -246,12 +249,12 @@ TEMPLATE_MCF_TEMPLATE_2 = """
 Node: E:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
-observationDate: "2020-04-13"
+observationDate: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->Date
 observationAbout: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->GeoId
 value: C:CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts->{stat_var}
 """
 
-stat_vars = new_columns_2[3:]
+stat_vars = new_columns_2[4:]
 
 with open('CA_County_General_Acute_Care_Hospitals_Bed_Types_And_Counts.tmcf', 'w', newline='') as f_out:
     for i in range(len(stat_vars)):

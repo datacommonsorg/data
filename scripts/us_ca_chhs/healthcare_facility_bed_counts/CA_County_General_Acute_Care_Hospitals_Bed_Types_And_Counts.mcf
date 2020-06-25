@@ -1,4 +1,4 @@
-Node: dcid:Count_Hosptital_GeneralAcuteCare
+Node: dcid:Count_Hospital_GeneralAcuteCare
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Hospital
 statType: dcs:measuredValue
