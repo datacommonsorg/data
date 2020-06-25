@@ -1,0 +1,367 @@
+Node: dcid:ChemicalCompound
+name: "ChemicalCompound"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "Chemical compound."
+url: "https://www.ebi.ac.uk/chembl/"
+
+Node: dcid:ChemicalCompoundProteinInteraction
+name: "ChemicalCompoundProteinInteraction"
+typeOf: schema:Class
+subClassOf: dcs:ChemicalCompound
+description: "Interaction between a compound and a protein."
+url: "https://www.ebi.ac.uk/chembl/"
+
+Node: dcid:ChemicalCompoundDiseaseTreatment
+name: "ChemicalCompoundDiseaseTreatment"
+typeOf: schema:Class
+subClassOf: dcs:ChemicalCompound
+description: "Compound associated with the treatment of a given disease."
+url: "https://www.ebi.ac.uk/chembl/"
+
+Node: dcid:ChemicalCompoundDiseaseContraindication
+name: "ChemicalCompoundDiseaseContraindication"
+typeOf: schema:Class
+subClassOf: dcs:ChemicalCompound
+description: "Compound that is inadvisable to be used to treat a given disease."
+url: "https://www.ebi.ac.uk/chembl/"
+
+Node: dcid:Protein
+name: "Protein"
+typeOf: schema:Class
+subClassOf: dcs:ChemicalCompound
+description: "A class of nitrogenous organic compounds that are composed of large molecules called amino acids. These are essential for life in all living organisms."
+url: "https://www.uniprot.org/"
+
+Node: dcid:SideEffect
+name: "SideEffect"
+typeOf: schema:Class
+subClassOf: dcs:ChemicalCompound
+description: "Unintended effect of administering a drug."
+url: "http://sideeffects.embl.de/"
+
+Node: dcid:PharmacologicClass
+name: "PharmacologicClass"
+typeOf: schema:Class
+subClassOf: dcs:ChemicalCompound
+description: "Pharmacologic class is a group of active moieties that share scientifically documented properties."
+url: "https://www.fda.gov/industry/structured-product-labeling-resources/pharmacologic-class"
+
+Node: dcid:ProteinProteinInteraction
+name: "ProteinProteinInteraction"
+typeOf: schema:Class
+subClassOf: dcs:Protein
+description: "A highly specific physical contact between two or more proteins as a result of a biochemical event."
+
+Node: dcid:chemblID
+name: "chemblID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompound,dcs:Protein
+description: "ChEMBL identifier."
+
+Node: dcid:drugBankID
+name: "drugBankID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompound
+description: "DrugBank identifier of compound."
+
+Node: dcid:maximumFDAClinicalTrialPhase
+name: "maximumFDAClinicalTrialPhase"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:ChemicalCompound
+description: "The maximum FDA clinical trials phase in which the compound has participated for any disease."
+
+Node: dcid:iupacInternationalChemicalID
+name: "iupacInternationalChemicalID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompound
+description: "International Union of Applied Chemistry (IUPAC) International Chemical Identifier for compound."
+
+Node: dcid:inChIKey
+name: "inChIKey"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompound
+description: "Hash (SHA-256 algorithm) of compound International Union of Applied Chemistry IUPAC International Chemical Identifier. This is a fixed-length format to represent molecules and is derived from InChI."
+
+Node: dcid:simplifiedMolecularInputLineEntrySystem
+name: "simplifiedMolecularInputLineEntrySystem"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompound
+description: "Simplified Molecular-Input Line-Entry System (SMILES) for compound."
+
+Node: dcid:compoundID
+name: "compoundID"
+typeOf: schema:Property
+rangeIncludes: dcs:ChemicalCompound
+domainIncludes: dcs:ChemicalCompound
+description: "Link out to the ChemicalCompound node associated with the current node."
+
+Node: dcid:proteinID
+name: "proteinID"
+typeOf: schema:Property
+rangeIncludes: dcs:Protein
+domainIncludes: dcs:ChemicalCompoundProteinInteraction,dcs:ProteinProteinInteraction
+description: "Link out to the Protein node associated with the current node."
+
+Node: dcid:diseaseID
+name: "diseaseID"
+typeOf: schema:Property
+rangeIncludes: dcs:Disease
+domainIncludes: dcs:ChemicalCompoundDiseaseTreatment,dcs:ChemicalCompoundDiseaseContraindication
+description: "Identifier for disease in a compound-disease treatment."
+
+Node: dcid:fdaClinicalTrialPhase
+name: "fdaClinicalTrialPhase"
+typeOf: schema:Property
+rangeIncludes: schema:Number
+domainIncludes: dcs:ChemicalCompoundDiseaseTreatment
+description: "The FDA clinical trial phase for which a compound has been studied to treat the associated disease."
+
+Node: dcid:drugCentralSource
+name: "drugCentralSource"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompoundDiseaseTreatment,dcs:ChemicalCompoundDiseaseContraindication
+description: "DrugCentral source for drug-disease relationship."
+
+Node: dcid:uniProtID
+name: "uniProtID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Protein,dcs:ChemicalCompoundProteinInteraction
+description: "UniProt identifier of protein."
+
+Node: dcid:alternateNCBIProteinAccessionNumber
+name: "alternateNCBIProteinAccessionNumber"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Protein
+description: "Alternate NCBI accession number associated with a protein."
+
+Node: dcid:bindingDBID
+name: "bindingDBID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Protein
+description: "BindingDB identifier of a protein."
+
+Node: dcid:bgeeID
+name: "bgeeID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Protein
+description: "Bgee (gene expression data in animals database) identifier of a protein."
+
+Node: dcid:proteinDataBankID
+name: "proteinDataBankID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Protein
+description: "Protein Data Bank identifier of a protein."
+
+Node: dcid:geneSynonym
+name: "geneSynonym"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Protein
+description: "Synonyms for the gene symbol of gene that codes for a protein."
+
+Node: dcid:aminoAcidSequence
+name: "aminoAcidSequence"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Protein
+description: "The amino acid sequence for protein using IUPAC one letter codes for amino acids."
+
+Node: dcid:umlsConceptID
+name: "umlsConceptID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:SideEffect
+description: "The Concept Unique Identifier for a Metathesaurus concept to which strings with the same meaning are linked."
+
+Node: dcid:alternateUMLSConceptID
+name: "alternateUMLSConceptID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:SideEffect
+description: "The Alternate Concept Unique Identifier for a Metathesaurus concept to which strings with the same meaning are linked."
+
+Node: dcid:pharmacologicClass
+name: "pharmacologicClass"
+typeOf: schema:Property
+rangeIncludes: dcs:PharmacologicClass
+domainIncludes: dcs:ChemicalCompound
+description: "FDA pharmacologic class."
+
+Node: dcid:pharmacologicClassCode
+name: "pharmacologicClassCode"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:PharmacologicClass
+description: "FDA pharmacologic class code."
+
+Node: dcid:pharmacologicClassType
+name: "pharmacologicClassType"
+typeOf: schema:Property
+rangeIncludes: dcs:PharmacologicClassTypeEnum
+domainIncludes: dcs:PharmacologicClass
+description: "The class type associated with the active moiety for a pharmacologic class."
+
+Node: dcid:swissProtID
+name: "swissProtID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Protein
+description: "Identifier referring to a protein in the Swiss-Prot database. A manually curated database with records with information extracted from literature and curator-evaluated computational analysis."
+
+Node: dcid:ProteinProteinInteraction
+name: "ProteinProteinInteraction"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "A highly specific physical contact between two or more proteins as a result of a biochemical event."
+
+Node: dcid:interactingProtein
+typeOf: schema:Property
+name: "interactingProtein"
+description: "A participant protein in a protein-protein interaction."
+rangeIncludes: dcs:Protein
+domainIncludes: dcs:ProteinProteinInteraction
+
+Node: dcid:interactionDetectionMethod
+typeOf: schema:Property
+name: "interactionDetectionMethod"
+description: "The interaction detection method used in the experiment."
+rangeIncludes: dcs:InteractionDetectionMethodEnum
+domainIncludes: dcs:ProteinProteinInteraction
+
+Node: dcid:interactionType
+typeOf: schema:Property
+name: "interactionType"
+description: "The molecular interaction type."
+rangeIncludes: dcs:InteractionTypeEnum,dcs:ChemicalCompoundProteinInteractionTypeEnum
+domainIncludes: dcs:ProteinProteinInteraction,dcs:ChemicalCompoundProteinInteraction
+
+Node: dcid:interactionSource
+typeOf: schema:Property
+name: "interactionSource"
+description: "The database from which the interaction record was extracted."
+rangeIncludes: dcs:InteractionSourceEnum
+domainIncludes: dcs:ProteinProteinInteraction
+
+Node: dcid:confidenceScore
+typeOf: schema:Property
+name: "confidenceScore"
+description: "The confidence score of a protein-protein interaction and the source in which it is recorded."
+rangeIncludes: schema:Quantity
+domainIncludes: dcs:ProteinProteinInteraction
+
+Node: dcid:mintID
+typeOf: schema:Property
+name: "mintID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation
+description: "Molecular INTeraction database identifier."
+url: "https://mint.bio.uniroma2.it/"
+
+Node: dcid:imexID
+typeOf: schema:Property
+name: "imexID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation
+description: "The international molecular exchange consortium identifier for a non-redundant physical molecular interaction."
+url: "https://www.imexconsortium.org/"
+
+Node: dcid:rcsbPDBID
+typeOf: schema:Property
+name: "rcsbPDBID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation
+description: "Research Collaboratory for Structural Bioinformatics (RCSB) Protein Data Bank (PDB) identifier."
+url: "https://www.rcsb.org/"
+
+Node: dcid:intActID
+typeOf: schema:Property
+name: "intActID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation
+description: "EMBL-EBI IntAct identifier."
+url: "https://www.ebi.ac.uk/intact/"
+
+Node: dcid:electronMicroscopyDataBankID
+typeOf: schema:Property
+name: "electronMicroscopyDataBankID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation
+description: "The Electron Microscopy Data Bank (EMDB) identifier."
+url: "https://www.ebi.ac.uk/pdbe/emdb/"
+
+Node: dcid:worldWideProteinDataBankID
+typeOf: schema:Property
+name: "worldWideProteinDataBankID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation
+description: "The Worldwide Protein Data Bank (wwPDB) identifier, which serves as the single repository of information about the 3D structures of proteins, nucleic acids, and complex assemblies."
+url: "https://www.ebi.ac.uk/pdbe/", "https://www.rcsb.org/", "https://pdbj.org/", "http://www.bmrb.wisc.edu/".
+
+Node: dcid:psimiID
+typeOf: schema:Property
+name: "psimiID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation,dcs:InteractionTypeEnum,dcs:InteractionDetectionMethodEnum,dcs:InteractionSourceEnum
+description: "Proteomics Standard Initiative - Molecular Interaction identifier."
+url: "http://www.psidev.info/"
+
+Node: dcid:reactomePathwayID
+typeOf: schema:Property
+name: "reactomePathwayID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation
+description: "Reactome identifier. Reactome is a free, open-source, curated and peer-reviewed pathway database."
+url: "https://reactome.org/"
+
+Node: dcid:proteinDataBankInEuropeID
+typeOf: schema:Property
+name: "proteinDataBankInEuropeID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ProteinProteinInteracation
+description: "EMBL-EBI Protein Data Bank in Europe (PDBe) identifier."
+url: "https://www.ebi.ac.uk/pdbe/node/1"
+
+Node: dcid:pubMedID
+typeOf: schema:Property
+name: "pubMedID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompound
+description: "Identifier for reference paper on PubMed."
+url: "https://pubmed.ncbi.nlm.nih.gov/"
+
+Node: dcid:digitalObjectID
+typeOf: schema:Property
+name: "digitalObjectID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:Thing
+description: "Digital object identifier (doi) generated by the International DOI Foundation (IDF)."
+url: "https://www.doi.org/"
+
+Node: dcid:goID
+typeOf: schema:Property
+name: "goID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:InteractionDetectionMethodEnum, dcs:InteractionTypeEnum, dcs:InteractionSourceEnum
+description: "Identifiers of the Gene Ontology database AmiGO 2."
+url: "http://amigo.geneontology.org/amigo/landing"
+
+Node: dcid:residID
+typeOf: schema:Property
+name: "residID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:InteractionDetectionMethodEnum, dcs:InteractionTypeEnum, dcs:InteractionSourceEnum
+description: "Identifiers of the RESID database which contains the collections of annotations and structures for protein modifications."
+url: "https://proteininformationresource.org/resid/"
