@@ -12,7 +12,7 @@ def get_class_name_helper(astring):
     Take a space delimited string, return a class name such as ThisIsAnUnusualName 
     Here we use this function for instance name. Thus it allows to start with a number
     """
-    jointName = astring.title().replace(" ","")
+    jointName = astring.title().replace(' ','')
     # substitute except for  _, character, number
     nonLegit = re.compile(r'[\W]+')
     className = nonLegit.sub('', jointName)
@@ -43,17 +43,17 @@ def get_references(term):
         
         ("pubMedID: 1007323", {aNewSource:100100})
     """
-    source = term.split(":")[0]
-    idNum = ":".join(term.split(":")[1:])
+    source = term.split(':')[0]
+    idNum = ':'.join(term.split(':')[1:])
     newSourceMap = {}
-    if source == "PMID" or source == "pmid":
-        propertyLine =  "pubMedID: " + "\"" + idNum +"\""
-    elif source == "GO":
-        propertyLine =  "goID: " + "\"" + idNum +"\""
-    elif source == "RESID":
-        propertyLine =  "residID: " + "\"" + idNum +"\""
-    elif source == "doi":
-        propertyLine =  "digitalObjectID: " + "\"" + idNum +"\""
+    if source == 'PMID' or source == 'pmid':
+        propertyLine =  'pubMedID:  '+ '"' + idNum +'"'
+    elif source == 'GO':
+        propertyLine =  'goID: ' + '"' + idNum +'"'
+    elif source == 'RESID':
+        propertyLine =  'residID: ' + '"' + idNum +'"'
+    elif source == 'doi':
+        propertyLine =  'digitalObjectID: ' + '"' + idNum +'"'
     else:
         newReference[source] = idNum
         propertyLine = None
@@ -94,10 +94,10 @@ def get_parent_id_list(termList):
         term containining parent information is "is_a: MI:0013 ! biophysical" 
         or "relationship: part_of MI:1349 ! chembl"
         ''' 
-        if term.startswith("is_a"):
-            idStringList.append(term.split(" ")[1])
-        elif term.startswith("relationship"):
-            idStringList.append(term.split(" ")[2])
+        if term.startswith('is_a'):
+            idStringList.append(term.split(' ')[1])
+        elif term.startswith('relationship'):
+            idStringList.append(term.split(' ')[2])
         else: continue
             
     return idStringList
@@ -152,9 +152,9 @@ def get_schema_from_text(term, id2node, newSourceMap, id2className,interactionTy
     """
     termDic = collections.defaultdict(list)
     for line in term:
-        lineList = line.split(": ")
+        lineList = line.split(': ')
         key = lineList[0]
-        value = ": ".join(lineList[1:])
+        value = ': '.join(lineList[1:])
         termDic[key].append(value)
         
     defLong = termDic['def'][0]
@@ -163,31 +163,31 @@ def get_schema_from_text(term, id2node, newSourceMap, id2className,interactionTy
     termDic['def'] = [description]
     IDString = defLong[idStart+1:-1]
     if len(IDString)>0:
-        IDList = defLong[idStart+1:-1].split(", ")
+        IDList = defLong[idStart+1:-1].split(', ')
         termDic['references']= IDList     
     
     schemaPieceList = []
-    keyList = ["id", "def","references","parentClassName"]
+    keyList = ['id', 'def','references','parentClassName']
     
     idString = termDic['id'][0]
     dcid = id2className[idString]
     
-    curLine = "Node: dcid:" + dcid
+    curLine = 'Node: dcid:' + dcid
     schemaPieceList.append(curLine)
     
     if idString in interactionTypeIdSet:
-        curLine = "typeOf: dcs:InteractionTypeEnum"
+        curLine = 'typeOf: dcs:InteractionTypeEnum'
     elif idString in detectionMethodIdSet:
-        curLine = "typeOf: dcs:InteractionDetectionMethodEnum"
+        curLine = 'typeOf: dcs:InteractionDetectionMethodEnum'
     elif idString in interactionSourceIdset:
-        curLine = "typeOf: dcs:InteractionSourceEnum"
+        curLine = 'typeOf: dcs:InteractionSourceEnum'
     else:
         return None
         
-    termDic["parentClassName"] = [id2className[node.value] for node in id2node[idString].parentList] 
+    termDic['parentClassName'] = [id2className[node.value] for node in id2node[idString].parentList] 
     schemaPieceList.append(curLine)
     
-    curLine = "name: \"" + dcid + "\""
+    curLine = 'name: "' + dcid + '"'
     schemaPieceList.append(curLine)
 
     '''
@@ -204,35 +204,35 @@ def get_schema_from_text(term, id2node, newSourceMap, id2className,interactionTy
     
     for key in keyList:
             
-        if key=="def" and len(termDic[key])>0 :
-            curLine = "description: \"" + termDic[key][0][0].upper() + termDic[key][0][1:] +"\""
+        if key=='def' and termDic[key]:
+            curLine = 'description: "' + termDic[key][0][0].upper() + termDic[key][0][1:] +'"'
             schemaPieceList.append(curLine)
 
-        elif key=="references" and len(termDic[key])>0:
+        elif key=='references' and termDic[key]:
             itemList = []
             for i in range(len(termDic[key])):
-                if termDic[key][i]!="": 
+                if termDic[key][i]!='': 
                     curLine, newReferenceMap = get_references(termDic[key][i])
                     if curLine:
                         schemaPieceList.append(curLine)
                     if newReferenceMap:
                         newSourceMap[key] = newSourceMap[key].update(newReferenceMap)
             
-        elif key=="id" and len(termDic[key])>0:       
-            curLine = "psimiID: \"" + termDic[key][0] + "\""
+        elif key=='id' and termDic[key]:       
+            curLine = 'psimiID: "' + termDic[key][0] + '"'
             schemaPieceList.append(curLine)
             
-        elif key=="parentClassName" and len(termDic[key])>0:
+        elif key=='parentClassName' and termDic[key]:
             itemList = []
             for i in range(len(termDic[key])):
-                itemList.append( "dcs:" + termDic[key][i])
-            curLine = "specializationOf: " +  ",".join(itemList)
+                itemList.append( 'dcs:' + termDic[key][i])
+            curLine = 'specializationOf: ' +  ','.join(itemList)
             schemaPieceList.append(curLine)
-            
-    curLine = "descriptionUrl: \"http://psidev.info/groups/controlled-vocabularies\""
+    
+    curLine = 'descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"'
     schemaPieceList.append(curLine)
     
-    return "\n".join(schemaPieceList), termDic['id'][0], dcid, newSourceMap
+    return '\n'.join(schemaPieceList), termDic['id'][0], dcid, newSourceMap
 
 
 def main(argv):
@@ -240,7 +240,7 @@ def main(argv):
     with open(dbFile, 'r') as fp:
         file = fp.read()
     # clip exists in dcs already. Substitute with ClipInteraction
-    file = file.replace("name: clip\ndef", "name: clip interaction\ndef")
+    file = file.replace('name: clip\ndef', 'name: clip interaction\ndef')
     fileTerms = file.split('\n\n')[1:]
 
     '''
@@ -258,20 +258,20 @@ def main(argv):
     id2className = {}
     # build nodes and create the id2node dictionary at first iteration
     for termText in fileTerms:
-        if not termText.startswith("[Term]"):
+        if not termText.startswith('[Term]'):
             continue
         # idString example: "MI:0000"
-        idString = termText.split("\n")[1].split(" ")[1]
-        className = get_class_name(termText.split("\n")[2].split(": ")[1])
+        idString = termText.split('\n')[1].split(' ')[1]
+        className = get_class_name(termText.split('\n')[2].split(': ')[1])
         id2className[idString] = className
         id2node[idString] = Node(idString)
 
     # build the parent-child relation at the second iteration
     for termText in fileTerms:
-        if not termText.startswith("[Term]"):
+        if not termText.startswith('[Term]'):
             continue
-        termList = termText.split("\n")
-        idString = termList[1].split(" ")[1]
+        termList = termText.split('\n')
+        idString = termList[1].split(' ')[1]
         parentIdList = get_parent_id_list(termList[1:])
         for pId in parentIdList:
             id2node[pId].childList.append(id2node[idString])
@@ -279,55 +279,53 @@ def main(argv):
 
     # get the idStrings for the three target set
     dfsCaller = GetTreeValues()
-    interactionTypeIdSet = dfsCaller.get_subset_id(id2node["MI:0001"]) # root id: MI:0001 
-    detectionMethodIdSet = dfsCaller.get_subset_id(id2node["MI:0190"])# root id: MI:0190
-    interactionSourceIdset = dfsCaller.get_subset_id(id2node["MI:0444"]) # root id: MI:0444
+    interactionTypeIdSet = dfsCaller.get_subset_id(id2node['MI:0001']) # root id: MI:0001 
+    detectionMethodIdSet = dfsCaller.get_subset_id(id2node['MI:0190'])# root id: MI:0190
+    interactionSourceIdset = dfsCaller.get_subset_id(id2node['MI:0444']) # root id: MI:0444
 
     # delete root node value from the set
-    interactionTypeIdSet.remove("MI:0001")
-    detectionMethodIdSet.remove("MI:0190")
-    interactionSourceIdset.remove("MI:0444")
+    interactionTypeIdSet.remove('MI:0001')
+    detectionMethodIdSet.remove('MI:0190')
+    interactionSourceIdset.remove('MI:0444')
 
     setList = [interactionTypeIdSet, detectionMethodIdSet,interactionSourceIdset]
-    print("The schema amount of each Enum: interactionType, detectionMethod,interactionSource are ")
+    print('The schema amount of each Enum: interactionType, detectionMethod,interactionSource are ')
     print([len(s) for s in setList])
 
     schemaList = []
     psimi2dcid = []
-    newSourceMap = {"references":{}}
+    newSourceMap = {'references':{}}
     for termText in fileTerms:
-        if not termText.startswith("[Term]"):
+        if not termText.startswith('[Term]'):
             continue
-        term = termText.split("\n")[1:]
+        term = termText.split('\n')[1:]
         schemaRes = get_schema_from_text(term,id2node,newSourceMap,id2className,
                                       interactionTypeIdSet,detectionMethodIdSet,interactionSourceIdset)
         if schemaRes:
             schema, psimi, dcid, newSourceMap  = schemaRes
             schemaList.append(schema)
             psimi2dcid.append(psimi+': ' + dcid)
-    schemaEnumText = "\n\n".join(schemaList)
-    schema = "# This schema file is generated by parseEBI.py. Please don't edit.\n"
+    schemaEnumText = '\n\n'.join(schemaList)
+    schema = '# This schema file is generated by parseEBI.py. Please don\'t edit.\n'
     schemaEnumText = schema + schemaEnumText
 
-    # dev browser imported name: BioOntologySchema
     with open('BioOntologySchemaEnum.mcf','w') as fp:
         fp.write(schemaEnumText)
     with open('psimi2dcid.txt','w') as fp:
-        fp.write("\n".join(psimi2dcid))
+        fp.write('\n'.join(psimi2dcid))
         
     writeList = []
     for sourceType in newSourceMap:
         if not newSourceMap[sourceType]: continue
         writeList.append(sourceType)
         for source in newSourceMap[sourceType]:
-            line = source + ": " + newSourceMap[sourceType][source]
+            line = source + ': ' + newSourceMap[sourceType][source]
             writeList.append(sourceType)
-        writeList.append("\n")
+        writeList.append('\n')
     if writeList:
         with open('BioEBINewSource.txt','w') as fp:
-            fp.write("\n".join(writeList))
+            fp.write('\n'.join(writeList))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main(sys.argv[1:])
-

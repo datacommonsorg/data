@@ -21,19 +21,19 @@ def get_references(term):
         
         ("imexID: 1007323", {aNewSource:100100})
     """
-    source = term.split(":")[0]
-    idNum = ":".join(term.split(":")[1:])
+    source = term.split(':')[0]
+    idNum = ':'.join(term.split(':')[1:])
     newSourceMap = {}
-    if source == "pubmed":
-        propertyLine = "pubMedID: " + "\"" + idNum +"\""
-    elif source == "imex":
-        propertyLine = "imexID: " + "\"" + idNum +"\""
-    elif source == "mint":
-        propertyLine =  "mintID: " + "\"" + idNum +"\""
-    elif source == "doi":
-        propertyLine =  "digitalObjectID: " + "\"" + idNum +"\""
-    elif source == "rcsb pdb":
-        propertyLine =  "rcsbPDBID: " + "\"" + idNum +"\""
+    if source == 'pubmed':
+        propertyLine = 'pubMedID: ' + '"' + idNum +'"'
+    elif source == 'imex':
+        propertyLine = 'imexID: ' + '"' + idNum +'"'
+    elif source == 'mint':
+        propertyLine =  'mintID: ' + '"' + idNum +'"'
+    elif source == 'doi':
+        propertyLine =  'digitalObjectID: ' + '"' + idNum +'"'
+    elif source == 'rcsb pdb':
+        propertyLine =  'rcsbPDBID: ' + '"' + idNum +'"'
     else:
         newReference[source] = idNum
         newSourceMap = None
@@ -53,27 +53,27 @@ def get_identifier(term):
         
         ("imexID: 1007323", "{aNewSource:100100}")
     """
-    source = term.split(":")[0]
-    idNum = ":".join(term.split(":")[1:])
+    source = term.split(':')[0]
+    idNum = ':'.join(term.split(':')[1:])
     newSourceMap = {}
-    if source == "intact":
-        propertyLine = "intActID: " + "\"" + idNum +"\""
-    elif source == "mint":
-        propertyLine = "mintID: " + "\"" + idNum +"\""
-    elif source == "imex":
-        propertyLine = "imexID: " + "\"" + idNum +"\""
-    elif source == "emdb":
-        propertyLine = "electronMicroscopyDataBankID: " + "\"" + idNum +"\""   
-    elif source == "wwpdb":
-        propertyLine = "worldWideProteinDataBankID: " + "\"" + idNum +"\""
-    elif source == "rcsb pdb":
-        propertyLine = "rcsbPDBID: " + "\"" + idNum +"\""
-    elif source == "psi-mi":
-        propertyLine = "psimiID: " + "\"" + idNum[1:-1] +"\""
-    elif source == "reactome":
-        propertyLine = "reactomePathwayID: " + "\"" + idNum +"\""
-    elif source == "pdbe":
-        propertyLine = "proteinDataBankInEuropeID: "  + "\"" + idNum +"\""
+    if source == 'intact':
+        propertyLine = 'intActID: ' + '"' + idNum + '"'
+    elif source == 'mint':
+        propertyLine = 'mintID: ' + '"' + idNum + '"'
+    elif source == 'imex':
+        propertyLine = 'imexID: ' + '"' + idNum + '"'
+    elif source == 'emdb':
+        propertyLine = 'electronMicroscopyDataBankID: ' + '"' + idNum + '"'
+    elif source == 'wwpdb':
+        propertyLine = 'worldWideProteinDataBankID: ' + '"' + idNum + '"'
+    elif source == 'rcsb pdb':
+        propertyLine = 'rcsbPDBID: ' + '"' + idNum + '"'
+    elif source == 'psi-mi':
+        propertyLine = 'psimiID: ' + '"' + idNum[1:-1] + '"'
+    elif source == 'reactome':
+        propertyLine = 'reactomePathwayID: ' + '"' + idNum + '"'
+    elif source == 'pdbe':
+        propertyLine = 'proteinDataBankInEuropeID: '  + '"' + idNum + '"'
     else:
         newSourceMap[source] = idNum
         propertyLine = None
@@ -93,23 +93,23 @@ def get_confidence(term):
         
         ("[13 dcs:AuthorScore]", {aNewSource:10})
     """
-    source = term.split(":")[0]
-    idNum = ":".join(term.split(":")[1:])
+    source = term.split(':')[0]
+    idNum = ':'.join(term.split(':')[1:])
     newSourceMap = {}
-    if source == "author score":
-        if idNum.split(" ")[0] == "Below":
-            propertyLine =  "[- "+ idNum.split(" ")[1] + " dcs:AuthorScore" +  "]"
-        elif idNum.split(" ")[0] == "Above":
-            propertyLine =  "["+ idNum.split(" ")[1] + " - dcs:AuthorScore" +  "]"
-        for part in idNum.split("."):
+    if source == 'author score':
+        if idNum.split(" ")[0] == 'Below':
+            propertyLine =  '[- '+ idNum.split(' ')[1] + ' dcs:AuthorScore' +  ']'
+        elif idNum.split(" ")[0] == 'Above':
+            propertyLine =  '['+ idNum.split(' ')[1] + ' - dcs:AuthorScore' +  ']'
+        for part in idNum.split('.'):
             if not part.isnumeric():
                 # if author score is "++++"
-                propertyLine =  "["+ str(len(idNum)) + " dcs:AuthorScore" +  "]"
+                propertyLine =  '['+ str(len(idNum)) + ' dcs:AuthorScore' +  ']'
                 
         
-        propertyLine =  "["+ idNum + " dcs:AuthorScore" +  "]"
-    elif source == "intact-miscore":
-        propertyLine =  "["+ idNum + " dcs:IntactMiScore" +  "]"
+        propertyLine =  '['+ idNum + ' dcs:AuthorScore' +  ']'
+    elif source == 'intact-miscore':
+        propertyLine =  '['+ idNum + ' dcs:IntactMiScore' +  ']'
     else:
         newSourceMap[source] = idNum
         propertyLine =  None
@@ -124,7 +124,7 @@ def get_protein_dcid(mintAliases):
     dcid of the participant protein.
     """
     if len(mintAliases)>1:
-        return mintAliases.split("|")[0].split(":")[1].split('(')[0].upper()
+        return mintAliases.split('|')[0].split(':')[1].split('(')[0].upper()
     else:
         # for a self-interacting protein, one of the protein name is empty, denoted by "-" 
         return None
@@ -134,7 +134,7 @@ def check_uniprot(alias):
     """
     Return True if the protein has UniProt identifier
     """ 
-    return len(alias)==1 or alias.split(":")[0] == "uniprotkb"
+    return len(alias)==1 or alias.split(':')[0] == 'uniprotkb'
 
 
 def check_dcid(alias):
@@ -147,15 +147,15 @@ def check_dcid(alias):
     """
     if len(alias) == 1:
         return 1
-    aliasList = alias.split("|")
+    aliasList = alias.split('|')
     aliasDic = {}
     for ali in aliasList:
-        key = ali.split("(")[1][:-1]
-        value = ali.split("(")[0].split(":")[1]
+        key = ali.split('(')[1][:-1]
+        value = ali.split('(')[0].split(':')[1]
         aliasDic[key] = value
-    if "display_long" in aliasDic:
-        dcid = aliasDic["display_long"]
-        if re.search("[\W]+", dcid)!=None or len(dcid.split("_"))!=2:
+    if 'display_long' in aliasDic:
+        dcid = aliasDic['display_long']
+        if re.search('[\W]+', dcid)!=None or len(dcid.split('_'))!=2:
             return 0    
     else:
         return 2
@@ -178,7 +178,7 @@ def get_property_content(content, prefix):
     for obj in content:
         itemList.append(prefix + obj)
 
-    return ",".join(itemList)
+    return ','.join(itemList)
 
 def get_cur_line(keyName, valueList, prefix):
     """Return the line of property schema from objects, property name and prefix
@@ -193,7 +193,7 @@ def get_cur_line(keyName, valueList, prefix):
     """
     propertyContent = get_property_content(valueList, prefix)
     if not propertyContent: return None
-    curLine = keyName + ": " + propertyContent 
+    curLine = keyName + ': ' + propertyContent 
     return curLine
 
 
@@ -233,17 +233,17 @@ def get_schema_from_text(term, newSourceMap, psimi2dcid):
     protein = get_protein_dcid(term[5])
     if protein:
         termDic['interactingProtein'].append(protein)
-    detectionMethod = psimi2dcid[term[6].split(":\"")[1].split("(")[0][:-1]]
+    detectionMethod = psimi2dcid[term[6].split(':"')[1].split('(')[0][:-1]]
     termDic['interactionDetectionMethod'].append(detectionMethod)
-    termDic['references'] = term[8].split("|")
-    interactionType = psimi2dcid[term[11].split(":\"")[1].split("(")[0][:-1]]
+    termDic['references'] = term[8].split('|')
+    interactionType = psimi2dcid[term[11].split(':"')[1].split('(')[0][:-1]]
     termDic['interactionType'].append(interactionType)
-    interactionSource =  psimi2dcid[term[12].split(":\"")[1].split("(")[0][:-1]]
+    interactionSource =  psimi2dcid[term[12].split(':"')[1].split('(')[0][:-1]]
     termDic['interactionSource'].append(interactionSource)
-    termDic['identifier'] = term[13].split("|")
+    termDic['identifier'] = term[13].split('|')
     confidence = term[14]
-    if confidence!= "-":
-        termDic['confidence']=term[14].split("|")
+    if confidence!= '-':
+        termDic['confidence']=term[14].split('|')
 
     '''
     termDic example:
@@ -257,31 +257,31 @@ def get_schema_from_text(term, newSourceMap, psimi2dcid):
     '''
     
     schemaPieceList = []
-    keyList = ["interactingProtein", "interactionDetectionMethod","interactionType","interactionSource",
-               "identifier", "confidence","references"]
-    if len(termDic["interactingProtein"])>1:
-        dcid = termDic["interactingProtein"][0] + "_" + termDic["interactingProtein"][1]
+    keyList = ['interactingProtein', 'interactionDetectionMethod','interactionType','interactionSource',
+               'identifier', 'confidence','references']
+    if len(termDic['interactingProtein'])>1:
+        dcid = termDic['interactingProtein'][0] + '_' + termDic['interactingProtein'][1]
     else:
-        dcid = termDic["interactingProtein"][0] + "_" + termDic["interactingProtein"][0]
-    curLine = "Node: dcid:bio/" + dcid
+        dcid = termDic['interactingProtein'][0] + '_' + termDic['interactingProtein'][0]
+    curLine = 'Node: dcid:bio/' + dcid
     schemaPieceList.append(curLine)
-    curLine = "typeOf: ProteinProteinInteraction"
+    curLine = 'typeOf: ProteinProteinInteraction'
     schemaPieceList.append(curLine)
-    curLine = "name: " + "\"" + dcid + "\""
+    curLine = 'name: ' + '"' + dcid + '"'
     schemaPieceList.append(curLine)
 
     for key in keyList:
-        if key in set(["interactionDetectionMethod", "interactionType", "interactionSource"]):
-            curLine = get_cur_line(key, termDic[key], "dcs:")
+        if key in set(['interactionDetectionMethod','interactionType','interactionSource']):
+            curLine = get_cur_line(key, termDic[key], 'dcs:')
             if curLine:
                 schemaPieceList.append(curLine)
             
-        elif key=="interactingProtein" and termDic[key]:
-            curLine = get_cur_line(key, termDic[key], "dcs:bio/UniProt_")
+        elif key=='interactingProtein' and termDic[key]:
+            curLine = get_cur_line(key, termDic[key], 'dcs:bio/UniProt_')
             if curLine:
                 schemaPieceList.append(curLine)
 
-        elif key=="references" and termDic[key]:
+        elif key=='references' and termDic[key]:
             for term in termDic[key]:
                 if term:
                     curLine, newReferenceMap = get_references(term)
@@ -290,7 +290,7 @@ def get_schema_from_text(term, newSourceMap, psimi2dcid):
                     if newReferenceMap:
                         newSourceMap[key] = newSourceMap[key].update(newReferenceMap)
                           
-        elif key=="identifier" and termDic[key]:
+        elif key=='identifier' and termDic[key]:
             for term in termDic[key]:
                 if term:                  
                     curLine, newIdentifierMap = get_identifier(term)
@@ -299,25 +299,24 @@ def get_schema_from_text(term, newSourceMap, psimi2dcid):
                     if newIdentifierMap:
                         newSourceMap[key] = newSourceMap[key].update(newIdentifierMap)
    
-        elif key=="confidence" and termDic[key]:       
+        elif key=='confidence' and termDic[key]:       
             itemList = []
             for term in termDic[key]:
                 if term: 
                     item, newConfidenceSource = get_confidence(term)
                     itemList.append(item)
             if itemList:
-                curLine = "confidenceScore: " +  ",".join(itemList)        
+                curLine = 'confidenceScore: ' +  ','.join(itemList)        
                 schemaPieceList.append(curLine)
             if newConfidenceSource:
                 newSourceMap[key] = newSourceMap[key].update(newConfidenceSource)
                 
-    return "\n".join(schemaPieceList), newSourceMap
+    return '\n'.join(schemaPieceList), newSourceMap
 
 
 def main(argv):
     
     dbFile = argv[0]
-    #schemaMCF = argv[1]
     psimi2dcidFile = argv[1]
     parts = int(argv[2])
     
@@ -333,11 +332,11 @@ def main(argv):
 
 
     psimi2dcid = {}
-    p2d = [line.split(": ") for line in p2d.split("\n")]
+    p2d = [line.split(': ') for line in p2d.split('\n')]
     for line in p2d:
         psimi2dcid[line[0]] = line[1]
 
-    newSourceMap = {"references":{}, "identifier":{}, "confidence":{}}
+    newSourceMap = {'references':{}, 'identifier':{}, 'confidence':{}}
     schemaList = []
     wrongDcid = []
     failed = []
@@ -375,7 +374,7 @@ def main(argv):
         fCount += len(alist)
 
     if parts == 1:
-        schemaEnumText = "\n\n".join(schemaList)
+        schemaEnumText = '\n\n'.join(schemaList)
         with open('BioMINTDataSchema.mcf','w') as fp:
             fp.write(schemaEnumText)
         
@@ -384,7 +383,7 @@ def main(argv):
         count = 1
         step = math.ceil(len(schemaList)/float(parts))
         for i in range(0,len(schemaList), step):
-            schemaEnumText = "\n\n".join(schemaList[i:i+step])   
+            schemaEnumText = '\n\n'.join(schemaList[i:i+step])   
             with open('BioMINTDataSchema_part'+str(count)+'.mcf','w') as fp:
                 fp.write(schemaEnumText)
             count += 1
