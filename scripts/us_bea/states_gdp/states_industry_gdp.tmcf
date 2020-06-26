@@ -1,0 +1,8 @@
+Node: E:states_industry_gdp->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InflationAdjustedGDP
+observationAbout: C:states_gdp->GeoId
+observationDate: C:states_gdp->Quarter
+observationPeriod: "P3M"
+value: C:states_gdp->millions_of_chained_2012_dollars
+unit: "Millions of chained 2012 dollars"

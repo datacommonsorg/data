@@ -1,0 +1,169 @@
+
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_11
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/11
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_21
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/21
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_22
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/22
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_23
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/23
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_31-33
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/31-33
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_JOLTS_320000
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/JOLTS_320000
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_JOLTS_340000
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/JOLTS_340000
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_42
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/42
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_44-45
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/44-45
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_48-49
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/48-49
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_51
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/51
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_52
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/52
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_53
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/53
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_54
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/54
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_55
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/55
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_56
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/56
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_61
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/61
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_62
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/62
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_71
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/71
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_72
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/72
+        
+        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_81
+        typeOf: dcs:StatisticalVariable
+        populationType:EconomicActivity
+        activitySource: dcs:GrossDomesticProduction
+        measuredProperty: dcs:amount
+        measurementQualifier: dcs:Nominal
+        naics: dcid:NAICS/81
+        
