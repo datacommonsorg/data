@@ -126,7 +126,8 @@ class StateGDPDataLoader:
         self.df.to_csv(filename)
 
 
-def main():
+def main(argv):
+    del argv # unused
     loader = StateGDPDataLoader()
     loader.save_csv()
 
