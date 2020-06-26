@@ -72,7 +72,7 @@ const (
 	// shard split will only occur after the line that closes an MCF block.
 	dataTypeMCF
 
-	// TODO: If there are other formats of data being sharded for writing
+	// TODO(rsned): If there are other formats of data being sharded for writing
 	// that need more smarts, add them here. (e.g. JSON should split on the
 	// close of a complete record so that all file shards can be independently
 	// processed safely.
@@ -129,7 +129,7 @@ func NewWriter(basePath, extension string, opts ...Option) io.WriteCloser {
 
 	// If the user accidentally includes the dot before the extension,
 	// chop it off since we insert it when making the filenames.
-	strings.TrimPrefix(w.extension, ".")
+	w.extension = strings.TrimPrefix(w.extension, ".")
 
 	// Check opts and set any the user has chosen to set explicitly.
 	for _, o := range opts {
@@ -182,7 +182,7 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 		return 0, fmt.Errorf("error occurred during previous writes")
 	}
 
-	// TODO(rsned): Maybe allow a +/- 5% leeway so we don't end up
+	// TODO(rsned): Maybe allow a +/- 1% leeway so we don't end up
 	// writing out a 100 MB shard and a 1 kB shard when it could all
 	// end up in one file.
 

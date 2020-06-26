@@ -11,7 +11,7 @@ The default instance of the writer will use 100 MB as the file size to split on,
 The size of the shards can be specified when creating the writer:
 
 	w := sharding_writer.NewWriter(filename, extension,
-		sharding_writer.ShardSize(1024*1024))
+		sharding_writer.ShardSize(1024*1024))  // size is in bytes.
 
 The writer has some smarts if the data being written to the file is text or even
 MCF / TMCF files. In these cases the writer will ensure shards don't split in the
@@ -26,19 +26,23 @@ To ensure lines aren't broken in the middle, use TextDataType option.
 		sharding_writer.TextDataType(),
 		sharding_writer.ShardSize(10*1024))
 
-For files of MCF data, specify MCFDataType to ensure files don't split in the middle of a node.G
+For files of MCF data, specify MCFDataType to ensure files don't split in the middle of a node.
 
 	w := sharding_writer.NewWriter(filename, extension,
 		sharding_writer.MCFDataType())
 
 Note that this package does NOT attempt to balance the shard sizes, it is for
-splittng the writes up along the given size boundaries.
+splitting the writes per the given size boundaries.
 
 To take advantage of the io.StringWriter interface, use the io.WriteString method.
 (io.WriteString takes a Writer, but calls it WriteString method if it has one).
 
 
 Example Usage:
+
+	import "github.com/datacommons/data/util/sharding_writer"
+
+	...
 
 	// Create the sharded writer with ~64kB files.
 	sw := sharding_writer.NewWriter("my_data", "csv",
