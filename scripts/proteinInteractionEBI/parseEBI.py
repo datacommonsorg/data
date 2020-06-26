@@ -6,137 +6,141 @@ import re
 import sys
 
 
-def get_class_name_helper(astring):
+def get_class_name(a_string):
     """Convert a name string to format: ThisIsAnUnusualName.
-    
-    Take a space delimited string, return a class name such as ThisIsAnUnusualName 
+
+    Take a space delimited string, return a class name such as ThisIsAnUnusualName
     Here we use this function for instance name. Thus it allows to start with a number
     """
-    jointName = astring.title().replace(' ','')
+    joint_name = a_string.title().replace(' ','')
     # substitute except for  _, character, number
-    nonLegit = re.compile(r'[\W]+')
-    className = nonLegit.sub('', jointName)
-    return className
-
-def get_class_name(astring):
-    return get_class_name_helper(astring)
-
-def get_property_name(astring):
-    """Convert a name string to format: thisIsAnUnusualName.
-    Take a space delimited string, return a property name such as thisIsAnUnusualName 
-    """
-    className = get_class_name_helper(astring)
-    return className[0].lower()+className[1:]
+    non_legitimate = re.compile(r'[\W]+')
+    class_name = non_legitimate.sub('', joint_name)
+    return class_name
 
 
 def get_references(term):
     """Convert reference string to the corresponding reference property schema
-    
+
     Args:
-        term: a string with the format "source:idNum"
-    
+        term: a string with the format "source:id_content"
+
     Returns:
-        a tuple: (propertyLine,newSourceMap). propertyLine is the reference 
-        property in schema, and newSourceMap is the dictionary of with source
+        a tuple: (property_line,new_source_map). property_line is the reference
+        property in schema, and new_source_map is the dictionary of with source
         name as the key and the identifier as the value, if new source exists.
         For example:
-        
+
         ("pubMedID: 1007323", {aNewSource:100100})
     """
-    source = term.split(':')[0]
-    idNum = ':'.join(term.split(':')[1:])
-    newSourceMap = {}
+    term_split = term.split(':')
+    source = term_split[0]
+    id_content = ':'.join(term_split[1:])
+    new_source_map = {}
     if source == 'PMID' or source == 'pmid':
-        propertyLine =  'pubMedID:  '+ '"' + idNum +'"'
+        property_line = 'pubMedID:  ' + '"' + id_content + '"'
     elif source == 'GO':
-        propertyLine =  'goID: ' + '"' + idNum +'"'
+        property_line = 'goID: ' + '"' + id_content + '"'
     elif source == 'RESID':
-        propertyLine =  'residID: ' + '"' + idNum +'"'
+        property_line = 'residID: ' + '"' + id_content + '"'
     elif source == 'doi':
-        propertyLine =  'digitalObjectID: ' + '"' + idNum +'"'
+        property_line = 'digitalObjectID: ' + '"' + id_content + '"'
     else:
-        newReference[source] = idNum
-        propertyLine = None
-        
-    return (propertyLine, newSourceMap)
+        new_source_map[source] = id_content
+        property_line = None
+
+    return (property_line, new_source_map)
 
 
 class Node(object):
     """Node class for containing each ontology
     Attributes:
         value: A string shows the ontology name
-        parentList: A list of Node contains the parent nodes. One node can have multiple parent nodes.
-        childList: A list of Node contains the child nodes.     
+        parent_list: A list of Node contains the parent nodes. One node can
+            have multiple parent nodes.
+        child_list: A list of Node contains the child nodes.
     """
     def __init__(self, value):
         self.value = value
-        self.parentList = []
-        self.childList = []
-        
-def get_parent_id_list(termList):
-    """Takes a list with string elements of a node, return a list containing string identifiers of its parent nodes. 
+        self.parent_list = []
+        self.child_list = []
+
+def get_parent_id_list(term_list):
+    """Takes a list with string elements of a node, return a list containing string
+    identifiers of its parent nodes.
     Args:
-        termList: for example:
+        term_list: for example:
         ['id: MI:0000',
          'name: molecular interaction',
-         'def: "Controlled vocabularies originally created for protein protein interactions, extended to other molecules interactions." [PMID:14755292]',
+         'def: "Controlled vocabularies originally created for protein protein
+         interactions, extended to other molecules interactions." [PMID:14755292]',
          'subset: Drugable',
          'subset: PSI-MI_slim']
-    
-    Returns:
-        idStringList: a list of string identifiers of its parent nodes. For example:
-        ["MI:0013", "MI:1349"]
-    
-    """
-    idStringList = []
-    for term in termList:
-        '''
-        term containining parent information is "is_a: MI:0013 ! biophysical" 
-        or "relationship: part_of MI:1349 ! chembl"
-        ''' 
-        if term.startswith('is_a'):
-            idStringList.append(term.split(' ')[1])
-        elif term.startswith('relationship'):
-            idStringList.append(term.split(' ')[2])
-        else: continue
-            
-    return idStringList
 
-class GetTreeValues(object):
+    Returns:
+        id_string_list: a list of string identifiers of its parent nodes. For example:
+        ["MI:0013", "MI:1349"]
+
+    """
+    id_string_list = []
+    for term in term_list:
+        '''
+        term containining parent information is "is_a: MI:0013 ! biophysical"
+        or "relationship: part_of MI:1349 ! chembl"
+        '''
+        if term.startswith('is_a'):
+            id_string_list.append(term.split(' ')[1])
+        elif term.startswith('relationship'):
+            id_string_list.append(term.split(' ')[2])
+        else: continue
+
+    return id_string_list
+
+class TreeBuilder(object):
     """A computation class to get all the node values of a subtree from the subtree root by DFS.
-    
+
     Attributes:
         nodeValueSet: a set to save and return all the node values in the subtree
     """
-    
-    def __init__(self):
-        self.nodeValuesSet = set()
 
-    def get_subset_id(self, node):
+    def __init__(self, id_to_node):
+
+        self.node_value_set = set()
+        self.id_to_node = id_to_node
+
+    def get_subset_id(self, node_id):
         """Takes the string identifer such as "MI:1349" as the root node value
-            returns all the tree node values as a set."""
+        returns all the tree node values except for root value as a set."""
         # reset the value set to be empty every function call
-        self.nodeValuesSet = set()
-        # run a DFS on the tree
-        self.dfs(node)
-        return self.nodeValuesSet
+        self.node_value_set = set()
 
-    def dfs(self, node):
+        node = self.id_to_node[node_id]
+
+        # run a DFS on the tree
+        self._dfs(node)
+        # remove root value
+        self.node_value_set.remove(node.value)
+        return self.node_value_set
+
+    def _dfs(self, node):
         """Takes a tree node as root, do a DFS tree traversal recursively"""
         if not node: return
-        self.nodeValuesSet.add(node.value)
-        for child in node.childList:
-            self.dfs(child)
+        self.node_value_set.add(node.value)
+        for child in node.child_list:
+            self._dfs(child)
 
 
-def get_schema_from_text(term, id2node, newSourceMap, id2className,interactionTypeIdSet,detectionMethodIdSet,interactionSourceIdset):
-    
-    """Takes a list with each item containing the information, return a list: [data schema, PSI-MI, DCID] 
+def get_schema_from_text(term, id_to_node, new_source_map, id_to_class_name, interaction_type_id_set,
+                         detection_method_id_set, interaction_source_id_set):
+
+    """Takes a list with each item containing the information,
+        return a list: [data schema, PSI-MI, DCID]
     Args:
         term: For example:
         ['id: MI:0000',
          'name: molecular interaction',
-         'def: "Controlled vocabularies originally created for protein protein interactions, extended to other molecules interactions." [PMID:14755292]',
+         'def: "Controlled vocabularies originally created for protein protein interactions,
+             extended to other molecules interactions." [PMID:14755292]',
          'subset: Drugable',
          'subset: PSI-MI_slim']
     Returns:
@@ -145,53 +149,60 @@ def get_schema_from_text(term, id2node, newSourceMap, id2className,interactionTy
         typeOf: dcs:InteractionTypeEnum
         name: "Biophysical"
         psimiID: "MI:0013"
-        description: "The application of physical principles and methods to biological experiments"
+        description: "The application of physical principles and methods to biological
+            experiments"
         pubMedID: "14755292"
-        specializationOf: dcs:ExperimentalInteractionDetection''','MI:0001', "Biophysical", {"references":{"newConfidence":"AA10010"}}]
-        
+        specializationOf: dcs:ExperimentalInteractionDetection''','MI:0001', "Biophysical",
+            {"references":{"newConfidence":"AA10010"}}]
+
     """
-    termDic = collections.defaultdict(list)
+    term_map = collections.defaultdict(list)
     for line in term:
-        lineList = line.split(': ')
-        key = lineList[0]
-        value = ': '.join(lineList[1:])
-        termDic[key].append(value)
-        
-    defLong = termDic['def'][0]
-    idStart = defLong.rfind('[')
-    description = defLong[1:idStart-1-2]
-    termDic['def'] = [description]
-    IDString = defLong[idStart+1:-1]
-    if len(IDString)>0:
-        IDList = defLong[idStart+1:-1].split(', ')
-        termDic['references']= IDList     
-    
-    schemaPieceList = []
-    keyList = ['id', 'def','references','parentClassName']
-    
-    idString = termDic['id'][0]
-    dcid = id2className[idString]
-    
-    curLine = 'Node: dcid:' + dcid
-    schemaPieceList.append(curLine)
-    
-    if idString in interactionTypeIdSet:
-        curLine = 'typeOf: dcs:InteractionTypeEnum'
-    elif idString in detectionMethodIdSet:
-        curLine = 'typeOf: dcs:InteractionDetectionMethodEnum'
-    elif idString in interactionSourceIdset:
-        curLine = 'typeOf: dcs:InteractionSourceEnum'
+        line_list = line.split(': ')
+        key = line_list[0]
+        value = ': '.join(line_list[1:])
+        term_map[key].append(value)
+
+    # description_long example: '"The...chromogen [TMB]...instead." [PMID:14755292]'
+    description_long = term_map['def'][0]
+
+    # find the last occurrence of '[' in description_long
+    reference_start_idx = description_long.rfind('[')
+    description = description_long[1:reference_start_idx-1-2]
+    term_map['def'] = [description]
+    # id_string example: PMID:14755292
+    id_string = description_long[reference_start_idx+1:-1]
+    if len(id_string)>0:
+        id_string_list = id_string.split(', ')
+        term_map['references'] = id_string_list
+
+    schema_piece_list = []
+    keyList = ['id', 'def', 'references', 'parentClassName']
+
+    id_string = term_map['id'][0]
+    dcid = id_to_class_name[id_string]
+
+    current_line = 'Node: dcid:' + dcid
+    schema_piece_list.append(current_line)
+
+    if id_string in interaction_type_id_set:
+        current_line = 'typeOf: dcs:InteractionTypeEnum'
+    elif id_string in detection_method_id_set:
+        current_line = 'typeOf: dcs:InteractionDetectionMethodEnum'
+    elif id_string in interaction_source_id_set:
+        current_line = 'typeOf: dcs:InteractionSourceEnum'
     else:
         return None
-        
-    termDic['parentClassName'] = [id2className[node.value] for node in id2node[idString].parentList] 
-    schemaPieceList.append(curLine)
-    
-    curLine = 'name: "' + dcid + '"'
-    schemaPieceList.append(curLine)
+
+    term_map['parentClassName'] = [id_to_class_name[node.value] for node
+                                   in id_to_node[id_string].parent_list]
+    schema_piece_list.append(current_line)
+
+    current_line = 'name: "' + dcid + '"'
+    schema_piece_list.append(current_line)
 
     '''
-    termDic:
+    term_map:
     id:  ['MI:0001']
     name:  ['interaction detection method']
     def:  ['Method to determine the interaction']
@@ -201,51 +212,52 @@ def get_schema_from_text(term, id2node, newSourceMap, id2className,interactionTy
     references:  ['PMID:14755292']
     parentClassName:  ['MolecularInteraction']
     '''
-    
-    for key in keyList:
-            
-        if key=='def' and termDic[key]:
-            curLine = 'description: "' + termDic[key][0][0].upper() + termDic[key][0][1:] +'"'
-            schemaPieceList.append(curLine)
 
-        elif key=='references' and termDic[key]:
-            itemList = []
-            for i in range(len(termDic[key])):
-                if termDic[key][i]!='': 
-                    curLine, newReferenceMap = get_references(termDic[key][i])
-                    if curLine:
-                        schemaPieceList.append(curLine)
-                    if newReferenceMap:
-                        newSourceMap[key] = newSourceMap[key].update(newReferenceMap)
-            
-        elif key=='id' and termDic[key]:       
-            curLine = 'psimiID: "' + termDic[key][0] + '"'
-            schemaPieceList.append(curLine)
-            
-        elif key=='parentClassName' and termDic[key]:
-            itemList = []
-            for i in range(len(termDic[key])):
-                itemList.append( 'dcs:' + termDic[key][i])
-            curLine = 'specializationOf: ' +  ','.join(itemList)
-            schemaPieceList.append(curLine)
-    
-    curLine = 'descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"'
-    schemaPieceList.append(curLine)
-    
-    return '\n'.join(schemaPieceList), termDic['id'][0], dcid, newSourceMap
+    for key in keyList:
+
+        if key == 'def' and term_map[key]:
+            current_line = 'description: "' + term_map[key][0][0].upper() + term_map[key][0][1:] +'"'
+            schema_piece_list.append(current_line)
+
+        elif key == 'references' and term_map[key]:
+            for i in range(len(term_map[key])):
+                if term_map[key][i]!='':
+                    current_line, new_reference_map = get_references(term_map[key][i])
+                    if current_line:
+                        schema_piece_list.append(current_line)
+                    if new_reference_map:
+                        new_source_map[key] = new_source_map[key].update(new_reference_map)
+
+        elif key == 'id' and term_map[key]:
+            current_line = 'psimiID: "' + term_map[key][0] + '"'
+            schema_piece_list.append(current_line)
+
+        elif key == 'parentClassName' and term_map[key]:
+            item_list = []
+            for i in range(len(term_map[key])):
+                item_list.append('dcs:' + term_map[key][i])
+            current_line = 'specializationOf: ' +  ','.join(item_list)
+            schema_piece_list.append(current_line)
+
+    current_line = 'descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"'
+    schema_piece_list.append(current_line)
+
+    return '\n'.join(schema_piece_list), term_map['id'][0], dcid, new_source_map
 
 
 def main(argv):
-    dbFile = argv[0]
-    with open(dbFile, 'r') as fp:
+    database_file = argv[0]
+    with open(database_file, 'r') as fp:
         file = fp.read()
     # clip exists in dcs already. Substitute with ClipInteraction
     file = file.replace('name: clip\ndef', 'name: clip interaction\ndef')
-    fileTerms = file.split('\n\n')[1:]
+    file_terms = file.split('\n\n')[1:]
+    file_terms = [term_text.split('\n') for term_text in file_terms 
+                  if term_text.startswith('[Term]')]
 
     '''
     Parsing Steps:
-    1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used 
+    1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used
     to access nodes as well.
     2. save all the tree nodes in the subtree of the three nodes into three set:
         id: MI:0001 name: interaction detection method
@@ -253,79 +265,83 @@ def main(argv):
         id: MI:0444 name: database citation
     3. save the nodes in the three sets to the corresponding enumearation schema
     '''
-    
-    id2node = {}
-    id2className = {}
-    # build nodes and create the id2node dictionary at first iteration
-    for termText in fileTerms:
-        if not termText.startswith('[Term]'):
-            continue
-        # idString example: "MI:0000"
-        idString = termText.split('\n')[1].split(' ')[1]
-        className = get_class_name(termText.split('\n')[2].split(': ')[1])
-        id2className[idString] = className
-        id2node[idString] = Node(idString)
+
+    id_to_node = {}
+    id_to_class_name = {}
+
+    # build nodes and create the id_to_node dictionary at first iteration
+    for term_list in file_terms:
+        # id_string example: "MI:0000"
+        id_string = term_list[1].split(' ')[1]
+        class_name = get_class_name(term_list[2].split(': ')[1])
+        id_to_class_name[id_string] = class_name
+        id_to_node[id_string] = Node(id_string)
 
     # build the parent-child relation at the second iteration
-    for termText in fileTerms:
-        if not termText.startswith('[Term]'):
-            continue
-        termList = termText.split('\n')
-        idString = termList[1].split(' ')[1]
-        parentIdList = get_parent_id_list(termList[1:])
-        for pId in parentIdList:
-            id2node[pId].childList.append(id2node[idString])
-            id2node[idString].parentList.append(id2node[pId])
+    for term_list in file_terms:
+        id_string = term_list[1].split(' ')[1]
+        parent_id_list = get_parent_id_list(term_list[1:])
+        for parent_id in parent_id_list:
+            id_to_node[parent_id].child_list.append(id_to_node[id_string])
+            id_to_node[id_string].parent_list.append(id_to_node[parent_id])
 
-    # get the idStrings for the three target set
-    dfsCaller = GetTreeValues()
-    interactionTypeIdSet = dfsCaller.get_subset_id(id2node['MI:0001']) # root id: MI:0001 
-    detectionMethodIdSet = dfsCaller.get_subset_id(id2node['MI:0190'])# root id: MI:0190
-    interactionSourceIdset = dfsCaller.get_subset_id(id2node['MI:0444']) # root id: MI:0444
+    # get the id_strings for the three target set
+    dfs_caller = TreeBuilder(id_to_node)
 
-    # delete root node value from the set
-    interactionTypeIdSet.remove('MI:0001')
-    detectionMethodIdSet.remove('MI:0190')
-    interactionSourceIdset.remove('MI:0444')
+    INTERACTION_TYPE_ROOT = 'MI:0001'
+    DETECTION_METHOD_ROOT = 'MI:0190'
+    INTERACTION_SOURCE_ROOT = 'MI:0444'
 
-    setList = [interactionTypeIdSet, detectionMethodIdSet,interactionSourceIdset]
-    print('The schema amount of each Enum: interactionType, detectionMethod,interactionSource are ')
-    print([len(s) for s in setList])
+    interaction_type_id_set = dfs_caller.get_subset_id(INTERACTION_TYPE_ROOT) # root id: MI:0001
+    detection_method_id_set = dfs_caller.get_subset_id(DETECTION_METHOD_ROOT)# root id: MI:0190
+    interaction_source_id_set = dfs_caller.get_subset_id(INTERACTION_SOURCE_ROOT) # root id: MI:0444
 
-    schemaList = []
-    psimi2dcid = []
-    newSourceMap = {'references':{}}
-    for termText in fileTerms:
-        if not termText.startswith('[Term]'):
-            continue
-        term = termText.split('\n')[1:]
-        schemaRes = get_schema_from_text(term,id2node,newSourceMap,id2className,
-                                      interactionTypeIdSet,detectionMethodIdSet,interactionSourceIdset)
+    set_list = [interaction_type_id_set, detection_method_id_set,interaction_source_id_set]
+
+    schema_list = []
+    psimi_to_dcid = []
+
+    '''
+    if the updated database file has reference source other than "PMID","pmid",
+    "GO","RESID","doi", save one example to new_source_map and write to BioEBINewSource.txt
+    '''
+    new_source_map = {'references':{}}
+
+    for term_list in file_terms:
+        term = term_list[1:]
+        schemaRes = get_schema_from_text(term,id_to_node,new_source_map,id_to_class_name,
+                                      interaction_type_id_set,detection_method_id_set,interaction_source_id_set)
         if schemaRes:
-            schema, psimi, dcid, newSourceMap  = schemaRes
-            schemaList.append(schema)
-            psimi2dcid.append(psimi+': ' + dcid)
-    schemaEnumText = '\n\n'.join(schemaList)
+            schema, psimi, dcid, new_source_map  = schemaRes
+            schema_list.append(schema)
+            psimi_to_dcid.append(psimi+': ' + dcid)
+
+    schema_enum_text = '\n\n'.join(schema_list)
     schema = '# This schema file is generated by parseEBI.py. Please don\'t edit.\n'
-    schemaEnumText = schema + schemaEnumText
+    schema_enum_text = schema + schema_enum_text
 
     with open('BioOntologySchemaEnum.mcf','w') as fp:
-        fp.write(schemaEnumText)
-    with open('psimi2dcid.txt','w') as fp:
-        fp.write('\n'.join(psimi2dcid))
-        
-    writeList = []
-    for sourceType in newSourceMap:
-        if not newSourceMap[sourceType]: continue
-        writeList.append(sourceType)
-        for source in newSourceMap[sourceType]:
-            line = source + ': ' + newSourceMap[sourceType][source]
-            writeList.append(sourceType)
-        writeList.append('\n')
-    if writeList:
+        fp.write(schema_enum_text)
+    with open('psimi2dcid2.txt','w') as fp:
+        fp.write('\n'.join(psimi_to_dcid))
+
+    write_list = []
+    for source_type in new_source_map:
+        if not new_source_map[source_type]: continue
+        write_list.append(source_type)
+        for source in new_source_map[source_type]:
+            line = source + ': ' + new_source_map[source_type][source]
+            write_list.append(source_type)
+        write_list.append('\n')
+    if write_list:
         with open('BioEBINewSource.txt','w') as fp:
-            fp.write('\n'.join(writeList))
+            fp.write('\n'.join(write_list))
+    print('Schema has been sucessfully written to BioOntologySchemaEnum.mcf')
+    len_string = ','.join([str(len(s)) for s in set_list])
+    print('The amount of each Enum:\ninteractionType, detectionMethod,interactionSource: '
+         + len_string)
 
 
 if __name__ == '__main__':
     main(sys.argv[1:])
+

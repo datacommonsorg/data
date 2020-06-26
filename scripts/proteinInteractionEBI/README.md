@@ -16,16 +16,10 @@ If new reference sources which are not properties in dcs occur, 'BioEBINewSource
 ## Database format
 
 Data is available for download from
-http://psidev.info/groups/controlled-vocabularies. It can also be browsed at https://www.ebi.ac.uk/ols/ontologies/mi. 
+https://www.ebi.ac.uk/ols/ontologies/mi. It refers to http://psidev.info/groups/controlled-vocabularies. 
 The ontologies dictionary has a tree structure. Note here that one parent node can have multiple child nodes and one child node can have multiple parent nodes as well.
 
-![Tree Structure](./graph/ontologyTree.png)
-
-![Multiple Parent Node](./graph/multipleParent.png)
-
 The original data file (mi.owl) uses "is_a" and "part_of" as the relation property to connect the child node to the parent node, however we don't distinguish these two and a property "specializationOf" is used for the child-parent connection.
-
-![Original Data Sample](./graph/originalDataSample.png)
 
 We make each term as an enumeration node of three subtrees with root nodes as: "database citation", "interaction detection method", and "interaction type". There are two main concerns that we didn't import all the nodes. First, we focus on the ontologies in protein-protein interaction and these three categories are the most commonly used. Secondly, to avoid general terms from another ontology from polluting the Data Commons schema. 
 
@@ -59,4 +53,4 @@ goID, residID, psimiID
 
 ### Reference
 
-http://psidev.info/groups/controlled-vocabularies
+HUPO Proteomics Standards Initiative. http://psidev.info/groups/controlled-vocabularies
