@@ -30,35 +30,35 @@ import re
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None # default='warn'
 
-US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas',
-             'California', 'Colorado', 'Connecticut', 'Delaware',
-             'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
-             'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-             'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-             'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
-             'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-             'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
-             'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
-             'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-             'West Virginia', 'Wisconsin', 'Wyoming']
-
-
 class StateGDPDataLoader:
-    """Pulls GDP state data from BEA.
+    """Pulls per-state GDP data from the BEA.
 
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
-    FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
+    _US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+                  'Colorado', 'Connecticut', 'Delaware', 'District of Columbia',
+                  'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana',
+                  'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
+                  'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+                  'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+                  'New Jersey', 'New Mexico', 'New York', 'North Carolina',
+                  'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+                  'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+                  'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+                  'West Virginia', 'Wisconsin', 'Wyoming']
+    _ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
+    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
 
     def __init__(self):
-        """Downloads the data, cleans it and stores it in instance DF."""
+        """Downloads the data, cleans it and stores it in instance data frame.
+
+        Returns
+        """
         df = self.download_data()
 
-        # Filters out columns that are not US States (e.g. New England).
-        # TODO(fpernice): Add non-state entities.
-        df = df[df['GeoName'].isin(US_STATES)]
+        # Filters out columns that are not US states (e.g. New England).
+        df = df[df['GeoName'].isin(self._US_STATES)]
 
         # Gets columns that represent quarters, e.g. 2015:Q2, by matching
         # against a regular expression.
@@ -77,7 +77,7 @@ class StateGDPDataLoader:
         }
 
         def date_to_obs_date(date):
-            """Converts date format e.g. 2005:Q3 to e.g. 2005-09."""
+            """Converts date format, e.g., "2005:Q3" to "2005-09"."""
             return date[:4] + "-" + qtr_month_map[date[5:]]
         df['Quarter'] = df['Quarter'].apply(date_to_obs_date)
 
@@ -90,7 +90,7 @@ class StateGDPDataLoader:
             return "geoId/" + fips_code[:2]
         df['GeoId'] = df['GeoFIPS'].apply(convert_geoid)
 
-        # Set the instance DF to have one row per geoId/Quarter pair, with
+        # Set the instance DF to have one row per geoId/quarter pair, with
         # different measurement methods as columns. This facilitates the
         # design of TMCFs.
         self.df = df[df['Unit'] == "Millions of chained 2012 dollars"]
@@ -103,9 +103,11 @@ class StateGDPDataLoader:
         self.df = self.df.drop(["GeoFIPS", "Unit", "value"], axis=1)
 
     def download_data(self):
-        """Downloads zip, extracts the desired CSV, and puts it into a DF."""
+        """Downloads ZIP file, extracts the desired CSV, and puts it into a data
+        frame.
+        """
         # Open zip file from link.
-        resp = urlopen(self.ZIP_LINK)
+        resp = urlopen(self._ZIP_LINK)
 
         # Read the file, interpret it as bytes, and create a ZipFile instance
         # from it for easy handling.
@@ -114,18 +116,17 @@ class StateGDPDataLoader:
         # Open the specific desired file (CSV) from the folder, and decode it.
         # This results in a string representation of the file. Interpret that
         # as a CSV, and read it into a DF.
-        data = zip_file.open(self.FILE).read().decode('utf-8')
+        data = zip_file.open(self._STATE_QUARTERLY_GDP_FILE).read()
+        data = data.decode('utf-8')
         data = list(csv.reader(data.splitlines()))
-        df = pd.DataFrame(data[1:], columns=data[0])
-        return df
+        return pd.DataFrame(data[1:], columns=data[0])
 
     def save_csv(self, filename='states_gdp.csv'):
-        """Saves instance DF to specified csv file."""
+        """Saves instance data frame to specified CSV file."""
         self.df.to_csv(filename)
 
 
-def main(argv):
-    del argv # unused
+def main():
     loader = StateGDPDataLoader()
     loader.save_csv()
 
