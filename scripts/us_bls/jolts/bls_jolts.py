@@ -129,26 +129,25 @@ def generate_cleaned_dataframe():
   total_other_seps = web_to_pandas("https://download.bls.gov/pub/time.series/jt/jt.data.7.OtherSeparations", sep="\t", expected_cols=expected_job_columns)
 
   # Additional information about each dataframe
-  # Tuple Format: Statistical Variable name, Stat Var population, Stat Var Turnover Type If Relevant, Dataframe for Stat Var 
+  # Tuple Format: Statistical Variable name, Stat Var population, Stat Var Job Change Type If Relevant, Dataframe for Stat Var 
   schema_mapping = [
-    ("NumJobOpening", "JobPosting", "", "", job_openings),
-    ("NumJobHire", "Worker", "Hired", "", job_hires),
-    ("Turnover", "Worker", "Separated", "", total_seps),
-    ("NumVoluntarySeparation", "Worker", "Separated", "VoluntarySeparation", total_quits),
-    ("NumLayoff", "Worker", "Separated", "Layoff", total_layoffs),
-    ("NumOtherSeparation", "Worker", "Separated", "OtherSeparation", total_other_seps),
+    ("NumJobOpening", "schema:JobPosting", "", job_openings),
+    ("NumJobHire", "dcs:BLSWorker", "Hire", job_hires),
+    ("NumSeparation", "dcs:BLSWorker", "Separation", total_seps),
+    ("NumVoluntarySeparation", "dcs:BLSWorker", "VoluntarySeparation", total_quits),
+    ("NumInvoluntarySeparation", "dcs:BLSWorker", "InvoluntarySeparation", total_layoffs),
+    ("NumOtherSeparation", "dcs:BLSWorker", "OtherSeparation", total_other_seps),
   ]
 
   # Combine datasets into a single dataframe including origin of data
   jolts_df = pd.DataFrame()
   columns_to_keep = ['series_id', 'year', 'period', 'value']
 
-  for schema_name, population_type, job_change_status, separation_type, df in schema_mapping:
+  for schema_name, population_type, job_change_event, df in schema_mapping:
     df = df.loc[:, columns_to_keep]
     df['statistical_variable'] = schema_name
-    df['job_change_status'] = job_change_status
+    df['job_change_event'] = job_change_event
     df['population_type'] = population_type
-    df['separation_type'] = separation_type
     jolts_df = jolts_df.append(df)
 
   # Drop non-monthly data
@@ -166,10 +165,10 @@ def generate_cleaned_dataframe():
   jolts_df = jolts_df.merge(series_desc[['industry_code', 'region_code', 'seasonal', 'ratelevel_code']], left_on=["series_id"], right_index=True)
 
   # Drop rate data
-  jolts_df = jolts_df.drop(jolts_df.query("ratelevel_code != 'L'").index)
+  jolts_df = jolts_df.query("ratelevel_code == 'L'")
 
   # Drop non-national data
-  jolts_df = jolts_df.drop(jolts_df.query("region_code != '00'").index)
+  jolts_df = jolts_df.query("region_code == '00'")
 
   # Map industries
   def jolts_code_map(row):
@@ -215,13 +214,57 @@ def create_bls_nodes():
   This method creates the statistical variables file and writes to it.
   """
 
+  required_new_nodes = """
+Node: dcid:jobChangeEvent
+name: "jobChangeEvent"
+typeOf: schema:Property
+domain: schema:Person
+range: dcs:JobChangeEventEnum
+
+Node: dcid:JobChangeEventEnum
+name: "JobChangeEventEnum"
+description: "Describes different job change events that may happen to workers" 
+typeOf: dcs:Class
+subClassOf: Enumeration
+
+Node: dcid:Hired
+name: "Hired"
+description: "Describes a worker that was hired to a company"
+typeOf: dcid:JobChangeEventEnum
+
+Node: dcid:Separated
+name: "Separated"
+description: "Describes a worker that was separated from a company"
+typeOf: dcid:JobChangeEventEnum
+
+Node: dcid:VoluntarySeparation
+name: "VoluntarySeparation"
+description: "Describes a worker that voluntarily separated from a company"
+typeOf: dcid:JobChangeEventEnum
+specializationOf: dcs:Separated
+
+Node: dcid:InvoluntarySeparation
+name: "InvoluntarySeparation"
+description: "Describes a worker that involuntarily separated from a company"
+typeOf: dcid:JobChangeEventEnum
+specializationOf: dcs:Separated
+
+Node: dcid:OtherSeparation
+name: "OtherSeparation"
+description: "Describes a worker that separated from a company for other reasons"
+typeOf: dcid:JobChangeEventEnum
+specializationOf: dcs:Separated
+  """
+
   template_bls = """
-  Node: dcid:NAICS/JOLTS_{JOLTS_CODE}
-  typeOf: NAICSEnum
-  name: {JOLTS_NAME}
+Node: dcid:NAICS/JOLTS_{JOLTS_CODE}
+typeOf: NAICSEnum
+name: {JOLTS_NAME}
   """
 
   with open(STATISTICAL_VARIABLE_FILE, "w+", newline="") as f_out:
+    f_out.write(required_new_nodes)
+
     for _, new_code in CODE_MAPPINGS.items():
       if ":" in new_code:
         jolts_code, jolts_name = new_code.split(":")
@@ -230,7 +273,7 @@ def create_bls_nodes():
 def create_statistical_variables(jolts_df, schema_mapping):
   """ Creates Statistical Variable nodes.
 
-    A new statistical industry is needed for each of the 6 job variables and for every industry
+    A new statistical industry is needed Homocidefor each of the 6 job variables and for every industry
     The industry codes may be either NAICS or BLS_JOLTS aggregations. The schema_mapping is used 
     for additional information for each of the 6 job variables. These new variables are written
     to the statistical variables mcf file.
@@ -244,11 +287,10 @@ def create_statistical_variables(jolts_df, schema_mapping):
   Node: dcid:{STAT_CLASS}_NAICS_{INDUSTRY}
   typeOf: StatisticalVariable
   populationType: {POPULATION}
-  jobChangeStatus: dcs:{JOB_CHANGE_STATUS}
+  jobChangeEvent: dcs:{JOB_CHANGE_EVENT}
   statType: dcs:measuredValue
   measuredProperty: dcs:count
   naics: dcid:NAICS/{INDUSTRY}
-  turnoverType: dcs:{TURNOVER_TYPE}
   """
 
   # Map industry and seasonal adjustment to statistical variable name
@@ -256,7 +298,7 @@ def create_statistical_variables(jolts_df, schema_mapping):
 
   # Output the schema mapping to a new file
   with open(STATISTICAL_VARIABLE_FILE, "a+", newline="") as f_out:
-    for schema_name, pop_type, job_change_status, sep_type, _ in schema_mapping:
+    for schema_name, pop_type, job_change_event, _ in schema_mapping:
 
         unique_industries = list(jolts_df['industry_code'].unique())
 
@@ -266,11 +308,8 @@ def create_statistical_variables(jolts_df, schema_mapping):
             stat_var_schema = template_stat_var
 
             # Remove separation type entry if not includes
-            if sep_type == "":
-              stat_var_schema = stat_var_schema.replace("turnoverType: dcs:{TURNOVER_TYPE}", "")
-
-            if job_change_status == "":
-              stat_var_schema = stat_var_schema.replace("jobChangeStatus: dcs:{JOB_CHANGE_STATUS}", "")
+            if job_change_event == "":
+              stat_var_schema = stat_var_schema.replace("jobChangeEvent: dcs:{JOB_CHANGE_EVENT}\n", "")
 
             # Replace all other fields
             stat_var_schema = stat_var_schema.replace("{STAT_CLASS}", schema_name)   \
@@ -278,8 +317,7 @@ def create_statistical_variables(jolts_df, schema_mapping):
                                             .replace("{ADJUSTMENT}", adjusted_dcid_map)   \
                                             .replace("{BLS_ADJUSTMENT}", adjusted_schema)   \
                                             .replace("{POPULATION}", pop_type)      \
-                                            .replace("{JOB_CHANGE_STATUS}", job_change_status)      \
-                                            .replace("{TURNOVER_TYPE}", sep_type)
+                                            .replace("{JOB_CHANGE_EVENT}", job_change_event)  
 
           f_out.write(stat_var_schema)
 
