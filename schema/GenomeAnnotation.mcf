@@ -251,14 +251,14 @@ description: "Recorded transcript. UCSC Gene ID."
 Node: dcid:ncbiTaxonID
 name: "ncbiTaxonID"
 typeOf: schema:Property
-rangeIncludes: schema:Number
-domainIncludes: dcs:Gene
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene,dcs:Protein
 description: "NCBI Taxonomy database identifier."
 
 Node: dcid:ncbiGeneID
 name: "ncbiGeneID"
 typeOf: schema:Property
-rangeIncludes: schema:Number
+rangeIncludes: schema:Text
 domainIncludes: dcs:Gene,dcs:GeneticVariant
 description: "NCBI Entrez Gene database identifier."
 
@@ -275,6 +275,13 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Gene,dcs:GeneticVariant
 description: "OMIM database identifier."
+
+Node: dcid:mondoID
+name: "mondoID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GeneticVariant
+description: "MONDO database identifier."
 
 Node: dcid:hgncID
 name: "hgncID"
@@ -883,4 +890,3 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:GeneticVariantGeneAssociation
 description: "An ID denoting a unique gene and genetic variant association within the GTEx database."
-
