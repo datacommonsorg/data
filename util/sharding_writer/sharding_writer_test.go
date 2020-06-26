@@ -35,7 +35,7 @@ const (
 	// rows when repeated line after line.
 	baseString = `abcdef_ghijkl,mnopqr?stuvwx+yz0123-456789*0ABCDE/FGHIJK:LMNOPQ;RSTUVWXYZ.`
 
-	// TODO(roberts): Add in a test string that includes varying byte width
+	// TODO(rsned): Add in a test string that includes varying byte width
 	// UTF-8 characters such as:
 	//
 	// 2 byte utf-8
@@ -115,10 +115,10 @@ func TestGenerateRawString(t *testing.T) {
 	}
 }
 
-// generateLines generates the given number of lines of text as 61 or 47 character
-// long lines in a regular fashion.
+// generateLines generates the given number of lines of text using varying line
+// lengths to reduce regularity in the generated data.
 func generateLines(count int64) string {
-	// short circuit requests for negative or 0.
+	// Short circuit requests for negative or 0.
 	if count < 1 {
 		return ""
 	}
@@ -127,33 +127,24 @@ func generateLines(count int64) string {
 	var start, end int64
 	var lenBase = int64(len(baseString))
 
-	for i := int64(0); i < count; i++ {
-		// 61 char long
-		if i%2 == 0 {
-			end = start + 61
-			// if we dont have to wrap, write it out and move on.
-			if end < lenBase {
+	// Choose some prime number length lines to reduce convenient line
+	// breaks on round and even numbers.
+	const (
+		shortLine int64 = 47
+		medLine   int64 = 61
+		longLine  int64 = 79
+	)
 
-				buf.WriteString(baseString[start:end])
-				buf.WriteString("\n")
-				start = end
-				continue
-			}
-			// We need to wrap. Write to the end of the string.
-			buf.WriteString(baseString[start:])
-			// Jump back to the start.
-			start = 0
-			// The end is the remainder from dividing by length.
-			end = end % lenBase
-			buf.WriteString(baseString[start:end])
-			buf.WriteString("\n")
-			start = end
-			continue
+	for i := int64(0); i < count; i++ {
+		lineLength := shortLine
+		if i%2 == 0 {
+			lineLength = medLine
+		} else if i%7 == 0 {
+			lineLength = longLine
 		}
 
-		// else 47 char long
-		end = start + 47
-		// if we dont have to wrap, write it out and move on.
+		end = start + lineLength
+		// If we don't have to wrap, write it out and move on.
 		if end < lenBase {
 			buf.WriteString(baseString[start:end])
 			buf.WriteString("\n")
@@ -169,8 +160,6 @@ func generateLines(count int64) string {
 		buf.WriteString(baseString[start:end])
 		buf.WriteString("\n")
 		start = end
-		continue
-
 	}
 	return buf.String()
 }
@@ -228,14 +217,14 @@ YZ.abcdef_ghijkl,mnopqr?stuvwx+yz0123-456789*0ABCDE/FGHIJK:LM
 // generateMCF generates a series of MCF definitions with a blank line separator
 // between each entry.
 func generateMCF(count int64) string {
-	// short circuit requests for negative or 0.
+	// Short circuit requests for negative or 0.
 	if count < 1 {
 		return ""
 	}
 
 	var buf bytes.Buffer
 
-	// TODO: generate the MCF
+	// TODO(rsned): generate the MCF
 
 	return buf.String()
 }
@@ -457,13 +446,13 @@ func TestWriter(t *testing.T) {
 		n, err := io.WriteString(w, data)
 		if err != nil {
 			t.Errorf("error writing to the sharding writer: %v", err)
-			// move on to next case since the remaining checks wont work
+			// Move on to next case since the remaining checks won't work.
 			continue
 		}
 		if n != len(data) {
 			t.Errorf("num bytes written doesn't match the input. wrote %d, had %d",
 				n, len(data))
-			// move on to next case since the remaining checks wont work
+			// Move on to next case since the remaining checks won't work.
 			continue
 		}
 
