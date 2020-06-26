@@ -15235,7 +15235,7 @@ range: dcs:JobChangeEventEnum
 
 Node: dcid:JobChangeEventEnum
 name: "JobChangeEventEnum"
-description: "Describes different job change events that may happen to workers." 
+description: "Describes different job change events that may happen to workers."
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 
