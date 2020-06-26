@@ -273,7 +273,7 @@ name: {JOLTS_NAME}
 def create_statistical_variables(jolts_df, schema_mapping):
   """ Creates Statistical Variable nodes.
 
-    A new statistical industry is needed Homocidefor each of the 6 job variables and for every industry
+    A new statistical industry is needed for each of the 6 job variables and for every industry
     The industry codes may be either NAICS or BLS_JOLTS aggregations. The schema_mapping is used 
     for additional information for each of the 6 job variables. These new variables are written
     to the statistical variables mcf file.
