@@ -1,8 +1,189 @@
-Node: E:states_industry_gdp->E1
+Node: E:states_industry_gdp_11->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:InflationAdjustedGDP
-observationAbout: C:states_gdp->GeoId
-observationDate: C:states_gdp->Quarter
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_11
+observationAbout: C:states_industry_gdp_11->GeoId
+observationDate: C:states_industry_gdp_11->Quarter
 observationPeriod: "P3M"
-value: C:states_gdp->millions_of_chained_2012_dollars
-unit: "Millions of chained 2012 dollars"
+value: C:states_industry_gdp_11->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_21->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_21
+observationAbout: C:states_industry_gdp_21->GeoId
+observationDate: C:states_industry_gdp_21->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_21->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_22->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_22
+observationAbout: C:states_industry_gdp_22->GeoId
+observationDate: C:states_industry_gdp_22->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_22->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_23->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_23
+observationAbout: C:states_industry_gdp_23->GeoId
+observationDate: C:states_industry_gdp_23->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_23->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_31_33->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_31_33
+observationAbout: C:states_industry_gdp_31_33->GeoId
+observationDate: C:states_industry_gdp_31_33->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_31_33->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_JOLTS_320000->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_JOLTS_320000
+observationAbout: C:states_industry_gdp_JOLTS_320000->GeoId
+observationDate: C:states_industry_gdp_JOLTS_320000->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_JOLTS_320000->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_JOLTS_340000->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_JOLTS_340000
+observationAbout: C:states_industry_gdp_JOLTS_340000->GeoId
+observationDate: C:states_industry_gdp_JOLTS_340000->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_JOLTS_340000->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_42->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_42
+observationAbout: C:states_industry_gdp_42->GeoId
+observationDate: C:states_industry_gdp_42->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_42->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_44_45->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_44_45
+observationAbout: C:states_industry_gdp_44_45->GeoId
+observationDate: C:states_industry_gdp_44_45->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_44_45->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_48_49->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_48_49
+observationAbout: C:states_industry_gdp_48_49->GeoId
+observationDate: C:states_industry_gdp_48_49->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_48_49->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_51->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_51
+observationAbout: C:states_industry_gdp_51->GeoId
+observationDate: C:states_industry_gdp_51->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_51->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_52->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_52
+observationAbout: C:states_industry_gdp_52->GeoId
+observationDate: C:states_industry_gdp_52->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_52->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_53->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_53
+observationAbout: C:states_industry_gdp_53->GeoId
+observationDate: C:states_industry_gdp_53->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_53->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_54->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_54
+observationAbout: C:states_industry_gdp_54->GeoId
+observationDate: C:states_industry_gdp_54->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_54->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_55->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_55
+observationAbout: C:states_industry_gdp_55->GeoId
+observationDate: C:states_industry_gdp_55->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_55->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_56->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_56
+observationAbout: C:states_industry_gdp_56->GeoId
+observationDate: C:states_industry_gdp_56->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_56->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_61->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_61
+observationAbout: C:states_industry_gdp_61->GeoId
+observationDate: C:states_industry_gdp_61->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_61->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_62->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_62
+observationAbout: C:states_industry_gdp_62->GeoId
+observationDate: C:states_industry_gdp_62->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_62->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_71->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_71
+observationAbout: C:states_industry_gdp_71->GeoId
+observationDate: C:states_industry_gdp_71->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_71->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_72->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_72
+observationAbout: C:states_industry_gdp_72->GeoId
+observationDate: C:states_industry_gdp_72->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_72->value
+unit: "Current USD"
+
+Node: E:states_industry_gdp_81->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_81
+observationAbout: C:states_industry_gdp_81->GeoId
+observationDate: C:states_industry_gdp_81->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp_81->value
+unit: "Current USD"
+

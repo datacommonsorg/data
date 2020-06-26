@@ -126,31 +126,42 @@ class StateGDPIndustryDataLoader:
         df = pd.DataFrame(data[1:], columns=data[0])
         return df
 
-    def save_csv(self, filename='states_gdp.csv'):
-        """Saves instance DF to specified csv file."""
-        self.df.to_csv(filename)
-
-    def generate_MCF(self):
-        """Generates MCF StatVars for each industry code."""
-        temp = """
-        Node: dcid:USSateQuarterlyIndustryGDP_NAICS_{naics}
-        typeOf: dcs:StatisticalVariable
-        populationType:EconomicActivity
-        activitySource: dcs:GrossDomesticProduction
-        measuredProperty: dcs:amount
-        measurementQualifier: dcs:Nominal
-        naics: dcid:NAICS/{naics}
+    def save_csv(self, prefix='states_industry_gdp'):
+        """Splits instance data frame into multiple CSV files, one per industry
+        code. This facilitates TMCF design.
         """
-        with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f:
-            for naics_code in self.df['NAICS'].unique():
-                mcf_f.write(temp.format(naics=naics_code))
+        for naics_code, naics_df in self.df.groupby("NAICS"):
+            naics_df.to_csv(prefix + f"_{naics_code}.csv")
 
+    def generate_MCF_TMCF(self):
+        """Generates MCF StatVars for each industry code."""
+        mcf_temp = ('Node: dcid:USSateQuarterlyIndustryGDP_NAICS_{naics}\n'
+                    'typeOf: dcs:StatisticalVariable\n'
+                    'populationType: dcs:EconomicActivity\n'
+                    'activitySource: dcs:GrossDomesticProduction\n'
+                    'measuredProperty: dcs:amount\n'
+                    'measurementQualifier: dcs:Nominal\n'
+                    'naics: dcid:NAICS/{naics}\n\n')
+        tmcf_temp = ('Node: E:states_industry_gdp_{naics}->E1\n'
+                     'typeOf: dcs:StatVarObservation\n'
+                     'variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_{naics}\n'
+                     'observationAbout: C:states_industry_gdp_{naics}->GeoId\n'
+                     'observationDate: C:states_industry_gdp_{naics}->Quarter\n'
+                     'observationPeriod: "P3M"\n'
+                     'value: C:states_industry_gdp_{naics}->value\n'
+                     'unit: "Current USD"\n\n')
+
+        with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f, \
+             open('states_industry_gdp.tmcf', 'w') as tmcf_f:
+            for naics_code in self.df['NAICS'].unique():
+                mcf_f.write(mcf_temp.format(naics=naics_code))
+                tmcf_f.write(tmcf_temp.format(naics=naics_code))
 
 def main(argv):
     del argv # unused
     loader = StateGDPIndustryDataLoader()
-    loader.save_csv(filename="states_industry_gdp.csv")
-    loader.generate_MCF()
+    loader.save_csv()
+    loader.generate_MCF_TMCF()
 
 
 if __name__ == '__main__':
