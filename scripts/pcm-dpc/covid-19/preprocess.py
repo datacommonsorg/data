@@ -86,14 +86,20 @@ class pcm_dpc_regions(pcm_dpc):
             'CumulativeTestsPerformed', 'CumulativeTestedPeople']
     
     def setLocation(self):
-        self.data['Location'] = self.data['RegionCode'].astype(str).str.zfill(2)
+        regionCodePath = "https://raw.githubusercontent.com/qlj-lijuan/data/master/scripts/istat/geos/cleaned/ISTAT_region.csv"
+        regionCode = pd.read_csv(regionCodePath)[['Region Code', 'NUTS2']]
+        codeDict = regionCode.set_index('Region Code').to_dict()['NUTS2']
+        # code 21 and 22 is missing from the dict above, add manually here.
+        codeDict[21] = 'nuts/ITH1'
+        codeDict[22] = 'nuts/ITH2'
+        self.data['Location'] = self.data['RegionCode'].map(codeDict)
         self.data = self.data.drop(columns = ['State', 'RegionCode', 'RegionName', \
-            'Latitude', 'Longitude'])
-    
+        'Latitude', 'Longitude'])
+        
     def geoTemplate(self):
         Geo_TEMPLATE = 'Node: E:pcm-dpc->E0\n' +\
                     'typeOf: dcs:EurostatNUTS2\n' +\
-                    'istatId: C:pcm-dpc->Location\n\n'
+                    'dcid: C:pcm-dpc->Location\n\n'
         with open(self.name + '.tmcf', 'w') as f_out:
             f_out.write(Geo_TEMPLATE)
             
@@ -105,22 +111,23 @@ class pcm_dpc_provinces(pcm_dpc):
         self.StatVar = ['CumulativePositiveCase']
     
     def setLocation(self):
+        provinceCodePath = "https://raw.githubusercontent.com/qlj-lijuan/data/master/scripts/istat/geos/cleaned/ISTAT_province.csv"
+        provinceCode = pd.read_csv(provinceCodePath)[['Province Abbreviation', 'NUTS3']]
+        provinceDict = provinceCode.set_index('Province Abbreviation').to_dict()['NUTS3']
         # drop the data whose location is "being defined/updated", i.e. ProvinceCode > 111
-        self.data = self.data[self.data['ProvinceCode']<=111].reset_index()
-        self.data['Location'] = self.data['ProvinceCode'].astype(str).str.zfill(3)
+        # location Sud Sardegna (Province Code = 111) is defined as a unique
+        # area in DataCommons, skip for now.
+        self.data = self.data[self.data['ProvinceCode']< 111].reset_index()
+        self.data['Location'] = self.data['ProvinceAbbreviation'].map(provinceDict)
         self.data = self.data[['Date','Location', 'CumulativePositiveCase']]
     
     def geoTemplate(self):
         Geo_TEMPLATE = 'Node: E:pcm-dpc->E0\n' +\
                    'typeOf: dcs:EurostatNUTS3\n' +\
-                   'istatId: C:pcm-dpc->Location\n\n'
+                   'dcid: C:pcm-dpc->Location\n\n'
         with open(self.name + '.tmcf', 'w') as f_out:
             f_out.write(Geo_TEMPLATE)
             
-
-
-
-
 def main():
     """process the national, regional, provinces data and generate
     correponding template mcfs"""

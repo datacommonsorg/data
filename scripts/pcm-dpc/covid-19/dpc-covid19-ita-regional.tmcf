@@ -1,6 +1,6 @@
 Node: E:pcm-dpc->E0
 typeOf: dcs:EurostatNUTS2
-istatId: C:pcm-dpc->Location
+dcid: C:pcm-dpc->Location
 
 Node: E:pcm-dpc->E1
 typeOf: dcs:StatVarObservation
