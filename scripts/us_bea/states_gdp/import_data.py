@@ -1,4 +1,4 @@
- # Copyright 2020 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@ per US state. Saves output as a CSV file.
 
     python3 import_data.py
 """
-from urllib.request import urlopen
-from absl import app
-import pandas as pd
 import io
 import zipfile
 import csv
 import re
+from urllib.request import urlopen
+from absl import app
+import pandas as pd
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None # default='warn'
@@ -51,11 +51,41 @@ class StateGDPDataLoader:
     _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
 
     def __init__(self):
-        """Downloads the data, cleans it and stores it in instance data frame.
+        """Initializes instance, assigning member data frames to None."""
+        self.raw_df = None
+        self.clean_df = None
 
-        Returns
+    def download_data(self):
+        """Downloads ZIP file, extracts the desired CSV, and puts it into a data
+        frame. Stores that data frame in the instance raw_df variable.
         """
-        df = self.download_data()
+        # Open zip file from link.
+        resp = urlopen(self._ZIP_LINK)
+
+        # Read the file, interpret it as bytes, and create a ZipFile instance
+        # from it for easy handling.
+        zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
+
+        # Open the specific desired file (CSV) from the folder, and decode it.
+        # This results in a string representation of the file. Interpret that
+        # as a CSV, and read it into a DF.
+        data = zip_file.open(self._STATE_QUARTERLY_GDP_FILE).read()
+        data = data.decode('utf-8')
+        data = list(csv.reader(data.splitlines()))
+        self.raw_df = pd.DataFrame(data[1:], columns=data[0])
+
+    def process_data(self):
+        """Cleans raw_df and converts it from wide to long format.
+
+        Raises:
+            ValueError: The instance raw_df data frame has not been initialized.
+            This is probably caused by not having called download_data.
+        """
+        if self.raw_df is None:
+            raise ValueError("Uninitialized value of raw data frame. Please "
+                             "check you are calling download_data before "
+                             "process_data.")
+        df = self.raw_df.copy()
 
         # Filters out columns that are not US states (e.g. New England).
         df = df[df['GeoName'].isin(self._US_STATES)]
@@ -77,13 +107,16 @@ class StateGDPDataLoader:
         }
 
         def date_to_obs_date(date):
-            """Converts date format, e.g., "2005:Q3" to "2005-09"."""
+            """Converts date format from YEAR:QUARTER to YEAR-MONTH,
+            where the recorded month is the last year in the given quarter.
+            For example: "2005:Q3" to "2005-09".
+            """
             return date[:4] + "-" + qtr_month_map[date[5:]]
         df['Quarter'] = df['Quarter'].apply(date_to_obs_date)
 
         def convert_geoid(fips_code):
             """Creates GeoId column. We get lucky that Data Commons's geoIds
-            equal US FIPS state codes.
+            equal US FIPS state codes. We slice out zero-padding.
             """
             fips_code = fips_code.replace('"', "")
             fips_code = fips_code.replace(" ", "")
@@ -92,43 +125,39 @@ class StateGDPDataLoader:
 
         # Set the instance DF to have one row per geoId/quarter pair, with
         # different measurement methods as columns. This facilitates the
-        # design of TMCFs.
-        self.df = df[df['Unit'] == "Millions of chained 2012 dollars"]
-        self.df.set_index(['GeoId', 'Quarter'])
-        self.df["millions_of_chained_2012_dollars"] = self.df['value']
-        quality_indices = df[df['Unit'] == "Quantity index"]
-        self.df["Quantity_index"] = quality_indices['value'].values
-        current_usd = df[df['Unit'] == "Millions of current dollars"]['value']
-        self.df["millions_of_current_dollars"] = current_usd.values
-        self.df = self.df.drop(["GeoFIPS", "Unit", "value"], axis=1)
-
-    def download_data(self):
-        """Downloads ZIP file, extracts the desired CSV, and puts it into a data
-        frame.
-        """
-        # Open zip file from link.
-        resp = urlopen(self._ZIP_LINK)
-
-        # Read the file, interpret it as bytes, and create a ZipFile instance
-        # from it for easy handling.
-        zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
-
-        # Open the specific desired file (CSV) from the folder, and decode it.
-        # This results in a string representation of the file. Interpret that
-        # as a CSV, and read it into a DF.
-        data = zip_file.open(self._STATE_QUARTERLY_GDP_FILE).read()
-        data = data.decode('utf-8')
-        data = list(csv.reader(data.splitlines()))
-        return pd.DataFrame(data[1:], columns=data[0])
+        # design of TMCFs. Also convert values from millions of USD to USD.
+        one_million = 1000000
+        self.clean_df = df[df["Unit"] == "Millions of chained 2012 dollars"]
+        self.clean_df.set_index(["GeoId", "Quarter"])
+        self.clean_df["chained_2012_dollars"] = self.clean_df["value"].astype(float)
+        self.clean_df["chained_2012_dollars"] *= one_million
+        quality_indices = df[df["Unit"] == "Quantity index"]
+        self.clean_df["quantity_index"] = quality_indices["value"].values.astype(float)
+        current_usd = df[df["Unit"] == "Millions of current dollars"]["value"]
+        self.clean_df["current_dollars"] = current_usd.values.astype(float)
+        self.clean_df["current_dollars"] *= one_million
+        self.clean_df = self.clean_df.drop(["GeoFIPS", "Unit", "value"], axis=1)
 
     def save_csv(self, filename='states_gdp.csv'):
-        """Saves instance data frame to specified CSV file."""
-        self.df.to_csv(filename)
+        """Saves instance data frame to specified CSV file.
+
+        Raises:
+            ValueError: The instance clean_df data frame has not been
+            initialized. This is probably caused by not having called
+            process_data.
+        """
+        if self.clean_df is None:
+            raise ValueError("Uninitialized value of clean data frame. Please "
+                             "check you are calling process_data before "
+                             "save_csv.")
+        self.clean_df.to_csv(filename)
 
 
 def main(argv):
     del argv # unused
     loader = StateGDPDataLoader()
+    loader.download_data()
+    loader.process_data()
     loader.save_csv()
 
 
