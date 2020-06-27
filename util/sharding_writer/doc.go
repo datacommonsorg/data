@@ -11,7 +11,7 @@ The default instance of the writer will use 100 MB a the file size to split on. 
 The size of the shards can be specified when creating the writer:
 
 	w := sharding_writer.NewWriter(filename, extension,
-		sharding_writer.ShardSize(1024*1024))  // size is in bytes.
+		sharding_writer.ShardSize(1024*1024))  // shard size is in bytes.
 
 The writer has some smarts if the data being written to the file is text or even
 MCF / TMCF files. In these cases the writer will ensure shards don't split in the
@@ -47,7 +47,7 @@ Example Usage:
 	// Create the sharded writer with ~64kB files.
 	sw := sharding_writer.NewWriter("my_data", "csv",
 		sharding_writer.TextDataType().
-		sharding_writer.ShardSize(64*1024))
+		sharding_writer.ShardSize(64*1024))  // shard size is in bytes.
 
 	// Ensure we close when we are all done.
 	defer sw.Close()

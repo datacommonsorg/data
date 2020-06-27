@@ -48,29 +48,14 @@ const (
 	// U+2070E	𠜎
 	// U+20731	𠜱
 
-	// sampleMCF is a simple string that will have the x replaced with a
-	// counter when being generated as filler.
-	// TODO(rsned): Uncomment when generateMCF is implemented.
-	/*
-			sampleMCF = `
-		Node: dcid:UnitTest_Generated_Node_{x}_Entry
-		name: "UnitTest_Generated_Node_{x}_Entry"
-		typeOf: dcs:StatisticalVariable
-		populationType: dcs:TotalPopulation
-		measuredProperty: dcs:measuredProperty
-		statType: dcs:measuredValue
-		measurementMethod: dcs:UnitTestingGenerated
-		unit: dcs:Percent
-		`
-	*/
 )
 
-// generateRawString generates a regular set of characters up to the given
-// number, without newlines, whitespace, or punctuation.
-func generateRawString(count int64) string {
+// generateBytes generates a regular set of characters up to the given
+// number, without newlines or whitespace as a slice of bytes.
+func generateBytes(count int64) []byte {
 	// short circuit requests for negative or 0.
 	if count < 1 {
-		return ""
+		return nil
 	}
 
 	var buf bytes.Buffer
@@ -85,13 +70,14 @@ func generateRawString(count int64) string {
 		}
 	}
 
-	// Write out the bytes less than a full line to get to the full amount.
+	// Write out the remaining bytes that are less than a full amount to get
+	// to the amount desired.
 	buf.WriteString(baseString[:count%int64(len(baseString))])
 
-	return buf.String()
+	return buf.Bytes()
 }
 
-func TestGenerateRawString(t *testing.T) {
+func TestGenerateBytes(t *testing.T) {
 	tests := []struct {
 		count int64
 		want  string
@@ -109,9 +95,7 @@ func TestGenerateRawString(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		if got := generateRawString(test.count); got != test.want {
-			t.Errorf("generateRawString(%d) = %q, want %q", test.count, got, test.want)
-		}
+		cmpBytes(t, fmt.Sprintf("generateBytes(%d)", test.count), generateBytes(test.count), []byte(test.want))
 	}
 }
 
@@ -236,6 +220,7 @@ func TestGenerateMCF(t *testing.T) {
 	}{
 		{count: -1, want: ""},
 		{count: 0, want: ""},
+		// TODO(rsned): add test cases
 	}
 
 	for _, test := range tests {
@@ -334,7 +319,7 @@ func checkFileBeginEndContents(t *testing.T, testPath, filename string, begins, 
 	cmpBytes(t, fn, contents[len(contents)-len(ends):], ends)
 }
 
-func TestWriter(t *testing.T) {
+func TestWriterWriteString(t *testing.T) {
 	tests := []struct {
 		label string   // descriptive label of this case
 		path  string   // directory name piece to distinguish test data
@@ -360,7 +345,7 @@ func TestWriter(t *testing.T) {
 			label:               "Write 1 byte to default shard, default opts, raw data",
 			path:                "1_byte_to_default_shard_all_defaults",
 			count:               1,
-			dataType:            dataTypeRaw,
+			dataType:            dataTypeBytes,
 			wantNumShards:       1,
 			wantFirstShardBegin: "a",
 			wantFirstShardEnd:   "a",
@@ -369,10 +354,10 @@ func TestWriter(t *testing.T) {
 			label: "Write 1 byte to 1 shard, raw data",
 			path:  "1_byte_to_1_byte_shard_raw",
 			opts: []Option{
-				RawDataType(),
+				BytesDataType(),
 				ShardSize(1),
 			},
-			dataType:          dataTypeRaw,
+			dataType:          dataTypeBytes,
 			count:             1,
 			wantNumShards:     1,
 			wantFirstShardEnd: "a",
@@ -381,10 +366,10 @@ func TestWriter(t *testing.T) {
 			label: "Write 256 bytes to 1 shard, raw data",
 			path:  "256_bytes_to_100mb_shard_raw",
 			opts: []Option{
-				RawDataType(),
+				BytesDataType(),
 			},
 			count:               256,
-			dataType:            dataTypeRaw,
+			dataType:            dataTypeBytes,
 			wantNumShards:       1,
 			wantFirstShardBegin: "abcdef_g",
 			wantFirstShardEnd:   "z0123-45",
@@ -393,11 +378,11 @@ func TestWriter(t *testing.T) {
 			label: "Write 256 bytes to 32-byte shards, raw data",
 			path:  "256_bytes_to_32_byte_shards_raw",
 			opts: []Option{
-				RawDataType(),
+				BytesDataType(),
 				ShardSize(32),
 			},
 			count:               256,
-			dataType:            dataTypeRaw,
+			dataType:            dataTypeBytes,
 			wantNumShards:       8,
 			wantFirstShardBegin: "abcdef_g",
 			wantFirstShardEnd:   "vwx+yz01",
@@ -408,11 +393,11 @@ func TestWriter(t *testing.T) {
 			label: "Write 257 bytes to 11-byte shards, raw data",
 			path:  "257_bytes_to_11_byte_shards_raw",
 			opts: []Option{
-				RawDataType(),
+				BytesDataType(),
 				ShardSize(11),
 			},
 			count:               257,
-			dataType:            dataTypeRaw,
+			dataType:            dataTypeBytes,
 			wantNumShards:       24,
 			wantFirstShardBegin: "abcdef_g",
 			wantFirstShardEnd:   "def_ghij",
@@ -433,8 +418,8 @@ func TestWriter(t *testing.T) {
 		// Generate data to be written out.
 		var data string
 		switch test.dataType {
-		case dataTypeRaw:
-			data = generateRawString(test.count)
+		case dataTypeBytes:
+			data = string(generateBytes(test.count))
 		case dataTypeText:
 			data = generateLines(test.count)
 		case dataTypeMCF:
@@ -464,6 +449,7 @@ func TestWriter(t *testing.T) {
 
 		checkFilesSumToInputSize(t, test.path, int64(len(data)))
 
+		// TODO(rsned): If the shard number format changes, change here and below as well.
 		firstFile := "sharded_data_0.dat"
 		checkFileBeginEndContents(t, test.path, firstFile,
 			[]byte(test.wantFirstShardBegin),
@@ -476,6 +462,7 @@ func TestWriter(t *testing.T) {
 				[]byte(test.wantLastShardEnd))
 
 		}
+
 		// If you want to debug output or leave the results on disk,
 		// comment out the tearDown call which removes this tests data.
 		tearDown(test.path)
