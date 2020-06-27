@@ -1,10 +1,32 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+'''
+This scirpt will generate Enum instances for InteractionTypeEnum,
+InteractionDetectionMethodEnum, InteractionSourceEnum.
+
+Run "python3 parseEBI.py --help" for usage.
+'''
 
 import collections
 import re
-import sys
+from absl import app
+from absl import flags
 
+FLAGS = flags.FLAGS
+flags.DEFINE_string('database_file', None,
+                    'database file path.', short_name='f')
 
 def get_class_name(a_string):
     """Convert a name string to format: ThisIsAnUnusualName.
@@ -12,12 +34,11 @@ def get_class_name(a_string):
     Take a space delimited string, return a class name such as ThisIsAnUnusualName
     Here we use this function for instance name. Thus it allows to start with a number
     """
-    joint_name = a_string.title().replace(' ','')
+    joint_name = a_string.title().replace(' ', '')
     # substitute except for  _, character, number
     non_legitimate = re.compile(r'[\W]+')
     class_name = non_legitimate.sub('', joint_name)
     return class_name
-
 
 def get_references(term):
     """Convert reference string to the corresponding reference property schema
@@ -37,7 +58,7 @@ def get_references(term):
     source = term_split[0]
     id_content = ':'.join(term_split[1:])
     new_source_map = {}
-    if source == 'PMID' or source == 'pmid':
+    if source in ('PMID', 'pmid'):
         property_line = 'pubMedID:  ' + '"' + id_content + '"'
     elif source == 'GO':
         property_line = 'goID: ' + '"' + id_content + '"'
@@ -51,8 +72,7 @@ def get_references(term):
 
     return (property_line, new_source_map)
 
-
-class Node(object):
+class Node():
     """Node class for containing each ontology
     Attributes:
         value: A string shows the ontology name
@@ -84,10 +104,8 @@ def get_parent_id_list(term_list):
     """
     id_string_list = []
     for term in term_list:
-        '''
-        term containining parent information is "is_a: MI:0013 ! biophysical"
-        or "relationship: part_of MI:1349 ! chembl"
-        '''
+#         term containining parent information is "is_a: MI:0013 ! biophysical"
+#         or "relationship: part_of MI:1349 ! chembl"
         if term.startswith('is_a'):
             id_string_list.append(term.split(' ')[1])
         elif term.startswith('relationship'):
@@ -96,7 +114,7 @@ def get_parent_id_list(term_list):
 
     return id_string_list
 
-class TreeBuilder(object):
+class TreeBuilder():
     """A computation class to get all the node values of a subtree from the subtree root by DFS.
 
     Attributes:
@@ -124,13 +142,15 @@ class TreeBuilder(object):
 
     def _dfs(self, node):
         """Takes a tree node as root, do a DFS tree traversal recursively"""
-        if not node: return
+        if not node:
+            return
         self.node_value_set.add(node.value)
         for child in node.child_list:
             self._dfs(child)
 
 
-def get_schema_from_text(term, id_to_node, new_source_map, id_to_class_name, interaction_type_id_set,
+def get_schema_from_text(term, id_to_node, new_source_map,
+                         id_to_class_name, interaction_type_id_set,
                          detection_method_id_set, interaction_source_id_set):
 
     """Takes a list with each item containing the information,
@@ -140,21 +160,12 @@ def get_schema_from_text(term, id_to_node, new_source_map, id_to_class_name, int
         ['id: MI:0000',
          'name: molecular interaction',
          'def: "Controlled vocabularies originally created for protein protein interactions,
-             extended to other molecules interactions." [PMID:14755292]',
-         'subset: Drugable',
-         'subset: PSI-MI_slim']
+             extended to other molecules interactions." [PMID:14755292]']
     Returns:
         [data schema, PSI-MI, DCID], for example:
         ['''Node: dcid:Biophysical
         typeOf: dcs:InteractionTypeEnum
-        name: "Biophysical"
-        psimiID: "MI:0013"
-        description: "The application of physical principles and methods to biological
-            experiments"
-        pubMedID: "14755292"
-        specializationOf: dcs:ExperimentalInteractionDetection''','MI:0001', "Biophysical",
-            {"references":{"newConfidence":"AA10010"}}]
-
+        name: "Biophysical"''','MI:0001', "Biophysical", {"references":{"newConfidence":"AA10010"}}]
     """
     term_map = collections.defaultdict(list)
     for line in term:
@@ -172,12 +183,12 @@ def get_schema_from_text(term, id_to_node, new_source_map, id_to_class_name, int
     term_map['def'] = [description]
     # id_string example: PMID:14755292
     id_string = description_long[reference_start_idx+1:-1]
-    if len(id_string)>0:
+    if len(id_string) > 0:
         id_string_list = id_string.split(', ')
         term_map['references'] = id_string_list
 
     schema_piece_list = []
-    keyList = ['id', 'def', 'references', 'parentClassName']
+    key_list = ['id', 'def', 'references', 'parentClassName']
 
     id_string = term_map['id'][0]
     dcid = id_to_class_name[id_string]
@@ -201,27 +212,26 @@ def get_schema_from_text(term, id_to_node, new_source_map, id_to_class_name, int
     current_line = 'name: "' + dcid + '"'
     schema_piece_list.append(current_line)
 
-    '''
-    term_map:
-    id:  ['MI:0001']
-    name:  ['interaction detection method']
-    def:  ['Method to determine the interaction']
-    subset:  ['Drugable', 'PSI-MI_slim']
-    synonym:  ['"interaction detect" EXACT PSI-MI-short []']
-    relationship:  ['part_of MI:0000 ! molecular interaction']
-    references:  ['PMID:14755292']
-    parentClassName:  ['MolecularInteraction']
-    '''
+#     term_map:
+#     id:  ['MI:0001']
+#     name:  ['interaction detection method']
+#     def:  ['Method to determine the interaction']
+#     subset:  ['Drugable', 'PSI-MI_slim']
+#     synonym:  ['"interaction detect" EXACT PSI-MI-short []']
+#     relationship:  ['part_of MI:0000 ! molecular interaction']
+#     references:  ['PMID:14755292']
+#     parentClassName:  ['MolecularInteraction']
 
-    for key in keyList:
+    for key in key_list:
 
         if key == 'def' and term_map[key]:
-            current_line = 'description: "' + term_map[key][0][0].upper() + term_map[key][0][1:] +'"'
+            current_line = term_map[key][0][0].upper() + term_map[key][0][1:]
+            current_line = 'description: "' + current_line + '"'
             schema_piece_list.append(current_line)
 
         elif key == 'references' and term_map[key]:
             for i in range(len(term_map[key])):
-                if term_map[key][i]!='':
+                if term_map[key][i] != '':
                     current_line, new_reference_map = get_references(term_map[key][i])
                     if current_line:
                         schema_piece_list.append(current_line)
@@ -246,25 +256,21 @@ def get_schema_from_text(term, id_to_node, new_source_map, id_to_class_name, int
 
 
 def main(argv):
-    database_file = argv[0]
-    with open(database_file, 'r') as fp:
-        file = fp.read()
+    """Main function to read the database file and generate data mcf"""
+    del argv
+    database_file = FLAGS.database_file
+    with open(database_file, 'r') as file_open:
+        file = file_open.read()
     # clip exists in dcs already. Substitute with ClipInteraction
     file = file.replace('name: clip\ndef', 'name: clip interaction\ndef')
     file_terms = file.split('\n\n')[1:]
-    file_terms = [term_text.split('\n') for term_text in file_terms 
+    file_terms = [term_text.split('\n') for term_text in file_terms
                   if term_text.startswith('[Term]')]
-
-    '''
-    Parsing Steps:
-    1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used
-    to access nodes as well.
-    2. save all the tree nodes in the subtree of the three nodes into three set:
-        id: MI:0001 name: interaction detection method
-        id: MI:0190 name: interaction type
-        id: MI:0444 name: database citation
-    3. save the nodes in the three sets to the corresponding enumearation schema
-    '''
+#     Parsing Steps:
+#     1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used
+#     to access nodes as well.
+#     2. save all the tree nodes in the subtree of the three nodes into three set
+#     3. save the nodes in the three sets to the corresponding enumearation schema
 
     id_to_node = {}
     id_to_class_name = {}
@@ -296,23 +302,23 @@ def main(argv):
     detection_method_id_set = dfs_caller.get_subset_id(DETECTION_METHOD_ROOT)# root id: MI:0190
     interaction_source_id_set = dfs_caller.get_subset_id(INTERACTION_SOURCE_ROOT) # root id: MI:0444
 
-    set_list = [interaction_type_id_set, detection_method_id_set,interaction_source_id_set]
+    set_list = [interaction_type_id_set, detection_method_id_set, interaction_source_id_set]
 
     schema_list = []
     psimi_to_dcid = []
 
-    '''
-    if the updated database file has reference source other than "PMID","pmid",
-    "GO","RESID","doi", save one example to new_source_map and write to BioEBINewSource.txt
-    '''
+#     if the updated database file has reference source other than "PMID","pmid",
+#     "GO","RESID","doi", save one example to new_source_map and write to BioEBINewSource.txt
+
     new_source_map = {'references':{}}
 
     for term_list in file_terms:
         term = term_list[1:]
-        schemaRes = get_schema_from_text(term,id_to_node,new_source_map,id_to_class_name,
-                                      interaction_type_id_set,detection_method_id_set,interaction_source_id_set)
-        if schemaRes:
-            schema, psimi, dcid, new_source_map  = schemaRes
+        schema_res = get_schema_from_text(term, id_to_node, new_source_map,
+                                          id_to_class_name, interaction_type_id_set,
+                                          detection_method_id_set, interaction_source_id_set)
+        if schema_res:
+            schema, psimi, dcid, new_source_map = schema_res
             schema_list.append(schema)
             psimi_to_dcid.append(psimi+': ' + dcid)
 
@@ -320,28 +326,28 @@ def main(argv):
     schema = '# This schema file is generated by parseEBI.py. Please don\'t edit.\n'
     schema_enum_text = schema + schema_enum_text
 
-    with open('BioOntologySchemaEnum.mcf','w') as fp:
-        fp.write(schema_enum_text)
-    with open('psimi2dcid2.txt','w') as fp:
-        fp.write('\n'.join(psimi_to_dcid))
+    with open('BioOntologySchemaEnum.mcf', 'w') as file_open:
+        file_open.write(schema_enum_text)
+    with open('psimi2dcid2.txt', 'w') as file_open:
+        file_open.write('\n'.join(psimi_to_dcid))
 
     write_list = []
     for source_type in new_source_map:
-        if not new_source_map[source_type]: continue
+        if not new_source_map[source_type]:
+            continue
         write_list.append(source_type)
         for source in new_source_map[source_type]:
             line = source + ': ' + new_source_map[source_type][source]
-            write_list.append(source_type)
+            write_list.append(line)
         write_list.append('\n')
     if write_list:
-        with open('BioEBINewSource.txt','w') as fp:
-            fp.write('\n'.join(write_list))
+        with open('BioEBINewSource.txt', 'w') as file_open:
+            file_open.write('\n'.join(write_list))
     print('Schema has been sucessfully written to BioOntologySchemaEnum.mcf')
     len_string = ','.join([str(len(s)) for s in set_list])
     print('The amount of each Enum:\ninteractionType, detectionMethod,interactionSource: '
-         + len_string)
-
+          + len_string)
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
-
+    app.run(main)
+    
