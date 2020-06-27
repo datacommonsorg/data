@@ -13,7 +13,8 @@
 # limitations under the License.
 """
 Pulls data from the US Bureau of Economic Analysis (BEA) on quarterly GDP
-per US state. Saves output as a CSV file.
+per US state. Saves output as a CSV file. The output CSV contains three
+measurement methods of GDP per quarter per US state from the years 2005-2019.
 
     Typical usage:
 
@@ -108,7 +109,7 @@ class StateGDPDataLoader:
 
         def date_to_obs_date(date):
             """Converts date format from YEAR:QUARTER to YEAR-MONTH,
-            where the recorded month is the last year in the given quarter.
+            where the recorded month is the last month in the given quarter.
             For example: "2005:Q3" to "2005-09".
             """
             return date[:4] + "-" + qtr_month_map[date[5:]]
