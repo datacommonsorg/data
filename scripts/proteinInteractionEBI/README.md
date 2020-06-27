@@ -5,10 +5,10 @@ Here we only import the three subsets of the ontologies: "interaction detection 
 
 ## Usage
 
-To generate 'BioOntologySchemaEnum.mcf' which contains all the schemas and "psimi2dcid.txt" which contains paired PSI-MI identifiers and DCID (../proteinInteractionMINT/parseMINT.py needs to use this file to refer to the corresponding Enum instance by DCID), run:
+To generate 'BioOntologySchemaEnum.mcf' which contains all the schemas and "psimi2dcid.txt" which contains paired PSI-MI identifiers and DCID (../proteinInteractionMINT/parse_mint.py needs to use this file to refer to the corresponding Enum instance by DCID), run:
 
 ```bash
-python3 parseEBI.py mi.owl 
+python3 parse_ebi.py -f mi.owl 
 ```
 
 If new reference sources which are not properties in dcs occur, 'BioEBINewSource.txt' containing such information will be generated as well. If this is the case, new properties should be created for the new source (similar to property "dcs:pubMedID"), and the script should handle the new source corespondingly.
@@ -19,7 +19,7 @@ Data is available for download from
 https://www.ebi.ac.uk/ols/ontologies/mi. It refers to http://psidev.info/groups/controlled-vocabularies. 
 The ontologies dictionary has a tree structure. Note here that one parent node can have multiple child nodes and one child node can have multiple parent nodes as well.
 
-The original data file (mi.owl) uses "is_a" and "part_of" as the relation property to connect the child node to the parent node, however we don't distinguish these two and a property "specializationOf" is used for the child-parent connection.
+The database file (mi.owl) uses "is_a" and "part_of" as the relation property to connect the child node to the parent node, however we don't distinguish these two and a property "specializationOf" is used for the child-parent connection.
 
 We make each term as an enumeration node of three subtrees with root nodes as: "database citation", "interaction detection method", and "interaction type". There are two main concerns that we didn't import all the nodes. First, we focus on the ontologies in protein-protein interaction and these three categories are the most commonly used. Secondly, to avoid general terms from another ontology from polluting the Data Commons schema. 
 
