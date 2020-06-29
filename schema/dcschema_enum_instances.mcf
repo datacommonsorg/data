@@ -1355,3 +1355,6 @@ Node: dcid:Pending
 typeOf: dcs:MedicalTestResultEnum
 name: "Pending"
 
+Node: dcid:Ready
+typeOf: dcs:MedicalTestResultEnum
+name: "Ready"
