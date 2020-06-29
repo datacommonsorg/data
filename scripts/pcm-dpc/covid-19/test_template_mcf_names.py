@@ -11,6 +11,8 @@ def test_col_names(csv_path, tmcf_path):
                 assert col_name in cols
 
 def test_statvar_names(sv_path, tmcf_path):
+    """ check it all the statistical variables specified in the template mcf 
+        can be found in the mcf of statistical variable """
     sv_list = []
     with open(sv_path, "r") as file:
         for line in file:

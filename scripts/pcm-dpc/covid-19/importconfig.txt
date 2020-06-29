@@ -1,0 +1,35 @@
+import: {
+    import_name: "pcm-dpc-national"
+    provenance_url: "https://github.com/pcm-dpc/COVID-19"
+    provenance_description: "national trend data of COVID-19 from Italy 
+        department of Civil protection"
+    mcf_url: "gs://resolved_mcf/external_tables/pcm-dpc-national/nodes.mcf-00000-of-00001"
+    start_date: "2020-02-24"
+    end_date: "2020-06-25"
+    update_frequency: "P1D"
+    next_release_date: "2020-06-26"
+}
+
+import: {
+    import_name: "pcm_dpc_regions"
+    provenance_url: "https://github.com/pcm-dpc/COVID-19"
+    provenance_description: "COVID-19 data in Italy at regional level from Italy 
+        department of Civil protection"
+    mcf_url: "gs://resolved_mcf/external_tables/pcm_dpc_regions/nodes.mcf-00000-of-00001"
+    start_date: "2020-02-24"
+    end_date: "2020-06-25"
+    update_frequency: "P1D"
+    next_release_date: "2020-06-26"
+}
+
+import: {
+    import_name: "pcm_dpc_provinces"
+    provenance_url: "https://github.com/pcm-dpc/COVID-19"
+    provenance_description: "Cumulative positive cases of COVID-19 at provinces level 
+        in Italy from Italy department of Civil protection"
+    mcf_url: "gs://resolved_mcf/external_tables/pcm_dpc_provinces/nodes.mcf-00000-of-00001"
+    start_date: "2020-02-24"
+    end_date: "2020-06-25"
+    update_frequency: "P1D"
+    next_release_date: "2020-06-26"
+}

@@ -1,6 +1,6 @@
+"""generate the mcf for StatisticalVariables"""
 
 def generate_SV():
-    """generate the mcf for StatisticalVariables"""
     MedicalIncident_TEMPLATE = 'Node: dcid:COVID19_Italy_{SVFullName}\n' +\
                    'typeOf: dcs:StatisticalVariable\n' +\
                    'populationType: dcs:MedicalConditionIncident\n' +\
