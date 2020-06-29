@@ -11,7 +11,7 @@ steps:
   entrypoint: python3
   args: ["-m", "unittest", "discover", "-v", "-s", ".", "-p", "*_test.py"]
   # In cloudbuild, everything happens under /workspace path
-  env: ['PYTHONPATH="/workspace:$PYTHONPATH"']
+  env: ["PYTHONPATH=/workspace"]
   waitFor:
   - python_install
 
