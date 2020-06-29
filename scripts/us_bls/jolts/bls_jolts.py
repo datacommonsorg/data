@@ -206,70 +206,6 @@ def generate_cleaned_dataframe():
   return jolts_df, schema_mapping
 
 
-def create_bls_nodes():
-  """ Creates a list of BLS_JOLTS MCFs for JOLTS aggregations.
-
-  Downloads detailed series information from the entire JOLTS dataset.
-  Each of the files is read, combined into a single dataframe, and post-processed.
-  This method creates the statistical variables file and writes to it.
-  """
-
-  required_new_nodes = """
-Node: dcid:jobChangeEvent
-name: "jobChangeEvent"
-typeOf: schema:Property
-domain: schema:Person
-range: dcs:JobChangeEventEnum
-
-Node: dcid:JobChangeEventEnum
-name: "JobChangeEventEnum"
-description: "Describes different job change events that may happen to workers" 
-typeOf: dcs:Class
-subClassOf: Enumeration
-
-Node: dcid:Hired
-name: "Hired"
-description: "Describes a worker that was hired to a company"
-typeOf: dcid:JobChangeEventEnum
-
-Node: dcid:Separated
-name: "Separated"
-description: "Describes a worker that was separated from a company"
-typeOf: dcid:JobChangeEventEnum
-
-Node: dcid:VoluntarySeparation
-name: "VoluntarySeparation"
-description: "Describes a worker that voluntarily separated from a company"
-typeOf: dcid:JobChangeEventEnum
-specializationOf: dcs:Separated
-
-Node: dcid:InvoluntarySeparation
-name: "InvoluntarySeparation"
-description: "Describes a worker that involuntarily separated from a company"
-typeOf: dcid:JobChangeEventEnum
-specializationOf: dcs:Separated
-
-Node: dcid:OtherSeparation
-name: "OtherSeparation"
-description: "Describes a worker that separated from a company for other reasons"
-typeOf: dcid:JobChangeEventEnum
-specializationOf: dcs:Separated
-  """
-
-  template_bls = """
-Node: dcid:NAICS/JOLTS_{JOLTS_CODE}
-typeOf: NAICSEnum
-name: {JOLTS_NAME}
-  """
-
-  with open(STATISTICAL_VARIABLE_FILE, "w+", newline="") as f_out:
-    f_out.write(required_new_nodes)
-
-    for _, new_code in CODE_MAPPINGS.items():
-      if ":" in new_code:
-        jolts_code, jolts_name = new_code.split(":")
-        f_out.write(template_bls.format_map({"JOLTS_CODE": jolts_code, "JOLTS_NAME": jolts_name}))
-
 def create_statistical_variables(jolts_df, schema_mapping):
   """ Creates Statistical Variable nodes.
 
@@ -285,7 +221,7 @@ def create_statistical_variables(jolts_df, schema_mapping):
 
   template_stat_var = """
   Node: dcid:{STAT_CLASS}_NAICS_{INDUSTRY}
-  typeOf: StatisticalVariable
+  typeOf: dcs:StatisticalVariable
   populationType: {POPULATION}
   jobChangeEvent: dcs:{JOB_CHANGE_EVENT}
   statType: dcs:measuredValue
@@ -335,9 +271,6 @@ def main(argv):
   final_columns = ['Date', 'StatisticalVariable', 'SeasonalAdjustment', 'Value']
   output_csv = jolts_df.loc[:, final_columns]
   output_csv.to_csv("BLSJolts.csv", index=False, encoding="utf-8")
-
-  # Create new JOLTS nodes
-  create_bls_nodes()
 
   # Create and output Statistical Variables
   create_statistical_variables(jolts_df, schema_mapping)

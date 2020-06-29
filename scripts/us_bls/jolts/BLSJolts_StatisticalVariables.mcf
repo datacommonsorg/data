@@ -1,302 +1,201 @@
-
-Node: dcid:jobChangeEvent
-name: "jobChangeEvent"
-typeOf: schema:Property
-domain: schema:Person
-range: dcs:JobChangeEventEnum
-
-Node: dcid:JobChangeEventEnum
-name: "JobChangeEventEnum"
-description: "Describes different job change events that may happen to workers" 
-typeOf: dcs:Class
-subClassOf: Enumeration
-
-Node: dcid:Hired
-name: "Hired"
-description: "Describes a worker that was hired to a company"
-typeOf: dcid:JobChangeEventEnum
-
-Node: dcid:Separated
-name: "Separated"
-description: "Describes a worker that was separated from a company"
-typeOf: dcid:JobChangeEventEnum
-
-Node: dcid:VoluntarySeparation
-name: "VoluntarySeparation"
-description: "Describes a worker that voluntarily separated from a company"
-typeOf: dcid:JobChangeEventEnum
-specializationOf: dcs:Separated
-
-Node: dcid:InvoluntarySeparation
-name: "InvoluntarySeparation"
-description: "Describes a worker that involuntarily separated from a company"
-typeOf: dcid:JobChangeEventEnum
-specializationOf: dcs:Separated
-
-Node: dcid:OtherSeparation
-name: "OtherSeparation"
-description: "Describes a worker that separated from a company for other reasons"
-typeOf: dcid:JobChangeEventEnum
-specializationOf: dcs:Separated
-  
-Node: dcid:NAICS/JOLTS_000000
-typeOf: NAICSEnum
-name: Total nonfarm
-  
-Node: dcid:NAICS/JOLTS_110099
-typeOf: NAICSEnum
-name: Mining and logging
-  
-Node: dcid:NAICS/JOLTS_300000
-typeOf: NAICSEnum
-name: Manufacturing
-  
-Node: dcid:NAICS/JOLTS_320000
-typeOf: NAICSEnum
-name: Durable goods manufacturing
-  
-Node: dcid:NAICS/JOLTS_340000
-typeOf: NAICSEnum
-name: Nondurable goods manufacturing
-  
-Node: dcid:NAICS/JOLTS_400000
-typeOf: NAICSEnum
-name: Trade, transportation, and utilities
-  
-Node: dcid:NAICS/JOLTS_480099
-typeOf: NAICSEnum
-name: Transportation warehousing, and utilities
-  
-Node: dcid:NAICS/JOLTS_510099
-typeOf: NAICSEnum
-name: Financial activities
-  
-Node: dcid:NAICS/JOLTS_540099
-typeOf: NAICSEnum
-name: Professional and business services
-  
-Node: dcid:NAICS/JOLTS_600000
-typeOf: NAICSEnum
-name: Education and health services
-  
-Node: dcid:NAICS/JOLTS_700000
-typeOf: NAICSEnum
-name: Leisure and hospitality
-  
-Node: dcid:NAICS/JOLTS_900000
-typeOf: NAICSEnum
-name: Government
-  
-Node: dcid:NAICS/JOLTS_910000
-typeOf: NAICSEnum
-name: Federal
-  
-Node: dcid:NAICS/JOLTS_923000
-typeOf: NAICSEnum
-name: State and local government education
-  
-Node: dcid:NAICS/JOLTS_929000
-typeOf: NAICSEnum
-name: State and local government excluding education
-  
 Node: dcid:NumJobOpening_NAICS_JOLTS_000000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_000000
 
 Node: dcid:NumJobOpening_NAICS_10
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/10
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_110099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_110099
 
 Node: dcid:NumJobOpening_NAICS_23
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/23
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_300000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_300000
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_320000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_320000
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_340000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_340000
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_400000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_400000
 
 Node: dcid:NumJobOpening_NAICS_42
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/42
 
 Node: dcid:NumJobOpening_NAICS_44
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/44
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_480099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_480099
 
 Node: dcid:NumJobOpening_NAICS_51
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/51
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_510099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_510099
 
 Node: dcid:NumJobOpening_NAICS_52
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/52
 
 Node: dcid:NumJobOpening_NAICS_53
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/53
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_540099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_540099
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_600000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_600000
 
 Node: dcid:NumJobOpening_NAICS_61
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/61
 
 Node: dcid:NumJobOpening_NAICS_62
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/62
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_700000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_700000
 
 Node: dcid:NumJobOpening_NAICS_71
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/71
 
 Node: dcid:NumJobOpening_NAICS_72
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/72
 
 Node: dcid:NumJobOpening_NAICS_81
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/81
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_900000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_900000
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_910000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_910000
 
 Node: dcid:NumJobOpening_NAICS_92
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/92
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_923000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_923000
 
 Node: dcid:NumJobOpening_NAICS_JOLTS_929000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: schema:JobPosting
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_929000
 
 Node: dcid:NumJobHire_NAICS_JOLTS_000000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -304,7 +203,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_000000
 
 Node: dcid:NumJobHire_NAICS_10
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -312,7 +211,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/10
 
 Node: dcid:NumJobHire_NAICS_JOLTS_110099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -320,7 +219,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_110099
 
 Node: dcid:NumJobHire_NAICS_23
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -328,7 +227,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/23
 
 Node: dcid:NumJobHire_NAICS_JOLTS_300000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -336,7 +235,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_300000
 
 Node: dcid:NumJobHire_NAICS_JOLTS_320000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -344,7 +243,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_320000
 
 Node: dcid:NumJobHire_NAICS_JOLTS_340000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -352,7 +251,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_340000
 
 Node: dcid:NumJobHire_NAICS_JOLTS_400000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -360,7 +259,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_400000
 
 Node: dcid:NumJobHire_NAICS_42
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -368,7 +267,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/42
 
 Node: dcid:NumJobHire_NAICS_44
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -376,7 +275,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/44
 
 Node: dcid:NumJobHire_NAICS_JOLTS_480099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -384,7 +283,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_480099
 
 Node: dcid:NumJobHire_NAICS_51
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -392,7 +291,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/51
 
 Node: dcid:NumJobHire_NAICS_JOLTS_510099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -400,7 +299,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_510099
 
 Node: dcid:NumJobHire_NAICS_52
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -408,7 +307,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/52
 
 Node: dcid:NumJobHire_NAICS_53
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -416,7 +315,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/53
 
 Node: dcid:NumJobHire_NAICS_JOLTS_540099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -424,7 +323,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_540099
 
 Node: dcid:NumJobHire_NAICS_JOLTS_600000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -432,7 +331,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_600000
 
 Node: dcid:NumJobHire_NAICS_61
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -440,7 +339,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/61
 
 Node: dcid:NumJobHire_NAICS_62
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -448,7 +347,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/62
 
 Node: dcid:NumJobHire_NAICS_JOLTS_700000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -456,7 +355,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_700000
 
 Node: dcid:NumJobHire_NAICS_71
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -464,7 +363,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/71
 
 Node: dcid:NumJobHire_NAICS_72
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -472,7 +371,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/72
 
 Node: dcid:NumJobHire_NAICS_81
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -480,7 +379,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/81
 
 Node: dcid:NumJobHire_NAICS_JOLTS_900000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -488,7 +387,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_900000
 
 Node: dcid:NumJobHire_NAICS_JOLTS_910000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -496,7 +395,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_910000
 
 Node: dcid:NumJobHire_NAICS_92
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -504,7 +403,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/92
 
 Node: dcid:NumJobHire_NAICS_JOLTS_923000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -512,7 +411,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_923000
 
 Node: dcid:NumJobHire_NAICS_JOLTS_929000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Hire
 statType: dcs:measuredValue
@@ -520,7 +419,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_929000
 
 Node: dcid:NumSeparation_NAICS_JOLTS_000000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -528,7 +427,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_000000
 
 Node: dcid:NumSeparation_NAICS_10
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -536,7 +435,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/10
 
 Node: dcid:NumSeparation_NAICS_JOLTS_110099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -544,7 +443,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_110099
 
 Node: dcid:NumSeparation_NAICS_23
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -552,7 +451,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/23
 
 Node: dcid:NumSeparation_NAICS_JOLTS_300000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -560,7 +459,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_300000
 
 Node: dcid:NumSeparation_NAICS_JOLTS_320000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -568,7 +467,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_320000
 
 Node: dcid:NumSeparation_NAICS_JOLTS_340000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -576,7 +475,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_340000
 
 Node: dcid:NumSeparation_NAICS_JOLTS_400000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -584,7 +483,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_400000
 
 Node: dcid:NumSeparation_NAICS_42
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -592,7 +491,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/42
 
 Node: dcid:NumSeparation_NAICS_44
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -600,7 +499,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/44
 
 Node: dcid:NumSeparation_NAICS_JOLTS_480099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -608,7 +507,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_480099
 
 Node: dcid:NumSeparation_NAICS_51
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -616,7 +515,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/51
 
 Node: dcid:NumSeparation_NAICS_JOLTS_510099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -624,7 +523,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_510099
 
 Node: dcid:NumSeparation_NAICS_52
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -632,7 +531,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/52
 
 Node: dcid:NumSeparation_NAICS_53
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -640,7 +539,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/53
 
 Node: dcid:NumSeparation_NAICS_JOLTS_540099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -648,7 +547,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_540099
 
 Node: dcid:NumSeparation_NAICS_JOLTS_600000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -656,7 +555,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_600000
 
 Node: dcid:NumSeparation_NAICS_61
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -664,7 +563,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/61
 
 Node: dcid:NumSeparation_NAICS_62
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -672,7 +571,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/62
 
 Node: dcid:NumSeparation_NAICS_JOLTS_700000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -680,7 +579,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_700000
 
 Node: dcid:NumSeparation_NAICS_71
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -688,7 +587,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/71
 
 Node: dcid:NumSeparation_NAICS_72
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -696,7 +595,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/72
 
 Node: dcid:NumSeparation_NAICS_81
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -704,7 +603,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/81
 
 Node: dcid:NumSeparation_NAICS_JOLTS_900000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -712,7 +611,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_900000
 
 Node: dcid:NumSeparation_NAICS_JOLTS_910000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -720,7 +619,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_910000
 
 Node: dcid:NumSeparation_NAICS_92
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -728,7 +627,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/92
 
 Node: dcid:NumSeparation_NAICS_JOLTS_923000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -736,7 +635,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_923000
 
 Node: dcid:NumSeparation_NAICS_JOLTS_929000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:Separation
 statType: dcs:measuredValue
@@ -744,7 +643,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_929000
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_000000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -752,7 +651,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_000000
 
 Node: dcid:NumVoluntarySeparation_NAICS_10
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -760,7 +659,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/10
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_110099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -768,7 +667,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_110099
 
 Node: dcid:NumVoluntarySeparation_NAICS_23
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -776,7 +675,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/23
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_300000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -784,7 +683,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_300000
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_320000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -792,7 +691,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_320000
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_340000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -800,7 +699,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_340000
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_400000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -808,7 +707,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_400000
 
 Node: dcid:NumVoluntarySeparation_NAICS_42
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -816,7 +715,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/42
 
 Node: dcid:NumVoluntarySeparation_NAICS_44
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -824,7 +723,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/44
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_480099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -832,7 +731,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_480099
 
 Node: dcid:NumVoluntarySeparation_NAICS_51
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -840,7 +739,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/51
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_510099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -848,7 +747,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_510099
 
 Node: dcid:NumVoluntarySeparation_NAICS_52
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -856,7 +755,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/52
 
 Node: dcid:NumVoluntarySeparation_NAICS_53
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -864,7 +763,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/53
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_540099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -872,7 +771,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_540099
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_600000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -880,7 +779,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_600000
 
 Node: dcid:NumVoluntarySeparation_NAICS_61
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -888,7 +787,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/61
 
 Node: dcid:NumVoluntarySeparation_NAICS_62
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -896,7 +795,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/62
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_700000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -904,7 +803,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_700000
 
 Node: dcid:NumVoluntarySeparation_NAICS_71
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -912,7 +811,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/71
 
 Node: dcid:NumVoluntarySeparation_NAICS_72
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -920,7 +819,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/72
 
 Node: dcid:NumVoluntarySeparation_NAICS_81
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -928,7 +827,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/81
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_900000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -936,7 +835,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_900000
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_910000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -944,7 +843,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_910000
 
 Node: dcid:NumVoluntarySeparation_NAICS_92
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -952,7 +851,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/92
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_923000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -960,7 +859,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_923000
 
 Node: dcid:NumVoluntarySeparation_NAICS_JOLTS_929000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:VoluntarySeparation
 statType: dcs:measuredValue
@@ -968,7 +867,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_929000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_000000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -976,7 +875,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_000000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_10
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -984,7 +883,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/10
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_110099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -992,7 +891,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_110099
 
 Node: dcid:NumInvoluntarySeparation_NAICS_23
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1000,7 +899,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/23
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_300000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1008,7 +907,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_300000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_320000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1016,7 +915,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_320000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_340000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1024,7 +923,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_340000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_400000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1032,7 +931,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_400000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_42
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1040,7 +939,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/42
 
 Node: dcid:NumInvoluntarySeparation_NAICS_44
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1048,7 +947,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/44
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_480099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1056,7 +955,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_480099
 
 Node: dcid:NumInvoluntarySeparation_NAICS_51
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1064,7 +963,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/51
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_510099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1072,7 +971,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_510099
 
 Node: dcid:NumInvoluntarySeparation_NAICS_52
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1080,7 +979,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/52
 
 Node: dcid:NumInvoluntarySeparation_NAICS_53
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1088,7 +987,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/53
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_540099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1096,7 +995,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_540099
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_600000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1104,7 +1003,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_600000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_61
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1112,7 +1011,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/61
 
 Node: dcid:NumInvoluntarySeparation_NAICS_62
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1120,7 +1019,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/62
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_700000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1128,7 +1027,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_700000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_71
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1136,7 +1035,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/71
 
 Node: dcid:NumInvoluntarySeparation_NAICS_72
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1144,7 +1043,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/72
 
 Node: dcid:NumInvoluntarySeparation_NAICS_81
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1152,7 +1051,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/81
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_900000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1160,7 +1059,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_900000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_910000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1168,7 +1067,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_910000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_92
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1176,7 +1075,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/92
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_923000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1184,7 +1083,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_923000
 
 Node: dcid:NumInvoluntarySeparation_NAICS_JOLTS_929000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:InvoluntarySeparation
 statType: dcs:measuredValue
@@ -1192,7 +1091,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_929000
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_000000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1200,7 +1099,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_000000
 
 Node: dcid:NumOtherSeparation_NAICS_10
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1208,7 +1107,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/10
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_110099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1216,7 +1115,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_110099
 
 Node: dcid:NumOtherSeparation_NAICS_23
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1224,7 +1123,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/23
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_300000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1232,7 +1131,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_300000
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_320000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1240,7 +1139,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_320000
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_340000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1248,7 +1147,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_340000
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_400000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1256,7 +1155,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_400000
 
 Node: dcid:NumOtherSeparation_NAICS_42
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1264,7 +1163,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/42
 
 Node: dcid:NumOtherSeparation_NAICS_44
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1272,7 +1171,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/44
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_480099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1280,7 +1179,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_480099
 
 Node: dcid:NumOtherSeparation_NAICS_51
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1288,7 +1187,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/51
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_510099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1296,7 +1195,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_510099
 
 Node: dcid:NumOtherSeparation_NAICS_52
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1304,7 +1203,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/52
 
 Node: dcid:NumOtherSeparation_NAICS_53
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1312,7 +1211,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/53
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_540099
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1320,7 +1219,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_540099
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_600000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1328,7 +1227,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_600000
 
 Node: dcid:NumOtherSeparation_NAICS_61
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1336,7 +1235,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/61
 
 Node: dcid:NumOtherSeparation_NAICS_62
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1344,7 +1243,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/62
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_700000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1352,7 +1251,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_700000
 
 Node: dcid:NumOtherSeparation_NAICS_71
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1360,7 +1259,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/71
 
 Node: dcid:NumOtherSeparation_NAICS_72
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1368,7 +1267,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/72
 
 Node: dcid:NumOtherSeparation_NAICS_81
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1376,7 +1275,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/81
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_900000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1384,7 +1283,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_900000
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_910000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1392,7 +1291,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_910000
 
 Node: dcid:NumOtherSeparation_NAICS_92
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1400,7 +1299,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/92
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_923000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
@@ -1408,7 +1307,7 @@ measuredProperty: dcs:count
 naics: dcid:NAICS/JOLTS_923000
 
 Node: dcid:NumOtherSeparation_NAICS_JOLTS_929000
-typeOf: StatisticalVariable
+typeOf: dcs:StatisticalVariable
 populationType: dcs:BLSWorker
 jobChangeEvent: dcs:OtherSeparation
 statType: dcs:measuredValue
