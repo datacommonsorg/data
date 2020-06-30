@@ -1,0 +1,7 @@
+Node: E:ISTAT->E0
+typeOf: dcs:EurostatNUTS3
+dcid: C:ISTAT->NUTS3
+name: C:ISTAT->Province name
+istatId: C:ISTAT->Province Code
+abbreviation: C:ISTAT->Province Abbreviation
+
