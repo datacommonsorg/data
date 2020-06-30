@@ -1,4 +1,4 @@
-Date,HospitalizedsWithSymptoms,IntensiveCare,Hospitalized,PeopleInHomeIsolation,ActiveCase,IncrementalPositiveCase,IncrementalActiveCase,CumulativeRecovered,CumulativeDeath,casi_da_sospetto_diagnostico,casi_da_screening,CumulativePositiveCase,CumulativeTestsPerformed,CumulativeTestedPeople,Location
+Date,HospitalizedsWithSymptoms,IntensiveCare,Hospitalized,PeopleInHomeIsolation,ActiveCase,IncrementalPositiveCase,IncrementalActiveCase,CumulativeRecovered,CumulativeDeath,PositiveCasesFromClinicActivity,PositiveCasesFromSurveyAndTest,CumulativePositiveCase,CumulativeTestsPerformed,CumulativeTestedPeople,Location
 2020-02-24,101,26,127,94,221,0,221,1,7,,,229,4324,,country/ITA
 2020-02-25,114,35,150,162,311,90,93,1,10,,,322,8623,,country/ITA
 2020-02-26,128,36,164,221,385,74,78,3,12,,,400,9587,,country/ITA

@@ -53,7 +53,10 @@ class PcmDpc:
                  'deceduti': 'CumulativeDeath',
                  'totale_casi':'CumulativePositiveCase',
                  'tamponi': 'CumulativeTestsPerformed',
-                 'casi_testati': 'CumulativeTestedPeople'}
+                 'casi_testati': 'CumulativeTestedPeople',
+                 'casi_da_sospetto_diagnostico': 'PositiveCasesFromClinicActivity',
+                 'casi_da_screening': 'PositiveCasesFromSurveyAndTest'
+}
         self.data = self.data.rename(columns=it2en)
 
     def set_location(self):

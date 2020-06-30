@@ -22,3 +22,10 @@ This directory contains artifacts required for importing Italy Department of Civ
 - [test_template_mcf_names.py](test_template_mcf_names.py): 
     - test if the statistical variables in the template MCF can be found in the mcf of StatVars.
     - test if the columns specified in the template MCF can be found in the csv files.
+    
+## Node:
+Starting from 2020/06/25, different sources of total positive cases are reported:
+- positive cases from clinic activity  
+- positive cases from surveys and tests 
+These two variables haven't been imported into Data Commons yet.  
+
