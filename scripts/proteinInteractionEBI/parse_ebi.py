@@ -288,6 +288,7 @@ def build_child_parent_link(file_terms, id_to_node):
         for parent_id in parent_id_list:
             id_to_node[parent_id].child_list.append(id_to_node[id_string])
             id_to_node[id_string].parent_list.append(id_to_node[parent_id])
+    return id_to_node
 
 def main(argv):
     """Main function to read the database file and generate data mcf"""
@@ -310,7 +311,7 @@ def main(argv):
     id_to_class_name, id_to_node = get_id_maps(file_terms)
 
     # build the parent-child relation at the second iteration
-    build_child_parent_link(file_terms, id_to_node)
+    id_to_node = build_child_parent_link(file_terms, id_to_node)
 
     # get the id_strings for the three target set
     dfs_caller = TreeBuilder(id_to_node)
@@ -348,7 +349,7 @@ def main(argv):
 
     with open('BioOntologySchemaEnum.mcf', 'w') as file_open:
         file_open.write(schema_enum_text)
-    with open('psimi2dcid2.txt', 'w') as file_open:
+    with open('psimi2dcid.txt', 'w') as file_open:
         file_open.write('\n'.join(psimi_to_dcid))
     # write new source examples to file if occurs
     write_new_source(new_source_map)
