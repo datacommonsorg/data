@@ -17,20 +17,21 @@ Import attempt resources associated with the endpoints
 '/import/<string:attempt_id>' and '/imports'.
 """
 
-
 from enum import Enum
+import http
 
 import flask_restful
 from flask_restful import reqparse
 
-from ..service import import_attempt_database
-from .. import utils
-
-import http
+from app.service import import_attempt_database
+from app import utils
 
 
 class ImportStatus(Enum):
-    """Allowed status of an import attempt."""
+    """Allowed status of an import attempt.
+
+    The status of an import attempt can only be one of these.
+    """
     CREATED = 'created'
     SUCCEEDED = 'succeeded'
     FAILED = 'failed'
@@ -44,12 +45,14 @@ NOT_FOUND_ERROR = 'attempt_id not found'
 
 
 class ImportAttempt(flask_restful.Resource):
-    """Base import attempt resource.
+    """Base class of an import attempt resource.
 
     Attributes:
         database: A database service for storing import attempts
     """
     parser = reqparse.RequestParser()
+    # The parser looks for these fields in the request body.
+    # The Content-Type of the request must be application/json.
     optional_fields = (
         ('attempt_id',), ('branch_name',), ('repo_name',), ('pr_number', int),
         ('import_name',), ('provenance_url',), ('provenance_description',),
@@ -83,7 +86,8 @@ class ImportAttemptByID(ImportAttempt):
             (error message, error code), where the error message is a string
             and the error code is an int.
         """
-        args = self.parser.parse_args()
+        # See ImportAttempt class for what fields the parser looks for.
+        args = ImportAttempt.parser.parse_args()
         if attempt_id != args.setdefault('attempt_id', attempt_id):
             return ID_NOT_MATCH_ERROR, http.HTTPStatus.CONFLICT
         status = args.setdefault('status', ImportStatus.CREATED.value)
@@ -117,17 +121,17 @@ class ImportAttemptByID(ImportAttempt):
     def patch(self, attempt_id):
         """Modifies the value of a field of an existing attempt.
 
-        attempt_id is forbidden to modify.
+        It is not allowed to modify the value of attempt_id.
 
         Args:
-            attempt_id: ID of the attempt as a string
+            attempt_id: ID of theI attempt as a string
 
         Returns:
             The import attempt with the ID if successful as a dict. Otherwise,
             (error message, error code), where the error message is a string
             and the error code is an int.
         """
-        args = self.parser.parse_args()
+        args = ImportAttempt.parser.parse_args()
         if args.get('attempt_id', attempt_id) != attempt_id:
             return 'Cannot patch attempt_id', http.HTTPStatus.FORBIDDEN
 
@@ -144,6 +148,5 @@ class ImportAttemptList(ImportAttempt):
     def get(self):
         """Retrieves a list of import attempts that pass the filter defined by
         the key-value mappings in the request body."""
-        args = self.parser.parse_args()
-        imports = self.database.filter(args)
-        return imports
+        args = ImportAttempt.parser.parse_args()
+        return self.database.filter(args)

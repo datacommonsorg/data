@@ -16,23 +16,26 @@
 Tests for import_attempt.py.
 """
 
+import unittest
+from unittest import mock
 
 from context import app
 from app.resource import import_attempt
 from app.service import import_attempt_database_dict
-
-import unittest
-from unittest import mock
 
 
 PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
 IMPORT_ATTEMPT_DATABASE = 'app.resource.import_attempt' \
                           '.import_attempt_database.ImportAttemptDatabase'
 EXAMPLE_ATTEMPT = {
-    'attempt_id': '0', 'branch_name': 'branch',
-    'repo_name': 'repo', 'import_name': 'name',
+    'attempt_id': '0',
+    'branch_name': 'branch',
+    'repo_name': 'repo',
+    'import_name': 'name',
     'time_created': '2020-06-30T04:28:53.717569+00:00',
-    'logs': [], 'status': 'created', 'pr_number': 0
+    'logs': [],
+    'status': 'created',
+    'pr_number': 0
 }
 
 
@@ -101,8 +104,7 @@ class ImportAttemptListTest(unittest.TestCase):
 
     @mock.patch(IMPORT_ATTEMPT_DATABASE,
                 import_attempt_database_dict.ImportAttemptDatabaseDict)
-    @mock.patch(PARSE_ARGS)
-    def setUp(self, parse_args):
+    def setUp(self):
         """Injects several attempts to the database."""
         import_attempt_database_dict.ImportAttemptDatabaseDict.reset()
 
@@ -111,15 +113,16 @@ class ImportAttemptListTest(unittest.TestCase):
         attempt_2 = {'attempt_id': '2', 'import_name': 'name', 'pr_number': 1}
         attempt_3 = {'attempt_id': '3', 'import_name': 'nameeeee'}
         returns = [attempt_0, attempt_1, attempt_2, attempt_3]
-        parse_args.side_effect = returns
-        self.attempts = returns
+        with mock.patch(PARSE_ARGS) as parse_args:
+            parse_args.side_effect = returns
+            self.attempts = returns
 
-        attempt_api = import_attempt.ImportAttemptByID()
-        attempt_api.put(attempt_0['attempt_id'])
-        attempt_api.put(attempt_1['attempt_id'])
-        attempt_api.put(attempt_2['attempt_id'])
-        attempt_api.put(attempt_3['attempt_id'])
-        self.attempt_api = attempt_api
+            attempt_api = import_attempt.ImportAttemptByID()
+            attempt_api.put(attempt_0['attempt_id'])
+            attempt_api.put(attempt_1['attempt_id'])
+            attempt_api.put(attempt_2['attempt_id'])
+            attempt_api.put(attempt_3['attempt_id'])
+            self.attempt_api = attempt_api
 
     @mock.patch(PARSE_ARGS, lambda self: {'import_name': 'name'})
     def test_get_by_name(self):
