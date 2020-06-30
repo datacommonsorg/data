@@ -20,7 +20,8 @@ Import log resource associated with the endpoint
 from enum import Enum
 import http
 
-from flask_restful import Resource, reqparse
+import flask_restful
+from flask_restful import reqparse
 from google.cloud import datastore
 
 from app import utils
@@ -41,7 +42,7 @@ class LogLevel(Enum):
 LOG_LEVELS = set(level.value for level in LogLevel)
 
 
-class ImportLog(Resource):
+class ImportLog(flask_restful.Resource):
     """API for managing the logs of an attempt specified by its attempt_id
     associated with the endpoint '/import/<string:attempt_id>/logs'.
 
