@@ -369,7 +369,7 @@ name: "Fuzzy"
 typeOf: dcs:GeneticVariantLocTypeEnum
 
 Node: dcid:GeneticVariantAlignmentQualityEnum
-name: "GeneticVariantAlignmentQualityEnumm"
+name: "GeneticVariantAlignmentQualityEnum"
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 description: "The quality of the alignment: unique mapping, non-unique, and many matches (1, 2, or 3+)."
@@ -387,7 +387,7 @@ name: "Many Matches"
 typeOf: dcs:GeneticVariantAlignmentQualityEnum
 
 Node: dcid:GeneticVariantAttributeEnum
-name: "GeneticVariantAttributeEnumm"
+name: "GeneticVariantAttributeEnum"
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 description: "Genetic variant attributes extracted from dbSNP's SNP_bitfield table: clinically associated, MAF >5% in some populations, MAF >5% in all populations, has OMIM OMIA, microattribute tpa, submitted by locus-specific database, genotype conflict, rs cluster non-overlapping alleles, observed mismatch, reference present, pharmGKB, published, 3D structure, submitter link out, other variant with exact mapping, assembly specific, mutant, validated, included in high density kit, genotypes available, 1000 Genomes Phase 1, 1000 Genomes Phase 3, included in clinical diagnostic assay, withdrawn by some not all submitters, or common SNP."

@@ -63,7 +63,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:CovidTrackingProject
 observationAbout: C:COVIDTracking_States->GeoId
-observationDate: C:COVIDTracking_States->Dates
+observationDate: C:COVIDTracking_States->Date
 value: C:COVIDTracking_States->{stat_var}
 """
 
