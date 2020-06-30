@@ -19,78 +19,51 @@ Tests the import_data.py script.
     python3 test_import.py
 """
 import unittest
-import re
-import numpy as np
+import pandas as pd
 from import_data import StateGDPDataLoader
 
 class USStateQuarterlyGDPImportTest(unittest.TestCase):
-    def test_download_data(self):
-        """Tests that data gets downloaded properly.
+    def test_date_converter(self):
+        """Tests the date converter function used to process raw data."""
+        date_conv_fn = StateGDPDataLoader._date_to_obs_date
 
-        Tests that all US States (rows) are represented in the downloaded data.
-        Tests that all measurement periods of interest (cols) are represented
-        in the downloaded data.
-        """
+        self.assertEqual(date_conv_fn("2005:Q1"), "2005-03")
+        self.assertEqual(date_conv_fn("2005:Q2"), "2005-06")
+        self.assertEqual(date_conv_fn("2005:Q3"), "2005-09")
+        self.assertEqual(date_conv_fn("2005:Q4"), "2005-12")
+        self.assertEqual(date_conv_fn("1999:Q1"), "1999-03")
+        self.assertEqual(date_conv_fn("2020:Q2"), "2020-06")
+
+    def test_geoid_converter(self):
+        """Tests the geoid converter function used to process raw data."""
+        geoid_conv_fn = StateGDPDataLoader._convert_geoid
+
+        self.assertEqual(geoid_conv_fn('   "1000"'), "geoId/10")
+        self.assertEqual(geoid_conv_fn("1000"), "geoId/10")
+        self.assertEqual(geoid_conv_fn("10"), "geoId/10")
+        self.assertEqual(geoid_conv_fn("10    "), "geoId/10")
+        self.assertEqual(geoid_conv_fn('10""""""'), "geoId/10")
+        self.assertEqual(geoid_conv_fn("25100"), "geoId/25")
+        self.assertEqual(geoid_conv_fn('   "760000"'), "geoId/76")
+        self.assertEqual(geoid_conv_fn('123""""""'), "geoId/12")
+
+    def test_data_processing_tiny(self):
+        """Tests end-to-end data cleaning on a tiny example."""
+        raw_df = pd.read_csv("test_tiny_raw.csv", index_col=0)
+        clean_df = pd.read_csv("test_tiny_cleaned.csv", index_col=0)
         loader = StateGDPDataLoader()
-        loader.download_data()
-
-        # Test that all states appear in downloaded data.
-        all_states = set(loader._US_STATES)
-        data_states = all_states.intersection(set(loader.raw_df['GeoName']))
-        self.assertSetEqual(all_states, data_states)
-
-        # Test that the quarters in the downloaded data are exactly the ones
-        # from the years 2005-2019.
-        years = range(2005, 2020)
-        quarters = range(1, 5)
-        all_quarters = {f"{y}:Q{q}" for y in years for q in quarters}
-        cols = loader.raw_df.columns
-        data_quarters = {q for q in cols if re.match(r"....:Q.", q)}
-        self.assertSetEqual(all_quarters, data_quarters)
-
-    def test_process_data(self):
-        """Tests that raw data gets process properly.
-
-        Tests that all columns in processed data are as expected.
-        Checks that all types are as expected.
-        """
-        loader = StateGDPDataLoader()
-        loader.download_data()
+        loader.raw_df = raw_df
         loader.process_data()
+        pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
-        clean_df = loader.clean_df
-        expected_col_types = {"Quarter": np.object,
-                              "GeoId": np.object,
-                              "chained_2012_dollars": np.float64,
-                              "quantity_index": np.float64,
-                              "current_dollars": np.float64}
-        # Check that the resulting columns are as expected.
-        expected_cols = set(expected_col_types.keys())
-        self.assertSetEqual(set(clean_df.columns), expected_cols)
-
-        # Checks for desired types per column.
-        for col, col_type in zip(clean_df.columns, clean_df.dtypes):
-            self.assertEqual(col_type, expected_col_types[col])
-
-    def test_exceptions(self):
-        """Tests that trying to call functions prematurely raises exceptions."""
+    def test_data_processing_small(self):
+        """Tests end-to-end data cleaning on a small example."""
+        raw_df = pd.read_csv("test_small_raw.csv", index_col=0)
+        clean_df = pd.read_csv("test_small_cleaned.csv", index_col=0)
         loader = StateGDPDataLoader()
-        with self.assertRaises(ValueError):
-            loader.process_data()
-
-        loader = StateGDPDataLoader()
-        with self.assertRaises(ValueError):
-            loader.save_csv()
-
-        loader = StateGDPDataLoader()
-        loader.download_data()
-        with self.assertRaises(ValueError):
-            loader.save_csv()
-
-        loader = StateGDPDataLoader()
-        loader.download_data()
+        loader.raw_df = raw_df
         loader.process_data()
-        loader.save_csv()
+        pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
 
 if __name__ == '__main__':

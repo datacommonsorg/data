@@ -50,6 +50,12 @@ class StateGDPDataLoader:
                   'West Virginia', 'Wisconsin', 'Wyoming']
     _ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
     _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
+    _QUARTER_MONTH_MAP = {
+        'Q1':'03',
+        'Q2':'06',
+        'Q3':'09',
+        'Q4':'12'
+    }
 
     def __init__(self):
         """Initializes instance, assigning member data frames to None."""
@@ -100,29 +106,8 @@ class StateGDPDataLoader:
                      value_vars=all_quarters,
                      var_name='Quarter')
 
-        qtr_month_map = {
-            'Q1':'03',
-            'Q2':'06',
-            'Q3':'09',
-            'Q4':'12'
-        }
-
-        def date_to_obs_date(date):
-            """Converts date format from YEAR:QUARTER to YEAR-MONTH,
-            where the recorded month is the last month in the given quarter.
-            For example: "2005:Q3" to "2005-09".
-            """
-            return date[:4] + "-" + qtr_month_map[date[5:]]
-        df['Quarter'] = df['Quarter'].apply(date_to_obs_date)
-
-        def convert_geoid(fips_code):
-            """Creates GeoId column. We get lucky that Data Commons's geoIds
-            equal US FIPS state codes. We slice out zero-padding.
-            """
-            fips_code = fips_code.replace('"', "")
-            fips_code = fips_code.replace(" ", "")
-            return "geoId/" + fips_code[:2]
-        df['GeoId'] = df['GeoFIPS'].apply(convert_geoid)
+        df['Quarter'] = df['Quarter'].apply(self._date_to_obs_date)
+        df['GeoId'] = df['GeoFIPS'].apply(self._convert_geoid)
 
         # Set the instance DF to have one row per geoId/quarter pair, with
         # different measurement methods as columns. This facilitates the
@@ -138,6 +123,23 @@ class StateGDPDataLoader:
         self.clean_df["current_dollars"] = current_usd.values.astype(float)
         self.clean_df["current_dollars"] *= one_million
         self.clean_df = self.clean_df.drop(["GeoFIPS", "Unit", "value"], axis=1)
+
+    @classmethod
+    def _date_to_obs_date(cls, date):
+        """Converts date format from YEAR:QUARTER to YEAR-MONTH,
+        where the recorded month is the last month in the given quarter.
+        For example: "2005:Q3" to "2005-09".
+        """
+        return date[:4] + "-" + cls._QUARTER_MONTH_MAP[date[5:]]
+
+    @staticmethod
+    def _convert_geoid(fips_code):
+        """Creates GeoId column. We get lucky that Data Commons's geoIds
+        equal US FIPS state codes. We slice out zero-padding.
+        """
+        fips_code = fips_code.replace('"', "")
+        fips_code = fips_code.replace(" ", "")
+        return "geoId/" + fips_code[:2]
 
     def save_csv(self, filename='states_gdp.csv'):
         """Saves instance data frame to specified CSV file.
