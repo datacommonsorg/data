@@ -13,7 +13,7 @@ Author: qlj-lijuan
 
 ### Download URL
 
-CSV files are available for download from https:github.com/pcm-dpc/COVID-19.
+CSV files are available for download from <https:github.com/pcm-dpc/COVID-19>.
 
 ### Overview
   This dataset contains daily updated information on Covid-19 in Italy from the Head of Department of Civil Protection starting from 2020/02/24. 
@@ -25,16 +25,16 @@ CSV files are available for download from https:github.com/pcm-dpc/COVID-19.
 
   The Naional level and regions level datasets are  broken into 12 statistical variables.
   
-   1. Hospitalizeds with symptoms: Hospitalized positive cases with symptoms
-   2. Intensive care: Hospitalized positive cases in intensive case
-   3. Hospitalized: Hospitalized positive cases
+   1. Hospitalizeds with symptoms: hospitalized positive cases with symptoms
+   2. Intensive care: hospitalized positive cases in intensive case
+   3. Hospitalized: hospitalized positive cases
    4. People in home isolation: positive cases in home isolation
    5. Active case: currently positive cases
-   6. Incremental active case: change in active cases, i.e. active cases today - active cases of previous day
+   6. Incremental active case: change in active cases, i.e. (active cases today - active cases of previous day)
    7. Recovered: cumulative recovered cases
    8. Death: cumulative death
    9. Positive case: cumulative positive cases
-  10. Incremental positive case: new postive cases, i.e. total positive cases today - total positive cases of previous day
+  10. Incremental positive case: new postive cases, i.e. (total positive cases today - total positive cases of previous day)
   11. Tests performed: total number of tests performed
   12. Tested people: total number of people tested
 
