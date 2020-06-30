@@ -1,9 +1,9 @@
 import: {
-    import_name: "pcm-dpc-national"
+    import_name: "pcm_dpc_national"
     provenance_url: "https://github.com/pcm-dpc/COVID-19"
     provenance_description: "National trend information on COVID-19 from Italy 
         department of Civil protection."
-    mcf_url: "gs://resolved_mcf/external_tables/pcm-dpc-national/nodes.mcf-00000-of-00001"
+    mcf_url: "gs://resolved_mcf/external_tables/pcm_dpc_national/nodes.mcf-00000-of-00001"
     start_date: "2020-02-24"
     update_frequency: "P1D"
 }
