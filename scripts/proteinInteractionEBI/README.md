@@ -11,6 +11,12 @@ To generate 'BioOntologySchemaEnum.mcf' which contains all the schemas and "psim
 python3 parse_ebi.py -f mi.owl 
 ```
 
+To test the script, run:
+
+```bash
+python3 parse_ebi_test.py
+```
+
 If new reference sources which are not properties in dcs occur, 'BioEBINewSource.txt' containing such information will be generated as well. If this is the case, new properties should be created for the new source (similar to property "dcs:pubMedID"), and the script should handle the new source corespondingly.
 
 ## Database format
