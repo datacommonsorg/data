@@ -4,7 +4,7 @@ dcid: C:pcm-dpc->Location
 
 Node: E:pcm-dpc->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_CumulativePositiveCase
+variableMeasured: dcs:cumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
 observationAbout: E:pcm-dpc->E0
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativePositiveCase

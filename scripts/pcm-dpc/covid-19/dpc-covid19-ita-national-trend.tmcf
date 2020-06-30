@@ -1,88 +1,84 @@
-Node: E:pcm-dpc->E0
-typeOf: dcs:Country
-dcid: C:pcm-dpc->Location
-
 Node: E:pcm-dpc->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_HospitalizedsWithSymptoms
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_HospitalizedsWithSymptoms
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->HospitalizedsWithSymptoms
 
 Node: E:pcm-dpc->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_IntensiveCare
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_IntensiveCare
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->IntensiveCare
 
 Node: E:pcm-dpc->E3
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_Hospitalized
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_Hospitalized
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->Hospitalized
 
 Node: E:pcm-dpc->E4
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_PeopleInHomeIsolation
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_PeopleInHomeIsolation
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->PeopleInHomeIsolation
 
 Node: E:pcm-dpc->E5
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_ActiveCase
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_ActiveCase
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->ActiveCase
 
 Node: E:pcm-dpc->E6
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_IncrementalPositiveCase
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:incrementalCount_MedicalConditionIncident_COVID_19_IncrementalPositiveCase
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->IncrementalPositiveCase
 
 Node: E:pcm-dpc->E7
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_IncrementalActiveCase
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:incrementalCount_MedicalConditionIncident_COVID_19_IncrementalActiveCase
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->IncrementalActiveCase
 
 Node: E:pcm-dpc->E8
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_CumulativeRecovered
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:cumulativeCount_MedicalConditionIncident_COVID_19_Recovered
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativeRecovered
 
 Node: E:pcm-dpc->E9
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_CumulativeDeath
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:cumulativeCount_MedicalConditionIncident_COVID_19_Death
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativeDeath
 
 Node: E:pcm-dpc->E10
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_CumulativePositiveCase
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:cumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativePositiveCase
 
 Node: E:pcm-dpc->E11
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_CumulativeTestsPerformed
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:cumulativeCount_MedicalTest_COVID_19
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativeTestsPerformed
 
 Node: E:pcm-dpc->E12
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19_Italy_CumulativeTestedPeople
-observationAbout: E:pcm-dpc->E0
+variableMeasured: dcs:cumulativeCount_Person_COVID_19_Tested
+observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
 value: C:pcm-dpc->CumulativeTestedPeople
 

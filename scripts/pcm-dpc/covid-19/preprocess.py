@@ -20,17 +20,32 @@ class PcmDpc:
 
     def generate_tmcf(self):
         """ generate the template mcf"""
-        self.geo_template() # write the geo node to template mcf
+        geo_node = self.geo_template() # write the geo node to template mcf
         TEMPLATE = ('Node: E:pcm-dpc->E{index}\n'
                     'typeOf: dcs:StatVarObservation\n'
-                    'variableMeasured: dcs:COVID19_Italy_{SVname}\n'
-                    'observationAbout: E:pcm-dpc->E0\n'
+                    'variableMeasured: dcs:{SVFullName}\n'
+                    'observationAbout: {geoNode}\n'
                     'observationDate: C:pcm-dpc->Date\n'
                     'value: C:pcm-dpc->{SVname}\n\n')
         idx = 1
         with open(self.name + '.tmcf', 'a') as f_out:
             for statvar in self.stat_vars:
-                f_out.write(TEMPLATE.format_map({'index': idx, 'SVname': statvar}))
+                if statvar == 'CumulativeTestsPerformed':
+                    sv_full_name = 'cumulativeCount_MedicalTest_COVID_19'
+                elif statvar == 'CumulativeTestedPeople':
+                    sv_full_name = 'cumulativeCount_Person_COVID_19_Tested'
+                elif 'Cumulative' in statvar:
+                    sv_full_name = ('cumulativeCount_MedicalConditionIncident_'
+                                    'COVID_19_'+ statvar.replace('Cumulative', ''))
+                elif 'Incremental' in statvar:
+                    sv_full_name = ('incrementalCount_MedicalConditionIncident_'
+                                    'COVID_19_' + statvar)
+                else:
+                    sv_full_name = ('count_MedicalConditionIncident_COVID_19_'
+                                    + statvar)
+                f_out.write(TEMPLATE.format_map({'index': idx,
+                    'SVname': statvar, 'SVFullName': sv_full_name,
+                    'geoNode': geo_node}))
                 idx += 1
 
     def _translate(self):
@@ -55,8 +70,7 @@ class PcmDpc:
                  'tamponi': 'CumulativeTestsPerformed',
                  'casi_testati': 'CumulativeTestedPeople',
                  'casi_da_sospetto_diagnostico': 'PositiveCasesFromClinicActivity',
-                 'casi_da_screening': 'PositiveCasesFromSurveyAndTest'
-}
+                 'casi_da_screening': 'PositiveCasesFromSurveyAndTest'}
         self.data = self.data.rename(columns=it2en)
 
     def set_location(self):
@@ -81,15 +95,10 @@ class PcmDpcNational(PcmDpc):
 
     def set_location(self):
         assert (self.data['State'] == 'ITA').all()
-        self.data['Location'] = 'country/ITA'
         self.data = self.data.drop(columns=['State'])
 
     def geo_template(self):
-        GEO_TEMPLATE = ('Node: E:pcm-dpc->E0\n'
-                        'typeOf: dcs:Country\n'
-                        'dcid: C:pcm-dpc->Location\n\n')
-        with open(self.name + '.tmcf', 'w') as f_out:
-            f_out.write(GEO_TEMPLATE)
+        return 'dcid:country/ITA'
 
 
 class PcmDpcRegions(PcmDpc):
@@ -123,6 +132,7 @@ class PcmDpcRegions(PcmDpc):
                     'dcid: C:pcm-dpc->Location\n\n'
         with open(self.name + '.tmcf', 'w') as f_out:
             f_out.write(GEO_TEMPLATE)
+        return 'E:pcm-dpc->E0'
 
 
 class PcmDpcProvinces(PcmDpc):
@@ -138,7 +148,7 @@ class PcmDpcProvinces(PcmDpc):
                               '/master/scripts/istat/geos/cleaned/ISTAT_province'
                               '.csv')
         province_code = pd.read_csv(province_code_path)[['Province Abbreviation',
-                                                       'NUTS3']]
+                                                         'NUTS3']]
         province_dict = (province_code.set_index('Province Abbreviation')
                          .to_dict()['NUTS3'])
         # drop the data whose location is "being defined/updated",
@@ -156,6 +166,7 @@ class PcmDpcProvinces(PcmDpc):
                         'dcid: C:pcm-dpc->Location\n\n')
         with open(self.name + '.tmcf', 'w') as f_out:
             f_out.write(GEO_TEMPLATE)
+        return 'E:pcm-dpc->E0'
 
 def main():
     """process the national, regional, provinces data and generate
