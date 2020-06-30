@@ -52,8 +52,7 @@ class USStateQuarterlyGDPImportTest(unittest.TestCase):
         raw_df = pd.read_csv("test_tiny_raw.csv", index_col=0)
         clean_df = pd.read_csv("test_tiny_cleaned.csv", index_col=0)
         loader = StateGDPDataLoader()
-        loader.raw_df = raw_df
-        loader.process_data()
+        loader.process_data(raw_df)
         pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
     def test_data_processing_small(self):
@@ -61,8 +60,7 @@ class USStateQuarterlyGDPImportTest(unittest.TestCase):
         raw_df = pd.read_csv("test_small_raw.csv", index_col=0)
         clean_df = pd.read_csv("test_small_cleaned.csv", index_col=0)
         loader = StateGDPDataLoader()
-        loader.raw_df = raw_df
-        loader.process_data()
+        loader.process_data(raw_df)
         pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
 

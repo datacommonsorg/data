@@ -81,13 +81,21 @@ class StateGDPDataLoader:
         data = list(csv.reader(data.splitlines()))
         self.raw_df = pd.DataFrame(data[1:], columns=data[0])
 
-    def process_data(self):
+    def process_data(self, raw_data=None):
         """Cleans raw_df and converts it from wide to long format.
 
+        Args:
+            raw_data (optional): raw data frame to be used as starting point
+            for cleaning. If argument is left unspecified, instance self.raw_df
+            is used instead.
+
         Raises:
-            ValueError: The instance raw_df data frame has not been initialized.
-            This is probably caused by not having called download_data.
+            ValueError: The instance raw_df data frame has not been initialized
+            and no other raw_data was passed as argument. This is probably
+            caused by not having called download_data.
         """
+        if raw_data is not None:
+            self.raw_df = raw_data
         if self.raw_df is None:
             raise ValueError("Uninitialized value of raw data frame. Please "
                              "check you are calling download_data before "

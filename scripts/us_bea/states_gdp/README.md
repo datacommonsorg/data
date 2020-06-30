@@ -4,7 +4,7 @@
 - Available for download at [https://www.bea.gov/data/gdp/gdp-state](https://www.bea.gov/data/gdp/gdp-state).
 
 ## Notes on Raw Data Format
-- The only way of downloading the desired data from the BEA website (liked above) is by downloading relatively large Zip files. These Zip files contain lots of GDP data (e.g. GDP by industry, county, etc.), distributed across many different CSV files. In this import, we are interested in only one of these CSV files, which specifically contains quarterly GDP data per US state. Thus, in the import_data.py script outlined below, we download the entire Zip file, and pull out the single CSV file that is relevant to us.
+- The only way of downloading the desired data from the BEA website (linked above) is by downloading relatively large Zip files. These Zip files contain lots of GDP data (e.g. GDP by industry, county, etc.), distributed across many different CSV files. In this import, we are interested in only one of these CSV files, which specifically contains quarterly GDP data per US state. Thus, in the import_data.py script outlined below, we download the entire Zip file, and pull out the single CSV file that is relevant to us.
 
 ## Cleaned Data
 - [states_gdp.csv](states_gdp.csv) contains quarterly gross domestic product (GDP) data per US state as measured in three different ways:
