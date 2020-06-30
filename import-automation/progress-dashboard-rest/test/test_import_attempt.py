@@ -19,7 +19,6 @@ Tests for import_attempt.py.
 import unittest
 from unittest import mock
 
-from context import app
 from app.resource import import_attempt
 from app.service import import_attempt_database_dict
 

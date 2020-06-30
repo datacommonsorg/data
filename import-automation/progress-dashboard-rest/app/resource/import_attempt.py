@@ -45,7 +45,7 @@ NOT_FOUND_ERROR = 'attempt_id not found'
 
 
 class ImportAttempt(flask_restful.Resource):
-    """Base class of an import attempt resource.
+    """Base class for an import attempt resource.
 
     Attributes:
         database: A database service for storing import attempts
@@ -121,7 +121,8 @@ class ImportAttemptByID(ImportAttempt):
     def patch(self, attempt_id):
         """Modifies the value of a field of an existing attempt.
 
-        It is not allowed to modify the value of attempt_id.
+        The attempt_id of an existing import attempt resource is forbidden
+        to be patched.
 
         Args:
             attempt_id: ID of theI attempt as a string
