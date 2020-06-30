@@ -23,7 +23,7 @@ This directory contains artifacts required for importing Italy Department of Civ
     - test if the statistical variables in the template MCF can be found in the mcf of StatVars.
     - test if the columns specified in the template MCF can be found in the csv files.
     
-## Node:
+## Note:
 Starting from 2020/06/25, different sources of total positive cases are reported:
 - positive cases from clinic activity  
 - positive cases from surveys and tests 
