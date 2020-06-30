@@ -50,7 +50,7 @@ class USStateQuarterlyGDPImportVal(unittest.TestCase):
         self.assertSetEqual(all_quarters, data_quarters)
 
     def test_process_data(self):
-        """Tests that raw data gets process properly.
+        """Tests that raw data gets processed properly.
 
         Tests that all columns in processed data are as expected.
         Checks that all types are as expected.
