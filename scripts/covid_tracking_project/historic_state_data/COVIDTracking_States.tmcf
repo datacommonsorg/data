@@ -1,123 +1,96 @@
 
 Node: E:COVIDTracking_States->E0
-typeOf: dcs:State
-dcid: C:COVIDTracking_States->GeoId
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->CumulativeCount_MedicalTest_COVID_19
 
 Node: E:COVIDTracking_States->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CumulativeTestResults
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19_Positive
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeTestResults
+value: C:COVIDTracking_States->CumulativeCount_MedicalTest_COVID_19_Positive
 
 Node: E:COVIDTracking_States->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19NewTestResults
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19_Negative
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19NewTestResults
+value: C:COVIDTracking_States->CumulativeCount_MedicalTest_COVID_19_Negative
 
 Node: E:COVIDTracking_States->E3
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CumulativePositiveTestResults
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:Count_MedicalTest_COVID_19_Pending
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativePositiveTestResults
+value: C:COVIDTracking_States->Count_MedicalTest_COVID_19_Pending
 
 Node: E:COVIDTracking_States->E4
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19NewPositiveTestResults
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19NewPositiveTestResults
+value: C:COVIDTracking_States->CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
 
 Node: E:COVIDTracking_States->E5
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CumulativeNegativeTestResults
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeNegativeTestResults
+value: C:COVIDTracking_States->CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
 
 Node: E:COVIDTracking_States->E6
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19NewNegativeTestResults
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19NewNegativeTestResults
+value: C:COVIDTracking_States->Count_MedicalConditionIncident_COVID_19_PatientHospitalized
 
 Node: E:COVIDTracking_States->E7
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19PendingTests
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19PendingTests
+value: C:COVIDTracking_States->CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized
 
 Node: E:COVIDTracking_States->E8
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CumulativeRecoveredCases
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientInICU
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeRecoveredCases
+value: C:COVIDTracking_States->Count_MedicalConditionIncident_COVID_19_PatientInICU
 
 Node: E:COVIDTracking_States->E9
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CumulativeDeaths
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeDeaths
+value: C:COVIDTracking_States->CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU
 
 Node: E:COVIDTracking_States->E10
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19NewDeaths
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientOnVentilator
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19NewDeaths
+value: C:COVIDTracking_States->Count_MedicalConditionIncident_COVID_19_PatientOnVentilator
 
 Node: E:COVIDTracking_States->E11
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CurrentHospitalizedCases
-observationAbout: E:COVIDTracking_States->E0
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CurrentHospitalizedCases
-
-Node: E:COVIDTracking_States->E12
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CumulativeHospitalizedCases
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeHospitalizedCases
-
-Node: E:COVIDTracking_States->E13
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19NewHospitalizedCases
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19NewHospitalizedCases
-
-Node: E:COVIDTracking_States->E14
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CurrentICUCases
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CurrentICUCases
-
-Node: E:COVIDTracking_States->E15
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CumulativeICUCases
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeICUCases
-
-Node: E:COVIDTracking_States->E16
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CurrentVentilatorCases
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CurrentVentilatorCases
-
-Node: E:COVIDTracking_States->E17
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:COVID19CumulativeVentilatorCases
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->COVID19CumulativeVentilatorCases
+value: C:COVIDTracking_States->CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator
