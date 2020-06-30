@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"os"
 	"strings"
 )
@@ -43,10 +44,12 @@ type Options struct {
 }
 
 // shardSize is a byte count to split on.
-// TODO(rsned): What do we do is someone wants shard larger the 4GB?
 type shardSize int64
 
 // ShardSize returns an option that sets the desired shard size in bytes.
+//
+// If the value is non-positive, then there will be no splitting of output.
+// All data will go in a single file.
 func ShardSize(numBytes int64) Option { return shardSize(numBytes) }
 
 func (x shardSize) set(opts *Options) {
@@ -58,11 +61,10 @@ func (x shardSize) set(opts *Options) {
 type dataType int
 
 const (
-	// dataTypeRaw is for plain bytes, no smarts, just split on exact byte count.
+	// dataTypeBytes is for plain bytes, no smarts, just split on exact byte count.
 	//
-	// TODO(rsned): Is raw the clearest name for this? Maybe dataTypeBytes?
-	// This is just the basic write whatever comes in as-is. dataTypePlain?
-	dataTypeRaw dataType = iota
+	// This is the default behavior.
+	dataTypeBytes dataType = iota
 
 	// dataTypeText is for textual values that will wrap on the next newline
 	// that comes after the byte count requested.
@@ -72,14 +74,14 @@ const (
 	// shard split will only occur after the line that closes an MCF block.
 	dataTypeMCF
 
-	// TODO: If there are other formats of data being sharded for writing
-	// that need more smarts, add them here. (e.g. JSON should split on the
+	// TODO(rsned): If there are other formats of data being sharded for writing
+	// that need more smarts, add them here. (E.g., JSON should split on the
 	// close of a complete record so that all file shards can be independently
 	// processed safely.
 )
 
-// RawDataType configures the writer to treat data as plain bytes.
-func RawDataType() Option { return dataTypeRaw }
+// BytesDataType configures the writer to treat data as plain bytes.
+func BytesDataType() Option { return dataTypeBytes }
 
 // TextDataType configures the writer to treat data as text, so data
 // shards are split on line breaks and not mid-line.
@@ -99,8 +101,8 @@ func (d dataType) set(opts *Options) {
 // If an error occurs writing to the Writer, no more data will be accepted and all
 // subsequent writes will return the error.
 type Writer struct {
-	basePath  string
-	extension string // extension with out any leading period.
+	basePath  string // full path and file name prefix.
+	extension string // extension with leading period if set.
 	opts      *Options
 
 	currentFile  *os.File // file handle currently being written to.
@@ -115,8 +117,9 @@ type Writer struct {
 // If no options are given, the writer defaults to 100 MB shard size, and
 // writing out the data as bytes with no smarts on split points.
 //
-// If multiple of the same option are supplied, only the last will be used.
-// e.g. ShardSize(1024), ShardSize(100), the shard size will be 100 bytes.
+// If multiple values of the same type of option are supplied, only the last
+// one will be have effect. E.g., given []Option{ShardSize(1024), ShardSize(100)},
+// the shard size used will be 100 bytes.
 func NewWriter(basePath, extension string, opts ...Option) io.WriteCloser {
 	w := &Writer{
 		basePath:  basePath,
@@ -127,13 +130,20 @@ func NewWriter(basePath, extension string, opts ...Option) io.WriteCloser {
 		},
 	}
 
-	// If the user accidentally includes the dot before the extension,
-	// chop it off since we insert it when making the filenames.
-	strings.TrimPrefix(w.extension, ".")
+	// If the user sets an extension, prepend the period if they didn't
+	// so we can more simply construct the filename.
+	if len(extension) > 0 && !strings.HasPrefix("extension", ".") {
+		w.extension = fmt.Sprintf(".%s", extension)
+	}
 
-	// Check opts and set any the user has chosen to set explicitly.
+	// Check the opts and set any the user has chosen to set explicitly.
 	for _, o := range opts {
 		o.set(w.opts)
+	}
+
+	if w.opts.shardSize <= 0 {
+		// 2^64 bytes in a file ought to be enough for anybody.
+		w.opts.shardSize = math.MaxInt64
 	}
 
 	var err error
@@ -146,10 +156,9 @@ func NewWriter(basePath, extension string, opts ...Option) io.WriteCloser {
 
 // currentFileName is a helper to format the current filename.
 func (w *Writer) currentFileName() string {
-	if w.extension == "" {
-		return fmt.Sprintf("%s_%d", w.basePath, w.currentShard)
-	}
-	return fmt.Sprintf("%s_%d.%s", w.basePath, w.currentShard, w.extension)
+	// TODO(rsned): Come to a decision on shard number width and padding.
+	// E.g., %d, %05d, etc.
+	return fmt.Sprintf("%s_%d%s", w.basePath, w.currentShard, w.extension)
 }
 
 // Write writes len(p) bytes from p to the underlying data stream. It returns
@@ -160,7 +169,7 @@ func (w *Writer) Write(p []byte) (n int, err error) {
 		return 0, fmt.Errorf("error occurred during previous writes")
 	}
 
-	// Will this fit without needing to start a new shard.
+	// Will this fit without needing to start a new shard?
 	if w.opts.shardSize-w.bytesWritten-int64(len(p)) > 0 {
 		n, err := w.currentFile.Write(p)
 		w.bytesWritten += int64(n)
@@ -170,11 +179,11 @@ func (w *Writer) Write(p []byte) (n int, err error) {
 		return n, err
 	}
 
-	// TODO(rsned): Implment the sharded writing of bytes.
+	// TODO(rsned): Implement the sharded writing of bytes.
 	return -1, fmt.Errorf("sharded write not implemented")
 }
 
-// WriteString writes the contents of the given string. It returns the number of
+// WriteString writes the contents of the given string. It returns the number n of
 // bytes written from from the string (0 <= n <= len(s)) and any error encountered
 // that caused the write to stop early.
 func (w *Writer) WriteString(s string) (n int, err error) {
@@ -182,7 +191,7 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 		return 0, fmt.Errorf("error occurred during previous writes")
 	}
 
-	// TODO(rsned): Maybe allow a +/- 5% leeway so we don't end up
+	// TODO(rsned): Future enhancement: Allow a +/- 1% leeway so we don't end up
 	// writing out a 100 MB shard and a 1 kB shard when it could all
 	// end up in one file.
 
@@ -199,7 +208,7 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 	var bytesWritten int64
 
 	switch w.opts.dataType {
-	case dataTypeRaw:
+	case dataTypeBytes:
 		// We will need more than the current shard to complete the write.
 		for {
 			// Figure out how much of the input we can use before sharding.
@@ -212,10 +221,11 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 			n, err = w.currentFile.WriteString(s[:splitPoint])
 			if (err != nil) || int64(n) != splitPoint {
 				w.errorTriggered = true
+				return n, fmt.Errorf("error writing: %v", err)
 			}
 			bytesWritten += int64(n)
 
-			// drop the portion written so far from the string.
+			// Drop the portion written so far from the string.
 			s = s[splitPoint:]
 
 			// If there is no more to write, we are done with the loop.
@@ -224,7 +234,10 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 			}
 			// Else, there is still more to write, create a new
 			// shard and keep going.
-			w.newShard()
+			if err := w.newShard(); err != nil {
+				w.errorTriggered = true
+				return int(bytesWritten), err
+			}
 		}
 	case dataTypeText:
 		// TODO(rsned): implement
@@ -245,8 +258,12 @@ func (w *Writer) WriteByte(c byte) error {
 	}
 
 	// Will this byte fit, or do we need to start a new shard.
-	if w.opts.shardSize-w.bytesWritten-1 <= 0 {
-		w.newShard()
+	// TODO(rsned): As above, in the future apply a little leeway for this.
+	if w.bytesWritten+1 > w.opts.shardSize {
+		if err := w.newShard(); err != nil {
+			w.errorTriggered = true
+			return err
+		}
 	}
 
 	n, err := w.currentFile.Write([]byte{c})
@@ -262,20 +279,25 @@ func (w *Writer) Close() error {
 	return w.currentFile.Close()
 }
 
-// newShard is used to close the existing shard, start a new one, and reset the counters.
-func (w *Writer) newShard() {
+// newShard is used to close the existing shard, start a new one, and reset
+// the counters. If an error occurs closing the current file or opening the
+// new file, it is returned.
+func (w *Writer) newShard() error {
+	var err error
+
 	if w.currentFile != nil {
-		// Do we need to do something if there was an error closing
-		// the current file?
-		w.currentFile.Close()
+		if err = w.currentFile.Close(); err != nil {
+			w.errorTriggered = true
+			return err
+		}
 	}
 
 	w.currentShard++
 	w.bytesWritten = 0
 
-	var err error
 	w.currentFile, err = os.Create(w.currentFileName())
 	if err != nil {
 		w.errorTriggered = true
 	}
+	return err
 }
