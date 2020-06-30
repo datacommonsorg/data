@@ -39,7 +39,7 @@ with open('COVIDTracking_States.csv', 'w', newline='') as f_out:
     for row_dict in reader:
       processed_dict = {
           'Date': '%s-%s-%s' % (row_dict['date'][:4], row_dict['date'][4:6], row_dict['date'][6:]),
-          'GeoId': 'geoId/%s' % row_dict['fips'],
+          'GeoId': 'dcid:geoId/%s' % row_dict['fips'],
           'CumulativeCount_MedicalTest_COVID_19': row_dict['totalTestResults'],
           'CumulativeCount_MedicalTest_COVID_19_Positive': row_dict['positive'],
           'CumulativeCount_MedicalTest_COVID_19_Negative': row_dict['negative'],
@@ -56,25 +56,18 @@ with open('COVIDTracking_States.csv', 'w', newline='') as f_out:
 
       writer.writerow(processed_dict)
 
-# Automate Template MCF generation since there are 18 Statitical Variables.
-TEMPLATE_MCF_GEO = """
-Node: E:COVIDTracking_States->E0
-typeOf: schema:State
-dcid: C:COVIDTracking_States->GeoId
-"""
-
+# Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """
 Node: E:COVIDTracking_States->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:CovidTrackingProject
-observationAbout: E:COVIDTracking_States->E0
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
 value: C:COVIDTracking_States->{stat_var}
 """
 
 stat_vars = output_columns[2:]
 with open('COVIDTracking_States.tmcf', 'w', newline='') as f_out:
-  f_out.write(TEMPLATE_MCF_GEO)
   for i in range(len(stat_vars)):
-    f_out.write(TEMPLATE_MCF_TEMPLATE.format_map({'index': i+1, 'stat_var': output_columns[2:][i]}))
+    f_out.write(TEMPLATE_MCF_TEMPLATE.format_map({'index': i, 'stat_var': output_columns[2:][i]}))
