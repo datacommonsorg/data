@@ -13,7 +13,7 @@ Author: qlj-lijuan
 
 ### Download URL
 
-CSV files are available for download from https:github.com/pcm-dpc/COVID-19.
+CSV files are available for download from https:github.com/pcm-dpc/COVID-19 .
 
 ### Overview
   This dataset contains daily updated information on Covid-19 in Italy from the Head of Department of Civil Protection starting from 2020/02/24. 
