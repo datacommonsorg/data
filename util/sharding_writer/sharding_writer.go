@@ -314,16 +314,3 @@ func (w *Writer) shardFull() bool {
 	// end up in one file.
 	return (w.opts.shardSize - w.bytesWritten) <= 0
 }
-
-// willDataFitInShard reports if the current number of bytes will fit in the
-// current shard or if we need to start a new one.
-func (w *Writer) willDataFitInShard(n int) bool {
-	if n <= 0 {
-		return true
-	}
-
-	// TODO(rsned): Future enhancement: Allow a +/- 1% leeway so we don't end up
-	// writing out a 100 MB shard and a 1 kB shard when it could all
-	// end up in one file.
-	return (w.opts.shardSize - w.bytesWritten - int64(n)) >= 0
-}
