@@ -6,12 +6,53 @@ steps:
   entrypoint: python3
   args: ["-m" , "pip" , "install" , "-t" , "." , "-r" , "requirements.txt"]
 
-# TODO: Uncomment when mcf_template_filler dependencies are added and working.
-#- id: python_test
+# We can't just test everything under out cloud build working directory because
+# that's where python installs all of its packages also, and we don't really
+# want to test all of that other unrelated code.
+#
+# The unittest module only supports one -s path at a time, so we need multiple rules
+# to get both places where we submit code.
+#
+- id: python_test_util
+  name: python:3.7
+  entrypoint: python3
+  args: ["-m", "unittest", "discover", "-v", "-s", "util/", "-p", "*_test.py"]
+  # In cloudbuild, everything happens under /workspace path
+  env: ["PYTHONPATH=/workspace"]
+  waitFor:
+  - python_install
+
+- id: python_test_scripts
+  name: python:3.7
+  entrypoint: python3
+  args: ["-m", "unittest", "discover", "-v", "-s", "scripts/", "-p", "*_test.py"]
+  # In cloudbuild, everything happens under /workspace path
+  env: ["PYTHONPATH=/workspace"]
+  waitFor:
+  - python_install
+
+##
+## TODO(rsned): Uncomment this block once existing code has been run through formatter and pushed.
+##
+#- id: python_format_check
 #  name: python:3.7
 #  entrypoint: python3
-#  args: ["-m", "unittest", "discover", "-v", "-s", ".", "-p", "*_test.py"]
+#  args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/"]
+#  # In cloudbuild, everything happens under /workspace path
+#  env: ["PYTHONPATH=/workspace"]
 #  waitFor:
 #  - python_install
-#
-# TODO: Add Python linter, format checker, and any other useful code health tools.
+
+##
+## TODO(rsned): Uncomment this block once existing code has been run through linter and pushed.
+##
+#- id: python_lint
+#  name: python:3.7
+#  entrypoint: python3
+#  args: ["-m", "pylint", "util/", "scripts/"]
+#  # In cloudbuild, everything happens under /workspace path
+#  env: ["PYTHONPATH=/workspace"]
+#  waitFor:
+#  - python_install
+
+# TODO: Add any other useful code health tools.
