@@ -26,43 +26,61 @@ import io
 import zipfile
 import csv
 import re
+from import_data import StateGDPDataLoader
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None # default='warn'
 
-# Note: this list will be imported from the US State GDP data file as soon
-# as that is merged.
-US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas',
-             'California', 'Colorado', 'Connecticut', 'Delaware',
-             'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
-             'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-             'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-             'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
-             'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-             'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
-             'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
-             'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-             'West Virginia', 'Wisconsin', 'Wyoming']
-
-# It would be great to make this class inherit from StateGDPDataLoader to
-# avoid repeating e.g. the dowload_data function. As soon as that gets merged
-# in, I will modify this to inherit from there.
-class StateGDPIndustryDataLoader:
+class StateGDPIndustryDataLoader(StateGDPDataLoader):
     """Pulls GDP industry-level state data from BEA.
 
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
-    FILE = "SQGDP2__ALL_AREAS_2005_2019.csv"
+    _STATE_QUARTERLY_INDUSTRY_GDP_FILE = "SQGDP2__ALL_AREAS_2005_2019.csv"
 
-    def __init__(self):
-        """Downloads the data, cleans it and stores it in instance DF."""
-        df = self.download_data()
+    def download_data(self):
+        """Downloads ZIP file, extracts the desired CSV, and puts it into a data
+        frame. Stores that data frame in the instance raw_df variable.
+        """
+        # Open zip file from link.
+        resp = urlopen(self._ZIP_LINK)
 
-        # Filters out columns that are not US States (e.g. New England).
-        # TODO(fpernice): Add non-state entities.
-        df = df[df['GeoName'].isin(US_STATES)]
+        # Read the file, interpret it as bytes, and create a ZipFile instance
+        # from it for easy handling.
+        zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
+
+        # Open the specific desired file (CSV) from the folder, and decode it.
+        # This results in a string representation of the file. Interpret that
+        # as a CSV, and read it into a DF.
+        data = zip_file.open(self._STATE_QUARTERLY_INDUSTRY_GDP_FILE).read()
+        data = data.decode('utf-8')
+        data = list(csv.reader(data.splitlines()))
+        self.raw_df = pd.DataFrame(data[1:], columns=data[0])
+
+    def process_data(self, raw_data=None):
+        """Cleans raw_df and converts it from wide to long format.
+
+        Args:
+            raw_data (optional): raw data frame to be used as starting point
+            for cleaning. If argument is left unspecified, instance self.raw_df
+            is used instead.
+
+        Raises:
+            ValueError: The instance raw_df data frame has not been initialized
+            and no other raw_data was passed as argument. This is probably
+            caused by not having called download_data.
+        """
+        if raw_data is not None:
+            self.raw_df = raw_data
+        if self.raw_df is None:
+            raise ValueError("Uninitialized value of raw data frame. Please "
+                             "check you are calling download_data before "
+                             "process_data.")
+        df = self.raw_df.copy()
+
+        # Filters out columns that are not US states (e.g. New England).
+        df = df[df['GeoName'].isin(self._US_STATES)]
 
         # Gets columns that represent quarters, e.g. 2015:Q2, by matching
         # against a regular expression.
@@ -73,67 +91,47 @@ class StateGDPIndustryDataLoader:
                      value_vars=all_quarters,
                      var_name='Quarter')
 
-        qtr_month_map = {
-            'Q1':'03',
-            'Q2':'06',
-            'Q3':'09',
-            'Q4':'12'
-        }
-
-        def date_to_obs_date(date):
-            """Converts date format e.g. 2005:Q3 to e.g. 2005-09."""
-            return date[:4] + "-" + qtr_month_map[date[5:]]
-        df['Quarter'] = df['Quarter'].apply(date_to_obs_date)
-
-        def convert_geoid(fips_code):
-            """Creates GeoId column. We get lucky that Data Commons's geoIds
-            equal US FIPS state codes.
-            """
-            fips_code = fips_code.replace('"', "")
-            fips_code = fips_code.replace(" ", "")
-            return "geoId/" + fips_code[:2]
-        df['GeoId'] = df['GeoFIPS'].apply(convert_geoid)
+        df['Quarter'] = df['Quarter'].apply(self._date_to_obs_date)
+        df['GeoId'] = df['GeoFIPS'].apply(self._convert_geoid)
 
         df = df[df['IndustryClassification'] != "..."]
 
-        def convert_industry_class(naics_code):
-            """Filters out aggregate NAICS codes and assigns them their Data
-            Commons codes.
-            """
-            if naics_code == "321,327-339":
-                return "JOLTS_320000"
-            if naics_code == "311-316,322-326":
-                return "JOLTS_340000"
-            return naics_code.replace("-", "_")
-        df['NAICS'] = df['IndustryClassification'].apply(convert_industry_class)
+        df['NAICS'] = df['IndustryClassification'].apply(self._convert_industry_class)
+        df['value'] = df['value'].apply(self._value_converter)
 
-        self.df = df.drop(["GeoFIPS","IndustryClassification"], axis=1)
+        self.clean_df = df.drop(["GeoFIPS","IndustryClassification"], axis=1)
 
-    def download_data(self):
-        """Downloads zip, extracts the desired CSV, and puts it into a DF."""
-        # Open zip file from link.
-        resp = urlopen(self.ZIP_LINK)
+    @staticmethod
+    def _value_converter(val):
+        if type(val) is float:
+            return val
+        if '(' in val or ')' in val:
+            return -1
+        
 
-        # Read the file, interpret it as bytes, and create a ZipFile instance
-        # from it for easy handling.
-        zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
-
-        # Open the specific desired file (CSV) from the folder, and decode it.
-        # This results in a string representation of the file. Interpret that
-        # as a CSV, and read it into a DF.
-        data = zip_file.open(self.FILE).read().decode('utf-8')
-        data = list(csv.reader(data.splitlines()))
-        df = pd.DataFrame(data[1:], columns=data[0])
-        return df
-
-    def save_csv(self, prefix='states_industry_gdp'):
-        """Splits instance data frame into multiple CSV files, one per industry
-        code. This facilitates TMCF design.
+    @staticmethod
+    def _convert_industry_class(naics_code):
+        """Filters out aggregate NAICS codes and assigns them their Data
+        Commons codes.
         """
-        for naics_code, naics_df in self.df.groupby("NAICS"):
-            naics_df.to_csv(prefix + f"_{naics_code}.csv")
+        if naics_code == "321,327-339":
+            naics_code = "JOLTS_320000"
+        if naics_code == "311-316,322-326":
+            naics_code = "JOLTS_340000"
+        naice_code = naics_code.replace("-", "_")
+        return f"dcs:USSateQuarterlyIndustryGDP_NAICS_{naics_code}"
 
-    def generate_MCF_TMCF(self):
+    def save_csv(self, filename='states_industry_gdp.csv'):
+        """Saves instance data frame to specified CSV file.
+
+        Raises:
+            ValueError: The instance clean_df data frame has not been
+            initialized. This is probably caused by not having called
+            process_data.
+        """
+        super().save_csv(filename)
+
+    def generate_MCF(self):
         """Generates MCF StatVars for each industry code."""
         mcf_temp = ('Node: dcid:USSateQuarterlyIndustryGDP_NAICS_{naics}\n'
                     'typeOf: dcs:StatisticalVariable\n'
@@ -142,26 +140,18 @@ class StateGDPIndustryDataLoader:
                     'measuredProperty: dcs:amount\n'
                     'measurementQualifier: dcs:Nominal\n'
                     'naics: dcid:NAICS/{naics}\n\n')
-        tmcf_temp = ('Node: E:states_industry_gdp_{naics}->E1\n'
-                     'typeOf: dcs:StatVarObservation\n'
-                     'variableMeasured: dcs:USSateQuarterlyIndustryGDP_NAICS_{naics}\n'
-                     'observationAbout: C:states_industry_gdp_{naics}->GeoId\n'
-                     'observationDate: C:states_industry_gdp_{naics}->Quarter\n'
-                     'observationPeriod: "P3M"\n'
-                     'value: C:states_industry_gdp_{naics}->value\n'
-                     'unit: "Current USD"\n\n')
 
-        with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f, \
-             open('states_industry_gdp.tmcf', 'w') as tmcf_f:
-            for naics_code in self.df['NAICS'].unique():
+        with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f:
+            for naics_code in self.clean_df['NAICS'].unique():
                 mcf_f.write(mcf_temp.format(naics=naics_code))
-                tmcf_f.write(tmcf_temp.format(naics=naics_code))
 
 def main(argv):
     del argv # unused
     loader = StateGDPIndustryDataLoader()
+    loader.download_data()
+    loader.process_data()
     loader.save_csv()
-    loader.generate_MCF_TMCF()
+    loader.generate_MCF()
 
 
 if __name__ == '__main__':
