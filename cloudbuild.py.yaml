@@ -1,0 +1,17 @@
+# Run Python tests, lint, etc.
+steps:
+
+- id: python_install
+  name: python:3.7
+  entrypoint: python3
+  args: ["-m" , "pip" , "install" , "-t" , "." , "-r" , "requirements.txt"]
+
+# TODO: Uncomment when mcf_template_filler dependencies are added and working.
+#- id: python_test
+#  name: python:3.7
+#  entrypoint: python3
+#  args: ["-m", "unittest", "discover", "-v", "-s", ".", "-p", "*_test.py"]
+#  waitFor:
+#  - python_install
+#
+# TODO: Add Python linter, format checker, and any other useful code health tools.
