@@ -13,7 +13,7 @@ Author: qlj-lijuan
 
 ### Download URL
 
-CSV files are available for download from https:github.com/pcm-dpc/COVID-19 .
+CSV files are available for download from https://github.com/pcm-dpc/COVID-19. 
 
 ### Overview
   This dataset contains daily updated information on Covid-19 in Italy from the Head of Department of Civil Protection starting from 2020/02/24. 
@@ -50,7 +50,7 @@ The province level dataset reports:
 
 This dataset is under Creative Commons Attribution 4.0 International License ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). It grants users the right to copy and redistribute the material in any medium or format; remix, transform, and build upon the material for any purpose, even commercially.
 
-The license is available online at <https://github.com/pcm-dpc/COVID-19/blob/master/LICENSE>.
+The license is available online at https://github.com/pcm-dpc/COVID-19/blob/master/LICENSE.
 
 ### Dataset Documentation and Relevant Links 
 
