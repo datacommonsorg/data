@@ -204,8 +204,11 @@ def get_schema_from_text(term, id_to_node, new_source_map,
     else:
         return None
 
-    term_map['parentClassName'] = [id_to_class_name[node.value] for node
-                                   in id_to_node[id_string].parent_list]
+    term_map['parentClassName'] = [id_to_class_name[node.value]
+                                   for node in id_to_node[id_string].parent_list
+                                   if (node.value in interaction_type_id_set
+                                   or node.value in detection_method_id_set
+                                   or node.value in interaction_source_id_set)]
     schema_piece_list.append(current_line)
 
     current_line = 'name: "' + dcid + '"'
