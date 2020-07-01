@@ -154,7 +154,7 @@ name: "CorrelatedMutations"
 psimiID: "MI:0026"
 description: "Pairs of multiple alignments of orthologous sequences are used to identify potential interacting partners as proteins that show covariation of their residue identities between different species. Proteins displaying inter-protein correlated mutations during evolution are likely to be interacting proteins due to co-adapted evolution of their protein interacting interfaces"
 pubMedID: "11933068"
-specializationOf: dcs:SequenceBasedPrediction,dcs:FeaturePrediction
+specializationOf: dcs:SequenceBasedPrediction
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:Cosedimentation
@@ -219,7 +219,7 @@ psimiID: "MI:0035"
 description: "Predicts the structure of a molecular complex from the unbound structures of its components. The initial approach in the majority of docking procedures is based largely on the 'rigid-body' assumption, whereby the proteins are treated as solid objects. Initial scoring of a complex is based on geometric fit or surface complementarity. This generally requires some knowledge of the binding site to limit the number of solutions"
 pubMedID: "11478868"
 pubMedID: "9631301"
-specializationOf: dcs:StructureBasedPrediction,dcs:FeaturePredictionFromStructure
+specializationOf: dcs:StructureBasedPrediction
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:DomainFusion
@@ -237,7 +237,7 @@ name: "DomainProfilePairs"
 psimiID: "MI:0037"
 description: "This approach uses a protein interaction network of a given organism to infer interaction in another organism using information about the interacting region. The regions or domains involved in interactions are clustered if they share sequence similarity and have common interacting partners. The resulting domain profiles are then used to screen the proteome of another organism and domain-domain interactions are inferred. Ultimately, an inferred protein interaction map is built in this second organism"
 pubMedID: "11473021"
-specializationOf: dcs:ExperimentalKnowledgeBased,dcs:SequenceBasedPrediction,dcs:FeaturePrediction
+specializationOf: dcs:ExperimentalKnowledgeBased,dcs:SequenceBasedPrediction
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:DynamicLightScattering
@@ -284,7 +284,7 @@ name: "ElectronResonance"
 psimiID: "MI:0043"
 description: "A form of spectroscopy in which the absorption of microwave by a sample in a strong magnetic field is used to study atoms or molecules with unpaired electrons"
 pubMedID: "14755292"
-specializationOf: dcs:Biophysical,dcs:ExperimentalFeatureDetection
+specializationOf: dcs:Biophysical
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:ExperimentalInteractionDetection
@@ -293,7 +293,6 @@ name: "ExperimentalInteractionDetection"
 psimiID: "MI:0045"
 description: "Methods based on laboratory experiments to determine an interaction"
 pubMedID: "14755292"
-specializationOf: dcs:InteractionDetectionMethod
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:ExperimentalKnowledgeBased
@@ -402,7 +401,6 @@ name: "InteractionPrediction"
 psimiID: "MI:0063"
 description: "Computational methods to predict an interaction"
 pubMedID: "14755292"
-specializationOf: dcs:InteractionDetectionMethod
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:InterologsMapping
@@ -476,7 +474,7 @@ psimiID: "MI:0077"
 description: "Nuclear magnetic resonance (NMR) is an effect whereby magnetic nuclei in a magnetic field absorb and re-emit electromagnetic (EM) energy. Certain atomic nuclei, and in particular hydrogen, have a magnetic moment or spin; i.e., they have an intrinsic magnetisation, like a bar magnet. The spin aligns along the strong magnetic field, but can be changed to a misaligned excited state in response to applied radio frequency (RF) pulses of electromagnetic radiation. When the excited hydrogen nuclei relax to their aligned state, they emit RF radiation, which can be measured and displayed as a spectrum. The nature of the emitted radiation depends on the environment of each hydrogen nucleus, and if one nucleus is excited, it will influence the absorption and emission of radiation by other nuclei that lie close to it. It is consequently possible, by an ingenious elaboration of the basic NMR technique known as two-dimensional NMR, to distinguish the signals from hydrogen nuclei in different amino acid residues and to identify and measure the small shifts in these signals that occur when these hydrogen nuclei lie close enough to interact: the size of such a shift reveals the distance between the interacting pair of hydrogen atoms. In this way NMR can give information about the distances between the parts of the interacting molecule. NMR provides information about interacting atoms thereby permitting to obtain information about macromolecular structure and molecular interactions"
 pubMedID: "12062432"
 pubMedID: "12120505"
-specializationOf: dcs:Biophysical,dcs:ExperimentalFeatureDetection
+specializationOf: dcs:Biophysical
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:PeptideArray
@@ -643,7 +641,7 @@ description: "This method measures formation of complex by monitoring changes in
 pubMedID: "11896282"
 pubMedID: "12120258"
 pubMedID: "16338355"
-specializationOf: dcs:ExperimentalFeatureDetection,dcs:Biosensor
+specializationOf: dcs:Biosensor
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:T7PhageDisplay
@@ -688,7 +686,7 @@ name: "XRayCrystallography"
 psimiID: "MI:0114"
 description: "Analysis of a diffraction pattern generated by a single crystal. X-rays have a wavelength, typically around 1 Angstrom (the diameter of a hydrogen atom). If a narrow parallel beam of X-rays is directed at a sample of a pure protein, most of the X-rays will pass straight through it. A small fraction, however, will be scattered by the atoms in the sample. If the sample is a well-ordered crystal, the scattered waves will reinforce one another at certain points and will appear as diffraction spots when the X-rays are recorded by a suitable detector. The position and intensity of each spot in the X-ray diffraction pattern contain information about the position and nature of the atoms in the crystal. The three-dimensional structure of a large molecule can be deduced from the electron-density map of its crystal. In recent years X-ray diffraction analysis has become increasingly automated, and now the slowest step is likely to be the production of suitable macromolecule crystals. This requires high concentration of very pure macromolecule and empirical searching for the proper crystallization conditions"
 pubMedID: "14755292"
-specializationOf: dcs:Biophysical,dcs:ExperimentalFeatureDetection
+specializationOf: dcs:Biophysical
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:YeastDisplay
@@ -896,7 +894,6 @@ name: "GeneticInteraction"
 psimiID: "MI:0208"
 description: "An effect in which two genetic perturbations, when combined, result in a phenotype that does not appear to be merely explained by the superimposition or addition of effects of the original perturbations.\nab (not=) "
 pubMedID: "16527956"
-specializationOf: dcs:InteractionType
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:GeranylgeranylationReaction
@@ -1153,7 +1150,6 @@ name: "Inference"
 psimiID: "MI:0362"
 description: "Evidence based on human assumption, either when the complete experimental support is not available or when the results are extended by homology to closely related orthologues sequences"
 pubMedID: "14755292"
-specializationOf: dcs:InteractionDetectionMethod,dcs:ParticipantIdentificationMethod,dcs:FeatureDetectionMethod
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:InferredByAuthor
@@ -1254,7 +1250,6 @@ name: "Colocalization"
 psimiID: "MI:0403"
 description: "Coincident occurrence of molecules in a given subcellular fraction observed with a low resolution methodology from which a physical interaction among those molecules cannot be inferred"
 pubMedID: "14755292"
-specializationOf: dcs:InteractionType
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:ComigrationInNonDenaturingGelElectrophoresis
@@ -1317,7 +1312,7 @@ name: "EnzymeLinkedImmunosorbentAssay"
 psimiID: "MI:0411"
 description: "Following non-covalent binding of a purified primary ligand to a solid phase, a blocking reagent is added to prevent any non-specific binding. A specific antigen is then allowed to bind to the primary ligand. Unbound antigen is removed by washing and a secondary antibody conjugated to an enzyme (e.g. horseradish peroxidase) is added. Following a washing step to remove unbound secondary ligand, the extent to which a chromogenic substrate (e.g. 3,3', 5,5' tetramethyl benzidine chromogen [TMB]) is converted to a soluble coloured product by the conjugated enzyme in a given time is determined by spectrophotometry using a standard microplate absorbance reader. A similar type of approach can be utilized to detect enzymatic activities. The substrate, attached to a solid phase is incubated in the presence of the enzyme and the enzymatic modification is monitored by an antibody that is specific for the modified substrate (for instance a phosphorylated protein)"
 pubMedID: "11906746"
-specializationOf: dcs:IdentificationByAntibody,dcs:SolidPhaseAssay
+specializationOf: dcs:SolidPhaseAssay
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:ElectrophoreticMobilitySupershiftAssay
@@ -1527,7 +1522,6 @@ name: "LiteratureDatabase"
 psimiID: "MI:0445"
 description: "Databases acting as a source of literature information"
 pubMedID: "14755292"
-specializationOf: dcs:DatabaseCitation
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:Pubmed
@@ -1545,7 +1539,6 @@ name: "FeatureDatabase"
 psimiID: "MI:0447"
 description: "A database describing a feature on a molecule"
 pubMedID: "14755292"
-specializationOf: dcs:DatabaseCitation
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:GeneOntology
@@ -1671,7 +1664,6 @@ name: "InteractionDatabase"
 psimiID: "MI:0461"
 description: "Databases that contain experimental or predictive molecular interaction data"
 pubMedID: "14755292"
-specializationOf: dcs:DatabaseCitation
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:Bind
@@ -1781,7 +1773,6 @@ name: "ParticipantDatabase"
 psimiID: "MI:0473"
 description: "Database of molecules participating in molecular interactions"
 pubMedID: "14755292"
-specializationOf: dcs:DatabaseCitation
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:Chebi
@@ -1916,7 +1907,6 @@ name: "PsiMi"
 psimiID: "MI:0488"
 description: "PSI-MI"
 pubMedID: "14755292"
-specializationOf: dcs:DatabaseCitation
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:SourceDatabase
@@ -1925,7 +1915,6 @@ name: "SourceDatabase"
 psimiID: "MI:0489"
 description: "Database that originally provided the interaction record for exchange purposes"
 pubMedID: "14755292"
-specializationOf: dcs:DatabaseCitation
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:DeacetylaseRadiometricAssay
@@ -2304,7 +2293,6 @@ name: "UnspecifiedMethod"
 psimiID: "MI:0686"
 description: "Yet to be identified interaction detection method associated with interaction data imported from a third party database. This database may have potentially different standards of curation"
 pubMedID: "14755292"
-specializationOf: dcs:InteractionDetectionMethod
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:SandwichImmunoassay
@@ -2395,7 +2383,7 @@ name: "ReverseTwoHybrid"
 psimiID: "MI:0726"
 description: "Yeast strains are generated in which expression of DB-X/AD-Y or DBPX hybrid proteins is toxic under particular conditions (negative selection). Under these conditions, dissociation of an interaction should provide a selective advantage thereby facilitating detection: a few growing yeast colonies in which DB-X/AD-Y (or DBPX/binding site) fail to interact should be identified among many nongrowing colonies containing interacting DB-X/AD-Y or DBPX/binding site"
 pubMedID: "8816797"
-specializationOf: dcs:FeatureDetectionMethod,dcs:TranscriptionalComplementationAssay
+specializationOf: dcs:TranscriptionalComplementationAssay
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:LexaB52Complementation
@@ -2569,7 +2557,7 @@ psimiID: "MI:0813"
 description: "Upon binding of two proximity probes (usually antibodies conjugated to DNA) to the same target protein complex, the oligonucleotides on the proximity probes are brought close together. These antibody-conjugated oligonucleotides hybridize to two connector oligonucleotides that are ligated to form a circular DNA molecule. This newly formed DNA-molecule can be amplified by rolling circle amplification. The resulting single-stranded DNA-molecule collapses into a bundle, which is detectable through hybridization of fluorescently labeled complementary oligonucleotides"
 pubMedID: "15155907"
 pubMedID: "\:17072308"
-specializationOf: dcs:AffinityTechnology,dcs:IdentificationByAntibody
+specializationOf: dcs:AffinityTechnology
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:ProteaseAccessibilityLaddering
@@ -4019,7 +4007,6 @@ name: "PredictedInteraction"
 psimiID: "MI:1110"
 description: "Interaction has been predicted by either interologue mapping, by an algorithm or by a computational method"
 pubMedID: "14755292"
-specializationOf: dcs:InteractionType
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:TwoHybridBaitOrPreyPoolingApproach
@@ -4856,7 +4843,6 @@ name: "ExperimentDatabase"
 psimiID: "MI:1336"
 description: "Databases that contain information used to add additional information to experiments (meta-data)"
 pubMedID: "14755292"
-specializationOf: dcs:DatabaseCitation
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:Efo
@@ -5497,7 +5483,6 @@ typeOf: dcs:InteractionDetectionMethodEnum
 name: "MolecularAssociation"
 psimiID: "MI:2232"
 description: "A particular way two or more molecules influence one another"
-specializationOf: dcs:InteractionType
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:GuanineNucleotideExchangeFactorReaction
@@ -5613,7 +5598,6 @@ typeOf: dcs:InteractionDetectionMethodEnum
 name: "FunctionalAssociation"
 psimiID: "MI:2286"
 description: "Binary relationship between biological entities when one of them modulates the other in terms of function, expression, degradation or stability of the other and the relationship between the partners cannot be ascertained as direct, so intermediate steps are implicitly present. This relation specifically does not imply a physical interaction between the entities involved"
-specializationOf: dcs:InteractionType
 descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"
 
 Node: dcid:DapSeq
