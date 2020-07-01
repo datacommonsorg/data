@@ -249,11 +249,7 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 		// TODO(rsned): Implement
 		return -1, fmt.Errorf("sharded writestring for text not implemented yet.")
 	case dataTypeMCF:
-<<<<<<< HEAD
 		// TODO(rsned): Implement
-=======
-		// TODO(rsned): Implement.
->>>>>>> cd0d77aee204edb04d40b2a8b1ee6009c3bfb76d
 		return -1, fmt.Errorf("sharded writestring for MCF not implemented yet.")
 	}
 
