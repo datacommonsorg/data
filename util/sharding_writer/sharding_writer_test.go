@@ -319,6 +319,87 @@ func checkFileBeginEndContents(t *testing.T, testPath, filename string, begins, 
 	cmpBytes(t, fn, contents[len(contents)-len(ends):], ends)
 }
 
+func TestWriterWrite(t *testing.T) {
+	tests := []struct {
+		label string   // descriptive label of this case
+		path  string   // directory name piece to distinguish test data
+		opts  []Option // selection of opts to set.
+		count int64    // how many we want to generate
+
+		wantNumShards int
+
+		// Check the first and last bytes of the first shard.
+		wantFirstShardBegin string
+		wantFirstShardEnd   string
+
+		// Check the first and last bytes of the last shard.
+		// Note that these are only checked if there is more than one shard.
+		wantLastShardBegin string
+		wantLastShardEnd   string
+	}{
+		{
+			label:               "Write 1 byte to default shard, default opts, byte data",
+			path:                "1_byte_to_default_shard_all_defaults_write",
+			count:               1,
+			wantNumShards:       1,
+			wantFirstShardBegin: "a",
+			wantFirstShardEnd:   "a",
+		},
+		// TODO(rsned): Add more Write([]byte) test cases.
+	}
+
+	for _, test := range tests {
+		setup(test.path)
+		// Create a sharded writer with the options in the test case.
+		w := NewWriter(makeFilename(test.path, "sharded_data"), "dat",
+			test.opts...)
+
+		// Generate data to be written out.
+		data := generateBytes(test.count)
+
+		n, err := w.Write(data)
+		if err != nil {
+			t.Errorf("error writing to the sharding writer: %v", err)
+			// Move on to next case since the remaining checks won't work.
+			continue
+		}
+		if n != len(data) {
+			t.Errorf("num bytes written doesn't match the input. wrote %d, had %d",
+				n, len(data))
+			// Move on to next case since the remaining checks won't work.
+			continue
+		}
+
+		// Close the writer to ensure it's all saved.
+		w.Close()
+
+		// Now perform the various checks of the outputs.
+		checkExpectedNumShards(t, test.path, test.wantNumShards)
+
+		checkFilesSumToInputSize(t, test.path, int64(len(data)))
+
+		// TODO(rsned): If the shard number format changes, change here and below as well.
+
+		// TODO(rsned): If the shard number format changes, change here and below as well.
+		firstFile := "sharded_data_0.dat"
+		checkFileBeginEndContents(t, test.path, firstFile,
+			[]byte(test.wantFirstShardBegin),
+			[]byte(test.wantFirstShardEnd))
+
+		if test.wantNumShards > 1 {
+			lastFile := fmt.Sprintf("sharded_data_%d.dat", test.wantNumShards-1)
+			checkFileBeginEndContents(t, test.path, lastFile,
+				[]byte(test.wantLastShardBegin),
+				[]byte(test.wantLastShardEnd))
+
+		}
+
+		// If you want to debug output or leave the results on disk,
+		// comment out the tearDown call which removes this tests data.
+		tearDown(test.path)
+	}
+}
+
 func TestWriterWriteString(t *testing.T) {
 	tests := []struct {
 		label string   // descriptive label of this case
@@ -342,8 +423,8 @@ func TestWriterWriteString(t *testing.T) {
 		wantLastShardEnd   string
 	}{
 		{
-			label:               "Write 1 byte to default shard, default opts, raw data",
-			path:                "1_byte_to_default_shard_all_defaults",
+			label:               "Write 1 byte to default shard, default opts, byte data",
+			path:                "1_byte_to_default_shard_all_defaults_writestring",
 			count:               1,
 			dataType:            dataTypeBytes,
 			wantNumShards:       1,
@@ -351,8 +432,8 @@ func TestWriterWriteString(t *testing.T) {
 			wantFirstShardEnd:   "a",
 		},
 		{
-			label: "Write 1 byte to 1 shard, raw data",
-			path:  "1_byte_to_1_byte_shard_raw",
+			label: "Write 1 byte to 1 shard, byte data",
+			path:  "1_byte_to_1_byte_shard_writestring",
 			opts: []Option{
 				BytesDataType(),
 				ShardSize(1),
@@ -363,8 +444,8 @@ func TestWriterWriteString(t *testing.T) {
 			wantFirstShardEnd: "a",
 		},
 		{
-			label: "Write 256 bytes to 1 shard, raw data",
-			path:  "256_bytes_to_100mb_shard_raw",
+			label: "Write 256 bytes to 1 shard, byte data",
+			path:  "256_bytes_to_100mb_shard_writestring",
 			opts: []Option{
 				BytesDataType(),
 			},
@@ -375,8 +456,8 @@ func TestWriterWriteString(t *testing.T) {
 			wantFirstShardEnd:   "z0123-45",
 		},
 		{
-			label: "Write 256 bytes to 32-byte shards, raw data",
-			path:  "256_bytes_to_32_byte_shards_raw",
+			label: "Write 256 bytes to 32-byte shards, byte data",
+			path:  "256_bytes_to_32_byte_shards_writestring",
 			opts: []Option{
 				BytesDataType(),
 				ShardSize(32),
@@ -390,8 +471,8 @@ func TestWriterWriteString(t *testing.T) {
 			wantLastShardEnd:    "z0123-45",
 		},
 		{
-			label: "Write 257 bytes to 11-byte shards, raw data",
-			path:  "257_bytes_to_11_byte_shards_raw",
+			label: "Write 257 bytes to 11-byte shards, byte data",
+			path:  "257_bytes_to_11_byte_shards_writestring",
 			opts: []Option{
 				BytesDataType(),
 				ShardSize(11),

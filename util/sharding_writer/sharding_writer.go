@@ -57,7 +57,7 @@ func (x shardSize) set(opts *Options) {
 }
 
 // dataType is an enum of the different types of writing behavior based
-// on the data expected to be writen.
+// on the data expected to be written.
 type dataType int
 
 const (
@@ -107,7 +107,7 @@ type Writer struct {
 
 	currentFile  *os.File // file handle currently being written to.
 	currentShard int      // current shard number.
-	bytesWritten int64    // number of bytes written to current shard.
+	bytesWritten int64    // number of bytes written to current shard [0, shardSize).
 
 	// track if we should be failing all writes going forward.
 	errorTriggered bool
@@ -141,6 +141,7 @@ func NewWriter(basePath, extension string, opts ...Option) io.WriteCloser {
 		o.set(w.opts)
 	}
 
+	// If the user specifies an unusable size, default to 'all data'.
 	if w.opts.shardSize <= 0 {
 		// 2^64 bytes in a file ought to be enough for anybody.
 		w.opts.shardSize = math.MaxInt64
@@ -156,7 +157,8 @@ func NewWriter(basePath, extension string, opts ...Option) io.WriteCloser {
 
 // currentFileName is a helper to format the current filename.
 func (w *Writer) currentFileName() string {
-	// TODO(rsned): Come to a decision on shard number width and padding.
+	// TODO(rsned): Come to a decision on shard number width and padding
+	// that will match what the Python library does.
 	// E.g., %d, %05d, etc.
 	return fmt.Sprintf("%s_%d%s", w.basePath, w.currentShard, w.extension)
 }
@@ -164,23 +166,42 @@ func (w *Writer) currentFileName() string {
 // Write writes len(p) bytes from p to the underlying data stream. It returns
 // the number of bytes written from p (0 <= n <= len(p)) and any error encountered
 // that caused the write to stop early.
-func (w *Writer) Write(p []byte) (n int, err error) {
+func (w *Writer) Write(data []byte) (n int, err error) {
 	if w.errorTriggered {
 		return 0, fmt.Errorf("error occurred during previous writes")
 	}
 
-	// Will this fit without needing to start a new shard?
-	if w.opts.shardSize-w.bytesWritten-int64(len(p)) > 0 {
-		n, err := w.currentFile.Write(p)
-		w.bytesWritten += int64(n)
-		if err != nil || n != len(p) {
-			w.errorTriggered = true
+	var bytesWritten int64
+	for len(data) > 0 {
+		// Check if we need to start a new shard.
+		if w.shardFull() {
+			if err := w.newShard(); err != nil {
+				w.errorTriggered = true
+				return int(bytesWritten), err
+			}
 		}
-		return n, err
+		// Figure out how much of the input we can use before sharding.
+		splitPoint := w.opts.shardSize - w.bytesWritten
+
+		// If we don't have enough to fill out the remainder of
+		// the current shard, adjust the cut point.
+		if splitPoint > int64(len(data)) {
+			splitPoint = int64(len(data))
+		}
+
+		n, err = w.currentFile.Write(data[:splitPoint])
+		bytesWritten += int64(n)
+		w.bytesWritten += int64(n)
+		if (err != nil) || int64(n) != splitPoint {
+			w.errorTriggered = true
+			return int(bytesWritten), fmt.Errorf("error writing: %v", err)
+		}
+
+		// Drop the portion written so far.
+		data = data[splitPoint:]
 	}
 
-	// TODO(rsned): Implement the sharded writing of bytes.
-	return -1, fmt.Errorf("sharded write not implemented")
+	return int(bytesWritten), nil
 }
 
 // WriteString writes the contents of the given string. It returns the number n of
@@ -191,59 +212,48 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 		return 0, fmt.Errorf("error occurred during previous writes")
 	}
 
-	// TODO(rsned): Future enhancement: Allow a +/- 1% leeway so we don't end up
-	// writing out a 100 MB shard and a 1 kB shard when it could all
-	// end up in one file.
-
-	// Check if we can write this without triggering a new shard.
-	if w.opts.shardSize-w.bytesWritten-int64(len(s)) > 0 {
-		n, err := w.currentFile.WriteString(s)
-		w.bytesWritten += int64(n)
-		if err != nil || n != len(s) {
-			w.errorTriggered = true
-		}
-		return n, err
-	}
-
+	// track total bytes written in this call, which may be more than shardSize.
 	var bytesWritten int64
 
 	switch w.opts.dataType {
 	case dataTypeBytes:
-		// We will need more than the current shard to complete the write.
-		for {
+		for len(s) > 0 {
+			// Check if we need to start a new shard.
+			if w.shardFull() {
+				if err := w.newShard(); err != nil {
+					w.errorTriggered = true
+					return int(bytesWritten), err
+				}
+			}
 			// Figure out how much of the input we can use before sharding.
 			splitPoint := w.opts.shardSize - w.bytesWritten
-			// If we don't have enough to fill out a shard, adjust the cut point.
+
+			// If we don't have enough to fill out the remainder of
+			// the current shard, adjust the cut point.
 			if splitPoint > int64(len(s)) {
 				splitPoint = int64(len(s))
 			}
 
 			n, err = w.currentFile.WriteString(s[:splitPoint])
+			bytesWritten += int64(n)
+			w.bytesWritten += int64(n)
 			if (err != nil) || int64(n) != splitPoint {
 				w.errorTriggered = true
-				return n, fmt.Errorf("error writing: %v", err)
+				return int(bytesWritten), fmt.Errorf("error writing: %v", err)
 			}
-			bytesWritten += int64(n)
 
 			// Drop the portion written so far from the string.
 			s = s[splitPoint:]
-
-			// If there is no more to write, we are done with the loop.
-			if len(s) == 0 {
-				break
-			}
-			// Else, there is still more to write, create a new
-			// shard and keep going.
-			if err := w.newShard(); err != nil {
-				w.errorTriggered = true
-				return int(bytesWritten), err
-			}
 		}
 	case dataTypeText:
-		// TODO(rsned): implement
+		// TODO(rsned): Implement
 		return -1, fmt.Errorf("sharded writestring for text not implemented yet.")
 	case dataTypeMCF:
+<<<<<<< HEAD
+		// TODO(rsned): Implement
+=======
 		// TODO(rsned): Implement.
+>>>>>>> cd0d77aee204edb04d40b2a8b1ee6009c3bfb76d
 		return -1, fmt.Errorf("sharded writestring for MCF not implemented yet.")
 	}
 
@@ -258,8 +268,7 @@ func (w *Writer) WriteByte(c byte) error {
 	}
 
 	// Will this byte fit, or do we need to start a new shard.
-	// TODO(rsned): As above, in the future apply a little leeway for this.
-	if w.bytesWritten+1 > w.opts.shardSize {
+	if w.shardFull() {
 		if err := w.newShard(); err != nil {
 			w.errorTriggered = true
 			return err
@@ -300,4 +309,25 @@ func (w *Writer) newShard() error {
 		w.errorTriggered = true
 	}
 	return err
+}
+
+// shardFull reports of the current shard is full.
+func (w *Writer) shardFull() bool {
+	// TODO(rsned): Future enhancement: Allow a +/- 1% leeway so we don't end up
+	// writing out a 100 MB shard and a 1 kB shard when it could all
+	// end up in one file.
+	return (w.opts.shardSize - w.bytesWritten) <= 0
+}
+
+// willDataFitInShard reports if the current number of bytes will fit in the
+// current shard or if we need to start a new one.
+func (w *Writer) willDataFitInShard(n int) bool {
+	if n <= 0 {
+		return true
+	}
+
+	// TODO(rsned): Future enhancement: Allow a +/- 1% leeway so we don't end up
+	// writing out a 100 MB shard and a 1 kB shard when it could all
+	// end up in one file.
+	return (w.opts.shardSize - w.bytesWritten - int64(n)) >= 0
 }
