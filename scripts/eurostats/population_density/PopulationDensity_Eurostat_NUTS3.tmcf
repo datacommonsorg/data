@@ -1,7 +1,7 @@
 
-Node: E:PopulationDensity_Eurostat_NUTS3->E0
+Node: E:EurostatNUTS3_DensityTracking->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:PopulationDensity
-observationAbout: C:PopulationDensity_Eurostat_NUTS3->GeoId
-observationDate: C:PopulationDensity_Eurostat_NUTS3->Dates
-value: C:PopulationDensity_Eurostat_NUTS3->PopulationDensity
+variableMeasured: dcs:PopulationDensity_Eurostat_NUTS3
+observationAbout: C:EurostatNUTS3_DensityTracking->GeoId
+observationDate: C:EurostatNUTS3_DensityTracking->Dates
+value: C:EurostatNUTS3_DensityTracking->PopulationDensity_Eurostat_NUTS3
