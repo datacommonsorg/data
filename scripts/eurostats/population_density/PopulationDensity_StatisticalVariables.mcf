@@ -1,0 +1,13 @@
+Node: dcid:PopulationDensity_Eurostat_NUTS3
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person 
+measuredProperty: dcs:populationDensity
+statType: dcs:measuredValue
+unit: dcs:SquareKilometer
+measurementQualifier: dcs:TotalLand
+
+
+Node: dcid:TotalLand
+typeOf: dcs:UnitOfMeasure
+name: “total land”
+description: "Quantifier for total land measured."
