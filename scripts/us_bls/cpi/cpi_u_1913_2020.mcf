@@ -1,0 +1,7 @@
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ConsumerGoodsAndServices
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
