@@ -21,13 +21,11 @@ import unittest
 from unittest import mock
 
 from flask_restful import reqparse
-import werkzeug
 
 from app import utils
 from app import main
 from app.service import import_attempt_database_dict
 
-PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
 IMPORT_ATTEMPT_DATABASE = 'app.resource.import_attempt' \
                           '.import_attempt_database.ImportAttemptDatabase'
 
