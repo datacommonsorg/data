@@ -1,1 +1,1 @@
-Importing data from Eurostat for popualtion density in NUTS3 defined areas. 
+Importing dataset from Eurostats --> Population density in NUTS3 defined areas.
