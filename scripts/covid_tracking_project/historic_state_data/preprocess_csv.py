@@ -17,14 +17,18 @@ import io
 import urllib.request
 
 output_columns = ['Date', 'GeoId',
-                  'COVID19CumulativeTestResults', 'COVID19NewTestResults',
-                  'COVID19CumulativePositiveTestResults', 'COVID19NewPositiveTestResults',
-                  'COVID19CumulativeNegativeTestResults', 'COVID19NewNegativeTestResults',
-                  'COVID19PendingTests',
-                  'COVID19CumulativeRecoveredCases', 'COVID19CumulativeDeaths', 'COVID19NewDeaths',
-                  'COVID19CurrentHospitalizedCases', 'COVID19CumulativeHospitalizedCases', 'COVID19NewHospitalizedCases',
-                  'COVID19CurrentICUCases', 'COVID19CumulativeICUCases',
-                  'COVID19CurrentVentilatorCases', 'COVID19CumulativeVentilatorCases',
+                  'CumulativeCount_MedicalTest_COVID_19',
+                  'CumulativeCount_MedicalTest_COVID_19_Positive',
+                  'CumulativeCount_MedicalTest_COVID_19_Negative',
+                  'Count_MedicalTest_COVID_19_Pending',
+                  'CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered',
+                  'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased',
+                  'Count_MedicalConditionIncident_COVID_19_PatientHospitalized',
+                  'CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized',
+                  'Count_MedicalConditionIncident_COVID_19_PatientInICU',
+                  'CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU',
+                  'Count_MedicalConditionIncident_COVID_19_PatientOnVentilator',
+                  'CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator'
                  ]
 with open('COVIDTracking_States.csv', 'w', newline='') as f_out:
   writer = csv.DictWriter(f_out, fieldnames=output_columns, lineterminator='\n')
@@ -35,46 +39,35 @@ with open('COVIDTracking_States.csv', 'w', newline='') as f_out:
     for row_dict in reader:
       processed_dict = {
           'Date': '%s-%s-%s' % (row_dict['date'][:4], row_dict['date'][4:6], row_dict['date'][6:]),
-          'GeoId': 'geoId/%s' % row_dict['fips'],
-          'COVID19CumulativeTestResults': row_dict['totalTestResults'],
-          'COVID19NewTestResults': row_dict['totalTestResultsIncrease'],
-          'COVID19CumulativePositiveTestResults': row_dict['positive'],
-          'COVID19NewPositiveTestResults': row_dict['positiveIncrease'],
-          'COVID19CumulativeNegativeTestResults': row_dict['negative'],
-          'COVID19NewNegativeTestResults': row_dict['negativeIncrease'],
-          'COVID19PendingTests': row_dict['pending'],
-          'COVID19CumulativeRecoveredCases': row_dict['recovered'],
-          'COVID19CumulativeDeaths': row_dict['death'],
-          'COVID19NewDeaths': row_dict['deathIncrease'],
-          'COVID19CurrentHospitalizedCases': row_dict['hospitalizedCurrently'],
-          'COVID19CumulativeHospitalizedCases': row_dict['hospitalizedCumulative'],
-          'COVID19NewHospitalizedCases': row_dict['hospitalizedIncrease'],
-          'COVID19CurrentICUCases': row_dict['inIcuCurrently'],
-          'COVID19CumulativeICUCases': row_dict['inIcuCumulative'],
-          'COVID19CurrentVentilatorCases': row_dict['onVentilatorCurrently'],
-          'COVID19CumulativeVentilatorCases': row_dict['onVentilatorCumulative'],
+          'GeoId': 'dcid:geoId/%s' % row_dict['fips'],
+          'CumulativeCount_MedicalTest_COVID_19': row_dict['totalTestResults'],
+          'CumulativeCount_MedicalTest_COVID_19_Positive': row_dict['positive'],
+          'CumulativeCount_MedicalTest_COVID_19_Negative': row_dict['negative'],
+          'Count_MedicalTest_COVID_19_Pending': row_dict['pending'],
+          'CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered': row_dict['recovered'],
+          'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased': row_dict['death'],
+          'Count_MedicalConditionIncident_COVID_19_PatientHospitalized': row_dict['hospitalizedCurrently'],
+          'CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized': row_dict['hospitalizedCumulative'],
+          'Count_MedicalConditionIncident_COVID_19_PatientInICU': row_dict['inIcuCurrently'],
+          'CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU': row_dict['inIcuCumulative'],
+          'Count_MedicalConditionIncident_COVID_19_PatientOnVentilator': row_dict['onVentilatorCurrently'],
+          'CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator': row_dict['onVentilatorCumulative'],
       }   
 
       writer.writerow(processed_dict)
 
-# Automate Template MCF generation since there are 18 Statitical Variables.
-TEMPLATE_MCF_GEO = """
-Node: E:COVIDTracking_States->E0
-typeOf: schema:State
-dcid: C:COVIDTracking_States->GeoId
-"""
-
+# Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """
 Node: E:COVIDTracking_States->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
-observationAbout: E:COVIDTracking_States->E0
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVIDTracking_States->GeoId
 observationDate: C:COVIDTracking_States->Date
 value: C:COVIDTracking_States->{stat_var}
 """
 
 stat_vars = output_columns[2:]
 with open('COVIDTracking_States.tmcf', 'w', newline='') as f_out:
-  f_out.write(TEMPLATE_MCF_GEO)
   for i in range(len(stat_vars)):
-    f_out.write(TEMPLATE_MCF_TEMPLATE.format_map({'index': i+1, 'stat_var': output_columns[2:][i]}))
+    f_out.write(TEMPLATE_MCF_TEMPLATE.format_map({'index': i, 'stat_var': output_columns[2:][i]}))

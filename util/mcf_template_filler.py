@@ -58,13 +58,15 @@ class Filler(object):
         # Completed line.
         template_copy.append(line)
         continue
-      if not line.startswith(('Node: ', 'observedNode: ')):
-        assert (len(set(matches)) == 1), 'Line with var must have only 1 var.'
+      if not (line.startswith(('Node: ', 'observedNode: ')) or
+              re.fullmatch(r'\{p[0-9]\}:\s\{v[0-9]\}', line)):
+        assert (len(set(matches)) == 1
+               ), 'Line should have only 1 var:\n%s' % line
       write_line = True
       for template_var in matches:
         if template_var in template_dict:
           if not isinstance(template_dict[template_var], (int, float)):
-            assert template_dict[template_var]
+            assert template_dict[template_var], 'Non-truthy value: %s' % template_var
           # Non-mval variable is present with truthy value.
         elif template_var not in self._required_vars:
           if line.startswith(('Node: ', 'observedNode: ')):
