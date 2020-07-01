@@ -23,6 +23,7 @@ Download the requirements.txt via pip and execute the file with Python 3.
 from absl import app
 import pandas as pd
 import urllib.request
+import textwrap
 
 # JOLTS dataset contains a mix of NAICS industry codes and custom BLS jolts aggregations
 # Existing NAICS Codes are mapped directly
@@ -141,7 +142,7 @@ def generate_cleaned_dataframe():
 
   # Combine datasets into a single dataframe including origin of data
   jolts_df = pd.DataFrame()
-  columns_to_keep = ['series_id', 'year', 'period', 'value']
+  columns_to_keep = ['series_id', 'year', 'period', 'value', 'footnote_codes']
 
   for schema_name, population_type, job_change_event, df in schema_mapping:
     df = df.loc[:, columns_to_keep]
@@ -151,7 +152,7 @@ def generate_cleaned_dataframe():
     jolts_df = jolts_df.append(df)
 
   # Drop non-monthly data
-  jolts_df = jolts_df.drop(jolts_df.query("period == 'M13'").index)
+  jolts_df = jolts_df.query("period != 'M13'")
 
   # Change date to ISO Format (YYYY-MM)
   def period_year_to_iso_8601(row):
@@ -166,6 +167,9 @@ def generate_cleaned_dataframe():
 
   # Drop rate data
   jolts_df = jolts_df.query("ratelevel_code == 'L'")
+
+  # Drop prelimary data
+  jolts_df = jolts_df.query("footnote_codes != 'P'")
 
   # Drop non-national data
   jolts_df = jolts_df.query("region_code == '00'")
@@ -195,11 +199,12 @@ def generate_cleaned_dataframe():
     """ Maps a row of the dataframe to the Statistical Variable that describes it """
     base_stat_var = row['statistical_variable']
     industry_code = row['industry_code']
+    seasonal_adjustment = row['seasonal_adjustment']
 
-    return f"dcs:{base_stat_var}_NAICS_{industry_code}"
+    return f"dcs:{base_stat_var}_NAICS_{industry_code}_{seasonal_adjustment}"
 
   # Build map to Statistical Variable
-  jolts_df['SeasonalAdjustment'] = jolts_df['seasonal'].apply(lambda adjustment: "Adjusted" if adjustment == "S" else "Unadjusted")
+  jolts_df['seasonal_adjustment'] = jolts_df['seasonal'].apply(lambda adjustment: "Adjusted" if adjustment == "S" else "Unadjusted")
   jolts_df['StatisticalVariable'] = jolts_df.apply(map_row_to_statistical_variable, axis=1)
   jolts_df['Value'] = jolts_df['value']
 
@@ -220,20 +225,21 @@ def create_statistical_variables(jolts_df, schema_mapping):
   """
 
   template_stat_var = """
-  Node: dcid:{STAT_CLASS}_NAICS_{INDUSTRY}
+  Node: dcid:{STAT_CLASS}_NAICS_{INDUSTRY}_{ADJUSTMENT}
   typeOf: dcs:StatisticalVariable
   populationType: {POPULATION}
   jobChangeEvent: dcs:{JOB_CHANGE_EVENT}
   statType: dcs:measuredValue
   measuredProperty: dcs:count
+  measurementQualifier: {BLS_ADJUSTMENT}
   naics: dcid:NAICS/{INDUSTRY}
   """
 
   # Map industry and seasonal adjustment to statistical variable name
-  adjustment_types = [("Adjusted", "BLSSeasonallyAdjusted"), ("Unadjusted", "BLSSeasonallyUnadjusted")]
+  adjustment_types = [("Adjusted", "dcs:BLSSeasonallyAdjusted"), ("Unadjusted", "dcs:BLSSeasonallyUnadjusted")]
 
   # Output the schema mapping to a new file
-  with open(STATISTICAL_VARIABLE_FILE, "a+", newline="") as f_out:
+  with open(STATISTICAL_VARIABLE_FILE, "w+", newline="") as f_out:
     for schema_name, pop_type, job_change_event, _ in schema_mapping:
 
         unique_industries = list(jolts_df['industry_code'].unique())
@@ -241,7 +247,7 @@ def create_statistical_variables(jolts_df, schema_mapping):
         for industry_code in unique_industries:
           for adjusted_dcid_map, adjusted_schema in adjustment_types:
             # Create new schema object
-            stat_var_schema = template_stat_var
+            stat_var_schema = textwrap.dedent(template_stat_var)
 
             # Remove separation type entry if not includes
             if job_change_event == "":
@@ -255,7 +261,7 @@ def create_statistical_variables(jolts_df, schema_mapping):
                                             .replace("{POPULATION}", pop_type)      \
                                             .replace("{JOB_CHANGE_EVENT}", job_change_event)  
 
-          f_out.write(stat_var_schema)
+            f_out.write(stat_var_schema)
 
 def main(argv):
   """ Executes the downloading, preprocessing, and outputting of required MCF and CSV for JOLTS data.
@@ -268,7 +274,7 @@ def main(argv):
   jolts_df, schema_mapping = generate_cleaned_dataframe()
 
   # Output final cleaned CSV
-  final_columns = ['Date', 'StatisticalVariable', 'SeasonalAdjustment', 'Value']
+  final_columns = ['Date', 'StatisticalVariable', 'Value']
   output_csv = jolts_df.loc[:, final_columns]
   output_csv.to_csv("BLSJolts.csv", index=False, encoding="utf-8")
 
