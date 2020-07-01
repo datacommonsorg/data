@@ -30,7 +30,7 @@ df.head()
 df.columns
 
 output_columns = ['Date', 'GeoId',
-                  'PopulationDensity',
+                  'PopulationDensity_Eurostat_NUTS3',
                  ]
 with open(cleaned_file, 'w', newline='') as f_out:
   writer = csv.DictWriter(f_out, fieldnames=output_columns, lineterminator='\n')
@@ -42,7 +42,7 @@ with open(cleaned_file, 'w', newline='') as f_out:
       processed_dict = {
           'Date': '%s' % (row_dict['TIME'][:4]),
           'GeoId': 'dcid:nuts/%s' % row_dict['GEO'],
-          'PopulationDensity': row_dict['Value'],
+          'PopulationDensity_Eurostat_NUTS3': row_dict['Value'],
       }   
 
       writer.writerow(processed_dict)
@@ -53,12 +53,12 @@ df_cleaned.head()
 
 # Automate Template MCF generation since there are many Statistical Variables.
 TEMPLATE_MCF_TEMPLATE = """
-Node: E:PopulationDensity_Eurostat_NUTS3->E{index}
+Node: E:EurostatNUTS3_DensityTracking->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
-observationAbout: C:PopulationDensity_Eurostat_NUTS3->GeoId
-observationDate: C:PopulationDensity_Eurostat_NUTS3->Dates
-value: C:PopulationDensity_Eurostat_NUTS3->{stat_var}
+observationAbout: C:EurostatNUTS3_DensityTracking->GeoId
+observationDate: C:EurostatNUTS3_DensityTracking->Dates
+value: C:EurostatNUTS3_DensityTracking->{stat_var}
 """
 
 stat_vars = output_columns[2:]
