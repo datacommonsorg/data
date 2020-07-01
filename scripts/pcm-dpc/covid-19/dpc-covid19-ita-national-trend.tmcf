@@ -1,84 +1,84 @@
 Node: E:pcm-dpc->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_HospitalizedsWithSymptoms
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientHospitalizedWithSymptoms
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->HospitalizedsWithSymptoms
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_PatientHospitalizedWithSymptoms
 
 Node: E:pcm-dpc->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_IntensiveCare
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientInICU
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->IntensiveCare
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_PatientInICU
 
 Node: E:pcm-dpc->E3
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_Hospitalized
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->Hospitalized
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_PatientHospitalized
 
 Node: E:pcm-dpc->E4
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_PeopleInHomeIsolation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientInHomeIsolation
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->PeopleInHomeIsolation
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_PatientInHomeIsolation
 
 Node: E:pcm-dpc->E5
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:count_MedicalConditionIncident_COVID_19_ActiveCase
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_ActiveCase
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->ActiveCase
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_ActiveCase
 
 Node: E:pcm-dpc->E6
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:incrementalCount_MedicalConditionIncident_COVID_19_IncrementalPositiveCase
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_PositiveCase
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->IncrementalPositiveCase
+value: C:pcm-dpc->IncrementalCount_MedicalConditionIncident_COVID_19_PositiveCase
 
 Node: E:pcm-dpc->E7
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:incrementalCount_MedicalConditionIncident_COVID_19_IncrementalActiveCase
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_ActiveCase
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->IncrementalActiveCase
+value: C:pcm-dpc->IncrementalCount_MedicalConditionIncident_COVID_19_ActiveCase
 
 Node: E:pcm-dpc->E8
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:cumulativeCount_MedicalConditionIncident_COVID_19_Recovered
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->CumulativeRecovered
+value: C:pcm-dpc->CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
 
 Node: E:pcm-dpc->E9
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:cumulativeCount_MedicalConditionIncident_COVID_19_Death
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->CumulativeDeath
+value: C:pcm-dpc->CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
 
 Node: E:pcm-dpc->E10
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:cumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->CumulativePositiveCase
+value: C:pcm-dpc->CumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
 
 Node: E:pcm-dpc->E11
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:cumulativeCount_MedicalTest_COVID_19
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->CumulativeTestsPerformed
+value: C:pcm-dpc->CumulativeCount_MedicalTest_COVID_19
 
 Node: E:pcm-dpc->E12
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:cumulativeCount_Person_COVID_19_Tested
+variableMeasured: dcs:CumulativeCount_Person_COVID_19_Tested
 observationAbout: dcid:country/ITA
 observationDate: C:pcm-dpc->Date
-value: C:pcm-dpc->CumulativeTestedPeople
+value: C:pcm-dpc->CumulativeCount_Person_COVID_19_Tested
 

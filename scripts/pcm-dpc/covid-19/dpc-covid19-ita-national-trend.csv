@@ -1,4 +1,4 @@
-Date,HospitalizedsWithSymptoms,IntensiveCare,Hospitalized,PeopleInHomeIsolation,ActiveCase,IncrementalPositiveCase,IncrementalActiveCase,CumulativeRecovered,CumulativeDeath,PositiveCasesFromClinicActivity,PositiveCasesFromSurveyAndTest,CumulativePositiveCase,CumulativeTestsPerformed,CumulativeTestedPeople
+Date,Count_MedicalConditionIncident_COVID_19_PatientHospitalizedWithSymptoms,Count_MedicalConditionIncident_COVID_19_PatientInICU,Count_MedicalConditionIncident_COVID_19_PatientHospitalized,Count_MedicalConditionIncident_COVID_19_PatientInHomeIsolation,Count_MedicalConditionIncident_COVID_19_ActiveCase,IncrementalCount_MedicalConditionIncident_COVID_19_PositiveCase,IncrementalCount_MedicalConditionIncident_COVID_19_ActiveCase,CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered,CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased,PositiveCasesFromClinicActivity,PositiveCasesFromSurveyAndTest,CumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase,CumulativeCount_MedicalTest_COVID_19,CumulativeCount_Person_COVID_19_Tested
 2020-02-24,101,26,127,94,221,0,221,1,7,,,229,4324,
 2020-02-25,114,35,150,162,311,90,93,1,10,,,322,8623,
 2020-02-26,128,36,164,221,385,74,78,3,12,,,400,9587,
@@ -126,3 +126,4 @@ Date,HospitalizedsWithSymptoms,IntensiveCare,Hospitalized,PeopleInHomeIsolation,
 2020-06-27,1260,97,1357,15479,16836,-802,175,188584,34716,223262.0,16874.0,240136,5277273,3198837.0
 2020-06-28,1160,98,1258,15423,16681,-155,174,188891,34738,223272.0,17038.0,240310,5314619,3220020.0
 2020-06-29,1120,96,1216,15280,16496,-185,126,189196,34744,223254.0,17182.0,240436,5341837,3235504.0
+2020-06-30,1090,93,1183,14380,15563,-933,142,190248,34767,222901.0,17677.0,240578,5390110,3263975.0

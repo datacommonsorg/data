@@ -11,41 +11,29 @@ class PcmDpc:
     DataCommons"""
     def preprocess(self):
         """clean and save the CSV file"""
-        self.data = pd.read_csv(self.csvpath).drop(
-            columns=['note'])
+        self.data = pd.read_csv(self.csvpath)
+        assert 'note' in self.data.columns
+        self.data = self.data.drop(columns=['note'])
         self._translate()
+        # drop the time, keep the date only
         self.data['Date'] = self.data['Date'].str[0:10]
         self.set_location() # prepocess the geo ids
         self.data.to_csv(self.name + '.csv', index=False)
 
     def generate_tmcf(self):
-        """ generate the template mcf"""
+        """generate the template mcf"""
         geo_node = self.geo_template() # write the geo node to template mcf
         TEMPLATE = ('Node: E:pcm-dpc->E{index}\n'
                     'typeOf: dcs:StatVarObservation\n'
-                    'variableMeasured: dcs:{SVFullName}\n'
+                    'variableMeasured: dcs:{SVname}\n'
                     'observationAbout: {geoNode}\n'
                     'observationDate: C:pcm-dpc->Date\n'
                     'value: C:pcm-dpc->{SVname}\n\n')
         idx = 1
         with open(self.name + '.tmcf', 'a') as f_out:
             for statvar in self.stat_vars:
-                if statvar == 'CumulativeTestsPerformed':
-                    sv_full_name = 'cumulativeCount_MedicalTest_COVID_19'
-                elif statvar == 'CumulativeTestedPeople':
-                    sv_full_name = 'cumulativeCount_Person_COVID_19_Tested'
-                elif 'Cumulative' in statvar:
-                    sv_full_name = ('cumulativeCount_MedicalConditionIncident_'
-                                    'COVID_19_'+ statvar.replace('Cumulative', ''))
-                elif 'Incremental' in statvar:
-                    sv_full_name = ('incrementalCount_MedicalConditionIncident_'
-                                    'COVID_19_' + statvar)
-                else:
-                    sv_full_name = ('count_MedicalConditionIncident_COVID_19_'
-                                    + statvar)
                 f_out.write(TEMPLATE.format_map({'index': idx,
-                    'SVname': statvar, 'SVFullName': sv_full_name,
-                    'geoNode': geo_node}))
+                    'SVname': statvar, 'geoNode': geo_node}))
                 idx += 1
 
     def _translate(self):
@@ -57,27 +45,60 @@ class PcmDpc:
                  'denominazione_provincia': 'ProvinceName',
                  'sigla_provincia': 'ProvinceAbbreviation',
                  'lat': 'Latitude', 'long': 'Longitude',
-                 'ricoverati_con_sintomi': 'HospitalizedsWithSymptoms',
-                 'terapia_intensiva': 'IntensiveCare',
-                 'totale_ospedalizzati': 'Hospitalized',
-                 'isolamento_domiciliare': 'PeopleInHomeIsolation',
-                 'totale_positivi': 'ActiveCase',
-                 'variazione_totale_positivi': 'IncrementalPositiveCase',
-                 'nuovi_positivi': 'IncrementalActiveCase',
-                 'dimessi_guariti': 'CumulativeRecovered',
-                 'deceduti': 'CumulativeDeath',
-                 'totale_casi':'CumulativePositiveCase',
-                 'tamponi': 'CumulativeTestsPerformed',
-                 'casi_testati': 'CumulativeTestedPeople',
+                 'ricoverati_con_sintomi': 'Count_MedicalConditionIncident'
+                 '_COVID_19_PatientHospitalizedWithSymptoms',
+                 'terapia_intensiva': 'Count_MedicalConditionIncident'
+                 '_COVID_19_PatientInICU',
+                 'totale_ospedalizzati': 'Count_MedicalConditionIncident'
+                 '_COVID_19_PatientHospitalized',
+                 'isolamento_domiciliare': 'Count_MedicalConditionIncident'
+                 '_COVID_19_PatientInHomeIsolation',
+                 'totale_positivi': 'Count_MedicalConditionIncident'
+                 '_COVID_19_ActiveCase',
+                 'variazione_totale_positivi': 'IncrementalCount_Medical'
+                 'ConditionIncident_COVID_19_PositiveCase',
+                 'nuovi_positivi': 'IncrementalCount_MedicalConditionIncident'
+                 '_COVID_19_ActiveCase',
+                 'dimessi_guariti': 'CumulativeCount_MedicalConditionIncident'
+                 '_COVID_19_PatientRecovered',
+                 'deceduti': 'CumulativeCount_MedicalConditionIncident_COVID_19'
+                 '_PatientDeceased',
+                 'totale_casi':'CumulativeCount_MedicalConditionIncident_'
+                 'COVID_19_PositiveCase',
+                 'tamponi': 'CumulativeCount_MedicalTest_COVID_19',
+                 'casi_testati': 'CumulativeCount_Person_COVID_19_Tested',
                  'casi_da_sospetto_diagnostico': 'PositiveCasesFromClinicActivity',
                  'casi_da_screening': 'PositiveCasesFromSurveyAndTest'}
+        for col in self.data.columns:
+            assert col in it2en
         self.data = self.data.rename(columns=it2en)
 
     def set_location(self):
-        pass
+        raise NotImplementedError
 
     def geo_template(self):
-        pass
+        raise NotImplementedError
+
+STAT_VARS = ['Count_MedicalConditionIncident_COVID_19_'
+             'PatientHospitalizedWithSymptoms',
+             'Count_MedicalConditionIncident_COVID_19_PatientInICU',
+             'Count_MedicalConditionIncident_COVID_19_'
+             'PatientHospitalized',
+             'Count_MedicalConditionIncident_COVID_19_'
+             'PatientInHomeIsolation',
+             'Count_MedicalConditionIncident_COVID_19_ActiveCase',
+             'IncrementalCount_MedicalConditionIncident_COVID_19_'
+             'PositiveCase',
+             'IncrementalCount_MedicalConditionIncident_COVID_19_'
+             'ActiveCase',
+             'CumulativeCount_MedicalConditionIncident_COVID_19_'
+             'PatientRecovered',
+             'CumulativeCount_MedicalConditionIncident_COVID_19'
+             '_PatientDeceased',
+             'CumulativeCount_MedicalConditionIncident_'
+             'COVID_19_PositiveCase',
+             'CumulativeCount_MedicalTest_COVID_19',
+             'CumulativeCount_Person_COVID_19_Tested']
 
 class PcmDpcNational(PcmDpc):
     """subclass processing national data"""
@@ -86,12 +107,7 @@ class PcmDpcNational(PcmDpc):
                         'master/dati-andamento-nazionale/dpc-covid19-ita-and'
                         'amento-nazionale.csv')
         self.name = "dpc-covid19-ita-national-trend"
-        self.stat_vars = ['HospitalizedsWithSymptoms', 'IntensiveCare',
-                          'Hospitalized', 'PeopleInHomeIsolation', 'ActiveCase',
-                          'IncrementalPositiveCase', 'IncrementalActiveCase',
-                          'CumulativeRecovered', 'CumulativeDeath',
-                          'CumulativePositiveCase', 'CumulativeTestsPerformed',
-                          'CumulativeTestedPeople']
+        self.stat_vars = STAT_VARS
 
     def set_location(self):
         assert (self.data['State'] == 'ITA').all()
@@ -107,12 +123,7 @@ class PcmDpcRegions(PcmDpc):
         self.csvpath = ('https://raw.githubusercontent.com/pcm-dpc/COVID-19/'
                         'master/dati-regioni/dpc-covid19-ita-regioni.csv')
         self.name = "dpc-covid19-ita-regional"
-        self.stat_vars = ['HospitalizedsWithSymptoms', 'IntensiveCare',
-                          'Hospitalized', 'PeopleInHomeIsolation', 'ActiveCase',
-                          'IncrementalPositiveCase', 'IncrementalActiveCase',
-                          'CumulativeRecovered', 'CumulativeDeath',
-                          'CumulativePositiveCase', 'CumulativeTestsPerformed',
-                          'CumulativeTestedPeople']
+        self.stat_vars = STAT_VARS
 
     def set_location(self):
         region_code_path = ('https://raw.githubusercontent.com/qlj-lijuan/data/'
@@ -141,7 +152,8 @@ class PcmDpcProvinces(PcmDpc):
         self.csvpath = ('https://raw.githubusercontent.com/pcm-dpc/COVID-19/'
                         'master/dati-province/dpc-covid19-ita-province.csv')
         self.name = "dpc-covid19-ita-province"
-        self.stat_vars = ['CumulativePositiveCase']
+        self.stat_vars = ['CumulativeCount_MedicalConditionIncident_'
+                          'COVID_19_PositiveCase']
 
     def set_location(self):
         province_code_path = ('https://raw.githubusercontent.com/qlj-lijuan/data'
@@ -158,7 +170,8 @@ class PcmDpcProvinces(PcmDpc):
         self.data = self.data[self.data['ProvinceCode'] < 111].reset_index()
         self.data['Location'] = self.data['ProvinceAbbreviation'].map(
             province_dict)
-        self.data = self.data[['Date', 'Location', 'CumulativePositiveCase']]
+        self.data = self.data[['Date', 'Location', 'CumulativeCount_Medical'
+                               'ConditionIncident_COVID_19_PositiveCase']]
 
     def geo_template(self):
         GEO_TEMPLATE = ('Node: E:pcm-dpc->E0\n'
