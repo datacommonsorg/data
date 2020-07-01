@@ -1,7 +1,3 @@
-Node: E:pcm-dpc->E0
-typeOf: dcs:EurostatNUTS3
-dcid: C:pcm-dpc->Location
-
 Node: E:pcm-dpc->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
