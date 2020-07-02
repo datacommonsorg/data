@@ -1,4 +1,4 @@
-Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanWageEarnerAndClericalWorker
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanWageEarnerAndClericalWorker_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
 populationType: dcs:ConsumerGoodsAndServices
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
