@@ -1,16 +1,16 @@
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
-  args: ['import-automation/task.sh']
+  args: ['import-automation/cloudbuild/task.sh']
   env:
-  - 'COMMIT_SHA=$COMMIT_SHA',
-  - 'REPO_NAME=$REPO_NAME',
-  - 'BRANCH_NAME=$BRANCH_NAME',
-  - 'HEAD_BRANCH=$_HEAD_BRANCH',
-  - 'BASE_BRANCH=$_BASE_BRANCH',
+  - 'COMMIT_SHA=$COMMIT_SHA'
+  - 'REPO_NAME=$REPO_NAME'
+  - 'BRANCH_NAME=$BRANCH_NAME'
+  - 'HEAD_BRANCH=$_HEAD_BRANCH'
+  - 'BASE_BRANCH=$_BASE_BRANCH'
   - 'PR_NUMBER=$_PR_NUMBER'
   - 'TASK_LOCATION_ID=$_TASK_LOCATION_ID'
   - 'TASK_QUEUE_NAME=$_TASK_QUEUE_NAME'
   - 'TASK_PROJECT_ID=$_TASK_PROJECT_ID'
-  - 'HANDLER_ENDPOINT=$_HANDLER_ENDPOINT'
+  - 'HANDLER_SERVICE=$_HANDLER_SERVICE'
   - 'HANDLER_URI=$_HANDLER_URI'

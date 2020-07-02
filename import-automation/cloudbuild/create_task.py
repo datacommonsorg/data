@@ -52,7 +52,7 @@ def create_body():
 
 
 def create_task(task_body, project_id, location_id, queue_name,
-                max_attempts, service, endpoint):
+                service, endpoint):
     """Creates a Google Cloud Tasks App Engine task.
 
     The App Engine app that handles the task must be under the same Google
@@ -68,9 +68,6 @@ def create_task(task_body, project_id, location_id, queue_name,
         project_id: ID of the Google Cloud project as a string.
         location_id: ID of the location where the task queue is hosted.
         queue_name: Name of the task queue.
-        max_attempts: Maximum number of times this task will be attempted.
-            max_attempts - 1 is the number of times this task can be retried
-            if the first attempt fails.
         service: Name of the App Engine service that will handle the task.
         endpoint: Relative URL of the App Engine task handler endpoint.
     """
@@ -78,19 +75,16 @@ def create_task(task_body, project_id, location_id, queue_name,
     parent = client.queue_path(project_id, location_id, queue_name)
     body = json.dumps(task_body)
     task = {
-        'app_engine_routing': {
-            'service': service
-        },
         'app_engine_http_request': {
+            'app_engine_routing': {
+                'service': service
+            },
             'http_method': 'POST',
             'relative_uri': endpoint,
             'body': body.encode(),
             'headers': {
                 'Content-Type': 'application/json'
             }
-        },
-        'retry_config': {
-            'max_attempts': max_attempts,
         }
     }
     client.create_task(parent, task)
@@ -107,7 +101,6 @@ def main():
         project_id=os.environ['TASK_PROJECT_ID'],
         location_id=os.environ['TASK_LOCATION_ID'],
         queue_name=os.environ['TASK_QUEUE_NAME'],
-        max_attempts=os.environ['TASK_MAX_ATTEMPTS'],
         service=os.environ['HANDLER_SERVICE'],
         endpoint=os.environ['HANDLER_URI'])
 
