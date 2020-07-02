@@ -322,7 +322,7 @@ Node: dcid:reactomePathwayID
 typeOf: schema:Property
 name: "reactomePathwayID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteration
+domainIncludes: dcs:ProteinProteinInteraction
 description: "Reactome identifier. Reactome is a free, open-source, curated and peer-reviewed pathway database."
 url: "https://reactome.org/"
 
