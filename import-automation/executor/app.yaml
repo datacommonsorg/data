@@ -1,0 +1,6 @@
+runtime: python37
+entrypoint: gunicorn --timeout 600 -b :$PORT app:app 
+env_variables:
+    EXECUTOR_PRODUCTION: "True"
+    TMPDIR: "/tmp"
+instance_class: F2

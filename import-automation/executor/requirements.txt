@@ -1,0 +1,7 @@
+requests
+google-auth
+google-cloud-logging
+google-cloud-datastore
+flask
+gunicorn
+virtualenv
