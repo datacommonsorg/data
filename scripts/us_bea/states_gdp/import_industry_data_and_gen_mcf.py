@@ -20,12 +20,12 @@ per US state. Saves output as a CSV file.
     python3 import_data.py
 """
 from urllib.request import urlopen
-from absl import app
-import pandas as pd
 import io
 import zipfile
 import csv
 import re
+from absl import app
+import pandas as pd
 from import_data import StateGDPDataLoader
 
 # Suppress annoying pandas DF copy warnings.
@@ -37,7 +37,7 @@ class StateGDPIndustryDataLoader(StateGDPDataLoader):
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    _STATE_QUARTERLY_INDUSTRY_GDP_FILE = "SQGDP2__ALL_AREAS_2005_2019.csv"
+    _STATE_QUARTERLY_INDUSTRY_GDP_FILE = "SQGDP2__ALL_AREAS_2005_2020.csv"
 
     def download_data(self):
         """Downloads ZIP file, extracts the desired CSV, and puts it into a data
@@ -84,7 +84,7 @@ class StateGDPIndustryDataLoader(StateGDPDataLoader):
 
         # Gets columns that represent quarters, e.g. 2015:Q2, by matching
         # against a regular expression.
-        all_quarters = [q for q in df.columns if re.match(r"....:Q.", q)]
+        all_quarters = [q for q in df.columns if re.match(r"\d\d\d\d:Q\d", q)]
 
         # Convert table from wide to long format.
         df = pd.melt(df, id_vars=['GeoFIPS', 'IndustryClassification'],
@@ -98,16 +98,21 @@ class StateGDPIndustryDataLoader(StateGDPDataLoader):
 
         df['NAICS'] = df['IndustryClassification'].apply(self._convert_industry_class)
         df['value'] = df['value'].apply(self._value_converter)
+        df = df[df['value'] >= 0]
 
-        self.clean_df = df.drop(["GeoFIPS","IndustryClassification"], axis=1)
+        self.clean_df = df.drop(["GeoFIPS", "IndustryClassification"], axis=1)
 
     @staticmethod
     def _value_converter(val):
-        if type(val) is float:
+        """Converts value to float type, and filters out missing values. Missing
+        values are marked by a latter enclosed in parentheses, e.g., "(D)".
+        """
+        if isinstance(val, float):
             return val
         if '(' in val or ')' in val:
             return -1
-        
+        return float(val)
+
 
     @staticmethod
     def _convert_industry_class(naics_code):
@@ -118,7 +123,7 @@ class StateGDPIndustryDataLoader(StateGDPDataLoader):
             naics_code = "JOLTS_320000"
         if naics_code == "311-316,322-326":
             naics_code = "JOLTS_340000"
-        naice_code = naics_code.replace("-", "_")
+        naics_code = naics_code.replace("-", "_")
         return f"dcs:USSateQuarterlyIndustryGDP_NAICS_{naics_code}"
 
     def save_csv(self, filename='states_industry_gdp.csv'):
@@ -131,9 +136,9 @@ class StateGDPIndustryDataLoader(StateGDPDataLoader):
         """
         super().save_csv(filename)
 
-    def generate_MCF(self):
+    def generate_mcf(self):
         """Generates MCF StatVars for each industry code."""
-        mcf_temp = ('Node: dcid:USSateQuarterlyIndustryGDP_NAICS_{naics}\n'
+        mcf_temp = ('Node: dcid:USStateQuarterlyIndustryGDP_NAICS_{naics}\n'
                     'typeOf: dcs:StatisticalVariable\n'
                     'populationType: dcs:EconomicActivity\n'
                     'activitySource: dcs:GrossDomesticProduction\n'
@@ -143,15 +148,15 @@ class StateGDPIndustryDataLoader(StateGDPDataLoader):
 
         with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f:
             for naics_code in self.clean_df['NAICS'].unique():
-                mcf_f.write(mcf_temp.format(naics=naics_code))
+                code = naics_code[37:]
+                mcf_f.write(mcf_temp.format(naics=code))
 
-def main(argv):
-    del argv # unused
+def main(_):
     loader = StateGDPIndustryDataLoader()
     loader.download_data()
     loader.process_data()
     loader.save_csv()
-    loader.generate_MCF()
+    loader.generate_mcf()
 
 
 if __name__ == '__main__':
