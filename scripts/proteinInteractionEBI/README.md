@@ -8,7 +8,7 @@ Here we only import the three subsets of the ontologies: "interaction detection 
 To generate 'BioOntologySchemaEnum.mcf' which contains all the schemas and "psimi2dcid.txt" which contains paired PSI-MI identifiers and DCID (../proteinInteractionMINT/parse_mint.py needs to use this file to refer to the corresponding Enum instance by DCID), run:
 
 ```bash
-python3 parse_ebi.py -f mi.owl 
+python3 parse_ebi.py -f mi.owl -new_soure new_source.txt
 ```
 
 To test the script, run:
@@ -17,7 +17,26 @@ To test the script, run:
 python3 parse_ebi_test.py
 ```
 
-If new reference sources which are not properties in dcs occur, 'BioEBINewSource.txt' containing such information will be generated as well. If this is the case, new properties should be created for the new source (similar to property "dcs:pubMedID"), and the script should handle the new source corespondingly.
+If new reference sources which are not properties in dcs occur, 'new_source.txt' containing such information will be generated. For example: 
+
+```
+references
+pubMedID: 1007323
+goID: 30234
+```
+
+If this is the case, new properties should be created for the new sources and added to data/schema/CompoundSchema.mcf, such as:
+
+```
+Node: dcid:pubMedID
+typeOf: schema:Property
+name: "pubMedID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompound
+description: "Identifier for reference paper on PubMed."
+url: "https://pubmed.ncbi.nlm.nih.gov/"
+```
+and the function get_references in parse_ebi.py should handle the new source correspondingly.
 
 ## Database format
 

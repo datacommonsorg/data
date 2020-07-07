@@ -19,9 +19,7 @@ import copy
 import unittest
 import parse_ebi
 
-
-
-TEST_TEXT = '''[Term]
+CONST_TEST_TEXT = '''[Term]
 id: MI:0001
 name: interaction detection method
 def: "Method to determine the interaction." [PMID:14755292]
@@ -36,19 +34,46 @@ is_a: MI:0001 ! interaction detection method
 id: MI:0401
 name: biochemical
 def: "The application" [PMID:14755292]
-is_a: MI:0045 ! experimental interaction detection'''
+is_a: MI:0045 ! experimental interaction detection
+
+[Term]
+id: MI:0091
+name: chromatography technology
+def: "Used to separate" [PMID:14755292]
+is_a: MI:0401 ! biochemical'''
 
 CONST_ID_TO_CLASS_NAME = {'MI:0001': 'InteractionDetectionMethod',
+                          'MI:0091': 'ChromatographyTechnology',
                           'MI:0045': 'ExperimentalInteractionDetection', 'MI:0401': 'Biochemical'}
 CONST_ID_TO_NODE = {}
 CONST_ID_TO_NODE_NO_RELATION = {}
-for key in ['MI:0001', 'MI:0045', 'MI:0401']:
+for key in ['MI:0001', 'MI:0045', 'MI:0401', 'MI:0091']:
     CONST_ID_TO_NODE[key] = parse_ebi.Node(key)
     CONST_ID_TO_NODE_NO_RELATION[key] = parse_ebi.Node(key)
+
 CONST_ID_TO_NODE['MI:0001'].child_list.append(CONST_ID_TO_NODE['MI:0045'])
 CONST_ID_TO_NODE['MI:0045'].parent_list.append(CONST_ID_TO_NODE['MI:0001'])
 CONST_ID_TO_NODE['MI:0045'].child_list.append(CONST_ID_TO_NODE['MI:0401'])
 CONST_ID_TO_NODE['MI:0401'].parent_list.append(CONST_ID_TO_NODE['MI:0045'])
+CONST_ID_TO_NODE['MI:0401'].child_list.append(CONST_ID_TO_NODE['MI:0091'])
+CONST_ID_TO_NODE['MI:0091'].parent_list.append(CONST_ID_TO_NODE['MI:0401'])
+
+CONST_SCHEMA1 = '''Node: dcid:ExperimentalInteractionDetection
+typeOf: dcs:InteractionTypeEnum
+name: "ExperimentalInteractionDetection"
+psimiID: "MI:0045"
+description: "Methods base"
+pubMedID: "14755292"
+descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"'''
+
+CONST_SCHEMA2 = '''Node: dcid:Biochemical
+typeOf: dcs:InteractionTypeEnum
+name: "Biochemical"
+psimiID: "MI:0401"
+description: "The applicatio"
+pubMedID: "14755292"
+specializationOf: dcs:ExperimentalInteractionDetection
+descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"'''
 
 def get_file_terms(file):
     "Ruturns a list of text blocks."
@@ -57,20 +82,23 @@ def get_file_terms(file):
                   if term_text.startswith('[Term]')]
     return file_terms
 
-CONST_FILE_TERMS = get_file_terms(TEST_TEXT)
+CONST_FILE_TERMS = get_file_terms(CONST_TEST_TEXT)
 
-CONST_INTERACTION_TYPE_ID_SET = set(['MI:0045', 'MI:0401'])
+CONST_INTERACTION_TYPE_ID_SET = set(['MI:0045', 'MI:0091', 'MI:0401'])
 
 class TestParseEbi(unittest.TestCase):
     """Test the functions in parse_ebi.py"""
+
     def test_get_id_maps(self):
         """Test function get_id_maps. Note that id_to_node here doesn't have parent_child
         relation, so only map keys are tested."""
         id_to_class_name, id_to_node = parse_ebi.get_id_maps(CONST_FILE_TERMS)
         self.assertEqual(id_to_class_name, CONST_ID_TO_CLASS_NAME)
         self.assertEqual(id_to_node.keys(), CONST_ID_TO_NODE_NO_RELATION.keys())
+
     def test_build_child_parent_link(self):
-        """Test function build_child_parent_link by check the values of child_list and parent_list."""
+        """Test function build_child_parent_link by checking the values of
+        child_list and parent_list."""
         id_to_node = copy.deepcopy(CONST_ID_TO_NODE_NO_RELATION)
         id_to_node = parse_ebi.build_child_parent_link(CONST_FILE_TERMS, id_to_node)
         def get_node_value_set(node_list):
@@ -85,6 +113,7 @@ class TestParseEbi(unittest.TestCase):
             const_child_value_set = get_node_value_set(CONST_ID_TO_NODE[id_key].child_list)
             self.assertEqual(parent_value_set, const_parent_value_set)
             self.assertEqual(child_value_set, const_child_value_set)
+
     def test_TreeBuilder(self):
         """Test TreeBuilder class."""
         dfs_caller = parse_ebi.TreeBuilder(CONST_ID_TO_NODE)
@@ -99,24 +128,12 @@ class TestParseEbi(unittest.TestCase):
         schema_res = parse_ebi.get_schema_from_text(term, CONST_ID_TO_NODE,
                                                     new_source_map, CONST_ID_TO_CLASS_NAME,
                                                     CONST_INTERACTION_TYPE_ID_SET, set(), set())
-        self.assertEqual(schema_res[0],
-                         ('Node: dcid:ExperimentalInteractionDetection\n'
-                          'typeOf: dcs:InteractionTypeEnum\n'
-                          'name: "ExperimentalInteractionDetection"\npsimiID: "MI:0045"\n'
-                          'description: "Methods base"\npubMedID: "14755292"\n'
-                          'specializationOf: dcs:InteractionDetectionMethod\n'
-                          'descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"'))
+        self.assertEqual(schema_res[0], CONST_SCHEMA1)
         term = CONST_FILE_TERMS[2]
         schema_res = parse_ebi.get_schema_from_text(term, CONST_ID_TO_NODE,
                                                     new_source_map, CONST_ID_TO_CLASS_NAME,
                                                     CONST_INTERACTION_TYPE_ID_SET, set(), set())
-        self.assertEqual(schema_res[0],
-                         ('Node: dcid:Biochemical\n'
-                          'typeOf: dcs:InteractionTypeEnum\n'
-                          'name: "Biochemical"\npsimiID: "MI:0401"\n'
-                          'description: "The applicatio"\npubMedID: "14755292"\n'
-                          'specializationOf: dcs:ExperimentalInteractionDetection\n'
-                          'descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"'))
+        self.assertEqual(schema_res[0], CONST_SCHEMA2)
 
 if __name__ == '__main__':
     unittest.main()

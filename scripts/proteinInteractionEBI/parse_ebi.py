@@ -27,6 +27,8 @@ from absl import flags
 FLAGS = flags.FLAGS
 flags.DEFINE_string('database_file', None,
                     'database file path.', short_name='f')
+flags.DEFINE_string('new_source', "new_source.txt",
+                    'new source file path.')
 
 def get_class_name(a_string):
     """Convert a name string to format: ThisIsAnUnusualName.
@@ -102,10 +104,11 @@ def get_parent_id_list(term_list):
         ["MI:0013", "MI:1349"]
 
     """
+
     id_string_list = []
     for term in term_list:
-#         term containining parent information is "is_a: MI:0013 ! biophysical"
-#         or "relationship: part_of MI:1349 ! chembl"
+        # term containining parent information is "is_a: MI:0013 ! biophysical"
+        # or "relationship: part_of MI:1349 ! chembl"
         if term.startswith('is_a'):
             id_string_list.append(term.split(' ')[1])
         elif term.startswith('relationship'):
@@ -147,7 +150,6 @@ class TreeBuilder():
         for child in node.child_list:
             self._dfs(child)
 
-
 def get_schema_from_text(term, id_to_node, new_source_map,
                          id_to_class_name, interaction_type_id_set,
                          detection_method_id_set, interaction_source_id_set):
@@ -166,6 +168,7 @@ def get_schema_from_text(term, id_to_node, new_source_map,
         typeOf: dcs:InteractionTypeEnum
         name: "Biophysical"''','MI:0001', "Biophysical", {"references":{"newConfidence":"AA10010"}}]
     """
+
     term_map = collections.defaultdict(list)
     for line in term:
         line_list = line.split(': ')
@@ -215,15 +218,15 @@ def get_schema_from_text(term, id_to_node, new_source_map,
     current_line = 'name: "' + dcid + '"'
     schema_piece_list.append(current_line)
 
-#     term_map:
-#     id:  ['MI:0001']
-#     name:  ['interaction detection method']
-#     def:  ['Method to determine the interaction']
-#     subset:  ['Drugable', 'PSI-MI_slim']
-#     synonym:  ['"interaction detect" EXACT PSI-MI-short []']
-#     relationship:  ['part_of MI:0000 ! molecular interaction']
-#     references:  ['PMID:14755292']
-#     parentClassName:  ['MolecularInteraction']
+    # term_map:
+    # id:  ['MI:0001']
+    # name:  ['interaction detection method']
+    # def:  ['Method to determine the interaction']
+    # subset:  ['Drugable', 'PSI-MI_slim']
+    # synonym:  ['"interaction detect" EXACT PSI-MI-short []']
+    # relationship:  ['part_of MI:0000 ! molecular interaction']
+    # references:  ['PMID:14755292']
+    # parentClassName:  ['MolecularInteraction']
 
     for key in key_list:
 
@@ -269,7 +272,7 @@ def write_new_source(new_source_map):
             write_list.append(line)
         write_list.append('\n')
     if write_list:
-        with open('BioEBINewSource.txt', 'w') as file_open:
+        with open(FLAGS.new_source, 'w') as file_open:
             file_open.write('\n'.join(write_list))
 
 def get_id_maps(file_terms):
@@ -305,11 +308,11 @@ def main(argv):
     file_terms = file.split('\n\n')[1:]
     file_terms = [term_text.split('\n') for term_text in file_terms
                   if term_text.startswith('[Term]')]
-#     Parsing Steps:
-#     1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used
-#     to access nodes as well.
-#     2. save all the tree nodes in the subtree of the three nodes into three set
-#     3. save the nodes in the three sets to the corresponding enumearation schema
+    # Parsing Steps:
+    # 1. build the tree by the psi-mi number. A dictionary {psi-mi: node} is used
+    #    to access nodes as well.
+    # 2. save all the tree nodes in the subtree of the three nodes into three set
+    # 3. save the nodes in the three sets to the corresponding enumearation schema
 
     # build nodes and create the id_to_node dictionary at first iteration
     id_to_class_name, id_to_node = get_id_maps(file_terms)
@@ -324,17 +327,17 @@ def main(argv):
     DETECTION_METHOD_ROOT = 'MI:0190'
     INTERACTION_SOURCE_ROOT = 'MI:0444'
 
-    interaction_type_id_set = dfs_caller.get_subset_id(INTERACTION_TYPE_ROOT) # root id: MI:0001
-    detection_method_id_set = dfs_caller.get_subset_id(DETECTION_METHOD_ROOT)# root id: MI:0190
-    interaction_source_id_set = dfs_caller.get_subset_id(INTERACTION_SOURCE_ROOT) # root id: MI:0444
+    interaction_type_id_set = dfs_caller.get_subset_id(INTERACTION_TYPE_ROOT)
+    detection_method_id_set = dfs_caller.get_subset_id(DETECTION_METHOD_ROOT)
+    interaction_source_id_set = dfs_caller.get_subset_id(INTERACTION_SOURCE_ROOT)
 
     set_list = [interaction_type_id_set, detection_method_id_set, interaction_source_id_set]
 
     schema_list = []
     psimi_to_dcid = []
 
-#     if the updated database file has reference source other than "PMID","pmid",
-#     "GO","RESID","doi", save one example to new_source_map and write to BioEBINewSource.txt
+    # if the updated database file has reference source other than "PMID","pmid",
+    # "GO","RESID","doi", save one example to new_source_map and write to new_source.txt
     new_source_map = {'references':{}}
 
     for term_list in file_terms:
