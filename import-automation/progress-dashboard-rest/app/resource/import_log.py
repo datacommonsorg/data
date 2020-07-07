@@ -52,8 +52,8 @@ class ImportLog(flask_restful.Resource):
     parser = reqparse.RequestParser()
     required_fields = [('level',), ('message',)]
     optional_fields = [('time_logged',)]
-    utils.add_required_fields(parser, required_fields)
-    utils.add_optional_fields(parser, optional_fields)
+    utils.add_fields(parser, required_fields, required=True)
+    utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self):
         """Constructs an ImportLog."""
