@@ -70,6 +70,10 @@ def create_task(task_body, project_id, location_id, queue_name,
         queue_name: Name of the task queue.
         service: Name of the App Engine service that will handle the task.
         endpoint: Relative URL of the App Engine task handler endpoint.
+
+    Returns:
+        The created task as a dict.
+        The CloudTasksClient used to create the task.
     """
     client = tasks_v2.CloudTasksClient()
     parent = client.queue_path(project_id, location_id, queue_name)
@@ -88,6 +92,7 @@ def create_task(task_body, project_id, location_id, queue_name,
         }
     }
     client.create_task(parent, task)
+    return task, client
 
 
 def main():
@@ -95,9 +100,8 @@ def main():
     Creates a Cloud Tasks task that ships information about a GitHub commit
     to the executor.
     """
-    task_body = create_body()
     create_task(
-        task_body=task_body,
+        task_body=create_body(),
         project_id=os.environ['TASK_PROJECT_ID'],
         location_id=os.environ['TASK_LOCATION_ID'],
         queue_name=os.environ['TASK_QUEUE_NAME'],

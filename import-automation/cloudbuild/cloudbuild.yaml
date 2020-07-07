@@ -1,4 +1,7 @@
 steps:
+# task.sh is a bash script that installs and runs pip to install dependencies
+# and runs create_task.py to create a Cloud Tasks task that passes information
+# about the commit to the executor.
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['import-automation/cloudbuild/task.sh']
