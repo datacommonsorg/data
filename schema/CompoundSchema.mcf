@@ -266,7 +266,7 @@ Node: dcid:mintID
 typeOf: schema:Property
 name: "mintID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation
+domainIncludes: dcs:ProteinProteinInteraction
 description: "Molecular INTeraction database identifier."
 url: "https://mint.bio.uniroma2.it/"
 
@@ -274,7 +274,7 @@ Node: dcid:imexID
 typeOf: schema:Property
 name: "imexID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation
+domainIncludes: dcs:ProteinProteinInteraction
 description: "The international molecular exchange consortium identifier for a non-redundant physical molecular interaction."
 url: "https://www.imexconsortium.org/"
 
@@ -282,7 +282,7 @@ Node: dcid:rcsbPDBID
 typeOf: schema:Property
 name: "rcsbPDBID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation
+domainIncludes: dcs:ProteinProteinInteraction
 description: "Research Collaboratory for Structural Bioinformatics (RCSB) Protein Data Bank (PDB) identifier."
 url: "https://www.rcsb.org/"
 
@@ -290,7 +290,7 @@ Node: dcid:intActID
 typeOf: schema:Property
 name: "intActID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation
+domainIncludes: dcs:ProteinProteinInteraction
 description: "EMBL-EBI IntAct identifier."
 url: "https://www.ebi.ac.uk/intact/"
 
@@ -298,7 +298,7 @@ Node: dcid:electronMicroscopyDataBankID
 typeOf: schema:Property
 name: "electronMicroscopyDataBankID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation
+domainIncludes: dcs:ProteinProteinInteraction
 description: "The Electron Microscopy Data Bank (EMDB) identifier."
 url: "https://www.ebi.ac.uk/pdbe/emdb/"
 
@@ -306,7 +306,7 @@ Node: dcid:worldWideProteinDataBankID
 typeOf: schema:Property
 name: "worldWideProteinDataBankID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation
+domainIncludes: dcs:ProteinProteinInteraction
 description: "The Worldwide Protein Data Bank (wwPDB) identifier, which serves as the single repository of information about the 3D structures of proteins, nucleic acids, and complex assemblies."
 url: "https://www.ebi.ac.uk/pdbe/", "https://www.rcsb.org/", "https://pdbj.org/", "http://www.bmrb.wisc.edu/".
 
@@ -314,7 +314,7 @@ Node: dcid:psimiID
 typeOf: schema:Property
 name: "psimiID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation,dcs:InteractionTypeEnum,dcs:InteractionDetectionMethodEnum,dcs:InteractionSourceEnum
+domainIncludes: dcs:ProteinProteinInteraction,dcs:InteractionTypeEnum,dcs:InteractionDetectionMethodEnum,dcs:InteractionSourceEnum
 description: "Proteomics Standard Initiative - Molecular Interaction identifier."
 url: "http://www.psidev.info/"
 
@@ -322,7 +322,7 @@ Node: dcid:reactomePathwayID
 typeOf: schema:Property
 name: "reactomePathwayID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation
+domainIncludes: dcs:ProteinProteinInteraction
 description: "Reactome identifier. Reactome is a free, open-source, curated and peer-reviewed pathway database."
 url: "https://reactome.org/"
 
@@ -330,7 +330,7 @@ Node: dcid:proteinDataBankInEuropeID
 typeOf: schema:Property
 name: "proteinDataBankInEuropeID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ProteinProteinInteracation
+domainIncludes: dcs:ProteinProteinInteraction
 description: "EMBL-EBI Protein Data Bank in Europe (PDBe) identifier."
 url: "https://www.ebi.ac.uk/pdbe/node/1"
 
