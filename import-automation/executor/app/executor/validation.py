@@ -1,4 +1,4 @@
-from app.executor import utils
+from app import utils
 
 
 TASK_INFO_REQUIRED_FIELDS = ['REPO_NAME', 'BRANCH_NAME', 'COMMIT_SHA', 'PR_NUMBER']

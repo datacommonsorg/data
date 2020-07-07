@@ -10,13 +10,9 @@ import requests
 from app import configs
 from app.service import dashboard_api
 from app.service import github_api
+from app.service import gcs_io
 from app.executor import validation
-from app.executor import utils
-
-
-MANIFEST_FILENAME = 'manifest.json'
-REPO_OWNER_USERNAME = 'intrepiditee'
-REQUIREMENTS_FILENAME = 'requirements.txt'
+from app import utils
 
 
 def parse_manifest(path):
@@ -25,7 +21,7 @@ def parse_manifest(path):
 
 
 def parse_commit_message_targets(commit_message):
-    targets = re.findall('(?<=\\\\)(?:(?:\w+/)+\w+:)?\w+', commit_message)
+    targets = re.findall(r'(?<=\\)(?:(?:\w+/)+\w+:)?\w+', commit_message)
     return list(set(targets))
 
 
@@ -71,24 +67,23 @@ def execute_imports(task_info):
     #     }
     # )
 
-    auth_username = 'intrepiditee'
-    auth_access_token = os.environ['GITHUB_ACCESS_TOKEN']
+    auth_access_token = configs.get_github_auth_access_token()
 
     commit_info = github_api.query_commit(
-        REPO_OWNER_USERNAME, repo_name, commit_sha, auth_username, auth_access_token)
+        configs.REPO_OWNER_USERNAME, repo_name, commit_sha, auth_username, auth_access_token)
 
     commit_author_username = commit_info['author']['login']
     commit_message = commit_info['commit']['message']
 
     manifest_dirs = github_api.find_dirs_in_commit_containing_file(
-        REPO_OWNER_USERNAME, repo_name, commit_sha, MANIFEST_FILENAME, auth_username, auth_access_token)
+        configs.REPO_OWNER_USERNAME, repo_name, commit_sha, configs.MANIFEST_FILENAME, configs.GITHUB_AUTH_USERNAME, auth_access_token)
     import_targets = parse_commit_message_targets(commit_message)
     valid, err = validation.import_targets_valid(import_targets, manifest_dirs)
     if not valid:
         return err
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        repo_dirname = github_api.download_repo(REPO_OWNER_USERNAME, repo_name, commit_sha, tmpdir, auth_username, auth_access_token)
+        repo_dirname = github_api.download_repo(REPO_OWNER_USERNAME, repo_name, commit_sha, tmpdir, configs.GITHUB_AUTH_USERNAME, auth_access_token)
         cwd = os.path.join(tmpdir, repo_dirname)
         os.chdir(cwd)
 
@@ -105,12 +100,12 @@ def execute_imports(task_info):
                 absolute_name = utils.get_absolute_import_name(dir_path, import_name)
                 if import_all or absolute_name in import_targets or import_name in import_targets:
                     import_one(dir_path, spec, commit_sha, client_id)
-    
+
     return 'success'
 
 
 def import_one(dir_path, import_spec, commit_sha, client_id):
-    
+
     cwd = os.getcwd()
     os.chdir(dir_path)
 
@@ -125,9 +120,8 @@ def import_one(dir_path, import_spec, commit_sha, client_id):
         for url in urls:
             utils.download_file(url, '.')
 
-
     with tempfile.TemporaryDirectory() as tmpdir:
-        interpreter_path, process = create_venv(REQUIREMENTS_FILENAME, tmpdir)
+        interpreter_path, process = create_venv(configs.REQUIREMENTS_FILENAME, tmpdir)
         download_script_path = import_spec.get('data_download_script')
         if download_script_path:
             try:
@@ -150,7 +144,7 @@ def import_one(dir_path, import_spec, commit_sha, client_id):
 
         if template_mcf:
             with open(template_mcf, 'r') as f:
-                print(f.readline())
+                gcs_io.upload_file(template_mcf, os.path.join(run_id, attempt_id, os.path.basename(template_mcf)), bucket_name='import-backend-imports')
 
         if cleaned_csv:
             with open(cleaned_csv, 'r') as f:

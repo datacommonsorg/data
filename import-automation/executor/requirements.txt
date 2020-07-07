@@ -2,6 +2,7 @@ requests
 google-auth
 google-cloud-logging
 google-cloud-datastore
+google-cloud-secret-manager
 flask
 gunicorn
 virtualenv

@@ -1,13 +1,23 @@
-from google.cloud import datastore
+from google.cloud import secretmanager
 
 
 PROJECT_ID = 'google.com:datcom-data'
-CONFIGS_NAMESPACE = 'configs'
-CONFIGS_KIND = CONFIGS_NAMESPACE
+MANIFEST_FILENAME = 'manifest.json'
+REQUIREMENTS_FILENAME = 'requirements.txt'
+REPO_OWNER_USERNAME = 'intrepiditee'
+GITHUB_AUTH_USERNAME = 'intrepiditee'
 
 
-def get_dashboard_oauth_client_id():
-    client = datastore.Client(project=PROJECT_ID, namespace=CONFIGS_NAMESPACE)
-    entity_id = 'DASHBOARD_OAUTH_CLIENT_ID'
-    key = datastore.Key(CONFIGS_KIND, entity_id)
-    return client.get(key)[entity_id]
+def _get_secret(secret_id, version_id='latest'):
+    client = secretmanager.SecretManagerServiceClient()
+    name = client.secret_version_path(PROJECT_ID, secret_id, version_id)
+    response = client.access_secret_version(name)
+    return response.payload.data.decode('UTF-8')
+
+
+def get_dashboard_oauth_client_id(version_id='latest'):
+    return _get_secret('DASHBOARD_OAUTH_CLIENT_ID', version_id)
+
+
+def get_github_auth_access_token(version_id='latest'):
+    return _get_secret('GITHUB_AUTH_ACCESS_TOKEN', version_id)
