@@ -16,7 +16,7 @@
 Utility functions.
 """
 
-from datetime import datetime, timezone
+import datetime
 
 import google.cloud.logging
 
@@ -24,22 +24,22 @@ import google.cloud.logging
 def utctime():
     """Returns the current time string in ISO 8601 with timezone UTC+0, e.g.
     '2020-06-30T04:28:53.717569+00:00'."""
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
-def _add_fields(parser, fields, required):
-    """Adds an iterable of fields to the parser.
+def add_fields(parser, fields, required=True):
+    """Adds a set of fields to the parser.
 
     Args:
         parser: A reqparse RequestParser.
-        fields: An iterable of fields to add. Each field is represented as a
-            tuple. The first element is the name of field as a string.
-            The second element, if present, is the data type of the string. If
-            absent, str is used. The third element, if present, is the action
-            the parser should take when encountering the field. If absent,
-            'store' is used. See
+        fields: A set of fields to add as a list, tuple, or anything iterable.
+            Each field is represented as a tuple. The first element is the name
+            of field as a string. The second element, if present, is the data
+            type of the string. If absent, str is used. The third element, if
+            present, is the action the parser should take when encountering
+            the field. If absent, 'store' is used. See
             https://flask-restful.readthedocs.io/en/latest/api.html?highlight=RequestParser#reqparse.Argument.
-        required: Whether the fields are required as a boolean.
+        required: Whether the fields are required, as a boolean.
     """
     for field in fields:
         field_name = field[0]
@@ -48,36 +48,6 @@ def _add_fields(parser, fields, required):
         parser.add_argument(
             field_name, type=data_type, action=action,
             store_missing=False, required=required, location='json')
-
-
-def add_optional_fields(parser, optional_fields):
-    """Adds optional fields to the parser.
-
-    Args:
-        optional_fields: An iterable of optional fields to add.
-            Each field is represented as a tuple. The first element is the name
-            of field as a string. The second element, if present, is the data
-            type of the string. If absent, str is used. The third element,
-            if present, is the action the parser should take when encountering
-            the field. If absent, 'store' is used. See
-            https://flask-restful.readthedocs.io/en/latest/api.html?highlight=RequestParser#reqparse.Argument.
-    """
-    _add_fields(parser, optional_fields, False)
-
-
-def add_required_fields(parser, required_fields):
-    """Adds required fields to the parser.
-
-    Args:
-        optional_fields: An iterable of required fields to add.
-            Each field is represented as a tuple. The first element is the name
-            of field as a string. The second element, if present, is the data
-            type of the string. If absent, str is used. The third element,
-            if present, is the action the parser should take when encountering
-            the field. If absent, 'store' is used. See
-            https://flask-restful.readthedocs.io/en/latest/api.html?highlight=RequestParser#reqparse.Argument.
-    """
-    _add_fields(parser, required_fields, True)
 
 
 def setup_logging():

@@ -57,11 +57,11 @@ class RequestParserAddFieldsTest(unittest.TestCase):
     """Tests for utility functions that deal with RequestParser."""
 
     def test_optional_fields(self):
-        """Tests that add_optional_fields correctly add optional fields
+        """Tests that add_fields correctly adds optional fields
         to the parser."""
         parser = reqparse.RequestParser()
         optional_fields = [('attempt_id', str), ('import_name', str, 'store')]
-        utils.add_optional_fields(parser, optional_fields)
+        utils.add_fields(parser, optional_fields, required=False)
 
         with main.app.test_request_context(json={'pr_number': 1}):
             args = parser.parse_args()
@@ -78,11 +78,11 @@ class RequestParserAddFieldsTest(unittest.TestCase):
             self.assertEqual(both, args)
 
     def test_required_fields(self):
-        """Tests that add_required_fields correctly adds required fields
+        """Tests that add_fields correctly adds required fields
         to the parser."""
         parser = reqparse.RequestParser()
         required_fields = [('pr_number', int)]
-        utils.add_required_fields(parser, required_fields)
+        utils.add_fields(parser, required_fields, required=True)
 
         with_pr = {'pr_number': 1, 'import_name': 'name'}
         with main.app.test_request_context(json=with_pr):
@@ -96,8 +96,8 @@ class RequestParserAddFieldsTest(unittest.TestCase):
                 self.assertEqual(400, context.exception.code)
 
     def test_combined(self):
-        """Tests that add_optional_fields and add_required_fields work correctly
-        when used together."""
+        """Tests that add_fields correctly adds both required and
+        optional fields to a parser."""
         parser = reqparse.RequestParser()
         required_fields = [('pr_number', int)]
         optional_fields = [('logs', dict, 'append')]
