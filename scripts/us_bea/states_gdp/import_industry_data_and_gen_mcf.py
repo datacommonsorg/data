@@ -26,12 +26,12 @@ import csv
 import re
 from absl import app
 import pandas as pd
-from import_data import StateGDPDataLoader
+import import_data
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None # default='warn'
 
-class StateGDPIndustryDataLoader(StateGDPDataLoader):
+class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
     """Pulls GDP industry-level state data from BEA.
 
     Attributes:
@@ -107,7 +107,7 @@ class StateGDPIndustryDataLoader(StateGDPDataLoader):
         """Converts value to float type, and filters out missing values. Missing
         values are marked by a latter enclosed in parentheses, e.g., "(D)".
         """
-        if isinstance(val, float):
+        if not isinstance(val, str):
             return val
         if '(' in val or ')' in val:
             return -1
