@@ -3,14 +3,14 @@
 ## Table of Contents
 
 1. [About the Dataset](#about-the-dataset)
-2. [Download URL](#download-url)
-2. [Overview](#overview)
-2. [Notes and Caveats](#notes-and-caveats)
-2. [License](#license)
-2. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
-1. [About the Import](#about-the-import)
-2. [Artifacts](#artifacts)
-2. [Import Procedure](#import-procedure)
+    1. [Download URL](#download-url)
+    2. [Overview](#overview)
+    3. [Notes and Caveats](#notes-and-caveats)
+    4. [License](#license)
+    5. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
+2. [About the Import](#about-the-import)
+    1. [Artifacts](#artifacts)
+    2. [Import Procedure](#import-procedure)
 
 
 ## About the Dataset
