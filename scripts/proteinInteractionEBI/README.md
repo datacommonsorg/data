@@ -1,4 +1,4 @@
-# Importing ontology dataset molecular interaction from the European Bioinformatics Institute (EMBL-EBI)
+# Importing ontology dataset of molecular interaction from the European Bioinformatics Institute (EMBL-EBI)
 
 ## Table of Contents
 
