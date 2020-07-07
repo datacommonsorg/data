@@ -24,21 +24,38 @@ class GCSDownloader(GCSBucketIO):
         blob.download_to_filename(dest)
 
 
-class GCSUploader(GCSBucketIO):
 
-    def upload_dir(self, src, dest):
-        with os.scandir(src) as entry_iter:
-            for entry in entry_iter:
-                if entry.is_dir(follow_symlinks=False):
-                    self.upload_dir(
-                        entry.path,
-                        os.path.join(dest, entry.name))
-                elif entry.is_file(follow_symlinks=False):
-                    self.upload_file(
-                        entry.path,
-                        os.path.join(dest, entry.name))
 
-    def upload_file(self, src, dest):
-        blob = self.bucket.blob(dest)
-        blob.upload_from_filename(src)
+def upload_dir(src, dest, bucket_name=None, bucket=None, client=None):
+    if not bucket_name and not bucket:
+        raise ValueError('neither bucket_name or bucket is specified')
+    if not client:
+        client = storage.Client()
+    if not bucket:
+        bucket = client.bucket(bucket_name)
 
+    with os.scandir(src) as entry_iter:
+        for entry in entry_iter:
+            if entry.is_dir(follow_symlinks=False):
+                upload_dir(
+                    entry.path,
+                    os.path.join(dest, entry.name),
+                    bucket=bucket,
+                    client=client)
+            elif entry.is_file(follow_symlinks=False):
+                upload_file(
+                    entry.path,
+                    os.path.join(dest, entry.name),
+                    bucket=bucket,
+                    client=client)
+
+
+def upload_file(src, dest, bucket_name=None, bucket=None, client=None):
+    if not bucket_name and not bucket:
+        raise ValueError('neither bucket_name or bucket is specified')
+    if not client:
+        client = storage.Client()
+    if not bucket:
+        bucket = client.bucket(bucket_name)
+    blob = bucket.blob(dest)
+    blob.upload_from_filename(src)

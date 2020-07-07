@@ -35,5 +35,5 @@ def task_info_valid(task_info):
     return True, ''
 
 
-def get_missing_keys(keys, task_info):
-    return list(key for key in keys if key not in task_info)
+def get_missing_keys(keys, a_dict):
+    return list(key for key in keys if key not in a_dict)
