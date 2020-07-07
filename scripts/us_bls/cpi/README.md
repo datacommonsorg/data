@@ -17,7 +17,7 @@ Xlsx and text files are available for download from https://www.bls.gov/cpi/data
 
 The Consumer Price Index, short for CPI, is a measure of inflation. It is a
 weighted average of market prices of goods and services purchased by consumers.
-The U.S. Bureau of Labor Statistics  provides datasets of different types of
+The U.S. Bureau of Labor Statistics provides datasets of different types of
 CPIs. CPIs differ in their methods of calculation, the products they include in
 the calculation, and the population groups.
 

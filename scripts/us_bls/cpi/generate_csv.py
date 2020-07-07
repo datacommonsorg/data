@@ -23,35 +23,42 @@ Usage: python3 generate_csv.py
 from io import StringIO
 
 import requests
+import frozendict
 import pandas as pd
 
 
 # Dict from series names to download links
-CSV_URLS = {
+CSV_URLS = frozendict.frozendict({
     "cpi_u_1913_2020":
         "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems",
     "cpi_w_1913_2020":
         "https://download.bls.gov/pub/time.series/cw/cw.data.1.AllItems",
     "c_cpi_u_1999_2020":
         "https://download.bls.gov/pub/time.series/su/su.data.1.AllItems"
-}
+})
 
 # Dict from series names to series IDs
-SERIES_IDS = {
+SERIES_IDS = frozendict.frozendict({
     "cpi_u_1913_2020": "CUUR0000SA0",
     "cpi_w_1913_2020": "CWUR0000SA0",
     "c_cpi_u_1999_2020": "SUUR0000SA0"
-}
+})
 
 
 def main():
     for series_name, url in CSV_URLS.items():
         series_id = SERIES_IDS[series_name]
+
+        # If the downloading fails, an exception will be thrown and the
+        # script will crash.
+        # See https://requests.readthedocs.io/en/latest/user/quickstart/#errors-and-exceptions.
         response = requests.get(url)
+        response.raise_for_status()
+
         buffer = StringIO(response.text)
 
         # The raw csv has four columns: "series_id", "year", "period", "value",
-        # and "footnote_codes.
+        # and "footnote_codes".
         # "value" is the CPI values.
         # "year" is of the form "YYYY".
         # "period" is the months of the observations and is of the form "MM"
