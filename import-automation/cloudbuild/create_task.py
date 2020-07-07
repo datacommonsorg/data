@@ -22,7 +22,9 @@ import json
 
 from google.cloud import tasks_v2
 
-
+# These fields must present as environmental variables.
+# PR_NUMBER must be an integer.
+# Otherwise, the script will fail.
 TASK_BODY_FIELDS = [
     'COMMIT_SHA',
     'REPO_NAME',
@@ -100,6 +102,9 @@ def main():
     Creates a Cloud Tasks task that ships information about a GitHub commit
     to the executor.
     """
+    # TASK_PROJECT_ID, TASK_LOCATION_ID, TASK_QUEUE_NAME, HANDLER_SERVICE, and
+    # HANDLER_URI must be present as environmental variables.
+    # Otherwise, the script will fail.
     create_task(
         task_body=create_body(),
         project_id=os.environ['TASK_PROJECT_ID'],
