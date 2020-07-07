@@ -101,8 +101,8 @@ class RequestParserAddFieldsTest(unittest.TestCase):
         parser = reqparse.RequestParser()
         required_fields = [('pr_number', int)]
         optional_fields = [('logs', dict, 'append')]
-        utils.add_required_fields(parser, required_fields)
-        utils.add_optional_fields(parser, optional_fields)
+        utils.add_fields(parser, required_fields, required=True)
+        utils.add_fields(parser, optional_fields, required=False)
 
         log_1 = {'level': 'info', 'message': 'ahhhhh'}
         log_2 = {'level': 'error', 'message': 'noooo'}
