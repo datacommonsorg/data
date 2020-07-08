@@ -92,7 +92,7 @@ class ImportAttemptByID(ImportAttempt):
             and the error code is an int.
         """
         with self.client.transaction():
-            import_attempt = self.attempt_database.get_by_id(attempt_id)
+            import_attempt = self.database.get_by_id(attempt_id)
             if not import_attempt:
                 return NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
             return import_attempt
