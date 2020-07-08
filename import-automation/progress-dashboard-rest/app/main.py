@@ -33,7 +33,7 @@ def create_app(logging=True):
     Args:
         logging: Whether to set up Google Cloud Logging.
     """
-    if not logging:
+    if logging:
         utils.setup_logging()
     return flask.Flask(__name__)
 
@@ -55,5 +55,5 @@ def main():
     FLASK_APP.run(debug=True, port=8080)
 
 
-FLASK_APP = create_app('DASHBOARD_PRODUCTION' not in os.environ)
+FLASK_APP = create_app('DASHBOARD_PRODUCTION' in os.environ)
 FLASK_API = create_api(FLASK_APP)
