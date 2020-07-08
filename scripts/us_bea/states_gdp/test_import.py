@@ -21,6 +21,9 @@ Tests the import_data.py script.
 import unittest
 import pandas as pd
 from import_data import StateGDPDataLoader
+from import_industry_data_and_gen_mcf import StateGDPIndustryDataLoader
+
+TEST_DATA_DIR = "test_csvs/"
 
 class USStateQuarterlyGDPImportTest(unittest.TestCase):
     def test_date_converter(self):
@@ -49,20 +52,52 @@ class USStateQuarterlyGDPImportTest(unittest.TestCase):
 
     def test_data_processing_tiny(self):
         """Tests end-to-end data cleaning on a tiny example."""
-        raw_df = pd.read_csv("test_tiny_raw.csv", index_col=0)
-        clean_df = pd.read_csv("test_tiny_cleaned.csv", index_col=0)
+        raw_df = pd.read_csv(TEST_DATA_DIR + "test_tiny_raw.csv", index_col=0)
+        clean_df = pd.read_csv(TEST_DATA_DIR + "test_tiny_cleaned.csv", index_col=0)
         loader = StateGDPDataLoader()
         loader.process_data(raw_df)
         pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
     def test_data_processing_small(self):
         """Tests end-to-end data cleaning on a small example."""
-        raw_df = pd.read_csv("test_small_raw.csv", index_col=0)
-        clean_df = pd.read_csv("test_small_cleaned.csv", index_col=0)
+        raw_df = pd.read_csv(TEST_DATA_DIR + "test_small_raw.csv", index_col=0)
+        clean_df = pd.read_csv(TEST_DATA_DIR + "test_small_cleaned.csv", index_col=0)
         loader = StateGDPDataLoader()
         loader.process_data(raw_df)
         pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
+class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
+    def test_data_processing_tiny(self):
+        """Tests end-to-end data cleaning on a tiny example."""
+        raw_df = pd.read_csv(TEST_DATA_DIR + "test_industry_tiny_raw.csv",
+                             index_col=0)
+        clean_df = pd.read_csv(TEST_DATA_DIR + "test_industry_tiny_cleaned.csv",
+                               index_col=0)
+        loader = StateGDPIndustryDataLoader()
+        loader.process_data(raw_df)
+        pd.testing.assert_frame_equal(clean_df, loader.clean_df)
+
+    def test_value_converter(self):
+        """Tests value converter function that cleans out empty datapoints."""
+        val_conv_fn = StateGDPIndustryDataLoader._value_converter
+        self.assertEqual(val_conv_fn("(D)"), -1)
+        self.assertEqual(val_conv_fn("(E)"), -1)
+        self.assertEqual(val_conv_fn("356785)"), -1)
+        self.assertEqual(val_conv_fn("35678.735"), 35678.735)
+        self.assertEqual(val_conv_fn(35678.735), 35678.735)
+        self.assertEqual(val_conv_fn(5), 5)
+
+    def test_industry_class(self):
+        """Tests industry class converter function that cleans out empty
+        datapoints.
+        """
+        ind_conv_fn = StateGDPIndustryDataLoader._convert_industry_class
+        prefix = "dcs:USSateQuarterlyIndustryGDP_NAICS_"
+        self.assertEqual(ind_conv_fn("35"), prefix + "35")
+        self.assertEqual(ind_conv_fn("987"), prefix + "987")
+        self.assertEqual(ind_conv_fn("35-37"), prefix + "35_37")
+        self.assertEqual(ind_conv_fn("35-37,40"), prefix + "35_37&40")
+        self.assertEqual(ind_conv_fn("13-97,2,45-78"), prefix + "13_97&2&45_78")
 
 if __name__ == '__main__':
     unittest.main()

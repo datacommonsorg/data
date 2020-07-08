@@ -38,21 +38,21 @@ measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
 naics: dcid:NAICS/31_33
 
-Node: dcid:USStateQuarterlyIndustryGDP_NAICS_JOLTS_320000
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_321&327_339
 typeOf: dcs:StatisticalVariable
 populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
-naics: dcid:NAICS/JOLTS_320000
+naics: dcid:NAICS/321&327_339
 
-Node: dcid:USStateQuarterlyIndustryGDP_NAICS_JOLTS_340000
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_311_316&322_326
 typeOf: dcs:StatisticalVariable
 populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
-naics: dcid:NAICS/JOLTS_340000
+naics: dcid:NAICS/311_316&322_326
 
 Node: dcid:USStateQuarterlyIndustryGDP_NAICS_42
 typeOf: dcs:StatisticalVariable
@@ -165,4 +165,3 @@ activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
 naics: dcid:NAICS/81
-

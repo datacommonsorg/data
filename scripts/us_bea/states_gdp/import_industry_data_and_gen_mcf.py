@@ -100,6 +100,8 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         df['value'] = df['value'].apply(self._value_converter)
         df = df[df['value'] >= 0]
 
+        # Convert from millions of current USD to current USD.
+        df['value'] *= 1000000
         self.clean_df = df.drop(["GeoFIPS", "IndustryClassification"], axis=1)
 
     @staticmethod
@@ -119,11 +121,13 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         """Filters out aggregate NAICS codes and assigns them their Data
         Commons codes.
         """
-        if naics_code == "321,327-339":
-            naics_code = "JOLTS_320000"
-        if naics_code == "311-316,322-326":
-            naics_code = "JOLTS_340000"
-        naics_code = naics_code.replace("-", "_")
+        # if naics_code == "321,327-339":
+        #     naics_code = "JOLTS_320000"
+        # if naics_code == "311-316,322-326":
+        #     naics_code = "JOLTS_340000"
+        if isinstance(naics_code, str):
+            naics_code = naics_code.replace("-", "_")
+            naics_code = naics_code.replace(",", "&")
         return f"dcs:USSateQuarterlyIndustryGDP_NAICS_{naics_code}"
 
     def save_csv(self, filename='states_industry_gdp.csv'):
