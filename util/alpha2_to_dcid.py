@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Country and US State Alpha2 -> DCID maps."""
 
 COUNTRY_MAP = {
@@ -325,4 +324,3 @@ USSTATE_MAP = {
     'UM': 'geoId/74',
     'VI': 'geoId/78',
 }
-

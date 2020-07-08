@@ -11,3 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+"""
+Configurations for the dashboard API.
+"""
+
+# ID of the Google Cloud project that enables Datastore
+PROJECT_ID = 'datcom-data'
+# Google Cloud Datastore namespace in which import attempts are stored
+DASHBOARD_NAMESPACE = 'import-progress-dashboard'

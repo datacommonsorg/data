@@ -11,3 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+"""
+Entry point of the app module.
+To run the app locally, run "python3 -m app" in the
+progress-dashboard-rest directory
+"""
+
+from app import main
+
+main.main()
