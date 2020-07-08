@@ -131,7 +131,10 @@ class SystemRunList(SystemRun):
     """API for querying a list of system runs based on some criteria."""
 
     def __init__(self):
-        self.database = system_run_database.SystemRunDatabase()
+        self.client = utils.create_datastore_client()
+        self.database = system_run_database.SystemRunDatabase(
+            client=self.client)
+
 
     def get(self):
         """Retrieves a list of system runs that pass the filter defined by
@@ -151,6 +154,7 @@ class SystemRunList(SystemRun):
         args.pop('logs', None)
         set_system_run_default_values(args)
 
-        run = self.database.get_by_id(make_new=True)
-        run.update(args)
-        return self.database.save(run)
+        with self.client.transaction():
+            run = self.database.get_by_id(make_new=True)
+            run.update(args)
+            return self.database.save(run)

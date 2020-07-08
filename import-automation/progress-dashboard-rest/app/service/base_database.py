@@ -80,7 +80,9 @@ class BaseDatabase:
             A datastore Key composed of the entity kind and the entity_id. If
             entity_id is None, a partial Key.
         """
-        return self.client.key(self.kind, entity_id)
+        if entity_id:
+            return self.client.key(self.kind, entity_id)
+        return self.client.key(self.kind)
 
     def filter(self, kv_dict):
         """Retrieves a list of entities based on some criteria.
