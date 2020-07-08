@@ -19,7 +19,6 @@ Tests for import_log.py.
 import unittest
 from unittest import mock
 
-from context import app
 from app.resource import import_attempt, import_log
 from app.service import import_attempt_database_dict
 from app import utils
