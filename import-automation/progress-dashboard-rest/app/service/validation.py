@@ -22,4 +22,4 @@ def import_attempt_valid(attempt, attempt_id=None):
 
 
 def system_run_valid(system_run):
-    return None
+    return True, None, None
