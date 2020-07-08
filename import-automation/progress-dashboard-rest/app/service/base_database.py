@@ -65,6 +65,8 @@ class BaseDatabase:
         if not entity_id and not make_new:
             raise ValueError('entity_id is None and make_new is False')
         key = self._get_key(entity_id)
+        if not entity_id:
+            return datastore.Entity(key)
         entity = self.client.get(key)
         if make_new and not entity:
             return datastore.Entity(key)
