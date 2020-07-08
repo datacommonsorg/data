@@ -31,17 +31,16 @@ steps:
   waitFor:
   - python_install
 
-# TODO(rsned): Uncomment once the existing source files are updated to pass lint.
-#- id: python_format_check
-#  name: python:3.7
-#  entrypoint: python3
-#  # TODO(rsned): Add in scripts/ tree when it's fixed up.
-#  # args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/", "scripts/"]
-#  args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/"]
-#  # In cloudbuild, everything happens under /workspace path
-#  env: ["PYTHONPATH=/workspace"]
-#  waitFor:
-#  - python_install
+- id: python_format_check
+  name: python:3.7
+  entrypoint: python3
+  # TODO(rsned): Add in scripts/ tree when it's fixed up.
+  # args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/", "scripts/"]
+  args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/"]
+  # In cloudbuild, everything happens under /workspace path
+  env: ["PYTHONPATH=/workspace"]
+  waitFor:
+  - python_install
 
 # TODO(rsned): Uncomment once the existing source files are updated to pass lint.
 #- id: python_lint
@@ -53,4 +52,4 @@ steps:
 #  waitFor:
 #  - python_install
 
-# TODO: Add any other useful code health tools.
+# TODO(rsned): Add any other useful code health tools.
