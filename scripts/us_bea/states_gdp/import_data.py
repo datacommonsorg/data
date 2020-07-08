@@ -49,7 +49,7 @@ class StateGDPDataLoader:
                   'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
                   'West Virginia', 'Wisconsin', 'Wyoming']
     _ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
-    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
+    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2020.csv"
     _QUARTER_MONTH_MAP = {
         'Q1':'03',
         'Q2':'06',
