@@ -16,16 +16,17 @@
 Mock classes of Google Datastore Client Library classes.
 """
 
+ID_FIELD = 'entity_id'
 
 class DatastoreEntityMock(dict):
     """Mock class of google.cloud.datastore.Entity."""
 
-    def __init__(self, attempt_id, **kwargs):
+    def __init__(self, entity_id, **kwargs):
         """Constructs a DatastoreEntityMock whose key is the attempt_id."""
         super().__init__()
         # Unused
         del kwargs
-        self['attempt_id'] = attempt_id
+        self[ID_FIELD] = entity_id
 
 
 class DatastoreClientMock:
@@ -36,21 +37,21 @@ class DatastoreClientMock:
         """Constructs a DatastoreClientMock."""
         # Unused
         del kwargs
-        self.attempts = {}
+        self.entities = {}
 
-    def get(self, attempt_id):
+    def get(self, entity_id):
         """Retrieves the attempt with the given ID."""
-        return self.attempts.get(attempt_id)
+        return self.entities.get(entity_id)
 
-    def put(self, import_attempt):
+    def put(self, entity):
         """Saves the given attempt into storage."""
-        self.attempts[import_attempt['attempt_id']] = import_attempt
+        self.entities[entity[ID_FIELD]] = entity
 
-    def key(self, kind, attempt_id):
+    def key(self, kind, entity_id):
         """Converts the attempt_id into a key."""
         # Unused
         del kind
-        return attempt_id
+        return entity_id
 
     def query(self, kind):
         """Returns a DatastoreQueryMock object that can be used filter
@@ -79,7 +80,7 @@ class DatastoreQueryMock:
         """Applies the filers and returns an iterator of import attempts that
         pass."""
         ans = []
-        for attempt in self.client_mock.attempts.values():
+        for attempt in self.client_mock.entities.values():
             found = True
             for key, value in self.filters:
                 if attempt.get(key) != value:

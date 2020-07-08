@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-Database service for storing import attempts using Google Cloud Datastore for
+Database service for storing system runs using Google Cloud Datastore for
 storage.
 """
 
@@ -21,20 +21,20 @@ from app import configs
 from app.service import base_database
 
 
-class ImportAttemptDatabase(base_database.BaseDatabase):
-    """Database service for storing import attempts using Google Cloud Datastore
+class SystemRunDatabase(base_database.BaseDatabase):
+    """Database service for storing system runs using Google Cloud Datastore
     for storage.
 
     See BaseDatabase.
     """
-    kind = 'import-attempt'
+    kind = 'system-run'
 
     def __init__(self, client=None):
-        """Constructs an ImportAttemptDatabase.
+        """Constructs an SystemRunDatabase.
 
         See BaseDatabase.
         """
-        super().__init__(ImportAttemptDatabase.kind, client)
+        super().__init__(SystemRunDatabase.kind, client)
 
-    def save(self, entity, id_field='attempt_id'):
+    def save(self, entity, id_field='run_id'):
         return super().save(entity, id_field)

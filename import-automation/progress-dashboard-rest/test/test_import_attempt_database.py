@@ -32,6 +32,9 @@ from app.service import import_attempt_database
 class ImportAttemptDatabaseTest(unittest.TestCase):
     """Tests for ImportAttemptDatabase."""
 
+    def setUpClass():
+        datastore_mocks.ID_FIELD = 'attempt_id'
+
     def test_save_then_get(self):
         """Tests that an import attempt can be saved and then retrieved."""
         database = import_attempt_database.ImportAttemptDatabase()

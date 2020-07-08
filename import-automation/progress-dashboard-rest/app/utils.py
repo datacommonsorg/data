@@ -19,12 +19,29 @@ Utility functions.
 import datetime
 
 import google.cloud.logging
+from google.cloud import datastore
+from google.cloud import storage
+
+from app import configs
 
 
 def utctime():
     """Returns the current time string in ISO 8601 with timezone UTC+0, e.g.
     '2020-06-30T04:28:53.717569+00:00'."""
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+
+def iso_utc(time):
+    """
+    See https://docs.python.org/3/library/datetime.html#datetime.datetime.fromisoformat.
+    """
+    try:
+        time = datetime.datetime.fromisoformat(time)
+        if time.tzname() != 'UTC':
+            return False
+    except ValueError:
+        return False
+    return True
 
 
 def add_fields(parser, fields, required=True):
@@ -56,3 +73,19 @@ def setup_logging():
     client = google.cloud.logging.Client()
     client.get_default_handler()
     client.setup_logging()
+
+
+def create_storage_bucket(project=configs.PROJECT_ID,
+                          bucket_name=configs.LOG_BUCKET_NAME):
+    return storage.Client(project).bucket(bucket_name)
+
+
+def create_datastore_client(project=configs.PROJECT_ID,
+                            namespace=configs.DASHBOARD_NAMESPACE):
+    """
+    Args:
+        project: ID of the Google Cloud project as a string.
+        namespace: Namespace in which the import attempts will be stored
+            as a string.
+    """
+    return datastore.Client(project=project, namespace=namespace)
