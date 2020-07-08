@@ -1,7 +1,7 @@
-
 Node: E:EurostatNUTS3_DensityTracking->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:PopulationDensity_Eurostat_NUTS3
+variableMeasured: dcs:Count_Person_AsAFractionOfArea
 observationAbout: C:EurostatNUTS3_DensityTracking->GeoId
-observationDate: C:EurostatNUTS3_DensityTracking->Dates
-value: C:EurostatNUTS3_DensityTracking->PopulationDensity_Eurostat_NUTS3
+observationDate: C:EurostatNUTS3_DensityTracking->Date
+value: C:EurostatNUTS3_DensityTracking->Count_Person_AsAFractionOfArea
+measurementMethod: "EurostatRegionalStatistics"
