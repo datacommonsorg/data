@@ -1,13 +1,8 @@
-Node: dcid:PopulationDensity_Eurostat_NUTS3
+# Persons per square kilometre
+
+Node: dcid:Count_Person_AsAFractionOfArea
 typeOf: dcs:StatisticalVariable
-populationType: schema:Person 
-measuredProperty: dcs:populationDensity
+populationType: schema:Person
+measuredProperty: dcs:count
 statType: dcs:measuredValue
-unit: dcs:SquareKilometer
-measurementQualifier: dcs:TotalLand
-
-
-Node: dcid:TotalLand
-typeOf: dcs:UnitOfMeasure
-name: “total land”
-description: "Quantifier for total land measured."
+measurementDenominator: dcs:area
