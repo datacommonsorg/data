@@ -57,6 +57,8 @@ def create_api(app):
                      '/system_runs/<string:run_id>/logs')
     api.add_resource(progress_log_list.ProgressLogList,
                      '/logs')
+    api.add_resource(progress_log_list.ProgressLogList,
+                     '/logs/<string:log_id>')
     return api
 
 

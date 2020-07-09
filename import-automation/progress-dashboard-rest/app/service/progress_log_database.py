@@ -18,17 +18,7 @@ storage.
 """
 
 from app.service import base_database
-
-
-def load_message(log_id, bucket):
-    blob = bucket.blob(log_id)
-    return blob.download_as_string().decode('UTF-8')
-
-
-def save_log_message(message, log_id, bucket):
-    blob = bucket.blob(log_id)
-    blob.upload_from_string(message)
-    return log_id
+from app.service import log_message_manager
 
 
 class ProgressLogDatabase(base_database.BaseDatabase):
@@ -39,27 +29,27 @@ class ProgressLogDatabase(base_database.BaseDatabase):
     """
     kind = 'progress-log'
 
-    def __init__(self, client=None):
+    def __init__(self, client=None, log_manager=None):
         """Constructs a LogDatabase.
 
         See BaseDatabase.
         """
         super().__init__(ProgressLogDatabase.kind, client)
+        if not log_manager:
+            log_manager = log_message_manager.LogMessageManager()
+        self.log_manager = log_manager
 
-    def get_by_id(self, entity_id=None, make_new=False, bucket=None, load_content=False):
-        if load_content and not bucket:
-            raise ValueError('load_content is True but no bucket is provided')
+    def get_by_id(self, entity_id=None, make_new=False, load_content=False):
         log = super().get_by_id(entity_id, make_new)
         if log and load_content:
-            log['message'] = load_message(log.key.name, bucket)
+            log['message'] = self.log_manager.load_message(log.key.name)
         return log
 
-    def save(self, entity, id_field='log_id', bucket=None, save_content=False):
-        if save_content and not bucket:
-            raise ValueError('save_content is True but no bucket is provided')
+    def save(self, entity, id_field='log_id', save_content=False):
         entity[id_field] = entity.key.name
         if save_content:
-            entity['message'] = save_log_message(entity['message'], entity.key.name, bucket)
+            entity['message'] = self.log_manager.save_message(
+                entity['message'], entity.key.name)
         return super().save(entity, id_field)
 
     def load_logs(self, log_ids, bucket):
@@ -67,4 +57,4 @@ class ProgressLogDatabase(base_database.BaseDatabase):
 
     def load_log(self, log_id, bucket):
         return self.get_by_id(
-            entity_id=log_id, bucket=bucket, load_content=True)
+            entity_id=log_id, load_content=True)

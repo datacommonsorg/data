@@ -28,7 +28,6 @@ class ProgressLogList(flask_restful.Resource):
 
     def __init__(self):
         """Constructs an ImportLog."""
-        self.bucket = utils.create_storage_bucket()
         self.datastore_client = utils.create_datastore_client()
         self.run_database = system_run_database.SystemRunDatabase(
             client=self.datastore_client)
@@ -74,7 +73,7 @@ class ProgressLogList(flask_restful.Resource):
         log.update(args)
 
         with self.datastore_client.transaction():
-            self.log_database.save(log, bucket=self.bucket, save_content=True)
+            self.log_database.save(log, save_content=True)
             if run_id:
                 self.run_database.save(
                     add_log_to_entity(log.key.name, run)

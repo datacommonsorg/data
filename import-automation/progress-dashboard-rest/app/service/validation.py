@@ -21,5 +21,5 @@ def import_attempt_valid(attempt, attempt_id=None):
     return True, None, None
 
 
-def system_run_valid(system_run):
+def system_run_valid(system_run, run_id=None):
     return True, None, None
