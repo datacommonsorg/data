@@ -23,7 +23,7 @@ var (
 )
 
 const (
-	batchSize = 100
+	batchSize = 200
 	placeId2dcidBucket = "datcom-browser-prod.appspot.com"
 	placeId2dcidObject = "placeid2dcid.json"
 )
@@ -64,7 +64,8 @@ func appendContainedInPlaceNames(name string, row []string, tinfo *tableInfo) (s
 
 	idx, ok := tinfo.node2row[cipRef]
 	if !ok {
-		return "", fmt.Errorf("Unresolved 'containedInPlace' ref %s in Node %s", cipRef, nodeId)
+		log.Printf("ERROR: Unresolved 'containedInPlace' ref %s in Node %s, skipping.", cipRef, nodeId)
+		return name, nil
 	}
 	if idx >= len(tinfo.rows) {
 		return "", fmt.Errorf("Out of range %d vs. %d", idx, len(tinfo.rows))
@@ -203,10 +204,10 @@ func geocodePlaces(mapsApiKey string, placeId2Dcid *map[string]string, tinfo *ta
 		}
 		for j := i; j < jMax; j++ {
 			wg.Add(1)
-			log.Printf("Processing j=%d (%v)", j, tinfo.rows[j])
 			go geocodeOneRow(j, placeId2Dcid, tinfo, mapCli, &wg)
 		}
 		wg.Wait()
+		log.Printf("Processed %d rows, %d left.", jMax, len(tinfo.rows) - jMax)
 	}
 	return nil
 }
