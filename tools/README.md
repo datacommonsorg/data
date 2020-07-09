@@ -17,6 +17,6 @@ For sample input/output CSVs, see `examples` directory.
 To run this program:
 
 ```
-go run place_name_resolver.go --in_csv_path=sample_resolution_input.csv --out_csv_path=sample_resolution_output.csv --maps_api_key=<YOUR_KEY_HERE>
+go run place_name_resolver.go --in_csv_path=examples/resolution_input_basic.csv --out_csv_path=examples/resolution_output_basic.csv --maps_api_key=<YOUR_KEY_HERE>
 ```
 
