@@ -46,7 +46,7 @@ class ProgressLogDatabase(base_database.BaseDatabase):
         """
         super().__init__(ProgressLogDatabase.kind, client)
 
-    def get_by_id(self, entity_id=None, make_new=False, bucket=None, load_content=True):
+    def get_by_id(self, entity_id=None, make_new=False, bucket=None, load_content=False):
         if load_content and not bucket:
             raise ValueError('load_content is True but no bucket is provided')
         log = super().get_by_id(entity_id, make_new)
@@ -54,7 +54,7 @@ class ProgressLogDatabase(base_database.BaseDatabase):
             log['message'] = load_message(log.key.name, bucket)
         return log
 
-    def save(self, entity, id_field='log_id', bucket=None, save_content=True):
+    def save(self, entity, id_field='log_id', bucket=None, save_content=False):
         if save_content and not bucket:
             raise ValueError('save_content is True but no bucket is provided')
         entity[id_field] = entity.key.name

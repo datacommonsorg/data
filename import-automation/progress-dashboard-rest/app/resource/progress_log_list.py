@@ -70,11 +70,11 @@ class ProgressLogList(flask_restful.Resource):
                         'import attempt',
                         http.HTTPStatus.INTERNAL_SERVER_ERROR)
 
-        log = self.log_database.get_by_id(entity_id=None, make_new=True)
+        log = self.log_database.get_by_id(make_new=True)
         log.update(args)
 
         with self.datastore_client.transaction():
-            self.log_database.save(log)
+            self.log_database.save(log, bucket=self.bucket, save_content=True)
             if run_id:
                 self.run_database.save(
                     add_log_to_entity(log.id, run)
