@@ -45,8 +45,7 @@ LOG_LEVELS = frozenset(level.value for level in LogLevel)
 class ProgressLogByID(flask_restful.Resource):
 
     def __init__(self):
-        self.database = progress_log_database.ProgressLogDatabase(
-            client=self.client)
+        self.database = progress_log_database.ProgressLogDatabase()
         self.bucket = utils.create_storage_bucket()
 
     def get(self, log_id):
