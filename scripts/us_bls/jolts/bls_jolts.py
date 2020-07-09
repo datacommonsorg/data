@@ -62,16 +62,16 @@ _CODE_MAPPINGS = {
 }
 
 def generate_cleaned_dataframe():
-  """ Fetches and combines BLS Jolts data sources.
+  """Fetches and combines BLS Jolts data sources.
 
   Downloads detailed series information from the entire JOLTS dataset.
   Each of the files is read, combined into a single dataframe, and processed.
 
   Returns:
-    jolts_df: The 6 job data categories by industry, year, and adjustment.
+    jolts_df: The 6 job data categories by industry, year, and adjustment, 
+        as a data frame.
     schema_mapping: List of tuples that contains information for each dataset.
   """
-
   # Series descriptions are used for adjustment status and industry code.
   exp_series_columns = ['series_id', 'seasonal', 'industry_code',
       'region_code', 'dataelement_code', 'ratelevel_code', 'footnote_codes',
@@ -123,15 +123,15 @@ def generate_cleaned_dataframe():
   ]
   # Combine datasets into a single dataframe including origin of data.
   jolts_df = pd.DataFrame()
-  exp_job_columns = ['series_id', 'year', 'period', 'value', 'footnote_codes']
+  job_columns = ['series_id', 'year', 'period', 'value', 'footnote_codes']
 
   for schema_name, population_type, job_change_event, df in schema_mapping:
     # Assert columns are as expected.
-    assert len(df.columns) == len(exp_job_columns)
-    assert False not in (df.columns == exp_job_columns)
+    assert len(df.columns) == len(job_columns)
+    assert False not in (df.columns == job_columns)
 
     # Add to general dataframe.
-    df = df.loc[:, exp_job_columns]
+    df = df.loc[:, job_columns]
     df.loc[:, 'statistical_variable'] = schema_name
     df.loc[:, 'job_change_event'] = job_change_event
     df.loc[:, 'population_type'] = population_type
@@ -159,7 +159,7 @@ def generate_cleaned_dataframe():
 
   # Map industries.
   def jolts_code_map(row):
-    """ Maps industry code used by BLS Jolts to NAICS or BLS aggregation """
+    """Maps industry code used by BLS Jolts to NAICS or BLS aggregation."""
     industry_code = row['industry_code']
     assert industry_code in _CODE_MAPPINGS, f"{industry_code} not mapped!"
     mapped_code = _CODE_MAPPINGS[industry_code]
@@ -175,7 +175,7 @@ def generate_cleaned_dataframe():
   jolts_df = jolts_df.apply(jolts_code_map, axis=1)
 
   def row_to_stat_var(row):
-    """ Maps a row of the df to the Statistical Variable that describes it. """
+    """Maps a row of the df to the Statistical Variable that describes it."""
     base_stat_var = row['statistical_variable']
     industry_code = row['industry_code']
     seasonal_adjustment = row['seasonal_adjustment']
@@ -191,7 +191,7 @@ def generate_cleaned_dataframe():
   return jolts_df, schema_mapping
 
 def create_statistical_variables(jolts_df, schema_mapping):
-  """ Creates Statistical Variable nodes.
+  """Creates Statistical Variable nodes.
 
     A new statistical industry is needed for each of the 6 job variables
     and for every industry.
@@ -240,20 +240,17 @@ def create_statistical_variables(jolts_df, schema_mapping):
                 .replace("{POPULATION}", pop_type)
                 .replace("{JOB_CHANGE_EVENT}", job_change_event))
 
-def main(argv):
+def main(_):
   """ Executes the downloading, preprocessing, and outputting of
   required MCF and CSV for JOLTS data.
-
-    Args:
-      argv: Not used. Required by absl run.
   """
   # Download and clean data.
   jolts_df, schema_mapping = generate_cleaned_dataframe()
 
   # Output final cleaned CSV.
   final_columns = ['Date', 'StatisticalVariable', 'Value']
-  output_csv = jolts_df.loc[:, final_columns]
-  output_csv.to_csv("BLSJolts.csv", index=False, encoding="utf-8")
+  jolts_df.loc[:, final_columns].to_csv("BLSJolts.csv",
+                                        index=False, encoding="utf-8")
 
   # Create and output Statistical Variables.
   create_statistical_variables(jolts_df, schema_mapping)
