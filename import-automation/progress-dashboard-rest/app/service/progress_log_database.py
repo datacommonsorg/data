@@ -59,7 +59,7 @@ class ProgressLogDatabase(base_database.BaseDatabase):
             raise ValueError('save_content is True but no bucket is provided')
         entity[id_field] = entity.key.name
         if save_content:
-            entity['message'] = save_log_message(entity['message'], entity.key.name)
+            entity['message'] = save_log_message(entity['message'], entity.key.name, bucket)
         return super().save(entity, id_field)
 
     def load_logs(self, log_ids, bucket):
