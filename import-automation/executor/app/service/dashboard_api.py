@@ -18,19 +18,19 @@ DASHBOARD_LOG_BY_ID = DASHBOARD_LOG_LIST + '/{log_id}'
 
 
 def init_run(client_id, system_run):
-    return iap.post(DASHBOARD_RUN_LIST, client_id, json=system_run).json()
+    return iap.post(client_id, DASHBOARD_RUN_LIST, json=system_run).json()
 
 
 def init_attempt(client_id, import_attempt):
-    return iap.post(DASHBOARD_ATTEMPT_LIST, client_id, json=import_attempt).json()
+    return iap.post(client_id, DASHBOARD_ATTEMPT_LIST, json=import_attempt).json()
 
 
 def update_attempt(client_id, import_attempt, attempt_id=None):
     if not attempt_id:
         attempt_id = import_attempt['attempt_id']
     return iap.patch(
-        DASHBOARD_ATTEMPT_BY_ID.format_map({'attempt_id': attempt_id}),
         client_id,
+        DASHBOARD_ATTEMPT_BY_ID.format_map({'attempt_id': attempt_id}),
         json=import_attempt).json()
 
 
@@ -38,8 +38,8 @@ def update_run(client_id, system_run, run_id=None):
     if not run_id:
         run_id = system_run['run_id']
     return iap.patch(
-        DASHBOARD_RUN_BY_ID.format_map({'run_id': run_id}),
         client_id,
+        DASHBOARD_RUN_BY_ID.format_map({'run_id': run_id}),
         json=system_run).json()
 
 
@@ -59,10 +59,7 @@ def _log(client_id, message, level, attempt_id=None, run_id=None, time_logged=No
     if run_id:
         log['run_id'] = run_id
 
-    return iap.post(
-        DASHBOARD_LOG_LIST,
-        client_id,
-        json=log)
+    return iap.post(client_id, DASHBOARD_LOG_LIST, json=log).json()
 
 
 def log_info(client_id, message, attempt_id=None, run_id=None, time_logged=None):
