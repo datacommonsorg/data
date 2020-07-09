@@ -2,11 +2,16 @@ package main
 
 import (
 	"context"
+	"cloud.google.com/go/storage"
+	"encoding/csv"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"googlemaps.github.io/maps"
+	"io"
+	"io/ioutil"
 	"log"
+	"os"
 )
 
 var (
@@ -38,7 +43,7 @@ type tableInfo struct {
 	typeIdx int
 }
 
-func appendContainedInPlaceNames(name string, row *map[string]string, tinfo *tableInfo) (string, error) {
+func appendContainedInPlaceNames(name string, row []string, tinfo *tableInfo) (string, error) {
 	if tinfo.cipIdx < 0 {
 		return name, nil
 	}
@@ -48,7 +53,7 @@ func appendContainedInPlaceNames(name string, row *map[string]string, tinfo *tab
 		return name, nil
 	}
 
-	nodeId := row[nidIdx]
+	nodeId := row[tinfo.nidIdx]
 	if nodeId == cipRef {
 		return name, nil
 	}
@@ -62,20 +67,20 @@ func appendContainedInPlaceNames(name string, row *map[string]string, tinfo *tab
 	}
 
 	cipRow := tinfo.rows[idx]
-	cipName := cipRow[nameIdx]
+	cipName := cipRow[tinfo.nameIdx]
 	return appendContainedInPlaceNames(name+", "+cipName, cipRow, tinfo)
 }
 
-func buildTableInfo(inCsvPath string) (tableInfo, error) {
+func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	csvfile, err := os.Open(inCsvPath)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	r := csv.NewReader(csvfile)
 	isHeader := true
 	rowNum := 0
 	numCols := 0
-	tinfo := tableInfo{nidIdx: -1, nameIdx: -1, cipIdx: -1, typeIdx: -1}
+	tinfo := &tableInfo{nidIdx: -1, nameIdx: -1, cipIdx: -1, typeIdx: -1}
 	for {
 		row, err := r.Read()
 		if err == io.EOF {
@@ -96,86 +101,93 @@ func buildTableInfo(inCsvPath string) (tableInfo, error) {
 				}
 			}
 			if tinfo.nameIdx < 0 {
-				return fmt.Error("CSV does not have a 'name' column!")
+				return nil, fmt.Errorf("CSV does not have a 'name' column!")
 			}
 			if tinfo.cipIdx >= 0 && tinfo.nidIdx < 0 {
-				return fmt.Errorf("When 'containedInPLace' is provided, 'Node' must be provided to allow for references!")
+				return nil, fmt.Errorf("When 'containedInPLace' is provided, 'Node' must be provided to allow for references!")
 			}
 			isHeader = false
 			rowNum += 1
 			continue
 		}
 		if numCols != len(row) {
-			return fmt.Errorf("Not a rectangular CSV! Row %d has only %d columns!", rowNum, len(row))
+			return nil, fmt.Errorf("Not a rectangular CSV! Row %d has only %d columns!", rowNum, len(row))
 		}
-		if row[nodeIdidx] != "" {
-			tinfo.node2row[row[nodeIdIdx]] = rowNum
+		if tinfo.nidIdx >= 0 && row[tinfo.nidIdx] != "" {
+			tinfo.node2row[row[tinfo.nidIdx]] = rowNum
 		}
 		tinfo.rows = append(tinfo.rows, row)
 		rowNum += 1
 	}
 
 	for _, row := range tinfo.rows {
-		extName, err := appendContainedInPlaceNames(row[nameIdx], row, tinfo)
+		extName, err := appendContainedInPlaceNames(row[tinfo.nameIdx], row, tinfo)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		tinfo.extNames = append(tinfo.extNames, extName)
 	}
-	return tinfo
+	return tinfo, nil
 }
 
-func loadPlaceIdToDcidMap() (map[string]string, error) {
+func loadPlaceIdToDcidMap() (*map[string]string, error) {
 	ctx := context.Background()
 	gcsCli, err := storage.NewClient(ctx)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	fp, err := gcsCli.Bucket(placeId2dcidBucket).Object(placeId2dcidObject).NewReader(ctx)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer fp.Close()
 	bytes, err := ioutil.ReadAll(fp)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	placeId2Dcid := map[string]string{}
-	err = json.Unmarshall(bytes, &placeId2Dcid)
+	placeId2Dcid := &map[string]string{}
+	err = json.Unmarshal(bytes, &placeId2Dcid)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return placeId2Dcid
+	return placeId2Dcid, nil
 }
 
 func geocodePlaces(mapsApiKey string, placeId2Dcid *map[string]string, tinfo *tableInfo) error {
-	client, err = maps.NewClient(maps.WithAPIKey(mapsApiKey))
-	for i, row := range tinfo.rows {
-		extName, _ := row["extendedName"]
-		req := &maps.GeocodingRequest{
-			Address:  tinfo.extNames[i],
+	mapCli, err := maps.NewClient(maps.WithAPIKey(mapsApiKey))
+	if err != nil {
+		return err
+	}
+	for i, _ := range tinfo.rows {
+		extName := tinfo.extNames[i]
+		req := &maps.GeocodingRequest {
+			Address:  extName,
 			Language: "en",
 		}
-		resp, err := client.Geocode(context.Background(), req)
-		if resp.Status != "OK" {
-			tinfo.rows[i] = append(tinfo.rows[i], "", resp.Status)
+		results, err := mapCli.Geocode(context.Background(), req)
+		if err != nil {
+			tinfo.rows[i] = append(tinfo.rows[i], "", fmt.Sprintf("Geocoding failed for %s: %v", extName, err))
 			continue
 		}
-		for _, result := range resp.Results {
-			dcid, ok := placeId2Dcid[result.PlaceId]
+		if len(results) == 0 {
+			tinfo.rows[i] = append(tinfo.rows[i], "", fmt.Sprintf("Geocoding returned no result for %s", extName))
+			continue
+		}
+		for _, result := range results {
+			dcid, ok := (*placeId2Dcid)[result.PlaceID]
 			if !ok {
-				tinfo.rows[i] = append(tinfo.rows[i], "", fmt.Sprintf("Could not find placeId: %s", result.PlaceId))
-				break
+				tinfo.rows[i] = append(tinfo.rows[i], "", fmt.Sprintf("Could not find placeId: %s", result.PlaceID))
+			} else {
+				// TODO: Deal with place-type checks. Deal with multiple DCIDs.
+				tinfo.rows[i] = append(tinfo.rows[i], dcid, "")
 			}
-			// TODO: Deal with place-type checks. Deal with multiple DCIDs.
-			tinfo.rows[i] = append(tinfo.rows[i], dcid, "")
 			break
 		}
 	}
 	return nil
 }
 
-func writeOutput(outCsvPath string, tinfo tableInfo) error {
+func writeOutput(outCsvPath string, tinfo *tableInfo) error {
 	outFile, err := os.Open(outCsvPath)
 	if err != nil {
 		return err
@@ -197,7 +209,7 @@ func resolvePlacesByName(inCsvPath, outCsvPath, mapsApiKey string) error {
 	if err != nil {
 		return err
 	}
-	err = geocodePlaces(mapsApiKey, placeIdToDcid, &tinfo)
+	err = geocodePlaces(mapsApiKey, placeIdToDcid, tinfo)
 	if err != nil {
 		return err
 	}
@@ -207,6 +219,8 @@ func resolvePlacesByName(inCsvPath, outCsvPath, mapsApiKey string) error {
 func main() {
 	flag.Parse()
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	ctx := context.Background()
-	err := ResolvePlacesByName(*inCsvPath, *outCsvPath, *mapsApiKey)
+	err := resolvePlacesByName(*inCsvPath, *outCsvPath, *mapsApiKey)
+	if err != nil {
+		log.Fatalf("resolvePlacesByName failed: %v", err)
+	}
 }
