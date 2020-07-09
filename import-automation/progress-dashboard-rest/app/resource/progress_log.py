@@ -42,7 +42,7 @@ class LogLevel(Enum):
 LOG_LEVELS = frozenset(level.value for level in LogLevel)
 
 
-class ProgressLogByID(flask_restful):
+class ProgressLogByID(flask_restful.Resource):
 
     def __init__(self):
         self.database = progress_log_database.ProgressLogDatabase(
