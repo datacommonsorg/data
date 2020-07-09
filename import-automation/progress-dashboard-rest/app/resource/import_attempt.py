@@ -141,7 +141,6 @@ class ImportAttemptList(ImportAttempt):
         self.run_database = system_run_database.SystemRunDatabase(
             self.client)
 
-
     def get(self):
         """Retrieves a list of import attempts that pass the filter defined by
         the key-value mappings in the request body."""
