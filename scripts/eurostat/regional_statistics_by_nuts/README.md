@@ -2,8 +2,6 @@
 
 > This README is a template of what an import's README might look like.
 
-# Importing <example_provenance> <example_dataset> Into Data Commons
-
 Author: <github_handle>
 
 ## Table of Contents
