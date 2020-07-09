@@ -1,0 +1,3096 @@
+Node: E:lifexp->E0
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_10Years_geo
+
+Node: E:lifexp->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_10Years
+observationAbout: E:lifexp->E0
+observationDate: C:lifexp->LifeExpectancy_Person_10Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_10Years
+
+Node: E:lifexp->E2
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_10Years_Female_geo
+
+Node: E:lifexp->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_10Years_Female
+observationAbout: E:lifexp->E2
+observationDate: C:lifexp->LifeExpectancy_Person_10Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_10Years_Female
+
+Node: E:lifexp->E4
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_10Years_Male_geo
+
+Node: E:lifexp->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_10Years_Male
+observationAbout: E:lifexp->E4
+observationDate: C:lifexp->LifeExpectancy_Person_10Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_10Years_Male
+
+Node: E:lifexp->E6
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_11Years_geo
+
+Node: E:lifexp->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_11Years
+observationAbout: E:lifexp->E6
+observationDate: C:lifexp->LifeExpectancy_Person_11Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_11Years
+
+Node: E:lifexp->E8
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_11Years_Female_geo
+
+Node: E:lifexp->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_11Years_Female
+observationAbout: E:lifexp->E8
+observationDate: C:lifexp->LifeExpectancy_Person_11Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_11Years_Female
+
+Node: E:lifexp->E10
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_11Years_Male_geo
+
+Node: E:lifexp->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_11Years_Male
+observationAbout: E:lifexp->E10
+observationDate: C:lifexp->LifeExpectancy_Person_11Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_11Years_Male
+
+Node: E:lifexp->E12
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_12Years_geo
+
+Node: E:lifexp->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_12Years
+observationAbout: E:lifexp->E12
+observationDate: C:lifexp->LifeExpectancy_Person_12Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_12Years
+
+Node: E:lifexp->E14
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_12Years_Female_geo
+
+Node: E:lifexp->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_12Years_Female
+observationAbout: E:lifexp->E14
+observationDate: C:lifexp->LifeExpectancy_Person_12Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_12Years_Female
+
+Node: E:lifexp->E16
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_12Years_Male_geo
+
+Node: E:lifexp->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_12Years_Male
+observationAbout: E:lifexp->E16
+observationDate: C:lifexp->LifeExpectancy_Person_12Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_12Years_Male
+
+Node: E:lifexp->E18
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_13Years_geo
+
+Node: E:lifexp->E19
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_13Years
+observationAbout: E:lifexp->E18
+observationDate: C:lifexp->LifeExpectancy_Person_13Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_13Years
+
+Node: E:lifexp->E20
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_13Years_Female_geo
+
+Node: E:lifexp->E21
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_13Years_Female
+observationAbout: E:lifexp->E20
+observationDate: C:lifexp->LifeExpectancy_Person_13Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_13Years_Female
+
+Node: E:lifexp->E22
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_13Years_Male_geo
+
+Node: E:lifexp->E23
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_13Years_Male
+observationAbout: E:lifexp->E22
+observationDate: C:lifexp->LifeExpectancy_Person_13Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_13Years_Male
+
+Node: E:lifexp->E24
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_14Years_geo
+
+Node: E:lifexp->E25
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_14Years
+observationAbout: E:lifexp->E24
+observationDate: C:lifexp->LifeExpectancy_Person_14Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_14Years
+
+Node: E:lifexp->E26
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_14Years_Female_geo
+
+Node: E:lifexp->E27
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_14Years_Female
+observationAbout: E:lifexp->E26
+observationDate: C:lifexp->LifeExpectancy_Person_14Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_14Years_Female
+
+Node: E:lifexp->E28
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_14Years_Male_geo
+
+Node: E:lifexp->E29
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_14Years_Male
+observationAbout: E:lifexp->E28
+observationDate: C:lifexp->LifeExpectancy_Person_14Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_14Years_Male
+
+Node: E:lifexp->E30
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_15Years_geo
+
+Node: E:lifexp->E31
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_15Years
+observationAbout: E:lifexp->E30
+observationDate: C:lifexp->LifeExpectancy_Person_15Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_15Years
+
+Node: E:lifexp->E32
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_15Years_Female_geo
+
+Node: E:lifexp->E33
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_15Years_Female
+observationAbout: E:lifexp->E32
+observationDate: C:lifexp->LifeExpectancy_Person_15Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_15Years_Female
+
+Node: E:lifexp->E34
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_15Years_Male_geo
+
+Node: E:lifexp->E35
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_15Years_Male
+observationAbout: E:lifexp->E34
+observationDate: C:lifexp->LifeExpectancy_Person_15Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_15Years_Male
+
+Node: E:lifexp->E36
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_16Years_geo
+
+Node: E:lifexp->E37
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_16Years
+observationAbout: E:lifexp->E36
+observationDate: C:lifexp->LifeExpectancy_Person_16Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_16Years
+
+Node: E:lifexp->E38
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_16Years_Female_geo
+
+Node: E:lifexp->E39
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_16Years_Female
+observationAbout: E:lifexp->E38
+observationDate: C:lifexp->LifeExpectancy_Person_16Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_16Years_Female
+
+Node: E:lifexp->E40
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_16Years_Male_geo
+
+Node: E:lifexp->E41
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_16Years_Male
+observationAbout: E:lifexp->E40
+observationDate: C:lifexp->LifeExpectancy_Person_16Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_16Years_Male
+
+Node: E:lifexp->E42
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_17Years_geo
+
+Node: E:lifexp->E43
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_17Years
+observationAbout: E:lifexp->E42
+observationDate: C:lifexp->LifeExpectancy_Person_17Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_17Years
+
+Node: E:lifexp->E44
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_17Years_Female_geo
+
+Node: E:lifexp->E45
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_17Years_Female
+observationAbout: E:lifexp->E44
+observationDate: C:lifexp->LifeExpectancy_Person_17Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_17Years_Female
+
+Node: E:lifexp->E46
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_17Years_Male_geo
+
+Node: E:lifexp->E47
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_17Years_Male
+observationAbout: E:lifexp->E46
+observationDate: C:lifexp->LifeExpectancy_Person_17Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_17Years_Male
+
+Node: E:lifexp->E48
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_18Years_geo
+
+Node: E:lifexp->E49
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_18Years
+observationAbout: E:lifexp->E48
+observationDate: C:lifexp->LifeExpectancy_Person_18Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_18Years
+
+Node: E:lifexp->E50
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_18Years_Female_geo
+
+Node: E:lifexp->E51
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_18Years_Female
+observationAbout: E:lifexp->E50
+observationDate: C:lifexp->LifeExpectancy_Person_18Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_18Years_Female
+
+Node: E:lifexp->E52
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_18Years_Male_geo
+
+Node: E:lifexp->E53
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_18Years_Male
+observationAbout: E:lifexp->E52
+observationDate: C:lifexp->LifeExpectancy_Person_18Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_18Years_Male
+
+Node: E:lifexp->E54
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_19Years_geo
+
+Node: E:lifexp->E55
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_19Years
+observationAbout: E:lifexp->E54
+observationDate: C:lifexp->LifeExpectancy_Person_19Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_19Years
+
+Node: E:lifexp->E56
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_19Years_Female_geo
+
+Node: E:lifexp->E57
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_19Years_Female
+observationAbout: E:lifexp->E56
+observationDate: C:lifexp->LifeExpectancy_Person_19Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_19Years_Female
+
+Node: E:lifexp->E58
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_19Years_Male_geo
+
+Node: E:lifexp->E59
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_19Years_Male
+observationAbout: E:lifexp->E58
+observationDate: C:lifexp->LifeExpectancy_Person_19Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_19Years_Male
+
+Node: E:lifexp->E60
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_1Years_geo
+
+Node: E:lifexp->E61
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_1Years
+observationAbout: E:lifexp->E60
+observationDate: C:lifexp->LifeExpectancy_Person_1Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_1Years
+
+Node: E:lifexp->E62
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_1Years_Female_geo
+
+Node: E:lifexp->E63
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_1Years_Female
+observationAbout: E:lifexp->E62
+observationDate: C:lifexp->LifeExpectancy_Person_1Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_1Years_Female
+
+Node: E:lifexp->E64
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_1Years_Male_geo
+
+Node: E:lifexp->E65
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_1Years_Male
+observationAbout: E:lifexp->E64
+observationDate: C:lifexp->LifeExpectancy_Person_1Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_1Years_Male
+
+Node: E:lifexp->E66
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_20Years_geo
+
+Node: E:lifexp->E67
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_20Years
+observationAbout: E:lifexp->E66
+observationDate: C:lifexp->LifeExpectancy_Person_20Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_20Years
+
+Node: E:lifexp->E68
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_20Years_Female_geo
+
+Node: E:lifexp->E69
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_20Years_Female
+observationAbout: E:lifexp->E68
+observationDate: C:lifexp->LifeExpectancy_Person_20Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_20Years_Female
+
+Node: E:lifexp->E70
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_20Years_Male_geo
+
+Node: E:lifexp->E71
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_20Years_Male
+observationAbout: E:lifexp->E70
+observationDate: C:lifexp->LifeExpectancy_Person_20Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_20Years_Male
+
+Node: E:lifexp->E72
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_21Years_geo
+
+Node: E:lifexp->E73
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_21Years
+observationAbout: E:lifexp->E72
+observationDate: C:lifexp->LifeExpectancy_Person_21Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_21Years
+
+Node: E:lifexp->E74
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_21Years_Female_geo
+
+Node: E:lifexp->E75
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_21Years_Female
+observationAbout: E:lifexp->E74
+observationDate: C:lifexp->LifeExpectancy_Person_21Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_21Years_Female
+
+Node: E:lifexp->E76
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_21Years_Male_geo
+
+Node: E:lifexp->E77
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_21Years_Male
+observationAbout: E:lifexp->E76
+observationDate: C:lifexp->LifeExpectancy_Person_21Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_21Years_Male
+
+Node: E:lifexp->E78
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_22Years_geo
+
+Node: E:lifexp->E79
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_22Years
+observationAbout: E:lifexp->E78
+observationDate: C:lifexp->LifeExpectancy_Person_22Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_22Years
+
+Node: E:lifexp->E80
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_22Years_Female_geo
+
+Node: E:lifexp->E81
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_22Years_Female
+observationAbout: E:lifexp->E80
+observationDate: C:lifexp->LifeExpectancy_Person_22Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_22Years_Female
+
+Node: E:lifexp->E82
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_22Years_Male_geo
+
+Node: E:lifexp->E83
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_22Years_Male
+observationAbout: E:lifexp->E82
+observationDate: C:lifexp->LifeExpectancy_Person_22Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_22Years_Male
+
+Node: E:lifexp->E84
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_23Years_geo
+
+Node: E:lifexp->E85
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_23Years
+observationAbout: E:lifexp->E84
+observationDate: C:lifexp->LifeExpectancy_Person_23Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_23Years
+
+Node: E:lifexp->E86
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_23Years_Female_geo
+
+Node: E:lifexp->E87
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_23Years_Female
+observationAbout: E:lifexp->E86
+observationDate: C:lifexp->LifeExpectancy_Person_23Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_23Years_Female
+
+Node: E:lifexp->E88
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_23Years_Male_geo
+
+Node: E:lifexp->E89
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_23Years_Male
+observationAbout: E:lifexp->E88
+observationDate: C:lifexp->LifeExpectancy_Person_23Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_23Years_Male
+
+Node: E:lifexp->E90
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_24Years_geo
+
+Node: E:lifexp->E91
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_24Years
+observationAbout: E:lifexp->E90
+observationDate: C:lifexp->LifeExpectancy_Person_24Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_24Years
+
+Node: E:lifexp->E92
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_24Years_Female_geo
+
+Node: E:lifexp->E93
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_24Years_Female
+observationAbout: E:lifexp->E92
+observationDate: C:lifexp->LifeExpectancy_Person_24Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_24Years_Female
+
+Node: E:lifexp->E94
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_24Years_Male_geo
+
+Node: E:lifexp->E95
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_24Years_Male
+observationAbout: E:lifexp->E94
+observationDate: C:lifexp->LifeExpectancy_Person_24Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_24Years_Male
+
+Node: E:lifexp->E96
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_25Years_geo
+
+Node: E:lifexp->E97
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_25Years
+observationAbout: E:lifexp->E96
+observationDate: C:lifexp->LifeExpectancy_Person_25Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_25Years
+
+Node: E:lifexp->E98
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_25Years_Female_geo
+
+Node: E:lifexp->E99
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_25Years_Female
+observationAbout: E:lifexp->E98
+observationDate: C:lifexp->LifeExpectancy_Person_25Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_25Years_Female
+
+Node: E:lifexp->E100
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_25Years_Male_geo
+
+Node: E:lifexp->E101
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_25Years_Male
+observationAbout: E:lifexp->E100
+observationDate: C:lifexp->LifeExpectancy_Person_25Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_25Years_Male
+
+Node: E:lifexp->E102
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_26Years_geo
+
+Node: E:lifexp->E103
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_26Years
+observationAbout: E:lifexp->E102
+observationDate: C:lifexp->LifeExpectancy_Person_26Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_26Years
+
+Node: E:lifexp->E104
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_26Years_Female_geo
+
+Node: E:lifexp->E105
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_26Years_Female
+observationAbout: E:lifexp->E104
+observationDate: C:lifexp->LifeExpectancy_Person_26Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_26Years_Female
+
+Node: E:lifexp->E106
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_26Years_Male_geo
+
+Node: E:lifexp->E107
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_26Years_Male
+observationAbout: E:lifexp->E106
+observationDate: C:lifexp->LifeExpectancy_Person_26Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_26Years_Male
+
+Node: E:lifexp->E108
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_27Years_geo
+
+Node: E:lifexp->E109
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_27Years
+observationAbout: E:lifexp->E108
+observationDate: C:lifexp->LifeExpectancy_Person_27Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_27Years
+
+Node: E:lifexp->E110
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_27Years_Female_geo
+
+Node: E:lifexp->E111
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_27Years_Female
+observationAbout: E:lifexp->E110
+observationDate: C:lifexp->LifeExpectancy_Person_27Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_27Years_Female
+
+Node: E:lifexp->E112
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_27Years_Male_geo
+
+Node: E:lifexp->E113
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_27Years_Male
+observationAbout: E:lifexp->E112
+observationDate: C:lifexp->LifeExpectancy_Person_27Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_27Years_Male
+
+Node: E:lifexp->E114
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_28Years_geo
+
+Node: E:lifexp->E115
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_28Years
+observationAbout: E:lifexp->E114
+observationDate: C:lifexp->LifeExpectancy_Person_28Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_28Years
+
+Node: E:lifexp->E116
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_28Years_Female_geo
+
+Node: E:lifexp->E117
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_28Years_Female
+observationAbout: E:lifexp->E116
+observationDate: C:lifexp->LifeExpectancy_Person_28Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_28Years_Female
+
+Node: E:lifexp->E118
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_28Years_Male_geo
+
+Node: E:lifexp->E119
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_28Years_Male
+observationAbout: E:lifexp->E118
+observationDate: C:lifexp->LifeExpectancy_Person_28Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_28Years_Male
+
+Node: E:lifexp->E120
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_29Years_geo
+
+Node: E:lifexp->E121
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_29Years
+observationAbout: E:lifexp->E120
+observationDate: C:lifexp->LifeExpectancy_Person_29Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_29Years
+
+Node: E:lifexp->E122
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_29Years_Female_geo
+
+Node: E:lifexp->E123
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_29Years_Female
+observationAbout: E:lifexp->E122
+observationDate: C:lifexp->LifeExpectancy_Person_29Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_29Years_Female
+
+Node: E:lifexp->E124
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_29Years_Male_geo
+
+Node: E:lifexp->E125
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_29Years_Male
+observationAbout: E:lifexp->E124
+observationDate: C:lifexp->LifeExpectancy_Person_29Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_29Years_Male
+
+Node: E:lifexp->E126
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_2Years_geo
+
+Node: E:lifexp->E127
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_2Years
+observationAbout: E:lifexp->E126
+observationDate: C:lifexp->LifeExpectancy_Person_2Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_2Years
+
+Node: E:lifexp->E128
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_2Years_Female_geo
+
+Node: E:lifexp->E129
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_2Years_Female
+observationAbout: E:lifexp->E128
+observationDate: C:lifexp->LifeExpectancy_Person_2Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_2Years_Female
+
+Node: E:lifexp->E130
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_2Years_Male_geo
+
+Node: E:lifexp->E131
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_2Years_Male
+observationAbout: E:lifexp->E130
+observationDate: C:lifexp->LifeExpectancy_Person_2Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_2Years_Male
+
+Node: E:lifexp->E132
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_30Years_geo
+
+Node: E:lifexp->E133
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_30Years
+observationAbout: E:lifexp->E132
+observationDate: C:lifexp->LifeExpectancy_Person_30Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_30Years
+
+Node: E:lifexp->E134
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_30Years_Female_geo
+
+Node: E:lifexp->E135
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_30Years_Female
+observationAbout: E:lifexp->E134
+observationDate: C:lifexp->LifeExpectancy_Person_30Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_30Years_Female
+
+Node: E:lifexp->E136
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_30Years_Male_geo
+
+Node: E:lifexp->E137
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_30Years_Male
+observationAbout: E:lifexp->E136
+observationDate: C:lifexp->LifeExpectancy_Person_30Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_30Years_Male
+
+Node: E:lifexp->E138
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_31Years_geo
+
+Node: E:lifexp->E139
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_31Years
+observationAbout: E:lifexp->E138
+observationDate: C:lifexp->LifeExpectancy_Person_31Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_31Years
+
+Node: E:lifexp->E140
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_31Years_Female_geo
+
+Node: E:lifexp->E141
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_31Years_Female
+observationAbout: E:lifexp->E140
+observationDate: C:lifexp->LifeExpectancy_Person_31Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_31Years_Female
+
+Node: E:lifexp->E142
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_31Years_Male_geo
+
+Node: E:lifexp->E143
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_31Years_Male
+observationAbout: E:lifexp->E142
+observationDate: C:lifexp->LifeExpectancy_Person_31Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_31Years_Male
+
+Node: E:lifexp->E144
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_32Years_geo
+
+Node: E:lifexp->E145
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_32Years
+observationAbout: E:lifexp->E144
+observationDate: C:lifexp->LifeExpectancy_Person_32Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_32Years
+
+Node: E:lifexp->E146
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_32Years_Female_geo
+
+Node: E:lifexp->E147
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_32Years_Female
+observationAbout: E:lifexp->E146
+observationDate: C:lifexp->LifeExpectancy_Person_32Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_32Years_Female
+
+Node: E:lifexp->E148
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_32Years_Male_geo
+
+Node: E:lifexp->E149
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_32Years_Male
+observationAbout: E:lifexp->E148
+observationDate: C:lifexp->LifeExpectancy_Person_32Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_32Years_Male
+
+Node: E:lifexp->E150
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_33Years_geo
+
+Node: E:lifexp->E151
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_33Years
+observationAbout: E:lifexp->E150
+observationDate: C:lifexp->LifeExpectancy_Person_33Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_33Years
+
+Node: E:lifexp->E152
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_33Years_Female_geo
+
+Node: E:lifexp->E153
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_33Years_Female
+observationAbout: E:lifexp->E152
+observationDate: C:lifexp->LifeExpectancy_Person_33Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_33Years_Female
+
+Node: E:lifexp->E154
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_33Years_Male_geo
+
+Node: E:lifexp->E155
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_33Years_Male
+observationAbout: E:lifexp->E154
+observationDate: C:lifexp->LifeExpectancy_Person_33Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_33Years_Male
+
+Node: E:lifexp->E156
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_34Years_geo
+
+Node: E:lifexp->E157
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_34Years
+observationAbout: E:lifexp->E156
+observationDate: C:lifexp->LifeExpectancy_Person_34Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_34Years
+
+Node: E:lifexp->E158
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_34Years_Female_geo
+
+Node: E:lifexp->E159
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_34Years_Female
+observationAbout: E:lifexp->E158
+observationDate: C:lifexp->LifeExpectancy_Person_34Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_34Years_Female
+
+Node: E:lifexp->E160
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_34Years_Male_geo
+
+Node: E:lifexp->E161
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_34Years_Male
+observationAbout: E:lifexp->E160
+observationDate: C:lifexp->LifeExpectancy_Person_34Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_34Years_Male
+
+Node: E:lifexp->E162
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_35Years_geo
+
+Node: E:lifexp->E163
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_35Years
+observationAbout: E:lifexp->E162
+observationDate: C:lifexp->LifeExpectancy_Person_35Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_35Years
+
+Node: E:lifexp->E164
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_35Years_Female_geo
+
+Node: E:lifexp->E165
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_35Years_Female
+observationAbout: E:lifexp->E164
+observationDate: C:lifexp->LifeExpectancy_Person_35Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_35Years_Female
+
+Node: E:lifexp->E166
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_35Years_Male_geo
+
+Node: E:lifexp->E167
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_35Years_Male
+observationAbout: E:lifexp->E166
+observationDate: C:lifexp->LifeExpectancy_Person_35Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_35Years_Male
+
+Node: E:lifexp->E168
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_36Years_geo
+
+Node: E:lifexp->E169
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_36Years
+observationAbout: E:lifexp->E168
+observationDate: C:lifexp->LifeExpectancy_Person_36Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_36Years
+
+Node: E:lifexp->E170
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_36Years_Female_geo
+
+Node: E:lifexp->E171
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_36Years_Female
+observationAbout: E:lifexp->E170
+observationDate: C:lifexp->LifeExpectancy_Person_36Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_36Years_Female
+
+Node: E:lifexp->E172
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_36Years_Male_geo
+
+Node: E:lifexp->E173
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_36Years_Male
+observationAbout: E:lifexp->E172
+observationDate: C:lifexp->LifeExpectancy_Person_36Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_36Years_Male
+
+Node: E:lifexp->E174
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_37Years_geo
+
+Node: E:lifexp->E175
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_37Years
+observationAbout: E:lifexp->E174
+observationDate: C:lifexp->LifeExpectancy_Person_37Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_37Years
+
+Node: E:lifexp->E176
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_37Years_Female_geo
+
+Node: E:lifexp->E177
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_37Years_Female
+observationAbout: E:lifexp->E176
+observationDate: C:lifexp->LifeExpectancy_Person_37Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_37Years_Female
+
+Node: E:lifexp->E178
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_37Years_Male_geo
+
+Node: E:lifexp->E179
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_37Years_Male
+observationAbout: E:lifexp->E178
+observationDate: C:lifexp->LifeExpectancy_Person_37Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_37Years_Male
+
+Node: E:lifexp->E180
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_38Years_geo
+
+Node: E:lifexp->E181
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_38Years
+observationAbout: E:lifexp->E180
+observationDate: C:lifexp->LifeExpectancy_Person_38Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_38Years
+
+Node: E:lifexp->E182
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_38Years_Female_geo
+
+Node: E:lifexp->E183
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_38Years_Female
+observationAbout: E:lifexp->E182
+observationDate: C:lifexp->LifeExpectancy_Person_38Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_38Years_Female
+
+Node: E:lifexp->E184
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_38Years_Male_geo
+
+Node: E:lifexp->E185
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_38Years_Male
+observationAbout: E:lifexp->E184
+observationDate: C:lifexp->LifeExpectancy_Person_38Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_38Years_Male
+
+Node: E:lifexp->E186
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_39Years_geo
+
+Node: E:lifexp->E187
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_39Years
+observationAbout: E:lifexp->E186
+observationDate: C:lifexp->LifeExpectancy_Person_39Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_39Years
+
+Node: E:lifexp->E188
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_39Years_Female_geo
+
+Node: E:lifexp->E189
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_39Years_Female
+observationAbout: E:lifexp->E188
+observationDate: C:lifexp->LifeExpectancy_Person_39Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_39Years_Female
+
+Node: E:lifexp->E190
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_39Years_Male_geo
+
+Node: E:lifexp->E191
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_39Years_Male
+observationAbout: E:lifexp->E190
+observationDate: C:lifexp->LifeExpectancy_Person_39Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_39Years_Male
+
+Node: E:lifexp->E192
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_3Years_geo
+
+Node: E:lifexp->E193
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_3Years
+observationAbout: E:lifexp->E192
+observationDate: C:lifexp->LifeExpectancy_Person_3Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_3Years
+
+Node: E:lifexp->E194
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_3Years_Female_geo
+
+Node: E:lifexp->E195
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_3Years_Female
+observationAbout: E:lifexp->E194
+observationDate: C:lifexp->LifeExpectancy_Person_3Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_3Years_Female
+
+Node: E:lifexp->E196
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_3Years_Male_geo
+
+Node: E:lifexp->E197
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_3Years_Male
+observationAbout: E:lifexp->E196
+observationDate: C:lifexp->LifeExpectancy_Person_3Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_3Years_Male
+
+Node: E:lifexp->E198
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_40Years_geo
+
+Node: E:lifexp->E199
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_40Years
+observationAbout: E:lifexp->E198
+observationDate: C:lifexp->LifeExpectancy_Person_40Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_40Years
+
+Node: E:lifexp->E200
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_40Years_Female_geo
+
+Node: E:lifexp->E201
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_40Years_Female
+observationAbout: E:lifexp->E200
+observationDate: C:lifexp->LifeExpectancy_Person_40Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_40Years_Female
+
+Node: E:lifexp->E202
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_40Years_Male_geo
+
+Node: E:lifexp->E203
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_40Years_Male
+observationAbout: E:lifexp->E202
+observationDate: C:lifexp->LifeExpectancy_Person_40Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_40Years_Male
+
+Node: E:lifexp->E204
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_41Years_geo
+
+Node: E:lifexp->E205
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_41Years
+observationAbout: E:lifexp->E204
+observationDate: C:lifexp->LifeExpectancy_Person_41Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_41Years
+
+Node: E:lifexp->E206
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_41Years_Female_geo
+
+Node: E:lifexp->E207
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_41Years_Female
+observationAbout: E:lifexp->E206
+observationDate: C:lifexp->LifeExpectancy_Person_41Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_41Years_Female
+
+Node: E:lifexp->E208
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_41Years_Male_geo
+
+Node: E:lifexp->E209
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_41Years_Male
+observationAbout: E:lifexp->E208
+observationDate: C:lifexp->LifeExpectancy_Person_41Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_41Years_Male
+
+Node: E:lifexp->E210
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_42Years_geo
+
+Node: E:lifexp->E211
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_42Years
+observationAbout: E:lifexp->E210
+observationDate: C:lifexp->LifeExpectancy_Person_42Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_42Years
+
+Node: E:lifexp->E212
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_42Years_Female_geo
+
+Node: E:lifexp->E213
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_42Years_Female
+observationAbout: E:lifexp->E212
+observationDate: C:lifexp->LifeExpectancy_Person_42Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_42Years_Female
+
+Node: E:lifexp->E214
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_42Years_Male_geo
+
+Node: E:lifexp->E215
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_42Years_Male
+observationAbout: E:lifexp->E214
+observationDate: C:lifexp->LifeExpectancy_Person_42Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_42Years_Male
+
+Node: E:lifexp->E216
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_43Years_geo
+
+Node: E:lifexp->E217
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_43Years
+observationAbout: E:lifexp->E216
+observationDate: C:lifexp->LifeExpectancy_Person_43Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_43Years
+
+Node: E:lifexp->E218
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_43Years_Female_geo
+
+Node: E:lifexp->E219
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_43Years_Female
+observationAbout: E:lifexp->E218
+observationDate: C:lifexp->LifeExpectancy_Person_43Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_43Years_Female
+
+Node: E:lifexp->E220
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_43Years_Male_geo
+
+Node: E:lifexp->E221
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_43Years_Male
+observationAbout: E:lifexp->E220
+observationDate: C:lifexp->LifeExpectancy_Person_43Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_43Years_Male
+
+Node: E:lifexp->E222
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_44Years_geo
+
+Node: E:lifexp->E223
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_44Years
+observationAbout: E:lifexp->E222
+observationDate: C:lifexp->LifeExpectancy_Person_44Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_44Years
+
+Node: E:lifexp->E224
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_44Years_Female_geo
+
+Node: E:lifexp->E225
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_44Years_Female
+observationAbout: E:lifexp->E224
+observationDate: C:lifexp->LifeExpectancy_Person_44Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_44Years_Female
+
+Node: E:lifexp->E226
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_44Years_Male_geo
+
+Node: E:lifexp->E227
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_44Years_Male
+observationAbout: E:lifexp->E226
+observationDate: C:lifexp->LifeExpectancy_Person_44Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_44Years_Male
+
+Node: E:lifexp->E228
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_45Years_geo
+
+Node: E:lifexp->E229
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_45Years
+observationAbout: E:lifexp->E228
+observationDate: C:lifexp->LifeExpectancy_Person_45Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_45Years
+
+Node: E:lifexp->E230
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_45Years_Female_geo
+
+Node: E:lifexp->E231
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_45Years_Female
+observationAbout: E:lifexp->E230
+observationDate: C:lifexp->LifeExpectancy_Person_45Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_45Years_Female
+
+Node: E:lifexp->E232
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_45Years_Male_geo
+
+Node: E:lifexp->E233
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_45Years_Male
+observationAbout: E:lifexp->E232
+observationDate: C:lifexp->LifeExpectancy_Person_45Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_45Years_Male
+
+Node: E:lifexp->E234
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_46Years_geo
+
+Node: E:lifexp->E235
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_46Years
+observationAbout: E:lifexp->E234
+observationDate: C:lifexp->LifeExpectancy_Person_46Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_46Years
+
+Node: E:lifexp->E236
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_46Years_Female_geo
+
+Node: E:lifexp->E237
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_46Years_Female
+observationAbout: E:lifexp->E236
+observationDate: C:lifexp->LifeExpectancy_Person_46Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_46Years_Female
+
+Node: E:lifexp->E238
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_46Years_Male_geo
+
+Node: E:lifexp->E239
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_46Years_Male
+observationAbout: E:lifexp->E238
+observationDate: C:lifexp->LifeExpectancy_Person_46Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_46Years_Male
+
+Node: E:lifexp->E240
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_47Years_geo
+
+Node: E:lifexp->E241
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_47Years
+observationAbout: E:lifexp->E240
+observationDate: C:lifexp->LifeExpectancy_Person_47Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_47Years
+
+Node: E:lifexp->E242
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_47Years_Female_geo
+
+Node: E:lifexp->E243
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_47Years_Female
+observationAbout: E:lifexp->E242
+observationDate: C:lifexp->LifeExpectancy_Person_47Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_47Years_Female
+
+Node: E:lifexp->E244
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_47Years_Male_geo
+
+Node: E:lifexp->E245
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_47Years_Male
+observationAbout: E:lifexp->E244
+observationDate: C:lifexp->LifeExpectancy_Person_47Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_47Years_Male
+
+Node: E:lifexp->E246
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_48Years_geo
+
+Node: E:lifexp->E247
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_48Years
+observationAbout: E:lifexp->E246
+observationDate: C:lifexp->LifeExpectancy_Person_48Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_48Years
+
+Node: E:lifexp->E248
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_48Years_Female_geo
+
+Node: E:lifexp->E249
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_48Years_Female
+observationAbout: E:lifexp->E248
+observationDate: C:lifexp->LifeExpectancy_Person_48Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_48Years_Female
+
+Node: E:lifexp->E250
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_48Years_Male_geo
+
+Node: E:lifexp->E251
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_48Years_Male
+observationAbout: E:lifexp->E250
+observationDate: C:lifexp->LifeExpectancy_Person_48Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_48Years_Male
+
+Node: E:lifexp->E252
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_49Years_geo
+
+Node: E:lifexp->E253
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_49Years
+observationAbout: E:lifexp->E252
+observationDate: C:lifexp->LifeExpectancy_Person_49Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_49Years
+
+Node: E:lifexp->E254
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_49Years_Female_geo
+
+Node: E:lifexp->E255
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_49Years_Female
+observationAbout: E:lifexp->E254
+observationDate: C:lifexp->LifeExpectancy_Person_49Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_49Years_Female
+
+Node: E:lifexp->E256
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_49Years_Male_geo
+
+Node: E:lifexp->E257
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_49Years_Male
+observationAbout: E:lifexp->E256
+observationDate: C:lifexp->LifeExpectancy_Person_49Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_49Years_Male
+
+Node: E:lifexp->E258
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_4Years_geo
+
+Node: E:lifexp->E259
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_4Years
+observationAbout: E:lifexp->E258
+observationDate: C:lifexp->LifeExpectancy_Person_4Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_4Years
+
+Node: E:lifexp->E260
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_4Years_Female_geo
+
+Node: E:lifexp->E261
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_4Years_Female
+observationAbout: E:lifexp->E260
+observationDate: C:lifexp->LifeExpectancy_Person_4Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_4Years_Female
+
+Node: E:lifexp->E262
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_4Years_Male_geo
+
+Node: E:lifexp->E263
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_4Years_Male
+observationAbout: E:lifexp->E262
+observationDate: C:lifexp->LifeExpectancy_Person_4Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_4Years_Male
+
+Node: E:lifexp->E264
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_50Years_geo
+
+Node: E:lifexp->E265
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_50Years
+observationAbout: E:lifexp->E264
+observationDate: C:lifexp->LifeExpectancy_Person_50Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_50Years
+
+Node: E:lifexp->E266
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_50Years_Female_geo
+
+Node: E:lifexp->E267
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_50Years_Female
+observationAbout: E:lifexp->E266
+observationDate: C:lifexp->LifeExpectancy_Person_50Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_50Years_Female
+
+Node: E:lifexp->E268
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_50Years_Male_geo
+
+Node: E:lifexp->E269
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_50Years_Male
+observationAbout: E:lifexp->E268
+observationDate: C:lifexp->LifeExpectancy_Person_50Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_50Years_Male
+
+Node: E:lifexp->E270
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_51Years_geo
+
+Node: E:lifexp->E271
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_51Years
+observationAbout: E:lifexp->E270
+observationDate: C:lifexp->LifeExpectancy_Person_51Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_51Years
+
+Node: E:lifexp->E272
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_51Years_Female_geo
+
+Node: E:lifexp->E273
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_51Years_Female
+observationAbout: E:lifexp->E272
+observationDate: C:lifexp->LifeExpectancy_Person_51Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_51Years_Female
+
+Node: E:lifexp->E274
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_51Years_Male_geo
+
+Node: E:lifexp->E275
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_51Years_Male
+observationAbout: E:lifexp->E274
+observationDate: C:lifexp->LifeExpectancy_Person_51Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_51Years_Male
+
+Node: E:lifexp->E276
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_52Years_geo
+
+Node: E:lifexp->E277
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_52Years
+observationAbout: E:lifexp->E276
+observationDate: C:lifexp->LifeExpectancy_Person_52Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_52Years
+
+Node: E:lifexp->E278
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_52Years_Female_geo
+
+Node: E:lifexp->E279
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_52Years_Female
+observationAbout: E:lifexp->E278
+observationDate: C:lifexp->LifeExpectancy_Person_52Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_52Years_Female
+
+Node: E:lifexp->E280
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_52Years_Male_geo
+
+Node: E:lifexp->E281
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_52Years_Male
+observationAbout: E:lifexp->E280
+observationDate: C:lifexp->LifeExpectancy_Person_52Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_52Years_Male
+
+Node: E:lifexp->E282
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_53Years_geo
+
+Node: E:lifexp->E283
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_53Years
+observationAbout: E:lifexp->E282
+observationDate: C:lifexp->LifeExpectancy_Person_53Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_53Years
+
+Node: E:lifexp->E284
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_53Years_Female_geo
+
+Node: E:lifexp->E285
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_53Years_Female
+observationAbout: E:lifexp->E284
+observationDate: C:lifexp->LifeExpectancy_Person_53Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_53Years_Female
+
+Node: E:lifexp->E286
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_53Years_Male_geo
+
+Node: E:lifexp->E287
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_53Years_Male
+observationAbout: E:lifexp->E286
+observationDate: C:lifexp->LifeExpectancy_Person_53Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_53Years_Male
+
+Node: E:lifexp->E288
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_54Years_geo
+
+Node: E:lifexp->E289
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_54Years
+observationAbout: E:lifexp->E288
+observationDate: C:lifexp->LifeExpectancy_Person_54Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_54Years
+
+Node: E:lifexp->E290
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_54Years_Female_geo
+
+Node: E:lifexp->E291
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_54Years_Female
+observationAbout: E:lifexp->E290
+observationDate: C:lifexp->LifeExpectancy_Person_54Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_54Years_Female
+
+Node: E:lifexp->E292
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_54Years_Male_geo
+
+Node: E:lifexp->E293
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_54Years_Male
+observationAbout: E:lifexp->E292
+observationDate: C:lifexp->LifeExpectancy_Person_54Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_54Years_Male
+
+Node: E:lifexp->E294
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_55Years_geo
+
+Node: E:lifexp->E295
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_55Years
+observationAbout: E:lifexp->E294
+observationDate: C:lifexp->LifeExpectancy_Person_55Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_55Years
+
+Node: E:lifexp->E296
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_55Years_Female_geo
+
+Node: E:lifexp->E297
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_55Years_Female
+observationAbout: E:lifexp->E296
+observationDate: C:lifexp->LifeExpectancy_Person_55Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_55Years_Female
+
+Node: E:lifexp->E298
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_55Years_Male_geo
+
+Node: E:lifexp->E299
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_55Years_Male
+observationAbout: E:lifexp->E298
+observationDate: C:lifexp->LifeExpectancy_Person_55Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_55Years_Male
+
+Node: E:lifexp->E300
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_56Years_geo
+
+Node: E:lifexp->E301
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_56Years
+observationAbout: E:lifexp->E300
+observationDate: C:lifexp->LifeExpectancy_Person_56Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_56Years
+
+Node: E:lifexp->E302
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_56Years_Female_geo
+
+Node: E:lifexp->E303
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_56Years_Female
+observationAbout: E:lifexp->E302
+observationDate: C:lifexp->LifeExpectancy_Person_56Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_56Years_Female
+
+Node: E:lifexp->E304
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_56Years_Male_geo
+
+Node: E:lifexp->E305
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_56Years_Male
+observationAbout: E:lifexp->E304
+observationDate: C:lifexp->LifeExpectancy_Person_56Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_56Years_Male
+
+Node: E:lifexp->E306
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_57Years_geo
+
+Node: E:lifexp->E307
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_57Years
+observationAbout: E:lifexp->E306
+observationDate: C:lifexp->LifeExpectancy_Person_57Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_57Years
+
+Node: E:lifexp->E308
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_57Years_Female_geo
+
+Node: E:lifexp->E309
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_57Years_Female
+observationAbout: E:lifexp->E308
+observationDate: C:lifexp->LifeExpectancy_Person_57Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_57Years_Female
+
+Node: E:lifexp->E310
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_57Years_Male_geo
+
+Node: E:lifexp->E311
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_57Years_Male
+observationAbout: E:lifexp->E310
+observationDate: C:lifexp->LifeExpectancy_Person_57Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_57Years_Male
+
+Node: E:lifexp->E312
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_58Years_geo
+
+Node: E:lifexp->E313
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_58Years
+observationAbout: E:lifexp->E312
+observationDate: C:lifexp->LifeExpectancy_Person_58Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_58Years
+
+Node: E:lifexp->E314
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_58Years_Female_geo
+
+Node: E:lifexp->E315
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_58Years_Female
+observationAbout: E:lifexp->E314
+observationDate: C:lifexp->LifeExpectancy_Person_58Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_58Years_Female
+
+Node: E:lifexp->E316
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_58Years_Male_geo
+
+Node: E:lifexp->E317
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_58Years_Male
+observationAbout: E:lifexp->E316
+observationDate: C:lifexp->LifeExpectancy_Person_58Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_58Years_Male
+
+Node: E:lifexp->E318
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_59Years_geo
+
+Node: E:lifexp->E319
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_59Years
+observationAbout: E:lifexp->E318
+observationDate: C:lifexp->LifeExpectancy_Person_59Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_59Years
+
+Node: E:lifexp->E320
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_59Years_Female_geo
+
+Node: E:lifexp->E321
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_59Years_Female
+observationAbout: E:lifexp->E320
+observationDate: C:lifexp->LifeExpectancy_Person_59Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_59Years_Female
+
+Node: E:lifexp->E322
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_59Years_Male_geo
+
+Node: E:lifexp->E323
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_59Years_Male
+observationAbout: E:lifexp->E322
+observationDate: C:lifexp->LifeExpectancy_Person_59Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_59Years_Male
+
+Node: E:lifexp->E324
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_5Years_geo
+
+Node: E:lifexp->E325
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_5Years
+observationAbout: E:lifexp->E324
+observationDate: C:lifexp->LifeExpectancy_Person_5Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_5Years
+
+Node: E:lifexp->E326
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_5Years_Female_geo
+
+Node: E:lifexp->E327
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_5Years_Female
+observationAbout: E:lifexp->E326
+observationDate: C:lifexp->LifeExpectancy_Person_5Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_5Years_Female
+
+Node: E:lifexp->E328
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_5Years_Male_geo
+
+Node: E:lifexp->E329
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_5Years_Male
+observationAbout: E:lifexp->E328
+observationDate: C:lifexp->LifeExpectancy_Person_5Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_5Years_Male
+
+Node: E:lifexp->E330
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_60Years_geo
+
+Node: E:lifexp->E331
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_60Years
+observationAbout: E:lifexp->E330
+observationDate: C:lifexp->LifeExpectancy_Person_60Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_60Years
+
+Node: E:lifexp->E332
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_60Years_Female_geo
+
+Node: E:lifexp->E333
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_60Years_Female
+observationAbout: E:lifexp->E332
+observationDate: C:lifexp->LifeExpectancy_Person_60Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_60Years_Female
+
+Node: E:lifexp->E334
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_60Years_Male_geo
+
+Node: E:lifexp->E335
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_60Years_Male
+observationAbout: E:lifexp->E334
+observationDate: C:lifexp->LifeExpectancy_Person_60Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_60Years_Male
+
+Node: E:lifexp->E336
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_61Years_geo
+
+Node: E:lifexp->E337
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_61Years
+observationAbout: E:lifexp->E336
+observationDate: C:lifexp->LifeExpectancy_Person_61Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_61Years
+
+Node: E:lifexp->E338
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_61Years_Female_geo
+
+Node: E:lifexp->E339
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_61Years_Female
+observationAbout: E:lifexp->E338
+observationDate: C:lifexp->LifeExpectancy_Person_61Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_61Years_Female
+
+Node: E:lifexp->E340
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_61Years_Male_geo
+
+Node: E:lifexp->E341
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_61Years_Male
+observationAbout: E:lifexp->E340
+observationDate: C:lifexp->LifeExpectancy_Person_61Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_61Years_Male
+
+Node: E:lifexp->E342
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_62Years_geo
+
+Node: E:lifexp->E343
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_62Years
+observationAbout: E:lifexp->E342
+observationDate: C:lifexp->LifeExpectancy_Person_62Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_62Years
+
+Node: E:lifexp->E344
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_62Years_Female_geo
+
+Node: E:lifexp->E345
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_62Years_Female
+observationAbout: E:lifexp->E344
+observationDate: C:lifexp->LifeExpectancy_Person_62Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_62Years_Female
+
+Node: E:lifexp->E346
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_62Years_Male_geo
+
+Node: E:lifexp->E347
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_62Years_Male
+observationAbout: E:lifexp->E346
+observationDate: C:lifexp->LifeExpectancy_Person_62Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_62Years_Male
+
+Node: E:lifexp->E348
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_63Years_geo
+
+Node: E:lifexp->E349
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_63Years
+observationAbout: E:lifexp->E348
+observationDate: C:lifexp->LifeExpectancy_Person_63Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_63Years
+
+Node: E:lifexp->E350
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_63Years_Female_geo
+
+Node: E:lifexp->E351
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_63Years_Female
+observationAbout: E:lifexp->E350
+observationDate: C:lifexp->LifeExpectancy_Person_63Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_63Years_Female
+
+Node: E:lifexp->E352
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_63Years_Male_geo
+
+Node: E:lifexp->E353
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_63Years_Male
+observationAbout: E:lifexp->E352
+observationDate: C:lifexp->LifeExpectancy_Person_63Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_63Years_Male
+
+Node: E:lifexp->E354
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_64Years_geo
+
+Node: E:lifexp->E355
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_64Years
+observationAbout: E:lifexp->E354
+observationDate: C:lifexp->LifeExpectancy_Person_64Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_64Years
+
+Node: E:lifexp->E356
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_64Years_Female_geo
+
+Node: E:lifexp->E357
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_64Years_Female
+observationAbout: E:lifexp->E356
+observationDate: C:lifexp->LifeExpectancy_Person_64Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_64Years_Female
+
+Node: E:lifexp->E358
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_64Years_Male_geo
+
+Node: E:lifexp->E359
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_64Years_Male
+observationAbout: E:lifexp->E358
+observationDate: C:lifexp->LifeExpectancy_Person_64Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_64Years_Male
+
+Node: E:lifexp->E360
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_65Years_geo
+
+Node: E:lifexp->E361
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_65Years
+observationAbout: E:lifexp->E360
+observationDate: C:lifexp->LifeExpectancy_Person_65Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_65Years
+
+Node: E:lifexp->E362
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_65Years_Female_geo
+
+Node: E:lifexp->E363
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_65Years_Female
+observationAbout: E:lifexp->E362
+observationDate: C:lifexp->LifeExpectancy_Person_65Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_65Years_Female
+
+Node: E:lifexp->E364
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_65Years_Male_geo
+
+Node: E:lifexp->E365
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_65Years_Male
+observationAbout: E:lifexp->E364
+observationDate: C:lifexp->LifeExpectancy_Person_65Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_65Years_Male
+
+Node: E:lifexp->E366
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_66Years_geo
+
+Node: E:lifexp->E367
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_66Years
+observationAbout: E:lifexp->E366
+observationDate: C:lifexp->LifeExpectancy_Person_66Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_66Years
+
+Node: E:lifexp->E368
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_66Years_Female_geo
+
+Node: E:lifexp->E369
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_66Years_Female
+observationAbout: E:lifexp->E368
+observationDate: C:lifexp->LifeExpectancy_Person_66Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_66Years_Female
+
+Node: E:lifexp->E370
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_66Years_Male_geo
+
+Node: E:lifexp->E371
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_66Years_Male
+observationAbout: E:lifexp->E370
+observationDate: C:lifexp->LifeExpectancy_Person_66Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_66Years_Male
+
+Node: E:lifexp->E372
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_67Years_geo
+
+Node: E:lifexp->E373
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_67Years
+observationAbout: E:lifexp->E372
+observationDate: C:lifexp->LifeExpectancy_Person_67Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_67Years
+
+Node: E:lifexp->E374
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_67Years_Female_geo
+
+Node: E:lifexp->E375
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_67Years_Female
+observationAbout: E:lifexp->E374
+observationDate: C:lifexp->LifeExpectancy_Person_67Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_67Years_Female
+
+Node: E:lifexp->E376
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_67Years_Male_geo
+
+Node: E:lifexp->E377
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_67Years_Male
+observationAbout: E:lifexp->E376
+observationDate: C:lifexp->LifeExpectancy_Person_67Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_67Years_Male
+
+Node: E:lifexp->E378
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_68Years_geo
+
+Node: E:lifexp->E379
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_68Years
+observationAbout: E:lifexp->E378
+observationDate: C:lifexp->LifeExpectancy_Person_68Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_68Years
+
+Node: E:lifexp->E380
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_68Years_Female_geo
+
+Node: E:lifexp->E381
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_68Years_Female
+observationAbout: E:lifexp->E380
+observationDate: C:lifexp->LifeExpectancy_Person_68Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_68Years_Female
+
+Node: E:lifexp->E382
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_68Years_Male_geo
+
+Node: E:lifexp->E383
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_68Years_Male
+observationAbout: E:lifexp->E382
+observationDate: C:lifexp->LifeExpectancy_Person_68Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_68Years_Male
+
+Node: E:lifexp->E384
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_69Years_geo
+
+Node: E:lifexp->E385
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_69Years
+observationAbout: E:lifexp->E384
+observationDate: C:lifexp->LifeExpectancy_Person_69Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_69Years
+
+Node: E:lifexp->E386
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_69Years_Female_geo
+
+Node: E:lifexp->E387
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_69Years_Female
+observationAbout: E:lifexp->E386
+observationDate: C:lifexp->LifeExpectancy_Person_69Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_69Years_Female
+
+Node: E:lifexp->E388
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_69Years_Male_geo
+
+Node: E:lifexp->E389
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_69Years_Male
+observationAbout: E:lifexp->E388
+observationDate: C:lifexp->LifeExpectancy_Person_69Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_69Years_Male
+
+Node: E:lifexp->E390
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_6Years_geo
+
+Node: E:lifexp->E391
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_6Years
+observationAbout: E:lifexp->E390
+observationDate: C:lifexp->LifeExpectancy_Person_6Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_6Years
+
+Node: E:lifexp->E392
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_6Years_Female_geo
+
+Node: E:lifexp->E393
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_6Years_Female
+observationAbout: E:lifexp->E392
+observationDate: C:lifexp->LifeExpectancy_Person_6Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_6Years_Female
+
+Node: E:lifexp->E394
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_6Years_Male_geo
+
+Node: E:lifexp->E395
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_6Years_Male
+observationAbout: E:lifexp->E394
+observationDate: C:lifexp->LifeExpectancy_Person_6Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_6Years_Male
+
+Node: E:lifexp->E396
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_70Years_geo
+
+Node: E:lifexp->E397
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_70Years
+observationAbout: E:lifexp->E396
+observationDate: C:lifexp->LifeExpectancy_Person_70Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_70Years
+
+Node: E:lifexp->E398
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_70Years_Female_geo
+
+Node: E:lifexp->E399
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_70Years_Female
+observationAbout: E:lifexp->E398
+observationDate: C:lifexp->LifeExpectancy_Person_70Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_70Years_Female
+
+Node: E:lifexp->E400
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_70Years_Male_geo
+
+Node: E:lifexp->E401
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_70Years_Male
+observationAbout: E:lifexp->E400
+observationDate: C:lifexp->LifeExpectancy_Person_70Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_70Years_Male
+
+Node: E:lifexp->E402
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_71Years_geo
+
+Node: E:lifexp->E403
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_71Years
+observationAbout: E:lifexp->E402
+observationDate: C:lifexp->LifeExpectancy_Person_71Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_71Years
+
+Node: E:lifexp->E404
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_71Years_Female_geo
+
+Node: E:lifexp->E405
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_71Years_Female
+observationAbout: E:lifexp->E404
+observationDate: C:lifexp->LifeExpectancy_Person_71Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_71Years_Female
+
+Node: E:lifexp->E406
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_71Years_Male_geo
+
+Node: E:lifexp->E407
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_71Years_Male
+observationAbout: E:lifexp->E406
+observationDate: C:lifexp->LifeExpectancy_Person_71Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_71Years_Male
+
+Node: E:lifexp->E408
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_72Years_geo
+
+Node: E:lifexp->E409
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_72Years
+observationAbout: E:lifexp->E408
+observationDate: C:lifexp->LifeExpectancy_Person_72Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_72Years
+
+Node: E:lifexp->E410
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_72Years_Female_geo
+
+Node: E:lifexp->E411
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_72Years_Female
+observationAbout: E:lifexp->E410
+observationDate: C:lifexp->LifeExpectancy_Person_72Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_72Years_Female
+
+Node: E:lifexp->E412
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_72Years_Male_geo
+
+Node: E:lifexp->E413
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_72Years_Male
+observationAbout: E:lifexp->E412
+observationDate: C:lifexp->LifeExpectancy_Person_72Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_72Years_Male
+
+Node: E:lifexp->E414
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_73Years_geo
+
+Node: E:lifexp->E415
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_73Years
+observationAbout: E:lifexp->E414
+observationDate: C:lifexp->LifeExpectancy_Person_73Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_73Years
+
+Node: E:lifexp->E416
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_73Years_Female_geo
+
+Node: E:lifexp->E417
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_73Years_Female
+observationAbout: E:lifexp->E416
+observationDate: C:lifexp->LifeExpectancy_Person_73Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_73Years_Female
+
+Node: E:lifexp->E418
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_73Years_Male_geo
+
+Node: E:lifexp->E419
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_73Years_Male
+observationAbout: E:lifexp->E418
+observationDate: C:lifexp->LifeExpectancy_Person_73Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_73Years_Male
+
+Node: E:lifexp->E420
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_74Years_geo
+
+Node: E:lifexp->E421
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_74Years
+observationAbout: E:lifexp->E420
+observationDate: C:lifexp->LifeExpectancy_Person_74Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_74Years
+
+Node: E:lifexp->E422
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_74Years_Female_geo
+
+Node: E:lifexp->E423
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_74Years_Female
+observationAbout: E:lifexp->E422
+observationDate: C:lifexp->LifeExpectancy_Person_74Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_74Years_Female
+
+Node: E:lifexp->E424
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_74Years_Male_geo
+
+Node: E:lifexp->E425
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_74Years_Male
+observationAbout: E:lifexp->E424
+observationDate: C:lifexp->LifeExpectancy_Person_74Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_74Years_Male
+
+Node: E:lifexp->E426
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_75Years_geo
+
+Node: E:lifexp->E427
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_75Years
+observationAbout: E:lifexp->E426
+observationDate: C:lifexp->LifeExpectancy_Person_75Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_75Years
+
+Node: E:lifexp->E428
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_75Years_Female_geo
+
+Node: E:lifexp->E429
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_75Years_Female
+observationAbout: E:lifexp->E428
+observationDate: C:lifexp->LifeExpectancy_Person_75Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_75Years_Female
+
+Node: E:lifexp->E430
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_75Years_Male_geo
+
+Node: E:lifexp->E431
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_75Years_Male
+observationAbout: E:lifexp->E430
+observationDate: C:lifexp->LifeExpectancy_Person_75Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_75Years_Male
+
+Node: E:lifexp->E432
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_76Years_geo
+
+Node: E:lifexp->E433
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_76Years
+observationAbout: E:lifexp->E432
+observationDate: C:lifexp->LifeExpectancy_Person_76Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_76Years
+
+Node: E:lifexp->E434
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_76Years_Female_geo
+
+Node: E:lifexp->E435
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_76Years_Female
+observationAbout: E:lifexp->E434
+observationDate: C:lifexp->LifeExpectancy_Person_76Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_76Years_Female
+
+Node: E:lifexp->E436
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_76Years_Male_geo
+
+Node: E:lifexp->E437
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_76Years_Male
+observationAbout: E:lifexp->E436
+observationDate: C:lifexp->LifeExpectancy_Person_76Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_76Years_Male
+
+Node: E:lifexp->E438
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_77Years_geo
+
+Node: E:lifexp->E439
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_77Years
+observationAbout: E:lifexp->E438
+observationDate: C:lifexp->LifeExpectancy_Person_77Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_77Years
+
+Node: E:lifexp->E440
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_77Years_Female_geo
+
+Node: E:lifexp->E441
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_77Years_Female
+observationAbout: E:lifexp->E440
+observationDate: C:lifexp->LifeExpectancy_Person_77Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_77Years_Female
+
+Node: E:lifexp->E442
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_77Years_Male_geo
+
+Node: E:lifexp->E443
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_77Years_Male
+observationAbout: E:lifexp->E442
+observationDate: C:lifexp->LifeExpectancy_Person_77Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_77Years_Male
+
+Node: E:lifexp->E444
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_78Years_geo
+
+Node: E:lifexp->E445
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_78Years
+observationAbout: E:lifexp->E444
+observationDate: C:lifexp->LifeExpectancy_Person_78Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_78Years
+
+Node: E:lifexp->E446
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_78Years_Female_geo
+
+Node: E:lifexp->E447
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_78Years_Female
+observationAbout: E:lifexp->E446
+observationDate: C:lifexp->LifeExpectancy_Person_78Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_78Years_Female
+
+Node: E:lifexp->E448
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_78Years_Male_geo
+
+Node: E:lifexp->E449
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_78Years_Male
+observationAbout: E:lifexp->E448
+observationDate: C:lifexp->LifeExpectancy_Person_78Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_78Years_Male
+
+Node: E:lifexp->E450
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_79Years_geo
+
+Node: E:lifexp->E451
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_79Years
+observationAbout: E:lifexp->E450
+observationDate: C:lifexp->LifeExpectancy_Person_79Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_79Years
+
+Node: E:lifexp->E452
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_79Years_Female_geo
+
+Node: E:lifexp->E453
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_79Years_Female
+observationAbout: E:lifexp->E452
+observationDate: C:lifexp->LifeExpectancy_Person_79Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_79Years_Female
+
+Node: E:lifexp->E454
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_79Years_Male_geo
+
+Node: E:lifexp->E455
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_79Years_Male
+observationAbout: E:lifexp->E454
+observationDate: C:lifexp->LifeExpectancy_Person_79Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_79Years_Male
+
+Node: E:lifexp->E456
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_7Years_geo
+
+Node: E:lifexp->E457
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_7Years
+observationAbout: E:lifexp->E456
+observationDate: C:lifexp->LifeExpectancy_Person_7Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_7Years
+
+Node: E:lifexp->E458
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_7Years_Female_geo
+
+Node: E:lifexp->E459
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_7Years_Female
+observationAbout: E:lifexp->E458
+observationDate: C:lifexp->LifeExpectancy_Person_7Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_7Years_Female
+
+Node: E:lifexp->E460
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_7Years_Male_geo
+
+Node: E:lifexp->E461
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_7Years_Male
+observationAbout: E:lifexp->E460
+observationDate: C:lifexp->LifeExpectancy_Person_7Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_7Years_Male
+
+Node: E:lifexp->E462
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_80Years_geo
+
+Node: E:lifexp->E463
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_80Years
+observationAbout: E:lifexp->E462
+observationDate: C:lifexp->LifeExpectancy_Person_80Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_80Years
+
+Node: E:lifexp->E464
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_80Years_Female_geo
+
+Node: E:lifexp->E465
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_80Years_Female
+observationAbout: E:lifexp->E464
+observationDate: C:lifexp->LifeExpectancy_Person_80Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_80Years_Female
+
+Node: E:lifexp->E466
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_80Years_Male_geo
+
+Node: E:lifexp->E467
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_80Years_Male
+observationAbout: E:lifexp->E466
+observationDate: C:lifexp->LifeExpectancy_Person_80Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_80Years_Male
+
+Node: E:lifexp->E468
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_81Years_geo
+
+Node: E:lifexp->E469
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_81Years
+observationAbout: E:lifexp->E468
+observationDate: C:lifexp->LifeExpectancy_Person_81Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_81Years
+
+Node: E:lifexp->E470
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_81Years_Female_geo
+
+Node: E:lifexp->E471
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_81Years_Female
+observationAbout: E:lifexp->E470
+observationDate: C:lifexp->LifeExpectancy_Person_81Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_81Years_Female
+
+Node: E:lifexp->E472
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_81Years_Male_geo
+
+Node: E:lifexp->E473
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_81Years_Male
+observationAbout: E:lifexp->E472
+observationDate: C:lifexp->LifeExpectancy_Person_81Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_81Years_Male
+
+Node: E:lifexp->E474
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_82Years_geo
+
+Node: E:lifexp->E475
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_82Years
+observationAbout: E:lifexp->E474
+observationDate: C:lifexp->LifeExpectancy_Person_82Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_82Years
+
+Node: E:lifexp->E476
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_82Years_Female_geo
+
+Node: E:lifexp->E477
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_82Years_Female
+observationAbout: E:lifexp->E476
+observationDate: C:lifexp->LifeExpectancy_Person_82Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_82Years_Female
+
+Node: E:lifexp->E478
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_82Years_Male_geo
+
+Node: E:lifexp->E479
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_82Years_Male
+observationAbout: E:lifexp->E478
+observationDate: C:lifexp->LifeExpectancy_Person_82Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_82Years_Male
+
+Node: E:lifexp->E480
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_83Years_geo
+
+Node: E:lifexp->E481
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_83Years
+observationAbout: E:lifexp->E480
+observationDate: C:lifexp->LifeExpectancy_Person_83Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_83Years
+
+Node: E:lifexp->E482
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_83Years_Female_geo
+
+Node: E:lifexp->E483
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_83Years_Female
+observationAbout: E:lifexp->E482
+observationDate: C:lifexp->LifeExpectancy_Person_83Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_83Years_Female
+
+Node: E:lifexp->E484
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_83Years_Male_geo
+
+Node: E:lifexp->E485
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_83Years_Male
+observationAbout: E:lifexp->E484
+observationDate: C:lifexp->LifeExpectancy_Person_83Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_83Years_Male
+
+Node: E:lifexp->E486
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_84Years_geo
+
+Node: E:lifexp->E487
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_84Years
+observationAbout: E:lifexp->E486
+observationDate: C:lifexp->LifeExpectancy_Person_84Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_84Years
+
+Node: E:lifexp->E488
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_84Years_Female_geo
+
+Node: E:lifexp->E489
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_84Years_Female
+observationAbout: E:lifexp->E488
+observationDate: C:lifexp->LifeExpectancy_Person_84Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_84Years_Female
+
+Node: E:lifexp->E490
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_84Years_Male_geo
+
+Node: E:lifexp->E491
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_84Years_Male
+observationAbout: E:lifexp->E490
+observationDate: C:lifexp->LifeExpectancy_Person_84Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_84Years_Male
+
+Node: E:lifexp->E492
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_85OrMoreYears_geo
+
+Node: E:lifexp->E493
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_85OrMoreYears
+observationAbout: E:lifexp->E492
+observationDate: C:lifexp->LifeExpectancy_Person_85OrMoreYears_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_85OrMoreYears
+
+Node: E:lifexp->E494
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Female_geo
+
+Node: E:lifexp->E495
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_85OrMoreYears_Female
+observationAbout: E:lifexp->E494
+observationDate: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Female
+
+Node: E:lifexp->E496
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Male_geo
+
+Node: E:lifexp->E497
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_85OrMoreYears_Male
+observationAbout: E:lifexp->E496
+observationDate: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Male
+
+Node: E:lifexp->E498
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_8Years_geo
+
+Node: E:lifexp->E499
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_8Years
+observationAbout: E:lifexp->E498
+observationDate: C:lifexp->LifeExpectancy_Person_8Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_8Years
+
+Node: E:lifexp->E500
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_8Years_Female_geo
+
+Node: E:lifexp->E501
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_8Years_Female
+observationAbout: E:lifexp->E500
+observationDate: C:lifexp->LifeExpectancy_Person_8Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_8Years_Female
+
+Node: E:lifexp->E502
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_8Years_Male_geo
+
+Node: E:lifexp->E503
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_8Years_Male
+observationAbout: E:lifexp->E502
+observationDate: C:lifexp->LifeExpectancy_Person_8Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_8Years_Male
+
+Node: E:lifexp->E504
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_9Years_geo
+
+Node: E:lifexp->E505
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_9Years
+observationAbout: E:lifexp->E504
+observationDate: C:lifexp->LifeExpectancy_Person_9Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_9Years
+
+Node: E:lifexp->E506
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_9Years_Female_geo
+
+Node: E:lifexp->E507
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_9Years_Female
+observationAbout: E:lifexp->E506
+observationDate: C:lifexp->LifeExpectancy_Person_9Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_9Years_Female
+
+Node: E:lifexp->E508
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_9Years_Male_geo
+
+Node: E:lifexp->E509
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_9Years_Male
+observationAbout: E:lifexp->E508
+observationDate: C:lifexp->LifeExpectancy_Person_9Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_9Years_Male
+
+Node: E:lifexp->E510
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_Upto1Years_geo
+
+Node: E:lifexp->E511
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_Upto1Years
+observationAbout: E:lifexp->E510
+observationDate: C:lifexp->LifeExpectancy_Person_Upto1Years_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_Upto1Years
+
+Node: E:lifexp->E512
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_Upto1Years_Female_geo
+
+Node: E:lifexp->E513
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_Upto1Years_Female
+observationAbout: E:lifexp->E512
+observationDate: C:lifexp->LifeExpectancy_Person_Upto1Years_Female_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_Upto1Years_Female
+
+Node: E:lifexp->E514
+typeOf: dcs:Country
+dcid: C:lifexp->LifeExpectancy_Person_Upto1Years_Male_geo
+
+Node: E:lifexp->E515
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_Upto1Years_Male
+observationAbout: E:lifexp->E514
+observationDate: C:lifexp->LifeExpectancy_Person_Upto1Years_Male_year
+measurementMethod: EurostatRegionalStatistics
+value: C:lifexp->LifeExpectancy_Person_Upto1Years_Male
+
