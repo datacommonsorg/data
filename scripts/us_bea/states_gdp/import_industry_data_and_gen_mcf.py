@@ -1,4 +1,4 @@
- # Copyright 2020 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,12 @@
 # limitations under the License.
 """
 Pulls data from the US Bureau of Economic Analysis (BEA) on quarterly GDP
-per US state. Saves output as a CSV file.
+per US state per industry. Saves output as a CSV file. Also generates the MCF
+nodes for the data schema.
 
     Typical usage:
 
-    python3 import_data.py
+    python3 import_industry_data_and_gen_mcf.py
 """
 from urllib.request import urlopen
 import io
@@ -43,20 +44,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         """Downloads ZIP file, extracts the desired CSV, and puts it into a data
         frame. Stores that data frame in the instance raw_df variable.
         """
-        # Open zip file from link.
-        resp = urlopen(self._ZIP_LINK)
-
-        # Read the file, interpret it as bytes, and create a ZipFile instance
-        # from it for easy handling.
-        zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
-
-        # Open the specific desired file (CSV) from the folder, and decode it.
-        # This results in a string representation of the file. Interpret that
-        # as a CSV, and read it into a DF.
-        data = zip_file.open(self._STATE_QUARTERLY_INDUSTRY_GDP_FILE).read()
-        data = data.decode('utf-8')
-        data = list(csv.reader(data.splitlines()))
-        self.raw_df = pd.DataFrame(data[1:], columns=data[0])
+        super().download_data(file=self._STATE_QUARTERLY_INDUSTRY_GDP_FILE)
 
     def process_data(self, raw_data=None):
         """Cleans raw_df and converts it from wide to long format.
@@ -107,7 +95,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
     @staticmethod
     def _value_converter(val):
         """Converts value to float type, and filters out missing values. Missing
-        values are marked by a latter enclosed in parentheses, e.g., "(D)".
+        values are marked by a letter enclosed in parentheses, e.g., "(D)".
         """
         if not isinstance(val, str):
             return val
@@ -128,7 +116,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         if isinstance(naics_code, str):
             naics_code = naics_code.replace("-", "_")
             naics_code = naics_code.replace(",", "&")
-        return f"dcs:USSateQuarterlyIndustryGDP_NAICS_{naics_code}"
+        return f"dcs:USStateQuarterlyIndustryGDP_NAICS_{naics_code}"
 
     def save_csv(self, filename='states_industry_gdp.csv'):
         """Saves instance data frame to specified CSV file.
@@ -152,7 +140,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
 
         with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f:
             for naics_code in self.clean_df['NAICS'].unique():
-                code_title = naics_code[37:]
+                code_title = naics_code[38:]
                 code = code_title.replace("_", "-")
                 code = code.replace("&", "&NAICS/")
                 mcf_f.write(mcf_temp.format(title=code_title, naics=code))
