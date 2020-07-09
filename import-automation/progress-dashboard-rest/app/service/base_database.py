@@ -115,8 +115,7 @@ class BaseDatabase:
             key is partial before invoking this function, an integer ID will
             be generated to make the key complete.
         """
-        self.client.put(entity)
         if id_field and id_field not in entity:
-            entity[id_field] = entity.id
-            entity = self.client.put(entity)
+            entity[id_field] = entity.key.name
+        self.client.put(entity)
         return entity
