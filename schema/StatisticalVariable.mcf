@@ -156,7 +156,7 @@ measuredProperty: dcs:incrementalCount
 measurementMethod: dcs:dcDerivedStat/NYT_COVID19_GitHub
 statType: dcs:measuredValue
 
-Node: dcid:Count_Person_AsAFractionOfArea
+Node: dcid:Count_Person_PerArea
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:count
