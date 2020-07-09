@@ -17,6 +17,7 @@ Utility functions.
 """
 
 import datetime
+import uuid
 
 import google.cloud.logging
 from google.cloud import datastore
@@ -89,3 +90,7 @@ def create_datastore_client(project=configs.PROJECT_ID,
             as a string.
     """
     return datastore.Client(project=project, namespace=namespace)
+
+
+def get_id():
+    return uuid.uuid4().int

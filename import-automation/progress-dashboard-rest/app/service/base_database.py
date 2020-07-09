@@ -64,23 +64,22 @@ class BaseDatabase:
         """
         if not entity_id and not make_new:
             raise ValueError('entity_id is None and make_new is False')
+        if not entity_id and make_new:
+            entity_id = utils.get_id()
         key = self._get_key(entity_id)
-        if not entity_id:
-            return datastore.Entity(key)
         entity = self.client.get(key)
         if make_new and not entity:
             return datastore.Entity(key)
         return entity
 
-    def _get_key(self, entity_id=None):
+    def _get_key(self, entity_id):
         """Creates a datastore Key for an entity that has the entity_id.
 
         Args:
             entity_id: ID of the entity as a string or int.
 
         Returns:
-            A datastore Key composed of the entity kind and the entity_id. If
-            entity_id is None, a partial Key.
+            A datastore Key composed of the entity kind and the entity_id.
         """
         if entity_id:
             return self.client.key(self.kind, entity_id)
