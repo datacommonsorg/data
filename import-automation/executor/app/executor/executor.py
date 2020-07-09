@@ -89,7 +89,7 @@ def execute_imports(task_info):
         cwd = os.path.join(tmpdir, repo_dirname)
         os.chdir(cwd)
 
-        dashboard_api.log_info(client_id, f'Downloaded repo: ' + repo_dirname, run_id=run_id)
+        dashboard_api.log_info(client_id, f'Downloaded repo: {repo_dirname}', run_id=run_id)
 
         import_all = 'all' in import_targets
         for dir_path in manifest_dirs:
@@ -124,11 +124,11 @@ def import_one(dir_path, import_spec, commit_sha, client_id, run_id):
     if urls:
         for url in urls:
             utils.download_file(url, '.')
-            dashboard_api.log_info(client_id, 'Downloaded: ' + url, attempt_id=attempt_id)
+            dashboard_api.log_info(client_id, f'Downloaded: {url}', attempt_id=attempt_id)
 
     with tempfile.TemporaryDirectory() as tmpdir:
         interpreter_path, process = create_venv(configs.REQUIREMENTS_FILENAME, tmpdir)
-        dashboard_api.log_info(client_id, 'Installed dependencies: ' + process.stdout, attempt_id=attempt_id)
+        dashboard_api.log_info(client_id, f'Installed dependencies: {process.stdout}', attempt_id=attempt_id)
 
         script_paths = import_spec.get('scripts')
         for path in script_paths:
