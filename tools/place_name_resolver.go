@@ -68,7 +68,7 @@ func appendContainedInPlaceNames(name string, row []string, tinfo *tableInfo) (s
 
 	cipRow := tinfo.rows[idx]
 	cipName := cipRow[tinfo.nameIdx]
-	return appendContainedInPlaceNames(name+", "+cipName, cipRow, tinfo)
+	return appendContainedInPlaceNames(name + ", " + cipName, cipRow, tinfo)
 }
 
 func buildTableInfo(inCsvPath string) (*tableInfo, error) {
@@ -78,9 +78,15 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	}
 	r := csv.NewReader(csvfile)
 	isHeader := true
-	rowNum := 0
 	numCols := 0
-	tinfo := &tableInfo{nidIdx: -1, nameIdx: -1, cipIdx: -1, typeIdx: -1}
+	tinfo := &tableInfo{
+		node2row: map[string]int{},
+		nidIdx: -1,
+		nameIdx: -1,
+		cipIdx: -1,
+		typeIdx: -1,
+	}
+	dataRowNum := 0
 	for {
 		row, err := r.Read()
 		if err == io.EOF {
@@ -107,17 +113,16 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 				return nil, fmt.Errorf("When 'containedInPLace' is provided, 'Node' must be provided to allow for references!")
 			}
 			isHeader = false
-			rowNum += 1
 			continue
 		}
 		if numCols != len(row) {
-			return nil, fmt.Errorf("Not a rectangular CSV! Row %d has only %d columns!", rowNum, len(row))
+			return nil, fmt.Errorf("Not a rectangular CSV! Row %d has only %d columns!", dataRowNum + 1, len(row))
 		}
 		if tinfo.nidIdx >= 0 && row[tinfo.nidIdx] != "" {
-			tinfo.node2row[row[tinfo.nidIdx]] = rowNum
+			tinfo.node2row[row[tinfo.nidIdx]] = dataRowNum
 		}
 		tinfo.rows = append(tinfo.rows, row)
-		rowNum += 1
+		dataRowNum += 1
 	}
 
 	for _, row := range tinfo.rows {
@@ -188,7 +193,7 @@ func geocodePlaces(mapsApiKey string, placeId2Dcid *map[string]string, tinfo *ta
 }
 
 func writeOutput(outCsvPath string, tinfo *tableInfo) error {
-	outFile, err := os.Open(outCsvPath)
+	outFile, err := os.Create(outCsvPath)
 	if err != nil {
 		return err
 	}
