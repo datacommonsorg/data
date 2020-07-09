@@ -22,7 +22,7 @@ from app.service import base_database
 
 def load_message(log_id, bucket):
     blob = bucket.blob(log_id)
-    return blob.download_as_string().encode(blob.content_encoding)
+    return blob.download_as_string().decode(blob.content_encoding)
 
 
 def save_log_message(message, log_id, bucket):
