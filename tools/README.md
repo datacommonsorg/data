@@ -1,18 +1,18 @@
-# Tools for use in importing data into Data Commons
+# Tools used in importing data into Data Commons
 
 [TOC]
 
 ## Place Name Resolver
 
-Given a CSV with a column called "name" with place names, this tool uses
-geocoding to do a best-effort mapping of the names to DCIDs. It produces an
-output CSV with two additional columns appended. A "dcid" colummn with the DCID
-value and an "errors" column with more information set when the DCID value is
-empty.
+Given a CSV with a column called "name" with place name values, this tool uses
+the geocoding API to do a best-effort mapping of the names to DCIDs. It produces
+an output CSV with two additional columns appended. A "dcid" column with the
+corresponding DCID values and an informational "errors" column set when the DCID
+value is empty.
 
-Optionally, CSVs may include "Node" and "containedInPlace" columns. Where "Node"
-defines the local name for the row, and "containedInPlace" columns include local
-name references to contained-in places.
+Optionally, CSVs can include "Node" and "containedInPlace" columns. Where "Node"
+defines the (unique) local-id for the row, and "containedInPlace" column
+includes local-id references to contained-in places.
 
 For an example, see `sample_resolution_input.csv` and
 `sample_resolution_output.csv`.
