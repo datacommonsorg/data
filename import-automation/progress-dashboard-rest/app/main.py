@@ -44,17 +44,17 @@ def create_api(app):
     """Creates the REST API on top of the Flask app."""
     api = flask_restful.Api(app)
     api.add_resource(import_attempt.ImportAttemptByID,
-                     '/import_attempts/<str:attempt_id>')
+                     '/import_attempts/<string:attempt_id>')
     api.add_resource(import_attempt.ImportAttemptList,
                      '/import_attempts')
     api.add_resource(log.ImportLogByAttemptID,
-                     '/import_attempts/<str:attempt_id>/logs')
+                     '/import_attempts/<string:attempt_id>/logs')
     api.add_resource(system_run.SystemRunList,
                      '/system_runs')
     api.add_resource(system_run.SystemRunByID,
-                     '/system_runs/<str:run_id>')
+                     '/system_runs/<string:run_id>')
     api.add_resource(log.ImportLogByRunID,
-                     '/system_runs/<str:run_id>/logs')
+                     '/system_runs/<string:run_id>/logs')
     api.add_resource(log_list.ImportLogList,
                      '/logs')
     return api
