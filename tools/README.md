@@ -12,8 +12,7 @@ Optionally, CSVs can include "Node" and "containedInPlace" columns. Where "Node"
 defines the (unique) local-id for the row, and "containedInPlace" column
 includes local-id references to contained-in places.
 
-For an example, see `sample_resolution_input.csv` and
-`sample_resolution_output.csv`.
+For sample input/output CSVs, see `examples` directory.
 
 To run this program:
 
