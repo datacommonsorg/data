@@ -103,16 +103,11 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
             return -1
         return float(val)
 
-
     @staticmethod
     def _convert_industry_class(naics_code):
         """Filters out aggregate NAICS codes and assigns them their Data
         Commons codes.
         """
-        # if naics_code == "321,327-339":
-        #     naics_code = "JOLTS_320000"
-        # if naics_code == "311-316,322-326":
-        #     naics_code = "JOLTS_340000"
         if isinstance(naics_code, str):
             naics_code = naics_code.replace("-", "_")
             naics_code = naics_code.replace(",", "&")
