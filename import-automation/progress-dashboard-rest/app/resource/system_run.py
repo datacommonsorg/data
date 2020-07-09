@@ -23,10 +23,7 @@ import http
 import flask_restful
 from flask_restful import reqparse
 
-from app.resource import import_attempt
-from app.service import import_attempt_database
 from app.service import system_run_database
-from app.service import log_database
 from app.service import validation
 from app import utils
 

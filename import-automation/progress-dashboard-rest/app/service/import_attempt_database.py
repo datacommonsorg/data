@@ -17,7 +17,6 @@ Database service for storing import attempts using Google Cloud Datastore for
 storage.
 """
 
-from app import configs
 from app.service import base_database
 
 

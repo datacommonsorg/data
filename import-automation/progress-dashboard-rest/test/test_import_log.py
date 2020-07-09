@@ -13,13 +13,13 @@
 # limitations under the License.
 
 """
-Tests for log.py.
+Tests for progress_log.py.
 """
 
 import unittest
 from unittest import mock
 
-from app.resource import import_attempt, log
+from app.resource import import_attempt, progress_log
 from app.service import import_attempt_database_dict
 from app import utils
 
@@ -52,7 +52,7 @@ class ImportLogTest(unittest.TestCase):
         attempt_id = '0'
         attempt_api.put(attempt_id)
 
-        log_api = log.ImportLogByAttemptID()
+        log_api = progress_log.ImportLogByAttemptID()
         log_api.post(attempt_id)
         log_api.post(attempt_id)
 
@@ -76,7 +76,7 @@ class ImportLogTest(unittest.TestCase):
     def test_not_found(self):
         """Tests that querying the logs of an attempt that does not exist
         returns NOT FOUND."""
-        log_api = log.ImportLogByAttemptID()
+        log_api = progress_log.ImportLogByAttemptID()
         _, err = log_api.get('9999')
         self.assertEqual(404, err)
 
@@ -87,6 +87,6 @@ class ImportLogTest(unittest.TestCase):
         attempt_api = import_attempt.ImportAttemptByID()
         attempt_id = '0'
         attempt_api.put(attempt_id)
-        log_api = log.ImportLogByAttemptID()
+        log_api = progress_log.ImportLogByAttemptID()
         logs = log_api.get(attempt_id)
         self.assertEqual([], logs)

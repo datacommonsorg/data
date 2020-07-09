@@ -38,7 +38,8 @@ class ImportAttemptStatus(Enum):
     FAILED = 'failed'
 
 
-IMPORT_ATTEMPT_STATUS = frozenset(status.value for status in ImportAttemptStatus)
+IMPORT_ATTEMPT_STATUS = frozenset(
+    status.value for status in ImportAttemptStatus)
 
 ID_NOT_MATCH_ERROR = 'attempt_id in path variable does not match attempt_id ' \
                      'in request body '

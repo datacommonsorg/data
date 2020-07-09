@@ -21,19 +21,12 @@ import http
 from enum import Enum
 import flask_restful
 
+from app import utils
 from app.resource import import_attempt
 from app.resource import system_run
 from app.service import import_attempt_database
 from app.service import system_run_database
-
-
-def log_ids_to_logs(log_ids, database, bucket):
-    return [log_id_to_log(log_id, database, bucket) for log_id in log_ids]
-
-
-def log_id_to_log(log_id, database, bucket):
-    return database.get_by_id(
-        entity_id=log_id, bucket=bucket, load_content=True)
+from app.service import progress_log_database
 
 
 class LogLevel(Enum):
@@ -49,21 +42,26 @@ class LogLevel(Enum):
 LOG_LEVELS = frozenset(level.value for level in LogLevel)
 
 
-class ImportLogByRunID(flask_restful.Resource):
+class ProgressLogByRunID(flask_restful.Resource):
     """
     Attributes:
         See ImportLog.
     """
 
     def __init__(self):
-        self.database = system_run_database.SystemRunDatabase()
+        self.client = utils.create_datastore_client()
+        self.run_database = system_run_database.SystemRunDatabase(
+            client=self.client)
+        self.log_database = progress_log_database.ProgressLogDatabase(
+            client=self.client)
+        self.bucket = utils.create_storage_bucket()
 
     def get(self, run_id):
-        run = self.database.get_by_id(run_id)
+        run = self.run_database.get_by_id(run_id)
         if not run:
             return system_run.NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
         log_ids = run.get('logs', [])
-        return log_ids_to_logs(log_ids)
+        return self.log_database.load_logs(log_ids, self.bucket)
 
 
 class ImportLogByAttemptID(flask_restful.Resource):
@@ -75,7 +73,12 @@ class ImportLogByAttemptID(flask_restful.Resource):
     """
 
     def __init__(self):
-        self.database = import_attempt_database.ImportAttemptDatabase()
+        self.client = utils.create_datastore_client()
+        self.attempt_database = import_attempt_database.ImportAttemptDatabase(
+            client=self.client)
+        self.log_database = progress_log_database.ProgressLogDatabase(
+            client=self.client)
+        self.bucket = utils.create_storage_bucket()
 
     def get(self, attempt_id):
         """Queries the logs of an attempt.
@@ -87,8 +90,8 @@ class ImportLogByAttemptID(flask_restful.Resource):
             A list of logs of the attempt if successful. Otherwise,
             (error message, error code).
         """
-        attempt = self.database.get_by_id(attempt_id)
+        attempt = self.attempt_database.get_by_id(attempt_id)
         if not attempt:
             return import_attempt.NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
         log_ids = attempt.get('logs', [])
-        return log_ids_to_logs(log_ids)
+        return self.log_database.load_logs(log_ids, self.bucket)

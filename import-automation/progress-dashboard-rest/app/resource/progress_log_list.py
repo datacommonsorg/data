@@ -6,9 +6,9 @@ from flask_restful import reqparse
 from app import utils
 from app.resource import import_attempt
 from app.resource import system_run
-from app.resource import log
+from app.resource import progress_log
 from app.service import import_attempt_database
-from app.service import log_database
+from app.service import progress_log_database
 from app.service import system_run_database
 
 
@@ -19,7 +19,7 @@ def add_log_to_entity(log_id, entity):
     return entity
 
 
-class ImportLogList(flask_restful.Resource):
+class ProgressLogList(flask_restful.Resource):
     parser = reqparse.RequestParser()
     required_fields = [('level',), ('message',)]
     optional_fields = [('time_logged',), ('run_id',), ('attempt_id',)]
@@ -32,14 +32,14 @@ class ImportLogList(flask_restful.Resource):
         self.datastore_client = utils.create_datastore_client()
         self.run_database = system_run_database.SystemRunDatabase(
             client=self.datastore_client)
-        self.log_database = log_database.LogDatabase(
+        self.log_database = progress_log_database.ProgressLogDatabase(
             client=self.datastore_client)
         self.attempt_database = import_attempt_database.ImportAttemptDatabase(
             client=self.datastore_client)
 
     def post(self):
-        args = ImportLogList.parser.parse_args()
-        if args['level'] not in log.LOG_LEVELS:
+        args = ProgressLogList.parser.parse_args()
+        if args['level'] not in progress_log.LOG_LEVELS:
             return ('Log level {} is not allowed'.format(args['level']),
                     http.HTTPStatus.FORBIDDEN)
         time_logged = args.setdefault('time_logged', utils.utctime())
