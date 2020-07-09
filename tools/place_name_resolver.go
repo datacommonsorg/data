@@ -12,6 +12,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"sync"
 )
 
 var (
@@ -22,11 +23,15 @@ var (
 )
 
 const (
+	batchSize = 100
 	placeId2dcidBucket = "datcom-browser-prod.appspot.com"
 	placeId2dcidObject = "placeid2dcid.json"
 )
 
 type tableInfo struct {
+	// CSV header.
+	header []string
+
 	// Ordered rows in CSV.
 	rows [][]string
 
@@ -40,7 +45,6 @@ type tableInfo struct {
 	nidIdx  int
 	cipIdx  int
 	nameIdx int
-	typeIdx int
 }
 
 func appendContainedInPlaceNames(name string, row []string, tinfo *tableInfo) (string, error) {
@@ -84,7 +88,6 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 		nidIdx: -1,
 		nameIdx: -1,
 		cipIdx: -1,
-		typeIdx: -1,
 	}
 	dataRowNum := 0
 	for {
@@ -100,12 +103,13 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 					tinfo.nameIdx = i
 				case "containedInPlace":
 					tinfo.cipIdx = i
-				case "typeOf":
-					tinfo.typeIdx = i
 				case "Node":
 					tinfo.nidIdx = i
 				}
 			}
+			tinfo.header = append(row, "dcid", "errors")
+
+			// Validate.
 			if tinfo.nameIdx < 0 {
 				return nil, fmt.Errorf("CSV does not have a 'name' column!")
 			}
@@ -158,36 +162,51 @@ func loadPlaceIdToDcidMap() (*map[string]string, error) {
 	return placeId2Dcid, nil
 }
 
+func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, mapCli *maps.Client, wg *sync.WaitGroup) {
+	defer wg.Done()
+	extName := tinfo.extNames[idx]
+	req := &maps.GeocodingRequest {
+		Address:  extName,
+		Language: "en",
+	}
+	results, err := mapCli.Geocode(context.Background(), req)
+	if err != nil {
+		tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Geocoding failed for %s: %v", extName, err))
+		return
+	}
+	if len(results) == 0 {
+		tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Geocoding returned no result for %s", extName))
+		return
+	}
+	for _, result := range results {
+		dcid, ok := (*placeId2Dcid)[result.PlaceID]
+		if !ok {
+			tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Could not find placeId: %s", result.PlaceID))
+		} else {
+			// TODO: Deal with place-type checks and multiple results.
+			tinfo.rows[idx] = append(tinfo.rows[idx], dcid, "")
+		}
+		break
+	}
+}
+
 func geocodePlaces(mapsApiKey string, placeId2Dcid *map[string]string, tinfo *tableInfo) error {
 	mapCli, err := maps.NewClient(maps.WithAPIKey(mapsApiKey))
 	if err != nil {
 		return err
 	}
-	for i, _ := range tinfo.rows {
-		extName := tinfo.extNames[i]
-		req := &maps.GeocodingRequest {
-			Address:  extName,
-			Language: "en",
+	for i := 0; i < len(tinfo.rows); i += batchSize {
+		var wg sync.WaitGroup
+		jMax := i + batchSize
+		if jMax > len(tinfo.rows) {
+			jMax = len(tinfo.rows)
 		}
-		results, err := mapCli.Geocode(context.Background(), req)
-		if err != nil {
-			tinfo.rows[i] = append(tinfo.rows[i], "", fmt.Sprintf("Geocoding failed for %s: %v", extName, err))
-			continue
+		for j := i; j < jMax; j++ {
+			wg.Add(1)
+			log.Printf("Processing j=%d (%v)", j, tinfo.rows[j])
+			go geocodeOneRow(j, placeId2Dcid, tinfo, mapCli, &wg)
 		}
-		if len(results) == 0 {
-			tinfo.rows[i] = append(tinfo.rows[i], "", fmt.Sprintf("Geocoding returned no result for %s", extName))
-			continue
-		}
-		for _, result := range results {
-			dcid, ok := (*placeId2Dcid)[result.PlaceID]
-			if !ok {
-				tinfo.rows[i] = append(tinfo.rows[i], "", fmt.Sprintf("Could not find placeId: %s", result.PlaceID))
-			} else {
-				// TODO: Deal with place-type checks. Deal with multiple DCIDs.
-				tinfo.rows[i] = append(tinfo.rows[i], dcid, "")
-			}
-			break
-		}
+		wg.Wait()
 	}
 	return nil
 }
@@ -198,6 +217,7 @@ func writeOutput(outCsvPath string, tinfo *tableInfo) error {
 		return err
 	}
 	w := csv.NewWriter(outFile)
+	w.Write(tinfo.header)
 	w.WriteAll(tinfo.rows)
 	if err := w.Error(); err != nil {
 		return err
