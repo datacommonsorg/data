@@ -1,6 +1,7 @@
 requests
 google-auth
 google-cloud-logging
+google-cloud-storage
 google-cloud-datastore
 flask
 gunicorn
