@@ -1,6 +1,6 @@
 # Persons per square kilometre
 
-Node: dcid:Count_Person_AsAFractionOfArea
+Node: dcid:Count_Person_Per_Area
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:count
