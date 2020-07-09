@@ -77,11 +77,11 @@ class ProgressLogList(flask_restful.Resource):
             self.log_database.save(log, bucket=self.bucket, save_content=True)
             if run_id:
                 self.run_database.save(
-                    add_log_to_entity(log.id, run)
+                    add_log_to_entity(log.key.name, run)
                 )
             if attempt_id:
                 self.attempt_database.save(
-                    add_log_to_entity(log.id, attempt)
+                    add_log_to_entity(log.key.name, attempt)
                 )
 
         return args
