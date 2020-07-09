@@ -142,7 +142,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
 
     def generate_mcf(self):
         """Generates MCF StatVars for each industry code."""
-        mcf_temp = ('Node: dcid:USStateQuarterlyIndustryGDP_NAICS_{naics}\n'
+        mcf_temp = ('Node: dcid:USStateQuarterlyIndustryGDP_NAICS_{title}\n'
                     'typeOf: dcs:StatisticalVariable\n'
                     'populationType: dcs:EconomicActivity\n'
                     'activitySource: dcs:GrossDomesticProduction\n'
@@ -152,8 +152,10 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
 
         with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f:
             for naics_code in self.clean_df['NAICS'].unique():
-                code = naics_code[37:]
-                mcf_f.write(mcf_temp.format(naics=code))
+                code_title = naics_code[37:]
+                code = code_title.replace("_", "-")
+                code = code.replace("&", "&NAICS/")
+                mcf_f.write(mcf_temp.format(title=code_title, naics=code))
 
 def main(_):
     loader = StateGDPIndustryDataLoader()

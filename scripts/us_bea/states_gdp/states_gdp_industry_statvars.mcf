@@ -36,7 +36,7 @@ populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
-naics: dcid:NAICS/31_33
+naics: dcid:NAICS/31-33
 
 Node: dcid:USStateQuarterlyIndustryGDP_NAICS_321&327_339
 typeOf: dcs:StatisticalVariable
@@ -44,7 +44,7 @@ populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
-naics: dcid:NAICS/321&327_339
+naics: dcid:NAICS/321&NAICS/327-339
 
 Node: dcid:USStateQuarterlyIndustryGDP_NAICS_311_316&322_326
 typeOf: dcs:StatisticalVariable
@@ -52,7 +52,7 @@ populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
-naics: dcid:NAICS/311_316&322_326
+naics: dcid:NAICS/311-316&NAICS/322-326
 
 Node: dcid:USStateQuarterlyIndustryGDP_NAICS_42
 typeOf: dcs:StatisticalVariable
@@ -68,7 +68,7 @@ populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
-naics: dcid:NAICS/44_45
+naics: dcid:NAICS/44-45
 
 Node: dcid:USStateQuarterlyIndustryGDP_NAICS_48_49
 typeOf: dcs:StatisticalVariable
@@ -76,7 +76,7 @@ populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
-naics: dcid:NAICS/48_49
+naics: dcid:NAICS/48-49
 
 Node: dcid:USStateQuarterlyIndustryGDP_NAICS_51
 typeOf: dcs:StatisticalVariable
@@ -165,3 +165,4 @@ activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:Nominal
 naics: dcid:NAICS/81
+
