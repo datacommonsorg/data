@@ -1,7 +1,5 @@
 # Tools used in importing data into Data Commons
 
-[TOC]
-
 ## Place Name Resolver
 
 Given a CSV with a column called "name" with place name values, this tool uses
