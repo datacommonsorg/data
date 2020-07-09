@@ -23,7 +23,7 @@ def parse_manifest(path):
 def parse_commit_message_targets(commit_message):
     targets = re.findall(
         r'(?:IMPORTS=)((?:[a-zA-Z\d])(?:,[a-zA-Z\d]+)*)',
-        commit_message).split(',')
+        commit_message)[0].split(',')
     return list(set(targets))
 
 
