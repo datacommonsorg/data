@@ -150,7 +150,6 @@ class ImportAttemptList(ImportAttempt):
 
         # Only the API can modify these fields
         args.pop('attempt_id', None)
-        args.pop('run_id', None)
         args.pop('logs', None)
         set_import_attempt_default_values(args)
 
