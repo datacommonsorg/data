@@ -155,3 +155,10 @@ medicalStatus: dcs:PatientDeceased
 measuredProperty: dcs:incrementalCount
 measurementMethod: dcs:dcDerivedStat/NYT_COVID19_GitHub
 statType: dcs:measuredValue
+
+Node: dcid:Count_Person_AsAFractionOfArea
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:area
