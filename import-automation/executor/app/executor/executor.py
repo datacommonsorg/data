@@ -21,7 +21,9 @@ def parse_manifest(path):
 
 
 def parse_commit_message_targets(commit_message):
-    targets = re.findall(r'(?<=\\)(?:(?:\w+/)+\w+:)?\w+', commit_message)
+    targets = re.findall(
+        r'(?:IMPORTS=)((?:[a-zA-Z\d])(?:,[a-zA-Z\d]+)*)',
+        commit_message).split(',')
     return list(set(targets))
 
 
@@ -45,8 +47,7 @@ def run_user_script(script_path, interpreter_path):
 
 
 def execute_imports(task_info):
-    # client_id = configs.get_dashboard_oauth_client_id()
-    client_id = 1
+    client_id = configs.get_dashboard_oauth_client_id()
 
     valid, err = validation.task_info_valid(task_info)
     if not valid:
@@ -57,20 +58,21 @@ def execute_imports(task_info):
     branch_name = task_info['BRANCH_NAME']
     pr_number = task_info['PR_NUMBER']
 
-    # dashboard_api.dashboard_init_progress(
-    #     client_id,
-    #     {
-    #         'attempt_id': commit_sha,
-    #         'branch_name': branch_name,
-    #         'repo_name': repo_name,
-    #         'pr_number': pr_number
-    #     }
-    # )
+    run = dashboard_api.init_run(
+        client_id,
+        {
+            'repo_name': repo_name,
+            'branch_name': branch_name,
+            'pr_number': pr_number,
+            'commit_sha': commit_sha
+        })
+    run_id = run['run_id']
+
 
     auth_access_token = configs.get_github_auth_access_token()
 
     commit_info = github_api.query_commit(
-        configs.REPO_OWNER_USERNAME, repo_name, commit_sha, auth_username, auth_access_token)
+        configs.REPO_OWNER_USERNAME, repo_name, commit_sha, configs.GITHUB_AUTH_USERNAME, auth_access_token)
 
     commit_author_username = commit_info['author']['login']
     commit_message = commit_info['commit']['message']
@@ -83,58 +85,56 @@ def execute_imports(task_info):
         return err
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        repo_dirname = github_api.download_repo(REPO_OWNER_USERNAME, repo_name, commit_sha, tmpdir, configs.GITHUB_AUTH_USERNAME, auth_access_token)
+        repo_dirname = github_api.download_repo(configs.REPO_OWNER_USERNAME, repo_name, commit_sha, tmpdir, configs.GITHUB_AUTH_USERNAME, auth_access_token)
         cwd = os.path.join(tmpdir, repo_dirname)
         os.chdir(cwd)
 
-        # dashboard_api.dashboard_log_info(client_id, commit_sha, f'Downloaded repo: ' + repo_dirname)
-
-        # dashboard_api.dashboard_log_info(client_id, commit_sha, f'Installed dependencies: {process.stdout}')
+        dashboard_api.log_info(client_id, f'Downloaded repo: ' + repo_dirname, run_id=run_id)
 
         import_all = 'all' in import_targets
         for dir_path in manifest_dirs:
-            manifest_path = os.path.join(dir_path, MANIFEST_FILENAME)
+            manifest_path = os.path.join(dir_path, configs.MANIFEST_FILENAME)
             manifest = parse_manifest(manifest_path)
             for spec in manifest['import_specifications']:
                 import_name = spec['import_name']
                 absolute_name = utils.get_absolute_import_name(dir_path, import_name)
                 if import_all or absolute_name in import_targets or import_name in import_targets:
-                    import_one(dir_path, spec, commit_sha, client_id)
+                    import_one(dir_path, spec, commit_sha, client_id, run_id)
 
     return 'success'
 
 
-def import_one(dir_path, import_spec, commit_sha, client_id):
+def import_one(dir_path, import_spec, commit_sha, client_id, run_id):
+    import_name = import_spec['import_name']
+    attempt = dashboard_api.init_attempt(
+        client_id,
+        {
+            'run_id': run_id,
+            'import_name': import_name,
+            'absolute_import_name': utils.get_absolute_import_name(dir_path, import_name),
+            'provenance_url': import_spec['provenance_url'],
+            'provenance_description': import_spec['provenance_description']
+        })
+    attempt_id = attempt['attempt_id']
 
     cwd = os.getcwd()
     os.chdir(dir_path)
-
-    # dashboard_api.dashboard_update(client_id, commit_sha, import_progress={
-    #     'import_name': import_spec['import_name'],
-    #     'provenance_description': import_spec['provenance_description'],
-    #     'provenance_url': import_spec['provenance_url']
-    # })
 
     urls = import_spec.get('data_download_url')
     if urls:
         for url in urls:
             utils.download_file(url, '.')
+            dashboard_api.log_info(client_id, 'Downloaded: ' + url, attempt_id=attempt_id)
 
     with tempfile.TemporaryDirectory() as tmpdir:
         interpreter_path, process = create_venv(configs.REQUIREMENTS_FILENAME, tmpdir)
-        download_script_path = import_spec.get('data_download_script')
-        if download_script_path:
-            try:
-                process = run_user_script(download_script_path, interpreter_path)
-            except Exception as e:
-                logging.error(e)
-                logging.error(e.output)
-                logging.error(e.stdout)
-                logging.error(e.stderr)
+        dashboard_api.log_info(client_id, 'Installed dependencies: ' + process.stdout, attempt_id=attempt_id)
 
-        cleaning_script_path = import_spec.get('data_cleaning_script')
-        if cleaning_script_path:
-            process = run_user_script(cleaning_script_path, interpreter_path)
+        script_paths = import_spec.get('scripts')
+        for path in script_paths:
+            process = run_user_script(path, interpreter_path)
+            dashboard_api.log_info(client_id, f'Run {path}: {process.stdout}', attempt_id=attempt_id)
+
 
     import_inputs = import_spec.get('import_inputs', [])
     for import_input in import_inputs:
@@ -144,14 +144,14 @@ def import_one(dir_path, import_spec, commit_sha, client_id):
 
         if template_mcf:
             with open(template_mcf, 'r') as f:
-                gcs_io.upload_file(template_mcf, os.path.join(run_id, attempt_id, os.path.basename(template_mcf)), bucket_name='import-backend-imports')
+                dashboard_api.log_info(client_id, f'Generated template MCF: {f.readline()}', attempt_id=attempt_id)
 
         if cleaned_csv:
             with open(cleaned_csv, 'r') as f:
-                print(f.readline())
+                dashboard_api.log_info(client_id, f'Generated cleaned CSV: {f.readline()}', attempt_id=attempt_id)
 
         if node_mcf:
             with open(node_mcf, 'r') as f:
-                print(f.readline())
+                dashboard_api.log_info(client_id, f'Generated node MCF: {f.readline()}', attempt_id=attempt_id)
 
     os.chdir(cwd)
