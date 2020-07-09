@@ -80,7 +80,7 @@ def generate_cleaned_dataframe():
   series_desc = pd.read_csv(
       "https://download.bls.gov/pub/time.series/jt/jt.series",
       converters={'industry_code': lambda col: str(col)},
-      sep="\s+")
+      sep="\\s+")
   assert len(series_desc.columns) == len(exp_series_columns)
   assert False not in (series_desc.columns == exp_series_columns)
   series_desc = series_desc.set_index("series_id")
@@ -88,22 +88,22 @@ def generate_cleaned_dataframe():
   # Download various series datapoints
   job_openings = pd.read_csv(
       "https://download.bls.gov/pub/time.series/jt/jt.data.2.JobOpenings",
-      sep="\s+")
+      sep="\\s+")
   job_hires = pd.read_csv(
       "https://download.bls.gov/pub/time.series/jt/jt.data.3.Hires",
-      sep="\s+")
+      sep="\\s+")
   total_seps = pd.read_csv(
       "https://download.bls.gov/pub/time.series/jt/jt.data.4.TotalSeparations",
-      sep="\s+")
+      sep="\\s+")
   total_quits = pd.read_csv(
       "https://download.bls.gov/pub/time.series/jt/jt.data.5.Quits",
-      sep="\s+")
+      sep="\\s+")
   total_layoffs = pd.read_csv(
       "https://download.bls.gov/pub/time.series/jt/jt.data.6.LayoffsDischarges",
-      sep="\s+")
+      sep="\\s+")
   total_other_seps = pd.read_csv(
       "https://download.bls.gov/pub/time.series/jt/jt.data.7.OtherSeparations",
-      sep="\s+")
+      sep="\\s+")
   # Additional information about each dataframe.
   # Tuple Format: Statistical Variable name, Stat Var population,
   #   Stat Var Job Change Type If Relevant, Dataframe for Stat Var.
