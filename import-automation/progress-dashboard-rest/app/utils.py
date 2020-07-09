@@ -93,4 +93,4 @@ def create_datastore_client(project=configs.PROJECT_ID,
 
 
 def get_id():
-    return uuid.uuid4().int
+    return uuid.uuid4().hex

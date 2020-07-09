@@ -60,9 +60,9 @@ class SystemRun(flask_restful.Resource):
     """Base class for an system run resource."""
     parser = reqparse.RequestParser()
     optional_fields = (
-        ('run_id', int), ('repo_name',), ('branch_name',), ('pr_number', int),
+        ('run_id', str), ('repo_name',), ('branch_name',), ('pr_number', int),
         ('time_created',), ('time_completed',),
-        ('import_attempts', int, 'append'), ('logs', int, 'append'),
+        ('import_attempts', str, 'append'), ('logs', str, 'append'),
         ('status',)
     )
     utils.add_fields(parser, optional_fields, required=False)

@@ -58,10 +58,10 @@ class ImportAttempt(flask_restful.Resource):
     # The parser looks for these fields in the request body.
     # The Content-Type of the request must be application/json.
     optional_fields = (
-        ('attempt_id', int), ('run_id', int), ('import_name',),
+        ('attempt_id', str), ('run_id', str), ('import_name',),
         ('absolute_import_name',), ('provenance_url',),
         ('provenance_description',), ('status',), ('time_created',),
-        ('time_completed',), ('logs', int, 'append'),
+        ('time_completed',), ('logs', str, 'append'),
         ('template_mcf_url',), ('node_mcf_url',), ('csv_url',)
     )
     utils.add_fields(parser, optional_fields, required=False)
