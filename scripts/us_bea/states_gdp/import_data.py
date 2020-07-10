@@ -49,7 +49,7 @@ class StateGDPDataLoader:
                   'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
                   'West Virginia', 'Wisconsin', 'Wyoming']
     _ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
-    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
+    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2020.csv"
     _QUARTER_MONTH_MAP = {
         'Q1':'03',
         'Q2':'06',
@@ -62,12 +62,25 @@ class StateGDPDataLoader:
         self.raw_df = None
         self.clean_df = None
 
-    def download_data(self):
+    def download_data(self, zip_link=None, file=None):
         """Downloads ZIP file, extracts the desired CSV, and puts it into a data
         frame. Stores that data frame in the instance raw_df variable.
+
+        Args:
+            zip_link: Link to the raw data to be downloaded in ZIP format. If
+            None or unspecified, this value gets overriden by the class constant
+            _ZIP_LINK.
+            file: File within the specified ZIP file that should be downloaded
+            and stored. If None or unspecified, this value gets overriden by the
+            class constant _STATE_QUARTERLY_GDP_FILE.
+
         """
+        if zip_link is None:
+            zip_link = self._ZIP_LINK
+        if file is None:
+            file = self._STATE_QUARTERLY_GDP_FILE
         # Open zip file from link.
-        resp = urlopen(self._ZIP_LINK)
+        resp = urlopen(zip_link)
 
         # Read the file, interpret it as bytes, and create a ZipFile instance
         # from it for easy handling.
@@ -76,7 +89,7 @@ class StateGDPDataLoader:
         # Open the specific desired file (CSV) from the folder, and decode it.
         # This results in a string representation of the file. Interpret that
         # as a CSV, and read it into a DF.
-        data = zip_file.open(self._STATE_QUARTERLY_GDP_FILE).read()
+        data = zip_file.open(file).read()
         data = data.decode('utf-8')
         data = list(csv.reader(data.splitlines()))
         self.raw_df = pd.DataFrame(data[1:], columns=data[0])
