@@ -17,7 +17,7 @@ System run resource associated with the endpoint
 '/system_runs/<string:run_id>'.
 """
 
-from enum import Enum
+import enum
 
 import flask_restful
 from flask_restful import reqparse
@@ -30,7 +30,7 @@ from app import utils
 _MODEL = system_run_model.SystemRunModel
 
 
-class SystemRunStatus(Enum):
+class SystemRunStatus(enum.Enum):
     """Allowed status of a system run.
 
     The status of a system run can only be one of these.
