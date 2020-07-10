@@ -19,13 +19,15 @@ Author: <github_handle>
 ### Overview
 > The metadata for Population change - Demographic balance and crude rates at regional level (NUTS 3) is available online at [here](https://ec.europa.eu/eurostat/cache/metadata/en/demo_r_gind3_esms.htm)
 
-NUTS (Nomenclature of Territorial Units for Statistics) is a hierarchical classification for dividing regions of Europe. NUTSi, starting at NUTS1, is the ith classification which is more detailed than the NUTS(i-1).
-
-The format of each region’s NUTS3 GEO is two letters continued by 0,1,2, or 3 digits. 
-Example: BE, BE1, BE21, BE254 
+possible geo values: 
+> Countries
+> NUTS1
+> NUTS2
+> NUTS3
 
 
 NUTS2 and NUTS3 can be accessed by dcid: nuts/xxx, typeOf:EurostatNUTS2, typeOf:EurostatNUTS3 (respectively) 
+
 > Explain as much as you need so that others can understand what the
 dataset's variables are without digging into the data and documentation.
 Here's an example skeleton you may find helpful:
