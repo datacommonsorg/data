@@ -20,18 +20,15 @@ import flask_restful
 
 from app import utils
 from app.resource import system_run
-from app.service import system_run_database
 from app.service import validation
 
 
-class SystemRunList(flask_restful.Resource):
+class SystemRunList(system_run.SystemRun):
     """API for querying a list of system runs based on some criteria and
-    for creating new system runs."""
+    for creating new system runs.
 
-    def __init__(self):
-        self.client = utils.create_datastore_client()
-        self.database = system_run_database.SystemRunDatabase(
-            client=self.client)
+    See SystemRun.
+    """
 
     def get(self):
         """Retrieves a list of system runs that pass the filter defined by
@@ -40,7 +37,7 @@ class SystemRunList(flask_restful.Resource):
         Returns:
             A list of system runs each as a datastore Entity object.
         """
-        args = system_run.SystemRun.parser.parse_args()
+        args = system_run.SystemRunByID.parser.parse_args()
         return self.database.filter(args)
 
     def post(self):
@@ -52,7 +49,7 @@ class SystemRunList(flask_restful.Resource):
             run_id set. Otherwise, (error message, error code), where
             the error message is a string and the error code is an int.
         """
-        args = system_run.SystemRun.parser.parse_args()
+        args = system_run.SystemRunByID.parser.parse_args()
         valid, err, code = validation.system_run_valid(args)
         if not valid:
             return err, code

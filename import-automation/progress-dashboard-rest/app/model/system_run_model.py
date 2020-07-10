@@ -13,12 +13,12 @@
 # limitations under the License.
 
 """
-Data model of an import attempt.
+Data model of a system run.
 """
 
 
 class SystemRunModel:
-    """Data model of an import attempt.
+    """Data model of a system run.
 
     The class variables below are the fields of a system run.
 

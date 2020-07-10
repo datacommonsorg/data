@@ -28,7 +28,7 @@ _MODEL = system_run_model.SystemRunModel
 
 
 class SystemRunByIDTest(unittest.TestCase):
-    """Tests for SystemRun."""
+    """Tests for SystemRunByID."""
 
     @classmethod
     def setUpClass(cls):
@@ -43,7 +43,7 @@ class SystemRunByIDTest(unittest.TestCase):
     def setUp(self):
         """Creates the endpoints before every test."""
         # Used for querying system runs by run_id
-        self.resource = system_run.SystemRun()
+        self.resource = system_run.SystemRunByID()
         # Used for creating system runs
         self.list_resource = system_run_list.SystemRunList()
         self.list_resource.database.client = self.resource.database.client
