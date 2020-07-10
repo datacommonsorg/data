@@ -16,9 +16,6 @@
 System run list resource associated with the endpoint '/system_runs'.
 """
 
-import flask_restful
-
-from app import utils
 from app.resource import system_run
 from app.service import validation
 
