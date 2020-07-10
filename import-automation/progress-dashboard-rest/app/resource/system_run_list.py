@@ -16,13 +16,15 @@
 System run list resource associated with the endpoint '/system_runs'.
 """
 
+import flask_restful
+
 from app import utils
 from app.resource import system_run
 from app.service import system_run_database
 from app.service import validation
 
 
-class SystemRunList(system_run.SystemRun):
+class SystemRunList(flask_restful.Resource):
     """API for querying a list of system runs based on some criteria and
     for creating new system runs."""
 

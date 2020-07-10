@@ -13,19 +13,21 @@
 # limitations under the License.
 
 """
-System run resources associated with the endpoints
-'/system_runs/<int:run_id>' and '/system_runs'.
+System run resource associated with the endpoint
+'/system_runs/<string:run_id>'.
 """
 
 from enum import Enum
-import http
 
 import flask_restful
 from flask_restful import reqparse
 
+from app.model import system_run_model
 from app.service import system_run_database
 from app.service import validation
 from app import utils
+
+_MODEL = system_run_model.SystemRunModel
 
 
 class SystemRunStatus(Enum):
@@ -55,37 +57,40 @@ def set_system_run_default_values(system_run):
     Returns:
         The same system run with the fields set, as a dict.
     """
-    system_run.setdefault('import_attempts', [])
-    system_run.setdefault('status', SystemRunStatus.CREATED.value)
-    system_run.setdefault('time_created', utils.utctime())
-    system_run.setdefault('logs', [])
+    system_run.setdefault(_MODEL.import_attempts, [])
+    system_run.setdefault(_MODEL.status, SystemRunStatus.CREATED.value)
+    system_run.setdefault(_MODEL.time_created, utils.utctime())
+    system_run.setdefault(_MODEL.logs, [])
     return system_run
 
 
 class SystemRun(flask_restful.Resource):
-    """Base class for an system run resource."""
-    parser = reqparse.RequestParser()
-    optional_fields = (
-        ('run_id', str), ('repo_name',), ('branch_name',), ('pr_number', int),
-        ('commit_sha',), ('time_created',), ('time_completed',),
-        ('import_attempts', str, 'append'), ('logs', str, 'append'),
-        ('status',)
-    )
-    utils.add_fields(parser, optional_fields, required=False)
-
-
-class SystemRunByID(SystemRun):
     """API for managing system runs by run_id associated with the endpoint
     '/system_runs/<int:run_id>'.
 
     Attributes:
-        database
-        client
+        client: datastore Client object used to communicate with Datastore
+        database: SystemRunDatabase object for querying and storing
+            system runs using the client
     """
+    parser = reqparse.RequestParser()
+    optional_fields = (
+        (_MODEL.run_id, str),
+        (_MODEL.repo_name,),
+        (_MODEL.branch_name,),
+        (_MODEL.pr_number, int),
+        (_MODEL.commit_sha,),
+        (_MODEL.time_created,),
+        (_MODEL.time_completed,),
+        (_MODEL.import_attempts, str, 'append'),
+        (_MODEL.logs, str, 'append'),
+        (_MODEL.status,)
+    )
+    utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self):
-        self.database = system_run_database.SystemRunDatabase()
-        self.client = self.database.client
+        self.client = utils.create_datastore_client()
+        self.database = system_run_database.SystemRunDatabase(self.client)
 
     def get(self, run_id):
         """Retrieves a system run by its run_id.
@@ -94,42 +99,40 @@ class SystemRunByID(SystemRun):
             run_id: ID of the system run as a string
 
         Returns:
-            The system run with the run_id if successful as an Entity.
-            Otherwise, (error message, error code), where the error message is
-            a string and the error code is an int.
+            The system run with the run_id if successful as a
+            datastore Entity object. Otherwise, (error message, error code),
+            where the error message is a string and the error code is an int.
         """
         run = self.database.get(run_id)
         if not run:
-            return NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
+            return validation.get_not_found_error(_MODEL.run_id, run_id)
         return run
 
     def patch(self, run_id):
         """Modifies the value of a field of an existing system run.
 
-        The run_id and import_attempts of an existing system run resource are
+        The run_id and import_attempts of an existing system run are
         forbidden to be patched.
 
         Args:
             run_id: ID of the system run as a string
 
         Returns:
-            The system run with the run_id if successful as an Entity.
-            Otherwise, (error message, error code), where the error message is
-            a string and the error code is an int.
+            The system run with the run_id if successful as a
+            datastore Entity object. Otherwise, (error message, error code),
+            where the error message is a string and the error code is an int.
         """
         args = SystemRun.parser.parse_args()
         valid, err, code = validation.system_run_valid(args, run_id=run_id)
         if not valid:
             return err, code
-        if 'run_id' in args or 'import_attempts' in args:
-            return ('Cannot patch run_id or import_attempts',
-                    http.HTTPStatus.FORBIDDEN)
+        if _MODEL.run_id in args or _MODEL.import_attempts in args:
+            return validation.get_patch_forbidden_error(
+                (_MODEL.run_id, _MODEL.import_attempts))
 
         with self.client.transaction():
             run = self.database.get(run_id)
             if not run:
-                return NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
+                return validation.get_not_found_error(_MODEL.run_id, run_id)
             run.update(args)
             return self.database.save(run)
-
-

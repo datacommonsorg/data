@@ -22,7 +22,7 @@ class ImportAttemptModel:
 
     The class variables below are the fields of an import attempt.
 
-    TODO(intrepiditee): add description for each field
+    TODO(intrepiditee): Add description for each field
     """
     attempt_id = 'attempt_id'
     run_id = 'run_id'

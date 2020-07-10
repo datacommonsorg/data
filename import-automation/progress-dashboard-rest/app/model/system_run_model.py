@@ -22,7 +22,7 @@ class SystemRunModel:
 
     The class variables below are the fields of a system run.
 
-    TODO(intrepiditee): add description for each field
+    TODO(intrepiditee): Add description for each field
     """
     run_id = 'run_id'
     repo_name = 'repo_name'

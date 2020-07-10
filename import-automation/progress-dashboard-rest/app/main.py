@@ -53,7 +53,7 @@ def create_api(app):
                      '/import_attempts/<string:attempt_id>/logs')
     api.add_resource(app.resource.system_run_list.SystemRunList,
                      '/system_runs')
-    api.add_resource(system_run.SystemRunByID,
+    api.add_resource(system_run.SystemRun,
                      '/system_runs/<string:run_id>')
     api.add_resource(progress_log.ProgressLogByRunID,
                      '/system_runs/<string:run_id>/logs')
