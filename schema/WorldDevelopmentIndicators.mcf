@@ -152,3 +152,48 @@ typeOf: dcs:UnitOfMeasure
 name: "ConstantPriceUSDollar2015"
 description: "The value of the official currency of the United States of America in the year 2015."
 
+Node: dcid:LevelOfSchoolEnum
+name: "LevelOfSchoolEnum"
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+
+Node: dcid:iscedLevel
+name: "iscedLevel"
+typeOf: schema:Property
+domain: dcs:Person
+range: dcs:LevelOfSchoolEnum
+
+Node: dcid:ISCEDLevel5OrHigher
+name: "ISCED Level 5 (short-cycle tertiary education) Or Higher"
+description: "Short-cycle tertiary education or more. Includes any form of post-secondary education."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel5OrHigher"
+
+Node: dcid:BachelorsDegreeOrHigher
+name: "ISCED Level 6 (Bachelor's Degree) Or Higher"
+description: "Bachelor's degree or equivalent level."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel6OrHigher"
+
+Node: dcid:MastersDegreeOrHigher
+name: "ISCED Level 7 (Master's degree) Or Higher"
+description: "Master's degree of equivalent."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel7OrHigher"
+
+Node: dcid:DoctorateDegree
+name: "ISCED Level 8 (Doctorate Degree)"
+description: "Doctorate degree or equivalent level."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel8"
+
+Node: dcid:ICD10/X60-X84
+name: "X60-X84 (Intentional self-harm)"
+typeOf: dcs:ICD10Section
+
+Node: dcid:Years15To64
+name: "Years 15 to 64"
+typeOf: dcs:QuantityRange
+startValue: 15
+endValue: 64
+unitOfMeasure: dcs:Years
