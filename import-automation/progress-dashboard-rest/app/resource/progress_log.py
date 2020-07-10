@@ -49,7 +49,7 @@ class ProgressLogByID(flask_restful.Resource):
         self.bucket = utils.create_storage_bucket()
 
     def get(self, log_id):
-        log = self.database.get_by_id(entity_id=log_id, load_content=True)
+        log = self.database.get(entity_id=log_id, load_content=True)
         if not log:
             return 'not found', http.HTTPStatus.NOT_FOUND
         return log
@@ -70,7 +70,7 @@ class ProgressLogByRunID(flask_restful.Resource):
         self.bucket = utils.create_storage_bucket()
 
     def get(self, run_id):
-        run = self.run_database.get_by_id(run_id)
+        run = self.run_database.get(run_id)
         if not run:
             return system_run.NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
         log_ids = run.get('logs', [])
@@ -103,7 +103,7 @@ class ImportLogByAttemptID(flask_restful.Resource):
             A list of logs of the attempt if successful. Otherwise,
             (error message, error code).
         """
-        attempt = self.attempt_database.get_by_id(attempt_id)
+        attempt = self.attempt_database.get(attempt_id)
         if not attempt:
             return import_attempt.NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
         log_ids = attempt.get('logs', [])

@@ -107,7 +107,7 @@ class ImportAttemptByID(ImportAttempt):
             Otherwise, (error message, error code), where the error message is
             a string and the error code is an int.
         """
-        import_attempt = self.database.get_by_id(attempt_id)
+        import_attempt = self.database.get(attempt_id)
         if not import_attempt:
             return validation.get_not_found_error(_MODEL.attempt_id, attempt_id)
         return import_attempt
@@ -136,7 +136,7 @@ class ImportAttemptByID(ImportAttempt):
                 (_MODEL.attempt_id, _MODEL.run_id))
 
         with self.client.transaction():
-            import_attempt = self.database.get_by_id(attempt_id)
+            import_attempt = self.database.get(attempt_id)
             if not import_attempt:
                 return validation.get_not_found_error(
                     _MODEL.attempt_id, attempt_id)

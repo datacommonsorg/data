@@ -89,7 +89,7 @@ class SystemRunByID(SystemRun):
             Otherwise, (error message, error code), where the error message is
             a string and the error code is an int.
         """
-        run = self.database.get_by_id(run_id)
+        run = self.database.get(run_id)
         if not run:
             return NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
         return run
@@ -117,7 +117,7 @@ class SystemRunByID(SystemRun):
                     http.HTTPStatus.FORBIDDEN)
 
         with self.client.transaction():
-            run = self.database.get_by_id(run_id)
+            run = self.database.get(run_id)
             if not run:
                 return NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
             run.update(args)
@@ -152,6 +152,6 @@ class SystemRunList(SystemRun):
         set_system_run_default_values(args)
 
         with self.client.transaction():
-            run = self.database.get_by_id(make_new=True)
+            run = self.database.get(make_new=True)
             run.update(args)
             return self.database.save(run)

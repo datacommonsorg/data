@@ -52,11 +52,11 @@ class ProgressLogList(flask_restful.Resource):
             return ('Neither run_id or attempt_id is present',
                     http.HTTPStatus.BAD_REQUEST)
         if run_id:
-            run = self.run_database.get_by_id(run_id)
+            run = self.run_database.get(run_id)
             if not run:
                 return system_run.NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
         if attempt_id:
-            attempt = self.attempt_database.get_by_id(attempt_id)
+            attempt = self.attempt_database.get(attempt_id)
             if not attempt:
                 return import_attempt.NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
         if run_id and attempt_id:
@@ -69,7 +69,7 @@ class ProgressLogList(flask_restful.Resource):
                         'import attempt',
                         http.HTTPStatus.INTERNAL_SERVER_ERROR)
 
-        log = self.log_database.get_by_id(make_new=True)
+        log = self.log_database.get(make_new=True)
         log.update(args)
 
         with self.datastore_client.transaction():

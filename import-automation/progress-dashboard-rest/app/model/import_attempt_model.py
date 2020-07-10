@@ -22,9 +22,8 @@ class ImportAttemptModel:
 
     The class variables below are the fields of an import attempt.
 
-    TODO(shijunjie): add description for each feild
+    TODO(intrepiditee): add description for each field
     """
-    #asasdas
     attempt_id = 'attempt_id'
     run_id = 'run_id'
     import_name = 'import_name'

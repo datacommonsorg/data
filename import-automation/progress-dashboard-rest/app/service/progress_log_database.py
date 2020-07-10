@@ -39,8 +39,8 @@ class ProgressLogDatabase(base_database.BaseDatabase):
             log_manager = log_message_manager.LogMessageManager()
         self.log_manager = log_manager
 
-    def get_by_id(self, entity_id=None, make_new=False, load_content=False):
-        log = super().get_by_id(entity_id, make_new)
+    def get(self, entity_id=None, make_new=False, load_content=False):
+        log = super().get(entity_id, make_new)
         if log and load_content:
             log['message'] = self.log_manager.load_message(log.key.name)
         return log
@@ -56,5 +56,5 @@ class ProgressLogDatabase(base_database.BaseDatabase):
         return [self.load_log(log_id, bucket) for log_id in log_ids]
 
     def load_log(self, log_id, bucket):
-        return self.get_by_id(
+        return self.get(
             entity_id=log_id, load_content=True)

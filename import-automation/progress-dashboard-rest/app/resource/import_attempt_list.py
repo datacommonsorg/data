@@ -84,14 +84,16 @@ class ImportAttemptList(import_attempt.ImportAttempt):
         args.pop(_ATTEMPT.logs, None)
         import_attempt.set_import_attempt_default_values(args)
 
+        # The system run pointed to by this import attempt needs to
+        # point back at the import attempt.
         transaction = self.client.transaction()
         transaction.begin()
         run_id = args[_ATTEMPT.run_id]
-        run = self.run_database.get_by_id(run_id)
+        run = self.run_database.get(run_id)
         if not run:
             transaction.rollback()
             return validation.get_not_found_error(_ATTEMPT.run_id, run_id)
-        attempt = self.attempt_database.get_by_id(make_new=True)
+        attempt = self.attempt_database.get(make_new=True)
         attempt.update(args)
         self.attempt_database.save(attempt)
         attempts = run.setdefault(_RUN.import_attempts, [])
@@ -100,7 +102,10 @@ class ImportAttemptList(import_attempt.ImportAttempt):
             self.run_database.save(run)
         else:
             transaction.rollback()
-            return 'attempt_id already exists', http.HTTPStatus.FORBIDDEN
+            return ('The system run pointed to by the import attempt already '
+                    'points to the import attempt. This is a sign of creating '
+                    'duplicated import attempts.',
+                    http.HTTPStatus.BAD_REQUEST)
 
         transaction.commit()
         return attempt
