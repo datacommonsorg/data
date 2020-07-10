@@ -23,6 +23,7 @@ import os
 import flask
 import flask_restful
 
+import app.resource.import_attempt_list
 from app.resource import import_attempt
 from app.resource import progress_log
 from app.resource import progress_log_list
@@ -45,7 +46,7 @@ def create_api(app):
     api = flask_restful.Api(app)
     api.add_resource(import_attempt.ImportAttemptByID,
                      '/import_attempts/<string:attempt_id>')
-    api.add_resource(import_attempt.ImportAttemptList,
+    api.add_resource(app.resource.import_attempt_list.ImportAttemptList,
                      '/import_attempts')
     api.add_resource(progress_log.ImportLogByAttemptID,
                      '/import_attempts/<string:attempt_id>/logs')

@@ -58,7 +58,7 @@ class SystemRun(flask_restful.Resource):
     parser = reqparse.RequestParser()
     optional_fields = (
         ('run_id', str), ('repo_name',), ('branch_name',), ('pr_number', int),
-        ('time_created',), ('time_completed',),
+        ('commit_sha',), ('time_created',), ('time_completed',),
         ('import_attempts', str, 'append'), ('logs', str, 'append'),
         ('status',)
     )

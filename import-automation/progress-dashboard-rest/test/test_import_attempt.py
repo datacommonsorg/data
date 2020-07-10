@@ -19,6 +19,7 @@ Tests for import_attempt.py.
 import unittest
 from unittest import mock
 
+import app.resource.import_attempt_list
 from app.resource import import_attempt
 from app.service import import_attempt_database_dict
 
@@ -126,7 +127,7 @@ class ImportAttemptListTest(unittest.TestCase):
     @mock.patch(PARSE_ARGS, lambda self: {'import_name': 'name'})
     def test_get_by_name(self):
         """Tests filtering by import_name returns the correct attempts."""
-        attempt_list = import_attempt.ImportAttemptList()
+        attempt_list = app.resource.import_attempt_list.ImportAttemptList()
         attempts = attempt_list.get()
         self.assertEqual(3, len(attempts))
         self.assertIn(self.attempts[0], attempts)
@@ -136,7 +137,7 @@ class ImportAttemptListTest(unittest.TestCase):
     @mock.patch(PARSE_ARGS, lambda self: {'attempt_id': '1'})
     def test_get_by_id(self):
         """Tests filtering by attempt_id returns the only correct attempt."""
-        attempt_list = import_attempt.ImportAttemptList()
+        attempt_list = app.resource.import_attempt_list.ImportAttemptList()
         attempts = attempt_list.get()
         self.assertEqual(1, len(attempts))
         self.assertIn(self.attempts[1], attempts)
@@ -146,7 +147,7 @@ class ImportAttemptListTest(unittest.TestCase):
     def test_get_by_name_and_repo_num(self):
         """Tests filtering by import_name and pr_number returns
         the correct attempts."""
-        attempt_list = import_attempt.ImportAttemptList()
+        attempt_list = app.resource.import_attempt_list.ImportAttemptList()
         attempts = attempt_list.get()
         self.assertEqual(2, len(attempts))
         self.assertIn(self.attempts[1], attempts)
@@ -155,6 +156,6 @@ class ImportAttemptListTest(unittest.TestCase):
     @mock.patch(PARSE_ARGS, lambda self: {'import_name': 'noooo'})
     def test_get_not_exist(self):
         """Tests empty result."""
-        attempt_list = import_attempt.ImportAttemptList()
+        attempt_list = app.resource.import_attempt_list.ImportAttemptList()
         attempts = attempt_list.get()
         self.assertEqual([], attempts)

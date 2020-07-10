@@ -1,0 +1,111 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""
+Tests for base_database.py.
+
+The Datastore emulator must be running for these tests to run.
+In a different terminal, run
+'gcloud beta emulators datastore start --no-store-on-disk'.
+In the terminal where the tests will be run, run
+'$(gcloud beta emulators datastore env-init)' and proceed to run the tests.
+
+See https://cloud.google.com/datastore/docs/tools/datastore-emulator.
+"""
+
+import unittest
+
+from google.auth import credentials
+from google.cloud import datastore
+
+from app import utils
+from app.service import base_database
+
+
+class BaseDatabaseTest(unittest.TestCase):
+    """Tests for BaseDatabase."""
+
+    def setUp(self):
+        """Test setup that runs before every test."""
+        self.client = utils.create_datastore_client(
+            project=utils.get_id(),
+            credentials=credentials.AnonymousCredentials())
+        self.id_field = 'entity_id'
+        self.database = base_database.BaseDatabase(
+            'kind', self.client, self.id_field)
+
+    def test_make_new(self):
+        """Tests that get_by_id returns a new import attempt when
+        make_new is True."""
+        entity_id = 'does-not-exist'
+        new_entity = self.database.get_by_id(entity_id, True)
+        self.assertIn('entity_id', new_entity)
+        self.assertNotEqual(entity_id, new_entity[self.id_field])
+        self.assertEqual(1, len(new_entity))
+
+    def test_save_then_get(self):
+        """Tests that a new entity can be saved and then retrieved."""
+        entity = self.database.get_by_id(make_new=True)
+        entity['foo'] = 'bar'
+        self.database.save(entity)
+        self.assertIn(self.id_field, entity)
+        self.assertEqual('bar', entity['foo'])
+        self.assertEqual(2, len(entity))
+
+    def test_save_partial_key(self):
+        """Tests that attempting to save an entity with a partial key throws
+        an exeception."""
+        key = datastore.Key('namespace', project='project')
+        entity = datastore.Entity(key)
+        self.assertRaises(ValueError, self.database.save, entity)
+
+    def test_filter(self):
+        """Tests that filtering by fields works."""
+        entity_0 = self.database.get_by_id(make_new=True)
+        entity_1 = self.database.get_by_id(make_new=True)
+        entity_2 = self.database.get_by_id(make_new=True)
+        entity_3 = self.database.get_by_id(make_new=True)
+
+        entity_0.update({
+            'import_name': 'name',
+            'provenance_url': 'google.com',
+            'pr_number': 0
+        })
+        entity_1.update({
+            'attempt_id': '1',
+            'import_name': 'name',
+            'provenance_url': 'google.com',
+            'pr_number': 1
+        })
+        entity_2.update({
+            'attempt_id': '2',
+            'import_name': 'name',
+            'provenance_url': 'apple.com',
+            'pr_number': 1
+        })
+        entity_3.update({
+            'attempt_id': '3',
+            'import_name': 'name',
+            'pr_number': 2
+        })
+        entities = [entity_0, entity_1, entity_2, entity_3]
+        for entity in entities:
+            self.database.save(entity)
+
+        filters = {
+            'import_name': 'name',
+            'pr_number': 1
+        }
+        expected = [entity_1, entity_2]
+        self.assertEqual(expected, self.database.filter(filters))

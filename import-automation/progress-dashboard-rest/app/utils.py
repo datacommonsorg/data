@@ -82,15 +82,22 @@ def create_storage_bucket(project=configs.PROJECT_ID,
 
 
 def create_datastore_client(project=configs.PROJECT_ID,
-                            namespace=configs.DASHBOARD_NAMESPACE):
+                            namespace=configs.DASHBOARD_NAMESPACE,
+                            credentials=None):
     """
     Args:
         project: ID of the Google Cloud project as a string.
         namespace: Namespace in which the import attempts will be stored
             as a string.
+        credentials: Credentials to authenticate with Datastore
     """
-    return datastore.Client(project=project, namespace=namespace)
+    return datastore.Client(
+        project=project, namespace=namespace, credentials=credentials)
 
 
 def get_id():
     return uuid.uuid4().hex
+
+
+def list_to_str(a_list):
+    return ', '.join(a_list)

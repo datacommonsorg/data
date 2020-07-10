@@ -18,6 +18,9 @@ storage.
 """
 
 from app.service import base_database
+from app.model import import_attempt_model
+
+_MODEL = import_attempt_model.ImportAttemptModel
 
 
 class ImportAttemptDatabase(base_database.BaseDatabase):
@@ -33,7 +36,4 @@ class ImportAttemptDatabase(base_database.BaseDatabase):
 
         See BaseDatabase.
         """
-        super().__init__(ImportAttemptDatabase.kind, client)
-
-    def save(self, entity, id_field='attempt_id'):
-        return super().save(entity, id_field)
+        super().__init__(ImportAttemptDatabase.kind, client, _MODEL.attempt_id)
