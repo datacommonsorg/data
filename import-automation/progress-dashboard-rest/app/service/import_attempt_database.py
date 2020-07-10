@@ -17,86 +17,23 @@ Database service for storing import attempts using Google Cloud Datastore for
 storage.
 """
 
-from google.cloud import datastore
+from app.service import base_database
+from app.model import import_attempt_model
 
-from app import configs
+_MODEL = import_attempt_model.ImportAttemptModel
 
 
-class ImportAttemptDatabase:
+class ImportAttemptDatabase(base_database.BaseDatabase):
     """Database service for storing import attempts using Google Cloud Datastore
     for storage.
 
-    The datastore Client will attempt to infer credentials based on
-    host environment. See
-    https://cloud.google.com/docs/authentication/production#finding_credentials_automatically.
-
-    Attributes:
-        client: A datastore Client to communicate with Datastore
+    See BaseDatabase.
     """
     kind = 'import-attempt'
 
-    def __init__(self, project=configs.PROJECT_ID,
-                 namespace=configs.DASHBOARD_NAMESPACE):
+    def __init__(self, client=None):
         """Constructs an ImportAttemptDatabase.
 
-        Args:
-            project: ID of the Google Cloud project as a string.
-            namespace: namespace in which the import attempts will be stored
-                as a string.
+        See BaseDatabase.
         """
-        self.client = datastore.Client(project=project, namespace=namespace)
-
-    def get_by_id(self, attempt_id, make_new=False):
-        """Retrieves an import attempt from Datastore given its attempt_id.
-
-        Args:
-            attempt_id: ID of the attempt as a string.
-            make_new: Whether to return a new attempt if the attempt_id does
-                not exist as a boolean.
-
-        Returns:
-            The import attempt with the attempt_id as a datastore Entity. None,
-            if the attempt_id does not exist and make_new is False.
-        """
-        key = self._get_key(attempt_id)
-        import_attempt = self.client.get(key)
-        if make_new and not import_attempt:
-            return datastore.Entity(key, exclude_from_indexes=('logs',))
-        return import_attempt
-
-    def filter(self, kv_dict):
-        """Retrieves a list of import attempts based on some criteria.
-
-        Only equality is supported. For example,
-        filter(kv_dict = {'import_name': 'cpi'}) retrieves all attempts whose
-        import_name is 'cpi'.
-
-        Args:
-            kv_dict: Key-value mappings used for filtering as a dict.
-
-        Returns:
-            A list of import attempts each as a datastore Entity
-            that pass the filter.
-        """
-        query = self.client.query(kind=ImportAttemptDatabase.kind)
-        for key, value in kv_dict.items():
-            query.add_filter(key, '=', value)
-        return list(query.fetch())
-
-    def _get_key(self, attempt_id):
-        """Creates a datastore Key for an import attempt that
-        has the attempt_id.
-
-        Args:
-            attempt_id: ID of the attempt as a string
-
-        Returns:
-            A datastore Key composed of the import attempt kind and the
-            attempt_id.
-        """
-        return self.client.key(ImportAttemptDatabase.kind, attempt_id)
-
-    def save(self, import_attempt):
-        """Saves the import attempt as a datastore Entity to Datastore."""
-        self.client.put(import_attempt)
-        return import_attempt
+        super().__init__(ImportAttemptDatabase.kind, client, _MODEL.attempt_id)
