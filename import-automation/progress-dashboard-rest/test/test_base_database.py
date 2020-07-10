@@ -15,48 +15,54 @@
 """
 Tests for base_database.py.
 
-The Datastore emulator must be running for these tests to run.
-In a different terminal, run
-'gcloud beta emulators datastore start --no-store-on-disk'.
-In the terminal where the tests will be run, run
-'$(gcloud beta emulators datastore env-init)' and proceed to run the tests.
+The Datastore emulator must be installed. See
+https://cloud.google.com/datastore/docs/tools/datastore-emulator#before_you_begin
+for requirements.
 
-See https://cloud.google.com/datastore/docs/tools/datastore-emulator.
+TODO(intrepiditee): decide later whether test filenames start with
+test_ or end with _test or use a pattern that supports both.
 """
 
 import unittest
+from unittest import mock
 
-from google.auth import credentials
 from google.cloud import datastore
 
-from app import utils
 from app.service import base_database
+from test import utils
 
 
 class BaseDatabaseTest(unittest.TestCase):
     """Tests for BaseDatabase."""
 
+    @classmethod
+    def setUpClass(cls):
+        cls.emulator = utils.start_emulator()
+
+    @classmethod
+    def tearDownClass(cls):
+        utils.terminate_emulator(cls.emulator)
+
+    @mock.patch('app.utils.create_datastore_client',
+                utils.create_test_datastore_client)
     def setUp(self):
         """Test setup that runs before every test."""
-        self.client = utils.create_datastore_client(
-            project=utils.get_id(),
-            credentials=credentials.AnonymousCredentials())
         self.id_field = 'entity_id'
         self.database = base_database.BaseDatabase(
-            'kind', self.client, self.id_field)
+            kind='kind', id_field=self.id_field)
 
     def test_make_new(self):
-        """Tests that get_by_id returns a new import attempt when
+        """Tests that get returns a new import attempt when
         make_new is True."""
         entity_id = 'does-not-exist'
-        new_entity = self.database.get_by_id(entity_id, True)
+        new_entity = self.database.get(entity_id, True)
         self.assertIn('entity_id', new_entity)
         self.assertNotEqual(entity_id, new_entity[self.id_field])
         self.assertEqual(1, len(new_entity))
 
     def test_save_then_get(self):
         """Tests that a new entity can be saved and then retrieved."""
-        entity = self.database.get_by_id(make_new=True)
+        entity = self.database.get(make_new=True)
         entity['foo'] = 'bar'
         self.database.save(entity)
         self.assertIn(self.id_field, entity)
@@ -72,10 +78,10 @@ class BaseDatabaseTest(unittest.TestCase):
 
     def test_filter(self):
         """Tests that filtering by fields works."""
-        entity_0 = self.database.get_by_id(make_new=True)
-        entity_1 = self.database.get_by_id(make_new=True)
-        entity_2 = self.database.get_by_id(make_new=True)
-        entity_3 = self.database.get_by_id(make_new=True)
+        entity_0 = self.database.get(make_new=True)
+        entity_1 = self.database.get(make_new=True)
+        entity_2 = self.database.get(make_new=True)
+        entity_3 = self.database.get(make_new=True)
 
         entity_0.update({
             'import_name': 'name',
@@ -107,5 +113,8 @@ class BaseDatabaseTest(unittest.TestCase):
             'import_name': 'name',
             'pr_number': 1
         }
-        expected = [entity_1, entity_2]
-        self.assertEqual(expected, self.database.filter(filters))
+
+        retrieved = self.database.filter(filters)
+        self.assertIn(entity_1, retrieved)
+        self.assertIn(entity_2, retrieved)
+        self.assertEqual(2, len(retrieved))

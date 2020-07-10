@@ -26,15 +26,15 @@ class BaseDatabase:
     """Base class for a Database service that stores some kind of entities using
     Google Cloud Datastore for storage.
 
-    New Entities must be created using get_by_id(make_new=True).
+    New datastore Entity objects must be created using get(make_new=True).
 
     The datastore Client will attempt to infer credentials based on
     host environment. See
     https://cloud.google.com/docs/authentication/production#finding_credentials_automatically.
 
     Attributes:
-        kind: Kind of entities to store
-        client: datastore Client to communicate with Datastore
+        kind: Kind of entities to store as a string
+        client: datastore Client object to communicate with Datastore
     """
     def __init__(self, kind, client=None, id_field=None):
         """Constructs an BaseDatabase.
@@ -53,7 +53,7 @@ class BaseDatabase:
         self.client = client
         self.id_field = id_field
 
-    def get_by_id(self, entity_id=None, make_new=False):
+    def get(self, entity_id=None, make_new=False):
         """Retrieves an entity from Datastore given its entity_id.
 
         Args:
@@ -90,7 +90,8 @@ class BaseDatabase:
             entity_id: ID of the entity as a string.
 
         Returns:
-            A datastore Key composed of the entity kind and the entity_id.
+            A datastore Key object composed of the entity kind and
+            the entity_id.
         """
         if entity_id:
             return self.client.key(self.kind, entity_id)
