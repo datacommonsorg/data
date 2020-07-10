@@ -78,7 +78,7 @@ class SystemRunByIDTest(unittest.TestCase):
                              {'run_id': 'not-allowed'},
                              {'import_attempts': 'not-allowed'}))
     def test_patch_run_id_not_allowed(self, _):
-        """Tests that patching run_id fails and
+        """Tests that patching run_id and import_attempts fails and
         returns FORBIDDEN."""
         run = self.list_resource.post()
         run_id = run[_MODEL.run_id]
