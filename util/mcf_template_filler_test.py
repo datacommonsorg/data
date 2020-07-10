@@ -11,12 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for util.mcf_template_filler."""
 
-import mcf_template_filler
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
+
+from __future__ import absolute_import
 import unittest
 
+from util import mcf_template_filler
 
 POP_TEMPLATE = """
 Node: Pop_payroll_est_{geo_id}_{naics_code}_{operation_type}_{tax_status}
@@ -56,7 +60,7 @@ measuredValue: {mval}
 class MCFTemplateFillerTest(unittest.TestCase):
 
   def test_example_usage(self):
-    example_template = '''
+    example_template = """
 Node: People_in_geoId_{geo_id}_{race}_{gender}_{random_field}
 typeOf: schema:StatisticalPopulation
 populationType: schema:Person
@@ -64,7 +68,7 @@ location: geoId/{geo_id}
 race: dcs:{race}
 gender: dcs:{gender}
 randomOptionalProperty: {random_field}
-'''
+"""
 
     templater = mcf_template_filler.Filler(
         example_template, required_vars=['geo_id'])
@@ -203,6 +207,7 @@ location: dcid:badPlace
 """
     with self.assertRaises(ValueError):
       mcf_template_filler.Filler(POP_TEMPLATE + bad_node)
+
 
 if __name__ == '__main__':
   unittest.main()
