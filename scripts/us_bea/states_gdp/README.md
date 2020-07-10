@@ -11,17 +11,17 @@ Author: fpernice-google
 
 ### Download URL
 
-ZIP file is available for download from [https://www.bea.gov/data/gdp/gdp-state](https://www.bea.gov/data/gdp/gdp-state).
+ZIP file is available for download from https://www.bea.gov/data/gdp/gdp-state].``
 
 ### Overview
 
 > Gross Domestic Product (GDP) measures the overall level of economic activity in a country or region. The US Department of Commerce’s Bureau of Economic Analysis (BEA) publishes various forms of economic data, including GDP, consumer spending, income and saving, prices, inflation, and employment. Specifically on GDP, it publishes data at the national, state, industry and county levels, among others. In this import, we focus on overall US state GDP data, as well as per industry per US state GDP.
 
-> Data Format: All considered data is measured in either 2012 chained US Dollars or current US Dollars. The former means that the data is inflation-adjusted to 2012 money, by using the inflation rate measured by the chain-weighted CPI (i.e. taking into account product substitutions). The latter simply means nominal GDP. In both cases, during the cleaning process, this data gets converted from millions of USD to USD (i.e. by multiplying by one million).
+> Data Format: All considered data is measured in either 2012 chained US dollars or current US dollars. The former means that the data is inflation-adjusted to 2012 money, by using the inflation rate measured by the chain-weighted CPI (i.e., taking into account product substitutions). The latter simply means nominal GDP. In both cases, during the cleaning process, this data gets converted from millions of USD to USD (i.e., by multiplying by one million).
 
 This dataset is broken up into 2 major families of variables:
 1. US state GDP: Quarterly GDP per US state.
-2. US state industry GDP: Quarterly GDP per industry in each US State.
+2. US state industry GDP: Quarterly GDP per industry in each US state.
 
 US state GDP is further broken down into:
 1. Chained 2012 USD: GDP measured in chained 2012 USD.
@@ -55,12 +55,12 @@ US state industry GDP is further broken down into:
 
 - The only way of downloading the desired data from the BEA website (linked above) is by downloading relatively large Zip files. These Zip files contain lots of GDP data (e.g. GDP by industry, county, etc.), distributed across many different CSV files. In this import, we are interested in only one of these CSV files, which specifically contains quarterly GDP data per US state. Thus, in the import_data.py script outlined below, we download the entire Zip file, and pull out the single CSV file that is relevant to us.
 
-- In the case of per industry data, some industries in some states are so small that the data had to he excluded from the database for privacy reasons. In the raw data, these datapoints are marked as "(D)" for "Disclosure Avoidance," and are cleaned out during data processing.=
+- In the case of per industry data, some industries in some states are so small that the data had to he excluded from the database for privacy reasons. In the raw data, these datapoints are marked as "(D)" for "Disclosure Avoidance" and are removed during data processing.
 
 ### Dataset Documentation and Relevant Links
 
-- Documentation: [https://www.bea.gov/resources/methodologies/gdp-by-state](https://www.bea.gov/resources/methodologies/gdp-by-state).
-- Data Visualization UI: [https://apps.bea.gov/itable/iTable.cfm?ReqID=70&step=1#reqid=70&step=1&isuri=1](https://apps.bea.gov/itable/iTable.cfm?ReqID=70&step=1#reqid=70&step=1&isuri=1).
+- Documentation: https://www.bea.gov/resources/methodologies/gdp-by-state
+- Data Visualization UI: https://apps.bea.gov/itable/iTable.cfm?ReqID=70&step=1#reqid=70&step=1&isuri=1.
 
 #### Cleaned Data
 - [states_gdp.csv](states_gdp.csv): US state GDP data.
@@ -75,8 +75,10 @@ US state industry GDP is further broken down into:
 - [states_gdp_industry_statvars.mcf](states_gdp_industry_statvars.mcf): Per US state per industry GDP MCF.
 
 #### Scripts
-- [states_gdp_statvars.mcf](states_gdp_statvars.mcf): US state GDP MCF.
-- [states_gdp_industry_statvars.mcf](states_gdp_industry_statvars.mcf): Per US state per industry GDP MCF.
+- [import_data.py](import_data.py): US state GDP import script.
+- [import_industry_data_and_gen_mcf.py](import_industry_data_and_gen_mcf.py): US state per industry GDP import script. This script also generates the data schema MCF for the industry nodes at [states_industry_gdp.tmcf](states_industry_gdp.tmcf).
+- [test_import.py](test_import.py): Runs tests on both state GDP and state per industry GDP imports.
+- [validate_import.py](validate_import.py): Runs validates the import of state GDP data (not industry GDP data).
 
 ### Import Procedure
 

@@ -49,7 +49,7 @@ class StateGDPDataLoader:
                   'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
                   'West Virginia', 'Wisconsin', 'Wyoming']
     _ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
-    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
+    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2020.csv"
     _QUARTER_MONTH_MAP = {
         'Q1':'03',
         'Q2':'06',
@@ -62,9 +62,18 @@ class StateGDPDataLoader:
         self.raw_df = None
         self.clean_df = None
 
-    def download_data(self, file=None, zip_link=None):
+    def download_data(self, zip_link=None, file=None):
         """Downloads ZIP file, extracts the desired CSV, and puts it into a data
         frame. Stores that data frame in the instance raw_df variable.
+
+        Args:
+            zip_link: Link to the raw data to be downloaded in ZIP format. If
+            None or unspecified, this value gets overriden by the class constant
+            _ZIP_LINK.
+            file: File within the specified ZIP file that should be downloaded
+            and stored. If None or unspecified, this value gets overriden by the
+            class constant _STATE_QUARTERLY_GDP_FILE.
+
         """
         if zip_link is None:
             zip_link = self._ZIP_LINK

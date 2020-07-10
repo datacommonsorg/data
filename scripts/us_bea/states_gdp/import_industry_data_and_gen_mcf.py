@@ -97,11 +97,10 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         """Converts value to float type, and filters out missing values. Missing
         values are marked by a letter enclosed in parentheses, e.g., "(D)".
         """
-        if not isinstance(val, str):
-            return val
-        if '(' in val or ')' in val:
+        try:
+            return float(val)
+        except ValueError:
             return -1
-        return float(val)
 
     @staticmethod
     def _convert_industry_class(naics_code):
@@ -109,8 +108,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         Commons codes.
         """
         if isinstance(naics_code, str):
-            naics_code = naics_code.replace("-", "_")
-            naics_code = naics_code.replace(",", "&")
+            naics_code = naics_code.replace("-", "_").replace(",", "&")
         return f"dcs:USStateQuarterlyIndustryGDP_NAICS_{naics_code}"
 
     def save_csv(self, filename='states_industry_gdp.csv'):
