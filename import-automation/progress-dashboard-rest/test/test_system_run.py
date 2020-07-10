@@ -28,7 +28,7 @@ _MODEL = system_run_model.SystemRunModel
 
 
 class SystemRunByIDTest(unittest.TestCase):
-    """Tests for SystemRun."""
+    """Tests for SystemRunByID."""
 
     @classmethod
     def setUpClass(cls):
@@ -43,7 +43,7 @@ class SystemRunByIDTest(unittest.TestCase):
     def setUp(self):
         """Creates the endpoints before every test."""
         # Used for querying system runs by run_id
-        self.resource = system_run.SystemRun()
+        self.resource = system_run.SystemRunByID()
         # Used for creating system runs
         self.list_resource = system_run_list.SystemRunList()
         self.list_resource.database.client = self.resource.database.client
@@ -78,7 +78,7 @@ class SystemRunByIDTest(unittest.TestCase):
                              {'run_id': 'not-allowed'},
                              {'import_attempts': 'not-allowed'}))
     def test_patch_run_id_not_allowed(self, _):
-        """Tests that patching run_id and import_attempts fails and
+        """Tests that patching run_id fails and
         returns FORBIDDEN."""
         run = self.list_resource.post()
         run_id = run[_MODEL.run_id]

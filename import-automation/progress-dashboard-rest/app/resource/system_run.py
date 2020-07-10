@@ -65,8 +65,7 @@ def set_system_run_default_values(system_run):
 
 
 class SystemRun(flask_restful.Resource):
-    """API for managing system runs by run_id associated with the endpoint
-    '/system_runs/<int:run_id>'.
+    """Base class for a system run resource.
 
     Attributes:
         client: datastore Client object used to communicate with Datastore
@@ -89,9 +88,17 @@ class SystemRun(flask_restful.Resource):
     utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self):
+        """Constructs a System Run."""
         self.client = utils.create_datastore_client()
         self.database = system_run_database.SystemRunDatabase(self.client)
 
+
+class SystemRunByID(SystemRun):
+    """API for managing system runs by run_id associated with the endpoint
+    '/system_runs/<int:run_id>'.
+
+    See SystemRun.
+    """
     def get(self, run_id):
         """Retrieves a system run by its run_id.
 
@@ -122,7 +129,7 @@ class SystemRun(flask_restful.Resource):
             datastore Entity object. Otherwise, (error message, error code),
             where the error message is a string and the error code is an int.
         """
-        args = SystemRun.parser.parse_args()
+        args = SystemRunByID.parser.parse_args()
         valid, err, code = validation.system_run_valid(args, run_id=run_id)
         if not valid:
             return err, code
