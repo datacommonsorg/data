@@ -18,6 +18,9 @@ storage.
 """
 
 from app.service import base_database
+from app.model import system_run_model
+
+_MODEL = system_run_model.SystemRunModel
 
 
 class SystemRunDatabase(base_database.BaseDatabase):
@@ -33,7 +36,4 @@ class SystemRunDatabase(base_database.BaseDatabase):
 
         See BaseDatabase.
         """
-        super().__init__(SystemRunDatabase.kind, client)
-
-    def save(self, entity, id_field='run_id'):
-        return super().save(entity, id_field)
+        super().__init__(SystemRunDatabase.kind, client, _MODEL.run_id)

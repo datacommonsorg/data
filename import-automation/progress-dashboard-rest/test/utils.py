@@ -7,6 +7,9 @@ from google.auth import credentials
 from google.cloud import datastore
 
 from app import utils
+from app.model import import_attempt_model
+
+_ATTEMPT = import_attempt_model.ImportAttemptModel
 
 PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
 
@@ -28,7 +31,6 @@ def start_emulator():
         prefix = 'export '
         if line.startswith(prefix):
             line = line.strip(prefix)
-            logging.warning(line)
             name, val = line.split('=')
             os.environ[name] = val
     return process
@@ -48,15 +50,3 @@ def create_test_datastore_client():
         project=utils.get_id(),
         namespace='namespace',
         credentials=credentials.AnonymousCredentials())
-
-
-EXAMPLE_ATTEMPT = {
-    'attempt_id': '0',
-    'branch_name': 'branch',
-    'repo_name': 'repo',
-    'import_name': 'name',
-    'time_created': '2020-06-30T04:28:53.717569+00:00',
-    'logs': [],
-    'status': 'created',
-    'pr_number': 0
-}

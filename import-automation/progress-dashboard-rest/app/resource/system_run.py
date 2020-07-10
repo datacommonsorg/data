@@ -40,12 +40,21 @@ class SystemRunStatus(Enum):
 
 SYSTEM_RUN_STATUS = frozenset(status.value for status in SystemRunStatus)
 
-ID_NOT_MATCH_ERROR = 'run_id in path variable does not match run_id ' \
-                     'in request body '
-NOT_FOUND_ERROR = 'run_id not found'
-
 
 def set_system_run_default_values(system_run):
+    """Sets default values for some fields of a system run.
+
+    import_attempts is set to an empty list.
+    status is set to 'created'.
+    time_created is set to the current time.
+    logs is set to an empty list.
+
+    Args:
+        system_run: System run as a dict.
+
+    Returns:
+        The same system run with the fields set, as a dict.
+    """
     system_run.setdefault('import_attempts', [])
     system_run.setdefault('status', SystemRunStatus.CREATED.value)
     system_run.setdefault('time_created', utils.utctime())
@@ -124,34 +133,3 @@ class SystemRunByID(SystemRun):
             return self.database.save(run)
 
 
-class SystemRunList(SystemRun):
-    """API for querying a list of system runs based on some criteria."""
-
-    def __init__(self):
-        self.client = utils.create_datastore_client()
-        self.database = system_run_database.SystemRunDatabase(
-            client=self.client)
-
-
-    def get(self):
-        """Retrieves a list of system runs that pass the filter defined by
-        the key-value mappings in the request body."""
-        args = SystemRun.parser.parse_args()
-        return self.database.filter(args)
-
-    def post(self):
-        args = SystemRun.parser.parse_args()
-        valid, err, code = validation.system_run_valid(args)
-        if not valid:
-            return err, code
-
-        # Only the API can modify these fields
-        args.pop('run_id', None)
-        args.pop('import_attempts', None)
-        args.pop('logs', None)
-        set_system_run_default_values(args)
-
-        with self.client.transaction():
-            run = self.database.get(make_new=True)
-            run.update(args)
-            return self.database.save(run)

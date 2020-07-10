@@ -39,10 +39,10 @@ class ImportAttemptList(import_attempt.ImportAttempt):
     must be 'application/json'.
 
     Attributes:
-        client: datastore Client used to communicate with Datastore
-        attempt_database: ImportAttemptDatabase for querying and storing
+        client: datastore Client object used to communicate with Datastore
+        attempt_database: ImportAttemptDatabase object for querying and storing
             import attempts using the client
-        run_database: SystemRunDatabase for querying system runs
+        run_database: SystemRunDatabase object for querying system runs
             using the client
     """
 
@@ -63,12 +63,13 @@ class ImportAttemptList(import_attempt.ImportAttempt):
         """Creates a new import attempt with the fields provided in the
         request body.
 
-        run_id must be present in the request body.
+        run_id must be present in the request body to link the import attempt
+        to a system run.
 
         Returns:
-            The created import attempt as an Entity with attempt_id set.
-            Otherwise, (error message, error code), where the error message is
-            a string and the error code is an int.
+            The created import attempt as a datastore Entity object with
+            attempt_id set. Otherwise, (error message, error code), where
+            the error message is a string and the error code is an int.
         """
         args = import_attempt.ImportAttempt.parser.parse_args()
         valid, err, code = validation.import_attempt_valid(args)

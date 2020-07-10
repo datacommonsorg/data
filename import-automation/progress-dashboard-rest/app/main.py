@@ -24,6 +24,7 @@ import flask
 import flask_restful
 
 import app.resource.import_attempt_list
+import app.resource.system_run_list
 from app.resource import import_attempt
 from app.resource import progress_log
 from app.resource import progress_log_list
@@ -50,7 +51,7 @@ def create_api(app):
                      '/import_attempts')
     api.add_resource(progress_log.ImportLogByAttemptID,
                      '/import_attempts/<string:attempt_id>/logs')
-    api.add_resource(system_run.SystemRunList,
+    api.add_resource(app.resource.system_run_list.SystemRunList,
                      '/system_runs')
     api.add_resource(system_run.SystemRunByID,
                      '/system_runs/<string:run_id>')
