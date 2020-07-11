@@ -30,8 +30,6 @@ IMPORT_ATTEMPT_DATABASE = 'app.resource.import_attempt' \
                           '.import_attempt_database.ImportAttemptDatabase'
 
 
-@mock.patch(IMPORT_ATTEMPT_DATABASE,
-            import_attempt_database_dict.ImportAttemptDatabaseDict)
 class UCTTest(unittest.TestCase):
     """Tests for utctime function."""
 

@@ -130,12 +130,12 @@ class SystemRunByID(SystemRun):
             where the error message is a string and the error code is an int.
         """
         args = SystemRunByID.parser.parse_args()
-        valid, err, code = validation.system_run_valid(args, run_id=run_id)
-        if not valid:
-            return err, code
         if _MODEL.run_id in args or _MODEL.import_attempts in args:
             return validation.get_patch_forbidden_error(
                 (_MODEL.run_id, _MODEL.import_attempts))
+        valid, err, code = validation.system_run_valid(args, run_id=run_id)
+        if not valid:
+            return err, code
 
         with self.client.transaction():
             run = self.database.get(run_id)

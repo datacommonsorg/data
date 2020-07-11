@@ -107,9 +107,9 @@ class ImportAttemptByID(ImportAttempt):
             attempt_id: ID of the import attempt as a string
 
         Returns:
-            The import attempt with the attempt_id if successful as an Entity.
-            Otherwise, (error message, error code), where the error message is
-            a string and the error code is an int.
+            The import attempt with the attempt_id if successful as a
+            datastore Entity object. Otherwise, (error message, error code),
+            where the error message is a string and the error code is an int.
         """
         import_attempt = self.database.get(attempt_id)
         if not import_attempt:
@@ -126,18 +126,18 @@ class ImportAttemptByID(ImportAttempt):
             attempt_id: ID of the import attempt as a string
 
         Returns:
-            The import attempt with the attempt_id if successful as an Entity.
-            Otherwise, (error message, error code), where the error message is
-            a string and the error code is an int.
+            The import attempt with the attempt_id if successful as a
+            datastore Entity object. Otherwise, (error message, error code),
+            where the error message is a string and the error code is an int.
         """
         args = ImportAttempt.parser.parse_args()
+        if _MODEL.attempt_id in args or _MODEL.run_id in args:
+            return validation.get_patch_forbidden_error(
+                (_MODEL.attempt_id, _MODEL.run_id))
         valid, err, code = validation.import_attempt_valid(
             args, attempt_id=attempt_id)
         if not valid:
             return err, code
-        if _MODEL.attempt_id in args or _MODEL.run_id in args:
-            return validation.get_patch_forbidden_error(
-                (_MODEL.attempt_id, _MODEL.run_id))
 
         with self.client.transaction():
             import_attempt = self.database.get(attempt_id)

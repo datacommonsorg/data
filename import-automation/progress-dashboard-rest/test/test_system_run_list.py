@@ -43,14 +43,13 @@ class SystemRunListTest(unittest.TestCase):
     def setUp(self):
         """Injects several system runs to the database before every test."""
         self.resource = system_run_list.SystemRunList()
-        run_0 = {_MODEL.repo_name: 'dddd', _MODEL.pr_number: 0}
-        run_1 = {_MODEL.repo_name: 'data', _MODEL.pr_number: 1}
-        run_2 = {_MODEL.repo_name: 'data', _MODEL.pr_number: 1}
-        run_3 = {_MODEL.repo_name: 'aaaa', _MODEL.pr_number: 2}
-        returns = [run_0, run_1, run_2, run_3]
-        with mock.patch(utils.PARSE_ARGS) as parse_args:
-            parse_args.side_effect = returns
-            self.runs = [self.resource.post() for _ in returns]
+        runs = [
+            {_MODEL.repo_name: 'dddd', _MODEL.pr_number: 0},
+            {_MODEL.repo_name: 'data', _MODEL.pr_number: 1},
+            {_MODEL.repo_name: 'data', _MODEL.pr_number: 1},
+            {_MODEL.repo_name: 'aaaa', _MODEL.pr_number: 2}
+        ]
+        self.runs = utils.ingest_system_runs(self.resource, runs)
 
     @mock.patch(utils.PARSE_ARGS, lambda self: {})
     def test_get_all(self):

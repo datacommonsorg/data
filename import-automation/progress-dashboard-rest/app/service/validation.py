@@ -5,8 +5,8 @@ from app.resource import import_attempt
 
 
 def import_attempt_valid(attempt, attempt_id=None):
-    if attempt_id and attempt_id != attempt.get('attempt_id'):
-        err, code = get_id_not_match_error('attempt_id', attempt.get('attempt_id'), attempt_id)
+    if attempt_id and attempt_id != attempt.get('attempt_id', attempt_id):
+        err, code = get_id_not_match_error('attempt_id', attempt['attempt_id'], attempt_id)
         return False, err, code
     status = attempt.get('status')
     if status and status not in import_attempt.IMPORT_ATTEMPT_STATUS:

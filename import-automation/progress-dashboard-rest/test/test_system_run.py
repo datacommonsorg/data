@@ -45,17 +45,17 @@ class SystemRunByIDTest(unittest.TestCase):
         # Used for querying system runs by run_id
         self.resource = system_run.SystemRunByID()
         # Used for creating system runs
-        self.list_resource = system_run_list.SystemRunList()
-        self.list_resource.database.client = self.resource.database.client
+        list_resource = system_run_list.SystemRunList()
+        list_resource.database.client = self.resource.database.client
+        runs = [
+            {},
+            {_MODEL.commit_sha: 'commit-sha'}
+        ]
+        self.runs = utils.ingest_system_runs(list_resource, runs)
 
-    @mock.patch(utils.PARSE_ARGS)
-    def test_get(self, parse_args):
+    def test_get(self):
         """Tests that GET returns the correct system run."""
-        runs = [{}, {}, {}]
-        parse_args.side_effects = runs
-        for i in range(len(runs)):
-            runs[i] = self.list_resource.post()
-        for run in runs:
+        for run in self.runs:
             self.assertEqual(run, self.resource.get(run[_MODEL.run_id]))
 
     def test_get_not_exist(self):
@@ -63,25 +63,37 @@ class SystemRunByIDTest(unittest.TestCase):
         _, err = self.resource.get('does-not-exist')
         self.assertEqual(404, err)
 
-    @mock.patch(utils.PARSE_ARGS,
-                side_effect=({'pr_number': 1}, {'pr_number': 9999}))
-    def test_patch(self, _):
-        """Tests that patching a field succeeds."""
-        run = self.list_resource.post()
-        run_id = run[_MODEL.run_id]
-        self.assertEqual(1, self.resource.get(run_id)[_MODEL.pr_number])
+    @mock.patch(utils.PARSE_ARGS, lambda self: {_MODEL.pr_number: 1})
+    def test_patch_creates_field(self):
+        """Tests that PATCHing a field that does not exist creates the field."""
+        run_id = self.runs[0][_MODEL.run_id]
         self.resource.patch(run_id)
-        self.assertEqual(9999, self.resource.get(run_id)[_MODEL.pr_number])
+        self.assertEqual(1, self.resource.get(run_id)[_MODEL.pr_number])
 
-    @mock.patch(utils.PARSE_ARGS,
-                side_effect=({},
-                             {'run_id': 'not-allowed'},
-                             {'import_attempts': 'not-allowed'}))
-    def test_patch_run_id_not_allowed(self, _):
-        """Tests that patching run_id fails and
+    @mock.patch(utils.PARSE_ARGS)
+    def test_patch(self, parse_args):
+        """Tests that PATCHing a field succeeds."""
+        parse_args.side_effect = [
+            {_MODEL.commit_sha: 'patched'},
+            {_MODEL.commit_sha: 'commit_sha'},
+        ]
+        run_id = self.runs[1][_MODEL.run_id]
+        self.resource.patch(run_id)
+        patched = self.resource.get(run_id)
+        self.assertEqual('patched', patched[_MODEL.commit_sha])
+        self.resource.patch(run_id)
+        patched = self.resource.get(run_id)
+        self.assertEqual('commit_sha', patched[_MODEL.commit_sha])
+
+    @mock.patch(utils.PARSE_ARGS)
+    def test_patch_run_id_not_allowed(self, parse_args):
+        """Tests that patching run_id and import_attempts fails and
         returns FORBIDDEN."""
-        run = self.list_resource.post()
-        run_id = run[_MODEL.run_id]
+        parse_args.side_effect = [
+            {'run_id': 'not-allowed'},
+            {'import_attempts': 'not-allowed'}
+        ]
+        run_id = self.runs[0][_MODEL.run_id]
         _, err = self.resource.patch(run_id)
         self.assertEqual(403, err)
         _, err = self.resource.patch(run_id)
