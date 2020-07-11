@@ -13,21 +13,25 @@
 # limitations under the License.
 
 """
-Import attempt resources associated with the endpoints
-'/import/<string:attempt_id>' and '/imports'.
+Import attempt resource associated with the endpoint
+'/import_attempts/<string:attempt_id>'.
 """
 
-from enum import Enum
+import enum
 import http
 
 import flask_restful
 from flask_restful import reqparse
 
-from app.service import import_attempt_database
 from app import utils
+from app.service import import_attempt_database
+from app.service import validation
+from app.model import import_attempt_model
+
+_MODEL = import_attempt_model.ImportAttemptModel
 
 
-class ImportStatus(Enum):
+class ImportAttemptStatus(enum.Enum):
     """Allowed status of an import attempt.
 
     The status of an import attempt can only be one of these.
@@ -37,117 +41,108 @@ class ImportStatus(Enum):
     FAILED = 'failed'
 
 
-IMPORT_STATUS = set(status.value for status in ImportStatus)
+IMPORT_ATTEMPT_STATUS = frozenset(
+    status.value for status in ImportAttemptStatus)
 
-ID_NOT_MATCH_ERROR = 'attempt_id in path variable does not match attempt_id ' \
-                     'in request body '
-NOT_FOUND_ERROR = 'attempt_id not found'
+
+def set_import_attempt_default_values(import_attempt):
+    """Sets default values for some fields of the import attempt and returns it.
+
+    status is set to 'created'.
+    time_created is set to the current time.
+    logs is set to an empty list.
+    """
+    import_attempt.setdefault(_MODEL.status, ImportAttemptStatus.CREATED.value)
+    import_attempt.setdefault(_MODEL.time_created, utils.utctime())
+    import_attempt.setdefault(_MODEL.logs, [])
+    return import_attempt
 
 
 class ImportAttempt(flask_restful.Resource):
     """Base class for an import attempt resource.
 
     Attributes:
-        database: A database service for storing import attempts
+        client: datastore Client object used to communicate with Datastore
+        database: ImportAttemptDatabase object for querying and storing
+            import attempts using the client
     """
     parser = reqparse.RequestParser()
     # The parser looks for these fields in the request body.
     # The Content-Type of the request must be application/json.
     optional_fields = (
-        ('attempt_id',), ('branch_name',), ('repo_name',), ('pr_number', int),
-        ('import_name',), ('provenance_url',), ('provenance_description',),
-        ('email',), ('status',), ('time_created',), ('logs', dict, 'append')
+        (_MODEL.attempt_id, str),
+        (_MODEL.run_id, str),
+        (_MODEL.import_name,),
+        (_MODEL.absolute_import_name,),
+        (_MODEL.provenance_url,),
+        (_MODEL.provenance_description,),
+        (_MODEL.status,),
+        (_MODEL.time_created,),
+        (_MODEL.time_completed,),
+        (_MODEL.logs, str, 'append'),
+        (_MODEL.template_mcf_url,),
+        (_MODEL.node_mcf_url,),
+        (_MODEL.csv_url,)
     )
-    utils.add_optional_fields(parser, optional_fields)
+    utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self):
-        self.database = import_attempt_database.ImportAttemptDatabase()
+        """Constructs an ImportAttempt."""
+        self.client = utils.create_datastore_client()
+        self.database = import_attempt_database.ImportAttemptDatabase(
+            self.client)
 
 
 class ImportAttemptByID(ImportAttempt):
     """API for managing import attempts by attempt_id associated with
-    '/import/<string:attempt_id>'."""
+    '/import/<string:attempt_id>'.
 
-    def put(self, attempt_id):
-        """Overwrites or creates an attempt with the given ID.
-
-        time_created must be in ISO 8601 format with timezone UTC+0, e.g.
-        '2020-06-30T04:28:53.717569+00:00'. If time_created is not specified,
-        the time at which the request is processed will be used.
-
-        status must be one of the allowed status defined by ImportStatus. If
-        status is not specified, 'created' will be used.
-
-        Args:
-            attempt_id: ID string of the attempt
-
-        Returns:
-            The created import attempt if successful as a dict. Otherwise,
-            (error message, error code), where the error message is a string
-            and the error code is an int.
-        """
-        # See ImportAttempt class for what fields the parser looks for.
-        args = ImportAttempt.parser.parse_args()
-        if attempt_id != args.setdefault('attempt_id', attempt_id):
-            return ID_NOT_MATCH_ERROR, http.HTTPStatus.CONFLICT
-        status = args.setdefault('status', ImportStatus.CREATED.value)
-        if status not in IMPORT_STATUS:
-            return ('Import status {} is not allowed'.format(status),
-                    http.HTTPStatus.FORBIDDEN)
-
-        import_attempt = self.database.get_by_id(attempt_id, make_new=True)
-        args.setdefault('logs', [])
-        args.setdefault('time_created', utils.utctime())
-        import_attempt.update(args)
-
-        return self.database.save(import_attempt)
+    See ImportAttempt.
+    """
 
     def get(self, attempt_id):
-        """Retrieves an attempt by its attempt_id.
+        """Retrieves an import attempt by its attempt_id.
 
         Args:
-            attempt_id: ID of the attempt as a string
+            attempt_id: ID of the import attempt as a string
 
         Returns:
-            The import attempt with the ID if successful as a dict. Otherwise,
-            (error message, error code), where the error message is a string
-            and the error code is an int.
+            The import attempt with the attempt_id if successful as a
+            datastore Entity object. Otherwise, (error message, error code),
+            where the error message is a string and the error code is an int.
         """
-        import_attempt = self.database.get_by_id(attempt_id)
+        import_attempt = self.database.get(attempt_id)
         if not import_attempt:
-            return NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
+            return validation.get_not_found_error(_MODEL.attempt_id, attempt_id)
         return import_attempt
 
     def patch(self, attempt_id):
-        """Modifies the value of a field of an existing attempt.
+        """Modifies the value of a field of an existing import attempt.
 
-        The attempt_id of an existing import attempt resource is forbidden
-        to be patched.
+        The attempt_id and run_id of an existing import attempt resource are
+        forbidden to be patched.
 
         Args:
-            attempt_id: ID of theI attempt as a string
+            attempt_id: ID of the import attempt as a string
 
         Returns:
-            The import attempt with the ID if successful as a dict. Otherwise,
-            (error message, error code), where the error message is a string
-            and the error code is an int.
+            The import attempt with the attempt_id if successful as a
+            datastore Entity object. Otherwise, (error message, error code),
+            where the error message is a string and the error code is an int.
         """
         args = ImportAttempt.parser.parse_args()
-        if args.get('attempt_id', attempt_id) != attempt_id:
-            return 'Cannot patch attempt_id', http.HTTPStatus.FORBIDDEN
+        if _MODEL.attempt_id in args or _MODEL.run_id in args:
+            return validation.get_patch_forbidden_error(
+                (_MODEL.attempt_id, _MODEL.run_id))
+        valid, err, code = validation.import_attempt_valid(
+            args, attempt_id=attempt_id)
+        if not valid:
+            return err, code
 
-        import_attempt = self.database.get_by_id(attempt_id)
-        if not import_attempt:
-            return NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
-        import_attempt.update(args)
-        return self.database.save(import_attempt)
-
-
-class ImportAttemptList(ImportAttempt):
-    """API for querying a list of import attempts based on some criteria."""
-
-    def get(self):
-        """Retrieves a list of import attempts that pass the filter defined by
-        the key-value mappings in the request body."""
-        args = ImportAttempt.parser.parse_args()
-        return self.database.filter(args)
+        with self.client.transaction():
+            import_attempt = self.database.get(attempt_id)
+            if not import_attempt:
+                return validation.get_not_found_error(
+                    _MODEL.attempt_id, attempt_id)
+            import_attempt.update(args)
+            return self.database.save(import_attempt)
