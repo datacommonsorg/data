@@ -88,7 +88,7 @@ class SystemRun(flask_restful.Resource):
     utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self):
-        """Constructs a System Run."""
+        """Constructs a SystemRun."""
         self.client = utils.create_datastore_client()
         self.database = system_run_database.SystemRunDatabase(self.client)
 

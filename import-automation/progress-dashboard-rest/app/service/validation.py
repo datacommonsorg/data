@@ -6,11 +6,10 @@ from app.resource import import_attempt
 
 def import_attempt_valid(attempt, attempt_id=None):
     if attempt_id and attempt_id != attempt.get('attempt_id'):
-        return (False,
-                import_attempt.ID_NOT_MATCH_ERROR,
-                http.HTTPStatus.CONFLICT)
+        err, code = get_id_not_match_error('attempt_id', attempt.get('attempt_id'), attempt_id)
+        return False, err, code
     status = attempt.get('status')
-    if status and status not in attempt.IMPORT_ATTEMPT_STATUS:
+    if status and status not in import_attempt.IMPORT_ATTEMPT_STATUS:
         return (False,
                 f'Import status {status} is not allowed',
                 http.HTTPStatus.FORBIDDEN)
@@ -30,7 +29,7 @@ def required_fields_present(fields, entity):
     if absent:
         return (False,
                 f'missing {utils.list_to_str(absent)} in the request body',
-                http.HTTPStatus.BAD_REQUEST)
+                http.HTTPStatus.FORBIDDEN)
     return True, None, None
 
 

@@ -59,7 +59,13 @@ def set_import_attempt_default_values(import_attempt):
 
 
 class ImportAttempt(flask_restful.Resource):
-    """Base class for an import attempt resource."""
+    """Base class for an import attempt resource.
+
+    Attributes:
+        client: datastore Client object used to communicate with Datastore
+        database: ImportAttemptDatabase object for querying and storing
+            import attempts using the client
+    """
     parser = reqparse.RequestParser()
     # The parser looks for these fields in the request body.
     # The Content-Type of the request must be application/json.
@@ -80,21 +86,19 @@ class ImportAttempt(flask_restful.Resource):
     )
     utils.add_fields(parser, optional_fields, required=False)
 
+    def __init__(self):
+        """Constructs an ImportAttempt."""
+        self.client = utils.create_datastore_client()
+        self.database = import_attempt_database.ImportAttemptDatabase(
+            self.client)
+
 
 class ImportAttemptByID(ImportAttempt):
     """API for managing import attempts by attempt_id associated with
     '/import/<string:attempt_id>'.
 
-    Attributes:
-        client: datastore Client used to communicate with Datastore
-        database: ImportAttemptDatabase for querying and storing
-            import attempts using the client
+    See ImportAttempt.
     """
-
-    def __init__(self):
-        self.client = utils.create_datastore_client()
-        self.database = import_attempt_database.ImportAttemptDatabase(
-            self.client)
 
     def get(self, attempt_id):
         """Retrieves an import attempt by its attempt_id.

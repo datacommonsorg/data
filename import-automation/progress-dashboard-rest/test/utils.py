@@ -48,5 +48,5 @@ def terminate_emulator(process):
 def create_test_datastore_client():
     return datastore.Client(
         project=utils.get_id(),
-        namespace='namespace',
+        namespace=utils.get_id(),
         credentials=credentials.AnonymousCredentials())

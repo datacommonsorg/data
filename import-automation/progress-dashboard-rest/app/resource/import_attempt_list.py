@@ -16,12 +16,7 @@
 Import attempt list resource associated with the endpoint '/import_attempts'.
 """
 
-import http
-
-
-from app import utils
 from app.resource import import_attempt
-from app.service import import_attempt_database
 from app.service import system_run_database
 from app.service import validation
 from app.model import import_attempt_model
@@ -39,17 +34,13 @@ class ImportAttemptList(import_attempt.ImportAttempt):
     must be 'application/json'.
 
     Attributes:
-        client: datastore Client object used to communicate with Datastore
-        attempt_database: ImportAttemptDatabase object for querying and storing
-            import attempts using the client
+        See ImportAttempt.
         run_database: SystemRunDatabase object for querying system runs
-            using the client
+            using the client.
     """
 
     def __init__(self):
-        self.client = utils.create_datastore_client()
-        self.attempt_database = import_attempt_database.ImportAttemptDatabase(
-            self.client)
+        super().__init__()
         self.run_database = system_run_database.SystemRunDatabase(
             self.client)
 
@@ -57,7 +48,7 @@ class ImportAttemptList(import_attempt.ImportAttempt):
         """Retrieves a list of import attempts that pass the filter defined by
         the key-value mappings in the request body."""
         args = import_attempt.ImportAttempt.parser.parse_args()
-        return self.attempt_database.filter(args)
+        return self.database.filter(args)
 
     def post(self):
         """Creates a new import attempt with the fields provided in the
@@ -85,28 +76,20 @@ class ImportAttemptList(import_attempt.ImportAttempt):
         args.pop(_ATTEMPT.logs, None)
         import_attempt.set_import_attempt_default_values(args)
 
-        # The system run pointed to by this import attempt needs to
-        # point back at the import attempt.
-        transaction = self.client.transaction()
-        transaction.begin()
-        run_id = args[_ATTEMPT.run_id]
-        run = self.run_database.get(run_id)
-        if not run:
-            transaction.rollback()
-            return validation.get_not_found_error(_ATTEMPT.run_id, run_id)
-        attempt = self.attempt_database.get(make_new=True)
-        attempt.update(args)
-        self.attempt_database.save(attempt)
-        attempts = run.setdefault(_RUN.import_attempts, [])
-        if attempt.key.name not in attempts:
+        with self.client.transaction():
+            # The system run pointed to by this import attempt needs to
+            # point back at the import attempt.
+            run_id = args[_ATTEMPT.run_id]
+            run = self.run_database.get(run_id)
+            if not run:
+                return validation.get_not_found_error(_ATTEMPT.run_id, run_id)
+
+            attempt = self.database.get(make_new=True)
+            attempt.update(args)
+            self.database.save(attempt)
+
+            attempts = run.setdefault(_RUN.import_attempts, [])
             attempts.append(attempt.key.name)
             self.run_database.save(run)
-        else:
-            transaction.rollback()
-            return ('The system run pointed to by the import attempt already '
-                    'points to the import attempt. This is a sign of creating '
-                    'duplicated import attempts.',
-                    http.HTTPStatus.BAD_REQUEST)
 
-        transaction.commit()
-        return attempt
+            return attempt
