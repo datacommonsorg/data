@@ -67,7 +67,6 @@ class ProgressLogByRunID(flask_restful.Resource):
             client=self.client)
         self.log_database = progress_log_database.ProgressLogDatabase(
             client=self.client)
-        self.bucket = utils.create_storage_bucket()
 
     def get(self, run_id):
         run = self.run_database.get(run_id)
@@ -88,10 +87,9 @@ class ImportLogByAttemptID(flask_restful.Resource):
     def __init__(self):
         self.client = utils.create_datastore_client()
         self.attempt_database = import_attempt_database.ImportAttemptDatabase(
-            client=self.client)
+            self.client)
         self.log_database = progress_log_database.ProgressLogDatabase(
-            client=self.client)
-        self.bucket = utils.create_storage_bucket()
+            self.client)
 
     def get(self, attempt_id):
         """Queries the logs of an attempt.
@@ -107,4 +105,4 @@ class ImportLogByAttemptID(flask_restful.Resource):
         if not attempt:
             return import_attempt.NOT_FOUND_ERROR, http.HTTPStatus.NOT_FOUND
         log_ids = attempt.get('logs', [])
-        return self.log_database.load_logs(log_ids, self.bucket)
+        return self.log_database.load_logs(log_ids)

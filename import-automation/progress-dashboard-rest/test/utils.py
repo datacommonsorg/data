@@ -5,6 +5,7 @@ from unittest import mock
 import psutil
 from google.auth import credentials
 from google.cloud import datastore
+from google.cloud import exceptions
 
 from app import utils
 from app.model import import_attempt_model
@@ -14,6 +15,22 @@ _ATTEMPT = import_attempt_model.ImportAttemptModel
 _RUN = system_run_model.SystemRunModel()
 
 PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
+
+
+class LogMessageManagerMock:
+    def __init__(self):
+        self.data = {}
+
+    def load_message(self, log_id):
+        message = self.data.get(log_id)
+        if not message:
+            raise exceptions.NotFound(
+                f'message of log {log_id} has never been saved.')
+        return self.data[log_id]
+
+    def save_message(self, message, log_id):
+        self.data[log_id] = message
+        return log_id
 
 
 def start_emulator():
