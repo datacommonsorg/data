@@ -13,14 +13,15 @@
 # limitations under the License.
 
 """
-Storage service for storing log messages in a Google Cloud Storage bucket.
+Storage service for storing progress log messages in
+a Google Cloud Storage bucket.
 """
 
 from app import utils
 
 
 class LogMessageManager:
-    """Storage service for storing log messages in a
+    """Storage service for storing progress log messages in a
     Google Cloud Storage bucket.
 
     Attributes:

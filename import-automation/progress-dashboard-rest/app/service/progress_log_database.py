@@ -13,8 +13,9 @@
 # limitations under the License.
 
 """
-Database service for storing logs using Google Cloud Datastore for storage.
-Log messages are optionally stored in a Google Cloud Storage bucket.
+Database service for storing progress logs using Google Cloud Datastore
+for storage. Log messages are optionally stored in a Google Cloud Storage
+bucket using LogMessageManager.
 """
 
 from app.service import base_database
@@ -22,9 +23,9 @@ from app.service import log_message_manager
 
 
 class ProgressLogDatabase(base_database.BaseDatabase):
-    """Database service for storing logs using Google Cloud Datastore
+    """Database service for storing progress logs using Google Cloud Datastore
     for storage. Log messages are optionally stored in a Google Cloud Storage
-    bucket.
+    bucket using LogMessageManager.
 
     Attributes:
         See BaseDatabase.
