@@ -25,6 +25,7 @@ from test import utils
 from app.model import progress_log_model
 from app.service import progress_log_database
 
+
 _MODEL = progress_log_model.ProgressLogModel
 
 
@@ -87,3 +88,16 @@ class ProgressLogDatabaseTest(unittest.TestCase):
             self.assertRaises(
                 exceptions.NotFound,
                 self.database.get, entity_id=log_id, load_content=True)
+
+    def test_load_logs(self):
+        """Tests that load_logs correctly loads log messages and throws
+        an exception when the messages have not been saved."""
+        loaded = self.database.load_logs(
+            [log[_MODEL.log_id] for log in self.logs_save_content])
+        messages = [log[_MODEL.message] for log in loaded]
+        self.assertEqual(['first', 'second'], messages)
+
+        self.assertRaises(
+            exceptions.NotFound,
+            self.database.load_logs,
+            [log[_MODEL.log_id] for log in self.logs_not_save_content])
