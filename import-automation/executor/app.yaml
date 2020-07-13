@@ -3,4 +3,7 @@ entrypoint: gunicorn --timeout 600 -b :$PORT app.main:app
 env_variables:
     EXECUTOR_PRODUCTION: "True"
     TMPDIR: "/tmp"
-instance_class: F2
+basic_scaling:
+  max_instances: 1
+  idle_timeout: 10m
+instance_class: B4_1G

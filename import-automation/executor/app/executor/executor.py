@@ -151,22 +151,23 @@ def import_one(dir_path, import_spec, run_id, dashboard):
         cleaned_csv = import_input.get('cleaned_csv')
         node_mcf = import_input.get('node_mcf')
 
+        time = utils.utctime()
         if template_mcf:
             with open(template_mcf, 'r') as f:
                 dashboard.info(f'Generated template MCF: {f.readline()}',
                                attempt_id=attempt_id)
-            gcs_io.upload_file(template_mcf, f'{utils.utctime()}/{dir_path}:{import_name}/{os.path.basename(template_mcf)}', configs.BUCKET_NAME)
+            gcs_io.upload_file(template_mcf, f'{time}/{dir_path}:{import_name}/{os.path.basename(template_mcf)}', configs.BUCKET_NAME)
 
         if cleaned_csv:
             with open(cleaned_csv, 'r') as f:
                 dashboard.info(f'Generated cleaned CSV: {f.readline()}',
                                attempt_id=attempt_id)
-            gcs_io.upload_file(cleaned_csv, f'{utils.utctime()}/{dir_path}:{import_name}/{os.path.basename(cleaned_csv)}', configs.BUCKET_NAME)
+            gcs_io.upload_file(cleaned_csv, f'{time}/{dir_path}:{import_name}/{os.path.basename(cleaned_csv)}', configs.BUCKET_NAME)
 
         if node_mcf:
             with open(node_mcf, 'r') as f:
                 dashboard.info(f'Generated node MCF: {f.readline()}',
                                attempt_id=attempt_id)
-            gcs_io.upload_file(node_mcf, f'{utils.utctime()}/{dir_path}:{import_name}/{os.path.basename(node_mcf)}', configs.BUCKET_NAME)
+            gcs_io.upload_file(node_mcf, f'{time}/{dir_path}:{import_name}/{os.path.basename(node_mcf)}', configs.BUCKET_NAME)
 
     os.chdir(cwd)
