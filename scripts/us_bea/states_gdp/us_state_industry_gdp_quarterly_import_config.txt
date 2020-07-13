@@ -3,7 +3,7 @@ import: {
   provenance_url: "https://www.bea.gov/data/gdp/gdp-state"
   provenance_description: "Quarterly data on GDP at a state level per industry in the United States from the US Bureau of Economic Analysis"
   # Path to the resolved MCF. Can be a repeated field.
-  mcf_url: "gs://resolved_mcf/external_tables/industryGDPFinal4/nodes.mcf-00000-of-00001"
+  mcf_url: "gs://resolved_mcf/external_tables/industryGDPFinal5/nodes.mcf-00000-of-00001"
   # First date of imported data.
   start_date: "2005-03-01"
   # Last date of imported data.
