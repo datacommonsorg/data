@@ -41,5 +41,11 @@ def scheduled_updates():
 
     return executor.execute_import_on_update(task_info['absolute_import_name'])
 
+
+@app.route('/_ah/start')
+def start():
+    return ''
+
+
 def main():
     app.run(host='127.0.0.1', port=8080, debug=True)
