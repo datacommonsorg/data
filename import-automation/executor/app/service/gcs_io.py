@@ -3,7 +3,7 @@ import os
 from google.cloud import storage
 
 
-class GCSBucketIO():
+class GCSBucketIO:
     def __init__(self, bucket_name):
         self.bucket_name = bucket_name
         self.client = storage.Client()
@@ -22,8 +22,6 @@ class GCSDownloader(GCSBucketIO):
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         blob = self.bucket.blob(src)
         blob.download_to_filename(dest)
-
-
 
 
 def upload_dir(src, dest, bucket_name=None, bucket=None, client=None):

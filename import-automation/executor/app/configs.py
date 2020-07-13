@@ -7,6 +7,8 @@ MANIFEST_FILENAME = 'manifest.json'
 REQUIREMENTS_FILENAME = 'requirements.txt'
 REPO_OWNER_USERNAME = 'intrepiditee'
 GITHUB_AUTH_USERNAME = 'intrepiditee'
+REPO_NAME = 'data-demo'
+BUCKET_NAME = 'import-inputs'
 
 
 def _get_config(entity_id):
@@ -15,9 +17,9 @@ def _get_config(entity_id):
     return client.get(key)[entity_id]
 
 
-def get_dashboard_oauth_client_id(version_id='latest'):
+def get_dashboard_oauth_client_id():
     return _get_config('DASHBOARD_OAUTH_CLIENT_ID')
 
 
-def get_github_auth_access_token(version_id='latest'):
+def get_github_auth_access_token():
     return _get_config('GITHUB_AUTH_ACCESS_TOKEN')
