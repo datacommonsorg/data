@@ -25,7 +25,8 @@ def execute_imports():
     branch_name = task_info['BRANCH_NAME']
     pr_number = task_info['PR_NUMBER']
 
-    return executor.execute_imports(task_info)
+    return executor.execute_imports_on_commit(
+        commit_sha, repo_name, branch_name, pr_number)
 
 
 @app.route('/update', methods=['POST'])
