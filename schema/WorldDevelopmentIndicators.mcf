@@ -197,3 +197,11 @@ typeOf: dcs:QuantityRange
 startValue: 15
 endValue: 64
 unitOfMeasure: dcs:Years
+
+Node: dcid:Overweight
+name: "Overweight"
+typeOf: dcs:HealthBehaviorEnum
+
+Node: dcid:InLaborForce
+name: "InLaborForce"
+typeOf: dcs:EmploymentStatusEnum
