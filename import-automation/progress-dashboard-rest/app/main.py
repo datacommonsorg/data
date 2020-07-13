@@ -49,7 +49,7 @@ def create_api(app):
                      '/import_attempts/<string:attempt_id>')
     api.add_resource(app.resource.import_attempt_list.ImportAttemptList,
                      '/import_attempts')
-    api.add_resource(progress_log.ImportLogByAttemptID,
+    api.add_resource(progress_log.ProgressLogByAttemptID,
                      '/import_attempts/<string:attempt_id>/logs')
     api.add_resource(app.resource.system_run_list.SystemRunList,
                      '/system_runs')

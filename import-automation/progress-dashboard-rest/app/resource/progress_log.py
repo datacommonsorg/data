@@ -69,9 +69,16 @@ class ProgressLog(flask_restful.Resource):
     utils.add_fields(parser, required_fields, required=True)
     utils.add_fields(parser, optional_fields, required=False)
 
-    def __init__(self):
-        """Constructs a ProgressLog."""
-        self.client = utils.create_datastore_client()
+    # TODO(intrepiditee): Change other resources to also accept an optional arg
+    def __init__(self, client=None):
+        """Constructs a ProgressLog.
+
+        Args:
+            client: datastore Client object used to communicate with Datastore
+        """
+        if not client:
+            client = utils.create_datastore_client()
+        self.client = client
         self.run_database = system_run_database.SystemRunDatabase(
             self.client)
         self.log_database = progress_log_database.ProgressLogDatabase(
@@ -88,7 +95,7 @@ class ProgressLogByID(ProgressLog):
         See ImportLog.
     """
     # TODO(intrepiditee): Use a helper for get
-    # TODO(intrepiditee): Use exception for common request errors
+    # TODO(intrepiditee): Use exception for request errors
     def get(self, log_id):
         """Queries the progress logs by its log_id.
 
@@ -107,7 +114,7 @@ class ProgressLogByID(ProgressLog):
 
 class ProgressLogByRunID(ProgressLog):
     """API associated with the endpoint '/import/<string:attempt_id>/logs' for
-    managing the progress logs of an import attempt specified by its attempt_id.
+    querying the progress logs of an import attempt specified by its attempt_id.
 
     Attributes:
         See ImportLog.
@@ -130,9 +137,9 @@ class ProgressLogByRunID(ProgressLog):
         return {_RUN.logs: self.log_database.load_logs(log_ids)}
 
 
-class ImportLogByAttemptID(ProgressLog):
+class ProgressLogByAttemptID(ProgressLog):
     """API associated with the endpoint '/import/<string:attempt_id>/logs' for
-    managing the progress logs of an import attempt specified by its attempt_id.
+    querying the progress logs of an import attempt specified by its attempt_id.
 
     Attributes:
         See ImportLog.

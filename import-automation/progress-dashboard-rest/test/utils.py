@@ -26,7 +26,7 @@ class LogMessageManagerMock:
         if not message:
             raise exceptions.NotFound(
                 f'message of log {log_id} has never been saved.')
-        return self.data[log_id]
+        return message
 
     def save_message(self, message, log_id):
         self.data[log_id] = message
