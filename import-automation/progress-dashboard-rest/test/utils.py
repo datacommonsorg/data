@@ -71,11 +71,15 @@ def create_test_datastore_client():
         credentials=credentials.AnonymousCredentials())
 
 
-def ingest_import_attempts(run_list_resource, attempt_list_resource, attempts):
-    returns = [{}] + attempts
+def ingest_import_attempts(
+        run_list_resource, attempt_list_resource, attempts, system_run=None):
     with mock.patch(PARSE_ARGS) as parse_args:
-        parse_args.side_effect = returns
-        run_id = run_list_resource.post()[_RUN.run_id]
+        if system_run:
+            parse_args.side_effect = [system_run] + attempts
+            run_id = system_run[_RUN.run_id]
+        else:
+            parse_args.side_effect = [{}] + attempts
+            run_id = run_list_resource.post()[_RUN.run_id]
         for i, attempt in enumerate(attempts):
             attempt[_ATTEMPT.run_id] = run_id
             attempts[i] = attempt_list_resource.post()

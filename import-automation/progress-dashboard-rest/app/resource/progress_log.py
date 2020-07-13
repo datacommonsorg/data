@@ -142,7 +142,7 @@ class ImportLogByAttemptID(ProgressLog):
         """Queries the progress logs of an import attempt.
 
         Args:
-            attempt_id: ID string of the import attempt
+            attempt_id: ID of the import attempt as a string
 
         Returns:
            A list of progress logs each as a datastore Entity object with
