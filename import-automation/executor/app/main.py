@@ -1,7 +1,4 @@
 import logging
-import os
-import subprocess
-import shutil
 
 from flask import Flask, request
 

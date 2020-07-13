@@ -18,8 +18,12 @@ need to be changed.
 I have not figured out a way to test it locally. I have been testing it by
 1. deploying the app
 2. forking `datacommonsorg/data` to `data-demo`
-3. setting up a Cloud Build trigger for `data-demo` that runs task.sh in
+3. creating a branch `test`
+4. creating an empty pull request from `test` to `master`
+3. setting up a Cloud Build trigger `task` for `data-demo` that runs task.sh in
    `intrepiditee/data-demo/import-automation/cloudbuild` on pull request
+   to `master` branch
+4. switching to `test` branch
 4. creating `scripts/us_fed/treasury_constant_maturity_rates/manifest.json`
 5. modifying some files in `treasury_constant_maturity_rates` directory
 6. pushing commit with the commit message containing
