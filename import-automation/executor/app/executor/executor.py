@@ -94,7 +94,7 @@ def execute_imports_on_commit(commit_sha, repo_name=None, branch_name=None, pr_n
 
 def execute_import_on_update(absolute_import_name):
     dashboard = dashboard_api.DashboardAPI()
-    run = dashboard.init_run()
+    run = dashboard.init_run({})
     run_id = run['run_id']
     github = github_api.GitHubRepoAPI()
     with tempfile.TemporaryDirectory() as tmpdir:
