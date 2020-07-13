@@ -9,14 +9,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def execute_imports():
-    task_info = None
-    try:
-        task_info = request.json
-    except Exception as e:
-        err = 'Failed to parse commit info'
-        logging.critical('%s: %s', err, e)
-        return 'Failed to parse commit info'
-
+    task_info = request.get_json(force=True)
     repo_name = task_info['REPO_NAME']
     commit_sha = task_info['COMMIT_SHA']
     branch_name = task_info['BRANCH_NAME']
@@ -28,14 +21,7 @@ def execute_imports():
 
 @app.route('/update', methods=['POST'])
 def scheduled_updates():
-    task_info = None
-    try:
-        task_info = request.json
-    except Exception as e:
-        err = 'Failed to parse commit info'
-        logging.critical('%s: %s', err, e)
-        return 'Failed to parse commit info'
-
+    task_info = request.get_json(force=True)
     return executor.execute_import_on_update(task_info['absolute_import_name'])
 
 
