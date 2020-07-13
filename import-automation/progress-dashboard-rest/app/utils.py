@@ -32,19 +32,6 @@ def utctime():
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
-def iso_utc(time):
-    """
-    See https://docs.python.org/3/library/datetime.html#datetime.datetime.fromisoformat.
-    """
-    try:
-        time = datetime.datetime.fromisoformat(time)
-        if time.tzname() != 'UTC':
-            return False
-    except ValueError:
-        return False
-    return True
-
-
 def add_fields(parser, fields, required=True):
     """Adds a set of fields to the parser.
     Args:

@@ -1,3 +1,4 @@
+import datetime
 import http
 
 from app import utils
@@ -14,7 +15,7 @@ def import_attempt_valid(attempt, attempt_id=None):
                 f'Import status {status} is not allowed',
                 http.HTTPStatus.FORBIDDEN)
     time_created = attempt.get('time_created')
-    if time_created and not utils.iso_utc(time_created):
+    if time_created and not iso_utc(time_created):
         return ('time_created is not in ISO format with UTC timezone',
                 http.HTTPStatus.FORBIDDEN)
     return True, None, None
@@ -46,3 +47,16 @@ def get_not_found_error(id_field, entity_id):
 def get_patch_forbidden_error(fields):
     return (f'It is not allowed to patch {utils.list_to_str(fields)}',
             http.HTTPStatus.FORBIDDEN)
+
+
+def iso_utc(time):
+    """
+    See https://docs.python.org/3/library/datetime.html#datetime.datetime.fromisoformat.
+    """
+    try:
+        time = datetime.datetime.fromisoformat(time)
+        if time.tzname() != 'UTC':
+            return False
+    except ValueError:
+        return False
+    return True
