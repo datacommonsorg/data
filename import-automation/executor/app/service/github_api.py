@@ -59,7 +59,7 @@ class GitHubRepoAPI:
         return response.json()
 
     def query_changed_files_in_commit(self, commit_sha):
-        commit_info = query_commit(commit_sha)
+        commit_info = self.query_commit(commit_sha)
         return [entry['filename'] for entry in commit_info['files']]
 
     def query_files_in_dir(self, commit_sha, dir_path):
