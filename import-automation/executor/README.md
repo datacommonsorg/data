@@ -32,3 +32,8 @@ I have not figured out a way to test it locally. I have been testing it by
 To test the `/update` endpoint, you will have to modify `HANDLER_URI` of the
 Cloud Build trigger from `/` to `/update` and modify `create_body` function in
 `create_task.py` to include an `absolute_import_name` field in the task body.
+
+You could also use Cloud Scheduler to POST to the endpoints directly. For example:
+1. `Target` = `App Engine HTTP`
+2. `URL` = `/update`
+3. `Body` = `{"absolute_import_name": "scripts/us_fed/treausury_contant_maturity_rates:us_treausury_contant_maturity_rates"}`
