@@ -42,10 +42,10 @@ def generate_statvar(statvars, path):
         for stat_var in statvars:
             keys = stat_var.split('_')
             age = convert_range(keys[2])
-            if len(keys) == 3:
+            if len(keys) == 3: # measurePropery_populationType_age
                 f_out.write(by_age_template.format_map({'stat_var':stat_var,
                     'age':age}))
-            else:
+            else: # measurePropery_populationType_age_gender
                 gender = keys[-1]
                 f_out.write(by_age_gender_template.format_map({'stat_var':stat_var,
                     'age':age, 'gender': gender}))

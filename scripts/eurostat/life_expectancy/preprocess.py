@@ -3,15 +3,27 @@ import re
 import sys
 PATH = 'demo_r_mlifexp.tsv'
 
-def group_to_wide_form(data, col):
-    """reorgnize the data of each statvars into independent columns """
-    data_grouped = data.groupby([col])
+def group_to_wide_form(data):
+    """Group the data by statvars, and organize data related to different 
+    statvars into separated columns. 
+    
+    For example:
+    Input data format:
+    geo       year  ...   StatVar
+    nuts/AT1  2018  ...   sv1
+    nuts/AT2  2018  ...   sv2
+    
+    Output data format:
+    sv1_geo     sv1_year    sv2_geo     sv_year ...
+    nuts/AT1    2018        nuts/AT2    sv2     ...
+    """
+    data_grouped = data.groupby('StatVar')
     subsets = []
     for _, subset in data_grouped:
-        pivot = subset[col].iloc[0]
+        pivot = subset['StatVar'].iloc[0]
         subset = subset.rename(columns = {'geo': pivot+'_geo',
             'year': pivot + '_year', 'life_expectancy': pivot})
-        subset = subset.drop(columns = [col]).reset_index(drop=True)
+        subset = subset.drop(columns = ['StatVar']).reset_index(drop=True)
         subsets.append(subset)
     data = pd.concat(subsets, axis=1, join = 'outer')
     return data
