@@ -95,7 +95,7 @@ class SystemRun(flask_restful.Resource):
 
 class SystemRunByID(SystemRun):
     """API for managing system runs by run_id associated with the endpoint
-    '/system_runs/<int:run_id>'.
+    '/system_runs/<string:run_id>'.
 
     See SystemRun.
     """

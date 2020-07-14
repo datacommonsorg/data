@@ -34,3 +34,7 @@ class SystemRunModel:
     import_attempts = 'import_attempts'
     logs = 'logs'
     status = 'status'
+
+
+FIELDS = frozenset(name for name in vars(SystemRunModel)
+                   if not name.startswith('__'))
