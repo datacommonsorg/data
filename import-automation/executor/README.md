@@ -13,7 +13,7 @@ The easiest way is to clone the repo in Cloud Shell and run
 `gcloud app deploy`. Some constants in [`configs.py`](app/configs.py) might
 need to be changed. 
 
-## Testing
+## Testing on GCP
 
 I have not figured out a way to test it locally. I have been testing it by
 1. deploying the app
@@ -37,3 +37,9 @@ You could also use Cloud Scheduler to POST to the endpoints directly. For exampl
 1. `Target` = `App Engine HTTP`
 2. `URL` = `/update`
 3. `Body` = `{"absolute_import_name": "scripts/us_fed/treausury_contant_maturity_rates:us_treausury_contant_maturity_rates"}`
+
+
+## Testing locally
+
+Run `python3 -m unittest`. See [test/test_integration](test/test_integration.py).
+First lines of the generated files would be printed.

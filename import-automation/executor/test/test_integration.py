@@ -1,5 +1,6 @@
 import os
 import unittest
+import logging
 from unittest import mock
 import uuid
 
@@ -74,13 +75,14 @@ class DashboardAPIMock(mock.MagicMock):
     #     return run
 
 
-class GCSBucketIOMock(mock.MagicMock):
-    pass
-    # def __init__(self):
-    #     self.data = {}
-    #
-    # def upload_file(self, src, dest):
-    #     self.data[dest] = src
+class GCSBucketIOMock:
+    def __init__(self):
+        self.data = {}
+
+    def upload_file(self, src, dest):
+        self.data[dest] = src
+        with open(src) as file:
+            logging.warning(f'Generated {src}: {file.readline()}')
 
 
 def get_github_auth_access_token_mock():

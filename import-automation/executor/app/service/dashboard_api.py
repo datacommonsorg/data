@@ -76,7 +76,7 @@ class DashboardAPI:
         return self._log_helper(
             message, LogLevel.INFO, attempt_id, run_id, time_logged)
 
-    def info(self, message, attempt_id=None, run_id=None, time_logged=None):
+    def debug(self, message, attempt_id=None, run_id=None, time_logged=None):
         return self._log_helper(
             message, LogLevel.DEBUG, attempt_id, run_id, time_logged)
 

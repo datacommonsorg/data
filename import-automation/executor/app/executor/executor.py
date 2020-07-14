@@ -141,6 +141,7 @@ def _execute_imports_on_commit_helper(commit_sha, run_id):
                 if import_all or absolute_name in import_targets or \
                         import_name in import_targets:
                     import_one(dir_path, spec, run_id)
+    return 'success'
 
 
 def _init_run(commit_sha=None, repo_name=None, branch_name=None, pr_number=None):
@@ -215,6 +216,7 @@ def _execute_imports_on_update_helper(absolute_import_name, run_id):
             if import_name == 'all' or import_name == spec['import_name']:
                 import_one(dir_path, spec, run_id)
 
+    return 'success'
 
 def execute_imports_on_update(absolute_import_name):
     """Executes imports upon a scheduled update.
@@ -280,10 +282,11 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
             dashboard.log(log)
             process.check_returncode()
 
+    time = utils.utctime()
+    path_prefix = f'{dir_path}:{import_spec["import_name"]}/{time}'
     import_inputs = import_spec.get('import_inputs', [])
-    for import_input in import_inputs:
-        time = utils.utctime()
-        path_prefix = f'{dir_path}:{import_spec["import_name"]}/{time}'
+    for i, import_input in enumerate(import_inputs):
+
         bucket_io = gcs_io.GCSBucketIO()
 
         template_mcf = import_input.get('template_mcf')
@@ -295,7 +298,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
                                attempt_id=attempt_id)
             bucket_io.upload_file(
                 template_mcf,
-                f'{path_prefix}/{os.path.basename(template_mcf)}')
+                f'{path_prefix}/{i}/{os.path.basename(template_mcf)}')
 
         if cleaned_csv:
             with open(cleaned_csv) as f:
