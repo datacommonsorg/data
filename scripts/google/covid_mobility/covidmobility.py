@@ -12,222 +12,227 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from random import random
-from os import remove
-import sys
+from sys import path
+path.insert(1, '../../../')
 
-sys.path.insert(1, '../../../')
-import util.county_to_dcid as county_to_dcid
-import util.alpha2_to_dcid as alpha2_to_dcid
+from os import remove, path as ospath
+from csv import DictReader
+from urllib.request import urlopen
+
 import util.name_to_alpha2 as name_to_alpha2
+import util.alpha2_to_dcid as alpha2_to_dcid
+import util.county_to_dcid as county_to_dcid
+
+# Dictionary that maps a row name in the CSV file is mapped to a Schema place.
+# key = CSV's row name
+# value = Schema.org place
+from config import PLACE_CATEGORIES
+
+USSTATE_TO_ALPHA2 = name_to_alpha2.USSTATE_MAP
+COUNTRY_MAP = alpha2_to_dcid.COUNTRY_MAP
+USSTATE_MAP = alpha2_to_dcid.USSTATE_MAP
+COUNTY_MAP = county_to_dcid.COUNTY_MAP
 
 
-def skip_value(skip_pct) -> bool:
-    """Given the amount of cells you skip in percent, will return whether to skip that specific one."""
-    return random() <= skip_pct
-
-
-def covid_mobility(input_csv: str = None, less_output: bool = False, output_path='./output/covid_mobility_output.mcf') -> None:
-    if not input_csv:
-        raise Exception("You must input a csv file")
-
-    mobility_locations: dict = {}
-    data: list = []
-
-    # Remove any existing output file
-    remove(output_path)
-
-    with open(input_csv, 'r+') as f:
-        # Ignore the first row from csv, since it's the column titles.
-        rows: list = f.read().split("\n")[1:] # Read columns from input_csv
-
-        for row in rows:
-            # If flag less_ouput is enabled, then only output less than 1% of the data.
-            if less_output and skip_value(skip_pct=0.99995):
-                continue
-
-            row_as_list: list = row.split(',')
-
-            # There must be 11 rows, otherwise skip that row.
-            if len(row_as_list) != 11:
-                continue
-
-            try:
-                row_data: dict = csv_row_to_obj(row_as_list)
-            # If it's not a US sub_region, skip it.
-            except KeyError:
-                print('Skipped: ' + str(row_as_list))
-                continue
-
-            data.append(row_data)
-
-            dcid: str = row_data['dcid']
-            node_ids = generate_places_node_ids_for_row(row_data)
-
-            mobility_locations[dcid] = {"place_categories": node_ids}
-
-    write_statistical_pop_node(mobility_locations, output_path)
-    write_observation_nodes(data, mobility_locations, output_path)
-
-def csv_row_to_obj(row: list) -> dict:
-    """
-    Given a row from an input file, generate an object for it.
-    :arg row: a list of strings separated by commas, where each index is a column.
-    :returns data_as_dict: the row's data where each column is a key.
-    :except KeyError if there is no dcid for a given place.
-    """
-
-    # Store values as variables
-    country_code: str = row[0] # ES, US are example of country codes.
-    country: str = row[1].replace(' ', '') # util.COUNTRY_MAP requires no white-spaces
-    sub_region_1: str = row[2].replace(' ', '') # util.USSTATE_MAP requires no white-spaces
-    sub_region_2: str = row[3] # Whitespaces are okay here
-    dcid: str = get_dcid_from_region(sub_region_2, sub_region_1, country_code) # country/ESP is an example
-
-    # Return a dictionary of the row
-    return {
-        'dcid': dcid,
-        'country_code': country_code,
-        'country': country,
-        'sub_region_1': sub_region_1,
-        'sub_region_2': sub_region_2,
-        'date': row[4],
-        'LocalBusiness': row[5],
-        'GroceryStore&Pharmacy': row[6],
-        'Park': row[7],
-        'TransportHub': row[8],
-        'Workplace': row[9],
-        'Residence': row[10]
-    }
-
-def generate_places_node_ids_for_row(row_data: dict) -> dict:
-    """Given row data, return the node local ids for each place
+def covid_mobility(input_path: str = './input/data.csv',
+                   output_path='./output/covid_mobility_output.mcf') -> None:
+    """Main method for the covid_mobility script.
 
     Args:
-        row_data (dict): row_data in the form of an object
-
-    Returns:
-        node_ids: object containing place -> node Id
-    """
-    location_name: str = row_data['sub_region_2'] + row_data['sub_region_1'] + row_data['country']
-    # Ignore any non-ascii characters
-    location_name: str = ''.join([i if ord(i) < 128 else '_' for i in location_name])
-    # Get rid of any whitespaces
-    location_name: str = location_name.replace(" ", "")
-    location_dcid: str = row_data['dcid']
-
-    return {
-        "LocalBusiness": f"{location_name}LocalBusiness",
-        "GroceryStore&Pharmacy": f"{location_name}GroceryStore&Pharmacy",
-        "Park": f"{location_name}Park",
-        "TransportHub": f"{location_name}TransportHub",
-        "Workplace": f"{location_name}Workplace",
-        "Residence": f"{location_name}Residence"
-    }
-
-def get_dcid_from_region(sub_region_2: str, sub_region_1: str, country_code: str) -> str:
-    """
-    Convert region to dcid.
-    :param sub_region_2: Usually a US County (only US County allowed for now)
-    :param sub_region_1: State or Province (only US State allowed for now)
-    :param country_code: Country Code as Alpha2
-    :return location_dcid: the dcid of the location
-    :except KeyError if any of the regions aren't hashable to dcid
+        path_to_store_data (str): Defaults to './input/data.csv'.
+        export_to (str): Defaults to './output/covid_mobility_output.mcf'.
     """
 
-    # Counties
-    if sub_region_2:
-        if country_code != 'US':
-            raise KeyError('sub_region_2 is only supported for US Counties.')
-        state_alpha_code: str = name_to_alpha2.USSTATE_MAP[sub_region_1]
-        dcid: str = county_to_dcid.COUNTY_MAP[state_alpha_code][sub_region_2]
-    # States or Provinces
-    elif sub_region_1:
-        if country_code != 'US':
-            raise KeyError('sub_region_1 is only supported for US States.')
-        region_alpha_code: str = name_to_alpha2.USSTATE_MAP[sub_region_1]
-        dcid: str = alpha2_to_dcid.USSTATE_MAP[region_alpha_code]
-    # Countries
-    else:
-        dcid: str = alpha2_to_dcid.COUNTRY_MAP[country_code]
-    return dcid
+    # URL to download the data from Google Mobility site.
+    url: str = "https://www.gstatic.com/covid19/mobility/" + \
+               "Global_Mobility_Report.csv"
 
-def write_statistical_pop_node(mobility_locations: dict, output_path: str) -> None:
-    """
-    Generates unique ID's for each location and writes a Statistical Population Node in MCF format.
-    """
-    output_file = open(output_path, 'a+')
-    for location_dcid in mobility_locations:
-        location_data: dict = mobility_locations[location_dcid]
-        place_categories: dict = location_data['place_categories']
+    # Download CSV data from url.
+    _download_data(url=url, download_as=input_path)
 
-        for category_name in place_categories:
-            node_id: str = place_categories[category_name]
-            statistical_pop_node: str = generate_statistical_pop_nodes(local_id=node_id,
-                                                                       location_dcid=f"{location_dcid}",
-                                                                       place_category=category_name)
-            output_file.write(statistical_pop_node + '\n\n')
-    output_file.close()
+    # Convert the CSV data to MCF.
+    csv_to_mcf(input_path, output_path)
 
-def generate_statistical_pop_nodes(local_id: str, location_dcid: str, place_category: str) -> str:
-    """
-    Returns the MCF string representation of a statistical population node.
-    :param local_id: unique local id for the node.
-    :param location_dcid: the location's dcid.
-    :param place_category: type of category (Pharmacy, Residence, Transit, etc...).
-    :return: Statistical Population Node MCF String.
-    """
-    return (f"Node: {local_id}\n"
-            "typeOf: schema:StatisticalPopulation\n"
-            f"location: dcid:{location_dcid}\n"
-            "populationType: dcs:PlaceVisitEvent\n"
-            f"placeCategory: dcs:{place_category}")
 
-def write_observation_nodes(data, mobility_locations, output_path) -> None:
-    """
-    For every data point, generate a new observation node with its corresponding information.
-    Where observed_node is the statistical population node where this observation node is observed.
-    """
-    output_file = open(output_path, 'a+')
-    for row_data in data:
-        location_dcid: str = row_data['dcid']
+def csv_to_mcf(input_path: str, output_path: str) -> None:
+    """Converts the Mobility data to MCF.
 
-        place_categories: dict = mobility_locations[location_dcid]['place_categories']
-        for category_name in place_categories:
-            observation_node_id: str = place_categories[category_name]
-            measured_value: str = row_data[category_name]
+    Args:
+        input_path (str): The path to the CSV file containing the data.
+        output_path (str): The path to write the output MCF file.
+    """
 
-            # If the measured value is empty, skip it
-            if not measured_value:
+    visited_dcids: set = set()
+
+    # If output file already exists, remove it.
+    if ospath.exists(output_path):
+        remove(output_path)
+
+    f_input = open(input_path, 'r')
+    f_output = open(output_path, 'a+')
+
+    csv_reader: DictReader = DictReader(f_input)
+
+    for row in csv_reader:
+        # Get the region names.
+        # If the column doesn't exist, skip the row.
+        try:
+            sub_region1: str = row['sub_region_1']
+            sub_region2: str = row['sub_region_2']
+            country_code: str = row['country_region_code']
+            date = row['date']
+        except KeyError:
+            continue
+
+        # Convert the region name to a dcid/geoId.
+        region_dcid: str = _get_region_dcid(sub_region2,
+                                           sub_region1,
+                                           country_code)
+
+        # If no dcid, skip the row.
+        if not region_dcid:
+            continue
+
+        # If no date, skip the row.
+        if not date:
+            continue
+
+        # Iterate through all places in the row.
+        for place in PLACE_CATEGORIES:
+            # Type of place using Schema notation.
+            schema_place = PLACE_CATEGORIES[place]
+
+            population_id = f"{region_dcid}_{schema_place}"
+            population_id = convert_to_ascii(population_id)
+
+            observation_id = f"{population_id}_{date}"
+
+            try:
+                # Get the value for the current place.
+                value = row[place]
+            except KeyError:
                 continue
 
-            observation_node: str = generate_observation_node(observed_node=observation_node_id,
-                                                              date=row_data['date'],
-                                                              measured_value=measured_value)
-            output_file.write(observation_node + '\n\n')
+            # If the value is None, skip the row.
+            if not value:
+                continue
 
-    output_file.close()
+            # If this is the first time vieweing this dcid.
+            # Write the population node for the place.
+            if region_dcid not in visited_dcids:
+                f_output.write(
+                    f"Node: {population_id}\n"
+                    "typeOf: schema:StatisticalPopulation\n"
+                    f"location: dcid:{region_dcid}\n"
+                    "populationType: dcs:PlaceVisitEvent\n"
+                    f"placeCategory: dcs:{schema_place}\n\n")
 
-def generate_observation_node(observed_node: str, date: str, measured_value: str) -> str:
+            # Write observation node for value.
+            f_output.write(
+                f"Node: {observation_id}\n"
+                "typeOf: schema:Observation\n"
+                f"observedNode: l:{population_id}\n"
+                f'observationDate: "{date}"\n'
+                "measuredProperty: dcs:covid19MobilityTrend\n"
+                f"measuredValue: {value}\n"
+                "unit: dcs:Percent\n\n")
+
+        # Add dcid to the list of visited.
+        visited_dcids.add(region_dcid)
+
+    f_input.close()
+    f_output.close()
+
+
+def _download_data(url: str, download_as: str) -> None:
+    """Download the data file from the input url.
+
+    Args:
+        url (str): URL of the file.
+        download_as (str): path to save the file.
     """
-    Returns the MCF string representation of an observation node.
-    :param observed_node: The unique local ID of the reference node.
-    :param date: Date of the observation.
-    :param measured_value: Value of the observation.
-    :return: Observation Node MCF String
+
+    # Request data from url.
+    data: str = urlopen(url).read().decode('utf-8')
+
+    # Store the data as a download_as.
+    with open(download_as, 'w+') as input_file:
+        input_file.write(data)
+
+
+def _get_region_dcid(sub_region_2: str,
+                    sub_region_1: str,
+                    country_code: str) -> str:
+    """Returns the dcid for the region.
+
+
+    Args:
+        sub_region_2 (str): Usually a US County.
+        sub_region_1 (str): Usually a US State or a country's province.
+        country_code (str): Country Code. Examples: ES, US.
+
+    Returns:
+        str: the dcid of the region.
     """
 
-    # Remove any whitespace
-    node_id: str = "Node: " + observed_node + date.replace("-", "")
+    # Get rid of sub_region_1 whitespaces.
+    # Hashmap keys don't contain whitespaces.
+    sub_region_1 = sub_region_1.replace(" ", "")
 
-    return (f"{node_id}\n"
-            "typeOf: schema:Observation\n"
-            f"observedNode: l:{observed_node}\n"
-            f'observationDate: "{date}"\n'
-            "measuredProperty: dcs:covid19MobilityTrend\n"
-            f"measuredValue: {measured_value}\n"
-            "unit: dcs:Percent")
+    if sub_region_1:
+        # Only US sub-regions are allowed.
+        if country_code != 'US' or sub_region_1 not in USSTATE_TO_ALPHA2:
+            return None
+
+        # Convert the State name to Alpha2.
+        # Example: Florida->FL.
+        sub_region_1_alpha2 = USSTATE_TO_ALPHA2[sub_region_1]
+
+    # If the sub_region_1 is not a key in COUNTY_MAP.
+    if sub_region_2 and sub_region_1_alpha2 not in COUNTY_MAP:
+        print("sub_region_1_alpha2 not in COUNTY_MAP")
+        return None
+
+    # If the sub_region_1_alpha2 is not a key in COUNTY_MAP[State].
+    if sub_region_2 and sub_region_2 not in COUNTY_MAP[sub_region_1_alpha2]:
+        print(sub_region_2)
+        print("sub_region_2 not in COUNTY_MAP[sub_region_1_alpha2]")
+        return None
+
+    # If the sub_region_1_alpha2 is not a key in USSATE_MAP.
+    if sub_region_1 and sub_region_1_alpha2 not in USSTATE_MAP:
+        print("sub_region_1 and sub_region_1_alpha2 not in USSTATE_MAP")
+        return None
+
+    # Counties.
+    if sub_region_2:
+        dcid = COUNTY_MAP[sub_region_1_alpha2][sub_region_2]
+    # States or Provinces.
+    elif sub_region_1:
+        dcid = USSTATE_MAP[sub_region_1_alpha2]
+    # Countries.
+    else:
+        dcid = COUNTRY_MAP[country_code]
+    return dcid
+
+
+def convert_to_ascii(string: str) -> str:
+    """Given a string, omit any non-ascii characters.
+    The knowledge graph only supports ascii.
+
+    Args:
+        string (str): the string to convert.
+
+    Returns:
+        str: the same string, without any non-ascii characters.
+        "ñàlom" would be converted to "lom".
+    """
+
+    # Get rid of non-ascii characters.
+    # KG only supports ascii characters.
+    string_ascii: list = [i if ord(i) < 128 else '' for i in string]
+    return ''.join(string_ascii)
 
 
 if __name__ == '__main__':
-    covid_mobility('./input_data.csv', less_output=True)
+    covid_mobility()

@@ -1,38 +1,68 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import unittest
-from covidmobility import covid_mobility, csv_row_to_obj
+from CovidMobility import csv_to_mcf
+from os import path
 
 
-# NOTE: More testing will be added soon.
+class TestCovidMobility(unittest.TestCase):
+    maxDiff = None
 
+    def test1(self):
+        self._test_mcf_output('./tests/test1')
 
-class TestStringMethods(unittest.TestCase):
-    def test1_output(self):
-        # Get the output file.
-        covid_mobility('./test1.csv')
-        # Get the content of the expected output.
-        actual_f = open('./output/covid_mobility_output.mcf', 'r')
-        actual = actual_f.read().replace('\n', '')
+    def test2(self):
+        self._test_mcf_output('./tests/test2')
+
+    def _test_mcf_output(self, dir_path:str):
+        """Generates an MCF file, given an input data file.
+        Compares the expected.mcf to the output.mcf file
+        to make sure the function is performing as designed.
+
+        Args:
+            dir_path (str): the path of the directory containing:
+            data.csv and expected.mcf.
+
+        Returns:
+            str: expected output == actual output.
+        """
+
+        input_path = path.join(dir_path, "data.csv")
+        output_path = path.join(dir_path, "output.mcf")
+        expected_path = path.join(dir_path, "expected.mcf")
+
+        if not path.exists(input_path):
+            self.fail(input_path + ' doesn\'t exist!')
+        if not path.exists(expected_path):
+            self.fail(expected_path + ' doesn\'t exist!')
+
+        # Generate the output mcf file.
+        csv_to_mcf(input_path, output_path)
+
+        # Get the content from the MCF file.
+        actual_f = open(output_path, 'r+')
+        actual: str = actual_f.read()
         actual_f.close()
-        # Get the content of the written output.
-        expected_f = open('./test1expectedoutput.mcf', 'r')
-        expected = expected_f.read().replace('\n', '')
+
+        # Get the content of the expected output.
+        expected_f = open(expected_path, 'r+')
+        expected = expected_f.read()
         expected_f.close()
+
         self.assertEqual(actual, expected)
-
-    def test_csv_row_to_dict(self):
-        row = ["AE", "United Arab Emirates", "", "", "2/26/20", "-2", "1", "-3", "-2", "3", "1"]
-        covidmobility = covid_mobility('./test1.csv')
-        output = csv_row_to_obj(row)
-        self.assertEqual(output, {'dcid': 'country/ARE', 'country_code': 'AE', 'country': 'UnitedArabEmirates',
-                                  'sub_region_1': '', 'sub_region_2': '', 'date': '2/26/20',
-                                  'LocalBusiness': '-2', 'GroceryStore&Pharmacy': '1', 'Park': '-3',
-                                  'TransportHub': '-2', 'Workplace': '3', 'Residence': '1'})
-
-    def test_non_US_subregion_raises_exception(self):
-        row = ["ES", "Spain", "Barcelona", "", "2/26/20", "0", "1", "2", "3", "4", "5"]
-        with self.assertRaises(KeyError):
-            csv_row_to_obj(row)
-
 
 if __name__ == '__main__':
     unittest.main()
+
