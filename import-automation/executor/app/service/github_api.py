@@ -36,12 +36,6 @@ def _build_commit_query(owner_username, repo_name, commit_sha):
     })
 
 
-def _get_auth(auth_username, auth_access_token):
-    if not auth_username or not auth_access_token:
-        return None
-    return auth_username, auth_access_token
-
-
 class GitHubRepoAPI:
     def __init__(self,
                  owner_username=configs.REPO_OWNER_USERNAME,
@@ -50,7 +44,9 @@ class GitHubRepoAPI:
                  auth_access_token=None):
         self.owner = owner_username
         self.repo = repo_name
-        self.auth = _get_auth(auth_username, auth_access_token)
+        if not auth_access_token:
+            auth_access_token = configs.get_github_auth_access_token()
+        self.auth = (auth_username, auth_access_token)
 
     def query_commit(self, commit_sha):
         commit_query = _build_commit_query(self.owner, self.repo, commit_sha)

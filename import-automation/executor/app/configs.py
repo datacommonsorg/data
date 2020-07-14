@@ -1,3 +1,5 @@
+import os
+
 from google.cloud import datastore
 
 PROJECT_ID = 'google.com:datcom-data'
@@ -9,6 +11,8 @@ REPO_OWNER_USERNAME = 'intrepiditee'
 GITHUB_AUTH_USERNAME = 'intrepiditee'
 REPO_NAME = 'data-demo'
 BUCKET_NAME = 'import-inputs'
+USER_SCRIPT_TIMEOUT = 600
+VENV_CREATE_TIMEOUT = 600
 
 
 def _get_config(entity_id):
@@ -23,3 +27,7 @@ def get_dashboard_oauth_client_id():
 
 def get_github_auth_access_token():
     return _get_config('GITHUB_AUTH_ACCESS_TOKEN')
+
+
+def production():
+    return 'EXECUTOR_PRODUCITON' in os.environ

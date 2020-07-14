@@ -33,8 +33,8 @@ def get_relative_import_names(import_names):
     return list(name for name in import_names if relative_import_name(name))
 
 
-def list_to_str(a_list):
-    return ', '.join(a_list)
+def list_to_str(a_list, sep=','):
+    return (sep + ' ').join(a_list)
 
 
 def get_filename(response):

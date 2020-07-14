@@ -2,15 +2,18 @@ import os
 
 from google.cloud import storage
 
+from app import configs
+
+
 
 class GCSBucketIO:
-    def __init__(self, bucket_name):
-        self.bucket_name = bucket_name
+    def __init__(self, bucket_name=configs.BUCKET_NAME, bucket=None, client=None):
+        if not client:
+            client = storage.Client()
+        if not bucket:
+            bucket = client.bucket(bucket_name)
         self.client = storage.Client()
         self.bucket = self.client.bucket(bucket_name)
-
-
-class GCSDownloader(GCSBucketIO):
 
     def download_dir(self, src, dest):
         os.makedirs(dest, exist_ok=True)
@@ -23,37 +26,14 @@ class GCSDownloader(GCSBucketIO):
         blob = self.bucket.blob(src)
         blob.download_to_filename(dest)
 
+    def upload_dir(self, src, dest):
+        with os.scandir(src) as entry_iter:
+            for entry in entry_iter:
+                if entry.is_dir(follow_symlinks=False):
+                    self.upload_dir(entry.path, os.path.join(dest, entry.name))
+                elif entry.is_file(follow_symlinks=False):
+                    self.upload_file(entry.path, os.path.join(dest, entry.name))
 
-def upload_dir(src, dest, bucket_name=None, bucket=None, client=None):
-    if not bucket_name and not bucket:
-        raise ValueError('neither bucket_name or bucket is specified')
-    if not client:
-        client = storage.Client()
-    if not bucket:
-        bucket = client.bucket(bucket_name)
-
-    with os.scandir(src) as entry_iter:
-        for entry in entry_iter:
-            if entry.is_dir(follow_symlinks=False):
-                upload_dir(
-                    entry.path,
-                    os.path.join(dest, entry.name),
-                    bucket=bucket,
-                    client=client)
-            elif entry.is_file(follow_symlinks=False):
-                upload_file(
-                    entry.path,
-                    os.path.join(dest, entry.name),
-                    bucket=bucket,
-                    client=client)
-
-
-def upload_file(src, dest, bucket_name=None, bucket=None, client=None):
-    if not bucket_name and not bucket:
-        raise ValueError('neither bucket_name or bucket is specified')
-    if not client:
-        client = storage.Client()
-    if not bucket:
-        bucket = client.bucket(bucket_name)
-    blob = bucket.blob(dest)
-    blob.upload_from_filename(src)
+    def upload_file(self, src, dest):
+        blob = self.bucket.blob(dest)
+        blob.upload_from_filename(src)
