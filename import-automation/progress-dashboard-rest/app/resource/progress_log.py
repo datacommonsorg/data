@@ -43,9 +43,11 @@ class LogLevel(enum.Enum):
 
     The level of a log can only be one of these.
     """
-    INFO = 'info'
+    CRITICAL = 'critical'
+    ERROR = 'error'
     WARNING = 'warning'
-    SEVERE = 'severe'
+    INFO = 'info'
+    DEBUG = 'debug'
 
 
 LOG_LEVELS = frozenset(level.value for level in LogLevel)
