@@ -24,7 +24,7 @@ var (
 
 const (
 	batchSize = 200
-	placeId2dcidBucket = "datcom-browser-prod.appspot.com"
+	placeId2dcidBucket = "datcom-browser-staging.appspot.com"
 	placeId2dcidObject = "placeid2dcid.json"
 )
 
