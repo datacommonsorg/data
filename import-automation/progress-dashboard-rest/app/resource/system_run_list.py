@@ -13,9 +13,11 @@
 # limitations under the License.
 
 """
-System run list resource associated with the endpoint '/system_runs'.
+System run lists, the resource associated with the endpoint '/system_runs'.
 """
+import http
 
+from app.model import system_run_model
 from app.resource import system_run
 from app.service import validation
 
@@ -31,10 +33,19 @@ class SystemRunList(system_run.SystemRun):
         """Retrieves a list of system runs that pass the filter defined by
         the key-value mappings in the request body.
 
+        The filter can only contain fields defined by SystemRunModel.
+
         Returns:
-            A list of system runs each as a datastore Entity object.
+            A list of system runs each as a datastore Entity object
+            if successful. Otherwise, (error message, error code), where
+            the error message is a string and the error code is an int.
         """
         args = system_run.SystemRunByID.parser.parse_args()
+        for field in args:
+            # TODO(intrepiditee): Create fields
+            if field not in system_run_model.fields:
+                return (f'Field {field} is not a valid field for a system run',
+                        http.HTTPStatus.BAD_REQUEST)
         return self.database.filter(args)
 
     def post(self):
