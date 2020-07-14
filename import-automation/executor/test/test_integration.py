@@ -7,78 +7,80 @@ from app import main
 from app import utils
 
 
-class DashboardAPIMock:
-    def __init__(self):
-        self.attempts = {}
-        self.runs = {}
-        self.logs = {}
+class DashboardAPIMock(mock.MagicMock):
+    pass
+    # def __init__(self):
+    #     self.attempts = {}
+    #     self.runs = {}
+    #     self.logs = {}
+    #
+    # def info(self, message, attempt_id=None, run_id=None, time_logged=None):
+    #     return self._log(message, 'info', attempt_id, run_id, time_logged)
+    #
+    # def warning(self, message, attempt_id=None, run_id=None, time_logged=None):
+    #     return self._log(message, 'warning', attempt_id, run_id, time_logged)
+    #
+    # def severe(self, message, attempt_id=None, run_id=None, time_logged=None):
+    #     return self._log(message, 'critical', attempt_id, run_id, time_logged)
+    #
+    # def _log(self, message, level, attempt_id=None, run_id=None, time_logged=None):
+    #     if not attempt_id and not run_id:
+    #         raise ValueError('Neither attempt_id or run_id is specified')
+    #     if not time_logged:
+    #         time_logged = utils.utctime()
+    #
+    #     log = {
+    #         'message': message,
+    #         'level': level,
+    #         'time_logged': time_logged
+    #     }
+    #     if attempt_id:
+    #         log['attempt_id'] = attempt_id
+    #         attempt = self.attempts[attempt_id]
+    #         logs = attempt.setdefault('logs', [])
+    #         logs.append(log)
+    #     if run_id:
+    #         log['run_id'] = run_id
+    #         run = self.runs[run_id]
+    #         logs = run.setdefault('logs', [])
+    #         logs.append(log)
+    #
+    # def init_run(self, system_run):
+    #     run_id = uuid.uuid4().hex
+    #     system_run['run_id'] = run_id
+    #     self.runs[run_id] = system_run
+    #     return system_run
+    #
+    # def init_attempt(self, import_attempt):
+    #     attempt_id = uuid.uuid4().hex
+    #     import_attempt['attempt_id'] = attempt_id
+    #     self.attempts[attempt_id] = import_attempt
+    #     return import_attempt
+    #
+    # def update_attempt(self, import_attempt, attempt_id=None):
+    #     if not attempt_id:
+    #         attempt_id = import_attempt['attempt_id']
+    #     attempt = self.attempts[attempt_id]
+    #     for k, v in import_attempt.items():
+    #         attempt[k] = v
+    #     return attempt
+    #
+    # def update_run(self, system_run, run_id=None):
+    #     if not run_id:
+    #         run_id = system_run['run_id']
+    #     run = self.runs[run_id]
+    #     for k, v in system_run.items():
+    #         run[k] = v
+    #     return run
 
-    def info(self, message, attempt_id=None, run_id=None, time_logged=None):
-        return self._log(message, 'info', attempt_id, run_id, time_logged)
 
-    def warning(self, message, attempt_id=None, run_id=None, time_logged=None):
-        return self._log(message, 'warning', attempt_id, run_id, time_logged)
-
-    def severe(self, message, attempt_id=None, run_id=None, time_logged=None):
-        return self._log(message, 'severe', attempt_id, run_id, time_logged)
-
-    def _log(self, message, level, attempt_id=None, run_id=None, time_logged=None):
-        if not attempt_id and not run_id:
-            raise ValueError('Neither attempt_id or run_id is specified')
-        if not time_logged:
-            time_logged = utils.utctime()
-
-        log = {
-            'message': message,
-            'level': level,
-            'time_logged': time_logged
-        }
-        if attempt_id:
-            log['attempt_id'] = attempt_id
-            attempt = self.attempts[attempt_id]
-            logs = attempt.setdefault('logs', [])
-            logs.append(log)
-        if run_id:
-            log['run_id'] = run_id
-            run = self.runs[run_id]
-            logs = run.setdefault('logs', [])
-            logs.append(log)
-
-    def init_run(self, system_run):
-        run_id = uuid.uuid4().hex
-        system_run['run_id'] = run_id
-        self.runs[run_id] = system_run
-        return system_run
-
-    def init_attempt(self, import_attempt):
-        attempt_id = uuid.uuid4().hex
-        import_attempt['attempt_id'] = attempt_id
-        self.attempts[attempt_id] = import_attempt
-        return import_attempt
-
-    def update_attempt(self, import_attempt, attempt_id=None):
-        if not attempt_id:
-            attempt_id = import_attempt['attempt_id']
-        attempt = self.attempts[attempt_id]
-        for k, v in import_attempt.items():
-            attempt[k] = v
-        return attempt
-
-    def update_run(self, system_run, run_id=None):
-        if not run_id:
-            run_id = system_run['run_id']
-        run = self.runs[run_id]
-        for k, v in system_run.items():
-            run[k] = v
-        return run
-
-
-class GCSBucketIOMock:
-    def __init__(self):
-        self.data = {}
-
-    def upload_file(self, src, dest):
-        self.data[dest] = src
+class GCSBucketIOMock(mock.MagicMock):
+    pass
+    # def __init__(self):
+    #     self.data = {}
+    #
+    # def upload_file(self, src, dest):
+    #     self.data[dest] = src
 
 
 def get_github_auth_access_token_mock():

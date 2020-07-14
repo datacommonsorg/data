@@ -1,9 +1,9 @@
 import re
 import json
-import logging
 import os
 import subprocess
 import tempfile
+import logging
 
 from app import configs
 from app.service import dashboard_api
@@ -22,7 +22,7 @@ def parse_manifest(path):
     Returns:
         The parsed manifest as a dict.
     """
-    with open(path, 'r') as file:
+    with open(path) as file:
         return json.load(file)
 
 
@@ -39,55 +39,10 @@ def parse_commit_message_targets(commit_message):
         A list of import names each as a string.
     """
     target_lists = re.findall(r'(?:IMPORTS=)((?:\w+)(?:,\w+)*)', commit_message)
-    if not len(target_lists):
-        raise ValueError(
-            f'No import targets found in the commit message ({commit_message})')
     targets = set()
     for target_list in target_lists:
         targets.update(target_list.split(','))
     return list(targets)
-
-
-def construct_log(message, level='info', time_logged=None,
-                  run_id=None, attempt_id=None, process=None):
-    """Constructs a progress log that can be sent to the dashboard.
-
-    Args:
-        message: Log message as a string.
-        level: Log level as a string.
-        time_logged: Time logged in ISO format with UTC timezone as a string.
-        run_id: ID of the system run to link to as a string.
-        attempt_id: ID of the import attempt to link to as a string.
-        process: subprocess.CompletedProcess object that has been executed and
-            that needs to be logged.
-
-    Returns:
-        Constructed progress log ready to be sent to the dashboard as a dict.
-
-    Raises:
-        ValueError: Neither run_id nor attempt_id is specified.
-    """
-    if not run_id and not attempt_id:
-        raise ValueError('Neither run_id nor attempt_id is specified')
-    if not time_logged:
-        time_logged = utils.utctime()
-    log = {'message': message, 'level': level, 'time_logged': time_logged}
-    if run_id:
-        log['run_id'] = run_id
-    if attempt_id:
-        log['attempt_id'] = attempt_id
-    if process:
-        log['args'] = (utils.list_to_str(process.args, ' ')
-                       if isinstance(process.args, list)
-                       else process.args)
-        log['return_code'] = process.returncode
-        if not process.returncode:
-            log['level'] = 'error'
-        if process.stdout:
-            log['stdout'] = process.stdout
-        if process.stderr:
-            log['stderr'] = process.stderr
-    return log
 
 
 def run_with_timeout(args, timeout):
@@ -154,40 +109,11 @@ def run_user_script(interpreter_path, script_path, args=[],
                             timeout)
 
 
-def execute_imports_on_commit(commit_sha,
-                              repo_name=None, branch_name=None, pr_number=None):
-    """Executes imports upon a GitHub commit that is a part of a pull request
-    to the master branch of datacommonsorg/data.
-
-    repo_name, branch_name, and pr_number are used only for logging purposes.
-
-    Args:
-        commit_sha: ID of the commit as a string.
-        repo_name: Name of the repository from which the pull request is created
-            as a string.
-        branch_name: Name of the branch the pull request wants to merge
-            as a stirng.
-        pr_number: Number of the pull request as an int.
-
-    Returns:
-        A string describing the results of the imports.
-    """
+def _execute_imports_on_commit_helper(commit_sha, run_id):
     dashboard = dashboard_api.DashboardAPI()
-    run = {'commit_sha': commit_sha}
-    if repo_name:
-        run['repo_name'] = repo_name
-    if branch_name:
-        run['branch_name'] = branch_name
-    if pr_number:
-        run['pr_number'] = pr_number
-    run = dashboard.init_run(run)
-
-    run_id = run['run_id']
-
     github = github_api.GitHubRepoAPI()
 
     commit_info = github.query_commit(commit_sha)
-    commit_author_username = commit_info['author']['login']
     commit_message = commit_info['commit']['message']
 
     manifest_dirs = github.find_dirs_in_commit_containing_file(
@@ -210,11 +136,84 @@ def execute_imports_on_commit(commit_sha,
             manifest = parse_manifest(manifest_path)
             for spec in manifest['import_specifications']:
                 import_name = spec['import_name']
-                absolute_name = utils.get_absolute_import_name(dir_path, import_name)
-                if import_all or absolute_name in import_targets or import_name in import_targets:
-                    import_one(dir_path, spec, run_id, dashboard)
+                absolute_name = utils.get_absolute_import_name(dir_path,
+                                                               import_name)
+                if import_all or absolute_name in import_targets or \
+                        import_name in import_targets:
+                    import_one(dir_path, spec, run_id)
 
-    return 'success'
+
+def _init_run(commit_sha=None, repo_name=None, branch_name=None, pr_number=None):
+    dashboard = dashboard_api.DashboardAPI()
+    run = {}
+    if commit_sha:
+        run['commit_sha'] = commit_sha
+    if repo_name:
+        run['repo_name'] = repo_name
+    if branch_name:
+        run['branch_name'] = branch_name
+    if pr_number:
+        run['pr_number'] = pr_number
+    return dashboard.init_run(run)
+
+
+def execute_imports_on_commit(commit_sha,
+                              repo_name=None, branch_name=None, pr_number=None):
+    """Executes imports upon a GitHub commit that is a part of a pull request
+    to the master branch of datacommonsorg/data.
+
+    repo_name, branch_name, and pr_number are used only for logging purposes.
+
+    Args:
+        commit_sha: ID of the commit as a string.
+        repo_name: Name of the repository from which the pull request is created
+            as a string.
+        branch_name: Name of the branch the pull request wants to merge
+            as a stirng.
+        pr_number: Number of the pull request as an int.
+
+    Returns:
+        A string describing the results of the imports.
+    """
+    run_id = _init_run(commit_sha, repo_name, branch_name, pr_number)['run_id']
+
+    try:
+        return _execute_imports_on_commit_helper(commit_sha, run_id)
+    except Exception as e:
+        logging.exception(e)
+        mark_system_run_failed(run_id)
+        return f'{e}'
+
+
+def mark_system_run_failed(run_id):
+    dashboard = dashboard_api.DashboardAPI()
+    dashboard.critical('Failed', run_id=run_id)
+    return dashboard.update_run({'status': 'failed'}, run_id=run_id)
+
+
+def mark_import_attempt_failed(attempt_id):
+    dashboard = dashboard_api.DashboardAPI()
+    dashboard.critical('Failed', attempt_id=attempt_id)
+    return dashboard.update_attempt({'status': 'failed'}, attempt_id=attempt_id)
+
+
+def _execute_imports_on_update_helper(absolute_import_name, run_id):
+    github = github_api.GitHubRepoAPI()
+    dashboard = dashboard_api.DashboardAPI()
+    with tempfile.TemporaryDirectory() as tmpdir:
+        repo_dirname = github.download_repo(tmpdir)
+        cwd = os.path.join(tmpdir, repo_dirname)
+        os.chdir(cwd)
+
+        dashboard.info(f'Downloaded repo: {repo_dirname}', run_id=run_id)
+
+        dir_path, import_name = utils.split_relative_import_name(
+            absolute_import_name)
+        manifest_path = os.path.join(dir_path, configs.MANIFEST_FILENAME)
+        manifest = parse_manifest(manifest_path)
+        for spec in manifest['import_specifications']:
+            if import_name == 'all' or import_name == spec['import_name']:
+                import_one(dir_path, spec, run_id)
 
 
 def execute_imports_on_update(absolute_import_name):
@@ -230,51 +229,32 @@ def execute_imports_on_update(absolute_import_name):
     Returns:
         A string describing the results of the imports.
     """
+    run_id = _init_run()['run_id']
+    try:
+        return _execute_imports_on_update_helper(absolute_import_name, run_id)
+    except Exception as e:
+        logging.exception(e)
+        mark_system_run_failed(run_id)
+        return f'{e}'
+
+
+def _init_attempt(run_id, import_name, absolute_import_name,
+                  provenance_url, provenance_description):
     dashboard = dashboard_api.DashboardAPI()
-    run = dashboard.init_run({})
-    run_id = run['run_id']
-    github = github_api.GitHubRepoAPI()
-    with tempfile.TemporaryDirectory() as tmpdir:
-        repo_dirname = github.download_repo(tmpdir)
-        cwd = os.path.join(tmpdir, repo_dirname)
-        os.chdir(cwd)
-
-        dashboard.info(f'Downloaded repo: {repo_dirname}', run_id=run_id)
-
-        dir_path, import_name = utils.split_relative_import_name(
-            absolute_import_name)
-        manifest_path = os.path.join(dir_path, configs.MANIFEST_FILENAME)
-        manifest = parse_manifest(manifest_path)
-        for spec in manifest['import_specifications']:
-            if import_name == 'all' or import_name == spec['import_name']:
-                import_one(dir_path, spec, run_id, dashboard)
-
-    return 'success'
+    return dashboard.init_attempt({
+        'run_id': run_id,
+        'import_name': import_name,
+        'absolute_import_name': absolute_import_name,
+        'provenance_url': provenance_url,
+        'provenance_description': provenance_description
+    })
 
 
-def import_one(dir_path, import_spec, run_id, dashboard):
-    """Executes an import.
-
-    Args:
-        dir_path: Path to the direcotry containing the manifest as a string.
-        import_spec: Specification of the import as a dict.
-        run_id: ID of the system run the import belongs to.
-        dashboard: DashboardAPI object to communicate with the
-            import progress dashboard.
-    """
-    import_name = import_spec['import_name']
-    attempt = dashboard.init_attempt(
-        {
-            'run_id': run_id,
-            'import_name': import_name,
-            'absolute_import_name': utils.get_absolute_import_name(dir_path, import_name),
-            'provenance_url': import_spec['provenance_url'],
-            'provenance_description': import_spec['provenance_description']
-        })
-    attempt_id = attempt['attempt_id']
-
+def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
     cwd = os.getcwd()
     os.chdir(dir_path)
+
+    dashboard = dashboard_api.DashboardAPI()
 
     urls = import_spec.get('data_download_url')
     if urls:
@@ -283,25 +263,34 @@ def import_one(dir_path, import_spec, run_id, dashboard):
             dashboard.info(f'Downloaded: {url}', attempt_id=attempt_id)
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        interpreter_path, process = create_venv(configs.REQUIREMENTS_FILENAME, tmpdir)
-        dashboard.info(f'Installed dependencies: {process.stdout}', attempt_id=attempt_id)
+        interpreter_path, process = create_venv(configs.REQUIREMENTS_FILENAME,
+                                                tmpdir)
+        log = dashboard_api.construct_log(
+            'Installing dependencies',
+            process=process, run_id=run_id, attempt_id=attempt_id)
+        dashboard.log(log)
+        process.check_returncode()
 
         script_paths = import_spec.get('scripts')
         for path in script_paths:
             process = run_user_script(interpreter_path, path)
-            dashboard.info(f'Run {path}: {process.stdout}', attempt_id=attempt_id)
+            log = dashboard_api.construct_log(
+                f'Running {path}',
+                process=process, run_id=run_id, attempt_id=attempt_id)
+            dashboard.log(log)
+            process.check_returncode()
 
     import_inputs = import_spec.get('import_inputs', [])
     for import_input in import_inputs:
         time = utils.utctime()
-        path_prefix = f'{dir_path}:{import_name}/{time}'
+        path_prefix = f'{dir_path}:{import_spec["import_name"]}/{time}'
         bucket_io = gcs_io.GCSBucketIO()
 
         template_mcf = import_input.get('template_mcf')
         cleaned_csv = import_input.get('cleaned_csv')
         node_mcf = import_input.get('node_mcf')
         if template_mcf:
-            with open(template_mcf, 'r') as f:
+            with open(template_mcf) as f:
                 dashboard.info(f'Generated template MCF: {f.readline()}',
                                attempt_id=attempt_id)
             bucket_io.upload_file(
@@ -309,7 +298,7 @@ def import_one(dir_path, import_spec, run_id, dashboard):
                 f'{path_prefix}/{os.path.basename(template_mcf)}')
 
         if cleaned_csv:
-            with open(cleaned_csv, 'r') as f:
+            with open(cleaned_csv) as f:
                 dashboard.info(f'Generated cleaned CSV: {f.readline()}',
                                attempt_id=attempt_id)
             bucket_io.upload_file(
@@ -317,7 +306,7 @@ def import_one(dir_path, import_spec, run_id, dashboard):
                 f'{path_prefix}/{os.path.basename(cleaned_csv)}')
 
         if node_mcf:
-            with open(node_mcf, 'r') as f:
+            with open(node_mcf) as f:
                 dashboard.info(f'Generated node MCF: {f.readline()}',
                                attempt_id=attempt_id)
             bucket_io.upload_file(
@@ -325,3 +314,26 @@ def import_one(dir_path, import_spec, run_id, dashboard):
                 f'{path_prefix}/{os.path.basename(node_mcf)}')
 
     os.chdir(cwd)
+
+
+def import_one(dir_path, import_spec, run_id):
+    """Executes an import.
+
+    Args:
+        dir_path: Path to the direcotry containing the manifest as a string.
+        import_spec: Specification of the import as a dict.
+        run_id: ID of the system run the import belongs to.
+    """
+    import_name = import_spec['import_name']
+    attempt_id = _init_attempt(
+        run_id,
+        import_name,
+        os.path.join(dir_path, import_name),
+        import_spec['provenance_url'],
+        import_spec['provenance_description'])['attempt_id']
+
+    try:
+        return _import_one_helper(dir_path, import_spec, run_id, attempt_id)
+    except Exception as e:
+        mark_import_attempt_failed(attempt_id)
+        raise e

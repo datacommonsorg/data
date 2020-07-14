@@ -1,7 +1,6 @@
 import logging
 
 import flask
-from flask import app
 
 from app import utils
 from app import configs

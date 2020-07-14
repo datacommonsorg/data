@@ -121,7 +121,7 @@ class GitHubRepoAPI:
                 shutil.copyfileobj(response.raw, temp_file)
                 temp_file.flush()
 
-            with tarfile.open(temp_file.name, 'r') as tar:
+            with tarfile.open(temp_file.name) as tar:
                 tar.extractall(dest_dir)
                 extracted_repo_name = tar.getnames()[0]
 
