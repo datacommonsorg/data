@@ -2,8 +2,8 @@ import pandas as pd
 import re
 
 def convert_range(s_input):
-    """Convert range values from the format in statvar names to the format as 
-        QuantityRange in Data Commons."""
+    """Convert range values from the format in statvar names (e.g. 10YearsOrMore)
+     to the format as QuantityRange (e.g. [Years 10 -]) in Data Commons."""
     if 'OrMore' in s_input:
         match = re.match(r'(\d+)OrMore([a-zA-Z]+)', s_input)
         num = match.group(1)
@@ -52,7 +52,7 @@ def generate_statvar(statvars, path):
                 raise Exception("Invalid StatVar")
 
 def generate_tmcf(statvars, path):
-    """Generate the templated mcf."""
+    """Generate the template mcf."""
     statvar_template = ('Node: E:lifexp->E{sv_index}\n'
                         'typeOf: dcs:StatVarObservation\n'
                         'variableMeasured: dcs:{stat_var}\n'
