@@ -17,15 +17,7 @@ tsv file is available for download from https://ec.europa.eu/eurostat/estat-navt
 
 ### Overview
 
-This dataset reports life expectancy by age, gender in countries and NUTS2 regions in Europe.
-The dataset is broken into 2 parts: the country level and NUT2 regions for the convenience of importing into DataCommons
-
-### License
-
-
-### Dataset Documentation and Relevant Links 
-
-
+This dataset reports life expectancy by age, gender in countries, NUTS1 and NUTS2 regions in Europe.
 
 ## Import Artifacts
 
@@ -34,11 +26,9 @@ The dataset is broken into 2 parts: the country level and NUT2 regions for the c
 
 ### Cleaned Data
 - [demo_r_mlifexp_cleaned.csv](demo_r_mlifexp_cleaned.csv)
-- [demo_r_mlifexp_country_cleaned.csv](demo_r_mlifexp_country_cleaned.csv)
 
 ### Template MCFs
 - [demo_r_mlifexp.tmcf](demo_r_mlifexp.tmcf)
-- [demo_r_mlifexp_country.tmcf](demo_r_mlifexp_country.tmcf)
 
 ### StatisticalVariable Instance MCF
 - [demo_r_mlifexp_statvar.tmcf](demo_r_mlifexp_statvar.tmcf)
@@ -52,13 +42,13 @@ The dataset is broken into 2 parts: the country level and NUT2 regions for the c
 
 
 ## Generating Artifacts
-To generate the cleaned csv `demo_r_mlifexp_cleaned.csv` and `demo_r_mlifexp_country_cleaned.csv`, run
+To generate the cleaned csv `demo_r_mlifexp_cleaned.csv`, run
 
 ```bash
 python3 preprocess.py
 ```
 
-To generate `demo_r_mlifexp.tmcf`, `demo_r_mlifexp_country.tmcf` and `demo_r_mlifexp_statvar.mcf`, run:
+To generate `demo_r_mlifexp.tmcf` and `demo_r_mlifexp_statvar.mcf`, run:
 
 ```bash
 python3 generate_mcf.py
