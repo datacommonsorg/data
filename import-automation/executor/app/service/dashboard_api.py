@@ -71,6 +71,14 @@ class DashboardAPI:
             logging.info(log['message'])
           else:
             logging.debug(log['message'])
+
+          if 'return_code' in log:
+            if log['return_code']:
+              logging.error('Sub-process returned: ' + str(log['return_code']))
+              logging.info('Sub-process stderr: ' + log['stderr'])
+            else:
+              logging.info('Sub-process succeeded')
+
           return ''
 
         response = self.iap.post(_DASHBOARD_LOG_LIST, json=log).json()
