@@ -46,10 +46,10 @@ Type of Place
 ## Import Artifacts
 
 ### Raw Data
-- [data.csv](data.csv)
+- `data.csv` gets downloaded.
 
 ### MCF
-- [output.mcf](output/covid_mobility_output.mcf)
+- `covid_mobility_output.mcf` gets generated.
 
 ### Scripts
 - [CovidMobility.py](CovidMobility.py)
@@ -79,11 +79,11 @@ Any modifications to the names were duplicated.
 To generate the output MCF `covid_mobility_output.mcf`, run
 
 ``` bash
-python3 CovidMobility.py
+python3 covidmobility.py
 ```
 
 To run the unit tests for CovidMobility.py run:
 
 ```bash
-python3 CovidMobility.py
+python3 TestCovidMobility.py
 ```
