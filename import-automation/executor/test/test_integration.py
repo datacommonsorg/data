@@ -104,7 +104,7 @@ class IntegrationTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        os.environ['TMPDIR'] = os.path.join(os.getcwd(), 'data')
+        os.environ['TMPDIR'] = os.getcwd()
 
     @classmethod
     def tearDownClass(cls):
