@@ -34,13 +34,13 @@ USSTATE_MAP = alpha2_to_dcid.USSTATE_MAP
 COUNTY_MAP = county_to_dcid.COUNTY_MAP
 
 
-def covid_mobility(input_path: str = './input/data.csv',
-                   output_path='./output/covid_mobility_output.mcf') -> None:
+def covid_mobility(input_path: str = 'data.csv',
+                   output_path='covid_mobility_output.mcf') -> None:
     """Main method for the covid_mobility script.
 
     Args:
-        path_to_store_data (str): Defaults to './input/data.csv'.
-        export_to (str): Defaults to './output/covid_mobility_output.mcf'.
+        path_to_store_data (str): Defaults to 'data.csv'.
+        export_to (str): Defaults to 'covid_mobility_output.mcf'.
     """
 
     # URL to download the data from Google Mobility site.

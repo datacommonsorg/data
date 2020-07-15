@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-from CovidMobility import csv_to_mcf
+from covidmobility import csv_to_mcf
 from os import path
 
 
