@@ -77,8 +77,9 @@ def create_venv(requirements_path, venv_dir,
     with tempfile.NamedTemporaryFile(mode='w', suffix='.sh') as script:
         script.write(f'python3 -m virtualenv --verbose --clear {venv_dir}\n')
         script.write(f'. {venv_dir}/bin/activate\n')
-        script.write('python3 -m pip install --verbose --no-cache-dir '
-                     f'--requirement {requirements_path}\n')
+        if os.path.exists(requirements_path):
+          script.write('python3 -m pip install --verbose --no-cache-dir '
+                       f'--requirement {requirements_path}\n')
         script.flush()
 
         process = run_with_timeout(['bash', script.name], timeout)
