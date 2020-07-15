@@ -140,7 +140,14 @@ def _execute_imports_on_commit_helper(commit_sha, run_id):
                                                                import_name)
                 if import_all or absolute_name in import_targets or \
                         import_name in import_targets:
-                    import_one(dir_path, spec, run_id)
+                    import_name = spec['import_name']
+                    attempt_id = _init_attempt(
+                        run_id,
+                        import_name,
+                        os.path.join(dir_path, import_name),
+                        spec['provenance_url'],
+                        spec['provenance_description'])['attempt_id']
+                    import_one(dir_path, spec, run_id, attempt_id)
     return 'success'
 
 
@@ -214,7 +221,7 @@ def _execute_imports_on_update_helper(absolute_import_name, run_id):
         manifest = parse_manifest(manifest_path)
         for spec in manifest['import_specifications']:
             if import_name == 'all' or import_name == spec['import_name']:
-                import_one(dir_path, spec, run_id)
+                import_one(dir_path, spec, run_id, run_id)
 
     return 'success'
 
@@ -231,7 +238,7 @@ def execute_imports_on_update(absolute_import_name):
     Returns:
         A string describing the results of the imports.
     """
-    run_id = _init_run()['run_id']
+    run_id = absolute_import_name
     try:
         return _execute_imports_on_update_helper(absolute_import_name, run_id)
     except Exception as e:
@@ -319,22 +326,15 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
     os.chdir(cwd)
 
 
-def import_one(dir_path, import_spec, run_id):
+def import_one(dir_path, import_spec, run_id, attempt_id):
     """Executes an import.
 
     Args:
         dir_path: Path to the direcotry containing the manifest as a string.
         import_spec: Specification of the import as a dict.
         run_id: ID of the system run the import belongs to.
+        attempt_id: Attempt ID.
     """
-    import_name = import_spec['import_name']
-    attempt_id = _init_attempt(
-        run_id,
-        import_name,
-        os.path.join(dir_path, import_name),
-        import_spec['provenance_url'],
-        import_spec['provenance_description'])['attempt_id']
-
     try:
         return _import_one_helper(dir_path, import_spec, run_id, attempt_id)
     except Exception as e:

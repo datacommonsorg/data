@@ -41,5 +41,9 @@ You could also use Cloud Scheduler to POST to the endpoints directly. For exampl
 
 ## Testing locally
 
-Run `python3 -m unittest`. See [test/test_integration](test/test_integration.py).
-First lines of the generated files would be printed.
+```
+./run_test.sh
+```
+
+See [test/test_integration](test/test_integration.py).  First lines of the
+generated files would be printed.
