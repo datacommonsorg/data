@@ -3,12 +3,18 @@ import shutil
 import re
 import datetime
 
+import pytz
+
 import google.cloud.logging
 import requests
 
 
 def utctime():
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+
+def pttime():
+    return datetime.datetime.now(pytz.timezone('US/Pacific')).isoformat()
 
 
 def setup_logging():

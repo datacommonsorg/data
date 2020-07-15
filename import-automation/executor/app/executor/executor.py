@@ -296,7 +296,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
             dashboard.log(log)
             process.check_returncode()
 
-    time = utils.utctime().replace(':', '_')
+    time = utils.pttime().replace(':', '_')
     path_prefix = f'{dir_path}/{import_spec["import_name"]}'
     import_inputs = import_spec.get('import_inputs', [])
     bucket_io = gcs_io.GCSBucketIO(path_prefix)
