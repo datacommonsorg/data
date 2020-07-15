@@ -76,7 +76,7 @@ class DashboardAPIMock(mock.MagicMock):
 
 
 class GCSBucketIOMock:
-    def __init__(self):
+    def __init__(self, path_prefix='', bucket_name='', bucket=None, client=None):
         self.data = {}
 
     def upload_file(self, src, dest):
@@ -84,15 +84,14 @@ class GCSBucketIOMock:
         with open(src) as file:
             logging.warning(f'Generated {src}: {file.readline()}')
 
+    def update_version(self, version):
+      logging.warning(f'Version: {version}')
+
 
 def get_github_auth_access_token_mock():
     return os.environ.get('GITHUB_ACCESS_TOKEN', '')
 
 
-@mock.patch('app.service.dashboard_api.DashboardAPI',
-            DashboardAPIMock)
-@mock.patch('app.configs.get_github_auth_access_token',
-            get_github_auth_access_token_mock)
 @mock.patch('app.service.gcs_io.GCSBucketIO',
             GCSBucketIOMock)
 class IntegrationTest(unittest.TestCase):
@@ -108,8 +107,11 @@ class IntegrationTest(unittest.TestCase):
     def setUp(self):
         self.app = main.FLASK_APP.test_client()
 
+    @mock.patch('app.configs.get_github_auth_access_token', get_github_auth_access_token_mock)
+    @mock.patch('app.service.dashboard_api.DashboardAPI', DashboardAPIMock)
     def test_commit(self):
         self.app.post('/', json={'COMMIT_SHA': '9804f2fd2c5422a9f6b896e9c6862db61f9a8a08'})
 
     def test_update(self):
-        self.app.post('/update', json={'absolute_import_name': 'scripts/us_fed/treasury_constant_maturity_rates:us_treasury_constant_maturity_rates'})
+        with mock.patch('app.configs.standalone', return_value=True):
+            self.app.post('/update', json={'absolute_import_name': 'scripts/us_fed/treasury_constant_maturity_rates:all'})
