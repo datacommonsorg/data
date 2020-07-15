@@ -1,4 +1,5 @@
 import enum
+import logging
 
 from app import utils
 from app import configs
@@ -61,15 +62,15 @@ class DashboardAPI:
     def log(self, log):
         if configs.standalone():
           if log['level'] == LogLevel.CRITICAL:
-            logging.critical(message)
+            logging.critical(log['message'])
           elif log['level'] == LogLevel.ERROR:
-            logging.error(message)
+            logging.error(log['message'])
           elif log['level'] == LogLevel.WARNING:
-            logging.warning(message)
+            logging.warning(log['message'])
           elif log['level'] == LogLevel.INFO:
-            logging.info(message)
+            logging.info(log['message'])
           else:
-            logging.debug(message)
+            logging.debug(log['message'])
           return ''
 
         response = self.iap.post(_DASHBOARD_LOG_LIST, json=log).json()

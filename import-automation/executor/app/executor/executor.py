@@ -206,10 +206,13 @@ def mark_import_attempt_failed(attempt_id):
 
 
 def _execute_imports_on_update_helper(absolute_import_name, run_id):
+    logging.info(absolute_import_name + ': BEGIN')
     github = github_api.GitHubRepoAPI()
     dashboard = dashboard_api.DashboardAPI()
     with tempfile.TemporaryDirectory() as tmpdir:
+        logging.info(absolute_import_name + ': downloading repo')
         repo_dirname = github.download_repo(tmpdir)
+        logging.info(absolute_import_name + ': downloaded repo ' + repo_dirname)
         cwd = os.path.join(tmpdir, repo_dirname)
         os.chdir(cwd)
 
@@ -219,10 +222,12 @@ def _execute_imports_on_update_helper(absolute_import_name, run_id):
             absolute_import_name)
         manifest_path = os.path.join(dir_path, configs.MANIFEST_FILENAME)
         manifest = parse_manifest(manifest_path)
+        logging.info(absolute_import_name + ': loaded manifest ' + manifest_path)
         for spec in manifest['import_specifications']:
             if import_name == 'all' or import_name == spec['import_name']:
                 import_one(dir_path, spec, run_id, run_id)
 
+    logging.info(absolute_import_name + ': END')
     return 'success'
 
 def execute_imports_on_update(absolute_import_name):

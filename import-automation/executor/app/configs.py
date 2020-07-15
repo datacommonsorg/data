@@ -30,12 +30,14 @@ def _get_config(entity_id):
 
 
 def get_dashboard_oauth_client_id():
+    if standalone(): return ''
     return _get_config('DASHBOARD_OAUTH_CLIENT_ID')
 
 
 def get_github_auth_access_token():
+    if standalone(): return ''
     return _get_config('GITHUB_AUTH_ACCESS_TOKEN')
 
 
 def production():
-    return 'EXECUTOR_PRODUCITON' in os.environ
+    return 'EXECUTOR_PRODUCTION' in os.environ
