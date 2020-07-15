@@ -95,7 +95,7 @@ class GCSBucketIOMock:
         self.data[dest] = src
         with open(src) as file:
             logging.warning(f'Generated {src}: {file.readline()}')
-        _compare_lines(src, os.path.join(CWD, 'test', 'data', os.path.basename(src)), 50)
+        assert _compare_lines(src, os.path.join(CWD, 'test', 'data', os.path.basename(src)), 50)
 
     def update_version(self, version):
         logging.warning(f'Version: {version}')
