@@ -296,7 +296,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
             process.check_returncode()
 
     time = utils.utctime()
-    path_prefix = f'{dir_path}:{import_spec["import_name"]}/{time}'
+    path_prefix = f'{dir_path}_{import_spec["import_name"]}/{time}'
     import_inputs = import_spec.get('import_inputs', [])
     for i, import_input in enumerate(import_inputs):
 
@@ -311,7 +311,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
                                attempt_id=attempt_id)
             bucket_io.upload_file(
                 template_mcf,
-                f'{path_prefix}/{i}/{os.path.basename(template_mcf)}')
+                f'{path_prefix}/{os.path.basename(template_mcf)}')
 
         if cleaned_csv:
             with open(cleaned_csv) as f:
