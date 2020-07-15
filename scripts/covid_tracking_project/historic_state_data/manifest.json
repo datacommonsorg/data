@@ -12,7 +12,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "COVIDTracking_States.tmcf",
-                    "cleaned_csv": "COVIDTracking_US.csv",
+                    "cleaned_csv": "COVIDTracking_States.csv",
                     "node_mcf": "COVIDTracking_States_StatisticalVariables.mcf"
                 }
             ],
