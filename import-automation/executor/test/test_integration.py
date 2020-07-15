@@ -3,6 +3,7 @@ import unittest
 import logging
 from unittest import mock
 import uuid
+import filecmp
 
 from app import main
 from app import utils
@@ -75,17 +76,22 @@ class DashboardAPIMock(mock.MagicMock):
     #     return run
 
 
+CWD = os.getcwd()
+
+
 class GCSBucketIOMock:
     def __init__(self, path_prefix='', bucket_name='', bucket=None, client=None):
         self.data = {}
+        self.prefix = path_prefix
 
     def upload_file(self, src, dest):
         self.data[dest] = src
         with open(src) as file:
             logging.warning(f'Generated {src}: {file.readline()}')
+        assert filecmp.cmp(src, os.path.join(CWD, 'test', 'data', os.path.basename(src)), shallow=False)
 
     def update_version(self, version):
-      logging.warning(f'Version: {version}')
+        logging.warning(f'Version: {version}')
 
 
 def get_github_auth_access_token_mock():
@@ -98,7 +104,7 @@ class IntegrationTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        os.environ['TMPDIR'] = os.getcwd()
+        os.environ['TMPDIR'] = os.path.join(os.getcwd(), 'data')
 
     @classmethod
     def tearDownClass(cls):
