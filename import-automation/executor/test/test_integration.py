@@ -86,10 +86,7 @@ class GCSBucketIOMock:
 
 
 def get_github_auth_access_token_mock():
-    token = os.environ.get('GITHUB_ACCESS_TOKEN')
-    if token:
-        return token
-    return ''
+    return os.environ.get('GITHUB_ACCESS_TOKEN', '')
 
 
 @mock.patch('app.service.dashboard_api.DashboardAPI',

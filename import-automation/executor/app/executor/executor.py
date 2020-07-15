@@ -218,6 +218,7 @@ def _execute_imports_on_update_helper(absolute_import_name, run_id):
 
     return 'success'
 
+
 def execute_imports_on_update(absolute_import_name):
     """Executes imports upon a scheduled update.
 
