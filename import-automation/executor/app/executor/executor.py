@@ -77,8 +77,9 @@ def create_venv(requirements_path, venv_dir,
     with tempfile.NamedTemporaryFile(mode='w', suffix='.sh') as script:
         script.write(f'python3 -m virtualenv --verbose --clear {venv_dir}\n')
         script.write(f'. {venv_dir}/bin/activate\n')
-        script.write('python3 -m pip install --verbose --no-cache-dir '
-                     f'--requirement {requirements_path}\n')
+        if os.path.exists(requirements_path):
+          script.write('python3 -m pip install --verbose --no-cache-dir '
+                       f'--requirement {requirements_path}\n')
         script.flush()
 
         process = run_with_timeout(['bash', script.name], timeout)
@@ -140,7 +141,14 @@ def _execute_imports_on_commit_helper(commit_sha, run_id):
                                                                import_name)
                 if import_all or absolute_name in import_targets or \
                         import_name in import_targets:
-                    import_one(dir_path, spec, run_id)
+                    import_name = spec['import_name']
+                    attempt_id = _init_attempt(
+                        run_id,
+                        import_name,
+                        os.path.join(dir_path, import_name),
+                        spec['provenance_url'],
+                        spec['provenance_description'])['attempt_id']
+                    import_one(dir_path, spec, run_id, attempt_id)
     return 'success'
 
 
@@ -199,10 +207,13 @@ def mark_import_attempt_failed(attempt_id):
 
 
 def _execute_imports_on_update_helper(absolute_import_name, run_id):
+    logging.info(absolute_import_name + ': BEGIN')
     github = github_api.GitHubRepoAPI()
     dashboard = dashboard_api.DashboardAPI()
     with tempfile.TemporaryDirectory() as tmpdir:
+        logging.info(absolute_import_name + ': downloading repo')
         repo_dirname = github.download_repo(tmpdir)
+        logging.info(absolute_import_name + ': downloaded repo ' + repo_dirname)
         cwd = os.path.join(tmpdir, repo_dirname)
         os.chdir(cwd)
 
@@ -212,10 +223,12 @@ def _execute_imports_on_update_helper(absolute_import_name, run_id):
             absolute_import_name)
         manifest_path = os.path.join(dir_path, configs.MANIFEST_FILENAME)
         manifest = parse_manifest(manifest_path)
+        logging.info(absolute_import_name + ': loaded manifest ' + manifest_path)
         for spec in manifest['import_specifications']:
             if import_name == 'all' or import_name == spec['import_name']:
-                import_one(dir_path, spec, run_id)
+                import_one(dir_path, spec, run_id, run_id)
 
+    logging.info(absolute_import_name + ': END')
     return 'success'
 
 
@@ -232,7 +245,7 @@ def execute_imports_on_update(absolute_import_name):
     Returns:
         A string describing the results of the imports.
     """
-    run_id = _init_run()['run_id']
+    run_id = absolute_import_name
     try:
         return _execute_imports_on_update_helper(absolute_import_name, run_id)
     except Exception as e:
@@ -284,7 +297,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
             process.check_returncode()
 
     time = utils.utctime()
-    path_prefix = f'{dir_path}:{import_spec["import_name"]}/{time}'
+    path_prefix = f'{dir_path}_{import_spec["import_name"]}/{time}'
     import_inputs = import_spec.get('import_inputs', [])
     for i, import_input in enumerate(import_inputs):
 
@@ -299,7 +312,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
                                attempt_id=attempt_id)
             bucket_io.upload_file(
                 template_mcf,
-                f'{path_prefix}/{i}/{os.path.basename(template_mcf)}')
+                f'{path_prefix}/{os.path.basename(template_mcf)}')
 
         if cleaned_csv:
             with open(cleaned_csv) as f:
@@ -320,22 +333,15 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
     os.chdir(cwd)
 
 
-def import_one(dir_path, import_spec, run_id):
+def import_one(dir_path, import_spec, run_id, attempt_id):
     """Executes an import.
 
     Args:
         dir_path: Path to the direcotry containing the manifest as a string.
         import_spec: Specification of the import as a dict.
         run_id: ID of the system run the import belongs to.
+        attempt_id: Attempt ID.
     """
-    import_name = import_spec['import_name']
-    attempt_id = _init_attempt(
-        run_id,
-        import_name,
-        os.path.join(dir_path, import_name),
-        import_spec['provenance_url'],
-        import_spec['provenance_description'])['attempt_id']
-
     try:
         return _import_one_helper(dir_path, import_spec, run_id, attempt_id)
     except Exception as e:

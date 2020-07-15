@@ -1,4 +1,5 @@
 import enum
+import logging
 
 from app import utils
 from app import configs
@@ -15,6 +16,8 @@ _DASHBOARD_ATTEMPT_BY_ID = _DASHBOARD_ATTEMPT_LIST + '/{attempt_id}'
 _DASHBOARD_LOG_LIST = _DASHBOARD_API_HOST + '/logs'
 _DASHBOARD_LOG_BY_ID = _DASHBOARD_LOG_LIST + '/{log_id}'
 
+_STANDALONE = 'STANDALONE'
+
 
 class LogLevel(enum.Enum):
     """Allowed log levels of a log.
@@ -30,6 +33,7 @@ class LogLevel(enum.Enum):
 class DashboardAPI:
 
     def __init__(self, client_id=None):
+        if configs.standalone(): return
         if not client_id:
             client_id = configs.get_dashboard_oauth_client_id()
         self.client_id = client_id
@@ -56,6 +60,19 @@ class DashboardAPI:
         return self.log(log)
 
     def log(self, log):
+        if configs.standalone():
+          if log['level'] == LogLevel.CRITICAL:
+            logging.critical(log['message'])
+          elif log['level'] == LogLevel.ERROR:
+            logging.error(log['message'])
+          elif log['level'] == LogLevel.WARNING:
+            logging.warning(log['message'])
+          elif log['level'] == LogLevel.INFO:
+            logging.info(log['message'])
+          else:
+            logging.debug(log['message'])
+          return ''
+
         response = self.iap.post(_DASHBOARD_LOG_LIST, json=log).json()
         response.raise_for_status()
         return response
@@ -81,12 +98,15 @@ class DashboardAPI:
             message, LogLevel.DEBUG, attempt_id, run_id, time_logged)
 
     def init_run(self, system_run):
+        if configs.standalone(): return {'run_id': _STANDALONE}
         return self.iap.post(_DASHBOARD_RUN_LIST, json=system_run).json()
 
     def init_attempt(self, import_attempt):
+        if configs.standalone(): return {'attempt_id': _STANDALONE}
         return self.iap.post(_DASHBOARD_ATTEMPT_LIST, json=import_attempt).json()
 
     def update_attempt(self, import_attempt, attempt_id=None):
+        if configs.standalone(): return {'attempt_id': _STANDALONE}
         if not attempt_id:
             attempt_id = import_attempt['attempt_id']
         return self.iap.patch(
@@ -94,6 +114,7 @@ class DashboardAPI:
             json=import_attempt).json()
 
     def update_run(self, system_run, run_id=None):
+        if configs.standalone(): return {'run_id': _STANDALONE}
         if not run_id:
             run_id = system_run['run_id']
         return self.iap.patch(
