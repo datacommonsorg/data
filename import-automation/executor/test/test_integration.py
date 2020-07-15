@@ -82,7 +82,12 @@ CWD = os.getcwd()
 def _compare_lines(path1, path2, num_lines):
     with open(path1) as file1, open(path2) as file2:
         for i in range(num_lines):
-            if file1.readline() != file2.readline():
+            line1 = file1.readline()
+            line2 = file2.readline()
+            if line1 != line2:
+                print('Two lines differ:')
+                print(line1)
+                print(line2)
                 return False
     return True
 
