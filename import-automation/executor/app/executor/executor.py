@@ -231,6 +231,7 @@ def _execute_imports_on_update_helper(absolute_import_name, run_id):
     logging.info(absolute_import_name + ': END')
     return 'success'
 
+
 def execute_imports_on_update(absolute_import_name):
     """Executes imports upon a scheduled update.
 
@@ -295,13 +296,11 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
             dashboard.log(log)
             process.check_returncode()
 
-    time = utils.utctime()
-    path_prefix = f'{dir_path}_{import_spec["import_name"]}/{time}'
+    time = utils.pttime().replace(':', '_')
+    path_prefix = f'{dir_path}/{import_spec["import_name"]}'
     import_inputs = import_spec.get('import_inputs', [])
+    bucket_io = gcs_io.GCSBucketIO(path_prefix)
     for i, import_input in enumerate(import_inputs):
-
-        bucket_io = gcs_io.GCSBucketIO()
-
         template_mcf = import_input.get('template_mcf')
         cleaned_csv = import_input.get('cleaned_csv')
         node_mcf = import_input.get('node_mcf')
@@ -311,7 +310,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
                                attempt_id=attempt_id)
             bucket_io.upload_file(
                 template_mcf,
-                f'{path_prefix}/{os.path.basename(template_mcf)}')
+                f'{time}/{os.path.basename(template_mcf)}')
 
         if cleaned_csv:
             with open(cleaned_csv) as f:
@@ -319,7 +318,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
                                attempt_id=attempt_id)
             bucket_io.upload_file(
                 cleaned_csv,
-                f'{path_prefix}/{os.path.basename(cleaned_csv)}')
+                f'{time}/{os.path.basename(cleaned_csv)}')
 
         if node_mcf:
             with open(node_mcf) as f:
@@ -327,8 +326,8 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
                                attempt_id=attempt_id)
             bucket_io.upload_file(
                 node_mcf,
-                f'{path_prefix}/{os.path.basename(node_mcf)}')
-
+                f'{time}/{os.path.basename(node_mcf)}')
+    bucket_io.update_version(time)
     os.chdir(cwd)
 
 
