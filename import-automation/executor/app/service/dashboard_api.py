@@ -1,4 +1,3 @@
-import enum
 import logging
 
 from app import utils
@@ -8,7 +7,7 @@ from app.service import iap
 _DASHBOARD_API_HOST = 'https://datcom-data.uc.r.appspot.com'
 
 _DASHBOARD_RUN_LIST = _DASHBOARD_API_HOST + '/system_runs'
-_DASHBOARD_RUN_BY_ID = _DASHBOARD_RUN_LIST + '/{attempt_id}'
+_DASHBOARD_RUN_BY_ID = _DASHBOARD_RUN_LIST + '/{run_id}'
 
 _DASHBOARD_ATTEMPT_LIST = _DASHBOARD_API_HOST + '/import_attempts'
 _DASHBOARD_ATTEMPT_BY_ID = _DASHBOARD_ATTEMPT_LIST + '/{attempt_id}'
@@ -19,7 +18,7 @@ _DASHBOARD_LOG_BY_ID = _DASHBOARD_LOG_LIST + '/{log_id}'
 _STANDALONE = 'STANDALONE'
 
 
-class LogLevel(enum.Enum):
+class LogLevel:
     """Allowed log levels of a log.
     The level of a log can only be one of these.
     """
@@ -45,7 +44,7 @@ class DashboardAPI:
         if not attempt_id and not run_id:
             raise ValueError('Neither attempt_id or run_id is specified')
         if not time_logged:
-            time_logged = utils.utctime()
+            time_logged = utils.pttime()
 
         log = {
             'message': message,
@@ -61,25 +60,26 @@ class DashboardAPI:
 
     def log(self, log):
         if configs.standalone():
-          if log['level'] == LogLevel.CRITICAL:
-            logging.critical(log['message'])
-          elif log['level'] == LogLevel.ERROR:
-            logging.error(log['message'])
-          elif log['level'] == LogLevel.WARNING:
-            logging.warning(log['message'])
-          elif log['level'] == LogLevel.INFO:
-            logging.info(log['message'])
-          else:
-            logging.debug(log['message'])
-
-          if 'return_code' in log:
-            if log['return_code']:
-              logging.error('Sub-process returned: ' + str(log['return_code']))
-              logging.info('Sub-process stderr: ' + log['stderr'])
+            if log['level'] == LogLevel.CRITICAL:
+                logging.critical(log['message'])
+            elif log['level'] == LogLevel.ERROR:
+                logging.error(log['message'])
+            elif log['level'] == LogLevel.WARNING:
+                logging.warning(log['message'])
+            elif log['level'] == LogLevel.INFO:
+                logging.info(log['message'])
             else:
-              logging.info('Sub-process succeeded')
+                logging.debug(log['message'])
 
-          return ''
+            if 'return_code' in log:
+                if log['return_code']:
+                    logging.error(
+                        'Sub-process returned: ' + str(log['return_code']))
+                    logging.info('Sub-process stderr: ' + log['stderr'])
+                else:
+                    logging.info('Sub-process succeeded')
+
+            return ''
 
         response = self.iap.post(_DASHBOARD_LOG_LIST, json=log).json()
         response.raise_for_status()
@@ -111,7 +111,8 @@ class DashboardAPI:
 
     def init_attempt(self, import_attempt):
         if configs.standalone(): return {'attempt_id': _STANDALONE}
-        return self.iap.post(_DASHBOARD_ATTEMPT_LIST, json=import_attempt).json()
+        return self.iap.post(_DASHBOARD_ATTEMPT_LIST,
+                             json=import_attempt).json()
 
     def update_attempt(self, import_attempt, attempt_id=None):
         if configs.standalone(): return {'attempt_id': _STANDALONE}
@@ -152,7 +153,7 @@ def construct_log(message, level=LogLevel.INFO, time_logged=None,
     if not run_id and not attempt_id:
         raise ValueError('Neither run_id nor attempt_id is specified')
     if not time_logged:
-        time_logged = utils.utctime()
+        time_logged = utils.pttime()
     log = {'message': message, 'level': level, 'time_logged': time_logged}
     if run_id:
         log['run_id'] = run_id
