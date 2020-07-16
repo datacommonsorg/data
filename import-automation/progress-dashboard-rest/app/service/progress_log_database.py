@@ -37,8 +37,8 @@ class ProgressLogDatabase(base_database.BaseDatabase):
         """Constructs a LogDatabase.
 
         Args:
-            client: datastore Client object to communicate with Datastore
-            message_manager: LogMessageManager object to store log messages
+            client: datastore Client object to communicate with Datastore.
+            message_manager: LogMessageManager object to store log messages.
         """
         super().__init__(ProgressLogDatabase.kind, client, 'log_id')
         if not message_manager:
