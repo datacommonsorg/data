@@ -116,6 +116,10 @@ class GitHubRepoAPI:
         """
         content_query = self._build_content_query(commit_sha, dir_path)
         response = requests.get(content_query, auth=self.auth)
+        ok = response.status_code == http.HTTPStatus.OK
+        not_found = response.status_code == http.HTTPStatus.NOT_FOUND
+        if not ok and not not_found:
+            response.raise_for_status()
         return response.status_code != http.HTTPStatus.NOT_FOUND
 
     def find_dirs_in_commit_containing_file(self, commit_sha, containing):

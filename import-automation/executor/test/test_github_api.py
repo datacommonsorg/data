@@ -66,6 +66,15 @@ class GitHubAPITest(unittest.TestCase):
             auth=('authusernameC', ''))
 
     @mock.patch('requests.get')
+    def test_dir_exists_other_error(self, get):
+        get.return_value = ResponseMock(500)
+        self.assertRaises(
+            exceptions.HTTPError, self.github._dir_exists, 'c', 'a/b/c')
+        get.assert_called_with(
+            'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
+            auth=('authusernameC', ''))
+
+    @mock.patch('requests.get')
     def test_query_commit(self, get):
         expected = {'files': []}
         get.return_value = ResponseMock(200, expected)
