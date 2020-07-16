@@ -40,7 +40,7 @@ class GitHubRepoAPI:
     def __init__(self,
                  owner_username=None,
                  repo_name=None,
-                 auth_username=configs.GITHUB_AUTH_USERNAME,
+                 auth_username=None,
                  auth_access_token=None):
         if not owner_username:
             owner_username = configs.REPO_OWNER_USERNAME
@@ -72,9 +72,6 @@ class GitHubRepoAPI:
             'dir_path': dir_path
         })
         response = requests.get(content_query, auth=self.auth)
-        if response.status_code == 404:
-            # Dir was deleted
-            return []
         response.raise_for_status()
         content_info = response.json()
         return [entry['name'] for entry in content_info if entry['type'] == 'file']

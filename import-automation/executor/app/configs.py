@@ -19,7 +19,7 @@ def standalone():
 
 PROJECT_ID = 'datcom-cronjobs' if standalone() else 'google.com:datcom-data'
 REPO_OWNER_USERNAME = 'datacommonsorg' if standalone() else 'intrepiditee'
-REPO_NAME = 'data-demo' if standalone() else 'data-demo'
+REPO_NAME = 'data' if standalone() else 'data-demo'
 BUCKET_NAME = 'datcom-prod-imports' if standalone() else 'import-inputs'
 
 
