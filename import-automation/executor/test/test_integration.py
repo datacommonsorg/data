@@ -80,7 +80,7 @@ CWD = os.getcwd()
 
 
 def _compare_lines(expected_path, path, num_lines):
-    with open(expected_path) as expected, open(path) as file:
+    with open(expected_path, 'rb') as expected, open(path, 'rb') as file:
         for i in range(num_lines):
             line1 = expected.readline()
             line2 = file.readline()
