@@ -3,6 +3,7 @@ import unittest
 import logging
 from unittest import mock
 import uuid
+import filecmp
 
 from app import main
 from app import utils
@@ -75,6 +76,21 @@ class DashboardAPIMock(mock.MagicMock):
     #     return run
 
 
+CWD = os.getcwd()
+
+
+def _compare_lines(expected_path, path, num_lines):
+    with open(expected_path) as expected, open(path) as file:
+        for i in range(num_lines):
+            line1 = expected.readline()
+            line2 = file.readline()
+            if line1 != line2:
+                print('WANT:', line1)
+                print('GOT:', line2)
+                return False
+    return True
+
+
 class GCSBucketIOMock:
     def __init__(self, path_prefix='', bucket_name='', bucket=None, client=None):
         self.data = {}
@@ -83,9 +99,11 @@ class GCSBucketIOMock:
         self.data[dest] = src
         with open(src) as file:
             logging.warning(f'Generated {src}: {file.readline()}')
+        assert _compare_lines(os.path.join(CWD, 'test', 'data', os.path.basename(src)), src, 50)
 
     def update_version(self, version):
-      logging.warning(f'Version: {version}')
+        logging.warning(f'Version: {version}')
+        assert version == '2020_07_15T12_07_17_365264_07_00'
 
 
 def get_github_auth_access_token_mock():
@@ -94,6 +112,7 @@ def get_github_auth_access_token_mock():
 
 @mock.patch('app.service.gcs_io.GCSBucketIO',
             GCSBucketIOMock)
+@mock.patch('app.utils.pttime', lambda: '2020-07-15T12:07:17.365264-07:00')
 class IntegrationTest(unittest.TestCase):
 
     @classmethod
