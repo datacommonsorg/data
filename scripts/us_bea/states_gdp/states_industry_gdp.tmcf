@@ -5,4 +5,4 @@ observationAbout: C:states_industry_gdp->GeoId
 observationDate: C:states_industry_gdp->Quarter
 observationPeriod: "P3M"
 value: C:states_industry_gdp->value
-unit: "Current USD"
+unit: dcs:USDollar
