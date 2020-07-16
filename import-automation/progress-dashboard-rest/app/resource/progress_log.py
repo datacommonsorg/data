@@ -32,12 +32,13 @@ from app.model import import_attempt_model
 from app.model import system_run_model
 from app.model import progress_log_model
 
+# TODO(intrepiditee): Rename from *_model.*Model to *.Model.
 _ATTEMPT = import_attempt_model.ImportAttemptModel
 _RUN = system_run_model.SystemRunModel
 _LOG = progress_log_model.ProgressLogModel
 
 
-# TODO(intrepiditee): Move to model
+# TODO(intrepiditee): Move to model.
 class LogLevel(enum.Enum):
     """Allowed log levels of a log.
 
@@ -57,13 +58,13 @@ class ProgressLog(flask_restful.Resource):
     """Base class for a progress log resource.
 
     Attributes:
-        client: datastore Client object used to communicate with Datastore
+        client: datastore Client object used to communicate with Datastore.
         run_database: SystemRunDatabase object for querying and storing
-            system runs using the client
+            system runs using the client.
         log_database: ProgressLogDatabase object for querying and storing
-            progress logs using the client
+            progress logs using the client.
         attempt_database: ImportAttemptDatabase object for querying and storing
-            import attempts using the client
+            import attempts using the client.
     """
     parser = reqparse.RequestParser()
     required_fields = [(_LOG.level,), (_LOG.message,)]
@@ -71,12 +72,12 @@ class ProgressLog(flask_restful.Resource):
     utils.add_fields(parser, required_fields, required=True)
     utils.add_fields(parser, optional_fields, required=False)
 
-    # TODO(intrepiditee): Change other resources to also accept an optional arg
+    # TODO(intrepiditee): Change other resources to also accept an optional arg.
     def __init__(self, client=None):
         """Constructs a ProgressLog.
 
         Args:
-            client: datastore Client object used to communicate with Datastore
+            client: datastore Client object used to communicate with Datastore.
         """
         if not client:
             client = utils.create_datastore_client()
@@ -96,13 +97,13 @@ class ProgressLogByID(ProgressLog):
     Attributes:
         See ImportLog.
     """
-    # TODO(intrepiditee): Use a helper for get
-    # TODO(intrepiditee): Use exception for request errors
+    # TODO(intrepiditee): Use a helper for get.
+    # TODO(intrepiditee): Use exception for request errors.
     def get(self, log_id):
         """Queries the progress logs by its log_id.
 
         Args:
-            log_id: ID of the progress log as a string
+            log_id: ID of the progress log as a string.
 
         Returns:
             A list of progress logs with messages loaded of the
@@ -125,7 +126,7 @@ class ProgressLogByRunID(ProgressLog):
         """Queries the progress logs of a system run.
 
         Args:
-            run_id: ID of the system run as a string
+            run_id: ID of the system run as a string.
 
         Returns:
             A list of progress logs each as a datastore Entity object with
@@ -151,7 +152,7 @@ class ProgressLogByAttemptID(ProgressLog):
         """Queries the progress logs of an import attempt.
 
         Args:
-            attempt_id: ID of the import attempt as a string
+            attempt_id: ID of the import attempt as a string.
 
         Returns:
            A list of progress logs each as a datastore Entity object with

@@ -60,14 +60,14 @@ class ProgressLogListTest(unittest.TestCase):
         log_list_resource = progress_log_list.ProgressLogList()
         run_list_resource = system_run_list.SystemRunList()
         attempt_list_resource = import_attempt_list.ImportAttemptList()
-        # TODO(intrepiditee): Add optional arg to resources accept a client
+        # TODO(intrepiditee): Add optional arg to resources accept a client.
         run_list_resource.database.client = self.client
         attempt_list_resource.database.client = self.client
         attempt_list_resource.run_database.client = self.client
         log_list_resource.log_database.client = self.client
         log_list_resource.attempt_database.client = self.client
         log_list_resource.run_database.client = self.client
-        # TODO(intrepiditee): Add optional arg for log message manager
+        # TODO(intrepiditee): Add optional arg for log message manager.
         log_list_resource.log_database.message_manager = self.manager
         self.by_log_id.log_database.message_manager = self.manager
         self.by_run_id.log_database.message_manager = self.manager
