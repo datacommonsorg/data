@@ -79,15 +79,14 @@ class DashboardAPIMock(mock.MagicMock):
 CWD = os.getcwd()
 
 
-def _compare_lines(path1, path2, num_lines):
-    with open(path1) as file1, open(path2) as file2:
+def _compare_lines(expected_path, path, num_lines):
+    with open(expected_path) as expected, open(path) as file:
         for i in range(num_lines):
-            line1 = file1.readline()
-            line2 = file2.readline()
+            line1 = expected.readline()
+            line2 = file.readline()
             if line1 != line2:
-                print('Two lines differ:')
-                print(line1)
-                print(line2)
+                print('WANT:', line1)
+                print('GOT:', line2)
                 return False
     return True
 
@@ -100,7 +99,7 @@ class GCSBucketIOMock:
         self.data[dest] = src
         with open(src) as file:
             logging.warning(f'Generated {src}: {file.readline()}')
-        assert _compare_lines(src, os.path.join(CWD, 'test', 'data', os.path.basename(src)), 50)
+        assert _compare_lines(os.path.join(CWD, 'test', 'data', os.path.basename(src)), src, 50)
 
     def update_version(self, version):
         logging.warning(f'Version: {version}')
