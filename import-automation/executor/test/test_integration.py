@@ -5,6 +5,7 @@ from unittest import mock
 import uuid
 import filecmp
 
+from app import configs
 from app import main
 from app import utils
 
@@ -113,11 +114,52 @@ def get_github_auth_access_token_mock():
 @mock.patch('app.service.gcs_io.GCSBucketIO',
             GCSBucketIOMock)
 @mock.patch('app.utils.pttime', lambda: '2020-07-15T12:07:17.365264-07:00')
-class IntegrationTest(unittest.TestCase):
+@mock.patch('app.configs.standalone', lambda: True)
+@mock.patch('app.configs.PROJECT_ID', 'datcom-cronjobs')
+@mock.patch('app.configs.REPO_OWNER_USERNAME', 'datacommonsorg')
+@mock.patch('app.configs.REPO_NAME', 'data')
+@mock.patch('app.configs.BUCKET_NAME', 'datcom-prod-imports')
+class StandaloneUpdateTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        os.environ['TMPDIR'] = os.getcwd()
+        os.environ['TMPDIR'] = CWD
+        logging.getLogger().setLevel(logging.INFO)
+
+    @classmethod
+    def tearDownClass(cls):
+        os.environ.pop('TMPDIR')
+
+    def setUp(self):
+        self.app = main.FLASK_APP.test_client()
+
+    # @mock.patch('app.configs.get_github_auth_access_token',
+    #             get_github_auth_access_token_mock)
+    # @mock.patch('app.service.dashboard_api.DashboardAPI', DashboardAPIMock)
+    # @mock.patch('app.executor.executor.parse_commit_message_targets',
+    #             lambda _: ['scripts/google/covid_mobility:all'])
+    # def test_covid_state_commit(self):
+    #     self.app.post(
+    #         '/',
+    #         json={'COMMIT_SHA': '9de1e33a5e4ab44cda0106faa6c33379ccc708e0'})
+
+    def test_treasury_update(self):
+        self.app.post('/update', json={'absolute_import_name':
+        'scripts/us_fed/treasury_constant_maturity_rates:all'})
+
+    def test_covid_state_update(self):
+        self.app.post('/update', json={'absolute_import_name':
+        'scripts/covid_tracking_project/historic_state_data:all'})
+
+
+@mock.patch('app.service.gcs_io.GCSBucketIO',
+            GCSBucketIOMock)
+@mock.patch('app.utils.pttime', lambda: '2020-07-15T12:07:17.365264-07:00')
+class CommitTest(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        os.environ['TMPDIR'] = CWD
 
     @classmethod
     def tearDownClass(cls):
@@ -128,9 +170,5 @@ class IntegrationTest(unittest.TestCase):
 
     @mock.patch('app.configs.get_github_auth_access_token', get_github_auth_access_token_mock)
     @mock.patch('app.service.dashboard_api.DashboardAPI', DashboardAPIMock)
-    def test_commit(self):
+    def test_treasury(self):
         self.app.post('/', json={'COMMIT_SHA': '9804f2fd2c5422a9f6b896e9c6862db61f9a8a08'})
-
-    def test_update(self):
-        with mock.patch('app.configs.standalone', return_value=True):
-            self.app.post('/update', json={'absolute_import_name': 'scripts/us_fed/treasury_constant_maturity_rates:all'})

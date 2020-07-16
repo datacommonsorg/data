@@ -38,14 +38,20 @@ def _build_commit_query(owner_username, repo_name, commit_sha):
 
 class GitHubRepoAPI:
     def __init__(self,
-                 owner_username=configs.REPO_OWNER_USERNAME,
-                 repo_name=configs.REPO_NAME,
+                 owner_username=None,
+                 repo_name=None,
                  auth_username=configs.GITHUB_AUTH_USERNAME,
                  auth_access_token=None):
-        self.owner = owner_username
-        self.repo = repo_name
+        if not owner_username:
+            owner_username = configs.REPO_OWNER_USERNAME
+        if not repo_name:
+            repo_name = configs.REPO_NAME
+        if not auth_username:
+            auth_username = configs.GITHUB_AUTH_USERNAME
         if not auth_access_token:
             auth_access_token = configs.get_github_auth_access_token()
+        self.owner = owner_username
+        self.repo = repo_name
         self.auth = (auth_username, auth_access_token)
 
     def query_commit(self, commit_sha):
@@ -66,6 +72,9 @@ class GitHubRepoAPI:
             'dir_path': dir_path
         })
         response = requests.get(content_query, auth=self.auth)
+        if response.status_code == 404:
+            # Dir was deleted
+            return []
         response.raise_for_status()
         content_info = response.json()
         return [entry['name'] for entry in content_info if entry['type'] == 'file']

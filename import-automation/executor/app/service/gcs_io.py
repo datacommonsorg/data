@@ -7,7 +7,9 @@ from app import configs
 
 
 class GCSBucketIO:
-    def __init__(self, path_prefix='', bucket_name=configs.BUCKET_NAME, bucket=None, client=None):
+    def __init__(self, path_prefix='', bucket_name=None, bucket=None, client=None):
+        if not bucket_name:
+            bucket_name = configs.BUCKET_NAME
         if not client:
             client = storage.Client()
         if not bucket:
