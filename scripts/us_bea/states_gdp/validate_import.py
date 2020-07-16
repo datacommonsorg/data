@@ -45,6 +45,7 @@ class USStateQuarterlyGDPImportVal(unittest.TestCase):
         years = range(2005, 2020)
         quarters = range(1, 5)
         all_quarters = {f"{y}:Q{q}" for y in years for q in quarters}
+        all_quarters.add("2020:Q1")
         cols = loader.raw_df.columns
         data_quarters = {q for q in cols if re.match(r"....:Q.", q)}
         self.assertSetEqual(all_quarters, data_quarters)
