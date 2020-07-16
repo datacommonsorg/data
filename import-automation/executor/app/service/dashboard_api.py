@@ -117,7 +117,10 @@ class DashboardAPI:
     def update_attempt(self, import_attempt, attempt_id=None):
         if configs.standalone(): return {'attempt_id': _STANDALONE}
         if not attempt_id:
-            attempt_id = import_attempt['attempt_id']
+            attempt_id = import_attempt.get('attempt_id')
+            if not attempt_id:
+                raise ValueError('attempt_id not supplied as an argument and '
+                                 'not found the in the attmpet body')
         return self.iap.patch(
             _DASHBOARD_ATTEMPT_BY_ID.format_map({'attempt_id': attempt_id}),
             json=import_attempt).json()
@@ -125,7 +128,10 @@ class DashboardAPI:
     def update_run(self, system_run, run_id=None):
         if configs.standalone(): return {'run_id': _STANDALONE}
         if not run_id:
-            run_id = system_run['run_id']
+            run_id = system_run.get('run_id')
+            if not run_id:
+                raise ValueError('run_id not supplied as an argument and '
+                                 'not found the in the run body')
         return self.iap.patch(
             _DASHBOARD_RUN_BY_ID.format_map({'run_id': run_id}),
             json=system_run).json()

@@ -5,30 +5,10 @@ import os
 
 from requests import exceptions
 
+import test.utils
 from app.service import github_api
 from test import test_integration
-
-
-class ResponseMock:
-    """Simple mock of a HTTP response."""
-    def __init__(self, code, data=None, raw=None):
-        self.status_code = code
-        self.data = data
-        self.raw = raw
-
-    def raise_for_status(self):
-        if self.status_code != 200:
-            raise exceptions.HTTPError
-
-    def json(self):
-        self.raise_for_status()
-        return self.data
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        pass
+from test import utils
 
 
 class GitHubAPITest(unittest.TestCase):
@@ -51,7 +31,7 @@ class GitHubAPITest(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_dir_exists(self, get):
-        get.return_value = ResponseMock(200)
+        get.return_value = utils.ResponseMock(200)
         self.assertTrue(self.github._dir_exists('c', 'a/b/c'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
@@ -59,7 +39,7 @@ class GitHubAPITest(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_dir_exists_not(self, get):
-        get.return_value = ResponseMock(404)
+        get.return_value = utils.ResponseMock(404)
         self.assertFalse(self.github._dir_exists('c', 'a/b/c'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
@@ -67,7 +47,7 @@ class GitHubAPITest(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_dir_exists_other_error(self, get):
-        get.return_value = ResponseMock(500)
+        get.return_value = utils.ResponseMock(500)
         self.assertRaises(
             exceptions.HTTPError, self.github._dir_exists, 'c', 'a/b/c')
         get.assert_called_with(
@@ -77,13 +57,13 @@ class GitHubAPITest(unittest.TestCase):
     @mock.patch('requests.get')
     def test_query_commit(self, get):
         expected = {'files': []}
-        get.return_value = ResponseMock(200, expected)
+        get.return_value = utils.ResponseMock(200, expected)
         self.assertEqual(expected, self.github.query_commit('commitCCC'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/commits/commitCCC',
             auth=('authusernameC', ''))
 
-        get.return_value = ResponseMock(400)
+        get.return_value = utils.ResponseMock(400)
         self.assertRaises(
             exceptions.HTTPError, self.github.query_commit, 'commitCCC')
 
@@ -120,7 +100,7 @@ class GitHubAPITest(unittest.TestCase):
             ('scripts/google/covid_mobility/covidmobility.py', 'added'),
             ('scripts/google/covid_mobility/input/data.csv', 'removed')
         ]
-        get.return_value = ResponseMock(200, data)
+        get.return_value = utils.ResponseMock(200, data)
         self.assertEqual(
             expected, self.github.query_changed_files_in_commit('commitCCC'))
         get.assert_called_with(
@@ -129,7 +109,7 @@ class GitHubAPITest(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_query_changed_files_in_commit_raise(self, get):
-        get.return_value = ResponseMock(400)
+        get.return_value = utils.ResponseMock(400)
         self.assertRaises(
             exceptions.HTTPError, self.github.query_commit, 'commitCCC')
 
@@ -159,7 +139,7 @@ class GitHubAPITest(unittest.TestCase):
             'go.sum',
             'requirements.txt'
         ]
-        get.return_value = ResponseMock(200, data)
+        get.return_value = utils.ResponseMock(200, data)
         self.assertEqual(
             expected, self.github.query_files_in_dir('committt', 'd'))
         get.assert_called_with(
@@ -168,7 +148,7 @@ class GitHubAPITest(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_query_files_in_dir_raise(self, get):
-        get.return_value = ResponseMock(400)
+        get.return_value = utils.ResponseMock(400)
         self.assertRaises(
             exceptions.HTTPError,
             self.github.query_files_in_dir, 'committt', 'dirrr')
@@ -380,7 +360,7 @@ class GitHubAPITest(unittest.TestCase):
     def test_download_repo(self, get):
         tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
         with open(tar_path, 'rb') as tar:
-            get.return_value = ResponseMock(200, raw=tar)
+            get.return_value = utils.ResponseMock(200, raw=tar)
 
             with tempfile.TemporaryDirectory() as dir_path:
                 downloaded = self.github.download_repo(dir_path, 'commit-sha')
@@ -390,25 +370,25 @@ class GitHubAPITest(unittest.TestCase):
                                     downloaded,
                                     'treasury_constant_maturity_rates.csv')
                 print(file)
-                assert test_integration._compare_lines(
+                assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.csv', file, 50)
 
                 file = os.path.join(dir_path,
                                     downloaded,
                                     'treasury_constant_maturity_rates.mcf')
-                assert test_integration._compare_lines(
+                assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.mcf', file, 50)
 
                 file = os.path.join(dir_path,
                                     downloaded,
                                     'treasury_constant_maturity_rates.tmcf')
-                assert test_integration._compare_lines(
+                assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.tmcf', file, 50)
 
     @mock.patch('requests.get')
     def test_download_repo_empty(self, get):
         with open('test/data/empty.tar.gz', 'rb') as tar:
-            get.return_value = ResponseMock(200, raw=tar)
+            get.return_value = utils.ResponseMock(200, raw=tar)
 
             with tempfile.TemporaryDirectory() as dir_path:
                 self.assertRaises(
@@ -419,7 +399,7 @@ class GitHubAPITest(unittest.TestCase):
     def test_download_repo_http_error(self, get):
         tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
         with open(tar_path, 'rb') as tar:
-            get.return_value = ResponseMock(400, raw=tar)
+            get.return_value = utils.ResponseMock(400, raw=tar)
 
             with tempfile.TemporaryDirectory() as dir_path:
                 self.assertRaises(
