@@ -25,7 +25,7 @@ class LogMessageManager:
     Google Cloud Storage bucket.
 
     Attributes:
-        bucket: storage Bucket object in which log messages are stored.
+        bucket: storage bucket object in which log messages are stored.
     """
     def __init__(self):
         """Constructs a LogMessageManager."""
