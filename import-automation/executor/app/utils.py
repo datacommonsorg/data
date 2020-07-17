@@ -9,8 +9,8 @@ import google.cloud.logging
 import requests
 
 
-# def utctime():
-#     return datetime.datetime.now(datetime.timezone.utc).isoformat()
+def utctime():
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
 def pttime():

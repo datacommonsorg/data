@@ -45,7 +45,7 @@ class DashboardAPI:
         if not attempt_id and not run_id:
             raise ValueError('Neither attempt_id or run_id is specified')
         if not time_logged:
-            time_logged = utils.pttime()
+            time_logged = utils.utctime()
 
         log = {
             'message': message,
@@ -154,7 +154,7 @@ def construct_log(message, level=LogLevel.INFO, time_logged=None,
     if not run_id and not attempt_id:
         raise ValueError('Neither run_id nor attempt_id is specified')
     if not time_logged:
-        time_logged = utils.pttime()
+        time_logged = utils.utctime()
     log = {'message': message, 'level': level, 'time_logged': time_logged}
     if run_id:
         log['run_id'] = run_id

@@ -136,13 +136,18 @@ def _execute_imports_on_commit_helper(commit_sha, run_id):
         for dir_path in manifest_dirs:
             manifest_path = os.path.join(dir_path, configs.MANIFEST_FILENAME)
             manifest = parse_manifest(manifest_path)
+            # Import targets of the form <dir_path>:all instructs the executor
+            # to execute all imports in <dir_path>
+            absolute_all = utils.get_absolute_import_name(dir_path, 'all')
             for spec in manifest['import_specifications']:
                 import_name = spec['import_name']
-                absolute_name = utils.get_absolute_import_name(dir_path,
-                                                               import_name)
-                absolute_all = utils.get_absolute_import_name(dir_path, 'all')
-                if import_all or absolute_name in import_targets or \
-                        import_name in import_targets or absolute_all in import_targets:
+                absolute_name = utils.get_absolute_import_name(
+                    dir_path, import_name)
+                if (import_all or
+                    absolute_name in import_targets or
+                    import_name in import_targets or
+                    absolute_all in import_targets):
+
                     import_name = spec['import_name']
                     attempt_id = _init_attempt(
                         run_id,
@@ -150,7 +155,6 @@ def _execute_imports_on_commit_helper(commit_sha, run_id):
                         os.path.join(dir_path, import_name),
                         spec['provenance_url'],
                         spec['provenance_description'])['attempt_id']
-                    logging.info('Initialized: ' + absolute_name)
                     import_one(dir_path, spec, run_id, attempt_id)
     return 'success'
 
