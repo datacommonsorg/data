@@ -30,14 +30,20 @@ GITHUB_DOWNLOAD_API = (
 
 class GitHubRepoAPI:
     def __init__(self,
-                 owner_username=configs.REPO_OWNER_USERNAME,
-                 repo_name=configs.REPO_NAME,
-                 auth_username=configs.GITHUB_AUTH_USERNAME,
+                 owner_username=None,
+                 repo_name=None,
+                 auth_username=None,
                  auth_access_token=None):
-        self.owner = owner_username
-        self.repo = repo_name
+        if not owner_username:
+            owner_username = configs.REPO_OWNER_USERNAME
+        if not repo_name:
+            repo_name = configs.REPO_NAME
+        if not auth_username:
+            auth_username = configs.GITHUB_AUTH_USERNAME
         if not auth_access_token:
             auth_access_token = configs.get_github_auth_access_token()
+        self.owner = owner_username
+        self.repo = repo_name
         self.auth = (auth_username, auth_access_token)
 
     def _build_content_query(self, commit_sha, path):

@@ -81,9 +81,9 @@ class DashboardAPI:
 
             return ''
 
-        response = self.iap.post(_DASHBOARD_LOG_LIST, json=log).json()
+        response = self.iap.post(_DASHBOARD_LOG_LIST, json=log)
         response.raise_for_status()
-        return response
+        return response.json()
 
     def critical(self, message, attempt_id=None, run_id=None, time_logged=None):
         return self._log_helper(
