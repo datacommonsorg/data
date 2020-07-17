@@ -44,9 +44,9 @@ class TestCovidMobility(unittest.TestCase):
         expected_path = path.join(dir_path, "expected.mcf")
 
         if not path.exists(input_path):
-            self.fail(input_path + ' doesn\'t exist!')
+            self.fail(input_path + " doesn't exist!")
         if not path.exists(expected_path):
-            self.fail(expected_path + ' doesn\'t exist!')
+            self.fail(expected_path + " doesn't exist!")
 
         # Generate the output mcf file.
         csv_to_mcf(input_path, output_path)
