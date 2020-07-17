@@ -120,6 +120,7 @@ def _execute_imports_on_commit_helper(commit_sha, run_id):
     manifest_dirs = github.find_dirs_in_commit_containing_file(
         commit_sha, configs.MANIFEST_FILENAME)
     import_targets = parse_commit_message_targets(commit_message)
+    logging.info(f'targets: {import_targets}')
     valid, err = validation.import_targets_valid(import_targets, manifest_dirs)
     if not valid:
         return err
@@ -135,12 +136,18 @@ def _execute_imports_on_commit_helper(commit_sha, run_id):
         for dir_path in manifest_dirs:
             manifest_path = os.path.join(dir_path, configs.MANIFEST_FILENAME)
             manifest = parse_manifest(manifest_path)
+            # Import targets of the form <dir_path>:all instructs the executor
+            # to execute all imports in <dir_path>
+            absolute_all = utils.get_absolute_import_name(dir_path, 'all')
             for spec in manifest['import_specifications']:
                 import_name = spec['import_name']
-                absolute_name = utils.get_absolute_import_name(dir_path,
-                                                               import_name)
-                if import_all or absolute_name in import_targets or \
-                        import_name in import_targets:
+                absolute_name = utils.get_absolute_import_name(
+                    dir_path, import_name)
+                if (import_all or
+                    absolute_name in import_targets or
+                    import_name in import_targets or
+                    absolute_all in import_targets):
+
                     import_name = spec['import_name']
                     attempt_id = _init_attempt(
                         run_id,
