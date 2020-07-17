@@ -158,3 +158,36 @@ class DashboardAPITest(unittest.TestCase):
         for func, level in funcs:
             func(**args)
             self.assertEqual(level, log.call_args[0][0]['level'])
+
+    @mock.patch('app.configs.standalone', lambda: True)
+    @mock.patch('app.service.iap.IAPRequest')
+    def test_standalone(self, iap_request):
+        # Tests that no IAP calls are made in standalone mode
+        dashboard = dashboard_api.DashboardAPI(client_id=1)
+        dashboard.iap = iap_request()
+        logging_funcs = [
+            dashboard.critical,
+            dashboard.error,
+            dashboard.warning,
+            dashboard.info,
+            dashboard.debug
+        ]
+        log = {
+            'message': 'message',
+            'run_id': 'run',
+            'attempt_id': 'attempt',
+            'time_logged': 'time'
+        }
+        for func in logging_funcs:
+            func(**log)
+
+        dashboard.init_run({})
+        dashboard.init_attempt({})
+        dashboard.update_run({'run_id': 'run'})
+        dashboard.update_attempt({'attempt_id': 'attempt'})
+
+        dashboard.iap.get.assert_not_called()
+        dashboard.iap.put.assert_not_called()
+        dashboard.iap.post.assert_not_called()
+        dashboard.iap.patch.assert_not_called()
+        dashboard.iap._request.assert_not_called()

@@ -3,6 +3,7 @@ from requests import exceptions
 
 class ResponseMock:
     """Simple mock of a HTTP response."""
+
     def __init__(self, code, data=None, raw=None):
         self.status_code = code
         self.data = data
