@@ -181,6 +181,12 @@ class DashboardAPITest(unittest.TestCase):
         for func in logging_funcs:
             func(**log)
 
+        dashboard._log_helper('message', 'level', 'attempt')
+        dashboard.log({
+            'message': 'message',
+            'level': 'level',
+            'attempt_id': 'attempt'
+        })
         dashboard.init_run({})
         dashboard.init_attempt({})
         dashboard.update_run({'run_id': 'run'})
