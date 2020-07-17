@@ -54,4 +54,4 @@ def download_file(url, dest_dir):
         path = os.path.join(dest_dir, filename)
         with open(path, 'wb') as out:
             shutil.copyfileobj(response.raw, out)
-    return path
+        return path

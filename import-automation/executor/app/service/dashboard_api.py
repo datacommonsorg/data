@@ -61,29 +61,30 @@ class DashboardAPI:
 
     def log(self, log):
         if configs.standalone():
-          if log['level'] == LogLevel.CRITICAL:
-            logging.critical(log['message'])
-          elif log['level'] == LogLevel.ERROR:
-            logging.error(log['message'])
-          elif log['level'] == LogLevel.WARNING:
-            logging.warning(log['message'])
-          elif log['level'] == LogLevel.INFO:
-            logging.info(log['message'])
-          else:
-            logging.debug(log['message'])
-
-          if 'return_code' in log:
-            if log['return_code']:
-              logging.error('Sub-process returned: ' + str(log['return_code']))
-              logging.info('Sub-process stderr: ' + log['stderr'])
+            if log['level'] == LogLevel.CRITICAL:
+                logging.critical(log['message'])
+            elif log['level'] == LogLevel.ERROR:
+                logging.error(log['message'])
+            elif log['level'] == LogLevel.WARNING:
+                logging.warning(log['message'])
+            elif log['level'] == LogLevel.INFO:
+                logging.info(log['message'])
             else:
-              logging.info('Sub-process succeeded')
+                logging.debug(log['message'])
 
-          return ''
+            if 'return_code' in log:
+                if log['return_code']:
+                    logging.error(
+                        'Sub-process returned: ' + str(log['return_code']))
+                    logging.info('Sub-process stderr: ' + log['stderr'])
+                else:
+                    logging.info('Sub-process succeeded')
 
-        response = self.iap.post(_DASHBOARD_LOG_LIST, json=log).json()
+            return ''
+
+        response = self.iap.post(_DASHBOARD_LOG_LIST, json=log)
         response.raise_for_status()
-        return response
+        return response.json()
 
     def critical(self, message, attempt_id=None, run_id=None, time_logged=None):
         return self._log_helper(
@@ -111,7 +112,8 @@ class DashboardAPI:
 
     def init_attempt(self, import_attempt):
         if configs.standalone(): return {'attempt_id': _STANDALONE}
-        return self.iap.post(_DASHBOARD_ATTEMPT_LIST, json=import_attempt).json()
+        return self.iap.post(_DASHBOARD_ATTEMPT_LIST,
+                             json=import_attempt).json()
 
     def update_attempt(self, import_attempt, attempt_id=None):
         if configs.standalone(): return {'attempt_id': _STANDALONE}
