@@ -6,7 +6,7 @@ from app.service import dashboard_api
 from app.service import iap
 
 
-@mock.patch('app.utils.pttime', lambda: '2020-07-15T12:07:17.365264-07:00')
+@mock.patch('app.utils.utctime', lambda: '2020-07-15T12:07:17.365264+00:00')
 class DashboardAPITest(unittest.TestCase):
 
     @mock.patch('app.configs.get_dashboard_oauth_client_id',
@@ -42,7 +42,7 @@ class DashboardAPITest(unittest.TestCase):
             'message': 'message',
             'level': 'level',
             'run_id': 'run',
-            'time_logged': '2020-07-15T12:07:17.365264-07:00'
+            'time_logged': '2020-07-15T12:07:17.365264+00:00'
         }
         self.dashboard._log_helper(**args)
         log.assert_called_with(expected)
@@ -64,7 +64,7 @@ class DashboardAPITest(unittest.TestCase):
             'message': 'message',
             'level': 'info',
             'attempt_id': 'attempt',
-            'time_logged': '2020-07-15T12:07:17.365264-07:00'
+            'time_logged': '2020-07-15T12:07:17.365264+00:00'
         }
         self.assertEqual(expected, dashboard_api.construct_log(**args))
 
