@@ -2,27 +2,13 @@ import os
 import unittest
 import logging
 from unittest import mock
-import uuid
-import filecmp
 
 from app import configs
 from app import main
-from app import utils
+from test import utils
 
 CWD = os.getcwd()
 NUM_LINES_TO_CHECK = 50
-
-
-def _compare_lines(expected_path, path, num_lines):
-    with open(expected_path, 'rb') as expected, open(path, 'rb') as file:
-        for i in range(num_lines):
-            line1 = expected.readline()
-            line2 = file.readline()
-            if line1 != line2:
-                print('WANT:', line1)
-                print('GOT:', line2)
-                return False
-    return True
 
 
 class GCSBucketIOMock:
@@ -33,10 +19,7 @@ class GCSBucketIOMock:
         self.data[dest] = src
         with open(src) as file:
             logging.warning(f'Generated {src}: {file.readline()}')
-        assert _compare_lines(
-            os.path.join(CWD, 'test', 'data', os.path.basename(src)),
-            src,
-            NUM_LINES_TO_CHECK)
+        assert utils.compare_lines(os.path.join(CWD, 'test', 'data', os.path.basename(src)), src, 50)
 
     def update_version(self, version):
         logging.warning(f'Version: {version}')
