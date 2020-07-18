@@ -12,12 +12,12 @@ Optionally, CSVs can include "Node" and "containedInPlace" columns. Where "Node"
 defines the (unique) local-id for the row, and "containedInPlace" column
 includes local-id references to contained-in places.
 
-For sample input/output CSVs, see the `.csv` files in `testdata` directory.
+For sample input/output CSVs, see the `.csv` files in `place_name_resolver/testdata` directory.
 
 ### Usage
 
 ```
-go run place_name_resolver.go --in_csv_path=testdata/input_basic.csv --out_csv_path=/tmp/output_basic.csv --maps_api_key=<YOUR_KEY_HERE>
+go run resolver.go --in_csv_path=testdata/input_basic.csv --out_csv_path=/tmp/output_basic.csv --maps_api_key=<YOUR_KEY_HERE>
 ```
 
 ### Testing
