@@ -1,8 +1,8 @@
 package main
 
 import (
-	"context"
 	"cloud.google.com/go/storage"
+	"context"
 	"encoding/csv"
 	"encoding/json"
 	"flag"
@@ -23,11 +23,52 @@ var (
 )
 
 const (
-	batchSize = 200
-	placeId2dcidBucket = "datcom-browser-staging.appspot.com"
-	placeId2dcidObject = "placeid2dcid.json"
+	batchSize          = 200
+	placeId2DcidBucket = "datcom-browser-prod.appspot.com"
+	placeId2DcidObject = "placeid2dcid.json"
 )
 
+//
+// PlaceId2Dcid Reader.
+//
+type PlaceId2Dcid interface {
+	Read() ([]byte, error)
+}
+
+type RealPlaceId2Dcid struct{}
+
+func (r *RealPlaceId2Dcid) Read() ([]byte, error) {
+	ctx := context.Background()
+	gcsCli, err := storage.NewClient(ctx)
+	if err != nil {
+		return nil, err
+	}
+	fp, err := gcsCli.Bucket(placeId2DcidBucket).Object(placeId2DcidObject).NewReader(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer fp.Close()
+	return ioutil.ReadAll(fp)
+}
+
+//
+// Maps API Client.
+//
+type MapsClient interface {
+	Geocode(r *maps.GeocodingRequest) ([]maps.GeocodingResult, error)
+}
+
+type RealMapsClient struct {
+	Client *maps.Client
+}
+
+func (r *RealMapsClient) Geocode(req *maps.GeocodingRequest) ([]maps.GeocodingResult, error) {
+	return r.Client.Geocode(context.Background(), req)
+}
+
+//
+// Data Structure representing the CSV.
+//
 type tableInfo struct {
 	// CSV header.
 	header []string
@@ -73,7 +114,7 @@ func appendContainedInPlaceNames(name string, row []string, tinfo *tableInfo) (s
 
 	cipRow := tinfo.rows[idx]
 	cipName := cipRow[tinfo.nameIdx]
-	return appendContainedInPlaceNames(name + ", " + cipName, cipRow, tinfo)
+	return appendContainedInPlaceNames(name+", "+cipName, cipRow, tinfo)
 }
 
 func buildTableInfo(inCsvPath string) (*tableInfo, error) {
@@ -86,9 +127,9 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	numCols := 0
 	tinfo := &tableInfo{
 		node2row: map[string]int{},
-		nidIdx: -1,
-		nameIdx: -1,
-		cipIdx: -1,
+		nidIdx:   -1,
+		nameIdx:  -1,
+		cipIdx:   -1,
 	}
 	dataRowNum := 0
 	for {
@@ -121,7 +162,7 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 			continue
 		}
 		if numCols != len(row) {
-			return nil, fmt.Errorf("Not a rectangular CSV! Row %d has only %d columns!", dataRowNum + 1, len(row))
+			return nil, fmt.Errorf("Not a rectangular CSV! Row %d has only %d columns!", dataRowNum+1, len(row))
 		}
 		if tinfo.nidIdx >= 0 && row[tinfo.nidIdx] != "" {
 			tinfo.node2row[row[tinfo.nidIdx]] = dataRowNum
@@ -140,18 +181,8 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	return tinfo, nil
 }
 
-func loadPlaceIdToDcidMap() (*map[string]string, error) {
-	ctx := context.Background()
-	gcsCli, err := storage.NewClient(ctx)
-	if err != nil {
-		return nil, err
-	}
-	fp, err := gcsCli.Bucket(placeId2dcidBucket).Object(placeId2dcidObject).NewReader(ctx)
-	if err != nil {
-		return nil, err
-	}
-	defer fp.Close()
-	bytes, err := ioutil.ReadAll(fp)
+func loadPlaceIdToDcidMap(p2d PlaceId2Dcid) (*map[string]string, error) {
+	bytes, err := p2d.Read()
 	if err != nil {
 		return nil, err
 	}
@@ -163,14 +194,14 @@ func loadPlaceIdToDcidMap() (*map[string]string, error) {
 	return placeId2Dcid, nil
 }
 
-func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, mapCli *maps.Client, wg *sync.WaitGroup) {
+func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, mapCli MapsClient, wg *sync.WaitGroup) {
 	defer wg.Done()
 	extName := tinfo.extNames[idx]
-	req := &maps.GeocodingRequest {
+	req := &maps.GeocodingRequest{
 		Address:  extName,
 		Language: "en",
 	}
-	results, err := mapCli.Geocode(context.Background(), req)
+	results, err := mapCli.Geocode(req)
 	if err != nil {
 		tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Geocoding failure for %s: %v", extName, err))
 		return
@@ -191,11 +222,7 @@ func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, m
 	}
 }
 
-func geocodePlaces(mapsApiKey string, placeId2Dcid *map[string]string, tinfo *tableInfo) error {
-	mapCli, err := maps.NewClient(maps.WithAPIKey(mapsApiKey))
-	if err != nil {
-		return err
-	}
+func geocodePlaces(mapCli MapsClient, placeId2Dcid *map[string]string, tinfo *tableInfo) error {
 	for i := 0; i < len(tinfo.rows); i += batchSize {
 		var wg sync.WaitGroup
 		jMax := i + batchSize
@@ -207,7 +234,7 @@ func geocodePlaces(mapsApiKey string, placeId2Dcid *map[string]string, tinfo *ta
 			go geocodeOneRow(j, placeId2Dcid, tinfo, mapCli, &wg)
 		}
 		wg.Wait()
-		log.Printf("Processed %d rows, %d left.", jMax, len(tinfo.rows) - jMax)
+		log.Printf("Processed %d rows, %d left.", jMax, len(tinfo.rows)-jMax)
 	}
 	return nil
 }
@@ -226,16 +253,16 @@ func writeOutput(outCsvPath string, tinfo *tableInfo) error {
 	return nil
 }
 
-func resolvePlacesByName(inCsvPath, outCsvPath, mapsApiKey string) error {
+func resolvePlacesByName(inCsvPath, outCsvPath string, p2d PlaceId2Dcid, mapCli MapsClient) error {
 	tinfo, err := buildTableInfo(inCsvPath)
 	if err != nil {
 		return err
 	}
-	placeIdToDcid, err := loadPlaceIdToDcidMap()
+	placeIdToDcid, err := loadPlaceIdToDcidMap(p2d)
 	if err != nil {
 		return err
 	}
-	err = geocodePlaces(mapsApiKey, placeIdToDcid, tinfo)
+	err = geocodePlaces(mapCli, placeIdToDcid, tinfo)
 	if err != nil {
 		return err
 	}
@@ -245,7 +272,13 @@ func resolvePlacesByName(inCsvPath, outCsvPath, mapsApiKey string) error {
 func main() {
 	flag.Parse()
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	err := resolvePlacesByName(*inCsvPath, *outCsvPath, *mapsApiKey)
+
+	mapCli, err := maps.NewClient(maps.WithAPIKey(*mapsApiKey))
+	if err != nil {
+		log.Fatalf("Maps API init failed: %v", err)
+	}
+
+	err = resolvePlacesByName(*inCsvPath, *outCsvPath, &RealPlaceId2Dcid{}, &RealMapsClient{Client: mapCli})
 	if err != nil {
 		log.Fatalf("resolvePlacesByName failed: %v", err)
 	}
