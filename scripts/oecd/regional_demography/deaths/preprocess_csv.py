@@ -130,12 +130,11 @@ ISOcode: ???
 """
 
 # Automate Template MCF generation since there are many Statitical Variables.
-# TODO: measurementMethod here to be changed
 TEMPLATE_MCF_TEMPLATE = """
 Node: E:OECD_deaths->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->{stat_var}

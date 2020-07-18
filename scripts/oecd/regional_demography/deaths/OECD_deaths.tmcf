@@ -7,7 +7,7 @@ ISOcode: ???
 Node: E:OECD_deaths->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_Female
@@ -15,7 +15,7 @@ value: C:OECD_deaths->Count_MortalityEvent_Female
 Node: E:OECD_deaths->E2
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_Male
@@ -23,7 +23,7 @@ value: C:OECD_deaths->Count_MortalityEvent_Male
 Node: E:OECD_deaths->E3
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent
@@ -31,7 +31,7 @@ value: C:OECD_deaths->Count_MortalityEvent
 Node: E:OECD_deaths->E4
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_0To14Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_0To14Years_Female
@@ -39,7 +39,7 @@ value: C:OECD_deaths->Count_MortalityEvent_0To14Years_Female
 Node: E:OECD_deaths->E5
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_0To14Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_0To14Years_Male
@@ -47,7 +47,7 @@ value: C:OECD_deaths->Count_MortalityEvent_0To14Years_Male
 Node: E:OECD_deaths->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_0To14Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_0To14Years
@@ -55,7 +55,7 @@ value: C:OECD_deaths->Count_MortalityEvent_0To14Years
 Node: E:OECD_deaths->E7
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_0To4Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_0To4Years_Female
@@ -63,7 +63,7 @@ value: C:OECD_deaths->Count_MortalityEvent_0To4Years_Female
 Node: E:OECD_deaths->E8
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_0To4Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_0To4Years_Male
@@ -71,7 +71,7 @@ value: C:OECD_deaths->Count_MortalityEvent_0To4Years_Male
 Node: E:OECD_deaths->E9
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_0To4Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_0To4Years
@@ -79,7 +79,7 @@ value: C:OECD_deaths->Count_MortalityEvent_0To4Years
 Node: E:OECD_deaths->E10
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_10To14Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_10To14Years_Female
@@ -87,7 +87,7 @@ value: C:OECD_deaths->Count_MortalityEvent_10To14Years_Female
 Node: E:OECD_deaths->E11
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_10To14Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_10To14Years_Male
@@ -95,7 +95,7 @@ value: C:OECD_deaths->Count_MortalityEvent_10To14Years_Male
 Node: E:OECD_deaths->E12
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_10To14Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_10To14Years
@@ -103,7 +103,7 @@ value: C:OECD_deaths->Count_MortalityEvent_10To14Years
 Node: E:OECD_deaths->E13
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_15To19Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_15To19Years_Female
@@ -111,7 +111,7 @@ value: C:OECD_deaths->Count_MortalityEvent_15To19Years_Female
 Node: E:OECD_deaths->E14
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_15To19Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_15To19Years_Male
@@ -119,7 +119,7 @@ value: C:OECD_deaths->Count_MortalityEvent_15To19Years_Male
 Node: E:OECD_deaths->E15
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_15To19Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_15To19Years
@@ -127,7 +127,7 @@ value: C:OECD_deaths->Count_MortalityEvent_15To19Years
 Node: E:OECD_deaths->E16
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_15To64Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_15To64Years_Female
@@ -135,7 +135,7 @@ value: C:OECD_deaths->Count_MortalityEvent_15To64Years_Female
 Node: E:OECD_deaths->E17
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_15To64Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_15To64Years_Male
@@ -143,7 +143,7 @@ value: C:OECD_deaths->Count_MortalityEvent_15To64Years_Male
 Node: E:OECD_deaths->E18
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_15To64Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_15To64Years
@@ -151,7 +151,7 @@ value: C:OECD_deaths->Count_MortalityEvent_15To64Years
 Node: E:OECD_deaths->E19
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_20To24Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_20To24Years_Female
@@ -159,7 +159,7 @@ value: C:OECD_deaths->Count_MortalityEvent_20To24Years_Female
 Node: E:OECD_deaths->E20
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_20To24Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_20To24Years_Male
@@ -167,7 +167,7 @@ value: C:OECD_deaths->Count_MortalityEvent_20To24Years_Male
 Node: E:OECD_deaths->E21
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_20To24Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_20To24Years
@@ -175,7 +175,7 @@ value: C:OECD_deaths->Count_MortalityEvent_20To24Years
 Node: E:OECD_deaths->E22
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_25To29Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_25To29Years_Female
@@ -183,7 +183,7 @@ value: C:OECD_deaths->Count_MortalityEvent_25To29Years_Female
 Node: E:OECD_deaths->E23
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_25To29Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_25To29Years_Male
@@ -191,7 +191,7 @@ value: C:OECD_deaths->Count_MortalityEvent_25To29Years_Male
 Node: E:OECD_deaths->E24
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_25To29Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_25To29Years
@@ -199,7 +199,7 @@ value: C:OECD_deaths->Count_MortalityEvent_25To29Years
 Node: E:OECD_deaths->E25
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_30To34Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_30To34Years_Female
@@ -207,7 +207,7 @@ value: C:OECD_deaths->Count_MortalityEvent_30To34Years_Female
 Node: E:OECD_deaths->E26
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_30To34Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_30To34Years_Male
@@ -215,7 +215,7 @@ value: C:OECD_deaths->Count_MortalityEvent_30To34Years_Male
 Node: E:OECD_deaths->E27
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_30To34Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_30To34Years
@@ -223,7 +223,7 @@ value: C:OECD_deaths->Count_MortalityEvent_30To34Years
 Node: E:OECD_deaths->E28
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_35To39Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_35To39Years_Female
@@ -231,7 +231,7 @@ value: C:OECD_deaths->Count_MortalityEvent_35To39Years_Female
 Node: E:OECD_deaths->E29
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_35To39Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_35To39Years_Male
@@ -239,7 +239,7 @@ value: C:OECD_deaths->Count_MortalityEvent_35To39Years_Male
 Node: E:OECD_deaths->E30
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_35To39Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_35To39Years
@@ -247,7 +247,7 @@ value: C:OECD_deaths->Count_MortalityEvent_35To39Years
 Node: E:OECD_deaths->E31
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_40To44Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_40To44Years_Female
@@ -255,7 +255,7 @@ value: C:OECD_deaths->Count_MortalityEvent_40To44Years_Female
 Node: E:OECD_deaths->E32
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_40To44Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_40To44Years_Male
@@ -263,7 +263,7 @@ value: C:OECD_deaths->Count_MortalityEvent_40To44Years_Male
 Node: E:OECD_deaths->E33
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_40To44Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_40To44Years
@@ -271,7 +271,7 @@ value: C:OECD_deaths->Count_MortalityEvent_40To44Years
 Node: E:OECD_deaths->E34
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_45To49Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_45To49Years_Female
@@ -279,7 +279,7 @@ value: C:OECD_deaths->Count_MortalityEvent_45To49Years_Female
 Node: E:OECD_deaths->E35
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_45To49Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_45To49Years_Male
@@ -287,7 +287,7 @@ value: C:OECD_deaths->Count_MortalityEvent_45To49Years_Male
 Node: E:OECD_deaths->E36
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_45To49Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_45To49Years
@@ -295,7 +295,7 @@ value: C:OECD_deaths->Count_MortalityEvent_45To49Years
 Node: E:OECD_deaths->E37
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_50To54Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_50To54Years_Female
@@ -303,7 +303,7 @@ value: C:OECD_deaths->Count_MortalityEvent_50To54Years_Female
 Node: E:OECD_deaths->E38
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_50To54Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_50To54Years_Male
@@ -311,7 +311,7 @@ value: C:OECD_deaths->Count_MortalityEvent_50To54Years_Male
 Node: E:OECD_deaths->E39
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_50To54Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_50To54Years
@@ -319,7 +319,7 @@ value: C:OECD_deaths->Count_MortalityEvent_50To54Years
 Node: E:OECD_deaths->E40
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_55To59Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_55To59Years_Female
@@ -327,7 +327,7 @@ value: C:OECD_deaths->Count_MortalityEvent_55To59Years_Female
 Node: E:OECD_deaths->E41
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_55To59Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_55To59Years_Male
@@ -335,7 +335,7 @@ value: C:OECD_deaths->Count_MortalityEvent_55To59Years_Male
 Node: E:OECD_deaths->E42
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_55To59Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_55To59Years
@@ -343,7 +343,7 @@ value: C:OECD_deaths->Count_MortalityEvent_55To59Years
 Node: E:OECD_deaths->E43
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_5To9Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_5To9Years_Female
@@ -351,7 +351,7 @@ value: C:OECD_deaths->Count_MortalityEvent_5To9Years_Female
 Node: E:OECD_deaths->E44
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_5To9Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_5To9Years_Male
@@ -359,7 +359,7 @@ value: C:OECD_deaths->Count_MortalityEvent_5To9Years_Male
 Node: E:OECD_deaths->E45
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_5To9Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_5To9Years
@@ -367,7 +367,7 @@ value: C:OECD_deaths->Count_MortalityEvent_5To9Years
 Node: E:OECD_deaths->E46
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_60To64Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_60To64Years_Female
@@ -375,7 +375,7 @@ value: C:OECD_deaths->Count_MortalityEvent_60To64Years_Female
 Node: E:OECD_deaths->E47
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_60To64Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_60To64Years_Male
@@ -383,7 +383,7 @@ value: C:OECD_deaths->Count_MortalityEvent_60To64Years_Male
 Node: E:OECD_deaths->E48
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_60To64Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_60To64Years
@@ -391,7 +391,7 @@ value: C:OECD_deaths->Count_MortalityEvent_60To64Years
 Node: E:OECD_deaths->E49
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_65To69Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_65To69Years_Female
@@ -399,7 +399,7 @@ value: C:OECD_deaths->Count_MortalityEvent_65To69Years_Female
 Node: E:OECD_deaths->E50
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_65To69Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_65To69Years_Male
@@ -407,7 +407,7 @@ value: C:OECD_deaths->Count_MortalityEvent_65To69Years_Male
 Node: E:OECD_deaths->E51
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_65To69Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_65To69Years
@@ -415,7 +415,7 @@ value: C:OECD_deaths->Count_MortalityEvent_65To69Years
 Node: E:OECD_deaths->E52
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_65OrMoreYears_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_65OrMoreYears_Female
@@ -423,7 +423,7 @@ value: C:OECD_deaths->Count_MortalityEvent_65OrMoreYears_Female
 Node: E:OECD_deaths->E53
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_65OrMoreYears_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_65OrMoreYears_Male
@@ -431,7 +431,7 @@ value: C:OECD_deaths->Count_MortalityEvent_65OrMoreYears_Male
 Node: E:OECD_deaths->E54
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_65OrMoreYears
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_65OrMoreYears
@@ -439,7 +439,7 @@ value: C:OECD_deaths->Count_MortalityEvent_65OrMoreYears
 Node: E:OECD_deaths->E55
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_70To74Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_70To74Years_Female
@@ -447,7 +447,7 @@ value: C:OECD_deaths->Count_MortalityEvent_70To74Years_Female
 Node: E:OECD_deaths->E56
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_70To74Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_70To74Years_Male
@@ -455,7 +455,7 @@ value: C:OECD_deaths->Count_MortalityEvent_70To74Years_Male
 Node: E:OECD_deaths->E57
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_70To74Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_70To74Years
@@ -463,7 +463,7 @@ value: C:OECD_deaths->Count_MortalityEvent_70To74Years
 Node: E:OECD_deaths->E58
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_75To79Years_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_75To79Years_Female
@@ -471,7 +471,7 @@ value: C:OECD_deaths->Count_MortalityEvent_75To79Years_Female
 Node: E:OECD_deaths->E59
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_75To79Years_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_75To79Years_Male
@@ -479,7 +479,7 @@ value: C:OECD_deaths->Count_MortalityEvent_75To79Years_Male
 Node: E:OECD_deaths->E60
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_75To79Years
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_75To79Years
@@ -487,7 +487,7 @@ value: C:OECD_deaths->Count_MortalityEvent_75To79Years
 Node: E:OECD_deaths->E61
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_80OrMoreYears_Female
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_80OrMoreYears_Female
@@ -495,7 +495,7 @@ value: C:OECD_deaths->Count_MortalityEvent_80OrMoreYears_Female
 Node: E:OECD_deaths->E62
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_80OrMoreYears_Male
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_80OrMoreYears_Male
@@ -503,7 +503,7 @@ value: C:OECD_deaths->Count_MortalityEvent_80OrMoreYears_Male
 Node: E:OECD_deaths->E63
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_MortalityEvent_80OrMoreYears
-measurementMethod: dcs:OECD
+measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_deaths->E0
 observationDate: C:OECD_deaths->Year
 value: C:OECD_deaths->Count_MortalityEvent_80OrMoreYears
