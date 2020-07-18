@@ -82,9 +82,11 @@ type tableInfo struct {
 	// Map from node-id to row index.
 	node2row map[string]int
 
-	// Various indexes. -1 if missing.
+	// Column index of 'Node'. -1 if missing.
 	nidIdx  int
+	// Column index of 'containedInPlace'. -1 if missing.
 	cipIdx  int
+	// Column index of 'name'. -1 if missing.
 	nameIdx int
 }
 
@@ -109,6 +111,7 @@ func appendContainedInPlaceNames(name string, row []string, tinfo *tableInfo) (s
 		return name, nil
 	}
 	if idx >= len(tinfo.rows) {
+		log.Fatalf("Out of range %d vs. %d", idx, len(tinfo.rows))
 		return "", fmt.Errorf("Out of range %d vs. %d", idx, len(tinfo.rows))
 	}
 
