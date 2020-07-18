@@ -48,6 +48,10 @@ Test coming soon.
 -   `util/geo`: This package contains various mappings between geographic
     identifiers (such as 2-character country codes) and Data Commons IDs.
 
+-   `util/sharding_writer`: This package implements an io.Writer that shard
+    files to a given size boundary to help match Data Common's preference of
+    input files remaining under 100 MB.
+
 Additional libraries coming soon.
 
 ### Testing libraries

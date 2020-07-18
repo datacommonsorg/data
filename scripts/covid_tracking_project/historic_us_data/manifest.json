@@ -1,0 +1,21 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "historic_us_data",
+            "curator_emails": [
+                "hhhhhwu@google.com"
+            ],
+            "provenance_url": "https://www.covidtracking.com",
+            "scripts": [
+                "preprocess_csv.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "COVIDTracking_US.tmcf",
+                    "cleaned_csv": "COVIDTracking_US.csv"
+                }
+            ],
+            "cron_schedule": "* * * * *"
+        }
+    ]
+}
