@@ -1,0 +1,70 @@
+Node: E:eurostat_gdp->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction
+observationAbout: C:eurostat_gdp->geo
+observationDate: C:eurostat_gdp->time
+measurementMethod: dcs:EurostatRegionalStatistics
+observationPeriod: "P1M"
+value: C:eurostat_gdp->geo
+unit: dcs:Euro
+
+Node: E:eurostat_gdp->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction
+observationAbout: C:eurostat_gdp->geo
+observationDate: C:eurostat_gdp->time
+measurementMethod: dcs:EurostatRegionalStatistics
+observationPeriod: "P1M"
+value: C:eurostat_gdp->time
+unit: dcs:Euro
+
+Node: E:eurostat_gdp->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction
+observationAbout: C:eurostat_gdp->geo
+observationDate: C:eurostat_gdp->time
+measurementMethod: dcs:EurostatRegionalStatistics
+observationPeriod: "P1M"
+value: C:eurostat_gdp->NUM_EUR
+unit: dcs:Euro
+
+Node: E:eurostat_gdp->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction_Count_Person
+observationAbout: C:eurostat_gdp->geo
+observationDate: C:eurostat_gdp->time
+measurementMethod: dcs:EurostatRegionalStatistics
+observationPeriod: "P1M"
+value: C:eurostat_gdp->EUR_HAB
+unit: dcs:Euro
+
+Node: E:eurostat_gdp->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction
+observationAbout: C:eurostat_gdp->geo
+observationDate: C:eurostat_gdp->time
+measurementMethod: dcs:EurostatRegionalStatistics
+observationPeriod: "P1M"
+value: C:eurostat_gdp->NUM_NAC
+unit: dcs:NationalCurrency
+
+Node: E:eurostat_gdp->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction
+observationAbout: C:eurostat_gdp->geo
+observationDate: C:eurostat_gdp->time
+measurementMethod: dcs:EurostatRegionalStatistics
+observationPeriod: "P1M"
+value: C:eurostat_gdp->NUM_PPS
+unit: dcs:PurchasingPowerStandard
+
+Node: E:eurostat_gdp->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction_Count_Person
+observationAbout: C:eurostat_gdp->geo
+observationDate: C:eurostat_gdp->time
+measurementMethod: dcs:EurostatRegionalStatistics
+observationPeriod: "P1M"
+value: C:eurostat_gdp->PPS_HAB
+unit: dcs:PurchasingPowerStandard
+

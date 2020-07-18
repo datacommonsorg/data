@@ -13,7 +13,8 @@
 # limitations under the License.
 """
 Defines functions to preprocess Eurostat data and put it in long-form CSV format.
-Author:
+
+Author: jinpz
 
     Usage:
 
@@ -24,6 +25,7 @@ import argparse
 import gzip
 import shutil
 
+# TODO (jinpz): Add comments below to make this script easier to read.
 
 def unzip_single(filename_in):
     filename_out = filename_in[:-3]  # to trim the .gz
@@ -136,7 +138,7 @@ def preprocess_df(df, sep='|'):
 
 def main(args):
     print('Processing {0}'.format(args.input_file))
-    tsv_filename = unzip_single(PREFIX + args.input_file)
+    tsv_filename = unzip_single(args.input_file)
     df = pd.read_csv(tsv_filename, delimiter='\t')
     first_stage_df = first_stage_processing(df, args.sep)
     second_stage_df = second_stage_processing(first_stage_df, args.sep)
