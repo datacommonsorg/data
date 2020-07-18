@@ -1,0 +1,15 @@
+
+// TODO here.
+Node: E:OECD_pop_density_cleaned->E0
+typeOf: schema:???
+ISOcode: ???
+// Here might need some process to represent landArea.
+landArea: C:OECD_pop_density_cleaned->Area
+
+Node: E:OECD_pop_density_cleaned->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_PerArea
+measurementMethod: dcs:OECDRegionalStatics
+observationAbout: C:OECD_pop_density_cleaned->E0
+observationDate: C:OECD_pop_density_cleaned->Year
+value: C:OECD_pop_density_cleaned->Count_Person_PerArea
