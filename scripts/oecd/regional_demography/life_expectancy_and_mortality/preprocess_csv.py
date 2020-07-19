@@ -30,9 +30,9 @@ def multi_index_to_single_index(df):
 df = pd.read_csv("REGION_DEMOGR_life_expectancy_and_mortality.csv")
 
 # process the source data
-df = df[["REG_ID", "VAR", "SEX", "Year", "Value"]]
+df = df[["REG_ID", "Region", "VAR", "SEX", "Year", "Value"]]
 df_clear = df.drop(df[(df['VAR']=="INF_SEXDIF") | (df['VAR']=="LIFE_SEXDIF")].index)
-df_cleaned = df_clear.pivot_table(values="Value", index=["REG_ID", "Year"],
+df_cleaned = df_clear.pivot_table(values="Value", index=["REG_ID", "Region", "Year"],
                     columns=["VAR", "SEX"])
 df_cleaned["DEATH_RA"] = df_cleaned["DEATH_RA"] / 1000
 df_cleaned["INF_MORT"] = df_cleaned["INF_MORT"] / 1000
@@ -82,7 +82,7 @@ observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
 value: C:OECD_life_expectancy_and_mortality_cleaned->{stat_var}
 """
 
-stat_vars = df_cleaned.columns[2:]
+stat_vars = df_cleaned.columns[3:]
 with open('OECD_life_expectancy_and_mortality.tmcf', 'w', newline='') as f_out:
     f_out.write(TEMPLATE_GEO)
     for i in range(len(stat_vars)):
