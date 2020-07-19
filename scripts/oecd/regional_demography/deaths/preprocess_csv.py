@@ -15,14 +15,6 @@
 import pandas as pd
 
 
-def region_id_is_legal(row):
-    """Helper function to filter out invalid regions, e.g. "5-Dec"."""
-    if row['REG_ID'][0].isalpha():
-        return True
-    else:
-        return False
-
-
 def multi_index_to_single_index(df):
     columns = []
     for column in df.columns:
@@ -36,15 +28,6 @@ def multi_index_to_single_index(df):
 
 df = pd.read_csv("REGION_DEMOGR_death_tl3.csv")
 temp = df[["REG_ID", "Region", "VAR", "SEX", "Year", "Value"]]
-
-temp['valid'] = temp.apply(region_id_is_legal, axis=1)
-temp = temp[temp['valid']]
-temp = temp.drop(columns=['valid'])
-
-# Test if it is cleaned up.
-for i in temp["REG_ID"].unique():
-    if not i[0].isalpha():
-        exit("ERROR. The table contains invalid REG_ID.")
 
 temp_multi_index = temp.pivot_table(values="Value", index=["REG_ID", "Region", "Year"],
                                     columns=["VAR", "SEX"])
