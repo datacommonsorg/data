@@ -16,6 +16,7 @@ import pandas as pd
 
 
 def region_id_is_legal(row):
+    """Helper function to filter out invalid regions, e.g. "5-Dec"."""
     if row['REG_ID'][0].isalpha():
         return True
     else:
@@ -119,7 +120,7 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv("OECD_deaths_cleaned.csv")
+df_cleaned.to_csv("OECD_deaths_cleaned.csv", index=False)
 
 # ISO code region node
 TEMPLATE_MCF_TEMPLATE_GEO = """
