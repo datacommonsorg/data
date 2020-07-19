@@ -28,9 +28,9 @@ def multi_index_to_single_index(df):
 
 # Process the dataset.
 df = pd.read_csv("REGION_DEMOGR_population_tl3.csv")
-df = df[["REG_ID", "VAR", "SEX", "Year", "Value"]]
+df = df[["REG_ID", "Region", "VAR", "SEX", "Year", "Value"]]
 
-df_cleaned = df.pivot_table(values="Value", index=["REG_ID", "Year"], columns=["VAR", "SEX"])
+df_cleaned = df.pivot_table(values="Value", index=["REG_ID", "Region", "Year"], columns=["VAR", "SEX"])
 df_cleaned = multi_index_to_single_index(df_cleaned)
 
 VAR_to_statsvars = {
@@ -123,7 +123,7 @@ observationDate: C:OECD_population_tl3_cleaned->Year
 value: C:OECD_population_tl3_cleaned->{stat_var}
 """
 
-stat_vars = df_cleaned.columns[2:]
+stat_vars = df_cleaned.columns[3:]
 with open('OECD_population_tl3.tmcf', 'w', newline='') as f_out:
     f_out.write(TEMPLATE_MCF_TEMPLATE_GEO)
     for i in range(len(stat_vars)):
