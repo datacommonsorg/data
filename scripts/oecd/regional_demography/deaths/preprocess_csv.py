@@ -34,7 +34,7 @@ def multi_index_to_single_index(df):
 
 
 df = pd.read_csv("REGION_DEMOGR_death_tl3.csv")
-temp = df[["REG_ID", "VAR", "SEX", "Year", "Value"]]
+temp = df[["REG_ID", "Region", "VAR", "SEX", "Year", "Value"]]
 
 temp['valid'] = temp.apply(region_id_is_legal, axis=1)
 temp = temp[temp['valid']]
@@ -45,7 +45,7 @@ for i in temp["REG_ID"].unique():
     if not i[0].isalpha():
         exit("ERROR. The table contains invalid REG_ID.")
 
-temp_multi_index = temp.pivot_table(values="Value", index=["REG_ID", "Year"],
+temp_multi_index = temp.pivot_table(values="Value", index=["REG_ID", "Region", "Year"],
                                     columns=["VAR", "SEX"])
 
 df_cleaned = multi_index_to_single_index(temp_multi_index)
@@ -119,28 +119,28 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv("OECD_deaths.csv")
+df_cleaned.to_csv("OECD_deaths_cleaned.csv")
 
 # ISO code region node
 TEMPLATE_MCF_TEMPLATE_GEO = """
 // TODO here.
-Node: E:OECD_deaths->E0
+Node: E:OECD_deaths_cleaned->E0
 typeOf: schema:???
 ISOcode: ???
 """
 
 # Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """
-Node: E:OECD_deaths->E{index}
+Node: E:OECD_deaths_cleaned->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: E:OECD_deaths->E0
-observationDate: C:OECD_deaths->Year
-value: C:OECD_deaths->{stat_var}
+observationAbout: E:OECD_deaths_cleaned->E0
+observationDate: C:OECD_deaths_cleaned->Year
+value: C:OECD_deaths_cleaned->{stat_var}
 """
 
-stat_vars = df_cleaned.columns[2:]
+stat_vars = df_cleaned.columns[3:]
 with open('OECD_deaths.tmcf', 'w', newline='') as f_out:
     f_out.write(TEMPLATE_MCF_TEMPLATE_GEO)
     for i in range(len(stat_vars)):
