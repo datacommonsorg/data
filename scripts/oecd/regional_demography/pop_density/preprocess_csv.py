@@ -27,12 +27,12 @@ def multi_index_to_single_index(df):
 
 
 df = pd.read_csv("REGION_DEMOGR_pop_density.csv")
-temp = df[["REG_ID", "VAR", "Year", "Value"]]
+temp = df[["REG_ID", "Region", "VAR", "Year", "Value"]]
 
-temp_multi_index = temp.pivot_table(values="Value", index=["REG_ID", "Year"],
+temp_multi_index = temp.pivot_table(values="Value", index=["REG_ID", "Region", "Year"],
                                     columns=["VAR"])
 
-df_cleaned = multi_index_to_single_index(temp_multi_index)[["REG_ID", "Year", "POP_DEN", "SURF"]]
+df_cleaned = multi_index_to_single_index(temp_multi_index)[["REG_ID", "Region", "Year", "POP_DEN", "SURF"]]
 
 VAR_to_statsvars = {
     "POP_DEN": "Count_Person_PerArea",
@@ -55,7 +55,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_PerArea
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: C:OECD_pop_density_cleaned->E0
-observationDate: C:OECD_pop_density_cleaned->Year
+observationDate: C:OECD_pop_density_cleaned->Years
 value: C:OECD_pop_density_cleaned->Count_Person_PerArea
 """
 
