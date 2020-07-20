@@ -1,4 +1,4 @@
-Node: E:eurostat_gdp->E2
+Node: E:eurostat_gdp->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction
 observationAbout: C:eurostat_gdp->geo
@@ -8,7 +8,7 @@ observationPeriod: "P1Y"
 value: C:eurostat_gdp->NUM_EUR
 unit: dcs:Euro
 
-Node: E:eurostat_gdp->E3
+Node: E:eurostat_gdp->E2
 typeOf: dcs:StatVarObservation
 variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction_AsAFractionOfCount_Person
 observationAbout: C:eurostat_gdp->geo
@@ -18,7 +18,7 @@ observationPeriod: "P1Y"
 value: C:eurostat_gdp->EUR_HAB
 unit: dcs:Euro
 
-Node: E:eurostat_gdp->E4
+Node: E:eurostat_gdp->E3
 typeOf: dcs:StatVarObservation
 variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction
 observationAbout: C:eurostat_gdp->geo
@@ -28,7 +28,7 @@ observationPeriod: "P1Y"
 value: C:eurostat_gdp->NUM_NAC
 unit: dcs:NationalCurrency
 
-Node: E:eurostat_gdp->E5
+Node: E:eurostat_gdp->E4
 typeOf: dcs:StatVarObservation
 variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction
 observationAbout: C:eurostat_gdp->geo
@@ -38,7 +38,7 @@ observationPeriod: "P1Y"
 value: C:eurostat_gdp->NUM_PPS
 unit: dcs:PurchasingPowerStandard
 
-Node: E:eurostat_gdp->E6
+Node: E:eurostat_gdp->E5
 typeOf: dcs:StatVarObservation
 variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction_AsAFractionOfCount_Person
 observationAbout: C:eurostat_gdp->geo

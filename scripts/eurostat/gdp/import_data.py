@@ -123,7 +123,8 @@ class EurostatGDPImporter:
                 'value: C:eurostat_gdp->{val_col}\n'
                 'unit: {unit}\n\n')
         with open("eurostat_gdp.tmcf", 'w') as tmcf_f:
-            for i, col in enumerate(self.clean_df.columns):
+            col_num = 0
+            for col in self.clean_df.columns:
                 if "NAC" in col:
                     unit = "dcs:NationalCurrency"
                 elif "PPS" in col:
@@ -133,16 +134,14 @@ class EurostatGDPImporter:
                 else:
                     assert col in ['geo', 'time']
                     continue
-
+                col_num += 1
                 if "HAB" in col:
                     var = "dcid:Amount_EconomicActivity_GrossDomesticProduction"\
                           "_AsAFractionOfCount_Person"
                 else:
                     var = "dcid:Amount_EconomicActivity_GrossDomesticProduction"
-                tmcf_f.write(temp.format(i=i,
-                                         var_ref=var,
-                                         val_col=col,
-                                         unit=unit))
+                tmcf_f.write(temp.format(i=col_num, var_ref=var,
+                                         val_col=col, unit=unit))
 
 if __name__ == "__main__":
     imp = EurostatGDPImporter()
