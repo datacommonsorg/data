@@ -1,15 +1,11 @@
 
-// TODO here.
-Node: E:OECD_population_tl2_cleaned->E0
-typeOf: schema:???
-ISOcode: ???
-
 Node: E:OECD_population_tl2_cleaned->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_Female
 
 Node: E:OECD_population_tl2_cleaned->E2
@@ -18,6 +14,7 @@ variableMeasured: dcs:Count_Person_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_Male
 
 Node: E:OECD_population_tl2_cleaned->E3
@@ -26,55 +23,62 @@ variableMeasured: dcs:Count_Person
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person
 
 Node: E:OECD_population_tl2_cleaned->E4
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_0To14Years_Female
+variableMeasured: dcs:Count_Person_Upto14Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
-value: C:OECD_population_tl2_cleaned->Count_Person_0To14Years_Female
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto14Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E5
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_0To14Years_Male
+variableMeasured: dcs:Count_Person_Upto14Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
-value: C:OECD_population_tl2_cleaned->Count_Person_0To14Years_Male
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto14Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E6
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_0To14Years
+variableMeasured: dcs:Count_Person_Upto14Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
-value: C:OECD_population_tl2_cleaned->Count_Person_0To14Years
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto14Years
 
 Node: E:OECD_population_tl2_cleaned->E7
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_0To4Years_Female
+variableMeasured: dcs:Count_Person_Upto4Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
-value: C:OECD_population_tl2_cleaned->Count_Person_0To4Years_Female
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto4Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E8
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_0To4Years_Male
+variableMeasured: dcs:Count_Person_Upto4Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
-value: C:OECD_population_tl2_cleaned->Count_Person_0To4Years_Male
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto4Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E9
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_0To4Years
+variableMeasured: dcs:Count_Person_Upto4Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
-value: C:OECD_population_tl2_cleaned->Count_Person_0To4Years
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto4Years
 
 Node: E:OECD_population_tl2_cleaned->E10
 typeOf: dcs:StatVarObservation
@@ -82,6 +86,7 @@ variableMeasured: dcs:Count_Person_10To14Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_10To14Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E11
@@ -90,6 +95,7 @@ variableMeasured: dcs:Count_Person_10To14Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_10To14Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E12
@@ -98,6 +104,7 @@ variableMeasured: dcs:Count_Person_10To14Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_10To14Years
 
 Node: E:OECD_population_tl2_cleaned->E13
@@ -106,6 +113,7 @@ variableMeasured: dcs:Count_Person_15To19Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_15To19Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E14
@@ -114,6 +122,7 @@ variableMeasured: dcs:Count_Person_15To19Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_15To19Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E15
@@ -122,6 +131,7 @@ variableMeasured: dcs:Count_Person_15To19Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_15To19Years
 
 Node: E:OECD_population_tl2_cleaned->E16
@@ -130,6 +140,7 @@ variableMeasured: dcs:Count_Person_15To64Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_15To64Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E17
@@ -138,6 +149,7 @@ variableMeasured: dcs:Count_Person_15To64Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_15To64Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E18
@@ -146,6 +158,7 @@ variableMeasured: dcs:Count_Person_15To64Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_15To64Years
 
 Node: E:OECD_population_tl2_cleaned->E19
@@ -154,6 +167,7 @@ variableMeasured: dcs:Count_Person_20To24Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_20To24Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E20
@@ -162,6 +176,7 @@ variableMeasured: dcs:Count_Person_20To24Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_20To24Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E21
@@ -170,6 +185,7 @@ variableMeasured: dcs:Count_Person_20To24Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_20To24Years
 
 Node: E:OECD_population_tl2_cleaned->E22
@@ -178,6 +194,7 @@ variableMeasured: dcs:Count_Person_25To29Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_25To29Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E23
@@ -186,6 +203,7 @@ variableMeasured: dcs:Count_Person_25To29Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_25To29Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E24
@@ -194,6 +212,7 @@ variableMeasured: dcs:Count_Person_25To29Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_25To29Years
 
 Node: E:OECD_population_tl2_cleaned->E25
@@ -202,6 +221,7 @@ variableMeasured: dcs:Count_Person_30To34Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_30To34Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E26
@@ -210,6 +230,7 @@ variableMeasured: dcs:Count_Person_30To34Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_30To34Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E27
@@ -218,6 +239,7 @@ variableMeasured: dcs:Count_Person_30To34Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_30To34Years
 
 Node: E:OECD_population_tl2_cleaned->E28
@@ -226,6 +248,7 @@ variableMeasured: dcs:Count_Person_35To39Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_35To39Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E29
@@ -234,6 +257,7 @@ variableMeasured: dcs:Count_Person_35To39Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_35To39Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E30
@@ -242,6 +266,7 @@ variableMeasured: dcs:Count_Person_35To39Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_35To39Years
 
 Node: E:OECD_population_tl2_cleaned->E31
@@ -250,6 +275,7 @@ variableMeasured: dcs:Count_Person_40To44Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_40To44Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E32
@@ -258,6 +284,7 @@ variableMeasured: dcs:Count_Person_40To44Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_40To44Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E33
@@ -266,6 +293,7 @@ variableMeasured: dcs:Count_Person_40To44Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_40To44Years
 
 Node: E:OECD_population_tl2_cleaned->E34
@@ -274,6 +302,7 @@ variableMeasured: dcs:Count_Person_45To49Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_45To49Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E35
@@ -282,6 +311,7 @@ variableMeasured: dcs:Count_Person_45To49Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_45To49Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E36
@@ -290,6 +320,7 @@ variableMeasured: dcs:Count_Person_45To49Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_45To49Years
 
 Node: E:OECD_population_tl2_cleaned->E37
@@ -298,6 +329,7 @@ variableMeasured: dcs:Count_Person_50To54Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_50To54Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E38
@@ -306,6 +338,7 @@ variableMeasured: dcs:Count_Person_50To54Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_50To54Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E39
@@ -314,6 +347,7 @@ variableMeasured: dcs:Count_Person_50To54Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_50To54Years
 
 Node: E:OECD_population_tl2_cleaned->E40
@@ -322,6 +356,7 @@ variableMeasured: dcs:Count_Person_55To59Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_55To59Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E41
@@ -330,6 +365,7 @@ variableMeasured: dcs:Count_Person_55To59Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_55To59Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E42
@@ -338,6 +374,7 @@ variableMeasured: dcs:Count_Person_55To59Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_55To59Years
 
 Node: E:OECD_population_tl2_cleaned->E43
@@ -346,6 +383,7 @@ variableMeasured: dcs:Count_Person_5To9Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_5To9Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E44
@@ -354,6 +392,7 @@ variableMeasured: dcs:Count_Person_5To9Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_5To9Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E45
@@ -362,6 +401,7 @@ variableMeasured: dcs:Count_Person_5To9Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_5To9Years
 
 Node: E:OECD_population_tl2_cleaned->E46
@@ -370,6 +410,7 @@ variableMeasured: dcs:Count_Person_60To64Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_60To64Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E47
@@ -378,6 +419,7 @@ variableMeasured: dcs:Count_Person_60To64Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_60To64Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E48
@@ -386,6 +428,7 @@ variableMeasured: dcs:Count_Person_60To64Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_60To64Years
 
 Node: E:OECD_population_tl2_cleaned->E49
@@ -394,6 +437,7 @@ variableMeasured: dcs:Count_Person_65To69Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_65To69Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E50
@@ -402,6 +446,7 @@ variableMeasured: dcs:Count_Person_65To69Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_65To69Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E51
@@ -410,6 +455,7 @@ variableMeasured: dcs:Count_Person_65To69Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_65To69Years
 
 Node: E:OECD_population_tl2_cleaned->E52
@@ -418,6 +464,7 @@ variableMeasured: dcs:Count_Person_65OrMoreYears_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_65OrMoreYears_Female
 
 Node: E:OECD_population_tl2_cleaned->E53
@@ -426,6 +473,7 @@ variableMeasured: dcs:Count_Person_65OrMoreYears_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_65OrMoreYears_Male
 
 Node: E:OECD_population_tl2_cleaned->E54
@@ -434,6 +482,7 @@ variableMeasured: dcs:Count_Person_65OrMoreYears
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_65OrMoreYears
 
 Node: E:OECD_population_tl2_cleaned->E55
@@ -442,6 +491,7 @@ variableMeasured: dcs:Count_Person_70To74Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_70To74Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E56
@@ -450,6 +500,7 @@ variableMeasured: dcs:Count_Person_70To74Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_70To74Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E57
@@ -458,6 +509,7 @@ variableMeasured: dcs:Count_Person_70To74Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_70To74Years
 
 Node: E:OECD_population_tl2_cleaned->E58
@@ -466,6 +518,7 @@ variableMeasured: dcs:Count_Person_75To79Years_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_75To79Years_Female
 
 Node: E:OECD_population_tl2_cleaned->E59
@@ -474,6 +527,7 @@ variableMeasured: dcs:Count_Person_75To79Years_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_75To79Years_Male
 
 Node: E:OECD_population_tl2_cleaned->E60
@@ -482,6 +536,7 @@ variableMeasured: dcs:Count_Person_75To79Years
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_75To79Years
 
 Node: E:OECD_population_tl2_cleaned->E61
@@ -490,6 +545,7 @@ variableMeasured: dcs:Count_Person_80OrMoreYears_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_80OrMoreYears_Female
 
 Node: E:OECD_population_tl2_cleaned->E62
@@ -498,6 +554,7 @@ variableMeasured: dcs:Count_Person_80OrMoreYears_Male
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_80OrMoreYears_Male
 
 Node: E:OECD_population_tl2_cleaned->E63
@@ -506,4 +563,5 @@ variableMeasured: dcs:Count_Person_80OrMoreYears
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: E:OECD_population_tl2_cleaned->E0
 observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->Count_Person_80OrMoreYears
