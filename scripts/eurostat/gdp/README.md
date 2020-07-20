@@ -35,7 +35,7 @@ ZIP file is available for download from [here](https://ec.europa.eu/eurostat/est
 1. "PPS_HAB_EU": "Purchasing power standard (PPS) per inhabitant in percentage of the EU average",
 1. "PPS_HAB_EU27_2020": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant in percentage of the EU27 (from 2020) average"
 
-> Eurostat publishes their data with cerrtain [flags and special values](https://ec.europa.eu/eurostat/data/database/information) that are used to mark things like breaks in time series, confidential information, estimated data, etc. These markers are currently completely filtered out of the data, and should eventually be added as extra properties on StatVarObservations.
+> Eurostat publishes their data with certain [flags and special values](https://ec.europa.eu/eurostat/data/database/information) that are used to mark things like breaks in time series, confidential information, estimated data, etc. These markers are currently completely filtered out of the data, and should eventually be added as extra properties on StatVarObservations.
 
 #### Cleaned Data
 - [eurostat_gdp.csv](eurostat_gdp.csv).
