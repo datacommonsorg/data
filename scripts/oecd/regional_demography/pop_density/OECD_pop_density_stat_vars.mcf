@@ -1,5 +1,7 @@
 Node: dcid:Count_Person_PerArea
+typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:area
+s
