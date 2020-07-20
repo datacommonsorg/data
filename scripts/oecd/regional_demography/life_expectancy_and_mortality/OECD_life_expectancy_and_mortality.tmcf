@@ -1,0 +1,135 @@
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_Female_Count_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_Female_Count_Person
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_Male_Count_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_Male_Count_Person
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_Count_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_Count_Person
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_LessThan1Year_Female_Count_BirthEvent_LiveBirth
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_LessThan1Year_Female_Count_BirthEvent_LiveBirth
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_LessThan1Year_Male_Count_BirthEvent_LiveBirth
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_LessThan1Year_Male_Count_BirthEvent_LiveBirth
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_LessThan1Year_Count_BirthEvent_LiveBirth
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_LessThan1Year_Count_BirthEvent_LiveBirth
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->LifeExpectancy_Person_Female
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->LifeExpectancy_Person_Male
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LifeExpectancy_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->LifeExpectancy_Person
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_Female_Count_Person_AgeAdjusted
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_Female_Count_Person_AgeAdjusted
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_Male_Count_Person_AgeAdjusted
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_Male_Count_Person_AgeAdjusted
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_Count_Person_AgeAdjusted
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_Count_Person_AgeAdjusted
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_15To64Years_Female_Count_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_15To64Years_Female_Count_Person
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_15To64Years_Male_Count_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_15To64Years_Male_Count_Person
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MortalityEvent_15To64Years_Count_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_MortalityEvent_15To64Years_Count_Person
