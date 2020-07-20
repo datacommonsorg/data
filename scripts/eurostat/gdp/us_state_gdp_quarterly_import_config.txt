@@ -5,10 +5,10 @@ import: {
   # Path to the resolved MCF. Can be a repeated field.
   mcf_url: "gs://resolved_mcf/external_tables/eurostatGDP3/nodes.mcf-00000-of-00001"
   # First date of imported data.
-  start_date: "2000-01-01"
+  start_date: "2000"
   # Last date of imported data.
-  end_date: "2018-12-31"
+  end_date: "2018"
   # Source data release schedule.
-  update_frequency: "P1M"
+  update_frequency: "P1Y"
   next_release_date: "Unknown"
 }

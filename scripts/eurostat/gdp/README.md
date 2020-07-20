@@ -11,11 +11,11 @@ Author: fpernice-google
 
 ### Download URL
 
-ZIP file is available for download from https://ec.europa.eu/eurostat/data/database.
+ZIP file is available for download from [here](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/nama_10r_3gdp.tsv.gz).
 
 ### Overview
 
-> Gross Domestic Product (GDP) measures the overall level of economic activity in a country or region. The Eurostat publishes various forms of economic data, including GDP, inflation, and employment. Specifically on GDP, it publishes data at various levels of government, and with different measurement styles. We import all Eurostat GDP data.
+> Gross Domestic Product (GDP) measures the overall level of economic activity in a country or region. Eurostat publishes various forms of economic data, including GDP, inflation, and employment. Specifically on GDP, it publishes data at various levels of government, and with different measurement styles. We import all Eurostat GDP data.
 
 > Data Format: All considered data is measured in one of the following forms:
 1. "MIO_EUR": "Million euro",
@@ -34,6 +34,8 @@ ZIP file is available for download from https://ec.europa.eu/eurostat/data/datab
 1. "PPS_EU27_2020_HAB": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant",
 1. "PPS_HAB_EU": "Purchasing power standard (PPS) per inhabitant in percentage of the EU average",
 1. "PPS_HAB_EU27_2020": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant in percentage of the EU27 (from 2020) average"
+
+> Eurostat publishes their data with cerrtain [flags and special values](https://ec.europa.eu/eurostat/data/database/information) that are used to mark things like breaks in time series, confidential information, estimated data, etc. These markers are currently completely filtered out of the data, and should eventually be added as extra properties on StatVarObservations.
 
 #### Cleaned Data
 - [eurostat_gdp.csv](eurostat_gdp.csv).

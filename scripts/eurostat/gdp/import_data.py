@@ -56,7 +56,6 @@ class EurostatGDPImporter:
         self.raw_df = None
         self.preprocessed_df = None
         self.clean_df = None
-        print(self.REGION_CODES['EU27_2020'])
 
     def download_data(self):
         """Downloads raw data from Eurostat website and stores it in instance
@@ -74,14 +73,14 @@ class EurostatGDPImporter:
 
     def clean_data(self):
         """Drops unnecessary columns that are not needed for data import."""
-        if self.raw_df is None:
+        if self.preprocessed_df is None:
             raise ValueError("Uninitialized value of processed data frame. "
                              "Please check you are calling preprocess_data "
                              "before clean_data.")
         self.clean_df = self.preprocessed_df[self.DESIRED_COLUMNS]
         self.clean_df = self.clean_df.replace(to_replace=':', value='')
         new_col_names = {}
-        one_million = 1000000
+        one_million = 1000 * 1000
 
         def float_converter(val):
             try:
@@ -114,26 +113,30 @@ class EurostatGDPImporter:
         self.clean_df.to_csv(filename)
 
     def generate_tmcf(self):
-        temp = ('Node: E:eurostat_gdp->E{i}\n'\
-               'typeOf: dcs:StatVarObservation\n'\
-               'variableMeasured: {var_ref}\n'\
-               'observationAbout: C:eurostat_gdp->geo\n'\
-               'observationDate: C:eurostat_gdp->time\n'\
-               'measurementMethod: dcs:EurostatRegionalStatistics\n'\
-               'observationPeriod: "P1M"\n'\
-               'value: C:eurostat_gdp->{val_col}\n'\
-               'unit: {unit}\n\n')
+        temp = ('Node: E:eurostat_gdp->E{i}\n'
+                'typeOf: dcs:StatVarObservation\n'
+                'variableMeasured: {var_ref}\n'
+                'observationAbout: C:eurostat_gdp->geo\n'
+                'observationDate: C:eurostat_gdp->time\n'
+                'measurementMethod: dcs:EurostatRegionalStatistics\n'
+                'observationPeriod: "P1Y"\n'
+                'value: C:eurostat_gdp->{val_col}\n'
+                'unit: {unit}\n\n')
         with open("eurostat_gdp.tmcf", 'w') as tmcf_f:
             for i, col in enumerate(self.clean_df.columns):
                 if "NAC" in col:
                     unit = "dcs:NationalCurrency"
                 elif "PPS" in col:
                     unit = "dcs:PurchasingPowerStandard"
-                else:
+                elif "EUR" in col:
                     unit = "dcs:Euro"
+                else:
+                    assert col in ['geo', 'time']
+                    continue
 
                 if "HAB" in col:
-                    var = "dcid:Amount_EconomicActivity_GrossDomesticProduction_Count_Person"
+                    var = "dcid:Amount_EconomicActivity_GrossDomesticProduction"\
+                          "_AsAFractionOfCount_Person"
                 else:
                     var = "dcid:Amount_EconomicActivity_GrossDomesticProduction"
                 tmcf_f.write(temp.format(i=i,
