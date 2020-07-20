@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import pandas as pd
 
 
@@ -29,6 +30,13 @@ def multi_index_to_single_index(df):
 # Process the dataset.
 df = pd.read_csv("REGION_DEMOGR_population_tl3.csv")
 df = df[["REG_ID", "Region", "VAR", "SEX", "Year", "Value"]]
+# First remove geos with names that we don't have mappings to dcid for.
+name2dcid = dict(json.loads(open('../name2dcid.json').read()))
+print(name2dcid)
+df = df[df['Region'].isin(name2dcid.keys())]
+# Second, replace the names with dcids
+df.replace({'Region': name2dcid}, inplace=True)
+
 
 df_cleaned = df.pivot_table(values="Value", index=["REG_ID", "Region", "Year"], columns=["VAR", "SEX"])
 df_cleaned = multi_index_to_single_index(df_cleaned)

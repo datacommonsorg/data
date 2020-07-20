@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import pandas as pd
 
 
@@ -28,6 +29,13 @@ def multi_index_to_single_index(df):
 
 # Read csv from source csv
 df = pd.read_csv("REGION_DEMOGR_life_expectancy_and_mortality.csv")
+# First remove geos with names that we don't have mappings to dcid for.
+name2dcid = dict(json.loads(open('../name2dcid.json').read()))
+print(name2dcid)
+df = df[df['Region'].isin(name2dcid.keys())]
+# Second, replace the names with dcids
+df.replace({'Region': name2dcid}, inplace=True)
+
 
 # process the source data
 df = df[["REG_ID", "Region", "VAR", "SEX", "Year", "Value"]]
