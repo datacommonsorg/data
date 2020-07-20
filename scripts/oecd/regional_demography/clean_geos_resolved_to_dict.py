@@ -21,6 +21,7 @@ df.loc[df['dcid'].duplicated(), 'dcid'] = np.nan
 df.loc[df['dcid'].duplicated(), 'errors'] = 'DCID resolved to a duplicate parent or previous sibling.'
 
 dfs = df[['name', 'dcid']].dropna()
+dfs['dcid'] = 'dcid:' + dfs['dcid'].astype(str)
 name2dcid = dict(zip(dfs.name,dfs.dcid))
 with open('name2dcid.json', 'w') as f_out:
   json.dump(name2dcid, f_out, indent=4)

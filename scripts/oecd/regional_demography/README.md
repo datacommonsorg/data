@@ -18,5 +18,5 @@ demographics dataset
 go run ../../../tools/place_name_resolver/resolver.go --in_csv_path=geos_cleaned.csv --out_csv_path=geos_resolved.csv --maps_api_key=YOUR_API_KEY
 ```
 
-5. Clean the resolved CSV: `python3 clean_resolved_geos_csv.py`
+5. Clean the resolved CSV: `python3 clean_geos_resolved_to_dict.py`
 

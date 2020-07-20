@@ -18,34 +18,34 @@ gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:Count_Person_0To4Years
+Node: dcid:Count_Person_Upto4Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 0 4]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:Count_Person_0To4Years_Female
+Node: dcid:Count_Person_Upto4Years_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 0 4]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:Count_Person_0To4Years_Male
+Node: dcid:Count_Person_Upto4Years_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 0 4]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_5To9Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 5 9]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_5To9Years_Female
@@ -53,7 +53,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 5 9]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_5To9Years_Male
@@ -61,14 +61,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 5 9]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_10To14Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 10 14]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_10To14Years_Female
@@ -76,7 +76,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 10 14]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_10To14Years_Male
@@ -84,14 +84,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 10 14]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_15To19Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 15 19]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_15To19Years_Female
@@ -99,7 +99,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 15 19]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_15To19Years_Male
@@ -107,14 +107,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 15 19]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_20To24Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 20 24]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_20To24Years_Female
@@ -122,7 +122,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 20 24]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_20To24Years_Male
@@ -130,14 +130,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 20 24]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_25To29Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 25 29]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_25To29Years_Female
@@ -145,7 +145,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 25 29]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_25To29Years_Male
@@ -153,14 +153,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 25 29]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_30To34Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 30 34]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_30To34Years_Female
@@ -168,7 +168,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 30 34]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_30To34Years_Male
@@ -176,14 +176,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 30 34]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_35To39Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 35 39]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_35To39Years_Female
@@ -191,7 +191,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 35 39]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_35To39Years_Male
@@ -199,14 +199,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 35 39]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_40To44Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 40 44]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_40To44Years_Female
@@ -214,7 +214,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 40 44]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_40To44Years_Male
@@ -222,14 +222,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 40 44]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_45To49Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 45 49]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_45To49Years_Female
@@ -237,7 +237,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 45 49]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_45To49Years_Male
@@ -245,14 +245,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 45 49]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_50To54Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 50 54]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_50To54Years_Female
@@ -260,7 +260,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 50 54]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_50To54Years_Male
@@ -268,14 +268,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 50 54]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_55To59Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 55 59]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_55To59Years_Female
@@ -283,7 +283,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 55 59]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_55To59Years_Male
@@ -291,14 +291,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 55 59]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_60To64Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 60 64]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_60To64Years_Female
@@ -306,7 +306,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 60 64]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_60To64Years_Male
@@ -314,14 +314,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 60 64]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_65To69Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 65 69]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_65To69Years_Female
@@ -329,7 +329,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 65 69]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_65To69Years_Male
@@ -337,14 +337,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 65 69]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_70To74Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 70 74]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_70To74Years_Female
@@ -352,7 +352,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 70 74]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_70To74Years_Male
@@ -360,14 +360,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 70 74]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_75To79Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 75 79]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_75To79Years_Female
@@ -375,7 +375,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 75 79]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_75To79Years_Male
@@ -383,14 +383,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 75 79]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_80OrMoreYears
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 80 -]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_80OrMoreYears_Female
@@ -398,7 +398,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 80 -]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_80OrMoreYears_Male
@@ -406,37 +406,37 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 80 -]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:Count_Person_0To14Years
+Node: dcid:Count_Person_Upto14Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 0 14]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:Count_Person_0To14Years_Female
+Node: dcid:Count_Person_Upto14Years_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 0 14]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:Count_Person_0To14Years_Male
+Node: dcid:Count_Person_Upto14Years_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 0 14]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_15To64Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 15 64]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_15To64Years_Female
@@ -444,7 +444,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 15 64]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_15To64Years_Male
@@ -452,14 +452,14 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 15 64]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_65OrMoreYears
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 65 -]
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_65OrMoreYears_Female
@@ -467,7 +467,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 65 -]
 gender: schema:Female
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Person_65OrMoreYears_Male
@@ -475,5 +475,5 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 65 -]
 gender: schema:Male
-measureProperty: dcs:count
+measuredProperty: dcs:count
 statType: dcs:measuredValue
