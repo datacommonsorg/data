@@ -4,4 +4,3 @@ populationType: schema:Person
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:area
-s
