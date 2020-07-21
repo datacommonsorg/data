@@ -41,7 +41,7 @@ _IMPORT_SPECIFICATION_REQUIRED_FIELDS = [
 ]
 
 
-def task_info_valid(task_info: typing.Dict):
+def is_task_info_valid(task_info: typing.Dict):
     """Checks whether the task info sent to the app is valid.
 
     Checks that required fields are present. Not currently used.
@@ -52,16 +52,16 @@ def task_info_valid(task_info: typing.Dict):
     Raises:
         ValueError: The task info is not valid.
     """
-    missing_keys = _get_missing_keys(_TASK_INFO_REQUIRED_FIELDS, task_info)
+    missing_keys = _filter_missing_keys(_TASK_INFO_REQUIRED_FIELDS, task_info)
     if missing_keys:
         raise ValueError(f'Missing {utils.list_to_str(missing_keys)} in '
                          f'task info {task_info}')
 
 
-def import_targets_valid(import_targets: typing.List[str],
-                         manifest_dirs: typing.List[str],
-                         repo_dir: str,
-                         manifest_filename: str) -> None:
+def is_import_targets_valid(import_targets: typing.List[str],
+                            manifest_dirs: typing.List[str],
+                            repo_dir: str,
+                            manifest_filename: str) -> None:
     """Checks whether the import targets specified in the commit message
     are valid.
 
@@ -110,13 +110,13 @@ def import_targets_valid(import_targets: typing.List[str],
             repo_dir, import_dir, import_name, manifest_filename)
 
 
-def manifest_valid(
+def is_manifest_valid(
         manifest: typing.Dict, repo_dir: str, import_dir: str) -> None:
     """Checks whether the manifest is valid.
 
     Checks that:
         1) Required fields are present.
-        2) Each import specification is valid. See _import_spec_valid.
+        2) Each import specification is valid. See _is_import_spec_valid.
 
     Args:
         manifest: The manifest to check as a dict.
@@ -127,22 +127,49 @@ def manifest_valid(
     Raises:
         ValueError: THe manifest is not valid.
     """
-    missing_keys = _get_missing_keys(_MANIFEST_REQUIRED_FIELDS,
-                                     manifest)
+    missing_keys = _filter_missing_keys(_MANIFEST_REQUIRED_FIELDS,
+                                        manifest)
     if missing_keys:
         raise ValueError(f'Missing {utils.list_to_str(missing_keys)} in '
                          f'manifest ({manifest})')
     for spec in manifest['import_specifications']:
-        _import_spec_valid(spec, repo_dir, import_dir)
+        _is_import_spec_valid(spec, repo_dir, import_dir)
 
 
-def _get_import_names_in_manifest(manifest):
+def _get_import_names_in_manifest(manifest: typing.Dict) -> typing.List[str]:
+    """Gets all the import names in the manifest.
+
+    The manifest should have an import_specification field whose values are
+    dicts and have an import_name field.
+
+    Args:
+        manifest: The manifest as a dict.
+
+    Returns:
+        List of import names in the manifest each as a string.
+    """
     return [spec.get('import_name')
             for spec in manifest.get('import_specifications', [])]
 
 
 def _import_name_exists_in_manifest(
         repo_dir, import_dir, import_name, manifest_filename):
+    """Ensures that an import name exists in one of the import specifications
+    in a manifest.
+
+    The manifest is read from <repo_dir>/<import_dir>/<manifest_filename>.
+
+    Args:
+        repo_dir: Absolute path to the repository as a string.
+        import_dir: Path to the directory containing the manifest, relative to
+            the root directory of the repository as a string.
+        import_name: Import name to check as a string.
+        manifest_filename: Filename of the manifest as a string.
+
+    Raises:
+        ValueError: The manifest does not exist or the import name is not found
+            in the manifest.
+    """
     try:
         manifest = import_executor.parse_manifest(
             os.path.join(repo_dir, import_dir, manifest_filename))
@@ -155,7 +182,7 @@ def _import_name_exists_in_manifest(
                          f'{os.path.join(import_dir, manifest_filename)}')
 
 
-def _import_spec_valid(import_spec, repo_dir, import_dir):
+def _is_import_spec_valid(import_spec, repo_dir, import_dir):
     """Checks whether the import specification is valid.
 
     Checks that:
@@ -172,22 +199,31 @@ def _import_spec_valid(import_spec, repo_dir, import_dir):
     Raises:
         ValueError: THe import specification is not valid.
     """
-    missing_keys = _get_missing_keys(_IMPORT_SPECIFICATION_REQUIRED_FIELDS,
-                                     import_spec)
+    missing_keys = _filter_missing_keys(_IMPORT_SPECIFICATION_REQUIRED_FIELDS,
+                                        import_spec)
     if missing_keys:
         raise ValueError(f'Missing {utils.list_to_str(missing_keys)} in '
                          f'import specification ({import_spec})')
 
     absolute_script_paths = [os.path.join(repo_dir, import_dir, path)
                              for path in import_spec.get('scripts', [])]
-    missing_paths = _get_missing_paths(absolute_script_paths)
+    missing_paths = _filter_missing_paths(absolute_script_paths)
     if missing_paths:
         raise ValueError(f'{utils.list_to_str(missing_paths)} not found')
 
 
-def _get_missing_paths(paths):
+def _filter_missing_paths(paths: typing.List[str]) -> typing.List[str]:
+    """Given a list of paths, returns the paths that point to files and
+    directories that do not exist.
+
+    Raises:
+        Same exceptions as os.path.exists.
+    """
     return list(path for path in paths if not os.path.exists(path))
 
 
-def _get_missing_keys(keys, a_dict):
+def _filter_missing_keys(
+        keys: typing.Any, a_dict: typing.Dict) -> typing.List[typing.Any]:
+    """Given a list of keys each as a string and a dict, returns the keys in
+    the list that are not present in the dict."""
     return list(key for key in keys if key not in a_dict)

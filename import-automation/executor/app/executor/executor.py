@@ -121,7 +121,7 @@ def _execute_imports_on_commit_helper(commit_sha, run_id):
         commit_sha, configs.MANIFEST_FILENAME)
     import_targets = parse_commit_message_targets(commit_message)
     logging.info(f'targets: {import_targets}')
-    valid, err = validation.import_targets_valid(import_targets, manifest_dirs)
+    valid, err = validation.is_import_targets_valid(import_targets, manifest_dirs)
     if not valid:
         return err
 
