@@ -47,7 +47,7 @@ class GCSFileUploader(FileUploader):
             project_id: ID of the Google Cloud project that hosts the bucket,
                 as a string.
             bucket_name: Name of the Cloud Storage Bucket to upload files to,
-                as a string.c
+                as a string.
         """
         self.bucket = storage.Client(project=project_id).bucket(bucket_name)
 
