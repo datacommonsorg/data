@@ -1,3 +1,17 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import unittest
 from unittest import mock
 import tempfile
@@ -7,17 +21,15 @@ from requests import exceptions
 
 import test.utils
 from app.service import github_api
-from test import test_integration
 from test import utils
+from test import test_integration
 
 
 class GitHubAPITest(unittest.TestCase):
 
-    @mock.patch('app.configs.get_github_auth_access_token',
-                test_integration.get_github_auth_access_token_mock)
     def setUp(self):
         self.github = github_api.GitHubRepoAPI(
-            'ownerA', 'repoB', 'authusernameC')
+            'ownerA', 'repoB', 'authusernameC', 'authacesstokenD')
 
     def test_build_commit_query(self):
         self.assertEqual(
@@ -35,7 +47,7 @@ class GitHubAPITest(unittest.TestCase):
         self.assertTrue(self.github._dir_exists('c', 'a/b/c'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_dir_exists_not(self, get):
@@ -43,7 +55,7 @@ class GitHubAPITest(unittest.TestCase):
         self.assertFalse(self.github._dir_exists('c', 'a/b/c'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_dir_exists_other_error(self, get):
@@ -52,7 +64,7 @@ class GitHubAPITest(unittest.TestCase):
             exceptions.HTTPError, self.github._dir_exists, 'c', 'a/b/c')
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_query_commit(self, get):
@@ -61,7 +73,7 @@ class GitHubAPITest(unittest.TestCase):
         self.assertEqual(expected, self.github.query_commit('commitCCC'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/commits/commitCCC',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
         get.return_value = utils.ResponseMock(400)
         self.assertRaises(
@@ -102,10 +114,10 @@ class GitHubAPITest(unittest.TestCase):
         ]
         get.return_value = utils.ResponseMock(200, data)
         self.assertEqual(
-            expected, self.github.query_changed_files_in_commit('commitCCC'))
+            expected, self.github._query_changed_files_in_commit('commitCCC'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/commits/commitCCC',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_query_changed_files_in_commit_raise(self, get):
@@ -141,31 +153,31 @@ class GitHubAPITest(unittest.TestCase):
         ]
         get.return_value = utils.ResponseMock(200, data)
         self.assertEqual(
-            expected, self.github.query_files_in_dir('committt', 'd'))
+            expected, self.github._query_files_in_dir('committt', 'd'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/d?ref=committt',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_query_files_in_dir_raise(self, get):
         get.return_value = utils.ResponseMock(400)
         self.assertRaises(
             exceptions.HTTPError,
-            self.github.query_files_in_dir, 'committt', 'dirrr')
+            self.github._query_files_in_dir, 'committt', 'dirrr')
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir',
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir',
                 lambda *args: ['aaa', 'bbb', 'ccc'])
     def test_path_containing_file(self):
         self.assertTrue(
             self.github._path_containing_file('sha', 'foo/bar', 'bbb'))
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir',
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir',
                 lambda *args: ['aaa', 'bbb', 'ccc'])
     def test_path_containing_file_not_exist(self):
         self.assertFalse(
             self.github._path_containing_file('sha', 'foo/bar', 'not-exist'))
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     def test_find_dirs_up_path(self, query):
         # Each path component needs a return value
         # 'scripts/us_fed/foo', 'scripts/us_fed', 'scripts', and ''
@@ -198,7 +210,7 @@ class GitHubAPITest(unittest.TestCase):
         }
         self.assertEqual(expected_searched, searched)
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     def test_find_dirs_up_path_skip_call(self, query):
         # No calls should be made
         query.side_effect = [
@@ -222,7 +234,7 @@ class GitHubAPITest(unittest.TestCase):
         self.assertEqual({'a/b/c/d'}, found_dirs)
         self.assertEqual({'a/b/c', 'a/b/c/d'}, searched)
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     def test_find_dirs_up_path_empty(self, query):
         # Only three calls will be made
         query.side_effect = [
@@ -249,7 +261,7 @@ class GitHubAPITest(unittest.TestCase):
         self.assertEqual(set(), found_dirs)
         self.assertEqual({'a/b', 'a', ''}, searched)
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     def test_find_dirs_up_path_root(self, query):
         query.side_effect = [
             [],
@@ -270,7 +282,7 @@ class GitHubAPITest(unittest.TestCase):
         self.assertEqual({'foo/bar', 'foo', ''}, searched)
 
     @mock.patch('app.service.github_api.GitHubRepoAPI.query_commit')
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     @mock.patch('app.service.github_api.GitHubRepoAPI._dir_exists')
     def test_find_dirs_in_commit(
             self, dir_exists, query_files_in_dir, query_commit):
@@ -327,7 +339,7 @@ class GitHubAPITest(unittest.TestCase):
         self.assertCountEqual(expected, found_dirs)
 
     @mock.patch('app.service.github_api.GitHubRepoAPI.query_commit')
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     @mock.patch('app.service.github_api.GitHubRepoAPI._dir_exists')
     def test_find_dirs_in_commit_empty(
             self, dir_exists, query_files_in_dir, query_commit):
@@ -369,21 +381,26 @@ class GitHubAPITest(unittest.TestCase):
                 file = os.path.join(dir_path,
                                     downloaded,
                                     'treasury_constant_maturity_rates.csv')
-                print(file)
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.csv', file, 50)
+                    'test/data/treasury_constant_maturity_rates.csv',
+                    file,
+                    test_integration.NUM_LINES_TO_CHECK)
 
                 file = os.path.join(dir_path,
                                     downloaded,
                                     'treasury_constant_maturity_rates.mcf')
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.mcf', file, 50)
+                    'test/data/treasury_constant_maturity_rates.mcf',
+                    file,
+                    test_integration.NUM_LINES_TO_CHECK)
 
                 file = os.path.join(dir_path,
                                     downloaded,
                                     'treasury_constant_maturity_rates.tmcf')
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.tmcf', file, 50)
+                    'test/data/treasury_constant_maturity_rates.tmcf',
+                    file,
+                    test_integration.NUM_LINES_TO_CHECK)
 
     @mock.patch('requests.get')
     def test_download_repo_empty(self, get):

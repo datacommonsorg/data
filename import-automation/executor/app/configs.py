@@ -1,43 +1,93 @@
-import os
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
+import os
+import typing
+import dataclasses
+
+from google.cloud import logging
 from google.cloud import datastore
 
-CONFIGS_NAMESPACE = 'configs'
-CONFIGS_KIND = 'config'
-MANIFEST_FILENAME = 'manifest.json'
-REQUIREMENTS_FILENAME = 'requirements.txt'
-USER_SCRIPT_TIMEOUT = 600
-VENV_CREATE_TIMEOUT = 600
-GITHUB_AUTH_USERNAME = 'intrepiditee'
 
-
-#
-# Environment specific variables
-#
-def standalone():
+def _standalone():
     return 'STANDALONE_MODE' in os.environ
 
-PROJECT_ID = 'datcom-cronjobs' if standalone() else 'google.com:datcom-data'
-REPO_OWNER_USERNAME = 'datacommonsorg' if standalone() else 'intrepiditee'
-REPO_NAME = 'data' if standalone() else 'data-demo'
-BUCKET_NAME = 'datcom-prod-imports' if standalone() else 'import-inputs'
 
-
-def _get_config(entity_id):
-    client = datastore.Client(project=PROJECT_ID, namespace=CONFIGS_NAMESPACE)
-    key = client.key(CONFIGS_KIND, entity_id)
-    return client.get(key)[entity_id]
-
-
-def get_dashboard_oauth_client_id():
-    if standalone(): return ''
-    return _get_config('DASHBOARD_OAUTH_CLIENT_ID')
-
-
-def get_github_auth_access_token():
-    if standalone(): return ''
-    return _get_config('GITHUB_AUTH_ACCESS_TOKEN')
-
-
-def production():
+def _production():
     return 'EXECUTOR_PRODUCTION' in os.environ
+
+
+def _testing():
+    return 'EXECUTOR_TESTING' in os.environ
+
+
+@dataclasses.dataclass
+class ExecutorConfig:
+    # TODO(intrepiditee): Add descriptions
+    gcp_project_id: str = 'google.com:datcom-data'
+    datastore_configs_namespace: str = 'configs'
+    datastore_configs_kind: str = 'config'
+    dashboard_oauth_client_id: str = ''
+    github_auth_access_token: str = ''
+    github_auth_username: str = 'intrepiditee'
+    github_repo_owner_username: str = 'datacommonsorg'
+    github_repo_name: str = 'data'
+    manifest_filename: str = 'manifest.json'
+    requirements_filename: str = 'requirements.txt'
+    storage_bucket_name: str = 'import-inputs'
+    storage_version_filename: str = 'latest_version.txt'
+    import_input_types: typing.List[str] = (
+        'template_mcf',
+        'cleaned_csv',
+        'node_mcf'
+    )
+
+    user_script_timeout: float = 600
+    venv_create_timeout: float = 600
+
+    # TODO(intrepiditee): Implement these two
+    file_download_timeout: float = 600
+    repo_download_timeout: float = 600
+
+    def __post_init__(self):
+        access_token = 'GITHUB_AUTH_ACCESS_TOKEN'
+        client_id = 'DASHBOARD_OAUTH_CLIENT_ID'
+        if _standalone():
+            return
+        if _production():
+            if not self.github_auth_access_token:
+                self.github_auth_access_token = self._get_config(access_token)
+            if not self.dashboard_oauth_client_id:
+                self.dashboard_oauth_client_id = self._get_config(client_id)
+        if _testing():
+            if not self.github_auth_access_token:
+                self.github_auth_access_token = os.environ[access_token]
+
+    def _get_config(self, entity_id):
+        client = datastore.Client(
+            project=self.gcp_project_id,
+            namespace=self.datastore_configs_kind)
+        key = client.key(self.datastore_configs_kind, entity_id)
+        return client.get(key)[entity_id]
+
+
+def _setup_logging():
+    client = logging.Client()
+    client.get_default_handler()
+    client.setup_logging()
+
+
+if _production():
+    _setup_logging()
+
