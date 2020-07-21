@@ -47,8 +47,12 @@ class GCSFileUploader(FileUploader):
             project_id: ID of the Google Cloud project that hosts the bucket,
                 as a string.
             bucket_name: Name of the Cloud Storage Bucket to upload files to,
-                as a string.c
+                as a string.
+
+        Raises:
+            ValueError: project_id or bucket_name is None, empty, or all spaces.
         """
+        _strings_not_empty(project_id, bucket_name)
         self.bucket = storage.Client(project=project_id).bucket(bucket_name)
 
     def upload_file(self, src: str, dest: str) -> None:
@@ -57,7 +61,11 @@ class GCSFileUploader(FileUploader):
         Args:
             src: Path to the file to upload, as a string.
             dest: Destination in the bucket as a string.
+
+        Raises:
+            ValueError: src or dest is None, empty, or all spaces.
         """
+        _strings_not_empty(src, dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_filename(src)
 
@@ -67,7 +75,11 @@ class GCSFileUploader(FileUploader):
         Args:
             string: The string to upload.
             dest: Destination in the bucket as a string.
+
+        Raises:
+            ValueError: dest is None, empty, or all spaces.
         """
+        _strings_not_empty(dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_string(string)
 
@@ -88,7 +100,9 @@ class LocalFileUploader(FileUploader):
 
         Raises:
             Same exceptions as shutil.copyfile.
+            ValueError: src or dest is None, empty, or all spaces.
         """
+        _strings_not_empty(src, dest)
         dest = os.path.join(self.output_dir, dest)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         shutil.copyfile(src, dest)
@@ -99,8 +113,21 @@ class LocalFileUploader(FileUploader):
 
         Raises:
             Same exceptions as open and write.
+            ValueError: dest is None, empty, or all spaces.
         """
+        _strings_not_empty(dest)
         dest = os.path.join(self.output_dir, dest)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         with open(dest, 'w+') as out:
             out.write(string)
+
+
+def _strings_not_empty(*args: str):
+    """Ensures that a string is not None, empty, or all spaces.
+
+    Raises:
+        ValueError: The string is None, empty, or all spaces.
+    """
+    for string in args:
+        if not string or string.isspace():
+            raise ValueError(f'{string} is None, empty, or all spaces')

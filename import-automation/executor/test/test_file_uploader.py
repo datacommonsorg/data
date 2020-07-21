@@ -17,8 +17,6 @@ import tempfile
 import unittest
 from unittest import mock
 
-from google.cloud import storage
-
 from app.service import file_uploader
 from test import utils
 from test import test_integration
@@ -50,6 +48,19 @@ class GCSFileUploaderTest(unittest.TestCase):
             mock.call().upload_from_string(version)
         ])
 
+    def test_invalid_string_args(self):
+        self.assertRaises(ValueError,
+                          file_uploader.GCSFileUploader, 'project', '')
+        self.assertRaises(ValueError,
+                          file_uploader.GCSFileUploader, '   ', 'bucket')
+        self.assertRaises(ValueError,
+                          self.io.upload_file, 'src', '')
+        self.assertRaises(ValueError,
+                          self.io.upload_file, '   ', 'dest')
+        self.assertRaises(ValueError,
+                          self.io.upload_string, 'string', '')
+
+
 
 class LocalFileUploaderTest(unittest.TestCase):
 
@@ -70,3 +81,12 @@ class LocalFileUploaderTest(unittest.TestCase):
             uploader.upload_string('12345', 'foo/bar/file')
             with open(os.path.join(tmp_dir, 'foo/bar/file')) as file:
                 self.assertEqual('12345', file.read())
+
+    def test_invalid_string_args(self):
+        uploader = file_uploader.LocalFileUploader()
+        self.assertRaises(ValueError,
+                          uploader.upload_file, 'src', '')
+        self.assertRaises(ValueError,
+                          uploader.upload_file, '   ', 'dest')
+        self.assertRaises(ValueError,
+                          uploader.upload_string, 'string', '')
