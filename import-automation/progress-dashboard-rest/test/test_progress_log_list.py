@@ -32,16 +32,12 @@ _RUN = system_run_model.SystemRunModel
 _LOG = progress_log_model.ProgressLogModel
 
 
+def setUpModule():
+    utils.EMULATOR.start_emulator()
+
+
 class ProgressLogListTest(unittest.TestCase):
     """Tests for ProgressLogList."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)

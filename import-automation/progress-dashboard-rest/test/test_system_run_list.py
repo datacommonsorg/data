@@ -26,17 +26,12 @@ from test import utils
 _MODEL = system_run_model.SystemRunModel
 
 
+def setUpModule():
+    utils.EMULATOR.start_emulator()
+
+
 class SystemRunListTest(unittest.TestCase):
     """Tests for SystemRunList."""
-
-    # TODO(intrepiditee): Replace with module level setup
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
@@ -71,8 +66,9 @@ class SystemRunListTest(unittest.TestCase):
     @mock.patch(utils.PARSE_ARGS, lambda self: {'does-not-exist': 'data'})
     def test_get_field_not_exist(self):
         """Tests that filtering by a field that does not exist
-        returns empty result."""
-        self.assertEqual([], self.resource.get())
+        returns BAD REQUEST."""
+        _, code = self.resource.get()
+        self.assertEqual(400, code)
 
     @mock.patch(utils.PARSE_ARGS, lambda self: {'repo_name': 'does-not-exist'})
     def test_get_value_not_exist(self):
