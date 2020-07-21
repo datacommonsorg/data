@@ -42,7 +42,7 @@ _IMPORT_SPECIFICATION_REQUIRED_FIELDS = [
 
 
 def is_task_info_valid(task_info: typing.Dict):
-    """Checks whether the task info sent to the app is valid.
+    """Ensures that the task info sent to the app is valid.
 
     Checks that required fields are present. Not currently used.
 
@@ -62,7 +62,7 @@ def is_import_targets_valid(import_targets: typing.List[str],
                             manifest_dirs: typing.List[str],
                             repo_dir: str,
                             manifest_filename: str) -> None:
-    """Checks whether the import targets specified in the commit message
+    """Ensures that the import targets specified in the commit message
     are valid.
 
     Checks that:
@@ -112,7 +112,7 @@ def is_import_targets_valid(import_targets: typing.List[str],
 
 def is_manifest_valid(
         manifest: typing.Dict, repo_dir: str, import_dir: str) -> None:
-    """Checks whether the manifest is valid.
+    """Ensures that the manifest is valid.
 
     Checks that:
         1) Required fields are present.
@@ -183,7 +183,7 @@ def _import_name_exists_in_manifest(
 
 
 def _is_import_spec_valid(import_spec, repo_dir, import_dir):
-    """Checks whether the import specification is valid.
+    """Ensures that the import specification is valid.
 
     Checks that:
         1) Required fields are present.
