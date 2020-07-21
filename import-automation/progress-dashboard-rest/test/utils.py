@@ -36,11 +36,10 @@ class LogMessageManagerMock:
 
 class DatastoreEmulator:
     def __init__(self):
-        self.started = False
         self.process = None
 
     def start_emulator(self):
-        if self.started:
+        if self.process is not None:
             return
 
         # bufsize=1 means that stderr will be line buffered
@@ -68,16 +67,16 @@ class DatastoreEmulator:
                 name, val = line.split('=')
                 os.environ[name] = val
 
-        self.started = True
-
     def terminate_emulator(self):
-        assert self.started
+        assert self.process is not None
         parent = psutil.Process(self.process.pid)
         for child in parent.children(recursive=True):
             child.terminate()
         self.process.stderr.close()
         self.process.terminate()
         self.process.wait()
+
+        self.process = None
 
 
 EMULATOR = DatastoreEmulator()
