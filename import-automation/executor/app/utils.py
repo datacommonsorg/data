@@ -25,8 +25,8 @@ def utctime():
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
-def pttime():
-    return datetime.datetime.now(pytz.timezone('US/Pacific')).isoformat()
+def pacific_time():
+    return datetime.datetime.now(pytz.timezone('America/Los_Angeles')).isoformat()
 
 
 def list_to_str(a_list, sep=', '):
@@ -34,6 +34,23 @@ def list_to_str(a_list, sep=', '):
 
 
 def _get_filename(response):
+    """Parses the filename of a downloaded file from a requests.Response object.
+
+    The filename is the value associated with the 'filename' key in the
+    Content-Disposition header. If the header does not exist, the base name
+    of the url is returned.
+
+    Args:
+        response: requests.Response object containing the HTTP response for
+            the downloaded file.
+
+    Returns:
+        The filename of the downloaded file as a string.
+
+    Raises:
+        ValueError: The Content-Disposition header exists but 'filename' key
+            does not exist.
+    """
     header = response.headers.get('Content-Disposition')
     if not header:
         return os.path.basename(response.url)

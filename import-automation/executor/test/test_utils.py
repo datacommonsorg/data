@@ -29,20 +29,20 @@ import test.utils
 class AppUtilsTest(unittest.TestCase):
     """Tests for app/utils.py."""
 
-    def test_pttime_to_datetime(self):
-        """Tests that the string returned by pttime can be converted to
+    def test_pacific_time_to_datetime(self):
+        """Tests that the string returned by pacific_time can be converted to
         a datetime object and the timezone component is correct."""
-        time_iso = app.utils.pttime()
+        time_iso = app.utils.pacific_time()
         time_datetime = datetime.datetime.fromisoformat(time_iso)
         offset = time_datetime.utcoffset().total_seconds()
         self.assertTrue(offset in (-(7 * 60 * 60), -(8 * 60 * 60)))
         tzname = time_datetime.tzname()
         self.assertTrue(tzname in ('UTC-07:00', 'UTC-08:00'))
 
-    def test_pttime_to_datetime_then_back(self):
-        """Tests that the string returned by pttime can be converted to
+    def test_pacific_time_to_datetime_then_back(self):
+        """Tests that the string returned by pacific_time can be converted to
         a datetime object and remains the same when converted back."""
-        time_iso = app.utils.pttime()
+        time_iso = app.utils.pacific_time()
         time_datetime = datetime.datetime.fromisoformat(time_iso)
         self.assertEqual(time_iso, time_datetime.isoformat())
 

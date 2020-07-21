@@ -5,12 +5,13 @@ import subprocess
 import tempfile
 import logging
 
+from app import utils
 from app import configs
 from app.service import dashboard_api
 from app.service import github_api
 from app.service import gcs_io
 from app.executor import validation
-from app import utils
+
 
 
 def parse_manifest(path):
@@ -303,7 +304,7 @@ def _import_one_helper(dir_path, import_spec, run_id, attempt_id):
             dashboard.log(log)
             process.check_returncode()
 
-    time = utils.pttime().replace(':', '_').replace('-', '_').replace('.', '_')
+    time = utils.pacific_time().replace(':', '_').replace('-', '_').replace('.', '_')
     path_prefix = f'{dir_path}/{import_spec["import_name"]}'
     import_inputs = import_spec.get('import_inputs', [])
     bucket_io = gcs_io.GCSBucketIO(path_prefix)

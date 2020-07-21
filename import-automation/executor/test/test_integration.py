@@ -32,7 +32,7 @@ def get_github_auth_access_token_mock():
 
 @mock.patch('app.service.gcs_io.GCSBucketIO',
             GCSBucketIOMock)
-@mock.patch('app.utils.pttime', lambda: '2020-07-15T12:07:17.365264-07:00')
+@mock.patch('app.utils.pacific_time', lambda: '2020-07-15T12:07:17.365264-07:00')
 @mock.patch('app.configs.standalone', lambda: True)
 @mock.patch('app.configs.PROJECT_ID', 'datcom-cronjobs')
 @mock.patch('app.configs.REPO_OWNER_USERNAME', 'datacommonsorg')
@@ -74,7 +74,7 @@ class StandaloneUpdateTest(unittest.TestCase):
 
 @mock.patch('app.service.gcs_io.GCSBucketIO',
             GCSBucketIOMock)
-@mock.patch('app.utils.pttime', lambda: '2020-07-15T12:07:17.365264-07:00')
+@mock.patch('app.utils.pacific_time', lambda: '2020-07-15T12:07:17.365264-07:00')
 class CommitTest(unittest.TestCase):
 
     @classmethod
