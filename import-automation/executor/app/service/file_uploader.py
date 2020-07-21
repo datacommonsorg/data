@@ -123,7 +123,7 @@ class LocalFileUploader(FileUploader):
 
 
 def _strings_not_empty(*args: str):
-    """Ensures that a string is not None, empty, or all spaces.
+    """Ensures that the strings are not None, empty, or all spaces.
 
     Raises:
         ValueError: The string is None, empty, or all spaces.
