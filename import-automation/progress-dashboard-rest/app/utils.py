@@ -78,7 +78,7 @@ def create_datastore_client(project=configs.PROJECT_ID,
         project: ID of the Google Cloud project as a string.
         namespace: Namespace in which the import attempts will be stored
             as a string.
-        credentials: Credentials to authenticate with Datastore
+        credentials: Credentials to authenticate with Datastore.
     """
     return datastore.Client(
         project=project, namespace=namespace, credentials=credentials)
