@@ -26,7 +26,7 @@ class TestCovidMobility(unittest.TestCase):
     def test2(self):
         self._test_mcf_output('./tests/test2')
 
-    def _test_mcf_output(self, dir_path:str):
+    def _test_mcf_output(self, dir_path: str):
         """Generates an MCF file, given an input data file.
         Compares the expected.mcf to the output.mcf file
         to make sure the function is performing as designed.
@@ -63,6 +63,6 @@ class TestCovidMobility(unittest.TestCase):
 
         self.assertEqual(actual, expected)
 
+
 if __name__ == '__main__':
     unittest.main()
-
