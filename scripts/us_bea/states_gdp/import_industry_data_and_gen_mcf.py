@@ -30,7 +30,8 @@ import pandas as pd
 import import_data
 
 # Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None # default='warn'
+pd.options.mode.chained_assignment = None  # default='warn'
+
 
 class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
     """Pulls GDP industry-level state data from BEA.
@@ -75,7 +76,8 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         all_quarters = [q for q in df.columns if re.match(r"\d\d\d\d:Q\d", q)]
 
         # Convert table from wide to long format.
-        df = pd.melt(df, id_vars=['GeoFIPS', 'IndustryClassification'],
+        df = pd.melt(df,
+                     id_vars=['GeoFIPS', 'IndustryClassification'],
                      value_vars=all_quarters,
                      var_name='Quarter')
 
@@ -84,7 +86,8 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
 
         df = df[df['IndustryClassification'] != "..."]
 
-        df['NAICS'] = df['IndustryClassification'].apply(self._convert_industry_class)
+        df['NAICS'] = df['IndustryClassification'].apply(
+            self._convert_industry_class)
         df['value'] = df['value'].apply(self._value_converter)
         df = df[df['value'] >= 0]
 
@@ -137,6 +140,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                 code = code_title.replace("_", "-")
                 code = code.replace("&", "&NAICS/")
                 mcf_f.write(mcf_temp.format(title=code_title, naics=code))
+
 
 def main(_):
     loader = StateGDPIndustryDataLoader()
