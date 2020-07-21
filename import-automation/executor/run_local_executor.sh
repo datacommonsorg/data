@@ -16,6 +16,6 @@ python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -q -r requirements.txt
 
-python3 -m unittest -v
+python3 -m local_executor "$@"
 
 deactivate
