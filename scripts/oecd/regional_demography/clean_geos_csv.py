@@ -15,26 +15,37 @@
 import pandas as pd
 
 df = pd.read_csv('geos.csv', skiprows=2)
-df.columns = ['containedInCountry','Node','oecd_territorial_level','name','containedInPlace','rural_or_urban','access_to_city']
+df.columns = [
+    'containedInCountry', 'Node', 'oecd_territorial_level', 'name',
+    'containedInPlace', 'rural_or_urban', 'access_to_city'
+]
 
 # Remove Non-official grid (NOG)
 df = df[df.oecd_territorial_level != 'NOG']
 
 # Remove statistical regions
-df = df[~((df.containedInCountry == 'CAN') & (df.name.str.startswith('Division')))]
-df = df[~((df.containedInCountry == 'CAN') & (df.name.str.startswith('Region')))]
-df = df[~((df.containedInCountry == 'LVA') & (df.oecd_territorial_level == '3'))]
-df = df[~((df.containedInCountry == 'MEX') & (df.oecd_territorial_level == '3'))]
-df = df[~((df.containedInCountry == 'NLD') & (df.oecd_territorial_level == '3'))]
-df = df[~((df.containedInCountry == 'SVN') & (df.oecd_territorial_level == '3'))]
-df = df[~((df.containedInCountry == 'USA') & (df.oecd_territorial_level == '3'))]
-df = df[~((df.containedInCountry == 'BRA') & (df.oecd_territorial_level == '3'))]
+df = df[~((df.containedInCountry == 'CAN') &
+          (df.name.str.startswith('Division')))]
+df = df[~((df.containedInCountry == 'CAN') &
+          (df.name.str.startswith('Region')))]
+df = df[~((df.containedInCountry == 'LVA') &
+          (df.oecd_territorial_level == '3'))]
+df = df[~((df.containedInCountry == 'MEX') &
+          (df.oecd_territorial_level == '3'))]
+df = df[~((df.containedInCountry == 'NLD') &
+          (df.oecd_territorial_level == '3'))]
+df = df[~((df.containedInCountry == 'SVN') &
+          (df.oecd_territorial_level == '3'))]
+df = df[~((df.containedInCountry == 'USA') &
+          (df.oecd_territorial_level == '3'))]
+df = df[~((df.containedInCountry == 'BRA') &
+          (df.oecd_territorial_level == '3'))]
 
 # Remove Non OECD Member Country (NOMC) containedInPlace=NOMC
 df.replace({'NOMC': ''}, regex=True, inplace=True)
 
 # Geocoding resolution is especially bad for Ireland.
-df = df[~((df.containedInCountry == 'IRL') & (df.oecd_territorial_level != '1'))]
+df = df[~((df.containedInCountry == 'IRL') &
+          (df.oecd_territorial_level != '1'))]
 
 df.to_csv('geos_cleaned.csv', index=False)
-
