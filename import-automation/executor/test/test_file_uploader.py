@@ -70,4 +70,3 @@ class LocalFileUploaderTest(unittest.TestCase):
             uploader.upload_string('12345', 'foo/bar/file')
             with open(os.path.join(tmp_dir, 'foo/bar/file')) as file:
                 self.assertEqual('12345', file.read())
-

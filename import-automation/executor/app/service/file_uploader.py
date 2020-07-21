@@ -12,24 +12,43 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+File uploaders for uploading generated data files.
+"""
+
 import os
 import shutil
 
 from google.cloud import storage
 
-from app import configs
-
 
 class FileUploader:
+    """Base class for all file uploaders."""
     def upload_file(self, src: str, dest: str) -> None:
+        """Uploads the file at src to a file at dest."""
         raise NotImplementedError
 
     def upload_string(self, string: str, dest: str) -> None:
+        """Uploads the string to a file at dest."""
         raise NotImplementedError
 
 
 class GCSFileUploader(FileUploader):
-    def __init__(self, project_id, bucket_name):
+    """Class for uploading files to a Google Storage Bucket.
+
+    Attributes:
+        bucket: google.cloud.storage.Bucket object for the bucket files are
+            uploaded to.
+    """
+    def __init__(self, project_id: str, bucket_name: str):
+        """Constructs a GCSFileUploader.
+
+        Args:
+            project_id: ID of the Google Cloud project that hosts the bucket,
+                as a string.
+            bucket_name: Name of the Cloud Storage Bucket to upload files to,
+                as a string.c
+        """
         self.bucket = storage.Client(project=project_id).bucket(bucket_name)
 
     def upload_file(self, src: str, dest: str) -> None:
@@ -37,14 +56,13 @@ class GCSFileUploader(FileUploader):
 
         Args:
             src: Path to the file to upload, as a string.
-            dest: Destination in the bucket as a string. This will be prefixed
-                by the prefix attribute.
+            dest: Destination in the bucket as a string.
         """
         blob = self.bucket.blob(dest)
         blob.upload_from_filename(src)
 
     def upload_string(self, string: str, dest: str) -> None:
-        """Uploads a string to a file, overwriting it.
+        """Uploads a string to a file in the bucket, overwriting it.
 
         Args:
             string: The string to upload.
@@ -55,15 +73,33 @@ class GCSFileUploader(FileUploader):
 
 
 class LocalFileUploader(FileUploader):
+    """Class for copying files to a different location in the local filesystem.
+
+    Attributes:
+        output_dir: Path to the directory files are copied to. E.g.,
+            LocalFileUploader('/tmp').upload_file('/foo/file', 'bar/file') will
+            copy '/foo/file' to '/tmp/bar/file'.
+    """
     def __init__(self, output_dir=''):
         self.output_dir = os.path.abspath(output_dir)
 
     def upload_file(self, src: str, dest: str) -> None:
+        """Copies the file at src to a file at <output_dir>/<dest>.
+
+        Raises:
+            Same exceptions as shutil.copyfile.
+        """
         dest = os.path.join(self.output_dir, dest)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         shutil.copyfile(src, dest)
 
     def upload_string(self, string: str, dest: str) -> None:
+        """Writes a string into a file at <output_dir>/<dest>, overwriting any
+        existing files.
+
+        Raises:
+            Same exceptions as open and write.
+        """
         dest = os.path.join(self.output_dir, dest)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         with open(dest, 'w+') as out:
