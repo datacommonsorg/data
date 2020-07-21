@@ -27,16 +27,12 @@ from test import utils
 _MODEL = system_run_model.SystemRunModel
 
 
+def setUpModule():
+    utils.EMULATOR.start_emulator()
+
+
 class SystemRunByIDTest(unittest.TestCase):
     """Tests for SystemRunByID."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
