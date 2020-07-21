@@ -10,5 +10,4 @@ import: {
   end_date: "2018"
   # Source data release schedule.
   update_frequency: "P1Y"
-  next_release_date: "Unknown"
 }
