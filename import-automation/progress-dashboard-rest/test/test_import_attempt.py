@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for import_attempt.py.
 """
@@ -49,13 +48,15 @@ class ImportAttemptByIDTest(unittest.TestCase):
         run_list_resource.database.client = self.resource.client
         list_resource.database.client = self.resource.client
         list_resource.run_database.client = self.resource.client
-        attempts = [
-            {_ATTEMPT.csv_url: 'google.com'},
-            {_ATTEMPT.node_mcf_url: 'facebook.com'},
-            {_ATTEMPT.template_mcf_url: 'bing.com'}
-        ]
-        self.attempts = utils.ingest_import_attempts(
-            run_list_resource, list_resource, attempts)
+        attempts = [{
+            _ATTEMPT.csv_url: 'google.com'
+        }, {
+            _ATTEMPT.node_mcf_url: 'facebook.com'
+        }, {
+            _ATTEMPT.template_mcf_url: 'bing.com'
+        }]
+        self.attempts = utils.ingest_import_attempts(run_list_resource,
+                                                     list_resource, attempts)
 
     def test_get(self):
         """Tests that querying by attempt_id returns the correct
@@ -94,9 +95,10 @@ class ImportAttemptByIDTest(unittest.TestCase):
     def test_patch_not_allowed(self, parse_args):
         """Tests that patching attempt_id or run_id fails and
         returns FORBIDDEN."""
-        parse_args.side_effect = [
-            {_ATTEMPT.attempt_id: 'forbidden'},
-            {_ATTEMPT.run_id: 'forbidden'}
-        ]
+        parse_args.side_effect = [{
+            _ATTEMPT.attempt_id: 'forbidden'
+        }, {
+            _ATTEMPT.run_id: 'forbidden'
+        }]
         _, err = self.resource.patch(self.attempts[1][_ATTEMPT.attempt_id])
         self.assertEqual(403, err)

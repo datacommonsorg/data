@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Import attempt list resource associated with the endpoint '/import_attempts'.
 """
@@ -41,8 +40,7 @@ class ImportAttemptList(import_attempt.ImportAttempt):
 
     def __init__(self):
         super().__init__()
-        self.run_database = system_run_database.SystemRunDatabase(
-            self.client)
+        self.run_database = system_run_database.SystemRunDatabase(self.client)
 
     def get(self):
         """Retrieves a list of import attempts that pass the filter defined by

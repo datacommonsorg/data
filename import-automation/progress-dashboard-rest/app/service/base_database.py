@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Base class for a Database service that stores some kind of entities using
 Google Cloud Datastore for storage.
@@ -36,6 +35,7 @@ class BaseDatabase:
         kind: Kind of entities to store as a string
         client: datastore Client object to communicate with Datastore
     """
+
     def __init__(self, kind, client=None, id_field=None):
         """Constructs an BaseDatabase.
 

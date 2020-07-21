@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Entry point of the API.
 When deployed on App Engine, gunicorn will serve the FLASK_APP variable,
@@ -43,10 +42,8 @@ def create_api(app):
     api = flask_restful.Api(app)
     api.add_resource(import_attempt.ImportAttemptByID,
                      '/import/<string:attempt_id>')
-    api.add_resource(import_attempt.ImportAttemptList,
-                     '/imports')
-    api.add_resource(import_log.ImportLog,
-                     '/import/<string:attempt_id>/logs')
+    api.add_resource(import_attempt.ImportAttemptList, '/imports')
+    api.add_resource(import_log.ImportLog, '/import/<string:attempt_id>/logs')
     return api
 
 

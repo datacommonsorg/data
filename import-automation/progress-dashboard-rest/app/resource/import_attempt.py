@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Import attempt resource associated with the endpoint
 '/import_attempts/<string:attempt_id>'.
@@ -69,21 +68,13 @@ class ImportAttempt(flask_restful.Resource):
     parser = reqparse.RequestParser()
     # The parser looks for these fields in the request body.
     # The Content-Type of the request must be application/json.
-    optional_fields = (
-        (_MODEL.attempt_id, str),
-        (_MODEL.run_id, str),
-        (_MODEL.import_name,),
-        (_MODEL.absolute_import_name,),
-        (_MODEL.provenance_url,),
-        (_MODEL.provenance_description,),
-        (_MODEL.status,),
-        (_MODEL.time_created,),
-        (_MODEL.time_completed,),
-        (_MODEL.logs, str, 'append'),
-        (_MODEL.template_mcf_url,),
-        (_MODEL.node_mcf_url,),
-        (_MODEL.csv_url,)
-    )
+    optional_fields = ((_MODEL.attempt_id, str), (_MODEL.run_id,
+                                                  str), (_MODEL.import_name,),
+                       (_MODEL.absolute_import_name,), (_MODEL.provenance_url,),
+                       (_MODEL.provenance_description,), (_MODEL.status,),
+                       (_MODEL.time_created,), (_MODEL.time_completed,),
+                       (_MODEL.logs, str, 'append'), (_MODEL.template_mcf_url,),
+                       (_MODEL.node_mcf_url,), (_MODEL.csv_url,))
     utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self):
@@ -142,7 +133,7 @@ class ImportAttemptByID(ImportAttempt):
         with self.client.transaction():
             import_attempt = self.database.get(attempt_id)
             if not import_attempt:
-                return validation.get_not_found_error(
-                    _MODEL.attempt_id, attempt_id)
+                return validation.get_not_found_error(_MODEL.attempt_id,
+                                                      attempt_id)
             import_attempt.update(args)
             return self.database.save(import_attempt)
