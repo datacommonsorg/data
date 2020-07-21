@@ -3,3 +3,4 @@ flask_restful
 google-cloud-datastore
 google-cloud-logging
 gunicorn
+google-cloud-storage

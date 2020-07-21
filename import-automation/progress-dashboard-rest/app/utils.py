@@ -17,8 +17,13 @@ Utility functions.
 """
 
 import datetime
+import uuid
 
-import google.cloud.logging
+from google.cloud import logging
+from google.cloud import datastore
+from google.cloud import storage
+
+from app import configs
 
 
 def utctime():
@@ -55,6 +60,33 @@ def setup_logging():
 
     Only logs at INFO level or higher will be captured.
     """
-    client = google.cloud.logging.Client()
+    client = logging.Client()
     client.get_default_handler()
     client.setup_logging()
+
+
+def create_storage_bucket(project=configs.PROJECT_ID,
+                          bucket_name=configs.LOG_BUCKET_NAME):
+    return storage.Client(project).bucket(bucket_name)
+
+
+def create_datastore_client(project=configs.PROJECT_ID,
+                            namespace=configs.DASHBOARD_NAMESPACE,
+                            credentials=None):
+    """
+    Args:
+        project: ID of the Google Cloud project as a string.
+        namespace: Namespace in which the import attempts will be stored
+            as a string.
+        credentials: Credentials to authenticate with Datastore
+    """
+    return datastore.Client(
+        project=project, namespace=namespace, credentials=credentials)
+
+
+def get_id():
+    return uuid.uuid4().hex
+
+
+def list_to_str(a_list, sep=', '):
+    return sep.join(a_list)
