@@ -64,5 +64,7 @@ class LocalFileUploader(FileUploader):
         shutil.copyfile(src, dest)
 
     def upload_string(self, string: str, dest: str) -> None:
+        dest = os.path.join(self.output_dir, dest)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
         with open(dest, 'w+') as out:
             out.write(string)

@@ -12,12 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+import tempfile
 import unittest
 from unittest import mock
 
 from google.cloud import storage
 
 from app.service import file_uploader
+from test import utils
+from test import test_integration
 
 
 class GCSFileUploaderTest(unittest.TestCase):
@@ -48,5 +52,22 @@ class GCSFileUploaderTest(unittest.TestCase):
 
 
 class LocalFileUploaderTest(unittest.TestCase):
-    # TODO
-    pass
+
+    def test_upload_file(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            uploader = file_uploader.LocalFileUploader(tmp_dir)
+            src = os.path.join(
+                os.getcwd(), 'test/data/COVIDTracking_States.csv')
+            uploader.upload_file(src, 'foo/bar/data.csv')
+            self.assertTrue(utils.compare_lines(
+                src,
+                os.path.join(tmp_dir, 'foo/bar/data.csv'),
+                test_integration.NUM_LINES_TO_CHECK))
+
+    def test_upload_string(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            uploader = file_uploader.LocalFileUploader(tmp_dir)
+            uploader.upload_string('12345', 'foo/bar/file')
+            with open(os.path.join(tmp_dir, 'foo/bar/file')) as file:
+                self.assertEqual('12345', file.read())
+
