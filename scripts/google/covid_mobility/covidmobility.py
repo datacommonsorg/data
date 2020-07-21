@@ -113,10 +113,6 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
             except KeyError:
                 continue
 
-            # If the value is None, skip the row.
-            if not value:
-                continue
-
             # If this is the first time vieweing this dcid.
             # Write the population node for the place.
             if region_dcid not in visited_dcids:
@@ -126,6 +122,10 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
                     f"location: dcid:{region_dcid}\n"
                     "populationType: dcs:PlaceVisitEvent\n"
                     f"placeCategory: dcs:{schema_place}\n\n")
+
+            # If the value is None, skip the place.
+            if not value:
+                continue
 
             # Write observation node for value.
             f_output.write(
