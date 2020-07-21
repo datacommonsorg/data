@@ -25,21 +25,22 @@ class ImportTargetTest(unittest.TestCase):
 
     def test_absolute_import_name(self):
         self.assertTrue(
-            import_target.absolute_import_name('scripts/us_fed:treausry'))
+            import_target.is_absolute_import_name('scripts/us_fed:treasury'))
         self.assertTrue(
-            import_target.absolute_import_name('us_fed:treausry'))
+            import_target.is_absolute_import_name('us_fed:treasury'))
         self.assertFalse(
-            import_target.absolute_import_name('scripts/us_fed:treausry/data'))
+            import_target.is_absolute_import_name(
+                'scripts/us_fed:treasury/data'))
         self.assertFalse(
-            import_target.absolute_import_name(':treasury'))
+            import_target.is_absolute_import_name(':treasury'))
         self.assertFalse(
-            import_target.absolute_import_name('scripts/us_fed:'))
+            import_target.is_absolute_import_name('scripts/us_fed:'))
         self.assertFalse(
-            import_target.absolute_import_name('scripts/us_fed/treausry'))
+            import_target.is_absolute_import_name('scripts/us_fed/treasury'))
         self.assertFalse(
-            import_target.absolute_import_name(' scripts/us_fed:treausry'))
+            import_target.is_absolute_import_name(' scripts/us_fed:treasury'))
         self.assertFalse(
-            import_target.absolute_import_name(''))
+            import_target.is_absolute_import_name(''))
 
     def test_parse_commit_message_targets(self):
         self.assertEqual(

@@ -44,11 +44,11 @@ def get_absolute_import_name(dir_path, import_name):
     return f'{dir_path}:{import_name}'
 
 
-def absolute_import_name(import_name):
+def is_absolute_import_name(import_name):
     return re.fullmatch(_ABSOLUTE_IMPORT_NAME_REGEX, import_name) is not None
 
 
-def relative_import_name(import_name):
+def is_relative_import_name(import_name):
     return re.fullmatch(_RELATIVE_IMPORT_NAME_REGEX, import_name) is not None
 
 
@@ -56,12 +56,12 @@ def split_absolute_import_name(import_name):
     return import_name.split(':')
 
 
-def get_relative_import_names(import_names):
-    return list(name for name in import_names if relative_import_name(name))
+def filter_relative_import_names(import_names):
+    return list(name for name in import_names if is_relative_import_name(name))
 
 
-def get_absolute_import_names(import_names):
-    return list(name for name in import_names if absolute_import_name(name))
+def filter_absolute_import_names(import_names):
+    return list(name for name in import_names if is_absolute_import_name(name))
 
 
 def parse_commit_message_targets(commit_message: str) -> typing.List[str]:
@@ -84,7 +84,7 @@ def parse_commit_message_targets(commit_message: str) -> typing.List[str]:
         for target in target_list.split(','):
             if not target or target.isspace():
                 continue
-            if absolute_import_name(target) or relative_import_name(target):
+            if is_absolute_import_name(target) or is_relative_import_name(target):
                 targets.add(target)
             else:
                 raise ValueError(f'Import target {target} is not valid')
