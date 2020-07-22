@@ -85,9 +85,8 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
             continue
 
         # Convert the region name to a dcid/geoId.
-        region_dcid: str = _get_region_dcid(sub_region2,
-                                           sub_region1,
-                                           country_code)
+        region_dcid: str = _get_region_dcid(sub_region2, sub_region1,
+                                            country_code)
 
         # If no dcid, skip the row.
         if not region_dcid:
@@ -116,26 +115,24 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
             # If this is the first time vieweing this dcid.
             # Write the population node for the place.
             if region_dcid not in visited_dcids:
-                f_output.write(
-                    f"Node: {population_id}\n"
-                    "typeOf: schema:StatisticalPopulation\n"
-                    f"location: dcid:{region_dcid}\n"
-                    "populationType: dcs:PlaceVisitEvent\n"
-                    f"placeCategory: dcs:{schema_place}\n\n")
+                f_output.write(f"Node: {population_id}\n"
+                               "typeOf: schema:StatisticalPopulation\n"
+                               f"location: dcid:{region_dcid}\n"
+                               "populationType: dcs:PlaceVisitEvent\n"
+                               f"placeCategory: dcs:{schema_place}\n\n")
 
             # If the value is None, skip the place.
             if not value:
                 continue
 
             # Write observation node for value.
-            f_output.write(
-                f"Node: {observation_id}\n"
-                "typeOf: schema:Observation\n"
-                f"observedNode: l:{population_id}\n"
-                f'observationDate: "{date}"\n'
-                "measuredProperty: dcs:covid19MobilityTrend\n"
-                f"measuredValue: {value}\n"
-                "unit: dcs:Percent\n\n")
+            f_output.write(f"Node: {observation_id}\n"
+                           "typeOf: schema:Observation\n"
+                           f"observedNode: l:{population_id}\n"
+                           f'observationDate: "{date}"\n'
+                           "measuredProperty: dcs:covid19MobilityTrend\n"
+                           f"measuredValue: {value}\n"
+                           "unit: dcs:Percent\n\n")
 
         # Add dcid to the list of visited.
         visited_dcids.add(region_dcid)
@@ -160,9 +157,8 @@ def _download_data(url: str, download_as: str) -> None:
         input_file.write(data)
 
 
-def _get_region_dcid(sub_region_2: str,
-                    sub_region_1: str,
-                    country_code: str) -> str:
+def _get_region_dcid(sub_region_2: str, sub_region_1: str,
+                     country_code: str) -> str:
     """Returns the dcid for the region.
 
 
