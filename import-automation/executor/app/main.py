@@ -29,8 +29,8 @@ def execute_imports():
     branch_name = task_info.get('BRANCH_NAME')
     pr_number = task_info.get('PR_NUMBER')
 
-    return executor.execute_imports_on_commit(
-        commit_sha, repo_name, branch_name, pr_number)
+    return executor.execute_imports_on_commit(commit_sha, repo_name,
+                                              branch_name, pr_number)
 
 
 @FLASK_APP.route('/update', methods=['POST'])
@@ -42,7 +42,6 @@ def scheduled_updates():
 @FLASK_APP.route('/schedule', methods=['POST'])
 def schedule_crons():
     task_info = flask.request.get_json(force=True)
-
 
 
 @FLASK_APP.route('/_ah/start')

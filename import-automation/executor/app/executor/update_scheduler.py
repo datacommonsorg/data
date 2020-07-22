@@ -56,7 +56,7 @@ class UpdateScheduler:
             absolute_import_name: Absolute import name of the import to be
                 updated. This is used as the name of the job.
             schedule: Cron schedule for the updates as a string. See
-                https://en.wikipedia.org/wiki/Cron.
+                https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules.
 
         Returns:
             Created job as a dict.
