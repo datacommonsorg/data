@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Storage service for storing progress log messages in
 a Google Cloud Storage bucket.
@@ -27,6 +26,7 @@ class LogMessageManager:
     Attributes:
         bucket: storage bucket object in which log messages are stored.
     """
+
     def __init__(self):
         """Constructs a LogMessageManager."""
         self.bucket = utils.create_storage_bucket()

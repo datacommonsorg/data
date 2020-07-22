@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for system_run_list.py.
 """
@@ -43,12 +42,19 @@ class SystemRunListTest(unittest.TestCase):
     def setUp(self):
         """Injects several system runs to the database before every test."""
         self.resource = system_run_list.SystemRunList()
-        runs = [
-            {_MODEL.repo_name: 'dddd', _MODEL.pr_number: 0},
-            {_MODEL.repo_name: 'data', _MODEL.pr_number: 1},
-            {_MODEL.repo_name: 'data', _MODEL.pr_number: 1},
-            {_MODEL.repo_name: 'aaaa', _MODEL.pr_number: 2}
-        ]
+        runs = [{
+            _MODEL.repo_name: 'dddd',
+            _MODEL.pr_number: 0
+        }, {
+            _MODEL.repo_name: 'data',
+            _MODEL.pr_number: 1
+        }, {
+            _MODEL.repo_name: 'data',
+            _MODEL.pr_number: 1
+        }, {
+            _MODEL.repo_name: 'aaaa',
+            _MODEL.pr_number: 2
+        }]
         self.runs = utils.ingest_system_runs(self.resource, runs)
 
     @mock.patch(utils.PARSE_ARGS, lambda self: {})
@@ -61,8 +67,10 @@ class SystemRunListTest(unittest.TestCase):
         """Tests that filtering by repo_name returns the correct runs."""
         self.assertCountEqual([self.runs[1], self.runs[2]], self.resource.get())
 
-    @mock.patch(utils.PARSE_ARGS,
-                lambda self: {'repo_name': 'dddd', 'pr_number': 0})
+    @mock.patch(utils.PARSE_ARGS, lambda self: {
+        'repo_name': 'dddd',
+        'pr_number': 0
+    })
     def test_get_by_repo_name_and_pr_number(self):
         """Tests that filtering by repo_name and pr_number returns
         the correct runs."""

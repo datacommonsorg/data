@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Creates a Cloud Tasks task that ships information about a GitHub commit
 to the executor.
@@ -26,11 +25,7 @@ from google.cloud import tasks_v2
 # PR_NUMBER must be an integer.
 # Otherwise, the script will fail.
 TASK_BODY_FIELDS = [
-    'COMMIT_SHA',
-    'REPO_NAME',
-    'BRANCH_NAME',
-    'HEAD_BRANCH',
-    'BASE_BRANCH',
+    'COMMIT_SHA', 'REPO_NAME', 'BRANCH_NAME', 'HEAD_BRANCH', 'BASE_BRANCH',
     'PR_NUMBER'
 ]
 
@@ -53,8 +48,8 @@ def create_body():
     return task_body
 
 
-def create_task(task_body, project_id, location_id, queue_name,
-                service, endpoint):
+def create_task(task_body, project_id, location_id, queue_name, service,
+                endpoint):
     """Creates a Google Cloud Tasks App Engine task.
 
     The App Engine app that handles the task must be under the same Google
@@ -105,13 +100,12 @@ def main():
     # TASK_PROJECT_ID, TASK_LOCATION_ID, TASK_QUEUE_NAME, HANDLER_SERVICE, and
     # HANDLER_URI must be present as environmental variables.
     # Otherwise, the script will fail.
-    create_task(
-        task_body=create_body(),
-        project_id=os.environ['TASK_PROJECT_ID'],
-        location_id=os.environ['TASK_LOCATION_ID'],
-        queue_name=os.environ['TASK_QUEUE_NAME'],
-        service=os.environ['HANDLER_SERVICE'],
-        endpoint=os.environ['HANDLER_URI'])
+    create_task(task_body=create_body(),
+                project_id=os.environ['TASK_PROJECT_ID'],
+                location_id=os.environ['TASK_LOCATION_ID'],
+                queue_name=os.environ['TASK_QUEUE_NAME'],
+                service=os.environ['HANDLER_SERVICE'],
+                endpoint=os.environ['HANDLER_URI'])
 
 
 if __name__ == '__main__':

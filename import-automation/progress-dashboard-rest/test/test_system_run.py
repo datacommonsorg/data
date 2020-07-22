@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for system_run.py.
 """
@@ -47,10 +46,7 @@ class SystemRunByIDTest(unittest.TestCase):
         # Used for creating system runs
         list_resource = system_run_list.SystemRunList()
         list_resource.database.client = self.resource.database.client
-        runs = [
-            {},
-            {_MODEL.commit_sha: 'commit-sha'}
-        ]
+        runs = [{}, {_MODEL.commit_sha: 'commit-sha'}]
         self.runs = utils.ingest_system_runs(list_resource, runs)
 
     def test_get(self):
@@ -74,8 +70,12 @@ class SystemRunByIDTest(unittest.TestCase):
     def test_patch(self, parse_args):
         """Tests that PATCHing a field succeeds."""
         parse_args.side_effect = [
-            {_MODEL.commit_sha: 'patched'},
-            {_MODEL.commit_sha: 'commit_sha'},
+            {
+                _MODEL.commit_sha: 'patched'
+            },
+            {
+                _MODEL.commit_sha: 'commit_sha'
+            },
         ]
         run_id = self.runs[1][_MODEL.run_id]
         self.resource.patch(run_id)
@@ -89,10 +89,11 @@ class SystemRunByIDTest(unittest.TestCase):
     def test_patch_run_id_not_allowed(self, parse_args):
         """Tests that patching run_id and import_attempts fails and
         returns FORBIDDEN."""
-        parse_args.side_effect = [
-            {'run_id': 'not-allowed'},
-            {'import_attempts': 'not-allowed'}
-        ]
+        parse_args.side_effect = [{
+            'run_id': 'not-allowed'
+        }, {
+            'import_attempts': 'not-allowed'
+        }]
         run_id = self.runs[0][_MODEL.run_id]
         _, err = self.resource.patch(run_id)
         self.assertEqual(403, err)

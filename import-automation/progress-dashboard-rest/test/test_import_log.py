@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for import_log.py.
 """
@@ -22,7 +21,6 @@ from unittest import mock
 from app.resource import import_attempt, import_log
 from app.service import import_attempt_database_dict
 from app import utils
-
 
 PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
 IMPORT_ATTEMPT_DATABASE = 'app.resource.import_attempt' \
@@ -43,11 +41,11 @@ class ImportLogTest(unittest.TestCase):
         """Tests that POST adds a log to an attempt."""
         log_0 = {'level': 'info', 'message': 'first'}
         log_1 = {
-            'level': 'info', 'message': 'second', 'time_logged': utils.utctime()
+            'level': 'info',
+            'message': 'second',
+            'time_logged': utils.utctime()
         }
-        parse_args.side_effect = [
-            {'import_name': 'name'}, log_0, log_1
-        ]
+        parse_args.side_effect = [{'import_name': 'name'}, log_0, log_1]
         attempt_api = import_attempt.ImportAttemptByID()
         attempt_id = '0'
         attempt_api.put(attempt_id)
