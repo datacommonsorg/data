@@ -11,8 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-
 '''
 1. Extracts the data portion out of the constant maturity rate csv file
    downloaded from Federal Reserve and store it in
@@ -27,32 +25,37 @@
 Run "python3 generate_csv_and_mcf.py --help" for usage.
 '''
 
-
 from absl import app
 from absl import flags
 
-FLAGS = flags.FLAGS 
-flags.DEFINE_boolean("csv", True,
-    "Whether or not to generate the csv.")
-flags.DEFINE_boolean("mcf", False,
+FLAGS = flags.FLAGS
+flags.DEFINE_boolean("csv", True, "Whether or not to generate the csv.")
+flags.DEFINE_boolean(
+    "mcf", False,
     "Whether or not to generate the template and StatisticalVariable"
     "instance MCFs.")
 flags.DEFINE_string("path", "FRB_H15.csv",
-    "Path to the raw csv containing rates at all maturities.")
+                    "Path to the raw csv containing rates at all maturities.")
 
 from frozendict import frozendict
 import pandas as pd
-
-
 '''
 Maturities for which interest rates are provided by BEA.
 Treasury bills have maturities of a year or less, notes greater than 1 year up
 to 10 years, and bonds greater than 10 years.
 '''
 MATURITIES = frozendict({
-    "1-month": "Bill", "3-month": "Bill", "6-month": "Bill",
-    "1-year": "Bill", "2-year": "Note", "3-year": "Note", "5-year": "Note",
-    "7-year": "Note", "10-year": "Note", "20-year": "Bond", "30-year": "Bond"
+    "1-month": "Bill",
+    "3-month": "Bill",
+    "6-month": "Bill",
+    "1-year": "Bill",
+    "2-year": "Note",
+    "3-year": "Note",
+    "5-year": "Note",
+    "7-year": "Note",
+    "10-year": "Note",
+    "20-year": "Bond",
+    "30-year": "Bond"
 })
 
 # URL of the raw csv
@@ -69,29 +72,28 @@ def generate_csv():
     header_rows = 5
     name_template = "Market yield on U.S. Treasury securities at {}   constant"\
                     " maturity, quoted on investment basis"
-    
+
     in_df = pd.read_csv(CSV_URL, na_values="ND")
-    
+
     out_df["date"] = in_df["Series Description"][header_rows:]
     for maturity in MATURITIES:
         column_name = name_template.format(maturity)
         out_df[maturity.title()] = in_df[column_name][header_rows:]
-      
+
     out_df.to_csv("treasury_constant_maturity_rates.csv", index=False)
 
 
 def generate_mcf():
     '''Generates the template and StatisticalVariable instance MCFs'''
 
-    variable_template = ( 
+    variable_template = (
         'Node: dcid:InterestRate_Treasury{security_type}_{maturity_no_hypen}\n'
         'name: "InterestRate_Treasury{security_type}_{maturity_no_hypen}"\n'
         'typeOf: dcs:StatisticalVariable\n'
         'measuredProperty: dcs:interestRate\n'
         'populationType: dcs:Treasury{security_type}\n'
         'maturity: [{maturity_space}]\n'
-        'statType: dcs:measuredValue\n'
-    )
+        'statType: dcs:measuredValue\n')
     template_template = (
         'Node: E:{filename}->E{index}\n'
         'typeOf: dcs:StatVarObservation\n'
@@ -100,8 +102,7 @@ def generate_mcf():
         'unit: dcs:Percent\n'
         'observationAbout: dcid:country/USA\n'
         'observationDate: C:{filename}->date\n'
-        'value: C:{filename}->{maturity_hyphen}\n'
-    )
+        'value: C:{filename}->{maturity_hyphen}\n')
 
     with open("treasury_constant_maturity_rates.mcf", "w") as mcf_f, \
          open("treasury_constant_maturity_rates.tmcf", "w") as tmcf_f:
@@ -121,7 +122,7 @@ def generate_mcf():
                 "maturity_no_hypen": maturity_no_hypen,
                 "maturity_space": maturity_space
             }
-            
+
             mcf_f.write(variable_template.format_map(format_dict))
             mcf_f.write("\n")
             tmcf_f.write(template_template.format_map(format_dict))

@@ -29,7 +29,8 @@ from absl import app
 import pandas as pd
 
 # Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None # default='warn'
+pd.options.mode.chained_assignment = None  # default='warn'
+
 
 class StateGDPDataLoader:
     """Pulls per-state GDP data from the BEA.
@@ -37,37 +38,46 @@ class StateGDPDataLoader:
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    _US_STATES = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-                  'Colorado', 'Connecticut', 'Delaware', 'District of Columbia',
-                  'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana',
-                  'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
-                  'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-                  'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-                  'New Jersey', 'New Mexico', 'New York', 'North Carolina',
-                  'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-                  'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-                  'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-                  'West Virginia', 'Wisconsin', 'Wyoming']
+    _US_STATES = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+        'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia',
+        'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+        'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan',
+        'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
+        'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+        'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
+        'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+        'West Virginia', 'Wisconsin', 'Wyoming'
+    ]
     _ZIP_LINK = "https://apps.bea.gov/regional/zip/SQGDP.zip"
-    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2019.csv"
-    _QUARTER_MONTH_MAP = {
-        'Q1':'03',
-        'Q2':'06',
-        'Q3':'09',
-        'Q4':'12'
-    }
+    _STATE_QUARTERLY_GDP_FILE = "SQGDP1__ALL_AREAS_2005_2020.csv"
+    _QUARTER_MONTH_MAP = {'Q1': '03', 'Q2': '06', 'Q3': '09', 'Q4': '12'}
 
     def __init__(self):
         """Initializes instance, assigning member data frames to None."""
         self.raw_df = None
         self.clean_df = None
 
-    def download_data(self):
+    def download_data(self, zip_link=None, file=None):
         """Downloads ZIP file, extracts the desired CSV, and puts it into a data
         frame. Stores that data frame in the instance raw_df variable.
+
+        Args:
+            zip_link: Link to the raw data to be downloaded in ZIP format. If
+            None or unspecified, this value gets overriden by the class constant
+            _ZIP_LINK.
+            file: File within the specified ZIP file that should be downloaded
+            and stored. If None or unspecified, this value gets overriden by the
+            class constant _STATE_QUARTERLY_GDP_FILE.
+
         """
+        if zip_link is None:
+            zip_link = self._ZIP_LINK
+        if file is None:
+            file = self._STATE_QUARTERLY_GDP_FILE
         # Open zip file from link.
-        resp = urlopen(self._ZIP_LINK)
+        resp = urlopen(zip_link)
 
         # Read the file, interpret it as bytes, and create a ZipFile instance
         # from it for easy handling.
@@ -76,7 +86,7 @@ class StateGDPDataLoader:
         # Open the specific desired file (CSV) from the folder, and decode it.
         # This results in a string representation of the file. Interpret that
         # as a CSV, and read it into a DF.
-        data = zip_file.open(self._STATE_QUARTERLY_GDP_FILE).read()
+        data = zip_file.open(file).read()
         data = data.decode('utf-8')
         data = list(csv.reader(data.splitlines()))
         self.raw_df = pd.DataFrame(data[1:], columns=data[0])
@@ -110,7 +120,8 @@ class StateGDPDataLoader:
         all_quarters = [q for q in df.columns if re.match(r"....:Q.", q)]
 
         # Convert table from wide to long format.
-        df = pd.melt(df, id_vars=['GeoFIPS', 'Unit'],
+        df = pd.melt(df,
+                     id_vars=['GeoFIPS', 'Unit'],
                      value_vars=all_quarters,
                      var_name='Quarter')
 
@@ -123,10 +134,12 @@ class StateGDPDataLoader:
         one_million = 1000000
         self.clean_df = df[df["Unit"] == "Millions of chained 2012 dollars"]
         self.clean_df.set_index(["GeoId", "Quarter"])
-        self.clean_df["chained_2012_dollars"] = self.clean_df["value"].astype(float)
+        self.clean_df["chained_2012_dollars"] = self.clean_df["value"].astype(
+            float)
         self.clean_df["chained_2012_dollars"] *= one_million
         quality_indices = df[df["Unit"] == "Quantity index"]
-        self.clean_df["quantity_index"] = quality_indices["value"].values.astype(float)
+        self.clean_df["quantity_index"] = quality_indices[
+            "value"].values.astype(float)
         current_usd = df[df["Unit"] == "Millions of current dollars"]["value"]
         self.clean_df["current_dollars"] = current_usd.values.astype(float)
         self.clean_df["current_dollars"] *= one_million
@@ -165,7 +178,7 @@ class StateGDPDataLoader:
 
 
 def main(argv):
-    del argv # unused
+    del argv  # unused
     loader = StateGDPDataLoader()
     loader.download_data()
     loader.process_data()
