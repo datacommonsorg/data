@@ -1,0 +1,240 @@
+Node: dcid:AllCausesOfDeath
+typeOf: dcs:ICD10Code
+name: "AllCausesOfDeath"
+description: "Corresponds to ICD10 Codes A-R,V-Y (A00-Y89) excluding S00-T98"
+
+Node: dcid:CertainInfectiousAndParasiticDiseases
+typeOf: dcs:ICD10Code
+name: "CertainInfectiousAndParasiticDiseases"
+description: "Corresponds to ICD10 Codes A,B (A00-B99)"
+
+Node: dcid:Tuberculosis
+typeOf: dcs:ICD10Code
+name: "Tuberculosis"
+description: "Corresponds to ICD10 Codes A15-A19,B90"
+
+Node: dcid:ViralHepatitisAndSequelaeOfViralHepatitis
+typeOf: dcs:ICD10Code
+name: "ViralHepatitisAndSequelaeOfViralHepatitis"
+description: "Corresponds to ICD10 Codes B15-B19,B942"
+
+Node: dcid:ChronicViralHepatitisBAndC
+typeOf: dcs:ICD10Code
+name: "ChronicViralHepatitisBAndC"
+description: "Corresponds to ICD10 Codes B180-B182"
+
+Node: dcid:OtherInfectiousAndParasiticDiseases
+typeOf: dcs:ICD10Code
+name: "OtherInfectiousAndParasiticDiseases"
+description: "Corresponds to ICD10 Codes A,B and other (remainder of A00-B99)"
+
+Node: dcid:MalignantNeoplasmOfTrachea_BronchusAndLung
+typeOf: dcs:ICD10Code
+name: "MalignantNeoplasmOfTrachea_BronchusAndLung"
+description: "Corresponds to ICD10 Codes C33,C34"
+
+Node: dcid:MalignantNeoplasmOfOtherPartsOfUterus
+typeOf: dcs:ICD10Code
+name: "MalignantNeoplasmOfOtherPartsOfUterus"
+description: "Corresponds to ICD10 Codes C54,C55"
+
+Node: dcid:HodgkinDiseaseAndLymphomas
+typeOf: dcs:ICD10Code
+name: "HodgkinDiseaseAndLymphomas"
+description: "Corresponds to ICD10 Codes C81-C86"
+
+Node: dcid:OtherMalignantNeoplasmOfLymphoid_HaematopoieticAndRelatedTissue
+typeOf: dcs:ICD10Code
+name: "OtherMalignantNeoplasmOfLymphoid_HaematopoieticAndRelatedTissue"
+description: "Corresponds to ICD10 Codes C88,C90,C96"
+
+Node: dcid:OtherMalignantNeoplasms
+typeOf: dcs:ICD10Code
+name: "OtherMalignantNeoplasms"
+description: "Corresponds to ICD10 Codes C and other (remainder of C00-C97)"
+
+Node: dcid:Endocrine_NutritionalAndMetabolicDiseases
+typeOf: dcs:ICD10Code
+name: "Endocrine_NutritionalAndMetabolicDiseases"
+description: "Corresponds to ICD10 Codes E (E00-E90)"
+
+Node: dcid:OtherEndocrine_NutritionalAndMetabolicDiseases
+typeOf: dcs:ICD10Code
+name: "OtherEndocrine_NutritionalAndMetabolicDiseases"
+description: "Corresponds to ICD10 Codes E and other (remainder of E00-E90)"
+
+Node: dcid:MentalAndBehaviouralDisorders
+typeOf: dcs:ICD10Code
+name: "MentalAndBehaviouralDisorders"
+description: "Corresponds to ICD10 Codes F (F00-F99)"
+
+Node: dcid:Dementia
+typeOf: dcs:ICD10Code
+name: "Dementia"
+description: "Corresponds to ICD10 Codes F01,F03"
+
+Node: dcid:DrugDependence_Toxicomania
+typeOf: dcs:ICD10Code
+name: "DrugDependence_Toxicomania"
+description: "Corresponds to ICD10 Codes TOXICO (F11-F16, F18-F19)"
+
+Node: dcid:OtherMentalAndBehaviouralDisorders
+typeOf: dcs:ICD10Code
+name: "OtherMentalAndBehaviouralDisorders"
+description: "Corresponds to ICD10 Codes F and other (remainder of F00-F99)"
+
+Node: dcid:DiseasesOfTheNervousSystemAndTheSenseOrgans
+typeOf: dcs:ICD10Code
+name: "DiseasesOfTheNervousSystemAndTheSenseOrgans"
+description: "Corresponds to ICD10 Codes G,H (G00-H95)"
+
+Node: dcid:OtherDiseasesOfTheNervousSystemAndTheSenseOrgans
+typeOf: dcs:ICD10Code
+name: "OtherDiseasesOfTheNervousSystemAndTheSenseOrgans"
+description: "Corresponds to ICD10 Codes G,H and other (remainder of G00-H95)"
+
+Node: dcid:AcuteMyocardialInfarctionIncludingSubsequentMyocardialInfarction
+typeOf: dcs:ICD10Code
+name: "AcuteMyocardialInfarctionIncludingSubsequentMyocardialInfarction"
+description: "Corresponds to ICD10 Codes I21,I22"
+
+Node: dcid:OtherIschaemicHeartDiseases
+typeOf: dcs:ICD10Code
+name: "OtherIschaemicHeartDiseases"
+description: "Corresponds to ICD10 Codes I20,I23-I25"
+
+Node: dcid:OtherHeartDiseases
+typeOf: dcs:ICD10Code
+name: "OtherHeartDiseases"
+description: "Corresponds to ICD10 Codes I30-I51"
+
+Node: dcid:OtherDiseasesOfTheCirculatorySystem
+typeOf: dcs:ICD10Code
+name: "OtherDiseasesOfTheCirculatorySystem"
+description: "Corresponds to ICD10 Codes I and other (remainder of I00-I99)"
+
+Node: dcid:DiseasesOfTheRespiratorySystem
+typeOf: dcs:ICD10Code
+name: "DiseasesOfTheRespiratorySystem"
+description: "Corresponds to ICD10 Codes J (J00-J99)"
+
+Node: dcid:Influenza
+typeOf: dcs:ICD10Code
+name: "Influenza"
+description: "Corresponds to ICD10 Codes J09-J11 (including swine flu)"
+
+Node: dcid:AsthmaAndStatusAsthmaticus
+typeOf: dcs:ICD10Code
+name: "AsthmaAndStatusAsthmaticus"
+description: "Corresponds to ICD10 Codes J45,J46"
+
+Node: dcid:OtherLowerRespiratoryDiseases
+typeOf: dcs:ICD10Code
+name: "OtherLowerRespiratoryDiseases"
+description: "Corresponds to ICD10 Codes J40-J44,J47"
+
+Node: dcid:OtherDiseasesOfTheRespiratorySystem
+typeOf: dcs:ICD10Code
+name: "OtherDiseasesOfTheRespiratorySystem"
+description: "Corresponds to ICD10 Codes J and other (remainder of J00-J99)"
+
+Node: dcid:DiseasesOfTheDigestiveSystem
+typeOf: dcs:ICD10Code
+name: "DiseasesOfTheDigestiveSystem"
+description: "Corresponds to ICD10 Codes K (K00-K93)"
+
+Node: dcid:ChronicLiverDisease
+typeOf: dcs:ICD10Code
+name: "ChronicLiverDisease"
+description: "Corresponds to ICD10 Codes K70,K73,K74"
+
+Node: dcid:ChronicLiverDisease
+typeOf: dcs:ICD10Code
+name: "ChronicLiverDisease"
+description: "Corresponds to ICD10 Codes K72-K75 (excluding alcoholic and toxic liver disease)"
+
+Node: dcid:OtherDiseasesOfTheDigestiveSystem
+typeOf: dcs:ICD10Code
+name: "OtherDiseasesOfTheDigestiveSystem"
+description: "Corresponds to ICD10 Codes K and other (remainder of K00-K93)"
+
+Node: dcid:DiseasesOfTheSkinAndSubcutaneousTissue
+typeOf: dcs:ICD10Code
+name: "DiseasesOfTheSkinAndSubcutaneousTissue"
+description: "Corresponds to ICD10 Codes L (L00-L99)"
+
+Node: dcid:RheumatoidArthritisAndArthrosis
+typeOf: dcs:ICD10Code
+name: "RheumatoidArthritisAndArthrosis"
+description: "Corresponds to ICD10 Codes RHEUM,ARTHRO (M05-M06,M15-M19)"
+
+Node: dcid:OtherDiseasesOfTheMusculoskeletalSystemAndConnectiveTissue
+typeOf: dcs:ICD10Code
+name: "OtherDiseasesOfTheMusculoskeletalSystemAndConnectiveTissue"
+description: "Corresponds to ICD10 Codes M and other (remainder of M00-M99)"
+
+Node: dcid:DiseasesOfTheGenitourinarySystem
+typeOf: dcs:ICD10Code
+name: "DiseasesOfTheGenitourinarySystem"
+description: "Corresponds to ICD10 Codes N (N00-N99)"
+
+Node: dcid:DiseasesOfKidneyAndUreter
+typeOf: dcs:ICD10Code
+name: "DiseasesOfKidneyAndUreter"
+description: "Corresponds to ICD10 Codes N00-N29"
+
+Node: dcid:OtherDiseasesOfTheGenitourinarySystem
+typeOf: dcs:ICD10Code
+name: "OtherDiseasesOfTheGenitourinarySystem"
+description: "Corresponds to ICD10 Codes N and other (remainder of N00-N99)"
+
+Node: dcid:SuddenInfantDeathSyndrome
+typeOf: dcs:ICD10Code
+name: "SuddenInfantDeathSyndrome"
+description: "Corresponds to ICD10 Codes R95"
+
+Node: dcid:Ill-DefinedAndUnknownCausesOfMortality
+typeOf: dcs:ICD10Code
+name: "Ill-DefinedAndUnknownCausesOfMortality"
+description: "Corresponds to ICD10 Codes R96-R99"
+
+Node: dcid:OtherSymptoms_SignsAndAbnormalClinicalAndLaboratoryFindings
+typeOf: dcs:ICD10Code
+name: "OtherSymptoms_SignsAndAbnormalClinicalAndLaboratoryFindings"
+description: "Corresponds to ICD10 Codes R and other (remainder of R00-R99)"
+
+Node: dcid:Accidents
+typeOf: dcs:ICD10Code
+name: "Accidents"
+description: "Corresponds to ICD10 Codes ACC (V01-X59, Y85, Y86)"
+
+Node: dcid:TransportAccidents
+typeOf: dcs:ICD10Code
+name: "TransportAccidents"
+description: "Corresponds to ICD10 Codes V,Y85 (V01-V99, Y85)"
+
+Node: dcid:OtherAccidents
+typeOf: dcs:ICD10Code
+name: "OtherAccidents"
+description: "Corresponds to ICD10 Codes ACC and other (W20-W64, W75-X39, X50-X59, Y86)"
+
+Node: dcid:IntentionalSelf-Harm
+typeOf: dcs:ICD10Code
+name: "IntentionalSelf-Harm"
+description: "Corresponds to ICD10 Codes X60-X84,Y870"
+
+Node: dcid:Assault
+typeOf: dcs:ICD10Code
+name: "Assault"
+description: "Corresponds to ICD10 Codes X85-Y09,Y871"
+
+Node: dcid:EventOfUndeterminedIntent
+typeOf: dcs:ICD10Code
+name: "EventOfUndeterminedIntent"
+description: "Corresponds to ICD10 Codes Y10-Y34,Y872"
+
+Node: dcid:OtherExternalCausesOfMorbidityAndMortality
+typeOf: dcs:ICD10Code
+name: "OtherExternalCausesOfMorbidityAndMortality"
+description: "Corresponds to ICD10 Codes V01-Y89 and other (remainder of V01-Y89)"
+
