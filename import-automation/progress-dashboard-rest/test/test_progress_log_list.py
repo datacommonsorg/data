@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for progress_log_list.py.
 """
@@ -54,20 +53,28 @@ class ProgressLogListTest(unittest.TestCase):
         attempt_list_resource.database.client = self.resource.client
         attempt_list_resource.run_database.client = self.resource.client
 
-        runs = [
-            {_RUN.branch_name: 'test-branch', _RUN.pr_number: 0},
-            {_RUN.branch_name: 'prod-branch', _RUN.pr_number: 1}
-        ]
+        runs = [{
+            _RUN.branch_name: 'test-branch',
+            _RUN.pr_number: 0
+        }, {
+            _RUN.branch_name: 'prod-branch',
+            _RUN.pr_number: 1
+        }]
         self.runs = utils.ingest_system_runs(run_list_resource, runs)
 
         # Linked to the first run
         attempts = [
-            {_ATTEMPT.import_name: 'cpi-u'},
-            {_ATTEMPT.import_name: 'cpi-w'},
+            {
+                _ATTEMPT.import_name: 'cpi-u'
+            },
+            {
+                _ATTEMPT.import_name: 'cpi-w'
+            },
         ]
-        self.attempts = utils.ingest_import_attempts(
-            run_list_resource, attempt_list_resource,
-            attempts, system_run=self.runs[0])
+        self.attempts = utils.ingest_import_attempts(run_list_resource,
+                                                     attempt_list_resource,
+                                                     attempts,
+                                                     system_run=self.runs[0])
 
     @mock.patch(utils.PARSE_ARGS)
     def test_level_not_allowed(self, parse_args):
@@ -96,8 +103,10 @@ class ProgressLogListTest(unittest.TestCase):
         self.assertEqual(403, code)
         self.assertIn('time_logged', message)
 
-    @mock.patch(utils.PARSE_ARGS,
-                lambda self: {_LOG.level: 'info', _LOG.message: 'hello'})
+    @mock.patch(utils.PARSE_ARGS, lambda self: {
+        _LOG.level: 'info',
+        _LOG.message: 'hello'
+    })
     def test_attempt_and_run_id_not_exist(self):
         """Tests that POSTing a progress log without attempt_id or run_id set
         returns FORBIDDEN."""
