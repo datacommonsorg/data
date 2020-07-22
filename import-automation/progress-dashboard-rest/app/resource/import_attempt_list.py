@@ -40,6 +40,7 @@ class ImportAttemptList(import_attempt.ImportAttempt):
     """
 
     def __init__(self):
+        """Constructs an ImportAttemptList."""
         super().__init__()
         self.run_database = system_run_database.SystemRunDatabase(
             self.client)

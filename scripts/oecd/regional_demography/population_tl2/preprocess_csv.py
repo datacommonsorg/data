@@ -38,8 +38,9 @@ df = df[df['Region'].isin(name2dcid.keys())]
 df.replace({'Region': name2dcid}, inplace=True)
 df['Year'] = '"' + df['Year'].astype(str) + '"'
 
-
-df_cleaned = df.pivot_table(values='Value', index=['REG_ID', 'Region', 'Year'], columns=['VAR', 'SEX'])
+df_cleaned = df.pivot_table(values='Value',
+                            index=['REG_ID', 'Region', 'Year'],
+                            columns=['VAR', 'SEX'])
 df_cleaned = multi_index_to_single_index(df_cleaned)
 
 VAR_to_statsvars = {
@@ -64,7 +65,6 @@ VAR_to_statsvars = {
     'Y0_14T': 'Count_Person_Upto14Years',
     'Y15_64T': 'Count_Person_15To64Years',
     'Y65_MAXT': 'Count_Person_65OrMoreYears',
-
     'TM': 'Count_Person_Male',
     'Y0_4M': 'Count_Person_Upto4Years_Male',
     'Y5_9M': 'Count_Person_5To9Years_Male',
@@ -86,7 +86,6 @@ VAR_to_statsvars = {
     'Y0_14M': 'Count_Person_Upto14Years_Male',
     'Y15_64M': 'Count_Person_15To64Years_Male',
     'Y65_MAXM': 'Count_Person_65OrMoreYears_Male',
-
     'TF': 'Count_Person_Female',
     'Y0_4F': 'Count_Person_Upto4Years_Female',
     'Y5_9F': 'Count_Person_5To9Years_Female',
@@ -111,8 +110,9 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv('OECD_population_tl2_cleaned.csv', index=False, quoting=csv.QUOTE_NONE)
-
+df_cleaned.to_csv('OECD_population_tl2_cleaned.csv',
+                  index=False,
+                  quoting=csv.QUOTE_NONE)
 
 # Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """
@@ -120,7 +120,7 @@ Node: E:OECD_population_tl2_cleaned->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: E:OECD_population_tl2_cleaned->E0
+observationAbout: C:OECD_population_tl2_cleaned->Region
 observationDate: C:OECD_population_tl2_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_population_tl2_cleaned->{stat_var}
@@ -129,4 +129,8 @@ value: C:OECD_population_tl2_cleaned->{stat_var}
 stat_vars = df_cleaned.columns[3:]
 with open('OECD_population_tl2.tmcf', 'w', newline='') as f_out:
     for i in range(len(stat_vars)):
-        f_out.write(TEMPLATE_MCF_TEMPLATE.format_map({'index': i + 1, 'stat_var': stat_vars[i]}))
+        f_out.write(
+            TEMPLATE_MCF_TEMPLATE.format_map({
+                'index': i + 1,
+                'stat_var': stat_vars[i]
+            }))

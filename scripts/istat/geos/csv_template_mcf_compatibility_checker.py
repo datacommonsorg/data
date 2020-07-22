@@ -11,10 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """test functions for the template mcf"""
 
 import pandas as pd
+
 
 def test_col_names(csv_path, tmcf_path):
     """ check if all the column names specified in the template mcf
@@ -25,6 +25,7 @@ def test_col_names(csv_path, tmcf_path):
             if " C:" in line:
                 col_name = line[:-1].split("->")[1]
             assert col_name in cols
+
 
 if __name__ == "__main__":
     test_col_names("ISTAT_region.csv", "ISTAT_region.tmcf")
