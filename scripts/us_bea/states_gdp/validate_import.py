@@ -24,7 +24,9 @@ import re
 import numpy as np
 from import_data import StateGDPDataLoader
 
+
 class USStateQuarterlyGDPImportVal(unittest.TestCase):
+
     def test_download_data(self):
         """Tests that data gets downloaded properly.
 
@@ -61,11 +63,13 @@ class USStateQuarterlyGDPImportVal(unittest.TestCase):
         loader.process_data()
 
         clean_df = loader.clean_df
-        expected_col_types = {"Quarter": np.object,
-                              "GeoId": np.object,
-                              "chained_2012_dollars": np.float64,
-                              "quantity_index": np.float64,
-                              "current_dollars": np.float64}
+        expected_col_types = {
+            "Quarter": np.object,
+            "GeoId": np.object,
+            "chained_2012_dollars": np.float64,
+            "quantity_index": np.float64,
+            "current_dollars": np.float64
+        }
         # Check that the resulting columns are as expected.
         expected_cols = set(expected_col_types.keys())
         self.assertSetEqual(set(clean_df.columns), expected_cols)

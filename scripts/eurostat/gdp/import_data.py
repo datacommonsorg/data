@@ -18,10 +18,13 @@ Downloads and cleans GDP data from the Eurostat database.
 
     python3 import_data.py
 """
-
-import pandas as pd
 import json
+import pandas as pd
 from preprocess_data import preprocess_df
+
+
+# Suppress annoying pandas DF copy warnings.
+pd.options.mode.chained_assignment = None  # default='warn'
 
 
 class EurostatGDPImporter:
@@ -79,7 +82,10 @@ class EurostatGDPImporter:
                              "Please check you are calling preprocess_data "
                              "before clean_data.")
         self.clean_df = self.preprocessed_df[self.DESIRED_COLUMNS]
-        self.clean_df = self.clean_df.replace(to_replace=':', value='')
+
+        # Prepends nuts/ prefix to geo codes.
+        self.clean_df['geo'] = self.clean_df['geo'].apply(lambda g: "nuts/" + g)
+
         new_col_names = {}
         one_million = 1000 * 1000
 
