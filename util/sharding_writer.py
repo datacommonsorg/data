@@ -14,7 +14,7 @@
 """General class to shard while writing strings to file."""
 
 
-class ShardingWriter(object):
+class ShardingWriter:
     """Helper class for writing strings to sharded files."""
 
     def __init__(self, base_path, file_extension='mcf', shard_size=104857600):
@@ -25,7 +25,7 @@ class ShardingWriter(object):
         self._nbytes = 0
         self._fptr = None
 
-    def Write(self, data):
+    def write(self, data):
         """Write to current sharded file if the file has not exceeded size limit."""
         if not self._fptr:
             dest_file = '%s_%s.%s' % (self._base_path, self._shard_id,
