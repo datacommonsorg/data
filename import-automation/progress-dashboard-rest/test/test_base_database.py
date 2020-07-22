@@ -15,11 +15,7 @@
 """
 Tests for base_database.py.
 
-The Datastore emulator must be installed. See
-https://cloud.google.com/datastore/docs/tools/datastore-emulator#before_you_begin
-for requirements.
-
-TODO(intrepiditee): decide later whether test filenames start with
+TODO(intrepiditee): Decide later whether test filenames start with
 test_ or end with _test or use a pattern that supports both.
 """
 
@@ -32,16 +28,12 @@ from app.service import base_database
 from test import utils
 
 
+def setUpModule():
+    utils.EMULATOR.start_emulator()
+
+
 class BaseDatabaseTest(unittest.TestCase):
     """Tests for BaseDatabase."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
