@@ -131,7 +131,7 @@ def generate_mcf():
 
 
 def main(_):
-    """Run the code."""
+    """Runs the code."""
     if FLAGS.csv:
         generate_csv()
     if FLAGS.mcf:
