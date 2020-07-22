@@ -67,14 +67,14 @@ class UpdateScheduler:
                 'http_method': 'POST',
                 'app_engine_routing': {
                     'service': 'default',
-                    'relative_uri': '/update',
-                    'headers': {
-                        'Content-Type': 'application/json'
-                    },
-                    'body': json.dumps({
-                        'absolute_import_name': absolute_import_name
-                    }).encode()
-                }
+                },
+                'relative_uri': '/update',
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body': json.dumps({
+                    'absolute_import_name': absolute_import_name
+                }).encode()
             },
             'retry_config': {
                 'retry_count': 2
@@ -85,7 +85,7 @@ class UpdateScheduler:
             }
         }
         location_path = self.client.location_path(
-            self.config.gcp_project_id,
+            _fix_project_id(self.config.gcp_project_id),
             self.config.scheduler_location)
         return dict(self.client.create_job(location_path, job))
 
@@ -100,7 +100,15 @@ class UpdateScheduler:
             Same exceptions as CloudSchedulerClient.delete_job.
         """
         job_path = self.client.job_path(
-            self.config.gcp_project_id,
+            _fix_project_id(self.config.gcp_project_id),
             self.config.scheduler_location,
             absolute_import_name)
         self.client.delete_job(job_path)
+
+
+def _fix_project_id(project_id):
+    sep = ':'
+    if sep in project_id:
+        organization, project = project_id.split(sep)
+        return f'{organization}/{project}'
+    return project_id
