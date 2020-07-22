@@ -5,5 +5,5 @@ google-cloud-storage
 google-cloud-datastore
 flask
 gunicorn
-virtualenv
 pytz
+absl-py
