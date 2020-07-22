@@ -28,16 +28,12 @@ from test import utils
 _ATTEMPT = import_attempt_model.ImportAttemptModel
 
 
+def setUpModule():
+    utils.EMULATOR.start_emulator()
+
+
 class ImportAttemptByIDTest(unittest.TestCase):
     """Tests for ImportAttemptByID."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
