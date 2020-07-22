@@ -39,11 +39,13 @@ You could also use Cloud Scheduler to POST to the endpoints directly. For exampl
 3. `Body` = `{"absolute_import_name": "scripts/us_fed/treausury_contant_maturity_rates:us_treausury_contant_maturity_rates"}`
 
 
-## Testing locally
+## Local Executor
 
-```
+Run `./run_local_executor --help` for usage.
+
+## Running Tests
+
+```shell script
+export GITHUB_AUTH_ACCESS_TOKEN=<your access token>
 ./run_test.sh
 ```
-
-See [test/test_integration](test/test_integration.py).  First lines of the
-generated files would be printed.
