@@ -29,40 +29,30 @@ _ATTEMPT = import_attempt_model.ImportAttemptModel
 _RUN = system_run_model.SystemRunModel
 
 
+def setUpModule():
+    utils.EMULATOR.start_emulator()
+
+
 class ImportAttemptListTest(unittest.TestCase):
     """Tests for ImportAttemptList."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
     def setUp(self):
         """Injects a system run and several import attempts to the database."""
         self.resource = import_attempt_list.ImportAttemptList()
-        self.run_list_resource = system_run_list.SystemRunList()
-        self.run_list_resource.database.client = self.resource.client
 
-        run = {_RUN.branch_name: 'test-branch'}
-        attempt_0 = {_ATTEMPT.import_name: 'cpi-u'}
-        attempt_1 = {_ATTEMPT.import_name: 'cpi-w'}
-        attempt_2 = {_ATTEMPT.import_name: 'cpi-w'}
-        attempt_3 = {_ATTEMPT.import_name: 'c-cpi-u'}
-        attempts = [attempt_0, attempt_1, attempt_2, attempt_3]
-        returns = [run, attempt_0, attempt_1, attempt_2, attempt_3]
+        run_list_resource = system_run_list.SystemRunList()
+        run_list_resource.database.client = self.resource.client
 
-        with mock.patch(utils.PARSE_ARGS) as parse_args:
-            parse_args.side_effect = returns
-            run_id = self.run_list_resource.post()[_RUN.run_id]
-            for i, attempt in enumerate(attempts):
-                attempt[_ATTEMPT.run_id] = run_id
-                attempts[i] = self.resource.post()
-            self.attempts = attempts
+        attempts = [
+            {_ATTEMPT.import_name: 'cpi-u'},
+            {_ATTEMPT.import_name: 'cpi-w'},
+            {_ATTEMPT.import_name: 'cpi-w'},
+            {_ATTEMPT.import_name: 'c-cpi-u'}
+        ]
+        self.attempts = utils.ingest_import_attempts(
+            run_list_resource, self.resource, attempts)
 
     @mock.patch(utils.PARSE_ARGS, lambda self: {_ATTEMPT.import_name: 'ppi'})
     def test_post_run_id_not_set(self):

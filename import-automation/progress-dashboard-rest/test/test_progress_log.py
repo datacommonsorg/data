@@ -33,16 +33,12 @@ _RUN = system_run_model.SystemRunModel
 _LOG = progress_log_model.ProgressLogModel
 
 
+def setUpModule():
+    utils.EMULATOR.start_emulator()
+
+
 class ProgressLogListTest(unittest.TestCase):
     """Tests for ProgressLogList."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
@@ -97,15 +93,15 @@ class ProgressLogListTest(unittest.TestCase):
             },
             # Linked to the first attempt and first run
             {
-                _LOG.level: 'severe',
+                _LOG.level: 'critical',
                 _LOG.message: 'second',
                 _LOG.attempt_id: self.attempts[0][_ATTEMPT.attempt_id],
                 _LOG.run_id: self.runs[0][_RUN.run_id]
             },
             # Linked to the first run
             {
-                _LOG.level: 'info',
-                _LOG.message: 'thrid',
+                _LOG.level: 'debug',
+                _LOG.message: 'third',
                 _LOG.run_id: self.runs[0][_RUN.run_id]
             }
         ]

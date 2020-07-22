@@ -119,7 +119,7 @@ Node: E:OECD_population_tl3_cleaned->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: E:OECD_population_tl3_cleaned->E0
+observationAbout: C:OECD_population_tl3_cleaned->Region
 observationDate: C:OECD_population_tl3_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_population_tl3_cleaned->{stat_var}
