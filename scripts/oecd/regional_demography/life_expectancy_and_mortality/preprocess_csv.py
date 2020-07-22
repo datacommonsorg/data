@@ -94,7 +94,7 @@ Node: E:OECD_life_expectancy_and_mortality_cleaned->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->E0
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
 observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->{stat_var}

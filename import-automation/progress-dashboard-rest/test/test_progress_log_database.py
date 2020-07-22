@@ -25,20 +25,15 @@ from test import utils
 from app.model import progress_log_model
 from app.service import progress_log_database
 
-
 _MODEL = progress_log_model.ProgressLogModel
+
+
+def setUpModule():
+    utils.EMULATOR.start_emulator()
 
 
 class ProgressLogDatabaseTest(unittest.TestCase):
     """Tests for BaseDatabase."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
