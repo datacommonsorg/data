@@ -44,6 +44,14 @@ class UpdateScheduler:
     def create_schedule(self, absolute_import_name: str, schedule: str) -> Dict:
         """Schedules periodic updates for an import.
 
+        Example:
+            The method call
+                create_schedule('scripts/us_fed:treasury', '* * * * *')
+            schedules a cron job that updates the import every minute. The
+            name of the job is 'scripts_us_fed_treasury' and the description
+            is 'scripts/us_fed:treasury'. See _create_job_body for exact job
+            definition.
+
         Attributes:
             absolute_import_name: Absolute import name of the import to be
                 updated. This is used as the name of the job.
@@ -61,8 +69,8 @@ class UpdateScheduler:
             self.config.scheduler_location)
         return dict(
             self.client.create_job(
-                location_path, _create_job_body(absolute_import_name,
-                                                schedule)))
+                location_path,
+                self._create_job_body(absolute_import_name, schedule)))
 
     def delete_schedule(self, absolute_import_name):
         """Deletes an update schedule for an import.
@@ -79,48 +87,69 @@ class UpdateScheduler:
             self.config.scheduler_location, absolute_import_name)
         self.client.delete_job(job_path)
 
+    def _create_job_body(self, absolute_import_name: str,
+                         schedule: str) -> Dict:
+        """Creates the body of a Cloud Scheduler job for updating an import.
 
-def _create_job_body(absolute_import_name: str, schedule: str) -> Dict:
-    """Creates the body of a Cloud Scheduler job for updating an import.
+        This function does not schedule any jobs.
 
-    This function does not schedule any jobs.
+        Args:
+            absolute_import_name: Absolute import name of the import
+                as a string.
+            schedule: Cron schedule for the updates as a string.
 
-    Args:
-        absolute_import_name: Absolute import name of the import as a string.
-        schedule: Cron schedule for the updates as a string.
-
-    Returns:
-        The body of a Cloud Scheduler job as a dict that is ready to be used
-        as an argument to CloudSchedulerClient.create_job.
-    """
-    return {
-        'name': absolute_import_name,
-        'schedule': schedule,
-        'time_zone': 'utc',
-        'app_engine_http_target': {
-            'http_method':
-                'POST',
-            'app_engine_routing': {
-                'service': 'default',
+        Returns:
+            The body of a Cloud Scheduler job as a dict that is ready to be used
+            as an argument to CloudSchedulerClient.create_job.
+        """
+        return {
+            'name': _fix_absolute_import_name(absolute_import_name),
+            'description': absolute_import_name,
+            'schedule': schedule,
+            'time_zone': 'utc',
+            'app_engine_http_target': {
+                'http_method':
+                    'POST',
+                'app_engine_routing': {
+                    'service': 'default',
+                },
+                'relative_uri':
+                    '/update',
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body':
+                    json.dumps({
+                        'absolute_import_name': absolute_import_name,
+                        'configs': {
+                            'github_auth_username':
+                                self.config.github_auth_username,
+                            'github_auth_access_token':
+                                self.config.github_auth_access_token,
+                            'dashboard_oauth_client_id':
+                                self.config.dashboard_oauth_client_id
+                        }
+                    }).encode()
             },
-            'relative_uri':
-                '/update',
-            'headers': {
-                'Content-Type': 'application/json'
+            'retry_config': {
+                'retry_count': 2,
+                'min_backoff_duration': {
+                    # 1h
+                    'seconds': 60 * 60
+                }
             },
-            'body':
-                json.dumps({
-                    'absolute_import_name': absolute_import_name
-                }).encode()
-        },
-        'retry_config': {
-            'retry_count': 2
-        },
-        'attempt_deadline': {
-            # 24h
-            'seconds': 86400
+            'attempt_deadline': {
+                # 24h
+                'seconds': 24 * 60 * 60
+            }
         }
-    }
+
+
+def _fix_absolute_import_name(absolute_import_name: str) -> str:
+    """Replaces all the forward slashes and colons in an absolute import name
+    with underscores. This is for conforming to restrictions of Cloud Scheduler
+    job names."""
+    return absolute_import_name.replace('/', '_').replace(':', '_')
 
 
 def _fix_project_id(project_id: str) -> str:
