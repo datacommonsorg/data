@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-
+Class for scheduling import updates using Google Cloud Scheduler.
 """
 
 import json
@@ -35,8 +35,6 @@ class UpdateScheduler:
 
     Returns:
         Created job as a dict.
-
-
     """
     def __init__(self,
                 client: scheduler.CloudSchedulerClient,
@@ -106,7 +104,9 @@ class UpdateScheduler:
         self.client.delete_job(job_path)
 
 
-def _fix_project_id(project_id):
+def _fix_project_id(project_id: str) -> str:
+    """Converts Google Cloud project ID from the form <organization>:<project>
+    to <organization>/<project>."""
     sep = ':'
     if sep in project_id:
         organization, project = project_id.split(sep)
