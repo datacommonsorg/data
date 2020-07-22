@@ -44,7 +44,7 @@ class UpdateScheduler:
         self.client = client
         self.config = config
 
-    def schedule_update(self, absolute_import_name: str, schedule: str) -> Dict:
+    def create_schedule(self, absolute_import_name: str, schedule: str) -> Dict:
         """Schedules periodic updates for an import.
 
         Attributes:
@@ -57,7 +57,7 @@ class UpdateScheduler:
             Created job as a dict.
 
         Raises:
-            See CloudSchedulerClient.create_job.
+            Same exceptions as CloudSchedulerClient.create_job.
         """
         job = {
             'name': absolute_import_name,
@@ -88,3 +88,19 @@ class UpdateScheduler:
             self.config.gcp_project_id,
             self.config.scheduler_location)
         return dict(self.client.create_job(location_path, job))
+
+    def delete_schedule(self, absolute_import_name):
+        """Deletes an update schedule for an import.
+
+        Args:
+            absolute_import_name: Absolute import name of the import
+                as a string.
+
+        Raises:
+            Same exceptions as CloudSchedulerClient.delete_job.
+        """
+        job_path = self.client.job_path(
+            self.config.gcp_project_id,
+            self.config.scheduler_location,
+            absolute_import_name)
+        self.client.delete_job(job_path)
