@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for import_attempt_list.py.
 """
@@ -45,14 +44,17 @@ class ImportAttemptListTest(unittest.TestCase):
         run_list_resource = system_run_list.SystemRunList()
         run_list_resource.database.client = self.resource.client
 
-        attempts = [
-            {_ATTEMPT.import_name: 'cpi-u'},
-            {_ATTEMPT.import_name: 'cpi-w'},
-            {_ATTEMPT.import_name: 'cpi-w'},
-            {_ATTEMPT.import_name: 'c-cpi-u'}
-        ]
-        self.attempts = utils.ingest_import_attempts(
-            run_list_resource, self.resource, attempts)
+        attempts = [{
+            _ATTEMPT.import_name: 'cpi-u'
+        }, {
+            _ATTEMPT.import_name: 'cpi-w'
+        }, {
+            _ATTEMPT.import_name: 'cpi-w'
+        }, {
+            _ATTEMPT.import_name: 'c-cpi-u'
+        }]
+        self.attempts = utils.ingest_import_attempts(run_list_resource,
+                                                     self.resource, attempts)
 
     @mock.patch(utils.PARSE_ARGS, lambda self: {_ATTEMPT.import_name: 'ppi'})
     def test_post_run_id_not_set(self):
