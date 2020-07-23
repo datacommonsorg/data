@@ -25,29 +25,27 @@ from app import configs
 
 GITHUB_API_HOST = 'https://api.github.com'
 
-GITHUB_COMMIT_API = (
-    GITHUB_API_HOST +
-    '/repos/{owner_username}/{repo_name}/commits/{commit_sha}'
-)
+GITHUB_COMMIT_API = (GITHUB_API_HOST +
+                     '/repos/{owner_username}/{repo_name}/commits/{commit_sha}')
 
 GITHUB_CONTENT_API = (
     GITHUB_API_HOST +
-    '/repos/{owner_username}/{repo_name}/contents/{dir_path}?ref={commit_sha}'
-)
+    '/repos/{owner_username}/{repo_name}/contents/{dir_path}?ref={commit_sha}')
 
 GITHUB_USER_API = GITHUB_API_HOST + '/users/{name}'
 
 GITHUB_DOWNLOAD_API = (
     GITHUB_API_HOST +
-    '/repos/{owner_username}/{repo_name}/tarball/{commit_sha}'
-)
+    '/repos/{owner_username}/{repo_name}/tarball/{commit_sha}')
 
 
 class GitHubRepoAPI:
-    def __init__(
-            self,
-            repo_owner_username: str, repo_name: str,
-            auth_username: str = '', auth_access_token: str = ''):
+
+    def __init__(self,
+                 repo_owner_username: str,
+                 repo_name: str,
+                 auth_username: str = '',
+                 auth_access_token: str = ''):
         self.owner = repo_owner_username
         self.repo = repo_name
         self.auth = (auth_username, auth_access_token)
@@ -58,8 +56,8 @@ class GitHubRepoAPI:
         response.raise_for_status()
         return response.json()
 
-    def find_dirs_in_commit_containing_file(
-            self, commit_sha: str, containing: str) -> typing.Set[str]:
+    def find_dirs_in_commit_containing_file(self, commit_sha: str,
+                                            containing: str) -> typing.Set[str]:
         """
         Example:
             Assume the repository has a file README.md at foo/bar/README.md and
@@ -84,8 +82,9 @@ class GitHubRepoAPI:
             exist = self._dir_exists(commit_sha, dir_path)
             if status == 'removed' and not exist:
                 continue
-            found_dirs.update(self._find_dirs_up_path_containing_file(
-                commit_sha, dir_path, containing, searched))
+            found_dirs.update(
+                self._find_dirs_up_path_containing_file(commit_sha, dir_path,
+                                                        containing, searched))
         return found_dirs
 
     def download_repo(self, dest_dir: str, commit_sha: str = None) -> str:
@@ -117,8 +116,8 @@ class GitHubRepoAPI:
         })
 
         with tempfile.NamedTemporaryFile(suffix='.tar.gz') as temp_file:
-            with requests.get(download_query,
-                              auth=self.auth, stream=True) as response:
+            with requests.get(download_query, auth=self.auth,
+                              stream=True) as response:
                 # requests.get does not verify the status code.
                 # raise_for_status throws an exception if the status code
                 # is not 200.
@@ -149,8 +148,8 @@ class GitHubRepoAPI:
             'commit_sha': commit_sha
         })
 
-    def _query_changed_files_in_commit(
-            self, commit_sha: str) -> typing.List[str]:
+    def _query_changed_files_in_commit(self,
+                                       commit_sha: str) -> typing.List[str]:
         """Finds the paths of files changed by a commit.
 
         Example:
@@ -180,8 +179,8 @@ class GitHubRepoAPI:
             files.append((entry['filename'], entry['status']))
         return files
 
-    def _query_files_in_dir(
-            self, commit_sha: str, dir_path: str) -> typing.List[str]:
+    def _query_files_in_dir(self, commit_sha: str,
+                            dir_path: str) -> typing.List[str]:
         content_query = GITHUB_CONTENT_API.format_map({
             'owner_username': self.owner,
             'repo_name': self.repo,
@@ -191,9 +190,9 @@ class GitHubRepoAPI:
         response = requests.get(content_query, auth=self.auth)
         response.raise_for_status()
         content_info = response.json()
-        return [entry['name']
-                for entry in content_info
-                if entry['type'] == 'file']
+        return [
+            entry['name'] for entry in content_info if entry['type'] == 'file'
+        ]
 
     def _dir_exists(self, commit_sha: str, dir_path: str) -> bool:
         """Checks whether a directory still exists in the repository
@@ -214,8 +213,8 @@ class GitHubRepoAPI:
             response.raise_for_status()
         return response.status_code != http.HTTPStatus.NOT_FOUND
 
-    def _path_containing_file(
-            self, commit_sha: str, dir_path: str, containing: str) -> bool:
+    def _path_containing_file(self, commit_sha: str, dir_path: str,
+                              containing: str) -> bool:
         """Checks if the directory in the repository contains a file.
 
         Example:
