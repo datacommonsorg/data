@@ -102,6 +102,11 @@ def scheduled_updates():
     return dataclasses.asdict(result)
 
 
+@FLASK_APP.route('/schedule', methods=['POST'])
+def schedule_crons():
+    task_info = flask.request.get_json(force=True)
+
+
 @FLASK_APP.route('/_ah/start')
 def start():
     """Handles start up calls from App Engine."""
