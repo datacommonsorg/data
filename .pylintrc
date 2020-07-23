@@ -173,7 +173,10 @@ argument-naming-style=snake_case
 # Naming style matching correct attribute names.
 attr-naming-style=snake_case
 
-# Bad variable names which should always be refused, separated by a comma.
+# Good variable names, which should always be accepted, separated by commas.
+good-names=df
+
+# Bad variable names which should always be refused, separated by commas.
 bad-names=foo,
           bar,
           baz,

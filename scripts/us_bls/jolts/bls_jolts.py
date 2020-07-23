@@ -22,9 +22,9 @@ Download the requirements.txt via pip and execute the file with Python 3.
 
 Dataset being processed: https://download.bls.gov/pub/time.series/jt/
 """
+import textwrap
 from absl import app
 import pandas as pd
-import textwrap
 
 # JOLTS dataset contains both NAICS industry codes and BLS jolts aggregations.
 # Existing NAICS Codes are mapped directly while
@@ -69,7 +69,7 @@ def generate_cleaned_dataframe():
   Each of the files is read, combined into a single dataframe, and processed.
 
   Returns:
-    jolts_df: The 6 job data categories by industry, year, and adjustment, 
+    jolts_df: The 6 job data categories by industry, year, and adjustment,
         as a data frame.
     schema_mapping: List of tuples that contains information for each dataset.
   """
@@ -82,10 +82,10 @@ def generate_cleaned_dataframe():
 
     series_desc = pd.read_csv(
         "https://download.bls.gov/pub/time.series/jt/jt.series",
-        converters={'industry_code': lambda col: str(col)},
+        converters={'industry_code': str},
         sep="\\s+")
     assert len(series_desc.columns) == len(exp_series_columns)
-    assert False not in (series_desc.columns == exp_series_columns)
+    assert False not in series_desc.columns == exp_series_columns
     series_desc = series_desc.set_index("series_id")
 
     # Download various series datapoints
@@ -128,7 +128,7 @@ def generate_cleaned_dataframe():
     for schema_name, population_type, job_change_event, df in schema_mapping:
         # Assert columns are as expected.
         assert len(df.columns) == len(job_columns)
-        assert False not in (df.columns == job_columns)
+        assert False not in df.columns == job_columns
 
         # Add to general dataframe.
         df = df.loc[:, job_columns]

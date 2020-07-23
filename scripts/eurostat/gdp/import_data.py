@@ -18,10 +18,13 @@ Downloads and cleans GDP data from the Eurostat database.
 
     python3 import_data.py
 """
-
-import pandas as pd
 import json
+import pandas as pd
 from preprocess_data import preprocess_df
+
+# Suppress annoying pandas DF copy warnings.
+pd.options.mode.chained_assignment = None  # default='warn'
+
 
 class EurostatGDPImporter:
     """Pulls GDP data from the Eurostat database. Specifically, it processes the
@@ -33,14 +36,14 @@ class EurostatGDPImporter:
     """
     DATA_LINK = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/nama_10r_3gdp.tsv.gz"
     UNIT_CODES = {
-        "MIO_EUR":	         "Million euro",
-        "EUR_HAB":	         "Euro per inhabitant",
+        "MIO_EUR": "Million euro",
+        "EUR_HAB": "Euro per inhabitant",
         # "EUR_HAB_EU":	     "Euro per inhabitant in percentage of the EU average",
         # "EUR_HAB_EU27_2020": "Euro per inhabitant in percentage of the EU27 (from 2020) average",
-        "MIO_NAC":	         "Million units of national currency",
-        "MIO_PPS":	         "Million purchasing power standards (PPS)",
+        "MIO_NAC": "Million units of national currency",
+        "MIO_PPS": "Million purchasing power standards (PPS)",
         # "MIO_PPS_EU27_2020": "Million purchasing power standards (PPS, EU27 from 2020)",
-        "PPS_HAB":	         "Purchasing power standard (PPS) per inhabitant",
+        "PPS_HAB": "Purchasing power standard (PPS) per inhabitant",
         # "PPS_EU27_2020_HAB": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant",
         # "PPS_HAB_EU":	     "Purchasing power standard (PPS) per inhabitant in percentage of the \
         #                       EU average",
@@ -78,7 +81,10 @@ class EurostatGDPImporter:
                              "Please check you are calling preprocess_data "
                              "before clean_data.")
         self.clean_df = self.preprocessed_df[self.DESIRED_COLUMNS]
-        self.clean_df = self.clean_df.replace(to_replace=':', value='')
+
+        # Prepends nuts/ prefix to geo codes.
+        self.clean_df['geo'] = self.clean_df['geo'].apply(lambda g: "nuts/" + g)
+
         new_col_names = {}
         one_million = 1000 * 1000
 
@@ -140,8 +146,9 @@ class EurostatGDPImporter:
                           "_AsAFractionOfCount_Person"
                 else:
                     var = "dcid:Amount_EconomicActivity_GrossDomesticProduction"
-                tmcf_f.write(temp.format(i=col_num, var_ref=var,
-                                         val_col=col, unit=unit))
+                tmcf_f.write(
+                    temp.format(i=col_num, var_ref=var, val_col=col, unit=unit))
+
 
 if __name__ == "__main__":
     imp = EurostatGDPImporter()

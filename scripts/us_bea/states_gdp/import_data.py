@@ -38,7 +38,7 @@ class StateGDPDataLoader:
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    _US_STATES = [
+    US_STATES = [
         'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
         'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia',
         'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
@@ -113,7 +113,7 @@ class StateGDPDataLoader:
         df = self.raw_df.copy()
 
         # Filters out columns that are not US states (e.g. New England).
-        df = df[df['GeoName'].isin(self._US_STATES)]
+        df = df[df['GeoName'].isin(self.US_STATES)]
 
         # Gets columns that represent quarters, e.g. 2015:Q2, by matching
         # against a regular expression.
@@ -125,8 +125,8 @@ class StateGDPDataLoader:
                      value_vars=all_quarters,
                      var_name='Quarter')
 
-        df['Quarter'] = df['Quarter'].apply(self._date_to_obs_date)
-        df['GeoId'] = df['GeoFIPS'].apply(self._convert_geoid)
+        df['Quarter'] = df['Quarter'].apply(self.date_to_obs_date)
+        df['GeoId'] = df['GeoFIPS'].apply(self.convert_geoid)
 
         # Set the instance DF to have one row per geoId/quarter pair, with
         # different measurement methods as columns. This facilitates the
@@ -146,7 +146,7 @@ class StateGDPDataLoader:
         self.clean_df = self.clean_df.drop(["GeoFIPS", "Unit", "value"], axis=1)
 
     @classmethod
-    def _date_to_obs_date(cls, date):
+    def date_to_obs_date(cls, date):
         """Converts date format from YEAR:QUARTER to YEAR-MONTH,
         where the recorded month is the last month in the given quarter.
         For example: "2005:Q3" to "2005-09".
@@ -154,7 +154,7 @@ class StateGDPDataLoader:
         return date[:4] + "-" + cls._QUARTER_MONTH_MAP[date[5:]]
 
     @staticmethod
-    def _convert_geoid(fips_code):
+    def convert_geoid(fips_code):
         """Creates GeoId column. We get lucky that Data Commons's geoIds
         equal US FIPS state codes. We slice out zero-padding.
         """
@@ -177,8 +177,8 @@ class StateGDPDataLoader:
         self.clean_df.to_csv(filename)
 
 
-def main(argv):
-    del argv  # unused
+def main(_):
+    """Runs the program."""
     loader = StateGDPDataLoader()
     loader.download_data()
     loader.process_data()

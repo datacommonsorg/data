@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for utils.py.
 """
@@ -24,14 +23,11 @@ from flask_restful import reqparse
 
 from app import utils
 from app import main
-from app.service import import_attempt_database_dict
 
-IMPORT_ATTEMPT_DATABASE = 'app.resource.import_attempt' \
-                          '.import_attempt_database.ImportAttemptDatabase'
+IMPORT_ATTEMPT_DATABASE = ('app.resource.import_attempt'
+                           '.import_attempt_database.ImportAttemptDatabase')
 
 
-@mock.patch(IMPORT_ATTEMPT_DATABASE,
-            import_attempt_database_dict.ImportAttemptDatabaseDict)
 class UCTTest(unittest.TestCase):
     """Tests for utctime function."""
 
@@ -51,8 +47,6 @@ class UCTTest(unittest.TestCase):
         self.assertEqual(time_iso, time_datetime.isoformat())
 
 
-@mock.patch(IMPORT_ATTEMPT_DATABASE,
-            import_attempt_database_dict.ImportAttemptDatabaseDict)
 class RequestParserAddFieldsTest(unittest.TestCase):
     """Tests for utility functions that deal with RequestParser."""
 
@@ -63,17 +57,17 @@ class RequestParserAddFieldsTest(unittest.TestCase):
         optional_fields = [('attempt_id', str), ('import_name', str, 'store')]
         utils.add_fields(parser, optional_fields, required=False)
 
-        with main.app.test_request_context(json={'pr_number': 1}):
+        with main.FLASK_APP.test_request_context(json={'pr_number': 1}):
             args = parser.parse_args()
             self.assertEqual({}, args)
 
         only_attempt_id = {'attempt_id': "0"}
-        with main.app.test_request_context(json=only_attempt_id):
+        with main.FLASK_APP.test_request_context(json=only_attempt_id):
             args = parser.parse_args()
             self.assertEqual(only_attempt_id, args)
 
         both = {'attempt_id': '0', 'import_name': 'name'}
-        with main.app.test_request_context(json=both):
+        with main.FLASK_APP.test_request_context(json=both):
             args = parser.parse_args()
             self.assertEqual(both, args)
 
@@ -85,12 +79,12 @@ class RequestParserAddFieldsTest(unittest.TestCase):
         utils.add_fields(parser, required_fields, required=True)
 
         with_pr = {'pr_number': 1, 'import_name': 'name'}
-        with main.app.test_request_context(json=with_pr):
+        with main.FLASK_APP.test_request_context(json=with_pr):
             args = parser.parse_args()
             self.assertEqual({'pr_number': 1}, args)
 
         without_pr = {'import_name': 'name'}
-        with main.app.test_request_context(json=without_pr):
+        with main.FLASK_APP.test_request_context(json=without_pr):
             with self.assertRaises(Exception) as context:
                 parser.parse_args()
                 self.assertEqual(400, context.exception.code)
@@ -107,6 +101,7 @@ class RequestParserAddFieldsTest(unittest.TestCase):
         log_1 = {'level': 'info', 'message': 'ahhhhh'}
         log_2 = {'level': 'error', 'message': 'noooo'}
         with_pr_and_logs = {'pr_number': 1, 'logs': [log_1, log_2]}
-        with main.app.test_request_context(json=with_pr_and_logs):
+
+        with main.FLASK_APP.test_request_context(json=with_pr_and_logs):
             args = parser.parse_args()
             self.assertEqual(with_pr_and_logs, args)

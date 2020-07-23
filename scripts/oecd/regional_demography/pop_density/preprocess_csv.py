@@ -37,9 +37,12 @@ df.replace({'Region': name2dcid}, inplace=True)
 
 df['Year'] = '"' + df['Year'].astype(str) + '"'
 temp = df[['REG_ID', 'Region', 'VAR', 'Year', 'Value']]
-temp_multi_index = temp.pivot_table(values='Value', index=['REG_ID', 'Region', 'Year'],
+temp_multi_index = temp.pivot_table(values='Value',
+                                    index=['REG_ID', 'Region', 'Year'],
                                     columns=['VAR'])
-df_cleaned = multi_index_to_single_index(temp_multi_index)[['REG_ID', 'Region', 'Year', 'POP_DEN', 'SURF']]
+df_cleaned = multi_index_to_single_index(temp_multi_index)[[
+    'REG_ID', 'Region', 'Year', 'POP_DEN', 'SURF'
+]]
 
 VAR_to_statsvars = {
     'POP_DEN': 'Count_Person_PerArea',
@@ -47,4 +50,6 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv('OECD_pop_density_cleaned.csv', index=False, quoting=csv.QUOTE_NONE)
+df_cleaned.to_csv('OECD_pop_density_cleaned.csv',
+                  index=False,
+                  quoting=csv.QUOTE_NONE)

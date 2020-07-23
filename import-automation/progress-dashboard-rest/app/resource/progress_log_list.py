@@ -13,6 +13,8 @@
 # limitations under the License.
 """
 Progress log list resource associated with the endpoint '/logs'.
+See app/model/progress_log_model.py and app/resource/progress_log.py for what
+a progress log is.
 """
 
 import http
@@ -56,12 +58,12 @@ class ProgressLogList(progress_log.ProgressLog):
         request body.
 
         Log level can only be one of the levels defined by LogLevel.
-        A progress log must be linked to either a system run or an import
+        A progress log must be linked to a system run, an import
         attempt, or both.
 
         Returns:
-            The created system run as a datastore Entity object with
-            run_id set. Otherwise, (error message, error code), where
+            The created progress log as a datastore Entity object with
+            log_id set. Otherwise, (error message, error code), where
             the error message is a string and the error code is an int.
         """
         args = progress_log.ProgressLog.parser.parse_args()

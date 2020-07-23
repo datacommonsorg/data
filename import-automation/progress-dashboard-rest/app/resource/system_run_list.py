@@ -11,10 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 System run lists, the resource associated with the endpoint '/system_runs'.
 """
+
 import http
 
 from app.model import system_run_model
@@ -42,8 +42,7 @@ class SystemRunList(system_run.SystemRun):
         """
         args = system_run.SystemRunByID.parser.parse_args()
         for field in args:
-            # TODO(intrepiditee): Create fields
-            if field not in system_run_model.fields:
+            if field not in system_run_model.FIELDS:
                 return (f'Field {field} is not a valid field for a system run',
                         http.HTTPStatus.BAD_REQUEST)
         return self.database.filter(args)

@@ -11,15 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for base_database.py.
 
-The Datastore emulator must be installed. See
-https://cloud.google.com/datastore/docs/tools/datastore-emulator#before_you_begin
-for requirements.
-
-TODO(intrepiditee): decide later whether test filenames start with
+TODO(intrepiditee): Decide later whether test filenames start with
 test_ or end with _test or use a pattern that supports both.
 """
 
@@ -32,24 +27,20 @@ from app.service import base_database
 from test import utils
 
 
+def setUpModule():
+    utils.EMULATOR.start_emulator()
+
+
 class BaseDatabaseTest(unittest.TestCase):
     """Tests for BaseDatabase."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
     def setUp(self):
         """Test setup that runs before every test."""
         self.id_field = 'entity_id'
-        self.database = base_database.BaseDatabase(
-            kind='kind', id_field=self.id_field)
+        self.database = base_database.BaseDatabase(kind='kind',
+                                                   id_field=self.id_field)
 
     def test_make_new(self):
         """Tests that get returns a new import attempt when
@@ -109,10 +100,7 @@ class BaseDatabaseTest(unittest.TestCase):
         for entity in entities:
             self.database.save(entity)
 
-        filters = {
-            'import_name': 'name',
-            'pr_number': 1
-        }
+        filters = {'import_name': 'name', 'pr_number': 1}
 
         retrieved = self.database.filter(filters)
         self.assertIn(entity_1, retrieved)

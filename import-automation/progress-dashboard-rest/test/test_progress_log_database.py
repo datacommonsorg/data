@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for progress_log_database.py.
 """
@@ -25,20 +24,15 @@ from test import utils
 from app.model import progress_log_model
 from app.service import progress_log_database
 
-
 _MODEL = progress_log_model.ProgressLogModel
+
+
+def setUpModule():
+    utils.EMULATOR.start_emulator()
 
 
 class ProgressLogDatabaseTest(unittest.TestCase):
     """Tests for BaseDatabase."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.emulator = utils.start_emulator()
-
-    @classmethod
-    def tearDownClass(cls):
-        utils.terminate_emulator(cls.emulator)
 
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
@@ -55,8 +49,8 @@ class ProgressLogDatabaseTest(unittest.TestCase):
         self.logs_save_content = [logs[0], logs[1]]
         self.logs_not_save_content = [logs[2], logs[3]]
         for i, log in enumerate(self.logs_save_content):
-            self.logs_save_content[i] = self.database.save(
-                log, save_content=True)
+            self.logs_save_content[i] = self.database.save(log,
+                                                           save_content=True)
         for i, log in enumerate(self.logs_not_save_content):
             self.logs_not_save_content[i] = self.database.save(
                 log, save_content=False)
@@ -66,8 +60,8 @@ class ProgressLogDatabaseTest(unittest.TestCase):
         expected = ['first', 'second']
         for i, message in enumerate(expected):
             log = self.logs_save_content[i]
-            retrieved = self.database.get(
-                entity_id=log[_MODEL.log_id], load_content=True)
+            retrieved = self.database.get(entity_id=log[_MODEL.log_id],
+                                          load_content=True)
             self.assertEqual(message, retrieved[_MODEL.message])
 
     def test_not_load_content(self):
@@ -85,9 +79,10 @@ class ProgressLogDatabaseTest(unittest.TestCase):
             log_id = self.logs_not_save_content[i][_MODEL.log_id]
             retrieved = self.database.get(entity_id=log_id, load_content=False)
             self.assertEqual(message, retrieved[_MODEL.message])
-            self.assertRaises(
-                exceptions.NotFound,
-                self.database.get, entity_id=log_id, load_content=True)
+            self.assertRaises(exceptions.NotFound,
+                              self.database.get,
+                              entity_id=log_id,
+                              load_content=True)
 
     def test_load_logs(self):
         """Tests that load_logs correctly loads log messages and throws
@@ -98,6 +93,5 @@ class ProgressLogDatabaseTest(unittest.TestCase):
         self.assertEqual(['first', 'second'], messages)
 
         self.assertRaises(
-            exceptions.NotFound,
-            self.database.load_logs,
+            exceptions.NotFound, self.database.load_logs,
             [log[_MODEL.log_id] for log in self.logs_not_save_content])

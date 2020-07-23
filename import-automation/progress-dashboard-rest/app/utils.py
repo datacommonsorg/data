@@ -11,14 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Utility functions.
 """
 
 import datetime
+import uuid
 
-import google.cloud.logging
+from google.cloud import logging
+from google.cloud import datastore
+from google.cloud import storage
+
+from app import configs
 
 
 def utctime():
@@ -45,9 +49,12 @@ def add_fields(parser, fields, required=True):
         field_name = field[0]
         data_type = field[1] if len(field) > 1 else str
         action = field[2] if len(field) > 2 else 'store'
-        parser.add_argument(
-            field_name, type=data_type, action=action,
-            store_missing=False, required=required, location='json')
+        parser.add_argument(field_name,
+                            type=data_type,
+                            action=action,
+                            store_missing=False,
+                            required=required,
+                            location='json')
 
 
 def setup_logging():
@@ -55,6 +62,34 @@ def setup_logging():
 
     Only logs at INFO level or higher will be captured.
     """
-    client = google.cloud.logging.Client()
+    client = logging.Client()
     client.get_default_handler()
     client.setup_logging()
+
+
+def create_storage_bucket(project=configs.PROJECT_ID,
+                          bucket_name=configs.LOG_BUCKET_NAME):
+    return storage.Client(project).bucket(bucket_name)
+
+
+def create_datastore_client(project=configs.PROJECT_ID,
+                            namespace=configs.DASHBOARD_NAMESPACE,
+                            credentials=None):
+    """
+    Args:
+        project: ID of the Google Cloud project as a string.
+        namespace: Namespace in which the import attempts will be stored
+            as a string.
+        credentials: Credentials to authenticate with Datastore.
+    """
+    return datastore.Client(project=project,
+                            namespace=namespace,
+                            credentials=credentials)
+
+
+def get_id():
+    return uuid.uuid4().hex
+
+
+def list_to_str(a_list, sep=', '):
+    return sep.join(a_list)
