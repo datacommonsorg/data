@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Progress log list resource associated with the endpoint '/logs'.
 See app/model/progress_log_model.py and app/resource/progress_log.py for what
@@ -74,8 +73,7 @@ class ProgressLogList(progress_log.ProgressLog):
         time_logged = args.setdefault(_LOG.time_logged, utils.utctime())
         if not validation.iso_utc(time_logged):
             return (f'time_logged ({time_logged}) is not in ISO format '
-                    f'with UTC timezone',
-                    http.HTTPStatus.FORBIDDEN)
+                    f'with UTC timezone', http.HTTPStatus.FORBIDDEN)
 
         run_id = args.get(_LOG.run_id)
         attempt_id = args.get(_LOG.attempt_id)
@@ -92,8 +90,8 @@ class ProgressLogList(progress_log.ProgressLog):
         if attempt_id:
             attempt = self.attempt_database.get(attempt_id)
             if not attempt:
-                return validation.get_not_found_error(
-                    _ATTEMPT.attempt_id, attempt_id)
+                return validation.get_not_found_error(_ATTEMPT.attempt_id,
+                                                      attempt_id)
         if run and attempt:
             if attempt_id not in run[_RUN.import_attempts]:
                 return ('The import attempt specified by the attempt_id '
@@ -108,8 +106,7 @@ class ProgressLogList(progress_log.ProgressLog):
         with self.client.transaction():
             log = self.log_database.save(log, save_content=True)
             if run:
-                self.run_database.save(
-                    add_log_to_entity(log.key.name, run))
+                self.run_database.save(add_log_to_entity(log.key.name, run))
             if attempt:
                 self.attempt_database.save(
                     add_log_to_entity(log.key.name, attempt))

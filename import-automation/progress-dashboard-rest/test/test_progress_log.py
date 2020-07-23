@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for progress_log.py.
 """
@@ -69,20 +68,28 @@ class ProgressLogListTest(unittest.TestCase):
         self.by_run_id.log_database.message_manager = self.manager
         self.by_attempt_id.log_database.message_manager = self.manager
 
-        runs = [
-            {_RUN.branch_name: 'test-branch', _RUN.pr_number: 0},
-            {_RUN.branch_name: 'prod-branch', _RUN.pr_number: 1}
-        ]
+        runs = [{
+            _RUN.branch_name: 'test-branch',
+            _RUN.pr_number: 0
+        }, {
+            _RUN.branch_name: 'prod-branch',
+            _RUN.pr_number: 1
+        }]
         self.runs = utils.ingest_system_runs(run_list_resource, runs)
 
         # Linked to the first run
         attempts = [
-            {_ATTEMPT.import_name: 'cpi-u'},
-            {_ATTEMPT.import_name: 'cpi-w'},
+            {
+                _ATTEMPT.import_name: 'cpi-u'
+            },
+            {
+                _ATTEMPT.import_name: 'cpi-w'
+            },
         ]
-        self.attempts = utils.ingest_import_attempts(
-            run_list_resource, attempt_list_resource,
-            attempts, system_run=self.runs[0])
+        self.attempts = utils.ingest_import_attempts(run_list_resource,
+                                                     attempt_list_resource,
+                                                     attempts,
+                                                     system_run=self.runs[0])
 
         self.logs = [
             # Linked to the first attempt
