@@ -12,29 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+sys.path.append('../')
+from utils import multi_index_to_single_index, generate_geo_id
 import csv
 import json
 import pandas as pd
 
 
-def multi_index_to_single_index(df):
-    columns = []
-    for column in df.columns:
-        column = list(column)
-        column[1] = str(column[1])
-        columns.append(''.join(column))
-
-    df.columns = columns
-    return df.reset_index()
-
-
+# Read csv from source csv
 df = pd.read_csv('REGION_DEMOGR_death_tl3.csv')
-
+df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
 name2dcid = dict(json.loads(open('../name2dcid.json').read()))
-df = df[df['Region'].isin(name2dcid.keys())]
-# Second, replace the names with dcids.
-df.replace({'Region': name2dcid}, inplace=True)
+nuts = dict(json.loads(open('../region_nuts_codes.json').read()))
+df = df[df['REG_ID'].isin(nuts.keys()) | df['Region'].isin(name2dcid.keys())]
+# Second, replace the names with dcids
+df['Region'] = df.apply(lambda row: generate_geo_id(row, nuts, name2dcid), axis=1)
 df['Year'] = '"' + df['Year'].astype(str) + '"'
 
 temp = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
