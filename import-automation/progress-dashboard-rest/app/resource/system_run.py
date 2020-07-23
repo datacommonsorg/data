@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 System run resource associated with the endpoint
 '/system_runs/<string:run_id>'.
@@ -73,18 +72,12 @@ class SystemRun(flask_restful.Resource):
             system runs using the client
     """
     parser = reqparse.RequestParser()
-    optional_fields = (
-        (_MODEL.run_id, str),
-        (_MODEL.repo_name,),
-        (_MODEL.branch_name,),
-        (_MODEL.pr_number, int),
-        (_MODEL.commit_sha,),
-        (_MODEL.time_created,),
-        (_MODEL.time_completed,),
-        (_MODEL.import_attempts, str, 'append'),
-        (_MODEL.logs, str, 'append'),
-        (_MODEL.status,)
-    )
+    optional_fields = ((_MODEL.run_id, str), (_MODEL.repo_name,),
+                       (_MODEL.branch_name,), (_MODEL.pr_number, int),
+                       (_MODEL.commit_sha,), (_MODEL.time_created,),
+                       (_MODEL.time_completed,), (_MODEL.import_attempts, str,
+                                                  'append'),
+                       (_MODEL.logs, str, 'append'), (_MODEL.status,))
     utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self):
@@ -99,6 +92,7 @@ class SystemRunByID(SystemRun):
 
     See SystemRun.
     """
+
     def get(self, run_id):
         """Retrieves a system run by its run_id.
 
