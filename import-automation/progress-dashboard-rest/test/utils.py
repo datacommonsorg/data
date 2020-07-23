@@ -19,6 +19,7 @@ PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
 
 
 class LogMessageManagerMock:
+
     def __init__(self):
         self.data = {}
 
@@ -35,6 +36,7 @@ class LogMessageManagerMock:
 
 
 class DatastoreEmulator:
+
     def __init__(self):
         self.process = None
 
@@ -84,14 +86,15 @@ atexit.register(EMULATOR.terminate_emulator)
 
 
 def create_test_datastore_client():
-    return datastore.Client(
-        project=utils.get_id(),
-        namespace=utils.get_id(),
-        credentials=credentials.AnonymousCredentials())
+    return datastore.Client(project=utils.get_id(),
+                            namespace=utils.get_id(),
+                            credentials=credentials.AnonymousCredentials())
 
 
-def ingest_import_attempts(
-        run_list_resource, attempt_list_resource, attempts, system_run=None):
+def ingest_import_attempts(run_list_resource,
+                           attempt_list_resource,
+                           attempts,
+                           system_run=None):
     with mock.patch(PARSE_ARGS) as parse_args:
         if system_run:
             parse_args.side_effect = [system_run] + attempts
