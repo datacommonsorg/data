@@ -34,7 +34,7 @@ steps:
 - id: python_test_import_automation
   name: python:3.7
   entrypoint: python3
-  args: ["-m", "unittest", "discover", "-v", "-s", "import_automation/", "-p", "*_test.py"]
+  args: ["-m", "unittest", "discover", "-v", "-s", "import-automation/", "-p", "*_test.py"]
   # In cloudbuild, everything happens under /workspace path
   env: ["PYTHONPATH=/workspace"]
   waitFor:
