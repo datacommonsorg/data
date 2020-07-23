@@ -103,6 +103,7 @@ class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
         ind_conv_fn = (import_industry_data_and_gen_mcf
                        .StateGDPIndustryDataLoader
                        .convert_industry_class)
+
         prefix = "dcs:USStateQuarterlyIndustryGDP_NAICS_"
         self.assertEqual(ind_conv_fn("35"), prefix + "35")
         self.assertEqual(ind_conv_fn("987"), prefix + "987")
