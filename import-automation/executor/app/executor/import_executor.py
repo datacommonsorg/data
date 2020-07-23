@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Import executor that downloads GitHub repositories and executes data imports
 based on manifests.
@@ -64,6 +63,7 @@ class ExecutionResult:
 
 
 class ExecutionError(Exception):
+
     def __init__(self, execution_result):
         super().__init__()
         self.result = execution_result
@@ -83,6 +83,7 @@ class ImportExecutor:
             import progress dashboard. If not provided, the executor will not
             communicate with the dashboard.
     """
+
     def __init__(self,
                  uploader: file_uploader.FileUploader,
                  github: github_api.GitHubRepoAPI,
@@ -115,20 +116,18 @@ class ImportExecutor:
         run_id = None
         try:
             if self.dashboard:
-                run_id = _init_run_helper(
-                    dashboard=self.dashboard,
-                    commit_sha=commit_sha,
-                    repo_name=repo_name,
-                    branch_name=branch_name,
-                    pr_number=pr_number)['run_id']
+                run_id = _init_run_helper(dashboard=self.dashboard,
+                                          commit_sha=commit_sha,
+                                          repo_name=repo_name,
+                                          branch_name=branch_name,
+                                          pr_number=pr_number)['run_id']
         except Exception:
             logging.exception(_SYSTEM_RUN_INIT_FAILED_MESSAGE)
             return _create_system_run_init_failed_result(traceback.format_exc())
 
-        return _run_and_handle_exception(
-            run_id, self.dashboard,
-            self._execute_imports_on_commit_helper,
-            commit_sha, run_id)
+        return _run_and_handle_exception(run_id, self.dashboard,
+                                         self._execute_imports_on_commit_helper,
+                                         commit_sha, run_id)
 
     def execute_imports_on_update(self,
                                   absolute_import_name: str) -> ExecutionResult:
@@ -152,10 +151,9 @@ class ImportExecutor:
             logging.exception(_SYSTEM_RUN_INIT_FAILED_MESSAGE)
             return _create_system_run_init_failed_result(traceback.format_exc())
 
-        return _run_and_handle_exception(
-            run_id, self.dashboard,
-            self._execute_imports_on_update_helper,
-            absolute_import_name, run_id)
+        return _run_and_handle_exception(run_id, self.dashboard,
+                                         self._execute_imports_on_update_helper,
+                                         absolute_import_name, run_id)
 
     def _execute_imports_on_update_helper(
             self,
@@ -166,8 +164,8 @@ class ImportExecutor:
         with tempfile.TemporaryDirectory() as tmpdir:
             logging.info('%s: downloading repo', absolute_import_name)
             repo_dirname = self.github.download_repo(tmpdir)
-            logging.info(
-                absolute_import_name + ': downloaded repo ' + repo_dirname)
+            logging.info(absolute_import_name + ': downloaded repo ' +
+                         repo_dirname)
             if self.dashboard:
                 self.dashboard.info(f'Downloaded repo: {repo_dirname}',
                                     run_id=run_id)
@@ -181,8 +179,7 @@ class ImportExecutor:
             manifest_path = os.path.join(absolute_import_dir,
                                          self.config.manifest_filename)
             manifest = parse_manifest(manifest_path)
-            logging.info('%s: loaded manifest %s',
-                         absolute_import_name,
+            logging.info('%s: loaded manifest %s', absolute_import_name,
                          manifest_path)
 
             for spec in manifest['import_specifications']:
@@ -195,16 +192,19 @@ class ImportExecutor:
                             import_spec=spec,
                             run_id=run_id)
                     except Exception:
-                        raise ExecutionError(ExecutionResult(
-                            'failed', executed_imports, traceback.format_exc()))
+                        raise ExecutionError(
+                            ExecutionResult('failed', executed_imports,
+                                            traceback.format_exc()))
                     executed_imports.append(
                         f'{import_dir}:{import_name_in_spec}')
 
         logging.info('%s: END', absolute_import_name)
         return ExecutionResult('succeeded', executed_imports, 'No issues')
 
-    def _execute_imports_on_commit_helper(
-            self, commit_sha: str, run_id: str = None) -> ExecutionResult:
+    def _execute_imports_on_commit_helper(self,
+                                          commit_sha: str,
+                                          run_id: str = None
+                                         ) -> ExecutionResult:
 
         commit_info = self.github.query_commit(commit_sha)
         commit_message = commit_info['commit']['message']
@@ -215,8 +215,7 @@ class ImportExecutor:
             commit_sha, self.config.manifest_filename)
         # Import targets specified in the commit message,
         # e.g., 'scripts/us_fed/treasury:constant_maturity', 'constant_maturity'
-        targets = import_target.parse_commit_message_targets(
-            commit_message)
+        targets = import_target.parse_commit_message_targets(commit_message)
         if not targets:
             message = ('No import target specified in commit message '
                        '({commit_message})')
@@ -225,20 +224,19 @@ class ImportExecutor:
         with tempfile.TemporaryDirectory() as tmpdir:
             repo_dir = self.github.download_repo(tmpdir, commit_sha)
             if self.dashboard:
-                self.dashboard.info(
-                    f'Downloaded repo: {repo_dir}', run_id=run_id)
+                self.dashboard.info(f'Downloaded repo: {repo_dir}',
+                                    run_id=run_id)
             repo_dir = os.path.join(tmpdir, repo_dir)
 
-            validation.import_targets_valid(targets,
-                                            list(manifest_dirs),
-                                            repo_dir,
-                                            self.config.manifest_filename)
+            validation.are_import_targets_valid(targets, list(manifest_dirs),
+                                                repo_dir,
+                                                self.config.manifest_filename)
 
             # Import targets specified in the commit message can be absolute,
             # e.g., 'scripts/us_fed/treasury:constant_maturity'.
             # Add the directory components, e.g., 'scripts/us_fed/treasury',
             # to manifest_dirs.
-            for target in import_target.get_absolute_import_names(targets):
+            for target in import_target.filter_absolute_import_names(targets):
                 import_dir, _ = import_target.split_absolute_import_name(target)
                 manifest_dirs.add(import_dir)
             # At this point, manifest_dirs contains all the directories that
@@ -250,7 +248,7 @@ class ImportExecutor:
                 manifest_path = os.path.join(absolute_import_dir,
                                              self.config.manifest_filename)
                 manifest = parse_manifest(manifest_path)
-                validation.manifest_valid(manifest, repo_dir, import_dir)
+                validation.is_manifest_valid(manifest, repo_dir, import_dir)
 
                 for spec in manifest['import_specifications']:
                     import_name = spec['import_name']
@@ -264,8 +262,9 @@ class ImportExecutor:
                             import_spec=spec,
                             run_id=run_id)
                     except Exception:
-                        raise ExecutionError(ExecutionResult(
-                            'failed', executed_imports, traceback.format_exc()))
+                        raise ExecutionError(
+                            ExecutionResult('failed', executed_imports,
+                                            traceback.format_exc()))
                     absolute_name = import_target.get_absolute_import_name(
                         import_dir, import_name)
                     executed_imports.append(absolute_name)
@@ -300,18 +299,16 @@ class ImportExecutor:
                 provenance_description=import_spec['provenance_description'])
             attempt_id = attempt['attempt_id']
         try:
-            self._import_one_helper(
-                relative_import_dir=relative_import_dir,
-                absolute_import_dir=absolute_import_dir,
-                import_spec=import_spec,
-                run_id=run_id,
-                attempt_id=attempt_id)
+            self._import_one_helper(relative_import_dir=relative_import_dir,
+                                    absolute_import_dir=absolute_import_dir,
+                                    import_spec=import_spec,
+                                    run_id=run_id,
+                                    attempt_id=attempt_id)
         except Exception as exc:
             if self.dashboard:
-                _mark_import_attempt_failed(
-                    attempt_id=attempt_id,
-                    message=traceback.format_exc(),
-                    dashboard=self.dashboard)
+                _mark_import_attempt_failed(attempt_id=attempt_id,
+                                            message=traceback.format_exc(),
+                                            dashboard=self.dashboard)
             raise exc
 
     def _import_one_helper(self,
@@ -325,19 +322,21 @@ class ImportExecutor:
             for url in urls:
                 utils.download_file(url, '')
                 if self.dashboard:
-                    self.dashboard.info(
-                        f'Downloaded: {url}', attempt_id=attempt_id)
+                    self.dashboard.info(f'Downloaded: {url}',
+                                        attempt_id=attempt_id)
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            requirements_path = os.path.join(
-                absolute_import_dir, self.config.requirements_filename)
+            requirements_path = os.path.join(absolute_import_dir,
+                                             self.config.requirements_filename)
             interpreter_path, process = _create_venv(
-                requirements_path, tmpdir,
+                requirements_path,
+                tmpdir,
                 timeout=self.config.venv_create_timeout)
 
-            _log_process(
-                process=process,
-                dashboard=self.dashboard, attempt_id=attempt_id, run_id=run_id)
+            _log_process(process=process,
+                         dashboard=self.dashboard,
+                         attempt_id=attempt_id,
+                         run_id=run_id)
             process.check_returncode()
 
             script_paths = import_spec.get('scripts')
@@ -347,11 +346,10 @@ class ImportExecutor:
                     script_path=os.path.join(absolute_import_dir, path),
                     timeout=self.config.user_script_timeout,
                     cwd=absolute_import_dir)
-                _log_process(
-                    process=process,
-                    dashboard=self.dashboard,
-                    attempt_id=attempt_id,
-                    run_id=run_id)
+                _log_process(process=process,
+                             dashboard=self.dashboard,
+                             attempt_id=attempt_id,
+                             run_id=run_id)
                 process.check_returncode()
 
         self._upload_import_inputs(
@@ -362,14 +360,13 @@ class ImportExecutor:
 
         # TODO(intrepiditee): Call the dev importer
 
-    def _upload_import_inputs(
-            self,
-            import_dir: str,
-            output_dir: str,
-            import_inputs: typing.List[typing.Dict[str, str]],
-            attempt_id: str = None) -> None:
+    def _upload_import_inputs(self,
+                              import_dir: str,
+                              output_dir: str,
+                              import_inputs: typing.List[typing.Dict[str, str]],
+                              attempt_id: str = None) -> None:
 
-        version = _clean_time(utils.pttime())
+        version = _clean_time(utils.pacific_time())
         for import_input in import_inputs:
             for input_type in self.config.import_input_types:
                 path = import_input.get(input_type)
@@ -394,10 +391,11 @@ class ImportExecutor:
         self.uploader.upload_file(src, dest)
 
 
-def _run_and_handle_exception(
-        run_id: typing.Optional[str],
-        dashboard: typing.Optional[dashboard_api.DashboardAPI],
-        exec_func: typing.Callable, *args) -> ExecutionResult:
+def _run_and_handle_exception(run_id: typing.Optional[str],
+                              dashboard: typing.Optional[
+                                  dashboard_api.DashboardAPI],
+                              exec_func: typing.Callable,
+                              *args) -> ExecutionResult:
     """Runs a method of ImportExecutor that executes imports and handles
     its exceptions.
 
@@ -428,10 +426,9 @@ def _run_and_handle_exception(
         return ExecutionResult('failed', [], message)
 
 
-def _run_with_timeout(
-        args: typing.List[str],
-        timeout: float,
-        cwd: str = None) -> subprocess.CompletedProcess:
+def _run_with_timeout(args: typing.List[str],
+                      timeout: float,
+                      cwd: str = None) -> subprocess.CompletedProcess:
     """Runs a command in a subprocess.
 
     Args:
@@ -442,13 +439,15 @@ def _run_with_timeout(
     Returns:
         subprocess.CompletedProcess object used to run the command.
     """
-    return subprocess.run(
-        args, capture_output=True, text=True, timeout=timeout, cwd=cwd)
+    return subprocess.run(args,
+                          capture_output=True,
+                          text=True,
+                          timeout=timeout,
+                          cwd=cwd)
 
 
 def _create_venv(
-        requirements_path: str,
-        venv_dir: str,
+        requirements_path: str, venv_dir: str,
         timeout: float) -> typing.Tuple[str, subprocess.CompletedProcess]:
     """Creates a Python virtual environment.
 
@@ -482,12 +481,11 @@ def _create_venv(
         return os.path.join(venv_dir, 'bin/python3'), process
 
 
-def _run_user_script(
-        interpreter_path: str,
-        script_path: str,
-        timeout: float,
-        args: list = None,
-        cwd: str = None) -> subprocess.CompletedProcess:
+def _run_user_script(interpreter_path: str,
+                     script_path: str,
+                     timeout: float,
+                     args: list = None,
+                     cwd: str = None) -> subprocess.CompletedProcess:
     """Runs a user Python script.
 
     Args:
@@ -509,16 +507,15 @@ def _run_user_script(
     """
     if args is None:
         args = []
-    return _run_with_timeout(
-        [interpreter_path, script_path] + list(args), timeout, cwd)
+    return _run_with_timeout([interpreter_path, script_path] + list(args),
+                             timeout, cwd)
 
 
-def _init_run_helper(
-        dashboard: dashboard_api.DashboardAPI,
-        commit_sha: str = None,
-        repo_name: str = None,
-        branch_name: str = None,
-        pr_number: str = None) -> dict:
+def _init_run_helper(dashboard: dashboard_api.DashboardAPI,
+                     commit_sha: str = None,
+                     repo_name: str = None,
+                     branch_name: str = None,
+                     pr_number: str = None) -> dict:
     run = {}
     if commit_sha:
         run['commit_sha'] = commit_sha
@@ -531,13 +528,10 @@ def _init_run_helper(
     return dashboard.init_run(run)
 
 
-def _init_attempt_helper(
-        dashboard: dashboard_api.DashboardAPI,
-        run_id: str,
-        import_name: str,
-        absolute_import_name: str,
-        provenance_url: str,
-        provenance_description: str) -> dict:
+def _init_attempt_helper(dashboard: dashboard_api.DashboardAPI, run_id: str,
+                         import_name: str, absolute_import_name: str,
+                         provenance_url: str,
+                         provenance_description: str) -> dict:
     return dashboard.init_attempt({
         'run_id': run_id,
         'import_name': import_name,
@@ -547,25 +541,21 @@ def _init_attempt_helper(
     })
 
 
-def _mark_system_run_failed(
-        run_id: str,
-        message: str,
-        dashboard: dashboard_api.DashboardAPI) -> dict:
+def _mark_system_run_failed(run_id: str, message: str,
+                            dashboard: dashboard_api.DashboardAPI) -> dict:
     dashboard.critical(message, run_id=run_id)
     return dashboard.update_run({'status': 'failed'}, run_id=run_id)
 
 
-def _mark_import_attempt_failed(
-        attempt_id: str,
-        message: str,
-        dashboard: dashboard_api.DashboardAPI) -> dict:
+def _mark_import_attempt_failed(attempt_id: str, message: str,
+                                dashboard: dashboard_api.DashboardAPI) -> dict:
     dashboard.critical(message, attempt_id=attempt_id)
     return dashboard.update_attempt({'status': 'failed'}, attempt_id=attempt_id)
 
 
 def _create_system_run_init_failed_result(trace):
-    return ExecutionResult(
-        'failed', [], f'{_SYSTEM_RUN_INIT_FAILED_MESSAGE}\n{trace}')
+    return ExecutionResult('failed', [],
+                           f'{_SYSTEM_RUN_INIT_FAILED_MESSAGE}\n{trace}')
 
 
 def _clean_time(time: str) -> str:
@@ -589,11 +579,9 @@ def _construct_process_message(message: str,
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
     if process.stdout:
-        message += ('\n[Subprocess stdout]:\n'
-                    f'{process.stdout}')
+        message += ('\n[Subprocess stdout]:\n' f'{process.stdout}')
     if process.stderr:
-        message += ('\n[Subprocess stderr]:\n'
-                    f'{process.stderr}')
+        message += ('\n[Subprocess stderr]:\n' f'{process.stderr}')
     return message
 
 

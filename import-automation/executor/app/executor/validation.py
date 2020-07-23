@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Functions for validating import targets specified in commit messages, manifests,
 and import specifications.
@@ -25,19 +24,11 @@ from app.executor import import_executor
 from app.executor import import_target
 
 _TASK_INFO_REQUIRED_FIELDS = [
-    'REPO_NAME',
-    'BRANCH_NAME',
-    'COMMIT_SHA',
-    'PR_NUMBER'
+    'REPO_NAME', 'BRANCH_NAME', 'COMMIT_SHA', 'PR_NUMBER'
 ]
-_MANIFEST_REQUIRED_FIELDS = [
-    'import_specifications'
-]
+_MANIFEST_REQUIRED_FIELDS = ['import_specifications']
 _IMPORT_SPECIFICATION_REQUIRED_FIELDS = [
-    'import_name',
-    'provenance_url',
-    'provenance_description',
-    'curator_emails'
+    'import_name', 'provenance_url', 'provenance_description', 'curator_emails'
 ]
 
 
@@ -58,10 +49,9 @@ def is_task_info_valid(task_info: typing.Dict):
                          f'task info {task_info}')
 
 
-def is_import_targets_valid(import_targets: typing.List[str],
-                            manifest_dirs: typing.List[str],
-                            repo_dir: str,
-                            manifest_filename: str) -> None:
+def are_import_targets_valid(import_targets: typing.List[str],
+                             manifest_dirs: typing.List[str], repo_dir: str,
+                             manifest_filename: str) -> None:
     """Ensures that the import targets specified in the commit message
     are valid.
 
@@ -89,9 +79,8 @@ def is_import_targets_valid(import_targets: typing.List[str],
     Raises:
         ValueError: Some of the targets are not valid.
     """
-    relative_names = import_target.get_relative_import_names(import_targets)
-    if ('all' not in import_targets and
-            len(manifest_dirs) > 1 and
+    relative_names = import_target.filter_relative_import_names(import_targets)
+    if ('all' not in import_targets and len(manifest_dirs) > 1 and
             relative_names):
         raise ValueError('Commit touched multiple directories '
                          f'({manifest_dirs}) but {relative_names} '
@@ -99,19 +88,19 @@ def is_import_targets_valid(import_targets: typing.List[str],
     if len(manifest_dirs) == 1:
         import_dir = manifest_dirs[0]
         for import_name in relative_names:
-            _import_name_exists_in_manifest(
-                repo_dir, import_dir, import_name, manifest_filename)
+            _import_name_exists_in_manifest(repo_dir, import_dir, import_name,
+                                            manifest_filename)
 
-    absolute_names = import_target.get_absolute_import_names(import_targets)
+    absolute_names = import_target.filter_absolute_import_names(import_targets)
     for absolute_name in absolute_names:
         import_dir, import_name = import_target.split_absolute_import_name(
             absolute_name)
-        _import_name_exists_in_manifest(
-            repo_dir, import_dir, import_name, manifest_filename)
+        _import_name_exists_in_manifest(repo_dir, import_dir, import_name,
+                                        manifest_filename)
 
 
-def is_manifest_valid(
-        manifest: typing.Dict, repo_dir: str, import_dir: str) -> None:
+def is_manifest_valid(manifest: typing.Dict, repo_dir: str,
+                      import_dir: str) -> None:
     """Ensures that the manifest is valid.
 
     Checks that:
@@ -127,8 +116,7 @@ def is_manifest_valid(
     Raises:
         ValueError: THe manifest is not valid.
     """
-    missing_keys = _filter_missing_keys(_MANIFEST_REQUIRED_FIELDS,
-                                        manifest)
+    missing_keys = _filter_missing_keys(_MANIFEST_REQUIRED_FIELDS, manifest)
     if missing_keys:
         raise ValueError(f'Missing {utils.list_to_str(missing_keys)} in '
                          f'manifest ({manifest})')
@@ -148,12 +136,14 @@ def _get_import_names_in_manifest(manifest: typing.Dict) -> typing.List[str]:
     Returns:
         List of import names in the manifest each as a string.
     """
-    return [spec.get('import_name')
-            for spec in manifest.get('import_specifications', [])]
+    return [
+        spec.get('import_name')
+        for spec in manifest.get('import_specifications', [])
+    ]
 
 
-def _import_name_exists_in_manifest(
-        repo_dir, import_dir, import_name, manifest_filename):
+def _import_name_exists_in_manifest(repo_dir, import_dir, import_name,
+                                    manifest_filename):
     """Ensures that an import name exists in one of the import specifications
     in a manifest.
 
@@ -205,8 +195,10 @@ def _is_import_spec_valid(import_spec, repo_dir, import_dir):
         raise ValueError(f'Missing {utils.list_to_str(missing_keys)} in '
                          f'import specification ({import_spec})')
 
-    absolute_script_paths = [os.path.join(repo_dir, import_dir, path)
-                             for path in import_spec.get('scripts', [])]
+    absolute_script_paths = [
+        os.path.join(repo_dir, import_dir, path)
+        for path in import_spec.get('scripts', [])
+    ]
     missing_paths = _filter_missing_paths(absolute_script_paths)
     if missing_paths:
         raise ValueError(f'{utils.list_to_str(missing_paths)} not found')
@@ -222,8 +214,8 @@ def _filter_missing_paths(paths: typing.List[str]) -> typing.List[str]:
     return list(path for path in paths if not os.path.exists(path))
 
 
-def _filter_missing_keys(
-        keys: typing.Any, a_dict: typing.Dict) -> typing.List[typing.Any]:
+def _filter_missing_keys(keys: typing.Any,
+                         a_dict: typing.Dict) -> typing.List[typing.Any]:
     """Given a list of keys each as a string and a dict, returns the keys in
     the list that are not present in the dict."""
     return list(key for key in keys if key not in a_dict)
