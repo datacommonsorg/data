@@ -18,6 +18,7 @@ Import progress dashboard API client.
 
 import logging
 import subprocess
+from typing import Dict
 
 from app import utils
 from app import configs
@@ -114,16 +115,19 @@ class DashboardAPI:
                     level: str,
                     attempt_id: str = None,
                     run_id: str = None,
-                    time_logged: str = None):
-        """
+                    time_logged: str = None) -> Dict:
+        """Posts a progress log to the import progress dashboard.
+
         Args:
             message: Log message as a string.
             level: Log level as a string.
-            process: subprocess.CompletedProcess object that has been executed and
-                that needs to be logged.
-            time_logged: Time logged in ISO format with UTC timezone as a string.
             run_id: ID of the system run to link to as a string.
             attempt_id: ID of the import attempt to link to as a string.
+            time_logged: Time logged in ISO 8601 format with UTC timezone
+                as a string.
+
+        Returns:
+            The posted progress log as a dict.
 
         Raises:
             ValueError: Neither run_id nor attempt_id is specified.

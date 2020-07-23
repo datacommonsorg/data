@@ -71,7 +71,7 @@ def execute_imports():
 def scheduled_updates():
     """Endpoint for updating imports.
 
-    Currently does not log to the import progress dashboard but will later.
+    TODO(intrepiditee): Log to the import progress dashboard.
     """
     task_info = flask.request.get_json(force=True)
     if 'absolute_import_name' not in task_info:

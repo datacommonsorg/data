@@ -422,3 +422,17 @@ class GitHubAPITest(unittest.TestCase):
                 self.assertRaises(
                     exceptions.HTTPError,
                     self.github.download_repo, dir_path, 'commit-sha')
+
+    def test_get_path_first_component(self):
+        self.assertEqual(
+            'data',
+            github_api._get_path_first_component('data/foo/bar/README.md'))
+        self.assertEqual(
+            '',
+            github_api._get_path_first_component('data/foo/bar/README.md'))
+        self.assertEqual(
+            'data',
+            github_api._get_path_first_component('data'))
+        self.assertEqual(
+            '',
+            github_api._get_path_first_component(''))

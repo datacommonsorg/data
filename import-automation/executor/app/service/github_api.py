@@ -63,7 +63,7 @@ class GitHubRepoAPI:
         """
         Example:
             Assume the repository has a file README.md at foo/bar/README.md and
-            at README.md.
+            at ./README.md.
 
             Commit 1r9f121 changes some files in foo/bar and its
             subdirectories, say foo/bar/a/b/c/file.
@@ -75,9 +75,6 @@ class GitHubRepoAPI:
             foo/bar/a/b/c is first searched, followed by foo/bar/a/b,
             foo/bar/a, foo/bar, and foo in order.
             ['foo/bar', ''] will be returned.
-
-            In this case, script/us_fed/treausy_constant_maturity_rates
-            will be returned.
         """
         changed_files = self._query_changed_files_in_commit(commit_sha)
         found_dirs = set()
@@ -98,7 +95,7 @@ class GitHubRepoAPI:
             Assume the repository is named 'data-demo' owned by 'intrepiditee'.
             The method call
                 download_repo('download_dir', '12ef23231a')
-            returns 'download_dir/intrepiditee-data-demo-12ef23231a'.
+            returns 'intrepiditee-data-demo-12ef23231a'.
 
         Args:
             dest_dir: Directory to download the repository into as a string.
@@ -107,7 +104,9 @@ class GitHubRepoAPI:
                 is downloaded.
 
         Returns:
-            Path to the downloaded repository as a string.
+            Name of a directory containing the downloaded repository,
+            as a string. The repository's contents are downloaded and copied
+            into the same directory structure within the returned directory.
         """
         if not commit_sha:
             commit_sha = ''
@@ -133,7 +132,7 @@ class GitHubRepoAPI:
                     raise FileNotFoundError(
                         'Downloaded tar file does not contain the repository')
                 tar.extractall(dest_dir)
-                return os.path.commonpath(files)
+                return _get_path_first_component(files[0])
 
     def _build_content_query(self, commit_sha: str, path: str) -> str:
         return GITHUB_CONTENT_API.format_map({
@@ -287,3 +286,18 @@ class GitHubRepoAPI:
             if self._path_containing_file(commit_sha, '', containing):
                 found_dirs.add('')
         return found_dirs
+
+
+def _get_path_first_component(path: str) -> str:
+    """Returns the first component of a path.
+
+    Example:
+        _get_path_first_component('data/foo/bar/README.md') returns 'data'.
+        _get_path_first_component('/data/foo/bar/README.md') returns ''.
+        _get_path_first_component('data') returns 'data'.
+         _get_path_first_component('') returns ''.
+    """
+    index = path.find(os.path.sep)
+    if index != -1:
+        return path[:index]
+    return path
