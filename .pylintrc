@@ -188,11 +188,9 @@ class-rgx=^_?[A-Z][a-zA-Z0-9]*$
 # Regular expression which should only match correct function names.
 # 'camel_case' and 'snake_case' group names are used for consistency of naming
 # styles across functions and methods.
-# TODO(b/76153802): Need to figure out why the test/rc is not picked up when running blaze test.
 function-rgx=^(?:(?P<exempt>setUp|tearDown|setUpModule|tearDownModule)|(?P<camel_case>_?[A-Z][a-zA-Z0-9]*)|(?P<snake_case>_?[a-z][a-z0-9_]*))$
 
 
-# TODO(b/76153802): Need to figure out why the test/rc is not picked up when running blaze test.
 # Regular expression which should only match correct method names.
 # 'camel_case' and 'snake_case' group names are used for consistency of naming
 # styles across functions and methods. 'exempt' indicates a name which is
@@ -348,4 +346,4 @@ min-public-methods=2
 # "BaseException, Exception".
 overgeneral-exceptions=BaseException,
                        Exception,
-		       StandardError
+                       StandardError
