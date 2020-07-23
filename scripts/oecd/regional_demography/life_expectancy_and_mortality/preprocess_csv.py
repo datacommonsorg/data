@@ -58,11 +58,11 @@ VAR_to_statsvars = {
     'STD_MORTF':
         'Count_MortalityEvent_Female_Count_Person_AgeAdjusted',
     'YOU_DEATH_RAT':
-        'Count_MortalityEvent_15To64Years_Count_Person',
+        'Count_MortalityEvent_Upto14Years_Count_Person',
     'YOU_DEATH_RAM':
-        'Count_MortalityEvent_15To64Years_Male_Count_Person',
+        'Count_MortalityEvent_Upto14Years_Male_Count_Person',
     'YOU_DEATH_RAF':
-        'Count_MortalityEvent_15To64Years_Female_Count_Person',
+        'Count_MortalityEvent_Upto14Years_Female_Count_Person',
     'INF_MORTT':
         'Count_MortalityEvent_LessThan1Year_Count_BirthEvent_LiveBirth',
     'INF_MORTM':

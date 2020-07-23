@@ -21,7 +21,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
 
-Node: dcid:Count_MortalityEvent_15To64Years_Count_Person
+Node: dcid:Count_MortalityEvent_Upto14Years_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
@@ -29,7 +29,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
 
-Node: dcid:Count_MortalityEvent_15To64Years_Male_Count_Person
+Node: dcid:Count_MortalityEvent_Upto14Years_Male_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
@@ -38,7 +38,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
 
-Node: dcid:Count_MortalityEvent_15To64Years_Female_Count_Person
+Node: dcid:Count_MortalityEvent_Upto14Years_Female_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
