@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for base_database.py.
 
@@ -40,8 +39,8 @@ class BaseDatabaseTest(unittest.TestCase):
     def setUp(self):
         """Test setup that runs before every test."""
         self.id_field = 'entity_id'
-        self.database = base_database.BaseDatabase(
-            kind='kind', id_field=self.id_field)
+        self.database = base_database.BaseDatabase(kind='kind',
+                                                   id_field=self.id_field)
 
     def test_make_new(self):
         """Tests that get returns a new import attempt when
@@ -101,10 +100,7 @@ class BaseDatabaseTest(unittest.TestCase):
         for entity in entities:
             self.database.save(entity)
 
-        filters = {
-            'import_name': 'name',
-            'pr_number': 1
-        }
+        filters = {'import_name': 'name', 'pr_number': 1}
 
         retrieved = self.database.filter(filters)
         self.assertIn(entity_1, retrieved)
