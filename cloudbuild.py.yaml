@@ -44,8 +44,7 @@ steps:
   name: python:3.7
   entrypoint: python3
   # TODO(rsned): Add in scripts/ tree when it's fixed up.
-  # args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/", "scripts/"]
-  args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/"]
+  args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/", "scripts/", "tools/", "docs/", "schema/"]]
   # In cloudbuild, everything happens under /workspace path
   env: ["PYTHONPATH=/workspace"]
   waitFor:
