@@ -160,13 +160,6 @@ single-line-class-stmt=no
 single-line-if-stmt=no
 
 
-[TYPECHECK]
-
-# List of decorators that produce context managers, such as
-# contextlib.contextmanager. Add to this list to register other decorators that
-# produce valid context managers.
-contextmanager-decorators=contextlib.contextmanager
-
 [BASIC]
 
 # Regular expression which should only match the name
@@ -214,9 +207,6 @@ inlinevar-rgx=^[a-z][a-z0-9_]*$
 # Good variable names which should always be accepted, separated by a comma
 good-names=main,_
 
-# Bad variable names which should always be refused, separated by a comma
-bad-names=
-
 # List of builtins function names that should not be used, separated by a comma
 # <http://go/python-style#Deprecated_Language_Features>
 bad-functions=input,apply,reduce
@@ -234,8 +224,9 @@ bad-names=foo,
 
 [TYPECHECK]
 
-# List of decorators that create context managers from functions, such as
-# contextlib.contextmanager.
+# List of decorators that produce context managers, such as
+# contextlib.contextmanager. Add to this list to register other decorators that
+# produce valid context managers.
 contextmanager-decorators=contextlib.contextmanager,contextlib2.contextmanager
 
 [STRING]
