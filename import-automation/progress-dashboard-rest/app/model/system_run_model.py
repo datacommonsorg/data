@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Data model of a system run.
 """
@@ -36,5 +35,5 @@ class SystemRunModel:
     status = 'status'
 
 
-FIELDS = frozenset(name for name in vars(SystemRunModel)
-                   if not name.startswith('__'))
+FIELDS = frozenset(
+    name for name in vars(SystemRunModel) if not name.startswith('__'))

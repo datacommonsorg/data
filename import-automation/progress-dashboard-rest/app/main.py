@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Entry point of the API.
 When deployed on App Engine, gunicorn will serve the FLASK_APP variable,
@@ -48,20 +47,15 @@ def create_api(app):
     api = flask_restful.Api(app)
     api.add_resource(import_attempt.ImportAttemptByID,
                      '/import_attempts/<string:attempt_id>')
-    api.add_resource(import_attempt_list.ImportAttemptList,
-                     '/import_attempts')
+    api.add_resource(import_attempt_list.ImportAttemptList, '/import_attempts')
     api.add_resource(progress_log.ProgressLogByAttemptID,
                      '/import_attempts/<string:attempt_id>/logs')
-    api.add_resource(system_run_list.SystemRunList,
-                     '/system_runs')
-    api.add_resource(system_run.SystemRunByID,
-                     '/system_runs/<string:run_id>')
+    api.add_resource(system_run_list.SystemRunList, '/system_runs')
+    api.add_resource(system_run.SystemRunByID, '/system_runs/<string:run_id>')
     api.add_resource(progress_log.ProgressLogByRunID,
                      '/system_runs/<string:run_id>/logs')
-    api.add_resource(progress_log_list.ProgressLogList,
-                     '/logs')
-    api.add_resource(progress_log.ProgressLog,
-                     '/logs/<string:log_id>')
+    api.add_resource(progress_log_list.ProgressLogList, '/logs')
+    api.add_resource(progress_log.ProgressLog, '/logs/<string:log_id>')
     return api
 
 
