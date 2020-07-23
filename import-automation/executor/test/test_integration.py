@@ -45,7 +45,8 @@ class GCSFileUploaderMock:
 
 @mock.patch('app.configs._standalone', lambda: True)
 @mock.patch('app.service.file_uploader.GCSFileUploader', GCSFileUploaderMock)
-@mock.patch('app.utils.pttime', lambda: '2020-07-15T12:07:17.365264-07:00')
+@mock.patch('app.utils.pacific_time',
+            lambda: '2020-07-15T12:07:17.365264-07:00')
 class StandaloneUpdateTest(unittest.TestCase):
     """Tests for updating imports in standalone mode (without interaction
     with the dashboard).
@@ -60,6 +61,7 @@ class StandaloneUpdateTest(unittest.TestCase):
        @mock.patch('test.test_integration.GCSFileUploaderMock._REVERSE', True)
        to compare the last NUM_LINES_TO_CHECK lines.
     """
+
     def setUp(self):
         self.app = main.FLASK_APP.test_client()
 
@@ -103,9 +105,9 @@ class StandaloneUpdateTest(unittest.TestCase):
 
 @mock.patch('app.configs._testing', lambda: True)
 @mock.patch('app.service.dashboard_api.DashboardAPI', mock.MagicMock)
-@mock.patch('app.utils.pttime', lambda: '2020-07-15T12:07:17.365264-07:00')
-@mock.patch('app.service.file_uploader.GCSFileUploader',
-            GCSFileUploaderMock)
+@mock.patch('app.utils.pacific_time',
+            lambda: '2020-07-15T12:07:17.365264-07:00')
+@mock.patch('app.service.file_uploader.GCSFileUploader', GCSFileUploaderMock)
 class CommitTest(unittest.TestCase):
 
     def setUp(self):

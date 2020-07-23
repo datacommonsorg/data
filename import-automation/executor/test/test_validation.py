@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for validation.py.
 """
@@ -34,97 +33,96 @@ class ValidationTest(unittest.TestCase):
         self.tmp_dir.cleanup()
 
     def test_import_targets_valid_absolute_names(self):
-        manifest_path = os.path.join(
-            self.repo_dir, 'scripts/us_fed/manifest.json')
+        manifest_path = os.path.join(self.repo_dir,
+                                     'scripts/us_fed/manifest.json')
         os.makedirs(os.path.dirname(manifest_path), exist_ok=True)
         with open(manifest_path, 'w+') as manifest:
-            manifest.write(json.dumps(
-                {'import_specifications': [{'import_name': 'treasury'}]}))
+            manifest.write(
+                json.dumps(
+                    {'import_specifications': [{
+                        'import_name': 'treasury'
+                    }]}))
 
-        manifest_path = os.path.join(
-            self.repo_dir, 'us_bls/cpi/manifest.json')
+        manifest_path = os.path.join(self.repo_dir, 'us_bls/cpi/manifest.json')
         os.makedirs(os.path.dirname(manifest_path), exist_ok=True)
         with open(manifest_path, 'w+') as manifest:
-            manifest.write(json.dumps(
-                {'import_specifications': [{'import_name': 'cpi_u'}]}))
+            manifest.write(
+                json.dumps(
+                    {'import_specifications': [{
+                        'import_name': 'cpi_u'
+                    }]}))
 
-        validation.is_import_targets_valid(
+        validation.are_import_targets_valid(
             ['scripts/us_fed:treasury', 'us_bls/cpi:cpi_u'],
-            ['utils/template.py'],
-            self.repo_dir,
-            'manifest.json')
+            ['utils/template.py'], self.repo_dir, 'manifest.json')
 
     def test_import_targets_valid_name_not_exist(self):
-        manifest_path = os.path.join(
-            self.repo_dir, 'scripts/us_fed/manifest.json')
+        manifest_path = os.path.join(self.repo_dir,
+                                     'scripts/us_fed/manifest.json')
         os.makedirs(os.path.dirname(manifest_path), exist_ok=True)
         with open(manifest_path, 'w+') as manifest:
-            manifest.write(json.dumps(
-                {'import_specifications': [{'import_name': 'treasury'}]}))
+            manifest.write(
+                json.dumps(
+                    {'import_specifications': [{
+                        'import_name': 'treasury'
+                    }]}))
 
         with self.assertRaises(ValueError) as context:
-            validation.is_import_targets_valid(
-                ['scripts/us_fed:treasuryyy'],
-                ['utils/template.py'],
-                self.repo_dir,
-                'manifest.json')
+            validation.are_import_targets_valid(['scripts/us_fed:treasuryyy'],
+                                                ['utils/template.py'],
+                                                self.repo_dir, 'manifest.json')
             self.assertIn('treasuryyy not found', str(context.exception))
 
     def test_import_targets_valid_manifest_not_exist(self):
         with self.assertRaises(ValueError) as context:
-            validation.is_import_targets_valid(
+            validation.are_import_targets_valid(
                 ['scripts/us_fed:treasury', 'us_bls/cpi:cpi_u'],
-                ['utils/template.py'],
-                self.repo_dir,
-                'manifest.json')
+                ['utils/template.py'], self.repo_dir, 'manifest.json')
             self.assertIn('manifest.json does not exist',
                           str(context.exception))
 
     def test_import_targets_valid_relative_names(self):
-        manifest_path = os.path.join(
-            self.repo_dir, 'scripts/us_fed/manifest.json')
+        manifest_path = os.path.join(self.repo_dir,
+                                     'scripts/us_fed/manifest.json')
         os.makedirs(os.path.dirname(manifest_path), exist_ok=True)
         with open(manifest_path, 'w+') as file:
             manifest = {
-                'import_specifications': [
-                    {'import_name': 'treasury1'},
-                    {'import_name': 'treasury2'}
-                ]
+                'import_specifications': [{
+                    'import_name': 'treasury1'
+                }, {
+                    'import_name': 'treasury2'
+                }]
             }
             file.write(json.dumps(manifest))
 
-        validation.is_import_targets_valid(
-            ['treasury1', 'treasury2'],
-            ['scripts/us_fed'],
-            self.repo_dir,
-            'manifest.json')
+        validation.are_import_targets_valid(['treasury1', 'treasury2'],
+                                            ['scripts/us_fed'], self.repo_dir,
+                                            'manifest.json')
 
     def test_import_targets_valid_relative_names_multiple_dirs(self):
-        manifest_path = os.path.join(
-            self.repo_dir, 'scripts/us_fed/manifest.json')
+        manifest_path = os.path.join(self.repo_dir,
+                                     'scripts/us_fed/manifest.json')
         os.makedirs(os.path.dirname(manifest_path), exist_ok=True)
         with open(manifest_path, 'w+') as file:
             manifest = {
-                'import_specifications': [
-                    {'import_name': 'treasury1'},
-                    {'import_name': 'treasury2'}
-                ]
+                'import_specifications': [{
+                    'import_name': 'treasury1'
+                }, {
+                    'import_name': 'treasury2'
+                }]
             }
             file.write(json.dumps(manifest))
 
         with self.assertRaises(ValueError) as context:
-            validation.is_import_targets_valid(
-                ['treasury1', 'treasury2'],
-                ['scripts/us_fed', 'foo/bar'],
-                self.repo_dir,
-                'manifest.json')
+            validation.are_import_targets_valid(['treasury1', 'treasury2'],
+                                                ['scripts/us_fed', 'foo/bar'],
+                                                self.repo_dir, 'manifest.json')
             self.assertIn('relative import names', str(context.exception))
 
     def test_import_spec_valid(self):
         import_dir = 'scripts/us_fed'
-        os.makedirs(
-            os.path.join(self.repo_dir, import_dir, 'dir'),
-            exist_ok=True)
+        os.makedirs(os.path.join(self.repo_dir, import_dir, 'dir'),
+                    exist_ok=True)
 
         script_path = os.path.join(self.repo_dir, import_dir, 'dir/foo.py')
         print(script_path)
@@ -150,8 +148,8 @@ class ValidationTest(unittest.TestCase):
             'scripts': ['dir/foo.py', 'dir/../bar.py']
         }
         with self.assertRaises(ValueError) as context:
-            validation._is_import_spec_valid(
-                spec, self.repo_dir, 'scripts/us_fed')
+            validation._is_import_spec_valid(spec, self.repo_dir,
+                                             'scripts/us_fed')
             self.assertIn(
                 'provenance_url, provenance_description, curator_emails',
                 str(context.exception))
@@ -165,8 +163,8 @@ class ValidationTest(unittest.TestCase):
             'scripts': ['dir/foo.py', 'dir/../bar.py']
         }
         with self.assertRaises(ValueError) as context:
-            validation._is_import_spec_valid(
-                spec, self.repo_dir, 'scripts/us_fed')
+            validation._is_import_spec_valid(spec, self.repo_dir,
+                                             'scripts/us_fed')
             self.assertIn('dir/foo.py, dir/../bar.py', str(context.exception))
 
     def test_manifest_valid_fields_absent(self):

@@ -1,50 +1,50 @@
-Node: dcid:CumulativeCount_MedicalTest_COVID_19
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalTest
-medicalCondition: dcs:COVID_19
-statType: dcs:measuredValue
-measuredProperty: dcs:cumulativeCount
-testResult: dcs:Ready
-
-Node: dcid:CumulativeCount_MedicalTest_COVID_19_Positive
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalTest
-medicalCondition: dcs:COVID_19
-statType: dcs:measuredValue
-measuredProperty: dcs:cumulativeCount
-testResult: dcs:Positive
-
-Node: dcid:CumulativeCount_MedicalTest_COVID_19_Negative
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalTest
-medicalCondition: dcs:COVID_19
-statType: dcs:measuredValue
-measuredProperty: dcs:cumulativeCount
-testResult: dcs:Negative
-
-Node: dcid:Count_MedicalTest_COVID_19_Pending
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalTest
-medicalCondition: dcs:COVID_19
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-testResult: dcs:Pending
-
-Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
-statType: dcs:measuredValue
-measuredProperty: dcs:cumulativeCount
-medicalStatus: dcs:PatientRecovered
-
-Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
-statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
 medicalStatus: dcs:PatientDeceased
 
 Node: dcid:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
 typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalStatus: dcs:PatientHospitalized
+
+Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+statType: dcs:measuredValue
+measuredProperty: dcs:cumulativeCount
+medicalStatus: dcs:PatientHospitalized
+
+Node: dcid:Count_MedicalConditionIncident_COVID_19_PatientInICU
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalStatus: dcs:PatientInICU
+
+Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+statType: dcs:measuredValue
+measuredProperty: dcs:cumulativeCount
+medicalStatus: dcs:PatientInICU
+
+Node: dcid:Count_MedicalConditionIncident_COVID_19_PatientOnVentilator
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalStatus: dcs:PatientOnVentilator
+
+Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+statType: dcs:measuredValue
+measuredProperty: dcs:cumulativeCount
+medicalStatus: dcs:PatientOnVentilator

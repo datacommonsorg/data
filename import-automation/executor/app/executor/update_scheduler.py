@@ -84,7 +84,8 @@ class UpdateScheduler:
         """
         job_path = self.client.job_path(
             _fix_project_id(self.config.gcp_project_id),
-            self.config.scheduler_location, absolute_import_name)
+            self.config.scheduler_location,
+            _fix_absolute_import_name(absolute_import_name))
         self.client.delete_job(job_path)
 
     def _create_job_body(self, absolute_import_name: str,

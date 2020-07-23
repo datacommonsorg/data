@@ -3,6 +3,7 @@ google-auth
 google-cloud-logging
 google-cloud-storage
 google-cloud-datastore
+google-cloud-scheduler
 flask
 gunicorn
 pytz

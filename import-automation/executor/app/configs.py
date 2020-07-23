@@ -47,11 +47,10 @@ class ExecutorConfig:
     requirements_filename: str = 'requirements.txt'
     storage_bucket_name: str = 'import-inputs'
     storage_version_filename: str = 'latest_version.txt'
-    import_input_types: typing.List[str] = (
-        'template_mcf',
-        'cleaned_csv',
-        'node_mcf'
-    )
+    import_input_types: typing.List[str] = ('template_mcf', 'cleaned_csv',
+                                            'node_mcf')
+
+    scheduler_location: str = 'us-central1'
 
     user_script_timeout: float = 600
     venv_create_timeout: float = 600
@@ -75,9 +74,8 @@ class ExecutorConfig:
                 self.github_auth_access_token = os.environ[access_token]
 
     def _get_config(self, entity_id):
-        client = datastore.Client(
-            project=self.gcp_project_id,
-            namespace=self.datastore_configs_kind)
+        client = datastore.Client(project=self.gcp_project_id,
+                                  namespace=self.datastore_configs_kind)
         key = client.key(self.datastore_configs_kind, entity_id)
         return client.get(key)[entity_id]
 
@@ -90,4 +88,3 @@ def _setup_logging():
 
 if _production():
     _setup_logging()
-
