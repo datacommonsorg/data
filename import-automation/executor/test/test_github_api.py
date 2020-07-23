@@ -1,3 +1,17 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import unittest
 from unittest import mock
 import tempfile
@@ -7,17 +21,16 @@ from requests import exceptions
 
 import test.utils
 from app.service import github_api
-from test import test_integration
 from test import utils
+from test import test_integration
 
 
 class GitHubAPITest(unittest.TestCase):
 
-    @mock.patch('app.configs.get_github_auth_access_token',
-                test_integration.get_github_auth_access_token_mock)
     def setUp(self):
-        self.github = github_api.GitHubRepoAPI(
-            'ownerA', 'repoB', 'authusernameC')
+        self.github = github_api.GitHubRepoAPI('ownerA', 'repoB',
+                                               'authusernameC',
+                                               'authacesstokenD')
 
     def test_build_commit_query(self):
         self.assertEqual(
@@ -35,7 +48,7 @@ class GitHubAPITest(unittest.TestCase):
         self.assertTrue(self.github._dir_exists('c', 'a/b/c'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_dir_exists_not(self, get):
@@ -43,16 +56,16 @@ class GitHubAPITest(unittest.TestCase):
         self.assertFalse(self.github._dir_exists('c', 'a/b/c'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_dir_exists_other_error(self, get):
         get.return_value = utils.ResponseMock(500)
-        self.assertRaises(
-            exceptions.HTTPError, self.github._dir_exists, 'c', 'a/b/c')
+        self.assertRaises(exceptions.HTTPError, self.github._dir_exists, 'c',
+                          'a/b/c')
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/a/b/c?ref=c',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_query_commit(self, get):
@@ -61,241 +74,169 @@ class GitHubAPITest(unittest.TestCase):
         self.assertEqual(expected, self.github.query_commit('commitCCC'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/commits/commitCCC',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
         get.return_value = utils.ResponseMock(400)
-        self.assertRaises(
-            exceptions.HTTPError, self.github.query_commit, 'commitCCC')
+        self.assertRaises(exceptions.HTTPError, self.github.query_commit,
+                          'commitCCC')
 
     @mock.patch('requests.get')
     def test_query_changed_files_in_commit(self, get):
         data = {
-            'files': [
-                {
-                    'filename': 'scripts/google/covid_mobility/README.md',
-                    'status': 'modified',
-                    "size": 39
-                },
-                {
-                    'filename':
-                        'scripts/google/covid_mobility/TestCovidMobility.py',
-                    'status': 'removed',
-                    "size": 12
-                },
-                {
-                    'filename':
-                        'scripts/google/covid_mobility/covidmobility.py',
-                    'status': 'added',
-                    "size": 4,
-                },
-                {
-                    'filename': 'scripts/google/covid_mobility/input/data.csv',
-                    'status': 'removed',
-                }
-            ]
+            'files': [{
+                'filename': 'scripts/google/covid_mobility/README.md',
+                'status': 'modified',
+                "size": 39
+            }, {
+                'filename':
+                    'scripts/google/covid_mobility/TestCovidMobility.py',
+                'status':
+                    'removed',
+                "size":
+                    12
+            }, {
+                'filename': 'scripts/google/covid_mobility/covidmobility.py',
+                'status': 'added',
+                "size": 4,
+            }, {
+                'filename': 'scripts/google/covid_mobility/input/data.csv',
+                'status': 'removed',
+            }]
         }
-        expected = [
-            ('scripts/google/covid_mobility/README.md', 'modified'),
-            ('scripts/google/covid_mobility/TestCovidMobility.py', 'removed'),
-            ('scripts/google/covid_mobility/covidmobility.py', 'added'),
-            ('scripts/google/covid_mobility/input/data.csv', 'removed')
-        ]
+        expected = [('scripts/google/covid_mobility/README.md', 'modified'),
+                    ('scripts/google/covid_mobility/TestCovidMobility.py',
+                     'removed'),
+                    ('scripts/google/covid_mobility/covidmobility.py', 'added'),
+                    ('scripts/google/covid_mobility/input/data.csv', 'removed')]
         get.return_value = utils.ResponseMock(200, data)
         self.assertEqual(
-            expected, self.github.query_changed_files_in_commit('commitCCC'))
+            expected, self.github._query_changed_files_in_commit('commitCCC'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/commits/commitCCC',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_query_changed_files_in_commit_raise(self, get):
         get.return_value = utils.ResponseMock(400)
-        self.assertRaises(
-            exceptions.HTTPError, self.github.query_commit, 'commitCCC')
+        self.assertRaises(exceptions.HTTPError, self.github.query_commit,
+                          'commitCCC')
 
     @mock.patch('requests.get')
     def test_query_files_in_dir(self, get):
-        data = [
-            {
-                "name": "go.sum",
-                "type": "file",
-                'foo': 'bar'
-            },
-            {
-                "name": "import-automation",
-                "type": "dir",
-                'bar': 'foo'
-            },
-            {
-                "name": "requirements.txt",
-                "type": "file",
-            },
-            {
-                "name": "schema",
-                "type": "dir"
-            }
-        ]
-        expected = [
-            'go.sum',
-            'requirements.txt'
-        ]
+        data = [{
+            "name": "go.sum",
+            "type": "file",
+            'foo': 'bar'
+        }, {
+            "name": "import-automation",
+            "type": "dir",
+            'bar': 'foo'
+        }, {
+            "name": "requirements.txt",
+            "type": "file",
+        }, {
+            "name": "schema",
+            "type": "dir"
+        }]
+        expected = ['go.sum', 'requirements.txt']
         get.return_value = utils.ResponseMock(200, data)
-        self.assertEqual(
-            expected, self.github.query_files_in_dir('committt', 'd'))
+        self.assertEqual(expected,
+                         self.github._query_files_in_dir('committt', 'd'))
         get.assert_called_with(
             'https://api.github.com/repos/ownerA/repoB/contents/d?ref=committt',
-            auth=('authusernameC', ''))
+            auth=('authusernameC', 'authacesstokenD'))
 
     @mock.patch('requests.get')
     def test_query_files_in_dir_raise(self, get):
         get.return_value = utils.ResponseMock(400)
-        self.assertRaises(
-            exceptions.HTTPError,
-            self.github.query_files_in_dir, 'committt', 'dirrr')
+        self.assertRaises(exceptions.HTTPError, self.github._query_files_in_dir,
+                          'committt', 'dirrr')
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir',
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir',
                 lambda *args: ['aaa', 'bbb', 'ccc'])
     def test_path_containing_file(self):
         self.assertTrue(
             self.github._path_containing_file('sha', 'foo/bar', 'bbb'))
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir',
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir',
                 lambda *args: ['aaa', 'bbb', 'ccc'])
     def test_path_containing_file_not_exist(self):
         self.assertFalse(
             self.github._path_containing_file('sha', 'foo/bar', 'not-exist'))
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     def test_find_dirs_up_path(self, query):
         # Each path component needs a return value
         # 'scripts/us_fed/foo', 'scripts/us_fed', 'scripts', and ''
-        query.side_effect = [
-            [
-                'covidmobility.py',
-                'manifest.json',
-                'fileeee'
-            ],
-            [],
-            [
-                'magic.py',
-                'manifest.json'
-            ],
-            []
-        ]
+        query.side_effect = [['covidmobility.py', 'manifest.json', 'fileeee'],
+                             [], ['magic.py', 'manifest.json'], []]
         searched = set()
         found_dirs = self.github._find_dirs_up_path_containing_file(
-            'committt',
-            'scripts/us_fed/foo',
-            'manifest.json',
-            searched)
+            'committt', 'scripts/us_fed/foo', 'manifest.json', searched)
         self.assertEqual({'scripts/us_fed/foo', 'scripts'}, found_dirs)
         expected_searched = {
-            'scripts/us_fed/foo',
-            'scripts/us_fed',
-            'scripts/us_fed',
-            'scripts',
+            'scripts/us_fed/foo', 'scripts/us_fed', 'scripts/us_fed', 'scripts',
             ''
         }
         self.assertEqual(expected_searched, searched)
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     def test_find_dirs_up_path_skip_call(self, query):
         # No calls should be made
-        query.side_effect = [
-            [
-                'covidmobility.py',
-                'target',
-                'fileeee'
-            ],
-            [],
-            [
-                'afqwrqdwd',
-                'target'
-            ],
-            [
-                'target'
-            ]
-        ]
+        query.side_effect = [['covidmobility.py', 'target', 'fileeee'], [],
+                             ['afqwrqdwd', 'target'], ['target']]
         searched = {'a/b/c'}
         found_dirs = self.github._find_dirs_up_path_containing_file(
             'commitT', 'a/b/c/d', 'target', searched)
         self.assertEqual({'a/b/c/d'}, found_dirs)
         self.assertEqual({'a/b/c', 'a/b/c/d'}, searched)
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     def test_find_dirs_up_path_empty(self, query):
         # Only three calls will be made
-        query.side_effect = [
-            [
-                'covidmobility.py',
-                'target',
-                'fileeee'
-            ],
-            [
-                'afqwrqdwd',
-                'target'
-            ],
-            [
-                'target',
-                'targett'
-            ]
-        ]
+        query.side_effect = [['covidmobility.py', 'target', 'fileeee'],
+                             ['afqwrqdwd', 'target'], ['target', 'targett']]
         searched = set()
         found_dirs = self.github._find_dirs_up_path_containing_file(
-            'commitT',
-            'a/b',
-            'not-exist',
-            searched)
+            'commitT', 'a/b', 'not-exist', searched)
         self.assertEqual(set(), found_dirs)
         self.assertEqual({'a/b', 'a', ''}, searched)
 
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     def test_find_dirs_up_path_root(self, query):
         query.side_effect = [
             [],
             [],
-            [
-                'covidmobility.py',
-                'target',
-                'fileeee'
-            ],
+            ['covidmobility.py', 'target', 'fileeee'],
         ]
         searched = set()
         found_dirs = self.github._find_dirs_up_path_containing_file(
-            'commit???',
-            'foo/bar',
-            'fileeee',
-            searched)
+            'commit???', 'foo/bar', 'fileeee', searched)
         self.assertEqual({''}, found_dirs)
         self.assertEqual({'foo/bar', 'foo', ''}, searched)
 
     @mock.patch('app.service.github_api.GitHubRepoAPI.query_commit')
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     @mock.patch('app.service.github_api.GitHubRepoAPI._dir_exists')
-    def test_find_dirs_in_commit(
-            self, dir_exists, query_files_in_dir, query_commit):
+    def test_find_dirs_in_commit(self, dir_exists, query_files_in_dir,
+                                 query_commit):
         query_commit.return_value = {
-            'files': [
-                {
-                    'filename': 'a/b/c/csv.py',
-                    'status': 'modified',
-                    "size": 39
-                },
-                {
-                    'filename': 'a/b/c/d/tsv.py',
-                    'status': 'removed',
-                    "size": 500
-                },
-                {
-                    'filename': 'check.py',
-                    'status': 'added',
-                    "size": 12
-                },
-                {
-                    'filename': 'scripts/README.md',
-                    'status': 'removed',
-                }
-            ]
+            'files': [{
+                'filename': 'a/b/c/csv.py',
+                'status': 'modified',
+                "size": 39
+            }, {
+                'filename': 'a/b/c/d/tsv.py',
+                'status': 'removed',
+                "size": 500
+            }, {
+                'filename': 'check.py',
+                'status': 'added',
+                "size": 12
+            }, {
+                'filename': 'scripts/README.md',
+                'status': 'removed',
+            }]
         }
         dir_exists.side_effect = [
             # 'a/b/c'
@@ -327,18 +268,16 @@ class GitHubAPITest(unittest.TestCase):
         self.assertCountEqual(expected, found_dirs)
 
     @mock.patch('app.service.github_api.GitHubRepoAPI.query_commit')
-    @mock.patch('app.service.github_api.GitHubRepoAPI.query_files_in_dir')
+    @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir')
     @mock.patch('app.service.github_api.GitHubRepoAPI._dir_exists')
-    def test_find_dirs_in_commit_empty(
-            self, dir_exists, query_files_in_dir, query_commit):
+    def test_find_dirs_in_commit_empty(self, dir_exists, query_files_in_dir,
+                                       query_commit):
         query_commit.return_value = {
-            'files': [
-                {
-                    'filename': 'a/b/c/csv.py',
-                    'status': 'modified',
-                    "size": 39
-                }
-            ]
+            'files': [{
+                'filename': 'a/b/c/csv.py',
+                'status': 'modified',
+                "size": 39
+            }]
         }
         dir_exists.return_value = True
         query_files_in_dir.side_effect = [
@@ -366,24 +305,23 @@ class GitHubAPITest(unittest.TestCase):
                 downloaded = self.github.download_repo(dir_path, 'commit-sha')
                 self.assertEqual('treasury_constant_maturity_rates', downloaded)
 
-                file = os.path.join(dir_path,
-                                    downloaded,
+                file = os.path.join(dir_path, downloaded,
                                     'treasury_constant_maturity_rates.csv')
-                print(file)
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.csv', file, 50)
+                    'test/data/treasury_constant_maturity_rates.csv', file,
+                    test_integration.NUM_LINES_TO_CHECK)
 
-                file = os.path.join(dir_path,
-                                    downloaded,
+                file = os.path.join(dir_path, downloaded,
                                     'treasury_constant_maturity_rates.mcf')
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.mcf', file, 50)
+                    'test/data/treasury_constant_maturity_rates.mcf', file,
+                    test_integration.NUM_LINES_TO_CHECK)
 
-                file = os.path.join(dir_path,
-                                    downloaded,
+                file = os.path.join(dir_path, downloaded,
                                     'treasury_constant_maturity_rates.tmcf')
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.tmcf', file, 50)
+                    'test/data/treasury_constant_maturity_rates.tmcf', file,
+                    test_integration.NUM_LINES_TO_CHECK)
 
     @mock.patch('requests.get')
     def test_download_repo_empty(self, get):
@@ -391,9 +329,8 @@ class GitHubAPITest(unittest.TestCase):
             get.return_value = utils.ResponseMock(200, raw=tar)
 
             with tempfile.TemporaryDirectory() as dir_path:
-                self.assertRaises(
-                    FileNotFoundError,
-                    self.github.download_repo, dir_path, 'commit-sha')
+                self.assertRaises(FileNotFoundError, self.github.download_repo,
+                                  dir_path, 'commit-sha')
 
     @mock.patch('requests.get')
     def test_download_repo_http_error(self, get):
@@ -402,6 +339,15 @@ class GitHubAPITest(unittest.TestCase):
             get.return_value = utils.ResponseMock(400, raw=tar)
 
             with tempfile.TemporaryDirectory() as dir_path:
-                self.assertRaises(
-                    exceptions.HTTPError,
-                    self.github.download_repo, dir_path, 'commit-sha')
+                self.assertRaises(exceptions.HTTPError,
+                                  self.github.download_repo, dir_path,
+                                  'commit-sha')
+
+    def test_get_path_first_component(self):
+        self.assertEqual(
+            'data',
+            github_api._get_path_first_component('data/foo/bar/README.md'))
+        self.assertEqual(
+            '', github_api._get_path_first_component('/data/foo/bar/README.md'))
+        self.assertEqual('data', github_api._get_path_first_component('data'))
+        self.assertEqual('', github_api._get_path_first_component(''))
