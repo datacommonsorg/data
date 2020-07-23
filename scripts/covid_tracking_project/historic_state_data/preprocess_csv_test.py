@@ -17,6 +17,21 @@ import os
 import filecmp
 
 
+TEMPLATE_MCF_GEO = """
+Node: E:COVIDTracking_States->E0
+typeOf: schema:State
+dcid: C:COVIDTracking_States->GeoId
+"""
+
+TEMPLATE_MCF_TEMPLATE = """
+Node: E:COVIDTracking_States->E{index}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+observationAbout: E:COVIDTracking_States->E0
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->{stat_var}
+"""
+
 class PreprocessCSVTest(unittest.TestCase):
 
     def test_generate_tmcf(self):
@@ -27,21 +42,6 @@ class PreprocessCSVTest(unittest.TestCase):
             'COVID19CumulativeNegativeTestResults',
             'COVID19NewNegativeTestResults'
         ]
-
-        TEMPLATE_MCF_GEO = """
-Node: E:COVIDTracking_States->E0
-typeOf: schema:State
-dcid: C:COVIDTracking_States->GeoId
-"""
-
-        TEMPLATE_MCF_TEMPLATE = """
-Node: E:COVIDTracking_States->E{index}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{stat_var}
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->{stat_var}
-"""
 
         stat_vars = output_columns[2:]
         with open('test_tmcf.tmcf', 'w', newline='') as f_out:

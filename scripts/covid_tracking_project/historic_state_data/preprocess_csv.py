@@ -54,21 +54,26 @@ with open('COVIDTracking_States.csv', 'w', newline='') as f_out:
                     row_dict['negative'],
                 'Count_MedicalTest_COVID_19_Pending':
                     row_dict['pending'],
-                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered':
+                ('CumulativeCount_MedicalConditionIncident'
+                 '_COVID_19_PatientRecovered'):
                     row_dict['recovered'],
-                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased':
+                ('CumulativeCount_MedicalConditionIncident'
+                 '_COVID_19_PatientDeceased'):
                     row_dict['death'],
                 'Count_MedicalConditionIncident_COVID_19_PatientHospitalized':
                     row_dict['hospitalizedCurrently'],
-                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized':
+                ('CumulativeCount_MedicalConditionIncident'
+                 '_COVID_19_PatientHospitalized'):
                     row_dict['hospitalizedCumulative'],
                 'Count_MedicalConditionIncident_COVID_19_PatientInICU':
                     row_dict['inIcuCurrently'],
-                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU':
+                ('CumulativeCount_MedicalConditionIncident'
+                 '_COVID_19_PatientInICU'):
                     row_dict['inIcuCumulative'],
                 'Count_MedicalConditionIncident_COVID_19_PatientOnVentilator':
                     row_dict['onVentilatorCurrently'],
-                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator':
+                ('CumulativeCount_MedicalConditionIncident'
+                 '_COVID_19_PatientOnVentilator'):
                     row_dict['onVentilatorCumulative'],
             }
 
