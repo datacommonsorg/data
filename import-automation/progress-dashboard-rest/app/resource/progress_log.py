@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Import log resources associated with the endpoints
 '/import_attempts/<string:attempt_id>/logs',
@@ -82,8 +81,7 @@ class ProgressLog(flask_restful.Resource):
         if not client:
             client = utils.create_datastore_client()
         self.client = client
-        self.run_database = system_run_database.SystemRunDatabase(
-            self.client)
+        self.run_database = system_run_database.SystemRunDatabase(self.client)
         self.log_database = progress_log_database.ProgressLogDatabase(
             self.client)
         self.attempt_database = import_attempt_database.ImportAttemptDatabase(
@@ -97,6 +95,7 @@ class ProgressLogByID(ProgressLog):
     Attributes:
         See ImportLog.
     """
+
     # TODO(intrepiditee): Use a helper for get.
     # TODO(intrepiditee): Use exception for request errors.
     def get(self, log_id):
@@ -122,6 +121,7 @@ class ProgressLogByRunID(ProgressLog):
     Attributes:
         See ImportLog.
     """
+
     def get(self, run_id):
         """Queries the progress logs of a system run.
 
@@ -161,7 +161,7 @@ class ProgressLogByAttemptID(ProgressLog):
         """
         attempt = self.attempt_database.get(attempt_id)
         if not attempt:
-            return validation.get_not_found_error(
-                _ATTEMPT.attempt_id, attempt_id)
+            return validation.get_not_found_error(_ATTEMPT.attempt_id,
+                                                  attempt_id)
         log_ids = attempt.get(_ATTEMPT.logs, [])
         return {_ATTEMPT.logs: self.log_database.load_logs(log_ids)}
