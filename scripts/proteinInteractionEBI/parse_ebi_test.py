@@ -11,12 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Test for parse_ebi.py.
+"""Test for parse_ebi.py.
 Run "python3 parse_ebi_test.py"
-'''
+"""
+
 import copy
 import unittest
-import parse_ebi
+
+from proteinInteractionEBI import parse_ebi
 
 CONST_TEST_TEXT = '''[Term]
 id: MI:0001
