@@ -93,11 +93,30 @@ observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->{stat_var}
 """
 
+TEMPLATE_MCF_TEMPLATE_YEAR = """
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E{index}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->{stat_var}
+unit: dcs:Year
+"""
+
 stat_vars = df_cleaned.columns[3:]
 with open('OECD_life_expectancy_and_mortality.tmcf', 'w', newline='') as f_out:
     for i in range(len(stat_vars)):
-        f_out.write(
-            TEMPLATE_MCF_TEMPLATE.format_map({
-                'index': i + 1,
-                'stat_var': stat_vars[i]
-            }))
+        if stat_vars[i].startswith("LifeExpectancy"):
+            f_out.write(
+                TEMPLATE_MCF_TEMPLATE_YEAR.format_map({
+                    'index': i + 1,
+                    'stat_var': stat_vars[i]
+                }))
+        else:
+            f_out.write(
+                TEMPLATE_MCF_TEMPLATE.format_map({
+                    'index': i + 1,
+                    'stat_var': stat_vars[i]
+                }))

@@ -61,6 +61,7 @@ observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
 observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->LifeExpectancy_Person_Female
+unit: dcs:Year
 
 Node: E:OECD_life_expectancy_and_mortality_cleaned->E8
 typeOf: dcs:StatVarObservation
@@ -70,6 +71,7 @@ observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
 observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->LifeExpectancy_Person_Male
+unit: dcs:Year
 
 Node: E:OECD_life_expectancy_and_mortality_cleaned->E9
 typeOf: dcs:StatVarObservation
@@ -79,6 +81,7 @@ observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
 observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->LifeExpectancy_Person
+unit: dcs:Year
 
 Node: E:OECD_life_expectancy_and_mortality_cleaned->E10
 typeOf: dcs:StatVarObservation
