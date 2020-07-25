@@ -27,9 +27,12 @@ from app.executor import import_executor
 class ImportExecutorTest(unittest.TestCase):
 
     def test_clean_time(self):
-        self.assertEqual('2020_07_15T12_07_17_365264+00_00',
+        self.assertEqual('2020_07_15T12_07_17_365264_00_00',
                          import_executor._clean_time(
                              '2020-07-15T12:07:17.365264+00:00'))
+        self.assertEqual('2020_07_15T12_07_17_365264_07_00',
+                         import_executor._clean_time(
+                             '2020-07-15T12:07:17.365264-07:00'))
 
     def test_run_with_timeout(self):
         self.assertRaises(

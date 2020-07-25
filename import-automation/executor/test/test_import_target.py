@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for import_target.py.
 """
@@ -31,36 +30,30 @@ class ImportTargetTest(unittest.TestCase):
         self.assertFalse(
             import_target.is_absolute_import_name(
                 'scripts/us_fed:treasury/data'))
-        self.assertFalse(
-            import_target.is_absolute_import_name(':treasury'))
+        self.assertFalse(import_target.is_absolute_import_name(':treasury'))
         self.assertFalse(
             import_target.is_absolute_import_name('scripts/us_fed:'))
         self.assertFalse(
             import_target.is_absolute_import_name('scripts/us_fed/treasury'))
         self.assertFalse(
             import_target.is_absolute_import_name(' scripts/us_fed:treasury'))
-        self.assertFalse(
-            import_target.is_absolute_import_name(''))
+        self.assertFalse(import_target.is_absolute_import_name(''))
 
     def test_parse_commit_message_targets(self):
-        self.assertEqual(
-            [], import_target.parse_commit_message_targets(''))
-        self.assertEqual(
-            [], import_target.parse_commit_message_targets('IMPORTS='))
+        self.assertEqual([], import_target.parse_commit_message_targets(''))
+        self.assertEqual([],
+                         import_target.parse_commit_message_targets('IMPORTS='))
         self.assertEqual(
             [], import_target.parse_commit_message_targets('imports=treasury'))
+        self.assertRaises(ValueError,
+                          import_target.parse_commit_message_targets,
+                          'IMPORTS=scripts/us_fed/treasury')
         self.assertRaises(
-            ValueError,
-            import_target.parse_commit_message_targets,
-            'IMPORTS=scripts/us_fed/treasury')
-        self.assertCountEqual(
-            ['scripts/us_fed:treasury'],
-            import_target.parse_commit_message_targets(
-                'abc IMPORTS=scripts/us_fed:treasury, scripts/us_bls:cpi'))
-        self.assertEqual(
-            ['scripts/us_fed:treasury'],
-            import_target.parse_commit_message_targets(
-                'IMPORTS=scripts/us_fed:treasury'))
+            ValueError, import_target.parse_commit_message_targets,
+            'abc IMPORTS=scripts/us_fed:treasury, scripts/us_bls:cpi')
+        self.assertEqual(['scripts/us_fed:treasury'],
+                         import_target.parse_commit_message_targets(
+                             'IMPORTS=scripts/us_fed:treasury'))
         self.assertEqual(
             ['scripts/us_fed:treasury'],
             import_target.parse_commit_message_targets(
@@ -75,18 +68,20 @@ class ImportTargetTest(unittest.TestCase):
             import_target.import_targetted_by_commit(
                 'scripts/us_fed', 'treasury', ['scripts/us_fed:treasury']))
         self.assertTrue(
-            import_target.import_targetted_by_commit(
-                'scripts/us_fed', 'treasury', ['all']))
+            import_target.import_targetted_by_commit('scripts/us_fed',
+                                                     'treasury', ['all']))
         self.assertTrue(
-            import_target.import_targetted_by_commit(
-                'scripts/us_fed', 'treasury', ['scripts/us_fed:all']))
+            import_target.import_targetted_by_commit('scripts/us_fed',
+                                                     'treasury',
+                                                     ['scripts/us_fed:all']))
         self.assertTrue(
             import_target.import_targetted_by_commit(
                 'scripts/us_fed', 'treasury',
                 ['scripts/us_fed:all', 'scripts/us_fed:else']))
         self.assertFalse(
-            import_target.import_targetted_by_commit(
-                'scripts/us_fed', 'treasury', []))
+            import_target.import_targetted_by_commit('scripts/us_fed',
+                                                     'treasury', []))
         self.assertFalse(
-            import_target.import_targetted_by_commit(
-                'scripts/us_fed', 'treasury', ['scripts/us_fed:else']))
+            import_target.import_targetted_by_commit('scripts/us_fed',
+                                                     'treasury',
+                                                     ['scripts/us_fed:else']))

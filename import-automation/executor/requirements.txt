@@ -1,4 +1,5 @@
 requests
+protobuf
 google-auth
 google-cloud-logging
 google-cloud-storage

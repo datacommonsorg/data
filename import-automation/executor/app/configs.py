@@ -75,7 +75,7 @@ class ExecutorConfig:
 
     def _get_config(self, entity_id):
         client = datastore.Client(project=self.gcp_project_id,
-                                  namespace=self.datastore_configs_kind)
+                                  namespace=self.datastore_configs_namespace)
         key = client.key(self.datastore_configs_kind, entity_id)
         return client.get(key)[entity_id]
 
