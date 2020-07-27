@@ -19,42 +19,52 @@ import json
 import unittest
 from unittest import mock
 
+import google.api_core.exceptions
+
+from app import configs
 from app.executor import update_scheduler
+from test import utils
 
 
+@mock.patch('google.protobuf.json_format.MessageToDict',
+            lambda job, preserving_proto_field_name=False: dict(job))
 class UpdateSchedulerTest(unittest.TestCase):
+    """Tests for create_schedule and delete_schedule. schedule_on_commit is
+    tested in test_integration.py."""
 
     def setUp(self):
-        config = mock.MagicMock()
-        config.gcp_project_id = 'google.com:datcom-data'
-        config.scheduler_location = 'us-central1'
-        config.github_auth_username = 'username'
-        config.github_auth_access_token = 'access-token'
-        config.dashboard_oauth_client_id = 'client-id'
-        self.client = mock.MagicMock()
-        self.scheduler = update_scheduler.UpdateScheduler(self.client, config)
+        config = configs.ExecutorConfig(gcp_project_id='google.com:datcom-data',
+                                        scheduler_location='us-central1',
+                                        github_auth_username='username',
+                                        github_auth_access_token='access-token',
+                                        dashboard_oauth_client_id='client-id')
+        self.scheduler = update_scheduler.UpdateScheduler(
+            utils.SchedulerClientMock(), None, config, None)
 
+    @mock.patch('app.utils.utctime', lambda: '2020-07-24T16:27:22.609304+00:00')
     def test_create_schedule(self):
-        self.scheduler.create_schedule('scripts/us_fed:treasury', '5 4 * * *')
-        self.client.location_path.assert_called_once_with(
-            'google.com/datcom-data', 'us-central1')
-        args, _ = self.client.create_job.call_args
-        job = args[1]
-        self.assertEqual('scripts_us_fed_treasury', job['name'])
+        job = self.scheduler.create_schedule(
+            'scripts/us_fed:treasury', '5 4 * * *')
+        expected_name = ('projects/google.com:datcom-data/locations/'
+                         'us-central1/jobs/scripts_us_fed_treasury')
+        self.assertEqual(expected_name, job['name'])
         self.assertEqual('scripts/us_fed:treasury', job['description'])
         expected_body = {
             'absolute_import_name': 'scripts/us_fed:treasury',
             'configs': {
+                'github_repo_name': 'data',
+                'github_repo_owner_username': 'datacommonsorg',
                 'github_auth_username': 'username',
                 'github_auth_access_token': 'access-token',
                 'dashboard_oauth_client_id': 'client-id'
             }
         }
-        self.assertEqual(expected_body,
-                         json.loads(job['app_engine_http_target']['body']))
+        self.assertEqual(expected_body, job['app_engine_http_target']['body'])
 
     def test_delete_schedule(self):
+        self.scheduler.create_schedule('foo/bar:import', '5 4 * * *')
         self.scheduler.delete_schedule('foo/bar:import')
-        self.client.job_path.assert_called_once_with('google.com/datcom-data',
-                                                     'us-central1',
-                                                     'foo_bar_import')
+        self.assertRaises(
+            google.api_core.exceptions.GoogleAPICallError,
+            self.scheduler.delete_schedule,
+            'foo/bar:import')

@@ -23,7 +23,7 @@ import subprocess
 import tempfile
 import logging
 import traceback
-import typing
+from typing import Tuple, List, Dict, Optional, Callable
 import dataclasses
 
 from app import utils
@@ -57,7 +57,7 @@ class ExecutionResult:
     # Status of the execution, one of 'succeeded', 'failed', or 'pass'
     status: str
     # Absolute import names of the imports executed
-    imports_executed: typing.List[str]
+    imports_executed: List[str]
     # Description of the result
     message: str
 
@@ -215,10 +215,11 @@ class ImportExecutor:
             commit_sha, self.config.manifest_filename)
         # Import targets specified in the commit message,
         # e.g., 'scripts/us_fed/treasury:constant_maturity', 'constant_maturity'
-        targets = import_target.parse_commit_message_targets(commit_message)
+        targets = import_target.parse_commit_message_targets(
+            commit_message, 'IMPORTS')
         if not targets:
             message = ('No import target specified in commit message '
-                       '({commit_message})')
+                       f'({commit_message})')
             return ExecutionResult('pass', [], message)
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -363,7 +364,7 @@ class ImportExecutor:
     def _upload_import_inputs(self,
                               import_dir: str,
                               output_dir: str,
-                              import_inputs: typing.List[typing.Dict[str, str]],
+                              import_inputs: List[Dict[str, str]],
                               attempt_id: str = None) -> None:
 
         version = _clean_time(utils.pacific_time())
@@ -391,10 +392,10 @@ class ImportExecutor:
         self.uploader.upload_file(src, dest)
 
 
-def _run_and_handle_exception(run_id: typing.Optional[str],
-                              dashboard: typing.Optional[
+def _run_and_handle_exception(run_id: Optional[str],
+                              dashboard: Optional[
                                   dashboard_api.DashboardAPI],
-                              exec_func: typing.Callable,
+                              exec_func: Callable,
                               *args) -> ExecutionResult:
     """Runs a method of ImportExecutor that executes imports and handles
     its exceptions.
@@ -426,7 +427,7 @@ def _run_and_handle_exception(run_id: typing.Optional[str],
         return ExecutionResult('failed', [], message)
 
 
-def _run_with_timeout(args: typing.List[str],
+def _run_with_timeout(args: List[str],
                       timeout: float,
                       cwd: str = None) -> subprocess.CompletedProcess:
     """Runs a command in a subprocess.
@@ -448,7 +449,7 @@ def _run_with_timeout(args: typing.List[str],
 
 def _create_venv(
         requirements_path: str, venv_dir: str,
-        timeout: float) -> typing.Tuple[str, subprocess.CompletedProcess]:
+        timeout: float) -> Tuple[str, subprocess.CompletedProcess]:
     """Creates a Python virtual environment.
 
     The virtual environment is created with --system-site-packages set,
@@ -558,9 +559,20 @@ def _create_system_run_init_failed_result(trace):
                            f'{_SYSTEM_RUN_INIT_FAILED_MESSAGE}\n{trace}')
 
 
-def _clean_time(time: str) -> str:
-    """Given a time string, replaces ':', '-', and '.' with '_'."""
-    return re.sub(r'[:\-.]', '_', time)
+def _clean_time(
+        time: str, chars_to_replace: Tuple[str] = (':', '-', '.', '+')) -> str:
+    """Replaces some characters with underscores.
+
+    Args:
+        time: Time string.
+        chars_to_replace: List of characters to replace with underscores.
+
+    Returns:
+        Time string with the characters replaced.
+    """
+    for char in chars_to_replace:
+        time = time.replace(char, '_')
+    return time
 
 
 def _construct_process_message(message: str,

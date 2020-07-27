@@ -16,6 +16,7 @@ import os
 import shutil
 import re
 import datetime
+from typing import List
 
 import pytz
 import requests
@@ -26,7 +27,8 @@ def utctime():
 
 
 def pacific_time():
-    return datetime.datetime.now(pytz.timezone('America/Los_Angeles')).isoformat()
+    return datetime.datetime.now(
+        pytz.timezone('America/Los_Angeles')).isoformat()
 
 
 def list_to_str(a_list, sep=', '):
@@ -68,3 +70,29 @@ def download_file(url, dest_dir):
         with open(path, 'wb') as out:
             shutil.copyfileobj(response.raw, out)
         return path
+
+
+def parse_tag_list(message: str, tag: str, allowed_chars: str) -> List[str]:
+    """Parses a comma separated list following a tag.
+
+    Example:
+        The function call
+            parse_tag_list('abc IMPORTS=foo,bar abc', 'IMPORTS', 'a-z')
+        returns ['foo', 'bar'].
+
+    Args:
+        message: The message containing the list, as a string.
+        tag: The tag preceding the list, as a string.
+        allowed_chars: Valid characters in an element. This should be in regex
+            format, e.g. 'A-Za-z' and 'abc'.
+
+    Returns:
+        A list of elements each as a string.
+    """
+    targets = set()
+    pattern = r'(?:{}=)([{},]+)'.format(tag, allowed_chars)
+    target_lists = re.findall(pattern, message)
+    for target_list in target_lists:
+        for target in target_list.split(','):
+            targets.add(target)
+    return list(targets)

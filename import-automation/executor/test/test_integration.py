@@ -151,3 +151,66 @@ class CommitTest(unittest.TestCase):
             'message': 'No issues'
         }
         self.assertEqual(expected_result, response.json)
+
+
+@mock.patch('app.utils.utctime', lambda: '2020-07-24T16:27:22.609304+00:00')
+@mock.patch('app.configs._testing', lambda: True)
+@mock.patch('google.cloud.scheduler.CloudSchedulerClient',
+            utils.SchedulerClientMock)
+@mock.patch('google.protobuf.json_format.MessageToDict',
+            lambda job, preserving_proto_field_name=False: dict(job))
+class ScheduleTest(unittest.TestCase):
+    """Tests for scheduling import updates."""
+
+    def setUp(self):
+        self.app = main.FLASK_APP.test_client()
+
+    def test_treasury_absolute(self):
+        """The target is specified using absolute import name."""
+        response = self.app.post(
+            '/schedule',
+            json={
+                'COMMIT_SHA': '0df53ec282b1dd030165c7dc309d53964562b211',
+                'configs': {
+                    'github_repo_owner_username': 'intrepiditee',
+                    'github_repo_name': 'data-demo'
+                }
+            })
+        self.assertEqual(200, response.status_code)
+        scheduled_imports = response.json['imports_executed']
+        self.assertEqual(1, len(scheduled_imports))
+        scheduled = scheduled_imports[0]
+        expected_name = ('projects/google.com:datcom-data/'
+                         'locations/us-central1/jobs/'
+                         'scripts_us_fed_treasury_constant_maturity_'
+                         'rates_us_treasury_constant_maturity_rates')
+        self.assertEqual(expected_name, scheduled['name'])
+        expected_desc = ('scripts/us_fed/treasury_constant_maturity_'
+                         'rates:us_treasury_constant_maturity_rates')
+        self.assertEqual(expected_desc, scheduled['description'])
+        self.assertEqual('* * * * *', scheduled['schedule'])
+
+    def test_treasury_relative(self):
+        """The target is specified using relative import name."""
+        response = self.app.post(
+            '/schedule',
+            json={
+                'COMMIT_SHA': '50195689a407af9ab60d5ead0dd733b0cfbe4cb0',
+                'configs': {
+                    'github_repo_owner_username': 'intrepiditee',
+                    'github_repo_name': 'data-demo'
+                }
+            })
+        self.assertEqual(200, response.status_code)
+        scheduled_imports = response.json['imports_executed']
+        self.assertEqual(1, len(scheduled_imports))
+        scheduled = scheduled_imports[0]
+        expected_name = ('projects/google.com:datcom-data/'
+                         'locations/us-central1/jobs/'
+                         'scripts_us_fed_treasury_constant_maturity_'
+                         'rates_us_treasury_constant_maturity_rates')
+        self.assertEqual(expected_name, scheduled['name'])
+        expected_desc = ('scripts/us_fed/treasury_constant_maturity_'
+                         'rates:us_treasury_constant_maturity_rates')
+        self.assertEqual(expected_desc, scheduled['description'])
+        self.assertEqual('* * * * *', scheduled['schedule'])

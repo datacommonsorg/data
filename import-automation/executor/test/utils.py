@@ -12,7 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from requests import exceptions
+from unittest import mock
+
+import requests.exceptions
+import google.api_core.exceptions
 
 
 class ResponseMock:
@@ -25,7 +28,7 @@ class ResponseMock:
 
     def raise_for_status(self):
         if self.status_code != 200:
-            raise exceptions.HTTPError
+            raise requests.exceptions.HTTPError
 
     def json(self):
         self.raise_for_status()
@@ -63,7 +66,7 @@ def compare_lines(expected_path, to_test_path, num_lines, reverse=False):
                 lines_to_test = to_test.readlines()[:num_lines]
             if len(lines_to_test) != len(expected_lines):
                 print(f'Expected to test {len(lines_to_test)} lines but '
-                      f'only got {len(expected_lines)}')
+                      f'got {len(expected_lines)} lines')
                 return False
             for i in range(min(len(lines_to_test), num_lines)):
                 expected_line = expected_lines[i]
@@ -73,3 +76,38 @@ def compare_lines(expected_path, to_test_path, num_lines, reverse=False):
                     print('GOT:', line_to_test)
                     return False
             return True
+
+
+class SchedulerJobMock(dict):
+
+    @property
+    def app_engine_http_target(self):
+        return SchedulerJobMock(self.__getitem__('app_engine_http_target'))
+
+    @property
+    def body(self):
+        return self.__getitem__('body')
+
+
+class SchedulerClientMock:
+    """Mock class for google.cloud.scheduler.CloudSchedulerClient."""
+
+    def __init__(self):
+        self.jobs = {}
+
+    def create_job(self, location_path, job):
+        job = SchedulerJobMock(job)
+        self.jobs[job["name"]] = job
+        return job
+
+    def delete_job(self, job_path):
+        if job_path not in self.jobs:
+            raise google.api_core.exceptions.GoogleAPICallError(
+                'Job does not exist')
+        return self.jobs.pop(job_path)
+
+    def location_path(self, project, location):
+        return f'projects/{project}/locations/{location}'
+
+    def job_path(self, project, location, job):
+        return f'projects/{project}/locations/{location}/jobs/{job}'
