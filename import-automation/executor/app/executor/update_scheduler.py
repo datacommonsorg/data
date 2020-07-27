@@ -74,7 +74,6 @@ class UpdateScheduler:
 
         Args:
             commit_sha: ID of the commit as a string.
-            commit_sha: ID of the commit as a string.
             repo_name: Name of the repository the commit is for as a string.
             branch_name: Name of the branch the commit is for as a string.
             pr_number: If the commit is a part of a pull request, the number of
@@ -162,10 +161,9 @@ class UpdateScheduler:
             The method call
                 create_schedule('scripts/us_fed:treasury', '* * * * *')
             schedules a cron job that updates the import every minute. The
-            name of the job is 'scripts_us_fed_treasury_<current UTC time>',
-            e.g., 'scripts_us_fed_treasury_2020_07_24T16_27_22_609304_00_00',
-            and the description is 'scripts/us_fed:treasury'.
-            See _create_job_body for exact job definition.
+            name of the job is 'scripts_us_fed_treasury' and the description
+            is 'scripts/us_fed:treasury'. See _create_job_body for
+            exact job definition.
 
         Attributes:
             absolute_import_name: Absolute import name of the import to be
