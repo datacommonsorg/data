@@ -41,18 +41,15 @@ with open('COVIDTracking_US.csv', 'w', newline='') as f_out:
                 ('CumulativeCount_MedicalConditionIncident'
                  '_COVID_19_PatientRecovered'):
                     row_dict['recovered'],
-                ('CumulativeCount_MedicalConditionIncident',
-                 '_COVID_19_PatientDeceased'):
+                ('CumulativeCount_MedicalConditionIncident', '_COVID_19_PatientDeceased'):
                     row_dict['death'],
                 'Count_MedicalConditionIncident_COVID_19_PatientHospitalized':
                     row_dict['hospitalizedCurrently'],
-                ('CumulativeCount_MedicalConditionIncident',
-                 '_COVID_19_PatientHospitalized'):
+                ('CumulativeCount_MedicalConditionIncident', '_COVID_19_PatientHospitalized'):
                     row_dict['hospitalizedCumulative'],
                 'Count_MedicalConditionIncident_COVID_19_PatientInICU':
                     row_dict['inIcuCurrently'],
-                ('CumulativeCount_MedicalConditionIncident',
-                 '_COVID_19_PatientInICU'):
+                ('CumulativeCount_MedicalConditionIncident', '_COVID_19_PatientInICU'):
                     row_dict['inIcuCumulative'],
                 'Count_MedicalConditionIncident_COVID_19_PatientOnVentilator':
                     row_dict['onVentilatorCurrently'],

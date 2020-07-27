@@ -17,7 +17,6 @@ import os
 import tempfile
 import unittest
 
-
 TEMPLATE_MCF_GEO = """
 Node: E:COVIDTracking_States->E0
 typeOf: schema:State
@@ -33,9 +32,9 @@ observationDate: C:COVIDTracking_States->Date
 value: C:COVIDTracking_States->{stat_var}
 """
 
-
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
+
 
 class TestPreprocessCSVTest(unittest.TestCase):
 
