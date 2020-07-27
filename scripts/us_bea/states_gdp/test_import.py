@@ -18,10 +18,12 @@ Tests the import_data.py script.
 
     python3 test_import.py
 """
+
 import unittest
+
 import pandas as pd
-import import_data
-import import_industry_data_and_gen_mcf
+from us_bea.states_gdp import import_data
+from us_bea.states_gdp import import_industry_data_and_gen_mcf
 
 TEST_DATA_DIR = "test_csvs/"
 
@@ -85,9 +87,8 @@ class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
 
     def test_value_converter(self):
         """Tests value converter function that cleans out empty datapoints."""
-        val_conv_fn = (import_industry_data_and_gen_mcf
-                       .StateGDPIndustryDataLoader
-                       .value_converter)
+        val_conv_fn = (import_industry_data_and_gen_mcf.
+                       StateGDPIndustryDataLoader.value_converter)
         self.assertEqual(val_conv_fn("(D)"), -1)
         self.assertEqual(val_conv_fn("(E)"), -1)
         self.assertEqual(val_conv_fn("356785)"), -1)
@@ -100,9 +101,8 @@ class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
         """Tests industry class converter function that cleans out empty
         datapoints.
         """
-        ind_conv_fn = (import_industry_data_and_gen_mcf
-                       .StateGDPIndustryDataLoader
-                       .convert_industry_class)
+        ind_conv_fn = (import_industry_data_and_gen_mcf.
+                       StateGDPIndustryDataLoader.convert_industry_class)
 
         prefix = "dcs:USStateQuarterlyIndustryGDP_NAICS_"
         self.assertEqual(ind_conv_fn("35"), prefix + "35")
