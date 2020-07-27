@@ -1,0 +1,480 @@
+Node: dcid:Count_MortalityEvent
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_Upto4Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 0 4]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_Upto4Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 0 4]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_Upto4Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 0 4]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+
+Node: dcid:Count_MortalityEvent_5To9Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 5 9]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_5To9Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 5 9]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_5To9Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 5 9]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_10To14Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 10 14]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_10To14Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 10 14]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_10To14Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 10 14]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_15To19Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 15 19]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_15To19Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 15 19]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_15To19Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 15 19]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_20To24Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 20 24]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_20To24Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 20 24]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_20To24Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 20 24]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_25To29Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 25 29]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_25To29Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 25 29]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_25To29Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 25 29]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_30To34Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 30 34]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_30To34Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 30 34]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_30To34Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 30 34]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_35To39Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 35 39]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_35To39Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 35 39]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_35To39Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 35 39]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_40To44Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 40 44]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_40To44Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 40 44]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_40To44Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 40 44]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_45To49Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 45 49]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_45To49Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 45 49]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_45To49Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 45 49]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_50To54Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 50 54]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_50To54Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 50 54]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_50To54Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 50 54]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_55To59Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 55 59]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_55To59Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 55 59]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_55To59Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 55 59]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_60To64Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 60 64]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_60To64Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 60 64]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_60To64Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 60 64]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_65To69Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 65 69]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_65To69Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 65 69]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_65To69Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 65 69]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_70To74Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 70 74]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_70To74Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 70 74]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_70To74Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 70 74]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_75To79Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 75 79]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_75To79Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 75 79]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_75To79Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 75 79]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_80OrMoreYears
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 80 -]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_80OrMoreYears_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 80 -]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_80OrMoreYears_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 80 -]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_Upto14Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 0 14]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_Upto14Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 0 14]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_Upto14Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 0 14]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_15To64Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 15 64]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_15To64Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 15 64]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_15To64Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 15 64]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_65OrMoreYears
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 65 -]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_65OrMoreYears_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 65 -]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent_65OrMoreYears_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+age: [Years 65 -]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
