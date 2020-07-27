@@ -41,7 +41,7 @@ Node: dcid:ChainingEnum
 name: "ChainingEnum"
 typeOf: schema:Class
 subClassOf: schema:MeasurementMethodEnum
-description: "An enumeration of chained and unchained price index measurement methods"
+description: "An enumeration of chained and unchained price index measurement methods."
 
 Node: dcid:BLSUnchained
 name: "BLSUnchained"
