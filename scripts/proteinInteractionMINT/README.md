@@ -1,63 +1,104 @@
-# Scripts for importing ontology dataset from the Molecular INTeraction database (MINT)
+# Importing protein-protein interaction dataset from the Molecular INTeraction database (MINT)
 
-This directory stores all scripts used to import datasets from the Molecular INTeraction database (MINT). MINT contains publicly available protein-protein interactions and uses the Molecular Interaction Ontology of the Proteomics Standard Initiative (PSI-MI).
+## Table of Contents
 
-## Usage
+1. [About the Dataset](#about-the-dataset)
+    1. [Download URL](#download-url)
+    2. [Overview](#overview)
+    3. [Notes and Caveats](#notes-and-caveats)
+    4. [License](#license)
+    5. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
+2. [About the Import](#about-the-import)
+    1. [Artifacts](#artifacts)
+    2. [Import Procedure](#import-procedure)
+
+
+## About the Dataset
+
+### Download URL
+
+The data can be downloaded at [MINT Download](https://mint.bio.uniroma2.it/index.php/download/)
+
+The downloaded data is tab-separated format. 
+
+### Overview
+
+This directory stores all scripts used to import datasets from the Molecular INTeraction database (MINT). MINT contains publicly available protein-protein interactions and uses the Molecular Interaction Ontology of the Proteomics Standard Initiative (PSI-MI). 
+
+A protein-protein interaction instance connects to partipant proteins through property "interactingProtein", connects to detection methods through property "interactionDetectionMethod", connects to interaction type through property "interactionType", connects to the source database through property "interactionSource", connects to related publications through property "references" and connects to related database records through property "identifier". The objects of "interactionType", "interactionDetectionMethod" and "interactionSource" are enumeration instances from EMBL-EBI Molecular Interaction Ontology database. The objects of "interactingProtein" are protein instances from UniPort.
+
+#### Example Nodes in Data Commons
+
+[ProteinProteinInteraction](https://datacommons.org/browser/ProteinProteinInteraction)
+[AGO2_HUMAN_PABP1_HUMAN](https://datacommons.org/browser/bio/AGO2_HUMAN_PABP1_HUMAN)
+
+
+### Notes and Caveats
+
+The dataset contains information for the interaction and the participant proteins. A full interaction example from the website is https://mint.bio.uniroma2.it/index.php/detailed-curation/?id=MINT-4409840. The features of each participant such as "Biological role", "Interactor type" are not included in the downloadable database thus we didn't import these features to Data Commons.
+
+There are 133,167 records in the MINT database. Here we imported 129,585 records to Data Commons. The 3,582 records that we didn't import have problematic protein identifiers that we cannot connect them to UniProt protein instances right now.
+
+### License
+
+Licata, Luana, Leonardo Briganti, Daniele Peluso, Livia Perfetto, Marta Iannuccelli, Eugenia Galeota, Francesca Sacco et al. "MINT, the molecular interaction database: 2012 update." Nucleic acids research 40, no. D1 (2012): D857-D861.
+
+### Dataset Documentation and Relevant Links
+
+- Documentation: [MINT, the molecular interaction database: 2012 update](https://academic.oup.com/nar/article/40/D1/D857/2903552)
+- Data website: [MINT](https://mint.bio.uniroma2.it/)
+
+## About the import
+
+### Artifacts
+
+#### Scripts 
+
+parse_ebi.py
+parse_ebi_test.py
+
+### Import Procedure
+
+#### Processing Steps 
 
 To generate the data schema from MINT, run:
 
 ```bash
-python3 parseMINT.py mint_database ../proteinInteractionEBI/psimi2dcid.txt 1
+python3 parse_mint.py -f mint_database -p psimi2dcid.txt
+```
+If new reference sources which are not properties in dcs occur, 'new_source.txt' containing such information will be generated as well. 
+
+Somes cases were not imported into the KG due to the lack of UniProt ID or the incorrect dcid format. To generate the files containing the information for the failed cases, run:  
+
+```bash
+python3 parse_mint.py -f mint_database -p psimi2dcid.txt
+```
+The interaction information of the records which don't have UniProt name will be saved to 'no_uniprot_cases.txt',  which don't have correct DCIDs will be saved to 'wrong_dcid_cases.txt'.
+
+To do the unit test, run:
+```bash
+python3 parse_mint_test.py
 ```
 
-Then number at the last postion is how many parts you want the schema to be saved to. If "1" the schemas will be saved to 'BioMINTDataSchema.mcf', or 'BioMINTDataSchema_part1.mcf', etc. if other numbers.  
+#### Post-Processing Steps 
 
-If new reference sources which are not properties in dcs occur, 'BioMINTNewSource.txt' containing such information will be generated as well. The interaction information of the records which don't have the correct UniProt name will be saved to 'BioMINTFailedDcid.txt',  which don't have correct UniProt Identifiers will be saved to 'BioMINTNoUniprot.txt', and which failed the parsing will be saved to 'BioMINTParseFailed.txt'. 
+If new reference sources which are not properties in dcs occur, 'new_source.txt' containing such information will be generated. For example: 
 
-## Database format
+```
+references
+pubMedID: 1007323
+goID: 30234
+```
 
-The data can be downloaded at https://mint.bio.uniroma2.it/index.php/download/ 
+If this is the case, new properties should be created for the new sources and added to data/schema/CompoundSchema.mcf, such as:
 
-The downloaded data is tab-separated format.
-
-The dataset contains information for the interaction and the participant proteins. A full interaction example from the website is https://mint.bio.uniroma2.it/index.php/detailed-curation/?id=MINT-4409840. The features of each participant such as "Biological role", "Interactor type" are not included in the downloadable database thus we didn't import these features to Data Commons. The information available in the downloadable database is shown in the graph below.  
-
-![A MINT Record](./graph/MINTexample.png)
-
-A protein-protein interaction instance connects to partipant proteins through property "interactingProtein", connects to detection methods through property "interactionDetectionMethod", connects to interaction type through property "interactionType", connects to the source database through property "interactionSource", connects to related publications through property "references" and connects to related database records through property "identifier". The objects of "interactionType", "interactionDetectionMethod" and "interactionSource" are enumeration instances from EMBL-EBI Molecular Interaction Ontology database. The objects of "interactingProtein" are protein instances from UniPort.
-
-
-## Links to Dev Browser
-
-ProteinProteinInteraction class node 
-
-https://datcom-browser-dev2.googleplex.com/kg?dcid=ProteinProteinInteraction
-
-ProteinProteinInteraction instance nodes
-
-https://datcom-browser-dev2.googleplex.com/kg?dcid=bio/CCR1_HUMAN_PRIO_HUMAN&db=
-
-https://datcom-browser-dev2.googleplex.com/kg?dcid=bio/NUDC1_HUMAN_F91A1_HUMAN&db= 
-
- 
-
-## Schema overview
-
-
-### New class
-
-ProteinProteinInteraction.
-
-### New properties
-
-interactingProtein, interactionType, interactionSource, pubMedID, imexID, mintID, digitalObjectID, rcsbPDBID, intActID, electronMicroscopyDataBankID, worldWideProteinDataBankID, rcsbPDBID, reactomePathwayID, proteinDataBankInEuropeID    
-
-## Notes and Caveats
-
-There are 133,167 records in the MINT database. Here we imported 129,585 records to Data Commons. The 3,582 records that we didn't import have problematic protein identifiers that we cannot connect them to UniProt right now.
-
-## Reference
-
-Licata, Luana, et al. "MINT, the molecular interaction database: 2012 update." Nucleic acids research 40.D1 (2012): D857-D861.
-https://academic.oup.com/nar/article/40/D1/D857/2903552
-
+```
+Node: dcid:pubMedID
+typeOf: schema:Property
+name: "pubMedID"
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompound
+description: "Identifier for reference paper on PubMed."
+url: "https://pubmed.ncbi.nlm.nih.gov/"
+```
+and the function get_references in parse_ebi.py should handle the new source correspondingly. The same steps for identifiers and confidence score.
