@@ -29,13 +29,13 @@ A protein-protein interaction instance connects to partipant proteins through pr
 
 #### Example Nodes in Data Commons
 
-[ProteinProteinInteraction](https://datacommons.org/browser/ProteinProteinInteraction)
-[AGO2_HUMAN_PABP1_HUMAN](https://datacommons.org/browser/bio/AGO2_HUMAN_PABP1_HUMAN)
+[ProteinProteinInteraction](https://datacommons.org/browser/ProteinProteinInteraction) 
 
+[AGO2_HUMAN_PABP1_HUMAN](https://datacommons.org/browser/bio/AGO2_HUMAN_PABP1_HUMAN) 
 
 ### Notes and Caveats
 
-The dataset contains information for the interaction and the participant proteins. A full interaction example from the website is https://mint.bio.uniroma2.it/index.php/detailed-curation/?id=MINT-4409840. The features of each participant such as "Biological role", "Interactor type" are not included in the downloadable database thus we didn't import these features to Data Commons.
+The dataset contains information for the interaction and the participant proteins. A full interaction example from the website: [MINT-4409840](https://mint.bio.uniroma2.it/index.php/detailed-curation/?id=MINT-4409840). The features of each participant such as "Biological role", "Interactor type" are not included in the downloadable database thus we didn't import these features to Data Commons.
 
 There are 133,167 records in the MINT database. Here we imported 129,585 records to Data Commons. The 3,582 records that we didn't import have problematic protein identifiers that we cannot connect them to UniProt protein instances right now.
 
@@ -54,14 +54,15 @@ Licata, Luana, Leonardo Briganti, Daniele Peluso, Livia Perfetto, Marta Iannucce
 
 #### Scripts 
 
-parse_ebi.py
-parse_ebi_test.py
+parse_ebi.py 
+
+parse_ebi_test.py 
 
 ### Import Procedure
 
 #### Processing Steps 
 
-To generate the data schema from MINT, run:
+To generate the data mcf from MINT, run:
 
 ```bash
 python3 parse_mint.py -f mint_database -p psimi2dcid.txt
@@ -71,7 +72,7 @@ If new reference sources which are not properties in dcs occur, 'new_source.txt'
 Somes cases were not imported into the KG due to the lack of UniProt ID or the incorrect dcid format. To generate the files containing the information for the failed cases, run:  
 
 ```bash
-python3 parse_mint.py -f mint_database -p psimi2dcid.txt
+python3 parse_mint.py -f mint_database -p psimi2dcid.txt -o True
 ```
 The interaction information of the records which don't have UniProt name will be saved to 'no_uniprot_cases.txt',  which don't have correct DCIDs will be saved to 'wrong_dcid_cases.txt'.
 
