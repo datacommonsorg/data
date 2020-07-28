@@ -148,7 +148,7 @@ def find_imports_to_execute(targets: List[str], manifest_dirs: Set[str],
     Args:
         targets: List of import targets specified by the commit message each as
             a string.
-        manifest_dirs: List of subdirectories of the repository touched by the
+        manifest_dirs: Set of subdirectories of the repository touched by the
             commit each as a string.
         manifest_filename: Filename of the manifest as a string.
         repo_dir: Absolute path to the repository as a string.
