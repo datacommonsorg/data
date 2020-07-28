@@ -50,10 +50,10 @@ All the MCF files are named by `OECD_{subdirectory name}_stat_vars.mcf`. Except 
 All the template MCF files are named by `OECD_{subdirectory name}.tmcf`.
 
 ### Script
-The script file `preprocess_csv.py` are used to generate cleaned csv files and template MCFs.
+The script file `preprocess_csv.py` is used to generate cleaned csv files and template MCFs.
 
 ## Generating Artifacts
-To generate the cleaned csv and template MCF file, run
+To generate the cleaned csv and template MCF files, run
 ```bash
 python3 preprocess_csv.py
 ```

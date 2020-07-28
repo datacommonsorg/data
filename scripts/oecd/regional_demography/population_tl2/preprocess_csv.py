@@ -29,7 +29,6 @@ nuts = dict(json.loads(open('../region_nuts_codes.json').read()))
 df = df[df['REG_ID'].isin(nuts.keys()) | df['Region'].isin(name2dcid.keys())]
 # Second, replace the names with dcids
 df['Region'] = df.apply(lambda row: generate_geo_id(row, nuts, name2dcid), axis=1)
-# df.replace({'Region': name2dcid}, inplace=True)
 df['Year'] = '"' + df['Year'].astype(str) + '"'
 
 df = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]

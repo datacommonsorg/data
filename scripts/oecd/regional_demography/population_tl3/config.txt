@@ -1,7 +1,7 @@
 import: {
     import_name: "OECD_population_tl3"
     provenance_url: "https://stats.oecd.org"
-    provenance_description: "Various regional statistics measured by OECD(Organisation for Economic Co-operation and Development)."
+    provenance_description: "Various regional statistics measured by OECD (Organisation for Economic Co-operation and Development)."
     # Path to the resolved MCF.
     mcf_url: "gs://resolved_mcf/external_tables/oecd_pop_tl3/nodes.mcf-00000-of-00001"
     update_frequency: "P1Y"
