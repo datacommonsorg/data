@@ -48,27 +48,27 @@ VAR_to_statsvars = {
     'DEATH_RAT':
         'Count_MortalityEvent_Count_Person',
     'DEATH_RAM':
-        'Count_MortalityEvent_Male_Count_Person',
+        'Count_MortalityEvent_Male_Count_Person_Male',
     'DEATH_RAF':
-        'Count_MortalityEvent_Female_Count_Person',
+        'Count_MortalityEvent_Female_Count_Person_Female',
     'STD_MORTT':
         'Count_MortalityEvent_Count_Person_AgeAdjusted',
     'STD_MORTM':
-        'Count_MortalityEvent_Male_Count_Person_AgeAdjusted',
+        'Count_MortalityEvent_Male_Count_Person_Male_AgeAdjusted',
     'STD_MORTF':
-        'Count_MortalityEvent_Female_Count_Person_AgeAdjusted',
+        'Count_MortalityEvent_Female_Count_Person_Female_AgeAdjusted',
     'YOU_DEATH_RAT':
-        'Count_MortalityEvent_Upto14Years_Count_Person',
+        'Count_MortalityEvent_Upto14Years_Count_Person_Upto14Years',
     'YOU_DEATH_RAM':
-        'Count_MortalityEvent_Upto14Years_Male_Count_Person',
+        'Count_MortalityEvent_Upto14Years_Male_Count_Person_Upto14Years_Male',
     'YOU_DEATH_RAF':
-        'Count_MortalityEvent_Upto14Years_Female_Count_Person',
+        'Count_MortalityEvent_Upto14Years_Female_Count_Person_Upto14Years_Female',
     'INF_MORTT':
-        'Count_MortalityEvent_LessThan1Year_Count_BirthEvent_LiveBirth',
+        'Count_MortalityEvent_LessThan1Year_Count_BirthEvent',
     'INF_MORTM':
-        'Count_MortalityEvent_LessThan1Year_Male_Count_BirthEvent_LiveBirth',
+        'Count_MortalityEvent_LessThan1Year_Male_Count_BirthEvent_Male',
     'INF_MORTF':
-        'Count_MortalityEvent_LessThan1Year_Female_Count_BirthEvent_LiveBirth',
+        'Count_MortalityEvent_LessThan1Year_Female_Count_BirthEvent_Female',
     'LIFE_EXPT':
         'LifeExpectancy_Person',
     'LIFE_EXPF':

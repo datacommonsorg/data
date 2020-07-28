@@ -5,47 +5,47 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
 
-Node: dcid:Count_MortalityEvent_Male_Count_Person
+Node: dcid:Count_MortalityEvent_Male_Count_Person_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Male
 
-Node: dcid:Count_MortalityEvent_Female_Count_Person
+Node: dcid:Count_MortalityEvent_Female_Count_Person_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Female
 
-Node: dcid:Count_MortalityEvent_Upto14Years_Count_Person
+Node: dcid:Count_MortalityEvent_Upto14Years_Count_Person_Upto14Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Upto14Years
 
-Node: dcid:Count_MortalityEvent_Upto14Years_Male_Count_Person
+Node: dcid:Count_MortalityEvent_Upto14Years_Male_Count_Person_Upto14Years_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Upto14Years_Male
 
-Node: dcid:Count_MortalityEvent_Upto14Years_Female_Count_Person
+Node: dcid:Count_MortalityEvent_Upto14Years_Female_Count_Person_Upto14Years_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
 gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Upto14Years_Female
 
 Node: dcid:Count_MortalityEvent_Count_Person_AgeAdjusted
 typeOf: dcs:StatisticalVariable
@@ -55,49 +55,49 @@ statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
 measurementQualifier: dcs:AgeAdjusted
 
-Node: dcid:Count_MortalityEvent_Male_Count_Person_AgeAdjusted
+Node: dcid:Count_MortalityEvent_Male_Count_Person_Male_AgeAdjusted
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Male
 measurementQualifier: dcs:AgeAdjusted
 
-Node: dcid:Count_MortalityEvent_Female_Count_Person_AgeAdjusted
+Node: dcid:Count_MortalityEvent_Female_Count_Person_Female_AgeAdjusted
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Female
 measurementQualifier: dcs:AgeAdjusted
 
-Node: dcid:Count_MortalityEvent_LessThan1Year_Count_BirthEvent_LiveBirth
+Node: dcid:Count_MortalityEvent_LessThan1Year_Count_BirthEvent
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years - 1]
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_BirthEvent_LiveBirth
+measurementDenominator: dcs:Count_BirthEvent
 
-Node: dcid:Count_MortalityEvent_LessThan1Year_Male_Count_BirthEvent_LiveBirth
+Node: dcid:Count_MortalityEvent_LessThan1Year_Male_Count_BirthEvent_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years - 1]
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_BirthEvent_LiveBirth
+measurementDenominator: dcs:Count_BirthEvent_Male
 
-Node: dcid:Count_MortalityEvent_LessThan1Year_Female_Count_BirthEvent_LiveBirth
+Node: dcid:Count_MortalityEvent_LessThan1Year_Female_Count_BirthEvent_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years - 1]
 gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-measurementDenominator: dcs:Count_BirthEvent_LiveBirth
+measurementDenominator: dcs:Count_BirthEvent_Female
 
 Node: dcid:LifeExpectancy_Person
 typeOf: dcs:StatisticalVariable
@@ -118,3 +118,23 @@ populationType: schema:Person
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
 gender: schema:Male
+
+Node: dcid:Count_BirthEvent
+typeOf: dcs:StatisticalVariable
+populationType: schema:BirthEvent
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthEvent_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:BirthEvent
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthEvent_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:BirthEvent
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
