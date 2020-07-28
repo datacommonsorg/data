@@ -71,7 +71,6 @@ class ProgressLog(flask_restful.Resource):
     utils.add_fields(parser, required_fields, required=True)
     utils.add_fields(parser, optional_fields, required=False)
 
-    # TODO(intrepiditee): Change other resources to also accept an optional arg.
     def __init__(self, client=None, message_manager=None):
         """Constructs a ProgressLog.
 
