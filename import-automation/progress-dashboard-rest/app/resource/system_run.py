@@ -127,7 +127,7 @@ class SystemRunByID(SystemRun):
         if _MODEL.run_id in args or _MODEL.import_attempts in args:
             return validation.get_patch_forbidden_error(
                 (_MODEL.run_id, _MODEL.import_attempts))
-        valid, err, code = validation.system_run_valid(args, run_id=run_id)
+        valid, err, code = validation.is_system_run_valid(args, run_id=run_id)
         if not valid:
             return err, code
 

@@ -125,7 +125,7 @@ class ImportAttemptByID(ImportAttempt):
         if _MODEL.attempt_id in args or _MODEL.run_id in args:
             return validation.get_patch_forbidden_error(
                 (_MODEL.attempt_id, _MODEL.run_id))
-        valid, err, code = validation.import_attempt_valid(
+        valid, err, code = validation.is_import_attempt_valid(
             args, attempt_id=attempt_id)
         if not valid:
             return err, code

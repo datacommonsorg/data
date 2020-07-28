@@ -57,7 +57,7 @@ class SystemRunList(system_run.SystemRun):
             the error message is a string and the error code is an int.
         """
         args = system_run.SystemRunByID.parser.parse_args()
-        valid, err, code = validation.system_run_valid(args)
+        valid, err, code = validation.is_system_run_valid(args)
         if not valid:
             return err, code
 
