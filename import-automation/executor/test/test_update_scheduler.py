@@ -43,8 +43,8 @@ class UpdateSchedulerTest(unittest.TestCase):
 
     @mock.patch('app.utils.utctime', lambda: '2020-07-24T16:27:22.609304+00:00')
     def test_create_schedule(self):
-        job = self.scheduler.create_schedule(
-            'scripts/us_fed:treasury', '5 4 * * *')
+        job = self.scheduler.create_schedule('scripts/us_fed:treasury',
+                                             '5 4 * * *')
         expected_name = ('projects/google.com:datcom-data/locations/'
                          'us-central1/jobs/scripts_us_fed_treasury')
         self.assertEqual(expected_name, job['name'])
@@ -64,7 +64,5 @@ class UpdateSchedulerTest(unittest.TestCase):
     def test_delete_schedule(self):
         self.scheduler.create_schedule('foo/bar:import', '5 4 * * *')
         self.scheduler.delete_schedule('foo/bar:import')
-        self.assertRaises(
-            google.api_core.exceptions.GoogleAPICallError,
-            self.scheduler.delete_schedule,
-            'foo/bar:import')
+        self.assertRaises(google.api_core.exceptions.GoogleAPICallError,
+                          self.scheduler.delete_schedule, 'foo/bar:import')

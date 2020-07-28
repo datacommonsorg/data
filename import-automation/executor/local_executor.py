@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Local import executor. Run '. run_local_executor.sh --help' for usage.
 
@@ -48,40 +47,36 @@ flags.DEFINE_string(
     name='import_name',
     default=None,
     help='Absolute import name of the import to execute of the form '
-         f'{_IMPORT_NAME_FORM}.',
+    f'{_IMPORT_NAME_FORM}.',
     short_name='i')
-flags.DEFINE_string(
-    name='output_dir',
-    default='.',
-    help='Path to the output directory.',
-    short_name='o')
-flags.DEFINE_string(
-    name='repo_name',
-    default='data',
-    help='Name of the GitHub repository containing the import.',
-    short_name='r')
+flags.DEFINE_string(name='output_dir',
+                    default='.',
+                    help='Path to the output directory.',
+                    short_name='o')
+flags.DEFINE_string(name='repo_name',
+                    default='data',
+                    help='Name of the GitHub repository containing the import.',
+                    short_name='r')
 flags.DEFINE_string(
     name='owner_username',
     default='datacommonsorg',
     help='GitHub username of the owner of the GitHub repository '
-         'containing the import.',
+    'containing the import.',
     short_name='u')
-flags.DEFINE_string(
-    name='username',
-    default='',
-    help='GitHub username for authentication.',
-    short_name='n')
-flags.DEFINE_string(
-    name='access_token',
-    default='',
-    help='GitHub access token for authentication.',
-    short_name='t')
+flags.DEFINE_string(name='username',
+                    default='',
+                    help='GitHub username for authentication.',
+                    short_name='n')
+flags.DEFINE_string(name='access_token',
+                    default='',
+                    help='GitHub access token for authentication.',
+                    short_name='t')
 
 flags.mark_flag_as_required('import_name')
 flags.register_validator('import_name',
                          import_target.absolute_import_name,
                          message='--import_name must be of the form '
-                                 f'{_IMPORT_NAME_FORM}.')
+                         f'{_IMPORT_NAME_FORM}.')
 
 
 def main(_):
@@ -92,8 +87,8 @@ def main(_):
         github_auth_access_token=FLAGS.access_token)
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.LocalFileUploader(output_dir=FLAGS.output_dir),
-        github=github_api.GitHubRepoAPI(
-            config.github_repo_owner_username, config.github_repo_name),
+        github=github_api.GitHubRepoAPI(config.github_repo_owner_username,
+                                        config.github_repo_name),
         config=config)
     results = executor.execute_imports_on_update(FLAGS.import_name)
     print(results)

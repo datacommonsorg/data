@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for app/utils.py and test/utils.py.
 """
@@ -82,27 +81,35 @@ class TestUtilsTest(unittest.TestCase):
                 for i in range(lines):
                     to_test.write(f'{i}\n')
                 to_test.flush()
-                self.assertTrue(test.utils.compare_lines(
-                    expected.name, to_test.name, lines))
-                self.assertTrue(test.utils.compare_lines(
-                    expected.name, to_test.name, lines, True))
+                self.assertTrue(
+                    test.utils.compare_lines(expected.name, to_test.name,
+                                             lines))
+                self.assertTrue(
+                    test.utils.compare_lines(expected.name, to_test.name, lines,
+                                             True))
 
-                self.assertTrue(test.utils.compare_lines(
-                    expected.name, to_test.name, 999999))
-                self.assertTrue(test.utils.compare_lines(
-                    expected.name, to_test.name, 999999, True))
+                self.assertTrue(
+                    test.utils.compare_lines(expected.name, to_test.name,
+                                             999999))
+                self.assertTrue(
+                    test.utils.compare_lines(expected.name, to_test.name,
+                                             999999, True))
 
                 to_test.write('one-more-line-at-end\n')
                 to_test.flush()
-                self.assertTrue(test.utils.compare_lines(
-                    expected.name, to_test.name, lines))
-                self.assertFalse(test.utils.compare_lines(
-                    expected.name, to_test.name, lines, True))
+                self.assertTrue(
+                    test.utils.compare_lines(expected.name, to_test.name,
+                                             lines))
+                self.assertFalse(
+                    test.utils.compare_lines(expected.name, to_test.name, lines,
+                                             True))
 
                 to_test.seek(0)
                 to_test.write('one-more-line-at-start\n')
                 to_test.flush()
-                self.assertFalse(test.utils.compare_lines(
-                    expected.name, to_test.name, lines))
-                self.assertFalse(test.utils.compare_lines(
-                    expected.name, to_test.name, lines, True))
+                self.assertFalse(
+                    test.utils.compare_lines(expected.name, to_test.name,
+                                             lines))
+                self.assertFalse(
+                    test.utils.compare_lines(expected.name, to_test.name, lines,
+                                             True))

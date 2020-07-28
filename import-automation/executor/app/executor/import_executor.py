@@ -164,8 +164,7 @@ class ImportExecutor:
         with tempfile.TemporaryDirectory() as tmpdir:
             logging.info('%s: downloading repo', absolute_import_name)
             repo_dir = self.github.download_repo(tmpdir)
-            logging.info(absolute_import_name + ': downloaded repo ' +
-                         repo_dir)
+            logging.info(absolute_import_name + ': downloaded repo ' + repo_dir)
             if self.dashboard:
                 self.dashboard.info(f'Downloaded repo: {repo_dir}',
                                     run_id=run_id)

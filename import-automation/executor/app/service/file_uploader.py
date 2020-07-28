@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 File uploaders for uploading generated data files.
 """
@@ -24,6 +23,7 @@ from google.cloud import storage
 
 class FileUploader:
     """Base class for all file uploaders."""
+
     def upload_file(self, src: str, dest: str) -> None:
         """Uploads the file at src to a file at dest."""
         raise NotImplementedError
@@ -40,6 +40,7 @@ class GCSFileUploader(FileUploader):
         bucket: google.cloud.storage.Bucket object for the bucket files are
             uploaded to.
     """
+
     def __init__(self, project_id: str, bucket_name: str):
         """Constructs a GCSFileUploader.
 
@@ -92,6 +93,7 @@ class LocalFileUploader(FileUploader):
             LocalFileUploader('/tmp').upload_file('/foo/file', 'bar/file') will
             copy '/foo/file' to '/tmp/bar/file'.
     """
+
     def __init__(self, output_dir=''):
         self.output_dir = os.path.abspath(output_dir)
 

@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Import progress dashboard API client.
 """
@@ -64,24 +63,24 @@ class DashboardAPI:
         self.iap = iap_request.IAPRequest(client_id)
 
     def critical(self, message, attempt_id=None, run_id=None, time_logged=None):
-        return self._log_helper(message, LogLevel.CRITICAL,
-                                attempt_id, run_id, time_logged)
+        return self._log_helper(message, LogLevel.CRITICAL, attempt_id, run_id,
+                                time_logged)
 
     def error(self, message, attempt_id=None, run_id=None, time_logged=None):
-        return self._log_helper(message, LogLevel.ERROR,
-                                attempt_id, run_id, time_logged)
+        return self._log_helper(message, LogLevel.ERROR, attempt_id, run_id,
+                                time_logged)
 
     def warning(self, message, attempt_id=None, run_id=None, time_logged=None):
-        return self._log_helper(message, LogLevel.WARNING,
-                                attempt_id, run_id, time_logged)
+        return self._log_helper(message, LogLevel.WARNING, attempt_id, run_id,
+                                time_logged)
 
     def info(self, message, attempt_id=None, run_id=None, time_logged=None):
-        return self._log_helper(message, LogLevel.INFO,
-                                attempt_id, run_id, time_logged)
+        return self._log_helper(message, LogLevel.INFO, attempt_id, run_id,
+                                time_logged)
 
     def debug(self, message, attempt_id=None, run_id=None, time_logged=None):
-        return self._log_helper(message, LogLevel.DEBUG,
-                                attempt_id, run_id, time_logged)
+        return self._log_helper(message, LogLevel.DEBUG, attempt_id, run_id,
+                                time_logged)
 
     def init_run(self, system_run):
         return self.iap.post(_DASHBOARD_RUN_LIST, json=system_run).json()
@@ -96,9 +95,9 @@ class DashboardAPI:
             if not attempt_id:
                 raise ValueError('attempt_id not supplied as an argument and '
                                  'not found the in the attempt body')
-        return self.iap.patch(
-            _DASHBOARD_ATTEMPT_BY_ID.format_map({'attempt_id': attempt_id}),
-            json=import_attempt).json()
+        return self.iap.patch(_DASHBOARD_ATTEMPT_BY_ID.format_map(
+            {'attempt_id': attempt_id}),
+                              json=import_attempt).json()
 
     def update_run(self, system_run, run_id=None):
         if not run_id:
@@ -106,9 +105,9 @@ class DashboardAPI:
             if not run_id:
                 raise ValueError('run_id not supplied as an argument and '
                                  'not found the in the run body')
-        return self.iap.patch(
-            _DASHBOARD_RUN_BY_ID.format_map({'run_id': run_id}),
-            json=system_run).json()
+        return self.iap.patch(_DASHBOARD_RUN_BY_ID.format_map(
+            {'run_id': run_id}),
+                              json=system_run).json()
 
     def _log_helper(self,
                     message: str,
@@ -136,11 +135,7 @@ class DashboardAPI:
             raise ValueError('Neither run_id nor attempt_id is specified')
         if not time_logged:
             time_logged = utils.utctime()
-        log = {
-            'message': message,
-            'level': level,
-            'time_logged': time_logged
-        }
+        log = {'message': message, 'level': level, 'time_logged': time_logged}
         if run_id:
             log['run_id'] = run_id
         if attempt_id:
