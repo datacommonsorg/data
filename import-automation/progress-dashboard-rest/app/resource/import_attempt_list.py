@@ -62,7 +62,7 @@ class ImportAttemptList(import_attempt.ImportAttempt):
             the error message is a string and the error code is an int.
         """
         args = import_attempt.ImportAttempt.parser.parse_args()
-        valid, err, code = validation.import_attempt_valid(args)
+        valid, err, code = validation.is_import_attempt_valid(args)
         if not valid:
             return err, code
         present, err, code = validation.required_fields_present(
