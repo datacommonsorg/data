@@ -71,19 +71,20 @@ class ProgressLog(flask_restful.Resource):
     utils.add_fields(parser, required_fields, required=True)
     utils.add_fields(parser, optional_fields, required=False)
 
-    # TODO(intrepiditee): Change other resources to also accept an optional arg.
-    def __init__(self, client=None):
+    def __init__(self, client=None, message_manager=None):
         """Constructs a ProgressLog.
 
         Args:
             client: datastore Client object used to communicate with Datastore.
+            message_manager: LogMessageManager object used to store and retreive
+                log messages.
         """
         if not client:
             client = utils.create_datastore_client()
         self.client = client
         self.run_database = system_run_database.SystemRunDatabase(self.client)
         self.log_database = progress_log_database.ProgressLogDatabase(
-            self.client)
+            self.client, message_manager)
         self.attempt_database = import_attempt_database.ImportAttemptDatabase(
             self.client)
 
@@ -97,7 +98,6 @@ class ProgressLogByID(ProgressLog):
     """
 
     # TODO(intrepiditee): Use a helper for get.
-    # TODO(intrepiditee): Use exception for request errors.
     def get(self, log_id):
         """Queries the progress logs by its log_id.
 

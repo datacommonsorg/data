@@ -77,9 +77,11 @@ class ImportAttempt(flask_restful.Resource):
                        (_MODEL.node_mcf_url,), (_MODEL.csv_url,))
     utils.add_fields(parser, optional_fields, required=False)
 
-    def __init__(self):
+    def __init__(self, client=None):
         """Constructs an ImportAttempt."""
-        self.client = utils.create_datastore_client()
+        if not client:
+            client = utils.create_datastore_client()
+        self.client = client
         self.database = import_attempt_database.ImportAttemptDatabase(
             self.client)
 
