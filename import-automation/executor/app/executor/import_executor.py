@@ -206,21 +206,17 @@ class ImportExecutor:
                                           run_id: str = None
                                          ) -> ExecutionResult:
 
-        commit_info = self.github.query_commit(commit_sha)
-        commit_message = commit_info['commit']['message']
-
+        # Import targets specified in the commit message,
+        # e.g., 'scripts/us_fed/treasury:constant_maturity', 'constant_maturity'
+        targets = import_target.find_targets_in_commit(commit_sha, 'IMPORTS',
+                                                       self.github)
+        if not targets:
+            return ExecutionResult(
+                'pass', [], 'No import target specified in commit message')
         # Relative paths to directories having files changed by the commit
         # containing manifests, e.g. 'scripts/us_fed/treasury'.
         manifest_dirs = self.github.find_dirs_in_commit_containing_file(
             commit_sha, self.config.manifest_filename)
-        # Import targets specified in the commit message,
-        # e.g., 'scripts/us_fed/treasury:constant_maturity', 'constant_maturity'
-        targets = import_target.parse_commit_message_targets(
-            commit_message, 'IMPORTS')
-        if not targets:
-            message = ('No import target specified in commit message '
-                       f'({commit_message})')
-            return ExecutionResult('pass', [], message)
 
         with tempfile.TemporaryDirectory() as tmpdir:
             repo_dir = self.github.download_repo(tmpdir, commit_sha)
@@ -229,46 +225,27 @@ class ImportExecutor:
                                     run_id=run_id)
             repo_dir = os.path.join(tmpdir, repo_dir)
 
-            validation.are_import_targets_valid(targets, list(manifest_dirs),
-                                                repo_dir,
-                                                self.config.manifest_filename)
-
-            # Import targets specified in the commit message can be absolute,
-            # e.g., 'scripts/us_fed/treasury:constant_maturity'.
-            # Add the directory components, e.g., 'scripts/us_fed/treasury',
-            # to manifest_dirs.
-            for target in import_target.filter_absolute_import_names(targets):
-                import_dir, _ = import_target.split_absolute_import_name(target)
-                manifest_dirs.add(import_dir)
-            # At this point, manifest_dirs contains all the directories that
-            # will be looked at to look for imports.
+            imports_to_execute = import_target.find_imports_to_execute(
+                targets=targets,
+                manifest_dirs=manifest_dirs,
+                manifest_filename=self.config.manifest_filename,
+                repo_dir=repo_dir)
 
             executed_imports = []
-            for import_dir in manifest_dirs:
-                absolute_import_dir = os.path.join(repo_dir, import_dir)
-                manifest_path = os.path.join(absolute_import_dir,
-                                             self.config.manifest_filename)
-                manifest = parse_manifest(manifest_path)
-                validation.is_manifest_valid(manifest, repo_dir, import_dir)
-
-                for spec in manifest['import_specifications']:
-                    import_name = spec['import_name']
-                    if not import_target.import_targetted_by_commit(
-                            import_dir, import_name, targets):
-                        continue
-                    try:
-                        self._import_one(
-                            relative_import_dir=import_dir,
-                            absolute_import_dir=absolute_import_dir,
-                            import_spec=spec,
-                            run_id=run_id)
-                    except Exception:
-                        raise ExecutionError(
-                            ExecutionResult('failed', executed_imports,
-                                            traceback.format_exc()))
-                    absolute_name = import_target.get_absolute_import_name(
-                        import_dir, import_name)
-                    executed_imports.append(absolute_name)
+            for relative_dir, spec in imports_to_execute:
+                try:
+                    self._import_one(relative_import_dir=relative_dir,
+                                     absolute_import_dir=os.path.join(
+                                         repo_dir, relative_dir),
+                                     import_spec=spec,
+                                     run_id=run_id)
+                except Exception:
+                    raise ExecutionError(
+                        ExecutionResult('failed', executed_imports,
+                                        traceback.format_exc()))
+                absolute_name = import_target.get_absolute_import_name(
+                    relative_dir, spec['import_name'])
+                executed_imports.append(absolute_name)
 
             return ExecutionResult('succeeded', executed_imports, 'No issues')
 
@@ -393,10 +370,8 @@ class ImportExecutor:
 
 
 def _run_and_handle_exception(run_id: Optional[str],
-                              dashboard: Optional[
-                                  dashboard_api.DashboardAPI],
-                              exec_func: Callable,
-                              *args) -> ExecutionResult:
+                              dashboard: Optional[dashboard_api.DashboardAPI],
+                              exec_func: Callable, *args) -> ExecutionResult:
     """Runs a method of ImportExecutor that executes imports and handles
     its exceptions.
 
@@ -447,9 +422,8 @@ def _run_with_timeout(args: List[str],
                           cwd=cwd)
 
 
-def _create_venv(
-        requirements_path: str, venv_dir: str,
-        timeout: float) -> Tuple[str, subprocess.CompletedProcess]:
+def _create_venv(requirements_path: str, venv_dir: str,
+                 timeout: float) -> Tuple[str, subprocess.CompletedProcess]:
     """Creates a Python virtual environment.
 
     The virtual environment is created with --system-site-packages set,
@@ -560,7 +534,7 @@ def _create_system_run_init_failed_result(trace):
 
 
 def _clean_time(
-        time: str, chars_to_replace: Tuple[str] = (':', '-', '.', '+')) -> str:
+    time: str, chars_to_replace: Tuple[str] = (':', '-', '.', '+')) -> str:
     """Replaces some characters with underscores.
 
     Args:
