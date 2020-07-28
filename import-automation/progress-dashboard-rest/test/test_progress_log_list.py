@@ -127,7 +127,7 @@ class ProgressLogListTest(unittest.TestCase):
             _LOG.attempt_id: self.attempts[0][_ATTEMPT.attempt_id]
         }
         message, code = self.resource.post()
-        self.assertEqual(403, code)
+        self.assertEqual(409, code)
         self.assertIn('run_id', message)
         self.assertIn('attempt_id', message)
 

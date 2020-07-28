@@ -17,7 +17,6 @@ Tests for utils.py.
 
 from datetime import datetime
 import unittest
-from unittest import mock
 
 from flask_restful import reqparse
 
