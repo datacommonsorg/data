@@ -33,15 +33,13 @@ def setUpModule():
 class SystemRunByIDTest(unittest.TestCase):
     """Tests for SystemRunByID."""
 
-    @mock.patch('app.utils.create_datastore_client',
-                utils.create_test_datastore_client)
     def setUp(self):
         """Creates the endpoints before every test."""
+        client = utils.create_test_datastore_client()
         # Used for querying system runs by run_id
-        self.resource = system_run.SystemRunByID()
+        self.resource = system_run.SystemRunByID(client)
         # Used for creating system runs
-        list_resource = system_run_list.SystemRunList()
-        list_resource.database.client = self.resource.database.client
+        list_resource = system_run_list.SystemRunList(client)
         runs = [{}, {_MODEL.commit_sha: 'commit-sha'}]
         self.runs = utils.ingest_system_runs(list_resource, runs)
 
