@@ -233,9 +233,8 @@ def create_statistical_variables(jolts_df, schema_mapping):
 
                     # Remove separation type entry if not includes.
                     if job_change_event == "":
-                        stat_var_schema = (
-                            stat_var_schema.replace(
-                                "jobChangeEvent: dcs:{JOB_CHANGE_EVENT}\n", ""))
+                        stat_var_schema = (stat_var_schema.replace(
+                            "jobChangeEvent: dcs:{JOB_CHANGE_EVENT}\n", ""))
 
                     # Replace all other fields.
                     f_out.write(
