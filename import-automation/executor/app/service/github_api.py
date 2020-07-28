@@ -94,7 +94,7 @@ class GitHubRepoAPI:
             Assume the repository is named 'data-demo' owned by 'intrepiditee'.
             The method call
                 download_repo('download_dir', '12ef23231a')
-            returns 'intrepiditee-data-demo-12ef23231a'.
+            returns 'download_dir/intrepiditee-data-demo-12ef23231a'.
 
         Args:
             dest_dir: Directory to download the repository into as a string.
@@ -103,7 +103,7 @@ class GitHubRepoAPI:
                 is downloaded.
 
         Returns:
-            Name of a directory containing the downloaded repository,
+            Path to a directory containing the downloaded repository,
             as a string. The repository's contents are downloaded and copied
             into the same directory structure within the returned directory.
         """
@@ -131,7 +131,8 @@ class GitHubRepoAPI:
                     raise FileNotFoundError(
                         'Downloaded tar file does not contain the repository')
                 tar.extractall(dest_dir)
-                return _get_path_first_component(files[0])
+                return os.path.join(dest_dir,
+                                    _get_path_first_component(files[0]))
 
     def _build_content_query(self, commit_sha: str, path: str) -> str:
         return GITHUB_CONTENT_API.format_map({
