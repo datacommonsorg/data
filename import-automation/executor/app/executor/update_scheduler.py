@@ -105,8 +105,8 @@ class UpdateScheduler:
             self, commit_sha: str,
             run_id: str) -> import_executor.ExecutionResult:
 
-        targets = import_target.find_targets_in_commit(
-            commit_sha, 'SCHEDULES', self.github)
+        targets = import_target.find_targets_in_commit(commit_sha, 'SCHEDULES',
+                                                       self.github)
         if not targets:
             return import_executor.ExecutionResult(
                 'pass', [], 'No import target specified in commit message')
@@ -115,7 +115,6 @@ class UpdateScheduler:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             repo_dir = self.github.download_repo(tmpdir, commit_sha)
-            repo_dir = os.path.join(tmpdir, repo_dir)
 
             imports_to_execute = import_target.find_imports_to_execute(
                 targets=targets,
@@ -127,8 +126,8 @@ class UpdateScheduler:
             for relative_dir, spec in imports_to_execute:
                 schedule = spec.get('cron_schedule')
                 if not schedule:
-                    manifest_path = os.path.join(
-                        relative_dir, self.config.manifest_filename)
+                    manifest_path = os.path.join(relative_dir,
+                                                 self.config.manifest_filename)
                     raise KeyError(
                         f'cron_schedule not found in {manifest_path}')
                 try:
@@ -138,8 +137,8 @@ class UpdateScheduler:
                         self.create_schedule(absolute_name, schedule))
                 except Exception:
                     raise import_executor.ExecutionError(
-                        import_executor.ExecutionResult(
-                            'failed', scheduled, traceback.format_exc()))
+                        import_executor.ExecutionResult('failed', scheduled,
+                                                        traceback.format_exc()))
             return import_executor.ExecutionResult('succeeded', scheduled,
                                                    'No issues')
 
@@ -170,13 +169,12 @@ class UpdateScheduler:
             Same exceptions as CloudSchedulerClient.create_job.
         """
         location_path = self.client.location_path(
-            self.config.gcp_project_id,
-            self.config.scheduler_location)
+            self.config.gcp_project_id, self.config.scheduler_location)
         job = self.client.create_job(
-            location_path,
-            self._create_job_body(absolute_import_name, schedule))
-        scheduled = json_format.MessageToDict(
-            job, preserving_proto_field_name=True)
+            location_path, self._create_job_body(absolute_import_name,
+                                                 schedule))
+        scheduled = json_format.MessageToDict(job,
+                                              preserving_proto_field_name=True)
         scheduled['app_engine_http_target']['body'] = json.loads(
             job.app_engine_http_target.body)
         return scheduled
@@ -192,8 +190,7 @@ class UpdateScheduler:
             Same exceptions as CloudSchedulerClient.delete_job.
         """
         job_path = self.client.job_path(
-            self.config.gcp_project_id,
-            self.config.scheduler_location,
+            self.config.gcp_project_id, self.config.scheduler_location,
             _fix_absolute_import_name(absolute_import_name))
         self.client.delete_job(job_path)
 
@@ -213,8 +210,7 @@ class UpdateScheduler:
             as an argument to CloudSchedulerClient.create_job.
         """
         job_name = self.client.job_path(
-            self.config.gcp_project_id,
-            self.config.scheduler_location,
+            self.config.gcp_project_id, self.config.scheduler_location,
             _fix_absolute_import_name(absolute_import_name))
         return {
             'name': job_name,

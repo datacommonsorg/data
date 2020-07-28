@@ -303,21 +303,22 @@ class GitHubAPITest(unittest.TestCase):
 
             with tempfile.TemporaryDirectory() as dir_path:
                 downloaded = self.github.download_repo(dir_path, 'commit-sha')
-                self.assertEqual('treasury_constant_maturity_rates', downloaded)
+                self.assertEqual(f'{dir_path}/treasury_constant_maturity_rates',
+                                 downloaded)
 
-                file = os.path.join(dir_path, downloaded,
+                file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.csv')
                 assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.csv', file,
                     test_integration.NUM_LINES_TO_CHECK)
 
-                file = os.path.join(dir_path, downloaded,
+                file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.mcf')
                 assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.mcf', file,
                     test_integration.NUM_LINES_TO_CHECK)
 
-                file = os.path.join(dir_path, downloaded,
+                file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.tmcf')
                 assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.tmcf', file,

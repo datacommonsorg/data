@@ -163,11 +163,11 @@ class ImportExecutor:
         logging.info('%s: BEGIN', absolute_import_name)
         with tempfile.TemporaryDirectory() as tmpdir:
             logging.info('%s: downloading repo', absolute_import_name)
-            repo_dirname = self.github.download_repo(tmpdir)
+            repo_dir = self.github.download_repo(tmpdir)
             logging.info(absolute_import_name + ': downloaded repo ' +
-                         repo_dirname)
+                         repo_dir)
             if self.dashboard:
-                self.dashboard.info(f'Downloaded repo: {repo_dirname}',
+                self.dashboard.info(f'Downloaded repo: {repo_dir}',
                                     run_id=run_id)
 
             executed_imports = []
@@ -175,7 +175,7 @@ class ImportExecutor:
             # An example import_dir is 'scripts/us_fed/treasury'
             import_dir, import_name = import_target.split_absolute_import_name(
                 absolute_import_name)
-            absolute_import_dir = os.path.join(tmpdir, repo_dirname, import_dir)
+            absolute_import_dir = os.path.join(repo_dir, import_dir)
             manifest_path = os.path.join(absolute_import_dir,
                                          self.config.manifest_filename)
             manifest = parse_manifest(manifest_path)
@@ -223,7 +223,6 @@ class ImportExecutor:
             if self.dashboard:
                 self.dashboard.info(f'Downloaded repo: {repo_dir}',
                                     run_id=run_id)
-            repo_dir = os.path.join(tmpdir, repo_dir)
 
             imports_to_execute = import_target.find_imports_to_execute(
                 targets=targets,

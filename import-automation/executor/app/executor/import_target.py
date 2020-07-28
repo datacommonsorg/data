@@ -123,10 +123,8 @@ def is_import_targetted_by_commit(import_dir: str, import_name: str,
             import_name in import_targets or absolute_all in import_targets)
 
 
-def find_targets_in_commit(
-        commit_sha: str,
-        tag: str,
-        github: github_api.GitHubRepoAPI) -> List[str]:
+def find_targets_in_commit(commit_sha: str, tag: str,
+                           github: github_api.GitHubRepoAPI) -> List[str]:
     """Finds the targets specified in the commit message of a GitHub commit.
 
     Args:
@@ -139,16 +137,12 @@ def find_targets_in_commit(
     """
     commit_info = github.query_commit(commit_sha)
     commit_message = commit_info['commit']['message']
-    return parse_commit_message_targets(
-        commit_message, tag)
+    return parse_commit_message_targets(commit_message, tag)
 
 
-def find_imports_to_execute(
-    targets: List[str],
-    manifest_dirs: Set[str],
-    manifest_filename: str,
-    repo_dir: str
-) -> List[Tuple[str, Dict]]:
+def find_imports_to_execute(targets: List[str], manifest_dirs: Set[str],
+                            manifest_filename: str,
+                            repo_dir: str) -> List[Tuple[str, Dict]]:
     """Finds imports to execute on a GitHub commit.
 
     Args:
@@ -170,8 +164,8 @@ def find_imports_to_execute(
             are_import_targets_valid) or the manifest is not valid (see
             is_manifest_valid).
     """
-    validation.are_import_targets_valid(
-        targets, list(manifest_dirs), repo_dir, manifest_filename)
+    validation.are_import_targets_valid(targets, list(manifest_dirs), repo_dir,
+                                        manifest_filename)
 
     # Import targets specified in the commit message can be absolute,
     # e.g., 'scripts/us_fed/treasury:constant_maturity'.
@@ -192,8 +186,8 @@ def find_imports_to_execute(
         validation.is_manifest_valid(manifest, repo_dir, import_dir)
 
         for spec in manifest['import_specifications']:
-            if not is_import_targetted_by_commit(
-                    import_dir, spec['import_name'], targets):
+            if not is_import_targetted_by_commit(import_dir,
+                                                 spec['import_name'], targets):
                 continue
             imports_to_execute.append((import_dir, spec))
     return imports_to_execute
