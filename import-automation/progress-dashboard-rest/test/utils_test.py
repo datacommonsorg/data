@@ -19,6 +19,7 @@ from datetime import datetime
 import unittest
 
 from flask_restful import reqparse
+from werkzeug import exceptions
 
 from app import utils
 from app import main
@@ -104,3 +105,27 @@ class RequestParserAddFieldsTest(unittest.TestCase):
         with main.FLASK_APP.test_request_context(json=with_pr_and_logs):
             args = parser.parse_args()
             self.assertEqual(with_pr_and_logs, args)
+
+    def test_dict(self):
+        """Tests parsing dicts."""
+        parser = reqparse.RequestParser()
+        utils.add_fields(parser, [('field', dict, 'append')], required=True)
+
+        body = {'field': [{'abc': '1'}, {'def': '2', 'ghi': '3'}, {}]}
+        with main.FLASK_APP.test_request_context(json=body):
+            self.assertEqual(body, parser.parse_args())
+
+        # Empty list throws exception if field required
+        parser = reqparse.RequestParser()
+        utils.add_fields(parser, [('field', dict, 'append')], required=True)
+        body = {'field': []}
+        with self.assertRaises(exceptions.BadRequest):
+            with main.FLASK_APP.test_request_context(json=body):
+                parser.parse_args()
+
+        # Empty list accepted if field not required
+        parser = reqparse.RequestParser()
+        utils.add_fields(parser, [('field', dict, 'append')], required=False)
+        body = {'field': []}
+        with main.FLASK_APP.test_request_context(json=body):
+            self.assertEqual({}, parser.parse_args())

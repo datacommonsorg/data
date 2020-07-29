@@ -16,32 +16,15 @@ Import attempt resource associated with the endpoint
 '/import_attempts/<string:attempt_id>'.
 """
 
-import enum
-import http
-
-import flask_restful
 from flask_restful import reqparse
 
 from app import utils
 from app.service import import_attempt_database
 from app.service import validation
 from app.model import import_attempt_model
+from app.resource import base_resource
 
-_MODEL = import_attempt_model.ImportAttemptModel
-
-
-class ImportAttemptStatus(enum.Enum):
-    """Allowed status of an import attempt.
-
-    The status of an import attempt can only be one of these.
-    """
-    CREATED = 'created'
-    SUCCEEDED = 'succeeded'
-    FAILED = 'failed'
-
-
-IMPORT_ATTEMPT_STATUS = frozenset(
-    status.value for status in ImportAttemptStatus)
+_MODEL = import_attempt_model.ImportAttempt
 
 
 def set_import_attempt_default_values(import_attempt):
@@ -51,13 +34,14 @@ def set_import_attempt_default_values(import_attempt):
     time_created is set to the current time.
     logs is set to an empty list.
     """
-    import_attempt.setdefault(_MODEL.status, ImportAttemptStatus.CREATED.value)
+    import_attempt.setdefault(
+        _MODEL.status, import_attempt_model.ImportAttemptStatus.CREATED.value)
     import_attempt.setdefault(_MODEL.time_created, utils.utctime())
     import_attempt.setdefault(_MODEL.logs, [])
     return import_attempt
 
 
-class ImportAttempt(flask_restful.Resource):
+class ImportAttempt(base_resource.BaseResource):
     """Base class for an import attempt resource.
 
     Attributes:
@@ -73,8 +57,8 @@ class ImportAttempt(flask_restful.Resource):
                        (_MODEL.absolute_import_name,), (_MODEL.provenance_url,),
                        (_MODEL.provenance_description,), (_MODEL.status,),
                        (_MODEL.time_created,), (_MODEL.time_completed,),
-                       (_MODEL.logs, str, 'append'), (_MODEL.template_mcf_url,),
-                       (_MODEL.node_mcf_url,), (_MODEL.csv_url,))
+                       (_MODEL.logs, str, 'append'), (_MODEL.import_inputs,
+                                                      dict, 'append'))
     utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self, client=None):
@@ -104,10 +88,7 @@ class ImportAttemptByID(ImportAttempt):
             datastore Entity object. Otherwise, (error message, error code),
             where the error message is a string and the error code is an int.
         """
-        import_attempt = self.database.get(attempt_id)
-        if not import_attempt:
-            return validation.get_not_found_error(_MODEL.attempt_id, attempt_id)
-        return import_attempt
+        return self._get_helper(self.database, _MODEL.attempt_id, attempt_id)
 
     def patch(self, attempt_id):
         """Modifies the value of a field of an existing import attempt.
