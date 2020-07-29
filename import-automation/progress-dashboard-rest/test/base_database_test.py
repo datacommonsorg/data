@@ -13,9 +13,6 @@
 # limitations under the License.
 """
 Tests for base_database.py.
-
-TODO(intrepiditee): Decide later whether test filenames start with
-test_ or end with _test or use a pattern that supports both.
 """
 
 import unittest

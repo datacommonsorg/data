@@ -38,9 +38,9 @@ class ImportAttemptList(import_attempt.ImportAttempt):
             using the client.
     """
 
-    def __init__(self):
+    def __init__(self, client=None):
         """Constructs an ImportAttemptList."""
-        super().__init__()
+        super().__init__(client)
         self.run_database = system_run_database.SystemRunDatabase(self.client)
 
     def get(self):
