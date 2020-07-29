@@ -68,18 +68,19 @@ class ImportTargetTest(unittest.TestCase):
             import_target.is_import_targetted_by_commit(
                 'scripts/us_fed', 'treasury', ['scripts/us_fed:treasury']))
         self.assertTrue(
-            import_target.is_import_targetted_by_commit(
-                'scripts/us_fed', 'treasury', ['all']))
+            import_target.is_import_targetted_by_commit('scripts/us_fed',
+                                                        'treasury', ['all']))
         self.assertTrue(
-            import_target.is_import_targetted_by_commit(
-                'scripts/us_fed', 'treasury', ['scripts/us_fed:all']))
+            import_target.is_import_targetted_by_commit('scripts/us_fed',
+                                                        'treasury',
+                                                        ['scripts/us_fed:all']))
         self.assertTrue(
             import_target.is_import_targetted_by_commit(
                 'scripts/us_fed', 'treasury',
                 ['scripts/us_fed:all', 'scripts/us_fed:else']))
         self.assertFalse(
-            import_target.is_import_targetted_by_commit(
-                'scripts/us_fed', 'treasury', []))
+            import_target.is_import_targetted_by_commit('scripts/us_fed',
+                                                        'treasury', []))
         self.assertFalse(
             import_target.is_import_targetted_by_commit(
                 'scripts/us_fed', 'treasury', ['scripts/us_fed:else']))

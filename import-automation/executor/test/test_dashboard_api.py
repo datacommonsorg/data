@@ -52,11 +52,7 @@ class DashboardAPITest(unittest.TestCase):
     @mock.patch('app.service.iap_request.IAPRequest.post')
     def test_log_helper_time(self, post):
         """Tests that time_logged is generated if not supplied."""
-        args = {
-            'message': 'message',
-            'level': 'level',
-            'run_id': 'run'
-        }
+        args = {'message': 'message', 'level': 'level', 'run_id': 'run'}
         expected = {
             'message': 'message',
             'level': 'level',
@@ -70,15 +66,14 @@ class DashboardAPITest(unittest.TestCase):
     def test_log_helper_id(self):
         """Tests that at least one of run_id and attempt_id
         need to be specified."""
-        self.assertRaises(ValueError,
-                          self.dashboard._log_helper, 'message', 'level')
+        self.assertRaises(ValueError, self.dashboard._log_helper, 'message',
+                          'level')
 
     @mock.patch('app.service.iap_request.IAPRequest.post')
     def test_log_helper_http(self, post):
         """Tests that an exception is thrown is the HTTP request fails."""
         post.return_value = utils.ResponseMock(400)
-        self.assertRaises(exceptions.HTTPError,
-                          self.dashboard._log_helper,
+        self.assertRaises(exceptions.HTTPError, self.dashboard._log_helper,
                           'message', 'level', 'attempt')
 
     @mock.patch('app.service.iap_request.IAPRequest.patch')
@@ -99,7 +94,10 @@ class DashboardAPITest(unittest.TestCase):
         self.assertEqual({}, self.dashboard.update_attempt(attempt, 'idd'))
         self.dashboard.iap.patch.assert_called_with(
             'https://datcom-data.uc.r.appspot.com/import_attempts/idd',
-            json={'import_name': 'treasury', 'attempt_id': 'idd'})
+            json={
+                'import_name': 'treasury',
+                'attempt_id': 'idd'
+            })
 
     def test_update_attempt_no_id(self):
         """Tests that an exception is raised if attempt_id is not found."""
@@ -112,8 +110,7 @@ class DashboardAPITest(unittest.TestCase):
         patch.return_value = utils.ResponseMock(200, {})
         self.assertEqual({}, self.dashboard.update_run(run, 'id'))
         patch.assert_called_with(
-            'https://datcom-data.uc.r.appspot.com/system_runs/id',
-            json=run)
+            'https://datcom-data.uc.r.appspot.com/system_runs/id', json=run)
 
     @mock.patch('app.service.iap_request.IAPRequest.patch')
     def test_update_run_id(self, patch):
@@ -124,7 +121,10 @@ class DashboardAPITest(unittest.TestCase):
         self.assertEqual({}, self.dashboard.update_attempt(run))
         self.dashboard.iap.patch.assert_called_with(
             'https://datcom-data.uc.r.appspot.com/import_attempts/idddd',
-            json={'commit_sha': 'commit-sha', 'attempt_id': 'idddd'})
+            json={
+                'commit_sha': 'commit-sha',
+                'attempt_id': 'idddd'
+            })
 
     def test_update_run_no_id(self):
         """Tests that an exception is raised if run_id is not found."""
@@ -136,17 +136,10 @@ class DashboardAPITest(unittest.TestCase):
     def test_levels(self):
         """Tests that the convenient logging functions set the right
         logging levels.  """
-        args = {
-            'message': 'message',
-            'time_logged': 'time',
-            'run_id': 'run'
-        }
-        funcs = [
-            (self.dashboard.critical, 'critical'),
-            (self.dashboard.error, 'error'),
-            (self.dashboard.warning, 'warning'),
-            (self.dashboard.info, 'info'),
-            (self.dashboard.debug, 'debug')
-        ]
+        args = {'message': 'message', 'time_logged': 'time', 'run_id': 'run'}
+        funcs = [(self.dashboard.critical, 'critical'),
+                 (self.dashboard.error, 'error'),
+                 (self.dashboard.warning, 'warning'),
+                 (self.dashboard.info, 'info'), (self.dashboard.debug, 'debug')]
         for func, level in funcs:
             self.assertEqual(level, func(**args)['level'])

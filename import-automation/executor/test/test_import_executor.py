@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Tests for import_executor.py.
 """
@@ -27,17 +26,17 @@ from app.executor import import_executor
 class ImportExecutorTest(unittest.TestCase):
 
     def test_clean_time(self):
-        self.assertEqual('2020_07_15T12_07_17_365264_00_00',
-                         import_executor._clean_time(
-                             '2020-07-15T12:07:17.365264+00:00'))
-        self.assertEqual('2020_07_15T12_07_17_365264_07_00',
-                         import_executor._clean_time(
-                             '2020-07-15T12:07:17.365264-07:00'))
+        self.assertEqual(
+            '2020_07_15T12_07_17_365264_00_00',
+            import_executor._clean_time('2020-07-15T12:07:17.365264+00:00'))
+        self.assertEqual(
+            '2020_07_15T12_07_17_365264_07_00',
+            import_executor._clean_time('2020-07-15T12:07:17.365264-07:00'))
 
     def test_run_with_timeout(self):
-        self.assertRaises(
-            subprocess.TimeoutExpired,
-            import_executor._run_with_timeout, ['sleep', '5'], 0.1)
+        self.assertRaises(subprocess.TimeoutExpired,
+                          import_executor._run_with_timeout, ['sleep', '5'],
+                          0.1)
 
     def test_create_venv(self):
         with tempfile.NamedTemporaryFile(mode='w+') as requirements:
@@ -58,16 +57,19 @@ class ImportExecutorTest(unittest.TestCase):
 
                     script.write('import bs4\nimport requests\nprint(123)\n')
                     script.flush()
-                    proc = subprocess.run(
-                        [interpreter_path, script.name],
-                        capture_output=True, text=True, timeout=2)
+                    proc = subprocess.run([interpreter_path, script.name],
+                                          capture_output=True,
+                                          text=True,
+                                          timeout=2)
                     self.assertEqual(0, proc.returncode)
                     self.assertEqual('123\n', proc.stdout)
 
     @mock.patch('app.service.dashboard_api.DashboardAPI')
     def test_run_and_handle_exception(self, dashboard):
+
         def raise_exception():
             raise Exception
+
         result = import_executor._run_and_handle_exception(
             'run', dashboard, raise_exception)
         self.assertEqual('failed', result.status)
@@ -75,13 +77,14 @@ class ImportExecutorTest(unittest.TestCase):
         self.assertIn('Exception', result.message)
         self.assertIn('Traceback', result.message)
         dashboard.critical.assert_called_once()
-        dashboard.update_run.assert_called_once_with(
-            {'status': 'failed'}, run_id='run')
+        dashboard.update_run.assert_called_once_with({'status': 'failed'},
+                                                     run_id='run')
 
     def test_construct_process_message(self):
-        process = subprocess.run(
-            'printf "out" & >&2 printf "err" & exit 1',
-            shell=True, text=True, capture_output=True)
+        process = subprocess.run('printf "out" & >&2 printf "err" & exit 1',
+                                 shell=True,
+                                 text=True,
+                                 capture_output=True)
         message = import_executor._construct_process_message('message', process)
         expected = (
             'message\n'
@@ -96,12 +99,12 @@ class ImportExecutorTest(unittest.TestCase):
     def test_construct_process_message_no_output(self):
         """Tests that _construct_process_message does not append
         empty stdout and stderr to the message."""
-        process = subprocess.run(
-            'exit 0',
-            shell=True, text=True, capture_output=True)
+        process = subprocess.run('exit 0',
+                                 shell=True,
+                                 text=True,
+                                 capture_output=True)
         message = import_executor._construct_process_message('message', process)
-        expected = (
-            'message\n'
-            '[Subprocess command]: exit 0\n'
-            '[Subprocess return code]: 0')
+        expected = ('message\n'
+                    '[Subprocess command]: exit 0\n'
+                    '[Subprocess return code]: 0')
         self.assertEqual(expected, message)
