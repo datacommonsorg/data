@@ -80,9 +80,11 @@ class SystemRun(flask_restful.Resource):
                        (_MODEL.logs, str, 'append'), (_MODEL.status,))
     utils.add_fields(parser, optional_fields, required=False)
 
-    def __init__(self):
+    def __init__(self, client=None):
         """Constructs a SystemRun."""
-        self.client = utils.create_datastore_client()
+        if not client:
+            client = utils.create_datastore_client()
+        self.client = client
         self.database = system_run_database.SystemRunDatabase(self.client)
 
 
@@ -127,7 +129,7 @@ class SystemRunByID(SystemRun):
         if _MODEL.run_id in args or _MODEL.import_attempts in args:
             return validation.get_patch_forbidden_error(
                 (_MODEL.run_id, _MODEL.import_attempts))
-        valid, err, code = validation.system_run_valid(args, run_id=run_id)
+        valid, err, code = validation.is_system_run_valid(args, run_id=run_id)
         if not valid:
             return err, code
 

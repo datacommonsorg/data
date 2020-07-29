@@ -77,9 +77,11 @@ class ImportAttempt(flask_restful.Resource):
                        (_MODEL.node_mcf_url,), (_MODEL.csv_url,))
     utils.add_fields(parser, optional_fields, required=False)
 
-    def __init__(self):
+    def __init__(self, client=None):
         """Constructs an ImportAttempt."""
-        self.client = utils.create_datastore_client()
+        if not client:
+            client = utils.create_datastore_client()
+        self.client = client
         self.database = import_attempt_database.ImportAttemptDatabase(
             self.client)
 
@@ -125,7 +127,7 @@ class ImportAttemptByID(ImportAttempt):
         if _MODEL.attempt_id in args or _MODEL.run_id in args:
             return validation.get_patch_forbidden_error(
                 (_MODEL.attempt_id, _MODEL.run_id))
-        valid, err, code = validation.import_attempt_valid(
+        valid, err, code = validation.is_import_attempt_valid(
             args, attempt_id=attempt_id)
         if not valid:
             return err, code

@@ -1,5 +1,8 @@
 [MESSAGES CONTROL]
 
+# List of checkers and warnings to enable.
+enable=indexing-exception,old-raise-syntax
+
 # Disable the message, report, category or checker with the given id(s). You
 # can either give multiple identifiers separated by comma (,) or put this
 # option multiple times (only on the command line, not in the configuration
@@ -9,85 +12,84 @@
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
-disable=print-statement,
-        parameter-unpacking,
-        unpacking-in-except,
-        old-raise-syntax,
-        backtick,
-        long-suffix,
-        old-ne-operator,
-        old-octal-literal,
-        import-star-module-level,
-        non-ascii-bytes-literal,
-        raw-checker-failed,
+disable=backtick,
         bad-inline-option,
-        locally-disabled,
-        file-ignored,
-        suppressed-message,
-        useless-suppression,
-        deprecated-pragma,
-        use-symbolic-message-instead,
-        apply-builtin,
+        bad-python3-import,
         basestring-builtin,
         buffer-builtin,
         cmp-builtin,
-        coerce-builtin,
-        execfile-builtin,
-        file-builtin,
-        long-builtin,
-        raw_input-builtin,
-        reduce-builtin,
-        standarderror-builtin,
-        unicode-builtin,
-        xrange-builtin,
-        coerce-method,
-        delslice-method,
-        getslice-method,
-        setslice-method,
-        no-absolute-import,
-        old-division,
-        dict-iter-method,
-        dict-view-method,
-        next-method-called,
-        metaclass-assignment,
-        indexing-exception,
-        raising-string,
-        reload-builtin,
-        oct-method,
-        hex-method,
-        nonzero-method,
         cmp-method,
-        input-builtin,
-        round-builtin,
-        intern-builtin,
-        unichr-builtin,
-        map-builtin-not-iterating,
-        zip-builtin-not-iterating,
-        range-builtin-not-iterating,
-        filter-builtin-not-iterating,
-        using-cmp-argument,
-        eq-without-hash,
-        div-method,
-        idiv-method,
-        rdiv-method,
-        exception-message-attribute,
-        invalid-str-codec,
-        sys-max-int,
-        bad-python3-import,
-        deprecated-string-function,
-        deprecated-str-translate-call,
+        coerce-builtin,
+        coerce-method,
+        comprehension-escape,
+        delslice-method,
         deprecated-itertools-function,
+        deprecated-operator-function,
+        deprecated-pragma,
+        deprecated-str-translate-call,
+        deprecated-string-function,
+        deprecated-sys-function,
         deprecated-types-field,
-        next-method-defined,
+        deprecated-urllib-function,
         dict-items-not-iterating,
+        dict-iter-method,
         dict-keys-not-iterating,
         dict-values-not-iterating,
-        deprecated-operator-function,
-        deprecated-urllib-function,
-        xreadlines-attribute,
-        deprecated-sys-function,
+        dict-view-method,
+        div-method,
+        eq-without-hash,
         exception-escape,
-        comprehension-escape,
+        exception-message-attribute,
+        execfile-builtin,
+        file-builtin,
+        file-ignored,
+        filter-builtin-not-iterating,
+        getslice-method,
+        hex-method,
+        idiv-method,
+        import-star-module-level,
+        indexing-exception,
+        input-builtin,
+        intern-builtin,
+        invalid-str-codec,
+        locally-disabled,
+        long-builtin,
+        long-suffix,
+        map-builtin-not-iterating,
+        metaclass-assignment,
+        next-method-called,
+        next-method-defined,
+        no-absolute-import,
+        non-ascii-bytes-literal,
+        nonzero-method,
+        oct-method,
+        old-division,
+        old-ne-operator,
+        old-octal-literal,
+        old-raise-syntax,
+        parameter-unpacking,
+        print-statement,
+        raising-string,
+        range-builtin-not-iterating,
+        raw-checker-failed,
+        raw_input-builtin,
+        rdiv-method,
+        reduce-builtin,
+        reload-builtin,
+        round-builtin,
+        setslice-method,
+        standarderror-builtin,
+        suppressed-message,
+        sys-max-int,
+        unichr-builtin,
+        unicode-builtin,
+        unpacking-in-except,
+        use-symbolic-message-instead,
+        useless-suppression,
+        using-cmp-argument,
+        xrange-builtin,
+        xreadlines-attribute,
+        zip-builtin-not-iterating,
         # Added by rsned
         too-few-public-methods
 
@@ -137,10 +139,10 @@ indent-after-paren=4
 indent-string='    '
 
 # Maximum number of characters on a single line.
-max-line-length=85
+max-line-length=80
 
 # Maximum number of lines in a module.
-max-module-lines=10000
+max-module-lines=99999
 
 # List of optional constructs for which whitespace checking is disabled. `dict-
 # separator` is used to allow tabulation in dicts, etc.: {1  : 1,\n222: 2}.
@@ -158,23 +160,59 @@ single-line-class-stmt=no
 single-line-if-stmt=no
 
 
-[TYPECHECK]
-
-# List of decorators that produce context managers, such as
-# contextlib.contextmanager. Add to this list to register other decorators that
-# produce valid context managers.
-contextmanager-decorators=contextlib.contextmanager
-
 [BASIC]
 
-# Naming style matching correct argument names.
-argument-naming-style=snake_case
+# Regular expression which should only match the name
+# of functions or classes which do not require a docstring.
+no-docstring-rgx=(__.*__|main)
 
-# Naming style matching correct attribute names.
-attr-naming-style=snake_case
+# Min length in lines of a function that requires a docstring.
+docstring-min-length=10
 
-# Good variable names, which should always be accepted, separated by commas.
-good-names=df
+# Regular expression which should only match correct module level names
+const-rgx=^(_?[A-Z][A-Z0-9_]*|__[a-z0-9_]+__|_?[a-z][a-z0-9_]*)$
+
+# Regular expression which should only match correct class attribute
+class-attribute-rgx=^(_?[A-Z][A-Z0-9_]*|__[a-z0-9_]+__|_?[a-z][a-z0-9_]*)$
+
+# Regular expression which should only match correct class names
+class-rgx=^_?[A-Z][a-zA-Z0-9]*$
+
+# Regular expression which should only match correct function names.
+# 'camel_case' and 'snake_case' group names are used for consistency of naming
+# styles across functions and methods.
+function-rgx=^(?:(?P<exempt>setUp|tearDown|setUpModule|tearDownModule)|(?P<camel_case>_?[A-Z][a-zA-Z0-9]*)|(?P<snake_case>_?[a-z][a-z0-9_]*))$
+
+
+# Regular expression which should only match correct method names.
+# 'camel_case' and 'snake_case' group names are used for consistency of naming
+# styles across functions and methods. 'exempt' indicates a name which is
+# consistent with all naming styles.
+method-rgx=(?x)^(?:(?P<exempt>_[a-z0-9_]+__|runTest|setUp|tearDown|setUpTestCase|tearDownTestCase|setupSelf|tearDownClass|setUpClass|(test|assert)_*[A-Z0-9][a-zA-Z0-9_]*|next)|(?P<camel_case>_{0,2}[A-Z][a-zA-Z0-9_]*)|(?P<snake_case>_{0,2}[a-z][a-z0-9_]*))$
+
+
+# Regular expression which should only match correct instance attribute names
+attr-rgx=^_{0,2}[a-z][a-z0-9_]*$
+
+# Regular expression which should only match correct argument names
+argument-rgx=^[a-z][a-z0-9_]*$
+
+# Regular expression which should only match correct variable names
+variable-rgx=^[a-z][a-z0-9_]*$
+
+# Regular expression which should only match correct list comprehension /
+# generator expression variable names
+inlinevar-rgx=^[a-z][a-z0-9_]*$
+
+# Good variable names which should always be accepted, separated by a comma
+good-names=main,_
+
+# List of builtins function names that should not be used, separated by a comma
+# <http://go/python-style#Deprecated_Language_Features>
+bad-functions=input,apply,reduce
+
+# List of decorators that define properties, such as abc.abstractproperty.
+property-classes=abc.abstractproperty,google3.pyglib.function_utils.cached.property,cached_property.cached_property,cached_property.threaded_cached_property,cached_property.cached_property_with_ttl,cached_property.threaded_cached_property_with_ttl,werkzeug.utils.cached_property
 
 # Bad variable names which should always be refused, separated by commas.
 bad-names=foo,
@@ -184,13 +222,12 @@ bad-names=foo,
           tutu,
           tata
 
-class-attribute-naming-style=any
-class-naming-style=PascalCase
-const-naming-style=UPPER_CASE
-function-naming-style=snake_case
-method-naming-style=snake_case
-module-naming-style=snake_case
-variable-naming-style=snake_case
+[TYPECHECK]
+
+# List of decorators that produce context managers, such as
+# contextlib.contextmanager. Add to this list to register other decorators that
+# produce valid context managers.
+contextmanager-decorators=contextlib.contextmanager,contextlib2.contextmanager
 
 [STRING]
 
@@ -199,7 +236,6 @@ variable-naming-style=snake_case
 # several lines.
 check-str-concat-over-line-jumps=no
 
-
 [VARIABLES]
 
 # List of strings which can identify a callback function by name. A callback
@@ -207,6 +243,18 @@ check-str-concat-over-line-jumps=no
 callbacks=cb_,
           _cb
 
+# Tells whether we should check for unused import in __init__ files.
+init-import=no
+
+# A regular expression matching names used for dummy variables (i.e. not used).
+dummy-variables-rgx=^\*{0,2}(_$|unused_|dummy_)
+
+# List of additional names supposed to be defined in builtins. Remember that
+# you should avoid to define new builtins when possible.
+additional-builtins=
+
+# List of modules that are allowed to redefine builtins.
+redefining-builtins-modules=six,six.moves,past.builtins,future.builtins,functools
 
 [MISCELLANEOUS]
 
@@ -288,4 +336,5 @@ min-public-methods=2
 # Exceptions that will emit a warning when being caught. Defaults to
 # "BaseException, Exception".
 overgeneral-exceptions=BaseException,
-                       Exception
+                       Exception,
+                       StandardError
