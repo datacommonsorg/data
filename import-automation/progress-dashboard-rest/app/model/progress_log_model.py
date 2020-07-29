@@ -20,7 +20,9 @@ import enum
 class ProgressLog:
     """Data model of a progress log.
 
-    The class variables below are the fields of a progress log.
+    This class is not a data class. The class variables below are the fields
+    of a progress log and their values are the field names. They are used
+    to index progress log entities.
     """
     # ID of the progress log as a string. This is a UUID hex string.
     log_id = 'log_id'

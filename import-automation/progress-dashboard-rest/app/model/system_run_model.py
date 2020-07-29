@@ -20,7 +20,9 @@ import enum
 class SystemRun:
     """Data model of a system run.
 
-    The class variables below are the fields of a system run.
+    This class is not a data class. The class variables below are the fields
+    of a system run and their values are the field names. They are used
+    to index system run entities.
     """
     # ID of the system run as a string. This is a UUID hex string.
     run_id = 'run_id'

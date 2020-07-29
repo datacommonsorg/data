@@ -20,7 +20,9 @@ import enum
 class ImportAttempt:
     """Data model of an import attempt.
 
-    The class variables below are the fields of an import attempt.
+    This class is not a data class. The class variables below are the fields
+    of an import attempt and their values are the field names. They are used
+    to index import attempt entities.
     """
     # ID of the import attempt as a string. This is a UUID hex string.
     attempt_id = 'attempt_id'
