@@ -23,7 +23,7 @@ from app.resource import system_run
 from app.resource import system_run_list
 from test import utils
 
-_MODEL = system_run_model.SystemRunModel
+_MODEL = system_run_model.SystemRun
 
 
 def setUpModule():

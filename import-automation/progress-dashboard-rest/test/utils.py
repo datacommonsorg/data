@@ -12,8 +12,8 @@ from app import utils
 from app.model import import_attempt_model
 from app.model import system_run_model
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel()
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun()
 
 PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
 

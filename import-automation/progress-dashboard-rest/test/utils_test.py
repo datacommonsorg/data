@@ -104,3 +104,12 @@ class RequestParserAddFieldsTest(unittest.TestCase):
         with main.FLASK_APP.test_request_context(json=with_pr_and_logs):
             args = parser.parse_args()
             self.assertEqual(with_pr_and_logs, args)
+
+    def test_dict(self):
+        """Tests parsing dicts."""
+        parser = reqparse.RequestParser()
+        utils.add_fields(parser, [('field', dict, 'append')], required=True)
+
+        body = {'field': [{'abc': '1'}, {'def': '2'}]}
+        with main.FLASK_APP.test_request_context(json=body):
+            self.assertEqual(body, parser.parse_args())

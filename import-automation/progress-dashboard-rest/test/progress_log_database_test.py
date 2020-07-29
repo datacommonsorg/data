@@ -24,7 +24,7 @@ from test import utils
 from app.model import progress_log_model
 from app.service import progress_log_database
 
-_MODEL = progress_log_model.ProgressLogModel
+_MODEL = progress_log_model.ProgressLog
 
 
 def setUpModule():
