@@ -21,6 +21,8 @@ import datetime
 import tempfile
 import hashlib
 
+import requests
+
 import app.utils
 import test.utils
 
@@ -54,6 +56,14 @@ class AppUtilsTest(unittest.TestCase):
             with open(path, 'rb') as file:
                 self.assertEqual('90ffd2359008d82298821d16b21778c5c39aec36',
                                  hashlib.sha1(file.read()).hexdigest())
+
+    def test_download_file_timeout(self):
+        """Raises requests.Timeout exception."""
+        url = ('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/'
+               'pdf/dummy.pdf')
+        with tempfile.TemporaryDirectory() as dest_dir:
+            self.assertRaises(requests.Timeout, app.utils.download_file, url,
+                              dest_dir, 0.000000001)
 
     @mock.patch('requests.Response')
     def test_get_filename(self, response):

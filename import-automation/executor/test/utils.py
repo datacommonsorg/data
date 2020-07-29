@@ -21,10 +21,11 @@ import google.api_core.exceptions
 class ResponseMock:
     """Simple mock of a HTTP response."""
 
-    def __init__(self, code, data=None, raw=None):
+    def __init__(self, code, data=None, raw=None, headers=None):
         self.status_code = code
         self.data = data
         self.raw = raw
+        self.headers = headers
 
     def raise_for_status(self):
         if self.status_code != 200:
@@ -39,6 +40,12 @@ class ResponseMock:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
+
+    def iter_content(self, chunk_size):
+        # Unused
+        del chunk_size
+        for line in self.raw:
+            yield line
 
 
 def compare_lines(expected_path, to_test_path, num_lines, reverse=False):
