@@ -1,8 +1,8 @@
-# Importing EuroStat XXX Into Data Commons
+# Importing EuroStat Regional Statistics by NUTS Into Data Commons
 
 > This README is a template of what an import's README might look like.
 
-Author: <github_handle>
+Author: eftekhari-mhs
 
 ## Table of Contents
 
@@ -14,114 +14,38 @@ Author: <github_handle>
 
 ### Download URL
 
-[CSV | XLSX | TXT | etc.] file is available for download from <download_url>.
+[TSV] file is available for download from <https://ec.europa.eu/eurostat/data/database> under 'Data navigation tree > Database by themes > General and regional statistics > Regional statistics by NUTS classification (reg)'.
 
 ### Overview
-> The metadata for Population change - Demographic balance and crude rates at regional level (NUTS 3) is available online at [here](https://ec.europa.eu/eurostat/cache/metadata/en/demo_r_gind3_esms.htm)
+> The metadata for each dataset is available online at '<https://ec.europa.eu/eurostat/cache/metadata/en/<dataset name>_esms.htm>'
 
-possible geo values: 
-> Countries
-> NUTS1
-> NUTS2
-> NUTS3
+NUTS (Nomenclature of Territorial Units for Statistics) is a hierarchical classification for dividing regions of Europe. 
 
+Useful links: [NUTS Background](https://ec.europa.eu/eurostat/web/nuts/background), 
+[NUTS Map](https://ec.europa.eu/eurostat/web/nuts/nuts-maps)
 
-NUTS2 and NUTS3 can be accessed by dcid: nuts/xxx, typeOf:EurostatNUTS2, typeOf:EurostatNUTS3 (respectively) 
+##### Imported datasets (P0): 
 
-> Explain as much as you need so that others can understand what the
-dataset's variables are without digging into the data and documentation.
-Here's an example skeleton you may find helpful:
+- Population density (by NUTS3)
+- Birth, deaths, and migrations (by NUTS3)
+- Life expectancy by age and gender (by NUTS2)
 
-This dataset is broken up into 3 major families of variables:
-1. XXX: <description_of_XXX>
-2. YYY: <description_of_YYY>
-3. ZZZ: <description_of_ZZZ>
+##### Imported datasets (P1): 
 
-X is further broken down into:
-1. a: <description_of_a>
-2. b: <description_of_b>
-
-Y is further broken down into:
-1. aa: <description_of_aa>
-2. bb: <description_of_bb>
-3. cc: <description_of_cc>
-
-Z is further broken down into:
-1. aaa: <description_of_aaa>
-2. bbb: <description_of_bbb>
-
-### Notes and Caveats
-
-> Some example notes/caveats:
-
-- This dataset considers Honolulu County a city.
-- This dataset is a best-effort and occasionally contains decreasing
-  numbers for cumulative count statistics.
-- This dataset's documentation warns users not to compare across years
-  due to <some_statistical_reason>.
+- Moratality rate by cause (NUTS2)
+- Fertility rate, median and mean age of mothers at childbirth (by NUTS3)
+- Various measures of GDP (by NUTS3)
+- Education enrollment by gender (by NUTS2)
+- Education Attainment by gender (by NUTS2)
+- Employed per sector (by NUTS3)
 
 ### License
-
-> An example license summary:
 
 Eurostat has a policy of encouraging free re-use of its data, both for non-commercial and commercial purposes. 
 
 The license is available online at [here](https://ec.europa.eu/eurostat/about/policies/copyright).
 
-### Dataset Documentation and Relevant Links 
 
-- Documentation: <documentation_url>
-- Data Visualization UI: <some_other_url>
-
-## About the Import
-
-### Artifacts
-
-#### Raw Data
-- <file_name_with_hyperlink>: <file_description>
-- <file_name_with_hyperlink>: <file_description>
-
-#### Cleaned Data
-- <file_name_with_hyperlink>: <file_description_if_not_obvious_from_name>
-- <file_name_with_hyperlink>: <file_description_if_not_obvious_from_name>
-
-#### Template MCFs
-- <file_name_with_hyperlink>: <file_description_if_not_obvious_from_name>
-- <file_name_with_hyperlink>: <file_description_if_not_obvious_from_name>
-
-#### StatisticalVariable Instance MCF
-- <file_name_with_hyperlink>: <file_description_if_not_obvious_from_name>
-- <file_name_with_hyperlink>: <file_description_if_not_obvious_from_name>
-
-#### Scripts
-- <file_name_with_hyperlink>: <file_description>
-- <file_name_with_hyperlink>: <file_description>
-
-#### Notes
->#### available flags:
-- b	break in time series	
-- c	confidential	
-- d	definition differs, see metadata
-- e	estimated	
-- f	forecast	
-- n	not significant
-- p	provisional	
-- r	revised	
-- s	Eurostat estimate
-- u	low reliability	
-- z	not applicable 
-- Special value: ":" not available
-
-- Please use the tsv file instead of csv.
-
-> Include any import related notes here. Here's an example:
-
-New starting 2020-06-25, two new columns were added:
-
-- abc
-- def
-
-These two variables have not been integrated into the import yet.
 
 ### Import Procedure
 
