@@ -72,6 +72,12 @@ typeOf: schema:Class
 subClassOf: schema:Thing
 description: "Tells how much of the active ingredient is present in a drug dosage."
 
+Node: dcid:DrugStrength
+name: "DrugStrength"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "A specific strength in which a medical drug is available in a specific country."
+
 Node: dcid:chemblID
 name: "chemblID"
 typeOf: schema:Property
@@ -460,7 +466,7 @@ typeOf: schema:Property
 rangeIncludes: dcs:MarketingStatusEnum
 domainIncludes: schema:DrugStrength
 description: "Marketing status indicates how a drug product is sold in the United States."
-descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#M"
+descriptionUrl: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#M"
 
 Node: dcid:therapeuticEquivalenceCode
 name: "therapeuticEquivalenceCode"
@@ -468,7 +474,7 @@ typeOf: schema:Property
 rangeIncludes: dcs:TherapeuticEquivalenceCodeEnum
 domainIncludes: schema:DrugStrength
 description: "The therapeutic equivalence code indicates whether the FDA has evaluated a particular approved product (e.g., a particular strength of an approved drug) as therapeutically equivalent to other pharmaceutically equivalent products and to provide additional information on the basis of FDA's evaluations (second letter)."
-descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+descriptionUrl: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
 
 Node: dcid:fdaProductID
 name: "fdaProductID"
