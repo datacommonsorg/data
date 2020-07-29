@@ -46,8 +46,8 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string(
     name='import_name',
     default=None,
-    help='Absolute import name of the import to execute of the form '
-    f'{_IMPORT_NAME_FORM}.',
+    help=('Absolute import name of the import to execute of the form '
+          f'{_IMPORT_NAME_FORM}.'),
     short_name='i')
 flags.DEFINE_string(name='output_dir',
                     default='.',
@@ -60,8 +60,8 @@ flags.DEFINE_string(name='repo_name',
 flags.DEFINE_string(
     name='owner_username',
     default='datacommonsorg',
-    help='GitHub username of the owner of the GitHub repository '
-    'containing the import.',
+    help=('GitHub username of the owner of the GitHub repository '
+          'containing the import.'),
     short_name='u')
 flags.DEFINE_string(name='username',
                     default='',
@@ -75,8 +75,8 @@ flags.DEFINE_string(name='access_token',
 flags.mark_flag_as_required('import_name')
 flags.register_validator('import_name',
                          import_target.absolute_import_name,
-                         message='--import_name must be of the form '
-                         f'{_IMPORT_NAME_FORM}.')
+                         message=('--import_name must be of the form '
+                                  f'{_IMPORT_NAME_FORM}.'))
 
 
 def main(_):
