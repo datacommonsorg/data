@@ -19,7 +19,7 @@ storage.
 from app.service import base_database
 from app.model import import_attempt_model
 
-_MODEL = import_attempt_model.ImportAttemptModel
+_MODEL = import_attempt_model.ImportAttempt
 
 
 class ImportAttemptDatabase(base_database.BaseDatabase):
