@@ -75,7 +75,7 @@ def download_file(url: str, dest_dir: str, timeout: float = None) -> str:
 
     Returns:
         Path to the downloaded file of the form
-        <dest_dir>/<filename of the download file>.
+        <dest_dir>/<basename of the downloaded file>.
 
     Raises:
         requests.Timeout: Downloading timed out.
