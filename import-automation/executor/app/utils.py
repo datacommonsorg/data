@@ -69,9 +69,9 @@ def download_file(url: str, dest_dir: str, timeout: float = None) -> str:
     Args:
         url: File url as a string.
         dest_dir: Directory to download the file into, as a string.
-        timeout: Maximum number of seconds for the file transfer, as a float.
-            The actual timeout will be a rough approximation to this, likely
-            several seconds longer.
+        timeout: Maximum time in seconds downloading the file can take,
+            as a float. The actual timeout will be a rough approximation to
+            this, likely several seconds larger.
 
     Returns:
         Path to the downloaded file of the form

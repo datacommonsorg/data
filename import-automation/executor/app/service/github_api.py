@@ -105,7 +105,9 @@ class GitHubRepoAPI:
             commit_sha: Commit ID that defines the version of the repository
                 to download as a string. If not supplied, the master branch
                 is downloaded.
-            timeout:
+            timeout: Maximum time downloading the repository can take in
+                seconds, as a float. The actual timeout will be a rough
+                approximation to this, likely several seconds larger.
 
         Returns:
             Path to a directory containing the downloaded repository,
