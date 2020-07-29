@@ -26,6 +26,7 @@ import pandas as pd
 URL = "https://www.istat.it/storage/codici-unita-amministrative/"+\
     "Elenco-codici-statistici-e-denominazioni-delle-unita-territoriali.zip"
 
+
 def download(url):
     """download and extract the csv file to ./raw/xx"""
     response = requests.get(url)
@@ -37,9 +38,11 @@ def download(url):
     if len(files) != 1:
         raise Exception("0 or more than 1 files found")
     file_name = files[0]
-    os.rename(os.path.join(folder, file_name), "./raw/"+file_name[:-4]+"_it.csv")
+    os.rename(os.path.join(folder, file_name),
+              "./raw/" + file_name[:-4] + "_it.csv")
     os.system("rm -rf ./raw/temp")
-    return "./raw/"+file_name[:-4]+"_it.csv"
+    return "./raw/" + file_name[:-4] + "_it.csv"
+
 
 def translate(file_path):
     """tranlate the column names to English based on Google translate"""
@@ -61,13 +64,23 @@ def translate(file_path):
     data.to_csv(file_path_en, encoding='utf-8', index=False)
     return data
 
+
 def preprocess(data):
     """"preprocess the csv file for importing into Data Commons"""
-    columns_rename = {"Province Code (Historic) (1)": "Province Code",\
-        "Name of the supra-municipal territorial unit (valid for statistical purposes)":\
-        "Province name", "Automotive abbreviation":"Province Abbreviation",\
-        "NUTS2(3)":"NUTS2", "Common Code numeric format":"Municipal Code", \
-        "Name in Italian":"Municipal Name"}
+    columns_rename = {
+        "Province Code (Historic) (1)":
+            "Province Code",
+        "Name of the supra-municipal territorial unit (valid for statistical purposes)":
+            "Province name",
+        "Automotive abbreviation":
+            "Province Abbreviation",
+        "NUTS2(3)":
+            "NUTS2",
+        "Common Code numeric format":
+            "Municipal Code",
+        "Name in Italian":
+            "Municipal Name"
+    }
     data = data.rename(columns=columns_rename)
 
     # correct some of the mismatch of NUTS code and names
@@ -76,18 +89,24 @@ def preprocess(data):
     # "Ogliastra". We rename it to "Ogliastra". The reason why we assume the
     # NUTS code is right and the name is wrong, but not the oppositte way, is that
     # if it's the opposite way, areas such as "Ogliastra" will be missing.
-    
+
     reorg = [("ITG2A", 91, "OG", "Ogliastra"), ("ITG28", 95, "OR", "Oristano"),\
             ("ITG27", 92, "CA", "Cargliari"), ("ITG29", 90, "OT", "Olbia-Tempio")]
     for (nuts3, province_code, province_abbrev, province_name) in reorg:
-        data.loc[data[data["NUTS3"] == nuts3].index, "Province Code"] = province_code
-        data.loc[data[data["NUTS3"] == nuts3].index, "Province Abbreviation"] = province_abbrev
-        data.loc[data[data["NUTS3"] == nuts3].index, "Province name"] = province_name
-    data.loc[data[data["Province name"] == "Napoli"].index, "Province Abbreviation"] = "NA"
+        data.loc[data[data["NUTS3"] == nuts3].index,
+                 "Province Code"] = province_code
+        data.loc[data[data["NUTS3"] == nuts3].index,
+                 "Province Abbreviation"] = province_abbrev
+        data.loc[data[data["NUTS3"] == nuts3].index,
+                 "Province name"] = province_name
+    data.loc[data[data["Province name"] == "Napoli"].index,
+             "Province Abbreviation"] = "NA"
 
-    region_data = data[["Region Code", "NUTS2", "Region name"]].drop_duplicates()
+    region_data = data[["Region Code", "NUTS2",
+                        "Region name"]].drop_duplicates()
     region_data["NUTS2"] = "nuts/" + region_data["NUTS2"]
-    region_data["Region Code"] = region_data["Region Code"].astype(str).str.zfill(2)
+    region_data["Region Code"] = region_data["Region Code"].astype(
+        str).str.zfill(2)
     region_data.loc[region_data[region_data["NUTS2"] == "nuts/ITH1"].index, "Region name"] = \
         "Provincia Autonoma di Bolzano/Bozen"
     region_data.loc[region_data[region_data["NUTS2"] == "nuts/ITH2"].index, "Region name"]\
@@ -97,13 +116,17 @@ def preprocess(data):
     province_data = data[["Province Code", "NUTS3", "Province name", \
         "Province Abbreviation"]].drop_duplicates()
     province_data["NUTS3"] = "nuts/" + province_data["NUTS3"]
-    province_data["Province Code"] = province_data["Province Code"].astype(str).str.zfill(3)
+    province_data["Province Code"] = province_data["Province Code"].astype(
+        str).str.zfill(3)
     province_data.to_csv("./cleaned/ISTAT_province.csv", index=False)
 
-    municipal_data = data[["Municipal Code", "Municipal Name", "NUTS3"]].drop_duplicates()
+    municipal_data = data[["Municipal Code", "Municipal Name",
+                           "NUTS3"]].drop_duplicates()
     municipal_data["NUTS3"] = "dcid:nuts/" + municipal_data["NUTS3"]
-    municipal_data["Municipal Code"] = municipal_data["Municipal Code"].astype(str).str.zfill(6)
+    municipal_data["Municipal Code"] = municipal_data["Municipal Code"].astype(
+        str).str.zfill(6)
     municipal_data.to_csv("./cleaned/ISTAT_municipal.csv", index=False)
+
 
 if __name__ == "__main__":
     FILE_PATH_IT = download(URL)

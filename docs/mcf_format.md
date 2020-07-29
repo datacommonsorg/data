@@ -259,6 +259,9 @@ containedInPlace: geoId/06
     letter is lower-cased.
     [(EXAMPLE)](https://browser.datacommons.org/kg?dcid=healthOutcome)
 
+-   DCIDs have a length limit of 256 characters. Nodes with a DCID longer than
+    256 characters will throw a syntax error upon uploading to DataCommons.
+
 ## MCF Types in Data Commons
 
 We employ two main types of MCF nodes: instance MCF and template MCF. We may

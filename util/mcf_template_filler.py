@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-r"""General class to handle filling in MCF templates for StatisticalPopulation and Observation.
+r"""Fill in MCF templates for StatisticalPopulation and Observation.
 
 This library is a wrapper around Python's `format_map` function, except
 it does not require all `{var_string}`s to have a replacement value.
@@ -33,7 +33,7 @@ import re
 import logging
 
 
-class Filler(object):
+class Filler:
     """Helper class for filling in MCF Templates and removing unused PVs."""
 
     def __init__(self, template, required_vars=None):
