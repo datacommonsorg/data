@@ -21,8 +21,8 @@ from app.service import validation
 from app.model import import_attempt_model
 from app.model import system_run_model
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
 
 
 class ImportAttemptList(import_attempt.ImportAttempt):
@@ -38,9 +38,9 @@ class ImportAttemptList(import_attempt.ImportAttempt):
             using the client.
     """
 
-    def __init__(self):
+    def __init__(self, client=None):
         """Constructs an ImportAttemptList."""
-        super().__init__()
+        super().__init__(client)
         self.run_database = system_run_database.SystemRunDatabase(self.client)
 
     def get(self):

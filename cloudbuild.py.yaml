@@ -18,7 +18,7 @@ steps:
   entrypoint: python3
   args: ["-m", "unittest", "discover", "-v", "-s", "util/", "-p", "*_test.py"]
   # In cloudbuild, everything happens under /workspace path
-  env: ["PYTHONPATH=/workspace"]
+  env: ["PYTHONPATH=/workspace:/workspace/scripts"]
   waitFor:
   - python_install
 
@@ -27,7 +27,7 @@ steps:
   entrypoint: python3
   args: ["-m", "unittest", "discover", "-v", "-s", "scripts/", "-p", "*_test.py"]
   # In cloudbuild, everything happens under /workspace path
-  env: ["PYTHONPATH=/workspace"]
+  env: ["PYTHONPATH=/workspace:/workspace/scripts"]
   waitFor:
   - python_install
 
@@ -36,7 +36,7 @@ steps:
   entrypoint: python3
   args: ["-m", "unittest", "discover", "-v", "-s", "import-automation/", "-p", "*_test.py"]
   # In cloudbuild, everything happens under /workspace path
-  env: ["PYTHONPATH=/workspace"]
+  env: ["PYTHONPATH=/workspace:/workspace/scripts"]
   waitFor:
   - python_install
 
@@ -45,7 +45,7 @@ steps:
   entrypoint: python3
   args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/", "scripts/", "tools/", "docs/", "schema/"]
   # In cloudbuild, everything happens under /workspace path
-  env: ["PYTHONPATH=/workspace"]
+  env: ["PYTHONPATH=/workspace:/workspace/scripts"]
   waitFor:
   - python_install
 

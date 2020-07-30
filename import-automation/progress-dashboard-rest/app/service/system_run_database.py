@@ -19,7 +19,7 @@ storage.
 from app.service import base_database
 from app.model import system_run_model
 
-_MODEL = system_run_model.SystemRunModel
+_MODEL = system_run_model.SystemRun
 
 
 class SystemRunDatabase(base_database.BaseDatabase):

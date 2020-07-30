@@ -16,30 +16,16 @@ System run resource associated with the endpoint
 '/system_runs/<string:run_id>'.
 """
 
-import enum
-
 import flask_restful
 from flask_restful import reqparse
 
+from app import utils
 from app.model import system_run_model
 from app.service import system_run_database
 from app.service import validation
-from app import utils
+from app.resource import base_resource
 
-_MODEL = system_run_model.SystemRunModel
-
-
-class SystemRunStatus(enum.Enum):
-    """Allowed status of a system run.
-
-    The status of a system run can only be one of these.
-    """
-    CREATED = 'created'
-    SUCCEEDED = 'succeeded'
-    FAILED = 'failed'
-
-
-SYSTEM_RUN_STATUS = frozenset(status.value for status in SystemRunStatus)
+_MODEL = system_run_model.SystemRun
 
 
 def set_system_run_default_values(system_run):
@@ -57,13 +43,14 @@ def set_system_run_default_values(system_run):
         The same system run with the fields set, as a dict.
     """
     system_run.setdefault(_MODEL.import_attempts, [])
-    system_run.setdefault(_MODEL.status, SystemRunStatus.CREATED.value)
+    system_run.setdefault(_MODEL.status,
+                          system_run_model.SystemRunStatus.CREATED.value)
     system_run.setdefault(_MODEL.time_created, utils.utctime())
     system_run.setdefault(_MODEL.logs, [])
     return system_run
 
 
-class SystemRun(flask_restful.Resource):
+class SystemRun(base_resource.BaseResource):
     """Base class for a system run resource.
 
     Attributes:
@@ -80,9 +67,11 @@ class SystemRun(flask_restful.Resource):
                        (_MODEL.logs, str, 'append'), (_MODEL.status,))
     utils.add_fields(parser, optional_fields, required=False)
 
-    def __init__(self):
+    def __init__(self, client=None):
         """Constructs a SystemRun."""
-        self.client = utils.create_datastore_client()
+        if not client:
+            client = utils.create_datastore_client()
+        self.client = client
         self.database = system_run_database.SystemRunDatabase(self.client)
 
 
@@ -104,10 +93,7 @@ class SystemRunByID(SystemRun):
             datastore Entity object. Otherwise, (error message, error code),
             where the error message is a string and the error code is an int.
         """
-        run = self.database.get(run_id)
-        if not run:
-            return validation.get_not_found_error(_MODEL.run_id, run_id)
-        return run
+        return self._get_helper(self.database, _MODEL.run_id, run_id)
 
     def patch(self, run_id):
         """Modifies the value of a field of an existing system run.
