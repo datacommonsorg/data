@@ -26,9 +26,9 @@ from app.model import system_run_model
 from app.model import import_attempt_model
 from app.model import progress_log_model
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
-_LOG = progress_log_model.ProgressLogModel
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
+_LOG = progress_log_model.ProgressLog
 
 
 def setUpModule():

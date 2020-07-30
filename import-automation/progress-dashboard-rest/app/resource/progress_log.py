@@ -17,8 +17,6 @@ Import log resources associated with the endpoints
 '/system_runs/<string:run_id>/logs', and '/logs/<string:log_id>'.
 """
 
-import enum
-
 import flask_restful
 from flask_restful import reqparse
 
@@ -31,26 +29,9 @@ from app.model import import_attempt_model
 from app.model import system_run_model
 from app.model import progress_log_model
 
-# TODO(intrepiditee): Rename from *_model.*Model to *.Model.
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
-_LOG = progress_log_model.ProgressLogModel
-
-
-# TODO(intrepiditee): Move to model.
-class LogLevel(enum.Enum):
-    """Allowed log levels of a log.
-
-    The level of a log can only be one of these.
-    """
-    CRITICAL = 'critical'
-    ERROR = 'error'
-    WARNING = 'warning'
-    INFO = 'info'
-    DEBUG = 'debug'
-
-
-LOG_LEVELS = frozenset(level.value for level in LogLevel)
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
+_LOG = progress_log_model.ProgressLog
 
 
 class ProgressLog(flask_restful.Resource):
@@ -97,7 +78,6 @@ class ProgressLogByID(ProgressLog):
         See ImportLog.
     """
 
-    # TODO(intrepiditee): Use a helper for get.
     def get(self, log_id):
         """Queries the progress logs by its log_id.
 

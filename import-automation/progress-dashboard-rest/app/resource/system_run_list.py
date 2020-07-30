@@ -17,9 +17,9 @@ System run lists, the resource associated with the endpoint '/system_runs'.
 
 import http
 
-from app.model import system_run_model
 from app.resource import system_run
 from app.service import validation
+from app.model import system_run_model
 
 
 class SystemRunList(system_run.SystemRun):
@@ -33,7 +33,7 @@ class SystemRunList(system_run.SystemRun):
         """Retrieves a list of system runs that pass the filter defined by
         the key-value mappings in the request body.
 
-        The filter can only contain fields defined by SystemRunModel.
+        The filter can only contain fields defined by SystemRun.
 
         Returns:
             A list of system runs each as a datastore Entity object

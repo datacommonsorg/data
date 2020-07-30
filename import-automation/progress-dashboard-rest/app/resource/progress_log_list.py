@@ -26,9 +26,9 @@ from app.model import system_run_model
 from app.model import progress_log_model
 from app.service import validation
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
-_LOG = progress_log_model.ProgressLogModel
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
+_LOG = progress_log_model.ProgressLog
 
 
 def add_log_to_entity(log_id, entity):

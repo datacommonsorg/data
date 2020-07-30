@@ -31,10 +31,11 @@ get_not_found_error and get_patch_forbidden_error return a tuple consisting of:
 import datetime
 import http
 
+import app.model.system_run_model
 from app import utils
-from app.resource import import_attempt
 from app.resource import system_run
-from app.resource import progress_log
+from app.model import import_attempt_model
+from app.model import progress_log_model
 
 
 def is_import_attempt_valid(attempt, attempt_id=None):
@@ -62,8 +63,8 @@ def is_import_attempt_valid(attempt, attempt_id=None):
     if not valid:
         return valid, err, code
 
-    valid, err, code = _is_value_defined(attempt, 'status',
-                                         import_attempt.IMPORT_ATTEMPT_STATUS)
+    valid, err, code = _is_value_defined(
+        attempt, 'status', import_attempt_model.IMPORT_ATTEMPT_STATUS)
     if not valid:
         return valid, err, code
 
@@ -103,8 +104,8 @@ def is_system_run_valid(run, run_id=None):
     if not valid:
         return valid, err, code
 
-    valid, err, code = _is_value_defined(run, 'status',
-                                         system_run.SYSTEM_RUN_STATUS)
+    valid, err, code = _is_value_defined(
+        run, 'status', app.model.system_run_model.SYSTEM_RUN_STATUS)
     if not valid:
         return valid, err, code
 
@@ -142,7 +143,8 @@ def is_progress_log_valid(log, log_id=None):
     if not valid:
         return valid, err, code
 
-    valid, err, code = _is_value_defined(log, 'level', progress_log.LOG_LEVELS)
+    valid, err, code = _is_value_defined(log, 'level',
+                                         progress_log_model.LOG_LEVELS)
     if not valid:
         return valid, err, code
 
