@@ -438,6 +438,10 @@ def parse_manifest(path: str) -> dict:
 
     Returns:
         The parsed manifest as a dict.
+
+    Raises:
+        Same exceptions as open and json.load if the file does not exist or
+        contains malformed json.
     """
     with open(path) as file:
         return json.load(file)

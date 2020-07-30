@@ -38,7 +38,7 @@ def pacific_time():
         pytz.timezone('America/Los_Angeles')).isoformat()
 
 
-def list_to_str(a_list, sep=', '):
+def list_to_str(a_list: List, sep: str = ', ') -> str:
     """Converts a list to string.
 
     Args:

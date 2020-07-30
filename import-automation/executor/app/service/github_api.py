@@ -55,6 +55,15 @@ class GitHubRepoAPI:
                  repo_name: str,
                  auth_username: str = '',
                  auth_access_token: str = ''):
+        """Constructs a GitHubRepoAPI.
+
+        Args:
+            repo_owner_username: See owner in Attributes.
+            repo_name: See repo in Attributes.
+            auth_username: The username of the account to authenticate
+                with GitHub, as a string.
+            auth_access_token: The corresponding access token as a string.
+        """
         self.owner = repo_owner_username
         self.repo = repo_name
         self.auth = (auth_username, auth_access_token)
