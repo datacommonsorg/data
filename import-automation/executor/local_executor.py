@@ -80,6 +80,7 @@ flags.register_validator('import_name',
 
 
 def main(_):
+    """Runs the local executor."""
     config = configs.ExecutorConfig(
         github_repo_name=FLAGS.repo_name,
         github_repo_owner_username=FLAGS.owner_username,
