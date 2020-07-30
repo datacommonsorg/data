@@ -1,0 +1,23 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "BLS_JOLTS",
+            "curator_emails": [
+                "ianjc@google.com"
+            ],
+            "provenance_url": "https://www.bls.gov/jlt/",
+            "provenance_description": "U.S. Bureau of Labor Statistics data on job openings, hires, and separations.",
+            "scripts": [
+                "bls_jolts.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "BLSJolts.tmcf",
+                    "cleaned_csv": "BLSJolts.csv",
+                    "node_mcf": "BLSJolts_StatisticalVariables.mcf"
+                }
+            ],
+            "cron_schedule": "* * * * *"
+        }
+    ]
+}
