@@ -22,6 +22,13 @@ from test import utils
 
 NUM_LINES_TO_CHECK = 50
 
+CONFIGS = {
+    'github_repo_owner_username': 'intrepiditee',
+    'github_repo_name': 'data-demo',
+    'github_auth_username': 'intrepiditee',
+    'github_auth_access_token': os.environ['GITHUB_AUTH_ACCESS_TOKEN']
+}
+
 
 class GCSFileUploaderMock:
     _REVERSE = False
@@ -43,7 +50,7 @@ class GCSFileUploaderMock:
         assert string == '2020_07_15T12_07_17_365264_07_00'
 
 
-@mock.patch('app.configs._standalone', lambda: True)
+@mock.patch('app.service.dashboard_api.DashboardAPI', mock.MagicMock())
 @mock.patch('app.service.file_uploader.GCSFileUploader', GCSFileUploaderMock)
 @mock.patch('app.utils.pacific_time',
             lambda: '2020-07-15T12:07:17.365264-07:00')
@@ -70,7 +77,9 @@ class StandaloneUpdateTest(unittest.TestCase):
             '/update',
             json={
                 'absolute_import_name':
-                    'scripts/us_fed/treasury_constant_maturity_rates:all'
+                    'scripts/us_fed/treasury_constant_maturity_rates:all',
+                'configs':
+                    CONFIGS
             })
         self.assertEqual(200, response.status_code)
         expected_result = {
@@ -89,7 +98,9 @@ class StandaloneUpdateTest(unittest.TestCase):
             '/update',
             json={
                 'absolute_import_name':
-                    'scripts/covid_tracking_project/historic_state_data:all'
+                    'scripts/covid_tracking_project/historic_state_data:all',
+                'configs':
+                    CONFIGS
             })
         self.assertEqual(200, response.status_code)
         expected_result = {
@@ -103,7 +114,6 @@ class StandaloneUpdateTest(unittest.TestCase):
         self.assertEqual(expected_result, response.json)
 
 
-@mock.patch('app.configs._testing', lambda: True)
 @mock.patch('app.service.dashboard_api.DashboardAPI', mock.MagicMock)
 @mock.patch('app.utils.pacific_time',
             lambda: '2020-07-15T12:07:17.365264-07:00')
@@ -118,10 +128,7 @@ class CommitTest(unittest.TestCase):
             '/',
             json={
                 'COMMIT_SHA': '9804f2fd2c5422a9f6b896e9c6862db61f9a8a08',
-                'configs': {
-                    'github_repo_owner_username': 'intrepiditee',
-                    'github_repo_name': 'data-demo'
-                }
+                'configs': CONFIGS
             })
         self.assertEqual(200, response.status_code)
         expected_result = {
@@ -139,10 +146,7 @@ class CommitTest(unittest.TestCase):
             '/',
             json={
                 'COMMIT_SHA': 'cded751aaf369af27430d5f80da61b04b5dea9b4',
-                'configs': {
-                    'github_repo_owner_username': 'intrepiditee',
-                    'github_repo_name': 'data-demo'
-                }
+                'configs': CONFIGS
             })
         self.assertEqual(200, response.status_code)
         expected_result = {
@@ -154,7 +158,7 @@ class CommitTest(unittest.TestCase):
 
 
 @mock.patch('app.utils.utctime', lambda: '2020-07-24T16:27:22.609304+00:00')
-@mock.patch('app.configs._testing', lambda: True)
+@mock.patch('app.service.dashboard_api.DashboardAPI', mock.MagicMock())
 @mock.patch('google.cloud.scheduler.CloudSchedulerClient',
             utils.SchedulerClientMock)
 @mock.patch('google.protobuf.json_format.MessageToDict',
@@ -171,10 +175,7 @@ class ScheduleTest(unittest.TestCase):
             '/schedule',
             json={
                 'COMMIT_SHA': '0df53ec282b1dd030165c7dc309d53964562b211',
-                'configs': {
-                    'github_repo_owner_username': 'intrepiditee',
-                    'github_repo_name': 'data-demo'
-                }
+                'configs': CONFIGS
             })
         self.assertEqual(200, response.status_code)
         scheduled_imports = response.json['imports_executed']
@@ -196,10 +197,7 @@ class ScheduleTest(unittest.TestCase):
             '/schedule',
             json={
                 'COMMIT_SHA': '50195689a407af9ab60d5ead0dd733b0cfbe4cb0',
-                'configs': {
-                    'github_repo_owner_username': 'intrepiditee',
-                    'github_repo_name': 'data-demo'
-                }
+                'configs': CONFIGS
             })
         self.assertEqual(200, response.status_code)
         scheduled_imports = response.json['imports_executed']

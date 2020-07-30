@@ -114,7 +114,8 @@ class UpdateScheduler:
             commit_sha, self.config.manifest_filename)
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            repo_dir = self.github.download_repo(tmpdir, commit_sha)
+            repo_dir = self.github.download_repo(
+                tmpdir, commit_sha, self.config.repo_download_timeout)
 
             imports_to_execute = import_target.find_imports_to_execute(
                 targets=targets,

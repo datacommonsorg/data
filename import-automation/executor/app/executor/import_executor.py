@@ -163,7 +163,8 @@ class ImportExecutor:
         logging.info('%s: BEGIN', absolute_import_name)
         with tempfile.TemporaryDirectory() as tmpdir:
             logging.info('%s: downloading repo', absolute_import_name)
-            repo_dir = self.github.download_repo(tmpdir)
+            repo_dir = self.github.download_repo(
+                tmpdir, timeout=self.config.repo_download_timeout)
             logging.info(absolute_import_name + ': downloaded repo ' + repo_dir)
             if self.dashboard:
                 self.dashboard.info(f'Downloaded repo: {repo_dir}',
@@ -218,7 +219,8 @@ class ImportExecutor:
             commit_sha, self.config.manifest_filename)
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            repo_dir = self.github.download_repo(tmpdir, commit_sha)
+            repo_dir = self.github.download_repo(
+                tmpdir, commit_sha, self.config.repo_download_timeout)
             if self.dashboard:
                 self.dashboard.info(f'Downloaded repo: {repo_dir}',
                                     run_id=run_id)
@@ -296,7 +298,8 @@ class ImportExecutor:
         urls = import_spec.get('data_download_url')
         if urls:
             for url in urls:
-                utils.download_file(url, '')
+                utils.download_file(url, absolute_import_dir,
+                                    self.config.file_download_timeout)
                 if self.dashboard:
                     self.dashboard.info(f'Downloaded: {url}',
                                         attempt_id=attempt_id)

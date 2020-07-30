@@ -299,7 +299,8 @@ class GitHubAPITest(unittest.TestCase):
     def test_download_repo(self, get):
         tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
         with open(tar_path, 'rb') as tar:
-            get.return_value = utils.ResponseMock(200, raw=tar)
+            headers = {'Content-Disposition': 'attachment; filename=abc'}
+            get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
 
             with tempfile.TemporaryDirectory() as dir_path:
                 downloaded = self.github.download_repo(dir_path, 'commit-sha')
@@ -325,9 +326,21 @@ class GitHubAPITest(unittest.TestCase):
                     test_integration.NUM_LINES_TO_CHECK)
 
     @mock.patch('requests.get')
+    def test_download_repo_timeout(self, get):
+        tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
+        with open(tar_path, 'rb') as tar:
+            headers = {'Content-Disposition': 'attachment; filename=abc'}
+            get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
+
+            with tempfile.TemporaryDirectory() as dir_path:
+                self.assertRaises(exceptions.Timeout, self.github.download_repo,
+                                  dir_path, 'commit-sha', 0.000001)
+
+    @mock.patch('requests.get')
     def test_download_repo_empty(self, get):
         with open('test/data/empty.tar.gz', 'rb') as tar:
-            get.return_value = utils.ResponseMock(200, raw=tar)
+            headers = {'Content-Disposition': 'attachment; filename=abc'}
+            get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
 
             with tempfile.TemporaryDirectory() as dir_path:
                 self.assertRaises(FileNotFoundError, self.github.download_repo,

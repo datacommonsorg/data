@@ -22,6 +22,7 @@ import typing
 import requests
 
 from app import configs
+from app import utils
 
 GITHUB_API_HOST = 'https://api.github.com'
 
@@ -87,7 +88,10 @@ class GitHubRepoAPI:
                                                         containing, searched))
         return found_dirs
 
-    def download_repo(self, dest_dir: str, commit_sha: str = None) -> str:
+    def download_repo(self,
+                      dest_dir: str,
+                      commit_sha: str = None,
+                      timeout: float = None) -> str:
         """Downloads the repository.
 
         Example:
@@ -101,11 +105,17 @@ class GitHubRepoAPI:
             commit_sha: Commit ID that defines the version of the repository
                 to download as a string. If not supplied, the master branch
                 is downloaded.
+            timeout: Maximum time downloading the repository can take in
+                seconds, as a float. The actual timeout will be a rough
+                approximation to this, likely several seconds larger.
 
         Returns:
             Path to a directory containing the downloaded repository,
             as a string. The repository's contents are downloaded and copied
             into the same directory structure within the returned directory.
+
+        Raises:
+            requests.Timeout: Downloading timed out.
         """
         if not commit_sha:
             commit_sha = ''
@@ -115,17 +125,9 @@ class GitHubRepoAPI:
             'commit_sha': commit_sha
         })
 
-        with tempfile.NamedTemporaryFile(suffix='.tar.gz') as temp_file:
-            with requests.get(download_query, auth=self.auth,
-                              stream=True) as response:
-                # requests.get does not verify the status code.
-                # raise_for_status throws an exception if the status code
-                # is not 200.
-                response.raise_for_status()
-                shutil.copyfileobj(response.raw, temp_file)
-                temp_file.flush()
-
-            with tarfile.open(temp_file.name) as tar:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            repo_tar = utils.download_file(download_query, tmpdir, timeout)
+            with tarfile.open(repo_tar) as tar:
                 files = tar.getnames()
                 if not files:
                     raise FileNotFoundError(

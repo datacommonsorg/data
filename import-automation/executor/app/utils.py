@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import time
 import os
 import shutil
 import re
@@ -62,13 +63,35 @@ def _get_filename(response):
     return name_list[0]
 
 
-def download_file(url, dest_dir):
-    with requests.get(url, stream=True) as response:
+def download_file(url: str, dest_dir: str, timeout: float = None) -> str:
+    """Downloads a file from a web URL to a directory.
+
+    Args:
+        url: File url as a string.
+        dest_dir: Directory to download the file into, as a string.
+        timeout: Maximum time in seconds downloading the file can take,
+            as a float. The actual timeout will be a rough approximation to
+            this, likely several seconds larger.
+
+    Returns:
+        Path to the downloaded file of the form
+        <dest_dir>/<basename of the downloaded file>.
+
+    Raises:
+        requests.Timeout: Downloading timed out.
+    """
+    # 9.05 is the connect timeout and 27 is the read timeout. See
+    # https://requests.readthedocs.io/en/master/user/advanced/#timeouts.
+    with requests.get(url, stream=True, timeout=(9.05, 27)) as response:
         response.raise_for_status()
         filename = _get_filename(response)
         path = os.path.join(dest_dir, filename)
         with open(path, 'wb') as out:
-            shutil.copyfileobj(response.raw, out)
+            start = time.time()
+            for data in response.iter_content(chunk_size=4096):
+                out.write(data)
+                if timeout is not None and time.time() - start > timeout:
+                    raise requests.Timeout(f'Downloading {url} timed out')
         return path
 
 

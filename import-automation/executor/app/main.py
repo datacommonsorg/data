@@ -86,16 +86,7 @@ def scheduled_updates():
     task_info = flask.request.get_json(force=True)
     if 'absolute_import_name' not in task_info:
         return 'absolute_import_name not found'
-    task_configs = task_info.get(
-        'configs',
-
-        # TODO(intrepiditee): Deprecate
-        {
-            'gcp_project_id': 'datcom-cronjobs',
-            'github_repo_owner_username': 'datacommonsorg',
-            'github_repo_name': 'data',
-            'storage_bucket_name': 'datcom-prod-imports'
-        })
+    task_configs = task_info.get('configs', {})
     config = configs.ExecutorConfig(**task_configs)
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.GCSFileUploader(
