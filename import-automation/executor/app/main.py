@@ -131,4 +131,5 @@ def start():
 
 
 def main():
+    """Runs the app locally."""
     FLASK_APP.run(host='127.0.0.1', port=8080, debug=True)

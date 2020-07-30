@@ -11,55 +11,82 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+GitHub API client for querying information about a repository.
+"""
 
 import os
-import shutil
 import tarfile
 import tempfile
 import http
-import typing
+from typing import Dict, Set, List
 
 import requests
 
-from app import configs
 from app import utils
 
-GITHUB_API_HOST = 'https://api.github.com'
+_GITHUB_API_HOST = 'https://api.github.com'
 
-GITHUB_COMMIT_API = (GITHUB_API_HOST +
+_GITHUB_COMMIT_API = (_GITHUB_API_HOST +
                      '/repos/{owner_username}/{repo_name}/commits/{commit_sha}')
 
-GITHUB_CONTENT_API = (
-    GITHUB_API_HOST +
+_GITHUB_CONTENT_API = (
+        _GITHUB_API_HOST +
     '/repos/{owner_username}/{repo_name}/contents/{dir_path}?ref={commit_sha}')
 
-GITHUB_USER_API = GITHUB_API_HOST + '/users/{name}'
+_GITHUB_USER_API = _GITHUB_API_HOST + '/users/{name}'
 
-GITHUB_DOWNLOAD_API = (
-    GITHUB_API_HOST +
+_GITHUB_DOWNLOAD_API = (
+        _GITHUB_API_HOST +
     '/repos/{owner_username}/{repo_name}/tarball/{commit_sha}')
 
 
 class GitHubRepoAPI:
+    """GitHub API client for querying information about a repository.
 
+    Attributes:
+        owner: Username of the owner of the repository as a string.
+        repo: Name of the repository as a string.
+        auth: Tuple consisting of the username of the account to authenticate
+            with GitHub and the access token.
+    """
     def __init__(self,
                  repo_owner_username: str,
                  repo_name: str,
                  auth_username: str = '',
                  auth_access_token: str = ''):
+        """Constructs a GitHubRepoAPI.
+
+        Args:
+            repo_owner_username: See owner in Attributes.
+            repo_name: See repo in Attributes.
+            auth_username: The username of the account to authenticate
+                with GitHub, as a string.
+            auth_access_token: The corresponding access token as a string.
+        """
         self.owner = repo_owner_username
         self.repo = repo_name
         self.auth = (auth_username, auth_access_token)
 
-    def query_commit(self, commit_sha: str) -> typing.Dict:
+    def query_commit(self, commit_sha: str) -> Dict:
+        """Queries the information about a commit to the repository.
+
+        Args:
+            commit_sha: ID of the commit as a string.
+
+        Returns:
+            Information about the commit as a dict.
+        """
         commit_query = self._build_commit_query(commit_sha)
         response = requests.get(commit_query, auth=self.auth)
         response.raise_for_status()
         return response.json()
 
     def find_dirs_in_commit_containing_file(self, commit_sha: str,
-                                            containing: str) -> typing.Set[str]:
-        """
+                                            containing: str) -> Set[str]:
+        """Finds the directories and their parent directories touched by a
+        commit that contain a specific file.
+
         Example:
             Assume the repository has a file README.md at foo/bar/README.md and
             at ./README.md.
@@ -74,6 +101,14 @@ class GitHubRepoAPI:
             foo/bar/a/b/c is first searched, followed by foo/bar/a/b,
             foo/bar/a, foo/bar, and foo in order.
             ['foo/bar', ''] will be returned.
+
+        Args:
+            commit_sha: ID of the commit as a string.
+            containing: Name of the file to look for, as a string.
+
+        Returns:
+            Set of directory paths each as a string. The paths are relative
+            to the root directory of the repository.
         """
         changed_files = self._query_changed_files_in_commit(commit_sha)
         found_dirs = set()
@@ -119,7 +154,7 @@ class GitHubRepoAPI:
         """
         if not commit_sha:
             commit_sha = ''
-        download_query = GITHUB_DOWNLOAD_API.format_map({
+        download_query = _GITHUB_DOWNLOAD_API.format_map({
             'owner_username': self.owner,
             'repo_name': self.repo,
             'commit_sha': commit_sha
@@ -137,7 +172,18 @@ class GitHubRepoAPI:
                                     _get_path_first_component(files[0]))
 
     def _build_content_query(self, commit_sha: str, path: str) -> str:
-        return GITHUB_CONTENT_API.format_map({
+        """Formats the URL for querying the contents of a directory at the
+        state of a commit.
+
+        Args:
+            commit_sha: ID of the commit as a string.
+            path: Path to the directory as a string, relative to the root
+                directory of the repository.
+
+        Returns:
+            URL as a string.
+        """
+        return _GITHUB_CONTENT_API.format_map({
             'owner_username': self.owner,
             'repo_name': self.repo,
             'commit_sha': commit_sha,
@@ -145,14 +191,22 @@ class GitHubRepoAPI:
         })
 
     def _build_commit_query(self, commit_sha: str) -> str:
-        return GITHUB_COMMIT_API.format_map({
+        """Formats the URL for querying information about a commit.
+
+        Args:
+            commit_sha: ID of the commit as a string.
+
+        Returns:
+            URL as a string.
+        """
+        return _GITHUB_COMMIT_API.format_map({
             'owner_username': self.owner,
             'repo_name': self.repo,
             'commit_sha': commit_sha
         })
 
     def _query_changed_files_in_commit(self,
-                                       commit_sha: str) -> typing.List[str]:
+                                       commit_sha: str) -> List[str]:
         """Finds the paths of files changed by a commit.
 
         Example:
@@ -183,8 +237,20 @@ class GitHubRepoAPI:
         return files
 
     def _query_files_in_dir(self, commit_sha: str,
-                            dir_path: str) -> typing.List[str]:
-        content_query = GITHUB_CONTENT_API.format_map({
+                            dir_path: str) -> List[str]:
+        """Queries the files in a directory at the state of a commit.
+
+        Only files are returned, not directories.
+
+        Args:
+            commit_sha: ID of the commit as a string.
+            dir_path: Path to the directory as a string, relative to the root
+                directory of the repository.
+
+        Returns:
+            List of relative paths to the files, each as a string.
+        """
+        content_query = _GITHUB_CONTENT_API.format_map({
             'owner_username': self.owner,
             'repo_name': self.repo,
             'commit_sha': commit_sha,
@@ -210,9 +276,9 @@ class GitHubRepoAPI:
         """
         content_query = self._build_content_query(commit_sha, dir_path)
         response = requests.get(content_query, auth=self.auth)
-        ok = response.status_code == http.HTTPStatus.OK
-        not_found = response.status_code == http.HTTPStatus.NOT_FOUND
-        if not ok and not not_found:
+        is_ok = response.status_code == http.HTTPStatus.OK
+        is_not_found = response.status_code == http.HTTPStatus.NOT_FOUND
+        if not is_ok and not is_not_found:
             response.raise_for_status()
         return response.status_code != http.HTTPStatus.NOT_FOUND
 
@@ -243,7 +309,7 @@ class GitHubRepoAPI:
 
     def _find_dirs_up_path_containing_file(
             self, commit_sha: str, dir_path: str, containing: str,
-            searched: typing.Set[str]) -> typing.Set[str]:
+            searched: Set[str]) -> Set[str]:
         """Given a path pointing at a directory in the repository, searches for
         a file in the directory and its parent directories.
 

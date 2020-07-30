@@ -11,10 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+Utility functions.
+"""
 
 import time
 import os
-import shutil
 import re
 import datetime
 from typing import List
@@ -24,15 +26,28 @@ import requests
 
 
 def utctime():
+    """Returns the current time string in ISO 8601 with timezone UTC+0, e.g.
+    '2020-06-30T04:28:53.717569+00:00'."""
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
 def pacific_time():
+    """Returns the current time string in ISO 8601 with timezone
+    America/Los_Angeles, e.g. '2020-06-30T04:28:53.717569-07:00'."""
     return datetime.datetime.now(
         pytz.timezone('America/Los_Angeles')).isoformat()
 
 
-def list_to_str(a_list, sep=', '):
+def list_to_str(a_list: List, sep: str = ', ') -> str:
+    """Converts a list to string.
+
+    Args:
+        a_list: The list to convert to string.
+        sep: Separator between elements.
+
+    Returns:
+        String representation of the list.
+    """
     return sep.join(a_list)
 
 

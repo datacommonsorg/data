@@ -45,27 +45,34 @@ _IMPORT_NAME_REGEX = r'{}|{}'.format(_ABSOLUTE_IMPORT_NAME_REGEX,
                                      _RELATIVE_IMPORT_NAME_REGEX)
 
 
-def get_absolute_import_name(dir_path, import_name):
+def get_absolute_import_name(dir_path: str, import_name: str) -> str:
+    """Joins a relative import path with an import name."""
     return f'{dir_path}:{import_name}'
 
 
-def is_absolute_import_name(import_name):
+def is_absolute_import_name(import_name: str) -> bool:
+    """Checks if an import name is absolute."""
     return re.fullmatch(_ABSOLUTE_IMPORT_NAME_REGEX, import_name) is not None
 
 
-def is_relative_import_name(import_name):
+def is_relative_import_name(import_name: str) -> bool:
+    """Checks if an import name is relative."""
     return re.fullmatch(_RELATIVE_IMPORT_NAME_REGEX, import_name) is not None
 
 
-def split_absolute_import_name(import_name):
+def split_absolute_import_name(import_name: str) -> List[str]:
+    """Splits an absolute import name into a relative import path and an
+    import name."""
     return import_name.split(':')
 
 
-def filter_relative_import_names(import_names):
+def filter_relative_import_names(import_names: List[str]) -> List[str]:
+    """Given a list of import names, filters out the relative import names."""
     return list(name for name in import_names if is_relative_import_name(name))
 
 
 def filter_absolute_import_names(import_names):
+    """Given a list of import names, filters out the absolute import names."""
     return list(name for name in import_names if is_absolute_import_name(name))
 
 

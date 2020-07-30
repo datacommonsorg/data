@@ -11,15 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from unittest import mock
+"""
+Testing utilities.
+"""
 
 import requests.exceptions
 import google.api_core.exceptions
 
 
 class ResponseMock:
-    """Simple mock of a HTTP response."""
+    """Mock class for request.Response."""
 
     def __init__(self, code, data=None, raw=None, headers=None):
         self.status_code = code
@@ -86,6 +87,7 @@ def compare_lines(expected_path, to_test_path, num_lines, reverse=False):
 
 
 class SchedulerJobMock(dict):
+    """Mock class for google.cloud.scheduler.types.Job."""
 
     @property
     def app_engine_http_target(self):

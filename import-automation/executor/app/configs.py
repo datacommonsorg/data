@@ -23,7 +23,6 @@ import typing
 import dataclasses
 
 from google.cloud import logging
-from google.cloud import datastore
 
 
 def _production():
