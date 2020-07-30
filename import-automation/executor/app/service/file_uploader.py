@@ -94,7 +94,7 @@ class LocalFileUploader(FileUploader):
             copy '/foo/file' to '/tmp/bar/file'.
     """
 
-    def __init__(self, output_dir=''):
+    def __init__(self, output_dir: str = ''):
         self.output_dir = os.path.abspath(output_dir)
 
     def upload_file(self, src: str, dest: str) -> None:

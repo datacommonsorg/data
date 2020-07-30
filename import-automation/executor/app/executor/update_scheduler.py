@@ -20,7 +20,7 @@ import logging
 import json
 import traceback
 import tempfile
-from typing import Dict, List
+from typing import Dict
 
 from google.cloud import scheduler
 from google.protobuf import json_format
@@ -31,7 +31,6 @@ from app.service import dashboard_api
 from app.service import github_api
 from app.executor import import_target
 from app.executor import import_executor
-from app.executor import validation
 
 
 class UpdateScheduler:
@@ -52,7 +51,6 @@ class UpdateScheduler:
     Returns:
         Created job as a dict.
     """
-
     def __init__(self,
                  client: scheduler.CloudSchedulerClient,
                  github: github_api.GitHubRepoAPI,
@@ -97,13 +95,28 @@ class UpdateScheduler:
             return import_executor._create_system_run_init_failed_result(
                 traceback.format_exc())
 
-        return import_executor._run_and_handle_exception(
+        return import_executor.run_and_handle_exception(
             run_id, self.dashboard, self._schedule_on_commit_helper, commit_sha,
             run_id)
 
     def _schedule_on_commit_helper(
             self, commit_sha: str,
             run_id: str) -> import_executor.ExecutionResult:
+        """Helper for schedule_on_commit.
+
+        Args:
+            See schedule_on_commit.
+            run_id: ID of the system run as a string. This is only used to
+                communicate with the import progress dashboard. If not provided,
+                no such communication will be made.
+
+        Returns:
+            ExecutionResult object describing the results of scheduling
+                the updates.
+
+        Raises:
+            ExecutionError: Scheduling an update failed for any reason.
+        """
 
         targets = import_target.find_targets_in_commit(commit_sha, 'SCHEDULES',
                                                        self.github)
@@ -140,6 +153,11 @@ class UpdateScheduler:
                     raise import_executor.ExecutionError(
                         import_executor.ExecutionResult('failed', scheduled,
                                                         traceback.format_exc()))
+
+            if self.dashboard:
+                self.dashboard.update_run(
+                    {'status': 'succeeded', 'time_completed': utils.utctime()},
+                    run_id)
             return import_executor.ExecutionResult('succeeded', scheduled,
                                                    'No issues')
 

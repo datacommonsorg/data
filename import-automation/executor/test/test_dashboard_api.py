@@ -86,50 +86,12 @@ class DashboardAPITest(unittest.TestCase):
             json=attempt)
 
     @mock.patch('app.service.iap_request.IAPRequest.patch')
-    def test_update_attempt_id(self, patch):
-        """Tests that attempt_id can be found in the attempt body
-        if not supplied as an argument."""
-        attempt = {'import_name': 'treasury', 'attempt_id': 'idd'}
-        patch.return_value = utils.ResponseMock(200, {})
-        self.assertEqual({}, self.dashboard.update_attempt(attempt, 'idd'))
-        self.dashboard.iap.patch.assert_called_with(
-            'https://datcom-data.uc.r.appspot.com/import_attempts/idd',
-            json={
-                'import_name': 'treasury',
-                'attempt_id': 'idd'
-            })
-
-    def test_update_attempt_no_id(self):
-        """Tests that an exception is raised if attempt_id is not found."""
-        attempt = {'import_name': 'treasury'}
-        self.assertRaises(ValueError, self.dashboard.update_attempt, attempt)
-
-    @mock.patch('app.service.iap_request.IAPRequest.patch')
     def test_update_run(self, patch):
         run = {'commit_sha': 'commit-sha'}
         patch.return_value = utils.ResponseMock(200, {})
         self.assertEqual({}, self.dashboard.update_run(run, 'id'))
         patch.assert_called_with(
             'https://datcom-data.uc.r.appspot.com/system_runs/id', json=run)
-
-    @mock.patch('app.service.iap_request.IAPRequest.patch')
-    def test_update_run_id(self, patch):
-        """Tests that run_id can be found in the run body
-        if not supplied as an argument."""
-        run = {'commit_sha': 'commit-sha', 'attempt_id': 'idddd'}
-        patch.return_value = utils.ResponseMock(200, {})
-        self.assertEqual({}, self.dashboard.update_attempt(run))
-        self.dashboard.iap.patch.assert_called_with(
-            'https://datcom-data.uc.r.appspot.com/import_attempts/idddd',
-            json={
-                'commit_sha': 'commit-sha',
-                'attempt_id': 'idddd'
-            })
-
-    def test_update_run_no_id(self):
-        """Tests that an exception is raised if run_id is not found."""
-        run = {'commit_sha': 'commit-sha'}
-        self.assertRaises(ValueError, self.dashboard.update_run, run)
 
     @mock.patch('app.service.iap_request.IAPRequest.post',
                 lambda self, url, json=None: utils.ResponseMock(200, json))
