@@ -26,10 +26,10 @@ def multi_index_to_single_index(df):
 
 
 # Generate the dcid info.
-def generate_geo_id(row, nuts, name2dcid):
+def generate_geo_id(row, nuts, regid2dcid):
     if str(row['TL']) == '1':
         return "dcid:country/" + row['REG_ID']
     elif row['REG_ID'] in nuts.keys():
         return "dcid:nuts/" + row['REG_ID']
     else:
-        return name2dcid[row['Region']]
+        return regid2dcid[row['REG_ID']]

@@ -24,11 +24,11 @@ import pandas as pd
 df = pd.read_csv('REGION_DEMOGR_population_tl2.csv')
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
-name2dcid = dict(json.loads(open('../name2dcid.json').read()))
+regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
 nuts = dict(json.loads(open('../region_nuts_codes.json').read()))
-df = df[df['REG_ID'].isin(nuts.keys()) | df['Region'].isin(name2dcid.keys())]
+df = df[df['REG_ID'].isin(nuts.keys()) | df['REG_ID'].isin(regid2dcid.keys())]
 # Second, replace the names with dcids
-df['Region'] = df.apply(lambda row: generate_geo_id(row, nuts, name2dcid), axis=1)
+df['Region'] = df.apply(lambda row: generate_geo_id(row, nuts, regid2dcid), axis=1)
 df['Year'] = '"' + df['Year'].astype(str) + '"'
 
 df = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
