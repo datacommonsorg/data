@@ -19,7 +19,6 @@ import csv
 import json
 import pandas as pd
 
-
 # Read csv from source csv
 df = pd.read_csv('REGION_DEMOGR_life_expectancy_and_mortality.csv')
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
@@ -28,11 +27,13 @@ regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
 nuts = dict(json.loads(open('../region_nuts_codes.json').read()))
 df = df[df['REG_ID'].isin(nuts.keys()) | df['REG_ID'].isin(regid2dcid.keys())]
 # Second, replace the names with dcids
-df['Region'] = df.apply(lambda row: generate_geo_id(row, nuts, regid2dcid), axis=1)
+df['Region'] = df.apply(lambda row: generate_geo_id(row, nuts, regid2dcid),
+                        axis=1)
 
 # process the source data
 df = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
-df_clear = df.drop(df[(df['VAR']=='INF_SEXDIF') | (df['VAR']=='LIFE_SEXDIF')].index)
+df_clear = df.drop(df[(df['VAR'] == 'INF_SEXDIF') |
+                      (df['VAR'] == 'LIFE_SEXDIF')].index)
 df_clear['Year'] = '"' + df_clear['Year'].astype(str) + '"'
 
 df_cleaned = df_clear.pivot_table(values='Value',

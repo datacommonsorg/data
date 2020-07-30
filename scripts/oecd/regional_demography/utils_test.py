@@ -20,6 +20,7 @@ from utils import multi_index_to_single_index, generate_geo_id
 
 
 class TestUtils(unittest.TestCase):
+
     def test_multi_index_to_single_index(self):
         df = pd.read_csv("test.csv")
         df_cleaned = df.pivot_table(values='value',
