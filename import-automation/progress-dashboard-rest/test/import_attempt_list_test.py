@@ -24,8 +24,8 @@ from app.resource import system_run_list
 from app.model import system_run_model
 from app.model import import_attempt_model
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
 
 
 def setUpModule():
@@ -35,14 +35,11 @@ def setUpModule():
 class ImportAttemptListTest(unittest.TestCase):
     """Tests for ImportAttemptList."""
 
-    @mock.patch('app.utils.create_datastore_client',
-                utils.create_test_datastore_client)
     def setUp(self):
         """Injects a system run and several import attempts to the database."""
-        self.resource = import_attempt_list.ImportAttemptList()
-
-        run_list_resource = system_run_list.SystemRunList()
-        run_list_resource.database.client = self.resource.client
+        client = utils.create_test_datastore_client()
+        self.resource = import_attempt_list.ImportAttemptList(client)
+        run_list_resource = system_run_list.SystemRunList(client)
 
         attempts = [{
             _ATTEMPT.import_name: 'cpi-u'

@@ -24,7 +24,7 @@ from app.resource import import_attempt_list
 from app.resource import system_run_list
 from test import utils
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
+_ATTEMPT = import_attempt_model.ImportAttempt
 
 
 def setUpModule():
@@ -34,22 +34,18 @@ def setUpModule():
 class ImportAttemptByIDTest(unittest.TestCase):
     """Tests for ImportAttemptByID."""
 
-    @mock.patch('app.utils.create_datastore_client',
-                utils.create_test_datastore_client)
     def setUp(self):
         """Injects a system run and several import attempts to the database."""
-        self.resource = import_attempt.ImportAttemptByID()
-        list_resource = import_attempt_list.ImportAttemptList()
-        run_list_resource = system_run_list.SystemRunList()
-        run_list_resource.database.client = self.resource.client
-        list_resource.database.client = self.resource.client
-        list_resource.run_database.client = self.resource.client
+        client = utils.create_test_datastore_client()
+        self.resource = import_attempt.ImportAttemptByID(client)
+        list_resource = import_attempt_list.ImportAttemptList(client)
+        run_list_resource = system_run_list.SystemRunList(client)
         attempts = [{
-            _ATTEMPT.csv_url: 'google.com'
+            _ATTEMPT.provenance_url: 'google.com'
         }, {
-            _ATTEMPT.node_mcf_url: 'facebook.com'
+            _ATTEMPT.provenance_url: 'facebook.com'
         }, {
-            _ATTEMPT.template_mcf_url: 'bing.com'
+            _ATTEMPT.provenance_url: 'bing.com'
         }]
         self.attempts = utils.ingest_import_attempts(run_list_resource,
                                                      list_resource, attempts)
@@ -77,15 +73,15 @@ class ImportAttemptByIDTest(unittest.TestCase):
         self.assertEqual(404, err)
 
     @mock.patch(utils.PARSE_ARGS,
-                lambda self: {_ATTEMPT.csv_url: 'facebook.com'})
+                lambda self: {_ATTEMPT.provenance_url: 'facebook.com'})
     def test_patch(self):
         """Tests that patching a field succeeds."""
         attempt_id = self.attempts[0][_ATTEMPT.attempt_id]
         before = self.resource.get(attempt_id)
-        self.assertEqual('google.com', before[_ATTEMPT.csv_url])
+        self.assertEqual('google.com', before[_ATTEMPT.provenance_url])
         self.resource.patch(attempt_id)
         after = self.resource.get(attempt_id)
-        self.assertEqual('facebook.com', after[_ATTEMPT.csv_url])
+        self.assertEqual('facebook.com', after[_ATTEMPT.provenance_url])
 
     @mock.patch(utils.PARSE_ARGS)
     def test_patch_not_allowed(self, parse_args):

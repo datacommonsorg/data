@@ -26,9 +26,9 @@ from app.model import system_run_model
 from app.model import import_attempt_model
 from app.model import progress_log_model
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
-_LOG = progress_log_model.ProgressLogModel
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
+_LOG = progress_log_model.ProgressLog
 
 
 def setUpModule():
@@ -38,20 +38,16 @@ def setUpModule():
 class ProgressLogListTest(unittest.TestCase):
     """Tests for ProgressLogList."""
 
-    @mock.patch('app.utils.create_datastore_client',
-                utils.create_test_datastore_client)
     @mock.patch('app.service.log_message_manager.LogMessageManager',
                 utils.LogMessageManagerMock)
     def setUp(self):
         """Injects several system runs and import attempts to the database
         before every test. New progress logs will be linked to these entities.
         """
-        self.resource = progress_log_list.ProgressLogList()
-        run_list_resource = system_run_list.SystemRunList()
-        attempt_list_resource = import_attempt_list.ImportAttemptList()
-        run_list_resource.database.client = self.resource.client
-        attempt_list_resource.database.client = self.resource.client
-        attempt_list_resource.run_database.client = self.resource.client
+        client = utils.create_test_datastore_client()
+        self.resource = progress_log_list.ProgressLogList(client)
+        run_list_resource = system_run_list.SystemRunList(client)
+        attempt_list_resource = import_attempt_list.ImportAttemptList(client)
 
         runs = [{
             _RUN.branch_name: 'test-branch',
@@ -127,7 +123,7 @@ class ProgressLogListTest(unittest.TestCase):
             _LOG.attempt_id: self.attempts[0][_ATTEMPT.attempt_id]
         }
         message, code = self.resource.post()
-        self.assertEqual(403, code)
+        self.assertEqual(409, code)
         self.assertIn('run_id', message)
         self.assertIn('attempt_id', message)
 
