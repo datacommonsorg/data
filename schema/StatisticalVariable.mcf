@@ -1,9 +1,3 @@
-Node: dcid:PerCapita
-typeOf: dcs:StatisticalVariable
-populationType: schema:Person
-measuredProperty: dcs:count
-description: "Measurement is for each person."
-
 Node: dcid:TotalPopulation
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
@@ -124,24 +118,6 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:unemploymentRate
 measurementMethod: dcs:BLSSeasonallyUnadjusted
-statType: dcs:measuredValue
-
-Node: dcid:WHOCovid19CumulativeCases
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
-medicalStatus: dcs:ConfirmedCase
-measuredProperty: dcs:cumulativeCount
-measurementMethod: dcs:WHO_COVID19_SituationReport
-statType: dcs:measuredValue
-
-Node: dcid:WHOCovid19CumulativeDeaths
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
-medicalStatus: dcs:PatientDeceased
-measuredProperty: dcs:cumulativeCount
-measurementMethod: dcs:WHO_COVID19_SituationReport
 statType: dcs:measuredValue
 
 Node: dcid:NYTCovid19CumulativeCases
