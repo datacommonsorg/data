@@ -1,11 +1,11 @@
-Node: dcid:Count_MortalityEvent_AsAFractionOf_Count_Person
+Node: dcid:Count_Death_AsAFractionOf_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
 
-Node: dcid:Count_MortalityEvent_Male_AsAFractionOf_Count_Person_Male
+Node: dcid:Count_Death_Male_AsAFractionOf_Count_Person_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 gender: schema:Male
@@ -13,7 +13,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_Male
 
-Node: dcid:Count_MortalityEvent_Female_AsAFractionOf_Count_Person_Female
+Node: dcid:Count_Death_Female_AsAFractionOf_Count_Person_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 gender: schema:Female
@@ -21,7 +21,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_Female
 
-Node: dcid:Count_MortalityEvent_Upto14Years_AsAFractionOf_Count_Person_Upto14Years
+Node: dcid:Count_Death_Upto14Years_AsAFractionOf_Count_Person_Upto14Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
@@ -29,7 +29,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_Upto14Years
 
-Node: dcid:Count_MortalityEvent_Upto14Years_Male_AsAFractionOf_Count_Person_Upto14Years_Male
+Node: dcid:Count_Death_Upto14Years_Male_AsAFractionOf_Count_Person_Upto14Years_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
@@ -38,7 +38,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_Upto14Years_Male
 
-Node: dcid:Count_MortalityEvent_Upto14Years_Female_AsAFractionOf_Count_Person_Upto14Years_Female
+Node: dcid:Count_Death_Upto14Years_Female_AsAFractionOf_Count_Person_Upto14Years_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years 0 14]
@@ -47,7 +47,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_Upto14Years_Female
 
-Node: dcid:Count_MortalityEvent_AgeAdjusted_AsAFractionOf_Count_Person
+Node: dcid:Count_Death_AgeAdjusted_AsAFractionOf_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 measuredProperty: dcs:count
@@ -55,7 +55,7 @@ statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
 measurementQualifier: dcs:AgeAdjusted
 
-Node: dcid:Count_MortalityEvent_Male_AgeAdjusted_AsAFractionOf_Count_Person_Male
+Node: dcid:Count_Death_Male_AgeAdjusted_AsAFractionOf_Count_Person_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 gender: schema:Male
@@ -64,7 +64,7 @@ statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_Male
 measurementQualifier: dcs:AgeAdjusted
 
-Node: dcid:Count_MortalityEvent_Female_AgeAdjusted_AsAFractionOf_Count_Person_Female
+Node: dcid:Count_Death_Female_AgeAdjusted_AsAFractionOf_Count_Person_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 gender: schema:Female
@@ -73,7 +73,7 @@ statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_Female
 measurementQualifier: dcs:AgeAdjusted
 
-Node: dcid:Count_MortalityEvent_LessThan1Year_AsAFractionOf_Count_BirthEvent
+Node: dcid:Count_Death_LessThan1Year_AsAFractionOf_Count_BirthEvent
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years - 1]
@@ -81,7 +81,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_BirthEvent
 
-Node: dcid:Count_MortalityEvent_LessThan1Year_Male_AsAFractionOf_Count_BirthEvent_Male
+Node: dcid:Count_Death_LessThan1Year_Male_AsAFractionOf_Count_BirthEvent_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years - 1]
@@ -90,7 +90,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_BirthEvent_Male
 
-Node: dcid:Count_MortalityEvent_LessThan1Year_Female_AsAFractionOf_Count_BirthEvent_Female
+Node: dcid:Count_Death_LessThan1Year_Female_AsAFractionOf_Count_BirthEvent_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
 age: [Years - 1]
