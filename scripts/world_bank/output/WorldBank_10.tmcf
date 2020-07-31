@@ -1,0 +1,14 @@
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->IsoCode
+value: C:WorldBank->Value
+measurementMethod: C:WorldBank->measurementMethod
+sourceScalingFactor: C:WorldBank->sourceScalingFactor
+
+Node: E:WorldBank->E1
+typeOf: dcs:Country
+countryAlpha3Code: C:WorldBank->IsoCode
