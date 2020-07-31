@@ -1,0 +1,902 @@
+Node: encode_class_BedLine
+dcid: "BedLine"
+typeOf: schema:Class
+subClassOf: schema:Thing
+name: "BedLine"
+description: "A line in a bed file."
+
+Node: encode_class_EncodeAward
+dcid: "EncodeAward"
+typeOf: schema:Class
+subClassOf: schema:Thing
+name: "EncodeAward"
+description: "Research grant information uploaded to the Encode Project."
+
+Node: encode_class_EncodeBedFile
+dcid: "EncodeBedFile"
+typeOf: schema:Class
+subClassOf: schema:Thing
+name: "EncodeBedFile"
+description: "A bed file uploaded to the Encode Project."
+
+Node: encode_class_EncodeBiosample
+dcid: "EncodeBiosample"
+typeOf: schema:Class
+subClassOf: schema:Thing
+name: "EncodeBiosample"
+description: "An Encode Project biosample."
+
+Node: encode_class_EncodeBiosampleType
+dcid: "EncodeBiosampleType"
+typeOf: schema:Class
+subClassOf: schema:Thing
+name: "EncodeBiosampleType"
+description: "The type of a specific Encode Project biosample."
+
+Node: encode_class_EncodeExperiment
+dcid: "EncodeExperiment"
+typeOf: schema:Class
+subClassOf: schema:Thing
+name: "EncodeExperiment"
+description: "An experiment uploaded to the Encode Project."
+
+Node: encode_class_EncodeLibrary
+dcid: "EncodeLibrary"
+typeOf: schema:Class
+subClassOf: schema:Thing
+name: "EncodeLibrary"
+description: "An encode molecular library."
+
+Node: encode_class_Lab
+dcid: "Lab"
+typeOf: schema:Class
+subClassOf: schema:Thing
+name: "Lab"
+description: "A group or organization that performs scientific research."
+
+Node: encode_property_address1
+dcid: "address1"
+typeOf: schema:Property
+name: "address1"
+description: "Address line 1."
+
+Node: encode_property_address2
+dcid: "address2"
+typeOf: schema:Property
+name: "address2"
+description: "Address line 2."
+
+Node: encode_property_ageDisplay
+dcid: "ageDisplay"
+typeOf: schema:Property
+name: "ageDisplay"
+description: "The displayed age."
+
+Node: encode_property_ageUnits
+dcid: "ageUnits"
+typeOf: schema:Property
+name: "ageUnits"
+description: "Unit of time associated with age."
+
+Node: encode_property_alternateAccessions
+dcid: "alternateAccessions"
+typeOf: schema:Property
+name: "alternateAccessions"
+description: "An accession previously assigned to an object that has been merged with this object."
+
+Node: encode_property_antibodies
+dcid: "antibodies"
+typeOf: schema:Property
+name: "antibodies"
+description: "Antibodies associated with entity."
+
+Node: encode_property_appliedModifications
+dcid: "appliedModifications"
+typeOf: schema:Property
+name: "appliedModifications"
+description: "Genetic modification made in either the donor and/or biosample."
+
+Node: encode_property_assaySlims
+dcid: "assaySlims"
+typeOf: schema:Property
+name: "assaySlims"
+description: "The assay slim."
+
+Node: encode_property_assayTermId
+dcid: "assayTermId"
+typeOf: schema:Property
+name: "assayTermId"
+description: "The assay ID."
+
+Node: encode_property_assayTermName
+dcid: "assayTermName"
+typeOf: schema:Property
+name: "assayTermName"
+description: "The assay name."
+
+Node: encode_property_assayTitle
+dcid: "assayTitle"
+typeOf: schema:Property
+name: "assayTitle"
+description: "The title of the assay performed."
+
+Node: encode_property_assembly
+dcid: "assembly"
+typeOf: schema:Property
+name: "assembly"
+description: "Genome assembly that files were mapped to."
+
+Node: encode_property_award
+dcid: "award"
+typeOf: schema:Property
+name: "award"
+description: "Grant associated with the submission."
+
+Node: encode_property_awards
+dcid: "awards"
+typeOf: schema:Property
+name: "awards"
+description: "A grant associated with the lab."
+
+Node: encode_property_barcodeDetails
+dcid: "barcodeDetails"
+typeOf: schema:Property
+name: "barcodeDetails"
+description: "Biosample barcode."
+
+Node: encode_property_bedFile
+dcid: "bedFile"
+typeOf: schema:Property
+name: "bedFile"
+description: "The bed file associated with bed line."
+
+Node: encode_property_bedName
+dcid: "bedName"
+typeOf: schema:Property
+name: "bedName"
+description: "The name of the bed line."
+
+Node: encode_property_bedScore
+dcid: "bedScore"
+typeOf: schema:Property
+name: "bedScore"
+description: "A score associated to the bed line."
+
+Node: encode_property_biologicalReplicates
+dcid: "biologicalReplicates"
+typeOf: schema:Property
+name: "biologicalReplicates"
+description: "The identifying number of each relevant biological replicate."
+
+Node: encode_property_biosample
+dcid: "biosample"
+typeOf: schema:Property
+name: "biosample"
+description: "The biosample that nucleic acid was isolated from to generate the library."
+
+Node: encode_property_biosampleOntology
+dcid: "biosampleOntology"
+typeOf: schema:Property
+name: "biosampleOntology"
+description: "An embeded property for linking to biosample type which describes the ontology of the biosample."
+
+Node: encode_property_biosampleSummary
+dcid: "biosampleSummary"
+typeOf: schema:Property
+name: "biosampleSummary"
+description: "The biosample summary."
+
+Node: encode_property_blockCount
+dcid: "blockCount"
+typeOf: schema:Property
+name: "blockCount"
+description: "The number of blocks (exons) in the BED line."
+
+Node: encode_property_blockSizes
+dcid: "blockSizes"
+typeOf: schema:Property
+name: "blockSizes"
+description: "A comma-separated list of the block sizes. The number of items in this list should correspond to blockCount."
+
+Node: encode_property_blockStarts
+dcid: "blockStarts"
+typeOf: schema:Property
+name: "blockStarts"
+description: "A comma-separated list of block starts. The first value must be 0 and all of the blockStart positions should be calculated relative to chromStart. The number of items in this list should correspond to blockCount."
+
+Node: encode_property_categorySlims
+dcid: "categorySlims"
+typeOf: schema:Property
+name: "categorySlims"
+description: "The category slims."
+
+Node: encode_property_cellSlims
+dcid: "cellSlims"
+typeOf: schema:Property
+name: "cellSlims"
+description: "The cell slims."
+
+Node: encode_property_characterizations
+dcid: "characterizations"
+typeOf: schema:Property
+name: "characterizations"
+description: "Characterization of biosample."
+
+Node: encode_property_chromosome
+dcid: "chromosome"
+typeOf: schema:Property
+name: "chromosome"
+description: "The name of the chromosome described by the bed line."
+
+Node: encode_property_chromosomeEnd
+dcid: "chromosomeEnd"
+typeOf: schema:Property
+name: "chromosomeEnd"
+description: "The ending position of the feature in the chromosome or scaffold."
+
+Node: encode_property_chromosomeStart
+dcid: "chromosomeStart"
+typeOf: schema:Property
+name: "chromosomeStart"
+description: "The starting position of the feature in the chromosome or scaffold."
+
+Node: encode_property_chromosomeStrand
+dcid: "chromosomeStrand"
+typeOf: schema:Property
+name: "chromosomeStrand"
+description: "The chromosome strand."
+
+Node: encode_property_city
+dcid: "city"
+typeOf: schema:Property
+name: "city"
+description: "The city that an entity belongs in."
+
+Node: encode_property_classification
+dcid: "classification"
+typeOf: schema:Property
+name: "classification"
+description: "The general category of this type of biosample."
+
+Node: encode_property_country
+dcid: "country"
+typeOf: schema:Property
+name: "country"
+description: "The country that an entity belongs in."
+
+Node: encode_property_crosslinkingMethod
+dcid: "crosslinkingMethod"
+typeOf: schema:Property
+name: "crosslinkingMethod"
+description: "A short description or reference of the crosslinking protocol used in library preparation."
+
+Node: encode_property_cultureHarvestDate
+dcid: "cultureHarvestDate"
+typeOf: schema:Property
+name: "cultureHarvestDate"
+description: "For cultured samples, the date the biosample was taken."
+
+Node: encode_property_cultureStartDate
+dcid: "cultureStartDate"
+typeOf: schema:Property
+name: "cultureStartDate"
+description: "For cultured samples, the date the culture was started. For cell lines, the date this particular growth was started, not the date the line was established."
+
+Node: encode_property_dateCreated
+dcid: "dateCreated"
+typeOf: schema:Property
+name: "dateCreated"
+description: "The date the object was created."
+
+Node: encode_property_dateObtained
+dcid: "dateObtained"
+typeOf: schema:Property
+name: "dateObtained"
+description: "For tissue samples, the date the biosample was taken."
+
+Node: encode_property_dateReleased
+dcid: "dateReleased"
+typeOf: schema:Property
+name: "dateReleased"
+description: "The date the object was released."
+
+Node: encode_property_dateSubmitted
+dcid: "dateSubmitted"
+typeOf: schema:Property
+name: "dateSubmitted"
+description: "The date that the experiment received all required replicates and files."
+
+Node: encode_property_dbxrefs
+dcid: "dbxrefs"
+typeOf: schema:Property
+name: "dbxrefs"
+description: "A unique identifier from external resource (e.g. HGNC, MGI, FlyBase, WormBase, ENSEMBL, MIM, UniProtKB, Vega, miRBase)."
+
+Node: encode_property_depletedInTermId
+dcid: "depletedInTermId"
+typeOf: schema:Property
+name: "depletedInTermId"
+description: "See https://www.encodeproject.org/terms/depleted_in_term_id"
+
+Node: encode_property_depletedInTermName
+dcid: "depletedInTermName"
+typeOf: schema:Property
+name: "depletedInTermName"
+description: "See https://www.encodeproject.org/terms/depleted_in_term_name"
+
+Node: encode_property_developmentalSlims
+dcid: "developmentalSlims"
+typeOf: schema:Property
+name: "developmentalSlims"
+description: "The developmental slims."
+
+Node: encode_property_donor
+dcid: "donor"
+typeOf: schema:Property
+name: "donor"
+description: "The donor or strain the biosample was originated from."
+
+Node: encode_property_encodeUUID
+dcid: "encodeUUID"
+typeOf: schema:Property
+name: "encodeUUID"
+description: "The Encode Project uuid used to describe this entity."
+
+Node: encode_property_experiment
+dcid: "experiment"
+typeOf: schema:Property
+name: "experiment"
+description: "The experiment that this Bed file belongs to."
+
+Node: encode_property_experimentClassification
+dcid: "experimentClassification"
+typeOf: schema:Property
+name: "experimentClassification"
+description: "The classification of the experiment."
+
+Node: encode_property_extractionMethod
+dcid: "extractionMethod"
+typeOf: schema:Property
+name: "extractionMethod"
+description: "A short description or reference of the nucleic acid extraction protocol used in library preparation."
+
+Node: encode_property_fax
+dcid: "fax"
+typeOf: schema:Property
+name: "fax"
+description: "The fax number associated with the entity."
+
+Node: encode_property_fileType
+dcid: "fileType"
+typeOf: schema:Property
+name: "fileType"
+description: "The type of the file."
+
+Node: encode_property_flyLifeStage
+dcid: "flyLifeStage"
+typeOf: schema:Property
+name: "flyLifeStage"
+description: "Fly development stage of the animals used to prepare the biosample."
+
+Node: encode_property_flySynchronizationStage
+dcid: "flySynchronizationStage"
+typeOf: schema:Property
+name: "flySynchronizationStage"
+description: "Fly development stage at which flies were synchronized."
+
+Node: encode_property_fragmentationDate
+dcid: "fragmentationDate"
+typeOf: schema:Property
+name: "fragmentationDate"
+description: "The date that the nucleic acid was fragmented."
+
+Node: encode_property_fragmentationMethod
+dcid: "fragmentationMethod"
+typeOf: schema:Property
+name: "fragmentationMethod"
+description: "A short description or reference of the nucleic acid fragmentation protocol used in library preparation."
+
+Node: encode_property_geneticModifications
+dcid: "geneticModifications"
+typeOf: schema:Property
+name: "geneticModifications"
+description: "Genetic modification(s)."
+
+Node: encode_property_genomeAnnotation
+dcid: "genomeAnnotation"
+typeOf: schema:Property
+name: "genomeAnnotation"
+description: "Genome annotation that file was generated with."
+
+Node: encode_property_healthStatus
+dcid: "healthStatus"
+typeOf: schema:Property
+name: "healthStatus"
+description: "Donor health status."
+
+Node: encode_property_host
+dcid: "host"
+typeOf: schema:Property
+name: "host"
+description: "A biosample that was hosting this biosample."
+
+Node: encode_property_instituteLabel
+dcid: "instituteLabel"
+typeOf: schema:Property
+name: "instituteLabel"
+description: "An abbreviation for the institute the lab is associated with."
+
+Node: encode_property_instituteName
+dcid: "instituteName"
+typeOf: schema:Property
+name: "instituteName"
+description: "The name for the institute the lab is associated with."
+
+Node: encode_property_itemRGB
+dcid: "itemRGB"
+typeOf: schema:Property
+name: "itemRGB"
+description: "An RGB value of the form R,G,B (e.g. 255,0,0). If the track line itemRgb attribute is set to "On", this RBG value will determine the display color of the data contained in this BED line. NOTE: It is recommended that a simple color scheme (eight colors or less) be used with this attribute to avoid overwhelming the color resources of the Genome Browser and your Internet browser."
+
+Node: encode_property_lab
+dcid: "lab"
+typeOf: schema:Property
+name: "lab"
+description: "Lab associated with the submission or user."
+
+Node: encode_property_library
+dcid: "library"
+typeOf: schema:Property
+name: "library"
+description: "The nucleic acid library sequenced to produce this file."
+
+Node: encode_property_librarySizeSelectionMethod
+dcid: "librarySizeSelectionMethod"
+typeOf: schema:Property
+name: "librarySizeSelectionMethod"
+description: "A short description or reference of the size selection protocol used in library preparation."
+
+Node: encode_property_lifeStage
+dcid: "lifeStage"
+typeOf: schema:Property
+name: "lifeStage"
+description: "Life stage."
+
+Node: encode_property_lotId
+dcid: "lotId"
+typeOf: schema:Property
+name: "lotId"
+description: "The lot identifier provided by the lab or vendor, for nucleic acids or proteins purchased directly from a lab or vendor (e.g. total RNA)."
+
+Node: encode_property_lysisMethod
+dcid: "lysisMethod"
+typeOf: schema:Property
+name: "lysisMethod"
+description: "A short description or reference of the cell lysis protocol used in library preparation."
+
+Node: encode_property_modelOrganismAge
+dcid: "modelOrganismAge"
+typeOf: schema:Property
+name: "modelOrganismAge"
+description: "The age or age range of the model donor organism when biological material was sampled."
+
+Node: encode_property_modelOrganismAgeUnits
+dcid: "modelOrganismAgeUnits"
+typeOf: schema:Property
+name: "modelOrganismAgeUnits"
+description: "Age units of the model organism."
+
+Node: encode_property_modelOrganismDonorModifications
+dcid: "modelOrganismDonorModifications"
+typeOf: schema:Property
+name: "modelOrganismDonorModifications"
+description: "Genetic modification made in the donor organism of the biosample."
+
+Node: encode_property_modelOrganismHealthStatus
+dcid: "modelOrganismHealthStatus"
+typeOf: schema:Property
+name: "modelOrganismHealthStatus"
+description: "Health status of the model organism."
+
+Node: encode_property_modelOrganismMatingStatus
+dcid: "modelOrganismMatingStatus"
+typeOf: schema:Property
+name: "modelOrganismMatingStatus"
+description: "The mating status of the animal."
+
+Node: encode_property_modelOrganismSex
+dcid: "modelOrganismSex"
+typeOf: schema:Property
+name: "modelOrganismSex"
+description: "The sex of the organism the biosample comes from."
+
+Node: encode_property_mouseLifeStage
+dcid: "mouseLifeStage"
+typeOf: schema:Property
+name: "mouseLifeStage"
+description: "The life stage of the mouse biosample."
+
+Node: encode_property_nihInstitutionalCertification
+dcid: "nihInstitutionalCertification"
+typeOf: schema:Property
+name: "nihInstitutionalCertification"
+description: "Institutional certification given by the NIH for human biosamples."
+
+Node: encode_property_notes
+dcid: "notes"
+typeOf: schema:Property
+name: "notes"
+description: "DCC internal notes."
+
+Node: encode_property_nucleicAcidStartingQuantity
+dcid: "nucleicAcidStartingQuantity"
+typeOf: schema:Property
+name: "nucleicAcidStartingQuantity"
+description: "The starting amount of nucleic acid before selection and purification."
+
+Node: encode_property_nucleicAcidStartingQuantityUnits
+dcid: "nucleicAcidStartingQuantityUnits"
+typeOf: schema:Property
+name: "nucleicAcidStartingQuantityUnits"
+description: "The units used for starting amount of nucleic acid."
+
+Node: encode_property_nucleicAcidTermId
+dcid: "nucleicAcidTermId"
+typeOf: schema:Property
+name: "nucleicAcidTermId"
+description: "The nucleic acid term id."
+
+Node: encode_property_nucleicAcidTermName
+dcid: "nucleicAcidTermName"
+typeOf: schema:Property
+name: "nucleicAcidTermName"
+description: "The nucleic acid term name."
+
+Node: encode_property_objectiveSlims
+dcid: "objectiveSlims"
+typeOf: schema:Property
+name: "objectiveSlims"
+description: "The objective slims."
+
+Node: encode_property_organism
+dcid: "organism"
+typeOf: schema:Property
+name: "organism"
+description: "The organism bearing the target, the organism of the donor, the organism of the gene, the organism the biosample originated from."
+
+Node: encode_property_organSlims
+dcid: "organSlims"
+typeOf: schema:Property
+name: "organSlims"
+description: "The organ slims."
+
+Node: encode_property_originatedFrom
+dcid: "originatedFrom"
+typeOf: schema:Property
+name: "originatedFrom"
+description: "A biosample that the sample was orginated from."
+
+Node: encode_property_outputCategory
+dcid: "outputCategory"
+typeOf: schema:Property
+name: "outputCategory"
+description: "The overall catagory of the file content."
+
+Node: encode_property_outputType
+dcid: "outputType"
+typeOf: schema:Property
+name: "outputType"
+description: "A description of the file's purpose or contents."
+
+Node: encode_property_parentOf
+dcid: "parentOf"
+typeOf: schema:Property
+name: "parentOf"
+description: "See https://www.encodeproject.org/terms/parent_of"
+
+Node: encode_property_partOf
+dcid: "partOf"
+typeOf: schema:Property
+name: "partOf"
+description: "A biosample from which a discrete component was taken. That component is this biosample."
+
+Node: encode_property_passageNumber
+dcid: "passageNumber"
+typeOf: schema:Property
+name: "passageNumber"
+description: "Number of passages including the passages from the source."
+
+Node: encode_property_peak
+dcid: "peak"
+typeOf: schema:Property
+name: "peak"
+description: "Point-source called for this peak; 0-based offset from chromStart. Use -1 if no point-source called."
+
+Node: encode_property_phase
+dcid: "phase"
+typeOf: schema:Property
+name: "phase"
+description: "Specification of cell cycle phase of the biosample."
+
+Node: encode_property_phone1
+dcid: "phone1"
+typeOf: schema:Property
+name: "phone1"
+description: "The lab's primary phone number (with country code)."
+
+Node: encode_property_phone2
+dcid: "phone2"
+typeOf: schema:Property
+name: "phone2"
+description: "The lab's secondary phone number (with country code)."
+
+Node: encode_property_pi
+dcid: "pi"
+typeOf: schema:Property
+name: "pi"
+description: "Principle Investigator of the grant or lab."
+
+Node: encode_property_pipelineErrorDetail
+dcid: "pipelineErrorDetail"
+typeOf: schema:Property
+name: "pipelineErrorDetail"
+description: "Explanation of why the experiment failed pipeline analysis."
+
+Node: encode_property_pooledFrom
+dcid: "pooledFrom"
+typeOf: schema:Property
+name: "pooledFrom"
+description: "A biosample from which an aliquot was taken to form the biosample."
+
+Node: encode_property_possibleControls
+dcid: "possibleControls"
+typeOf: schema:Property
+name: "possibleControls"
+description: "A dataset that contains files that can serve as a scientific control for this experiment."
+
+Node: encode_property_postalCode
+dcid: "postalCode"
+typeOf: schema:Property
+name: "postalCode"
+description: "ZIP/Postal code."
+
+Node: encode_property_postSynchronizationTime
+dcid: "postSynchronizationTime"
+typeOf: schema:Property
+name: "postSynchronizationTime"
+description: "The time that elapsed past the point when animals were synchronized."
+
+Node: encode_property_postSynchronizationTimeUnits
+dcid: "postSynchronizationTimeUnits"
+typeOf: schema:Property
+name: "postSynchronizationTimeUnits"
+description: "The units of time that elapsed past the point when animals were synchronized."
+
+Node: encode_property_postTreatmentTime
+dcid: "postTreatmentTime"
+typeOf: schema:Property
+name: "postTreatmentTime"
+description: "The time that elapsed past the point when biosamples were treated."
+
+Node: encode_property_postTreatmentTimeUnits
+dcid: "postTreatmentTimeUnits"
+typeOf: schema:Property
+name: "postTreatmentTimeUnits"
+description: "The units of time that elapsed past the point when biosamples were treated."
+
+Node: encode_property_productId
+dcid: "productId"
+typeOf: schema:Property
+name: "productId"
+description: "The product identifier provided by the vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."
+
+Node: encode_property_pValue
+dcid: "pValue"
+typeOf: schema:Property
+name: "pValue"
+description: "Measurement of statistical significance (-log10). Use -1 if no pValue is assigned."
+
+Node: encode_property_qualityMetrics
+dcid: "qualityMetrics"
+typeOf: schema:Property
+name: "qualityMetrics"
+description: "See https://www.encodeproject.org/terms/quality_metrics"
+
+Node: encode_property_qValue
+dcid: "qValue"
+typeOf: schema:Property
+name: "qValue"
+description: "Measurement of statistical significance using false discovery rate (-log10). Use -1 if no qValue is assigned."
+
+Node: encode_property_references
+dcid: "references"
+typeOf: schema:Property
+name: "references"
+description: "A publication that provide smore information about the object."
+
+Node: encode_property_relatedSeries
+dcid: "relatedSeries"
+typeOf: schema:Property
+name: "relatedSeries"
+description: "The related series."
+
+Node: encode_property_rnaIntegrityNumber
+dcid: "rnaIntegrityNumber"
+typeOf: schema:Property
+name: "rnaIntegrityNumber"
+description: "The RNA integrity number (RIN) value."
+
+Node: encode_property_sex
+dcid: "sex"
+typeOf: schema:Property
+name: "sex"
+description: "Sex of a biosample."
+
+Node: encode_property_signalValue
+dcid: "signalValue"
+typeOf: schema:Property
+name: "signalValue"
+description: "Measurement of overall (usually, average) enrichment for the region."
+
+Node: encode_property_sizeRange
+dcid: "sizeRange"
+typeOf: schema:Property
+name: "sizeRange"
+description: "The measured size range of the purified nucleic acid, in bp."
+
+Node: encode_property_source
+dcid: "source"
+typeOf: schema:Property
+name: "source"
+description: "The vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."
+
+Node: encode_property_spikeinsUsed
+dcid: "spikeinsUsed"
+typeOf: schema:Property
+name: "spikeinsUsed"
+description: "A specific spike-ins type dataset"
+
+Node: encode_property_startingAmount
+dcid: "startingAmount"
+typeOf: schema:Property
+name: "startingAmount"
+description: "The initial quantity of cells, tissue or animals obtained."
+
+Node: encode_property_startingAmountUnits
+dcid: "startingAmountUnits"
+typeOf: schema:Property
+name: "startingAmountUnits"
+description: "The units used to quantify the amount of cells or tissue obtained."
+
+Node: encode_property_state
+dcid: "state"
+typeOf: schema:Property
+name: "state"
+description: "State/Province/Region."
+
+Node: encode_property_status
+dcid: "status"
+typeOf: schema:Property
+name: "status"
+description: "The current status of an encode entity."
+
+Node: encode_property_strandSpecificity
+dcid: "strandSpecificity"
+typeOf: schema:Property
+name: "strandSpecificity"
+description: "The preparation of the library uses a strand-specific protocol."
+
+Node: encode_property_subcellularFractionTermId
+dcid: "subcellularFractionTermId"
+typeOf: schema:Property
+name: "subcellularFractionTermId"
+description: "See https://www.encodeproject.org/terms/subcellular_fraction_term_id"
+
+Node: encode_property_subcellularFractionTermName
+dcid: "subcellularFractionTermName"
+typeOf: schema:Property
+name: "subcellularFractionTermName"
+description: "See https://www.encodeproject.org/terms/subcellular_fraction_term_name"
+
+Node: encode_property_submittedBy
+dcid: "submittedBy"
+typeOf: schema:Property
+name: "submittedBy"
+description: "The individual submitting the entity."
+
+Node: encode_property_submitterComment
+dcid: "submitterComment"
+typeOf: schema:Property
+name: "submitterComment"
+description: "Comment made by the submitter."
+
+Node: encode_property_summary
+dcid: "summary"
+typeOf: schema:Property
+name: "summary"
+description: "The summary"
+
+Node: encode_property_synchronization
+dcid: "synchronization"
+typeOf: schema:Property
+name: "synchronization"
+description: "See https://www.encodeproject.org/terms/synchronization"
+
+Node: encode_property_synonyms
+dcid: "synonyms"
+typeOf: schema:Property
+name: "synonyms"
+description: "Alternative names for the given entity."
+
+Node: encode_property_systemSlims
+dcid: "systemSlims"
+typeOf: schema:Property
+name: "systemSlims"
+description: "The system slims."
+
+Node: encode_property_target
+dcid: "target"
+typeOf: schema:Property
+name: "target"
+description: "The name of the gene whose expression or product is the intended goal of the antibody. For assays, such as ChIP-seq or RIP-seq, the name of the gene whose expression or product is under investigation for the experiment."
+
+Node: encode_property_termId
+dcid: "termId"
+typeOf: schema:Property
+name: "termId"
+description: "An ontology identifier describing BiosampleType or OBI (Ontology for Biomedical Investigations) ontology identifier for the measurement device."
+
+Node: encode_property_termName
+dcid: "termName"
+typeOf: schema:Property
+name: "termName"
+description: "An ontology name describing BiosampleType or OBI (Ontology for Biomedical Investigations) ontology identifier for the measurement device."
+
+Node: encode_property_thickEnd
+dcid: "thickEnd"
+typeOf: schema:Property
+name: "thickEnd"
+description: "The ending position at which the feature is drawn thickly. Not used in gappedPeak type, set to 0."
+
+Node: encode_property_thickStart
+dcid: "thickStart"
+typeOf: schema:Property
+name: "thickStart"
+description: "The starting position at which the feature is drawn thickly. Not used in gappedPeak type, set to 0."
+
+Node: encode_property_treatments
+dcid: "treatments"
+typeOf: schema:Property
+name: "treatments"
+description: "Relevant mutagenesis treatment applied to result in the modification."
+
+Node: encode_property_typeSlims
+dcid: "typeSlims"
+typeOf: schema:Property
+name: "typeSlims"
+description: "The type slims."
+
+Node: encode_property_wormLifeStage
+dcid: "wormLifeStage"
+typeOf: schema:Property
+name: "wormLifeStage"
+description: "Worm development stage of the animals used to prepare the biosample."
+
+Node: encode_property_wormSynchronizationStage
+dcid: "wormSynchronizationStage"
+typeOf: schema:Property
+name: "wormSynchronizationStage"
+description: "Worm development stage at which the animals were synchronized."
+
+Node: encode_property_fromBedFile
+dcid: "fromBedFile"
+typeOf: schema:Property
+name: "fromBedFile"
+description: "The BedFile containing the associated BedLine"
+
+Node: encode_property_fromExperiment
+dcid: "fromExperiment"
+typeOf: schema:Property
+name: "fromExperiment"
+description: "The EncodeExperiment associated with the given BedFile."
+

@@ -1,0 +1,38 @@
+# File to consolidate all measurementMethod values.
+#
+# Reminder:
+# measurementMethod should describe how the data was MEASURED.
+# measurementQualifier should describe how the data was POST-PROCESSED.
+
+Node: dcid:MeasurementMethodEnum
+name: "MeasurementMethodEnum"
+subClassOf: schema:Enumeration
+description: "Measurement methods used by various observations in Data Commons."
+typeOf: schema:Class
+
+Node: dcid:StatisticSourceEnum
+name: "StatisticSourceEnum"
+subClassOf: dcs:MeasurementMethodEnum
+description: "Measurement methods used solely for distinguishing observations that come from different sources about the same statistic."
+typeOf: schema:Class
+
+Node: dcid:CovidTrackingProject
+name: "CovidTrackingProject"
+typeOf: dcs:StatisticSourceEnum
+
+Node: dcid:GeoNamesTotalPopulation
+typeOf: dcs:StatisticSourceEnum
+name: "GeoNamesTotalPopulation"
+description: "Measurement method for total population measured by geonames.org."
+
+Node: dcid:BondYieldMeasurementEnum
+name: "BondYieldMeasurementEnum"
+typeOf: schema:Class
+subClassOf: schema:MeasurementMethodEnum
+description: "Indicates the method of computing yields of bonds, such as constant maturity"
+
+Node: dcid:ConstantMaturityRate
+name: "ConstantMaturityRate"
+typeOf: dcs:BondYieldMeasurementEnum
+description: "Indicates that the yield data are extrapolated against a yield curve, which relates the yield on a security to its time to maturity, to estimate the yield of the bond if it had exactly some maturity"
+descriptionUrl: "https://www.investopedia.com/terms/c/cmtindex.asp"

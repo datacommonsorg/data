@@ -1,0 +1,50 @@
+Node: E:treasury_constant_maturity_rates->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterestRate_TreasuryBill_1Month
+measurementMethod: dcs:ConstantMaturityRate
+unit: dcs:Percent
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->1-Month
+
+Node: E:treasury_constant_maturity_rates->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterestRate_TreasuryBill_3Month
+measurementMethod: dcs:ConstantMaturityRate
+unit: dcs:Percent
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->3-Month
+
+Node: E:treasury_constant_maturity_rates->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterestRate_TreasuryBill_6Month
+measurementMethod: dcs:ConstantMaturityRate
+unit: dcs:Percent
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->6-Month
+
+Node: E:treasury_constant_maturity_rates->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterestRate_TreasuryBill_1Year
+measurementMethod: dcs:ConstantMaturityRate
+unit: dcs:Percent
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->1-Year
+
+Node: E:treasury_constant_maturity_rates->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterestRate_TreasuryNote_2Year
+measurementMethod: dcs:ConstantMaturityRate
+unit: dcs:Percent
+observationAbout: dcid:country/USA
+observationDate: C:treasury_constant_maturity_rates->date
+value: C:treasury_constant_maturity_rates->2-Year
+
+Node: E:treasury_constant_maturity_rates->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterestRate_TreasuryNote_3Year
+measurementMethod: dcs:ConstantMaturityRate
+unit: dcs:Percent
