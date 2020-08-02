@@ -1,3 +1,20 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Testing utilities.
+"""
+
 import os
 import subprocess
 from unittest import mock
@@ -12,13 +29,14 @@ from app import utils
 from app.model import import_attempt_model
 from app.model import system_run_model
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel()
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
 
 PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
 
 
 class LogMessageManagerMock:
+
     def __init__(self):
         self.data = {}
 
@@ -35,6 +53,7 @@ class LogMessageManagerMock:
 
 
 class DatastoreEmulator:
+
     def __init__(self):
         self.process = None
 
@@ -84,14 +103,15 @@ atexit.register(EMULATOR.terminate_emulator)
 
 
 def create_test_datastore_client():
-    return datastore.Client(
-        project=utils.get_id(),
-        namespace=utils.get_id(),
-        credentials=credentials.AnonymousCredentials())
+    return datastore.Client(project=utils.get_id(),
+                            namespace=utils.get_id(),
+                            credentials=credentials.AnonymousCredentials())
 
 
-def ingest_import_attempts(
-        run_list_resource, attempt_list_resource, attempts, system_run=None):
+def ingest_import_attempts(run_list_resource,
+                           attempt_list_resource,
+                           attempts,
+                           system_run=None):
     with mock.patch(PARSE_ARGS) as parse_args:
         if system_run:
             parse_args.side_effect = [system_run] + attempts

@@ -27,6 +27,8 @@ Run "python3 generate_csv_and_mcf.py --help" for usage.
 
 from absl import app
 from absl import flags
+import pandas as pd
+from frozendict import frozendict
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean("csv", True, "Whether or not to generate the csv.")
@@ -37,13 +39,9 @@ flags.DEFINE_boolean(
 flags.DEFINE_string("path", "FRB_H15.csv",
                     "Path to the raw csv containing rates at all maturities.")
 
-from frozendict import frozendict
-import pandas as pd
-'''
-Maturities for which interest rates are provided by BEA.
-Treasury bills have maturities of a year or less, notes greater than 1 year up
-to 10 years, and bonds greater than 10 years.
-'''
+# Maturities for which interest rates are provided by BEA.
+# Treasury bills have maturities of a year or less, notes greater than 1 year up
+# to 10 years, and bonds greater than 10 years.
 MATURITIES = frozendict({
     "1-month": "Bill",
     "3-month": "Bill",
@@ -87,8 +85,8 @@ def generate_mcf():
     '''Generates the template and StatisticalVariable instance MCFs'''
 
     variable_template = (
-        'Node: dcid:InterestRate_Treasury{security_type}_{maturity_no_hypen}\n'
-        'name: "InterestRate_Treasury{security_type}_{maturity_no_hypen}"\n'
+        'Node: dcid:InterestRate_Treasury{security_type}_{maturity_no_hyphen}\n'
+        'name: "InterestRate_Treasury{security_type}_{maturity_no_hyphen}"\n'
         'typeOf: dcs:StatisticalVariable\n'
         'measuredProperty: dcs:interestRate\n'
         'populationType: dcs:Treasury{security_type}\n'
@@ -97,7 +95,8 @@ def generate_mcf():
     template_template = (
         'Node: E:{filename}->E{index}\n'
         'typeOf: dcs:StatVarObservation\n'
-        'variableMeasured: dcs:InterestRate_Treasury{security_type}_{maturity_no_hypen}\n'
+        'variableMeasured: '
+        'dcs:InterestRate_Treasury{security_type}_{maturity_no_hyphen}\n'
         'measurementMethod: dcs:ConstantMaturityRate\n'
         'unit: dcs:Percent\n'
         'observationAbout: dcid:country/USA\n'
@@ -110,7 +109,7 @@ def generate_mcf():
         index = 1
         for maturity, security_type in MATURITIES.items():
             maturity_hyphen = maturity.title()
-            maturity_no_hypen = maturity_hyphen.replace("-", "")
+            maturity_no_hyphen = maturity_hyphen.replace("-", "")
             maturity_space = maturity_hyphen.replace("-", " ")
             maturity_underscore = maturity_hyphen.replace("-", "_")
             format_dict = {
@@ -119,7 +118,7 @@ def generate_mcf():
                 "maturity_underscore": maturity_underscore,
                 "maturity_hyphen": maturity_hyphen,
                 "security_type": security_type,
-                "maturity_no_hypen": maturity_no_hypen,
+                "maturity_no_hyphen": maturity_no_hyphen,
                 "maturity_space": maturity_space
             }
 
@@ -131,10 +130,8 @@ def generate_mcf():
             index += 1
 
 
-def main(argv):
-    # unused
-    del argv
-
+def main(_):
+    """Runs the code."""
     if FLAGS.csv:
         generate_csv()
     if FLAGS.mcf:

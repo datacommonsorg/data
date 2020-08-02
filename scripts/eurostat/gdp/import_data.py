@@ -22,7 +22,6 @@ import json
 import pandas as pd
 from preprocess_data import preprocess_df
 
-
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None  # default='warn'
 

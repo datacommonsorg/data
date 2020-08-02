@@ -11,14 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Import log resources associated with the endpoints
 '/import_attempts/<string:attempt_id>/logs',
 '/system_runs/<string:run_id>/logs', and '/logs/<string:log_id>'.
 """
-
-import enum
 
 import flask_restful
 from flask_restful import reqparse
@@ -32,26 +29,9 @@ from app.model import import_attempt_model
 from app.model import system_run_model
 from app.model import progress_log_model
 
-# TODO(intrepiditee): Rename from *_model.*Model to *.Model.
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
-_LOG = progress_log_model.ProgressLogModel
-
-
-# TODO(intrepiditee): Move to model.
-class LogLevel(enum.Enum):
-    """Allowed log levels of a log.
-
-    The level of a log can only be one of these.
-    """
-    CRITICAL = 'critical'
-    ERROR = 'error'
-    WARNING = 'warning'
-    INFO = 'info'
-    DEBUG = 'debug'
-
-
-LOG_LEVELS = frozenset(level.value for level in LogLevel)
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
+_LOG = progress_log_model.ProgressLog
 
 
 class ProgressLog(flask_restful.Resource):
@@ -72,20 +52,20 @@ class ProgressLog(flask_restful.Resource):
     utils.add_fields(parser, required_fields, required=True)
     utils.add_fields(parser, optional_fields, required=False)
 
-    # TODO(intrepiditee): Change other resources to also accept an optional arg.
-    def __init__(self, client=None):
+    def __init__(self, client=None, message_manager=None):
         """Constructs a ProgressLog.
 
         Args:
             client: datastore Client object used to communicate with Datastore.
+            message_manager: LogMessageManager object used to store and retreive
+                log messages.
         """
         if not client:
             client = utils.create_datastore_client()
         self.client = client
-        self.run_database = system_run_database.SystemRunDatabase(
-            self.client)
+        self.run_database = system_run_database.SystemRunDatabase(self.client)
         self.log_database = progress_log_database.ProgressLogDatabase(
-            self.client)
+            self.client, message_manager)
         self.attempt_database = import_attempt_database.ImportAttemptDatabase(
             self.client)
 
@@ -97,8 +77,7 @@ class ProgressLogByID(ProgressLog):
     Attributes:
         See ImportLog.
     """
-    # TODO(intrepiditee): Use a helper for get.
-    # TODO(intrepiditee): Use exception for request errors.
+
     def get(self, log_id):
         """Queries the progress logs by its log_id.
 
@@ -122,6 +101,7 @@ class ProgressLogByRunID(ProgressLog):
     Attributes:
         See ImportLog.
     """
+
     def get(self, run_id):
         """Queries the progress logs of a system run.
 
@@ -161,7 +141,7 @@ class ProgressLogByAttemptID(ProgressLog):
         """
         attempt = self.attempt_database.get(attempt_id)
         if not attempt:
-            return validation.get_not_found_error(
-                _ATTEMPT.attempt_id, attempt_id)
+            return validation.get_not_found_error(_ATTEMPT.attempt_id,
+                                                  attempt_id)
         log_ids = attempt.get(_ATTEMPT.logs, [])
         return {_ATTEMPT.logs: self.log_database.load_logs(log_ids)}

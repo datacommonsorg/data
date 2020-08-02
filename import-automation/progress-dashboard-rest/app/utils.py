@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Utility functions.
 """
@@ -50,9 +49,12 @@ def add_fields(parser, fields, required=True):
         field_name = field[0]
         data_type = field[1] if len(field) > 1 else str
         action = field[2] if len(field) > 2 else 'store'
-        parser.add_argument(
-            field_name, type=data_type, action=action,
-            store_missing=False, required=required, location='json')
+        parser.add_argument(field_name,
+                            type=data_type,
+                            action=action,
+                            store_missing=False,
+                            required=required,
+                            location='json')
 
 
 def setup_logging():
@@ -67,6 +69,12 @@ def setup_logging():
 
 def create_storage_bucket(project=configs.PROJECT_ID,
                           bucket_name=configs.LOG_BUCKET_NAME):
+    """Creates a Google Cloud Storage bucket.
+
+    Args:
+        project: ID of the Google Cloud project as a string.
+        bucket_name: Name of the bucket as a string.
+    """
     return storage.Client(project).bucket(bucket_name)
 
 
@@ -80,13 +88,24 @@ def create_datastore_client(project=configs.PROJECT_ID,
             as a string.
         credentials: Credentials to authenticate with Datastore.
     """
-    return datastore.Client(
-        project=project, namespace=namespace, credentials=credentials)
+    return datastore.Client(project=project,
+                            namespace=namespace,
+                            credentials=credentials)
 
 
 def get_id():
+    """Returns a random UUID as a hex string."""
     return uuid.uuid4().hex
 
 
 def list_to_str(a_list, sep=', '):
+    """Converts a list to string.
+
+    Args:
+        a_list: The list to convert to string.
+        sep: Separator between elements.
+
+    Returns:
+        String representation of the list.
+    """
     return sep.join(a_list)

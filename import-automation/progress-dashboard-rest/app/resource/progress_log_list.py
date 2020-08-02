@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Progress log list resource associated with the endpoint '/logs'.
 See app/model/progress_log_model.py and app/resource/progress_log.py for what
@@ -27,9 +26,9 @@ from app.model import system_run_model
 from app.model import progress_log_model
 from app.service import validation
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
-_LOG = progress_log_model.ProgressLogModel
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
+_LOG = progress_log_model.ProgressLog
 
 
 def add_log_to_entity(log_id, entity):
@@ -68,48 +67,45 @@ class ProgressLogList(progress_log.ProgressLog):
             the error message is a string and the error code is an int.
         """
         args = progress_log.ProgressLog.parser.parse_args()
-        if args[_LOG.level] not in progress_log.LOG_LEVELS:
-            return (f'Log level ({args[_LOG.level]}) is not allowed',
-                    http.HTTPStatus.FORBIDDEN)
-        time_logged = args.setdefault(_LOG.time_logged, utils.utctime())
-        if not validation.iso_utc(time_logged):
-            return (f'time_logged ({time_logged}) is not in ISO format '
-                    f'with UTC timezone',
-                    http.HTTPStatus.FORBIDDEN)
+        args.setdefault('time_logged', utils.utctime())
 
-        run_id = args.get(_LOG.run_id)
-        attempt_id = args.get(_LOG.attempt_id)
-        if not run_id and not attempt_id:
-            return ('Neither run_id or attempt_id is present',
-                    http.HTTPStatus.FORBIDDEN)
+        valid, err, code = validation.is_progress_log_valid(args)
+        if not valid:
+            return err, code
 
+        valid, err, code = validation.required_fields_present(
+            ('run_id', 'attempt_id'), args, all_present=False)
+        if not valid:
+            return err, code
+
+        run_id = args.get('run_id')
+        attempt_id = args.get('attempt_id')
         run = None
         attempt = None
-        if run_id:
-            run = self.run_database.get(run_id)
-            if not run:
-                return validation.get_not_found_error(_RUN.run_id, run_id)
-        if attempt_id:
-            attempt = self.attempt_database.get(attempt_id)
-            if not attempt:
-                return validation.get_not_found_error(
-                    _ATTEMPT.attempt_id, attempt_id)
-        if run and attempt:
-            if attempt_id not in run[_RUN.import_attempts]:
-                return ('The import attempt specified by the attempt_id '
-                        f'({attempt_id}) in the request body is not executed '
-                        'by the system run specified by the run_id '
-                        f'({run_id}) in the request body',
-                        http.HTTPStatus.FORBIDDEN)
-
-        log = self.log_database.get(make_new=True)
-        log.update(args)
 
         with self.client.transaction():
+            if run_id:
+                run = self.run_database.get(run_id)
+                if not run:
+                    return validation.get_not_found_error(_RUN.run_id, run_id)
+            if attempt_id:
+                attempt = self.attempt_database.get(attempt_id)
+                if not attempt:
+                    return validation.get_not_found_error(
+                        _ATTEMPT.attempt_id, attempt_id)
+            if run and attempt:
+                if attempt_id not in run[_RUN.import_attempts]:
+                    return ('The import attempt specified by the attempt_id '
+                            f'{attempt_id} in the request body is not '
+                            'executed by the system run specified by the '
+                            f'run_id {run_id} in the request body',
+                            http.HTTPStatus.CONFLICT)
+
+            log = self.log_database.get(make_new=True)
+            log.update(args)
             log = self.log_database.save(log, save_content=True)
             if run:
-                self.run_database.save(
-                    add_log_to_entity(log.key.name, run))
+                self.run_database.save(add_log_to_entity(log.key.name, run))
             if attempt:
                 self.attempt_database.save(
                     add_log_to_entity(log.key.name, attempt))

@@ -38,7 +38,7 @@ class USStateQuarterlyGDPImportVal(unittest.TestCase):
         loader.download_data()
 
         # Test that all states appear in downloaded data.
-        all_states = set(loader._US_STATES)
+        all_states = set(loader.US_STATES)
         data_states = all_states.intersection(set(loader.raw_df['GeoName']))
         self.assertSetEqual(all_states, data_states)
 

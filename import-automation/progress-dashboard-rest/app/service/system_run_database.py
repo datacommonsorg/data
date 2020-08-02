@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Database service for storing system runs using Google Cloud Datastore for
 storage.
@@ -20,7 +19,7 @@ storage.
 from app.service import base_database
 from app.model import system_run_model
 
-_MODEL = system_run_model.SystemRunModel
+_MODEL = system_run_model.SystemRun
 
 
 class SystemRunDatabase(base_database.BaseDatabase):

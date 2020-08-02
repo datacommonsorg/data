@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Import attempt list resource associated with the endpoint '/import_attempts'.
 """
@@ -22,8 +21,8 @@ from app.service import validation
 from app.model import import_attempt_model
 from app.model import system_run_model
 
-_ATTEMPT = import_attempt_model.ImportAttemptModel
-_RUN = system_run_model.SystemRunModel
+_ATTEMPT = import_attempt_model.ImportAttempt
+_RUN = system_run_model.SystemRun
 
 
 class ImportAttemptList(import_attempt.ImportAttempt):
@@ -39,11 +38,10 @@ class ImportAttemptList(import_attempt.ImportAttempt):
             using the client.
     """
 
-    def __init__(self):
+    def __init__(self, client=None):
         """Constructs an ImportAttemptList."""
-        super().__init__()
-        self.run_database = system_run_database.SystemRunDatabase(
-            self.client)
+        super().__init__(client)
+        self.run_database = system_run_database.SystemRunDatabase(self.client)
 
     def get(self):
         """Retrieves a list of import attempts that pass the filter defined by
@@ -64,7 +62,7 @@ class ImportAttemptList(import_attempt.ImportAttempt):
             the error message is a string and the error code is an int.
         """
         args = import_attempt.ImportAttempt.parser.parse_args()
-        valid, err, code = validation.import_attempt_valid(args)
+        valid, err, code = validation.is_import_attempt_valid(args)
         if not valid:
             return err, code
         present, err, code = validation.required_fields_present(

@@ -1,0 +1,50 @@
+
+Node: dcid:NumJobOpening_NAICS_JOLTS_000000_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: schema:JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:BLSSeasonallyAdjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:NumJobOpening_NAICS_JOLTS_000000_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: schema:JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:NumJobOpening_NAICS_10_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: schema:JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:BLSSeasonallyAdjusted
+naics: dcid:NAICS/10
+
+Node: dcid:NumJobOpening_NAICS_10_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: schema:JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+naics: dcid:NAICS/10
+
+Node: dcid:NumJobOpening_NAICS_JOLTS_110099_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: schema:JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:BLSSeasonallyAdjusted
+naics: dcid:NAICS/JOLTS_110099
+
+Node: dcid:NumJobOpening_NAICS_JOLTS_110099_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: schema:JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+naics: dcid:NAICS/JOLTS_110099
+
+Node: dcid:NumJobOpening_NAICS_23_Adjusted
