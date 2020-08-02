@@ -1,240 +1,167 @@
-Node: dcid:AllCausesOfDeath
-typeOf: dcs:ICD10Code
-name: "AllCausesOfDeath"
+Node: dcid:ICD10/A00-Y89
+typeOf: dcs:ICD10Section
+name: "AllCausesOfDeath_ExcludingS00-T98"
 description: "Corresponds to ICD10 Codes A-R,V-Y (A00-Y89) excluding S00-T98"
-
-Node: dcid:CertainInfectiousAndParasiticDiseases
-typeOf: dcs:ICD10Code
-name: "CertainInfectiousAndParasiticDiseases"
-description: "Corresponds to ICD10 Codes A,B (A00-B99)"
-
-Node: dcid:Tuberculosis
-typeOf: dcs:ICD10Code
-name: "Tuberculosis"
-description: "Corresponds to ICD10 Codes A15-A19,B90"
-
-Node: dcid:ViralHepatitisAndSequelaeOfViralHepatitis
-typeOf: dcs:ICD10Code
-name: "ViralHepatitisAndSequelaeOfViralHepatitis"
-description: "Corresponds to ICD10 Codes B15-B19,B942"
-
-Node: dcid:ChronicViralHepatitisBAndC
-typeOf: dcs:ICD10Code
-name: "ChronicViralHepatitisBAndC"
-description: "Corresponds to ICD10 Codes B180-B182"
+excludes: "Injury, poisoning and certain other consequences of external causes (S00-T98)"
 
 Node: dcid:OtherInfectiousAndParasiticDiseases
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherInfectiousAndParasiticDiseases"
-description: "Corresponds to ICD10 Codes A,B and other (remainder of A00-B99)"
+description: "Corresponds to ICD10 Codes A,B that are not in A15-A19, B90, B15-B19, B94.2, B18.0-B18.2, B20-B24"
 
-Node: dcid:MalignantNeoplasmOfTrachea_BronchusAndLung
-typeOf: dcs:ICD10Code
-name: "MalignantNeoplasmOfTrachea_BronchusAndLung"
-description: "Corresponds to ICD10 Codes C33,C34"
-
-Node: dcid:MalignantNeoplasmOfOtherPartsOfUterus
-typeOf: dcs:ICD10Code
-name: "MalignantNeoplasmOfOtherPartsOfUterus"
-description: "Corresponds to ICD10 Codes C54,C55"
-
-Node: dcid:HodgkinDiseaseAndLymphomas
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/C81-C86
+typeOf: dcs:ICD10Section
 name: "HodgkinDiseaseAndLymphomas"
 description: "Corresponds to ICD10 Codes C81-C86"
 
-Node: dcid:OtherMalignantNeoplasmOfLymphoid_HaematopoieticAndRelatedTissue
-typeOf: dcs:ICD10Code
-name: "OtherMalignantNeoplasmOfLymphoid_HaematopoieticAndRelatedTissue"
-description: "Corresponds to ICD10 Codes C88,C90,C96"
-
 Node: dcid:OtherMalignantNeoplasms
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherMalignantNeoplasms"
-description: "Corresponds to ICD10 Codes C and other (remainder of C00-C97)"
+description: "Corresponds to ICD10 Codes C that are not in C00-C14, C15, C16, C18-C21, C22, C25, C32, C33, C34, C43, C50, C53, C54, C55, C56, C61, C64, C67, C70-C72, C73, C81-C86, C88, C90, C96, C91-C95"
 
-Node: dcid:Endocrine_NutritionalAndMetabolicDiseases
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/E00-E90
+typeOf: dcs:ICD10Section
 name: "Endocrine_NutritionalAndMetabolicDiseases"
 description: "Corresponds to ICD10 Codes E (E00-E90)"
 
 Node: dcid:OtherEndocrine_NutritionalAndMetabolicDiseases
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherEndocrine_NutritionalAndMetabolicDiseases"
-description: "Corresponds to ICD10 Codes E and other (remainder of E00-E90)"
+description: "Corresponds to ICD10 Codes E that are not in E10-E14"
 
-Node: dcid:MentalAndBehaviouralDisorders
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/F00-F99
+typeOf: dcs:ICD10Section
 name: "MentalAndBehaviouralDisorders"
 description: "Corresponds to ICD10 Codes F (F00-F99)"
 
-Node: dcid:Dementia
-typeOf: dcs:ICD10Code
-name: "Dementia"
-description: "Corresponds to ICD10 Codes F01,F03"
-
 Node: dcid:DrugDependence_Toxicomania
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "DrugDependence_Toxicomania"
 description: "Corresponds to ICD10 Codes TOXICO (F11-F16, F18-F19)"
 
 Node: dcid:OtherMentalAndBehaviouralDisorders
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherMentalAndBehaviouralDisorders"
-description: "Corresponds to ICD10 Codes F and other (remainder of F00-F99)"
+description: "Corresponds to ICD10 Codes F that are not in F01, F03, F10, F11-F16, F18-F19"
 
-Node: dcid:DiseasesOfTheNervousSystemAndTheSenseOrgans
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/G00-H95
+typeOf: dcs:ICD10Section
 name: "DiseasesOfTheNervousSystemAndTheSenseOrgans"
 description: "Corresponds to ICD10 Codes G,H (G00-H95)"
 
 Node: dcid:OtherDiseasesOfTheNervousSystemAndTheSenseOrgans
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherDiseasesOfTheNervousSystemAndTheSenseOrgans"
-description: "Corresponds to ICD10 Codes G,H and other (remainder of G00-H95)"
+description: "Corresponds to ICD10 Codes G,H that are not in G20, G30"
 
-Node: dcid:AcuteMyocardialInfarctionIncludingSubsequentMyocardialInfarction
-typeOf: dcs:ICD10Code
-name: "AcuteMyocardialInfarctionIncludingSubsequentMyocardialInfarction"
-description: "Corresponds to ICD10 Codes I21,I22"
-
-Node: dcid:OtherIschaemicHeartDiseases
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/I23-I25
+typeOf: dcs:ICD10Section
 name: "OtherIschaemicHeartDiseases"
-description: "Corresponds to ICD10 Codes I20,I23-I25"
+description: "Corresponds to ICD10 Codes I23-I25"
 
-Node: dcid:OtherHeartDiseases
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/I30-I51
+typeOf: dcs:ICD10Section
 name: "OtherHeartDiseases"
 description: "Corresponds to ICD10 Codes I30-I51"
 
 Node: dcid:OtherDiseasesOfTheCirculatorySystem
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherDiseasesOfTheCirculatorySystem"
-description: "Corresponds to ICD10 Codes I and other (remainder of I00-I99)"
+description: "Corresponds to ICD10 Codes I that are not in I20-I25, I21, I22, I23-I25, I30-I51, I60-I69"
 
-Node: dcid:DiseasesOfTheRespiratorySystem
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/J00-J99
+typeOf: dcs:ICD10Section
 name: "DiseasesOfTheRespiratorySystem"
 description: "Corresponds to ICD10 Codes J (J00-J99)"
 
-Node: dcid:Influenza
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/J09-J11
+typeOf: dcs:ICD10Section
 name: "Influenza"
-description: "Corresponds to ICD10 Codes J09-J11 (including swine flu)"
+description: "Corresponds to ICD10 Codes J09-J11"
+inclusionTerm: "Swine flu"
 
-Node: dcid:AsthmaAndStatusAsthmaticus
-typeOf: dcs:ICD10Code
-name: "AsthmaAndStatusAsthmaticus"
-description: "Corresponds to ICD10 Codes J45,J46"
-
-Node: dcid:OtherLowerRespiratoryDiseases
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/J40-J44
+typeOf: dcs:ICD10Section
 name: "OtherLowerRespiratoryDiseases"
-description: "Corresponds to ICD10 Codes J40-J44,J47"
+description: "Corresponds to ICD10 Codes J40-J44"
 
 Node: dcid:OtherDiseasesOfTheRespiratorySystem
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherDiseasesOfTheRespiratorySystem"
-description: "Corresponds to ICD10 Codes J and other (remainder of J00-J99)"
+description: "Corresponds to ICD10 Codes J that are not in J09-J11, J12-J18, J40-J47"
 
-Node: dcid:DiseasesOfTheDigestiveSystem
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/K00-K93
+typeOf: dcs:ICD10Section
 name: "DiseasesOfTheDigestiveSystem"
 description: "Corresponds to ICD10 Codes K (K00-K93)"
 
-Node: dcid:ChronicLiverDisease
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/K72-K75
+typeOf: dcs:ICD10Section
 name: "ChronicLiverDisease"
-description: "Corresponds to ICD10 Codes K70,K73,K74"
-
-Node: dcid:ChronicLiverDisease
-typeOf: dcs:ICD10Code
-name: "ChronicLiverDisease"
-description: "Corresponds to ICD10 Codes K72-K75 (excluding alcoholic and toxic liver disease)"
+description: "Corresponds to ICD10 Codes K72-K75"
+excludes: "Alcoholic and toxic liver disease"
 
 Node: dcid:OtherDiseasesOfTheDigestiveSystem
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherDiseasesOfTheDigestiveSystem"
-description: "Corresponds to ICD10 Codes K and other (remainder of K00-K93)"
+description: "Corresponds to ICD10 Codes K that are not in K25-K28, K70, K72-K75"
 
-Node: dcid:DiseasesOfTheSkinAndSubcutaneousTissue
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/L00-L99
+typeOf: dcs:ICD10Section
 name: "DiseasesOfTheSkinAndSubcutaneousTissue"
 description: "Corresponds to ICD10 Codes L (L00-L99)"
 
-Node: dcid:RheumatoidArthritisAndArthrosis
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/M05-M06
+typeOf: dcs:ICD10Section
 name: "RheumatoidArthritisAndArthrosis"
-description: "Corresponds to ICD10 Codes RHEUM,ARTHRO (M05-M06,M15-M19)"
+description: "Corresponds to ICD10 Codes RHEUM (M05-M06)"
 
 Node: dcid:OtherDiseasesOfTheMusculoskeletalSystemAndConnectiveTissue
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherDiseasesOfTheMusculoskeletalSystemAndConnectiveTissue"
-description: "Corresponds to ICD10 Codes M and other (remainder of M00-M99)"
+description: "Corresponds to ICD10 Codes M that are not in M05-M06, M15-M19"
 
-Node: dcid:DiseasesOfTheGenitourinarySystem
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/N00-N99
+typeOf: dcs:ICD10Section
 name: "DiseasesOfTheGenitourinarySystem"
 description: "Corresponds to ICD10 Codes N (N00-N99)"
 
-Node: dcid:DiseasesOfKidneyAndUreter
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/N00-N29
+typeOf: dcs:ICD10Section
 name: "DiseasesOfKidneyAndUreter"
 description: "Corresponds to ICD10 Codes N00-N29"
 
 Node: dcid:OtherDiseasesOfTheGenitourinarySystem
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherDiseasesOfTheGenitourinarySystem"
-description: "Corresponds to ICD10 Codes N and other (remainder of N00-N99)"
+description: "Corresponds to ICD10 Codes N that are not in N00-N29"
 
-Node: dcid:SuddenInfantDeathSyndrome
+Node: dcid:ICD10/R95
 typeOf: dcs:ICD10Code
 name: "SuddenInfantDeathSyndrome"
-description: "Corresponds to ICD10 Codes R95"
+description: "Corresponds to ICD10 Code R95"
 
-Node: dcid:Ill-DefinedAndUnknownCausesOfMortality
-typeOf: dcs:ICD10Code
+Node: dcid:ICD10/R96-R99
+typeOf: dcs:ICD10Section
 name: "Ill-DefinedAndUnknownCausesOfMortality"
 description: "Corresponds to ICD10 Codes R96-R99"
 
 Node: dcid:OtherSymptoms_SignsAndAbnormalClinicalAndLaboratoryFindings
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherSymptoms_SignsAndAbnormalClinicalAndLaboratoryFindings"
-description: "Corresponds to ICD10 Codes R and other (remainder of R00-R99)"
+description: "Corresponds to ICD10 Codes R that are not in R95, R96-R99"
 
-Node: dcid:Accidents
-typeOf: dcs:ICD10Code
-name: "Accidents"
-description: "Corresponds to ICD10 Codes ACC (V01-X59, Y85, Y86)"
+Node: dcid:Eurostat_OtherAccidents
+typeOf: dcs:ICD10Section
+name: "Eurostat_OtherAccidents"
+description: "Corresponds to ICD10 Codes ACC (W20-W64, W75-X39, X50-X59, Y86)"
 
-Node: dcid:TransportAccidents
-typeOf: dcs:ICD10Code
-name: "TransportAccidents"
-description: "Corresponds to ICD10 Codes V,Y85 (V01-V99, Y85)"
-
-Node: dcid:OtherAccidents
-typeOf: dcs:ICD10Code
-name: "OtherAccidents"
-description: "Corresponds to ICD10 Codes ACC and other (W20-W64, W75-X39, X50-X59, Y86)"
-
-Node: dcid:IntentionalSelf-Harm
-typeOf: dcs:ICD10Code
-name: "IntentionalSelf-Harm"
-description: "Corresponds to ICD10 Codes X60-X84,Y870"
-
-Node: dcid:Assault
-typeOf: dcs:ICD10Code
-name: "Assault"
-description: "Corresponds to ICD10 Codes X85-Y09,Y871"
-
-Node: dcid:EventOfUndeterminedIntent
-typeOf: dcs:ICD10Code
-name: "EventOfUndeterminedIntent"
+Node: dcid:Eurostat_EventOfUndeterminedIntent
+typeOf: dcs:ICD10Section
+name: "Eurostat_EventOfUndeterminedIntent"
 description: "Corresponds to ICD10 Codes Y10-Y34,Y872"
 
 Node: dcid:OtherExternalCausesOfMorbidityAndMortality
-typeOf: dcs:ICD10Code
+typeOf: dcs:ICD10Section
 name: "OtherExternalCausesOfMorbidityAndMortality"
-description: "Corresponds to ICD10 Codes V01-Y89 and other (remainder of V01-Y89)"
-
+description: "Corresponds to ICD10 Codes V01-Y89 that are not in V01-X59, X60-X84, X85-Y09, Y10-Y34, Y85, Y86, Y87.0, Y87.1, Y87.2"
