@@ -25,7 +25,7 @@ steps:
                                     "$_GITHUB_REPO_NAME",
                                  "github_repo_owner_username":
                                     "$_GITHUB_REPO_OWNER_USERNAME",
-                                 "gmail_account":
-                                    "$_GMAIL_ACCOUNT",
-                                 "gmail_password":
-                                    "$_GMAIL_PASSWORD"}}']
+                                 "email_account":
+                                    "$_EMAIL_ACCOUNT",
+                                 "email_token":
+                                    "$_EMAIL_TOKEN"}}']
