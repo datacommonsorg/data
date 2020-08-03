@@ -21,6 +21,11 @@ Downloads and cleans GDP data from the Eurostat database.
 import json
 import pandas as pd
 from preprocess_data import preprocess_df
+import sys
+
+# Imports country mapping alpha2 country codes to country DCIDs.
+sys.path.insert(1, '../../../util')
+from alpha2_to_dcid import COUNTRY_MAP
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None  # default='warn'
@@ -28,8 +33,8 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 class EurostatGDPImporter:
     """Pulls GDP data from the Eurostat database. Specifically, it processes the
-    data in the nama_10r_3gdp folder (available from the Eurostat website, linked
-    in README).
+    data in the nama_10r_3gdp folder (available from the Eurostat website,
+    linked in README).
 
     Attributes:
         df: DataFrame (DF) with the cleaned data.
@@ -81,9 +86,23 @@ class EurostatGDPImporter:
                              "Please check you are calling preprocess_data "
                              "before clean_data.")
         self.clean_df = self.preprocessed_df[self.DESIRED_COLUMNS]
+        self.clean_df = self.clean_df[~self.clean_df['geo'].isin(['EU27_2020',
+                                                                  'EU28'])]
 
+        def geo_converter(geo):
+            """Converts geo codes to nuts or country codes."""
+            numbers = "0123456789"
+            if any(num in geo for num in numbers):
+                return 'nuts/' + geo
+            elif geo in COUNTRY_MAP:
+                return COUNTRY_MAP[geo]
+            else:
+                return ""
+
+        # Remove geos that include all european countries
+        self.clean_df = self.clean_df[self.clean_df['geo'] != ""]
         # Prepends nuts/ prefix to geo codes.
-        self.clean_df['geo'] = self.clean_df['geo'].apply(lambda g: "nuts/" + g)
+        self.clean_df['geo'] = self.clean_df['geo'].apply(geo_converter)
 
         new_col_names = {}
         one_million = 1000 * 1000
