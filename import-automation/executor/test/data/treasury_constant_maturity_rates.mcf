@@ -1,0 +1,50 @@
+Node: dcid:InterestRate_TreasuryBill_1Month
+name: "InterestRate_TreasuryBill_1Month"
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:interestRate
+populationType: dcs:TreasuryBill
+maturity: [1 Month]
+statType: dcs:measuredValue
+
+Node: dcid:InterestRate_TreasuryBill_3Month
+name: "InterestRate_TreasuryBill_3Month"
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:interestRate
+populationType: dcs:TreasuryBill
+maturity: [3 Month]
+statType: dcs:measuredValue
+
+Node: dcid:InterestRate_TreasuryBill_6Month
+name: "InterestRate_TreasuryBill_6Month"
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:interestRate
+populationType: dcs:TreasuryBill
+maturity: [6 Month]
+statType: dcs:measuredValue
+
+Node: dcid:InterestRate_TreasuryBill_1Year
+name: "InterestRate_TreasuryBill_1Year"
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:interestRate
+populationType: dcs:TreasuryBill
+maturity: [1 Year]
+statType: dcs:measuredValue
+
+Node: dcid:InterestRate_TreasuryNote_2Year
+name: "InterestRate_TreasuryNote_2Year"
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:interestRate
+populationType: dcs:TreasuryNote
+maturity: [2 Year]
+statType: dcs:measuredValue
+
+Node: dcid:InterestRate_TreasuryNote_3Year
+name: "InterestRate_TreasuryNote_3Year"
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:interestRate
+populationType: dcs:TreasuryNote
+maturity: [3 Year]
+statType: dcs:measuredValue
+
+Node: dcid:InterestRate_TreasuryNote_5Year
+name: "InterestRate_TreasuryNote_5Year"
