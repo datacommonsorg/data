@@ -1,4 +1,11 @@
 # US FDA Drugs Import
+## About the Dataset
+### URL
+CSV is available for download from https://www.fda.gov/media/89850/download
+### Overview
+“Drugs@FDA includes information about drugs, including biological products, approved for human use in the United States (see FAQ), but does not include information about FDA-approved products regulated by the Center for Biologics Evaluation and Research (for example, vaccines, allergenic products, blood and blood products, plasma derivatives, cellular and gene therapy products). For prescription brand-name drugs, Drugs@FDA typically includes the most recent labeling approved by the FDA (for example, Prescribing Information and FDA-approved patient labeling when available), regulatory information, and FDA staff reviews that evaluate the safety and effectiveness of the drug.”
+### License
+Drugs@FDA is public domain and made available with a Creative Commons CC0 1.0 Universal dedication.
 
 ## Scripts
 ### create_enums.py
@@ -48,6 +55,7 @@ chemblIDs.out (used to map drug names to their ChEMBL IDs) originates from chemb
 
 ```
 $ awk '{ if ($0~/^chembl_molecule:/) { molecule=$1; } else if ($0=="") { molecule=""; } if (molecule != "" && $0~/rdfs:label/) { print molecule, $0; }}' chembl_27.0_molecule.ttl > chemblIDs.out    
+$ awk '$3 !~ "CHEMBL"' chemblIDs.out > chembl_ids.out
 ```
 
 FDADrugsDosageForms.csv is based on the information from https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms
