@@ -4,3 +4,5 @@ numpy==1.18.5
 pandas==1.0.4
 requests==2.24.0
 urllib3==1.25.9
+chembl-webresource-client==0.10.2
+func-timeout==4.3.5 
