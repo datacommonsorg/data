@@ -5,7 +5,7 @@ import write_mcf
 
 def main():
     print('Starting to create enums....')
-    create_enums.main(True)
+    create_enums.main()
     print('Enums created- see FDADrugsEnumSchema.mcf')
     print('Starting to clean data....')
     clean_data.main()
