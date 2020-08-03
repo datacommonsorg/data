@@ -85,7 +85,7 @@ def generate_cleaned_dataframe():
         converters={'industry_code': str},
         sep="\\s+")
     assert len(series_desc.columns) == len(exp_series_columns)
-    assert False not in series_desc.columns == exp_series_columns
+    assert (series_desc.columns == exp_series_columns).all()
     series_desc = series_desc.set_index("series_id")
 
     # Download various series datapoints
@@ -128,7 +128,7 @@ def generate_cleaned_dataframe():
     for schema_name, population_type, job_change_event, df in schema_mapping:
         # Assert columns are as expected.
         assert len(df.columns) == len(job_columns)
-        assert False not in df.columns == job_columns
+        assert (df.columns == job_columns).all()
 
         # Add to general dataframe.
         df = df.loc[:, job_columns]
@@ -233,9 +233,8 @@ def create_statistical_variables(jolts_df, schema_mapping):
 
                     # Remove separation type entry if not includes.
                     if job_change_event == "":
-                        stat_var_schema = (
-                            stat_var_schema.replace(
-                                "jobChangeEvent: dcs:{JOB_CHANGE_EVENT}\n", ""))
+                        stat_var_schema = (stat_var_schema.replace(
+                            "jobChangeEvent: dcs:{JOB_CHANGE_EVENT}\n", ""))
 
                     # Replace all other fields.
                     f_out.write(
