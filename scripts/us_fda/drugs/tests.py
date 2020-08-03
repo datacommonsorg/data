@@ -64,7 +64,8 @@ def test_write_clean_data():
     products_clean = 'test_files/testCleanProducts.txt'
     data_clean = 'test_files/testCleanData.csv'
 
-    write_clean_data(products, applications, te_code, market_stat, products_clean, data_clean)
+    write_clean_data(products, applications, te_code, market_stat,
+                     products_clean, data_clean)
 
     test_clean_df = pd.read_csv('test_files/testCleanData.csv')
     test_clean_df = test_clean_df.fillna('')
@@ -73,6 +74,7 @@ def test_write_clean_data():
     reference_clean_df = reference_clean_df.fillna('')
 
     pd.testing.assert_frame_equal(test_clean_df, reference_clean_df)
+
 
 def test_write_head_mcf():
     reference_head_df = pd.read_csv('test_files/ReferenceHeadData.csv')
@@ -99,12 +101,14 @@ def test_write_edge_mcf():
     for line in difflib.unified_diff(reference_edge, test_edge):
         print(line)
 
+
 def test_enum_schema():
     test_enums = open('FDADrugsEnumSchema.mcf').readlines()
     reference_enums = open('test_files/referenceEnums.mcf').readlines()
 
     for line in difflib.unified_diff(reference_enums, test_enums):
         print(line)
+
 
 if __name__ == "__main__":
     print('Testing enum schema....')

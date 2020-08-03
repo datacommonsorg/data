@@ -1,3 +1,5 @@
+"""Runs all of the scripts in order as if in a fresh directory.
+"""
 import create_enums
 import clean_data
 import write_mcf
