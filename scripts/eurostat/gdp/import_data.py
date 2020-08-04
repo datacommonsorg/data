@@ -99,10 +99,10 @@ class EurostatGDPImporter:
             else:
                 return ""
 
-        # Remove geos that include all european countries
-        self.clean_df = self.clean_df[self.clean_df['geo'] != ""]
         # Prepends nuts/ prefix to geo codes.
         self.clean_df['geo'] = self.clean_df['geo'].apply(geo_converter)
+        # Remove geos that include all european countries
+        self.clean_df = self.clean_df[self.clean_df['geo'] != ""]
 
         new_col_names = {}
         one_million = 1000 * 1000
@@ -161,10 +161,12 @@ class EurostatGDPImporter:
                     continue
                 col_num += 1
                 if "HAB" in col:
-                    var = "dcid:Amount_EconomicActivity_GrossDomesticProduction"\
-                          "_AsAFractionOfCount_Person"
+                    var = ("dcid:Amount_EconomicActivity_"
+                           "GrossDomesticProduction_AsAFractionOfCount_"
+                           "Person_Nominal")
                 else:
-                    var = "dcid:Amount_EconomicActivity_GrossDomesticProduction"
+                    var = ("dcid:Amount_EconomicActivity_"
+                           "GrossDomesticProduction_Nominal")
                 tmcf_f.write(
                     temp.format(i=col_num, var_ref=var, val_col=col, unit=unit))
 
