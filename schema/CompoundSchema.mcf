@@ -569,5 +569,5 @@ typeOf: schema:Property
 name: "humanProteinOccurrenceReliability"
 description: "A reliability score is manually set for all genes and indicates the level of reliability of the analyzed protein expression pattern based on available RNA-seq data, protein/gene characterization data and immunohistochemical data from one or several antibodies with non-overlapping epitopes."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
-rangeIncludes: dcs:HumanProteinOccurrenceReliabilityEnum
+rangeIncludes: dcs:humanProteinOccurrenceReliabilityEnum
 domainIncludes: dcs:HumanProteinOccurrence

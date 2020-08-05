@@ -34,7 +34,7 @@ Node: BLS_InLaborForceEnum
 typeOf: dcs:EmploymentStatusEnum
 dcid: "BLS_InLaborForce"
 name: "BLS_InLaborForce"
-description: "Labor force includes employed and unemployed people. They must be working, receiving unemployment benefits or actively seeking employment."
+description: "Labor force includes employed and unemployed people over 16. They must be working, receiving unemployment benefits or actively seeking employment."
 
 Node: BLS_NotInLaborForceEnum
 typeOf: dcs:EmploymentStatusEnum
