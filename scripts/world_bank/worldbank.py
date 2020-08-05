@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-""" Fetches, cleans, outputs TMCFs and CSVs for all WorldBank development
+""" Fetches, cleans, outputs TMCFs and CSVs for all World Bank development
     indicator codes provided in WorldBankIndicators.csv for all years and for
-    all countries provided in WorldBankCountries.csv """
+    all countries provided in WorldBankCountries.csv. """
 
 from absl import app
 import pandas as pd
@@ -24,7 +24,7 @@ import zipfile
 import io
 import re
 
-# Remaps the columns provided by WorldBank API.
+# Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
     'Country Name': 'CountryName',
     'Country Code': 'CountryCode',
@@ -38,7 +38,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
 observationPeriod: "P1Y"
-observationAbout: C:WorldBank->IsoCode
+observationAbout: C:WorldBank->ISO3166Alpha3
 value: C:WorldBank->Value
 """
 
@@ -54,23 +54,18 @@ measurementDenominator: dcs:{measurementDenominator}
 {CONSTRAINTS}
 """
 
-COUNTRY_MCF = """
-Node: E:WorldBank->E1
-typeOf: dcs:Country
-countryAlpha3Code: C:WorldBank->IsoCode
-"""
+def read_worldbank(iso3166alpha3):
+    """ Fetches and tidies all ~1500 World Bank indicators
+        for a given ISO 3166 alpha 3 code.
 
-def read_worldbank(country_iso):
-    """ Fetches and tidies all ~1500 Worldbank indicators
-        for a given 3 digit ISO code.
-
-        For a particular 3 digit ISO code, this function fetches the entire ZIP
-        file for that particular country for all Worldbank indicators.
-        The format of the file has rows for each economic indicator for
-        each year. The data is tidied so that each year is a column.
+        For a particular alpha 3 code, this function fetches the entire ZIP
+        file for that particular country for all World Bank indicators in a
+        wide format where years are columns. The dataframe is changed into a
+        narrow format so that year becomes a single column with each row
+        representing a different year for a single indicator.
 
         Args:
-            country_iso: 3-digit ISO code for a country, as a string.
+            iso3166alpha3: ISO 3166 alpha 3 for a country, as a string.
 
         Returns:
             A tidied pandas dataframe with all indicator codes for a particular
@@ -78,22 +73,23 @@ def read_worldbank(country_iso):
 
         Notes:
             Takes approximately 10 seconds to download and
-            tidy one country in Google colab.
+            tidy one country in a Jupyter notebook.
     """
     country_zip = ("http://api.worldbank.org/v2/en/country/"
-        + country_iso + "?downloadformat=csv")
+        + iso3166alpha3 + "?downloadformat=csv")
     r = requests.get(country_zip)
     filebytes = io.BytesIO(r.content)
     myzipfile = zipfile.ZipFile(filebytes)
 
     # We need to select the data file which starts with "API",
-    # but does not have an otherwise regular structure.
+    # but does not have an otherwise regular filename structure.
     file_to_open = None
     for file in myzipfile.namelist():
         if file.startswith("API"):
             file_to_open = file
             break
-    assert file_to_open is not None
+    assert file_to_open is not None, \
+        "Failed to find data for" + iso3166alpha3
 
     df = None
     # Captures any text contained in double quotatations.
@@ -129,7 +125,7 @@ def read_worldbank(country_iso):
 
 
 def build_stat_vars_from_indicator_list(row):
-    """ Generates WorldBank StatVar for a row in the indicators dataframe. """
+    """ Generates World Bank StatVar for a row in the indicators dataframe. """
 
     def row_to_constraints(row):
         """ Helper to generate list of constraints. """
@@ -152,8 +148,8 @@ def build_stat_vars_from_indicator_list(row):
         .replace("{CONSTRAINTS}", row_to_constraints(row)))
 
     # Include or remove option fields.
-    for optional_col in \
-            ['populationType', 'statType', 'measurementDenominator']:
+    for optional_col in (
+            ['populationType', 'statType', 'measurementDenominator']):
         if not pd.isna(row[optional_col]):
             new_stat_var = new_stat_var.replace(
                     f"{{{optional_col}}}", row[optional_col])
@@ -173,67 +169,69 @@ def group_stat_vars_by_observation_properties(indicator_codes):
         different template MCFs and CSVs.
 
         Args:
-            indicator_codes: List of WorldBank indicator codes with
+            indicator_codes: List of World Bank indicator codes with
                 their Data Commons mappings, as a pandas dataframe.
 
         Returns:
-            Array of tuples of for each statistical variable grouping.
+            Array of tuples for each statistical variable grouping.
                 1) template MCF, as a string.
                 2) columns to include in exported csv, as a list of strings.
                 3) indicator codes in this grouping, as a list of strings.
     """
     # All the statistical observation properties that we included.
-    properties_belonging_to_stat_var_observation = (
+    properties_of_stat_var_observation = (
         ['measurementMethod', 'scalingFactor', 'sourceScalingFactor', 'unit'])
     # List of tuples to return.
     tmcfs_for_stat_vars = []
     # Dataframe that tracks which values are null.
     null_status = indicator_codes.notna()
 
-    # Iterates over all permuations of stat var properties being included.
-    for permutation in list(itertools.product([False,True],
-            repeat=len(properties_belonging_to_stat_var_observation))):
+    # Iterates over all permutations of stat var properties being included.
+    for permutation in list(itertools.product([False, True],
+            repeat=len(properties_of_stat_var_observation))):
         codes_that_match = null_status.copy()
         base_template_mcf = TEMPLATE_TMCF
         cols_to_include_in_csv = ['IndicatorCode']
 
         # Loop over each obs column and whether to include it.
-        for include_col, column in \
-                zip(permutation, properties_belonging_to_stat_var_observation):
+        for include_col, column in (
+                zip(permutation, properties_of_stat_var_observation)):
             # Filter the dataframe by this observation.
             codes_that_match = codes_that_match.query(
                 f"{column} == {include_col}")
             # Include the column in TMCF and column list.
             if include_col:
-                base_template_mcf = (base_template_mcf
-                    + f"{column}: C:WorldBank->{column}\n")
+                base_template_mcf += f"{column}: C:WorldBank->{column}\n"
                 cols_to_include_in_csv.append(f"{column}")
 
-        tmcfs_for_stat_vars.append((base_template_mcf, cols_to_include_in_csv,
-            list(indicator_codes.loc[codes_that_match.index]['IndicatorCode'])))
-
+        tmcfs_for_stat_vars.append((
+            base_template_mcf,
+            cols_to_include_in_csv,
+            list(indicator_codes.loc[codes_that_match.index]['IndicatorCode']))
+        )
     return tmcfs_for_stat_vars
 
 
 def download_indicator_data(worldbank_countries, indicator_codes):
-    """ Downloads world bank country data for all countries and
+    """ Downloads World Bank country data for all countries and
             indicators provided.
 
         Retains only the unique indicator codes provided.
 
         Args:
-            worldbank_countries: Dataframe with ISO_CODE for each country.
+            worldbank_countries: Dataframe with ISO 3166 alpha 3 code for each
+                country.
             indicator_code: Dataframe with INDICATOR_CODES to include.
 
         Returns:
             worldbank_dataframe: A tidied pandas dataframe where each row has
-            the format (indicator code, country ISO, year, value)
+            the format (indicator code, ISO 3166 alpha 3, year, value)
             for all countries and all indicators provided.
     """
     worldbank_dataframe = pd.DataFrame()
     indicators_to_keep = list(indicator_codes['IndicatorCode'].unique())
 
-    for index, country_code in enumerate(worldbank_countries['CountryCode']):
+    for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
         print(f"Downloading {country_code}")
         country_df = read_worldbank(country_code)
 
@@ -242,7 +240,7 @@ def download_indicator_data(worldbank_countries, indicator_codes):
                                 .isin(indicators_to_keep)]
 
         # Map country codes to ISO.
-        country_df['IsoCode'] = country_code
+        country_df['ISO3166Alpha3'] = country_code
 
         # Add new row to main datframe.
         worldbank_dataframe = worldbank_dataframe.append(country_df)
@@ -251,30 +249,33 @@ def download_indicator_data(worldbank_countries, indicator_codes):
     worldbank_dataframe['StatisticalVariable'] = (
         worldbank_dataframe['IndicatorCode'].apply(
             lambda code: f"WorldBank/{code.replace('.', '_')}"))
-    worldbank_dataframe = worldbank_dataframe.rename({'year': 'Year'}, axis=1)
-    return worldbank_dataframe
+    return worldbank_dataframe.rename({'year': 'Year'}, axis=1)
 
 
-def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars, indicator_codes):
+def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
+                                    tmcfs_for_stat_vars,
+                                    indicator_codes):
     """ Outputs TMCFs and CSVs for each grouping of stat vars.
 
         Args:
-            worldbank_dataframe -> Dataframe containing all indicators for all
-            countries tmcfs_for_stat_vars -> Array of tuples of templace MCF,
+            worldbank_dataframe: Dataframe containing all indicators for all
+                countries.
+            tmcfs_for_stat_vars: Array of tuples of template MCF,
                 columns on stat var observations,
                 indicator codes for that template.
-            MCF indicator_codes -> Dataframe with INDICATOR_CODES to include.
+            indicator_codes -> Dataframe with INDICATOR_CODES to include.
     """
     # Only include a subset of columns in the final csv
-    output_csv = worldbank_dataframe[['StatisticalVariable', 'IndicatorCode', 'IsoCode', 'Year', 'Value']]
+    output_csv = worldbank_dataframe[['StatisticalVariable', 'IndicatorCode',
+                                      'ISO3166Alpha3', 'Year', 'Value']]
 
-    # Output tmcf and csv for each unique WorldBank grouping.
+    # Output tmcf and csv for each unique World Bank grouping.
     for index, enum in enumerate(tmcfs_for_stat_vars):
         tmcf, stat_var_obs_cols, stat_vars_in_group = enum
         if len(stat_vars_in_group) != 0:
-            with open(f"output/WorldBank_{index}.tmcf", 'w', newline='') as f_out:
+            with open(f"output/WorldBank_{index}.tmcf",
+                      'w', newline='') as f_out:
                 f_out.write(tmcf)
-                f_out.write(COUNTRY_MCF)
 
             # Output only the indicator codes in that grouping.
             matching_csv = output_csv[
@@ -298,14 +299,14 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
     """ Scales values by sourceScalingFactor and inputs exisiting stat vars.
 
         First, this function converts all values to per capita. Some measures
-        in the WorldBank dataset are per thousand or per hundred thousand, but
+        in the World Bank dataset are per thousand or per hundred thousand, but
         we need to scale these to the common denomination format. Secondly,
         some statistical variables such as Count_Person_InLaborForce are not
-        WorldBank specific and need to be replaced. Both of these are imputted
+        World Bank specific and need to be replaced. Both of these are imputted
         from the following two lists in args.
 
     Args:
-        scaling_factor_lookup: A dictionary of a mapping between WorldBank
+        scaling_factor_lookup: A dictionary of a mapping between World Bank
             indicator code to the respective numeric scaling factor.
         existing_stat_var_lookup: A dictionary of a mapping between all
             indicator to be replaced with the exisiting stat var to replace it.
@@ -321,7 +322,7 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
     return row
 
 
-def main(argv):
+def main(_):
     # Load statistical variable configuration file.
     indicator_codes = pd.read_csv("WorldBankIndicators.csv")
 
@@ -356,8 +357,9 @@ def main(argv):
     # Remap columns to match expected format.
     worldbank_dataframe['Value'] = pd.to_numeric(
         worldbank_dataframe['Value'])
-    worldbank_dataframe['IsoCode'] = worldbank_dataframe['IsoCode'].apply(
-        lambda code: "dcs:country/" + code)
+    worldbank_dataframe['ISO3166Alpha3'] = (
+        worldbank_dataframe['ISO3166Alpha3'].apply(
+        lambda code: "dcs:country/" + code))
     worldbank_dataframe['StatisticalVariable'] = \
         worldbank_dataframe['StatisticalVariable'].apply(
             lambda code: "dcs:" + code)
