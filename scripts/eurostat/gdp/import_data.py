@@ -86,22 +86,23 @@ class EurostatGDPImporter:
                              "Please check you are calling preprocess_data "
                              "before clean_data.")
         self.clean_df = self.preprocessed_df[self.DESIRED_COLUMNS]
+
+        # GDP measurements for all of Europe are currently removed for lack
+        # of a way to represent them in the DataCommons Graph.
+        # TODO(fpernice): Add Europe-wide data to the import once it's
+        # supported by DataCommons.
         self.clean_df = self.clean_df[~self.clean_df['geo'].isin(['EU27_2020',
                                                                   'EU28'])]
 
         def geo_converter(geo):
             """Converts geo codes to nuts or country codes."""
-            numbers = "0123456789"
-            if any(num in geo for num in numbers):
+            if any(char.isdigit() for char in geo):
                 return 'nuts/' + geo
-            elif geo in COUNTRY_MAP:
-                return COUNTRY_MAP[geo]
-            else:
-                return ""
+            return COUNTRY_MAP.get(geo, "")
 
-        # Prepends nuts/ prefix to geo codes.
+        # Convert geo IDS to geo codes, e.g., "country/SHN" or "nuts/AT342".
         self.clean_df['geo'] = self.clean_df['geo'].apply(geo_converter)
-        # Remove geos that include all european countries
+        # Remove geos that do not adjust to any of the recognized standards.
         self.clean_df = self.clean_df[self.clean_df['geo'] != ""]
 
         new_col_names = {}
