@@ -1,0 +1,497 @@
+Node: dcid:Adipocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "Adipocytes"
+description: "Adipocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:GlandularCells
+typeOf: dcs:HumanCellTypeEnum
+name: "GlandularCells"
+description: "Glandular cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:LymphoidTissue
+typeOf: dcs:HumanCellTypeEnum
+name: "LymphoidTissue"
+description: "Lymphoid tissue"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:HematopoieticCells
+typeOf: dcs:HumanCellTypeEnum
+name: "HematopoieticCells"
+description: "Hematopoietic cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:MyoepithelialCells
+typeOf: dcs:HumanCellTypeEnum
+name: "MyoepithelialCells"
+description: "Myoepithelial cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:RespiratoryEpithelialCells
+typeOf: dcs:HumanCellTypeEnum
+name: "RespiratoryEpithelialCells"
+description: "Respiratory epithelial cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:GlialCells
+typeOf: dcs:HumanCellTypeEnum
+name: "GlialCells"
+description: "Glial cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:NeuronalCells
+typeOf: dcs:HumanCellTypeEnum
+name: "NeuronalCells"
+description: "Neuronal cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInGranularLayer
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInGranularLayer"
+description: "Cells in granular layer"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInMolecularLayer
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInMolecularLayer"
+description: "Cells in molecular layer"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:PurkinjeCells
+typeOf: dcs:HumanCellTypeEnum
+name: "PurkinjeCells"
+description: "Purkinje cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:EndothelialCells
+typeOf: dcs:HumanCellTypeEnum
+name: "EndothelialCells"
+description: "Endothelial cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Neuropil
+typeOf: dcs:HumanCellTypeEnum
+name: "Neuropil"
+description: "Neuropil"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:SquamousEpithelialCells
+typeOf: dcs:HumanCellTypeEnum
+name: "SquamousEpithelialCells"
+description: "Squamous epithelial cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:PeripheralNerveGanglion
+typeOf: dcs:HumanCellTypeEnum
+name: "PeripheralNerveGanglion"
+description: "Peripheral nerve/ganglion"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInEndometrialStroma
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInEndometrialStroma"
+description: "Cells in endometrial stroma"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Myocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "Myocytes"
+description: "Myocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInGlomeruli
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInGlomeruli"
+description: "Cells in glomeruli"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInTubules
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInTubules"
+description: "Cells in tubules"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:BileDuctCells
+typeOf: dcs:HumanCellTypeEnum
+name: "BileDuctCells"
+description: "Bile duct cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Hepatocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "Hepatocytes"
+description: "Hepatocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Macrophages
+typeOf: dcs:HumanCellTypeEnum
+name: "Macrophages"
+description: "Macrophages"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Pneumocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "Pneumocytes"
+description: "Pneumocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:GerminalCenterCells
+typeOf: dcs:HumanCellTypeEnum
+name: "GerminalCenterCells"
+description: "Germinal center cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:NonGerminalCenterCells
+typeOf: dcs:HumanCellTypeEnum
+name: "NonGerminalCenterCells"
+description: "Non-germinal center cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:OvarianStromaCells
+typeOf: dcs:HumanCellTypeEnum
+name: "OvarianStromaCells"
+description: "Ovarian stroma cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:ExocrineGlandularCells
+typeOf: dcs:HumanCellTypeEnum
+name: "ExocrineGlandularCells"
+description: "Exocrine glandular cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:IsletsOfLangerhans
+typeOf: dcs:HumanCellTypeEnum
+name: "IsletsOfLangerhans"
+description: "Islets of Langerhans"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:DecidualCells
+typeOf: dcs:HumanCellTypeEnum
+name: "DecidualCells"
+description: "Decidual cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:TrophoblasticCells
+typeOf: dcs:HumanCellTypeEnum
+name: "TrophoblasticCells"
+description: "Trophoblastic cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Fibroblasts
+typeOf: dcs:HumanCellTypeEnum
+name: "Fibroblasts"
+description: "Fibroblasts"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Keratinocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "Keratinocytes"
+description: "Keratinocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Langerhans
+typeOf: dcs:HumanCellTypeEnum
+name: "Langerhans"
+description: "Langerhans"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Melanocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "Melanocytes"
+description: "Melanocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:EpidermalCells
+typeOf: dcs:HumanCellTypeEnum
+name: "EpidermalCells"
+description: "Epidermal cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:SmoothMuscleCells
+typeOf: dcs:HumanCellTypeEnum
+name: "SmoothMuscleCells"
+description: "Smooth muscle cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:PeripheralNerve
+typeOf: dcs:HumanCellTypeEnum
+name: "PeripheralNerve"
+description: "Peripheral nerve"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInRedPulp
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInRedPulp"
+description: "Cells in red pulp"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInWhitePulp
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInWhitePulp"
+description: "Cells in white pulp"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInSeminiferousDucts
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInSeminiferousDucts"
+description: "Cells in seminiferous ducts"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:LeydigCells
+typeOf: dcs:HumanCellTypeEnum
+name: "LeydigCells"
+description: "Leydig cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:UrothelialCells
+typeOf: dcs:HumanCellTypeEnum
+name: "UrothelialCells"
+description: "Urothelial cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:FollicleCells
+typeOf: dcs:HumanCellTypeEnum
+name: "FollicleCells"
+description: "Follicle cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Chondrocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "Chondrocytes"
+description: "Chondrocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:NeuronalProjections
+typeOf: dcs:HumanCellTypeEnum
+name: "NeuronalProjections"
+description: "Neuronal projections"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:Synapses
+typeOf: dcs:HumanCellTypeEnum
+name: "Synapses"
+description: "Synapses"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:ElongatedOrLateSpermatids
+typeOf: dcs:HumanCellTypeEnum
+name: "ElongatedOrLateSpermatids"
+description: "Elongated or late spermatids"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:PachyteneSpermatocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "PachyteneSpermatocytes"
+description: "Pachytene spermatocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:PeritubularCells
+typeOf: dcs:HumanCellTypeEnum
+name: "PeritubularCells"
+description: "Peritubular cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:PreleptoteneSpermatocytes
+typeOf: dcs:HumanCellTypeEnum
+name: "PreleptoteneSpermatocytes"
+description: "Preleptotene spermatocytes"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:RoundOrEarlySpermatids
+typeOf: dcs:HumanCellTypeEnum
+name: "RoundOrEarlySpermatids"
+description: "Round or early spermatids"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:SertoliCells
+typeOf: dcs:HumanCellTypeEnum
+name: "SertoliCells"
+description: "Sertoli cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:SpermatogoniaCells
+typeOf: dcs:HumanCellTypeEnum
+name: "SpermatogoniaCells"
+description: "Spermatogonia cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInCortexMedulla
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInCortexMedulla"
+description: "Cells in cortex/medulla"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInCuticle
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInCuticle"
+description: "Cells in cuticle"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInExternalRootSheath
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInExternalRootSheath"
+description: "Cells in external root sheath"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInInternalRootSheath
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInInternalRootSheath"
+description: "Cells in internal root sheath"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInInnerNuclearLayer
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInInnerNuclearLayer"
+description: "Cells in inner nuclear layer "
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInPhotoreceptorLayer
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInPhotoreceptorLayer"
+description: "Cells in photoreceptor layer "
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:GanglionCells
+typeOf: dcs:HumanCellTypeEnum
+name: "GanglionCells"
+description: "Ganglion cells "
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:LimitingMembrane
+typeOf: dcs:HumanCellTypeEnum
+name: "LimitingMembrane"
+description: "Limiting membrane"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:NerveFibersInInnerPlexiformLayer
+typeOf: dcs:HumanCellTypeEnum
+name: "NerveFibersInInnerPlexiformLayer"
+description: "Nerve fibers in inner plexiform layer"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:NerveFibersInNerveFiberLayer
+typeOf: dcs:HumanCellTypeEnum
+name: "NerveFibersInNerveFiberLayer"
+description: "Nerve fibers in nerve fiber layer"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:NerveFibersInOuterPlexiformLayer
+typeOf: dcs:HumanCellTypeEnum
+name: "NerveFibersInOuterPlexiformLayer"
+description: "Nerve fibers in outer plexiform layer "
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:PigmentEpithelium
+typeOf: dcs:HumanCellTypeEnum
+name: "PigmentEpithelium"
+description: "Pigment epithelium"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:LactatingGlandularCells
+typeOf: dcs:HumanCellTypeEnum
+name: "LactatingGlandularCells"
+description: "Lactating glandular cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInZonaFasciculata
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInZonaFasciculata"
+description: "Cells in zona fasciculata"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInZonaGlomerulosa
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInZonaGlomerulosa"
+description: "Cells in zona glomerulosa"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInZonaReticularis
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInZonaReticularis"
+description: "Cells in zona reticularis"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:MedullaryCells
+typeOf: dcs:HumanCellTypeEnum
+name: "MedullaryCells"
+description: "Medullary cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:SebaceousCells
+typeOf: dcs:HumanCellTypeEnum
+name: "SebaceousCells"
+description: "Sebaceous cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:SecretoryCells
+typeOf: dcs:HumanCellTypeEnum
+name: "SecretoryCells"
+description: "Secretory cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:SweatDucts
+typeOf: dcs:HumanCellTypeEnum
+name: "SweatDucts"
+description: "Sweat ducts"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CornealEpithelialCells
+typeOf: dcs:HumanCellTypeEnum
+name: "CornealEpithelialCells"
+description: "Corneal epithelial cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:HyaloidMembrane
+typeOf: dcs:HumanCellTypeEnum
+name: "HyaloidMembrane"
+description: "Hyaloid membrane"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:LensEpithelialCells
+typeOf: dcs:HumanCellTypeEnum
+name: "LensEpithelialCells"
+description: "Lens epithelial cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:LensFiberCells
+typeOf: dcs:HumanCellTypeEnum
+name: "LensFiberCells"
+description: "Lens fiber cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CorticalCells
+typeOf: dcs:HumanCellTypeEnum
+name: "CorticalCells"
+description: "Cortical cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInAnterior
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInAnterior"
+description: "Cells in anterior "
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInPosterior
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInPosterior"
+description: "Cells in posterior "
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:DuctalCells
+typeOf: dcs:HumanCellTypeEnum
+name: "DuctalCells"
+description: "Ductal cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:EpendymalCells
+typeOf: dcs:HumanCellTypeEnum
+name: "EpendymalCells"
+description: "Ependymal cells"
+domainIncludes: dcs:HumanCellTypeEnum
+
+Node: dcid:CellsInDentateNucleus
+typeOf: dcs:HumanCellTypeEnum
+name: "CellsInDentateNucleus"
+description: "Cells in dentate nucleus"
+domainIncludes: dcs:HumanCellTypeEnum
