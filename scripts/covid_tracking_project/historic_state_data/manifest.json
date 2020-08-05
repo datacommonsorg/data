@@ -1,0 +1,23 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "historic_state_data",
+            "curator_emails": [
+                "hhhhhwu@google.com"
+            ],
+            "provenance_url": "https://www.covidtracking.com",
+            "provenance_description": "The COVID Tracking Project is a volunteer organization launched from The Atlantic and dedicated to collecting and publishing the data required to understand the COVID-19 outbreak in the United States.",
+            "scripts": [
+                "preprocess_csv.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "COVIDTracking_States.tmcf",
+                    "cleaned_csv": "COVIDTracking_States.csv",
+                    "node_mcf": "COVIDTracking_States_StatisticalVariables.mcf"
+                }
+            ],
+            "cron_schedule": "* * * * *"
+        }
+    ]
+}
