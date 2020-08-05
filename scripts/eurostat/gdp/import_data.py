@@ -91,8 +91,8 @@ class EurostatGDPImporter:
         # of a way to represent them in the DataCommons Graph.
         # TODO(fpernice): Add Europe-wide data to the import once it's
         # supported by DataCommons.
-        self.clean_df = self.clean_df[~self.clean_df['geo'].isin(['EU27_2020',
-                                                                  'EU28'])]
+        self.clean_df = self.clean_df[~self.clean_df['geo'].
+                                      isin(['EU27_2020', 'EU28'])]
 
         def geo_converter(geo):
             """Converts geo codes to nuts or country codes."""
