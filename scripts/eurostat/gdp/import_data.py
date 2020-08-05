@@ -103,7 +103,10 @@ class EurostatGDPImporter:
         # Convert geo IDS to geo codes, e.g., "country/SHN" or "nuts/AT342".
         self.clean_df['geo'] = self.clean_df['geo'].apply(geo_converter)
         # Remove geos that do not adjust to any of the recognized standards.
-        self.clean_df = self.clean_df[self.clean_df['geo'] != ""]
+        invalid_geos = self.clean_df['geo'] == ""
+        print(f"Num invalid geos: {sum(invalid_geos)} out of "
+              f"{len(invalid_geos)} total geos.")
+        self.clean_df = self.clean_df[~invalid_geos]
 
         new_col_names = {}
         one_million = 1000 * 1000
