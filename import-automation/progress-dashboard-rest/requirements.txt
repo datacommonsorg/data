@@ -1,8 +1,0 @@
-flask
-flask_restful
-google-cloud-datastore
-google-cloud-logging
-google-cloud-storage
-google-auth
-gunicorn
-psutil
