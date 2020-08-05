@@ -60,6 +60,8 @@ class EurostatGDPImporter:
     # TODO (fpernice): Add a human-readable description of the codes to statVarObs
     REGION_CODES = dict(json.loads(open('region_codes.json').read()))
 
+    NUM_INVALID_GEOS_TO_PRINT = 10
+
     def __init__(self):
         self.raw_df = None
         self.preprocessed_df = None
@@ -98,14 +100,22 @@ class EurostatGDPImporter:
             """Converts geo codes to nuts or country codes."""
             if any(char.isdigit() for char in geo):
                 return 'nuts/' + geo
-            return COUNTRY_MAP.get(geo, "")
+            # Get the country ID. If the geo is not a country, mark this
+            # geo as invalid by surrounding it in ~ signs.
+            return COUNTRY_MAP.get(geo, '~' + geo + '~')
 
         # Convert geo IDS to geo codes, e.g., "country/SHN" or "nuts/AT342".
         self.clean_df['geo'] = self.clean_df['geo'].apply(geo_converter)
         # Remove geos that do not adjust to any of the recognized standards.
-        invalid_geos = self.clean_df['geo'] == ""
-        print(f"Num invalid geos: {sum(invalid_geos)} out of "
+        invalid_geos = self.clean_df['geo'].str.contains('~.*~')
+
+        num_invalid = sum(invalid_geos)
+        num_to_print = min(self.NUM_INVALID_GEOS_TO_PRINT, num_invalid)
+        print(f"Num invalid geos: {num_invalid} out of "
               f"{len(invalid_geos)} total geos.")
+        print(f"Below is a sample of {num_to_print} ignored geos: \n")
+        print(self.clean_df[invalid_geos].sample(num_to_print))
+
         self.clean_df = self.clean_df[~invalid_geos]
 
         new_col_names = {}
@@ -167,10 +177,10 @@ class EurostatGDPImporter:
                 if "HAB" in col:
                     var = ("dcid:Amount_EconomicActivity_"
                            "GrossDomesticProduction_AsAFractionOfCount_"
-                           "Person_Nominal")
+                           "Person")
                 else:
                     var = ("dcid:Amount_EconomicActivity_"
-                           "GrossDomesticProduction_Nominal")
+                           "GrossDomesticProduction")
                 tmcf_f.write(
                     temp.format(i=col_num, var_ref=var, val_col=col, unit=unit))
 
