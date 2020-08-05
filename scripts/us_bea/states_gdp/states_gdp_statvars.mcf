@@ -1,6 +1,0 @@
-Node: dcid:InflationAdjustedGDP
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EconomicActivity
-activitySource: dcs:GrossDomesticProduction
-measuredProperty: dcs:amount
-measurementQualifier: dcs:InflationAdjusted
