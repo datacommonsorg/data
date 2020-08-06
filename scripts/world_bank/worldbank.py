@@ -139,6 +139,7 @@ def build_stat_vars_from_indicator_list(row):
             next_constraint += 1
         return constraints_text
 
+    # yapf: disable
     # Input all required statistical variable fields.
     new_stat_var = (TEMPLATE_STAT_VAR
         .replace("{INDICATOR}", row['IndicatorCode'].replace(".", "_"))
@@ -147,6 +148,7 @@ def build_stat_vars_from_indicator_list(row):
         .replace("{measuredProperty}", row['measuredProp'])
         .replace("{CONSTRAINTS}", row_to_constraints(row))
     )
+    # yapf: enable
     # Include or remove option fields.
     for optional_col in ([
             'populationType', 'statType', 'measurementDenominator'
