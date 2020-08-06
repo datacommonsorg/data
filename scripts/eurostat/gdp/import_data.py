@@ -91,7 +91,7 @@ class EurostatGDPImporter:
 
         # GDP measurements for all of Europe are currently removed for lack
         # of a way to represent them in the DataCommons Graph.
-        # TODO(fpernice): Add Europe-wide data to the import once it's
+        # TODO(fpernice-google): Add Europe-wide data to the import once it's
         # supported by DataCommons.
         self.clean_df = self.clean_df[~self.clean_df['geo'].
                                       isin(['EU27_2020', 'EU28'])]
@@ -102,6 +102,9 @@ class EurostatGDPImporter:
                 return 'nuts/' + geo
             # Get the country ID. If the geo is not a country, mark this
             # geo as invalid by surrounding it in ~ signs.
+            # TODO(fpernice-google): When there is a dictionary that maps to
+            # NUTS codes, use that instead  of searching for numbers in the
+            # code (since this leaves out NUTS codes like "FRK").
             return COUNTRY_MAP.get(geo, '~' + geo + '~')
 
         # Convert geo IDS to geo codes, e.g., "country/SHN" or "nuts/AT342".
