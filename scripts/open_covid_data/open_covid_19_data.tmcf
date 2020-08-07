@@ -32,7 +32,7 @@ value: C:open_covid_19_data_cleaned->deaths_new
 
 Node: E:open_covid_19_data_cleaned->E4
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:CumulativeCount_Person_COVID_19_Tested_PCR
+variableMeasured: dcs:CumulativeCount_Person_COVID19PCRTest
 measurementMethod: dcs:OpenCovid19Data
 observationAbout: C:open_covid_19_data_cleaned->observationAbout
 observationDate: C:open_covid_19_data_cleaned->date
@@ -72,7 +72,7 @@ value: C:open_covid_19_data_cleaned->tests_cumulative_units_unclear__incl__non_P
 
 Node: E:open_covid_19_data_cleaned->E9
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:IncrementalCount_Person_COVID_19_Tested_PCR
+variableMeasured: dcs:IncrementalCount_Person_COVID19PCRTest
 measurementMethod: dcs:OpenCovid19Data
 observationAbout: C:open_covid_19_data_cleaned->observationAbout
 observationDate: C:open_covid_19_data_cleaned->date
