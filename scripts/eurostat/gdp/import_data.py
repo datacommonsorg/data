@@ -26,6 +26,7 @@ import sys
 # Imports country mapping alpha2 country codes to country DCIDs.
 sys.path.insert(1, '../../../util')
 from alpha2_to_dcid import COUNTRY_MAP
+from nuts_codes_names import NUTS1_CODES_NAMES
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None  # default='warn'
@@ -98,13 +99,8 @@ class EurostatGDPImporter:
 
         def geo_converter(geo):
             """Converts geo codes to nuts or country codes."""
-            if any(char.isdigit() for char in geo):
+            if 'nuts/' + geo in NUTS1_CODES_NAMES:
                 return 'nuts/' + geo
-            # Get the country ID. If the geo is not a country, mark this
-            # geo as invalid by surrounding it in ~ signs.
-            # TODO(fpernice-google): When there is a dictionary that maps to
-            # NUTS codes, use that instead  of searching for numbers in the
-            # code (since this leaves out NUTS codes like "FRK").
             return COUNTRY_MAP.get(geo, '~' + geo + '~')
 
         # Convert geo IDS to geo codes, e.g., "country/SHN" or "nuts/AT342".
@@ -114,8 +110,8 @@ class EurostatGDPImporter:
 
         num_invalid = sum(invalid_geos)
         num_to_print = min(self.NUM_INVALID_GEOS_TO_PRINT, num_invalid)
-        print(f"Num invalid geos: {num_invalid} out of "
-              f"{len(invalid_geos)} total geos.")
+        print(f"Num invalid geo instances: {num_invalid} out of "
+              f"{len(invalid_geos)} total instances.")
         print(f"Below is a sample of {num_to_print} ignored geos: \n")
         print(self.clean_df[invalid_geos].sample(num_to_print))
 
