@@ -44,7 +44,7 @@ Node: dcid:AllAdministrativeAreas
 typeOf: dcs:PolicySpatialCoverageEnum
 description: "The policy is applied across the whole country."
 
-Node: dcid:Unknown
+Node: dcid:SpatialCoverageUnknown
 typeOf: dcs:PolicySpatialCoverageEnum
 description: "The policy coverage is unknown."
 
@@ -528,7 +528,7 @@ Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized
 typeOf: dcs:StatisticalVariable
 incidentType: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
-medicalStatus: dcs:	PatientHospitalized
+medicalStatus: dcs:PatientHospitalized
 populationType: dcs:MedicalConditionIncident
 statType: dcs:measuredValue
 
@@ -536,7 +536,7 @@ Node: dcid:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
 typeOf: dcs:StatisticalVariable
 incidentType: dcs:COVID_19
 measuredProperty: dcs:count
-medicalStatus: dcs:	PatientHospitalized
+medicalStatus: dcs:PatientHospitalized
 populationType: dcs:MedicalConditionIncident
 statType: dcs:measuredValue
 
@@ -544,14 +544,14 @@ Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19
 typeOf: dcs:StatisticalVariable
 medicalCondition: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
-populationType: dcs:MedicalTest
+populationType: dcs:MedicalConditionIncident
 statType: dcs:measuredValue
 
 Node: dcid:IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased
 typeOf: dcs:StatisticalVariable
 incidentType: dcs:COVID_19
 measuredProperty: dcs:incrementalCount
-medicalStatus: dcs:	PatientDeceased
+medicalStatus: dcs:PatientDeceased
 populationType: dcs:MedicalConditionIncident
 statType: dcs:measuredValue
 
@@ -563,7 +563,7 @@ medicalStatus: dcs:PatientDeceased
 populationType: dcs:MedicalConditionIncident
 statType: dcs:measuredValue
 
-Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedPatientDeceased
+Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
 typeOf: dcs:StatisticalVariable
 incidentType: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
@@ -594,19 +594,19 @@ measuredProperty: dcs:incrementalCount
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 
-Node: dcid:IncrementalCount_Person_COVID_19_Tested_PCR
+Node: dcid:IncrementalCount_Person_COVID19PCRTest
 typeOf: dcs:StatisticalVariable
 medicalCondition: dcs:COVID_19
 measuredProperty: dcs:incrementalCount
-populationType: dcs:MedicalTest
-medicalTestingMethod: dcs:COVID19PCRTest
+populationType: dcs:Person
+healthPrevention: dcs:COVID19PCRTest
 statType: dcs:measuredValue
 
-Node: dcid:IncrementalCount_Person_COVID_19_Tested
+Node: dcid:IncrementalCount_Person_COVID19Tested
 typeOf: dcs:StatisticalVariable
 medicalCondition: dcs:COVID_19
 measuredProperty: dcs:incrementalCount
-populationType: dcs:MedicalTest
+populationType: dcs:Person
 statType: dcs:measuredValue
 
 Node: dcid:IncrementalCount_MedicalTest_COVID_19_PCR
@@ -624,25 +624,25 @@ measuredProperty: dcs:incrementalCount
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 
-Node: dcid:CumulativeCount_Person_COVID_19_Tested_PCR
+Node: dcid:CumulativeCount_Person_COVID19PCRTest
 typeOf: dcs:StatisticalVariable
 medicalCondition: dcs:COVID_19
-measuredProperty: dcs:incrementalCount
-populationType: dcs:MedicalTest
-medicalTestingMethod: dcs:COVID19PCRTest
+measuredProperty: dcs:cumulativeCount
+populationType: dcs:Person
+healthPrevention: dcs:COVID19PCRTest
 statType: dcs:measuredValue
 
-Node: dcid:CumulativeCount_Person_COVID_19_Tested
+Node: dcid:CumulativeCount_Person_COVID19Tested
 typeOf: dcs:StatisticalVariable
 medicalCondition: dcs:COVID_19
-measuredProperty: dcs:incrementalCount
-populationType: dcs:MedicalTest
+measuredProperty: dcs:cumulativeCount
+populationType: dcs:Person
 statType: dcs:measuredValue
 
 Node: dcid:CumulativeCount_MedicalTest_COVID_19_PCR
 typeOf: dcs:StatisticalVariable
 medicalCondition: dcs:COVID_19
-measuredProperty: dcs:incrementalCount
+measuredProperty: dcs:cumulativeCount
 populationType: dcs:MedicalTest
 medicalTestingMethod: dcs:COVID19PCRTest
 statType: dcs:measuredValue
@@ -650,7 +650,7 @@ statType: dcs:measuredValue
 Node: dcid:CumulativeCount_MedicalTest_COVID_19
 typeOf: dcs:StatisticalVariable
 medicalCondition: dcs:COVID_19
-measuredProperty: dcs:incrementalCount
+measuredProperty: dcs:cumulativeCount
 populationType: dcs:MedicalTest
 statType: dcs:measuredValue
 
@@ -680,14 +680,14 @@ policyType: dcs:SchoolClosure
 measuredProperty: dcs:policyExtent
 spatialCoverage: dcs:AllAdministrativeAreas
 
-Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_SchoolClosure_Unknown
+Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_SchoolClosure_SpatialCoverageUnknown
 typeOf: dcs:StatisticalVariable
 populationType: schema:Legislation
 legislationPassedBy: schema:GovernmentOrganization
 category: dcs:COVID19Pandemic
 policyType: dcs:SchoolClosure
 measuredProperty: dcs:policyExtent
-spatialCoverage: dcs:Unknown
+spatialCoverage: dcs:SpatialCoverageUnknown
 
 Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_WorkplaceClosure_SelectedAdministrativeAreas
 typeOf: dcs:StatisticalVariable
@@ -707,14 +707,14 @@ policyType: dcs:WorkplaceClosure
 measuredProperty: dcs:policyExtent
 spatialCoverage: dcs:AllAdministrativeAreas
 
-Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_WorkplaceClosure_Unknown
+Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_WorkplaceClosure_SpatialCoverageUnknown
 typeOf: dcs:StatisticalVariable
 populationType: schema:Legislation
 legislationPassedBy: schema:GovernmentOrganization
 category: dcs:COVID19Pandemic
 policyType: dcs:WorkplaceClosure
 measuredProperty: dcs:policyExtent
-spatialCoverage: dcs:Unknown
+spatialCoverage: dcs:SpatialCoverageUnknown
 
 Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PrivateGatheringRestriction_SelectedAdministrativeAreas
 typeOf: dcs:StatisticalVariable
@@ -734,14 +734,14 @@ policyType: dcs:PrivateGatheringRestriction
 measuredProperty: dcs:policyExtent
 spatialCoverage: dcs:AllAdministrativeAreas
 
-Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PrivateGatheringRestriction_Unknown
+Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PrivateGatheringRestriction_SpatialCoverageUnknown
 typeOf: dcs:StatisticalVariable
 populationType: schema:Legislation
 legislationPassedBy: schema:GovernmentOrganization
 category: dcs:COVID19Pandemic
 policyType: dcs:PrivateGatheringRestriction
 measuredProperty: dcs:policyExtent
-spatialCoverage: dcs:Unknown
+spatialCoverage: dcs:SpatialCoverageUnknown
 
 Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PublicTransitClosure_SelectedAdministrativeAreas
 typeOf: dcs:StatisticalVariable
@@ -761,14 +761,14 @@ policyType: dcs:PublicTransitClosure
 measuredProperty: dcs:policyExtent
 spatialCoverage: dcs:AllAdministrativeAreas
 
-Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PublicTransitClosure_Unknown
+Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PublicTransitClosure_SpatialCoverageUnknown
 typeOf: dcs:StatisticalVariable
 populationType: schema:Legislation
 legislationPassedBy: schema:GovernmentOrganization
 category: dcs:COVID19Pandemic
 policyType: dcs:PublicTransitClosure
 measuredProperty: dcs:policyExtent
-spatialCoverage: dcs:Unknown
+spatialCoverage: dcs:SpatialCoverageUnknown
 
 Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_StayAtHomeRequirement_SelectedAdministrativeAreas
 typeOf: dcs:StatisticalVariable
@@ -788,14 +788,14 @@ policyType: dcs:StayAtHomeRequirement
 measuredProperty: dcs:policyExtent
 spatialCoverage: dcs:AllAdministrativeAreas
 
-Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_StayAtHomeRequirement_Unknown
+Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_StayAtHomeRequirement_SpatialCoverageUnknown
 typeOf: dcs:StatisticalVariable
 populationType: schema:Legislation
 legislationPassedBy: schema:GovernmentOrganization
 category: dcs:COVID19Pandemic
 policyType: dcs:StayAtHomeRequirement
 measuredProperty: dcs:policyExtent
-spatialCoverage: dcs:Unknown
+spatialCoverage: dcs:SpatialCoverageUnknown
 
 Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternalMovementRestriction_SelectedAdministrativeAreas
 typeOf: dcs:StatisticalVariable
@@ -815,14 +815,14 @@ policyType: dcs:InternalMovementRestriction
 measuredProperty: dcs:policyExtent
 spatialCoverage: dcs:AllAdministrativeAreas
 
-Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternalMovementRestriction_Unknown
+Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternalMovementRestriction_SpatialCoverageUnknown
 typeOf: dcs:StatisticalVariable
 populationType: schema:Legislation
 legislationPassedBy: schema:GovernmentOrganization
 category: dcs:COVID19Pandemic
 policyType: dcs:InternalMovementRestriction
 measuredProperty: dcs:policyExtent
-spatialCoverage: dcs:Unknown
+spatialCoverage: dcs:SpatialCoverageUnknown
 
 Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternationalTravelRestriction
 typeOf: dcs:StatisticalVariable
@@ -850,14 +850,14 @@ policyType: dcs:IncomeSupport
 measuredProperty: dcs:policyExtent
 spatialCoverage: dcs:AllAdministrativeAreas
 
-Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_IncomeSupport_Unknown
+Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_IncomeSupport_SpatialCoverageUnknown
 typeOf: dcs:StatisticalVariable
 populationType: schema:Legislation
 legislationPassedBy: schema:GovernmentOrganization
 category: dcs:COVID19Pandemic
 policyType: dcs:IncomeSupport
 measuredProperty: dcs:policyExtent
-spatialCoverage: dcs:Unknown
+spatialCoverage: dcs:SpatialCoverageUnknown
 
 Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_DebtOrContractRelief
 typeOf: dcs:StatisticalVariable
@@ -883,13 +883,13 @@ category: dcs:COVID19Pandemic
 measuredProperty: dcs:campaignExtent
 spatialCoverage: dcs:AllAdministrativeAreas
 
-Node: dcid:CampaignExtent_PublicInformationCampaign_COVID19Pandemic_GovernmentOrganization_Unknown
+Node: dcid:CampaignExtent_PublicInformationCampaign_COVID19Pandemic_GovernmentOrganization_SpatialCoverageUnknown
 typeOf: dcs:StatisticalVariable
 populationType: schema:PublicInformationCampaign
 organizer: schema:GovernmentOrganization
 category: dcs:COVID19Pandemic
 measuredProperty: dcs:campaignExtent
-spatialCoverage: dcs:Unknown
+spatialCoverage: dcs:SpatialCoverageUnknown
 
 Node: dcid:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_TestingEligibility
 typeOf: dcs:StatisticalVariable
