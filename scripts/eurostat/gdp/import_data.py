@@ -99,7 +99,8 @@ class EurostatGDPImporter:
 
         def geo_converter(geo):
             """Converts geo codes to nuts or country codes."""
-            if 'nuts/' + geo in NUTS1_CODES_NAMES:
+            if any(char.isdigit() for char in geo) or ('nuts/' + geo
+                                                       in NUTS1_CODES_NAMES):
                 return 'nuts/' + geo
             return COUNTRY_MAP.get(geo, '~' + geo + '~')
 
