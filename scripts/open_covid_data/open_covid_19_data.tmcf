@@ -1,0 +1,563 @@
+Node: E:open_covid_19_data_cleaned->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->cases_cumulative
+
+Node: E:open_covid_19_data_cleaned->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->cases_new
+
+Node: E:open_covid_19_data_cleaned->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->deaths_cumulative
+
+Node: E:open_covid_19_data_cleaned->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->deaths_new
+
+Node: E:open_covid_19_data_cleaned->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_Person_COVID_19_Tested_PCR
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_cumulative_people_tested
+
+Node: E:open_covid_19_data_cleaned->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19_PCR
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_cumulative_samples_tested
+
+Node: E:open_covid_19_data_cleaned->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19_PCR
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_cumulative_tests_performed
+
+Node: E:open_covid_19_data_cleaned->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19_PCR
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_cumulative_units_unclear
+
+Node: E:open_covid_19_data_cleaned->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_cumulative_units_unclear__incl__non_PCR_
+
+Node: E:open_covid_19_data_cleaned->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_Person_COVID_19_Tested_PCR
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_new_people_tested
+
+Node: E:open_covid_19_data_cleaned->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalTest_COVID_19_PCR
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_new_samples_tested
+
+Node: E:open_covid_19_data_cleaned->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalTest_COVID_19_PCR
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_new_tests_performed
+
+Node: E:open_covid_19_data_cleaned->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalTest_COVID_19_PCR
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_new_units_unclear
+
+Node: E:open_covid_19_data_cleaned->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalTest_COVID_19
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->tests_new_units_unclear__incl__non_PCR_
+
+Node: E:open_covid_19_data_cleaned->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->hospitalized_current
+
+Node: E:open_covid_19_data_cleaned->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_PatientHospitalized
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->hospitalized_new
+
+Node: E:open_covid_19_data_cleaned->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->hospitalized_cumulative
+
+Node: E:open_covid_19_data_cleaned->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientInICU
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->icu_current
+
+Node: E:open_covid_19_data_cleaned->E18
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->icu_cumulative
+
+Node: E:open_covid_19_data_cleaned->E19
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientOnVentilator
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->ventilator_current
+
+Node: E:open_covid_19_data_cleaned->E20
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_Healthcare
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->emergency_investment_in_healthcare
+measurementMethod: dcs:OpenCovid19Data
+unit: schema:USDollar
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E21
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_Vaccine
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->investment_in_vaccines
+measurementMethod: dcs:OpenCovid19Data
+unit: schema:USDollar
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E22
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_EconomicStimulus
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->fiscal_measures
+measurementMethod: dcs:OpenCovid19Data
+unit: schema:USDollar
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E23
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_InternationalAid
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->international_support
+measurementMethod: dcs:OpenCovid19Data
+unit: schema:USDollar
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E24
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternationalTravelRestriction
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->international_travel_controls
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyInternationalTravelRestriction
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E25
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_DebtOrContractRelief
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->debt_contract_relief
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyDebtOrContractRelief
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E26
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_TestingEligibility
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->testing_policy
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyTestingEligibility
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E27
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_ContactTracing
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->contact_tracing
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyContactTracing
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E28
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_SchoolClosure_SelectedAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->school_closing_0
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicySchoolClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E29
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_SchoolClosure_AllAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->school_closing_1
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicySchoolClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E30
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_SchoolClosure_Unknown
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->school_closing__NA_
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicySchoolClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E31
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_WorkplaceClosure_SelectedAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->workplace_closing_0
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyWorkplaceClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E32
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_WorkplaceClosure_AllAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->workplace_closing_1
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyWorkplaceClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E33
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_WorkplaceClosure_Unknown
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->workplace_closing__NA_
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyWorkplaceClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E34
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PrivateGatheringRestriction_SelectedAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->restrictions_on_gatherings_0
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyPrivateGatheringRestriction
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E35
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PrivateGatheringRestriction_AllAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->restrictions_on_gatherings_1
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyPrivateGatheringRestriction
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E36
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PrivateGatheringRestriction_Unknown
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->restrictions_on_gatherings__NA_
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyPrivateGatheringRestriction
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E37
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PublicTransitClosure_SelectedAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->close_public_transit_0
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyPublicTransitClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E38
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PublicTransitClosure_AllAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->close_public_transit_1
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyPublicTransitClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E39
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PublicTransitClosure_Unknown
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->close_public_transit__NA_
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyPublicTransitClosure
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E40
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_StayAtHomeRequirement_SelectedAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->stay_at_home_requirements_0
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyStayAtHomeRequirement
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E41
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_StayAtHomeRequirement_AllAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->stay_at_home_requirements_1
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyStayAtHomeRequirement
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E42
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_StayAtHomeRequirement_Unknown
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->stay_at_home_requirements__NA_
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyStayAtHomeRequirement
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E43
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternalMovementRestriction_SelectedAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->restrictions_on_internal_movement_0
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyInternalMovementRestriction
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E44
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternalMovementRestriction_AllAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->restrictions_on_internal_movement_1
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyInternalMovementRestriction
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E45
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternalMovementRestriction_Unknown
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->restrictions_on_internal_movement__NA_
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyInternalMovementRestriction
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E46
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_IncomeSupport_SelectedAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->income_support_0
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyIncomeSupport
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E47
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_IncomeSupport_AllAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->income_support_1
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyIncomeSupport
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E48
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_IncomeSupport_Unknown
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->income_support__NA_
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPolicyIncomeSupport
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E49
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CampaignExtent_PublicInformationCampaign_COVID19Pandemic_GovernmentOrganization_SelectedAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->public_information_campaigns_0
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPublicInformationCampaign
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E50
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CampaignExtent_PublicInformationCampaign_COVID19Pandemic_GovernmentOrganization_AllAdministrativeAreas
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->public_information_campaigns_1
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPublicInformationCampaign
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E51
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CampaignExtent_PublicInformationCampaign_COVID19Pandemic_GovernmentOrganization_Unknown
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->public_information_campaigns__NA_
+measurementMethod: dcs:OpenCovid19Data
+unit: dcs:ExtentOfPublicInformationCampaign
+statType: dcs:measuredValue
+
+Node: E:open_covid_19_data_cleaned->E52
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Covid19StringencyIndex_Legislation_COVID19Pandemic_GovernmentOrganization
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->stringency_index
+
+Node: E:open_covid_19_data_cleaned->E53
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Covid19ResponseIndex_Legislation_COVID19Pandemic_GovernmentOrganization
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->government_response_index
+
+Node: E:open_covid_19_data_cleaned->E54
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Covid19ContainmentAndHealthIndex_Legislation_COVID19Pandemic_GovernmentOrganization
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->containment_health_index
+
+Node: E:open_covid_19_data_cleaned->E55
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Covid19EconomicSupportIndex_Legislation_COVID19Pandemic_GovernmentOrganization
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->economic_support_index
+
+Node: E:open_covid_19_data_cleaned->E56
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Covid19StringencyIndex_Legislation_COVID19Pandemic_GovernmentOrganization
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->stringency_index_for_display
+measurementQualifer: dcs:SmoothedByRepeatingLatestPoint
+
+Node: E:open_covid_19_data_cleaned->E57
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Covid19ResponseIndex_Legislation_COVID19Pandemic_GovernmentOrganization
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->government_response_index_for_display
+measurementQualifer: dcs:SmoothedByRepeatingLatestPoint
+
+Node: E:open_covid_19_data_cleaned->E58
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Covid19ContainmentAndHealthIndex_Legislation_COVID19Pandemic_GovernmentOrganization
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->containment_health_index_for_display
+measurementQualifer: dcs:SmoothedByRepeatingLatestPoint
+
+Node: E:open_covid_19_data_cleaned->E59
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Covid19EconomicSupportIndex_Legislation_COVID19Pandemic_GovernmentOrganization
+measurementMethod: dcs:OpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->economic_support_index_for_display
+measurementQualifer: dcs:SmoothedByRepeatingLatestPoint
+
+Node: E:open_covid_19_data_cleaned->E60
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+measurementMethod: dcs:OxCGRTViaOpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->confirmed_cases
+
+Node: E:open_covid_19_data_cleaned->E61
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedPatientDeceased
+measurementMethod: dcs:OxCGRTViaOpenCovid19Data
+observationAbout: C:open_covid_19_data_cleaned->observationAbout
+observationDate: C:open_covid_19_data_cleaned->date
+value: C:open_covid_19_data_cleaned->confirmed_deaths
