@@ -556,7 +556,7 @@ value: C:open_covid_19_data_cleaned->confirmed_cases
 
 Node: E:open_covid_19_data_cleaned->E61
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedPatientDeceased
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
 measurementMethod: dcs:OxCGRTViaOpenCovid19Data
 observationAbout: C:open_covid_19_data_cleaned->observationAbout
 observationDate: C:open_covid_19_data_cleaned->date
