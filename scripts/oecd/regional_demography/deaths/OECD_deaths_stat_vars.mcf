@@ -21,14 +21,14 @@ statType: dcs:measuredValue
 Node: dcid:Count_Death_Upto4Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
-age: [Years 0 4]
+age: [Years - 4]
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Death_Upto4Years_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
-age: [Years 0 4]
+age: [Years - 4]
 gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -36,7 +36,7 @@ statType: dcs:measuredValue
 Node: dcid:Count_Death_Upto4Years_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
-age: [Years 0 4]
+age: [Years - 4]
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -413,14 +413,14 @@ statType: dcs:measuredValue
 Node: dcid:Count_Death_Upto14Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
-age: [Years 0 14]
+age: [Years - 14]
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 Node: dcid:Count_Death_Upto14Years_Female
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
-age: [Years 0 14]
+age: [Years - 14]
 gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -428,7 +428,7 @@ statType: dcs:measuredValue
 Node: dcid:Count_Death_Upto14Years_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:MortalityEvent
-age: [Years 0 14]
+age: [Years - 14]
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
