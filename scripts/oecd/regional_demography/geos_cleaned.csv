@@ -1172,6 +1172,19 @@ ISL,IS025,3,Southern Region (IS),IS02,3_PRR,NMR-S
 ISL,IS026,3,Northeastern Region (IS),IS02,3_PRR,NMR-R
 ISL,IS027,3,Austurland,IS02,3_PRR,NMR-R
 IRL,IRL,1,Ireland,IRL,1,1
+IRL,IE04,2,Southern and Eastern,IRL,2,2
+IRL,IE041,3,Border,IE04,3_PRR,NMR-R
+IRL,IE042,3,West,IE04,3_PRR,NMR-S
+IRL,IE05,2,Southern and Eastern,IRL,2,2
+IRL,IE051,3,Mid-West,IE05,3_PRC,NMR-S
+IRL,IE052,3,South-East (IE),IE05,3_PRC,NMR-S
+IRL,IE053,3,South-West (IE),IE05,3_PRC,MR-M
+IRL,IE06,2,Southern and Eastern,IRL,2,2
+IRL,IE061,3,Dublin,IE06,3_PU,MR-L
+IRL,IE062,3,Mid-East,IE06,3_INC,MR-L
+IRL,IE063,3,Midlands,IE06,3_PRR,NMR-R
+IRL,IE01,OLD_2_2013,"Border, Midland and Western",IRL,OLD_2_2013,OLD_2_2013
+IRL,IE02,OLD_2_2013,Southern and Eastern,IRL,OLD_2_2013,OLD_2_2013
 ISR,ISR,1,Israel,ISR,1,1
 ISR,IL01,2,Jerusalem District,ISR,2,2
 ISR,IL010,3,Jerusalem District,IL01,3_PU,..
