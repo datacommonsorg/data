@@ -563,14 +563,6 @@ medicalStatus: dcs:PatientDeceased
 populationType: dcs:MedicalConditionIncident
 statType: dcs:measuredValue
 
-Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
-typeOf: dcs:StatisticalVariable
-incidentType: dcs:COVID_19
-measuredProperty: dcs:cumulativeCount
-medicalStatus: dcs:PatientDeceased
-populationType: dcs:MedicalConditionIncident
-statType: dcs:measuredValue
-
 Node: dcid:IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase
 typeOf: dcs:StatisticalVariable
 incidentType: dcs:COVID_19
