@@ -44,8 +44,4 @@ df = df[~((df.containedInCountry == 'BRA') &
 # Remove Non OECD Member Country (NOMC) containedInPlace=NOMC
 df.replace({'NOMC': ''}, regex=True, inplace=True)
 
-# Geocoding resolution is especially bad for Ireland.
-df = df[~((df.containedInCountry == 'IRL') &
-          (df.oecd_territorial_level != '1'))]
-
 df.to_csv('geos_cleaned.csv', index=False)
