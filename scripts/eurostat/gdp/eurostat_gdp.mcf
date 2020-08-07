@@ -4,6 +4,8 @@ populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 statType: dcs:measuredValue
+measurementQualifier: dcs:Nominal
+
 
 Node: dcid:Amount_EconomicActivity_GrossDomesticProduction_AsAFractionOfCount_Person
 typeOf: dcs:StatisticalVariable
@@ -12,3 +14,4 @@ activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
+measurementQualifier: dcs:Nominal
