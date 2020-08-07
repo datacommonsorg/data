@@ -1,0 +1,12 @@
+import: {
+    import_name: "OECD_deaths"
+    provenance_url: "https://stats.oecd.org"
+    provenance_description: "Various regional statistics measured by OECD (Organisation for Economic Co-operation and Development)."
+    # Path to the resolved MCF.
+    mcf_url: "gs://resolved_mcf/external_tables/oecd_deaths/nodes.mcf-00000-of-00001"
+    mcf_url: "gs://resolved_mcf/external_tables/oecd_life_and_mortality/nodes.mcf-00000-of-00001"
+    mcf_url: "gs://resolved_mcf/external_tables/oecd_pop_density/nodes.mcf-00000-of-00001"
+    mcf_url: "gs://resolved_mcf/external_tables/oecd_pop_tl2/nodes.mcf-00000-of-00001"
+    mcf_url: "gs://resolved_mcf/external_tables/oecd_pop_tl3/nodes.mcf-00000-of-00001"
+    update_frequency: "P1Y"
+}
