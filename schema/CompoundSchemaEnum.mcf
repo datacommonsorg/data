@@ -2427,55 +2427,55 @@ name: "ProteinExpressionScoreEnum"
 description: "The level of protein observed in a specified cell type."
 
 Node: dcid:ProteinExpressionNotDetected
-typeOf: ProteinExpressionScoreEnum
+typeOf: dcs:ProteinExpressionScoreEnum
 name: "ProteinExpressionNotDetected"
 description: "The protein expression score is ‘Not detected' when the combination of intensity and fractions is negative or weak and <25%. Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)."
 descriptionUrl: "https://www.proteinatlas.org/about/help#4"
 
 Node: dcid:ProteinExpressionLow
-typeOf: ProteinExpressionScoreEnum
+typeOf: dcs:ProteinExpressionScoreEnum
 name: "ProteinExpressionLow"
 description: "The protein expression score is ‘Low' when the combination of intensity and fractions is weak combined with either 25 - 75% or 75%, or moderate <25%. Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)"
 descriptionUrl: "https://www.proteinatlas.org/about/help#4"
 
 Node: dcid:ProteinExpressionMedium
-typeOf: ProteinExpressionScoreEnum
+typeOf: dcs:ProteinExpressionScoreEnum
 name: "ProteinExpressionMedium"
 description: "The protein expression score is ‘Medium' when the combination of intensity and fractions is moderate combined with either 25 - 75% or 75% - medium, or strong <25%. Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)"
 descriptionUrl: "https://www.proteinatlas.org/about/help#4"
 
 Node: dcid:ProteinExpressionHigh
-typeOf: ProteinExpressionScoreEnum
+typeOf: dcs:ProteinExpressionScoreEnum
 name: "ProteinExpressionHigh"
 description: "The protein expression score is ‘Medium' when the combination of intensity and fractions is strong combined with either 25 - 75% or 75%. Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)"
 descriptionUrl: "https://www.proteinatlas.org/about/help#4"
 
-Node: dcid:humanProteinOccurrenceReliabilityEnum
+Node: dcid:HumanProteinOccurrenceReliabilityEnum
 typeOf: schema:Class
 subClassOf: schema:Enumeration
-name: "humanProteinOccurrenceReliabilityEnum"
+name: "HumanProteinOccurrenceReliabilityEnum"
 description: "The human protein tissue atlas reliability enumeration."
 
 Node: dcid:ProteinTissueAtlasReliabilityEnhanced
-typeOf: humanProteinOccurrenceReliabilityEnum
+typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
 name: "ProteinTissueAtlasReliabilityEnhanced"
 description: "One or more antibodies are enhanced validated and there is no contradicting data, for example literature describes experimental evidence for a different location."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
 Node: dcid:ProteinTissueAtlasReliabilitySupported
-typeOf: humanProteinOccurrenceReliabilityEnum
+typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
 name: "ProteinTissueAtlasReliabilitySupported"
 description: "There is no enhanced validation of the used antibody, but the annotated localization is reported in literature."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
 Node: dcid:ProteinTissueAtlasReliabilityApproved
-typeOf: humanProteinOccurrenceReliabilityEnum
+typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
 name: "ProteinTissueAtlasReliabilityApproved"
 description: "If the localization of the protein has not been previously described and was detected by only one antibody without additional antibody validation."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
 Node: dcid:ProteinTissueAtlasReliabilityUncertain
-typeOf: humanProteinOccurrenceReliabilityEnum
+typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
 name: "ProteinTissueAtlasReliabilityUncertain"
 description: "If the antibody-staining pattern contradicts experimental data or no expression is detected on the RNA level."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
