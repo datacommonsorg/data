@@ -11,9 +11,6 @@
 # USC_DetailedLevelOfSchoolEnum from census_enums.mcf
 # USC_DetailedLevelOfSchoolEnum is range of detailedLevelOfSchool
 
-# TODO(tjann): migrate most of USC_DetailedLevelOfSchoolEnum
-# to use the SchoolGradeLevelEnum enums.
-
 Node: dcid:EnrolledInGrade12
 typeOf: dcs:USC_DetailedLevelOfSchoolEnum
 specializationOf: dcs:HighSchool
