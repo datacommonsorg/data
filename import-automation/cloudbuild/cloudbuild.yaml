@@ -22,7 +22,9 @@ steps:
                 "dashboard_oauth_client_id": "$_DASHBOARD_OAUTH_CLIENT_ID",
                 "github_auth_access_token": "$_GITHUB_AUTH_ACCESS_TOKEN",
                 "github_repo_name": "$_GITHUB_REPO_NAME",
-                "github_repo_owner_username": "$_GITHUB_REPO_OWNER_USERNAME"
+                "github_repo_owner_username": "$_GITHUB_REPO_OWNER_USERNAME",
+                "email_account": "$_EMAIL_ACCOUNT",
+                "email_token": "$_EMAIL_TOKEN"
             }
         }'
     ]
