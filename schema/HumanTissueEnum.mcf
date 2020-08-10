@@ -1,0 +1,371 @@
+Node: dcid:AdiposeTissue
+typeOf: dcs:HumanTissueEnum
+name: "AdiposeTissue"
+description: "Adipose tissue"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:AdrenalGland
+typeOf: dcs:HumanTissueEnum
+name: "AdrenalGland"
+description: "Adrenal gland"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Appendix
+typeOf: dcs:HumanTissueEnum
+name: "Appendix"
+description: "Appendix"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:BoneMarrow
+typeOf: dcs:HumanTissueEnum
+name: "BoneMarrow"
+description: "Bone marrow"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Breast
+typeOf: dcs:HumanTissueEnum
+name: "Breast"
+description: "Breast"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Bronchus
+typeOf: dcs:HumanTissueEnum
+name: "Bronchus"
+description: "Bronchus"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Caudate
+typeOf: dcs:HumanTissueEnum
+name: "Caudate"
+description: "Caudate"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Cerebellum
+typeOf: dcs:HumanTissueEnum
+name: "Cerebellum"
+description: "Cerebellum"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:CerebralCortex
+typeOf: dcs:HumanTissueEnum
+name: "CerebralCortex"
+description: "Cerebral cortex"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:CervixUterine
+typeOf: dcs:HumanTissueEnum
+name: "CervixUterine"
+description: "Cervix, uterine"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Colon
+typeOf: dcs:HumanTissueEnum
+name: "Colon"
+description: "Colon"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Duodenum
+typeOf: dcs:HumanTissueEnum
+name: "Duodenum"
+description: "Duodenum"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Endometrium1
+typeOf: dcs:HumanTissueEnum
+name: "Endometrium1"
+description: "Endometrium 1"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Endometrium2
+typeOf: dcs:HumanTissueEnum
+name: "Endometrium2"
+description: "Endometrium 2"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Epididymis
+typeOf: dcs:HumanTissueEnum
+name: "Epididymis"
+description: "Epididymis"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Esophagus
+typeOf: dcs:HumanTissueEnum
+name: "Esophagus"
+description: "Esophagus"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:FallopianTube
+typeOf: dcs:HumanTissueEnum
+name: "FallopianTube"
+description: "Fallopian tube"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Gallbladder
+typeOf: dcs:HumanTissueEnum
+name: "Gallbladder"
+description: "Gallbladder"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:HeartMuscle
+typeOf: dcs:HumanTissueEnum
+name: "HeartMuscle"
+description: "Heart muscle"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Hippocampus
+typeOf: dcs:HumanTissueEnum
+name: "Hippocampus"
+description: "Hippocampus"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Kidney
+typeOf: dcs:HumanTissueEnum
+name: "Kidney"
+description: "Kidney"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Liver
+typeOf: dcs:HumanTissueEnum
+name: "Liver"
+description: "Liver"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Lung
+typeOf: dcs:HumanTissueEnum
+name: "Lung"
+description: "Lung"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:LymphNode
+typeOf: dcs:HumanTissueEnum
+name: "LymphNode"
+description: "Lymph node"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Nasopharynx
+typeOf: dcs:HumanTissueEnum
+name: "Nasopharynx"
+description: "Nasopharynx"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:OralMucosa
+typeOf: dcs:HumanTissueEnum
+name: "OralMucosa"
+description: "Oral mucosa"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Ovary
+typeOf: dcs:HumanTissueEnum
+name: "Ovary"
+description: "Ovary"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Pancreas
+typeOf: dcs:HumanTissueEnum
+name: "Pancreas"
+description: "Pancreas"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:ParathyroidGland
+typeOf: dcs:HumanTissueEnum
+name: "ParathyroidGland"
+description: "Parathyroid gland"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Placenta
+typeOf: dcs:HumanTissueEnum
+name: "Placenta"
+description: "Placenta"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Prostate
+typeOf: dcs:HumanTissueEnum
+name: "Prostate"
+description: "Prostate"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Rectum
+typeOf: dcs:HumanTissueEnum
+name: "Rectum"
+description: "Rectum"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SalivaryGland
+typeOf: dcs:HumanTissueEnum
+name: "SalivaryGland"
+description: "Salivary gland"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SeminalVesicle
+typeOf: dcs:HumanTissueEnum
+name: "SeminalVesicle"
+description: "Seminal vesicle"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SkeletalMuscle
+typeOf: dcs:HumanTissueEnum
+name: "SkeletalMuscle"
+description: "Skeletal muscle"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Skin1
+typeOf: dcs:HumanTissueEnum
+name: "Skin1"
+description: "Skin 1"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Skin2
+typeOf: dcs:HumanTissueEnum
+name: "Skin2"
+description: "Skin 2"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SmallIntestine
+typeOf: dcs:HumanTissueEnum
+name: "SmallIntestine"
+description: "Small intestine"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SmoothMuscle
+typeOf: dcs:HumanTissueEnum
+name: "SmoothMuscle"
+description: "Smooth muscle"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SoftTissue1
+typeOf: dcs:HumanTissueEnum
+name: "SoftTissue1"
+description: "Soft tissue 1"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SoftTissue2
+typeOf: dcs:HumanTissueEnum
+name: "SoftTissue2"
+description: "Soft tissue 2"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Spleen
+typeOf: dcs:HumanTissueEnum
+name: "Spleen"
+description: "Spleen"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Stomach1
+typeOf: dcs:HumanTissueEnum
+name: "Stomach1"
+description: "Stomach 1"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Stomach2
+typeOf: dcs:HumanTissueEnum
+name: "Stomach2"
+description: "Stomach 2"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Testis
+typeOf: dcs:HumanTissueEnum
+name: "Testis"
+description: "Testis"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:ThyroidGland
+typeOf: dcs:HumanTissueEnum
+name: "ThyroidGland"
+description: "Thyroid gland"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Tonsil
+typeOf: dcs:HumanTissueEnum
+name: "Tonsil"
+description: "Tonsil"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:UrinaryBladder
+typeOf: dcs:HumanTissueEnum
+name: "UrinaryBladder"
+description: "Urinary bladder"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Vagina
+typeOf: dcs:HumanTissueEnum
+name: "Vagina"
+description: "Vagina"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Hypothalamus
+typeOf: dcs:HumanTissueEnum
+name: "Hypothalamus"
+description: "Hypothalamus"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Hair
+typeOf: dcs:HumanTissueEnum
+name: "Hair"
+description: "Hair"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Retina
+typeOf: dcs:HumanTissueEnum
+name: "Retina"
+description: "Retina"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:LactatingBreast
+typeOf: dcs:HumanTissueEnum
+name: "LactatingBreast"
+description: "Lactating breast"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Skin
+typeOf: dcs:HumanTissueEnum
+name: "Skin"
+description: "Skin"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Cartilage
+typeOf: dcs:HumanTissueEnum
+name: "Cartilage"
+description: "Cartilage"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Eye
+typeOf: dcs:HumanTissueEnum
+name: "Eye"
+description: "Eye"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:Thymus
+typeOf: dcs:HumanTissueEnum
+name: "Thymus"
+description: "Thymus"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:PituitaryGland
+typeOf: dcs:HumanTissueEnum
+name: "PituitaryGland"
+description: "Pituitary gland"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:DorsalRaphe
+typeOf: dcs:HumanTissueEnum
+name: "DorsalRaphe"
+description: "Dorsal raphe"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:ChoroidPlexus
+typeOf: dcs:HumanTissueEnum
+name: "ChoroidPlexus"
+description: "Choroid plexus"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SubstantiaNigra
+typeOf: dcs:HumanTissueEnum
+name: "SubstantiaNigra"
+description: "Substantia nigra"
+domainIncludes: dcs:HumanTissueEnum
+
+Node: dcid:SoleOfFoot
+typeOf: dcs:HumanTissueEnum
+name: "SoleOfFoot"
+description: "Sole of foot"
+domainIncludes: dcs:HumanTissueEnum

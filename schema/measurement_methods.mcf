@@ -54,3 +54,13 @@ name: "BLSChained"
 typeOf: dcs:ChainingEnumeration
 description: "Indicates chained price index series that uses more current weights of goods and services and that more accurately reflects how consumers respond to changes in relative prices."
 descriptionUrl: "https://www.bls.gov/cpi/additional-resources/chained-cpi.htm"
+
+Node: dcid:GoogleMapsCommunityMobility
+name: "GoogleMapsCommunityMobility"
+typeOf: dcs:StatisticSourceEnum
+description: "Represents the methods used by Google to compute how visits and length of stay at different places have changed over time compared to a baseline."
+
+Node: dcid:EurostatRegionalStatistics
+name: "EurostatRegionalStatistics"
+typeOf: dcs:StatisticSourceEnum
+description: "Measurement method for regional statistics collected by eurostat.org."

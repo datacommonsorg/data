@@ -24,7 +24,9 @@ import re
 import numpy as np
 from import_data import StateGDPDataLoader
 
+
 class USStateQuarterlyGDPImportVal(unittest.TestCase):
+
     def test_download_data(self):
         """Tests that data gets downloaded properly.
 
@@ -36,7 +38,7 @@ class USStateQuarterlyGDPImportVal(unittest.TestCase):
         loader.download_data()
 
         # Test that all states appear in downloaded data.
-        all_states = set(loader._US_STATES)
+        all_states = set(loader.US_STATES)
         data_states = all_states.intersection(set(loader.raw_df['GeoName']))
         self.assertSetEqual(all_states, data_states)
 
@@ -45,6 +47,7 @@ class USStateQuarterlyGDPImportVal(unittest.TestCase):
         years = range(2005, 2020)
         quarters = range(1, 5)
         all_quarters = {f"{y}:Q{q}" for y in years for q in quarters}
+        all_quarters.add("2020:Q1")
         cols = loader.raw_df.columns
         data_quarters = {q for q in cols if re.match(r"....:Q.", q)}
         self.assertSetEqual(all_quarters, data_quarters)
@@ -60,11 +63,13 @@ class USStateQuarterlyGDPImportVal(unittest.TestCase):
         loader.process_data()
 
         clean_df = loader.clean_df
-        expected_col_types = {"Quarter": np.object,
-                              "GeoId": np.object,
-                              "chained_2012_dollars": np.float64,
-                              "quantity_index": np.float64,
-                              "current_dollars": np.float64}
+        expected_col_types = {
+            "Quarter": np.object,
+            "GeoId": np.object,
+            "chained_2012_dollars": np.float64,
+            "quantity_index": np.float64,
+            "current_dollars": np.float64
+        }
         # Check that the resulting columns are as expected.
         expected_cols = set(expected_col_types.keys())
         self.assertSetEqual(set(clean_df.columns), expected_cols)
