@@ -70,19 +70,24 @@ class GeojsonSimplifier:
             if not self.geojson.is_valid:
                 raise ValueError("Invalid GeoJSON read in.")
 
-    def simplify(self, epsilon=0.01, verbose=False):
+    def simplify(self, input=None, epsilon=0.01, verbose=False):
         """Modifies the instance geojson by reducing its number of points.
 
         Runs the Ramer–Douglas–Peucker algorithm to simplify the GeoJSONs.
         Wikipedia page: wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm
 
         Args:
+            input: The GeoJSON to simplify, as a dict. If None, gets set to
+                   self.geojson.
             epsilon: The epsilon parameter to the  Ramer–Douglas–Peucker
                      algorithm. See the Wikipedia page for details.
             verbose: If True, the number of points in the GeoJSON before and
                      after simplification will be printed for comparison.
+
+        Returns: The simplified GeoJSON, as a dict.
         """
-        coords = self.geojson['coordinates']
+        geojson = input if input is not None else self.geojson
+        coords = geojson['coordinates']
 
         original_size = 0
         simplified_size = 0
@@ -100,6 +105,8 @@ class GeojsonSimplifier:
         if verbose:
             print(f"Original number of points = {original_size}.")
             print(f"Simplified number of points = {simplified_size}.")
+
+        return geojson
 
     def save(self, out_path):
         """Saves instance geojson after simplification.

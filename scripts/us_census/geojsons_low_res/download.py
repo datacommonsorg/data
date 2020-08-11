@@ -95,6 +95,8 @@ class GeojsonDownloader:
                                     self.LEVEL_MAP[geolevel])[place]
         self.geojsons = dc.get_property_values(geos_contained_in_place,
                                                "geoJsonCoordinates")
+        for area, coords in self.iter_subareas():
+            self.geojsons[area][0] = geojson.loads(coords)
 
     def get_subarea(self, area):
         assert len(self.geojsons[area]) == 1
@@ -117,7 +119,7 @@ class GeojsonDownloader:
         for geoid, coords in self.iter_subareas():
             filename = geoid.replace('/', '-')
             with open(path + prefix + filename + '.geojson', 'w') as f:
-                geojson.dump(geojson.loads(coords), f)
+                geojson.dump(coords, f)
 
 
 if __name__ == '__main__':
