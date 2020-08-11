@@ -1,31 +1,31 @@
 steps:
-# Create a Cloud Tasks task that passes information
-# about the commit to the executor.
-- name: 'gcr.io/cloud-builders/gcloud'
-   args: [
-   'tasks',
-   'create-app-engine-task',
-   '$COMMIT_SHA',
-   '--queue=$_TASK_QUEUE_NAME',
-   '--header=Content-Type: application/json',
-   '--method=POST',
-   '--relative-uri=$_HANDLER_URI',
-   '--routing=service:$_HANDLER_SERVICE',
-   '--body-content={"COMMIT_SHA": "$COMMIT_SHA",
-                     "REPO_NAME": "$REPO_NAME",
-                     "BRANCH_NAME": "$BRANCH_NAME",
-                     "HEAD_BRANCH": "$_HEAD_BRANCH",
-                     "BASE_BRANCH": "$_BASE_BRANCH",
-                     "PR_NUMBER": "$_PR_NUMBER",
-                     "configs": {"dashboard_oauth_client_id":
-                                    "$_DASHBOARD_OAUTH_CLIENT_ID",
-                                 "github_auth_access_token":
-                                    "$_GITHUB_AUTH_ACCESS_TOKEN",
-                                 "github_repo_name":
-                                    "$_GITHUB_REPO_NAME",
-                                 "github_repo_owner_username":
-                                    "$_GITHUB_REPO_OWNER_USERNAME",
-                                 "email_account":
-                                    "$_EMAIL_ACCOUNT",
-                                 "email_token":
-                                    "$_EMAIL_TOKEN"}}']
+    # Create a Cloud Tasks task that passes information
+    # about the commit to the executor.
+    - name: 'gcr.io/cloud-builders/gcloud'
+      args: [
+        'tasks',
+        'create-app-engine-task',
+        '$COMMIT_SHA',
+        '--queue=$_TASK_QUEUE_NAME',
+        '--header=Content-Type: application/json',
+        '--method=POST',
+        '--relative-uri=$_HANDLER_URI',
+        '--routing=service:$_HANDLER_SERVICE',
+        '--body-content={
+            "COMMIT_SHA": "$COMMIT_SHA",
+            "REPO_NAME": "$REPO_NAME",
+            "BRANCH_NAME": "$BRANCH_NAME",
+            "HEAD_BRANCH": "$_HEAD_BRANCH",
+            "BASE_BRANCH": "$_BASE_BRANCH",
+            "PR_NUMBER": "$_PR_NUMBER",
+            "configs": {
+                "dashboard_oauth_client_id": "$_DASHBOARD_OAUTH_CLIENT_ID",
+                "github_auth_access_token": "$_GITHUB_AUTH_ACCESS_TOKEN",
+                "github_repo_name": "$_GITHUB_REPO_NAME",
+                "github_repo_owner_username": "$_GITHUB_REPO_OWNER_USERNAME",
+                "email_account": "$_EMAIL_ACCOUNT",
+                "email_token": "$_EMAIL_TOKEN"
+            }
+        }'
+    ]
+    

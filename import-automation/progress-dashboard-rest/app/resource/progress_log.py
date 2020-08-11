@@ -117,7 +117,7 @@ class ProgressLogByRunID(ProgressLog):
         if not run:
             return validation.get_not_found_error(_RUN.run_id, run_id)
         log_ids = run.get(_RUN.logs, [])
-        return {_RUN.logs: self.log_database.load_logs(log_ids)}
+        return self.log_database.load_logs(log_ids)
 
 
 class ProgressLogByAttemptID(ProgressLog):
@@ -144,4 +144,4 @@ class ProgressLogByAttemptID(ProgressLog):
             return validation.get_not_found_error(_ATTEMPT.attempt_id,
                                                   attempt_id)
         log_ids = attempt.get(_ATTEMPT.logs, [])
-        return {_ATTEMPT.logs: self.log_database.load_logs(log_ids)}
+        return self.log_database.load_logs(log_ids)
