@@ -1,0 +1,7 @@
+absl-py==0.9.0
+datacommons==1.2.0
+descartes==1.1.0
+geojson==2.5.0
+geopandas==0.8.1
+matplotlib==3.3.0
+rdp==0.8
