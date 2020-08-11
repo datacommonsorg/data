@@ -78,6 +78,13 @@ typeOf: schema:Class
 subClassOf: schema:Thing
 description: "A specific strength in which a medical drug is available in a specific country."
 
+Node: dcid:HumanProteinOccurrence
+name: "HumanProteinOccurrence"
+typeOf: schema:Class
+subClassOf: schema:Intangible
+description: "The Tissue Atlas contains information regarding the expression profiles of human genes both on the mRNA and protein level. The protein expression data from 44 normal human tissue types is derived from antibody-based protein profiling using immunohistochemistry."
+descriptionUrl: "https://www.proteinatlas.org/humanproteome/tissue"
+
 Node: dcid:chemblID
 name: "chemblID"
 typeOf: schema:Property
@@ -534,3 +541,33 @@ rangeIncludes: dcs:QuantityRange
 rangeIncludes: schema:Text
 domainIncludes: dcs:ActiveIngredientAmount
 description: "Amount of the active ingredient."
+
+Node: dcid:detectedProtein
+typeOf: schema:Property
+name: "detectedProtein"
+description: "The protein whose levels are being assessed."
+rangeIncludes: dcs:Protein
+domainIncludes: dcs:HumanProteinOccurrence
+
+Node: dcid:humanCellType
+typeOf: schema:Property
+name: "humanCellType"
+description: "The human cell type in which the protein's level is measured."
+rangeIncludes: dcs:HumanCellTypeEnum
+domainIncludes: dcs:HumanProteinOccurrence
+
+Node: dcid:proteinExpressionScore
+typeOf: schema:Property
+name: "proteinExpressionScore"
+description: "Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)."
+descriptionUrl: "https://www.proteinatlas.org/about/help#4"
+rangeIncludes: dcs:ProteinExpressionScoreEnum
+domainIncludes: dcs:HumanProteinOccurrence
+
+Node: dcid:humanProteinOccurrenceReliability
+typeOf: schema:Property
+name: "humanProteinOccurrenceReliability"
+description: "A reliability score is manually set for all genes and indicates the level of reliability of the analyzed protein expression pattern based on available RNA-seq data, protein/gene characterization data and immunohistochemical data from one or several antibodies with non-overlapping epitopes."
+descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
+rangeIncludes: dcs:HumanProteinOccurrenceReliabilityEnum
+domainIncludes: dcs:HumanProteinOccurrence
