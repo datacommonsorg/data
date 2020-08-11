@@ -437,7 +437,7 @@ Node: dcid:beaProduct
 description: "Products and Services designated by US Bureau of Economic Analysis, of consumer spending (such as food, clothing, shelter, and services) that people buy for day-to-day living"
 dcid: "beaProduct"
 name: "beaProduct"
-rangeIncludes: dcid:BEAProductEnum
+rangeIncludes: dcid:EconomicProductEnum
 typeOf: dcid:Property
 domainIncludes: dcid:Product
 

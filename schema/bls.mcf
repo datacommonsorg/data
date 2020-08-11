@@ -15329,3 +15329,43 @@ name: "State and local government education"
 Node: dcid:NAICS/JOLTS_929000
 typeOf: dcs:NAICSEnum
 name: "State and local government excluding education"
+
+Node: dcid: consumerPriceIndex
+typeOf: schema:property
+domainIncludes: dcs:ConsumerGoodsAndServices
+rangeIncludes: schema:Number
+description: "A Consumer Price Index measures changes in the price level of a weighted average market basket of consumer goods and services purchased by households."
+descriptionUrl: "https://en.wikipedia.org/wiki/Consumer_price_index"
+
+Node: dcid:IndexPointBasePeriod1982-84=100
+name: "IndexPointBasePeriod1982-84=100"
+typeOf: dcs:UnitOfMeasure
+description: "The reference base is 1982 to 1984 equals 100."
+descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
+
+Node: dcid:IndexPointBasePeriod1999-12=100
+name: "IndexPointBasePeriod1999-12=100"
+typeOf: dcs:UnitOfMeasure
+description: "The reference base is December 1999 equals 100."
+descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
+
+Node: dcid:Consumer
+Name: "Consumer"
+typeOf: schema:Class
+subClassOf: schema:Person
+description: "A consumer is a person who intends to order or use purchased goods, products, or services primarily for personal, social, family, household and similar needs, not directly related to entrepreneurial or business activities."
+descriptionUrl: "https://en.wikipedia.org/wiki/Consumer"
+
+Node: dcid:UrbanConsumer
+name: "UrbanConsumer"
+typeOf: schema:Class
+subClassOf: dcs:Consumer
+description: "The all-urban consumer population consists of all urban households in metropolitan statistical areas (MSAs) and in urban places of 2,500 inhabitants or more."
+descriptionUrl: "https://en.wikipedia.org/wiki/United_States_Consumer_Price_Index#CPI_for_all_urban_consumers_(CPI-U)"
+
+Node: dcid:UrbanWageEarnerAndClericalWorker
+name: "UrbanWageEarnerAndClericalWorker"
+typeOf: schema:Class
+subClassOf: dcs:Consumer
+description: "The urban wage earner and clerical worker population consists of consumer units consisting of clerical workers, sales workers, craft workers, operative, service workers, or laborers."
+descriptionUrl: "https://en.wikipedia.org/wiki/United_States_Consumer_Price_Index#CPI_for_urban_wage_earners_and_clerical_workers_(CPI-W)"
