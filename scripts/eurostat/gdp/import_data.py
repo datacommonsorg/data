@@ -177,10 +177,10 @@ class EurostatGDPImporter:
                 if "HAB" in col:
                     var = ("dcid:Amount_EconomicActivity_"
                            "GrossDomesticProduction_AsAFractionOfCount_"
-                           "Person")
+                           "Person_Nominal")
                 else:
                     var = ("dcid:Amount_EconomicActivity_"
-                           "GrossDomesticProduction")
+                           "GrossDomesticProduction_Nominal")
                 tmcf_f.write(
                     temp.format(i=col_num, var_ref=var, val_col=col, unit=unit))
 
