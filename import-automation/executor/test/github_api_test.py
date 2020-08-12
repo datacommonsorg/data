@@ -25,7 +25,7 @@ from requests import exceptions
 import test.utils
 from app.service import github_api
 from test import utils
-from test import test_integration
+from test import integration_test
 
 
 class GitHubAPITest(unittest.TestCase):
@@ -308,19 +308,19 @@ class GitHubAPITest(unittest.TestCase):
                                     'treasury_constant_maturity_rates.csv')
                 assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.csv', file,
-                    test_integration.NUM_LINES_TO_CHECK)
+                    integration_test.NUM_LINES_TO_CHECK)
 
                 file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.mcf')
                 assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.mcf', file,
-                    test_integration.NUM_LINES_TO_CHECK)
+                    integration_test.NUM_LINES_TO_CHECK)
 
                 file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.tmcf')
                 assert test.utils.compare_lines(
                     'test/data/treasury_constant_maturity_rates.tmcf', file,
-                    test_integration.NUM_LINES_TO_CHECK)
+                    integration_test.NUM_LINES_TO_CHECK)
 
     @mock.patch('requests.get')
     def test_download_repo_timeout(self, get):
