@@ -1,0 +1,53 @@
+Node: dcid:uniprotOrganismCode
+typeOf: schema:Property
+name: "uniprotOrganismCode"
+description: "A mnemonic organism identification code of at most 5 alphanumeric characters is used in the entry name of UniProtKB entries, e.g. SP0A_BACSU. This code is generally made of the first three letters of the genus name and the first two letters of the species name."
+descriptionUrl: "https://www.uniprot.org/help/taxonomy#organism-code"
+rangeIncludes: schema:Text
+domainIncludes: schema:Species
+
+Node: dcid:organismTaxonomicKingdom
+typeOf: schema:Property
+name: "organismTaxonomicKingdom"
+description: "The taxonomic 'kingdom' an organism belongs to."
+descriptionUrl:"https://www.uniprot.org/docs/speclist"
+rangeIncludes: schema:OrganismTaxonomicKingdomEnum
+domainIncludes: schema:Species
+
+Node: dcid:OrganismTaxonomicKingdomEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "OrganismTaxonomicKingdomEnum"
+description: "The taxonomic kingdoms of organisms."
+descriptionUrl:"https://www.uniprot.org/docs/speclist"
+
+Node: dcid:Archaea
+typeOf: dcs:OrganismTaxonomicKingdomEnum
+name: "Archaea"
+description: "Archaea or archaebacteria."
+descriptionUrl:"https://www.uniprot.org/docs/speclist"
+
+Node: dcid:Bacteria
+typeOf: dcs:OrganismTaxonomicKingdomEnum
+name: "Bacteria"
+description: "Bacteria, archaebacteria or eubacteria."
+descriptionUrl:"https://www.uniprot.org/docs/speclist"
+
+Node: dcid:Eukaryota
+typeOf: dcs:OrganismTaxonomicKingdomEnum
+name: "Eukaryota"
+description: "Eukaryota or eukarya."
+descriptionUrl:"https://www.uniprot.org/docs/speclist"
+
+Node: dcid:Virus
+typeOf: dcs:OrganismTaxonomicKingdomEnum
+name: "Virus"
+description: "Viruses and phages, or viridae."
+descriptionUrl:"https://www.uniprot.org/docs/speclist"
+
+Node: dcid:OtherOrganismKingdom
+typeOf: dcs:OrganismTaxonomicKingdomEnum
+name: "OtherOrganismKingdom"
+description: "When the organism doesn’t belong to any taxonomic kingdoms including archaea, bacteria, eukaryota, viruses and phages. Such as artificial sequences."
+descriptionUrl:"https://www.uniprot.org/docs/speclist"
+
