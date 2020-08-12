@@ -9,21 +9,33 @@ name: "FDAApplication"
 typeOf: schema:Class
 subClassOf: schema:Thing
 description: "An application filing for approval of one or more drug products with the FDA."
-url: "https://www.accessdata.fda.gov/scripts/cder/daf/" 
+descriptionUrl: "https://www.accessdata.fda.gov/scripts/cder/daf/"
 
-Node: dcid:hasFDAApplication
-name: "hasFDAApplication"
+Node: dcid:ActiveIngredientAmount
+name: "ActiveIngredientAmount"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "Tells how much of the active ingredient is present in a drug dosage."
+
+Node: dcid:DrugStrength
+name: "DrugStrength"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "A specific strength in which a medical drug is available in a specific country."
+
+Node: dcid:submittedFDAApplication
+name: "submittedFDAApplication"
 typeOf: schema:Property
 rangeIncludes: dcs:FDAApplication
 domainIncludes: schema:DrugStrength
-description: "Link out to an application submitted to the FDA for this drug."
+description: "The application submitted to the FDA for this drug."
 
 Node: dcid:additionalDrugInformation
 name: "additionalDrugInformation"
 typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: schema:Drug
-description: "Additional information associated with the drug."
+description: "Additional information associated with a drug."
 
 Node: dcid:manufacturer
 name: "manufacturer"
@@ -86,7 +98,7 @@ typeOf: schema:Property
 rangeIncludes: dcs:MarketingStatusEnum
 domainIncludes: schema:DrugStrength
 description: "Marketing status indicates how a drug product is sold in the United States."
-descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#M"
+descriptionUrl: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#M"
 
 Node: dcid:therapeuticEquivalenceCode
 name: "therapeuticEquivalenceCode"
@@ -94,7 +106,7 @@ typeOf: schema:Property
 rangeIncludes: dcs:TherapeuticEquivalenceCodeEnum
 domainIncludes: schema:DrugStrength
 description: "The therapeutic equivalence code indicates whether the FDA has evaluated a particular approved product (e.g., a particular strength of an approved drug) as therapeutically equivalent to other pharmaceutically equivalent products and to provide additional information on the basis of FDA's evaluations (second letter)."
-descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+descriptionUrl: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
 
 Node: dcid:fdaProductID
 name: "fdaProductID"
@@ -124,26 +136,20 @@ rangeIncludes: schema:Quantity
 domainIncludes: schema:DrugStrength
 description: "Final reconstituted solution volume for drug dose."
 
-Node: dcid:hasStrength
-name: "hasStrength"
+Node: dcid:drugStrength
+name: "drugStrength"
 typeOf: schema:Property
 rangeIncludes: schema:Quantity
 rangeIncludes: schema:Text
 domainIncludes: schema:DrugStrength
 description: "Strength of the drug."
 
-Node: dcid:ActiveIngredientAmount
-name: "ActiveIngredientAmount"
-typeOf: schema:Class
-subClassOf: schema:Thing
-description: "Tells how much of the active ingredient is present in a drug dosage."
-
 Node: dcid:hasActiveIngredientAmount
 name: "hasActiveIngredientAmount"
 typeOf: schema:Property
 rangeIncludes: dcs:ActiveIngredientAmount
 domainIncludes: schema:DrugStrength
-description: "Link out to the quantity of specific active ingredient in the drug."
+description: "The quantity of active ingredient in the drug."
 
 Node: dcid:ingredientName
 name: "ingredientName"
