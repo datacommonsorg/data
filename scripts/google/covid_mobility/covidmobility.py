@@ -68,16 +68,27 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
     if ospath.exists(output_path):
         remove(output_path)
 
+    # Input file.
     f_input = open(input_path, 'r')
+    # Output file.
     f_output = open(output_path, 'a+')
 
     csv_reader: DictReader = DictReader(f_input)
 
     for row in csv_reader:
+        # When this script was written, there were 14 columns.
+        # If there aren't exactly 14 columns, fail.
+        if len(row) != 14:
+            raise Exception("Incompatible Google Mobility CSV file. " +
+                            "There must be exactly 14 columns in file. " +
+                            "Script must be updated!")
+
         # Get the region names.
         # If the column doesn't exist, skip the row.
         try:
-            sub_region1: str = row['sub_region_1']
+            # metro_area is also considered a sub_region_1.
+            # They can not be combined. It's either or.
+            sub_region1: str = row['sub_region_1'] or row['metro_area']
             sub_region2: str = row['sub_region_2']
             country_code: str = row['country_region_code']
             date = row['date']
