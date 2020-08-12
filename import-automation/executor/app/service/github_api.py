@@ -343,20 +343,13 @@ class GitHubRepoAPI:
             A set of directory paths each as a string.
         """
         found_dirs = set()
-        while dir_path:
+        while dir_path or dir_path == '':
             if dir_path in searched:
                 return found_dirs
             searched.add(dir_path)
             if self._path_containing_file(commit_sha, dir_path, containing):
                 found_dirs.add(dir_path)
             dir_path = os.path.dirname(dir_path)
-
-        # Search root
-        if '' not in searched:
-            searched.add('')
-            if self._path_containing_file(commit_sha, '', containing):
-                found_dirs.add('')
-        return found_dirs
 
 
 def _get_path_first_component(path: str) -> str:
