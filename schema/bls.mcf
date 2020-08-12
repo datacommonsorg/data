@@ -15337,14 +15337,14 @@ rangeIncludes: schema:Number
 description: "A Consumer Price Index measures changes in the price level of a weighted average market basket of consumer goods and services purchased by households."
 descriptionUrl: "https://en.wikipedia.org/wiki/Consumer_price_index"
 
-Node: dcid:IndexPointBasePeriod1982-84=100
-name: "IndexPointBasePeriod1982-84=100"
+Node: dcid:IndexPointBasePeriod1982To1984Equals100
+name: "IndexPointBasePeriod1982To1984Equals100"
 typeOf: dcs:UnitOfMeasure
 description: "The reference base is 1982 to 1984 equals 100."
 descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
 
-Node: dcid:IndexPointBasePeriod1999-12=100
-name: "IndexPointBasePeriod1999-12=100"
+Node: dcid:IndexPointBasePeriodDecember1999Equals100
+name: "IndexPointBasePeriodDecember1999Equals100"
 typeOf: dcs:UnitOfMeasure
 description: "The reference base is December 1999 equals 100."
 descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
