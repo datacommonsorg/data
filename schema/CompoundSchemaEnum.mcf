@@ -2456,27 +2456,26 @@ subClassOf: schema:Enumeration
 name: "HumanProteinOccurrenceReliabilityEnum"
 description: "The human protein tissue atlas reliability enumeration."
 
-Node: dcid:ProteinOccurrenceReliabilityEnhanced
+Node: dcid:ProteinTissueAtlasReliabilityEnhanced
 typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
-name: "ProteinOccurrenceReliabilityEnhanced"
+name: "ProteinTissueAtlasReliabilityEnhanced"
 description: "One or more antibodies are enhanced validated and there is no contradicting data, for example literature describes experimental evidence for a different location."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
-Node: dcid:ProteinOccurrenceReliabilitySupported
+Node: dcid:ProteinTissueAtlasReliabilitySupported
 typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
-name: "ProteinOccurrenceReliabilitySupported"
+name: "ProteinTissueAtlasReliabilitySupported"
 description: "There is no enhanced validation of the used antibody, but the annotated localization is reported in literature."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
-Node: dcid:ProteinOccurrenceReliabilityApproved
+Node: dcid:ProteinTissueAtlasReliabilityApproved
 typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
-name: "ProteinOccurrenceReliabilityApproved"
+name: "ProteinTissueAtlasReliabilityApproved"
 description: "If the localization of the protein has not been previously described and was detected by only one antibody without additional antibody validation."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
-Node: dcid:ProteinOccurrenceReliabilityUncertain
+Node: dcid:ProteinTissueAtlasReliabilityUncertain
 typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
-name: "ProteinOccurrenceReliabilityUncertain"
+name: "ProteinTissueAtlasReliabilityUncertain"
 description: "If the antibody-staining pattern contradicts experimental data or no expression is detected on the RNA level."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
-
