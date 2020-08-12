@@ -217,5 +217,5 @@ def _filter_missing_paths(paths: typing.List[str]) -> typing.List[str]:
 def _filter_missing_keys(keys: typing.Any,
                          a_dict: typing.Dict) -> typing.List[typing.Any]:
     """Given a list of keys each as a string and a dict, returns the keys in
-    the list that are not present in the dict."""
-    return list(key for key in keys if key not in a_dict)
+    the list that are not present in the dict or have empty values."""
+    return list(key for key in keys if not a_dict.get(key))
