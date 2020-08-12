@@ -5,4 +5,4 @@ measurementMethod: dcs:BLSChained
 observationAbout: dcid:country/USA
 observationDate: C:c_cpi_u:1999_2020->date
 value: C:c_cpi_u:1999_2020->cpi
-unit: dcs:IndexPointBasePeriod1999-12=100
+unit: dcs:IndexPointBasePeriodDecember1999Equals100
