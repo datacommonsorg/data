@@ -120,8 +120,8 @@ class GitHubRepoAPI:
         searched = set()
         for file_path, status in changed_files:
             dir_path = os.path.dirname(file_path)
-            exist = self._dir_exists(commit_sha, dir_path)
-            if status == 'removed' and not exist:
+            if (status == 'removed' and
+                    not self._dir_exists(commit_sha, dir_path)):
                 continue
             found_dirs.update(
                 self._find_dirs_up_path_containing_file(commit_sha, dir_path,
@@ -214,7 +214,7 @@ class GitHubRepoAPI:
         """Finds the paths of files changed by a commit.
 
         Example:
-            Assume commit '12f23f1eeg234' to rhe repository modifies
+            Assume commit '12f23f1eeg234' to the repository modifies
             'scripts/README.md', adds 'scripts/us_fed/README.md', and removes
             'utils/foo.py'.
 
@@ -324,7 +324,7 @@ class GitHubRepoAPI:
 
             The method call
                 _find_dirs_up_path_containing_file(
-                    'dw1f231asdf1321', scripts/us_fed', 'README.md', set())
+                    'dw1f231asdf1321', 'scripts/us_fed', 'README.md', set())
             first searches in 'us_fed' and adds 'scripts/us_fed' to
             'found_dirs'. It then searches in 'scripts' and the root directory
             of the repository.
@@ -334,7 +334,7 @@ class GitHubRepoAPI:
             commit_sha: Commit ID as a string.
             dir_path: Path to the directory where the search begins as a string.
             containing: Filename to search for as a string.
-            searched: Set object containng paths of directories to skip over.
+            searched: Set object containing paths of directories to skip over.
                 If a directory is already in 'searched', it and its parent
                 directories will not be searched. Directories searched this
                 time are also added to it.
