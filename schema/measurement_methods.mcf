@@ -37,21 +37,21 @@ typeOf: dcs:BondYieldMeasurementEnum
 description: "Indicates that the yield data are extrapolated against a yield curve, which relates the yield on a security to its time to maturity, to estimate the yield of the bond if it had exactly some maturity"
 descriptionUrl: "https://www.investopedia.com/terms/c/cmtindex.asp"
 
-Node: dcid:ChainingEnum
-name: "ChainingEnum"
+Node: dcid:PriceIndexChainingEnum
+name: "PriceIndexChainingEnum"
 typeOf: schema:Class
 subClassOf: schema:MeasurementMethodEnum
 description: "An enumeration of chained and unchained price index measurement methods."
 
 Node: dcid:BLSUnchained
 name: "BLSUnchained"
-typeOf: dcs:ChainingEnumeration
+typeOf: dcs:PriceIndexChainingEnum
 description: "Indicates regular unchained price index series such as CPI-U and CPI-W"
 descriptionUrl: "https://www.bls.gov/cpi/additional-resources/chained-cpi.htm"
 
 Node: dcid:BLSChained
 name: "BLSChained"
-typeOf: dcs:ChainingEnumeration
+typeOf: dcs:PriceIndexChainingEnum
 description: "Indicates chained price index series that uses more current weights of goods and services and that more accurately reflects how consumers respond to changes in relative prices."
 descriptionUrl: "https://www.bls.gov/cpi/additional-resources/chained-cpi.htm"
 
