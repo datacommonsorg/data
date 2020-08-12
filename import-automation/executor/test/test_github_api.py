@@ -242,12 +242,8 @@ class GitHubAPITest(unittest.TestCase):
             }]
         }
         dir_exists.side_effect = [
-            # 'a/b/c'
-            True,
             # 'a/b/c/d'
             False,
-            # ''
-            True,
             # 'scripts'
             True
         ]
@@ -259,8 +255,6 @@ class GitHubAPITest(unittest.TestCase):
             # 'a'
             ['targettt'],
             # ''
-            ['targett'],
-            # 'a/b/c/d',
             ['targett'],
             # 'scripts'
             ['targett'],
