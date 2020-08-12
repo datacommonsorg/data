@@ -438,6 +438,7 @@ def _get_import_id(import_name: str, curator_email: str,
     with the import_name and curator_email. The assumption is that between
     logs_before and logs_after, no import request with the same import name and
     email is submitted to the importer.
+    # TODO(intreidpitee): The assumption is not always true.
 
     Args:
         import_name: Import name submitted to the importer.
