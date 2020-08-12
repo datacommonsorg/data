@@ -1,6 +1,6 @@
-Node: dcid:uniprotOrganismCode
+Node: dcid:uniProtOrganismCode
 typeOf: schema:Property
-name: "uniprotOrganismCode"
+name: "uniProtOrganismCode"
 description: "A mnemonic organism identification code of at most 5 alphanumeric characters is used in the entry name of UniProtKB entries, e.g. SP0A_BACSU. This code is generally made of the first three letters of the genus name and the first two letters of the species name."
 descriptionUrl: "https://www.uniprot.org/help/taxonomy#organism-code"
 rangeIncludes: schema:Text
