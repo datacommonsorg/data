@@ -76,10 +76,12 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
     csv_reader: DictReader = DictReader(f_input)
 
     for row in csv_reader:
-        # When this script was written, there were 14 rows.
-        # If there aren't exactly 14 rows, continue.
+        # When this script was written, there were 14 columns.
+        # If there aren't exactly 14 columns, fail.
         if len(row) != 14:
-            continue
+            raise Exception("Incompatible Google Mobility CSV file. " +
+                            "There must be exactly 14 columns in file. " +
+                            "Script must be updated!")
 
         # Get the region names.
         # If the column doesn't exist, skip the row.
