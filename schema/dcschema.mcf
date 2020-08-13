@@ -1097,28 +1097,35 @@ description: "A unit used to denote a quantitative measurement."
 
 Node: LengthUnitOfMeasure
 typeOf: schema:Class
-subClassOf: dcid:UnitOfMeasure
+subClassOf: dcs:UnitOfMeasure
 name: "LengthUnitOfMeasure"
 dcid: "LengthUnitOfMeasure"
 description: "A unit used to denote a measurement of length."
 
 Node: AreaUnitOfMeasure
 typeOf: schema:Class
-subClassOf: dcid:UnitOfMeasure
+subClassOf: dcs:UnitOfMeasure
 name: "AreaUnitOfMeasure"
 dcid: "AreaUnitOfMeasure"
 description: "A unit used to denote a measurement of area."
 
+Node: CurrencyUnitOfMeasure
+typeOf: schema:Class
+subClassOf: dcs:UnitOfMeasure
+name: "CurrencyUnitOfMeasure"
+dcid: "CurrencyUnitOfMeasure"
+description: "A unit used to denote a measurement of currency."
+
 Node: VolumeUnitOfMeasure
 typeOf: schema:Class
-subClassOf: dcid:UnitOfMeasure
+subClassOf: dcs:UnitOfMeasure
 name: "VolumeUnitOfMeasure"
 dcid: "VolumeUnitOfMeasure"
 description: "A unit used to denote a measurement of volume."
 
 Node: TimeUnitOfMeasure
 typeOf: schema:Class
-subClassOf: dcid:UnitOfMeasure
+subClassOf: dcs:UnitOfMeasure
 name: "TimeUnitOfMeasure"
 dcid: "TimeUnitOfMeasure"
 description: "A unit used to denote a measurement of time."
@@ -1180,7 +1187,7 @@ name: "MilesPerHour (MPH)"
 description: "A speed unit of measure representing one mile per hour."
 
 Node: Percent
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 name: "Percent"
 dcid: "Percent"
 description: "A number expressed as a fraction of 100. E.g. 98 denotes 98 percent, while 0.98 denotes 0.98 percent."
@@ -1268,60 +1275,66 @@ dcid: "Liter"
 description: "A volume unit accepted by the International System of Units equivalent to one cubic decimeter."
 
 Node: PersonPerSquareMile
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 name: "PersonPerSquareMile"
 dcid: "PersonPerSquareMile"
 description: "A unit person per square mile area."
 
 Node: MilePerSquareMile
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 name: "MilePerSquareMile"
 dcid: "MilePerSquareMile"
 description: "A unit ratio between mile length and square mile area."
 
 Node: DeathPer1000Births
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 name: "DeathPer1000Births"
 dcid: "DeathPer1000Births"
 description: "A unit death per one thousand births."
 
 Node: USDollar
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:CurrencyUnitOfMeasure
 name: "USDollar"
 dcid: "USDollar"
 description: "The official currency of the United States of America."
 
 Node: Euro
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:CurrencyUnitOfMeasure
 name: "Euro"
 dcid: "Euro"
 description: "The official currency of the European Union."
 
+Node: CanadianDollar
+typeOf: dcs:CurrencyUnitOfMeasure
+name: "CanadianDollar"
+dcid: "CanadianDollar"
+description: "The official currency of Canada."
+
 Node: dcid:NationalCurrency
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:CurrencyUnitOfMeasure
 name: "NationalCurrency"
 description: "Unit for measurements made in the official currency of the relevant country."
 
 Node: dcid:PurchasingPowerStandard
 name: "PurchasingPowerStandard"
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 description: "The purchasing power standard, abbreviated as PPS, is an artificial currency unit. PPS is the technical term used by Eurostat for the common currency in which national accounts aggregates are expressed when adjusted for price level differences using PPPs. Thus, PPPs can be interpreted as the exchange rate of the PPS against the euro."
 descriptionUrl: "https://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Purchasing_power_standard_(PPS)"
 
 Node: PhonesPer1000Persons
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 name: "PhonesPer1000Persons"
 dcid: "PhonesPer1000Persons"
 description: "A unit phone per one thousand persons."
 
 Node: BirthsPer1000Persons
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 name: "BirthsPer1000Persons"
 dcid: "BirthsPer1000Persons"
 description: "A unit birth per one thousand persons."
 
 Node: DeathsPer1000Persons
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 name: "DeathsPer1000Persons"
 dcid: "DeathsPer1000Persons"
 description: "A unit death per one thousand persons."
@@ -1363,7 +1376,7 @@ dcid: "Year"
 description: "A unit of time equivalent to one year on the Gregorian calendar."
 
 Node: dcid:RatioToPovertyLine
-typeOf: dcid:UnitOfMeasure
+typeOf: dcs:UnitOfMeasure
 name: "RatioToPovertyLine"
 description: "A unit indicating a ratio to poverty line. If one is at poverty line, then one has a RatioToPovertyLine of 1. If one's income is twice that of the poverty line threshold, then one has a RatioToPovertyLine of 2."
 
