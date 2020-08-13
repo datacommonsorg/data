@@ -84,6 +84,7 @@ type ImportAttemptRowProps = {
 }
 
 type ImportAttemptRowState = {
+    // Whether the row is collapsed
     open: boolean,
     logs: Array<ProgressLog>
 }
@@ -103,6 +104,10 @@ class ImportAttemptRow extends React.Component<ImportAttemptRowProps, ImportAtte
         this._fetchLogs();
     }
 
+    /**
+     * Fetches the actual logs using the log IDs, sorts them descendingly by
+     * time_logged, and stores them in this.state.logs.
+     */
     _fetchLogs() {
         fetch('/import_attempts/' + this.props.attempt.attempt_id + '/logs').then(response => response.json()).then(data => {
             data.sort((log1: ProgressLog, log2: ProgressLog) => log1.time_logged > log2.time_logged ? 1 : -1);
@@ -110,6 +115,9 @@ class ImportAttemptRow extends React.Component<ImportAttemptRowProps, ImportAtte
         });
     }
 
+    /**
+     * Generates the drop-down rows, one for each log.
+     */
     _generateLogRows() {
         return this.state.logs.map(log => (
             <TableRow key={log.log_id}>
@@ -170,6 +178,7 @@ type SystemRunRowProps = {
 }
 
 type SystemRunRowState = {
+    // Whether the row is collapsed
     open: boolean,
     attempts: Array<ImportAttempt>,
     logs: Array<ProgressLog>
@@ -192,6 +201,10 @@ class SystemRunRow extends React.Component<SystemRunRowProps, SystemRunRowState>
         this._fetchAttempts();
     }
 
+    /**
+     * Fetches the actual import attempts using the attempt IDs and stores
+     * them in this.state.attempts.
+     */
     _fetchAttempts() {
         const attemptIds = this.props.run.import_attempts || []
         const attempts: Array<ImportAttempt> = []
@@ -203,12 +216,19 @@ class SystemRunRow extends React.Component<SystemRunRowProps, SystemRunRowState>
         }));
     }
 
+    /**
+     * Generates the drop-down rows, one for each import attempt.
+     */
     _generateAttemptRows() {
         return this.state.attempts.map(attempt => (
             <ImportAttemptRow key={attempt.attempt_id} attempt={attempt} />
         ));
     }
 
+    /**
+     * Fetches the actual logs using the log IDs, sorts them descendingly by
+     * time_logged, and stores them in this.state.logs.
+     */
     _fetchLogs() {
         fetch('/system_runs/' + this.props.run.run_id + '/logs').then(response => response.json()).then(data => {
             data.sort((log1: ProgressLog, log2: ProgressLog) => log1.time_logged > log2.time_logged ? 1 : -1);
@@ -216,6 +236,10 @@ class SystemRunRow extends React.Component<SystemRunRowProps, SystemRunRowState>
         });
     }
 
+    /**
+     * Generates the rows for the logs. These go above the drop-down
+     * rows for the import attempts.
+     */
     _generateLogRows() {
         return this.state.logs.map(log => (
             <TableRow key={log.log_id}>
@@ -308,6 +332,10 @@ export default class SystemRunTable extends React.Component<SystemRunTableProps,
         this._fetchRuns();
     }
 
+    /**
+     * Fetches the most recent system runs, sorts them descendingly by
+     * time_created, and stores them in this.state.logs.
+     */
     _fetchRuns() {
         fetch('/system_runs').then(response => response.json()).then((runs: Array<SystemRun>) => {
             runs.sort((run1: SystemRun, run2: SystemRun) => run1.time_created < run2.time_created ? 1 : -1);
@@ -315,6 +343,9 @@ export default class SystemRunTable extends React.Component<SystemRunTableProps,
         });
     }
 
+    /**
+     * Generates the rows, one for each system run.
+     */
     _generateRows() {
         return this.state.runs.map(run => (
             <SystemRunRow key={run.run_id} run={run} />
