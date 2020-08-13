@@ -12,7 +12,7 @@ Drugs@FDA is public domain and made available with a Creative Commons CC0 1.0 Un
 
 Functions involving creating the mcf for related enums and loading the necessary enum dictionaries can be found in `create_enums.py`.
 
-Running `create_enums.py` from command line will write the file FDADrugsEnumSchema.mcf to the current directory.
+Running `python3 create_enums.py` from command line will write the file FDADrugsEnumSchema.mcf to the current directory.
 
 Required files for `create_enums.py` are FDADrugsDosageForms.csv and FDADrugsAdminRoutes.csv .
 
@@ -30,7 +30,7 @@ Functions involving combining original data from different files and writing cle
 
 Required files are Products.txt, Applications.txt, TE.txt and MarketingStatus.txt.
 
-This script loads the dictionaries created in `create_enums.py` in order to map Application-Number + Product-Number to MarketingStatus and TECode enums.
+Running 'python3 clean_data` loads the dictionaries created in `create_enums.py` in order to map Application-Number + Product-Number to MarketingStatus and TECode enums.
 
 ### write_mcf.py
 
@@ -38,14 +38,13 @@ Functions involving parsing the clean data from CleanData.csv and writing the fi
 
 Required files are CleanData.csv and chemblIDs.out .
 
-This script loads the dictionaries created in `create_enums.py` in order to map Application Types, Dosage Forms, and Administration Routes to enums.
+This script loads the dictionaries created by `create_enums.py` in order to map Application Types, Dosage Forms, and Administration Routes to enums.
 
-If CleanData.csv is already available, then executing `write_mcf.py` by itself will pull the necessary dictionaries from `create_enums.py` and generate FDADrugsFinal.mcf .
+If CleanData.csv is already available, then executing `python3 write_mcf.py` by itself will pull the necessary dictionaries from `create_enums.py` and generate FDADrugsFinal.mcf .
 
 ### run_all.py
 
-Executing `run_all.py` from the command line will execute the above scripts, generating FDADrugsDosageForms.mcf, CleanData.csv and FDADrugsFinal.mcf .
-
+Executing `python3 run_all.py` from the command line will execute the above scripts, generating FDADrugsDosageForms.mcf, CleanData.csv and FDADrugsFinal.mcf .
 
 ## AdditionalInformation
 

@@ -13,12 +13,23 @@
 # limitations under the License.
 """Runs all of the scripts in order as if in a fresh directory.
 """
+import requests, zipfile, io
+
 import create_enums
 import clean_data
 import write_mcf
 
 
+def download_files():
+    url = 'https://www.fda.gov/media/89850/download'
+    download = requests.get(url)
+    files = zipfile.ZipFile(io.BytesIO(download.content))
+    files.extractall('./raw_data')
+    
+
 def main():
+    print('downloading raw data')
+    download_files()
     print('Starting to create enums....')
     create_enums.main()
     print('Enums created- see FDADrugsEnumSchema.mcf')
