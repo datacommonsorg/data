@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Database service for storing import attempts using Google Cloud Datastore for
 storage.
@@ -20,7 +19,7 @@ storage.
 from app.service import base_database
 from app.model import import_attempt_model
 
-_MODEL = import_attempt_model.ImportAttemptModel
+_MODEL = import_attempt_model.ImportAttempt
 
 
 class ImportAttemptDatabase(base_database.BaseDatabase):

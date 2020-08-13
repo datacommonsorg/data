@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Configurations for the dashboard API.
 """
@@ -20,3 +19,5 @@ Configurations for the dashboard API.
 PROJECT_ID = 'datcom-data'
 # Google Cloud Datastore namespace in which import attempts are stored
 DASHBOARD_NAMESPACE = 'import-progress-dashboard'
+# Google Cloud Storage bucket in which log messages are be stored
+LOG_BUCKET_NAME = 'dashboard-progress-logs'
