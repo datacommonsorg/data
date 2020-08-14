@@ -450,17 +450,20 @@ Node: dcid:ExpenditureTypeEnum
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 
-# TODO(mahsae): GitHub issue #213: suffix these enums with Expenditure
-Node: dcid:Healthcare
+Node: dcid:HealthcareExpenditure
+name: "HealthcareExpenditure"
 typeOf: dcs:ExpenditureTypeEnum
 
-Node: dcid:Vaccine
+Node: dcid:VaccineExpenditure
+name: "VaccineExpenditure"
 typeOf: dcs:ExpenditureTypeEnum
 
-Node: dcid:EconomicStimulus
+Node: dcid:EconomicStimulusExpenditure
+name: "EconomicStimulusExpenditure"
 typeOf: dcs:ExpenditureTypeEnum
 
-Node: dcid:InternationalAid
+Node: dcid:InternationalAidExpenditure
+name: "InternationalAidExpenditure"
 typeOf: dcs:ExpenditureTypeEnum
 
 Node: dcid:covid19StringencyIndex
