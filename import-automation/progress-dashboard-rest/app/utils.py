@@ -54,7 +54,7 @@ def add_fields(parser, fields, required=True):
                             action=action,
                             store_missing=False,
                             required=required,
-                            location='json')
+                            nullable=False)
 
 
 def setup_logging():
