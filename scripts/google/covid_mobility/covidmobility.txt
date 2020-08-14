@@ -1,0 +1,13 @@
+import: {
+  import_name: "Covid19Mobility"
+  provenance_url: "https://www.google.com/covid19/mobility/"
+  provenance_description: "Shows how visits and length of stay at different places have changed over time compared to a baseline"
+
+  # Path to the resolved MCF
+  mcf_url: "gs://resolved_mcf/covid_mobility/Covid19Mobility.mcf"
+
+  # First date of imported data
+  start_date: "2020-02-15"
+  update_frequency: "P1D"
+}
+

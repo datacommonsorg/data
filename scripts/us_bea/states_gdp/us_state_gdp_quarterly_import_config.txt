@@ -1,0 +1,14 @@
+import: {
+  import_name: "USStatesQuarterlyGDP"
+  provenance_url: "https://www.bea.gov/data/gdp/gdp-state"
+  provenance_description: "Quarterly data on inflation-adjusted GDP at a state level in the United States from the US Bureau of Economic Analysis"
+  # Path to the resolved MCF. Can be a repeated field.
+  mcf_url: "gs://resolved_mcf/external_tables/USStateQuarterlyGDPsFinal/nodes.mcf-00000-of-00001"
+  # First date of imported data.
+  start_date: "2005-03-01"
+  # Last date of imported data.
+  end_date: "2020-03-01"
+  # Source data release schedule.
+  update_frequency: "P3M"
+  next_release_date: "2020-10-02"
+}
