@@ -58,7 +58,7 @@ def get_references(term):
         ("imexID: 1007323", {'imex2':100100})
     """
     source = term.split(':')[0]
-    id_content = ':'.join(term.split(':')[1:])
+    id_content = term[len(source) + 1:]
     new_source_map = {}
     if source == 'pubmed':
         property_line = 'pubMedID: ' + '"' + id_content +'"'
@@ -87,7 +87,7 @@ def get_identifier(term):
         ("imexID: 1007323", "{'imex2':100100}")
     """
     source = term.split(':')[0]
-    id_content = ':'.join(term.split(':')[1:])
+    id_content = term[len(source) + 1:]
     new_source_map = {}
     if source == 'intact':
         property_line = 'intActID: ' + '"' + id_content + '"'
@@ -127,7 +127,7 @@ def get_confidence(term):
         ("[13 dcs:AuthorScore]", {aNewSource:10})
     """
     source = term.split(':')[0]
-    id_content = ':'.join(term.split(':')[1:])
+    id_content = term[len(source) + 1:]
     new_source_map = {}
     if source == 'author score':
         if id_content.split(" ")[0] == 'Below':
@@ -135,15 +135,15 @@ def get_confidence(term):
         elif id_content.split(" ")[0] == 'Above':
             property_line = '['+ id_content.split(' ')[1] + ' - dcs:AuthorScore' +  ']'
         else:
-            flag = 1
+            is_numeric_score = True
             # check if author score is a number
             for part in id_content.split('.'):
                 if not part.isnumeric():
                     # if author score is "++++"
                     property_line = '['+ str(len(id_content)) + ' dcs:AuthorScore' +  ']'
-                    flag = 0
+                    is_numeric_score = False
                     break
-            if flag:
+            if is_numeric_score:
                 property_line = '['+ id_content + ' dcs:AuthorScore' +  ']'
     elif source == 'intact-miscore':
         property_line = '['+ id_content + ' dcs:IntactMiScore' +  ']'
@@ -157,6 +157,9 @@ def get_protein_dcid(mint_aliases):
     Args:
         mint_aliases: a line contains the aliases of the protein. The capitalized
         "display_long" name is the dcid of the participant protein.
+    mint_aliases example: 'psi-mi:rpn3_yeast(display_long)|uniprotkb:YER021W(locus name)|
+                    uniprotkb:RPN3(gene name)|psi-mi:RPN3(display_short)|
+                    uniprotkb:SUN2(gene name synonym)'
     """
     if len(mint_aliases) > 1:
         return mint_aliases.split('|')[0].split(':')[1].split('(')[0].upper()
@@ -176,6 +179,10 @@ def check_dcid(alias):
         has the right format (contains only number, char, "_"), and it has two parts separated
         by "_", return True
     else return False
+
+    alias example: 'psi-mi:rpn3_yeast(display_long)|uniprotkb:YER021W(locus name)|
+                    uniprotkb:RPN3(gene name)|psi-mi:RPN3(display_short)|
+                    uniprotkb:SUN2(gene name synonym)'
     """
     if alias == '-':
         return True
@@ -225,10 +232,10 @@ def get_cur_line(key_name, value_list, prefix):
     cur_line = key_name + ': ' + property_content
     return cur_line
 
-def get_schema_from_text(term, new_source_map, psimi_to_dcid):
+def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
     """
     Args:
-        term: a list with each item containing the information
+        terms: a list with each item containing the information
         new_source_map: a map contaning new source information. For example:
         {"refereces":{},"identifier":{},"confidence":{"newConfidence":"AA10010"}}
 
@@ -253,23 +260,29 @@ def get_schema_from_text(term, new_source_map, psimi_to_dcid):
         "confidence":{"newConfidence":"AA10010"}}]
     """
     term_map = collections.defaultdict(list)
-    protein = get_protein_dcid(term[4])
+    protein = get_protein_dcid(terms[4])
     if protein:
         term_map['interactingProtein'].append(protein)
-    protein = get_protein_dcid(term[5])
+    protein = get_protein_dcid(terms[5])
     if protein:
         term_map['interactingProtein'].append(protein)
-    detection_method = psimi_to_dcid[term[6].split(':"')[1].split('(')[0][:-1]]
-    term_map['interactionDetectionMethod'].append(detection_method)
-    term_map['references'] = term[8].split('|')
-    interaction_type = psimi_to_dcid[term[11].split(':"')[1].split('(')[0][:-1]]
-    term_map['interactionType'].append(interaction_type)
-    interaction_source = psimi_to_dcid[term[12].split(':"')[1].split('(')[0][:-1]]
-    term_map['interactionSource'].append(interaction_source)
-    term_map['identifier'] = term[13].split('|')
-    confidence = term[14]
+
+    term_map['references'] = terms[8].split('|')
+    term_map['identifier'] = terms[13].split('|')
+    confidence = terms[14]
     if confidence != '-':
-        term_map['confidence'] = term[14].split('|')
+        term_map['confidence'] = terms[14].split('|')
+
+    def get_value_helper(key, idx):
+        """Help to get the target value from terms, idx shows which column
+        contains the relevant information."""
+        value = psimi_to_dcid[terms[idx].split(':"')[1].split('(')[0][:-1]]
+        term_map[key].append(value)
+
+    key_idx_pairs = [('interactionDetectionMethod', 6), ('interactionType', 11),
+                     ('interactionSource', 12)]
+    for key, idx in key_idx_pairs:
+        get_value_helper(key, idx)
 
     # term_map example:
     # interactingProtein:  ['RPN1_YEAST', 'RPN3_YEAST']
@@ -341,45 +354,54 @@ def main(argv):
     database_file = FLAGS.database
     psimi_to_dcid_file = FLAGS.psimi_to_dcid
     with open(database_file, 'r') as file_object:
-        file = file_object.read()
+        lines = file_object.readlines()
 
     # read the file which has paired PSI-MI and DCID.
     # This file was generated by parse_ebi.py from EBI MI Ontology.
     with open(psimi_to_dcid_file, 'r') as file_object:
-        psimi_to_dcid_content = file_object.read()
+        psimi_to_dcid_content = file_object.readlines()
 
-    lines = file.split('\n')
+   # lines = file.split('\n')
     psimi_to_dcid = {}
-    psimi_to_dcid_content = [line.split(': ') for line in psimi_to_dcid_content.split('\n')]
+    psimi_to_dcid_content = [line.split(': ') for line in psimi_to_dcid_content]
     for line in psimi_to_dcid_content:
         psimi_to_dcid[line[0]] = line[1]
 
     new_source_map = {'references':{}, 'identifier':{}, 'confidence':{}}
     mcf_list = []
-    wroing_dcid_cases = []
+    wrong_dcid_cases = []
     failed_cases = []
     no_uniprot_cases = []
     for line in lines:
         if len(line) == 0:
             continue
-        term = line.split('\t')
+        # 4 columns in the terms are used with indices: 0, 1, 4, 5
+        # terms[0], terms[1]: contains the uniProt accession number,
+        # example: 'uniprotkb:P38764'
+        # terms[4], terms[5]: contains the multiple alternate names, including
+        # UniProt entry name denoted as (display_long).
+        # example: 'psi-mi:rpn3_yeast(display_long)|uniprotkb:YER021W(locus name)|
+        # uniprotkb:RPN3(gene name)|psi-mi:RPN3(display_short)|
+        # uniprotkb:SUN2(gene name synonym)'
+
+        terms = line.split('\t')
         # check if the record has the correct UniProt Protein Name
-        if_dcid1, if_dcid2 = check_dcid(term[4]), check_dcid(term[5])
+        if_dcid1, if_dcid2 = check_dcid(terms[4]), check_dcid(terms[5])
         if not if_dcid1 or not if_dcid2:
-            wroing_dcid_cases.append(line)
+            wrong_dcid_cases.append(line)
             continue
         # check if the record has Uniprot Identifier
-        if_uniprot1, if_uniprot2 = check_uniprot(term[0]), check_uniprot(term[1])
+        if_uniprot1, if_uniprot2 = check_uniprot(terms[0]), check_uniprot(terms[1])
         if not if_uniprot1 or not if_uniprot2:
             no_uniprot_cases.append(line)
             continue
-        schema, new_source_map = get_schema_from_text(term, new_source_map, psimi_to_dcid)
+        schema, new_source_map = get_schema_from_text(terms, new_source_map, psimi_to_dcid)
         if schema:
             mcf_list.append(schema)
 
     # the number of records we didn't import
     not_import_count = 0
-    for alist in [wroing_dcid_cases, no_uniprot_cases, failed_cases]:
+    for alist in [wrong_dcid_cases, no_uniprot_cases, failed_cases]:
         not_import_count += len(alist)
 
     output_path = FLAGS.output_mcf
@@ -388,9 +410,9 @@ def main(argv):
         file_object.write(mcf_text)
 
     if FLAGS.output_failed:
-        if wroing_dcid_cases:
+        if wrong_dcid_cases:
             with open(FLAGS.wrong_dcid, 'w') as file_object:
-                file_object.write("\n".join(wroing_dcid_cases))
+                file_object.write("\n".join(wrong_dcid_cases))
         if no_uniprot_cases:
             with open(FLAGS.no_uniprot, 'w') as file_object:
                 file_object.write("\n".join(no_uniprot_cases))
@@ -412,7 +434,7 @@ def main(argv):
             file_object.write("\n".join(write_list))
     print(str(len(mcf_list)) + " records have been successfully parsed to schema. "
           + str(not_import_count)
-          + " records failed_cases the parsing and have been saved to corresponding files.")
+          + " records failed the parsing and have been saved to the corresponding files.")
 
 if __name__ == '__main__':
     app.run(main)
