@@ -20,11 +20,11 @@ import os
 from google.cloud import logging
 
 
-def _is_production():
+def is_production():
     return 'DASHBOARD_FRONTEND_PRODUCTION' in os.environ
 
 
-def _setup_logging():
+def setup_logging():
     """Connects the default logger to Google Cloud Logging.
     Only logs at INFO level or higher will be captured.
     """
@@ -37,7 +37,3 @@ def get_dashboard_oauth_client_id():
     """Gets the client ID used to authenticate with Identity-Aware Proxy
     from the environment variable DASHBOARD_OAUTH_CLIENT_ID."""
     return os.environ.get('DASHBOARD_OAUTH_CLIENT_ID')
-
-
-if _is_production():
-    _setup_logging()

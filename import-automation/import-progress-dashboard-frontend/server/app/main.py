@@ -28,7 +28,10 @@ DASHBOARD_API = dashboard_api.DashboardAPI(
 
 
 def create_app():
-    """Creates the Flask app."""
+    """Creates the Flask app. Sets up Google Cloud Logging if
+    on prod profile."""
+    if configs.is_production():
+        configs.setup_logging()
     return flask.Flask(__name__,
                        static_folder='../../client/build/static',
                        template_folder='../../client/build')
@@ -52,7 +55,7 @@ def serve_file(path):
 @FLASK_APP.route('/system_runs')
 def get_system_runs():
     """Returns all the system runs."""
-    # TODO(intrepiditee): Limit number returned
+    # TODO(intrepiditee): Limit number returned.
     return flask.Response(json.dumps(DASHBOARD_API.get_system_runs()),
                           mimetype='application/json')
 

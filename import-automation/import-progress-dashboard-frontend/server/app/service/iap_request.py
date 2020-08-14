@@ -76,6 +76,5 @@ class IAPRequest:
         # Google-issued OpenID Connect token for the service account.
         headers = kwargs.setdefault('headers', {})
         headers['Authorization'] = f'Bearer {google_open_id_connect_token}'
-        response = requests.request(method, url, **kwargs)
 
-        return response
+        return requests.request(method, url, **kwargs)
