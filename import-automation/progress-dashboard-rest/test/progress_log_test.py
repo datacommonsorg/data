@@ -116,7 +116,7 @@ class ProgressLogListTest(unittest.TestCase):
     def test_progress_log_by_run_id(self):
         """Tests querying the progress logs of a system run by its run_id."""
         expected = [self.logs[1], self.logs[2]]
-        retrieved = self.by_run_id.get(self.runs[0][_RUN.run_id])[_RUN.logs]
+        retrieved = self.by_run_id.get(self.runs[0][_RUN.run_id])
         self.assertEqual(len(expected), len(retrieved))
         for i, log in enumerate(expected):
             self.assertEqual(log[_LOG.log_id], retrieved[i][_LOG.log_id])
@@ -126,7 +126,7 @@ class ProgressLogListTest(unittest.TestCase):
         its attempt_id."""
         expected = [self.logs[0], self.logs[1]]
         retrieved = self.by_attempt_id.get(
-            self.attempts[0][_ATTEMPT.attempt_id])[_ATTEMPT.logs]
+            self.attempts[0][_ATTEMPT.attempt_id])
         self.assertEqual(len(expected), len(retrieved))
         for i, log in enumerate(expected):
             self.assertEqual(log[_LOG.log_id], retrieved[i][_LOG.log_id])
