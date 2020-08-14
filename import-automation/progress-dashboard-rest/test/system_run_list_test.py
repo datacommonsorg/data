@@ -18,11 +18,13 @@ Tests for system_run_list.py.
 import unittest
 from unittest import mock
 
+from app import main
 from app.model import system_run_model
 from app.resource import system_run_list
 from test import utils
 
 _MODEL = system_run_model.SystemRun
+_ENDPOINT = '/system_runs'
 
 
 def setUpModule():
@@ -45,41 +47,56 @@ class SystemRunListTest(unittest.TestCase):
             _MODEL.pr_number: 1
         }, {
             _MODEL.repo_name: 'data',
-            _MODEL.pr_number: 1
+            _MODEL.pr_number: 3
         }, {
             _MODEL.repo_name: 'aaaa',
             _MODEL.pr_number: 2
         }]
         self.runs = utils.ingest_system_runs(self.resource, runs)
 
-    @mock.patch(utils.PARSE_ARGS, lambda self: {})
     def test_get_all(self):
         """Tests that empty filter returns all the runs."""
-        self.assertCountEqual(self.runs, self.resource.get())
+        with main.FLASK_APP.test_request_context(_ENDPOINT, json={}):
+            self.assertCountEqual(self.runs, self.resource.get())
 
-    @mock.patch(utils.PARSE_ARGS, lambda self: {_MODEL.repo_name: 'data'})
     def test_get_by_repo_name(self):
         """Tests that filtering by repo_name returns the correct runs."""
-        self.assertCountEqual([self.runs[1], self.runs[2]], self.resource.get())
+        with main.FLASK_APP.test_request_context(
+                _ENDPOINT, json={_MODEL.repo_name: 'data'}):
+            self.assertCountEqual([self.runs[1], self.runs[2]],
+                                  self.resource.get())
 
-    @mock.patch(utils.PARSE_ARGS, lambda self: {
-        'repo_name': 'dddd',
-        'pr_number': 0
-    })
     def test_get_by_repo_name_and_pr_number(self):
         """Tests that filtering by repo_name and pr_number returns
         the correct runs."""
-        self.assertCountEqual([self.runs[0]], self.resource.get())
+        with main.FLASK_APP.test_request_context(_ENDPOINT,
+                                                 json={
+                                                     'repo_name': 'dddd',
+                                                     'pr_number': 0
+                                                 }):
+            self.assertCountEqual([self.runs[0]], self.resource.get())
 
-    @mock.patch(utils.PARSE_ARGS, lambda self: {'does-not-exist': 'data'})
     def test_get_field_not_exist(self):
         """Tests that filtering by a field that does not exist
         returns BAD REQUEST."""
-        _, code = self.resource.get()
-        self.assertEqual(400, code)
+        with main.FLASK_APP.test_request_context(
+                _ENDPOINT, json={'does-not-exist': 'data'}):
+            _, code = self.resource.get()
+            self.assertEqual(400, code)
 
-    @mock.patch(utils.PARSE_ARGS, lambda self: {'repo_name': 'does-not-exist'})
     def test_get_value_not_exist(self):
         """Tests that filtering by a value that does not exist
         returns empty result."""
-        self.assertEqual([], self.resource.get())
+        with main.FLASK_APP.test_request_context(
+                _ENDPOINT, json={'repo_name': 'does-not-exist'}):
+            self.assertEqual([], self.resource.get())
+
+    def test_limit_order(self):
+        with main.FLASK_APP.test_request_context(
+                f'{_ENDPOINT}?limit=3&order=repo_name&order=-pr_number',
+                json={}):
+            runs = self.resource.get()
+            self.assertEqual(['aaaa', 'data', 'data'],
+                             list(run[_MODEL.repo_name] for run in runs))
+            self.assertEqual([2, 3, 1],
+                             list(run[_MODEL.pr_number] for run in runs))
