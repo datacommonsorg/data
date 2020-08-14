@@ -106,8 +106,8 @@ class BaseDatabase:
 
         Args:
             kv_dict: Key-value mappings used for filtering as a dict.
-            order: Sequence of field names each as a string to order
-                the returned entities. Prepend - to a field name to sort it
+            order: Tuple or list of field names each as a string to order
+                the returned entities. Prepend "-" to a field name to sort it
                 in descending order.
             limit: Maximum number of entities returned, as an int.
 

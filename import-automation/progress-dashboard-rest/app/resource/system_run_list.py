@@ -45,7 +45,7 @@ class SystemRunList(system_run.SystemRun):
         This endpoint accepts two url arguments: limit and order.
         limit is an integer that specifies the maximum number of system runs
         returned and order is a list of field names to order the returned
-        system runs by. Prepend - to a field name to sort it in
+        system runs by. Prepend "-" to a field name to sort it in
         descending order. The list can be specified by repeated keys. E.g.,
         ?order=status&order=-time_created.
 
