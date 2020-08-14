@@ -17,6 +17,10 @@ System run lists, the resource associated with the endpoint '/system_runs'.
 
 import http
 
+import flask
+from werkzeug import exceptions
+
+from app import utils
 from app.resource import system_run
 from app.service import validation
 from app.model import system_run_model
@@ -28,6 +32,9 @@ class SystemRunList(system_run.SystemRun):
 
     See SystemRun.
     """
+    _parser = system_run.SystemRun.parser.copy()
+    utils.add_fields(_parser, (('limit', int), ('order', str, 'append')),
+                     required=False)
 
     def get(self):
         """Retrieves a list of system runs that pass the filter defined by
@@ -35,17 +42,30 @@ class SystemRunList(system_run.SystemRun):
 
         The filter can only contain fields defined by SystemRun.
 
+        This endpoint accepts two url arguments: limit and order.
+        limit is an integer that specifies the maximum number of system runs
+        returned and order is a list of field names to order the returned
+        system runs by. Prepend - to a field name to sort it in
+        descending order. The list can be specified by repeated keys. E.g.,
+        ?order=status&order=-time_created.
+
         Returns:
             A list of system runs each as a datastore Entity object
             if successful. Otherwise, (error message, error code), where
             the error message is a string and the error code is an int.
         """
-        args = system_run.SystemRunByID.parser.parse_args()
+        args = None
+        try:
+            args = SystemRunList._parser.parse_args(strict=True)
+        except exceptions.BadRequest as exc:
+            return exc.description, exc.code
+        order = args.pop('order', ())
+        limit = args.pop('limit', None)
         for field in args:
             if field not in system_run_model.FIELDS:
                 return (f'Field {field} is not a valid field for a system run',
                         http.HTTPStatus.BAD_REQUEST)
-        return self.database.filter(args)
+        return self.database.filter(args, order=order, limit=limit)
 
     def post(self):
         """Creates a new system run with the fields provided in the

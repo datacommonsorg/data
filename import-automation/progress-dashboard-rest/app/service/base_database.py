@@ -97,7 +97,7 @@ class BaseDatabase:
             return self.client.key(self.kind, entity_id)
         return self.client.key(self.kind)
 
-    def filter(self, kv_dict):
+    def filter(self, kv_dict, order=(), limit=None):
         """Retrieves a list of entities based on some criteria.
 
         Only equality is supported. For example,
@@ -106,14 +106,18 @@ class BaseDatabase:
 
         Args:
             kv_dict: Key-value mappings used for filtering as a dict.
+            order: Sequence of field names each as a string to order
+                the returned entities. Prepend - to a field name to sort it
+                in descending order.
+            limit: Maximum number of entities returned, as an int.
 
         Returns:
             A list of entities that pass the filter each as a datastore Entity.
         """
-        query = self.client.query(kind=self.kind)
+        query = self.client.query(kind=self.kind, order=order)
         for key, value in kv_dict.items():
             query.add_filter(key, '=', value)
-        return list(query.fetch())
+        return list(query.fetch(limit=limit))
 
     def save(self, entity):
         """Saves the entity to Datastore.
