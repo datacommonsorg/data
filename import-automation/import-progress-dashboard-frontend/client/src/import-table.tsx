@@ -97,9 +97,7 @@ type ImportAttemptRowState = {
  */
 class ImportAttemptRow extends
   React.Component<ImportAttemptRowProps, ImportAttemptRowState> {
-  /**
-   * @param {ImportAttemptRowProps} props
-   */
+
   constructor(props: ImportAttemptRowProps) {
     super(props);
     this.state = {
@@ -227,9 +225,9 @@ class SystemRunRow extends
   }
 
   /**
-     * Fetches the actual import attempts using the attempt IDs and stores
-     * them in this.state.attempts.
-     */
+   * Fetches the actual import attempts using the attempt IDs and stores
+   * them in this.state.attempts.
+   */
   _fetchAttempts() {
     const attemptIds = this.props.run.importAttempts || [];
     const attempts: Array<ImportAttempt> = [];
@@ -385,8 +383,8 @@ export default class SystemRunTable extends
   }
 
   /**
-     * Generates the rows, one for each system run.
-     */
+   * Generates the rows, one for each system run.
+   */
   _generateRows() {
     return this.state.runs.map((run) => (
       <SystemRunRow key={run.runId} run={run} />
