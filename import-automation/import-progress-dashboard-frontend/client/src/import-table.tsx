@@ -29,6 +29,8 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
+import './import-table.css';
+
 /**
  * A system run describes a run of the executor. A run can perform multiple
  * import attempts.
@@ -133,9 +135,6 @@ class ImportAttemptRow extends
     ));
   }
 
-  /**
-   * @return {React.Fragment}
-   */
   render() {
     return (
       <React.Fragment>
@@ -170,7 +169,7 @@ class ImportAttemptRow extends
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell colSpan={10}>
+          <TableCell id="attemptLogsCell" colSpan={10}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom component="div">
@@ -303,7 +302,7 @@ class SystemRunRow extends
           <TableCell align="right">{this.props.run.commitSha}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell colSpan={10}>
+          <TableCell id="runLogsCell" colSpan={10}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom component="div">
