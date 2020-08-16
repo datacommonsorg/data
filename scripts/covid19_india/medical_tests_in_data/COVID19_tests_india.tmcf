@@ -1,0 +1,7 @@
+Node: E:COVID19_tests_india->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:COVID19_tests_india->isoCode
+observationDate: C:COVID19_tests_india->Date
+value: C:COVID19_tests_india->CumulativeCount_MedicalTest_COVID_19

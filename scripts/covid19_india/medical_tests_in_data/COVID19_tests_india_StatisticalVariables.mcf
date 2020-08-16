@@ -1,0 +1,7 @@
+Node: dcid:CumulativeCount_MedicalTest_COVID_19
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalTest
+medicalCondition: dcs:COVID_19
+statType: dcs:measuredValue
+measuredProperty: dcs:cumulativeCount
+testResult: dcs:Ready
