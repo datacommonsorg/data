@@ -152,3 +152,241 @@ typeOf: dcs:UnitOfMeasure
 name: "ConstantPriceUSDollar2015"
 description: "The value of the official currency of the United States of America in the year 2015."
 
+Node: dcid:LevelOfSchoolEnum
+name: "LevelOfSchoolEnum"
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+
+Node: dcid:iscedLevel
+name: "iscedLevel"
+typeOf: schema:Property
+domain: dcs:Person
+range: dcs:LevelOfSchoolEnum
+
+Node: dcid:TertiaryEducation
+name: "ISCED Level 5 (short-cycle tertiary education) Or Higher"
+description: "Short-cycle tertiary education or more. Includes any form of post-secondary education."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel5OrHigher"
+
+Node: dcid:BachelorsDegreeOrHigher
+name: "ISCED Level 6 (Bachelor's Degree) Or Higher"
+description: "Bachelor's degree or equivalent level."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel6OrHigher"
+
+Node: dcid:MastersDegreeOrHigher
+name: "ISCED Level 7 (Master's degree) Or Higher"
+description: "Master's degree of equivalent."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel7OrHigher"
+
+Node: dcid:DoctorateDegree
+name: "ISCED Level 8 (Doctorate Degree)"
+description: "Doctorate degree or equivalent level."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel8"
+
+Node: dcid:ICD10/X60-X84
+name: "X60-X84 (Intentional self-harm)"
+typeOf: dcs:ICD10Section
+
+Node: dcid:Years15To64
+name: "Years 15 to 64"
+typeOf: dcs:QuantityRange
+startValue: 15
+endValue: 64
+unitOfMeasure: dcs:Years
+
+Node: dcid:Overweight
+name: "Overweight"
+typeOf: dcs:HealthBehaviorEnum
+
+Node: dcid:InLaborForce
+name: "InLaborForce"
+typeOf: dcs:EmploymentStatusEnum
+
+Node: dcid:sourceScalingFactor
+name: "sourceScalingFactor"
+typeOf: schema:Property
+description: "Describes the scaling factor that was used by the source. All statistical variables are remapped to a per individual basis."
+domainIncludes: dcs:StatisticalVariable
+
+Node: dcid:rainfall
+name: "rainfall"
+typeOf: schema:Property
+domainIncludes: dcs:StatisticalPopulation
+rangeIncludes: dcs:Number
+
+Node: dcid:EnvironmentalResource
+name: "EnvironmentalResource"
+typeOf: schema:Class
+subClassOf: schema:Thing
+
+Node: dcid:Production
+name: "Production"
+description: "Production is a process of combining various material inputs and immaterial inputs (plans, know-how) in order to make something for consumption (output)."
+descriptionUrl: "https://en.wikipedia.org/wiki/Production_(economics)"
+typeOf: dcs:Class
+subClassOf: dcid:Thing
+
+Node: dcid:productType
+name: "productType"
+typeOf: schema:Property
+domain: dcs:Product
+range: dcs:ProductTypeEnum
+
+Node: dcid:ProductTypeEnum
+name: "ProductTypeEnum"
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+
+Node: dcid:Gasoline
+name: "Gasoline"
+typeOf: dcid:ProductTypeEnum
+
+Node: dcid:MobileCellularSubscription
+name: "MobileCellularSubscription"
+typeOf: dcid:ProductTypeEnum
+
+Node: dcid:expenditureType
+name: "propertyType"
+typeOf: schema:Property
+domain: dcs:EconomicActivity
+range: dcs:ExpenditureTypeEnum
+
+Node: dcid:ExpenditureTypeEnum
+name: "ExpenditureTypeEnum"
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+
+Node: dcid:Education
+name: "Education"
+typeOf: dcid:ExpenditureTypeEnum
+
+Node: dcid:TertiaryEducation
+name: "TertiaryEducation"
+typeOf: dcid:ExpenditureTypeEnum
+
+Node: dcid:expensor
+name: "expensor"
+typeOf: schema:Property
+domain: dcs:EconomicActivity
+range: schema:Organization, schema:Person
+
+Node: dcid:producedThing
+name: "producedThing"
+typeOf: schema:Property
+domain: dcs:Production
+range: dcs:ProducedThingEnum
+
+Node: dcid:ProducedThingEnum
+name: "ProducedThingEnum"
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+
+Node: dcid:ElectricityFromOilGasOrCoalSources
+name: "ElectricityFromOilGasOrCoalSources"
+typeOf: dcid:ProducedThingEnum
+
+Node: dcid:ElectricityFromNuclearSources
+name: "ElectricityFromNuclearSources"
+typeOf: dcid:ProducedThingEnum
+
+Node: dcid:residenceCharacteristic
+name: "residenceCharacteristic"
+typeOf: schema:Property
+domain: dcs:Person
+range: dcs:ResidenceCharactersticEnum
+
+Node: dcid:ResidenceCharactersticEnum
+name: "ResidenceCharactersticEnum"
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+
+Node: dcid:Below5metersAboveSea
+name: "Below5metersAboveSea"
+typeOf: dcid:ResidenceCharactersticEnum
+
+Node: dcid:CauseOfDeathEnum
+name: "CauseOfDeathEnum"
+description: "Describes cause of death events that are not adequately described by ICD10 codes."
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+
+Node: dcid:PregnancyAndPrenatalComplication
+name: "PregnancyAndPrenatalComplication"
+description: "Describes medical complications that arise during pregnancy or within 42 days of pregnancy termination."
+typeOf: dcid:CauseOfDeathEnum
+
+Node: dcid:RenewableEnergy
+typeOf: dcs:Class
+description: "Consumable energy of renewable forms."
+subClassOf: dcs:Energy
+
+Node: dcid:Expenditure
+name: "Expenditure"
+description: "Any form of general spending by a particular organization or group."
+typeOf: dcs:EconomicActivitySourceEnum
+
+Node: dcid:LiveBirth
+name: "LiveBirth"
+typeOf: dcs:MedicalEventEnum
+
+Node: dcid:Amount_EconomicActivity_Expenditure
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+activitySource: dcs:Expenditure
+
+Node: dcid:Amount_EconomicActivity_Expenditure_Education
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+activitySource: dcs:Expenditure
+expenditureType: dcs:Education
+
+Node: dcid:Amount_Consumption_Energy
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Consumption
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+consumedThing: dcs:Energy
+
+Node: dcid:Amount_Production_Energy
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Production
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+consumedThing: dcs:Energy
+
+Node: dcid:Count_BirthEvent_Live
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BirthEvent
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalEventEnum: dcs:LiveBirth
+
+Node: dcid:Count_Person_20To79Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+age: dcs:Years20To79
+
+Node: dcid:Years20To79
+name: "Years 20 to 79"
+typeOf: dcs:QuantityRange
+startValue: 20
+endValue: 79
+unitOfMeasure: dcs:Years
+
+Node: dcid:mortalityRate
+typeOf: schema:Property
+name: "mortalityRate"
+description: "Mortality rate is a measure of the number of deaths (in general, or due to a specific cause) in a particular population, scaled to the size of that population, per unit of time."
+descriptionUrl: "https://en.wikipedia.org/wiki/Mortality_rate"
+domainIncludes: dcs:StatisticalPopulation
+rangeIncludes: dcs:Float
