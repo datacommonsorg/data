@@ -1,9 +1,9 @@
-Node: dcid:BEAProductEnum
-name: "BEAProductEnum"
+Node: dcid:EconomicProductEnum
+name: "EconomicProductEnum"
 typeOf: schema:Class
-description: "Enumerations of Products and Services used to determine Consumer Price Index (CPI) or price change over time for a market basket of consumer goods and services"
+description: "Enumerations of Products and Services used to determine Consumer Price Index (CPI) or price change over time for a market basket of consumer goods and services."
 subClassOf: dcid:Enumeration
-dcid: "BEAProductEnum"
+dcid: "EconomicProductEnum"
 
 Node: PercentileEnum
 dcid: "PercentileEnum"

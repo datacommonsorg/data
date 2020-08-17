@@ -18,9 +18,16 @@
     python3 test_import.py
 """
 import os
+import sys
+
 import unittest
 
 import pandas as pd
+
+# Allows the following module imports to work when running as a script
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
 from us_bea.states_gdp import import_data
 from us_bea.states_gdp import import_industry_data_and_gen_mcf
 

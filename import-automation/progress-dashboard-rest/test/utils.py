@@ -21,7 +21,6 @@ from unittest import mock
 import atexit
 
 import psutil
-from google.auth import credentials
 from google.cloud import datastore
 from google.cloud import exceptions
 
@@ -103,9 +102,7 @@ atexit.register(EMULATOR.terminate_emulator)
 
 
 def create_test_datastore_client():
-    return datastore.Client(project=utils.get_id(),
-                            namespace=utils.get_id(),
-                            credentials=credentials.AnonymousCredentials())
+    return datastore.Client(project=utils.get_id(), namespace=utils.get_id())
 
 
 def ingest_import_attempts(run_list_resource,

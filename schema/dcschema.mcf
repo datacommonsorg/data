@@ -54,12 +54,11 @@ domainIncludes: schema:StatisticalPopulation
 rangeIncludes: schema:Number, dcs:Percent
 supersededBy: dcs:countRelative
 
-Node: unit
-dcid: "unit"
+Node: dcid:unit
 name: "unit"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: schema:Observation, dcs:StatisticalVariable
+domainIncludes: schema:Observation, dcs:StatVarObservation
 
 Node: subPopulation
 dcid: "subPopulation"
@@ -437,7 +436,7 @@ Node: dcid:beaProduct
 description: "Products and Services designated by US Bureau of Economic Analysis, of consumer spending (such as food, clothing, shelter, and services) that people buy for day-to-day living"
 dcid: "beaProduct"
 name: "beaProduct"
-rangeIncludes: dcid:BEAProductEnum
+rangeIncludes: dcid:EconomicProductEnum
 typeOf: dcid:Property
 domainIncludes: dcid:Product
 
@@ -2072,7 +2071,7 @@ description: "Identifies the denominator variable when an observation represents
 Node: dcid:scalingFactor
 typeOf: schema:Property
 name: "scalingFactor"
-domainIncludes: schema:Observation, dcs:StatisticalVariable
+domainIncludes: schema:Observation, dcs:StatVarObservation
 rangeIncludes: schema:Number
 description: "Used in conjunction with measurementDenominator, this indicates the factor the denominator is to be scaled by."
 
