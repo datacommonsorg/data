@@ -17,7 +17,7 @@
                     "node_mcf": "COVIDTracking_States_StatisticalVariables.mcf"
                 }
             ],
-            "cron_schedule": "* * * * *"
+            "cron_schedule": "45 3 * * *"
         }
     ]
 }
