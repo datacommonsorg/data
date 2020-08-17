@@ -181,7 +181,7 @@ class ImportAttemptRow extends
           </RightAlignTableCell>
         </TableRow>
         <TableRow>
-          <RightAlignTableCell id="attemptLogsCell" colSpan={10}>
+          <TableCell id="attemptLogsCell" colSpan={10}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom component="div">
@@ -201,7 +201,7 @@ class ImportAttemptRow extends
                 </Table>
               </Box>
             </Collapse>
-          </RightAlignTableCell>
+          </TableCell>
         </TableRow>
       </React.Fragment>
     );
