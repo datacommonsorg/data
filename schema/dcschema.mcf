@@ -54,12 +54,11 @@ domainIncludes: schema:StatisticalPopulation
 rangeIncludes: schema:Number, dcs:Percent
 supersededBy: dcs:countRelative
 
-Node: unit
-dcid: "unit"
+Node: dcid:unit
 name: "unit"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: schema:Observation, dcs:StatisticalVariable
+domainIncludes: schema:Observation, dcs:StatVarObservation
 
 Node: subPopulation
 dcid: "subPopulation"
@@ -2072,7 +2071,7 @@ description: "Identifies the denominator variable when an observation represents
 Node: dcid:scalingFactor
 typeOf: schema:Property
 name: "scalingFactor"
-domainIncludes: schema:Observation, dcs:StatisticalVariable
+domainIncludes: schema:Observation, dcs:StatVarObservation
 rangeIncludes: schema:Number
 description: "Used in conjunction with measurementDenominator, this indicates the factor the denominator is to be scaled by."
 
