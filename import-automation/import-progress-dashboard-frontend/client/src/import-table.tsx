@@ -390,12 +390,9 @@ export default class SystemRunTable extends
    * timeCreated, and stores them in this.state.logs.
    */
   _fetchRuns() {
-    fetch('/system_runs')
+    fetch('/system_runs?limit=10&order=-time_created')
         .then((response) => response.json())
         .then((runs: Array<SystemRun>) => {
-          runs.sort(
-            (run1, run2) => run1.timeCreated < run2.timeCreated ? 1 : -1
-          );
           this.setState({runs: runs});
         });
   }
