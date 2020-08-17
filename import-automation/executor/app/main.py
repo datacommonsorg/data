@@ -80,7 +80,8 @@ def execute_imports():
             executor_output_prefix=config.storage_executor_output_prefix,
             importer_output_prefix=config.storage_importer_output_prefix,
             unresolved_mcf_bucket_name=config.storage_dev_bucket_name,
-            resolved_mcf_bucket_name=config.storage_importer_bucket_name))
+            resolved_mcf_bucket_name=config.storage_importer_bucket_name,
+            client_id=config.importer_oauth_client_id))
     result = executor.execute_imports_on_commit(commit_sha=commit_sha,
                                                 repo_name=repo_name,
                                                 branch_name=branch_name,
