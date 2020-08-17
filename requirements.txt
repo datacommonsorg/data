@@ -4,3 +4,7 @@ pandas
 pylint
 pytest
 yapf
+frozendict
+
+urllib3
+zipp

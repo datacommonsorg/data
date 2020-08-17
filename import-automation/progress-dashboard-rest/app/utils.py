@@ -54,7 +54,7 @@ def add_fields(parser, fields, required=True):
                             action=action,
                             store_missing=False,
                             required=required,
-                            location='json')
+                            nullable=False)
 
 
 def setup_logging():
@@ -69,6 +69,12 @@ def setup_logging():
 
 def create_storage_bucket(project=configs.PROJECT_ID,
                           bucket_name=configs.LOG_BUCKET_NAME):
+    """Creates a Google Cloud Storage bucket.
+
+    Args:
+        project: ID of the Google Cloud project as a string.
+        bucket_name: Name of the bucket as a string.
+    """
     return storage.Client(project).bucket(bucket_name)
 
 
@@ -88,8 +94,18 @@ def create_datastore_client(project=configs.PROJECT_ID,
 
 
 def get_id():
+    """Returns a random UUID as a hex string."""
     return uuid.uuid4().hex
 
 
 def list_to_str(a_list, sep=', '):
+    """Converts a list to string.
+
+    Args:
+        a_list: The list to convert to string.
+        sep: Separator between elements.
+
+    Returns:
+        String representation of the list.
+    """
     return sep.join(a_list)

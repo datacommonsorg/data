@@ -85,7 +85,7 @@ def generate_cleaned_dataframe():
         converters={'industry_code': str},
         sep="\\s+")
     assert len(series_desc.columns) == len(exp_series_columns)
-    assert False not in series_desc.columns == exp_series_columns
+    assert (series_desc.columns == exp_series_columns).all()
     series_desc = series_desc.set_index("series_id")
 
     # Download various series datapoints
@@ -96,16 +96,16 @@ def generate_cleaned_dataframe():
         "https://download.bls.gov/pub/time.series/jt/jt.data.3.Hires",
         sep="\\s+")
     total_seps = pd.read_csv(
-        "https://download.bls.gov/pub/time.series/jt/jt.data.4.TotalSeparations",
+        "https://download.bls.gov/pub/time.series/jt/jt.data.4.TotalSeparations",  # pylint: disable=line-too-long
         sep="\\s+")
     total_quits = pd.read_csv(
         "https://download.bls.gov/pub/time.series/jt/jt.data.5.Quits",
         sep="\\s+")
     total_layoffs = pd.read_csv(
-        "https://download.bls.gov/pub/time.series/jt/jt.data.6.LayoffsDischarges",
+        "https://download.bls.gov/pub/time.series/jt/jt.data.6.LayoffsDischarges",  # pylint: disable=line-too-long
         sep="\\s+")
     total_other_seps = pd.read_csv(
-        "https://download.bls.gov/pub/time.series/jt/jt.data.7.OtherSeparations",
+        "https://download.bls.gov/pub/time.series/jt/jt.data.7.OtherSeparations",  # pylint: disable=line-too-long
         sep="\\s+")
     # Additional information about each dataframe.
     # Tuple Format: Statistical Variable name, Stat Var population,
@@ -128,7 +128,7 @@ def generate_cleaned_dataframe():
     for schema_name, population_type, job_change_event, df in schema_mapping:
         # Assert columns are as expected.
         assert len(df.columns) == len(job_columns)
-        assert False not in df.columns == job_columns
+        assert (df.columns == job_columns).all()
 
         # Add to general dataframe.
         df = df.loc[:, job_columns]
@@ -178,12 +178,13 @@ def generate_cleaned_dataframe():
     jolts_df = jolts_df.apply(jolts_code_map, axis=1)
 
     def row_to_stat_var(row):
-        """Maps a row of the df to the Statistical Variable that describes it."""
+        """Maps a row of df to the Statistical Variable that describes it."""
         base_stat_var = row['statistical_variable']
         industry_code = row['industry_code']
         seasonal_adjustment = row['seasonal_adjustment']
 
-        return f"dcs:{base_stat_var}_NAICS_{industry_code}_{seasonal_adjustment}"
+        return (
+            f"dcs:{base_stat_var}_NAICS_{industry_code}_{seasonal_adjustment}")
 
     # Build map to Statistical Variable.
     jolts_df['seasonal_adjustment'] = jolts_df['seasonal'].apply(
@@ -232,8 +233,8 @@ def create_statistical_variables(jolts_df, schema_mapping):
 
                     # Remove separation type entry if not includes.
                     if job_change_event == "":
-                        stat_var_schema = stat_var_schema \
-                            .replace("jobChangeEvent: dcs:{JOB_CHANGE_EVENT}\n", "")
+                        stat_var_schema = (stat_var_schema.replace(
+                            "jobChangeEvent: dcs:{JOB_CHANGE_EVENT}\n", ""))
 
                     # Replace all other fields.
                     f_out.write(

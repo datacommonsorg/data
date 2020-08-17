@@ -213,15 +213,14 @@ func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, m
 		tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Empty geocoding result for %s", extName))
 		return
 	}
-	for _, result := range results {
+	// TODO: Deal with place-type checks and multiple results.
+	for _, result := range results[:1] {
 		dcid, ok := (*placeId2Dcid)[result.PlaceID]
 		if !ok {
 			tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Missing dcid for placeId %s", result.PlaceID))
 		} else {
-			// TODO: Deal with place-type checks and multiple results.
 			tinfo.rows[idx] = append(tinfo.rows[idx], dcid, "")
 		}
-		break
 	}
 }
 
@@ -248,8 +247,12 @@ func writeOutput(outCsvPath string, tinfo *tableInfo) error {
 		return err
 	}
 	w := csv.NewWriter(outFile)
-	w.Write(tinfo.header)
-	w.WriteAll(tinfo.rows)
+	if err := w.Write(tinfo.header); err != nil {
+		return err
+	}
+	if err := w.WriteAll(tinfo.rows); err != nil {
+		return err
+	}
 	if err := w.Error(); err != nil {
 		return err
 	}

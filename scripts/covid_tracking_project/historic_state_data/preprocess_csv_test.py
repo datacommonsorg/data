@@ -12,12 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
-import os
 import filecmp
+import os
+import tempfile
+import unittest
+
+TEMPLATE_MCF_GEO = """
+Node: E:COVIDTracking_States->E0
+typeOf: schema:State
+dcid: C:COVIDTracking_States->GeoId
+"""
+
+TEMPLATE_MCF_TEMPLATE = """
+Node: E:COVIDTracking_States->E{index}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+observationAbout: E:COVIDTracking_States->E0
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->{stat_var}
+"""
+
+# module_dir_ is the path to where this test is running from.
+module_dir_ = os.path.dirname(__file__)
 
 
-class PreprocessCSVTest(unittest.TestCase):
+class TestPreprocessCSVTest(unittest.TestCase):
 
     def test_generate_tmcf(self):
         output_columns = [
@@ -28,33 +47,21 @@ class PreprocessCSVTest(unittest.TestCase):
             'COVID19NewNegativeTestResults'
         ]
 
-        TEMPLATE_MCF_GEO = """
-Node: E:COVIDTracking_States->E0
-typeOf: schema:State
-dcid: C:COVIDTracking_States->GeoId
-"""
-
-        TEMPLATE_MCF_TEMPLATE = """
-Node: E:COVIDTracking_States->E{index}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{stat_var}
-observationAbout: E:COVIDTracking_States->E0
-observationDate: C:COVIDTracking_States->Date
-value: C:COVIDTracking_States->{stat_var}
-"""
-
         stat_vars = output_columns[2:]
-        with open('test_tmcf.tmcf', 'w', newline='') as f_out:
-            f_out.write(TEMPLATE_MCF_GEO)
-            for i in range(len(stat_vars)):
-                f_out.write(
-                    TEMPLATE_MCF_TEMPLATE.format_map({
-                        'index': i + 1,
-                        'stat_var': output_columns[2:][i]
-                    }))
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_file = os.path.join(tmp_dir, 'test_tmcf.tmcf')
+            golden_file = os.path.join(module_dir_, 'test_expected_tmcf.tmcf')
+            with open(tmp_file, 'w', newline='') as f_out:
+                f_out.write(TEMPLATE_MCF_GEO)
+                for i in range(len(stat_vars)):
+                    f_out.write(
+                        TEMPLATE_MCF_TEMPLATE.format_map({
+                            'index': i + 1,
+                            'stat_var': output_columns[2:][i]
+                        }))
 
-        same = filecmp.cmp('test_tmcf.tmcf', 'test_expected_tmcf.tmcf')
-        os.remove('test_tmcf.tmcf')
+            same = filecmp.cmp(tmp_file, golden_file)
+            os.remove(tmp_file)
 
         self.assertTrue(same)
 
