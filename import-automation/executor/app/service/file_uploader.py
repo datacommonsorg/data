@@ -39,9 +39,13 @@ class GCSFileUploader(FileUploader):
     Attributes:
         bucket: google.cloud.storage.Bucket object for the bucket files are
             uploaded to.
+        path_prefix: Path prefix in the bucket as a string.
     """
 
-    def __init__(self, project_id: str, bucket_name: str):
+    def __init__(self,
+                 project_id: str,
+                 bucket_name: str,
+                 path_prefix: str = ''):
         """Constructs a GCSFileUploader.
 
         Args:
@@ -49,25 +53,28 @@ class GCSFileUploader(FileUploader):
                 as a string.
             bucket_name: Name of the Cloud Storage Bucket to upload files to,
                 as a string.
+            path_prefix: Path prefix in the bucket as a string.
 
         Raises:
             ValueError: project_id or bucket_name is None, empty, or all spaces.
         """
         _strings_not_empty(project_id, bucket_name)
         self.bucket = storage.Client(project=project_id).bucket(bucket_name)
+        self.path_prefix = path_prefix
 
     def upload_file(self, src: str, dest: str) -> None:
         """Uploads a file to the bucket.
 
         Args:
             src: Path to the file to upload, as a string.
-            dest: Destination in the bucket as a string.
+            dest: Relative destination in the bucket as a string. The actual
+                destination would be {self.path_prefix}/{dest}.
 
         Raises:
             ValueError: src or dest is None, empty, or all spaces.
         """
         _strings_not_empty(src, dest)
-        blob = self.bucket.blob(dest)
+        blob = self.bucket.blob(self._fix_path(dest))
         blob.upload_from_filename(src)
 
     def upload_string(self, string: str, dest: str) -> None:
@@ -75,14 +82,19 @@ class GCSFileUploader(FileUploader):
 
         Args:
             string: The string to upload.
-            dest: Destination in the bucket as a string.
+            dest: Relative destination in the bucket as a string. The actual
+                destination would be {self.path_prefix}/{dest}.
 
         Raises:
             ValueError: dest is None, empty, or all spaces.
         """
         _strings_not_empty(dest)
-        blob = self.bucket.blob(dest)
+        blob = self.bucket.blob(self._fix_path(dest))
         blob.upload_from_string(string)
+
+    def _fix_path(self, path):
+        """Returns {self.path_prefix}/{path}."""
+        return os.path.join(self.path_prefix, path)
 
 
 class LocalFileUploader(FileUploader):
