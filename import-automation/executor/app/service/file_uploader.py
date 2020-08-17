@@ -39,7 +39,8 @@ class GCSFileUploader(FileUploader):
     Attributes:
         bucket: google.cloud.storage.Bucket object for the bucket files are
             uploaded to.
-        path_prefix: Path prefix in the bucket as a string.
+        path_prefix: Path prefix in the bucket as a string. Destinations
+            will be prepended by this prefix.
     """
 
     def __init__(self,
@@ -53,7 +54,8 @@ class GCSFileUploader(FileUploader):
                 as a string.
             bucket_name: Name of the Cloud Storage Bucket to upload files to,
                 as a string.
-            path_prefix: Path prefix in the bucket as a string.
+            path_prefix: Path prefix in the bucket as a string. Destinations
+                will be prepended by this prefix.
 
         Raises:
             ValueError: project_id or bucket_name is None, empty, or all spaces.
