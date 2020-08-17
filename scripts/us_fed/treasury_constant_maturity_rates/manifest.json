@@ -17,7 +17,7 @@
                     "node_mcf": "treasury_constant_maturity_rates.mcf"
                 }
             ],
-            "cron_schedule": "15 5 * * *"
+            "cron_schedule": "15 3 * * *"
         }
     ]
 }

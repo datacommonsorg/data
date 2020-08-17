@@ -26,7 +26,7 @@
                     "node_mcf": "cpi_w_1913_2020.mcf"
                 }
             ],
-            "cron_schedule": "15 20 15 * *"
+            "cron_schedule": "15 17 15 * *"
         }
     ]
 }
