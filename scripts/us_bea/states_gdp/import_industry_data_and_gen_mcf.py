@@ -21,11 +21,16 @@ Also generates the MCF nodes for the data schema.
 
     python3 import_industry_data_and_gen_mcf.py
 """
+import os
 import re
+import sys
 
 from absl import app
 import pandas as pd
-import import_data
+
+# Allows the following module import to work when running as a script
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+from us_bea.states_gdp import import_data
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None  # default='warn'
