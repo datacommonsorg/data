@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import SystemRunTable from './import-table.tsx';
 
 function App() {
