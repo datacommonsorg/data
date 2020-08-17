@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "USBLS_CPIAllItems",
+            "import_name": "USBLS_CPIAllItemsAverage",
             "curator_emails": [
                 "shijunjie@google.com"
             ],
