@@ -127,7 +127,7 @@ class ImportServiceClient:
                 unresolved_mcf_bucket_name bucket, as a string.
             executor_output_prefix: Output prefix in the
                 resolved_mcf_bucket_name bucket, as a string.
-            client_id: Oauth client ID to authenticate with the proxy,
+            client_id: OAuth client ID to authenticate with the proxy,
                 as a string.
         """
         client = storage.Client(project=project_id)
