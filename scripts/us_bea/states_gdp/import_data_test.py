@@ -21,8 +21,8 @@ import os
 import unittest
 
 import pandas as pd
-from us_bea.states_gdp import import_data
-from us_bea.states_gdp import import_industry_data_and_gen_mcf
+import import_data
+import import_industry_data_and_gen_mcf
 
 # _MODULE_DIR is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(__file__)

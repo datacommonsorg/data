@@ -25,7 +25,7 @@ import re
 
 from absl import app
 import pandas as pd
-from us_bea.states_gdp import import_data
+import import_data
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None  # default='warn'
