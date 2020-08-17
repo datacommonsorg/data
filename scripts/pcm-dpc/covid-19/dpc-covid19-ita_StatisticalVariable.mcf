@@ -1,7 +1,7 @@
 Node: dcid:Count_MedicalConditionIncident_COVID_19_PatientHospitalizedWithSymptoms
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:PatientHospitalizedWithSymptoms
@@ -9,7 +9,7 @@ medicalStatus: dcs:PatientHospitalizedWithSymptoms
 Node: dcid:Count_MedicalConditionIncident_COVID_19_PatientInICU
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:PatientInICU
@@ -17,7 +17,7 @@ medicalStatus: dcs:PatientInICU
 Node: dcid:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:PatientHospitalized
@@ -25,7 +25,7 @@ medicalStatus: dcs:PatientHospitalized
 Node: dcid:Count_MedicalConditionIncident_COVID_19_PatientInHomeIsolation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:PatientInHomeIsolation
@@ -33,7 +33,7 @@ medicalStatus: dcs:PatientInHomeIsolation
 Node: dcid:Count_MedicalConditionIncident_COVID_19_ActiveCase
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 medicalStatus: dcs:ActiveCase
@@ -41,7 +41,7 @@ medicalStatus: dcs:ActiveCase
 Node: dcid:IncrementalCount_MedicalConditionIncident_COVID_19_ActiveCase
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
 medicalStatus: dcs:ActiveCase
@@ -49,7 +49,7 @@ medicalStatus: dcs:ActiveCase
 Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
 medicalStatus: dcs:PatientRecovered
@@ -57,7 +57,7 @@ medicalStatus: dcs:PatientRecovered
 Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
 medicalStatus: dcs:PatientDeceased
@@ -65,7 +65,7 @@ medicalStatus: dcs:PatientDeceased
 Node: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
 medicalStatus: dcs:PositiveCase
@@ -73,7 +73,7 @@ medicalStatus: dcs:PositiveCase
 Node: dcid:IncrementalCount_MedicalConditionIncident_COVID_19_PositiveCase
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalConditionIncident
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
 medicalStatus: dcs:PositiveCase
@@ -81,14 +81,14 @@ medicalStatus: dcs:PositiveCase
 Node: dcid:CumulativeCount_MedicalTest_COVID_19
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicaltTest
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
 statType: dcs:measuredValue
 
 Node: dcid:CumulativeCount_Person_COVID_19_Tested
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-incidentType: dcs:COVID_19
+medicalCondition: dcs:COVID_19
 measuredProperty: dcs:cumulativeCount
 medicalStatus: dcs:Tested
 statType: dcs:measuredValue
