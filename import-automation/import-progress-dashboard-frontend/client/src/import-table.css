@@ -2,3 +2,7 @@
     paddingBottom: 0;
     paddingTop: 0
 }
+
+TableCell {
+    text-align: center;
+}
