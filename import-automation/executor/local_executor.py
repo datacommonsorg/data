@@ -74,7 +74,7 @@ flags.DEFINE_string(name='access_token',
 
 flags.mark_flag_as_required('import_name')
 flags.register_validator('import_name',
-                         import_target.absolute_import_name,
+                         import_target.is_absolute_import_name,
                          message=('--import_name must be of the form '
                                   f'{_IMPORT_NAME_FORM}.'))
 
