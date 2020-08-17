@@ -1,3 +1,17 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import pandas as pd
 import re
 
@@ -33,8 +47,8 @@ def generate_statvar(statvars, path):
                        'populationType: schema:Person\n'
                        'age: {age}\n'
                        'measuredProperty: dcs:lifeExpectancy\n'
-                       'statType: dcs:measuredValue\n'
-                       'unit: dcs:Year\n\n')
+                       'statType: dcs:measuredValue\n\n')
+                       
     by_age_gender_template = by_age_template[:-1] + 'gender: schema:{gender}\n\n'
 
     with open(path, 'w') as f_out:
@@ -50,20 +64,6 @@ def generate_statvar(statvars, path):
                     'age':age, 'gender': gender}))
             else:
                 raise Exception("Invalid StatVar")
-
-# Copyright 2020 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
 def generate_tmcf(statvars, path):
     """Generate the template mcf."""

@@ -4,7 +4,6 @@ populationType: schema:Person
 age: [Years 10]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_10Years_Female
 typeOf: dcs:StatisticalVariable
@@ -12,7 +11,6 @@ populationType: schema:Person
 age: [Years 10]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_10Years_Male
@@ -21,7 +19,6 @@ populationType: schema:Person
 age: [Years 10]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_11Years
@@ -30,7 +27,6 @@ populationType: schema:Person
 age: [Years 11]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_11Years_Female
 typeOf: dcs:StatisticalVariable
@@ -38,7 +34,6 @@ populationType: schema:Person
 age: [Years 11]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_11Years_Male
@@ -47,7 +42,6 @@ populationType: schema:Person
 age: [Years 11]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_12Years
@@ -56,7 +50,6 @@ populationType: schema:Person
 age: [Years 12]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_12Years_Female
 typeOf: dcs:StatisticalVariable
@@ -64,7 +57,6 @@ populationType: schema:Person
 age: [Years 12]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_12Years_Male
@@ -73,7 +65,6 @@ populationType: schema:Person
 age: [Years 12]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_13Years
@@ -82,7 +73,6 @@ populationType: schema:Person
 age: [Years 13]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_13Years_Female
 typeOf: dcs:StatisticalVariable
@@ -90,7 +80,6 @@ populationType: schema:Person
 age: [Years 13]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_13Years_Male
@@ -99,7 +88,6 @@ populationType: schema:Person
 age: [Years 13]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_14Years
@@ -108,7 +96,6 @@ populationType: schema:Person
 age: [Years 14]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_14Years_Female
 typeOf: dcs:StatisticalVariable
@@ -116,7 +103,6 @@ populationType: schema:Person
 age: [Years 14]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_14Years_Male
@@ -125,7 +111,6 @@ populationType: schema:Person
 age: [Years 14]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_15Years
@@ -134,7 +119,6 @@ populationType: schema:Person
 age: [Years 15]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_15Years_Female
 typeOf: dcs:StatisticalVariable
@@ -142,7 +126,6 @@ populationType: schema:Person
 age: [Years 15]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_15Years_Male
@@ -151,7 +134,6 @@ populationType: schema:Person
 age: [Years 15]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_16Years
@@ -160,7 +142,6 @@ populationType: schema:Person
 age: [Years 16]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_16Years_Female
 typeOf: dcs:StatisticalVariable
@@ -168,7 +149,6 @@ populationType: schema:Person
 age: [Years 16]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_16Years_Male
@@ -177,7 +157,6 @@ populationType: schema:Person
 age: [Years 16]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_17Years
@@ -186,7 +165,6 @@ populationType: schema:Person
 age: [Years 17]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_17Years_Female
 typeOf: dcs:StatisticalVariable
@@ -194,7 +172,6 @@ populationType: schema:Person
 age: [Years 17]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_17Years_Male
@@ -203,7 +180,6 @@ populationType: schema:Person
 age: [Years 17]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_18Years
@@ -212,7 +188,6 @@ populationType: schema:Person
 age: [Years 18]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_18Years_Female
 typeOf: dcs:StatisticalVariable
@@ -220,7 +195,6 @@ populationType: schema:Person
 age: [Years 18]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_18Years_Male
@@ -229,7 +203,6 @@ populationType: schema:Person
 age: [Years 18]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_19Years
@@ -238,7 +211,6 @@ populationType: schema:Person
 age: [Years 19]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_19Years_Female
 typeOf: dcs:StatisticalVariable
@@ -246,7 +218,6 @@ populationType: schema:Person
 age: [Years 19]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_19Years_Male
@@ -255,7 +226,6 @@ populationType: schema:Person
 age: [Years 19]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_1Years
@@ -264,7 +234,6 @@ populationType: schema:Person
 age: [Years 1]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_1Years_Female
 typeOf: dcs:StatisticalVariable
@@ -272,7 +241,6 @@ populationType: schema:Person
 age: [Years 1]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_1Years_Male
@@ -281,7 +249,6 @@ populationType: schema:Person
 age: [Years 1]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_20Years
@@ -290,7 +257,6 @@ populationType: schema:Person
 age: [Years 20]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_20Years_Female
 typeOf: dcs:StatisticalVariable
@@ -298,7 +264,6 @@ populationType: schema:Person
 age: [Years 20]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_20Years_Male
@@ -307,7 +272,6 @@ populationType: schema:Person
 age: [Years 20]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_21Years
@@ -316,7 +280,6 @@ populationType: schema:Person
 age: [Years 21]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_21Years_Female
 typeOf: dcs:StatisticalVariable
@@ -324,7 +287,6 @@ populationType: schema:Person
 age: [Years 21]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_21Years_Male
@@ -333,7 +295,6 @@ populationType: schema:Person
 age: [Years 21]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_22Years
@@ -342,7 +303,6 @@ populationType: schema:Person
 age: [Years 22]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_22Years_Female
 typeOf: dcs:StatisticalVariable
@@ -350,7 +310,6 @@ populationType: schema:Person
 age: [Years 22]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_22Years_Male
@@ -359,7 +318,6 @@ populationType: schema:Person
 age: [Years 22]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_23Years
@@ -368,7 +326,6 @@ populationType: schema:Person
 age: [Years 23]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_23Years_Female
 typeOf: dcs:StatisticalVariable
@@ -376,7 +333,6 @@ populationType: schema:Person
 age: [Years 23]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_23Years_Male
@@ -385,7 +341,6 @@ populationType: schema:Person
 age: [Years 23]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_24Years
@@ -394,7 +349,6 @@ populationType: schema:Person
 age: [Years 24]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_24Years_Female
 typeOf: dcs:StatisticalVariable
@@ -402,7 +356,6 @@ populationType: schema:Person
 age: [Years 24]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_24Years_Male
@@ -411,7 +364,6 @@ populationType: schema:Person
 age: [Years 24]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_25Years
@@ -420,7 +372,6 @@ populationType: schema:Person
 age: [Years 25]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_25Years_Female
 typeOf: dcs:StatisticalVariable
@@ -428,7 +379,6 @@ populationType: schema:Person
 age: [Years 25]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_25Years_Male
@@ -437,7 +387,6 @@ populationType: schema:Person
 age: [Years 25]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_26Years
@@ -446,7 +395,6 @@ populationType: schema:Person
 age: [Years 26]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_26Years_Female
 typeOf: dcs:StatisticalVariable
@@ -454,7 +402,6 @@ populationType: schema:Person
 age: [Years 26]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_26Years_Male
@@ -463,7 +410,6 @@ populationType: schema:Person
 age: [Years 26]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_27Years
@@ -472,7 +418,6 @@ populationType: schema:Person
 age: [Years 27]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_27Years_Female
 typeOf: dcs:StatisticalVariable
@@ -480,7 +425,6 @@ populationType: schema:Person
 age: [Years 27]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_27Years_Male
@@ -489,7 +433,6 @@ populationType: schema:Person
 age: [Years 27]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_28Years
@@ -498,7 +441,6 @@ populationType: schema:Person
 age: [Years 28]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_28Years_Female
 typeOf: dcs:StatisticalVariable
@@ -506,7 +448,6 @@ populationType: schema:Person
 age: [Years 28]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_28Years_Male
@@ -515,7 +456,6 @@ populationType: schema:Person
 age: [Years 28]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_29Years
@@ -524,7 +464,6 @@ populationType: schema:Person
 age: [Years 29]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_29Years_Female
 typeOf: dcs:StatisticalVariable
@@ -532,7 +471,6 @@ populationType: schema:Person
 age: [Years 29]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_29Years_Male
@@ -541,7 +479,6 @@ populationType: schema:Person
 age: [Years 29]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_2Years
@@ -550,7 +487,6 @@ populationType: schema:Person
 age: [Years 2]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_2Years_Female
 typeOf: dcs:StatisticalVariable
@@ -558,7 +494,6 @@ populationType: schema:Person
 age: [Years 2]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_2Years_Male
@@ -567,7 +502,6 @@ populationType: schema:Person
 age: [Years 2]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_30Years
@@ -576,7 +510,6 @@ populationType: schema:Person
 age: [Years 30]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_30Years_Female
 typeOf: dcs:StatisticalVariable
@@ -584,7 +517,6 @@ populationType: schema:Person
 age: [Years 30]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_30Years_Male
@@ -593,7 +525,6 @@ populationType: schema:Person
 age: [Years 30]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_31Years
@@ -602,7 +533,6 @@ populationType: schema:Person
 age: [Years 31]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_31Years_Female
 typeOf: dcs:StatisticalVariable
@@ -610,7 +540,6 @@ populationType: schema:Person
 age: [Years 31]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_31Years_Male
@@ -619,7 +548,6 @@ populationType: schema:Person
 age: [Years 31]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_32Years
@@ -628,7 +556,6 @@ populationType: schema:Person
 age: [Years 32]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_32Years_Female
 typeOf: dcs:StatisticalVariable
@@ -636,7 +563,6 @@ populationType: schema:Person
 age: [Years 32]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_32Years_Male
@@ -645,7 +571,6 @@ populationType: schema:Person
 age: [Years 32]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_33Years
@@ -654,7 +579,6 @@ populationType: schema:Person
 age: [Years 33]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_33Years_Female
 typeOf: dcs:StatisticalVariable
@@ -662,7 +586,6 @@ populationType: schema:Person
 age: [Years 33]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_33Years_Male
@@ -671,7 +594,6 @@ populationType: schema:Person
 age: [Years 33]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_34Years
@@ -680,7 +602,6 @@ populationType: schema:Person
 age: [Years 34]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_34Years_Female
 typeOf: dcs:StatisticalVariable
@@ -688,7 +609,6 @@ populationType: schema:Person
 age: [Years 34]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_34Years_Male
@@ -697,7 +617,6 @@ populationType: schema:Person
 age: [Years 34]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_35Years
@@ -706,7 +625,6 @@ populationType: schema:Person
 age: [Years 35]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_35Years_Female
 typeOf: dcs:StatisticalVariable
@@ -714,7 +632,6 @@ populationType: schema:Person
 age: [Years 35]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_35Years_Male
@@ -723,7 +640,6 @@ populationType: schema:Person
 age: [Years 35]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_36Years
@@ -732,7 +648,6 @@ populationType: schema:Person
 age: [Years 36]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_36Years_Female
 typeOf: dcs:StatisticalVariable
@@ -740,7 +655,6 @@ populationType: schema:Person
 age: [Years 36]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_36Years_Male
@@ -749,7 +663,6 @@ populationType: schema:Person
 age: [Years 36]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_37Years
@@ -758,7 +671,6 @@ populationType: schema:Person
 age: [Years 37]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_37Years_Female
 typeOf: dcs:StatisticalVariable
@@ -766,7 +678,6 @@ populationType: schema:Person
 age: [Years 37]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_37Years_Male
@@ -775,7 +686,6 @@ populationType: schema:Person
 age: [Years 37]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_38Years
@@ -784,7 +694,6 @@ populationType: schema:Person
 age: [Years 38]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_38Years_Female
 typeOf: dcs:StatisticalVariable
@@ -792,7 +701,6 @@ populationType: schema:Person
 age: [Years 38]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_38Years_Male
@@ -801,7 +709,6 @@ populationType: schema:Person
 age: [Years 38]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_39Years
@@ -810,7 +717,6 @@ populationType: schema:Person
 age: [Years 39]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_39Years_Female
 typeOf: dcs:StatisticalVariable
@@ -818,7 +724,6 @@ populationType: schema:Person
 age: [Years 39]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_39Years_Male
@@ -827,7 +732,6 @@ populationType: schema:Person
 age: [Years 39]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_3Years
@@ -836,7 +740,6 @@ populationType: schema:Person
 age: [Years 3]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_3Years_Female
 typeOf: dcs:StatisticalVariable
@@ -844,7 +747,6 @@ populationType: schema:Person
 age: [Years 3]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_3Years_Male
@@ -853,7 +755,6 @@ populationType: schema:Person
 age: [Years 3]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_40Years
@@ -862,7 +763,6 @@ populationType: schema:Person
 age: [Years 40]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_40Years_Female
 typeOf: dcs:StatisticalVariable
@@ -870,7 +770,6 @@ populationType: schema:Person
 age: [Years 40]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_40Years_Male
@@ -879,7 +778,6 @@ populationType: schema:Person
 age: [Years 40]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_41Years
@@ -888,7 +786,6 @@ populationType: schema:Person
 age: [Years 41]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_41Years_Female
 typeOf: dcs:StatisticalVariable
@@ -896,7 +793,6 @@ populationType: schema:Person
 age: [Years 41]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_41Years_Male
@@ -905,7 +801,6 @@ populationType: schema:Person
 age: [Years 41]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_42Years
@@ -914,7 +809,6 @@ populationType: schema:Person
 age: [Years 42]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_42Years_Female
 typeOf: dcs:StatisticalVariable
@@ -922,7 +816,6 @@ populationType: schema:Person
 age: [Years 42]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_42Years_Male
@@ -931,7 +824,6 @@ populationType: schema:Person
 age: [Years 42]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_43Years
@@ -940,7 +832,6 @@ populationType: schema:Person
 age: [Years 43]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_43Years_Female
 typeOf: dcs:StatisticalVariable
@@ -948,7 +839,6 @@ populationType: schema:Person
 age: [Years 43]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_43Years_Male
@@ -957,7 +847,6 @@ populationType: schema:Person
 age: [Years 43]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_44Years
@@ -966,7 +855,6 @@ populationType: schema:Person
 age: [Years 44]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_44Years_Female
 typeOf: dcs:StatisticalVariable
@@ -974,7 +862,6 @@ populationType: schema:Person
 age: [Years 44]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_44Years_Male
@@ -983,7 +870,6 @@ populationType: schema:Person
 age: [Years 44]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_45Years
@@ -992,7 +878,6 @@ populationType: schema:Person
 age: [Years 45]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_45Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1000,7 +885,6 @@ populationType: schema:Person
 age: [Years 45]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_45Years_Male
@@ -1009,7 +893,6 @@ populationType: schema:Person
 age: [Years 45]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_46Years
@@ -1018,7 +901,6 @@ populationType: schema:Person
 age: [Years 46]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_46Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1026,7 +908,6 @@ populationType: schema:Person
 age: [Years 46]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_46Years_Male
@@ -1035,7 +916,6 @@ populationType: schema:Person
 age: [Years 46]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_47Years
@@ -1044,7 +924,6 @@ populationType: schema:Person
 age: [Years 47]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_47Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1052,7 +931,6 @@ populationType: schema:Person
 age: [Years 47]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_47Years_Male
@@ -1061,7 +939,6 @@ populationType: schema:Person
 age: [Years 47]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_48Years
@@ -1070,7 +947,6 @@ populationType: schema:Person
 age: [Years 48]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_48Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1078,7 +954,6 @@ populationType: schema:Person
 age: [Years 48]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_48Years_Male
@@ -1087,7 +962,6 @@ populationType: schema:Person
 age: [Years 48]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_49Years
@@ -1096,7 +970,6 @@ populationType: schema:Person
 age: [Years 49]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_49Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1104,7 +977,6 @@ populationType: schema:Person
 age: [Years 49]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_49Years_Male
@@ -1113,7 +985,6 @@ populationType: schema:Person
 age: [Years 49]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_4Years
@@ -1122,7 +993,6 @@ populationType: schema:Person
 age: [Years 4]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_4Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1130,7 +1000,6 @@ populationType: schema:Person
 age: [Years 4]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_4Years_Male
@@ -1139,7 +1008,6 @@ populationType: schema:Person
 age: [Years 4]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_50Years
@@ -1148,7 +1016,6 @@ populationType: schema:Person
 age: [Years 50]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_50Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1156,7 +1023,6 @@ populationType: schema:Person
 age: [Years 50]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_50Years_Male
@@ -1165,7 +1031,6 @@ populationType: schema:Person
 age: [Years 50]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_51Years
@@ -1174,7 +1039,6 @@ populationType: schema:Person
 age: [Years 51]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_51Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1182,7 +1046,6 @@ populationType: schema:Person
 age: [Years 51]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_51Years_Male
@@ -1191,7 +1054,6 @@ populationType: schema:Person
 age: [Years 51]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_52Years
@@ -1200,7 +1062,6 @@ populationType: schema:Person
 age: [Years 52]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_52Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1208,7 +1069,6 @@ populationType: schema:Person
 age: [Years 52]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_52Years_Male
@@ -1217,7 +1077,6 @@ populationType: schema:Person
 age: [Years 52]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_53Years
@@ -1226,7 +1085,6 @@ populationType: schema:Person
 age: [Years 53]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_53Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1234,7 +1092,6 @@ populationType: schema:Person
 age: [Years 53]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_53Years_Male
@@ -1243,7 +1100,6 @@ populationType: schema:Person
 age: [Years 53]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_54Years
@@ -1252,7 +1108,6 @@ populationType: schema:Person
 age: [Years 54]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_54Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1260,7 +1115,6 @@ populationType: schema:Person
 age: [Years 54]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_54Years_Male
@@ -1269,7 +1123,6 @@ populationType: schema:Person
 age: [Years 54]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_55Years
@@ -1278,7 +1131,6 @@ populationType: schema:Person
 age: [Years 55]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_55Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1286,7 +1138,6 @@ populationType: schema:Person
 age: [Years 55]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_55Years_Male
@@ -1295,7 +1146,6 @@ populationType: schema:Person
 age: [Years 55]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_56Years
@@ -1304,7 +1154,6 @@ populationType: schema:Person
 age: [Years 56]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_56Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1312,7 +1161,6 @@ populationType: schema:Person
 age: [Years 56]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_56Years_Male
@@ -1321,7 +1169,6 @@ populationType: schema:Person
 age: [Years 56]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_57Years
@@ -1330,7 +1177,6 @@ populationType: schema:Person
 age: [Years 57]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_57Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1338,7 +1184,6 @@ populationType: schema:Person
 age: [Years 57]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_57Years_Male
@@ -1347,7 +1192,6 @@ populationType: schema:Person
 age: [Years 57]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_58Years
@@ -1356,7 +1200,6 @@ populationType: schema:Person
 age: [Years 58]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_58Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1364,7 +1207,6 @@ populationType: schema:Person
 age: [Years 58]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_58Years_Male
@@ -1373,7 +1215,6 @@ populationType: schema:Person
 age: [Years 58]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_59Years
@@ -1382,7 +1223,6 @@ populationType: schema:Person
 age: [Years 59]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_59Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1390,7 +1230,6 @@ populationType: schema:Person
 age: [Years 59]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_59Years_Male
@@ -1399,7 +1238,6 @@ populationType: schema:Person
 age: [Years 59]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_5Years
@@ -1408,7 +1246,6 @@ populationType: schema:Person
 age: [Years 5]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_5Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1416,7 +1253,6 @@ populationType: schema:Person
 age: [Years 5]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_5Years_Male
@@ -1425,7 +1261,6 @@ populationType: schema:Person
 age: [Years 5]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_60Years
@@ -1434,7 +1269,6 @@ populationType: schema:Person
 age: [Years 60]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_60Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1442,7 +1276,6 @@ populationType: schema:Person
 age: [Years 60]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_60Years_Male
@@ -1451,7 +1284,6 @@ populationType: schema:Person
 age: [Years 60]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_61Years
@@ -1460,7 +1292,6 @@ populationType: schema:Person
 age: [Years 61]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_61Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1468,7 +1299,6 @@ populationType: schema:Person
 age: [Years 61]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_61Years_Male
@@ -1477,7 +1307,6 @@ populationType: schema:Person
 age: [Years 61]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_62Years
@@ -1486,7 +1315,6 @@ populationType: schema:Person
 age: [Years 62]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_62Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1494,7 +1322,6 @@ populationType: schema:Person
 age: [Years 62]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_62Years_Male
@@ -1503,7 +1330,6 @@ populationType: schema:Person
 age: [Years 62]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_63Years
@@ -1512,7 +1338,6 @@ populationType: schema:Person
 age: [Years 63]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_63Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1520,7 +1345,6 @@ populationType: schema:Person
 age: [Years 63]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_63Years_Male
@@ -1529,7 +1353,6 @@ populationType: schema:Person
 age: [Years 63]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_64Years
@@ -1538,7 +1361,6 @@ populationType: schema:Person
 age: [Years 64]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_64Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1546,7 +1368,6 @@ populationType: schema:Person
 age: [Years 64]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_64Years_Male
@@ -1555,7 +1376,6 @@ populationType: schema:Person
 age: [Years 64]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_65Years
@@ -1564,7 +1384,6 @@ populationType: schema:Person
 age: [Years 65]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_65Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1572,7 +1391,6 @@ populationType: schema:Person
 age: [Years 65]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_65Years_Male
@@ -1581,7 +1399,6 @@ populationType: schema:Person
 age: [Years 65]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_66Years
@@ -1590,7 +1407,6 @@ populationType: schema:Person
 age: [Years 66]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_66Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1598,7 +1414,6 @@ populationType: schema:Person
 age: [Years 66]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_66Years_Male
@@ -1607,7 +1422,6 @@ populationType: schema:Person
 age: [Years 66]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_67Years
@@ -1616,7 +1430,6 @@ populationType: schema:Person
 age: [Years 67]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_67Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1624,7 +1437,6 @@ populationType: schema:Person
 age: [Years 67]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_67Years_Male
@@ -1633,7 +1445,6 @@ populationType: schema:Person
 age: [Years 67]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_68Years
@@ -1642,7 +1453,6 @@ populationType: schema:Person
 age: [Years 68]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_68Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1650,7 +1460,6 @@ populationType: schema:Person
 age: [Years 68]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_68Years_Male
@@ -1659,7 +1468,6 @@ populationType: schema:Person
 age: [Years 68]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_69Years
@@ -1668,7 +1476,6 @@ populationType: schema:Person
 age: [Years 69]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_69Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1676,7 +1483,6 @@ populationType: schema:Person
 age: [Years 69]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_69Years_Male
@@ -1685,7 +1491,6 @@ populationType: schema:Person
 age: [Years 69]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_6Years
@@ -1694,7 +1499,6 @@ populationType: schema:Person
 age: [Years 6]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_6Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1702,7 +1506,6 @@ populationType: schema:Person
 age: [Years 6]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_6Years_Male
@@ -1711,7 +1514,6 @@ populationType: schema:Person
 age: [Years 6]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_70Years
@@ -1720,7 +1522,6 @@ populationType: schema:Person
 age: [Years 70]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_70Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1728,7 +1529,6 @@ populationType: schema:Person
 age: [Years 70]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_70Years_Male
@@ -1737,7 +1537,6 @@ populationType: schema:Person
 age: [Years 70]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_71Years
@@ -1746,7 +1545,6 @@ populationType: schema:Person
 age: [Years 71]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_71Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1754,7 +1552,6 @@ populationType: schema:Person
 age: [Years 71]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_71Years_Male
@@ -1763,7 +1560,6 @@ populationType: schema:Person
 age: [Years 71]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_72Years
@@ -1772,7 +1568,6 @@ populationType: schema:Person
 age: [Years 72]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_72Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1780,7 +1575,6 @@ populationType: schema:Person
 age: [Years 72]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_72Years_Male
@@ -1789,7 +1583,6 @@ populationType: schema:Person
 age: [Years 72]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_73Years
@@ -1798,7 +1591,6 @@ populationType: schema:Person
 age: [Years 73]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_73Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1806,7 +1598,6 @@ populationType: schema:Person
 age: [Years 73]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_73Years_Male
@@ -1815,7 +1606,6 @@ populationType: schema:Person
 age: [Years 73]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_74Years
@@ -1824,7 +1614,6 @@ populationType: schema:Person
 age: [Years 74]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_74Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1832,7 +1621,6 @@ populationType: schema:Person
 age: [Years 74]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_74Years_Male
@@ -1841,7 +1629,6 @@ populationType: schema:Person
 age: [Years 74]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_75Years
@@ -1850,7 +1637,6 @@ populationType: schema:Person
 age: [Years 75]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_75Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1858,7 +1644,6 @@ populationType: schema:Person
 age: [Years 75]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_75Years_Male
@@ -1867,7 +1652,6 @@ populationType: schema:Person
 age: [Years 75]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_76Years
@@ -1876,7 +1660,6 @@ populationType: schema:Person
 age: [Years 76]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_76Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1884,7 +1667,6 @@ populationType: schema:Person
 age: [Years 76]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_76Years_Male
@@ -1893,7 +1675,6 @@ populationType: schema:Person
 age: [Years 76]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_77Years
@@ -1902,7 +1683,6 @@ populationType: schema:Person
 age: [Years 77]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_77Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1910,7 +1690,6 @@ populationType: schema:Person
 age: [Years 77]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_77Years_Male
@@ -1919,7 +1698,6 @@ populationType: schema:Person
 age: [Years 77]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_78Years
@@ -1928,7 +1706,6 @@ populationType: schema:Person
 age: [Years 78]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_78Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1936,7 +1713,6 @@ populationType: schema:Person
 age: [Years 78]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_78Years_Male
@@ -1945,7 +1721,6 @@ populationType: schema:Person
 age: [Years 78]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_79Years
@@ -1954,7 +1729,6 @@ populationType: schema:Person
 age: [Years 79]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_79Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1962,7 +1736,6 @@ populationType: schema:Person
 age: [Years 79]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_79Years_Male
@@ -1971,7 +1744,6 @@ populationType: schema:Person
 age: [Years 79]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_7Years
@@ -1980,7 +1752,6 @@ populationType: schema:Person
 age: [Years 7]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_7Years_Female
 typeOf: dcs:StatisticalVariable
@@ -1988,7 +1759,6 @@ populationType: schema:Person
 age: [Years 7]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_7Years_Male
@@ -1997,7 +1767,6 @@ populationType: schema:Person
 age: [Years 7]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_80Years
@@ -2006,7 +1775,6 @@ populationType: schema:Person
 age: [Years 80]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_80Years_Female
 typeOf: dcs:StatisticalVariable
@@ -2014,7 +1782,6 @@ populationType: schema:Person
 age: [Years 80]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_80Years_Male
@@ -2023,7 +1790,6 @@ populationType: schema:Person
 age: [Years 80]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_81Years
@@ -2032,7 +1798,6 @@ populationType: schema:Person
 age: [Years 81]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_81Years_Female
 typeOf: dcs:StatisticalVariable
@@ -2040,7 +1805,6 @@ populationType: schema:Person
 age: [Years 81]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_81Years_Male
@@ -2049,7 +1813,6 @@ populationType: schema:Person
 age: [Years 81]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_82Years
@@ -2058,7 +1821,6 @@ populationType: schema:Person
 age: [Years 82]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_82Years_Female
 typeOf: dcs:StatisticalVariable
@@ -2066,7 +1828,6 @@ populationType: schema:Person
 age: [Years 82]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_82Years_Male
@@ -2075,7 +1836,6 @@ populationType: schema:Person
 age: [Years 82]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_83Years
@@ -2084,7 +1844,6 @@ populationType: schema:Person
 age: [Years 83]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_83Years_Female
 typeOf: dcs:StatisticalVariable
@@ -2092,7 +1851,6 @@ populationType: schema:Person
 age: [Years 83]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_83Years_Male
@@ -2101,7 +1859,6 @@ populationType: schema:Person
 age: [Years 83]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_84Years
@@ -2110,7 +1867,6 @@ populationType: schema:Person
 age: [Years 84]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_84Years_Female
 typeOf: dcs:StatisticalVariable
@@ -2118,7 +1874,6 @@ populationType: schema:Person
 age: [Years 84]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_84Years_Male
@@ -2127,7 +1882,6 @@ populationType: schema:Person
 age: [Years 84]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_85OrMoreYears
@@ -2136,7 +1890,6 @@ populationType: schema:Person
 age: [Years 85 -]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_85OrMoreYears_Female
 typeOf: dcs:StatisticalVariable
@@ -2144,7 +1897,6 @@ populationType: schema:Person
 age: [Years 85 -]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_85OrMoreYears_Male
@@ -2153,7 +1905,6 @@ populationType: schema:Person
 age: [Years 85 -]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_8Years
@@ -2162,7 +1913,6 @@ populationType: schema:Person
 age: [Years 8]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_8Years_Female
 typeOf: dcs:StatisticalVariable
@@ -2170,7 +1920,6 @@ populationType: schema:Person
 age: [Years 8]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_8Years_Male
@@ -2179,7 +1928,6 @@ populationType: schema:Person
 age: [Years 8]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_9Years
@@ -2188,7 +1936,6 @@ populationType: schema:Person
 age: [Years 9]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_9Years_Female
 typeOf: dcs:StatisticalVariable
@@ -2196,7 +1943,6 @@ populationType: schema:Person
 age: [Years 9]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_9Years_Male
@@ -2205,7 +1951,6 @@ populationType: schema:Person
 age: [Years 9]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 
 Node: dcid:LifeExpectancy_Person_Upto1Years
@@ -2214,7 +1959,6 @@ populationType: schema:Person
 age: [Years - 1]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 
 Node: dcid:LifeExpectancy_Person_Upto1Years_Female
 typeOf: dcs:StatisticalVariable
@@ -2222,7 +1966,6 @@ populationType: schema:Person
 age: [Years - 1]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Female
 
 Node: dcid:LifeExpectancy_Person_Upto1Years_Male
@@ -2231,6 +1974,5 @@ populationType: schema:Person
 age: [Years - 1]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
-unit: dcs:Year
 gender: schema:Male
 

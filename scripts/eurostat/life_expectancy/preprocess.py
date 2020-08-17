@@ -70,8 +70,8 @@ def preprocess(filepath):
     data_country = data[data['geo'].str.len() <= 2]
     data_nuts = data[~(data['geo'].str.len() <= 2)]
     data_country = nuts_to_iso(data_country) # convert nuts code to ISO Alpha-3
-    data.loc[data_country.index,'geo'] = 'country/' + data_country['geo']
-    data.loc[data_nuts.index, 'geo'] = 'nuts/' + data_nuts['geo']
+    data.loc[data_country.index,'geo'] = 'dcid:country/' + data_country['geo']
+    data.loc[data_nuts.index, 'geo'] = 'dcid:nuts/' + data_nuts['geo']
 
     # Separate data of different StatVars from one column into multiple columns
     # For example: 
