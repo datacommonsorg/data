@@ -15,6 +15,7 @@
  */
 
 import React from 'react';
+import { styled } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -29,7 +30,20 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
-import './import-table.css';
+import "./import-table.css"
+
+
+const RightAlignTableCell = styled(TableCell)({
+  textAlign: "right"
+});
+
+const LeftAlignTableCell = styled(TableCell)({
+  textAlign: "left"
+});
+
+
+// const NoTopBottomPaddingTableCell
+
 
 /**
  * A system run describes a run of the executor. A run can perform multiple
@@ -126,9 +140,9 @@ class ImportAttemptRow extends
   _generateLogRows() {
     return this.state.logs.map((log) => (
       <TableRow key={log.logId}>
-        <TableCell align="right">{log.timeLogged}</TableCell>
-        <TableCell align="right">{log.level}</TableCell>
-        <TableCell align="left">{log.message}</TableCell>
+        <RightAlignTableCell>{log.timeLogged}</RightAlignTableCell>
+        <RightAlignTableCell>{log.level}</RightAlignTableCell>
+        <LeftAlignTableCell>{log.message}</LeftAlignTableCell>
       </TableRow>
     ));
   }
@@ -137,7 +151,7 @@ class ImportAttemptRow extends
     return (
       <React.Fragment>
         <TableRow>
-          <TableCell>
+          <RightAlignTableCell>
             <IconButton aria-label="Show Logs" size="small"
               onClick={() => this.setState({open: !this.state.open})}>
               {
@@ -146,28 +160,28 @@ class ImportAttemptRow extends
                   <KeyboardArrowDownIcon />
               }
             </IconButton>
-          </TableCell>
-          <TableCell align="right">
+          </RightAlignTableCell>
+          <RightAlignTableCell>
             {this.props.attempt.absoluteImportName}
-          </TableCell>
-          <TableCell align="right">
+          </RightAlignTableCell>
+          <RightAlignTableCell>
             {this.props.attempt.status}
-          </TableCell>
-          <TableCell align="right">
+          </RightAlignTableCell>
+          <RightAlignTableCell>
             {this.props.attempt.timeCreated}
-          </TableCell>
-          <TableCell align="right">
+          </RightAlignTableCell>
+          <RightAlignTableCell>
             {this.props.attempt.timeCompleted}
-          </TableCell>
-          <TableCell align="right">
+          </RightAlignTableCell>
+          <RightAlignTableCell>
             {this.props.attempt.provenanceUrl}
-          </TableCell>
-          <TableCell align="right">
+          </RightAlignTableCell>
+          <RightAlignTableCell>
             {this.props.attempt.provenanceDescription}
-          </TableCell>
+          </RightAlignTableCell>
         </TableRow>
         <TableRow>
-          <TableCell id="attemptLogsCell" colSpan={10}>
+          <RightAlignTableCell id="attemptLogsCell" colSpan={10}>
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom component="div">
@@ -176,9 +190,9 @@ class ImportAttemptRow extends
                 <Table size="small" aria-label="Logs">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="right">Time Logged</TableCell>
-                      <TableCell align="right">Level</TableCell>
-                      <TableCell align="left">Message</TableCell>
+                      <RightAlignTableCell>Time Logged</RightAlignTableCell>
+                      <RightAlignTableCell>Level</RightAlignTableCell>
+                      <LeftAlignTableCell>Message</LeftAlignTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -187,7 +201,7 @@ class ImportAttemptRow extends
                 </Table>
               </Box>
             </Collapse>
-          </TableCell>
+          </RightAlignTableCell>
         </TableRow>
       </React.Fragment>
     );
@@ -270,9 +284,9 @@ class SystemRunRow extends
   _generateLogRows() {
     return this.state.logs.map((log) => (
       <TableRow key={log.logId}>
-        <TableCell align="right">{log.timeLogged}</TableCell>
-        <TableCell align="right">{log.level}</TableCell>
-        <TableCell align="left">{log.message}</TableCell>
+        <RightAlignTableCell>{log.timeLogged}</RightAlignTableCell>
+        <RightAlignTableCell>{log.level}</RightAlignTableCell>
+        <LeftAlignTableCell>{log.message}</LeftAlignTableCell>
       </TableRow>
     ));
   }
@@ -281,7 +295,7 @@ class SystemRunRow extends
     return (
       <React.Fragment>
         <TableRow>
-          <TableCell>
+          <RightAlignTableCell>
             <IconButton aria-label="Show Import Attempts" size="small"
               onClick={() => this.setState({open: !this.state.open})}>
               {
@@ -290,14 +304,18 @@ class SystemRunRow extends
                   <KeyboardArrowDownIcon />
               }
             </IconButton>
-          </TableCell>
-          <TableCell align="right">{this.props.run.status}</TableCell>
-          <TableCell align="right">{this.props.run.timeCreated}</TableCell>
-          <TableCell align="right">{this.props.run.timeCompleted}</TableCell>
-          <TableCell align="right">{this.props.run.repoName}</TableCell>
-          <TableCell align="right">{this.props.run.branchName}</TableCell>
-          <TableCell align="right">{this.props.run.prNumber}</TableCell>
-          <TableCell align="right">{this.props.run.commitSha}</TableCell>
+          </RightAlignTableCell>
+          <RightAlignTableCell>{this.props.run.status}</RightAlignTableCell>
+          <RightAlignTableCell>
+            {this.props.run.timeCreated}
+          </RightAlignTableCell>
+          <RightAlignTableCell>
+            {this.props.run.timeCompleted}
+          </RightAlignTableCell>
+          <RightAlignTableCell>{this.props.run.repoName}</RightAlignTableCell>
+          <RightAlignTableCell>{this.props.run.branchName}</RightAlignTableCell>
+          <RightAlignTableCell>{this.props.run.prNumber}</RightAlignTableCell>
+          <RightAlignTableCell>{this.props.run.commitSha}</RightAlignTableCell>
         </TableRow>
         <TableRow>
           <TableCell id="runLogsCell" colSpan={10}>
@@ -309,9 +327,9 @@ class SystemRunRow extends
                 <Table size="small" aria-label="System Run Logs">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="right">Time Logged</TableCell>
-                      <TableCell align="right">Level</TableCell>
-                      <TableCell align="left">Message</TableCell>
+                      <RightAlignTableCell>Time Logged</RightAlignTableCell>
+                      <RightAlignTableCell>Level</RightAlignTableCell>
+                      <LeftAlignTableCell>Message</LeftAlignTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -324,15 +342,15 @@ class SystemRunRow extends
                 <Table size="small" aria-label="Import Attempts">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="right"></TableCell>
-                      <TableCell align="right">Import Name</TableCell>
-                      <TableCell align="right">Status</TableCell>
-                      <TableCell align="right">Time Created</TableCell>
-                      <TableCell align="right">Time Completed</TableCell>
-                      <TableCell align="right">Provenance URL</TableCell>
-                      <TableCell align="right">
+                      <RightAlignTableCell></RightAlignTableCell>
+                      <RightAlignTableCell>Import Name</RightAlignTableCell>
+                      <RightAlignTableCell>Status</RightAlignTableCell>
+                      <RightAlignTableCell>Time Created</RightAlignTableCell>
+                      <RightAlignTableCell>Time Completed</RightAlignTableCell>
+                      <RightAlignTableCell>Provenance URL</RightAlignTableCell>
+                      <RightAlignTableCell>
                         Provenance Description
-                      </TableCell>
+                      </RightAlignTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -397,14 +415,14 @@ export default class SystemRunTable extends
         <Table aria-label="System Run Table">
           <TableHead>
             <TableRow>
-              <TableCell><b>System Runs</b></TableCell>
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Time Created</TableCell>
-              <TableCell align="right">Time Completed</TableCell>
-              <TableCell align="right">Repo Name</TableCell>
-              <TableCell align="right">Branch Name</TableCell>
-              <TableCell align="right">PR Number</TableCell>
-              <TableCell align="right">Commit SHA</TableCell>
+              <RightAlignTableCell><b>System Runs</b></RightAlignTableCell>
+              <RightAlignTableCell>Status</RightAlignTableCell>
+              <RightAlignTableCell>Time Created</RightAlignTableCell>
+              <RightAlignTableCell>Time Completed</RightAlignTableCell>
+              <RightAlignTableCell>Repo Name</RightAlignTableCell>
+              <RightAlignTableCell>Branch Name</RightAlignTableCell>
+              <RightAlignTableCell>PR Number</RightAlignTableCell>
+              <RightAlignTableCell>Commit SHA</RightAlignTableCell>
             </TableRow>
           </TableHead>
           <TableBody>

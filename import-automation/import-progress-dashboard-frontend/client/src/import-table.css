@@ -1,8 +1,4 @@
 #attemptLogsCell, #runLogsCell {
-    paddingBottom: 0;
-    paddingTop: 0
-}
-
-TableCell {
-    text-align: center;
+    padding-bottom: 0;
+    padding-top: 0;
 }
