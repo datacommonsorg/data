@@ -29,7 +29,9 @@ from absl import app
 import pandas as pd
 
 # Allows the following module import to work when running as a script
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
 from us_bea.states_gdp import import_data
 
 # Suppress annoying pandas DF copy warnings.
