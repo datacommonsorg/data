@@ -25,19 +25,24 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('database', None,
-                    'database file path.', short_name='f')
+flags.DEFINE_string('database', None, 'database file path.', short_name='f')
 
-flags.DEFINE_string('psimi_to_dcid', 'psimi2dcid.txt',
-                    'psimi2dcid.txt file path.', short_name='p')
+flags.DEFINE_string('psimi_to_dcid',
+                    'psimi2dcid.txt',
+                    'psimi2dcid.txt file path.',
+                    short_name='p')
 
-flags.DEFINE_string('output_mcf', 'BioMINTData.mcf',
-                    'The output data mcf file path.', short_name='m')
+flags.DEFINE_string('output_mcf',
+                    'BioMINTData.mcf',
+                    'The output data mcf file path.',
+                    short_name='m')
 
 flags.DEFINE_string('new_source', "new_source.txt", 'new source file path.')
 
-flags.DEFINE_boolean('output_failed', False,
-                     'If output the files containing failed cases or not.', short_name='o')
+flags.DEFINE_boolean('output_failed',
+                     False,
+                     'If output the files containing failed cases or not.',
+                     short_name='o')
 
 flags.DEFINE_string('no_uniprot', 'no_uniprot_cases.txt',
                     'The cases which don\'t have uniprot.')
@@ -61,19 +66,20 @@ def get_references(term):
     id_content = term[len(source) + 1:]
     new_source_map = {}
     if source == 'pubmed':
-        property_line = 'pubMedID: ' + '"' + id_content +'"'
+        property_line = 'pubMedID: ' + '"' + id_content + '"'
     elif source == 'imex':
-        property_line = 'imexID: ' + '"' + id_content +'"'
+        property_line = 'imexID: ' + '"' + id_content + '"'
     elif source == 'mint':
-        property_line = 'mintID: ' + '"' + id_content +'"'
+        property_line = 'mintID: ' + '"' + id_content + '"'
     elif source == 'doi':
-        property_line = 'digitalObjectID: ' + '"' + id_content +'"'
+        property_line = 'digitalObjectID: ' + '"' + id_content + '"'
     elif source == 'rcsb pdb':
-        property_line = 'rcsbPDBID: ' + '"' + id_content +'"'
+        property_line = 'rcsbPDBID: ' + '"' + id_content + '"'
     else:
         new_source_map[source] = id_content
         property_line = None
     return (property_line, new_source_map)
+
 
 def get_identifier(term):
     """Convert identifier string to the corresponding identifier property schema
@@ -106,11 +112,12 @@ def get_identifier(term):
     elif source == 'reactome':
         property_line = 'reactomePathwayID: ' + '"' + id_content + '"'
     elif source == 'pdbe':
-        property_line = 'proteinDataBankInEuropeID: '  + '"' + id_content + '"'
+        property_line = 'proteinDataBankInEuropeID: ' + '"' + id_content + '"'
     else:
         new_source_map[source] = id_content
         property_line = None
     return (property_line, new_source_map)
+
 
 def get_confidence(term):
     """Convert confidence string to the corresponding confidence property schema
@@ -131,26 +138,30 @@ def get_confidence(term):
     new_source_map = {}
     if source == 'author score':
         if id_content.split(" ")[0] == 'Below':
-            property_line = '[- '+ id_content.split(' ')[1] + ' dcs:AuthorScore' +  ']'
+            property_line = '[- ' + id_content.split(
+                ' ')[1] + ' dcs:AuthorScore' + ']'
         elif id_content.split(" ")[0] == 'Above':
-            property_line = '['+ id_content.split(' ')[1] + ' - dcs:AuthorScore' +  ']'
+            property_line = '[' + id_content.split(
+                ' ')[1] + ' - dcs:AuthorScore' + ']'
         else:
             is_numeric_score = True
             # check if author score is a number
             for part in id_content.split('.'):
                 if not part.isnumeric():
                     # if author score is "++++"
-                    property_line = '['+ str(len(id_content)) + ' dcs:AuthorScore' +  ']'
+                    property_line = '[' + str(
+                        len(id_content)) + ' dcs:AuthorScore' + ']'
                     is_numeric_score = False
                     break
             if is_numeric_score:
-                property_line = '['+ id_content + ' dcs:AuthorScore' +  ']'
+                property_line = '[' + id_content + ' dcs:AuthorScore' + ']'
     elif source == 'intact-miscore':
-        property_line = '['+ id_content + ' dcs:IntactMiScore' +  ']'
+        property_line = '[' + id_content + ' dcs:IntactMiScore' + ']'
     else:
         new_source_map[source] = id_content
         property_line = None
     return (property_line, new_source_map)
+
 
 def get_protein_dcid(mint_aliases):
     """Takes a string from the mint database, return the dcid of the protein.
@@ -166,11 +177,13 @@ def get_protein_dcid(mint_aliases):
     # for a self-interacting protein, one of the protein name is empty, denoted by "-"
     return None
 
+
 def check_uniprot(alias):
     """
     Return True if the protein has UniProt identifier
     """
     return len(alias) == 1 or alias.split(':')[0] == 'uniprotkb'
+
 
 def check_dcid(alias):
     """
@@ -199,6 +212,7 @@ def check_dcid(alias):
             return False
     return True
 
+
 def get_property_content(content, prefix):
     """Add the prefix to each object in the content and return the
     concatenated string with "," as the separator.
@@ -216,6 +230,7 @@ def get_property_content(content, prefix):
         item_list.append(prefix + obj)
     return ','.join(item_list)
 
+
 def get_cur_line(key_name, value_list, prefix):
     """Return the line of property schema from objects, property name and prefix
     Args:
@@ -231,6 +246,7 @@ def get_cur_line(key_name, value_list, prefix):
         return None
     cur_line = key_name + ': ' + property_content
     return cur_line
+
 
 def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
     """
@@ -294,12 +310,16 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
     # confidence:  ['intact-miscore:0.76']
 
     schema_piece_list = []
-    key_list = ['interactingProtein', 'interactionDetectionMethod', 'interactionType',
-                'interactionSource', 'identifier', 'confidence', 'references']
+    key_list = [
+        'interactingProtein', 'interactionDetectionMethod', 'interactionType',
+        'interactionSource', 'identifier', 'confidence', 'references'
+    ]
     if len(term_map['interactingProtein']) > 1:
-        dcid = term_map['interactingProtein'][0] + '_' + term_map['interactingProtein'][1]
+        dcid = term_map['interactingProtein'][0] + '_' + term_map[
+            'interactingProtein'][1]
     else:
-        dcid = term_map['interactingProtein'][0] + '_' + term_map['interactingProtein'][0]
+        dcid = term_map['interactingProtein'][0] + '_' + term_map[
+            'interactingProtein'][0]
     cur_line = 'Node: dcid:bio/' + dcid
     schema_piece_list.append(cur_line)
     cur_line = 'typeOf: ProteinProteinInteraction'
@@ -308,7 +328,10 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
     schema_piece_list.append(cur_line)
 
     for key in key_list:
-        if key in set(['interactionDetectionMethod', 'interactionType', 'interactionSource']):
+        if key in set([
+                'interactionDetectionMethod', 'interactionType',
+                'interactionSource'
+        ]):
             cur_line = get_cur_line(key, term_map[key], 'dcs:')
             if cur_line:
                 schema_piece_list.append(cur_line)
@@ -325,7 +348,8 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
                     if cur_line:
                         schema_piece_list.append(cur_line)
                     if new_reference_map:
-                        new_source_map[key] = new_source_map[key].update(new_reference_map)
+                        new_source_map[key] = new_source_map[key].update(
+                            new_reference_map)
 
         elif key == 'identifier' and term_map[key]:
             for cur_term in term_map[key]:
@@ -334,7 +358,8 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
                     if cur_line:
                         schema_piece_list.append(cur_line)
                     if new_identifier_map:
-                        new_source_map[key] = new_source_map[key].update(new_identifier_map)
+                        new_source_map[key] = new_source_map[key].update(
+                            new_identifier_map)
 
         elif key == 'confidence' and term_map[key]:
             item_list = []
@@ -343,11 +368,13 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
                     item, new_confidence_source = get_confidence(cur_term)
                     item_list.append(item)
             if item_list:
-                cur_line = 'confidenceScore: ' +  ','.join(item_list)
+                cur_line = 'confidenceScore: ' + ','.join(item_list)
                 schema_piece_list.append(cur_line)
             if new_confidence_source:
-                new_source_map[key] = new_source_map[key].update(new_confidence_source)
+                new_source_map[key] = new_source_map[key].update(
+                    new_confidence_source)
     return '\n'.join(schema_piece_list), new_source_map
+
 
 def main(argv):
     "Main function to read the database file and generate data mcf"
@@ -361,13 +388,12 @@ def main(argv):
     with open(psimi_to_dcid_file, 'r') as file_object:
         psimi_to_dcid_content = file_object.readlines()
 
-   # lines = file.split('\n')
     psimi_to_dcid = {}
     psimi_to_dcid_content = [line.split(': ') for line in psimi_to_dcid_content]
     for line in psimi_to_dcid_content:
         psimi_to_dcid[line[0]] = line[1]
 
-    new_source_map = {'references':{}, 'identifier':{}, 'confidence':{}}
+    new_source_map = {'references': {}, 'identifier': {}, 'confidence': {}}
     mcf_list = []
     wrong_dcid_cases = []
     failed_cases = []
@@ -391,11 +417,13 @@ def main(argv):
             wrong_dcid_cases.append(line)
             continue
         # check if the record has Uniprot Identifier
-        if_uniprot1, if_uniprot2 = check_uniprot(terms[0]), check_uniprot(terms[1])
+        if_uniprot1, if_uniprot2 = check_uniprot(terms[0]), check_uniprot(
+            terms[1])
         if not if_uniprot1 or not if_uniprot2:
             no_uniprot_cases.append(line)
             continue
-        schema, new_source_map = get_schema_from_text(terms, new_source_map, psimi_to_dcid)
+        schema, new_source_map = get_schema_from_text(terms, new_source_map,
+                                                      psimi_to_dcid)
         if schema:
             mcf_list.append(schema)
 
@@ -432,9 +460,13 @@ def main(argv):
     if write_list:
         with open(FLAGS.new_source, 'w') as file_object:
             file_object.write("\n".join(write_list))
-    print(str(len(mcf_list)) + " records have been successfully parsed to schema. "
-          + str(not_import_count)
-          + " records failed the parsing and have been saved to the corresponding files.")
+    print(
+        str(len(mcf_list)) +
+        " records have been successfully parsed to schema. " +
+        str(not_import_count) +
+        " records failed the parsing and have been saved to the corresponding files."
+    )
+
 
 if __name__ == '__main__':
     app.run(main)
