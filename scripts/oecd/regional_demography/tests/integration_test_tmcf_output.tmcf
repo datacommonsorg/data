@@ -1,0 +1,540 @@
+
+Node: E:integration_test_output->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Female
+
+Node: E:integration_test_output->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Male
+
+Node: E:integration_test_output->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person
+
+Node: E:integration_test_output->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Upto14Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto14Years_Female
+
+Node: E:integration_test_output->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Upto14Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto14Years_Male
+
+Node: E:integration_test_output->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Upto14Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto14Years
+
+Node: E:integration_test_output->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Upto4Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto4Years_Female
+
+Node: E:integration_test_output->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Upto4Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto4Years_Male
+
+Node: E:integration_test_output->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Upto4Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_Upto4Years
+
+Node: E:integration_test_output->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_10To14Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_10To14Years_Female
+
+Node: E:integration_test_output->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_10To14Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_10To14Years_Male
+
+Node: E:integration_test_output->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_10To14Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_10To14Years
+
+Node: E:integration_test_output->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_15To19Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_15To19Years_Female
+
+Node: E:integration_test_output->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_15To19Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_15To19Years_Male
+
+Node: E:integration_test_output->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_15To19Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_15To19Years
+
+Node: E:integration_test_output->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_15To64Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_15To64Years_Female
+
+Node: E:integration_test_output->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_15To64Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_15To64Years_Male
+
+Node: E:integration_test_output->E18
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_15To64Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_15To64Years
+
+Node: E:integration_test_output->E19
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_20To24Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_20To24Years_Female
+
+Node: E:integration_test_output->E20
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_20To24Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_20To24Years_Male
+
+Node: E:integration_test_output->E21
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_20To24Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_20To24Years
+
+Node: E:integration_test_output->E22
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_25To29Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_25To29Years_Female
+
+Node: E:integration_test_output->E23
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_25To29Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_25To29Years_Male
+
+Node: E:integration_test_output->E24
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_25To29Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_25To29Years
+
+Node: E:integration_test_output->E25
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_30To34Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_30To34Years_Female
+
+Node: E:integration_test_output->E26
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_30To34Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_30To34Years_Male
+
+Node: E:integration_test_output->E27
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_30To34Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_30To34Years
+
+Node: E:integration_test_output->E28
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_35To39Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_35To39Years_Female
+
+Node: E:integration_test_output->E29
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_35To39Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_35To39Years_Male
+
+Node: E:integration_test_output->E30
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_35To39Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_35To39Years
+
+Node: E:integration_test_output->E31
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_40To44Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_40To44Years_Female
+
+Node: E:integration_test_output->E32
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_40To44Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_40To44Years_Male
+
+Node: E:integration_test_output->E33
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_40To44Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_40To44Years
+
+Node: E:integration_test_output->E34
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_45To49Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_45To49Years_Female
+
+Node: E:integration_test_output->E35
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_45To49Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_45To49Years_Male
+
+Node: E:integration_test_output->E36
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_45To49Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_45To49Years
+
+Node: E:integration_test_output->E37
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_50To54Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_50To54Years_Female
+
+Node: E:integration_test_output->E38
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_50To54Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_50To54Years_Male
+
+Node: E:integration_test_output->E39
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_50To54Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_50To54Years
+
+Node: E:integration_test_output->E40
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_55To59Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_55To59Years_Female
+
+Node: E:integration_test_output->E41
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_55To59Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_55To59Years_Male
+
+Node: E:integration_test_output->E42
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_55To59Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_55To59Years
+
+Node: E:integration_test_output->E43
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_5To9Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_5To9Years_Female
+
+Node: E:integration_test_output->E44
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_5To9Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_5To9Years_Male
+
+Node: E:integration_test_output->E45
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_5To9Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_5To9Years
+
+Node: E:integration_test_output->E46
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_60To64Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_60To64Years_Female
+
+Node: E:integration_test_output->E47
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_60To64Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_60To64Years_Male
+
+Node: E:integration_test_output->E48
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_60To64Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_60To64Years
+
+Node: E:integration_test_output->E49
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_65To69Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_65To69Years_Female
+
+Node: E:integration_test_output->E50
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_65To69Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_65To69Years_Male
+
+Node: E:integration_test_output->E51
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_65To69Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_65To69Years
+
+Node: E:integration_test_output->E52
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_65OrMoreYears_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_65OrMoreYears_Female
+
+Node: E:integration_test_output->E53
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_65OrMoreYears_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_65OrMoreYears_Male
+
+Node: E:integration_test_output->E54
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_65OrMoreYears
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_65OrMoreYears
+
+Node: E:integration_test_output->E55
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_70To74Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_70To74Years_Female
+
+Node: E:integration_test_output->E56
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_70To74Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_70To74Years_Male
+
+Node: E:integration_test_output->E57
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_70To74Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_70To74Years
+
+Node: E:integration_test_output->E58
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_75To79Years_Female
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_75To79Years_Female
+
+Node: E:integration_test_output->E59
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_75To79Years_Male
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_75To79Years_Male
+
+Node: E:integration_test_output->E60
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_75To79Years
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_population_tl2_cleaned->Region
+observationDate: C:OECD_population_tl2_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_population_tl2_cleaned->Count_Person_75To79Years

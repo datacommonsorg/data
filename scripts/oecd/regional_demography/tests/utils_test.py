@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+sys.path.append('../')
+from utils import multi_index_to_single_index, generate_geo_id
 import unittest
 import json
 import pandas as pd
 from pandas.testing import assert_frame_equal
-from utils import multi_index_to_single_index, generate_geo_id
 
 
 class TestUtils(unittest.TestCase):
@@ -39,8 +41,8 @@ class TestUtils(unittest.TestCase):
             "Region": ["United States", "Gümüshane", "Russia"]
         })
 
-        regid2dcid = dict(json.loads(open('regid2dcid.json').read()))
-        nuts = dict(json.loads(open('region_nuts_codes.json').read()))
+        regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
+        nuts = dict(json.loads(open('../region_nuts_codes.json').read()))
 
         res = []
         for index, row in df.iterrows():
