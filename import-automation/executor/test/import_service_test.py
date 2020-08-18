@@ -30,7 +30,7 @@ class ImportServiceTest(unittest.TestCase):
         self.importer = import_service.ImportServiceClient(
             'project_id', 'unresolved_mcf_bucket_name',
             'resolved_mcf_bucket_name', 'importer_output_prefix',
-            'executor_output_prefix')
+            'executor_output_prefix', 'client_id')
 
     def test_fix_input_path(self):
         expected = ('/bigstore/unresolved_mcf_bucket_name/'

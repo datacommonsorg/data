@@ -79,6 +79,8 @@ class ExecutorConfig:
     # to the Identity-Aware Proxy of the Google Cloud project that hosts
     # the dashboard and clicking 'Edit OAuth Client'.
     dashboard_oauth_client_id: str = ''
+    # Oauth Client ID used to authenticate with the proxy.
+    importer_oauth_client_id: str = ''
     # Access token of the account used to authenticate with GitHub. This is not
     # the account password. See
     # https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token.
