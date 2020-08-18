@@ -102,8 +102,7 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv('OECD_population_tl3_cleaned.csv',
-                  index=False)
+df_cleaned.to_csv('OECD_population_tl3_cleaned.csv', index=False)
 
 # Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """

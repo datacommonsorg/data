@@ -31,8 +31,8 @@ df.loc[nuts_idx, 'dcid'] = 'nuts/' + df.loc[nuts_idx, 'Node']
 
 # Hardcode dcids for US States, ignoring resolver output.
 # Take TL2 geos in USA and convert value US[0-9]{2} into geoId/[0-9]{2}
-us_state_idx = (df['containedInCountry'] == 'USA') & (
-    df['oecd_territorial_level'] == '2')
+us_state_idx = (df['containedInCountry']
+                == 'USA') & (df['oecd_territorial_level'] == '2')
 
 df.loc[us_state_idx, 'dcid'] = 'geoId/' + \
     df.loc[us_state_idx, 'Node'].apply(lambda x: x.replace('US', ''))

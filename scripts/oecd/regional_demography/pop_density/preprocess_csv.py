@@ -42,5 +42,4 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv('OECD_pop_density_cleaned.csv',
-                  index=False)
+df_cleaned.to_csv('OECD_pop_density_cleaned.csv', index=False)
