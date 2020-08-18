@@ -48,7 +48,7 @@ dfs = df[['Node', 'dcid']].dropna()
 dfs['dcid'] = 'dcid:' + dfs['dcid'].astype(str)
 name2dcid = dict(zip(dfs.Node, dfs.dcid))
 with open('regid2dcid.json', 'w') as f_out:
-    json.dump(name2dcid, f_out, indent=4)
+    json.dump(name2dcid, f_out, indent=4, sort_keys=True)
 
 # Uncomment for debugging
 # df.to_csv('geos_resolved_cleaned_dbg.csv', index=False)
