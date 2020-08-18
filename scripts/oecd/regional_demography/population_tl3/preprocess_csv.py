@@ -14,7 +14,7 @@
 
 import sys
 sys.path.append('../')
-from utils import multi_index_to_single_index, generate_geo_id
+from utils import multi_index_to_single_index
 import csv
 import json
 import pandas as pd
@@ -24,11 +24,10 @@ df = pd.read_csv("REGION_DEMOGR_population_tl3.csv")
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
-nuts = dict(json.loads(open('../region_nuts_codes.json').read()))
-df = df[df['REG_ID'].isin(nuts.keys()) | df['REG_ID'].isin(regid2dcid.keys())]
+df = df[df['REG_ID'].isin(regid2dcid.keys())]
 # Second, replace the names with dcids
-df['Region'] = df.apply(lambda row: generate_geo_id(row, nuts, regid2dcid),
-                        axis=1)
+df.replace({'Region': regid2dcid}, inplace=True)
+
 df['Year'] = '"' + df['Year'].astype(str) + '"'
 
 df_cleaned = df.pivot_table(values='Value',
