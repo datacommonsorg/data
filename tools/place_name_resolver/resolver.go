@@ -238,6 +238,7 @@ func geocodePlaces(mapCli MapsClient, placeId2Dcid *map[string]string, tinfo *ta
 			go geocodeOneRow(j, placeId2Dcid, tinfo, mapCli, &wg)
 		}
 		wg.Wait()
+		// Make sure we are under the 50 QPS limit set by Google Maps API.
 		time.Sleep(1 * time.Second)
 		log.Printf("Processed %d rows, %d left.", jMax, len(tinfo.rows)-jMax)
 	}
