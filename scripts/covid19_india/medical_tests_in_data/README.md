@@ -44,7 +44,7 @@ Each record is a JOSN document and there is one record per day.
 - [COVID19_tests_india_StatisticalVariables.mcf](COVID19_tests_india_StatisticalVariables.mcf).
 
 #### Scripts
-- [import_data.py](import_data.py): Eurostat GDP import script.
+- [preprocess.py](preprocess.py): Medical tests count import script.
 
 
 ### Import Procedure
