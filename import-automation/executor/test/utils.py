@@ -48,6 +48,9 @@ class ResponseMock:
         for line in self.raw:
             yield line
 
+    def text(self):
+        return str(self.data)
+
 
 def compare_lines(expected_path, to_test_path, num_lines, reverse=False):
     """Compares the first n lines of two files.
