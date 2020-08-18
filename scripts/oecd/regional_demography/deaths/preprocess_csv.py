@@ -106,8 +106,7 @@ VAR_to_statsvars = {
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
 df_cleaned.to_csv('OECD_deaths_cleaned.csv',
-                  index=False,
-                  quoting=csv.QUOTE_NONE)
+                  index=False)
 
 # Automate Template MCF generation since there are many Statistical Variables.
 TEMPLATE_MCF_TEMPLATE = """
