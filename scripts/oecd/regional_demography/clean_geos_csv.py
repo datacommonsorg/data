@@ -20,6 +20,8 @@ df.columns = [
     'containedInPlace', 'rural_or_urban', 'access_to_city'
 ]
 
+df.loc[df.oecd_territorial_level == '2',
+       'name'] = df.loc[df.oecd_territorial_level == '2', 'name'] + ' AdministrativeArea1'
 # Remove Non-official grid (NOG)
 df = df[df.oecd_territorial_level != 'NOG']
 
