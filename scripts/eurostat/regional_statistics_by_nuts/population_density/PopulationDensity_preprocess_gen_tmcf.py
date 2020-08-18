@@ -16,7 +16,6 @@ import pandas as pd
 import io
 import csv
 
-
 # data_url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3area.tsv.gz"
 
 source_tsv = "./demo_r_d3dens.tsv"
@@ -39,12 +38,11 @@ def translate_wide_to_long(source_tsv):
     years = header[1:]
 
     # Pandas.melt() unpivots a DataFrame from wide format to long format
-    df = pd.melt(
-        df,
-        id_vars=header[0],
-        value_vars=years,
-        var_name='time',
-        value_name='value')
+    df = pd.melt(df,
+                 id_vars=header[0],
+                 value_vars=years,
+                 var_name='time',
+                 value_name='value')
 
     # separate geo and unit columns
     new = df[header[0]].str.split(",", n=1, expand=True)
@@ -64,8 +62,9 @@ def translate_wide_to_long(source_tsv):
 
 def preprocess(cleaned_csv, source_csv_long):
     with open(cleaned_csv, 'w', newline='') as f_out:
-        writer = csv.DictWriter(
-            f_out, fieldnames=output_columns, lineterminator='\n')
+        writer = csv.DictWriter(f_out,
+                                fieldnames=output_columns,
+                                lineterminator='\n')
         with open(source_csv_long) as response:
             reader = csv.DictReader(response)
 
@@ -113,7 +112,7 @@ def get_template_mcf(output_columns):
     df_cleaned.head()
 
     # Uncomment the following to download to your local computer.
-    files.download(tmcf)
+    # files.download(tmcf)
 
 
 if __name__ == "__main__":
