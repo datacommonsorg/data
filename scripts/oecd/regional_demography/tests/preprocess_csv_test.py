@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import sys
 sys.path.append('../')
 from utils import multi_index_to_single_index, generate_geo_id
@@ -32,10 +31,11 @@ class TestIntegration(unittest.TestCase):
         # First remove geos with names that we don't have mappings to dcid for.
         regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
         nuts = dict(json.loads(open('../region_nuts_codes.json').read()))
-        df = df[df['REG_ID'].isin(nuts.keys()) | df['REG_ID'].isin(regid2dcid.keys())]
+        df = df[df['REG_ID'].isin(nuts.keys()) |
+                df['REG_ID'].isin(regid2dcid.keys())]
         # Second, replace the names with dcids
-        df['Region'] = df.apply(lambda row: generate_geo_id(row, nuts, regid2dcid),
-                                axis=1)
+        df['Region'] = df.apply(
+            lambda row: generate_geo_id(row, nuts, regid2dcid), axis=1)
         df['Year'] = '"' + df['Year'].astype(str) + '"'
 
         df = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
@@ -113,8 +113,8 @@ class TestIntegration(unittest.TestCase):
 
         df_cleaned.rename(columns=var_to_statsvars, inplace=True)
         df_cleaned.to_csv('integration_test_output.csv',
-                        index=False,
-                        quoting=csv.QUOTE_NONE)
+                          index=False,
+                          quoting=csv.QUOTE_NONE)
 
         # Automate Template MCF generation since there are many Statitical Variables.
         TEMPLATE_MCF_TEMPLATE = """
@@ -129,7 +129,8 @@ value: C:OECD_population_tl2_cleaned->{stat_var}
 """
 
         stat_vars = df_cleaned.columns[3:]
-        with open('integration_test_tmcf_output.tmcf', 'w', newline='') as f_out:
+        with open('integration_test_tmcf_output.tmcf', 'w',
+                  newline='') as f_out:
             for i in range(len(stat_vars)):
                 f_out.write(
                     TEMPLATE_MCF_TEMPLATE.format_map({
@@ -139,7 +140,9 @@ value: C:OECD_population_tl2_cleaned->{stat_var}
 
         # Note for ME21, this is neither in regid2dcid.json nor in regiion_nuts_codes.json. So it is withdrawn.
         # Also, there is no range for 'Count_Person_80OrMoreYears_Female', so this won't shown in tmcf as expected.
-        self.assertTrue(filecmp.cmp('integration_test_tmcf_output.tmcf', 'integration_test_tmcf_expected.tmcf'))
+        self.assertTrue(
+            filecmp.cmp('integration_test_tmcf_output.tmcf',
+                        'integration_test_tmcf_expected.tmcf'))
 
 
 if __name__ == '__main__':
