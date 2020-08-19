@@ -25,7 +25,7 @@ df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
 df = df[df['REG_ID'].isin(regid2dcid.keys())]
 # Second, replace the names with dcids
-df.replace({'Region': regid2dcid}, inplace=True)
+df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
 
 df['Year'] = '"' + df['Year'].astype(str) + '"'
 temp = df[['REG_ID', 'Region', 'VAR', 'Year', 'Value']]
