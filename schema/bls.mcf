@@ -15349,6 +15349,19 @@ typeOf: dcs:UnitOfMeasure
 description: "The reference base is December 1999 equals 100."
 descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
 
+# TEMPORARY UNTIL NEXT BLS CPI UPDATE
+Node: dcid:IndexPointBasePeriod1982-84=100
+name: "IndexPointBasePeriod1982To1984Equals100"
+typeOf: dcs:UnitOfMeasure
+description: "The reference base is 1982 to 1984 equals 100."
+descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
+
+Node: dcid:IndexPointBasePeriod1999-12=100
+name: "IndexPointBasePeriodDecember1999Equals100"
+typeOf: dcs:UnitOfMeasure
+description: "The reference base is December 1999 equals 100."
+descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
+
 Node: dcid:Consumer
 Name: "Consumer"
 typeOf: schema:Class
