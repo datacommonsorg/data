@@ -148,8 +148,8 @@ To disable yapf for some lines,
 
 *   Code must be formatted according to
     [go fmt](https://golang.org/cmd/go/#hdr-Gofmt__reformat__package_sources).
-*   Vetting must identify no likely mistakes as revealed
-    by[go vet](https://golang.org/cmd/go/#hdr-Report_likely_mistakes_in_packages).
+*   Vetting must identify no likely mistakes as revealed by
+    [go vet](https://golang.org/cmd/go/#hdr-Report_likely_mistakes_in_packages).
 *   Code must not generate lint errors or warnings according to
     [golangcli-lint](https://golangci-lint.run/). To run on `foo.go`, use
     `golangcli-lint run foo.go`.
