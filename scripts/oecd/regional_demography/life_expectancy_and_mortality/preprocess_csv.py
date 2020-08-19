@@ -77,7 +77,9 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv('OECD_life_expectancy_and_mortality_cleaned.csv', index=False)
+df_cleaned.to_csv('OECD_life_expectancy_and_mortality_cleaned.csv',
+                  index=False,
+                  quoting=csv.QUOTE_NONE)
 
 TEMPLATE_MCF_TEMPLATE = """
 Node: E:OECD_life_expectancy_and_mortality_cleaned->E{index}
