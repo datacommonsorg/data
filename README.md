@@ -84,7 +84,8 @@ enforce some of the guidelines.
 *   Code must not generate lint errors or warnings according to
     [pylint](https://www.pylint.org/) configured for the
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
-    as specified in `.pylintrc`.
+    as specified in
+    [.pylintrc](https://github.com/datacommonsorg/data/blob/master/.pylintrc).
 *   Tests must succeed.
 
 Consider automating coding to satisfy some of these requirements.
@@ -142,6 +143,10 @@ To disable yapf for some lines,
 ... code ...
 # yapf: enable
 ```
+
+#### Go
+
+TODO(jeffreyoldham): Add documentation.
 
 ## Support
 
