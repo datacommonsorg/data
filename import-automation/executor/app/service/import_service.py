@@ -25,6 +25,7 @@ import requests
 from google.cloud import storage
 
 from app.executor import import_target
+from app.service import iap_request
 
 _PROXY_HOST = 'https://datcom-api-key-sandbox.uc.r.appspot.com'
 _PROXY_IMPORT_TABLE = f'{_PROXY_HOST}/ImportTable'
@@ -112,7 +113,7 @@ class ImportServiceClient:
 
     def __init__(self, project_id: str, unresolved_mcf_bucket_name: str,
                  resolved_mcf_bucket_name: str, importer_output_prefix: str,
-                 executor_output_prefix: str):
+                 executor_output_prefix: str, client_id: str):
         """Constructs an ImportServiceClient.
 
         Args:
@@ -126,6 +127,8 @@ class ImportServiceClient:
                 unresolved_mcf_bucket_name bucket, as a string.
             executor_output_prefix: Output prefix in the
                 resolved_mcf_bucket_name bucket, as a string.
+            client_id: OAuth client ID to authenticate with the proxy,
+                as a string.
         """
         client = storage.Client(project=project_id)
         self.unresolved_bucket = client.bucket(unresolved_mcf_bucket_name)
@@ -134,6 +137,7 @@ class ImportServiceClient:
         self.resolved_mcf_bucket_name = resolved_mcf_bucket_name
         self.importer_output_prefix = importer_output_prefix
         self.executor_output_prefix = executor_output_prefix
+        self.iap = iap_request.IAPRequest(client_id)
 
     def smart_import(self,
                      import_dir: str,
@@ -318,11 +322,13 @@ class ImportServiceClient:
                 larger than or equal to 400.
         """
         request = {'userEmail': curator_email}
-        logging.info(f'ImportServiceClient: Sending request {request} '
-                     'to {_PROXY_GET_IMPORT_LOG}')
-        response = requests.post(_PROXY_GET_IMPORT_LOG, json=request)
-        logging.info(f'ImportServiceClient: Received response {response.text} '
-                     'from {_PROXY_GET_IMPORT_LOG}')
+        logging.info('ImportServiceClient.get_import_log: '
+                     'Sending request %s to %s',
+                     request, _PROXY_GET_IMPORT_LOG)
+        response = self.iap.post(_PROXY_GET_IMPORT_LOG, json=request)
+        logging.info('ImportServiceClient.get_import_log: '
+                     'Received response %s from %s',
+                     response.text, _PROXY_GET_IMPORT_LOG)
         response.raise_for_status()
         return response.json()
 
@@ -363,8 +369,13 @@ class ImportServiceClient:
         logs_before = self.get_import_log(curator_email)['entry']
         if not _are_imports_finished(logs_before, import_name, curator_email):
             raise PreviousImportNotFinishedError(import_name, curator_email)
-
-        response = requests.post(url, json=import_request)
+        logging.info('ImportServiceClient._import_helper: '
+                     'Sending request %s to %s',
+                     import_request, url)
+        response = self.iap.post(url, json=import_request)
+        logging.info('ImportServiceClient._import_helper: '
+                     'Received response %s from %s',
+                     response.text, url)
         response.raise_for_status()
 
         logs_after = self.get_import_log(curator_email)['entry']
@@ -403,6 +414,9 @@ class ImportServiceClient:
             ImportFailedError: Import fails on the importer's side.
             TimeoutError: Timeout expired.
         """
+        logging.info(
+            'ImportServiceClient._block_on_import: Blocking on %s',
+            f'<{_format_import_info(import_name, curator_email, import_id)}>')
         start = time.time()
         while True:
             log = _get_log(import_id, import_name, curator_email,

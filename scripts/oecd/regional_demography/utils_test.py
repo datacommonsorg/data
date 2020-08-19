@@ -16,7 +16,7 @@ import unittest
 import json
 import pandas as pd
 from pandas.testing import assert_frame_equal
-from utils import multi_index_to_single_index, generate_geo_id
+from utils import multi_index_to_single_index
 
 
 class TestUtils(unittest.TestCase):
@@ -31,23 +31,6 @@ class TestUtils(unittest.TestCase):
         df_expected = pd.read_csv("test_expected.csv")
 
         self.assertTrue(assert_frame_equal(df_cleaned, df_expected) is None)
-
-    def test_generate_geo_id(self):
-        df = pd.DataFrame({
-            "TL": [1, 3, 1],
-            "REG_ID": ["USA", "TR906", "RUS"],
-            "Region": ["United States", "Gümüshane", "Russia"]
-        })
-
-        regid2dcid = dict(json.loads(open('regid2dcid.json').read()))
-        nuts = dict(json.loads(open('region_nuts_codes.json').read()))
-
-        res = []
-        for index, row in df.iterrows():
-            res.append(generate_geo_id(row, nuts, regid2dcid))
-
-        expected = ['dcid:country/USA', 'dcid:nuts/TR906', 'dcid:country/RUS']
-        self.assertTrue(res == expected)
 
 
 if __name__ == '__main__':

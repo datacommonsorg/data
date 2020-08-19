@@ -20,6 +20,7 @@ steps:
             "PR_NUMBER": "$_PR_NUMBER",
             "configs": {
                 "dashboard_oauth_client_id": "$_DASHBOARD_OAUTH_CLIENT_ID",
+                "importer_oauth_client_id": "$_IMPORTER_OAUTH_CLIENT_ID",
                 "github_auth_access_token": "$_GITHUB_AUTH_ACCESS_TOKEN",
                 "github_repo_name": "$_GITHUB_REPO_NAME",
                 "github_repo_owner_username": "$_GITHUB_REPO_OWNER_USERNAME",
