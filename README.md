@@ -83,7 +83,8 @@ enforce some of the guidelines.
     according to the [yapf formatter](https://github.com/google/yapf).
 *   Code must not generate lint errors or warnings according to
     [pylint](https://www.pylint.org/) configured for the
-    [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html).
+    [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
+    as specified in `.pylintrc`.
 *   Tests must succeed.
 
 Consider automating coding to satisfy some of these requirements.
@@ -120,6 +121,27 @@ python3 -m unittest discover -v -s util/ -p "*_test.py"
 The `discover` option searches (`-s`) the `util/` directory for files with
 filenames ending with `_test.py`. It considers all these files to be unit tests
 to be run. Output is verbose (`-v`).
+
+#### Disabling style checks
+
+Occasionally, one has to disable style checking or formatting for particular
+lines.
+
+To
+[disable pylint for a particular line or block](http://pylint.pycqa.org/en/latest/user_guide/message-control.html)
+, use syntax like
+
+```
+# pylint: disable=line-too-long,unbalanced-tuple-unpacking
+```
+
+To disable yapf for some lines,
+
+```
+# yapf: disable
+... code ...
+# yapf: enable
+```
 
 ## Support
 
