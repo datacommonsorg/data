@@ -322,11 +322,13 @@ class ImportServiceClient:
                 larger than or equal to 400.
         """
         request = {'userEmail': curator_email}
-        logging.info(f'ImportServiceClient: Sending request {request} '
-                     'to {_PROXY_GET_IMPORT_LOG}')
+        logging.info('ImportServiceClient.get_import_log: '
+                     'Sending request %s to %s',
+                     request, _PROXY_GET_IMPORT_LOG)
         response = self.iap.post(_PROXY_GET_IMPORT_LOG, json=request)
-        logging.info(f'ImportServiceClient: Received response {response.text} '
-                     'from {_PROXY_GET_IMPORT_LOG}')
+        logging.info('ImportServiceClient.get_import_log: '
+                     'Received response %s from %s',
+                     response.text, _PROXY_GET_IMPORT_LOG)
         response.raise_for_status()
         return response.json()
 
@@ -367,8 +369,13 @@ class ImportServiceClient:
         logs_before = self.get_import_log(curator_email)['entry']
         if not _are_imports_finished(logs_before, import_name, curator_email):
             raise PreviousImportNotFinishedError(import_name, curator_email)
-
+        logging.info('ImportServiceClient._import_helper: '
+                     'Sending request %s to %s',
+                     import_request, url)
         response = self.iap.post(url, json=import_request)
+        logging.info('ImportServiceClient._import_helper: '
+                     'Received response %s from %s',
+                     response.text, url)
         response.raise_for_status()
 
         logs_after = self.get_import_log(curator_email)['entry']
@@ -407,6 +414,9 @@ class ImportServiceClient:
             ImportFailedError: Import fails on the importer's side.
             TimeoutError: Timeout expired.
         """
+        logging.info(
+            'ImportServiceClient._block_on_import: Blocking on %s',
+            f'<{_format_import_info(import_name, curator_email, import_id)}>')
         start = time.time()
         while True:
             log = _get_log(import_id, import_name, curator_email,
