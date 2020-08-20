@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-gcloud components install cloud-datastore-emulator --quiet &> /dev/null
+gcloud components install cloud-datastore-emulator --quiet
 
 python3 -m venv .env
 . .env/bin/activate
