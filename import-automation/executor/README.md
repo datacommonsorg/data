@@ -146,9 +146,9 @@ gcloud app deploy
 
 ## Configuring the Executor
 
-The executor has a number of customizble configurations listed in
-[app/configs.py](app/configs.py). Some have default values and some do not and
-need to be supplied. The Cloud Tasks tasks created by Cloud Build can pass the
+The executor has a number of customizable configurations listed in
+[app/configs.py](app/configs.py). Some have default values; the others need
+explicit values. The Cloud Tasks tasks created by Cloud Build can pass the
 configurations to the executor. To edit a configuration:
 1. Add the key-value pair to "configs" field in
    data/import-automation/cloudbuild/cloudbuild.yaml if it is not already there
