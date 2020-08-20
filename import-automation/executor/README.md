@@ -144,6 +144,25 @@ TODO(intrepiditee): Add description
 gcloud app deploy
 ```
 
+## Configuring the Executor
+
+The executor has a number of customizable configurations listed in
+[app/configs.py](app/configs.py). Some have default values; the others need
+explicit values. The Cloud Tasks tasks created by Cloud Build can pass the
+configurations to the executor. To edit a configuration:
+1. Add the key-value pair to "configs" field in
+   data/import-automation/cloudbuild/cloudbuild.yaml if it is not already there
+2. Check in the cloudbuild.yaml to GitHub
+3. Go to the Cloud Build page on Google Cloud and add the key-value pair as
+   a substitution variable to the trigger
+
+Note: A scheduled cron job for updating a dataset inherits some of the
+configurations for the run that creates the job. The configurations for a cron
+job is stored in the body of the job. To change the configurations for a created
+cron job, go to the Cloud Scheduler page on Google Cloud and edit the job
+directly, or write a script to query the Cloud Scheduler API (see
+https://cloud.google.com/scheduler/docs/reference/rest).
+
 ## Running Tests
 
 ```
