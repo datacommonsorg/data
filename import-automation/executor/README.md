@@ -1,7 +1,7 @@
 # Import Automation Executor
 
 This directory contains code for the executor of the import automation system,
-which runs user scripts, generates CSVs and MCFs, and import them to the Data
+which runs user scripts, generates CSVs and MCFs, and imports them to the Data
 Commons knowledge graph using the importer.
 
 ## User Manual
@@ -17,7 +17,7 @@ affected by the commit.
 
 In the commit message, use IMPORTS={comma separated list of import names
 without spaces between the elements} to specify import targets.
-The commit message does not have to only contain the tag and list.
+The commit message may contain more than just the tag and list.
 
 A commit can modify files in multiple directories that contain manifest files.
 The system will detect the affected directories based on paths of changed files.
@@ -89,12 +89,12 @@ Assuming scripts/us_bls/jolts/manifest.json has
 
 If the commit only changes files in scripts/us_bls/cpi:
 - To import USBLS_CPIAllItemsAverage:
-  - "fix syntax error IMPORTS=scripts/us_bls/cpi:USBLS_CPIAllItemsAverage"
+  - "fix syntax error IMPORTS=scripts/us_bls/cpi:USBLS_CPIAllItemsAverage" or
   - "IMPORTS=USBLS_CPIAllItemsAverage fix memory leak"
 - To import BLS_JOLTS
   - "nice day IMPORTS=scripts/us_bls/jolts:BLS_JOLTS"
 - To import both USBLS_CPIAllItemsAverage and BLS_JOLTS
-  - "update README IMPORTS=scripts/us_bls/cpi:USBLS_CPIAllItemsAverage,scripts/us_bls/jolts:BLS_JOLTS"
+  - "update README IMPORTS=scripts/us_bls/cpi:USBLS_CPIAllItemsAverage,scripts/us_bls/jolts:BLS_JOLTS" or
   - "IMPORTS=USBLS_CPIAllItemsAverage,scripts/us_bls/jolts:BLS_JOLTS hope they succeed"
 
 If the commit changes files in both scripts/us_bls/cpi and scripts/us_bls/jolts
@@ -102,10 +102,10 @@ directories:
 - To import USBLS_CPIAllItemsAverage:
   - "fix syntax error IMPORTS=scripts/us_bls/cpi:USBLS_CPIAllItemsAverage"
 - To import BLS_JOLTS
-  - "nice day IMPORTS=scripts/us_bls/jolts:BLS_JOLTS"
+  - "nice day IMPORTS=scripts/us_bls/jolts:BLS_JOLTS" or
   - "good try IMPORTS=BLS_JOLTS"
 - To import both USBLS_CPIAllItemsAverage and BLS_JOLTS
-  - "update README IMPORTS=scripts/us_bls/cpi:USBLS_CPIAllItemsAverage,scripts/us_bls/jolts:BLS_JOLTS"
+  - "update README IMPORTS=scripts/us_bls/cpi:USBLS_CPIAllItemsAverage,scripts/us_bls/jolts:BLS_JOLTS" or
   - "IMPORTS=scripts/us_bls/cpi:USBLS_CPIAllItemsAverage,BLS_JOLTS hope they succeed"
 
 ### Importing to Dev Graph
