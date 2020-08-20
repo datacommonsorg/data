@@ -260,7 +260,13 @@ class UpdateScheduler:
                             'github_auth_access_token':
                                 self.config.github_auth_access_token,
                             'dashboard_oauth_client_id':
-                                self.config.dashboard_oauth_client_id
+                                self.config.dashboard_oauth_client_id,
+                            'importer_oauth_client_id':
+                                self.config.importer_oauth_client_id,
+                            'email_account':
+                                self.config.email_account,
+                            'email_token':
+                                self.config.email_token
                         }
                     }).encode()
             },
