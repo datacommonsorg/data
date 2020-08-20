@@ -37,7 +37,10 @@ class UpdateSchedulerTest(unittest.TestCase):
                                         scheduler_location='us-central1',
                                         github_auth_username='username',
                                         github_auth_access_token='access-token',
-                                        dashboard_oauth_client_id='client-id')
+                                        dashboard_oauth_client_id='dashboard',
+                                        importer_oauth_client_id='importer',
+                                        email_account='@google',
+                                        email_token='token')
         self.scheduler = update_scheduler.UpdateScheduler(
             utils.SchedulerClientMock(), None, config, None)
 
@@ -56,7 +59,10 @@ class UpdateSchedulerTest(unittest.TestCase):
                 'github_repo_owner_username': 'datacommonsorg',
                 'github_auth_username': 'username',
                 'github_auth_access_token': 'access-token',
-                'dashboard_oauth_client_id': 'client-id'
+                'dashboard_oauth_client_id': 'dashboard',
+                'importer_oauth_client_id': 'importer',
+                'email_account': '@google',
+                'email_token': 'token'
             }
         }
         self.assertEqual(expected_body, job['app_engine_http_target']['body'])
