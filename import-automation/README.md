@@ -128,3 +128,8 @@ directories:
    message as described by [Specifying Import Target](#specifying-import-targets)
    but using the SCHEDULES tag instead of IMPORTS.
 2. Configure the production pipeline to pick up the data files at some schedule.
+
+
+## Deployment
+
+TODO(intrepiditee): Finish.
