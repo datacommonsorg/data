@@ -57,3 +57,10 @@ To generate the cleaned csv and template MCF files, run
 ```bash
 python3 preprocess_csv.py
 ```
+
+## Tests
+To run all tests, run
+```bash
+cd tests
+python3 -m pytest
+```

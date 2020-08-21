@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+sys.path.append('../')
+from utils import multi_index_to_single_index
 import unittest
 import json
 import pandas as pd
 from pandas.testing import assert_frame_equal
-from utils import multi_index_to_single_index
 
 
 class TestUtils(unittest.TestCase):
@@ -31,7 +33,6 @@ class TestUtils(unittest.TestCase):
         df_expected = pd.read_csv("test_expected.csv")
 
         self.assertTrue(assert_frame_equal(df_cleaned, df_expected) is None)
-
 
 if __name__ == '__main__':
     unittest.main()
