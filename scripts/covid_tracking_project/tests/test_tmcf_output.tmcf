@@ -1,0 +1,96 @@
+
+Node: E:test_cleaned_output->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->CumulativeCount_MedicalTest_COVID_19
+
+Node: E:test_cleaned_output->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19_Positive
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->CumulativeCount_MedicalTest_COVID_19_Positive
+
+Node: E:test_cleaned_output->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19_Negative
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->CumulativeCount_MedicalTest_COVID_19_Negative
+
+Node: E:test_cleaned_output->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalTest_COVID_19_Pending
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->Count_MedicalTest_COVID_19_Pending
+
+Node: E:test_cleaned_output->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+
+Node: E:test_cleaned_output->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+
+Node: E:test_cleaned_output->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->Count_MedicalConditionIncident_COVID_19_PatientHospitalized
+
+Node: E:test_cleaned_output->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized
+
+Node: E:test_cleaned_output->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientInICU
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->Count_MedicalConditionIncident_COVID_19_PatientInICU
+
+Node: E:test_cleaned_output->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU
+
+Node: E:test_cleaned_output->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientOnVentilator
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->Count_MedicalConditionIncident_COVID_19_PatientOnVentilator
+
+Node: E:test_cleaned_output->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator
+measurementMethod: dcs:CovidTrackingProject
+observationAbout: C:test_cleaned_output->GeoId
+observationDate: C:test_cleaned_output->Date
+value: C:test_cleaned_output->CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator

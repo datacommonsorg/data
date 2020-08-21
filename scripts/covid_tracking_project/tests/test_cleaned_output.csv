@@ -1,0 +1,6 @@
+Date,GeoId,CumulativeCount_MedicalTest_COVID_19,CumulativeCount_MedicalTest_COVID_19_Positive,CumulativeCount_MedicalTest_COVID_19_Negative,Count_MedicalTest_COVID_19_Pending,CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered,CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased,Count_MedicalConditionIncident_COVID_19_PatientHospitalized,CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized,Count_MedicalConditionIncident_COVID_19_PatientInICU,CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU,Count_MedicalConditionIncident_COVID_19_PatientOnVentilator,CumulativeCount_MedicalConditionIncident_COVID_19_PatientOnVentilator
+2020-08-20,dcid:geoId/02,312647,5332,307315,,1513,29,51,,,,6,
+2020-08-20,dcid:geoId/01,896779,112449,784330,,44684,1974,1105,13330,,1348,,734
+2020-08-20,dcid:geoId/05,648509,54765,593744,,48458,641,499,3790,,,108,488
+2020-08-20,dcid:geoId/60,1514,0,1514,,,0,,,,,,
+2020-08-20,dcid:geoId/04,1118443,196280,922163,,28471,4684,1070,21143,388,,233,
