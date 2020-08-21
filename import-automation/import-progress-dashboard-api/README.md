@@ -38,7 +38,7 @@ dynamically when queried.
    - URL parameters
      - `order`: List of field names to order the returned
        system runs by. Prepend "-" to a field name to sort it in
-       descending order. The list is is specified by repeated keys,
+       descending order. The list is specified by repeated keys,
        e.g., `?order=status&order=-time_created`
      - `limit`: Maximum number of system runs to return, as an integer
    - Returns
