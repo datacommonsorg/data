@@ -45,8 +45,9 @@ class TestCovidIntegration(unittest.TestCase):
                 for row_dict in reader:
                     processed_dict = {
                         'Date':
-                            '%s-%s-%s' % (row_dict['date'][:4], row_dict['date'][4:6],
-                                        row_dict['date'][6:]),
+                            '%s-%s-%s' %
+                            (row_dict['date'][:4], row_dict['date'][4:6],
+                             row_dict['date'][6:]),
                         'GeoId':
                             'dcid:geoId/%s' % row_dict['fips'],
                         'CumulativeCount_MedicalTest_COVID_19':
@@ -58,31 +59,32 @@ class TestCovidIntegration(unittest.TestCase):
                         'Count_MedicalTest_COVID_19_Pending':
                             row_dict['pending'],
                         ('CumulativeCount_MedicalConditionIncident'
-                        '_COVID_19_PatientRecovered'):
+                         '_COVID_19_PatientRecovered'):
                             row_dict['recovered'],
                         ('CumulativeCount_MedicalConditionIncident'
-                        '_COVID_19_PatientDeceased'):
+                         '_COVID_19_PatientDeceased'):
                             row_dict['death'],
                         'Count_MedicalConditionIncident_COVID_19_PatientHospitalized':
                             row_dict['hospitalizedCurrently'],
                         ('CumulativeCount_MedicalConditionIncident'
-                        '_COVID_19_PatientHospitalized'):
+                         '_COVID_19_PatientHospitalized'):
                             row_dict['hospitalizedCumulative'],
                         'Count_MedicalConditionIncident_COVID_19_PatientInICU':
                             row_dict['inIcuCurrently'],
                         ('CumulativeCount_MedicalConditionIncident'
-                        '_COVID_19_PatientInICU'):
+                         '_COVID_19_PatientInICU'):
                             row_dict['inIcuCumulative'],
                         'Count_MedicalConditionIncident_COVID_19_PatientOnVentilator':
                             row_dict['onVentilatorCurrently'],
                         ('CumulativeCount_MedicalConditionIncident'
-                        '_COVID_19_PatientOnVentilator'):
+                         '_COVID_19_PatientOnVentilator'):
                             row_dict['onVentilatorCumulative'],
                     }
 
                     writer.writerow(processed_dict)
 
-        self.assertTrue(filecmp.cmp('test_cleaned_output.csv', 'test_cleaned_expected.csv'))
+        self.assertTrue(
+            filecmp.cmp('test_cleaned_output.csv', 'test_cleaned_expected.csv'))
 
         # Automate Template MCF generation since there are many Statitical Variables.
         TEMPLATE_MCF_TEMPLATE = """
@@ -104,4 +106,5 @@ value: C:test_cleaned_output->{stat_var}
                         'stat_var': output_columns[2:][i]
                     }))
 
-        self.assertTrue(filecmp.cmp('test_tmcf_output.tmcf', 'test_tmcf_expected.tmcf'))
+        self.assertTrue(
+            filecmp.cmp('test_tmcf_output.tmcf', 'test_tmcf_expected.tmcf'))
