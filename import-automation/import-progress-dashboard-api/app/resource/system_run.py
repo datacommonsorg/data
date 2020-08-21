@@ -110,9 +110,10 @@ class SystemRunByID(SystemRun):
             where the error message is a string and the error code is an int.
         """
         args = SystemRunByID.parser.parse_args()
-        if _MODEL.run_id in args or _MODEL.import_attempts in args:
+        if (_MODEL.run_id in args or _MODEL.import_attempts in args or
+                _MODEL.logs in args):
             return validation.get_patch_forbidden_error(
-                (_MODEL.run_id, _MODEL.import_attempts))
+                (_MODEL.run_id, _MODEL.import_attempts, _MODEL.logs))
         valid, err, code = validation.is_system_run_valid(args, run_id=run_id)
         if not valid:
             return err, code
