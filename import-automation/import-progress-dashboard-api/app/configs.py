@@ -17,7 +17,7 @@ Configurations for the dashboard API.
 
 # ID of the Google Cloud project that enables Datastore
 PROJECT_ID = 'datcom-data'
-# Google Cloud Datastore namespace in which import attempts are stored
+# Google Cloud Datastore namespace in which entities are stored
 DASHBOARD_NAMESPACE = 'import-progress-dashboard'
 # Google Cloud Storage bucket in which log messages are be stored
 LOG_BUCKET_NAME = 'dashboard-progress-logs'
