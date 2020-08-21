@@ -19,7 +19,7 @@ configurations. See main.py.
 """
 
 import os
-import typing
+from typing import List
 import dataclasses
 
 from google.cloud import logging
@@ -72,19 +72,20 @@ class ExecutorConfig:
     storage_version_filename: str = 'latest_version.txt'
     # Types of inputs accepted by the Data Commons importer. These are
     # also the accepted fields of an import_inputs value in the manifest.
-    import_input_types: typing.List[str] = ('template_mcf', 'cleaned_csv',
-                                            'node_mcf')
+    import_input_types: List[str] = ('template_mcf', 'cleaned_csv', 'node_mcf')
     # Oauth Client ID used to authenticate with the import progress dashboard.
     # which is protected by Identity-Aware Proxy. This can be found by going
     # to the Identity-Aware Proxy of the Google Cloud project that hosts
     # the dashboard and clicking 'Edit OAuth Client'.
     dashboard_oauth_client_id: str = ''
+    # Oauth Client ID used to authenticate with the proxy.
+    importer_oauth_client_id: str = ''
     # Access token of the account used to authenticate with GitHub. This is not
     # the account password. See
     # https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token.
     github_auth_access_token: str = ''
     # Username of the account used to authenticate with GitHub.
-    github_auth_username: str = 'intrepiditee'
+    github_auth_username: str = ''
     # Name of the repository that contains all the imports.
     # On commits, this is the repository to which the pull requests must be sent
     # to trigger the executor. The source repositories of the pull requests
@@ -114,10 +115,10 @@ class ExecutorConfig:
     email_token: str = ''
     # Maximum time a blocking call to the importer to
     # perform an import can take in seconds.
-    importer_import_timeout: float = 10 * 60
+    importer_import_timeout: float = 20 * 60
     # Maximum time a blocking call to the importer to
     # delete an import can take in seconds.
-    importer_delete_timeout: float = 20 * 60
+    importer_delete_timeout: float = 10 * 60
 
 
 def _setup_logging():

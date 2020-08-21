@@ -23,7 +23,7 @@ from test import utils
 NUM_LINES_TO_CHECK = 50
 
 CONFIGS = {
-    'github_repo_owner_username': 'intrepiditee',
+    'github_repo_owner_username': os.environ['GITHUB_AUTH_USERNAME'],
     'github_repo_name': 'data-demo',
     'github_auth_username': 'intrepiditee',
     'github_auth_access_token': os.environ['GITHUB_AUTH_ACCESS_TOKEN']
