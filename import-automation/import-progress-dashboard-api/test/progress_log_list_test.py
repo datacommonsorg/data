@@ -103,13 +103,12 @@ class ProgressLogListTest(unittest.TestCase):
         _LOG.level: 'info',
         _LOG.message: 'hello'
     })
-    def test_attempt_and_run_id_not_exist(self):
-        """Tests that POSTing a progress log without attempt_id or run_id set
+    def test_run_id_not_exist(self):
+        """Tests that POSTing a progress log without run_id set
         returns FORBIDDEN."""
         message, code = self.resource.post()
         self.assertEqual(403, code)
         self.assertIn('run_id', message)
-        self.assertIn('attempt_id', message)
 
     @mock.patch(utils.PARSE_ARGS)
     def test_attempt_not_linked_to_run(self, parse_args):
@@ -134,7 +133,8 @@ class ProgressLogListTest(unittest.TestCase):
         parse_args.return_value = {
             _LOG.level: 'info',
             _LOG.message: 'hello',
-            _LOG.attempt_id: 'not-exist'
+            _LOG.attempt_id: 'not-exist',
+            _LOG.run_id: self.runs[0][_RUN.run_id]
         }
         message, code = self.resource.post()
         self.assertEqual(404, code)
@@ -160,7 +160,8 @@ class ProgressLogListTest(unittest.TestCase):
         parse_args.return_value = {
             _LOG.level: 'info',
             _LOG.message: 'hello',
-            _LOG.attempt_id: attempt_id
+            _LOG.attempt_id: attempt_id,
+            _LOG.run_id: self.runs[0][_RUN.run_id]
         }
         posted = self.resource.post()
         self.assertEqual('info', posted[_LOG.level])
