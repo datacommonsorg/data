@@ -36,7 +36,7 @@ def setUpModule():
     utils.EMULATOR.start_emulator()
 
 
-class ProgressLogListTest(unittest.TestCase):
+class ProgressLogTest(unittest.TestCase):
     """Tests for ProgressLogList."""
 
     @mock.patch('app.utils.create_datastore_client',
@@ -81,11 +81,12 @@ class ProgressLogListTest(unittest.TestCase):
                                                      system_run=self.runs[0])
 
         self.logs = [
-            # Linked to the first attempt
+            # Linked to the first attempt and first run
             {
                 _LOG.level: 'info',
                 _LOG.message: 'first',
-                _LOG.attempt_id: self.attempts[0][_ATTEMPT.attempt_id]
+                _LOG.attempt_id: self.attempts[0][_ATTEMPT.attempt_id],
+                _LOG.run_id: self.runs[0][_RUN.run_id]
             },
             # Linked to the first attempt and first run
             {
@@ -115,7 +116,7 @@ class ProgressLogListTest(unittest.TestCase):
 
     def test_progress_log_by_run_id(self):
         """Tests querying the progress logs of a system run by its run_id."""
-        expected = [self.logs[1], self.logs[2]]
+        expected = self.logs
         retrieved = self.by_run_id.get(self.runs[0][_RUN.run_id])
         self.assertEqual(len(expected), len(retrieved))
         for i, log in enumerate(expected):
