@@ -105,9 +105,10 @@ class ImportAttemptByID(ImportAttempt):
             where the error message is a string and the error code is an int.
         """
         args = ImportAttempt.parser.parse_args()
-        if _MODEL.attempt_id in args or _MODEL.run_id in args:
+        if (_MODEL.attempt_id in args or _MODEL.run_id in args or
+                _MODEL.logs in args):
             return validation.get_patch_forbidden_error(
-                (_MODEL.attempt_id, _MODEL.run_id))
+                (_MODEL.attempt_id, _MODEL.run_id, _MODEL.logs))
         valid, err, code = validation.is_import_attempt_valid(
             args, attempt_id=attempt_id)
         if not valid:
