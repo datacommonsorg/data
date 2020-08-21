@@ -34,5 +34,6 @@ class TestUtils(unittest.TestCase):
 
         self.assertTrue(assert_frame_equal(df_cleaned, df_expected) is None)
 
+
 if __name__ == '__main__':
     unittest.main()
