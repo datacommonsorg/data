@@ -5,9 +5,7 @@ The import automation system has three components:
 2. [Executor](executor/README.md)
 3. Import Progress Dashboard
    - [Import Progress Dashboard API](import-progress-dashboard-api/README.md)
-   - Import Progress Dashboard Frontend
-     - [Client](import-progress-dashboard-fronend/client/README.md)
-     - [Server](import-progress-dashboard-fronend/server/README.md)
+   - [Import Progress Dashboard Frontend](import-progress-dashboard-frontend/README.md)
 
 ## User Manual
 
@@ -130,3 +128,8 @@ directories:
    message as described by [Specifying Import Target](#specifying-import-targets)
    but using the SCHEDULES tag instead of IMPORTS.
 2. Configure the production pipeline to pick up the data files at some schedule.
+
+
+## Deployment
+
+TODO(intrepiditee): Finish.
