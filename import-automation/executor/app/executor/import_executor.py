@@ -419,11 +419,16 @@ class ImportExecutor:
                     f'Submitting job to delete the previous import',
                     attempt_id=attempt_id,
                     run_id=run_id)
-            self.importer.delete_import(
-                relative_import_dir,
-                import_spec,
-                block=True,
-                timeout=self.config.importer_delete_timeout)
+            try:
+                self.importer.delete_import(
+                    relative_import_dir,
+                    import_spec,
+                    block=True,
+                    timeout=self.config.importer_delete_timeout)
+            except import_service.ImportNotFoundError as exc:
+                # If this is the first time executing this import,
+                # there will be no previous import
+                logging.warning(str(exc))
             if self.dashboard:
                 self.dashboard.info(f'Deleted previous import',
                                     attempt_id=attempt_id,

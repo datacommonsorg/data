@@ -160,34 +160,63 @@ description: "Third level statistical subdivision within an EU member country"
 subClassOf: schema:StatisticalArea
 
 Node: dcid:AdministrativeArea1
-name: "Administrative Area Level 1"
+name: "AdministrativeAreaLevel1"
 typeOf: schema:Class
 description: "A level-1 administrative subdivision of a country, e.g. departments in Bolivia."
 subClassOf: schema:AdministrativeArea
 
 Node: dcid:AdministrativeArea2
-name: "Administrative Area Level 2"
+name: "AdministrativeAreaLevel2"
 typeOf: schema:Class
 description: "A level-2 administrative subdivision of a country, e.g. municipalities in Bulgaria."
 subClassOf: schema:AdministrativeArea
 
 Node: dcid:AdministrativeArea3
-name: "Administrative Area Level 3"
+name: "AdministrativeAreaLevel3"
 typeOf: schema:Class
 description: "A level-3 administrative subdivision of a country, e.g. municipalities in Bosnia and Herzegovina."
 subClassOf: schema:AdministrativeArea
 
 Node: dcid:AdministrativeArea4
-name: "Administrative Area Level 4"
+name: "AdministrativeAreaLevel4"
 typeOf: schema:Class
 description: "A level-4 administrative subdivision of a country, e.g. wards in South Africa."
 subClassOf: schema:AdministrativeArea
 
 Node: dcid:AdministrativeArea5
-name: "Administrative Area Level 5"
+name: "AdministrativeAreaLevel5"
 typeOf: schema:Class
-description: "A level-5 administrative subdivision of a country"
+description: "A level-5 administrative subdivision of a country."
 subClassOf: schema:AdministrativeArea
+
+Node: dcid:Town
+name: "Town"
+typeOf: schema:Class
+description: "A settlement that is bigger than a village but smaller than a city."
+descriptionUrl: "https://www.wikidata.org/wiki/Q3957"
+subClassOf: schema:Place
+
+Node: dcid:Village
+name: "Village"
+typeOf: schema:Class
+description: "A small clustered human settlement smaller than a town."
+descriptionUrl: "https://www.wikidata.org/wiki/Q532"
+subClassOf: schema:Place
+
+Node: dcid:Neighborhood
+name: "Neighborhood"
+typeOf: schema:Class
+description: "A geographically localized community within a larger city, town or suburb."
+descriptionUrl: "https://wikidata.org/wiki/Q123705"
+subClassOf: schema:Place
+
+Node: dcid:administrativeCapital
+name: "administrativeCapital"
+typeOf: schema:Property
+description: "The municipality exercising primary status in a country, state, province, or other administrative region, usually as its seat of government."
+descruptionUrl: "https://en.wikipedia.org/wiki/Capital_city"
+rangeIncludes: schema:City, schema:Town
+domainIncludes: schema:AdministrativeArea
 
 Node: rentAsked
 dcid: "rentAsked"

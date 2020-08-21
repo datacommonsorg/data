@@ -15,6 +15,7 @@
 Import progress dashboard API client.
 """
 
+import logging
 from typing import Dict
 
 from app import utils
@@ -46,6 +47,9 @@ class LogLevel:
 class DashboardAPI:
     """Import progress dashboard API client.
 
+    The methods check for the response status code and throw
+    requests.exceptions.HTTPError if the code is larger than or equal to 400.
+
     Attributes:
         iap: IAPRequest object for making HTTP requests to
             Identity-Aware Proxy protected resources.
@@ -58,6 +62,7 @@ class DashboardAPI:
             client_id: Oauth2 client id for authentication.
         """
         self.iap = iap_request.IAPRequest(client_id)
+        logging.info('DashboardAPI.__init__: Initialized')
 
     def critical(self,
                  message: str,
@@ -114,9 +119,16 @@ class DashboardAPI:
             Initialized system run returned from the dashboard as a dict.
 
         Raises:
-            Same exceptions as IAPRequest.post.
+            requests.HTTPError: The importer returns a status code that is
+                larger than or equal to 400.
         """
-        return self.iap.post(_DASHBOARD_RUN_LIST, json=system_run).json()
+        logging.info('DashboardAPI.init_run: Posting %s to %s',
+                     system_run, _DASHBOARD_RUN_LIST)
+        response = self.iap.post(_DASHBOARD_RUN_LIST, json=system_run)
+        response.raise_for_status()
+        logging.info('DashboardAPI.init_run: Received %s from %s',
+                     response.text, _DASHBOARD_ATTEMPT_LIST)
+        return response.json()
 
     def init_attempt(self, import_attempt: Dict) -> Dict:
         """Initializes an import attempt.
@@ -128,10 +140,16 @@ class DashboardAPI:
             Initialized import attempt returned from the dashboard as a dict.
 
         Raises:
-            Same exceptions as IAPRequest.post.
+            requests.HTTPError: The importer returns a status code that is
+                larger than or equal to 400.
         """
-        return self.iap.post(_DASHBOARD_ATTEMPT_LIST,
-                             json=import_attempt).json()
+        logging.info('DashboardAPI.init_attempt: Posting %s to %s',
+                     import_attempt, _DASHBOARD_ATTEMPT_LIST)
+        response = self.iap.post(_DASHBOARD_ATTEMPT_LIST, json=import_attempt)
+        response.raise_for_status()
+        logging.info('DashboardAPI.init_attempt: Received %s from %s',
+                     response.text, _DASHBOARD_ATTEMPT_LIST)
+        return response.json()
 
     def update_attempt(self, import_attempt: Dict, attempt_id: str) -> Dict:
         """Updates some fields of an import attempt.
@@ -142,10 +160,19 @@ class DashboardAPI:
 
         Returns:
             Updated import attempt returned from the dashboard, as a dict.
+
+        Raises:
+            requests.HTTPError: The importer returns a status code that is
+                larger than or equal to 400.
         """
-        return self.iap.patch(_DASHBOARD_ATTEMPT_BY_ID.format_map(
-            {'attempt_id': attempt_id}),
-                              json=import_attempt).json()
+        query = _DASHBOARD_ATTEMPT_BY_ID.format_map({'attempt_id': attempt_id})
+        logging.info('DashboardAPI.update_attempt: Patching %s to %s',
+                     import_attempt, query)
+        response = self.iap.patch(query, json=import_attempt)
+        response.raise_for_status()
+        logging.info('DashboardAPI.update_attempt: Received %s from %s',
+                     response.text, query)
+        return response.json()
 
     def update_run(self, system_run: Dict, run_id: str) -> Dict:
         """Updates some fields of a system run.
@@ -156,10 +183,19 @@ class DashboardAPI:
 
         Returns:
             Updated system run returned from the dashboard, as a dict.
+
+        Raises:
+            requests.HTTPError: The importer returns a status code that is
+                larger than or equal to 400.
         """
-        return self.iap.patch(_DASHBOARD_RUN_BY_ID.format_map(
-            {'run_id': run_id}),
-                              json=system_run).json()
+        query = _DASHBOARD_RUN_BY_ID.format_map({'run_id': run_id})
+        logging.info('DashboardAPI.update_run: Patching %s to %s',
+                     system_run, query)
+        response = self.iap.patch(query, json=system_run)
+        response.raise_for_status()
+        logging.info('DashboardAPI.update_run: Received %s from %s',
+                     response.text, query)
+        return response.json()
 
     def _log_helper(self,
                     message: str,
@@ -182,6 +218,8 @@ class DashboardAPI:
 
         Raises:
             ValueError: Neither run_id nor attempt_id is specified.
+            requests.HTTPError: The importer returns a status code that is
+                larger than or equal to 400.
         """
         if not run_id and not attempt_id:
             raise ValueError('Neither run_id nor attempt_id is specified')
@@ -192,6 +230,10 @@ class DashboardAPI:
             log['run_id'] = run_id
         if attempt_id:
             log['attempt_id'] = attempt_id
+        logging.info('DashboardAPI._log_helper: Logging %s to %s', log,
+                     _DASHBOARD_LOG_LIST)
         response = self.iap.post(_DASHBOARD_LOG_LIST, json=log)
         response.raise_for_status()
+        logging.info('DashboardAPI._log_helper: Received %s from %s',
+                     response.text, _DASHBOARD_LOG_LIST)
         return response.json()

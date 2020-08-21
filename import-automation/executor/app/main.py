@@ -47,10 +47,7 @@ FLASK_APP = create_app()
 
 @FLASK_APP.route('/', methods=['POST'])
 def execute_imports():
-    """Endpoint for executing imports on GitHub commits.
-
-    Logs to the import progress dashboard.
-    """
+    """Endpoint for executing imports on GitHub commits."""
     task_info = flask.request.get_json(force=True)
     if 'COMMIT_SHA' not in task_info:
         return {'error': 'COMMIT_SHA not found'}
@@ -80,7 +77,8 @@ def execute_imports():
             executor_output_prefix=config.storage_executor_output_prefix,
             importer_output_prefix=config.storage_importer_output_prefix,
             unresolved_mcf_bucket_name=config.storage_dev_bucket_name,
-            resolved_mcf_bucket_name=config.storage_importer_bucket_name))
+            resolved_mcf_bucket_name=config.storage_importer_bucket_name,
+            client_id=config.importer_oauth_client_id))
     result = executor.execute_imports_on_commit(commit_sha=commit_sha,
                                                 repo_name=repo_name,
                                                 branch_name=branch_name,
@@ -90,10 +88,7 @@ def execute_imports():
 
 @FLASK_APP.route('/update', methods=['POST'])
 def scheduled_updates():
-    """Endpoint for updating imports.
-
-    TODO(intrepiditee): Log to the import progress dashboard.
-    """
+    """Endpoint for updating imports."""
     task_info = flask.request.get_json(force=True)
     if 'absolute_import_name' not in task_info:
         return {'error': 'absolute_import_name not found'}
@@ -108,6 +103,7 @@ def scheduled_updates():
             repo_name=config.github_repo_name,
             auth_username=config.github_auth_username,
             auth_access_token=config.github_auth_access_token),
+        dashboard=dashboard_api.DashboardAPI(config.dashboard_oauth_client_id),
         config=config)
     result = executor.execute_imports_on_update(
         task_info['absolute_import_name'])
