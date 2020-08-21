@@ -276,6 +276,7 @@ class ImportServiceClient:
         Raises:
             requests.HTTPError: The importer returns a status code that is
                 larger than or equal to 400.
+            ImportNotFoundError: Import not found in the import logs.
         """
         absolute_import_name = _get_fixed_absolute_import_name(
             import_dir, import_spec['import_name'])
