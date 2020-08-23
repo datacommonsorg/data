@@ -16,7 +16,7 @@ import pandas as pd
 import io
 import csv
 
-# data_url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3area.tsv.gz"
+# data_url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/trng_lfse_04.tsv.gz"
 
 source_tsv = "./demo_r_d3dens.tsv"
 source_csv_long = "./demo_r_d3dens.csv"
