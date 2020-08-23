@@ -21,7 +21,7 @@ This dataset has the education enrollment rate (percentage) for EU countries dow
 
 
 The original dataset is broken up into 3 major families of variables:
-1. Date: Years from 1990 to 2018 with some holes in time seris marked with note "b" in the original dataset
+1. Date: Years from 2000 to 2019 with some holes in time seris marked with note "b" in the original dataset
 2. unit,sex,age,geo: e.g. PC,F,Y25-64,AT (Percent, Female, Years 25 to 64, nuts/AT)
 3. value: some with note "e"="estimated" and "u" = "low reliability"
 
@@ -32,8 +32,8 @@ unit,sex,age,geo is further broken down into:
 4. geo: NUTS2 codes for regions of Europe
 
 The cleraned csv is broken up into 5 major families of variables:
-1. Date: Subset of years from 1990 to 2018 with values in the original dataset
-2. GeoID: NUTS3 codes
+1. Date: Subset of years from 2000 to 2019 with values in the original dataset
+2. GeoID: NUTS2 codes
 3. Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years: float values 
 4. Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
 5. Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
@@ -55,7 +55,7 @@ The license is available online at [here](https://ec.europa.eu/eurostat/about/po
 
 ### Dataset Documentation and Relevant Links 
 
-- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/demo_r_gind3_esms.htm>
+- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/trng_lfs_4w0_esms.htm>
 
 ## About the Import
 
@@ -83,7 +83,7 @@ Automated validation:
 
 #### Processing Steps
 
-`PopulationDensity_Eurostat_NUTS3.mcf` was handwritten.
+`Eurostats_NUTS2_Enrollment.mcf` was handwritten.
 
 To generate `Eurostats_NUTS2_Enrollment.tmcf` and `Eurostats_NUTS2_Enrollment.csv`, run:
 
