@@ -1,0 +1,45 @@
+# 0-2 LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+Node: dcid:LessThanPrimaryEducation
+name: "ISCED Level 0 (Less Than Primary Education)"
+description: "Less than primary education"
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel0"
+
+Node: dcid:PrimaryEducation
+name: "ISCED Level 1 (Primary Education)"
+description: "Primary education"
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel1"
+
+Node: dcid:LowerSecondaryEducation
+name: "ISCED Level 2 (LowerSecondaryEducation)"
+description: "Lower secondary education"
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel2"
+
+# 3-8 UpperSecondaryEducationOrHigher
+Node: dcid:UpperSecondaryEducationOrHigher
+name: "ISCED Level 3 (Upper Secondary Education) Or Higher"
+description: "Upper secondary education or more. Includes any form of upper secondary and post-secondary education."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel3-8"
+
+# 3-4 UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+Node: dcid:UpperSecondaryEducation
+name: "ISCED Level 3 (UpperSecondaryEducation)"
+description: "Upper secondary education"
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel3"
+
+Node: dcid:PostSecondaryNonTertiaryEducation
+name: "ISCED Level 4 (PostSecondaryNonTertiaryEducation)"
+description: "Post-secondary non-tertiary education"
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel4"
+
+# 5-8: TertiaryEducation:
+Node: dcid:TertiaryEducation
+name: "Short-Cycle Tertiary Education (ISCED Level 5) Or Higher"
+description: "Short-cycle tertiary education or more. Includes any form of post-secondary education."
+typeOf: dcid:LevelOfSchoolEnum
+iscedLevel: "ISCEDLevel5-8"
