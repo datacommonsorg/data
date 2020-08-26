@@ -556,6 +556,13 @@ description: "The human cell type in which the protein's level is measured."
 rangeIncludes: dcs:HumanCellTypeEnum
 domainIncludes: dcs:HumanProteinOccurrence
 
+Node: dcid:humanTissue
+typeOf: schema:Property
+name: "humanTissue"
+description: "The human tissue in which the protein's level is measured."
+rangeIncludes: dcs:HumanTissueEnum
+domainIncludes: dcs:HumanProteinOccurrence
+
 Node: dcid:proteinExpressionScore
 typeOf: schema:Property
 name: "proteinExpressionScore"
@@ -569,5 +576,5 @@ typeOf: schema:Property
 name: "humanProteinOccurrenceReliability"
 description: "A reliability score is manually set for all genes and indicates the level of reliability of the analyzed protein expression pattern based on available RNA-seq data, protein/gene characterization data and immunohistochemical data from one or several antibodies with non-overlapping epitopes."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
-rangeIncludes: dcs:humanProteinOccurrenceReliabilityEnum
+rangeIncludes: dcs:HumanProteinOccurrenceReliabilityEnum
 domainIncludes: dcs:HumanProteinOccurrence

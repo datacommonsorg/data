@@ -12,28 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+sys.path.append('../')
+from utils import multi_index_to_single_index
 import csv
 import json
 import pandas as pd
 
-
-def multi_index_to_single_index(df):
-    columns = []
-    for column in df.columns:
-        column = list(column)
-        column[1] = str(column[1])
-        columns.append(''.join(column))
-
-    df.columns = columns
-    return df.reset_index()
-
-
 df = pd.read_csv('REGION_DEMOGR_pop_density.csv')
+df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
-name2dcid = dict(json.loads(open('../name2dcid.json').read()))
-df = df[df['Region'].isin(name2dcid.keys())]
+regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
+df = df[df['REG_ID'].isin(regid2dcid.keys())]
 # Second, replace the names with dcids
-df.replace({'Region': name2dcid}, inplace=True)
+df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
 
 df['Year'] = '"' + df['Year'].astype(str) + '"'
 temp = df[['REG_ID', 'Region', 'VAR', 'Year', 'Value']]

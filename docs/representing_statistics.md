@@ -47,9 +47,9 @@ the median age of people in San Antonio, Texas in 2014 was 39.4 years."
 can be represented as:
 
 ```
-Node: Observation_MedianAge_SanAntonio_TX_2014
+Node: Observation_Median_Age_Person_SanAntonio_TX_2014
 typeOf: dcs:StatVarObservation
-variableMeasured: dcid:MedianAge
+variableMeasured: dcid:Median_Age_Person
 observationAbout: dcid:geoId/4865000
 observationDate: "2014"
 value: 39.4
@@ -57,21 +57,21 @@ unit: dcs:Year
 measurementMethod: dcs:CensusACS5yrSurvey
 ```
 
-Where `MedianAge` is a `StatisticalVariable` schema node that only needs to be defined once:
+Where `Median_Age_Person` is a `StatisticalVariable` schema node that only needs to be
+defined once:
 
 ```
-Node: dcid:MedianAge	
+Node: dcid:Median_Age_Person	
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:age
 populationType: schema:Person
 statType: dcs:medianValue
 ```
 
-> Note: Data Commons is in the process of migrating `measurementMethod` and `unit` from being `StatisticalVariable` properties to `StatVarObservation` properties. You may see that the [`MedianAge`](https://browser.datacommons.org/kg?dcid=MedianAge) node still has `measurementMethod` and `unit`, but please do not emulate that behavior.
+## Mapping `StatisticalVariable` and `StatVarObservation` to `StatisticalPopulation`and `Observation`
 
-## Mapping `StatisticalVariable` and `StatVarObservation` to `StatisticalPopulation` and `Observation`
-
-The information encoded in `MedianAge` and `Observation_MedianAge_SanAntonio_TX_2014`
+The information encoded in `Median_Age_Person` and
+`Observation_Median_Age_Person_SanAntonio_TX_2014`
 are sufficient for translating into `StatisticalPopulation`
 and `Observation` representations, and we go through this exercise to
 illustrate the value of `StatisticalVariable` and `StatVarObservation`.
@@ -89,13 +89,15 @@ populationType: dcid:Person
 location: dcid:geoId/4865000
 ```
 
-The `Observation` copies the `StatVarObservation`'s `observationDate`, `observationPeriod`, `measurementMethod`, and `unit` (when applicable),
-and the `StatisticalVariable`'s `measuredProperty`, `measurementQualifier`, etc. (when applicable). It also extracts the
+The `Observation` copies the `StatVarObservation`'s `observationDate`, `observationPeriod`,
+`measurementMethod`, `unit`, and `scalingFactor` (when applicable),
+and the `StatisticalVariable`'s `measuredProperty`, `measurementQualifier`,
+`measurementDenominator`, etc. (when applicable). It also extracts the
 `StatisticalVariable`'s `statType` and the `StatVarObservation`'s `value`
-as its own `.*Value` property and value.
+as its own `<statType>Value` property and value.
 
 ```
-Node: Observation_MedianAge_SanAntonio_TX_2014
+Node: Observation_Median_Age_Person_SanAntonio_TX_2014
 typeOf: schema:Observation
 observedNode: l:StatisticalPopulation_People_SanAntonio_TX
 observationDate: "2014"
@@ -118,8 +120,9 @@ from the `StatisticalVariable` would be appended to the `StatisticalPopulation`.
 
 Instead of having a `StatisticalPopulation` for each City, County, State, etc. that has
 data on the median age of its population, we have one `StatisticalVariable`. Similarly,
-instead of recoding `measuredProperty`, `measurementQualifier`, and `measurement_denominator` in each place
-and year with an `Observation`, that information is encoded once in the `StatisticalVariable`.
+instead of recoding `measuredProperty`, `measurementQualifier`, and `measurement_denominator`
+in each place and year with an `Observation`, that information is encoded once in the
+`StatisticalVariable`.
 
 The `StatisticalVariable` also makes consuming Data Commons data
 [very simple](http://docs.datacommons.org/api/sheets/get_variable.html).
@@ -131,7 +134,11 @@ triples using this `StatisticalVariable` and `StatVarObservation` format.
 
 ### `StatisticalPopulation` and `Observation`
 
-> Prelude: we'd like to emphasize that `StatisticalPopulation` and `Observation` types are being deemphasized in favor of `StatisticalVariable` and `StatVarObservation`. However, it is still useful to understand these types since they are still (as of June 2020) the final representation in the graph. Understanding `StatisticalPopulation` and `Observation` may also aid in a deeper understanding of `StatisticalVariable` and `StatVarObservation`.
+> Prelude: we'd like to emphasize that `StatisticalPopulation` and `Observation` types are
+being deemphasized in favor of `StatisticalVariable` and `StatVarObservation`. However,
+it is still useful to understand these types since they are still (as of June 2020) the
+final representation in the graph. Understanding `StatisticalPopulation` and `Observation`
+may also aid in a deeper understanding of `StatisticalVariable` and `StatVarObservation`.
 
 <!-- Adapted from https://docs.google.com/document/d/139jXakeQk4ChwCkGjqq5wJfCPMDnwIV94oCH-JzJrhM/edit?usp=sharing by R.V. Guha -->
 

@@ -21,10 +21,20 @@ class TestCovidMobility(unittest.TestCase):
     maxDiff = None
 
     def test1(self):
+        """Simple test 1"""
         self._test_mcf_output('./tests/test1')
 
     def test2(self):
+        """Simple test 2"""
         self._test_mcf_output('./tests/test2')
+
+    def test3(self):
+        """Tests a row with empty data."""
+        self._test_mcf_output('./tests/test3')
+
+    def test4(self):
+        """Tests a row with an empty date."""
+        self._test_mcf_output('./tests/test4')
 
     def _test_mcf_output(self, dir_path: str):
         """Generates an MCF file, given an input data file.

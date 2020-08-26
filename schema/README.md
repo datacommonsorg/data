@@ -1,6 +1,10 @@
 # Data Commons Schema MCF Files
 
 This directory contains the MCF nodes for all defined schemas in Data Commons.
+These files are kept in-sync with the Google repository via Copybara. Changes
+inside Google are immediately copied here. Approved GitHub pull requests are
+sent to the Google respository, where it is tested; if approved, the PR will
+merge into both the Google and GitHub repository.
 
 ## Overview
 
@@ -12,8 +16,3 @@ properties.
 - [enum_specializations.mcf](enum_specializations.mcf) contains all enum `specializationOf` relationships.
   Please handle this file with care.
 - All other MCF files are source or domain specific.
-
-## Testing
-
-Syntax and duplication testing coming soon.
-

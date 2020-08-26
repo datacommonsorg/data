@@ -2,6 +2,8 @@
 
 Author: fpernice-google
 
+# TODO(jeffreyoldham): Update the curator when appropriate.
+
 ## Table of Contents
 
 1. [About the Dataset](#about-the-dataset)
