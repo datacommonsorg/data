@@ -46,7 +46,7 @@ humanProteinOccurrenceReliability: dcs:ProteinOccurrenceReliabilityApproved
 '''
 
 
-class TestParseEbi(unittest.TestCase):
+class TestParseProteinAtlas(unittest.TestCase):
     """Test the functions in parse_mint.py"""
 
     def test_main(self):

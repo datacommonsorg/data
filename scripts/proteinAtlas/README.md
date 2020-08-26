@@ -35,7 +35,7 @@ This dataset is available under [CC BY-SA 3.0](https://creativecommons.org/licen
 
 ### Dataset Documentation and Relevant Links
 
-- Dataset website: [THe Human Protein Atlas - The Tissue Atlas](https://www.proteinatlas.org/humanproteome/tissue)
+- Dataset website: [The Human Protein Atlas - The Tissue Atlas](https://www.proteinatlas.org/humanproteome/tissue)
 
 ## About the import
 
