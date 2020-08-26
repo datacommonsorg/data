@@ -39,6 +39,10 @@ class McfGenerator:
     def generate_simple_geojsons(self, verbose=True):
         self.downloader.download_data(place=self.PLACE_TO_IMPORT)
         for geoid, coords in self.downloader.iter_subareas():
+
+            # This an admitedly hacky way of getting rid of bogus geographies
+            # that are, for some mysterious reason, included as part of the US
+            # states query (with geoIds like geoId/7000).
             if int(geoid.split('/')[1]) > 100:
                 continue
             if verbose:
