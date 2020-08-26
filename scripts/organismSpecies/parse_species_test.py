@@ -71,7 +71,7 @@ dcid: "bio/9ABAC"
 '''
 
 
-class TestParseEbi(unittest.TestCase):
+class TestParseSpecies(unittest.TestCase):
     """Test the functions in parse_mint.py"""
 
     def test_main(self):
