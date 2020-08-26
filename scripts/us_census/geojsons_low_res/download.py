@@ -95,6 +95,16 @@ class GeojsonDownloader:
                                     self.LEVEL_MAP[geolevel])[place]
         self.geojsons = dc.get_property_values(geos_contained_in_place,
                                                "geoJsonCoordinates")
+        for area, coords in self.iter_subareas():
+            self.geojsons[area][0] = geojson.loads(coords)
+
+    def get_subarea(self, area):
+        assert len(self.geojsons[area]) == 1
+        return self.geojsons[area][0]
+
+    def iter_subareas(self):
+        for area in self.geojsons:
+            yield area, self.get_subarea(area)
 
     def save(self, prefix='', path='./original-data/'):
         """Saves the downloaded geojsons to disk.
@@ -106,12 +116,10 @@ class GeojsonDownloader:
                     'original-geoId-01.geojson'.
             path: Directory in which to save the desired files, as a string.
         """
-        for geoid in self.geojsons:
-            assert len(self.geojsons[geoid]) == 1
-            coords = self.geojsons[geoid][0]
+        for geoid, coords in self.iter_subareas():
             filename = geoid.replace('/', '-')
             with open(path + prefix + filename + '.geojson', 'w') as f:
-                geojson.dump(geojson.loads(coords), f)
+                geojson.dump(coords, f)
 
 
 if __name__ == '__main__':
