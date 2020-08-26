@@ -88,19 +88,25 @@ class GeojsonSimplifier:
         """
         geojson = input if input is not None else self.geojson
         coords = geojson['coordinates']
-
+        isPolygon = geojson['type'] == 'Polygon'
         original_size = 0
         simplified_size = 0
         # Iterate over polygons.
         for i in range(len(coords)):
-            assert len(coords[i]) == 1
-            c = coords[i][0]
+            if isPolygon:
+                c = coords[0]
+            else:
+                assert len(coords[i]) == 1
+                c = coords[i][0]
             original_size += len(c)
             new_c = rdp.rdp(c, epsilon=epsilon)
             simplified_size += len(new_c)
             if len(new_c) >= 3:
                 # Simplify the polygon succeeded, not yielding a line
-                coords[i][0] = new_c
+                if isPolygon:
+                    coords[0] = new_c
+                else:
+                    coords[i][0] = new_c
 
         if verbose:
             print(f"Original number of points = {original_size}.")

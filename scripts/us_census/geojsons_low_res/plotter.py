@@ -35,18 +35,23 @@ flags.DEFINE_string('simplified_path', default=None,
 flags.mark_flag_as_required('original_path')
 flags.mark_flag_as_required('simplified_path')
 
+_, (ax1, ax2) = plt.subplots(ncols=2, sharex=True, sharey=True)
+
+
+def compare_plots(geojson1, geojson2, show=True):
+    f1 = geojson1.plot(ax=ax1)
+    f2 = geojson2.plot(ax=ax2)
+    f1.set_title('Original.')
+    f2.set_title('Simplified.')
+
+    if show:
+        plt.show()
+
 
 def main(_):
     original = gpd.read_file(FLAGS.original_path)
     simple = gpd.read_file(FLAGS.simplified_path)
-
-    _, (ax1, ax2) = plt.subplots(ncols=2, sharex=True, sharey=True)
-    f1 = original.plot(ax=ax1)
-    f2 = simple.plot(ax=ax2)
-    f1.set_title('Original.')
-    f2.set_title('Simplified.')
-
-    plt.show()
+    compare_plots(original, simple)
 
 
 if __name__ == '__main__':

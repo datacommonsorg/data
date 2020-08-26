@@ -18,8 +18,14 @@ for US states.
     Typical usage:
     python3 generate_mcf.py
 """
+import geopandas as gpd
 import download
 import simplify
+import plotter
+import geojson
+import copy
+import tempfile
+import matplotlib.pyplot as plt
 
 
 class McfGenerator:
@@ -30,11 +36,37 @@ class McfGenerator:
         self.simplifier = simplify.GeojsonSimplifier()
         self.simple_geojsons = {}
 
-    def generate_simple_geojsons(self):
+    def generate_simple_geojsons(self, verbose=True):
         self.downloader.download_data(place=self.PLACE_TO_IMPORT)
         for geoid, coords in self.downloader.iter_subareas():
-            print(f"Simplifying geoid = {geoid}")
-            self.simple_geojsons[geoid] = self.simplifier.simplify(coords)
+            if int(geoid.split('/')[1]) > 100:
+                continue
+            if verbose:
+                print(f"Simplifying {geoid}...")
+            try:
+                f1 = tempfile.TemporaryFile(mode='r+')
+                f2 = tempfile.TemporaryFile(mode='r+')
+
+                original = copy.deepcopy(coords)
+                simple = self.simplifier.simplify(coords, verbose=verbose,
+                                                  epsilon=0.05)
+                print()
+
+                f1.write(geojson.dumps(original))
+                f2.write(geojson.dumps(simple))
+
+                f1.seek(0)
+                f2.seek(0)
+
+                plotter.compare_plots(gpd.read_file(f1),
+                                      gpd.read_file(f2), show=False)
+                f1.close()
+                f2.close()
+            except AssertionError:
+                print("Simplifier failure on GeoJSON below:")
+                print(coords)
+        plt.show()
+
 
     # def generate_mcf(self, path='low_res_geojsons.mcf'):
     #     with open(path, 'w') as f:
