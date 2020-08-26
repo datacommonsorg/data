@@ -23,9 +23,9 @@ import download
 import simplify
 import plotter
 import geojson
-import copy
 import tempfile
 import matplotlib.pyplot as plt
+from absl import logging
 
 
 class McfGenerator:
@@ -42,29 +42,24 @@ class McfGenerator:
             if int(geoid.split('/')[1]) > 100:
                 continue
             if verbose:
-                print(f"Simplifying {geoid}...")
+                logging.info(f"Simplifying {geoid}...")
             try:
-                f1 = tempfile.TemporaryFile(mode='r+')
-                f2 = tempfile.TemporaryFile(mode='r+')
+                with tempfile.TemporaryFile(mode='r+') as f1, \
+                     tempfile.TemporaryFile(mode='r+') as f2:
 
-                original = copy.deepcopy(coords)
-                simple = self.simplifier.simplify(coords, verbose=verbose,
-                                                  epsilon=0.05)
-                print()
+                    geojson.dump(coords, f1)
+                    geojson.dump(self.simplifier.simplify(coords,
+                                                          verbose=verbose,
+                                                          epsilon=0.05), f2)
 
-                f1.write(geojson.dumps(original))
-                f2.write(geojson.dumps(simple))
+                    # Rewind files to start for reading.
+                    f1.seek(0)
+                    f2.seek(0)
 
-                f1.seek(0)
-                f2.seek(0)
-
-                plotter.compare_plots(gpd.read_file(f1),
-                                      gpd.read_file(f2), show=False)
-                f1.close()
-                f2.close()
+                    plotter.compare_plots(gpd.read_file(f1),
+                                          gpd.read_file(f2), show=False)
             except AssertionError:
-                print("Simplifier failure on GeoJSON below:")
-                print(coords)
+                logging.error("Simplifier failure on GeoJSON below:\n", coords)
         plt.show()
 
 

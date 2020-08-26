@@ -28,6 +28,7 @@ import rdp
 import geojson
 from absl import app
 from absl import flags
+from absl import logging
 
 
 FLAGS = flags.FLAGS
@@ -109,8 +110,8 @@ class GeojsonSimplifier:
                     coords[i][0] = new_c
 
         if verbose:
-            print(f"Original number of points = {original_size}.")
-            print(f"Simplified number of points = {simplified_size}.")
+            logging.info(f"Original number of points = {original_size}.")
+            logging.info(f"Simplified number of points = {simplified_size}.")
 
         return geojson
 

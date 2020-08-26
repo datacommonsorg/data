@@ -19,7 +19,7 @@ Downloads and saves GeoJson map files from DataCommons.
 
 import datacommons as dc
 import geojson
-
+import os
 
 # TODO(fpernice-google): Support downloading more than just US states.
 class GeojsonDownloader:
@@ -106,7 +106,7 @@ class GeojsonDownloader:
         for area in self.geojsons:
             yield area, self.get_subarea(area)
 
-    def save(self, prefix='', path='./original-data/'):
+    def save(self, prefix='', path='./original-data'):
         """Saves the downloaded geojsons to disk.
 
         Args:
@@ -118,7 +118,8 @@ class GeojsonDownloader:
         """
         for geoid, coords in self.iter_subareas():
             filename = geoid.replace('/', '-')
-            with open(path + prefix + filename + '.geojson', 'w') as f:
+            with open(os.path.join(path, prefix + filename + '.geojson'),
+                      'w') as f:
                 geojson.dump(coords, f)
 
 
