@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests the import_data.py script.
 
     Typical usage:
@@ -26,6 +25,7 @@ TEST_DATA_DIR = "test-data"
 
 
 class GeojsonSimplifierTest(unittest.TestCase):
+
     @staticmethod
     def get_file_output(raw_file, simple_file):
         simplifier = simplify.GeojsonSimplifier()
@@ -59,15 +59,11 @@ class GeojsonSimplifierTest(unittest.TestCase):
         """
         polygon_ex = {
             'type': 'Polygon',
-            'coordinates': [
-                [[[1, 1], [2, 2], [3, 3.1], [4, 0]]]
-            ]
+            'coordinates': [[[[1, 1], [2, 2], [3, 3.1], [4, 0]]]]
         }
         polygon_simple_ex = {
             'type': 'Polygon',
-            'coordinates': [
-                [[[1, 1], [3, 3.1], [4, 0]]]
-            ]
+            'coordinates': [[[[1, 1], [3, 3.1], [4, 0]]]]
         }
         simplifier = simplify.GeojsonSimplifier()
         simplifier.geojson = polygon_ex
@@ -80,15 +76,11 @@ class GeojsonSimplifierTest(unittest.TestCase):
         """
         polygon_ex = {
             'type': 'Polygon',
-            'coordinates': [
-                [[[1, 0], [2, 5], [3, 0.25], [4, -0.5], [5, 0.1]]]
-            ]
+            'coordinates': [[[[1, 0], [2, 5], [3, 0.25], [4, -0.5], [5, 0.1]]]]
         }
         polygon_simple_ex = {
             'type': 'Polygon',
-            'coordinates': [
-                [[[1, 0], [2, 5], [5, 0.1]]]
-            ]
+            'coordinates': [[[[1, 0], [2, 5], [5, 0.1]]]]
         }
         simplifier = simplify.GeojsonSimplifier()
         simplifier.geojson = polygon_ex

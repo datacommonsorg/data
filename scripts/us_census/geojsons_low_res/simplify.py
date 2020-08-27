@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Simplifies GeoJson files by reducing their number of vertices.
 
     Some geographic boundaries are more complicated than the finest detail
@@ -30,19 +29,23 @@ from absl import app
 from absl import flags
 from absl import logging
 
-
 FLAGS = flags.FLAGS
-flags.DEFINE_string('in_path', default=None,
+flags.DEFINE_string('in_path',
+                    default=None,
                     help='Path to original GeoJSON to simplify.')
-flags.DEFINE_string('out_path', default=None,
+flags.DEFINE_string('out_path',
+                    default=None,
                     help='Path to save simplified GeoJSON.')
-flags.DEFINE_boolean('verbose', default=False,
+flags.DEFINE_boolean('verbose',
+                     default=False,
                      help='If True, compression information is printed.')
-flags.DEFINE_float('epsilon', default=0.01,
+flags.DEFINE_float('epsilon',
+                   default=0.01,
                    help='Epsilon parameter to the Ramer–Douglas–Peucker '
-                        'algorithm. For more information, see the Wikipedia'
-                        ' page.')
-flags.register_validator('epsilon', lambda value: value > 0,
+                   'algorithm. For more information, see the Wikipedia'
+                   ' page.')
+flags.register_validator('epsilon',
+                         lambda value: value > 0,
                          message='--epsilon must be positive')
 flags.mark_flag_as_required('in_path')
 flags.mark_flag_as_required('out_path')
@@ -56,6 +59,7 @@ class GeojsonSimplifier:
                  to be simplified. After calling simplify(), it contains the
                  simplified GeoJSON.
     """
+
     def __init__(self):
         self.geojson = None
 

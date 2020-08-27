@@ -53,20 +53,21 @@ class McfGenerator:
                      tempfile.TemporaryFile(mode='r+') as f2:
 
                     geojson.dump(coords, f1)
-                    geojson.dump(self.simplifier.simplify(coords,
-                                                          verbose=verbose,
-                                                          epsilon=0.05), f2)
+                    geojson.dump(
+                        self.simplifier.simplify(coords,
+                                                 verbose=verbose,
+                                                 epsilon=0.05), f2)
 
                     # Rewind files to start for reading.
                     f1.seek(0)
                     f2.seek(0)
 
                     plotter.compare_plots(gpd.read_file(f1),
-                                          gpd.read_file(f2), show=False)
+                                          gpd.read_file(f2),
+                                          show=False)
             except AssertionError:
                 logging.error("Simplifier failure on GeoJSON below:\n", coords)
         plt.show()
-
 
     # def generate_mcf(self, path='low_res_geojsons.mcf'):
     #     with open(path, 'w') as f:
