@@ -43,6 +43,7 @@ class McfGenerator:
             # This an admitedly hacky way of getting rid of bogus geographies
             # that are, for some mysterious reason, included as part of the US
             # states query (with geoIds like geoId/7000).
+            # TODO(jeffreyoldham): (potentially) find a cleaner way to do this.
             if int(geoid.split('/')[1]) > 100:
                 continue
             if verbose:
