@@ -592,18 +592,11 @@ subClassOf: dcs:ChemicalCompound
 description: "The invading substances from the outer source which causes the immune response. It refers to a molecule or molecule structure which may interact with the immune cell antigen receptor or antibody. "
 descriptionUrl:"https://en.wikipedia.org/wiki/Antigen"
 
-Node: dcid:OtherAntigenType
-name: "OtherAntigenType"
-typeOf: schema:Class
-subClassOf: schema:Thing
-description: "Other antigen types excluding protein or chemicals."
-descriptionUrl:  "https://web.expasy.org/abcd/"
-
 Node: dcid:recognizesAntigen
 typeOf: schema:Property
 name: "recognizesAntigen"
 description: "The targeting antigen of the antibody."
-rangeIncludes: dcs:Protein, schema:Text, dcs:ChemicalCompound
+rangeIncludes: dcs:Protein
 domainIncludes:dcs:Antibody
 # rangeIncludes proteins with links to UniProt, chemicals with IDs to ChEBI and a few samples to other databases (InterPro, NCBI, Prosite, UniProt-Subcell).
 
@@ -611,20 +604,20 @@ Node: dcid:antigenType
 typeOf: schema:Property
 name: "antigenType"
 description: "The type of the antigen for an antibody. There are types as protein, chemical and the others. "
-rangeIncludes: dcs:Protein, dcs:ChemicalCompound, dcs:OtherAntigenType
+rangeIncludes: dcs:Protein
 domainIncludes:dcs:Antibody
 
 Node: dcid:antibodyType
 typeOf: schema:Property
 name: "antibodyType"
-description: "The type of antibody. "
+description: "The type of antibody, including bispecific antibody, nanobody and DARPins. "
 rangeIncludes: dcs:AntibodyTypeEnum 
 domainIncludes:dcs:Antibody
 
 Node: dcid:antibodyApplication
 typeOf: schema:Property
 name: "antibodyApplication"
-description: "The applications of the antibody."
+description: "The applications of the antibody in the experiments, such as ELISA, Immunofluorescence, Immunoprecipitation, etc."
 rangeIncludes: schema:Text
 domainIncludes:dcs:Antibody
 
@@ -732,4 +725,3 @@ description: "The identifier in PROSITE database. PROSITE consists of documentat
 rangeIncludes: schema:Text
 domainIncludes:dcs:Antibody
 descriptionUrl:"https://prosite.expasy.org/index.html"
-
