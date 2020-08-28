@@ -40,7 +40,7 @@ flags.DEFINE_string('output_mcf',
                     short_name='m')
 
 
-def get_mcf_piece(code, info, seen_name_to_dcid, CODE_TO_KINGDOM):
+def get_mcf_piece(code, info, seen_name_to_dcid):
     """
     Args:
         code: an organism code
@@ -51,6 +51,14 @@ def get_mcf_piece(code, info, seen_name_to_dcid, CODE_TO_KINGDOM):
     info = {'Official': 'Abaeis nicippe', 'kingdom': 'E',
     'taxonID': '72259', 'Common': 'Sleepy orange butterfly'}
     """
+    CODE_TO_KINGDOM = {
+        'A': 'Archaea',
+        'B': 'Bacteria',
+        'E': 'Eukaryota',
+        'V': 'Virus',
+        'O': 'OtherOrganismKingdom'
+    }
+
     name = get_class_name(info['Official'])
 
     name_seen = False
@@ -68,19 +76,28 @@ def get_mcf_piece(code, info, seen_name_to_dcid, CODE_TO_KINGDOM):
     if 'Alternate' in info:
         type_names += 'alternateName: "' + info['Alternate'] + '"\n'
     taxonID = info['taxonID']
+
+    # handle the special cases when the get_class_name generate the same node
+    # name from two different nodes after deleting the special characters
     if taxonID == "31609":
         # scientific name = "Parainfluenza virus 5 (isolate Canine/CPI-)"
         name += 'Negative'
     elif taxonID == "31608":
         # scientific name = "Parainfluenza virus 5 (isolate Canine/CPI+)"
         name += 'Positive'
-    mcf = ('Node: ' + name + '\n' + 'name: "' + name + '"\n' +
-           'typeOf: Species' + '\n' + type_names + 'ncbiTaxonID: "' + taxonID +
-           '"\n' + 'organismTaxonomicKingdom: dcs:' +
-           CODE_TO_KINGDOM[info['kingdom']] + '\n' + 'uniProtOrganismCode: "' +
-           code + '"\n' + 'dcid: "bio/' + dcid + '"\n')
 
-    return mcf, name_seen
+    mcf_list = []
+    mcf_list.append('Node: ' + name + '\n')
+    mcf_list.append('name: "' + name + '"\n')
+    mcf_list.append('typeOf: Species' + '\n')
+    mcf_list.append(type_names)
+    mcf_list.append('ncbiTaxonID: "' + taxonID + '"\n')
+    mcf_list.append('organismTaxonomicKingdom: dcs:' +
+                    CODE_TO_KINGDOM[info['kingdom']] + '\n')
+    mcf_list.append('uniProtOrganismCode: "' + code + '"\n')
+    mcf_list.append('dcid: "bio/' + dcid + '"\n')
+
+    return ''.join(mcf_list), name_seen
 
 
 def get_class_name(a_string):
@@ -109,13 +126,6 @@ def get_mcf(combine_lines, seen_name_to_dcid):
     mcf_seen_list = []
     code = None
     name_type_map = {'N': 'Official', 'C': 'Common', 'S': 'Alternate'}
-    CODE_TO_KINGDOM = {
-        'A': 'Archaea',
-        'B': 'Bacteria',
-        'E': 'Eukaryota',
-        'V': 'Virus',
-        'O': 'OtherOrganismKingdom'
-    }
     info = {}
     # Original data format:
     # AADNV V  648330: N=Aedes albopictus densovirus (isolate Boublik/1994)
@@ -128,8 +138,7 @@ def get_mcf(combine_lines, seen_name_to_dcid):
         if line[0] != ' ':
             # save last complete information in map
             if code:
-                mcf, name_seen = get_mcf_piece(code, info, seen_name_to_dcid,
-                                               CODE_TO_KINGDOM)
+                mcf, name_seen = get_mcf_piece(code, info, seen_name_to_dcid)
                 if name_seen:
                     mcf_seen_list.append(mcf)
                 else:
@@ -153,6 +162,8 @@ def get_mcf(combine_lines, seen_name_to_dcid):
             name_code, name = line.lstrip().split('=')
             name_type = name_type_map[name_code]
             info[name_type] = name
+    # Last line of combine_lines is the '9ZZZZ X       1: N=root'
+    # which is not species actually. Thus we skipped this node.
     return mcf_seen_list, mcf_list
 
 
@@ -168,20 +179,16 @@ def main(argv):
     # Save the species instances already in Data Commons in the dict
     seen_name_to_dcid = {}
     for mcf in species_mcf_list:
-        mcf_split = mcf.split('\n')
-        name = mcf_split[0].split()[1]
-        dcid = mcf_split[-1].split()[1][1:-1].split('/')[1]
+        for line in mcf.split('\n'):
+            line = line.strip()
+            if line.startswith('name'):
+                name = line.split(' ')[1][1:-1]
+            elif line.startswith('dcid'):
+                dcid = line.split(' ')[1][1:-1].split('/')[1]
         seen_name_to_dcid[name] = dcid
-    #  The species imported already:
-    #  seen_name_to_dcid =
-    #  {'HomoSapiens': 'hs',
-    #  'CaenorhabditisElegans': 'ce',
-    #  'DanioRerio': 'danRer',
-    #  'DrosophilaMelanogaster': 'dm',
-    #  'GallusGallus': 'galGal',
-    #  'MusMusculus': 'mm',
-    #  'SaccharomycesCerevisiae': 'sacCer',
-    #  'XenopusLaevis': 'xenLae'}
+
+    #  example of the species imported before in seen_name_to_dcid:
+    #  'HomoSapiens': 'hs'
 
     # content_chunks[2].split('__\n')[1] Real organism codes
     # content_chunks[8].split('\n\n')[1] "Virtual" codes that
