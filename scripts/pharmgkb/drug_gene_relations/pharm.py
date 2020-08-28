@@ -446,7 +446,7 @@ def get_drug_mcf(row, drug_dcid):
     pubchem = format_text_list(row['PubChem Compound Identifiers'])
     compound_type = get_compound_type(row['Type'])
 
-    dc_name = drug_dcid.replace('bio/','')
+    dc_name = drug_dcid.replace('bio/', '')
 
     templater = mcf_template_filler.Filler(config.DRUG_TEMPLATE,
                                            required_vars=['dcid', 'type'])
@@ -622,7 +622,7 @@ def main():
     relation_df.fillna('', inplace=True)
 
     print('writing ChemicalCompoundGeneAssociation nodes to mcf....')
-    
+
     drug_gene_df = relation_df[(relation_df['Entity1_type'] == 'Chemical') &
                                (relation_df['Entity2_type'] == 'Gene')]
     drug_first = True
