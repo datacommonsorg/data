@@ -19,9 +19,8 @@ Requirements:
 Generating the csv files takes at least  3 hours!
 
 ### Py Files
-- `pharm.py` downloads the raw data and write the mcf file
-- `config.py` contains enum and property label dictionaries as well as template strings used in pharm.py. Review this file to see what data was ingested into Data Commons via this import.
-- `tests.py` contains unit tests for pharm.py
+- `generate_conversion_files.py` querries UniChem, InChI, and Chembl web resources to find Chembl ids matching the provided identifer.
+- `generate_conversion_files_tests.py` contains unit tests for generate_conversion_files.py
 
 
 ### Generating CSVs
@@ -32,7 +31,7 @@ $python3 generate_conversion_files.py
 ```
 You will prompted to confirm that you do wish to run `generate_conversion_files.py`, since it takes a considerable amount of time to complete.
 
-To run the unit tests for generate_conversion_file.py run
+To run the unit tests for generate_conversion_files.py run
 
 ```bash
 $python3 generate_conversion_files_test.py
