@@ -36,7 +36,7 @@ def nuts_to_iso(data):
 
 def obtain_value(entry):
     """Extract value from entry. 
-    The entries could be: '81.6', ': ', '79.9 e', ': e'
+    The entries could be like: '81.6', ': ', '79.9 e', ': e'.
     """
     entry = entry.split(' ', maxsplit=-1)[0]  # Discard notes.
     if not entry or entry == ':':
