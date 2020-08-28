@@ -1,9 +1,3 @@
-Node: dcid:alternateGeneSymbol
-name: "alternateGeneSymbol"
-typeOf: schema:Property
-rangeIncludes: schema:Text
-domainIncludes: dcs:Gene
-
 Node: dcid:alfredID
 name: "alfredID"
 typeOf: schema:Property
@@ -207,5 +201,3 @@ name: "rxNormID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Drug,dcs:ChemicalCompound
-
-

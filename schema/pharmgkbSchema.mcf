@@ -60,6 +60,12 @@ domainIncludes: dcs:Drug, dcs:ChemicalCompound, dcs:Gene,
 description: "Entity ID given by PharmGKB."
 url: "https://www.pharmgkb.org/"
 
+Node: dcid:alternateGeneSymbol
+name: "alternateGeneSymbol"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
 Node: dcid:RelationshipAssociationTypeEnum
 typeOf: schema:Class
 subClassOf: schema:Enumeration
