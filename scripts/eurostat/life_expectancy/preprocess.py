@@ -20,6 +20,9 @@ PATH = 'demo_r_mlifexp.tsv'
 
 def nuts_to_iso(data):
     """Convert 2-letter NUTS codes for countries to ISO 3166-1 alpha-3 codes."""
+    # TODO(jefferyoldham): Consider using util/geo/geo_to_dcid_mappings.go's
+    # CountryCodeToDCID subject to NUTS's two additions. If so, remove
+    # countries_codes_and_coordinate.csv
     ISO_2_TO_3_PATH = ('./countries_codes_and_coordinates.csv')
     codes = pd.read_csv(ISO_2_TO_3_PATH)
     codes["Alpha-2 code"] = codes["Alpha-2 code"].str.extract(r'"([a-zA-Z]+)"')
