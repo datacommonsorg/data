@@ -46,18 +46,19 @@ flags.DEFINE_string('tissue_mcf', 'HumanTissueEnum.mcf',
 flags.DEFINE_string('cell_mcf', 'HumanCellTypeEnum.mcf',
                     'The output HumanCellTypeEnum.mcf file path.')
 EXPRESSION_MAP = {
-        'Not detected': 'ProteinExpressionNotDetected',
-        'Low': 'ProteinExpressionLow',
-        'Medium': 'ProteinExpressionMedium',
-        'High': 'ProteinExpressionHigh'
-    }
+    'Not detected': 'ProteinExpressionNotDetected',
+    'Low': 'ProteinExpressionLow',
+    'Medium': 'ProteinExpressionMedium',
+    'High': 'ProteinExpressionHigh'
+}
 
 RELIABILITY_MAP = {
-        'Enhanced': 'ProteinOccurrenceReliabilityEnhanced',
-        'Supported': 'ProteinOccurrenceReliabilitySupported',
-        'Approved': 'ProteinOccurrenceReliabilityApproved',
-        'Uncertain': 'ProteinOccurrenceReliabilityUncertain'
-    }
+    'Enhanced': 'ProteinOccurrenceReliabilityEnhanced',
+    'Supported': 'ProteinOccurrenceReliabilitySupported',
+    'Approved': 'ProteinOccurrenceReliabilityApproved',
+    'Uncertain': 'ProteinOccurrenceReliabilityUncertain'
+}
+
 
 def get_gene_to_uniprot_list(file_path):
     """
@@ -143,16 +144,14 @@ def generate_mcf(protein_dcid, tissue, cell, expression, reliability):
     name = '_'.join([protein_dcid, tissue, cell])
     mcf_list = []
     mcf_list.append('Node: dcid:bio/' + name + '\n')
-    mcf_list.append('typeOf: HumanProteinOccurrence' +
-           '\n')
+    mcf_list.append('typeOf: HumanProteinOccurrence' + '\n')
     mcf_list.append('name: "' + name + '"' + '\n')
-    mcf_list.append('detectedProtein: dcs:bio/' +
-           protein_dcid + '\n')
+    mcf_list.append('detectedProtein: dcs:bio/' + protein_dcid + '\n')
     mcf_list.append('humanTissue: dcs:' + tissue + '\n')
     mcf_list.append('humanCellType: dcs:' + cell + '\n')
     mcf_list.append('proteinExpressionScore: dcs:' + expression + '\n')
     mcf_list.append('humanProteinOccurrenceReliability: dcs:' + reliability)
-    
+
     return ''.join(mcf_list)
 
 
@@ -182,10 +181,9 @@ def get_tissue_enum(tissue):
     mcf_list.append('Node: dcid:' + name + '\n')
     mcf_list.append('typeOf: dcs:HumanTissueEnum' + '\n')
     mcf_list.append('name: "' + name + '"\n')
-    mcf_list.append('description: "' + tissue[0].upper() +
-           tissue[1:] + '"\n')
+    mcf_list.append('description: "' + tissue[0].upper() + tissue[1:] + '"\n')
     mcf_list.append('domainIncludes: dcs:HumanTissueEnum\n')
-    
+
     return ''.join(mcf_list)
 
 
@@ -194,11 +192,9 @@ def get_cell_enum(cell):
     name = get_class_name(cell)
     mcf_list = []
     mcf_list.append('Node: dcid:' + name + '\n')
-    mcf_list.append('typeOf: dcs:HumanCellTypeEnum' +
-           '\n')
+    mcf_list.append('typeOf: dcs:HumanCellTypeEnum' + '\n')
     mcf_list.append('name: "' + name + '"\n')
-    mcf_list.append('description: "' +
-           cell[0].upper() + cell[1:] + '"\n')
+    mcf_list.append('description: "' + cell[0].upper() + cell[1:] + '"\n')
     mcf_list.append('domainIncludes: dcs:HumanCellTypeEnum\n')
 
     return ''.join(mcf_list)
@@ -218,8 +214,7 @@ def main(argv):
     df = pd.read_csv(tissue_atlas_path, sep='\t', header=[0], squeeze=True)
 
     df = df.dropna()
-    df['mcf'] = df.apply(lambda row: mcf_from_row(
-        row, gene_to_dcid_list),
+    df['mcf'] = df.apply(lambda row: mcf_from_row(row, gene_to_dcid_list),
                          axis=1)
     data_mcf = '\n\n'.join(df['mcf'].dropna()) + '\n'
 
