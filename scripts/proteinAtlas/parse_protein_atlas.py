@@ -45,7 +45,19 @@ flags.DEFINE_string('tissue_mcf', 'HumanTissueEnum.mcf',
 
 flags.DEFINE_string('cell_mcf', 'HumanCellTypeEnum.mcf',
                     'The output HumanCellTypeEnum.mcf file path.')
+EXPRESSION_MAP = {
+        'Not detected': 'ProteinExpressionNotDetected',
+        'Low': 'ProteinExpressionLow',
+        'Medium': 'ProteinExpressionMedium',
+        'High': 'ProteinExpressionHigh'
+    }
 
+RELIABILITY_MAP = {
+        'Enhanced': 'ProteinOccurrenceReliabilityEnhanced',
+        'Supported': 'ProteinOccurrenceReliabilitySupported',
+        'Approved': 'ProteinOccurrenceReliabilityApproved',
+        'Uncertain': 'ProteinOccurrenceReliabilityUncertain'
+    }
 
 def get_gene_to_uniprot_list(file_path):
     """
@@ -129,22 +141,28 @@ def get_class_name(a_string):
 def generate_mcf(protein_dcid, tissue, cell, expression, reliability):
     """generate a data mcf"""
     name = '_'.join([protein_dcid, tissue, cell])
-    mcf = ('Node: dcid:bio/' + name + '\n' + 'typeOf: HumanProteinOccurrence' +
-           '\n' + 'name: "' + name + '"' + '\n' + 'detectedProtein: dcs:bio/' +
-           protein_dcid + '\n' + 'humanTissue: dcs:' + tissue + '\n' +
-           'humanCellType: dcs:' + cell + '\n' +
-           'proteinExpressionScore: dcs:' + expression + '\n' +
-           'humanProteinOccurrenceReliability: dcs:' + reliability)
-    return mcf
+    mcf_list = []
+    mcf_list.append('Node: dcid:bio/' + name + '\n')
+    mcf_list.append('typeOf: HumanProteinOccurrence' +
+           '\n')
+    mcf_list.append('name: "' + name + '"' + '\n')
+    mcf_list.append('detectedProtein: dcs:bio/' +
+           protein_dcid + '\n')
+    mcf_list.append('humanTissue: dcs:' + tissue + '\n')
+    mcf_list.append('humanCellType: dcs:' + cell + '\n')
+    mcf_list.append('proteinExpressionScore: dcs:' + expression + '\n')
+    mcf_list.append('humanProteinOccurrenceReliability: dcs:' + reliability)
+    
+    return ''.join(mcf_list)
 
 
-def mcf_from_row(row, expression_map, reliability_map, gene_to_dcid_list):
+def mcf_from_row(row, gene_to_dcid_list):
     """Generate data mcf from each row of the dataframe"""
     gene = row['Gene name']
     tissue = get_class_name(row['Tissue'])
     cell = get_class_name(row['Cell type'])
-    expression = expression_map[row['Level']]
-    reliability = reliability_map[row['Reliability']]
+    expression = EXPRESSION_MAP[row['Level']]
+    reliability = RELIABILITY_MAP[row['Reliability']]
     if gene not in gene_to_dcid_list:
         # skip case when there is no gene to dcid mapping
         return None
@@ -160,20 +178,30 @@ def mcf_from_row(row, expression_map, reliability_map, gene_to_dcid_list):
 def get_tissue_enum(tissue):
     """Generate a enum instance for a tissue"""
     name = get_class_name(tissue)
-    mcf = ('Node: dcid:' + name + '\n' + 'typeOf: dcs:HumanTissueEnum' + '\n' +
-           'name: "' + name + '"\n' + 'description: "' + tissue[0].upper() +
-           tissue[1:] + '"\n' + 'domainIncludes: dcs:HumanTissueEnum\n')
-    return mcf
+    mcf_list = []
+    mcf_list.append('Node: dcid:' + name + '\n')
+    mcf_list.append('typeOf: dcs:HumanTissueEnum' + '\n')
+    mcf_list.append('name: "' + name + '"\n')
+    mcf_list.append('description: "' + tissue[0].upper() +
+           tissue[1:] + '"\n')
+    mcf_list.append('domainIncludes: dcs:HumanTissueEnum\n')
+    
+    return ''.join(mcf_list)
 
 
 def get_cell_enum(cell):
     """Generate a enum instance for a cell type"""
     name = get_class_name(cell)
-    mcf = ('Node: dcid:' + name + '\n' + 'typeOf: dcs:HumanCellTypeEnum' +
-           '\n' + 'name: "' + name + '"\n' + 'description: "' +
-           cell[0].upper() + cell[1:] + '"\n' +
-           'domainIncludes: dcs:HumanCellTypeEnum\n')
-    return mcf
+    mcf_list = []
+    mcf_list.append('Node: dcid:' + name + '\n')
+    mcf_list.append('typeOf: dcs:HumanCellTypeEnum' +
+           '\n')
+    mcf_list.append('name: "' + name + '"\n')
+    mcf_list.append('description: "' +
+           cell[0].upper() + cell[1:] + '"\n')
+    mcf_list.append('domainIncludes: dcs:HumanCellTypeEnum\n')
+
+    return ''.join(mcf_list)
 
 
 def main(argv):
@@ -189,21 +217,9 @@ def main(argv):
     tissue_atlas_path = database_file
     df = pd.read_csv(tissue_atlas_path, sep='\t', header=[0], squeeze=True)
 
-    expression_map = {
-        'Not detected': 'ProteinExpressionNotDetected',
-        'Low': 'ProteinExpressionLow',
-        'Medium': 'ProteinExpressionMedium',
-        'High': 'ProteinExpressionHigh'
-    }
-    reliability_map = {
-        'Enhanced': 'ProteinOccurrenceReliabilityEnhanced',
-        'Supported': 'ProteinOccurrenceReliabilitySupported',
-        'Approved': 'ProteinOccurrenceReliabilityApproved',
-        'Uncertain': 'ProteinOccurrenceReliabilityUncertain'
-    }
     df = df.dropna()
     df['mcf'] = df.apply(lambda row: mcf_from_row(
-        row, expression_map, reliability_map, gene_to_dcid_list),
+        row, gene_to_dcid_list),
                          axis=1)
     data_mcf = '\n\n'.join(df['mcf'].dropna()) + '\n'
 

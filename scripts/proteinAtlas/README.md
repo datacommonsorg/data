@@ -17,7 +17,7 @@
 
 ### Download URL
 
-Data is available for downloading at [Protein Atlas Download](https://www.proteinatlas.org/about/download). (The main dataset used here is [normal_tissue.tsv](https://www.proteinatlas.org/download/normal_tissue.tsv.zip), the dataset to retrive \[Gene Name, UniProt Entry] pair is [proteinatlas.tsv.zip](https://www.proteinatlas.org/download/proteinatlas.tsv.zip).
+Data is available for downloading at [Protein Atlas Download](https://www.proteinatlas.org/about/download). (The main dataset used here is [normal_tissue.tsv](https://www.proteinatlas.org/download/normal_tissue.tsv.zip), the dataset to retrieve \[Gene Name, UniProt Entry] pair is [proteinatlas.tsv.zip](https://www.proteinatlas.org/download/proteinatlas.tsv.zip).
  
 ### Overview
 
@@ -55,12 +55,14 @@ This dataset is available under [CC BY-SA 3.0](https://creativecommons.org/licen
 #### Processing Steps 
 
 
-To generate 'uniprot_list.txt' which contains all the UniProt entries and "gene_to_uniprot_list.txt" which contains the paired gene name and the UniProt entry list, run:
+To generate 'uniprot_list.txt' which contains all the UniProt entries and [gene_to_uniprot_list.txt](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/gene_to_uniprot_list.txt) which contains the paired gene name and the UniProt entry list, run:
 
 ```bash
 python3 generate_gene_to_uniprot_mapping.py -f proteinatlas.tsv --uniprot uniprot_list.txt --gene_to_uniprot gene_to_uniprot_list.txt 
 ```
 Then upload the file uniprot_list.txt containing UniProt entries separated by space to [UniProt Retrieve/ID mapping](https://www.uniprot.org/uploadlists/) to generate the UniProt \[Entry, Entry Name] pairs and save to file [uniprot_to_dcid.tsv](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/uniprot_to_dcid.tsv). The pair example is \['Q96GF1', 'RN185_HUMAN']. The UniProt Entry Name is the DCID for protein instances in Data Commons. Thus we can create the mapping from gene name to protein DCID.
+
+[gene_to_uniprot_list.txt](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/gene_to_uniprot_list.txt) and [uniprot_to_dcid.tsv](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/uniprot_to_dcid.tsv) will be used by [parse_protein_atlas.py](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/parse_protein_atlas.py).
 
 To generate the data MCF file and enumeration files, run:
 

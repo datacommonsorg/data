@@ -60,21 +60,9 @@ class TestParseProteinAtlas(unittest.TestCase):
                          header=[0],
                          squeeze=True)
 
-        expression_map = {
-            'Not detected': 'ProteinExpressionNotDetected',
-            'Low': 'ProteinExpressionLow',
-            'Medium': 'ProteinExpressionMedium',
-            'High': 'ProteinExpressionHigh'
-        }
-        reliability_map = {
-            'Enhanced': 'ProteinOccurrenceReliabilityEnhanced',
-            'Supported': 'ProteinOccurrenceReliabilitySupported',
-            'Approved': 'ProteinOccurrenceReliabilityApproved',
-            'Uncertain': 'ProteinOccurrenceReliabilityUncertain'
-        }
         df = df.dropna()
         df['mcf'] = df.apply(lambda row: parse_protein_atlas.mcf_from_row(
-            row, expression_map, reliability_map, gene_to_dcid_list),
+            row, gene_to_dcid_list),
                              axis=1)
         data_mcf = '\n\n'.join(df['mcf'].dropna()) + '\n'
         self.assertEqual(data_mcf, CONST_OUTPUT)
