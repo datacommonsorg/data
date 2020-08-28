@@ -105,8 +105,8 @@ To run the tools via a command line:
     `--style google`, e.g.,
 
 ```
-# Update (--in_place) all files in the util/ directory and its subdirectories.
-yapf --recursive --in_place --style google util/
+# Update (--in-place) all files in the util/ directory and its subdirectories.
+yapf --recursive --in-place --style google util/
 
 # Produce differences between the current code and reformatted code.  Empty
 # output indicates correctly formatted code.
