@@ -603,7 +603,7 @@ domainIncludes:dcs:Antibody
 Node: dcid:antigenType
 typeOf: schema:Property
 name: "antigenType"
-description: "The type of the antigen for an antibody. There are types as protein, chemical and the others. "
+description: "The type of the antigen for an antibody which includes protein, chemical compound and other types. "
 rangeIncludes: dcs:Protein
 domainIncludes:dcs:Antibody
 
