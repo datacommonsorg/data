@@ -34,7 +34,7 @@ def main(argv):
     """Main function to generate the gene name to uniprot entries mapping."""
     database_file_path = FLAGS.database
     uniprot_list_path = FLAGS.uniprot
-    
+
     with open(database_file_path, 'r') as file:
         file_content = file.read()
 
@@ -56,6 +56,7 @@ def main(argv):
 
     with open(FLAGS.uniprot, 'w') as file:
         file.write(' '.join(uniprot_list))
+
 
 if __name__ == '__main__':
     app.run(main)

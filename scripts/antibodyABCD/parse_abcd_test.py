@@ -80,6 +80,7 @@ epitope: "Sequence:SDDESDSGMASQADQKEEELLLFWTYIQAMLTNLESLSLDRIYNMLRMFVVTGPALAEIDL
 
 class TestParseAbcd(unittest.TestCase):
     """Test the functions in parse_abcd.py"""
+
     def test_main(self):
         """Test in the main function"""
         uniprot_to_dcid = {'Q9UJX6': 'ANC2_HUMAN'}
