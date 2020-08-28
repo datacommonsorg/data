@@ -134,19 +134,19 @@ Node: dcid:InteractionTypeEnum
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 name: "InteractionTypeEnum"
-description: "The interaction type enumeration in biomedical ontologies."
+description: "The type of interaction between two entities, such as a protein-protein interaction."
 
 Node: dcid:InteractionDetectionMethodEnum
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 name: "InteractionDetectionMethodEnum"
-description: "The detection method enumeration in biomedical ontologies."
+description: "The detection method for an interaction between two entities, such as a protein-protein interaction."
 
 Node: dcid:InteractionSourceEnum
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 name: "InteractionSourceEnum"
-description: "The interaction source database enumeration in biomedical ontologies."
+description: "The database that is the source of the observed interaction between two entities, such as a protein-protein interactions."
 
 Node: dcid:ConfidenceScoreTypeEnum
 typeOf: schema:Class
@@ -163,3 +163,2319 @@ Node: dcid:IntActMiScore
 typeOf: ConfidenceScoreTypeEnum
 name: "IntactMiScore"
 description: "The confidence score of a protein-protein interaction given in IntAct Molecular Interaction Database."
+
+Node: dcid:InteractionTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionTypeEnum"
+description: "The type of protein-protein interaction."
+
+Node: dcid:InteractionDetectionMethodEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "InteractionDetectionMethodEnum"
+description: "The detection method for an interaction between two entitites, such as a protein-protein interaction."
+
+Node: dcid:AdministrationRouteEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "AdministrationRouteEnum"
+description: "Administration route enumeration for a drug."
+
+Node: dcid:DosageFormEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "DosageFormEnum"
+description: "Dosage form enumeration for a drug."
+
+Node: dcid:TherapeuticEquivalenceCodeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "TherapeuticEquivalenceCodeEnum"
+description: "The therapeutic equivalence (TE) code enumeration."
+
+Node: dcid:MarketingStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "MarketingStatusEnum"
+description: "The marketing status enumeration."
+
+Node: dcid:MarketingStatusPrescription
+typeOf: MarketingStatusEnum
+name: "MarketingStatusPrescription"
+description: "A prescription drug product requires a doctor's authorization to purchase."
+descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#prescription_drug"
+
+Node: dcid:MarketingStatusOverTheCounter
+typeOf: MarketingStatusEnum
+name: "MarketingStatusOverTheCounter"
+description: "FDA defines OTC drugs as safe and effective for use by the general public without a doctor's prescription."
+descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#OTC"
+
+Node: dcid:MarketingStatusDiscontinued
+typeOf: MarketingStatusEnum
+name: "MarketingStatusDiscontinued"
+description: "Products listed in Drugs@FDA as "discontinued" are approved products that have never been marketed, have been discontinued from marketing, are for military use, are for export only, or have had their approvals withdrawn for reasons other than safety or efficacy after being discontinued from marketing."
+descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#discontinued_drug"
+
+Node: dcid:MarketingStatusNone
+typeOf: MarketingStatusEnum
+name: "None (Tentative Approval)"
+description: "Drug products that have been tentatively approved."
+descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#M"
+
+Node: dcid:ApplicationTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "ApplicationTypeEnum"
+description: "The application type enumeration."
+
+Node: dcid:ApplicationTypeNDA
+typeOf: ApplicationTypeEnum
+name: "New Drug Application (NDA)"
+description: "The application must contain data from specific technical viewpoints for review, including chemistry, pharmacology, medical, biopharmaceutics, and statistics."
+descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#NDA"
+
+Node: dcid:ApplicationTypeANDA
+typeOf: ApplicationTypeEnum
+name: "Abbreviated New Drug Application (ANDA)"
+description: "An Abbreviated New Drug Application (ANDA) contains data that, when submitted to FDA's Center for Drug Evaluation and Research, Office of Generic Drugs, provides for the review and ultimate approval of a generic drug product."
+descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#ANDA"
+
+Node: dcid:ApplicationTypeBLA
+typeOf: ApplicationTypeEnum
+name: "Biologic License Application (BLA)"
+description: "A biologics license application is a submission that contains specific information on the manufacturing processes, chemistry, pharmacology, clinical pharmacology and the medical affects of the biologic product."
+descriptionURL: "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-glossary-terms#BLA"
+
+Node: dcid:DosageFormAerosol
+typeOf: dcs:DosageFormEnum
+name: "Aerosol"
+fdaCode: "C42887"
+
+Node: dcid:DosageFormAerosolFoam
+typeOf: dcs:DosageFormEnum
+name: "Aerosol, Foam"
+fdaCode: "C42888"
+specializationOf: dcs:DosageFormAerosol
+
+Node: dcid:DosageFormAerosolMetered
+typeOf: dcs:DosageFormEnum
+name: "Aerosol, Metered"
+fdaCode: "C42960"
+specializationOf: dcs:DosageFormAerosol
+
+Node: dcid:DosageFormAerosolPowder
+typeOf: dcs:DosageFormEnum
+name: "Aerosol, Powder"
+fdaCode: "C42971"
+specializationOf: dcs:DosageFormAerosol
+
+Node: dcid:DosageFormAerosolSpray
+typeOf: dcs:DosageFormEnum
+name: "Aerosol, Spray"
+fdaCode: "C42889"
+specializationOf: dcs:DosageFormAerosol
+
+Node: dcid:DosageFormBarChewable
+typeOf: dcs:DosageFormEnum
+name: "Bar, Chewable"
+fdaCode: "C42892"
+specializationOf: dcs:DosageFormBar
+
+Node: dcid:DosageFormBead
+typeOf: dcs:DosageFormEnum
+name: "Bead"
+fdaCode: "C42890"
+
+Node: dcid:DosageFormCapsule
+typeOf: dcs:DosageFormEnum
+name: "Capsule"
+fdaCode: "C25158"
+
+Node: dcid:DosageFormCapsuleCoated
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Coated"
+fdaCode: "C42895"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCapsuleCoatedPellet
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Coated Pellet"
+fdaCode: "C42896"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCapsuleCoatedExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Coated, Extended Release"
+fdaCode: "C42917"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCapsuleDelayedRelease
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Delayed Release"
+fdaCode: "C42902"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCapsuleDelayedReleasePellet
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Delayed Release Pellet"
+fdaCode: "C42904"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCapsuleExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Extended Release"
+fdaCode: "C42916"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCapsuleFilmCoatedExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Film Coated, Extended Release"
+fdaCode: "C42928"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCapsuleGelatinCoated
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Gelatin Coated"
+fdaCode: "C42936"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCapsuleLiquidFilled
+typeOf: dcs:DosageFormEnum
+name: "Capsule, Liquid Filled"
+fdaCode: "C42954"
+specializationOf: dcs:DosageFormCapsule
+
+Node: dcid:DosageFormCellularSheet
+typeOf: dcs:DosageFormEnum
+name: "Cellular Sheet"
+fdaCode: "C100103"
+
+Node: dcid:DosageFormChewableGel
+typeOf: dcs:DosageFormEnum
+name: "Chewable Gel"
+fdaCode: "C134876"
+
+Node: dcid:DosageFormCloth
+typeOf: dcs:DosageFormEnum
+name: "Cloth"
+fdaCode: "C60884"
+
+Node: dcid:DosageFormConcentrate
+typeOf: dcs:DosageFormEnum
+name: "Concentrate"
+fdaCode: "C60891"
+
+Node: dcid:DosageFormCream
+typeOf: dcs:DosageFormEnum
+name: "Cream"
+fdaCode: "C28944"
+
+Node: dcid:DosageFormCreamAugmented
+typeOf: dcs:DosageFormEnum
+name: "Cream, Augmented"
+fdaCode: "C60897"
+specializationOf: dcs:DosageFormCream
+
+Node: dcid:DosageFormCrystal
+typeOf: dcs:DosageFormEnum
+name: "Crystal"
+fdaCode: "C42901"
+
+Node: dcid:DosageFormDisc
+typeOf: dcs:DosageFormEnum
+name: "Disc"
+fdaCode: "C43525"
+
+Node: dcid:DosageFormDouche
+typeOf: dcs:DosageFormEnum
+name: "Douche"
+fdaCode: "C42679"
+
+Node: dcid:DosageFormDressing
+typeOf: dcs:DosageFormEnum
+name: "Dressing"
+fdaCode: "C42763"
+
+Node: dcid:DosageFormElixir
+typeOf: dcs:DosageFormEnum
+name: "Elixir"
+fdaCode: "C42912"
+
+Node: dcid:DosageFormEmulsion
+typeOf: dcs:DosageFormEnum
+name: "Emulsion"
+fdaCode: "C42913"
+
+Node: dcid:DosageFormEnema
+typeOf: dcs:DosageFormEnum
+name: "Enema"
+fdaCode: "C42915"
+
+Node: dcid:DosageFormExtract
+typeOf: dcs:DosageFormEnum
+name: "Extract"
+fdaCode: "C42929"
+
+Node: dcid:DosageFormFiberExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Fiber, Extended Release"
+fdaCode: "C60926"
+specializationOf: dcs:DosageFormFiber
+
+Node: dcid:DosageFormFilm
+typeOf: dcs:DosageFormEnum
+name: "Film"
+fdaCode: "C42932"
+
+Node: dcid:DosageFormFilmExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Film, Extended Release"
+fdaCode: "C42920"
+specializationOf: dcs:DosageFormFilm
+
+Node: dcid:DosageFormFilmSoluble
+typeOf: dcs:DosageFormEnum
+name: "Film, Soluble"
+fdaCode: "C42984"
+specializationOf: dcs:DosageFormFilm
+
+Node: dcid:DosageFormForSolution
+typeOf: dcs:DosageFormEnum
+name: "For Solution"
+fdaCode: "C60927"
+
+Node: dcid:DosageFormForSuspension
+typeOf: dcs:DosageFormEnum
+name: "For Suspension"
+fdaCode: "C60928"
+
+Node: dcid:DosageFormForSuspensionExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "For Suspension, Extended Release"
+fdaCode: "C60929"
+specializationOf: dcs:DosageFormForSuspension
+
+Node: dcid:DosageFormGas
+typeOf: dcs:DosageFormEnum
+name: "Gas"
+fdaCode: "C42933"
+
+Node: dcid:DosageFormGel
+typeOf: dcs:DosageFormEnum
+name: "Gel"
+fdaCode: "C42934"
+
+Node: dcid:DosageFormGelDentifrice
+typeOf: dcs:DosageFormEnum
+name: "Gel, Dentifrice"
+fdaCode: "C42906"
+specializationOf: dcs:DosageFormGel
+
+Node: dcid:DosageFormGelMetered
+typeOf: dcs:DosageFormEnum
+name: "Gel, Metered"
+fdaCode: "C60930"
+specializationOf: dcs:DosageFormGel
+
+Node: dcid:DosageFormGlobule
+typeOf: dcs:DosageFormEnum
+name: "Globule"
+fdaCode: "C42937"
+
+Node: dcid:DosageFormGranule
+typeOf: dcs:DosageFormEnum
+name: "Granule"
+fdaCode: "C42938"
+
+Node: dcid:DosageFormGranuleDelayedRelease
+typeOf: dcs:DosageFormEnum
+name: "Granule, Delayed Release"
+fdaCode: "C42903"
+specializationOf: dcs:DosageFormGranule
+
+Node: dcid:DosageFormGranuleEffervescent
+typeOf: dcs:DosageFormEnum
+name: "Granule, Effervescent"
+fdaCode: "C42909"
+specializationOf: dcs:DosageFormGranule
+
+Node: dcid:DosageFormGranuleForSolution
+typeOf: dcs:DosageFormEnum
+name: "Granule, For Solution"
+fdaCode: "C42939"
+specializationOf: dcs:DosageFormGranule
+
+Node: dcid:DosageFormGranuleForSuspension
+typeOf: dcs:DosageFormEnum
+name: "Granule, For Suspension"
+fdaCode: "C42940"
+specializationOf: dcs:DosageFormGranule
+
+Node: dcid:DosageFormGranuleForSuspensionExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Granule, For Suspension, Extended Release"
+fdaCode: "C42921"
+specializationOf: dcs:DosageFormGranule
+
+Node: dcid:DosageFormGumChewing
+typeOf: dcs:DosageFormEnum
+name: "Gum, Chewing"
+fdaCode: "C42894"
+specializationOf: dcs:DosageFormGum
+
+Node: dcid:DosageFormImplant
+typeOf: dcs:DosageFormEnum
+name: "Implant"
+fdaCode: "C42942"
+
+Node: dcid:DosageFormInhalant
+typeOf: dcs:DosageFormEnum
+name: "Inhalant"
+fdaCode: "C42944"
+
+Node: dcid:DosageFormInjectableFoam
+typeOf: dcs:DosageFormEnum
+name: "Injectable Foam"
+fdaCode: "C113106"
+
+Node: dcid:DosageFormInjectableLiposomal
+typeOf: dcs:DosageFormEnum
+name: "Injectable, Liposomal"
+fdaCode: "C60931"
+specializationOf: dcs:DosageFormInjectable
+
+Node: dcid:DosageFormInjection
+typeOf: dcs:DosageFormEnum
+name: "Injection"
+fdaCode: "C42946"
+
+Node: dcid:DosageFormInjectionEmulsion
+typeOf: dcs:DosageFormEnum
+name: "Injection, Emulsion"
+fdaCode: "C42914"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionLipidComplex
+typeOf: dcs:DosageFormEnum
+name: "Injection, Lipid Complex"
+fdaCode: "C42950"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionPowderForSolution
+typeOf: dcs:DosageFormEnum
+name: "Injection, Powder, For Solution"
+fdaCode: "C42974"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionPowderForSuspension
+typeOf: dcs:DosageFormEnum
+name: "Injection, Powder, For Suspension"
+fdaCode: "C42976"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionPowderForSuspensionExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Injection, Powder, For Suspension, Extended Release"
+fdaCode: "C42977"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionPowderLyophilizedForLiposomalSuspension
+typeOf: dcs:DosageFormEnum
+name: "Injection, Powder, Lyophilized, For Liposomal Suspension"
+fdaCode: "C42959"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionPowderLyophilizedForSolution
+typeOf: dcs:DosageFormEnum
+name: "Injection, Powder, Lyophilized, For Solution"
+fdaCode: "C42957"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionPowderLyophilizedForSuspension
+typeOf: dcs:DosageFormEnum
+name: "Injection, Powder, Lyophilized, For Suspension"
+fdaCode: "C42958"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionPowderLyophilizedForSuspensionExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Injection, Powder, Lyophilized, For Suspension, Extended Release"
+fdaCode: "C42956"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionSolution
+typeOf: dcs:DosageFormEnum
+name: "Injection, Solution"
+fdaCode: "C42945"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionSolutionConcentrate
+typeOf: dcs:DosageFormEnum
+name: "Injection, Solution, Concentrate"
+fdaCode: "C42899"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionSuspension
+typeOf: dcs:DosageFormEnum
+name: "Injection, Suspension"
+fdaCode: "C42995"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionSuspensionExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Injection, Suspension, Extended Release"
+fdaCode: "C42926"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionSuspensionLiposomal
+typeOf: dcs:DosageFormEnum
+name: "Injection, Suspension, Liposomal"
+fdaCode: "C42951"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInjectionSuspensionSonicated
+typeOf: dcs:DosageFormEnum
+name: "Injection, Suspension, Sonicated"
+fdaCode: "C42988"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormInsert
+typeOf: dcs:DosageFormEnum
+name: "Insert"
+fdaCode: "C60933"
+
+Node: dcid:DosageFormInsertExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Insert, Extended Release"
+fdaCode: "C42922"
+specializationOf: dcs:DosageFormInsert
+
+Node: dcid:DosageFormIntrauterineDevice
+typeOf: dcs:DosageFormEnum
+name: "Intrauterine Device"
+fdaCode: "C47915"
+
+Node: dcid:DosageFormIrrigant
+typeOf: dcs:DosageFormEnum
+name: "Irrigant"
+fdaCode: "C42947"
+
+Node: dcid:DosageFormJelly
+typeOf: dcs:DosageFormEnum
+name: "Jelly"
+fdaCode: "C42948"
+
+Node: dcid:DosageFormKit
+typeOf: dcs:DosageFormEnum
+name: "Kit"
+fdaCode: "C47916"
+
+Node: dcid:DosageFormLiniment
+typeOf: dcs:DosageFormEnum
+name: "Liniment"
+fdaCode: "C42949"
+
+Node: dcid:DosageFormLipstick
+typeOf: dcs:DosageFormEnum
+name: "Lipstick"
+fdaCode: "C42952"
+
+Node: dcid:DosageFormLiquid
+typeOf: dcs:DosageFormEnum
+name: "Liquid"
+fdaCode: "C42953"
+
+Node: dcid:DosageFormLiquidExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Liquid, Extended Release"
+fdaCode: "C60934"
+specializationOf: dcs:DosageFormLiquid
+
+Node: dcid:DosageFormLotion
+typeOf: dcs:DosageFormEnum
+name: "Lotion"
+fdaCode: "C29167"
+
+Node: dcid:DosageFormLotionAugmented
+typeOf: dcs:DosageFormEnum
+name: "Lotion, Augmented"
+fdaCode: "C60957"
+specializationOf: dcs:DosageFormLotion
+
+Node: dcid:DosageFormLotionShampoo
+typeOf: dcs:DosageFormEnum
+name: "Lotion,Shampoo"
+fdaCode: "C60958"
+specializationOf: dcs:DosageFormLotion
+
+Node: dcid:DosageFormLozenge
+typeOf: dcs:DosageFormEnum
+name: "Lozenge"
+fdaCode: "C42955"
+
+Node: dcid:DosageFormMouthwash
+typeOf: dcs:DosageFormEnum
+name: "Mouthwash"
+fdaCode: "C29269"
+
+Node: dcid:DosageFormNotApplicable
+typeOf: dcs:DosageFormEnum
+name: "Not Applicable"
+fdaCode: "C48624"
+
+Node: dcid:DosageFormOil
+typeOf: dcs:DosageFormEnum
+name: "Oil"
+fdaCode: "C42965"
+
+Node: dcid:DosageFormOintment
+typeOf: dcs:DosageFormEnum
+name: "Ointment"
+fdaCode: "C42966"
+
+Node: dcid:DosageFormOintmentAugmented
+typeOf: dcs:DosageFormEnum
+name: "Ointment, Augmented"
+fdaCode: "C60984"
+specializationOf: dcs:DosageFormOintment
+
+Node: dcid:DosageFormPaste
+typeOf: dcs:DosageFormEnum
+name: "Paste"
+fdaCode: "C42967"
+
+Node: dcid:DosageFormPasteDentifrice
+typeOf: dcs:DosageFormEnum
+name: "Paste, Dentifrice"
+fdaCode: "C42907"
+specializationOf: dcs:DosageFormPaste
+
+Node: dcid:DosageFormPastille
+typeOf: dcs:DosageFormEnum
+name: "Pastille"
+fdaCode: "C60985"
+
+Node: dcid:DosageFormPatch
+typeOf: dcs:DosageFormEnum
+name: "Patch"
+fdaCode: "C42968"
+
+Node: dcid:DosageFormPatchExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Patch, Extended Release"
+fdaCode: "C42923"
+specializationOf: dcs:DosageFormPatch
+
+Node: dcid:DosageFormPatchExtendedReleaseElectricallyControlled
+typeOf: dcs:DosageFormEnum
+name: "Patch, Extended Release, Electrically Controlled"
+fdaCode: "C42911"
+specializationOf: dcs:DosageFormPatch
+
+Node: dcid:DosageFormPellet
+typeOf: dcs:DosageFormEnum
+name: "Pellet"
+fdaCode: "C42969"
+
+Node: dcid:DosageFormPelletImplantable
+typeOf: dcs:DosageFormEnum
+name: "Pellet, Implantable"
+fdaCode: "C42943"
+specializationOf: dcs:DosageFormPellet
+
+Node: dcid:DosageFormPelletCoatedExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Pellet, Coated, Extended Release"
+fdaCode: "C42918"
+specializationOf: dcs:DosageFormPellet
+
+Node: dcid:DosageFormPill
+typeOf: dcs:DosageFormEnum
+name: "Pill"
+fdaCode: "C25394"
+
+Node: dcid:DosageFormPlaster
+typeOf: dcs:DosageFormEnum
+name: "Plaster"
+fdaCode: "C42970"
+
+Node: dcid:DosageFormPoultice
+typeOf: dcs:DosageFormEnum
+name: "Poultice"
+fdaCode: "C47913"
+
+Node: dcid:DosageFormPowder
+typeOf: dcs:DosageFormEnum
+name: "Powder"
+fdaCode: "C42972"
+
+Node: dcid:DosageFormPowderDentifrice
+typeOf: dcs:DosageFormEnum
+name: "Powder, Dentifrice"
+fdaCode: "C42908"
+specializationOf: dcs:DosageFormPowder
+
+Node: dcid:DosageFormPowderForSolution
+typeOf: dcs:DosageFormEnum
+name: "Powder, For Solution"
+fdaCode: "C42973"
+specializationOf: dcs:DosageFormPowder
+
+Node: dcid:DosageFormPowderForSuspension
+typeOf: dcs:DosageFormEnum
+name: "Powder, For Suspension"
+fdaCode: "C42975"
+specializationOf: dcs:DosageFormPowder
+
+Node: dcid:DosageFormPowderMetered
+typeOf: dcs:DosageFormEnum
+name: "Powder, Metered"
+fdaCode: "C42961"
+specializationOf: dcs:DosageFormPowder
+
+Node: dcid:DosageFormRing
+typeOf: dcs:DosageFormEnum
+name: "Ring"
+fdaCode: "C60988"
+
+Node: dcid:DosageFormRinse
+typeOf: dcs:DosageFormEnum
+name: "Rinse"
+fdaCode: "C42979"
+
+Node: dcid:DosageFormSalve
+typeOf: dcs:DosageFormEnum
+name: "Salve"
+fdaCode: "C42980"
+
+Node: dcid:DosageFormShampoo
+typeOf: dcs:DosageFormEnum
+name: "Shampoo"
+fdaCode: "C42981"
+
+Node: dcid:DosageFormShampooSuspension
+typeOf: dcs:DosageFormEnum
+name: "Shampoo, Suspension"
+fdaCode: "C42982"
+specializationOf: dcs:DosageFormShampoo
+
+Node: dcid:DosageFormSoap
+typeOf: dcs:DosageFormEnum
+name: "Soap"
+fdaCode: "C42983"
+
+Node: dcid:DosageFormSolution
+typeOf: dcs:DosageFormEnum
+name: "Solution"
+fdaCode: "C42986"
+
+Node: dcid:DosageFormSolutionConcentrate
+typeOf: dcs:DosageFormEnum
+name: "Solution, Concentrate"
+fdaCode: "C42898"
+specializationOf: dcs:DosageFormSolution
+
+Node: dcid:DosageFormSolutionForSlush
+typeOf: dcs:DosageFormEnum
+name: "Solution, For Slush"
+fdaCode: "C42987"
+specializationOf: dcs:DosageFormSolution
+
+Node: dcid:DosageFormSolutionGelFormingDrops
+typeOf: dcs:DosageFormEnum
+name: "Solution, Gel Forming, Drops"
+fdaCode: "C60994"
+specializationOf: dcs:DosageFormSolution
+
+Node: dcid:DosageFormSolutionGelFormingExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Solution, Gel Forming, Extended Release"
+fdaCode: "C42935"
+specializationOf: dcs:DosageFormSolution
+
+Node: dcid:DosageFormSolutionDrops
+typeOf: dcs:DosageFormEnum
+name: "Solution, Drops"
+fdaCode: "C60992"
+specializationOf: dcs:DosageFormSolution
+
+Node: dcid:DosageFormSponge
+typeOf: dcs:DosageFormEnum
+name: "Sponge"
+fdaCode: "C47912"
+
+Node: dcid:DosageFormSpray
+typeOf: dcs:DosageFormEnum
+name: "Spray"
+fdaCode: "C42989"
+
+Node: dcid:DosageFormSprayMetered
+typeOf: dcs:DosageFormEnum
+name: "Spray, Metered"
+fdaCode: "C42962"
+specializationOf: dcs:DosageFormSpray
+
+Node: dcid:DosageFormSpraySuspension
+typeOf: dcs:DosageFormEnum
+name: "Spray, Suspension"
+fdaCode: "C42990"
+specializationOf: dcs:DosageFormSpray
+
+Node: dcid:DosageFormStick
+typeOf: dcs:DosageFormEnum
+name: "Stick"
+fdaCode: "C42991"
+
+Node: dcid:DosageFormStrip
+typeOf: dcs:DosageFormEnum
+name: "Strip"
+fdaCode: "C47914"
+
+Node: dcid:DosageFormSuppository
+typeOf: dcs:DosageFormEnum
+name: "Suppository"
+fdaCode: "C42993"
+
+Node: dcid:DosageFormSuppositoryExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Suppository, Extended Release"
+fdaCode: "C42924"
+specializationOf: dcs:DosageFormSuppository
+
+Node: dcid:DosageFormSuspension
+typeOf: dcs:DosageFormEnum
+name: "Suspension"
+fdaCode: "C42994"
+
+Node: dcid:DosageFormSuspensionExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Suspension, Extended Release"
+fdaCode: "C42925"
+specializationOf: dcs:DosageFormSuspension
+
+Node: dcid:DosageFormSuspensionDrops
+typeOf: dcs:DosageFormEnum
+name: "Suspension, Drops"
+fdaCode: "C60995"
+specializationOf: dcs:DosageFormSuspension
+
+Node: dcid:DosageFormSwab
+typeOf: dcs:DosageFormEnum
+name: "Swab"
+fdaCode: "C47898"
+
+Node: dcid:DosageFormSyrup
+typeOf: dcs:DosageFormEnum
+name: "Syrup"
+fdaCode: "C42996"
+
+Node: dcid:DosageFormSystem
+typeOf: dcs:DosageFormEnum
+name: "System"
+fdaCode: "C17423"
+
+Node: dcid:DosageFormTablet
+typeOf: dcs:DosageFormEnum
+name: "Tablet"
+fdaCode: "C42998"
+
+Node: dcid:DosageFormTabletChewable
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Chewable"
+fdaCode: "C42893"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletChewableExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Chewable, Extended Release"
+fdaCode: "C124794"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletCoated
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Coated"
+fdaCode: "C42897"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletCoatedParticles
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Coated Particles"
+fdaCode: "C60997"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletDelayedRelease
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Delayed Release"
+fdaCode: "C42905"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletDelayedReleaseParticles
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Delayed Release Particles"
+fdaCode: "C42997"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletEffervescent
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Effervescent"
+fdaCode: "C42910"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Extended Release"
+fdaCode: "C42927"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletFilmCoated
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Film Coated"
+fdaCode: "C42931"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletFilmCoatedExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Film Coated, Extended Release"
+fdaCode: "C42930"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletForSolution
+typeOf: dcs:DosageFormEnum
+name: "Tablet, For Solution"
+fdaCode: "C61004"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletForSuspension
+typeOf: dcs:DosageFormEnum
+name: "Tablet, For Suspension"
+fdaCode: "C61005"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletMultilayer
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Multilayer"
+fdaCode: "C42964"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletMultilayerExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Multilayer, Extended Release"
+fdaCode: "C42963"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletOrallyDisintegrating
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Orally Disintegrating"
+fdaCode: "C42999"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletOrallyDisintegratingDelayedRelease
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Orally Disintegrating, Delayed Release"
+fdaCode: "C61006"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletSoluble
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Soluble"
+fdaCode: "C42985"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletSugarCoated
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Sugar Coated"
+fdaCode: "C42992"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormTabletWithSensor
+typeOf: dcs:DosageFormEnum
+name: "Tablet With Sensor"
+fdaCode: "C147579"
+
+Node: dcid:DosageFormTampon
+typeOf: dcs:DosageFormEnum
+name: "Tampon"
+fdaCode: "C47892"
+
+Node: dcid:DosageFormTape
+typeOf: dcs:DosageFormEnum
+name: "Tape"
+fdaCode: "C47897"
+
+Node: dcid:DosageFormTincture
+typeOf: dcs:DosageFormEnum
+name: "Tincture"
+fdaCode: "C43000"
+
+Node: dcid:DosageFormTroche
+typeOf: dcs:DosageFormEnum
+name: "Troche"
+fdaCode: "C43001"
+
+Node: dcid:DosageFormWafer
+typeOf: dcs:DosageFormEnum
+name: "Wafer"
+fdaCode: "C43003"
+
+Node: dcid:DosageFormSyringe
+typeOf: dcs:DosageFormEnum
+name: "Syringe"
+
+Node: dcid:DosageFormVial
+typeOf: dcs:DosageFormEnum
+name: "Vial"
+
+Node: dcid:DosageFormPowderLyophilizedPowder
+typeOf: dcs:DosageFormEnum
+name: "Powder, Lyophilized Powder"
+specializationOf: dcs:DosageFormPowder
+
+Node: dcid:DosageFormSolutionMetered
+typeOf: dcs:DosageFormEnum
+name: "Solution, Metered"
+specializationOf: dcs:DosageFormSolution
+
+Node: dcid:DosageFormSuspensionLiposomal
+typeOf: dcs:DosageFormEnum
+name: "Suspension, Liposomal"
+specializationOf: dcs:DosageFormSuspension
+
+Node: dcid:DosageFormSuspensionDelayedRelease
+typeOf: dcs:DosageFormEnum
+name: "Suspension, Delayed Release"
+specializationOf: dcs:DosageFormSuspension
+
+Node: dcid:DosageFormOilDrops
+typeOf: dcs:DosageFormEnum
+name: "Oil, Drops"
+specializationOf: dcs:DosageFormOil
+
+Node: dcid:DosageFormTabletDispersible
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Dispersible"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormGelAugmented
+typeOf: dcs:DosageFormEnum
+name: "Gel, Augmented"
+specializationOf: dcs:DosageFormGel
+
+Node: dcid:DosageFormForSuspensionDelayedRelease
+typeOf: dcs:DosageFormEnum
+name: "For Suspension, Delayed Release"
+specializationOf: dcs:DosageFormForSuspension
+
+Node: dcid:DosageFormInjectionExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Injection, Extended Release"
+specializationOf: dcs:DosageFormInjection
+
+Node: dcid:DosageFormSystemExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "System, Extended Release"
+specializationOf: dcs:DosageFormSystem
+
+Node: dcid:DosageFormPowderExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Powder, Extended Release"
+specializationOf: dcs:DosageFormPowder
+
+Node: dcid:DosageFormTabletOrallyDisintegratingExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Tablet, Orally Disintegrating, Extended Release"
+specializationOf: dcs:DosageFormTablet
+
+Node: dcid:DosageFormFoam
+typeOf: dcs:DosageFormEnum
+name: "Foam"
+
+Node: dcid:DosageFormSolutionExtendedRelease
+typeOf: dcs:DosageFormEnum
+name: "Solution, Extended Release"
+specializationOf: dcs:DosageFormSolution
+
+Node: dcid:DosageFormBar
+typeOf: dcs:DosageFormEnum
+name: "Bar"
+
+Node: dcid:DosageFormFiber
+typeOf: dcs:DosageFormEnum
+name: "Fiber"
+
+Node: dcid:DosageFormGum
+typeOf: dcs:DosageFormEnum
+name: "Gum"
+
+Node: dcid:DosageFormInjectable
+typeOf: dcs:DosageFormEnum
+name: "Injectable"
+
+Node: dcid:AdministrationRouteAuricular
+typeOf: dcs:AdministrationRouteEnum
+name: "Auricular (Otic)"
+fdaCode: "13"
+nciConceptCode: "C38192"
+description: "Administration to or by way of the ear."
+fdaShortName: "OTIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteBuccal
+typeOf: dcs:AdministrationRouteEnum
+name: "Buccal"
+fdaCode: "30"
+nciConceptCode: "C38193"
+description: "Administration directed toward the cheek, generally from within the mouth."
+fdaShortName: "BUCCAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteConjunctival
+typeOf: dcs:AdministrationRouteEnum
+name: "Conjunctival"
+fdaCode: "68"
+nciConceptCode: "C38194"
+description: "Administration to the conjunctiva, the delicate membrane that lines the eyelids and covers the exposed surface of the eyeball."
+fdaShortName: "CONJUNC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteCutaneous
+typeOf: dcs:AdministrationRouteEnum
+name: "Cutaneous"
+fdaCode: "130"
+nciConceptCode: "C38675"
+description: "Administration to the skin."
+fdaShortName: "CUTAN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteDental
+typeOf: dcs:AdministrationRouteEnum
+name: "Dental"
+fdaCode: "38"
+nciConceptCode: "C38197"
+description: "Administration to a tooth or teeth."
+fdaShortName: "DENTAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteElectroOsmosis
+typeOf: dcs:AdministrationRouteEnum
+name: "Electro-Osmosis"
+fdaCode: "357"
+nciConceptCode: "C38633"
+description: "Administration of through the diffusion of substance through a membrane in an electric field."
+fdaShortName: "EL-OSMOS"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteEndocervical
+typeOf: dcs:AdministrationRouteEnum
+name: "Endocervical"
+fdaCode: "131"
+nciConceptCode: "C38205"
+description: "Administration within the canal of the cervix uteri.  Synonymous with the term intracervical.."
+fdaShortName: "E-CERVIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteEndosinusial
+typeOf: dcs:AdministrationRouteEnum
+name: "Endosinusial"
+fdaCode: "133"
+nciConceptCode: "C38206"
+description: "Administration within the nasal sinuses of the head."
+fdaShortName: "E-SINUS"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteEndotracheal
+typeOf: dcs:AdministrationRouteEnum
+name: "Endotracheal"
+fdaCode: "401"
+nciConceptCode: "C38208"
+description: "Administration directly into the trachea."
+fdaShortName: "E-TRACHE"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteEnteral
+typeOf: dcs:AdministrationRouteEnum
+name: "Enteral"
+fdaCode: "313"
+nciConceptCode: "C38209"
+description: "Administration directly into the intestines."
+fdaShortName: "ENTER"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteEpidural
+typeOf: dcs:AdministrationRouteEnum
+name: "Epidural"
+fdaCode: "9"
+nciConceptCode: "C38210"
+description: "Administration upon or over the dura mater."
+fdaShortName: "EPIDUR"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteExtra‑Amniotic
+typeOf: dcs:AdministrationRouteEnum
+name: "Extra‑Amniotic"
+fdaCode: "402"
+nciConceptCode: "C38211"
+description: "Administration to the outside of the membrane enveloping the fetus"
+fdaShortName: "X-AMNI"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteExtracorporeal
+typeOf: dcs:AdministrationRouteEnum
+name: "Extracorporeal"
+fdaCode: "57"
+nciConceptCode: "C38212"
+description: "Administration outside of the body."
+fdaShortName: "X-CORPOR"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteHemodialysis
+typeOf: dcs:AdministrationRouteEnum
+name: "Hemodialysis"
+fdaCode: "140"
+nciConceptCode: "C38200"
+description: "Administration through hemodialysate fluid."
+fdaShortName: "HEMO"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteInfiltration
+typeOf: dcs:AdministrationRouteEnum
+name: "Infiltration"
+fdaCode: "361"
+nciConceptCode: "C38215"
+description: "Administration that results in substances passing into tissue spaces or into cells."
+fdaShortName: "INFIL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteInterstitial
+typeOf: dcs:AdministrationRouteEnum
+name: "Interstitial"
+fdaCode: "88"
+nciConceptCode: "C38219"
+description: "Administration to or in the interstices of a tissue."
+fdaShortName: "INTERSTIT"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraAbdominal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intra-Abdominal"
+fdaCode: "56"
+nciConceptCode: "C38220"
+description: "Administration within the abdomen."
+fdaShortName: "I-ABDOM"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraAmniotic
+typeOf: dcs:AdministrationRouteEnum
+name: "Intra-Amniotic"
+fdaCode: "60"
+nciConceptCode: "C38221"
+description: "Administration within the amnion."
+fdaShortName: "I-AMNI"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraArterial
+typeOf: dcs:AdministrationRouteEnum
+name: "Intra-Arterial"
+fdaCode: "37"
+nciConceptCode: "C38222"
+description: "Administration within an artery or arteries."
+fdaShortName: "I-ARTER"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraArticular
+typeOf: dcs:AdministrationRouteEnum
+name: "Intra-Articular"
+fdaCode: "7"
+nciConceptCode: "C38223"
+description: "Administration within a joint."
+fdaShortName: "I-ARTIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrabiliary
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrabiliary"
+fdaCode: "362"
+nciConceptCode: "C38224"
+description: "Administration within the bile, bile ducts or gallbladder."
+fdaShortName: "I-BILI"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrabronchial
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrabronchial"
+fdaCode: "67"
+nciConceptCode: "C38225"
+description: "Administration within a bronchus."
+fdaShortName: "I-BRONCHI"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrabursal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrabursal"
+fdaCode: "25"
+nciConceptCode: "C38226"
+description: "Administration within a bursa."
+fdaShortName: "I-BURSAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracardiac
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracardiac"
+fdaCode: "27"
+nciConceptCode: "C38227"
+description: "Administration with the heart."
+fdaShortName: "I-CARDI"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracartilaginous
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracartilaginous"
+fdaCode: "363"
+nciConceptCode: "C38228"
+description: "Administration within a cartilage; endochondral."
+fdaShortName: "I-CARTIL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracaudal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracaudal"
+fdaCode: "413"
+nciConceptCode: "C38229"
+description: "Administration within the cauda equina."
+fdaShortName: "I-CAUDAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracavernous
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracavernous"
+fdaCode: "132"
+nciConceptCode: "C38230"
+description: "Administration within a pathologic cavity, such as  occurs in the lung in tuberculosis."
+fdaShortName: "I-CAVERN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracavitary
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracavitary"
+fdaCode: "23"
+nciConceptCode: "C38231"
+description: "Administration within a non-pathologic cavity, such as that of the cervix, uterus, or penis, or such as that which is formed as the result of a wound."
+fdaShortName: "I-CAVIT"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracerebral
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracerebral"
+fdaCode: "404"
+nciConceptCode: "C38232"
+description: "Administration within the cerebrum."
+fdaShortName: "I-CERE"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracisternal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracisternal"
+fdaCode: "405"
+nciConceptCode: "C38233"
+description: "Administration within the cisterna magna cerebellomedularis."
+fdaShortName: "I-CISTERN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracorneal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracorneal"
+fdaCode: "406"
+nciConceptCode: "C38234"
+description: "Administration within the cornea (the transparent structure forming the anterior part of the fibrous tunic of the eye)."
+fdaShortName: "I-CORNE"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraCoronalDental
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracoronal, Dental"
+fdaCode: "117"
+nciConceptCode: "C38217"
+description: "Administration of a drug within a portion of a tooth which is covered by enamel and which is separated from the roots by a slightly constricted region known as the neck."
+fdaShortName: "I-CORONAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracoronary
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracoronary"
+fdaCode: "119"
+nciConceptCode: "C38218"
+description: "Administration within the coronary arteries."
+fdaShortName: "I-CORONARY"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntracorporusCavernosum
+typeOf: dcs:AdministrationRouteEnum
+name: "Intracorporus Cavernosum"
+fdaCode: "403"
+nciConceptCode: "C38235"
+description: "Administration within the dilatable spaces of the corporus cavernosa of the penis."
+fdaShortName: "I-CORPOR"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntradermal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intradermal"
+fdaCode: "8"
+nciConceptCode: "C38238"
+description: "Administration within the dermis."
+fdaShortName: "I-DERMAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntradiscal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intradiscal"
+fdaCode: "121"
+nciConceptCode: "C38239"
+description: "Administration within a disc."
+fdaShortName: "I-DISCAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraductal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraductal"
+fdaCode: "123"
+nciConceptCode: "C38240"
+description: "Administration within the duct of a gland."
+fdaShortName: "I-DUCTAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraduodenal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraduodenal"
+fdaCode: "47"
+nciConceptCode: "C38241"
+description: "Administration within the duodenum."
+fdaShortName: "I-DUOD"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntradural
+typeOf: dcs:AdministrationRouteEnum
+name: "Intradural"
+fdaCode: "52"
+nciConceptCode: "C38242"
+description: "Administration within or beneath the dura."
+fdaShortName: "I-DURAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraepidermal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraepidermal"
+fdaCode: "127"
+nciConceptCode: "C38243"
+description: "Administration within the epidermis."
+fdaShortName: "I-EPIDERM"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraesophageal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraesophageal"
+fdaCode: "72"
+nciConceptCode: "C38245"
+description: "Administration within the esophagus."
+fdaShortName: "I-ESO"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntragastric
+typeOf: dcs:AdministrationRouteEnum
+name: "Intragastric"
+fdaCode: "46"
+nciConceptCode: "C38246"
+description: "Administration within the stomach."
+fdaShortName: "I-GASTRIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntragingival
+typeOf: dcs:AdministrationRouteEnum
+name: "Intragingival"
+fdaCode: "307"
+nciConceptCode: "C38247"
+description: "Administration within the gingivae."
+fdaShortName: "I-GINGIV"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraileal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraileal"
+fdaCode: "365"
+nciConceptCode: "C38249"
+description: "Administration within the distal portion of the small intestine, from the jejunum to the cecum."
+fdaShortName: "I-ILE"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntralesional
+typeOf: dcs:AdministrationRouteEnum
+name: "Intralesional"
+fdaCode: "42"
+nciConceptCode: "C38250"
+description: "Administration within or introduced directly into a localized lesion."
+fdaShortName: "I-LESION"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraluminal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraluminal"
+fdaCode: "310"
+nciConceptCode: "C38251"
+description: "Administration within the lumen of a tube."
+fdaShortName: "I-LUMIN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntralymphatic
+typeOf: dcs:AdministrationRouteEnum
+name: "Intralymphatic"
+fdaCode: "352"
+nciConceptCode: "C38252"
+description: "Administration within the lymph."
+fdaShortName: "I-LYMPHAT"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntramedullary
+typeOf: dcs:AdministrationRouteEnum
+name: "Intramedullary"
+fdaCode: "408"
+nciConceptCode: "C38253"
+description: "Administration within the marrow cavity of a bone."
+fdaShortName: "I-MEDUL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrameningeal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrameningeal"
+fdaCode: "409"
+nciConceptCode: "C38254"
+description: "Administration within the meninges (the three membranes that envelope the brain and spinal cord)."
+fdaShortName: "I-MENIN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntramuscular
+typeOf: dcs:AdministrationRouteEnum
+name: "Intramuscular"
+fdaCode: "5"
+nciConceptCode: "C28161"
+description: "Administration within a muscle."
+fdaShortName: "IM"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraocular
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraocular"
+fdaCode: "36"
+nciConceptCode: "C38255"
+description: "Administration within the eye."
+fdaShortName: "I-OCUL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraovarian
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraovarian"
+fdaCode: "354"
+nciConceptCode: "C38256"
+description: "Administration within the ovary."
+fdaShortName: "I-OVAR"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrapericardial
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrapericardial"
+fdaCode: "314"
+nciConceptCode: "C38257"
+description: "Administration within the pericardium."
+fdaShortName: "I-PERICARD"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraperitoneal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraperitoneal"
+fdaCode: "4"
+nciConceptCode: "C38258"
+description: "Administration within the peritoneal cavity."
+fdaShortName: "I-PERITON"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrapleural
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrapleural"
+fdaCode: "43"
+nciConceptCode: "C38259"
+description: "Administration within the pleura."
+fdaShortName: "I-PLEURAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraprostatic
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraprostatic"
+fdaCode: "61"
+nciConceptCode: "C38260"
+description: "Administration within the prostate gland."
+fdaShortName: "I-PROSTAT"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrapulmonary
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrapulmonary"
+fdaCode: "414"
+nciConceptCode: "C38261"
+description: "Administration within the lungs or its bronchi."
+fdaShortName: "I-PULMON"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrasinal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrasinal"
+fdaCode: "10"
+nciConceptCode: "C38262"
+description: "Administration within the nasal or periorbital sinuses."
+fdaShortName: "I-SINAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraspinal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraspinal"
+fdaCode: "22"
+nciConceptCode: "C38263"
+description: "Administration within the vertebral column."
+fdaShortName: "I-SPINAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrasynovial
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrasynovial"
+fdaCode: "19"
+nciConceptCode: "C38264"
+description: "Administration within the synovial cavity of a joint."
+fdaShortName: "I-SYNOV"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntratendinous
+typeOf: dcs:AdministrationRouteEnum
+name: "Intratendinous"
+fdaCode: "49"
+nciConceptCode: "C38265"
+description: "Administration within a tendon."
+fdaShortName: "I-TENDIN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntratesticular
+typeOf: dcs:AdministrationRouteEnum
+name: "Intratesticular"
+fdaCode: "110"
+nciConceptCode: "C38266"
+description: "Administration within the testicle."
+fdaShortName: "I-TESTIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrathecal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrathecal"
+fdaCode: "103"
+nciConceptCode: "C38267"
+description: "Administration within the cerebrospinal fluid at any level of the cerebrospinal axis, including injection into the cerebral ventricles."
+fdaShortName: "IT"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrathoracic
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrathoracic"
+fdaCode: "6"
+nciConceptCode: "C38207"
+description: "Administration within the thorax (internal to the ribs); synonymous with the term endothoracic."
+fdaShortName: "I-THORAC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntratubular
+typeOf: dcs:AdministrationRouteEnum
+name: "Intratubular"
+fdaCode: "353"
+nciConceptCode: "C38268"
+description: "Administration within the tubules of an organ."
+fdaShortName: "I-TUBUL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntratumor
+typeOf: dcs:AdministrationRouteEnum
+name: "Intratumor"
+fdaCode: "20"
+nciConceptCode: "C38269"
+description: "Administration within a tumor."
+fdaShortName: "I-TUMOR"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntratympanic
+typeOf: dcs:AdministrationRouteEnum
+name: "Intratympanic"
+fdaCode: "366"
+nciConceptCode: "C38270"
+description: "Administration within the aurus media."
+fdaShortName: "I-TYMPAN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntrauterine
+typeOf: dcs:AdministrationRouteEnum
+name: "Intrauterine"
+fdaCode: "28"
+nciConceptCode: "C38272"
+description: "Administration within the uterus."
+fdaShortName: "I-UTER"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntravascular
+typeOf: dcs:AdministrationRouteEnum
+name: "Intravascular"
+fdaCode: "21"
+nciConceptCode: "C38273"
+description: "Administration within a vessel or vessels."
+fdaShortName: "I-VASC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntravenous
+typeOf: dcs:AdministrationRouteEnum
+name: "Intravenous"
+fdaCode: "2"
+nciConceptCode: "C38276"
+description: "Administration within or into a vein or veins."
+fdaShortName: "IV"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntravenousBolus
+typeOf: dcs:AdministrationRouteEnum
+name: "Intravenous Bolus"
+fdaCode: "138"
+nciConceptCode: "C38274"
+description: "Administration within or into a vein or veins all at once."
+fdaShortName: "IV BOLUS"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntravenousDrip
+typeOf: dcs:AdministrationRouteEnum
+name: "Intravenous Drip"
+fdaCode: "137"
+nciConceptCode: "C38279"
+description: "Administration within or into a vein or veins over a sustained period of time."
+fdaShortName: "IV DRIP"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntraventricular
+typeOf: dcs:AdministrationRouteEnum
+name: "Intraventricular"
+fdaCode: "48"
+nciConceptCode: "C38277"
+description: "Administration within a ventricle."
+fdaShortName: "I-VENTRIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntravesical
+typeOf: dcs:AdministrationRouteEnum
+name: "Intravesical"
+fdaCode: "128"
+nciConceptCode: "C38278"
+description: "Administration within the bladder."
+fdaShortName: "I-VESIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIntravitreal
+typeOf: dcs:AdministrationRouteEnum
+name: "Intravitreal"
+fdaCode: "311"
+nciConceptCode: "C38280"
+description: "Administration within the vitreous body of the eye."
+fdaShortName: "I-VITRE"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIontophoresis
+typeOf: dcs:AdministrationRouteEnum
+name: "Iontophoresis"
+fdaCode: "55"
+nciConceptCode: "C38203"
+description: "Administration by means of an electric current where ions of soluble salts migrate into the tissues of the body."
+fdaShortName: "ION"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteIrrigation
+typeOf: dcs:AdministrationRouteEnum
+name: "Irrigation"
+fdaCode: "32"
+nciConceptCode: "C38281"
+description: "Administration to bathe or flush open wounds or body cavities."
+fdaShortName: "IRRIG"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteLaryngeal
+typeOf: dcs:AdministrationRouteEnum
+name: "Laryngeal"
+fdaCode: "364"
+nciConceptCode: "C38282"
+description: "Administration directly upon the larynx."
+fdaShortName: "LARYN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteNasal
+typeOf: dcs:AdministrationRouteEnum
+name: "Nasal"
+fdaCode: "14"
+nciConceptCode: "C38284"
+description: "Administration to the nose; administered by way of the nose."
+fdaShortName: "NASAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteNasogastric
+typeOf: dcs:AdministrationRouteEnum
+name: "Nasogastric"
+fdaCode: "71"
+nciConceptCode: "C38285"
+description: "Administration through the nose and into the stomach, usually by means of a tube."
+fdaShortName: "NG"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteNotApplicable
+typeOf: dcs:AdministrationRouteEnum
+name: "Not Applicable"
+fdaCode: "312"
+nciConceptCode: "C48623"
+description: "Routes of administration are not applicable."
+fdaShortName: "nan"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteOcclusiveDressingTechnique
+typeOf: dcs:AdministrationRouteEnum
+name: "Occlusive Dressing Technique"
+fdaCode: "134"
+nciConceptCode: "C38286"
+description: "Administration by the topical route which is then covered by a dressing which occludes the area."
+fdaShortName: "OCCLUS"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteOphthalmic
+typeOf: dcs:AdministrationRouteEnum
+name: "Ophthalmic"
+fdaCode: "12"
+nciConceptCode: "C38287"
+description: "Administration  to the external eye."
+fdaShortName: "OPHTHALM"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteOral
+typeOf: dcs:AdministrationRouteEnum
+name: "Oral"
+fdaCode: "1"
+nciConceptCode: "C38288"
+description: "Administration to or by way of the mouth."
+fdaShortName: "ORAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteOropharyngeal
+typeOf: dcs:AdministrationRouteEnum
+name: "Oropharyngeal"
+fdaCode: "410"
+nciConceptCode: "C38289"
+description: "Administration directly to the mouth and pharynx."
+fdaShortName: "ORO"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteOther
+typeOf: dcs:AdministrationRouteEnum
+name: "Other"
+fdaCode: "135"
+nciConceptCode: "C38290"
+description: "Administration is different from others on this list."
+fdaShortName: "OTHER"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteParenteral
+typeOf: dcs:AdministrationRouteEnum
+name: "Parenteral"
+fdaCode: "411"
+nciConceptCode: "C38291"
+description: "Administration by injection, infusion, or implantation."
+fdaShortName: "PAREN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRoutePercutaneous
+typeOf: dcs:AdministrationRouteEnum
+name: "Percutaneous"
+fdaCode: "113"
+nciConceptCode: "C38676"
+description: "Administration through the skin."
+fdaShortName: "PERCUT"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRoutePeriarticular
+typeOf: dcs:AdministrationRouteEnum
+name: "Periarticular"
+fdaCode: "45"
+nciConceptCode: "C38292"
+description: "Administration around a joint."
+fdaShortName: "P-ARTIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRoutePeridural
+typeOf: dcs:AdministrationRouteEnum
+name: "Peridural"
+fdaCode: "50"
+nciConceptCode: "C38677"
+description: "Administration to the outside of the dura mater of the spinal cord.."
+fdaShortName: "P-DURAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRoutePerineural
+typeOf: dcs:AdministrationRouteEnum
+name: "Perineural"
+fdaCode: "412"
+nciConceptCode: "C38293"
+description: "Administration surrounding a nerve or nerves."
+fdaShortName: "P-NEURAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRoutePeriodontal
+typeOf: dcs:AdministrationRouteEnum
+name: "Periodontal"
+fdaCode: "40"
+nciConceptCode: "C38294"
+description: "Administration around a tooth."
+fdaShortName: "P-ODONT"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteRectal
+typeOf: dcs:AdministrationRouteEnum
+name: "Rectal"
+fdaCode: "16"
+nciConceptCode: "C38295"
+description: "Administration to the rectum."
+fdaShortName: "RECTAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteRespiratory
+typeOf: dcs:AdministrationRouteEnum
+name: "Respiratory (Inhalation)"
+fdaCode: "136"
+nciConceptCode: "C38216"
+description: "Administration within the respiratory tract by inhaling orally or nasally for local or systemic effect."
+fdaShortName: "RESPIR"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteRetrobulbar
+typeOf: dcs:AdministrationRouteEnum
+name: "Retrobulbar"
+fdaCode: "34"
+nciConceptCode: "C38296"
+description: "Administration behind the pons or behind the eyeball."
+fdaShortName: "RETRO"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteSoftTissue
+typeOf: dcs:AdministrationRouteEnum
+name: "Soft Tissue"
+fdaCode: "109"
+nciConceptCode: "C38198"
+description: "Administration into any soft tissue."
+fdaShortName: "SOFT TIS"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteSubarachnoid
+typeOf: dcs:AdministrationRouteEnum
+name: "Subarachnoid"
+fdaCode: "66"
+nciConceptCode: "C38297"
+description: "Administration beneath the arachnoid."
+fdaShortName: "S-ARACH"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteSubconjunctival
+typeOf: dcs:AdministrationRouteEnum
+name: "Subconjunctival"
+fdaCode: "96"
+nciConceptCode: "C38298"
+description: "Administration beneath the conjunctiva."
+fdaShortName: "S-CONJUNC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteSubcutaneous
+typeOf: dcs:AdministrationRouteEnum
+name: "Subcutaneous"
+fdaCode: "3"
+nciConceptCode: "C38299"
+description: "Administration beneath the skin; hypodermic.  Synonymous with the term SUBDERMAL."
+fdaShortName: "SC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteSublingual
+typeOf: dcs:AdministrationRouteEnum
+name: "Sublingual"
+fdaCode: "24"
+nciConceptCode: "C38300"
+description: "Administration beneath the tongue."
+fdaShortName: "SL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteSubmucosal
+typeOf: dcs:AdministrationRouteEnum
+name: "Submucosal"
+fdaCode: "53"
+nciConceptCode: "C38301"
+description: "Administration beneath the mucous membrane."
+fdaShortName: "S-MUCOS"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteTopical
+typeOf: dcs:AdministrationRouteEnum
+name: "Topical"
+fdaCode: "11"
+nciConceptCode: "C38304"
+description: "Administration to a particular spot on the outer surface of the body.  The E2B term TRANSMAMMARY is a subset of the term TOPICAL."
+fdaShortName: "TOPIC"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteTransdermal
+typeOf: dcs:AdministrationRouteEnum
+name: "Transdermal"
+fdaCode: "358"
+nciConceptCode: "C38305"
+description: "Administration through the dermal layer of the skin to the systemic circulation by diffusion."
+fdaShortName: "T-DERMAL"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteTransmucosal
+typeOf: dcs:AdministrationRouteEnum
+name: "Transmucosal"
+fdaCode: "122"
+nciConceptCode: "C38283"
+description: "Administration across the mucosa."
+fdaShortName: "T-MUCOS"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteTransplacental
+typeOf: dcs:AdministrationRouteEnum
+name: "Transplacental"
+fdaCode: "415"
+nciConceptCode: "C38307"
+description: "Administration through or across the placenta."
+fdaShortName: "T-PLACENT"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteTranstracheal
+typeOf: dcs:AdministrationRouteEnum
+name: "Transtracheal"
+fdaCode: "355"
+nciConceptCode: "C38308"
+description: "Administration through the wall of the trachea."
+fdaShortName: "T-TRACHE"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteTranstympanic
+typeOf: dcs:AdministrationRouteEnum
+name: "Transtympanic"
+fdaCode: "124"
+nciConceptCode: "C38309"
+description: "Administration across or through the tympanic cavity."
+fdaShortName: "T-TYMPAN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteUnassigned
+typeOf: dcs:AdministrationRouteEnum
+name: "Unassigned"
+fdaCode: "400"
+nciConceptCode: "C38310"
+description: "Route of administration has not yet been assigned."
+fdaShortName: "UNAS"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteUnknown
+typeOf: dcs:AdministrationRouteEnum
+name: "Unknown"
+fdaCode: "139"
+nciConceptCode: "C38311"
+description: "Route of administration is unknown."
+fdaShortName: "UNKNOWN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteUreteral
+typeOf: dcs:AdministrationRouteEnum
+name: "Ureteral"
+fdaCode: "112"
+nciConceptCode: "C38312"
+description: "Administration into the ureter."
+fdaShortName: "URETER"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteUrethral
+typeOf: dcs:AdministrationRouteEnum
+name: "Urethral"
+fdaCode: "17"
+nciConceptCode: "C38271"
+description: "Administration into the urethra."
+fdaShortName: "URETH"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteVaginal
+typeOf: dcs:AdministrationRouteEnum
+name: "Vaginal"
+fdaCode: "15"
+nciConceptCode: "C38313"
+description: "Administration into the vagina."
+fdaShortName: "VAGIN"
+descriptionURL: "https://www.fda.gov/drugs/data-standards-manual-monographs/route-administration"
+
+Node: dcid:AdministrationRouteInjection
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRouteInjection"
+
+Node: dcid:AdministrationRouteImplantation
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRouteImplantation"
+
+Node: dcid:AdministrationRouteIntraAnal
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRouteIntraAnal"
+
+Node: dcid:AdministrationRoutePyelocalyceal
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRoutePyelocalyceal"
+
+Node: dcid:AdministrationRouteIntraCranial
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRouteIntraCranial"
+
+Node: dcid:AdministrationRouteIntraTracheal
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRouteIntraTracheal"
+
+Node: dcid:AdministrationRouteForRxCompounding
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRouteForRxCompounding"
+
+Node: dcid:AdministrationRoutePerfusionBiliary
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRoutePerfusionBiliary"
+
+Node: dcid:AdministrationRouteIntraCoronalDental
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRouteIntraCoronalDental"
+
+Node: dcid:AdministrationRoutePerfusionCardiac
+typeOf: dcs:AdministrationRouteEnum
+name: "AdministrationRoutePerfusionCardiac"
+
+Node: dcid:TherapeuticEquivalenceCodeAA
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAA"
+description: "Products in conventional dosage forms not presenting bioequivalence problems. Considered to be therapeutically equivalent to other pharmaceutically equivalent products, i.e., drug products for which there are no known or suspected bioequivalence problems."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeAB
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAB"
+description: "Multisource drug products listed under the same heading (i.e., identical active ingredients(s), dosage form, and route(s) of administration) and having the same strength generally will be coded AB if data and information are submitted demonstrating bioequivalence.  Drugs coded as AB under a heading are considered therapeutically equivalent only to other drugs coded as AB under that heading."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeAB1
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAB1"
+description: "Drugs coded with AB1 under a heading (specified active ingredients(s), dosage form, and route(s) of administration) are considered therapeutically equivalent only to other drugs also coded with AB1 under the same heading. The generic drug products bioequivalent to Adalat® CC have been assigned a rating of AB1."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAB
+
+Node: dcid:TherapeuticEquivalenceCodeAB2
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAB2"
+description: "Drugs coded with AB2 under a heading (specified active ingredients(s), dosage form, and route(s) of administration) are considered therapeutically equivalent only to other drugs also coded with AB2 under the same heading. The generic drug products bioequivalent to Procardia XL® have been assigned a rating of AB2."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAB
+
+Node: dcid:TherapeuticEquivalenceCodeAB3
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAB3"
+description: "Drugs coded with AB3 under a heading (specified active ingredients(s), dosage form, and route(s) of administration) are considered therapeutically equivalent only to other drugs also coded with AB3 under the same heading."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAB
+
+Node: dcid:TherapeuticEquivalenceCodeAB4
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAB4"
+description: "Drugs coded with AB4 under a heading (specified active ingredients(s), dosage form, and route(s) of administration) are considered therapeutically equivalent only to other drugs also coded with AB4 under the same heading."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAB
+
+Node: dcid:TherapeuticEquivalenceCodeAN
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAN"
+description: "Solutions and powders for aerosolization. Considered to be therapeutically equivalent to other pharmaceutically equivalent products, i.e., drug products for which there are no known or suspected bioequivalence problems."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeAO
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAO"
+description: "Injectable oil solutions. Considered to be therapeutically equivalent to other pharmaceutically equivalent products, i.e., drug products for which there are no known or suspected bioequivalence problems."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeAP
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAP"
+description: "Injectable aqueous solutions and, in certain instances, intravenous non-aqueous solutions. Considered to be therapeutically equivalent to other pharmaceutically equivalent products, i.e., drug products for which there are no known or suspected bioequivalence problems."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeAP1
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAP1"
+description: "Considered to be therapeutically equivalent to other drugs also coded with AP1."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAP
+
+Node: dcid:TherapeuticEquivalenceCodeAP2
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAP2"
+description: "Considered to be therapeutically equivalent to other drugs also coded with AP2."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAP
+
+Node: dcid:TherapeuticEquivalenceCodeAT
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAT"
+description: "Topical products. Considered to be therapeutically equivalent to other pharmaceutically equivalent products, i.e., drug products for which there are no known or suspected bioequivalence problems."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeAT1
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAT1"
+description: "Considered to be therapeutically equivalent to other drugs also coded with AT1."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAT
+
+Node: dcid:TherapeuticEquivalenceCodeAT2
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAT2"
+description: "Considered to be therapeutically equivalent to other drugs also coded with AT2."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAT
+
+Node: dcid:TherapeuticEquivalenceCodeBC
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBC"
+description: "Extended-release dosage forms (capsules, injectables and tablets). Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeBD
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBD"
+description: "Active ingredients and dosage forms with documented bioequivalence problems. Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeBE
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBE"
+description: "Delayed‑release oral dosage forms. Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeBN
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBN"
+description: "Products in aerosol-nebulizer drug delivery systems. Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeBP
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBP"
+description: "Active ingredients and dosage forms with potential bioequivalence problems. Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeBR
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBR"
+description: "Suppositories or enemas that deliver drugs for systemic absorption. Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeBS
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBS"
+description: "Products having drug standard deficiencies. Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeBT
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBT"
+description: "Topical products with bioequivalence issues. Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+Node: dcid:TherapeuticEquivalenceCodeBX
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeBX"
+description: "Drug products for which the data are insufficient to determine therapeutic equivalence. Considered not to be therapeutically equivalent to other pharmaceutically equivalent products."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+
+# the instances of HumanTissueEnum are in HumanTissueEnum.mcf
+Node: dcid:HumanTissueEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "HumanTissueEnum"
+description: "The human tissue that was the source of material for an experiment or observation."
+
+# the instances of HumanCellTypeEnum are in HumanCellTypeEnum.mcf
+Node: dcid:HumanCellTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "HumanCellTypeEnum"
+description: "The human cell type that was the source of material for an experiment or observation."
+
+Node: dcid:ProteinExpressionScoreEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "ProteinExpressionScoreEnum"
+description: "The level of protein observed in a specified cell type."
+
+Node: dcid:ProteinExpressionNotDetected
+typeOf: dcs:ProteinExpressionScoreEnum
+name: "ProteinExpressionNotDetected"
+description: "The protein expression score is ‘Not detected' when the combination of intensity and fractions is negative or weak and <25%. Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)."
+descriptionUrl: "https://www.proteinatlas.org/about/help#4"
+
+Node: dcid:ProteinExpressionLow
+typeOf: dcs:ProteinExpressionScoreEnum
+name: "ProteinExpressionLow"
+description: "The protein expression score is ‘Low' when the combination of intensity and fractions is weak combined with either 25 - 75% or 75%, or moderate <25%. Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)"
+descriptionUrl: "https://www.proteinatlas.org/about/help#4"
+
+Node: dcid:ProteinExpressionMedium
+typeOf: dcs:ProteinExpressionScoreEnum
+name: "ProteinExpressionMedium"
+description: "The protein expression score is ‘Medium' when the combination of intensity and fractions is moderate combined with either 25 - 75% or 75% - medium, or strong <25%. Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)"
+descriptionUrl: "https://www.proteinatlas.org/about/help#4"
+
+Node: dcid:ProteinExpressionHigh
+typeOf: dcs:ProteinExpressionScoreEnum
+name: "ProteinExpressionHigh"
+description: "The protein expression score is ‘Medium' when the combination of intensity and fractions is strong combined with either 25 - 75% or 75%. Protein expression score is based on immunohistochemical data manually scored with regard to staining intensity (negative, weak, moderate or strong) and fraction of stained cells (<25%, 25-75% or >75%)"
+descriptionUrl: "https://www.proteinatlas.org/about/help#4"
+
+Node: dcid:HumanProteinOccurrenceReliabilityEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "HumanProteinOccurrenceReliabilityEnum"
+description: "The human protein tissue atlas reliability enumeration."
+
+Node: dcid:ProteinOccurrenceReliabilityEnhanced
+typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
+name: "ProteinOccurrenceReliabilityEnhanced"
+description: "One or more antibodies are enhanced validated and there is no contradicting data, for example literature describes experimental evidence for a different location."
+descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
+
+Node: dcid:ProteinOccurrenceReliabilitySupported
+typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
+name: "ProteinOccurrenceReliabilitySupported"
+description: "There is no enhanced validation of the used antibody, but the annotated localization is reported in literature."
+descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
+
+Node: dcid:ProteinOccurrenceReliabilityApproved
+typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
+name: "ProteinOccurrenceReliabilityApproved"
+description: "If the localization of the protein has not been previously described and was detected by only one antibody without additional antibody validation."
+descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
+
+Node: dcid:ProteinOccurrenceReliabilityUncertain
+typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
+name: "ProteinOccurrenceReliabilityUncertain"
+description: "If the antibody-staining pattern contradicts experimental data or no expression is detected on the RNA level."
+descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
