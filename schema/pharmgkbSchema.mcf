@@ -1,0 +1,333 @@
+Node: dcid:ChemicalCompoundGeneAssociation
+name: "ChemicalCompoundGeneAssociation"
+typeOf: schema:Class
+subClassOf: schema:Intangible
+description: "The association of a chemical compound with a gene."
+
+Node: dcid:compoundID
+name: "compoundID"
+typeOf: schema:Property
+rangeIncludes: dcs:Drug
+domainIncludes: dcs:ChemicalCompoundGeneAssociation
+
+Node: dcid:geneID
+name: "geneID"
+typeOf: schema:Property
+rangeIncludes: dcs:Gene
+domainIncludes: dcs:ChemicalCompoundGeneAssociation
+
+Node: dcid:pubMedID
+name: "pubMedID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:ChemicalCompoundGeneAssociation
+
+Node: dcid:isPharmacokineticRelationship
+name: "isPharmacokineticRelationship"
+typeOf: schema:Property
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:ChemicalCompoundGeneAssociation
+description: "True if the pair of entities was found in a pharmacokinetic pathway on PharmGKB, or if the Variant Annotation or VIP was annotated with PK in some manner."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:isPharmacodynamicRelationship
+name: "isPharmacodynamicRelationship"
+typeOf: schema:Property
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:ChemicalCompoundGeneAssociation
+description: "True if the pair of entities was found in a pharmacodynamic pathway on PharmGKB, or if the Variant Annotation or VIP was annotated with PD in some manner."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:relationshipAssociationType
+name: "relationshipAssociationType"
+typeOf: schema:Property
+rangeIncludes: dcs:RelationshipAssociationTypeEnum
+domainIncludes: dcs:ChemicalCompoundGeneAssociation
+
+Node: dcid:relationshipEvidenceType
+name: "relationshipEvidenceType"
+typeOf: schema:Property
+rangeIncludes: dcs:RelationshipEvidenceTypeEnum
+domainIncludes: dcs:ChemicalCompoundGeneAssociation
+
+Node: dcid:pharmGKBID
+name: "pharmGKBID"
+typeOf: schema:Property
+rangeIncludes: dcs:Text
+domainIncludes: dcs:Drug, dcs:ChemicalCompound, dcs:Gene,
+
+Node: dcid:alternateGeneSymbol
+name: "alternateGeneSymbol"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:alfredID
+name: "alfredID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:comparativeToxicogenomicsDBID
+name: "comparativeToxicogenomicsDBID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:genAtlasID
+name: "genAtlasID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:geneCardID
+name: "geneCardID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:geneOntologyID
+name: "geneOntologyID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:humanCycGeneID
+name: "humanCycGeneID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:modBaseID
+name: "modBaseID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:mutDBID
+name: "mutDBID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:ucscGenomeBroswerID
+name: "ucscGenomeBroswerID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:iupharReceptorID
+name: "iupharReceptorID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:genBankID
+name: "genBankID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+
+Node: dcid:uniProtID
+name: "uniProtID"
+typeOf: schema:Property
+domainIncludes: dcs:ChemicalCompound, dcs:Gene
+
+Node: dcid:chebiID
+name: "chebiID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:chemicalAbstractServiceID
+name: "chemicalAbstractServiceID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:chemSpiderID
+name: "chemSpiderID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:drugBankID
+name: "drugBankID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:keggCompoundID
+name: "keggCompoundID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:keggDrugID
+name: "keggDrugID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:pubChemCompoundID
+name: "pubChemCompoundID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+
+Node: dcid:pubChemSubstanceID
+name: "pubChemSubstanceID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:iupharLigandID
+name: "iupharLigandID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:proteinDataBankID
+name: "proteinDataBankID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:fdaDailyMedDrugLabel
+name: "fdaDailyMedDrugLabel"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:drugsProductDatabaseID
+name: "drugsProductDatabaseID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:therapeuticTargetsDatabaseID
+name: "therapeuticTargetsDatabaseID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:clinicalTrialsGovID
+name: "clinicalTrialsGovID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:bindingDBID
+name: "bindingDBID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:nationalDrugCodeDirectoryID
+name: "nationalDrugCodeDirectoryID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:genBankID
+name: "genBankID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:humanMetabolomeDatabaseID
+name: "humanMetabolomeDatabaseID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:americanTypeCultureCollectionID
+name: "americanTypeCultureCollectionID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:hetID
+name: "hetID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:drugBankMetaboliteID
+name: "drugBankMetaboliteID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:rxNormID
+name: "rxNormID"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Drug,dcs:ChemicalCompound
+
+Node: dcid:RelationshipAssociationTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "RelationshipAssociationTypeEnum"
+description: "Type of relationship association as defined by PharmGKB."
+
+Node: dcid:RelationshipAssociationTypeAssociated
+typeOf: dcid:RelationshipAssociationTypeEnum
+name: "Associated"
+description: "Associated means an association between the entities is supported by the Evidence and PMIDs columns."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:RelationshipAssociationTypeNotAssociated
+typeOf: dcid:RelationshipAssociationTypeEnum
+name: "NotAssociated"
+description: "Not associated means that the entities were evaluated but not found have a statistically significant association based on the PMIDs column."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:RelationshipAssociationTypeAmbiguous
+typeOf: dcid:RelationshipAssociationTypeEnum
+name: "Ambiguous"
+description: "Ambiguous means that some of the items in the Evidence and/or PMIDs columns support an association and others do not."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:RelationshipEvidenceTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "RelationshipEvidenceTypeEnum"
+description: "Type of evidence for a relationship as defined by PharmGKB."
+
+Node: dcid:RelationshipEvidenceTypeClinicalAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "ClinicalAnnotation"
+
+Node: dcid:RelationshipEvidenceTypeMultilinkAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "MultilinkAnnotation"
+
+Node: dcid:RelationshipEvidenceTypeGuidelineAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "GuidelineAnnotation"
+
+Node: dcid:RelationshipEvidenceTypeLabelAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "LabelAnnotation"
+
+Node: dcid:RelationshipEvidenceTypeVariantAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "VariantAnnotation"
+
+Node: dcid:RelationshipEvidenceTypeDataAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "DataAnnotation"
+
+Node: dcid:RelationshipEvidenceTypeLiterature
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "Literature"
+
+Node: dcid:RelationshipEvidenceTypeVipGene
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "VipGene"
+
+Node: dcid:RelationshipEvidenceTypePathway
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "Pathway"
