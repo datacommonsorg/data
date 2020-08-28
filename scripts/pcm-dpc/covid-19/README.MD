@@ -23,7 +23,7 @@ CSV files are available for download from https://github.com/pcm-dpc/COVID-19.
   2. Regions level
   3. Provinces level
 
-  The naional level and regions level datasets are  broken into 12 statistical variables.
+  The national level and regions level datasets are broken into 12 statistical variables.
   
    1. Hospitalized with symptoms: hospitalized positive cases with symptoms
    2. Intensive care: hospitalized positive cases in intensive case
