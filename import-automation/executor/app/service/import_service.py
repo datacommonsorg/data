@@ -276,6 +276,7 @@ class ImportServiceClient:
         Raises:
             requests.HTTPError: The importer returns a status code that is
                 larger than or equal to 400.
+            ImportNotFoundError: Import not found in the import logs.
         """
         absolute_import_name = _get_fixed_absolute_import_name(
             import_dir, import_spec['import_name'])
@@ -322,13 +323,14 @@ class ImportServiceClient:
                 larger than or equal to 400.
         """
         request = {'userEmail': curator_email}
-        logging.info('ImportServiceClient.get_import_log: '
-                     'Sending request %s to %s',
-                     request, _PROXY_GET_IMPORT_LOG)
+        logging.info(
+            'ImportServiceClient.get_import_log: '
+            'Sending request %s to %s', request, _PROXY_GET_IMPORT_LOG)
         response = self.iap.post(_PROXY_GET_IMPORT_LOG, json=request)
-        logging.info('ImportServiceClient.get_import_log: '
-                     'Received response %s from %s',
-                     response.text, _PROXY_GET_IMPORT_LOG)
+        logging.info(
+            'ImportServiceClient.get_import_log: '
+            'Received response %s from %s', response.text,
+            _PROXY_GET_IMPORT_LOG)
         response.raise_for_status()
         return response.json()
 
@@ -367,15 +369,20 @@ class ImportServiceClient:
             If block is set, Same exceptions as _block_on_import.
         """
         logs_before = self.get_import_log(curator_email)['entry']
-        if not _are_imports_finished(logs_before, import_name, curator_email):
-            raise PreviousImportNotFinishedError(import_name, curator_email)
-        logging.info('ImportServiceClient._import_helper: '
-                     'Sending request %s to %s',
-                     import_request, url)
+        try:
+            if not _are_imports_finished(logs_before, import_name,
+                                         curator_email):
+                raise PreviousImportNotFinishedError(import_name, curator_email)
+        except ImportNotFoundError as exc:
+            # This might be the first attempt
+            logging.warning(str(exc))
+        logging.info(
+            'ImportServiceClient._import_helper: '
+            'Sending request %s to %s', import_request, url)
         response = self.iap.post(url, json=import_request)
-        logging.info('ImportServiceClient._import_helper: '
-                     'Received response %s from %s',
-                     response.text, url)
+        logging.info(
+            'ImportServiceClient._import_helper: '
+            'Received response %s from %s', response.text, url)
         response.raise_for_status()
 
         logs_after = self.get_import_log(curator_email)['entry']

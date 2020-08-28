@@ -58,8 +58,8 @@ class ProgressLogList(progress_log.ProgressLog):
         request body.
 
         Log level can only be one of the levels defined by LogLevel.
-        A progress log must be linked to a system run, an import
-        attempt, or both.
+        A progress log must be at least linked to a system run and can
+        optionally be linked to an import attempt.
 
         Returns:
             The created progress log as a datastore Entity object with
@@ -67,6 +67,7 @@ class ProgressLogList(progress_log.ProgressLog):
             the error message is a string and the error code is an int.
         """
         args = progress_log.ProgressLog.parser.parse_args()
+        args.pop(_LOG.log_id, None)
         args.setdefault('time_logged', utils.utctime())
 
         valid, err, code = validation.is_progress_log_valid(args)
@@ -74,7 +75,7 @@ class ProgressLogList(progress_log.ProgressLog):
             return err, code
 
         valid, err, code = validation.required_fields_present(
-            ('run_id', 'attempt_id'), args, all_present=False)
+            (_LOG.run_id, _LOG.level, _LOG.message), args)
         if not valid:
             return err, code
 
