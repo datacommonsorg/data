@@ -1,0 +1,6 @@
+Node: E:ISTAT->E0
+typeOf: dcs:EurostatNUTS2
+dcid: C:ISTAT->NUTS2
+name: C:ISTAT->Region name
+istatId: C:ISTAT->Region Code
+
