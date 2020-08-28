@@ -74,7 +74,8 @@ DRUG_XREF_PROP_DICT = {
     'HMDB': 'humanMetabolomeDatabaseID',
     'ATCC': 'americanTypeCultureCollectionID',
     'HET': 'hetID',
-    'DrugBank Metabolite': 'drugBankMetaboliteID'
+    'DrugBank Metabolite': 'drugBankMetaboliteID',
+    'RXNorm Identifiers': 'rxNormID',
 }
 GENE_TEMPLATE = '''
 Node: dcid:{dcid}
