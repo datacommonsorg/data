@@ -1,0 +1,8 @@
+Node: E:states_industry_gdp->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:states_industry_gdp->NAICS
+observationAbout: C:states_industry_gdp->GeoId
+observationDate: C:states_industry_gdp->Quarter
+observationPeriod: "P3M"
+value: C:states_industry_gdp->value
+unit: dcs:USDollar

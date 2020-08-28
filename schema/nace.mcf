@@ -1,0 +1,71 @@
+Node: dcid:NACEEnum
+typeOf: dcs:Class
+subClassOf: schema:Enumeration
+name: "NACEEnum"
+description: "The Statistical Classification of Economic Activities in the European Community, commonly referred to as NACE, is the industry standard classification system used in the European Union."
+descriptionUrl: "https://en.wikipedia.org/wiki/Statistical_Classification_of_Economic_Activities_in_the_European_Community"
+
+Node: dcid:nace
+typeOf: dcs:Property
+name: "nace"
+rangeIncludes: dcs:NACEEnum
+domainIncludes: schema:Person
+
+
+Node: dcid:NACE/A
+typeOf: dcs:NACEEnum
+name: "Agriculture, forestry and fishing"
+
+Node: dcid:NACE/B-E
+typeOf: dcs:NACEEnum
+name: "Industry (except construction)"
+
+Node: dcid:NACE/C
+typeOf: dcs:NACEEnum
+name: "Manufacturing"
+
+Node: dcid:NACE/F
+typeOf: dcs:NACEEnum
+name: "Construction"
+
+Node: dcid:NACE/G-J
+typeOf: dcs:NACEEnum
+name: "Wholesale and retail trade, transport, accommodation and food service activities, information and communication"
+
+Node: dcid:NACE/G-I
+typeOf: dcs:NACEEnum
+name: "Wholesale and retail trade, transport, accommodation and food service"
+
+Node: dcid:NACE/J
+typeOf: dcs:NACEEnum
+name: "Information and communication"
+
+Node: dcid:NACE/K-N
+typeOf: dcs:NACEEnum
+name: "Financial, real estate, professional, scientific, technical, administrative, and support activities"
+description: "Includes financial and insurance, real estate, professional, scientific and technical, administrative and support service activities."
+
+Node: dcid:NACE/K
+typeOf: dcs:NACEEnum
+name: "Financial and insurance activities"
+
+Node: dcid:NACE/L
+typeOf: dcs:NACEEnum
+name: "Real estate activities"
+
+Node: dcid:NACE/M-N
+typeOf: dcs:NACEEnum
+name: "Professional, scientific and technical activities, administrative and support service activities"
+
+Node: dcid:NACE/O-U
+typeOf: dcs:NACEEnum
+name: "Public administration and defence, compulsory social security, education, human health and social work activities, arts, entertainment and recreation"
+
+Node: dcid:NACE/O-Q
+typeOf: dcs:NACEEnum
+name: "Public administration, defence, education, human health and social work activities"
+
+Node: dcid:NACE/R-U
+typeOf: dcs:NACEEnum
+name: "Arts, entertainment, recreation, other service, household, and extra-territorial organizations and bodies activities"
+description: "Includes arts, entertainment and recreation, other service activities, activities of household and extra-territorial organizations and bodies."

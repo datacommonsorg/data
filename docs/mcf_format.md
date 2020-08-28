@@ -3,13 +3,13 @@
 ## Background
 
 Data Commons accepts graph data in multiple formats. In addition to web
-standards like JSON-LD and RDFa, we also make heavy use of
-an earlier format called MCF. We use this simple format extensively because of
-its easy readability. This page documents MCF.
+standards like JSON-LD and RDFa, we also make heavy use of an earlier format
+called MCF. We use this simple format extensively because of its easy
+readability. This page documents MCF.
 
-Data Commons is a directed labeled graph. The nodes in this graph are
-either 'entities' or primitive data types (strings and numbers). Each arc has a
-label, which we will often refer to as a property. This is the basis of the
+Data Commons is a directed labeled graph. The nodes in this graph are either
+'entities' or primitive data types (strings and numbers). Each arc has a label,
+which we will often refer to as a property. This is the basis of the
 [Schema.org Data Model](https://schema.org/docs/datamodel.html), as well as
 ours. It is also worth noting that the Data Commons schema is a superset of
 Schema.org.
@@ -60,9 +60,9 @@ name: "Just another test node in a test world"
 ### Scoping and Namespaces
 
 The Data Commons graph is built from data that is distributed across many files,
-from different sources. One challenge is coordination and scoping of
-identifiers across multiple sources. We adopt the solution that has been used
-before in the context of programming languages, XML, etc.: **namespaces**.
+from different sources. One challenge is coordination and scoping of identifiers
+across multiple sources. We adopt the solution that has been used before in the
+context of programming languages, XML, etc.: **namespaces**.
 
 Each MCF file includes a `Context` section whose scope is that file. Context
 includes the provenance (`importName`, `importUrl`, `provenanceUrl`) that the
@@ -84,7 +84,6 @@ namespace: "foaf=http://xmlns.com/foaf/0.1/"
 To refer to an entity via its identifier (`id1`) in a namespace associated with
 a prefix 'foaf', we write 'foaf:id1'. To refer to an entity via its identifier
 in the local namespace, we use the prefix `l`.
-
 
 #### Special Namespaces
 
@@ -115,8 +114,8 @@ corresponding DCIDs, while for the last three, we won't.
 
 #### Referencing Examples
 
-Here are MCF nodes for a city, county, and state, demonstrating usage of local ID,
-DCID, Schema.org schema, and Data Commons schema referencing:
+Here are MCF nodes for a city, county, and state, demonstrating usage of local
+ID, DCID, Schema.org schema, and Data Commons schema referencing:
 
 ```
 Node: USCity_0600001
@@ -152,9 +151,9 @@ stricter syntax described above does work.
 
 #### Skip global prefix on known ref properties
 
-For well-known properties that are known to have referencess as values,
-the global reference prefixes (`dcs:`, `schema:`, `dcid:`) for their
-values can be dropped.
+For well-known properties that are known to have referencess as values, the
+global reference prefixes (`dcs:`, `schema:`, `dcid:`) for their values can be
+dropped.
 
 Reference properties include: `location`, `observedNode`, `containedInPlace`,
 `typeOf`, `populationType`, `subClassOf`, `rangeIncludes`, `domainIncludes`,
@@ -208,8 +207,9 @@ missing, we would intepret it as a local ID.
 
 #### Entities with properties coming from different datasets
 
-If you have entities that have properties coming multiple datasets, each dataset
-should write a MCF node for the entity with just the properties it determines.
+If you have entities that have properties coming from multiple datasets, each
+dataset should write a MCF node for the entity with just the properties it
+determines.
 
 For example:
 
@@ -248,15 +248,19 @@ containedInPlace: geoId/06
 
 #### DCID and Name Conventions
 
-- For non-schema entities, do not use underscores in identifier or DCID fields.
+-   For non-schema entities, do not use underscores in identifier or DCID
+    fields.
 
-- For classes, the DCID and name must follow PascalCasing. This
-means first letter is upper-cased.
-[(EXAMPLE)](https://browser.datacommons.org/kg?dcid=BiologicalSpecimen)
+-   For classes, the DCID and name must follow PascalCasing. This means first
+    letter is upper-cased.
+    [(EXAMPLE)](https://browser.datacommons.org/kg?dcid=BiologicalSpecimen)
 
-- For properties, the DCID and name must follow camelCasing. This
-means first letter is lower-cased.
-[(EXAMPLE)](https://browser.datacommons.org/kg?dcid=healthOutcome)
+-   For properties, the DCID and name must follow camelCasing. This means first
+    letter is lower-cased.
+    [(EXAMPLE)](https://browser.datacommons.org/kg?dcid=healthOutcome)
+
+-   DCIDs have a length limit of 256 characters. Nodes with a DCID longer than
+    256 characters will throw a syntax error upon uploading to DataCommons.
 
 ## MCF Types in Data Commons
 
@@ -318,4 +322,3 @@ Contributors need not worry about the process of using template MCF to convert
 datasets to instance MCF, but roughly, for each row of the dataset, we create
 all the nodes in the template MCF specification, substituting values from the
 specified columns for each property.
-

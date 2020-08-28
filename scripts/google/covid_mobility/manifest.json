@@ -1,0 +1,20 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "data",
+            "curator_emails": [
+                "edumorales@google.com"
+            ],
+            "provenance_url": "https://www.google.com/covid19/mobility",
+            "scripts": [
+                "covidmobility.py"
+            ],
+            "import_inputs": [
+                {
+                    "node_mcf": "covid_mobility_output.mcf"
+                }
+            ],
+            "cron_schedule": "* * * * *"
+        }
+    ]
+}
