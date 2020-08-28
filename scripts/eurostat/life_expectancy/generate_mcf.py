@@ -19,23 +19,23 @@ def convert_range(s_input):
     """Convert range values from the format in statvar names (e.g. 10YearsOrMore)
      to the format as QuantityRange (e.g. [Years 10 -]) in Data Commons."""
     if 'OrMore' in s_input:
-        match = re.match(r'(\d+)OrMore([a-zA-Z]+)', s_input)
+        match = re.fullmatch(r'(\d+)OrMore([a-zA-Z]+)', s_input)
         num = match.group(1)
         unit = match.group(2)
         return '[{} {} -]'.format(unit, num)
     elif 'Upto' in s_input:
-        match = re.match(r'Upto(\d+)([a-zA-Z]+)', s_input)
+        match = re.fullmatch(r'Upto(\d+)([a-zA-Z]+)', s_input)
         num = match.group(1)
         unit = match.group(2)
         return '[{} - {}]'.format(unit, num)
     elif 'To' in s_input:
-        match = re.match(r'(\d+)To(\d+)([a-zA-Z]+)', s_input)
+        match = re.fullmatch(r'(\d+)To(\d+)([a-zA-Z]+)', s_input)
         num1 = match.group(1)
         num2 = match.group(2)
         unit = match.group(3)
         return '[{} {} {}]'.format(unit, num1, num2)
     else:
-        match = re.match(r'(\d+)([a-zA-Z]+)', s_input)
+        match = re.fullmatch(r'(\d+)([a-zA-Z]+)', s_input)
         num = match.group(1)
         unit = match.group(2)
         return '[{} {}]'.format(unit, num)
@@ -54,6 +54,8 @@ def generate_statvar(statvars, path):
     with open(path, 'w') as f_out:
         for stat_var in statvars:
             keys = stat_var.split('_')
+            if len(keys) < 3:
+                raise Exception("Invalid StatVar")
             age = convert_range(keys[2])
             if len(keys) == 3: # measuredPropery_populationType_age
                 f_out.write(by_age_template.format_map({'stat_var':stat_var,
@@ -62,8 +64,7 @@ def generate_statvar(statvars, path):
                 gender = keys[-1]
                 f_out.write(by_age_gender_template.format_map({'stat_var':stat_var,
                     'age':age, 'gender': gender}))
-            else:
-                raise Exception("Invalid StatVar")
+                
 
 def generate_tmcf(statvars, path):
     """Generate the template mcf."""
@@ -76,9 +77,9 @@ def generate_tmcf(statvars, path):
                         'value: C:lifexp->{stat_var}\n\n')
     
     with open(path, 'w') as f_out:
-        i = 0
+        i = 1
         for stat_var in statvars:
-            f_out.write(statvar_template.format_map({'sv_index': i+1,
+            f_out.write(statvar_template.format_map({'sv_index': i,
                 'stat_var': stat_var, 'year_col': stat_var+'_year', 
                 'geo_col': stat_var+'_geo'}))
             i += 1

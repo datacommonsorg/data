@@ -53,7 +53,3 @@ To generate `demo_r_mlifexp.tmcf` and `demo_r_mlifexp_statvar.mcf`, run:
 ```bash
 python3 generate_mcf.py
 ```
-
-
-
-
