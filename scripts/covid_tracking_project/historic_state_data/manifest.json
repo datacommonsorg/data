@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "CovidTracking_HistoricStateData",
+            "import_name": "COVIDTracking_HistoricStateData",
             "curator_emails": [
                 "hhhhhwu@google.com"
             ],

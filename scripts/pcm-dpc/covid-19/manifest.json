@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "ItalyPCMDPC_Covid19",
+            "import_name": "ItalyPCMDPC_COVID19",
             "curator_emails": [
                 "lijuanqian@google.com"
             ],
