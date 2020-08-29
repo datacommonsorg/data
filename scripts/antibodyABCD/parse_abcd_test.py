@@ -41,7 +41,7 @@ ADR  RAN:anti-ANAPC2-RAB-C76
 ARX  PMID:26290498'''
 
 CONST_OUTPUT = '''Node: dcid:bio/AntiAnapc2RabC75
-typeOf: Antibody
+typeOf: dcs:Antibody
 name: "AntiAnapc2RabC75"
 alternateName: anti-ANAPC2-RAB-C75
 antigenType: dcs:Protein
@@ -52,14 +52,14 @@ recombinantAntibodyNetworkID: "anti-ANAPC2-RAB-C75"
 pubMedID: "26290498"
 
 Node: dcid:bio/antigen_AntiAnapc2RabC75
-typeOf: Antigen
+typeOf: dcs:Antigen
 subClassOf: dcs:bio/AntiAnapc2RabC75
 name: "antigen_AntiAnapc2RabC75"
 antigenType: dcs:Protein
 epitope: "Sequence:SDDESDSGMASQADQKEEELLLFWTYIQAMLTNLESLSLDRIYNMLRMFVVTGPALAEIDLQELQGYLQKKVRDQQLVYSAGVYRLPKNCS"
 
 Node: dcid:bio/AntiAnapc2RabC76
-typeOf: Antibody
+typeOf: dcs:Antibody
 name: "AntiAnapc2RabC76"
 alternateName: anti-ANAPC2-RAB-C76
 antigenType: dcs:Protein
@@ -70,7 +70,7 @@ recombinantAntibodyNetworkID: "anti-ANAPC2-RAB-C76"
 pubMedID: "26290498"
 
 Node: dcid:bio/antigen_AntiAnapc2RabC76
-typeOf: Antigen
+typeOf: dcs:Antigen
 subClassOf: dcs:bio/AntiAnapc2RabC76
 name: "antigen_AntiAnapc2RabC76"
 antigenType: dcs:Protein

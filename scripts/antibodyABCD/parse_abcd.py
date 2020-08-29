@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This scirpt will generate data mcf for ABCD antibody dataset.
+This script will generate data mcf for ABCD antibody dataset.
 
 Run "python3 parse_abcd.py --help" for usage.
 '''
@@ -59,6 +59,7 @@ def get_uniprot_to_dcid(file_path):
     with open(file_path, 'r') as file:
         lines = file.read().split('\n')
     uniprot_to_dcid = {}
+    #lines[0] is the column names and lines[-1] is ''.
     for line in lines[1:-1]:
         line_split = line.split('\t')
         uniprot = line_split[0]
@@ -177,7 +178,11 @@ def get_schema_piece(content_piece, uniprot_to_dcid):
     #  'ADR': 'Cross-references',
     #  'ARX': 'References ID'}
     info = {}
+    # line example:
+    # AAC  ABCD_AU181
     for line in lines:
+        # code is the first 3 chars
+        # content and code are separated by two spaces
         code = line[:3]
         content = line[5:]
         info[code] = content
@@ -195,7 +200,7 @@ def get_schema_piece(content_piece, uniprot_to_dcid):
     # create the mcf for the antibody
     mcf_list = []
     mcf_list.append('Node: dcid:bio/' + name)
-    mcf_list.append('typeOf: Antibody')
+    mcf_list.append('typeOf: dcs:Antibody')
     mcf_list.append('name: "' + name + '"')
     mcf_list.append('alternateName: ' + info['AID'])
     if antibody_type_schema:
@@ -210,7 +215,7 @@ def get_schema_piece(content_piece, uniprot_to_dcid):
 
     # create the mcf for antigen
     mcf_list.append('Node: dcid:bio/antigen_' + name)
-    mcf_list.append('typeOf: Antigen')
+    mcf_list.append('typeOf: dcs:Antigen')
     mcf_list.append('subClassOf: dcs:bio/' + name)
     mcf_list.append('name: "antigen_' + name + '"')
     mcf_list.append('antigenType: ' + antigen_type)
