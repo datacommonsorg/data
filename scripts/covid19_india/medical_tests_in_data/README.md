@@ -12,7 +12,7 @@ You can download the parsed [JSON file](https://github.com/datameet/covid19/blob
 [ICMR](https://www.icmr.gov.in/) publishes daily cumulative tests count. It's scraped by the [DataMeet](https://github.com/datameet/covid19). It's available under Attribution 4.0 International (CC BY 4.0).
 
 
-Each record is a JOSN document and there is one record per day.
+Each record is a JSON document and there is one record per day.
 
 ```
 {
@@ -40,12 +40,15 @@ Each record is a JOSN document and there is one record per day.
 #### Template MCFs
 - [COVID19_tests_india.tmcf](COVID19_tests_india.tmcf).
 
-#### StatisticalVariable Instance MCF
-- [COVID19_tests_india_StatisticalVariables.mcf](COVID19_tests_india_StatisticalVariables.mcf).
-
 #### Scripts
 - [preprocess.py](preprocess.py): Medical tests count import script.
 
+
+### Runnint Tests
+
+```bash
+python3 -m unittest preprocess_test
+```
 
 ### Import Procedure
 

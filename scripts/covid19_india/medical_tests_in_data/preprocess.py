@@ -20,15 +20,12 @@ import urllib.request
 # 2. Only cumulative counts are available at this point
 
 INDIA = "IN"
-
 output_columns = ['Date', 'isoCode', 'CumulativeCount_MedicalTest_COVID_19']
 
-with urllib.request.urlopen(
-        "https://raw.githubusercontent.com/datameet/covid19/master/data/icmr_testing_status.json"
-) as response:
-    data = json.load(response)
+
+def create_formatted_csv_file(csv_file_path, data):
     rows = data["rows"]
-    with open('COVID19_tests_india.csv', 'w', newline='') as f_out:
+    with open(csv_file_path, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
                                 fieldnames=output_columns,
                                 lineterminator='\n')
@@ -40,3 +37,11 @@ with urllib.request.urlopen(
             processed_dict["CumulativeCount_MedicalTest_COVID_19"] = row[
                 "value"]["samples"]
             writer.writerow(processed_dict)
+
+
+if __name__ == '__main__':
+    with urllib.request.urlopen(
+            "https://raw.githubusercontent.com/datameet/covid19/master/data/icmr_testing_status.json"
+    ) as response:
+        data = json.load(response)
+        create_formatted_csv_file('COVID19_tests_india.csv', data)
