@@ -1,0 +1,18 @@
+{
+    "import_specifications": [{
+        "import_name":
+        "cases_count_states_data",
+        "curator_emails": ["hhhhhwu@google.com"],
+        "provenance_url":
+        "https://github.com/datameet/covid19",
+        "provenance_description":
+        "Community collected, cleaned and organized COVID-19/India datasets, sourced from various government websites.",
+        "scripts": ["preprocess.py"],
+        "import_inputs": [{
+            "template_mcf": "COVID19_cases_indian_states.tmcf",
+            "cleaned_csv": "COVID19_cases_indian_states.csv"
+        }],
+        "cron_schedule":
+        "* * * * *"
+    }]
+}

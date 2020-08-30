@@ -44,7 +44,7 @@ Each record is a JSON document and there is one record per day.
 - [preprocess.py](preprocess.py): Medical tests count import script.
 
 
-### Runnint Tests
+### Running Tests
 
 ```bash
 python3 -m unittest preprocess_test
