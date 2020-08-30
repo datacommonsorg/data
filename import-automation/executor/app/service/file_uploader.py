@@ -16,6 +16,7 @@ File uploaders for uploading generated data files.
 """
 
 import os
+import logging
 import shutil
 
 from google.cloud import storage
@@ -39,9 +40,14 @@ class GCSFileUploader(FileUploader):
     Attributes:
         bucket: google.cloud.storage.Bucket object for the bucket files are
             uploaded to.
+        path_prefix: Path prefix in the bucket as a string. Destinations
+            will be prepended by this prefix.
     """
 
-    def __init__(self, project_id: str, bucket_name: str):
+    def __init__(self,
+                 project_id: str,
+                 bucket_name: str,
+                 path_prefix: str = ''):
         """Constructs a GCSFileUploader.
 
         Args:
@@ -49,40 +55,62 @@ class GCSFileUploader(FileUploader):
                 as a string.
             bucket_name: Name of the Cloud Storage Bucket to upload files to,
                 as a string.
+            path_prefix: Path prefix in the bucket as a string. Destinations
+                will be prepended by this prefix.
 
         Raises:
             ValueError: project_id or bucket_name is None, empty, or all spaces.
         """
         _strings_not_empty(project_id, bucket_name)
         self.bucket = storage.Client(project=project_id).bucket(bucket_name)
+        self.path_prefix = path_prefix
+        logging.info('GCSFileUploader.__init__: '
+                     'Initialized with bucket %s at prefix %s on project %s',
+                     bucket_name, path_prefix, project_id)
 
     def upload_file(self, src: str, dest: str) -> None:
         """Uploads a file to the bucket.
 
         Args:
             src: Path to the file to upload, as a string.
-            dest: Destination in the bucket as a string.
+            dest: Relative destination in the bucket as a string. The actual
+                destination would be {self.path_prefix}/{dest}.
 
         Raises:
             ValueError: src or dest is None, empty, or all spaces.
         """
         _strings_not_empty(src, dest)
+        dest = self._fix_path(dest)
+        logging.info('GCSFileUploader.upload_file: Uploading %s to %s',
+                     src, dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_filename(src)
+        logging.info('GCSFileUploader.upload_file: Uploaded %s to %s',
+                     src, dest)
 
     def upload_string(self, string: str, dest: str) -> None:
         """Uploads a string to a file in the bucket, overwriting it.
 
         Args:
             string: The string to upload.
-            dest: Destination in the bucket as a string.
+            dest: Relative destination in the bucket as a string. The actual
+                destination would be {self.path_prefix}/{dest}.
 
         Raises:
             ValueError: dest is None, empty, or all spaces.
         """
         _strings_not_empty(dest)
+        dest = self._fix_path(dest)
+        logging.info('GCSFileUploader.upload_string: Uploading %s to %s',
+                     string, dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_string(string)
+        logging.info('GCSFileUploader.upload_string: Uploaded %s to %s',
+                     string, dest)
+
+    def _fix_path(self, path):
+        """Returns {self.path_prefix}/{path}."""
+        return os.path.join(self.path_prefix, path)
 
 
 class LocalFileUploader(FileUploader):
@@ -96,6 +124,9 @@ class LocalFileUploader(FileUploader):
 
     def __init__(self, output_dir: str = ''):
         self.output_dir = os.path.abspath(output_dir)
+        logging.info('LocalFileUploader.__init__: '
+                     'Initialized with output directory %s',
+                     output_dir)
 
     def upload_file(self, src: str, dest: str) -> None:
         """Copies the file at src to a file at <output_dir>/<dest>.
@@ -106,8 +137,12 @@ class LocalFileUploader(FileUploader):
         """
         _strings_not_empty(src, dest)
         dest = os.path.join(self.output_dir, dest)
+        logging.info('LocalFileUploader.upload_file: Uploading %s to %s',
+                     src, dest)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         shutil.copyfile(src, dest)
+        logging.info('LocalFileUploader.upload_file: Uploaded %s to %s',
+                     src, dest)
 
     def upload_string(self, string: str, dest: str) -> None:
         """Writes a string into a file at <output_dir>/<dest>, overwriting any
@@ -119,9 +154,13 @@ class LocalFileUploader(FileUploader):
         """
         _strings_not_empty(dest)
         dest = os.path.join(self.output_dir, dest)
+        logging.info('LocalFileUploader.upload_string: Uploading %s to %s',
+                     string, dest)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         with open(dest, 'w+') as out:
             out.write(string)
+        logging.info('LocalFileUploader.upload_string: Uploaded %s to %s',
+                     string, dest)
 
 
 def _strings_not_empty(*args: str):
