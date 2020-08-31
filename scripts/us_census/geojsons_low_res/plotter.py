@@ -26,24 +26,21 @@ import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
-FLAGS = flags.FLAGS
-flags.DEFINE_string('original_path',
-                    default=None,
-                    help='Path to original geojson to be compared.')
-flags.DEFINE_string('simplified_path',
-                    default=None,
-                    help='Path to simplified geojson to be compared.')
-flags.mark_flag_as_required('original_path')
-flags.mark_flag_as_required('simplified_path')
-
 _, (ax1, ax2) = plt.subplots(ncols=2, sharex=True, sharey=True)
 
 
 def compare_plots(geojson1, geojson2, show=True):
-    f1 = geojson1.plot(ax=ax1)
-    f2 = geojson2.plot(ax=ax2)
-    f1.set_title('Original.')
-    f2.set_title('Simplified.')
+    if show:
+        _, (new_ax1, new_ax2) = plt.subplots(ncols=2, sharex=True, sharey=True)
+        f1 = geojson1.plot(ax=new_ax1)
+        f2 = geojson2.plot(ax=new_ax2)
+        f1.set_title('Original.')
+        f2.set_title('Simplified.')
+    else:
+        f1 = geojson1.plot(ax=ax1)
+        f2 = geojson2.plot(ax=ax2)
+        f1.set_title('Original.')
+        f2.set_title('Simplified.')
 
     if show:
         plt.show()
@@ -56,4 +53,13 @@ def main(_):
 
 
 if __name__ == '__main__':
+    FLAGS = flags.FLAGS
+    flags.DEFINE_string('original_path',
+                        default=None,
+                        help='Path to original geojson to be compared.')
+    flags.DEFINE_string('simplified_path',
+                        default=None,
+                        help='Path to simplified geojson to be compared.')
+    flags.mark_flag_as_required('original_path')
+    flags.mark_flag_as_required('simplified_path')
     app.run(main)
