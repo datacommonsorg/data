@@ -30,20 +30,28 @@ _, (ax1, ax2) = plt.subplots(ncols=2, sharex=True, sharey=True)
 
 
 def compare_plots(geojson1, geojson2, show=True):
+    """Compares geopandas objects by plotting them side by side.
+
+    Args:
+        geojson1: A geopandas GeoDataFrame of the first object to compare.
+        geojson2: A geopandas GeoDataFrame of the second object to compare.
+        show: If True, it shows the plot after it is created. If False, it does
+              not automatically show, waiting for the user to explicitly call
+              plt.show(). This allows multiple GeoDataFrames to be compared at
+              once.
+    """
     if show:
         _, (new_ax1, new_ax2) = plt.subplots(ncols=2, sharex=True, sharey=True)
         f1 = geojson1.plot(ax=new_ax1)
         f2 = geojson2.plot(ax=new_ax2)
         f1.set_title('Original.')
         f2.set_title('Simplified.')
+        plt.show()
     else:
         f1 = geojson1.plot(ax=ax1)
         f2 = geojson2.plot(ax=ax2)
         f1.set_title('Original.')
         f2.set_title('Simplified.')
-
-    if show:
-        plt.show()
 
 
 def main(_):
