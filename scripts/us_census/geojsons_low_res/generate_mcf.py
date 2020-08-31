@@ -23,10 +23,13 @@ import download
 import simplify
 import plotter
 import geojson
+import json
 import tempfile
+import re
 import matplotlib.pyplot as plt
 from absl import logging
 from absl import app
+from absl import flags
 
 
 class McfGenerator:
@@ -82,16 +85,23 @@ class McfGenerator:
         ])
         with open(path, 'w') as f:
             for geoid in self.simple_geojsons:
-                geostr = geojson.dumps(self.simple_geojsons[geoid])
+                # Note: the double use of json.dumps automatically escapes all
+                # inner quotes, and encloses the entire string in quotes.
+                geostr = json.dumps(json.dumps(self.simple_geojsons[geoid]))
                 f.write(temp.format(geoid=geoid, type="State",
                                     coords_str=geostr))
 
 
 def main(_):
     gen = McfGenerator()
-    gen.generate_simple_geojsons(show=True)
+    gen.generate_simple_geojsons(show=False)
     gen.generate_mcf()
 
 
 if __name__ == "__main__":
+    FLAGS = flags.FLAGS
+    flags.DEFINE_boolean('show',
+                         default=False,
+                         help='If True, plots comparison of original vs. '
+                         'simplified for each geography.')
     app.run(main)
