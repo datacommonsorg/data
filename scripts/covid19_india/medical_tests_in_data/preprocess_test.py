@@ -17,7 +17,7 @@ import os
 import json
 import tempfile
 import unittest
-from preprocess import create_formatted_csv_file
+from covid19_india.medical_tests_in_data.preprocess import create_formatted_csv_file
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
