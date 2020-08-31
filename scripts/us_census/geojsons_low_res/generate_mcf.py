@@ -37,7 +37,7 @@ class McfGenerator:
         self.simplifier = simplify.GeojsonSimplifier()
         self.simple_geojsons = {}
 
-    def generate_simple_geojsons(self, verbose=True, show=False):
+    def generate_simple_geojsons(self, show=False):
         self.downloader.download_data(place=self.PLACE_TO_IMPORT)
         for geoid, coords in self.downloader.iter_subareas():
 
@@ -47,16 +47,13 @@ class McfGenerator:
             # TODO(jeffreyoldham): (potentially) find a cleaner way to do this.
             if int(geoid.split('/')[1]) > 100:
                 continue
-            if verbose:
-                logging.info(f"Simplifying {geoid}...")
+            logging.info(f"Simplifying {geoid}...")
             try:
                 with tempfile.TemporaryFile(mode='r+') as f1, \
                      tempfile.TemporaryFile(mode='r+') as f2:
 
                     geojson.dump(coords, f1)
-                    simple = self.simplifier.simplify(coords,
-                                                      verbose=verbose,
-                                                      epsilon=0.01)
+                    simple = self.simplifier.simplify(coords, epsilon=0.01)
                     geojson.dump(simple, f2)
 
                     # Rewind files to start for reading.
@@ -72,11 +69,17 @@ class McfGenerator:
         plt.show()
 
     def generate_mcf(self, path='low_res_geojsons.mcf'):
-        temp = (
-            "Node: dcid:{geoid}\n"
-            "typeOf: dcs:{type}\n"
-            "geoJsonCoordinatesLowRes: {coords_str}\n\n"
-        )
+        """Writes the simplified GeoJSONs to an MCF file.
+
+        Args:
+            path: Path to MCF file to write simplified GeoJSON to.
+        """
+        temp = "\n".join([
+            "Node: dcid:{geoid}",
+            "typeOf: dcs:{type}",
+            "geoJsonCoordinatesLowRes: {coords_str}",
+            "\n"
+        ])
         with open(path, 'w') as f:
             for geoid in self.simple_geojsons:
                 geostr = geojson.dumps(self.simple_geojsons[geoid])
@@ -86,7 +89,7 @@ class McfGenerator:
 
 def main(_):
     gen = McfGenerator()
-    gen.generate_simple_geojsons(show=True, verbose=True)
+    gen.generate_simple_geojsons(show=True)
     gen.generate_mcf()
 
 
