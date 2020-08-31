@@ -26,6 +26,7 @@ import geojson
 import tempfile
 import matplotlib.pyplot as plt
 from absl import logging
+from absl import app
 
 
 class McfGenerator:
@@ -36,7 +37,7 @@ class McfGenerator:
         self.simplifier = simplify.GeojsonSimplifier()
         self.simple_geojsons = {}
 
-    def generate_simple_geojsons(self, verbose=True):
+    def generate_simple_geojsons(self, verbose=True, show=False):
         self.downloader.download_data(place=self.PLACE_TO_IMPORT)
         for geoid, coords in self.downloader.iter_subareas():
 
@@ -53,10 +54,10 @@ class McfGenerator:
                      tempfile.TemporaryFile(mode='r+') as f2:
 
                     geojson.dump(coords, f1)
-                    geojson.dump(
-                        self.simplifier.simplify(coords,
-                                                 verbose=verbose,
-                                                 epsilon=0.05), f2)
+                    simple = self.simplifier.simplify(coords,
+                                                      verbose=verbose,
+                                                      epsilon=0.01)
+                    geojson.dump(simple, f2)
 
                     # Rewind files to start for reading.
                     f1.seek(0)
@@ -64,15 +65,30 @@ class McfGenerator:
 
                     plotter.compare_plots(gpd.read_file(f1),
                                           gpd.read_file(f2),
-                                          show=False)
+                                          show=show)
+                    self.simple_geojsons[geoid] = simple
             except AssertionError:
                 logging.error("Simplifier failure on GeoJSON below:\n", coords)
         plt.show()
 
-    # def generate_mcf(self, path='low_res_geojsons.mcf'):
-    #     with open(path, 'w') as f:
+    def generate_mcf(self, path='low_res_geojsons.mcf'):
+        temp = (
+            "Node: dcid:{geoid}\n"
+            "typeOf: dcs:{type}\n"
+            "geoJsonCoordinatesLowRes: {coords_str}\n\n"
+        )
+        with open(path, 'w') as f:
+            for geoid in self.simple_geojsons:
+                geostr = geojson.dumps(self.simple_geojsons[geoid])
+                f.write(temp.format(geoid=geoid, type="State",
+                                    coords_str=geostr))
+
+
+def main(_):
+    gen = McfGenerator()
+    gen.generate_simple_geojsons(show=True, verbose=True)
+    gen.generate_mcf()
 
 
 if __name__ == "__main__":
-    gen = McfGenerator()
-    gen.generate_simple_geojsons()
+    app.run(main)

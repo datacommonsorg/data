@@ -29,27 +29,6 @@ from absl import app
 from absl import flags
 from absl import logging
 
-FLAGS = flags.FLAGS
-flags.DEFINE_string('in_path',
-                    default=None,
-                    help='Path to original GeoJSON to simplify.')
-flags.DEFINE_string('out_path',
-                    default=None,
-                    help='Path to save simplified GeoJSON.')
-flags.DEFINE_boolean('verbose',
-                     default=False,
-                     help='If True, compression information is printed.')
-flags.DEFINE_float('epsilon',
-                   default=0.01,
-                   help='Epsilon parameter to the Ramer–Douglas–Peucker '
-                   'algorithm. For more information, see the Wikipedia'
-                   ' page.')
-flags.register_validator('epsilon',
-                         lambda value: value > 0,
-                         message='--epsilon must be positive')
-flags.mark_flag_as_required('in_path')
-flags.mark_flag_as_required('out_path')
-
 
 class GeojsonSimplifier:
     """Simplifies GeoJson files by reducing their number of vertices.
@@ -138,4 +117,24 @@ def main(_):
 
 
 if __name__ == '__main__':
+    FLAGS = flags.FLAGS
+    flags.DEFINE_string('in_path',
+                        default=None,
+                        help='Path to original GeoJSON to simplify.')
+    flags.DEFINE_string('out_path',
+                        default=None,
+                        help='Path to save simplified GeoJSON.')
+    flags.DEFINE_boolean('verbose',
+                         default=False,
+                         help='If True, compression information is printed.')
+    flags.DEFINE_float('epsilon',
+                       default=0.01,
+                       help='Epsilon parameter to the Ramer–Douglas–Peucker '
+                       'algorithm. For more information, see the Wikipedia'
+                       ' page.')
+    flags.register_validator('epsilon',
+                             lambda value: value > 0,
+                             message='--epsilon must be positive')
+    flags.mark_flag_as_required('in_path')
+    flags.mark_flag_as_required('out_path')
     app.run(main)
