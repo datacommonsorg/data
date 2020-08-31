@@ -55,8 +55,8 @@ def create_formatted_csv_file(csv_file_path, data):
             processed_dict["DateTime"] = row["value"]["report_time"]
             processed_dict["isoCode"] = iso_code
             processed_dict[
-                "CumulativeCount_MedicalTest_COVID_19_Positive"] = row[
-                    "value"]["confirmed"]
+                "CumulativeCount_MedicalTest_COVID_19_Positive"] = row["value"][
+                    "confirmed"]
             processed_dict[
                 "CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered"] = row[
                     "value"]["cured"]

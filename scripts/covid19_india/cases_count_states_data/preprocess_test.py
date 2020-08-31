@@ -24,6 +24,7 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestPreprocessCSVTest(unittest.TestCase):
+
     def test_create_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             json_file = os.path.join(module_dir_,
