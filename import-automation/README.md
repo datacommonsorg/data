@@ -71,7 +71,7 @@ Assuming scripts/us_bls/cpi/manifest.json has
 {
     "import_specifications": [
         {
-            "import_name**: "USBLS_CPIAllItemsAverage",
+            "import_name": "USBLS_CPIAllItemsAverage",
             ...
         }
     ]
@@ -83,7 +83,7 @@ Assuming scripts/us_bls/jolts/manifest.json has
 {
     "import_specifications": [
         {
-            "import_name**: "BLS_JOLTS",
+            "import_name": "BLS_JOLTS",
             ...
         }
     ]
