@@ -11,13 +11,13 @@ Author: eftekhari-mhs
 
 ### Download URL
 
-[TSV] file is available for download from [here](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/trng_lfse_04.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/trng_lfse_04.tsv.gz).
 
 [Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=trng_lfse_04&lang=en)
 
 ### Overview
 
-This dataset has the education enrollment rate (percentage) for EU countries down to their NUTS2 geos, according to the (NUTS2013-NUTS2016) classification. It has the enrollment rate categorized by Male/Female/Total for the years of [2000-2019]
+This dataset has the education enrollment rate (percentage) for European Union (EU) countries down to their NUTS2 geos, according to the (NUTS2013-NUTS2016) classification. It has the enrollment rate categorized by Male/Female/Total for the years of [2000-2019].
 
 
 The original dataset is broken up into 3 major families of variables:
@@ -31,7 +31,7 @@ unit,sex,age,geo is further broken down into:
 3. age: 25 to 64 years old
 4. geo: NUTS2 codes for regions of Europe
 
-The cleraned csv is broken up into 5 major families of variables:
+The cleaned csv is broken up into 5 major families of variables:
 1. Date: Subset of years from 2000 to 2019 with values in the original dataset
 2. GeoID: NUTS2 codes
 3. Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years: float values 
@@ -44,14 +44,14 @@ The cleraned csv is broken up into 5 major families of variables:
 - There are breaks in the time series of the original dataset. Note =”b”, value=":"
 - There are estimated values in the original dataset. Note =”e”
 - There are values with low reliability. Note = "u"
-- As written, we're imporing the estimated and low reliable values as regular values.
+- As written, we're importing the estimated and low reliable values as regular values.
 
 
 ### License
 
 Eurostat has a policy of encouraging free re-use of its data, both for non-commercial and commercial purposes. 
 
-The license is available online at [here](https://ec.europa.eu/eurostat/about/policies/copyright).
+The license is [available](https://ec.europa.eu/eurostat/about/policies/copyright).
 
 ### Dataset Documentation and Relevant Links 
 
@@ -79,7 +79,7 @@ The license is available online at [here](https://ec.europa.eu/eurostat/about/po
 #### Pre-Processing Validation
 
 Automated validation:
-1. In the processing script (next section), there assertion to check numerical values are correctly formatted.
+1. In the processing script (next section), assert to check numerical values are correctly formatted.
 
 #### Processing Steps
 
