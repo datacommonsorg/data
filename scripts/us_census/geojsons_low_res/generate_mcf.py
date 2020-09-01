@@ -47,8 +47,10 @@ class McfGenerator:
         self.simple_geojsons = {}
         self.eps = 0.01
 
-    def generate_simple_geojsons(self, show=False):
+    def download_data(self):
         self.downloader.download_data(place=self.PLACE_TO_IMPORT)
+
+    def generate_simple_geojsons(self, show=False, eps=None):
         for geoid, coords in self.downloader.iter_subareas():
 
             # This an admitedly hacky way of getting rid of bogus geographies
@@ -58,6 +60,8 @@ class McfGenerator:
             if int(geoid.split('/')[1]) > 100:
                 continue
             logging.info(f"Simplifying {geoid}...")
+            if eps is not None:
+                self.eps = eps
             try:
                 with tempfile.TemporaryFile(mode='r+') as f1, \
                      tempfile.TemporaryFile(mode='r+') as f2:
@@ -76,7 +80,7 @@ class McfGenerator:
                     self.simple_geojsons[geoid] = simple
             except AssertionError:
                 logging.error("Simplifier failure on GeoJSON below:\n", coords)
-        plt.show()
+        # plt.show()
 
     def generate_mcf(self, path='low_res_geojsons.mcf', mode='w'):
         """Writes the simplified GeoJSONs to an MCF file.
@@ -104,8 +108,11 @@ class McfGenerator:
 
 def main(_):
     gen = McfGenerator()
-    gen.generate_simple_geojsons(show=False)
-    gen.generate_mcf()
+    gen.download_data()
+    for eps in McfGenerator.EPS_LEVEL_MAP:
+        gen.generate_simple_geojsons(show=False, eps=eps)
+        filename = f"low_res_geojsons_DP{McfGenerator.EPS_LEVEL_MAP[eps]}.mcf"
+        gen.generate_mcf(path=filename)
 
 
 if __name__ == "__main__":
