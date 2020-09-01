@@ -1,0 +1,27 @@
+Node: E:WikipediaCOVID19Tracking->E0
+typeOf: schema: State
+dcid: C:Node:E:WikipediaCOVID19Tracking->E1->GeoId
+
+Node:E:WikipediaCOVID19Tracking->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+observationAbout: E:WikipediaCOVID19Tracking->E0
+observationDate: C:WikipediaCOVID19Tracking->Date
+value: C:WikipediaCOVID19Tracking->CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+measurementMethod: dcs:WikipediaCOVID19Tracking
+
+Node:E:WikipediaCOVID19Tracking->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+observationAbout: E:WikipediaCOVID19Tracking->E0
+observationDate: C:WikipediaCOVID19Tracking->Date
+value: C:WikipediaCOVID19Tracking->CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+measurementMethod: dcs:WikipediaCOVID19Tracking
+
+Node:E:WikipediaCOVID19Tracking->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+observationAbout: E:WikipediaCOVID19Tracking->E0
+observationDate: C:WikipediaCOVID19Tracking->Date
+value: C:WikipediaCOVID19Tracking->CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+measurementMethod: dcs:WikipediaCOVID19Tracking
