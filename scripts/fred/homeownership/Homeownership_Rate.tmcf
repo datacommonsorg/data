@@ -1,0 +1,7 @@
+Node: E:FRED_Homeownership->E0
+typeOf: dcs:StatisticalVariable
+variableMeasured: dcs:Percent_Population_Homeowners
+measurementMethod: dcs:FRED
+observationAbout: C:COVIDTracking_States->GeoId
+observationDate: C:FRED_HomeownershipS->Date
+value: C:FRED_Homeownership->Percent_Population_Homeowners
