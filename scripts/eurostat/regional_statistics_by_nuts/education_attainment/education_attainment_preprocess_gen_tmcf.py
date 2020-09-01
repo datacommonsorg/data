@@ -16,7 +16,7 @@ import pandas as pd
 import io
 import csv
 
-# data_url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz"
+# _DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz"
 
 _CLEANED_CSV = "./Eurostats_NUTS2_Edat.csv"
 _TMCF = "./Eurostats_NUTS2_Edat.tmcf"
@@ -162,7 +162,6 @@ def get_template_mcf(tmcf, output_columns):
                     'index': i,
                     'stat_var': output_columns[2:][i]
                 }))
-
 
 
 if __name__ == "__main__":
