@@ -34,8 +34,6 @@ from absl import flags
 
 class McfGenerator:
     PLACE_TO_IMPORT = 'country/USA'
-    LEVELS_DOWN = 2  # counties
-
     EPS_LEVEL_MAP = {0.01: 1, 0.03: 2, 0.05: 3}
 
     def __init__(self):
@@ -44,9 +42,10 @@ class McfGenerator:
         self.simple_geojsons = {}
         self.eps = 0.01
 
-    def download_data(self):
+    def download_data(self, levels_down=1):
+        self.levels_down = levels_down
         self.downloader.download_data(place=self.PLACE_TO_IMPORT,
-                                      level=self.LEVELS_DOWN)
+                                      level=self.levels_down)
 
     def generate_simple_geojsons(self, show=False, eps=None):
         original_pts = 0
@@ -56,8 +55,8 @@ class McfGenerator:
             # that are, for some mysterious reason, included as part of the US
             # states query (with geoIds like geoId/7000).
             # TODO(jeffreyoldham): (potentially) find a cleaner way to do this.
-            # if int(geoid.split('/')[1]) > 100:
-            #     continue
+            if self.levels_down == 1 and int(geoid.split('/')[1]) > 100:
+                continue
             logging.info(f"Simplifying {geoid}...")
             if eps is not None:
                 self.eps = eps
@@ -112,7 +111,7 @@ class McfGenerator:
 
 def main(_):
     gen = McfGenerator()
-    gen.download_data()
+    gen.download_data(FLAGS.level)
     for eps in McfGenerator.EPS_LEVEL_MAP:
         gen.generate_simple_geojsons(show=FLAGS.show, eps=eps)
         filename = f"low_res_geojsons_DP{McfGenerator.EPS_LEVEL_MAP[eps]}.mcf"
@@ -125,4 +124,9 @@ if __name__ == "__main__":
                          default=False,
                          help='If True, plots comparison of original vs. '
                          'simplified for each geography.')
+    flags.DEFINE_integer('level',
+                         default=1,
+                         help="Number of administrative levels down from "
+                              "'country/USA'. For example, level=1 corresponds"
+                              " to US states and level=2 to US counties")
     app.run(main)
