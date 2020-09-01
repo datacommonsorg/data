@@ -103,6 +103,8 @@ class GeojsonDownloader:
 
     def iter_subareas(self):
         for area in self.geojsons:
+            if 'geoId' not in area:
+                continue
             yield area, self.get_subarea(area)
 
     def save(self, prefix='', path='./original-data'):
