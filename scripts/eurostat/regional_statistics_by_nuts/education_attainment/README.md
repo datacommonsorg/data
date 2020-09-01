@@ -33,7 +33,7 @@ ISCED standard education levels:
 
 
 The original dataset is broken up into 3 major families of variables:
-1. Date: Years from 2000 to 2019 with some holes in time seris marked with note "b" in the original dataset
+1. Date: Years from 2000 to 2019 with some holes in time series marked with note "b" in the original dataset
 2. sex,edu-level,age,unit,geo: e.g. F,ED0-2,Y25-64,PC,AT (Female, Lower Secondary or less,Years 25 to 64, Percent, nuts/AT)
 3. value: some with note "e"="estimated", "u" = "low reliability", and "d"="definition differs"
 
