@@ -18,39 +18,39 @@ import csv
 
 # data_url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3area.tsv.gz"
 
-source_tsv = "./demo_r_d3dens.tsv"
-source_csv_long = "./demo_r_d3dens.csv"
-cleaned_csv = "./PopulationDensity_Eurostat_NUTS3.csv"
-tmcf = "./PopulationDensity_Eurostat_NUTS3.tmcf"
+_SOURCE_TSV = "./demo_r_d3dens.tsv"
+_SOURCE_CSV_LONG = "./demo_r_d3dens.csv"
+_CLEANED_CSV = "./PopulationDensity_Eurostat_NUTS3.csv"
+_TMCF = "./PopulationDensity_Eurostat_NUTS3.tmcf"
 
-output_columns = [
+_OUTPUT_COLUMNS = [
     'Date',
     'GeoId',
     'Count_Person_PerArea',
 ]
 
 
-def translate_wide_to_long(source_tsv):
+def translate_wide_to_long(source_tsv, source_csv_long):
     df = pd.read_csv(source_tsv, delimiter='\t')
-    assert df.head != []
+    assert df.head
 
     header = list(df.columns.values)
     years = header[1:]
 
-    # Pandas.melt() unpivots a DataFrame from wide format to long format
+    # Pandas.melt() unpivots a DataFrame from wide format to long format.
     df = pd.melt(df,
                  id_vars=header[0],
                  value_vars=years,
                  var_name='time',
                  value_name='value')
 
-    # separate geo and unit columns
+    # Separate geo and unit columns.
     new = df[header[0]].str.split(",", n=1, expand=True)
     df['geo'] = new[1]
     df['unit'] = new[0]
     df.drop(columns=[header[0]], inplace=True)
 
-    # remove empty rows, clean values to have all digits
+    # Remove empty rows, clean values to have all digits.
     df = df[df.value.str.contains('[0-9]')]
     possible_flags = [' ', ':', 'b', 'e']
     for flag in possible_flags:
@@ -60,10 +60,10 @@ def translate_wide_to_long(source_tsv):
     df.to_csv(source_csv_long, index=False)
 
 
-def preprocess(cleaned_csv, source_csv_long):
+def preprocess(cleaned_csv, source_csv_long, output_cols):
     with open(cleaned_csv, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
-                                fieldnames=output_columns,
+                                fieldnames=output_cols,
                                 lineterminator='\n')
         with open(source_csv_long) as response:
             reader = csv.DictReader(response)
@@ -81,10 +81,8 @@ def preprocess(cleaned_csv, source_csv_long):
 
                 writer.writerow(processed_dict)
 
-    df_cleaned = pd.read_csv(cleaned_csv)
 
-
-def get_template_mcf(output_columns):
+def get_template_mcf(tmcf, output_columns):
     # Automate Template MCF generation since there are many Statistical Variables.
     TEMPLATE_MCF_TEMPLATE = """
   Node: E:EurostatNUTS3_DensityTracking->E{index}
@@ -105,15 +103,8 @@ def get_template_mcf(output_columns):
                     'stat_var': output_columns[2:][i]
                 }))
 
-    # View the result:
-    df_cleaned = pd.read_csv(tmcf)
-    df_cleaned.head()
-
-    # Uncomment the following to download to your local computer.
-    # files.download(tmcf)
-
 
 if __name__ == "__main__":
-    translate_wide_to_long(source_tsv)
-    preprocess(cleaned_csv, source_csv_long)
-    get_template_mcf(output_columns)
+    translate_wide_to_long(_SOURCE_TSV, _SOURCE_CSV_LONG)
+    preprocess(_CLEANED_CSV, _SOURCE_CSV_LONG, _OUTPUT_COLUMNS)
+    get_template_mcf(_TMCF, _OUTPUT_COLUMNS)
