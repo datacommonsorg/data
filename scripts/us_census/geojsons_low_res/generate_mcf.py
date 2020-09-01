@@ -34,6 +34,7 @@ from absl import flags
 
 class McfGenerator:
     PLACE_TO_IMPORT = 'country/USA'
+    LEVELS_DOWN = 2  # counties
 
     EPS_LEVEL_MAP = {0.01: 1, 0.03: 2, 0.05: 3}
 
@@ -44,7 +45,8 @@ class McfGenerator:
         self.eps = 0.01
 
     def download_data(self):
-        self.downloader.download_data(place=self.PLACE_TO_IMPORT)
+        self.downloader.download_data(place=self.PLACE_TO_IMPORT,
+                                      level=self.LEVELS_DOWN)
 
     def generate_simple_geojsons(self, show=False, eps=None):
         for geoid, coords in self.downloader.iter_subareas():
@@ -53,8 +55,8 @@ class McfGenerator:
             # that are, for some mysterious reason, included as part of the US
             # states query (with geoIds like geoId/7000).
             # TODO(jeffreyoldham): (potentially) find a cleaner way to do this.
-            if int(geoid.split('/')[1]) > 100:
-                continue
+            # if int(geoid.split('/')[1]) > 100:
+            #     continue
             logging.info(f"Simplifying {geoid}...")
             if eps is not None:
                 self.eps = eps
@@ -76,7 +78,7 @@ class McfGenerator:
                     self.simple_geojsons[geoid] = simple
             except AssertionError:
                 logging.error("Simplifier failure on GeoJSON below:\n", coords)
-        # plt.show()
+        plt.show()
 
     def generate_mcf(self, path='low_res_geojsons.mcf', mode='w'):
         """Writes the simplified GeoJSONs to an MCF file.
@@ -106,7 +108,7 @@ def main(_):
     gen = McfGenerator()
     gen.download_data()
     for eps in McfGenerator.EPS_LEVEL_MAP:
-        gen.generate_simple_geojsons(show=False, eps=eps)
+        gen.generate_simple_geojsons(show=FLAGS.show, eps=eps)
         filename = f"low_res_geojsons_DP{McfGenerator.EPS_LEVEL_MAP[eps]}.mcf"
         gen.generate_mcf(path=filename)
 
