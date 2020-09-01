@@ -11,13 +11,13 @@ Author: eftekhari-mhs
 
 ### Download URL
 
-[TSV] file is available for download from [here](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz).
 
 [Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=edat_lfse_04&lang=en)
 
 ### Overview
 
-This dataset has the education attainment rate (percentage) for EU countries to their NUTS2 geos. It has the attainment rate categorized by Male/Female/Total for 4 different levels of education for the intervals of [0-2], [3-8], [3-4], [5-8], where the digits are based on ISCED standard explained as follows:
+This dataset has the education attainment rate (percentage) for European Union (EU) countries to their NUTS2 geos. It has the attainment rate categorized by Male/Female/Total for 4 different levels of education for the intervals of [0-2], [3-8], [3-4], [5-8], where the digits are based on ISCED standard explained as follows:
 
 ISCED standard education levels: 
 
@@ -43,7 +43,7 @@ sex,edu-level,age,unit,geo is further broken down into:
 3. unit: Percentage
 4. geo: NUTS2 codes for regions of Europe
 
-The cleraned csv is broken up into 5 major families of variables:
+The cleaned csv is broken up into 5 major families of variables:
 1. Date: Subset of years from 2000 to 2019 with values in the original dataset
 2. GeoID: NUTS2 codes
 3. Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years: float values 
@@ -66,14 +66,14 @@ The cleraned csv is broken up into 5 major families of variables:
 - There are estimated values in the original dataset. Note =”e”
 - There are values with low reliability. Note = "u"
 - There are values that definition differs. Note = "d"
-- As written, we're imporing the estimated, low reliable, and different definitions values as regular values.
+- As written, we're importing the estimated, low reliable, and different definitions values as regular values.
 
 
 ### License
 
 Eurostat has a policy of encouraging free re-use of its data, both for non-commercial and commercial purposes. 
 
-The license is available online at [here](https://ec.europa.eu/eurostat/about/policies/copyright).
+The license is [available](https://ec.europa.eu/eurostat/about/policies/copyright).
 
 ### Dataset Documentation and Relevant Links 
 
@@ -101,7 +101,7 @@ The license is available online at [here](https://ec.europa.eu/eurostat/about/po
 #### Pre-Processing Validation
 
 Automated validation:
-1. In the processing script (next section), there assertion to check numerical values are correctly formatted.
+1. In the processing script (next section), assert to check numerical values are correctly formatted.
 
 #### Processing Steps
 
