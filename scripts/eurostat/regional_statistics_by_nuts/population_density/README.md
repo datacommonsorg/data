@@ -19,7 +19,7 @@ This dataset has the population density (per square kilometer) for European Unio
 
 
 The original dataset is broken up into 3 major families of variables:
-1. Date: Years from 1990 to 2018 with some holes in time seris marked with note "b" in the original dataset
+1. Date: Years from 1990 to 2018 with some holes in time series marked with note "b" in the original dataset
 2. unit,geo: e.g. PER_KM2,AL	
 3. value: population density which is person count per square kilometer, some with note "e"="estimated"
 
