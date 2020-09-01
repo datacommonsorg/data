@@ -16,8 +16,8 @@ import pandas as pd
 
 
 def test_col_names(cleaned_csv, tmcf):
-    """ check if all the column names specified in the template mcf
-        is found in the CSV file"""
+    """Check if all the column names specified in the template mcf
+        is found in the CSV file."""
     cols = pd.read_csv(cleaned_csv, nrows=0).columns
     with open(tmcf, "r") as file:
         for line in file:
