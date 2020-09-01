@@ -95,14 +95,13 @@ class GeojsonDownloader:
         assert len(geolevel[place]) == 1
         geolevel = geolevel[place][0]
 
-        level_to_fetch = geolevel
         for i in range(level):
-            if level_to_fetch not in self.LEVEL_MAP:
+            if geolevel not in self.LEVEL_MAP:
                 raise ValueError("Desired level does not exist.")
-            level_to_fetch = self.LEVEL_MAP[level_to_fetch]
+            geolevel = self.LEVEL_MAP[geolevel]
 
         geos_contained_in_place = dc.get_places_in(
-            [place], level_to_fetch)[place]
+            [place], geolevel)[place]
         self.geojsons = dc.get_property_values(geos_contained_in_place,
                                                "geoJsonCoordinates")
         for area, coords in self.iter_subareas():

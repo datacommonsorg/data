@@ -70,7 +70,7 @@ class McfGenerator:
                                                              epsilon=self.eps)
                     original_pts += o_sz
                     compressed_pts += c_sz
-                    geojson.dump(s, f2)  # Save simple geojson in tempfile
+                    geojson.dump(s, f2)  # Save simple geojson in tempfile.
 
                     # Rewind files to start for reading.
                     f1.seek(0)

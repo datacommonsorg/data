@@ -65,7 +65,12 @@ class GeojsonSimplifier:
             epsilon: The epsilon parameter to the  Ramer–Douglas–Peucker
                      algorithm. See the Wikipedia page for details.
 
-        Returns: The simplified GeoJSON, as a dict.
+        Returns: A tuple, containing
+                    1. The simplified GeoJSON, as a dict.
+                    2. The number of points in the original GeoJSON, pre
+                       simplification, as an int.
+                    3. The number of points in the simplified GeoJSON, as an
+                       int.
         """
         geojson = input if input is not None else self.geojson
         coords = geojson['coordinates']
