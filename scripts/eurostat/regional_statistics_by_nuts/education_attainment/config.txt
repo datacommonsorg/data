@@ -8,9 +8,8 @@ import: {
   # First date of imported data.
   start_date: "2020-01-01"
   # Last date of imported data.
-  end_date: "2020-14-07"
+  end_date: "2020-07-14"
   # Source data release schedule.
   update_frequency: "P1Y"
   next_release_date: "2021-05-14"
 }
-© 2020 G
