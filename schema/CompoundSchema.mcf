@@ -611,7 +611,7 @@ Node: dcid:antibodyType
 typeOf: schema:Property
 name: "antibodyType"
 description: "The type of antibody, including bispecific antibody, nanobody and DARPins. "
-rangeIncludes: dcs:AntibodyTypeEnum 
+rangeIncludes: dcs:AntibodyTypeEnum
 domainIncludes:dcs:Antibody
 
 Node: dcid:antibodyApplication
