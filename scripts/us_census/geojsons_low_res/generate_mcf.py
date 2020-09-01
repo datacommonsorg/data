@@ -83,7 +83,8 @@ class McfGenerator:
 
         Args:
             path: Path to MCF file to write simplified GeoJSON to.
-            mode: mode parameter to be passed to 
+            mode: mode parameter to be passed to open() function when writing
+                  to MCF.
         """
         temp = "\n".join([
             "Node: dcid:{geoid}",
