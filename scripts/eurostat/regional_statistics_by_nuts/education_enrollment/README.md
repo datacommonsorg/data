@@ -21,7 +21,7 @@ This dataset has the education enrollment rate (percentage) for European Union (
 
 
 The original dataset is broken up into 3 major families of variables:
-1. Date: Years from 2000 to 2019 with some holes in time seris marked with note "b" in the original dataset
+1. Date: Years from 2000 to 2019 with some holes in time series marked with note "b" in the original dataset
 2. unit,sex,age,geo: e.g. PC,F,Y25-64,AT (Percent, Female, Years 25 to 64, nuts/AT)
 3. value: some with note "e"="estimated" and "u" = "low reliability"
 
