@@ -35,15 +35,7 @@ from absl import flags
 class McfGenerator:
     PLACE_TO_IMPORT = 'country/USA'
 
-<<<<<<< HEAD
     EPS_LEVEL_MAP = {0.01: 1, 0.03: 2, 0.05: 3}
-=======
-    EPS_LEVEL_MAP = {
-        0.01: 1,
-        0.03: 2,
-        0.05: 3
-    }
->>>>>>> origin/write_simple_geojson_to_mcf
 
     def __init__(self):
         self.downloader = download.GeojsonDownloader()
@@ -95,32 +87,19 @@ class McfGenerator:
                   to MCF.
         """
         temp = "\n".join([
-<<<<<<< HEAD
             "Node: dcid:{geoid}", "typeOf: dcs:{type}",
             "geoJsonCoordinatesDP{level}: {coords_str}", "\n"
-=======
-            "Node: dcid:{geoid}",
-            "typeOf: dcs:{type}",
-            "geoJsonCoordinatesDP{level}: {coords_str}",
-            "\n"
->>>>>>> origin/write_simple_geojson_to_mcf
         ])
         with open(path, mode) as f:
             for geoid in self.simple_geojsons:
                 # Note: the double use of json.dumps automatically escapes all
                 # inner quotes, and encloses the entire string in quotes.
                 geostr = json.dumps(json.dumps(self.simple_geojsons[geoid]))
-<<<<<<< HEAD
                 f.write(
                     temp.format(geoid=geoid,
                                 type="State",
                                 level=self.EPS_LEVEL_MAP[self.eps],
                                 coords_str=geostr))
-=======
-                f.write(temp.format(geoid=geoid, type="State",
-                                    level=self.EPS_LEVEL_MAP[self.eps],
-                                    coords_str=geostr))
->>>>>>> origin/write_simple_geojson_to_mcf
 
 
 def main(_):
