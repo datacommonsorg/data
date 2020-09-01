@@ -1,8 +1,8 @@
 {
     "import_specifications": [{
         "import_name":
-        "cases_count_states_data",
-        "curator_emails": ["hhhhhwu@google.com"],
+        "covid19IndiaCasesCountStatesData",
+        "curator_emails": ["i@thejeshgn.com"],
         "provenance_url":
         "https://github.com/datameet/covid19",
         "provenance_description":

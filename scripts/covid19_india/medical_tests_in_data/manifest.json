@@ -1,8 +1,8 @@
 {
     "import_specifications": [{
         "import_name":
-        "medical_tests_in_data",
-        "curator_emails": ["hhhhhwu@google.com"],
+        "covid19IndiaMedicalTestsInData",
+        "curator_emails": ["i@thejeshgn.com"],
         "provenance_url":
         "https://github.com/datameet/covid19",
         "provenance_description":
