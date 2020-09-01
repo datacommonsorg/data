@@ -35,10 +35,17 @@ from absl import flags
 class McfGenerator:
     PLACE_TO_IMPORT = 'country/USA'
 
+    EPS_LEVEL_MAP = {
+        0.01: 1,
+        0.03: 2,
+        0.05: 3
+    }
+
     def __init__(self):
         self.downloader = download.GeojsonDownloader()
         self.simplifier = simplify.GeojsonSimplifier()
         self.simple_geojsons = {}
+        self.eps = 0.01
 
     def generate_simple_geojsons(self, show=False):
         self.downloader.download_data(place=self.PLACE_TO_IMPORT)
@@ -56,7 +63,7 @@ class McfGenerator:
                      tempfile.TemporaryFile(mode='r+') as f2:
 
                     geojson.dump(coords, f1)
-                    simple = self.simplifier.simplify(coords, epsilon=0.01)
+                    simple = self.simplifier.simplify(coords, epsilon=self.eps)
                     geojson.dump(simple, f2)
 
                     # Rewind files to start for reading.
@@ -71,24 +78,26 @@ class McfGenerator:
                 logging.error("Simplifier failure on GeoJSON below:\n", coords)
         plt.show()
 
-    def generate_mcf(self, path='low_res_geojsons.mcf'):
+    def generate_mcf(self, path='low_res_geojsons.mcf', mode='w'):
         """Writes the simplified GeoJSONs to an MCF file.
 
         Args:
             path: Path to MCF file to write simplified GeoJSON to.
+            mode: mode parameter to be passed to 
         """
         temp = "\n".join([
             "Node: dcid:{geoid}",
             "typeOf: dcs:{type}",
-            "geoJsonCoordinatesLowRes: {coords_str}",
+            "geoJsonCoordinatesDP{level}: {coords_str}",
             "\n"
         ])
-        with open(path, 'w') as f:
+        with open(path, mode) as f:
             for geoid in self.simple_geojsons:
                 # Note: the double use of json.dumps automatically escapes all
                 # inner quotes, and encloses the entire string in quotes.
                 geostr = json.dumps(json.dumps(self.simple_geojsons[geoid]))
                 f.write(temp.format(geoid=geoid, type="State",
+                                    level=self.EPS_LEVEL_MAP[self.eps],
                                     coords_str=geostr))
 
 
