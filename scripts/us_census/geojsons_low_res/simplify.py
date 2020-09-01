@@ -92,7 +92,7 @@ class GeojsonSimplifier:
         logging.info(f"Original number of points = {original_size}.")
         logging.info(f"Simplified number of points = {simplified_size}.")
 
-        return geojson
+        return geojson, original_size, simplified_size
 
     def save(self, out_path):
         """Saves instance geojson after simplification.

@@ -49,8 +49,9 @@ class McfGenerator:
                                       level=self.LEVELS_DOWN)
 
     def generate_simple_geojsons(self, show=False, eps=None):
+        original_pts = 0
+        compressed_pts = 0
         for geoid, coords in self.downloader.iter_subareas():
-
             # This an admitedly hacky way of getting rid of bogus geographies
             # that are, for some mysterious reason, included as part of the US
             # states query (with geoIds like geoId/7000).
@@ -65,8 +66,11 @@ class McfGenerator:
                      tempfile.TemporaryFile(mode='r+') as f2:
 
                     geojson.dump(coords, f1)
-                    simple = self.simplifier.simplify(coords, epsilon=self.eps)
-                    geojson.dump(simple, f2)
+                    s, o_sz, c_sz = self.simplifier.simplify(coords,
+                                                             epsilon=self.eps)
+                    original_pts += o_sz
+                    compressed_pts += c_sz
+                    geojson.dump(s, f2)  # Save simple geojson in tempfile
 
                     # Rewind files to start for reading.
                     f1.seek(0)
@@ -75,9 +79,11 @@ class McfGenerator:
                     plotter.compare_plots(gpd.read_file(f1),
                                           gpd.read_file(f2),
                                           show=show)
-                    self.simple_geojsons[geoid] = simple
+                    self.simple_geojsons[geoid] = s
             except AssertionError:
                 logging.error("Simplifier failure on GeoJSON below:\n", coords)
+        logging.info(f"Total original points = {original_pts}\n"
+                     f"Compressed points = {compressed_pts}\n")
         plt.show()
 
     def generate_mcf(self, path='low_res_geojsons.mcf', mode='w'):
