@@ -69,7 +69,7 @@ Assuming the following directory structure:
 Assuming scripts/us_bls/cpi/manifest.json has
 ```json
 {
-    "import_specifications**: [
+    "import_specifications": [
         {
             "import_name**: "USBLS_CPIAllItemsAverage",
             ...
@@ -81,7 +81,7 @@ Assuming scripts/us_bls/cpi/manifest.json has
 Assuming scripts/us_bls/jolts/manifest.json has
 ```json
 {
-    "import_specifications**: [
+    "import_specifications": [
         {
             "import_name**: "BLS_JOLTS",
             ...
