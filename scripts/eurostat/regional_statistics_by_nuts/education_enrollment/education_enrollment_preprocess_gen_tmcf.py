@@ -103,6 +103,7 @@ def get_template_mcf(output_columns):
                     'stat_var': output_columns[2:][i]
                 }))
 
+
 if __name__ == "__main__":
     translate_wide_to_long(_SOURCE_TSV)
     preprocess(_CLEANED_CSV, _SOURCE_CSV_LONG)
