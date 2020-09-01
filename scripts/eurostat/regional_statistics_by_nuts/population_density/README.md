@@ -11,11 +11,11 @@ Author: eftekhari-mhs
 
 ### Download URL
 
-[TSV] file is available for download from [here](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3dens.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3dens.tsv.gz).
 
 ### Overview
 
-This dataset has the population density (per square kilometer) for EU countries down to their NUTS3 geos, according to the (NUTS2013-NUTS2016) classification. It has population density for the years of [1990-2018]
+This dataset has the population density (per square kilometer) for European Union (EU) countries down to their NUTS3 geos, according to the (NUTS2013-NUTS2016) classification. It has population density for the years of [1990-2018].
 
 
 The original dataset is broken up into 3 major families of variables:
@@ -27,7 +27,7 @@ unit,geo is further broken down into:
 1. unit: person per KM2
 2. geo: NUTS3 codes for regions of Europe
 
-The cleraned csv is broken up into 3 major families of variables:
+The cleaned csv is broken up into 3 major families of variables:
 1. Date: Subset of years from 1990 to 2018 with values in the original dataset
 2. GeoID: NUTS3 codes
 3. Count_Person_PerArea: float values 
@@ -36,14 +36,14 @@ The cleraned csv is broken up into 3 major families of variables:
 
 - There are breaks in the time series of the original dataset. Note =”b”, value=":"
 - There are estimated values in the original dataset. Note =”e”
-- As written, we're imporing the estimated values as regular values.
+- As written, we're importing the estimated values as regular values.
 
 
 ### License
 
 Eurostat has a policy of encouraging free re-use of its data, both for non-commercial and commercial purposes. 
 
-The license is available online at [here](https://ec.europa.eu/eurostat/about/policies/copyright).
+The license is [available](https://ec.europa.eu/eurostat/about/policies/copyright).
 
 ### Dataset Documentation and Relevant Links 
 
@@ -71,7 +71,7 @@ The license is available online at [here](https://ec.europa.eu/eurostat/about/po
 #### Pre-Processing Validation
 
 Automated validation:
-1. In the processing script (next section), there assertion to check numerical values are correctly formatted.
+1. In the processing script (next section), assert to check numerical values are correctly formatted.
 
 #### Processing Steps
 
