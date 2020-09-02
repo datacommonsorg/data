@@ -1,0 +1,32 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "ItalyPCMDPC_COVID19",
+            "curator_emails": [
+                "lijuanqian@google.com"
+            ],
+            "provenance_url": "https://github.com/pcm-dpc/COVID-19",
+            "provenance_description": "Cumulative positive cases of COVID-19 at regional, provincial, and national level in Italy from Italy department of Civil protection.",
+            "scripts": [
+                "preprocess.py",
+                "test_template_mcf_names.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "dpc-covid19-ita-regional.tmcf",
+                    "cleaned_csv": "dpc-covid19-ita-regional.csv",
+                    "node_mcf": "dpc-covid19-ita_StatisticalVariable.mcf"
+                },
+                {
+                    "template_mcf": "dpc-covid19-ita-province.tmcf",
+                    "cleaned_csv": "dpc-covid19-ita-province.csv"
+                },
+                {
+                    "template_mcf": "dpc-covid19-ita-national-trend.tmcf",
+                    "cleaned_csv": "dpc-covid19-ita-national-trend.csv"
+                }
+            ],
+            "cron_schedule": "0 18 * * *"
+        }
+    ]
+}
