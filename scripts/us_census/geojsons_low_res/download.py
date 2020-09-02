@@ -99,8 +99,7 @@ class GeojsonDownloader:
                 raise ValueError("Desired level does not exist.")
             geolevel = self.LEVEL_MAP[geolevel]
 
-        geos_contained_in_place = dc.get_places_in(
-            [place], geolevel)[place]
+        geos_contained_in_place = dc.get_places_in([place], geolevel)[place]
         self.geojsons = dc.get_property_values(geos_contained_in_place,
                                                "geoJsonCoordinates")
         for area, coords in self.iter_subareas():

@@ -128,11 +128,12 @@ if __name__ == "__main__":
     FLAGS = flags.FLAGS
     flags.DEFINE_boolean('show',
                          default=False,
-                         help='If True, plots comparison of original vs. '
-                         'simplified for each geography.')
+                         help=('If True, plots comparison of original vs. '
+                               'simplified for each geography.'))
     flags.DEFINE_integer('level',
                          default=1,
-                         help="Number of administrative levels down from "
-                              "'country/USA'. For example, level=1 corresponds"
-                              " to US states and level=2 to US counties")
+                         help=("Number of administrative levels down from "
+                               "'country/USA'. For example, level=1 "
+                               "corresponds to US states and level=2 to US "
+                               "counties"))
     app.run(main)
