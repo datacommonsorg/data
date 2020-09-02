@@ -20,7 +20,6 @@
     Typical usage:
     python3 simplify.py --in_path original-data/geoId-01.geojson
                         --out_path simplified-data/geoId-01-simple.geojson
-                        --verbose
 """
 
 import rdp
@@ -28,27 +27,6 @@ import geojson
 from absl import app
 from absl import flags
 from absl import logging
-
-FLAGS = flags.FLAGS
-flags.DEFINE_string('in_path',
-                    default=None,
-                    help='Path to original GeoJSON to simplify.')
-flags.DEFINE_string('out_path',
-                    default=None,
-                    help='Path to save simplified GeoJSON.')
-flags.DEFINE_boolean('verbose',
-                     default=False,
-                     help='If True, compression information is printed.')
-flags.DEFINE_float('epsilon',
-                   default=0.01,
-                   help='Epsilon parameter to the Ramer–Douglas–Peucker '
-                   'algorithm. For more information, see the Wikipedia'
-                   ' page.')
-flags.register_validator('epsilon',
-                         lambda value: value > 0,
-                         message='--epsilon must be positive')
-flags.mark_flag_as_required('in_path')
-flags.mark_flag_as_required('out_path')
 
 
 class GeojsonSimplifier:
@@ -75,7 +53,7 @@ class GeojsonSimplifier:
             if not self.geojson.is_valid:
                 raise ValueError("Invalid GeoJSON read in.")
 
-    def simplify(self, input=None, epsilon=0.01, verbose=False):
+    def simplify(self, input=None, epsilon=0.01):
         """Modifies the instance geojson by reducing its number of points.
 
         Runs the Ramer–Douglas–Peucker algorithm to simplify the GeoJSONs.
@@ -86,8 +64,6 @@ class GeojsonSimplifier:
                    self.geojson.
             epsilon: The epsilon parameter to the  Ramer–Douglas–Peucker
                      algorithm. See the Wikipedia page for details.
-            verbose: If True, the number of points in the GeoJSON before and
-                     after simplification will be printed for comparison.
 
         Returns: The simplified GeoJSON, as a dict.
         """
@@ -113,9 +89,8 @@ class GeojsonSimplifier:
                 else:
                     coords[i][0] = new_c
 
-        if verbose:
-            logging.info(f"Original number of points = {original_size}.")
-            logging.info(f"Simplified number of points = {simplified_size}.")
+        logging.info(f"Original number of points = {original_size}.")
+        logging.info(f"Simplified number of points = {simplified_size}.")
 
         return geojson
 
@@ -133,9 +108,26 @@ class GeojsonSimplifier:
 def main(_):
     simplifier = GeojsonSimplifier()
     simplifier.read_geojson(FLAGS.in_path)
-    simplifier.simplify(FLAGS.epsilon, FLAGS.verbose)
+    simplifier.simplify(FLAGS.epsilon)
     simplifier.save(FLAGS.out_path)
 
 
 if __name__ == '__main__':
+    FLAGS = flags.FLAGS
+    flags.DEFINE_string('in_path',
+                        default=None,
+                        help='Path to original GeoJSON to simplify.')
+    flags.DEFINE_string('out_path',
+                        default=None,
+                        help='Path to save simplified GeoJSON.')
+    flags.DEFINE_float('epsilon',
+                       default=0.01,
+                       help='Epsilon parameter to the Ramer–Douglas–Peucker '
+                       'algorithm. For more information, see the Wikipedia'
+                       ' page.')
+    flags.register_validator('epsilon',
+                             lambda value: value > 0,
+                             message='--epsilon must be positive')
+    flags.mark_flag_as_required('in_path')
+    flags.mark_flag_as_required('out_path')
     app.run(main)
