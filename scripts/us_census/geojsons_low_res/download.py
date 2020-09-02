@@ -22,7 +22,6 @@ import geojson
 import os
 
 
-# TODO(fpernice-google): Support downloading more than just US states.
 class GeojsonDownloader:
     """Downloads desired GeoJSON files from the DataCommons Knowledge Graph.
 

@@ -25,7 +25,6 @@ import plotter
 import geojson
 import json
 import tempfile
-import re
 import matplotlib.pyplot as plt
 from absl import logging
 from absl import app
@@ -34,7 +33,12 @@ from absl import flags
 
 class McfGenerator:
     PLACE_TO_IMPORT = 'country/USA'
+
+    # Mapping from the epsilon parameter (abbreviated eps) in the
+    # Ramer–Douglas–Peucker algorithm to the "degree" of precision, as defined
+    # by DataCommons.
     EPS_LEVEL_MAP = {0.01: 1, 0.03: 2, 0.05: 3}
+    LEVEL_MAP = {1: 'State', 2: 'County'}
 
     def __init__(self):
         self.downloader = download.GeojsonDownloader()
@@ -84,6 +88,7 @@ class McfGenerator:
         logging.info(f"Total original points = {original_pts}\n"
                      f"Compressed points = {compressed_pts}\n")
         plt.show()
+        plt.clf()
 
     def generate_mcf(self, path='low_res_geojsons.mcf', mode='w'):
         """Writes the simplified GeoJSONs to an MCF file.
@@ -104,7 +109,7 @@ class McfGenerator:
                 geostr = json.dumps(json.dumps(self.simple_geojsons[geoid]))
                 f.write(
                     temp.format(geoid=geoid,
-                                type="State",
+                                type=self.LEVEL_MAP[self.levels_down],
                                 level=self.EPS_LEVEL_MAP[self.eps],
                                 coords_str=geostr))
 
@@ -114,7 +119,8 @@ def main(_):
     gen.download_data(FLAGS.level)
     for eps in McfGenerator.EPS_LEVEL_MAP:
         gen.generate_simple_geojsons(show=FLAGS.show, eps=eps)
-        filename = f"low_res_geojsons_DP{McfGenerator.EPS_LEVEL_MAP[eps]}.mcf"
+        filename = (f"low_res_geojsons_level_{FLAGS.level}_DP"
+                    f"{McfGenerator.EPS_LEVEL_MAP[eps]}.mcf")
         gen.generate_mcf(path=filename)
 
 
