@@ -55,6 +55,22 @@ class TestPreprocessCSVTest(unittest.TestCase):
 
         self.assertTrue(same)
 
+    def test_create_csv_include_dn_dd(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            json_file = os.path.join(module_dir_,
+                                     'test_data/testcase3_data.json')
+            expected_file = os.path.join(
+                module_dir_, 'test_data/testcase3_expected_data.csv')
+            with open(json_file, "r") as f:
+                data = json.loads(f.read())
+                result_file = os.path.join(
+                    tmp_dir, 'testcase2_COVID19_cases_indian_states.csv')
+                create_formatted_csv_file(result_file, data)
+                same = filecmp.cmp(result_file, expected_file)
+                os.remove(result_file)
+
+        self.assertTrue(same)
+
 
 if __name__ == '__main__':
     unittest.main()
