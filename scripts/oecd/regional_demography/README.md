@@ -64,3 +64,8 @@ Run `python3 gen_place_mapping_stats.py > stats.txt` to regenerate the
 geo resolution statistics. The diffs in stats.txt will help track
 geo resolution changes.
 
+To track changes to the final OECD region ID to DCID map (which uses the geo
+resolution results but overwrites countries, NUTS, USA states, and other special
+cases as specified in `clean_geos_resolved_to_dict.py`) just look at diffs in
+`regid2dcid.json`.
+

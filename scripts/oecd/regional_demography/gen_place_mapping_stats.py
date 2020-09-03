@@ -15,6 +15,6 @@ df.errors = df.errors.str[:20]
 print(df.errors.value_counts(dropna=False))
 
 
-## PART 2: With hardcoding for nuts, USA, etc.
-
+## For diffs including hardcoding for nuts, USA, etc.,
+#  just use the diffs in regid2dcid.json.
 
