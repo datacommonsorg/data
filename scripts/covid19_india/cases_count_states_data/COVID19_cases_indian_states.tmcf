@@ -1,10 +1,10 @@
 Node: E:COVID19_cases_india->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19_Positive
+variableMeasured: dcs:CumulativeCount_MedicalTest_ConditionCOVID_19_Positive
 measurementMethod: dcs:Covid19IndiaProject
 observationAbout: E:COVID19_cases_india->E3
 observationDate: C:COVID19_cases_india->DateTime
-value: C:COVID19_cases_india->CumulativeCount_MedicalTest_COVID_19_Positive
+value: C:COVID19_cases_india->CumulativeCount_MedicalTest_ConditionCOVID_19_Positive
 
 
 Node: E:COVID19_cases_india->E1
@@ -26,5 +26,5 @@ value: C:COVID19_cases_india->CumulativeCount_MedicalConditionIncident_COVID_19_
 
 
 Node: E:COVID19_cases_india->E3
-typeOf: schema:State
+typeOf: dcs:AdministrativeAreaLevel1
 isoCode: C:COVID19_cases_india->isoCode

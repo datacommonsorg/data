@@ -27,13 +27,14 @@ INDIAN_STATE_CODES = [
     "IN-HP", "IN-JH", "IN-KA", "IN-KL", "IN-MP", "IN-MH", "IN-MN", "IN-ML",
     "IN-MZ", "IN-NL", "IN-OR", "IN-PB", "IN-RJ", "IN-SK", "IN-TN", "IN-TG",
     "IN-TR", "IN-UT", "IN-UP", "IN-WB", "IN-AN", "IN-CH", "IN-DN", "IN-DD",
-    "IN-DL", "IN-JK", "IN-LA", "IN-LD", "IN-PY"
+    "IN-DL", "IN-JK", "IN-LA", "IN-LD", "IN-PY", "IN-DN_DD"
 ]
 
 ISOCODE_COUNTRY_STATE_FORMAT = "IN-{state}"
 
 output_columns = [
-    'DateTime', 'isoCode', 'CumulativeCount_MedicalTest_COVID_19_Positive',
+    'DateTime', 'isoCode',
+    'CumulativeCount_MedicalTest_ConditionCOVID_19_Positive',
     'CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered',
     'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased'
 ]
@@ -55,8 +56,8 @@ def create_formatted_csv_file(csv_file_path, data):
             processed_dict["DateTime"] = row["value"]["report_time"]
             processed_dict["isoCode"] = iso_code
             processed_dict[
-                "CumulativeCount_MedicalTest_COVID_19_Positive"] = row["value"][
-                    "confirmed"]
+                "CumulativeCount_MedicalTest_ConditionCOVID_19_Positive"] = row[
+                    "value"]["confirmed"]
             processed_dict[
                 "CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered"] = row[
                     "value"]["cured"]

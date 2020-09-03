@@ -1,4 +1,4 @@
-DateTime,isoCode,CumulativeCount_MedicalTest_COVID_19_Positive,CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered,CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+DateTime,isoCode,CumulativeCount_MedicalTest_ConditionCOVID_19_Positive,CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered,CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
 2020-01-30T13:33:00.00+05:30,IN-KL,1,0,0
 2020-02-02T10:39:00.00+05:30,IN-KL,2,0,0
 2020-02-03T12:13:00.00+05:30,IN-KL,3,0,0

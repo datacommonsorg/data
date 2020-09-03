@@ -20,7 +20,9 @@ import urllib.request
 # 2. Only cumulative counts are available at this point
 
 INDIA = "IN"
-output_columns = ['Date', 'isoCode', 'CumulativeCount_MedicalTest_COVID_19']
+output_columns = [
+    'Date', 'isoCode', 'CumulativeCount_MedicalTest_ConditionCOVID_19'
+]
 
 
 def create_formatted_csv_file(csv_file_path, data):
@@ -34,8 +36,9 @@ def create_formatted_csv_file(csv_file_path, data):
             processed_dict = {}
             processed_dict["Date"] = (row["value"]["report_time"])[:10]
             processed_dict["isoCode"] = INDIA
-            processed_dict["CumulativeCount_MedicalTest_COVID_19"] = row[
-                "value"]["samples"]
+            processed_dict[
+                "CumulativeCount_MedicalTest_ConditionCOVID_19"] = row["value"][
+                    "samples"]
             writer.writerow(processed_dict)
 
 
