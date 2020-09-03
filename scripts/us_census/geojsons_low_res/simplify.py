@@ -65,7 +65,12 @@ class GeojsonSimplifier:
             epsilon: The epsilon parameter to the  Ramer–Douglas–Peucker
                      algorithm. See the Wikipedia page for details.
 
-        Returns: The simplified GeoJSON, as a dict.
+        Returns: A tuple, containing
+                    1. The simplified GeoJSON, as a dict.
+                    2. The number of points in the original GeoJSON, pre
+                       simplification, as an int.
+                    3. The number of points in the simplified GeoJSON, as an
+                       int.
         """
         geojson = input if input is not None else self.geojson
         coords = geojson['coordinates']
@@ -92,7 +97,7 @@ class GeojsonSimplifier:
         logging.info(f"Original number of points = {original_size}.")
         logging.info(f"Simplified number of points = {simplified_size}.")
 
-        return geojson
+        return geojson, original_size, simplified_size
 
     def save(self, out_path):
         """Saves instance geojson after simplification.
