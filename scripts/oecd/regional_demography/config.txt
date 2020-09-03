@@ -4,7 +4,7 @@ import: {
     provenance_description: "Regional demographic statistics measured by OECD (Organisation for Economic Co-operation and Development)."
     # Path to the resolved MCF.
     mcf_url: "gs://resolved_mcf/external_tables/oecd_deaths_alsoselectedresolvegeosagainstkgmcf/nodes.mcf-?????-of-?????"
-    mcf_url: "resolved_mcf/external_tables/oecd_life_and_mortality_v2/nodes.mcf-?????-of-?????"
+    mcf_url: "gs://resolved_mcf/external_tables/oecd_life_and_mortality_v2/nodes.mcf-?????-of-?????"
     mcf_url: "gs://resolved_mcf/external_tables/oecdpopdensity/nodes.mcf-00000-of-00001"
     mcf_url: "gs://resolved_mcf/external_tables/oecdpop2/nodes.mcf-?????-of-?????"
     mcf_url: "gs://resolved_mcf/external_tables/oecdpop3/nodes.mcf-?????-of-?????"
