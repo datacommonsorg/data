@@ -1,0 +1,66 @@
+
+OECD->DCID resolved
+
+NaN                   371
+country/SWE             7
+wikidataId/Q21          7
+country/BGR             6
+nuts/UKG3               5
+wikidataId/Q684369      5
+country/CZE             5
+nuts/UKN                5
+nuts/DK01               4
+iso/AU-NSW              4
+nuts/UKD3               4
+country/MLT             4
+iso/KR-47               3
+iso/KR-44               3
+country/USA             3
+nuts/AT21               3
+nuts/UKJ4               3
+iso/PL-32               3
+geoNamesId/2061327      3
+nuts/PL22               3
+nuts/UKL                3
+country/TUR             3
+iso/PL-30               3
+nuts/NO043              3
+nuts/PT150              3
+geoNamesId/2145234      2
+nuts/ITC2               2
+country/NOR             2
+iso/PL-16               2
+geoNamesId/294824       2
+geoNamesId/1629652      2
+wikidataId/Q702083      2
+wikidataId/Q160734      2
+iso/RO-NT               2
+geoNamesId/2179671      2
+geoNamesId/2190146      2
+wikidataId/Q12225       2
+nuts/ITH1               2
+nuts/ES13               2
+wikidataId/Q10686       2
+Name: dcid, dtype: int64
+
+OECD->DCID errors
+
+NaN                                                     2249
+Missing dcid for placeId ChIJj2lzXZ5hXkgRjcZqTUQ5m8o       8
+Missing dcid for placeId ChIJbw4iEgC2GGARiZ85fiY71mk       4
+Missing dcid for placeId ChIJoZ0J5xlxGw0RP6BzpvKOepY       4
+Missing dcid for placeId ChIJM_LSd0u5XUARmMatWcbWXP4       4
+                                                        ... 
+Missing dcid for placeId ChIJa8S6CqgfdUARLIUQkycMB1M       1
+Missing dcid for placeId ChIJrfdtd6hf5kcRoXjIKGV79o4       1
+Missing dcid for placeId ChIJaXYN-cASckcR6pZu97Vu4TY       1
+Missing dcid for placeId ChIJ227hvGB_hUgRDgGrFoLY9yY       1
+Missing dcid for placeId ChIJreAabQVAm0cRhPvGSUrAnew       1
+Name: errors, Length: 339, dtype: int64
+
+OECD->DCID errors summary
+
+NaN                     2249
+Missing dcid for pla     331
+Empty geocoding resu      40
+Name: errors, dtype: int64
