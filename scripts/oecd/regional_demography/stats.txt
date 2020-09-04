@@ -1,4 +1,16 @@
 
+PLACE RESOLUTION STATISTICS
+
+This only tracks the resolution statistics from `tools/place_name_resolver/`.
+
+The final mapping used by the OECD datasets overrides the `place_name_resolver`
+mapping for special cases such as NUTS codes, USA states, etc., where we know
+the OECD Region ID corresponds with a well-known standard, such as NUTS or
+FIPS. To see changes in the final mapping, just use diffs in regid2dcid.json.
+
+To regenerate this file, run `python3 gen_place_mapping_stats.py > stats.txt`
+
+
 1. Summary of resolution errors (NaN = no error):
 
 NaN                             2249
@@ -6,52 +18,53 @@ Missing dcid for placeId ...     331
 Empty geocoding result fo...      40
 Name: errors, dtype: int64
 
-2. Number of OECD places mapped to each DCID. Observe N to 1 issues.
-(NaN = places that failed to resolve to DCID):
+2. Number of OECD places mapped to each DCID. Observe N to 1 issues. (NaN =
+   places that failed to resolve to DCID):
 
-NaN                     371
-wikidataId/Q21            7
-country/SWE               7
-country/BGR               6
-wikidataId/Q684369        5
-country/CZE               5
-nuts/UKN                  5
-nuts/UKG3                 5
-iso/AU-NSW                4
-nuts/UKD3                 4
-nuts/DK01                 4
-country/MLT               4
-iso/PL-30                 3
-nuts/PL22                 3
-nuts/NO043                3
-country/TUR               3
-nuts/PT150                3
-iso/PL-32                 3
-geoNamesId/2061327        3
-nuts/UKL                  3
-iso/KR-44                 3
-country/USA               3
-iso/KR-47                 3
-nuts/UKJ4                 3
-nuts/AT21                 3
-iso/KR-46                 2
-nuts/ES13                 2
-nuts/CH07                 2
-wikidataId/Q702083        2
-nuts/PL51                 2
-nuts/ES41                 2
-iso/AU-WA                 2
-nuts/UKJ23                2
-nuts/PT200                2
-wikidataId/Q160734        2
-wikidataId/Q696235        2
-wikidataId/Q12447620      2
-geoNamesId/2190146        2
-nuts/CH033                2
-wikidataId/Q3033          2
+NaN                   371
+wikidataId/Q21          7
+country/SWE             7
+country/BGR             6
+wikidataId/Q684369      5
+nuts/UKG3               5
+nuts/UKN                5
+country/CZE             5
+iso/AU-NSW              4
+nuts/UKD3               4
+country/MLT             4
+nuts/DK01               4
+nuts/PT150              3
+nuts/UKJ4               3
+iso/PL-30               3
+iso/KR-47               3
+nuts/UKL                3
+country/USA             3
+iso/KR-44               3
+nuts/PL22               3
+nuts/AT21               3
+geoNamesId/2061327      3
+iso/PL-32               3
+country/TUR             3
+nuts/NO043              3
+geoNamesId/294904       2
+iso/CZ-64               2
+wikidataId/Q702083      2
+nuts/ES22               2
+country/KOR             2
+wikidataId/Q234         2
+nuts/IS001              2
+wikidataId/Q672744      2
+geoNamesId/293396       2
+wikidataId/Q10686       2
+wikidataId/Q160734      2
+geoNamesId/2064513      2
+wikidataId/Q192232      2
+geoNamesId/1629652      2
+iso/RO-NT               2
 Name: dcid, dtype: int64
 
-3. Number of OECD places mapped to each DCID, grouped by namespace (only those with N to 1 issues):
+3. Number of OECD places mapped to each DCID, grouped by namespace (only those
+   with N to 1 issues):
 
 namespace   dcid                
 country     country/BGR             6
@@ -184,3 +197,13 @@ wikidataId  wikidataId/Q10686       2
             wikidataId/Q702083      2
             wikidataId/Q856010      2
 dtype: int64
+
+4. Number of resolved DCIDs by namespace (ignoring N to 1 issues):
+wikidataId    832
+nuts          748
+nan           371
+geoNamesId    274
+iso           266
+country        76
+geoId          53
+Name: namespace, dtype: int64
