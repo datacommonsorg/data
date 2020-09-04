@@ -25,7 +25,6 @@ import plotter
 import geojson
 import json
 import tempfile
-import re
 import matplotlib.pyplot as plt
 from absl import logging
 from absl import app
@@ -35,7 +34,11 @@ from absl import flags
 class McfGenerator:
     PLACE_TO_IMPORT = 'country/USA'
 
+    # Mapping from the epsilon parameter (abbreviated eps) in the
+    # Ramer–Douglas–Peucker algorithm to the "degree" of precision, as defined
+    # by DataCommons.
     EPS_LEVEL_MAP = {0.01: 1, 0.03: 2, 0.05: 3}
+    LEVEL_MAP = {1: 'State', 2: 'County'}
 
     def __init__(self):
         self.downloader = download.GeojsonDownloader()
@@ -43,17 +46,20 @@ class McfGenerator:
         self.simple_geojsons = {}
         self.eps = 0.01
 
-    def download_data(self):
-        self.downloader.download_data(place=self.PLACE_TO_IMPORT)
+    def download_data(self, levels_down=1):
+        self.levels_down = levels_down
+        self.downloader.download_data(place=self.PLACE_TO_IMPORT,
+                                      level=self.levels_down)
 
     def generate_simple_geojsons(self, show=False, eps=None):
+        original_pts = 0
+        compressed_pts = 0
         for geoid, coords in self.downloader.iter_subareas():
-
             # This an admitedly hacky way of getting rid of bogus geographies
             # that are, for some mysterious reason, included as part of the US
             # states query (with geoIds like geoId/7000).
             # TODO(jeffreyoldham): (potentially) find a cleaner way to do this.
-            if int(geoid.split('/')[1]) > 100:
+            if self.levels_down == 1 and int(geoid.split('/')[1]) > 100:
                 continue
             logging.info(f"Simplifying {geoid}...")
             if eps is not None:
@@ -63,8 +69,11 @@ class McfGenerator:
                      tempfile.TemporaryFile(mode='r+') as f2:
 
                     geojson.dump(coords, f1)
-                    simple = self.simplifier.simplify(coords, epsilon=self.eps)
-                    geojson.dump(simple, f2)
+                    s, o_sz, c_sz = self.simplifier.simplify(coords,
+                                                             epsilon=self.eps)
+                    original_pts += o_sz
+                    compressed_pts += c_sz
+                    geojson.dump(s, f2)  # Save simple geojson in tempfile.
 
                     # Rewind files to start for reading.
                     f1.seek(0)
@@ -73,10 +82,13 @@ class McfGenerator:
                     plotter.compare_plots(gpd.read_file(f1),
                                           gpd.read_file(f2),
                                           show=show)
-                    self.simple_geojsons[geoid] = simple
+                    self.simple_geojsons[geoid] = s
             except AssertionError:
                 logging.error("Simplifier failure on GeoJSON below:\n", coords)
-        # plt.show()
+        logging.info(f"Total original points = {original_pts}\n"
+                     f"Compressed points = {compressed_pts}\n")
+        plt.show()
+        plt.clf()
 
     def generate_mcf(self, path='low_res_geojsons.mcf', mode='w'):
         """Writes the simplified GeoJSONs to an MCF file.
@@ -97,17 +109,18 @@ class McfGenerator:
                 geostr = json.dumps(json.dumps(self.simple_geojsons[geoid]))
                 f.write(
                     temp.format(geoid=geoid,
-                                type="State",
+                                type=self.LEVEL_MAP[self.levels_down],
                                 level=self.EPS_LEVEL_MAP[self.eps],
                                 coords_str=geostr))
 
 
 def main(_):
     gen = McfGenerator()
-    gen.download_data()
+    gen.download_data(FLAGS.level)
     for eps in McfGenerator.EPS_LEVEL_MAP:
-        gen.generate_simple_geojsons(show=False, eps=eps)
-        filename = f"low_res_geojsons_DP{McfGenerator.EPS_LEVEL_MAP[eps]}.mcf"
+        gen.generate_simple_geojsons(show=FLAGS.show, eps=eps)
+        filename = (f"low_res_geojsons_level_{FLAGS.level}_DP"
+                    f"{McfGenerator.EPS_LEVEL_MAP[eps]}.mcf")
         gen.generate_mcf(path=filename)
 
 
@@ -115,6 +128,12 @@ if __name__ == "__main__":
     FLAGS = flags.FLAGS
     flags.DEFINE_boolean('show',
                          default=False,
-                         help='If True, plots comparison of original vs. '
-                         'simplified for each geography.')
+                         help=('If True, plots comparison of original vs. '
+                               'simplified for each geography.'))
+    flags.DEFINE_integer('level',
+                         default=1,
+                         help=("Number of administrative levels down from "
+                               "'country/USA'. For example, level=1 "
+                               "corresponds to US states and level=2 to US "
+                               "counties"))
     app.run(main)
