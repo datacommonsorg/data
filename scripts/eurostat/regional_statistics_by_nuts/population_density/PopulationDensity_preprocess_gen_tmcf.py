@@ -16,7 +16,6 @@ import pandas as pd
 import io
 import csv
 
-
 _DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3dens.tsv.gz"
 _CLEANED_CSV = "./PopulationDensity_Eurostat_NUTS3.csv"
 _TMCF = "./PopulationDensity_Eurostat_NUTS3.tmcf"
@@ -55,7 +54,7 @@ def translate_wide_to_long(data_url):
         df['value'] = df['value'].str.replace(flag, '')
 
     df['value'] = pd.to_numeric(df['value'])
-    return(df)
+    return (df)
 
 
 def preprocess(df, cleaned_csv):
@@ -105,8 +104,7 @@ def test_col_names(cleaned_csv, tmcf):
                 col_name = line[:-1].split("->")[1]
                 assert col_name in cols
 
+
 if __name__ == "__main__":
-    preprocess(translate_wide_to_long(_DATA_URL),
-               _CLEANED_CSV)
+    preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
     get_template_mcf(output_columns)
-    
