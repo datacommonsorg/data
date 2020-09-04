@@ -53,9 +53,6 @@ The license is [available](https://ec.europa.eu/eurostat/about/policies/copyrigh
 
 ### Artifacts
 
-#### Raw Data
-[demo_r_d3dens.tsv](./demo_r_d3dens.tsv)
-
 #### Cleaned Data
 [PopulationDensity_Eurostat_NUTS3.csv](./PopulationDensity_Eurostat_NUTS3.csv)
 
