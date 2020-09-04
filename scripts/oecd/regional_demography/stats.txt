@@ -1,5 +1,5 @@
 
-1. Summary of resolution errors (NaN = no error)
+1. Summary of resolution errors (NaN = no error):
 
 NaN                             2249
 Missing dcid for placeId ...     331
@@ -9,46 +9,46 @@ Name: errors, dtype: int64
 2. Number of OECD places mapped to each DCID. Observe N to 1 issues.
 (NaN = places that failed to resolve to DCID):
 
-NaN                   371
-wikidataId/Q21          7
-country/SWE             7
-country/BGR             6
-nuts/UKN                5
-wikidataId/Q684369      5
-nuts/UKG3               5
-country/CZE             5
-country/MLT             4
-iso/AU-NSW              4
-nuts/DK01               4
-nuts/UKD3               4
-iso/KR-44               3
-nuts/PT150              3
-nuts/NO043              3
-country/USA             3
-geoNamesId/2061327      3
-nuts/PL22               3
-nuts/UKJ4               3
-iso/KR-47               3
-iso/PL-32               3
-iso/PL-30               3
-nuts/UKL                3
-country/TUR             3
-nuts/AT21               3
-wikidataId/Q1757        2
-geoNamesId/6612113      2
-nuts/ITC2               2
-nuts/DE423              2
-wikidataId/Q234         2
-country/KOR             2
-geoNamesId/2147291      2
-geoNamesId/2192628      2
-nuts/CZ08               2
-wikidataId/Q180200      2
-iso/RO-AG               2
-nuts/PL213              2
-geoNamesId/6185811      2
-nuts/PL127              2
-geoNamesId/1629652      2
+NaN                     371
+wikidataId/Q21            7
+country/SWE               7
+country/BGR               6
+wikidataId/Q684369        5
+country/CZE               5
+nuts/UKN                  5
+nuts/UKG3                 5
+iso/AU-NSW                4
+nuts/UKD3                 4
+nuts/DK01                 4
+country/MLT               4
+iso/PL-30                 3
+nuts/PL22                 3
+nuts/NO043                3
+country/TUR               3
+nuts/PT150                3
+iso/PL-32                 3
+geoNamesId/2061327        3
+nuts/UKL                  3
+iso/KR-44                 3
+country/USA               3
+iso/KR-47                 3
+nuts/UKJ4                 3
+nuts/AT21                 3
+iso/KR-46                 2
+nuts/ES13                 2
+nuts/CH07                 2
+wikidataId/Q702083        2
+nuts/PL51                 2
+nuts/ES41                 2
+iso/AU-WA                 2
+nuts/UKJ23                2
+nuts/PT200                2
+wikidataId/Q160734        2
+wikidataId/Q696235        2
+wikidataId/Q12447620      2
+geoNamesId/2190146        2
+nuts/CH033                2
+wikidataId/Q3033          2
 Name: dcid, dtype: int64
 
 3. Number of OECD places mapped to each DCID, grouped by namespace (only those with N to 1 issues):
