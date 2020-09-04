@@ -16,22 +16,20 @@ import pandas as pd
 import io
 import csv
 
-# data_url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3area.tsv.gz"
 
-_SOURCE_TSV = "./demo_r_d3dens.tsv"
-_SOURCE_CSV_LONG = "./demo_r_d3dens.csv"
+_DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3dens.tsv.gz"
 _CLEANED_CSV = "./PopulationDensity_Eurostat_NUTS3.csv"
 _TMCF = "./PopulationDensity_Eurostat_NUTS3.tmcf"
 
-_OUTPUT_COLUMNS = [
+output_columns = [
     'Date',
     'GeoId',
     'Count_Person_PerArea',
 ]
 
 
-def translate_wide_to_long(source_tsv, source_csv_long):
-    df = pd.read_csv(source_tsv, delimiter='\t')
+def translate_wide_to_long(data_url):
+    df = pd.read_csv(data_url, delimiter='\t')
     assert df.head
 
     header = list(df.columns.values)
@@ -57,32 +55,25 @@ def translate_wide_to_long(source_tsv, source_csv_long):
         df['value'] = df['value'].str.replace(flag, '')
 
     df['value'] = pd.to_numeric(df['value'])
-    df.to_csv(source_csv_long, index=False)
+    return(df)
 
 
-def preprocess(cleaned_csv, source_csv_long, output_cols):
+def preprocess(df, cleaned_csv):
     with open(cleaned_csv, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
-                                fieldnames=output_cols,
+                                fieldnames=output_columns,
                                 lineterminator='\n')
-        with open(source_csv_long) as response:
-            reader = csv.DictReader(response)
-
-            writer.writeheader()
-            for row_dict in reader:
-                assert not row_dict['value'].isdigit()
-                assert not row_dict['time'].isdigit()
-                processed_dict = {
-                    # 'Date': '%s-%s-%s' % (row_dict['TIME'][:4], '01', '01'),
-                    'Date': '%s' % (row_dict['time'][:4]),
-                    'GeoId': 'dcid:nuts/%s' % row_dict['geo'],
-                    'Count_Person_PerArea': float(row_dict['value']),
-                }
-
-                writer.writerow(processed_dict)
+        writer.writeheader()
+        for _, row in df.iterrows():
+            writer.writerow({
+                # 'Date': '%s-%s-%s' % (row_dict['TIME'][:4], '01', '01'),
+                'Date': '%s' % (row['time'][:4]),
+                'GeoId': 'dcid:nuts/%s' % row['geo'],
+                'Count_Person_PerArea': float(row['value']),
+            })
 
 
-def get_template_mcf(tmcf, output_columns):
+def get_template_mcf(output_columns):
     # Automate Template MCF generation since there are many Statistical Variables.
     TEMPLATE_MCF_TEMPLATE = """
   Node: E:EurostatNUTS3_DensityTracking->E{index}
@@ -95,7 +86,7 @@ def get_template_mcf(tmcf, output_columns):
   """
 
     stat_vars = output_columns[2:]
-    with open(tmcf, 'w', newline='') as f_out:
+    with open(_TMCF, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
@@ -104,7 +95,18 @@ def get_template_mcf(tmcf, output_columns):
                 }))
 
 
+def test_col_names(cleaned_csv, tmcf):
+    """ check if all the column names specified in the template mcf
+        is found in the CSV file"""
+    cols = pd.read_csv(cleaned_csv, nrows=0).columns
+    with open(tmcf, "r") as file:
+        for line in file:
+            if " C:" in line:
+                col_name = line[:-1].split("->")[1]
+                assert col_name in cols
+
 if __name__ == "__main__":
-    translate_wide_to_long(_SOURCE_TSV, _SOURCE_CSV_LONG)
-    preprocess(_CLEANED_CSV, _SOURCE_CSV_LONG, _OUTPUT_COLUMNS)
-    get_template_mcf(_TMCF, _OUTPUT_COLUMNS)
+    preprocess(translate_wide_to_long(_DATA_URL),
+               _CLEANED_CSV)
+    get_template_mcf(output_columns)
+    
