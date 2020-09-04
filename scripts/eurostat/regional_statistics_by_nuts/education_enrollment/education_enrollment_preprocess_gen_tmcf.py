@@ -16,16 +16,17 @@ import pandas as pd
 import io
 import csv
 
-
 _DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/trng_lfse_04.tsv.gz"
 _CLEANED_CSV = "./Eurostats_NUTS2_Enrollment.csv"
 _TMCF = "./Eurostats_NUTS2_Enrollment.tmcf"
 
-output_columns = ['Date', 'GeoId',
-                  'Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female',
-                  'Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male',
-                  'Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years',
-                 ]
+output_columns = [
+    'Date',
+    'GeoId',
+    'Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female',
+    'Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male',
+    'Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years',
+]
 
 
 def translate_wide_to_long(data_url):
@@ -44,12 +45,13 @@ def translate_wide_to_long(data_url):
 
     # Separate geo and unit columns.
     new = df[header[0]].str.split(",", n=-1, expand=True)
-    df = df.join(pd.DataFrame({
-      'geo': new[3],
-      'age': new[2],
-      'sex': new[1],
-      'unit': new[0]
-    }))
+    df = df.join(
+        pd.DataFrame({
+            'geo': new[3],
+            'age': new[2],
+            'sex': new[1],
+            'unit': new[0]
+        }))
     df.drop(columns=[header[0]], inplace=True)
 
     # Remove empty rows, clean values to have all digits.
@@ -59,9 +61,10 @@ def translate_wide_to_long(data_url):
         df['value'] = df['value'].str.replace(flag, '')
 
     df['value'] = pd.to_numeric(df['value'])
-    df = df.pivot_table(values='value', 
-                      index=['geo','time', 'unit','age'], 
-                      columns=['sex'], aggfunc='first').reset_index().rename_axis(None, axis=1)
+    df = df.pivot_table(values='value',
+                        index=['geo', 'time', 'unit', 'age'],
+                        columns=['sex'],
+                        aggfunc='first').reset_index().rename_axis(None, axis=1)
     return df
 
 
@@ -74,12 +77,17 @@ def preprocess(df, cleaned_csv):
         for _, row in df.iterrows():
             writer.writerow({
                 # 'Date': '%s-%s-%s' % (row['time'][:4], '01', '01'),
-                'Date': '%s' % (row['time'][:4]),
-                'GeoId': 'dcid:nuts/%s' % row['geo'],
-                'Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female': (row['F']),
-                'Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male': (row['M']),
-                'Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years': (row['T']),
-        })
+                'Date':
+                    '%s' % (row['time'][:4]),
+                'GeoId':
+                    'dcid:nuts/%s' % row['geo'],
+                'Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female':
+                    (row['F']),
+                'Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male':
+                    (row['M']),
+                'Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years':
+                    (row['T']),
+            })
 
 
 def get_template_mcf(output_columns):
@@ -115,7 +123,7 @@ def test_col_names(cleaned_csv, tmcf):
                 col_name = line[:-1].split("->")[1]
                 assert col_name in cols
 
+
 if __name__ == "__main__":
-    preprocess(translate_wide_to_long(_DATA_URL),
-               _CLEANED_CSV)
+    preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
     get_template_mcf(output_columns)
