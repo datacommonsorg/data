@@ -14,9 +14,12 @@ This only tracks the resolution statistics from `tools/place_name_resolver/`.
 The final mapping used by the OECD datasets overrides the `place_name_resolver`
 mapping for special cases such as NUTS codes, USA states, etc., where we know
 the OECD Region ID corresponds with a well-known standard, such as NUTS or
-FIPS. We also address the many-to-one OECD to DCID mapping issues by removeing
+FIPS. We also address the many-to-one OECD to DCID mapping issues by removing
 DCIDs for lower level places that resolve to a DCID already used by a higher
-level place. These optimizations are made in `clean_geos_resolved_to_dict.py`.
+level place. This filtering avoids inconsistent statistics (when data from
+multiple places is incorrectly associated with the same place, there is often
+vastly different or duplicate values for a variable). These optimizations are
+made in `clean_geos_resolved_to_dict.py`.
 
 To see changes in the final mapping, just use diffs in regid2dcid.json.
 
