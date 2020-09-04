@@ -16,7 +16,6 @@ import pandas as pd
 import io
 import csv
 
-
 _DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz"
 _CLEANED_CSV = "./Eurostats_NUTS2_Edat.csv"
 _TMCF = "./Eurostats_NUTS2_Edat.tmcf"
@@ -89,35 +88,35 @@ def preprocess(df, cleaned_csv):
         writer.writeheader()
         for _, row in df.iterrows():
             writer.writerow({
-                    'Date':
-                        '%s' % (row['time'][:4]),
-                    'GeoId':
-                        'dcid:nuts/%s' % (row['geo']),
-                    'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years':
-                        (row['T_ED0-2']),
-                    'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years':
-                        (row['T_ED3-8']),
-                    'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_25To64Years':
-                        (row['T_ED3_4']),
-                    'Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years':
-                        (row['T_ED5-8']),
-                    'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                        (row['F_ED0-2']),
-                    'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                        (row['F_ED3-8']),
-                    'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                        (row['F_ED3_4']),
-                    'Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                        (row['F_ED5-8']),
-                    'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                        (row['M_ED0-2']),
-                    'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                        (row['M_ED3-8']),
-                    'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                        (row['M_ED3_4']),
-                    'Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                        (row['M_ED5-8']),
-                })
+                'Date':
+                    '%s' % (row['time'][:4]),
+                'GeoId':
+                    'dcid:nuts/%s' % (row['geo']),
+                'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years':
+                    (row['T_ED0-2']),
+                'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years':
+                    (row['T_ED3-8']),
+                'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_25To64Years':
+                    (row['T_ED3_4']),
+                'Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years':
+                    (row['T_ED5-8']),
+                'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
+                    (row['F_ED0-2']),
+                'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female':
+                    (row['F_ED3-8']),
+                'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
+                    (row['F_ED3_4']),
+                'Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
+                    (row['F_ED5-8']),
+                'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
+                    (row['M_ED0-2']),
+                'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male':
+                    (row['M_ED3-8']),
+                'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
+                    (row['M_ED3_4']),
+                'Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
+                    (row['M_ED5-8']),
+            })
 
 
 def get_template_mcf(output_columns):
@@ -153,7 +152,7 @@ def test_col_names(cleaned_csv, tmcf):
                 col_name = line[:-1].split("->")[1]
                 assert col_name in cols
 
+
 if __name__ == "__main__":
-    preprocess(translate_wide_to_long(_DATA_URL),
-               _CLEANED_CSV)
+    preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
     get_template_mcf(_OUTPUT_CLOUMNS)
