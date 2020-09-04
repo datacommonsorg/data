@@ -13,7 +13,7 @@ multiple places is incorrectly associated with the same place, there is often
 vastly different or duplicate values for a variable). These optimizations are
 made in `clean_geos_resolved_to_dict.py`.
 
-To see changes in the final mapping, just use diffs in regid2dcid.json.
+To see changes in the final mapping, just use diffs in `regid2dcid.json`.
 
 To regenerate this file, run `python3 gen_place_mapping_stats.py > stats.txt`
 
@@ -42,42 +42,42 @@ NaN                   371
 country/SWE             7
 wikidataId/Q21          7
 country/BGR             6
-nuts/UKN                5
 wikidataId/Q684369      5
-country/CZE             5
 nuts/UKG3               5
-country/MLT             4
+country/CZE             5
+nuts/UKN                5
 nuts/UKD3               4
+country/MLT             4
 iso/AU-NSW              4
 nuts/DK01               4
-iso/PL-32               3
-nuts/UKJ4               3
-geoNamesId/2061327      3
 iso/PL-30               3
+nuts/UKJ4               3
+iso/KR-47               3
+iso/KR-44               3
 nuts/UKL                3
+nuts/PL22               3
+geoNamesId/2061327      3
+nuts/AT21               3
+iso/PL-32               3
+nuts/NO043              3
+country/TUR             3
 nuts/PT150              3
 country/USA             3
-iso/KR-47               3
-nuts/AT21               3
-country/TUR             3
-nuts/NO043              3
-iso/KR-44               3
-nuts/PL22               3
-geoNamesId/2147291      2
-iso/PL-16               2
-nuts/NO021              2
+nuts/PL213              2
+nuts/UKJ24              2
+nuts/TR1                2
+wikidataId/Q122723      2
+nuts/ES22               2
+geoNamesId/293396       2
+nuts/UKH3               2
+wikidataId/Q1979        2
+nuts/CH07               2
+nuts/IS001              2
 iso/HU-PE               2
-nuts/DE6                2
-iso/GR-L                2
-iso/AU-WA               2
-iso/KR-49               2
-iso/NO-50               2
-iso/RO-VN               2
-nuts/CH033              2
-wikidataId/Q10686       2
-country/TUN             2
-nuts/DE3                2
-iso/KR-46               2
+geoNamesId/294952       2
+nuts/ES23               2
+country/LTU             2
+geoNamesId/6612113      2
 Name: dcid, dtype: int64
 
 4. Number of OECD places mapped to each DCID, grouped by namespace (only those

@@ -21,7 +21,7 @@ multiple places is incorrectly associated with the same place, there is often
 vastly different or duplicate values for a variable). These optimizations are
 made in `clean_geos_resolved_to_dict.py`.
 
-To see changes in the final mapping, just use diffs in regid2dcid.json.
+To see changes in the final mapping, just use diffs in `regid2dcid.json`.
 
 To regenerate this file, run `python3 gen_place_mapping_stats.py > stats.txt`
 """)
