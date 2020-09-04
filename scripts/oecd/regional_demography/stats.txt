@@ -1,0 +1,186 @@
+
+1. Summary of resolution errors (NaN = no error):
+
+NaN                             2249
+Missing dcid for placeId ...     331
+Empty geocoding result fo...      40
+Name: errors, dtype: int64
+
+2. Number of OECD places mapped to each DCID. Observe N to 1 issues.
+(NaN = places that failed to resolve to DCID):
+
+NaN                     371
+wikidataId/Q21            7
+country/SWE               7
+country/BGR               6
+wikidataId/Q684369        5
+country/CZE               5
+nuts/UKN                  5
+nuts/UKG3                 5
+iso/AU-NSW                4
+nuts/UKD3                 4
+nuts/DK01                 4
+country/MLT               4
+iso/PL-30                 3
+nuts/PL22                 3
+nuts/NO043                3
+country/TUR               3
+nuts/PT150                3
+iso/PL-32                 3
+geoNamesId/2061327        3
+nuts/UKL                  3
+iso/KR-44                 3
+country/USA               3
+iso/KR-47                 3
+nuts/UKJ4                 3
+nuts/AT21                 3
+iso/KR-46                 2
+nuts/ES13                 2
+nuts/CH07                 2
+wikidataId/Q702083        2
+nuts/PL51                 2
+nuts/ES41                 2
+iso/AU-WA                 2
+nuts/UKJ23                2
+nuts/PT200                2
+wikidataId/Q160734        2
+wikidataId/Q696235        2
+wikidataId/Q12447620      2
+geoNamesId/2190146        2
+nuts/CH033                2
+wikidataId/Q3033          2
+Name: dcid, dtype: int64
+
+3. Number of OECD places mapped to each DCID, grouped by namespace (only those with N to 1 issues):
+
+namespace   dcid                
+country     country/BGR             6
+            country/CZE             5
+            country/FIN             2
+            country/KOR             2
+            country/LTU             2
+            country/MLT             4
+            country/NOR             2
+            country/SWE             7
+            country/TUN             2
+            country/TUR             3
+            country/USA             3
+geoNamesId  geoNamesId/1629652      2
+            geoNamesId/2061327      3
+            geoNamesId/2064513      2
+            geoNamesId/2145234      2
+            geoNamesId/2147291      2
+            geoNamesId/2179671      2
+            geoNamesId/2181872      2
+            geoNamesId/2182501      2
+            geoNamesId/2185978      2
+            geoNamesId/2190146      2
+            geoNamesId/2190767      2
+            geoNamesId/2192628      2
+            geoNamesId/2193734      2
+            geoNamesId/293396       2
+            geoNamesId/294800       2
+            geoNamesId/294824       2
+            geoNamesId/294904       2
+            geoNamesId/294952       2
+            geoNamesId/6185811      2
+            geoNamesId/6612109      2
+            geoNamesId/6612113      2
+            geoNamesId/7910068      2
+iso         iso/AU-NSW              4
+            iso/AU-WA               2
+            iso/CZ-64               2
+            iso/GR-L                2
+            iso/HU-PE               2
+            iso/IS-2                2
+            iso/KR-42               2
+            iso/KR-44               3
+            iso/KR-46               2
+            iso/KR-47               3
+            iso/KR-48               2
+            iso/KR-49               2
+            iso/NO-50               2
+            iso/PL-16               2
+            iso/PL-30               3
+            iso/PL-32               3
+            iso/RO-AG               2
+            iso/RO-NT               2
+            iso/RO-VN               2
+            iso/TN-11               2
+nuts        nuts/AT11               2
+            nuts/AT21               3
+            nuts/AT31               2
+            nuts/AT334              2
+            nuts/BG411              2
+            nuts/CH033              2
+            nuts/CH05               2
+            nuts/CH062              2
+            nuts/CH07               2
+            nuts/CZ08               2
+            nuts/DE3                2
+            nuts/DE423              2
+            nuts/DE6                2
+            nuts/DK01               4
+            nuts/DK04               2
+            nuts/EL11               2
+            nuts/ES12               2
+            nuts/ES13               2
+            nuts/ES22               2
+            nuts/ES23               2
+            nuts/ES41               2
+            nuts/FI193              2
+            nuts/IS001              2
+            nuts/ITC2               2
+            nuts/ITH1               2
+            nuts/ITH2               2
+            nuts/LU0                2
+            nuts/NL12               2
+            nuts/NO021              2
+            nuts/NO043              3
+            nuts/PL127              2
+            nuts/PL21               2
+            nuts/PL213              2
+            nuts/PL22               3
+            nuts/PL51               2
+            nuts/PL61               2
+            nuts/PT150              3
+            nuts/PT200              2
+            nuts/PT300              2
+            nuts/RO321              2
+            nuts/TR1                2
+            nuts/UKD1               2
+            nuts/UKD3               4
+            nuts/UKF15              2
+            nuts/UKG3               5
+            nuts/UKH3               2
+            nuts/UKJ23              2
+            nuts/UKJ24              2
+            nuts/UKJ36              2
+            nuts/UKJ4               3
+            nuts/UKL                3
+            nuts/UKN                5
+wikidataId  wikidataId/Q10686       2
+            wikidataId/Q12225       2
+            wikidataId/Q122723      2
+            wikidataId/Q12447620    2
+            wikidataId/Q160734      2
+            wikidataId/Q1757        2
+            wikidataId/Q180200      2
+            wikidataId/Q192232      2
+            wikidataId/Q1965        2
+            wikidataId/Q1979        2
+            wikidataId/Q21          7
+            wikidataId/Q23115       2
+            wikidataId/Q234         2
+            wikidataId/Q25389       2
+            wikidataId/Q3033        2
+            wikidataId/Q3258        2
+            wikidataId/Q521869      2
+            wikidataId/Q5245991     2
+            wikidataId/Q57278       2
+            wikidataId/Q672744      2
+            wikidataId/Q684369      5
+            wikidataId/Q696235      2
+            wikidataId/Q702083      2
+            wikidataId/Q856010      2
+dtype: int64
