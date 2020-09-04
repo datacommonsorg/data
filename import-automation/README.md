@@ -134,8 +134,8 @@ directories:
 
 1. Check in the `import-automation` directory to the repository.
 2. [Configure](executor/README.md#configuring-the-executor) and [deploy](executor/README.md#deploying-on-app-engine) the executor
-3. [Deploy the import progress dashboard API]((import-progress-dashboard-api/README.md#deploying-to-app-engine))
-4. [Deploy the import progress dashboard frontend]((import-progress-dashboard-frontend/README.md#deploying-to-app-engine))
+3. [Deploy the import progress dashboard API](import-progress-dashboard-api/README.md#deploying-to-app-engine)
+4. [Deploy the import progress dashboard frontend](import-progress-dashboard-frontend/README.md#deploying-to-app-engine)
 5. [Create a Cloud Tasks queue](#creating-cloud-task-queue)
 6. [Connect the repository to Cloud Build and set up Cloud Build triggers](#setting-up-cloud-build)
 
@@ -184,6 +184,3 @@ directories:
          - **_HEAD_BRANCH**: `master`
          - **_PR_NUMBER**: `0`
          - **_HANDLER_URI**: `/schedule`
-
-
-
