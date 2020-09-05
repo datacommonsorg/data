@@ -20,7 +20,7 @@ _DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownlo
 _CLEANED_CSV = "./PopulationDensity_Eurostat_NUTS3.csv"
 _TMCF = "./PopulationDensity_Eurostat_NUTS3.tmcf"
 
-output_columns = [
+_OUTPUT_COLUMNS = [
     'Date',
     'GeoId',
     'Count_Person_PerArea',
@@ -60,7 +60,7 @@ def translate_wide_to_long(data_url):
 def preprocess(df, cleaned_csv):
     with open(cleaned_csv, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
-                                fieldnames=output_columns,
+                                fieldnames=_OUTPUT_COLUMNS,
                                 lineterminator='\n')
         writer.writeheader()
         for _, row in df.iterrows():
@@ -72,7 +72,7 @@ def preprocess(df, cleaned_csv):
             })
 
 
-def get_template_mcf(output_columns):
+def get_template_mcf():
     # Automate Template MCF generation since there are many Statistical Variables.
     TEMPLATE_MCF_TEMPLATE = """
   Node: E:EurostatNUTS3_DensityTracking->E{index}
@@ -84,16 +84,16 @@ def get_template_mcf(output_columns):
   measurementMethod: "EurostatRegionalStatistics"
   """
 
-    stat_vars = output_columns[2:]
+    stat_vars = _OUTPUT_COLUMNS[2:]
     with open(_TMCF, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
                     'index': i,
-                    'stat_var': output_columns[2:][i]
+                    'stat_var': _OUTPUT_COLUMNS[2:][i]
                 }))
 
 
 if __name__ == "__main__":
     preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
-    get_template_mcf(output_columns)
+    get_template_mcf()
