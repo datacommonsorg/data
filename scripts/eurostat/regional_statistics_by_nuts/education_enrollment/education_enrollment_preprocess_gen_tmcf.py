@@ -89,7 +89,7 @@ def preprocess(df, cleaned_csv):
             })
 
 
-def get_template_mcf(output_columns):
+def get_template_mcf():
     # Automate Template MCF generation since there are many Statistical Variables.
     TEMPLATE_MCF_TEMPLATE = """
     Node: E:EurostatsNUTS2_Enrollment->E{index}
@@ -102,16 +102,16 @@ def get_template_mcf(output_columns):
     measurementMethod: dcs:EurostatRegionalStatistics
     """
 
-    stat_vars = output_columns[2:]
+    stat_vars = _OUTPUT_COLUMNS[2:]
     with open(_TMCF, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
                     'index': i,
-                    'stat_var': output_columns[2:][i]
+                    'stat_var': _OUTPUT_COLUMNS[2:][i]
                 }))
 
 
 if __name__ == "__main__":
     preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
-    get_template_mcf(_OUTPUT_COLUMNS)
+    get_template_mcf()
