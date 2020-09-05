@@ -11,60 +11,68 @@ Author: eftekhari-mhs
 
 ### Download URL
 
-[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/nama_10r_3empers.tsv.gz).
 
-[Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=edat_lfse_04&lang=en)
+[Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=nama_10r_3empers&lang=en)
 
 ### Overview
 
-This dataset has the education attainment rate (percentage) for European Union (EU) countries to their NUTS2 geos. It has the attainment rate categorized by Male/Female/Total for 4 different levels of education for the intervals of [0-2], [3-8], [3-4], [5-8], where the digits are based on ISCED standard explained as follows:
+This dataset has the the employee per sector (thousand persons) for European Union (EU) countries to their NUTS3 geos. It has the employees and employed persons counts categorized by NACE classification for 15 different economic activities in [1995-2018]. The NACE categories are as follows:
 
 ISCED standard education levels: 
 
-- Level 0 – Less than primary education
-- Level 1 – Primary education
-- Level 2 – Lower secondary education
-- Level 3 – Upper secondary education
-- Level 4 – Post-secondary non-tertiary education
-- Level 5 – Short-cycle tertiary education
-- Level 6 – Bachelor’s or equivalent level
-- Level 7 – Master’s or equivalent level
-- Level 8 – Doctoral or equivalent level 
+- Total – All NACE activities.
+- A – Agriculture, forestry and fishing.
+- B-E – Industry (except construction).
+- C – Manufacturing.
+- F – Construction.
+- G-J – Wholesale and retail trade, transport, accommodation and food service activities, information and communication.
+- G-I – Wholesale and retail trade, transport, accommodation and food service activities.
+- J – Information and communication.
+- K-N – Financial and insurance activities, real estate activities, professional, scientific and technical activities, administrative and support service activities.
+- K – Financial and insurance activities.
+- L – Real estate activities.
+- M_N – Professional, scientific and technical activities, administrative and support service activities
+- O-U – Public administration and defence, compulsory social security, education, human health and social work activities, arts, entertainment and recreation... .
+- O-Q – Public administration, defence, education, human health and social work activities.
+- R-U – Arts, entertainment and recreation, other service activities, activities of household and extra-territorial organizations and bodies.
 
 
 The original dataset is broken up into 3 major families of variables:
-1. Date: Years from 2000 to 2019 with some holes in time series marked with note "b" in the original dataset
-2. sex,edu-level,age,unit,geo: e.g. F,ED0-2,Y25-64,PC,AT (Female, Lower Secondary or less,Years 25 to 64, Percent, nuts/AT)
-3. value: some with note "e"="estimated", "u" = "low reliability", and "d"="definition differs"
+1. Date: Years from 1995 to 2018 with some holes in time series marked with note "b" in the original dataset
+2. nace_r2,wstatus,unit,geo: e.g. THS,EMP,A,AT (Thousand, Employed Person, NACE/A, nuts/AT)
+3. value: some with note "p" = "provisional", "u" = "low reliability", and "d" = "definition differs"
 
-sex,edu-level,age,unit,geo is further broken down into:
-1. sex-level: 'F_ED0-2', 'F_ED3-8', 'F_ED3_4','F_ED5-8', 'M_ED0-2', 'M_ED3-8', 'M_ED3_4', 'M_ED5-8', 'T_ED0-2', 'T_ED3-8', 'T_ED3_4', 'T_ED5-8'
-2. age: 25 to 64 years old
-3. unit: Percentage
-4. geo: NUTS2 codes for regions of Europe
+nace_r2,wstatus,unit,geo is further broken down into:
+1. wstatus-nace: 'EMP_A', 'EMP_B-E', 'EMP_C','EMP_F', 'EMP_G-I', 'EMP_G-J', 'EMP_J', 'EMP_K', 'EMP_K-N', 'EMP_L', 'EMP_M_N', 'EMP_O-Q', 'EMP_O-U', 'EMP_R-U', 'EMP_TOTAL'
+2. unit: Thousand
+3. geo: NUTS3 codes for regions of Europe
 
 The cleaned csv is broken up into 5 major families of variables:
-1. Date: Subset of years from 2000 to 2019 with values in the original dataset
-2. GeoID: NUTS2 codes
-3. Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years: float values 
-4. Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years: float values 
-5. Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_25To64Years: float values 
-6. Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years: float values 
-7. Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
-8. Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
-9. Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
-10. Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
-11. Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
-12. Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
-13. Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
-14. Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
+1. Date: Subset of years from 1995 to 2018 with values in the original dataset
+2. GeoID: NUTS3 codes
+3. Count_Person_Employed_NACE/A: float values 
+4. Count_Person_Employed_NACE/B-E: float values 
+5. Count_Person_Employed_NACE/C: float values 
+6. Count_Person_Employed_NACE/F: float values 
+7. Count_Person_Employed_NACE/G-I: float values 
+8. Count_Person_Employed_NACE/G_J: float values 
+9. Count_Person_Employed_NACE/J: float values 
+10. Count_Person_Employed_NACE/K: float values 
+11. Count_Person_Employed_NACE/K-N: float values 
+12. Count_Person_Employed_NACE/L: float values 
+13. Count_Person_Employed_NACE/M-N: float values 
+14. Count_Person_Employed_NACE/O-Q: float values 
+15. Count_Person_Employed_NACE/O-U: float values 
+16. Count_Person_Employed_NACE/R-U: float values 
+17. Count_Person_Employed: float values 
 
 
 ### Notes and Caveats
 
 - There are breaks in the time series of the original dataset. Note =”b”, value=":"
 - There are estimated values in the original dataset. Note =”e”
-- There are values with low reliability. Note = "u"
+- There are provisional values. Note = "p"
 - There are values that definition differs. Note = "d"
 - As written, we're importing the estimated, low reliable, and different definitions values as regular values.
 
@@ -77,26 +85,23 @@ The license is [available](https://ec.europa.eu/eurostat/about/policies/copyrigh
 
 ### Dataset Documentation and Relevant Links 
 
-- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/edat1_esms.htm>
+- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/reg_eco10_esms.htm>
 
 ## About the Import
 
 ### Artifacts
 
-#### Raw Data
-[edat_lfse_04.tsv](./edat_lfse_04.tsv)
-
 #### Cleaned Data
-[Eurostats_NUTS2_Edat.csv](./Eurostats_NUTS2_Edat.csv)
+[Eurostats_NUTS2_Edat.csv](./Eurostats_NUTS3_Empers.csv)
 
 #### Template MCFs
-[Eurostats_NUTS2_Edat.tmcf](./Eurostats_NUTS2_Edat.tmcf)
+[Eurostats_NUTS2_Edat.tmcf](./Eurostats_NUTS3_Empers.tmcf)
 
 #### StatisticalVariable Instance MCF
-[Eurostats_NUTS2_Edat.mcf](./Eurostats_NUTS2_Edat.mcf)
+[Eurostats_NUTS2_Edat.mcf](./Eurostats_NUTS3_Empers.mcf)
 
 #### Scripts
-[education_attainment_preprocess_gen_tmcf.py](./education_attainment_preprocess_gen_tmcf.py)
+[education_attainment_preprocess_gen_tmcf.py](./employed_persec_preprocess_gen_tmcf.py)
 
 #### Pre-Processing Validation
 
@@ -105,12 +110,12 @@ Automated validation:
 
 #### Processing Steps
 
-`Eurostats_NUTS2_Edat.mcf` and `Eurostats_NUTS2_Edat_Enum.mcf` were handwritten.
+`Eurostats_NUTS3_Empers.mcf` is handwritten.
 
-To generate `Eurostats_NUTS2_Edat.tmcf` and `Eurostats_NUTS2_Edat.csv`, run:
+To generate `Eurostats_NUTS3_Empers.tmcf` and `Eurostats_NUTS3_Empers.csv`, run:
 
 ```bash
-python3 education_attainment_preprocess_gen_tmcf.py
+python3 employed_persec_preprocess_gen_tmcf.py
 ```
 
 #### Post-Processing Validation
