@@ -56,7 +56,7 @@ def translate_wide_to_long(data_url):
 
     # Remove empty rows, clean values to have all digits.
     df = df[df.value.str.contains('[0-9]')]
-    possible_flags = [' ', ':', 'b', 'd', 'e', 'p', 'u']
+    possible_flags = [' ', ':']
     for flag in possible_flags:
         df['value'] = df['value'].str.replace(flag, '')
 
