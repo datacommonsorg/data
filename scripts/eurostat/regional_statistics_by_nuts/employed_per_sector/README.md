@@ -38,7 +38,7 @@ ISCED standard education levels:
 - R-U – Arts, entertainment and recreation, other service activities, activities of household and extra-territorial organizations and bodies.
 
 
-The original dataset is broken up into 3 major families of variables:
+The original dataset is broken up into the following major families of variables:
 1. Date: Years from 1995 to 2018 with some holes in time series marked with note "b" in the original dataset
 2. nace_r2,wstatus,unit,geo: e.g. THS,EMP,A,AT (Thousand, Employed Person, NACE/A, nuts/AT)
 3. value: some with note "p" = "provisional", "u" = "low reliability", and "d" = "definition differs"
@@ -92,16 +92,16 @@ The license is [available](https://ec.europa.eu/eurostat/about/policies/copyrigh
 ### Artifacts
 
 #### Cleaned Data
-[Eurostats_NUTS2_Edat.csv](./Eurostats_NUTS3_Empers.csv)
+[Eurostats_NUTS3_Empers.csv](./Eurostats_NUTS3_Empers.csv)
 
 #### Template MCFs
-[Eurostats_NUTS2_Edat.tmcf](./Eurostats_NUTS3_Empers.tmcf)
+[Eurostats_NUTS3_Empers.tmcf](./Eurostats_NUTS3_Empers.tmcf)
 
 #### StatisticalVariable Instance MCF
-[Eurostats_NUTS2_Edat.mcf](./Eurostats_NUTS3_Empers.mcf)
+[Eurostats_NUTS3_Empers.mcf](./Eurostats_NUTS3_Empers.mcf)
 
 #### Scripts
-[education_attainment_preprocess_gen_tmcf.py](./emp_persec_preprocess_gen_tmcf.py)
+[emp_persec_preprocess_gen_tmcf.py](./emp_persec_preprocess_gen_tmcf.py)
 
 #### Pre-Processing Validation
 
