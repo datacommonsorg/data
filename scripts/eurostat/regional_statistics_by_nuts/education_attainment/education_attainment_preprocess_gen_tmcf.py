@@ -20,7 +20,7 @@ _DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownlo
 _CLEANED_CSV = "./Eurostats_NUTS2_Edat.csv"
 _TMCF = "./Eurostats_NUTS2_Edat.tmcf"
 
-_OUTPUT_CLOUMNS = [
+_OUTPUT_COLUMNS = [
     'Date',
     'GeoId',
     'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years',
@@ -83,7 +83,7 @@ def translate_wide_to_long(data_url):
 def preprocess(df, cleaned_csv):
     with open(cleaned_csv, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
-                                fieldnames=_OUTPUT_CLOUMNS,
+                                fieldnames=_OUTPUT_COLUMNS,
                                 lineterminator='\n')
         writer.writeheader()
         for _, row in df.iterrows():
@@ -144,4 +144,4 @@ def get_template_mcf(output_columns):
 
 if __name__ == "__main__":
     preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
-    get_template_mcf(_OUTPUT_CLOUMNS)
+    get_template_mcf(_OUTPUT_COLUMNS)
