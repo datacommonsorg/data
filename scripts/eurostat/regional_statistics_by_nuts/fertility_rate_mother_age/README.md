@@ -11,63 +11,39 @@ Author: eftekhari-mhs
 
 ### Download URL
 
-[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_find3.tsv.gz).
 
-[Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=edat_lfse_04&lang=en)
+[Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=demo_r_find3&lang=en)
 
 ### Overview
 
-This dataset has the education attainment rate (percentage) for European Union (EU) countries to their NUTS2 geos. It has the attainment rate categorized by Male/Female/Total for 4 different levels of education for the intervals of [0-2], [3-8], [3-4], [5-8], where the digits are based on ISCED standard explained as follows:
+This dataset has the fertility rate, median and mean age of mother at childbirth for European Union (EU) countries to their NUTS3 geos over [2013-2018]. Codes used in the dataset: 
 
-ISCED standard education levels: 
-
-- Level 0 – Less than primary education
-- Level 1 – Primary education
-- Level 2 – Lower secondary education
-- Level 3 – Upper secondary education
-- Level 4 – Post-secondary non-tertiary education
-- Level 5 – Short-cycle tertiary education
-- Level 6 – Bachelor’s or equivalent level
-- Level 7 – Master’s or equivalent level
-- Level 8 – Doctoral or equivalent level 
+- TOTFERRT – Total fertility rate.
+- AGEMOTH – Mean age of women at childbirth.
+- MEDAGEMOTH – Median age of women at childbirth.
 
 
 The original dataset is broken up into 3 major families of variables:
-1. Date: Years from 2000 to 2019 with some holes in time series marked with note "b" in the original dataset
-2. sex,edu-level,age,unit,geo: e.g. F,ED0-2,Y25-64,PC,AT (Female, Lower Secondary or less,Years 25 to 64, Percent, nuts/AT)
-3. value: some with note "e"="estimated", "u" = "low reliability", and "d"="definition differs"
+1. Date: Years from 2013 to 2018 with some holes in time series marked with note "b" in the original dataset
+2. indic_de,unit,geo: e.g. AGEMOTH,YR,AL	 (Mean age of women at childbirth, Years, nuts/AL)
 
-sex,edu-level,age,unit,geo is further broken down into:
-1. sex-level: 'F_ED0-2', 'F_ED3-8', 'F_ED3_4','F_ED5-8', 'M_ED0-2', 'M_ED3-8', 'M_ED3_4', 'M_ED5-8', 'T_ED0-2', 'T_ED3-8', 'T_ED3_4', 'T_ED5-8'
-2. age: 25 to 64 years old
-3. unit: Percentage
-4. geo: NUTS2 codes for regions of Europe
+indic_de,unit,geo is further broken down into:
+1. indic_de: 'TOTFERRT', 'AGEMOTH', 'MEDAGEMOTH'
+2. unit: 'YR' (age), 'NR' (fertility rate)
+3. geo: NUTS3 codes for regions of Europe
 
-The cleaned csv is broken up into 5 major families of variables:
+The cleaned csv is broken up into the following major families of variables:
 1. Date: Subset of years from 2000 to 2019 with values in the original dataset
-2. GeoID: NUTS2 codes
-3. Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years: float values 
-4. Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years: float values 
-5. Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_25To64Years: float values 
-6. Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years: float values 
-7. Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
-8. Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
-9. Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
-10. Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female: float values 
-11. Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
-12. Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
-13. Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
-14. Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male: float values 
+2. GeoID: NUTS3 codes
+3. MeanMothersAge_BirthEvent: float values 
+4. MedianMothersAge_BirthEvent: float values 
+5. FertilityRate_Person_Female: float values 
 
 
 ### Notes and Caveats
 
 - There are breaks in the time series of the original dataset. Note =”b”, value=":"
-- There are estimated values in the original dataset. Note =”e”
-- There are values with low reliability. Note = "u"
-- There are values that definition differs. Note = "d"
-- As written, we're importing the estimated, low reliable, and different definitions values as regular values.
-
 
 ### License
 
@@ -77,7 +53,7 @@ The license is [available](https://ec.europa.eu/eurostat/about/policies/copyrigh
 
 ### Dataset Documentation and Relevant Links 
 
-- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/edat1_esms.htm>
+- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/demo_r_gind3_esms.htm>
 
 ## About the Import
 
@@ -87,16 +63,16 @@ The license is [available](https://ec.europa.eu/eurostat/about/policies/copyrigh
 [edat_lfse_04.tsv](./edat_lfse_04.tsv)
 
 #### Cleaned Data
-[Eurostats_NUTS2_Edat.csv](./Eurostats_NUTS2_Edat.csv)
+[Eurostats_NUTS2_Edat.csv](./Eurostats_NUTS3_FRate_Age.csv)
 
 #### Template MCFs
-[Eurostats_NUTS2_Edat.tmcf](./Eurostats_NUTS2_Edat.tmcf)
+[Eurostats_NUTS2_Edat.tmcf](./Eurostats_NUTS3_FRate_Age.tmcf)
 
 #### StatisticalVariable Instance MCF
-[Eurostats_NUTS2_Edat.mcf](./Eurostats_NUTS2_Edat.mcf)
+[Eurostats_NUTS2_Edat.mcf](./Eurostats_NUTS3_FRate_Age.mcf)
 
 #### Scripts
-[education_attainment_preprocess_gen_tmcf.py](./education_attainment_preprocess_gen_tmcf.py)
+[fertility_rate_preprocess_gen_tmcf.py](./fertility_rate_preprocess_gen_tmcf.py)
 
 #### Pre-Processing Validation
 
@@ -105,12 +81,12 @@ Automated validation:
 
 #### Processing Steps
 
-`Eurostats_NUTS2_Edat.mcf` and `Eurostats_NUTS2_Edat_Enum.mcf` were handwritten.
+`Eurostats_NUTS3_FRate_Age.mcf` was handwritten.
 
-To generate `Eurostats_NUTS2_Edat.tmcf` and `Eurostats_NUTS2_Edat.csv`, run:
+To generate `Eurostats_NUTS3_FRate_Age.tmcf` and `Eurostats_NUTS3_FRate_Age.csv`, run:
 
 ```bash
-python3 education_attainment_preprocess_gen_tmcf.py
+python3 fertility_rate_preprocess_gen_tmcf.py
 ```
 
 #### Post-Processing Validation
