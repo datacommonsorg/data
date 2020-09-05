@@ -59,17 +59,14 @@ The license is [available](https://ec.europa.eu/eurostat/about/policies/copyrigh
 
 ### Artifacts
 
-#### Raw Data
-[edat_lfse_04.tsv](./edat_lfse_04.tsv)
-
 #### Cleaned Data
-[Eurostats_NUTS2_Edat.csv](./Eurostats_NUTS3_FRate_Age.csv)
+[Eurostats_NUTS3_FRate_Age.csv](./Eurostats_NUTS3_FRate_Age.csv)
 
 #### Template MCFs
-[Eurostats_NUTS2_Edat.tmcf](./Eurostats_NUTS3_FRate_Age.tmcf)
+[Eurostats_NUTS3_FRate_Age.tmcf](./Eurostats_NUTS3_FRate_Age.tmcf)
 
 #### StatisticalVariable Instance MCF
-[Eurostats_NUTS2_Edat.mcf](./Eurostats_NUTS3_FRate_Age.mcf)
+[Eurostats_NUTS3_FRate_Age.mcf](./Eurostats_NUTS3_FRate_Age.mcf)
 
 #### Scripts
 [fertility_rate_preprocess_gen_tmcf.py](./fertility_rate_preprocess_gen_tmcf.py)
