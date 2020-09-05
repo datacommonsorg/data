@@ -16,25 +16,16 @@ import pandas as pd
 import io
 import csv
 
-_DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz"
-_CLEANED_CSV = "./Eurostats_NUTS2_Edat.csv"
-_TMCF = "./Eurostats_NUTS2_Edat.tmcf"
+_DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_find3.tsv.gz"
+_CLEANED_CSV = "./Eurostats_NUTS3_FRate_Age.csv"
+_TMCF = "./Eurostats_NUTS3_FRate_Age.tmcf"
 
-_OUTPUT_COLUMNS = [
+_OUTPUT_CLOUMNS = [
     'Date',
     'GeoId',
-    'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years',
-    'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years',
-    'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_25To64Years',
-    'Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years',
-    'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female',
-    'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female',
-    'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female',
-    'Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female',
-    'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male',
-    'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male',
-    'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male',
-    'Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male',
+    'MeanMothersAge_BirthEvent',
+    'MedianMothersAge_BirthEvent',
+    'FertilityRate_Person_Female',
 ]
 
 
@@ -56,26 +47,23 @@ def translate_wide_to_long(data_url):
     new = df[header[0]].str.split(",", n=-1, expand=True)
     df = df.join(
         pd.DataFrame({
-            'geo': new[4],
-            'unit': new[3],
-            'age': new[2],
-            'level': new[1],
-            'sex': new[0]
+            'geo': new[2],
+            'unit': new[1],
+            'indic_de': new[0]
         }))
+    df["indicator_unit"] = df["indic_de"] + "_" + df["unit"]
     df.drop(columns=[header[0]], inplace=True)
-
-    df["sex-level"] = df["sex"] + "_" + df["level"]
 
     # Remove empty rows, clean values to have all digits.
     df = df[df.value.str.contains('[0-9]')]
-    possible_flags = [' ', ':', 'b', 'd', 'e', 'u']
+    possible_flags = [' ', ':', 'b', 'd', 'e', 'p', 'u']
     for flag in possible_flags:
         df['value'] = df['value'].str.replace(flag, '')
 
     df['value'] = pd.to_numeric(df['value'])
     df = df.pivot_table(values='value',
-                        index=['geo', 'time', 'unit', 'age'],
-                        columns=['sex-level'],
+                        index=['geo', 'time'],
+                        columns=['indicator_unit'],
                         aggfunc='first').reset_index().rename_axis(None, axis=1)
     return df
 
@@ -83,65 +71,41 @@ def translate_wide_to_long(data_url):
 def preprocess(df, cleaned_csv):
     with open(cleaned_csv, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
-                                fieldnames=_OUTPUT_COLUMNS,
+                                fieldnames=_OUTPUT_CLOUMNS,
                                 lineterminator='\n')
         writer.writeheader()
         for _, row in df.iterrows():
             writer.writerow({
-                'Date':
-                    '%s' % (row['time'][:4]),
-                'GeoId':
-                    'dcid:nuts/%s' % (row['geo']),
-                'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years':
-                    (row['T_ED0-2']),
-                'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years':
-                    (row['T_ED3-8']),
-                'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_25To64Years':
-                    (row['T_ED3_4']),
-                'Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years':
-                    (row['T_ED5-8']),
-                'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F_ED0-2']),
-                'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F_ED3-8']),
-                'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F_ED3_4']),
-                'Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F_ED5-8']),
-                'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M_ED0-2']),
-                'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M_ED3-8']),
-                'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M_ED3_4']),
-                'Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M_ED5-8']),
+                'Date': '%s' % (row['time'][:4]),
+                'GeoId': 'dcid:nuts/%s' % row['geo'],
+                'MeanMothersAge_BirthEvent': (row['AGEMOTH_YR']),
+                'MedianMothersAge_BirthEvent': (row['MEDAGEMOTH_YR']),
+                'FertilityRate_Person_Female': (row['TOTFERRT_NR']),
             })
 
 
-def get_template_mcf(output_columns):
+def get_template_mcf():
     # Automate Template MCF generation since there are many Statistical Variables.
     TEMPLATE_MCF_TEMPLATE = """
-  Node: E:EurostatsNUTS2_Education_Attainment->E{index}
+  Node: E:Eurostats_NUTS3_FRate_Age->E{index}
   typeOf: dcs:StatVarObservation
   variableMeasured: dcs:{stat_var}
-  observationAbout: C:EurostatsNUTS2_Education_Attainment->GeoId
-  observationDate: C:EurostatsNUTS2_Education_Attainment->Date
-  value: C:EurostatsNUTS2_Education_Attainment->{stat_var}
-  scalingFactor: 100
+  observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
+  observationDate: C:Eurostats_NUTS3_FRate_Age->Date
+  value: C:Eurostats_NUTS3_FRate_Age->{stat_var}
   measurementMethod: dcs:EurostatRegionalStatistics
   """
 
-    stat_vars = output_columns[2:]
+    stat_vars = _OUTPUT_CLOUMNS[2:]
     with open(_TMCF, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
                     'index': i,
-                    'stat_var': output_columns[2:][i]
+                    'stat_var': _OUTPUT_CLOUMNS[2:][i]
                 }))
 
 
 if __name__ == "__main__":
     preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
-    get_template_mcf(_OUTPUT_COLUMNS)
+    get_template_mcf()
