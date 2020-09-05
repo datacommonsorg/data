@@ -101,7 +101,7 @@ The license is [available](https://ec.europa.eu/eurostat/about/policies/copyrigh
 [Eurostats_NUTS2_Edat.mcf](./Eurostats_NUTS3_Empers.mcf)
 
 #### Scripts
-[education_attainment_preprocess_gen_tmcf.py](./employed_persec_preprocess_gen_tmcf.py)
+[education_attainment_preprocess_gen_tmcf.py](./emp_persec_preprocess_gen_tmcf.py)
 
 #### Pre-Processing Validation
 
@@ -115,7 +115,7 @@ Automated validation:
 To generate `Eurostats_NUTS3_Empers.tmcf` and `Eurostats_NUTS3_Empers.csv`, run:
 
 ```bash
-python3 employed_persec_preprocess_gen_tmcf.py
+python3 emp_persec_preprocess_gen_tmcf.py
 ```
 
 #### Post-Processing Validation
