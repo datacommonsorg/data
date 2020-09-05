@@ -142,17 +142,6 @@ def get_template_mcf(output_columns):
                 }))
 
 
-def test_col_names(cleaned_csv, tmcf):
-    """ check if all the column names specified in the template mcf
-        is found in the CSV file"""
-    cols = pd.read_csv(cleaned_csv, nrows=0).columns
-    with open(tmcf, "r") as file:
-        for line in file:
-            if " C:" in line:
-                col_name = line[:-1].split("->")[1]
-                assert col_name in cols
-
-
 if __name__ == "__main__":
     preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
     get_template_mcf(_OUTPUT_CLOUMNS)
