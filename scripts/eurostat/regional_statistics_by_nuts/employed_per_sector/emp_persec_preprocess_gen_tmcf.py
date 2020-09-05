@@ -66,7 +66,7 @@ def translate_wide_to_long(data_url):
         }))
     df.drop(columns=[header[0]], inplace=True)
 
-    df["wstatus-nace"] = df["wstatus"] + "_"+df["nace_r2"]
+    df["wstatus-nace"] = df["wstatus"] + "_"+ df["nace_r2"]
 
     # Remove empty rows, clean values to have all digits.
     df = df[df.value.str.contains('[0-9]')]
@@ -92,40 +92,23 @@ def preprocess(df, cleaned_csv):
         writer.writeheader()
         for _, row in df.iterrows():
             writer.writerow({
-                'Date':
-                    '%s' % (row['time'][:4]),
-                'GeoId':
-                    'dcid:nuts/%s' % (row['geo']),
-                'Count_Person_Employed_NACE/A':
-                    (row['EMP_A']),
-                'Count_Person_Employed_NACE/B-E':
-                    (row['EMP_B-E']),
-                'Count_Person_Employed_NACE/C':
-                    (row['EMP_C']),
-                'Count_Person_Employed_NACE/F':
-                    (row['EMP_F']),
-                'Count_Person_Employed_NACE/G-I':
-                    (row['EMP_G-I']),
-                'Count_Person_Employed_NACE/G-J':
-                    (row['EMP_G-J']),
-                'Count_Person_Employed_NACE/J':
-                    (row['EMP_J']),
-                'Count_Person_Employed_NACE/K':
-                    (row['EMP_K']),
-                'Count_Person_Employed_NACE/K-N':
-                    (row['EMP_K-N']),
-                'Count_Person_Employed_NACE/L':
-                    (row['EMP_L']),
-                'Count_Person_Employed_NACE/M-N':
-                    (row['EMP_M_N']),
-                'Count_Person_Employed_NACE/O-Q':
-                    (row['EMP_O-Q']),
-                'Count_Person_Employed_NACE/O-U':
-                    (row['EMP_O-U']),
-                'Count_Person_Employed_NACE/R-U':
-                    (row['EMP_R-U']),
-                'Count_Person_Employed':
-                    (row['EMP_TOTAL']),
+                'Date': '%s' % (row['time'][:4]),
+                'GeoId': 'dcid:nuts/%s' % (row['geo']),
+                'Count_Person_Employed_NACE/A': (row['EMP_A']),
+                'Count_Person_Employed_NACE/B-E': (row['EMP_B-E']),
+                'Count_Person_Employed_NACE/C': (row['EMP_C']),
+                'Count_Person_Employed_NACE/F': (row['EMP_F']),
+                'Count_Person_Employed_NACE/G-I': (row['EMP_G-I']),
+                'Count_Person_Employed_NACE/G-J': (row['EMP_G-J']),
+                'Count_Person_Employed_NACE/J': (row['EMP_J']),
+                'Count_Person_Employed_NACE/K': (row['EMP_K']),
+                'Count_Person_Employed_NACE/K-N': (row['EMP_K-N']),
+                'Count_Person_Employed_NACE/L': (row['EMP_L']),
+                'Count_Person_Employed_NACE/M-N': (row['EMP_M_N']),
+                'Count_Person_Employed_NACE/O-Q': (row['EMP_O-Q']),
+                'Count_Person_Employed_NACE/O-U': (row['EMP_O-U']),
+                'Count_Person_Employed_NACE/R-U': (row['EMP_R-U']),
+                'Count_Person_Employed': (row['EMP_TOTAL']),
             })
 
 
