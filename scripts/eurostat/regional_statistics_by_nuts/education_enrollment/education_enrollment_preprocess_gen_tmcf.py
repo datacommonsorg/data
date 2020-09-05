@@ -76,7 +76,6 @@ def preprocess(df, cleaned_csv):
         writer.writeheader()
         for _, row in df.iterrows():
             writer.writerow({
-                # 'Date': '%s-%s-%s' % (row['time'][:4], '01', '01'),
                 'Date':
                     '%s' % (row['time'][:4]),
                 'GeoId':
