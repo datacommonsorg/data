@@ -66,7 +66,7 @@ def translate_wide_to_long(data_url):
         }))
     df.drop(columns=[header[0]], inplace=True)
 
-    df["wstatus-nace"] = df["wstatus"] + "_"+ df["nace_r2"]
+    df["wstatus-nace"] = df["wstatus"] + "_" + df["nace_r2"]
 
     # Remove empty rows, clean values to have all digits.
     df = df[df.value.str.contains('[0-9]')]
