@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"sync"
+	"time"
 )
 
 var (
@@ -23,7 +24,8 @@ var (
 )
 
 const (
-	batchSize          = 200
+	// Query limit: 50 qps
+	batchSize          = 50
 	placeId2DcidBucket = "datcom-browser-prod.appspot.com"
 	placeId2DcidObject = "placeid2dcid.json"
 )
@@ -236,6 +238,8 @@ func geocodePlaces(mapCli MapsClient, placeId2Dcid *map[string]string, tinfo *ta
 			go geocodeOneRow(j, placeId2Dcid, tinfo, mapCli, &wg)
 		}
 		wg.Wait()
+		// Make sure we are under the 50 QPS limit set by Google Maps API.
+		time.Sleep(1 * time.Second)
 		log.Printf("Processed %d rows, %d left.", jMax, len(tinfo.rows)-jMax)
 	}
 	return nil

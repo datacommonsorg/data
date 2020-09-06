@@ -2456,26 +2456,51 @@ subClassOf: schema:Enumeration
 name: "HumanProteinOccurrenceReliabilityEnum"
 description: "The human protein tissue atlas reliability enumeration."
 
-Node: dcid:ProteinTissueAtlasReliabilityEnhanced
+Node: dcid:ProteinOccurrenceReliabilityEnhanced
 typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
-name: "ProteinTissueAtlasReliabilityEnhanced"
+name: "ProteinOccurrenceReliabilityEnhanced"
 description: "One or more antibodies are enhanced validated and there is no contradicting data, for example literature describes experimental evidence for a different location."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
-Node: dcid:ProteinTissueAtlasReliabilitySupported
+Node: dcid:ProteinOccurrenceReliabilitySupported
 typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
-name: "ProteinTissueAtlasReliabilitySupported"
+name: "ProteinOccurrenceReliabilitySupported"
 description: "There is no enhanced validation of the used antibody, but the annotated localization is reported in literature."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
-Node: dcid:ProteinTissueAtlasReliabilityApproved
+Node: dcid:ProteinOccurrenceReliabilityApproved
 typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
-name: "ProteinTissueAtlasReliabilityApproved"
+name: "ProteinOccurrenceReliabilityApproved"
 description: "If the localization of the protein has not been previously described and was detected by only one antibody without additional antibody validation."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
 
-Node: dcid:ProteinTissueAtlasReliabilityUncertain
+Node: dcid:ProteinOccurrenceReliabilityUncertain
 typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
-name: "ProteinTissueAtlasReliabilityUncertain"
+name: "ProteinOccurrenceReliabilityUncertain"
 description: "If the antibody-staining pattern contradicts experimental data or no expression is detected on the RNA level."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
+
+Node: dcid:AntibodyTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "AntibodyTypeEnum"
+description: "The antibody type enumeration which includes bispecific antibody, nanobody and DARPins."
+
+Node: dcid:BispecificAntibody
+typeOf: dcs:AntibodyTypeEnum
+name: "BispecificAntibody"
+description: "The term bispecific antibody (bsAb) is used to describe a large family of molecules designed to recognize two different epitopes or antigens."
+descriptionUrl: "https://www.nature.com/articles/s41573-019-0028-1"
+
+Node: dcid:NanobodyAntibody
+typeOf: dcs:AntibodyTypeEnum
+name: "NanobodyAntibody"
+description: "A single-domain antibody (sdAb), also known as a nanobody, is an antibody fragment consisting of a single monomeric variable antibody domain."
+descriptionUrl: "https://en.wikipedia.org/wiki/Single-domain_antibody"
+
+Node: dcid:DarpinAntibody
+typeOf: dcs:AntibodyTypeEnum
+name: "DarpinAntibody "
+description: "DARPins (an acronym for designed ankyrin repeat proteins) are genetically engineered antibody mimetic proteins typically exhibiting highly specific and high-affinity target protein binding."
+descriptionUrl: "https://en.wikipedia.org/wiki/DARPin"
+

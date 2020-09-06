@@ -37,6 +37,16 @@ typeOf: dcs:BondYieldMeasurementEnum
 description: "Indicates that the yield data are extrapolated against a yield curve, which relates the yield on a security to its time to maturity, to estimate the yield of the bond if it had exactly some maturity"
 descriptionUrl: "https://www.investopedia.com/terms/c/cmtindex.asp"
 
+Node: dcid:WikipediaInfoBox
+name: "WikipediaInfoBox"
+typeOf: dcs:StatisticSourceEnum
+description: "Measurement method of Wikipedia population from Google KG."
+
+Node: dcid:GoogleKGHumanCurated
+name: "GoogleKGHumanCurated"
+typeOf: dcs:StatisticSourceEnum
+description: "Measurement method of human curated data from Google KG."
+
 Node: dcid:PriceIndexChainingEnum
 name: "PriceIndexChainingEnum"
 typeOf: schema:Class
