@@ -173,23 +173,19 @@ def parse_series_id(series_id):
                       series_id=series_id)
 
 
-def generate_unit_enums(dest, info_df, targets):
+def generate_unit_enums(info_df, targets) -> Set[str]:
     generated = set()
-    with open(dest, "w+") as out:
-        for series_id in targets:
-            unit, desc = parse_series_id(series_id).get_unit(info_df)
-            if unit in generated:
-                continue
-            generated.add(unit)
-            out.write((f"Node: dcid:{unit}\n"
+    for series_id in targets:
+        unit, desc = parse_series_id(series_id).get_unit(info_df)
+        generated.add((f"Node: dcid:{unit}\n"
                        "typeOf: dcs:UnitOfMeasure\n"
                        f"description: \"{desc}\"\n"
                        "descriptionUrl: \"https://www.bls.gov/cpi/"
-                       "technical-notes/home.htm\"\n"))
-            out.write("\n")
+                       "technical-notes/home.htm\"\n\n"))
+    return generated
 
 
-def generate_pop_type_enums(url, dest, targets):
+def generate_pop_type_enums(url, targets) -> Set[str]:
     df = download_df(url, sep="\t", usecols=("item_code", "item_name"))
     if "item_code" not in df.columns or "item_name" not in df.columns:
         raise ValueError("item_code or/and item_name columns missing")
@@ -204,18 +200,18 @@ def generate_pop_type_enums(url, dest, targets):
             raise ValueError(
                 f"{series_info} does not have an item_code mapping")
 
-    with open(dest, "w+") as out:
-        out.write(("Node: dcid:BLSExpenditureTypeEnum\n"
-                   "typeOf: dcs:Class\n"
-                   "subClassOf: schema:Enumeration\n"
-                   "description: "
-                   "\"An enumeration of types of consumer expenditures.\"\n"))
-        out.write("\n")
-        for row in df.itertuples(index=False):
-            out.write((f"Node: dcid:BLS_{row.item_code}\n"
+    generated = set()
+    generated.add("Node: dcid:BLSExpenditureTypeEnum\n"
+                  "typeOf: dcs:Class\n"
+                  "subClassOf: schema:Enumeration\n"
+                  "description: "
+                  "\"An enumeration of types of consumer expenditures.\"\n\n")
+
+    for row in df.itertuples(index=False):
+        generated.add((f"Node: dcid:BLS_{row.item_code}\n"
                        "typeOf: dcs:BLSExpenditureTypeEnum\n"
-                       f"description: \"{row.item_name}\"\n"))
-            out.write("\n")
+                       f"description: \"{row.item_name}\"\n\n"))
+    return generated
 
 
 def generate_csv(urls, dest, info_df, targets):
@@ -279,20 +275,29 @@ def filter_series(info_df: pd.DataFrame) -> Set[str]:
     return targets
 
 
+def write_set(dest, to_write: Set[str]):
+    with open(dest, "w") as out:
+        for elem in to_write:
+            out.write(elem)
+
+
 def main():
     """Runs the script. See module docstring."""
-
+    unit_enums = set()
+    pop_type_enums = set()
     for series_type, urls in SERIES_TYPES_TO_DATA_URLS.items():
         info_df = download_df(SERIES_TYPES_TO_INFO_URLS[series_type],
                               sep=r"\s*\t")
         targets = filter_series(info_df)
-        generate_pop_type_enums(
-            SERIES_TYPES_TO_EXPENDITURE_TYPES_URLS[series_type],
-            f"{series_type}_pop_type_enums.mcf", targets)
-        generate_unit_enums(f"{series_type}_unit_enums.mcf", info_df, targets)
+        pop_type_enums.update(
+            generate_pop_type_enums(
+                SERIES_TYPES_TO_EXPENDITURE_TYPES_URLS[series_type], targets))
+        unit_enums.update(generate_unit_enums(info_df, targets))
         generate_statvars(f"{series_type}.mcf", targets)
         generate_csv(SERIES_TYPES_TO_DATA_URLS[series_type],
                      f"{series_type}.csv", info_df, targets)
+    write_set("unit_enums.mcf", unit_enums)
+    write_set("pop_type_enums.mcf", pop_type_enums)
 
 
 if __name__ == "__main__":
