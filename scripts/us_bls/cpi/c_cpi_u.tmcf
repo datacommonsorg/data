@@ -1,0 +1,8 @@
+Node: E:c_cpi_u->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:c_cpi_u->statvar
+measurementMethod: dcs:BLSChained
+observationAbout: dcid:country/USA
+observationDate: C:c_cpi_u->date
+value: C:c_cpi_u->value
+unit: C:c_cpi_u->unit

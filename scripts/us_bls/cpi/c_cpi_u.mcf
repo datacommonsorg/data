@@ -1,0 +1,232 @@
+Node: dcid:ConsumerPriceIndex_BLS_SAT1_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAT1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAG_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAG
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SA0_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SA0
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAH_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAH
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAM1_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAM1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAM_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAM
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SA0E_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SA0E
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SETA01_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SETA01
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SETG_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SETG
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAF11_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAF11
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAH2_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAH2
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAF116_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAF116
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAE1_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAE1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAM2_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAM2
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SA0L1E_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SA0L1E
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SEFV_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SEFV
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAD_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAD
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAE_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAE
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAF1_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAF1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAN_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAN
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAT_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAT
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAA_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAA
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAS_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAS
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAH3_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAH3
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAE2_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAE2
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAR_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAR
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAC_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAC
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAF_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAF
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
+Node: dcid:ConsumerPriceIndex_BLS_SAH1_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLS_SAH1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+
