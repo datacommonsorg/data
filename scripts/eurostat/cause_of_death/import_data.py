@@ -351,7 +351,7 @@ class EurostatCauseOfDeathImporter:
             "geo", "time"
         ]).pivot(
             columns="statistical_variable")['value'].reset_index().rename_axis(
-            None, axis=1))
+                None, axis=1))
         # Fill missing 'geo' values with a colon.
         self.preprocessed_df.fillna(': ', inplace=True)
 
