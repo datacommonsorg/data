@@ -17,7 +17,7 @@ Author: eftekhari-mhs
 
 ### Overview
 
-This dataset has the the employee per sector (thousand persons) for European Union (EU) countries to their NUTS3 geos. It has the employees and employed persons counts categorized by NACE classification for 15 different economic activities in [1995-2018]. The NACE categories are as follows:
+This dataset has the employee per sector (thousand persons) for European Union (EU) countries specified by their NUTS3 geos. It has the employees and employed persons counts categorized by NACE classification for 15 different economic activities in [1995-2018]. The NACE categories are as follows:
 
 ISCED standard education levels: 
 
@@ -56,7 +56,7 @@ The cleaned csv is broken up into 5 major families of variables:
 5. Count_Person_Employed_NACE/C: float values 
 6. Count_Person_Employed_NACE/F: float values 
 7. Count_Person_Employed_NACE/G-I: float values 
-8. Count_Person_Employed_NACE/G_J: float values 
+8. Count_Person_Employed_NACE/G-J: float values 
 9. Count_Person_Employed_NACE/J: float values 
 10. Count_Person_Employed_NACE/K: float values 
 11. Count_Person_Employed_NACE/K-N: float values 
