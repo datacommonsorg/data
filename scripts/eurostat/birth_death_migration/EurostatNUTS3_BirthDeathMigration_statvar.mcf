@@ -1,0 +1,43 @@
+Node: dcid:Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BirthEvent
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_MortalityEvent
+typeOf: dcs:StatisticalVariable
+populationType: schema:MortalityEvent
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:IncrementalCount_Person
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:incrementalCount
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthEvent_AsAFractionOfCount_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BirthEvent
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person
+
+Node: dcid:Count_MortalityEvent_AsAFractionOfCount_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MortalityEvent
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person
+
+Node: dcid:GrowthRate_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:count
+statType: dcs:growthRate
