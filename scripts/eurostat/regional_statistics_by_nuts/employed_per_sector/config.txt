@@ -1,14 +1,14 @@
 import: {
-  import_name: "Eurostats_NUTS2_Education_Attainment_by_Gender"
-  provenance_url: "https://datcom-browser-dev2.googleplex.com/kg?dcid=dc/kzsldr"
-  provenance_description: "The education attainment level for EU countries down to NUTS2 regions"
+  import_name: "Eurostats_NUTS3_EMPERS"
+  provenance_url: "https://datcom-browser-dev2.googleplex.com/kg?dcid=dc/m41d89"
+  provenance_description: "Number of employed persons using NACE standard provided by Eruostats."
   # Path to the resolved MCF. Can be a repeated field.
-  mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/Eurostats_NUTS2_Education_Attainment_by_Gender/nodes.mcf-00000-of-00001"
-  enums: "https://storage.cloud.google.com/import_server/dev/Enum_nodes_Education_attainment/Enum_nodes_Education_attainment.mcf"
+  mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/Eurostats_NUTS3_EMPERS/nodes.mcf-00000-of-00001"
+  enums: "https://storage.cloud.google.com/resolved_mcf/template_mcf_imports/eurostats/employed_per_sector/Eurostats_NUTS3_Empers.mcf"
   # First date of imported data.
   start_date: "2020-01-01"
   # Last date of imported data.
-  end_date: "2020-07-14"
+  end_date: "2020-07-17"
   # Source data release schedule.
   update_frequency: "P1Y"
   next_release_date: "2021-05-14"
