@@ -15362,7 +15362,7 @@ typeOf: dcs:UnitOfMeasure
 description: "The reference base is 1967 equals 100."
 descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
 
-Node: dcid:InexPointBasePeriod1982To1984Equals100
+Node: dcid:IndexPointBasePeriod1982To1984Equals100
 typeOf: dcs:UnitOfMeasure
 description: "The reference base is 1982 to 1984 equals 100."
 descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
