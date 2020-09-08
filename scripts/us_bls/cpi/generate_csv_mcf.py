@@ -210,7 +210,7 @@ def generate_pop_type_enums(url, targets) -> Set[str]:
     for row in df.itertuples(index=False):
         generated.add((f"Node: dcid:BLS_{row.item_code}\n"
                        "typeOf: dcs:BLSExpenditureTypeEnum\n"
-                       f"description: \"{row.item_name}\"\n\n"))
+                       f"name: \"{row.item_name}\"\n\n"))
     return generated
 
 
