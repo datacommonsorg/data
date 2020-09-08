@@ -17,7 +17,7 @@ Author: eftekhari-mhs
 
 ### Overview
 
-This dataset has the fertility rate, median and mean age of mother at childbirth for European Union (EU) countries to their NUTS3 geos over [2013-2018]. Codes used in the dataset: 
+This dataset has the fertility rate, median and mean age of mother at childbirth for European Union (EU) countries specified by their NUTS3 geos over [2013-2018]. Codes used in the dataset: 
 
 - TOTFERRT – Total fertility rate.
 - AGEMOTH – Mean age of women at childbirth.
@@ -25,7 +25,7 @@ This dataset has the fertility rate, median and mean age of mother at childbirth
 
 
 The original dataset is broken up into 3 major families of variables:
-1. Date: Years from 2013 to 2018 with some holes in time series marked with note "b" in the original dataset
+1. Date: Years from 2013 to 2018.
 2. indic_de,unit,geo: e.g. AGEMOTH,YR,AL	 (Mean age of women at childbirth, Years, nuts/AL)
 
 indic_de,unit,geo is further broken down into:
@@ -34,7 +34,7 @@ indic_de,unit,geo is further broken down into:
 3. geo: NUTS3 codes for regions of Europe
 
 The cleaned csv is broken up into the following major families of variables:
-1. Date: Subset of years from 2000 to 2019 with values in the original dataset
+1. Date: Years from 2013 to 2018 with values in the original dataset.
 2. GeoID: NUTS3 codes
 3. MeanMothersAge_BirthEvent: float values 
 4. MedianMothersAge_BirthEvent: float values 
