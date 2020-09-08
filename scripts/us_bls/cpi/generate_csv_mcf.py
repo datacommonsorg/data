@@ -157,7 +157,7 @@ class SeriesInfo:
             year_start, year_end, _ = re.split(r"[-=]", base)
             year_end = year_start[:2] + year_end
             return (
-                f"InexPointBasePeriod{year_start}To{year_end}Equals100",
+                f"IndexPointBasePeriod{year_start}To{year_end}Equals100",
                 f"The reference base is {year_start} to {year_end} equals 100.")
         year, _ = base.split("=")
         return (f"IndexPointBasePeriod{year}Equals100",
