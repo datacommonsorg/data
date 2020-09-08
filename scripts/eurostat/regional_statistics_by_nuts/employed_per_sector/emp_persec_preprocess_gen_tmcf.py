@@ -20,7 +20,7 @@ _DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownlo
 _CLEANED_CSV = "./Eurostats_NUTS3_Empers.csv"
 _TMCF = "./Eurostats_NUTS3_Empers.tmcf"
 
-_OUTPUT_CLOUMNS = [
+_OUTPUT_COLUMNS = [
     'Date',
     'GeoId',
     'Count_Person_Employed_NACE/A',
@@ -87,7 +87,7 @@ def translate_wide_to_long(data_url):
 def preprocess(df, cleaned_csv):
     with open(cleaned_csv, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
-                                fieldnames=_OUTPUT_CLOUMNS,
+                                fieldnames=_OUTPUT_COLUMNS,
                                 lineterminator='\n')
         writer.writeheader()
         for _, row in df.iterrows():
@@ -125,13 +125,13 @@ def get_template_mcf():
   measurementMethod: dcs:EurostatRegionalStatistics
   """
 
-    stat_vars = _OUTPUT_CLOUMNS[2:]
+    stat_vars = _OUTPUT_COLUMNS[2:]
     with open(_TMCF, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
                     'index': i,
-                    'stat_var': _OUTPUT_CLOUMNS[2:][i]
+                    'stat_var': _OUTPUT_COLUMNS[2:][i]
                 }))
 
 
