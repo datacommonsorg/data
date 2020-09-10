@@ -88,7 +88,7 @@ def preprocess_data(raw_df):
     return preprocessed_df
 
 
-def clean_data(preprocessed_df):
+def clean_data(preprocessed_df, output_path):
     """Drops unnecessary columns that are not needed for data import and reformat column names."""
     if preprocessed_df is None:
         raise ValueError("Uninitialized value of processed data frame. "
@@ -101,8 +101,8 @@ def clean_data(preprocessed_df):
     # columns
     # replace colon with NaN.
     clean_df = clean_df.replace(':', '')
-    clean_df.to_csv(FINAL_CSV_NAME, index=False)
-    clean_df = pd.read_csv(FINAL_CSV_NAME)
+    clean_df.to_csv(output_path, index=False)
+    clean_df = pd.read_csv(output_path)
 
     clean_df['geo'] = 'dcid:nuts/' + clean_df['geo']
     original_names = [
@@ -120,7 +120,7 @@ def clean_data(preprocessed_df):
     clean_df[['GBIRTHRT', 'GDEATHRT',
               'GROWRT']] /= 1000  # apply scaling factor of 1000
     clean_df.columns = new_names
-    clean_df.to_csv(FINAL_CSV_NAME, index=False)
+    clean_df.to_csv(output_path, index=False)
 
 
 if __name__ == '__main__':
@@ -128,4 +128,4 @@ if __name__ == '__main__':
     FINAL_CSV_NAME = 'demo_r_gind3_final_stage.csv'
     raw_df = download_data()
     preprocessed_df = preprocess_data(raw_df)
-    clean_data(preprocessed_df)
+    clean_data(preprocessed_df, FINAL_CSV_NAME)
