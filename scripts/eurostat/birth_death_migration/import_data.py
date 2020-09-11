@@ -105,7 +105,7 @@ def preprocess_data(raw_df):
     for column_name in preprocessed_df.columns:
         new_column_names.append(column_name.replace(',', '|'))
     preprocessed_df.columns = new_column_names
-    # split the statistical variable and its note into two columns
+    # split the statistical value and its note into two columns
     # split notes out of values.
     # ex: "5598920 b" -> "5598920", "b".
     # ex: "5665118" -> "5665118", ""
@@ -137,12 +137,13 @@ def clean_data(preprocessed_df, output_path):
     new_names = [
         'geo', 'time', 'Count_Death',
         'Count_BirthEvent_AsAFractionOf_Count_Person',
-        'Count_Death_AsAFractionOf_Count_Person',
-        'IncrementalCount_Person', 'GrowthRate_Count_Person', 'Count_Person',
-        'Count_BirthEvent'
+        'Count_Death_AsAFractionOf_Count_Person', 'IncrementalCount_Person',
+        'GrowthRate_Count_Person', 'Count_Person', 'Count_BirthEvent'
     ]
     clean_df = clean_df[original_names]
-    clean_df[['GBIRTHRT', 'GDEATHRT', 'GROWRT']] = clean_df[['GBIRTHRT', 'GDEATHRT', 'GROWRT']].apply(pd.to_numeric)
+    clean_df[['GBIRTHRT', 'GDEATHRT',
+              'GROWRT']] = clean_df[['GBIRTHRT', 'GDEATHRT',
+                                     'GROWRT']].apply(pd.to_numeric)
     clean_df[['GBIRTHRT', 'GDEATHRT',
               'GROWRT']] /= 1000  # apply scaling factor of 1000
     clean_df.columns = new_names

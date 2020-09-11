@@ -4,14 +4,14 @@ populationType: schema:Person
 measuredProperty: dcs:incrementalCount
 statType: dcs:measuredValue
 
-Node: dcid:Count_BirthEvent_AsAFractionOfCount_Person
+Node: dcid:Count_BirthEvent_AsAFractionOf_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BirthEvent
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person
 
-Node: dcid:Count_Death_AsAFractionOfCount_Person
+Node: dcid:Count_Death_AsAFractionOf_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MortalityEvent
 measuredProperty: dcs:count
