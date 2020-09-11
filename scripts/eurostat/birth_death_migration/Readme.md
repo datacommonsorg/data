@@ -5,7 +5,7 @@ Author: jinpz
 ## Table of Contents
 
 1. [About the Dataset](#about-the-dataset)
-1. [Import Procedure](#Import-Procedure)
+1. [Import Procedure](#import-procedure)
 
 ## About the Dataset
 

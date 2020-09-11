@@ -1,24 +1,24 @@
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_MortalityEvent
+variableMeasured: dcs:Count_Death
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
-value: C:EurostatNUTS3_BirthDeathMigration->Count_MortalityEvent
+value: C:EurostatNUTS3_BirthDeathMigration->Count_Death
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthEvent_AsAFractionOfCount_Person
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
-value: C:EurostatNUTS3_BirthDeathMigration->Count_BirthEvent_AsAFractionOfCount_Person
+value: C:EurostatNUTS3_BirthDeathMigration->Count_BirthEvent_AsAFractionOf_Count_Person
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_MortalityEvent_AsAFractionOfCount_Person
+variableMeasured: dcs:Count_Death_AsAFractionOfCount_Person
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
-value: C:EurostatNUTS3_BirthDeathMigration->Count_MortalityEvent_AsAFractionOfCount_Person
+value: C:EurostatNUTS3_BirthDeathMigration->Count_Death_AsAFractionOf_Count_Person
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E3
 typeOf: dcs:StatVarObservation

@@ -1,4 +1,4 @@
-geo,time,Count_MortalityEvent,Count_BirthEvent_AsAFractionOfCount_Person,Count_MortalityEvent_AsAFractionOfCount_Person,IncrementalCount_Person,GrowthRate_Count_Person,Count_Person,Count_BirthEvent
+geo,time,Count_Death,Count_BirthEvent_AsAFractionOf_Count_Person,Count_Death_AsAFractionOf_Count_Person,IncrementalCount_Person,GrowthRate_Count_Person,Count_Person,Count_BirthEvent
 dcid:nuts/AL,2000,,,,,,,
 dcid:nuts/AL,2001,,,,,,,
 dcid:nuts/AL,2002,,,,,,,
@@ -8,14 +8,14 @@ dcid:nuts/AL,2005,,,,,,,
 dcid:nuts/AL,2006,,,,,,,
 dcid:nuts/AL,2007,,,,,,,
 dcid:nuts/AL,2008,,,,,,,
-dcid:nuts/AL,2009,,,,-17681.0,-0.006,2936355.0,
-dcid:nuts/AL,2010,,,,-11313.0,-0.0039,2918674.0,
+dcid:nuts/AL,2009,,,,-17681,-0.006,2936355,
+dcid:nuts/AL,2010,,,,-11313,-0.0039,2918674,
 dcid:nuts/AL,2011,,,,,,,
-dcid:nuts/AL,2012,,,,-5238.0,-0.0018,2903008.0,
+dcid:nuts/AL,2012,,,,-5238,-0.0018,2903008,
 dcid:nuts/AL,2013,,,,,,,
 dcid:nuts/AL,2014,,,,,,,
-dcid:nuts/AL,2015,22418.0,0.011300000000000001,0.0078,-16710.0,-0.0058,2885796.0,32715.0
+dcid:nuts/AL,2015,22418,0.011300000000000001,0.0078,-16710,-0.0058,2885796,32715
 dcid:nuts/AL,2016,,,,,,,
 dcid:nuts/AL,2017,,,,,,,
 dcid:nuts/AL,2018,,,,,,,
-dcid:nuts/AL,2019,,,,,,2862427.0,
+dcid:nuts/AL,2019,,,,,,2862427,

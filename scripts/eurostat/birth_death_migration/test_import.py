@@ -21,14 +21,6 @@ import pandas as pd
 class TestPreprocess(unittest.TestCase):
     maxDiff = None
 
-    def test1(self):
-        """Simple unit test on melting csv content"""
-        self._test_preprocess_output('./test/test1')
-
-    def test2(self):
-        """Simple integration test on output csv content"""
-        self._test_csv_output('./test/test2')
-
     def _test_preprocess_output(self, dir_path: str):
         """Generates a melted csv file, given an input data file.
         Compares the expected.csv to the output.csv file
@@ -53,14 +45,12 @@ class TestPreprocess(unittest.TestCase):
         input_df = pd.read_csv(input_path, sep='\s*\t\s*', engine='python')
         preprocess_data(input_df).to_csv(output_path, index=False)
         # Get the content from the csv file.
-        actual_f = open(output_path, 'r+')
-        actual: str = actual_f.read()
-        actual_f.close()
+        with open(output_path, 'r+') as actual_f:
+            actual: str = actual_f.read()
 
         # Get the content of the expected output.
-        expected_f = open(expected_path, 'r+')
-        expected = expected_f.read()
-        expected_f.close()
+        with open(expected_path, 'r+') as expected_f:
+            expected: str = expected_f.read()
 
         self.assertEqual(actual, expected)
 
@@ -88,16 +78,22 @@ class TestPreprocess(unittest.TestCase):
         input_df = pd.read_csv(input_path, sep='\s*\t\s*', engine='python')
         clean_data(preprocess_data(input_df), output_path)
         # Get the content from the csv file.
-        actual_f = open(output_path, 'r+')
-        actual: str = actual_f.read()
-        actual_f.close()
+        with open(output_path, 'r+') as actual_f:
+            actual: str = actual_f.read()
 
         # Get the content of the expected output.
-        expected_f = open(expected_path, 'r+')
-        expected = expected_f.read()
-        expected_f.close()
+        with open(expected_path, 'r+') as expected_f:
+            expected: str = expected_f.read()
 
         self.assertEqual(actual, expected)
+
+    def test1(self):
+        """Simple unit test on melting csv content"""
+        self._test_preprocess_output('./test/test1')
+
+    def test2(self):
+        """Simple integration test on output csv content"""
+        self._test_csv_output('./test/test2')
 
 
 if __name__ == '__main__':
