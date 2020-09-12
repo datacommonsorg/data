@@ -12,23 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Generates the CSVs, StatisticalVariable MCFs, and TMCFs for importing
+Generates the CSVs, StatisticalVariable MCFs, and template MCFs for importing
 US Burea of Labor Statistics CPI-U, CPI-W, and C-CPI-U series into Data Commons.
 Only monthly series for the US as a whole and not for parts of the US are
 generated. The semi-annually series overlap with the monthly series so they
 are not generated.
 
-The script replies heavily on the CSVs provided by BLS that contain information
-about series of a particular type, e.g.,
-https://download.bls.gov/pub/time.series/cu/cu.series. The DataFrames loaded
-from these CSVs are referred to as "info_df" in the script.
+The script replies heavily on the CSVs provided by BLS that contain information,
+such as whether the series are seasonally adjusted, about series of a
+particular type, e.g., https://download.bls.gov/pub/time.series/cu/cu.series.
+The DataFrames loaded from these CSVs are often referred to as "info_df"
+in the script.
 
 Running the script generates these files:
 - CSVs
     - cpi_u.csv
     - cpi_w.csv
     - c_cpi_u.csv
-- MCFs
+- Node MCFs
     - cpi_u.mcf
         - Contains StatisticalVariables for CPI-U series.
     - cpi_w.mcf
@@ -37,7 +38,7 @@ Running the script generates these files:
         - Contains populationType enums for all three types of series.
     - unit_enums.mcf
         - Contains unit enums for all three types of series.
-- TMCFs
+- Template MCFs
     - cpi_u.tmcf
         - Contains the template MCF for CPI-U series.
     - cpi_w.tmcf

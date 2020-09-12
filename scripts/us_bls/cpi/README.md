@@ -46,21 +46,15 @@ and prices. The difference is their population group. C-CPI-U stands for Chained
 CPI for All Urban Consumers. It is the chained version of CPI-U. Each of the
 three can have seasonally adjusted and unadjusted series.
 
-The StatisticalVariable for CPI-U and C-CPI-U is
-`ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_BLSSeasonallyUnadjusted`,
-defined in [cpi_u_1913_2020.mcf](cpi_u_1913_2020.mcf) and
-[c_cpi_u_1999_2020.mcf](c_cpi_u_1999_2020.mcf).
-
-The StatisticalVariable for CPI-W is
-`ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanWageEarnerAndClericalWorker_BLSSeasonallyUnadjusted`,
-defined in [cpi_w_1913_2020.mcf](cpi_w_1913_2020.mcf).
-
 ### Notes and Caveats
 
 Since CPIs can have different population groups and baskets of goods and can be
 chained or unchained and seasonally adjusted or unadjusted and different
 countries and areas have their own CPIs, we should have support for importing
 any type of CPI into Data Commons.
+
+Only monthly series for the US as a whole and not for parts of the US are
+imported.
 
 ### License
 
@@ -84,34 +78,32 @@ The license is available online at https://www.bls.gov/bls/linksite.htm.
 
 #### Cleaned Data
 
--   [c_cpi_u_1999_2020.csv](c_cpi_u_1999_2020.csv) contains seasonally
-    unadjusted Chained CPI for All Urban Consumers (C-CPI-U) data from 1999
-    to 2020. Series ID is "SUUR0000SA0".
--   [cpi_u_1913_2020.csv](cpi_u_1913_2020.csv) contains seasonally unadjusted
-    CPI for All Urban Consumers (CPI-U) data from 1913 to 2020. Series ID is
-    "CUUR0000SA0".
--   [cpi_w_1913_2020.csv](cpi_w_1913_2020.csv) contains seasonally unadjusted
-    CPI for Urban Wage Earners and Clerical Workers (CPI-W) data from 1913
-    to 2020. Series ID is "CWUR0000SA0".
+-   [c_cpi_u.csv](c_cpi_u.csv) contains
+    Chained CPI for All Urban Consumers (C-CPI-U) data.
+-   [cpi_u.csv](cpi_u.csv) contains
+    CPI for All Urban Consumers (CPI-U) data.
+-   [cpi_w.csv](cpi_w.csv) contains
+    Urban Wage Earners and Clerical Workers (CPI-W) data.
 
 #### Template MCFs
 
--   [c_cpi_u_1999_2020.tmcf](c_cpi_u_1999_2020.tmcf)
--   [cpi_u_1913_2020.tmcf](cpi_u_1913_2020.tmcf)
--   [cpi_w_1913_2020.tmcf](cpi_w_1913_2020.tmcf)
+-   [c_cpi_u.tmcf](c_cpi_u_1999_2020.tmcf)
+    -   Contains the template MCF for C-CPI-U series.
+-   [cpi_u.tmcf](cpi_u_1913_2020.tmcf)
+-   [cpi_w.tmcf](cpi_w_1913_2020.tmcf)
 
-#### StatisticalVariable Instance MCF
+#### Node MCFs
 
--   [c_cpi_u_1999_2020_StatisticalVariable.mcf](c_cpi_u_1999_2020_StatisticalVariable.mcf)
--   [cpi_u_1913_2020_StatisticalVariable.mcf](cpi_u_1913_2020_StatisticalVariable.mcf)
--   [cpi_w_1913_2020_StatisticalVariable.mcf](cpi_w_1913_2020_StatisticalVariable.mcf)
+-   [c_cpi_u.mcf](c_cpi_u.mcf)
+    -   Contains StatisticalVariables for C-CPI-U series.
+-   [cpi_u.mcf](cpi_u.mcf)
+-   [cpi_w.mcf](cpi_w.mcf)
+-   [pop_type_enums.mcf](pop_type_enums.mcf)
+    -   Contains populationType enums for all three types of series.
+-   [unit_enums.mcf](unit_enums.mcf)
+    -   Contains unit enums for all three types of series.
 
 #### Scripts
 
--   [generate_csv.py](generate_csv.py) downloads and converts BLS CPI raw csv
-    files to csv files of two columns: "date" and "cpi", where "date" is of the
-    form "YYYY-MM" and "cpi" is numeric.
-
-### Import Procedure
-
-1.  Run `python3 generate_csv.py`
+-   [generate_csv_mcf.py](generate_csv_mcf.py) generates the CSVs,
+    StatisticalVariable MCFs, and template MCFs. See module docstring.
