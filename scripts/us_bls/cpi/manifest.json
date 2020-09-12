@@ -26,6 +26,9 @@
             ],
             "provenance_url": "https://www.bls.gov/cpi/",
             "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for Urban Wage Earners and Clerical Workers",
+            "scripts": [
+                "generate_csv_mcf.py"
+            ],
             "import_inputs": [
                 {
                     "template_mcf": "cpi_w.tmcf",
@@ -42,6 +45,9 @@
             ],
             "provenance_url": "https://www.bls.gov/cpi/",
             "provenance_description": "U.S. Bureau of Labor Statistics Chained Consumer Price Index for All Urban Consumers",
+            "scripts": [
+                "generate_csv_mcf.py"
+            ],
             "import_inputs": [
                 {
                     "template_mcf": "c_cpi_u.tmcf",
