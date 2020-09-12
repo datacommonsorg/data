@@ -1,29 +1,36 @@
 {
     "import_specifications": [
         {
-            "import_name": "USBLS_CPIAllItemsAverage",
+            "import_name": "USBLS_CPI",
             "curator_emails": [
                 "shijunjie@google.com"
             ],
             "provenance_url": "https://www.bls.gov/cpi/",
             "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index",
             "scripts": [
-                "generate_csv.py"
+                "generate_csv_mcf.py"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "c_cpi_u_1999_2020.tmcf",
-                    "cleaned_csv": "c_cpi_u_1999_2020.csv",
-                    "node_mcf": "c_cpi_u_1999_2020.mcf"
+                    "template_mcf": "c_cpi_u.tmcf",
+                    "cleaned_csv": "c_cpi_u.csv",
+                    "node_mcf": "c_cpi_u.mcf"
                 },
                 {
-                    "template_mcf": "cpi_u_1913_2020.tmcf",
-                    "cleaned_csv": "cpi_u_1913_2020.csv"
+                    "template_mcf": "cpi_u.tmcf",
+                    "cleaned_csv": "cpi_u.csv",
+                    "node_mcf": "cpi_u.mcf"
                 },
                 {
-                    "template_mcf": "cpi_w_1913_2020.tmcf",
-                    "cleaned_csv": "cpi_w_1913_2020.csv",
-                    "node_mcf": "cpi_w_1913_2020.mcf"
+                    "template_mcf": "cpi_w.tmcf",
+                    "cleaned_csv": "cpi_w.csv",
+                    "node_mcf": "cpi_w.mcf"
+                },
+                {
+                    "node_mcf": "pop_type_enums.mcf"
+                },
+                {
+                    "node_mcf": "unit_enums.mcf"
                 }
             ],
             "cron_schedule": "15 17 15 * *"

@@ -12,67 +12,111 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Downloading and converting BLS CPI raw csv files to csv files of two columns:
-"date" and "cpi", where "date" is of the form "YYYY-MM" and "cpi" is numeric.
+Generates the CSVs, StatisticalVariable MCFs, and TMCFs for importing
+US Burea of Labor Statistics CPI-U, CPI-W, and C-CPI-U series into Data Commons.
+Only series for the US as a whole and not for parts of the US are generated.
+The series for the US as a whole are either monthly or semi-annually.
 
-Usage: python3 generate_csv.py
+The script replies heavily on the CSVs provided by BLS that contain information
+about series of a particular type, e.g.,
+https://download.bls.gov/pub/time.series/cu/cu.series. The DataFrames loaded
+from these CSVs are referred to as "info_df" in the script.
+
+Running the script generates these files:
+- CSVs
+    - cpi_u.csv
+    - cpi_w.csv
+    - c_cpi_u.csv
+- MCFs
+    - cpi_u.mcf
+        - Contains StatisticalVariables for CPI-U series.
+    - cpi_w.mcf
+    - c_cpi_u.mcf
+    - pop_type_enums.mcf
+        - Contains PopulationType enums for all three types of series.
+    - unit_enums.mcf
+        - Contains Unit enums for all three types of series.
+- TMCFs
+    - cpi_u.tmcf
+        - Contains the template MCF for CPI-U series.
+    - cpi_w.tmcf
+    - c_cpi_u.tmcf
+
+The CSVs have these columns:
+- value
+    - Observation values for the series.
+- date
+    - Dates of the observations. For monthly series, the dates are of the form
+      "YYYY-MM" For semi-annually series, the format is the same and the dates
+      are the last months of the half years, i.e., June and December.
+- duration
+    - Observation periods of the series. The durations are "P1M" and "P6M" for
+      monthly series and semi-annually series respectively.
+- statvar
+    - DCIDs of the StatisticalVariables meausred by the series.
+- unit
+    - DCIDs of the units of the observations.
+
+Usage: python3 generate_csv_mcf.py
 '''
 
 import re
 import io
-import logging
 import dataclasses
-from typing import Set, Tuple
+from typing import Set, Tuple, Iterable
 
 import requests
 import frozendict
 import pandas as pd
 
+_PREFIX = "https://download.bls.gov/pub/time.series/"
+
 # From series types to lists of CSV URLs containing series of those types
 SERIES_TYPES_TO_DATA_URLS = frozendict.frozendict({
-    "cpi_u": (
-        "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.11.USFoodBeverage",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.12.USHousing",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.13.USApparel",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.14.USTransportation",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.15.USMedical",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.16.USRecreation",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.17.USEducationAndCommunication",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.18.USOtherGoodsAndServices",
-        "https://download.bls.gov/pub/time.series/cu/cu.data.20.USCommoditiesServicesSpecial"
-    ),
-    "cpi_w": (
-        "https://download.bls.gov/pub/time.series/cw/cw.data.1.AllItems",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.11.USFoodBeverage",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.12.USHousing",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.13.USApparel",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.14.USTransportation",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.15.USMedical",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.16.USRecreation",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.17.USEducationAndCommunication",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.18.USOtherGoodsAndServices",
-        "https://download.bls.gov/pub/time.series/cw/cw.data.20.USCommoditiesServicesSpecial"
-    ),
-    "c_cpi_u":
-        ("https://download.bls.gov/pub/time.series/su/su.data.1.AllItems",)
+    "cpi_u": (f"{_PREFIX}/cu/cu.data.1.AllItems",
+              f"{_PREFIX}/cu/cu.data.11.USFoodBeverage",
+              f"{_PREFIX}/cu/cu.data.12.USHousing",
+              f"{_PREFIX}/cu/cu.data.13.USApparel",
+              f"{_PREFIX}/cu/cu.data.14.USTransportation",
+              f"{_PREFIX}/cu/cu.data.15.USMedical",
+              f"{_PREFIX}/cu/cu.data.16.USRecreation",
+              f"{_PREFIX}/cu/cu.data.17.USEducationAndCommunication",
+              f"{_PREFIX}/cu/cu.data.18.USOtherGoodsAndServices",
+              f"{_PREFIX}/cu/cu.data.20.USCommoditiesServicesSpecial"),
+    "cpi_w": (f"{_PREFIX}/cw/cw.data.1.AllItems",
+              f"{_PREFIX}/cw/cw.data.11.USFoodBeverage",
+              f"{_PREFIX}/cw/cw.data.12.USHousing",
+              f"{_PREFIX}/cw/cw.data.13.USApparel",
+              f"{_PREFIX}/cw/cw.data.14.USTransportation",
+              f"{_PREFIX}/cw/cw.data.15.USMedical",
+              f"{_PREFIX}/cw/cw.data.16.USRecreation",
+              f"{_PREFIX}/cw/cw.data.17.USEducationAndCommunication",
+              f"{_PREFIX}/cw/cw.data.18.USOtherGoodsAndServices",
+              f"{_PREFIX}/cw/cw.data.20.USCommoditiesServicesSpecial"),
+    "c_cpi_u": (f"{_PREFIX}/su/su.data.1.AllItems",)
 })
 
+# From series types to URLs of CSVs describing the series
 SERIES_TYPES_TO_INFO_URLS = frozendict.frozendict({
-    "cpi_u": "https://download.bls.gov/pub/time.series/cu/cu.series",
-    "cpi_w": "https://download.bls.gov/pub/time.series/cw/cw.series",
-    "c_cpi_u": "https://download.bls.gov/pub/time.series/su/su.series"
+    "cpi_u": f"{_PREFIX}/cu/cu.series",
+    "cpi_w": f"{_PREFIX}/cw/cw.series",
+    "c_cpi_u": f"{_PREFIX}/su/su.series"
 })
 
+# From series types to URLs of CSVs containing mappings from
+# item code to item name
 SERIES_TYPES_TO_EXPENDITURE_TYPES_URLS = frozendict.frozendict({
-    "cpi_u": "https://download.bls.gov/pub/time.series/cu/cu.item",
-    "cpi_w": "https://download.bls.gov/pub/time.series/cw/cw.item",
-    "c_cpi_u": "https://download.bls.gov/pub/time.series/su/su.item"
+    "cpi_u": f"{_PREFIX}/cu/cu.item",
+    "cpi_w": f"{_PREFIX}/cw/cw.item",
+    "c_cpi_u": f"{_PREFIX}/su/su.item"
 })
 
 
 @dataclasses.dataclass(frozen=True)
 class SeriesInfo:
+    """Information about a series. For descriptions of the fields, see
+    Section 4 of {_PREFIX}/cu/cu.txt.
+    """
     survey_abbreviation: str
     seasonal_code: str
     periodicity_code: str
@@ -81,60 +125,85 @@ class SeriesInfo:
     series_id: str
 
     def __post_init__(self):
+        """Validates the fields after init."""
         self._validate()
 
-    def _validate(self):
+    def _validate(self) -> None:
+        """Validates the fields.
+
+        Raises:
+            ValueError: Some field(s) is invalid.
+        """
         if (not self.series_id or len(self.series_id) < 11 or
                 len(self.series_id) > 17):
             self._raise_validation_error("invalid series_id")
-        if (not self.survey_abbreviation or
-                self.survey_abbreviation not in ("SU", "CU", "CW")):
+        if (self.survey_abbreviation not in ("SU", "CU", "CW")):
             self._raise_validation_error(
                 f"nvalid survey_abbreviation: {self.survey_abbreviation}")
-        if (not self.seasonal_code or self.seasonal_code not in ("S", "U")):
+        if (self.seasonal_code not in ("S", "U")):
             self._raise_validation_error(
                 f"invalid survey_abbreviation: {self.survey_abbreviation}")
-        if (not self.periodicity_code or
-                self.periodicity_code not in ("R", "S")):
+        if (self.periodicity_code not in ("R", "S")):
             self._raise_validation_error(
                 f"invalid periodicity_code: {self.periodicity_code}")
         if (not self.area_code or len(self.area_code) != 4):
             self._raise_validation_error(f"invalid area_code: {self.area_code}")
 
-    def _raise_validation_error(self, message: str):
+    def _raise_validation_error(self, message: str) -> None:
         raise ValueError(f"{self.series_id}: {message}")
 
-    def is_us(self):
+    def is_us(self) -> bool:
+        """Returns if the series is for US as a whole and
+        not for parts of US."""
         return self.area_code == "0000"
 
-    def is_monthly(self):
+    def is_monthly(self) -> bool:
+        """Returns if the series is monthly."""
         return self.periodicity_code == "R"
 
+    def is_semiannually(self) -> bool:
+        """Returns if the series is semi-annually."""
+        return self.periodicity_code == "S"
+
     def get_mmethod(self) -> str:
+        """Returns the DCID of the measurement method for this series."""
         if self.survey_abbreviation == "SU":
             return "BLSChained"
         return "BLSUnchained"
 
     def get_pop_type(self) -> str:
+        """Returns the DCID of the population type for this series."""
         return f"BLS_{self.item_code}"
 
     def get_consumer(self) -> str:
+        """Returns the DCID of the consumer for this series."""
         if self.survey_abbreviation == "CW":
             return "UrbanWageEarnerAndClericalWorker"
         return "UrbanConsumer"
 
     def get_mqual(self) -> str:
+        """Returns the DCID of the measurement qualifier for this series."""
         if self.seasonal_code == "S":
             return "BLSSeasonallyAdjusted"
         return "BLSSeasonallyUnadjusted"
 
     def get_statvar(self) -> str:
+        """Returns the DCID of the statistical variable for this series."""
         return ("ConsumerPriceIndex_"
                 f"{self.get_pop_type()}_"
                 f"{self.get_consumer()}_"
                 f"{self.get_mqual()}")
 
     def get_unit(self, info_df: pd.DataFrame) -> Tuple[str, str]:
+        """Returns the DCID of the unit for this series and a description
+        of the unit.
+        
+        Args:
+            info_df: DataFrame containing information about the series.
+
+        Raises:
+            ValueError: The base period obtained from the dataframe is invalid.
+        """
         row = info_df[info_df["series_id"] == self.series_id]
         num_rows = row.shape[0]
         if num_rows != 1:
@@ -164,7 +233,10 @@ class SeriesInfo:
                 f"The reference base is {year} equals 100.")
 
 
-def parse_series_id(series_id):
+def parse_series_id(series_id: str) -> SeriesInfo:
+    """Parses a series ID to a SeriesInfo. See Section 4 of
+    {_PREFIX}/cu/cu.txt
+    for a breakdown of series IDs."""
     return SeriesInfo(survey_abbreviation=series_id[:2],
                       seasonal_code=series_id[2],
                       periodicity_code=series_id[3],
@@ -173,7 +245,15 @@ def parse_series_id(series_id):
                       series_id=series_id)
 
 
-def generate_unit_enums(info_df, targets) -> Set[str]:
+def generate_unit_enums(info_df: pd.DataFrame, targets: Set[str]) -> Set[str]:
+    """Returns a set of enum definitions for the units required by the series
+    identified by their IDs in "targets".
+    
+    Args:
+        info_df: DataFrame containing information about
+            all the series in targets.
+        targets: Set of series IDs to generate unit enums for.
+    """
     generated = set()
     for series_id in targets:
         unit, desc = parse_series_id(series_id).get_unit(info_df)
@@ -185,7 +265,19 @@ def generate_unit_enums(info_df, targets) -> Set[str]:
     return generated
 
 
-def generate_pop_type_enums(url, targets) -> Set[str]:
+def generate_pop_type_enums(url: str, targets: Set[str]) -> Set[str]:
+    """Returns a set of enum definitions for the population types required
+    by the series identified by their IDs in "targets".
+
+    Args:
+        url: URL to the CSV containing the mappings from item codes to item
+            names needed by the type of the series in "targets".
+        targets: Set of series IDs to generate population
+            type enums for.
+
+    Raises:
+        ValueError: Some series(s) does not have an item code mapping.
+    """
     df = download_df(url, sep="\t", usecols=("item_code", "item_name"))
     if "item_code" not in df.columns or "item_name" not in df.columns:
         raise ValueError("item_code or/and item_name columns missing")
@@ -201,28 +293,40 @@ def generate_pop_type_enums(url, targets) -> Set[str]:
                 f"{series_info} does not have an item_code mapping")
 
     generated = set()
-    generated.add("Node: dcid:BLSExpenditureTypeEnum\n"
-                  "typeOf: dcs:Class\n"
-                  "subClassOf: schema:Enumeration\n"
-                  "description: "
-                  "\"An enumeration of types of consumer expenditures.\"\n\n")
-
     for row in df.itertuples(index=False):
         generated.add((f"Node: dcid:BLS_{row.item_code}\n"
-                       "typeOf: dcs:BLSExpenditureTypeEnum\n"
+                       "typeOf: dcs:EconomicProductEnum\n"
                        f"name: \"{row.item_name}\"\n\n"))
     return generated
 
 
-def generate_csv(urls, dest, info_df, targets):
+def generate_csv(urls: Iterable[str], dest: str, info_df: pd.DataFrame,
+                 targets: Set[str]) -> None:
+    """Writes out the CSV containing series of a particular type, e.g., CPI-U.
+    
+    Args:
+        urls: URLs to the CSVs containing the series.
+        dest: Path to the output CSV.
+        info_df: DataFrame containing information about the series.
+        targets: Series to include in the output CSV.
+    """
     result = pd.DataFrame()
     for url in urls:
-        result = result.append(single(url, info_df, targets))
+        result = result.append(_generate_csv_helper(url, info_df, targets))
     result.to_csv(dest, index=False)
     return result
 
 
-def download_df(url, sep="\t", usecols=None):
+def download_df(url: str,
+                sep: str = "\t",
+                usecols: Tuple[str] = None) -> pd.DataFrame:
+    """Downloads a CSV from a URL and loads it into a DataFrame,
+
+    Args:
+        url: URL to the CSV.
+        sep: Separators used by the CSV. Can be a regex pattern.
+        usecols: Columns to keep.
+    """
     response = requests.get(url)
     response.raise_for_status()
     return pd.read_csv(io.StringIO(response.text),
@@ -231,7 +335,20 @@ def download_df(url, sep="\t", usecols=None):
                        usecols=usecols).rename(columns=lambda col: col.strip())
 
 
-def single(url: str, info_df: pd.DataFrame, targets: Set[str]) -> pd.DataFrame:
+def _generate_csv_helper(url: str, info_df: pd.DataFrame,
+                         targets: Set[str]) -> pd.DataFrame:
+    """Returns a DataFrame containing series obtained from "url" and specified
+    by "targets".
+
+    Args:
+        url: URL to a CSV containing some of the series in "targets".
+        info_df: DataFrame containing informatino about the series.
+        targets: Series to include in the return DataFrame.
+
+    Returns:
+        A DataFrame of five columns: "value", "date", "duration", "statvar",
+        and "unit". See module docstring for what the columns are.
+    """
     df = download_df(url, sep=r"\s+")
     result = pd.DataFrame()
     for series_id, group_df in df.groupby(by="series_id"):
@@ -240,19 +357,28 @@ def single(url: str, info_df: pd.DataFrame, targets: Set[str]) -> pd.DataFrame:
         series_info = parse_series_id(series_id)
         # "period" is the months of the observations and is of the form "MM"
         # preceded by char 'M', e.g. "M05".
-        # "M13" is annual averages.
-        group_df = group_df[group_df["period"] != "M13"]
+        # "M13" and "S03" are annual averages.
+        group_df = group_df[~group_df["period"].isin(("M13", "S03"))]
         # "year" is of the form "YYYY".
-        group_df["date"] = (group_df["year"] + "-" +
-                            group_df["period"].str[-2:])
-        group_df["statvar"] = f"dcs:{series_info.get_statvar()}"
-        group_df["unit"] = f"dcs:{series_info.get_unit(info_df)[0]}"
+        if series_info.is_monthly():
+            group_df.loc[:, "date"] = (group_df["year"] + "-" +
+                                       group_df["period"].str[-2:])
+            group_df.loc[:, "duration"] = "P1M"
+        else:
+            group_df.loc[:, "date"] = group_df["year"] + "-" + group_df[
+                "period"].map(lambda period: "06" if period == "S01" else "12")
+            group_df.loc[:, "duration"] = "P6M"
+        group_df.loc[:, "statvar"] = f"dcs:{series_info.get_statvar()}"
+        group_df.loc[:, "unit"] = f"dcs:{series_info.get_unit(info_df)[0]}"
         # "value" is the CPI values.
-        result = result.append(group_df[["value", "date", "statvar", "unit"]])
+        result = result.append(
+            group_df[["value", "date", "duration", "statvar", "unit"]])
     return result
 
 
-def generate_statvars(dest, targets):
+def generate_statvars(dest: str, targets: Set[str]) -> None:
+    """Writes out the statistical variable definitions required by the
+    series in "targets"."""
     with open(dest, "w") as out:
         for series_id in targets:
             series_info = parse_series_id(series_id)
@@ -262,26 +388,31 @@ def generate_statvars(dest, targets):
                        f"measurementQualifier: dcs:{series_info.get_mqual()}\n"
                        "measuredProperty: dcs:consumerPriceIndex\n"
                        "statType: dcs:measuredValue\n"
-                       f"consumer: dcs:{series_info.get_consumer()}\n"))
+                       f"consumer: dcs:{series_info.get_consumer()}\n"
+                       f"description: \"The series ID is {series_id}.\"\n"))
             out.write("\n")
 
 
 def filter_series(info_df: pd.DataFrame) -> Set[str]:
+    """Returns series for US as a whole and not parts of US."""
     targets = set()
     for row in info_df.itertuples(index=False):
         series_info = parse_series_id(row.series_id)
-        if series_info.is_us() and series_info.is_monthly():
-            targets.add(row.series_id)
+        if not series_info.is_us():
+            print(f"Skipping {series_info}")
+            continue
+        targets.add(row.series_id)
     return targets
 
 
-def write_set(dest, to_write: Set[str]):
+def write_set(dest: str, to_write: Set[str]) -> None:
+    """Writes out a set of strings."""
     with open(dest, "w") as out:
         for elem in to_write:
             out.write(elem)
 
 
-def main():
+def main() -> None:
     """Runs the script. See module docstring."""
     unit_enums = set()
     pop_type_enums = set()
@@ -294,8 +425,7 @@ def main():
                 SERIES_TYPES_TO_EXPENDITURE_TYPES_URLS[series_type], targets))
         unit_enums.update(generate_unit_enums(info_df, targets))
         generate_statvars(f"{series_type}.mcf", targets)
-        generate_csv(SERIES_TYPES_TO_DATA_URLS[series_type],
-                     f"{series_type}.csv", info_df, targets)
+        generate_csv(urls, f"{series_type}.csv", info_df, targets)
     write_set("unit_enums.mcf", unit_enums)
     write_set("pop_type_enums.mcf", pop_type_enums)
 

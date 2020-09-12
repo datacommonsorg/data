@@ -4,5 +4,6 @@ variableMeasured: C:cpi_u->statvar
 measurementMethod: dcs:BLSUnchained
 observationAbout: dcid:country/USA
 observationDate: C:cpi_u->date
+observationPeriod: C:cpi_u->duration
 value: C:cpi_u->value
 unit: C:cpi_u->unit
