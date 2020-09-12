@@ -50,32 +50,6 @@
                 }
             ],
             "cron_schedule": "30 17 15 * *"
-        },
-        {
-            "import_name": "USBLS_CPI_POP_TYPES",
-            "curator_emails": [
-                "shijunjie@google.com"
-            ],
-            "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index populationType enums",
-            "import_inputs": [
-                {
-                    "node_mcf": "pop_type_enums.mcf"
-                }
-            ]
-        },
-        {
-            "import_name": "USBLS_CPI_UNITS",
-            "curator_emails": [
-                "shijunjie@google.com"
-            ],
-            "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index unit enums",
-            "import_inputs": [
-                {
-                    "node_mcf": "unit_enums.mcf"
-                }
-            ]
         }
     ]
 }
