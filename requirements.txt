@@ -5,6 +5,6 @@ pylint
 pytest
 yapf
 frozendict
-
+requests
 urllib3
 zipp
