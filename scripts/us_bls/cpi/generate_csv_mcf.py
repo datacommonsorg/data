@@ -14,8 +14,9 @@
 '''
 Generates the CSVs, StatisticalVariable MCFs, and TMCFs for importing
 US Burea of Labor Statistics CPI-U, CPI-W, and C-CPI-U series into Data Commons.
-Only series for the US as a whole and not for parts of the US are generated.
-The series for the US as a whole are either monthly or semi-annually.
+Only monthly series for the US as a whole and not for parts of the US are
+generated. The semi-annually series overlap with the monthly series so they
+are not generated.
 
 The script replies heavily on the CSVs provided by BLS that contain information
 about series of a particular type, e.g.,
@@ -137,13 +138,13 @@ class SeriesInfo:
         if (not self.series_id or len(self.series_id) < 11 or
                 len(self.series_id) > 17):
             self._raise_validation_error("invalid series_id")
-        if (self.survey_abbreviation not in ("SU", "CU", "CW")):
+        if self.survey_abbreviation not in ("SU", "CU", "CW"):
             self._raise_validation_error(
                 f"nvalid survey_abbreviation: {self.survey_abbreviation}")
-        if (self.seasonal_code not in ("S", "U")):
+        if self.seasonal_code not in ("S", "U"):
             self._raise_validation_error(
                 f"invalid survey_abbreviation: {self.survey_abbreviation}")
-        if (self.periodicity_code not in ("R", "S")):
+        if self.periodicity_code not in ("R", "S"):
             self._raise_validation_error(
                 f"invalid periodicity_code: {self.periodicity_code}")
         if (not self.area_code or len(self.area_code) != 4):
@@ -197,7 +198,7 @@ class SeriesInfo:
     def get_unit(self, info_df: pd.DataFrame) -> Tuple[str, str]:
         """Returns the DCID of the unit for this series and a description
         of the unit.
-        
+
         Args:
             info_df: DataFrame containing information about the series.
 
@@ -248,7 +249,7 @@ def parse_series_id(series_id: str) -> SeriesInfo:
 def generate_unit_enums(info_df: pd.DataFrame, targets: Set[str]) -> Set[str]:
     """Returns a set of enum definitions for the units required by the series
     identified by their IDs in "targets".
-    
+
     Args:
         info_df: DataFrame containing information about
             all the series in targets.
@@ -303,7 +304,7 @@ def generate_pop_type_enums(url: str, targets: Set[str]) -> Set[str]:
 def generate_csv(urls: Iterable[str], dest: str, info_df: pd.DataFrame,
                  targets: Set[str]) -> None:
     """Writes out the CSV containing series of a particular type, e.g., CPI-U.
-    
+
     Args:
         urls: URLs to the CSVs containing the series.
         dest: Path to the output CSV.
@@ -394,12 +395,13 @@ def generate_statvars(dest: str, targets: Set[str]) -> None:
 
 
 def filter_series(info_df: pd.DataFrame) -> Set[str]:
-    """Returns series for US as a whole and not parts of US."""
+    """Filters all series provided by BLS and returns only monthly series for
+    the US as a whole and not parts of US."""
     targets = set()
+    # Prioritize monthly series
     for row in info_df.itertuples(index=False):
         series_info = parse_series_id(row.series_id)
-        if not series_info.is_us():
-            print(f"Skipping {series_info}")
+        if not series_info.is_us() or not series_info.is_monthly():
             continue
         targets.add(row.series_id)
     return targets
