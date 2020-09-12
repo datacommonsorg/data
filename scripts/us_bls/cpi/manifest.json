@@ -1,39 +1,81 @@
 {
     "import_specifications": [
         {
-            "import_name": "USBLS_CPI",
+            "import_name": "USBLS_CPI_U",
             "curator_emails": [
                 "shijunjie@google.com"
             ],
             "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index",
+            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for All Urban Consumers",
             "scripts": [
                 "generate_csv_mcf.py"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "c_cpi_u.tmcf",
-                    "cleaned_csv": "c_cpi_u.csv",
-                    "node_mcf": "c_cpi_u.mcf"
-                },
-                {
                     "template_mcf": "cpi_u.tmcf",
                     "cleaned_csv": "cpi_u.csv",
                     "node_mcf": "cpi_u.mcf"
-                },
+                }
+            ],
+            "cron_schedule": "0 17 15 * *"
+        },
+        {
+            "import_name": "USBLS_CPI_W",
+            "curator_emails": [
+                "shijunjie@google.com"
+            ],
+            "provenance_url": "https://www.bls.gov/cpi/",
+            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for Urban Wage Earners and Clerical Workers",
+            "import_inputs": [
                 {
                     "template_mcf": "cpi_w.tmcf",
                     "cleaned_csv": "cpi_w.csv",
                     "node_mcf": "cpi_w.mcf"
-                },
-                {
-                    "node_mcf": "pop_type_enums.mcf"
-                },
-                {
-                    "node_mcf": "unit_enums.mcf"
                 }
             ],
             "cron_schedule": "15 17 15 * *"
+        },
+        {
+            "import_name": "USBLS_C_CPI_U",
+            "curator_emails": [
+                "shijunjie@google.com"
+            ],
+            "provenance_url": "https://www.bls.gov/cpi/",
+            "provenance_description": "U.S. Bureau of Labor Statistics Chained Consumer Price Index for All Urban Consumers",
+            "import_inputs": [
+                {
+                    "template_mcf": "c_cpi_u.tmcf",
+                    "cleaned_csv": "c_cpi_u.csv",
+                    "node_mcf": "c_cpi_u.mcf"
+                }
+            ],
+            "cron_schedule": "30 17 15 * *"
+        },
+        {
+            "import_name": "USBLS_CPI_POP_TYPES",
+            "curator_emails": [
+                "shijunjie@google.com"
+            ],
+            "provenance_url": "https://www.bls.gov/cpi/",
+            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index populationType enums",
+            "import_inputs": [
+                {
+                    "node_mcf": "pop_type_enums.mcf"
+                }
+            ]
+        },
+        {
+            "import_name": "USBLS_CPI_UNITS",
+            "curator_emails": [
+                "shijunjie@google.com"
+            ],
+            "provenance_url": "https://www.bls.gov/cpi/",
+            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index unit enums",
+            "import_inputs": [
+                {
+                    "node_mcf": "unit_enums.mcf"
+                }
+            ]
         }
     ]
 }

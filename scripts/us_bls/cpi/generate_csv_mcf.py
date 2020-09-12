@@ -33,9 +33,9 @@ Running the script generates these files:
     - cpi_w.mcf
     - c_cpi_u.mcf
     - pop_type_enums.mcf
-        - Contains PopulationType enums for all three types of series.
+        - Contains populationType enums for all three types of series.
     - unit_enums.mcf
-        - Contains Unit enums for all three types of series.
+        - Contains unit enums for all three types of series.
 - TMCFs
     - cpi_u.tmcf
         - Contains the template MCF for CPI-U series.
