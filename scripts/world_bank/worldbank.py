@@ -363,7 +363,7 @@ def main(_):
     worldbank_dataframe['ISO3166Alpha3'] = (
         worldbank_dataframe['ISO3166Alpha3'].apply(
             lambda code: "dcid:Earth"
-            if code == "WLD" else "dcs:country/" + code))
+            if code == "WLD" else "dcid:country/" + code))
     worldbank_dataframe['StatisticalVariable'] = \
         worldbank_dataframe['StatisticalVariable'].apply(
             lambda code: "dcs:" + code)
