@@ -21,6 +21,7 @@ import itertools
 import requests
 import zipfile
 import io
+import time
 import re
 
 # Remaps the columns provided by World Bank API.
@@ -78,6 +79,11 @@ def read_worldbank(iso3166alpha3):
     country_zip = ("http://api.worldbank.org/v2/en/country/" + iso3166alpha3 +
                    "?downloadformat=csv")
     r = requests.get(country_zip)
+    if r.status_code != 200:
+        print('Status code: ', r.status_code)
+        time.sleep(30)
+        r = requests.get(country_zip)
+
     filebytes = io.BytesIO(r.content)
     myzipfile = zipfile.ZipFile(filebytes)
 
