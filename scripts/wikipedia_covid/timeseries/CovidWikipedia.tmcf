@@ -1,27 +1,35 @@
 Node: E:WikipediaCOVID19Tracking->E0
-typeOf: schema: State
-dcid: C:Node:E:WikipediaCOVID19Tracking->E1->GeoId
+typeOf: schema:Place
+wikidataId: C:WikipediaCOVID19Tracking->wikidataId
 
 Node:E:WikipediaCOVID19Tracking->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
 observationAbout: E:WikipediaCOVID19Tracking->E0
-observationDate: C:WikipediaCOVID19Tracking->Date
-value: C:WikipediaCOVID19Tracking->CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+observationDate: C:WikipediaCOVID19Tracking->date
+value: C:WikipediaCOVID19Tracking->cases
 measurementMethod: dcs:WikipediaCOVID19Tracking
 
 Node:E:WikipediaCOVID19Tracking->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_ConfirmedCase
 observationAbout: E:WikipediaCOVID19Tracking->E0
-observationDate: C:WikipediaCOVID19Tracking->Date
-value: C:WikipediaCOVID19Tracking->CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+observationDate: C:WikipediaCOVID19Tracking->date
+value: C:WikipediaCOVID19Tracking->active_cases
 measurementMethod: dcs:WikipediaCOVID19Tracking
 
 Node:E:WikipediaCOVID19Tracking->E3
 typeOf: dcs:StatVarObservation
-variableMeasured: CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
 observationAbout: E:WikipediaCOVID19Tracking->E0
-observationDate: C:WikipediaCOVID19Tracking->Date
-value: C:WikipediaCOVID19Tracking->CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+observationDate: C:WikipediaCOVID19Tracking->date
+value: C:WikipediaCOVID19Tracking->recoveries
+measurementMethod: dcs:WikipediaCOVID19Tracking
+
+Node:E:WikipediaCOVID19Tracking->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+observationAbout: E:WikipediaCOVID19Tracking->E0
+observationDate: C:WikipediaCOVID19Tracking->date
+value: C:WikipediaCOVID19Tracking->deaths
 measurementMethod: dcs:WikipediaCOVID19Tracking
