@@ -1,14 +1,8 @@
-config = [
-    {
-        "geoId": "country/AFG",
-        "url": "https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data/Afghanistan_medical_cases_chart",
-    },
-    {
-        "geoId": "geoId/AND",
-        "url": "https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data/Andorra_medical_cases_chart",
-    },
-    {
-        "geoId": "geoId/ICE",
-        "url": "https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data/Iceland_medical_cases_chart",
-    }
-]
+# NOTE: Keep all lower case.
+
+replace_headers = {
+    "active cases": "active_cases", # Get rid of spaces
+    "active cases and recoveries": "cases", # See Connecticut, USA
+    "cumulative cases (revised)": "active_cases" #See Contra Costa County, CA
+}
+
