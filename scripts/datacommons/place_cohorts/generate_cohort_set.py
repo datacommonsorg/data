@@ -43,18 +43,22 @@ typeOf: dcs:CohortSet
 """
         if set_description:
             cohort_set += f"description: \"{set_description}\"\n"
-        f_out.write(cohort_set)
+        members_list = []
 
         with open(csv_path, 'r') as f_in:
             dict_reader = csv.DictReader(f_in)
             for row in dict_reader:
                 place_id = row[place_id_property]
+                members_list.append(f"l:{place_id}")
                 f_out.write(f"""
 Node: {place_id}
 {place_id_property}: "{place_id}"
 typeOf: dcs:{place_type}
-memberOf: dcid:{set_id}
 """)
+
+        members_list
+        cohort_set += "member: %s" % ', '.join(members_list)
+        f_out.write(cohort_set)
 
 
 def main(argv):
