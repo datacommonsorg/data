@@ -160,31 +160,31 @@ description: "Third level statistical subdivision within an EU member country"
 subClassOf: schema:StatisticalArea
 
 Node: dcid:AdministrativeArea1
-name: "AdministrativeAreaLevel1"
+name: "AdministrativeArea1"
 typeOf: schema:Class
 description: "A level-1 administrative subdivision of a country, e.g. departments in Bolivia."
 subClassOf: schema:AdministrativeArea
 
 Node: dcid:AdministrativeArea2
-name: "AdministrativeAreaLevel2"
+name: "AdministrativeArea2"
 typeOf: schema:Class
 description: "A level-2 administrative subdivision of a country, e.g. municipalities in Bulgaria."
 subClassOf: schema:AdministrativeArea
 
 Node: dcid:AdministrativeArea3
-name: "AdministrativeAreaLevel3"
+name: "AdministrativeArea3"
 typeOf: schema:Class
 description: "A level-3 administrative subdivision of a country, e.g. municipalities in Bosnia and Herzegovina."
 subClassOf: schema:AdministrativeArea
 
 Node: dcid:AdministrativeArea4
-name: "AdministrativeAreaLevel4"
+name: "AdministrativeArea4"
 typeOf: schema:Class
 description: "A level-4 administrative subdivision of a country, e.g. wards in South Africa."
 subClassOf: schema:AdministrativeArea
 
 Node: dcid:AdministrativeArea5
-name: "AdministrativeAreaLevel5"
+name: "AdministrativeArea5"
 typeOf: schema:Class
 description: "A level-5 administrative subdivision of a country."
 subClassOf: schema:AdministrativeArea
