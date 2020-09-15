@@ -1,0 +1,145 @@
+
+Node: dcid:PlacePagesComparisonCountyCohort
+name: "PlacePagesComparisonCountyCohort"
+typeOf: dcs:CohortSet
+description: "Counties used for Data Commons Place Page comparisons."
+
+Node: 06001
+geoId: "06001"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 36005
+geoId: "36005"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06013
+geoId: "06013"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 17031
+geoId: "17031"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 39035
+geoId: "39035"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 48113
+geoId: "48113"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 12031
+geoId: "12031"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 08041
+geoId: "08041"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 51059
+geoId: "51059"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 13121
+geoId: "13121"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 48201
+geoId: "48201"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 12057
+geoId: "12057"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 15003
+geoId: "15003"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 08059
+geoId: "08059"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06029
+geoId: "06029"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 53033
+geoId: "53033"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06037
+geoId: "06037"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 04013
+geoId: "04013"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 37119
+geoId: "37119"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 12086
+geoId: "12086"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06059
+geoId: "06059"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 36081
+geoId: "36081"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06065
+geoId: "06065"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06071
+geoId: "06071"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06073
+geoId: "06073"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06075
+geoId: "06075"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 06085
+geoId: "06085"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
+
+Node: 24047
+geoId: "24047"
+typeOf: dcs:County
+memberOf: dcid:PlacePagesComparisonCountyCohort
