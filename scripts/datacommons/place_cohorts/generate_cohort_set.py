@@ -33,37 +33,40 @@ flags.DEFINE_string(
 )
 
 
-def write_mcf(csv_path, set_id, place_id_property, place_type, set_description):
-    """Generates a CohortSet from flag arguments and attaches places in the CSV"""
-    with open(csv_path.replace('.csv', '.mcf'), 'w') as f_out:
-        cohort_set = f"""
+def write_mcf(f_in, f_out, set_id, place_id_property, place_type,
+              set_description):
+    """Generates a CohortSet and attaches places from the input file."""
+    cohort_set = f"""
 Node: dcid:{set_id}
 name: "{set_id}"
 typeOf: dcs:CohortSet
 """
-        if set_description:
-            cohort_set += f"description: \"{set_description}\"\n"
-        members_list = []
+    if set_description:
+        cohort_set += f"description: \"{set_description}\"\n"
+    members_list = []
 
-        with open(csv_path, 'r') as f_in:
-            dict_reader = csv.DictReader(f_in)
-            for row in dict_reader:
-                place_id = row[place_id_property]
-                members_list.append(f"l:{place_id}")
-                f_out.write(f"""
+    dict_reader = csv.DictReader(f_in)
+    for row in dict_reader:
+        place_id = row[place_id_property]
+        members_list.append(f"l:{place_id}")
+        f_out.write(f"""
 Node: {place_id}
 {place_id_property}: "{place_id}"
 typeOf: dcs:{place_type}
 """)
 
-        members_list
-        cohort_set += "member: %s" % ', '.join(members_list)
-        f_out.write(cohort_set)
+    members_list
+    cohort_set += "member: %s" % ', '.join(members_list)
+    f_out.write(cohort_set)
 
 
 def main(argv):
-    write_mcf(FLAGS.csv, FLAGS.set_id, FLAGS.place_id_property,
+    f_in = open(FLAGS.csv, 'r')
+    f_out = open(FLAGS.csv.replace('.csv', '.mcf'), 'w')
+    write_mcf(f_in, f_out, FLAGS.set_id, FLAGS.place_id_property,
               FLAGS.place_type, FLAGS.set_description)
+    f_in.close()
+    f_out.close()
 
 
 if __name__ == "__main__":

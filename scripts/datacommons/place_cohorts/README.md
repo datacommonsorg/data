@@ -1,18 +1,23 @@
-# Generating Cohort Sets
+# Generating a CohortSet
 
 [generate_cohort_set.py](generate_cohort_set.py) will generate a
 [`CohortSet`](https://datacommons.org/browser/CohortSet)
-node and add a `memberOf: <cohort_set_id>` to each
-[`Place`](https://datacommons.org/browser/Place) in the given CSV.
-Note that the names in the CSV are not used. They are there for
-contributor convenience.
+node and declare each [`Place`](https://datacommons.org/browser/Place)
+in the given CSV as a [`member`](https://datacommons.org/browser/member).
 
-TODO(tjann): Just hardcode "Place" as the place type once Data Commons
-stops accepting place type declarations from arbitrary imports.
+Notes:
+1. [generate_cohort_set.py](generate_cohort_set.py) includes more
+than the minimal logic, in order to support geo resolution for all geo
+identifiers (Data Commons is moving away from dcid-based references for
+geos).
+1. The names in the CSV are not used. They are included for contributor
+convenience.
+1. Once Data Commons stops accepting place type declarations from arbitrary
+imports, this script should just hardcode "Place" as the place type.
 
 ## Example
 
-```
+```bash
 python3 generate_cohort_set.py \
 --set_id=PlacePagesComparisonCityCohort \
 --csv=place_page_compare_cities.csv \
@@ -35,10 +40,20 @@ Where:
     recommend that you just edit this in the resulting MCF, but provide this
     option for streamlining periodic refreshes.
 
-    ## Updating Production CohortSets
+## Updating Production CohortSets
 
-    If a CohortSet is in prod, or staged for prod, add the final command used
-    to generate the unresolved MCF to
-    [refresh_prod_sets.sh](refresh_prod_sets.sh).
+If a CohortSet is in prod, or staged for prod, add the final command used
+to generate the unresolved MCF to
+[refresh_prod_sets.sh](refresh_prod_sets.sh).
 
-    To regenerate the MCF changing a prod CSV, just run `./refresh_prod_sets.sh`.
+To regenerate the MCF changing a prod CSV, just run:
+
+```bash
+./refresh_prod_sets.sh
+```
+
+## To Test:
+
+```bash
+python3 -m unittest generate_cohort_set_test
+```
