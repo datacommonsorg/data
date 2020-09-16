@@ -330,21 +330,21 @@ rangeIncludes: schema:Text
 Node: dcid:geoJsonCoordinatesDP1
 typeOf: schema:Property
 name: "geoJsonCoordinatesDP1"
-description: "Simplified geographical boundary of a place in GeoJSON format. Created by running the Ramer–Douglas–Peucker algorithm on dcid:geoJsonCoordinates with epsilon=0.01."
+description: "Simplified geographical boundary of a place in GeoJSON format. Created by running the Ramer-Douglas-Peucker algorithm on geoJsonCoordinates with epsilon of 0.01."
 domainIncludes: schema:Place
 rangeIncludes: schema:Text
 
 Node: dcid:geoJsonCoordinatesDP2
 typeOf: schema:Property
 name: "geoJsonCoordinatesDP2"
-description: "Simplified geographical boundary of a place in GeoJSON format. Created by running the Ramer–Douglas–Peucker algorithm on dcid:geoJsonCoordinates with epsilon=0.03."
+description: "Simplified geographical boundary of a place in GeoJSON format. Created by running the Ramer-Douglas-Peucker algorithm on geoJsonCoordinates with epsilon of 0.03."
 domainIncludes: schema:Place
 rangeIncludes: schema:Text
 
 Node: dcid:geoJsonCoordinatesDP3
 typeOf: schema:Property
 name: "geoJsonCoordinatesDP3"
-description: "Simplified geographical boundary of a place in GeoJSON format. Created by running the Ramer–Douglas–Peucker algorithm on dcid:geoJsonCoordinates with epsilon=0.05."
+description: "Simplified geographical boundary of a place in GeoJSON format. Created by running the Ramer-Douglas-Peucker algorithm on geoJsonCoordinates with epsilon of 0.05."
 domainIncludes: schema:Place
 rangeIncludes: schema:Text
 
