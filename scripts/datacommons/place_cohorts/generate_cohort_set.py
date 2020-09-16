@@ -55,7 +55,6 @@ Node: {place_id}
 typeOf: dcs:{place_type}
 """)
 
-    members_list
     cohort_set += "member: %s" % ', '.join(members_list)
     f_out.write(cohort_set)
 
