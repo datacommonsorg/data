@@ -1,3 +1,9 @@
+Node: Legislation
+dcid: "Legislation"
+subClassOf: schema:CreativeWork
+name: "Legislation"
+typeOf: schema:Class
+
 Node: StatisticalPopulation
 dcid: "StatisticalPopulation"
 subClassOf: schema:Intangible
