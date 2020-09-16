@@ -33,13 +33,7 @@ print("\n2. Summary of resolution errors (NaN = no error):\n")
 print(df.errors.value_counts(dropna=False))
 
 print("""
-3. Number of OECD places mapped to each DCID. Observe N to 1 issues. (NaN =
-   places that failed to resolve to DCID):
-""")
-print(df.dcid.value_counts(dropna=False).head(40))
-
-print("""
-4. Number of OECD places mapped to each DCID, grouped by namespace (only those
+3. Number of OECD places mapped to each DCID, grouped by namespace (only those
    with N to 1 issues):
 """)
 with pd.option_context('display.max_rows', None):
