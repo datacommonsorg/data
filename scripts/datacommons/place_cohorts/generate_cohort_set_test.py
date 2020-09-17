@@ -19,7 +19,6 @@ class WriteMCFTest(unittest.TestCase):
         with open(csv_file, 'rt') as f_in:
             f_out = io.StringIO()
             generate_cohort_set.write_mcf(f_in, f_out, "AwesomePlaces", "fooId",
-                                          "State",
                                           "List of awesome test places.")
         self.assertEqual(f_out.getvalue(), expected_mcf)
 

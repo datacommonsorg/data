@@ -1,23 +1,23 @@
 
 Node: 3502000
 fooId: "3502000"
-typeOf: dcs:State
+typeOf: schema:Place
 
 Node: 0203000
 fooId: "0203000"
-typeOf: dcs:State
+typeOf: schema:Place
 
 Node: 2603000
 fooId: "2603000"
-typeOf: dcs:State
+typeOf: schema:Place
 
 Node: 1304000
 fooId: "1304000"
-typeOf: dcs:State
+typeOf: schema:Place
 
 Node: 4805000
 fooId: "4805000"
-typeOf: dcs:State
+typeOf: schema:Place
 
 Node: dcid:AwesomePlaces
 name: "AwesomePlaces"

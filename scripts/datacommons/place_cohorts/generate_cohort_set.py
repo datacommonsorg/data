@@ -25,16 +25,13 @@ flags.DEFINE_string(
     "place_id_property", None,
     "The CSV column with the place identifiers. It should also be the DCID of the property."
 )
-flags.DEFINE_string("place_type", None,
-                    "The DCID of the Place type of CohortSet members.")
 flags.DEFINE_string(
     "set_description", None,
     "Optional description of the CohortSet. Used as the value of `description`."
 )
 
 
-def write_mcf(f_in, f_out, set_id, place_id_property, place_type,
-              set_description):
+def write_mcf(f_in, f_out, set_id, place_id_property, set_description):
     """Generates a CohortSet and attaches places from the input file."""
     cohort_set = f"""
 Node: dcid:{set_id}
@@ -52,7 +49,7 @@ typeOf: dcs:CohortSet
         f_out.write(f"""
 Node: {place_id}
 {place_id_property}: "{place_id}"
-typeOf: dcs:{place_type}
+typeOf: schema:Place
 """)
 
     cohort_set += "member: %s" % ', '.join(members_list)
@@ -63,7 +60,7 @@ def main(argv):
     f_in = open(FLAGS.csv, 'r')
     f_out = open(FLAGS.csv.replace('.csv', '.mcf'), 'w')
     write_mcf(f_in, f_out, FLAGS.set_id, FLAGS.place_id_property,
-              FLAGS.place_type, FLAGS.set_description)
+              FLAGS.set_description)
     f_in.close()
     f_out.close()
 
@@ -71,7 +68,6 @@ def main(argv):
 if __name__ == "__main__":
     flags.mark_flag_as_required('csv')
     flags.mark_flag_as_required('set_id')
-    flags.mark_flag_as_required('place_type')
     flags.mark_flag_as_required('place_id_property')
 
     app.run(main)
