@@ -280,7 +280,7 @@ def generate_pop_type_enums(url: str, targets: Set[str]) -> Set[str]:
     Raises:
         ValueError: Some series(s) does not have an item code mapping.
     """
-    df = download_df(url, sep="\t", usecols=("item_code", "item_name"))
+    df = _download_df(url, sep="\t", usecols=("item_code", "item_name"))
     if "item_code" not in df.columns or "item_name" not in df.columns:
         raise ValueError("item_code or/and item_name columns missing")
 
@@ -302,8 +302,8 @@ def generate_pop_type_enums(url: str, targets: Set[str]) -> Set[str]:
     return generated
 
 
-def generate_csv(urls: Iterable[str], dest: str, info_df: pd.DataFrame,
-                 targets: Set[str]) -> None:
+def write_csv(urls: Iterable[str], dest: str, info_df: pd.DataFrame,
+              targets: Set[str]) -> None:
     """Writes out the CSV containing series of a particular type, e.g., CPI-U.
 
     Args:
@@ -314,14 +314,14 @@ def generate_csv(urls: Iterable[str], dest: str, info_df: pd.DataFrame,
     """
     result = pd.DataFrame()
     for url in urls:
-        result = result.append(_generate_csv_helper(url, info_df, targets))
+        result = result.append(_generate_csv(url, info_df, targets))
     result.to_csv(dest, index=False)
     return result
 
 
-def download_df(url: str,
-                sep: str = "\t",
-                usecols: Tuple[str] = None) -> pd.DataFrame:
+def _download_df(url: str,
+                 sep: str = "\t",
+                 usecols: Tuple[str] = None) -> pd.DataFrame:
     """Downloads a CSV from a URL and loads it into a DataFrame,
 
     Args:
@@ -337,8 +337,8 @@ def download_df(url: str,
                        usecols=usecols).rename(columns=lambda col: col.strip())
 
 
-def _generate_csv_helper(url: str, info_df: pd.DataFrame,
-                         targets: Set[str]) -> pd.DataFrame:
+def _generate_csv(url: str, info_df: pd.DataFrame,
+                  targets: Set[str]) -> pd.DataFrame:
     """Returns a DataFrame containing series obtained from "url" and specified
     by "targets".
 
@@ -351,7 +351,7 @@ def _generate_csv_helper(url: str, info_df: pd.DataFrame,
         A DataFrame of five columns: "value", "date", "duration", "statvar",
         and "unit". See module docstring for what the columns are.
     """
-    df = download_df(url, sep=r"\s+")
+    df = _download_df(url, sep=r"\s+")
     result = pd.DataFrame()
     for series_id, group_df in df.groupby(by="series_id"):
         if series_id not in targets:
@@ -378,20 +378,25 @@ def _generate_csv_helper(url: str, info_df: pd.DataFrame,
     return result
 
 
-def generate_statvars(dest: str, targets: Set[str]) -> None:
+def _generate_statvar(series_id: str) -> str:
+    """Returns the statvar definition for a series."""
+    series_info = parse_series_id(series_id)
+    return (f"Node: dcid:{series_info.get_statvar()}\n"
+            "typeOf: dcs:StatisticalVariable\n"
+            f"populationType: dcs:{series_info.get_pop_type()}\n"
+            f"measurementQualifier: dcs:{series_info.get_mqual()}\n"
+            "measuredProperty: dcs:consumerPriceIndex\n"
+            "statType: dcs:measuredValue\n"
+            f"consumer: dcs:{series_info.get_consumer()}\n"
+            f"description: \"The series ID is {series_id}.\"\n")
+
+
+def write_statvars(dest: str, targets: Set[str]) -> None:
     """Writes out the statistical variable definitions required by the
     series in "targets"."""
     with open(dest, "w") as out:
         for series_id in targets:
-            series_info = parse_series_id(series_id)
-            out.write((f"Node: dcid:{series_info.get_statvar()}\n"
-                       "typeOf: dcs:StatisticalVariable\n"
-                       f"populationType: dcs:{series_info.get_pop_type()}\n"
-                       f"measurementQualifier: dcs:{series_info.get_mqual()}\n"
-                       "measuredProperty: dcs:consumerPriceIndex\n"
-                       "statType: dcs:measuredValue\n"
-                       f"consumer: dcs:{series_info.get_consumer()}\n"
-                       f"description: \"The series ID is {series_id}.\"\n"))
+            out.write(_generate_statvar(series_id))
             out.write("\n")
 
 
@@ -420,15 +425,15 @@ def main() -> None:
     unit_enums = set()
     pop_type_enums = set()
     for series_type, urls in SERIES_TYPES_TO_DATA_URLS.items():
-        info_df = download_df(SERIES_TYPES_TO_INFO_URLS[series_type],
-                              sep=r"\s*\t")
+        info_df = _download_df(SERIES_TYPES_TO_INFO_URLS[series_type],
+                               sep=r"\s*\t")
         targets = filter_series(info_df)
         pop_type_enums.update(
             generate_pop_type_enums(
                 SERIES_TYPES_TO_EXPENDITURE_TYPES_URLS[series_type], targets))
         unit_enums.update(generate_unit_enums(info_df, targets))
-        generate_statvars(f"{series_type}.mcf", targets)
-        generate_csv(urls, f"{series_type}.csv", info_df, targets)
+        write_statvars(f"{series_type}.mcf", targets)
+        write_csv(urls, f"{series_type}.csv", info_df, targets)
     write_set("unit_enums.mcf", unit_enums)
     write_set("pop_type_enums.mcf", pop_type_enums)
 
