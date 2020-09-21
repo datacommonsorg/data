@@ -6,7 +6,6 @@ Author: KilimAnnejaro
 
 1. [About the Dataset](#about-the-dataset)
 1. [Import Artifacts](#about-the-import)
-1. [Generating Artifacts](#generating-artifacts)
 
 ## About the dataset
 
