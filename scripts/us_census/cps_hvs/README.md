@@ -5,10 +5,10 @@ Author: KilimAnnejaro
 ## Table of Contents
 
 1. [About the Dataset](#about-the-dataset)
-1. [Import Artifacts](#import-artifacts)
+1. [Import Artifacts](#about-the-import)
 1. [Generating Artifacts](#generating-artifacts)
 
-## About the Dataset
+## About the dataset
 
 ### Download URL
 
@@ -29,7 +29,7 @@ The license is available online at <https://www.kaggle.com/census/homeownership-
 - Documentation: <https://www.kaggle.com/census/homeownership-rate-time-series-collection>
 - Data Visualization UI: <https://fred.stlouisfed.org/series/MNHOWN>
 
-## About the Import
+## About the import
 
 ### Artifacts
 
