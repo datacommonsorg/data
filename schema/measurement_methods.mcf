@@ -74,3 +74,8 @@ Node: dcid:EurostatRegionalStatistics
 name: "EurostatRegionalStatistics"
 typeOf: dcs:StatisticSourceEnum
 description: "Measurement method for regional statistics collected by eurostat.org."
+
+Node: dcid:NationalPrisonerStatistics
+name: "NationalPrisonerStatistics"
+typeOf: dcs:MeasurementMethodEnum
+description: "Measurement method for data from National Prisoner Statistics from ICPSR."
