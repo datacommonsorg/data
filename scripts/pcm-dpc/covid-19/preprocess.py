@@ -38,7 +38,7 @@ class PcmDpc:
                     'observationDate: C:pcm-dpc->Date\n'
                     'value: C:pcm-dpc->{SVname}\n\n')
         idx = 1
-        with open(self.name + '.tmcf', 'a') as f_out:
+        with open(out, 'a') as f_out:
             for statvar in self.stat_vars:
                 f_out.write(
                     TEMPLATE.format_map({
