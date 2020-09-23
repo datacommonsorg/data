@@ -15,9 +15,7 @@ The CSV file is available for download from <https://www.kaggle.com/census/homeo
 
 ### Overview
 
-This dataset contains two variables:
-1. date: The date when the value was measured.
-2. value: Count of housing units occupied by their owners as a percentage of occupied housing units. 
+This dataset contains just one variable, _value_: the count of housing units occupied by their owners as a percentage of occupied housing units. 
 
 ### License
 
@@ -40,7 +38,7 @@ The license is available online at <https://www.kaggle.com/census/homeownership-
 
 ### Import Procedure
 
-To import new homeownership data from FRED into Data Commons, simply upload the CSVs from Kaggle, removing the _realtime_start_ and _realtime_end_ columns manually.
+To import new homeownership data from FRED into Data Commons, simply upload the CSVs from Kaggle.
 
 #### Pre-Processing Validation
 
