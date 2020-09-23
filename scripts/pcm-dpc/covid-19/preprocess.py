@@ -4,6 +4,8 @@ This script preprocesses the covid19 data from Italy Department of Civil
 Protection for importing into Data Commons.
 """
 
+import os
+
 import pandas as pd
 
 
@@ -24,6 +26,10 @@ class PcmDpc:
 
     def generate_tmcf(self):
         """Generate the template mcf."""
+        out = self.name + '.tmcf'
+        if os.path.exists(out):
+            os.remove(out)
+
         geo_node = self.geo_template()  # Write the geo node to template mcf.
         TEMPLATE = ('Node: E:pcm-dpc->E{index}\n'
                     'typeOf: dcs:StatVarObservation\n'
