@@ -26,19 +26,16 @@ class PcmDpc:
 
     def generate_tmcf(self):
         """Generate the template mcf."""
-        out = self.name + '.tmcf'
-        if os.path.exists(out):
-            os.remove(out)
-
-        geo_node = self.geo_template()  # Write the geo node to template mcf.
-        TEMPLATE = ('Node: E:pcm-dpc->E{index}\n'
-                    'typeOf: dcs:StatVarObservation\n'
-                    'variableMeasured: dcs:{SVname}\n'
-                    'observationAbout: {geoNode}\n'
-                    'observationDate: C:pcm-dpc->Date\n'
-                    'value: C:pcm-dpc->{SVname}\n\n')
         idx = 1
-        with open(out, 'a') as f_out:
+        with open(self.name + '.tmcf', 'w') as f_out:
+            # Write the geo node to template mcf.
+            geo_node = self.geo_template(f_out)
+            TEMPLATE = ('Node: E:pcm-dpc->E{index}\n'
+                        'typeOf: dcs:StatVarObservation\n'
+                        'variableMeasured: dcs:{SVname}\n'
+                        'observationAbout: {geoNode}\n'
+                        'observationDate: C:pcm-dpc->Date\n'
+                        'value: C:pcm-dpc->{SVname}\n\n')
             for statvar in self.stat_vars:
                 f_out.write(
                     TEMPLATE.format_map({
@@ -94,7 +91,11 @@ class PcmDpc:
     def set_location(self):
         raise NotImplementedError
 
-    def geo_template(self):
+    def geo_template(self, out):
+        """
+        Args:
+            out: file handle to write the output to.
+        """
         raise NotImplementedError
 
 
@@ -133,7 +134,7 @@ class PcmDpcNational(PcmDpc):
         assert (self.data['State'] == 'ITA').all()
         self.data = self.data.drop(columns=['State'])
 
-    def geo_template(self):
+    def geo_template(self, out):
         return 'dcid:country/ITA'
 
 
@@ -158,12 +159,10 @@ class PcmDpcRegions(PcmDpc):
             'State', 'RegionCode', 'RegionName', 'Latitude', 'Longitude'
         ])
 
-    def geo_template(self):
-        GEO_TEMPLATE = ('Node: E:pcm-dpc->E0\n'
-                        'typeOf: dcs:EurostatNUTS2\n'
-                        'dcid: C:pcm-dpc->Location\n\n')
-        with open(self.name + '.tmcf', 'w') as f_out:
-            f_out.write(GEO_TEMPLATE)
+    def geo_template(self, out):
+        out.write(('Node: E:pcm-dpc->E0\n'
+                   'typeOf: dcs:EurostatNUTS2\n'
+                   'dcid: C:pcm-dpc->Location\n\n'))
         return 'E:pcm-dpc->E0'
 
 
@@ -198,12 +197,10 @@ class PcmDpcProvinces(PcmDpc):
             'ConditionIncident_COVID_19_PositiveCase'
         ]]
 
-    def geo_template(self):
-        GEO_TEMPLATE = ('Node: E:pcm-dpc->E0\n'
-                        'typeOf: dcs:EurostatNUTS3\n'
-                        'dcid: C:pcm-dpc->Location\n\n')
-        with open(self.name + '.tmcf', 'w') as f_out:
-            f_out.write(GEO_TEMPLATE)
+    def geo_template(self, out):
+        out.write(('Node: E:pcm-dpc->E0\n'
+                   'typeOf: dcs:EurostatNUTS3\n'
+                   'dcid: C:pcm-dpc->Location\n\n'))
         return 'E:pcm-dpc->E0'
 
 
