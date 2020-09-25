@@ -1,0 +1,15 @@
+import: {
+  import_name: "Eurostats_NUTS3_FRate_Age"
+  provenance_url: "https://datcom-browser-dev2.googleplex.com/kg?dcid=dc/gte46y"
+  provenance_description: "Fertility rate, mean age, and median age of mothers at childbirth provided by Eruostats."
+  # Path to the resolved MCF. Can be a repeated field.
+  mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/Eurostats_NUTS3_FRate_Age/nodes.mcf-00000-of-00001"
+  enums: "https://storage.cloud.google.com/resolved_mcf/template_mcf_imports/eurostats/fertility_rate_age/Eurostats_NUTS3_FRate_Age.mcf"
+  # First date of imported data.
+  start_date: "2020-01-01"
+  # Last date of imported data.
+  end_date: "2020-07-21"
+  # Source data release schedule.
+  update_frequency: "P1Y"
+  next_release_date: "2021-05-14"
+}
