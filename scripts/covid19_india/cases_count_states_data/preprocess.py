@@ -14,13 +14,14 @@
 
 import json
 import csv
+import pandas as pd
 import urllib.request
 
 # 1. All counts are at State/UT level
 # 2. Only cumulative counts are available at this point
 # 3. 'unassigned' cases are ignored
 # 5. Wrong state codes are ignored
-# 4. Sometimes reports are published more than once
+# 4. Sometimes reports are published more than once. The we take the last report on that day
 
 INDIAN_STATE_CODES = [
     "IN-AP", "IN-AR", "IN-AS", "IN-BR", "IN-CT", "IN-GA", "IN-GJ", "IN-HR",
@@ -40,32 +41,50 @@ output_columns = [
 ]
 
 
-def create_formatted_csv_file(csv_file_path, data):
-    rows = data["rows"]
-    with open(csv_file_path, 'w', newline='') as f_out:
-        writer = csv.DictWriter(f_out,
-                                fieldnames=output_columns,
-                                lineterminator='\n')
-        writer.writeheader()
-        for row in rows:
-            iso_code = ISOCODE_COUNTRY_STATE_FORMAT.format(
-                state=(row["value"]["state"]).upper())
-            if iso_code not in INDIAN_STATE_CODES:
-                continue
-            processed_dict = {}
-            processed_dict["DateTime"] = row["value"]["report_time"]
-            processed_dict["isoCode"] = iso_code
-            processed_dict[
-                "CumulativeCount_MedicalTest_ConditionCOVID_19_Positive"] = row[
-                    "value"]["confirmed"]
-            processed_dict[
-                "CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered"] = row[
-                    "value"]["cured"]
-            processed_dict[
-                "CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased"] = row[
-                    "value"]["death"]
+def get_isocode(state):
+    iso_code = ISOCODE_COUNTRY_STATE_FORMAT.format(state=state.upper())
+    if iso_code not in INDIAN_STATE_CODES:
+        return "NOT_VALID_CODE"
+    return iso_code
 
-            writer.writerow(processed_dict)
+
+def create_formatted_csv_file(csv_file_path, data):
+
+    df = pd.json_normalize(data["rows"])
+
+    #convert to datetime and the drop the not required columns
+    df['value.report_time'] = pd.to_datetime(df['value.report_time'])
+    df = df.sort_values(by="value.report_time")
+    df['DateTime'] = df['value.report_time'].dt.date
+    df = df.drop([
+        'id', 'key', 'value._id', 'value._rev', 'value.source', 'value.type',
+        'value.confirmed_india', 'value.confirmed_foreign'
+    ],
+                 axis=1)
+
+    #get the isocode and drop rows that have invalid isocodes
+    df['isoCode'] = df['value.state'].apply(lambda x: get_isocode(x))
+    df = df[df['isoCode'] != "NOT_VALID_CODE"]
+    df = df.groupby([df["DateTime"], df["isoCode"]], as_index=False).last()
+
+    #prepare for exporting
+    df = df.rename(
+        columns={
+            'value.confirmed':
+                "CumulativeCount_MedicalTest_ConditionCOVID_19_Positive",
+            'value.death':
+                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased',
+            'value.cured':
+                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered'
+        })
+    df = df.drop(['value.report_time', 'value.state'], axis=1)
+    df = df[[
+        "DateTime", "isoCode",
+        "CumulativeCount_MedicalTest_ConditionCOVID_19_Positive",
+        "CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered",
+        "CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased"
+    ]]
+    df.to_csv(csv_file_path, index=False, header=True)
 
 
 if __name__ == '__main__':
