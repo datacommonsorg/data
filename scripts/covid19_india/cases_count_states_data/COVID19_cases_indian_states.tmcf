@@ -26,5 +26,5 @@ value: C:COVID19_cases_india->CumulativeCount_MedicalConditionIncident_COVID_19_
 
 
 Node: E:COVID19_cases_india->E3
-typeOf: dcs:AdministrativeAreaLevel1
+typeOf: dcs:AdministrativeArea1
 isoCode: C:COVID19_cases_india->isoCode
