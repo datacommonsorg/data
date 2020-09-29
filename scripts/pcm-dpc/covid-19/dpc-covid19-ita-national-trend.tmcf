@@ -1,0 +1,84 @@
+Node: E:pcm-dpc->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientHospitalizedWithSymptoms
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_PatientHospitalizedWithSymptoms
+
+Node: E:pcm-dpc->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientInICU
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_PatientInICU
+
+Node: E:pcm-dpc->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_PatientHospitalized
+
+Node: E:pcm-dpc->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientInHomeIsolation
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_PatientInHomeIsolation
+
+Node: E:pcm-dpc->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_ActiveCase
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->Count_MedicalConditionIncident_COVID_19_ActiveCase
+
+Node: E:pcm-dpc->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_PositiveCase
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->IncrementalCount_MedicalConditionIncident_COVID_19_PositiveCase
+
+Node: E:pcm-dpc->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_ActiveCase
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->IncrementalCount_MedicalConditionIncident_COVID_19_ActiveCase
+
+Node: E:pcm-dpc->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+
+Node: E:pcm-dpc->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+
+Node: E:pcm-dpc->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->CumulativeCount_MedicalConditionIncident_COVID_19_PositiveCase
+
+Node: E:pcm-dpc->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_COVID_19
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->CumulativeCount_MedicalTest_COVID_19
+
+Node: E:pcm-dpc->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_Person_COVID_19_Tested
+observationAbout: dcid:country/ITA
+observationDate: C:pcm-dpc->Date
+value: C:pcm-dpc->CumulativeCount_Person_COVID_19_Tested
+
