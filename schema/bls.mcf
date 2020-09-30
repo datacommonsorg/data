@@ -15330,8 +15330,8 @@ Node: dcid:NAICS/JOLTS_929000
 typeOf: dcs:NAICSEnum
 name: "State and local government excluding education"
 
-Node: dcid: consumerPriceIndex
-typeOf: schema:property
+Node: dcid:consumerPriceIndex
+typeOf: schema:Property
 domainIncludes: dcs:ConsumerGoodsAndServices
 rangeIncludes: schema:Number
 description: "A Consumer Price Index measures changes in the price level of a weighted average market basket of consumer goods and services purchased by households."
@@ -15350,7 +15350,7 @@ description: "The reference base is December 1999 equals 100."
 descriptionUrl: "https://www.bls.gov/cpi/technical-notes/home.htm"
 
 Node: dcid:Consumer
-Name: "Consumer"
+name: "Consumer"
 typeOf: schema:Class
 subClassOf: schema:Person
 description: "A consumer is a person who intends to order or use purchased goods, products, or services primarily for personal, social, family, household and similar needs, not directly related to entrepreneurial or business activities."
