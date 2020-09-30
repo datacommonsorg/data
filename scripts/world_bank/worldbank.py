@@ -40,13 +40,13 @@ WORLDBANK_COL_REMAP = {
 }
 
 TEMPLATE_TMCF = """
-Node: E:WorldBank->E0
+Node: E:WorldBank->E{idx}
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
 observationPeriod: "P1Y"
 observationAbout: C:WorldBank->ISO3166Alpha3
-value: C:WorldBank->Value
+value: C:WorldBank->Value{idx}
 """
 
 TEMPLATE_STAT_VAR = """
@@ -309,7 +309,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
             tmcf, stat_var_obs_cols, stat_vars_in_group = enum
             if len(stat_vars_in_group) == 0:
                 continue
-            f_out.write(tmcf.replace("->Value", f"->Value{index}"))
+            f_out.write(tmcf.format_map({'idx': index}))
 
             # Get only the indicator codes in that grouping.
             matching_csv = output_csv[output_csv['IndicatorCode'].isin(

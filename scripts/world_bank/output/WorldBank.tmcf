@@ -7,7 +7,7 @@ observationPeriod: "P1Y"
 observationAbout: C:WorldBank->ISO3166Alpha3
 value: C:WorldBank->Value0
 
-Node: E:WorldBank->E0
+Node: E:WorldBank->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
@@ -16,16 +16,7 @@ observationAbout: C:WorldBank->ISO3166Alpha3
 value: C:WorldBank->Value1
 unit: C:WorldBank->unit
 
-Node: E:WorldBank->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:WorldBank->StatisticalVariable
-observationDate: C:WorldBank->Year
-observationPeriod: "P1Y"
-observationAbout: C:WorldBank->ISO3166Alpha3
-value: C:WorldBank->Value4
-scalingFactor: C:WorldBank->scalingFactor
-
-Node: E:WorldBank->E0
+Node: E:WorldBank->E9
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
@@ -35,7 +26,7 @@ value: C:WorldBank->Value9
 measurementDenominator: C:WorldBank->measurementDenominator
 unit: C:WorldBank->unit
 
-Node: E:WorldBank->E0
+Node: E:WorldBank->E10
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
@@ -45,7 +36,7 @@ value: C:WorldBank->Value10
 measurementDenominator: C:WorldBank->measurementDenominator
 sourceScalingFactor: C:WorldBank->sourceScalingFactor
 
-Node: E:WorldBank->E0
+Node: E:WorldBank->E12
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
@@ -55,7 +46,7 @@ value: C:WorldBank->Value12
 measurementDenominator: C:WorldBank->measurementDenominator
 scalingFactor: C:WorldBank->scalingFactor
 
-Node: E:WorldBank->E0
+Node: E:WorldBank->E16
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
@@ -64,7 +55,7 @@ observationAbout: C:WorldBank->ISO3166Alpha3
 value: C:WorldBank->Value16
 measurementMethod: C:WorldBank->measurementMethod
 
-Node: E:WorldBank->E0
+Node: E:WorldBank->E28
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
