@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ Fetches, cleans, outputs TMCFs and CSVs for all World Bank development
-    indicator codes provided in WorldBankIndicators.csv for all years and for
-    all countries provided in WorldBankCountries.csv. """
+    indicator codes provided by the indicatorSchemaFile flag for all years
+    and for all countries provided in WorldBankCountries.csv. """
 
 from absl import app
+from absl import flags
 import pandas as pd
 import itertools
 import requests
@@ -23,6 +24,12 @@ import zipfile
 import io
 import time
 import re
+
+FLAGS = flags.FLAGS
+flags.DEFINE_boolean("fetchFromSource", True,
+                     "Whether to bypass cached CSVs and fetch from source.")
+flags.DEFINE_string("indicatorSchemaFile", None,
+                    "Path to indicator schema CSV file.")
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
@@ -55,7 +62,7 @@ measurementDenominator: dcs:{measurementDenominator}
 """
 
 
-def read_worldbank(iso3166alpha3):
+def read_worldbank(iso3166alpha3, fetchFromSource=True):
     """ Fetches and tidies all ~1500 World Bank indicators
         for a given ISO 3166 alpha 3 code.
 
@@ -76,57 +83,65 @@ def read_worldbank(iso3166alpha3):
             Takes approximately 10 seconds to download and
             tidy one country in a Jupyter notebook.
     """
-    country_zip = ("http://api.worldbank.org/v2/en/country/" + iso3166alpha3 +
-                   "?downloadformat=csv")
-    r = requests.get(country_zip)
-    if r.status_code != 200:
-        print('Status code: ', r.status_code)
-        time.sleep(30)
+    if fetchFromSource:
+        print(f"Downloading {country_code}")
+        country_zip = ("http://api.worldbank.org/v2/en/country/" +
+                       iso3166alpha3 + "?downloadformat=csv")
         r = requests.get(country_zip)
+        if r.status_code != 200:
+            print('Status code: ', r.status_code)
+            time.sleep(30)
+            r = requests.get(country_zip)
+            if r.status_code != 200:
+                print('Failed to retrieve ' + iso3166alpha3)
 
-    filebytes = io.BytesIO(r.content)
-    myzipfile = zipfile.ZipFile(filebytes)
+        filebytes = io.BytesIO(r.content)
+        myzipfile = zipfile.ZipFile(filebytes)
 
-    # We need to select the data file which starts with "API",
-    # but does not have an otherwise regular filename structure.
-    file_to_open = None
-    for file in myzipfile.namelist():
-        if file.startswith("API"):
-            file_to_open = file
-            break
-    assert file_to_open is not None, \
-        "Failed to find data for" + iso3166alpha3
+        # We need to select the data file which starts with "API",
+        # but does not have an otherwise regular filename structure.
+        file_to_open = None
+        for file in myzipfile.namelist():
+            if file.startswith("API"):
+                file_to_open = file
+                break
+        assert file_to_open is not None, \
+            "Failed to find data for" + iso3166alpha3
 
-    df = None
-    # Captures any text contained in double quotatations.
-    line_match = re.compile(r"\"([^\"]*)\"")
+        df = None
+        # Captures any text contained in double quotatations.
+        line_match = re.compile(r"\"([^\"]*)\"")
 
-    for line in myzipfile.open(file_to_open).readlines():
-        # Cells are contained in quotations and comma separated.
-        cols = line_match.findall(line.decode("utf-8"))
+        for line in myzipfile.open(file_to_open).readlines():
+            # Cells are contained in quotations and comma separated.
+            cols = line_match.findall(line.decode("utf-8"))
 
-        # CSVs include header informational lines which should be ignored.
-        if len(cols) > 2:
-            # Use first row as the header.
-            if df is None:
-                df = pd.DataFrame(columns=cols)
-            else:
-                df = df.append(pd.DataFrame([cols], columns=df.columns),
-                               ignore_index=True)
+            # CSVs include header informational lines which should be ignored.
+            if len(cols) > 2:
+                # Use first row as the header.
+                if df is None:
+                    df = pd.DataFrame(columns=cols)
+                else:
+                    df = df.append(pd.DataFrame([cols], columns=df.columns),
+                                   ignore_index=True)
 
-    df = df.rename(columns=WORLDBANK_COL_REMAP)
+        df = df.rename(columns=WORLDBANK_COL_REMAP)
 
-    # Turn each year into its own row.
-    df = df.set_index(
-        ['CountryName', 'CountryCode', 'IndicatorName', 'IndicatorCode'])
-    df = df.stack()
-    df.index = df.index.rename('year', level=4)
-    df.name = "Value"
-    df = df.reset_index()
+        # Turn each year into its own row.
+        df = df.set_index(
+            ['CountryName', 'CountryCode', 'IndicatorName', 'IndicatorCode'])
+        df = df.stack()
+        df.index = df.index.rename('year', level=4)
+        df.name = "Value"
+        df = df.reset_index()
 
-    # Convert to numeric and drop empty values.
-    df['Value'] = pd.to_numeric(df['Value'])
-    df = df.dropna()
+        # Convert to numeric and drop empty values.
+        df['Value'] = pd.to_numeric(df['Value'])
+        df = df.dropna()
+        df.to_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv',
+                  index=False)
+    else:
+        df = pd.read_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv')
     return df
 
 
@@ -145,15 +160,16 @@ def build_stat_vars_from_indicator_list(row):
             next_constraint += 1
         return constraints_text
 
+    # TODO(tjann): try to turn this into a format_map.
     # yapf: disable
     # Input all required statistical variable fields.
-    new_stat_var = (TEMPLATE_STAT_VAR
-        .replace("{INDICATOR}", row['IndicatorCode'].replace(".", "_"))
-        .replace("{NAME}", row['IndicatorName'])
-        .replace("{DESCRIPTION}", row['SourceNote'])
-        .replace("{measuredProperty}", row['measuredProp'])
-        .replace("{CONSTRAINTS}", row_to_constraints(row))
-    )
+    new_stat_var = (TEMPLATE_STAT_VAR.replace(
+        "{INDICATOR}", row['IndicatorCode'].replace(".", "_")).replace(
+            "{NAME}", row['IndicatorName']).replace(
+                "{DESCRIPTION}", row['SourceNote']).replace(
+                    "{measuredProperty}",
+                    row['measuredProp']).replace("{CONSTRAINTS}",
+                                                 row_to_constraints(row)))
     # yapf: enable
     # Include or remove option fields.
     for optional_col in ([
@@ -189,7 +205,8 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     """
     # All the statistical observation properties that we included.
     properties_of_stat_var_observation = ([
-        'measurementMethod', 'scalingFactor', 'sourceScalingFactor', 'unit'
+        'measurementMethod', 'measurementDenominator', 'scalingFactor',
+        'sourceScalingFactor', 'unit'
     ])
     # List of tuples to return.
     tmcfs_for_stat_vars = []
@@ -222,7 +239,9 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     return tmcfs_for_stat_vars
 
 
-def download_indicator_data(worldbank_countries, indicator_codes):
+def download_indicator_data(worldbank_countries,
+                            indicator_codes,
+                            fetchFromSource=True):
     """ Downloads World Bank country data for all countries and
             indicators provided.
 
@@ -242,8 +261,7 @@ def download_indicator_data(worldbank_countries, indicator_codes):
     indicators_to_keep = list(indicator_codes['IndicatorCode'].unique())
 
     for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
-        print(f"Downloading {country_code}")
-        country_df = read_worldbank(country_code)
+        country_df = read_worldbank(country_code, fetchFromSource)
 
         # Remove unneccessary indicators.
         country_df = country_df[country_df['IndicatorCode'].isin(
@@ -280,29 +298,39 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
     ]]
 
     # Output tmcf and csv for each unique World Bank grouping.
-    for index, enum in enumerate(tmcfs_for_stat_vars):
-        tmcf, stat_var_obs_cols, stat_vars_in_group = enum
-        if len(stat_vars_in_group) != 0:
-            with open(f"output/WorldBank_{index}.tmcf", 'w',
-                      newline='') as f_out:
-                f_out.write(tmcf)
+    df = pd.DataFrame(columns=[
+        'StatisticalVariable',
+        'IndicatorCode',
+        'ISO3166Alpha3',
+        'Year',
+    ])
+    with open('output/WorldBank.tmcf', 'w', newline='') as f_out:
+        for index, enum in enumerate(tmcfs_for_stat_vars):
+            tmcf, stat_var_obs_cols, stat_vars_in_group = enum
+            if len(stat_vars_in_group) == 0:
+                continue
+            f_out.write(tmcf.replace("->Value", f"->Value{index}"))
 
-            # Output only the indicator codes in that grouping.
+            # Get only the indicator codes in that grouping.
             matching_csv = output_csv[output_csv['IndicatorCode'].isin(
                 stat_vars_in_group)]
 
-            # Include the Stat Observation columns in the output CSV.
-            if len(stat_var_obs_cols) > 1:
-                matching_csv = pd.merge(matching_csv,
-                                        indicator_codes[stat_var_obs_cols],
-                                        on="IndicatorCode")
-
             # Format to decimals.
             matching_csv = matching_csv.round(10)
-            matching_csv.drop("IndicatorCode",
-                              axis=1).to_csv(f"output/WorldBank_{index}.csv",
-                                             float_format='%.10f',
-                                             index=False)
+            df = df.merge(
+                matching_csv.rename(columns={'Value': f"Value{index}"}),
+                how='outer',
+                on=[
+                    'StatisticalVariable',
+                    'IndicatorCode',
+                    'ISO3166Alpha3',
+                    'Year',
+                ])
+    # Include the Stat Observation columns in the output CSV.
+    df = df.merge(indicator_codes[stat_var_obs_cols], on='IndicatorCode')
+    df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
+                                            float_format='%.10f',
+                                            index=False)
 
 
 def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
@@ -334,7 +362,7 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
 
 def main(_):
     # Load statistical variable configuration file.
-    indicator_codes = pd.read_csv("WorldBankIndicators.csv")
+    indicator_codes = pd.read_csv(FLAGS.indicatorSchemaFile)
 
     # Add source description to note.
     def add_source_to_description(row):
@@ -362,7 +390,8 @@ def main(_):
     # Download data for all countries.
     worldbank_countries = pd.read_csv("WorldBankCountries.csv")
     worldbank_dataframe = download_indicator_data(worldbank_countries,
-                                                  indicator_codes)
+                                                  indicator_codes,
+                                                  FLAGS.fetchFromSource)
 
     # Remap columns to match expected format.
     worldbank_dataframe['Value'] = pd.to_numeric(worldbank_dataframe['Value'])
@@ -375,9 +404,9 @@ def main(_):
             lambda code: "dcs:" + code)
 
     # Scale values by scaling factor and replace exisiting StatVars.
-    scaling_factor_lookup = (indicator_codes.set_index("IndicatorCode")
+    scaling_factor_lookup = (indicator_codes.set_index('IndicatorCode')
                              ['sourceScalingFactor'].dropna().to_dict())
-    existing_stat_var_lookup = (indicator_codes.set_index("IndicatorCode")
+    existing_stat_var_lookup = (indicator_codes.set_index('IndicatorCode')
                                 ['ExistingStatVar'].dropna().to_dict())
     worldbank_dataframe = worldbank_dataframe.apply(
         lambda row: source_scaling_remap(row, scaling_factor_lookup,

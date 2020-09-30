@@ -1,0 +1,10 @@
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value12
+measurementMethod: C:WorldBank->measurementMethod
+scalingFactor: C:WorldBank->scalingFactor

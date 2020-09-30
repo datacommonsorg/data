@@ -1,0 +1,76 @@
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value0
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value1
+unit: C:WorldBank->unit
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value4
+scalingFactor: C:WorldBank->scalingFactor
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value9
+measurementDenominator: C:WorldBank->measurementDenominator
+unit: C:WorldBank->unit
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value10
+measurementDenominator: C:WorldBank->measurementDenominator
+sourceScalingFactor: C:WorldBank->sourceScalingFactor
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value12
+measurementDenominator: C:WorldBank->measurementDenominator
+scalingFactor: C:WorldBank->scalingFactor
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value16
+measurementMethod: C:WorldBank->measurementMethod
+
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: "P1Y"
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value28
+measurementMethod: C:WorldBank->measurementMethod
+measurementDenominator: C:WorldBank->measurementDenominator
+scalingFactor: C:WorldBank->scalingFactor

@@ -1,0 +1,903 @@
+CountryName,CountryCode,IndicatorName,IndicatorCode,year,Value
+St. Martin (French part),MAF,"Intentional homicides (per 100,000 people)",VC.IHR.PSRC.P5,2011,21.361245360999998
+St. Martin (French part),MAF,"Intentional homicides (per 100,000 people)",VC.IHR.PSRC.P5,2012,5.403652869299999
+St. Martin (French part),MAF,"Intentional homicides (per 100,000 people)",VC.IHR.PSRC.P5,2013,21.943057765
+St. Martin (French part),MAF,"Intentional homicides (per 100,000 people)",VC.IHR.PSRC.P5,2014,22.211116664000002
+St. Martin (French part),MAF,"Intentional homicides (per 100,000 people)",VC.IHR.PSRC.P5,2015,16.729401924
+St. Martin (French part),MAF,"Intentional homicides (per 100,000 people)",VC.IHR.PSRC.P5,2016,27.730789496
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1982,76.6
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1983,76.2
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1984,76.3
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1985,76.1
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1986,76.9
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1987,77.0
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1988,77.6
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1989,77.6
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1990,77.8
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1991,79.1
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1992,78.6
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1993,78.8
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1994,79.1
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1995,79.3
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1996,79.5
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1997,79.7
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1998,79.9
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1999,80.1
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2000,80.3
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2001,80.5
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2002,80.7
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2003,80.9
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2004,81.0
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2005,81.2
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2006,81.4
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2007,81.5
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2008,81.7
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2009,81.9
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2010,82.0
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2011,82.2
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2012,82.3
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2013,82.5
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2014,82.6
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2015,82.8
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2016,82.9
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2017,83.0
+St. Martin (French part),MAF,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,2018,83.2
+St. Martin (French part),MAF,"Plant species (higher), threatened",EN.HPT.THRD.NO,2018,3.0
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1990,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1991,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1992,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1993,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1994,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1995,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1996,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1997,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1998,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,1999,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2000,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2001,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2002,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2003,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2004,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2005,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2006,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2007,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2008,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2009,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2010,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2011,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2012,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2013,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2014,18.3823529411765
+St. Martin (French part),MAF,Forest area (% of land area),AG.LND.FRST.ZS,2015,18.3823529411765
+St. Martin (French part),MAF,Terrestrial protected areas (% of total land area),ER.LND.PTLD.ZS,2016,16.78
+St. Martin (French part),MAF,Terrestrial protected areas (% of total land area),ER.LND.PTLD.ZS,2017,12.77155153357
+St. Martin (French part),MAF,Terrestrial protected areas (% of total land area),ER.LND.PTLD.ZS,2018,12.77155153357
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1969,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1970,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1971,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1972,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1973,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1974,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1975,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1976,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1977,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1978,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1979,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1980,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1981,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1982,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1983,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1984,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1985,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1986,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1987,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1988,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1989,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1990,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1991,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1992,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1993,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1994,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1995,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1996,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1997,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1998,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,1999,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2000,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2001,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2002,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2003,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2004,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2005,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2006,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2007,0.0
+St. Martin (French part),MAF,Agricultural nitrous oxide emissions (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.AG.KT.CE,2008,0.0
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2010,64.35
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2011,100.0
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2012,100.0
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2013,100.0
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2014,100.0
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2015,100.0
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2016,100.0
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2017,100.0
+St. Martin (French part),MAF,Access to electricity (% of population),EG.ELC.ACCS.ZS,2018,100.0
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1982,21.0
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1983,23.4
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1984,24.3
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1985,25.0
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1986,23.9
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1987,25.2
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1988,25.5
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1989,26.1
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1990,24.9
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1991,23.8
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1992,22.2
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1993,20.7
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1994,20.1
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1995,19.5
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1996,18.9
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1997,18.4
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1998,17.9
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1999,17.6
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2000,17.4
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2001,17.3
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2002,17.3
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2003,17.3
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2004,17.4
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2005,17.5
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2006,17.5
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2007,17.4
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2008,17.2
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2009,17.0
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2010,16.8
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2011,16.6
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2012,16.3
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2013,16.0
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2014,15.7
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2015,15.4
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2016,15.2
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2017,14.9
+St. Martin (French part),MAF,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,2018,14.7
+St. Martin (French part),MAF,"Internally displaced persons, new displacement associated with disasters (number of cases)",VC.IDP.NWDS,2017,11000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2011,127000000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2012,131000000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2013,164000000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2014,132000000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2015,129000000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2016,132000000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2017,123000000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2018,148000000.0
+St. Martin (French part),MAF,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,2019,140000000.0
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1982,70.0
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1983,69.5
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1984,69.7
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1985,69.4
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1986,70.3
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1987,70.5
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1988,71.1
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1989,71.2
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1990,71.4
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1991,72.9
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1992,72.4
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1993,72.5
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1994,72.7
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1995,72.8
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1996,73.0
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1997,73.2
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1998,73.4
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1999,73.6
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2000,73.8
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2001,74.0
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2002,74.2
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2003,74.4
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2004,74.6
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2005,74.7
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2006,74.9
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2007,75.1
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2008,75.2
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2009,75.4
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2010,75.6
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2011,75.7
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2012,75.9
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2013,76.0
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2014,76.2
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2015,76.3
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2016,76.5
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2017,76.6
+St. Martin (French part),MAF,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,2018,76.7
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2010,0.0
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2011,0.0
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2012,27.0204544840444
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2013,54.86516884755711
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2014,55.532417048452
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2015,111.55111829996099
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2016,332.732566199917
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2017,246.17067833698
+St. Martin (French part),MAF,Secure Internet servers (per 1 million people),IT.NET.SECR.P6,2018,295.191069128381
+St. Martin (French part),MAF,Marine protected areas (% of territorial waters),ER.MRN.PTMR.ZS,2016,96.56592121
+St. Martin (French part),MAF,Marine protected areas (% of territorial waters),ER.MRN.PTMR.ZS,2017,96.4019006131393
+St. Martin (French part),MAF,Marine protected areas (% of territorial waters),ER.MRN.PTMR.ZS,2018,96.4019006131393
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1961,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1962,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1963,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1964,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1965,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1966,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1967,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1968,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1969,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1970,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1971,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1972,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1973,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1974,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1975,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1976,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1977,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1978,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1979,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1980,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1981,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1982,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1983,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1984,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1985,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1986,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1987,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1988,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1989,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1990,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1991,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1992,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1993,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1994,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1995,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1996,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1997,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1998,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,1999,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2000,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2001,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2002,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2003,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2004,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2005,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2006,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2007,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2008,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2009,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2010,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2011,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2012,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2013,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2014,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2015,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2016,54.4
+St. Martin (French part),MAF,Land area (sq. km),AG.LND.TOTL.K2,2017,54.4
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1970,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1971,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1972,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1973,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1974,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1975,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1976,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1977,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1978,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1979,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1980,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1981,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1982,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1983,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1984,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1985,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1986,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1987,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1988,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1989,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1990,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1991,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1992,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1993,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1994,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1995,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1996,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1997,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1998,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,1999,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2000,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2001,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2002,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2003,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2004,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2005,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2006,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2007,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2008,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2009,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2010,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2011,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2012,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2013,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2014,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2015,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2016,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2017,0.0
+St. Martin (French part),MAF,Adjusted savings: mineral depletion (current US$),NY.ADJ.DMIN.CD,2018,0.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2011,734000000.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2012,768000000.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2013,925000000.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2014,1013000000.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2015,857000000.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2016,856000000.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2017,761000000.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2018,902000000.0
+St. Martin (French part),MAF,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,2019,915000000.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2007,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2008,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2009,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2010,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2011,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2012,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2013,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2014,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2015,90.0
+St. Martin (French part),MAF,Total fisheries production (metric tons),ER.FSH.PROD.MT,2016,90.0
+St. Martin (French part),MAF,"Fish species, threatened",EN.FSH.THRD.NO,2018,31.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1969,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1970,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1971,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1972,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1973,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1974,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1975,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1976,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1977,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1978,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1979,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1980,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1981,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1982,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1983,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1984,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1985,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1986,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1987,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1988,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1989,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1990,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1991,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1992,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1993,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1994,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1995,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1996,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1997,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1998,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,1999,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2000,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2001,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2002,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2003,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2004,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2005,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2006,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2007,0.0
+St. Martin (French part),MAF,Methane emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.METH.EG.KT.CE,2008,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1990,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1991,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1992,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1993,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1994,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1995,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1996,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1997,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1998,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,1999,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2000,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2001,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2002,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2003,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2004,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2005,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2006,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2007,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2008,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2009,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2010,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2011,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2012,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2013,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2014,0.0
+St. Martin (French part),MAF,Renewable electricity output (% of total electricity output),EG.ELC.RNEW.ZS,2015,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1969,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1970,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1971,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1972,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1973,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1974,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1975,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1976,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1977,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1978,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1979,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1980,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1981,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1982,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1983,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1984,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1985,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1986,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1987,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1988,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1989,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1990,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1991,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1992,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1993,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1994,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1995,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1996,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1997,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1998,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,1999,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2000,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2001,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2002,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2003,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2004,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2005,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2006,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2007,0.0
+St. Martin (French part),MAF,Agricultural methane emissions (thousand metric tons of CO2 equivalent),EN.ATM.METH.AG.KT.CE,2008,0.0
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1961,73.3272058823529
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1962,74.92647058823529
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1963,76.8933823529412
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1964,79.1911764705882
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1965,82.1323529411765
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1966,86.1213235294118
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1967,90.4411764705882
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1968,95.45955882352942
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1969,100.34926470588199
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1970,105.0
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1971,109.264705882353
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1972,113.16176470588199
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1973,117.05882352941201
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1974,121.452205882353
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1975,126.48897058823499
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1976,133.198529411765
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1977,141.875
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1978,150.551470588235
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1979,157.297794117647
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1980,161.231617647059
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1981,159.522058823529
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1982,153.841911764706
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1983,152.463235294118
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1984,166.5625
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1985,203.32720588235298
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1986,267.628676470588
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1987,354.319852941176
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1988,448.125
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1989,527.9779411764711
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1990,579.411764705882
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1991,596.488970588235
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1992,584.761029411765
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1993,555.1470588235289
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1994,523.6029411764711
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1995,502.22426470588204
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1996,493.547794117647
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1997,494.65073529411796
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1998,503.52941176470597
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,1999,516.838235294118
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2000,531.893382352941
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2001,548.768382352941
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2002,568.198529411765
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2003,589.2095588235289
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2004,610.036764705882
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2005,629.558823529412
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2006,647.738970588235
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2007,664.283088235294
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2008,678.033088235294
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2009,687.0772058823529
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2010,690.845588235294
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2011,688.345588235294
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2012,680.3125
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2013,670.091911764706
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2014,662.0404411764711
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2015,659.154411764706
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2016,662.9595588235289
+St. Martin (French part),MAF,Population density (people per sq. km of land area),EN.POP.DNST,2017,672.058823529412
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1961,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1962,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1963,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1964,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1965,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1966,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1967,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1968,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1969,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1970,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1971,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1972,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1973,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1974,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1975,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1976,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1977,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1978,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1979,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1980,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1981,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1982,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1983,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1984,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1985,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1986,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1987,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1988,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1989,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1990,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1991,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1992,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1993,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1994,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1995,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1996,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1997,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1998,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,1999,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2000,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2001,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2002,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2003,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2004,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2005,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2006,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2007,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2008,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2009,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2010,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2011,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2012,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2013,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2014,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2015,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2016,54.4
+St. Martin (French part),MAF,Surface area (sq. km),AG.SRF.TOTL.K2,2017,54.4
+St. Martin (French part),MAF,"Mammal species, threatened",EN.MAM.THRD.NO,2018,2.0
+St. Martin (French part),MAF,"Bird species, threatened",EN.BIR.THRD.NO,2018,1.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1990,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1991,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1992,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1993,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1994,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1995,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1996,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1997,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1998,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,1999,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2000,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2001,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2002,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2003,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2004,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2005,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2006,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2007,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2008,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2009,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2010,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2011,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2012,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2013,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2014,10.0
+St. Martin (French part),MAF,Forest area (sq. km),AG.LND.FRST.K2,2015,10.0
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1982,3.6
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1983,3.5
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1984,3.4
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1985,3.4
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1986,3.1
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1987,3.1
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1988,2.9
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1989,2.9
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1990,2.8
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1991,2.6
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1992,2.8
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1993,2.8
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1994,2.8
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1995,2.9
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1996,3.0
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1997,3.0
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1998,3.1
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1999,3.2
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2000,3.3
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2001,3.4
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2002,3.5
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2003,3.5
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2004,3.6
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2005,3.7
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2006,3.7
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2007,3.7
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2008,3.7
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2009,3.8
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2010,3.8
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2011,3.9
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2012,4.0
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2013,4.0
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2014,4.1
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2015,4.2
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2016,4.2
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2017,4.3
+St. Martin (French part),MAF,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,2018,4.4
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1982,73.21951219512201
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1983,72.7682926829268
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1984,72.91951219512201
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1985,72.6682926829268
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1986,73.519512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1987,73.67073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1988,74.2707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1989,74.3219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1990,74.5219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1991,75.92439024390251
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1992,75.42439024390251
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1993,75.5731707317073
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1994,75.8219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1995,75.9707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1996,76.17073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1997,76.37073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1998,76.5707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1999,76.7707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2000,76.9707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2001,77.17073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2002,77.37073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2003,77.5707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2004,77.7219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2005,77.87073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2006,78.0707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2007,78.2219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2008,78.37073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2009,78.5707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2010,78.7219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2011,78.87073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2012,79.0219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2013,79.17073170731709
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2014,79.3219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2015,79.4707317073171
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2016,79.62195121951221
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2017,79.7219512195122
+St. Martin (French part),MAF,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2018,79.87073170731709
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2010,0.0
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2011,0.0
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2012,1.0
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2013,2.0
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2014,2.0
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2015,4.0
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2016,12.0
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2017,9.0
+St. Martin (French part),MAF,Secure Internet servers,IT.NET.SECR,2018,11.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2007,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2008,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2009,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2010,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2011,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2012,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2013,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2014,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2015,90.0
+St. Martin (French part),MAF,Capture fisheries production (metric tons),ER.FSH.CAPT.MT,2016,90.0
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2010,84.59
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2011,95.6134185791016
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2012,96.5005722045898
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2013,97.3838958740234
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2014,98.2641448974609
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2015,99.2411270141602
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2016,99.69439697265629
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2017,99.9525680541992
+St. Martin (French part),MAF,"Access to electricity, urban (% of urban population)",EG.ELC.ACCS.UR.ZS,2018,100.0
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1961,2.4360504294951
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1962,2.1575542437208797
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1963,2.5912577099583
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1964,2.9445066834080804
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1965,3.64671219128122
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1966,4.74250344834311
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1967,4.89426148138313
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1968,5.40030343579651
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1969,4.9954057937438705
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1970,4.5303602237662695
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1971,3.98130823781749
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1972,3.50449085611746
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1973,3.3858232565449304
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1974,3.6844244505666603
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1975,4.06342971725941
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1976,5.168560225254269
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1977,6.31056706425414
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1978,5.93586347495511
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1979,4.38357635709398
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1980,2.47011635333269
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1981,-1.06597375930856
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1982,-3.62566843254221
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1983,-0.9002041226547399
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1984,8.84471274157339
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1985,19.944591868019398
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1986,27.4783951171072
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1987,28.0599560358204
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1988,23.4872166784252
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1989,16.3982293404782
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1990,9.29588853512513
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1991,2.90473610445921
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1992,-1.9857484112199
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1993,-5.197021754124741
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1994,-5.84993982609456
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1995,-4.16868888660872
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1996,-1.7427060940348997
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1997,0.223222682816255
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1998,1.77901968177268
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,1999,2.60878093543274
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2000,2.87131257121432
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2001,3.1233402275332796
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2002,3.4794418842890202
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2003,3.6311026586246604
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2004,3.47373175103244
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2005,3.1500068602048796
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2006,2.8468498068039705
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2007,2.52206042931692
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2008,2.04876931324117
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2009,1.32505776485705
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2010,0.546967038212502
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2011,-0.36253171869999995
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2012,-1.17387688713345
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2013,-1.5137366714042
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2014,-1.20882412532583
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2015,-0.43688241680907897
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2016,0.575617178240042
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2017,1.36318806303135
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2018,1.9072966556036002
+St. Martin (French part),MAF,Population growth (annual %),SP.POP.GROW,2019,1.9611076778354999
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1982,2.44
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1983,2.4
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1984,2.29
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1985,2.24
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1986,2.06
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1987,2.13
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1988,2.13
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1989,2.2
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1990,2.12
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1991,2.05
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1992,1.94
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1993,1.84
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1994,1.84
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1995,1.84
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1996,1.84
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1997,1.84
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1998,1.83
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1999,1.83
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2000,1.83
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2001,1.83
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2002,1.83
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2003,1.83
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2004,1.83
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2005,1.83
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2006,1.82
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2007,1.82
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2008,1.82
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2009,1.82
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2010,1.82
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2011,1.82
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2012,1.82
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2013,1.81
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2014,1.81
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2015,1.81
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2016,1.81
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2017,1.81
+St. Martin (French part),MAF,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,2018,1.81
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1960,3893.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1961,3989.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1962,4076.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1963,4183.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1964,4308.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1965,4468.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1966,4685.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1967,4920.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1968,5193.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1969,5459.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1970,5712.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1971,5944.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1972,6156.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1973,6368.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1974,6607.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1975,6881.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1976,7246.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1977,7718.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1978,8190.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1979,8557.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1980,8771.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1981,8678.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1982,8369.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1983,8294.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1984,9061.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1985,11061.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1986,14559.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1987,19275.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1988,24378.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1989,28722.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1990,31520.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1991,32449.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1992,31811.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1993,30200.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1994,28484.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1995,27321.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1996,26849.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1997,26909.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1998,27392.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,1999,28116.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2000,28935.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2001,29853.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2002,30910.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2003,32053.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2004,33186.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2005,34248.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2006,35237.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2007,36137.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2008,36885.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2009,37377.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2010,37582.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2011,37446.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2012,37009.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2013,36453.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2014,36015.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2015,35858.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2016,36065.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2017,36560.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2018,37264.0
+St. Martin (French part),MAF,"Population, total",SP.POP.TOTL,2019,38002.0
+St. Martin (French part),MAF,Terrestrial and marine protected areas (% of total territorial area),ER.PTD.TOTL.ZS,2016,92.35132500221572
+St. Martin (French part),MAF,Terrestrial and marine protected areas (% of total territorial area),ER.PTD.TOTL.ZS,2017,91.98700718700229
+St. Martin (French part),MAF,Terrestrial and marine protected areas (% of total territorial area),ER.PTD.TOTL.ZS,2018,91.98700718700229
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1969,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1970,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1971,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1972,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1973,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1974,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1975,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1976,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1977,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1978,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1979,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1980,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1981,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1982,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1983,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1984,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1985,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1986,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1987,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1988,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1989,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1990,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1991,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1992,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1993,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1994,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1995,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1996,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1997,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1998,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,1999,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2000,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2001,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2002,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2003,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2004,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2005,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2006,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2007,0.0
+St. Martin (French part),MAF,Nitrous oxide emissions in energy sector (thousand metric tons of CO2 equivalent),EN.ATM.NOXE.EG.KT.CE,2008,0.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2010,100.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2011,100.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2012,100.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2013,100.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2014,100.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2015,100.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2016,100.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2017,100.0
+St. Martin (French part),MAF,"Access to electricity, rural (% of rural population)",EG.ELC.ACCS.RU.ZS,2018,100.0
