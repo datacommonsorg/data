@@ -1,9 +1,9 @@
 import: {
   import_name: "Eurostats_NUTS2_Education_Enrollment_by_Gender"
-  provenance_url: "https://datcom-browser-dev2.googleplex.com/kg?dcid=dc/f0hblw1"
+  provenance_url: "https://ec.europa.eu/eurostat/data/database"
   provenance_description: "The education enrollment for EU countries down to NUTS2 regions"
   # Path to the resolved MCF. Can be a repeated field.
-  mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/Eurostats_NUTS2_Education_Enrollment_by_Gender/nodes.mcf-00000-of-00001"
+  mcf_url: "https://storage.cloud.google.com/resolved_mcf/external_tables/Eurostats_Education_Enrollment_by_Gender/nodes.mcf-00000-of-00001"
   # First date of imported data.
   start_date: "2020-01-01"
   # Last date of imported data.

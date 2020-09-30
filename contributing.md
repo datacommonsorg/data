@@ -15,12 +15,17 @@ You generally only need to submit a CLA once, so if you've already submitted one
 (even if it was for a different project), you probably don't need to do it
 again.
 
-## Code reviews
+## Code Reviews
 
 All submissions, including submissions by project members, require review. We
 use GitHub pull requests for this purpose. Consult
 [GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
 information on using pull requests.
+
+## Dataset Requirements
+
+Please review [LICENSING_POLICY.md](LICENSING_POLICY.md) before adding a
+dataset to Data Commons.
 
 ## Community Guidelines
 
