@@ -29,5 +29,5 @@ variables file.
 
 ```bash
 mkdir output
-python3 worldbank.py
+python3 worldbank.py --indicatorFile=<DESIRED INDICATOR CSV FILE>
 ```
