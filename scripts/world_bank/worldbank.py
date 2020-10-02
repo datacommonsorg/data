@@ -26,7 +26,7 @@ import time
 import re
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean("fetchFromSource", True,
+flags.DEFINE_boolean("fetchFromSource", False,
                      "Whether to bypass cached CSVs and fetch from source.")
 flags.DEFINE_string("indicatorSchemaFile", None,
                     "Path to indicator schema CSV file.")
@@ -62,7 +62,7 @@ measurementDenominator: dcs:{measurementDenominator}
 """
 
 
-def read_worldbank(iso3166alpha3, fetchFromSource=True):
+def read_worldbank(iso3166alpha3, fetchFromSource):
     """ Fetches and tidies all ~1500 World Bank indicators
         for a given ISO 3166 alpha 3 code.
 
@@ -84,7 +84,7 @@ def read_worldbank(iso3166alpha3, fetchFromSource=True):
             tidy one country in a Jupyter notebook.
     """
     if fetchFromSource:
-        print(f"Downloading {country_code}")
+        print(f"Downloading {iso3166alpha3}")
         country_zip = ("http://api.worldbank.org/v2/en/country/" +
                        iso3166alpha3 + "?downloadformat=csv")
         r = requests.get(country_zip)
@@ -241,7 +241,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
 
 def download_indicator_data(worldbank_countries,
                             indicator_codes,
-                            fetchFromSource=True):
+                            fetchFromSource):
     """ Downloads World Bank country data for all countries and
             indicators provided.
 
@@ -427,4 +427,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    flags.mark_flag_as_required('indicatorSchemaFile')
     app.run(main)

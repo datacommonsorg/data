@@ -160,7 +160,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years_Female
 healthBehavior: dcs:Overweight
-age: dcs:[Years - 4]
+age: dcs:YearsUpto4
 gender: dcs:Female
 
 
@@ -173,7 +173,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years_Male
 healthBehavior: dcs:Overweight
-age: dcs:[Years - 4]
+age: dcs:YearsUpto4
 gender: dcs:Male
 
 
@@ -186,7 +186,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years
 healthBehavior: dcs:Overweight
-age: dcs:[Years - 4]
+age: dcs:YearsUpto4
 
 
 Node: dcid:WorldBank/SH_STA_SUIC_FE_P5
@@ -232,7 +232,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_15To64Years_Female
-age: dcs:[Years 15 64]
+age: dcs:Years15To64
 employmentStatus: dcs:BLS_InLaborForce
 gender: dcs:Female
 
@@ -245,7 +245,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_15To64Years_Male
-age: dcs:[Years 15 64]
+age: dcs:Years15To64
 employmentStatus: dcs:BLS_InLaborForce
 gender: dcs:Male
 
@@ -258,7 +258,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_15To64Years
-age: dcs:[Years 15 64]
+age: dcs:Years15To64
 employmentStatus: dcs:BLS_InLaborForce
 
 
@@ -422,7 +422,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years
 age: dcs:YearsUpto4
-healthCondition: dcs:SevereWasting
+medicalCondition: dcs:SevereWasting
 
 
 Node: dcid:WorldBank/SH_SVR_WAST_MA_ZS
@@ -434,7 +434,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years_Male
 age: dcs:YearsUpto4
-healthCondition: dcs:SevereWasting
+medicalCondition: dcs:SevereWasting
 gender: dcs:Male
 
 
@@ -447,7 +447,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years_Female
 age: dcs:YearsUpto4
-healthCondition: dcs:SevereWasting
+medicalCondition: dcs:SevereWasting
 gender: dcs:Female
 
 
@@ -460,7 +460,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years
 age: dcs:YearsUpto4
-healthCondition: dcs:Wasting
+medicalCondition: dcs:Wasting
 
 
 Node: dcid:WorldBank/SH_STA_WAST_MA_ZS
@@ -472,7 +472,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years_Male
 age: dcs:YearsUpto4
-healthCondition: dcs:Wasting
+medicalCondition: dcs:Wasting
 gender: dcs:Male
 
 
@@ -485,7 +485,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Upto4Years_Female
 age: dcs:YearsUpto4
-healthCondition: dcs:Wasting
+medicalCondition: dcs:Wasting
 gender: dcs:Female
 
 
@@ -497,7 +497,7 @@ populationType: dcs:EconomicActivity
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 measurementDenominator: dcs:Count_Person
-activitySource: dcs:Expenditure
+activitySource: dcs:ExpenditureActivity
 expenditureType: dcs:HealthcareExpenditure
 
 
@@ -509,7 +509,7 @@ populationType: dcs:EconomicActivity
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 measurementDenominator: dcs:Count_Person
-activitySource: dcs:Expenditure
+activitySource: dcs:ExpenditureActivity
 expenditureType: dcs:HealthcareExpenditure
 
 
@@ -579,7 +579,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:EconomicActivity
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
-measurementDenominator: dcs:Amount_EconomicActivity_GrossDomesticProduction
+measurementDenominator: dcs:Amount_EconomicActivity_GrossDomesticProduction_Nominal
 activitySource: dcs:ExpenditureActivity
 expenditureType: dcs:MilitaryExpenditure
 expensor: dcs:Government
@@ -592,7 +592,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Stock
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
-measurementDenominator: dcs:Amount_EconomicActivity_GrossDomesticProduction
+measurementDenominator: dcs:Amount_EconomicActivity_GrossDomesticProduction_Nominal
 
 
 Node: dcid:WorldBank/CM_MKT_LCAP_CD
@@ -611,7 +611,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Remittance
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
-measurementDenominator: dcs:Amount_EconomicActivity_GrossDomesticProduction
+measurementDenominator: dcs:Amount_EconomicActivity_GrossDomesticProduction_Nominal
 transferType: dcs:InwardRemittance
 
 
@@ -627,10 +627,10 @@ transferType: dcs:InwardRemittance
 
 Node: dcid:WorldBank/BM_TRF_PWKR_CD_DT
 name: "Personal remittances, paid (current US$)"
-description: "Personal remittances comprise personal transfers and compensation of employees. Personal transfers consist of all current transfers in cash or in kind made or received by resident households to or from nonresident households. Personal transfers thus include all current transfers between resident and nonresident individuals. Compensation of employees refers to the income of border, seasonal, and other short-term workers who are employed in an economy where they are not resident and of residents employed by nonresident entities. Data are the sum of two items defined in the sixth edition of the IMF's Balance of Payments Manual: personal transfers and compensation of employees. Data are in current U.S. dollars."
+description: "Personal remittances comprise personal transfers and compensation of employees. Personal transfers consist of all current transfers in cash or in kind made or received by resident households to or from nonresident households. Personal transfers thus include all current transfers between resident and nonresident individuals. Compensation of employees refers to the income of border, seasonal, and other short-term workers who are employed in an economy where they are not resident and of residents employed by nonresident entities. Data are the sum of two items defined in the sixth edition of the IMF's Balance of Payments Manual: personal transfers and compensation of employees. Data are in current U.S. dollars. World Bank staff estimates based on IMF balance of payments data, and World Bank and OECD GDP estimates."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Remittance
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
-transferType: dcs:OutwardReminttance
+transferType: dcs:OutwardRemittance
 
