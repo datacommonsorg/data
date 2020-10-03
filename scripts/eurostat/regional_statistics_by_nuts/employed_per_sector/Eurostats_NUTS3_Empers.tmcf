@@ -1,0 +1,135 @@
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/A
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/A
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/B-E
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/B-E
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/C
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/C
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/F
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/F
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/G-I
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/G-I
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/G-J
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/G-J
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/J
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/J
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/K
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/K
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/K-N
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/K-N
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/L
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/L
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/M-N
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/M-N
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/O-Q
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/O-Q
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/O-U
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/O-U
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed_NACE/R-U
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed_NACE/R-U
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
+
+Node: E:EurostatsNUTS3_Employed_per_Sector->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Employed
+observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
+observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
+value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed
+sourceScalingFactor: 1000
+measurementMethod: dcs:EurostatRegionalStatistics
