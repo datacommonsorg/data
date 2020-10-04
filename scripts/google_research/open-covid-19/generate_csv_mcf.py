@@ -11,21 +11,38 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+Script for generating the Open COVID-19 Data open source at
+https://github.com/google-research/open-covid-19-data under CC-BY license.
+
+The script generates three files:
+1) open_covid_19_data.csv
+2) open_covid_19_data.tmcf
+3) open_covid_19_data_geos.mcf
+
+"open_covid_19_data_geos.mcf" contains node MCFs for geos in the dataset that do
+not come up DCIDs for local resolution. "open_covid_19_data_geos_resolved.mcf"
+contains the resolved geos.
+"""
 
 import re
 import collections
-from typing import Dict, List, Iterable, Tuple
+from typing import Dict, List, Iterable
 
 import pandas as pd
 import numpy as np
 import requests
 import frozendict
 
+# Data CSV
 CSV_URL = 'https://raw.githubusercontent.com/google-research/open-covid-19-data/master/data/exports/cc_by/aggregated_cc_by.csv'
+# CSV containing mappings from "region_code" to "datacommons_id"
 LOCATIONS_URL = 'https://raw.githubusercontent.com/google-research/open-covid-19-data/master/data/exports/locations/locations.csv'
+# Output filenames
 CSV_OUT = 'open_covid_19_data.csv'
 TMCF_OUT = 'open_covid_19_data.tmcf'
 GEOS_OUT = 'open_covid_19_data_geos.mcf'
+# Columns that contain integers
 INTEGRAL_COLS = ('confirmed_cases', 'confirmed_deaths', 'cases_cumulative',
                  'cases_new', 'deaths_cumulative', 'deaths_new',
                  'tests_cumulative', 'tests_new', 'hospitalized_current',
@@ -41,6 +58,7 @@ INTEGRAL_COLS = ('confirmed_cases', 'confirmed_deaths', 'cases_cumulative',
                  'income_support_flag', 'public_information_campaigns_flag',
                  'international_travel_controls', 'debt_contract_relief',
                  'testing_policy', 'contact_tracing')
+# Columns that do not contain integers
 NON_INTEGRAL_COLS = (
     'open_covid_region_code', 'region_name', 'date',
     'cases_cumulative_per_million', 'cases_new_per_million',
@@ -52,7 +70,9 @@ NON_INTEGRAL_COLS = (
     'government_response_index', 'government_response_index_for_display',
     'containment_health_index', 'containment_health_index_for_display',
     'economic_support_index', 'economic_support_index_for_display')
+# Required columns
 REQUIRED_COLS = INTEGRAL_COLS + NON_INTEGRAL_COLS
+# Columns whose template MCFs can be produced without special processing
 REGULAR_COLS = ('cases_cumulative', 'cases_new', 'deaths_cumulative',
                 'deaths_new', 'tests_cumulative_people_tested',
                 'tests_cumulative_samples_tested',
@@ -62,13 +82,20 @@ REGULAR_COLS = ('cases_cumulative', 'cases_new', 'deaths_cumulative',
                 'tests_new_units_unclear', 'hospitalized_current',
                 'hospitalized_new', 'hospitalized_cumulative', 'icu_current',
                 'icu_cumulative', 'ventilator_current')
+# Columns that contain computed indices
 INDEX_COLS = ('stringency_index', 'government_response_index',
               'containment_health_index', 'economic_support_index')
+# Columns that contain computed indices that are smoothed for display.
+# These columns have the measurementQualifier "SmoothedByRepeatingLatestPoint".
 DISPLAY_COLS = ('stringency_index_for_display',
                 'government_response_index_for_display',
                 'containment_health_index_for_display',
                 'economic_support_index_for_display')
+# Columns that contain confirmed numbers.
+# These columns have the measurementMethod "OxCGRTViaOpenCovid19Data".
 CONFIRMED_COLS = ('confirmed_cases', 'confirmed_deaths')
+# Incomplete column names to StatVar DCIDs mappings.
+# The policy columns need to be added.
 COL_TO_STATVAR_PARTIAL = frozendict.frozendict({
     'cases_cumulative':
         'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
@@ -143,7 +170,11 @@ COL_TO_STATVAR_PARTIAL = frozendict.frozendict({
     'economic_support_index_for_display':
         'Covid19EconomicSupportIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
 })
-POLICY_COL_TO_STATVAR_PREFIX = frozendict.frozendict({
+# Policy column names to StatVar DCID prefixes.
+# Flag values need to be appended to the key prefixes and spatial coverage
+# suffixes need to be appended to the value prefixes to produce
+# the correct mappings.
+POLICY_COL_PREFIX_TO_STATVAR_PREFIX = frozendict.frozendict({
     'school_closing':
         'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_SchoolClosure',
     'workplace_closing':
@@ -161,7 +192,10 @@ POLICY_COL_TO_STATVAR_PREFIX = frozendict.frozendict({
     'public_information_campaigns':
         'CampaignExtent_PublicInformationCampaign_COVID19Pandemic_GovernmentOrganization'
 })
-POLICY_COL_TO_UNIT = frozendict.frozendict({
+# Policy column name prefixes to their units.
+# Flag values need to be appended to the prefixes to produce
+# the correct columns.
+POLICY_COL_PREFIX_TO_UNIT = frozendict.frozendict({
     'school_closing':
         'dcs:ExtentOfPolicySchoolClosure',
     'workplace_closing':
@@ -179,6 +213,7 @@ POLICY_COL_TO_UNIT = frozendict.frozendict({
     'public_information_campaigns':
         'dcs:ExtentOfPublicInformationCampaign',
 })
+# Incomplete column names to units mappings.
 COL_TO_UNIT_PARTIAL = frozendict.frozendict({
     'emergency_investment_in_healthcare':
         'schema:USDollar',
@@ -202,11 +237,10 @@ COL_TO_UNIT_PARTIAL = frozendict.frozendict({
 def generate_df(cols_to_keep: List[str]) -> pd.DataFrame:
     """Generates the cleaned dataframe."""
     df = pd.read_csv(CSV_URL)
-    for col in REQUIRED_COLS:
-        if col not in df.columns:
-            raise RuntimeError(f'{col} not found in the csv')
     for col in INTEGRAL_COLS:
         df[col] = df[col].astype('Int64')
+        if col.endswith('_flag'):
+            assert get_unique_values(df[col]) == [0, 1, pd.NA]
 
     df = pd.merge(df,
                   pd.read_csv(LOCATIONS_URL),
@@ -217,6 +251,10 @@ def generate_df(cols_to_keep: List[str]) -> pd.DataFrame:
                                  'datacommons_id']].apply(get_observation_about,
                                                           axis=1)
     assert not any(pd.isna(df['observationAbout']))
+    assert get_unique_values(df['test_units']) == [
+        'people tested', 'people tested (incl. non-PCR)', 'samples tested',
+        'tests performed', 'units unclear', pd.NA
+    ]
 
     # Split the test columns by units
     for col in ('tests_cumulative', 'tests_new'):
@@ -224,7 +262,7 @@ def generate_df(cols_to_keep: List[str]) -> pd.DataFrame:
         validate_split(df, col, 'test_units')
 
     # Split the policy columns by flags
-    for col in POLICY_COL_TO_STATVAR_PREFIX.keys():
+    for col in POLICY_COL_PREFIX_TO_STATVAR_PREFIX.keys():
         by = col + '_flag'
         split_col(df, col, by)
         validate_split(df, col, by)
@@ -262,12 +300,19 @@ def get_unique_values(series: pd.Series) -> List:
 
 
 def get_col_value_name(col: str, value: str) -> str:
+    """Formats column name with a value as suffix."""
     return f'{col}_{clean_col_name(value)}'
 
 
 def split_col(df: pd.DataFrame, col_to_split: str, col_by: str) -> List[str]:
-    """Splits a column into several columns each having elements of the same
-    value based on the unique values in another column.
+    """Splits a column "col_to_split" into several columns by another column
+    "col_by".
+    
+    The function looks at the unique values in "col_by" including NaN. For each
+    of these values, it creates a new column out of "col_to_split" with only
+    rows where "col_by" has the value. The other rows are marked NaNs. A new
+    column is named "{col_to_split}_{value}" by converting the value to a string
+    and replacing characters other than letters and digits with underscores.
 
     Example:
         df = col1 | col2
@@ -325,7 +370,7 @@ def get_policy_col_to_statvar(col_to_prefix: Dict[str, str]) -> Dict[str, str]:
     """Returns mappings from policy columns splitted by flags
     to the DCIDs of their StatVars."""
     col_to_statvar = {}
-    for col, prefix in POLICY_COL_TO_STATVAR_PREFIX.items():
+    for col, prefix in POLICY_COL_PREFIX_TO_STATVAR_PREFIX.items():
         col_to_statvar[f'{col}_0'] = f'{prefix}_SelectedAdministrativeAreas'
         col_to_statvar[f'{col}_1'] = f'{prefix}_AllAdministrativeAreas'
         col_to_statvar[f'{col}__NA_'] = f'{prefix}_SpatialCoverageUnknown'
@@ -333,6 +378,7 @@ def get_policy_col_to_statvar(col_to_prefix: Dict[str, str]) -> Dict[str, str]:
 
 
 def generate_tmcfs(col_to_statvar: Dict[str, str]) -> List[str]:
+    """Generates template MCFs."""
     col_to_tmcf = generate_tmcfs_helper(REGULAR_COLS, col_to_statvar, 0,
                                         'dcs:OpenCovid19Data')
     col_to_unit = get_col_to_unit()
@@ -386,7 +432,7 @@ def generate_geo_mcfs(observation_abouts: pd.Series) -> List[str]:
     return mcfs
 
 
-def generate_tmcfs_helper(cols: List[str],
+def generate_tmcfs_helper(cols: Iterable[str],
                           col_to_statvar: Dict[str, str],
                           starting_index: int,
                           mmethod: str,
@@ -433,7 +479,7 @@ def get_col_to_unit() -> Dict[str, str]:
     """Returns mappings from column names to units for columns
     that need units."""
     col_to_unit = dict(COL_TO_UNIT_PARTIAL)
-    for col, unit in POLICY_COL_TO_UNIT.items():
+    for col, unit in POLICY_COL_PREFIX_TO_UNIT.items():
         for suffix in ('_0', '_1', '__NA_'):
             col_to_unit[col + suffix] = unit
     return col_to_unit
@@ -443,7 +489,7 @@ def main():
     """Runs the script."""
     col_to_statvar = {
         **COL_TO_STATVAR_PARTIAL,
-        **get_policy_col_to_statvar(POLICY_COL_TO_STATVAR_PREFIX)
+        **get_policy_col_to_statvar(POLICY_COL_PREFIX_TO_STATVAR_PREFIX)
     }
     df = generate_df(['observationAbout', 'date'] + list(col_to_statvar.keys()))
     df.to_csv(CSV_OUT, index=False)
