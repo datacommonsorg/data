@@ -1,0 +1,66 @@
+
+Node: USA
+countryAlpha3Code: "USA"
+typeOf: schema:Place
+
+Node: CAN
+countryAlpha3Code: "CAN"
+typeOf: schema:Place
+
+Node: IND
+countryAlpha3Code: "IND"
+typeOf: schema:Place
+
+Node: NGA
+countryAlpha3Code: "NGA"
+typeOf: schema:Place
+
+Node: EGY
+countryAlpha3Code: "EGY"
+typeOf: schema:Place
+
+Node: DEU
+countryAlpha3Code: "DEU"
+typeOf: schema:Place
+
+Node: FRA
+countryAlpha3Code: "FRA"
+typeOf: schema:Place
+
+Node: GBR
+countryAlpha3Code: "GBR"
+typeOf: schema:Place
+
+Node: NZL
+countryAlpha3Code: "NZL"
+typeOf: schema:Place
+
+Node: RUS
+countryAlpha3Code: "RUS"
+typeOf: schema:Place
+
+Node: CHN
+countryAlpha3Code: "CHN"
+typeOf: schema:Place
+
+Node: JPN
+countryAlpha3Code: "JPN"
+typeOf: schema:Place
+
+Node: MYS
+countryAlpha3Code: "MYS"
+typeOf: schema:Place
+
+Node: BRA
+countryAlpha3Code: "BRA"
+typeOf: schema:Place
+
+Node: PER
+countryAlpha3Code: "PER"
+typeOf: schema:Place
+
+Node: dcid:PlacePagesComparisonCountriesCohort
+name: "PlacePagesComparisonCountriesCohort"
+typeOf: dcs:CohortSet
+description: "Countries used for Data Commons Place Page comparisons."
+member: l:USA, l:CAN, l:IND, l:NGA, l:EGY, l:DEU, l:FRA, l:GBR, l:NZL, l:RUS, l:CHN, l:JPN, l:MYS, l:BRA, l:PER
