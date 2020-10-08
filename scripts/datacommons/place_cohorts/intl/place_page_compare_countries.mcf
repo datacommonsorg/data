@@ -1,66 +1,66 @@
 
-Node: USA
-countryAlpha3Code: "USA"
+Node: country/USA
+dcid: "country/USA"
 typeOf: schema:Place
 
-Node: CAN
-countryAlpha3Code: "CAN"
+Node: country/CAN
+dcid: "country/CAN"
 typeOf: schema:Place
 
-Node: IND
-countryAlpha3Code: "IND"
+Node: country/IND
+dcid: "country/IND"
 typeOf: schema:Place
 
-Node: NGA
-countryAlpha3Code: "NGA"
+Node: country/NGA
+dcid: "country/NGA"
 typeOf: schema:Place
 
-Node: EGY
-countryAlpha3Code: "EGY"
+Node: country/EGY
+dcid: "country/EGY"
 typeOf: schema:Place
 
-Node: DEU
-countryAlpha3Code: "DEU"
+Node: country/DEU
+dcid: "country/DEU"
 typeOf: schema:Place
 
-Node: FRA
-countryAlpha3Code: "FRA"
+Node: country/FRA
+dcid: "country/FRA"
 typeOf: schema:Place
 
-Node: GBR
-countryAlpha3Code: "GBR"
+Node: country/GBR
+dcid: "country/GBR"
 typeOf: schema:Place
 
-Node: NZL
-countryAlpha3Code: "NZL"
+Node: country/NZL
+dcid: "country/NZL"
 typeOf: schema:Place
 
-Node: RUS
-countryAlpha3Code: "RUS"
+Node: country/RUS
+dcid: "country/RUS"
 typeOf: schema:Place
 
-Node: CHN
-countryAlpha3Code: "CHN"
+Node: country/CHN
+dcid: "country/CHN"
 typeOf: schema:Place
 
-Node: JPN
-countryAlpha3Code: "JPN"
+Node: country/JPN
+dcid: "country/JPN"
 typeOf: schema:Place
 
-Node: MYS
-countryAlpha3Code: "MYS"
+Node: country/MYS
+dcid: "country/MYS"
 typeOf: schema:Place
 
-Node: BRA
-countryAlpha3Code: "BRA"
+Node: country/BRA
+dcid: "country/BRA"
 typeOf: schema:Place
 
-Node: PER
-countryAlpha3Code: "PER"
+Node: country/PER
+dcid: "country/PER"
 typeOf: schema:Place
 
 Node: dcid:PlacePagesComparisonCountriesCohort
 name: "PlacePagesComparisonCountriesCohort"
 typeOf: dcs:CohortSet
 description: "Countries used for Data Commons Place Page comparisons."
-member: l:USA, l:CAN, l:IND, l:NGA, l:EGY, l:DEU, l:FRA, l:GBR, l:NZL, l:RUS, l:CHN, l:JPN, l:MYS, l:BRA, l:PER
+member: l:country/USA, l:country/CAN, l:country/IND, l:country/NGA, l:country/EGY, l:country/DEU, l:country/FRA, l:country/GBR, l:country/NZL, l:country/RUS, l:country/CHN, l:country/JPN, l:country/MYS, l:country/BRA, l:country/PER
