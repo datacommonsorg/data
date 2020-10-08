@@ -239,8 +239,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     return tmcfs_for_stat_vars
 
 
-def download_indicator_data(worldbank_countries,
-                            indicator_codes,
+def download_indicator_data(worldbank_countries, indicator_codes,
                             fetchFromSource):
     """ Downloads World Bank country data for all countries and
             indicators provided.
