@@ -362,7 +362,7 @@ domainIncludes: dcs:Person
 Node: dcid:placeOfResidenceClassification
 typeOf: schema:Property
 name: "placeOfResidenceClassification"
-rangeIncludes: dcs:CountyClassificationEnum
+rangeIncludes: dcs:CountyClassificationEnum, dcs:HumanSettlementClassificationEnum
 domainIncludes: dcs:Person
 
 Node: dcid:perceivedAvailabilityToObtain
