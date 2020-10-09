@@ -29,5 +29,5 @@ variables file.
 
 ```bash
 mkdir output
-python3 worldbank.py --indicatorFile=<DESIRED INDICATOR CSV FILE>
+python3 worldbank.py --indicatorSchemaFile=<DESIRED INDICATOR CSV FILE> --fetchFromSource=<WHETHER TO FETCH FROM WDI WEBSITE>
 ```

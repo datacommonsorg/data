@@ -18,6 +18,9 @@
 from absl import app
 from absl import flags
 import pandas as pd
+from retry.api import retry_call
+
+import logging
 import itertools
 import requests
 import zipfile
@@ -39,8 +42,7 @@ WORLDBANK_COL_REMAP = {
     'Indicator Code': 'IndicatorCode'
 }
 
-TEMPLATE_TMCF = """
-Node: E:WorldBank->E{idx}
+TEMPLATE_TMCF = """Node: E:WorldBank->E{idx}
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
@@ -84,16 +86,13 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
             tidy one country in a Jupyter notebook.
     """
     if fetchFromSource:
-        print(f"Downloading {iso3166alpha3}")
+        logging.info('Downloading %s', iso3166alpha3)
         country_zip = ("http://api.worldbank.org/v2/en/country/" +
                        iso3166alpha3 + "?downloadformat=csv")
-        r = requests.get(country_zip)
+        r = retry_call(requests.get, fargs=[country_zip], tries=3, delay=20,
+                       backoff=1.5)
         if r.status_code != 200:
-            print('Status code: ', r.status_code)
-            time.sleep(30)
-            r = requests.get(country_zip)
-            if r.status_code != 200:
-                print('Failed to retrieve ' + iso3166alpha3)
+            logging.info('Failed to retrieve %s', iso3166alpha3)
 
         filebytes = io.BytesIO(r.content)
         myzipfile = zipfile.ZipFile(filebytes)
@@ -308,7 +307,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
             tmcf, stat_var_obs_cols, stat_vars_in_group = enum
             if len(stat_vars_in_group) == 0:
                 continue
-            f_out.write(tmcf.format_map({'idx': index}))
+            f_out.write(tmcf.format_map({'idx': index}) + '\n')
 
             # Get only the indicator codes in that grouping.
             matching_csv = output_csv[output_csv['IndicatorCode'].isin(
