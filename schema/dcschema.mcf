@@ -2375,3 +2375,21 @@ typeOf: schema:Class
 subClassOf: schema:Place
 description: "The place where passengers and cargo are exchanged between vehicles or/and between transport modes."
 descriptionUrl: "https://en.wikipedia.org/wiki/Transport_hub"
+
+Node: dcid:HumanSettlementClassificationEnum
+name: "HumanSettlementClassificationEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Enumeration of different types of human settlements, such as Urban, Rural, etc."
+
+Node: dcid:Urban
+name: "Urban"
+typeOf: dcs:HumanSettlementClassificationEnum
+description: "An urban area, or built-up area, is a human settlement with a high population density and infrastructure of built environment."
+descriptionUrl: "https://en.wikipedia.org/wiki/Urban_area"
+
+Node: dcid:Rural
+name: "Rural"
+typeOf: dcs:HumanSettlementClassificationEnum
+description: "A geographic area that is located outside towns and cities, typically with low population density and small settlements."
+descriptionUrl: "https://en.wikipedia.org/wiki/Rural_area"
