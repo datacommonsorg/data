@@ -89,7 +89,10 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
         logging.info('Downloading %s', iso3166alpha3)
         country_zip = ("http://api.worldbank.org/v2/en/country/" +
                        iso3166alpha3 + "?downloadformat=csv")
-        r = retry_call(requests.get, fargs=[country_zip], tries=3, delay=20,
+        r = retry_call(requests.get,
+                       fargs=[country_zip],
+                       tries=3,
+                       delay=20,
                        backoff=1.5)
         if r.status_code != 200:
             logging.info('Failed to retrieve %s', iso3166alpha3)
