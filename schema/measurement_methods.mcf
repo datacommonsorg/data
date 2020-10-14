@@ -74,3 +74,23 @@ Node: dcid:EurostatRegionalStatistics
 name: "EurostatRegionalStatistics"
 typeOf: dcs:StatisticSourceEnum
 description: "Measurement method for regional statistics collected by eurostat.org."
+
+Node: dcid:WorldBankEstimate
+name: "WorldBankEstimate"
+typeOf: dcs:MeasurementMethodEnum
+description: "Estimates made by the World Bank staff."
+
+Node: dcid:UnitedNationsIGMEEstimate
+name: "UnitedNationsIGMEEstimate"
+typeOf: dcs:MeasurementMethodEnum
+description: "Estimates made by the United Nations Inter-agency Group for Child Mortality Estimation (UN IGME)."
+
+Node: dcid:JointChildMalnutritionEstimate
+name: "JointChildMalnutritionEstimate"
+typeOf: dcs:MeasurementMethodEnum
+description: "UNICEF/WHO/The World Bank Group joint child malnutrition estimates."
+
+Node: dcid:WorldHealthOrganizationEstimates
+name: "WorldHealthOrganizationEstimates"
+typeOf: dcs:MeasurementMethodEnum
+description: "Estimates made by the World Health Organization."
