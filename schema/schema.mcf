@@ -1,3 +1,9 @@
+Node: Legislation
+dcid: "Legislation"
+subClassOf: schema:CreativeWork
+name: "Legislation"
+typeOf: schema:Class
+
 Node: StatisticalPopulation
 dcid: "StatisticalPopulation"
 subClassOf: schema:Intangible
@@ -26,7 +32,7 @@ subClassOf: schema:Intangible
 Node: dcid:observationDate
 name: "observationDate"
 typeOf: schema:Property
-domainIncludes: schema:Observation
+domainIncludes: schema:Observation, dcs:StatVarObservation
 rangeIncludes: schema:Date
 description: "Date the Observation was made OR the last date of an Observation spanning a period of time."
 
@@ -11013,4 +11019,3 @@ typeOf: schema:Class
 subClassOf: schema:Substance
 name: "Drug"
 description: "A chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism. Here the term drug is used interchangeably with the term medicine although clinical knowledge make a clear difference between them."
-

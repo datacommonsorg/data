@@ -556,6 +556,13 @@ description: "The human cell type in which the protein's level is measured."
 rangeIncludes: dcs:HumanCellTypeEnum
 domainIncludes: dcs:HumanProteinOccurrence
 
+Node: dcid:humanTissue
+typeOf: schema:Property
+name: "humanTissue"
+description: "The human tissue in which the protein's level is measured."
+rangeIncludes: dcs:HumanTissueEnum
+domainIncludes: dcs:HumanProteinOccurrence
+
 Node: dcid:proteinExpressionScore
 typeOf: schema:Property
 name: "proteinExpressionScore"
@@ -569,5 +576,152 @@ typeOf: schema:Property
 name: "humanProteinOccurrenceReliability"
 description: "A reliability score is manually set for all genes and indicates the level of reliability of the analyzed protein expression pattern based on available RNA-seq data, protein/gene characterization data and immunohistochemical data from one or several antibodies with non-overlapping epitopes."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
-rangeIncludes: dcs:humanProteinOccurrenceReliabilityEnum
+rangeIncludes: dcs:HumanProteinOccurrenceReliabilityEnum
 domainIncludes: dcs:HumanProteinOccurrence
+
+Node: dcid:Antibody
+name: "Antibody"
+typeOf: schema:Class
+subClassOf: dcs:Protein
+description: "An antibody is a kind of protective protein which is produced by the immune system when substances from the outer source invade the living organisms. The process of producing the antibodies is called immune response."
+
+Node: dcid:Antigen
+name: "Antigen"
+typeOf: schema:Class
+subClassOf: dcs:ChemicalCompound
+description: "The invading substances from the outer source which causes the immune response. It refers to a molecule or molecule structure which may interact with the immune cell antigen receptor or antibody. "
+descriptionUrl:"https://en.wikipedia.org/wiki/Antigen"
+
+Node: dcid:recognizesAntigen
+typeOf: schema:Property
+name: "recognizesAntigen"
+description: "The targeting antigen of the antibody."
+rangeIncludes: dcs:Protein
+domainIncludes:dcs:Antibody
+# rangeIncludes proteins with links to UniProt, chemicals with IDs to ChEBI and a few samples to other databases (InterPro, NCBI, Prosite, UniProt-Subcell).
+
+Node: dcid:antigenType
+typeOf: schema:Property
+name: "antigenType"
+description: "The type of the antigen for an antibody which includes protein, chemical compound and other types. "
+rangeIncludes: dcs:Protein
+domainIncludes:dcs:Antibody
+
+Node: dcid:antibodyType
+typeOf: schema:Property
+name: "antibodyType"
+description: "The type of antibody, including bispecific antibody, nanobody and DARPins. "
+rangeIncludes: dcs:AntibodyTypeEnum
+domainIncludes:dcs:Antibody
+
+Node: dcid:antibodyApplication
+typeOf: schema:Property
+name: "antibodyApplication"
+description: "The applications of the antibody in the experiments, such as ELISA, Immunofluorescence, Immunoprecipitation, etc."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+
+Node: dcid:epitope
+typeOf: schema:Property
+name: "epitope"
+description: "Also known as antigenic determinant. It is the recognizing part of an antigen by the interacting immune cell antigen receptor or the antibody."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://en.wikipedia.org/wiki/Epitope"
+
+Node: dcid:abcdID
+typeOf: schema:Property
+name: "abcdID"
+description: "The accession identifier of the antibody in the ABCD antibody database. "
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://web.expasy.org/abcd/"
+
+Node: dcid:patentID
+typeOf: schema:Property
+name: "patentID"
+description: "The identifier of patent in PATENTSCOPE. Using PATENTSCOPE you can search 90 million patent documents including 3.9 million published international patent applications (PCT)."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://patentscope.wipo.int/search/en/search.jsf"
+
+Node: dcid:cellosaurusID
+typeOf: schema:Property
+name: "cellosaurusID"
+description: "The identifier of cell line in Cellosaurus. The Cellosaurus is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://web.expasy.org/cellosaurus/"
+
+Node: dcid:imgtMonoclonalAntibodiesDBID
+typeOf: schema:Property
+name: "imgtMonoclonalAntibodiesDBID"
+description: "The identifier for therapeutic monoclonal antibodies in IMGT/mAb-DB. IMGT/mAb-DB is the IMGT monoclonal antibodies (mAb) database."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"http://www.imgt.org/mAb-DB/"
+
+Node: dcid:neuroMabID
+typeOf: schema:Property
+name: "neuroMabID"
+description: "The identifier for mouse monoclonal antibodies in NeuroMab. The UC Davis/NIH NeuroMab Facility generates mouse monoclonal antibodies extensively validated for use in the mammalian brain."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"http://neuromab.ucdavis.edu/"
+
+Node: dcid:ginasID
+typeOf: schema:Property
+name: "ginasID"
+description: "The identifier for substances found in medicines in Ginas. The main goal of ginas is the production of software, called G-SRS, to assist agencies in registering and documenting information about substances found in medicines."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://tripod.nih.gov/ginas/#/"
+
+Node: dcid:recombinantAntibodyNetworkID
+typeOf: schema:Property
+name: "recombinantAntibodyNetworkID"
+description: "The identifier for antibodies in Recombinant Antibody Network (RAN). The RAN is an international consortium of three expert centers at the University of Chicago, University of Toronto, and the University of California at San Francisco (UCSF) unified under a common set of goals, technologies, and operational procedures."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://recombinant-antibodies.org/"
+
+Node: dcid:addgeneID
+typeOf: schema:Property
+name: "addgeneID"
+description: "The identifier for antibodies in Addgene. They distribute 89,594 plasmids on behalf of 4,322 labs from around the world. They also produce 480 ready-to-use viral vectors from our plasmid collection."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://www.addgene.org/"
+
+Node: dcid:interProID
+typeOf: schema:Property
+name: "interProID"
+description: "The identifier for protein families in Addgene. InterPro provides functional analysis of proteins by classifying them into families and predicting domains and important sites."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://www.ebi.ac.uk/interpro/"
+
+Node: dcid:ncbiTXID
+typeOf: schema:Property
+name: "ncbiTXID"
+description: "The txid identifier in NCBI Taxonomy Browser. The NCBI Taxonomy Database is a curated classification and nomenclature for all of the organisms in the public sequence databases. This currently represents about 10% of the described species of life on the planet."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi"
+# example NCBI:txid46170
+
+Node: dcid:uniProtSubcellularID
+typeOf: schema:Property
+name: "uniProtSubcellularID"
+description: "The identifier of subcellular locations in UniProt. The subcellular locations in which a protein is found are described in UniProtKB entries with a controlled vocabulary, which also includes membrane topology and orientation terms."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://www.uniprot.org/locations/"
+
+Node: dcid:prositeID
+typeOf: schema:Property
+name: "prositeID"
+description: "The identifier in PROSITE database. PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them."
+rangeIncludes: schema:Text
+domainIncludes:dcs:Antibody
+descriptionUrl:"https://prosite.expasy.org/index.html"

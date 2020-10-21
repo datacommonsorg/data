@@ -20,6 +20,9 @@ df.columns = [
     'containedInPlace', 'rural_or_urban', 'access_to_city'
 ]
 
+df.loc[df.oecd_territorial_level == '2',
+       'name'] = df.loc[df.oecd_territorial_level == '2',
+                        'name'] + ' AdministrativeArea1'
 # Remove Non-official grid (NOG)
 df = df[df.oecd_territorial_level != 'NOG']
 
@@ -43,9 +46,5 @@ df = df[~((df.containedInCountry == 'BRA') &
 
 # Remove Non OECD Member Country (NOMC) containedInPlace=NOMC
 df.replace({'NOMC': ''}, regex=True, inplace=True)
-
-# Geocoding resolution is especially bad for Ireland.
-df = df[~((df.containedInCountry == 'IRL') &
-          (df.oecd_territorial_level != '1'))]
 
 df.to_csv('geos_cleaned.csv', index=False)

@@ -1,5 +1,8 @@
-# Cloud Build Configuration and Code
+# Cloud Build Configuration
 
-This directory contains configuration and code for Cloud Build that
-enables it to create asynchronous tasks using Cloud Tasks on pull
-requests and pushes to master.
+This directory contains a Cloud Build configuration that creates asynchronous
+tasks using Cloud Tasks on pull requests and pushes to master to trigger the
+executor.
+
+The tasks pass information about the commits to the executor and can optionally
+pass any configurations for the executor.

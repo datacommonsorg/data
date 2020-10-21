@@ -12,29 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+sys.path.append('../')
+from utils import multi_index_to_single_index
 import csv
 import json
 import pandas as pd
 
-
-def multi_index_to_single_index(df):
-    columns = []
-    for column in df.columns:
-        column = list(column)
-        column[1] = str(column[1])
-        columns.append(''.join(column))
-
-    df.columns = columns
-    return df.reset_index()
-
-
 # Read csv from source csv
 df = pd.read_csv('REGION_DEMOGR_life_expectancy_and_mortality.csv')
+df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
-name2dcid = dict(json.loads(open('../name2dcid.json').read()))
-df = df[df['Region'].isin(name2dcid.keys())]
+regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
+df = df[df['REG_ID'].isin(regid2dcid.keys())]
 # Second, replace the names with dcids
-df.replace({'Region': name2dcid}, inplace=True)
+df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
 
 # process the source data
 df = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
@@ -53,29 +45,29 @@ df_cleaned = multi_index_to_single_index(df_cleaned)
 
 VAR_to_statsvars = {
     'DEATH_RAT':
-        'Count_MortalityEvent_Count_Person',
+        'Count_Death_AsAFractionOf_Count_Person',
     'DEATH_RAM':
-        'Count_MortalityEvent_Male_Count_Person',
+        'Count_Death_Male_AsAFractionOf_Count_Person_Male',
     'DEATH_RAF':
-        'Count_MortalityEvent_Female_Count_Person',
+        'Count_Death_Female_AsAFractionOf_Count_Person_Female',
     'STD_MORTT':
-        'Count_MortalityEvent_Count_Person_AgeAdjusted',
+        'Count_Death_AgeAdjusted_AsAFractionOf_Count_Person',
     'STD_MORTM':
-        'Count_MortalityEvent_Male_Count_Person_AgeAdjusted',
+        'Count_Death_Male_AgeAdjusted_AsAFractionOf_Count_Person_Male',
     'STD_MORTF':
-        'Count_MortalityEvent_Female_Count_Person_AgeAdjusted',
+        'Count_Death_Female_AgeAdjusted_AsAFractionOf_Count_Person_Female',
     'YOU_DEATH_RAT':
-        'Count_MortalityEvent_15To64Years_Count_Person',
+        'Count_Death_Upto14Years_AsAFractionOf_Count_Person_Upto14Years',
     'YOU_DEATH_RAM':
-        'Count_MortalityEvent_15To64Years_Male_Count_Person',
+        'Count_Death_Upto14Years_Male_AsAFractionOf_Count_Person_Upto14Years_Male',
     'YOU_DEATH_RAF':
-        'Count_MortalityEvent_15To64Years_Female_Count_Person',
+        'Count_Death_Upto14Years_Female_AsAFractionOf_Count_Person_Upto14Years_Female',
     'INF_MORTT':
-        'Count_MortalityEvent_LessThan1Year_Count_BirthEvent_LiveBirth',
+        'Count_Death_LessThan1Year_AsAFractionOf_Count_BirthEvent',
     'INF_MORTM':
-        'Count_MortalityEvent_LessThan1Year_Male_Count_BirthEvent_LiveBirth',
+        'Count_Death_LessThan1Year_Male_AsAFractionOf_Count_BirthEvent_Male',
     'INF_MORTF':
-        'Count_MortalityEvent_LessThan1Year_Female_Count_BirthEvent_LiveBirth',
+        'Count_Death_LessThan1Year_Female_AsAFractionOf_Count_BirthEvent_Female',
     'LIFE_EXPT':
         'LifeExpectancy_Person',
     'LIFE_EXPF':
@@ -100,11 +92,30 @@ observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->{stat_var}
 """
 
+TEMPLATE_MCF_TEMPLATE_YEAR = """
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E{index}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->{stat_var}
+unit: dcs:Year
+"""
+
 stat_vars = df_cleaned.columns[3:]
 with open('OECD_life_expectancy_and_mortality.tmcf', 'w', newline='') as f_out:
     for i in range(len(stat_vars)):
-        f_out.write(
-            TEMPLATE_MCF_TEMPLATE.format_map({
-                'index': i + 1,
-                'stat_var': stat_vars[i]
-            }))
+        if stat_vars[i].startswith("LifeExpectancy"):
+            f_out.write(
+                TEMPLATE_MCF_TEMPLATE_YEAR.format_map({
+                    'index': i + 1,
+                    'stat_var': stat_vars[i]
+                }))
+        else:
+            f_out.write(
+                TEMPLATE_MCF_TEMPLATE.format_map({
+                    'index': i + 1,
+                    'stat_var': stat_vars[i]
+                }))

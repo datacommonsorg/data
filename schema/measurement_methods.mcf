@@ -36,3 +36,61 @@ name: "ConstantMaturityRate"
 typeOf: dcs:BondYieldMeasurementEnum
 description: "Indicates that the yield data are extrapolated against a yield curve, which relates the yield on a security to its time to maturity, to estimate the yield of the bond if it had exactly some maturity"
 descriptionUrl: "https://www.investopedia.com/terms/c/cmtindex.asp"
+
+Node: dcid:WikipediaInfoBox
+name: "WikipediaInfoBox"
+typeOf: dcs:StatisticSourceEnum
+description: "Measurement method of Wikipedia population from Google KG."
+
+Node: dcid:GoogleKGHumanCurated
+name: "GoogleKGHumanCurated"
+typeOf: dcs:StatisticSourceEnum
+description: "Measurement method of human curated data from Google KG."
+
+Node: dcid:PriceIndexChainingEnum
+name: "PriceIndexChainingEnum"
+typeOf: schema:Class
+subClassOf: schema:MeasurementMethodEnum
+description: "An enumeration of chained and unchained price index measurement methods."
+
+Node: dcid:BLSUnchained
+name: "BLSUnchained"
+typeOf: dcs:PriceIndexChainingEnum
+description: "Indicates regular unchained price index series such as CPI-U and CPI-W"
+descriptionUrl: "https://www.bls.gov/cpi/additional-resources/chained-cpi.htm"
+
+Node: dcid:BLSChained
+name: "BLSChained"
+typeOf: dcs:PriceIndexChainingEnum
+description: "Indicates chained price index series that uses more current weights of goods and services and that more accurately reflects how consumers respond to changes in relative prices."
+descriptionUrl: "https://www.bls.gov/cpi/additional-resources/chained-cpi.htm"
+
+Node: dcid:GoogleMapsCommunityMobility
+name: "GoogleMapsCommunityMobility"
+typeOf: dcs:StatisticSourceEnum
+description: "Represents the methods used by Google to compute how visits and length of stay at different places have changed over time compared to a baseline."
+
+Node: dcid:EurostatRegionalStatistics
+name: "EurostatRegionalStatistics"
+typeOf: dcs:StatisticSourceEnum
+description: "Measurement method for regional statistics collected by eurostat.org."
+
+Node: dcid:WorldBankEstimate
+name: "WorldBankEstimate"
+typeOf: dcs:MeasurementMethodEnum
+description: "Estimates made by the World Bank staff."
+
+Node: dcid:UnitedNationsIGMEEstimate
+name: "UnitedNationsIGMEEstimate"
+typeOf: dcs:MeasurementMethodEnum
+description: "Estimates made by the United Nations Inter-agency Group for Child Mortality Estimation (UN IGME)."
+
+Node: dcid:JointChildMalnutritionEstimate
+name: "JointChildMalnutritionEstimate"
+typeOf: dcs:MeasurementMethodEnum
+description: "UNICEF/WHO/The World Bank Group joint child malnutrition estimates."
+
+Node: dcid:WorldHealthOrganizationEstimates
+name: "WorldHealthOrganizationEstimates"
+typeOf: dcs:MeasurementMethodEnum
+description: "Estimates made by the World Health Organization."

@@ -5,7 +5,7 @@ steps:
   name: "golang"
   entrypoint: "go"
   env: ["GO111MODULE=on"]
-  args: ["build", "..."]
+  args: ["build", "./..."]
 
 - id: go_test
   name: "golang"
