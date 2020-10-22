@@ -13,8 +13,6 @@ Number and Percentage of Population Below Poverty Line published by Reserve Bank
 ### Overview
 Povery data is per state and by year. There are three sets of data, for the years 2004-05, 2009-10, 2011-12. The dataset contains the following columns.
 
-[BelowPovertyLine_raw_india.csv](BelowPovertyLine_raw_india.csv) is XLSX data converted into to simple CSV file for further processing.
-
 1. Year  
 2. State/Union Territory
 3. No. of Persons (Thousands), Rural  
@@ -39,7 +37,6 @@ Povery data is per state and by year. There are three sets of data, for the year
 
 
 #### Cleaned Data
-
 - [BelowPovertyLine_India.csv](BelowPovertyLine_India.csv).
 
 It has the following columns
@@ -54,6 +51,9 @@ It has the following columns
 9. count_person_combined - No. of Persons, Combined
 10. percentage_person_combined - Combined - % of Persons
 
+
+#### MCF
+- [BelowPovertyLine_India_StatisticalVariables.mcf](BelowPovertyLine_India_StatisticalVariables.mcf).
 
 #### Template MCFs
 - [BelowPovertyLine_india.tmcf](BelowPovertyLine_india.tmcf).
