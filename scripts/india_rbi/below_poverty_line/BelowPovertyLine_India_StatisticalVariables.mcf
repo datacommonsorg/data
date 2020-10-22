@@ -50,15 +50,13 @@ measurementDenominator: dcid:Count_Person
 Node: dcid:PovertyLine_Person_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-statType: dcs:maxValue
-measuredProperty: dcs:income
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:povertyLine
 placeOfResidence: dcs:Urban
 
 Node: dcid:PovertyLine_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-statType: dcs:maxValue
-measuredProperty: dcs:income
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-placeOfResidence: dcs:Rural
+statType: dcs:measuredValue
+measuredProperty: dcs:povertyLine
+placeOfResidence: dcs:Urban
