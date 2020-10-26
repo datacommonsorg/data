@@ -88,7 +88,6 @@ for state in state_apis:
 
         # Store the DataFrame for this district under the main table.
         table = pd.concat([table, district_table])
-        print(table)
 
 # Rename the Y-axis to be "date".
 table.index.name = "date"
@@ -96,11 +95,14 @@ table.index.name = "date"
 # Calculate the active cases = confirmed cases - recovered cases.
 table['active'] = table['confirmed'] - table['recovered']
 
+# Get rid of any rows gthat don't have a wikidataId.
 table.dropna(subset=['wikidataId'], inplace=True)
-table.dropna(subset=['confirmed', 'deceased', 'tested', 'active'], thresh=2, inplace=True)
 
-table = table[['confirmed', 'deceased', 'tested', 'active', 'wikidataId']]
+# Get rid of any rows that don't have at least one of the following.
+table.dropna(subset=['confirmed', 'deceased', 'tested', 'active', 'recovered'], thresh=1, inplace=True)
 
+# Only keep the following columns, the rest are not part of the import.
+table = table[['confirmed', 'deceased', 'tested', 'active', 'recovered', 'wikidataId']]
 
 # Export the main table containg ALL the data as a csv.
 table.to_csv('output.csv', index=True)
