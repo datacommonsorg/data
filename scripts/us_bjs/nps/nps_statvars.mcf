@@ -1,0 +1,979 @@
+Node: dcid:Count_Jurisdiction_Female
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_WhiteAlone_Female
+race: dcs:WhiteAlone
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_BlackOrAfricanAmericanAlone_Female
+race: dcs:BlackOrAfricanAmericanAlone
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_HispanicOrLatino_Female
+race: dcs:HispanicOrLatino
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone_Female
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AsianAlone_Female
+race: dcs:AsianAlone
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone_Female
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_TwoOrMoreRaces_Female
+race: dcs:TwoOrMoreRaces
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_Death_Female
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByJudicialExecution_Female
+causeOfDeath: dcs:JudicialExecution
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByIllnessOrNaturalCause_Female
+causeOfDeath: dcs:IllnessOrNaturalCause
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAIDS_Female
+causeOfDeath: dcs:AIDS
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)_Female
+causeOfDeath: dcs:IntentionalSelf-Harm(Suicide)
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)_Female
+causeOfDeath: dcs:Accidents(UnintentionalInjuries)
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByDeathDueToAnotherPerson_Female
+causeOfDeath: dcs:DeathDueToAnotherPerson
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAssault(Homicide)_Female
+causeOfDeath: dcs:Assault(Homicide)
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByNPSOtherCauseOfDeath_Female
+causeOfDeath: dcs:NPSOtherCauseOfDeath
+gender: schema:Female
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AdmittedToPrison_Female
+eventType: dcs:AdmittedToPrison
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+gender: schema:Female
+populationType: dcs:IncarcerationEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_ReleasedFromPrison_Female
+eventType: dcs:ReleasedFromPrison
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+gender: schema:Female
+populationType: dcs:IncarcerationEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_MaxSentenceGreaterThan1Year_Female
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_MaxSentence1YearOrLess_Female
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [- 1 Years]
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_Unsentenced_Female
+prisonSentenceStatus: dcs:Unsentenced
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_PrivatelyOperatedInStateFacility_Female
+correctionalFacilityOperator: dcs:PrivatelyOperated
+correctionalFacilityLocation: dcs:InState
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility_Female
+correctionalFacilityOperator: dcs:PrivatelyOperated
+correctionalFacilityLocation: dcs:OutOfState
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_LocallyOperatedLocalFacility_Female
+correctionalFacilityOperator: dcs:LocallyOperated
+correctionalFacilityLocation: dcs:Local
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_FederallyOperatedFacility_Female
+correctionalFacilityOperator: dcs:FederallyOperated
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_StateOperatedOutOfStateFacility_Female
+correctionalFacilityOperator: dcs:StateOperated
+correctionalFacilityLocation: dcs:OutOfState
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_Female
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year_Female
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess_Female
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [- 1 Years]
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_Unsentenced_Female
+prisonSentenceStatus: dcs:Unsentenced
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_Under18_Female
+age: [0 17 Years]
+gender: schema:Female
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_Male
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_WhiteAlone_Male
+race: dcs:WhiteAlone
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_BlackOrAfricanAmericanAlone_Male
+race: dcs:BlackOrAfricanAmericanAlone
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_HispanicOrLatino_Male
+race: dcs:HispanicOrLatino
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone_Male
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AsianAlone_Male
+race: dcs:AsianAlone
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone_Male
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_TwoOrMoreRaces_Male
+race: dcs:TwoOrMoreRaces
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_Death_Male
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByJudicialExecution_Male
+causeOfDeath: dcs:JudicialExecution
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByIllnessOrNaturalCause_Male
+causeOfDeath: dcs:IllnessOrNaturalCause
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAIDS_Male
+causeOfDeath: dcs:AIDS
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)_Male
+causeOfDeath: dcs:IntentionalSelf-Harm(Suicide)
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)_Male
+causeOfDeath: dcs:Accidents(UnintentionalInjuries)
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByDeathDueToAnotherPerson_Male
+causeOfDeath: dcs:DeathDueToAnotherPerson
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAssault(Homicide)_Male
+causeOfDeath: dcs:Assault(Homicide)
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByNPSOtherCauseOfDeath_Male
+causeOfDeath: dcs:NPSOtherCauseOfDeath
+gender: schema:Male
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AdmittedToPrison_Male
+eventType: dcs:AdmittedToPrison
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+gender: schema:Male
+populationType: dcs:IncarcerationEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_ReleasedFromPrison_Male
+eventType: dcs:ReleasedFromPrison
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+gender: schema:Male
+populationType: dcs:IncarcerationEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_MaxSentenceGreaterThan1Year_Male
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_MaxSentence1YearOrLess_Male
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [- 1 Years]
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_Unsentenced_Male
+prisonSentenceStatus: dcs:Unsentenced
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_PrivatelyOperatedInStateFacility_Male
+correctionalFacilityOperator: dcs:PrivatelyOperated
+correctionalFacilityLocation: dcs:InState
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility_Male
+correctionalFacilityOperator: dcs:PrivatelyOperated
+correctionalFacilityLocation: dcs:OutOfState
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_LocallyOperatedLocalFacility_Male
+correctionalFacilityOperator: dcs:LocallyOperated
+correctionalFacilityLocation: dcs:Local
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_FederallyOperatedFacility_Male
+correctionalFacilityOperator: dcs:FederallyOperated
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_StateOperatedOutOfStateFacility_Male
+correctionalFacilityOperator: dcs:StateOperated
+correctionalFacilityLocation: dcs:OutOfState
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_Male
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year_Male
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess_Male
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [- 1 Years]
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_Unsentenced_Male
+prisonSentenceStatus: dcs:Unsentenced
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_Under18_Male
+age: [0 17 Years]
+gender: schema:Male
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_WhiteAlone
+race: dcs:WhiteAlone
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_BlackOrAfricanAmericanAlone
+race: dcs:BlackOrAfricanAmericanAlone
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_HispanicOrLatino
+race: dcs:HispanicOrLatino
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AsianAlone
+race: dcs:AsianAlone
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_TwoOrMoreRaces
+race: dcs:TwoOrMoreRaces
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_Death
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByJudicialExecution
+causeOfDeath: dcs:JudicialExecution
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByIllnessOrNaturalCause
+causeOfDeath: dcs:IllnessOrNaturalCause
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAIDS
+causeOfDeath: dcs:AIDS
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)
+causeOfDeath: dcs:IntentionalSelf-Harm(Suicide)
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)
+causeOfDeath: dcs:Accidents(UnintentionalInjuries)
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByDeathDueToAnotherPerson
+causeOfDeath: dcs:DeathDueToAnotherPerson
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByAssault(Homicide)
+causeOfDeath: dcs:Assault(Homicide)
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_DeathByNPSOtherCauseOfDeath
+causeOfDeath: dcs:NPSOtherCauseOfDeath
+populationType: dcs:MortalityEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_AdmittedToPrison
+eventType: dcs:AdmittedToPrison
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+populationType: dcs:IncarcerationEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_ReleasedFromPrison
+eventType: dcs:ReleasedFromPrison
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+populationType: dcs:IncarcerationEvent
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_MaxSentenceGreaterThan1Year
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_MaxSentence1YearOrLess
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [- 1 Years]
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_Unsentenced
+prisonSentenceStatus: dcs:Unsentenced
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_PrivatelyOperatedInStateFacility
+correctionalFacilityOperator: dcs:PrivatelyOperated
+correctionalFacilityLocation: dcs:InState
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility
+correctionalFacilityOperator: dcs:PrivatelyOperated
+correctionalFacilityLocation: dcs:OutOfState
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_LocallyOperatedLocalFacility
+correctionalFacilityOperator: dcs:LocallyOperated
+correctionalFacilityLocation: dcs:Local
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_FederallyOperatedFacility
+correctionalFacilityOperator: dcs:FederallyOperated
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Jurisdiction_StateOperatedOutOfStateFacility
+correctionalFacilityOperator: dcs:StateOperated
+correctionalFacilityLocation: dcs:OutOfState
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnJurisdiction
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [2 - Years]
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess
+prisonSentenceStatus: dcs:Sentenced
+maxPrisonSentence: [- 1 Years]
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_NotAUSCitizen_Unsentenced
+prisonSentenceStatus: dcs:Unsentenced
+citizenship: dcs:NotAUSCitizen
+correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
+Node: dcid:Count_Custody_Under18
+age: [0 17 Years]
+populationType: dcs:Person
+measurementQualifier: dcs:MeasuredBasedOnCustody
+typeOf: dcs:StatisticalVariable
+institutionalization: dcs:Incarcerated
+statType: dcs:measuredValue
+measuredProperty: dcs:Count
+
