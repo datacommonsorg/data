@@ -1,0 +1,11 @@
+import: {
+  import_name: "covid19indiaORG"
+  provenance_url: "https://www.covid19india.org/"
+  provenance_description: "Indian State and District Covid19 data."
+  # Path to the resolved MCF. Can be a repeated field.
+  mcf_url: "gs://resolved_mcf/external_tables/covid19indiaORG/nodes.mcf-*"
+  # First date of imported data.
+  start_date: "2020-01-21"
+  # Last date of imported data.
+  update_frequency: "P1D"
+}
