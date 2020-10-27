@@ -18,59 +18,60 @@ import pandas as pd
 import numpy as np
 import urllib.request
 
-INDIA_ISO_CODES = {}
-INDIA_ISO_CODES["Andhra Pradesh"] = "IN-AP"
-INDIA_ISO_CODES["Arunachal Pradesh"] = "IN-AR"
-INDIA_ISO_CODES["Assam"] = "IN-AS"
-INDIA_ISO_CODES["Bihar"] = "IN-BR"
-INDIA_ISO_CODES["Chattisgarh"] = "IN-CT"
-INDIA_ISO_CODES["Chhattisgarh"] = "IN-CT"
-INDIA_ISO_CODES["Goa"] = "IN-GA"
-INDIA_ISO_CODES["Gujarat"] = "IN-GJ"
-INDIA_ISO_CODES["Haryana"] = "IN-HR"
-INDIA_ISO_CODES["Himachal Pradesh"] = "IN-HP"
-INDIA_ISO_CODES["Jharkhand"] = "IN-JH"
-INDIA_ISO_CODES["Jharkhand#"] = "IN-JH"
-INDIA_ISO_CODES["Karnataka"] = "IN-KA"
-INDIA_ISO_CODES["Kerala"] = "IN-KL"
-INDIA_ISO_CODES["Madhya Pradesh"] = "IN-MP"
-INDIA_ISO_CODES["Madhya Pradesh#"] = "IN-MP"
-INDIA_ISO_CODES["Maharashtra"] = "IN-MH"
-INDIA_ISO_CODES["Manipur"] = "IN-MN"
-INDIA_ISO_CODES["Meghalaya"] = "IN-ML"
-INDIA_ISO_CODES["Mizoram"] = "IN-MZ"
-INDIA_ISO_CODES["Nagaland"] = "IN-NL"
-INDIA_ISO_CODES["Nagaland#"] = "IN-NL"
-INDIA_ISO_CODES["Odisha"] = "IN-OR"
-INDIA_ISO_CODES["Punjab"] = "IN-PB"
-INDIA_ISO_CODES["Rajasthan"] = "IN-RJ"
-INDIA_ISO_CODES["Sikkim"] = "IN-SK"
-INDIA_ISO_CODES["Tamil Nadu"] = "IN-TN"
-INDIA_ISO_CODES["Telengana"] = "IN-TG"
-INDIA_ISO_CODES["Telangana***"] = "IN-TG"
-INDIA_ISO_CODES["Telengana***"] = "IN-TG"
-INDIA_ISO_CODES["Tripura"] = "TIN-R"
-INDIA_ISO_CODES["Uttarakhand"] = "IN-UT"
-INDIA_ISO_CODES["Uttar Pradesh"] = "IN-UP"
-INDIA_ISO_CODES["West Bengal"] = "IN-WB"
-INDIA_ISO_CODES["Andaman and Nicobar Islands"] = "IN-AN"
-INDIA_ISO_CODES["Andaman & Nicobar Islands"] = "IN-AN"
-INDIA_ISO_CODES["Chandigarh"] = "IN-CH"
-INDIA_ISO_CODES["Dadra and Nagar Haveli"] = "IN-DN"
-INDIA_ISO_CODES["Dadra & Nagar Haveli"] = "IN-DN"
-INDIA_ISO_CODES["Dadar Nagar Haveli"] = "IN-DN"
-INDIA_ISO_CODES["Daman and Diu"] = "IN-DD"
-INDIA_ISO_CODES["Daman & Diu"] = "IN-DD"
-INDIA_ISO_CODES["Delhi"] = "IN-DL"
-INDIA_ISO_CODES["Jammu and Kashmir"] = "IN-JK"
-INDIA_ISO_CODES["Jammu & Kashmir"] = "IN-JK"
-INDIA_ISO_CODES["Ladakh"] = "IN-LA"
-INDIA_ISO_CODES["Lakshadweep"] = "IN-LD"
-INDIA_ISO_CODES["Lakshwadeep"] = "IN-LD"
-INDIA_ISO_CODES["Pondicherry"] = "IN-PY"
-INDIA_ISO_CODES["Puducherry"] = "IN-PY"
-INDIA_ISO_CODES["Dadra and Nagar Haveli and Daman and Diu"] = "IN-DN_DD"
-INDIA_ISO_CODES["Telangana"] = "IN-TG"
+INDIA_ISO_CODES = {
+    "Andhra Pradesh": "IN-AP",
+    "Arunachal Pradesh": "IN-AR",
+    "Assam": "IN-AS",
+    "Bihar": "IN-BR",
+    "Chattisgarh": "IN-CT",
+    "Chhattisgarh": "IN-CT",
+    "Goa": "IN-GA",
+    "Gujarat": "IN-GJ",
+    "Haryana": "IN-HR",
+    "Himachal Pradesh": "IN-HP",
+    "Jharkhand": "IN-JH",
+    "Jharkhand#": "IN-JH",
+    "Karnataka": "IN-KA",
+    "Kerala": "IN-KL",
+    "Madhya Pradesh": "IN-MP",
+    "Madhya Pradesh#": "IN-MP",
+    "Maharashtra": "IN-MH",
+    "Manipur": "IN-MN",
+    "Meghalaya": "IN-ML",
+    "Mizoram": "IN-MZ",
+    "Nagaland": "IN-NL",
+    "Nagaland#": "IN-NL",
+    "Odisha": "IN-OR",
+    "Punjab": "IN-PB",
+    "Rajasthan": "IN-RJ",
+    "Sikkim": "IN-SK",
+    "Tamil Nadu": "IN-TN",
+    "Telengana": "IN-TG",
+    "Telangana***": "IN-TG",
+    "Telengana***": "IN-TG",
+    "Tripura": "TIN-R",
+    "Uttarakhand": "IN-UT",
+    "Uttar Pradesh": "IN-UP",
+    "West Bengal": "IN-WB",
+    "Andaman and Nicobar Islands": "IN-AN",
+    "Andaman & Nicobar Islands": "IN-AN",
+    "Chandigarh": "IN-CH",
+    "Dadra and Nagar Haveli": "IN-DN",
+    "Dadra & Nagar Haveli": "IN-DN",
+    "Dadar Nagar Haveli": "IN-DN",
+    "Daman and Diu": "IN-DD",
+    "Daman & Diu": "IN-DD",
+    "Delhi": "IN-DL",
+    "Jammu and Kashmir": "IN-JK",
+    "Jammu & Kashmir": "IN-JK",
+    "Ladakh": "IN-LA",
+    "Lakshadweep": "IN-LD",
+    "Lakshwadeep": "IN-LD",
+    "Pondicherry": "IN-PY",
+    "Puducherry": "IN-PY",
+    "Dadra and Nagar Haveli and Daman and Diu": "IN-DN_DD",
+    "Telangana": "IN-TG"
+}
 
 
 class BelowPovertyLineDataLoader:

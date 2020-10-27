@@ -7,7 +7,7 @@ Number and Percentage of Population Below Poverty Line published by Reserve Bank
 
 ### Download URL
 
-* Aviable for downlod as [XLSX](https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/154T_HB15092019609736EE47614B23BFD377A47FFC1A5D.XLSX)
+* Available for downlod as [XLSX](https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/154T_HB15092019609736EE47614B23BFD377A47FFC1A5D.XLSX)
 
 
 ### Overview
