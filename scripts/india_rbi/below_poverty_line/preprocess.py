@@ -89,9 +89,10 @@ class BelowPovertyLineDataLoader:
 
     def download(self):
         df = pd.read_excel(self.source)
-        #Drop title rows and empty rows
+        #Drop title rows in the top and empty rows after 39.
+        #The actual data is between 2nd and 40th row. So keep only them.
         df = df.iloc[2:40]
-        #Remove emprty columns
+        #There is an empty column at column index 19. We don't need it. So drop it.
         df = df.drop(df.columns[0], axis=1)
         self.raw_df = df.drop(df.columns[19], axis=1)
 
