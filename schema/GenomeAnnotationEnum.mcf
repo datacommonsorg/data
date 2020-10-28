@@ -997,3 +997,162 @@ name: "Estonian Genome Project"
 url: "https://genomics.ut.ee/en/about-us/estonian-genome-centre/"
 typeOf: dcs:GenVarSourceEnum
 
+Node: dcid:GenomeAssemblyTypeEnum
+name: "GenomeAssemblyTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "The type of sequence model data defined in this genome assembly."
+
+Node: dcid:GenomeAssemblyTypeAssembly
+name: "GenomeAssemblyTypeAssembly"
+typeOf: dcs:"GenomeAssemblyTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
+description: "The set of chromosomes, unlocalized and unplaced (sometimes called 'random') and alternate sequences used to represent an organism's genome. Assemblies are constructed from 1 or more assembly units."
+
+Node: dcid:GenomeAssemblyTypeHaploidAssembly
+name: "GenomeAssemblyTypeHaploidAssembly"
+typeOf: dcs:"GenomeAssemblyTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
+description: "The collection of chromosome assemblies, unlocalized and unplaced sequences that represent an organism's genome. Any locus may be represented 0 or 1 time, and entire chromosomes are only represented 0 or 1 times."
+
+Node: dcid:GenomeAssemblyTypeHaploid-with-alt-loci
+name: "GenomeAssemblyTypeHaploid-with-alt-loci"
+typeOf: dcs:"GenomeAssemblyTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
+description: "The collection of chromosome assemblies, unlocalized and unplaced sequences and alternate loci that represent an organism's genome. Any locus may be represented 0, 1 or >1 time, but entire chromosomes are only represented 0 or 1 times."
+
+Node: dcid:GenomeAssemblyTypeDiploidAssembly
+name: "GenomeAssemblyTypeDiploidAssembly"
+typeOf: dcs:"GenomeAssemblyTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
+description: "A genome assembly for which a chromosome assembly is available for both sets of an individual's chromosomes. It is anticipated that a diploid genome assembly represents the genome of an individual, therefore, it is not expected that alternate loci will be defined for this assembly, although it is possible that unlocalized or unplaced sequences could be part of the assembly."
+
+Node: dcid:GenomeAssemblyTypeUnresolvedDiploid
+name: "GenomeAssemblyTypeUnresolvedDiploid"
+typeOf: dcs:"GenomeAssemblyTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
+description: "A genome assembly from a diploid in which many of the haplotypic sequences have been resolved but the two haplotypes have not been separated. Consequently, the assembly will be much larger than the expected haploid genome size and many genes will be present in two copies."
+
+Node: dcid:GenomeAssemblyTypeLinkedPseudohaplotypeAssemblies
+name: "GenomeAssemblyTypeLinkedPseudohaplotypeAssemblies"
+typeOf: dcs:"GenomeAssemblyTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
+description: "A genome assembly from a diploid in which many of the haplotypic sequences have been resolved, phased and the two haplotypes have been separated. The current state of the technology is that most assemblers produce blocks that are phased, separated by blocks where the haplotype cannot be distinguished. The typical result is that the "Principal Pseudohaplotype" assembly is a mosaic of haplotype blocks linked by unresolved segments and the "Alternate Pseudohaplotype" assembly is the other haplotype wherever the haplotypes can be distinguished. A pair of pseudohaplotype assemblies derived from the same diploid individual can be linked with a cross-reference."
+
+Node: dcid:GenomeAssemblyReleaseTypeEnum
+name: "GenomeAssemblyReleaseTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Defines the update type of this genome assembly version release:"
+
+Node: dcid:GenomeAssemblyReleaseTypeMajor
+name: "GenomeAssemblyReleaseTypeMajor"
+typeOf: dcs:"GenomeAssemblyReleaseTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
+description: "Changes from the previous assembly version result in a significant change to the coordinate system. The first version of an assembly is always a major release. Most subsequent genome assembly updates are also major releases. [Field is not shown for major releases since this is the default type.]"
+
+Node: dcid:GenomeAssemblyReleaseTypeMinor
+name: "GenomeAssemblyReleaseTypeMinor"
+typeOf: dcs:"GenomeAssemblyReleaseTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
+description: "Changes from the previous assembly version are limited to the following changes, none of which result in a significant change to the coordinate system of the primary assembly-unit: adding, removing or changing a non-nuclear assembly-unit; dropping unplaced or unlocalized scaffolds; adding up to 50 unplaced or unlocalized scaffolds which are shorter than the current scaffold-N50 value; or replacing a component with a gap of the same length."
+
+Node: dcid:GenomeAssemblyReleaseTypePatch
+name: "GenomeAssemblyReleaseTypePatch"
+typeOf: dcs:"GenomeAssemblyReleaseTypeEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
+description: "The only change from the previous assembly version is the addition or modification of a patch assembly-unit (relevant for assemblies maintained by the Genome Reference Consortium )"
+
+Node: dcid:GenomeAssemblyLevelEnum
+name: "GenomeAssemblyLevelEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "The highest level of assembly for any object in the assembly."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#level"
+
+Node: dcid:GenomeAssemblyLevelComplete_genome
+name: "GenomeAssemblyReleaseTypeComplete_genome"
+typeOf: dcs:"GenomeAssemblyLevelEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#level"
+description: "All chromosomes are gapless and have no runs of 10 or more ambiguous bases (Ns), there are no unplaced or unlocalized scaffolds, and all the expected chromosomes are present (i.e. the assembly is not noted as having partial genome representation). Plasmids and organelles may or may not be included in the assembly but if present then the sequences are gapless."
+
+Node: dcid:GenomeAssemblyLevelChromosome
+name: "GenomeAssemblyReleaseTypeChromosome"
+typeOf: dcs:"GenomeAssemblyLevelEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#level"
+description: "There is sequence for one or more chromosomes. This could be a completely sequenced chromosome without gaps or a chromosome containing scaffolds or contigs with gaps between them. There may also be unplaced or unlocalized scaffolds."
+
+Node: dcid:GenomeAssemblyLevelScaffold
+name: "GenomeAssemblyReleaseTypeScaffold"
+typeOf: dcs:"GenomeAssemblyLevelEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#level"
+description: "Some sequence contigs have been connected across gaps to create scaffolds, but the scaffolds are all unplaced or unlocalized."
+
+Node: dcid:GenomeAssemblyLevelContig
+name: "GenomeAssemblyReleaseTypeContig"
+typeOf: dcs:"GenomeAssemblyLevelEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#level"
+description: "Nothing is assembled beyond the level of sequence contigs."
+
+Node: dcid:RefSeqCategoryEnum
+name: "RefSeqCategoryEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Denotes that the assembly is a reference or representative genome in the NCBI Reference Sequence ( RefSeq ) project classification."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
+
+Node: dcid:RefSeqCategoryReferenceGenome
+name: "RefSeqCategoryReference_genome"
+typeOf: dcs:"GenomeAssemblyLevelEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
+description: "A manually selected high quality genome assembly that NCBI and the community have identified as being important as a standard against which other data are compared."
+
+Node: dcid:RefSeqCategoryRepresentationGenome
+name: "RefSeqCategoryRepresentation_genome"
+typeOf: dcs:"GenomeAssemblyLevelEnum"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
+description: "A genome computationally or manually selected as a representative from among the best genomes available for a species or clade that does not have a designated reference genome."
+
+Node: dcid:DNASequenceRoleEnum
+name: "DNASequenceRoleEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "The role a defined sequence of DNA has in a genome assembly."
+
+Node: dcid:DNASequenceRoleAssembled-molecule
+name: "DNASequenceRoleAssembled-molecule"
+typeOf: dcs:DNASequenceRoleEnum
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
+description: "The object represents a chromosome, linkage-group, or plasmid."
+
+Node: dcid:DNASequenceRoleChromosome
+name: "DNASequenceRoleChromosome"
+typeOf: dcs:DNASequenceRoleEnum
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
+description: "The object represents a chromosome, linkage-group, or plasmid."
+
+Node: dcid:DNASequenceRoleUnlocalized-scaffold
+name: "DNASequenceRoleUnlocalized-scaffold"
+typeOf: dcs:DNASequenceRoleEnum
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
+description: "The object is a scaffold that is associated with a particular chromosome but has not been localized to a specific position on the chromosome."
+
+Node: dcid:DNASequenceRoleUnplaced-scaffold
+name: "DNASequenceRoleUnplaced-scaffold"
+typeOf: dcs:DNASequenceRoleEnum
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
+description: "The object is a scaffold that does not have a chromosome assignment."
+
+Node: dcid:DNASequenceRoleAlt-scaffold
+name: "DNASequenceRoleAlt-scaffold"
+typeOf: dcs:DNASequenceRoleEnum
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
+description: "The object is either an alternate loci scaffold or a patch scaffold."
+
+Node: dcid:DNASequenceRoleFix-patch
+name: "DNASequenceRoleFix-patch"
+typeOf: dcs:DNASequenceRoleEnum
+
+Node: dcid:DNASequenceRoleNovel-patch
+name: "DNASequenceRoleNovel-patch"
+typeOf: dcs:DNASequenceRoleEnum
