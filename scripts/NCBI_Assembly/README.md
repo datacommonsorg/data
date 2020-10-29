@@ -5,7 +5,7 @@
 1. [About the Dataset](#about-the-dataset)
     1. [Download URL](#download-url)
     2. [Database Overview](#database-overview)
-    3. [Schema Overview] (#schema-overview)
+    3. [Schema Overview](#schema-overview)
     4. [Notes and Caveats](#notes-and-caveats)
     5. [License](#license)
     6. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
@@ -45,7 +45,7 @@ Please also note that while assembly report files are loosely tab delimited some
 
 ### License
 
-This data is from an NIH National Library of Medicine (NLM) genome unrestricted-access data repository and made accessible under the [NIH Genomic Data Sharing (GDS) Policy] (https://osp.od.nih.gov/scientific-sharing/genomic-data-sharing/) and the [NLM Accessibility policy] (https://www.nlm.nih.gov/accessibility.html). Additional information on "NCBI Website and Data Usage Policies" can be found [here] (https://www.ncbi.nlm.nih.gov/home/about/policies/).
+This data is from an NIH National Library of Medicine (NLM) genome unrestricted-access data repository and made accessible under the [NIH Genomic Data Sharing (GDS) Policy] (https://osp.od.nih.gov/scientific-sharing/genomic-data-sharing/) and the [NLM Accessibility policy] (https://www.nlm.nih.gov/accessibility.html). Additional information on "NCBI Website and Data Usage Policies" can be found [here](https://www.ncbi.nlm.nih.gov/home/about/policies/).
 
 ## About the import
 
