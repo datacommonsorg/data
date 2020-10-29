@@ -209,7 +209,7 @@ description: "The nucleic acid molecule on the positive strand."
 Node: dcid:chromosomeSize
 name: "chromosomeSize"
 typeOf: schema:Property
-rangeIncludes: schema:Number
+rangeIncludes: schema:Quantity
 domainIncludes: dcs:Chromosome
 description: "The number of nucleotides in a given chromosome."
 
