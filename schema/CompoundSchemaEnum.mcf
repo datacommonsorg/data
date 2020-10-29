@@ -2479,3 +2479,28 @@ typeOf: dcs:HumanProteinOccurrenceReliabilityEnum
 name: "ProteinOccurrenceReliabilityUncertain"
 description: "If the antibody-staining pattern contradicts experimental data or no expression is detected on the RNA level."
 descriptionUrl: "https://www.proteinatlas.org/about/assays+annotation#if_reliability_score"
+
+Node: dcid:AntibodyTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "AntibodyTypeEnum"
+description: "The antibody type enumeration which includes bispecific antibody, nanobody and DARPins."
+
+Node: dcid:BispecificAntibody
+typeOf: dcs:AntibodyTypeEnum
+name: "BispecificAntibody"
+description: "The term bispecific antibody (bsAb) is used to describe a large family of molecules designed to recognize two different epitopes or antigens."
+descriptionUrl: "https://www.nature.com/articles/s41573-019-0028-1"
+
+Node: dcid:NanobodyAntibody
+typeOf: dcs:AntibodyTypeEnum
+name: "NanobodyAntibody"
+description: "A single-domain antibody (sdAb), also known as a nanobody, is an antibody fragment consisting of a single monomeric variable antibody domain."
+descriptionUrl: "https://en.wikipedia.org/wiki/Single-domain_antibody"
+
+Node: dcid:DarpinAntibody
+typeOf: dcs:AntibodyTypeEnum
+name: "DarpinAntibody "
+description: "DARPins (an acronym for designed ankyrin repeat proteins) are genetically engineered antibody mimetic proteins typically exhibiting highly specific and high-affinity target protein binding."
+descriptionUrl: "https://en.wikipedia.org/wiki/DARPin"
+

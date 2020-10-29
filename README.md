@@ -29,6 +29,8 @@ data, cleaning the data, and converting the data into one of Meta Content
 Framework, JSON-LD, or RDFa format. We ask that you check in all scripts used in
 this process, so that others can reproduce and continue your work.
 
+Source data must meet the [licensing policy](LICENSING_POLICY.md) requirements.
+
 Scripts should go under the top-level `scripts/` directory, depending on the
 provenance and dataset. See
 [the example](scripts/example_provenance/example_dataset/README.md) for more
@@ -105,8 +107,8 @@ To run the tools via a command line:
     `--style google`, e.g.,
 
 ```
-# Update (--in_place) all files in the util/ directory and its subdirectories.
-yapf --recursive --in_place --style google util/
+# Update (--in-place) all files in the util/ directory and its subdirectories.
+yapf --recursive --in-place --style google util/
 
 # Produce differences between the current code and reformatted code.  Empty
 # output indicates correctly formatted code.

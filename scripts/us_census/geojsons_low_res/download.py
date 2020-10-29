@@ -22,7 +22,6 @@ import geojson
 import os
 
 
-# TODO(fpernice-google): Support downloading more than just US states.
 class GeojsonDownloader:
     """Downloads desired GeoJSON files from the DataCommons Knowledge Graph.
 
@@ -70,7 +69,7 @@ class GeojsonDownloader:
         dc.set_api_key('dev')
         self.geojsons = None
 
-    def download_data(self, place='country/USA'):
+    def download_data(self, place='country/USA', level=1):
         """Downloads GeoJSON data for a specified location.
 
         Given the specified location, extracts the GeoJSONs of all
@@ -81,6 +80,10 @@ class GeojsonDownloader:
         Args:
             place: A string that is a valid value for the geoId property of a
                    DataCommons node.
+            level: Number of administrative levels down from place that should
+                   be fetched. For example if place='country/USA' and level=1,
+                   US states will be fetched. If instead level=2, US counties
+                   will be fetched, and so on.
 
         Raises:
             ValueError: If a Data Commons API call fails.
@@ -90,20 +93,30 @@ class GeojsonDownloader:
         # to get the 0th element explicitly.
         assert len(geolevel[place]) == 1
         geolevel = geolevel[place][0]
-        geos_contained_in_place = dc.get_places_in(
-            [place], self.LEVEL_MAP[geolevel])[place]
+
+        for i in range(level):
+            if geolevel not in self.LEVEL_MAP:
+                raise ValueError("Desired level does not exist.")
+            geolevel = self.LEVEL_MAP[geolevel]
+
+        geos_contained_in_place = dc.get_places_in([place], geolevel)[place]
         self.geojsons = dc.get_property_values(geos_contained_in_place,
                                                "geoJsonCoordinates")
         for area, coords in self.iter_subareas():
             self.geojsons[area][0] = geojson.loads(coords)
 
     def get_subarea(self, area):
+        if not self.geojsons[area]:
+            return False
         assert len(self.geojsons[area]) == 1
         return self.geojsons[area][0]
 
     def iter_subareas(self):
         for area in self.geojsons:
-            yield area, self.get_subarea(area)
+            obj = self.get_subarea(area)
+            if not obj or 'geoId' not in area:
+                continue
+            yield area, obj
 
     def save(self, prefix='', path='./original-data'):
         """Saves the downloaded geojsons to disk.
