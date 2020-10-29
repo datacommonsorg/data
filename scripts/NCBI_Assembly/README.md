@@ -41,7 +41,7 @@ For "Chromosome" text value properties include "ncbiDNASequenceName", "genBankAc
 
 Assembly includes viral, prokaryotic, eukaryotic genomes including historical genome assemblies. However, here we only include a subset of the most recent versions of major genome assemblies. The raw data of additional genome assembly reports can be found in [this directory](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/).
 
-Please also note that while assembly report files are loosely tab delimited some data is separated by ":" plus whitespace from its property name. When using the script `format_NCBI_Chromosome.py` to generate mcfs from the assembly report files of new genomes or new versions of a genome, we recommed reviewing the output mcf for changes in spacing or data separation to ensure that no changes had been made in data formatting of the input file, which effects the output file formatting.
+Please also note that while assembly report files are loosely tab delimited some data is separated by ":" plus whitespace from its property name. When using the script `format_NCBI_Chromosome.py` to generate data mcfs from the assembly report files of new genomes or new versions of a genome, we recommed reviewing the output mcf for changes in spacing or data separation to ensure that no changes had been made in data formatting of the input file, which effects the output file formatting.
 
 ### License
 
