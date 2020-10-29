@@ -47,7 +47,7 @@ Node: dcid:NPS_MeasuredBasedOnJurisdiction
 name: "NPS_MeasuredBasedOnJurisdiction"
 typeOf: dcs:PrisonerMeasurementBasisEnum
 description: "Measurement based on those under the jurisdiction of the state meaning all state and federal inmates held in a public or private prison and those held in jail facilities either physically located inside or outside of the state of legal responsibility, and other inmates who may be temporarily out to court or in transit from the jurisdiction of legal authority to the custody of a confinement facility outside that jurisdiction."
-descriptionUrl: “https://www.bjs.gov/index.cfm?ty=tdtp&tid=1”
+descriptionUrl: "https://www.bjs.gov/index.cfm?ty=tdtp&tid=1"
 
 Node: dcid:CauseOfDeathEnum
 name: "CauseOfDeathEnum"
