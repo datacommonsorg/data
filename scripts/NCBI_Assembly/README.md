@@ -19,15 +19,15 @@
 
 ### Download URL
 
-Assembly report data can be downloaded from the National Center for Biotechnology Information (NCBI) Assembly database using their [Genomes FTP Site](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/). Thus far the latest assembly versions for human genomes hg19 ([GRCh37] (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.13_GRCh37/GCF_000001405.13_GRCh37_assembly_report.txt)) and hg38 ([GRCh38]  (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.26_GRCh38/GCF_000001405.26_GRCh38_assembly_report.txt)) have been downloaded. The data is roughly in tab delimited format (see [Notes and Caveats](#notes-and-caveats) for additional information on formatting).
+Assembly report data can be downloaded from the National Center for Biotechnology Information (NCBI) Assembly database using their [Genomes FTP Site](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/). Thus far the latest assembly versions for human genomes hg19 ([GRCh37](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.13_GRCh37/GCF_000001405.13_GRCh37_assembly_report.txt)) and hg38 ([GRCh38](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.26_GRCh38/GCF_000001405.26_GRCh38_assembly_report.txt)) have been downloaded. The data is roughly in tab delimited format (see [Notes and Caveats](#notes-and-caveats) for additional information on formatting).
 
 ### Database Overview
 
-This directory stores the script used to import assembly report datasets from NCBI Assembly database. Assembly contains information on genome assemblies including their structure, collection of completely sequenced chromosomes, and unaligned sequence fragments More on the nature of the data contained in Assembly can be found on their [website] (https://www.ncbi.nlm.nih.gov/assembly/help/).
+This directory stores the script used to import assembly report datasets from NCBI Assembly database. Assembly contains information on genome assemblies including their structure, collection of completely sequenced chromosomes, and unaligned sequence fragments More on the nature of the data contained in Assembly can be found on their [website](https://www.ncbi.nlm.nih.gov/assembly/help/).
 
 ### Schema Overview
 
-The schema representing data from NCBI assembly reports is represented in [GenomeAnnotation.mcf] (https://github.com/datacommonsorg/data/tree/master/schema/GenomeAnnotation.mcf) and [GenomeAnnotationEnum.mcf] (https://github.com/datacommonsorg/data/tree/master/schema/GenomeAnnotationEnum.mcf).
+The schema representing data from NCBI assembly reports is represented in [GenomeAnnotation.mcf](https://github.com/datacommonsorg/data/tree/master/schema/GenomeAnnotation.mcf) and [GenomeAnnotationEnum.mcf](https://github.com/datacommonsorg/data/tree/master/schema/GenomeAnnotationEnum.mcf).
 
 The assembly reports contains instances of entities "GenomeAssembly", "GenomeAssemblyUnit", and "Chromosome". All of these are connected to entity "Species" by property "ofSpecies". "GenomeAssemblyUnit" and "Chromosome" are connected to "GenomeAssembly" entities with property "inGenomeAssembly". "Chromosome" is connected to "GenomeAssemblyUnit" entities by property "inGenomeAssemblyUnit". Finally, genome sequences of type "Chromosome" that are unlocalized scaffolds link to associated "Chromosome" entity by property "inChromosome".
 
@@ -39,13 +39,13 @@ For "Chromosome" text value properties include "ncbiDNASequenceName", "genBankAc
 
 ### Notes and Caveats
 
-Assembly includes viral, prokaryotic, eukaryotic genomes including historical genome assemblies. However, here we only include a subset of the most recent versions of major genome assemblies. The raw data of additional genome assembly reports can be found in [this directory] (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/).
+Assembly includes viral, prokaryotic, eukaryotic genomes including historical genome assemblies. However, here we only include a subset of the most recent versions of major genome assemblies. The raw data of additional genome assembly reports can be found in [this directory](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/).
 
 Please also note that while assembly report files are loosely tab delimited some data is separated by ":" plus whitespace from its property name. When using the script `format_NCBI_Chromosome.py` to generate mcfs from the assembly report files of new genomes or new versions of a genome, we recommed reviewing the output mcf for changes in spacing or data separation to ensure that no changes had been made in data formatting of the input file, which effects the output file formatting.
 
 ### License
 
-This data is from an NIH National Library of Medicine (NLM) genome unrestricted-access data repository and made accessible under the [NIH Genomic Data Sharing (GDS) Policy] (https://osp.od.nih.gov/scientific-sharing/genomic-data-sharing/) and the [NLM Accessibility policy] (https://www.nlm.nih.gov/accessibility.html). Additional information on "NCBI Website and Data Usage Policies" can be found [here](https://www.ncbi.nlm.nih.gov/home/about/policies/).
+This data is from an NIH National Library of Medicine (NLM) genome unrestricted-access data repository and made accessible under the [NIH Genomic Data Sharing (GDS) Policy](https://osp.od.nih.gov/scientific-sharing/genomic-data-sharing/) and the [NLM Accessibility policy](https://www.nlm.nih.gov/accessibility.html). Additional information on "NCBI Website and Data Usage Policies" can be found [here](https://www.ncbi.nlm.nih.gov/home/about/policies/).
 
 ## About the import
 
