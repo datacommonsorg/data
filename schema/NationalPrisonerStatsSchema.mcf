@@ -73,8 +73,8 @@ Node: dcid:DeathDueToAnotherPerson
 name: "DeathDueToAnotherPerson"
 typeOf: dcs:CauseOfDeathEnum
 
-Node: dcid:NPSOtherCauseOfDeath
-name: "NPSOtherCauseOfDeath"
+Node: dcid:NPS_OtherCauseOfDeath
+name: "NPS_OtherCauseOfDeath"
 typeOf: dcs:CauseOfDeathEnum
 description: "Other cause of death not already listed."
 
