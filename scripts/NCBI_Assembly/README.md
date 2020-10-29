@@ -12,14 +12,14 @@
 2. [About the Import](#about-the-import)
     1. [Artifacts](#artifacts)
     2. [Import Procedure](#import-procedure)
-    3. [Test] (#test)
+    3. [Test](#test)
 
 
 ## About the Dataset
 
 ### Download URL
 
-Assembly report data can be downloaded from the National Center for Biotechnology Information (NCBI) Assembly database using their [Genomes FTP Site] (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/). Thus far the latest assembly versions for human genomes hg19 ([GRCh37] (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.13_GRCh37/GCF_000001405.13_GRCh37_assembly_report.txt)) and hg38 ([GRCh38]  (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.26_GRCh38/GCF_000001405.26_GRCh38_assembly_report.txt)) have been downloaded. The data is roughly in tab delimited format (see [Notes and Caveats](#notes-and-caveats) for additional information on formatting).
+Assembly report data can be downloaded from the National Center for Biotechnology Information (NCBI) Assembly database using their [Genomes FTP Site](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/). Thus far the latest assembly versions for human genomes hg19 ([GRCh37] (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.13_GRCh37/GCF_000001405.13_GRCh37_assembly_report.txt)) and hg38 ([GRCh38]  (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.26_GRCh38/GCF_000001405.26_GRCh38_assembly_report.txt)) have been downloaded. The data is roughly in tab delimited format (see [Notes and Caveats](#notes-and-caveats) for additional information on formatting).
 
 ### Database Overview
 
