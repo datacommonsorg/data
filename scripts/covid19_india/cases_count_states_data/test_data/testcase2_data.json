@@ -1,0 +1,193 @@
+{
+  "total_rows": 11,
+  "offset": 0,
+  "rows": [
+    {
+      "id": "2020-01-30T13:33:00.00+05:30|kl",
+      "key": "2020-01-30T13:33:00.00+05:30|kl",
+      "value": {
+        "_id": "2020-01-30T13:33:00.00+05:30|kl",
+        "_rev": "2-727ff11254cdb1c043ab19b2714b3cab",
+        "report_time": "2020-01-30T13:33:00.00+05:30",
+        "state": "kl",
+        "confirmed_india": 1,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 1
+      }
+    },
+    {
+      "id": "2020-02-02T10:39:00.00+05:30|kl",
+      "key": "2020-02-02T10:39:00.00+05:30|kl",
+      "value": {
+        "_id": "2020-02-02T10:39:00.00+05:30|kl",
+        "_rev": "2-243204a6ebc85f1e9a48a597b1b601fc",
+        "report_time": "2020-02-02T10:39:00.00+05:30",
+        "state": "kl",
+        "confirmed_india": 2,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 2
+      }
+    },
+    {
+      "id": "2020-02-03T12:13:00.00+05:30|kl",
+      "key": "2020-02-03T12:13:00.00+05:30|kl",
+      "value": {
+        "_id": "2020-02-03T12:13:00.00+05:30|kl",
+        "_rev": "2-9f86f235a4ae4bd939d88f900857cad3",
+        "report_time": "2020-02-03T12:13:00.00+05:30",
+        "state": "kl",
+        "confirmed_india": 3,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 3
+      }
+    },
+    {
+      "id": "2020-03-02T14:28:00.00+05:30|dl",
+      "key": "2020-03-02T14:28:00.00+05:30|dl",
+      "value": {
+        "_id": "2020-03-02T14:28:00.00+05:30|dl",
+        "_rev": "2-21817e9568a28f7cf57f756d56bbfaf1",
+        "report_time": "2020-03-02T14:28:00.00+05:30",
+        "state": "dl",
+        "confirmed_india": 1,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 1
+      }
+    },
+    {
+      "id": "2020-03-02T14:28:00.00+05:30|kl",
+      "key": "2020-03-02T14:28:00.00+05:30|kl",
+      "value": {
+        "_id": "2020-03-02T14:28:00.00+05:30|kl",
+        "_rev": "2-6a1212defbdcc4666f0dca6d40dd0451",
+        "report_time": "2020-03-02T14:28:00.00+05:30",
+        "state": "kl",
+        "confirmed_india": 3,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 3
+      }
+    },
+    {
+      "id": "2020-03-02T14:28:00.00+05:30|tg",
+      "key": "2020-03-02T14:28:00.00+05:30|tg",
+      "value": {
+        "_id": "2020-03-02T14:28:00.00+05:30|tg",
+        "_rev": "2-61a6f9efc80e51e0a6ac2900fbe2d303",
+        "report_time": "2020-03-02T14:28:00.00+05:30",
+        "state": "tg",
+        "confirmed_india": 1,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 1
+      }
+    },
+    {
+      "id": "2020-03-03T19:36:00.00+05:30|dl",
+      "key": "2020-03-03T19:36:00.00+05:30|dl",
+      "value": {
+        "_id": "2020-03-03T19:36:00.00+05:30|dl",
+        "_rev": "2-b9f268d15908df9c4008ce75a003e94f",
+        "report_time": "2020-03-03T19:36:00.00+05:30",
+        "state": "dl",
+        "confirmed_india": 1,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 1
+      }
+    },
+    {
+      "id": "2020-03-03T19:36:00.00+05:30|kl",
+      "key": "2020-03-03T19:36:00.00+05:30|kl",
+      "value": {
+        "_id": "2020-03-03T19:36:00.00+05:30|kl",
+        "_rev": "2-c3e945c5f107c5709c81bfd46ff28119",
+        "report_time": "2020-03-03T19:36:00.00+05:30",
+        "state": "kl",
+        "confirmed_india": 3,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 3
+      }
+    },
+    {
+      "id": "2020-03-03T19:36:00.00+05:30|rj",
+      "key": "2020-03-03T19:36:00.00+05:30|rj",
+      "value": {
+        "_id": "2020-03-03T19:36:00.00+05:30|rj",
+        "_rev": "2-0c39cf1d206132986aaeccf6d330a552",
+        "report_time": "2020-03-03T19:36:00.00+05:30",
+        "state": "rj",
+        "confirmed_india": 1,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 1
+      }
+    },
+    {
+      "id": "2020-03-03T19:36:00.00+05:30|tg",
+      "key": "2020-03-03T19:36:00.00+05:30|tg",
+      "value": {
+        "_id": "2020-03-03T19:36:00.00+05:30|tg",
+        "_rev": "2-bc446702100117d07db63f79956ea555",
+        "report_time": "2020-03-03T19:36:00.00+05:30",
+        "state": "tg",
+        "confirmed_india": 1,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw_pib",
+        "type": "cases",
+        "confirmed": 1
+      }
+    },
+    {
+      "id": "2020-03-10T12:00:00.00+05:30|unassigned",
+      "key": "2020-03-10T12:00:00.00+05:30|unassigned",
+      "value": {
+        "_id": "2020-03-10T12:00:00.00+05:30|unassigned",
+        "_rev": "3-9e4c8a9695b1f3df79d59c211bb0b031",
+        "report_time": "2020-03-10T12:00:00.00+05:30",
+        "state": "unassigned",
+        "confirmed_india": 4,
+        "confirmed_foreign": 0,
+        "cured": 0,
+        "death": 0,
+        "source": "mohfw",
+        "type": "cases",
+        "confirmed": 4
+      }
+    }
+  ]
+}

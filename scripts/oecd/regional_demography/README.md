@@ -57,3 +57,16 @@ To generate the cleaned csv and template MCF files, run
 ```bash
 python3 preprocess_csv.py
 ```
+
+## Geo Resolution Tracking
+
+Run `python3 gen_place_mapping_stats.py > stats.txt` to regenerate the
+geo resolution statistics. The diffs in stats.txt will help track
+geo resolution changes. If the file is open in an IDE, remember to save
+the edits from running the script.
+
+To track changes to the final OECD region ID to DCID map (which uses the geo
+resolution results but overwrites countries, NUTS, USA states, and other special
+cases as specified in `clean_geos_resolved_to_dict.py`) just look at diffs in
+`regid2dcid.json`.
+
