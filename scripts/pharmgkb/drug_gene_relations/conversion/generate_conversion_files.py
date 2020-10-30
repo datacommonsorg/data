@@ -38,6 +38,7 @@ def pharm_to_chembl(pharm_ids):
     """Return list of chembl ids that positionally map to pharm ids."""
     # pharmgkb accession id to chembl id via unichem
     chembls = []
+    ndone = 0 # counter for printing progress to console
     for pharm_id in pharm_ids:
         if pd.isnull(pharm_id):
             chembls.append('')
@@ -45,20 +46,21 @@ def pharm_to_chembl(pharm_ids):
         url = 'https://www.ebi.ac.uk/unichem/rest/src_compound_id/' + pharm_id + '/17/1'
         res = requests.get(url)
         if res.status_code == 200 and res.json():
-            print('pharm_id: ' + pharm_id)
-            print(res.json())
             chembl_id = res.json()[0]['src_compound_id']
             chembls.append(chembl_id)
-            print(chembl_id)
         else:
             chembls.append('')
+
+        # increment progress tracker and print after 100th id conversion 
+        ndone += 1
+        if ndone % 100 == 0:
+            print('... completed ' + ndone + ' / ' + len(pharm_ids))
     return chembls
 
 
 def write_pharm_to_chembls(pharm_ids, chembls):
     """Writes pharm_id_to_chembl_combined.csv."""
 
-    print(len(pharm_ids) == len(chembls))
     # write chembl ids and pahrmgkb ids to csv
     chembl_dict = {
         'PharmGKB ID': pharm_ids,
@@ -72,6 +74,7 @@ def pubchem_to_chembl(pubchem_ids):
     """Return list of chembl ids that positionally map to pubchem ids."""
     # pubchem id to chembl id via unichem
     chembls = []
+    ndone = 0 # counter for printing progress to console
     for pubchem_id in pubchem_ids:
         if pd.isnull(pubchem_id):
             chembls.append('')
@@ -79,19 +82,21 @@ def pubchem_to_chembl(pubchem_ids):
         url = 'https://www.ebi.ac.uk/unichem/rest/src_compound_id/' + pubchem_id + '/22/1'
         res = requests.get(url)
         if res.status_code == 200 and res.json():
-            print('pubchem: ' + pubchem_id)
-            print(res.json())
             chembl_id = res.json()[0]['src_compound_id']
             chembls.append(chembl_id)
-            print(chembl_id)
         else:
             chembls.append('')
+
+        # increment progress tracker and print after 100th id conversion 
+        ndone += 1
+        if ndone % 100 == 0:
+            print('... completed ' + ndone + ' / ' + len(pubchem_ids))
+    
     return chembls
 
 
 def write_pubchem_to_chembls(pubchem_ids, chembls):
     """Writes pubchem_id_to_chembl_combined.csv."""
-    print(len(pubchem_ids) == len(chembls))
     # write chembl ids and pahrmgkb ids to csv
     chembl_dict = {
         'PubChem ID': pubchem_ids,
@@ -105,6 +110,7 @@ def inchi_to_inchi_key(inchis):
     """Return list of inchi keys that positionally map to inchis."""
 
     inchi_keys = []
+    ndone = 0 # counter for printing progress to console
     for inchi in inchis:
         if pd.isnull(inchi):
             inchi_keys.append('')
@@ -115,16 +121,20 @@ def inchi_to_inchi_key(inchis):
         if res.status_code == 200:
             tree = ElementTree.fromstring(res.content)
             inchi_keys.append(tree.text)
-            print(tree.text)
         else:
             inchi_keys.append('')
+        
+        # increment progress tracker and print after 100th id conversion 
+        ndone += 1
+        if ndone % 100 == 0:
+            print('... completed ' + ndone + ' / ' + len(inchis))
+    
     return inchi_keys
 
 
 def write_inchi_to_inchi_keys(inchis, inchi_keys):
     """Writes inchi_to_inchi_key_combined.csv."""
 
-    print(len(inchis) == len(inchi_keys))
 
     inchi_dict = {'InChI': inchis, 'InChI Key': inchi_keys}
     inchi_to_inchi_key_df = pd.DataFrame(inchi_dict)
@@ -136,7 +146,8 @@ def inchi_key_to_chembl(inchi_keys):
 
     molecule = new_client.molecule
     chembl_mols = []
-
+    ndone = 0 # counter for printing progress to console
+    
     for inchi_key in inchi_keys:
         if pd.isnull(inchi_key):
             chembl_mols.append('')
@@ -145,12 +156,17 @@ def inchi_key_to_chembl(inchi_keys):
             mol = molecule.get(inchi_key)
             if mol and mol['molecule_chembl_id']:
                 chembl_mols.append(mol['molecule_chembl_id'])
-                print(mol['molecule_chembl_id'])
             else:
                 chembl_mols.append('')
         except:
             chembl_mols.append('')
             print('in error: ' + inchi_key)
+        
+        # increment progress tracker and print after 100th id conversion 
+        ndone += 1
+        if ndone % 100 == 0:
+            print('... completed ' + ndone + ' / ' + len(inchi_keys))
+    
     return chembl_mols
 
 
