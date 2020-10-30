@@ -1,0 +1,163 @@
+Node: dcid:Incarcerated
+name: "Incarcerated"
+typeOf: dcs:InstitutionalizationEnum
+description: "Indicates the state of being confined in a prison or a jail. This may also include halfway houses, boot camps, weekend programs, and other facilities in which individuals are locked up overnight."
+descriptionUrl: "https://www.bjs.gov/index.cfm?tv=tdtp&tid=1"
+
+Node: dcid:prisonSentenceStatus
+name: "prisonSentenceStatus"
+typeOf: schema:Property
+rangeIncludes: dcs:PrisonSentenceStatusEnum
+domainIncludes: dcs:Person,dcs:IncarcerationEvent
+
+Node: dcid:PrisonSentenceStatusEnum
+name: "PrisonSentenceStatusEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "An enumeration of prison sentence statuses."
+
+Node: dcid:Unsentenced
+name: "Unsentenced"
+typeOf: dcs:PrisonSentenceStatusEnum
+description: "Indicates state of not having received a prison sentence."
+
+Node: dcid:Sentenced
+name: "Sentenced"
+typeOf: dcs:PrisonSentenceStatusEnum
+description: "Indicates state of having received a prison sentence."
+
+Node: dcid:maxPrisonSentence
+name: "maxPrisonSentence"
+typeOf: schema:Property
+rangeIncludes: dcs:QuantityRange
+domainIncludes: dcs:Person,dcs:IncarcerationEvent
+
+Node: dcid:PrisonerMeasurementBasisEnum
+name: "PrisonerMeasurementBasisEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Enumeration for the basis of measurement of the prisoner statistic."
+
+Node: dcid:NPS_MeasuredBasedOnCustody
+name: "NPS_MeasuredBasedOnCustody"
+typeOf: dcs:PrisonerMeasurementBasisEnum
+description: "Measurement based on those in custody of state or federal correctional officials."
+
+Node: dcid:NPS_MeasuredBasedOnJurisdiction
+name: "NPS_MeasuredBasedOnJurisdiction"
+typeOf: dcs:PrisonerMeasurementBasisEnum
+description: "Measurement based on those under the jurisdiction of the state meaning all state and federal inmates held in a public or private prison and those held in jail facilities either physically located inside or outside of the state of legal responsibility, and other inmates who may be temporarily out to court or in transit from the jurisdiction of legal authority to the custody of a confinement facility outside that jurisdiction."
+descriptionUrl: "https://www.bjs.gov/index.cfm?ty=tdtp&tid=1"
+
+Node: dcid:CauseOfDeathEnum
+name: "CauseOfDeathEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Enumeration for causes of death."
+
+Node: dcid:JudicialExecution
+name: "JudicialExecution"
+typeOf: dcs:CauseOfDeathEnum
+description: "Execution for committing a crime."
+
+Node: dcid:IllnessOrNaturalCause
+name: "IllnessOrNaturalCause"
+typeOf: dcs:CauseOfDeathEnum
+description: "Illness or other natural cause of death excluding AIDS."
+
+Node: dcid:AIDS
+name: "AIDS"
+typeOf: dcs:CauseOfDeathEnum
+
+Node: dcid:DeathDueToAnotherPerson
+name: "DeathDueToAnotherPerson"
+typeOf: dcs:CauseOfDeathEnum
+
+Node: dcid:NPS_OtherCauseOfDeath
+name: "NPS_OtherCauseOfDeath"
+typeOf: dcs:CauseOfDeathEnum
+description: "Other cause of death not already listed."
+
+Node: dcid:correctionalFacilityOperator
+name: "correctionalFacilityOperator"
+typeOf: schema:Property
+rangeIncludes: dcs:CorrectionalFacilityOperatorEnum
+domainIncludes: dcs:StatisticalVariable
+description: "The level that the correctional facility is operated at."
+
+Node: dcid:CorrectionalFacilityOperatorEnum
+name: "CorrectionalFacilityOperatorEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Enumeration of the different levels correctional facilities are operated at."
+
+Node: dcid:PrivatelyOperatedCorrectionalFacility
+name: "PrivatelyOperatedCorrectionalFacility"
+typeOf: dcs:CorrectionalFacilityOperatorEnum
+
+Node: dcid:LocallyOperatedCorrectionalFacility
+name: "LocallyOperatedCorrectionalFacility"
+typeOf: dcs:CorrectionalFacilityOperatorEnum
+
+Node: dcid:StateOperatedCorrectionalFacility
+name: "StateOperatedCorrectionalFacility"
+typeOf: dcs:CorrectionalFacilityOperatorEnum
+
+Node: dcid:FederallyOperatedCorrectionalFacility
+name: "FederallyOperatedCorrectionalFacility"
+typeOf: dcs:CorrectionalFacilityOperatorEnum
+
+Node: dcid:correctionalFacilityLocation
+name: "correctionalFacilityLocation"
+typeOf: schema:Property
+rangeIncludes: dcs:CorrectionalFacilityLocationEnum
+domainIncludes: dcs:StatisticalVariable
+description: "Where the correctional facility is located relative to a location."
+
+Node: dcid:CorrectionalFacilityLocationEnum
+name: "CorrectionalFacilityLocationEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Enumeration of relative locations of correctional facilities."
+
+Node: dcid:InStateCorrectionalFacility
+name: "InStateCorrectionalFacility"
+typeOf: dcs:CorrectionalFacilityLocationEnum
+description: "Correctional facility located within the state."
+
+Node: dcid:OutOfStateCorrectionalFacility
+name: "OutOfStateCorrectionalFacility"
+typeOf: dcs:CorrectionalFacilityLocationEnum
+description: "Correctional facility located outside of the state."
+
+Node: dcid:LocalCorrectionalFacility
+name: "Local"
+typeOf: dcs:CorrectionalFacilityLocationEnum
+description: "Correctional facility locally located."
+
+Node: dcid:IncarcerationEvent
+name: "IncarcerationEvent"
+typeOf: schema:Class
+subClassOf: schema:Event
+description: "An event that affects one's state of being incarcerated."
+
+Node: dcid:eventType
+name: "eventType"
+typeOf: schema:Property
+rangeIncludes: schema:Enumeration
+domainIncludes: schema:Event
+description: "Additional information about the type of an event."
+
+Node: dcid:IncarcerationEventTypeEnum
+name: "IncarcerationEventTypeEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Enumeration of types of incarceration events."
+
+Node: dcid:AdmittedToPrison
+name: "AdmittedToPrison"
+typeOf: dcs:IncarcerationEventTypeEnum
+
+Node: dcid:ReleasedFromPrison
+name: "ReleasedFromPrison"
+typeOf: dcs:IncarcerationEventTypeEnum
