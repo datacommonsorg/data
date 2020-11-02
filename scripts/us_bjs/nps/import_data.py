@@ -47,16 +47,6 @@ AGGREGATE_COLUMNS = [
 ]
 FILENAME = 'national_prison_stats'
 
-def get_tmcf_node(filename, index, stat_var, measurementMethod):
-    template = """
-    Node: E:{filename}->E{i}
-    typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:{stat_var}
-    measurementMethod: dcs:NationalPrisonerStatistics
-    observationAbout: C:{filename}->GeoId
-    observationDate: C:{filename}->YEAR
-    value: C:{filename}->{stat_var}
-    """
 
 def generate_tmcf(df):
     template = """
@@ -90,18 +80,20 @@ def generate_tmcf(df):
                             'mmethod': 'NationalPrisonerStatistics'
                         }))
             col_num += 1
-    
+
 
 def save_csv(df, filename):
     df.to_csv(filename + '.csv', index=False)
-    
+
+
 def main(args):
     df = pd.read_csv(FLAGS.input_file, delimiter='\t')
     processed_df = preprocess_df(df)
     save_csv(processed_df, FILENAME)
     generate_tmcf(processed_df)
-    f = open("nps_statvars.mcf","w+")
+    f = open("nps_statvars.mcf", "w+")
     write_sv(f)
+
 
 if __name__ == '__main__':
     app.run(main)

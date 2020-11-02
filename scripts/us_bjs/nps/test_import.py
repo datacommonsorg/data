@@ -17,24 +17,27 @@ import pandas as pd
 from preprocess_data import preprocess_df
 from import_data import save_csv
 
+
 class TestPreprocess(unittest.TestCase):
-  def test_preprocess(self):
-    input_path = "./test/test_data.tsv"
-    output_path = "./test/test_data_processed"
-    expected_path = "./test/expected_data.csv"
 
-    input_df = pd.read_csv(input_path, delimiter='\t')
-    save_csv(preprocess_df(input_df), output_path)
+    def test_preprocess(self):
+        input_path = "./test/test_data.tsv"
+        output_path = "./test/test_data_processed"
+        expected_path = "./test/expected_data.csv"
 
-    # Get the content from the processed file.
-    with open(output_path + ".csv", 'r+') as actual_f:
-        actual: str = actual_f.read()
+        input_df = pd.read_csv(input_path, delimiter='\t')
+        save_csv(preprocess_df(input_df), output_path)
 
-    # Get the content of the expected output.
-    with open(expected_path, 'r+') as expected_f:
-        expected: str = expected_f.read()
+        # Get the content from the processed file.
+        with open(output_path + ".csv", 'r+') as actual_f:
+            actual: str = actual_f.read()
 
-    self.assertEqual(actual, expected)
+        # Get the content of the expected output.
+        with open(expected_path, 'r+') as expected_f:
+            expected: str = expected_f.read()
+
+        self.assertEqual(actual, expected)
+
 
 if __name__ == "__main__":
     unittest.main()

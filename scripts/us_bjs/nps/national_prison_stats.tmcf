@@ -1,4 +1,3 @@
-
     Node: E:national_prison_stats->E2
     typeOf: dcs:StatVarObservation
     variableMeasured: dcs:Count_Person_Female_Incarcerated_MeasuredBasedOnJurisdiction
