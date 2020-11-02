@@ -1,769 +1,769 @@
 
     Node: E:national_prison_stats->E2
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_WhiteAlone_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_WhiteAlone_Female
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E3
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_WhiteAlone_Male
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_WhiteAlone_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_WhiteAlone_Male
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_WhiteAlone_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E4
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_WhiteAlone
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_BlackOrAfricanAmericanAlone_Female_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_WhiteAlone
+    value: C:national_prison_stats->Count_Person_BlackOrAfricanAmericanAlone_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E5
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_BlackOrAfricanAmericanAlone_Female
+    variableMeasured: dcs:Count_Person_Female_HispanicOrLatino_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_BlackOrAfricanAmericanAlone_Female
+    value: C:national_prison_stats->Count_Person_Female_HispanicOrLatino_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E6
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_BlackOrAfricanAmericanAlone_Male
+    variableMeasured: dcs:Count_Person_AmericanIndianOrAlaskaNativeAlone_Female_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_BlackOrAfricanAmericanAlone_Male
+    value: C:national_prison_stats->Count_Person_AmericanIndianOrAlaskaNativeAlone_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E7
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_BlackOrAfricanAmericanAlone
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_AsianAlone_Female_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_BlackOrAfricanAmericanAlone
+    value: C:national_prison_stats->Count_Person_AsianAlone_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E8
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_HispanicOrLatino_Female
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_NativeHawaiianOrOtherPacificIslanderAlone_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_HispanicOrLatino_Female
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_NativeHawaiianOrOtherPacificIslanderAlone_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E9
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_HispanicOrLatino_Male
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_TwoOrMoreRaces_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_HispanicOrLatino_Male
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_TwoOrMoreRaces_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E10
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_HispanicOrLatino
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_Female_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_HispanicOrLatino
+    value: C:national_prison_stats->Count_MortalityEvent_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E11
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone_Female
+    variableMeasured: dcs:Count_MortalityEvent_Female_Incarcerated_JudicialExecution_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone_Female
+    value: C:national_prison_stats->Count_MortalityEvent_Female_Incarcerated_JudicialExecution_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E12
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone_Male
+    variableMeasured: dcs:Count_MortalityEvent_Female_IllnessOrNaturalCause_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone_Male
+    value: C:national_prison_stats->Count_MortalityEvent_Female_IllnessOrNaturalCause_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E13
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_AIDS_Female_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AmericanIndianOrAlaskaNativeAlone
+    value: C:national_prison_stats->Count_MortalityEvent_AIDS_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E14
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AsianAlone_Female
+    variableMeasured: dcs:Count_MortalityEvent_Female_Incarcerated_IntentionalSelf-Harm(Suicide)_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AsianAlone_Female
+    value: C:national_prison_stats->Count_MortalityEvent_Female_Incarcerated_IntentionalSelf-Harm(Suicide)_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E15
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AsianAlone_Male
+    variableMeasured: dcs:Count_MortalityEvent_Accidents(UnintentionalInjuries)_Female_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AsianAlone_Male
+    value: C:national_prison_stats->Count_MortalityEvent_Accidents(UnintentionalInjuries)_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E16
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AsianAlone
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_DeathDueToAnotherPerson_Female_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AsianAlone
+    value: C:national_prison_stats->Count_MortalityEvent_DeathDueToAnotherPerson_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E17
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone_Female
+    variableMeasured: dcs:Count_MortalityEvent_Assault(Homicide)_Female_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone_Female
+    value: C:national_prison_stats->Count_MortalityEvent_Assault(Homicide)_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E18
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone_Male
+    variableMeasured: dcs:Count_MortalityEvent_Female_Incarcerated_NPSOtherCauseOfDeath_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone_Male
+    value: C:national_prison_stats->Count_MortalityEvent_Female_Incarcerated_NPSOtherCauseOfDeath_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E19
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_IncarcerationEvent_AdmittedToPrison_Female_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_NativeHawaiianOrOtherPacificIslanderAlone
+    value: C:national_prison_stats->Count_IncarcerationEvent_AdmittedToPrison_Female_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E20
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_TwoOrMoreRaces_Female
+    variableMeasured: dcs:Count_IncarcerationEvent_Female_Incarcerated_MaxSentenceGreaterThan1Year_ReleasedFromPrison_Sentenced_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_TwoOrMoreRaces_Female
+    value: C:national_prison_stats->Count_IncarcerationEvent_Female_Incarcerated_MaxSentenceGreaterThan1Year_ReleasedFromPrison_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E21
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_TwoOrMoreRaces_Male
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_TwoOrMoreRaces_Male
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E22
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_TwoOrMoreRaces
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_MaxSentence1YearOrLess_Sentenced_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_TwoOrMoreRaces
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_MaxSentence1YearOrLess_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E23
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_Death_Female
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_Unsentenced_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_Death_Female
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_Unsentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E24
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_Death_Male
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_InState_PrivatelyOperated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_Death_Male
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_InState_PrivatelyOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E25
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_Death
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_OutOfState_PrivatelyOperated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_Death
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_OutOfState_PrivatelyOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E26
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByJudicialExecution_Female
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_Local_LocallyOperated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByJudicialExecution_Female
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_Local_LocallyOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E27
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByJudicialExecution_Male
+    variableMeasured: dcs:Count_Person_FederallyOperated_Female_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByJudicialExecution_Male
+    value: C:national_prison_stats->Count_Person_FederallyOperated_Female_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E28
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByJudicialExecution
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_OutOfState_StateOperated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByJudicialExecution
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_OutOfState_StateOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E29
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByIllnessOrNaturalCause_Female
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByIllnessOrNaturalCause_Female
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E30
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByIllnessOrNaturalCause_Male
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_MaxSentenceGreaterThan1Year_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByIllnessOrNaturalCause_Male
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_MaxSentenceGreaterThan1Year_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E31
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByIllnessOrNaturalCause
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_MaxSentence1YearOrLess_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByIllnessOrNaturalCause
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_MaxSentence1YearOrLess_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E32
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAIDS_Female
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_Unsentenced_MeasuredBasedOnCustody
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAIDS_Female
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_Unsentenced_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E33
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAIDS_Male
+    variableMeasured: dcs:Count_Person_Female_Incarcerated_Under18_MeasuredBasedOnCustody
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAIDS_Male
+    value: C:national_prison_stats->Count_Person_Female_Incarcerated_Under18_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E34
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAIDS
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAIDS
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E35
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)_Female
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_WhiteAlone_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_WhiteAlone_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E36
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)_Male
+    variableMeasured: dcs:Count_Person_BlackOrAfricanAmericanAlone_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)_Male
+    value: C:national_prison_stats->Count_Person_BlackOrAfricanAmericanAlone_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E37
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_HispanicOrLatino_Incarcerated_Male_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByIntentionalSelf-Harm(Suicide)
+    value: C:national_prison_stats->Count_Person_HispanicOrLatino_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E38
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)_Female
+    variableMeasured: dcs:Count_Person_AmericanIndianOrAlaskaNativeAlone_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)_Female
+    value: C:national_prison_stats->Count_Person_AmericanIndianOrAlaskaNativeAlone_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E39
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)_Male
+    variableMeasured: dcs:Count_Person_AsianAlone_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)_Male
+    value: C:national_prison_stats->Count_Person_AsianAlone_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E40
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_NativeHawaiianOrOtherPacificIslanderAlone_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAccidents(UnintentionalInjuries)
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_NativeHawaiianOrOtherPacificIslanderAlone_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E41
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByDeathDueToAnotherPerson_Female
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_TwoOrMoreRaces_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByDeathDueToAnotherPerson_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_TwoOrMoreRaces_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E42
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByDeathDueToAnotherPerson_Male
+    variableMeasured: dcs:Count_MortalityEvent_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByDeathDueToAnotherPerson_Male
+    value: C:national_prison_stats->Count_MortalityEvent_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E43
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByDeathDueToAnotherPerson
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_Incarcerated_JudicialExecution_Male_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByDeathDueToAnotherPerson
+    value: C:national_prison_stats->Count_MortalityEvent_Incarcerated_JudicialExecution_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E44
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAssault(Homicide)_Female
+    variableMeasured: dcs:Count_MortalityEvent_IllnessOrNaturalCause_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAssault(Homicide)_Female
+    value: C:national_prison_stats->Count_MortalityEvent_IllnessOrNaturalCause_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E45
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAssault(Homicide)_Male
+    variableMeasured: dcs:Count_MortalityEvent_AIDS_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAssault(Homicide)_Male
+    value: C:national_prison_stats->Count_MortalityEvent_AIDS_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E46
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByAssault(Homicide)
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_Incarcerated_IntentionalSelf-Harm(Suicide)_Male_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByAssault(Homicide)
+    value: C:national_prison_stats->Count_MortalityEvent_Incarcerated_IntentionalSelf-Harm(Suicide)_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E47
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByNPSOtherCauseOfDeath_Female
+    variableMeasured: dcs:Count_MortalityEvent_Accidents(UnintentionalInjuries)_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByNPSOtherCauseOfDeath_Female
+    value: C:national_prison_stats->Count_MortalityEvent_Accidents(UnintentionalInjuries)_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E48
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByNPSOtherCauseOfDeath_Male
+    variableMeasured: dcs:Count_MortalityEvent_DeathDueToAnotherPerson_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByNPSOtherCauseOfDeath_Male
+    value: C:national_prison_stats->Count_MortalityEvent_DeathDueToAnotherPerson_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E49
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_DeathByNPSOtherCauseOfDeath
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_Assault(Homicide)_Incarcerated_Male_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_DeathByNPSOtherCauseOfDeath
+    value: C:national_prison_stats->Count_MortalityEvent_Assault(Homicide)_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E50
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AdmittedToPrison_Female
+    variableMeasured: dcs:Count_MortalityEvent_Incarcerated_Male_NPSOtherCauseOfDeath_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AdmittedToPrison_Female
+    value: C:national_prison_stats->Count_MortalityEvent_Incarcerated_Male_NPSOtherCauseOfDeath_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E51
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AdmittedToPrison_Male
+    variableMeasured: dcs:Count_IncarcerationEvent_AdmittedToPrison_Incarcerated_Male_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AdmittedToPrison_Male
+    value: C:national_prison_stats->Count_IncarcerationEvent_AdmittedToPrison_Incarcerated_Male_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E52
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_AdmittedToPrison
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_IncarcerationEvent_Incarcerated_Male_MaxSentenceGreaterThan1Year_ReleasedFromPrison_Sentenced_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_AdmittedToPrison
+    value: C:national_prison_stats->Count_IncarcerationEvent_Incarcerated_Male_MaxSentenceGreaterThan1Year_ReleasedFromPrison_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E53
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_ReleasedFromPrison_Female
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_ReleasedFromPrison_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E54
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_ReleasedFromPrison_Male
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_MaxSentence1YearOrLess_Sentenced_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_ReleasedFromPrison_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_MaxSentence1YearOrLess_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E55
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_ReleasedFromPrison
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_Unsentenced_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_ReleasedFromPrison
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_Unsentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E56
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_MaxSentenceGreaterThan1Year_Female
+    variableMeasured: dcs:Count_Person_Incarcerated_InState_Male_PrivatelyOperated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_MaxSentenceGreaterThan1Year_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_InState_Male_PrivatelyOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E57
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_MaxSentenceGreaterThan1Year_Male
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_OutOfState_PrivatelyOperated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_MaxSentenceGreaterThan1Year_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_OutOfState_PrivatelyOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E58
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_MaxSentenceGreaterThan1Year
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_Local_LocallyOperated_Male_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_MaxSentenceGreaterThan1Year
+    value: C:national_prison_stats->Count_Person_Incarcerated_Local_LocallyOperated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E59
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_MaxSentence1YearOrLess_Female
+    variableMeasured: dcs:Count_Person_FederallyOperated_Incarcerated_Male_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_MaxSentence1YearOrLess_Female
+    value: C:national_prison_stats->Count_Person_FederallyOperated_Incarcerated_Male_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E60
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_MaxSentence1YearOrLess_Male
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_OutOfState_StateOperated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_MaxSentence1YearOrLess_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_OutOfState_StateOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E61
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_MaxSentence1YearOrLess
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_MaxSentence1YearOrLess
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E62
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_Unsentenced_Female
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_MaxSentenceGreaterThan1Year_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_Unsentenced_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_MaxSentenceGreaterThan1Year_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E63
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_Unsentenced_Male
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_MaxSentence1YearOrLess_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_Unsentenced_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_MaxSentence1YearOrLess_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E64
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_Unsentenced
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_Unsentenced_MeasuredBasedOnCustody
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_Unsentenced
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_Unsentenced_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E65
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_PrivatelyOperatedInStateFacility_Female
+    variableMeasured: dcs:Count_Person_Incarcerated_Male_Under18_MeasuredBasedOnCustody
     measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_PrivatelyOperatedInStateFacility_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_Male_Under18_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E66
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_PrivatelyOperatedInStateFacility_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_PrivatelyOperatedInStateFacility_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E67
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_PrivatelyOperatedInStateFacility
+    variableMeasured: dcs:Count_Person_Incarcerated_WhiteAlone_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_PrivatelyOperatedInStateFacility
+    value: C:national_prison_stats->Count_Person_Incarcerated_WhiteAlone_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E68
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_BlackOrAfricanAmericanAlone_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility_Female
+    value: C:national_prison_stats->Count_Person_BlackOrAfricanAmericanAlone_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E69
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_HispanicOrLatino_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility_Male
+    value: C:national_prison_stats->Count_Person_HispanicOrLatino_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E70
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility
+    variableMeasured: dcs:Count_Person_AmericanIndianOrAlaskaNativeAlone_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_PrivatelyOperatedOutOfStateFacility
+    value: C:national_prison_stats->Count_Person_AmericanIndianOrAlaskaNativeAlone_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E71
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_LocallyOperatedLocalFacility_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_AsianAlone_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_LocallyOperatedLocalFacility_Female
+    value: C:national_prison_stats->Count_Person_AsianAlone_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E72
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_LocallyOperatedLocalFacility_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_NativeHawaiianOrOtherPacificIslanderAlone_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_LocallyOperatedLocalFacility_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_NativeHawaiianOrOtherPacificIslanderAlone_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E73
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_LocallyOperatedLocalFacility
+    variableMeasured: dcs:Count_Person_Incarcerated_TwoOrMoreRaces_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_LocallyOperatedLocalFacility
+    value: C:national_prison_stats->Count_Person_Incarcerated_TwoOrMoreRaces_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E74
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_FederallyOperatedFacility_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_FederallyOperatedFacility_Female
+    value: C:national_prison_stats->Count_MortalityEvent_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E75
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_FederallyOperatedFacility_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_Incarcerated_JudicialExecution_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_FederallyOperatedFacility_Male
+    value: C:national_prison_stats->Count_MortalityEvent_Incarcerated_JudicialExecution_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E76
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_FederallyOperatedFacility
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_IllnessOrNaturalCause_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_FederallyOperatedFacility
+    value: C:national_prison_stats->Count_MortalityEvent_IllnessOrNaturalCause_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E77
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_StateOperatedOutOfStateFacility_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_AIDS_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_StateOperatedOutOfStateFacility_Female
+    value: C:national_prison_stats->Count_MortalityEvent_AIDS_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E78
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_StateOperatedOutOfStateFacility_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_Incarcerated_IntentionalSelf-Harm(Suicide)_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_StateOperatedOutOfStateFacility_Male
+    value: C:national_prison_stats->Count_MortalityEvent_Incarcerated_IntentionalSelf-Harm(Suicide)_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E79
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_StateOperatedOutOfStateFacility
+    variableMeasured: dcs:Count_MortalityEvent_Accidents(UnintentionalInjuries)_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_StateOperatedOutOfStateFacility
+    value: C:national_prison_stats->Count_MortalityEvent_Accidents(UnintentionalInjuries)_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E80
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_DeathDueToAnotherPerson_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_Female
+    value: C:national_prison_stats->Count_MortalityEvent_DeathDueToAnotherPerson_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E81
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_MortalityEvent_Assault(Homicide)_Incarcerated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_Male
+    value: C:national_prison_stats->Count_MortalityEvent_Assault(Homicide)_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E82
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen
+    variableMeasured: dcs:Count_MortalityEvent_Incarcerated_NPSOtherCauseOfDeath_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen
+    value: C:national_prison_stats->Count_MortalityEvent_Incarcerated_NPSOtherCauseOfDeath_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E83
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_IncarcerationEvent_AdmittedToPrison_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year_Female
+    value: C:national_prison_stats->Count_IncarcerationEvent_AdmittedToPrison_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E84
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_IncarcerationEvent_Incarcerated_MaxSentenceGreaterThan1Year_ReleasedFromPrison_Sentenced_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year_Male
+    value: C:national_prison_stats->Count_IncarcerationEvent_Incarcerated_MaxSentenceGreaterThan1Year_ReleasedFromPrison_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E85
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year
+    variableMeasured: dcs:Count_Person_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_MaxSentenceGreaterThan1Year
+    value: C:national_prison_stats->Count_Person_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E86
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_MaxSentence1YearOrLess_Sentenced_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_MaxSentence1YearOrLess_Sentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E87
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_Unsentenced_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_Unsentenced_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E88
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess
+    variableMeasured: dcs:Count_Person_Incarcerated_InState_PrivatelyOperated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_MaxSentence1YearOrLess
+    value: C:national_prison_stats->Count_Person_Incarcerated_InState_PrivatelyOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E89
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_Unsentenced_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_OutOfState_PrivatelyOperated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_Unsentenced_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_OutOfState_PrivatelyOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E90
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_Unsentenced_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_Local_LocallyOperated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_Unsentenced_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_Local_LocallyOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E91
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_NotAUSCitizen_Unsentenced
+    variableMeasured: dcs:Count_Person_FederallyOperated_Incarcerated_MeasuredBasedOnJurisdiction
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_NotAUSCitizen_Unsentenced
+    value: C:national_prison_stats->Count_Person_FederallyOperated_Incarcerated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E92
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_Under18_Female
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_OutOfState_StateOperated_MeasuredBasedOnJurisdiction
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_Under18_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_OutOfState_StateOperated_MeasuredBasedOnJurisdiction
     
     Node: E:national_prison_stats->E93
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_Under18_Male
-    measurementMethod: dcs:NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
+    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_Under18_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E94
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Custody_Under18
+    variableMeasured: dcs:Count_Person_Incarcerated_MaxSentenceGreaterThan1Year_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Custody_Under18
+    value: C:national_prison_stats->Count_Person_Incarcerated_MaxSentenceGreaterThan1Year_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E95
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_Female
+    variableMeasured: dcs:Count_Person_Incarcerated_MaxSentence1YearOrLess_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_Female
+    value: C:national_prison_stats->Count_Person_Incarcerated_MaxSentence1YearOrLess_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E96
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction_Male
+    variableMeasured: dcs:Count_Person_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_Unsentenced_MeasuredBasedOnCustody
     measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction_Male
+    value: C:national_prison_stats->Count_Person_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_Unsentenced_MeasuredBasedOnCustody
     
     Node: E:national_prison_stats->E97
     typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:Count_Jurisdiction
-    measurementMethod: dcs:dcAggregate/NationalPrisonerStatistics
+    variableMeasured: dcs:Count_Person_Incarcerated_Under18_MeasuredBasedOnCustody
+    measurementMethod: dcs:NationalPrisonerStatistics
     observationAbout: C:national_prison_stats->GeoId
     observationDate: C:national_prison_stats->YEAR
-    value: C:national_prison_stats->Count_Jurisdiction
+    value: C:national_prison_stats->Count_Person_Incarcerated_Under18_MeasuredBasedOnCustody
     

@@ -12,7 +12,7 @@ UNSENTENCED = "Unsentenced"
 SENTENCE_AMOUNTS = [SENTENCED_OVER_1_YEAR, SENTENCED_UNDER_1_YEAR, UNSENTENCED]
 JURISDICTION = "MeasuredBasedOnJurisdiction"
 CUSTODY = "MeasuredBasedOnCustody"
-    
+
 def get_constant_properties(gender, population_type, measurement_qualifier):
     """gets list of properties needed for all stat vars
 
@@ -26,102 +26,128 @@ def get_constant_properties(gender, population_type, measurement_qualifier):
     """
     props = []
     if not gender == NO_GENDER:
-        props.append("gender: schema:" + gender + "\n")
-    props.append("populationType: dcs:" + population_type + "\n")
-    props.append("measurementQualifier: dcs:" + measurement_qualifier + "\n")
-    props.append("typeOf: dcs:StatisticalVariable\n")
-    props.append("institutionalization: dcs:Incarcerated\n")
-    props.append("statType: dcs:measuredValue\n")
-    props.append("measuredProperty: dcs:Count\n")
-    props.append("\n")
+        props.append("gender: schema:" + gender)
+    props.append("populationType: dcs:" + population_type)
+    props.append("measurementQualifier: dcs:" + measurement_qualifier)
+    props.append("typeOf: dcs:StatisticalVariable")
+    props.append("institutionalization: dcs:Incarcerated")
+    props.append("statType: dcs:measuredValue")
+    props.append("measuredProperty: dcs:Count")
+    props.append("")
     return props
 
-def get_title(sv_title, gender):
-    if gender == NO_GENDER:
-        return "Node: dcid:" + sv_title + "\n"
-    else:
-        return "Node: dcid:" + sv_title + "_" + gender + "\n"
+def get_title(properties, pop_type, gender, mqualifier):
+    template = """Count_{pop_type}_{properties}_{mqualifier}"""
+    props = []
+    if not gender == NO_GENDER:
+        props.append(gender)
+    props.extend(properties)
+    props.append("Incarcerated")
+    props = sorted(props, key=str.lower)
+    prop_string = '_'.join(props)
+    return template.format_map({'pop_type': pop_type, 'properties': prop_string, 'mqualifier': mqualifier})
 
 def get_sentencing_properties(sentence_type):
     props = []
+    prop_values = []
     if (sentence_type == UNSENTENCED):
-        props.append("prisonSentenceStatus: dcs:Unsentenced\n")
+        props.append("prisonSentenceStatus: dcs:Unsentenced")
+        prop_values.append("Unsentenced")
     elif (sentence_type == SENTENCED_OVER_1_YEAR):
-        props.append("prisonSentenceStatus: dcs:Sentenced\n")
-        props.append("maxPrisonSentence: [2 - Years]\n")
+        props.append("prisonSentenceStatus: dcs:Sentenced")
+        props.append("maxPrisonSentence: [2 - Years]")
+        prop_values.append("Sentenced")
+        prop_values.append("MaxSentenceGreaterThan1Year")
     elif (sentence_type == SENTENCED_UNDER_1_YEAR):
-        props.append("prisonSentenceStatus: dcs:Sentenced\n")
-        props.append("maxPrisonSentence: [- 1 Years]\n")
-    return props
+        props.append("prisonSentenceStatus: dcs:Sentenced")
+        props.append("maxPrisonSentence: [- 1 Years]")
+        prop_values.append("Sentenced")
+        prop_values.append("MaxSentence1YearOrLess")
+    return props, prop_values
 
 def get_jurisdiction_sv(gender):
     props = []
-    props.append(get_title("Count_Jurisdiction", gender))
+    props.append(get_title([], POPULATIONTYPE_PERSON, gender, JURISDICTION))
     props.extend(get_constant_properties(gender, POPULATIONTYPE_PERSON, JURISDICTION))
     for race in RACES:
-        props.append(get_title("Count_Jurisdiction_" + race, gender))
-        props.append("race: dcs:" + race + "\n")
+        props.append(get_title([race], POPULATIONTYPE_PERSON, gender, JURISDICTION))
+        props.append("race: dcs:" + race)
         props.extend(get_constant_properties(gender, POPULATIONTYPE_PERSON, JURISDICTION))
     return props
 
 def get_death_sv(gender):
     props = []
-    props.append(get_title("Count_Jurisdiction_Death", gender))
+    props.append(get_title([], POPULATIONTYPE_DEATH, gender, JURISDICTION))
     props.extend(get_constant_properties(gender, POPULATIONTYPE_DEATH, JURISDICTION))
     for cause in CAUSES_OF_DEATH:
-        props.append(get_title("Count_Jurisdiction_DeathBy" + cause, gender))
-        props.append("causeOfDeath: dcs:" + cause + "\n")
+        props.append(get_title([cause], POPULATIONTYPE_DEATH, gender, JURISDICTION))
+        props.append("causeOfDeath: dcs:" + cause)
         props.extend(get_constant_properties(gender, POPULATIONTYPE_DEATH, JURISDICTION))
     return props
     
 def get_incarceration_events_sv(gender):
     props = []
     for event in INCARCERATION_EVENTS:
-        props.append(get_title("Count_Jurisdiction_" + event, gender))
-        props.append("eventType: dcs:" + event + "\n")
-        props.extend(get_sentencing_properties(SENTENCED_OVER_1_YEAR))
+        sentencing_props, prop_values = get_sentencing_properties(SENTENCED_OVER_1_YEAR)
+        prop_values.append(event)
+        props.append(get_title(prop_values, POPULATIONTYPE_INCARCERATION, gender, JURISDICTION))
+        props.append("eventType: dcs:" + event)
+        props.extend(sentencing_props)
         props.extend(get_constant_properties(gender, POPULATIONTYPE_INCARCERATION, JURISDICTION))
     return props
 
 def get_sentencing_sv(gender):
     props = []
     for sentence in SENTENCE_AMOUNTS:
-        props.append(get_title("Count_Jurisdiction_" + sentence, gender))
-        props.extend(get_sentencing_properties(sentence))
+        sentencing_props, prop_values = get_sentencing_properties(sentence)
+        props.append(get_title(prop_values, POPULATIONTYPE_PERSON, gender, JURISDICTION))
+        props.extend(sentencing_props)
         props.extend(get_constant_properties(gender, POPULATIONTYPE_PERSON, JURISDICTION))
     return props
 
 def get_correctional_facility_sv(gender, operator, location):
     props = []
-    props.append(get_title("Count_Jurisdiction_" + operator + location + "Facility", gender))
-    if not operator is "":
-        props.append("correctionalFacilityOperator: dcs:" + operator + "\n")
-    if not location is "":
-        props.append("correctionalFacilityLocation: dcs:" + location + "\n")
+    prop_values = []
+    if operator is not None:
+        props.append("correctionalFacilityOperator: dcs:" + operator)
+        prop_values.append(operator)
+    if location is not None:
+        props.append("correctionalFacilityLocation: dcs:" + location)
+        prop_values.append(location)
     props.extend(get_constant_properties(gender, POPULATIONTYPE_PERSON, JURISDICTION))
-    return props
+    result = [get_title(prop_values, POPULATIONTYPE_PERSON, gender, JURISDICTION)]
+    result.extend(props)
+    return result
 
 def non_us_citizen_constant_props(gender):
     props = []
-    props.append("citizenship: dcs:NotAUSCitizen\n")
-    props.append("correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated\n")
+    prop_values = []
+    props.append("citizenship: dcs:NotAUSCitizen")
+    prop_values.append("NotAUSCitizen")
+    props.append("correctionalFacilityOperator: dcs:StateOperated&FederallyOperated&PrivatelyOperated")
+    prop_values.append("StateOperated&FederallyOperated&PrivatelyOperated")
     props.extend(get_constant_properties(gender, POPULATIONTYPE_PERSON, CUSTODY))
-    return props
+    return props, prop_values
     
 def get_non_us_citizen_sv(gender):
     props = []
-    props.append(get_title("Count_Custody_NotAUSCitizen", gender))
-    props.extend(non_us_citizen_constant_props(gender))
+    non_us_citizen_props, prop_values = non_us_citizen_constant_props(gender)
+    props.append(get_title(prop_values, POPULATIONTYPE_PERSON, gender, CUSTODY))
+    props.extend(non_us_citizen_props)
     for sentence in SENTENCE_AMOUNTS:
-        props.append(get_title("Count_Custody_NotAUSCitizen_" + sentence, gender))
-        props.extend(get_sentencing_properties(sentence))
-        props.extend(non_us_citizen_constant_props(gender))
+        sentencing_props, sentencing_prop_values = get_sentencing_properties(sentence)
+        temp_prop_vals = []
+        temp_prop_vals.extend(prop_values)
+        temp_prop_vals.extend(sentencing_prop_values)
+        props.append(get_title(temp_prop_vals, POPULATIONTYPE_PERSON, gender, CUSTODY))
+        props.extend(sentencing_props)
+        props.extend(non_us_citizen_props)
     return props
 
 def get_under_18_sv(gender):
     props = []
-    props.append(get_title("Count_Custody_Under18", gender))
-    props.append("age: [0 17 Years]\n")
+    props.append(get_title(["Under18"], POPULATIONTYPE_PERSON, gender, CUSTODY))
+    props.append("age: [0 17 Years]")
     props.extend(get_constant_properties(gender, POPULATIONTYPE_PERSON, CUSTODY))
     return props
 
@@ -140,12 +166,12 @@ def write_sv(f):
         result.extend(get_correctional_facility_sv(gender, "PrivatelyOperated", "InState"))
         result.extend(get_correctional_facility_sv(gender, "PrivatelyOperated", "OutOfState"))
         result.extend(get_correctional_facility_sv(gender, "LocallyOperated", "Local"))
-        result.extend(get_correctional_facility_sv(gender, "FederallyOperated", ""))
+        result.extend(get_correctional_facility_sv(gender, "FederallyOperated", None))
         result.extend(get_correctional_facility_sv(gender, "StateOperated", "OutOfState"))
         result.extend(get_non_us_citizen_sv(gender))
         """under 18"""
         result.extend(get_under_18_sv(gender))
-    result = ''.join(result)
+    result = "\n".join(result)
     f.write(result)
         
 def main():
