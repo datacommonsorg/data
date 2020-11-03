@@ -50,14 +50,14 @@ FILENAME = 'national_prison_stats'
 
 def generate_tmcf(df):
     template = """
-    Node: E:{filename}->E{i}
-    typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:{stat_var}
-    measurementMethod: dcs:{mmethod}
-    observationAbout: C:{filename}->GeoId
-    observationDate: C:{filename}->YEAR
-    value: C:{filename}->{stat_var}
-    """
+Node: E:{filename}->E{i}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+measurementMethod: dcs:{mmethod}
+observationAbout: C:{filename}->GeoId
+observationDate: C:{filename}->YEAR
+value: C:{filename}->{stat_var}
+"""
 
     with open('national_prison_stats.tmcf', 'w') as tmcf_f:
         col_num = 0
