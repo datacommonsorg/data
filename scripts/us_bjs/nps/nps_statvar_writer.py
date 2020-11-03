@@ -2,7 +2,7 @@ NO_GENDER = "Both"
 POPULATIONTYPE_PERSON = "Person"
 POPULATIONTYPE_DEATH = "MortalityEvent"
 POPULATIONTYPE_INCARCERATION = "IncarcerationEvent"
-GENDERS = ["Female", "Male", "Both"]
+GENDERS = ["Female", "Male", NO_GENDER]
 RACES = [
     "WhiteAlone", "BlackOrAfricanAmericanAlone", "HispanicOrLatino",
     "AmericanIndianOrAlaskaNativeAlone", "AsianAlone",
