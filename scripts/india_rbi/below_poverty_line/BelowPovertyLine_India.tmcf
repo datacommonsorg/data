@@ -1,14 +1,10 @@
-Node: E:BelowPowertyLine_India->E0
-typeOf: dcs:AdministrativeArea1
-isoCode: C:BelowPowertyLine_India->territory
-
 Node: E:BelowPowertyLine_India->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_rural
 observationDate: C:BelowPowertyLine_India->year
 observationPeriod: "P1Y"
-observationAbout: E:BelowPowertyLine_India->E0
+observationAbout: C:BelowPowertyLine_India->territory
 
 Node: E:BelowPowertyLine_India->E2
 typeOf: dcs:StatVarObservation
@@ -16,7 +12,7 @@ variableMeasured: dcs:Count_Person_Urban_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_urban
 observationDate: C:BelowPowertyLine_India->year
 observationPeriod: "P1Y"
-observationAbout: E:BelowPowertyLine_India->E0
+observationAbout: C:BelowPowertyLine_India->territory
 
 
 Node: E:BelowPowertyLine_India->E3
@@ -25,7 +21,7 @@ variableMeasured: dcs:Count_Person_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_combined
 observationDate: C:BelowPowertyLine_India->year
 observationPeriod: "P1Y"
-observationAbout: E:BelowPowertyLine_India->E0
+observationAbout: C:BelowPowertyLine_India->territory
 
 
 Node: E:BelowPowertyLine_India->E4
@@ -34,7 +30,7 @@ variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months_AsFr
 value: C:BelowPowertyLine_India->percentage_person_rural
 observationDate: C:BelowPowertyLine_India->year
 observationPeriod: "P1Y"
-observationAbout: E:BelowPowertyLine_India->E0
+observationAbout: C:BelowPowertyLine_India->territory
 
 
 Node: E:BelowPowertyLine_India->E5
@@ -43,7 +39,7 @@ variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months_AsFr
 value: C:BelowPowertyLine_India->percentage_person_urban
 observationDate: C:BelowPowertyLine_India->year
 observationPeriod: "P1Y"
-observationAbout: E:BelowPowertyLine_India->E0
+observationAbout: C:BelowPowertyLine_India->territory
 
 
 Node: E:BelowPowertyLine_India->E6
@@ -52,7 +48,7 @@ variableMeasured: dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFraction
 value: C:BelowPowertyLine_India->percentage_person_combined
 observationDate: C:BelowPowertyLine_India->year
 observationPeriod: "P1Y"
-observationAbout: E:BelowPowertyLine_India->E0
+observationAbout: C:BelowPowertyLine_India->territory
 
 
 Node: E:BelowPowertyLine_India->E7
@@ -62,7 +58,7 @@ value: C:BelowPowertyLine_India->poverty_line_rural
 unit: dcs:IndianRupee
 observationDate: C:BelowPowertyLine_India->year
 observationPeriod: "P1Y"
-observationAbout: E:BelowPowertyLine_India->E0
+observationAbout: C:BelowPowertyLine_India->territory
 
 
 Node: E:BelowPowertyLine_India->E8
@@ -72,4 +68,4 @@ value: C:BelowPowertyLine_India->poverty_line_urban
 unit: dcs:IndianRupee
 observationDate: C:BelowPowertyLine_India->year
 observationPeriod: "P1Y"
-observationAbout: E:BelowPowertyLine_India->E0
+observationAbout: C:BelowPowertyLine_India->territory
