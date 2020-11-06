@@ -1,0 +1,7 @@
+
+Node: E:IndiaCensus->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaCensus->StatisticalVariable
+observationDate: C:IndiaCensus->Year
+observationAbout: C:IndiaCensus->Name
+value: C:WorldBank->value
