@@ -1,7 +1,7 @@
 
-Node: E:IndiaCensus->E0
+Node: E:IndiaCensus2011_Primary_Abstract_Data->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: C:IndiaCensus->StatisticalVariable
-observationDate: C:IndiaCensus->Year
-observationAbout: C:IndiaCensus->Name
-value: C:WorldBank->value
+variableMeasured: C:IndiaCensus2011_Primary_Abstract_Data->StatisticalVariable
+observationDate: C:IndiaCensus2011_Primary_Abstract_Data->Year
+observationAbout: C:IndiaCensus2011_Primary_Abstract_Data->Name
+value: C:IndiaCensus2011_Primary_Abstract_Data->value

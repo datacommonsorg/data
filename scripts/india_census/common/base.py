@@ -17,12 +17,12 @@ measuredProperty: dcs:{measuredProperty}
 """
 
 TEMPLATE_TMCF = """
-Node: E:IndiaCensus->E0
+Node: E:IndiaCensus{year}_{dataset_name}->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: C:IndiaCensus->StatisticalVariable
-observationDate: C:IndiaCensus->Year
-observationAbout: C:IndiaCensus->Name
-value: C:WorldBank->value
+variableMeasured: C:IndiaCensus{year}_{dataset_name}->StatisticalVariable
+observationDate: C:IndiaCensus{year}_{dataset_name}->Year
+observationAbout: C:IndiaCensus{year}_{dataset_name}->Name
+value: C:IndiaCensus{year}_{dataset_name}->value
 """
 
 census_location_id_pattern = "COI{year}-{state}-{district}-{subdistt}-{town_or_village}-{ward}-{eb}"
@@ -30,15 +30,9 @@ census_location_id_pattern = "COI{year}-{state}-{district}-{subdistt}-{town_or_v
 
 class CensusDataLoader:
 
-    def __init__(self,
-                 data_file_path,
-                 metadata_file_path,
-                 mcf_file_path,
-                 tmcf_file_path,
-                 csv_file_path,
-                 existing_stat_var,
-                 census_year,
-                 social_category=None):
+    def __init__(self, data_file_path, metadata_file_path, mcf_file_path,
+                 tmcf_file_path, csv_file_path, existing_stat_var, census_year,
+                 social_category, dataset_name):
         self.data_file_path = data_file_path
         self.metadata_file_path = metadata_file_path
         self.mcf_file_path = mcf_file_path
@@ -47,6 +41,7 @@ class CensusDataLoader:
         self.existing_stat_var = existing_stat_var
         self.census_year = census_year
         self.social_category = social_category
+        self.dataset_name = dataset_name
         self.raw_df = None
         self.stat_var_index = {}
 
@@ -221,7 +216,9 @@ class CensusDataLoader:
 
     def _create_tmcf(self):
         with open(self.tmcf_file_path, 'w+', newline='') as f_out:
-            f_out.write(TEMPLATE_TMCF)
+            f_out.write(
+                TEMPLATE_TMCF.format(year=self.census_year,
+                                     dataset_name=self.dataset_name))
 
     def process(self):
         self._download()

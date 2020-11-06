@@ -36,5 +36,7 @@ if __name__ == '__main__':
         tmcf_file_path=tmcf_file_path,
         csv_file_path=csv_file_path,
         existing_stat_var=PRE_EXISTING_STAT_VARS,
-        census_year=2011)
+        census_year=2011,
+        social_category=None,
+        dataset_name="Primary_Abstract_Data")
     loader.process()
