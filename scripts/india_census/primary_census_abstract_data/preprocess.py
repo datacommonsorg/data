@@ -8,8 +8,7 @@ class CensusPrimaryCensusAbstractDataLoader(CensusDataLoader):
 
 if __name__ == '__main__':
     SOURCE_XLSX_FILE_URL = os.path.join(
-        os.path.dirname(__file__),
-        'data/DDW_PCA0000_2011_Indiastatedist.xlsx')
+        os.path.dirname(__file__), 'data/DDW_PCA0000_2011_Indiastatedist.xlsx')
 
     #SOURCE_XLSX_FILE_URL = "http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx"
 

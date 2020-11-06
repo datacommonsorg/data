@@ -27,6 +27,7 @@ value: C:WorldBank->value
 
 census_location_id_pattern = "COI{year}-{state}-{district}-{subdistt}-{town_or_village}-{ward}-{eb}"
 
+
 class CensusDataLoader:
 
     def __init__(self,
@@ -50,11 +51,18 @@ class CensusDataLoader:
         self.stat_var_index = {}
 
     def _download(self):
-        dtype={'State': str, 'District': str, 'Subdistt': str, "Town/Village": str, "Ward": str, "EB": str }
+        dtype = {
+            'State': str,
+            'District': str,
+            'Subdistt': str,
+            "Town/Village": str,
+            "Ward": str,
+            "EB": str
+        }
         self.raw_df = pd.read_excel(self.data_file_path, dtype=dtype)
 
     def _format_data(self):
-        
+
         #Generate Census locationid
         self.raw_df["census_location_id"] = self.raw_df.apply(
             lambda row: census_location_id_pattern.format(
@@ -66,20 +74,20 @@ class CensusDataLoader:
                 ward=row["Ward"],
                 eb=row["EB"]),
             axis=1)
-    
-
 
         #Remove the unwanted columns
         #They are census codes which we dont use
         #State,District,Subdistt,Town/Village,Ward,EB
         self.raw_df.drop([
             "State", "District", "Subdistt", "Town/Village", "Ward", "EB",
-            "Level","Name"
-        ],axis=1,inplace=True)
+            "Level", "Name"
+        ],
+                         axis=1,
+                         inplace=True)
         print(self.raw_df)
         #first column is Name of the place
         #second column is Name of the TRU/placeOfResidence
-        #3-N are the actual values        
+        #3-N are the actual values
         value_columns = list(self.raw_df.columns[1:-1])
 
         #converting rows in to columns. So the filnal structure will be
@@ -95,14 +103,18 @@ class CensusDataLoader:
             axis=1)
         #add the census year
         self.raw_df['Year'] = self.census_year
-        
+
         #reomve the rows for which we dont have dcids defined
-        location2dcid_json_path = os.path.join(os.path.dirname(__file__)+"/../geo/data/india_census_2011_location_to_dcid.json")             
+        location2dcid_json_path = os.path.join(
+            os.path.dirname(__file__) +
+            "/../geo/data/india_census_2011_location_to_dcid.json")
         location2dcid = dict(json.loads(open(location2dcid_json_path).read()))
-        self.raw_df = self.raw_df[self.raw_df['census_location_id'].isin(location2dcid.keys())]
+        self.raw_df = self.raw_df[self.raw_df['census_location_id'].isin(
+            location2dcid.keys())]
 
         #replace census_location_id with dcid
-        self.raw_df['Region'] = self.raw_df.apply(lambda row: location2dcid[row['census_location_id']], axis=1)
+        self.raw_df['Region'] = self.raw_df.apply(
+            lambda row: location2dcid[row['census_location_id']], axis=1)
 
         #Export it as CSV. It will have the following columns
         #Name,TRU,columnName,value,StatisticalVariable,Year

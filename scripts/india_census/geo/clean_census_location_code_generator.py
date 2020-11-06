@@ -40,13 +40,11 @@ class LoadCensusGeoData:
             self.census_data_dir,
             self.cleaned_geos_file_name_pattern.format(year=self.census_year))
         print(output_file_path)
-        self.raw_df.to_csv(output_file_path,
-                           index=False,
-                           header=True)
+        self.raw_df.to_csv(output_file_path, index=False, header=True)
 
 
 if __name__ == '__main__':
-    census_data_dir = os.path.join(os.path.dirname(__file__),"data")
+    census_data_dir = os.path.join(os.path.dirname(__file__), "data")
     census_data_file = 'DDW_PCA0000_2011_Indiastatedist.xlsx'
 
     loader = LoadCensusGeoData(census_data_dir, census_data_file, 2011)

@@ -26,17 +26,21 @@ module_dir_ = os.path.dirname(__file__)
 class TestLoadCensusGeoData(unittest.TestCase):
 
     def test_create_csv(self):
-        census_data_dir = os.path.join(os.path.dirname(__file__),"geo/test_data")
+        census_data_dir = os.path.join(os.path.dirname(__file__),
+                                       "geo/test_data")
         census_data_file = 'DDW_PCA0000_2011_Indiastatedist.xlsx'
 
         loader = LoadCensusGeoData(census_data_dir, census_data_file, 2011)
         loader.generate_location_csv()
 
-        expected_file = os.path.join(census_data_dir, "india_census_2011_geo_cleaned.csv")
-        result_file = os.path.join(census_data_dir, "india_census_2011_geo_cleaned_expected.csv")
+        expected_file = os.path.join(census_data_dir,
+                                     "india_census_2011_geo_cleaned.csv")
+        result_file = os.path.join(
+            census_data_dir, "india_census_2011_geo_cleaned_expected.csv")
 
         same = filecmp.cmp(result_file, expected_file)
         self.assertTrue(same)
+
 
 if __name__ == '__main__':
     unittest.main()
