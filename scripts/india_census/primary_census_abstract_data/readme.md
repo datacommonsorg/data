@@ -2,7 +2,7 @@
 
 
 ### Download URL
-You can pre download the dataset and add it `data` folder or you can download from the URL in real-time. Its available at (censusindia.gov.in)[http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx].
+You can pre download the dataset and add it `data` folder or you can download from the URL in real-time. Its available at [censusindia.gov.in](http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx).
 
 ### Overview
 
@@ -34,6 +34,15 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_Data.csv](IndiaCensus2011_Primary
 - Year - Census year
 - Region - dcid of the region
 
+** Example **
+| census_location_id                      | TRU   | columnName | Value     | StatisticalVariable   | Year | Region                    |
+| --------------------------------------- | ----- | ---------- | --------- | --------------------- | ---- | ------------------------- |
+| COI2011-00-000-00000-000000-0000-000000 | Total | No_HH      | 249501663 | Count_Household       | 2011 | dcid:country/IND          |
+| COI2011-00-000-00000-000000-0000-000000 | Rural | No_HH      | 168612897 | Count_Household_Rural | 2011 | dcid:country/IND          |
+| COI2011-00-000-00000-000000-0000-000000 | Urban | No_HH      | 80888766  | Count_Household_Urban | 2011 | dcid:country/IND          |
+| COI2011-01-000-00000-000000-0000-000000 | Total | No_HH      | 2119718   | Count_Household       | 2011 | dcid:wikidataId/Q66278313 |
+
+
 
 #### MCFs and Template MCFs
 - [IndiaCensus2011_Primary_Abstract_Data.mcf](IndiaCensus2011_Primary_Abstract_Data.mcf)
@@ -42,6 +51,6 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_Data.csv](IndiaCensus2011_Primary
 
 ### Import Procedure
 
-Make sure to run scripts to get [DCIDs for Census Locations]() before you run the below scipt. The below script will generate; mcf, tmcf and csv files.
+Make sure to run scripts to get [DCIDs for Census Locations](./../) before you run the below scipt. The below script will generate; mcf, tmcf and csv files.
 
 `python -m india_census.primary_census_abstract_data.preprocess`
