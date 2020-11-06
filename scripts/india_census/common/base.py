@@ -194,7 +194,6 @@ class CensusDataLoader:
         self.stat_var_index[key] = name
 
         self.mcf.append(row)
-        #print(dict(row))
         stat_var = TEMPLATE_STAT_VAR.format(**dict(row))
         stat_var = stat_var + "\n"
         return name, stat_var
@@ -212,7 +211,6 @@ class CensusDataLoader:
                             pass
                         else:
                             f_out.write(stat_var)
-        print(self.stat_var_index)
 
     def _create_tmcf(self):
         with open(self.tmcf_file_path, 'w+', newline='') as f_out:
