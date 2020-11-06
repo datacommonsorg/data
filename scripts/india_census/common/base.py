@@ -84,7 +84,6 @@ class CensusDataLoader:
         ],
                          axis=1,
                          inplace=True)
-        print(self.raw_df)
         #first column is Name of the place
         #second column is Name of the TRU/placeOfResidence
         #3-N are the actual values
@@ -104,7 +103,7 @@ class CensusDataLoader:
         #add the census year
         self.raw_df['Year'] = self.census_year
 
-        #reomve the rows for which we dont have dcids defined
+        #remove the rows for which we dont have dcids defined
         location2dcid_json_path = os.path.join(
             os.path.dirname(__file__) +
             "/../geo/data/india_census_2011_location_to_dcid.json")

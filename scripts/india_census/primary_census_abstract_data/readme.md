@@ -34,7 +34,8 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_Data.csv](IndiaCensus2011_Primary
 - Year - Census year
 - Region - dcid of the region
 
-** Example **
+#### Cleaned Data Snippet
+
 | census_location_id                      | TRU   | columnName | Value     | StatisticalVariable   | Year | Region                    |
 | --------------------------------------- | ----- | ---------- | --------- | --------------------- | ---- | ------------------------- |
 | COI2011-00-000-00000-000000-0000-000000 | Total | No_HH      | 249501663 | Count_Household       | 2011 | dcid:country/IND          |

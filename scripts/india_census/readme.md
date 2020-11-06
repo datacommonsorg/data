@@ -48,4 +48,4 @@ go run ../../../tools/place_name_resolver/resolver.go --in_csv_path=india_census
 
 ## Primary Census Abstract Data Tables (India, States/UTs - District Level) Overview
 - Make sure to run scripts to get dcid for Census Locations first
-- Refer the read me inside [primary_census_abstract_data](./primary_census_abstract_data/eadme.md) folder.
+- Refer the read me inside [primary_census_abstract_data](./primary_census_abstract_data/readme.md) folder.
