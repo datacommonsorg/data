@@ -79,3 +79,8 @@ This is used for creating the MCF files.
 ## Primary Census Abstract - Scheduled Caste (India, States/UTs - District Level) Overview
 - Make sure to run scripts to get dcid for Census Locations first
 - Refer the read me inside [primary_census_abstract_scheduled_caste](./primary_census_abstract_scheduled_caste/readme.md) folder.
+
+
+## Primary Census Abstract - Scheduled Tribe (India, States/UTs - District Level) Overview
+- Make sure to run scripts to get dcid for Census Locations first
+- Refer the read me inside [primary_census_abstract_scheduled_caste](./primary_census_abstract_scheduled_tribe/readme.md) folder.

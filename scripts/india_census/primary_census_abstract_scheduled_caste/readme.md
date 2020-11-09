@@ -5,7 +5,7 @@
 It's available at [censusindia.gov.in](http://censusindia.gov.in/2011census/SC-ST/pca_state_distt_sc.xls). You can pre-download the dataset and place it in the `data` folder or you can download from the URL in real-time. 
 
 ### Overview
-The first 4 columns refer to the location for which the data is tabulated. The 5th column is called TRU, it stands for Total, Urban or Rural. From Column 6 - 85, we have values tabulated. The column header is the variable. For example, the 6th column header is `No_HH_Head`, which has the values for `Number of Household Heads`. A list of all such variables and their definitions can be found in the CSV  `india_census/common/primary_abstract_data_variables.csv`
+The first 4 columns refer to the location for which the data is tabulated. The 5th column is called TRU, it stands for Total, Urban or Rural. From Column 6 - 85, we have values tabulated. The column header is the variable. For example, the 6th column header is `No_HH_Head`, which has the values for `Number of Household Heads`. A list of all such variables and their definition can be found in the CSV  `india_census/common/primary_abstract_data_variables.csv`
 
  - State - Two-digit state code
  - District - Three-digit district code inside the specific state
@@ -59,6 +59,6 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_ScheduleCaste_Data.csv](IndiaCens
 
 ### Import Procedure
 
-Make sure to run scripts to get [DCIDs for Census Locations](./../) before you run the below script. The below script will generate; mcf, tmcf, and CSV files.
+Make sure to run scripts to get [DCIDs for Census Locations](./../) before you run the below script. The below script will generate; mcf, tmcf and csv files.
 
 `python -m india_census.primary_census_abstract_scheduled_caste.preprocess`
