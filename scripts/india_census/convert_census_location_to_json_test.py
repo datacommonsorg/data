@@ -30,7 +30,7 @@ class TestConvertResolvedLocationData(unittest.TestCase):
                                        "geo/test_data")
 
         resolved_geos_file_name_pattern = "india_census_2011_geo_resolved.csv"
-        census_location_to_dcid_json_file_pattern = "india_census_2011_location_to_dcid_expected.json"
+        census_location_to_dcid_json_file_pattern = "india_census_2011_location_to_dcid.json"
 
         census_year = 2011
         converter = ConvertResolvedLocationData(
@@ -39,11 +39,16 @@ class TestConvertResolvedLocationData(unittest.TestCase):
         converter.generate_location_json()
 
         expected_file = os.path.join(census_data_dir,
-                                     "india_census_2011_geo_cleaned.csv")
+                                     "india_census_2011_location_to_dcid_expected.json")
         result_file = os.path.join(
-            census_data_dir, "india_census_2011_geo_cleaned_expected.csv")
+            census_data_dir, "india_census_2011_location_to_dcid.json")
 
         same = filecmp.cmp(result_file, expected_file)
+
+        #remove the created file, after comparison
+        if os.path.exists(result_file):
+            os.remove(result_file)
+
         self.assertTrue(same)
 
 

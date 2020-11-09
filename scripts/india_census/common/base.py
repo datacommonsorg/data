@@ -1,3 +1,17 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import json
 import csv
@@ -28,7 +42,7 @@ value: C:IndiaCensus{year}_{dataset_name}->value
 census_location_id_pattern = "COI{year}-{state}-{district}-{subdistt}-{town_or_village}-{ward}-{eb}"
 
 
-class CensusDataLoader:
+class CensusPrimaryAbstractDataLoaderBase:
 
     def __init__(self, data_file_path, metadata_file_path, mcf_file_path,
                  tmcf_file_path, csv_file_path, existing_stat_var, census_year,
@@ -45,7 +59,7 @@ class CensusDataLoader:
         self.raw_df = None
         self.stat_var_index = {}
 
-    def _download(self):
+    def _download_and_standardize(self):
         dtype = {
             'State': str,
             'District': str,
@@ -219,7 +233,7 @@ class CensusDataLoader:
                                      dataset_name=self.dataset_name))
 
     def process(self):
-        self._download()
+        self._download_and_standardize()
         self._create_mcf()
         self._create_tmcf()
         self._format_data()

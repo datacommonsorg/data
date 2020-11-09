@@ -2,13 +2,12 @@
 
 
 ### Download URL
-You can pre download the dataset and add it `data` folder or you can download from the URL in real-time. Its available at [censusindia.gov.in](http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx).
+It's available at [censusindia.gov.in](http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx). You can pre-download the dataset and place it in `data` folder or you can download from the URL in real-time. 
 
 ### Overview
 
-The sheet has various columns for data. The first nine columns refer the geography for which the data is presented. The 10th column is called TRU, it stands for Total, Urban or Rural. From Column 
-11-85, we have values. The column header is the varibale. For example 1th column is `No_HH` which has the values for `Number of Households`. List of all such variables and their defnition can be found in the CSV  `india_census/common/primary_abstract_data_variables.csv`
-
+The sheet has various columns for location data. The first nine columns refer the location for which the data is tabulated. The 10th column is called TRU, it stands for Total, Urban or Rural. From Column 
+11-85, we have values tabulated. The column header is the varibale. For example 1th column is `No_HH` which has the values for `Number of Households`. List of all such variables and their defnition can be found in the CSV  `india_census/common/primary_abstract_data_variables.csv`
 
  - State - Two digit state code
  - District - Three digit district code inside the specific state

@@ -34,11 +34,15 @@ class TestLoadCensusGeoData(unittest.TestCase):
         loader.generate_location_csv()
 
         expected_file = os.path.join(census_data_dir,
-                                     "india_census_2011_geo_cleaned.csv")
+                                     "india_census_2011_geo_cleaned_expected.csv")
         result_file = os.path.join(
-            census_data_dir, "india_census_2011_geo_cleaned_expected.csv")
+            census_data_dir, "india_census_2011_geo_cleaned.csv")
 
         same = filecmp.cmp(result_file, expected_file)
+
+        #remove the created file, after comparison
+        if os.path.exists(result_file):
+            os.remove(result_file)
         self.assertTrue(same)
 
 

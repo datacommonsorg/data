@@ -45,7 +45,37 @@ go run ../../../tools/place_name_resolver/resolver.go --in_csv_path=india_census
 ```
 
 
+## Base Class - CensusPrimaryAbstractDataLoaderBase
+`india_census.common.base.CensusPrimaryAbstractDataLoaderBase` is the base class for all census primary bastract data loaders. It has all the features required to clean and process the data. A specific census dataset loader can extend this class and can override any methods if required.
 
-## Primary Census Abstract Data Tables (India, States/UTs - District Level) Overview
+It has one public function `process()` which internally downloads the data, cleans the data, creates the MCF, TMCF and cleaned CSV file.
+
+
+## primary_abstract_data_variables.csv
+A csv file which defines census attribues. It's inside the package `india_census.common.base` It has the following columns
+
+- columnName
+- description
+- existingStatVar
+- populationType
+- statType
+- measuredProperty- 
+- gender
+- age
+- socialCategory 
+- literacyStatus 
+- workerStatus
+- workerClassification
+- workCategory
+- workPeriod
+
+This is used for creating the MCF files.
+
+## Primary Census Abstract Total (India, States/UTs - District Level) Overview
 - Make sure to run scripts to get dcid for Census Locations first
 - Refer the read me inside [primary_census_abstract_data](./primary_census_abstract_data/readme.md) folder.
+
+
+## Primary Census Abstract - Scheduled Caste (India, States/UTs - District Level) Overview
+- Make sure to run scripts to get dcid for Census Locations first
+- Refer the read me inside [primary_census_abstract_scheduled_caste](./primary_census_abstract_scheduled_caste/readme.md) folder.
