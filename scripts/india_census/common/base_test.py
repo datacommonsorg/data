@@ -25,12 +25,11 @@ module_dir_ = os.path.dirname(__file__)
 class TestCensusPrimaryAbstractDataLoaderBase(unittest.TestCase):
 
     def test_create_csv(self):
-        data_file_path = os.path.join(
-            os.path.dirname(__file__), './test_data/test_input.xlsx')
+        data_file_path = os.path.join(os.path.dirname(__file__),
+                                      './test_data/test_input.xlsx')
 
         metadata_file_path = os.path.join(
-            os.path.dirname(__file__),
-            'primary_abstract_data_variables.csv')
+            os.path.dirname(__file__), 'primary_abstract_data_variables.csv')
 
         existing_stat_var = [
             "Count_Household", "Count_Person", "Count_Person_Urban",
@@ -39,23 +38,17 @@ class TestCensusPrimaryAbstractDataLoaderBase(unittest.TestCase):
 
         mcf_file_path = os.path.join(os.path.dirname(__file__),
                                      './test_data/test_Data.mcf')
-        tmcf_file_path = os.path.join(
-            os.path.dirname(__file__),
-            './test_data/test_Data.tmcf')
+        tmcf_file_path = os.path.join(os.path.dirname(__file__),
+                                      './test_data/test_Data.tmcf')
         csv_file_path = os.path.join(os.path.dirname(__file__),
                                      './test_data/test_Data.csv')
-        
 
-        mcf_expected_file_path = os.path.join(os.path.dirname(__file__),
-                                     './test_data/test_Data_Expected.mcf')
-        tmcf_expected_file_path = os.path.join(
-            os.path.dirname(__file__),
-            './test_data/test_Data.tmcf')
-        csv_expected_file_path = os.path.join(os.path.dirname(__file__),
-                                     './test_data/test_Data_Expected.csv')
-
-
-
+        mcf_expected_file_path = os.path.join(
+            os.path.dirname(__file__), './test_data/test_Data_Expected.mcf')
+        tmcf_expected_file_path = os.path.join(os.path.dirname(__file__),
+                                               './test_data/test_Data.tmcf')
+        csv_expected_file_path = os.path.join(
+            os.path.dirname(__file__), './test_data/test_Data_Expected.csv')
 
         loader = CensusPrimaryAbstractDataLoaderBase(
             data_file_path=data_file_path,

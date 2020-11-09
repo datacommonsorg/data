@@ -16,13 +16,14 @@ import os
 from ..common.base import CensusPrimaryAbstractDataLoaderBase
 
 
-class CensusPrimaryCensusAbstractDataLoader(CensusPrimaryAbstractDataLoaderBase):
+class CensusPrimaryCensusAbstractDataLoader(CensusPrimaryAbstractDataLoaderBase
+                                           ):
     pass
 
 
 if __name__ == '__main__':
-    data_file_path = os.path.join(
-        os.path.dirname(__file__), 'data/DDW_PCA0000_2011_Indiastatedist.xlsx')
+    data_file_path = os.path.join(os.path.dirname(__file__),
+                                  'data/DDW_PCA0000_2011_Indiastatedist.xlsx')
     #data_file_path = "http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx"
     metadata_file_path = os.path.join(
         os.path.dirname(__file__),

@@ -26,8 +26,7 @@ module_dir_ = os.path.dirname(__file__)
 class TestConvertResolvedLocationData(unittest.TestCase):
 
     def test_create_json(self):
-        census_data_dir = os.path.join(os.path.dirname(__file__),
-                                       "geo/test_data")
+        census_data_dir = os.path.join(os.path.dirname(__file__), "test_data")
 
         resolved_geos_file_name_pattern = "india_census_2011_geo_resolved.csv"
         census_location_to_dcid_json_file_pattern = "india_census_2011_location_to_dcid.json"
@@ -38,10 +37,10 @@ class TestConvertResolvedLocationData(unittest.TestCase):
             census_location_to_dcid_json_file_pattern, census_year)
         converter.generate_location_json()
 
-        expected_file = os.path.join(census_data_dir,
-                                     "india_census_2011_location_to_dcid_expected.json")
-        result_file = os.path.join(
-            census_data_dir, "india_census_2011_location_to_dcid.json")
+        expected_file = os.path.join(
+            census_data_dir, "india_census_2011_location_to_dcid_expected.json")
+        result_file = os.path.join(census_data_dir,
+                                   "india_census_2011_location_to_dcid.json")
 
         same = filecmp.cmp(result_file, expected_file)
 
