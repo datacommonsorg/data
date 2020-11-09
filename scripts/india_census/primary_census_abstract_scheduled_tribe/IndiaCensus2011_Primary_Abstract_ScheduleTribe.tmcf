@@ -1,0 +1,7 @@
+
+Node: E:IndiaCensus2011_Primary_Abstract_ScheduleTribe->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaCensus2011_Primary_Abstract_ScheduleTribe->StatisticalVariable
+observationDate: C:IndiaCensus2011_Primary_Abstract_ScheduleTribe->Year
+observationAbout: C:IndiaCensus2011_Primary_Abstract_ScheduleTribe->Name
+value: C:IndiaCensus2011_Primary_Abstract_ScheduleTribe->value

@@ -1,35 +1,41 @@
-# Primary Census Abstract Data for Scheduled Castes (SC) (India & States/UTs - District Level) Overview
+# Primary Census Abstract Data Tables (India, States/UTs - District Level) Overview
 
 
 ### Download URL
-It's available at [censusindia.gov.in](http://censusindia.gov.in/2011census/SC-ST/pca_state_distt_sc.xls). You can pre-download the dataset and place it in the `data` folder or you can download from the URL in real-time. 
+It's available at [censusindia.gov.in](http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx). You can pre-download the dataset and place it in the `data` folder, or you can download it from the URL in real-time. 
 
 ### Overview
-The first 4 columns refer to the location for which the data is tabulated. The 5th column is called TRU, it stands for Total, Urban or Rural. From Column 6 - 85, we have values tabulated. The column header is the variable. For example, the 6th column header is `No_HH_Head`, which has the values for `Number of Household Heads`. A list of all such variables and their definitions can be found in the CSV  `india_census/common/primary_abstract_data_variables.csv`
 
- - State - Two-digit state code
- - District - Three-digit district code inside the specific state
+The first nine columns refer to the location for which the data is tabulated. The 9th column is called TRU; it stands for Total, Urban, or Rural. From Column 10-93, we have values tabulated. The column header is the census variable. For example, the 10th column header `No_HH`, which has the values for `Number of Households`. A list of all such variables and their definition can be found in the CSV  `india_census/common/primary_abstract_data_variables.csv`
+
+ - State - Two digit state code
+ - District - Three digit district code inside the specific state
+ - Subdistt - Five digit sub-district code inside the specific state
+ - Town/Village - Six digit town or village code
+ - Ward - Four digit ward code
+ - EB - Six digit Enumeration Block Number
  - Level - If the actual location is India (country), STATE, DISTRICT, SUB-DISTRICT, TOWN, VILLAGE or EB
  - Name - Official Name of the place
  - TRU - Stands for Total, Urban or Rural
- - 6-84 - Data value columns 
+ - 10-93 - Data value columns 
 
- #### Raw Data Snippet
 
-| State |  District | Level  |  Name            | TRU    |  No_HH_Head | TOT_P     | .... |
-| ----- | --------- | ------ | ---------------- | ------ | ----------- | --------- | ---- |
-| 00    | 000       |  India |  India           |  Total |  41694863   | 201378372 |      |
-| 00    | 000       |  India |  India           |  Rural |  31803775   | 153850848 |      |
-| 00    | 000       |  India |  India           |  Urban |  9891088    |  47527524 |      |
-| 01    | 000       |  State |  JAMMU & KASHMIR |  Total |  183020     | 924991    |      |
-| 01    | 000       |  State |  JAMMU & KASHMIR |  Rural |  149536     | 751026    |      |
+#### Raw Data Snippet
+
+| State | District | Subdistt | Town/Village | Ward | EB     | Level | Name            | TRU   | No_HH     | TOT_P      | ... |
+| ----- | -------- | -------- | ------------ | ---- | ------ | ----- | --------------- | ----- | --------- | ---------- | --- |
+| 00    | 000      | 00000    | 000000       | 0000 | 000000 | India | India           | Total | 249501663 | 1210854977 | ... |
+| 00    | 000      | 00000    | 000000       | 0000 | 000000 | India | India           | Rural | 168612897 | 833748852  | ... |
+| 00    | 000      | 00000    | 000000       | 0000 | 000000 | India | India           | Urban | 80888766  | 377106125  | ... |
+| 01    | 000      | 00000    | 000000       | 0000 | 000000 | STATE | JAMMU & KASHMIR | Total | 2119718   | 12541302   | ... |
+| ....  |
 | ....  |
 
 
 #### Cleaned Data
 As part of the cleaning process, we remove the unwanted columns and then convert the columns into rows. Then add the `StatisticalVariable` column corresponding to census variable and TRU.
 
-Cleaned data [IndiaCensus2011_Primary_Abstract_ScheduleCaste_Data.csv](IndiaCensus2011_Primary_Abstract_ScheduleCaste_Data.csv) will have the following columns.
+Cleaned data [IndiaCensus2011_Primary_Abstract_Data.csv](IndiaCensus2011_Primary_Abstract_Data.csv) will have the following columns.
 
 - census_location_id - Census location id
 - TRU - TRU
@@ -41,24 +47,22 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_ScheduleCaste_Data.csv](IndiaCens
 
 #### Cleaned Data Snippet
 
-| census_location_id                      | TRU   | columnName | Value    | StatisticalVariable                 | Year | Region                    |
-| --------------------------------------- | ----- | ---------- | -------- | ----------------------------------- | ---- | ------------------------- |
-| COI2011-00-000-00000-000000-0000-000000 | Total | No_HH_Head | 41694863 | Count_Household_ScheduleCaste       | 2011 | dcid:country/IND          |
-| COI2011-00-000-00000-000000-0000-000000 | Rural | No_HH_Head | 31803775 | Count_Household_ScheduleCaste_Rural | 2011 | dcid:country/IND          |
-| COI2011-00-000-00000-000000-0000-000000 | Urban | No_HH_Head | 9891088  | Count_Household_ScheduleCaste_Urban | 2011 | dcid:country/IND          |
-| COI2011-01-000-00000-000000-0000-000000 | Total | No_HH_Head | 183020   | Count_Household_ScheduleCaste       | 2011 | dcid:wikidataId/Q66278313 |
-| COI2011-01-000-00000-000000-0000-000000 | Rural | No_HH_Head | 149536   | Count_Household_ScheduleCaste_Rural | 2011 | dcid:wikidataId/Q66278313 |
-| COI2011-01-000-00000-000000-0000-000000 | Urban | No_HH_Head | 33484    | Count_Household_ScheduleCaste_Urban | 2011 | dcid:wikidataId/Q66278313 |
-|                                         |
+| census_location_id                      | TRU   | columnName | Value     | StatisticalVariable   | Year | Region                    |
+| --------------------------------------- | ----- | ---------- | --------- | --------------------- | ---- | ------------------------- |
+| COI2011-00-000-00000-000000-0000-000000 | Total | No_HH      | 249501663 | Count_Household       | 2011 | dcid:country/IND          |
+| COI2011-00-000-00000-000000-0000-000000 | Rural | No_HH      | 168612897 | Count_Household_Rural | 2011 | dcid:country/IND          |
+| COI2011-00-000-00000-000000-0000-000000 | Urban | No_HH      | 80888766  | Count_Household_Urban | 2011 | dcid:country/IND          |
+| COI2011-01-000-00000-000000-0000-000000 | Total | No_HH      | 2119718   | Count_Household       | 2011 | dcid:wikidataId/Q66278313 |
+
 
 
 #### MCFs and Template MCFs
+- [IndiaCensus2011_Primary_Abstract_Data.mcf](IndiaCensus2011_Primary_Abstract_Data.mcf)
+- [IndiaCensus2011_Primary_Abstract_Data.tmcf](IndiaCensus2011_Primary_Abstract_Data.tmcf)
 
-- [IndiaCensus2011_Primary_Abstract_ScheduleCaste_Data.mcf](IndiaCensus2011_Primary_Abstract_ScheduleCaste_Data.mcf)
-- [IndiaCensus2011_Primary_Abstract_ScheduleCaste_Data.tmcf](IndiaCensus2011_Primary_Abstract_ScheduleCaste_Data.tmcf)
 
 ### Import Procedure
 
-Make sure to run scripts to get [DCIDs for Census Locations](./../) before you run the below script. The below script will generate; mcf, tmcf, and CSV files.
+Make sure to run scripts to get [DCIDs for Census Locations](./../) before you run the below script. The below script will generate; mcf, tmcf, and csv files.
 
-`python -m india_census.primary_census_abstract_scheduled_caste.preprocess`
+`python -m india_census.primary_census_abstract_data.preprocess`

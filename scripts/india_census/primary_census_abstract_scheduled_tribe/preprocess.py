@@ -16,7 +16,7 @@ import os
 from ..common.base import CensusPrimaryAbstractDataLoaderBase
 
 
-class CensusPrimaryCensusAbstractScheduleCasteDataLoader(
+class CensusPrimaryCensusAbstractScheduleTribeDataLoader(
         CensusPrimaryAbstractDataLoaderBase):
 
     def _download_and_standardize(self):
@@ -32,8 +32,8 @@ class CensusPrimaryCensusAbstractScheduleCasteDataLoader(
 
 if __name__ == '__main__':
     data_file_path = os.path.join(os.path.dirname(__file__),
-                                  'data/pca_state_distt_sc.xls')
-    #data_file_path = "http://censusindia.gov.in/2011census/SC-ST/pca_state_distt_sc.xls"
+                                  'data/pca_state_distt_st.xls')
+    #data_file_path = "http://censusindia.gov.in/2011census/SC-ST/pca_state_distt_st.xls"
 
     metadata_file_path = os.path.join(
         os.path.dirname(__file__),
@@ -43,15 +43,15 @@ if __name__ == '__main__':
 
     mcf_file_path = os.path.join(
         os.path.dirname(__file__),
-        './IndiaCensus2011_Primary_Abstract_ScheduleCaste.mcf')
+        './IndiaCensus2011_Primary_Abstract_ScheduleTribe.mcf')
     tmcf_file_path = os.path.join(
         os.path.dirname(__file__),
-        './IndiaCensus2011_Primary_Abstract_ScheduleCaste.tmcf')
+        './IndiaCensus2011_Primary_Abstract_ScheduleTribe.tmcf')
 
     csv_file_path = os.path.join(
         os.path.dirname(__file__),
-        './IndiaCensus2011_Primary_Abstract_ScheduleCaste.csv')
-    loader = CensusPrimaryCensusAbstractScheduleCasteDataLoader(
+        './IndiaCensus2011_Primary_Abstract_ScheduleTribe.csv')
+    loader = CensusPrimaryCensusAbstractScheduleTribeDataLoader(
         data_file_path=data_file_path,
         metadata_file_path=metadata_file_path,
         mcf_file_path=mcf_file_path,
@@ -59,6 +59,6 @@ if __name__ == '__main__':
         csv_file_path=csv_file_path,
         existing_stat_var=existing_stat_var,
         census_year=2011,
-        social_category="ScheduleCaste",
-        dataset_name="Primary_Abstract_ScheduleCaste")
+        social_category="ScheduleTribe",
+        dataset_name="Primary_Abstract_ScheduleTribe")
     loader.process()
