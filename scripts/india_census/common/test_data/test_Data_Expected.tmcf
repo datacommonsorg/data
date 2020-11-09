@@ -1,0 +1,7 @@
+
+Node: E:IndiaCensus2011_TEST->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaCensus2011_TEST->StatisticalVariable
+observationDate: C:IndiaCensus2011_TEST->Year
+observationAbout: C:IndiaCensus2011_TEST->Name
+value: C:IndiaCensus2011_TEST->value

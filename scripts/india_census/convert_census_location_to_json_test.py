@@ -25,7 +25,7 @@ module_dir_ = os.path.dirname(__file__)
 
 class TestConvertResolvedLocationData(unittest.TestCase):
 
-    def test_create_csv(self):
+    def test_create_json(self):
         census_data_dir = os.path.join(os.path.dirname(__file__),
                                        "geo/test_data")
 
