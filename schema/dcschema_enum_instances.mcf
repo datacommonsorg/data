@@ -1,8 +1,12 @@
-Node: ACS5Enum
-dcid: dcs:CensusACS5yrSurvey
+Node: dcid:CensusACS5yrSurvey
 typeOf: dcs:CensusSurveyEnum
 name: "CensusACS5yrSurvey"
 description: "American Community Survey 5 year estimates"
+
+Node: dcid:CensusACS1yrSurvey
+typeOf: dcs:CensusSurveyEnum
+name: "CensusACS1yrSurvey"
+description: "American Community Survey 1 year estimates"
 
 Node: dcid:Difference
 typeOf: dcs:BinaryOperatorEnum
