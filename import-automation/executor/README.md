@@ -51,12 +51,6 @@ Commons knowledge graph using the importer.
 Run `. run_local_executor.sh --help` for usage.
 
 
-## Deploying on App Engine
-
-```
-gcloud app deploy
-```
-
 ## Configuring the Executor
 
 The executor has a number of customizable configurations listed in
@@ -75,6 +69,13 @@ job is stored in the body of the job. To change the configurations for a created
 cron job, go to the Cloud Scheduler page on Google Cloud and edit the job
 directly, or write a script to query the Cloud Scheduler API (see
 https://cloud.google.com/scheduler/docs/reference/rest).
+
+
+## Deploying on App Engine
+
+```
+gcloud app deploy
+```
 
 ## Running Tests
 
