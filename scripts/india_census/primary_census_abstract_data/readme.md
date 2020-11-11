@@ -63,6 +63,6 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_Data.csv](IndiaCensus2011_Primary
 
 ### Import Procedure
 
-Make sure to run scripts to get [DCIDs for Census Locations](./../) before you run the below script. The below script will generate; mcf, tmcf, and csv files.
+The below script will generate; mcf, tmcf, and csv files.
 
 `python -m india_census.primary_census_abstract_data.preprocess`

@@ -35,10 +35,11 @@ Node: E:IndiaCensus{year}_{dataset_name}->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus{year}_{dataset_name}->StatisticalVariable
 observationDate: C:IndiaCensus{year}_{dataset_name}->Year
-observationAbout: C:IndiaCensus{year}_{dataset_name}->Name
+observationAbout: C:IndiaCensus{year}_{dataset_name}->census_location_id
 value: C:IndiaCensus{year}_{dataset_name}->value
 """
 
+#This will uniquely identify a census location up to EB level for a given census year.
 census_location_id_pattern = "COI{year}-{state}-{district}-{subdistt}-{town_or_village}-{ward}-{eb}"
 
 
@@ -111,18 +112,6 @@ class CensusPrimaryAbstractDataLoaderBase:
             axis=1)
         #add the census year
         self.raw_df['Year'] = self.census_year
-
-        #remove the rows for which we dont have dcids defined
-        location2dcid_json_path = os.path.join(
-            os.path.dirname(__file__) +
-            "/../geo/data/india_census_2011_location_to_dcid.json")
-        location2dcid = dict(json.loads(open(location2dcid_json_path).read()))
-        self.raw_df = self.raw_df[self.raw_df['census_location_id'].isin(
-            location2dcid.keys())]
-
-        #replace census_location_id with dcid
-        self.raw_df['Region'] = self.raw_df.apply(
-            lambda row: location2dcid[row['census_location_id']], axis=1)
 
         #Export it as CSV. It will have the following columns
         #Name,TRU,columnName,value,StatisticalVariable,Year
