@@ -18,7 +18,14 @@ from ..common.base import CensusPrimaryAbstractDataLoaderBase
 
 class CensusPrimaryCensusAbstractDataLoader(CensusPrimaryAbstractDataLoaderBase
                                            ):
-    pass
+
+    def _get_base_name(self, row):
+        name = "Count_" + row["populationType"]
+        return name
+
+    def _get_base_constraints(self, row):
+        constraints = ""
+        return constraints
 
 
 if __name__ == '__main__':
@@ -48,6 +55,5 @@ if __name__ == '__main__':
         csv_file_path=csv_file_path,
         existing_stat_var=existing_stat_var,
         census_year=2011,
-        social_category=None,
         dataset_name="Primary_Abstract_Data")
     loader.process()

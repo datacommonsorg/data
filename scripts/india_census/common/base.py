@@ -47,7 +47,7 @@ class CensusPrimaryAbstractDataLoaderBase:
 
     def __init__(self, data_file_path, metadata_file_path, mcf_file_path,
                  tmcf_file_path, csv_file_path, existing_stat_var, census_year,
-                 social_category, dataset_name):
+                 dataset_name):
         self.data_file_path = data_file_path
         self.metadata_file_path = metadata_file_path
         self.mcf_file_path = mcf_file_path
@@ -55,7 +55,6 @@ class CensusPrimaryAbstractDataLoaderBase:
         self.tmcf_file_path = tmcf_file_path
         self.existing_stat_var = existing_stat_var
         self.census_year = census_year
-        self.social_category = social_category
         self.dataset_name = dataset_name
         self.raw_df = None
         self.stat_var_index = {}
@@ -117,18 +116,20 @@ class CensusPrimaryAbstractDataLoaderBase:
         #Name,TRU,columnName,value,StatisticalVariable,Year
         self.raw_df.to_csv(self.csv_file_path, index=False, header=True)
 
+    def _get_base_name(self, row):
+        #This function is overridden in the child class
+        name = "Count_" + row["populationType"]
+        return name
+
+    def _get_base_constraints(self, row):
+        #This function is overridden in the child class
+        constraints = ""
+        return constraints
+
     def _create_variable(self, data_row, place_of_residence=None):
         row = copy.deepcopy(data_row)
-        name = "Count_" + row["populationType"]
-        constraints = ""
-
-        if self.social_category == "ScheduleCaste":
-            name = name + "_" + "ScheduleCaste"
-            constraints = constraints + "socialCategory: ScheduleCaste \n"
-
-        if self.social_category == "ScheduleTribe":
-            name = name + "_" + "ScheduleTribe"
-            constraints = constraints + "socialCategory: ScheduleTribe \n"
+        name = self._get_base_name(row)
+        constraints = self._get_base_constraints(row)
 
         if row["age"] == "YearsUpto6":
             name = name + "_" + "YearsUpto6"

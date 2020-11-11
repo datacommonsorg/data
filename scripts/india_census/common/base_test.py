@@ -58,7 +58,6 @@ class TestCensusPrimaryAbstractDataLoaderBase(unittest.TestCase):
             csv_file_path=csv_file_path,
             existing_stat_var=existing_stat_var,
             census_year=2011,
-            social_category=None,
             dataset_name="TEST")
         loader.process()
 
@@ -66,15 +65,15 @@ class TestCensusPrimaryAbstractDataLoaderBase(unittest.TestCase):
         same_tmcf = filecmp.cmp(tmcf_file_path, tmcf_expected_file_path)
         same_csv = filecmp.cmp(csv_file_path, csv_expected_file_path)
 
-        #remove the created file, after comparison
-        # if os.path.exists(mcf_file_path):
-        #     os.remove(mcf_file_path)
+        #Remove the created files, after comparison
+        if os.path.exists(mcf_file_path):
+            os.remove(mcf_file_path)
 
-        # if os.path.exists(tmcf_file_path):
-        #     os.remove(tmcf_file_path)
+        if os.path.exists(tmcf_file_path):
+            os.remove(tmcf_file_path)
 
-        # if os.path.exists(csv_file_path):
-        #     os.remove(csv_file_path)
+        if os.path.exists(csv_file_path):
+            os.remove(csv_file_path)
 
         self.assertTrue(same_mcf)
         self.assertTrue(same_tmcf)

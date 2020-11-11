@@ -29,6 +29,15 @@ class CensusPrimaryCensusAbstractScheduleCasteDataLoader(
         self.raw_df["Ward"] = "0000"
         self.raw_df["EB"] = "000000"
 
+    def _get_base_name(self, row):
+        name = "Count_" + row["populationType"]
+        name = name + "_" + "ScheduleCaste"
+        return name
+
+    def _get_base_constraints(self, row):
+        constraints = "socialCategory: ScheduleCaste \n"
+        return constraints
+
 
 if __name__ == '__main__':
     data_file_path = os.path.join(os.path.dirname(__file__),
@@ -59,6 +68,5 @@ if __name__ == '__main__':
         csv_file_path=csv_file_path,
         existing_stat_var=existing_stat_var,
         census_year=2011,
-        social_category="ScheduleCaste",
         dataset_name="Primary_Abstract_ScheduleCaste")
     loader.process()
