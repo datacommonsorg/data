@@ -151,7 +151,7 @@ name: "ncbiBioProject"
 typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:GenomeAssembly
-description: "A BioProject is a collection of biological data related to a single initiative originating from a single organization or from a consortium. A BioProject record provides users a single place to find links to the diverse data generated for that project and deposited into the archival databases maintained by members of the INSDC. Typical examples of a BioProject include a multiisolate project for sequencing multiple strains of a bacterial species, or a monoisolate project for the genome and transcriptome of a particular organism."
+description: "A BioProject is a collection of biological data related to a single initiative originating from a single organization or from a consortium. A BioProject record provides users a single place to find links to the diverse data generated for that project and deposited into the archival databases maintained by members of the International Nucleotide Sequence Database Collaboration (INSDC). Typical examples of a BioProject include a multiisolate project for sequencing multiple strains of a bacterial species, or a monoisolate project for the genome and transcriptome of a particular organism."
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/bioproject/docs/faq/"
 
 Node: dcid:genomeAssemblyType
