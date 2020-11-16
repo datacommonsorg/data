@@ -58,6 +58,7 @@ class CensusPrimaryAbstractDataLoaderBase:
         self.dataset_name = dataset_name
         self.raw_df = None
         self.stat_var_index = {}
+        self.census_columns = []
 
     def _download_and_standardize(self):
         dtype = {
@@ -69,6 +70,7 @@ class CensusPrimaryAbstractDataLoaderBase:
             "EB": str
         }
         self.raw_df = pd.read_excel(self.data_file_path, dtype=dtype)
+        self.census_columns = self.raw_df.columns[9:]
 
     def _format_data(self):
 
@@ -211,7 +213,13 @@ class CensusPrimaryAbstractDataLoaderBase:
                     for place_of_residence in [None, "Urban", "Rural"]:
                         name, stat_var = self._create_variable(
                             data_row, place_of_residence)
+                        #if the statvar already exists then we don't
+                        #need to recreate it
                         if name in self.existing_stat_var:
+                            pass
+                        #we need to create statvars only for those columns that 
+                        #exist in the current data file
+                        elif data_row["columnName"] not in self.census_columns:
                             pass
                         else:
                             f_out.write(stat_var)
