@@ -13,7 +13,6 @@ A CSV file that defines census attributes. It's inside the package `india_census
 
 - columnName
 - description
-- existingStatVar
 - populationType
 - statType
 - measuredProperty- 
