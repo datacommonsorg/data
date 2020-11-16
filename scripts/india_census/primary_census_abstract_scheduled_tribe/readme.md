@@ -37,19 +37,18 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_ScheduleTribe.csv](IndiaCensus201
 - StatisticalVariable - statistical variable
 - Value - Value for the attribute
 - Year - Census year
-- Region - dcid of the region
 
 #### Cleaned Data Snippet
 
-| census_location_id                      | TRU   | columnName | Value    | StatisticalVariable                 | Year | Region                    |
-| --------------------------------------- | ----- | ---------- | -------- | ----------------------------------- | ---- | ------------------------- |
-| COI2011-00-000-00000-000000-0000-000000 | Total | No_HH_Head | 41694863 | Count_Household_ScheduleCaste       | 2011 | dcid:country/IND          |
-| COI2011-00-000-00000-000000-0000-000000 | Rural | No_HH_Head | 31803775 | Count_Household_ScheduleCaste_Rural | 2011 | dcid:country/IND          |
-| COI2011-00-000-00000-000000-0000-000000 | Urban | No_HH_Head | 9891088  | Count_Household_ScheduleCaste_Urban | 2011 | dcid:country/IND          |
-| COI2011-01-000-00000-000000-0000-000000 | Total | No_HH_Head | 183020   | Count_Household_ScheduleCaste       | 2011 | dcid:wikidataId/Q66278313 |
-| COI2011-01-000-00000-000000-0000-000000 | Rural | No_HH_Head | 149536   | Count_Household_ScheduleCaste_Rural | 2011 | dcid:wikidataId/Q66278313 |
-| COI2011-01-000-00000-000000-0000-000000 | Urban | No_HH_Head | 33484    | Count_Household_ScheduleCaste_Urban | 2011 | dcid:wikidataId/Q66278313 |
-|                                         |
+|census_location_id                     |TRU  |columnName|Value   |StatisticalVariable                |Year|
+|---------------------------------------|-----|----------|--------|-----------------------------------|----|
+|COI2011-00-000-00000-000000-0000-000000|Total|No_HH_Head|21511528|Count_Household_ScheduleTribe      |2011|
+|COI2011-00-000-00000-000000-0000-000000|Rural|No_HH_Head|19302332|Count_Household_ScheduleTribe_Rural|2011|
+|COI2011-00-000-00000-000000-0000-000000|Urban|No_HH_Head|2209196 |Count_Household_ScheduleTribe_Urban|2011|
+|COI2011-01-000-00000-000000-0000-000000|Total|No_HH_Head|260401  |Count_Household_ScheduleTribe      |2011|
+|COI2011-01-000-00000-000000-0000-000000|Rural|No_HH_Head|245038  |Count_Household_ScheduleTribe_Rural|2011|
+|COI2011-01-000-00000-000000-0000-000000|Urban|No_HH_Head|15363   |Count_Household_ScheduleTribe_Urban|2011|
+|COI2011-01-001-00000-000000-0000-000000|Total|No_HH_Head|10498   |Count_Household_ScheduleTribe      |2011|
 
 
 #### MCFs and Template MCFs
