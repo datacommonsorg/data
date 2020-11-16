@@ -217,7 +217,7 @@ class CensusPrimaryAbstractDataLoaderBase:
                         #need to recreate it
                         if name in self.existing_stat_var:
                             pass
-                        #we need to create statvars only for those columns that 
+                        #we need to create statvars only for those columns that
                         #exist in the current data file
                         elif data_row["columnName"] not in self.census_columns:
                             pass
