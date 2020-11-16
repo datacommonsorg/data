@@ -28,6 +28,7 @@ class CensusPrimaryCensusAbstractScheduleCasteDataLoader(
         self.raw_df["Town/Village"] = "000000"
         self.raw_df["Ward"] = "0000"
         self.raw_df["EB"] = "000000"
+        self.census_columns = self.raw_df.columns[5:]
 
     def _get_base_name(self, row):
         name = "Count_" + row["populationType"]

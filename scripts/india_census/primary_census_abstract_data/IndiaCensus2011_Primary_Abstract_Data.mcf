@@ -2953,23 +2953,3 @@ placeOfResidence: dcs:Rural
 gender: schema:Female 
 
 
-
-Node: dcid:Count_Household_Urban
-description: "Number of Household Heads - Urban"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-placeOfResidence: dcs:Urban 
-
-
-
-Node: dcid:Count_Household_Rural
-description: "Number of Household Heads - Rural"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-placeOfResidence: dcs:Rural 
-
-
