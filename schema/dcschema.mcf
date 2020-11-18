@@ -1347,23 +1347,25 @@ name: "DeathPer1000Births"
 dcid: "DeathPer1000Births"
 description: "A unit death per one thousand births."
 
-Node: USDollar
+Node: dcid:USDollar
 typeOf: dcs:CurrencyUnitOfMeasure
 name: "USDollar"
-dcid: "USDollar"
 description: "The official currency of the United States of America."
 
-Node: Euro
+Node: dcid:Euro
 typeOf: dcs:CurrencyUnitOfMeasure
 name: "Euro"
-dcid: "Euro"
 description: "The official currency of the European Union."
 
-Node: CanadianDollar
+Node: dcid:CanadianDollar
 typeOf: dcs:CurrencyUnitOfMeasure
 name: "CanadianDollar"
-dcid: "CanadianDollar"
 description: "The official currency of Canada."
+
+Node: dcid:IndianRupee
+typeOf: dcs:CurrencyUnitOfMeasure
+name: "IndianRupee"
+description: "The official currency of India."
 
 Node: dcid:NationalCurrency
 typeOf: dcs:CurrencyUnitOfMeasure
