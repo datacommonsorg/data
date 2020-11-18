@@ -370,7 +370,7 @@ Node: dcid:pubMedID
 typeOf: schema:Property
 name: "pubMedID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:ChemicalCompound
+domainIncludes: dcs:ChemicalCompound,dcs:ChemicalCompoundGeneAssociation
 description: "Identifier for reference paper on PubMed."
 descriptionUrl: "https://pubmed.ncbi.nlm.nih.gov/"
 

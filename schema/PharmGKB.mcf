@@ -4,24 +4,6 @@ typeOf: schema:Class
 subClassOf: schema:Intangible
 description: "The association of a chemical compound with a gene."
 
-Node: dcid:compoundID
-name: "compoundID"
-typeOf: schema:Property
-rangeIncludes: dcs:Drug
-domainIncludes: dcs:ChemicalCompoundGeneAssociation
-
-Node: dcid:geneID
-name: "geneID"
-typeOf: schema:Property
-rangeIncludes: dcs:Gene
-domainIncludes: dcs:ChemicalCompoundGeneAssociation
-
-Node: dcid:pubMedID
-name: "pubMedID"
-typeOf: schema:Property
-rangeIncludes: schema:Text
-domainIncludes: dcs:ChemicalCompoundGeneAssociation
-
 Node: dcid:isPharmacokineticRelationship
 name: "isPharmacokineticRelationship"
 typeOf: schema:Property
@@ -51,14 +33,6 @@ typeOf: schema:Property
 rangeIncludes: dcs:RelationshipEvidenceTypeEnum
 domainIncludes: dcs:ChemicalCompoundGeneAssociation
 description: "Type of evidence supporting a given relationship between entities."
-
-Node: dcid:pharmGKBID
-name: "pharmGKBID"
-typeOf: schema:Property
-rangeIncludes: dcs:Text
-domainIncludes: dcs:Drug, dcs:ChemicalCompound, dcs:Gene,
-description: "Entity ID given by PharmGKB."
-url: "https://www.pharmgkb.org/"
 
 Node: dcid:alternateGeneSymbol
 name: "alternateGeneSymbol"

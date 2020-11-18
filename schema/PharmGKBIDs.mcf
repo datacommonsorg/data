@@ -58,17 +58,6 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Gene
 
-Node: dcid:genBankID
-name: "genBankID"
-typeOf: schema:Property
-rangeIncludes: schema:Text
-domainIncludes: dcs:Gene
-
-Node: dcid:uniProtID
-name: "uniProtID"
-typeOf: schema:Property
-domainIncludes: dcs:ChemicalCompound, dcs:Gene
-
 Node: dcid:chebiID
 name: "chebiID"
 typeOf: schema:Property
@@ -83,12 +72,6 @@ domainIncludes: dcs:Drug,dcs:ChemicalCompound
 
 Node: dcid:chemSpiderID
 name: "chemSpiderID"
-typeOf: schema:Property
-rangeIncludes: schema:Text
-domainIncludes: dcs:Drug,dcs:ChemicalCompound
-
-Node: dcid:drugBankID
-name: "drugBankID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Drug,dcs:ChemicalCompound
@@ -111,7 +94,6 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Drug,dcs:ChemicalCompound
 
-
 Node: dcid:pubChemSubstanceID
 name: "pubChemSubstanceID"
 typeOf: schema:Property
@@ -120,12 +102,6 @@ domainIncludes: dcs:Drug,dcs:ChemicalCompound
 
 Node: dcid:iupharLigandID
 name: "iupharLigandID"
-typeOf: schema:Property
-rangeIncludes: schema:Text
-domainIncludes: dcs:Drug,dcs:ChemicalCompound
-
-Node: dcid:proteinDataBankID
-name: "proteinDataBankID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Drug,dcs:ChemicalCompound
@@ -154,12 +130,6 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Drug,dcs:ChemicalCompound
 
-Node: dcid:bindingDBID
-name: "bindingDBID"
-typeOf: schema:Property
-rangeIncludes: schema:Text
-domainIncludes: dcs:Drug,dcs:ChemicalCompound
-
 Node: dcid:nationalDrugCodeDirectoryID
 name: "nationalDrugCodeDirectoryID"
 typeOf: schema:Property
@@ -170,7 +140,7 @@ Node: dcid:genBankID
 name: "genBankID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:Drug,dcs:ChemicalCompound
+domainIncludes: dcs:Drug,dcs:ChemicalCompound,dcs:Gene
 
 Node: dcid:humanMetabolomeDatabaseID
 name: "humanMetabolomeDatabaseID"

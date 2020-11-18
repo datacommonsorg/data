@@ -58,7 +58,7 @@ Node: dcid:drugBankID
 name: "drugBankID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:ChemicalCompound
+domainIncludes: dcs:ChemicalCompound,dcs:Drug
 description: "DrugBank identifier of compound."
 
 Node: dcid:maximumFDAClinicalTrialPhase
@@ -92,8 +92,8 @@ description: "Simplified Molecular-Input Line-Entry System (SMILES) for compound
 Node: dcid:compoundID
 name: "compoundID"
 typeOf: schema:Property
-rangeIncludes: dcs:ChemicalCompound
-domainIncludes: dcs:ChemicalCompoundProteinInteraction,dcs:ChemicalCompoundDiseaseTreatment,dcs:ChemicalCompoundDiseaseContraindication,dcs:SideEffect,dcs:PharmacologicClass
+rangeIncludes: dcs:ChemicalCompound,dcs:Drug
+domainIncludes: dcs:ChemicalCompoundProteinInteraction,dcs:ChemicalCompoundDiseaseTreatment,dcs:ChemicalCompoundDiseaseContraindication,dcs:SideEffect,dcs:PharmacologicClass,dcs:ChemicalCompoundGeneAssociation
 description: "Compound identifier."
 
 Node: dcid:proteinID
@@ -135,7 +135,7 @@ Node: dcid:uniProtID
 name: "uniProtID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:Protein,dcs:ChemicalCompoundProteinInteraction
+domainIncludes: dcs:Protein,dcs:ChemicalCompoundProteinInteraction,dcs:ChemicalCompound,dcs:Gene
 description: "UniProt identifier of protein."
 
 Node: dcid:alternateNCBIProteinAccessionNumber
@@ -149,7 +149,7 @@ Node: dcid:bindingDBID
 name: "bindingDBID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:Protein
+domainIncludes: dcs:Protein,dcs:Drug,dcs:ChemicalCompound
 description: "BindingDB identifier of a protein."
 
 Node: dcid:bgeeID
@@ -163,7 +163,7 @@ Node: dcid:proteinDataBankID
 name: "proteinDataBankID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:Protein
+domainIncludes: dcs:Protein,dcs:Drug,dcs:ChemicalCompound
 description: "Protein Data Bank identifier of a protein."
 
 Node: dcid:geneSynonym
@@ -214,4 +214,3 @@ typeOf: schema:Property
 rangeIncludes: dcs:PharmacologicClassTypeEnum
 domainIncludes: dcs:PharmacologicClass
 description: "The class type associated with the active moiety for a pharmacologic class."
-
