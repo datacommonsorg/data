@@ -890,3 +890,10 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:GeneticVariantGeneAssociation
 description: "An ID denoting a unique gene and genetic variant association within the GTEx database."
+
+Node: dcid:alternateGeneSymbol
+name: "alternateGeneSymbol"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Gene
+description: "Alternative or secondary symbol for a gene."

@@ -26,6 +26,12 @@ subClassOf: dcs:ChemicalCompound
 description: "Compound that is inadvisable to be used to treat a given disease."
 url: "https://www.ebi.ac.uk/chembl/"
 
+Node: dcid:ChemicalCompoundGeneAssociation
+name: "ChemicalCompoundGeneAssociation"
+typeOf: schema:Class
+subClassOf: schema:Intangible
+description: "The association of a chemical compound with a gene."
+
 Node: dcid:Protein
 name: "Protein"
 typeOf: schema:Class
