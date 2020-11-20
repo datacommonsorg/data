@@ -3,5 +3,10 @@ Node: E:IndiaCensus2011_Primary_Abstract_ScheduleCaste->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus2011_Primary_Abstract_ScheduleCaste->StatisticalVariable
 observationDate: C:IndiaCensus2011_Primary_Abstract_ScheduleCaste->Year
-observationAbout: C:IndiaCensus2011_Primary_Abstract_ScheduleCaste->census_location_id
+observationAbout: C:IndiaCensus2011_Primary_Abstract_ScheduleCaste->E1
 value: C:IndiaCensus2011_Primary_Abstract_ScheduleCaste->value
+
+Node: E:IndiaCensus2011_Primary_Abstract_ScheduleCaste->E1
+typeOf: schema:Place
+indianCensusAreaCode2011: C:IndiaCensus2011_Primary_Abstract_ScheduleCaste->census_location_id
+

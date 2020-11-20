@@ -40,13 +40,16 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_ScheduleCaste.csv](IndiaCensus201
 
 #### Cleaned Data Snippet
 
-|census_location_id                     |TRU  |columnName|Value   |StatisticalVariable                |Year|
-|---------------------------------------|-----|----------|--------|-----------------------------------|----|
-|COI2011-00-000-00000-000000-0000-000000|Total|No_HH_Head|41694863|Count_Household_ScheduleCaste      |2011|
-|COI2011-00-000-00000-000000-0000-000000|Rural|No_HH_Head|31803775|Count_Household_ScheduleCaste_Rural|2011|
-|COI2011-00-000-00000-000000-0000-000000|Urban|No_HH_Head|9891088 |Count_Household_ScheduleCaste_Urban|2011|
-|COI2011-01-000-00000-000000-0000-000000|Total|No_HH_Head|183020  |Count_Household_ScheduleCaste      |2011|
-|COI2011-01-000-00000-000000-0000-000000|Rural|No_HH_Head|149536  |Count_Household_ScheduleCaste_Rural|2011|
+| census_location_id | TRU   | columnName | Value    | StatisticalVariable                 | Year |
+| ------------------ | ----- | ---------- | -------- | ----------------------------------- | ---- |
+| 0                  | Total | No_HH_Head | 41694863 | Count_Household_ScheduleCaste       | 2011 |
+| 0                  | Rural | No_HH_Head | 31803775 | Count_Household_ScheduleCaste_Rural | 2011 |
+| 0                  | Urban | No_HH_Head | 9891088  | Count_Household_ScheduleCaste_Urban | 2011 |
+| 01                 | Total | No_HH_Head | 183020   | Count_Household_ScheduleCaste       | 2011 |
+| 01                 | Rural | No_HH_Head | 149536   | Count_Household_ScheduleCaste_Rural | 2011 |
+| 01                 | Urban | No_HH_Head | 33484    | Count_Household_ScheduleCaste_Urban | 2011 |
+| 001                | Total | No_HH_Head | 101      | Count_Household_ScheduleCaste       | 2011 |
+| 001                | Rural | No_HH_Head | 63       | Count_Household_ScheduleCaste_Rural | 2011 |
 
 
 #### MCFs and Template MCFs

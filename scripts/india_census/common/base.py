@@ -35,12 +35,14 @@ Node: E:IndiaCensus{year}_{dataset_name}->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus{year}_{dataset_name}->StatisticalVariable
 observationDate: C:IndiaCensus{year}_{dataset_name}->Year
-observationAbout: C:IndiaCensus{year}_{dataset_name}->census_location_id
+observationAbout: C:IndiaCensus{year}_{dataset_name}->E1
 value: C:IndiaCensus{year}_{dataset_name}->value
-"""
 
-#This will uniquely identify a census location up to EB level for a given census year.
-census_location_id_pattern = "COI{year}-{state}-{district}-{subdistt}-{town_or_village}-{ward}-{eb}"
+Node: E:IndiaCensus{year}_{dataset_name}->E1
+typeOf: schema:Place
+indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_id
+
+"""
 
 
 class CensusPrimaryAbstractDataLoaderBase:
@@ -72,19 +74,28 @@ class CensusPrimaryAbstractDataLoaderBase:
         self.raw_df = pd.read_excel(self.data_file_path, dtype=dtype)
         self.census_columns = self.raw_df.columns[9:]
 
+    def _format_location(self, row):
+        #In census of India. Location code for India is all zeros.
+        if (row["Level"]).upper() == "INDIA":
+            return "0"
+        elif (row["Level"]).upper() == "STATE":
+            return row["State"]
+        elif (row["Level"]).upper() == "DISTRICT":
+            return row["District"]
+        elif (row["Level"]).upper() == "SUBDISTT":
+            return row["Subdistt"]
+        elif (row["Level"]).upper() == "TOWN":
+            return row["Town/Village"]
+        elif (row["Level"]).upper() == "VILLAGE":
+            return row["Town/Village"]
+        else:
+            raise Exception("Location Level not supported")
+
     def _format_data(self):
 
         #Generate Census locationid
         self.raw_df["census_location_id"] = self.raw_df.apply(
-            lambda row: census_location_id_pattern.format(
-                year=self.census_year,
-                state=row["State"],
-                district=row["District"],
-                subdistt=row["Subdistt"],
-                town_or_village=row["Town/Village"],
-                ward=row["Ward"],
-                eb=row["EB"]),
-            axis=1)
+            self._format_location, axis=1)
 
         #Remove the unwanted columns
         #They are census codes which we dont use
@@ -106,6 +117,7 @@ class CensusPrimaryAbstractDataLoaderBase:
                                        value_vars=value_columns,
                                        var_name='columnName',
                                        value_name='Value')
+
         #Add corresponding StatisticalVariable, based on columnName and TRU
         self.raw_df['StatisticalVariable'] = self.raw_df.apply(
             lambda row: self.stat_var_index["{0}_{1}".format(

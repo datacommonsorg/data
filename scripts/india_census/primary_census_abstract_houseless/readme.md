@@ -43,15 +43,14 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_Houseless.csv](IndiaCensus2011_Pr
 
 #### Cleaned Data Snippet
 
-|census_location_id                     |TRU  |columnName|Value |StatisticalVariable            |Year|
-|---------------------------------------|-----|----------|------|-------------------------------|----|
-|COI2011-00-000-00000-000000-0000-000000|Total|No_HH     |449787|Count_Household_Houseless      |2011|
-|COI2011-00-000-00000-000000-0000-000000|Rural|No_HH     |192891|Count_Household_Houseless_Rural|2011|
-|COI2011-00-000-00000-000000-0000-000000|Urban|No_HH     |256896|Count_Household_Houseless_Urban|2011|
-|COI2011-01-000-00000-000000-0000-000000|Total|No_HH     |3064  |Count_Household_Houseless      |2011|
-|COI2011-01-000-00000-000000-0000-000000|Rural|No_HH     |1441  |Count_Household_Houseless_Rural|2011|
-|COI2011-01-000-00000-000000-0000-000000|Urban|No_HH     |1623  |Count_Household_Houseless_Urban|2011|
-
+| census_location_id | TRU   | columnName | Value  | StatisticalVariable             | Year |
+| ------------------ | ----- | ---------- | ------ | ------------------------------- | ---- |
+| 0                  | Total | No_HH      | 449787 | Count_Household_Houseless       | 2011 |
+| 0                  | Rural | No_HH      | 192891 | Count_Household_Houseless_Rural | 2011 |
+| 0                  | Urban | No_HH      | 256896 | Count_Household_Houseless_Urban | 2011 |
+| 01                 | Total | No_HH      | 3064   | Count_Household_Houseless       | 2011 |
+| 01                 | Rural | No_HH      | 1441   | Count_Household_Houseless_Rural | 2011 |
+| 01                 | Urban | No_HH      | 1623   | Count_Household_Houseless_Urban | 2011 |
 
 #### MCFs and Template MCFs
 

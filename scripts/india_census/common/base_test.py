@@ -45,8 +45,8 @@ class TestCensusPrimaryAbstractDataLoaderBase(unittest.TestCase):
 
         mcf_expected_file_path = os.path.join(
             os.path.dirname(__file__), './test_data/test_Data_Expected.mcf')
-        tmcf_expected_file_path = os.path.join(os.path.dirname(__file__),
-                                               './test_data/test_Data.tmcf')
+        tmcf_expected_file_path = os.path.join(
+            os.path.dirname(__file__), './test_data/test_Data_Expected.tmcf')
         csv_expected_file_path = os.path.join(
             os.path.dirname(__file__), './test_data/test_Data_Expected.csv')
 

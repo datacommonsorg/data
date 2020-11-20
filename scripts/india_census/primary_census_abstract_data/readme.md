@@ -46,16 +46,14 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_Data.csv](IndiaCensus2011_Primary
 
 #### Cleaned Data Snippet
 
-|census_location_id|TRU|columnName|Value          |StatisticalVariable|Year  |
-|------------------|---|----------|---------------|-------------------|------|
-|COI2011-00-000-00000-000000-0000-000000|Total|No_HH     |249501663      |Count_Household    |2011  |
-|COI2011-00-000-00000-000000-0000-000000|Rural|No_HH     |168612897      |Count_Household_Rural|2011  |
-|COI2011-00-000-00000-000000-0000-000000|Urban|No_HH     |80888766       |Count_Household_Urban|2011  |
-|COI2011-01-000-00000-000000-0000-000000|Total|No_HH     |2119718        |Count_Household    |2011  |
-|COI2011-01-000-00000-000000-0000-000000|Rural|No_HH     |1553433        |Count_Household_Rural|2011  |
-|COI2011-01-000-00000-000000-0000-000000|Urban|No_HH     |566285         |Count_Household_Urban|2011  |
-|COI2011-01-001-00000-000000-0000-000000|Total|No_HH     |113929         |Count_Household    |2011  |
-
+| census_location_id | TRU   | columnName | Value     | StatisticalVariable   | Year |
+| ------------------ | ----- | ---------- | --------- | --------------------- | ---- |
+| 0                  | Total | No_HH      | 249501663 | Count_Household       | 2011 |
+| 0                  | Rural | No_HH      | 168612897 | Count_Household_Rural | 2011 |
+| 0                  | Urban | No_HH      | 80888766  | Count_Household_Urban | 2011 |
+| 01                 | Total | No_HH      | 2119718   | Count_Household       | 2011 |
+| 01                 | Rural | No_HH      | 1553433   | Count_Household_Rural | 2011 |
+| 01                 | Urban | No_HH      | 566285    | Count_Household_Urban | 2011 |
 
 #### MCFs and Template MCFs
 - [IndiaCensus2011_Primary_Abstract_Data.mcf](IndiaCensus2011_Primary_Abstract_Data.mcf)
