@@ -38,7 +38,7 @@ def pharm_to_chembl(pharm_ids):
     """Return list of chembl ids that positionally map to pharm ids."""
     # pharmgkb accession id to chembl id via unichem
     chembls = []
-    ndone = 0 # counter for printing progress to console
+    ndone = 0  # counter for printing progress to console
     for pharm_id in pharm_ids:
         if pd.isnull(pharm_id):
             chembls.append('')
@@ -51,7 +51,7 @@ def pharm_to_chembl(pharm_ids):
         else:
             chembls.append('')
 
-        # increment progress tracker and print after 100th id conversion 
+        # increment progress tracker and print after 100th id conversion
         ndone += 1
         if ndone % 100 == 0:
             print('... completed ' + ndone + ' / ' + len(pharm_ids))
@@ -74,7 +74,7 @@ def pubchem_to_chembl(pubchem_ids):
     """Return list of chembl ids that positionally map to pubchem ids."""
     # pubchem id to chembl id via unichem
     chembls = []
-    ndone = 0 # counter for printing progress to console
+    ndone = 0  # counter for printing progress to console
     for pubchem_id in pubchem_ids:
         if pd.isnull(pubchem_id):
             chembls.append('')
@@ -87,11 +87,11 @@ def pubchem_to_chembl(pubchem_ids):
         else:
             chembls.append('')
 
-        # increment progress tracker and print after 100th id conversion 
+        # increment progress tracker and print after 100th id conversion
         ndone += 1
         if ndone % 100 == 0:
             print('... completed ' + ndone + ' / ' + len(pubchem_ids))
-    
+
     return chembls
 
 
@@ -110,7 +110,7 @@ def inchi_to_inchi_key(inchis):
     """Return list of inchi keys that positionally map to inchis."""
 
     inchi_keys = []
-    ndone = 0 # counter for printing progress to console
+    ndone = 0  # counter for printing progress to console
     for inchi in inchis:
         if pd.isnull(inchi):
             inchi_keys.append('')
@@ -123,18 +123,17 @@ def inchi_to_inchi_key(inchis):
             inchi_keys.append(tree.text)
         else:
             inchi_keys.append('')
-        
-        # increment progress tracker and print after 100th id conversion 
+
+        # increment progress tracker and print after 100th id conversion
         ndone += 1
         if ndone % 100 == 0:
             print('... completed ' + ndone + ' / ' + len(inchis))
-    
+
     return inchi_keys
 
 
 def write_inchi_to_inchi_keys(inchis, inchi_keys):
     """Writes inchi_to_inchi_key_combined.csv."""
-
 
     inchi_dict = {'InChI': inchis, 'InChI Key': inchi_keys}
     inchi_to_inchi_key_df = pd.DataFrame(inchi_dict)
@@ -146,8 +145,8 @@ def inchi_key_to_chembl(inchi_keys):
 
     molecule = new_client.molecule
     chembl_mols = []
-    ndone = 0 # counter for printing progress to console
-    
+    ndone = 0  # counter for printing progress to console
+
     for inchi_key in inchi_keys:
         if pd.isnull(inchi_key):
             chembl_mols.append('')
@@ -161,12 +160,12 @@ def inchi_key_to_chembl(inchi_keys):
         except:
             chembl_mols.append('')
             print('in error: ' + inchi_key)
-        
-        # increment progress tracker and print after 100th id conversion 
+
+        # increment progress tracker and print after 100th id conversion
         ndone += 1
         if ndone % 100 == 0:
             print('... completed ' + ndone + ' / ' + len(inchi_keys))
-    
+
     return chembl_mols
 
 
