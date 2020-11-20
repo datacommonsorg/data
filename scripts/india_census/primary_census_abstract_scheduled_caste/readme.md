@@ -42,20 +42,20 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_ScheduleCaste.csv](IndiaCensus201
 
 | census_location_id | TRU   | columnName | Value    | StatisticalVariable                 | Year |
 | ------------------ | ----- | ---------- | -------- | ----------------------------------- | ---- |
-| 0                  | Total | No_HH_Head | 41694863 | Count_Household_ScheduleCaste       | 2011 |
-| 0                  | Rural | No_HH_Head | 31803775 | Count_Household_ScheduleCaste_Rural | 2011 |
-| 0                  | Urban | No_HH_Head | 9891088  | Count_Household_ScheduleCaste_Urban | 2011 |
-| 01                 | Total | No_HH_Head | 183020   | Count_Household_ScheduleCaste       | 2011 |
-| 01                 | Rural | No_HH_Head | 149536   | Count_Household_ScheduleCaste_Rural | 2011 |
-| 01                 | Urban | No_HH_Head | 33484    | Count_Household_ScheduleCaste_Urban | 2011 |
-| 001                | Total | No_HH_Head | 101      | Count_Household_ScheduleCaste       | 2011 |
-| 001                | Rural | No_HH_Head | 63       | Count_Household_ScheduleCaste_Rural | 2011 |
+| 0                  | Total | No_HH_Head | 41694863 | Count_Household_ScheduledCaste       | 2011 |
+| 0                  | Rural | No_HH_Head | 31803775 | Count_Household_ScheduledCaste_Rural | 2011 |
+| 0                  | Urban | No_HH_Head | 9891088  | Count_Household_ScheduledCaste_Urban | 2011 |
+| 01                 | Total | No_HH_Head | 183020   | Count_Household_ScheduledCaste       | 2011 |
+| 01                 | Rural | No_HH_Head | 149536   | Count_Household_ScheduledCaste_Rural | 2011 |
+| 01                 | Urban | No_HH_Head | 33484    | Count_Household_ScheduledCaste_Urban | 2011 |
+| 001                | Total | No_HH_Head | 101      | Count_Household_ScheduledCaste       | 2011 |
+| 001                | Rural | No_HH_Head | 63       | Count_Household_ScheduledCaste_Rural | 2011 |
 
 
 #### MCFs and Template MCFs
 
-- [IndiaCensus2011_Primary_Abstract_ScheduleCaste.mcf](IndiaCensus2011_Primary_Abstract_ScheduleCaste.mcf)
-- [IndiaCensus2011_Primary_Abstract_ScheduleCaste.tmcf](IndiaCensus2011_Primary_Abstract_ScheduleCaste.tmcf)
+- [IndiaCensus2011_Primary_Abstract_ScheduledCaste.mcf](IndiaCensus2011_Primary_Abstract_ScheduledCaste.mcf)
+- [IndiaCensus2011_Primary_Abstract_ScheduledCaste.tmcf](IndiaCensus2011_Primary_Abstract_ScheduledCaste.tmcf)
 
 ### Import Procedure
 

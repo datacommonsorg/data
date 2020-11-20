@@ -32,11 +32,11 @@ class CensusPrimaryCensusAbstractScheduleCasteDataLoader(
 
     def _get_base_name(self, row):
         name = "Count_" + row["populationType"]
-        name = name + "_" + "ScheduleCaste"
+        name = name + "_" + "ScheduledCaste"
         return name
 
     def _get_base_constraints(self, row):
-        constraints = "socialCategory: ScheduleCaste \n"
+        constraints = "socialCategory: ScheduledCaste \n"
         return constraints
 
 
@@ -53,14 +53,14 @@ if __name__ == '__main__':
 
     mcf_file_path = os.path.join(
         os.path.dirname(__file__),
-        './IndiaCensus2011_Primary_Abstract_ScheduleCaste.mcf')
+        './IndiaCensus2011_Primary_Abstract_ScheduledCaste.mcf')
     tmcf_file_path = os.path.join(
         os.path.dirname(__file__),
-        './IndiaCensus2011_Primary_Abstract_ScheduleCaste.tmcf')
+        './IndiaCensus2011_Primary_Abstract_ScheduledCaste.tmcf')
 
     csv_file_path = os.path.join(
         os.path.dirname(__file__),
-        './IndiaCensus2011_Primary_Abstract_ScheduleCaste.csv')
+        './IndiaCensus2011_Primary_Abstract_ScheduledCaste.csv')
     loader = CensusPrimaryCensusAbstractScheduleCasteDataLoader(
         data_file_path=data_file_path,
         metadata_file_path=metadata_file_path,
@@ -69,5 +69,5 @@ if __name__ == '__main__':
         csv_file_path=csv_file_path,
         existing_stat_var=existing_stat_var,
         census_year=2011,
-        dataset_name="Primary_Abstract_ScheduleCaste")
+        dataset_name="Primary_Abstract_ScheduledCaste")
     loader.process()

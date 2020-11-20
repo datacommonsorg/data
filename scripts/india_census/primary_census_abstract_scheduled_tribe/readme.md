@@ -42,22 +42,22 @@ Cleaned data [IndiaCensus2011_Primary_Abstract_ScheduleTribe.csv](IndiaCensus201
 
 | census_location_id | TRU   | columnName | Value    | StatisticalVariable                 | Year |
 | ------------------ | ----- | ---------- | -------- | ----------------------------------- | ---- |
-| 0                  | Total | No_HH_Head | 21511528 | Count_Household_ScheduleTribe       | 2011 |
-| 0                  | Rural | No_HH_Head | 19302332 | Count_Household_ScheduleTribe_Rural | 2011 |
-| 0                  | Urban | No_HH_Head | 2209196  | Count_Household_ScheduleTribe_Urban | 2011 |
-| 01                 | Total | No_HH_Head | 260401   | Count_Household_ScheduleTribe       | 2011 |
-| 01                 | Rural | No_HH_Head | 245038   | Count_Household_ScheduleTribe_Rural | 2011 |
-| 01                 | Urban | No_HH_Head | 15363    | Count_Household_ScheduleTribe_Urban | 2011 |
-| 001                | Total | No_HH_Head | 10498    | Count_Household_ScheduleTribe       | 2011 |
-| 001                | Rural | No_HH_Head | 10267    | Count_Household_ScheduleTribe_Rural | 2011 |
-| 001                | Urban | No_HH_Head | 231      | Count_Household_ScheduleTribe_Urban | 2011 |
-| 002                | Total | No_HH_Head | 3240     | Count_Household_ScheduleTribe       | 2011 |
+| 0                  | Total | No_HH_Head | 21511528 | Count_Household_ScheduledTribe       | 2011 |
+| 0                  | Rural | No_HH_Head | 19302332 | Count_Household_ScheduledTribe_Rural | 2011 |
+| 0                  | Urban | No_HH_Head | 2209196  | Count_Household_ScheduledTribe_Urban | 2011 |
+| 01                 | Total | No_HH_Head | 260401   | Count_Household_ScheduledTribe       | 2011 |
+| 01                 | Rural | No_HH_Head | 245038   | Count_Household_ScheduledTribe_Rural | 2011 |
+| 01                 | Urban | No_HH_Head | 15363    | Count_Household_ScheduledTribe_Urban | 2011 |
+| 001                | Total | No_HH_Head | 10498    | Count_Household_ScheduledTribe       | 2011 |
+| 001                | Rural | No_HH_Head | 10267    | Count_Household_ScheduledTribe_Rural | 2011 |
+| 001                | Urban | No_HH_Head | 231      | Count_Household_ScheduledTribe_Urban | 2011 |
+| 002                | Total | No_HH_Head | 3240     | Count_Household_ScheduledTribe       | 2011 |
 |                    |
 
 #### MCFs and Template MCFs
 
-- [IndiaCensus2011_Primary_Abstract_ScheduleTribe.mcf](IndiaCensus2011_Primary_Abstract_ScheduleTribe.mcf)
-- [IndiaCensus2011_Primary_Abstract_ScheduleTribe.tmcf](IndiaCensus2011_Primary_Abstract_ScheduleTribe.tmcf)
+- [IndiaCensus2011_Primary_Abstract_ScheduledTribe.mcf](IndiaCensus2011_Primary_Abstract_ScheduledTribe.mcf)
+- [IndiaCensus2011_Primary_Abstract_ScheduleTribe.tmcf](IndiaCensus2011_Primary_Abstract_ScheduledTribe.tmcf)
 
 ### Import Procedure
 
