@@ -8,4 +8,4 @@ value: C:COVID19_tests_india->CumulativeCount_MedicalTest_ConditionCOVID_19
 
 Node: E:COVID19_tests_india->E1
 typeOf: schema:Country
-countryAlpha2Code: C:COVID19_tests_india->isoCode
+isoCode: C:COVID19_tests_india->isoCode
