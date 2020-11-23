@@ -11,7 +11,7 @@ Number and Percentage of Population Below Poverty Line published by Reserve Bank
 
 
 ### Overview
-Povery data is per state and by year. There are three sets of data, for the years 2004-05, 2009-10, 2011-12. The dataset contains the following columns.
+Poverty data is per state and by year. There are three sets of data, for the years 2004-05, 2009-10, 2011-12. The dataset contains the following columns.
 
 1. Year  
 2. State/Union Territory

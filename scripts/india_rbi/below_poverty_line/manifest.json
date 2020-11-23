@@ -1,7 +1,7 @@
 {
     "import_specifications": [{
         "import_name":
-        "BelowPovertyLineIndiaData",
+        "IndiaPovertyData",
         "curator_emails": ["i@thejeshgn.com"],
         "provenance_url":
         "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+Economy",
