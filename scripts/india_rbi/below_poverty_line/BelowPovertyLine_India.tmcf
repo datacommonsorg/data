@@ -3,7 +3,6 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_rural
 observationDate: C:BelowPowertyLine_India->year
-observationPeriod: "P1Y"
 observationAbout: C:BelowPowertyLine_India->territory
 
 Node: E:BelowPowertyLine_India->E2
@@ -11,7 +10,6 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Urban_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_urban
 observationDate: C:BelowPowertyLine_India->year
-observationPeriod: "P1Y"
 observationAbout: C:BelowPowertyLine_India->territory
 
 
@@ -20,7 +18,6 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_combined
 observationDate: C:BelowPowertyLine_India->year
-observationPeriod: "P1Y"
 observationAbout: C:BelowPowertyLine_India->territory
 
 
@@ -29,7 +26,6 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person_Rural
 value: C:BelowPowertyLine_India->percentage_person_rural
 observationDate: C:BelowPowertyLine_India->year
-observationPeriod: "P1Y"
 observationAbout: C:BelowPowertyLine_India->territory
 
 
@@ -38,7 +34,6 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person_Urban
 value: C:BelowPowertyLine_India->percentage_person_urban
 observationDate: C:BelowPowertyLine_India->year
-observationPeriod: "P1Y"
 observationAbout: C:BelowPowertyLine_India->territory
 
 
@@ -47,7 +42,6 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
 value: C:BelowPowertyLine_India->percentage_person_combined
 observationDate: C:BelowPowertyLine_India->year
-observationPeriod: "P1Y"
 observationAbout: C:BelowPowertyLine_India->territory
 
 
@@ -57,7 +51,6 @@ variableMeasured: dcs:PovertyLine_Person_Rural
 value: C:BelowPowertyLine_India->poverty_line_rural
 unit: dcs:IndianRupee
 observationDate: C:BelowPowertyLine_India->year
-observationPeriod: "P1Y"
 observationAbout: C:BelowPowertyLine_India->territory
 
 
@@ -67,5 +60,4 @@ variableMeasured: dcs:PovertyLine_Person_Urban
 value: C:BelowPowertyLine_India->poverty_line_urban
 unit: dcs:IndianRupee
 observationDate: C:BelowPowertyLine_India->year
-observationPeriod: "P1Y"
 observationAbout: C:BelowPowertyLine_India->territory
