@@ -37,7 +37,7 @@ As part of the cleaning process, we remove the unwanted columns and then convert
 
 Cleaned data [IndiaCensus2011_Primary_Abstract_Data.csv](IndiaCensus2011_Primary_Abstract_Data.csv) will have the following columns.
 
-- census_location_id - Census location id
+- census_location_id - indianCensusAreaCode2011
 - TRU - TRU
 - columnName - census variable name
 - StatisticalVariable - statistical variable

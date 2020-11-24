@@ -107,7 +107,7 @@ class CensusPrimaryAbstractDataLoaderBase:
         #3-N are the actual values
         value_columns = list(self.raw_df.columns[1:-1])
 
-        #converting rows in to columns. So the filnal structure will be
+        #converting rows in to columns. So the final structure will be
         #Name,TRU,columnName,value
         self.raw_df = self.raw_df.melt(id_vars=["census_location_id", "TRU"],
                                        value_vars=value_columns,
@@ -150,22 +150,25 @@ class CensusPrimaryAbstractDataLoaderBase:
         else:
             pass
 
-        if row["workerStatus"] == "Worker":            
+        if row["workerStatus"] == "Worker":
             constraints_array.append("workerStatus: dcs:Worker")
             if row["workerClassification"] == "MainWorker":
                 name_array.append("MainWorkers")
                 constraints_array.append("workerClassification: dcs:MainWorker")
                 if row["workCategory"] != "":
                     name_array.append(row["workCategory"])
-                    constraints_array.append("workCategory: dcs:" + row["workCategory"])
+                    constraints_array.append("workCategory: dcs:" +
+                                             row["workCategory"])
 
             elif row["workerClassification"] == "MarginalWorker":
                 name_array.append("MarginalWorker")
-                constraints_array.append("workerClassification: dcs:MarginalWorker")
-                
+                constraints_array.append(
+                    "workerClassification: dcs:MarginalWorker")
+
                 if row["workCategory"] != "":
                     name_array.append("workCategory")
-                    constraints_array.append("workCategory: dcs:" + row["workCategory"])
+                    constraints_array.append("workCategory: dcs:" +
+                                             row["workCategory"])
 
                 if row["workPeriod"] == "[Month - 3]":
                     name_array.append("WorkedUpto3Months")
@@ -175,7 +178,7 @@ class CensusPrimaryAbstractDataLoaderBase:
                     name_array.append("Worked3To6Months")
                     constraints_array.append("workPeriod:" + row["workPeriod"])
             else:
-                 name_array.append("Workers")
+                name_array.append("Workers")
 
         elif row["workerStatus"] == "NonWorker":
             name_array.append("NonWorker")
@@ -199,7 +202,7 @@ class CensusPrimaryAbstractDataLoaderBase:
             name_array.append("Female")
             constraints_array.append("gender: schema:Female")
 
-        name = "_".join(name_array) 
+        name = "_".join(name_array)
         row["name"] = name
         row["constraints"] = "\n".join(constraints_array)
 
