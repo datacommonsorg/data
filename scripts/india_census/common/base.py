@@ -40,12 +40,43 @@ Node: E:IndiaCensus{year}_{dataset_name}->E1
 typeOf: schema:Place
 indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_id"""
 
+CENSUS_DATA_COLUMN_START = 9
+
 
 class CensusPrimaryAbstractDataLoaderBase:
+    """An object that represents Primary Abstract Data and its variables.
+    
+    Attributes:
+        census_columns (list): It will have all the data column names of a dataset
+        census_year : Census year
+        csv_file_path : Path where cleaned csv file will be saved
+        data_file_path : Input XLS file from Census of India. Can be url or local path.
+        dataset_name : Census dataset name. Eg:Primary_Abstract_Data
+        existing_stat_var (list): List of existing stat vars that we don't need to generate
+        mcf (list): Description
+        mcf_file_path : Description
+        metadata_file_path : Description
+        raw_df : Raw census data as dataframe
+        stat_var_index (dict): local storage for census column name and corresponding statvar
+        tmcf_file_path : Path where generated tmcf file will be saved
+    """
 
     def __init__(self, data_file_path, metadata_file_path, mcf_file_path,
                  tmcf_file_path, csv_file_path, existing_stat_var, census_year,
                  dataset_name):
+        """
+        Constructor
+        
+        Args:
+            data_file_path :  Input XLS file from Census of India. Can be url or local path
+            metadata_file_path : Meta data csv file which has attribute details
+            mcf_file_path : Path where generated mcf file will be saved
+            tmcf_file_path : Path where generated tmcf file will be saved
+            csv_file_path : Path where cleaned csv file will be saved
+            existing_stat_var : List of existing stat vars that we don't need to generate
+            census_year : Census Year
+            dataset_name : Census dataset name. Eg:Primary_Abstract_Data
+        """
         self.data_file_path = data_file_path
         self.metadata_file_path = metadata_file_path
         self.mcf_file_path = mcf_file_path
@@ -68,7 +99,7 @@ class CensusPrimaryAbstractDataLoaderBase:
             "EB": str
         }
         self.raw_df = pd.read_excel(self.data_file_path, dtype=dtype)
-        self.census_columns = self.raw_df.columns[9:]
+        self.census_columns = self.raw_df.columns[CENSUS_DATA_COLUMN_START:]
 
     def _format_location(self, row):
         #In census of India. Location code for India is all zeros.
