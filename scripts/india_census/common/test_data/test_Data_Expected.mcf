@@ -1,4 +1,3 @@
-
 Node: dcid:Count_Household_Urban
 description: "Number of Households - Urban"
 typeOf: dcs:StatisticalVariable
@@ -134,3 +133,4 @@ measuredProperty: dcs:count
 age: dcid:YearsUpto6
 placeOfResidence: dcs:Rural
 gender: schema:Female
+

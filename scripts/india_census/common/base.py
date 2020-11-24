@@ -20,13 +20,14 @@ import pandas as pd
 import numpy as np
 import urllib.request
 
-TEMPLATE_STAT_VAR = """
-Node: dcid:{name}
+TEMPLATE_STAT_VAR = """Node: dcid:{name}
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{populationType}
 statType: dcs:{statType}
-measuredProperty: dcs:{measuredProperty}{constraints}
+measuredProperty: dcs:{measuredProperty}
+{constraints}
+
 """
 
 TEMPLATE_TMCF = """Node: E:IndiaCensus{year}_{dataset_name}->E0
@@ -173,7 +174,10 @@ class CensusPrimaryAbstractDataLoaderBase:
         constraints_array = []
 
         name_array.append(self._get_base_name(row))
-        constraints_array.append(self._get_base_constraints(row))
+
+        #No need to add empty constraint to the list
+        if self._get_base_constraints(row) !="":
+            constraints_array.append(self._get_base_constraints(row))
 
         if row["age"] == "YearsUpto6":
             name_array.append("YearsUpto6")
