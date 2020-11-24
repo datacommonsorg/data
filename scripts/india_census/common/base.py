@@ -26,12 +26,10 @@ description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{populationType}
 statType: dcs:{statType}
-measuredProperty: dcs:{measuredProperty}
-{constraints}
+measuredProperty: dcs:{measuredProperty}{constraints}
 """
 
-TEMPLATE_TMCF = """
-Node: E:IndiaCensus{year}_{dataset_name}->E0
+TEMPLATE_TMCF = """Node: E:IndiaCensus{year}_{dataset_name}->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus{year}_{dataset_name}->StatisticalVariable
 observationDate: C:IndiaCensus{year}_{dataset_name}->Year
@@ -40,9 +38,7 @@ value: C:IndiaCensus{year}_{dataset_name}->value
 
 Node: E:IndiaCensus{year}_{dataset_name}->E1
 typeOf: schema:Place
-indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_id
-
-"""
+indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_id"""
 
 
 class CensusPrimaryAbstractDataLoaderBase:
@@ -142,69 +138,70 @@ class CensusPrimaryAbstractDataLoaderBase:
 
     def _create_variable(self, data_row, place_of_residence=None):
         row = copy.deepcopy(data_row)
-        name = self._get_base_name(row)
-        constraints = self._get_base_constraints(row)
+        name_array = []
+        constraints_array = []
+
+        name_array.append(self._get_base_name(row))
+        constraints_array.append(self._get_base_constraints(row))
 
         if row["age"] == "YearsUpto6":
-            name = name + "_" + "YearsUpto6"
-            constraints = constraints + "age: dcid:YearsUpto6 \n"
+            name_array.append("YearsUpto6")
+            constraints_array.append("age: dcid:YearsUpto6")
         else:
             pass
 
-        if row["workerStatus"] == "Worker":
-            constraints = constraints + "workerStatus: Worker \n"
+        if row["workerStatus"] == "Worker":            
+            constraints_array.append("workerStatus: dcs:Worker")
             if row["workerClassification"] == "MainWorker":
-                name = name + "_" + "MainWorkers"
-                constraints = constraints + "workerClassification: MainWorker \n"
+                name_array.append("MainWorkers")
+                constraints_array.append("workerClassification: dcs:MainWorker")
                 if row["workCategory"] != "":
-                    name = name + "_" + row["workCategory"]
-                    constraints = constraints + "workCategory:" + row[
-                        "workCategory"] + " \n"
+                    name_array.append(row["workCategory"])
+                    constraints_array.append("workCategory: dcs:" + row["workCategory"])
 
             elif row["workerClassification"] == "MarginalWorker":
-                name = name + "_" + "MarginalWorkers"
-                constraints = constraints + "workerClassification: MarginalWorker \n"
+                name_array.append("MarginalWorker")
+                constraints_array.append("workerClassification: dcs:MarginalWorker")
+                
                 if row["workCategory"] != "":
-                    name = name + "_" + row["workCategory"]
-                    constraints = constraints + "workCategory:" + row[
-                        "workCategory"] + " \n"
+                    name_array.append("workCategory")
+                    constraints_array.append("workCategory: dcs:" + row["workCategory"])
 
                 if row["workPeriod"] == "[Month - 3]":
-                    name = name + "_" + "WorkedUpto3Months"
-                    constraints = constraints + "workPeriod:" + row[
-                        "workPeriod"] + " \n"
+                    name_array.append("WorkedUpto3Months")
+                    constraints_array.append("workPeriod:" + row["workPeriod"])
 
                 if row["workPeriod"] == "[Month 3 6]":
-                    name = name + "_" + "Worked3To6Months"
-                    constraints = constraints + "workPeriod:" + row[
-                        "workPeriod"] + " \n"
+                    name_array.append("Worked3To6Months")
+                    constraints_array.append("workPeriod:" + row["workPeriod"])
             else:
-                name = name + "_" + "Workers"
+                 name_array.append("Workers")
 
         elif row["workerStatus"] == "NonWorker":
-            name = name + "_" + "NonWorkers"
-            constraints = constraints + "workerStatus: NonWorker \n"
+            name_array.append("NonWorker")
+            constraints_array.append("workerStatus: dcs:NonWorker")
 
         if place_of_residence == "Urban":
-            name = name + "_" + "Urban"
-            constraints = constraints + "placeOfResidence: dcs:Urban \n"
+            name_array.append("Urban")
+            constraints_array.append("placeOfResidence: dcs:Urban")
             row["description"] = row["description"] + " - Urban"
 
         elif place_of_residence == "Rural":
-            name = name + "_" + "Rural"
-            constraints = constraints + "placeOfResidence: dcs:Rural \n"
+            name_array.append("Rural")
+            constraints_array.append("placeOfResidence: dcs:Rural")
             row["description"] = row["description"] + " - Rural"
 
         if row["gender"] == "Male":
-            name = name + "_" + "Male"
-            constraints = constraints + "gender: schema:Male \n"
+            name_array.append("Male")
+            constraints_array.append("gender: schema:Male")
 
         elif row["gender"] == "Female":
-            name = name + "_" + "Female"
-            constraints = constraints + "gender: schema:Female \n"
+            name_array.append("Female")
+            constraints_array.append("gender: schema:Female")
 
+        name = "_".join(name_array) 
         row["name"] = name
-        row["constraints"] = constraints
+        row["constraints"] = "\n".join(constraints_array)
 
         key = "{0}_{1}".format(
             row["columnName"],
@@ -213,7 +210,6 @@ class CensusPrimaryAbstractDataLoaderBase:
 
         self.mcf.append(row)
         stat_var = TEMPLATE_STAT_VAR.format(**dict(row))
-        stat_var = stat_var + "\n"
         return name, stat_var
 
     def _create_mcf(self):

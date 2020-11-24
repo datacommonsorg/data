@@ -5,9 +5,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Urban 
-
-
+placeOfResidence: dcs:Urban
 
 Node: dcid:Count_Household_Rural
 description: "Number of Households - Rural"
@@ -15,9 +13,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Rural 
-
-
+placeOfResidence: dcs:Rural
 
 Node: dcid:Count_Person_Urban_Male
 description: "Total Males - Urban"
@@ -25,10 +21,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Urban 
-gender: schema:Male 
-
-
+placeOfResidence: dcs:Urban
+gender: schema:Male
 
 Node: dcid:Count_Person_Rural_Male
 description: "Total Males - Rural"
@@ -36,10 +30,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Rural 
-gender: schema:Male 
-
-
+placeOfResidence: dcs:Rural
+gender: schema:Male
 
 Node: dcid:Count_Person_Urban_Female
 description: "Total Females - Urban"
@@ -47,10 +39,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Urban 
-gender: schema:Female 
-
-
+placeOfResidence: dcs:Urban
+gender: schema:Female
 
 Node: dcid:Count_Person_Rural_Female
 description: "Total Females - Rural"
@@ -58,10 +48,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Rural 
-gender: schema:Female 
-
-
+placeOfResidence: dcs:Rural
+gender: schema:Female
 
 Node: dcid:Count_Person_YearsUpto6
 description: "Population in the Age group 0-6"
@@ -69,9 +57,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-
-
+age: dcid:YearsUpto6
 
 Node: dcid:Count_Person_YearsUpto6_Urban
 description: "Population in the Age group 0-6 - Urban"
@@ -79,10 +65,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-placeOfResidence: dcs:Urban 
-
-
+age: dcid:YearsUpto6
+placeOfResidence: dcs:Urban
 
 Node: dcid:Count_Person_YearsUpto6_Rural
 description: "Population in the Age group 0-6 - Rural"
@@ -90,10 +74,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-placeOfResidence: dcs:Rural 
-
-
+age: dcid:YearsUpto6
+placeOfResidence: dcs:Rural
 
 Node: dcid:Count_Person_YearsUpto6_Male
 description: "Male Population in the Age group 0-6"
@@ -101,10 +83,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-gender: schema:Male 
-
-
+age: dcid:YearsUpto6
+gender: schema:Male
 
 Node: dcid:Count_Person_YearsUpto6_Urban_Male
 description: "Male Population in the Age group 0-6 - Urban"
@@ -112,11 +92,9 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-placeOfResidence: dcs:Urban 
-gender: schema:Male 
-
-
+age: dcid:YearsUpto6
+placeOfResidence: dcs:Urban
+gender: schema:Male
 
 Node: dcid:Count_Person_YearsUpto6_Rural_Male
 description: "Male Population in the Age group 0-6 - Rural"
@@ -124,11 +102,9 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-placeOfResidence: dcs:Rural 
-gender: schema:Male 
-
-
+age: dcid:YearsUpto6
+placeOfResidence: dcs:Rural
+gender: schema:Male
 
 Node: dcid:Count_Person_YearsUpto6_Female
 description: "Female Population in the Age group 0-6"
@@ -136,10 +112,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-gender: schema:Female 
-
-
+age: dcid:YearsUpto6
+gender: schema:Female
 
 Node: dcid:Count_Person_YearsUpto6_Urban_Female
 description: "Female Population in the Age group 0-6 - Urban"
@@ -147,11 +121,9 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-placeOfResidence: dcs:Urban 
-gender: schema:Female 
-
-
+age: dcid:YearsUpto6
+placeOfResidence: dcs:Urban
+gender: schema:Female
 
 Node: dcid:Count_Person_YearsUpto6_Rural_Female
 description: "Female Population in the Age group 0-6 - Rural"
@@ -159,8 +131,6 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-age: dcid:YearsUpto6 
-placeOfResidence: dcs:Rural 
-gender: schema:Female 
-
-
+age: dcid:YearsUpto6
+placeOfResidence: dcs:Rural
+gender: schema:Female

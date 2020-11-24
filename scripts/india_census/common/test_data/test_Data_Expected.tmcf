@@ -1,4 +1,3 @@
-
 Node: E:IndiaCensus2011_TEST->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus2011_TEST->StatisticalVariable
@@ -9,4 +8,3 @@ value: C:IndiaCensus2011_TEST->value
 Node: E:IndiaCensus2011_TEST->E1
 typeOf: schema:Place
 indianCensusAreaCode2011: C:IndiaCensus2011_TEST->census_location_id
-
