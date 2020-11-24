@@ -176,7 +176,7 @@ class CensusPrimaryAbstractDataLoaderBase:
         name_array.append(self._get_base_name(row))
 
         #No need to add empty constraint to the list
-        if self._get_base_constraints(row) !="":
+        if self._get_base_constraints(row) != "":
             constraints_array.append(self._get_base_constraints(row))
 
         if row["age"] == "YearsUpto6":
