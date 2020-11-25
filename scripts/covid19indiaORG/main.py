@@ -1,8 +1,22 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from urllib.request import urlopen
 from json import load
 from typing import Dict
 import pandas as pd
-from Config import state_apis
+from Config import STATE_APIS
 from INDIA_MAP import STATES, DISTRICTS
 
 def _download_data(api: str) -> Dict[str, Dict]:
@@ -38,8 +52,8 @@ def _parse_timeseries(json: Dict[str, Dict[str, int]]) -> Dict[str, Dict[str, in
 # A DataFrame containing ALL merged state data.
 table = pd.DataFrame({})
 
-# For every state in Config.state_apis, query its data.
-for state in state_apis:
+# For every state in Config.STATE_APIS, query its data.
+for state in STATE_APIS:
     # Every state has its own API.
     api: str = state['API']
     downloaded_data: Dict[str, Dict] = _download_data(api)
