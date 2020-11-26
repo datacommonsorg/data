@@ -65,13 +65,13 @@ It has the following columns
 ### Running Tests
 
 ```bash
-python3 -m unittest preprocess_test
+python3 -m unittest discover -v -s scripts/ -p *_test.py
 ```
 
 ### Import Procedure
 
 To import data, run the following command:
 
-```
+```bash
 python3 preprocess.py
 ```
