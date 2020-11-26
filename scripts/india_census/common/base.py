@@ -125,15 +125,17 @@ class CensusPrimaryAbstractDataLoaderBase:
         self.raw_df["census_location_id"] = self.raw_df.apply(
             self._format_location, axis=1)
 
-        #Remove the unwanted columns
-        #They are census codes which we dont use
+        #Remove the unwanted columns. They are census codes which we dont use
         #State,District,Subdistt,Town/Village,Ward,EB
+        #We delete them only if they exists
+        #From pandas documentation:
+        #If erros=‘ignore’, suppress error and only existing labels are dropped
         self.raw_df.drop([
             "State", "District", "Subdistt", "Town/Village", "Ward", "EB",
             "Level", "Name"
         ],
                          axis=1,
-                         inplace=True)
+                         inplace=True, errors='ignore')
         #first column is Name of the place
         #second column is Name of the TRU/placeOfResidence
         #3-N are the actual values
@@ -182,6 +184,15 @@ class CensusPrimaryAbstractDataLoaderBase:
         if row["age"] == "YearsUpto6":
             name_array.append("YearsUpto6")
             constraints_array.append("age: dcid:YearsUpto6")
+        else:
+            pass
+
+        if row["socialCategory"] == "ScheduledCaste":
+            name_array.append("ScheduledCaste")
+            constraints_array.append("socialCategory: dcs:ScheduledCaste")
+        if row["socialCategory"] == "ScheduledTribe":
+            name_array.append("ScheduledTribe")
+            constraints_array.append("socialCategory: dcs:ScheduledTribe")            
         else:
             pass
 
