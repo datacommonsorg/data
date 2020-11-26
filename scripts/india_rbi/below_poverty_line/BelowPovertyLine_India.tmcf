@@ -7,6 +7,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_rural
 observationDate: C:BelowPowertyLine_India->year
+observationPeriod: "P1Y"
 observationAbout: E:BelowPowertyLine_India->E0
 
 Node: E:BelowPowertyLine_India->E2
@@ -14,6 +15,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Urban_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_urban
 observationDate: C:BelowPowertyLine_India->year
+observationPeriod: "P1Y"
 observationAbout: E:BelowPowertyLine_India->E0
 
 Node: E:BelowPowertyLine_India->E3
@@ -21,6 +23,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_BelowPovertyLevelInThePast12Months
 value: C:BelowPowertyLine_India->count_person_combined
 observationDate: C:BelowPowertyLine_India->year
+observationPeriod: "P1Y"
 observationAbout: E:BelowPowertyLine_India->E0
 
 Node: E:BelowPowertyLine_India->E4
@@ -28,6 +31,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person_Rural
 value: C:BelowPowertyLine_India->percentage_person_rural
 observationDate: C:BelowPowertyLine_India->year
+observationPeriod: "P1Y"
 observationAbout: E:BelowPowertyLine_India->E0
 
 Node: E:BelowPowertyLine_India->E5
@@ -35,6 +39,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Rural_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person_Urban
 value: C:BelowPowertyLine_India->percentage_person_urban
 observationDate: C:BelowPowertyLine_India->year
+observationPeriod: "P1Y"
 observationAbout: E:BelowPowertyLine_India->E0
 
 Node: E:BelowPowertyLine_India->E6
@@ -42,6 +47,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
 value: C:BelowPowertyLine_India->percentage_person_combined
 observationDate: C:BelowPowertyLine_India->year
+observationPeriod: "P1Y"
 observationAbout: E:BelowPowertyLine_India->E0
 
 Node: E:BelowPowertyLine_India->E7
