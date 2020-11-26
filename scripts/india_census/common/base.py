@@ -135,7 +135,8 @@ class CensusPrimaryAbstractDataLoaderBase:
             "Level", "Name"
         ],
                          axis=1,
-                         inplace=True, errors='ignore')
+                         inplace=True,
+                         errors='ignore')
         #first column is Name of the place
         #second column is Name of the TRU/placeOfResidence
         #3-N are the actual values
@@ -192,7 +193,7 @@ class CensusPrimaryAbstractDataLoaderBase:
             constraints_array.append("socialCategory: dcs:ScheduledCaste")
         if row["socialCategory"] == "ScheduledTribe":
             name_array.append("ScheduledTribe")
-            constraints_array.append("socialCategory: dcs:ScheduledTribe")            
+            constraints_array.append("socialCategory: dcs:ScheduledTribe")
         else:
             pass
 
