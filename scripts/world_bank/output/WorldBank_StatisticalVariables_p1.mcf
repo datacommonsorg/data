@@ -40,7 +40,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_15YearsOrMore_Male
+measurementDenominator: dcs:Count_Person_15YearsOrMore_Female
 healthBehavior: dcs:Smoking
 age: dcs:Years15Onwards
 gender: dcs:Female
@@ -53,7 +53,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_15YearsOrMore_Female
+measurementDenominator: dcs:Count_Person_15YearsOrMore_Male
 healthBehavior: dcs:Smoking
 age: dcs:Years15Onwards
 gender: dcs:Male
@@ -200,7 +200,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Female
 levelOfSchool: dcs:TertiaryEducation
 gender: dcs:Female
 
@@ -212,7 +212,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person
+measurementDenominator: dcs:Count_Person_Male
 levelOfSchool: dcs:TertiaryEducation
 gender: dcs:Male
 
