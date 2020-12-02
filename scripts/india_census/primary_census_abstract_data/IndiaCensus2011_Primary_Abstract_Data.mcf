@@ -134,75 +134,171 @@ age: dcid:YearsUpto6
 placeOfResidence: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Urban_Male
+Node: dcid:Count_Person_ScheduledCaste
+description: "Population Scheduled Caste"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:Count_Person_ScheduledCaste_Urban
+description: "Population Scheduled Caste - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
+placeOfResidence: dcs:Urban
+
+Node: dcid:Count_Person_ScheduledCaste_Rural
+description: "Population Scheduled Caste - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
+placeOfResidence: dcs:Rural
+
+Node: dcid:Count_Person_ScheduledCaste_Male
+description: "Male Population Scheduled Caste"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
+gender: schema:Male
+
+Node: dcid:Count_Person_ScheduledCaste_Urban_Male
 description: "Male Population Scheduled Caste - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
 placeOfResidence: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Rural_Male
+Node: dcid:Count_Person_ScheduledCaste_Rural_Male
 description: "Male Population Scheduled Caste - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
 placeOfResidence: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Urban_Female
+Node: dcid:Count_Person_ScheduledCaste_Female
+description: "Female Population Scheduled Caste"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
+gender: schema:Female
+
+Node: dcid:Count_Person_ScheduledCaste_Urban_Female
 description: "Female Population Scheduled Caste - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
 placeOfResidence: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Rural_Female
+Node: dcid:Count_Person_ScheduledCaste_Rural_Female
 description: "Female Population Scheduled Caste - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
 placeOfResidence: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Urban_Male
+Node: dcid:Count_Person_ScheduledTribe
+description: "Population Scheduled Tribe"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:Count_Person_ScheduledTribe_Urban
+description: "Population Scheduled Tribe - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
+placeOfResidence: dcs:Urban
+
+Node: dcid:Count_Person_ScheduledTribe_Rural
+description: "Population Scheduled Tribe - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
+placeOfResidence: dcs:Rural
+
+Node: dcid:Count_Person_ScheduledTribe_Male
+description: "Male Population Scheduled Tribe"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
+gender: schema:Male
+
+Node: dcid:Count_Person_ScheduledTribe_Urban_Male
 description: "Male Population Scheduled Tribe - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
 placeOfResidence: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Rural_Male
+Node: dcid:Count_Person_ScheduledTribe_Rural_Male
 description: "Male Population Scheduled Tribe - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
 placeOfResidence: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Urban_Female
+Node: dcid:Count_Person_ScheduledTribe_Female
+description: "Female Population Scheduled Tribe"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
+gender: schema:Female
+
+Node: dcid:Count_Person_ScheduledTribe_Urban_Female
 description: "Female Population Scheduled Tribe - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
 placeOfResidence: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Rural_Female
+Node: dcid:Count_Person_ScheduledTribe_Rural_Female
 description: "Female Population Scheduled Tribe - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+socialCategory: dcs:ScheduledTribe
 placeOfResidence: dcs:Rural
 gender: schema:Female
 
