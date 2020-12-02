@@ -15,9 +15,10 @@
 
 # The places' dcids are resolved by wikidataId.
 # The wikidataId for each place was found using the place_resolver.go as well as so manual checks.
+# Please see README.md for more information.
 
 DISTRICTS = {
-   "West Bengal":{
+   "WB":{
       "Alipurduar":"Q4726845",
       "Bankura":"Q2088458",
       "Birbhum":"Q2088440",
@@ -42,7 +43,7 @@ DISTRICTS = {
       "South 24 Parganas":"Q2308319",
       "Uttar Dinajpur":"Q2019766"
    },
-   "Uttarakhaland":{
+   "UT":{
       "Almora":"Q1805066",
       "Bageshwar":"Q1815313",
       "Chamoli":"Q1797372",
@@ -57,7 +58,7 @@ DISTRICTS = {
       "Udham Singh Nagar":"Q1805082",
       "Uttarkashi":"Q1773437"
    },
-   "Uttar Pradesh":{
+   "UP":{
       "Agra":"Q606343",
       "Aligarh":"Q766918",
       "Ambedkar Nagar":"Q456764",
@@ -134,7 +135,7 @@ DISTRICTS = {
       "Unnao":"Q1937875",
       "Varanasi":"Q1321140"
    },
-   "Tripura":{
+   "TR":{
       "Dhalai":"Q2086546",
       "Gomati":"Q16086497",
       "Khowai":"Q16086680",
@@ -144,7 +145,7 @@ DISTRICTS = {
       "Unokoti":"Q16087996",
       "West Tripura":"Q1947570"
    },
-   "Tamil Nadu":{
+   "TN":{
       "Ariyalur":"Q15112",
       "Chengalpattu":"Q65976177",
       "Chennai":"Q15116",
@@ -183,7 +184,7 @@ DISTRICTS = {
       "Viluppuram":"Q15205",
       "Virudhunagar":"Q15209"
    },
-   "Rajasthan":{
+   "RJ":{
       "Ajmer":"Q413037",
       "Alwar":"Q449690",
       "Banswara":"Q806969",
@@ -218,7 +219,7 @@ DISTRICTS = {
       "Tonk":"Q915880",
       "Udaipur":"Q1321577"
    },
-   "Punjab":{
+   "PB":{
       "Amritsar":"Q202822",
       "Barnala":"Q2353293",
       "Bathinda":"Q172488",
@@ -242,13 +243,13 @@ DISTRICTS = {
       "Sri Muktsar Sahib":"Q1947359",
       "Tarn Taran":"Q2298993"
    },
-   "Puducherry":{
+   "PY":{
       "Karaikal":"Q639264",
       "Mahe":"Q639279",
       "Puducherry":"Q984035",
       "Yanam":"Q2126598"
    },
-   "Odisha":{
+   "OR":{
       "Angul":"Q1772807",
       "Balangir":"Q804642",
       "Balasore":"Q2022279",
@@ -280,7 +281,7 @@ DISTRICTS = {
       "Subarnapur":"Q1473957",
       "Sundargarh":"Q2296047"
    },
-   "Nagaland":{
+   "NL":{
       "Dimapur":"Q634262",
       "Kiphire":"Q2597908",
       "Kohima":"Q953530",
@@ -293,7 +294,7 @@ DISTRICTS = {
       "Wokha":"Q681821",
       "Zunheboto":"Q2091461"
    },
-   "Mizoram":{
+   "MZ":{
       "Aizawl":"Q1947322",
       "Champhai":"Q1965256",
       "Hnahthial":"Q89360042",
@@ -306,7 +307,7 @@ DISTRICTS = {
       "Saitual":"Q89371650",
       "Serchhip":"Q2086190"
    },
-   "Meghalaya":{
+   "ML":{
       "East Garo Hills":"Q2085455",
       "East Jaintia Hills":"Q15923776",
       "East Khasi Hills":"Q1945304",
@@ -319,7 +320,7 @@ DISTRICTS = {
       "West Jaintia Hills":"Q13181190",
       "West Khasi Hills":"Q2064752"
    },
-   "Maharashtra":{
+   "MH":{
       "Ahmednagar":"Q401744",
       "Akola":"Q520510",
       "Amravati":"Q1771774",
@@ -356,7 +357,7 @@ DISTRICTS = {
       "Washim":"Q1804858",
       "Yavatmal":"Q1804852"
    },
-   "Madhya Pradesh":{
+   "MP":{
       "Agar Malwa":"Q15732396",
       "Alirajpur":"Q2667586",
       "Anuppur":"Q2299093",
@@ -410,11 +411,11 @@ DISTRICTS = {
       "Umaria":"Q620297",
       "Vidisha":"Q1815253"
    },
-   "Ladakh":{
+   "LA":{
       "Kargil":"Q1650798",
       "Leh":"Q1921210"
    },
-   "Kerala":{
+   "KL":{
       "Alappuzha":"Q928959",
       "Ernakulam":"Q1356097",
       "Idukki":"Q301821",
@@ -430,7 +431,7 @@ DISTRICTS = {
       "Thrissur":"Q2429655",
       "Wayanad":"Q1364427"
    },
-   "Karnataka":{
+   "KA":{
       "Bagalkote":"Q1910231",
       "Ballari":"Q1791926",
       "Belagavi":"Q815464",
@@ -462,7 +463,7 @@ DISTRICTS = {
       "Vijayapura":"Q83108",
       "Yadgir":"Q1786949"
    },
-   "Jharkhand":{
+   "JH":{
       "Bokaro":"Q2295925",
       "Chatra":"Q1979499",
       "Deoghar":"Q2030017",
@@ -488,7 +489,7 @@ DISTRICTS = {
       "Simdega":"Q2597889",
       "West Singhbhum":"Q1950527"
    },
-   "Jammy and Kashmir":{
+   "JK":{
       "Anantnag":"Q2982349",
       "Bandipora":"Q2983553",
       "Baramulla":"Q1912057",
@@ -510,7 +511,7 @@ DISTRICTS = {
       "Srinagar":"Q1506029",
       "Udhampur":"Q1947311"
    },
-   "Himachal Pradesh":{
+   "HP":{
       "Bilaspur":"Q3710724",
       "Chamba":"Q1060614",
       "Hamirpur":"Q5645337",
@@ -524,7 +525,7 @@ DISTRICTS = {
       "Solan":"Q2980937",
       "Una":"Q2301741"
    },
-   "Haryana":{
+   "HR":{
       "Ambala":"Q2086226",
       "Bhiwani":"Q1852857",
       "Charkhi Dadri":"Q28172110",
@@ -549,7 +550,7 @@ DISTRICTS = {
       "Sonipat":"Q2241746",
       "Yamunanagar":"Q1873644"
    },
-   "Gujarat":{
+   "GJ":{
       "Ahmedabad":"Q401686",
       "Amreli":"Q257946",
       "Anand":"Q485683",
@@ -584,7 +585,7 @@ DISTRICTS = {
       "Vadodara":"Q578285",
       "Valsad":"Q1946743"
    },
-   "Chhattisarh":{
+   "CT":{
       "Balod":"Q16056266",
       "Baloda Bazar":"Q15663455",
       "Balrampur":"Q16056268",
@@ -614,10 +615,10 @@ DISTRICTS = {
       "Surguja":"Q1805075",
       "Uttar Bastar Kanker":"Q2310530"
    },
-   "Chandigarh":{
+   "CH":{
       "Chandigarh":"Q5071071"
    },
-   "Bihar":{
+   "BR":{
       "Araria":"Q42901",
       "Arwal":"Q42917",
       "Aurangabad":"Q43086",
@@ -657,7 +658,7 @@ DISTRICTS = {
       "Vaishali":"Q100130",
       "West Champaran":"Q100124"
    },
-   "Arunachal Pradesh":{
+   "AR":{
       "Anjaw":"Q15413",
       "Changlang":"Q15427",
       "Dibang Valley":"Q15446",
@@ -685,7 +686,7 @@ DISTRICTS = {
       "West Kameng":"Q15459",
       "West Siang":"Q15453"
    },
-   "Andhra Pradesh":{
+   "AP":{
       "Anantapur":"Q15212",
       "Chittoor":"Q15213",
       "East Godavari":"Q15338",
@@ -703,38 +704,39 @@ DISTRICTS = {
 }
 
 STATES = {
-   "West Bengal":"Q1356",
-   "Uttarakhaland":"Q1499",
-   "Uttar Pradesh":"Q1498",
-   "Tripura":"Q13636",
-   "Telangana":"Q677037",
-   "Tamil Nadu":"Q1445",
-   "Skkim":"Q1505",
-   "Rajasthan":"Q1437",
-   "Punjab":"Q22424",
-   "Puducherry":"Q66743",
-   "Odisha":"Q22048",
-   "Nagaland":"Q1599",
-   "Mizoram":"Q1502",
-   "Meghalaya":"Q1195",
-   "Manipur":"Q1193",
-   "Maharashtra":"Q1191",
-   "Madhya Pradesh":"Q1188",
-   "Ladakh":"Q200667",
-   "Kerala":"Q1186",
-   "Karnataka":"Q1185",
-   "Jharkhand":"Q1184",
-   "Jammy and Kashmir": "Q66278313",
-   "Himachal Pradesh":"Q1177",
-   "Haryana":"Q1174",
-   "Gujarat":"Q1061",
-   "Goa":"Q1171",
-   "Delhi":"Q1353",
-   "Chhattisarh":"Q1168",
-   "Chandigarh":"Q43433",
-   "Bihar":"Q1165",
-   "Assam":"Q1164",
-   "Arunachal Pradesh":"Q1162",
-   "Andhra Pradesh":"Q1159",
-   "Andaman and Nicobar Islands":"Q40888"
+   "WB":"Q1356",
+   "UT":"Q1499",
+   "UP":"Q1498",
+   "TR":"Q13636",
+   "TG":"Q677037",
+   "TN":"Q1445",
+   "SK":"Q1505",
+   "RJ":"Q1437",
+   "PB":"Q22424",
+   "PY":"Q66743",
+   "OR":"Q22048",
+   "NL":"Q1599",
+   "MZ":"Q1502",
+   "ML":"Q1195",
+   "MN":"Q1193",
+   "MH":"Q1191",
+   "MP":"Q1188",
+   "LA":"Q200667",
+   "KL":"Q1186",
+   "KA":"Q1185",
+   "JH":"Q1184",
+   "JK": "Q66278313",
+   "HP":"Q1177",
+   "HR":"Q1174",
+   "GJ":"Q1061",
+   "GA":"Q1171",
+   "DL":"Q1353",
+   "DN": "Q77997266",
+   "CT":"Q1168",
+   "CH":"Q43433",
+   "BR":"Q1165",
+   "AS":"Q1164",
+   "AR":"Q1162",
+   "AP":"Q1159",
+   "AN":"Q40888",
 }
