@@ -134,3 +134,29 @@ age: dcid:YearsUpto6
 placeOfResidence: dcs:Rural
 gender: schema:Female
 
+Node: dcid:Count_Person_ScheduledCaste
+description: "Population Scheduled Caste"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:Count_Person_ScheduledCaste_Urban
+description: "Population Scheduled Caste - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
+placeOfResidence: dcs:Urban
+
+Node: dcid:Count_Person_ScheduledCaste_Rural
+description: "Population Scheduled Caste - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+socialCategory: dcs:ScheduledCaste
+placeOfResidence: dcs:Rural
+
