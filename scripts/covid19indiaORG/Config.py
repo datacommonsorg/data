@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Covid 19 India has some other data that we don't need for the import.
+# Only store data for the following labels.
+DATA_TO_KEEP = set(['confirmed', 'deceased', 'tested', 'active', 'recovered'])
+
+# Every state has its own API.
 STATE_APIS = {
     "WB":"https://api.covid19india.org/v4/min/timeseries-WB.min.json",
     "UT":"https://api.covid19india.org/v4/min/timeseries-UT.min.json",
@@ -48,4 +53,4 @@ STATE_APIS = {
     "AR":"https://api.covid19india.org/v4/min/timeseries-AR.min.json",
     "AP":"https://api.covid19india.org/v4/min/timeseries-AP.min.json",
     "AN":"https://api.covid19india.org/v4/min/timeseries-AN.min.json"
- }
+}

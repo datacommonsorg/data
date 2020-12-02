@@ -43,9 +43,7 @@ The entire dataset is broken down into:
 
 #### State
 
-This is further broken down into:
-
-#### District
+This is further broken down into District.
 
 ## Import Artifacts
 
@@ -53,11 +51,11 @@ This is further broken down into:
 
 The list States was auto-generated using the following script.
 Simply copy and paste the script into the covid19india.org console in your preferred browser.
-Top open console: Right Click >> "Inspect Element" >> Console
+Top open console: Right Click >> "Inspect Element" >> "Console".
 
-This will return a list of {State: string, Abbreviation: string, API: string}
+This will return a list of {State: string, ISOcode: string, API: string}
 
-```Array.prototype.slice.call($('select').childNodes).map(node => {const abbrev = JSON.parse(node.value)['stateCode']; return {"State": node.label, "Abbreviation": abbrev, "API": `https://api.covid19india.org/v4/min/timeseries-${abbrev}.min.json`}})```
+```Array.prototype.slice.call($('select').childNodes).map(node => {const isoCode = JSON.parse(node.value)['stateCode']; return {"State": node.label, "ISOcode": isoCode, "API": `https://api.covid19india.org/v4/min/timeseries-${isoCode}.min.json`}})```
 
 - [Config.py](Config.py)
 
@@ -73,16 +71,31 @@ The map of State->District->wikidataId was generated using the following:
 
 ### Output CSV
 
+The output CSV after running the Covid19IndiaORG script.
+
 - [output.csv](output/output.csv)
 
 ### Scripts
 
-The main script will call the covid19india.org API for each state in Config.py.
+The Covid19IndiaORG script will call the covid19india.org API for each state in Config.py.
 The covid19india.org APIs return return a JSON keyed by districtName->date.
 Using this JSON, we can generate a CSV file using Pandas.
 
-- [main.py](main.py)
-## Generating MCF
+- [Covid19IndiaORG.py](Covid19IndiaORG.py)
+
+### Unit Tests
+
+This import requires API calls to retrieve the data, for testing purposes, the JSON data will can be found inside each tests' directory. That is, instead of making an API call, the test will open the JSON file and treat its content as the API response.
+
+- [run_tests.py](run_tests.py)
+
+To run the unit tests, run
+
+``` bash
+python3 run_tests.py
+```
+
+## Generating CSV
 
 To generate the output CSV `output.csv`, run
 

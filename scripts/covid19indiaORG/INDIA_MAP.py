@@ -17,6 +17,7 @@
 # The wikidataId for each place was found using the place_resolver.go as well as so manual checks.
 # Please see README.md for more information.
 
+# State ISO Code -> District Name -> WikidataId
 DISTRICTS = {
    "WB":{
       "Alipurduar":"Q4726845",
@@ -703,6 +704,7 @@ DISTRICTS = {
    }
 }
 
+# State ISO Code -> WikidataId
 STATES = {
    "WB":"Q1356",
    "UT":"Q1499",
