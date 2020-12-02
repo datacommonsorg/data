@@ -13,19 +13,30 @@
 # limitations under the License.
 
 from urllib.request import urlopen
-from json import load
+from json import load, loads
 from typing import Dict
 import pandas as pd
-from Config import STATE_APIS
+from Config import STATE_APIS, DATA_TO_KEEP
 from INDIA_MAP import STATES, DISTRICTS
 
-def _download_data(api: str) -> Dict[str, Dict]:
+
+def _download_data(data_source: str) -> Dict[str, Dict]:
     """
-    Given Covid 19 India API, download the json data.
-    @param api: URL for the data to download.
+    Given a data_source, download and return the data.
+    @param data_source: either a URL/API or a direct path to a json file.
     """
-    response = urlopen(api)
-    data = load(response)
+    # Try to read the data_source as an API.
+    # If exception is given, try it is a path to a JSON file.
+    try:
+        response = urlopen(data_source)
+        # Use json.load to convert data to JSON.
+        data = load(response)
+    except ValueError:
+        with open(data_source, "r") as f:
+            # Read the string inside the file.
+            f_data = f.read()
+            # Use json.loads to convert data to JSON.
+            data = loads(f_data)
     return data
 
 def _parse_timeseries(json: Dict[str, Dict[str, int]]) -> Dict[str, Dict[str, int]]:
@@ -50,7 +61,7 @@ def _parse_timeseries(json: Dict[str, Dict[str, int]]) -> Dict[str, Dict[str, in
     return output
 
 
-def _get_state_table(state_abbrev: str, state_data: Dict[str, Dict[str, int]]):
+def _get_state_table(iso_code: str, state_data: Dict[str, Dict[str, int]]):
     """
     Given Covid 19 India JSON data for a specific state,
     return the data in the form of a DataFrame including
@@ -66,10 +77,15 @@ def _get_state_table(state_abbrev: str, state_data: Dict[str, Dict[str, int]]):
     state_table = pd.DataFrame(state_timeseries).T
 
     # Get the WikiDataId from the dictionary.
-    state_table['wikidataId'] = STATES[state_abbrev]
+    state_table['wikidataId'] = STATES[iso_code]
 
-    # Get the all district data for the state.
-    districts_data = state_data['districts']
+    # The district data is stored under 'districts'.
+    if 'districts' in state_data:
+        # Get the all district data for the state.
+        districts_data = state_data['districts']
+    else:
+        districts_data = {}
+        district_table = pd.DataFrame({})
 
     # For every district in the state, parse the timeseries.
     for district_name, data in districts_data.items():
@@ -79,27 +95,37 @@ def _get_state_table(state_abbrev: str, state_data: Dict[str, Dict[str, int]]):
         district_table = pd.DataFrame(district_timeseries).T
 
         # If there is not wikidataId for the given district name, skip it.
-        if not (state_abbrev in DISTRICTS and district_name in DISTRICTS[state_abbrev]):
+        if not (iso_code in DISTRICTS and district_name in DISTRICTS[iso_code]):
             continue
 
         # Get the WikidataId from the dictionary.
-        district_table['wikidataId'] = DISTRICTS[state_abbrev][district_name]
+        district_table['wikidataId'] = DISTRICTS[iso_code][district_name]
 
     # Store the DataFrame for this district under the state table.
     state_table = pd.concat([state_table, district_table])
 
-    # Calculate the active cases = confirmed cases - recovered cases.
-    state_table['active'] = state_table['confirmed'] - state_table['recovered']
+    if 'confirmed' in state_table and 'recovered' in state_table:
+        # Calculate the active cases = confirmed cases - recovered cases.
+        state_table['active'] = state_table['confirmed'] - state_table['recovered']
 
     # Get rid of any rows that don't have a wikidataId.
     state_table.dropna(subset=['wikidataId'], inplace=True)
+
+    # Find the columns in common between the table and the Config.DATA_TO_KEEP.
+    columns_to_keep = DATA_TO_KEEP.intersection(set(state_table.columns))
+
+    # Get rid of any rows that don't have at least one of the following.
+    state_table.dropna(subset=list(columns_to_keep), thresh=1, inplace=True)
+
+    # Only keep the following columns, the rest are not part of the import.
+    state_table = state_table[list(columns_to_keep ) + ['wikidataId']]
 
     # Rename the Y-axis to be "date".
     state_table.index.name = "date"
 
     return state_table
 
-def get_all_covid19indiaORG_data():
+def Covid19IndiaORG(state_to_source: Dict[str, str] = None, output: str = "output.csv"):
     """
     For all states in the Config.STATES, query the API
     and generate a DataFrame table for each state,
@@ -107,42 +133,35 @@ def get_all_covid19indiaORG_data():
     Combine each state DataFrame table into india_table.
     Clean and then export india_table as a CSV file.
     """
+
+    # If no data source is given, use the default Config.STATE_APIS
+    if not state_to_source:
+        state_to_source = STATE_APIS
+
     # A DataFrame containing ALL merged state and district data.
     india_table = pd.DataFrame({})
 
-    # For every state in Config.STATE_APIS, query its data.
-    for state_abbrev, api in STATE_APIS.items():
-
+    # For every state in state_to_source, download the data.
+    for iso_code, data_source in state_to_source.items():
         # Download the json data for the specific state.
         # Each state has its own API.
-        downloaded_data: Dict[str, Dict] = _download_data(api)
+        downloaded_data: Dict[str, Dict] = _download_data(data_source)
 
         # If there is no wikidataId for the state, skip it.
-        if state_abbrev not in STATES:
+        if iso_code not in STATES:
             continue
 
         # Get the state data as json.
-        state_data = downloaded_data[state_abbrev]
-
-        # The district data is stored under 'districts'.
-        if 'districts' not in state_data:
-            continue
+        state_data = downloaded_data[iso_code]
 
         # Given the state data, generate a DataFrame.
-        state_table = _get_state_table(state_abbrev, state_data)
+        state_table = _get_state_table(iso_code, state_data)
 
         # Store the DataFrame for this state under the india table.
         india_table = pd.concat([india_table, state_table])
 
-    # Get rid of any rows that don't have at least one of the following.
-    india_table.dropna(subset=['confirmed', 'deceased', 'tested', 'active', 'recovered'], thresh=1, inplace=True)
-
-    # Only keep the following columns, the rest are not part of the import.
-    india_table = india_table[['confirmed', 'deceased', 'tested', 'active', 'recovered', 'wikidataId']]
-
     # Export the main table containg ALL the data as a csv.
-    india_table.to_csv('output.csv', index=True)
-
+    india_table.to_csv(output, index=True)
 
 if __name__ == '__main__':
-    get_all_covid19indiaORG_data()
+    Covid19IndiaORG()
