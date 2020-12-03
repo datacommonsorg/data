@@ -1,8 +1,0 @@
-This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
-
-Some requirements of this license include:
-
-1. __Attribution__: You must give appropriate credit to PharmGKB (https://www.pharmgkb.org/page/citingPharmgkb), provide a link to this license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests PharmGKB endorses you or approves of your use.
-2. __ShareAlike__: If you alter, amend, reuse or otherwise change PharmGKB data you agree that if you distribute such product, all recipients shall first agree to be subject to this license. Proof of such agreement shall be made available to PharmGKB. Under no circumstances can PharmGKB data be sold for other's private or commercial use.
-
-Read the PharmGKB data usage policy (https://www.pharmgkb.org/page/dataUsagePolicy) for more details.

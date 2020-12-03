@@ -14,7 +14,6 @@
 
 import json
 import csv
-import pandas as pd
 import urllib.request
 
 # 1. All counts are at India level, so geographic reference code will always be IN
@@ -27,30 +26,20 @@ output_columns = [
 
 
 def create_formatted_csv_file(csv_file_path, data):
-    df = pd.json_normalize(data["rows"])
-
-    #convert to datetime and then drop the not required columns
-    df['value.report_time'] = pd.to_datetime(df['value.report_time'])
-    df = df.sort_values(by="value.report_time")
-    df['Date'] = df['value.report_time'].dt.date
-    df = df.drop([
-        'id', 'key', 'value._id', 'value._rev', 'value.source', 'value.type',
-        'value.individuals', 'value.confirmed_positive'
-    ],
-                 axis=1)
-
-    df['isoCode'] = INDIA
-    df = df.groupby([df["Date"], df["isoCode"]], as_index=False).last()
-
-    #prepare for exporting
-    df = df.rename(columns={
-        'value.samples': "CumulativeCount_MedicalTest_ConditionCOVID_19"
-    })
-    df = df.drop(['value.report_time'], axis=1)
-    df = df[[
-        "Date", "isoCode", "CumulativeCount_MedicalTest_ConditionCOVID_19"
-    ]]
-    df.to_csv(csv_file_path, index=False, header=True)
+    rows = data["rows"]
+    with open(csv_file_path, 'w', newline='') as f_out:
+        writer = csv.DictWriter(f_out,
+                                fieldnames=output_columns,
+                                lineterminator='\n')
+        writer.writeheader()
+        for row in rows:
+            processed_dict = {}
+            processed_dict["Date"] = (row["value"]["report_time"])[:10]
+            processed_dict["isoCode"] = INDIA
+            processed_dict[
+                "CumulativeCount_MedicalTest_ConditionCOVID_19"] = row["value"][
+                    "samples"]
+            writer.writerow(processed_dict)
 
 
 if __name__ == '__main__':
