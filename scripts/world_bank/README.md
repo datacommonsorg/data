@@ -26,3 +26,8 @@ template MCFs and CSVs will be output depending on which unique statistical
 observation properties are present in that group. Each of these CSV + TMCF
 grouping can then be written to the knowledge graph along with the statistical
 variables file.
+
+```bash
+mkdir output
+python3 worldbank.py --indicatorSchemaFile=<DESIRED INDICATOR CSV FILE> --fetchFromSource=<WHETHER TO FETCH FROM WDI WEBSITE>
+```
