@@ -1,0 +1,63 @@
+ApplicationDocsType_Lookup_ID	ApplicationDocsType_Lookup_Description
+1	Letter
+2	Label
+3	Review
+4	FDA Talk Paper
+5	FDA Press Release
+6	Patient Package Insert
+7	Dear Health Professional Letter
+8	Medication Guide
+9	Withdrawal Notice
+10	Other Important Information from FDA
+11	Consumer Information Sheet
+12	Exclusivity Letter
+13	Questions and Answers
+14	Other
+15	Patient Information Sheet
+16	Healthcare Professional Sheet
+17	Pediatric Statistical Review
+18	Pediatric Clinical Pharmacology Review
+19	REMS
+20	Pediatric Medical Review
+21	Summary Review
+22	Federal Register Notice
+23	Pediatric Written Request
+24	Pediatric Reissue
+25	Pediatric Amendment 1
+26	Pediatric Amendment 2
+27	Pediatric Amendment 3
+28	Pediatric Amendment 4
+29	Pediatric Amendment 5
+30	Pediatric Amendment 6
+31	Pediatric Amendment 7
+32	Pediatric Amendment 8
+33	Pediatric Amendment 9
+34	Pediatric Amendment 10
+35	Pediatric Amendment 11
+36	Pediatric Amendment 12
+37	Pediatric Amendment 13
+38	Pediatric Amendment 14
+39	Pediatric Amendment 15
+40	Pediatric Reissue Amendment 1
+41	Pediatric Reissue Amendment 2
+42	Pediatric Reissue Amendment 3
+43	Pediatric Reissue Amendment 4
+44	Pediatric Reissue Amendment 5
+45	Pediatric Reissue Amendment 6
+46	Pediatric Reissue Amendment 7
+47	Pediatric Reissue Amendment 8
+48	Pediatric Reissue Amendment 9
+49	Pediatric Reissue Amendment 10
+50	Pediatric Reissue Amendment 11
+51	Pediatric Reissue Amendment 12
+52	Pediatric Reissue Amendment 13
+53	Pediatric Reissue Amendment 14
+54	Pediatric Reissue Amendment 15
+55	Pediatric Memo
+56	Pediatric Other
+57	Pediatric CDTL Review
+58	Pediatric Medical Addendum
+59	Pediatric Medical Secondary Review
+60	Pediatric DD Summary Review
+61	Pediatric Addendum
+62	Pediatric Clinical Pharmacology Addendum

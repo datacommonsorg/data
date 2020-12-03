@@ -1,0 +1,113 @@
+NAME,DEFINITION,SHORT NAME,FDA CODE,NCI CONCEPT ID
+AURICULAR (OTIC),Administration to or by way of the ear.,OTIC,13,C38192
+BUCCAL,"Administration directed toward the cheek, generally from within the mouth.",BUCCAL,30,C38193
+CONJUNCTIVAL,"Administration to the conjunctiva, the delicate membrane that lines the eyelids and covers the exposed surface of the eyeball.",CONJUNC,68,C38194
+CUTANEOUS,Administration to the skin.,CUTAN,130,C38675
+DENTAL,Administration to a tooth or teeth.,DENTAL,38,C38197
+ELECTRO-OSMOSIS,Administration of through the diffusion of substance through a membrane in an electric field.,EL-OSMOS,357,C38633
+ENDOCERVICAL,Administration within the canal of the cervix uteri.  Synonymous with the term intracervical..,E-CERVIC,131,C38205
+ENDOSINUSIAL,Administration within the nasal sinuses of the head.,E-SINUS,133,C38206
+ENDOTRACHEAL,Administration directly into the trachea.,E-TRACHE,401,C38208
+ENTERAL,Administration directly into the intestines.,ENTER,313,C38209
+EPIDURAL,Administration upon or over the dura mater.,EPIDUR,9,C38210
+EXTRA‑AMNIOTIC,Administration to the outside of the membrane enveloping the fetus,X-AMNI,402,C38211
+EXTRACORPOREAL,Administration outside of the body.,X-CORPOR,57,C38212
+HEMODIALYSIS,Administration through hemodialysate fluid.,HEMO,140,C38200
+INFILTRATION,Administration that results in substances passing into tissue spaces or into cells.,INFIL,361,C38215
+INTERSTITIAL,Administration to or in the interstices of a tissue.,INTERSTIT,88,C38219
+INTRA-ABDOMINAL,Administration within the abdomen.,I-ABDOM,56,C38220
+INTRA-AMNIOTIC,Administration within the amnion.,I-AMNI,60,C38221
+INTRA-ARTERIAL,Administration within an artery or arteries.,I-ARTER,37,C38222
+INTRA-ARTICULAR,Administration within a joint.,I-ARTIC,7,C38223
+INTRABILIARY,"Administration within the bile, bile ducts or gallbladder.",I-BILI,362,C38224
+INTRABRONCHIAL,Administration within a bronchus.,I-BRONCHI,67,C38225
+INTRABURSAL,Administration within a bursa.,I-BURSAL,25,C38226
+INTRACARDIAC,Administration with the heart.,I-CARDI,27,C38227
+INTRACARTILAGINOUS,Administration within a cartilage; endochondral.,I-CARTIL,363,C38228
+INTRACAUDAL,Administration within the cauda equina.,I-CAUDAL,413,C38229
+INTRACAVERNOUS,"Administration within a pathologic cavity, such as  occurs in the lung in tuberculosis.",I-CAVERN,132,C38230
+INTRACAVITARY,"Administration within a non-pathologic cavity, such as that of the cervix, uterus, or penis, or such as that which is formed as the result of a wound.",I-CAVIT,23,C38231
+INTRACEREBRAL,Administration within the cerebrum.,I-CERE,404,C38232
+INTRACISTERNAL,Administration within the cisterna magna cerebellomedularis.,I-CISTERN,405,C38233
+INTRACORNEAL,Administration within the cornea (the transparent structure forming the anterior part of the fibrous tunic of the eye).,I-CORNE,406,C38234
+"INTRACORONAL, DENTAL",Administration of a drug within a portion of a tooth which is covered by enamel and which is separated from the roots by a slightly constricted region known as the neck.,I-CORONAL,117,C38217
+INTRACORONARY,Administration within the coronary arteries.,I-CORONARY,119,C38218
+INTRACORPORUS CAVERNOSUM,Administration within the dilatable spaces of the corporus cavernosa of the penis.,I-CORPOR,403,C38235
+INTRADERMAL,Administration within the dermis.,I-DERMAL,8,C38238
+INTRADISCAL,Administration within a disc.,I-DISCAL,121,C38239
+INTRADUCTAL,Administration within the duct of a gland.,I-DUCTAL,123,C38240
+INTRADUODENAL,Administration within the duodenum.,I-DUOD,47,C38241
+INTRADURAL,Administration within or beneath the dura.,I-DURAL,52,C38242
+INTRAEPIDERMAL,Administration within the epidermis.,I-EPIDERM,127,C38243
+INTRAESOPHAGEAL,Administration within the esophagus.,I-ESO,72,C38245
+INTRAGASTRIC,Administration within the stomach.,I-GASTRIC,46,C38246
+INTRAGINGIVAL,Administration within the gingivae.,I-GINGIV,307,C38247
+INTRAILEAL,"Administration within the distal portion of the small intestine, from the jejunum to the cecum.",I-ILE,365,C38249
+INTRALESIONAL,Administration within or introduced directly into a localized lesion.,I-LESION,42,C38250
+INTRALUMINAL,Administration within the lumen of a tube.,I-LUMIN,310,C38251
+INTRALYMPHATIC,Administration within the lymph.,I-LYMPHAT,352,C38252
+INTRAMEDULLARY,Administration within the marrow cavity of a bone.,I-MEDUL,408,C38253
+INTRAMENINGEAL,Administration within the meninges (the three membranes that envelope the brain and spinal cord).,I-MENIN,409,C38254
+INTRAMUSCULAR,Administration within a muscle.,IM,5,C28161
+INTRAOCULAR,Administration within the eye.,I-OCUL,36,C38255
+INTRAOVARIAN,Administration within the ovary.,I-OVAR,354,C38256
+INTRAPERICARDIAL,Administration within the pericardium.,I-PERICARD,314,C38257
+INTRAPERITONEAL,Administration within the peritoneal cavity.,I-PERITON,4,C38258
+INTRAPLEURAL,Administration within the pleura.,I-PLEURAL,43,C38259
+INTRAPROSTATIC,Administration within the prostate gland.,I-PROSTAT,61,C38260
+INTRAPULMONARY,Administration within the lungs or its bronchi.,I-PULMON,414,C38261
+INTRASINAL,Administration within the nasal or periorbital sinuses.,I-SINAL,10,C38262
+INTRASPINAL,Administration within the vertebral column.,I-SPINAL,22,C38263
+INTRASYNOVIAL,Administration within the synovial cavity of a joint.,I-SYNOV,19,C38264
+INTRATENDINOUS,Administration within a tendon.,I-TENDIN,49,C38265
+INTRATESTICULAR,Administration within the testicle.,I-TESTIC,110,C38266
+INTRATHECAL,"Administration within the cerebrospinal fluid at any level of the cerebrospinal axis, including injection into the cerebral ventricles.",IT,103,C38267
+INTRATHORACIC,Administration within the thorax (internal to the ribs); synonymous with the term endothoracic.,I-THORAC,6,C38207
+INTRATUBULAR,Administration within the tubules of an organ.,I-TUBUL,353,C38268
+INTRATUMOR,Administration within a tumor.,I-TUMOR,20,C38269
+INTRATYMPANIC,Administration within the aurus media.,I-TYMPAN,366,C38270
+INTRAUTERINE,Administration within the uterus.,I-UTER,28,C38272
+INTRAVASCULAR,Administration within a vessel or vessels.,I-VASC,21,C38273
+INTRAVENOUS,Administration within or into a vein or veins.,IV,2,C38276
+INTRAVENOUS BOLUS,Administration within or into a vein or veins all at once.,IV BOLUS,138,C38274
+INTRAVENOUS DRIP,Administration within or into a vein or veins over a sustained period of time.,IV DRIP,137,C38279
+INTRAVENTRICULAR,Administration within a ventricle.,I-VENTRIC,48,C38277
+INTRAVESICAL,Administration within the bladder.,I-VESIC,128,C38278
+INTRAVITREAL,Administration within the vitreous body of the eye.,I-VITRE,311,C38280
+IONTOPHORESIS,Administration by means of an electric current where ions of soluble salts migrate into the tissues of the body.,ION,55,C38203
+IRRIGATION,Administration to bathe or flush open wounds or body cavities.,IRRIG,32,C38281
+LARYNGEAL,Administration directly upon the larynx.,LARYN,364,C38282
+NASAL,Administration to the nose; administered by way of the nose.,NASAL,14,C38284
+NASOGASTRIC,"Administration through the nose and into the stomach, usually by means of a tube.",NG,71,C38285
+NOT APPLICABLE,Routes of administration are not applicable.,NA,312,C48623
+OCCLUSIVE DRESSING TECHNIQUE,Administration by the topical route which is then covered by a dressing which occludes the area.,OCCLUS,134,C38286
+OPHTHALMIC,Administration  to the external eye.,OPHTHALM,12,C38287
+ORAL,Administration to or by way of the mouth.,ORAL,1,C38288
+OROPHARYNGEAL,Administration directly to the mouth and pharynx.,ORO,410,C38289
+OTHER,Administration is different from others on this list.,OTHER,135,C38290
+PARENTERAL,"Administration by injection, infusion, or implantation.",PAREN,411,C38291
+PERCUTANEOUS,Administration through the skin.,PERCUT,113,C38676
+PERIARTICULAR,Administration around a joint.,P-ARTIC,45,C38292
+PERIDURAL,Administration to the outside of the dura mater of the spinal cord..,P-DURAL,50,C38677
+PERINEURAL,Administration surrounding a nerve or nerves.,P-NEURAL,412,C38293
+PERIODONTAL,Administration around a tooth.,P-ODONT,40,C38294
+RECTAL,Administration to the rectum.,RECTAL,16,C38295
+RESPIRATORY (INHALATION),Administration within the respiratory tract by inhaling orally or nasally for local or systemic effect.,RESPIR,136,C38216
+RETROBULBAR,Administration behind the pons or behind the eyeball.,RETRO,34,C38296
+SOFT TISSUE,Administration into any soft tissue.,SOFT TIS,109,C38198
+SUBARACHNOID,Administration beneath the arachnoid.,S-ARACH,66,C38297
+SUBCONJUNCTIVAL,Administration beneath the conjunctiva.,S-CONJUNC,96,C38298
+SUBCUTANEOUS,Administration beneath the skin; hypodermic.  Synonymous with the term SUBDERMAL.,SC,3,C38299
+SUBLINGUAL,Administration beneath the tongue.,SL,24,C38300
+SUBMUCOSAL,Administration beneath the mucous membrane.,S-MUCOS,53,C38301
+TOPICAL,Administration to a particular spot on the outer surface of the body.  The E2B term TRANSMAMMARY is a subset of the term TOPICAL.,TOPIC,11,C38304
+TRANSDERMAL,Administration through the dermal layer of the skin to the systemic circulation by diffusion.,T-DERMAL,358,C38305
+TRANSMUCOSAL,Administration across the mucosa.,T-MUCOS,122,C38283
+TRANSPLACENTAL,Administration through or across the placenta.,T-PLACENT,415,C38307
+TRANSTRACHEAL,Administration through the wall of the trachea.,T-TRACHE,355,C38308
+TRANSTYMPANIC,Administration across or through the tympanic cavity.,T-TYMPAN,124,C38309
+UNASSIGNED,Route of administration has not yet been assigned.,UNAS,400,C38310
+UNKNOWN,Route of administration is unknown.,UNKNOWN,139,C38311
+URETERAL,Administration into the ureter.,URETER,112,C38312
+URETHRAL,Administration into the urethra.,URETH,17,C38271
+VAGINAL,Administration into the vagina.,VAGIN,15,C38313

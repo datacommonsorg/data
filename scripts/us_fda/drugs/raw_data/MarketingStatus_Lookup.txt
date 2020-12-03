@@ -1,0 +1,5 @@
+MarketingStatusID	MarketingStatusDescription
+1	Prescription
+2	Over-the-counter
+3	Discontinued
+4	None (Tentative Approval)

@@ -1,0 +1,12 @@
+dbSNP = 147
+	source for variant and residue positions and alleles
+
+Human genome reference sequence = GRCh38.p7
+	source for gene locations
+
+NCBI Gene = 105
+	source for other gene information
+
+HapMap = 2010-08_phaseII+III
+	source for variant allele frequency data
+

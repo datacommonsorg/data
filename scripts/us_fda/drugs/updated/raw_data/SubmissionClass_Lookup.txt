@@ -1,0 +1,28 @@
+SubmissionClassCodeID	SubmissionClassCode	SubmissionClassCodeDescription
+1	BIOEQUIV	Bioequivalence
+2	EFFICACY	Efficacy
+3	LABELING	Labeling
+4	MANUF (CMC)	Manufacturing (CMC)
+5	N/A	Not Applicable
+6	S	Supplement
+7	TYPE 1	Type 1 - New Molecular Entity
+8	TYPE 1/4	Type 1 - New Molecular Entity and Type 4 - New Combination
+9	TYPE 2	Type 2 - New Active Ingredient
+10	TYPE 2/3	Type 2 - New Active Ingredient and Type 3 - New Dosage Form
+11	TYPE 2/4	Type 2 New Active Ingredient and Type 4 New Combination
+12	TYPE 3	Type 3 - New Dosage Form
+13	TYPE 3/4	Type 3 - New Dosage Form and Type 4 - New Combination
+14	TYPE 4	Type 4 - New Combination
+15	TYPE 5	Type 5 - New Formulation or New Manufacturer
+16	TYPE 6	Type 6 - New Indication (no longer used)
+17	TYPE 7	Type 7 - Drug Already Marketed without Approved NDA
+18	TYPE 8	Type 8 - Partial Rx to OTC Switch
+19	UNKNOWN	
+20	Unspecified	
+21	REMS	REMS
+22	TYPE 10	Type 10 - New Indication Submitted as Distinct NDA - Not Consolidated
+23	MEDGAS	Medical Gas
+24	TYPE 9	Type 9 - New Indication Submitted as Distinct NDA, Consolidated with Original NDA after Approval
+25	TYPE 9- BLA	Type 9 - New indication submitted as distinct BLA, consolidated
+26	TYPE 4/5	
+27	TYPE 10- BLA	

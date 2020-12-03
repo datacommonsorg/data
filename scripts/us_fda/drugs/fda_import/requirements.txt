@@ -1,0 +1,6 @@
+chembl-webresource-client 0.10.2
+func-timeout              4.3.5 
+pip install chembl_webresource_client
+pip install func-timeout
+pandas
+re
