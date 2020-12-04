@@ -51,8 +51,15 @@ Node: dcid:consumedThing
 name: "consumedThing"
 typeOf: schema:Property
 domainIncludes: dcs:Consumption
-rangeIncludes: dcs:PublicUtilityType
+rangeIncludes: dcs:PublicUtility
 description: "Type of consumption, such as energy."
+
+Node:dcid:producedThing
+name: "producedThing"
+typeOf: schema:Property
+domainIncludes: dcs:Production
+rangeIncludes: schema:Product, dcs:EconomicProductEnum
+description: "Something that is produced, such as electricity."
 
 Node: dcid:consumerAge
 name: "consumerAge"
@@ -67,20 +74,47 @@ typeOf: schema:Class
 subClassOf: schema:Thing
 description: "The usage or consumption of something."
 
-Node: dcid:PublicUtilityType
-name: "PublicUtilityType"
+Node: dcid:Production
+name: "Production"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "Production is a process of combining various material inputs and immaterial inputs (plans, know-how) in order to make something for consumption (output)."
+descriptionUrl: "https://en.wikipedia.org/wiki/Production_(economics)"
+
+Node: dcid:PublicUtility
+name: "PublicUtility"
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 description: "Type of public utility, like eletricity, energy."
 
 Node: dcid:Electricity
 name: "Electricity"
-typeOf: schema:PublicUtilityType
+typeOf: schema:Class
+subClassOf: dcs:PublicUtility
+
+Node: dcid:ElectricityFromOilGasOrCoalSources
+name: "ElectricityFromOilGasOrCoalSources"
+typeOf: schema:Class
+subClassOf: dcs:Electricity
+description: "Electricity produced from oil, gas, or coal."
+
+Node: dcid:ElectricityFromNuclearSources
+name: "ElectricityFromNuclearSources"
+typeOf: schema:Class
+subClassOf: dcs:Electricity
+description: "Electricity produced from nuclear sources."
 
 Node: dcid:Energy
 name: "Energy"
-typeOf: schema:PublicUtilityType
+typeOf: schema:Class
+subClassOf: dcs:PublicUtility
 description: "Consumable energy of different forms (electrical, nuclear, etc.)."
+
+Node: dcid:RenewableEnergy
+name: "RenewableEnergy"
+typeOf: schema:Class
+subClassOf: dcs:Energy
+description: "Energy produced from renewable sources (solar panels, wind turbines, etc.)."
 
 Node: dcid:EconomicActivity
 name: "EconomicActivity"
@@ -148,6 +182,10 @@ rangeIncludes: dcs:ExpenditureTypeEnum
 Node: dcid:EducationExpenditure
 name: "EducationExpenditure"
 typeOf: dcs:ExpenditureTypeEnum
+
+Node: dcid:TertiaryEducationExpenditure
+name: "TertiaryEducationExpenditure"
+typeOf: dcs:EducationExpenditure
 
 Node: dcid:MilitaryExpenditure
 name: "MilitaryExpenditure"
@@ -263,3 +301,36 @@ typeOf: dcs:MedicalConditionIncidentTypeEnum
 name: "SevereWasting"
 description: "A severe condition of wasting, the process by which a debilitating disease causes muscle and fat tissue to "waste" away. Wasting is sometimes referred to as "acute malnutrition" because it is believed that episodes of wasting have a short duration, in contrast to stunting, which is regarded as chronic malnutrition."
 descriptionUrl: "https://en.wikipedia.org/wiki/Wasting"
+
+Node: dcid:residenceCharacteristic
+name: "residenceCharacteristic"
+typeOf: schema:Property
+domainIncludes: schema:Person
+rangeIncludes: dcs:ResidenceCharacteristicEnum
+
+Node: dcid:ResidenceCharacteristicEnum
+name: "ResidenceCharacteristicEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+
+Node: dcid:LessThan5MetersAboveSeaLevel
+name: "LessThan5MetersAboveSeaLevel"
+typeOf: dcs:ResidenceCharacteristicEnum
+description: "Describes a place that is less than 5 meters above sea level."
+
+Node: dcid:MobileCellularSubscription
+name: "MobileCellularSubscription"
+typeOf: dcs:ConsumerGoodsAndServices
+description: "A mobile or cellular subscription plan."
+
+Node: dcid:rainfall
+name: "rainfall"
+typeOf: schema:Property
+domainIncludes: schema:Place
+rangeIncludes: dcs:Quantity
+
+Node: dcid:LiveBirth
+name: "LiveBirth"
+typeOf: dcs:MedicalEventEnum
+description: "The complete expulsion or extraction from its mother of a product of conception, irrespective of the duration of the pregnancy, which, after such separation, breathes or shows any other evidence of life such as beating of the heart, pulsation of the umbilical cord, or definite movement of voluntary muscles, whether or not the umbilical cord has been cut or the placenta is attached."
+descriptionurl: "https://www.who.int/data/gho/indicator-metadata-registry/imr-details/26"
