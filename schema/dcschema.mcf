@@ -494,7 +494,7 @@ dcid: "beaProduct"
 name: "beaProduct"
 rangeIncludes: dcid:EconomicProductEnum
 typeOf: dcid:Property
-domainIncludes: dcid:Product
+domainIncludes: schema:Product
 
 Node: dcid:grossDomesticProduct
 typeOf: schema:Property
