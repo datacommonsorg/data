@@ -2352,6 +2352,13 @@ description: "Considered to be therapeutically equivalent to other drugs also co
 descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
 specializationOf: dcs:TherapeuticEquivalenceCodeAT
 
+Node: dcid:TherapeuticEquivalenceCodeAT3
+typeOf: TherapeuticEquivalenceCodeEnum
+name: "TherapeuticEquivalenceCodeAT3"
+description: "Considered to be therapeutically equivalent to other drugs also coded with AT3."
+descriptionURL: "https://www.fda.gov/drugs/development-approval-process-drugs/orange-book-preface#TEC"
+specializationOf: dcs:TherapeuticEquivalenceCodeAT
+
 Node: dcid:TherapeuticEquivalenceCodeBC
 typeOf: TherapeuticEquivalenceCodeEnum
 name: "TherapeuticEquivalenceCodeBC"
@@ -2503,4 +2510,3 @@ typeOf: dcs:AntibodyTypeEnum
 name: "DarpinAntibody "
 description: "DARPins (an acronym for designed ankyrin repeat proteins) are genetically engineered antibody mimetic proteins typically exhibiting highly specific and high-affinity target protein binding."
 descriptionUrl: "https://en.wikipedia.org/wiki/DARPin"
-
