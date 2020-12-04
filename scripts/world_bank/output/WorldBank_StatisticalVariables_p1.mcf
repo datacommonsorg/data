@@ -17,7 +17,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:mortalityRate
-measurementDenominator: dcs:Count_BirthEvent_Live
+measurementDenominator: dcs:Count_BirthEvent_LiveBirth
 age: dcs:YearsUpto4
 
 
@@ -28,7 +28,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_15YearsOrMore
+measurementDenominator: dcs:Count_Person_15OrMoreYears
 healthBehavior: dcs:Smoking
 age: dcs:Years15Onwards
 
@@ -40,7 +40,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_15YearsOrMore_Female
+measurementDenominator: dcs:Count_Person_15OrMoreYears_Female
 healthBehavior: dcs:Smoking
 age: dcs:Years15Onwards
 gender: dcs:Female
@@ -53,7 +53,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_15YearsOrMore_Male
+measurementDenominator: dcs:Count_Person_15OrMoreYears_Male
 healthBehavior: dcs:Smoking
 age: dcs:Years15Onwards
 gender: dcs:Male
@@ -66,7 +66,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Years20To79
+measurementDenominator: dcs:Count_Person_20To79Years
 healthOutcome: dcs:Diabetes
 age: dcs:Years20To79
 
@@ -80,16 +80,6 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person
 medicalStatus: dcs:LiveBirth
-
-
-Node: dcid:WorldBank/SP_DYN_CDRT_IN
-name: "Death rate, crude (per 1,000 people)"
-description: "Crude death rate indicates the number of deaths occurring during the year, per 1,000 population estimated at midyear. Subtracting the crude death rate from the crude birth rate provides the rate of natural increase, which is equal to the rate of population change in the absence of migration. (1) United Nations Population Division. World Population Prospects: 2019 Revision. (2) Census reports and other statistical publications from national statistical offices, (3) Eurostat: Demographic Statistics, (4) United Nations Statistical Division. Population and Vital Statistics Report (various years), (5) U.S. Census Bureau: International Database, and (6) Secretariat of the Pacific Community: Statistics and Demography Programme."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:MortalityEvent
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person
 
 
 Node: dcid:WorldBank/SP_DYN_LE00_FE_IN
@@ -110,21 +100,6 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:lifeExpectancy
 gender: dcs:Male
-
-
-Node: dcid:WorldBank/AG_LND_PRCP_MM
-name: "Average precipitation in depth (mm per year)"
-description: "Average precipitation is the long-term average in depth (over space and time) of annual precipitation in the country. Precipitation is defined as any kind of water that falls from clouds as a liquid or a solid. Food and Agriculture Organization, electronic files and web site."
-typeOf: dcs:StatisticalVariable
-statType: dcs:meanValue
-measuredProperty: dcs:rainfall
-
-
-Node: dcid:WorldBank/AG_SRF_TOTL_K2
-name: "Surface area (sq. km)"
-description: "Surface area is a country's total area, including areas under inland bodies of water and some coastal waterways. Food and Agriculture Organization, electronic files and web site."
-typeOf: dcs:StatisticalVariable
-measuredProperty: dcs:area
 
 
 Node: dcid:WorldBank/EG_ELC_FOSL_ZS
@@ -182,41 +157,6 @@ measurementDenominator: dcs:Count_Person
 productType: dcs:MobileCellularSubscription
 
 
-Node: dcid:WorldBank/SE_TER_ENRR
-name: "School enrollment, tertiary (% gross)"
-description: "Gross enrollment ratio is the ratio of total enrollment, regardless of age, to the population of the age group that officially corresponds to the level of education shown. Tertiary education, whether or not to an advanced research qualification, normally requires, as a minimum condition of admission, the successful completion of education at the secondary level. UNESCO Institute for Statistics (http://uis.unesco.org/)"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person
-levelOfSchool: dcs:TertiaryEducation
-
-
-Node: dcid:WorldBank/SE_TER_ENRR_FE
-name: "School enrollment, tertiary, female (% gross)"
-description: "Gross enrollment ratio is the ratio of total enrollment, regardless of age, to the population of the age group that officially corresponds to the level of education shown. Tertiary education, whether or not to an advanced research qualification, normally requires, as a minimum condition of admission, the successful completion of education at the secondary level. UNESCO Institute for Statistics (http://uis.unesco.org/)"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Female
-levelOfSchool: dcs:TertiaryEducation
-gender: dcs:Female
-
-
-Node: dcid:WorldBank/SE_TER_ENRR_MA
-name: "School enrollment, tertiary, male (% gross)"
-description: "Gross enrollment ratio is the ratio of total enrollment, regardless of age, to the population of the age group that officially corresponds to the level of education shown. Tertiary education, whether or not to an advanced research qualification, normally requires, as a minimum condition of admission, the successful completion of education at the secondary level. UNESCO Institute for Statistics (http://uis.unesco.org/)"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Male
-levelOfSchool: dcs:TertiaryEducation
-gender: dcs:Male
-
-
 Node: dcid:WorldBank/SE_XPD_TERT_ZS
 name: "Expenditure on tertiary education (% of government expenditure on education)"
 description: "Expenditure on tertiary education is expressed as a percentage of total general government expenditure on education. General government usually refers to local, regional and central governments. UNESCO Institute for Statistics (http://uis.unesco.org/)"
@@ -224,8 +164,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:EconomicActivity
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
-measurementDenominator: dcs:Amount_EconomicActivity_ExpenditureActivity_EducationExpense
+measurementDenominator: dcs:Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government
 activitySource: dcs:ExpenditureActivity
-expenditureType: dcs:TertiaryEducationExpense
+expenditureType: dcs:TertiaryEducationExpenditure
 remunerator: dcs:Government
 
