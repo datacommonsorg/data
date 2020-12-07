@@ -138,7 +138,7 @@ Q15188,True,Nilgiris,Nilgiris district
 Q15186,True,Perambalur,Perambalur district
 Q15190,True,Pudukkottai,Pudukkottai district
 Q15191,True,Ramanathapuram,Ramanathapuram district
-Q66659623,False,Ranipet,Ranipet district
+Q66659623,True,Ranipet,Ranipet district
 Q15192,True,Salem,Salem district
 Q15195,True,Sivaganga,Sivaganga District
 Q75094121,True,Tenkasi,Tenkasi district
@@ -149,7 +149,7 @@ Q15197,True,Thiruvarur,Tiruvarur district
 Q15198,True,Thoothukkudi,Thoothukudi district
 Q15201,True,Tiruchirappalli,Tiruchirappalli district
 Q15200,True,Tirunelveli,Tirunelveli district
-Q66659621,False,Tirupathur,Tirupathur district
+Q66659621,True,Tirupathur,Tirupathur district
 Q15202,True,Tiruppur,Tirupur district
 Q15207,True,Tiruvannamalai,Tiruvannamalai district
 Q15206,True,Vellore,Vellore district
@@ -257,14 +257,14 @@ Q681821,True,Wokha,Wokha district
 Q2091461,True,Zunheboto,Zunheboto district
 Q1947322,True,Aizawl,Aizawl district
 Q1965256,True,Champhai,Champhai district
-Q89360042,False,Hnahthial,Hnahthial district
-Q89371656,False,Khawzawl,Khawzawl district
+Q89360042,True,Hnahthial,Hnahthial district
+Q89371656,True,Khawzawl,Khawzawl district
 Q1947343,True,Kolasib,Kolasib district
 Q2086209,True,Lawngtlai,Lawngtlai district
 Q1947352,True,Lunglei,Lunglei district
 Q751531,True,Mamit,Mamit district
 Q1821714,True,Saiha,Saiha District
-Q89371650,False,Saitual,Saitual district
+Q89371650,True,Saitual,Saitual district
 Q2086190,True,Serchhip,Serchhip District
 Q2085455,True,East Garo Hills,East Garo Hills district
 Q15923776,True,East Jaintia Hills,East Jaintia Hills district
@@ -454,9 +454,9 @@ Q1117086,True,Samba,Samba district
 Q2073646,True,Shopiyan,Shopian district
 Q1506029,True,Srinagar,Srinagar district
 Q1947311,True,Udhampur,Udhampur district
-Q3710724,False,Bilaspur,Bilaspur District
+Q3710724,True,Bilaspur,Bilaspur District
 Q1060614,True,Chamba,Chamba district
-Q5645337,False,Hamirpur,Hamirpur District
+Q5645337,True,Hamirpur,Hamirpur District
 Q727232,True,Kangra,Kangra district
 Q1862950,True,Kinnaur,Kinnaur district
 Q2980880,True,Kullu,Kullu district
@@ -604,7 +604,7 @@ Q2373368,True,Lower Dibang Valley,Lower Dibang Valley district
 Q13602925,True,Lower Siang,Lower Siang district
 Q15436,True,Lower Subansiri,Lower Subansiri district
 Q21559824,True,Namsai,Namsai district
-Q61439260,False,Pakke Kessang,Pakke-Kessang district
+Q61439260,True,Pakke Kessang,Pakke-Kessang district
 Q15432,True,Papum Pare,Papum Pare district
 Q63563625,True,Shi Yomi,Shi Yomi district
 Q18642331,True,Siang,Siang district
