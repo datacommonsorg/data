@@ -18,6 +18,7 @@
 # Please see README.md for more information.
 
 # State ISO Code -> District Name -> WikidataId
+
 DISTRICTS = {
    "WB":{
       "Alipurduar":"Q4726845",

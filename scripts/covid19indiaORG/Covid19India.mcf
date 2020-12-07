@@ -4,4 +4,4 @@ populationType: dcs:MedicalConditionIncident
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 medicalStatus: dcs:ConfirmedCase
-medicalCondition: dcs:COVID_19
+incidentType: dcs:COVID_19

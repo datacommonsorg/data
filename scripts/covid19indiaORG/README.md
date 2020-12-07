@@ -1,6 +1,6 @@
 # Importing covid19india.org Data Into Data Commons
 
-Author: @edumorales
+Author: @edumorlom
 
 ## Table of Contents
 
@@ -43,7 +43,7 @@ The entire dataset is broken down into:
 
 #### State
 
-This is further broken down into District.
+Each State is further broken down into District.
 
 ## Import Artifacts
 
@@ -71,17 +71,17 @@ The map of State->District->wikidataId was generated using the following:
 
 ### Output CSV
 
-The output CSV after running the Covid19IndiaORG script.
+The output CSV after running the Covid19India script.
 
 - [output.csv](output/output.csv)
 
 ### Scripts
 
-The Covid19IndiaORG script will call the covid19india.org API for each state in Config.py.
+The Covid19India script will call the covid19india.org API for each state in Config.py.
 The covid19india.org APIs return return a JSON keyed by districtName->date.
 Using this JSON, we can generate a CSV file using Pandas.
 
-- [Covid19IndiaORG.py](Covid19IndiaORG.py)
+- [Covid19India.py](Covid19India.py)
 
 ### Unit Tests
 

@@ -13,13 +13,14 @@
 # limitations under the License.
 
 import unittest
+from io import StringIO
 from os import path
 from typing import Dict
 import pandas as pd
-from Covid19IndiaORG import Covid19IndiaORG
+from Covid19India import Covid19India
 
 
-class TestCovid19IndiaORG(unittest.TestCase):
+class TestCovid19India(unittest.TestCase):
 
     def test1(self):
         """Simple test with both state and district data for two states."""
@@ -50,29 +51,28 @@ class TestCovid19IndiaORG(unittest.TestCase):
         @returns assertion that output.csv == expected.csv.
         """
 
-        output_path: str = path.join(dir_path, "output.csv")
+        # The expected output is found within the directory.
         expected_path: str = path.join(dir_path, "expected.csv")
 
         # Make sure the expected.csv file exists.
         if not path.exists(expected_path):
             self.fail(expected_path + " doesn't exist!")
 
-        # Generate the output CSV file.
-        Covid19IndiaORG(state_to_source, output_path)
+        # Read the expected.csv value.
+        f_expected = open(expected_path, 'rt')
+        expected_csv = f_expected.read()
 
-        # Make sure the output.csv file exists.
-        if not path.exists(output_path):
-            self.fail(output_path + " doesn't exist!")
+        # Run the script and get write the output to a StringIO.
+        f_actual = StringIO()
+        Covid19India(state_to_source=state_to_source,
+                     output=f_actual)
+        actual_csv = f_actual.getvalue()
 
-        # Read the CSV file and generate a DataFrame with it.
-        actual_df = pd.read_csv(output_path)
-        expected_df = pd.read_csv(expected_path)
+        # Assert both CSVs are equal.
+        self.assertEqual(expected_csv, actual_csv)
 
-        # Assert that both dataframes are equal, regardless of order and dtype.
-        pd.testing.assert_frame_equal(
-            actual_df.sort_index(axis=1),
-            expected_df.sort_index(axis=1),
-            check_dtype=False)
+        # Close opened file.
+        f_expected.close()
 
 
 if __name__ == '__main__':
