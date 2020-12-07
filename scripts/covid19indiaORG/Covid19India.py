@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from io import StringIO
 from urllib.request import urlopen
 from json import load, loads
 from typing import Dict
@@ -125,7 +126,7 @@ def _get_state_table(iso_code: str, state_data: Dict[str, Dict[str, int]]):
 
     return state_table
 
-def Covid19IndiaORG(state_to_source: Dict[str, str] = None, output: str = "output.csv"):
+def Covid19India(state_to_source: Dict[str, str], output: str):
     """
     For all states in the Config.STATES, query the API
     and generate a DataFrame table for each state,
@@ -133,10 +134,6 @@ def Covid19IndiaORG(state_to_source: Dict[str, str] = None, output: str = "outpu
     Combine each state DataFrame table into india_table.
     Clean and then export india_table as a CSV file.
     """
-
-    # If no data source is given, use the default Config.STATE_APIS
-    if not state_to_source:
-        state_to_source = STATE_APIS
 
     # A DataFrame containing ALL merged state and district data.
     india_table = pd.DataFrame({})
@@ -148,6 +145,8 @@ def Covid19IndiaORG(state_to_source: Dict[str, str] = None, output: str = "outpu
         downloaded_data: Dict[str, Dict] = _download_data(data_source)
 
         # If there is no wikidataId for the state, skip it.
+        # Edge case in case the input is not present in the dictionary.
+        # Not typical, but if that's the case, skip the state.
         if iso_code not in STATES:
             continue
 
@@ -160,8 +159,16 @@ def Covid19IndiaORG(state_to_source: Dict[str, str] = None, output: str = "outpu
         # Store the DataFrame for this state under the india table.
         india_table = pd.concat([india_table, state_table])
 
-    # Export the main table containg ALL the data as a csv.
-    india_table.to_csv(output, index=True)
+    # Ensure the order of the column names, for testing purposes.
+    india_table = india_table.reindex(sorted(india_table.columns), axis=1)
+
+    # If output is StringIO, return the CSV as a string.
+    if isinstance(output, StringIO):
+        csv = india_table.to_csv(index=True)
+        output.write(csv)
+    else:
+        # Otherwise, it means it's a path. Export to path.
+        csv = india_table.to_csv(output, index=True)
 
 if __name__ == '__main__':
-    Covid19IndiaORG()
+    Covid19India(state_to_source=STATE_APIS, output="output.csv")
