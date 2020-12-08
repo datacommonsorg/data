@@ -175,7 +175,7 @@ class SeriesInfo:
 
     def get_pop_type(self) -> str:
         """Returns the DCID of the population type for this series."""
-        return f"BLS_{self.item_code}"
+        return f"BLSItem/{self.item_code}"
 
     def get_consumer(self) -> str:
         """Returns the DCID of the consumer for this series."""
@@ -296,7 +296,7 @@ def generate_pop_type_enums(url: str, targets: Set[str]) -> Set[str]:
 
     generated = set()
     for row in df.itertuples(index=False):
-        generated.add((f"Node: dcid:BLS_{row.item_code}\n"
+        generated.add((f"Node: dcid:BLSItem/{row.item_code}\n"
                        "typeOf: dcs:EconomicProductEnum\n"
                        f"name: \"{row.item_name}\"\n\n"))
     return generated

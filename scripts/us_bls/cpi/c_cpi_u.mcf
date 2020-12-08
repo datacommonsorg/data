@@ -1,261 +1,261 @@
-Node: dcid:ConsumerPriceIndex_BLS_SETA01_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAE2_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SETA01
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SETA01."
-
-Node: dcid:ConsumerPriceIndex_BLS_SA0_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SA0
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SA0."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAC_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAC
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAC."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAT_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAT
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAT."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAF11_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAF11
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAF11."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAF_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAF
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAF."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAE2_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAE2
+populationType: dcs:BLSItem/SAE2
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
 description: "The series ID is SUUR0000SAE2."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAR_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAM_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAR
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAR."
-
-Node: dcid:ConsumerPriceIndex_BLS_SEFV_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SEFV
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SEFV."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAH1_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAH1
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAH1."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAT1_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAT1
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAT1."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAN_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAN
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAN."
-
-Node: dcid:ConsumerPriceIndex_BLS_SETG_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SETG
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SETG."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAG_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAG
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAG."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAH2_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAH2
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAH2."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAM_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAM
+populationType: dcs:BLSItem/SAM
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
 description: "The series ID is SUUR0000SAM."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAE_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAG_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAE
+populationType: dcs:BLSItem/SAG
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAE."
+description: "The series ID is SUUR0000SAG."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAH_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SEFV_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAH
+populationType: dcs:BLSItem/SEFV
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAH."
+description: "The series ID is SUUR0000SEFV."
 
-Node: dcid:ConsumerPriceIndex_BLS_SA0E_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SETG_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SA0E
+populationType: dcs:BLSItem/SETG
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SA0E."
+description: "The series ID is SUUR0000SETG."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAH3_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAF116_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAH3
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAH3."
-
-Node: dcid:ConsumerPriceIndex_BLS_SA0L1E_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SA0L1E
-measurementQualifier: dcs:BLSSeasonallyUnadjusted
-measuredProperty: dcs:consumerPriceIndex
-statType: dcs:measuredValue
-consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SA0L1E."
-
-Node: dcid:ConsumerPriceIndex_BLS_SAF116_UrbanConsumer_BLSSeasonallyUnadjusted
-typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAF116
+populationType: dcs:BLSItem/SAF116
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
 description: "The series ID is SUUR0000SAF116."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAS_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SETA01_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAS
+populationType: dcs:BLSItem/SETA01
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAS."
+description: "The series ID is SUUR0000SETA01."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAF1_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAC_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAF1
+populationType: dcs:BLSItem/SAC
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAF1."
+description: "The series ID is SUUR0000SAC."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAE1_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAE1_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAE1
+populationType: dcs:BLSItem/SAE1
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
 description: "The series ID is SUUR0000SAE1."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAM1_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAF_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAM1
+populationType: dcs:BLSItem/SAF
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAM1."
+description: "The series ID is SUUR0000SAF."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAA_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAS_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAA
+populationType: dcs:BLSItem/SAS
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
-description: "The series ID is SUUR0000SAA."
+description: "The series ID is SUUR0000SAS."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAD_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAH1_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAD
+populationType: dcs:BLSItem/SAH1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAH1."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SA0_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SA0
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SA0."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SA0E_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SA0E
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SA0E."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAF11_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAF11
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAF11."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAN_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAN
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAN."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAH2_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAH2
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAH2."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAE_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAE
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAE."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAD_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAD
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
 description: "The series ID is SUUR0000SAD."
 
-Node: dcid:ConsumerPriceIndex_BLS_SAM2_UrbanConsumer_BLSSeasonallyUnadjusted
+Node: dcid:ConsumerPriceIndex_BLSItem/SAT_UrbanConsumer_BLSSeasonallyUnadjusted
 typeOf: dcs:StatisticalVariable
-populationType: dcs:BLS_SAM2
+populationType: dcs:BLSItem/SAT
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAT."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAR_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAR
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAR."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAM2_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAM2
 measurementQualifier: dcs:BLSSeasonallyUnadjusted
 measuredProperty: dcs:consumerPriceIndex
 statType: dcs:measuredValue
 consumer: dcs:UrbanConsumer
 description: "The series ID is SUUR0000SAM2."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SA0L1E_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SA0L1E
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SA0L1E."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAF1_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAF1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAF1."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAH_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAH
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAH."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAT1_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAT1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAT1."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAM1_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAM1
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAM1."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAA_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAA
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAA."
+
+Node: dcid:ConsumerPriceIndex_BLSItem/SAH3_UrbanConsumer_BLSSeasonallyUnadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSItem/SAH3
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
+measuredProperty: dcs:consumerPriceIndex
+statType: dcs:measuredValue
+consumer: dcs:UrbanConsumer
+description: "The series ID is SUUR0000SAH3."
 

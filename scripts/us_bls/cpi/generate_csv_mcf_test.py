@@ -42,10 +42,10 @@ class TestGenerateCSVMCF(unittest.TestCase):
         self.assertTrue(info.is_monthly())
         self.assertFalse(info.is_semiannually())
         self.assertEqual('BLSUnchained', info.get_mmethod())
-        self.assertEqual('BLS_SEFV02', info.get_pop_type())
+        self.assertEqual('BLSItem/SEFV02', info.get_pop_type())
         self.assertEqual('UrbanConsumer', info.get_consumer())
         self.assertEqual('BLSSeasonallyUnadjusted', info.get_mqual())
-        self.assertEqual(('ConsumerPriceIndex_BLS_SEFV02_UrbanConsumer'
+        self.assertEqual(('ConsumerPriceIndex_BLSItem/SEFV02_UrbanConsumer'
                           '_BLSSeasonallyUnadjusted'), info.get_statvar())
         self.assertEqual(('IndexPointBasePeriodDecember2009Equals100',
                           'The reference base is December 2009 equals 100.'),
@@ -90,10 +90,10 @@ class TestGenerateCSVMCF(unittest.TestCase):
 
     def test_generate_statvar(self):
         self.assertEqual(
-            ('Node: dcid:ConsumerPriceIndex_BLS_SEFV02_'
+            ('Node: dcid:ConsumerPriceIndex_BLSItem/SEFV02_'
              'UrbanWageEarnerAndClericalWorker_BLSSeasonallyUnadjusted\n'
              'typeOf: dcs:StatisticalVariable\n'
-             'populationType: dcs:BLS_SEFV02\n'
+             'populationType: dcs:BLSItem/SEFV02\n'
              'measurementQualifier: dcs:BLSSeasonallyUnadjusted\n'
              'measuredProperty: dcs:consumerPriceIndex\n'
              'statType: dcs:measuredValue\n'
