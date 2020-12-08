@@ -494,7 +494,7 @@ dcid: "beaProduct"
 name: "beaProduct"
 rangeIncludes: dcid:EconomicProductEnum
 typeOf: dcid:Property
-domainIncludes: dcid:Product
+domainIncludes: schema:Product
 
 Node: dcid:grossDomesticProduct
 typeOf: schema:Property
@@ -1347,23 +1347,25 @@ name: "DeathPer1000Births"
 dcid: "DeathPer1000Births"
 description: "A unit death per one thousand births."
 
-Node: USDollar
+Node: dcid:USDollar
 typeOf: dcs:CurrencyUnitOfMeasure
 name: "USDollar"
-dcid: "USDollar"
 description: "The official currency of the United States of America."
 
-Node: Euro
+Node: dcid:Euro
 typeOf: dcs:CurrencyUnitOfMeasure
 name: "Euro"
-dcid: "Euro"
 description: "The official currency of the European Union."
 
-Node: CanadianDollar
+Node: dcid:CanadianDollar
 typeOf: dcs:CurrencyUnitOfMeasure
 name: "CanadianDollar"
-dcid: "CanadianDollar"
 description: "The official currency of Canada."
+
+Node: dcid:IndianRupee
+typeOf: dcs:CurrencyUnitOfMeasure
+name: "IndianRupee"
+description: "The official currency of India."
 
 Node: dcid:NationalCurrency
 typeOf: dcs:CurrencyUnitOfMeasure
@@ -2375,3 +2377,21 @@ typeOf: schema:Class
 subClassOf: schema:Place
 description: "The place where passengers and cargo are exchanged between vehicles or/and between transport modes."
 descriptionUrl: "https://en.wikipedia.org/wiki/Transport_hub"
+
+Node: dcid:HumanSettlementClassificationEnum
+name: "HumanSettlementClassificationEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "Enumeration of different types of human settlements, such as Urban, Rural, etc."
+
+Node: dcid:Urban
+name: "Urban"
+typeOf: dcs:HumanSettlementClassificationEnum
+description: "An urban area, or built-up area, is a human settlement with a high population density and infrastructure of built environment."
+descriptionUrl: "https://en.wikipedia.org/wiki/Urban_area"
+
+Node: dcid:Rural
+name: "Rural"
+typeOf: dcs:HumanSettlementClassificationEnum
+description: "A geographic area that is located outside towns and cities, typically with low population density and small settlements."
+descriptionUrl: "https://en.wikipedia.org/wiki/Rural_area"
