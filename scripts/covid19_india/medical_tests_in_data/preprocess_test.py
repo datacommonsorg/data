@@ -39,6 +39,20 @@ class TestPreprocessCSVTest(unittest.TestCase):
 
         self.assertTrue(same)
 
+    def test_create_csv_remove_duplicate_dates(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            json_file = os.path.join(module_dir_, 'test_data/test2_data.json')
+            expected_file = os.path.join(module_dir_,
+                                         'test_data/test2_expected_data.csv')
+            with open(json_file, "r") as f:
+                data = json.loads(f.read())
+                result_file = os.path.join(tmp_dir, 'COVID19_tests_india.csv')
+                create_formatted_csv_file(result_file, data)
+                same = filecmp.cmp(result_file, expected_file)
+                os.remove(result_file)
+
+        self.assertTrue(same)
+
 
 if __name__ == '__main__':
     unittest.main()

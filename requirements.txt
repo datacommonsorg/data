@@ -8,3 +8,4 @@ frozendict
 
 urllib3
 zipp
+xlrd
