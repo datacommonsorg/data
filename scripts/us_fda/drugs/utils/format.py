@@ -32,7 +32,7 @@ def get_qty_format(strength):
 
 
 def get_qty_range_format(strength):
-    """Retruns the quantity range format [# # UNIT] for a given strength.
+    """Returns the quantity range format [# # UNIT] for a given strength.
     """
     split_list = list(filter(None, re.split(r'(\d*[.]?\d+)', strength)))
     first_val = split_list[0]

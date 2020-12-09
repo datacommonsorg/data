@@ -13,7 +13,7 @@
 # limitations under the License.
 """Combines and cleans the raw data from fda into one dataFrame.
 
-The columns used to write and mcf file from the resulting dataFrame are:
+The columns used to write an mcf file from the resulting dataFrame are:
 ApplNo - FDA Application number
 ProductNo - FDA Application product number
 CleanStrength - amount of active ingredients in drug
@@ -31,6 +31,7 @@ DrugRef - either the ChEMBL id for the drug or sanitized verison of DrugName
 """
 import re
 import json
+from os import path
 from collections import defaultdict
 import pandas as pd
 from func_timeout import func_timeout
@@ -48,7 +49,12 @@ ADDITIONAL_INFO_TAGS, DOSE_TYPES, DRUG_COURSES
 molecule = new_client.molecule
 
 drug_ref_db = {}
-with open('./utils/drug_refs.json') as chembl_json:
+
+drug_ref_file_name = './drug_refs_updated.json'
+if not path.exists(drug_ref_file_name):
+    drug_ref_file_name = './utils/drug_refs.json'
+    
+with open(drug_ref_file_name) as chembl_json:
     drug_ref_db = json.load(chembl_json)
 
 
@@ -83,18 +89,24 @@ def create_drug_ref(drug_name):
 
 def get_drug_ref(drug_name, active_ingred):
     """Returns the drug reference to be used in creating a dcid for the drug."""
+
+    # if drug name does not exist, set drug name to the active ingredient
     if not drug_name:
         drug_name = active_ingred
 
+    # check if drug name is in the /utils/drug_refs.json file, then return the
+    # the specified drug reference
     if drug_name in drug_ref_db:
         return drug_ref_db[drug_name]
 
+    # check the /utils/drug_refs.json file for a standardized version of the
+    # drug name
     synonym = re.split(r'[^a-zA-Z\s-]',
                        drug_name.lower().replace('.', ''))[0].strip()
-
     if synonym in drug_ref_db:
         return drug_ref_db[synonym]
 
+    # find chembl id from chembl python api
     try:
         chembl_id = func_timeout(15, chembl_from_api, args=(synonym,))
     except:
@@ -104,8 +116,10 @@ def get_drug_ref(drug_name, active_ingred):
         drug_ref_db[synonym] = chembl_id
         return chembl_id
 
+    # create a new drug reference since a pre-existing one could not be found
     ref = create_drug_ref(drug_name)
 
+    # save new drug reference to be written to /utils/drug_refs.json file
     drug_ref_db[drug_name] = ref
     drug_ref_db[synonym] = ref
 
@@ -117,7 +131,7 @@ def reformat_paren_with_semi(strength):
     pattern that is searched for in the strength parsing done in write_mcf.py
     """
     # case: 700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)
-    # -->700 UNITS/10ML (70 UNITS/ML) 70 UNITS/ML; 300 UNITS/10ML (30 UNITS/ML)
+    # -->700 UNITS/10ML (70 UNITS/ML); 300 UNITS/10ML (30 UNITS/ML)
 
     paren_strength = re.findall(r'(?<=\().*?(?=\))', strength)
     strengths_no_paren = re.sub(r'[\(].*?[\)]', '', strength)
