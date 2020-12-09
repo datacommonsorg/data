@@ -2539,53 +2539,53 @@ descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 Node: dcid:RelationshipEvidenceTypeClinicalAnnotation
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "ClinicalAnnotation"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via Clinical Annotation."
 
 Node: dcid:RelationshipEvidenceTypeMultilinkAnnotation
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "MultilinkAnnotation"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via Multilink Annotation."
 
 Node: dcid:RelationshipEvidenceTypeGuidelineAnnotation
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "GuidelineAnnotation"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via Dosing Guideline."
 
 Node: dcid:RelationshipEvidenceTypeLabelAnnotation
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "LabelAnnotation"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via Drug Label."
 
 Node: dcid:RelationshipEvidenceTypeVariantAnnotation
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "VariantAnnotation"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via Variant Annotation."
 
 Node: dcid:RelationshipEvidenceTypeDataAnnotation
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "DataAnnotation"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via Data Annotation."
 
 Node: dcid:RelationshipEvidenceTypeLiterature
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "Literature"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via Literature."
 
 Node: dcid:RelationshipEvidenceTypeVipGene
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "VipGene"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via VIP."
 
 Node: dcid:RelationshipEvidenceTypePathway
 typeOf: dcid:RelationshipEvidenceTypeEnum
 name: "Pathway"
-url: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
 description: "Evidence for relationship between two entities was acquired via Pathway data."

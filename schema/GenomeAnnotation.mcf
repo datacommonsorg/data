@@ -560,7 +560,7 @@ Node: dcid:pharmGKBID
 name: "pharmGKBID"
 typeOf: schema:Property
 rangeIncludes: schema:Number,dcs:Text
-domainIncludes: dcs:GeneticVariant,dcs:Drug, dcs:ChemicalCompound, dcs:Gene
+domainIncludes: dcs:GeneticVariant,dcs:ChemicalCompound,dcs:Gene
 description: "PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers."
 descriptionUrl: "https://www.pharmgkb.org/"
 

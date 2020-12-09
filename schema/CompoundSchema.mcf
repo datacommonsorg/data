@@ -102,7 +102,7 @@ Node: dcid:drugBankID
 name: "drugBankID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:ChemicalCompound,dcs:Drug
+domainIncludes: dcs:ChemicalCompound
 description: "DrugBank identifier of compound."
 
 Node: dcid:maximumFDAClinicalTrialPhase
@@ -136,7 +136,7 @@ description: "Simplified Molecular-Input Line-Entry System (SMILES) for compound
 Node: dcid:compoundID
 name: "compoundID"
 typeOf: schema:Property
-rangeIncludes: dcs:ChemicalCompound,dcs:Drug
+rangeIncludes: dcs:ChemicalCompound
 domainIncludes: dcs:ChemicalCompound,dcs:ChemicalCompoundProteinInteraction,dcs:ChemicalCompoundDiseaseTreatment,dcs:ChemicalCompoundDiseaseContraindication,dcs:SideEffect,dcs:PharmacologicClass,dcs:ChemicalCompoundGeneAssociation
 description: "The ChemicalCompound node associated with the current node."
 
@@ -186,7 +186,7 @@ Node: dcid:bindingDBID
 name: "bindingDBID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:Protein,dcs:Drug,dcs:ChemicalCompound
+domainIncludes: dcs:Protein,dcs:ChemicalCompound
 description: "BindingDB identifier of a protein."
 
 Node: dcid:bgeeID
@@ -200,7 +200,7 @@ Node: dcid:proteinDataBankID
 name: "proteinDataBankID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:Protein,dcs:Drug,dcs:ChemicalCompound
+domainIncludes: dcs:Protein,dcs:ChemicalCompound
 description: "Protein Data Bank identifier of a protein."
 
 Node: dcid:geneSynonym
@@ -392,7 +392,7 @@ Node: dcid:goID
 typeOf: schema:Property
 name: "goID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:InteractionDetectionMethodEnum, dcs:InteractionTypeEnum, dcs:InteractionSourceEnum
+domainIncludes: dcs:InteractionDetectionMethodEnum,dcs:InteractionTypeEnum,dcs:InteractionSourceEnum
 description: "Identifiers of the Gene Ontology database AmiGO 2."
 descriptionUrl: "http://amigo.geneontology.org/amigo/landing"
 
@@ -400,7 +400,7 @@ Node: dcid:residID
 typeOf: schema:Property
 name: "residID"
 rangeIncludes: schema:Text
-domainIncludes: dcs:InteractionDetectionMethodEnum, dcs:InteractionTypeEnum, dcs:InteractionSourceEnum
+domainIncludes: dcs:InteractionDetectionMethodEnum,dcs:InteractionTypeEnum,dcs:InteractionSourceEnum
 description: "Identifiers of the RESID database which contains the collections of annotations and structures for protein modifications."
 descriptionUrl: "https://proteininformationresource.org/resid/"
 
