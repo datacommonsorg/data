@@ -41,8 +41,7 @@ from utils.format import get_qty_format
 from utils.config import APPLICATION_TYPE_ENUMS, TE_CODE_ENUMS, \
 MARKETING_STATUS_ENUMS, DOSAGE_FORM_ENUMS, ADMIN_ROUTE_ENUMS, \
 ADMIN_ROUTES_W_COMMAS, ADMIN_ROUTE_REPLACEMENTS, DOSAGE_FORM_IN_ADMIN_ROUTE, \
-DOSAGE_FORM_REPLACEMENTS, DOSAGE_FORMS_W_4_COMMAS, DOSAGE_FORMS_W_3_COMMAS, \
-DOSAGE_FORMS_W_2_COMMAS, DOSAGE_FORMS_W_COMMA, DRUG_REF_REPLACEMENTS, \
+DOSAGE_FORM_REPLACEMENTS,DOSGAE_FORM_LISTS, DRUG_REF_REPLACEMENTS, \
 ILL_FORMATTED_FORMS, ILL_FORMATTED_STRENGTHS, ILL_FORMATTED_INGREDIENTS, \
 ADDITIONAL_INFO_TAGS, DOSE_TYPES, DRUG_COURSES
 
@@ -53,7 +52,7 @@ drug_ref_db = {}
 drug_ref_file_name = './drug_refs_updated.json'
 if not path.exists(drug_ref_file_name):
     drug_ref_file_name = './utils/drug_refs.json'
-    
+
 with open(drug_ref_file_name) as chembl_json:
     drug_ref_db = json.load(chembl_json)
 
@@ -219,9 +218,9 @@ def expand_strength(row):
         row['AdditionalInfo'] = additional_info
 
     # search for final final Reconstituted Solution Volume quantity
-    if re.match(r"(.*)?\(\d*[.,]?\d+(\s+)?ML\)$", strengths):
-        paren = re.findall(r"[\(].*?[\)]", strengths)
-        strengths = re.sub(r"[\(].*?[\)]", '', strengths).strip()
+    if re.match(r"(.*)?\(\d*[.,]?\d+\s*ML\)", strengths):
+        paren = re.search(r"\(\d*[.,]?\d+\s*ML\)", strengths)
+        strengths = re.sub(r"\(\d*[.,]?\d+\s*ML\)", '', strengths).strip()
         row['FinalVolQty'] = get_qty_format(paren[0].strip('()'))
 
     # replace malformed strings for better formatting
@@ -253,15 +252,8 @@ def expand_dosage_form(row):
     dosage_forms = dosage_forms.title()
     dosage_enums = ''
 
-    dosgae_form_lists = [
-        DOSAGE_FORMS_W_4_COMMAS,
-        DOSAGE_FORMS_W_3_COMMAS,
-        DOSAGE_FORMS_W_2_COMMAS,
-        DOSAGE_FORMS_W_COMMA,
-    ]
-
     # search for the dosage forms containing commas before splitting by comma
-    for dosage_form_list in dosgae_form_lists:
+    for dosage_form_list in DOSGAE_FORM_LISTS:
         for form_w_comma in dosage_form_list:
             if form_w_comma in dosage_forms:
                 dosage_enums += 'dcid:' + DOSAGE_FORM_ENUMS[form_w_comma] + ','
@@ -329,6 +321,8 @@ def expand_admin_route(row):
             continue
         # search for hidden dosage forms
         if admin_route in DOSAGE_FORM_IN_ADMIN_ROUTE:
+            if not 'DosageFormEnums' in row:
+                row['DosageFormEnums'] = ''
             row['DosageFormEnums'] += DOSAGE_FORM_IN_ADMIN_ROUTE[admin_route][0]
             admin_enums += DOSAGE_FORM_IN_ADMIN_ROUTE[admin_route][1]
         # append administration route enum
@@ -339,12 +333,13 @@ def expand_admin_route(row):
             admin_enums += 'dcid:' + ADMIN_ROUTE_ENUMS[admin_route] + ','
 
     row['AdminRouteEnums'] = admin_enums.strip(',')
-    row['DosageFormEnums'] = row['DosageFormEnums'].strip(',')
+    if 'DosageFormEnums' in row:
+        row['DosageFormEnums'] = row['DosageFormEnums'].strip(',')
 
     return row
 
 
-def expand_df(appl_key_to_ms_enum, appl_key_to_te_enum, row):
+def expand_df(appl_key_to_ms_enum, appl_key_to_te_enum, row, df_length):
     """Expands the DataFrame created by combining Applications.txt and
     Products.txt.
 
@@ -354,6 +349,9 @@ def expand_df(appl_key_to_ms_enum, appl_key_to_te_enum, row):
     extra within the original columns.
     """
 
+    #progress PRINSTON
+    if row.name%5000 == 0:
+        print('...' + str(row.name) + '/' + str(df_length) + ' rows expanded')
     row = create_te_ms_columns(appl_key_to_ms_enum, appl_key_to_te_enum, row)
 
     row = expand_strength(row)
@@ -429,8 +427,9 @@ def get_df(file_name_dict):
                 axis=1)
 
     print('....expanding DataFrame')
+    df_length = len(drugs_df.index)
     drugs_df = drugs_df.apply(
-        lambda x: expand_df(appl_key_to_ms_enum, appl_key_to_te_enum, x),
+        lambda x: expand_df(appl_key_to_ms_enum, appl_key_to_te_enum, x, df_length ),
         axis=1)
     with open("./drug_refs_updated.json", "w") as outfile:
         json.dump(drug_ref_db, outfile)

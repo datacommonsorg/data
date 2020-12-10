@@ -99,6 +99,8 @@ def zip_ingred_comma_sep(mcf_file, strength_format_map, row):
             active_ingred_dcids.append(ingred_dcid)
 
         strength_format_map['strength_dcid'] = base_dcid + '_' + str(index)
+        strength_format_map['name'] = (base_dcid + '_' + str(index)).replace(
+            'dcid:bio/', '')
         strength_format_map['active_ingred_dcids'] = ','.join(
             active_ingred_dcids)
 
@@ -214,6 +216,8 @@ def parse_strength_nodes(mcf_file, fda_app, row):
             row['SingleDose'],
         'sponsor':
             row['SponsorName'].title(),
+        'final_vol_qty':
+            row['FinalVolQty'],
     }
 
     strengths = row['CleanStrength']

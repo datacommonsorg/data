@@ -727,11 +727,12 @@ ADMIN_ROUTE_REPLACEMENTS = {
 DOSAGE_FORM_IN_ADMIN_ROUTE = {
     'SUSPENSION': ['dcid:DosageFormSuspension,', ''],
     'ORAL SUSPENSION': [
-        'dcid:DosageFormSuspension,', 'dcid:AdministrationRouteOral,'
+        'dcid:DosageFormSuspension,',
+        'dcid:AdministrationRouteOral,'
     ],
     'SUBCUTANEOUS LYOPHILIZED POWER': [
-        'dosageForm: dcid:DosageFormPowderLyophilizedPowder,',
-        'administrationRoute: dcid:AdministrationRouteSubcutaneous,'
+        'dcid:DosageFormPowderLyophilizedPowder,',
+        'dcid:AdministrationRouteSubcutaneous,'
     ],
     'ORALLY DISINTEGRATING': [
         'dcid:DosageFormTabletOrallyDisintegrating,',
@@ -859,6 +860,13 @@ DOSAGE_FORMS_W_COMMA = [
     'System, Extended Release',
     'Powder, Extended Release',
     'Solution, Extended Release',
+]
+
+DOSGAE_FORM_LISTS = [
+    DOSAGE_FORMS_W_4_COMMAS,
+    DOSAGE_FORMS_W_3_COMMAS,
+    DOSAGE_FORMS_W_2_COMMAS,
+    DOSAGE_FORMS_W_COMMA,
 ]
 
 DRUG_REF_REPLACEMENTS = {
