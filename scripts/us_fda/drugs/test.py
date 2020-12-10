@@ -19,31 +19,112 @@ import clean
 import generate_mcf
 
 # constants used for testing create_mcf()
-DICT1 = {'ActiveIngredient': {0: 'HYDROXYAMPHETAMINE HYDROBROMIDE', 1: 'SULFAPYRIDINE'},
-'AdditionalInfo': {0: '', 1: ''},
-'AdminRoute': {0: 'OPHTHALMIC', 1: 'ORAL'},
-'AdminRouteEnums': {0: 'dcid:AdministrationRouteOphthalmic', 1: 'dcid:AdministrationRouteOral'},
-'ApplNo': {0: 4, 1: 159},
-'ApplPublicNotes': {0: '', 1: ''},
-'ApplType': {0: 'NDA', 1: 'NDA'},
-'ApplTypeEnum': {0: 'dcid:ApplicationTypeNDA', 1: 'dcid:ApplicationTypeNDA'},
-'CleanActiveIngredient': {0: 'Hydroxyamphetamine Hydrobromide', 1: 'Sulfapyridine'},
-'CleanStrength': {0: '1%', 1: '500MG'},
-'DosageForm': {0: 'SOLUTION/DROPS', 1: 'TABLET'},
-'DosageFormEnums': {0: 'dcid:DosageFormSolutionDrops', 1: 'dcid:DosageFormTablet'},
-'DrugCourse': {0: '', 1: ''},
-'DrugName': {0: 'PAREDRINE', 1: 'SULFAPYRIDINE'},
-'DrugRef': {0: 'CHEMBL1200705', 1: 'CHEMBL700'},
-'FinalVolQty': {0: '', 1: ''},
-'Form': {0: 'SOLUTION/DROPS;OPHTHALMIC', 1: 'TABLET;ORAL'},
-'MarketStatus': {0: 'dcid:MarketingStatusDiscontinued', 1: 'dcid:MarketingStatusDiscontinued'},
-'ProductNo': {0: 4, 1: 1}, 'ReferenceDrug': {0: 0, 1: 0},
-'ReferenceStandard': {0: 0.0, 1: 0.0},
-'SingleDose': {0: '', 1: ''},
-'SponsorName': {0: 'PHARMICS', 1: 'LILLY'},
-'Strength': {0: '1%', 1: '500MG'},
-'TECodes': {0: '', 1: ''},
-'_merge': {0: 'both', 1: 'both'}}
+DICT1 = {
+    'ActiveIngredient': {
+        0: 'HYDROXYAMPHETAMINE HYDROBROMIDE',
+        1: 'SULFAPYRIDINE'
+    },
+    'AdditionalInfo': {
+        0: '',
+        1: ''
+    },
+    'AdminRoute': {
+        0: 'OPHTHALMIC',
+        1: 'ORAL'
+    },
+    'AdminRouteEnums': {
+        0: 'dcid:AdministrationRouteOphthalmic',
+        1: 'dcid:AdministrationRouteOral'
+    },
+    'ApplNo': {
+        0: 4,
+        1: 159
+    },
+    'ApplPublicNotes': {
+        0: '',
+        1: ''
+    },
+    'ApplType': {
+        0: 'NDA',
+        1: 'NDA'
+    },
+    'ApplTypeEnum': {
+        0: 'dcid:ApplicationTypeNDA',
+        1: 'dcid:ApplicationTypeNDA'
+    },
+    'CleanActiveIngredient': {
+        0: 'Hydroxyamphetamine Hydrobromide',
+        1: 'Sulfapyridine'
+    },
+    'CleanStrength': {
+        0: '1%',
+        1: '500MG'
+    },
+    'DosageForm': {
+        0: 'SOLUTION/DROPS',
+        1: 'TABLET'
+    },
+    'DosageFormEnums': {
+        0: 'dcid:DosageFormSolutionDrops',
+        1: 'dcid:DosageFormTablet'
+    },
+    'DrugCourse': {
+        0: '',
+        1: ''
+    },
+    'DrugName': {
+        0: 'PAREDRINE',
+        1: 'SULFAPYRIDINE'
+    },
+    'DrugRef': {
+        0: 'CHEMBL1200705',
+        1: 'CHEMBL700'
+    },
+    'FinalVolQty': {
+        0: '',
+        1: ''
+    },
+    'Form': {
+        0: 'SOLUTION/DROPS;OPHTHALMIC',
+        1: 'TABLET;ORAL'
+    },
+    'MarketStatus': {
+        0: 'dcid:MarketingStatusDiscontinued',
+        1: 'dcid:MarketingStatusDiscontinued'
+    },
+    'ProductNo': {
+        0: 4,
+        1: 1
+    },
+    'ReferenceDrug': {
+        0: 0,
+        1: 0
+    },
+    'ReferenceStandard': {
+        0: 0.0,
+        1: 0.0
+    },
+    'SingleDose': {
+        0: '',
+        1: ''
+    },
+    'SponsorName': {
+        0: 'PHARMICS',
+        1: 'LILLY'
+    },
+    'Strength': {
+        0: '1%',
+        1: '500MG'
+    },
+    'TECodes': {
+        0: '',
+        1: ''
+    },
+    '_merge': {
+        0: 'both',
+        1: 'both'
+    }
+}
 
 TEST_MCF1 = """
 Node: dcid:USFederalDrugAdministration
@@ -122,25 +203,82 @@ availableStrength: dcid:bio/CHEMBL700_Strength-159-1_0
 """
 
 DICT2 = {
-'AdditionalInfo': {0: '', 1: ''},
-'AdminRouteEnums': {0: 'dcid:AdministrationRouteOphthalmic', 1: 'dcid:AdministrationRouteOral'},
-'ApplNo': {0: 4, 1: 159},
-'ApplTypeEnum': {0: 'dcid:ApplicationTypeNDA', 1: 'dcid:ApplicationTypeNDA'},
-'CleanActiveIngredient': {0: 'Ingred_A;Ingred_B', 1: 'Ingred1;Ingred2'},
-'CleanStrength': {0: '100MG,200MG;300MG,400MG;500MG,600MG', 1: '100MG, 200MG, 300MG; 400MG, 500MG, 600MG'},
-'DosageFormEnums': {0: 'dcid:DosageFormSolutionDrops', 1: 'dcid:DosageFormTablet'},
-'DrugCourse': {0: '', 1: ''},
-'DrugName': {0: 'PAREDRINE', 1: 'SULFAPYRIDINE'},
-'DrugRef': {0: 'CHEMBL1200705', 1: 'CHEMBL700'},
-'FinalVolQty': {0: '', 1: ''},
-'MarketStatus': {0: 'dcid:MarketingStatusDiscontinued', 1: 'dcid:MarketingStatusDiscontinued'},
-'ProductNo': {0: 4, 1: 1},
-'ReferenceDrug': {0: 0, 1: 0},
-'ReferenceStandard': {0: 0.0, 1: 0.0},
-'SingleDose': {0: '', 1: ''},
-'SponsorName': {0: 'PHARMICS', 1: 'LILLY'},
-'Strength': {0: '1%', 1: '500MG'},
-'TECodes': {0: '', 1: ''},
+    'AdditionalInfo': {
+        0: '',
+        1: ''
+    },
+    'AdminRouteEnums': {
+        0: 'dcid:AdministrationRouteOphthalmic',
+        1: 'dcid:AdministrationRouteOral'
+    },
+    'ApplNo': {
+        0: 4,
+        1: 159
+    },
+    'ApplTypeEnum': {
+        0: 'dcid:ApplicationTypeNDA',
+        1: 'dcid:ApplicationTypeNDA'
+    },
+    'CleanActiveIngredient': {
+        0: 'Ingred_A;Ingred_B',
+        1: 'Ingred1;Ingred2'
+    },
+    'CleanStrength': {
+        0: '100MG,200MG;300MG,400MG;500MG,600MG',
+        1: '100MG, 200MG, 300MG; 400MG, 500MG, 600MG'
+    },
+    'DosageFormEnums': {
+        0: 'dcid:DosageFormSolutionDrops',
+        1: 'dcid:DosageFormTablet'
+    },
+    'DrugCourse': {
+        0: '',
+        1: ''
+    },
+    'DrugName': {
+        0: 'PAREDRINE',
+        1: 'SULFAPYRIDINE'
+    },
+    'DrugRef': {
+        0: 'CHEMBL1200705',
+        1: 'CHEMBL700'
+    },
+    'FinalVolQty': {
+        0: '',
+        1: ''
+    },
+    'MarketStatus': {
+        0: 'dcid:MarketingStatusDiscontinued',
+        1: 'dcid:MarketingStatusDiscontinued'
+    },
+    'ProductNo': {
+        0: 4,
+        1: 1
+    },
+    'ReferenceDrug': {
+        0: 0,
+        1: 0
+    },
+    'ReferenceStandard': {
+        0: 0.0,
+        1: 0.0
+    },
+    'SingleDose': {
+        0: '',
+        1: ''
+    },
+    'SponsorName': {
+        0: 'PHARMICS',
+        1: 'LILLY'
+    },
+    'Strength': {
+        0: '1%',
+        1: '500MG'
+    },
+    'TECodes': {
+        0: '',
+        1: ''
+    },
 }
 
 TEST_MCF2 = """
@@ -320,24 +458,60 @@ availableStrength: dcid:bio/CHEMBL700_Strength-159-1_0,dcid:bio/CHEMBL700_Streng
 """
 
 DICT3 = {
-'AdditionalInfo': {0: 'Sentence with additional info here.'},
-'AdminRouteEnums': {0:'dcid:AdministrationRouteOphthalmic'},
-'ApplNo': {0: 4},
-'ApplTypeEnum': {0: 'dcid:ApplicationTypeBLA'},
-'CleanActiveIngredient': {0: 'Ingred_A'},
-'CleanStrength': {0: '100MG'},
-'DosageFormEnums': {0: 'dcid:DosageFormSolutionDrops'},
-'DrugCourse': {0: '[28 Days]'},
-'DrugName': {0: 'PAREDRINE'},
-'DrugRef': {0: 'CHEMBL1200705'},
-'FinalVolQty': {0: '[1000 ML]'},
-'MarketStatus': {0: 'dcid:MarketingStatusDiscontinued'},
-'ProductNo': {0: 4,},
-'ReferenceDrug': {0: 1},
-'ReferenceStandard': {0: 1},
-'SingleDose': {0: 'True'},
-'SponsorName': {0: 'PHARMICS'},
-'TECodes': {0: 'dcid:TherapeuticEquivalenceCodeAP'},
+    'AdditionalInfo': {
+        0: 'Sentence with additional info here.'
+    },
+    'AdminRouteEnums': {
+        0: 'dcid:AdministrationRouteOphthalmic'
+    },
+    'ApplNo': {
+        0: 4
+    },
+    'ApplTypeEnum': {
+        0: 'dcid:ApplicationTypeBLA'
+    },
+    'CleanActiveIngredient': {
+        0: 'Ingred_A'
+    },
+    'CleanStrength': {
+        0: '100MG'
+    },
+    'DosageFormEnums': {
+        0: 'dcid:DosageFormSolutionDrops'
+    },
+    'DrugCourse': {
+        0: '[28 Days]'
+    },
+    'DrugName': {
+        0: 'PAREDRINE'
+    },
+    'DrugRef': {
+        0: 'CHEMBL1200705'
+    },
+    'FinalVolQty': {
+        0: '[1000 ML]'
+    },
+    'MarketStatus': {
+        0: 'dcid:MarketingStatusDiscontinued'
+    },
+    'ProductNo': {
+        0: 4,
+    },
+    'ReferenceDrug': {
+        0: 1
+    },
+    'ReferenceStandard': {
+        0: 1
+    },
+    'SingleDose': {
+        0: 'True'
+    },
+    'SponsorName': {
+        0: 'PHARMICS'
+    },
+    'TECodes': {
+        0: 'dcid:TherapeuticEquivalenceCodeAP'
+    },
 }
 
 TEST_MCF3 = """
@@ -386,6 +560,7 @@ activeIngredient: "Ingred_A"
 availableStrength: dcid:bio/CHEMBL1200705_Strength-4-4_0
 """
 
+
 class TestSuite(unittest.TestCase):
 
     def test_reformat_paren_with_semi(self):
@@ -395,52 +570,56 @@ class TestSuite(unittest.TestCase):
 
     def test_expand_strength(self):
         row = {
-            'Strength': '2%;70% (100ML)**Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy',
+            'Strength':
+                '2%;70% (100ML)**Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy',
         }
         expanded = {
-            'Strength': '2%;70% (100ML)**Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy',
-            'AdditionalInfo': 'Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy. ',
-            'FinalVolQty': '[100 ML]',
-            'CleanStrength': '2%;70%'
+            'Strength':
+                '2%;70% (100ML)**Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy',
+            'AdditionalInfo':
+                'Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy. ',
+            'FinalVolQty':
+                '[100 ML]',
+            'CleanStrength':
+                '2%;70%'
         }
         self.assertEqual(clean.expand_strength(row), expanded)
 
-        row = {
-            'Strength': '15%(150GM/1000ML)(1.5ML)'
-
-        }
+        row = {'Strength': '15%(150GM/1000ML)(1.5ML)'}
         expanded = {
             'Strength': '15%(150GM/1000ML)(1.5ML)',
             'CleanStrength': '15%(150GM/1000ML)',
             'FinalVolQty': '[1.5 ML]',
-
         }
         self.assertEqual(clean.expand_strength(row), expanded)
 
         row = {
-            'Strength': '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)'
-
+            'Strength':
+                '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)'
         }
         expanded = {
-            'Strength': '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)',
-            'CleanStrength': '700 UNITS/10ML(70 UNITS/ML);300 UNITS/10ML(30 UNITS/ML)'
+            'Strength':
+                '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)',
+            'CleanStrength':
+                '700 UNITS/10ML(70 UNITS/ML);300 UNITS/10ML(30 UNITS/ML)'
         }
         self.assertEqual(clean.expand_strength(row), expanded)
 
     def test_expand_dosage_form(self):
         row = {
-            'DosageForm': 'Aerosol, Foam,Capsule, Coated, Extended Release,Injection, Powder, For Suspension, Extended Release,Injection, Powder, Lyophilized, For Suspension, Extended Release'
+            'DosageForm':
+                'Aerosol, Foam,Capsule, Coated, Extended Release,Injection, Powder, For Suspension, Extended Release,Injection, Powder, Lyophilized, For Suspension, Extended Release'
         }
         expanded = {
-            'DosageForm': 'Aerosol, Foam,Capsule, Coated, Extended Release,Injection, Powder, For Suspension, Extended Release,Injection, Powder, Lyophilized, For Suspension, Extended Release',
-            'DosageFormEnums': 'dcid:DosageFormInjectionPowderLyophilizedForSuspensionExtendedRelease,dcid:DosageFormInjectionPowderForSuspensionExtendedRelease,dcid:DosageFormCapsuleCoatedExtendedRelease,dcid:DosageFormAerosolFoam'
+            'DosageForm':
+                'Aerosol, Foam,Capsule, Coated, Extended Release,Injection, Powder, For Suspension, Extended Release,Injection, Powder, Lyophilized, For Suspension, Extended Release',
+            'DosageFormEnums':
+                'dcid:DosageFormInjectionPowderLyophilizedForSuspensionExtendedRelease,dcid:DosageFormInjectionPowderForSuspensionExtendedRelease,dcid:DosageFormCapsuleCoatedExtendedRelease,dcid:DosageFormAerosolFoam'
         }
         self.assertEqual(clean.expand_dosage_form(row), expanded)
 
     def test_expand_admin_route(self):
-        row = {
-            'AdminRoute': 'ORAL-28'
-        }
+        row = {'AdminRoute': 'ORAL-28'}
         expanded = {
             'AdminRoute': 'ORAL-28',
             'DrugCourse': '[28 Days]',
@@ -448,14 +627,11 @@ class TestSuite(unittest.TestCase):
         }
         self.assertEqual(clean.expand_admin_route(row), expanded)
 
-        row = {
-            'AdminRoute': 'MULTIDOSE'
-        }
+        row = {'AdminRoute': 'MULTIDOSE'}
         expanded = {
             'SingleDose': 'False',
             'AdminRoute': 'MULTIDOSE',
             'AdminRouteEnums': ''
-
         }
         self.assertEqual(clean.expand_admin_route(row), expanded)
 
@@ -463,9 +639,12 @@ class TestSuite(unittest.TestCase):
             'AdminRoute': 'SUBCUTANEOUS LYOPHILIZED POWER, ORAL',
         }
         expanded = {
-            'AdminRoute': 'SUBCUTANEOUS LYOPHILIZED POWER, ORAL',
-            'DosageFormEnums': 'dcid:DosageFormPowderLyophilizedPowder',
-            'AdminRouteEnums': 'dcid:AdministrationRouteSubcutaneous,dcid:AdministrationRouteOral'
+            'AdminRoute':
+                'SUBCUTANEOUS LYOPHILIZED POWER, ORAL',
+            'DosageFormEnums':
+                'dcid:DosageFormPowderLyophilizedPowder',
+            'AdminRouteEnums':
+                'dcid:AdministrationRouteSubcutaneous,dcid:AdministrationRouteOral'
         }
         self.assertEqual(clean.expand_admin_route(row), expanded)
 

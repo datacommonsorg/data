@@ -350,7 +350,7 @@ def expand_df(appl_key_to_ms_enum, appl_key_to_te_enum, row, df_length):
     """
 
     #progress PRINSTON
-    if row.name%5000 == 0:
+    if row.name % 5000 == 0:
         print('...' + str(row.name) + '/' + str(df_length) + ' rows expanded')
     row = create_te_ms_columns(appl_key_to_ms_enum, appl_key_to_te_enum, row)
 
@@ -428,9 +428,9 @@ def get_df(file_name_dict):
 
     print('....expanding DataFrame')
     df_length = len(drugs_df.index)
-    drugs_df = drugs_df.apply(
-        lambda x: expand_df(appl_key_to_ms_enum, appl_key_to_te_enum, x, df_length ),
-        axis=1)
+    drugs_df = drugs_df.apply(lambda x: expand_df(
+        appl_key_to_ms_enum, appl_key_to_te_enum, x, df_length),
+                              axis=1)
     with open("./drug_refs_updated.json", "w") as outfile:
         json.dump(drug_ref_db, outfile)
 

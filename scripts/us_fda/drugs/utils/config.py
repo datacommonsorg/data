@@ -727,8 +727,7 @@ ADMIN_ROUTE_REPLACEMENTS = {
 DOSAGE_FORM_IN_ADMIN_ROUTE = {
     'SUSPENSION': ['dcid:DosageFormSuspension,', ''],
     'ORAL SUSPENSION': [
-        'dcid:DosageFormSuspension,',
-        'dcid:AdministrationRouteOral,'
+        'dcid:DosageFormSuspension,', 'dcid:AdministrationRouteOral,'
     ],
     'SUBCUTANEOUS LYOPHILIZED POWER': [
         'dcid:DosageFormPowderLyophilizedPowder,',
