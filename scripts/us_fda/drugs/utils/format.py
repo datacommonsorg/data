@@ -14,7 +14,6 @@
 """Contains helper functions required by both clean.py and generate_mcf.py"""
 import re
 
-
 def get_qty_format(strength):
     """Returns a quantity format [# UNIT] of a given strength
     """
@@ -22,7 +21,6 @@ def get_qty_format(strength):
     if strength == 'N/A':
         return '"N/A"'
     if 'N/A' in strength:
-        #print(strength)
         return '"' + strength + '"'
     split_list = list(filter(None, re.split(r'(\d*[.,]?\d+)', strength)))
     if len(split_list) < 2:

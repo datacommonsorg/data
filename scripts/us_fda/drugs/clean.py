@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Combines and cleans the raw data from fda into one dataFrame.
+"""Combines and cleans the raw data from FDA into one dataFrame.
 
 The columns used to write an mcf file from the resulting dataFrame are:
 ApplNo - FDA Application number
@@ -27,7 +27,7 @@ FinalVolQty - quantity formatted final volume for DrugStrength property
 DrugCourse - quantity formatted drug course for DrugStrength property
 SingleDose - boolean fomatted as string for DrugStrength property
 AdditionalInfo - string for additionalInformation Drug property
-DrugRef - either the ChEMBL id for the drug or sanitized verison of DrugName
+DrugRef - either the ChEMBL ID for the drug or sanitized verison of DrugName
 """
 import re
 import json
@@ -58,8 +58,8 @@ with open(drug_ref_file_name) as chembl_json:
 
 
 def chembl_from_api(synonym):
-    """Synonym must be stripped lower case to match"""
-    print(synonym)
+    """Use ChEMBL python api to find the ChEMBL ID for the given synonym."""
+    synonym = synonym.strip('\r\n').lower()
     chembl_id = None
     for molec in molecule.search(synonym):
         for molec_synonymyn in molec['molecule_synonyms']:
@@ -70,7 +70,7 @@ def chembl_from_api(synonym):
 
 
 def create_drug_ref(drug_name):
-    """Returns a suitable reference name for a drug when the chembl ID cannot
+    """Returns a suitable reference name for a drug when the ChEMBL ID cannot
   be found. This reference name is used in dcids and therefore must not contain
   special characters.
   """
@@ -105,7 +105,7 @@ def get_drug_ref(drug_name, active_ingred):
     if synonym in drug_ref_db:
         return drug_ref_db[synonym]
 
-    # find chembl id from chembl python api
+    # find ChEMBL ID from chembl python api
     try:
         chembl_id = func_timeout(15, chembl_from_api, args=(synonym,))
     except:

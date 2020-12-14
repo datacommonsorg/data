@@ -36,7 +36,7 @@ Contains helper functions required by both clean.py and generate_mcf.py to conve
 
 ### utils/drug_refs.json
 
-This file is used to store drug names and their ChEMBL Ids to avoid querying ChEMBL database for each drug everytime the script is run.
+This file is used to store drug names and their ChEMBL IDs to avoid querying ChEMBL database for each drug every time the script is run.
 
 Initial data came from generating chembl_ids.out using the following steps
 chemblIDs.out (used to map drug names to their ChEMBL IDs) originates from chembl_27.0_molecule.ttl found at ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/latest/
@@ -57,7 +57,7 @@ chembl_dict = chemblDF.set_index('name_clean').to_dict()['chembl_clean']
 with open("./chembl_ids.json", "w") as outfile:
     json.dump(chembl_dict, outfile)
 ```
-A new copy of './drug_refs_updated.js is written with any new drug name : ChEMBL id relations appended after clean.get_df() is called.
+A new copy of './drug_refs_updated.js is written with any new drug name : ChEMBL ID relations appended after clean.get_df() is called.
 
 ## AdditionalInformation
 
@@ -71,12 +71,12 @@ The main file for this import is Products.txt. Other information is pulled from 
   * Applications.txt provides the Application Type enum property for FDAApplication
 * ProductNo is ingested as property of DrugStrength
 * ApplNo and ProductNo are used together as look ups to match the Drug entry to the appropriate TECode and MarketingStatusID from TE.txt, and MarketingStatus.txt.
-  * TeCode and MarketingStatusID are properties of each DrugStrength for the Drug
+  * TECode and MarketingStatusID are properties of each DrugStrength for the Drug
   * TE.txt contains both TECodes and MarketingStatusIDs
   * MarketingStatus.txt only contains MarketingStatusIDs
     * MaketingStatus_Lookup.txt was used to match marketingStatusID to the marketingStatus
   * In the case of conflicting MarketingStatusIDs from the two files, both IDs are added to the KG
-* The Form column is split by the semiColon with the general format of<DosageForm> ; <AdministrationRoute> wich are both enum properties of Drug
+* The Form column is split by the semicolon with the general format of <DosageForm> ; <AdministrationRoute> wich are both enum properties of Drug
   * If AdministationRoute specifies the drug course (ie Oral-28), then the drugCourse is saved as a property of the drugStrength (ie drugCourse: [28 "days"] )
   * If AdministrationRoute specifies a dosage pattern (ie SINGLE-USE), then the singleDose boolean property of DrugStrength is appropriately set
 * The Strength designates the amount of each ActiveIngredient in the drug, therefore the Strength column and ActiveIngredient column must be read together
@@ -100,9 +100,9 @@ The main file for this import is Products.txt. Other information is pulled from 
       * Strength node → "ingred1","ingred2"
 * ReferenceDrug is ingested as isAvailableGenerically boolean property of Drug
 * Drug name is ingested as drugName text property of Drug
-* Drug Name is used to search for the corresponding chemblID in order to form an existing DCID already in the KG
-  * To get the ChemblID, a dictionary of chemblIDs is created from chembl_27.0_molecules.ttl from chembl DB
-  * If the drugName is not in the dict, then the chembl python API is used to search for the drugName
+* Drug Name is used to search for the corresponding ChEMBL ID in order to form an existing DCID already in the KG
+  * To get the ChEMBL ID, a dictionary of ChEMBL IDs is created from chembl_27.0_molecules.ttl from ChEMBL DB
+  * If the drugName is not in the dict, then the ChEMBL python API is used to search for the drugName
   * Drugs whose names are not found by the two pass search system have a new DCID created for them based on a sanitized version of the drugName and will become new Drug nodes in the KG instead of appending to existing ones
 * ActiveIngredients are appended list of text properties to each Drug node
 * ReferenceStandard is ingested as the boolean Drug property called isReferenceStandard
