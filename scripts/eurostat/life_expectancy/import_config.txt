@@ -1,0 +1,6 @@
+import:{
+    import_name: "eurostat_lifeExpectancy_NUTS2"
+    provenance_url: "https://ec.europa.eu/eurostat/data/database"
+    provenance_description: "Life expectancy by age and sex in NUTS regions of Europe." 
+    mcf_url: "gs://resolved_mcf/external_table/eurostat_lifeExpectancy_NUTS2/nodes.mcf-00000-of-00001"
+}
