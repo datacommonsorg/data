@@ -14,6 +14,7 @@
 """Contains helper functions required by both clean.py and generate_mcf.py"""
 import re
 
+
 def get_qty_format(strength):
     """Returns a quantity format [# UNIT] of a given strength
     """
