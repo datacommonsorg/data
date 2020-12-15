@@ -19,13 +19,28 @@ Description:  Converts an NIH NCBI assembly reports file on a genome assembly
 	into a mcf output file populating information on GenomeAssembly, 
 	GenomeAssemblyUnit, and Chromosome.
 
-@file_input		path to the input NCBI file on a genome assembly
-@file_output		path to the output mcf file to write the reformatted data
-@genome 		the shorthand name for the genome assembly represented in the 
-			file (e.g. hg38, mm10)
-@species_abrv		the abbreviation used by Data Commons to represent species dcid 
-			(e.g. hs, mm)
+@file_input	path to the input NCBI file on a genome assembly
+@file_output	path to the output mcf file to write the reformatted data
+@genome 	the shorthand name for the genome assembly represented in the 
+		file (e.g. hg38, mm10)
+@species_abrv	the abbreviation used by Data Commons to represent species dcid 
+		(e.g. hs, mm)
 '''
+
+def format_enum_value(value):
+	'''
+	Format enummeration specification to camel case.
+
+	@value	The string of the enum type that needs to be formatted
+	@return	The camel case formatted string
+	'''
+	value = value.replace(' ', '')
+	value_split = value.split('_')
+	value_formatted = ''
+	# camel case enum type
+	for i in range(len(value_split)):
+		value = value_formatted + value_split[i][0].upper() + value_split[i][1:]
+	return(value_formatted)
 
 def write_genome_assembly(file_output, dict_genome_assembly, genome, 
 	species_abrv):
@@ -33,14 +48,14 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
 	Write the information on the genome assembly to a GenomeAssembly node in the
 	mcf output file.
 
-	@file_output			path to the output mcf file to write the reformatted
-					data
-	@dict_genome_assembly		dictionary of the data fields and values containing 
-					information on the genome assembly
-	@genome 			the shorthand name for the genome assembly 
-					represented in the file (e.g. hg38, mm10)
-	@species_abrv			the abbreviation used by Data Commons to represent 
-					species dcid (e.g. hs, mm)
+	@file_output		path to the output mcf file to write the reformatted
+				data
+	@dict_genome_assembly	dictionary of the data fields and values containing 
+				information on the genome assembly
+	@genome 		the shorthand name for the genome assembly 
+				represented in the file (e.g. hg38, mm10)
+	@species_abrv		the abbreviation used by Data Commons to represent 
+				species dcid (e.g. hs, mm)
 	'''
 	dict_conversion = {'Assembly name': \
 	'genomeReferenceConsortiumAssemblyName',\
@@ -85,7 +100,7 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
 			value = value[0].upper() + value[1:]
 			w.write(dict_conversion[key] + ': dcid:' + 
 				dict_conversion[key][0].upper() + dict_conversion[key][1:] +  
-				value.replace(' ', '')  + '\n')
+				format_enum_value(value)  + '\n')
 		elif key == 'Genomerepresentation':
 			if value.lower() == 'full':
 				w.write(dict_conversion[key] + ': True\n')
@@ -105,10 +120,10 @@ def write_assembly_unit(line, file_output, genome):
 	Wrie a line on a genome assembly unit to a GenomeAssemblyUnit node in the 
 	mcf output file.
 
-	@line			line containing information on a GenomeAssemblyUnit
-	@file_output		path to the output mcf file to write the reformatted data
-	@genome 		the shorthand name for the genome assembly represented in 
-				the file (e.g. hg38, mm10)
+	@line		line containing information on a GenomeAssemblyUnit
+	@file_output	path to the output mcf file to write the reformatted data
+	@genome 	the shorthand name for the genome assembly represented in 
+			the file (e.g. hg38, mm10)
 	'''
 	w = open(file_output, mode='a')
 	line[0] = line[0].strip('## ')
@@ -125,10 +140,10 @@ def write_chromosome(line, file_output, genome):
 	Wrie a line on a chromosome or unlocalized scaffold/fragment/sequence to a 
 	GenomeAssemblyUnit node in the mcf output file.
 
-	@line			line containing information on a Chromosome
-	@file_output		path to the output mcf file to write the reformatted data
-	@genome 		the shorthand name for the genome assembly represented in 
-				the file (e.g. hg38, mm10)
+	@line		line containing information on a Chromosome
+	@file_output	path to the output mcf file to write the reformatted data
+	@genome 	the shorthand name for the genome assembly represented in 
+			the file (e.g. hg38, mm10)
 	'''
 	list_chromosome = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', 
 	'12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', 'X', 'Y', 
