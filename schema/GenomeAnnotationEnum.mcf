@@ -1015,8 +1015,8 @@ typeOf: dcs:"GenomeAssemblyTypeEnum"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
 description: "The collection of chromosome assemblies, unlocalized and unplaced sequences that represent an organism's genome. Any locus may be represented 0 or 1 time, and entire chromosomes are only represented 0 or 1 times."
 
-Node: dcid:GenomeAssemblyTypeHaploid-with-alt-loci
-name: "GenomeAssemblyTypeHaploid-with-alt-loci"
+Node: dcid:GenomeAssemblyTypeHaploidWithAltLoci
+name: "GenomeAssemblyTypeHaploidWithAltLoci"
 typeOf: dcs:"GenomeAssemblyTypeEnum"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
 description: "The collection of chromosome assemblies, unlocalized and unplaced sequences and alternate loci that represent an organism's genome. Any locus may be represented 0, 1 or >1 time, but entire chromosomes are only represented 0 or 1 times."
@@ -1070,8 +1070,8 @@ subClassOf: schema:Enumeration
 description: "The highest level of assembly for any object in the assembly."
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#level"
 
-Node: dcid:GenomeAssemblyLevelComplete_genome
-name: "GenomeAssemblyReleaseTypeComplete_genome"
+Node: dcid:GenomeAssemblyLevelCompleteGenome
+name: "GenomeAssemblyReleaseTypeCompleteGenome"
 typeOf: dcs:"GenomeAssemblyLevelEnum"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#level"
 description: "All chromosomes are gapless and have no runs of 10 or more ambiguous bases (Ns), there are no unplaced or unlocalized scaffolds, and all the expected chromosomes are present (i.e. the assembly is not noted as having partial genome representation). Plasmids and organelles may or may not be included in the assembly but if present then the sequences are gapless."
@@ -1102,13 +1102,13 @@ description: "Denotes that the assembly is a reference or representative genome 
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
 
 Node: dcid:RefSeqCategoryReferenceGenome
-name: "RefSeqCategoryReference_genome"
+name: "RefSeqCategoryReferenceGenome"
 typeOf: dcs:"GenomeAssemblyLevelEnum"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
 description: "A manually selected high quality genome assembly that NCBI and the community have identified as being important as a standard against which other data are compared."
 
 Node: dcid:RefSeqCategoryRepresentationGenome
-name: "RefSeqCategoryRepresentation_genome"
+name: "RefSeqCategoryRepresentationGenome"
 typeOf: dcs:"GenomeAssemblyLevelEnum"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
 description: "A genome computationally or manually selected as a representative from among the best genomes available for a species or clade that does not have a designated reference genome."
@@ -1119,7 +1119,7 @@ typeOf: schema:Class
 subClassOf: schema:Enumeration
 description: "The role a defined sequence of DNA has in a genome assembly."
 
-Node: dcid:DNASequenceRoleAssembled-molecule
+Node: dcid:DNASequenceRoleAssembledMolecule
 name: "DNASequenceRoleAssembled-molecule"
 typeOf: dcs:DNASequenceRoleEnum
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
@@ -1131,28 +1131,28 @@ typeOf: dcs:DNASequenceRoleEnum
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
 description: "The object represents a chromosome, linkage-group, or plasmid."
 
-Node: dcid:DNASequenceRoleUnlocalized-scaffold
-name: "DNASequenceRoleUnlocalized-scaffold"
+Node: dcid:DNASequenceRoleUnlocalizedScaffold
+name: "DNASequenceRoleUnlocalizedScaffold"
 typeOf: dcs:DNASequenceRoleEnum
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
 description: "The object is a scaffold that is associated with a particular chromosome but has not been localized to a specific position on the chromosome."
 
-Node: dcid:DNASequenceRoleUnplaced-scaffold
-name: "DNASequenceRoleUnplaced-scaffold"
+Node: dcid:DNASequenceRoleUnplacedScaffold
+name: "DNASequenceRoleUnplacedScaffold"
 typeOf: dcs:DNASequenceRoleEnum
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
 description: "The object is a scaffold that does not have a chromosome assignment."
 
-Node: dcid:DNASequenceRoleAlt-scaffold
+Node: dcid:DNASequenceRoleAltScaffold
 name: "DNASequenceRoleAlt-scaffold"
 typeOf: dcs:DNASequenceRoleEnum
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help"
 description: "The object is either an alternate loci scaffold or a patch scaffold."
 
-Node: dcid:DNASequenceRoleFix-patch
+Node: dcid:DNASequenceRoleFixPatch
 name: "DNASequenceRoleFix-patch"
 typeOf: dcs:DNASequenceRoleEnum
 
-Node: dcid:DNASequenceRoleNovel-patch
+Node: dcid:DNASequenceRoleNovelPatch
 name: "DNASequenceRoleNovel-patch"
 typeOf: dcs:DNASequenceRoleEnum
