@@ -27,20 +27,24 @@ Description:  Converts an NIH NCBI assembly reports file on a genome assembly
 		(e.g. hs, mm)
 '''
 
-def format_enum_value(value):
-	'''
-	Format enummeration specification to camel case.
+import re
 
-	@value	The string of the enum type that needs to be formatted
+def format_camel_case(value):
+	'''
+	Format string to camel case.
+
+	@value	The string that needs to be formatted to camel case
 	@return	The camel case formatted string
 	'''
 	value = value.replace(' ', '')
-	value_split = value.split('_')
+	value_split = re.split('_|-', value)
 	value_formatted = ''
 	# camel case enum type
 	for i in range(len(value_split)):
-		value = value_formatted + value_split[i][0].upper() + value_split[i][1:]
+		value_formatted = value_formatted + value_split[i][0].upper() + \
+		value_split[i][1:]
 	return(value_formatted)
+
 
 def write_genome_assembly(file_output, dict_genome_assembly, genome, 
 	species_abrv):
@@ -97,10 +101,9 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
 			elif value.lower() == 'yes':
 				w.write(dict_conversion[key] + ': True\n')
 		elif key in list_key_enums:
-			value = value[0].upper() + value[1:]
 			w.write(dict_conversion[key] + ': dcid:' + 
-				dict_conversion[key][0].upper() + dict_conversion[key][1:] +  
-				format_enum_value(value)  + '\n')
+				format_camel_case(dict_conversion[key]) + \
+				format_camel_case(value)  + '\n')
 		elif key == 'Genomerepresentation':
 			if value.lower() == 'full':
 				w.write(dict_conversion[key] + ': True\n')
@@ -114,6 +117,7 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
 				'GenomeAssembly')
 		elif key != 'Organismname':
 			w.write(dict_conversion[key] + ': "' + value + '"\n')
+
 
 def write_assembly_unit(line, file_output, genome):
 	'''
@@ -135,6 +139,7 @@ def write_assembly_unit(line, file_output, genome):
 	w.write('genBankAccession: "' + line[0] + '"\n')
 	w.write('refSeqAccession: "' + line[1] + '"\n\n')
 
+
 def write_chromosome(line, file_output, genome):
 	'''
 	Wrie a line on a chromosome or unlocalized scaffold/fragment/sequence to a 
@@ -153,8 +158,8 @@ def write_chromosome(line, file_output, genome):
 	w.write('name: "' + line[9] + '"\n')
 	w.write('typeOf: dcs:Chromosome\n')
 	w.write('ncbiDNASequenceName: "' + line[0] + '"\n')
-	w.write('dnaSequenceRole: dcid:DNASequenceRole' + line[1][0].upper() + 
-		line[1][1:] + '\n')
+	w.write('dnaSequenceRole: dcid:DNASequenceRole' + \
+		format_camel_case(line[1]) + '\n')
 	w.write('inGenomeAssembly: dcid:bio/' + genome + '\n')
 	if line[2] not in list_chromosome and line[3] != 'na':
 		w.write('inChromosome: ' + genome + '_chr' + line[3] + '\n')
@@ -164,6 +169,7 @@ def write_chromosome(line, file_output, genome):
 	w.write('inGenomeAssemblyUnit: dcid:bio/' + genome + '_' + 
 		line[7].replace(' ', '_') + '\n')
 	w.write('chromosomeSize: [' + line[8] + ' BasePairs]\n\n')
+
 
 def main():
 	import sys
