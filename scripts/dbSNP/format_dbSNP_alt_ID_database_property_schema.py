@@ -40,7 +40,7 @@ def make_camel_case(item):
 		for i in l:
 			if len(i) > 2:
 				i = i.lower()
-				camel_item = camel_item + i[0].upper() + i[1:]
+				camel_item = camel_item + i.capitalize()
 	else:
 		return()
 	# make sure first character of the name is lowercase
@@ -158,7 +158,7 @@ def write_mcf(file_output, list_alt_db_IDs):
 		w.write('rangeIncludes: schema:Text\n')
 		w.write('domainIncludes: dcs:GeneticVariant\n')
 		w.write('description: "The ID used by database ' + re.sub(r"\B([A-Z])", 
-			r" \1", item[0].upper() + item[1:]) + ' for a genetic variant."\n')
+			r" \1", item.capitalize()) + ' for a genetic variant."\n')
 		w.write("\n")
 
 def main():
