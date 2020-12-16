@@ -37,7 +37,7 @@ def format_name(l):
 	'''
 	camel_item = ""
 	for i in l:
-		camel_item = camel_item + i[0].upper() + i[1:]
+		camel_item = camel_item + i.capitalize()
 	return camel_item
 
 def collect_freq_pop(freq_pops, set_freq_pop):
