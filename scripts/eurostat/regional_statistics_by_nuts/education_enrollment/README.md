@@ -70,8 +70,11 @@ The license is [available](https://ec.europa.eu/eurostat/about/policies/copyrigh
 #### Template MCFs
 [Eurostats_NUTS2_Enrollment.tmcf](./Eurostats_NUTS2_Enrollment.tmcf)
 
-#### StatisticalVariable Instance MCF
-[Eurostats_NUTS2_Enrollment.mcf](./Eurostats_NUTS2_Enrollment.mcf)
+#### StatisticalVariables
+This import uses StatVars in the Data Commons graph:
+ - [Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years](http://datacommons.org/browser/Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years)
+ - [Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female](http://datacommons.org/browser/Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female)
+ - [Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male](http://datacommons.org/browser/Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male)
 
 #### Scripts
 [education_enrollment_preprocess_gen_tmcf.py](./education_enrollment_preprocess_gen_tmcf.py)

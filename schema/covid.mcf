@@ -1,17 +1,21 @@
 Node: dcid:MedicalTestingMethodEnum
+name: "MedicalTestingMethodEnum"
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 description: "Types of medical tests for a disease."
 
 Node: dcid:COVID19TestingMethodEnum
+name: "COVID19TestingMethodEnum"
 typeOf: schema:Class
 subClassOf: dcs:MedicalTestingMethodEnum
 description: "Types of medical tests for COVID 19."
 
 Node: dcid:COVID19PCRTest
+name: "COVID19PCRTest"
 typeOf: dcs:COVID19TestingMethodEnum
 
 Node: dcid:medicalTestingMethod
+name: "medicalTestingMethod"
 typeOf: schema:Property
 description: "Medical testing method used to confirm the disease."
 domainIncludes: schema:Person, dcs:MedicalTest
@@ -25,10 +29,12 @@ rangeIncludes: schema:Number
 description: "The natural number used to describe how an instance of an OrdinalUnitOfMeasure is arranged among other instances of the same OrdinalUnitOfMeasure."
 
 Node: dcid:SchoolClosure
+name: "SchoolClosure"
 typeOf: dcs:LegislationTypeEnum
 description: "Record of closings of schools and universities."
 
 Node: dcid:OrdinalUnitOfMeasure
+name: "OrdinalUnitOfMeasure"
 typeOf: schema:Class
 subClassOf: dcs:UnitOfMeasure
 description: "UnitOfMeasure where the values are natural numbers representing non-numeric but well-ordered entities. Instances of this class define what each natural number represents. E.g a unit of rainbow color may indicate that 1 means red."
@@ -436,19 +442,24 @@ descriptionUrl: "https://github.com/OxCGRT/covid-policy-tracker/blob/master/docu
 ordinalCode: 2
 
 Node: dcid:ContactTracing
+name: "ContactTracing"
 typeOf: dcs:LegislationTypeEnum
 
 Node: dcid:ShortTermSpending
+name: "ShortTermSpending"
 typeOf: dcs:LegislationTypeEnum
 
 Node: dcid:expenditure
+name: "expenditure"
 typeOf: schema:Property
 rangeIncludes: schema:Legislation
 domainIncludes: schema:Number
 
 Node: dcid:ExpenditureTypeEnum
+name: "ExpenditureTypeEnum"
 typeOf: schema:Class
 subClassOf: schema:Enumeration
+description: "An enumeration of expense categories. For example, healthcare, education, military."
 
 Node: dcid:HealthcareExpenditure
 name: "HealthcareExpenditure"
