@@ -47,6 +47,10 @@ Please also note that while assembly report files are loosely tab delimited some
 
 This data is from an NIH National Library of Medicine (NLM) genome unrestricted-access data repository and made accessible under the [NIH Genomic Data Sharing (GDS) Policy](https://osp.od.nih.gov/scientific-sharing/genomic-data-sharing/) and the [NLM Accessibility policy](https://www.nlm.nih.gov/accessibility.html). Additional information on "NCBI Website and Data Usage Policies" can be found [here](https://www.ncbi.nlm.nih.gov/home/about/policies/).
 
+### Dataset Documentation and Relevant Links
+
+The database original documentation is accessible on [NCBI Assembly](https://www.ncbi.nlm.nih.gov/assembly/help/). NCBI assembly reports can be accessed using [FTP Download](https://ftp.ncbi.nlm.nih.gov/genomes/all/).
+
 ## About the import
 
 ### Artifacts
