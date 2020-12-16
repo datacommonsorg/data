@@ -2,6 +2,7 @@ Node: dcid:BiomedicalElement
 name: "BiomedicalElement"
 typeOf: schema:Class
 subClassOf: schema:Thing
+description: "Biomedical related entities."
 
 Node: dcid:ChemicalCompound
 name: "ChemicalCompound"
