@@ -1,7 +1,7 @@
 Node: dcid:BiologicalElement
 name: "BiologicalElement"
 typeOf: schema:Class
-subClassOf: schema:Thing
+subClassOf: dcs:BiomedicalElement
 description: "Biological entities."
 
 Node: dcid:GenomeAnnotation
