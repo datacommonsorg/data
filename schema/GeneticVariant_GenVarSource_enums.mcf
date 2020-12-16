@@ -14,7 +14,7 @@ typeOf: dcs:GenVarSourceEnum
 
 Node: dcid:GenVarSourceSiberian
 name: "Siberian"
-typeOf: dcs:GenVarSourceEnumf
+typeOf: dcs:GenVarSourceEnum
 
 Node: dcid:GenVarSource1000genomes
 name: "1000genomes"
