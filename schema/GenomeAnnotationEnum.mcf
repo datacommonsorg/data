@@ -1012,18 +1012,21 @@ description: "The set of chromosomes, unlocalized and unplaced (sometimes called
 Node: dcid:GenomeAssemblyTypeHaploidAssembly
 name: "GenomeAssemblyTypeHaploidAssembly"
 typeOf: dcs:"GenomeAssemblyTypeEnum"
+specializationOf: dcs:"GenomeAssemblyTypeAssembly"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
 description: "The collection of chromosome assemblies, unlocalized and unplaced sequences that represent an organism's genome. Any locus may be represented 0 or 1 time, and entire chromosomes are only represented 0 or 1 times."
 
 Node: dcid:GenomeAssemblyTypeHaploidWithAltLoci
 name: "GenomeAssemblyTypeHaploidWithAltLoci"
 typeOf: dcs:"GenomeAssemblyTypeEnum"
+specializationOf: dcs:"GenomeAssemblyTypeAssembly"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
 description: "The collection of chromosome assemblies, unlocalized and unplaced sequences and alternate loci that represent an organism's genome. Any locus may be represented 0, 1 or >1 time, but entire chromosomes are only represented 0 or 1 times."
 
 Node: dcid:GenomeAssemblyTypeDiploidAssembly
 name: "GenomeAssemblyTypeDiploidAssembly"
 typeOf: dcs:"GenomeAssemblyTypeEnum"
+specializationOf: dcs:"GenomeAssemblyTypeAssembly"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def"
 description: "A genome assembly for which a chromosome assembly is available for both sets of an individual's chromosomes. It is anticipated that a diploid genome assembly represents the genome of an individual, therefore, it is not expected that alternate loci will be defined for this assembly, although it is possible that unlocalized or unplaced sequences could be part of the assembly."
 
