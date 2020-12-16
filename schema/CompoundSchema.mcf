@@ -1,7 +1,12 @@
+Node: dcid:BiomedicalElement
+name: "BiomedicalElement"
+typeOf: schema:Class
+subClassOf: schema:Thing
+
 Node: dcid:ChemicalCompound
 name: "ChemicalCompound"
 typeOf: schema:Class
-subClassOf: schema:Thing
+subClassOf: dcid:BiomedicalElement
 description: "Chemical compound."
 url: "https://www.ebi.ac.uk/chembl/"
 
@@ -29,7 +34,7 @@ url: "https://www.ebi.ac.uk/chembl/"
 Node: dcid:ChemicalCompoundGeneAssociation
 name: "ChemicalCompoundGeneAssociation"
 typeOf: schema:Class
-subClassOf: schema:Intangible
+subClassOf: dcs:BiomedicalElement
 description: "The association of a chemical compound with a gene."
 
 Node: dcid:Protein
