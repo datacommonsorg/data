@@ -166,7 +166,7 @@ name: "genomeAssemblyReleaseType"
 typeOf: schema:Property
 rangeIncludes: dcs:GenomeAssemblyReleaseTypeEnum
 domainIncludes: dcs:GenomeAssembly
-description: "Defines the update type of this genome assembly version release:"
+description: "Defines the update type of this genome assembly version release."
 
 Node: dcid:genomeAssemblyLevel
 name: "genomeAssemblyLevel"
@@ -389,7 +389,7 @@ name: "ensemblID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Gene,dcs:GeneticVariantGeneAssociation,dcs:Protein
-description: "Ensembl ID, which describes a particular gene or protein as documented https://m.ensembl.org/Help/Faq?id=488."
+description: "Ensembl ID, which describes a particular gene or protein."
 
 Node: dcid:mapLocation
 name: "mapLocation"
