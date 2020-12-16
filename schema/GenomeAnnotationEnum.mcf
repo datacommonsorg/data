@@ -1046,7 +1046,7 @@ Node: dcid:GenomeAssemblyReleaseTypeEnum
 name: "GenomeAssemblyReleaseTypeEnum"
 typeOf: schema:Class
 subClassOf: schema:Enumeration
-description: "Defines the update type of this genome assembly version release:"
+description: "Defines the update type of this genome assembly version release."
 
 Node: dcid:GenomeAssemblyReleaseTypeMajor
 name: "GenomeAssemblyReleaseTypeMajor"
@@ -1064,7 +1064,7 @@ Node: dcid:GenomeAssemblyReleaseTypePatch
 name: "GenomeAssemblyReleaseTypePatch"
 typeOf: dcs:"GenomeAssemblyReleaseTypeEnum"
 descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
-description: "The only change from the previous assembly version is the addition or modification of a patch assembly-unit (relevant for assemblies maintained by the Genome Reference Consortium )"
+description: "The only change from the previous assembly version is the addition or modification of a patch assembly-unit (relevant for assemblies maintained by the Genome Reference Consortium)"
 
 Node: dcid:GenomeAssemblyLevelEnum
 name: "GenomeAssemblyLevelEnum"
@@ -1155,7 +1155,9 @@ description: "The object is either an alternate loci scaffold or a patch scaffol
 Node: dcid:DNASequenceRoleFixPatch
 name: "DNASequenceRoleFix-patch"
 typeOf: dcs:DNASequenceRoleEnum
+description: "The object is a fix patch to the assembly-unit scaffold."
 
 Node: dcid:DNASequenceRoleNovelPatch
 name: "DNASequenceRoleNovel-patch"
 typeOf: dcs:DNASequenceRoleEnum
+description: "The object is a novel patch to the assembly-unit scaffold."
