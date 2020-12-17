@@ -12,12 +12,12 @@ Author: @edumorlom
 
 ### Download URL
 
-The import APIs can be found in ./Config.py.
+The import APIs can be found in [Config.py](./Config.py)
 Each API returns the time series data for each Indian State along with the State's districts.
 
 ### Overview
 
-This dataset shows how Covid-19 has impacted States and Districts in India.
+This dataset shows how COVID-19 has impacted States and Districts in India.
 
 #### Active Cases
 
@@ -39,11 +39,7 @@ This dataset includes the total number of cumulative deaths for each region for 
 
 This dataset includes the total number of tests performed for each region for a specific date.
 
-The entire dataset is broken down into:
-
-#### State
-
-Each State is further broken down into District.
+The entire dataset is broken down into State and each State is further broken down into District.
 
 ## Import Artifacts
 
@@ -97,8 +93,8 @@ python3 run_tests.py
 
 ## Generating CSV
 
-To generate the output CSV `output.csv`, run
+To generate the `output.csv`, run
 
 ``` bash
-python3 main.py
+python3 Covid19India.py
 ```
