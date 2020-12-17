@@ -12,8 +12,6 @@ identifiers (Data Commons is moving away from dcid-based references for
 geos).
 1. The names in the CSV are not used. They are included for contributor
 convenience.
-1. Once Data Commons stops accepting place type declarations from arbitrary
-imports, this script should just hardcode "Place" as the place type.
 
 ## Example
 
