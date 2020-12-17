@@ -1,0 +1,629 @@
+wikidataId,country=India,districtName,wikidataName
+Q4726845,True,Alipurduar,Alipurduar district
+Q2088458,True,Bankura,Bankura district
+Q2088440,True,Birbhum,Birbhum district
+Q2728658,True,Cooch Behar,Cooch Behar district
+Q533839,True,Dakshin Dinajpur,Dakshin Dinajpur district
+Q1134759,True,Darjeeling,Darjeeling district
+Q548518,True,Hooghly,Hooghly district
+Q1478937,True,Howrah,Howrah district
+Q1351487,True,Jalpaiguri,Jalpaiguri district
+Q29168456,True,Jhargram,Jhargram district
+Q28769140,True,Kalimpong,Kalimpong district
+Q2088496,True,Kolkata,Kolkata district
+Q2049820,True,Malda,Malda district
+Q1546240,True,Murshidabad,Murshidabad district
+Q1143880,True,Nadia,Nadia district
+Q338425,True,North 24 Parganas,North 24 Parganas district
+Q808023,True,Paschim Bardhaman,Bardhaman district
+Q1855537,True,Paschim Medinipur,Paschim Medinipur district
+Q29257278,True,Purba Bardhaman,Purba Bardhaman district
+Q1431920,True,Purba Medinipur,Purba Medinipur district
+Q307474,True,Purulia,Purulia district
+Q2308319,True,South 24 Parganas,South 24 Parganas district
+Q2019766,True,Uttar Dinajpur,Uttar Dinajpur district
+Q1805066,True,Almora,Almora district
+Q1815313,True,Bageshwar,Bageshwar district
+Q1797372,True,Chamoli,Chamoli district
+Q288278,True,Champawat,Champawat district
+Q1815740,True,Dehradun,Dehradun district
+Q2270438,True,Haridwar,Haridwar district
+Q1797306,True,Nainital,Nainital district
+Q2085474,True,Pauri Garhwal,Pauri Garhwal district
+Q1945425,True,Pithoragarh,Pithoragarh district
+Q1805059,True,Rudraprayag,Rudraprayag district
+Q1357107,True,Tehri Garhwal,Tehri Garhwal district
+Q1805082,True,Udham Singh Nagar,Udham Singh Nagar district
+Q1773437,True,Uttarkashi,Uttarkashi district
+Q606343,True,Agra,Agra district
+Q766918,True,Aligarh,Aligarh district
+Q456764,True,Ambedkar Nagar,Ambedkar Nagar district
+Q1071494,True,Amethi,Amethi district
+Q1891677,True,Amroha,Amroha district
+Q1812533,True,Auraiya,Auraiya district
+Q1814132,True,Ayodhya,Ayodhya district
+Q793553,True,Azamgarh,Azamgarh district
+Q1797363,True,Baghpat,Bagpat district
+Q1812548,True,Bahraich,Bahraich district
+Q584644,True,Ballia,Ballia district
+Q1948380,True,Balrampur,Balrampur district
+Q2131759,True,Banda,Banda district
+Q633114,True,Barabanki,Barabanki district
+Q1797378,True,Bareilly,Bareilly district
+Q715267,True,Basti,Basti district
+Q127533,True,Bhadohi,Bhadohi district
+Q1937865,True,Bijnor,Bijnor district
+Q1815262,True,Budaun,Budaun district
+Q1752328,True,Bulandshahr,Bulandshahr district
+Q2733369,True,Chandauli,Chandauli district
+Q2089141,True,Chitrakoot,Chitrakoot district
+Q731746,True,Deoria,Deoria district
+Q1773429,True,Etah,Etah district
+Q1815288,True,Etawah,Etawah district
+Q1897251,True,Farrukhabad,Farrukhabad district
+Q1946829,True,Fatehpur,Fatehpur district
+Q1946950,True,Firozabad,Firozabad district
+Q1785950,True,Gautam Buddha Nagar,Gautam Buddh Nagar district
+Q1773444,True,Ghaziabad,Ghaziabad district
+Q1287993,True,Ghazipur,Ghazipur district
+Q1937857,True,Gonda,Gonda district
+Q1144349,True,Gorakhpur,Gorakhpur district
+Q2019757,True,Hamirpur,Hamirpur district
+Q5653340,True,Hapur,Hapur district
+Q1772822,True,Hardoi,Hardoi district
+Q1814892,True,Hathras,Hathras district
+Q2089115,True,Jalaun,Jalaun district
+Q1356060,True,Jaunpur,Jaunpur district
+Q1937885,True,Jhansi,Jhansi district
+Q627979,True,Kannauj,Kannauj district
+Q610612,True,Kanpur Dehat,Kanpur Dehat district
+Q2089152,True,Kanpur Nagar,Kanpur Nagar district
+Q890800,True,Kasganj,Kasganj district
+Q1946937,True,Kaushambi,Kaushambi district
+Q1840355,True,Kushinagar,Kushinagar district
+Q1755447,True,Lakhimpur Kheri,Lakhimpur Kheri district
+Q1947336,True,Lalitpur,Lalitpur district
+Q1773416,True,Lucknow,Lucknow district
+Q1356139,True,Maharajganj,Maharajganj district
+Q1815322,True,Mahoba,Mahoba district
+Q1816657,True,Mainpuri,Mainpuri district
+Q1773422,True,Mathura,Mathura district
+Q1518847,True,Mau,Mau district
+Q1764627,True,Meerut,Meerut district
+Q1143894,True,Mirzapur,Mirzapur district
+Q1345006,True,Moradabad,Moradabad district
+Q2365710,True,Muzaffarnagar,Muzaffarnagar district
+Q2980705,True,Pilibhit,Pilibhit district
+Q1473962,True,Pratapgarh,Pratapgarh district
+Q1773426,True,Prayagraj,Allahabad district
+Q1321157,True,Rae Bareli,Raebareli district
+Q1815331,True,Rampur,Rampur district
+Q1797326,True,Saharanpur,Saharanpur district
+Q3000436,True,Sambhal,Sambhal district
+Q1945445,True,Sant Kabir Nagar,Sant Kabir Nagar district
+Q1812557,True,Shahjahanpur,Shahjahanpur district
+Q2999938,True,Shamli,Shamli district
+Q1945458,True,Shrawasti,Shravasti district
+Q1815339,True,Siddharthnagar,Siddharthnagar district
+Q1812539,True,Sitapur,Sitapur district
+Q607798,True,Sonbhadra,Sonebhadra district
+Q1356154,True,Sultanpur,Sultanpur district
+Q1937875,True,Unnao,Unnao district
+Q1321140,True,Varanasi,Varanasi district
+Q2086546,True,Dhalai,Dhalai district
+Q16086497,True,Gomati,Gomati district
+Q16086680,True,Khowai,Khowai district
+Q1920978,True,North Tripura,North Tripura district
+Q16086076,True,Sipahijala,Sipahijala district
+Q1822159,True,South Tripura,South Tripura district
+Q16087996,True,Unokoti,Unakoti district
+Q1947570,True,West Tripura,West Tripura district
+Q15112,True,Ariyalur,Ariyalur district
+Q65976177,True,Chengalpattu,Chengalpattu district
+Q15116,True,Chennai,Chennai district
+Q15136,True,Coimbatore,Coimbatore district
+Q15150,True,Cuddalore,Cuddalore district
+Q15152,True,Dharmapuri,Dharmapuri district
+Q15154,True,Dindigul,Dindigul district
+Q15155,True,Erode,Erode district
+Q60493360,True,Kallakurichi,Kallakurichi District
+Q15157,True,Kancheepuram,Kanchipuram district
+Q15158,True,Kanyakumari,Kanyakumari district
+Q15182,True,Karur,Karur district
+Q15183,True,Krishnagiri,Krishnagiri district
+Q15184,True,Madurai,Madurai district
+Q15185,True,Nagapattinam,Nagapattinam district
+Q15187,True,Namakkal,Namakkal district
+Q15188,True,Nilgiris,Nilgiris district
+Q15186,True,Perambalur,Perambalur district
+Q15190,True,Pudukkottai,Pudukkottai district
+Q15191,True,Ramanathapuram,Ramanathapuram district
+Q66659623,True,Ranipet,Ranipet district
+Q15192,True,Salem,Salem district
+Q15195,True,Sivaganga,Sivaganga District
+Q75094121,True,Tenkasi,Tenkasi district
+Q15194,True,Thanjavur,Thanjavur district
+Q15196,True,Theni,Theni district
+Q15204,True,Thiruvallur,Tiruvallur district
+Q15197,True,Thiruvarur,Tiruvarur district
+Q15198,True,Thoothukkudi,Thoothukudi district
+Q15201,True,Tiruchirappalli,Tiruchirappalli district
+Q15200,True,Tirunelveli,Tirunelveli district
+Q66659621,True,Tirupathur,Tirupathur district
+Q15202,True,Tiruppur,Tirupur district
+Q15207,True,Tiruvannamalai,Tiruvannamalai district
+Q15206,True,Vellore,Vellore district
+Q15205,True,Viluppuram,Viluppuram District
+Q15209,True,Virudhunagar,Virudhunagar district
+Q413037,True,Ajmer,Ajmer district
+Q449690,True,Alwar,Alwar district
+Q806969,True,Banswara,Banswara district
+Q2329717,True,Baran,Baran district
+Q42016,True,Barmer,Barmer district
+Q854861,True,Bharatpur,Bharatpur district
+Q41991,True,Bhilwara,Bhilwara district
+Q778996,True,Bikaner,Bikaner district
+Q670405,True,Bundi,Bundi district
+Q1075011,True,Chittorgarh,Chittorgarh district
+Q1090006,True,Churu,Churu district
+Q1173042,True,Dausa,Dausa district
+Q1207709,True,Dholpur,Dholpur district
+Q1265687,True,Dungarpur,Dungarpur district
+Q1419696,True,Ganganagar,Sri Ganganagar district
+Q1356112,True,Hanumangarh,Hanumangarh District
+Q1134781,True,Jaipur,Jaipur district
+Q1419708,True,Jaisalmer,Jaisalmer district
+Q1460832,True,Jalore,Jalore district
+Q1471417,True,Jhalawar,Jhalawar district
+Q1471427,True,Jhunjhunu,Jhunjhunu district
+Q1434965,True,Jodhpur,Jodhpur district
+Q1419668,True,Karauli,Karauli district
+Q999432,True,Kota,Kota district
+Q1507174,True,Nagaur,Nagaur district
+Q46925,True,Pali,Pali district
+Q1585433,True,Pratapgarh,Pratapgarh district
+Q596693,True,Rajsamand,Rajsamand district
+Q1507166,True,Sawai Madhopur,Sawai Madhopur District
+Q12945777,True,Sikar,Sikar district
+Q205719,True,Sirohi,Sirohi district
+Q915880,True,Tonk,Tonk district
+Q1321577,True,Udaipur,Udaipur district
+Q202822,True,Amritsar,Amritsar district
+Q2353293,True,Barnala,Barnala district
+Q172488,True,Bathinda,Bathinda district
+Q172494,True,Faridkot,Faridkot district
+Q172485,True,Fatehgarh Sahib,Fatehgarh Sahib District
+Q188702,True,Fazilka,Fazilka district
+Q172385,True,Ferozepur,Firozpur district
+Q146708,True,Gurdaspur,Gurdaspur district
+Q304800,True,Hoshiarpur,Hoshiarpur District
+Q1817425,True,Jalandhar,Jalandhar district
+Q172363,True,Kapurthala,Kapurthala district
+Q172482,True,Ludhiana,Ludhiana district
+Q172387,True,Mansa,Mansa district
+Q1946896,True,Moga,Moga district
+Q172269,True,Pathankot,Pathankot district
+Q172391,True,Patiala,Patiala district
+Q196508,True,Rupnagar,Rupnagar district
+Q2037672,True,S.A.S. Nagar,Mohali district
+Q1945515,True,Sangrur,Sangrur district
+Q202710,True,Shahid Bhagat Singh Nagar,Shahid Bhagat Singh Nagar District
+Q1947359,True,Sri Muktsar Sahib,Sri Muktsar Sahib district
+Q2298993,True,Tarn Taran,Tarn Taran district
+Q639264,True,Karaikal,Karaikal district
+Q639279,True,Mahe,Mahé district
+Q984035,True,Puducherry,Puducherry district
+Q2126598,True,Yanam,Yanam district
+Q1772807,True,Angul,Angul district
+Q804642,True,Balangir,Balangir district
+Q2022279,True,Balasore,Balasore district
+Q808140,True,Bargarh,Bargarh district
+Q685638,True,Bhadrak,Bhadrak district
+Q2363639,True,Boudh,Boudh district
+Q2022256,True,Cuttack,Cuttack District
+Q2269639,True,Deogarh,Debagarh district
+Q1948389,True,Dhenkanal,Dhenkanal district
+Q1947292,True,Gajapati,Gajapati district
+Q776213,True,Ganjam,Ganjam district
+Q971581,True,Jagatsinghpur,Jagatsinghpur district
+Q2087771,True,Jajpur,Jajpur district
+Q569181,True,Jharsuguda,Jharsuguda district
+Q1876588,True,Kalahandi,Kalahandi district
+Q2085500,True,Kandhamal,Kandhamal district
+Q2299172,True,Kendrapara,Kendrapara district
+Q2085428,True,Kendujhar,Kendujhar district
+Q662818,True,Khordha,Khordha district
+Q1947300,True,Koraput,Koraput district
+Q5122619,True,Malkangiri,Malkangiri district
+Q1914546,True,Mayurbhanj,Mayurbhanj district
+Q2396798,True,Nabarangapur,Nabarangpur district
+Q2367388,True,Nayagarh,Nayagarh district
+Q1810550,True,Nuapada,Nuapada district
+Q1817158,True,Puri,Puri district
+Q2577997,True,Rayagada,Rayagada district
+Q1267306,True,Sambalpur,Sambalpur district
+Q1473957,True,Subarnapur,Subarnapur district
+Q2296047,True,Sundargarh,Sundargarh district
+Q634262,True,Dimapur,Dimapur district
+Q2597908,True,Kiphire,Kiphire district
+Q953530,True,Kohima,Kohima district
+Q1426783,True,Longleng,Longleng district
+Q2175311,True,Mokokchung,Mokokchung district
+Q2339648,True,Mon,Mon district
+Q516294,True,Peren,Peren district
+Q590882,True,Phek,Phek district
+Q2571393,True,Tuensang,Tuensang district
+Q681821,True,Wokha,Wokha district
+Q2091461,True,Zunheboto,Zunheboto district
+Q1947322,True,Aizawl,Aizawl district
+Q1965256,True,Champhai,Champhai district
+Q89360042,True,Hnahthial,Hnahthial district
+Q89371656,True,Khawzawl,Khawzawl district
+Q1947343,True,Kolasib,Kolasib district
+Q2086209,True,Lawngtlai,Lawngtlai district
+Q1947352,True,Lunglei,Lunglei district
+Q751531,True,Mamit,Mamit district
+Q1821714,True,Saiha,Saiha District
+Q89371650,True,Saitual,Saitual district
+Q2086190,True,Serchhip,Serchhip District
+Q2085455,True,East Garo Hills,East Garo Hills district
+Q15923776,True,East Jaintia Hills,East Jaintia Hills district
+Q1945304,True,East Khasi Hills,East Khasi Hills district
+Q7055466,True,North Garo Hills,North Garo Hills district
+Q1884672,True,Ribhoi,Ri-Bhoi district
+Q2329228,True,South Garo Hills,South Garo Hills district
+Q15961576,True,South West Garo Hills,South West Garo Hills district
+Q15923741,True,South West Khasi Hills,South West Khasi Hills district
+Q2329181,True,West Garo Hills,West Garo Hills district
+Q13181190,True,West Jaintia Hills,West Jaintia Hills district
+Q2064752,True,West Khasi Hills,West Khasi Hills district
+Q401744,True,Ahmednagar,Ahmednagar district
+Q520510,True,Akola,Akola district
+Q1771774,True,Amravati,Amravati district
+Q592942,True,Aurangabad,Aurangabad district
+Q814037,True,Beed,Beed district
+Q1813857,True,Bhandara,Bhandara district
+Q47929,True,Buldhana,Buldhana district
+Q1797274,True,Chandrapur,Chandrapur district
+Q1797383,True,Dhule,Dhule district
+Q1804847,True,Gadchiroli,Gadchiroli district
+Q1917227,True,Gondia,Gondia district
+Q2087615,True,Hingoli,Hingoli district
+Q1797291,True,Jalgaon,Jalgaon district
+Q1804863,True,Jalna,Jalna district
+Q1797312,True,Kolhapur,Kolhapur district
+Q1948713,True,Latur,Latur district
+Q2341660,True,Mumbai,Mumbai City district
+Q1797367,True,Nagpur,Nagpur district
+Q692389,True,Nanded,Nanded district
+Q1623525,True,Nandurbar,Nandurbar district
+Q1797269,True,Nashik,Nashik district
+Q1647186,True,Osmanabad,Osmanabad district
+Q18003119,True,Palghar,Palghar district
+Q1797389,True,Parbhani,Parbhani district
+Q1797336,True,Pune,Pune district
+Q2019683,True,Raigad,Raigad district
+Q1771768,True,Ratnagiri,Ratnagiri district
+Q1425060,True,Sangli,Sangli district
+Q1135612,True,Satara,Satara district
+Q768332,True,Sindhudurg,Sindhudurg district
+Q1797263,True,Solapur,Solapur district
+Q943099,True,Thane,Thane district
+Q980608,True,Wardha,Wardha district
+Q1804858,True,Washim,Washim District
+Q1804852,True,Yavatmal,Yavatmal district
+Q15732396,True,Agar Malwa,Agar Malwa district
+Q2667586,True,Alirajpur,Alirajpur district
+Q2299093,True,Anuppur,Anuppur district
+Q2246416,True,Ashoknagar,Ashoknagar district
+Q641904,True,Balaghat,Balaghat district
+Q2126754,True,Barwani,Barwani district
+Q1815279,True,Betul,Betul district
+Q2341700,True,Bhind,Bhind district
+Q1797245,True,Bhopal,Bhopal district
+Q2125592,True,Burhanpur,Burhanpur district
+Q2449785,True,Chhatarpur,Chhatarpur district
+Q1986096,True,Chhindwara,Chhindwara district
+Q2479331,True,Damoh,Damoh district
+Q2206266,True,Datia,Datia district
+Q2025998,True,Dewas,Dewas district
+Q2299069,True,Dhar,Dhar district
+Q2398551,True,Dindori,Dindori district
+Q930027,True,Guna,Guna district
+Q2085310,True,Gwalior,Gwalior district
+Q2173003,True,Harda,Harda district
+Q620801,True,Hoshangabad,Hoshangabad district
+Q742938,True,Indore,Indore district
+Q632093,True,Jabalpur,Jabalpur district
+Q2085336,True,Jhabua,Jhabua district
+Q746441,True,Katni,Katni district
+Q2085436,True,Khandwa,Khandwa district
+Q2273900,True,Khargone,Khargone district
+Q2341670,True,Mandla,Mandla district
+Q1870014,True,Mandsaur,Mandsaur district
+Q2341467,True,Morena,Morena district
+Q2341616,True,Narsinghpur,Narsinghpur district
+Q2341713,True,Neemuch,Neemuch district
+Q63563797,True,Niwari,Niwari district
+Q2341630,True,Panna,Panna district
+Q1815223,True,Raisen,Raisen district
+Q1833306,True,Rajgarh,Rajgarh district
+Q2299164,True,Ratlam,Ratlam district
+Q526862,True,Rewa,Rewa District
+Q2085421,True,Sagar,Sagar District
+Q2577924,True,Satna,Satna District
+Q2299029,True,Sehore,Sehore district
+Q2221184,True,Seoni,Seoni district
+Q2085464,True,Shahdol,Shahdol district
+Q2449803,True,Shajapur,Shajapur district
+Q620105,True,Sheopur,Sheopur district
+Q2299042,True,Shivpuri,Shivpuri district
+Q2449793,True,Sidhi,Sidhi district
+Q2668638,True,Singrauli,Singrauli district
+Q2449760,True,Tikamgarh,Tikamgarh district
+Q892641,True,Ujjain,Ujjain district
+Q620297,True,Umaria,Umaria district
+Q1815253,True,Vidisha,Vidisha district
+Q1650798,True,Kargil,Kargil district
+Q1921210,True,Leh,Leh district
+Q928959,True,Alappuzha,Alappuzha district
+Q1356097,True,Ernakulam,Ernakulam district
+Q301821,True,Idukki,Idukki district
+Q2980652,True,Kannur,Kannur district
+Q1419703,True,Kasaragod,Kasaragod district
+Q1356124,True,Kollam,Kollam district
+Q1353354,True,Kottayam,Kottayam district
+Q1142979,True,Kozhikode,Kozhikode district
+Q1030918,True,Malappuram,Malappuram district
+Q1535742,True,Palakkad,Palakkad district
+Q634935,True,Pathanamthitta,Pathanamthitta district
+Q162612,True,Thiruvananthapuram,Thiruvananthapuram district
+Q2429655,True,Thrissur,Thrissur district
+Q1364427,True,Wayanad,Wayanad district
+Q1910231,True,Bagalkote,Bagalkot district
+Q1791926,True,Ballari,Ballari District
+Q815464,True,Belagavi,Belagavi district
+Q806464,True,Bengaluru Rural,Bangalore Rural district
+Q806463,True,Bengaluru Urban,Bengaluru Urban district
+Q1790568,True,Bidar,Bidar district
+Q862912,True,Chamarajanagara,Chamarajanagar district
+Q1072629,True,Chikkaballapura,Chikkaballapura district
+Q743077,True,Chikkamagaluru,Chikkamagaluru district
+Q165264,True,Chitradurga,Chitradurga district
+Q950571,True,Dakshina Kannada,Dakshina Kannada district
+Q1863214,True,Davanagere,Davanagere district
+Q1790904,True,Dharwad,Dharwad district
+Q2353931,True,Gadag,Gadag district
+Q956732,True,Hassan,Hassan District
+Q765481,True,Haveri,Haveri District
+Q2641873,True,Kalaburagi,Kalaburgi district
+Q1553185,True,Kodagu,Kodagu district
+Q2509866,True,Kolar,Kolar district
+Q956387,True,Koppal,Koppal district
+Q2768290,True,Mandya,Mandya district
+Q591781,True,Mysuru,Mysore district
+Q1430830,True,Raichur,Raichur district
+Q427679,True,Ramanagara,Ramanagara district
+Q2981389,True,Shivamogga,Shimoga District
+Q1301635,True,Tumakuru,Tumakuru district
+Q1483337,True,Udupi,Udupi district
+Q579205,True,Uttara Kannada,Uttara Kannada District
+Q83108,True,Vijayapura,Vijaypura District
+Q1786949,True,Yadgir,Yadgir district
+Q2295925,True,Bokaro,Bokaro district
+Q1979499,True,Chatra,Chatra district
+Q2030017,True,Deoghar,Deoghar District
+Q2240791,True,Dhanbad,Dhanbad district
+Q2577657,True,Dumka,Dumka district
+Q2452921,True,East Singhbhum,East Singhbhum district
+Q2302076,True,Garhwa,Garhwa district
+Q2302065,True,Giridih,Giridih district
+Q638980,True,Godda,Godda district
+Q2295865,True,Gumla,Gumla district
+Q1945416,True,Hazaribagh,Hazaribagh District
+Q2980986,True,Jamtara,Jamtara district
+Q367344,True,Khunti,Khunti district
+Q2085480,True,Koderma,Koderma district
+Q2244762,True,Latehar,Latehar district
+Q1948301,True,Lohardaga,Lohardaga district
+Q2295930,True,Pakur,Pakur district
+Q1797254,True,Palamu,Palamu district
+Q2663612,True,Ramgarh,Ramgarh district
+Q1947380,True,Ranchi,Ranchi district
+Q767878,True,Sahibganj,Sahebganj district
+Q2362658,True,Saraikela-Kharsawan,Seraikela Kharsawan district
+Q2597889,True,Simdega,Simdega District
+Q1950527,True,West Singhbhum,West Singhbhum district
+Q2982349,True,Anantnag,Anantnag district
+Q2983553,True,Bandipora,Bandipore district
+Q1912057,True,Baramulla,Baramulla district
+Q2594218,True,Budgam,Budgam district
+Q2298979,True,Doda,Doda District
+Q2556028,True,Ganderbal,Ganderbal district
+Q1947371,True,Jammu,Jammu district
+Q2375700,True,Kathua,Kathua District
+Q2321899,True,Kishtwar,Kishtwar district
+Q2321867,True,Kulgam,Kulgam district
+Q2297306,True,Kupwara,Kupwara district
+Q2085364,True,Pulwama,Pulwama district
+Q2983134,True,Punch,Poonch district
+Q544279,True,Rajouri,Rajouri district
+Q2321939,True,Ramban,Ramban district
+Q2321956,True,Reasi,Reasi district
+Q1117086,True,Samba,Samba district
+Q2073646,True,Shopiyan,Shopian district
+Q1506029,True,Srinagar,Srinagar district
+Q1947311,True,Udhampur,Udhampur district
+Q3710724,True,Bilaspur,Bilaspur District
+Q1060614,True,Chamba,Chamba district
+Q5645337,True,Hamirpur,Hamirpur District
+Q727232,True,Kangra,Kangra district
+Q1862950,True,Kinnaur,Kinnaur district
+Q2980880,True,Kullu,Kullu district
+Q837595,True,Lahaul and Spiti,Lahaul and Spiti district
+Q1892161,True,Mandi,Mandi district
+Q1921404,True,Shimla,Shimla District
+Q654331,True,Sirmaur,Sirmaur district
+Q2980937,True,Solan,Solan district
+Q2301741,True,Una,Una district
+Q2086226,True,Ambala,Ambala district
+Q1852857,True,Bhiwani,Bhiwani district
+Q28172110,True,Charkhi Dadri,Charkhi Dadri district
+Q2086173,True,Faridabad,Faridabad district
+Q2301753,True,Fatehabad,Fatehabad district
+Q1815766,True,Gurugram,Gurugram district
+Q1815773,True,Hisar,Hisar District
+,False,Italians,
+Q1948260,True,Jhajjar,Jhajjar district
+Q268605,True,Jind,Jind district
+Q614037,True,Kaithal,Kaithal district
+Q607915,True,Karnal,Karnal district
+Q980118,True,Kurukshetra,Kurukshetra district
+Q684019,True,Mahendragarh,Mahendragarh district
+Q2216696,True,Nuh,Nuh district
+Q2724926,True,Palwal,Palwal district
+Q1898143,True,Panchkula,Panchkula district
+Q2086163,True,Panipat,Panipat district
+Q2301759,True,Rewari,Rewari district
+Q967388,True,Rohtak,Rohtak
+Q526101,True,Sirsa,Sirsa District
+Q2241746,True,Sonipat,Sonipat District
+Q1873644,True,Yamunanagar,Yamunanagar district
+Q401686,True,Ahmedabad,Ahmedabad district
+Q257946,True,Amreli,Amreli district
+Q485683,True,Anand,Anand district
+Q12175285,True,Aravalli,Aravalli district
+Q806125,True,Banaskantha,Banaskantha district
+Q854900,True,Bharuch,Bharuch district
+Q854963,True,Bhavnagar,Bhavnagar district
+Q14505072,True,Botad,Botad district
+Q5979243,True,Chhota Udaipur,Chhota Udaipur district
+Q186518,True,Dahod,Dahod district
+Q1135616,True,Dang,Dang district
+Q14594717,True,Devbhumi Dwarka,Devbhoomi Dwarka district
+Q1772860,True,Gandhinagar,Gandhinagar district
+Q15244465,True,Gir Somnath,Gir Somnath district
+Q2982118,True,Jamnagar,Jamnagar district
+Q1797344,True,Junagadh,Junagadh district
+Q1755463,True,Kheda,Kheda district
+Q1063417,True,Kutch,Kutch district
+Q5706885,True,Mahisagar,Mahisagar district
+Q2019694,True,Mehsana,Mehsana district
+Q5979727,True,Morbi,Morbi district
+Q1797230,True,Narmada,Narmada district
+Q1797349,True,Navsari,Navsari district
+Q1781463,True,Panchmahal,Panchmahal district
+Q1815269,True,Patan,Patan district
+Q1772815,True,Porbandar,Porbandar district
+Q1815245,True,Rajkot,Rajkot district
+Q1772856,True,Sabarkantha,Sabarkantha district
+Q1797317,True,Surat,Surat district
+Q237535,True,Surendranagar,Surendranagar district
+Q670165,True,Tapi,Tapi district
+Q578285,True,Vadodara,Vadodara district
+Q1946743,True,Valsad,Valsad district
+Q16056266,True,Balod,Balod district
+Q15663455,True,Baloda Bazar,Baloda Bazar district
+Q16056268,True,Balrampur,Balrampur district
+Q16254159,True,Bametara,Bemetara district
+Q100152,True,Bastar,Bastar district
+Q100164,True,Bijapur,Bijapur District
+Q100157,True,Bilaspur,Bilaspur district
+Q100211,True,Dakshin Bastar Dantewada,Dantewada district
+Q100190,True,Dhamtari,Dhamtari district
+Q100182,True,Durg,Durg district
+Q16961365,True,Gariaband,Gariaband district
+Q98304389,True,Gaurela Pendra Marwahi,Gaurella-Pendra-Marwahi district
+Q2575633,True,Janjgir Champa,Janjgir–Champa district
+Q2577551,True,Jashpur,Jashpur district
+Q2450255,True,Kabeerdham,Kabirdham district
+Q12420995,True,Kondagaon,Kondagaon district
+Q2299121,True,Korba,Korba district
+Q2295896,True,Koriya,Koriya district
+Q2450240,True,Mahasamund,Mahasamund district
+Q13476249,True,Mungeli,Mungeli district
+Q2322000,True,Narayanpur,Narayanpur district
+Q2286310,True,Raigarh,Raigarh district
+Q2295914,True,Raipur,Raipur district
+Q2341800,True,Rajnandgaon,Rajnandgaon district
+Q16933590,True,Sukma,Sukma district
+Q16938031,True,Surajpur,Surajpur district
+Q1805075,True,Surguja,Surguja district
+Q2310530,True,Uttar Bastar Kanker,Kanker district
+Q5071071,True,Chandigarh,Chandigarh district
+Q42901,True,Araria,Araria district
+Q42917,True,Arwal,Arwal district
+Q43086,True,Aurangabad,Aurangabad district
+Q43097,True,Banka,Banka district
+Q49157,True,Begusarai,Begusarai district
+Q49155,True,Bhagalpur,Bhagalpur district
+Q49153,True,Bhojpur,Bhojpur district
+Q49161,True,Buxar,Buxar district
+Q49160,True,Darbhanga,Darbhanga district
+Q49159,True,East Champaran,East Champaran district
+Q49173,True,Gaya,Gaya district
+Q49171,True,Gopalganj,Gopalganj District
+Q49168,True,Jamui,Jamui district
+Q49176,True,Jehanabad,Jehanabad district
+Q77367,True,Kaimur,Kaimur district
+Q77568,True,Katihar,Katihar district
+Q49175,True,Khagaria,Khagaria district
+Q77375,True,Kishanganj,Kishanganj District
+Q77505,True,Lakhisarai,Lakhisarai district
+Q77746,True,Madhepura,Madhepura district
+Q77474,True,Madhubani,Madhubani district
+Q77452,True,Munger,Munger district
+Q77731,True,Muzaffarpur,Muzaffarpur district
+Q77633,True,Nalanda,Nalanda district
+Q100067,True,Nawada,Nawada district
+Q100077,True,Patna,Patna district
+Q100082,True,Purnia,Purnia district
+Q100085,True,Rohtas,Rohtas district
+Q100120,True,Saharsa,Saharsa district
+Q100117,True,Samastipur,Samastipur district
+Q100146,True,Saran,Saran district
+Q100093,True,Sheikhpura,Sheikhpura district
+Q100095,True,Sheohar,Sheohar district
+Q100144,True,Sitamarhi,Sitamarhi district
+Q100131,True,Siwan,Siwan district
+Q100139,True,Supaul,Supaul district
+Q100130,True,Vaishali,Vaishali district
+Q100124,True,West Champaran,West Champaran district
+Q15413,True,Anjaw,Anjaw district
+Q15427,True,Changlang,Changlang district
+Q15446,True,Upper Dibang Valley,Dibang Valley district
+Q15424,True,East Kameng,East Kameng district
+Q15419,True,East Siang,East Siang district
+Q48731073,True,Kamle,Kamle district
+Q21018627,True,Kra Daadi,Kra Daadi district
+Q2449506,True,Kurung Kumey,Kurung Kumey district
+Q63563632,True,Lepa Rada,Lepa Rada district
+Q15438,True,Lohit,Lohit district
+Q5627568,True,Longding,Longding district
+Q2373368,True,Lower Dibang Valley,Lower Dibang Valley district
+Q13602925,True,Lower Siang,Lower Siang district
+Q15436,True,Lower Subansiri,Lower Subansiri district
+Q21559824,True,Namsai,Namsai district
+Q61439260,True,Pakke Kessang,Pakke-Kessang district
+Q15432,True,Papum Pare,Papum Pare district
+Q63563625,True,Shi Yomi,Shi Yomi district
+Q18642331,True,Siang,Siang district
+Q15449,True,Tawang,Tawang district
+Q15448,True,Tirap,Tirap district
+Q15465,True,Upper Siang,Upper Siang district
+Q15464,True,Upper Subansiri,Upper Subansiri district
+Q15459,True,West Kameng,West Kameng district
+Q15453,True,West Siang,West Siang district
+Q15212,True,Anantapur,Anantapuram district
+Q15213,True,Chittoor,Chittoor district
+Q15338,True,East Godavari,East Godavari district
+Q15341,True,Guntur,Guntur district
+Q15382,True,Krishna,Krishna district
+Q15381,True,Kurnool,Kurnool District
+Q15390,True,Prakasam,Prakasam district
+Q15383,True,S.P.S. Nellore,Sri Potti Sri Ramulu Nellore district
+Q15395,True,Srikakulam,Srikakulam district
+Q15394,True,Visakhapatnam,Visakhapatnam district
+Q15392,True,Vizianagaram,Vizianagaram district
+Q15404,True,West Godavari,West Godavari district
+Q15342,True,Y.S.R. Kadapa,Kadapa District
