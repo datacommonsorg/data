@@ -3,7 +3,10 @@ from typing import Dict, List
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
-from Config import replace_headers, places
+from Config import REPLACE_HEADERS, PLACES
+from os import path
+from io import StringIO
+from io import StringIO
 
 
 def _get_css_value(css: str, key: str) -> str:
@@ -57,10 +60,22 @@ def _is_valid_date(date_text: str) -> bool:
 
 def get_place_name_from_url(url: str) -> str:
     """
-    Given a Wikipedia Template Time Series Chart URL,
+    Given a Wikipedia Template Time Series Chart URL or HTML document,
     return the name of the place being observed.
-    @param url: Wikipedia Template Time Series Chart URL
+    @param url: Wikipedia Template Time Series Chart URL or HTML document
     """
+
+    # If no input url, return ""
+    if not url:
+        return ""
+
+    # If the input is a path, instead of a URL.
+    # Use name of document instead.
+    if path.exists(url):
+        place_name = url.split(".")[0]
+        return place_name
+
+    # Otherwise, it means it's a URL so strip out the name from the URL.
     place_name = url.split('_medical_cases_chart')[-2]
     place_name = place_name.split('pandemic_data/')[-1]
     place_name = place_name.split('/')[-1]
@@ -69,8 +84,7 @@ def get_place_name_from_url(url: str) -> str:
 
 def get_wikidata_id(wiki_url: str) -> str:
     """
-    Given any Wikipedia page, return the Wikidata Id
-    for the place being observed.
+    Given any Wikipedia page, return the WikidataId for the place observed.
     For Example:
     https://en.wikipedia.org/wiki/Spain will return "Q29".
     """
@@ -85,16 +99,30 @@ def get_wikidata_id(wiki_url: str) -> str:
 
 def parse_time_series_chart(wiki_url: str) -> Dict[str, Dict[str, int]]:
     """
-    Given a Wikipedia Template Time Series Table URL,
-    return a dicionary of the data in the page.
-    @param wiki_url: Wikipedia Template Time Series Table URL
+    Given a Wikipedia Template Time Series Table URL or HTML document
+    return a dictionary of the data in the page.
+    @param wiki_url: Wikipedia Template Time Series Table URL or HTML document
     """
-    # Query the HTML of the Wikipedia site.
-    html = urlopen(wiki_url)
+    html = ""
+    try:
+        # Query the HTML of the Wikipedia site.
+        html = urlopen(wiki_url)
+    except:
+        # Query the HTML of an HTML file.
+        with open(wiki_url, "r+") as f:
+            html = f.read()
+
     soup = BeautifulSoup(html, 'html.parser')
 
     # Find the first table element in the site.
-    table = soup.findAll("table")[0]
+    table = soup.findAll("table")
+
+    # If no table is available, return nothing.
+    if not table:
+        return {}
+
+    # Get the first table available
+    table = table[0]
 
     # Get a map of color -> label
     # The table doesn't refer to items by label but rather by color.
@@ -116,9 +144,9 @@ def parse_time_series_chart(wiki_url: str) -> Dict[str, Dict[str, int]]:
         # To lower-case and strip string.
         label = label_text.lower().strip("\xa0")
 
-        # Rename any labels by Config.replace_headers file.
-        if label in replace_headers:
-            label = replace_headers[label]
+        # Rename any labels by Config.REPLACE_HEADERS file.
+        if label in REPLACE_HEADERS:
+            label = REPLACE_HEADERS[label]
 
         # Get the color of the label.
         css_style = color_span['style']
@@ -177,15 +205,11 @@ def parse_time_series_chart(wiki_url: str) -> Dict[str, Dict[str, int]]:
                 data[date][label] = value
     return data
 
-
-if __name__ == "__main__":
+def WikiParser(state_to_source, output):
     # Stores a list of all the tables, for each place.
     all_tables: List[pd.DataFrame] = []
 
-    for place in places:
-        print(place)
-        url = place['url']
-        wikidata_id = place['wikidataId']
+    for wikidata_id, url in state_to_source.items():
         try:
             # Parse the Wikipedia Template time series page's table.
             data: Dict[str, int] = parse_time_series_chart(url)
@@ -206,8 +230,12 @@ if __name__ == "__main__":
 
         # Get the WikidataId of the place.
         table['wikidataId'] = wikidata_id
-        
+
         all_tables.append(table)
+
+    # If there is not a single table, throw an exeption.
+    if not all_tables:
+        raise Exception("No tables have been found!")
 
     # Create one big table from the list of tables.
     main_table = pd.concat(all_tables)
@@ -215,6 +243,8 @@ if __name__ == "__main__":
     # Rename the index column to "date".
     main_table.index.name = "date"
 
+    # NOTE: This function is used to calculate total_cases and is passed
+    # down to the Pandas.apply function.
     def all_cases(row: pd.Series):
         """
         @param row: a pd.Series
@@ -223,17 +253,36 @@ if __name__ == "__main__":
         Otherwise, "cases" will be manually calculated
         to be "active_cases" + "recoveries".
         """
-        if row['cases'] > 0:
+
+        if "cases" in row and row['cases'] > 0:
             return row
-        else:
-            row["cases"] = row["active_cases"] + row["recoveries"]
+
+        # If we are not given the number of total cases, calculate it.
+        deaths = row['deaths'] if 'deaths' in row else 0
+        active_cases = row['active_cases'] if 'active_cases' in row else 0
+        recoveries = row['recoveries'] if 'recoveries' in row else 0
+
+        # Sum the values up to calculate the total cases for that given date.
+        row["cases"] = deaths + active_cases + recoveries
+
         return row
+
 
     main_table = main_table.apply(all_cases, axis = 1)
 
     # Get rid of any unecessary columns.
+    # We only care about the following columns.
     main_table = main_table[main_table.columns & \
-        ['wikidataId', 'cases','active_cases', 'recoveries', 'deaths']]
+        ['wikidataId', 'cases', 'active_cases', 'recoveries', 'deaths']]
 
-    # Export table to CSV.
-    main_table.to_csv('output.csv', mode="w+")
+    # If output is StringIO, return the CSV as a string.
+    if isinstance(output, StringIO):
+        csv = main_table.to_csv(index=True)
+        output.write(csv)
+    else:
+        # Otherwise, it means it's a path. Export to path.
+        main_table.to_csv(output, index=True)
+
+
+if __name__ == "__main__":
+    WikiParser(state_to_source=PLACES, output="output.csv")
