@@ -9,28 +9,28 @@ name: "ChemicalCompound"
 typeOf: schema:Class
 subClassOf: dcid:BiomedicalElement
 description: "Chemical compound."
-url: "https://www.ebi.ac.uk/chembl/"
+descriptionUrl: "https://www.ebi.ac.uk/chembl/"
 
 Node: dcid:ChemicalCompoundProteinInteraction
 name: "ChemicalCompoundProteinInteraction"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Interaction between a compound and a protein."
-url: "https://www.ebi.ac.uk/chembl/"
+descriptionUrl: "https://www.ebi.ac.uk/chembl/"
 
 Node: dcid:ChemicalCompoundDiseaseTreatment
 name: "ChemicalCompoundDiseaseTreatment"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Compound associated with the treatment of a given disease."
-url: "https://www.ebi.ac.uk/chembl/"
+descriptionUrl: "https://www.ebi.ac.uk/chembl/"
 
 Node: dcid:ChemicalCompoundDiseaseContraindication
 name: "ChemicalCompoundDiseaseContraindication"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Compound that is inadvisable to be used to treat a given disease."
-url: "https://www.ebi.ac.uk/chembl/"
+descriptionUrl: "https://www.ebi.ac.uk/chembl/"
 
 Node: dcid:ChemicalCompoundGeneAssociation
 name: "ChemicalCompoundGeneAssociation"
@@ -43,21 +43,21 @@ name: "Protein"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "A class of nitrogenous organic compounds that are composed of large molecules called amino acids. These are essential for life in all living organisms."
-url: "https://www.uniprot.org/"
+descriptionUrl: "https://www.uniprot.org/"
 
 Node: dcid:SideEffect
 name: "SideEffect"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Unintended effect of administering a drug."
-url: "http://sideeffects.embl.de/"
+descriptionUrl: "http://sideeffects.embl.de/"
 
 Node: dcid:PharmacologicClass
 name: "PharmacologicClass"
 typeOf: schema:Class
 subClassOf: dcs:ChemicalCompound
 description: "Pharmacologic class is a group of active moieties that share scientifically documented properties."
-url: "https://www.fda.gov/industry/structured-product-labeling-resources/pharmacologic-class"
+descriptionUrl: "https://www.fda.gov/industry/structured-product-labeling-resources/pharmacologic-class"
 
 Node: dcid:ProteinProteinInteraction
 name: "ProteinProteinInteraction"
@@ -312,7 +312,7 @@ name: "mintID"
 rangeIncludes: schema:Text
 domainIncludes: dcs:ProteinProteinInteraction
 description: "Molecular INTeraction database identifier."
-url: "https://mint.bio.uniroma2.it/"
+descriptionUrl: "https://mint.bio.uniroma2.it/"
 
 Node: dcid:imexID
 typeOf: schema:Property
@@ -320,7 +320,7 @@ name: "imexID"
 rangeIncludes: schema:Text
 domainIncludes: dcs:ProteinProteinInteraction
 description: "The international molecular exchange consortium identifier for a non-redundant physical molecular interaction."
-url: "https://www.imexconsortium.org/"
+descriptionUrl: "https://www.imexconsortium.org/"
 
 Node: dcid:rcsbPDBID
 typeOf: schema:Property
@@ -328,7 +328,7 @@ name: "rcsbPDBID"
 rangeIncludes: schema:Text
 domainIncludes: dcs:ProteinProteinInteraction
 description: "Research Collaboratory for Structural Bioinformatics (RCSB) Protein Data Bank (PDB) identifier."
-url: "https://www.rcsb.org/"
+descriptionUrl: "https://www.rcsb.org/"
 
 Node: dcid:intActID
 typeOf: schema:Property
@@ -336,7 +336,7 @@ name: "intActID"
 rangeIncludes: schema:Text
 domainIncludes: dcs:ProteinProteinInteraction
 description: "EMBL-EBI IntAct identifier."
-url: "https://www.ebi.ac.uk/intact/"
+descriptionUrl: "https://www.ebi.ac.uk/intact/"
 
 Node: dcid:electronMicroscopyDataBankID
 typeOf: schema:Property
