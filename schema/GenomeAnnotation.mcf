@@ -1,7 +1,7 @@
 Node: dcid:BiologicalElement
 name: "BiologicalElement"
 typeOf: schema:Class
-subClassOf: dcs:BiomedicalElement
+subClassOf: schema:Thing
 description: "Biological entities."
 
 Node: dcid:GenomeAnnotation
@@ -196,7 +196,7 @@ Node: dcid:geneID
 name: "geneID"
 typeOf: schema:Property
 rangeIncludes: dcs:Gene
-domainIncludes: dcs:GeneticVariant,dcs:DiseaseGeneAssociation,dcs:GeneticVariantGeneAssociation,dcs:Protein,dcs:ChemicalCompoundGeneAssociation
+domainIncludes: dcs:GeneticVariant,dcs:DiseaseGeneAssociation,dcs:GeneticVariantGeneAssociation,dcs:Protein
 description: "Link out to the Gene node associated with the current node."
 
 Node: dcid:geneSymbol
@@ -559,8 +559,8 @@ descriptionUrl: "https://varnomen.hgvs.org/"
 Node: dcid:pharmGKBID
 name: "pharmGKBID"
 typeOf: schema:Property
-rangeIncludes: schema:Number,dcs:Text
-domainIncludes: dcs:GeneticVariant,dcs:ChemicalCompound,dcs:Gene
+rangeIncludes: schema:Number
+domainIncludes: dcs:GeneticVariant
 description: "PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers."
 descriptionUrl: "https://www.pharmgkb.org/"
 
@@ -890,10 +890,3 @@ typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:GeneticVariantGeneAssociation
 description: "An ID denoting a unique gene and genetic variant association within the GTEx database."
-
-Node: dcid:alternateGeneSymbol
-name: "alternateGeneSymbol"
-typeOf: schema:Property
-rangeIncludes: schema:Text
-domainIncludes: dcs:Gene
-description: "Alternative or secondary symbol for a gene."
