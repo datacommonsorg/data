@@ -6,7 +6,6 @@ import pandas as pd
 from Config import REPLACE_HEADERS, PLACES
 from os import path
 from io import StringIO
-from io import StringIO
 
 
 def _get_css_value(css: str, key: str) -> str:
