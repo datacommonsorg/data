@@ -74,7 +74,7 @@ parse_ebi.py
 To generate 'BioOntologySchemaEnum.mcf' which contains all the schemas and "psimi2dcid.txt" which contains paired PSI-MI identifiers and DCID (../proteinInteractionMINT/parse_mint.py needs to use this file to refer to the corresponding Enum instance by DCID), run:
 
 ```bash
-python3 parse_ebi.py -f mi.owl -new_soure new_source.txt
+python3 parse_ebi.py -f mi.owl -new_source new_source.txt
 ```
 
 To test the script, run:
