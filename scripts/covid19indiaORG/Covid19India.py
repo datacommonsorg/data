@@ -17,7 +17,7 @@ from urllib.request import urlopen
 from json import load, loads
 from typing import Dict
 import pandas as pd
-from Config import STATE_APIS, DATA_TO_KEEP
+from Config import get_state_apis, DATA_TO_KEEP
 from INDIA_MAP import STATES, DISTRICTS
 
 
@@ -171,4 +171,5 @@ def Covid19India(state_to_source: Dict[str, str], output: str):
         csv = india_table.to_csv(output, index=True)
 
 if __name__ == '__main__':
+    STATE_APIS = get_state_apis()
     Covid19India(state_to_source=STATE_APIS, output="output.csv")
