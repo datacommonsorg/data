@@ -136,6 +136,7 @@ Node: dcid:MentalHealthNotGood
 name: "MentalHealthNotGood"
 typeOf: dcs:HealthOutcomeEnum
 description: "Mental health not good for >=14 days."
+descriptionUrl: "https://www.cdc.gov/places/measure-definitions/health-outcomes/index.html#mental-health"
 
 Node: dcid:Obesity
 name: "Obesity"
