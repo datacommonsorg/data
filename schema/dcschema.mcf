@@ -2409,3 +2409,18 @@ name: "Rural"
 typeOf: dcs:HumanSettlementClassificationEnum
 description: "A geographic area that is located outside towns and cities, typically with low population density and small settlements."
 descriptionUrl: "https://en.wikipedia.org/wiki/Rural_area"
+
+Node: dcid:isoCode
+domainIncludes: schema:Place
+typeOf: schema:Property
+name: "isoCode"
+rangeIncludes: schema:Text
+description: "The standard code determined by the International Organization for Standardization."
+
+Node: dcid:nutsCode
+domainIncludes: schema:Place
+typeOf: schema:Property
+name: "nutsCode"
+rangeIncludes: schema:Text
+description: "Nomenclature of Territorial Units for Statistics or NUTS is a geocode standard for referencing the subdivisions of countries for statistical purposes."
+descriptionUrl: "https://en.wikipedia.org/wiki/Nomenclature_of_Territorial_Units_for_Statistics"
