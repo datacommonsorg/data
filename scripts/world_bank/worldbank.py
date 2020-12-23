@@ -207,7 +207,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     """
     # All the statistical observation properties that we included.
     properties_of_stat_var_observation = ([
-        'measurementMethod', 'measurementDenominator', 'scalingFactor',
+        'measurementMethod', 'scalingFactor',
         'sourceScalingFactor', 'unit'
     ])
     # List of tuples to return.
