@@ -1,42 +1,51 @@
-# OECD Regional Demography Statistics Imports
+# Importing OECD Regional Demography Statistics Datasets Into Data Commons
 
-## OECD Dataset Import Overview
+## About the Dataset
 
-### Download csv files
+### Download URL
 
-This is the overall link for regional demographics [dataset](https://stats.oecd.org/index.aspx?DataSetCode=REGION_DEMOGR). You can click on export menu and get .csv files for the specific dataset.
+<https://stats.oecd.org/index.aspx?DataSetCode=REGION_DEMOGR> is the overall link for regional demographics dataset. You can click on export menu and get .csv files for the specific dataset.
 
-### Directories
+### Overview
 
-We have five subdirectories for now, there are:
+There are multiple datasets under the Regional Demography database.
+We have a subdirectory for each imported Regional Demography dataset:
 
-- [deaths](deaths) (Deaths by 5-year age groups,small regions TL3)
-- [life_expectancy_and_mortality](life_expectancy_and_mortality) (Life Expectancy and Mortality, large TL2 and small TL3 regions)
-- [pop_density](pop_density) (Population density and area, large TL2 and small TL3 regions)
-- [population_tl2](population_tl2) (Population by 5-year age groups, large regions TL2)
-- [population_tl3](population_tl3) (Population by 5-year age groups, small regions TL3)
+- [deaths](deaths): Deaths by 5-year age groups,small regions TL3
+- [life_expectancy_and_mortality](life_expectancy_and_mortality): Life Expectancy and Mortality, large TL2 and small TL3 regions
+- [pop_density](pop_density): Population density and area, large TL2 and small TL3 regions
+- [population_tl2](population_tl2): Population by 5-year age groups, large regions TL2
+- [population_tl3](population_tl3): Population by 5-year age groups, small regions TL3
+
+### Notes and Caveats
+
+This import currently relies on place name resolver to map statistics to a place DCID.
+This has some issues, which are documented inside Google. We are working on this, but
+in the meantime, contact us for more information.
 
 ## Import Artifacts
 
 ### OECD ID to DCID mapping
 
-[regid2dcid.json](regid2dcid.json): the mapping from OECD IDs to DCIDs. See the section "Getting/Imrpoving DCIDs for OECD geos" for updating the mapping.
+[regid2dcid.json](regid2dcid.json): maps OECD IDs to DCIDs. See the section "Getting/Improving DCIDs for OECD geos" for updating the mapping.
 
 ### Raw Data
 
-Note: in each subdirectory, the source csv files are named like `REGION_DEMOGR_{subdirectory name}.csv`.
+In each subdirectory, the source CSVs are saved as `REGION_DEMOGR_{subdirectory name}.csv`.
 
 ### Cleaned Data
 
-All the cleaned CSVs are saved in each subdirectory, named as `OECD_{subdirectory name}_cleaned.csv`.
+In each subdirectory, the cleaned CSVs are saved as `OECD_{subdirectory name}_cleaned.csv`.
 
-### StatisticalVariables MCF files
+### StatisticalVariable MCF files
 
-The MCF files are in each subdirectory, named by `OECD_{subdirectory name}_stat_vars.mcf`. Note that [population_tl3/OECD_population_stat_vars.mcf](population_tl3/OECD_population_stat_vars.mcf) is a symlink to [population_tl2/OECD_population_stat_vars.mcf](population_tl2/OECD_population_stat_vars.mcf).
+In each subdirectory, the StatisticalVariable MCF files are saved as `OECD_{subdirectory name}_stat_vars.mcf`.
 
 ### StatVarObservation Template MCF files
 
-The template MCF files are in each subdirectory, named by `OECD_{subdirectory name}.tmcf`.
+In each subdirectory, the StatVarObservation template MCF files are saved as `OECD_{subdirectory name}.tmcf`.
+
+Note: [population_tl3/OECD_population_stat_vars.mcf](population_tl3/OECD_population_stat_vars.mcf) is a symlink to [population_tl2/OECD_population_stat_vars.mcf](population_tl2/OECD_population_stat_vars.mcf).
 
 ### Script
 
@@ -56,7 +65,8 @@ To update [regid2dcid.json](regid2dcid.json):
 
 1. Download the List of regions and typologies xls file.
 
-NOTE: this is already done and saved as [geos.csv](geos.csv). Only do this step if for some reason you feel that file needs updating.
+NOTE: this is already done and saved as [geos.csv](geos.csv).
+Only do this step if for some reason you feel that file needs updating.
 
 The xls file can be found in the info sidebar of the regional
 demographics dataset
@@ -66,10 +76,10 @@ Export the "List of regions" sheet to CSV and save it in this directory.
 
 1. Clean the CSV: `python3 clean_geos_csv.py`
 
-- This is where we append a place type to the place name,
+- This is where we **append a place type to the place name**,
   such as "AdministrativeArea1", as a hint to the place name resolver.
-- This is also where we remove regions that are statistical
-  regions, non official regions, etc. Essentially, we only
+- This is also where we **remove regions that are statistical
+  regions, non official regions, etc.** Essentially, we want to
   keep places that are real administrative areas.
   - Whether places are statistical, administrative, or
     other regions are determined based on the
@@ -91,13 +101,13 @@ go run ../../../tools/place_name_resolver/resolver.go --in_csv_path=geos_cleaned
 
 - This is where we take the CSV result of the `place_name_resolver` tool
   and create [regid2dcid.json](regid2dcid.json).
-- Here, we discard certain `dcid` column results from `place_name_resolver`,
+- Here, we **discard certain `dcid` column results** from `place_name_resolver`,
   when we know we can derive the DCIDs from OECD IDs.
   - For countries, we directly use `"country/" + OECDId`.
   - For NUTS regions (those present in [region_nuts_codes.json](region_nuts_codes.json)), we directly use `"nuts/" + OECDId`.
   - For US states, we directly use `"geoId/" + OECDId_without_the_US_prefix`.
 - Furthermore, if the `place_name_resolver` tool assigned the same DCID to multiple regions,
-  we remove the later occurrences so that there is no conflict.
+  we **remove the later occurrences so that there is no conflict**.
 
 Note: After further investigation/improved understanding of the regions,
 update the special casing logic in this file.
@@ -108,7 +118,7 @@ creating DCIDs based on the OECD ID.
 ## Geo Resolution Tracking
 
 Run `python3 gen_place_mapping_stats.py > stats.txt` to regenerate the
-geo resolution statistics. The diffs in [stats.txt](stats.txt) will help track
+[geo resolution statistics](stats.txt). The diffs in [stats.txt](stats.txt) will help track
 geo resolution changes. If the file is open in an IDE, remember to save
 the edits from running the script.
 
