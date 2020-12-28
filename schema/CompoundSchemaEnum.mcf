@@ -2510,3 +2510,89 @@ typeOf: dcs:AntibodyTypeEnum
 name: "DarpinAntibody "
 description: "DARPins (an acronym for designed ankyrin repeat proteins) are genetically engineered antibody mimetic proteins typically exhibiting highly specific and high-affinity target protein binding."
 descriptionUrl: "https://en.wikipedia.org/wiki/DARPin"
+
+Node: dcid:RelationshipAssociationTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "RelationshipAssociationTypeEnum"
+description: "Type of relationship association as defined by PharmGKB, either 'associated', 'ambiguous', or 'not associated'."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:RelationshipAssociationTypeAssociated
+typeOf: dcid:RelationshipAssociationTypeEnum
+name: "Associated"
+description: "Associated means an association between the entities is supported by the Evidence and PMIDs columns."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:RelationshipAssociationTypeNotAssociated
+typeOf: dcid:RelationshipAssociationTypeEnum
+name: "NotAssociated"
+description: "Not associated means that the entities were evaluated but not found have a statistically significant association based on the PMIDs column."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:RelationshipAssociationTypeAmbiguous
+typeOf: dcid:RelationshipAssociationTypeEnum
+name: "Ambiguous"
+description: "Ambiguous means that some of the items in the Evidence and/or PMIDs columns support an association and others do not."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:RelationshipEvidenceTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "RelationshipEvidenceTypeEnum"
+description: "Type of evidence for a relationship as defined by PharmGKB."
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+
+Node: dcid:RelationshipEvidenceTypeClinicalAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "ClinicalAnnotation"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via Clinical Annotation."
+
+Node: dcid:RelationshipEvidenceTypeMultilinkAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "MultilinkAnnotation"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via Multilink Annotation."
+
+Node: dcid:RelationshipEvidenceTypeGuidelineAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "GuidelineAnnotation"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via Dosing Guideline."
+
+Node: dcid:RelationshipEvidenceTypeLabelAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "LabelAnnotation"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via Drug Label."
+
+Node: dcid:RelationshipEvidenceTypeVariantAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "VariantAnnotation"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via Variant Annotation."
+
+Node: dcid:RelationshipEvidenceTypeDataAnnotation
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "DataAnnotation"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via Data Annotation."
+
+Node: dcid:RelationshipEvidenceTypeLiterature
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "Literature"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via Literature."
+
+Node: dcid:RelationshipEvidenceTypeVipGene
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "VipGene"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via VIP."
+
+Node: dcid:RelationshipEvidenceTypePathway
+typeOf: dcid:RelationshipEvidenceTypeEnum
+name: "Pathway"
+descriptionURL: "https://www.pharmgkb.org/page/downloadRelationshipsHelp"
+description: "Evidence for relationship between two entities was acquired via Pathway data."
