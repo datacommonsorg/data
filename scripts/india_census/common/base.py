@@ -129,7 +129,7 @@ class CensusPrimaryAbstractDataLoaderBase:
         #State,District,Subdistt,Town/Village,Ward,EB
         #We delete them only if they exists
         #From pandas documentation:
-        #If erros=‘ignore’, suppress error and only existing labels are dropped
+        #If errors=‘ignore’, suppress error and only existing labels are dropped
         self.raw_df.drop([
             "State", "District", "Subdistt", "Town/Village", "Ward", "EB",
             "Level", "Name"
