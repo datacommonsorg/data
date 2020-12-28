@@ -34,8 +34,8 @@ TEMPLATE_TMCF = """Node: E:IndiaCensus{year}_{dataset_name}->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus{year}_{dataset_name}->StatisticalVariable
 observationDate: C:IndiaCensus{year}_{dataset_name}->Year
-observationAbout: C:IndiaCensus{year}_{dataset_name}->E1
-value: C:IndiaCensus{year}_{dataset_name}->value
+observationAbout: E:IndiaCensus{year}_{dataset_name}->E1
+value: C:IndiaCensus{year}_{dataset_name}->Value
 
 Node: E:IndiaCensus{year}_{dataset_name}->E1
 typeOf: schema:Place
@@ -129,7 +129,7 @@ class CensusPrimaryAbstractDataLoaderBase:
         #State,District,Subdistt,Town/Village,Ward,EB
         #We delete them only if they exists
         #From pandas documentation:
-        #If erros=‘ignore’, suppress error and only existing labels are dropped
+        #If errors=‘ignore’, suppress error and only existing labels are dropped
         self.raw_df.drop([
             "State", "District", "Subdistt", "Town/Village", "Ward", "EB",
             "Level", "Name"
@@ -200,7 +200,7 @@ class CensusPrimaryAbstractDataLoaderBase:
         if row["workerStatus"] == "Worker":
             constraints_array.append("workerStatus: dcs:Worker")
             if row["workerClassification"] == "MainWorker":
-                name_array.append("MainWorkers")
+                name_array.append("MainWorker")
                 constraints_array.append("workerClassification: dcs:MainWorker")
                 if row["workCategory"] != "":
                     name_array.append(row["workCategory"])
@@ -213,7 +213,7 @@ class CensusPrimaryAbstractDataLoaderBase:
                     "workerClassification: dcs:MarginalWorker")
 
                 if row["workCategory"] != "":
-                    name_array.append("workCategory")
+                    name_array.append(row["workCategory"])
                     constraints_array.append("workCategory: dcs:" +
                                              row["workCategory"])
 
