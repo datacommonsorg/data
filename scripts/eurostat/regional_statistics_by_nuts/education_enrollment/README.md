@@ -15,9 +15,15 @@ It has the enrollment rate for the years of [2000-2019] categorized by
 
 - Male/Female/Total
 
-### Raw Data
+### Download URL
 
 [TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/trng_lfse_04.tsv.gz).
+
+### License
+
+See parent README.
+
+### About the TSV
 
 The original dataset is broken up into 3 columns:
 
@@ -36,10 +42,6 @@ unit,sex,age,geo is further broken down into:
 
 - Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/trng_lfs_4w0_esms.htm>
 - [Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=trng_lfse_04&lang=en)
-
-### License
-
-See parent README.
 
 ### Notes and Caveats
 

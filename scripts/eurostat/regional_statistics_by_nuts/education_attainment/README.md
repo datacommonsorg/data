@@ -32,6 +32,10 @@ ISCED standard education levels:
 
 [TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz).
 
+### License
+
+See parent README.
+
 ### About the TSV
 
 The original dataset is broken up into 3 columns:
@@ -47,6 +51,11 @@ The original dataset is broken up into 3 columns:
 3. unit: Percentage
 4. geo: NUTS2 codes for regions of Europe
 
+### Dataset Documentation and Relevant Links
+
+- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/edat1_esms.htm>
+- [Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=edat_lfse_04&lang=en)
+
 ### Notes and Caveats
 
 - There are breaks in the time series of the original dataset. Note =”b”, value=":"
@@ -54,15 +63,6 @@ The original dataset is broken up into 3 columns:
 - There are values with low reliability. Note = "u"
 - There are values that definition differs. Note = "d"
 - As written, we're importing the estimated, low reliable, and different definitions values as regular values.
-
-### License
-
-See parent README.
-
-### Dataset Documentation and Relevant Links
-
-- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/edat1_esms.htm>
-- [Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=edat_lfse_04&lang=en)
 
 ## About the Import
 
