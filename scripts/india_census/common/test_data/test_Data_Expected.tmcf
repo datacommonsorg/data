@@ -2,8 +2,8 @@ Node: E:IndiaCensus2011_TEST->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus2011_TEST->StatisticalVariable
 observationDate: C:IndiaCensus2011_TEST->Year
-observationAbout: C:IndiaCensus2011_TEST->E1
-value: C:IndiaCensus2011_TEST->value
+observationAbout: E:IndiaCensus2011_TEST->E1
+value: C:IndiaCensus2011_TEST->Value
 
 Node: E:IndiaCensus2011_TEST->E1
 typeOf: schema:Place
