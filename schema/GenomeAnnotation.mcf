@@ -28,6 +28,12 @@ typeOf: schema:Class
 subClassOf: dcs:GenomeAnnotation
 description:  "The reference genome to which the associated nucleotides have been aligned."
 
+Node: dcid:GenomeAssemblyUnit
+name: "GenomeAssemblyUnit"
+typeOf: schema:Class
+subClassOf: dcs:GenomeAnnotation
+description:  "The unit of assembling a reference genome to which the associated nucleotides have been aligned. Each unit is typically defined by the location of the cell from which the DNA is located such as the nucleus or an organelle."
+
 Node: dcid:Nucleotide
 name: "Nucleotide"
 typeOf: schema:Class
@@ -117,7 +123,81 @@ name: "genomeAssemblyYear"
 typeOf: schema:Property
 rangeIncludes: schema:Number
 domainIncludes: dcs:GenomeAssembly
-description:"The year in which the genome assembly was released."
+description: "The year in which the genome assembly was released."
+
+Node: dcid:genomeReferenceConsortiumAssemblyName
+name: "genomeReferenceConsortiumAssemblyName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GenomeAssembly
+description: "The Genome Refrence Consortium name for the genome assembly."
+
+Node: dcid:genBankAccession
+name: "genBankAssemblyAccession"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GenomeAssembly,dcs:GenomeAssemblyUnit,dcs:Chromosome
+description: "The accession version of the GenBank assembly or sequence element."
+
+Node: dcid:refSeqAccession
+name: "refSeqAssemblyAccession"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GenomeAssembly,dcs:GenomeAssemblyUnit,dcs:Chromosome
+description: "The accession version of the RefSeq assembly or sequence element."
+
+Node: dcid:ncbiBioProject
+name: "ncbiBioProject"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:GenomeAssembly
+description: "A BioProject is a collection of biological data related to a single initiative originating from a single organization or from a consortium. A BioProject record provides users a single place to find links to the diverse data generated for that project and deposited into the archival databases maintained by members of the International Nucleotide Sequence Database Collaboration (INSDC). Typical examples of a BioProject include a multiisolate project for sequencing multiple strains of a bacterial species, or a monoisolate project for the genome and transcriptome of a particular organism."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/bioproject/docs/faq/"
+
+Node: dcid:genomeAssemblyType
+name: "genomeAssemblyType"
+typeOf: schema:Property
+rangeIncludes: dcs:GenomeAssemblyTypeEnum
+domainIncludes: dcs:GenomeAssembly
+description: "The type of sequence model data defined in this genome assembly."
+
+Node: dcid:genomeAssemblyReleaseType
+name: "genomeAssemblyReleaseType"
+typeOf: schema:Property
+rangeIncludes: dcs:GenomeAssemblyReleaseTypeEnum
+domainIncludes: dcs:GenomeAssembly
+description: "Defines the update type of this genome assembly version release."
+
+Node: dcid:genomeAssemblyLevel
+name: "genomeAssemblyLevel"
+typeOf: schema:Property
+rangeIncludes: dcs:GenomeAssemblyLevelEnum
+domainIncludes: dcs:GenomeAssembly
+description: "The highest level of assembly for any object in the assembly."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#level"
+
+Node: dcid:isGenomeRepresentationFull
+name: "isGenomeRepresentationFull"
+typeOf: schemaProperty
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:GenomeAssembly
+description: "Whether the goal for the assembly was to represent the whole genome or only part of it."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/#representation"
+
+Node: dcid:isRefSeqGenBankAssembliesIdentical
+name: "isRefSeqGenBankAssembliesIdentical"
+typeOf: schemaProperty
+rangeIncludes: schema:Boolean
+domainIncludes: dcs:GenomeAssembly
+description: "Indicate whether the RefSeq and GenBank assemblies are identical."
+
+Node: dcid:refSeqCategory
+name: "refSeqCategory"
+typeOf: schemaProperty
+rangeIncludes: dcs:RefSeqCategoryEnum
+domainIncludes: dcs:GenomeAssembly
+description: "Denotes that the assembly is a reference or representative genome in the NCBI Reference Sequence ( RefSeq ) project classification."
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/assembly/help/"
 
 Node: dcid:nucleicAcid
 name: "nucleicAcid"
@@ -129,15 +209,29 @@ description: "The nucleic acid molecule on the positive strand."
 Node: dcid:chromosomeSize
 name: "chromosomeSize"
 typeOf: schema:Property
-rangeIncludes: schema:Number
+rangeIncludes: schema:Quantity
 domainIncludes: dcs:Chromosome
 description: "The number of nucleotides in a given chromosome."
+
+Node: dcid:ncbiDNASequenceName
+name: "ncbiDNASequenceName"
+typeOf: schema:Property
+rangeIncludes: schema:Text
+domainIncludes: dcs:Chromosome
+description: "The name by which NIH NCBI refers to this defined segment of DNA sequence."
+
+Node: dcid:dnaSequenceRole
+name: "dnaSequenceRole"
+typeOf: schema:Property
+rangeIncludes: dcs:DNASequenceRoleEnum
+domainIncludes: dcs:Chromosome
+description: "The role a defined sequence of DNA has in a genome assembly."
 
 Node: dcid:inChromosome
 name: "inChromosome"
 typeOf: schema:Property
 rangeIncludes: dcs:Chromosome,schema:Text
-domainIncludes: dcs:GenomeAnnotation
+domainIncludes: dcs:GenomeAnnotation,dcs:Chromosome
 description: "A threadlike structure of nucleic acids and protein found in the nucleus of most living cells, carrying genetic information in the form of genes."
 
 Node: dcid:inGenomeAssembly
@@ -252,7 +346,7 @@ Node: dcid:ncbiTaxonID
 name: "ncbiTaxonID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
-domainIncludes: dcs:Gene,dcs:Protein
+domainIncludes: dcs:Gene,dcs:Protein,dcs:GenomeAssembly
 description: "NCBI Taxonomy database identifier."
 
 Node: dcid:ncbiGeneID
@@ -295,7 +389,7 @@ name: "ensemblID"
 typeOf: schema:Property
 rangeIncludes: schema:Text
 domainIncludes: dcs:Gene,dcs:GeneticVariantGeneAssociation,dcs:Protein
-description: "Ensembl ID, which describes a particular gene or protein as documented https://m.ensembl.org/Help/Faq?id=488."
+description: "Ensembl ID, which describes a particular gene or protein."
 
 Node: dcid:mapLocation
 name: "mapLocation"
