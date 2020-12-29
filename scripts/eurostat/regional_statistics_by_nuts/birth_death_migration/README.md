@@ -9,7 +9,7 @@ Author: jinpz
 
 ## About the Dataset
 
-This dataset contains demographic balance, change including
+This dataset contains demographic balance and change stats:
 
 - Birth event counts and crude rates
 - Mortality event counts and crude rates

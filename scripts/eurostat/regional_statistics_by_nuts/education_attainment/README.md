@@ -66,10 +66,6 @@ The original dataset is broken up into 3 columns:
 
 ## About the Import
 
-1. [Artifacts](#artifacts)
-1. [Generating Artifacts](#generating-artifacts)
-1. [Validating Artifacts](#validating-artifacts)
-
 ### Artifacts
 
 #### Raw Data

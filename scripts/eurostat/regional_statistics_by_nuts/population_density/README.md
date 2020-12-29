@@ -30,15 +30,15 @@ unit,geo is further broken down into:
 
 See parent README.
 
+### Dataset Documentation and Relevant Links
+
+- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/demo_r_gind3_esms.htm>
+
 ### Notes and Caveats
 
 - There are breaks in the time series of the original dataset. Note =”b”, value=":"
 - There are estimated values in the original dataset. Note =”e”
 - As written, we're importing the estimated values as regular values.
-
-### Dataset Documentation and Relevant Links
-
-- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/demo_r_gind3_esms.htm>
 
 ## About the Import
 

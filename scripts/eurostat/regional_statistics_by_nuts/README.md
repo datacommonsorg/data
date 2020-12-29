@@ -10,9 +10,9 @@ main source of European sub-country level statistics.
 1. [About the Dataset](#about-the-dataset)
 1. [About the Imports](#about-the-imports)
 
-## About the Dataset
+## About the Datasets
 
-EuroStat Regional Statistics reports demographic data these geo levels:
+EuroStat Regional Statistics reports demographic data at these geo levels:
 
 - Countries
 - NUTS1
@@ -32,9 +32,13 @@ Useful links:
 
 - [Dataset Metadata](https://ec.europa.eu/eurostat/data/metadata).
 
-### Download URL
+### Download URLs
 
-[TSV] file is available for download from <https://ec.europa.eu/eurostat/data/database> under 'Data navigation tree > Database by themes > General and regional statistics > Regional statistics by NUTS classification (reg)'.
+[TSV] files are available for download from
+<https://ec.europa.eu/eurostat/data/database> under
+'Data navigation tree > Database by themes > General and regional statistics > Regional statistics by NUTS classification (reg)'.
+
+See the READMEs in the subdirectories for specific URLs.
 
 ### License
 

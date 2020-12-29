@@ -11,8 +11,6 @@ Author: eftekhari-mhs
 
 This dataset has the employee per sector (thousand persons) for European Union (EU) countries specified by their NUTS3 geos.
 
-### Variables
-
 It has the employees and employed persons counts categorized by NACE classification for 15 different economic activities in [1995-2018]. The NACE categories are as follows:
 
 - Total – All NACE activities.
@@ -31,9 +29,15 @@ It has the employees and employed persons counts categorized by NACE classificat
 - O-Q – Public administration, defence, education, human health and social work activities.
 - R-U – Arts, entertainment and recreation, other service activities, activities of household and extra-territorial organizations and bodies.
 
-### Raw Data
+### Download URL
 
 [TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/nama_10r_3empers.tsv.gz).
+
+### License
+
+See parent README.
+
+### About the TSV
 
 The original dataset is broken up into the following columns:
 
@@ -47,6 +51,11 @@ The original dataset is broken up into the following columns:
 2. unit: Thousand
 3. geo: NUTS3 codes for regions of Europe
 
+### Dataset Documentation and Relevant Links
+
+- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/reg_eco10_esms.htm>
+- [Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=nama_10r_3empers&lang=en)
+
 ### Notes and Caveats
 
 - There are breaks in the time series of the original dataset. Note =”b”, value=":"
@@ -54,15 +63,6 @@ The original dataset is broken up into the following columns:
 - There are provisional values. Note = "p"
 - There are values that definition differs. Note = "d"
 - As written, we're importing the estimated, low reliable, and different definitions values as regular values.
-
-### License
-
-See parent README.
-
-### Dataset Documentation and Relevant Links
-
-- Documentation: <https://ec.europa.eu/eurostat/cache/metadata/en/reg_eco10_esms.htm>
-- [Data explorer](https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=nama_10r_3empers&lang=en)
 
 ## About the Import
 
