@@ -5,23 +5,35 @@ into Data Commons (StatVarObs Template MCFs, StatVar MCFs, and the final CSV).
 
 ## Adding new variables to Data Commons
 
-1. Make a copy of [schema_template.csv](schema_template.csv) with a meaningful
-   name.
+To add new StatisticalVariables to Data Commons, for each indicator:
+
+1. Find the corresponding indicator code, name, and source.
+
+1. Add to or create a new schema CSV (copy [schema_template.csv](schema_template.csv) with a meaningful name).
 
 1. Fill out the columns for each variable you want to add
    to the best of your ability.
 
 1. Request a Data Commons engineer for review.
 
-1. Add a description for your file in the next section.
+1. When your import is productionized:
+
+   - Copy everything except the column headers
+     into [WorldBankIndicators_prod.csv](WorldBankIndicators_prod.csv).
+
+   - Add a description for your file in the next section.
 
 ## Existing Schema CSVs
 
-Productionized variables:
+Productionized variables (these are concatenated together into
+[WorldBankIndicators_prod.csv](WorldBankIndicators_prod.csv)):
 
 - [WorldBankIndicators_p0.csv](WorldBankIndicators_p0.csv): IanCostello's first WDI import done with the GitHub process.
 - [WorldBankIndicators_p1.csv](WorldBankIndicators_p1.csv): IanCostello's second batch of WDI variables, finished by tjann.
 - [WorldBankIndicators_placepg.csv](WorldBankIndicators_placepg.csv): tjann's first WDI import using this GitHub process. The variables were requested by rvguha just prior to the Data Commons launch.
+
+IMPORTANT: Please help keep [WorldBankIndicators_prod.csv](WorldBankIndicators_prod.csv)
+up to date. Copy your rows over when you see your import prod.
 
 In progress variables:
 

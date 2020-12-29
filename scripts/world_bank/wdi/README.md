@@ -2,17 +2,7 @@
 
 Authors: @IanCostello, @tjann
 
-This import automatically generates StatisticalVariables for
-the World Bank World Development Indicators, downloads the data
-for all countries and all years, and to output this data into a
-writable format to the knowledge graph.
-
-StatisticalVariables are defined in the WorldBankIndicators.csv. To add a new
-StatisticalVariable to this list, you must find the corresponding indicator
-code, name, and source and manually fill out the corresponding properties such
-as measurement method, population type, and the various constraints. You likely
-will need to define new schema enums and objects which should be created
-separately.
+This is Data Common's main source of international, country-level data.
 
 ## Table of Contents
 
@@ -62,31 +52,55 @@ The full license is available at <https://www.worldbank.org/en/about/legal/terms
 
 ## About the Import
 
+This import automatically generates StatisticalVariable MCF and
+StatVarObservation TMCF for specified World Bank World Development Indicators,
+downloads the data for all countries and all years,
+outputs this information into the required import artifacts for
+ingesting into Data Commons.
+
+This is achieved through a schema-config CSV. You can read more about it
+and learn how to import new variables in [schema_csv/README.md](schema_csv/README.md).
+
 ### Artifacts
+
+#### Schema CSVs
+
+- [`schema_csvs/WorldBankIndicators_*.csv`](schema_csvs): manually curated CSVs
+  with particular columns helping to describe the StatVar and StatVarObs
+  properties of WDI variables. This is encodes the final schema for the import.
+  The script [worldbank.py](worldbank.py) uses a Schema CSV
+  to write the output artifacts below.
+
+Note: we keep the CSVs separate to help record which variables were imported when,
+as WDI has many variables and we've been importing them in waves. If you simply
+want to regenerate the same variables with new year's data, you should use
+[schema_csvs/WorldBankIndicators_prod.csv](schema_csvs/WorldBankIndicators_prod.csv).
 
 #### Scripts
 
 - [worldbank.py](worldbank.py): Downloads and preprocesses the CSVs from World Bank, then creates the StatVars, StatVarObs, and Final CSV using the Preprocessed Source CSVs and Schema CSV.
 
-#### Preprocessed Source CSVs
+#### StatisticalVariable Instance MCF
 
-- preprocessed_source_csv/\*.csv: CSVs downloaded from World Bank's API, and then preprocessed. This is done in [worldbank.py](worldbank.py).
-
-#### Schema CSVs
-
-- \*.csv: CSVs with particular columns helping to describe the StatVar and StatVarObs properties of WDI variables. This is where the "schema modeling" happens/is finalized for this import. The script [worldbank.py](worldbank.py) uses a Schema CSV to write the output artifacts below.
+- [output/WorldBank_StatisticalVariables.mcf](output/WorldBank_StatisticalVariables.mcf)
 
 #### Template MCFs
 
 - [output/WorldBank.tmcf](output/WorldBank.tmcf)
 
-#### StatisticalVariable Instance MCF
+#### Preprocessed Source CSVs
 
-- [output/WorldBank_StatisticalVariables.mcf](output/WorldBank_StatisticalVariables.mcf)
+- [`preprocessed_source_csv/*.csv`](preprocessed_source_csv): CSVs downloaded
+  from World Bank's API, and then preprocessed.
+  This is done in [worldbank.py](worldbank.py).
+
+  These files differ from the Final CSV as they have ALL the data. These files
+  are saved as cached files, so that we don't need to refetch from worldbank.org
+  until the next year's data is released.
 
 #### Final CSV
 
-- Contains the data for all countries, all StatVars in a single CSV, where the columns are `StatisticalVariable`, `ISO3166Alpha3`, `Year`, and some number of `Value[0-9]+` columns. The `Value[0-9]+` columns correspond to combinatorial StatVarObs templates based on the presense or absence of optional properties of StatVarObs.
+- Contains the data for all specified indicators and all countries in a single CSV, where the columns are `StatisticalVariable`, `ISO3166Alpha3`, `Year`, and some number of `Value[0-9]+` columns. The `Value[0-9]+` columns correspond to combinatorial StatVarObs templates based on the presense or absence of optional properties of StatVarObs.
 
 #### Notes
 
@@ -96,8 +110,7 @@ The full license is available at <https://www.worldbank.org/en/about/legal/terms
 
 #### Creating the Schema CSV
 
-Make a copy of [schema_template.csv](schema_template.csv) and fill out the columns
-for your desired WDI variables. You may look at the other \*.csv files for reference.
+See [schema_csv/README.md](schema_csv/README.md).
 
 #### Processing Steps
 
@@ -105,7 +118,7 @@ To generate `output/WorldBank_StatisticalVariables.mcf`,
 `output/WorldBank.tmcf`, and `output/WorldBank.csv`, run:
 
 ```bash
-python3 worldbank.py --indicatorSchemaFile=<DESIRED INDICATOR CSV FILE> --fetchFromSource=<WHETHER TO RE-FETCH FROM WDI WEBSITE INSTEAD OF USING CHECKED-IN CSVS>
+python3 worldbank.py --indicatorSchemaFile=<DESIRED INDICATOR CSV FILE> --fetchFromSource=<WHETHER TO RE-FETCH FROM WDI WEBSITE INSTEAD OF USING CHECKED-IN PREPROCESSED CSVS>
 ```
 
 We highly recommend the use of the import validation tool for this import which
