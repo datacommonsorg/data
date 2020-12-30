@@ -70,7 +70,9 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
         'Taxid':
             'ncbiTaxonID',
         'BioProject':
-            'ncbiBioProject',
+            'bioProject',
+        'BioSample':
+            'bioSample',
         'Submitter':
             'submitter',
         'Date':
@@ -99,12 +101,14 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
             'alternativeName',
         'WGSproject':
             'wgsProject',
-        'Assemblymethod:':
+        'Assemblymethod':
             'assemblyMethod',
         'GenomeCoverage':
             'genomeCoverage',
         'Sequencingtechnology':
             'sequencingTechnology',
+        'Sex':
+            'gender',
         'Organismname':
             'ofSpecies'
     }  # convert NCBI fields to property names
@@ -136,6 +140,8 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
         elif key == 'Infraspecificname':
             value = value.strip('strain=')
             w.write(dict_conversion[key] + ': "' + value + '"\n')
+        elif key == 'Sex':
+            value = 'dcs:' + value.lower().capitalize()
         elif key not in dict_conversion.keys():
             print('Warning: ' + key + ' is not represented as a property for' +
                   'GenomeAssembly')
