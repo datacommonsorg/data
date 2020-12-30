@@ -83,9 +83,9 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
         'Taxid':
             'ncbiTaxonID',
         'BioProject':
-            'bioProject',
+            'ncbiBioProject',
         'BioSample':
-            'bioSample',
+            'ncbiBioSample',
         'Submitter':
             'submitter',
         'Date':
