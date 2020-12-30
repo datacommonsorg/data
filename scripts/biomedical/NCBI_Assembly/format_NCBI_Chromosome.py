@@ -34,7 +34,7 @@ def format_camel_case(value):
     '''
     Format string to camel case.
 
-    @value    The string that needs to be formatted to camel case
+    @value     The string that needs to be formatted to camel case
     @return    The camel case formatted string
     '''
     value = value.replace(' ', '')
@@ -46,6 +46,19 @@ def format_camel_case(value):
         ) + value_split[i][1:]
     return (value_formatted)
 
+def write_genome_coverage(value, key, w):
+    '''
+    Convert genome coverage value to integer and write to output.
+    
+    @value    The string that needs to be converted to an int
+    @key.     The property name to write the value to
+    @w        Output file to write to
+    '''
+    v = ''
+    for i in value:
+        if i.isdigit():
+            v += i
+    w.write(key + ': ' + v + '\n')
 
 def write_genome_assembly(file_output, dict_genome_assembly, genome,
                           species_abrv):
@@ -140,6 +153,8 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
         elif key == 'Infraspecificname':
             value = value.strip('strain=')
             w.write(dict_conversion[key] + ': "' + value + '"\n')
+        elif key == 'Genomecoverage':
+            write_genome_coverage(value, dict_conversion[key], w)
         elif key == 'Sex':
             value = 'dcs:' + value.lower().capitalize()
         elif key not in dict_conversion.keys():
