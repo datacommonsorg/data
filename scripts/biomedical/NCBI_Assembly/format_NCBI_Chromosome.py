@@ -42,13 +42,13 @@ def format_camel_case(value):
     value_formatted = ''
     # camel case enum type
     for i in range(len(value_split)):
-        value_formatted = value_formatted + value_split[i][0].upper(
-        ) + value_split[i][1:]
+        value_formatted = value_formatted + 
+        value_split[i][0].upper() + value_split[i][1:]
     return (value_formatted)
 
 def write_genome_coverage(value, key, w):
     '''
-    Convert genome coverage value to integer and write to output.
+    Convert genome coverareturn (value_formatted)ge value to integer and write to output.
     
     @value    The string that needs to be converted to an int
     @key.     The property name to write the value to
