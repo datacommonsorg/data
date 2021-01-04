@@ -7,6 +7,11 @@ This directory stores all scripts used to import datasets from the Census of Ind
 
 It has one public function `process()` which internally downloads the data, cleans the data, creates the MCF, TMCF, and cleaned CSV file.
 
+## Base Class - CensusGenericDataLoaderBase
+`india_census.common.base.CensusGenericDataLoaderBase` is the base class for census generic imports. It has minimal functionality.
+
+It has one public function `process()` which internally call the functions for downloading the data, cleaning the data, creating the MCF, TMCF, and cleaned CSV files. These functions are implemented in the child class.
+
 
 ## primary_abstract_data_variables.csv
 A CSV file that defines census attributes. It's inside the package `india_census.common.base`. It has the following columns
@@ -35,5 +40,8 @@ This is used for creating the MCF files.
 
 ## Primary Census Abstract Data for Scheduled Tribes (ST) (India & States/UTs - District Level) 
 - Refer the read me inside [primary_census_abstract_scheduled_tribe](./primary_census_abstract_scheduled_tribe/readme.md) folder.
+
+## Religion PCA (India & States/UTs - District Level) 
+- Refer the read me inside [primary_religion_data](./primary_religion_data/readme.md) folder.
 
 
