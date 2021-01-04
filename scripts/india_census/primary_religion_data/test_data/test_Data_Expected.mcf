@@ -1,0 +1,486 @@
+Node: dcid:indianCensus/Count_Person_Religion_Total_Female
+description: "Total Females - Total"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Female
+description: "Total Females - Hindu"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Female
+description: "Total Females - Muslim"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Female
+description: "Total Females - Christian"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Female
+description: "Total Females - Sikh"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Female
+description: "Total Females - Buddhist"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Female
+description: "Total Females - Jain"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Female
+description: "Total Females - Other religions and persuasions"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Female
+description: "Total Females - Religion not stated"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Total_Urban_Female
+description: "Total Females - Total - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban_Female
+description: "Total Females - Hindu - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban_Female
+description: "Total Females - Muslim - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban_Female
+description: "Total Females - Christian - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban_Female
+description: "Total Females - Sikh - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban_Female
+description: "Total Females - Buddhist - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban_Female
+description: "Total Females - Jain - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Female
+description: "Total Females - Other religions and persuasions - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Female
+description: "Total Females - Religion not stated - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Total_Rural_Female
+description: "Total Females - Total - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural_Female
+description: "Total Females - Hindu - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural_Female
+description: "Total Females - Muslim - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural_Female
+description: "Total Females - Christian - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural_Female
+description: "Total Females - Sikh - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural_Female
+description: "Total Females - Buddhist - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural_Female
+description: "Total Females - Jain - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Female
+description: "Total Females - Other religions and persuasions - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Female
+description: "Total Females - Religion not stated - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Total_NonWorker_Male
+description: "Male Non-Workers - Total"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Male
+description: "Male Non-Workers - Hindu"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Male
+description: "Male Non-Workers - Muslim"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Male
+description: "Male Non-Workers - Christian"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Male
+description: "Male Non-Workers - Sikh"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Male
+description: "Male Non-Workers - Buddhist"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Male
+description: "Male Non-Workers - Jain"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Male
+description: "Male Non-Workers - Other religions and persuasions"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Male
+description: "Male Non-Workers - Religion not stated"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Total_NonWorker_Urban_Male
+description: "Male Non-Workers - Total - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Urban_Male
+description: "Male Non-Workers - Hindu - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Urban_Male
+description: "Male Non-Workers - Muslim - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Urban_Male
+description: "Male Non-Workers - Christian - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Urban_Male
+description: "Male Non-Workers - Sikh - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Urban_Male
+description: "Male Non-Workers - Buddhist - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Urban_Male
+description: "Male Non-Workers - Jain - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Urban_Male
+description: "Male Non-Workers - Other religions and persuasions - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Urban_Male
+description: "Male Non-Workers - Religion not stated - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Urban_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Total_NonWorker_Rural_Male
+description: "Male Non-Workers - Total - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Rural_Male
+description: "Male Non-Workers - Hindu - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Rural_Male
+description: "Male Non-Workers - Muslim - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Rural_Male
+description: "Male Non-Workers - Christian - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Rural_Male
+description: "Male Non-Workers - Sikh - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Rural_Male
+description: "Male Non-Workers - Buddhist - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Rural_Male
+description: "Male Non-Workers - Jain - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Rural_Male
+description: "Male Non-Workers - Other religions and persuasions - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Rural_Male
+description: "Male Non-Workers - Religion not stated - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Rural_Male
+
+Node: dcid:indianCensus/Count_Person_Religion_Total_NonWorker_Female
+description: "Female Non-Workers - Total"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Female
+description: "Female Non-Workers - Hindu"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Female
+description: "Female Non-Workers - Muslim"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Female
+description: "Female Non-Workers - Christian"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Female
+description: "Female Non-Workers - Sikh"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Female
+description: "Female Non-Workers - Buddhist"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Female
+description: "Female Non-Workers - Jain"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Female
+description: "Female Non-Workers - Other religions and persuasions"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Female
+description: "Female Non-Workers - Religion not stated"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Total_NonWorker_Urban_Female
+description: "Female Non-Workers - Total - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Urban_Female
+description: "Female Non-Workers - Hindu - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Urban_Female
+description: "Female Non-Workers - Muslim - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Urban_Female
+description: "Female Non-Workers - Christian - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Urban_Female
+description: "Female Non-Workers - Sikh - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Urban_Female
+description: "Female Non-Workers - Buddhist - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Urban_Female
+description: "Female Non-Workers - Jain - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Urban_Female
+description: "Female Non-Workers - Other religions and persuasions - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Urban_Female
+description: "Female Non-Workers - Religion not stated - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Urban_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Total_NonWorker_Rural_Female
+description: "Female Non-Workers - Total - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_NonWorker_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Rural_Female
+description: "Female Non-Workers - Hindu - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_NonWorker_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Rural_Female
+description: "Female Non-Workers - Muslim - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_NonWorker_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Rural_Female
+description: "Female Non-Workers - Christian - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_NonWorker_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Rural_Female
+description: "Female Non-Workers - Sikh - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_NonWorker_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Rural_Female
+description: "Female Non-Workers - Buddhist - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Rural_Female
+description: "Female Non-Workers - Jain - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_NonWorker_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Rural_Female
+description: "Female Non-Workers - Other religions and persuasions - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Rural_Female
+
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Rural_Female
+description: "Female Non-Workers - Religion not stated - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Rural_Female
+
