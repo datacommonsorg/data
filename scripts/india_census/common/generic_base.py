@@ -22,11 +22,11 @@ CENSUS_DATA_COLUMN_START = 7
 
 
 class CensusGenericDataLoaderBase(object):
-    GENERIC_TEMPLATE_STAT_VAR = """Node: dcid:indianCensus/{name}
+    GENERIC_TEMPLATE_STAT_VAR = """Node: {StatisticalVariable}
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/{name}
+measuredProperty: {measuredProperty}
 
 """
 

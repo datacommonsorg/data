@@ -120,8 +120,8 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
 
         #Add corresponding StatisticalVariable, based on columnName and TRU
         self.raw_df['StatisticalVariable'] = self.raw_df.apply(
-            lambda row: self.stat_var_index[stat_var_index_key(
-                row, self.data_category_column)],
+            lambda row: self._get_stat_var_name(self.stat_var_index[
+                stat_var_index_key(row, self.data_category_column)]),
             axis=1)
 
         #add the census year
@@ -142,6 +142,12 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
         #the name of the stat var
         name = "Count_" + row["populationType"] + "_Religion"
         return name
+
+    def _get_stat_var_name(self, name):
+        return "dcid:indianCensus/{}".format(name)
+
+    def _get_measured_property_name(self, name):
+        return "dcs:indianCensus/{}".format(name)
 
     def _create_variable(self,
                          data_row,
@@ -212,8 +218,10 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
             key = key + "_" + titleCase(data_category)
 
         self.stat_var_index[key] = name
-
+        row["StatisticalVariable"] = self._get_stat_var_name(name)
+        row["measuredProperty"] = self._get_measured_property_name(name)
         self.mcf.append(row)
+
         stat_var = self.GENERIC_TEMPLATE_STAT_VAR.format(**dict(row))
 
         return name, stat_var
