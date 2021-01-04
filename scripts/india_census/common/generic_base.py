@@ -18,7 +18,7 @@ import csv
 import copy
 import pandas as pd
 
-CENSUS_DATA_COLUMN_START = 9
+CENSUS_DATA_COLUMN_START = 7
 
 
 class CensusGenericDataLoaderBase(object):

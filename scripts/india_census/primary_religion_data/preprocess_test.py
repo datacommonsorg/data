@@ -19,7 +19,6 @@ import unittest
 from india_census.common.base import CensusPrimaryAbstractDataLoaderBase
 from india_census.primary_religion_data.preprocess import CensusPrimaryReligiousDataLoader
 
-
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 
@@ -31,7 +30,8 @@ class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
                                       './test_data/test_input.xlsx')
 
         metadata_file_path = os.path.join(
-            os.path.dirname(__file__), '../common/primary_abstract_data_variables.csv')
+            os.path.dirname(__file__),
+            '../common/primary_abstract_data_variables.csv')
 
         existing_stat_var = [
             "Count_Household", "Count_Person", "Count_Person_Urban",
@@ -69,7 +69,6 @@ class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
             data_categories=data_categories,
             data_category_column="Religion")
         loader.process()
-
 
         same_mcf = filecmp.cmp(mcf_file_path, mcf_expected_file_path)
         same_tmcf = filecmp.cmp(tmcf_file_path, tmcf_expected_file_path)

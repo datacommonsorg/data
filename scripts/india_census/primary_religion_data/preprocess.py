@@ -23,8 +23,6 @@ import urllib.request
 from ..common.utils import titleCase
 from ..common.generic_base import CensusGenericDataLoaderBase
 
-CENSUS_DATA_COLUMN_START = 8
-
 
 class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
     """An object that represents Census Data and its variables.
@@ -131,9 +129,9 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
 
         #remove data_category_column as its not required
         self.raw_df.drop([self.data_category_column],
-            axis=1,
-            inplace=True,
-            errors='ignore')        
+                         axis=1,
+                         inplace=True,
+                         errors='ignore')
 
         #Export it as CSV. It will have the following columns
         #Name,TRU,columnName,value,StatisticalVariable,Year
@@ -309,8 +307,8 @@ if __name__ == '__main__':
         data_category_column="Religion")
     loader.process()
 
-    #Iterate through state files and just create the final CSV file
-    #We already have the MCF and TMCF file
+    # #Iterate through state files and just create the final CSV file
+    # #We already have the MCF and TMCF file
 
     state_data_files = [
         "RL-0300.xlsx", "RL-0600.xlsx", "RL-0900.xlsx", "RL-1200.xlsx",
