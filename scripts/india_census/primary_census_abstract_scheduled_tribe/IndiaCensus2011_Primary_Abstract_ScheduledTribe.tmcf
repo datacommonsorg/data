@@ -1,0 +1,10 @@
+Node: E:IndiaCensus2011_Primary_Abstract_ScheduledTribe->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaCensus2011_Primary_Abstract_ScheduledTribe->StatisticalVariable
+observationDate: C:IndiaCensus2011_Primary_Abstract_ScheduledTribe->Year
+observationAbout: E:IndiaCensus2011_Primary_Abstract_ScheduledTribe->E1
+value: C:IndiaCensus2011_Primary_Abstract_ScheduledTribe->Value
+
+Node: E:IndiaCensus2011_Primary_Abstract_ScheduledTribe->E1
+typeOf: schema:Place
+indianCensusAreaCode2011: C:IndiaCensus2011_Primary_Abstract_ScheduledTribe->census_location_id
