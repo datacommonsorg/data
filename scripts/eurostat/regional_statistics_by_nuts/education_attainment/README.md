@@ -9,7 +9,7 @@ Author: eftekhari-mhs
 
 ## About the Dataset
 
-This dataset has the education attainment rate (percentage) for European Union (EU) countries to their NUTS2 geos.
+This dataset has the education attainment rate (percentage) for European Union (EU) countries, NUTS1 and NUTS2 geos.
 
 It has the attainment rate categorized by
 
@@ -46,10 +46,11 @@ The original dataset is broken up into 3 columns:
 
 `sex,edu-level,age,unit,geo` is then broken down into:
 
-1. sex-level: 'F_ED0-2', 'F_ED3-8', 'F_ED3_4','F_ED5-8', 'M_ED0-2', 'M_ED3-8', 'M_ED3_4', 'M_ED5-8', 'T_ED0-2', 'T_ED3-8', 'T_ED3_4', 'T_ED5-8'
-2. age: 25 to 64 years old
-3. unit: Percentage
-4. geo: NUTS2 codes for regions of Europe
+1. sex: 'F' or 'M' or 'T'
+2. edu-level: 'ED0-2', 'ED3-8', 'ED3_4','ED5-8',
+3. age: 25 to 64 years old
+4. unit: Percentage
+5. geo: NUTS codes for regions of Europe
 
 ### Dataset Documentation and Relevant Links
 
