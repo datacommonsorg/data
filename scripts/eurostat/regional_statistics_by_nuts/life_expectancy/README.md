@@ -1,5 +1,4 @@
-
-# Importing Eurostat Life Expectancy By Age, Sex (demo_r_mlifexp)  Into Data Commons
+# Importing Eurostat Life Expectancy By Age, Sex (demo_r_mlifexp) Into Data Commons
 
 Author: qlj-lijuan
 
@@ -11,37 +10,42 @@ Author: qlj-lijuan
 
 ## About the Dataset
 
+This dataset reports life expectancy by age, gender in countries, NUTS1 and NUTS2 regions in Europe.
+
 ### Download URL
 
 tsv file is available for download from https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_mlifexp.tsv.gz.
 
-### Overview
+### License
 
-This dataset reports life expectancy by age, gender in countries, NUTS1 and NUTS2 regions in Europe.
+See parent README.
 
 ## Import Artifacts
 
 ### Raw Data
+
 - [demo_r_mlifexp.tsv](demo_r_mlifexp.tsv)
 
 ### Cleaned Data
+
 - [demo_r_mlifexp_cleaned.csv](demo_r_mlifexp_cleaned.csv)
 
 ### Template MCFs
+
 - [demo_r_mlifexp.tmcf](demo_r_mlifexp.tmcf)
 
 ### StatisticalVariable Instance MCF
+
 - [demo_r_mlifexp_statvar.tmcf](demo_r_mlifexp_statvar.tmcf)
 
 ### Scripts
--  [preprocess.py](preprocess.py)
--  [generate_mcf.py](generate_mcf.py)
--  [test_preprocess.py](test_preprocess.py)
 
-### Notes
-
+- [preprocess.py](preprocess.py)
+- [generate_mcf.py](generate_mcf.py)
+- [test_preprocess.py](test_preprocess.py)
 
 ## Generating Artifacts
+
 To generate the cleaned csv `demo_r_mlifexp_cleaned.csv`, run
 
 ```bash
