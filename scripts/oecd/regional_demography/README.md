@@ -20,8 +20,7 @@ We have a subdirectory for each imported Regional Demography dataset:
 ### Notes and Caveats
 
 This import currently relies on place name resolver to map statistics to a place DCID.
-This has some issues, which are documented inside Google. We are working on this, but
-in the meantime, contact us for more information.
+This has some issues, which we are working on, but in the meantime, contact us for more information.
 
 ## Import Artifacts
 
@@ -40,6 +39,11 @@ In each subdirectory, the cleaned CSVs are saved as `OECD_{subdirectory name}_cl
 ### StatisticalVariable MCF files
 
 In each subdirectory, the StatisticalVariable MCF files are saved as `OECD_{subdirectory name}_stat_vars.mcf`.
+
+IMPORTANT: These StatisticalVariable MCFs are only preliminary StatVar MCFs
+for the import procedure--they use WDI indicators to distinguish DCIDs;
+please contact support@datacommons.org to ask them to add the StatVars to
+the human readable StatVar file `manual_wdi_stat_vars.mcf`.
 
 ### StatVarObservation Template MCF files
 
@@ -65,55 +69,56 @@ To update [regid2dcid.json](regid2dcid.json):
 
 1. Download the List of regions and typologies xls file.
 
-NOTE: this is already done and saved as [geos.csv](geos.csv).
-Only do this step if for some reason you feel that file needs updating.
+   NOTE: this is already done and saved as [geos.csv](geos.csv).
+   Only do this step if for some reason you feel that file needs updating.
 
-The xls file can be found in the info sidebar of the regional
-demographics dataset
-[page](https://stats.oecd.org/index.aspx?DataSetCode=REGION_DEMOGR)
+   The xls file can be found [in the info sidebar](https://screenshot.googleplex.com/4F5bJXpM7tqc7ba) of the regional
+   demographics dataset
+   [page](https://stats.oecd.org/index.aspx?DataSetCode=REGION_DEMOGR)
 
-Export the "List of regions" sheet to CSV and save it in this directory.
+   Export the "List of regions" sheet to CSV and save it in this directory.
 
 1. Clean the CSV: `python3 clean_geos_csv.py`
 
-- This is where we **append a place type to the place name**,
-  such as "AdministrativeArea1", as a hint to the place name resolver.
-- This is also where we **remove regions that are statistical
-  regions, non official regions, etc.** Essentially, we want to
-  keep places that are real administrative areas.
-  - Whether places are statistical, administrative, or
-    other regions are determined based on the
-    [OECD Regions at a Glance Documentation](https://www.oecd-ilibrary.org/sites/reg_glance-2016-en/1/3/1/index.html?itemId=/content/publication/reg_glance-2016-en&_csp_=c935435269a6598b27c5166da7d1ad21&itemIGO=oecd&itemContentType=book#ID1d8692e3-637b-4fdc-9097-245b08f9948a) and further Googling.
+   - This is where we **append a place type to the place name**,
+     such as "AdministrativeArea1", as a hint to the place name resolver.
+   - This is also where we **remove regions that are statistical
+     regions, non official regions, etc.** Essentially, we want to
+     keep places that are real administrative areas.
 
-Note: After further investigation/improved understanding of the regions,
-update the special casing logic in this file.
-E.g. when we realize that Japan TL2 is actually not an AdminArea,
-but TL3 is, we should add a special case to append "AdministrativeArea1"
-to the place names of TL3 regions, not the TL2 regions.
+     - Whether places are statistical, administrative, or
+       other regions are determined based on the
+       [OECD Regions at a Glance Documentation](https://www.oecd-ilibrary.org/sites/reg_glance-2016-en/1/3/1/index.html?itemId=/content/publication/reg_glance-2016-en&_csp_=c935435269a6598b27c5166da7d1ad21&itemIGO=oecd&itemContentType=book#ID1d8692e3-637b-4fdc-9097-245b08f9948a) and further Googling.
+
+     Note: After further investigation/improved understanding of the regions,
+     update the special casing logic in this file.
+     E.g. when we realize that Japan TL2 is actually not an AdminArea,
+     but TL3 is, we should add a special case to append "AdministrativeArea1"
+     to the place names of TL3 regions, not the TL2 regions. (This is a TODO).
 
 1. Use the `place_name_resolver` tool to add a `dcid` column to the CSV:
 
-```
-go run ../../../tools/place_name_resolver/resolver.go --in_csv_path=geos_cleaned.csv --out_csv_path=geos_resolved.csv --maps_api_key=YOUR_API_KEY
-```
+   ```
+   go run ../../../tools/place_name_resolver/resolver.go --in_csv_path=geos_cleaned.csv --out_csv_path=geos_resolved.csv --maps_api_key=YOUR_API_KEY
+   ```
 
 1. Clean the resolved CSV: `python3 clean_geos_resolved_to_dict.py`
 
-- This is where we take the CSV result of the `place_name_resolver` tool
-  and create [regid2dcid.json](regid2dcid.json).
-- Here, we **discard certain `dcid` column results** from `place_name_resolver`,
-  when we know we can derive the DCIDs from OECD IDs.
-  - For countries, we directly use `"country/" + OECDId`.
-  - For NUTS regions (those present in [region_nuts_codes.json](region_nuts_codes.json)), we directly use `"nuts/" + OECDId`.
-  - For US states, we directly use `"geoId/" + OECDId_without_the_US_prefix`.
-- Furthermore, if the `place_name_resolver` tool assigned the same DCID to multiple regions,
-  we **remove the later occurrences so that there is no conflict**.
+   - This is where we take the CSV result of the `place_name_resolver` tool
+     and create [regid2dcid.json](regid2dcid.json).
+   - Here, we **discard certain `dcid` column results** from `place_name_resolver`,
+     when we know we can derive the DCIDs from OECD IDs.
+     - For countries, we directly use `"country/" + OECDId`.
+     - For NUTS regions (those present in [region_nuts_codes.json](region_nuts_codes.json)), we directly use `"nuts/" + OECDId`.
+     - For US states, we directly use `"geoId/" + OECDId_without_the_US_prefix`.
+   - Furthermore, if the `place_name_resolver` tool assigned the same DCID to multiple regions,
+     we **remove the later occurrences so that there is no conflict**.
 
-Note: After further investigation/improved understanding of the regions,
-update the special casing logic in this file.
-E.g. when we realized that USA TL2 OECD IDs are based on FIPS codes,
-we added a special case to discard the resolver output in favor of
-creating DCIDs based on the OECD ID.
+     Note: After further investigation/improved understanding of the regions,
+     update the special casing logic in this file.
+     E.g. when we realized that USA TL2 OECD IDs are based on FIPS codes,
+     we added a special case to discard the resolver output in favor of
+     creating DCIDs based on the OECD ID.
 
 ## Geo Resolution Tracking
 

@@ -7,12 +7,20 @@ into Data Commons (StatVarObs Template MCFs, StatVar MCFs, and the final CSV).
 
 To add new StatisticalVariables to Data Commons, for each indicator:
 
-1. Find the corresponding indicator code, name, and source.
+1. Find the corresponding indicator code, name, and source. [Here](https://data.worldbank.org/indicator?tab=all) is a way to see all the indicators. TODO(IanCostello): document how you dumped all the indicator metatdata into a CSV.
 
 1. Add to or create a new schema CSV (copy [schema_template.csv](schema_template.csv) with a meaningful name).
 
 1. Fill out the columns for each variable you want to add
    to the best of your ability.
+
+   - There are some non-schema fields:
+   - IndicatorCode: WDI's code for the indicator
+   - ConvertToInt: whether to convert the value to an int. TODO(IanCostello): explain why this is necessary
+   - ExistingStatVar: whether this variable corresponds to a StatVar that already exists in DC. The code will then use that StatVar instead of creating a new one.
+   - IndicatorName: Name from WDI, useful for visual debugging.
+   - SourceNote: Source note from WDI, useful for visual debugging.
+   - Source: Original data source. Maybe useful down the road for better data citation.
 
 1. Request a Data Commons engineer for review.
 

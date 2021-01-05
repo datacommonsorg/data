@@ -20,7 +20,7 @@ Data Commons imports several dozens of these variables into our knowledge graph.
 
 ### Notes and Caveats
 
-Data Commons has some legacy code inside Google that processes 13 WDI variables.
+Data Commons has some legacy code not in GitHub that processes 13 WDI variables.
 They are:
 
 1. CO2 emissions (metric tons per capita)
@@ -33,11 +33,17 @@ They are:
 1. GNI per capita, PPP (current international $)
 1. Individuals using the Internet (% of population)
 1. Life expectancy at birth, total (years)
-1. Fertility rate, total (births per woman)Population, total
+1. Fertility rate, total (births per woman)
 1. Population, total
 1. Population growth (annual %)
 
-Secondly, in our legacy work, we did not carefully indicate when variables were estimated or standardized across data sources by the WDI.
+Secondly, we did not consistently indicate when variables were estimated or standardized across data sources. E.g. observations of
+`MortalityRate_Person_Upto4Years_AsFractionOf_Count_BirthEvent_LiveBirth`
+[do not indicate](https://datacommons.org/browser/dc/p/mbwqq551rch16) that it was
+[estimated by the UN Inter-agency Group for Child Mortality Estimation](https://data.worldbank.org/indicator/SH.DYN.MORT),
+while observations of
+`MortalityRate_Person_Upto4Years_AsFractionOf_Count_BirthEvent_LiveBirth`
+[do indicate so](https://datacommons.org/browser/dc/p/6jq9n69ezf2k6).
 
 ### License
 
@@ -67,7 +73,7 @@ and learn how to import new variables in [schema_csv/README.md](schema_csv/READM
 
 - [`schema_csvs/WorldBankIndicators_*.csv`](schema_csvs): manually curated CSVs
   with particular columns helping to describe the StatVar and StatVarObs
-  properties of WDI variables. This is encodes the final schema for the import.
+  properties of WDI variables. This encodes the final schema for the import.
   The script [worldbank.py](worldbank.py) uses a Schema CSV
   to write the output artifacts below.
 
@@ -118,7 +124,7 @@ To generate `output/WorldBank_StatisticalVariables.mcf`,
 `output/WorldBank.tmcf`, and `output/WorldBank.csv`, run:
 
 ```bash
-python3 worldbank.py --indicatorSchemaFile=<DESIRED INDICATOR CSV FILE> --fetchFromSource=<WHETHER TO RE-FETCH FROM WDI WEBSITE INSTEAD OF USING CHECKED-IN PREPROCESSED CSVS>
+python3 worldbank.py --indicatorSchemaFile=<DESIRED INDICATOR CSV FILE> --fetchFromSource=<true TO RE-FETCH FROM WDI WEBSITE INSTEAD OF USING CHECKED-IN PREPROCESSED CSVS ELSE false>
 ```
 
 We highly recommend the use of the import validation tool for this import which

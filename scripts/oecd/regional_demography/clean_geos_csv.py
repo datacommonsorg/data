@@ -31,6 +31,9 @@ df.loc[df.oecd_territorial_level == '2',
 df = df[df.oecd_territorial_level != 'NOG']
 
 # Remove statistical regions
+# Note: In clean_geos_resolved_to_dict.py, we anyway hardcode dcids for NUTS,
+# ignoring resolver output. So I've excluded special casing European countries
+# here.
 df = df[~((df.containedInCountry == 'CAN') &
           (df.name.str.startswith('Division')))]
 df = df[~((df.containedInCountry == 'CAN') &
