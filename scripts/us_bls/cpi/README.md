@@ -64,46 +64,55 @@ The license is available online at https://www.bls.gov/bls/linksite.htm.
 
 ### Dataset Documentation and Relevant Links
 
--   Descriptions of all available series of CPI-U:
-    https://download.bls.gov/pub/time.series/cu/cu.series
--   Descriptions of all available series of CPI-W:
-    https://download.bls.gov/pub/time.series/cw/cw.series
--   Description of all available series of C-CPI-U:
-    https://download.bls.gov/pub/time.series/su/su.series
--   CPI method handbook: https://www.bls.gov/opub/hom/pdf/cpihom.pdf
+- Descriptions of all available series of CPI-U:
+  https://download.bls.gov/pub/time.series/cu/cu.series
+- Descriptions of all available series of CPI-W:
+  https://download.bls.gov/pub/time.series/cw/cw.series
+- Description of all available series of C-CPI-U:
+  https://download.bls.gov/pub/time.series/su/su.series
+- CPI method handbook: https://www.bls.gov/opub/hom/pdf/cpihom.pdf
 
 ## About the Import
+
+### Status
+
+- In prod: All 3 measures of CPI _without product breakdown_.
+  - To see this directory at prod (_without product breakdown_):
+    [see commit d84f967](https://github.com/datacommonsorg/data/tree/d84f96744ae5ad2df1fbc81890a0dd76bd5dc54c/scripts/us_bls/cpi)
+- Current state: All 3 measures, _with product breakdown_.
+  - When there is demand for this data, please check and do the
+    import process before productionizing.
 
 ### Artifacts
 
 #### Cleaned Data
 
--   [c_cpi_u.csv](c_cpi_u.csv) contains
-    Chained CPI for All Urban Consumers (C-CPI-U) data.
--   [cpi_u.csv](cpi_u.csv) contains
-    CPI for All Urban Consumers (CPI-U) data.
--   [cpi_w.csv](cpi_w.csv) contains
-    Urban Wage Earners and Clerical Workers (CPI-W) data.
+- [c_cpi_u.csv](c_cpi_u.csv) contains
+  Chained CPI for All Urban Consumers (C-CPI-U) data.
+- [cpi_u.csv](cpi_u.csv) contains
+  CPI for All Urban Consumers (CPI-U) data.
+- [cpi_w.csv](cpi_w.csv) contains
+  Urban Wage Earners and Clerical Workers (CPI-W) data.
 
 #### Template MCFs
 
--   [c_cpi_u.tmcf](c_cpi_u_1999_2020.tmcf)
-    -   Contains the template MCF for C-CPI-U series.
--   [cpi_u.tmcf](cpi_u_1913_2020.tmcf)
--   [cpi_w.tmcf](cpi_w_1913_2020.tmcf)
+- [c_cpi_u.tmcf](c_cpi_u_1999_2020.tmcf)
+  - Contains the template MCF for C-CPI-U series.
+- [cpi_u.tmcf](cpi_u_1913_2020.tmcf)
+- [cpi_w.tmcf](cpi_w_1913_2020.tmcf)
 
 #### Node MCFs
 
--   [c_cpi_u.mcf](c_cpi_u.mcf)
-    -   Contains StatisticalVariables for C-CPI-U series.
--   [cpi_u.mcf](cpi_u.mcf)
--   [cpi_w.mcf](cpi_w.mcf)
--   [pop_type_enums.mcf](pop_type_enums.mcf)
-    -   Contains populationType enums for all three types of series.
--   [unit_enums.mcf](unit_enums.mcf)
-    -   Contains unit enums for all three types of series.
+- [c_cpi_u.mcf](c_cpi_u.mcf)
+  - Contains StatisticalVariables for C-CPI-U series.
+- [cpi_u.mcf](cpi_u.mcf)
+- [cpi_w.mcf](cpi_w.mcf)
+- [pop_type_enums.mcf](pop_type_enums.mcf)
+  - Contains populationType enums for all three types of series.
+- [unit_enums.mcf](unit_enums.mcf)
+  - Contains unit enums for all three types of series.
 
 #### Scripts
 
--   [generate_csv_mcf.py](generate_csv_mcf.py) generates the CSVs,
-    StatisticalVariable MCFs, and template MCFs. See module docstring.
+- [generate_csv_mcf.py](generate_csv_mcf.py) generates the CSVs,
+  StatisticalVariable MCFs, and template MCFs. See module docstring.
