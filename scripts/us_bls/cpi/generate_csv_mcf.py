@@ -65,7 +65,7 @@ Usage: python3 generate_csv_mcf.py
 import re
 import io
 import dataclasses
-from typing import Set, Tuple, Iterable
+from typing import Set, List, Tuple, Iterable
 
 import requests
 import frozendict
@@ -248,7 +248,7 @@ def parse_series_id(series_id: str) -> SeriesInfo:
 
 
 def generate_unit_enums(info_df: pd.DataFrame, targets: Set[str]) -> Set[str]:
-    """Returns a set of enum definitions for the units required by the series
+    """Returns a list of enum definitions for the units required by the series
     identified by their IDs in "targets".
 
     Args:
@@ -268,7 +268,7 @@ def generate_unit_enums(info_df: pd.DataFrame, targets: Set[str]) -> Set[str]:
 
 
 def generate_pop_type_enums(url: str, targets: Set[str]) -> Set[str]:
-    """Returns a set of enum definitions for the population types required
+    """Returns a list of enum definitions for the population types required
     by the series identified by their IDs in "targets".
 
     Args:
@@ -338,7 +338,7 @@ def _download_df(url: str,
 
 
 def _generate_csv(url: str, info_df: pd.DataFrame,
-                  targets: Set[str]) -> pd.DataFrame:
+                  targets: List[str]) -> pd.DataFrame:
     """Returns a DataFrame containing series obtained from "url" and specified
     by "targets".
 
@@ -383,7 +383,8 @@ def _generate_statvar(series_id: str) -> str:
     series_info = parse_series_id(series_id)
     return (f"Node: dcid:{series_info.get_statvar()}\n"
             "typeOf: dcs:StatisticalVariable\n"
-            f"populationType: dcs:{series_info.get_pop_type()}\n"
+            f"populationType: dcs:ConsumerGoodsAndServices\n"
+            f"consumedThing: dcs:{series_info.get_pop_type()}\n"
             f"measurementQualifier: dcs:{series_info.get_mqual()}\n"
             "measuredProperty: dcs:consumerPriceIndex\n"
             "statType: dcs:measuredValue\n"
@@ -393,9 +394,9 @@ def _generate_statvar(series_id: str) -> str:
 
 def write_statvars(dest: str, targets: Set[str]) -> None:
     """Writes out the statistical variable definitions required by the
-    series in "targets"."""
+    series in "targets" after sorting for output determinism."""
     with open(dest, "w") as out:
-        for series_id in targets:
+        for series_id in sorted(targets):
             out.write(_generate_statvar(series_id))
             out.write("\n")
 
@@ -413,10 +414,10 @@ def filter_series(info_df: pd.DataFrame) -> Set[str]:
     return targets
 
 
-def write_set(dest: str, to_write: Set[str]) -> None:
-    """Writes out a set of strings."""
+def write_set(dest: str, to_write: List[str]) -> None:
+    """Writes out a set of strings after sorting for output determinism."""
     with open(dest, "w") as out:
-        for elem in to_write:
+        for elem in sorted(to_write):
             out.write(elem)
 
 

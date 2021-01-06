@@ -1,1596 +1,1596 @@
-Node: dcid:BLSItem/SEAB
+Node: dcid:BLSItem/AA0
 typeOf: dcs:EconomicProductEnum
-name: "Boys' apparel"
-
-Node: dcid:BLSItem/SETA02
-typeOf: dcs:EconomicProductEnum
-name: "Used cars and trucks"
-
-Node: dcid:BLSItem/SEAE03
-typeOf: dcs:EconomicProductEnum
-name: "Women's footwear"
-
-Node: dcid:BLSItem/SEHF01
-typeOf: dcs:EconomicProductEnum
-name: "Electricity"
-
-Node: dcid:BLSItem/SEFC
-typeOf: dcs:EconomicProductEnum
-name: "Beef and veal"
-
-Node: dcid:BLSItem/SASL2RS
-typeOf: dcs:EconomicProductEnum
-name: "Services less rent of shelter"
-
-Node: dcid:BLSItem/SANL1
-typeOf: dcs:EconomicProductEnum
-name: "Nondurables less food"
-
-Node: dcid:BLSItem/SS02021
-typeOf: dcs:EconomicProductEnum
-name: "Bread other than white"
-
-Node: dcid:BLSItem/SS20052
-typeOf: dcs:EconomicProductEnum
-name: "Wine away from home"
-
-Node: dcid:BLSItem/SEEC
-typeOf: dcs:EconomicProductEnum
-name: "Postage and delivery services"
-
-Node: dcid:BLSItem/SS62053
-typeOf: dcs:EconomicProductEnum
-name: "Pet services"
-
-Node: dcid:BLSItem/SS04012
-typeOf: dcs:EconomicProductEnum
-name: "Breakfast sausage and related products"
-
-Node: dcid:BLSItem/SEFP02
-typeOf: dcs:EconomicProductEnum
-name: "Other beverage materials including tea"
-
-Node: dcid:BLSItem/SEHC01
-typeOf: dcs:EconomicProductEnum
-name: "Owners' equivalent rent of primary residence"
-
-Node: dcid:BLSItem/SAM2
-typeOf: dcs:EconomicProductEnum
-name: "Medical care services"
-
-Node: dcid:BLSItem/SETA01
-typeOf: dcs:EconomicProductEnum
-name: "New vehicles"
-
-Node: dcid:BLSItem/SERB01
-typeOf: dcs:EconomicProductEnum
-name: "Pets and pet products"
-
-Node: dcid:BLSItem/SEFV
-typeOf: dcs:EconomicProductEnum
-name: "Food away from home"
-
-Node: dcid:BLSItem/SEAC04
-typeOf: dcs:EconomicProductEnum
-name: "Women's underwear, nightwear, swimwear and accessories"
-
-Node: dcid:BLSItem/SS09011
-typeOf: dcs:EconomicProductEnum
-name: "Fresh whole milk"
-
-Node: dcid:BLSItem/SEGD01
-typeOf: dcs:EconomicProductEnum
-name: "Legal services"
-
-Node: dcid:BLSItem/SERA01
-typeOf: dcs:EconomicProductEnum
-name: "Televisions"
-
-Node: dcid:BLSItem/SEHP
-typeOf: dcs:EconomicProductEnum
-name: "Household operations"
-
-Node: dcid:BLSItem/SEGC
-typeOf: dcs:EconomicProductEnum
-name: "Personal care services"
-
-Node: dcid:BLSItem/SEAE01
-typeOf: dcs:EconomicProductEnum
-name: "Men's footwear"
-
-Node: dcid:BLSItem/SAF115
-typeOf: dcs:EconomicProductEnum
-name: "Other food at home"
-
-Node: dcid:BLSItem/SAG1
-typeOf: dcs:EconomicProductEnum
-name: "Personal care"
-
-Node: dcid:BLSItem/SEHH
-typeOf: dcs:EconomicProductEnum
-name: "Window and floor coverings and other linens"
-
-Node: dcid:BLSItem/SS0206B
-typeOf: dcs:EconomicProductEnum
-name: "Frozen and refrigerated bakery products, pies, tarts, turnovers"
-
-Node: dcid:BLSItem/SS62055
-typeOf: dcs:EconomicProductEnum
-name: "Rental of video discs and other media"
-
-Node: dcid:BLSItem/SEFR03
-typeOf: dcs:EconomicProductEnum
-name: "Other sweets"
-
-Node: dcid:BLSItem/SS53031
-typeOf: dcs:EconomicProductEnum
-name: "Intracity mass transit"
-
-Node: dcid:BLSItem/SA0E
-typeOf: dcs:EconomicProductEnum
-name: "Energy"
-
-Node: dcid:BLSItem/SETC
-typeOf: dcs:EconomicProductEnum
-name: "Motor vehicle parts and equipment"
-
-Node: dcid:BLSItem/SAF113
-typeOf: dcs:EconomicProductEnum
-name: "Fruits and vegetables"
-
-Node: dcid:BLSItem/SEAC03
-typeOf: dcs:EconomicProductEnum
-name: "Women's suits and separates"
-
-Node: dcid:BLSItem/SS62031
-typeOf: dcs:EconomicProductEnum
-name: "Admission to movies, theaters, and concerts"
-
-Node: dcid:BLSItem/SAF116
-typeOf: dcs:EconomicProductEnum
-name: "Alcoholic beverages"
-
-Node: dcid:BLSItem/SEFL04
-typeOf: dcs:EconomicProductEnum
-name: "Other fresh vegetables"
-
-Node: dcid:BLSItem/SEME
-typeOf: dcs:EconomicProductEnum
-name: "Health insurance"
-
-Node: dcid:BLSItem/SEFK
-typeOf: dcs:EconomicProductEnum
-name: "Fresh fruits"
-
-Node: dcid:BLSItem/SEFN02
-typeOf: dcs:EconomicProductEnum
-name: "Frozen noncarbonated juices and drinks"
-
-Node: dcid:BLSItem/SEGD02
-typeOf: dcs:EconomicProductEnum
-name: "Funeral expenses"
-
-Node: dcid:BLSItem/SEMC03
-typeOf: dcs:EconomicProductEnum
-name: "Eyeglasses and eye care"
-
-Node: dcid:BLSItem/SERAC
-typeOf: dcs:EconomicProductEnum
-name: "Video and audio products"
-
-Node: dcid:BLSItem/SEAD
-typeOf: dcs:EconomicProductEnum
-name: "Girls' apparel"
-
-Node: dcid:BLSItem/SEHE01
-typeOf: dcs:EconomicProductEnum
-name: "Fuel oil"
-
-Node: dcid:BLSItem/SSEA011
-typeOf: dcs:EconomicProductEnum
-name: "College textbooks"
-
-Node: dcid:BLSItem/SASLE
-typeOf: dcs:EconomicProductEnum
-name: "Services less energy services"
-
-Node: dcid:BLSItem/SEAA03
-typeOf: dcs:EconomicProductEnum
-name: "Men's shirts and sweaters"
-
-Node: dcid:BLSItem/SEFG01
-typeOf: dcs:EconomicProductEnum
-name: "Fresh fish and seafood"
-
-Node: dcid:BLSItem/SEFP01
-typeOf: dcs:EconomicProductEnum
-name: "Coffee"
-
-Node: dcid:BLSItem/SEFE
-typeOf: dcs:EconomicProductEnum
-name: "Other meats"
-
-Node: dcid:BLSItem/SAG
-typeOf: dcs:EconomicProductEnum
-name: "Other goods and services"
-
-Node: dcid:BLSItem/SEFT06
-typeOf: dcs:EconomicProductEnum
-name: "Other miscellaneous foods"
-
-Node: dcid:BLSItem/SERB02
-typeOf: dcs:EconomicProductEnum
-name: "Pet services including veterinary"
-
-Node: dcid:BLSItem/SERD01
-typeOf: dcs:EconomicProductEnum
-name: "Photographic equipment and supplies"
-
-Node: dcid:BLSItem/SEFN01
-typeOf: dcs:EconomicProductEnum
-name: "Carbonated drinks"
-
-Node: dcid:BLSItem/SEMG
-typeOf: dcs:EconomicProductEnum
-name: "Medical equipment and supplies"
-
-Node: dcid:BLSItem/SEEB04
-typeOf: dcs:EconomicProductEnum
-name: "Technical and business school tuition and fees"
-
-Node: dcid:BLSItem/SA0L1E
-typeOf: dcs:EconomicProductEnum
-name: "All items less food and energy"
-
-Node: dcid:BLSItem/SEHF
-typeOf: dcs:EconomicProductEnum
-name: "Energy services"
-
-Node: dcid:BLSItem/SEGC01
-typeOf: dcs:EconomicProductEnum
-name: "Haircuts and other personal care services"
-
-Node: dcid:BLSItem/SEFH
-typeOf: dcs:EconomicProductEnum
-name: "Eggs"
-
-Node: dcid:BLSItem/SEHG
-typeOf: dcs:EconomicProductEnum
-name: "Water and sewer and trash collection services"
-
-Node: dcid:BLSItem/SEFV03
-typeOf: dcs:EconomicProductEnum
-name: "Food at employee sites and schools"
-
-Node: dcid:BLSItem/SEHB
-typeOf: dcs:EconomicProductEnum
-name: "Lodging away from home"
-
-Node: dcid:BLSItem/SEHE02
-typeOf: dcs:EconomicProductEnum
-name: "Propane, kerosene, and firewood"
-
-Node: dcid:BLSItem/SEGB02
-typeOf: dcs:EconomicProductEnum
-name: "Cosmetics, perfume, bath, nail preparations and implements"
-
-Node: dcid:BLSItem/SEFM02
-typeOf: dcs:EconomicProductEnum
-name: "Frozen fruits and vegetables"
-
-Node: dcid:BLSItem/SS30021
-typeOf: dcs:EconomicProductEnum
-name: "Laundry equipment"
+name: "All items - old base"
 
 Node: dcid:BLSItem/AA0R
 typeOf: dcs:EconomicProductEnum
 name: "Purchasing power of the consumer dollar - old base"
 
-Node: dcid:BLSItem/SEFV04
+Node: dcid:BLSItem/SA0
 typeOf: dcs:EconomicProductEnum
-name: "Food from vending machines and mobile vendors"
+name: "All items"
 
-Node: dcid:BLSItem/SAM
+Node: dcid:BLSItem/SA0E
 typeOf: dcs:EconomicProductEnum
-name: "Medical care"
-
-Node: dcid:BLSItem/SAH3
-typeOf: dcs:EconomicProductEnum
-name: "Household furnishings and operations"
-
-Node: dcid:BLSItem/SEMC02
-typeOf: dcs:EconomicProductEnum
-name: "Dental services"
-
-Node: dcid:BLSItem/SERA05
-typeOf: dcs:EconomicProductEnum
-name: "Audio equipment"
-
-Node: dcid:BLSItem/SAA2
-typeOf: dcs:EconomicProductEnum
-name: "Women's and girls' apparel"
-
-Node: dcid:BLSItem/SS14011
-typeOf: dcs:EconomicProductEnum
-name: "Frozen vegetables"
-
-Node: dcid:BLSItem/SAH21
-typeOf: dcs:EconomicProductEnum
-name: "Household energy"
-
-Node: dcid:BLSItem/SS04011
-typeOf: dcs:EconomicProductEnum
-name: "Bacon and related products"
-
-Node: dcid:BLSItem/SEGD04
-typeOf: dcs:EconomicProductEnum
-name: "Apparel services other than laundry and dry cleaning"
-
-Node: dcid:BLSItem/SETG03
-typeOf: dcs:EconomicProductEnum
-name: "Intracity transportation"
-
-Node: dcid:BLSItem/SEFF02
-typeOf: dcs:EconomicProductEnum
-name: "Other uncooked poultry including turkey"
-
-Node: dcid:BLSItem/SANL113
-typeOf: dcs:EconomicProductEnum
-name: "Nondurables less food, beverages, and apparel"
-
-Node: dcid:BLSItem/SEEEC
-typeOf: dcs:EconomicProductEnum
-name: "Information technology commodities"
-
-Node: dcid:BLSItem/SEFM
-typeOf: dcs:EconomicProductEnum
-name: "Processed fruits and vegetables"
-
-Node: dcid:BLSItem/SS1804B
-typeOf: dcs:EconomicProductEnum
-name: "Other condiments"
-
-Node: dcid:BLSItem/SEFL02
-typeOf: dcs:EconomicProductEnum
-name: "Lettuce"
-
-Node: dcid:BLSItem/SS05011
-typeOf: dcs:EconomicProductEnum
-name: "Frankfurters"
-
-Node: dcid:BLSItem/SS18064
-typeOf: dcs:EconomicProductEnum
-name: "Prepared salads"
-
-Node: dcid:BLSItem/SERC
-typeOf: dcs:EconomicProductEnum
-name: "Sporting goods"
-
-Node: dcid:BLSItem/SS62054
-typeOf: dcs:EconomicProductEnum
-name: "Veterinarian services"
-
-Node: dcid:BLSItem/SS31023
-typeOf: dcs:EconomicProductEnum
-name: "Video game hardware, software and accessories"
-
-Node: dcid:BLSItem/SERA03
-typeOf: dcs:EconomicProductEnum
-name: "Other video equipment"
-
-Node: dcid:BLSItem/SEHK02
-typeOf: dcs:EconomicProductEnum
-name: "Other appliances"
-
-Node: dcid:BLSItem/SAA1
-typeOf: dcs:EconomicProductEnum
-name: "Men's and boys' apparel"
-
-Node: dcid:BLSItem/SAF11
-typeOf: dcs:EconomicProductEnum
-name: "Food at home"
-
-Node: dcid:BLSItem/SEEA
-typeOf: dcs:EconomicProductEnum
-name: "Educational books and supplies"
-
-Node: dcid:BLSItem/SEFD04
-typeOf: dcs:EconomicProductEnum
-name: "Other pork including roasts, steaks, and ribs"
-
-Node: dcid:BLSItem/SEFL03
-typeOf: dcs:EconomicProductEnum
-name: "Tomatoes"
-
-Node: dcid:BLSItem/SEFL01
-typeOf: dcs:EconomicProductEnum
-name: "Potatoes"
-
-Node: dcid:BLSItem/SEFM01
-typeOf: dcs:EconomicProductEnum
-name: "Canned fruits and vegetables"
-
-Node: dcid:BLSItem/SERC01
-typeOf: dcs:EconomicProductEnum
-name: "Sports vehicles including bicycles"
-
-Node: dcid:BLSItem/SEFG
-typeOf: dcs:EconomicProductEnum
-name: "Fish and seafood"
-
-Node: dcid:BLSItem/SAE21
-typeOf: dcs:EconomicProductEnum
-name: "Information and information processing"
-
-Node: dcid:BLSItem/SEHM01
-typeOf: dcs:EconomicProductEnum
-name: "Tools, hardware and supplies"
-
-Node: dcid:BLSItem/SS20051
-typeOf: dcs:EconomicProductEnum
-name: "Beer, ale, and other malt beverages away from home"
-
-Node: dcid:BLSItem/SEHC
-typeOf: dcs:EconomicProductEnum
-name: "Owners' equivalent rent of residences"
-
-Node: dcid:BLSItem/SERF03
-typeOf: dcs:EconomicProductEnum
-name: "Fees for lessons or instructions"
-
-Node: dcid:BLSItem/SETA04
-typeOf: dcs:EconomicProductEnum
-name: "Car and truck rental"
-
-Node: dcid:BLSItem/SS45011
-typeOf: dcs:EconomicProductEnum
-name: "New cars"
-
-Node: dcid:BLSItem/SEEE02
-typeOf: dcs:EconomicProductEnum
-name: "Computer software and accessories"
-
-Node: dcid:BLSItem/SS10011
-typeOf: dcs:EconomicProductEnum
-name: "Butter"
-
-Node: dcid:BLSItem/SEMC
-typeOf: dcs:EconomicProductEnum
-name: "Professional services"
-
-Node: dcid:BLSItem/SS53021
-typeOf: dcs:EconomicProductEnum
-name: "Intercity bus fare"
-
-Node: dcid:BLSItem/SEAG
-typeOf: dcs:EconomicProductEnum
-name: "Jewelry and watches"
-
-Node: dcid:BLSItem/SAGS
-typeOf: dcs:EconomicProductEnum
-name: "Other personal services"
-
-Node: dcid:BLSItem/SEFR01
-typeOf: dcs:EconomicProductEnum
-name: "Sugar and sugar substitutes"
-
-Node: dcid:BLSItem/SEEE03
-typeOf: dcs:EconomicProductEnum
-name: "Internet services and electronic information providers"
-
-Node: dcid:BLSItem/SAD
-typeOf: dcs:EconomicProductEnum
-name: "Durables"
-
-Node: dcid:BLSItem/SERF01
-typeOf: dcs:EconomicProductEnum
-name: "Club membership for shopping clubs, fraternal, or other organizations, or participant sports fees"
-
-Node: dcid:BLSItem/SS18042
-typeOf: dcs:EconomicProductEnum
-name: "Olives, pickles, relishes"
-
-Node: dcid:BLSItem/SEMD02
-typeOf: dcs:EconomicProductEnum
-name: "Nursing homes and adult day services"
-
-Node: dcid:BLSItem/SEAE
-typeOf: dcs:EconomicProductEnum
-name: "Footwear"
-
-Node: dcid:BLSItem/SS33032
-typeOf: dcs:EconomicProductEnum
-name: "Stationery, stationery supplies, gift wrap"
-
-Node: dcid:BLSItem/SETF
-typeOf: dcs:EconomicProductEnum
-name: "Motor vehicle fees"
-
-Node: dcid:BLSItem/SEEB02
-typeOf: dcs:EconomicProductEnum
-name: "Elementary and high school tuition and fees"
-
-Node: dcid:BLSItem/SERF02
-typeOf: dcs:EconomicProductEnum
-name: "Admissions"
-
-Node: dcid:BLSItem/SEHJ02
-typeOf: dcs:EconomicProductEnum
-name: "Living room, kitchen, and dining room furniture"
-
-Node: dcid:BLSItem/SEFM03
-typeOf: dcs:EconomicProductEnum
-name: "Other processed fruits and vegetables including dried"
-
-Node: dcid:BLSItem/SEFK01
-typeOf: dcs:EconomicProductEnum
-name: "Apples"
-
-Node: dcid:BLSItem/SEFF01
-typeOf: dcs:EconomicProductEnum
-name: "Chicken"
-
-Node: dcid:BLSItem/SS45021
-typeOf: dcs:EconomicProductEnum
-name: "New trucks"
-
-Node: dcid:BLSItem/SAN1D
-typeOf: dcs:EconomicProductEnum
-name: "Domestically produced farm food"
-
-Node: dcid:BLSItem/SETF03
-typeOf: dcs:EconomicProductEnum
-name: "Parking and other fees"
-
-Node: dcid:BLSItem/SEHP03
-typeOf: dcs:EconomicProductEnum
-name: "Moving, storage, freight expense"
-
-Node: dcid:BLSItem/SERAS
-typeOf: dcs:EconomicProductEnum
-name: "Video and audio services"
-
-Node: dcid:BLSItem/SAS4
-typeOf: dcs:EconomicProductEnum
-name: "Transportation services"
-
-Node: dcid:BLSItem/SETD02
-typeOf: dcs:EconomicProductEnum
-name: "Motor vehicle maintenance and servicing"
-
-Node: dcid:BLSItem/SEHH03
-typeOf: dcs:EconomicProductEnum
-name: "Other linens"
-
-Node: dcid:BLSItem/SACL1E4
-typeOf: dcs:EconomicProductEnum
-name: "Commodities less food, energy, and used cars and trucks"
-
-Node: dcid:BLSItem/SEFA
-typeOf: dcs:EconomicProductEnum
-name: "Cereals and cereal products"
-
-Node: dcid:BLSItem/SA0R
-typeOf: dcs:EconomicProductEnum
-name: "Purchasing power of the consumer dollar"
-
-Node: dcid:BLSItem/SEFL
-typeOf: dcs:EconomicProductEnum
-name: "Fresh vegetables"
-
-Node: dcid:BLSItem/SEHF02
-typeOf: dcs:EconomicProductEnum
-name: "Utility (piped) gas service"
-
-Node: dcid:BLSItem/SERG
-typeOf: dcs:EconomicProductEnum
-name: "Recreational reading materials"
-
-Node: dcid:BLSItem/SAT
-typeOf: dcs:EconomicProductEnum
-name: "Transportation"
-
-Node: dcid:BLSItem/SS62052
-typeOf: dcs:EconomicProductEnum
-name: "Photo Processing"
-
-Node: dcid:BLSItem/SEED04
-typeOf: dcs:EconomicProductEnum
-name: "Land-line telephone services"
-
-Node: dcid:BLSItem/SAS24
-typeOf: dcs:EconomicProductEnum
-name: "Utilities and public transportation"
-
-Node: dcid:BLSItem/SEFT02
-typeOf: dcs:EconomicProductEnum
-name: "Frozen and freeze dried prepared foods"
-
-Node: dcid:BLSItem/SAR
-typeOf: dcs:EconomicProductEnum
-name: "Recreation"
-
-Node: dcid:BLSItem/SS53022
-typeOf: dcs:EconomicProductEnum
-name: "Intercity train fare"
-
-Node: dcid:BLSItem/SEFW02
-typeOf: dcs:EconomicProductEnum
-name: "Distilled spirits at home"
-
-Node: dcid:BLSItem/SEHP01
-typeOf: dcs:EconomicProductEnum
-name: "Domestic services"
-
-Node: dcid:BLSItem/SAE
-typeOf: dcs:EconomicProductEnum
-name: "Education and communication"
-
-Node: dcid:BLSItem/SERA
-typeOf: dcs:EconomicProductEnum
-name: "Video and audio"
-
-Node: dcid:BLSItem/SEFD03
-typeOf: dcs:EconomicProductEnum
-name: "Pork chops"
-
-Node: dcid:BLSItem/SEHK
-typeOf: dcs:EconomicProductEnum
-name: "Appliances"
-
-Node: dcid:BLSItem/SEAA01
-typeOf: dcs:EconomicProductEnum
-name: "Men's suits, sport coats, and outerwear"
-
-Node: dcid:BLSItem/SARC
-typeOf: dcs:EconomicProductEnum
-name: "Recreation commodities"
-
-Node: dcid:BLSItem/SS47021
-typeOf: dcs:EconomicProductEnum
-name: "Motor oil, coolant, and fluids"
-
-Node: dcid:BLSItem/SEFR02
-typeOf: dcs:EconomicProductEnum
-name: "Candy and chewing gum"
-
-Node: dcid:BLSItem/SEEB01
-typeOf: dcs:EconomicProductEnum
-name: "College tuition and fees"
-
-Node: dcid:BLSItem/SERB
-typeOf: dcs:EconomicProductEnum
-name: "Pets, pet products and services"
-
-Node: dcid:BLSItem/SETE
-typeOf: dcs:EconomicProductEnum
-name: "Motor vehicle insurance"
-
-Node: dcid:BLSItem/SAF1131
-typeOf: dcs:EconomicProductEnum
-name: "Fresh fruits and vegetables"
-
-Node: dcid:BLSItem/SEFA03
-typeOf: dcs:EconomicProductEnum
-name: "Rice, pasta, cornmeal"
-
-Node: dcid:BLSItem/SEFP
-typeOf: dcs:EconomicProductEnum
-name: "Beverage materials including coffee and tea"
-
-Node: dcid:BLSItem/SEEB03
-typeOf: dcs:EconomicProductEnum
-name: "Day care and preschool"
-
-Node: dcid:BLSItem/SAF11211
-typeOf: dcs:EconomicProductEnum
-name: "Meats"
-
-Node: dcid:BLSItem/SS16014
-typeOf: dcs:EconomicProductEnum
-name: "Peanut butter"
-
-Node: dcid:BLSItem/SETD
-typeOf: dcs:EconomicProductEnum
-name: "Motor vehicle maintenance and repair"
-
-Node: dcid:BLSItem/SAEC
-typeOf: dcs:EconomicProductEnum
-name: "Education and communication commodities"
-
-Node: dcid:BLSItem/SEMF01
-typeOf: dcs:EconomicProductEnum
-name: "Prescription drugs"
-
-Node: dcid:BLSItem/SEHP04
-typeOf: dcs:EconomicProductEnum
-name: "Repair of household items"
-
-Node: dcid:BLSItem/SACE
-typeOf: dcs:EconomicProductEnum
-name: "Energy commodities"
-
-Node: dcid:BLSItem/SEMD
-typeOf: dcs:EconomicProductEnum
-name: "Hospital and related services"
-
-Node: dcid:BLSItem/SETG02
-typeOf: dcs:EconomicProductEnum
-name: "Other intercity transportation"
-
-Node: dcid:BLSItem/SS5703
-typeOf: dcs:EconomicProductEnum
-name: "Outpatient hospital services"
-
-Node: dcid:BLSItem/SEHB02
-typeOf: dcs:EconomicProductEnum
-name: "Other lodging away from home including hotels and motels"
-
-Node: dcid:BLSItem/SAF
-typeOf: dcs:EconomicProductEnum
-name: "Food and beverages"
-
-Node: dcid:BLSItem/SEMD01
-typeOf: dcs:EconomicProductEnum
-name: "Hospital services"
-
-Node: dcid:BLSItem/SEFJ
-typeOf: dcs:EconomicProductEnum
-name: "Dairy and related products"
-
-Node: dcid:BLSItem/SEFA02
-typeOf: dcs:EconomicProductEnum
-name: "Breakfast cereal"
-
-Node: dcid:BLSItem/SEFW
-typeOf: dcs:EconomicProductEnum
-name: "Alcoholic beverages at home"
-
-Node: dcid:BLSItem/SEFS02
-typeOf: dcs:EconomicProductEnum
-name: "Salad dressing"
-
-Node: dcid:BLSItem/SS5702
-typeOf: dcs:EconomicProductEnum
-name: "Inpatient hospital services"
-
-Node: dcid:BLSItem/SS27061
-typeOf: dcs:EconomicProductEnum
-name: "Land-line intrastate toll calls"
-
-Node: dcid:BLSItem/SEHL02
-typeOf: dcs:EconomicProductEnum
-name: "Indoor plants and flowers"
-
-Node: dcid:BLSItem/SEAA
-typeOf: dcs:EconomicProductEnum
-name: "Men's apparel"
-
-Node: dcid:BLSItem/SEFG02
-typeOf: dcs:EconomicProductEnum
-name: "Processed fish and seafood"
-
-Node: dcid:BLSItem/SEAC02
-typeOf: dcs:EconomicProductEnum
-name: "Women's dresses"
-
-Node: dcid:BLSItem/SS16011
-typeOf: dcs:EconomicProductEnum
-name: "Margarine"
-
-Node: dcid:BLSItem/SS13031
-typeOf: dcs:EconomicProductEnum
-name: "Canned fruits"
-
-Node: dcid:BLSItem/SEFS01
-typeOf: dcs:EconomicProductEnum
-name: "Butter and margarine"
-
-Node: dcid:BLSItem/SEHK01
-typeOf: dcs:EconomicProductEnum
-name: "Major appliances"
-
-Node: dcid:BLSItem/SS47015
-typeOf: dcs:EconomicProductEnum
-name: "Gasoline, unleaded midgrade"
-
-Node: dcid:BLSItem/SS48021
-typeOf: dcs:EconomicProductEnum
-name: "Vehicle parts and equipment other than tires"
-
-Node: dcid:BLSItem/SAS2RS
-typeOf: dcs:EconomicProductEnum
-name: "Rent of shelter"
-
-Node: dcid:BLSItem/SEEE
-typeOf: dcs:EconomicProductEnum
-name: "Information technology, hardware and services"
-
-Node: dcid:BLSItem/SS52051
-typeOf: dcs:EconomicProductEnum
-name: "Parking fees and tolls"
-
-Node: dcid:BLSItem/SS53023
-typeOf: dcs:EconomicProductEnum
-name: "Ship fare"
-
-Node: dcid:BLSItem/SAN
-typeOf: dcs:EconomicProductEnum
-name: "Nondurables"
-
-Node: dcid:BLSItem/SS05015
-typeOf: dcs:EconomicProductEnum
-name: "Lamb and mutton"
-
-Node: dcid:BLSItem/SARS
-typeOf: dcs:EconomicProductEnum
-name: "Recreation services"
-
-Node: dcid:BLSItem/SEFJ02
-typeOf: dcs:EconomicProductEnum
-name: "Cheese and related products"
-
-Node: dcid:BLSItem/SEFJ04
-typeOf: dcs:EconomicProductEnum
-name: "Other dairy and related products"
+name: "Energy"
 
 Node: dcid:BLSItem/SA0L1
 typeOf: dcs:EconomicProductEnum
 name: "All items less food"
 
-Node: dcid:BLSItem/SEFK02
+Node: dcid:BLSItem/SA0L12
 typeOf: dcs:EconomicProductEnum
-name: "Bananas"
-
-Node: dcid:BLSItem/SAS367
-typeOf: dcs:EconomicProductEnum
-name: "Other services"
-
-Node: dcid:BLSItem/SEEC01
-typeOf: dcs:EconomicProductEnum
-name: "Postage"
-
-Node: dcid:BLSItem/SAE1
-typeOf: dcs:EconomicProductEnum
-name: "Education"
-
-Node: dcid:BLSItem/SAS
-typeOf: dcs:EconomicProductEnum
-name: "Services"
-
-Node: dcid:BLSItem/SS02041
-typeOf: dcs:EconomicProductEnum
-name: "Fresh cakes and cupcakes"
-
-Node: dcid:BLSItem/SEHH01
-typeOf: dcs:EconomicProductEnum
-name: "Floor coverings"
-
-Node: dcid:BLSItem/SS31022
-typeOf: dcs:EconomicProductEnum
-name: "Video discs and other media"
-
-Node: dcid:BLSItem/SEAA02
-typeOf: dcs:EconomicProductEnum
-name: "Men's underwear, nightwear, swimwear and accessories"
-
-Node: dcid:BLSItem/SEHJ
-typeOf: dcs:EconomicProductEnum
-name: "Furniture and bedding"
-
-Node: dcid:BLSItem/SAF1121
-typeOf: dcs:EconomicProductEnum
-name: "Meats, poultry, and fish"
-
-Node: dcid:BLSItem/SS68023
-typeOf: dcs:EconomicProductEnum
-name: "Tax return preparation and other accounting fees"
-
-Node: dcid:BLSItem/SS0501A
-typeOf: dcs:EconomicProductEnum
-name: "Lunchmeats"
-
-Node: dcid:BLSItem/SEGD
-typeOf: dcs:EconomicProductEnum
-name: "Miscellaneous personal services"
-
-Node: dcid:BLSItem/SS02011
-typeOf: dcs:EconomicProductEnum
-name: "White bread"
-
-Node: dcid:BLSItem/SS47016
-typeOf: dcs:EconomicProductEnum
-name: "Gasoline, unleaded premium"
-
-Node: dcid:BLSItem/SETB01
-typeOf: dcs:EconomicProductEnum
-name: "Gasoline (all types)"
-
-Node: dcid:BLSItem/SAGC
-typeOf: dcs:EconomicProductEnum
-name: "Other goods"
-
-Node: dcid:BLSItem/SEHJ03
-typeOf: dcs:EconomicProductEnum
-name: "Other furniture"
-
-Node: dcid:BLSItem/SEFC02
-typeOf: dcs:EconomicProductEnum
-name: "Uncooked beef roasts"
+name: "All items less food and shelter"
 
 Node: dcid:BLSItem/SA0L12E
 typeOf: dcs:EconomicProductEnum
 name: "All items less food, shelter, and energy"
 
-Node: dcid:BLSItem/SEFN03
+Node: dcid:BLSItem/SA0L12E4
 typeOf: dcs:EconomicProductEnum
-name: "Nonfrozen noncarbonated juices and drinks"
+name: "All items less food, shelter, energy, and used cars and trucks"
 
-Node: dcid:BLSItem/SS68021
+Node: dcid:BLSItem/SA0L1E
 typeOf: dcs:EconomicProductEnum
-name: "Checking account and other bank services"
-
-Node: dcid:BLSItem/SEFT01
-typeOf: dcs:EconomicProductEnum
-name: "Soups"
-
-Node: dcid:BLSItem/SEFJ01
-typeOf: dcs:EconomicProductEnum
-name: "Milk"
-
-Node: dcid:BLSItem/SEFD01
-typeOf: dcs:EconomicProductEnum
-name: "Bacon, breakfast sausage, and related products"
-
-Node: dcid:BLSItem/SAA
-typeOf: dcs:EconomicProductEnum
-name: "Apparel"
-
-Node: dcid:BLSItem/SANL11
-typeOf: dcs:EconomicProductEnum
-name: "Nondurables less food and beverages"
-
-Node: dcid:BLSItem/SEGA
-typeOf: dcs:EconomicProductEnum
-name: "Tobacco and smoking products"
-
-Node: dcid:BLSItem/SS61021
-typeOf: dcs:EconomicProductEnum
-name: "Film and photographic supplies"
-
-Node: dcid:BLSItem/SEEE01
-typeOf: dcs:EconomicProductEnum
-name: "Computers, peripherals, and smart home assistants"
-
-Node: dcid:BLSItem/SS06021
-typeOf: dcs:EconomicProductEnum
-name: "Fresh and frozen chicken parts"
-
-Node: dcid:BLSItem/SEGE
-typeOf: dcs:EconomicProductEnum
-name: "Miscellaneous personal goods"
-
-Node: dcid:BLSItem/SEEE04
-typeOf: dcs:EconomicProductEnum
-name: "Telephone hardware, calculators, and other consumer information items"
-
-Node: dcid:BLSItem/SERG02
-typeOf: dcs:EconomicProductEnum
-name: "Recreational books"
-
-Node: dcid:BLSItem/SEMF02
-typeOf: dcs:EconomicProductEnum
-name: "Nonprescription drugs"
-
-Node: dcid:BLSItem/SERA02
-typeOf: dcs:EconomicProductEnum
-name: "Cable and satellite television service"
-
-Node: dcid:BLSItem/SS20053
-typeOf: dcs:EconomicProductEnum
-name: "Distilled spirits away from home"
-
-Node: dcid:BLSItem/SA0L5
-typeOf: dcs:EconomicProductEnum
-name: "All items less medical care"
-
-Node: dcid:BLSItem/SEEB
-typeOf: dcs:EconomicProductEnum
-name: "Tuition, other school fees, and childcare"
-
-Node: dcid:BLSItem/SEAA04
-typeOf: dcs:EconomicProductEnum
-name: "Men's pants and shorts"
-
-Node: dcid:BLSItem/SEED03
-typeOf: dcs:EconomicProductEnum
-name: "Wireless telephone services"
-
-Node: dcid:BLSItem/SS06011
-typeOf: dcs:EconomicProductEnum
-name: "Fresh whole chicken"
-
-Node: dcid:BLSItem/SS14022
-typeOf: dcs:EconomicProductEnum
-name: "Dried beans, peas, and lentils"
-
-Node: dcid:BLSItem/SS04031
-typeOf: dcs:EconomicProductEnum
-name: "Ham, excluding canned"
-
-Node: dcid:BLSItem/SEHN02
-typeOf: dcs:EconomicProductEnum
-name: "Household paper products"
-
-Node: dcid:BLSItem/SEAF
-typeOf: dcs:EconomicProductEnum
-name: "Infants' and toddlers' apparel"
-
-Node: dcid:BLSItem/SEHN03
-typeOf: dcs:EconomicProductEnum
-name: "Miscellaneous household products"
-
-Node: dcid:BLSItem/SEAG02
-typeOf: dcs:EconomicProductEnum
-name: "Jewelry"
-
-Node: dcid:BLSItem/SSGE013
-typeOf: dcs:EconomicProductEnum
-name: "Infants' equipment"
-
-Node: dcid:BLSItem/SAF111
-typeOf: dcs:EconomicProductEnum
-name: "Cereals and bakery products"
-
-Node: dcid:BLSItem/SETD01
-typeOf: dcs:EconomicProductEnum
-name: "Motor vehicle body work"
-
-Node: dcid:BLSItem/SS62011
-typeOf: dcs:EconomicProductEnum
-name: "Automobile service clubs"
-
-Node: dcid:BLSItem/SEFF
-typeOf: dcs:EconomicProductEnum
-name: "Poultry"
-
-Node: dcid:BLSItem/SEGB
-typeOf: dcs:EconomicProductEnum
-name: "Personal care products"
-
-Node: dcid:BLSItem/SAF1
-typeOf: dcs:EconomicProductEnum
-name: "Food"
-
-Node: dcid:BLSItem/SEMC01
-typeOf: dcs:EconomicProductEnum
-name: "Physicians' services"
-
-Node: dcid:BLSItem/SAF114
-typeOf: dcs:EconomicProductEnum
-name: "Nonalcoholic beverages and beverage materials"
-
-Node: dcid:BLSItem/SEFC03
-typeOf: dcs:EconomicProductEnum
-name: "Uncooked beef steaks"
-
-Node: dcid:BLSItem/SS05014
-typeOf: dcs:EconomicProductEnum
-name: "Lamb and organ meats"
-
-Node: dcid:BLSItem/SEHN
-typeOf: dcs:EconomicProductEnum
-name: "Housekeeping supplies"
-
-Node: dcid:BLSItem/SANL13
-typeOf: dcs:EconomicProductEnum
-name: "Nondurables less food and apparel"
-
-Node: dcid:BLSItem/SS17031
-typeOf: dcs:EconomicProductEnum
-name: "Roasted coffee"
-
-Node: dcid:BLSItem/SERA04
-typeOf: dcs:EconomicProductEnum
-name: "Video discs and other media, including rental of video"
-
-Node: dcid:BLSItem/SEFK04
-typeOf: dcs:EconomicProductEnum
-name: "Other fresh fruits"
-
-Node: dcid:BLSItem/AA0
-typeOf: dcs:EconomicProductEnum
-name: "All items - old base"
+name: "All items less food and energy"
 
 Node: dcid:BLSItem/SA0L2
 typeOf: dcs:EconomicProductEnum
 name: "All items less shelter"
 
-Node: dcid:BLSItem/SS27051
+Node: dcid:BLSItem/SA0L5
 typeOf: dcs:EconomicProductEnum
-name: "Land-line interstate toll calls"
-
-Node: dcid:BLSItem/SEHE
-typeOf: dcs:EconomicProductEnum
-name: "Fuel oil and other fuels"
-
-Node: dcid:BLSItem/SEED
-typeOf: dcs:EconomicProductEnum
-name: "Telephone services"
-
-Node: dcid:BLSItem/SERE03
-typeOf: dcs:EconomicProductEnum
-name: "Music instruments and accessories"
-
-Node: dcid:BLSItem/SASL5
-typeOf: dcs:EconomicProductEnum
-name: "Services less medical care services"
-
-Node: dcid:BLSItem/SS07021
-typeOf: dcs:EconomicProductEnum
-name: "Frozen fish and seafood"
-
-Node: dcid:BLSItem/SEFW03
-typeOf: dcs:EconomicProductEnum
-name: "Wine at home"
-
-Node: dcid:BLSItem/SEHN01
-typeOf: dcs:EconomicProductEnum
-name: "Household cleaning products"
-
-Node: dcid:BLSItem/SEMF
-typeOf: dcs:EconomicProductEnum
-name: "Medicinal drugs"
-
-Node: dcid:BLSItem/SEHM
-typeOf: dcs:EconomicProductEnum
-name: "Tools, hardware, outdoor equipment and supplies"
-
-Node: dcid:BLSItem/SETG
-typeOf: dcs:EconomicProductEnum
-name: "Public transportation"
-
-Node: dcid:BLSItem/SEAC
-typeOf: dcs:EconomicProductEnum
-name: "Women's apparel"
-
-Node: dcid:BLSItem/SEFS
-typeOf: dcs:EconomicProductEnum
-name: "Fats and oils"
-
-Node: dcid:BLSItem/SAH
-typeOf: dcs:EconomicProductEnum
-name: "Housing"
-
-Node: dcid:BLSItem/SEHJ01
-typeOf: dcs:EconomicProductEnum
-name: "Bedroom furniture"
-
-Node: dcid:BLSItem/SETC01
-typeOf: dcs:EconomicProductEnum
-name: "Tires"
-
-Node: dcid:BLSItem/SEHD
-typeOf: dcs:EconomicProductEnum
-name: "Tenants' and household insurance"
-
-Node: dcid:BLSItem/SEFB
-typeOf: dcs:EconomicProductEnum
-name: "Bakery products"
-
-Node: dcid:BLSItem/SEFD02
-typeOf: dcs:EconomicProductEnum
-name: "Ham"
-
-Node: dcid:BLSItem/SS01031
-typeOf: dcs:EconomicProductEnum
-name: "Rice"
-
-Node: dcid:BLSItem/SEFV02
-typeOf: dcs:EconomicProductEnum
-name: "Limited service meals and snacks"
-
-Node: dcid:BLSItem/SERE
-typeOf: dcs:EconomicProductEnum
-name: "Other recreational goods"
-
-Node: dcid:BLSItem/SEHG01
-typeOf: dcs:EconomicProductEnum
-name: "Water and sewerage maintenance"
-
-Node: dcid:BLSItem/SS17032
-typeOf: dcs:EconomicProductEnum
-name: "Instant coffee"
-
-Node: dcid:BLSItem/SEHH02
-typeOf: dcs:EconomicProductEnum
-name: "Window coverings"
-
-Node: dcid:BLSItem/SA0
-typeOf: dcs:EconomicProductEnum
-name: "All items"
-
-Node: dcid:BLSItem/SERA06
-typeOf: dcs:EconomicProductEnum
-name: "Recorded music and music subscriptions"
-
-Node: dcid:BLSItem/SETD03
-typeOf: dcs:EconomicProductEnum
-name: "Motor vehicle repair"
-
-Node: dcid:BLSItem/SEFJ03
-typeOf: dcs:EconomicProductEnum
-name: "Ice cream and related products"
-
-Node: dcid:BLSItem/SEFR
-typeOf: dcs:EconomicProductEnum
-name: "Sugar and sweets"
-
-Node: dcid:BLSItem/SEFS03
-typeOf: dcs:EconomicProductEnum
-name: "Other fats and oils including peanut butter"
-
-Node: dcid:BLSItem/SS07011
-typeOf: dcs:EconomicProductEnum
-name: "Shelf stable fish and seafood"
-
-Node: dcid:BLSItem/SS62032
-typeOf: dcs:EconomicProductEnum
-name: "Admission to sporting events"
-
-Node: dcid:BLSItem/SS11031
-typeOf: dcs:EconomicProductEnum
-name: "Oranges, including tangerines"
-
-Node: dcid:BLSItem/SETA03
-typeOf: dcs:EconomicProductEnum
-name: "Leased cars and trucks"
-
-Node: dcid:BLSItem/SS45031
-typeOf: dcs:EconomicProductEnum
-name: "New motorcycles"
-
-Node: dcid:BLSItem/SS61023
-typeOf: dcs:EconomicProductEnum
-name: "Photographic equipment"
-
-Node: dcid:BLSItem/SEEC02
-typeOf: dcs:EconomicProductEnum
-name: "Delivery services"
-
-Node: dcid:BLSItem/SATCLTB
-typeOf: dcs:EconomicProductEnum
-name: "Transportation commodities less motor fuel"
-
-Node: dcid:BLSItem/SEHL04
-typeOf: dcs:EconomicProductEnum
-name: "Nonelectric cookware and tableware"
-
-Node: dcid:BLSItem/SEHL
-typeOf: dcs:EconomicProductEnum
-name: "Other household equipment and furnishings"
-
-Node: dcid:BLSItem/SAH2
-typeOf: dcs:EconomicProductEnum
-name: "Fuels and utilities"
-
-Node: dcid:BLSItem/SEMD03
-typeOf: dcs:EconomicProductEnum
-name: "Care of invalids and elderly at home"
-
-Node: dcid:BLSItem/SETC02
-typeOf: dcs:EconomicProductEnum
-name: "Vehicle accessories other than tires"
-
-Node: dcid:BLSItem/SEFT03
-typeOf: dcs:EconomicProductEnum
-name: "Snacks"
-
-Node: dcid:BLSItem/SEFV01
-typeOf: dcs:EconomicProductEnum
-name: "Full service meals and snacks"
-
-Node: dcid:BLSItem/SEFN
-typeOf: dcs:EconomicProductEnum
-name: "Juices and nonalcoholic drinks"
-
-Node: dcid:BLSItem/SAH31
-typeOf: dcs:EconomicProductEnum
-name: "Household furnishings and supplies"
-
-Node: dcid:BLSItem/SERE01
-typeOf: dcs:EconomicProductEnum
-name: "Toys"
-
-Node: dcid:BLSItem/SS20021
-typeOf: dcs:EconomicProductEnum
-name: "Whiskey at home"
-
-Node: dcid:BLSItem/SS62051
-typeOf: dcs:EconomicProductEnum
-name: "Photographer fees"
-
-Node: dcid:BLSItem/SEFA01
-typeOf: dcs:EconomicProductEnum
-name: "Flour and prepared flour mixes"
-
-Node: dcid:BLSItem/SS14021
-typeOf: dcs:EconomicProductEnum
-name: "Canned vegetables"
-
-Node: dcid:BLSItem/SS0206A
-typeOf: dcs:EconomicProductEnum
-name: "Crackers, bread, and cracker products"
-
-Node: dcid:BLSItem/SEGD05
-typeOf: dcs:EconomicProductEnum
-name: "Financial services"
-
-Node: dcid:BLSItem/SS02042
-typeOf: dcs:EconomicProductEnum
-name: "Cookies"
-
-Node: dcid:BLSItem/SEFD
-typeOf: dcs:EconomicProductEnum
-name: "Pork"
-
-Node: dcid:BLSItem/SEMC04
-typeOf: dcs:EconomicProductEnum
-name: "Services by other medical professionals"
-
-Node: dcid:BLSItem/SEFT04
-typeOf: dcs:EconomicProductEnum
-name: "Spices, seasonings, condiments, sauces"
-
-Node: dcid:BLSItem/SEGB01
-typeOf: dcs:EconomicProductEnum
-name: "Hair, dental, shaving, and miscellaneous personal care products"
-
-Node: dcid:BLSItem/SERE02
-typeOf: dcs:EconomicProductEnum
-name: "Sewing machines, fabric and supplies"
-
-Node: dcid:BLSItem/SAE2
-typeOf: dcs:EconomicProductEnum
-name: "Communication"
-
-Node: dcid:BLSItem/SS61011
-typeOf: dcs:EconomicProductEnum
-name: "Toys, games, hobbies and playground equipment"
-
-Node: dcid:BLSItem/SS09021
-typeOf: dcs:EconomicProductEnum
-name: "Fresh milk other than whole"
-
-Node: dcid:BLSItem/SEFX
-typeOf: dcs:EconomicProductEnum
-name: "Alcoholic beverages away from home"
-
-Node: dcid:BLSItem/SEFB04
-typeOf: dcs:EconomicProductEnum
-name: "Other bakery products"
-
-Node: dcid:BLSItem/SA311
-typeOf: dcs:EconomicProductEnum
-name: "Apparel less footwear"
-
-Node: dcid:BLSItem/SS61031
-typeOf: dcs:EconomicProductEnum
-name: "Pet food"
-
-Node: dcid:BLSItem/SAH1
-typeOf: dcs:EconomicProductEnum
-name: "Shelter"
-
-Node: dcid:BLSItem/SS4501A
-typeOf: dcs:EconomicProductEnum
-name: "New cars and trucks"
-
-Node: dcid:BLSItem/SEHL03
-typeOf: dcs:EconomicProductEnum
-name: "Dishes and flatware"
-
-Node: dcid:BLSItem/SACL1
-typeOf: dcs:EconomicProductEnum
-name: "Commodities less food"
-
-Node: dcid:BLSItem/SEFB02
-typeOf: dcs:EconomicProductEnum
-name: "Fresh biscuits, rolls, muffins"
-
-Node: dcid:BLSItem/SA0L12E4
-typeOf: dcs:EconomicProductEnum
-name: "All items less food, shelter, energy, and used cars and trucks"
-
-Node: dcid:BLSItem/SEFC04
-typeOf: dcs:EconomicProductEnum
-name: "Uncooked other beef and veal"
-
-Node: dcid:BLSItem/SEGA02
-typeOf: dcs:EconomicProductEnum
-name: "Tobacco products other than cigarettes"
-
-Node: dcid:BLSItem/SETB02
-typeOf: dcs:EconomicProductEnum
-name: "Other motor fuels"
-
-Node: dcid:BLSItem/SSHJ031
-typeOf: dcs:EconomicProductEnum
-name: "Infants' furniture"
-
-Node: dcid:BLSItem/SETA
-typeOf: dcs:EconomicProductEnum
-name: "New and used motor vehicles"
-
-Node: dcid:BLSItem/SEHA
-typeOf: dcs:EconomicProductEnum
-name: "Rent of primary residence"
-
-Node: dcid:BLSItem/SEFT
-typeOf: dcs:EconomicProductEnum
-name: "Other foods"
-
-Node: dcid:BLSItem/SS02063
-typeOf: dcs:EconomicProductEnum
-name: "Fresh sweetrolls, coffeecakes, doughnuts"
-
-Node: dcid:BLSItem/SEHB01
-typeOf: dcs:EconomicProductEnum
-name: "Housing at school, excluding board"
-
-Node: dcid:BLSItem/SEAG01
-typeOf: dcs:EconomicProductEnum
-name: "Watches"
-
-Node: dcid:BLSItem/SEFW01
-typeOf: dcs:EconomicProductEnum
-name: "Beer, ale, and other malt beverages at home"
-
-Node: dcid:BLSItem/SEAE02
-typeOf: dcs:EconomicProductEnum
-name: "Boys' and girls' footwear"
-
-Node: dcid:BLSItem/SS18043
-typeOf: dcs:EconomicProductEnum
-name: "Sauces and gravies"
-
-Node: dcid:BLSItem/SS20022
-typeOf: dcs:EconomicProductEnum
-name: "Distilled spirits, excluding whiskey, at home"
-
-Node: dcid:BLSItem/SEFB01
-typeOf: dcs:EconomicProductEnum
-name: "Bread"
-
-Node: dcid:BLSItem/SERD
-typeOf: dcs:EconomicProductEnum
-name: "Photography"
-
-Node: dcid:BLSItem/SEGD03
-typeOf: dcs:EconomicProductEnum
-name: "Laundry and dry cleaning services"
-
-Node: dcid:BLSItem/SERG01
-typeOf: dcs:EconomicProductEnum
-name: "Newspapers and magazines"
-
-Node: dcid:BLSItem/SEFB03
-typeOf: dcs:EconomicProductEnum
-name: "Cakes, cupcakes, and cookies"
-
-Node: dcid:BLSItem/SACL11
-typeOf: dcs:EconomicProductEnum
-name: "Commodities less food and beverages"
-
-Node: dcid:BLSItem/SEHG02
-typeOf: dcs:EconomicProductEnum
-name: "Garbage and trash collection"
+name: "All items less medical care"
 
 Node: dcid:BLSItem/SA0LE
 typeOf: dcs:EconomicProductEnum
 name: "All items less energy"
 
-Node: dcid:BLSItem/SEFC01
+Node: dcid:BLSItem/SA0R
 typeOf: dcs:EconomicProductEnum
-name: "Uncooked ground beef"
+name: "Purchasing power of the consumer dollar"
 
-Node: dcid:BLSItem/SEFV05
+Node: dcid:BLSItem/SA311
 typeOf: dcs:EconomicProductEnum
-name: "Other food away from home"
+name: "Apparel less footwear"
 
-Node: dcid:BLSItem/SEHL01
+Node: dcid:BLSItem/SAA
 typeOf: dcs:EconomicProductEnum
-name: "Clocks, lamps, and decorator items"
+name: "Apparel"
 
-Node: dcid:BLSItem/SAES
+Node: dcid:BLSItem/SAA1
 typeOf: dcs:EconomicProductEnum
-name: "Education and communication services"
+name: "Men's and boys' apparel"
 
-Node: dcid:BLSItem/SACL1E
+Node: dcid:BLSItem/SAA2
 typeOf: dcs:EconomicProductEnum
-name: "Commodities less food and energy commodities"
-
-Node: dcid:BLSItem/SS18041
-typeOf: dcs:EconomicProductEnum
-name: "Salt and other seasonings and spices"
-
-Node: dcid:BLSItem/SAF112
-typeOf: dcs:EconomicProductEnum
-name: "Meats, poultry, fish, and eggs"
-
-Node: dcid:BLSItem/SEHP02
-typeOf: dcs:EconomicProductEnum
-name: "Gardening and lawncare services"
-
-Node: dcid:BLSItem/SERF
-typeOf: dcs:EconomicProductEnum
-name: "Other recreation services"
-
-Node: dcid:BLSItem/SETF01
-typeOf: dcs:EconomicProductEnum
-name: "State motor vehicle registration and license fees"
-
-Node: dcid:BLSItem/SEGA01
-typeOf: dcs:EconomicProductEnum
-name: "Cigarettes"
-
-Node: dcid:BLSItem/SETB
-typeOf: dcs:EconomicProductEnum
-name: "Motor fuel"
-
-Node: dcid:BLSItem/SERD02
-typeOf: dcs:EconomicProductEnum
-name: "Photographers and photo processing"
-
-Node: dcid:BLSItem/SETG01
-typeOf: dcs:EconomicProductEnum
-name: "Airline fares"
-
-Node: dcid:BLSItem/SEHM02
-typeOf: dcs:EconomicProductEnum
-name: "Outdoor equipment and supplies"
-
-Node: dcid:BLSItem/SS61032
-typeOf: dcs:EconomicProductEnum
-name: "Purchase of pets, pet supplies, accessories"
-
-Node: dcid:BLSItem/SEFT05
-typeOf: dcs:EconomicProductEnum
-name: "Baby food"
-
-Node: dcid:BLSItem/SS47014
-typeOf: dcs:EconomicProductEnum
-name: "Gasoline, unleaded regular"
-
-Node: dcid:BLSItem/SSFV031A
-typeOf: dcs:EconomicProductEnum
-name: "Food at elementary and secondary schools"
-
-Node: dcid:BLSItem/SEAC01
-typeOf: dcs:EconomicProductEnum
-name: "Women's outerwear"
-
-Node: dcid:BLSItem/SERC02
-typeOf: dcs:EconomicProductEnum
-name: "Sports equipment"
+name: "Women's and girls' apparel"
 
 Node: dcid:BLSItem/SAC
 typeOf: dcs:EconomicProductEnum
 name: "Commodities"
 
-Node: dcid:BLSItem/SA0L12
+Node: dcid:BLSItem/SACE
 typeOf: dcs:EconomicProductEnum
-name: "All items less food and shelter"
+name: "Energy commodities"
 
-Node: dcid:BLSItem/SEFK03
+Node: dcid:BLSItem/SACL1
 typeOf: dcs:EconomicProductEnum
-name: "Citrus fruits"
+name: "Commodities less food"
+
+Node: dcid:BLSItem/SACL11
+typeOf: dcs:EconomicProductEnum
+name: "Commodities less food and beverages"
+
+Node: dcid:BLSItem/SACL1E
+typeOf: dcs:EconomicProductEnum
+name: "Commodities less food and energy commodities"
+
+Node: dcid:BLSItem/SACL1E4
+typeOf: dcs:EconomicProductEnum
+name: "Commodities less food, energy, and used cars and trucks"
+
+Node: dcid:BLSItem/SAD
+typeOf: dcs:EconomicProductEnum
+name: "Durables"
+
+Node: dcid:BLSItem/SAE
+typeOf: dcs:EconomicProductEnum
+name: "Education and communication"
+
+Node: dcid:BLSItem/SAE1
+typeOf: dcs:EconomicProductEnum
+name: "Education"
+
+Node: dcid:BLSItem/SAE2
+typeOf: dcs:EconomicProductEnum
+name: "Communication"
+
+Node: dcid:BLSItem/SAE21
+typeOf: dcs:EconomicProductEnum
+name: "Information and information processing"
+
+Node: dcid:BLSItem/SAEC
+typeOf: dcs:EconomicProductEnum
+name: "Education and communication commodities"
+
+Node: dcid:BLSItem/SAES
+typeOf: dcs:EconomicProductEnum
+name: "Education and communication services"
+
+Node: dcid:BLSItem/SAF
+typeOf: dcs:EconomicProductEnum
+name: "Food and beverages"
+
+Node: dcid:BLSItem/SAF1
+typeOf: dcs:EconomicProductEnum
+name: "Food"
+
+Node: dcid:BLSItem/SAF11
+typeOf: dcs:EconomicProductEnum
+name: "Food at home"
+
+Node: dcid:BLSItem/SAF111
+typeOf: dcs:EconomicProductEnum
+name: "Cereals and bakery products"
+
+Node: dcid:BLSItem/SAF112
+typeOf: dcs:EconomicProductEnum
+name: "Meats, poultry, fish, and eggs"
+
+Node: dcid:BLSItem/SAF1121
+typeOf: dcs:EconomicProductEnum
+name: "Meats, poultry, and fish"
+
+Node: dcid:BLSItem/SAF11211
+typeOf: dcs:EconomicProductEnum
+name: "Meats"
+
+Node: dcid:BLSItem/SAF113
+typeOf: dcs:EconomicProductEnum
+name: "Fruits and vegetables"
+
+Node: dcid:BLSItem/SAF1131
+typeOf: dcs:EconomicProductEnum
+name: "Fresh fruits and vegetables"
+
+Node: dcid:BLSItem/SAF114
+typeOf: dcs:EconomicProductEnum
+name: "Nonalcoholic beverages and beverage materials"
+
+Node: dcid:BLSItem/SAF115
+typeOf: dcs:EconomicProductEnum
+name: "Other food at home"
+
+Node: dcid:BLSItem/SAF116
+typeOf: dcs:EconomicProductEnum
+name: "Alcoholic beverages"
+
+Node: dcid:BLSItem/SAG
+typeOf: dcs:EconomicProductEnum
+name: "Other goods and services"
+
+Node: dcid:BLSItem/SAG1
+typeOf: dcs:EconomicProductEnum
+name: "Personal care"
+
+Node: dcid:BLSItem/SAGC
+typeOf: dcs:EconomicProductEnum
+name: "Other goods"
+
+Node: dcid:BLSItem/SAGS
+typeOf: dcs:EconomicProductEnum
+name: "Other personal services"
+
+Node: dcid:BLSItem/SAH
+typeOf: dcs:EconomicProductEnum
+name: "Housing"
+
+Node: dcid:BLSItem/SAH1
+typeOf: dcs:EconomicProductEnum
+name: "Shelter"
+
+Node: dcid:BLSItem/SAH2
+typeOf: dcs:EconomicProductEnum
+name: "Fuels and utilities"
+
+Node: dcid:BLSItem/SAH21
+typeOf: dcs:EconomicProductEnum
+name: "Household energy"
+
+Node: dcid:BLSItem/SAH3
+typeOf: dcs:EconomicProductEnum
+name: "Household furnishings and operations"
+
+Node: dcid:BLSItem/SAH31
+typeOf: dcs:EconomicProductEnum
+name: "Household furnishings and supplies"
+
+Node: dcid:BLSItem/SAM
+typeOf: dcs:EconomicProductEnum
+name: "Medical care"
+
+Node: dcid:BLSItem/SAM1
+typeOf: dcs:EconomicProductEnum
+name: "Medical care commodities"
+
+Node: dcid:BLSItem/SAM2
+typeOf: dcs:EconomicProductEnum
+name: "Medical care services"
+
+Node: dcid:BLSItem/SAN
+typeOf: dcs:EconomicProductEnum
+name: "Nondurables"
+
+Node: dcid:BLSItem/SAN1D
+typeOf: dcs:EconomicProductEnum
+name: "Domestically produced farm food"
+
+Node: dcid:BLSItem/SANL1
+typeOf: dcs:EconomicProductEnum
+name: "Nondurables less food"
+
+Node: dcid:BLSItem/SANL11
+typeOf: dcs:EconomicProductEnum
+name: "Nondurables less food and beverages"
+
+Node: dcid:BLSItem/SANL113
+typeOf: dcs:EconomicProductEnum
+name: "Nondurables less food, beverages, and apparel"
+
+Node: dcid:BLSItem/SANL13
+typeOf: dcs:EconomicProductEnum
+name: "Nondurables less food and apparel"
+
+Node: dcid:BLSItem/SAR
+typeOf: dcs:EconomicProductEnum
+name: "Recreation"
+
+Node: dcid:BLSItem/SARC
+typeOf: dcs:EconomicProductEnum
+name: "Recreation commodities"
+
+Node: dcid:BLSItem/SARS
+typeOf: dcs:EconomicProductEnum
+name: "Recreation services"
+
+Node: dcid:BLSItem/SAS
+typeOf: dcs:EconomicProductEnum
+name: "Services"
+
+Node: dcid:BLSItem/SAS24
+typeOf: dcs:EconomicProductEnum
+name: "Utilities and public transportation"
+
+Node: dcid:BLSItem/SAS2RS
+typeOf: dcs:EconomicProductEnum
+name: "Rent of shelter"
+
+Node: dcid:BLSItem/SAS367
+typeOf: dcs:EconomicProductEnum
+name: "Other services"
+
+Node: dcid:BLSItem/SAS4
+typeOf: dcs:EconomicProductEnum
+name: "Transportation services"
+
+Node: dcid:BLSItem/SASL2RS
+typeOf: dcs:EconomicProductEnum
+name: "Services less rent of shelter"
+
+Node: dcid:BLSItem/SASL5
+typeOf: dcs:EconomicProductEnum
+name: "Services less medical care services"
+
+Node: dcid:BLSItem/SASLE
+typeOf: dcs:EconomicProductEnum
+name: "Services less energy services"
+
+Node: dcid:BLSItem/SAT
+typeOf: dcs:EconomicProductEnum
+name: "Transportation"
 
 Node: dcid:BLSItem/SAT1
 typeOf: dcs:EconomicProductEnum
 name: "Private transportation"
 
-Node: dcid:BLSItem/SAM1
+Node: dcid:BLSItem/SATCLTB
 typeOf: dcs:EconomicProductEnum
-name: "Medical care commodities"
+name: "Transportation commodities less motor fuel"
+
+Node: dcid:BLSItem/SEAA
+typeOf: dcs:EconomicProductEnum
+name: "Men's apparel"
+
+Node: dcid:BLSItem/SEAA01
+typeOf: dcs:EconomicProductEnum
+name: "Men's suits, sport coats, and outerwear"
+
+Node: dcid:BLSItem/SEAA02
+typeOf: dcs:EconomicProductEnum
+name: "Men's underwear, nightwear, swimwear and accessories"
+
+Node: dcid:BLSItem/SEAA03
+typeOf: dcs:EconomicProductEnum
+name: "Men's shirts and sweaters"
+
+Node: dcid:BLSItem/SEAA04
+typeOf: dcs:EconomicProductEnum
+name: "Men's pants and shorts"
+
+Node: dcid:BLSItem/SEAB
+typeOf: dcs:EconomicProductEnum
+name: "Boys' apparel"
+
+Node: dcid:BLSItem/SEAC
+typeOf: dcs:EconomicProductEnum
+name: "Women's apparel"
+
+Node: dcid:BLSItem/SEAC01
+typeOf: dcs:EconomicProductEnum
+name: "Women's outerwear"
+
+Node: dcid:BLSItem/SEAC02
+typeOf: dcs:EconomicProductEnum
+name: "Women's dresses"
+
+Node: dcid:BLSItem/SEAC03
+typeOf: dcs:EconomicProductEnum
+name: "Women's suits and separates"
+
+Node: dcid:BLSItem/SEAC04
+typeOf: dcs:EconomicProductEnum
+name: "Women's underwear, nightwear, swimwear and accessories"
+
+Node: dcid:BLSItem/SEAD
+typeOf: dcs:EconomicProductEnum
+name: "Girls' apparel"
+
+Node: dcid:BLSItem/SEAE
+typeOf: dcs:EconomicProductEnum
+name: "Footwear"
+
+Node: dcid:BLSItem/SEAE01
+typeOf: dcs:EconomicProductEnum
+name: "Men's footwear"
+
+Node: dcid:BLSItem/SEAE02
+typeOf: dcs:EconomicProductEnum
+name: "Boys' and girls' footwear"
+
+Node: dcid:BLSItem/SEAE03
+typeOf: dcs:EconomicProductEnum
+name: "Women's footwear"
+
+Node: dcid:BLSItem/SEAF
+typeOf: dcs:EconomicProductEnum
+name: "Infants' and toddlers' apparel"
+
+Node: dcid:BLSItem/SEAG
+typeOf: dcs:EconomicProductEnum
+name: "Jewelry and watches"
+
+Node: dcid:BLSItem/SEAG01
+typeOf: dcs:EconomicProductEnum
+name: "Watches"
+
+Node: dcid:BLSItem/SEAG02
+typeOf: dcs:EconomicProductEnum
+name: "Jewelry"
+
+Node: dcid:BLSItem/SEEA
+typeOf: dcs:EconomicProductEnum
+name: "Educational books and supplies"
+
+Node: dcid:BLSItem/SEEB
+typeOf: dcs:EconomicProductEnum
+name: "Tuition, other school fees, and childcare"
+
+Node: dcid:BLSItem/SEEB01
+typeOf: dcs:EconomicProductEnum
+name: "College tuition and fees"
+
+Node: dcid:BLSItem/SEEB02
+typeOf: dcs:EconomicProductEnum
+name: "Elementary and high school tuition and fees"
+
+Node: dcid:BLSItem/SEEB03
+typeOf: dcs:EconomicProductEnum
+name: "Day care and preschool"
+
+Node: dcid:BLSItem/SEEB04
+typeOf: dcs:EconomicProductEnum
+name: "Technical and business school tuition and fees"
+
+Node: dcid:BLSItem/SEEC
+typeOf: dcs:EconomicProductEnum
+name: "Postage and delivery services"
+
+Node: dcid:BLSItem/SEEC01
+typeOf: dcs:EconomicProductEnum
+name: "Postage"
+
+Node: dcid:BLSItem/SEEC02
+typeOf: dcs:EconomicProductEnum
+name: "Delivery services"
+
+Node: dcid:BLSItem/SEED
+typeOf: dcs:EconomicProductEnum
+name: "Telephone services"
+
+Node: dcid:BLSItem/SEED03
+typeOf: dcs:EconomicProductEnum
+name: "Wireless telephone services"
+
+Node: dcid:BLSItem/SEED04
+typeOf: dcs:EconomicProductEnum
+name: "Land-line telephone services"
+
+Node: dcid:BLSItem/SEEE
+typeOf: dcs:EconomicProductEnum
+name: "Information technology, hardware and services"
+
+Node: dcid:BLSItem/SEEE01
+typeOf: dcs:EconomicProductEnum
+name: "Computers, peripherals, and smart home assistants"
+
+Node: dcid:BLSItem/SEEE02
+typeOf: dcs:EconomicProductEnum
+name: "Computer software and accessories"
+
+Node: dcid:BLSItem/SEEE03
+typeOf: dcs:EconomicProductEnum
+name: "Internet services and electronic information providers"
+
+Node: dcid:BLSItem/SEEE04
+typeOf: dcs:EconomicProductEnum
+name: "Telephone hardware, calculators, and other consumer information items"
+
+Node: dcid:BLSItem/SEEEC
+typeOf: dcs:EconomicProductEnum
+name: "Information technology commodities"
+
+Node: dcid:BLSItem/SEFA
+typeOf: dcs:EconomicProductEnum
+name: "Cereals and cereal products"
+
+Node: dcid:BLSItem/SEFA01
+typeOf: dcs:EconomicProductEnum
+name: "Flour and prepared flour mixes"
+
+Node: dcid:BLSItem/SEFA02
+typeOf: dcs:EconomicProductEnum
+name: "Breakfast cereal"
+
+Node: dcid:BLSItem/SEFA03
+typeOf: dcs:EconomicProductEnum
+name: "Rice, pasta, cornmeal"
+
+Node: dcid:BLSItem/SEFB
+typeOf: dcs:EconomicProductEnum
+name: "Bakery products"
+
+Node: dcid:BLSItem/SEFB01
+typeOf: dcs:EconomicProductEnum
+name: "Bread"
+
+Node: dcid:BLSItem/SEFB02
+typeOf: dcs:EconomicProductEnum
+name: "Fresh biscuits, rolls, muffins"
+
+Node: dcid:BLSItem/SEFB03
+typeOf: dcs:EconomicProductEnum
+name: "Cakes, cupcakes, and cookies"
+
+Node: dcid:BLSItem/SEFB04
+typeOf: dcs:EconomicProductEnum
+name: "Other bakery products"
+
+Node: dcid:BLSItem/SEFC
+typeOf: dcs:EconomicProductEnum
+name: "Beef and veal"
+
+Node: dcid:BLSItem/SEFC01
+typeOf: dcs:EconomicProductEnum
+name: "Uncooked ground beef"
+
+Node: dcid:BLSItem/SEFC02
+typeOf: dcs:EconomicProductEnum
+name: "Uncooked beef roasts"
+
+Node: dcid:BLSItem/SEFC03
+typeOf: dcs:EconomicProductEnum
+name: "Uncooked beef steaks"
+
+Node: dcid:BLSItem/SEFC04
+typeOf: dcs:EconomicProductEnum
+name: "Uncooked other beef and veal"
+
+Node: dcid:BLSItem/SEFD
+typeOf: dcs:EconomicProductEnum
+name: "Pork"
+
+Node: dcid:BLSItem/SEFD01
+typeOf: dcs:EconomicProductEnum
+name: "Bacon, breakfast sausage, and related products"
+
+Node: dcid:BLSItem/SEFD02
+typeOf: dcs:EconomicProductEnum
+name: "Ham"
+
+Node: dcid:BLSItem/SEFD03
+typeOf: dcs:EconomicProductEnum
+name: "Pork chops"
+
+Node: dcid:BLSItem/SEFD04
+typeOf: dcs:EconomicProductEnum
+name: "Other pork including roasts, steaks, and ribs"
+
+Node: dcid:BLSItem/SEFE
+typeOf: dcs:EconomicProductEnum
+name: "Other meats"
+
+Node: dcid:BLSItem/SEFF
+typeOf: dcs:EconomicProductEnum
+name: "Poultry"
+
+Node: dcid:BLSItem/SEFF01
+typeOf: dcs:EconomicProductEnum
+name: "Chicken"
+
+Node: dcid:BLSItem/SEFF02
+typeOf: dcs:EconomicProductEnum
+name: "Other uncooked poultry including turkey"
+
+Node: dcid:BLSItem/SEFG
+typeOf: dcs:EconomicProductEnum
+name: "Fish and seafood"
+
+Node: dcid:BLSItem/SEFG01
+typeOf: dcs:EconomicProductEnum
+name: "Fresh fish and seafood"
+
+Node: dcid:BLSItem/SEFG02
+typeOf: dcs:EconomicProductEnum
+name: "Processed fish and seafood"
+
+Node: dcid:BLSItem/SEFH
+typeOf: dcs:EconomicProductEnum
+name: "Eggs"
+
+Node: dcid:BLSItem/SEFJ
+typeOf: dcs:EconomicProductEnum
+name: "Dairy and related products"
+
+Node: dcid:BLSItem/SEFJ01
+typeOf: dcs:EconomicProductEnum
+name: "Milk"
+
+Node: dcid:BLSItem/SEFJ02
+typeOf: dcs:EconomicProductEnum
+name: "Cheese and related products"
+
+Node: dcid:BLSItem/SEFJ03
+typeOf: dcs:EconomicProductEnum
+name: "Ice cream and related products"
+
+Node: dcid:BLSItem/SEFJ04
+typeOf: dcs:EconomicProductEnum
+name: "Other dairy and related products"
+
+Node: dcid:BLSItem/SEFK
+typeOf: dcs:EconomicProductEnum
+name: "Fresh fruits"
+
+Node: dcid:BLSItem/SEFK01
+typeOf: dcs:EconomicProductEnum
+name: "Apples"
+
+Node: dcid:BLSItem/SEFK02
+typeOf: dcs:EconomicProductEnum
+name: "Bananas"
+
+Node: dcid:BLSItem/SEFK03
+typeOf: dcs:EconomicProductEnum
+name: "Citrus fruits"
+
+Node: dcid:BLSItem/SEFK04
+typeOf: dcs:EconomicProductEnum
+name: "Other fresh fruits"
+
+Node: dcid:BLSItem/SEFL
+typeOf: dcs:EconomicProductEnum
+name: "Fresh vegetables"
+
+Node: dcid:BLSItem/SEFL01
+typeOf: dcs:EconomicProductEnum
+name: "Potatoes"
+
+Node: dcid:BLSItem/SEFL02
+typeOf: dcs:EconomicProductEnum
+name: "Lettuce"
+
+Node: dcid:BLSItem/SEFL03
+typeOf: dcs:EconomicProductEnum
+name: "Tomatoes"
+
+Node: dcid:BLSItem/SEFL04
+typeOf: dcs:EconomicProductEnum
+name: "Other fresh vegetables"
+
+Node: dcid:BLSItem/SEFM
+typeOf: dcs:EconomicProductEnum
+name: "Processed fruits and vegetables"
+
+Node: dcid:BLSItem/SEFM01
+typeOf: dcs:EconomicProductEnum
+name: "Canned fruits and vegetables"
+
+Node: dcid:BLSItem/SEFM02
+typeOf: dcs:EconomicProductEnum
+name: "Frozen fruits and vegetables"
+
+Node: dcid:BLSItem/SEFM03
+typeOf: dcs:EconomicProductEnum
+name: "Other processed fruits and vegetables including dried"
+
+Node: dcid:BLSItem/SEFN
+typeOf: dcs:EconomicProductEnum
+name: "Juices and nonalcoholic drinks"
+
+Node: dcid:BLSItem/SEFN01
+typeOf: dcs:EconomicProductEnum
+name: "Carbonated drinks"
+
+Node: dcid:BLSItem/SEFN02
+typeOf: dcs:EconomicProductEnum
+name: "Frozen noncarbonated juices and drinks"
+
+Node: dcid:BLSItem/SEFN03
+typeOf: dcs:EconomicProductEnum
+name: "Nonfrozen noncarbonated juices and drinks"
+
+Node: dcid:BLSItem/SEFP
+typeOf: dcs:EconomicProductEnum
+name: "Beverage materials including coffee and tea"
+
+Node: dcid:BLSItem/SEFP01
+typeOf: dcs:EconomicProductEnum
+name: "Coffee"
+
+Node: dcid:BLSItem/SEFP02
+typeOf: dcs:EconomicProductEnum
+name: "Other beverage materials including tea"
+
+Node: dcid:BLSItem/SEFR
+typeOf: dcs:EconomicProductEnum
+name: "Sugar and sweets"
+
+Node: dcid:BLSItem/SEFR01
+typeOf: dcs:EconomicProductEnum
+name: "Sugar and sugar substitutes"
+
+Node: dcid:BLSItem/SEFR02
+typeOf: dcs:EconomicProductEnum
+name: "Candy and chewing gum"
+
+Node: dcid:BLSItem/SEFR03
+typeOf: dcs:EconomicProductEnum
+name: "Other sweets"
+
+Node: dcid:BLSItem/SEFS
+typeOf: dcs:EconomicProductEnum
+name: "Fats and oils"
+
+Node: dcid:BLSItem/SEFS01
+typeOf: dcs:EconomicProductEnum
+name: "Butter and margarine"
+
+Node: dcid:BLSItem/SEFS02
+typeOf: dcs:EconomicProductEnum
+name: "Salad dressing"
+
+Node: dcid:BLSItem/SEFS03
+typeOf: dcs:EconomicProductEnum
+name: "Other fats and oils including peanut butter"
+
+Node: dcid:BLSItem/SEFT
+typeOf: dcs:EconomicProductEnum
+name: "Other foods"
+
+Node: dcid:BLSItem/SEFT01
+typeOf: dcs:EconomicProductEnum
+name: "Soups"
+
+Node: dcid:BLSItem/SEFT02
+typeOf: dcs:EconomicProductEnum
+name: "Frozen and freeze dried prepared foods"
+
+Node: dcid:BLSItem/SEFT03
+typeOf: dcs:EconomicProductEnum
+name: "Snacks"
+
+Node: dcid:BLSItem/SEFT04
+typeOf: dcs:EconomicProductEnum
+name: "Spices, seasonings, condiments, sauces"
+
+Node: dcid:BLSItem/SEFT05
+typeOf: dcs:EconomicProductEnum
+name: "Baby food"
+
+Node: dcid:BLSItem/SEFT06
+typeOf: dcs:EconomicProductEnum
+name: "Other miscellaneous foods"
+
+Node: dcid:BLSItem/SEFV
+typeOf: dcs:EconomicProductEnum
+name: "Food away from home"
+
+Node: dcid:BLSItem/SEFV01
+typeOf: dcs:EconomicProductEnum
+name: "Full service meals and snacks"
+
+Node: dcid:BLSItem/SEFV02
+typeOf: dcs:EconomicProductEnum
+name: "Limited service meals and snacks"
+
+Node: dcid:BLSItem/SEFV03
+typeOf: dcs:EconomicProductEnum
+name: "Food at employee sites and schools"
+
+Node: dcid:BLSItem/SEFV04
+typeOf: dcs:EconomicProductEnum
+name: "Food from vending machines and mobile vendors"
+
+Node: dcid:BLSItem/SEFV05
+typeOf: dcs:EconomicProductEnum
+name: "Other food away from home"
+
+Node: dcid:BLSItem/SEFW
+typeOf: dcs:EconomicProductEnum
+name: "Alcoholic beverages at home"
+
+Node: dcid:BLSItem/SEFW01
+typeOf: dcs:EconomicProductEnum
+name: "Beer, ale, and other malt beverages at home"
+
+Node: dcid:BLSItem/SEFW02
+typeOf: dcs:EconomicProductEnum
+name: "Distilled spirits at home"
+
+Node: dcid:BLSItem/SEFW03
+typeOf: dcs:EconomicProductEnum
+name: "Wine at home"
+
+Node: dcid:BLSItem/SEFX
+typeOf: dcs:EconomicProductEnum
+name: "Alcoholic beverages away from home"
+
+Node: dcid:BLSItem/SEGA
+typeOf: dcs:EconomicProductEnum
+name: "Tobacco and smoking products"
+
+Node: dcid:BLSItem/SEGA01
+typeOf: dcs:EconomicProductEnum
+name: "Cigarettes"
+
+Node: dcid:BLSItem/SEGA02
+typeOf: dcs:EconomicProductEnum
+name: "Tobacco products other than cigarettes"
+
+Node: dcid:BLSItem/SEGB
+typeOf: dcs:EconomicProductEnum
+name: "Personal care products"
+
+Node: dcid:BLSItem/SEGB01
+typeOf: dcs:EconomicProductEnum
+name: "Hair, dental, shaving, and miscellaneous personal care products"
+
+Node: dcid:BLSItem/SEGB02
+typeOf: dcs:EconomicProductEnum
+name: "Cosmetics, perfume, bath, nail preparations and implements"
+
+Node: dcid:BLSItem/SEGC
+typeOf: dcs:EconomicProductEnum
+name: "Personal care services"
+
+Node: dcid:BLSItem/SEGC01
+typeOf: dcs:EconomicProductEnum
+name: "Haircuts and other personal care services"
+
+Node: dcid:BLSItem/SEGD
+typeOf: dcs:EconomicProductEnum
+name: "Miscellaneous personal services"
+
+Node: dcid:BLSItem/SEGD01
+typeOf: dcs:EconomicProductEnum
+name: "Legal services"
+
+Node: dcid:BLSItem/SEGD02
+typeOf: dcs:EconomicProductEnum
+name: "Funeral expenses"
+
+Node: dcid:BLSItem/SEGD03
+typeOf: dcs:EconomicProductEnum
+name: "Laundry and dry cleaning services"
+
+Node: dcid:BLSItem/SEGD04
+typeOf: dcs:EconomicProductEnum
+name: "Apparel services other than laundry and dry cleaning"
+
+Node: dcid:BLSItem/SEGD05
+typeOf: dcs:EconomicProductEnum
+name: "Financial services"
+
+Node: dcid:BLSItem/SEGE
+typeOf: dcs:EconomicProductEnum
+name: "Miscellaneous personal goods"
+
+Node: dcid:BLSItem/SEHA
+typeOf: dcs:EconomicProductEnum
+name: "Rent of primary residence"
+
+Node: dcid:BLSItem/SEHB
+typeOf: dcs:EconomicProductEnum
+name: "Lodging away from home"
+
+Node: dcid:BLSItem/SEHB01
+typeOf: dcs:EconomicProductEnum
+name: "Housing at school, excluding board"
+
+Node: dcid:BLSItem/SEHB02
+typeOf: dcs:EconomicProductEnum
+name: "Other lodging away from home including hotels and motels"
+
+Node: dcid:BLSItem/SEHC
+typeOf: dcs:EconomicProductEnum
+name: "Owners' equivalent rent of residences"
+
+Node: dcid:BLSItem/SEHC01
+typeOf: dcs:EconomicProductEnum
+name: "Owners' equivalent rent of primary residence"
+
+Node: dcid:BLSItem/SEHD
+typeOf: dcs:EconomicProductEnum
+name: "Tenants' and household insurance"
+
+Node: dcid:BLSItem/SEHE
+typeOf: dcs:EconomicProductEnum
+name: "Fuel oil and other fuels"
+
+Node: dcid:BLSItem/SEHE01
+typeOf: dcs:EconomicProductEnum
+name: "Fuel oil"
+
+Node: dcid:BLSItem/SEHE02
+typeOf: dcs:EconomicProductEnum
+name: "Propane, kerosene, and firewood"
+
+Node: dcid:BLSItem/SEHF
+typeOf: dcs:EconomicProductEnum
+name: "Energy services"
+
+Node: dcid:BLSItem/SEHF01
+typeOf: dcs:EconomicProductEnum
+name: "Electricity"
+
+Node: dcid:BLSItem/SEHF02
+typeOf: dcs:EconomicProductEnum
+name: "Utility (piped) gas service"
+
+Node: dcid:BLSItem/SEHG
+typeOf: dcs:EconomicProductEnum
+name: "Water and sewer and trash collection services"
+
+Node: dcid:BLSItem/SEHG01
+typeOf: dcs:EconomicProductEnum
+name: "Water and sewerage maintenance"
+
+Node: dcid:BLSItem/SEHG02
+typeOf: dcs:EconomicProductEnum
+name: "Garbage and trash collection"
+
+Node: dcid:BLSItem/SEHH
+typeOf: dcs:EconomicProductEnum
+name: "Window and floor coverings and other linens"
+
+Node: dcid:BLSItem/SEHH01
+typeOf: dcs:EconomicProductEnum
+name: "Floor coverings"
+
+Node: dcid:BLSItem/SEHH02
+typeOf: dcs:EconomicProductEnum
+name: "Window coverings"
+
+Node: dcid:BLSItem/SEHH03
+typeOf: dcs:EconomicProductEnum
+name: "Other linens"
+
+Node: dcid:BLSItem/SEHJ
+typeOf: dcs:EconomicProductEnum
+name: "Furniture and bedding"
+
+Node: dcid:BLSItem/SEHJ01
+typeOf: dcs:EconomicProductEnum
+name: "Bedroom furniture"
+
+Node: dcid:BLSItem/SEHJ02
+typeOf: dcs:EconomicProductEnum
+name: "Living room, kitchen, and dining room furniture"
+
+Node: dcid:BLSItem/SEHJ03
+typeOf: dcs:EconomicProductEnum
+name: "Other furniture"
+
+Node: dcid:BLSItem/SEHK
+typeOf: dcs:EconomicProductEnum
+name: "Appliances"
+
+Node: dcid:BLSItem/SEHK01
+typeOf: dcs:EconomicProductEnum
+name: "Major appliances"
+
+Node: dcid:BLSItem/SEHK02
+typeOf: dcs:EconomicProductEnum
+name: "Other appliances"
+
+Node: dcid:BLSItem/SEHL
+typeOf: dcs:EconomicProductEnum
+name: "Other household equipment and furnishings"
+
+Node: dcid:BLSItem/SEHL01
+typeOf: dcs:EconomicProductEnum
+name: "Clocks, lamps, and decorator items"
+
+Node: dcid:BLSItem/SEHL02
+typeOf: dcs:EconomicProductEnum
+name: "Indoor plants and flowers"
+
+Node: dcid:BLSItem/SEHL03
+typeOf: dcs:EconomicProductEnum
+name: "Dishes and flatware"
+
+Node: dcid:BLSItem/SEHL04
+typeOf: dcs:EconomicProductEnum
+name: "Nonelectric cookware and tableware"
+
+Node: dcid:BLSItem/SEHM
+typeOf: dcs:EconomicProductEnum
+name: "Tools, hardware, outdoor equipment and supplies"
+
+Node: dcid:BLSItem/SEHM01
+typeOf: dcs:EconomicProductEnum
+name: "Tools, hardware and supplies"
+
+Node: dcid:BLSItem/SEHM02
+typeOf: dcs:EconomicProductEnum
+name: "Outdoor equipment and supplies"
+
+Node: dcid:BLSItem/SEHN
+typeOf: dcs:EconomicProductEnum
+name: "Housekeeping supplies"
+
+Node: dcid:BLSItem/SEHN01
+typeOf: dcs:EconomicProductEnum
+name: "Household cleaning products"
+
+Node: dcid:BLSItem/SEHN02
+typeOf: dcs:EconomicProductEnum
+name: "Household paper products"
+
+Node: dcid:BLSItem/SEHN03
+typeOf: dcs:EconomicProductEnum
+name: "Miscellaneous household products"
+
+Node: dcid:BLSItem/SEHP
+typeOf: dcs:EconomicProductEnum
+name: "Household operations"
+
+Node: dcid:BLSItem/SEHP01
+typeOf: dcs:EconomicProductEnum
+name: "Domestic services"
+
+Node: dcid:BLSItem/SEHP02
+typeOf: dcs:EconomicProductEnum
+name: "Gardening and lawncare services"
+
+Node: dcid:BLSItem/SEHP03
+typeOf: dcs:EconomicProductEnum
+name: "Moving, storage, freight expense"
+
+Node: dcid:BLSItem/SEHP04
+typeOf: dcs:EconomicProductEnum
+name: "Repair of household items"
+
+Node: dcid:BLSItem/SEMC
+typeOf: dcs:EconomicProductEnum
+name: "Professional services"
+
+Node: dcid:BLSItem/SEMC01
+typeOf: dcs:EconomicProductEnum
+name: "Physicians' services"
+
+Node: dcid:BLSItem/SEMC02
+typeOf: dcs:EconomicProductEnum
+name: "Dental services"
+
+Node: dcid:BLSItem/SEMC03
+typeOf: dcs:EconomicProductEnum
+name: "Eyeglasses and eye care"
+
+Node: dcid:BLSItem/SEMC04
+typeOf: dcs:EconomicProductEnum
+name: "Services by other medical professionals"
+
+Node: dcid:BLSItem/SEMD
+typeOf: dcs:EconomicProductEnum
+name: "Hospital and related services"
+
+Node: dcid:BLSItem/SEMD01
+typeOf: dcs:EconomicProductEnum
+name: "Hospital services"
+
+Node: dcid:BLSItem/SEMD02
+typeOf: dcs:EconomicProductEnum
+name: "Nursing homes and adult day services"
+
+Node: dcid:BLSItem/SEMD03
+typeOf: dcs:EconomicProductEnum
+name: "Care of invalids and elderly at home"
+
+Node: dcid:BLSItem/SEME
+typeOf: dcs:EconomicProductEnum
+name: "Health insurance"
+
+Node: dcid:BLSItem/SEMF
+typeOf: dcs:EconomicProductEnum
+name: "Medicinal drugs"
+
+Node: dcid:BLSItem/SEMF01
+typeOf: dcs:EconomicProductEnum
+name: "Prescription drugs"
+
+Node: dcid:BLSItem/SEMF02
+typeOf: dcs:EconomicProductEnum
+name: "Nonprescription drugs"
+
+Node: dcid:BLSItem/SEMG
+typeOf: dcs:EconomicProductEnum
+name: "Medical equipment and supplies"
+
+Node: dcid:BLSItem/SERA
+typeOf: dcs:EconomicProductEnum
+name: "Video and audio"
+
+Node: dcid:BLSItem/SERA01
+typeOf: dcs:EconomicProductEnum
+name: "Televisions"
+
+Node: dcid:BLSItem/SERA02
+typeOf: dcs:EconomicProductEnum
+name: "Cable and satellite television service"
+
+Node: dcid:BLSItem/SERA03
+typeOf: dcs:EconomicProductEnum
+name: "Other video equipment"
+
+Node: dcid:BLSItem/SERA04
+typeOf: dcs:EconomicProductEnum
+name: "Video discs and other media, including rental of video"
+
+Node: dcid:BLSItem/SERA05
+typeOf: dcs:EconomicProductEnum
+name: "Audio equipment"
+
+Node: dcid:BLSItem/SERA06
+typeOf: dcs:EconomicProductEnum
+name: "Recorded music and music subscriptions"
+
+Node: dcid:BLSItem/SERAC
+typeOf: dcs:EconomicProductEnum
+name: "Video and audio products"
+
+Node: dcid:BLSItem/SERAS
+typeOf: dcs:EconomicProductEnum
+name: "Video and audio services"
+
+Node: dcid:BLSItem/SERB
+typeOf: dcs:EconomicProductEnum
+name: "Pets, pet products and services"
+
+Node: dcid:BLSItem/SERB01
+typeOf: dcs:EconomicProductEnum
+name: "Pets and pet products"
+
+Node: dcid:BLSItem/SERB02
+typeOf: dcs:EconomicProductEnum
+name: "Pet services including veterinary"
+
+Node: dcid:BLSItem/SERC
+typeOf: dcs:EconomicProductEnum
+name: "Sporting goods"
+
+Node: dcid:BLSItem/SERC01
+typeOf: dcs:EconomicProductEnum
+name: "Sports vehicles including bicycles"
+
+Node: dcid:BLSItem/SERC02
+typeOf: dcs:EconomicProductEnum
+name: "Sports equipment"
+
+Node: dcid:BLSItem/SERD
+typeOf: dcs:EconomicProductEnum
+name: "Photography"
+
+Node: dcid:BLSItem/SERD01
+typeOf: dcs:EconomicProductEnum
+name: "Photographic equipment and supplies"
+
+Node: dcid:BLSItem/SERD02
+typeOf: dcs:EconomicProductEnum
+name: "Photographers and photo processing"
+
+Node: dcid:BLSItem/SERE
+typeOf: dcs:EconomicProductEnum
+name: "Other recreational goods"
+
+Node: dcid:BLSItem/SERE01
+typeOf: dcs:EconomicProductEnum
+name: "Toys"
+
+Node: dcid:BLSItem/SERE02
+typeOf: dcs:EconomicProductEnum
+name: "Sewing machines, fabric and supplies"
+
+Node: dcid:BLSItem/SERE03
+typeOf: dcs:EconomicProductEnum
+name: "Music instruments and accessories"
+
+Node: dcid:BLSItem/SERF
+typeOf: dcs:EconomicProductEnum
+name: "Other recreation services"
+
+Node: dcid:BLSItem/SERF01
+typeOf: dcs:EconomicProductEnum
+name: "Club membership for shopping clubs, fraternal, or other organizations, or participant sports fees"
+
+Node: dcid:BLSItem/SERF02
+typeOf: dcs:EconomicProductEnum
+name: "Admissions"
+
+Node: dcid:BLSItem/SERF03
+typeOf: dcs:EconomicProductEnum
+name: "Fees for lessons or instructions"
+
+Node: dcid:BLSItem/SERG
+typeOf: dcs:EconomicProductEnum
+name: "Recreational reading materials"
+
+Node: dcid:BLSItem/SERG01
+typeOf: dcs:EconomicProductEnum
+name: "Newspapers and magazines"
+
+Node: dcid:BLSItem/SERG02
+typeOf: dcs:EconomicProductEnum
+name: "Recreational books"
+
+Node: dcid:BLSItem/SETA
+typeOf: dcs:EconomicProductEnum
+name: "New and used motor vehicles"
+
+Node: dcid:BLSItem/SETA01
+typeOf: dcs:EconomicProductEnum
+name: "New vehicles"
+
+Node: dcid:BLSItem/SETA02
+typeOf: dcs:EconomicProductEnum
+name: "Used cars and trucks"
+
+Node: dcid:BLSItem/SETA03
+typeOf: dcs:EconomicProductEnum
+name: "Leased cars and trucks"
+
+Node: dcid:BLSItem/SETA04
+typeOf: dcs:EconomicProductEnum
+name: "Car and truck rental"
+
+Node: dcid:BLSItem/SETB
+typeOf: dcs:EconomicProductEnum
+name: "Motor fuel"
+
+Node: dcid:BLSItem/SETB01
+typeOf: dcs:EconomicProductEnum
+name: "Gasoline (all types)"
+
+Node: dcid:BLSItem/SETB02
+typeOf: dcs:EconomicProductEnum
+name: "Other motor fuels"
+
+Node: dcid:BLSItem/SETC
+typeOf: dcs:EconomicProductEnum
+name: "Motor vehicle parts and equipment"
+
+Node: dcid:BLSItem/SETC01
+typeOf: dcs:EconomicProductEnum
+name: "Tires"
+
+Node: dcid:BLSItem/SETC02
+typeOf: dcs:EconomicProductEnum
+name: "Vehicle accessories other than tires"
+
+Node: dcid:BLSItem/SETD
+typeOf: dcs:EconomicProductEnum
+name: "Motor vehicle maintenance and repair"
+
+Node: dcid:BLSItem/SETD01
+typeOf: dcs:EconomicProductEnum
+name: "Motor vehicle body work"
+
+Node: dcid:BLSItem/SETD02
+typeOf: dcs:EconomicProductEnum
+name: "Motor vehicle maintenance and servicing"
+
+Node: dcid:BLSItem/SETD03
+typeOf: dcs:EconomicProductEnum
+name: "Motor vehicle repair"
+
+Node: dcid:BLSItem/SETE
+typeOf: dcs:EconomicProductEnum
+name: "Motor vehicle insurance"
+
+Node: dcid:BLSItem/SETF
+typeOf: dcs:EconomicProductEnum
+name: "Motor vehicle fees"
+
+Node: dcid:BLSItem/SETF01
+typeOf: dcs:EconomicProductEnum
+name: "State motor vehicle registration and license fees"
+
+Node: dcid:BLSItem/SETF03
+typeOf: dcs:EconomicProductEnum
+name: "Parking and other fees"
+
+Node: dcid:BLSItem/SETG
+typeOf: dcs:EconomicProductEnum
+name: "Public transportation"
+
+Node: dcid:BLSItem/SETG01
+typeOf: dcs:EconomicProductEnum
+name: "Airline fares"
+
+Node: dcid:BLSItem/SETG02
+typeOf: dcs:EconomicProductEnum
+name: "Other intercity transportation"
+
+Node: dcid:BLSItem/SETG03
+typeOf: dcs:EconomicProductEnum
+name: "Intracity transportation"
+
+Node: dcid:BLSItem/SS01031
+typeOf: dcs:EconomicProductEnum
+name: "Rice"
+
+Node: dcid:BLSItem/SS02011
+typeOf: dcs:EconomicProductEnum
+name: "White bread"
+
+Node: dcid:BLSItem/SS02021
+typeOf: dcs:EconomicProductEnum
+name: "Bread other than white"
+
+Node: dcid:BLSItem/SS02041
+typeOf: dcs:EconomicProductEnum
+name: "Fresh cakes and cupcakes"
+
+Node: dcid:BLSItem/SS02042
+typeOf: dcs:EconomicProductEnum
+name: "Cookies"
+
+Node: dcid:BLSItem/SS02063
+typeOf: dcs:EconomicProductEnum
+name: "Fresh sweetrolls, coffeecakes, doughnuts"
+
+Node: dcid:BLSItem/SS0206A
+typeOf: dcs:EconomicProductEnum
+name: "Crackers, bread, and cracker products"
+
+Node: dcid:BLSItem/SS0206B
+typeOf: dcs:EconomicProductEnum
+name: "Frozen and refrigerated bakery products, pies, tarts, turnovers"
+
+Node: dcid:BLSItem/SS04011
+typeOf: dcs:EconomicProductEnum
+name: "Bacon and related products"
+
+Node: dcid:BLSItem/SS04012
+typeOf: dcs:EconomicProductEnum
+name: "Breakfast sausage and related products"
+
+Node: dcid:BLSItem/SS04031
+typeOf: dcs:EconomicProductEnum
+name: "Ham, excluding canned"
+
+Node: dcid:BLSItem/SS05011
+typeOf: dcs:EconomicProductEnum
+name: "Frankfurters"
+
+Node: dcid:BLSItem/SS05014
+typeOf: dcs:EconomicProductEnum
+name: "Lamb and organ meats"
+
+Node: dcid:BLSItem/SS05015
+typeOf: dcs:EconomicProductEnum
+name: "Lamb and mutton"
+
+Node: dcid:BLSItem/SS0501A
+typeOf: dcs:EconomicProductEnum
+name: "Lunchmeats"
+
+Node: dcid:BLSItem/SS06011
+typeOf: dcs:EconomicProductEnum
+name: "Fresh whole chicken"
+
+Node: dcid:BLSItem/SS06021
+typeOf: dcs:EconomicProductEnum
+name: "Fresh and frozen chicken parts"
+
+Node: dcid:BLSItem/SS07011
+typeOf: dcs:EconomicProductEnum
+name: "Shelf stable fish and seafood"
+
+Node: dcid:BLSItem/SS07021
+typeOf: dcs:EconomicProductEnum
+name: "Frozen fish and seafood"
+
+Node: dcid:BLSItem/SS09011
+typeOf: dcs:EconomicProductEnum
+name: "Fresh whole milk"
+
+Node: dcid:BLSItem/SS09021
+typeOf: dcs:EconomicProductEnum
+name: "Fresh milk other than whole"
+
+Node: dcid:BLSItem/SS10011
+typeOf: dcs:EconomicProductEnum
+name: "Butter"
+
+Node: dcid:BLSItem/SS11031
+typeOf: dcs:EconomicProductEnum
+name: "Oranges, including tangerines"
+
+Node: dcid:BLSItem/SS13031
+typeOf: dcs:EconomicProductEnum
+name: "Canned fruits"
+
+Node: dcid:BLSItem/SS14011
+typeOf: dcs:EconomicProductEnum
+name: "Frozen vegetables"
+
+Node: dcid:BLSItem/SS14021
+typeOf: dcs:EconomicProductEnum
+name: "Canned vegetables"
+
+Node: dcid:BLSItem/SS14022
+typeOf: dcs:EconomicProductEnum
+name: "Dried beans, peas, and lentils"
+
+Node: dcid:BLSItem/SS16011
+typeOf: dcs:EconomicProductEnum
+name: "Margarine"
+
+Node: dcid:BLSItem/SS16014
+typeOf: dcs:EconomicProductEnum
+name: "Peanut butter"
+
+Node: dcid:BLSItem/SS17031
+typeOf: dcs:EconomicProductEnum
+name: "Roasted coffee"
+
+Node: dcid:BLSItem/SS17032
+typeOf: dcs:EconomicProductEnum
+name: "Instant coffee"
+
+Node: dcid:BLSItem/SS18041
+typeOf: dcs:EconomicProductEnum
+name: "Salt and other seasonings and spices"
+
+Node: dcid:BLSItem/SS18042
+typeOf: dcs:EconomicProductEnum
+name: "Olives, pickles, relishes"
+
+Node: dcid:BLSItem/SS18043
+typeOf: dcs:EconomicProductEnum
+name: "Sauces and gravies"
+
+Node: dcid:BLSItem/SS1804B
+typeOf: dcs:EconomicProductEnum
+name: "Other condiments"
+
+Node: dcid:BLSItem/SS18064
+typeOf: dcs:EconomicProductEnum
+name: "Prepared salads"
+
+Node: dcid:BLSItem/SS20021
+typeOf: dcs:EconomicProductEnum
+name: "Whiskey at home"
+
+Node: dcid:BLSItem/SS20022
+typeOf: dcs:EconomicProductEnum
+name: "Distilled spirits, excluding whiskey, at home"
+
+Node: dcid:BLSItem/SS20051
+typeOf: dcs:EconomicProductEnum
+name: "Beer, ale, and other malt beverages away from home"
+
+Node: dcid:BLSItem/SS20052
+typeOf: dcs:EconomicProductEnum
+name: "Wine away from home"
+
+Node: dcid:BLSItem/SS20053
+typeOf: dcs:EconomicProductEnum
+name: "Distilled spirits away from home"
+
+Node: dcid:BLSItem/SS27051
+typeOf: dcs:EconomicProductEnum
+name: "Land-line interstate toll calls"
+
+Node: dcid:BLSItem/SS27061
+typeOf: dcs:EconomicProductEnum
+name: "Land-line intrastate toll calls"
+
+Node: dcid:BLSItem/SS30021
+typeOf: dcs:EconomicProductEnum
+name: "Laundry equipment"
+
+Node: dcid:BLSItem/SS31022
+typeOf: dcs:EconomicProductEnum
+name: "Video discs and other media"
+
+Node: dcid:BLSItem/SS31023
+typeOf: dcs:EconomicProductEnum
+name: "Video game hardware, software and accessories"
+
+Node: dcid:BLSItem/SS33032
+typeOf: dcs:EconomicProductEnum
+name: "Stationery, stationery supplies, gift wrap"
+
+Node: dcid:BLSItem/SS45011
+typeOf: dcs:EconomicProductEnum
+name: "New cars"
+
+Node: dcid:BLSItem/SS4501A
+typeOf: dcs:EconomicProductEnum
+name: "New cars and trucks"
+
+Node: dcid:BLSItem/SS45021
+typeOf: dcs:EconomicProductEnum
+name: "New trucks"
+
+Node: dcid:BLSItem/SS45031
+typeOf: dcs:EconomicProductEnum
+name: "New motorcycles"
+
+Node: dcid:BLSItem/SS47014
+typeOf: dcs:EconomicProductEnum
+name: "Gasoline, unleaded regular"
+
+Node: dcid:BLSItem/SS47015
+typeOf: dcs:EconomicProductEnum
+name: "Gasoline, unleaded midgrade"
+
+Node: dcid:BLSItem/SS47016
+typeOf: dcs:EconomicProductEnum
+name: "Gasoline, unleaded premium"
+
+Node: dcid:BLSItem/SS47021
+typeOf: dcs:EconomicProductEnum
+name: "Motor oil, coolant, and fluids"
+
+Node: dcid:BLSItem/SS48021
+typeOf: dcs:EconomicProductEnum
+name: "Vehicle parts and equipment other than tires"
+
+Node: dcid:BLSItem/SS52051
+typeOf: dcs:EconomicProductEnum
+name: "Parking fees and tolls"
+
+Node: dcid:BLSItem/SS53021
+typeOf: dcs:EconomicProductEnum
+name: "Intercity bus fare"
+
+Node: dcid:BLSItem/SS53022
+typeOf: dcs:EconomicProductEnum
+name: "Intercity train fare"
+
+Node: dcid:BLSItem/SS53023
+typeOf: dcs:EconomicProductEnum
+name: "Ship fare"
+
+Node: dcid:BLSItem/SS53031
+typeOf: dcs:EconomicProductEnum
+name: "Intracity mass transit"
+
+Node: dcid:BLSItem/SS5702
+typeOf: dcs:EconomicProductEnum
+name: "Inpatient hospital services"
+
+Node: dcid:BLSItem/SS5703
+typeOf: dcs:EconomicProductEnum
+name: "Outpatient hospital services"
+
+Node: dcid:BLSItem/SS61011
+typeOf: dcs:EconomicProductEnum
+name: "Toys, games, hobbies and playground equipment"
+
+Node: dcid:BLSItem/SS61021
+typeOf: dcs:EconomicProductEnum
+name: "Film and photographic supplies"
+
+Node: dcid:BLSItem/SS61023
+typeOf: dcs:EconomicProductEnum
+name: "Photographic equipment"
+
+Node: dcid:BLSItem/SS61031
+typeOf: dcs:EconomicProductEnum
+name: "Pet food"
+
+Node: dcid:BLSItem/SS61032
+typeOf: dcs:EconomicProductEnum
+name: "Purchase of pets, pet supplies, accessories"
+
+Node: dcid:BLSItem/SS62011
+typeOf: dcs:EconomicProductEnum
+name: "Automobile service clubs"
+
+Node: dcid:BLSItem/SS62031
+typeOf: dcs:EconomicProductEnum
+name: "Admission to movies, theaters, and concerts"
+
+Node: dcid:BLSItem/SS62032
+typeOf: dcs:EconomicProductEnum
+name: "Admission to sporting events"
+
+Node: dcid:BLSItem/SS62051
+typeOf: dcs:EconomicProductEnum
+name: "Photographer fees"
+
+Node: dcid:BLSItem/SS62052
+typeOf: dcs:EconomicProductEnum
+name: "Photo Processing"
+
+Node: dcid:BLSItem/SS62053
+typeOf: dcs:EconomicProductEnum
+name: "Pet services"
+
+Node: dcid:BLSItem/SS62054
+typeOf: dcs:EconomicProductEnum
+name: "Veterinarian services"
+
+Node: dcid:BLSItem/SS62055
+typeOf: dcs:EconomicProductEnum
+name: "Rental of video discs and other media"
+
+Node: dcid:BLSItem/SS68021
+typeOf: dcs:EconomicProductEnum
+name: "Checking account and other bank services"
+
+Node: dcid:BLSItem/SS68023
+typeOf: dcs:EconomicProductEnum
+name: "Tax return preparation and other accounting fees"
+
+Node: dcid:BLSItem/SSEA011
+typeOf: dcs:EconomicProductEnum
+name: "College textbooks"
+
+Node: dcid:BLSItem/SSFV031A
+typeOf: dcs:EconomicProductEnum
+name: "Food at elementary and secondary schools"
+
+Node: dcid:BLSItem/SSGE013
+typeOf: dcs:EconomicProductEnum
+name: "Infants' equipment"
+
+Node: dcid:BLSItem/SSHJ031
+typeOf: dcs:EconomicProductEnum
+name: "Infants' furniture"
 
