@@ -79,9 +79,12 @@ The license is available online at https://www.bls.gov/bls/linksite.htm.
 - In prod: All 3 measures of CPI _without product breakdown_.
   - To see this directory at prod (_without product breakdown_):
     [see commit d84f967](https://github.com/datacommonsorg/data/tree/d84f96744ae5ad2df1fbc81890a0dd76bd5dc54c/scripts/us_bls/cpi)
-- Current state: All 3 measures, _with product breakdown_.
+  - The manifest.json points to the prod config.
+- State of this GitHub directory: All 3 measures, _with product breakdown_.
   - When there is demand for this data, please check and do the
     import process before productionizing.
+  - See the end of this file for intrepiditee's proposed manifest.json
+    from PR #296.
 
 ### Artifacts
 
@@ -116,3 +119,71 @@ The license is available online at https://www.bls.gov/bls/linksite.htm.
 
 - [generate_csv_mcf.py](generate_csv_mcf.py) generates the CSVs,
   StatisticalVariable MCFs, and template MCFs. See module docstring.
+
+## Proposed manifest.json for adding product breakdown
+
+See About the Import > Status above for context.
+
+```
+{
+    "import_specifications": [
+        {
+            "import_name": "USBLS_CPI_U",
+            "curator_emails": [
+                "shijunjie@google.com"
+            ],
+            "provenance_url": "https://www.bls.gov/cpi/",
+            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for All Urban Consumers",
+            "scripts": [
+                "generate_csv_mcf.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "cpi_u.tmcf",
+                    "cleaned_csv": "cpi_u.csv",
+                    "node_mcf": "cpi_u.mcf"
+                }
+            ],
+            "cron_schedule": "0 17 15 * *"
+        },
+        {
+            "import_name": "USBLS_CPI_W",
+            "curator_emails": [
+                "shijunjie@google.com"
+            ],
+            "provenance_url": "https://www.bls.gov/cpi/",
+            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for Urban Wage Earners and Clerical Workers",
+            "scripts": [
+                "generate_csv_mcf.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "cpi_w.tmcf",
+                    "cleaned_csv": "cpi_w.csv",
+                    "node_mcf": "cpi_w.mcf"
+                }
+            ],
+            "cron_schedule": "15 17 15 * *"
+        },
+        {
+            "import_name": "USBLS_C_CPI_U",
+            "curator_emails": [
+                "shijunjie@google.com"
+            ],
+            "provenance_url": "https://www.bls.gov/cpi/",
+            "provenance_description": "U.S. Bureau of Labor Statistics Chained Consumer Price Index for All Urban Consumers",
+            "scripts": [
+                "generate_csv_mcf.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "c_cpi_u.tmcf",
+                    "cleaned_csv": "c_cpi_u.csv",
+                    "node_mcf": "c_cpi_u.mcf"
+                }
+            ],
+            "cron_schedule": "30 17 15 * *"
+        }
+    ]
+}
+```

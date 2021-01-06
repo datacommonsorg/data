@@ -1,61 +1,28 @@
 {
-    "import_specifications": [
+  "import_specifications": [
+    {
+      "import_name": "USBLS_CPIAllItemsAverage",
+      "curator_emails": ["shijunjie@google.com"],
+      "provenance_url": "https://www.bls.gov/cpi/",
+      "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index",
+      "scripts": ["generate_csv.py"],
+      "import_inputs": [
         {
-            "import_name": "USBLS_CPI_U",
-            "curator_emails": [
-                "shijunjie@google.com"
-            ],
-            "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for All Urban Consumers",
-            "scripts": [
-                "generate_csv_mcf.py"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "cpi_u.tmcf",
-                    "cleaned_csv": "cpi_u.csv",
-                    "node_mcf": "cpi_u.mcf"
-                }
-            ],
-            "cron_schedule": "0 17 15 * *"
+          "template_mcf": "c_cpi_u_1999_2020.tmcf",
+          "cleaned_csv": "c_cpi_u_1999_2020.csv",
+          "node_mcf": "c_cpi_u_1999_2020.mcf"
         },
         {
-            "import_name": "USBLS_CPI_W",
-            "curator_emails": [
-                "shijunjie@google.com"
-            ],
-            "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for Urban Wage Earners and Clerical Workers",
-            "scripts": [
-                "generate_csv_mcf.py"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "cpi_w.tmcf",
-                    "cleaned_csv": "cpi_w.csv",
-                    "node_mcf": "cpi_w.mcf"
-                }
-            ],
-            "cron_schedule": "15 17 15 * *"
+          "template_mcf": "cpi_u_1913_2020.tmcf",
+          "cleaned_csv": "cpi_u_1913_2020.csv"
         },
         {
-            "import_name": "USBLS_C_CPI_U",
-            "curator_emails": [
-                "shijunjie@google.com"
-            ],
-            "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Chained Consumer Price Index for All Urban Consumers",
-            "scripts": [
-                "generate_csv_mcf.py"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "c_cpi_u.tmcf",
-                    "cleaned_csv": "c_cpi_u.csv",
-                    "node_mcf": "c_cpi_u.mcf"
-                }
-            ],
-            "cron_schedule": "30 17 15 * *"
+          "template_mcf": "cpi_w_1913_2020.tmcf",
+          "cleaned_csv": "cpi_w_1913_2020.csv",
+          "node_mcf": "cpi_w_1913_2020.mcf"
         }
-    ]
+      ],
+      "cron_schedule": "15 17 15 * *"
+    }
+  ]
 }
