@@ -45,6 +45,7 @@ def format_camel_case(value):
         value_formatted = (value_formatted + 
     return (value_formatted)
 
+
 def write_genome_coverage(value, key, w):
     '''
     Convert genome coverareturn (value_formatted)ge value to integer and write to output.
