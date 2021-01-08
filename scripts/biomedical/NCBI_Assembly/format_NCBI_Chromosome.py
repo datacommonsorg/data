@@ -43,7 +43,6 @@ def format_camel_case(value):
     # camel case enum type
     for i in range(len(value_split)):
         value_formatted = (value_formatted + 
-        value_split[i][0].upper() + value_split[i][1:])
     return (value_formatted)
 
 def write_genome_coverage(value, key, w):
