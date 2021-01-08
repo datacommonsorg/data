@@ -59,6 +59,7 @@ def write_genome_coverage(value, key, w):
             v += i
     w.write(key + ': ' + v + '\n')
 
+
 def write_genome_assembly(file_output, dict_genome_assembly, genome,
                           species_abrv):
     '''
