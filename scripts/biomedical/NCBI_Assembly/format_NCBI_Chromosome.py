@@ -42,7 +42,7 @@ def format_camel_case(value):
     value_formatted = ''
     # camel case enum type
     for i in range(len(value_split)):
-        value_formatted = (value_formatted + 
+        value_formatted = value_formatted + value_split[i].capitalize()
     return (value_formatted)
 
 
