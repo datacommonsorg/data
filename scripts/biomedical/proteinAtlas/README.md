@@ -67,7 +67,7 @@ Then upload the file uniprot_list.txt containing UniProt entries separated by sp
 To generate the data MCF file and enumeration files, run:
 
 ```bash
-python3 parse_protein_atlas.py --database normal_tissue.tsv -g gene_to_uniprot_list -u uniprot_to_dcid.tsv -m ProteinAtlasData.mcf --tissue_mcf HumanTissueEnum.mcf --cell_mcf HumanCellTypeEnum.mcf
+python3 parse_protein_atlas.py --database normal_tissue.tsv -g gene_to_uniprot_list -u uniprot_to_dcid.tsv -m ProteinAtlasData.mcf --tissue_mcf human_tissue_enum.mcf --cell_mcf human_cell_type_enum.mcf
 ```
 
 To test the script, run:
