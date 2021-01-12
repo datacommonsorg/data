@@ -16,10 +16,13 @@ import csv
 import io
 import ssl
 import urllib.request
+import sys
+
+sys.path.insert(1, '../../util')
+from alpha2_to_dcid import COUNTRY_MAP
 
 output_columns = [
-    'Date', 'GeoId',
-    'CumulativeCount_Vaccine_COVID_19_Administered',
+    'Date', 'GeoId', 'CumulativeCount_Vaccine_COVID_19_Administered',
     'IncrementalCount_Vaccine_COVID_19_Administered',
     'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
     'IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
@@ -34,19 +37,20 @@ with open('COVID_OWID.csv', 'w', newline='') as f_out:
     writer = csv.DictWriter(f_out,
                             fieldnames=output_columns,
                             lineterminator='\n')
-    gcontext = ssl.SSLContext()                         
+    gcontext = ssl.SSLContext()
     with urllib.request.urlopen(
-            'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv', context=gcontext) as response:
+            'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv',
+            context=gcontext) as response:
         reader = csv.DictReader(io.TextIOWrapper(response))
 
         writer.writeheader()
         for row_dict in reader:
             # Skip invalid country ISO code.
-            if len(row_dict['iso_code']) != 3 : 
+            if not 'country/%s' % row_dict['iso_code'] in COUNTRY_MAP.values():
                 continue
             processed_dict = {
                 'Date':
-                    '%s' %row_dict['date'],
+                    '%s' % row_dict['date'],
                 'GeoId':
                     'country/%s' % row_dict['iso_code'],
                 'CumulativeCount_Vaccine_COVID_19_Administered':
@@ -72,4 +76,3 @@ with open('COVID_OWID.csv', 'w', newline='') as f_out:
             }
 
             writer.writerow(processed_dict)
-
