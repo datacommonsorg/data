@@ -1,5 +1,0 @@
-requests
-google-auth
-google-cloud-logging
-flask
-gunicorn

@@ -1,7 +1,0 @@
-Node: E:EurostatNUTS3_DensityTracking->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Per_Area
-observationAbout: C:EurostatNUTS3_DensityTracking->GeoId
-observationDate: C:EurostatNUTS3_DensityTracking->Date
-value: C:EurostatNUTS3_DensityTracking->Count_Person_Per_Area
-measurementMethod: "EurostatRegionalStatistics"
