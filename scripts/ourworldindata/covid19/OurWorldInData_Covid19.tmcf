@@ -1,0 +1,80 @@
+
+Node: E:OurWorldInData_Covid19->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_Vaccine_COVID_19_Administered
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->CumulativeCount_Vaccine_COVID_19_Administered
+
+Node: E:OurWorldInData_Covid19->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_Vaccine_COVID_19_Administered
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->IncrementalCount_Vaccine_COVID_19_Administered
+
+Node: E:OurWorldInData_Covid19->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+
+Node: E:OurWorldInData_Covid19->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+
+Node: E:OurWorldInData_Covid19->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+
+Node: E:OurWorldInData_Covid19->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased
+
+Node: E:OurWorldInData_Covid19->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientInICU
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->Count_MedicalConditionIncident_COVID_19_PatientInICU
+
+Node: E:OurWorldInData_Covid19->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_PatientHospitalized
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->Count_MedicalConditionIncident_COVID_19_PatientHospitalized
+
+Node: E:OurWorldInData_Covid19->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalTest_ConditionCOVID_19
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->CumulativeCount_MedicalTest_ConditionCOVID_19
+
+Node: E:OurWorldInData_Covid19->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IncrementalCount_MedicalTest_ConditionCOVID_19
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->IncrementalCount_MedicalTest_ConditionCOVID_19
