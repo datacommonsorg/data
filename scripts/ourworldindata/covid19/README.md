@@ -6,6 +6,7 @@ into Data Commons.
 The script generates:
 - OurWorldInData_Covid19.csv
 - OurWorldInData_Covid19.tmcf
+
 and it relies on these statistic variables:
 - dcs:CumulativeCount_Vaccine_COVID_19_Administered
 - dcs:IncrementalCount_Vaccine_COVID_19_Administered
