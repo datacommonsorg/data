@@ -1,4 +1,3 @@
-
 Node: E:OurWorldInData_Covid19->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:CumulativeCount_Vaccine_COVID_19_Administered
