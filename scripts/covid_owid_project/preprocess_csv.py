@@ -21,6 +21,8 @@ import sys
 sys.path.insert(1, '../../util')
 from alpha2_to_dcid import COUNTRY_MAP
 
+country_set = set(COUNTRY_MAP.values())
+
 output_columns = [
     'Date', 'GeoId', 'CumulativeCount_Vaccine_COVID_19_Administered',
     'IncrementalCount_Vaccine_COVID_19_Administered',
@@ -45,14 +47,15 @@ with open('COVID_OWID.csv', 'w', newline='') as f_out:
 
         writer.writeheader()
         for row_dict in reader:
+            place_dcid = 'country/%s' % row_dict['iso_code']
             # Skip invalid country ISO code.
-            if not 'country/%s' % row_dict['iso_code'] in COUNTRY_MAP.values():
+            if not place_dcid in country_set:
                 continue
             processed_dict = {
                 'Date':
-                    '%s' % row_dict['date'],
+                    row_dict['date'],
                 'GeoId':
-                    'country/%s' % row_dict['iso_code'],
+                    place_dcid,
                 'CumulativeCount_Vaccine_COVID_19_Administered':
                     row_dict['total_vaccinations'],
                 'IncrementalCount_Vaccine_COVID_19_Administered':
