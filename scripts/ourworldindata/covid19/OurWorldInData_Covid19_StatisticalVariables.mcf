@@ -1,0 +1,22 @@
+Node: dcid:CumulativeCount_Vaccine_COVID_19_Administered
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Vaccine
+medicalCondition: dcs:COVID_19
+vaccineStatus: dcs:Administered
+measuredProperty: dcs:cumulativeCount
+statType: dcs:measuredValue
+
+Node: dcid:IncrementalCount_Vaccine_COVID_19_Administered
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Vaccine
+medicalCondition: dcs:COVID_19
+vaccineStatus: dcs:Administered
+measuredProperty: dcs:incrementalCount
+statType: dcs:measuredValue
+
+Node: dcid:IncrementalCount_MedicalTest_ConditionCOVID_19
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalTest
+medicalCondition: dcs:COVID_19
+measuredProperty: dcs:incrementalCount
+statType: dcs:measuredValue

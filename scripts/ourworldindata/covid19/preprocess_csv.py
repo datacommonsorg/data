@@ -24,8 +24,7 @@ from alpha2_to_dcid import COUNTRY_MAP
 country_set = set(COUNTRY_MAP.values())
 
 output_columns = [
-    'Date', 'GeoId',
-    'CumulativeCount_Vaccine_COVID_19_Administered',
+    'Date', 'GeoId', 'CumulativeCount_Vaccine_COVID_19_Administered',
     'IncrementalCount_Vaccine_COVID_19_Administered',
     'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
     'IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
