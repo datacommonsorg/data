@@ -13,11 +13,10 @@
             "import_inputs": [
                 {
                     "template_mcf": "OurWorldInData_Covid19.tmcf",
-                    "cleaned_csv": "OurWorldInData_Covid19.csv",
-                    "node_mcf": "COVIDTracking_States_StatisticalVariables.mcf"
+                    "cleaned_csv": "OurWorldInData_Covid19.csv"
                 }
             ],
-            "cron_schedule": "1,2,3,4,5,6,7 15,16,17,18 * * *"
+            "cron_schedule": "1,2,3,4,5,6,7 15,16,17,18,19,20 * * *"
         }
     ]
 }
