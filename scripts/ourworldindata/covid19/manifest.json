@@ -1,0 +1,23 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "covid19_data",
+            "curator_emails": [
+                "hanluc@google.com"
+            ],
+            "provenance_url": "https://github.com/owid/covid-19-data/tree/master/public/data",
+            "provenance_description": "Our World In Data maintains COVID-19 dataset, updates daily. It includes data on confirmed cases, deaths, hospitalizations, and testing, as well as other variables of potential interest.",
+            "scripts": [
+                "preprocess_csv.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "OurWorldInData_Covid19.tmcf",
+                    "cleaned_csv": "OurWorldInData_Covid19.csv",
+                    "node_mcf": "COVIDTracking_States_StatisticalVariables.mcf"
+                }
+            ],
+            "cron_schedule": "45 3 * * *"
+        }
+    ]
+}
