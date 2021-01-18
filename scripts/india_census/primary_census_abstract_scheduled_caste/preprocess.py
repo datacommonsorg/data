@@ -39,13 +39,13 @@ class CensusPrimaryCensusAbstractScheduleCasteDataLoader(
 if __name__ == '__main__':
     data_file_path = os.path.join(os.path.dirname(__file__),
                                   'data/pca_state_distt_sc.xls')
-    #data_file_path = "http://censusindia.gov.in/2011census/SC-ST/pca_state_distt_sc.xls"
+    # data_file_path = "http://censusindia.gov.in/2011census/SC-ST/pca_state_distt_sc.xls"
 
     metadata_file_path = os.path.join(
         os.path.dirname(__file__),
         '../common/primary_abstract_data_variables.csv')
 
-    #These are basic statvars
+    # These are basic statvars
     existing_stat_var = [
         "Count_Household",
         "Count_Person",
@@ -55,8 +55,8 @@ if __name__ == '__main__':
         "Count_Person_Female",
     ]
 
-    #These are generated as part of `primary_census_abstract_data`
-    #No need to create them again or include them in MCF
+    # These are generated as part of `primary_census_abstract_data`
+    # No need to create them again or include them in MCF
     existing_stat_var.extend([
         "Count_Person_ScheduledCaste",
         "Count_Person_ScheduledCaste_Urban",
