@@ -85,61 +85,61 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
                 key = key + "_" + row[data_category_column]
             return key
 
-        #Generate Census locationid
+        # Generate Census locationid
         self.raw_df["census_location_id"] = self.raw_df.apply(
             self._format_location, axis=1)
 
-        #Remove the unwanted columns. They are census codes which we dont use
-        #State,District,Subdistt,Town/Village,Ward,EB
-        #We delete them only if they exists
-        #From pandas documentation:
-        #If errors=‘ignore’, suppress error and only existing labels are dropped
+        # Remove the unwanted columns. They are census codes which we dont use
+        # State,District,Subdistt,Town/Village,Ward,EB
+        # We delete them only if they exists
+        # From pandas documentation:
+        # If errors=‘ignore’, suppress error and only existing labels are dropped
         self.raw_df.drop(
             ["State", "District", "Subdistt", "Town/Village", "Name"],
             axis=1,
             inplace=True,
             errors='ignore')
 
-        #Once the above columns are dropped, we will have
-        #First column = TRU/placeOfResidence
-        #Second column = data_category_column
-        #3-N are the actual values. Let's get value columns
+        # Once the above columns are dropped, we will have
+        # First column = TRU/placeOfResidence
+        # Second column = data_category_column
+        # 3-N are the actual values. Let's get value columns
         value_columns = list(self.raw_df.columns[2:-1])
 
-        #convert the data_category_column to titleCase
+        # Convert the data_category_column to titleCase
         self.raw_df[self.data_category_column] = self.raw_df[
             self.data_category_column].apply(lambda x: titleCase(x))
 
-        #converting rows in to columns. So the final structure will be
-        #Name,TRU,columnName,value
+        # Converting rows in to columns. So the final structure will be
+        # Name,TRU,columnName,value
         self.raw_df = self.raw_df.melt(
             id_vars=["census_location_id", "TRU", self.data_category_column],
             value_vars=value_columns,
             var_name='columnName',
             value_name='Value')
 
-        #Add corresponding StatisticalVariable, based on columnName and TRU
+        # Add corresponding StatisticalVariable, based on columnName and TRU
         self.raw_df['StatisticalVariable'] = self.raw_df.apply(
             lambda row: self._get_stat_var_name(self.stat_var_index[
                 stat_var_index_key(row, self.data_category_column)]),
             axis=1)
 
-        #add the census year
+        # Add the census year
         self.raw_df['Year'] = self.census_year
 
-        #remove data_category_column as its not required
+        # Remove data_category_column as its not required
         self.raw_df.drop([self.data_category_column],
                          axis=1,
                          inplace=True,
                          errors='ignore')
 
-        #Export it as CSV. It will have the following columns
-        #Name,TRU,columnName,value,StatisticalVariable,Year
+        # Export it as CSV. It will have the following columns
+        # Name,TRU,columnName,value,StatisticalVariable,Year
         self.raw_df.to_csv(self.csv_file_path, index=False, header=True)
 
     def _get_base_name(self, row):
-        #To make the name meanigful add Religion to the
-        #the name of the stat var
+        # To make the name meaningful add Religion to the
+        # the name of the stat var
         name = "Count_" + row["populationType"] + "_Religion"
         return name
 
@@ -238,12 +238,12 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
                                 data_row,
                                 place_of_residence,
                                 data_category=None)
-                            #if the statvar already exists then we don't
-                            #need to recreate it
+                            # If the statvar already exists then we don't
+                            # need to recreate it
                             if name in self.existing_stat_var:
                                 pass
-                            #we need to create statvars only for those columns that
-                            #exist in the current data file
+                            # we need to create statvars only for those columns that
+                            # exist in the current data file
                             elif data_row[
                                     "columnName"] not in self.census_columns:
                                 pass
@@ -255,12 +255,12 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
                                     data_row,
                                     place_of_residence,
                                     data_category=data_category)
-                                #if the statvar already exists then we don't
-                                #need to recreate it
+                                # If the statvar already exists then we don't
+                                # need to recreate it
                                 if name in self.existing_stat_var:
                                     pass
-                                #we need to create statvars only for those columns that
-                                #exist in the current data file
+                                # We need to create statvars only for those columns that
+                                # exist in the current data file
                                 elif data_row[
                                         "columnName"] not in self.census_columns:
                                     pass
@@ -274,11 +274,11 @@ if __name__ == '__main__':
         os.path.dirname(__file__),
         '../common/primary_abstract_data_variables.csv')
 
-    #These are basic statvars
+    # These are basic statvars
     existing_stat_var = []
 
-    #These are generated as part of `primary_census_abstract_data`
-    #No need to create them again or include them in MCF
+    # These are generated as part of `primary_census_abstract_data`
+    # No need to create them again or include them in MCF
     existing_stat_var.extend([])
 
     data_categories = [
@@ -296,12 +296,14 @@ if __name__ == '__main__':
         os.path.dirname(__file__),
         './IndiaCensus2011_Primary_Abstract_Religion.csv')
 
-    #this is the data file for India
+    # This is the data file for India
     data_file_path = os.path.join(os.path.dirname(__file__),
                                   'data/RL-0000.xlsx')
 
-    #Create the MCF. TMCF and Final CSV file for
-    #India level data file
+    # Create the MCF. TMCF and Final CSV file for
+    # India level data file
+    # TODO: Currently we are using only a meaninful unique name for
+    # statvar. The schema is not defined. It needs to be defined.
     loader = CensusPrimaryReligiousDataLoader(
         data_file_path=data_file_path,
         metadata_file_path=metadata_file_path,
@@ -315,24 +317,24 @@ if __name__ == '__main__':
         data_category_column="Religion")
     loader.process()
 
-    # #Iterate through state files and just create the final CSV file
-    # #We already have the MCF and TMCF file
+    # Iterate through state files and just create the final CSV file
+    # We already have the MCF and TMCF file
 
     state_data_files = [
-        "RL-0300.xlsx", "RL-0600.xlsx", "RL-0900.xlsx", "RL-1200.xlsx",
-        "RL-1500.xlsx", "RL-1800.xlsx", "RL-2100.xlsx", "RL-2400.xlsx",
-        "RL-2700.xlsx", "RL-3000.xlsx", "RL-3300.xlsx", "RL-0100.xlsx",
-        "RL-0400.xlsx", "RL-0700.xlsx", "RL-1000.xlsx", "RL-1300.xlsx",
-        "RL-1600.xlsx", "RL-1900.xlsx", "RL-2200.xlsx", "RL-2500.xlsx",
-        "RL-2800.xlsx", "RL-3100.xlsx", "RL-3400.xlsx", "RL-0200.xlsx",
-        "RL-0500.xlsx", "RL-0800.xlsx", "RL-1100.xlsx", "RL-1400.xlsx",
-        "RL-1700.xlsx", "RL-2000.xlsx", "RL-2300.xlsx", "RL-2600.xlsx",
-        "RL-2900.xlsx", "RL-3200.xlsx", "RL-3500.xlsx"
+        "RL-0100.xlsx", "RL-0200.xlsx", "RL-0300.xlsx", "RL-0400.xlsx",
+        "RL-0500.xlsx", "RL-0600.xlsx", "RL-0700.xlsx", "RL-0800.xlsx",
+        "RL-0900.xlsx", "RL-1000.xlsx", "RL-1100.xlsx", "RL-1200.xlsx",
+        "RL-1300.xlsx", "RL-1400.xlsx", "RL-1500.xlsx", "RL-1600.xlsx",
+        "RL-1700.xlsx", "RL-1800.xlsx", "RL-1900.xlsx", "RL-2000.xlsx",
+        "RL-2100.xlsx", "RL-2200.xlsx", "RL-2300.xlsx", "RL-2400.xlsx",
+        "RL-2500.xlsx", "RL-2600.xlsx", "RL-2700.xlsx", "RL-2800.xlsx",
+        "RL-2900.xlsx", "RL-3000.xlsx", "RL-3100.xlsx", "RL-3200.xlsx",
+        "RL-3300.xlsx", "RL-3400.xlsx", "RL-3500.xlsx"
     ]
     tmp_dir = tempfile.gettempdir()
 
-    #we dont need to redefine the tmcf file and mcf file
-    #we can reuse the ones we used already. Hence discard them
+    # we dont need to redefine the tmcf file and mcf file
+    # we can reuse the ones we used already. Hence discard them
     tmcf_file_path = os.path.join(tmp_dir, "temp.tmcf")
     mcf_file_path = os.path.join(tmp_dir, "temp.mcf")
 

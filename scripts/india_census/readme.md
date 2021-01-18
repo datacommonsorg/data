@@ -10,7 +10,7 @@ It has one public function `process()` which internally downloads the data, clea
 ## Base Class - CensusGenericDataLoaderBase
 `india_census.common.base.CensusGenericDataLoaderBase` is the base class for census generic imports. It has minimal functionality.
 
-It has one public function `process()` which internally call the functions for downloading the data, cleaning the data, creating the MCF, TMCF, and cleaned CSV files. These functions are implemented in the child class.
+It has one public function `process()` which internally calls the functions for downloading the data, cleaning the data, creating the MCF, TMCF, and cleaned CSV files. These functions are implemented in the child class.
 
 
 ## primary_abstract_data_variables.csv

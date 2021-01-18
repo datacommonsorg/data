@@ -65,32 +65,26 @@ Each state has a file.
 
 #### Cleaned Data Snippet
 
-| census_location_id | TRU   | columnName | Value      | StatisticalVariable                                      | Year | 
-|--------------------|-------|------------|------------|----------------------------------------------------------|------| 
-| 0                  | Total | TOT_P      | 1210854977 | Count_Person_Religion_Total                              | 2011 | 
-| 0                  | Total | TOT_P      | 966257353  | Count_Person_Religion_Hindu                              | 2011 | 
-| 0                  | Total | TOT_P      | 172245158  | Count_Person_Religion_Muslim                             | 2011 | 
-| 0                  | Urban | TOT_P      | 282163402  | Count_Person_Religion_Hindu_Urban                        | 2011 | 
-| 0                  | Urban | TOT_P      | 68740419   | Count_Person_Religion_Muslim_Urban                       | 2011 | 
-| 0                  | Urban | TOT_P      | 11162523   | Count_Person_Religion_Christian_Urban                    | 2011 | 
-| 0                  | Urban | TOT_P      | 5902324    | Count_Person_Religion_Sikh_Urban                         | 2011 | 
-| 0                  | Urban | TOT_P      | 3628123    | Count_Person_Religion_Buddhist_Urban                     | 2011 | 
-| 0                  | Urban | TOT_P      | 3546944    | Count_Person_Religion_Jain_Urban                         | 2011 | 
-| 0                  | Urban | TOT_P      | 738727     | Count_Person_Religion_OtherReligionsAndPersuasions_Urban | 2011 | 
-| 0                  | Urban | TOT_P      | 1223663    | Count_Person_Religion_ReligionNotStated_Urban            | 2011 | 
-| 01                 | Total | TOT_P      | 12541302   | Count_Person_Religion_Total                              | 2011 | 
-| 01                 | Total | TOT_P      | 3566674    | Count_Person_Religion_Hindu                              | 2011 | 
-| 0                  | Total | TOT_M      | 623270258  | Count_Person_Religion_Total_Male                         | 2011 | 
-| 0                  | Total | TOT_M      | 498306968  | Count_Person_Religion_Hindu_Male                         | 2011 | 
-| 0                  | Total | TOT_F      | 587584719  | Count_Person_Religion_Total_Female                       | 2011 | 
-| 0                  | Total | TOT_F      | 467950385  | Count_Person_Religion_Hindu_Female                       | 2011 | 
-
+|census_location_id|TRU|columnName|Value          |StatisticalVariable|Year  |
+|------------------|---|----------|---------------|-------------------|------|
+|0                 |Total|TOT_P     |1210854977     |dcid:indianCensus/Count_Person_Religion_Total|2011  |
+|0                 |Total|TOT_P     |966257353      |dcid:indianCensus/Count_Person_Religion_Hindu|2011  |
+|0                 |Total|TOT_P     |172245158      |dcid:indianCensus/Count_Person_Religion_Muslim|2011  |
+|0                 |Total|TOT_P     |27819588       |dcid:indianCensus/Count_Person_Religion_Christian|2011  |
+|0                 |Total|TOT_P     |20833116       |dcid:indianCensus/Count_Person_Religion_Sikh|2011  |
+|0                 |Total|TOT_P     |8442972        |dcid:indianCensus/Count_Person_Religion_Buddhist|2011  |
+|0                 |Total|TOT_P     |4451753        |dcid:indianCensus/Count_Person_Religion_Jain|2011  |
+|0                 |Total|TOT_P     |7937734        |dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions|2011  |
 
 
 #### MCFs and Template MCFs
 
 - [IndiaCensus2011_Primary_Abstract_Religion.mcf](IndiaCensus2011_Primary_Abstract_Religion.mcf)
 - [IndiaCensus2011_Primary_Abstract_Religion.tmcf](IndiaCensus2011_Primary_Abstract_Religion.tmcf)
+
+
+**Note:** The schema for StatisticalVariables are not defined yet. It needs to be defined.
+
 
 ### Import Procedure
 

@@ -96,9 +96,9 @@ indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_
         self.census_columns = self.raw_df.columns[CENSUS_DATA_COLUMN_START:]
 
     def _format_location(self, row):
-        #In this specific format there is no Level defined.
-        #A non zero location code from the lowest administration area
-        #takes the precedence.
+        # In this specific format there is no Level defined.
+        # A non zero location code from the lowest administration area
+        # takes the precedence.
         if row["Town/Village"] != "000000":
             return row["Town/Village"]
 
@@ -111,24 +111,24 @@ indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_
         elif row["State"] != "00":
             return row["State"]
         else:
-            #This is india level location
+            # This is india level location
             return "0"
 
     def _format_data(self):
-        #This function is overridden in the child class
+        # This function is overridden in the child class
         pass
 
     def _get_base_name(self, row):
-        #This function is overridden in the child class
+        # This function is overridden in the child class
         name = "Count_"
         return name
 
     def _create_variable(self, data_row, **kwargs):
-        #This function is overridden in the child class
+        # This function is overridden in the child class
         pass
 
     def _create_mcf(self):
-        #This function is overridden in the child class
+        # This function is overridden in the child class
         pass
 
     def _create_tmcf(self):

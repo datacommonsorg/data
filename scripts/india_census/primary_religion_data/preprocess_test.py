@@ -74,7 +74,7 @@ class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
         same_tmcf = filecmp.cmp(tmcf_file_path, tmcf_expected_file_path)
         same_csv = filecmp.cmp(csv_file_path, csv_expected_file_path)
 
-        #Remove the created files, after comparison
+        # Remove the created files, after comparison
         if os.path.exists(mcf_file_path):
             os.remove(mcf_file_path)
 
