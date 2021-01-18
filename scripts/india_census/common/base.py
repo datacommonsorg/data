@@ -197,6 +197,15 @@ class CensusPrimaryAbstractDataLoaderBase:
         else:
             pass
 
+        if row["literacyStatus"] == "Literate":
+            name_array.append("Literate")
+            constraints_array.append("literacyStatus: dcs:Literate")
+        if row["literacyStatus"] == "Illiterate":
+            name_array.append("Illiterate")
+            constraints_array.append("socialCategory: dcs:Illiterate")
+        else:
+            pass
+
         if row["workerStatus"] == "Worker":
             constraints_array.append("workerStatus: dcs:Worker")
             if row["workerClassification"] == "MainWorker":

@@ -303,171 +303,189 @@ socialCategory: dcs:ScheduledTribe
 placeOfResidence: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Houseless
+Node: dcid:Count_Person_Houseless_Literate
 description: "Literates"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 
-Node: dcid:Count_Person_Houseless_Urban
+Node: dcid:Count_Person_Houseless_Literate_Urban
 description: "Literates - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 placeOfResidence: dcs:Urban
 
-Node: dcid:Count_Person_Houseless_Rural
+Node: dcid:Count_Person_Houseless_Literate_Rural
 description: "Literates - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 placeOfResidence: dcs:Rural
 
-Node: dcid:Count_Person_Houseless_Male
+Node: dcid:Count_Person_Houseless_Literate_Male
 description: "Male literates"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 gender: schema:Male
 
-Node: dcid:Count_Person_Houseless_Urban_Male
+Node: dcid:Count_Person_Houseless_Literate_Urban_Male
 description: "Male literates - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 placeOfResidence: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Houseless_Rural_Male
+Node: dcid:Count_Person_Houseless_Literate_Rural_Male
 description: "Male literates - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 placeOfResidence: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Houseless_Female
+Node: dcid:Count_Person_Houseless_Literate_Female
 description: "Female literates"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 gender: schema:Female
 
-Node: dcid:Count_Person_Houseless_Urban_Female
+Node: dcid:Count_Person_Houseless_Literate_Urban_Female
 description: "Female literates - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 placeOfResidence: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Houseless_Rural_Female
+Node: dcid:Count_Person_Houseless_Literate_Rural_Female
 description: "Female literates - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+literacyStatus: dcs:Literate
 placeOfResidence: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Houseless
+Node: dcid:Count_Person_Houseless_Illiterate
 description: "Illiterates"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 
-Node: dcid:Count_Person_Houseless_Urban
+Node: dcid:Count_Person_Houseless_Illiterate_Urban
 description: "Illiterates - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 placeOfResidence: dcs:Urban
 
-Node: dcid:Count_Person_Houseless_Rural
+Node: dcid:Count_Person_Houseless_Illiterate_Rural
 description: "Illiterates - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 placeOfResidence: dcs:Rural
 
-Node: dcid:Count_Person_Houseless_Male
+Node: dcid:Count_Person_Houseless_Illiterate_Male
 description: "Male Illiterates"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 gender: schema:Male
 
-Node: dcid:Count_Person_Houseless_Urban_Male
+Node: dcid:Count_Person_Houseless_Illiterate_Urban_Male
 description: "Male Illiterates - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 placeOfResidence: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Houseless_Rural_Male
+Node: dcid:Count_Person_Houseless_Illiterate_Rural_Male
 description: "Male Illiterates - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 placeOfResidence: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Houseless_Female
+Node: dcid:Count_Person_Houseless_Illiterate_Female
 description: "Female Illiterates"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 gender: schema:Female
 
-Node: dcid:Count_Person_Houseless_Urban_Female
+Node: dcid:Count_Person_Houseless_Illiterate_Urban_Female
 description: "Female Illiterates - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 placeOfResidence: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Houseless_Rural_Female
+Node: dcid:Count_Person_Houseless_Illiterate_Rural_Female
 description: "Female Illiterates - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
+socialCategory: dcs:Illiterate
 placeOfResidence: dcs:Rural
 gender: schema:Female
 
