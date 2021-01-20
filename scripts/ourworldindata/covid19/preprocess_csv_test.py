@@ -28,10 +28,11 @@ class TestPreprocessCsvTest(unittest.TestCase):
     def test_create_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             f = os.path.join(module_dir_, 'test_data/test_data.csv')
-            expected_csv_file = os.path.join(module_dir_,
-                                         'test_data/expected_formatted_data.csv')
+            expected_csv_file = os.path.join(
+                module_dir_, 'test_data/expected_formatted_data.csv')
             with open(f, "r") as f_in:
-                result_csv_file = os.path.join(tmp_dir, 'OurWorldInData_Covid19.csv')
+                result_csv_file = os.path.join(tmp_dir,
+                                               'OurWorldInData_Covid19.csv')
                 create_formatted_csv_file(f_in, result_csv_file)
                 same_csv = filecmp.cmp(result_csv_file, expected_csv_file)
 
@@ -41,9 +42,10 @@ class TestPreprocessCsvTest(unittest.TestCase):
 
     def test_create_tmcf(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            expected_tmcf_file = os.path.join(module_dir_,
-                                            'test_data/expected_covid19.tmcf')
-            result_tmcf_file = os.path.join(tmp_dir, 'OurWorldInData_Covid19.tmcf')
+            expected_tmcf_file = os.path.join(
+                module_dir_, 'test_data/expected_covid19.tmcf')
+            result_tmcf_file = os.path.join(tmp_dir,
+                                            'OurWorldInData_Covid19.tmcf')
 
             create_tmcf_file(result_tmcf_file)
 
