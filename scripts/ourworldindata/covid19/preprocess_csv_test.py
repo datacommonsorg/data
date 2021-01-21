@@ -34,11 +34,15 @@ class TestPreprocessCsvTest(unittest.TestCase):
                 result_csv_file = os.path.join(tmp_dir,
                                                'OurWorldInData_Covid19.csv')
                 create_formatted_csv_file(f_in, result_csv_file)
-                same_csv = filecmp.cmp(result_csv_file, expected_csv_file)
+
+                with open(result_csv_file, "r") as result_f: 
+                    result_str: str = result_f.read()
+                    with open(expected_csv_file, "r") as expect_f: 
+                        expect_str: str = expect_f.read()
+                        self.assertEqual(result_str, expect_str)
 
                 os.remove(result_csv_file)
 
-        self.assertTrue(same_csv)
 
     def test_create_tmcf(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -49,11 +53,13 @@ class TestPreprocessCsvTest(unittest.TestCase):
 
             create_tmcf_file(result_tmcf_file)
 
-            same_tmcf = filecmp.cmp(result_tmcf_file, expected_tmcf_file)
+            with open(result_tmcf_file, "r") as result_f: 
+                result_str: str = result_f.read()
+                with open(expected_tmcf_file, "r") as expect_f: 
+                    expect_str: str = expect_f.read()
+                    self.assertEqual(result_str, expect_str)
 
             os.remove(result_tmcf_file)
-
-        self.assertTrue(same_tmcf)
 
 
 if __name__ == '__main__':
