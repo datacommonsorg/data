@@ -46,3 +46,17 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 measurementDenominator: dcid:Count_Person
+
+Node: dcid:RuralPovertyLine
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+placeOfResidence: dcs:Rural
+statType: dcs:measuredValue
+measuredProperty: dcs:povertyLine
+
+Node: dcid:UrbanPovertyLine
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+placeOfResidence: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:povertyLine
