@@ -29,7 +29,7 @@ class TestPreprocess(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             xlsx_file = os.path.join(module_dir_, 'test_data/test.XLSX')
             expected_file = os.path.join(module_dir_, 'test_data/expected.csv')
-            result_file = os.path.join(tmp_dir, 'test_cleaed.csv')
+            result_file = os.path.join(tmp_dir, 'test_cleaned.csv')
 
             loader = BelowPovertyLineDataLoader(xlsx_file)
             loader.download()
