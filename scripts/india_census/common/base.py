@@ -202,7 +202,7 @@ class CensusPrimaryAbstractDataLoaderBase:
             constraints_array.append("literacyStatus: dcs:Literate")
         if row["literacyStatus"] == "Illiterate":
             name_array.append("Illiterate")
-            constraints_array.append("socialCategory: dcs:Illiterate")
+            constraints_array.append("literacyStatus: dcs:Illiterate")
         else:
             pass
 
