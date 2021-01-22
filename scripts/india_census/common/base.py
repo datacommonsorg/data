@@ -138,7 +138,7 @@ class CensusPrimaryAbstractDataLoaderBase:
                          inplace=True,
                          errors='ignore')
         # First column is Name of the place
-        # Second column is Name of the TRU/placeOfResidence
+        # Second column is Name of the TRU/placeOfResidenceClassification
         # 3-N are the actual values
         value_columns = list(self.raw_df.columns[1:-1])
 
@@ -242,12 +242,14 @@ class CensusPrimaryAbstractDataLoaderBase:
 
         if place_of_residence == "Urban":
             name_array.append("Urban")
-            constraints_array.append("placeOfResidence: dcs:Urban")
+            constraints_array.append(
+                "placeOfResidenceClassification: dcs:Urban")
             row["description"] = row["description"] + " - Urban"
 
         elif place_of_residence == "Rural":
             name_array.append("Rural")
-            constraints_array.append("placeOfResidence: dcs:Rural")
+            constraints_array.append(
+                "placeOfResidenceClassification: dcs:Rural")
             row["description"] = row["description"] + " - Rural"
 
         if row["gender"] == "Male":
