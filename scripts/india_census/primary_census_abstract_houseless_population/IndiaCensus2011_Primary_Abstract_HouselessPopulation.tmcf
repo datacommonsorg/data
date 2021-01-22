@@ -1,0 +1,10 @@
+Node: E:IndiaCensus2011_Primary_Abstract_HouselessPopulation->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaCensus2011_Primary_Abstract_HouselessPopulation->StatisticalVariable
+observationDate: C:IndiaCensus2011_Primary_Abstract_HouselessPopulation->Year
+observationAbout: E:IndiaCensus2011_Primary_Abstract_HouselessPopulation->E1
+value: C:IndiaCensus2011_Primary_Abstract_HouselessPopulation->Value
+
+Node: E:IndiaCensus2011_Primary_Abstract_HouselessPopulation->E1
+typeOf: schema:Place
+indianCensusAreaCode2011: C:IndiaCensus2011_Primary_Abstract_HouselessPopulation->census_location_id
