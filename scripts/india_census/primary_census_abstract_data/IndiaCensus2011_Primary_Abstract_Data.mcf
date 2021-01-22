@@ -392,7 +392,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 
 Node: dcid:Count_Person_Illiterate_Urban
 description: "Illiterates - Urban"
@@ -400,7 +400,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 placeOfResidence: dcs:Urban
 
 Node: dcid:Count_Person_Illiterate_Rural
@@ -409,7 +409,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 placeOfResidence: dcs:Rural
 
 Node: dcid:Count_Person_Illiterate_Male
@@ -418,7 +418,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 gender: schema:Male
 
 Node: dcid:Count_Person_Illiterate_Urban_Male
@@ -427,7 +427,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 placeOfResidence: dcs:Urban
 gender: schema:Male
 
@@ -437,7 +437,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 placeOfResidence: dcs:Rural
 gender: schema:Male
 
@@ -447,7 +447,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 gender: schema:Female
 
 Node: dcid:Count_Person_Illiterate_Urban_Female
@@ -456,7 +456,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 placeOfResidence: dcs:Urban
 gender: schema:Female
 
@@ -466,7 +466,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-socialCategory: dcs:Illiterate
+literacyStatus: dcs:Illiterate
 placeOfResidence: dcs:Rural
 gender: schema:Female
 
