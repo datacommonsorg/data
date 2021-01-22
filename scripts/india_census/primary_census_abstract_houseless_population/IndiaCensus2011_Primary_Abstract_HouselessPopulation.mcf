@@ -13,7 +13,7 @@ populationType: dcs:Household
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Household_Houseless_Rural
 description: "Number of Households - Rural"
@@ -22,7 +22,7 @@ populationType: dcs:Household
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_YearsUpto6
 description: "Population in the Age group 0-6"
@@ -41,7 +41,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 age: dcid:YearsUpto6
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_YearsUpto6_Rural
 description: "Population in the Age group 0-6 - Rural"
@@ -51,7 +51,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 age: dcid:YearsUpto6
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_YearsUpto6_Male
 description: "Male Population in the Age group 0-6"
@@ -71,7 +71,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 age: dcid:YearsUpto6
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_YearsUpto6_Rural_Male
@@ -82,7 +82,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 age: dcid:YearsUpto6
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_YearsUpto6_Female
@@ -103,7 +103,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 age: dcid:YearsUpto6
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_YearsUpto6_Rural_Female
@@ -114,7 +114,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 age: dcid:YearsUpto6
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_ScheduledCaste
@@ -134,7 +134,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledCaste
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_ScheduledCaste_Rural
 description: "Population Scheduled Caste - Rural"
@@ -144,7 +144,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledCaste
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_ScheduledCaste_Male
 description: "Male Population Scheduled Caste"
@@ -164,7 +164,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledCaste
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_ScheduledCaste_Rural_Male
@@ -175,7 +175,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledCaste
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_ScheduledCaste_Female
@@ -196,7 +196,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledCaste
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_ScheduledCaste_Rural_Female
@@ -207,7 +207,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledCaste
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_ScheduledTribe
@@ -227,7 +227,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledTribe
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_ScheduledTribe_Rural
 description: "Population Scheduled Tribe - Rural"
@@ -237,7 +237,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledTribe
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_ScheduledTribe_Male
 description: "Male Population Scheduled Tribe"
@@ -257,7 +257,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledTribe
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_ScheduledTribe_Rural_Male
@@ -268,7 +268,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledTribe
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_ScheduledTribe_Female
@@ -289,7 +289,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledTribe
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_ScheduledTribe_Rural_Female
@@ -300,7 +300,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 socialCategory: dcs:ScheduledTribe
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_Literate
@@ -320,7 +320,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Literate
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_Literate_Rural
 description: "Literates - Rural"
@@ -330,7 +330,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Literate
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_Literate_Male
 description: "Male literates"
@@ -350,7 +350,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Literate
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_Literate_Rural_Male
@@ -361,7 +361,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Literate
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_Literate_Female
@@ -382,7 +382,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Literate
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_Literate_Rural_Female
@@ -393,7 +393,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Literate
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_Illiterate
@@ -413,7 +413,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Illiterate
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_Illiterate_Rural
 description: "Illiterates - Rural"
@@ -423,7 +423,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Illiterate
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_Illiterate_Male
 description: "Male Illiterates"
@@ -443,7 +443,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Illiterate
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_Illiterate_Rural_Male
@@ -454,7 +454,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Illiterate
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_Illiterate_Female
@@ -475,7 +475,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Illiterate
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_Illiterate_Rural_Female
@@ -486,7 +486,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 literacyStatus: dcs:Illiterate
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_Workers
@@ -506,7 +506,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_Workers_Rural
 description: "Total Workers - Rural"
@@ -516,7 +516,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_Workers_Male
 description: "Total Male Workers"
@@ -536,7 +536,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_Workers_Rural_Male
@@ -547,7 +547,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_Workers_Female
@@ -568,7 +568,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_Workers_Rural_Female
@@ -579,7 +579,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker
@@ -601,7 +601,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MainWorker_Rural
 description: "Main Workers - Rural"
@@ -612,7 +612,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MainWorker_Male
 description: "Male Main Workers"
@@ -634,7 +634,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_Rural_Male
@@ -646,7 +646,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_Female
@@ -669,7 +669,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_Rural_Female
@@ -681,7 +681,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_Cultivators
@@ -705,7 +705,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MainWorker_Cultivators_Rural
 description: "Main Cultivators - Rural"
@@ -717,7 +717,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MainWorker_Cultivators_Male
 description: "Male Main Cultivators"
@@ -741,7 +741,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_Cultivators_Rural_Male
@@ -754,7 +754,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_Cultivators_Female
@@ -779,7 +779,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_Cultivators_Rural_Female
@@ -792,7 +792,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_AgriculturalLabourers
@@ -816,7 +816,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MainWorker_AgriculturalLabourers_Rural
 description: "Main Agricultural Labourers - Rural"
@@ -828,7 +828,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MainWorker_AgriculturalLabourers_Male
 description: "Male Main Agricultural Labourers"
@@ -852,7 +852,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_AgriculturalLabourers_Rural_Male
@@ -865,7 +865,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_AgriculturalLabourers_Female
@@ -890,7 +890,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_AgriculturalLabourers_Rural_Female
@@ -903,7 +903,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_HouseholdIndustries
@@ -927,7 +927,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MainWorker_HouseholdIndustries_Rural
 description: "Main workers in Household Industries - Rural"
@@ -939,7 +939,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MainWorker_HouseholdIndustries_Male
 description: "Male Main workers in Household Industries"
@@ -963,7 +963,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_HouseholdIndustries_Rural_Male
@@ -976,7 +976,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_HouseholdIndustries_Female
@@ -1001,7 +1001,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_HouseholdIndustries_Rural_Female
@@ -1014,7 +1014,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_OtherWorkers
@@ -1038,7 +1038,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MainWorker_OtherWorkers_Rural
 description: "Main Other workers - Rural"
@@ -1050,7 +1050,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MainWorker_OtherWorkers_Male
 description: "Male Main Other workers"
@@ -1074,7 +1074,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_OtherWorkers_Rural_Male
@@ -1087,7 +1087,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MainWorker_OtherWorkers_Female
@@ -1112,7 +1112,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MainWorker_OtherWorkers_Rural_Female
@@ -1125,7 +1125,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MainWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker
@@ -1147,7 +1147,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Rural
 description: "Marginal Workers - Rural"
@@ -1158,7 +1158,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Male
 description: "Male Marginal Workers"
@@ -1180,7 +1180,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Rural_Male
@@ -1192,7 +1192,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Female
@@ -1215,7 +1215,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Rural_Female
@@ -1227,7 +1227,7 @@ measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators
@@ -1251,7 +1251,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Rural
 description: "Marginal Cultivators - Rural"
@@ -1263,7 +1263,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Male
 description: "Male Marginal Cultivators"
@@ -1287,7 +1287,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Rural_Male
@@ -1300,7 +1300,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Female
@@ -1325,7 +1325,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Rural_Female
@@ -1338,7 +1338,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers
@@ -1362,7 +1362,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Rural
 description: "Marginal Agricultural Labourers - Rural"
@@ -1374,7 +1374,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Male
 description: "Male Marginal Agricultural Labourers"
@@ -1398,7 +1398,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Rural_Male
@@ -1411,7 +1411,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Female
@@ -1436,7 +1436,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Rural_Female
@@ -1449,7 +1449,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries
@@ -1473,7 +1473,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Rural
 description: "Marginal Workers in Household Industries - Rural"
@@ -1485,7 +1485,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Male
 description: "Male Marginal Workers in Household Industries"
@@ -1509,7 +1509,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Rural_Male
@@ -1522,7 +1522,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Female
@@ -1547,7 +1547,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Rural_Female
@@ -1560,7 +1560,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers
@@ -1584,7 +1584,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Rural
 description: "Marginal Other Workers - Rural"
@@ -1596,7 +1596,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Male
 description: "Male Marginal Other Workers"
@@ -1620,7 +1620,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Rural_Male
@@ -1633,7 +1633,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Female
@@ -1658,7 +1658,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Rural_Female
@@ -1671,7 +1671,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Worked3To6Months
@@ -1695,7 +1695,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Worked3To6Months_Rural
 description: "Marginal Workers- worked for 3 months or more but less than 6 months - Rural"
@@ -1707,7 +1707,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Worked3To6Months_Male
 description: "Male Marginal Workers- worked for 3 months or more but less than 6 months"
@@ -1731,7 +1731,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Worked3To6Months_Rural_Male
@@ -1744,7 +1744,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Worked3To6Months_Female
@@ -1769,7 +1769,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Worked3To6Months_Rural_Female
@@ -1782,7 +1782,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Worked3To6Months
@@ -1808,7 +1808,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Worked3To6Months_Rural
 description: "Marginal Cultivators- worked for 3 months or more but less than 6 months - Rural"
@@ -1821,7 +1821,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Worked3To6Months_Male
 description: "Male Marginal Cultivators- worked for 3 months or more but less than 6 months"
@@ -1847,7 +1847,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Worked3To6Months_Rural_Male
@@ -1861,7 +1861,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Worked3To6Months_Female
@@ -1888,7 +1888,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_Worked3To6Months_Rural_Female
@@ -1902,7 +1902,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Worked3To6Months
@@ -1928,7 +1928,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Rural
 description: "Marginal Agricultural Labourers- worked for 3 months or more but less than 6 months - Rural"
@@ -1941,7 +1941,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Male
 description: "Male Marginal Agricultural Labourers- worked for 3 months or more but less than 6 months"
@@ -1967,7 +1967,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Rural_Male
@@ -1981,7 +1981,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Female
@@ -2008,7 +2008,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Rural_Female
@@ -2022,7 +2022,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Worked3To6Months
@@ -2048,7 +2048,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Worked3To6Months_Rural
 description: "Marginal workers in Household Industries- worked for 3 months or more but less than 6 months - Rural"
@@ -2061,7 +2061,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Worked3To6Months_Male
 description: "Male Marginal workers in Household Industries- worked for 3 months or more but less than 6 months"
@@ -2087,7 +2087,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Worked3To6Months_Rural_Male
@@ -2101,7 +2101,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Worked3To6Months_Female
@@ -2128,7 +2128,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_Worked3To6Months_Rural_Female
@@ -2142,7 +2142,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Worked3To6Months
@@ -2168,7 +2168,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Worked3To6Months_Rural
 description: "Marginal Other workers- worked for 3 months or more but less than 6 months - Rural"
@@ -2181,7 +2181,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Worked3To6Months_Male
 description: "Male Marginal Other workers- worked for 3 months or more but less than 6 months"
@@ -2207,7 +2207,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Worked3To6Months_Rural_Male
@@ -2221,7 +2221,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Worked3To6Months_Female
@@ -2248,7 +2248,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_Worked3To6Months_Rural_Female
@@ -2262,7 +2262,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_WorkedUpto3Months
@@ -2286,7 +2286,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_WorkedUpto3Months_Rural
 description: "Marginal Workers- worked for less than 3 months - Rural"
@@ -2298,7 +2298,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_WorkedUpto3Months_Male
 description: "Male Marginal Workers- worked for less than 3 months"
@@ -2322,7 +2322,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_WorkedUpto3Months_Rural_Male
@@ -2335,7 +2335,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_WorkedUpto3Months_Female
@@ -2360,7 +2360,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_WorkedUpto3Months_Rural_Female
@@ -2373,7 +2373,7 @@ householdType: dcs:Houseless
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_WorkedUpto3Months
@@ -2399,7 +2399,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_WorkedUpto3Months_Rural
 description: "Marginal Cultivators- worked for less than 3 months - Rural"
@@ -2412,7 +2412,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_WorkedUpto3Months_Male
 description: "Male Marginal Cultivators- worked for less than 3 months"
@@ -2438,7 +2438,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_WorkedUpto3Months_Rural_Male
@@ -2452,7 +2452,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_WorkedUpto3Months_Female
@@ -2479,7 +2479,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_Cultivators_WorkedUpto3Months_Rural_Female
@@ -2493,7 +2493,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months
@@ -2519,7 +2519,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Rural
 description: "Marginal Agricultural Labourers- worked for less than 3 months - Rural"
@@ -2532,7 +2532,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Male
 description: "Male Marginal Agricultural Labourers- worked for less than 3 months"
@@ -2558,7 +2558,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Rural_Male
@@ -2572,7 +2572,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Female
@@ -2599,7 +2599,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Rural_Female
@@ -2613,7 +2613,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_WorkedUpto3Months
@@ -2639,7 +2639,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Rural
 description: "Marginal workers in Household Industries- worked for less than 3 months - Rural"
@@ -2652,7 +2652,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Male
 description: "Male Marginal workers in Household Industries- worked for less than 3 months"
@@ -2678,7 +2678,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Rural_Male
@@ -2692,7 +2692,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Female
@@ -2719,7 +2719,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Rural_Female
@@ -2733,7 +2733,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_WorkedUpto3Months
@@ -2759,7 +2759,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_WorkedUpto3Months_Rural
 description: "Marginal Other workers - Rural"
@@ -2772,7 +2772,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_WorkedUpto3Months_Male
 description: "Male Marginal Other workers"
@@ -2798,7 +2798,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_WorkedUpto3Months_Rural_Male
@@ -2812,7 +2812,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_WorkedUpto3Months_Female
@@ -2839,7 +2839,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_MarginalWorker_OtherWorkers_WorkedUpto3Months_Rural_Female
@@ -2853,7 +2853,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_NonWorker
@@ -2873,7 +2873,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_NonWorker_Rural
 description: "Non-Workers - Rural"
@@ -2883,7 +2883,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_NonWorker_Male
 description: "Male Non-Workers"
@@ -2903,7 +2903,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_NonWorker_Rural_Male
@@ -2914,7 +2914,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_NonWorker_Female
@@ -2935,7 +2935,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_NonWorker_Rural_Female
@@ -2946,7 +2946,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless
@@ -2964,7 +2964,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_Houseless_Rural
 description: "Total Houseless Population - Rural"
@@ -2973,7 +2973,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Houseless_Male
 description: "Total Houseless Males"
@@ -2991,7 +2991,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_Rural_Male
@@ -3001,7 +3001,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Houseless_Female
@@ -3020,7 +3020,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Houseless_Rural_Female
@@ -3030,6 +3030,6 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 householdType: dcs:Houseless
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
