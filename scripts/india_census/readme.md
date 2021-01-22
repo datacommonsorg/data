@@ -36,4 +36,7 @@ This is used for creating the MCF files.
 ## Primary Census Abstract Data for Scheduled Tribes (ST) (India & States/UTs - District Level) 
 - Refer the read me inside [primary_census_abstract_scheduled_tribe](./primary_census_abstract_scheduled_tribe/readme.md) folder.
 
+## Primary Census Abstract Data for Houseless Population (India & States/UTs - District Level) Overview 
+- Refer the read me inside [primary_census_abstract_houseless_population](./primary_census_abstract_houseless_population/readme.md) folder.
+
 
