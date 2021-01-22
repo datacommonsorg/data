@@ -3,7 +3,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 
 Node: dcid:Count_Person_Urban_BelowPovertyLevelInThePast12Months
@@ -11,7 +11,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 
 Node: dcid:Count_Person_BelowPovertyLevelInThePast12Months
@@ -26,7 +26,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 measurementDenominator: dcid:Count_Person_Rural
 
@@ -35,7 +35,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 measurementDenominator: dcid:Count_Person_Urban
 
@@ -50,13 +50,13 @@ measurementDenominator: dcid:Count_Person
 Node: dcid:RuralPovertyLine
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 statType: dcs:measuredValue
 measuredProperty: dcs:povertyLine
 
 Node: dcid:UrbanPovertyLine
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 statType: dcs:measuredValue
 measuredProperty: dcs:povertyLine
