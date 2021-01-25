@@ -34,8 +34,8 @@ Average wage/salary earnings are per state and by quarter. There are three sets 
 #### Cleaned Data
 - [PLFSWageData_India_Table_42_07_09_2018.csv](PLFSWageData_India_Table_42_07_09_2018.csv)
 - [PLFSWageData_India_Table_42_10_12_2018.csv](PLFSWageData_India_Table_42_10_12_2018.csv)
-- [BelowPovertyLine_India.csv](PLFSWageData_India_Table_42_01_03_2019.csv)
-- [BelowPovertyLine_India.csv](PLFSWageData_India_Table_42_04_06_2019.csv)
+- [PLFSWageData_India_Table_42_01_03_2019.csv](PLFSWageData_India_Table_42_01_03_2019.csv)
+- [PLFSWageData_India_Table_42_04_06_2019.csv](PLFSWageData_India_Table_42_04_06_2019.csv)
 
 It has the following columns
 
