@@ -28,3 +28,9 @@ To generate `OurWorldInData_Covid19.tmcf` and `OurWorldInData_Covid19.csv`, run:
 ```bash
 python3 preprocess_csv.py
 ```
+
+### Running Tests
+
+```bash
+python3 -m unittest preprocess_csv_test
+```
