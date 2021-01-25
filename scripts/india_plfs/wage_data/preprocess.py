@@ -172,11 +172,13 @@ def main():
             "data/{data_file}.xlsx".format(data_file=data_file),
         )
         loader = PLFSWageDataLoader(data_file_path, period)
-        csv_file_name = "PLFSWageData_India_{data_file}.csv".format(
-            data_file=data_file)
+        csv_file_path = os.path.join(
+            os.path.dirname(__file__),
+            "./PLFSWageData_India_{data_file}.csv".format(data_file=data_file))
+
         loader.load()
         loader.process()
-        loader.save(csv_file_name)
+        loader.save(csv_file_path)
 
 
 if __name__ == "__main__":

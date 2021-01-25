@@ -1,20 +1,17 @@
-
-
 # Periodic Labour Force Survey (PLFS) - Average wage/salary earnings
 
 
 ## About the Dataset
 Average wage/salary earnings (Rs. 0.00) during the preceding calendar month from regular wage/salaried employment among the regular wage/ salaried employees in CWS for each State/ UT.
 
-
 ### Download URL
 
-* For July 2018 - June 2019 [XLSX](http://mospi.nic.in/sites/default/files/reports_and_publication/PLFS_2018_19_Anual/Table_42.xlsx)
+* PLES July 2018 - June 2019 [XLSX](http://mospi.nic.in/sites/default/files/reports_and_publication/PLFS_2018_19_Anual/Table_42.xlsx)
 
 
 ### Overview
 
-Average wage/salary earnings is per state and by quarter. There are three sets of data, for the years 2018-19. The dataset contains the following columns.
+Average wage/salary earnings are per state and by quarter. There are three sets of data for the years 2018-19. The dataset contains the following columns.
 
 1. State \ UT  
 2. State/Union Territory
