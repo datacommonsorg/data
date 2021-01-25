@@ -29,9 +29,10 @@ class TestPreprocess(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             xlsx_file = os.path.join(module_dir_, 'test_data/test.xlsx')
             expected_file = os.path.join(module_dir_, 'test_data/expected.csv')
-            result_file = os.path.join(tmp_dir, 'test_cleaned.csv')
+            result_file = os.path.join(module_dir_,
+                                       'test_data/test_cleaned.csv')
 
-            loader = PLFSWageDataLoader(xlsx_file,period="2018-10")
+            loader = PLFSWageDataLoader(xlsx_file, period="2018-10")
             loader.load()
             loader.process()
             loader.save(csv_file_path=result_file)
