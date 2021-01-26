@@ -35,17 +35,26 @@ output_columns = [
     'CumulativeCount_MedicalTest_ConditionCOVID_19',
     'IncrementalCount_MedicalTest_ConditionCOVID_19'
 ]
-with open('OurWorldInData_Covid19.csv', 'w', newline='') as f_out:
-    writer = csv.DictWriter(f_out,
-                            fieldnames=output_columns,
-                            lineterminator='\n')
-    gcontext = ssl.SSLContext()
-    with urllib.request.urlopen(
-            'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv',
-            context=gcontext) as response:
-        reader = csv.DictReader(io.TextIOWrapper(response))
 
+# Automate Template MCF generation since there are many Statitical Variables.
+TEMPLATE_MCF_TEMPLATE = """
+Node: E:OurWorldInData_Covid19->E{index}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+measurementMethod: dcs:OurWorldInData_COVID19
+observationAbout: C:OurWorldInData_Covid19->GeoId
+observationDate: C:OurWorldInData_Covid19->Date
+value: C:OurWorldInData_Covid19->{stat_var}
+"""
+
+
+def create_formatted_csv_file(f_in, csv_file_path):
+    with open(csv_file_path, 'w', newline='') as f_out:
+        writer = csv.DictWriter(f_out,
+                                fieldnames=output_columns,
+                                lineterminator='\n')
         writer.writeheader()
+        reader = csv.DictReader(f_in)
         for row_dict in reader:
             place_dcid = 'country/%s' % row_dict['iso_code']
             # Skip invalid country ISO code.
@@ -80,22 +89,23 @@ with open('OurWorldInData_Covid19.csv', 'w', newline='') as f_out:
 
             writer.writerow(processed_dict)
 
-# Automate Template MCF generation since there are many Statitical Variables.
-TEMPLATE_MCF_TEMPLATE = """
-Node: E:OurWorldInData_Covid19->E{index}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{stat_var}
-measurementMethod: dcs:OurWorldInData_COVID19
-observationAbout: C:OurWorldInData_Covid19->GeoId
-observationDate: C:OurWorldInData_Covid19->Date
-value: C:OurWorldInData_Covid19->{stat_var}
-"""
 
-stat_vars = output_columns[2:]
-with open('OurWorldInData_Covid19.tmcf', 'w', newline='') as f_out:
-    for i in range(len(stat_vars)):
-        f_out.write(
-            TEMPLATE_MCF_TEMPLATE.format_map({
-                'index': i,
-                'stat_var': output_columns[2:][i]
-            }))
+def create_tmcf_file(tmcf_file_path):
+    stat_vars = output_columns[2:]
+    with open(tmcf_file_path, 'w', newline='') as f_out:
+        for i in range(len(stat_vars)):
+            f_out.write(
+                TEMPLATE_MCF_TEMPLATE.format_map({
+                    'index': i,
+                    'stat_var': output_columns[2:][i]
+                }))
+
+
+if __name__ == '__main__':
+    gcontext = ssl.SSLContext()
+    with urllib.request.urlopen(
+            'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv',
+            context=gcontext) as response:
+        f_in = io.TextIOWrapper(response)
+        create_formatted_csv_file(f_in, 'OurWorldInData_Covid19.csv')
+        create_tmcf_file('OurWorldInData_Covid19.tmcf')
