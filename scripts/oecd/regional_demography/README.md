@@ -135,4 +135,3 @@ resolution results but overwrites countries, NUTS, USA states, and other special
 cases as specified in
 [clean_geos_resolved_to_dict.py](clean_geos_resolved_to_dict.py)) just look at diffs in
 [regid2dcid.json](regid2dcid.json).
-
