@@ -17,6 +17,9 @@ We have a subdirectory for each imported Regional Demography dataset:
 - [population_tl2](population_tl2): Population by 5-year age groups, large regions TL2
 - [population_tl3](population_tl3): Population by 5-year age groups, small regions TL3
 
+Note: Since the downloaded data was truncated to 1M data points as the Export UI [suggests](https://user-images.githubusercontent.com/4375037/104984023-d068f900-59c2-11eb-9d0e-2d5cb4691677.png), and TL3 data is over 1M, download the [Ready-made files](https://screenshot.googleplex.com/4ypzTDjF9RC9kfJ) instead, and filter unneeded data. 
+
+
 ### Notes and Caveats
 
 This import currently relies on place name resolver to map statistics to a place DCID.
@@ -132,3 +135,4 @@ resolution results but overwrites countries, NUTS, USA states, and other special
 cases as specified in
 [clean_geos_resolved_to_dict.py](clean_geos_resolved_to_dict.py)) just look at diffs in
 [regid2dcid.json](regid2dcid.json).
+

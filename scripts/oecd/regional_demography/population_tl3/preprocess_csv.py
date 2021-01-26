@@ -20,7 +20,7 @@ import json
 import pandas as pd
 
 # Process the dataset.
-df = pd.read_csv("REGION_DEMOGR_population_tl3.csv")
+df = pd.read_csv("REGION_DEMOGR_population_tl3.csv", sep='\t', low_memory=False)
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
@@ -102,6 +102,16 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+
+# Drop columns that are not related with tl3 populations. 
+drop_cols = []
+tl3_csv_columns = {'REG_ID', 'Region', 'Year', 'Count_Person_Female'}
+tl3_csv_columns.update(VAR_to_statsvars.values())
+for col in df_cleaned.columns: 
+    if col not in tl3_csv_columns: 
+        drop_cols.append(col)
+df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
+
 df_cleaned.to_csv('OECD_population_tl3_cleaned.csv',
                   index=False,
                   quoting=csv.QUOTE_NONE)
