@@ -107,8 +107,8 @@ df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
 drop_cols = []
 tl3_csv_columns = {'REG_ID', 'Region', 'Year', 'Count_Person_Female'}
 tl3_csv_columns.update(VAR_to_statsvars.values())
-for col in df_cleaned.columns: 
-    if col not in tl3_csv_columns: 
+for col in df_cleaned.columns:
+    if col not in tl3_csv_columns:
         drop_cols.append(col)
 df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
 
