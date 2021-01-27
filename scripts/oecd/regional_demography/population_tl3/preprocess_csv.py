@@ -105,7 +105,7 @@ df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
 
 # Drop columns that are not related with tl3 populations.
 drop_cols = []
-tl3_csv_columns = {'REG_ID', 'Region', 'Year', 'Count_Person_Female'}
+tl3_csv_columns = {'REG_ID', 'Region', 'Year'}
 tl3_csv_columns.update(VAR_to_statsvars.values())
 for col in df_cleaned.columns:
     if col not in tl3_csv_columns:
