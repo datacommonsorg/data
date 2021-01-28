@@ -175,5 +175,7 @@ if __name__ == '__main__':
                 logging.info('clean crime file for year %s', year)
                 clean_crime_file(f_input, f_output, year)
 
+    # TODO(hanlu): get read_geocodes test.
     geo_codes = geocode_cities.read_geocodes()
+    # TODO(hanlu): update code logic to iterate over year and add test for read_crime_csv
     geocode_cities.read_crime_csv(geo_codes, '2019_cleaned.csv')
