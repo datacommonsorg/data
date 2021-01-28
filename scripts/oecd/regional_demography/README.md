@@ -17,7 +17,7 @@ We have a subdirectory for each imported Regional Demography dataset:
 - [population_tl2](population_tl2): Population by 5-year age groups, large regions TL2
 - [population_tl3](population_tl3): Population by 5-year age groups, small regions TL3
 
-Note: Since the downloaded data was truncated to 1M data points as the Export UI [suggests](https://user-images.githubusercontent.com/4375037/104984023-d068f900-59c2-11eb-9d0e-2d5cb4691677.png), and TL3 data is over 1M, download the [Ready-made files](https://screenshot.googleplex.com/4ypzTDjF9RC9kfJ) instead, name it as REGION_DEMOGR_population_tl3.csv. 
+Note: Since the downloaded data was truncated to 1M data points as the Export UI [suggests](https://user-images.githubusercontent.com/4375037/104984023-d068f900-59c2-11eb-9d0e-2d5cb4691677.png), and TL3 data is over 1M, download the [Ready-made files](https://user-images.githubusercontent.com/59888187/106089544-fa19d280-60dc-11eb-9fa9-744c4ca2c9de.png) instead, name it as REGION_DEMOGR_population_tl3.csv before running preporocess_csv. The current prod one is stored [here](https://storage.cloud.google.com/datcom-source-data/oecd/regional_demography/population_tl3/REGION_DEMOGR_population_tl3.csv).
 
 
 ### Notes and Caveats
