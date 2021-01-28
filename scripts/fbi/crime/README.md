@@ -27,4 +27,6 @@ python3 preprocess.py
 ### Running Tests
 
 ```bash
+python3 preprocess_test.py
+python3 geocode_cities_test.py
 ```

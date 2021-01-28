@@ -33,6 +33,30 @@ _POPULATION_INDEX = 2
 _STATE_INDEX = 0
 _CITY_INDEX = 1
 _DUMMY_RAPE_INDEX = 6
+
+_CRIME_FIELDS = [
+    'Year',
+    'State',
+    'City',
+    'Population',
+    # Violent Crimes
+    'Violent',
+    'ViolentMurderAndNonNegligentManslaughter',
+    'ViolentRape',
+    'Rape2',
+    'ViolentRobbery',
+    'ViolentAggravatedAssault',
+    # Property Crimes
+    'Property',
+    'PropertyBurglary',
+    'PropertyLarcenyTheft',
+    'PropertyMotorVehicleTheft',
+    # Arson
+    'PropertyArson',
+]
+
+_CALCULATED_CRIME_FIELDS = _CRIME_FIELDS + ['Total', 'Geocode']
+
 # From 2013-2016, the FBI reported statistics for two different definitions of rape before fully transitioning to the current definition in 2017.
 # We add a dummy column after it (so allyears have two Rape columns).
 YEARS_WITH_TWO_RAPE_COLUMNS = {'2013', '2014', '2015', '2016'}
@@ -84,6 +108,75 @@ def _shouldSkipSpecialLine(year, field):
             _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25959.0':
         return True
     return False
+
+
+def int_from_field(f):
+    # Convert a field to int value. If field is empty or non-convertible, return 0.
+    try:
+        f = float(f)
+        f = int(f)
+        return f
+    except ValueError as err:
+        return 0
+
+
+def calculate_crimes(r):
+    # Return the violent, property, arson crimes & total
+    # If a field is empty, it is treated as 0
+
+    # Category 1: Violent Crimes
+    violent = int_from_field(r['Violent'])
+
+    murder = int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
+    rape = int_from_field(r['ViolentRape'])
+    rape2 = int_from_field(r['Rape2'])
+    robbery = int_from_field(r['ViolentRobbery'])
+    assault = int_from_field(r['ViolentAggravatedAssault'])
+    # Fix rape value
+    rape += rape2
+
+    # Add the values back as ints
+    r['ViolentMurderAndNonNegligentManslaughter'] = murder
+    r['ViolentRape'] = rape
+    r['Rape2'] = rape2
+    r['ViolentRobbery'] = robbery
+    r['ViolentAggravatedAssault'] = assault
+
+    violent_computed = murder + rape + robbery + assault
+    if violent_computed != violent:
+        print('{} {} {} violent mismatch {} {}'.format(r['Year'], r['City'],
+                                                       r['State'], violent,
+                                                       violent_computed))
+
+    # Category 2: Property Crime
+    property = int_from_field(r['Property'])
+
+    burglary = int_from_field(r['PropertyBurglary'])
+    theft = int_from_field(r['PropertyLarcenyTheft'])
+    motor = int_from_field(r['PropertyMotorVehicleTheft'])
+
+    # Add the property crime values as ints.
+    r['PropertyBurglary'] = burglary
+    r['PropertyLarcenyTheft'] = theft
+    r['PropertyMotorVehicleTheft'] = motor
+
+    # Compute totals
+    property_computed = burglary + theft + motor
+
+    if property_computed != property:
+        print('{} {} {} property mismatch {} {}'.format(r['Year'], r['City'],
+                                                        r['State'], property,
+                                                        property_computed))
+
+    # Category 3: Arson
+    arson = int_from_field(r['PropertyArson'])
+    r['PropertyArson'] = arson
+
+    total = violent_computed + property_computed + arson
+    # Write back the totals
+    r['Total'] = total
+    r['Violent'] = violent_computed
+    r['Property'] = property_computed
 
 
 def clean_crime_file(f_input, f_output, year):
@@ -155,6 +248,31 @@ def clean_crime_file(f_input, f_output, year):
     logging.info('%d states', count_state)
 
 
+def update_and_calculate_crime_csv(geo_codes, crime_csv, calculated_csv):
+    with open(crime_csv) as crime_f:
+        crimes = csv.DictReader(crime_f, fieldnames=_CRIME_FIELDS)
+        with open(calculated_csv, 'w') as csv_output_f:
+            writer = csv.DictWriter(csv_output_f,
+                                    fieldnames=_CALCULATED_CRIME_FIELDS)
+
+            found_set = set()
+            cities_not_found_set = set()
+            for crime in crimes:
+                if geocode_cities.update_crime_geocode(crime, geo_codes,
+                                                       found_set,
+                                                       cities_not_found_set):
+                    calculate_crimes(crime)
+                    writer.writerow(crime)
+
+        # Output the cities not_found
+        with open('city_not_found.txt', 'w') as cities_not_found_f:
+            for s in cities_not_found_set:
+                cities_not_found_f.write('{}\n'.format(s))
+
+        print('US src_cities = {}, cities_not_found = {}'.format(
+            len(found_set), len(cities_not_found_set)))
+
+
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
     for year, url in YEAR_TO_URL.items():
@@ -175,7 +293,7 @@ if __name__ == '__main__':
                 logging.info('clean crime file for year %s', year)
                 clean_crime_file(f_input, f_output, year)
 
-    # TODO(hanlu): get read_geocodes test.
     geo_codes = geocode_cities.read_geocodes()
-    # TODO(hanlu): update code logic to iterate over year and add test for read_crime_csv
-    geocode_cities.read_crime_csv(geo_codes, '2019_cleaned.csv')
+    # TODO(hanlu): update code logic to iterate over year
+    update_and_calculate_crime_csv(geo_codes, '2019_cleaned.csv',
+                                   '2019_calculated.csv')
