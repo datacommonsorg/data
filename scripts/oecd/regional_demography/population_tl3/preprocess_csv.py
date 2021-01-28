@@ -19,6 +19,10 @@ import csv
 import json
 import pandas as pd
 
+# Prod REGION_DEMOGR_population_tl3.csv is stored at 
+# https://storage.cloud.google.com/datcom-source-data/oecd/regional_demography/population_tl3.
+# Copy it over before running preprocess_csv.
+
 # Process the dataset.
 df = pd.read_csv("REGION_DEMOGR_population_tl3.csv", sep='\t', low_memory=False)
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]

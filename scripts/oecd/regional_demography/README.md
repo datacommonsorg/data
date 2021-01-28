@@ -35,11 +35,16 @@ This has some issues, which we are working on, but in the meantime, contact us f
 
 ### Raw Data
 
-In each subdirectory, the source CSVs are saved as `REGION_DEMOGR_{subdirectory name}.csv`.
+In each subdirectory, the source CSVs are saved as `REGION_DEMOGR_{subdirectory name}.csv`, except TL3. 
+
+TL3 raw data is stored at [here](https://storage.cloud.google.com/datcom-source-data/oecd/regional_demography/population_tl3/REGION_DEMOGR_population_tl3.csv) for small repository. 
 
 ### Cleaned Data
 
-In each subdirectory, the cleaned CSVs are saved as `OECD_{subdirectory name}_cleaned.csv`.
+In each subdirectory, the cleaned CSVs are saved as `OECD_{subdirectory name}_cleaned.csv`, except TL3. 
+
+To re-generate TL3 cleaned CSV, copy its raw data to population_tl3 directory, and run preprocess_csv.
+
 
 ### StatisticalVariable MCF files
 
