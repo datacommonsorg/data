@@ -60,6 +60,7 @@ INDIA_ISO_CODES = {
     "Andaman and Nicobar Islands": "IN-AN",
     "Andaman & Nicobar Islands": "IN-AN",
     "Andaman & N. Island": "IN-AN",
+    "A & N Islands": "IN-AN",
     "Chandigarh": "IN-CH",
     "Dadra and Nagar Haveli": "IN-DN",
     "Dadra & Nagar Haveli": "IN-DN",
@@ -78,9 +79,26 @@ INDIA_ISO_CODES = {
     "Dadra and Nagar Haveli and Daman and Diu": "IN-DN_DD",
     "Telangana": "IN-TG",
     "all India": "IN",
+    "all-India": "IN",
 }
 
 DATASETS = [
+    {
+        "period": "2017-07",
+        "data_file": "Table_42_07_09_2017"
+    },
+    {
+        "period": "2017-10",
+        "data_file": "Table_42_10_12_2017"
+    },
+    {
+        "period": "2018-01",
+        "data_file": "Table_42_01_03_2018"
+    },
+    {
+        "period": "2018-04",
+        "data_file": "Table_42_04_06_2018"
+    },
     {
         "period": "2018-07",
         "data_file": "Table_42_07_09_2018"

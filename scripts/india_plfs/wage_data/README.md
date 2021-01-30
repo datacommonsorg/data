@@ -4,9 +4,27 @@
 ## About the Dataset
 Average wage/salary earnings (Rs. 0.00) during the preceding calendar month from regular wage/salaried employment among the regular wage/ salaried employees in CWS for each State/ UT.
 
-### Download URL
+### Download Data
 
-* PLES July 2018 - June 2019 [XLSX](http://mospi.nic.in/sites/default/files/reports_and_publication/PLFS_2018_19_Anual/Table_42.xlsx)
+#### PLES July 2018 - June 2019
+Wage data from PLES July 2018 - June 2019 is availabe as [XLSX](http://mospi.nic.in/sites/default/files/reports_and_publication/PLFS_2018_19_Anual/Table_42.xlsx).
+
+#### PLES July 2017 - June 2018
+Wage data from PLES July 2017 - June 2018 is availabe as embeded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual%20Report%2C%20PLFS%202017-18_31052019.pdf).Table format is same. Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
+
+```
+java -jar tabula-java.jar  -a 52.094,85.771,549.879,760.359 -p 400 "$1" 
+java -jar tabula-java.jar  -a 52.094,85.771,549.879,760.359 -p 401 "$1" 
+java -jar tabula-java.jar  -a 52.094,85.771,549.879,760.359 -p 402 "$1" 
+java -jar tabula-java.jar  -a 52.094,85.771,549.879,760.359 -p 403 "$1" 
+```
+
+* Page 400 has the data for July-Sept 2017 
+* Page 401 has the data for Oct-Dec 2017      
+* Page 402 has the data for Jan-Mar 2018
+* Page 403 has the data for Apr-June 2018
+
+
 
 
 ### Overview
