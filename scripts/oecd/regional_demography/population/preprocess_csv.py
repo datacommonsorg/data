@@ -20,7 +20,7 @@ import json
 import pandas as pd
 
 # Prod REGION_DEMOGR_population.csv is stored at 
-# https://storage.cloud.google.com/datcom-source-data/oecd/regional_demography/population.
+# https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919.
 # Copy it over before running preprocess_csv.
 
 # Process the dataset.
@@ -107,16 +107,16 @@ VAR_to_statsvars = {
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
 
-# Drop columns that are not related with tl3 populations.
+# Drop columns that are not related with populations.
 drop_cols = []
-tl3_csv_columns = {'REG_ID', 'Region', 'Year'}
-tl3_csv_columns.update(VAR_to_statsvars.values())
+csv_columns = {'REG_ID', 'Region', 'Year'}
+csv_columns.update(VAR_to_statsvars.values())
 for col in df_cleaned.columns:
-    if col not in tl3_csv_columns:
+    if col not in csv_columns:
         drop_cols.append(col)
 df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
 
-df_cleaned.to_csv('OECD_population_tl3_cleaned.csv',
+df_cleaned.to_csv('OECD_population_cleaned.csv',
                   index=False,
                   quoting=csv.QUOTE_NONE)
 
