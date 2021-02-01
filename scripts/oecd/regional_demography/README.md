@@ -7,7 +7,7 @@
 <https://stats.oecd.org/index.aspx?DataSetCode=REGION_DEMOGR> is the overall link for regional demographics dataset. You can click on export menu and get .csv files for the specific dataset.
 
 
-Note: Downloaded data was truncated to 1M data points as the Export UI [suggests](https://user-images.githubusercontent.com/4375037/104984023-d068f900-59c2-11eb-9d0e-2d5cb4691677.png). For TL3, since its data is over 1M, download the [Ready-made files](https://user-images.githubusercontent.com/59888187/106089544-fa19d280-60dc-11eb-9fa9-744c4ca2c9de.png) instead, name it as REGION_DEMOGR_population_tl3.csv before running preporocess_csv. The current prod one is stored [here](https://storage.cloud.google.com/datcom-source-data/oecd/regional_demography/population_tl3/REGION_DEMOGR_population_tl3.csv).
+Note: Downloaded data was truncated to 1M data points as the Export UI [suggests](https://user-images.githubusercontent.com/4375037/104984023-d068f900-59c2-11eb-9d0e-2d5cb4691677.png). For population, since its data is over 1M, download the [Ready-made files](https://user-images.githubusercontent.com/59888187/106089544-fa19d280-60dc-11eb-9fa9-744c4ca2c9de.png) instead, name it as REGION_DEMOGR_population.csv before running preporocess_csv. The current prod one is stored [here](https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919).
 
 
 ### Overview
@@ -18,8 +18,7 @@ We have a subdirectory for each imported Regional Demography dataset:
 - [deaths](deaths): Deaths by 5-year age groups,small regions TL3
 - [life_expectancy_and_mortality](life_expectancy_and_mortality): Life Expectancy and Mortality, large TL2 and small TL3 regions
 - [pop_density](pop_density): Population density and area, large TL2 and small TL3 regions
-- [population_tl2](population_tl2): Population by 5-year age groups, large regions TL2
-- [population_tl3](population_tl3): Population by 5-year age groups, small regions TL3
+- [population](population): Population by 5-year age groups, large TL2 and small TL3 regions
 
 
 ### Notes and Caveats
@@ -35,15 +34,15 @@ This has some issues, which we are working on, but in the meantime, contact us f
 
 ### Raw Data
 
-In each subdirectory, the source CSVs are saved as `REGION_DEMOGR_{subdirectory name}.csv`, except TL3. 
+In each subdirectory, the source CSVs are saved as `REGION_DEMOGR_{subdirectory name}.csv`, except population. 
 
-TL3 raw data is stored at [here](https://storage.cloud.google.com/datcom-source-data/oecd/regional_demography/population_tl3/REGION_DEMOGR_population_tl3.csv) for small repository. 
+Population raw data is stored at [here](https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919) for small repository. 
 
 ### Cleaned Data
 
-In each subdirectory, the cleaned CSVs are saved as `OECD_{subdirectory name}_cleaned.csv`, except TL3. 
+In each subdirectory, the cleaned CSVs are saved as `OECD_{subdirectory name}_cleaned.csv`, except population. 
 
-To re-generate TL3 cleaned CSV, copy its raw data to population_tl3 directory, and run preprocess_csv.
+To re-generate population cleaned CSV, copy its raw data to population directory, and run preprocess_csv.
 
 
 ### StatisticalVariable MCF files
@@ -58,8 +57,6 @@ the human readable StatVar file `manual_wdi_stat_vars.mcf`.
 ### StatVarObservation Template MCF files
 
 In each subdirectory, the StatVarObservation template MCF files are saved as `OECD_{subdirectory name}.tmcf`.
-
-Note: [population_tl3/OECD_population_stat_vars.mcf](population_tl3/OECD_population_stat_vars.mcf) is a symlink to [population_tl2/OECD_population_stat_vars.mcf](population_tl2/OECD_population_stat_vars.mcf).
 
 ### Script
 
