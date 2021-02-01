@@ -65,6 +65,7 @@ YEARS_WITHOUT_POPULATION_COLUMN = {'2016'}
 YEAR_TO_URL = {
     '2019':
         'https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-8/table-8.xls',
+    # TODO(hanlu): un-comment these years after run code agaisnt them and check they are all fine.
     # '2018': 'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-8/table-8.xls',
     # '2017': 'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-8/table-8.xls',
     # '2016': 'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-8/table-8.xls',
@@ -91,7 +92,7 @@ def _remove_digits(c):
     return re.sub(r'[\d]', '', c)
 
 
-def _isDigit(x):
+def _is_digit(x):
     try:
         float(x)
         return True
@@ -99,8 +100,19 @@ def _isDigit(x):
         return False
 
 
+def _int_from_field(f):
+    # Convert a field to int value. If field is empty or non-convertible, return 0.
+    # Numeric number was read in as string with ".0" suffix, eg: "12.0". First convert to float, then to int.
+    try:
+        f = float(f)
+        f = int(f)
+        return f
+    except ValueError as err:
+        return 0
+
+
 # When there is two entries for the same city, skip the one with wrong population data.
-def _shouldSkipSpecialLine(year, field):
+def _should_skip_special_line(year, field):
     if year == '2019' and field[_STATE_INDEX] == 'OREGON' and field[
             _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2670.0':
         return True
@@ -110,28 +122,18 @@ def _shouldSkipSpecialLine(year, field):
     return False
 
 
-def int_from_field(f):
-    # Convert a field to int value. If field is empty or non-convertible, return 0.
-    try:
-        f = float(f)
-        f = int(f)
-        return f
-    except ValueError as err:
-        return 0
-
-
 def calculate_crimes(r):
     # Return the violent, property, arson crimes & total
     # If a field is empty, it is treated as 0
 
     # Category 1: Violent Crimes
-    violent = int_from_field(r['Violent'])
+    violent = _int_from_field(r['Violent'])
 
-    murder = int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
-    rape = int_from_field(r['ViolentRape'])
-    rape2 = int_from_field(r['Rape2'])
-    robbery = int_from_field(r['ViolentRobbery'])
-    assault = int_from_field(r['ViolentAggravatedAssault'])
+    murder = _int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
+    rape = _int_from_field(r['ViolentRape'])
+    rape2 = _int_from_field(r['Rape2'])
+    robbery = _int_from_field(r['ViolentRobbery'])
+    assault = _int_from_field(r['ViolentAggravatedAssault'])
     # Fix rape value
     rape += rape2
 
@@ -149,11 +151,11 @@ def calculate_crimes(r):
                                                        violent_computed))
 
     # Category 2: Property Crime
-    property = int_from_field(r['Property'])
+    property = _int_from_field(r['Property'])
 
-    burglary = int_from_field(r['PropertyBurglary'])
-    theft = int_from_field(r['PropertyLarcenyTheft'])
-    motor = int_from_field(r['PropertyMotorVehicleTheft'])
+    burglary = _int_from_field(r['PropertyBurglary'])
+    theft = _int_from_field(r['PropertyLarcenyTheft'])
+    motor = _int_from_field(r['PropertyMotorVehicleTheft'])
 
     # Add the property crime values as ints.
     r['PropertyBurglary'] = burglary
@@ -217,7 +219,7 @@ def clean_crime_file(f_input, f_output, year):
 
         # Skip if the line does not contain data or if population is empty.
         if (not field[_POPULATION_INDEX] or
-                not _isDigit(field[_POPULATION_INDEX]) or
+                not _is_digit(field[_POPULATION_INDEX]) or
                 field[_POPULATION_INDEX] == '0'):
             count_header_footer += 1
             continue
@@ -233,7 +235,7 @@ def clean_crime_file(f_input, f_output, year):
         count_city += 1
 
         # If duplicate lines.
-        if _shouldSkipSpecialLine(year, field):
+        if _should_skip_special_line(year, field):
             continue
 
         # Keep the first n fields. Some of the files contain extra empty fields.

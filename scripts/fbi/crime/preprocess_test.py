@@ -27,6 +27,7 @@ class CleanCrimeFileTest(unittest.TestCase):
 
     def test_clean_crime_file(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
+            # TODO(hanlu): take this CSV as input, run update_and_calculate_crime_csv and validate geocodes e2e2.
             test_csv_file = os.path.join(module_dir_,
                                          'test_data/test_data_basic.csv')
             result_csv_file = os.path.join(tmp_dir, 'cleaned_data_basic.csv')
