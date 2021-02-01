@@ -19,12 +19,12 @@ import csv
 import json
 import pandas as pd
 
-# Prod REGION_DEMOGR_population_tl3.csv is stored at 
-# https://storage.cloud.google.com/datcom-source-data/oecd/regional_demography/population_tl3.
+# Prod REGION_DEMOGR_population.csv is stored at 
+# https://storage.cloud.google.com/datcom-source-data/oecd/regional_demography/population.
 # Copy it over before running preprocess_csv.
 
 # Process the dataset.
-df = pd.read_csv("REGION_DEMOGR_population_tl3.csv", sep='\t', low_memory=False)
+df = pd.read_csv("REGION_DEMOGR_population.csv", sep='\t', low_memory=False)
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
@@ -122,18 +122,18 @@ df_cleaned.to_csv('OECD_population_tl3_cleaned.csv',
 
 # Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """
-Node: E:OECD_population_tl3_cleaned->E{index}
+Node: E:OECD_population_cleaned->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: C:OECD_population_tl3_cleaned->Region
-observationDate: C:OECD_population_tl3_cleaned->Year
+observationAbout: C:OECD_population_cleaned->Region
+observationDate: C:OECD_population_cleaned->Year
 observationPeriod: "P1Y"
-value: C:OECD_population_tl3_cleaned->{stat_var}
+value: C:OECD_population_cleaned->{stat_var}
 """
 
 stat_vars = df_cleaned.columns[3:]
-with open('OECD_population_tl3.tmcf', 'w', newline='') as f_out:
+with open('OECD_population.tmcf', 'w', newline='') as f_out:
     for i in range(len(stat_vars)):
         f_out.write(
             TEMPLATE_MCF_TEMPLATE.format_map({
