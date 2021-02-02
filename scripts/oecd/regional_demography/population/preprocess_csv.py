@@ -21,7 +21,8 @@ import pandas as pd
 
 # Prod REGION_DEMOGR_population.csv is stored at
 # https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919.
-# Copy it over before running preprocess_csv.
+# Copy it over before running preprocess_csv: 
+# gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv
 
 # Process the dataset.
 ag_df = []

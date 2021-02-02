@@ -36,8 +36,13 @@ This has some issues, which we are working on, but in the meantime, contact us f
 
 In each subdirectory, the source CSVs are saved as `REGION_DEMOGR_{subdirectory name}.csv`, except population. 
 
-Population raw data is stored at [here](https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919) for small repository. 
-It is missing data for region_id CL16. To add the missing data, We created manual_curated_population.csv with command 
+Population raw data is stored at [here](https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919) since it's quite big. 
+To copy raw CSV into the population directory, run:
+```bash
+gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv
+```
+
+Population raw CSV is missing data for region_id CL16. To add the missing data, we created manual_curated_population.csv with command 
 
 ```
 awk 'BEGIN { FS = "," }; {if (NR==1 || $3=="\"CL16\"")  {print}}' REGION_DEMOGR_population_tl2.csv  > manual_curated_population.csv
@@ -49,7 +54,7 @@ https://user-images.githubusercontent.com/59888187/106540945-d7f5cb00-64b5-11eb-
 
 In each subdirectory, the cleaned CSVs are saved as `OECD_{subdirectory name}_cleaned.csv`, except population. 
 
-To re-generate population cleaned CSV, copy its raw data to population directory, and run preprocess_csv.
+To re-generate population cleaned CSV, see Generating Artifacts section.
 
 
 ### StatisticalVariable MCF files
@@ -77,11 +82,8 @@ To generate the cleaned csv and template MCF files, run
 python3 preprocess_csv.py
 ```
 
-For population, first copy the raw CSV into the population directory, then preprocee it.   
-```bash
-gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv
-python3 preprocess_csv.py
-```
+For population, following the Raw Data section, first copy its raw data to population direction. 
+Then run the same preprocess_csv command, it will generate artifacts as well as cleaned CSV.
 
 ## Getting/Improving DCIDs mappings for OECD geos
 
