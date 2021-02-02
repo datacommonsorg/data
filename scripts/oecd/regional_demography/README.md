@@ -77,6 +77,12 @@ To generate the cleaned csv and template MCF files, run
 python3 preprocess_csv.py
 ```
 
+For population, first copy the raw CSV into the population directory, then preprocee it.   
+```bash
+gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv
+python3 preprocess_csv.py
+```
+
 ## Getting/Improving DCIDs mappings for OECD geos
 
 To update [regid2dcid.json](regid2dcid.json):
