@@ -63,31 +63,30 @@ YEARS_WITH_TWO_RAPE_COLUMNS = {'2013', '2014', '2015', '2016'}
 YEARS_WITHOUT_POPULATION_COLUMN = {'2016'}
 
 YEAR_TO_URL = {
-    '2019':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-8/table-8.xls',
-    '2018':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-8/table-8.xls',
-    '2017':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-8/table-8.xls',
-    # TODO(hanlu): preprocess 2016 data fail. Send PR to deal with it.
-    # '2016': 'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-8/table-8.xls',
-    '2015':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2015.xls',
-    '2014':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-8/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2014.xls',
-    '2013':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2013.xls',
-    '2012':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/8tabledatadecpdf/table_8_offenses_known_to_law_enforcement_by_state_by_city_2012.xls',
-    '2011':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table_8_offenses_known_to_law_enforcement_by_state_by_city_2011.xls',
-    # Sanity check 2008-2010 don't have duplicate city state.
-    '2010':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl08.xls',
-    '2009':
-        'https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl08.xls',
-    '2008':
-        'https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl08.xls',
+    # '2019':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-8/table-8.xls',
+    # '2018':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-8/table-8.xls',
+    # '2017':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-8/table-8.xls',
+    '2016': 'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-8/table-8.xls',
+    # '2015':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2015.xls',
+    # '2014':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-8/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2014.xls',
+    # '2013':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2013.xls',
+    # '2012':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/8tabledatadecpdf/table_8_offenses_known_to_law_enforcement_by_state_by_city_2012.xls',
+    # '2011':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table_8_offenses_known_to_law_enforcement_by_state_by_city_2011.xls',
+    # # Sanity check 2008-2010 don't have duplicate city state.
+    # '2010':
+    #     'https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl08.xls',
+    # '2009':
+    #     'https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl08.xls',
+    # '2008':
+    #     'https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl08.xls',
 }
 
 
@@ -270,6 +269,16 @@ def calculate_crimes(r):
     r['Property'] = property_computed
 
 
+def _get_2016_state(state):
+    state_suffix_1 = ' - Nonmetropolitan Counties'
+    if state_suffix_1 in state:
+        return state.replace(state_suffix_1, '')
+
+    state_suffix_2 = ' - Metropolitan Counties'
+    if state_suffix_2 in state: #state.endswith(state_suffix_2):
+        return state.replace(state_suffix_2, '')
+
+    
 def clean_crime_file(f_input, f_output, year):
     """Clean a tsv file of crime statistics.
 
@@ -317,6 +326,8 @@ def clean_crime_file(f_input, f_output, year):
         if field[_STATE_INDEX]:
             # Remove numeric values from state names (comes from footnotes)
             state = _remove_digits(field[_STATE_INDEX])
+            if year == "2016":
+                state = _get_2016_state(state)
             count_state += 1
         field[_STATE_INDEX] = state
         # Remove any numeric characters from city names.
@@ -328,6 +339,7 @@ def clean_crime_file(f_input, f_output, year):
             continue
 
         # Keep the first n fields. Some of the files contain extra empty fields.
+        print(field)
         output_line = '{},{}\n'.format(year,
                                        ','.join(field[:_FIELDS_IN_CRIME_FILE]))
         f_output.write(output_line)
@@ -387,5 +399,5 @@ if __name__ == '__main__':
                 clean_crime_file(f_input, f_output, year)
 
         # TODO(hanlu): Clean transient files.
-        update_and_calculate_crime_csv(geo_codes, year + '_cleaned.csv',
-                                       year + '_calculated.csv')
+        # update_and_calculate_crime_csv(geo_codes, year + '_cleaned.csv',
+                                    #    year + '_calculated.csv')
