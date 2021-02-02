@@ -65,18 +65,29 @@ YEARS_WITHOUT_POPULATION_COLUMN = {'2016'}
 YEAR_TO_URL = {
     '2019':
         'https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-8/table-8.xls',
-    # TODO(hanlu): un-comment these years after run code agaisnt them and check they are all fine.
-    # '2018': 'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-8/table-8.xls',
-    # '2017': 'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-8/table-8.xls',
+    '2018':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-8/table-8.xls',
+    '2017':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-8/table-8.xls',
+    # TODO(hanlu): preprocess 2016 data fail. Send PR to deal with it.
     # '2016': 'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-8/table-8.xls',
-    # '2015': 'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2015.xls',
-    # '2014': 'https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-8/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2014.xls',
-    # '2013': 'https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2013.xls',
-    # '2012': 'https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/8tabledatadecpdf/table_8_offenses_known_to_law_enforcement_by_state_by_city_2012.xls',
-    # '2011': 'https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table_8_offenses_known_to_law_enforcement_by_state_by_city_2011.xls',
-    # '2010': 'https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl08.xls',
-    # '2009': 'https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl08.xls',
-    # '2008': 'https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl08.xls',
+    '2015':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2015.xls',
+    '2014':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-8/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2014.xls',
+    '2013':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2013.xls',
+    '2012':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/8tabledatadecpdf/table_8_offenses_known_to_law_enforcement_by_state_by_city_2012.xls',
+    '2011':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table_8_offenses_known_to_law_enforcement_by_state_by_city_2011.xls',
+    # Sanity check 2008-2010 don't have duplicate city state.
+    '2010':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl08.xls',
+    '2009':
+        'https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl08.xls',
+    '2008':
+        'https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl08.xls',
 }
 
 
@@ -118,6 +129,84 @@ def _should_skip_special_line(year, field):
         return True
     if year == '2019' and field[_STATE_INDEX] == 'OREGON' and field[
             _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25959.0':
+        return True
+    if year == '2018' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2680.0':
+        return True
+    if year == '2018' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2753.0':
+        return True
+    if year == '2018' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '516.0':
+        return True
+    if year == '2017' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2694.0':
+        return True
+    if year == '2017' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2762.0':
+        return True
+    if year == '2017' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25771.0':
+        return True
+    if year == '2017' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '509.0':
+        return True
+    if year == '2015' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2743.0':
+        return True
+    if year == '2015' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2784.0':
+        return True
+    if year == '2015' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25599.0':
+        return True
+    if year == '2014' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2769.0':
+        return True
+    if year == '2014' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2806.0':
+        return True
+    if year == '2014' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '515.0':
+        return True
+    if year == '2013' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2778.0':
+        return True
+    if year == '2013' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2808.0':
+        return True
+    if year == '2013' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25583.0':
+        return True
+    if year == '2013' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '518.0':
+        return True
+    if year == '2012' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2807.0':
+        return True
+    if year == '2012' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2807.0':
+        return True
+    if year == '2012' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25662.0':
+        return True
+    if year == '2012' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '521.0':
+        return True
+    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2826.0':
+        return True
+    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2813.0':
+        return True
+    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25558.0':
+        return True
+    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Newport' and field[_POPULATION_INDEX] == '1579.0':
+        return True
+    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
+            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '521.0':
         return True
     return False
 
@@ -171,7 +260,7 @@ def calculate_crimes(r):
                                                         property_computed))
 
     # Category 3: Arson
-    arson = int_from_field(r['PropertyArson'])
+    arson = _int_from_field(r['PropertyArson'])
     r['PropertyArson'] = arson
 
     total = violent_computed + property_computed + arson
@@ -277,6 +366,8 @@ def update_and_calculate_crime_csv(geo_codes, crime_csv, calculated_csv):
 
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
+    geo_codes = geocode_cities.read_geocodes()
+
     for year, url in YEAR_TO_URL.items():
         response = requests.get(url)
         xls_file = year + '.xls'
@@ -295,7 +386,6 @@ if __name__ == '__main__':
                 logging.info('clean crime file for year %s', year)
                 clean_crime_file(f_input, f_output, year)
 
-    geo_codes = geocode_cities.read_geocodes()
-    # TODO(hanlu): update code logic to iterate over year
-    update_and_calculate_crime_csv(geo_codes, '2019_cleaned.csv',
-                                   '2019_calculated.csv')
+        # TODO(hanlu): Clean transient files.
+        update_and_calculate_crime_csv(geo_codes, year + '_cleaned.csv',
+                                       year + '_calculated.csv')
