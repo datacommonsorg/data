@@ -21,6 +21,7 @@ import csv
 import pandas as pd
 import numpy as np
 import urllib.request
+from os import path
 
 INDIA_ISO_CODES = {
     "Andhra Pradesh": "IN-AP",
@@ -177,11 +178,26 @@ class PLFSWageDataLoader:
         self._setup_location()
 
     def save(self, csv_file_path):
-        self.clean_df.to_csv(csv_file_path, index=False, header=True)
+        if path.exists(csv_file_path):
+            # If the file exists then append to the same
+            self.clean_df.to_csv(csv_file_path,
+                                 mode='a',
+                                 index=False,
+                                 header=False)
+        else:
+            self.clean_df.to_csv(csv_file_path, index=False, header=True)
 
 
 def main():
     """Runs the program."""
+
+    # If the final output csv already exists
+    # Remove it, so it can be regenerated
+    csv_file_path = os.path.join(os.path.dirname(__file__),
+                                 "./PLFSWageData_India.csv")
+    if path.exists(csv_file_path):
+        os.remove(csv_file_path)
+
     for dataset in DATASETS:
         period = dataset["period"]
         data_file = dataset["data_file"]
@@ -190,10 +206,6 @@ def main():
             "data/{data_file}.xlsx".format(data_file=data_file),
         )
         loader = PLFSWageDataLoader(data_file_path, period)
-        csv_file_path = os.path.join(
-            os.path.dirname(__file__),
-            "./PLFSWageData_India_{data_file}.csv".format(data_file=data_file))
-
         loader.load()
         loader.process()
         loader.save(csv_file_path)
