@@ -192,7 +192,7 @@ def main():
     """Runs the program."""
 
     # If the final output csv already exists
-    # Remove it, so it can regenerated
+    # Remove it, so it can be regenerated
     csv_file_path = os.path.join(os.path.dirname(__file__),
                                  "./PLFSWageData_India.csv")
     if path.exists(csv_file_path):
