@@ -19,12 +19,23 @@ import csv
 import json
 import pandas as pd
 
-# Prod REGION_DEMOGR_population.csv is stored at 
+# Prod REGION_DEMOGR_population.csv is stored at
 # https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919.
 # Copy it over before running preprocess_csv.
 
 # Process the dataset.
-df = pd.read_csv("REGION_DEMOGR_population.csv", sep='\t', low_memory=False)
+ag_df = []
+df1 = pd.read_csv("REGION_DEMOGR_population.csv",
+                  sep='\t',
+                  low_memory=False,
+                  index_col=None,
+                  header=0)
+# See README for how manual_curated_population is generated.
+df2 = pd.read_csv("manual_curated_population.csv", index_col=None, header=0)
+ag_df.append(df1)
+ag_df.append(df2)
+df = pd.concat(ag_df, axis=0, ignore_index=True)
+
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
