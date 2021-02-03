@@ -21,7 +21,7 @@ import pandas as pd
 
 # Prod REGION_DEMOGR_population.csv is stored at
 # https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919.
-# Copy it over before running preprocess_csv: 
+# Copy it over before running preprocess_csv:
 # gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv
 
 # Process the dataset.
@@ -37,6 +37,11 @@ ag_df.append(df1)
 ag_df.append(df2)
 df = pd.concat(ag_df, axis=0, ignore_index=True)
 
+# There can be AVG for national average, here we only care stats for Total Regions.
+df = df[df['POS'] == 'ALL']
+# Filter TL like "1_MR-L"(Country - Large metro TL3 regions)m "1_NMR-R"(Country - Remote TL3 regions).
+df = df[df['TL'].isin(['1', '2', '3'])]
+print(df)
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
@@ -51,6 +56,7 @@ df_cleaned = df.pivot_table(values='Value',
                             columns=['VAR', 'SEX'])
 df_cleaned = multi_index_to_single_index(df_cleaned)
 
+print(df_cleaned)
 VAR_to_statsvars = {
     'TT': 'Count_Person',
     'Y0_4T': 'Count_Person_Upto4Years',
