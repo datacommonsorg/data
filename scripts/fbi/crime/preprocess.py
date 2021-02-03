@@ -70,7 +70,8 @@ YEAR_TO_URL = {
         'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-8/table-8.xls',
     '2017':
         'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-8/table-8.xls',
-    '2016': 'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-8/table-8.xls',
+    '2016':
+        'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-8/table-8.xls',
     '2015':
         'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2015.xls',
     '2014':
@@ -122,96 +123,15 @@ def _int_from_field(f):
         return 0
 
 
-# When there is two entries for the same city, skip the one with wrong population data.
-def _should_skip_special_line(year, field):
-    if year == '2019' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2670.0':
-        return True
-    if year == '2019' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25959.0':
-        return True
-    if year == '2018' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2680.0':
-        return True
-    if year == '2018' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2753.0':
-        return True
-    if year == '2018' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '516.0':
-        return True
-    if year == '2017' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2694.0':
-        return True
-    if year == '2017' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2762.0':
-        return True
-    if year == '2017' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25771.0':
-        return True
-    if year == '2017' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '509.0':
-        return True
-    if year == '2015' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2743.0':
-        return True
-    if year == '2015' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2784.0':
-        return True
-    if year == '2015' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25599.0':
-        return True
-    if year == '2014' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2769.0':
-        return True
-    if year == '2014' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2806.0':
-        return True
-    if year == '2014' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '515.0':
-        return True
-    if year == '2013' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2778.0':
-        return True
-    if year == '2013' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2808.0':
-        return True
-    if year == '2013' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25583.0':
-        return True
-    if year == '2013' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '518.0':
-        return True
-    if year == '2012' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2807.0':
-        return True
-    if year == '2012' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2807.0':
-        return True
-    if year == '2012' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25662.0':
-        return True
-    if year == '2012' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '521.0':
-        return True
-    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Ashland' and field[_POPULATION_INDEX] == '2826.0':
-        return True
-    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Dallas' and field[_POPULATION_INDEX] == '2813.0':
-        return True
-    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Lebanon' and field[_POPULATION_INDEX] == '25558.0':
-        return True
-    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Newport' and field[_POPULATION_INDEX] == '1579.0':
-        return True
-    if year == '2011' and field[_STATE_INDEX] == 'OREGON' and field[
-            _CITY_INDEX] == 'Portland' and field[_POPULATION_INDEX] == '521.0':
-        return True
-    # 2016 CSV has footnote that we want to skip here.
-    if year == '2016' and field[_STATE_INDEX] is None:
-        return True
-    return False
+# Trim 2016 state name.
+def _get_2016_state(state):
+    substring1 = ' - Metropolitan Counties'
+    if substring1 in state:
+        return state.replace(substring1, '')
+    substring2 = ' - Nonmetropolitan Counties'
+    if substring2 in state:
+        return state.replace(substring2, '')
+    return state
 
 
 def calculate_crimes(r):
@@ -273,16 +193,6 @@ def calculate_crimes(r):
     r['Property'] = property_computed
 
 
-def _get_2016_state(state):
-    state_suffix_1 = ' - Nonmetropolitan Counties'
-    if state_suffix_1 in state:
-        return state.replace(state_suffix_1, '')
-
-    state_suffix_2 = ' - Metropolitan Counties'
-    if state_suffix_2 in state: #state.endswith(state_suffix_2):
-        return state.replace(state_suffix_2, '')
-
-    
 def clean_crime_file(f_input, f_output, year):
     """Clean a tsv file of crime statistics.
 
@@ -307,7 +217,13 @@ def clean_crime_file(f_input, f_output, year):
         if line.startswith('#'):
             count_comments += 1
             continue
-        field = line.split(',')
+        # Split by comma and exclude comma from quotes in split
+        # For case like PENNSYLVANIA,"Abington Township, Montgomery County",55476.0,53.0,0.0,6.0,0,15.0,32.0,934.0,32.0,883.0,19.0,2.0
+        field = [
+            '"{}"'.format(x)
+            for x in list(csv.reader([line], delimiter=',', quotechar='"'))[0]
+        ]
+
         # Skip incomplete lines
         if len(field) < _FIELDS_IN_CRIME_FILE:
             count_incomplete_lines += 1
@@ -337,10 +253,6 @@ def clean_crime_file(f_input, f_output, year):
         # Remove any numeric characters from city names.
         field[_CITY_INDEX] = _remove_digits(field[_CITY_INDEX])
         count_city += 1
-
-        # If duplicate lines or footnote lines. 
-        if _should_skip_special_line(year, field):
-            continue
 
         # Keep the first n fields. Some of the files contain extra empty fields.
         output_line = '{},{}\n'.format(year,
@@ -404,7 +316,7 @@ if __name__ == '__main__':
         update_and_calculate_crime_csv(geo_codes, year + '_cleaned.csv',
                                        year + '_calculated.csv')
 
-        # Clean files.  
+        # Clean intermediate files.
         os.remove(xls_file)
         os.remove(csv_file)
         os.remove(cleaned_csv_file)
