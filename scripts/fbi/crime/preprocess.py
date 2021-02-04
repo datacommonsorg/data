@@ -56,7 +56,31 @@ _CRIME_FIELDS = [
     'PropertyArson',
 ]
 
-_CALCULATED_CRIME_FIELDS = _CRIME_FIELDS + ['Total', 'Geocode']
+GEO_CODE = 'Geocode'
+TOTAL = 'Total'
+
+OUTPUT_COLUMNS = [
+    'Year', 'GeoId', 'Count_CriminalActivities_ViolentCrime',
+    'Count_CriminalActivities_MurderAndNonNegligentManslaughter',
+    'Count_CriminalActivities_ForcibleRape', 'Count_CriminalActivities_Robbery',
+    'Count_CriminalActivities_AggravatedAssault',
+    'Count_CriminalActivities_PropertyCrime',
+    'Count_CriminalActivities_Burglary',
+    'Count_CriminalActivities_LarcenyTheft',
+    'Count_CriminalActivities_MotorVehicleTheft',
+    'Count_CriminalActivities_Arson', 'Count_CriminalActivities_CombinedCrime'
+]
+
+# Automate Template MCF generation since there are many Statitical Variables.
+TEMPLATE_MCF_TEMPLATE = """
+Node: E:FBI_Crime->E{index}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+measurementMethod: dcs:FBI_Crime
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->YEAR
+value: C:FBI_Crime->{stat_var}
+"""
 
 # From 2013-2016, the FBI reported statistics for two different definitions of rape before fully transitioning to the current definition in 2017.
 # We add a dummy column after it (so allyears have two Rape columns).
@@ -188,7 +212,7 @@ def calculate_crimes(r):
 
     total = violent_computed + property_computed + arson
     # Write back the totals
-    r['Total'] = total
+    r[TOTAL] = total
     r['Violent'] = violent_computed
     r['Property'] = property_computed
 
@@ -266,21 +290,46 @@ def clean_crime_file(f_input, f_output, year):
     logging.info('%d states', count_state)
 
 
-def update_and_calculate_crime_csv(geo_codes, crime_csv, calculated_csv):
+def update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
     with open(crime_csv) as crime_f:
         crimes = csv.DictReader(crime_f, fieldnames=_CRIME_FIELDS)
-        with open(calculated_csv, 'w') as csv_output_f:
-            writer = csv.DictWriter(csv_output_f,
-                                    fieldnames=_CALCULATED_CRIME_FIELDS)
 
-            found_set = set()
-            cities_not_found_set = set()
-            for crime in crimes:
-                if geocode_cities.update_crime_geocode(crime, geo_codes,
-                                                       found_set,
-                                                       cities_not_found_set):
-                    calculate_crimes(crime)
-                    writer.writerow(crime)
+        found_set = set()
+        cities_not_found_set = set()
+        for crime in crimes:
+            if geocode_cities.update_crime_geocode(crime, geo_codes, found_set,
+                                                   cities_not_found_set):
+                calculate_crimes(crime)
+
+                processed_dict = {
+                    'Year':
+                        crime['Year'],
+                    'GeoId':
+                        "dcid:geoId/{}".format(crime[GEO_CODE]),
+                    'Count_CriminalActivities_ViolentCrime':
+                        crime['Violent'],
+                    'Count_CriminalActivities_MurderAndNonNegligentManslaughter':
+                        crime['ViolentMurderAndNonNegligentManslaughter'],
+                    'Count_CriminalActivities_ForcibleRape':
+                        crime['ViolentRape'],
+                    'Count_CriminalActivities_Robbery':
+                        crime['ViolentRobbery'],
+                    'Count_CriminalActivities_AggravatedAssault':
+                        crime['ViolentAggravatedAssault'],
+                    'Count_CriminalActivities_PropertyCrime':
+                        crime['Property'],
+                    'Count_CriminalActivities_Burglary':
+                        crime['PropertyBurglary'],
+                    'Count_CriminalActivities_LarcenyTheft':
+                        crime['PropertyLarcenyTheft'],
+                    'Count_CriminalActivities_MotorVehicleTheft':
+                        crime['PropertyMotorVehicleTheft'],
+                    'Count_CriminalActivities_Arson':
+                        crime['PropertyArson'],
+                    'Count_CriminalActivities_CombinedCrime':
+                        crime[TOTAL],
+                }
+                writer.writerow(processed_dict)
 
         # Output the cities not_found
         with open('city_not_found.txt', 'w') as cities_not_found_f:
@@ -291,32 +340,48 @@ def update_and_calculate_crime_csv(geo_codes, crime_csv, calculated_csv):
             len(found_set), len(cities_not_found_set)))
 
 
+def create_tmcf_file(tmcf_file_path):
+    stat_vars = OUTPUT_COLUMNS[2:]
+    with open(tmcf_file_path, 'w', newline='') as f_out:
+        for i in range(len(stat_vars)):
+            f_out.write(
+                TEMPLATE_MCF_TEMPLATE.format_map({
+                    'index': i,
+                    'stat_var': OUTPUT_COLUMNS[2:][i]
+                }))
+
+
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
     geo_codes = geocode_cities.read_geocodes()
 
-    for year, url in YEAR_TO_URL.items():
-        response = requests.get(url)
-        xls_file = year + '.xls'
-        csv_file = year + '.csv'
-        cleaned_csv_file = year + '_cleaned.csv'
-        with open(xls_file, 'wb') as file:
-            file.write(response.content)
-        read_file = pd.read_excel(xls_file, skiprows=[0, 1, 2])
-        if year in YEARS_WITHOUT_POPULATION_COLUMN:
-            read_file.insert(_POPULATION_INDEX, 'Population', 1)
-        if year not in YEARS_WITH_TWO_RAPE_COLUMNS:
-            read_file.insert(_DUMMY_RAPE_INDEX, 'Dummy', 0)
-        read_file.to_csv(csv_file, index=None, header=True)
-        with open(csv_file, "r") as f_input:
-            with open(cleaned_csv_file, "w") as f_output:
-                logging.info('clean crime file for year %s', year)
-                clean_crime_file(f_input, f_output, year)
+    with open('calculated_crime.csv', 'w') as csv_output_f:
+        writer = csv.DictWriter(csv_output_f, fieldnames=OUTPUT_COLUMNS)
+        writer.writeheader()
 
-        update_and_calculate_crime_csv(geo_codes, year + '_cleaned.csv',
-                                       year + '_calculated.csv')
+        for year, url in YEAR_TO_URL.items():
+            response = requests.get(url)
+            xls_file = year + '.xls'
+            csv_file = year + '.csv'
+            cleaned_csv_file = year + '_cleaned.csv'
+            with open(xls_file, 'wb') as file:
+                file.write(response.content)
+            read_file = pd.read_excel(xls_file, skiprows=[0, 1, 2])
+            if year in YEARS_WITHOUT_POPULATION_COLUMN:
+                read_file.insert(_POPULATION_INDEX, 'Population', 1)
+            if year not in YEARS_WITH_TWO_RAPE_COLUMNS:
+                read_file.insert(_DUMMY_RAPE_INDEX, 'Dummy', 0)
+            read_file.to_csv(csv_file, index=None, header=True)
+            with open(csv_file, "r") as f_input:
+                with open(cleaned_csv_file, "w") as f_output:
+                    logging.info('clean crime file for year %s', year)
+                    clean_crime_file(f_input, f_output, year)
 
-        # Clean intermediate files.
-        os.remove(xls_file)
-        os.remove(csv_file)
-        os.remove(cleaned_csv_file)
+            update_and_calculate_crime_csv(geo_codes, cleaned_csv_file, writer)
+
+            # Clean intermediate files.
+            os.remove(xls_file)
+            os.remove(csv_file)
+            os.remove(cleaned_csv_file)
+
+    create_tmcf_file("FBI_Crime.tmcf")
