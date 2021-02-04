@@ -78,7 +78,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:FBI_Crime
 observationAbout: C:FBI_Crime->GeoId
-observationDate: C:FBI_Crime->YEAR
+observationDate: C:FBI_Crime->Year
 value: C:FBI_Crime->{stat_var}
 """
 
@@ -384,4 +384,4 @@ if __name__ == '__main__':
             os.remove(csv_file)
             os.remove(cleaned_csv_file)
 
-    create_tmcf_file("FBI_Crime.tmcf")
+    create_tmcf_file("FBI_crime.tmcf")
