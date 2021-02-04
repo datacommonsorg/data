@@ -92,7 +92,7 @@ class CleanCrimeFileTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             expected_tmcf_file = os.path.join(
                 module_dir_, 'test_data/expected_fbi_crime.tmcf')
-            result_tmcf_file = os.path.join(tmp_dir, 'FBI_Crime.tmcf')
+            result_tmcf_file = os.path.join(tmp_dir, 'FBI_crime.tmcf')
 
             create_tmcf_file(result_tmcf_file)
 
