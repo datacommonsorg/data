@@ -36,10 +36,10 @@ This has some issues, which we are working on, but in the meantime, contact us f
 
 In each subdirectory, the source CSVs are saved as `REGION_DEMOGR_{subdirectory name}.csv`, except population. 
 
-Population raw data is stored at [here](https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919) since it's quite big. 
+Population raw data is stored [here](https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919) since it's quite big. 
 To copy raw CSV into the population directory, run:
 ```bash
-gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv
+gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv .
 ```
 
 Population raw CSV is missing data for region_id CL16. To add the missing data, we created manual_curated_population.csv with command 
