@@ -9,3 +9,4 @@ requests
 urllib3
 zipp
 xlrd==1.2.0
+progressbar2
