@@ -15,7 +15,7 @@ and it relies on these statistic variables:
 - From 2013-2016, the FBI reported statistics for two different definitions of rape before fully transitioning to the current definition in 2017. We add a dummy column after it (so all years have two Rape columns).
 - 2016 FBI reported data is missing population. We blindly add one column with value 1. 
 - For duplicate city data, we remove the one with wrong population data (Google search city population). 
-When it happens, you will see error message like "duplicate city state". Add logic in clean_crime_file to ignore the wrong one. 
+When it happens, you will see error message like "duplicate city state". Add logic in clean_crime_file() function to ignore the wrong one. 
 
 ## Generating Artifacts:
 
