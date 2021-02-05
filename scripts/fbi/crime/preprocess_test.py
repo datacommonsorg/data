@@ -16,7 +16,7 @@ import filecmp
 import os
 import tempfile
 import unittest
-from preprocess import clean_crime_file
+from preprocess import create_formatted_csv_file
 from preprocess import calculate_crimes
 
 # module_dir_ is the path to where this test is running from.
@@ -27,24 +27,20 @@ class CleanCrimeFileTest(unittest.TestCase):
 
     def test_clean_crime_file(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            # TODO(hanlu): take this CSV as input, run update_and_calculate_crime_csv and validate geocodes e2e2.
             test_csv_file = os.path.join(module_dir_,
                                          'test_data/test_data_basic.csv')
-            result_csv_file = os.path.join(tmp_dir, 'cleaned_data_basic.csv')
+            result_csv_file = os.path.join(tmp_dir, 'city_crime.csv')
             expected_csv_file = os.path.join(
-                module_dir_, 'test_data/expected_cleaned_data_basic.csv')
-            year = '2019'
-            with open(test_csv_file, "r") as f_input:
-                with open(result_csv_file, "w") as f_output:
-                    clean_crime_file(f_input, f_output, year)
+                module_dir_, 'test_data/expected_city_crime.csv')
+            create_formatted_csv_file([test_csv_file], result_csv_file)
 
-                with open(result_csv_file, "r") as result_f:
-                    result_str: str = result_f.read()
-                    with open(expected_csv_file, "r") as expect_f:
-                        expect_str: str = expect_f.read()
-                        self.assertEqual(result_str, expect_str)
+            with open(result_csv_file, "r") as result_f:
+                result_str: str = result_f.read()
+                with open(expected_csv_file, "r") as expect_f:
+                    expect_str: str = expect_f.read()
+                    self.assertEqual(result_str, expect_str)
 
-                os.remove(result_csv_file)
+            # os.remove(result_csv_file)
 
     def test_calculate_crimes(self):
         crime = {

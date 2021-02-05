@@ -29,11 +29,12 @@ import geocode_cities
 # 2019, 2018, 2017
 # The FBI does not publish arson data unless it receives data from either the agency or the state for all 12 months of the calendar year.
 
-_FIELDS_IN_CRIME_FILE = 14
-_POPULATION_INDEX = 2
-_STATE_INDEX = 0
-_CITY_INDEX = 1
-_DUMMY_RAPE_INDEX = 6
+_FIELDS_IN_CRIME_FILE = 15
+_POPULATION_INDEX = 3
+_YEAR_INDEX = 0
+_STATE_INDEX = 1
+_CITY_INDEX = 2
+_DUMMY_RAPE_INDEX = 7
 
 _CRIME_FIELDS = [
     'Year',
@@ -146,13 +147,6 @@ def _int_from_field(f):
         return 0
 
 
-# Trim 2016 state name.
-def _get_2016_state(state):
-    state = state.replace(' - Metropolitan Counties', '')
-    state = state.replace(' - Nonmetropolitan Counties', '')
-    return state
-
-
 def calculate_crimes(r):
     # Return the violent, property, arson crimes & total
     # If a field is empty, it is treated as 0
@@ -212,7 +206,7 @@ def calculate_crimes(r):
     r['Property'] = property_computed
 
 
-def clean_crime_file(f_input, f_output, year):
+def clean_crime_file(f_input, f_output):
     """Clean a tsv file of crime statistics.
 
     The input contains crime statistics, one for every city.
@@ -222,7 +216,6 @@ def clean_crime_file(f_input, f_output, year):
     Args:
         f_input: file object with crime statistics, one per city.
         f_output: outputstream for writing the cleaned statistics.
-        year: year string this input about. 
     """
     state = ''
     count_line = 0
@@ -265,17 +258,13 @@ def clean_crime_file(f_input, f_output, year):
         if field[_STATE_INDEX]:
             # Remove numeric values from state names (comes from footnotes)
             state = _remove_digits(field[_STATE_INDEX])
-            if year == "2016":
-                state = _get_2016_state(state)
             count_state += 1
         field[_STATE_INDEX] = state
         # Remove any numeric characters from city names.
         field[_CITY_INDEX] = _remove_digits(field[_CITY_INDEX])
         count_city += 1
 
-        # Keep the first n fields. Some of the files contain extra empty fields.
-        output_line = '{},{}\n'.format(year,
-                                       ','.join(field[:_FIELDS_IN_CRIME_FILE]))
+        output_line = '{}\n'.format(','.join(field[:_FIELDS_IN_CRIME_FILE]))
         f_output.write(output_line)
 
     logging.info('lines: %d, comments: %d, incomplete: %d, header_footer:%d',
@@ -286,7 +275,7 @@ def clean_crime_file(f_input, f_output, year):
 
 
 def update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
-    with open(crime_csv) as crime_f:
+    with open(crime_csv, "r") as crime_f:
         crimes = csv.DictReader(crime_f, fieldnames=_CRIME_FIELDS)
 
         found_set = set()
@@ -346,35 +335,48 @@ def create_tmcf_file(tmcf_file_path):
                 }))
 
 
-if __name__ == '__main__':
-    logging.getLogger().setLevel(logging.INFO)
+def create_formatted_csv_file(csv_files, city_output):
     geo_codes = geocode_cities.read_geocodes()
 
-    with open('calculated_crime.csv', 'w') as csv_output_f:
+    with open(city_output, 'w') as csv_output_f:
         writer = csv.DictWriter(csv_output_f, fieldnames=OUTPUT_COLUMNS)
         writer.writeheader()
 
-        for year, url in YEAR_TO_URL.items():
-            response = requests.get(url)
-            xls_file = year + '.xls'
-            csv_file = year + '.csv'
-            cleaned_csv_file = year + '_cleaned.csv'
-            with open(xls_file, 'wb') as file:
-                file.write(response.content)
-            read_file = pd.read_excel(xls_file, skiprows=[0, 1, 2])
-            if year not in YEARS_WITH_TWO_RAPE_COLUMNS:
-                read_file.insert(_DUMMY_RAPE_INDEX, 'Dummy', 0)
-            read_file.to_csv(csv_file, index=None, header=True)
+        for csv_file in csv_files:
             with open(csv_file, "r") as f_input:
+                cleaned_csv_file = 'cleaned_file.csv'
                 with open(cleaned_csv_file, "w") as f_output:
-                    logging.info('clean crime file for year %s', year)
-                    clean_crime_file(f_input, f_output, year)
+                    logging.info('clean crime file for csv file %s', csv_file)
+                    clean_crime_file(f_input, f_output)
 
-            update_and_calculate_crime_csv(geo_codes, cleaned_csv_file, writer)
+                update_and_calculate_crime_csv(geo_codes, cleaned_csv_file, writer)
 
-            # Clean intermediate files.
-            os.remove(xls_file)
-            os.remove(csv_file)
-            os.remove(cleaned_csv_file)
+                # Remove intermediate files.
+                os.remove(cleaned_csv_file)
+
+
+if __name__ == '__main__':
+    logging.getLogger().setLevel(logging.INFO)
+
+    csv_files = []
+    for year, url in YEAR_TO_URL.items():
+        response = requests.get(url)
+        xls_file = year + '.xls'
+        csv_file = year + '.csv'
+        with open(xls_file, 'wb') as file:
+            file.write(response.content)
+        read_file = pd.read_excel(xls_file, skiprows=[0, 1, 2])
+        read_file.insert(_YEAR_INDEX, 'Year', year)
+        if year not in YEARS_WITH_TWO_RAPE_COLUMNS:
+            read_file.insert(_DUMMY_RAPE_INDEX, 'Dummy', 0)
+        read_file.to_csv(csv_file, index=None, header=True)
+        csv_files.append(csv_file)
+        os.remove(xls_file)
+
+    create_formatted_csv_file(csv_files, 'city_crime.csv')
 
     create_tmcf_file("FBI_crime.tmcf")
+
+    # Remove intermediate files.
+    for csv_file in csv_files:
+        os.remove(csv_file)
