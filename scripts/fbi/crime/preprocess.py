@@ -147,7 +147,7 @@ def _int_from_field(f):
         return 0
 
 
-def calculate_crimes(r):
+def _calculate_crimes(r):
     # Return the violent, property, arson crimes & total
     # If a field is empty, it is treated as 0
 
@@ -206,7 +206,7 @@ def calculate_crimes(r):
     r['Property'] = property_computed
 
 
-def clean_crime_file(f_input, f_output):
+def _clean_crime_file(f_input, f_output):
     """Clean a tsv file of crime statistics.
 
     The input contains crime statistics, one for every city.
@@ -274,7 +274,7 @@ def clean_crime_file(f_input, f_output):
     logging.info('%d states', count_state)
 
 
-def update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
+def _update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
     with open(crime_csv, "r") as crime_f:
         crimes = csv.DictReader(crime_f, fieldnames=_CRIME_FIELDS)
 
@@ -283,7 +283,7 @@ def update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
         for crime in crimes:
             if geocode_cities.update_crime_geocode(crime, geo_codes, found_set,
                                                    cities_not_found_set):
-                calculate_crimes(crime)
+                _calculate_crimes(crime)
 
                 processed_dict = {
                     'Year':
@@ -347,9 +347,10 @@ def create_formatted_csv_file(csv_files, city_output):
                 cleaned_csv_file = 'cleaned_file.csv'
                 with open(cleaned_csv_file, "w") as f_output:
                     logging.info('clean crime file for csv file %s', csv_file)
-                    clean_crime_file(f_input, f_output)
+                    _clean_crime_file(f_input, f_output)
 
-                update_and_calculate_crime_csv(geo_codes, cleaned_csv_file, writer)
+                _update_and_calculate_crime_csv(geo_codes, cleaned_csv_file,
+                                                writer)
 
                 # Remove intermediate files.
                 os.remove(cleaned_csv_file)
@@ -358,6 +359,8 @@ def create_formatted_csv_file(csv_files, city_output):
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
 
+    # Script XML and convert to CSV.
+    # Add year as the first column and second rape column is not there.
     csv_files = []
     for year, url in YEAR_TO_URL.items():
         response = requests.get(url)
