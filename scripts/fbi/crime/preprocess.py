@@ -149,12 +149,8 @@ def _int_from_field(f):
 
 # Trim 2016 state name.
 def _get_2016_state(state):
-    substring1 = ' - Metropolitan Counties'
-    if substring1 in state:
-        return state.replace(substring1, '')
-    substring2 = ' - Nonmetropolitan Counties'
-    if substring2 in state:
-        return state.replace(substring2, '')
+    state = state.replace(' - Metropolitan Counties', '')
+    state = state.replace(' - Nonmetropolitan Counties', '')
     return state
 
 
@@ -347,7 +343,7 @@ def create_tmcf_file(tmcf_file_path):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
                     'index': i,
-                    'stat_var': OUTPUT_COLUMNS[2:][i]
+                    'stat_var': stat_vars[i]
                 }))
 
 
