@@ -19,8 +19,28 @@ import csv
 import json
 import pandas as pd
 
+# Prod REGION_DEMOGR_population.csv is stored at
+# https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919.
+# Copy it over before running preprocess_csv:
+# gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv
+
 # Process the dataset.
-df = pd.read_csv('REGION_DEMOGR_population_tl2.csv')
+ag_df = []
+df1 = pd.read_csv("REGION_DEMOGR_population.csv",
+                  sep='\t',
+                  low_memory=False,
+                  index_col=None,
+                  header=0)
+# See README for how manual_curated_population is generated.
+df2 = pd.read_csv("manual_curated_population.csv", index_col=None, header=0)
+ag_df.append(df1)
+ag_df.append(df2)
+df = pd.concat(ag_df, axis=0, ignore_index=True)
+
+# There can be AVG for national average, here we only care stats for Total Regions.
+df = df[df['POS'] == 'ALL']
+# Filter TL like "1_MR-L"(Country - Large metro TL3 regions)m "1_NMR-R"(Country - Remote TL3 regions).
+df = df[df['TL'].isin(['1', '2', '3'])]
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
@@ -29,8 +49,6 @@ df = df[df['REG_ID'].isin(regid2dcid.keys())]
 df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
 
 df['Year'] = '"' + df['Year'].astype(str) + '"'
-
-df = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 
 df_cleaned = df.pivot_table(values='Value',
                             index=['REG_ID', 'Region', 'Year'],
@@ -104,24 +122,34 @@ VAR_to_statsvars = {
 }
 
 df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv('OECD_population_tl2_cleaned.csv',
+
+# Drop columns that are not related with populations.
+drop_cols = []
+csv_columns = {'REG_ID', 'Region', 'Year'}
+csv_columns.update(VAR_to_statsvars.values())
+for col in df_cleaned.columns:
+    if col not in csv_columns:
+        drop_cols.append(col)
+df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
+
+df_cleaned.to_csv('OECD_population_cleaned.csv',
                   index=False,
                   quoting=csv.QUOTE_NONE)
 
 # Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """
-Node: E:OECD_population_tl2_cleaned->E{index}
+Node: E:OECD_population_cleaned->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: C:OECD_population_tl2_cleaned->Region
-observationDate: C:OECD_population_tl2_cleaned->Year
+observationAbout: C:OECD_population_cleaned->Region
+observationDate: C:OECD_population_cleaned->Year
 observationPeriod: "P1Y"
-value: C:OECD_population_tl2_cleaned->{stat_var}
+value: C:OECD_population_cleaned->{stat_var}
 """
 
 stat_vars = df_cleaned.columns[3:]
-with open('OECD_population_tl2.tmcf', 'w', newline='') as f_out:
+with open('OECD_population.tmcf', 'w', newline='') as f_out:
     for i in range(len(stat_vars)):
         f_out.write(
             TEMPLATE_MCF_TEMPLATE.format_map({
