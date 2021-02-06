@@ -359,7 +359,7 @@ def create_formatted_csv_file(csv_files, city_output):
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
 
-    # Script XML and convert to CSV.
+    # Script XLS and convert to CSV.
     # Add year as the first column and second rape column is not there.
     csv_files = []
     for year, url in YEAR_TO_URL.items():
