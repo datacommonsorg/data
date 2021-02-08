@@ -4,7 +4,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Household_Rural
 description: "Number of Households - Rural"
@@ -12,7 +12,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_Urban_Male
 description: "Total Males - Urban"
@@ -20,7 +20,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_Rural_Male
@@ -29,7 +29,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_Urban_Female
@@ -38,7 +38,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_Rural_Female
@@ -47,7 +47,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_Worked3To6Months
@@ -71,7 +71,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_Worked3To6Months_Rural
 description: "Marginal Cultivators- worked for 3 months or more but less than 6 months - Rural"
@@ -83,7 +83,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_Worked3To6Months_Male
 description: "Male Marginal Cultivators- worked for 3 months or more but less than 6 months"
@@ -107,7 +107,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_Worked3To6Months_Rural_Male
@@ -120,7 +120,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_Worked3To6Months_Female
@@ -145,7 +145,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_Worked3To6Months_Rural_Female
@@ -158,7 +158,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_Worked3To6Months
@@ -182,7 +182,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Rural
 description: "Marginal Agricultural Labourers- worked for 3 months or more but less than 6 months - Rural"
@@ -194,7 +194,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Male
 description: "Male Marginal Agricultural Labourers- worked for 3 months or more but less than 6 months"
@@ -218,7 +218,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Rural_Male
@@ -231,7 +231,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Female
@@ -256,7 +256,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_Worked3To6Months_Rural_Female
@@ -269,7 +269,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_Worked3To6Months
@@ -293,7 +293,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_Worked3To6Months_Rural
 description: "Marginal workers in Household Industries- worked for 3 months or more but less than 6 months - Rural"
@@ -305,7 +305,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_Worked3To6Months_Male
 description: "Male Marginal workers in Household Industries- worked for 3 months or more but less than 6 months"
@@ -329,7 +329,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_Worked3To6Months_Rural_Male
@@ -342,7 +342,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_Worked3To6Months_Female
@@ -367,7 +367,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_Worked3To6Months_Rural_Female
@@ -380,7 +380,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_Worked3To6Months
@@ -404,7 +404,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_Worked3To6Months_Rural
 description: "Marginal Other workers- worked for 3 months or more but less than 6 months - Rural"
@@ -416,7 +416,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_Worked3To6Months_Male
 description: "Male Marginal Other workers- worked for 3 months or more but less than 6 months"
@@ -440,7 +440,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_Worked3To6Months_Rural_Male
@@ -453,7 +453,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_Worked3To6Months_Female
@@ -478,7 +478,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_Worked3To6Months_Rural_Female
@@ -491,7 +491,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month 3 6]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_WorkedUpto3Months
@@ -513,7 +513,7 @@ measuredProperty: dcs:count
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_WorkedUpto3Months_Rural
 description: "Marginal Workers- worked for less than 3 months - Rural"
@@ -524,7 +524,7 @@ measuredProperty: dcs:count
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_WorkedUpto3Months_Male
 description: "Male Marginal Workers- worked for less than 3 months"
@@ -546,7 +546,7 @@ measuredProperty: dcs:count
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_WorkedUpto3Months_Rural_Male
@@ -558,7 +558,7 @@ measuredProperty: dcs:count
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_WorkedUpto3Months_Female
@@ -581,7 +581,7 @@ measuredProperty: dcs:count
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_WorkedUpto3Months_Rural_Female
@@ -593,7 +593,7 @@ measuredProperty: dcs:count
 workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_WorkedUpto3Months
@@ -617,7 +617,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_WorkedUpto3Months_Rural
 description: "Marginal Cultivators- worked for less than 3 months - Rural"
@@ -629,7 +629,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_WorkedUpto3Months_Male
 description: "Male Marginal Cultivators- worked for less than 3 months"
@@ -653,7 +653,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_WorkedUpto3Months_Rural_Male
@@ -666,7 +666,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_WorkedUpto3Months_Female
@@ -691,7 +691,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_Cultivators_WorkedUpto3Months_Rural_Female
@@ -704,7 +704,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:Cultivators
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months
@@ -728,7 +728,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Rural
 description: "Marginal Agricultural Labourers- worked for less than 3 months - Rural"
@@ -740,7 +740,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Male
 description: "Male Marginal Agricultural Labourers- worked for less than 3 months"
@@ -764,7 +764,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Rural_Male
@@ -777,7 +777,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Female
@@ -802,7 +802,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_AgriculturalLabourers_WorkedUpto3Months_Rural_Female
@@ -815,7 +815,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:AgriculturalLabourers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_WorkedUpto3Months
@@ -839,7 +839,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Rural
 description: "Marginal workers in Household Industries- worked for less than 3 months - Rural"
@@ -851,7 +851,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Male
 description: "Male Marginal workers in Household Industries- worked for less than 3 months"
@@ -875,7 +875,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Rural_Male
@@ -888,7 +888,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Female
@@ -913,7 +913,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_HouseholdIndustries_WorkedUpto3Months_Rural_Female
@@ -926,7 +926,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:HouseholdIndustries
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_WorkedUpto3Months
@@ -950,7 +950,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_WorkedUpto3Months_Rural
 description: "Marginal Other workers - Rural"
@@ -962,7 +962,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_WorkedUpto3Months_Male
 description: "Male Marginal Other workers"
@@ -986,7 +986,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_WorkedUpto3Months_Rural_Male
@@ -999,7 +999,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_WorkedUpto3Months_Female
@@ -1024,7 +1024,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_MarginalWorker_OtherWorkers_WorkedUpto3Months_Rural_Female
@@ -1037,7 +1037,7 @@ workerStatus: dcs:Worker
 workerClassification: dcs:MarginalWorker
 workCategory: dcs:OtherWorkers
 workPeriod:[Month - 3]
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Count_Person_NonWorker
@@ -1055,7 +1055,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Count_Person_NonWorker_Rural
 description: "Non-Workers - Rural"
@@ -1064,7 +1064,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Count_Person_NonWorker_Male
 description: "Male Non-Workers"
@@ -1082,7 +1082,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Count_Person_NonWorker_Rural_Male
@@ -1092,7 +1092,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Count_Person_NonWorker_Female
@@ -1111,7 +1111,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Count_Person_NonWorker_Rural_Female
@@ -1121,6 +1121,6 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 workerStatus: dcs:NonWorker
-placeOfResidence: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
