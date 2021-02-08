@@ -18,6 +18,7 @@ import tempfile
 import unittest
 from preprocess import create_formatted_csv_file
 from preprocess import calculate_crimes
+from preprocess import create_tmcf_file
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -82,6 +83,22 @@ class CleanCrimeFileTest(unittest.TestCase):
                 'Total': 472,
                 'Geocode': '5556375'
             })
+
+    def test_create_tmcf(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            expected_tmcf_file = os.path.join(
+                module_dir_, 'test_data/expected_fbi_crime.tmcf')
+            result_tmcf_file = os.path.join(tmp_dir, 'FBI_crime.tmcf')
+
+            create_tmcf_file(result_tmcf_file)
+
+            with open(result_tmcf_file, "r") as result_f:
+                result_str: str = result_f.read()
+                with open(expected_tmcf_file, "r") as expect_f:
+                    expect_str: str = expect_f.read()
+                    self.assertEqual(result_str, expect_str)
+
+            os.remove(result_tmcf_file)
 
 
 if __name__ == '__main__':

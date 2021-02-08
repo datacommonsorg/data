@@ -258,6 +258,8 @@ def _clean_crime_file(f_input, f_output):
         if field[_STATE_INDEX]:
             # Remove numeric values from state names (comes from footnotes)
             state = _remove_digits(field[_STATE_INDEX])
+            if year == "2016":
+                state = _get_2016_state(state)
             count_state += 1
         field[_STATE_INDEX] = state
         # Remove any numeric characters from city names.
