@@ -87,27 +87,27 @@ INDIA_ISO_CODES = {
 DATASETS = [{
     "data_file": "T_13091EFB2ADFEA47CAA069BEE53BD82F14.xlsx",
     "sheet_no": 0,
-    "statisticalVariable": "dcid:UnemploymentRate_Person_Urban_Male"
+    "statisticalVariable": "dcs:UnemploymentRate_Person_Urban_Male"
 }, {
     "data_file": "T_13091EFB2ADFEA47CAA069BEE53BD82F14.xlsx",
     "sheet_no": 1,
-    "statisticalVariable": "dcid:UnemploymentRate_Person_Urban_Female"
+    "statisticalVariable": "dcs:UnemploymentRate_Person_Urban_Female"
 }, {
     "data_file": "T_13091EFB2ADFEA47CAA069BEE53BD82F14.xlsx",
     "sheet_no": 2,
-    "statisticalVariable": "dcid:UnemploymentRate_Person_Urban"
+    "statisticalVariable": "dcs:UnemploymentRate_Person_Urban"
 }, {
     "data_file": "T_123C6CE499AEFB461E8242E14098242CA5.xlsx",
     "sheet_no": 0,
-    "statisticalVariable": "dcid:UnemploymentRate_Person_Rural_Male"
+    "statisticalVariable": "dcs:UnemploymentRate_Person_Rural_Male"
 }, {
     "data_file": "T_123C6CE499AEFB461E8242E14098242CA5.xlsx",
     "sheet_no": 1,
-    "statisticalVariable": "dcid:UnemploymentRate_Person_Rural_Female"
+    "statisticalVariable": "dcs:UnemploymentRate_Person_Rural_Female"
 }, {
     "data_file": "T_123C6CE499AEFB461E8242E14098242CA5.xlsx",
     "sheet_no": 2,
-    "statisticalVariable": "dcid:UnemploymentRate_Person_Rural"
+    "statisticalVariable": "dcs:UnemploymentRate_Person_Rural"
 }]
 
 FINACIAL_YEAR_TO_OBSERVATION_DATE_MAPPING = {
