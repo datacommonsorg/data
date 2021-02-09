@@ -13,6 +13,6 @@
 # limitations under the License.
 
 
-def titleCase(st):
+def title_case(st):
     output = ''.join(x for x in st.title() if x.isalnum())
     return output

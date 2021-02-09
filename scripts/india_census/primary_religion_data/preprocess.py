@@ -20,7 +20,7 @@ import pandas as pd
 import numpy as np
 import tempfile
 import urllib.request
-from ..common.utils import titleCase
+from ..common.utils import title_case
 from ..common.generic_base import CensusGenericDataLoaderBase
 
 
@@ -106,9 +106,9 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
         # 3-N are the actual values. Let's get value columns
         value_columns = list(self.raw_df.columns[2:-1])
 
-        # Convert the data_category_column to titleCase
+        # Convert the data_category_column to title case
         self.raw_df[self.data_category_column] = self.raw_df[
-            self.data_category_column].apply(lambda x: titleCase(x))
+            self.data_category_column].apply(lambda x: title_case(x))
 
         # Converting rows in to columns. So the final structure will be
         # Name,TRU,columnName,value
@@ -159,7 +159,7 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
         name_array.append(self._get_base_name(row))
 
         if data_category:
-            name_array.append(titleCase(data_category))
+            name_array.append(title_case(data_category))
             row["description"] = row["description"] + " - " + data_category
 
         if row["age"] == "YearsUpto6":
@@ -215,7 +215,7 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
             place_of_residence if place_of_residence != None else "Total")
 
         if data_category:
-            key = key + "_" + titleCase(data_category)
+            key = key + "_" + title_case(data_category)
 
         self.stat_var_index[key] = name
         row["StatisticalVariable"] = self._get_stat_var_name(name)
@@ -321,15 +321,12 @@ if __name__ == '__main__':
     # We already have the MCF and TMCF file
 
     state_data_files = [
-        "RL-0100.xlsx", "RL-0200.xlsx", "RL-0300.xlsx", "RL-0400.xlsx",
-        "RL-0500.xlsx", "RL-0600.xlsx", "RL-0700.xlsx", "RL-0800.xlsx",
-        "RL-0900.xlsx", "RL-1000.xlsx", "RL-1100.xlsx", "RL-1200.xlsx",
-        "RL-1300.xlsx", "RL-1400.xlsx", "RL-1500.xlsx", "RL-1600.xlsx",
-        "RL-1700.xlsx", "RL-1800.xlsx", "RL-1900.xlsx", "RL-2000.xlsx",
-        "RL-2100.xlsx", "RL-2200.xlsx", "RL-2300.xlsx", "RL-2400.xlsx",
-        "RL-2500.xlsx", "RL-2600.xlsx", "RL-2700.xlsx", "RL-2800.xlsx",
-        "RL-2900.xlsx", "RL-3000.xlsx", "RL-3100.xlsx", "RL-3200.xlsx",
-        "RL-3300.xlsx", "RL-3400.xlsx", "RL-3500.xlsx"
+        "RL-0100", "RL-0200", "RL-0300", "RL-0400", "RL-0500", "RL-0600",
+        "RL-0700", "RL-0800", "RL-0900", "RL-1000", "RL-1100", "RL-1200",
+        "RL-1300", "RL-1400", "RL-1500", "RL-1600", "RL-1700", "RL-1800",
+        "RL-1900", "RL-2000", "RL-2100", "RL-2200", "RL-2300", "RL-2400",
+        "RL-2500", "RL-2600", "RL-2700", "RL-2800", "RL-2900", "RL-3000",
+        "RL-3100", "RL-3200", "RL-3300", "RL-3400", "RL-3500"
     ]
     tmp_dir = tempfile.gettempdir()
 
@@ -339,6 +336,11 @@ if __name__ == '__main__':
     mcf_file_path = os.path.join(tmp_dir, "temp.mcf")
 
     for state_data_file in state_data_files:
+
+        data_file_path = os.path.join(
+            os.path.dirname(__file__), 'data/{state_data_file}.xlsx'.format(
+                state_data_file=state_data_file))
+
         csv_file_name = "./IndiaCensus2011_Primary_Abstract_Religion_{state_data_file}.csv".format(
             state_data_file=state_data_file)
         csv_file_path = os.path.join(os.path.dirname(__file__), csv_file_name)
