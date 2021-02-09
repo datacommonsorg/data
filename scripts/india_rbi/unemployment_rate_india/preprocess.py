@@ -110,7 +110,7 @@ DATASETS = [{
     "statisticalVariable": "dcs:UnemploymentRate_Person_Rural"
 }]
 
-FINACIAL_YEAR_TO_OBSERVATION_DATE_MAPPING = {
+FINANCIAL_YEAR_TO_OBSERVATION_DATE_MAPPING = {
     "1993-94": "1994-03",
     "1999-00": "2000-03",
     "2004-05": "2005-03",
@@ -168,7 +168,7 @@ class UnempolymentRateIndiaLoader:
             # Its for the financial year. For example 1993-94 means
             # One year period from 1993-04-01 to 1994-03-31
             # Which is same as 1994-03, with period "PY1"
-            df["period"] = FINACIAL_YEAR_TO_OBSERVATION_DATE_MAPPING[
+            df["period"] = FINANCIAL_YEAR_TO_OBSERVATION_DATE_MAPPING[
                 period_column_name]
             df["statisticalVariable"] = self.statisticalVariable
             # Rename columns

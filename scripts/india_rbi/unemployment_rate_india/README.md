@@ -13,7 +13,7 @@ Available for download as xlsx.
 
 
 ### Overview
-Poverty data is per state and by financial year. There are three sets (sheet) of data in each XLSX Workbook, Male, Female and Overall.
+Unemployment rate is per state and by financial year. There are three sets (sheet) of data in each XLSX Workbook, Male, Female and Overall.
 
 The dataset contains the following columns.
 State/Union Territory   
