@@ -78,7 +78,6 @@ INDIA_ISO_CODES = {
     "Puducherry": "IN-PY",
     "Puduchery": "IN-PY",
     "Dadra and Nagar Haveli and Daman and Diu": "IN-DN_DD",
-    "Telangana": "IN-TG",
     "all India": "IN",
     "all-India": "IN",
     "ALL INDIA": "IN"
