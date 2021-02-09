@@ -65,20 +65,23 @@ def read_geocodes():
     return city
 
 
+def find_crime_state(crime):
+    state_parts = crime['State'].split()
+    state_parts_1 = [p.capitalize() for p in state_parts]
+    lookup_name = ''.join(state_parts_1)
+    all_states = _get_all_states()
+    return all_states[lookup_name]
+
+
 def update_crime_geocode(crime, geo_codes, found_set, cities_not_found_set):
     """
     Update crime with geo_code column. 
     Upon finding the geo_code, update found set. Otherwise, update cities_not_found_set.
     """
     try:
-        state_parts = crime['State'].split()
-        state_parts_1 = [p.capitalize() for p in state_parts]
-        lookup_name = ''.join(state_parts_1)
-        all_states = _get_all_states()
-        state = all_states[lookup_name].lower()
+        state = find_crime_state(crime).lower()
     except KeyError:
-        logging.error('{} state not found {}'.format(crime['State'],
-                                                     lookup_name))
+        logging.error('{} state not found'.format(crime['State']))
         return False
     city = _normalize_fbi_city(crime['City'], state)
     city_state = '{} {}'.format(city, state)
