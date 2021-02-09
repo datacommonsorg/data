@@ -48,7 +48,7 @@ class TestPreprocess(unittest.TestCase):
         result_file.close()
 
         os.remove(result_file_path)
-        self.assertEqual(expected_data,result_data)
+        self.assertEqual(expected_data, result_data)
 
 
 if __name__ == '__main__':
