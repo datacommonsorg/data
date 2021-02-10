@@ -34,9 +34,9 @@ TEMPLATE_MCF_TEMPLATE = """
 Node: E:FBI_Crime->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
-measurementMethod: dcs:FBI_Crime
 observationAbout: C:FBI_Crime->GeoId
 observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
 value: C:FBI_Crime->{stat_var}
 """
 
