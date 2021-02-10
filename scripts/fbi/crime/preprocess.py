@@ -77,9 +77,9 @@ TEMPLATE_MCF_TEMPLATE = """
 Node: E:FBI_Crime->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
-measurementMethod: dcs:FBI_Crime
 observationAbout: C:FBI_Crime->GeoId
 observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
 value: C:FBI_Crime->{stat_var}
 """
 
@@ -147,7 +147,7 @@ def _int_from_field(f):
         return 0
 
 
-def _calculate_crimes(r):
+def calculate_crimes(r):
     # Return the violent, property, arson crimes & total
     # If a field is empty, it is treated as 0
 
@@ -258,8 +258,6 @@ def _clean_crime_file(f_input, f_output):
         if field[_STATE_INDEX]:
             # Remove numeric values from state names (comes from footnotes)
             state = _remove_digits(field[_STATE_INDEX])
-            if year == "2016":
-                state = _get_2016_state(state)
             count_state += 1
         field[_STATE_INDEX] = state
         # Remove any numeric characters from city names.
@@ -285,7 +283,7 @@ def _update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
         for crime in crimes:
             if geocode_cities.update_crime_geocode(crime, geo_codes, found_set,
                                                    cities_not_found_set):
-                _calculate_crimes(crime)
+                calculate_crimes(crime)
 
                 processed_dict = {
                     'Year':
