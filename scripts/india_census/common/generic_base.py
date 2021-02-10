@@ -106,7 +106,7 @@ indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_
             return row["Subdistt"]
 
         elif row["District"] != "000":
-            return row["Subdistt"]
+            return row["District"]
 
         elif row["State"] != "00":
             return row["State"]
