@@ -970,977 +970,977 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_YearsUpto6_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Total
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate
 description: "Literates - Total"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate
 description: "Literates - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate
 description: "Literates - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate
 description: "Literates - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate
 description: "Literates - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate
 description: "Literates - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate
 description: "Literates - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate
 description: "Literates - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate
 description: "Literates - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate_Urban
 description: "Literates - Total - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate_Urban
 description: "Literates - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate_Urban
 description: "Literates - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate_Urban
 description: "Literates - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate_Urban
 description: "Literates - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate_Urban
 description: "Literates - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate_Urban
 description: "Literates - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Urban
 description: "Literates - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Urban
 description: "Literates - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate_Rural
 description: "Literates - Total - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate_Rural
 description: "Literates - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate_Rural
 description: "Literates - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate_Rural
 description: "Literates - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate_Rural
 description: "Literates - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate_Rural
 description: "Literates - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate_Rural
 description: "Literates - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Rural
 description: "Literates - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Rural
 description: "Literates - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Male
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate_Male
 description: "Male literates - Total"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Male
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate_Male
 description: "Male literates - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Male
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate_Male
 description: "Male literates - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Male
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate_Male
 description: "Male literates - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Male
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate_Male
 description: "Male literates - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Male
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate_Male
 description: "Male literates - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Male
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate_Male
 description: "Male literates - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Male
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Male
 description: "Male literates - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Male
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Male
 description: "Male literates - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate_Urban_Male
 description: "Male literates - Total - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate_Urban_Male
 description: "Male literates - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate_Urban_Male
 description: "Male literates - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate_Urban_Male
 description: "Male literates - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate_Urban_Male
 description: "Male literates - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate_Urban_Male
 description: "Male literates - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate_Urban_Male
 description: "Male literates - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Urban_Male
 description: "Male literates - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Urban_Male
 description: "Male literates - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate_Rural_Male
 description: "Male literates - Total - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate_Rural_Male
 description: "Male literates - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate_Rural_Male
 description: "Male literates - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate_Rural_Male
 description: "Male literates - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate_Rural_Male
 description: "Male literates - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate_Rural_Male
 description: "Male literates - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate_Rural_Male
 description: "Male literates - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Rural_Male
 description: "Male literates - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Rural_Male
 description: "Male literates - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Female
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate_Female
 description: "Female literates - Total"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Female
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate_Female
 description: "Female literates - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Female
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate_Female
 description: "Female literates - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Female
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate_Female
 description: "Female literates - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Female
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate_Female
 description: "Female literates - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Female
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate_Female
 description: "Female literates - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Female
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate_Female
 description: "Female literates - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Female
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Female
 description: "Female literates - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Female
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Female
 description: "Female literates - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate_Urban_Female
 description: "Female literates - Total - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate_Urban_Female
 description: "Female literates - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate_Urban_Female
 description: "Female literates - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate_Urban_Female
 description: "Female literates - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate_Urban_Female
 description: "Female literates - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate_Urban_Female
 description: "Female literates - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate_Urban_Female
 description: "Female literates - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Urban_Female
 description: "Female literates - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Urban_Female
 description: "Female literates - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Total_Literate_Rural_Female
 description: "Female literates - Total - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Literate_Rural_Female
 description: "Female literates - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Literate_Rural_Female
 description: "Female literates - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Literate_Rural_Female
 description: "Female literates - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Literate_Rural_Female
 description: "Female literates - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Literate_Rural_Female
 description: "Female literates - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Literate_Rural_Female
 description: "Female literates - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Rural_Female
 description: "Female literates - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Rural_Female
 description: "Female literates - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Literate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Total
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate
 description: "Illiterates - Total"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate
 description: "Illiterates - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate
 description: "Illiterates - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate
 description: "Illiterates - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate
 description: "Illiterates - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate
 description: "Illiterates - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate
 description: "Illiterates - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate
 description: "Illiterates - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate
 description: "Illiterates - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate_Urban
 description: "Illiterates - Total - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate_Urban
 description: "Illiterates - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate_Urban
 description: "Illiterates - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate_Urban
 description: "Illiterates - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate_Urban
 description: "Illiterates - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Urban
 description: "Illiterates - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate_Urban
 description: "Illiterates - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Urban
 description: "Illiterates - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Urban
 description: "Illiterates - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Urban
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Urban
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate_Rural
 description: "Illiterates - Total - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate_Rural
 description: "Illiterates - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate_Rural
 description: "Illiterates - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate_Rural
 description: "Illiterates - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate_Rural
 description: "Illiterates - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Rural
 description: "Illiterates - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate_Rural
 description: "Illiterates - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Rural
 description: "Illiterates - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Rural
 description: "Illiterates - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Rural
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Rural
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Male
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate_Male
 description: "Male Illiterates - Total"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Male
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate_Male
 description: "Male Illiterates - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Male
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate_Male
 description: "Male Illiterates - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Male
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate_Male
 description: "Male Illiterates - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Male
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate_Male
 description: "Male Illiterates - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Male
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Male
 description: "Male Illiterates - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Male
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate_Male
 description: "Male Illiterates - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Male
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Male
 description: "Male Illiterates - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Male
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Male
 description: "Male Illiterates - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate_Urban_Male
 description: "Male Illiterates - Total - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate_Urban_Male
 description: "Male Illiterates - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate_Urban_Male
 description: "Male Illiterates - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate_Urban_Male
 description: "Male Illiterates - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate_Urban_Male
 description: "Male Illiterates - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Urban_Male
 description: "Male Illiterates - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate_Urban_Male
 description: "Male Illiterates - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Urban_Male
 description: "Male Illiterates - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Male
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Urban_Male
 description: "Male Illiterates - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Urban_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate_Rural_Male
 description: "Male Illiterates - Total - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate_Rural_Male
 description: "Male Illiterates - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate_Rural_Male
 description: "Male Illiterates - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate_Rural_Male
 description: "Male Illiterates - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate_Rural_Male
 description: "Male Illiterates - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Rural_Male
 description: "Male Illiterates - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate_Rural_Male
 description: "Male Illiterates - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Rural_Male
 description: "Male Illiterates - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Male
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Rural_Male
 description: "Male Illiterates - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Male
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Rural_Male
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Female
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate_Female
 description: "Female Illiterates - Total"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Female
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate_Female
 description: "Female Illiterates - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Female
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate_Female
 description: "Female Illiterates - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Female
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate_Female
 description: "Female Illiterates - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Female
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate_Female
 description: "Female Illiterates - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Female
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Female
 description: "Female Illiterates - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Female
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate_Female
 description: "Female Illiterates - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Female
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Female
 description: "Female Illiterates - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Female
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Female
 description: "Female Illiterates - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate_Urban_Female
 description: "Female Illiterates - Total - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate_Urban_Female
 description: "Female Illiterates - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate_Urban_Female
 description: "Female Illiterates - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate_Urban_Female
 description: "Female Illiterates - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate_Urban_Female
 description: "Female Illiterates - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Urban_Female
 description: "Female Illiterates - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate_Urban_Female
 description: "Female Illiterates - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Urban_Female
 description: "Female Illiterates - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Female
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Urban_Female
 description: "Female Illiterates - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Urban_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Total_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Total_Illiterate_Rural_Female
 description: "Female Illiterates - Total - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Total_Illiterate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Illiterate_Rural_Female
 description: "Female Illiterates - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Hindu_Illiterate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Illiterate_Rural_Female
 description: "Female Illiterates - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Muslim_Illiterate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Illiterate_Rural_Female
 description: "Female Illiterates - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Christian_Illiterate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Illiterate_Rural_Female
 description: "Female Illiterates - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Sikh_Illiterate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Rural_Female
 description: "Female Illiterates - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Buddhist_Illiterate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Illiterate_Rural_Female
 description: "Female Illiterates - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_Jain_Illiterate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Rural_Female
 description: "Female Illiterates - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Illiterate_Rural_Female
 
-Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Female
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Rural_Female
 description: "Female Illiterates - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Female
+measuredProperty: dcs:indianCensus/Count_Person_Religion_ReligionNotStated_Illiterate_Rural_Female
 
 Node: dcid:indianCensus/Count_Person_Religion_Total_Workers
 description: "Total Workers - Total"

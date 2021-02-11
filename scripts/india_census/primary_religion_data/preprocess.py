@@ -170,6 +170,13 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
         if row["socialCategory"] == "ScheduledTribe":
             name_array.append("ScheduledTribe")
 
+        if row["literacyStatus"] == "Literate":
+            name_array.append("Literate")
+        if row["literacyStatus"] == "Illiterate":
+            name_array.append("Illiterate")
+        else:
+            pass
+
         if row["workerStatus"] == "Worker":
             if row["workerClassification"] == "MainWorker":
                 name_array.append("MainWorker")
