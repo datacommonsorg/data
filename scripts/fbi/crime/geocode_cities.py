@@ -66,6 +66,7 @@ def read_geocodes():
 
 
 def find_crime_state(crime):
+    """Finds key 'State' value in crime dict. Each crime is a row from CSV in a dict format."""
     state_parts = crime['State'].split()
     state_parts_1 = [p.capitalize() for p in state_parts]
     lookup_name = ''.join(state_parts_1)
