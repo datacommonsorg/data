@@ -25,7 +25,7 @@ class CensusGenericDataLoaderBase(object):
     GENERIC_TEMPLATE_STAT_VAR = """Node: {StatisticalVariable}
 description: "{description}"
 typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
+populationType: schema:Person
 measuredProperty: {measuredProperty}
 
 """
