@@ -1,0 +1,4 @@
+Year,GeoId,Count_CriminalActivities_ViolentCrime,Count_CriminalActivities_MurderAndNonNegligentManslaughter,Count_CriminalActivities_ForcibleRape,Count_CriminalActivities_Robbery,Count_CriminalActivities_AggravatedAssault,Count_CriminalActivities_PropertyCrime,Count_CriminalActivities_Burglary,Count_CriminalActivities_LarcenyTheft,Count_CriminalActivities_MotorVehicleTheft,Count_CriminalActivities_CombinedCrime
+2008,dcid:geoId/01,21111,353,1617,7346,11795,190343,50408,126477,13458,211454
+2008,dcid:geoId/02,4474,28,441,645,3360,20124,3240,15246,1638,24598
+2008,dcid:geoId/04,29059,407,1673,9697,17282,278920,56481,185221,37218,307979
