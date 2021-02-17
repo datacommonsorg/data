@@ -3,13 +3,22 @@
 This directory imports [FBI Crime Data](https://ucr.fbi.gov/crime-in-the-u.s) into Data Commons, more specifically, offenses known to law enforcement data.
 
 
-
 The script generates:
-- TBD
+- `crime.csv`, `state_crime.csv`, `FBI_crime.tmcf` & `FBI_state_crime.tmcf`
 
 and it relies on these statistic variables:
-- TBD
+- Count_CriminalActivities_AggravatedAssault
+- Count_CriminalActivities_Arson
+- Count_CriminalActivities_Burglary
+- Count_CriminalActivities_ForcibleRape
+- Count_CriminalActivities_LarcenyTheft
+- Count_CriminalActivities_MotorVehicleTheft
+- Count_CriminalActivities_MurderAndNonNegligentManslaughter
+- Count_CriminalActivities_PropertyCrime
+- Count_CriminalActivities_Robbery
+- Count_CriminalActivities_CombinedCrime
 
+Source data are copied into the repository under source_data. 
 
 ## Data Caveats:
 - From 2013-2016, the FBI reported statistics for two different definitions of rape before fully transitioning to the current definition in 2017. We add a dummy column after it (so all years have two Rape columns).
@@ -19,15 +28,22 @@ and it relies on these statistic variables:
 
 ## Generating Artifacts:
 
-To generate `TBD`, run:
+To generate `crime.csv` & `FBI_crime.tmcf`, run:
 
 ```bash
 python3 preprocess.py
+```
+
+To generate `state_crime.csv` & `FBI_state_crime.tmcf`, run:
+
+```bash
+python3 preprocess_states_test.py
 ```
 
 ### Running Tests
 
 ```bash
 python3 preprocess_test.py
+python3 preprocess_states_test.py
 python3 geocode_cities_test.py
 ```
