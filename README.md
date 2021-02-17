@@ -25,9 +25,10 @@ Apache 2.0
 ## Development
 
 Every data import involves some or all of the following: obtaining the source
-data, cleaning the data, and converting the data into one of Meta Content
-Framework (MCF), JSON-LD, or RDFa format. We ask that you check in all scripts
-used in this process, so that others can reproduce and continue your work.
+data, cleaning the data, and converting the data into one of [Meta Content
+Framework (MCF)](docs/mcf_format.md), JSON-LD, or RDFa format. We ask that you
+check in all scripts used in this process, so that others can reproduce and
+continue your work.
 
 Source data must meet the [licensing policy](LICENSING_POLICY.md) requirements.
 
