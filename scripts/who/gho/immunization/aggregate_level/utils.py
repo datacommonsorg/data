@@ -129,7 +129,7 @@ def create_stats_vars_helper(metadata_df: pd.DataFrame, stat_var_template: str) 
 
         # Format the mandatory fields.
         stats_vars_string = stat_var_template.format(
-            name = var_name,
+            name = "dcid:{0}".format(var_name),
             description = row.description,
             populationType = row.populationType,
             statType = 'dcs:measuredValue',
@@ -147,11 +147,13 @@ def create_stats_vars_helper(metadata_df: pd.DataFrame, stat_var_template: str) 
             stats_vars_string += "measurementDenominator: dcs:{0}\n".format(num_prefix)
 
         # Finally, add constraints.
-        if ("constraints" in metadata_df.columns) and (row.constraints != 'nan'):
-            constraints_list = str.split(row.constraints, ",")
+        if ("constraintProperties" in metadata_df.columns) and (row.constraintProperties != 'nan'):
+            constraints_list = str.split(row.constraintProperties, ",")
 
-            constraints_string = "constraints: "
+            constraints_string = "constraintProperties: "
             for const in constraints_list:
+                if const[0] == ' ':
+                    const = const[1:]
                 constraints_string += "dcs:" + str(const) + ", "
 
             # Remove the final ",".

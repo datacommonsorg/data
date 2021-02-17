@@ -35,7 +35,7 @@ measuredProperty
 age
 ageUnit
 statsVarNameSuffix
-constraints
+constraintProperties
 hasDenominator
 
 

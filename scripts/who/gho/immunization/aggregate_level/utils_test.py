@@ -13,7 +13,7 @@ statType: {statType}
 measuredProperty: {measuredProperty}
 """
 
-BCG_EXPECTED_STAT_VAR = """Node: Count_Person_1Years_BCGImmunization_AsAFractionOf_Count_Person_1Years
+BCG_EXPECTED_STAT_VAR = """Node: dcid:Count_Person_1Years_BCGImmunization_AsAFractionOf_Count_Person_1Years
 description: "BCG immunization coverage among 1-year-olds (%)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
@@ -23,11 +23,11 @@ immunizedAgainst: dcs:TuberculosisDisease
 ghoCode: WHS4_543
 age: [Years 1]
 measurementDenominator: dcs:Count_Person_1Years
-constraints: dcs:age, dcs: immunizedAgainst
+constraintProperties: dcs:age, dcs:immunizedAgainst
 
 """
 
-PAB_EXPECTED_STAT_VAR = """Node: Count_BirthEvent_LiveBirth_PABImmunization_AsAFractionOf_Count_BirthEvent_LiveBirth
+PAB_EXPECTED_STAT_VAR = """Node: dcid:Count_BirthEvent_LiveBirth_PABImmunization_AsAFractionOf_Count_BirthEvent_LiveBirth
 description: "Neonates protected at birth against neonatal tetanus (PAB) (%)"
 typeOf: dcs:StatisticalVariable
 populationType: dcid:BirthEvent
@@ -36,11 +36,11 @@ measuredProperty: dcs:count
 immunizedAgainst: dcs:TetanusDisease
 ghoCode: WHS4_128
 measurementDenominator: dcs:Count_BirthEvent_LiveBirth
-constraints: dcs:immunizedAgainst
+constraintProperties: dcs:immunizedAgainst
 
 """
 
-MCV2_EXPECTED_STAT_VAR = """Node: Count_Person_NationalRecommendedAge_MCV2Immunization_AsAFractionOf_Count_Person_NationalRecommendedAge
+MCV2_EXPECTED_STAT_VAR = """Node: dcid:Count_Person_NationalRecommendedAge_MCV2Immunization_AsAFractionOf_Count_Person_NationalRecommendedAge
 description: "Measles-containing-vaccine second-dose (MCV2) immunization coverage by the nationally recommended age (%)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
@@ -49,7 +49,7 @@ measuredProperty: dcs:count
 immunizedAgainst: dcs:MeaselsDisease
 ghoCode: MCV2
 measurementDenominator: dcs:Count_Person_NationalRecommendedAge
-constraints: dcs:immunizedAgainst
+constraintProperties: dcs:immunizedAgainst
 
 """
 
