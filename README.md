@@ -26,8 +26,8 @@ Apache 2.0
 
 Every data import involves some or all of the following: obtaining the source
 data, cleaning the data, and converting the data into one of Meta Content
-Framework, JSON-LD, or RDFa format. We ask that you check in all scripts used in
-this process, so that others can reproduce and continue your work.
+Framework (MCF), JSON-LD, or RDFa format. We ask that you check in all scripts
+used in this process, so that others can reproduce and continue your work.
 
 Source data must meet the [licensing policy](LICENSING_POLICY.md) requirements.
 
@@ -36,14 +36,12 @@ provenance and dataset. See
 [the example](scripts/example_provenance/example_dataset/README.md) for more
 detail.
 
-We provide some utility libraries under the top-level `util/` directory. This
-includes maps to and from common geographic identifiers, a sharding writer to
-break up large output files, a templating library for writing
-[StatisticalPopulation](https://schema.org/StatisticalPopulation)s and
-[Observation](https://schema.org/Observation)s, and more to come.
+We provide some utility libraries under the top-level `util/` directory. For
+example, this includes maps to and from common geographic identifiers.
 
 ### GitHub Development Process
 
+#### One Time Set-up
 In https://github.com/datacommonsorg/data, click on "Fork" button to fork the
 repo.
 
@@ -54,6 +52,13 @@ Add datacommonsorg/data repo as a remote:
 ```shell
 git remote add dc https://github.com/datacommonsorg/data.git
 ```
+
+Please ask to join the
+[datacommons-developers](https://groups.google.com/g/datacommons-developers)
+Google group. For example, membership in this group provides access to debug
+logs of pre-submit tests that run for your Pull Request.
+
+#### Creating Pull Requests
 
 Every time when you want to send a Pull Request, do the following steps:
 
@@ -165,4 +170,4 @@ open an issue on our [issues](https://github.com/datacommonsorg/data/issues)
 page. For all other questions, please send an email to
 `support@datacommons.org`.
 
-**Note** - This is not an officially supported Google product. ```
+**Note** - This is not an officially supported Google product.
