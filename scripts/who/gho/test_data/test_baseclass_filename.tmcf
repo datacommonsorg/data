@@ -1,0 +1,10 @@
+Node: E:WHO_GHO_immunization_test->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WHO_GHO_immunization_test->StatisticalVariable
+observationDate: C:WHO_GHO_immunization_test->Date
+observationAbout: E:WHO_GHO_immunization_test->E1
+value: C:WHO_GHO_immunization_test->Value
+
+Node: E:WHO_GHO_immunization_test->E1
+typeOf: schema:Country
+dcid: C:WHO_GHO_immunization_test->Location_Code

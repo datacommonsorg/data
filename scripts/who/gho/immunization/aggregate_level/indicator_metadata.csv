@@ -1,0 +1,11 @@
+immunizationName,ghoCode,description,immunizedAgainst,populationType,measuredProperty,age,ageUnit,statsVarNameSuffix,constraints,hasDenominator
+BCG,WHS4_543,BCG immunization coverage among 1-year-olds (%),TuberculosisDisease,schema:Person,Count,1,Years,,"age, immunizationType",Yes
+DTP3,WHS4_100,Diphtheria tetanus toxoid and pertussis (DTP3) immunization coverage among 1-year-olds (%),DiphtheriaTetanusPertussisDisease,schema:Person,Count,1,Years,,"age, immunizationType",Yes
+HepB3,WHS4_117,Hepatitis B (HepB3) immunization coverage among 1-year-olds (%),HepatitusBDiseases,schema:Person,Count,1,Years,,"age, immunizationType",Yes
+Hib3,WHS4_129,Hib (Hib3) immunization coverage among 1-year-olds (%),HaemophilusInfluenzaeDisease,schema:Person,Count,1,Years,,"age, immunizationType",Yes
+MCV1,WHS8_110,Measles-containing-vaccine first-dose (MCV1) immunization coverage among 1-year-olds (%),MeaselsDisease,schema:Person,Count,1,Years,,"age, immunizationType",Yes
+MCV2,MCV2,Measles-containing-vaccine second-dose (MCV2) immunization coverage by the nationally recommended age (%),MeaselsDisease,schema:Person,Count,,,NationalRecommendedAge,immunizationType,Yes
+PAB,WHS4_128,Neonates protected at birth against neonatal tetanus (PAB) (%),TetanusDisease,dcid:BirthEvent,Count,,,LiveBirth,immunizationType,Yes
+PCV3,PCV3,Pneumococcal conjugate vaccines (PCV3) immunization coverage among 1-year-olds (%),PneumococcalDisease,schema:Person,Count,1,Years,,"age, immunizationType",Yes
+Pol3,WHS4_544,Polio (Pol3) immunization coverage among 1-year-olds (%),PolioDisease,schema:Person,Count,1,Years,,"age, immunizationType",Yes
+ROTAC,ROTAC,Rotavirus vaccines completed dose (RotaC) immunization coverage among 1-year-olds (%),RotavirusDisease,schema:Person,Count,1,Years,,"age, immunizationType",Yes

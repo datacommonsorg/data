@@ -1,0 +1,60 @@
+Node: dcid:GHO/immunization_WHS4_543
+description: "BCG immunization coverage among 1-year-olds (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_WHS4_100
+description: "Diphtheria tetanus toxoid and pertussis (DTP3) immunization coverage among 1-year-olds (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_WHS4_117
+description: "Hepatitis B (HepB3) immunization coverage among 1-year-olds (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_WHS4_129
+description: "Hib (Hib3) immunization coverage among 1-year-olds (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_WHS8_110
+description: "Measles-containing-vaccine first-dose (MCV1) immunization coverage among 1-year-olds (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_MCV2
+description: "Measles-containing-vaccine second-dose (MCV2) immunization coverage by the nationally recommended age (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_WHS4_128
+description: "Neonates protected at birth against neonatal tetanus (PAB) (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_PCV3
+description: "Pneumococcal conjugate vaccines (PCV3) immunization coverage among 1-year-olds (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_WHS4_544
+description: "Polio (Pol3) immunization coverage among 1-year-olds (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+Node: dcid:GHO/immunization_ROTAC
+description: "Rotavirus vaccines completed dose (RotaC) immunization coverage among 1-year-olds (%)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
