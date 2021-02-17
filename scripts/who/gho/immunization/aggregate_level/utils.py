@@ -133,7 +133,7 @@ def create_stats_vars_helper(metadata_df: pd.DataFrame, stat_var_template: str) 
             description = row.description,
             populationType = row.populationType,
             statType = 'dcs:measuredValue',
-            measuredProperty = 'dcs:%s' %row.measuredProperty
+            measuredProperty = 'dcs:%s' %str.lower(row.measuredProperty)
         )
 
         # Add additional fields

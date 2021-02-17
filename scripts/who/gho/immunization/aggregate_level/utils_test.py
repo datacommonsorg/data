@@ -18,12 +18,12 @@ description: "BCG immunization coverage among 1-year-olds (%)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 statType: dcs:measuredValue
-measuredProperty: dcs:Count
+measuredProperty: dcs:count
 immunizedAgainst: dcs:TuberculosisDisease
 ghoCode: WHS4_543
 age: [Years 1]
 measurementDenominator: dcs:Count_Person_1Years
-constraints: dcs:age, dcs: immunizationType
+constraints: dcs:age, dcs: immunizedAgainst
 
 """
 
@@ -32,11 +32,11 @@ description: "Neonates protected at birth against neonatal tetanus (PAB) (%)"
 typeOf: dcs:StatisticalVariable
 populationType: dcid:BirthEvent
 statType: dcs:measuredValue
-measuredProperty: dcs:Count
+measuredProperty: dcs:count
 immunizedAgainst: dcs:TetanusDisease
 ghoCode: WHS4_128
 measurementDenominator: dcs:Count_BirthEvent_LiveBirth
-constraints: dcs:immunizationType
+constraints: dcs:immunizedAgainst
 
 """
 
@@ -45,11 +45,11 @@ description: "Measles-containing-vaccine second-dose (MCV2) immunization coverag
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 statType: dcs:measuredValue
-measuredProperty: dcs:Count
+measuredProperty: dcs:count
 immunizedAgainst: dcs:MeaselsDisease
 ghoCode: MCV2
 measurementDenominator: dcs:Count_Person_NationalRecommendedAge
-constraints: dcs:immunizationType
+constraints: dcs:immunizedAgainst
 
 """
 
