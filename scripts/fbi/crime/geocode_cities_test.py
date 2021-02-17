@@ -20,6 +20,7 @@ import geocode_cities
 
 
 class GeocodeCitiesTest(unittest.TestCase):
+
     def setUp(self):
         self.geo_codes = geocode_cities.read_geocodes()
 
@@ -67,8 +68,8 @@ class GeocodeCitiesTest(unittest.TestCase):
             'City': 'Random City',
             'Population': 1.0
         }
-        result = geocode_cities.update_crime_geocode(not_found_crime,
-                                                     geo_codes, found_set,
+        result = geocode_cities.update_crime_geocode(not_found_crime, geo_codes,
+                                                     found_set,
                                                      cities_not_found_set)
         self.assertFalse(result)
         self.assertEqual(found_set, {'mineral point wi'})

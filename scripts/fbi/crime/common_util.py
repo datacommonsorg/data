@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from sys import path
+# For import util.alpha2_to_dcid
 path.insert(1, '../../../')
 
 import csv
