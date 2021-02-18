@@ -73,14 +73,6 @@ value: C:FBI_Crime->Count_CriminalActivities_MotorVehicleTheft
 
 Node: E:FBI_Crime->E9
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_CriminalActivities_Arson
-observationAbout: C:FBI_Crime->GeoId
-observationDate: C:FBI_Crime->Year
-observationPeriod: "P1Y"
-value: C:FBI_Crime->Count_CriminalActivities_Arson
-
-Node: E:FBI_Crime->E10
-typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_CriminalActivities_CombinedCrime
 observationAbout: C:FBI_Crime->GeoId
 observationDate: C:FBI_Crime->Year
