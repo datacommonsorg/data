@@ -20,6 +20,7 @@ import sys
 import requests
 import re
 import os
+import common_util as cu
 
 import pandas as pd
 import logging
@@ -72,17 +73,6 @@ OUTPUT_COLUMNS = [
     'Count_CriminalActivities_Arson', 'Count_CriminalActivities_CombinedCrime'
 ]
 
-# Automate Template MCF generation since there are many Statitical Variables.
-TEMPLATE_MCF_TEMPLATE = """
-Node: E:FBI_Crime->E{index}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{stat_var}
-observationAbout: C:FBI_Crime->GeoId
-observationDate: C:FBI_Crime->Year
-observationPeriod: "P1Y"
-value: C:FBI_Crime->{stat_var}
-"""
-
 # From 2013-2016, the FBI reported statistics for two different definitions of rape before fully transitioning to the current definition in 2017.
 # We add a dummy column after it (so allyears have two Rape columns).
 YEARS_WITH_TWO_RAPE_COLUMNS = {'2013', '2014', '2015', '2016'}
@@ -116,49 +106,18 @@ YEAR_TO_URL = {
 }
 
 
-def _remove_extra_chars(c):
-    # Remove commas and quotes from string c, and any trailing whitespace.
-    # Return the cleaned_string
-    return re.sub(r'[,"]', '', c).strip()
-
-
-def _remove_digits(c):
-    # Remove digits from string c
-    # Return the cleaned string
-    return re.sub(r'[\d]', '', c)
-
-
-def _is_digit(x):
-    try:
-        float(x)
-        return True
-    except ValueError:
-        return False
-
-
-def _int_from_field(f):
-    # Convert a field to int value. If field is empty or non-convertible, return 0.
-    # Numeric number was read in as string with ".0" suffix, eg: "12.0". First convert to float, then to int.
-    try:
-        f = float(f)
-        f = int(f)
-        return f
-    except ValueError as err:
-        return 0
-
-
 def calculate_crimes(r):
     # Return the violent, property, arson crimes & total
     # If a field is empty, it is treated as 0
 
     # Category 1: Violent Crimes
-    violent = _int_from_field(r['Violent'])
+    violent = cu.int_from_field(r['Violent'])
 
-    murder = _int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
-    rape = _int_from_field(r['ViolentRape'])
-    rape2 = _int_from_field(r['Rape2'])
-    robbery = _int_from_field(r['ViolentRobbery'])
-    assault = _int_from_field(r['ViolentAggravatedAssault'])
+    murder = cu.int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
+    rape = cu.int_from_field(r['ViolentRape'])
+    rape2 = cu.int_from_field(r['Rape2'])
+    robbery = cu.int_from_field(r['ViolentRobbery'])
+    assault = cu.int_from_field(r['ViolentAggravatedAssault'])
     # Fix rape value
     rape += rape2
 
@@ -176,11 +135,11 @@ def calculate_crimes(r):
                                                        violent_computed))
 
     # Category 2: Property Crime
-    property = _int_from_field(r['Property'])
+    property = cu.int_from_field(r['Property'])
 
-    burglary = _int_from_field(r['PropertyBurglary'])
-    theft = _int_from_field(r['PropertyLarcenyTheft'])
-    motor = _int_from_field(r['PropertyMotorVehicleTheft'])
+    burglary = cu.int_from_field(r['PropertyBurglary'])
+    theft = cu.int_from_field(r['PropertyLarcenyTheft'])
+    motor = cu.int_from_field(r['PropertyMotorVehicleTheft'])
 
     # Add the property crime values as ints.
     r['PropertyBurglary'] = burglary
@@ -196,7 +155,7 @@ def calculate_crimes(r):
                                                         property_computed))
 
     # Category 3: Arson
-    arson = _int_from_field(r['PropertyArson'])
+    arson = cu.int_from_field(r['PropertyArson'])
     r['PropertyArson'] = arson
 
     total = violent_computed + property_computed + arson
@@ -245,11 +204,11 @@ def _clean_crime_file(f_input, f_output):
         # Replace commas and quotes in fields e.g. "1,234" -> 1234
         # Remove any other leading or trailing whitespace
         for i in range(_FIELDS_IN_CRIME_FILE):
-            field[i] = _remove_extra_chars(field[i])
+            field[i] = cu.remove_extra_chars(field[i])
 
         # Skip if the line does not contain data or if population is empty.
         if (not field[_POPULATION_INDEX] or
-                not _is_digit(field[_POPULATION_INDEX]) or
+                not cu.is_digit(field[_POPULATION_INDEX]) or
                 field[_POPULATION_INDEX] == '0'):
             count_header_footer += 1
             continue
@@ -257,11 +216,11 @@ def _clean_crime_file(f_input, f_output):
         # If field[_STATE_INDEX] is present, use it as the State.
         if field[_STATE_INDEX]:
             # Remove numeric values from state names (comes from footnotes)
-            state = _remove_digits(field[_STATE_INDEX])
+            state = cu.remove_digits(field[_STATE_INDEX])
             count_state += 1
         field[_STATE_INDEX] = state
         # Remove any numeric characters from city names.
-        field[_CITY_INDEX] = _remove_digits(field[_CITY_INDEX])
+        field[_CITY_INDEX] = cu.remove_digits(field[_CITY_INDEX])
         count_city += 1
 
         output_line = '{}\n'.format(','.join(field[:_FIELDS_IN_CRIME_FILE]))
@@ -329,7 +288,7 @@ def create_tmcf_file(tmcf_file_path):
     with open(tmcf_file_path, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
-                TEMPLATE_MCF_TEMPLATE.format_map({
+                cu.TEMPLATE_MCF_TEMPLATE.format_map({
                     'index': i,
                     'stat_var': stat_vars[i]
                 }))
@@ -374,7 +333,7 @@ if __name__ == '__main__':
             read_file.insert(_DUMMY_RAPE_INDEX, 'Dummy', 0)
         read_file.to_csv(csv_file, index=None, header=True)
         csv_files.append(csv_file)
-        os.remove(xls_file)
+        # os.remove(xls_file)
 
     create_formatted_csv_file(csv_files, 'city_crime.csv')
 
