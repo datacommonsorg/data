@@ -1,3 +1,5 @@
+"""Processing script for CDC PLACES data."""
+
 import argparse
 import contextlib
 import csv
@@ -8,6 +10,8 @@ import progressbar
 
 
 class StatisticalVariable(object):
+    """A Stastical Variable created from the CDC PLACES dataset."""
+
     def __init__(self, measure_id, data_value_unit):
         self.measure_id = measure_id
         self.data_value_unit = data_value_unit
@@ -18,6 +22,12 @@ class StatisticalVariable(object):
 
     @property
     def age_range(self):
+        """Return the variable's age range as a tuple (min, max) where both
+        ends are inclusive.
+
+        None indicates a missing min or max value, e.g. "18 and over" is
+        indicated by `(18, None)`.
+        """
         measure_id_to_age_range = {
             "ACCESS2": (18, 64),
             "ARTHRITIS": (18, None),
@@ -40,7 +50,7 @@ class StatisticalVariable(object):
             "HIGHCHOL": (18, None),
             "KIDNEY": (18, None),
             "LPA": (18, None),
-            "MAMMOUSE": (50, 74), # NOTE: Currently stored as 50-75
+            "MAMMOUSE": (50, 74),  # NOTE: Currently stored as 50-75
             "MHLTH": (18, None),
             "OBESITY": (18, None),
             "PHLTH": (18, None),
@@ -61,6 +71,8 @@ class StatisticalVariable(object):
 
     @property
     def health_behavior(self):
+        """Returns the name of the variable's associated health behavior."""
+
         measure_id_to_health_behavior = {
             "BINGE": "BingeDrinking",
             "CSMOKING": "Smoking",
@@ -68,13 +80,12 @@ class StatisticalVariable(object):
             "OBESITY": "Obesity",
             "SLEEP": "SleepLessThan7Hours",
         }
-        if self.measure_id in measure_id_to_health_behavior:
-            return measure_id_to_health_behavior[self.measure_id]
-        else:
-            return None
+        return measure_id_to_health_behavior.get(self.measure_id)
 
     @property
     def health_outcome(self):
+        """Returns the name of the variable's associated health outcome."""
+
         measure_id_to_health_outcome = {
             "MHLTH": "MentalHealthNotGood",
             "BPHIGH": "HighBloodPressure",
@@ -91,13 +102,13 @@ class StatisticalVariable(object):
             "COPD": "ChronicObstructivePulmonaryDisease",
             "DIABETES": "Diabetes",
         }
-        if self.measure_id in measure_id_to_health_outcome:
-            return measure_id_to_health_outcome[self.measure_id]
-        else:
-            return None
+        return measure_id_to_health_outcome.get(self.measure_id)
 
     @property
     def health_prevention(self):
+        """Returns the name of the variable's associated health prevention
+        measure."""
+
         measure_id_to_health_prevention = {
             "ACCESS2": "NoHealthInsurance",
             "BPMED": "TakingBloodPressureMedication",
@@ -110,15 +121,16 @@ class StatisticalVariable(object):
             "DENTAL": "DentalVisit",
             "MAMMOUSE": "Mammography",
         }
-        if self.measure_id in measure_id_to_health_prevention:
-            return measure_id_to_health_prevention[self.measure_id]
-        else:
-            return None
+        return measure_id_to_health_prevention.get(self.measure_id)
 
     def validate(self):
+        """Runs sanity-check validations for the variable's data.
+
+        Throws a ValueError exception on validation errors."""
+
         # Data Value Unit
         if self.data_value_unit != "%":
-            raise ValueError("Unknown data value unit: %s", self.data_value_unit)
+            raise ValueError("Unknown data value unit: " + self.data_value_unit)
 
         # Age
         age_range = self.age_range
@@ -127,14 +139,17 @@ class StatisticalVariable(object):
         if not age_range[0]:
             raise ValueError("Missing lower bound on age range")
         if age_range[1] and age_range[0] > age_range[1]:
-            raise ValueError("Invalid age range: upper bound must be >= lower bound")
+            raise ValueError("Invalid age range: upper bound must be " +
+                             ">= lower bound")
 
     @property
     def mcf_node(self):
+        """Returns the value of the MCF `Node` key."""
+
         parts = ["Percent", "Person"]
         if self.age_range:
             start, end = self.age_range
-            if not (start == 18 and end == None):
+            if not (start == 18 and end is None):
                 if not end:
                     parts.append(f"{start}OrMoreYears")
                 else:
@@ -151,6 +166,8 @@ class StatisticalVariable(object):
 
     @property
     def mcf_properties(self):
+        """Returns a dictionary of the variable's MCF key-value pairs."""
+
         stat_var_node_kvs = {
             "Node": self.mcf_node,
             "typeOf": "dcs:StatisticalVariable",
@@ -169,12 +186,12 @@ class StatisticalVariable(object):
         if self.health_outcome:
             stat_var_node_kvs["healthOutcome"] = "dcs:" + self.health_outcome
         if self.health_prevention:
-            stat_var_node_kvs["healthPrevention"] = "dcs:" + self.health_prevention
+            stat_var_node_kvs["healthPrevention"] = \
+                "dcs:" + self.health_prevention
 
         return stat_var_node_kvs
 
 
-# TODO(rafikk): Add option for subsetting columns?
 out_field_names = (
     "Year",
     # "StateAbbr",
@@ -200,14 +217,21 @@ out_field_names = (
     "StatisticalVariable",
 )
 
+
 def preprocess_csv(args):
+    """Runs the preprocess_csv subcommand.
+
+    The command process the input CSV and generates an output CSV with the
+    requisite columns to import into the Data Commons KG."""
+
     stat_var_names = {}
     with contextlib.closing(args.input) as input_file, \
             contextlib.closing(args.output) as output_file:
         line_count = sum(1 for _ in input_file)
         input_file.seek(0)
         reader = csv.DictReader(input_file)
-        progress = progressbar.ProgressBar(max_value=line_count, redirect_stdout=True)
+        progress = progressbar.ProgressBar(max_value=line_count,
+                                           redirect_stdout=True)
         writer = csv.DictWriter(output_file, fieldnames=out_field_names)
         writer.writeheader()
         for row_dict in reader:
@@ -225,13 +249,22 @@ def preprocess_csv(args):
 
 
 def generate_stat_vars(args):
+    """Runs the generate_stat_vars subcommand.
+
+    The command processes the input CSV and generates StasticalVariable
+    MCF for each measure found in the input file. The output can be written
+    to a file or printed to stdout.
+
+    If the number of measures/variables is known ahead of time, this command
+    can short-circuit once `count` variables have been identified."""
+
     stat_vars = {}
     progress = progressbar.NullBar()
     with contextlib.closing(args.input) as input_file:
         if not args.count:
             line_count = sum(1 for _ in input_file)
-            progress = progressbar.ProgressBar(
-                max_value=line_count, redirect_stdout=True)
+            progress = progressbar.ProgressBar(max_value=line_count,
+                                               redirect_stdout=True)
             input_file.seek(0)
         reader = csv.DictReader(input_file)
         for row_dict in reader:
@@ -246,7 +279,8 @@ def generate_stat_vars(args):
     for sv in stat_vars.values():
         sv.validate()
         stat_var_node_kvs = sv.mcf_properties
-        nodes.append("\n".join(f"{k}: {v}" for k, v in stat_var_node_kvs.items()))
+        nodes.append("\n".join(
+            f"{k}: {v}" for k, v in stat_var_node_kvs.items()))
 
     with contextlib.closing(args.output) as output_file:
         output_file.write("\n".join(n.strip() + "\n" for n in nodes))
@@ -260,26 +294,23 @@ def main():
     preprocess_csv_parser = subparsers.add_parser(
         "preprocess_csv",
         help="Preprocesses CSV file for import into Data Commons KG.")
-    preprocess_csv_parser.add_argument(
-        "--input",
-        required=True,
-        type=argparse.FileType("r"),
-        help="Path to input CSV file.")
-    preprocess_csv_parser.add_argument(
-        "--output",
-        required=True,
-        type=argparse.FileType("w"),
-        help="Path to output CSV file.")
+    preprocess_csv_parser.add_argument("--input",
+                                       required=True,
+                                       type=argparse.FileType("r"),
+                                       help="Path to input CSV file.")
+    preprocess_csv_parser.add_argument("--output",
+                                       required=True,
+                                       type=argparse.FileType("w"),
+                                       help="Path to output CSV file.")
     preprocess_csv_parser.set_defaults(func=preprocess_csv)
 
     generate_stat_vars_parser = subparsers.add_parser(
         "generate_stat_vars",
         help="Generates StatisticalVariable MCF nodes from input CSV file.")
-    generate_stat_vars_parser.add_argument(
-        "--input",
-        required=True,
-        type=argparse.FileType("r"),
-        help="Path to input CSV file.")
+    generate_stat_vars_parser.add_argument("--input",
+                                           required=True,
+                                           type=argparse.FileType("r"),
+                                           help="Path to input CSV file.")
     generate_stat_vars_parser.add_argument(
         "--output",
         required=False,
@@ -289,13 +320,18 @@ def main():
     generate_stat_vars_parser.add_argument(
         "--count",
         required=False,
-        type=int, default=0,
+        type=int,
+        default=0,
         help="Number of StatisticalVariables to generate. Can be used " +
-            "to avoid loading the entire CSV file if known ahead of time.")
+        "to avoid loading the entire CSV file if known ahead of time.")
     generate_stat_vars_parser.set_defaults(func=generate_stat_vars)
 
     args = parser.parse_args()
-    args.func(args) if args.command else parser.error("A subcommand is required.")
+    if args.command:
+        parser.error("A subcommand is required.")
+        return
+
+    args.func(args)
 
 
 if __name__ == "__main__":
