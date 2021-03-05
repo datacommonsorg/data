@@ -45,7 +45,7 @@ From Column 8 - N, we have values tabulated. The column header is the variable. 
 #### Cleaned Data
 As part of the cleaning process, we remove the unwanted columns and then convert the columns into rows. Then add the `StatisticalVariable` column corresponding to census variable and TRU.
 
-Cleaned data for India level data is in the CSV [IndiaCensus2011_Primary_Abstract_Religion.csv](IndiaCensus2011_Primary_Abstract_Religion.csv). It will have the following columns.
+Cleaned data for India level data is in the CSV [IndiaCensus2011_Primary_Abstract_Religion - ZIP](IndiaCensus2011_Primary_Abstract_Religion.zip). It will have the following columns.
 
 - census_location_id - indianCensusAreaCode2011
 - TRU - TRU
@@ -53,14 +53,6 @@ Cleaned data for India level data is in the CSV [IndiaCensus2011_Primary_Abstrac
 - StatisticalVariable - statistical variable
 - Value - Value for the attribute
 - Year - Census year
-
-
-Cleaned data for each state is in a separate CSV. They have the following name format.
-
-`IndiaCensus2011_Primary_Abstract_Religion_<state_data_file.xlsx>.csv`
-
-Each state has a file.
-
 
 
 #### Cleaned Data Snippet
