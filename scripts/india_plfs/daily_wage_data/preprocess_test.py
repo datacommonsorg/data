@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__author__ = ["Thejesh GN (i@thejeshgn.com)"]
+__author__ = ["Thejesh GN <i@thejeshgn.com>"]
 
 import filecmp
 import os
 import json
 import tempfile
 import unittest
-from india_plfs.wage_data.preprocess import PLFSWageDataLoader
+from india_plfs.daily_wage_data.preprocess import PLFSDailyWageDataLoader
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -35,7 +35,7 @@ class TestPreprocess(unittest.TestCase):
             result_file_path = os.path.join(module_dir_,
                                             'test_data/test_cleaned.csv')
 
-            loader = PLFSWageDataLoader(xlsx_file, period="2018-10")
+            loader = PLFSDailyWageDataLoader(xlsx_file, period="2018-10")
             loader.load()
             loader.process()
             loader.save(csv_file_path=result_file_path)
@@ -50,8 +50,7 @@ class TestPreprocess(unittest.TestCase):
 
             os.remove(result_file_path)
 
-        self.maxDif = None
-        self.assertEqual(expected_file_data, result_file_data)
+            self.assertEqual(expected_file_data, result_file_data)
 
 
 if __name__ == '__main__':
