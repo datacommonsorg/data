@@ -30,19 +30,27 @@ class TestPreprocess(unittest.TestCase):
     def test_create_cleaned_wage_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             xlsx_file = os.path.join(module_dir_, 'test_data/test.xlsx')
-            expected_file = os.path.join(module_dir_, 'test_data/expected.csv')
-            result_file = os.path.join(module_dir_,
+            expected_file_path = os.path.join(module_dir_, 'test_data/expected.csv')
+            result_file_path = os.path.join(module_dir_,
                                        'test_data/test_cleaned.csv')
 
             loader = PLFSWageDataLoader(xlsx_file, period="2018-10")
             loader.load()
             loader.process()
-            loader.save(csv_file_path=result_file)
+            loader.save(csv_file_path=result_file_path)
 
-            same = filecmp.cmp(result_file, expected_file)
-            os.remove(result_file)
+            expected_file = open(expected_file_path)
+            expected_file_data = expected_file.read()
+            expected_file.close()
 
-        self.assertTrue(same)
+            result_file = open(result_file_path)
+            result_file_data = result_file.read()
+            result_file.close()
+
+            os.remove(result_file_path)
+
+        self.maxDif = None
+        self.assertEqual(expected_file_data, result_file_data)
 
 
 if __name__ == '__main__':
