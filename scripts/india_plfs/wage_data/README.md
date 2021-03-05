@@ -4,13 +4,14 @@
 ## About the Dataset
 Average wage/salary earnings (Rs. 0.00) during the preceding calendar month from regular wage/salaried employment among the regular wage/ salaried employees in CWS for each State/ UT.
 
+
 ### Download Data
 
 #### PLES July 2018 - June 2019
-Wage data from PLES July 2018 - June 2019 is availabe as [XLSX](http://mospi.nic.in/sites/default/files/reports_and_publication/PLFS_2018_19_Anual/Table_42.xlsx).
+Wage data from PLES July 2018 - June 2019 is available as [XLSX](http://mospi.nic.in/sites/default/files/reports_and_publication/PLFS_2018_19_Anual/Table_42.xlsx).
 
 #### PLES July 2017 - June 2018
-Wage data from PLES July 2017 - June 2018 is availabe as embeded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual%20Report%2C%20PLFS%202017-18_31052019.pdf).Table format is same. Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
+Wage data from PLES July 2017 - June 2018 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual%20Report%2C%20PLFS%202017-18_31052019.pdf). Table format is the same. Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
 
 ```
 java -jar tabula-java.jar  -a 52.094,85.771,549.879,760.359 -p 400 "$1" 
@@ -44,18 +45,16 @@ Average wage/salary earnings are per state and by quarter. There are three sets 
 11. rural+urban, total
 
 
-**Notes from the data page :** 
+**Notes from the data page:** 
 1. Reported earnings from regular wage/salaried employment
+2. The Current Weekly Status (CWS) approach to measuring uses seven days preceding the date of survey as the reference period. 
 
 
 
 #### Cleaned Data
-- [PLFSWageData_India_Table_42_07_09_2018.csv](PLFSWageData_India_Table_42_07_09_2018.csv)
-- [PLFSWageData_India_Table_42_10_12_2018.csv](PLFSWageData_India_Table_42_10_12_2018.csv)
-- [PLFSWageData_India_Table_42_01_03_2019.csv](PLFSWageData_India_Table_42_01_03_2019.csv)
-- [PLFSWageData_India_Table_42_04_06_2019.csv](PLFSWageData_India_Table_42_04_06_2019.csv)
+- [PLFSWageData_India.csv](PLFSWageData_India.csv)
 
-It has the following columns
+It has the following columns.
 
 1. period
 2. territory
