@@ -19,6 +19,7 @@ import copy
 import pandas as pd
 import numpy as np
 import tempfile
+from os import path
 import urllib.request
 from ..common.utils import title_case
 from ..common.generic_base import CensusGenericDataLoaderBase
@@ -135,7 +136,13 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
 
         # Export it as CSV. It will have the following columns
         # Name,TRU,columnName,value,StatisticalVariable,Year
-        self.raw_df.to_csv(self.csv_file_path, index=False, header=True)
+        if path.exists(self.csv_file_path):
+            self.raw_df.to_csv(self.csv_file_path,
+                               mode='a',
+                               index=False,
+                               header=False)
+        else:
+            self.raw_df.to_csv(self.csv_file_path, index=False, header=True)
 
     def _get_base_name(self, row):
         # To make the name meaningful add Religion to the
@@ -303,6 +310,11 @@ if __name__ == '__main__':
         os.path.dirname(__file__),
         './IndiaCensus2011_Primary_Abstract_Religion.csv')
 
+    # If the final CSV already exists
+    # Remove it, so it can be regenerated
+    if path.exists(csv_file_path):
+        os.remove(csv_file_path)
+
     # This is the data file for India
     data_file_path = os.path.join(os.path.dirname(__file__),
                                   'data/RL-0000.xlsx')
@@ -348,9 +360,6 @@ if __name__ == '__main__':
             os.path.dirname(__file__), 'data/{state_data_file}.xlsx'.format(
                 state_data_file=state_data_file))
 
-        csv_file_name = "./IndiaCensus2011_Primary_Abstract_Religion_{state_data_file}.csv".format(
-            state_data_file=state_data_file)
-        csv_file_path = os.path.join(os.path.dirname(__file__), csv_file_name)
         loader = CensusPrimaryReligiousDataLoader(
             data_file_path=data_file_path,
             metadata_file_path=metadata_file_path,
