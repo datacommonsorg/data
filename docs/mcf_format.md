@@ -288,10 +288,12 @@ other nodes can be `typeOf`.
 
 ### Template MCF
 
-Template MCF is an intermediary MCF that we use for mapping datasets to instance
-MCF. Template MCF does not get ingested into the Data Commons graph.
+Template MCF, or tMCF, is an intermediary MCF that we use for mapping datasets to instance
+MCF. Template MCF does not get ingested into the Data Commons graph. They are
+referencing the data in a paired .csv and together will be used to generate a
+MCF that can be ingested into the graph.
 
-For example, if we had a dataset `SomeDataset` with columns:
+For example, if we had a dataset `SomeDataset` stored as a .csv with columns:
 
 `ResponseOption_Identifier, ResponseOption_Text, ResponseOption_Dcid,
 ResponseOption_Name, SurveyItem_Dcid`
@@ -316,7 +318,40 @@ typeOf: SurveyItem
 dcid: C:SomeDataset->SurveyItem_Dcid
 ```
 
-Where E is short for "Entity" and "C" is short for "Column".
+Where "E" is short for "Entity" and "C" is short for "Column".
+
+"E" should be used to refrence another entity that is defined in the template
+MCF only. Instead "C" should be used to refer to property values that are 
+entities already populated in the graph and not being defined in the template 
+MCF. "C" should also be used to reference property values that are Quantities
+or Enummerations already defined in the schema.
+
+For example, if we had a dataset `SomeDataset` stored as a .csv with columns:
+
+`State_Dcid, City_Dcid, City_Name, City_Size, Water_Area`
+
+And you are referencing an existing node in the Data Commons graph with a
+defined a schema that looks like:
+
+![Drawing of Schema](img/example_schema_mapping_diagram_2.png)
+
+The template MCF looks like:
+
+Node: USCity_0600001
+typeOf: City
+dcid: "geoId/0600001"
+name: "No Place Town"
+containedInPlace: l:USState_06
+
+```
+Node: E:SomeDataset->E1
+typeOf: City
+dcid: C:SomeDataset->City_Dcid
+name: C:SomeDataset->City_Name
+containedInPlace C:SomeDataset->State_Dcid
+waterArea: C:SomeDataset->Water_Area
+citySize: C:SomeDataset->City_Size
+```
 
 Contributors need not worry about the process of using template MCF to convert
 datasets to instance MCF, but roughly, for each row of the dataset, we create
