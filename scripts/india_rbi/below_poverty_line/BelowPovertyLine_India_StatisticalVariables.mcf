@@ -1,0 +1,62 @@
+Node: dcid:Count_Person_Rural_BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Rural
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+
+Node: dcid:Count_Person_Urban_BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Urban
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+
+Node: dcid:Count_Person_BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+
+Node: dcid:Count_Person_Rural_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Rural
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+measurementDenominator: dcid:Count_Person_Rural
+
+Node: dcid:Count_Person_Urban_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Urban
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+measurementDenominator: dcid:Count_Person_Urban
+
+Node: dcid:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+measurementDenominator: dcid:Count_Person
+
+Node: dcid:RuralPovertyLine
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+placeOfResidenceClassification: dcs:Rural
+statType: dcs:measuredValue
+measuredProperty: dcs:povertyLine
+
+Node: dcid:UrbanPovertyLine
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:povertyLine

@@ -1,0 +1,10 @@
+Node: E:IndiaCensus2011_TEST3->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaCensus2011_TEST3->StatisticalVariable
+observationDate: C:IndiaCensus2011_TEST3->Year
+observationAbout: E:IndiaCensus2011_TEST3->E1
+value: C:IndiaCensus2011_TEST3->Value
+
+Node: E:IndiaCensus2011_TEST3->E1
+typeOf: schema:Place
+indianCensusAreaCode2011: C:IndiaCensus2011_TEST3->census_location_id

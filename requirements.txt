@@ -5,7 +5,7 @@ pylint
 pytest
 yapf
 frozendict
-
+requests
 urllib3
 zipp
-xlrd
+xlrd==1.2.0

@@ -65,7 +65,7 @@ class TestCensusPrimaryAbstractDataLoaderBase(unittest.TestCase):
         same_tmcf = filecmp.cmp(tmcf_file_path, tmcf_expected_file_path)
         same_csv = filecmp.cmp(csv_file_path, csv_expected_file_path)
 
-        #Remove the created files, after comparison
+        # Remove the created files, after comparison
         if os.path.exists(mcf_file_path):
             os.remove(mcf_file_path)
 
@@ -120,7 +120,62 @@ class TestCensusPrimaryAbstractDataLoaderBase(unittest.TestCase):
         same_tmcf = filecmp.cmp(tmcf_file_path, tmcf_expected_file_path)
         same_csv = filecmp.cmp(csv_file_path, csv_expected_file_path)
 
-        #Remove the created files, after comparison
+        # Remove the created files, after comparison
+        if os.path.exists(mcf_file_path):
+            os.remove(mcf_file_path)
+
+        if os.path.exists(tmcf_file_path):
+            os.remove(tmcf_file_path)
+
+        if os.path.exists(csv_file_path):
+            os.remove(csv_file_path)
+
+        self.assertTrue(same_mcf)
+        self.assertTrue(same_tmcf)
+        self.assertTrue(same_csv)
+
+    def test_create_csv_literate_data(self):
+        data_file_path = os.path.join(os.path.dirname(__file__),
+                                      './test_data/test3_input.xlsx')
+
+        metadata_file_path = os.path.join(
+            os.path.dirname(__file__), 'primary_abstract_data_variables.csv')
+
+        existing_stat_var = [
+            "Count_Household", "Count_Person", "Count_Person_Urban",
+            "Count_Person_Rural", "Count_Person_Male", "Count_Person_Female"
+        ]
+
+        mcf_file_path = os.path.join(os.path.dirname(__file__),
+                                     './test_data/test3_Data.mcf')
+        tmcf_file_path = os.path.join(os.path.dirname(__file__),
+                                      './test_data/test3_Data.tmcf')
+        csv_file_path = os.path.join(os.path.dirname(__file__),
+                                     './test_data/test3_Data.csv')
+
+        mcf_expected_file_path = os.path.join(
+            os.path.dirname(__file__), './test_data/test3_Data_Expected.mcf')
+        tmcf_expected_file_path = os.path.join(
+            os.path.dirname(__file__), './test_data/test3_Data_Expected.tmcf')
+        csv_expected_file_path = os.path.join(
+            os.path.dirname(__file__), './test_data/test3_Data_Expected.csv')
+
+        loader = CensusPrimaryAbstractDataLoaderBase(
+            data_file_path=data_file_path,
+            metadata_file_path=metadata_file_path,
+            mcf_file_path=mcf_file_path,
+            tmcf_file_path=tmcf_file_path,
+            csv_file_path=csv_file_path,
+            existing_stat_var=existing_stat_var,
+            census_year=2011,
+            dataset_name="TEST3")
+        loader.process()
+
+        same_mcf = filecmp.cmp(mcf_file_path, mcf_expected_file_path)
+        same_tmcf = filecmp.cmp(tmcf_file_path, tmcf_expected_file_path)
+        same_csv = filecmp.cmp(csv_file_path, csv_expected_file_path)
+
+        # Remove the created files, after comparison
         if os.path.exists(mcf_file_path):
             os.remove(mcf_file_path)
 

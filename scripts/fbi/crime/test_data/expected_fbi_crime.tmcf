@@ -1,0 +1,88 @@
+
+Node: E:FBI_Crime->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_ViolentCrime
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_ViolentCrime
+
+Node: E:FBI_Crime->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_MurderAndNonNegligentManslaughter
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_MurderAndNonNegligentManslaughter
+
+Node: E:FBI_Crime->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_ForcibleRape
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_ForcibleRape
+
+Node: E:FBI_Crime->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_Robbery
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_Robbery
+
+Node: E:FBI_Crime->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_AggravatedAssault
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_AggravatedAssault
+
+Node: E:FBI_Crime->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_PropertyCrime
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_PropertyCrime
+
+Node: E:FBI_Crime->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_Burglary
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_Burglary
+
+Node: E:FBI_Crime->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_LarcenyTheft
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_LarcenyTheft
+
+Node: E:FBI_Crime->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_MotorVehicleTheft
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_MotorVehicleTheft
+
+Node: E:FBI_Crime->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_Arson
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_Arson
+
+Node: E:FBI_Crime->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_CriminalActivities_CombinedCrime
+observationAbout: C:FBI_Crime->GeoId
+observationDate: C:FBI_Crime->Year
+observationPeriod: "P1Y"
+value: C:FBI_Crime->Count_CriminalActivities_CombinedCrime

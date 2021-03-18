@@ -34,8 +34,8 @@ TEMPLATE_TMCF = """Node: E:IndiaCensus{year}_{dataset_name}->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus{year}_{dataset_name}->StatisticalVariable
 observationDate: C:IndiaCensus{year}_{dataset_name}->Year
-observationAbout: C:IndiaCensus{year}_{dataset_name}->E1
-value: C:IndiaCensus{year}_{dataset_name}->value
+observationAbout: E:IndiaCensus{year}_{dataset_name}->E1
+value: C:IndiaCensus{year}_{dataset_name}->Value
 
 Node: E:IndiaCensus{year}_{dataset_name}->E1
 typeOf: schema:Place
@@ -103,7 +103,7 @@ class CensusPrimaryAbstractDataLoaderBase:
         self.census_columns = self.raw_df.columns[CENSUS_DATA_COLUMN_START:]
 
     def _format_location(self, row):
-        #In census of India. Location code for India is all zeros.
+        # In census of India. Location code for India is all zeros.
         if (row["Level"]).upper() == "INDIA":
             return "0"
         elif (row["Level"]).upper() == "STATE":
@@ -121,50 +121,53 @@ class CensusPrimaryAbstractDataLoaderBase:
 
     def _format_data(self):
 
-        #Generate Census locationid
+        # Generate Census locationid
         self.raw_df["census_location_id"] = self.raw_df.apply(
             self._format_location, axis=1)
 
-        #Remove the unwanted columns
-        #They are census codes which we dont use
-        #State,District,Subdistt,Town/Village,Ward,EB
+        # Remove the unwanted columns. They are census codes which we dont use
+        # State,District,Subdistt,Town/Village,Ward,EB
+        # We delete them only if they exists
+        # From pandas documentation:
+        # If errors=‘ignore’, suppress error and only existing labels are dropped
         self.raw_df.drop([
             "State", "District", "Subdistt", "Town/Village", "Ward", "EB",
             "Level", "Name"
         ],
                          axis=1,
-                         inplace=True)
-        #first column is Name of the place
-        #second column is Name of the TRU/placeOfResidence
-        #3-N are the actual values
+                         inplace=True,
+                         errors='ignore')
+        # First column is Name of the place
+        # Second column is Name of the TRU/placeOfResidenceClassification
+        # 3-N are the actual values
         value_columns = list(self.raw_df.columns[1:-1])
 
-        #converting rows in to columns. So the final structure will be
-        #Name,TRU,columnName,value
+        # Converting rows in to columns. So the final structure will be
+        # Name,TRU,columnName,value
         self.raw_df = self.raw_df.melt(id_vars=["census_location_id", "TRU"],
                                        value_vars=value_columns,
                                        var_name='columnName',
                                        value_name='Value')
 
-        #Add corresponding StatisticalVariable, based on columnName and TRU
+        # Add corresponding StatisticalVariable, based on columnName and TRU
         self.raw_df['StatisticalVariable'] = self.raw_df.apply(
             lambda row: self.stat_var_index["{0}_{1}".format(
                 row["columnName"], row["TRU"])],
             axis=1)
-        #add the census year
+        # Add the census year
         self.raw_df['Year'] = self.census_year
 
-        #Export it as CSV. It will have the following columns
-        #Name,TRU,columnName,value,StatisticalVariable,Year
+        # Export it as CSV. It will have the following columns
+        # Name,TRU,columnName,value,StatisticalVariable,Year
         self.raw_df.to_csv(self.csv_file_path, index=False, header=True)
 
     def _get_base_name(self, row):
-        #This function is overridden in the child class
+        # This function is overridden in the child class
         name = "Count_" + row["populationType"]
         return name
 
     def _get_base_constraints(self, row):
-        #This function is overridden in the child class
+        # This function is overridden in the child class
         constraints = ""
         return constraints
 
@@ -175,7 +178,7 @@ class CensusPrimaryAbstractDataLoaderBase:
 
         name_array.append(self._get_base_name(row))
 
-        #No need to add empty constraint to the list
+        # No need to add empty constraint to the list
         if self._get_base_constraints(row) != "":
             constraints_array.append(self._get_base_constraints(row))
 
@@ -185,10 +188,28 @@ class CensusPrimaryAbstractDataLoaderBase:
         else:
             pass
 
+        if row["socialCategory"] == "ScheduledCaste":
+            name_array.append("ScheduledCaste")
+            constraints_array.append("socialCategory: dcs:ScheduledCaste")
+        if row["socialCategory"] == "ScheduledTribe":
+            name_array.append("ScheduledTribe")
+            constraints_array.append("socialCategory: dcs:ScheduledTribe")
+        else:
+            pass
+
+        if row["literacyStatus"] == "Literate":
+            name_array.append("Literate")
+            constraints_array.append("literacyStatus: dcs:Literate")
+        if row["literacyStatus"] == "Illiterate":
+            name_array.append("Illiterate")
+            constraints_array.append("literacyStatus: dcs:Illiterate")
+        else:
+            pass
+
         if row["workerStatus"] == "Worker":
             constraints_array.append("workerStatus: dcs:Worker")
             if row["workerClassification"] == "MainWorker":
-                name_array.append("MainWorkers")
+                name_array.append("MainWorker")
                 constraints_array.append("workerClassification: dcs:MainWorker")
                 if row["workCategory"] != "":
                     name_array.append(row["workCategory"])
@@ -201,7 +222,7 @@ class CensusPrimaryAbstractDataLoaderBase:
                     "workerClassification: dcs:MarginalWorker")
 
                 if row["workCategory"] != "":
-                    name_array.append("workCategory")
+                    name_array.append(row["workCategory"])
                     constraints_array.append("workCategory: dcs:" +
                                              row["workCategory"])
 
@@ -221,12 +242,14 @@ class CensusPrimaryAbstractDataLoaderBase:
 
         if place_of_residence == "Urban":
             name_array.append("Urban")
-            constraints_array.append("placeOfResidence: dcs:Urban")
+            constraints_array.append(
+                "placeOfResidenceClassification: dcs:Urban")
             row["description"] = row["description"] + " - Urban"
 
         elif place_of_residence == "Rural":
             name_array.append("Rural")
-            constraints_array.append("placeOfResidence: dcs:Rural")
+            constraints_array.append(
+                "placeOfResidenceClassification: dcs:Rural")
             row["description"] = row["description"] + " - Rural"
 
         if row["gender"] == "Male":
@@ -259,12 +282,12 @@ class CensusPrimaryAbstractDataLoaderBase:
                     for place_of_residence in [None, "Urban", "Rural"]:
                         name, stat_var = self._create_variable(
                             data_row, place_of_residence)
-                        #if the statvar already exists then we don't
-                        #need to recreate it
+                        # If the statvar already exists then we don't
+                        # need to recreate it
                         if name in self.existing_stat_var:
                             pass
-                        #we need to create statvars only for those columns that
-                        #exist in the current data file
+                        # We need to create statvars only for those columns that
+                        # Exist in the current data file
                         elif data_row["columnName"] not in self.census_columns:
                             pass
                         else:
