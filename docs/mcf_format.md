@@ -337,12 +337,6 @@ defined a schema that looks like:
 
 The template MCF looks like:
 
-Node: USCity_0600001
-typeOf: City
-dcid: "geoId/0600001"
-name: "No Place Town"
-containedInPlace: l:USState_06
-
 ```
 Node: E:SomeDataset->E1
 typeOf: City
