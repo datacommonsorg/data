@@ -86,6 +86,26 @@ enforce some of the guidelines.
 
 #### Python
 
+##### Setup
+
+Ensure prerequisites are installed
+
+* [Python3](https://www.python.org/downloads/)
+* [Pip](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+
+Install requirements and setup a virtual environment to isolate python development in this repo.
+
+```shell
+python3 -m venv .env
+source .env/bin/activate
+
+pip3 install -r requirements.txt
+```
+
+##### Guidelines
+
+*   Any additional package required must be specified in the requirements.txt
+    in the top-level folder. No other requirements.txt files are allowed.
 *   Code must be formatted according to the
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
     according to the [yapf formatter](https://github.com/google/yapf).
