@@ -43,6 +43,9 @@ example, this includes maps to and from common geographic identifiers.
 ### GitHub Development Process
 
 #### One Time Set-up
+
+Install [Git LFS](https://git-lfs.github.com/)
+
 In https://github.com/datacommonsorg/data, click on "Fork" button to fork the
 repo.
 
