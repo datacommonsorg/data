@@ -40,7 +40,7 @@ function run_py_lint_fix {
 function run_py_lint_test {
   setup_python
   echo "#### Testing Python lint"
-  if ! yapf -vv -r --diff -p --style=google util/ scripts/ import-automation/; then
+  if ! yapf -r --diff -p --style=google util/ scripts/ import-automation/; then
     echo "Fix lint errors by running ./run_test.sh -f"
     exit 1
   fi
