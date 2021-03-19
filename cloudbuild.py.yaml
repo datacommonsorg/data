@@ -43,7 +43,7 @@ steps:
 - id: python_format_check
   name: python:3.7
   entrypoint: python3
-  args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/", "scripts/", "tools/", "docs/", "schema/"]
+  args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/", "scripts/", "tools/", "docs/"]
   # In cloudbuild, everything happens under /workspace path
   env: ["PYTHONPATH=/workspace:/workspace/scripts"]
   waitFor:
