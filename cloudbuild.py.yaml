@@ -3,8 +3,12 @@ steps:
 
 - id: python_install
   name: python:3.7
-  entrypoint: python3
-  args: ["-m" , "pip" , "install" , "-t" , "." , "-r" , "requirements.txt"]
+  entrypoint: /bin/sh
+  waitFor: ['-']
+  args:
+    - -c
+    - |
+      ./run_test.sh -p
 
 # We can't just test everything under our Cloud Build working directory because
 # that's where python installs all of its packages also, and we don't really
@@ -15,39 +19,43 @@ steps:
 #
 - id: python_test_util
   name: python:3.7
-  entrypoint: python3
-  args: ["-m", "unittest", "discover", "-v", "-s", "util/", "-p", "*_test.py"]
-  # In cloudbuild, everything happens under /workspace path
-  env: ["PYTHONPATH=/workspace:/workspace/scripts"]
+  entrypoint: /bin/sh
   waitFor:
   - python_install
+  args:
+    - -c
+    - |
+      ./run_test.sh -u
 
 - id: python_test_scripts
   name: python:3.7
-  entrypoint: python3
-  args: ["-m", "unittest", "discover", "-v", "-s", "scripts/", "-p", "*_test.py"]
-  # In cloudbuild, everything happens under /workspace path
-  env: ["PYTHONPATH=/workspace:/workspace/scripts"]
+  entrypoint: /bin/sh
   waitFor:
   - python_install
+  args:
+    - -c
+    - |
+      ./run_test.sh -s
 
 - id: python_test_import_automation
   name: python:3.7
-  entrypoint: python3
-  args: ["-m", "unittest", "discover", "-v", "-s", "import-automation/", "-p", "*_test.py"]
-  # In cloudbuild, everything happens under /workspace path
-  env: ["PYTHONPATH=/workspace:/workspace/scripts"]
+  entrypoint: /bin/sh
   waitFor:
   - python_install
+  args:
+    - -c
+    - |
+      ./run_test.sh -i
 
 - id: python_format_check
   name: python:3.7
-  entrypoint: python3
-  args: ["-m", "yapf", "--recursive", "--diff", "--style", "google", "util/", "scripts/", "tools/", "docs/"]
-  # In cloudbuild, everything happens under /workspace path
-  env: ["PYTHONPATH=/workspace:/workspace/scripts"]
+  entrypoint: /bin/sh
   waitFor:
   - python_install
+  args:
+    - -c
+    - |
+      ./run_test.sh -l
 
 # TODO(rsned): Uncomment once the existing source files are updated to pass lint.
 #- id: python_lint
