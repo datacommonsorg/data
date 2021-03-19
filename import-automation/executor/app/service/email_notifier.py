@@ -40,9 +40,9 @@ class EmailNotifier:
         self.account = account
         self.password = password
         self.host = host
-        logging.info('EmailNotifier.__init__: '
-                     'Initialized with account %s and host %s',
-                     account, host)
+        logging.info(
+            'EmailNotifier.__init__: '
+            'Initialized with account %s and host %s', account, host)
 
     def send(self, subject: str, body: str,
              receiver_addresses: List[str]) -> None:
@@ -64,10 +64,8 @@ class EmailNotifier:
                  f'Subject: {subject}\n'
                  '\n'
                  f'{body}\n')
-        logging.info('EmailNotifier.send: Sending %s to %s',
-                     email, receivers)
+        logging.info('EmailNotifier.send: Sending %s to %s', email, receivers)
         with smtplib.SMTP_SSL(self.host) as server:
             server.login(self.account, self.password)
             server.sendmail(self.account, receiver_addresses, email)
-            logging.info('EmailNotifier.send: Sent %s to %s',
-                         email, receivers)
+            logging.info('EmailNotifier.send: Sent %s to %s', email, receivers)

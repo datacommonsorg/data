@@ -120,9 +120,10 @@ class GitHubRepoAPI:
             Set of directory paths each as a string. The paths are relative
             to the root directory of the repository.
         """
-        logging.info('GitHubRepoAPI.find_dirs_in_commit_containing_file: '
-                     'Finding directories touched by commit %s containing %s',
-                     commit_sha, containing)
+        logging.info(
+            'GitHubRepoAPI.find_dirs_in_commit_containing_file: '
+            'Finding directories touched by commit %s containing %s',
+            commit_sha, containing)
         changed_files = self._query_changed_files_in_commit(commit_sha)
         found_dirs = set()
         searched = set()
@@ -134,9 +135,9 @@ class GitHubRepoAPI:
             found_dirs.update(
                 self._find_dirs_up_path_containing_file(commit_sha, dir_path,
                                                         containing, searched))
-        logging.info('GitHubRepoAPI.find_dirs_in_commit_containing_file: '
-                     'Found %s',
-                     found_dirs)
+        logging.info(
+            'GitHubRepoAPI.find_dirs_in_commit_containing_file: '
+            'Found %s', found_dirs)
         return found_dirs
 
     def download_repo(self,
@@ -168,9 +169,10 @@ class GitHubRepoAPI:
         Raises:
             requests.Timeout: Downloading timed out.
         """
-        logging.info('GitHubRepoAPI.download_repo: '
-                     'Downloading repository %s at commit %s to %s',
-                     f'{self._format_repo_name()}', commit_sha, dest_dir)
+        logging.info(
+            'GitHubRepoAPI.download_repo: '
+            'Downloading repository %s at commit %s to %s',
+            f'{self._format_repo_name()}', commit_sha, dest_dir)
         if not commit_sha:
             commit_sha = ''
         download_query = _GITHUB_DOWNLOAD_API.format_map({
@@ -191,9 +193,9 @@ class GitHubRepoAPI:
                 tar.extractall(dest_dir)
                 repo_dir = os.path.join(dest_dir,
                                         _get_path_first_component(files[0]))
-                logging.info('GitHubRepoAPI.download_repo: '
-                             'Extracted repository %s',
-                             repo_dir)
+                logging.info(
+                    'GitHubRepoAPI.download_repo: '
+                    'Extracted repository %s', repo_dir)
                 return repo_dir
 
     def _build_content_query(self, commit_sha: str, path: str) -> str:
@@ -255,16 +257,16 @@ class GitHubRepoAPI:
             is the path to the file in the repository and <status> indicates
             how the file is changed.
         """
-        logging.info('GitHubRepoAPI._query_changed_files_in_commit: '
-                     'Querying commit %s',
-                     commit_sha)
+        logging.info(
+            'GitHubRepoAPI._query_changed_files_in_commit: '
+            'Querying commit %s', commit_sha)
         commit_info = self.query_commit(commit_sha)
         files = []
         for entry in commit_info['files']:
             files.append((entry['filename'], entry['status']))
-        logging.info('GitHubRepoAPI._query_changed_files_in_commit: '
-                     'Found %s',
-                     files)
+        logging.info(
+            'GitHubRepoAPI._query_changed_files_in_commit: '
+            'Found %s', files)
         return files
 
     def _query_files_in_dir(self, commit_sha: str, dir_path: str) -> List[str]:
@@ -294,8 +296,7 @@ class GitHubRepoAPI:
         files = [
             entry['name'] for entry in content_info if entry['type'] == 'file'
         ]
-        logging.info('GitHubRepoAPI._query_files_in_dir: Found %s',
-                     files)
+        logging.info('GitHubRepoAPI._query_files_in_dir: Found %s', files)
         return files
 
     def _dir_exists(self, commit_sha: str, dir_path: str) -> bool:
@@ -310,8 +311,7 @@ class GitHubRepoAPI:
             True if the directory exists. False, otherwise.
         """
         content_query = self._build_content_query(commit_sha, dir_path)
-        logging.info('GitHubRepoAPI._dir_exists: Querying %s',
-                     content_query)
+        logging.info('GitHubRepoAPI._dir_exists: Querying %s', content_query)
         response = requests.get(content_query, auth=self.auth)
         is_ok = response.status_code == http.HTTPStatus.OK
         is_not_found = response.status_code == http.HTTPStatus.NOT_FOUND
@@ -319,8 +319,7 @@ class GitHubRepoAPI:
             response.raise_for_status()
         exists = response.status_code != http.HTTPStatus.NOT_FOUND
         logging.info('GitHubRepoAPI._dir_exists: Directory %s at commit %s %s',
-                     dir_path,
-                     commit_sha,
+                     dir_path, commit_sha,
                      'exists' if exists else 'does not exist')
         return exists
 
@@ -343,21 +342,20 @@ class GitHubRepoAPI:
             True if the directory contains a file with the given name. False,
             otherwise.
         """
-        logging.info('GitHubRepoAPI._path_containing_file: '
-                     'Checking if directory %s at commit %s contains %s',
-                     dir_path, commit_sha, containing)
+        logging.info(
+            'GitHubRepoAPI._path_containing_file: '
+            'Checking if directory %s at commit %s contains %s', dir_path,
+            commit_sha, containing)
         files_in_dir = self._query_files_in_dir(commit_sha, dir_path)
         contains = False
         for filename in files_in_dir:
             if filename == containing:
                 contains = True
                 break
-        logging.info('GitHubRepoAPI._path_containing_file: '
-                     'Directory %s at commit %s %s %s',
-                     dir_path,
-                     commit_sha,
-                     'contains' if contains else 'does not contain',
-                     containing)
+        logging.info(
+            'GitHubRepoAPI._path_containing_file: '
+            'Directory %s at commit %s %s %s', dir_path, commit_sha,
+            'contains' if contains else 'does not contain', containing)
         return contains
 
     def _find_dirs_up_path_containing_file(self, commit_sha: str, dir_path: str,
@@ -392,10 +390,10 @@ class GitHubRepoAPI:
         Returns:
             A set of directory paths each as a string.
         """
-        logging.info('GitHubRepoAPI._find_dirs_up_path_containing_file: '
-                     'Finding directories up path %s at commit %s containing %s'
-                     ', having searched %s',
-                     dir_path, commit_sha, containing, searched)
+        logging.info(
+            'GitHubRepoAPI._find_dirs_up_path_containing_file: '
+            'Finding directories up path %s at commit %s containing %s'
+            ', having searched %s', dir_path, commit_sha, containing, searched)
         found_dirs = set()
         while dir_path or dir_path == '':
             if dir_path in searched:
@@ -404,9 +402,9 @@ class GitHubRepoAPI:
             if self._path_containing_file(commit_sha, dir_path, containing):
                 found_dirs.add(dir_path)
             dir_path = os.path.dirname(dir_path)
-        logging.info('GitHubRepoAPI._find_dirs_up_path_containing_file: '
-                     'Found %s',
-                     found_dirs)
+        logging.info(
+            'GitHubRepoAPI._find_dirs_up_path_containing_file: '
+            'Found %s', found_dirs)
 
     def _format_repo_name(self):
         """Returns {self.owner}/{self.repo}."""

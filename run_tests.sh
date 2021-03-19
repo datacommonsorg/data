@@ -33,14 +33,14 @@ function setup_python {
 function run_py_lint_fix {
   setup_python
   echo "#### Fixing Python code"
-  yapf -r -i -p --style=google util/ scripts/ tools/ docs/
+  yapf -r -i -p --style=google util/ scripts/ import-automation/
 }
 
 # Tests Python code style
 function run_py_lint_test {
   setup_python
   echo "#### Testing Python lint"
-  if ! yapf -r --diff -p --style=google util/ scripts/ tools/ docs/; then
+  if ! yapf -vv -r --diff -p --style=google util/ scripts/ import-automation/; then
     echo "Fix lint errors by running ./run_test.sh -f"
     exit 1
   fi
