@@ -8,7 +8,7 @@ steps:
   args:
     - -c
     - |
-      ./run_tests.sh -a
+      ./run_tests.sh -r
 
 # We can't just test everything under our Cloud Build working directory because
 # that's where python installs all of its packages also, and we don't really
