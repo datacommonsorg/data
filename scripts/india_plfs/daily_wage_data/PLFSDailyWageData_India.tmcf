@@ -1,0 +1,84 @@
+Node: E:PLFSDailyWageData_India->E0
+typeOf: schema:Place
+isoCode: C:PLFSDailyWageData_India->territory
+
+Node: E:PLFSDailyWageData_India->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker_Rural_Male
+value: C:PLFSDailyWageData_India->wage_rural_male
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
+
+Node: E:PLFSDailyWageData_India->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker_Rural_Female
+value: C:PLFSDailyWageData_India->wage_rural_female
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
+
+Node: E:PLFSDailyWageData_India->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker_Rural
+value: C:PLFSDailyWageData_India->wage_rural_person
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
+
+Node: E:PLFSDailyWageData_India->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker_Urban_Male
+value: C:PLFSDailyWageData_India->wage_urban_male
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
+
+Node: E:PLFSDailyWageData_India->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker_Urban_Female
+value: C:PLFSDailyWageData_India->wage_urban_female
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
+
+Node: E:PLFSDailyWageData_India->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker_Urban
+value: C:PLFSDailyWageData_India->wage_urban_person
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
+
+Node: E:PLFSDailyWageData_India->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker_Male
+value: C:PLFSDailyWageData_India->wage_total_male
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
+
+Node: E:PLFSDailyWageData_India->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker_Female
+value: C:PLFSDailyWageData_India->wage_total_female
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
+
+Node: E:PLFSDailyWageData_India->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_WagesDaily_Worker
+value: C:PLFSDailyWageData_India->wage_total_person
+unit: dcs:IndianRupee
+observationDate: C:PLFSDailyWageData_India->period
+observationPeriod: "P3M"
+observationAbout: E:PLFSDailyWageData_India->E0
