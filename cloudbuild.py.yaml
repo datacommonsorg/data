@@ -35,7 +35,7 @@ steps:
   args:
     - -c
     - |
-      ./run_tests.sh -p scripts
+      ./run_tests.sh -p scripts/
 
 - id: python_test_import_automation
   name: python:3.7
@@ -45,7 +45,7 @@ steps:
   args:
     - -c
     - |
-      ./run_tests.sh -p import_automation
+      ./run_tests.sh -p import_automation/
 
 - id: python_format_check
   name: python:3.7
