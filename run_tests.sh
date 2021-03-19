@@ -31,15 +31,15 @@ function setup_python {
 
 # Fixes lint
 function run_py_lint_fix {
-  echo -e "#### Fixing Python code"
   setup_python
+  echo "#### Fixing Python code"
   yapf -r -i -p --style=google util/ scripts/ tools/ docs/
 }
 
 # Tests Python code style
 function run_py_lint_test {
-  echo -e "#### Testing Python lint"
   setup_python
+  echo "#### Testing Python lint"
   if ! yapf -r --diff -p --style=google util/ scripts/ tools/ docs/; then
     echo "Fix lint errors by running ./run_test.sh -f"
     exit 1
@@ -53,51 +53,45 @@ function run_py_test {
     echo "Please specify a folder to run tests in"
     exit 1
   fi
-  echo -e "#### Testing Python code in $1"
   setup_python
+  echo "#### Testing Python code in $1"
   python3 -m unittest discover -v -s $1 -p *_test.py
 }
 
 function help {
-  echo "Usage: $0 -plusiaf"
-  echo "-p       Install Python requirements"
+  echo "Usage: $0 -rplusiaf"
+  echo "-r       Install Python requirements"
   echo "-l       Test lint on Python code"
-  echo "-u       Run Python tests in util/"
-  echo "-s       Run Python tests in scripts/"
-  echo "-i       Run Python tests in import-automation/"
+  echo "-p       Run Python tests in specified folder, e.g. ./run_test.sh -p util"
   echo "-a       Run all tests"
   echo "-f       Fix lint"
   exit 1
 }
 
-while getopts plusiaf OPTION; do
+while getopts rp:lusiaf OPTION; do
   case $OPTION in
-    p)
-        echo -e "### Installing Python requirements"
+    r)
+        echo "### Installing Python requirements"
         setup_python
         ;;
     l)
-        echo -e "### Testing lint"
+        echo "### Testing lint"
         run_py_lint_test
         ;;
-    u)
-        echo -e "### Running Python tests in util/"
-        run_py_test "util/"
-        ;;
-    s)
-        echo -e "### Running Python tests in scripts/"
-        run_py_test "scripts/"
+    p)
+        echo "### Running Python tests in ${OPTARG}"
+        run_py_test ${OPTARG}
         ;;
     f)
-        echo -e "### Fixing lint errors"
+        echo "### Fixing lint errors"
         run_py_lint_fix
         ;;
     a)
-        echo -e "### Running all tests"
-        run_py_lint_test
+        echo "### Running all tests"
         run_py_test "util/"
         run_py_test "scripts/"
         run_py_test "import-automation/"
+        run_py_lint_test
         ;;
     *)
         help

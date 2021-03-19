@@ -8,7 +8,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -p
+      ./run_test.sh -r
 
 # We can't just test everything under our Cloud Build working directory because
 # that's where python installs all of its packages also, and we don't really
@@ -25,7 +25,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -u
+      ./run_test.sh -p util/
 
 - id: python_test_scripts
   name: python:3.7
@@ -35,7 +35,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -s
+      ./run_test.sh -p scripts
 
 - id: python_test_import_automation
   name: python:3.7
@@ -45,7 +45,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -i
+      ./run_test.sh -p import_automation
 
 - id: python_format_check
   name: python:3.7
