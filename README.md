@@ -44,31 +44,39 @@ example, this includes maps to and from common geographic identifiers.
 
 #### One Time Set-up
 
-Install [Git LFS](https://git-lfs.github.com/)
+1. Install [Git LFS](https://git-lfs.github.com/)
 
-In https://github.com/datacommonsorg/data, click on "Fork" button to fork the
-repo.
+1. Fork this repo - follow the [Github guide to forking a repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
+   - In https://github.com/datacommonsorg/data, click on "Fork" button to
+   fork the repo.
 
-Clone your forked repo to your desktop.
+   - Clone your forked repo to your desktop. Please do not directly clone
+   this repo, verify by running `git remote -v`, the output should look like
+   this:
 
-Add datacommonsorg/data repo as a remote:
+    ```shell
+    shell> git remote -v
+    origin  https://github.com/YOUR-GITHUB-USERNAME/data.git (fetch)
+    origin  https://github.com/YOUR-GITHUB-USERNAME/data.git (push)
+    upstream        https://github.com/datacommonsorg/data.git (fetch)
+    upstream        https://github.com/datacommonsorg/data.git (push)
+    ```
 
-```shell
-git remote add dc https://github.com/datacommonsorg/data.git
-```
-
-Please ask to join the
+1. Please ask to join the
 [datacommons-developers](https://groups.google.com/g/datacommons-developers)
 Google group. For example, membership in this group provides access to debug
 logs of pre-submit tests that run for your Pull Request.
 
 #### Creating Pull Requests
 
-Every time when you want to send a Pull Request, do the following steps:
+Contribute your changes by creating pull requests from your fork of this repo.
+Learn more in [this step-by-step guide](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
+
+A summary of the steps in the development workflow are:
 
 ```shell
 git checkout master
-git pull dc master
+git pull upstream master
 git checkout -b new_branch_name
 # Make some code change
 git add .
@@ -76,11 +84,11 @@ git commit -m "commit message"
 git push -u origin new_branch_name
 ```
 
-Then in your forked repo, you can send a Pull Request. If this is your first
-time contributing to a Google Open Source project, you may need to follow the
-steps in [contributing.md](contributing.md).
+Then in your forked repo, you can send a Pull Request. Wait for approval of
+the Pull Request and merge the change.
 
-Wait for approval of the Pull Request and merge the change.
+If this is your first time contributing to a Google Open Source project, you
+may need to follow the steps in [contributing.md](contributing.md).
 
 ### Code quality
 
