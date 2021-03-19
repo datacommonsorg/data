@@ -8,7 +8,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -r
+      ./run_tests.sh -r
 
 # We can't just test everything under our Cloud Build working directory because
 # that's where python installs all of its packages also, and we don't really
@@ -25,7 +25,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -p util/
+      ./run_tests.sh -p util/
 
 - id: python_test_scripts
   name: python:3.7
@@ -35,7 +35,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -p scripts
+      ./run_tests.sh -p scripts
 
 - id: python_test_import_automation
   name: python:3.7
@@ -45,7 +45,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -p import_automation
+      ./run_tests.sh -p import_automation
 
 - id: python_format_check
   name: python:3.7
@@ -55,7 +55,7 @@ steps:
   args:
     - -c
     - |
-      ./run_test.sh -l
+      ./run_tests.sh -l
 
 # TODO(rsned): Uncomment once the existing source files are updated to pass lint.
 #- id: python_lint
