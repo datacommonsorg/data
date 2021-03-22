@@ -122,8 +122,8 @@ class DashboardAPI:
             requests.HTTPError: The importer returns a status code that is
                 larger than or equal to 400.
         """
-        logging.info('DashboardAPI.init_run: Posting %s to %s',
-                     system_run, _DASHBOARD_RUN_LIST)
+        logging.info('DashboardAPI.init_run: Posting %s to %s', system_run,
+                     _DASHBOARD_RUN_LIST)
         response = self.iap.post(_DASHBOARD_RUN_LIST, json=system_run)
         response.raise_for_status()
         logging.info('DashboardAPI.init_run: Received %s from %s',
@@ -189,8 +189,8 @@ class DashboardAPI:
                 larger than or equal to 400.
         """
         query = _DASHBOARD_RUN_BY_ID.format_map({'run_id': run_id})
-        logging.info('DashboardAPI.update_run: Patching %s to %s',
-                     system_run, query)
+        logging.info('DashboardAPI.update_run: Patching %s to %s', system_run,
+                     query)
         response = self.iap.patch(query, json=system_run)
         response.raise_for_status()
         logging.info('DashboardAPI.update_run: Received %s from %s',

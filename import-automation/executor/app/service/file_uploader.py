@@ -64,9 +64,10 @@ class GCSFileUploader(FileUploader):
         _strings_not_empty(project_id, bucket_name)
         self.bucket = storage.Client(project=project_id).bucket(bucket_name)
         self.path_prefix = path_prefix
-        logging.info('GCSFileUploader.__init__: '
-                     'Initialized with bucket %s at prefix %s on project %s',
-                     bucket_name, path_prefix, project_id)
+        logging.info(
+            'GCSFileUploader.__init__: '
+            'Initialized with bucket %s at prefix %s on project %s',
+            bucket_name, path_prefix, project_id)
 
     def upload_file(self, src: str, dest: str) -> None:
         """Uploads a file to the bucket.
@@ -81,12 +82,12 @@ class GCSFileUploader(FileUploader):
         """
         _strings_not_empty(src, dest)
         dest = self._fix_path(dest)
-        logging.info('GCSFileUploader.upload_file: Uploading %s to %s',
-                     src, dest)
+        logging.info('GCSFileUploader.upload_file: Uploading %s to %s', src,
+                     dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_filename(src)
-        logging.info('GCSFileUploader.upload_file: Uploaded %s to %s',
-                     src, dest)
+        logging.info('GCSFileUploader.upload_file: Uploaded %s to %s', src,
+                     dest)
 
     def upload_string(self, string: str, dest: str) -> None:
         """Uploads a string to a file in the bucket, overwriting it.
@@ -105,8 +106,8 @@ class GCSFileUploader(FileUploader):
                      string, dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_string(string)
-        logging.info('GCSFileUploader.upload_string: Uploaded %s to %s',
-                     string, dest)
+        logging.info('GCSFileUploader.upload_string: Uploaded %s to %s', string,
+                     dest)
 
     def _fix_path(self, path):
         """Returns {self.path_prefix}/{path}."""
@@ -124,9 +125,9 @@ class LocalFileUploader(FileUploader):
 
     def __init__(self, output_dir: str = ''):
         self.output_dir = os.path.abspath(output_dir)
-        logging.info('LocalFileUploader.__init__: '
-                     'Initialized with output directory %s',
-                     output_dir)
+        logging.info(
+            'LocalFileUploader.__init__: '
+            'Initialized with output directory %s', output_dir)
 
     def upload_file(self, src: str, dest: str) -> None:
         """Copies the file at src to a file at <output_dir>/<dest>.
@@ -137,12 +138,12 @@ class LocalFileUploader(FileUploader):
         """
         _strings_not_empty(src, dest)
         dest = os.path.join(self.output_dir, dest)
-        logging.info('LocalFileUploader.upload_file: Uploading %s to %s',
-                     src, dest)
+        logging.info('LocalFileUploader.upload_file: Uploading %s to %s', src,
+                     dest)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         shutil.copyfile(src, dest)
-        logging.info('LocalFileUploader.upload_file: Uploaded %s to %s',
-                     src, dest)
+        logging.info('LocalFileUploader.upload_file: Uploaded %s to %s', src,
+                     dest)
 
     def upload_string(self, string: str, dest: str) -> None:
         """Writes a string into a file at <output_dir>/<dest>, overwriting any

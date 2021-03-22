@@ -51,6 +51,7 @@ class UpdateScheduler:
     Returns:
         Created job as a dict.
     """
+
     def __init__(self,
                  client: scheduler.CloudSchedulerClient,
                  github: github_api.GitHubRepoAPI,
@@ -156,8 +157,10 @@ class UpdateScheduler:
 
             if self.dashboard:
                 self.dashboard.update_run(
-                    {'status': 'succeeded', 'time_completed': utils.utctime()},
-                    run_id)
+                    {
+                        'status': 'succeeded',
+                        'time_completed': utils.utctime()
+                    }, run_id)
             return import_executor.ExecutionResult('succeeded', scheduled,
                                                    'No issues')
 
