@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from sys import path
+
 path.insert(1, '../../../')
 
 from os import remove, path as ospath

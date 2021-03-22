@@ -43,29 +43,40 @@ example, this includes maps to and from common geographic identifiers.
 ### GitHub Development Process
 
 #### One Time Set-up
-In https://github.com/datacommonsorg/data, click on "Fork" button to fork the
-repo.
 
-Clone your forked repo to your desktop.
+1. Install [Git LFS](https://git-lfs.github.com/)
 
-Add datacommonsorg/data repo as a remote:
+1. Fork this repo - follow the [Github guide to forking a repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
+   - In https://github.com/datacommonsorg/data, click on "Fork" button to
+   fork the repo.
 
-```shell
-git remote add dc https://github.com/datacommonsorg/data.git
-```
+   - Clone your forked repo to your desktop. Please do not directly clone
+   this repo, verify by running `git remote -v`, the output should look like
+   this:
 
-Please ask to join the
+    ```shell
+    shell> git remote -v
+    origin  https://github.com/YOUR-GITHUB-USERNAME/data.git (fetch)
+    origin  https://github.com/YOUR-GITHUB-USERNAME/data.git (push)
+    upstream        https://github.com/datacommonsorg/data.git (fetch)
+    upstream        https://github.com/datacommonsorg/data.git (push)
+    ```
+
+1. Please ask to join the
 [datacommons-developers](https://groups.google.com/g/datacommons-developers)
 Google group. For example, membership in this group provides access to debug
 logs of pre-submit tests that run for your Pull Request.
 
 #### Creating Pull Requests
 
-Every time when you want to send a Pull Request, do the following steps:
+Contribute your changes by creating pull requests from your fork of this repo.
+Learn more in [this step-by-step guide](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
+
+A summary of the steps in the development workflow are:
 
 ```shell
 git checkout master
-git pull dc master
+git pull upstream master
 git checkout -b new_branch_name
 # Make some code change
 git add .
@@ -73,11 +84,11 @@ git commit -m "commit message"
 git push -u origin new_branch_name
 ```
 
-Then in your forked repo, you can send a Pull Request. If this is your first
-time contributing to a Google Open Source project, you may need to follow the
-steps in [contributing.md](contributing.md).
+Then in your forked repo, you can send a Pull Request. Wait for approval of
+the Pull Request and merge the change.
 
-Wait for approval of the Pull Request and merge the change.
+If this is your first time contributing to a Google Open Source project, you
+may need to follow the steps in [contributing.md](contributing.md).
 
 ### Code quality
 
@@ -86,6 +97,26 @@ enforce some of the guidelines.
 
 #### Python
 
+##### Setup
+
+Ensure prerequisites are installed
+
+* [Python3](https://www.python.org/downloads/)
+* [Pip](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+
+Install requirements and setup a virtual environment to isolate python development in this repo.
+
+```shell
+python3 -m venv .env
+source .env/bin/activate
+
+pip3 install -r requirements.txt
+```
+
+##### Guidelines
+
+*   Any additional package required must be specified in the requirements.txt
+    in the top-level folder. No other requirements.txt files are allowed.
 *   Code must be formatted according to the
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
     according to the [yapf formatter](https://github.com/google/yapf).
@@ -106,30 +137,40 @@ Consider automating coding to satisfy some of these requirements.
     [vim](https://github.com/mindriot101/vim-yapf#why-you-may-not-need-this-plugin).
     Specify the Google style using `--style google`.
 
-To run the tools via a command line:
+To run the tools via a command line (both installed after setup steps above):
 
 *   [pylint](http://pylint.pycqa.org/en/latest/user_guide/run.html).
-*   After [installing yapf](https://github.com/google/yapf#id2), execute using
+*   [yapf](https://github.com/google/yapf#id2), execute using
     `--style google`, e.g.,
 
-```
-# Update (--in-place) all files in the util/ directory and its subdirectories.
-yapf --recursive --in-place --style google util/
+```shell
+# Update (--in-place) all files
+./run_tests.sh -f
 
 # Produce differences between the current code and reformatted code.  Empty
 # output indicates correctly formatted code.
-yapf --recursive --diff --style google util/
+./run_tests.sh -l
 ```
 
 To run a unit test, use a command like
 
-```
+```shell
 python3 -m unittest discover -v -s util/ -p "*_test.py"
 ```
 
 The `discover` option searches (`-s`) the `util/` directory for files with
 filenames ending with `_test.py`. It considers all these files to be unit tests
 to be run. Output is verbose (`-v`).
+
+We provide a utility to run all unit tests in a folder easily (e.g. util/):
+```shell
+./run_tests.sh -p util/
+```
+
+Or to run all tests and checks:
+```shell
+./run_tests.sh -a
+```
 
 #### Disabling style checks
 
