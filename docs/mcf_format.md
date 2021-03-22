@@ -351,6 +351,11 @@ waterArea: C:SomeDataset->Water_Area
 citySize: C:SomeDataset->City_Size
 ```
 
+A note about property values that are quantities like "waterArea" is in this
+example, the property value will be formated as [<value> <unitOfMeasure>]. This
+will result in the autopopulation of the information in the $Water_Area node of
+type quantity represented in the schema drawing above.
+
 Contributors need not worry about the process of using template MCF to convert
 datasets to instance MCF, but roughly, for each row of the dataset, we create
 all the nodes in the template MCF specification, substituting values from the
