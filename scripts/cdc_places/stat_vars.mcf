@@ -1,0 +1,228 @@
+Node: dcid:Percent_Person_WithCoronaryHeartDisease
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:CoronaryHeartDisease
+
+Node: dcid:Percent_Person_SleepLessThan7Hours
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthBehavior: dcs:SleepLessThan7Hours
+
+Node: dcid:Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 21 65]
+gender: dcs:Female
+healthPrevention: dcs:CervicalCancerScreening
+
+Node: dcid:Percent_Person_Smoking
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthBehavior: dcs:Smoking
+
+Node: dcid:Percent_Person_WithStroke
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:Stroke
+
+Node: dcid:Percent_Person_BingeDrinking
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthBehavior: dcs:BingeDrinking
+
+Node: dcid:Percent_Person_WithChronicKidneyDisease
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:ChronicKidneyDisease
+
+Node: dcid:Percent_Person_WithHighBloodPressure
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:HighBloodPressure
+
+Node: dcid:Percent_Person_WithArthritis
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:Arthritis
+
+Node: dcid:Percent_Person_18To64Years_ReceivedNoHealthInsurance
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 64]
+healthPrevention: dcs:NoHealthInsurance
+
+Node: dcid:Percent_Person_WithAsthma
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:Asthma
+
+Node: dcid:Percent_Person_65OrMoreYears_WithAllTeethLoss
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 65 -]
+healthOutcome: dcs:AllTeethLoss
+
+Node: dcid:Percent_Person_65OrMoreYears_Male_ReceivedCorePreventiveServices
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 65 -]
+gender: dcs:Male
+healthPrevention: dcs:CorePreventiveServices
+
+Node: dcid:Percent_Person_ReceivedCholesterolScreening
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthPrevention: dcs:CholesterolScreening
+
+Node: dcid:Percent_Person_WithMentalHealthNotGood
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:MentalHealthNotGood
+
+Node: dcid:Percent_Person_65OrMoreYears_Female_ReceivedCorePreventiveServices
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 65 -]
+gender: dcs:Female
+healthPrevention: dcs:CorePreventiveServices
+
+Node: dcid:Percent_Person_WithDiabetes
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:Diabetes
+
+Node: dcid:Percent_Person_WithHighCholesterol
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:HighCholesterol
+
+Node: dcid:Percent_Person_PhysicalInactivity
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthBehavior: dcs:PhysicalInactivity
+
+Node: dcid:Percent_Person_WithPhysicalHealthNotGood
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:PhysicalHealthNotGood
+
+Node: dcid:Percent_Person_ReceivedDentalVisit
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthPrevention: dcs:DentalVisit
+
+Node: dcid:Percent_Person_50To74Years_Female_ReceivedMammography
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 50 74]
+gender: dcs:Female
+healthPrevention: dcs:Mammography
+
+Node: dcid:Percent_Person_WithCancerExcludingSkinCancer
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:CancerExcludingSkinCancer
+
+Node: dcid:Percent_Person_Obesity
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthBehavior: dcs:Obesity
+
+Node: dcid:Percent_Person_ReceivedAnnualCheckup
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthPrevention: dcs:AnnualCheckup
+
+Node: dcid:Percent_Person_WithChronicObstructivePulmonaryDisease
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:ChronicObstructivePulmonaryDisease
+
+Node: dcid:Percent_Person_50To75Years_ReceivedColorectalCancerScreening
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 50 75]
+healthPrevention: dcs:ColorectalCancerScreening
+
+Node: dcid:Percent_Person_WithHighBloodPressure_ReceivedTakingBloodPressureMedication
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:percent
+age: [Years 18 -]
+healthOutcome: dcs:HighBloodPressure
+healthPrevention: dcs:TakingBloodPressureMedication

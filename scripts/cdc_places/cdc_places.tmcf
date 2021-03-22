@@ -1,0 +1,12 @@
+Node: E:CDC_Places->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:CDC_Places->StatisticalVariable
+observationDate: C:CDC_Places->Year
+observationAbout: E:CDC_Places->E1
+observationPeriod: "P1Y"
+value: C:CDC_Places->Data_Value
+
+Node: E:CDC_Places->E1
+typeOf: schema:Place
+latitude: C:CDC_Places->Latitude
+longitude: C:CDC_Places->Longitude
