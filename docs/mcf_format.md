@@ -288,10 +288,10 @@ other nodes can be `typeOf`.
 
 ### Template MCF
 
-Template MCF, or tMCF, is an intermediary MCF that we use for mapping datasets to instance
-MCF. Template MCF does not get ingested into the Data Commons graph. They are
-referencing the data in a paired .csv and together will be used to generate a
-MCF that can be ingested into the graph.
+Template MCF, or tMCF, is an intermediary MCF that we use for mapping datasets to
+instance MCF. Template MCF does not get ingested into the Data Commons graph. Template 
+MCFs references data in a paired .csv and together will be used to generate a MCF that 
+can be ingested into the graph.
 
 For example, if we had a dataset `SomeDataset` stored as a .csv with columns:
 
@@ -321,10 +321,14 @@ dcid: C:SomeDataset->SurveyItem_Dcid
 Where "E" is short for "Entity" and "C" is short for "Column".
 
 "E" should be used to refrence another entity that is defined in the template
-MCF only. Instead "C" should be used to refer to property values that are 
-entities already populated in the graph and not being defined in the template 
-MCF. "C" should also be used to reference property values that are Quantities
-or Enummerations already defined in the schema.
+MCF only. Instead "C" should be used to refer to property values represented in
+columns of the .csv file. The values may include:
+
+* References to entities that are already in the graph, and not defined in the 
+  Template MCF
+* Constants (strings, numbers)
+* Enumerations defined in the schema
+* Quantities, like [10 20 Years]
 
 For example, if we had a dataset `SomeDataset` stored as a .csv with columns:
 
