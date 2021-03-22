@@ -16,6 +16,10 @@
 
 set -e
 
+# Array of top-level folders with Python code.
+PYTHON_FOLDERS="util/ scripts/ import-automation/"
+
+# Flag used signal if Python requirements have already been installed.
 PYTHON_REQUIREMENTS_INSTALLED=false
 
 function setup_python {
@@ -33,15 +37,15 @@ function setup_python {
 function run_py_lint_fix {
   setup_python
   echo "#### Fixing Python code"
-  yapf -r -i -p --style=google util/ scripts/ import-automation/
+  yapf -r -i -p --style=google $PYTHON_FOLDERS
 }
 
 # Tests Python code style
 function run_py_lint_test {
   setup_python
   echo "#### Testing Python lint"
-  if ! yapf -r --diff -p --style=google util/ scripts/ import-automation/; then
-    echo "Fix lint errors by running ./run_test.sh -f"
+  if ! yapf -r --diff -p --style=google $PYTHON_FOLDERS; then
+    echo "ERROR: Fix lint errors by running ./run_test.sh -f" >&2
     exit 1
   fi
 }
@@ -59,7 +63,7 @@ function run_py_test {
 }
 
 function help {
-  echo "Usage: $0 -rplusiaf"
+  echo "Usage: $0 -rplaf"
   echo "-r       Install Python requirements"
   echo "-l       Test lint on Python code"
   echo "-p       Run Python tests in specified folder, e.g. ./run_test.sh -p util"
@@ -88,9 +92,10 @@ while getopts rp:lusiaf OPTION; do
         ;;
     a)
         echo "### Running all tests"
-        run_py_test "util/"
-        run_py_test "scripts/"
-        run_py_test "import-automation/"
+        for FOLDER in $PYTHON_FOLDERS
+        do
+          run_py_test $FOLDER
+        done
         run_py_lint_test
         ;;
     *)
