@@ -352,7 +352,7 @@ citySize: C:SomeDataset->City_Size
 ```
 
 A note about property values that are quantities like "waterArea" is in this
-example, the property value will be formated as [<value> <unitOfMeasure>]. This
+example, the property value will be formated as [value unitOfMeasure]. This
 will result in the autopopulation of the information in the $Water_Area node of
 type quantity represented in the schema drawing above.
 
