@@ -21,6 +21,7 @@ var (
 		"literal 'Node' to represent a local ID. containedInPlace is always assumed to be a local reference.")
 	outCsvPath = flag.String("out_csv_path", "", "Same as input with additional column for DCID.")
 	mapsApiKey = flag.String("maps_api_key", "", "Key for accessing Geocoding Maps API.")
+	generatePlaceID = flag.Bool("generate_place_id", false, "If set, this the place ID is generated instead of DCID.")
 )
 
 const (
@@ -217,6 +218,10 @@ func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, m
 	}
 	// TODO: Deal with place-type checks and multiple results.
 	for _, result := range results[:1] {
+		if len(*placeId2Dcid) == 0 {
+			tinfo.rows[idx] = append(tinfo.rows[idx], result.PlaceID, "")
+			continue
+		}
 		dcid, ok := (*placeId2Dcid)[result.PlaceID]
 		if !ok {
 			tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Missing dcid for placeId %s", result.PlaceID))
@@ -263,16 +268,19 @@ func writeOutput(outCsvPath string, tinfo *tableInfo) error {
 	return nil
 }
 
-func resolvePlacesByName(inCsvPath, outCsvPath string, p2d PlaceId2Dcid, mapCli MapsClient) error {
+func resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool, p2d PlaceId2Dcid, mapCli MapsClient) error {
 	tinfo, err := buildTableInfo(inCsvPath)
 	if err != nil {
 		return err
 	}
-	placeIdToDcid, err := loadPlaceIdToDcidMap(p2d)
-	if err != nil {
-		return err
+	placeId2Dcid := &map[string]string{}
+	if !generatePlaceID {
+		placeId2Dcid, err = loadPlaceIdToDcidMap(p2d)
+		if err != nil {
+			return err
+		}
 	}
-	err = geocodePlaces(mapCli, placeIdToDcid, tinfo)
+	err = geocodePlaces(mapCli, placeId2Dcid, tinfo)
 	if err != nil {
 		return err
 	}
@@ -288,7 +296,7 @@ func main() {
 		log.Fatalf("Maps API init failed: %v", err)
 	}
 
-	err = resolvePlacesByName(*inCsvPath, *outCsvPath, &RealPlaceId2Dcid{}, &RealMapsClient{Client: mapCli})
+	err = resolvePlacesByName(*inCsvPath, *outCsvPath, *generatePlaceID, &RealPlaceId2Dcid{}, &RealMapsClient{Client: mapCli})
 	if err != nil {
 		log.Fatalf("resolvePlacesByName failed: %v", err)
 	}
