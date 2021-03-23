@@ -187,7 +187,7 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	return tinfo, nil
 }
 
-func loadPlaceIdToDcidMap(p2d PlaceId2Dcid, placeId2Dcid *map[string]string) error {
+func loadPlaceIdToDcidMap(p2d PlaceId2Dcid, placeId2Dcid map[string]string) error {
 	bytes, err := p2d.Read()
 	if err != nil {
 		return err
@@ -274,7 +274,7 @@ func resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool, p2d
 	}
 	placeId2Dcid := map[string]string{}
 	if !generatePlaceID {
-		err = loadPlaceIdToDcidMap(p2d, &placeId2Dcid)
+		err = loadPlaceIdToDcidMap(p2d, placeId2Dcid)
 		if err != nil {
 			return err
 		}
