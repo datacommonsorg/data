@@ -69,7 +69,7 @@ func TestMain(t *testing.T) {
 		{"input_containment.csv", "expected_output_containment.csv", "actual_output_containment.csv", getMockGeocodesContainment()},
 	}
 	for _, t := range table {
-		err := resolvePlacesByName("testdata/"+t.in, "testdata/"+t.got, &MockPlaceId2Dcid{}, t.mapCli)
+		err := resolvePlacesByName("testdata/"+t.in, "testdata/"+t.got, false, &MockPlaceId2Dcid{}, t.mapCli)
 		if err != nil {
 			log.Fatal(err)
 		}
