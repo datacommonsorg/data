@@ -187,20 +187,19 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	return tinfo, nil
 }
 
-func loadPlaceIdToDcidMap(p2d PlaceId2Dcid) (*map[string]string, error) {
+func loadPlaceIdToDcidMap(p2d PlaceId2Dcid, placeId2Dcid *map[string]string) error {
 	bytes, err := p2d.Read()
 	if err != nil {
-		return nil, err
+		return err
 	}
-	placeId2Dcid := &map[string]string{}
 	err = json.Unmarshal(bytes, &placeId2Dcid)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return placeId2Dcid, nil
+	return nil
 }
 
-func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, mapCli MapsClient, wg *sync.WaitGroup) {
+func geocodeOneRow(idx int, placeId2Dcid map[string]string, tinfo *tableInfo, mapCli MapsClient, wg *sync.WaitGroup) {
 	defer wg.Done()
 	extName := tinfo.extNames[idx]
 	req := &maps.GeocodingRequest{
@@ -218,11 +217,11 @@ func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, m
 	}
 	// TODO: Deal with place-type checks and multiple results.
 	for _, result := range results[:1] {
-		if len(*placeId2Dcid) == 0 {
+		if len(placeId2Dcid) == 0 {
 			tinfo.rows[idx] = append(tinfo.rows[idx], result.PlaceID, "")
 			continue
 		}
-		dcid, ok := (*placeId2Dcid)[result.PlaceID]
+		dcid, ok := placeId2Dcid[result.PlaceID]
 		if !ok {
 			tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Missing dcid for placeId %s", result.PlaceID))
 		} else {
@@ -231,7 +230,7 @@ func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, m
 	}
 }
 
-func geocodePlaces(mapCli MapsClient, placeId2Dcid *map[string]string, tinfo *tableInfo) error {
+func geocodePlaces(mapCli MapsClient, placeId2Dcid map[string]string, tinfo *tableInfo) error {
 	for i := 0; i < len(tinfo.rows); i += batchSize {
 		var wg sync.WaitGroup
 		jMax := i + batchSize
@@ -273,9 +272,9 @@ func resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool, p2d
 	if err != nil {
 		return err
 	}
-	placeId2Dcid := &map[string]string{}
+	placeId2Dcid := map[string]string{}
 	if !generatePlaceID {
-		placeId2Dcid, err = loadPlaceIdToDcidMap(p2d)
+		err = loadPlaceIdToDcidMap(p2d, &placeId2Dcid)
 		if err != nil {
 			return err
 		}
