@@ -21,7 +21,7 @@ var (
 		"literal 'Node' to represent a local ID. containedInPlace is always assumed to be a local reference.")
 	outCsvPath = flag.String("out_csv_path", "", "Same as input with additional column for DCID.")
 	mapsApiKey = flag.String("maps_api_key", "", "Key for accessing Geocoding Maps API.")
-	generatePlaceID = flag.Bool("generate_place_id", false, "If set, this the place ID is generated instead of DCID.")
+	generatePlaceID = flag.Bool("generate_place_id", false, "If set, placeID is generated in output CSV instead of DCID.")
 )
 
 const (
