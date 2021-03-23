@@ -21,6 +21,7 @@ var (
 		"literal 'Node' to represent a local ID. containedInPlace is always assumed to be a local reference.")
 	outCsvPath = flag.String("out_csv_path", "", "Same as input with additional column for DCID.")
 	mapsApiKey = flag.String("maps_api_key", "", "Key for accessing Geocoding Maps API.")
+	generatePlaceID = flag.Bool("generate_place_id", false, "If set, placeID is generated in output CSV instead of DCID.")
 )
 
 const (
@@ -186,20 +187,19 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	return tinfo, nil
 }
 
-func loadPlaceIdToDcidMap(p2d PlaceId2Dcid) (*map[string]string, error) {
+func loadPlaceIdToDcidMap(p2d PlaceId2Dcid, placeId2Dcid map[string]string) error {
 	bytes, err := p2d.Read()
 	if err != nil {
-		return nil, err
+		return err
 	}
-	placeId2Dcid := &map[string]string{}
 	err = json.Unmarshal(bytes, &placeId2Dcid)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return placeId2Dcid, nil
+	return nil
 }
 
-func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, mapCli MapsClient, wg *sync.WaitGroup) {
+func geocodeOneRow(idx int, placeId2Dcid map[string]string, tinfo *tableInfo, mapCli MapsClient, wg *sync.WaitGroup) {
 	defer wg.Done()
 	extName := tinfo.extNames[idx]
 	req := &maps.GeocodingRequest{
@@ -217,7 +217,11 @@ func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, m
 	}
 	// TODO: Deal with place-type checks and multiple results.
 	for _, result := range results[:1] {
-		dcid, ok := (*placeId2Dcid)[result.PlaceID]
+		if len(placeId2Dcid) == 0 {
+			tinfo.rows[idx] = append(tinfo.rows[idx], result.PlaceID, "")
+			continue
+		}
+		dcid, ok := placeId2Dcid[result.PlaceID]
 		if !ok {
 			tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Missing dcid for placeId %s", result.PlaceID))
 		} else {
@@ -226,7 +230,7 @@ func geocodeOneRow(idx int, placeId2Dcid *map[string]string, tinfo *tableInfo, m
 	}
 }
 
-func geocodePlaces(mapCli MapsClient, placeId2Dcid *map[string]string, tinfo *tableInfo) error {
+func geocodePlaces(mapCli MapsClient, placeId2Dcid map[string]string, tinfo *tableInfo) error {
 	for i := 0; i < len(tinfo.rows); i += batchSize {
 		var wg sync.WaitGroup
 		jMax := i + batchSize
@@ -263,16 +267,19 @@ func writeOutput(outCsvPath string, tinfo *tableInfo) error {
 	return nil
 }
 
-func resolvePlacesByName(inCsvPath, outCsvPath string, p2d PlaceId2Dcid, mapCli MapsClient) error {
+func resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool, p2d PlaceId2Dcid, mapCli MapsClient) error {
 	tinfo, err := buildTableInfo(inCsvPath)
 	if err != nil {
 		return err
 	}
-	placeIdToDcid, err := loadPlaceIdToDcidMap(p2d)
-	if err != nil {
-		return err
+	placeId2Dcid := map[string]string{}
+	if !generatePlaceID {
+		err = loadPlaceIdToDcidMap(p2d, placeId2Dcid)
+		if err != nil {
+			return err
+		}
 	}
-	err = geocodePlaces(mapCli, placeIdToDcid, tinfo)
+	err = geocodePlaces(mapCli, placeId2Dcid, tinfo)
 	if err != nil {
 		return err
 	}
@@ -288,7 +295,7 @@ func main() {
 		log.Fatalf("Maps API init failed: %v", err)
 	}
 
-	err = resolvePlacesByName(*inCsvPath, *outCsvPath, &RealPlaceId2Dcid{}, &RealMapsClient{Client: mapCli})
+	err = resolvePlacesByName(*inCsvPath, *outCsvPath, *generatePlaceID, &RealPlaceId2Dcid{}, &RealMapsClient{Client: mapCli})
 	if err != nil {
 		log.Fatalf("resolvePlacesByName failed: %v", err)
 	}
