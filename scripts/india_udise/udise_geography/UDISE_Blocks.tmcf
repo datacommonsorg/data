@@ -1,0 +1,5 @@
+Node: dcid:udiseCode/C:UDISE_Blocks->udise_block_code
+typeOf: dcs:UDISEBlock
+udiseCode: C:UDISE_Blocks->udise_block_code
+name:  C:UDISE_Blocks->block_name
+containedInPlace: dcid:udiseCode/C:UDISE_Blocks->udise_district_code

@@ -1,0 +1,9 @@
+Node: E:UDISE_Districts->E0
+typeOf: schema:Place
+udiseCode: C:UDISE_Districts->udise_state_code
+
+Node: dcid:udiseCode/C:UDISE_Districts->udise_district_code
+typeOf: dcs:UDISEDistrict
+udiseCode: C:UDISE_Districts->udise_district_code
+name: C:UDISE_Districts->district_name
+containedInPlace: E:UDISE_Districts->E0
