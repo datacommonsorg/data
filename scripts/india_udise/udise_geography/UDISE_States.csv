@@ -1,0 +1,38 @@
+state_name,udise_state_code,isoCode
+Jammu & Kashmir,01,IN-JK
+Himachal Pradesh,02,IN-HP
+Punjab,03,IN-PB
+Chandigarh,04,IN-CH
+Uttarakhand,05,IN-UT
+Haryana,06,IN-HR
+Delhi,07,IN-DL
+Rajasthan,08,IN-RJ
+Uttar Pradesh,09,IN-UP
+Bihar,10,IN-BR
+Sikkim,11,IN-SK
+Arunachal Pradesh,12,IN-AR
+Nagaland,13,IN-NL
+Manipur,14,IN-MN
+Mizoram,15,IN-MZ
+Tripura,16,IN-TR
+Meghalaya,17,IN-ML
+Assam,18,IN-AS
+West Bengal,19,IN-WB
+Jharkhand,20,IN-JH
+Odisha,21,IN-OR
+Chhattisgarh,22,IN-CT
+Madhya Pradesh,23,IN-MP
+Gujarat,24,IN-GJ
+Daman & Diu,25,IN-DD
+Dadra & Nagar Haveli,26,IN-DN
+Maharashtra,27,IN-MH
+Andhra Pradesh,28,IN-AP
+Karnataka,29,IN-KA
+Goa,30,IN-GA
+Lakshadweep,31,IN-LD
+Kerala,32,IN-KL
+Tamil Nadu,33,IN-TN
+Puducherry,34,IN-PY
+Andaman & Nicobar Islands,35,IN-AN
+Telangana,36,IN-TG
+Ladhak,37,IN-LA
