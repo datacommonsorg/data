@@ -159,6 +159,9 @@ class UDISEGeography:
         df = df.rename({"udise_dist_code": "udise_district_code"},
                        axis='columns',
                        errors="raise")
+
+        df["udise_district_code"] = df["udise_district_code"].apply(
+            lambda x: "dcid:udiseCode/{}".format(x))
         df["udise_block_code"] = df["udise_block_code"].apply(
             lambda x: "udiseCode/{}".format(x))
         df["block_name"] = df["block_name"].apply(lambda x: x.title()
