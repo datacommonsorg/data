@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Classes and methods to import Average wage/salary earnings from Periodic Labour Force Survey (PLFS)"""
+"""Classes and methods to import geography data from Unified District Information System for Education (UDISE)"""
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
@@ -135,6 +135,8 @@ class UDISEGeography:
         states_json_data = json.loads(states_json_data_file.read())
         df = pd.DataFrame(states_json_data["rowValue"])
         df["isoCode"] = df["state_name"].apply(lambda x: INDIA_ISO_CODES[x])
+        df["udise_state_code"] = df["udise_state_code"].apply(
+            lambda x: "udiseCode/{}".format(x))
         df.to_csv(self.states_json_csv_file_path, index=False, header=True)
 
     def _process_districts_data(self):
@@ -142,6 +144,10 @@ class UDISEGeography:
         districts_json_data = json.loads(districts_json_data_file.read())
         df = pd.DataFrame(districts_json_data["rowValue"])
         df = df.drop_duplicates()
+        df["udise_district_code"] = df["udise_district_code"].apply(
+            lambda x: "udiseCode/{}".format(x))
+        df["district_name"] = df["district_name"].apply(lambda x: x.title())
+
         df.to_csv(self.districts_csv_data_file_path, index=False, header=True)
 
     def _process_blocks_data(self):
@@ -153,6 +159,10 @@ class UDISEGeography:
         df = df.rename({"udise_dist_code": "udise_district_code"},
                        axis='columns',
                        errors="raise")
+        df["udise_block_code"] = df["udise_block_code"].apply(
+            lambda x: "udiseCode/{}".format(x))
+        df["block_name"] = df["block_name"].apply(lambda x: x.title()
+                                                  if x else '')
         df = df.drop_duplicates()
         df.to_csv(self.blocks_csv_data_file_path, index=False, header=True)
 
@@ -166,6 +176,8 @@ class UDISEGeography:
             json_data_file = open(self.states_json_data_file_path, "w")
             json_data_file.write(json.dumps(response.json()))
             json_data_file.close()
+        else:
+            raise Exception("Couldn't download states JSON data")
 
     def _get_districts_json_data(self):
         data = {
@@ -180,6 +192,8 @@ class UDISEGeography:
             json_data_file = open(self.districts_json_data_file_path, "w")
             json_data_file.write(json.dumps(response.json()))
             json_data_file.close()
+        else:
+            raise Exception("Couldn't download districts JSON data")
 
     def _get_blocks_json_data(self):
         data = {
@@ -194,6 +208,8 @@ class UDISEGeography:
             json_data_file = open(self.blocks_json_data_file_path, "w")
             json_data_file.write(json.dumps(response.json()))
             json_data_file.close()
+        else:
+            raise Exception("Couldn't download blocks JSON data")
 
 
 def main():

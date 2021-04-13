@@ -1,10 +1,15 @@
-# UDISE Geography
+# Unified District Information System for Education (UDISE) Geography
 
 ## About the Dataset
 UDISE states match the revenue states. UDISE has its district and block hierarchy. There is a unique udiseCode for each state, district, and block. 
 
 ### Download URL
-Available for download using API.
+A backend API allows the master data to be queryable and responds with JSON data. The API endpoint is at
+`http://pgi.seshagun.gov.in/BackEnd-master/api/report/getMasterData` to get the master data. The API takes JSON input with two attributes.
+
+- extensionCall - Defines the master data type, one of GET_STATE, GET_DISTRICT or GET_BLOCK 
+- condition - Filtering condition. An empty string will get everything.
+
 
 #### Cleaned Data
 
@@ -26,9 +31,6 @@ It has the following columns
 1. udise_dist_code - UDISE district code
 2. udise_block_code - UDISE block code
 3. block_name -  Name of UDISE Block 
-
-#### MCF
-- [UDISE_Places.mcf](UDISE_Places.mcf).
 
 #### Template MCFs
 - [UDISE_States.tmcf](UDISE_States.tmcf).

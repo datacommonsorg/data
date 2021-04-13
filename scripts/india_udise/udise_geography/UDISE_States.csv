@@ -1,38 +1,38 @@
 state_name,udise_state_code,isoCode
-Jammu & Kashmir,01,IN-JK
-Himachal Pradesh,02,IN-HP
-Punjab,03,IN-PB
-Chandigarh,04,IN-CH
-Uttarakhand,05,IN-UT
-Haryana,06,IN-HR
-Delhi,07,IN-DL
-Rajasthan,08,IN-RJ
-Uttar Pradesh,09,IN-UP
-Bihar,10,IN-BR
-Sikkim,11,IN-SK
-Arunachal Pradesh,12,IN-AR
-Nagaland,13,IN-NL
-Manipur,14,IN-MN
-Mizoram,15,IN-MZ
-Tripura,16,IN-TR
-Meghalaya,17,IN-ML
-Assam,18,IN-AS
-West Bengal,19,IN-WB
-Jharkhand,20,IN-JH
-Odisha,21,IN-OR
-Chhattisgarh,22,IN-CT
-Madhya Pradesh,23,IN-MP
-Gujarat,24,IN-GJ
-Daman & Diu,25,IN-DD
-Dadra & Nagar Haveli,26,IN-DN
-Maharashtra,27,IN-MH
-Andhra Pradesh,28,IN-AP
-Karnataka,29,IN-KA
-Goa,30,IN-GA
-Lakshadweep,31,IN-LD
-Kerala,32,IN-KL
-Tamil Nadu,33,IN-TN
-Puducherry,34,IN-PY
-Andaman & Nicobar Islands,35,IN-AN
-Telangana,36,IN-TG
-Ladhak,37,IN-LA
+Jammu & Kashmir,udiseCode/01,IN-JK
+Himachal Pradesh,udiseCode/02,IN-HP
+Punjab,udiseCode/03,IN-PB
+Chandigarh,udiseCode/04,IN-CH
+Uttarakhand,udiseCode/05,IN-UT
+Haryana,udiseCode/06,IN-HR
+Delhi,udiseCode/07,IN-DL
+Rajasthan,udiseCode/08,IN-RJ
+Uttar Pradesh,udiseCode/09,IN-UP
+Bihar,udiseCode/10,IN-BR
+Sikkim,udiseCode/11,IN-SK
+Arunachal Pradesh,udiseCode/12,IN-AR
+Nagaland,udiseCode/13,IN-NL
+Manipur,udiseCode/14,IN-MN
+Mizoram,udiseCode/15,IN-MZ
+Tripura,udiseCode/16,IN-TR
+Meghalaya,udiseCode/17,IN-ML
+Assam,udiseCode/18,IN-AS
+West Bengal,udiseCode/19,IN-WB
+Jharkhand,udiseCode/20,IN-JH
+Odisha,udiseCode/21,IN-OR
+Chhattisgarh,udiseCode/22,IN-CT
+Madhya Pradesh,udiseCode/23,IN-MP
+Gujarat,udiseCode/24,IN-GJ
+Daman & Diu,udiseCode/25,IN-DD
+Dadra & Nagar Haveli,udiseCode/26,IN-DN
+Maharashtra,udiseCode/27,IN-MH
+Andhra Pradesh,udiseCode/28,IN-AP
+Karnataka,udiseCode/29,IN-KA
+Goa,udiseCode/30,IN-GA
+Lakshadweep,udiseCode/31,IN-LD
+Kerala,udiseCode/32,IN-KL
+Tamil Nadu,udiseCode/33,IN-TN
+Puducherry,udiseCode/34,IN-PY
+Andaman & Nicobar Islands,udiseCode/35,IN-AN
+Telangana,udiseCode/36,IN-TG
+Ladhak,udiseCode/37,IN-LA

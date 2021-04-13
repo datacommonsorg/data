@@ -1,7 +1,7 @@
 state_name,udise_state_code,isoCode
-Jammu & Kashmir,01,IN-JK
-Himachal Pradesh,02,IN-HP
-Punjab,03,IN-PB
-Chandigarh,04,IN-CH
-Chandigarh,04,IN-CH
-Uttarakhand,05,IN-UT
+Jammu & Kashmir,udiseCode/01,IN-JK
+Himachal Pradesh,udiseCode/02,IN-HP
+Punjab,udiseCode/03,IN-PB
+Chandigarh,udiseCode/04,IN-CH
+Chandigarh,udiseCode/04,IN-CH
+Uttarakhand,udiseCode/05,IN-UT

@@ -1,63 +1,63 @@
 udise_state_code,udise_district_code,district_name
-36,3601,ADILABAD
-23,2351,AGAR MALWA
-09,0915,AGRA
-27,2726,AHMADNAGAR
-24,2407,AHMEDABAD
-15,1503,AIZAWL
-08,0821,AJMER
-27,2705,AKOLA
-32,3211,ALAPPUZHA
-09,0912,ALIGARH
-19,1922,ALIPURDUAR
-23,2349,ALIRAJPUR
-09,0945,ALLAHABAD
-05,0509,ALMORA
-08,0806,ALWAR
-06,0602,AMBALA
-09,0948,AMBEDKAR NAGAR
-09,0973,AMETHI - CSM NAGAR
-27,2707,AMRAVATI
-24,2413,AMRELI
-03,0302,AMRITSAR
-24,2415,ANAND
-28,2822,ANANTAPUR
-01,0106,ANANTNAG
-35,3501,ANDAMANS
-21,2115,ANGUL
-12,1216,ANJAW
-23,2347,ANUPPUR
-10,1007,ARARIA
-24,2427,ARAVALLI
-33,3332,ARIYALUR
-10,1038,ARWAL
-23,2346,ASHOKNAGAR
-09,0932,AURAIYA
-10,1034,AURANGABAD (BIHAR)
-27,2719,AURANGABAD (MAHARASHTRA)
-09,0961,AZAMGARH
-01,0104,BADGAM
-29,2902,BAGALKOT
-05,0508,BAGESHWAR
-09,0908,BAGHPAT
-09,0950,BAHRAICH
-18,1824,BAKSA
-23,2345,BALAGHAT
-21,2108,BALASORE
-29,2912,BALLARI
-09,0963,BALLIA
-22,2222,BALOD
-22,2224,BALODABAZAR
-09,0952,BALRAMPUR
-22,2226,BALRAMPUR
-24,2402,BANAS KANTHA
-09,0940,BANDA
-01,0116,BANDIPORA
-10,1023,BANKA
-13,1305,WOKHA
-36,3620,YADADRI
-29,2933,YADAGIRI
-06,0603,YAMUNANAGAR
-34,3401,YANAM
-27,2714,YAVATMAL
-13,1304,ZUNHEBOTO
+36,udiseCode/3601,Adilabad
+23,udiseCode/2351,Agar Malwa
+09,udiseCode/0915,Agra
+27,udiseCode/2726,Ahmadnagar
+24,udiseCode/2407,Ahmedabad
+15,udiseCode/1503,Aizawl
+08,udiseCode/0821,Ajmer
+27,udiseCode/2705,Akola
+32,udiseCode/3211,Alappuzha
+09,udiseCode/0912,Aligarh
+19,udiseCode/1922,Alipurduar
+23,udiseCode/2349,Alirajpur
+09,udiseCode/0945,Allahabad
+05,udiseCode/0509,Almora
+08,udiseCode/0806,Alwar
+06,udiseCode/0602,Ambala
+09,udiseCode/0948,Ambedkar Nagar
+09,udiseCode/0973,Amethi - Csm Nagar
+27,udiseCode/2707,Amravati
+24,udiseCode/2413,Amreli
+03,udiseCode/0302,Amritsar
+24,udiseCode/2415,Anand
+28,udiseCode/2822,Anantapur
+01,udiseCode/0106,Anantnag
+35,udiseCode/3501,Andamans
+21,udiseCode/2115,Angul
+12,udiseCode/1216,Anjaw
+23,udiseCode/2347,Anuppur
+10,udiseCode/1007,Araria
+24,udiseCode/2427,Aravalli
+33,udiseCode/3332,Ariyalur
+10,udiseCode/1038,Arwal
+23,udiseCode/2346,Ashoknagar
+09,udiseCode/0932,Auraiya
+10,udiseCode/1034,Aurangabad (Bihar)
+27,udiseCode/2719,Aurangabad (Maharashtra)
+09,udiseCode/0961,Azamgarh
+01,udiseCode/0104,Badgam
+29,udiseCode/2902,Bagalkot
+05,udiseCode/0508,Bageshwar
+09,udiseCode/0908,Baghpat
+09,udiseCode/0950,Bahraich
+18,udiseCode/1824,Baksa
+23,udiseCode/2345,Balaghat
+21,udiseCode/2108,Balasore
+29,udiseCode/2912,Ballari
+09,udiseCode/0963,Ballia
+22,udiseCode/2222,Balod
+22,udiseCode/2224,Balodabazar
+09,udiseCode/0952,Balrampur
+22,udiseCode/2226,Balrampur
+24,udiseCode/2402,Banas Kantha
+09,udiseCode/0940,Banda
+01,udiseCode/0116,Bandipora
+10,udiseCode/1023,Banka
+13,udiseCode/1305,Wokha
+36,udiseCode/3620,Yadadri
+29,udiseCode/2933,Yadagiri
+06,udiseCode/0603,Yamunanagar
+34,udiseCode/3401,Yanam
+27,udiseCode/2714,Yavatmal
+13,udiseCode/1304,Zunheboto
