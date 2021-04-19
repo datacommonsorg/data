@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import sys
+
 sys.path.append("..")
 
 import filecmp
@@ -25,34 +26,46 @@ from base.data_cleaner import NHMDataLoaderBase
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
-    'State': 'State',
-    'isoCode': 'isoCode',
-    'Date': 'Date',
-    'Estimated Number of Annual Pregnancies #': 'Count_PregnancyEvent',
-    'Total number of pregnant women Registered for ANC': 'Count_PregnantWomen_RegisteredForAntenatalCare',
-    'Number of Pregnant women registered within first trimester': 'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
-    'Total reported deliveries': 'Count_ChildDeliveryEvent',
-    'Institutional deliveries (Public Insts.+Pvt. Insts.)': 'Count_ChildDeliveryEvent_InAnInstitution',
-    'Deliveries Conducted at Public Institutions': 'Count_ChildDeliveryEvent_InPublicInstitution',
-    'Number of Home deliveries': 'Count_ChildDeliveryEvent_AtHome',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)': 'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
-    '% Safe deliveries to Total Reported Deliveries': 'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
-    }
+    'State':
+        'State',
+    'isoCode':
+        'isoCode',
+    'Date':
+        'Date',
+    'Estimated Number of Annual Pregnancies #':
+        'Count_PregnancyEvent',
+    'Total number of pregnant women Registered for ANC':
+        'Count_PregnantWomen_RegisteredForAntenatalCare',
+    'Number of Pregnant women registered within first trimester':
+        'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
+    'Total reported deliveries':
+        'Count_ChildDeliveryEvent',
+    'Institutional deliveries (Public Insts.+Pvt. Insts.)':
+        'Count_ChildDeliveryEvent_InAnInstitution',
+    'Deliveries Conducted at Public Institutions':
+        'Count_ChildDeliveryEvent_InPublicInstitution',
+    'Number of Home deliveries':
+        'Count_ChildDeliveryEvent_AtHome',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
+        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+    '% Safe deliveries to Total Reported Deliveries':
+        'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
+}
 
 
 class TestPreprocess(unittest.TestCase):
 
     maxDiff = None
-    
+
     def test_create_csv(self):
-        expected_file = open(os.path.join(module_dir_,
-                                          'test/expected.csv'))
+        expected_file = open(os.path.join(module_dir_, 'test/expected.csv'))
         expected_data = expected_file.read()
         expected_file.close()
 
-
-        loader = NHMDataLoaderBase(data_folder='test/', dataset_name='test_gen', 
-                                   cols_dict=cols_to_nodes, final_csv_path="test/test_gen.csv")    
+        loader = NHMDataLoaderBase(data_folder='test/',
+                                   dataset_name='test_gen',
+                                   cols_dict=cols_to_nodes,
+                                   final_csv_path="test/test_gen.csv")
         loader.generate_csv()
 
         result_file = open('test/test_gen.csv')

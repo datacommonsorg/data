@@ -15,15 +15,18 @@
 import os
 import sys
 
+
 class ReadMeGen():
     """
     """
-    def __init__(self, dataset_name, dataset_description, data_level, cols_dict):
+
+    def __init__(self, dataset_name, dataset_description, data_level,
+                 cols_dict):
         self.dataset_name = dataset_name
         self.dataset_description = dataset_description
         self.data_level = data_level
         self.cols_dict = cols_dict
-    
+
     def _initial_stuff(self):
         INITIAL_STUFF = """# {dataset_description} - 2008 to 2020
         
@@ -41,10 +44,11 @@ Available for download as xls and zip files.
 {dataset_description} is available for financial year starting from 2008. The xls files are under 'data/' folder.
 The dataset contains key performance indicators of {dataset_description} for the particular financial year. 
 """
-        
-        return INITIAL_STUFF.format(dataset_description=self.dataset_description,
-                                    data_level = self.data_level)
-    
+
+        return INITIAL_STUFF.format(
+            dataset_description=self.dataset_description,
+            data_level=self.data_level)
+
     def _cleaned_data(self):
         CLEANED_DATA = """
 #### Cleaned data
@@ -53,10 +57,10 @@ The dataset contains key performance indicators of {dataset_description} for the
 The cleaned csv has the following columns:
 """
         for k, v in self.cols_dict.items():
-            CLEANED_DATA += "\n- {}: {}".format(v,k)
-            
+            CLEANED_DATA += "\n- {}: {}".format(v, k)
+
         return CLEANED_DATA.format(dataset_name=self.dataset_name)
-    
+
     def _artifacts(self):
         ARTIFACTS = """
 
@@ -66,13 +70,11 @@ The cleaned csv has the following columns:
 #### Scripts
 - [preprocess.py](preprocess.py): Clean up data and generate TMCF file
         """
-        
+
         return ARTIFACTS.format(dataset_name=self.dataset_name)
-    
+
     def gen_readme(self):
         with open('README.md', 'w+') as out:
             out.write(self._initial_stuff())
             out.write(self._cleaned_data())
             out.write(self._artifacts())
-            
-            

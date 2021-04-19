@@ -111,6 +111,7 @@ class NHMDataLoaderBase(object):
         cols_dict: dictionary containing column names in the data files mapped to StatVars
                     (keys contain column names and values contains StatVar names)
     """
+
     def __init__(self, data_folder, dataset_name, cols_dict, final_csv_path):
         """
         Constructor
@@ -119,12 +120,12 @@ class NHMDataLoaderBase(object):
         self.dataset_name = dataset_name
         self.cols_dict = cols_dict
         self.final_csv_path = final_csv_path
-        
+
         self.raw_df = None
-        
+
         # Ignoring the first 3 elements (State, isoCode, Date) in the dictionary map
         self.cols_to_extract = list(self.cols_dict.keys())[3:]
-    
+
     def generate_csv(self):
         """
         Class method to preprocess the data file for each available year, extract t
@@ -137,38 +138,42 @@ class NHMDataLoaderBase(object):
 
         """
         df_full = pd.DataFrame(columns=list(self.cols_dict.keys()))
-        
+
         # Loop through each year file
         for file in os.listdir(self.data_folder):
-            fname, fext = os.path.splitext(file) # fname contains year of the file
-            date = ''.join(['20', fname[-2:], '-03']) # date is set as March of every year
-            
+            fname, fext = os.path.splitext(
+                file)  # fname contains year of the file
+            date = ''.join(['20', fname[-2:],
+                            '-03'])  # date is set as March of every year
+
             if fext == '.xls':
                 # Reading .xls file as html and preprocessing multiindex
-                self.raw_df = pd.read_html(os.path.join(self.data_folder, file))[0]
+                self.raw_df = pd.read_html(os.path.join(self.data_folder,
+                                                        file))[0]
                 self.raw_df.columns = self.raw_df.columns.droplevel()
-                
+
                 cleaned_df = pd.DataFrame()
                 cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']
                 cleaned_df['isoCode'] = cleaned_df['State'].map(INDIA_ISO_CODES)
                 cleaned_df['Date'] = date
-                
+
                 # If no columns specified, extract all except first two (index and state name)
                 if not self.cols_to_extract:
-                    self.cols_to_extract = list(set(self.raw_df.columns.droplevel(-1)[2:]))
-                    
+                    self.cols_to_extract = list(
+                        set(self.raw_df.columns.droplevel(-1)[2:]))
+
                 # Extract specified columns from raw dataframe to cleaned dataframe
                 for col in self.cols_to_extract:
                     cleaned_df[col] = self.raw_df[col][fname]
-    
+
                 df_full = df_full.append(cleaned_df, ignore_index=True)
-            
+
         # Converting column names according to schema and saving it as csv
         df_full.columns = df_full.columns.map(self.cols_dict)
         df_full.to_csv(self.final_csv_path, index=False)
-        
+
         return df_full
-    
+
     def create_mcf_tmcf(self):
         """
         Class method to generate MCF and TMCF files for the current dataset.
@@ -176,20 +181,19 @@ class NHMDataLoaderBase(object):
         """
         tmcf_file = "{}.tmcf".format(self.dataset_name)
         mcf_file = "{}.mcf".format(self.dataset_name)
-        
+
         with open(tmcf_file, 'w+') as tmcf, open(mcf_file, 'w+') as mcf:
             # Writing isoCODE entity
             tmcf.write(TMCF_ISOCODE.format(dataset_name=self.dataset_name))
-            
-            # Writing nodes for each StatVar 
+
+            # Writing nodes for each StatVar
             for idx, variable in enumerate(self.cols_to_extract):
                 # Writing TMCF
-                tmcf.write(TMCF_NODES.format(dataset_name=self.dataset_name,
-                                             index=idx+1,
-                                             statvar=self.cols_dict[variable]))
-                
-                mcf.write(MCF_NODES.format(statvar=self.cols_dict[variable],
-                                           description=variable))
-    
-            
-    
+                tmcf.write(
+                    TMCF_NODES.format(dataset_name=self.dataset_name,
+                                      index=idx + 1,
+                                      statvar=self.cols_dict[variable]))
+
+                mcf.write(
+                    MCF_NODES.format(statvar=self.cols_dict[variable],
+                                     description=variable))
