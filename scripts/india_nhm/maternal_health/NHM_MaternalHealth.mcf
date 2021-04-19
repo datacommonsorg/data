@@ -1,0 +1,54 @@
+Node: dcid:indianNHM/Count_PregnancyEvent
+description: "Estimated Number of Annual Pregnancies #"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_PregnancyEvent
+
+Node: dcid:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
+description: "Total number of pregnant women Registered for ANC"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
+
+Node: dcid:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
+description: "Number of Pregnant women registered within first trimester"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
+
+Node: dcid:indianNHM/Count_ChildDeliveryEvent
+description: "Total reported deliveries"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent
+
+Node: dcid:indianNHM/Count_ChildDeliveryEvent_InAnInstitution
+description: "Institutional deliveries (Public Insts.+Pvt. Insts.)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_InAnInstitution
+
+Node: dcid:indianNHM/Count_ChildDeliveryEvent_InPublicInstitution
+description: "Deliveries Conducted at Public Institutions"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_InPublicInstitution
+
+Node: dcid:indianNHM/Count_ChildDeliveryEvent_AtHome
+description: "Number of Home deliveries"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_AtHome
+
+Node: dcid:indianNHM/Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+description: "Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+
+Node: dcid:indianNHM/Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
+description: "% Safe deliveries to Total Reported Deliveries"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
+

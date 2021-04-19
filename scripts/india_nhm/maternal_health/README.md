@@ -19,18 +19,18 @@ The dataset contains key performance indicators of Maternal Health Data for the 
 
 The cleaned csv has the following columns:
 
- State: State
- isoCode: isoCode
- Date: Date
- Count_PregnancyEvent: Estimated Number of Annual Pregnancies #
- Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women Registered for ANC
- Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of Pregnant women registered within first trimester
- Count_ChildDeliveryEvent: Total reported deliveries
- Count_ChildDeliveryEvent_InAnInstitution: Institutional deliveries (Public Insts.+Pvt. Insts.)
- Count_ChildDeliveryEvent_InPublicInstitution: Deliveries Conducted at Public Institutions
- Count_ChildDeliveryEvent_AtHome: Number of Home deliveries
- Count_ChildDeliveryEvent_AtHome_WithStandByAssist: Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)
- Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent: % Safe deliveries to Total Reported Deliveries
+- State: State
+- isoCode: isoCode
+- Date: Date
+- Count_PregnancyEvent: Estimated Number of Annual Pregnancies #
+- Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women Registered for ANC
+- Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of Pregnant women registered within first trimester
+- Count_ChildDeliveryEvent: Total reported deliveries
+- Count_ChildDeliveryEvent_InAnInstitution: Institutional deliveries (Public Insts.+Pvt. Insts.)
+- Count_ChildDeliveryEvent_InPublicInstitution: Deliveries Conducted at Public Institutions
+- Count_ChildDeliveryEvent_AtHome: Number of Home deliveries
+- Count_ChildDeliveryEvent_AtHome_WithStandByAssist: Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)
+- Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent: % Safe deliveries to Total Reported Deliveries
 
 #### TMCF
 - [NHM_MaternalHealth.tmcf](NHM_MaternalHealth.tmcf)

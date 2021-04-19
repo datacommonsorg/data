@@ -1,8 +1,19 @@
-# -*- coding: utf-8 -*-
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-import pandas as pd
 import os
-import sys
+import pandas as pd
 
 INDIA_ISO_CODES = {
     "Andhra Pradesh": "IN-AP",
@@ -60,13 +71,12 @@ INDIA_ISO_CODES = {
     "Puducherry": "IN-PY",
     "Puduchery": "IN-PY",
     "Dadra and Nagar Haveli and Daman and Diu": "IN-DN_DD",
-    "Telangana": "IN-TG",
     "all India": "IN",
     "all-India": "IN",
     "All India": "IN"
 }
 
-TMCF_isoCODE = """Node: E:{dataset_name}->E0
+TMCF_ISOCODE = """Node: E:{dataset_name}->E0
 typeOf: schema:Place
 isoCode: C:{dataset_name}->isoCode
 """
@@ -74,16 +84,24 @@ isoCode: C:{dataset_name}->isoCode
 TMCF_NODES = """
 Node: E:{dataset_name}->E{index}
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{variable}
+variableMeasured: dcs:{statvar}
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
 observationPeriod: "P1Y"
-value: C:{dataset_name}->{variable}
+value: C:{dataset_name}->{statvar}
+"""
+
+MCF_NODES = """Node: dcid:indianNHM/{statvar}
+description: "{description}"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/{statvar}
+
 """
 
 
-class NHMDataLoaderBase():
+class NHMDataLoaderBase(object):
     """
     An object to clean .xls files under 'data/' folder and convert it to csv
     
@@ -93,15 +111,18 @@ class NHMDataLoaderBase():
         cols_dict: dictionary containing column names in the data files mapped to StatVars
                     (keys contain column names and values contains StatVar names)
     """
-    def __init__(self, data_folder, dataset_name, cols_dict):
+    def __init__(self, data_folder, dataset_name, cols_dict, final_csv_path):
         """
         Constructor
         """
         self.data_folder = data_folder
         self.dataset_name = dataset_name
         self.cols_dict = cols_dict
+        self.final_csv_path = final_csv_path
         
         self.raw_df = None
+        
+        # Ignoring the first 3 elements (State, isoCode, Date) in the dictionary map
         self.cols_to_extract = list(self.cols_dict.keys())[3:]
     
     def generate_csv(self):
@@ -120,7 +141,7 @@ class NHMDataLoaderBase():
         # Loop through each year file
         for file in os.listdir(self.data_folder):
             fname, fext = os.path.splitext(file) # fname contains year of the file
-            self.date = ''.join(['20', fname[-2:] ,'-03']) # date is set as March of every year
+            date = ''.join(['20', fname[-2:], '-03']) # date is set as March of every year
             
             if fext == '.xls':
                 # Reading .xls file as html and preprocessing multiindex
@@ -130,9 +151,9 @@ class NHMDataLoaderBase():
                 cleaned_df = pd.DataFrame()
                 cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']
                 cleaned_df['isoCode'] = cleaned_df['State'].map(INDIA_ISO_CODES)
-                cleaned_df['Date'] = self.date
+                cleaned_df['Date'] = date
                 
-                # If no columns are specified, extract all columns in raw dataframe
+                # If no columns specified, extract all except first two (index and state name)
                 if not self.cols_to_extract:
                     self.cols_to_extract = list(set(self.raw_df.columns.droplevel(-1)[2:]))
                     
@@ -144,24 +165,31 @@ class NHMDataLoaderBase():
             
         # Converting column names according to schema and saving it as csv
         df_full.columns = df_full.columns.map(self.cols_dict)
-        df_full.to_csv(f"{self.dataset_name}.csv", index=False)
+        df_full.to_csv(self.final_csv_path, index=False)
         
         return df_full
     
-    def create_tmcf(self):
+    def create_mcf_tmcf(self):
         """
-        Class method to generate TMCF file for the current dataset.
+        Class method to generate MCF and TMCF files for the current dataset.
         
         """
-        filename = f"{self.dataset_name}.tmcf"
+        tmcf_file = "{}.tmcf".format(self.dataset_name)
+        mcf_file = "{}.mcf".format(self.dataset_name)
         
-        with open(filename, 'w+') as out:
+        with open(tmcf_file, 'w+') as tmcf, open(mcf_file, 'w+') as mcf:
             # Writing isoCODE entity
-            out.write(TMCF_isoCODE.format(dataset_name=self.dataset_name))
+            tmcf.write(TMCF_ISOCODE.format(dataset_name=self.dataset_name))
             
-            # Writing nodes for each StatVar
+            # Writing nodes for each StatVar 
             for idx, variable in enumerate(self.cols_to_extract):
-                out.write(TMCF_NODES.format(dataset_name=self.dataset_name,
-                                          index=idx+1,
-                                          variable=self.cols_dict[variable]))
+                # Writing TMCF
+                tmcf.write(TMCF_NODES.format(dataset_name=self.dataset_name,
+                                             index=idx+1,
+                                             statvar=self.cols_dict[variable]))
+                
+                mcf.write(MCF_NODES.format(statvar=self.cols_dict[variable],
+                                           description=variable))
+    
+            
     
