@@ -205,7 +205,8 @@ class NHMDataLoaderBase(object):
                                           statvar=self.cols_dict[variable]))
                     # Writing MCF
                     mcf.write(
-                        MCF_NODES.format(statvar=self.cols_dict[variable],
-                                         description=str(variable).capitalize()))
+                        MCF_NODES.format(
+                            statvar=self.cols_dict[variable],
+                            description=str(variable).capitalize()))
 
                     statvars_written.append(self.cols_dict[variable])

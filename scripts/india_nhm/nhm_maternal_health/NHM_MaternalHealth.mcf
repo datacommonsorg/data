@@ -1,12 +1,12 @@
 Node: dcid:indianNHM/Count_PregnancyEvent
-description: "Estimated number of annual pregnancies"
+description: "Estimated number of annual pregnancies #"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_PregnancyEvent
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
-description: "Total number of pregnant women registered for Antenatal Care"
+description: "Total number of pregnant women registered for anc"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
@@ -55,7 +55,7 @@ measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_AtHome_WithStandByAssis
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
-description: "Percent of safe deliveries to total reported deliveries"
+description: "% safe deliveries to total reported deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent

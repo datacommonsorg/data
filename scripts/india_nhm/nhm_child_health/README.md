@@ -30,7 +30,7 @@ The cleaned csv has the following columns:
 - Count_Infant_VaccineAdministered_DPTDose1: Number of Infants given DPT1
 - Count_Infant_VaccineAdministered_DPTDose2: Number of Infants given DPT2
 - Count_Infant_VaccineAdministered_DPTDose3: Number of Infants given DPT3
-- Count_ChildVaccinationEvent_MMR: Number of Infants given MMR
+- Count_ChildVaccinationEvent_MMR: Number of Infants given Measles
 - Count_Infant_VaccineSideEffect_Adverse_Deaths: Adverse Events Following Imunisation (Deaths)
 - Count_Infant_VaccineSideEffect_Adverse_Others: Adverse Events Following Imunisation (Others)
 - Count_Death_Infant: Total Number of Infant Deaths reported
