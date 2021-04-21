@@ -16,7 +16,6 @@ import sys
 
 sys.path.append("..")
 
-import os
 from base.data_cleaner import NHMDataLoaderBase
 from base.readme_generator import ReadMeGen
 
