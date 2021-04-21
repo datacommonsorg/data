@@ -19,7 +19,6 @@ import sys
 class ReadMeGen():
     """
     """
-
     def __init__(self, dataset_name, dataset_description, data_level,
                  cols_dict):
         self.dataset_name = dataset_name
