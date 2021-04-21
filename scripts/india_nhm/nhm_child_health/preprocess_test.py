@@ -26,30 +26,28 @@ from base.data_cleaner import NHMDataLoaderBase
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
-    'State':
-        'State',
-    'isoCode':
-        'isoCode',
-    'Date':
-        'Date',
-    'Estimated Number of Annual Pregnancies #':
-        'Count_PregnancyEvent',
-    'Total number of pregnant women Registered for ANC':
-        'Count_PregnantWomen_RegisteredForAntenatalCare',
-    'Number of Pregnant women registered within first trimester':
-        'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
-    'Total reported deliveries':
-        'Count_ChildDeliveryEvent',
-    'Institutional deliveries (Public Insts.+Pvt. Insts.)':
-        'Count_ChildDeliveryEvent_InAnInstitution',
-    'Deliveries Conducted at Public Institutions':
-        'Count_ChildDeliveryEvent_InPublicInstitution',
-    'Number of Home deliveries':
-        'Count_ChildDeliveryEvent_AtHome',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
-    '% Safe deliveries to Total Reported Deliveries':
-        'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
+    'State': 'State',
+    'isoCode': 'isoCode',
+    'Date': 'Date',
+    'Total Number of reported live births': 'Count_BirthEvent_LiveBirth',
+    'Total Number of reported Still Births': 'Count_BirthEvent_StillBirth',
+    '% Total Reported Live Births to Total Deliveries':
+    'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
+    'Number of Infants given BCG': 'Count_Infant_VaccineAdministered_BCG',
+    'Number of Infants given OPV 0 (Birth Dose)':
+    'Count_Infant_VaccineAdministered_OPV',
+    'Number of Infants given DPT1':
+    'Count_Infant_VaccineAdministered_DPTDose1',
+    'Number of Infants given DPT2':
+    'Count_Infant_VaccineAdministered_DPTDose2',
+    'Number of Infants given DPT3':
+    'Count_Infant_VaccineAdministered_DPTDose3',
+    'Number of Infants given Measles': 'Count_ChildVaccinationEvent_MMR',
+    'Adverse Events Following Imunisation (Deaths)':
+    'Count_Infant_VaccineSideEffect_Adverse_Deaths',
+    'Adverse Events Following Imunisation (Others)':
+    'Count_Infant_VaccineSideEffect_Adverse_Others',
+    'Total Number of Infant Deaths reported': 'Count_Death_Infant'
 }
 
 
@@ -72,7 +70,7 @@ class TestPreprocess(unittest.TestCase):
         result_data = result_file.read()
         result_file.close()
 
-        # os.remove('test_gen.csv')
+        os.remove('test/test_gen.csv')
         self.assertEqual(u'{}'.format(expected_data), result_data)
 
 
