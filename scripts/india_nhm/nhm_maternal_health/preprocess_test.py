@@ -16,10 +16,7 @@ import sys
 
 sys.path.append("..")
 
-import filecmp
 import os
-import json
-import tempfile
 import unittest
 from base.data_cleaner import NHMDataLoaderBase
 
