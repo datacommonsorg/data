@@ -12,13 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-
-sys.path.append("..")
+# import sys
+# sys.path.append("..")
 
 import os
 import unittest
-from base.data_cleaner import NHMDataLoaderBase
+from ..base.data_cleaner import NHMDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
