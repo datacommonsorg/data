@@ -17,27 +17,25 @@ These jsonl's can then be imported to bq using the associated schema bq_schema_*
 
 To import to bigquery:
 - run this script: python3 generate_jsonl_for_bq.py
-- copy bq_import/ to gcs
+- copy tmp_bq_import/ to gcs
 - bq load \
     --source_format=NEWLINE_DELIMITED_JSON \
     google.com:datcom-store-dev.import_us_eia.all_series \
     gs://us_eia/bq_import/*.series.jsonl \
-    bq_import/bq_schema_series.json
+    tmp_bq_import/bq_schema_series.json
 - bq load \
     --source_format=NEWLINE_DELIMITED_JSON \
     google.com:datcom-store-dev.import_us_eia.all_categories \
     gs://us_eia/bq_import/*.categories.jsonl \
-    bq_import/bq_schema_categories.json
+    tmp_bq_import/bq_schema_categories.json
 """
 
 import os
 import json
 import sys
 
-# from google.cloud import bigquery
-
-IN_DATA_PATH = 'raw_data'
-OUT_DATA_PATH = 'bq_import'
+IN_DATA_PATH = 'tmp_raw_data'
+OUT_DATA_PATH = 'tmp_bq_import'
 DATASETS = ['AEO.2014', 'AEO.2015', 'AEO.2016', 'AEO.2017', 'AEO.2018', 'AEO.2019', 'AEO.2020', 'AEO.2021', 'COAL', 'EBA', 'ELEC', 'EMISS', 'IEO.2017', 'IEO.2019', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS', 'SEDS', 'STEO', 'TOTAL']
 
 def extract_series_to_jsonl(line, dataset):
@@ -45,7 +43,6 @@ def extract_series_to_jsonl(line, dataset):
     # convert data to a flat list
     nested_data = json_data['data']
     list_data = []
-    global SKIPPED_VALUE_COUNT
     for [k,v] in nested_data:
         d = { 'date': k }
         try:
@@ -95,12 +92,6 @@ def process_all():
                 continue
             print(f'Processing {subdir}/{file}')
             process_single(subdir, file)
-    # for dataset in DATASETS:
-    #     in_file_path = f'{IN_DATA_PATH}/{dataset}/{dataset}.txt'
-    #     out_file_path = f'{OUT_DATA_PATH}/{dataset}/{dataset}'
-    #     print(f'Processing {in_file_path} to {out_file_path}')
-    #     process_dataset(dataset, in_file_path, out_file_path)
-
 
 if __name__ == '__main__':
     args = sys.argv[1:]

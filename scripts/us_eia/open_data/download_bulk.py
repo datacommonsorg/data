@@ -25,7 +25,7 @@ import zipfile
 import requests
 
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
-OUT_PATH = 'raw_data'
+OUT_PATH = 'tmp_raw_data'
 
 def download_file(url: str, save_path: str):
     print(f'Downloading {url} to {save_path}')

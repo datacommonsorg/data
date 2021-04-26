@@ -17,7 +17,7 @@
 import os
 import json
 
-DATA_PATH = 'raw_data'
+DATA_PATH = 'tmp_raw_data'
 
 all_series = set()
 all_categories = set()
