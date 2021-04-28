@@ -14,7 +14,7 @@ python3 download_bulk.py
 
 ### Data Exploration
 
-To ease analysis of the datasets, see [`generate_json_for_bq.py`](generate_json_for_bq.py) for instructions to convert and import the data into BigQuery.
+To ease analysis of the datasets, see [`generate_jsonl_for_bq.py`](generate_jsonl_for_bq.py) for instructions to convert and import the data into BigQuery.
 
 ### License
 
