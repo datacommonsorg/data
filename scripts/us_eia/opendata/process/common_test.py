@@ -40,6 +40,7 @@ class TestProcess(unittest.TestCase):
             os.remove(act_mcf)
             os.remove(act_tmcf)
 
+          self.maxDiff = None
           self.assertEqual(exp_csv_data, act_csv_data)
           self.assertEqual(exp_mcf_data, act_mcf_data)
           self.assertEqual(exp_tmcf_data, act_tmcf_data)

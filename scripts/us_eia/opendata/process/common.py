@@ -28,6 +28,44 @@ scalingFactor: C:EIATable->scaling_factor
 eiaSeriesId: C:EIATable->eia_series_id
 """
 
+_QUARTER_MAP = {
+    'Q1': '03',
+    'Q2': '06',
+    'Q3': '09',
+    'Q4': '12',
+}
+
+
+def _parse_date(d):
+  if len(d) == 4:
+    # Yearly
+    return d
+
+  if len(d) == 6:
+    yr = d[:4]
+    m_or_q = d[4:]
+
+    if m_or_q.startswith('Q'):
+      # Quarterly
+      if m_or_q in _QUARTER_MAP:
+        return yr + '-' + _QUARTER_MAP[m_or_q]
+    else:
+      # Monthly
+      return yr + '-' + m_or_q
+
+  return None
+
+
+def _eia_dcid(raw_sv):
+  return 'dcid:eia/' + raw_sv.lower()
+
+
+def _print_stats(stats):
+  print('\nSTATS:')
+  for k, v in stats.items():
+    print(f"\t{k} = {v}")
+  print('')
+
 
 def extract_place_stat_var(series_id, stats):
   if series_id.startswith('ELEC.'):
@@ -37,7 +75,7 @@ def extract_place_stat_var(series_id, stats):
     return (None, None)
 
 
-def find_dc_place(raw_place, stats):
+def _find_dc_place(raw_place, stats):
   # At the moment, we only support states and US.
   if raw_place == 'US':
     return 'country/usa'
@@ -48,21 +86,17 @@ def find_dc_place(raw_place, stats):
   return None
 
 
-def generate_schema_statvar(raw_sv, rows, sv_map, stats):
+def _generate_schema_statvar(raw_sv, rows, sv_map, stats):
   if raw_sv.startswith('ELEC'):
     return elec.generate_schema_statvar(raw_sv, rows, sv_map, stats)
   else:
     return False
 
 
-def eia_dcid(raw_sv):
-  return 'dcid:eia/' + raw_sv.lower()
-
-
-def generate_default_statvar(raw_sv, sv_map):
+def _generate_default_statvar(raw_sv, sv_map):
   if raw_sv in sv_map:
     return
-  raw_sv_id = eia_dcid(raw_sv)
+  raw_sv_id = _eia_dcid(raw_sv)
   sv_map[raw_sv] = '\n'.join([
       f"Node: {raw_sv_id}",
       'typeOf: dcs:StatisticalVariable',
@@ -70,13 +104,6 @@ def generate_default_statvar(raw_sv, sv_map):
       f"measuredProperty: {raw_sv_id}",
       'statType: dcs:measuredValue',
   ])
-
-
-def print_stats(stats):
-  print('\nSTATS:')
-  for k, v in stats.items():
-    print(f"\t{k} = {v}")
-  print('')
 
 
 def process(in_json, out_csv, out_sv_mcf, out_tmcf):
@@ -94,7 +121,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
       for line in in_fp:
         stats['info_lines_processed'] += 1
         if stats['info_lines_processed'] % 100000 == 99999:
-          print_stats(stats)
+          _print_stats(stats)
 
         data = json.loads(line)
 
@@ -115,7 +142,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
           continue
 
         # Map raw place to DC place
-        dc_place = find_dc_place(raw_place, stats)
+        dc_place = _find_dc_place(raw_place, stats)
         if not dc_place:
           stats['error_place_mapping'] += 1
           continue
@@ -123,20 +150,23 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
         # Add to rows.
         rows = []
         for k, v in time_series:
+          dt = _parse_date(k)
+          if not dt:
+            stats['error_date_parsing'] += 1
+            continue
           rows.append({
             'place': f"dcid:{dc_place}",
-            'stat_var': eia_dcid(raw_sv),
-            # TODO(shanth): Format date correctly
-            'date': k,
+            'stat_var': _eia_dcid(raw_sv),
+            'date': dt,
             'value': v,
             'eia_series_id': series_id,
           })
 
-        if generate_schema_statvar(raw_sv, rows, sv_map, stats):
+        if _generate_schema_statvar(raw_sv, rows, sv_map, stats):
           stats['info_schemaful_series'] += 1
         else:
           stats['info_schemaless_series'] += 1
-          generate_default_statvar(raw_sv, sv_map)
+          _generate_default_statvar(raw_sv, sv_map)
 
         csvwriter.writerows(rows)
         stats['info_rows_output'] += len(rows)
@@ -148,4 +178,4 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
   with open(out_tmcf, 'w') as out_fp:
     out_fp.write(_TMCF_STRING)
 
-  print_stats(stats)
+  _print_stats(stats)
