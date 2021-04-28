@@ -95,19 +95,22 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
             generate_statvar_schema_fn):
     """Process an EIA dataset and produce outputs using lambda functions.
 
-    in_json: Input JSON file
-    out_csv: Output CSV file
-    out_sv_mcf: Output StatisticalVariable MCF file
-    out_tmcf: Output TMCF file
+    Args:
+        in_json: Input JSON file
+        out_csv: Output CSV file
+        out_sv_mcf: Output StatisticalVariable MCF file
+        out_tmcf: Output TMCF file
 
-    extract_place_statvar_fn: Function that extracts raw place and stat-var from
-                              series_id.
+        extract_place_statvar_fn:
+                            Function that extracts raw place and stat-var from
+                            series_id.
                             Args:
                                 series_id: series_id field from EIA
                                 stats: map of counters with frequency
                             Returns (raw-place-id, raw-stat-var-id)
 
-    generate_statvar_schema_fn: Optional function that generate stat-var schema.
+        generate_statvar_schema_fn:
+                            Optional function that generate stat-var schema.
                             Args:
                                 raw-stat-var: the value returned by extract_place_statvar_fn
                                 rows: list of dicts representing rows with _COLUMNS as keys
