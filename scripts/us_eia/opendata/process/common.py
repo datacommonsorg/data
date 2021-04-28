@@ -93,7 +93,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
 
       for line in in_fp:
         stats['info_lines_processed'] += 1
-        if stats['info_lines_processed'] % 1000000 == 999999:
+        if stats['info_lines_processed'] % 100000 == 99999:
           print_stats(stats)
 
         data = json.loads(line)
@@ -126,6 +126,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
           rows.append({
             'place': f"dcid:{dc_place}",
             'stat_var': eia_dcid(raw_sv),
+            # TODO(shanth): Format date correctly
             'date': k,
             'value': v,
             'eia_series_id': series_id,
@@ -141,7 +142,8 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
         stats['info_rows_output'] += len(rows)
 
   with open(out_sv_mcf, 'w') as out_fp:
-    out_fp.writelines([v for k, v in sv_map.items()])
+    out_fp.write('\n\n'.join([v for k, v in sv_map.items()]))
+    out_fp.write('\n')
 
   with open(out_tmcf, 'w') as out_fp:
     out_fp.write(_TMCF_STRING)

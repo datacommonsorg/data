@@ -1,0 +1,12 @@
+Node: dcid:eia/elec.gen.tsn-94.m
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/elec.gen.tsn-94.m
+statType: dcs:measuredValue
+
+Node: dcid:Monthly_RetailSales_Electricity_Residential
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Monthly
+populationType: dcs:Electricity
+measuredProperty: dcs:retailSales
+consumingSector: dcs:Residential

@@ -35,9 +35,9 @@ def extract_place_stat_var(series_id, stats):
 ##
 
 _PERIOD_MAP = {
-    'A': 'AnnualValue',
-    'M': 'MonthlyValue',
-    'Q': 'QuarterlyValue',
+    'A': 'Annual',
+    'M': 'Monthly',
+    'Q': 'Quarterly',
 }
 
 _CONSUMING_SECTOR = {
