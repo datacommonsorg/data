@@ -39,15 +39,21 @@ import sys
 
 IN_DATA_PATH = 'tmp_raw_data'
 OUT_DATA_PATH = 'tmp_bq_import'
-DATASETS = ['AEO.2014', 'AEO.2015', 'AEO.2016', 'AEO.2017', 'AEO.2018', 'AEO.2019', 'AEO.2020', 'AEO.2021', 'COAL', 'EBA', 'ELEC', 'EMISS', 'IEO.2017', 'IEO.2019', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS', 'SEDS', 'STEO', 'TOTAL']
+DATASETS = [
+    'AEO.2014', 'AEO.2015', 'AEO.2016', 'AEO.2017', 'AEO.2018', 'AEO.2019',
+    'AEO.2020', 'AEO.2021', 'COAL', 'EBA', 'ELEC', 'EMISS', 'IEO.2017',
+    'IEO.2019', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS', 'SEDS',
+    'STEO', 'TOTAL'
+]
+
 
 def extract_series_to_jsonl(line, dataset):
     json_data = json.loads(line)
     # convert data to a flat list
     nested_data = json_data['data']
     list_data = []
-    for [k,v] in nested_data:
-        d = { 'date': k }
+    for [k, v] in nested_data:
+        d = {'date': k}
         try:
             d['value'] = float(v)
         except:
@@ -58,11 +64,13 @@ def extract_series_to_jsonl(line, dataset):
     json_data['dataset'] = dataset
     return json_data
 
+
 def extract_category_to_jsonl(line, dataset):
     json_data = json.loads(line)
     json_data['len_childseries'] = len(json_data['childseries'])
     json_data['dataset'] = dataset
     return json_data
+
 
 def process_dataset(dataset, in_file_path, out_file_path):
     with open(in_file_path) as data_fp:
@@ -81,11 +89,13 @@ def process_dataset(dataset, in_file_path, out_file_path):
                         category_fp.write(json.dumps(jsonl))
                         category_fp.write('\n')
 
+
 def process_single(subdir, file):
     dataset = os.path.split(subdir)[-1]
     in_file_path = os.path.join(subdir, file)
     out_file_path = f'{OUT_DATA_PATH}/{dataset}'
     process_dataset(dataset, in_file_path, out_file_path)
+
 
 def process_all():
     for subdir, dirs, files in os.walk(IN_DATA_PATH):
@@ -95,6 +105,7 @@ def process_all():
                 continue
             print(f'Processing {subdir}/{file}')
             process_single(subdir, file)
+
 
 if __name__ == '__main__':
     args = sys.argv[1:]

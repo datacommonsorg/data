@@ -27,14 +27,17 @@ import requests
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
 OUT_PATH = 'tmp_raw_data'
 
+
 def download_file(url: str, save_path: str):
     print(f'Downloading {url} to {save_path}')
     r = requests.get(url, stream=True)
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall(save_path)
 
+
 def download_manifest():
     return requests.get(MANIFEST_URL).json()
+
 
 def main():
     manifest_json = download_manifest()
@@ -43,6 +46,7 @@ def main():
         print(dataset_name)
         dataset = datasets[dataset_name]
         download_file(dataset['accessURL'], f'{OUT_PATH}/{dataset_name}')
+
 
 if __name__ == '__main__':
     main()
