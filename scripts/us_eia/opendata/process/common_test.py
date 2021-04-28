@@ -1,22 +1,26 @@
-import common
-import elec
+"""Test for common.py"""
+
 import os
 import tempfile
 import unittest
 
+import common
+import elec
+
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
+
+_TEST_CASES = [
+    # input-json, expected-csv, expected-mcf, expected-tmcf,
+    #   extract-fn, schema-fn
+    ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
+     elec.extract_place_statvar, elec.generate_statvar_schema),
+]
 
 
 class TestProcess(unittest.TestCase):
 
     def test_process(self):
-        _TEST_CASES = [
-            # input-json, expected-csv, expected-mcf, expected-tmcf,
-            #   extract-fn, schema-fn
-            ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
-             elec.extract_place_statvar, elec.generate_statvar_schema),
-        ]
         for (in_file, csv, mcf, tmcf, extract_fn, schema_fn) in _TEST_CASES:
             with tempfile.TemporaryDirectory() as tmp_dir:
                 in_file = os.path.join(module_dir_, 'test_data', in_file)

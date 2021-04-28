@@ -1,7 +1,18 @@
+"""EIA Electricity Dataset specific functions."""
+
 import re
 
 
 def extract_place_statvar(series_id, stats):
+    """Given the series_id, extract the raw place and stat-var ID.
+
+    Args:
+        series_id: EIA series ID
+        stats: map for updating error statistics
+
+    Returns a (place, raw-stat-var) pair.
+    """
+
     if series_id.startswith('ELEC.PLANT.'):
         stats['error_unimplemented_plant_series'] += 1
         return (None, None)
@@ -15,7 +26,7 @@ def extract_place_statvar(series_id, stats):
         place = m.group(3)
         producing_sector = m.group(4)
         period = m.group(5)
-        sv_id = f"ELEC.{measure}.{energy_source}-{producing_sector}.{period}"
+        sv_id = f'ELEC.{measure}.{energy_source}-{producing_sector}.{period}'
     else:
         # ELEC.{MEASURE}.{PLACE}-{CONSUMER_SECTOR}.{PERIOD}
         m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", series_id)
@@ -27,7 +38,7 @@ def extract_place_statvar(series_id, stats):
         place = m.group(2)
         consuming_sector = m.group(3)
         period = m.group(4)
-        sv_id = f"ELEC.{measure}.{consuming_sector}.{period}"
+        sv_id = f'ELEC.{measure}.{consuming_sector}.{period}'
     return (place, sv_id)
 
 
@@ -129,6 +140,17 @@ _UNIT_MAP = {
 
 
 def generate_statvar_schema(raw_sv, rows, sv_map, stats):
+    """Generate StatVar with full schema.
+
+    Args:
+        raw_sv: Raw stat-var returned by extract_place_statvar()
+        rows: List of dicts corresponding to CSV row. See common._COLUMNS.
+        sv_map: Map from stat-var to its MCF content.
+        stats: Map updated with error statistics.
+
+    Returns True if schema was generated, False otherwise.
+    """
+
     # ELEC.{MEASURE}.{ENERGY_SOURCE}-{PRODUCER_SECTOR}.{PERIOD}
     m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", raw_sv)
     if m:
@@ -153,8 +175,8 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
     sv_pvs = [
         'typeOf: dcs:StatisticalVariable',
         # TODO(shanth): use new property in next iteration
-        f"measurementQualifier: dcs:{_PERIOD_MAP[period]}",
-        f"statType: dcs:measuredValue",
+        f'measurementQualifier: dcs:{_PERIOD_MAP[period]}',
+        f'statType: dcs:measuredValue',
     ]
 
     # Get popType and mprop based on measure.
@@ -173,9 +195,9 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         if es != 'ALL':
             sv_id_parts.append(es)
             if '_Fuel_' in measure_pvs[0]:
-                sv_pvs.append(f"fuelType: dcs:{es}")
+                sv_pvs.append(f'fuelType: dcs:{es}')
             else:
-                sv_pvs.append(f"energySource: dcs:{es}")
+                sv_pvs.append(f'energySource: dcs:{es}')
 
     if producing_sector:
         ps = _PRODUCING_SECTOR.get(producing_sector, None)
@@ -185,9 +207,9 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         if ps != 'ALL':
             sv_id_parts.append(ps)
             if '_Fuel_' in measure_pvs[0]:
-                sv_pvs.append(f"electricityProducingSector: dcs:{ps}")
+                sv_pvs.append(f'electricityProducingSector: dcs:{ps}')
             else:
-                sv_pvs.append(f"producingSector: dcs:{ps}")
+                sv_pvs.append(f'producingSector: dcs:{ps}')
 
     if consuming_sector:
         cs = _CONSUMING_SECTOR.get(consuming_sector, None)
@@ -196,7 +218,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
             return False
         if cs != 'ALL':
             sv_id_parts.append(cs)
-            sv_pvs.append(f"consumingSector: dcs:{cs}")
+            sv_pvs.append(f'consumingSector: dcs:{cs}')
 
     (unit, sfactor) = _UNIT_MAP.get(measure, (None, None))
     if not unit and not sfactor:
@@ -207,14 +229,14 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
 
     # Update the rows with new StatVar ID value and additional properties.
     for row in rows:
-        row['stat_var'] = f"dcid:{sv_id}"
+        row['stat_var'] = f'dcid:{sv_id}'
         if unit:
-            row['unit'] = f"dcid:{unit}"
+            row['unit'] = f'dcid:{unit}'
         if sfactor:
             row['scaling_factor'] = sfactor
 
     if sv_id not in sv_map:
-        node = f"Node: dcid:{sv_id}"
+        node = f'Node: dcid:{sv_id}'
         sv_map[sv_id] = '\n'.join([node] + sv_pvs)
 
     return True

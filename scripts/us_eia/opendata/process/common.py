@@ -1,15 +1,13 @@
 """Process EIA datasets to produce TMCF and CSV."""
 
-from sys import path
-# For import util.alpha2_to_dcid
-path.insert(1, '../../../../')
-
 import csv
 import json
-import logging
-import pandas as pd
-import util.alpha2_to_dcid as alpha2_to_dcid
 from collections import defaultdict
+from sys import path
+
+# For import util.alpha2_to_dcid
+path.insert(1, '../../../../')
+import util.alpha2_to_dcid as alpha2_to_dcid
 
 _COLUMNS = [
     'place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor',
@@ -37,6 +35,8 @@ _QUARTER_MAP = {
 
 
 def _parse_date(d):
+    """Given a date from EIA JSON convert to DC compatible date."""
+
     if len(d) == 4:
         # Yearly
         return d
@@ -71,7 +71,7 @@ def _find_dc_place(raw_place, stats):
     # At the moment, we only support states and US.
     if raw_place == 'US':
         return 'country/usa'
-    elif raw_place in alpha2_to_dcid.USSTATE_MAP:
+    if raw_place in alpha2_to_dcid.USSTATE_MAP:
         return alpha2_to_dcid.USSTATE_MAP[raw_place]
 
     stats['error_unsupported_places'] += 1
@@ -93,8 +93,17 @@ def _generate_default_statvar(raw_sv, sv_map):
 
 def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
             generate_statvar_schema_fn):
+    """Process an EIA dataset and produce outputs using lambda functions.
+
+    in_json: Input JSON file
+    out_csv: Output CSV file
+    out_sv_mcf: Output StatisticalVariable MCF file
+    out_tmcf: Output TMCF file
+    extract_place_statvar_fn: Function that extracts raw place and stat-var from
+                              a series_id
+    generate_statvar_schema_fn: Optional function that generate stat-var schema.
+
     """
-  """
     assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
 
     stats = defaultdict(lambda: 0)
