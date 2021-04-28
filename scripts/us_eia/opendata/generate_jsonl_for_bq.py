@@ -16,18 +16,21 @@
 These jsonl's can then be imported to bq using the associated schema bq_schema_*.json
 
 To import to bigquery:
-- run this script: python3 generate_jsonl_for_bq.py
-- copy tmp_bq_import/ to gcs
-- bq load \
-    --source_format=NEWLINE_DELIMITED_JSON \
-    google.com:datcom-store-dev.import_us_eia.all_series \
-    gs://us_eia/bq_import/*.series.jsonl \
-    tmp_bq_import/bq_schema_series.json
-- bq load \
-    --source_format=NEWLINE_DELIMITED_JSON \
-    google.com:datcom-store-dev.import_us_eia.all_categories \
-    gs://us_eia/bq_import/*.categories.jsonl \
-    tmp_bq_import/bq_schema_categories.json
+- run this script: `python3 generate_jsonl_for_bq.py`
+- copy tmp_bq_import/ to gcs: `gsutil -m cp -r bq_import gs://us_eia/`
+- load data into bigquery:
+    ```
+    bq load \
+        --source_format=NEWLINE_DELIMITED_JSON \
+        google.com:datcom-store-dev.import_us_eia.all_series \
+        gs://us_eia/bq_import/*.series.jsonl \
+        bq_schema_series.json
+    bq load \
+        --source_format=NEWLINE_DELIMITED_JSON \
+        google.com:datcom-store-dev.import_us_eia.all_categories \
+        gs://us_eia/bq_import/*.categories.jsonl \
+        bq_schema_categories.json
+    ```
 """
 
 import os
