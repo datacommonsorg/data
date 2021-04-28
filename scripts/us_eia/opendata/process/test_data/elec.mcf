@@ -1,8 +1,11 @@
-Node: dcid:eia/elec.gen.tsn-94.m
+Node: dcid:Monthly_Generation_Electricity_Solar_IndependentPowerProducers
 typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/elec.gen.tsn-94.m
+measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
+populationType: dcs:Electricity
+measuredProperty: dcs:generation
+energySource: dcs:Solar
+producingSector: dcs:IndependentPowerProducers
 
 Node: dcid:Monthly_RetailSales_Electricity_Residential
 typeOf: dcs:StatisticalVariable

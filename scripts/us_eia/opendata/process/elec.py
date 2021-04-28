@@ -51,24 +51,45 @@ _CONSUMING_SECTOR = {
 
 _PRODUCING_SECTOR = {
     '1': 'ElectricUtility',
+    '2': 'ElectricUtilityNonCogen',
+    '3': 'ElectricUtilityCogen',
+    '4': 'CommercialNonCogen',
+    '5': 'CommercialCogen',
+    '6': 'IndustrialNonCogen',
+    '7': 'IndustrialCogen',
     '8': 'Residential',
+    '94': 'IndependentPowerProducers',
     '96': 'Commercial',
     '97': 'Industrial',
     '98': 'ElectricPower',
     '99': 'ALL',  # Special handled ALL
-    # TODO(shanth): Add the rest
 }
 
 _ENERGY_SOURCE = {
+    'AOR': 'RenewableEnergy',
+    'BIS': 'BituminousCoal',
+    'BIT': 'BituminousCoal',
     'COL': 'Coal',
     'COW': 'Coal',
+    'DPV': 'SmallScaleSolarPhotovoltaic',
     'GEO': 'Geothermal',
+    'HPS': 'HydroelectricPumpedStorage',
+    'HYC': 'ConventionalHydroelectric',
+    'LIG': 'LigniteCoal',
     'NG': 'NaturalGas',
     'NUC': 'Nuclear',
+    'OOG': 'Other',
+    'OTH': 'Other',
+    'PC': 'PetroleumCoke',
+    'PEL': 'PetroleumLiquids',
+    'SPV': 'UtilityScalePhotovoltaic',
+    'STH': 'UtilityScaleThermal',
+    'SUB': 'SubbituminousCoal',
+    'SUN': 'UtilityScaleSolar',
     'TSN': 'Solar',
+    'WAS': 'OtherBiomass',
     'WND': 'Wind',
     'ALL': 'ALL'
-    # TODO(shanth): Add the rest
 }
 
 _MEASURE_MAP = {
