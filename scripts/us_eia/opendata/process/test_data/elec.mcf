@@ -7,6 +7,7 @@ statType: dcs:measuredValue
 Node: dcid:Monthly_RetailSales_Electricity_Residential
 typeOf: dcs:StatisticalVariable
 measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
 populationType: dcs:Electricity
 measuredProperty: dcs:retailSales
 consumingSector: dcs:Residential

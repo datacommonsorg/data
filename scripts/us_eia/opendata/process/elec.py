@@ -130,7 +130,8 @@ def generate_schema_statvar(raw_sv, rows, sv_map, stats):
   sv_pvs = [
       'typeOf: dcs:StatisticalVariable',
       # TODO(shanth): use new property in next iteration
-      f"measurementQualifier: dcs:{_PERIOD_MAP[period]}"
+      f"measurementQualifier: dcs:{_PERIOD_MAP[period]}",
+      f"statType: dcs:measuredValue",
   ]
 
   # Get popType and mprop based on measure.
