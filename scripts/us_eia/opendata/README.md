@@ -1,4 +1,4 @@
-# US EIA OpenData Import
+# US EIA Open Data Import
 
 ## About the Dataset
 
@@ -19,3 +19,12 @@ To ease analysis of the datasets, see [`generate_jsonl_for_bq.py`](generate_json
 ### License
 
 This dataset is available for public use, license is available at https://www.eia.gov/about/copyrights_reuse.php
+
+### Import procedure
+
+- Download data 
+    ```bash
+    python3 download_bulk.py
+    ```
+
+- Run the [processor](process/README.md)
