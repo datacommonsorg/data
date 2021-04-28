@@ -137,30 +137,40 @@ Consider automating coding to satisfy some of these requirements.
     [vim](https://github.com/mindriot101/vim-yapf#why-you-may-not-need-this-plugin).
     Specify the Google style using `--style google`.
 
-To run the tools via a command line:
+To run the tools via a command line (both installed after setup steps above):
 
 *   [pylint](http://pylint.pycqa.org/en/latest/user_guide/run.html).
-*   After [installing yapf](https://github.com/google/yapf#id2), execute using
+*   [yapf](https://github.com/google/yapf#id2), execute using
     `--style google`, e.g.,
 
-```
-# Update (--in-place) all files in the util/ directory and its subdirectories.
-yapf --recursive --in-place --style google util/
+```shell
+# Update (--in-place) all files
+./run_tests.sh -f
 
 # Produce differences between the current code and reformatted code.  Empty
 # output indicates correctly formatted code.
-yapf --recursive --diff --style google util/
+./run_tests.sh -l
 ```
 
 To run a unit test, use a command like
 
-```
+```shell
 python3 -m unittest discover -v -s util/ -p "*_test.py"
 ```
 
 The `discover` option searches (`-s`) the `util/` directory for files with
 filenames ending with `_test.py`. It considers all these files to be unit tests
 to be run. Output is verbose (`-v`).
+
+We provide a utility to run all unit tests in a folder easily (e.g. util/):
+```shell
+./run_tests.sh -p util/
+```
+
+Or to run all tests and checks:
+```shell
+./run_tests.sh -a
+```
 
 #### Disabling style checks
 
