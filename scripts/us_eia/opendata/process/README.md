@@ -14,8 +14,8 @@ For (1), a dataset needs to implement an `extract_place_stat_var` function, like
 the one `elec.py`, which takes a `series_id` and returns raw place and
 stat-var.
 
-For (2), a dataset needs to implement `generate_schema_statvar`, which takes the
-raw stat-vara and generates a fully defined stat-var for it.
+For (2), a dataset needs to implement `generate_schema_statvar`, which takes a
+raw stat-var and generates a fully defined stat-var for it.
 
 ### ELEC
 
