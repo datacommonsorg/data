@@ -99,10 +99,22 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
     out_csv: Output CSV file
     out_sv_mcf: Output StatisticalVariable MCF file
     out_tmcf: Output TMCF file
-    extract_place_statvar_fn: Function that extracts raw place and stat-var from
-                              a series_id
-    generate_statvar_schema_fn: Optional function that generate stat-var schema.
 
+    extract_place_statvar_fn: Function that extracts raw place and stat-var from
+                              series_id.
+                            Args:
+                                series_id: series_id field from EIA
+                                stats: map of counters with frequency
+                            Returns (raw-place-id, raw-stat-var-id)
+
+    generate_statvar_schema_fn: Optional function that generate stat-var schema.
+                            Args:
+                                raw-stat-var: the value returned by extract_place_statvar_fn
+                                rows: list of dicts representing rows with _COLUMNS as keys
+                                sv-map: map from stat-var-id to MCF content
+                                stats: map of counters with frequency
+                            Returns True if schema was generated, False otherwise.
+                                On True, rows and sv-map are also updated.
     """
     assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
 
@@ -123,7 +135,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                 # Preliminary checks
                 series_id = data.get('series_id', None)
                 if not series_id:
-                    stats['error_missing_series'] += 1
+                    stats['info_ignored_categories'] += 1
                     continue
                 time_series = data.get('data', None)
                 if not time_series:
