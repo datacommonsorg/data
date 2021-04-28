@@ -1,5 +1,6 @@
 
 import common
+import elec
 import os
 import tempfile
 import unittest
@@ -12,16 +13,19 @@ class TestProcess(unittest.TestCase):
 
     def test_process(self):
         _TEST_CASES = [
-            ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf'),
+            # input-json, expected-csv, expected-mcf, expected-tmcf,
+            #   extract-fn, schema-fn
+            ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
+             elec.extract_place_statvar, elec.generate_statvar_schema),
         ]
-        for (in_file, csv, mcf, tmcf) in _TEST_CASES:
+        for (in_file, csv, mcf, tmcf, extract_fn, schema_fn) in _TEST_CASES:
           with tempfile.TemporaryDirectory() as tmp_dir:
             in_file = os.path.join(module_dir_, 'test_data', in_file)
 
             act_csv = os.path.join(tmp_dir, csv)
             act_mcf = os.path.join(tmp_dir, mcf)
             act_tmcf = os.path.join(tmp_dir, tmcf)
-            common.process(in_file, act_csv, act_mcf, act_tmcf)
+            common.process(in_file, act_csv, act_mcf, act_tmcf, extract_fn, schema_fn)
 
             with open(os.path.join(module_dir_, 'test_data', csv)) as f:
               exp_csv_data = f.read()

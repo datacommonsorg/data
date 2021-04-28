@@ -5,7 +5,6 @@ from sys import path
 path.insert(1, '../../../../')
 
 import csv
-import elec
 import json
 import logging
 import pandas as pd
@@ -67,14 +66,6 @@ def _print_stats(stats):
   print('')
 
 
-def extract_place_stat_var(series_id, stats):
-  if series_id.startswith('ELEC.'):
-    return elec.extract_place_stat_var(series_id, stats)
-  else:
-    stats['error_unimplemented_dataset'] += 1
-    return (None, None)
-
-
 def _find_dc_place(raw_place, stats):
   # At the moment, we only support states and US.
   if raw_place == 'US':
@@ -84,13 +75,6 @@ def _find_dc_place(raw_place, stats):
 
   stats['error_unsupported_places'] += 1
   return None
-
-
-def _generate_schema_statvar(raw_sv, rows, sv_map, stats):
-  if raw_sv.startswith('ELEC'):
-    return elec.generate_schema_statvar(raw_sv, rows, sv_map, stats)
-  else:
-    return False
 
 
 def _generate_default_statvar(raw_sv, sv_map):
@@ -106,11 +90,12 @@ def _generate_default_statvar(raw_sv, sv_map):
   ])
 
 
-def process(in_json, out_csv, out_sv_mcf, out_tmcf):
+def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
+            generate_statvar_schema_fn):
   """
-    Produces CSV with schema:
-        place, stat_var, date, value, unit, scaling_factor, eia_series_id
   """
+  assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
+
   stats = defaultdict(lambda: 0)
   sv_map = {}
   with open(in_json) as in_fp:
@@ -136,9 +121,9 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
           continue
 
         # Extract raw place and stat-var from series_id.
-        (raw_place, raw_sv) = extract_place_stat_var(series_id, stats)
+        (raw_place, raw_sv) = extract_place_statvar_fn(series_id, stats)
         if not raw_place or not raw_sv:
-          # Stats updated by extract_place_stat_var()
+          # Stats updated by extract_place_statvar_fn()
           continue
 
         # Map raw place to DC place
@@ -162,7 +147,8 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf):
             'eia_series_id': series_id,
           })
 
-        if _generate_schema_statvar(raw_sv, rows, sv_map, stats):
+        if (generate_statvar_schema_fn and
+            generate_statvar_schema_fn(raw_sv, rows, sv_map, stats)):
           stats['info_schemaful_series'] += 1
         else:
           stats['info_schemaless_series'] += 1

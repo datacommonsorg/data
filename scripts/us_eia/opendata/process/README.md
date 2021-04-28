@@ -10,12 +10,11 @@ There are two stages of support for a dataset:
 1. Raw schema-less stat-vars attached to DC places
 2. Stat-vars with full schema definition
 
-For (1), a dataset needs to implement an `extract_place_stat_var` function, like
-the one `elec.py`, which takes a `series_id` and returns raw place and
-stat-var.
+For (1), a dataset needs to implement an `extract_place_statvar` function, like
+the one `elec.py`, which takes a `series_id` and returns raw place and stat-var.
 
-For (2), a dataset needs to implement `generate_schema_statvar`, which takes a
-raw stat-var and generates a fully defined stat-var for it.
+For (2), a dataset needs to implement `generate_statvar_schema` function, which
+takes a raw stat-var and generates a fully defined stat-var for it.
 
 ### ELEC
 

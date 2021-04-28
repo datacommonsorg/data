@@ -1,7 +1,7 @@
 
 import re
 
-def extract_place_stat_var(series_id, stats):
+def extract_place_statvar(series_id, stats):
   if series_id.startswith('ELEC.PLANT.'):
     stats['error_unimplemented_plant_series'] += 1
     return (None, None)
@@ -105,7 +105,7 @@ _UNIT_MAP = {
     # TODO(shanth): Add the rest
 }
 
-def generate_schema_statvar(raw_sv, rows, sv_map, stats):
+def generate_statvar_schema(raw_sv, rows, sv_map, stats):
   # ELEC.{MEASURE}.{ENERGY_SOURCE}-{PRODUCER_SECTOR}.{PERIOD}
   m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", raw_sv)
   if m:
