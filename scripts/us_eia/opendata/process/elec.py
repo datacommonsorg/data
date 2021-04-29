@@ -18,16 +18,16 @@ def extract_place_statvar(series_id, stats):
         stats['error_unimplemented_plant_series'] += 1
         return (None, None)
 
-    # ELEC.{MEASURE}.{ENERGY_SOURCE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
+    # ELEC.{MEASURE}.{FUEL_TYPE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
     m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
                  series_id)
     if m:
         measure = m.group(1)
-        energy_source = m.group(2)
+        fuel_type = m.group(2)
         place = m.group(3)
         producing_sector = m.group(4)
         period = m.group(5)
-        sv_id = f'ELEC.{measure}.{energy_source}-{producing_sector}.{period}'
+        sv_id = f'ELEC.{measure}.{fuel_type}-{producing_sector}.{period}'
     else:
         # ELEC.{MEASURE}.{PLACE}-{CONSUMER_SECTOR}.{PERIOD}
         m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", series_id)
@@ -78,7 +78,7 @@ _PRODUCING_SECTOR = {
     '99': 'ALL',  # Special handled ALL
 }
 
-_ENERGY_SOURCE = {
+_FUEL_TYPE = {
     'AOR': 'RenewableEnergy',
     'BIS': 'BituminousCoal',
     'BIT': 'BituminousCoal',
@@ -91,7 +91,7 @@ _ENERGY_SOURCE = {
     'LIG': 'LigniteCoal',
     'NG': 'NaturalGas',
     'NUC': 'Nuclear',
-    'OOG': 'Other',
+    'OOG': 'OtherGases',
     'OTH': 'Other',
     'PC': 'PetroleumCoke',
     'PEL': 'PetroleumLiquids',
@@ -106,6 +106,8 @@ _ENERGY_SOURCE = {
     'ALL': 'ALL'
 }
 
+# Each value is a list where first entry is StatVar ID component, and the rest
+# are StatVar PVs.
 _MEASURE_MAP = {
     'ASH_CONTENT': [
         'AshContent_Fuel_ForElectricityGeneration',
@@ -193,36 +195,50 @@ _MEASURE_MAP = {
     ],
 }
 
+# The following measures are the same StatVar as another measure, but differ in
+# units (see _UNIT_MAP).
 _MEASURE_MAP['COST_BTU'] = _MEASURE_MAP['COST']
 _MEASURE_MAP['CONS_EG_BTU'] = _MEASURE_MAP['CONS_EG']
 _MEASURE_MAP['CONS_TOT_BTU'] = _MEASURE_MAP['CONS_TOT']
 _MEASURE_MAP['CONS_UTO_BTU'] = _MEASURE_MAP['CONS_UTO']
 _MEASURE_MAP['RECEIPTS_BTU'] = _MEASURE_MAP['RECEIPTS']
 
+
+# Unit with this value is handled specially depending on the fuel type.
+_FUEL_UNIT = '_XYZ_'
+
+# The value is a pair of (unit, scalingFactor) for each measure.
 _UNIT_MAP = {
     'ASH_CONTENT': ('', '100'),
-    # TODO(shanth): This has ton/barrel too.
-    'CONS_EG': ('Mcf', '1000'),
+    'CONS_EG': (_FUEL_UNIT, '1000'),
     'CONS_EG_BTU': ('MMBtu', '1000000'),
-    'CONS_TOT': ('Mcf', '1000'),
-    'CONS_TOT_BTU': ('MMBtu', '1000000'),
-    'CONS_UTO': ('Mcf', '1000'),
-    'CONS_UTO_BTU': ('MMBtu', '1000000'),
-    # TODO(shanth): This has per ton/barrel too.
-    'COST': ('USDollarPerMcf', ''),
-    'COST_BTU': ('USDollarPerMMBtu', ''),
+    'COST': (_FUEL_UNIT, ''),
+    'COST_BTU': ('MMBtu', ''),
     'CUSTOMERS': ('', ''),
     'GEN': ('MegaWattHour', '1000'),
     'PRICE': ('USCentPerKiloWattHour', ''),
-    # TODO(shanth): This has ton/barrel too.
-    'RECEIPTS': ('Mcf', '1000'),
+    'RECEIPTS': (_FUEL_UNIT, '1000'),
     'RECEIPTS_BTU': ('Btu', '1000000000'),
     'REV': ('USDollar', '1000000'),
     'SALES': ('KiloWattHour', '1000000'),
-    # TODO(shanth): This has barrel too.
-    'STOCKS': ('Ton', '1000'),
+    'STOCKS': (_FUEL_UNIT, '1000'),
     'SULFUR_CONTENT': ('', '100'),
 }
+
+_UNIT_MAP['CONS_TOT'] = _UNIT_MAP['CONS_EG']
+_UNIT_MAP['CONS_UTO'] = _UNIT_MAP['CONS_EG']
+_UNIT_MAP['CONS_TOT_BTU'] = _UNIT_MAP['CONS_EG_BTU']
+_UNIT_MAP['CONS_UTO_BTU'] = _UNIT_MAP['CONS_EG_BTU']
+
+
+def _get_fuel_unit(fuel_type):
+    if fuel_type == 'NG' or fuel_type == 'OOG':
+        # Gas
+        return 'Mcf'
+    if fuel_type == 'PEL':
+        # Liquid
+        return 'Barrel'
+    return 'Ton'
 
 
 def generate_statvar_schema(raw_sv, rows, sv_map, stats):
@@ -237,11 +253,11 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
     Returns True if schema was generated, False otherwise.
     """
 
-    # ELEC.{MEASURE}.{ENERGY_SOURCE}-{PRODUCER_SECTOR}.{PERIOD}
+    # ELEC.{MEASURE}.{FUEL_TYPE}-{PRODUCER_SECTOR}.{PERIOD}
     m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", raw_sv)
     if m:
         measure = m.group(1)
-        energy_source = m.group(2)
+        fuel_type = m.group(2)
         producing_sector = m.group(3)
         period = m.group(4)
         consuming_sector = ''
@@ -254,7 +270,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         measure = m.group(1)
         consuming_sector = m.group(2)
         period = m.group(3)
-        energy_source = ''
+        fuel_type = ''
         producing_sector = ''
 
     # Get popType and mprop based on measure.
@@ -270,12 +286,12 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         f'measurementQualifier: dcs:{_PERIOD_MAP[period]}',
     ]
 
-    if energy_source:
-        es = _ENERGY_SOURCE.get(energy_source, None)
+    if fuel_type:
+        es = _FUEL_TYPE.get(fuel_type, None)
         if not es:
-            logging.error('Missing energy source: %s from %s', energy_source,
+            logging.error('Missing energy source: %s from %s', fuel_type,
                           raw_sv)
-            stats['error_missing_energy_source'] += 1
+            stats['error_missing_fuel_type'] += 1
             return False
         if es != 'ALL':
             sv_id_parts.append(es)
@@ -309,6 +325,14 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         stats['error_missing_unit'] += 1
         return False
     (unit, sfactor) = _UNIT_MAP[measure]
+
+    if unit == _FUEL_UNIT:
+      if not fuel_type:
+        stats['error_missing_unit_fuel_type'] += 1
+        return False
+      unit = _get_fuel_unit(fuel_type)
+      if measure == 'COST':
+        unit = 'USDollarPer' + unit
 
     sv_id = '_'.join(sv_id_parts)
 

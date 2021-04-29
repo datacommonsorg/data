@@ -156,13 +156,21 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                     stats['error_place_mapping'] += 1
                     continue
 
+                # TODO: Consider extracting units.
+
                 # Add to rows.
                 rows = []
                 for k, v in time_series:
+
+                    if not v:
+                        stats['error_empty_values'] += 1
+                        continue
+
                     dt = _parse_date(k)
                     if not dt:
                         stats['error_date_parsing'] += 1
                         continue
+
                     rows.append({
                         'place': f"dcid:{dc_place}",
                         'stat_var': _eia_dcid(raw_sv),
@@ -170,6 +178,9 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                         'value': v,
                         'eia_series_id': series_id,
                     })
+
+                if not rows:
+                  continue
 
                 if (generate_statvar_schema_fn and generate_statvar_schema_fn(
                         raw_sv, rows, sv_map, stats)):
