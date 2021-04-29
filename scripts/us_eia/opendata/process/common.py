@@ -70,7 +70,7 @@ def _print_stats(stats):
 def _find_dc_place(raw_place, stats):
     # At the moment, we only support states and US.
     if raw_place == 'US':
-        return 'country/usa'
+        return 'country/USA'
     if raw_place in alpha2_to_dcid.USSTATE_MAP:
         return alpha2_to_dcid.USSTATE_MAP[raw_place]
 
