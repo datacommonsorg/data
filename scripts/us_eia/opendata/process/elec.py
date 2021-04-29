@@ -1,5 +1,6 @@
 """EIA Electricity Dataset specific functions."""
 
+import logging
 import re
 
 
@@ -101,41 +102,126 @@ _ENERGY_SOURCE = {
     'TSN': 'Solar',
     'WAS': 'OtherBiomass',
     'WND': 'Wind',
+    'WWW': 'WoodAndWoodDerivedFuels',
     'ALL': 'ALL'
 }
 
 _MEASURE_MAP = {
+    'ASH_CONTENT': [
+        'AshContent_Fuel_ForElectricityGeneration',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:ashContent',
+        'usedFor: dcs:ElectricityGeneration',
+        'statType: dcs:measuredValue',
+    ],
+    'CONS_EG': [
+        'Consumption_Fuel_ForElectricityGeneration',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:consumption',
+        'usedFor: dcs:ElectricityGeneration',
+        'statType: dcs:measuredValue',
+    ],
+    'CONS_TOT': [
+        'Consumption_Fuel_ForElectricityGenerationAndThermalOutput',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:consumption',
+        'usedFor: dcs:ElectricityGenerationAndThermalOutput',
+        'statType: dcs:measuredValue',
+    ],
+    'CONS_UTO': [
+        'Consumption_Fuel_ForUsefulThermalOutput',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:consumption',
+        'usedFor: dcs:UsefulThermalOutputInCHPSystem',
+        'statType: dcs:measuredValue',
+    ],
+    'COST': [
+        'Average_Cost_Fuel_ForElectricityGeneration',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:cost',
+        'usedFor: dcs:ElectricityGeneration',
+        'statType: dcs:meanValue',
+    ],
+    'CUSTOMERS': [
+        'Count_ElectricityConsumer',
+        'populationType: dcs:ElectricityConsumer',
+        'measuredProperty: dcs:count',
+        'statType: dcs:measuredValue',
+    ],
     'GEN': [
         'Generation_Electricity',
         'populationType: dcs:Electricity',
         'measuredProperty: dcs:generation',
+        'statType: dcs:measuredValue',
+    ],
+    'PRICE': [
+        'Average_RetailPrice_Electricity',
+        'populationType: dcs:Electricity',
+        'measuredProperty: dcs:retailPrice',
+        'statType: dcs:meanValue',
+    ],
+    'RECEIPTS': [
+        'Receipt_Fuel_ForElectricityGeneration',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:receipt',
+        'statType: dcs:measuredValue',
+    ],
+    'REV': [
+        'SalesRevenue_Electricity',
+        'populationType: dcs:Electricity',
+        'measuredProperty: dcs:salesRevenue',
+        'statType: dcs:measuredValue',
     ],
     'SALES': [
         'RetailSales_Electricity',
         'populationType: dcs:Electricity',
         'measuredProperty: dcs:retailSales',
+        'statType: dcs:measuredValue',
     ],
-    'CONS_TOT': [
-        'Consumption_Fuel_ForElectricityGeneration',
+    'STOCKS': [
+        'Stock_Fuel_ForElectricityGeneration',
         'populationType: dcs:Fuel',
-        'measuredProperty: dcs:consumption',
-        'usedFor: dcs:ElectricityGeneration',
+        'measuredProperty: dcs:stock',
+        'statType: dcs:measuredValue',
     ],
-    'COST': [
-        'Cost_Fuel_ForElectricityGeneration',
+    'SULFUR_CONTENT': [
+        'SulfurContent_Fuel_ForElectricityGeneration',
         'populationType: dcs:Fuel',
-        'measuredProperty: dcs:cost',
+        'measuredProperty: dcs:sulfurContent',
         'usedFor: dcs:ElectricityGeneration',
+        'statType: dcs:measuredValue',
     ],
-    # TODO(shanth): Add the rest
 }
 
+_MEASURE_MAP['COST_BTU'] = _MEASURE_MAP['COST']
+_MEASURE_MAP['CONS_EG_BTU'] = _MEASURE_MAP['CONS_EG']
+_MEASURE_MAP['CONS_TOT_BTU'] = _MEASURE_MAP['CONS_TOT']
+_MEASURE_MAP['CONS_UTO_BTU'] = _MEASURE_MAP['CONS_UTO']
+_MEASURE_MAP['RECEIPTS_BTU'] = _MEASURE_MAP['RECEIPTS']
+
 _UNIT_MAP = {
-    'GEN': ('MegaWattHour', '1000'),
-    'SALES': ('KiloWattHour', '1000000'),
+    'ASH_CONTENT': ('', '100'),
+    # TODO(shanth): This has ton/barrel too.
+    'CONS_EG': ('Mcf', '1000'),
+    'CONS_EG_BTU': ('MMBtu', '1000000'),
     'CONS_TOT': ('Mcf', '1000'),
+    'CONS_TOT_BTU': ('MMBtu', '1000000'),
+    'CONS_UTO': ('Mcf', '1000'),
+    'CONS_UTO_BTU': ('MMBtu', '1000000'),
+    # TODO(shanth): This has per ton/barrel too.
     'COST': ('USDollarPerMcf', ''),
-    # TODO(shanth): Add the rest
+    'COST_BTU': ('USDollarPerMMBtu', ''),
+    'CUSTOMERS': ('', ''),
+    'GEN': ('MegaWattHour', '1000'),
+    'PRICE': ('USCentPerKiloWattHour', ''),
+    # TODO(shanth): This has ton/barrel too.
+    'RECEIPTS': ('Mcf', '1000'),
+    'RECEIPTS_BTU': ('Btu', '1000000000'),
+    'REV': ('USDollar', '1000000'),
+    'SALES': ('KiloWattHour', '1000000'),
+    # TODO(shanth): This has barrel too.
+    'STOCKS': ('Ton', '1000'),
+    'SULFUR_CONTENT': ('', '100'),
 }
 
 
@@ -171,25 +257,24 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         energy_source = ''
         producing_sector = ''
 
-    sv_id_parts = [_PERIOD_MAP[period]]
-    sv_pvs = [
-        'typeOf: dcs:StatisticalVariable',
-        # TODO(shanth): use new property in next iteration
-        f'measurementQualifier: dcs:{_PERIOD_MAP[period]}',
-        f'statType: dcs:measuredValue',
-    ]
-
     # Get popType and mprop based on measure.
     measure_pvs = _MEASURE_MAP.get(measure, None)
     if not measure_pvs:
         stats['error_missing_measure'] += 1
         return False
-    sv_id_parts.append(measure_pvs[0])
-    sv_pvs.extend(measure_pvs[1:])
+
+    sv_id_parts = [_PERIOD_MAP[period], measure_pvs[0]]
+    sv_pvs = measure_pvs[1:] + [
+        'typeOf: dcs:StatisticalVariable',
+        # TODO(shanth): use new property in next iteration
+        f'measurementQualifier: dcs:{_PERIOD_MAP[period]}',
+    ]
 
     if energy_source:
         es = _ENERGY_SOURCE.get(energy_source, None)
         if not es:
+            logging.error('Missing energy source: %s from %s', energy_source,
+                          raw_sv)
             stats['error_missing_energy_source'] += 1
             return False
         if es != 'ALL':
@@ -220,10 +305,10 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
             sv_id_parts.append(cs)
             sv_pvs.append(f'consumingSector: dcs:{cs}')
 
-    (unit, sfactor) = _UNIT_MAP.get(measure, (None, None))
-    if not unit and not sfactor:
+    if measure not in _UNIT_MAP:
         stats['error_missing_unit'] += 1
         return False
+    (unit, sfactor) = _UNIT_MAP[measure]
 
     sv_id = '_'.join(sv_id_parts)
 
