@@ -180,7 +180,8 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                     })
 
                 if not rows:
-                  continue
+                    stats['error_empty_series'] += 1
+                    continue
 
                 if (generate_statvar_schema_fn and generate_statvar_schema_fn(
                         raw_sv, rows, sv_map, stats)):
