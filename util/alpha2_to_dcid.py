@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Country and US State Alpha2 -> DCID maps."""
+"""Country, US state and Canadian province Alpha2 -> DCID maps."""
 
 COUNTRY_MAP = {
     'AD': 'country/AND',
@@ -323,4 +323,20 @@ USSTATE_MAP = {
     'PR': 'geoId/72',
     'UM': 'geoId/74',
     'VI': 'geoId/78',
+}
+
+CAN_PROVINCE_MAP = {
+    'AB': 'wikidataId/Q1951',
+    'BC': 'wikidataId/Q1974',
+    'MB': 'wikidataId/Q1948',
+    'NB': 'wikidataId/Q1965',
+    'NL': 'wikidataId/Q2003',
+    'NS': 'wikidataId/Q1952',
+    'ON': 'wikidataId/Q1904',
+    'PE': 'wikidataId/Q1979',
+    'QC': 'wikidataId/Q176',
+    'SK': 'wikidataId/Q1989',
+    'NT': 'wikidataId/Q2007',
+    'NU': 'wikidataId/Q2023',
+    'YT': 'wikidataId/Q2009',
 }
