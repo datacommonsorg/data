@@ -2,7 +2,7 @@
 
 This folder includes scripts to download and process the annual Form 860 dataset: https://www.eia.gov/electricity/data/eia860/
 
-The survey collects generator-level specific information about existing and planned generators and associated environmental equipment at electric power plants with 1 megawatt or greater of combined nameplate capacity. Summary level data can be found in the Electric Power Annual.
+The survey collects generator-level specific information about existing and planned generators and associated environmental equipment at electric power plants with 1 megawatt or greater of combined nameplate capacity in the United States. Summary level data can be found in the [Electric Power Annual](https://www.eia.gov/electricity/annual/).
 
 This dataset is published annually since 2001 (with an earlier version from 1990-2000). For this import, we will focus on 2019.
 

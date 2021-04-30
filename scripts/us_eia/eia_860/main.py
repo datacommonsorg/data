@@ -12,21 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Utility to download all EIA data from https://api.eia.gov/bulk/manifest.txt
-Files are stored in raw_data.
+Utility to download all EIA Form-860 data for a given year, and prepare the
+data for import.
 
 Run this script in this folder:
-python3 download_bulk.py
+python3 main.py
 """
-import sys
+from absl import app, flags
 import io
 import os
+import requests
 import zipfile
 
-import requests
-import pandas as pd
-
 import utility
+
+FLAGS = flags.FLAGS
+flags.DEFINE_boolean('skip_import', False, 'Skips downloading data.')
 
 URL = 'https://www.eia.gov/electricity/data/eia860/xls/eia8602019.zip'
 OUT_PATH = 'tmp_raw_data'
@@ -34,15 +35,24 @@ UTILITY_IN_FILENAME = '1___Utility_Y2019.xlsx'
 UTILITY_OUT_FILENAME = '1_utility.csv'
 PLANT_IN_FILENAME = '2___Plant_Y2019.xlsx'
 
+# module_dir_ is the path to where this module is running from.
+module_dir_ = os.path.dirname(__file__)
+
 
 def download_file(url: str, save_path: str):
-    print(f'Downloading {url} to {save_path}')
+    full_save_path = os.path.join(module_dir_, save_path)
+    print(f'Downloading {url} to {full_save_path}')
     r = requests.get(url, stream=True)
     z = zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall(save_path)
+    z.extractall(full_save_path)
 
-def main():
-    utility.process(os.path.join(OUT_PATH, UTILITY_IN_FILENAME), UTILITY_OUT_FILENAME)
+
+def main(argv):
+    if not FLAGS.skip_import:
+        download_file(URL, OUT_PATH)
+    utility.process(os.path.join(module_dir_, OUT_PATH, UTILITY_IN_FILENAME),
+                    UTILITY_OUT_FILENAME)
+
 
 if __name__ == '__main__':
-    main()
+    app.run(main)
