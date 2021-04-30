@@ -60,21 +60,21 @@ def _eia_dcid(raw_sv):
     return 'dcid:eia/' + raw_sv.lower()
 
 
-def _print_stats(stats):
+def _print_counters(counters):
     print('\nSTATS:')
-    for k, v in stats.items():
+    for k, v in counters.items():
         print(f"\t{k} = {v}")
     print('')
 
 
-def _find_dc_place(raw_place, stats):
+def _find_dc_place(raw_place, counters):
     # At the moment, we only support states and US.
     if raw_place == 'US':
-        return 'country/usa'
+        return 'country/USA'
     if raw_place in alpha2_to_dcid.USSTATE_MAP:
         return alpha2_to_dcid.USSTATE_MAP[raw_place]
 
-    stats['error_unsupported_places'] += 1
+    counters['error_unsupported_places'] += 1
     return None
 
 
@@ -105,7 +105,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                             Required function to extract raw place and stat-var from series_id
                             Args:
                                 series_id: series_id field from EIA
-                                stats: map of counters with frequency
+                                counters: map of counters with frequency
                             Returns (raw-place-id, raw-stat-var-id)
 
         generate_statvar_schema_fn:
@@ -114,13 +114,13 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                                 raw-stat-var: the value returned by extract_place_statvar_fn
                                 rows: list of dicts representing rows with _COLUMNS as keys
                                 sv-map: map from stat-var-id to MCF content
-                                stats: map of counters with frequency
+                                counters: map of counters with frequency
                             Returns True if schema was generated, False otherwise.
                                 On True, rows and sv-map are also updated.
     """
     assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
 
-    stats = defaultdict(lambda: 0)
+    counters = defaultdict(lambda: 0)
     sv_map = {}
     with open(in_json) as in_fp:
         with open(out_csv, 'w', newline='') as csv_fp:
@@ -128,41 +128,50 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
             csvwriter.writeheader()
 
             for line in in_fp:
-                stats['info_lines_processed'] += 1
-                if stats['info_lines_processed'] % 100000 == 99999:
-                    _print_stats(stats)
+                counters['info_lines_processed'] += 1
+                if counters['info_lines_processed'] % 100000 == 99999:
+                    _print_counters(counters)
 
                 data = json.loads(line)
 
                 # Preliminary checks
                 series_id = data.get('series_id', None)
                 if not series_id:
-                    stats['info_ignored_categories'] += 1
+                    counters['info_ignored_categories'] += 1
                     continue
                 time_series = data.get('data', None)
                 if not time_series:
-                    stats['error_missing_time_series'] += 1
+                    counters['error_missing_time_series'] += 1
                     continue
 
                 # Extract raw place and stat-var from series_id.
-                (raw_place, raw_sv) = extract_place_statvar_fn(series_id, stats)
+                (raw_place,
+                 raw_sv) = extract_place_statvar_fn(series_id, counters)
                 if not raw_place or not raw_sv:
                     # Stats updated by extract_place_statvar_fn()
                     continue
 
                 # Map raw place to DC place
-                dc_place = _find_dc_place(raw_place, stats)
+                dc_place = _find_dc_place(raw_place, counters)
                 if not dc_place:
-                    stats['error_place_mapping'] += 1
+                    counters['error_place_mapping'] += 1
                     continue
+
+                # TODO: Consider extracting units.
 
                 # Add to rows.
                 rows = []
                 for k, v in time_series:
+
+                    if not v:
+                        counters['error_empty_values'] += 1
+                        continue
+
                     dt = _parse_date(k)
                     if not dt:
-                        stats['error_date_parsing'] += 1
+                        counters['error_date_parsing'] += 1
                         continue
+
                     rows.append({
                         'place': f"dcid:{dc_place}",
                         'stat_var': _eia_dcid(raw_sv),
@@ -171,15 +180,19 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                         'eia_series_id': series_id,
                     })
 
+                if not rows:
+                    counters['error_empty_series'] += 1
+                    continue
+
                 if (generate_statvar_schema_fn and generate_statvar_schema_fn(
-                        raw_sv, rows, sv_map, stats)):
-                    stats['info_schemaful_series'] += 1
+                        raw_sv, rows, sv_map, counters)):
+                    counters['info_schemaful_series'] += 1
                 else:
-                    stats['info_schemaless_series'] += 1
+                    counters['info_schemaless_series'] += 1
                     _generate_default_statvar(raw_sv, sv_map)
 
                 csvwriter.writerows(rows)
-                stats['info_rows_output'] += len(rows)
+                counters['info_rows_output'] += len(rows)
 
     with open(out_sv_mcf, 'w') as out_fp:
         out_fp.write('\n\n'.join([v for k, v in sv_map.items()]))
@@ -188,4 +201,4 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
     with open(out_tmcf, 'w') as out_fp:
         out_fp.write(_TMCF_STRING)
 
-    _print_stats(stats)
+    _print_counters(counters)
