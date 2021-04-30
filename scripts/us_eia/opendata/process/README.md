@@ -1,5 +1,5 @@
 
-# EIA Open Data Import
+# US EIA Open Data Import Processor
 
 This folder includes processing scripts for importing datasets from EIA's Open
 Data portal: https://www.eia.gov/opendata/qb.php
