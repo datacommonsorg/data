@@ -1,37 +1,38 @@
 """EIA Electricity Dataset specific functions."""
 
+import logging
 import re
 
 
-def extract_place_statvar(series_id, stats):
+def extract_place_statvar(series_id, counters):
     """Given the series_id, extract the raw place and stat-var ID.
 
     Args:
         series_id: EIA series ID
-        stats: map for updating error statistics
+        counters: map for updating error statistics
 
     Returns a (place, raw-stat-var) pair.
     """
 
     if series_id.startswith('ELEC.PLANT.'):
-        stats['error_unimplemented_plant_series'] += 1
+        counters['error_unimplemented_plant_series'] += 1
         return (None, None)
 
-    # ELEC.{MEASURE}.{ENERGY_SOURCE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
+    # ELEC.{MEASURE}.{FUEL_TYPE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
     m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
                  series_id)
     if m:
         measure = m.group(1)
-        energy_source = m.group(2)
+        fuel_type = m.group(2)
         place = m.group(3)
         producing_sector = m.group(4)
         period = m.group(5)
-        sv_id = f'ELEC.{measure}.{energy_source}-{producing_sector}.{period}'
+        sv_id = f'ELEC.{measure}.{fuel_type}-{producing_sector}.{period}'
     else:
         # ELEC.{MEASURE}.{PLACE}-{CONSUMER_SECTOR}.{PERIOD}
         m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", series_id)
         if not m:
-            stats['error_unparsable_series'] += 1
+            counters['error_unparsable_series'] += 1
             return (None, None)
 
         measure = m.group(1)
@@ -77,7 +78,7 @@ _PRODUCING_SECTOR = {
     '99': 'ALL',  # Special handled ALL
 }
 
-_ENERGY_SOURCE = {
+_FUEL_TYPE = {
     'AOR': 'RenewableEnergy',
     'BIS': 'BituminousCoal',
     'BIT': 'BituminousCoal',
@@ -90,7 +91,7 @@ _ENERGY_SOURCE = {
     'LIG': 'LigniteCoal',
     'NG': 'NaturalGas',
     'NUC': 'Nuclear',
-    'OOG': 'Other',
+    'OOG': 'OtherGases',
     'OTH': 'Other',
     'PC': 'PetroleumCoke',
     'PEL': 'PetroleumLiquids',
@@ -101,61 +102,161 @@ _ENERGY_SOURCE = {
     'TSN': 'Solar',
     'WAS': 'OtherBiomass',
     'WND': 'Wind',
+    'WWW': 'WoodAndWoodDerivedFuels',
     'ALL': 'ALL'
 }
 
+# Each value is a list where first entry is StatVar ID component, and the rest
+# are StatVar PVs.
 _MEASURE_MAP = {
+    'ASH_CONTENT': [
+        'AshContent_Fuel_ForElectricityGeneration',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:ashContent',
+        'usedFor: dcs:ElectricityGeneration',
+        'statType: dcs:measuredValue',
+    ],
+    'CONS_EG': [
+        'Consumption_Fuel_ForElectricityGeneration',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:consumption',
+        'usedFor: dcs:ElectricityGeneration',
+        'statType: dcs:measuredValue',
+    ],
+    'CONS_TOT': [
+        'Consumption_Fuel_ForElectricityGenerationAndThermalOutput',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:consumption',
+        'usedFor: dcs:ElectricityGenerationAndThermalOutput',
+        'statType: dcs:measuredValue',
+    ],
+    'CONS_UTO': [
+        'Consumption_Fuel_ForUsefulThermalOutput',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:consumption',
+        'usedFor: dcs:UsefulThermalOutputInCHPSystem',
+        'statType: dcs:measuredValue',
+    ],
+    'COST': [
+        'Average_Cost_Fuel_ForElectricityGeneration',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:cost',
+        'usedFor: dcs:ElectricityGeneration',
+        'statType: dcs:meanValue',
+    ],
+    'CUSTOMERS': [
+        'Count_ElectricityConsumer',
+        'populationType: dcs:ElectricityConsumer',
+        'measuredProperty: dcs:count',
+        'statType: dcs:measuredValue',
+    ],
     'GEN': [
         'Generation_Electricity',
         'populationType: dcs:Electricity',
         'measuredProperty: dcs:generation',
+        'statType: dcs:measuredValue',
+    ],
+    'PRICE': [
+        'Average_RetailPrice_Electricity',
+        'populationType: dcs:Electricity',
+        'measuredProperty: dcs:retailPrice',
+        'statType: dcs:meanValue',
+    ],
+    'RECEIPTS': [
+        'Receipt_Fuel_ForElectricityGeneration',
+        'populationType: dcs:Fuel',
+        'measuredProperty: dcs:receipt',
+        'statType: dcs:measuredValue',
+    ],
+    'REV': [
+        'SalesRevenue_Electricity',
+        'populationType: dcs:Electricity',
+        'measuredProperty: dcs:salesRevenue',
+        'statType: dcs:measuredValue',
     ],
     'SALES': [
         'RetailSales_Electricity',
         'populationType: dcs:Electricity',
         'measuredProperty: dcs:retailSales',
+        'statType: dcs:measuredValue',
     ],
-    'CONS_TOT': [
-        'Consumption_Fuel_ForElectricityGeneration',
+    'STOCKS': [
+        'Stock_Fuel_ForElectricityGeneration',
         'populationType: dcs:Fuel',
-        'measuredProperty: dcs:consumption',
-        'usedFor: dcs:ElectricityGeneration',
+        'measuredProperty: dcs:stock',
+        'statType: dcs:measuredValue',
     ],
-    'COST': [
-        'Cost_Fuel_ForElectricityGeneration',
+    'SULFUR_CONTENT': [
+        'SulfurContent_Fuel_ForElectricityGeneration',
         'populationType: dcs:Fuel',
-        'measuredProperty: dcs:cost',
+        'measuredProperty: dcs:sulfurContent',
         'usedFor: dcs:ElectricityGeneration',
+        'statType: dcs:measuredValue',
     ],
-    # TODO(shanth): Add the rest
 }
 
+# The following measures are the same StatVar as another measure, but differ in
+# units (see _UNIT_MAP).
+_MEASURE_MAP['COST_BTU'] = _MEASURE_MAP['COST']
+_MEASURE_MAP['CONS_EG_BTU'] = _MEASURE_MAP['CONS_EG']
+_MEASURE_MAP['CONS_TOT_BTU'] = _MEASURE_MAP['CONS_TOT']
+_MEASURE_MAP['CONS_UTO_BTU'] = _MEASURE_MAP['CONS_UTO']
+_MEASURE_MAP['RECEIPTS_BTU'] = _MEASURE_MAP['RECEIPTS']
+
+# Unit with this value is handled specially depending on the fuel type.
+_PLACEHOLDER_FUEL_UNIT = '_XYZ_'
+
+# The value is a pair of (unit, scalingFactor) for each measure.
 _UNIT_MAP = {
+    'ASH_CONTENT': ('', '100'),
+    'CONS_EG': (_PLACEHOLDER_FUEL_UNIT, '1000'),
+    'CONS_EG_BTU': ('MMBtu', '1000000'),
+    'COST': (_PLACEHOLDER_FUEL_UNIT, ''),
+    'COST_BTU': ('MMBtu', ''),
+    'CUSTOMERS': ('', ''),
     'GEN': ('MegaWattHour', '1000'),
+    'PRICE': ('USCentPerKiloWattHour', ''),
+    'RECEIPTS': (_PLACEHOLDER_FUEL_UNIT, '1000'),
+    'RECEIPTS_BTU': ('Btu', '1000000000'),
+    'REV': ('USDollar', '1000000'),
     'SALES': ('KiloWattHour', '1000000'),
-    'CONS_TOT': ('Mcf', '1000'),
-    'COST': ('USDollarPerMcf', ''),
-    # TODO(shanth): Add the rest
+    'STOCKS': (_PLACEHOLDER_FUEL_UNIT, '1000'),
+    'SULFUR_CONTENT': ('', '100'),
 }
 
+_UNIT_MAP['CONS_TOT'] = _UNIT_MAP['CONS_EG']
+_UNIT_MAP['CONS_UTO'] = _UNIT_MAP['CONS_EG']
+_UNIT_MAP['CONS_TOT_BTU'] = _UNIT_MAP['CONS_EG_BTU']
+_UNIT_MAP['CONS_UTO_BTU'] = _UNIT_MAP['CONS_EG_BTU']
 
-def generate_statvar_schema(raw_sv, rows, sv_map, stats):
+
+def _get_fuel_unit(fuel_type):
+    if fuel_type == 'NG' or fuel_type == 'OOG':
+        # Gas
+        return 'Mcf'
+    if fuel_type == 'PEL':
+        # Liquid
+        return 'Barrel'
+    return 'Ton'
+
+
+def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     """Generate StatVar with full schema.
 
     Args:
         raw_sv: Raw stat-var returned by extract_place_statvar()
         rows: List of dicts corresponding to CSV row. See common._COLUMNS.
         sv_map: Map from stat-var to its MCF content.
-        stats: Map updated with error statistics.
+        counters: Map updated with error statistics.
 
     Returns True if schema was generated, False otherwise.
     """
 
-    # ELEC.{MEASURE}.{ENERGY_SOURCE}-{PRODUCER_SECTOR}.{PERIOD}
+    # ELEC.{MEASURE}.{FUEL_TYPE}-{PRODUCER_SECTOR}.{PERIOD}
     m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", raw_sv)
     if m:
         measure = m.group(1)
-        energy_source = m.group(2)
+        fuel_type = m.group(2)
         producing_sector = m.group(3)
         period = m.group(4)
         consuming_sector = ''
@@ -163,34 +264,33 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         # ELEC.{MEASURE}.{CONSUMER_SECTOR}.{PERIOD}
         m = re.match(r"^ELEC\.([^.]+)\.([^.]+)\.([AQM])$", raw_sv)
         if not m:
-            stats['error_unparsable_raw_statvar'] += 1
+            counters['error_unparsable_raw_statvar'] += 1
             return False
         measure = m.group(1)
         consuming_sector = m.group(2)
         period = m.group(3)
-        energy_source = ''
+        fuel_type = ''
         producing_sector = ''
-
-    sv_id_parts = [_PERIOD_MAP[period]]
-    sv_pvs = [
-        'typeOf: dcs:StatisticalVariable',
-        # TODO(shanth): use new property in next iteration
-        f'measurementQualifier: dcs:{_PERIOD_MAP[period]}',
-        f'statType: dcs:measuredValue',
-    ]
 
     # Get popType and mprop based on measure.
     measure_pvs = _MEASURE_MAP.get(measure, None)
     if not measure_pvs:
-        stats['error_missing_measure'] += 1
+        counters['error_missing_measure'] += 1
         return False
-    sv_id_parts.append(measure_pvs[0])
-    sv_pvs.extend(measure_pvs[1:])
 
-    if energy_source:
-        es = _ENERGY_SOURCE.get(energy_source, None)
+    sv_id_parts = [_PERIOD_MAP[period], measure_pvs[0]]
+    sv_pvs = measure_pvs[1:] + [
+        'typeOf: dcs:StatisticalVariable',
+        # TODO(shanth): use new property in next iteration
+        f'measurementQualifier: dcs:{_PERIOD_MAP[period]}',
+    ]
+
+    if fuel_type:
+        es = _FUEL_TYPE.get(fuel_type, None)
         if not es:
-            stats['error_missing_energy_source'] += 1
+            logging.error('Missing energy source: %s from %s', fuel_type,
+                          raw_sv)
+            counters['error_missing_fuel_type'] += 1
             return False
         if es != 'ALL':
             sv_id_parts.append(es)
@@ -202,7 +302,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
     if producing_sector:
         ps = _PRODUCING_SECTOR.get(producing_sector, None)
         if not ps:
-            stats['error_missing_producing_sector'] += 1
+            counters['error_missing_producing_sector'] += 1
             return False
         if ps != 'ALL':
             sv_id_parts.append(ps)
@@ -214,16 +314,24 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
     if consuming_sector:
         cs = _CONSUMING_SECTOR.get(consuming_sector, None)
         if not cs:
-            stats['error_missing_consuming_sector'] += 1
+            counters['error_missing_consuming_sector'] += 1
             return False
         if cs != 'ALL':
             sv_id_parts.append(cs)
             sv_pvs.append(f'consumingSector: dcs:{cs}')
 
-    (unit, sfactor) = _UNIT_MAP.get(measure, (None, None))
-    if not unit and not sfactor:
-        stats['error_missing_unit'] += 1
+    if measure not in _UNIT_MAP:
+        counters['error_missing_unit'] += 1
         return False
+    (unit, sfactor) = _UNIT_MAP[measure]
+
+    if unit == _PLACEHOLDER_FUEL_UNIT:
+        if not fuel_type:
+            counters['error_missing_unit_fuel_type'] += 1
+            return False
+        unit = _get_fuel_unit(fuel_type)
+        if measure == 'COST':
+            unit = 'USDollarPer' + unit
 
     sv_id = '_'.join(sv_id_parts)
 
