@@ -4,18 +4,18 @@ import logging
 import re
 
 
-def extract_place_statvar(series_id, stats):
+def extract_place_statvar(series_id, counters):
     """Given the series_id, extract the raw place and stat-var ID.
 
     Args:
         series_id: EIA series ID
-        stats: map for updating error statistics
+        counters: map for updating error statistics
 
     Returns a (place, raw-stat-var) pair.
     """
 
     if series_id.startswith('ELEC.PLANT.'):
-        stats['error_unimplemented_plant_series'] += 1
+        counters['error_unimplemented_plant_series'] += 1
         return (None, None)
 
     # ELEC.{MEASURE}.{FUEL_TYPE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
@@ -32,7 +32,7 @@ def extract_place_statvar(series_id, stats):
         # ELEC.{MEASURE}.{PLACE}-{CONSUMER_SECTOR}.{PERIOD}
         m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", series_id)
         if not m:
-            stats['error_unparsable_series'] += 1
+            counters['error_unparsable_series'] += 1
             return (None, None)
 
         measure = m.group(1)
@@ -203,25 +203,24 @@ _MEASURE_MAP['CONS_TOT_BTU'] = _MEASURE_MAP['CONS_TOT']
 _MEASURE_MAP['CONS_UTO_BTU'] = _MEASURE_MAP['CONS_UTO']
 _MEASURE_MAP['RECEIPTS_BTU'] = _MEASURE_MAP['RECEIPTS']
 
-
 # Unit with this value is handled specially depending on the fuel type.
-_FUEL_UNIT = '_XYZ_'
+_PLACEHOLDER_FUEL_UNIT = '_XYZ_'
 
 # The value is a pair of (unit, scalingFactor) for each measure.
 _UNIT_MAP = {
     'ASH_CONTENT': ('', '100'),
-    'CONS_EG': (_FUEL_UNIT, '1000'),
+    'CONS_EG': (_PLACEHOLDER_FUEL_UNIT, '1000'),
     'CONS_EG_BTU': ('MMBtu', '1000000'),
-    'COST': (_FUEL_UNIT, ''),
+    'COST': (_PLACEHOLDER_FUEL_UNIT, ''),
     'COST_BTU': ('MMBtu', ''),
     'CUSTOMERS': ('', ''),
     'GEN': ('MegaWattHour', '1000'),
     'PRICE': ('USCentPerKiloWattHour', ''),
-    'RECEIPTS': (_FUEL_UNIT, '1000'),
+    'RECEIPTS': (_PLACEHOLDER_FUEL_UNIT, '1000'),
     'RECEIPTS_BTU': ('Btu', '1000000000'),
     'REV': ('USDollar', '1000000'),
     'SALES': ('KiloWattHour', '1000000'),
-    'STOCKS': (_FUEL_UNIT, '1000'),
+    'STOCKS': (_PLACEHOLDER_FUEL_UNIT, '1000'),
     'SULFUR_CONTENT': ('', '100'),
 }
 
@@ -241,14 +240,14 @@ def _get_fuel_unit(fuel_type):
     return 'Ton'
 
 
-def generate_statvar_schema(raw_sv, rows, sv_map, stats):
+def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     """Generate StatVar with full schema.
 
     Args:
         raw_sv: Raw stat-var returned by extract_place_statvar()
         rows: List of dicts corresponding to CSV row. See common._COLUMNS.
         sv_map: Map from stat-var to its MCF content.
-        stats: Map updated with error statistics.
+        counters: Map updated with error statistics.
 
     Returns True if schema was generated, False otherwise.
     """
@@ -265,7 +264,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         # ELEC.{MEASURE}.{CONSUMER_SECTOR}.{PERIOD}
         m = re.match(r"^ELEC\.([^.]+)\.([^.]+)\.([AQM])$", raw_sv)
         if not m:
-            stats['error_unparsable_raw_statvar'] += 1
+            counters['error_unparsable_raw_statvar'] += 1
             return False
         measure = m.group(1)
         consuming_sector = m.group(2)
@@ -276,7 +275,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
     # Get popType and mprop based on measure.
     measure_pvs = _MEASURE_MAP.get(measure, None)
     if not measure_pvs:
-        stats['error_missing_measure'] += 1
+        counters['error_missing_measure'] += 1
         return False
 
     sv_id_parts = [_PERIOD_MAP[period], measure_pvs[0]]
@@ -291,7 +290,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
         if not es:
             logging.error('Missing energy source: %s from %s', fuel_type,
                           raw_sv)
-            stats['error_missing_fuel_type'] += 1
+            counters['error_missing_fuel_type'] += 1
             return False
         if es != 'ALL':
             sv_id_parts.append(es)
@@ -303,7 +302,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
     if producing_sector:
         ps = _PRODUCING_SECTOR.get(producing_sector, None)
         if not ps:
-            stats['error_missing_producing_sector'] += 1
+            counters['error_missing_producing_sector'] += 1
             return False
         if ps != 'ALL':
             sv_id_parts.append(ps)
@@ -315,24 +314,24 @@ def generate_statvar_schema(raw_sv, rows, sv_map, stats):
     if consuming_sector:
         cs = _CONSUMING_SECTOR.get(consuming_sector, None)
         if not cs:
-            stats['error_missing_consuming_sector'] += 1
+            counters['error_missing_consuming_sector'] += 1
             return False
         if cs != 'ALL':
             sv_id_parts.append(cs)
             sv_pvs.append(f'consumingSector: dcs:{cs}')
 
     if measure not in _UNIT_MAP:
-        stats['error_missing_unit'] += 1
+        counters['error_missing_unit'] += 1
         return False
     (unit, sfactor) = _UNIT_MAP[measure]
 
-    if unit == _FUEL_UNIT:
-      if not fuel_type:
-        stats['error_missing_unit_fuel_type'] += 1
-        return False
-      unit = _get_fuel_unit(fuel_type)
-      if measure == 'COST':
-        unit = 'USDollarPer' + unit
+    if unit == _PLACEHOLDER_FUEL_UNIT:
+        if not fuel_type:
+            counters['error_missing_unit_fuel_type'] += 1
+            return False
+        unit = _get_fuel_unit(fuel_type)
+        if measure == 'COST':
+            unit = 'USDollarPer' + unit
 
     sv_id = '_'.join(sv_id_parts)
 
