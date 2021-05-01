@@ -18,8 +18,8 @@ _TEST_CASES = [
     ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
      elec.extract_place_statvar, elec.generate_statvar_schema),
     ('ng.txt', 'ng.csv', 'ng.mcf', 'ng.tmcf', ng.extract_place_statvar, None),
-    ('pet.txt', 'pet.csv', 'pet.mcf', 'pet.tmcf',
-     pet.extract_place_statvar, None),
+    ('pet.txt', 'pet.csv', 'pet.mcf', 'pet.tmcf', pet.extract_place_statvar,
+     None),
 ]
 
 

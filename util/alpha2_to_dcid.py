@@ -41,7 +41,7 @@ COUNTRY_MAP = {
     'BJ': 'country/BEN',
     'BM': 'country/BMU',
     'BN': 'country/BRN',
-    'BX': 'country/BRN',   # FIPS code.
+    'BX': 'country/BRN',  # FIPS code.
     'BO': 'country/BOL',
     'BR': 'country/BRA',
     'BS': 'country/BHS',
@@ -201,9 +201,9 @@ COUNTRY_MAP = {
     'PT': 'country/PRT',
     'PW': 'country/PLW',
     'PY': 'country/PRY',
-    'PZ': 'geoId/72',       # Some sources refer to Puerto Rico as country.
+    'PZ': 'geoId/72',  # Some sources refer to Puerto Rico as country.
     'QA': 'country/QAT',
-    'QR': 'country/QAT',   # EIA uses this.
+    'QR': 'country/QAT',  # EIA uses this.
     'RE': 'country/REU',
     'RO': 'country/ROU',
     'RS': 'country/SRB',
@@ -259,7 +259,7 @@ COUNTRY_MAP = {
     'VG': 'country/VGB',
     'VI': 'country/VIR',
     'VN': 'country/VNM',
-    'VQ': 'geoId/78',       # Some sources refer to Virgin Islands as country.
+    'VQ': 'geoId/78',  # Some sources refer to Virgin Islands as country.
     'VU': 'country/VUT',
     'WF': 'country/WLF',
     'WS': 'country/WSM',

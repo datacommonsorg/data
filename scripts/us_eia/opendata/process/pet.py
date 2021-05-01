@@ -2,6 +2,7 @@
 
 import re
 
+
 def _parse_with_place_prefix(m):
     sv_part1 = m.group(1)
     sv_part2 = m.group(3)
@@ -10,6 +11,7 @@ def _parse_with_place_prefix(m):
     place = p_t[1:]
     in_us = True if p_t[0] == 'S' or p_t == 'NUS' else False
     return (place, sv_id, in_us)
+
 
 def extract_place_statvar(series_id, counters):
     """Given the series_id, extract the raw place and stat-var ID.
