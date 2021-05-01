@@ -2,6 +2,7 @@
 
 import csv
 import json
+import logging
 from collections import defaultdict
 from sys import path
 
@@ -53,6 +54,13 @@ def _parse_date(d):
             # Monthly
             return yr + '-' + m_or_q
 
+    if len(d) == 8:
+        # PET has weekly https://www.eia.gov/opendata/qb.php?sdid=PET.WCESTUS1.W
+        yr = d[:4]
+        m = d[4:2]
+        dt = d[6:2]
+        return yr + '-' + m + '-' + dt
+
     return None
 
 
@@ -80,6 +88,7 @@ def _find_dc_place(raw_place, is_us_place, counters):
     else:
       if raw_place in alpha2_to_dcid.COUNTRY_MAP:
         return alpha2_to_dcid.COUNTRY_MAP[raw_place]
+    logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
     counters['error_unsupported_places'] += 1
     return None
 
@@ -155,7 +164,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                  raw_sv,
                  is_us_place) = extract_place_statvar_fn(series_id, counters)
                 if not raw_place or not raw_sv:
-                    # Stats updated by extract_place_statvar_fn()
+                    counters['error_extract_place_sv'] += 1
                     continue
 
                 # Map raw place to DC place
@@ -176,6 +185,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
 
                     dt = _parse_date(k)
                     if not dt:
+                        logging.error('ERROR: failed to parse date "%s"', k)
                         counters['error_date_parsing'] += 1
                         continue
 
