@@ -6,6 +6,8 @@ import unittest
 
 import common
 import elec
+import ng
+import pet
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -15,6 +17,9 @@ _TEST_CASES = [
     #   extract-fn, schema-fn
     ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
      elec.extract_place_statvar, elec.generate_statvar_schema),
+    ('ng.txt', 'ng.csv', 'ng.mcf', 'ng.tmcf', ng.extract_place_statvar, None),
+    ('pet.txt', 'pet.csv', 'pet.mcf', 'pet.tmcf',
+     pet.extract_place_statvar, None),
 ]
 
 

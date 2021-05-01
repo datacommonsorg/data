@@ -1,0 +1,12 @@
+place,stat_var,date,value,unit,scaling_factor,eia_series_id
+dcid:geoId/01,dcid:eia/ng.n3035_4.m,2021-02,26.1,Percent,,NG.N3035AL4.M
+dcid:geoId/01,dcid:eia/ng.n3035_4.m,2021-01,25.2,Percent,,NG.N3035AL4.M
+dcid:geoId/01,dcid:eia/ng.n3035_4.m,2020-12,24.7,Percent,,NG.N3035AL4.M
+dcid:geoId/40,dcid:eia/ng.rl2r02_1.a,2008,6,MillionBarrels,,NG.RL2R02SOK_1.A
+dcid:geoId/40,dcid:eia/ng.rl2r02_1.a,2007,-4,MillionBarrels,,NG.RL2R02SOK_1.A
+dcid:geoId/40,dcid:eia/ng.rl2r02_1.a,2006,13,MillionBarrels,,NG.RL2R02SOK_1.A
+dcid:geoId/40,dcid:eia/ng.rl2r02_1.a,2005,16,MillionBarrels,,NG.RL2R02SOK_1.A
+dcid:geoId/40,dcid:eia/ng.rl2r02_1.a,2004,40,MillionBarrels,,NG.RL2R02SOK_1.A
+dcid:country/USA,dcid:eia/ng.na1350_2.a,2019,58084,MillionCubicFeet,,NG.NA1350_NUS_2.A
+dcid:country/USA,dcid:eia/ng.na1350_2.a,2018,9248,MillionCubicFeet,,NG.NA1350_NUS_2.A
+dcid:country/USA,dcid:eia/ng.na1350_2.a,2017,-256,MillionCubicFeet,,NG.NA1350_NUS_2.A

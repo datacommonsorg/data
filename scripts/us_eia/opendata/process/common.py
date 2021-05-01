@@ -88,7 +88,7 @@ def _find_dc_place(raw_place, is_us_place, counters):
     else:
       if raw_place in alpha2_to_dcid.COUNTRY_MAP:
         return alpha2_to_dcid.COUNTRY_MAP[raw_place]
-    logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
+    # logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
     counters['error_unsupported_places'] += 1
     return None
 
@@ -174,6 +174,8 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                     continue
 
                 raw_unit = _enumify(data.get('units', ''))
+
+                # TODO(shanth): Consider extracting stat-var name.
 
                 # Add to rows.
                 rows = []
