@@ -39,7 +39,7 @@ def extract_place_statvar(series_id, counters):
         series_id: EIA series ID
         counters: map for updating error statistics
 
-    Returns a (place, raw-stat-var, is_us_place) pair.
+    Returns a (place, raw-stat-var, is_us_place) tuple.
     """
 
     # Pattern #1: NG.N{MEASURE1}{PLACE}{MEASURE2}.{PERIOD}
