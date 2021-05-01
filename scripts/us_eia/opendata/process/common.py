@@ -60,6 +60,10 @@ def _eia_dcid(raw_sv):
     return 'dcid:eia/' + raw_sv.lower()
 
 
+def _enumify(in_str):
+  return in_str.title().replace(' ', '')
+
+
 def _print_counters(counters):
     print('\nSTATS:')
     for k, v in counters.items():
@@ -67,13 +71,15 @@ def _print_counters(counters):
     print('')
 
 
-def _find_dc_place(raw_place, counters):
-    # At the moment, we only support states and US.
-    if raw_place == 'US':
-        return 'country/USA'
-    if raw_place in alpha2_to_dcid.USSTATE_MAP:
-        return alpha2_to_dcid.USSTATE_MAP[raw_place]
-
+def _find_dc_place(raw_place, is_us_place, counters):
+    if is_us_place:
+      if raw_place == 'US':
+          return 'country/USA'
+      if raw_place in alpha2_to_dcid.USSTATE_MAP:
+          return alpha2_to_dcid.USSTATE_MAP[raw_place]
+    else:
+      if raw_place in alpha2_to_dcid.COUNTRY_MAP:
+        return alpha2_to_dcid.COUNTRY_MAP[raw_place]
     counters['error_unsupported_places'] += 1
     return None
 
@@ -106,7 +112,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                             Args:
                                 series_id: series_id field from EIA
                                 counters: map of counters with frequency
-                            Returns (raw-place-id, raw-stat-var-id)
+                            Returns (raw-place-id, raw-stat-var-id, is_us_place)
 
         generate_statvar_schema_fn:
                             Optional function to generate stat-var schema.
@@ -146,18 +152,19 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
 
                 # Extract raw place and stat-var from series_id.
                 (raw_place,
-                 raw_sv) = extract_place_statvar_fn(series_id, counters)
+                 raw_sv,
+                 is_us_place) = extract_place_statvar_fn(series_id, counters)
                 if not raw_place or not raw_sv:
                     # Stats updated by extract_place_statvar_fn()
                     continue
 
                 # Map raw place to DC place
-                dc_place = _find_dc_place(raw_place, counters)
+                dc_place = _find_dc_place(raw_place, is_us_place, counters)
                 if not dc_place:
                     counters['error_place_mapping'] += 1
                     continue
 
-                # TODO: Consider extracting units.
+                raw_unit = _enumify(data.get('units', ''))
 
                 # Add to rows.
                 rows = []
@@ -178,6 +185,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                         'date': dt,
                         'value': v,
                         'eia_series_id': series_id,
+                        'unit': raw_unit,
                     })
 
                 if not rows:
