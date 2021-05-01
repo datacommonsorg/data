@@ -21,7 +21,7 @@ def extract_place_statvar(series_id, counters):
     Returns a (place, raw-stat-var, is_us_place) tuple.
     """
 
-    # Pattern #1: PET.{MEASURE1}[SN]{PLACE}{MEASURE2}.{PERIOD}
+    # Pattern #1: PET.K{MEASURE1}[SN]{PLACE}{MEASURE2}.{PERIOD}
     m = re.match(r"^(PET\.K[^_]+)([NS][A-Z][A-Z])([0-9]\.[A-Z])$", series_id)
     if m:
         return _parse_with_place_prefix(m)
