@@ -2,8 +2,9 @@
 
 import re
 
-# List of series in Pattern #1 that include non-US countries. Unfotunately this
-# pattern doesn't have an N / S prefix.
+# List of series in Pattern #1 that include non-US countries. Unfortunately this
+# pattern doesn't have an N / S prefix, which distinguishes between a country
+# and US state.
 #
 # Obtained by looking at the results of this query:
 #
@@ -29,6 +30,7 @@ def _parse_with_place_prefix(m):
     sv_id = f'{sv_part1}_{sv_part2}'
     p_t = m.group(2)
     place = p_t[1:]
+    # Prefix 'S' is state, and 'N' is country.
     in_us = True if p_t[0] == 'S' or p_t == 'NUS' else False
     return (place, sv_id, in_us)
 

@@ -1,17 +1,17 @@
-Node: dcid:eia/ng.n3035_4.m
+Node: dcid:eia/NG.N3035_4.M
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcid:eia/ng.n3035_4.m
+measuredProperty: dcid:eia/NG.N3035_4.M
 statType: dcs:measuredValue
 
-Node: dcid:eia/ng.rl2r02_1.a
+Node: dcid:eia/NG.RL2R02_1.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcid:eia/ng.rl2r02_1.a
+measuredProperty: dcid:eia/NG.RL2R02_1.A
 statType: dcs:measuredValue
 
-Node: dcid:eia/ng.na1350_2.a
+Node: dcid:eia/NG.NA1350_2.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcid:eia/ng.na1350_2.a
+measuredProperty: dcid:eia/NG.NA1350_2.A
 statType: dcs:measuredValue

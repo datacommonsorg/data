@@ -65,7 +65,7 @@ def _parse_date(d):
 
 
 def _eia_dcid(raw_sv):
-    return 'dcid:eia/' + raw_sv.lower()
+    return 'dcid:eia/' + raw_sv
 
 
 def _enumify(in_str):
