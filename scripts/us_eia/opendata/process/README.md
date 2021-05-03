@@ -25,6 +25,18 @@ electricity generation, consumption, sales etc by energy source and “sectors�
 Plant-level data has a lot fewer variables than state-level. And where the
 stat-type allows, we’ll aggregate plant-level data to zip code level.
 
+Dataset includes full schema support, aka (2).
+
+### NG
+
+Natural gas dataset has country and state-level data. This dataset only has
+preliminary support, aka (1).
+
+### PET
+
+Petroleum dataset has country and state-level data. This dataset only has
+preliminary support, aka (1).
+
 ## Run
 
 Download and unzip the data files based on the

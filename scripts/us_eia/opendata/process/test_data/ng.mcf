@@ -1,0 +1,17 @@
+Node: dcid:eia/NG.N3035_4.M
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/NG.N3035_4.M
+statType: dcs:measuredValue
+
+Node: dcid:eia/NG.RL2R02_1.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/NG.RL2R02_1.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/NG.NA1350_2.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/NG.NA1350_2.A
+statType: dcs:measuredValue

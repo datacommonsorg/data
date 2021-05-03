@@ -11,12 +11,12 @@ def extract_place_statvar(series_id, counters):
         series_id: EIA series ID
         counters: map for updating error statistics
 
-    Returns a (place, raw-stat-var) pair.
+    Returns a (place, raw-stat-var, is_us_place) tuple.
     """
 
     if series_id.startswith('ELEC.PLANT.'):
         counters['error_unimplemented_plant_series'] += 1
-        return (None, None)
+        return (None, None, None)
 
     # ELEC.{MEASURE}.{FUEL_TYPE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
     m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
@@ -40,7 +40,8 @@ def extract_place_statvar(series_id, counters):
         consuming_sector = m.group(3)
         period = m.group(4)
         sv_id = f'ELEC.{measure}.{consuming_sector}.{period}'
-    return (place, sv_id)
+
+    return (place, sv_id, True)
 
 
 ##
@@ -340,6 +341,9 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         row['stat_var'] = f'dcid:{sv_id}'
         if unit:
             row['unit'] = f'dcid:{unit}'
+        else:
+            # Reset unit to empty to clear the raw unit value.
+            row['unit'] = ''
         if sfactor:
             row['scaling_factor'] = sfactor
 
