@@ -18,6 +18,7 @@ import tempfile
 import unittest
 
 import utility
+import power_plant
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -25,6 +26,7 @@ module_dir_ = os.path.dirname(__file__)
 _TEST_CASES = [
     # processor, input-excel, expected-csv
     (utility.process, '1___Utility.xlsx', '1_utility.csv'),
+    (power_plant.process, '2___Plant.xlsx', '2_plant.csv'),
 ]
 
 

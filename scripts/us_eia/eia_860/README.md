@@ -12,11 +12,11 @@ The data is available as a series of Excel spreadsheets.
 
 To download and process the data:
 ```bash
-python3 main.py
+python3 -m main
 ```
 This generates *.csv in this folder which can be used for the import, along with the accompanying *.mcf and *.tmcf.
 
-At the moment, this only processes Schedule 1: Utility.
+At the moment, this only processes Schedule 1: Utility and Schedule 2: Power Plants.
 
 To run tests:
 ```bash
