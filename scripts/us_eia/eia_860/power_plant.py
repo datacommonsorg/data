@@ -182,7 +182,8 @@ def _update_frames(raw_df: pd.DataFrame) -> pd.DataFrame:
     raw_df['StateDcid'] = raw_df['State'].apply(utils.state_alpha2_to_dcid)
     raw_df['ZipDcid'] = raw_df['Zip'].apply(utils.zip_to_dcid)
     raw_df['Naics'] = raw_df['NAICSCode'].apply(utils.naics_to_dcid)
-    raw_df['UtilityDcid'] = raw_df['UtilityId'].apply(utils.utility_id_to_dcid, prefix_dcid=True)
+    raw_df['UtilityDcid'] = raw_df['UtilityId'].apply(utils.utility_id_to_dcid,
+                                                      prefix_dcid=True)
     raw_df['RegulatoryStatusEnum'] = raw_df['RegulatoryStatus'].apply(
         _to_enum, enum=REGULATORY_STATUS_ENUM)
     raw_df['PowerPlantSector'] = raw_df['Sector'].apply(_to_enum,
