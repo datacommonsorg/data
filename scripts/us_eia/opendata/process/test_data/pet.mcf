@@ -1,0 +1,17 @@
+Node: dcid:eia/PET.KDLVIS_1.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/PET.KDLVIS_1.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/PET.RCRR06_1.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/PET.RCRR06_1.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/PET.M_EPC0_SPT_PER.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/PET.M_EPC0_SPT_PER.A
+statType: dcs:measuredValue

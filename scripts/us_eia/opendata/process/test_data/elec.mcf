@@ -1,16 +1,16 @@
 Node: dcid:Monthly_Generation_Electricity_Solar_IndependentPowerProducers
-typeOf: dcs:StatisticalVariable
-measurementQualifier: dcs:Monthly
-statType: dcs:measuredValue
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Monthly
 energySource: dcs:Solar
 producingSector: dcs:IndependentPowerProducers
 
 Node: dcid:Monthly_RetailSales_Electricity_Residential
-typeOf: dcs:StatisticalVariable
-measurementQualifier: dcs:Monthly
-statType: dcs:measuredValue
 populationType: dcs:Electricity
 measuredProperty: dcs:retailSales
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Monthly
 consumingSector: dcs:Residential
