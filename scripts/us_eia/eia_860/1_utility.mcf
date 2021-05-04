@@ -24,7 +24,7 @@ Node: dcid:powerPlantAssociationStatus
 description: "Denotes the relationship of the reporting entity with power plants reported on Schedule 2 of form EIA-860."
 rangeIncludes: dcid:PowerPlantAssociationStatusEnum
 typeOf: dcs:Property
-domainIncludes: dcs:PowerUtility
+domainIncludes: dcs:PublicUtility
 
 Node: dcid:PowerPlantAssociationStatusEnum
 description: "Types of associations a utility has with a power plant."
