@@ -38,10 +38,8 @@ _QUARTER_MAP = {
 def _parse_date(d):
     """Given a date from EIA JSON convert to DC compatible date."""
 
-    try:
-      _ = int(d)
-    except ValueError:
-      return None
+    if not d.isnumeric():
+        return None
 
     if len(d) == 4:
         # Yearly
