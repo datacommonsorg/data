@@ -53,6 +53,9 @@ def zip_to_dcid(zip: object) -> str:
 
 
 def build_address(row: pd.Series) -> str:
+    """Combines multiple columns into a single mailing address value.
+    Columns required are "StreetAddress", "City", "State" and "Zip"
+    """
     zip = row["Zip"]
     if pd_types.is_number(zip):
         zip = f'{zip:0>5}'

@@ -106,7 +106,7 @@ EXPORT_COLUMNS = [
 
 REGULATORY_STATUS_ENUM = {
     'NR': 'dcid:Regulated',
-    'RE': 'dcid:Non-regulated',
+    'RE': 'dcid:NonRegulated',
 }
 
 SECTOR_CODE_ENUM = {
