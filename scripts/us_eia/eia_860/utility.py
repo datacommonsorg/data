@@ -27,6 +27,8 @@ import pandas.api.types as pd_types
 import numpy as np
 from typing import Callable
 
+import utils
+
 # For import util.alpha2_to_dcid
 sys.path.insert(1, '../../../util')
 import alpha2_to_dcid
@@ -72,26 +74,6 @@ ENTITY_CODE_TO_ENUM = {
 }
 
 
-def _state_alpha2_to_dcid(alpha2: str) -> str:
-    if alpha2 == '':
-        return ''
-
-    # Special case for utility id 8862 in Canada
-    if alpha2 == 'CN':
-        return 'dcid:country/CAN'
-
-    # Special case for utility id 23931 in Quebec
-    if alpha2 == 'QB':
-        alpha2 = 'QC'
-
-    dcid = alpha2_to_dcid.USSTATE_MAP.get(alpha2, None)
-    if dcid is None:
-        dcid = alpha2_to_dcid.CAN_PROVINCE_MAP.get(alpha2, None)
-
-    assert dcid is not None, f'state alpha2 "{alpha2}" not found'
-    return f'dcid:{dcid}'
-
-
 def _entity_type_to_enum(entity_code: str) -> str:
     enum = ENTITY_CODE_TO_ENUM.get(entity_code, None)
     assert enum is not None, f'utility entity code "{entity_code}" not found'
@@ -104,34 +86,14 @@ def _to_assoc_enum(code: str, dcid) -> str:
     return ''
 
 
-def _zip_to_dcid(zip: str) -> str:
-    if pd_types.is_number(zip):
-        return f'dcid:zip/{zip:0>5}'
-    return ''
-
-
-def _build_address(row: pd.Series) -> str:
-    return _escape_value(
-        f'{row["StreetAddress"]}, {row["City"]}, {row["State"]} {row["Zip"]}')
-
-
-def _utility_id_to_dcid(utility_id: str) -> str:
-    return f'eia/u/{utility_id}'
-
-
-def _escape_value(value: str) -> str:
-    """values that could include commas need to be escaped"""
-    return f'\"{value}\"'
-
-
 def _update_frames(raw_df: pd.DataFrame) -> pd.DataFrame:
     """Updates data frame to include columns required for tmcf"""
     raw_df = raw_df.replace(np.nan, '')
-    raw_df['Dcid'] = raw_df['UtilityId'].apply(_utility_id_to_dcid)
-    raw_df['Name'] = raw_df['Name'].apply(_escape_value)
-    raw_df['Address'] = raw_df.apply(_build_address, axis=1)
-    raw_df['StateDcid'] = raw_df['State'].apply(_state_alpha2_to_dcid)
-    raw_df['ZipDcid'] = raw_df['Zip'].apply(_zip_to_dcid)
+    raw_df['Dcid'] = raw_df['UtilityId'].apply(utils.utility_id_to_dcid)
+    raw_df['Name'] = raw_df['Name'].apply(utils.escape_value)
+    raw_df['Address'] = raw_df.apply(utils.build_address, axis=1)
+    raw_df['StateDcid'] = raw_df['State'].apply(utils.state_alpha2_to_dcid)
+    raw_df['ZipDcid'] = raw_df['Zip'].apply(utils.zip_to_dcid)
     raw_df['EntityTypeEnum'] = raw_df['EntityType'].apply(_entity_type_to_enum)
     raw_df['OwnerEnum'] = raw_df['IsOwner'].apply(
         _to_assoc_enum, dcid='dcid:EIA_OwnerOfPowerPlants')

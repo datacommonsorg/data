@@ -25,15 +25,19 @@ import requests
 import zipfile
 
 import utility
+import power_plant
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('skip_import', False, 'Skips downloading data.')
 
-URL = 'https://www.eia.gov/electricity/data/eia860/xls/eia8602019.zip'
-OUT_PATH = 'tmp_raw_data'
-UTILITY_IN_FILENAME = '1___Utility_Y2019.xlsx'
-UTILITY_OUT_FILENAME = '1_utility.csv'
-PLANT_IN_FILENAME = '2___Plant_Y2019.xlsx'
+_URL = 'https://www.eia.gov/electricity/data/eia860/xls/eia8602019.zip'
+_RAW_PATH = 'tmp_raw_data'
+
+_DATASETS = [
+    # processor, input-excel, expected-csv
+    (utility.process, '1___Utility_Y2019.xlsx', '1_utility.csv'),
+    (power_plant.process, '2___Plant_Y2019.xlsx', '2_plant.csv'),
+]
 
 # module_dir_ is the path to where this module is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -49,9 +53,10 @@ def download_file(url: str, save_path: str):
 
 def main(argv):
     if not FLAGS.skip_import:
-        download_file(URL, OUT_PATH)
-    utility.process(os.path.join(module_dir_, OUT_PATH, UTILITY_IN_FILENAME),
-                    UTILITY_OUT_FILENAME)
+        download_file(_URL, _RAW_PATH)
+    for (processor, in_file, out_csv) in _DATASETS:
+        processor(os.path.join(module_dir_, _RAW_PATH, in_file),
+                  os.path.join(module_dir_, out_csv))
 
 
 if __name__ == '__main__':
