@@ -57,8 +57,8 @@ def _parse_date(d):
     if len(d) == 8:
         # PET has weekly https://www.eia.gov/opendata/qb.php?sdid=PET.WCESTUS1.W
         yr = d[:4]
-        m = d[4:2]
-        dt = d[6:2]
+        m = d[4:6]
+        dt = d[6:8]
         return yr + '-' + m + '-' + dt
 
     return None
