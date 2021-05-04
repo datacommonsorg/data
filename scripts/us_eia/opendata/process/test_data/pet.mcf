@@ -10,8 +10,8 @@ populationType: schema:Thing
 measuredProperty: dcid:eia/PET.RCRR06_1.A
 statType: dcs:measuredValue
 
-Node: dcid:eia/PET.M_EPC0_SPT_PER.A
+Node: dcid:eia/PET.M_EPC0_SPT_PER.W
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
-measuredProperty: dcid:eia/PET.M_EPC0_SPT_PER.A
+measuredProperty: dcid:eia/PET.M_EPC0_SPT_PER.W
 statType: dcs:measuredValue
