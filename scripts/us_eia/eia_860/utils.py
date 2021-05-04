@@ -26,7 +26,7 @@ sys.path.insert(1, os.path.join(module_dir_, '../../../util'))
 import alpha2_to_dcid
 
 
-def state_alpha2_to_dcid(alpha2: str) -> str:
+def state_alpha2_to_dcid(alpha2: object) -> str:
     if alpha2 == '':
         return ''
 
@@ -46,7 +46,7 @@ def state_alpha2_to_dcid(alpha2: str) -> str:
     return f'dcid:{dcid}'
 
 
-def zip_to_dcid(zip: str) -> str:
+def zip_to_dcid(zip: object) -> str:
     if pd_types.is_number(zip):
         return f'dcid:zip/{zip:0>5}'
     return ''
@@ -60,19 +60,22 @@ def build_address(row: pd.Series) -> str:
         f'{row["StreetAddress"]}, {row["City"]}, {row["State"]} {zip}')
 
 
-def utility_id_to_dcid(utility_id: str) -> str:
-    return f'eia/u/{utility_id}'
+def utility_id_to_dcid(utility_id: object, prefix_dcid=False) -> str:
+    dcid = f'eia/u/{utility_id}'
+    if prefix_dcid:
+        return f'dcid:{dcid}'
+    return dcid
 
 
-def plant_code_to_dcid(plant_code: str) -> str:
+def plant_code_to_dcid(plant_code: object) -> str:
     return f'eia/pp/{plant_code}'
 
 
-def naics_to_dcid(naics: str) -> str:
+def naics_to_dcid(naics: object) -> str:
     return f'NAICS/{naics}'
 
 
-def escape_value(value: str) -> str:
+def escape_value(value: object) -> str:
     """values that could include commas need to be escaped"""
     if value == '':
         return ''
