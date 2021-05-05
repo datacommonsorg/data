@@ -52,7 +52,7 @@ script.
 To generate CSV, TMCF and stat-var MCF for a supported dataset:
 
 ```bash
-python3 main.py --data_dir=tmp_raw_data --dataset=ELEC
+python3 main.py --data_dir=tmp_raw_data/ELEC --dataset=ELEC
 ```
 
 Replace `ELEC` with any of the other dataset codes listed above.

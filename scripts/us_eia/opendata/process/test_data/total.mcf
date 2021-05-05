@@ -1,0 +1,5 @@
+Node: dcid:eia/TOTAL.LUACP.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/TOTAL.LUACP.A
+statType: dcs:measuredValue
