@@ -153,81 +153,80 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
 
     counters = defaultdict(lambda: 0)
     sv_map = {}
-    with open(in_json) as in_fp:
-        with open(out_csv, 'w', newline='') as csv_fp:
-            csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
-            csvwriter.writeheader()
+    with open(in_json) as in_fp, open(out_csv, 'w', newline='') as csv_fp:
+        csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
+        csvwriter.writeheader()
 
-            for line in in_fp:
-                counters['info_lines_processed'] += 1
-                if counters['info_lines_processed'] % 100000 == 99999:
-                    _print_counters(counters)
+        for line in in_fp:
+            counters['info_lines_processed'] += 1
+            if counters['info_lines_processed'] % 100000 == 99999:
+                _print_counters(counters)
 
-                data = json.loads(line)
+            data = json.loads(line)
 
-                # Preliminary checks
-                series_id = data.get('series_id', None)
-                if not series_id:
-                    counters['info_ignored_categories'] += 1
-                    continue
-                time_series = data.get('data', None)
-                if not time_series:
-                    counters['error_missing_time_series'] += 1
-                    continue
+            # Preliminary checks
+            series_id = data.get('series_id', None)
+            if not series_id:
+                counters['info_ignored_categories'] += 1
+                continue
+            time_series = data.get('data', None)
+            if not time_series:
+                counters['error_missing_time_series'] += 1
+                continue
 
-                # Extract raw place and stat-var from series_id.
-                (raw_place, raw_sv,
-                 is_us_place) = extract_place_statvar_fn(series_id, counters)
-                if not raw_place or not raw_sv:
-                    counters['error_extract_place_sv'] += 1
-                    continue
+            # Extract raw place and stat-var from series_id.
+            (raw_place, raw_sv,
+                is_us_place) = extract_place_statvar_fn(series_id, counters)
+            if not raw_place or not raw_sv:
+                counters['error_extract_place_sv'] += 1
+                continue
 
-                # Map raw place to DC place
-                dc_place = _find_dc_place(raw_place, is_us_place, counters)
-                if not dc_place:
-                    counters['error_place_mapping'] += 1
-                    continue
+            # Map raw place to DC place
+            dc_place = _find_dc_place(raw_place, is_us_place, counters)
+            if not dc_place:
+                counters['error_place_mapping'] += 1
+                continue
 
-                raw_unit = _enumify(data.get('units', ''))
+            raw_unit = _enumify(data.get('units', ''))
 
-                # TODO(shanth): Consider extracting stat-var name.
+            # TODO(shanth): Consider extracting stat-var name.
 
-                # Add to rows.
-                rows = []
-                for k, v in time_series:
+            # Add to rows.
+            rows = []
+            for k, v in time_series:
 
-                    if not v:
-                        counters['error_empty_values'] += 1
-                        continue
-
-                    dt = _parse_date(k)
-                    if not dt:
-                        logging.error('ERROR: failed to parse date "%s"', k)
-                        counters['error_date_parsing'] += 1
-                        continue
-
-                    rows.append({
-                        'place': f"dcid:{dc_place}",
-                        'stat_var': _eia_dcid(raw_sv),
-                        'date': dt,
-                        'value': v,
-                        'eia_series_id': series_id,
-                        'unit': raw_unit,
-                    })
-
-                if not rows:
-                    counters['error_empty_series'] += 1
+                if not v:
+                    counters['error_empty_values'] += 1
                     continue
 
-                if (generate_statvar_schema_fn and generate_statvar_schema_fn(
-                        raw_sv, rows, sv_map, counters)):
-                    counters['info_schemaful_series'] += 1
-                else:
-                    counters['info_schemaless_series'] += 1
-                    _generate_default_statvar(raw_sv, sv_map)
+                dt = _parse_date(k)
+                if not dt:
+                    logging.error('ERROR: failed to parse date "%s"', k)
+                    counters['error_date_parsing'] += 1
+                    continue
 
-                csvwriter.writerows(rows)
-                counters['info_rows_output'] += len(rows)
+                rows.append({
+                    'place': f"dcid:{dc_place}",
+                    'stat_var': _eia_dcid(raw_sv),
+                    'date': dt,
+                    'value': v,
+                    'eia_series_id': series_id,
+                    'unit': raw_unit,
+                })
+
+            if not rows:
+                counters['error_empty_series'] += 1
+                continue
+
+            if (generate_statvar_schema_fn and generate_statvar_schema_fn(
+                    raw_sv, rows, sv_map, counters)):
+                counters['info_schemaful_series'] += 1
+            else:
+                counters['info_schemaless_series'] += 1
+                _generate_default_statvar(raw_sv, sv_map)
+
+            csvwriter.writerows(rows)
+            counters['info_rows_output'] += len(rows)
 
     with open(out_sv_mcf, 'w') as out_fp:
         out_fp.write('\n\n'.join([v for k, v in sv_map.items()]))
