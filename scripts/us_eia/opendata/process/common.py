@@ -35,6 +35,11 @@ _QUARTER_MAP = {
 }
 
 
+_ALPHA3_COUNTRY_SET = frozenset(
+    [v for k, v in alpha2_to_dcid.COUNTRY_MAP.items()]
+)
+
+
 def _parse_date(d):
     """Given a date from EIA JSON convert to DC compatible date."""
 
@@ -89,10 +94,28 @@ def _find_dc_place(raw_place, is_us_place, counters):
         if raw_place in alpha2_to_dcid.USSTATE_MAP:
             return alpha2_to_dcid.USSTATE_MAP[raw_place]
     else:
-        if raw_place in alpha2_to_dcid.COUNTRY_MAP:
+        if len(raw_place) == 2 and raw_place in alpha2_to_dcid.COUNTRY_MAP:
             return alpha2_to_dcid.COUNTRY_MAP[raw_place]
+        elif len(raw_place) == 3 and raw_place in _ALPHA3_COUNTRY_SET:
+            return f'country/{raw_place}'
+        elif len(raw_place) > 3:
+            # INTL dataset has 40 country aggregates
+            # (http://screenshot/8YvH4w58iDtuc5r).  We map a subset that exists
+            # in DC.
+            if raw_place == 'AFRC':
+                return 'africa'
+            if raw_place == 'EURO':
+                return 'europe'
+            if raw_place == 'NOAM':
+                return 'northamerica'
+            if raw_place == 'CSAM':
+                # This includes central america though
+                return 'southamerica'
+            if raw_place == 'WORL':
+                return 'Earth'
+
     # logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
-    counters['error_unsupported_places'] += 1
+    counters[f'error_unsupported_places_{raw_place}'] += 1
     return None
 
 
