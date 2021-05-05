@@ -36,17 +36,17 @@ _QUARTER_MAP = {
 
 
 _ALPHA3_COUNTRY_SET = frozenset(
-    [v for k, v in alpha2_to_dcid.COUNTRY_MAP.items()]
+    [v.removeprefix('country/') for k, v in alpha2_to_dcid.COUNTRY_MAP.items()]
 )
 
 
 def _parse_date(d):
     """Given a date from EIA JSON convert to DC compatible date."""
 
-    if not d.isnumeric():
-        return None
-
     if len(d) == 4:
+        if not d.isnumeric():
+            return None
+
         # Yearly
         return d
 
@@ -63,6 +63,9 @@ def _parse_date(d):
             return yr + '-' + m_or_q
 
     if len(d) == 8:
+        if not d.isnumeric():
+            return None
+
         # PET has weekly https://www.eia.gov/opendata/qb.php?sdid=PET.WCESTUS1.W
         yr = d[:4]
         m = d[4:6]
