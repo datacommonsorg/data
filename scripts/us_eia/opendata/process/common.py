@@ -211,6 +211,12 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                         counters['error_empty_values'] += 1
                         continue
 
+                    try:
+                        _ = float(v)
+                    except Exception:
+                        counters['error_non_numeric_values'] += 1
+                        continue
+
                     dt = _parse_date(k)
                     if not dt:
                         logging.error('ERROR: failed to parse date "%s"', k)

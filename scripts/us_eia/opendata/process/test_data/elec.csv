@@ -1,5 +1,5 @@
 place,stat_var,date,value,unit,scaling_factor,eia_series_id
-dcid:geoId/24,dcid:Monthly_Generation_Electricity_Solar_IndependentPowerProducers,2021-02,33.52617,dcid:MegaWattHour,1000,ELEC.GEN.TSN-MD-94.M
-dcid:geoId/24,dcid:Monthly_Generation_Electricity_Solar_IndependentPowerProducers,2021-01,33.77782,dcid:MegaWattHour,1000,ELEC.GEN.TSN-MD-94.M
-dcid:geoId/25,dcid:Quarterly_RetailSales_Electricity_Residential,2021-03,1809.70299,dcid:KiloWattHour,1000000,ELEC.SALES.MA-RES.Q
-dcid:geoId/25,dcid:Quarterly_RetailSales_Electricity_Residential,2021-06,1956.15091,dcid:KiloWattHour,1000000,ELEC.SALES.MA-RES.Q
+dcid:geoId/24,dcid:Monthly_Generation_Electricity_Solar_IndependentPowerProducers,2021-02,33.52617,dcid:MegawattHour,1000,ELEC.GEN.TSN-MD-94.M
+dcid:geoId/24,dcid:Monthly_Generation_Electricity_Solar_IndependentPowerProducers,2021-01,33.77782,dcid:MegawattHour,1000,ELEC.GEN.TSN-MD-94.M
+dcid:geoId/25,dcid:Quarterly_RetailSales_Electricity_Residential,2021-03,1809.70299,dcid:KilowattHour,1000000,ELEC.SALES.MA-RES.Q
+dcid:geoId/25,dcid:Quarterly_RetailSales_Electricity_Residential,2021-06,1956.15091,dcid:KilowattHour,1000000,ELEC.SALES.MA-RES.Q
