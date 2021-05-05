@@ -8,7 +8,7 @@ INTL=international
 SEDS=seds
 TOTAL=total_energy
 
-if [[ -z "$1" ]]; then
+if [[ "$#" -ne 1 ]]; then
   echo "Usage: $0 <dataset>"
   exit 1
 fi
