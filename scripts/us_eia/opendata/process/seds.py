@@ -16,7 +16,8 @@ def extract_place_statvar(series_id, counters):
     # SEDS.{MEASURE}.{PLACE}.{PERIOD}
     #
     # NOTE: This pattern excludes 11 series_ids which deal with two Federal
-    # Offshore places (http://screenshot/B2LNQ9tKG4Smcbd).
+    # Offshore places
+    # (https://user-images.githubusercontent.com/4375037/117168919-74618f00-ad7d-11eb-8306-bb4db3f52e03.png)
     m = re.match(r"^(SEDS\.[^.]+)\.([A-Z][A-Z])\.([A-Z])$", series_id)
     if m:
         sv_part1 = m.group(1)

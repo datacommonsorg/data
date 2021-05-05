@@ -101,8 +101,8 @@ def _find_dc_place(raw_place, is_us_place, counters):
             return f'country/{raw_place}'
         elif len(raw_place) > 3:
             # INTL dataset has 40 country aggregates
-            # (http://screenshot/8YvH4w58iDtuc5r).  We map a subset that exists
-            # in DC.
+            # (https://user-images.githubusercontent.com/4375037/117168575-22206e00-ad7d-11eb-8f38-3a3003401464.png)
+            # We map a subset that exists in DC.
             if raw_place == 'AFRC':
                 return 'africa'
             if raw_place == 'EURO':
