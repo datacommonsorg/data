@@ -1,0 +1,11 @@
+Node: dcid:eia/SEDS.TNISB.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/SEDS.TNISB.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/SEDS.WXICD.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/SEDS.WXICD.A
+statType: dcs:measuredValue

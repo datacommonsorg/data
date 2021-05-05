@@ -6,8 +6,11 @@ from absl import app
 
 import common
 import elec
+import intl
 import ng
 import pet
+import seds
+import total
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
@@ -17,10 +20,16 @@ flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
 def get_extract_fn(dataset):
     if dataset == 'ELEC':
         return elec.extract_place_statvar
+    elif dataset == 'INTL':
+        return intl.extract_place_statvar
     elif dataset == 'PET':
         return pet.extract_place_statvar
     elif dataset == 'NG':
         return ng.extract_place_statvar
+    elif dataset == 'SEDS':
+        return seds.extract_place_statvar
+    elif dataset == 'TOTAL':
+        return total.extract_place_statvar
     assert False, 'Unsupported dataset: ' + dataset
     return None
 

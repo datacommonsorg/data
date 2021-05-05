@@ -7,10 +7,10 @@ measurementQualifier: dcs:Monthly
 energySource: dcs:Solar
 producingSector: dcs:IndependentPowerProducers
 
-Node: dcid:Monthly_RetailSales_Electricity_Residential
+Node: dcid:Quarterly_RetailSales_Electricity_Residential
 populationType: dcs:Electricity
 measuredProperty: dcs:retailSales
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-measurementQualifier: dcs:Monthly
+measurementQualifier: dcs:Quarterly
 consumingSector: dcs:Residential

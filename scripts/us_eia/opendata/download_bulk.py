@@ -24,8 +24,14 @@ import zipfile
 
 import requests
 
+from absl import flags
+from absl import app
+
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
-OUT_PATH = 'tmp_raw_data'
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Data dir to download into')
+flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
 
 
 def download_file(url: str, save_path: str):
@@ -39,14 +45,17 @@ def download_manifest():
     return requests.get(MANIFEST_URL).json()
 
 
-def main():
+def main(_):
+    assert FLAGS.data_dir
     manifest_json = download_manifest()
     datasets = manifest_json.get('dataset', {})
     for dataset_name in datasets:
+        if FLAGS.datasets and dataset_name not in FLAGS.datasets:
+            continue
         print(dataset_name)
         dataset = datasets[dataset_name]
-        download_file(dataset['accessURL'], f'{OUT_PATH}/{dataset_name}')
+        download_file(dataset['accessURL'], f'{FLAGS.data_dir}/{dataset_name}')
 
 
 if __name__ == '__main__':
-    main()
+    app.run(main)
