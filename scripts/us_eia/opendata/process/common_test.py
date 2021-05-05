@@ -6,8 +6,11 @@ import unittest
 
 import common
 import elec
+import intl
 import ng
 import pet
+import seds
+import total
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -17,9 +20,15 @@ _TEST_CASES = [
     #   extract-fn, schema-fn
     ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
      elec.extract_place_statvar, elec.generate_statvar_schema),
+    ('intl.txt', 'intl.csv', 'intl.mcf', 'intl.tmcf',
+     intl.extract_place_statvar, None),
     ('ng.txt', 'ng.csv', 'ng.mcf', 'ng.tmcf', ng.extract_place_statvar, None),
     ('pet.txt', 'pet.csv', 'pet.mcf', 'pet.tmcf', pet.extract_place_statvar,
      None),
+    ('seds.txt', 'seds.csv', 'seds.mcf', 'seds.tmcf',
+     seds.extract_place_statvar, None),
+    ('total.txt', 'total.csv', 'total.mcf', 'total.tmcf',
+     total.extract_place_statvar, None),
 ]
 
 

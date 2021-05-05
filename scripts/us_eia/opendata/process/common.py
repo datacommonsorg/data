@@ -34,14 +34,17 @@ _QUARTER_MAP = {
     'Q4': '12',
 }
 
+_ALPHA3_COUNTRY_SET = frozenset(
+    [v.removeprefix('country/') for k, v in alpha2_to_dcid.COUNTRY_MAP.items()])
+
 
 def _parse_date(d):
     """Given a date from EIA JSON convert to DC compatible date."""
 
-    if not d.isnumeric():
-        return None
-
     if len(d) == 4:
+        if not d.isnumeric():
+            return None
+
         # Yearly
         return d
 
@@ -58,6 +61,9 @@ def _parse_date(d):
             return yr + '-' + m_or_q
 
     if len(d) == 8:
+        if not d.isnumeric():
+            return None
+
         # PET has weekly https://www.eia.gov/opendata/qb.php?sdid=PET.WCESTUS1.W
         yr = d[:4]
         m = d[4:6]
@@ -89,10 +95,28 @@ def _find_dc_place(raw_place, is_us_place, counters):
         if raw_place in alpha2_to_dcid.USSTATE_MAP:
             return alpha2_to_dcid.USSTATE_MAP[raw_place]
     else:
-        if raw_place in alpha2_to_dcid.COUNTRY_MAP:
+        if len(raw_place) == 2 and raw_place in alpha2_to_dcid.COUNTRY_MAP:
             return alpha2_to_dcid.COUNTRY_MAP[raw_place]
+        elif len(raw_place) == 3 and raw_place in _ALPHA3_COUNTRY_SET:
+            return f'country/{raw_place}'
+        elif len(raw_place) > 3:
+            # INTL dataset has 40 country aggregates
+            # (https://user-images.githubusercontent.com/4375037/117168575-22206e00-ad7d-11eb-8f38-3a3003401464.png)
+            # We map a subset that exists in DC.
+            if raw_place == 'AFRC':
+                return 'africa'
+            if raw_place == 'EURO':
+                return 'europe'
+            if raw_place == 'NOAM':
+                return 'northamerica'
+            if raw_place == 'CSAM':
+                # This includes central america though
+                return 'southamerica'
+            if raw_place == 'WORL':
+                return 'Earth'
+
     # logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
-    counters['error_unsupported_places'] += 1
+    counters[f'error_unsupported_places_{raw_place}'] += 1
     return None
 
 
