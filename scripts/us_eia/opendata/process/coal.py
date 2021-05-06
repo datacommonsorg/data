@@ -38,6 +38,7 @@ def extract_place_statvar(series_id, counters):
         period = m.group(4)
         sv_id = f'COAL.{measure}.{code}.{period}'
         return (place, sv_id, True)
+
     # Pattern #2: COAL.{EXPORT|IMPORT}_{Measure}.{Type}-{CountryIso}-{UsPortIso}.{Period}
     # Pattern #3: COAL.{SHIPMENT}_{Submeasure}.{Source}-{Destination}-{Material}.{Period}
     m = re.match(r"^COAL\.([A-Z]+)_([A-Z]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
@@ -57,26 +58,37 @@ def extract_place_statvar(series_id, counters):
         elif activity == 'SHIPMENT':
             # Pattern #3
             source = m.group(3)
-            if source.isalpha() and len(source) == 2:  # US State
+            if source.isalpha(): # could include 3-letter region codes
                 destination_power_plant = m.group(4)
                 material = m.group(5)
                 period = m.group(6)
                 sv_id = f'COAL.SHIPMENT_{measure}.{material}.{period}'
                 return (source, sv_id, True)
             else:
-                if source.isalpha():
-                    # TODO: Handle remaining places - regions
-                    counters[f'error_unknown_region SHIPMENT ({source})'] += 1
-                    return (None, None, None)
-                elif source.isnumeric():
-                    # TODO: Handle remaining places - coal mines
-                    counters[f'error_unknown_coal_mine SHIPMENT '] += 1
-                    return (None, None, None)
+                # TODO: Handle remaining places - coal mines
+                counters[f'error_unknown_coal_mine SHIPMENT '] += 1
+                return (None, None, None)
         else:
             counters[f'unknown #2,3 activity ({activity})'] += 1
             return (None, None, None)
 
-    # Pattern #4: COAL.{Measure}_{MINE|PLANT}_{ASH|HEAT|PRICE|QTY|SULFUR}.{Region}-{Material?}.{Period}
+    # Pattern #4: COAL.PROD_DIST_STOCKS.TOT-{Place}.{Period}
+    # Pattern #4: COAL.PRICE_BY_RANK.{Region}-{Material}.{Period}
+    # Pattern #4: COAL.SHIP_{MINE|PLANT}_{ASH|HEAT|PRICE|QTY|SULFUR}.{Region}-{Material}.{Period}
+    m = re.match(r"^COAL\.([A-Z]+_[A-Z]+_[A-Z]+)\.([^-]+)-([^.]+)\.([AQM])$", series_id)
+    if m:
+        measure = m.group(1)
+        if measure == "PROD_DIST_STOCKS":
+            assert m.group(2) == "TOT"
+            place = m.group(3)
+            period = m.group(4)
+            return (place, f'COAL.PROD_DIST_STOCKS.TOT.{period}', True)
+        else:
+            place = m.group(2)
+            material = m.group(3)
+            period = m.group(4)
+            return (place, f'COAL.{measure}.{material}.{period}', True)
+
     return (None, None, None)
 
 

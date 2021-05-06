@@ -536,6 +536,18 @@ typeOf: dcs:StatisticalVariable
 measurementQualifier: dcs:Annual
 consumingSector: dcs:ElectricUtilityCogen
 
+Node: dcid:eia/COAL.SHIP_PLANT_SULFUR.SUB.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_SULFUR.SUB.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_PLANT_SULFUR.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_SULFUR.TOT.Q
+statType: dcs:measuredValue
+
 Node: dcid:Quarterly_AverageQuality_SulfurContent_ReceivedCoal_IndependentPowerProducers
 populationType: dcs:Coal
 measuredProperty: dcs:sulfurContent
@@ -568,6 +580,42 @@ typeOf: dcs:StatisticalVariable
 measurementQualifier: dcs:Annual
 consumingSector: dcs:ElectricUtility
 
+Node: dcid:eia/COAL.SHIP_PLANT_ASH.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_ASH.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_PLANT_HEAT.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_HEAT.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_PLANT_HEAT.SYN.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_HEAT.SYN.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_MINE_SULFUR.SYN.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_SULFUR.SYN.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_PLANT_ASH.SUB.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_ASH.SUB.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_PLANT_HEAT.SUB.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_HEAT.SUB.Q
+statType: dcs:measuredValue
+
 Node: dcid:Annual_Stock_Coal_OtherIndustrial
 populationType: dcs:Coal
 measuredProperty: dcs:stock
@@ -576,8 +624,74 @@ typeOf: dcs:StatisticalVariable
 measurementQualifier: dcs:Annual
 consumingSector: dcs:OtherIndustrial
 
+Node: dcid:eia/COAL.SHIP_MINE_QTY.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_QTY.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_MINE_QTY.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_QTY.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_MINE_QTY.WC.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_QTY.WC.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_MINE_QTY.SUB.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_QTY.SUB.Q
+statType: dcs:measuredValue
+
 Node: dcid:eia/COAL.SHIPMENT_SULFUR.SUB.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIPMENT_SULFUR.SUB.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_MINE_ASH.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_ASH.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_MINE_ASH.SYN.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_ASH.SYN.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_MINE_HEAT.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_HEAT.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_MINE_HEAT.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_MINE_HEAT.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_PLANT_QTY.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_QTY.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_PLANT_PRICE.ANT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_PRICE.ANT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIP_PLANT_PRICE.SUB.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIP_PLANT_PRICE.SUB.A
 statType: dcs:measuredValue
