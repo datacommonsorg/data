@@ -37,6 +37,7 @@ class TestProcess(unittest.TestCase):
     def test_process(self):
         for (in_file, csv, mcf, tmcf, extract_fn, schema_fn) in _TEST_CASES:
             with tempfile.TemporaryDirectory() as tmp_dir:
+                print('Processing', in_file)
                 in_file = os.path.join(module_dir_, 'test_data', in_file)
 
                 act_csv = os.path.join(tmp_dir, csv)
