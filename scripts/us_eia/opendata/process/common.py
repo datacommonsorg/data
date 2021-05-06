@@ -179,7 +179,39 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
     return name
 
 
-def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map):
+def _get_dataset_root(svg_info):
+    # Dataset root.
+    dataset_root = ''
+    for _, (parent, _) in svg_info.items():
+        if parent in svg_info or dataset_root == parent:
+            continue
+        assert not dataset_root, f'Two roots found: {dataset_root}, {parent}'
+        dataset_root = parent
+
+    return dataset_root
+
+
+def _trim_area_categories(svg_info, counters):
+    dataset_root = _get_dataset_root(svg_info)
+
+    # Delete "area" categories.
+    for svg, (_, name) in list(svg_info.items()):
+        if name.lower() == 'by area':
+            counters['info_deleted_area_categories'] += 1
+            del svg_info[svg]
+
+    # Trim orphans, except for dataset_root.
+    run_again = True
+    while run_again:
+        run_again = False
+        for svg, (parent, _) in list(svg_info.items()):
+            if parent != dataset_root and parent not in svg_info:
+                run_again = True
+                counters['info_deleted_orphan_categories'] += 1
+                del svg_info[svg]
+
+
+def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info):
     nodes = []
     for k, v in sv_map.items():
         pvs = [v]
@@ -187,40 +219,40 @@ def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map):
             pvs.append(f'name: "{sv_name_map[k]}"')
         if k in sv_membership_map:
             for svg in sorted(sv_membership_map[k]):
-                pvs.append(f'memberOf: dcid:{svg}')
+                if svg in svg_info:
+                    pvs.append(f'memberOf: dcid:{svg}')
         nodes.append('\n'.join(pvs))
     return nodes
 
 
-def _generate_svg_nodes(dataset, svg_info):
+def _generate_svg_nodes(dataset, dataset_name, svg_info):
     nodes = []
 
-    # EIA SVG Root.
-    pvs = ['Node: dcid:eia/g/Root',
-           'typeOf: dcs:StatVarGroup',
-           'name: "Datasets from eia.gov"',
-           'specializationOf: dcid:dc/g/Energy']
+    if not svg_info:
+        return nodes
+
+    # EIA SVG root
+    pvs = [
+        'Node: dcid:eia/g/Root', 'typeOf: dcs:StatVarGroup',
+        'name: "Other Data (eia.gov)"', 'specializationOf: dcid:dc/g/Energy'
+    ]
     nodes.append('\n'.join(pvs))
 
-    # Dataset root.
-    dataset_root = ''
-    for _, (parent, _) in svg_info.items():
-      if parent in svg_info or dataset_root == parent:
-          continue
-      assert not dataset_root, f'Two roots found: {dataset_root}, {parent}'
-      pvs = [f'Node: dcid:{parent}',
-             'typeOf: dcs:StatVarGroup',
-             f'name: "{dataset} Dataset"',
-             'specializationOf: dcid:eia/g/Root']
-      nodes.append('\n'.join(pvs))
-      dataset_root = parent
+    # EIA Dataset root
+    dataset_root = _get_dataset_root(svg_info)
+    if dataset_root:
+        pvs = [
+            f'Node: dcid:{dataset_root}', 'typeOf: dcs:StatVarGroup',
+            f'name: "{dataset_name}"', 'specializationOf: dcid:eia/g/Root'
+        ]
+        nodes.append('\n'.join(pvs))
 
     # Category SVGs
     for svg, (parent, name) in svg_info.items():
-        pvs = [f'Node: dcid:{svg}',
-               'typeOf: dcs:StatVarGroup',
-               f'name: "{name}"',
-               f'specializationOf: dcid:{parent}']
+        pvs = [
+            f'Node: dcid:{svg}', 'typeOf: dcs:StatVarGroup', f'name: "{name}"',
+            f'specializationOf: dcid:{parent}'
+        ]
         nodes.append('\n'.join(pvs))
 
     return nodes
@@ -254,12 +286,13 @@ def _process_category(dataset, data, extract_place_statvar_fn, svg_info,
             sv_membership_map[raw_sv].add(svg_id)
 
 
-def process(dataset, in_json, out_csv, out_sv_mcf, out_tmcf,
+def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
             extract_place_statvar_fn, generate_statvar_schema_fn):
     """Process an EIA dataset and produce outputs using lambda functions.
 
     Args:
         dataset: Dataset code
+        dataset_name: Name of the dataset
         in_json: Input JSON file
         out_csv: Output CSV file
         out_sv_mcf: Output StatisticalVariable MCF file
@@ -389,8 +422,12 @@ def process(dataset, in_json, out_csv, out_sv_mcf, out_tmcf,
                 csvwriter.writerows(rows)
                 counters['info_rows_output'] += len(rows)
 
+    _trim_area_categories(svg_info, counters)
+
     with open(out_sv_mcf, 'w') as out_fp:
-        nodes = _generate_svg_nodes(dataset, svg_info) + _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map)
+        nodes = _generate_svg_nodes(
+            dataset, dataset_name, svg_info) + _generate_sv_nodes(
+                sv_map, sv_name_map, sv_membership_map, svg_info)
 
         out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')

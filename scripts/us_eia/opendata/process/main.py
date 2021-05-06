@@ -16,28 +16,17 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
 flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
 
-
-def get_extract_fn(dataset):
-    if dataset == 'ELEC':
-        return elec.extract_place_statvar
-    elif dataset == 'INTL':
-        return intl.extract_place_statvar
-    elif dataset == 'PET':
-        return pet.extract_place_statvar
-    elif dataset == 'NG':
-        return ng.extract_place_statvar
-    elif dataset == 'SEDS':
-        return seds.extract_place_statvar
-    elif dataset == 'TOTAL':
-        return total.extract_place_statvar
-    assert False, 'Unsupported dataset: ' + dataset
-    return None
-
-
-def get_schema_fn(dataset):
-    if dataset == 'ELEC':
-        return elec.generate_statvar_schema
-    return None
+# Value: (name, extract_fn, schema_fn)
+_DATASETS = {
+    'ELEC': ('Electricity', elec.extract_place_statvar,
+             elec.generate_statvar_schema),
+    'INTL': ('Energy Overview (INTL)', intl.extract_place_statvar, None),
+    'PET': ('Petroleum', pet.extract_place_statvar, None),
+    'NG': ('Natural Gas', ng.extract_place_statvar, None),
+    'SEDS': ('Consumption, Production, Prices and Expenditure (SEDS)',
+             seds.extract_place_statvar, None),
+    'TOTAL': ('Energy Overview (TOTAL)', total.extract_place_statvar, None)
+}
 
 
 def main(_):
@@ -45,12 +34,13 @@ def main(_):
     assert FLAGS.dataset
     file_prefix = os.path.join(FLAGS.data_dir, FLAGS.dataset)
     common.process(dataset=FLAGS.dataset,
+                   dataset_name=_DATASETS[FLAGS.dataset][0],
                    in_json=file_prefix + '.txt',
                    out_csv=file_prefix + '.csv',
                    out_sv_mcf=file_prefix + '.mcf',
                    out_tmcf=file_prefix + '.tmcf',
-                   extract_place_statvar_fn=get_extract_fn(FLAGS.dataset),
-                   generate_statvar_schema_fn=get_schema_fn(FLAGS.dataset))
+                   extract_place_statvar_fn=_DATASETS[FLAGS.dataset][1],
+                   generate_statvar_schema_fn=_DATASETS[FLAGS.dataset][2])
 
 
 if __name__ == '__main__':
