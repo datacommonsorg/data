@@ -215,12 +215,12 @@ _UNIT_MAP = {
     'COST': (_PLACEHOLDER_FUEL_UNIT, ''),
     'COST_BTU': ('MMBtu', ''),
     'CUSTOMERS': ('', ''),
-    'GEN': ('MegaWattHour', '1000'),
-    'PRICE': ('USCentPerKiloWattHour', ''),
+    'GEN': ('MegawattHour', '1000'),
+    'PRICE': ('USCentPerKilowattHour', ''),
     'RECEIPTS': (_PLACEHOLDER_FUEL_UNIT, '1000'),
     'RECEIPTS_BTU': ('Btu', '1000000000'),
     'REV': ('USDollar', '1000000'),
-    'SALES': ('KiloWattHour', '1000000'),
+    'SALES': ('KilowattHour', '1000000'),
     'STOCKS': (_PLACEHOLDER_FUEL_UNIT, '1000'),
     'SULFUR_CONTENT': ('', '100'),
 }
@@ -238,7 +238,7 @@ def _get_fuel_unit(fuel_type):
     if fuel_type == 'PEL':
         # Liquid
         return 'Barrel'
-    return 'Ton'
+    return 'MetricTon'
 
 
 def generate_statvar_schema(raw_sv, rows, sv_map, counters):

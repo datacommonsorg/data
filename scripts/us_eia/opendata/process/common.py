@@ -254,8 +254,23 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                 rows = []
                 for k, v in time_series:
 
-                    if not v:
-                        counters['error_empty_values'] += 1
+                    try:
+                        # The following non-numeric values exist:
+                        #  -- = Not applicable
+                        #   - = No data reported
+                        # (s) = Value too small for number of decimal places shown
+                        #  NA = Not available
+                        #   W = Data withheld to avoid disclosure
+                        #   * = Conversion Factor Unavailable
+                        #  se = EIA estimates based on time series analysis
+                        #  st = EIA forecasts (Short-Term Energy Outlook)
+                        # - - = Not applicable.
+                        #   W = Withdrawn
+                        #
+                        # TODO: Handle some these better.
+                        _ = float(v)
+                    except Exception:
+                        counters['error_non_numeric_values'] += 1
                         continue
 
                     dt = _parse_date(k)
