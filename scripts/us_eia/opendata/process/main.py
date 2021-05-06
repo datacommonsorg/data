@@ -42,7 +42,7 @@ def get_extract_fn(dataset):
         return pet.extract_place_statvar
     if dataset == 'NG':
         return ng.extract_place_statvar
-    elif dataset == 'SEDS':
+    if dataset == 'SEDS':
         return seds.extract_place_statvar
     elif dataset == 'TOTAL':
         return total.extract_place_statvar
