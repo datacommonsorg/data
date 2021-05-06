@@ -3,12 +3,14 @@
 import csv
 import json
 import logging
+import re
 from collections import defaultdict
 from sys import path
 
 # For import util.alpha2_to_dcid
 path.insert(1, '../../../../')
 import util.alpha2_to_dcid as alpha2_to_dcid
+import util.name_to_alpha2 as name_to_alpha2
 
 _COLUMNS = [
     'place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor',
@@ -90,7 +92,7 @@ def _print_counters(counters):
 
 def _find_dc_place(raw_place, is_us_place, counters):
     if is_us_place:
-        if raw_place == 'US':
+        if raw_place == 'US' or raw_place == 'USA':
             return 'country/USA'
         if raw_place in alpha2_to_dcid.USSTATE_MAP:
             return alpha2_to_dcid.USSTATE_MAP[raw_place]
@@ -133,6 +135,48 @@ def _generate_default_statvar(raw_sv, sv_map):
     ])
 
 
+# Name patterns for US and US states.
+_NAME_PATTERNS = {
+    v: [k.lower()] for k, v in name_to_alpha2.USSTATE_MAP_SPACE.items()
+}
+_NAME_PATTERNS['US'] = [
+    'united states of america', 'united states', 'u.s.a.', 'u.s.'
+]
+_NAME_PATTERNS['USA'] = [
+    'united states of america', 'united states', 'u.s.a.', 'u.s.'
+]
+
+
+def _maybe_parse_name(name, raw_place, is_us_place, counters):
+    """Best-effort parsing of names given a name with a place."""
+
+    if not name or not is_us_place or raw_place not in _NAME_PATTERNS:
+        return ''
+
+    for p in _NAME_PATTERNS[raw_place]:
+        idx = name.lower().find(p)
+        if idx == -1:
+            continue
+
+        # Replace only the pattern, otherwise retaining the case of the name.
+        name = name[0:idx] + name[idx + len(p):]
+
+        # Trim unnecessary whitespaces.
+        name = name.strip()
+        name = re.sub(r" +", ' ', name)
+
+        # Trim any leading/trailing ',' or ':'.  To handle names like "Measure
+        # Foo, California"
+        name = re.sub(r"([,:]+$|^[,:]+)", '', name)
+
+        return name
+
+    # If we didn't find the name for the place, likely the name doesn't include
+    # the place (e.g., TOTAL).
+    counters['info_unmodified_names'] += 1
+    return name
+
+
 def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
             generate_statvar_schema_fn):
     """Process an EIA dataset and produce outputs using lambda functions.
@@ -164,6 +208,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
 
     counters = defaultdict(lambda: 0)
     sv_map = {}
+    sv_name_map = {}
     with open(in_json) as in_fp:
         with open(out_csv, 'w', newline='') as csv_fp:
             csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
@@ -201,7 +246,11 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
 
                 raw_unit = _enumify(data.get('units', ''))
 
-                # TODO(shanth): Consider extracting stat-var name.
+                if raw_sv not in sv_name_map:
+                    name = _maybe_parse_name(data.get('name', ''), raw_place,
+                                             is_us_place, counters)
+                    if name:
+                        sv_name_map[raw_sv] = name
 
                 # Add to rows.
                 rows = []
@@ -241,7 +290,13 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                 counters['info_rows_output'] += len(rows)
 
     with open(out_sv_mcf, 'w') as out_fp:
-        out_fp.write('\n\n'.join([v for k, v in sv_map.items()]))
+        nodes = []
+        for k, v in sv_map.items():
+            if k in sv_name_map:
+                nodes.append('\n'.join([v, f'name: "{sv_name_map[k]}"']))
+            else:
+                nodes.append(v)
+        out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')
 
     with open(out_tmcf, 'w') as out_fp:

@@ -13,7 +13,7 @@
 # limitations under the License.
 """US State name -> Alpha2 code map."""
 
-USSTATE_MAP = {
+USSTATE_MAP_SPACE = {
     'Alabama': 'AL',
     'Alaska': 'AK',
     'Arizona': 'AZ',
@@ -22,8 +22,8 @@ USSTATE_MAP = {
     'Colorado': 'CO',
     'Connecticut': 'CT',
     'Delaware': 'DE',
-    'DistrictOfColumbia': 'DC',
-    'DistrictofColumbia': 'DC',
+    'District Of Columbia': 'DC',
+    'District of Columbia': 'DC',
     'Florida': 'FL',
     'Georgia': 'GA',
     'Guam': 'GU',
@@ -45,28 +45,31 @@ USSTATE_MAP = {
     'Montana': 'MT',
     'Nebraska': 'NE',
     'Nevada': 'NV',
-    'NewHampshire': 'NH',
-    'NewJersey': 'NJ',
-    'NewMexico': 'NM',
-    'NewYork': 'NY',
-    'NorthCarolina': 'NC',
-    'NorthDakota': 'ND',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
     'Ohio': 'OH',
     'Oklahoma': 'OK',
     'Oregon': 'OR',
-    'PuertoRico': 'PR',
+    'Puerto Rico': 'PR',
     'Pennsylvania': 'PA',
-    'RhodeIsland': 'RI',
-    'SouthCarolina': 'SC',
-    'SouthDakota': 'SD',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
     'Tennessee': 'TN',
     'Texas': 'TX',
     'Utah': 'UT',
     'Vermont': 'VT',
     'Virginia': 'VA',
     'Washington': 'WA',
-    'WestVirginia': 'WV',
+    'West Virginia': 'WV',
     'Wisconsin': 'WI',
     'Wyoming': 'WY',
-    'UnitedStates': 'US',
+    'United States': 'US',
 }
+
+USSTATE_MAP = {k.replace(' ', ''): v for k, v in USSTATE_MAP_SPACE.items()}
+

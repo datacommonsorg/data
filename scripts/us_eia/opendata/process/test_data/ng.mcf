@@ -3,15 +3,18 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/NG.N3035_4.M
 statType: dcs:measuredValue
+name: "Percent of Industrial Natural Gas Deliveries in Represented by the Price, Monthly"
 
 Node: dcid:eia/NG.RL2R02_1.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/NG.RL2R02_1.A
 statType: dcs:measuredValue
+name: "Natural Gas Plant Liquids, Reserves Adjustments, Annual"
 
 Node: dcid:eia/NG.NA1350_2.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/NG.NA1350_2.A
 statType: dcs:measuredValue
+name: "Natural Gas LNG Storage Net Withdrawals, Annual"
