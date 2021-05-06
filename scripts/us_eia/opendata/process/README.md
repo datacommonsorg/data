@@ -63,3 +63,8 @@ To run tests:
 python3 -m unittest common_test.py
 ```
 
+To download and generate all supported datasets:
+
+```bash
+./generate.sh all
+```
