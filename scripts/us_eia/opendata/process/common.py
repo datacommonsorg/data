@@ -142,13 +142,11 @@ _NAME_PATTERNS = {
 _NAME_PATTERNS['US'] = [
     'united states of america', 'united states', 'u.s.a.', 'u.s.'
 ]
-_NAME_PATTERNS['USA'] = [
-    'united states of america', 'united states', 'u.s.a.', 'u.s.'
-]
+_NAME_PATTERNS['USA'] = _NAME_PATTERNS['US']
 
 
 def _maybe_parse_name(name, raw_place, is_us_place, counters):
-    """Best-effort parsing of names given a name with a place."""
+    """Parsing stat-var name given a series name containing a place."""
 
     if not name or not is_us_place or raw_place not in _NAME_PATTERNS:
         return ''
