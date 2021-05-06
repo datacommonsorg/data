@@ -3,15 +3,18 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/PET.KDLVIS_1.A
 statType: dcs:measuredValue
+name: "No 2 Diesel Low Sulfur Sales/Deliveries to Industrial Consumers, Annual"
 
 Node: dcid:eia/PET.RCRR06_1.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/PET.RCRR06_1.A
 statType: dcs:measuredValue
+name: "Crude Oil Reserves Acquisitions, Annual"
 
 Node: dcid:eia/PET.M_EPC0_SPT_PER.W
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/PET.M_EPC0_SPT_PER.W
 statType: dcs:measuredValue
+name: "Percent of Total Petroleum Stocks Held in SPR, Annual"
