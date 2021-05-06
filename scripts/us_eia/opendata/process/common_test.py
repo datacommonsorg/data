@@ -16,18 +16,19 @@ import total
 module_dir_ = os.path.dirname(__file__)
 
 _TEST_CASES = [
-    # input-json, expected-csv, expected-mcf, expected-tmcf,
+    # dataset-code, input-json, expected-csv, expected-mcf, expected-tmcf,
     #   extract-fn, schema-fn
-    ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
+    ('ELEC', 'elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
      elec.extract_place_statvar, elec.generate_statvar_schema),
-    ('intl.txt', 'intl.csv', 'intl.mcf', 'intl.tmcf',
+    ('INTL', 'intl.txt', 'intl.csv', 'intl.mcf', 'intl.tmcf',
      intl.extract_place_statvar, None),
-    ('ng.txt', 'ng.csv', 'ng.mcf', 'ng.tmcf', ng.extract_place_statvar, None),
-    ('pet.txt', 'pet.csv', 'pet.mcf', 'pet.tmcf', pet.extract_place_statvar,
+    ('NG', 'ng.txt', 'ng.csv', 'ng.mcf', 'ng.tmcf', ng.extract_place_statvar,
      None),
-    ('seds.txt', 'seds.csv', 'seds.mcf', 'seds.tmcf',
+    ('PET', 'pet.txt', 'pet.csv', 'pet.mcf', 'pet.tmcf',
+     pet.extract_place_statvar, None),
+    ('SEDS', 'seds.txt', 'seds.csv', 'seds.mcf', 'seds.tmcf',
      seds.extract_place_statvar, None),
-    ('total.txt', 'total.csv', 'total.mcf', 'total.tmcf',
+    ('TOTAL', 'total.txt', 'total.csv', 'total.mcf', 'total.tmcf',
      total.extract_place_statvar, None),
 ]
 
@@ -35,7 +36,8 @@ _TEST_CASES = [
 class TestProcess(unittest.TestCase):
 
     def test_process(self):
-        for (in_file, csv, mcf, tmcf, extract_fn, schema_fn) in _TEST_CASES:
+        for (dataset, in_file, csv, mcf, tmcf,
+             extract_fn, schema_fn) in _TEST_CASES:
             with tempfile.TemporaryDirectory() as tmp_dir:
                 print('Processing', in_file)
                 in_file = os.path.join(module_dir_, 'test_data', in_file)
@@ -43,8 +45,8 @@ class TestProcess(unittest.TestCase):
                 act_csv = os.path.join(tmp_dir, csv)
                 act_mcf = os.path.join(tmp_dir, mcf)
                 act_tmcf = os.path.join(tmp_dir, tmcf)
-                common.process(in_file, act_csv, act_mcf, act_tmcf, extract_fn,
-                               schema_fn)
+                common.process(dataset, in_file, act_csv, act_mcf, act_tmcf,
+                               extract_fn, schema_fn)
 
                 with open(os.path.join(module_dir_, 'test_data', csv)) as f:
                     exp_csv_data = f.read()

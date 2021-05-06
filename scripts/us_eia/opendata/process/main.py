@@ -44,7 +44,8 @@ def main(_):
     assert FLAGS.data_dir
     assert FLAGS.dataset
     file_prefix = os.path.join(FLAGS.data_dir, FLAGS.dataset)
-    common.process(in_json=file_prefix + '.txt',
+    common.process(dataset=FLAGS.dataset,
+                   in_json=file_prefix + '.txt',
                    out_csv=file_prefix + '.csv',
                    out_sv_mcf=file_prefix + '.mcf',
                    out_tmcf=file_prefix + '.tmcf',

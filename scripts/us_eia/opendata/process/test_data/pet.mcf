@@ -1,3 +1,8 @@
+Node: dcid:eia/g/Root
+typeOf: dcs:StatVarGroup
+name: "Datasets from eia.gov"
+specializationOf: dcid:dc/g/Energy
+
 Node: dcid:eia/PET.KDLVIS_1.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
