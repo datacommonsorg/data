@@ -72,4 +72,3 @@ USSTATE_MAP_SPACE = {
 }
 
 USSTATE_MAP = {k.replace(' ', ''): v for k, v in USSTATE_MAP_SPACE.items()}
-
