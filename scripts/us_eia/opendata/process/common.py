@@ -16,12 +16,19 @@
 import csv
 import json
 import logging
+import re
 from collections import defaultdict
 from sys import path
 
 # For import util.alpha2_to_dcid
 path.insert(1, '../../../../')
 import util.alpha2_to_dcid as alpha2_to_dcid
+
+PERIOD_MAP = {
+    'A': 'Annual',
+    'M': 'Monthly',
+    'Q': 'Quarterly',
+}
 
 _COLUMNS = [
     'place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor',
@@ -47,11 +54,13 @@ _QUARTER_MAP = {
     'Q4': '12',
 }
 
+_DATE_RE = re.compile('[0-9WMQ]')
+
 
 def _parse_date(d):
     """Given a date from EIA JSON convert to DC compatible date."""
 
-    if not d.isnumeric():
+    if not _DATE_RE.match(d):
         return None
 
     if len(d) == 4:
@@ -90,8 +99,9 @@ def _enumify(in_str):
 
 def _print_counters(counters):
     print('\nSTATS:')
-    for k, v in counters.items():
-        print(f"\t{k} = {v}")
+    for k in sorted(counters):
+        # for k, v in counters.items():
+        print(f"\t{k} = {counters[k]}")
     print('')
 
 
@@ -104,7 +114,6 @@ def _find_dc_place(raw_place, is_us_place, counters):
     else:
         if raw_place in alpha2_to_dcid.COUNTRY_MAP:
             return alpha2_to_dcid.COUNTRY_MAP[raw_place]
-    # logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
     counters['error_unsupported_places'] += 1
     return None
 
@@ -176,7 +185,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
 
             # Extract raw place and stat-var from series_id.
             (raw_place, raw_sv,
-                is_us_place) = extract_place_statvar_fn(series_id, counters)
+             is_us_place) = extract_place_statvar_fn(series_id, counters)
             if not raw_place or not raw_sv:
                 counters['error_extract_place_sv'] += 1
                 continue
@@ -218,8 +227,8 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                 counters['error_empty_series'] += 1
                 continue
 
-            if (generate_statvar_schema_fn and generate_statvar_schema_fn(
-                    raw_sv, rows, sv_map, counters)):
+            if (generate_statvar_schema_fn and
+                    generate_statvar_schema_fn(raw_sv, rows, sv_map, counters)):
                 counters['info_schemaful_series'] += 1
             else:
                 counters['info_schemaless_series'] += 1

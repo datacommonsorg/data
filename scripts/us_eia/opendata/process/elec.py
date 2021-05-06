@@ -13,6 +13,7 @@
 # limitations under the License.
 """EIA Electricity Dataset specific functions."""
 
+import common
 import logging
 import re
 
@@ -60,12 +61,6 @@ def extract_place_statvar(series_id, counters):
 ##
 ## Maps for Schema
 ##
-
-_PERIOD_MAP = {
-    'A': 'Annual',
-    'M': 'Monthly',
-    'Q': 'Quarterly',
-}
 
 _CONSUMING_SECTOR = {
     'COM': 'Commercial',
@@ -292,11 +287,11 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         counters['error_missing_measure'] += 1
         return False
 
-    sv_id_parts = [_PERIOD_MAP[period], measure_pvs[0]]
+    sv_id_parts = [common.PERIOD_MAP[period], measure_pvs[0]]
     sv_pvs = measure_pvs[1:] + [
         'typeOf: dcs:StatisticalVariable',
         # TODO(shanth): use new property in next iteration
-        f'measurementQualifier: dcs:{_PERIOD_MAP[period]}',
+        f'measurementQualifier: dcs:{common.PERIOD_MAP[period]}',
     ]
 
     if fuel_type:

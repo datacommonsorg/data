@@ -17,6 +17,7 @@ import os
 import tempfile
 import unittest
 
+import coal
 import common
 import elec
 import ng
@@ -28,6 +29,8 @@ module_dir_ = os.path.dirname(__file__)
 _TEST_CASES = [
     # input-json, expected-csv, expected-mcf, expected-tmcf,
     #   extract-fn, schema-fn
+    ('coal.txt', 'coal.csv', 'coal.mcf', 'coal.tmcf',
+     coal.extract_place_statvar, coal.generate_statvar_schema),
     ('elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
      elec.extract_place_statvar, elec.generate_statvar_schema),
     ('ng.txt', 'ng.csv', 'ng.mcf', 'ng.tmcf', ng.extract_place_statvar, None),

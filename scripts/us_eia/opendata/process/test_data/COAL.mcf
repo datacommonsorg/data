@@ -1,0 +1,583 @@
+Node: dcid:Annual_AverageQuality_AshContent_ReceivedCoal_ElectricUtilityCogen
+populationType: dcs:Coal
+measuredProperty: dcs:ashContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:ElectricUtilityCogen
+
+Node: dcid:eia/COAL.EXPORT_PRICE.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_PRICE.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_PRICE.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_PRICE.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_PRICE.STM.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_PRICE.STM.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_PRICE.MET.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_PRICE.MET.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_QTY.STM.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_QTY.STM.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_PRICE.STM.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_PRICE.STM.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_QTY.MET.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_QTY.MET.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_QTY.STM.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_QTY.STM.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_QTY.MET.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_QTY.MET.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_PRICE.MET.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_PRICE.MET.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_QTY.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_QTY.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_QTY.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_QTY.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:Quarterly_Consumption_Coal_CokePlants
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:CokePlants
+
+Node: dcid:Quarterly_Average_Cost_Coal_OtherIndustrial
+populationType: dcs:Coal
+measuredProperty: dcs:cost
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:OtherIndustrial
+
+Node: dcid:Quarterly_Average_Cost_Coal_ElectricPower
+populationType: dcs:Coal
+measuredProperty: dcs:cost
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricPower
+
+Node: dcid:Quarterly_Consumption_Coal_ElectricUtilityNonCogen
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricUtilityNonCogen
+
+Node: dcid:Quarterly_AverageQuality_AshContent_ReceivedCoal_ElectricUtilityCogen
+populationType: dcs:Coal
+measuredProperty: dcs:ashContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricUtilityCogen
+
+Node: dcid:Annual_AverageQuality_AshContent_ReceivedCoal_CommercialAndInstitutional
+populationType: dcs:Coal
+measuredProperty: dcs:ashContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:CommercialAndInstitutional
+
+Node: dcid:Quarterly_AverageQuality_AshContent_ReceivedCoal_ElectricUtility
+populationType: dcs:Coal
+measuredProperty: dcs:ashContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricUtility
+
+Node: dcid:Quarterly_AverageQuality_AshContent_ReceivedCoal_CokePlants
+populationType: dcs:Coal
+measuredProperty: dcs:ashContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:CokePlants
+
+Node: dcid:Quarterly_Consumption_Coal_ElectricPower
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricPower
+
+Node: dcid:eia/COAL.EXPORT_QTY.COK.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_QTY.COK.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_QTY.COK.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_QTY.COK.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_PRICE.COK.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_PRICE.COK.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.EXPORT_PRICE.COK.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.EXPORT_PRICE.COK.Q
+statType: dcs:measuredValue
+
+Node: dcid:Quarterly_Average_Cost_Coal_ElectricUtility
+populationType: dcs:Coal
+measuredProperty: dcs:cost
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricUtility
+
+Node: dcid:Annual_Consumption_Coal_CommercialAndInstitutional
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:CommercialAndInstitutional
+
+Node: dcid:Quarterly_Consumption_Coal_OtherIndustrial
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:OtherIndustrial
+
+Node: dcid:Quarterly_AverageQuality_HeatContent_ReceivedCoal_CommercialAndInstitutional
+populationType: dcs:Coal
+measuredProperty: dcs:heatContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:CommercialAndInstitutional
+
+Node: dcid:Annual_AverageQuality_HeatContent_ReceivedCoal_OtherIndustrial
+populationType: dcs:Coal
+measuredProperty: dcs:heatContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:OtherIndustrial
+
+Node: dcid:Quarterly_AverageQuality_HeatContent_ReceivedCoal_ElectricUtilityCogen
+populationType: dcs:Coal
+measuredProperty: dcs:heatContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricUtilityCogen
+
+Node: dcid:eia/COAL.IMPORT_PRICE.MET.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_PRICE.MET.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_PRICE.COK.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_PRICE.COK.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_QTY.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_QTY.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_QTY.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_QTY.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_QTY.MET.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_QTY.MET.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_QTY.STM.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_QTY.STM.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_QTY.STM.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_QTY.STM.A
+statType: dcs:measuredValue
+
+Node: dcid:Annual_Receipt_Coal_OtherIndustrial
+populationType: dcs:Coal
+measuredProperty: dcs:receipt
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:OtherIndustrial
+
+Node: dcid:Quarterly_Receipt_Coal_CommercialAndInstitutional
+populationType: dcs:Coal
+measuredProperty: dcs:receipt
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:CommercialAndInstitutional
+
+Node: dcid:Annual_Receipt_Coal_CommercialAndInstitutional
+populationType: dcs:Coal
+measuredProperty: dcs:receipt
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:CommercialAndInstitutional
+
+Node: dcid:Annual_Receipt_Coal_ElectricUtilityNonCogen
+populationType: dcs:Coal
+measuredProperty: dcs:receipt
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:ElectricUtilityNonCogen
+
+Node: dcid:Annual_Receipt_Coal_ElectricUtilityCogen
+populationType: dcs:Coal
+measuredProperty: dcs:receipt
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:ElectricUtilityCogen
+
+Node: dcid:eia/COAL.IMPORT_PRICE.STM.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_PRICE.STM.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_PRICE.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_PRICE.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_PRICE.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_PRICE.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.IMPORT_PRICE.STM.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_PRICE.STM.A
+statType: dcs:measuredValue
+
+Node: dcid:Annual_Receipt_Coal_ElectricPower
+populationType: dcs:Coal
+measuredProperty: dcs:receipt
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:ElectricPower
+
+Node: dcid:eia/COAL.IMPORT_QTY.COK.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.IMPORT_QTY.COK.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_ASH.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_ASH.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_ASH.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_ASH.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_ASH.SUB.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_ASH.SUB.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_HEAT.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_HEAT.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_HEAT.SUB.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_HEAT.SUB.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_HEAT.SUB.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_HEAT.SUB.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_PRICE.BIT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_PRICE.BIT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_PRICE.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_PRICE.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_HEAT.BIT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_HEAT.BIT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_HEAT.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_HEAT.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_PRICE.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_PRICE.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_PRICE.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_PRICE.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_HEAT.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_HEAT.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_QTY.SUB.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_QTY.SUB.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_QTY.BIT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_QTY.BIT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_QTY.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_QTY.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_QTY.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_QTY.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_QTY.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_QTY.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:Quarterly_Stock_Coal_ElectricUtilityCogen
+populationType: dcs:Coal
+measuredProperty: dcs:stock
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricUtilityCogen
+
+Node: dcid:Quarterly_Stock_Coal_OtherIndustrial
+populationType: dcs:Coal
+measuredProperty: dcs:stock
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:OtherIndustrial
+
+Node: dcid:Annual_Stock_Coal_ElectricUtilityNonCogen
+populationType: dcs:Coal
+measuredProperty: dcs:stock
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:ElectricUtilityNonCogen
+
+Node: dcid:Annual_Stock_Coal_CommercialAndInstitutional
+populationType: dcs:Coal
+measuredProperty: dcs:stock
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:CommercialAndInstitutional
+
+Node: dcid:Annual_Stock_Coal_IndependentPowerProducers
+populationType: dcs:Coal
+measuredProperty: dcs:stock
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:IndependentPowerProducers
+
+Node: dcid:eia/COAL.SHIPMENT_SULFUR.BIT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_SULFUR.BIT.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_SULFUR.TOT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_SULFUR.TOT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_SULFUR.BIT.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_SULFUR.BIT.A
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_SULFUR.WC.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_SULFUR.WC.Q
+statType: dcs:measuredValue
+
+Node: dcid:eia/COAL.SHIPMENT_SULFUR.TOT.Q
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_SULFUR.TOT.Q
+statType: dcs:measuredValue
+
+Node: dcid:Quarterly_Stock_Coal_ElectricUtility
+populationType: dcs:Coal
+measuredProperty: dcs:stock
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricUtility
+
+Node: dcid:Annual_AverageQuality_SulfurContent_ReceivedCoal_ElectricUtilityCogen
+populationType: dcs:Coal
+measuredProperty: dcs:sulfurContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:ElectricUtilityCogen
+
+Node: dcid:Quarterly_AverageQuality_SulfurContent_ReceivedCoal_IndependentPowerProducers
+populationType: dcs:Coal
+measuredProperty: dcs:sulfurContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:IndependentPowerProducers
+
+Node: dcid:Annual_AverageQuality_SulfurContent_ReceivedCoal_OtherIndustrial
+populationType: dcs:Coal
+measuredProperty: dcs:sulfurContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:OtherIndustrial
+
+Node: dcid:Quarterly_AverageQuality_SulfurContent_ReceivedCoal_ElectricUtilityNonCogen
+populationType: dcs:Coal
+measuredProperty: dcs:sulfurContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:ElectricUtilityNonCogen
+
+Node: dcid:Annual_AverageQuality_SulfurContent_ReceivedCoal_ElectricUtility
+populationType: dcs:Coal
+measuredProperty: dcs:sulfurContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:ElectricUtility
+
+Node: dcid:Annual_Stock_Coal_OtherIndustrial
+populationType: dcs:Coal
+measuredProperty: dcs:stock
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:OtherIndustrial
+
+Node: dcid:eia/COAL.SHIPMENT_SULFUR.SUB.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/COAL.SHIPMENT_SULFUR.SUB.A
+statType: dcs:measuredValue

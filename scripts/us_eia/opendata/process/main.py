@@ -17,6 +17,7 @@ import os
 from absl import flags
 from absl import app
 
+import coal
 import common
 import elec
 import ng
@@ -28,17 +29,21 @@ flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
 
 
 def get_extract_fn(dataset):
+    if dataset == 'COAL':
+        return coal.extract_place_statvar
     if dataset == 'ELEC':
         return elec.extract_place_statvar
-    elif dataset == 'PET':
+    if dataset == 'PET':
         return pet.extract_place_statvar
-    elif dataset == 'NG':
+    if dataset == 'NG':
         return ng.extract_place_statvar
     assert False, 'Unsupported dataset: ' + dataset
     return None
 
 
 def get_schema_fn(dataset):
+    if dataset == 'COAL':
+        return coal.generate_statvar_schema
     if dataset == 'ELEC':
         return elec.generate_statvar_schema
     return None
