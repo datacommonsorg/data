@@ -20,7 +20,7 @@ def extract_place_statvar(series_id, counters):
         place = m.group(2)
         sv_part2 = m.group(3)
         sv_id = f'{sv_part1}-{sv_part2}'
-        # False because this dataset only has countries
-        return (place, sv_id, False)
+        is_us = True if place == 'USA' or place == 'US' else False
+        return (place, sv_id, is_us)
 
     return (None, None, None)
