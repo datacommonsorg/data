@@ -56,9 +56,8 @@ _QUARTER_MAP = {
     'Q4': '12',
 }
 
-_ALPHA3_COUNTRY_SET = frozenset([
-    v[len('country/'):] for k, v in alpha2_to_dcid.COUNTRY_MAP.items()
-])
+_ALPHA3_COUNTRY_SET = frozenset(
+    [v[len('country/'):] for k, v in alpha2_to_dcid.COUNTRY_MAP.items()])
 
 
 def _parse_date(d):

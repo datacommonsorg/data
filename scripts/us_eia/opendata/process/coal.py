@@ -28,8 +28,8 @@ def extract_place_statvar(series_id, counters):
     Returns a (place, raw-stat-var, is_us_place) tuple.
     """
     # Pattern #1: COAL.{Measure}.{Region}-{Code}.{Period}
-    # - Ignored: 3-leter region codes (e.g. MAT - Middle Atlantic)
-    m = re.match(r"^COAL\.([^._]+_?[^._]+)\.([A-Z][A-Z])-([0-9]+)\.([AQM])$",
+    # Region could include 3-leter codes (e.g. MAT - Middle Atlantic)
+    m = re.match(r"^COAL\.([^._]+_?[^._]+)\.([A-Z]+)-([0-9]+)\.([AQM])$",
                  series_id)
     if m:
         measure = m.group(1)
@@ -58,7 +58,7 @@ def extract_place_statvar(series_id, counters):
         elif activity == 'SHIPMENT':
             # Pattern #3
             source = m.group(3)
-            if source.isalpha(): # could include 3-letter region codes
+            if source.isalpha():  # could include 3-letter region codes
                 destination_power_plant = m.group(4)
                 material = m.group(5)
                 period = m.group(6)
@@ -75,7 +75,8 @@ def extract_place_statvar(series_id, counters):
     # Pattern #4: COAL.PROD_DIST_STOCKS.TOT-{Place}.{Period}
     # Pattern #4: COAL.PRICE_BY_RANK.{Region}-{Material}.{Period}
     # Pattern #4: COAL.SHIP_{MINE|PLANT}_{ASH|HEAT|PRICE|QTY|SULFUR}.{Region}-{Material}.{Period}
-    m = re.match(r"^COAL\.([A-Z]+_[A-Z]+_[A-Z]+)\.([^-]+)-([^.]+)\.([AQM])$", series_id)
+    m = re.match(r"^COAL\.([A-Z]+_[A-Z]+_[A-Z]+)\.([^-]+)-([^.]+)\.([AQM])$",
+                 series_id)
     if m:
         measure = m.group(1)
         if measure == "PROD_DIST_STOCKS":
