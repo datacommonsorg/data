@@ -109,7 +109,6 @@ def _enumify(in_str):
 def _print_counters(counters):
     print('\nSTATS:')
     for k in sorted(counters):
-        # for k, v in counters.items():
         print(f"\t{k} = {counters[k]}")
     print('')
 
