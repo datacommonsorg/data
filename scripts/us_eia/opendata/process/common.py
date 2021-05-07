@@ -244,11 +244,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
                 # Preliminary checks
                 series_id = data.get('series_id', None)
                 if not series_id:
-                    category.process_category(dataset,
-                                              data,
+                    category.process_category(dataset, data,
                                               extract_place_statvar_fn,
-                                              svg_info,
-                                              sv_membership_map,
+                                              svg_info, sv_membership_map,
                                               counters)
                     counters['info_categories_processed'] += 1
                     continue
