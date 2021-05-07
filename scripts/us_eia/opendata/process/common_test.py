@@ -30,6 +30,9 @@ _TEST_CASES = [
      seds.extract_place_statvar, None),
     ('TOTAL', 'Total Energy', 'total.txt', 'total.csv', 'total.mcf',
      'total.tmcf', total.extract_place_statvar, None),
+    # Categories Test Case.
+    ('NG', 'Natural Gas', 'categories.txt', 'categories.csv', 'categories.mcf',
+     'categories.tmcf', ng.extract_place_statvar, None),
 ]
 
 
