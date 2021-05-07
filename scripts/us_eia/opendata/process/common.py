@@ -12,6 +12,8 @@ path.insert(1, '../../../../')
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.name_to_alpha2 as name_to_alpha2
 
+import category
+
 _COLUMNS = [
     'place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor',
     'eia_series_id'
@@ -77,10 +79,6 @@ def _parse_date(d):
 
 def _sv_dcid(raw_sv):
     return 'dcid:eia/' + raw_sv
-
-
-def _svg_dcid(dataset, cat_id):
-    return f'dcid:eia/g/{dataset}.{cat_id}'
 
 
 def _enumify(in_str):
@@ -179,38 +177,6 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
     return name
 
 
-def _get_dataset_root(svg_info):
-    # Dataset root.
-    dataset_root = ''
-    for _, (parent, _) in svg_info.items():
-        if parent in svg_info or dataset_root == parent:
-            continue
-        assert not dataset_root, f'Two roots found: {dataset_root}, {parent}'
-        dataset_root = parent
-
-    return dataset_root
-
-
-def _trim_area_categories(svg_info, counters):
-    dataset_root = _get_dataset_root(svg_info)
-
-    # Delete "area" categories.
-    for svg, (_, name) in list(svg_info.items()):
-        if name.lower() == 'by area':
-            counters['info_deleted_area_categories'] += 1
-            del svg_info[svg]
-
-    # Trim orphans, except for dataset_root.
-    run_again = True
-    while run_again:
-        run_again = False
-        for svg, (parent, _) in list(svg_info.items()):
-            if parent != dataset_root and parent not in svg_info:
-                run_again = True
-                counters['info_deleted_orphan_categories'] += 1
-                del svg_info[svg]
-
-
 def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info):
     nodes = []
     for k, v in sv_map.items():
@@ -223,67 +189,6 @@ def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info):
                     pvs.append(f'memberOf: dcid:{svg}')
         nodes.append('\n'.join(pvs))
     return nodes
-
-
-def _generate_svg_nodes(dataset, dataset_name, svg_info):
-    nodes = []
-
-    if not svg_info:
-        return nodes
-
-    # EIA SVG root
-    pvs = [
-        'Node: dcid:eia/g/Root', 'typeOf: dcs:StatVarGroup',
-        'name: "Other Data (eia.gov)"', 'specializationOf: dcid:dc/g/Energy'
-    ]
-    nodes.append('\n'.join(pvs))
-
-    # EIA Dataset root
-    dataset_root = _get_dataset_root(svg_info)
-    if dataset_root:
-        pvs = [
-            f'Node: dcid:{dataset_root}', 'typeOf: dcs:StatVarGroup',
-            f'name: "{dataset_name}"', 'specializationOf: dcid:eia/g/Root'
-        ]
-        nodes.append('\n'.join(pvs))
-
-    # Category SVGs
-    for svg, (parent, name) in svg_info.items():
-        pvs = [
-            f'Node: dcid:{svg}', 'typeOf: dcs:StatVarGroup', f'name: "{name}"',
-            f'specializationOf: dcid:{parent}'
-        ]
-        nodes.append('\n'.join(pvs))
-
-    return nodes
-
-
-def _process_category(dataset, data, extract_place_statvar_fn, svg_info,
-                      sv_membership_map, counters):
-    if dataset == 'ELEC':
-        # Do not bother for electricity dataset which has a full schema.
-        return
-
-    cat_id = data.get('category_id', None)
-    parent_cat_id = data.get('parent_category_id', None)
-    name = data.get('name', None)
-    child_series = data.get('childseries', [])
-    if not cat_id or not parent_cat_id or not name:
-        return
-
-    svg_id = _svg_dcid(dataset, cat_id)
-    svg_info[svg_id] = (_svg_dcid(dataset, parent_cat_id), name)
-
-    for series in child_series:
-        (_, raw_sv, _) = extract_place_statvar_fn(series, counters)
-        if not raw_sv:
-            counters['error_extract_place_sv_for_category'] += 1
-            continue
-
-        if raw_sv not in sv_membership_map:
-            sv_membership_map[raw_sv] = set([svg_id])
-        else:
-            sv_membership_map[raw_sv].add(svg_id)
 
 
 def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
@@ -317,10 +222,10 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
     """
     assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
 
-    # SV ID -> set(SVGs)
-    sv_membership_map = {}
     # SVG ID -> (parent SVG, name)
     svg_info = {}
+    # Raw SV -> set(SVGs)
+    sv_membership_map = {}
     counters = defaultdict(lambda: 0)
     sv_map = {}
     sv_name_map = {}
@@ -339,8 +244,12 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
                 # Preliminary checks
                 series_id = data.get('series_id', None)
                 if not series_id:
-                    _process_category(dataset, data, extract_place_statvar_fn,
-                                      svg_info, sv_membership_map, counters)
+                    category.process_category(dataset,
+                                              data,
+                                              extract_place_statvar_fn,
+                                              svg_info,
+                                              sv_membership_map,
+                                              counters)
                     counters['info_categories_processed'] += 1
                     continue
 
@@ -422,10 +331,10 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
                 csvwriter.writerows(rows)
                 counters['info_rows_output'] += len(rows)
 
-    _trim_area_categories(svg_info, counters)
+    category.trim_area_categories(svg_info, counters)
 
     with open(out_sv_mcf, 'w') as out_fp:
-        nodes = _generate_svg_nodes(
+        nodes = category.generate_svg_nodes(
             dataset, dataset_name, svg_info) + _generate_sv_nodes(
                 sv_map, sv_name_map, sv_membership_map, svg_info)
 
