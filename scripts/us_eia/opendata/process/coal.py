@@ -39,38 +39,40 @@ def extract_place_statvar(series_id, counters):
         sv_id = f'COAL.{measure}.{code}.{period}'
         return (place, sv_id, True)
 
+    # TODO: Ignore this pattern until we have a way to model multi-location SV's.
     # Pattern #2: COAL.{EXPORT|IMPORT}_{Measure}.{Type}-{CountryIso}-{UsPortIso}.{Period}
     # Pattern #3: COAL.{SHIPMENT}_{Submeasure}.{Source}-{Destination}-{Material}.{Period}
-    m = re.match(r"^COAL\.([A-Z]+)_([A-Z]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
-                 series_id)
-    if m:
-        activity = m.group(1)
-        measure = m.group(2)
-        if activity in ['EXPORT', 'IMPORT']:
-            # Pattern #2
-            # TODO: model destination / source port as well
-            type = m.group(3)
-            place = m.group(4)
-            port = m.group(5)
-            period = m.group(6)
-            sv_id = f'COAL.{activity}_{measure}.{type}.{period}'
-            return (place, sv_id, False)
-        elif activity == 'SHIPMENT':
-            # Pattern #3
-            source = m.group(3)
-            if source.isalpha():  # could include 3-letter region codes
-                destination_power_plant = m.group(4)
-                material = m.group(5)
-                period = m.group(6)
-                sv_id = f'COAL.SHIPMENT_{measure}.{material}.{period}'
-                return (source, sv_id, True)
-            else:
-                # TODO: Handle remaining places - coal mines
-                counters[f'error_unknown_coal_mine SHIPMENT '] += 1
-                return (None, None, None)
-        else:
-            counters[f'unknown #2,3 activity ({activity})'] += 1
-            return (None, None, None)
+    # m = re.match(r"^COAL\.([A-Z]+)_([A-Z]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
+    #              series_id)
+    # if m:
+    #     return (None, None, None)
+    #     activity = m.group(1)
+    #     measure = m.group(2)
+    #     if activity in ['EXPORT', 'IMPORT']:
+    #         # Pattern #2
+    #         # TODO: model destination / source port as well
+    #         type = m.group(3)
+    #         place = m.group(4)
+    #         port = m.group(5)
+    #         period = m.group(6)
+    #         sv_id = f'COAL.{activity}_{measure}.{type}.{period}'
+    #         return (place, sv_id, False)
+    #     elif activity == 'SHIPMENT':
+    #         # Pattern #3
+    #         source = m.group(3)
+    #         if source.isalpha():  # could include 3-letter region codes
+    #             destination_power_plant = m.group(4)
+    #             material = m.group(5)
+    #             period = m.group(6)
+    #             sv_id = f'COAL.SHIPMENT_{measure}.{material}.{period}'
+    #             return (source, sv_id, True)
+    #         else:
+    #             # TODO: Handle remaining places - coal mines
+    #             counters[f'error_unknown_coal_mine SHIPMENT '] += 1
+    #             return (None, None, None)
+    #     else:
+    #         counters[f'unknown #2,3 activity ({activity})'] += 1
+    #         return (None, None, None)
 
     # Pattern #4: COAL.PROD_DIST_STOCKS.TOT-{Place}.{Period}
     # Pattern #4: COAL.PRICE_BY_RANK.{Region}-{Material}.{Period}
@@ -99,8 +101,10 @@ def extract_place_statvar(series_id, counters):
 
 # Each value is a list where first entry is StatVar ID component, and the rest
 # are StatVar PVs.
+### Make sure each constraint is added to SV name
 _MEASURE_MAP = {
     'ASH_CONTENT': [
+        'Average_AshContent_Coal_For',
         'AverageQuality_AshContent_ReceivedCoal',
         'populationType: dcs:Coal',
         'measuredProperty: dcs:ashContent',
@@ -119,7 +123,7 @@ _MEASURE_MAP = {
         'statType: dcs:meanValue',
     ],
     'HEAT_CONTENT': [
-        'AverageQuality_HeatContent_ReceivedCoal',
+        'Average_HeatContent_Coal_For',
         'populationType: dcs:Coal',
         'measuredProperty: dcs:heatContent',
         'statType: dcs:meanValue',
@@ -137,7 +141,7 @@ _MEASURE_MAP = {
         'statType: dcs:measuredValue',
     ],
     'SULFUR_CONTENT': [
-        'AverageQuality_SulfurContent_ReceivedCoal',
+        'Average_SulfurContent_Coal_For',
         'populationType: dcs:Coal',
         'measuredProperty: dcs:sulfurContent',
         'statType: dcs:meanValue',
