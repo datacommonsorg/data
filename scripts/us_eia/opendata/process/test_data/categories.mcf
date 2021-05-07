@@ -1,0 +1,50 @@
+Node: dcid:eia/g/Root
+typeOf: dcs:StatVarGroup
+name: "Other Data (eia.gov)"
+specializationOf: dcid:dc/g/Energy
+
+Node: dcid:dcid:eia/g/NG.714804
+typeOf: dcs:StatVarGroup
+name: "Natural Gas"
+specializationOf: dcid:eia/g/Root
+
+Node: dcid:dcid:eia/g/NG.714805
+typeOf: dcs:StatVarGroup
+name: "Summary"
+specializationOf: dcid:dcid:eia/g/NG.714804
+
+Node: dcid:dcid:eia/g/NG.456172
+typeOf: dcs:StatVarGroup
+name: "Natural Gas Annual Supply & Disposition by State"
+specializationOf: dcid:dcid:eia/g/NG.714805
+
+Node: dcid:dcid:eia/g/NG.457052
+typeOf: dcs:StatVarGroup
+name: "Natural Gas Summary"
+specializationOf: dcid:dcid:eia/g/NG.714805
+
+Node: dcid:dcid:eia/g/NG.459123
+typeOf: dcs:StatVarGroup
+name: "by Data Series"
+specializationOf: dcid:dcid:eia/g/NG.457052
+
+Node: dcid:dcid:eia/g/NG.460678
+typeOf: dcs:StatVarGroup
+name: "Total Consumption"
+specializationOf: dcid:dcid:eia/g/NG.459123
+
+Node: dcid:eia/NG.N9140_2.A
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/NG.N9140_2.A
+statType: dcs:measuredValue
+name: "Natural Gas Total Consumption, Annual"
+memberOf: dcid:dcid:eia/g/NG.460678
+
+Node: dcid:eia/NG.N9140_2.M
+typeOf: dcs:StatisticalVariable
+populationType: schema:Thing
+measuredProperty: dcid:eia/NG.N9140_2.M
+statType: dcs:measuredValue
+name: "Natural Gas Total Consumption, Monthly"
+memberOf: dcid:dcid:eia/g/NG.460678

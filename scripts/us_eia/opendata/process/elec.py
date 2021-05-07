@@ -238,7 +238,7 @@ def _get_fuel_unit(fuel_type):
     if fuel_type == 'PEL':
         # Liquid
         return 'Barrel'
-    return 'MetricTon'
+    return 'ShortTon'
 
 
 def generate_statvar_schema(raw_sv, rows, sv_map, counters):
