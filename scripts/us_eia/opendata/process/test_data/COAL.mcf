@@ -62,62 +62,6 @@ typeOf: dcs:StatisticalVariable
 measurementQualifier: dcs:Annual
 consumingSector: dcs:ElectricUtilityNonCogen
 
-Node: dcid:eia/COAL.SHIP_MINE_ASH.SYN.Q
-typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/COAL.SHIP_MINE_ASH.SYN.Q
-statType: dcs:measuredValue
-name: "Coal shipments to the electric power sector: ash content, by mine state : : synfuel coal : quarterly"
-
-Node: dcid:eia/COAL.SHIP_MINE_HEAT.BIT.A
-typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/COAL.SHIP_MINE_HEAT.BIT.A
-statType: dcs:measuredValue
-name: "Coal shipments to the electric power sector: heat content, by mine state : : bituminous : annual"
-
-Node: dcid:eia/COAL.SHIP_MINE_QTY.TOT.Q
-typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/COAL.SHIP_MINE_QTY.TOT.Q
-statType: dcs:measuredValue
-name: "Coal shipments to the electric power sector: quantity, by mine state : : all coal : quarterly"
-
-Node: dcid:eia/COAL.SHIP_MINE_SULFUR.SYN.Q
-typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/COAL.SHIP_MINE_SULFUR.SYN.Q
-statType: dcs:measuredValue
-name: "Coal shipments to the electric power sectors: sulfur content, by mine state : : synfuel coal : quarterly"
-
-Node: dcid:eia/COAL.SHIP_PLANT_ASH.BIT.A
-typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/COAL.SHIP_PLANT_ASH.BIT.A
-statType: dcs:measuredValue
-name: "Coal shipments to the electric power sector: ash content, by plant state : : bituminous : annual"
-
-Node: dcid:eia/COAL.SHIP_PLANT_PRICE.SUB.A
-typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/COAL.SHIP_PLANT_PRICE.SUB.A
-statType: dcs:measuredValue
-name: "Coal shipments to the electric power sector: price, by plant state : : subbituminous : annual"
-
-Node: dcid:eia/COAL.SHIP_PLANT_QTY.BIT.A
-typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/COAL.SHIP_PLANT_QTY.BIT.A
-statType: dcs:measuredValue
-name: "Coal shipments to the electric power sector: quantity, by plant state : : bituminous : annual"
-
-Node: dcid:eia/COAL.SHIP_PLANT_SULFUR.SUB.A
-typeOf: dcs:StatisticalVariable
-populationType: schema:Thing
-measuredProperty: dcid:eia/COAL.SHIP_PLANT_SULFUR.SUB.A
-statType: dcs:measuredValue
-name: "Coal shipments to the electric power sector: sulfur content, by plant state : : subbituminous : annual"
-
 Node: dcid:Quarterly_Stock_Coal_ElectricUtility
 populationType: dcs:Coal
 measuredProperty: dcs:stock

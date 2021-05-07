@@ -13,7 +13,6 @@
 # limitations under the License.
 """Helper functions to deal with category hierarchy."""
 
-
 def _svg_dcid(dataset, cat_id):
     return f'dcid:eia/g/{dataset}.{cat_id}'
 
@@ -86,7 +85,7 @@ def trim_area_categories(svg_info, counters):
 
     # Delete "area" categories.
     for svg, (_, name) in list(svg_info.items()):
-        if name.lower() == 'by area':
+        if name and name.lower() == 'by area':
             counters['info_deleted_area_categories'] += 1
             del svg_info[svg]
 
@@ -124,7 +123,7 @@ def process_category(dataset, data, extract_place_statvar_fn, svg_info,
     cat_id = data.get('category_id', None)
     parent_cat_id = data.get('parent_category_id', None)
     name = data.get('name', None)
-    if not cat_id or not parent_cat_id or not name:
+    if not cat_id or not parent_cat_id:
         return
     svg_id = _svg_dcid(dataset, cat_id)
     svg_info[svg_id] = (_svg_dcid(dataset, parent_cat_id), name)
