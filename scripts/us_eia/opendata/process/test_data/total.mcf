@@ -3,3 +3,4 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/TOTAL.LUACP.A
 statType: dcs:measuredValue
+name: "Lubricants Consumed by the Transportation Sector, Annual"

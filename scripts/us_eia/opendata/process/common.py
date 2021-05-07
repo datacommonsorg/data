@@ -23,6 +23,9 @@ from sys import path
 # For import util.alpha2_to_dcid
 path.insert(1, '../../../../')
 import util.alpha2_to_dcid as alpha2_to_dcid
+import util.name_to_alpha2 as name_to_alpha2
+
+import category
 
 PERIOD_MAP = {
     'A': 'Annual',
@@ -98,7 +101,7 @@ def _parse_date(d):
     return None
 
 
-def _eia_dcid(raw_sv):
+def _sv_dcid(raw_sv):
     return 'dcid:eia/' + raw_sv
 
 
@@ -116,7 +119,7 @@ def _print_counters(counters):
 
 def _find_dc_place(raw_place, is_us_place, counters):
     if is_us_place:
-        if raw_place == 'US':
+        if raw_place == 'US' or raw_place == 'USA':
             return 'country/USA'
         if raw_place in alpha2_to_dcid.USSTATE_MAP:
             return alpha2_to_dcid.USSTATE_MAP[raw_place]
@@ -149,7 +152,7 @@ def _find_dc_place(raw_place, is_us_place, counters):
 def _generate_default_statvar(raw_sv, sv_map):
     if raw_sv in sv_map:
         return
-    raw_sv_id = _eia_dcid(raw_sv)
+    raw_sv_id = _sv_dcid(raw_sv)
     sv_map[raw_sv] = '\n'.join([
         f"Node: {raw_sv_id}",
         'typeOf: dcs:StatisticalVariable',
@@ -159,11 +162,67 @@ def _generate_default_statvar(raw_sv, sv_map):
     ])
 
 
-def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
-            generate_statvar_schema_fn):
+# Name patterns for US and US states.
+_NAME_PATTERNS = {
+    v: [k.lower()] for k, v in name_to_alpha2.USSTATE_MAP_SPACE.items()
+}
+_NAME_PATTERNS['US'] = [
+    'united states of america', 'united states', 'u.s.a.', 'u.s.'
+]
+_NAME_PATTERNS['USA'] = _NAME_PATTERNS['US']
+
+
+def _maybe_parse_name(name, raw_place, is_us_place, counters):
+    """Parsing stat-var name given a series name containing a place."""
+
+    if not name or not is_us_place or raw_place not in _NAME_PATTERNS:
+        return ''
+
+    for p in _NAME_PATTERNS[raw_place]:
+        idx = name.lower().find(p)
+        if idx == -1:
+            continue
+
+        # Replace only the pattern, otherwise retaining the case of the name.
+        name = name[0:idx] + name[idx + len(p):]
+
+        # Trim unnecessary whitespaces.
+        name = name.strip()
+        name = re.sub(r" +", ' ', name)
+
+        # Trim any leading/trailing ',' or ':'.  To handle names like "Measure
+        # Foo, California"
+        name = re.sub(r"([,:]+$|^[,:]+)", '', name)
+
+        return name
+
+    # If we didn't find the name for the place, likely the name doesn't include
+    # the place (e.g., TOTAL).
+    counters['info_unmodified_names'] += 1
+    return name
+
+
+def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info):
+    nodes = []
+    for k, v in sv_map.items():
+        pvs = [v]
+        if k in sv_name_map:
+            pvs.append(f'name: "{sv_name_map[k]}"')
+        if k in sv_membership_map:
+            for svg in sorted(sv_membership_map[k]):
+                if svg in svg_info:
+                    pvs.append(f'memberOf: dcid:{svg}')
+        nodes.append('\n'.join(pvs))
+    return nodes
+
+
+def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
+            extract_place_statvar_fn, generate_statvar_schema_fn):
     """Process an EIA dataset and produce outputs using lambda functions.
 
     Args:
+        dataset: Dataset code
+        dataset_name: Name of the dataset
         in_json: Input JSON file
         out_csv: Output CSV file
         out_sv_mcf: Output StatisticalVariable MCF file
@@ -188,58 +247,100 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
     """
     assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
 
+    # SVG ID -> (parent SVG, name)
+    svg_info = {}
+    # Raw SV -> set(SVGs)
+    sv_membership_map = {}
     counters = defaultdict(lambda: 0)
     sv_map = {}
-    with open(in_json) as in_fp, open(out_csv, 'w', newline='') as csv_fp:
-        csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
-        csvwriter.writeheader()
+    sv_name_map = {}
+    with open(in_json) as in_fp, with open(out_csv, 'w', newline='') as csv_fp:
+            csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
+            csvwriter.writeheader()
 
-        for line in in_fp:
-            counters['info_lines_processed'] += 1
-            if counters['info_lines_processed'] % 100000 == 99999:
-                _print_counters(counters)
+            for line in in_fp:
+                counters['info_lines_processed'] += 1
+                if counters['info_lines_processed'] % 100000 == 99999:
+                    _print_counters(counters)
 
-            data = json.loads(line)
+                data = json.loads(line)
 
-            # Preliminary checks
-            series_id = data.get('series_id', None)
-            if not series_id:
-                counters['info_ignored_categories'] += 1
-                continue
-            time_series = data.get('data', None)
-            if not time_series:
-                counters['error_missing_time_series'] += 1
-                continue
-
-            # Extract raw place and stat-var from series_id.
-            (raw_place, raw_sv,
-             is_us_place) = extract_place_statvar_fn(series_id, counters)
-            if not raw_place or not raw_sv:
-                counters['error_extract_place_sv'] += 1
-                continue
-
-            # Map raw place to DC place
-            dc_place = _find_dc_place(raw_place, is_us_place, counters)
-            if not dc_place:
-                counters['error_place_mapping'] += 1
-                continue
-
-            raw_unit = _enumify(data.get('units', ''))
-
-            # TODO(shanth): Consider extracting stat-var name.
-
-            # Add to rows.
-            rows = []
-            for k, v in time_series:
-
-                if not v:
-                    counters['error_empty_values'] += 1
+                # Preliminary checks
+                series_id = data.get('series_id', None)
+                if not series_id:
+                    category.process_category(dataset, data,
+                                              extract_place_statvar_fn,
+                                              svg_info, sv_membership_map,
+                                              counters)
+                    counters['info_categories_processed'] += 1
                     continue
 
-                dt = _parse_date(k)
-                if not dt:
-                    logging.error('ERROR: failed to parse date "%s"', k)
-                    counters['error_date_parsing'] += 1
+                time_series = data.get('data', None)
+                if not time_series:
+                    counters['error_missing_time_series'] += 1
+                    continue
+
+                # Extract raw place and stat-var from series_id.
+                (raw_place, raw_sv,
+                 is_us_place) = extract_place_statvar_fn(series_id, counters)
+                if not raw_place or not raw_sv:
+                    counters['error_extract_place_sv'] += 1
+                    continue
+
+                # Map raw place to DC place
+                dc_place = _find_dc_place(raw_place, is_us_place, counters)
+                if not dc_place:
+                    counters['error_place_mapping'] += 1
+                    continue
+
+                raw_unit = _enumify(data.get('units', ''))
+
+                if raw_sv not in sv_name_map:
+                    name = _maybe_parse_name(data.get('name', ''), raw_place,
+                                             is_us_place, counters)
+                    if name:
+                        sv_name_map[raw_sv] = name
+
+                # Add to rows.
+                rows = []
+                for k, v in time_series:
+
+                    try:
+                        # The following non-numeric values exist:
+                        #  -- = Not applicable
+                        #   - = No data reported
+                        # (s) = Value too small for number of decimal places shown
+                        #  NA = Not available
+                        #   W = Data withheld to avoid disclosure
+                        #   * = Conversion Factor Unavailable
+                        #  se = EIA estimates based on time series analysis
+                        #  st = EIA forecasts (Short-Term Energy Outlook)
+                        # - - = Not applicable.
+                        #   W = Withdrawn
+                        #
+                        # TODO: Handle some these better.
+                        _ = float(v)
+                    except Exception:
+                        counters['error_non_numeric_values'] += 1
+                        continue
+
+                    dt = _parse_date(k)
+                    if not dt:
+                        logging.error('ERROR: failed to parse date "%s"', k)
+                        counters['error_date_parsing'] += 1
+                        continue
+
+                    rows.append({
+                        'place': f"dcid:{dc_place}",
+                        'stat_var': _sv_dcid(raw_sv),
+                        'date': dt,
+                        'value': v,
+                        'eia_series_id': series_id,
+                        'unit': raw_unit,
+                    })
+
+                if not rows:
+                    counters['error_empty_series'] += 1
                     continue
 
                 rows.append({
@@ -265,8 +366,14 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
             csvwriter.writerows(rows)
             counters['info_rows_output'] += len(rows)
 
+    category.trim_area_categories(svg_info, counters)
+
     with open(out_sv_mcf, 'w') as out_fp:
-        out_fp.write('\n\n'.join([v for k, v in sv_map.items()]))
+        nodes = category.generate_svg_nodes(
+            dataset, dataset_name, svg_info) + _generate_sv_nodes(
+                sv_map, sv_name_map, sv_membership_map, svg_info)
+
+        out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')
 
     with open(out_tmcf, 'w') as out_fp:

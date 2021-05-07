@@ -65,7 +65,10 @@ def extract_place_statvar(series_id, counters):
         sv_part2 = m.group(3)
         sv_id = f'{sv_part1}_{sv_part2}'
         place = m.group(2)
-        in_us = False if sv_part1 in _NON_US_COUNTRY_SERIES_PREFIX else True
+        if sv_part1 in _NON_US_COUNTRY_SERIES_PREFIX and place != 'US':
+            in_us = False
+        else:
+            in_us = True
         return (place, sv_id, in_us)
 
     # Pattern #2: NG.{MEASURE1}[SN]{PLACE}_{MEASURE2}.{PERIOD}

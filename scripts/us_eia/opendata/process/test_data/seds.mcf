@@ -3,9 +3,11 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/SEDS.TNISB.A
 statType: dcs:measuredValue
+name: "Total net energy consumed by the industrial sector, adjusted for process fuel, intermediate products, and fuels with no direct cost"
 
 Node: dcid:eia/SEDS.WXICD.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/SEDS.WXICD.A
 statType: dcs:measuredValue
+name: "Waxes price in the industrial sector"
