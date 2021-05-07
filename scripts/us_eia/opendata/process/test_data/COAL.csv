@@ -1,6 +1,12 @@
 place,stat_var,date,value,unit,scaling_factor,eia_series_id
 dcid:geoId/01,dcid:Quarterly_Average_AshContent_Coal_For_ElectricUtility,2020-12,6.744021229492053,,100,COAL.ASH_CONTENT.AL-1.Q
 dcid:geoId/01,dcid:Quarterly_Average_AshContent_Coal_For_ElectricUtility,2020-09,6.767757786979022,,100,COAL.ASH_CONTENT.AL-1.Q
+dcid:geoId/21,dcid:Annual_Average_AshContent_Coal_For_CommercialAndInstitutional,2002,0,,100,COAL.ASH_CONTENT.KY-8.A
+dcid:geoId/21,dcid:Annual_Average_AshContent_Coal_For_CommercialAndInstitutional,2001,0,,100,COAL.ASH_CONTENT.KY-8.A
+dcid:geoId/21,dcid:Annual_Average_AshContent_Coal_For_CommercialAndInstitutional,2000,0,,100,COAL.ASH_CONTENT.KY-8.A
+dcid:geoId/17,dcid:Quarterly_Average_HeatContent_Coal_For_CommercialAndInstitutional,2000-09,0,dcid:BtuPerPound,,COAL.HEAT_CONTENT.IL-8.Q
+dcid:geoId/17,dcid:Quarterly_Average_HeatContent_Coal_For_CommercialAndInstitutional,2000-06,0,dcid:BtuPerPound,,COAL.HEAT_CONTENT.IL-8.Q
+dcid:geoId/17,dcid:Quarterly_Average_HeatContent_Coal_For_CommercialAndInstitutional,2000-03,0,dcid:BtuPerPound,,COAL.HEAT_CONTENT.IL-8.Q
 dcid:geoId/36,dcid:Annual_Receipt_Coal_ElectricUtilityNonCogen,2008,8236048,dcid:ShortTon,,COAL.RECEIPTS.NY-2.A
 dcid:geoId/49,dcid:eia/COAL.SHIP_MINE_ASH.SYN.Q,2008-03,11,Percent,,COAL.SHIP_MINE_ASH.UT-SYN.Q
 dcid:geoId/56,dcid:eia/COAL.SHIP_MINE_HEAT.BIT.A,2010,11314,Btu/Lb,,COAL.SHIP_MINE_HEAT.WY-BIT.A

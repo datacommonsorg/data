@@ -1,3 +1,33 @@
+Node: dcid:eia/g/Root
+typeOf: dcs:StatVarGroup
+name: "Other Data (eia.gov)"
+specializationOf: dcid:dc/g/Energy
+
+Node: dcid:dcid:eia/g/COAL.717234
+typeOf: dcs:StatVarGroup
+name: "Coal"
+specializationOf: dcid:eia/g/Root
+
+Node: dcid:dcid:eia/g/COAL.773561
+typeOf: dcs:StatVarGroup
+name: "(10075) Taconite Harbor Energy Center(10075)"
+specializationOf: dcid:dcid:eia/g/COAL.717268
+
+Node: dcid:dcid:eia/g/COAL.773564
+typeOf: dcs:StatVarGroup
+name: "(10151) Grant Town Power Plant(10151)"
+specializationOf: dcid:dcid:eia/g/COAL.717268
+
+Node: dcid:dcid:eia/g/COAL.829519
+typeOf: dcs:StatVarGroup
+name: "(4150) Neil Simpson(4150)"
+specializationOf: dcid:dcid:eia/g/COAL.717268
+
+Node: dcid:dcid:eia/g/COAL.717268
+typeOf: dcs:StatVarGroup
+name: "Coal shipments to the electric power sector: by plant"
+specializationOf: dcid:dcid:eia/g/COAL.717234
+
 Node: dcid:Quarterly_Average_AshContent_Coal_For_ElectricUtility
 AverageQuality_AshContent_ReceivedCoal
 populationType: dcs:Coal
@@ -6,6 +36,23 @@ statType: dcs:meanValue
 typeOf: dcs:StatisticalVariable
 measurementQualifier: dcs:Quarterly
 consumingSector: dcs:ElectricUtility
+
+Node: dcid:Annual_Average_AshContent_Coal_For_CommercialAndInstitutional
+AverageQuality_AshContent_ReceivedCoal
+populationType: dcs:Coal
+measuredProperty: dcs:ashContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Annual
+consumingSector: dcs:CommercialAndInstitutional
+
+Node: dcid:Quarterly_Average_HeatContent_Coal_For_CommercialAndInstitutional
+populationType: dcs:Coal
+measuredProperty: dcs:heatContent
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+consumingSector: dcs:CommercialAndInstitutional
 
 Node: dcid:Annual_Receipt_Coal_ElectricUtilityNonCogen
 populationType: dcs:Coal
@@ -20,48 +67,56 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIP_MINE_ASH.SYN.Q
 statType: dcs:measuredValue
+name: "Coal shipments to the electric power sector: ash content, by mine state : : synfuel coal : quarterly"
 
 Node: dcid:eia/COAL.SHIP_MINE_HEAT.BIT.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIP_MINE_HEAT.BIT.A
 statType: dcs:measuredValue
+name: "Coal shipments to the electric power sector: heat content, by mine state : : bituminous : annual"
 
 Node: dcid:eia/COAL.SHIP_MINE_QTY.TOT.Q
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIP_MINE_QTY.TOT.Q
 statType: dcs:measuredValue
+name: "Coal shipments to the electric power sector: quantity, by mine state : : all coal : quarterly"
 
 Node: dcid:eia/COAL.SHIP_MINE_SULFUR.SYN.Q
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIP_MINE_SULFUR.SYN.Q
 statType: dcs:measuredValue
+name: "Coal shipments to the electric power sectors: sulfur content, by mine state : : synfuel coal : quarterly"
 
 Node: dcid:eia/COAL.SHIP_PLANT_ASH.BIT.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIP_PLANT_ASH.BIT.A
 statType: dcs:measuredValue
+name: "Coal shipments to the electric power sector: ash content, by plant state : : bituminous : annual"
 
 Node: dcid:eia/COAL.SHIP_PLANT_PRICE.SUB.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIP_PLANT_PRICE.SUB.A
 statType: dcs:measuredValue
+name: "Coal shipments to the electric power sector: price, by plant state : : subbituminous : annual"
 
 Node: dcid:eia/COAL.SHIP_PLANT_QTY.BIT.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIP_PLANT_QTY.BIT.A
 statType: dcs:measuredValue
+name: "Coal shipments to the electric power sector: quantity, by plant state : : bituminous : annual"
 
 Node: dcid:eia/COAL.SHIP_PLANT_SULFUR.SUB.A
 typeOf: dcs:StatisticalVariable
 populationType: schema:Thing
 measuredProperty: dcid:eia/COAL.SHIP_PLANT_SULFUR.SUB.A
 statType: dcs:measuredValue
+name: "Coal shipments to the electric power sector: sulfur content, by plant state : : subbituminous : annual"
 
 Node: dcid:Quarterly_Stock_Coal_ElectricUtility
 populationType: dcs:Coal

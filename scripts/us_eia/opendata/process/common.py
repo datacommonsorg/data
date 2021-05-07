@@ -112,7 +112,6 @@ def _enumify(in_str):
 def _print_counters(counters):
     print('\nSTATS:')
     for k in sorted(counters):
-        # for k, v in counters.items():
         print(f"\t{k} = {counters[k]}")
     print('')
 
@@ -254,98 +253,85 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
     counters = defaultdict(lambda: 0)
     sv_map = {}
     sv_name_map = {}
-    with open(in_json) as in_fp, with open(out_csv, 'w', newline='') as csv_fp:
-            csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
-            csvwriter.writeheader()
+    with open(in_json) as in_fp, open(out_csv, 'w', newline='') as csv_fp:
+        csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
+        csvwriter.writeheader()
 
-            for line in in_fp:
-                counters['info_lines_processed'] += 1
-                if counters['info_lines_processed'] % 100000 == 99999:
-                    _print_counters(counters)
+        for line in in_fp:
+            counters['info_lines_processed'] += 1
+            if counters['info_lines_processed'] % 100000 == 99999:
+                _print_counters(counters)
 
-                data = json.loads(line)
+            data = json.loads(line)
 
-                # Preliminary checks
-                series_id = data.get('series_id', None)
-                if not series_id:
-                    category.process_category(dataset, data,
-                                              extract_place_statvar_fn,
-                                              svg_info, sv_membership_map,
-                                              counters)
-                    counters['info_categories_processed'] += 1
+            # Preliminary checks
+            series_id = data.get('series_id', None)
+            if not series_id:
+                category.process_category(dataset, data,
+                                            extract_place_statvar_fn,
+                                            svg_info, sv_membership_map,
+                                            counters)
+                counters['info_categories_processed'] += 1
+                continue
+
+            time_series = data.get('data', None)
+            if not time_series:
+                counters['error_missing_time_series'] += 1
+                continue
+
+            # Extract raw place and stat-var from series_id.
+            (raw_place, raw_sv,
+                is_us_place) = extract_place_statvar_fn(series_id, counters)
+            if not raw_place or not raw_sv:
+                counters['error_extract_place_sv'] += 1
+                continue
+
+            # Map raw place to DC place
+            dc_place = _find_dc_place(raw_place, is_us_place, counters)
+            if not dc_place:
+                counters['error_place_mapping'] += 1
+                continue
+
+            raw_unit = _enumify(data.get('units', ''))
+
+            if raw_sv not in sv_name_map:
+                name = _maybe_parse_name(data.get('name', ''), raw_place,
+                                            is_us_place, counters)
+                if name:
+                    sv_name_map[raw_sv] = name
+
+            # Add to rows.
+            rows = []
+            for k, v in time_series:
+
+                try:
+                    # The following non-numeric values exist:
+                    #  -- = Not applicable
+                    #   - = No data reported
+                    # (s) = Value too small for number of decimal places shown
+                    #  NA = Not available
+                    #   W = Data withheld to avoid disclosure
+                    #   * = Conversion Factor Unavailable
+                    #  se = EIA estimates based on time series analysis
+                    #  st = EIA forecasts (Short-Term Energy Outlook)
+                    # - - = Not applicable.
+                    #   W = Withdrawn
+                    #
+                    # TODO: Handle some these better.
+                    _ = float(v)
+                except Exception:
+                    counters['error_non_numeric_values'] += 1
                     continue
 
-                time_series = data.get('data', None)
-                if not time_series:
-                    counters['error_missing_time_series'] += 1
-                    continue
-
-                # Extract raw place and stat-var from series_id.
-                (raw_place, raw_sv,
-                 is_us_place) = extract_place_statvar_fn(series_id, counters)
-                if not raw_place or not raw_sv:
-                    counters['error_extract_place_sv'] += 1
-                    continue
-
-                # Map raw place to DC place
-                dc_place = _find_dc_place(raw_place, is_us_place, counters)
-                if not dc_place:
-                    counters['error_place_mapping'] += 1
-                    continue
-
-                raw_unit = _enumify(data.get('units', ''))
-
-                if raw_sv not in sv_name_map:
-                    name = _maybe_parse_name(data.get('name', ''), raw_place,
-                                             is_us_place, counters)
-                    if name:
-                        sv_name_map[raw_sv] = name
-
-                # Add to rows.
-                rows = []
-                for k, v in time_series:
-
-                    try:
-                        # The following non-numeric values exist:
-                        #  -- = Not applicable
-                        #   - = No data reported
-                        # (s) = Value too small for number of decimal places shown
-                        #  NA = Not available
-                        #   W = Data withheld to avoid disclosure
-                        #   * = Conversion Factor Unavailable
-                        #  se = EIA estimates based on time series analysis
-                        #  st = EIA forecasts (Short-Term Energy Outlook)
-                        # - - = Not applicable.
-                        #   W = Withdrawn
-                        #
-                        # TODO: Handle some these better.
-                        _ = float(v)
-                    except Exception:
-                        counters['error_non_numeric_values'] += 1
-                        continue
-
-                    dt = _parse_date(k)
-                    if not dt:
-                        logging.error('ERROR: failed to parse date "%s"', k)
-                        counters['error_date_parsing'] += 1
-                        continue
-
-                    rows.append({
-                        'place': f"dcid:{dc_place}",
-                        'stat_var': _sv_dcid(raw_sv),
-                        'date': dt,
-                        'value': v,
-                        'eia_series_id': series_id,
-                        'unit': raw_unit,
-                    })
-
-                if not rows:
-                    counters['error_empty_series'] += 1
+                dt = _parse_date(k)
+                if not dt:
+                    logging.error('ERROR: failed to parse date "%s"', k)
+                    counters['error_date_parsing'] += 1
                     continue
 
                 rows.append({
                     'place': f"dcid:{dc_place}",
-                    'stat_var': _eia_dcid(raw_sv),
+                    'stat_var': _sv_dcid(raw_sv),
                     'date': dt,
                     'value': v,
                     'eia_series_id': series_id,
@@ -356,8 +342,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
                 counters['error_empty_series'] += 1
                 continue
 
-            if (generate_statvar_schema_fn and
-                    generate_statvar_schema_fn(raw_sv, rows, sv_map, counters)):
+            if (generate_statvar_schema_fn and generate_statvar_schema_fn(
+                    raw_sv, rows, sv_map, counters)):
                 counters['info_schemaful_series'] += 1
             else:
                 counters['info_schemaless_series'] += 1
