@@ -12,6 +12,8 @@ path.insert(1, '../../../../')
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.name_to_alpha2 as name_to_alpha2
 
+import category
+
 _COLUMNS = [
     'place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor',
     'eia_series_id'
@@ -75,7 +77,7 @@ def _parse_date(d):
     return None
 
 
-def _eia_dcid(raw_sv):
+def _sv_dcid(raw_sv):
     return 'dcid:eia/' + raw_sv
 
 
@@ -125,7 +127,7 @@ def _find_dc_place(raw_place, is_us_place, counters):
 def _generate_default_statvar(raw_sv, sv_map):
     if raw_sv in sv_map:
         return
-    raw_sv_id = _eia_dcid(raw_sv)
+    raw_sv_id = _sv_dcid(raw_sv)
     sv_map[raw_sv] = '\n'.join([
         f"Node: {raw_sv_id}",
         'typeOf: dcs:StatisticalVariable',
@@ -175,11 +177,27 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
     return name
 
 
-def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
-            generate_statvar_schema_fn):
+def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info):
+    nodes = []
+    for k, v in sv_map.items():
+        pvs = [v]
+        if k in sv_name_map:
+            pvs.append(f'name: "{sv_name_map[k]}"')
+        if k in sv_membership_map:
+            for svg in sorted(sv_membership_map[k]):
+                if svg in svg_info:
+                    pvs.append(f'memberOf: dcid:{svg}')
+        nodes.append('\n'.join(pvs))
+    return nodes
+
+
+def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
+            extract_place_statvar_fn, generate_statvar_schema_fn):
     """Process an EIA dataset and produce outputs using lambda functions.
 
     Args:
+        dataset: Dataset code
+        dataset_name: Name of the dataset
         in_json: Input JSON file
         out_csv: Output CSV file
         out_sv_mcf: Output StatisticalVariable MCF file
@@ -204,6 +222,10 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
     """
     assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
 
+    # SVG ID -> (parent SVG, name)
+    svg_info = {}
+    # Raw SV -> set(SVGs)
+    sv_membership_map = {}
     counters = defaultdict(lambda: 0)
     sv_map = {}
     sv_name_map = {}
@@ -222,8 +244,13 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                 # Preliminary checks
                 series_id = data.get('series_id', None)
                 if not series_id:
-                    counters['info_ignored_categories'] += 1
+                    category.process_category(dataset, data,
+                                              extract_place_statvar_fn,
+                                              svg_info, sv_membership_map,
+                                              counters)
+                    counters['info_categories_processed'] += 1
                     continue
+
                 time_series = data.get('data', None)
                 if not time_series:
                     counters['error_missing_time_series'] += 1
@@ -281,7 +308,7 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
 
                     rows.append({
                         'place': f"dcid:{dc_place}",
-                        'stat_var': _eia_dcid(raw_sv),
+                        'stat_var': _sv_dcid(raw_sv),
                         'date': dt,
                         'value': v,
                         'eia_series_id': series_id,
@@ -302,13 +329,13 @@ def process(in_json, out_csv, out_sv_mcf, out_tmcf, extract_place_statvar_fn,
                 csvwriter.writerows(rows)
                 counters['info_rows_output'] += len(rows)
 
+    category.trim_area_categories(svg_info, counters)
+
     with open(out_sv_mcf, 'w') as out_fp:
-        nodes = []
-        for k, v in sv_map.items():
-            if k in sv_name_map:
-                nodes.append('\n'.join([v, f'name: "{sv_name_map[k]}"']))
-            else:
-                nodes.append(v)
+        nodes = category.generate_svg_nodes(
+            dataset, dataset_name, svg_info) + _generate_sv_nodes(
+                sv_map, sv_name_map, sv_membership_map, svg_info)
+
         out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')
 
