@@ -32,8 +32,8 @@ module_dir_ = os.path.dirname(__file__)
 _TEST_CASES = [
     # dataset-code, dataset-name, input-json, expected-csv, expected-mcf,
     #   expected-tmcf, extract-fn, schema-fn
-    # ('COAL', 'Coal', 'coal.txt', 'coal.csv', 'coal.mcf', 'coal.tmcf',
-    #  coal.extract_place_statvar, coal.generate_statvar_schema),
+    ('COAL', 'Coal', 'coal.txt', 'coal.csv', 'coal.mcf', 'coal.tmcf',
+     coal.extract_place_statvar, coal.generate_statvar_schema),
     ('ELEC', 'Electricity', 'elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
      elec.extract_place_statvar, elec.generate_statvar_schema),
     ('INTL', 'Internationa', 'intl.txt', 'intl.csv', 'intl.mcf', 'intl.tmcf',
