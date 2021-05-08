@@ -30,7 +30,6 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
 flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
 
-
 # Value: (name, extract_fn, schema_fn)
 _DATASETS = {
     'COAL': ('Coal', coal.extract_place_statvar, coal.generate_statvar_schema),

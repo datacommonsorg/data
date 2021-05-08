@@ -13,6 +13,7 @@
 # limitations under the License.
 """Helper functions to deal with category hierarchy."""
 
+
 def _svg_dcid(dataset, cat_id):
     return f'dcid:eia/g/{dataset}.{cat_id}'
 

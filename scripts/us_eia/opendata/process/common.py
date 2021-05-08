@@ -268,9 +268,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
             series_id = data.get('series_id', None)
             if not series_id:
                 category.process_category(dataset, data,
-                                            extract_place_statvar_fn,
-                                            svg_info, sv_membership_map,
-                                            counters)
+                                          extract_place_statvar_fn, svg_info,
+                                          sv_membership_map, counters)
                 counters['info_categories_processed'] += 1
                 continue
 
@@ -281,7 +280,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
 
             # Extract raw place and stat-var from series_id.
             (raw_place, raw_sv,
-                is_us_place) = extract_place_statvar_fn(series_id, counters)
+             is_us_place) = extract_place_statvar_fn(series_id, counters)
             if not raw_place or not raw_sv:
                 counters['error_extract_place_sv'] += 1
                 continue
@@ -296,7 +295,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
 
             if raw_sv not in sv_name_map:
                 name = _maybe_parse_name(data.get('name', ''), raw_place,
-                                            is_us_place, counters)
+                                         is_us_place, counters)
                 if name:
                     sv_name_map[raw_sv] = name
 
@@ -342,8 +341,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_tmcf,
                 counters['error_empty_series'] += 1
                 continue
 
-            if (generate_statvar_schema_fn and generate_statvar_schema_fn(
-                    raw_sv, rows, sv_map, counters)):
+            if (generate_statvar_schema_fn and
+                    generate_statvar_schema_fn(raw_sv, rows, sv_map, counters)):
                 counters['info_schemaful_series'] += 1
             else:
                 counters['info_schemaless_series'] += 1
