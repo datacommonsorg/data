@@ -1,9 +1,23 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Process EIA datasets to produce TMCF and CSV."""
 
 import os
 from absl import flags
 from absl import app
 
+import coal
 import common
 import elec
 import intl
@@ -18,6 +32,7 @@ flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
 
 # Value: (name, extract_fn, schema_fn)
 _DATASETS = {
+    'COAL': ('Coal', coal.extract_place_statvar, coal.generate_statvar_schema),
     'ELEC': ('Electricity', elec.extract_place_statvar,
              elec.generate_statvar_schema),
     'INTL': ('Energy Overview (INTL)', intl.extract_place_statvar, None),
