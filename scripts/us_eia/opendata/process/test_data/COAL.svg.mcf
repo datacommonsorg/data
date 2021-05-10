@@ -1,0 +1,29 @@
+Node: dcid:eia/g/Root
+typeOf: dcs:StatVarGroup
+name: "Other Data (eia.gov)"
+specializationOf: dcid:dc/g/Energy
+
+Node: dcid:dcid:eia/g/COAL.717234
+typeOf: dcs:StatVarGroup
+name: "Coal"
+specializationOf: dcid:eia/g/Root
+
+Node: dcid:eia/g/COAL.773561
+typeOf: dcs:StatVarGroup
+name: "(10075) Taconite Harbor Energy Center(10075)"
+specializationOf: dcid:eia/g/COAL.717268
+
+Node: dcid:eia/g/COAL.773564
+typeOf: dcs:StatVarGroup
+name: "(10151) Grant Town Power Plant(10151)"
+specializationOf: dcid:eia/g/COAL.717268
+
+Node: dcid:eia/g/COAL.829519
+typeOf: dcs:StatVarGroup
+name: "(4150) Neil Simpson(4150)"
+specializationOf: dcid:eia/g/COAL.717268
+
+Node: dcid:eia/g/COAL.717268
+typeOf: dcs:StatVarGroup
+name: "Coal shipments to the electric power sector: by plant"
+specializationOf: dcid:eia/g/COAL.717234
