@@ -30,63 +30,68 @@ import total
 module_dir_ = os.path.dirname(__file__)
 
 _TEST_CASES = [
-    # dataset-code, dataset-name, input-json, expected-csv, expected-mcf,
-    #   expected-tmcf, extract-fn, schema-fn
-    ('COAL', 'Coal', 'coal.txt', 'coal.csv', 'coal.mcf', 'coal.tmcf',
+    # dataset-code, dataset-name, test-case-filename,
+    #   extract-fn, schema-fn
+    ('COAL', 'Coal', 'coal',
      coal.extract_place_statvar, coal.generate_statvar_schema),
-    ('ELEC', 'Electricity', 'elec.txt', 'elec.csv', 'elec.mcf', 'elec.tmcf',
+    ('ELEC', 'Electricity', 'elec',
      elec.extract_place_statvar, elec.generate_statvar_schema),
-    ('INTL', 'Internationa', 'intl.txt', 'intl.csv', 'intl.mcf', 'intl.tmcf',
-     intl.extract_place_statvar, None),
-    ('NG', 'Natural Gas', 'ng.txt', 'ng.csv', 'ng.mcf', 'ng.tmcf',
-     ng.extract_place_statvar, None),
-    ('PET', 'Petroleum', 'pet.txt', 'pet.csv', 'pet.mcf', 'pet.tmcf',
-     pet.extract_place_statvar, None),
-    ('SEDS', 'State Energy', 'seds.txt', 'seds.csv', 'seds.mcf', 'seds.tmcf',
-     seds.extract_place_statvar, None),
-    ('TOTAL', 'Total Energy', 'total.txt', 'total.csv', 'total.mcf',
-     'total.tmcf', total.extract_place_statvar, None),
+    ('INTL', 'Internationa', 'intl', intl.extract_place_statvar, None),
+    ('NG', 'Natural Gas', 'ng', ng.extract_place_statvar, None),
+    ('PET', 'Petroleum', 'pet', pet.extract_place_statvar, None),
+    ('SEDS', 'State Energy', 'seds', seds.extract_place_statvar, None),
+    ('TOTAL', 'Total Energy', 'total', total.extract_place_statvar, None),
     # Categories Test Case.
-    ('NG', 'Natural Gas', 'categories.txt', 'categories.csv', 'categories.mcf',
-     'categories.tmcf', ng.extract_place_statvar, None),
+    ('NG', 'Natural Gas', 'categories', ng.extract_place_statvar, None),
 ]
 
 
 class TestProcess(unittest.TestCase):
 
     def test_process(self):
-        for (dataset, dataset_name, in_file, csv, mcf, tmcf, extract_fn,
-             schema_fn) in _TEST_CASES:
+        for (dataset, dataset_name, test_fname, extract_fn, schema_fn) in _TEST_CASES:
             with tempfile.TemporaryDirectory() as tmp_dir:
                 print('Processing', dataset)
-                in_file = os.path.join(module_dir_, 'test_data', in_file)
+                in_file = os.path.join(module_dir_, 'test_data', f'{test_fname}.txt')
 
-                act_csv = os.path.join(tmp_dir, csv)
-                act_mcf = os.path.join(tmp_dir, mcf)
-                act_tmcf = os.path.join(tmp_dir, tmcf)
-                common.process(dataset, dataset_name, in_file, act_csv, act_mcf,
-                               act_tmcf, extract_fn, schema_fn)
+                exp_csv = f'{test_fname}.csv'
+                exp_mcf = f'{test_fname}.mcf'
+                exp_svg_mcf = f'{test_fname}.svg.mcf'
+                exp_tmcf = f'{test_fname}.tmcf'
 
-                with open(os.path.join(module_dir_, 'test_data', csv)) as f:
+                act_csv = os.path.join(tmp_dir, exp_csv)
+                act_mcf = os.path.join(tmp_dir, exp_mcf)
+                act_svg_mcf = os.path.join(tmp_dir, exp_svg_mcf)
+                act_tmcf = os.path.join(tmp_dir, exp_tmcf)
+                common.process(dataset, dataset_name, in_file, act_csv, act_mcf, act_svg_mcf, act_tmcf,
+                 extract_fn, schema_fn)
+
+                with open(os.path.join(module_dir_, 'test_data', exp_csv)) as f:
                     exp_csv_data = f.read()
-                with open(os.path.join(module_dir_, 'test_data', mcf)) as f:
+                with open(os.path.join(module_dir_, 'test_data', exp_mcf)) as f:
                     exp_mcf_data = f.read()
-                with open(os.path.join(module_dir_, 'test_data', tmcf)) as f:
+                with open(os.path.join(module_dir_, 'test_data', exp_svg_mcf)) as f:
+                    exp_svg_mcf_data = f.read()
+                with open(os.path.join(module_dir_, 'test_data', exp_tmcf)) as f:
                     exp_tmcf_data = f.read()
                 with open(act_csv) as f:
                     act_csv_data = f.read()
                 with open(act_mcf) as f:
                     act_mcf_data = f.read()
+                with open(act_svg_mcf) as f:
+                    act_svg_mcf_data = f.read()
                 with open(act_tmcf) as f:
                     act_tmcf_data = f.read()
 
                 os.remove(act_csv)
                 os.remove(act_mcf)
+                os.remove(act_svg_mcf)
                 os.remove(act_tmcf)
 
             self.maxDiff = None
             self.assertEqual(exp_csv_data, act_csv_data)
             self.assertEqual(exp_mcf_data, act_mcf_data)
+            self.assertEqual(exp_svg_mcf_data, act_svg_mcf_data)
             self.assertEqual(exp_tmcf_data, act_tmcf_data)
 
 

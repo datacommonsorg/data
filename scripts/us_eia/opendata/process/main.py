@@ -53,6 +53,7 @@ def main(_):
                    in_json=file_prefix + '.txt',
                    out_csv=file_prefix + '.csv',
                    out_sv_mcf=file_prefix + '.mcf',
+                   out_svg_mcf=file_prefix + '.svg.mcf',
                    out_tmcf=file_prefix + '.tmcf',
                    extract_place_statvar_fn=_DATASETS[FLAGS.dataset][1],
                    generate_statvar_schema_fn=_DATASETS[FLAGS.dataset][2])
