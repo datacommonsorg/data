@@ -125,10 +125,6 @@ def process_category(dataset, data, extract_place_statvar_fn, svg_info,
     On success, updates svg_info and sv_membership_map.
     """
 
-    if dataset == 'ELEC':
-        # Do not bother for electricity dataset which has full schema.
-        return
-
     cat_id = data.get('category_id', None)
     parent_cat_id = data.get('parent_category_id', None)
     name = data.get('name', None)
