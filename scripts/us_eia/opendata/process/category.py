@@ -13,6 +13,11 @@
 # limitations under the License.
 """Helper functions to deal with category hierarchy."""
 
+_DCID_PREFIX = 'dcid:'
+
+def _strip_dcid_prefix(id):
+    return id[len(_DCID_PREFIX):] if id.startswith(_DCID_PREFIX) else id
+
 
 def _svg_dcid(dataset, cat_id):
     return f'dcid:eia/g/{dataset}.{cat_id}'
@@ -63,6 +68,8 @@ def generate_svg_nodes(dataset, dataset_name, svg_info):
 
     # Category SVGs
     for svg, (parent, name) in svg_info.items():
+        svg = _strip_dcid_prefix(svg)
+        parent = _strip_dcid_prefix(parent)
         pvs = [
             f'Node: dcid:{svg}', 'typeOf: dcs:StatVarGroup', f'name: "{name}"',
             f'specializationOf: dcid:{parent}'
