@@ -15,6 +15,7 @@
 
 _DCID_PREFIX = 'dcid:'
 
+
 def _strip_dcid_prefix(id):
     return id[len(_DCID_PREFIX):] if id.startswith(_DCID_PREFIX) else id
 

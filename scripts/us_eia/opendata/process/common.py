@@ -215,8 +215,8 @@ def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info):
     return nodes
 
 
-def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf, out_tmcf,
-            extract_place_statvar_fn, generate_statvar_schema_fn):
+def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
+            out_tmcf, extract_place_statvar_fn, generate_statvar_schema_fn):
     """Process an EIA dataset and produce outputs using lambda functions.
 
     Args:
@@ -355,7 +355,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf, ou
     category.trim_area_categories(svg_info, counters)
 
     with open(out_sv_mcf, 'w') as out_fp:
-        nodes = _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info)
+        nodes = _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map,
+                                   svg_info)
 
         out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')
