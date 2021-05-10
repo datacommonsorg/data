@@ -108,7 +108,6 @@ def extract_place_statvar(series_id, counters):
 _MEASURE_MAP = {
     'ASH_CONTENT': [
         'Average_AshContent_Coal_For',
-        'AverageQuality_AshContent_ReceivedCoal',
         'populationType: dcs:Coal',
         'measuredProperty: dcs:ashContent',
         'statType: dcs:meanValue',
