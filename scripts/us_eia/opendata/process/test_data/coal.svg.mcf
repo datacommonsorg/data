@@ -3,7 +3,7 @@ typeOf: dcs:StatVarGroup
 name: "Other Data (eia.gov)"
 specializationOf: dcid:dc/g/Energy
 
-Node: dcid:dcid:eia/g/COAL.717234
+Node: dcid:eia/g/COAL.717234
 typeOf: dcs:StatVarGroup
 name: "Coal"
 specializationOf: dcid:eia/g/Root
