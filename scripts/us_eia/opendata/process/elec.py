@@ -258,7 +258,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         sv_map: Map from stat-var to its MCF content.
         counters: Map updated with error statistics.
 
-    Returns True if schema was generated, False otherwise.
+    Returns schema-ful stat-var ID if schema was generated, None otherwise.
     """
 
     # ELEC.{MEASURE}.{FUEL_TYPE}-{PRODUCER_SECTOR}.{PERIOD}
@@ -274,7 +274,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         m = re.match(r"^ELEC\.([^.]+)\.([^.]+)\.([AQM])$", raw_sv)
         if not m:
             counters['error_unparsable_raw_statvar'] += 1
-            return False
+            return None
         measure = m.group(1)
         consuming_sector = m.group(2)
         period = m.group(3)
@@ -285,7 +285,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     measure_pvs = _MEASURE_MAP.get(measure, None)
     if not measure_pvs:
         counters['error_missing_measure'] += 1
-        return False
+        return None
 
     sv_id_parts = [common.PERIOD_MAP[period], measure_pvs[0]]
     sv_pvs = measure_pvs[1:] + [
@@ -300,7 +300,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
             logging.error('Missing energy source: %s from %s', fuel_type,
                           raw_sv)
             counters['error_missing_fuel_type'] += 1
-            return False
+            return None
         if es != 'ALL':
             sv_id_parts.append(es)
             if '_Fuel_' in measure_pvs[0]:
@@ -312,7 +312,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         ps = _PRODUCING_SECTOR.get(producing_sector, None)
         if not ps:
             counters['error_missing_producing_sector'] += 1
-            return False
+            return None
         if ps != 'ALL':
             sv_id_parts.append(ps)
             if '_Fuel_' in measure_pvs[0]:
@@ -324,20 +324,20 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         cs = _CONSUMING_SECTOR.get(consuming_sector, None)
         if not cs:
             counters['error_missing_consuming_sector'] += 1
-            return False
+            return None
         if cs != 'ALL':
             sv_id_parts.append(cs)
             sv_pvs.append(f'consumingSector: dcs:{cs}')
 
     if measure not in _UNIT_MAP:
         counters['error_missing_unit'] += 1
-        return False
+        return None
     (unit, sfactor) = _UNIT_MAP[measure]
 
     if unit == _PLACEHOLDER_FUEL_UNIT:
         if not fuel_type:
             counters['error_missing_unit_fuel_type'] += 1
-            return False
+            return None
         unit = _get_fuel_unit(fuel_type)
         if measure == 'COST':
             unit = 'USDollarPer' + unit
@@ -359,4 +359,4 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         node = f'Node: dcid:{sv_id}'
         sv_map[sv_id] = '\n'.join([node] + sv_pvs)
 
-    return True
+    return sv_id

@@ -4,7 +4,7 @@ populationType: schema:Thing
 measuredProperty: dcid:eia/NG.N9140_2.A
 statType: dcs:measuredValue
 name: "Natural Gas Total Consumption, Annual"
-memberOf: dcid:dcid:eia/g/NG.460678
+memberOf: dcid:eia/g/NG.460678
 
 Node: dcid:eia/NG.N9140_2.M
 typeOf: dcs:StatisticalVariable
@@ -12,4 +12,4 @@ populationType: schema:Thing
 measuredProperty: dcid:eia/NG.N9140_2.M
 statType: dcs:measuredValue
 name: "Natural Gas Total Consumption, Monthly"
-memberOf: dcid:dcid:eia/g/NG.460678
+memberOf: dcid:eia/g/NG.460678

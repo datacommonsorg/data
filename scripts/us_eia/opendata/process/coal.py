@@ -181,7 +181,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         sv_map: Map from stat-var to its MCF content.
         counters: Map updated with error statistics.
 
-    Returns True if schema was generated, False otherwise.
+    Returns schema-ful stat-var ID if schema was generated, None otherwise.
     """
     counters['generate_statvar_schema'] += 1
 
@@ -193,14 +193,14 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         period = m.group(3)
     else:
         counters['error_unparsable_raw_statvar'] += 1
-        return False
+        return None
     counters[f'measure-{measure}'] += 1
 
     # Get popType and mprop based on measure.
     measure_pvs = _MEASURE_MAP.get(measure, None)
     if not measure_pvs:
         counters[f'error_missing_measure-{measure}'] += 1
-        return False
+        return None
 
     sv_id_parts = [common.PERIOD_MAP[period], measure_pvs[0]]
     sv_pvs = measure_pvs[1:] + [
@@ -213,13 +213,13 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         cs = _CONSUMING_SECTOR.get(consuming_sector, None)
         if not cs:
             counters[f'error_missing_consuming_sector-{consumingSector}'] += 1
-            return False
+            return None
         sv_id_parts.append(cs)
         sv_pvs.append(f'consumingSector: dcs:{cs}')
 
     if measure not in _UNIT_MAP:
         counters[f'error_missing_unit-{measure}'] += 1
-        return False
+        return None
     (unit, sfactor) = _UNIT_MAP[measure]
 
     sv_id = '_'.join(sv_id_parts)
@@ -239,4 +239,4 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         node = f'Node: dcid:{sv_id}'
         sv_map[sv_id] = '\n'.join([node] + sv_pvs)
 
-    return True
+    return sv_id
