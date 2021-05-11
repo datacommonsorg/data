@@ -102,7 +102,7 @@ def _parse_date(d):
 
 
 def _sv_dcid(raw_sv):
-    return 'dcid:eia/' + raw_sv
+    return 'eia/' + raw_sv
 
 
 def _enumify(in_str):
@@ -153,10 +153,10 @@ def _generate_default_statvar(raw_sv, sv_map):
         return
     raw_sv_id = _sv_dcid(raw_sv)
     sv_map[raw_sv] = '\n'.join([
-        f"Node: {raw_sv_id}",
+        f"Node: dcid:{raw_sv_id}",
         'typeOf: dcs:StatisticalVariable',
         'populationType: schema:Thing',
-        f"measuredProperty: {raw_sv_id}",
+        f"measuredProperty: dcid:{raw_sv_id}",
         'statType: dcs:measuredValue',
     ])
 
@@ -182,11 +182,15 @@ def cleanup_name(name):
 
     # Replace ':' with ','.
     name = name.replace(':', ',')
-    # Trim double ','.  Happens when place name appears in the middle, like
+
+    # Trim repeated ','s and have correct spaces. This can happen from:
     # "Stocks : California : electric utility : quarterly"
-    name = re.sub(r"[ ]*,[ ]*,[ ]*", ', ', name)
-    # Clean-up any spaces around single ','.
-    name = re.sub(r"[ ]*,[ ]*", ', ', name)
+    parts = []
+    for part in name.split(','):
+        part = part.strip()
+        if part:
+            parts.append(part)
+    name = ', '.join(parts)
 
     return name
 
@@ -352,7 +356,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
                 rows.append({
                     'place': f"dcid:{dc_place}",
-                    'stat_var': _sv_dcid(raw_sv),
+                    'stat_var': f"dcid:{_sv_dcid(raw_sv)}",
                     'date': dt,
                     'value': v,
                     'eia_series_id': series_id,
