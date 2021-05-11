@@ -171,6 +171,25 @@ _NAME_PATTERNS['US'] = [
 _NAME_PATTERNS['USA'] = _NAME_PATTERNS['US']
 
 
+def cleanup_name(name):
+    # Trim unnecessary whitespaces.
+    name = name.strip()
+    name = re.sub(r" +", ' ', name)
+
+    # Trim any leading/trailing ',' or ':'.  To handle names like "Measure
+    # Foo, California"
+    name = re.sub(r"([,: ]+$|^[,: ]+)", '', name)
+
+    # Replace ':' with ','.
+    name = name.replace(':', ',')
+    # Trim repeated ','.
+    name = re.sub(r",[ ]*,[ ]*", ', ', name)
+    # Clean-up spaces around ','.
+    name = re.sub(r"[ ]*,[ ]*", ', ', name)
+
+    return name
+
+
 def _maybe_parse_name(name, raw_place, is_us_place, counters):
     """Parsing stat-var name given a series name containing a place."""
 
@@ -185,33 +204,31 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
         # Replace only the pattern, otherwise retaining the case of the name.
         name = name[0:idx] + name[idx + len(p):]
 
-        # Trim unnecessary whitespaces.
-        name = name.strip()
-        name = re.sub(r" +", ' ', name)
-
-        # Trim any leading/trailing ',' or ':'.  To handle names like "Measure
-        # Foo, California"
-        name = re.sub(r"([,:]+$|^[,:]+)", '', name)
-
-        return name
+        return cleanup_name(name)
 
     # If we didn't find the name for the place, likely the name doesn't include
     # the place (e.g., TOTAL).
     counters['info_unmodified_names'] += 1
-    return name
+    return cleanup_name(name)
 
 
-def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info):
+def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map,
+                       sv_schemaful2raw, svg_info):
     nodes = []
-    for k, v in sv_map.items():
-        pvs = [v]
-        if k in sv_name_map:
-            pvs.append(f'name: "{sv_name_map[k]}"')
-        if k in sv_membership_map:
-            for svg in sorted(sv_membership_map[k]):
+    for sv, mcf in sv_map.items():
+        raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
+
+        pvs = [mcf]
+        if raw_sv in sv_name_map:
+            pvs.append(f'name: "{sv_name_map[raw_sv]}"')
+
+        if raw_sv in sv_membership_map:
+            for svg in sorted(sv_membership_map[raw_sv]):
                 if svg in svg_info:
                     pvs.append(f'memberOf: dcid:{svg}')
+
         nodes.append('\n'.join(pvs))
+
     return nodes
 
 
@@ -251,6 +268,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
     svg_info = {}
     # Raw SV -> set(SVGs)
     sv_membership_map = {}
+    # Schema-ful SV -> Raw SV
+    sv_schemaful2raw = {}
     counters = defaultdict(lambda: 0)
     sv_map = {}
     sv_name_map = {}
@@ -342,12 +361,16 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 counters['error_empty_series'] += 1
                 continue
 
-            if (generate_statvar_schema_fn and
-                    generate_statvar_schema_fn(raw_sv, rows, sv_map, counters)):
-                counters['info_schemaful_series'] += 1
+            schema_sv = None
+            if generate_statvar_schema_fn:
+              schema_sv = generate_statvar_schema_fn(raw_sv, rows, sv_map,
+                                                     counters)
+            if schema_sv:
+              sv_schemaful2raw[schema_sv] = raw_sv
+              counters['info_schemaful_series'] += 1
             else:
-                counters['info_schemaless_series'] += 1
-                _generate_default_statvar(raw_sv, sv_map)
+              counters['info_schemaless_series'] += 1
+              _generate_default_statvar(raw_sv, sv_map)
 
             csvwriter.writerows(rows)
             counters['info_rows_output'] += len(rows)
@@ -356,7 +379,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
     with open(out_sv_mcf, 'w') as out_fp:
         nodes = _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map,
-                                   svg_info)
+                                   sv_schemaful2raw, svg_info)
 
         out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')

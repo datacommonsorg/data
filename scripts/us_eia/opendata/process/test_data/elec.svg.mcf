@@ -1,0 +1,24 @@
+Node: dcid:eia/g/Root
+typeOf: dcs:StatVarGroup
+name: "Other Data (eia.gov)"
+specializationOf: dcid:dc/g/Energy
+
+Node: dcid:dcid:eia/g/ELEC.0
+typeOf: dcs:StatVarGroup
+name: "Electricity"
+specializationOf: dcid:eia/g/Root
+
+Node: dcid:eia/g/ELEC.1002
+typeOf: dcs:StatVarGroup
+name: "Residential"
+specializationOf: dcid:eia/g/ELEC.38
+
+Node: dcid:eia/g/ELEC.38
+typeOf: dcs:StatVarGroup
+name: "Retail sales of electricity"
+specializationOf: dcid:eia/g/ELEC.0
+
+Node: dcid:eia/g/ELEC.1718688
+typeOf: dcs:StatVarGroup
+name: "All solar"
+specializationOf: dcid:eia/g/ELEC.0

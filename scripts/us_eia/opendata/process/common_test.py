@@ -99,5 +99,14 @@ class TestProcess(unittest.TestCase):
             self.assertEqual(exp_tmcf_data, act_tmcf_data)
 
 
+    def test_cleanup(self):
+      self.assertEqual('Natural Gas Gross Withdrawals, Monthly',
+                       common.cleanup_name(
+                           ' Natural Gas Gross Withdrawals, Monthly'))
+      self.assertEqual('Stocks, electric utility, quarterly',
+                       common.cleanup_name(
+                           ' : Stocks : : electric utility : quarterly : '))
+
+
 if __name__ == '__main__':
     unittest.main()
