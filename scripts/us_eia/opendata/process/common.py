@@ -259,8 +259,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                                 rows: list of dicts representing rows with _COLUMNS as keys
                                 sv-map: map from stat-var-id to MCF content
                                 counters: map of counters with frequency
-                            Returns True if schema was generated, False otherwise.
-                                On True, rows and sv-map are also updated.
+                            Returns schema-ful stat-var ID if schema was generated,
+                                None otherwise. If stat-var is returned,
+                                rows and sv-map are also updated.
     """
     assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
 
