@@ -182,9 +182,10 @@ def cleanup_name(name):
 
     # Replace ':' with ','.
     name = name.replace(':', ',')
-    # Trim repeated ','.
-    name = re.sub(r",[ ]*,[ ]*", ', ', name)
-    # Clean-up spaces around ','.
+    # Trim double ','.  Happens when place name appears in the middle, like
+    # "Stocks : California : electric utility : quarterly"
+    name = re.sub(r"[ ]*,[ ]*,[ ]*", ', ', name)
+    # Clean-up any spaces around single ','.
     name = re.sub(r"[ ]*,[ ]*", ', ', name)
 
     return name
