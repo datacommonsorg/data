@@ -213,8 +213,8 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
     return cleanup_name(name)
 
 
-def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map,
-                       sv_schemaful2raw, svg_info):
+def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, sv_schemaful2raw,
+                       svg_info):
     nodes = []
     for sv, mcf in sv_map.items():
         raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
@@ -365,14 +365,14 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
             schema_sv = None
             if generate_statvar_schema_fn:
-              schema_sv = generate_statvar_schema_fn(raw_sv, rows, sv_map,
-                                                     counters)
+                schema_sv = generate_statvar_schema_fn(raw_sv, rows, sv_map,
+                                                       counters)
             if schema_sv:
-              sv_schemaful2raw[schema_sv] = raw_sv
-              counters['info_schemaful_series'] += 1
+                sv_schemaful2raw[schema_sv] = raw_sv
+                counters['info_schemaful_series'] += 1
             else:
-              counters['info_schemaless_series'] += 1
-              _generate_default_statvar(raw_sv, sv_map)
+                counters['info_schemaless_series'] += 1
+                _generate_default_statvar(raw_sv, sv_map)
 
             csvwriter.writerows(rows)
             counters['info_rows_output'] += len(rows)
