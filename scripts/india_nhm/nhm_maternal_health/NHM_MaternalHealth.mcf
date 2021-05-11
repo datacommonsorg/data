@@ -1,12 +1,12 @@
 Node: dcid:indianNHM/Count_PregnancyEvent
-description: "Estimated number of annual pregnancies #"
+description: "Estimated number of annual pregnancies"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_PregnancyEvent
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
-description: "Total number of pregnant women registered for anc"
+description: "Total number of pregnant women registered for Antenatal Care"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare

@@ -89,7 +89,7 @@ measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
 observationPeriod: "P1Y"
-value: C:{dataset_name}->indianNHM/{statvar}
+value: C:{dataset_name}->{statvar}
 """
 
 MCF_NODES = """Node: dcid:indianNHM/{statvar}

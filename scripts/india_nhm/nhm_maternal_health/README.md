@@ -22,8 +22,8 @@ The cleaned csv has the following columns:
 - State: State
 - isoCode: isoCode
 - Date: Date
-- Count_PregnancyEvent: Estimated Number of Annual Pregnancies #
-- Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women Registered for ANC
+- Count_PregnancyEvent: Estimated Number of Annual Pregnancies
+- Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women Registered for Antenatal Care
 - Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of Pregnant women registered within first trimester
 - Count_ChildDeliveryEvent: Total reported deliveries
 - Count_ChildDeliveryEvent_InAnInstitution: Institutional deliveries (Public Insts.+Pvt. Insts.)
