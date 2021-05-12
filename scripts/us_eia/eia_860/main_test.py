@@ -20,8 +20,7 @@ import unittest
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
-    os.path.dirname(
-    os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
 from us_eia.eia_860 import utility, power_plant
 

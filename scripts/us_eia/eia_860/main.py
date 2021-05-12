@@ -27,8 +27,7 @@ import zipfile
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
-    os.path.dirname(
-    os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
 from us_eia.eia_860 import utility, power_plant
 
@@ -36,7 +35,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('skip_import', False, 'Skips downloading data.')
 
 _URL = 'https://www.eia.gov/electricity/data/eia860/xls/eia8602019.zip'
-_RAW_PATH = 'test_data'
+_RAW_PATH = 'tmp_raw_data'
 
 _DATASETS = [
     # processor, input-excel, expected-csv

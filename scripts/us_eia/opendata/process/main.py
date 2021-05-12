@@ -20,11 +20,11 @@ from absl import flags
 from absl import app
 
 # Allows the following module imports to work when running as a script
-# relative to scripts/us_eia
+# relative to scripts/
 sys.path.append(
     os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__))))))
+        os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
 
 FLAGS = flags.FLAGS
