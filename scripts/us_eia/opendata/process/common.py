@@ -29,6 +29,7 @@ import category
 
 PERIOD_MAP = {
     'A': 'Annual',
+    'D': 'Daily',
     'M': 'Monthly',
     'Q': 'Quarterly',
 }
@@ -117,6 +118,8 @@ def _print_counters(counters):
 
 
 def _find_dc_place(raw_place, is_us_place, counters):
+    if raw_place.startswith('dcid:'):
+        return raw_place
     if is_us_place:
         if raw_place == 'US' or raw_place == 'USA':
             return 'country/USA'
@@ -251,7 +254,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
         out_tmcf: Output TMCF file
 
         extract_place_statvar_fn:
-                            Required function to extract raw place and stat-var from series_id
+                            Required function to extract raw place and stat-var from series_id.
+                            raw-place-id could be a code that is resolvable
+                            by _find_dc_place, or a specified dcid (prefixed with 'dcid:').
                             Args:
                                 series_id: series_id field from EIA
                                 counters: map of counters with frequency

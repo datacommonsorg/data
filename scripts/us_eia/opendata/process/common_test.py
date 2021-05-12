@@ -22,6 +22,7 @@ import common
 import elec
 import intl
 import ng
+import nuclear
 import pet
 import seds
 import total
@@ -38,6 +39,8 @@ _TEST_CASES = [
      elec.generate_statvar_schema),
     ('INTL', 'Internationa', 'intl', intl.extract_place_statvar, None),
     ('NG', 'Natural Gas', 'ng', ng.extract_place_statvar, None),
+    ('NUC_STATUS', 'Nuclear Outages', 'nuc_status',
+     nuclear.extract_place_statvar, nuclear.generate_statvar_schema),
     ('PET', 'Petroleum', 'pet', pet.extract_place_statvar, None),
     ('SEDS', 'State Energy', 'seds', seds.extract_place_statvar, None),
     ('TOTAL', 'Total Energy', 'total', total.extract_place_statvar, None),
