@@ -28,6 +28,6 @@ populationType: dcs:EnergyGeneration
 energySource: dcs:Nuclear
 measuredProperty: dcs:outage
 statType: dcs:measuredValue
-measurementDenominator: dcs:Capacity_Nuclear_EnergyGeneration
+measurementDenominator: dcs:Daily_Capacity_Nuclear_ForEnergyGeneration
 measurementQualifier: dcs:Daily
 memberOf: dcid:eia/g/NUC_STATUS.2890005
