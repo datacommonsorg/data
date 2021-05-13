@@ -118,7 +118,7 @@ def _print_counters(counters):
 
 
 def _find_dc_place(raw_place, is_us_place, counters):
-    if raw_place.startswith('dcid:'):
+    if raw_place.startswith('eia/'):
         return raw_place
     if is_us_place:
         if raw_place == 'US' or raw_place == 'USA':
@@ -220,7 +220,7 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
     return cleanup_name(name)
 
 
-def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, sv_schemaful2raw,
+def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map, sv_schemaful2raw,
                        svg_info):
     nodes = []
     for sv, mcf in sv_map.items():
@@ -230,6 +230,8 @@ def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, sv_schemaful2raw,
         if raw_sv in sv_name_map:
             pvs.append(f'name: "{sv_name_map[raw_sv]}"')
 
+        if dataset == 'NUC_STATUS':
+            pvs.append(f'memberOf: dcid:{category.NUC_STATUS_ROOT}')
         if raw_sv in sv_membership_map:
             for svg in sorted(sv_membership_map[raw_sv]):
                 if svg in svg_info:
@@ -256,7 +258,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
         extract_place_statvar_fn:
                             Required function to extract raw place and stat-var from series_id.
                             raw-place-id could be a code that is resolvable
-                            by _find_dc_place, or a specified dcid (prefixed with 'dcid:').
+                            by _find_dc_place, or a specified place (prefixed with 'eia/').
                             Args:
                                 series_id: series_id field from EIA
                                 counters: map of counters with frequency
@@ -389,7 +391,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
     category.trim_area_categories(svg_info, counters)
 
     with open(out_sv_mcf, 'w') as out_fp:
-        nodes = _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map,
+        nodes = _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map,
                                    sv_schemaful2raw, svg_info)
 
         out_fp.write('\n\n'.join(nodes))

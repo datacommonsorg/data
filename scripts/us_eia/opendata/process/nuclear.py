@@ -32,7 +32,7 @@ def extract_place_statvar(series_id, counters):
         measure = m.group(1)
         place = m.group(2)
         if not place == 'US':
-            place = f'dcid:eia/pp/{m.group(2)}'
+            place = f'eia/pp/{m.group(2)}'
         period = m.group(3)
         sv_id = f'NUC_STATUS.{measure}.{period}'
         return (place, sv_id, True)
@@ -49,7 +49,7 @@ _SV_MAP = {
         'Daily_Capacity_Nuclear_ForEnergyGeneration',
         'typeOf: dcid:StatisticalVariable',
         'name: "Nuclear Power Plant generating capacity"',
-        'description: \\""Nuclear generating capacity for a power plant. See https://www.eia.gov/nuclear/outages/.  For more information visit, Nuclear Regulatory Commission\'s Power Reactor Status Report\\""',
+        'description: "Nuclear generating capacity for a power plant. See https://www.eia.gov/nuclear/outages/.  For more information visit, Nuclear Regulatory Commission\'s Power Reactor Status Report"',
         'populationType: dcs:EnergyGeneration',
         'energySource: dcs:Nuclear',
         'measuredProperty: dcs:capacity',
@@ -61,7 +61,7 @@ _SV_MAP = {
         'Daily_CapacityOutage_Nuclear_ForEnergyGeneration',
         'typeOf: dcid:StatisticalVariable',
         'name: "Nuclear Power Plant generating capacity outage."',
-        'description: \\""Nuclear generating capacity outage at a power plant. See https://www.eia.gov/nuclear/outages/.  For more information visit, Nuclear Regulatory Commission\'s Power Reactor Status Report\\""',
+        'description: "Nuclear generating capacity outage at a power plant. See https://www.eia.gov/nuclear/outages/.  For more information visit, Nuclear Regulatory Commission\'s Power Reactor Status Report"',
         'populationType: dcs:EnergyGeneration',
         'energySource: dcs:Nuclear',
         'measuredProperty: dcs:outage',
@@ -72,7 +72,7 @@ _SV_MAP = {
     'OUT_PCT': [
         'Daily_CapacityOutage_Nuclear_ForEnergyGeneration_AsAFractionOf_Capacity',
         'typeOf: dcid:StatisticalVariable',
-        'description: \\""Nuclear generating capacity percent outage at a power plant. See https://www.eia.gov/nuclear/outages/.  For more information visit, Nuclear Regulatory Commission\'s Power Reactor Status Report\\""',
+        'description: "Nuclear generating capacity percent outage at a power plant. See https://www.eia.gov/nuclear/outages/.  For more information visit, Nuclear Regulatory Commission\'s Power Reactor Status Report"',
         'populationType: dcs:EnergyGeneration',
         'energySource: dcs:Nuclear',
         'measuredProperty: dcs:outage',

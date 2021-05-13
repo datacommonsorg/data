@@ -7,8 +7,3 @@ Node: dcid:eia/g/NUC_STATUS.2889994
 typeOf: dcs:StatVarGroup
 name: "Nuclear Outages"
 specializationOf: dcid:eia/g/Root
-
-Node: dcid:eia/g/NUC_STATUS.2890005
-typeOf: dcs:StatVarGroup
-name: "Columbia Generating Station"
-specializationOf: dcid:eia/g/NUC_STATUS.2889994
