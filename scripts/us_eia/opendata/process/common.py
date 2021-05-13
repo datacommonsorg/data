@@ -220,8 +220,8 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
     return cleanup_name(name)
 
 
-def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map, sv_schemaful2raw,
-                       svg_info):
+def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map,
+                       sv_schemaful2raw, svg_info):
     nodes = []
     for sv, mcf in sv_map.items():
         raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
@@ -391,8 +391,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
     category.trim_area_categories(svg_info, counters)
 
     with open(out_sv_mcf, 'w') as out_fp:
-        nodes = _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map,
-                                   sv_schemaful2raw, svg_info)
+        nodes = _generate_sv_nodes(dataset, sv_map, sv_name_map,
+                                   sv_membership_map, sv_schemaful2raw,
+                                   svg_info)
 
         out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')

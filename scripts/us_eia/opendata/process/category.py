@@ -17,6 +17,7 @@ _DCID_PREFIX = 'dcid:'
 
 NUC_STATUS_ROOT = 'eia/g/NUC_STATUS.2889994'
 
+
 def _svg_dcid(dataset, cat_id):
     return f'eia/g/{dataset}.{cat_id}'
 
