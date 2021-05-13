@@ -15,6 +15,8 @@
 
 _DCID_PREFIX = 'dcid:'
 
+NUC_STATUS_ROOT = 'eia/g/NUC_STATUS.2889994'
+
 
 def _svg_dcid(dataset, cat_id):
     return f'eia/g/{dataset}.{cat_id}'
@@ -44,7 +46,7 @@ def generate_svg_nodes(dataset, dataset_name, svg_info):
 
     nodes = []
 
-    if not svg_info:
+    if not svg_info and not dataset == 'NUC_STATUS':
         return nodes
 
     # EIA SVG root
@@ -56,6 +58,8 @@ def generate_svg_nodes(dataset, dataset_name, svg_info):
 
     # EIA Dataset root
     dataset_root = _get_dataset_root(svg_info)
+    if dataset == 'NUC_STATUS':
+        dataset_root = NUC_STATUS_ROOT
     if dataset_root:
         pvs = [
             f'Node: dcid:{dataset_root}', 'typeOf: dcs:StatVarGroup',
@@ -85,6 +89,10 @@ def trim_area_categories(svg_info, counters):
     On success, updates svg_info.
     """
     dataset_root = _get_dataset_root(svg_info)
+    if 'NUC_STATUS' in dataset_root:
+        # NUC_STATUS is a flat hierarchy of 3 SV's.
+        svg_info.clear()
+        return
 
     # Delete "area" categories.
     for svg, (_, name) in list(svg_info.items()):

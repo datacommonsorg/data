@@ -22,6 +22,7 @@ import common
 import elec
 import intl
 import ng
+import nuclear
 import pet
 import seds
 import total
@@ -38,6 +39,8 @@ _DATASETS = {
     'INTL': ('Energy Overview (INTL)', intl.extract_place_statvar, None),
     'PET': ('Petroleum', pet.extract_place_statvar, None),
     'NG': ('Natural Gas', ng.extract_place_statvar, None),
+    'NUC_STATUS': ('Nuclear Outages', nuclear.extract_place_statvar,
+                   nuclear.generate_statvar_schema),
     'SEDS': ('Consumption, Production, Prices and Expenditure (SEDS)',
              seds.extract_place_statvar, None),
     'TOTAL': ('Energy Overview (TOTAL)', total.extract_place_statvar, None)
