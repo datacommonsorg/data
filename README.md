@@ -172,6 +172,9 @@ Or to run all tests and checks:
 ./run_tests.sh -a
 ```
 
+> NOTE: Please ensure that all tests are runnable from the test script, e.g.
+> modules should be relative to the root of the repo.
+
 #### Disabling style checks
 
 Occasionally, one has to disable style checking or formatting for particular
