@@ -14,18 +14,17 @@
 """Test for common.py"""
 
 import os
+import sys
 import tempfile
 import unittest
 
-import coal
-import common
-import elec
-import intl
-import ng
-import nuclear
-import pet
-import seds
-import total
+# Allows the following module imports to work when running as a script
+# relative to scripts/
+sys.path.append(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

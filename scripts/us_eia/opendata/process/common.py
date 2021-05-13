@@ -25,7 +25,7 @@ path.insert(1, '../../../../')
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.name_to_alpha2 as name_to_alpha2
 
-import category
+from . import category
 
 PERIOD_MAP = {
     'A': 'Annual',
