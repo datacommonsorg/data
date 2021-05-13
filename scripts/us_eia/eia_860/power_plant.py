@@ -27,7 +27,7 @@ import pandas.api.types as pd_types
 import numpy as np
 import typing
 
-import utils
+from us_eia.eia_860 import utils
 
 IMPORT_COLUMNS = [
     'UtilityId',
