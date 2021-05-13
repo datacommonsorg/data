@@ -18,6 +18,14 @@ takes a raw stat-var and generates a fully defined stat-var for it.
 
 ### Datasets
 
+* **COAL:** Coal dataset has state and country-level information about coal
+  quality, consumption and production.
+
+  Dataset includes some full schema support (2), but mostly (1).
+
+  Ignored for now are coal-mine level information, as well as
+  import/export/shipment data involving 2 places.
+
 * **ELEC:** Electricity dataset has country, state-level and plant-level
   information on electricity generation, consumption, sales etc by energy source
   and “sectors” (like residential, commercial, etc.).
@@ -32,6 +40,10 @@ takes a raw stat-var and generates a fully defined stat-var for it.
 
 * **NG:** Natural gas dataset has country and state-level data. This dataset
   only has preliminary support, aka (1).
+
+* **NUC_STATUS:** Nuclear outage dataset has nuclear-plant and national data about
+  Nuclear energy generation capacity and planned outages.  Dataset has full
+  schema support (2).
 
 * **PET:** Petroleum dataset has country and state-level data. This dataset only
   has preliminary support, aka (1).

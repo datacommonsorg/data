@@ -7,8 +7,8 @@ fi
 
 set -x
 if [[ "$1" == "all" ]]; then
-  python3 ../download_bulk.py --datasets=COAL,ELEC,NG,PET,INTL,SEDS,TOTAL --data_dir=tmp_raw_data
-  for d in COAL ELEC NG PET INTL SEDS TOTAL; do
+  python3 ../download_bulk.py --datasets=COAL,ELEC,NG,NUC_STATUS,PET,INTL,SEDS,TOTAL --data_dir=tmp_raw_data
+  for d in COAL ELEC NG NUC_STATUS PET INTL SEDS TOTAL; do
     python3 main.py --dataset="$d" --data_dir=tmp_raw_data/"$d"
   done
 else
