@@ -57,7 +57,7 @@ goID, residID, psimiID
 
 #### Schema MCFs
 
-[CoumpoundSchema.mcf](https://github.com/datacommonsorg/data/blob/master/schema/CompoundSchema.mcf) 
+[CoumpoundSchema.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/chemical_compound.mcf) 
 
 #### Cleaned Data
 
