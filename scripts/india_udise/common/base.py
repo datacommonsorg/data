@@ -372,6 +372,7 @@ class UDISEIndiaDataLoaderBase:
 
     def download(self):
         self._download_geography()
+        self._load_geography()
         self._download_data()
 
     def process(self):
