@@ -108,8 +108,7 @@ class UDISEIndiaDataLoaderBase:
 
     def _get_states_json_data(self):
         if path.exists(self.states_json_data_file_path):
-            # Data already exists, no need to download
-            print("States JSON already exists")
+            print("States JSON already exists.")
         else:
             data = {"extensionCall": "GET_STATE", "condition": " "}
             self._pause()
@@ -122,12 +121,11 @@ class UDISEIndiaDataLoaderBase:
                 json_data_file.write(json.dumps(response.json()))
                 json_data_file.close()
             else:
-                raise Exception("Couldn't download states JSON data")
+                raise Exception("Couldn't download states JSON data.")
 
     def _get_districts_json_data(self):
         if path.exists(self.districts_json_data_file_path):
-            # Data already exists, no need to download
-            print("Districts JSON already exists")
+            print("Districts JSON already exists.")
         else:
             data = {
                 "extensionCall": "GET_DISTRICT",
@@ -143,12 +141,11 @@ class UDISEIndiaDataLoaderBase:
                 json_data_file.write(json.dumps(response.json()))
                 json_data_file.close()
             else:
-                raise Exception("Couldn't download districts JSON data")
+                raise Exception("Couldn't download districts JSON data.")
 
     def _get_blocks_json_data(self):
         if path.exists(self.blocks_json_data_file_path):
-            # Data already exists, no need to download
-            print("Blocks JSON already exists")
+            print("Blocks JSON already exists.")
         else:
             data = {
                 "extensionCall": "GET_BLOCK",
@@ -164,7 +161,7 @@ class UDISEIndiaDataLoaderBase:
                 json_data_file.write(json.dumps(response.json()))
                 json_data_file.close()
             else:
-                raise Exception("Couldn't download blocks JSON data")
+                raise Exception("Couldn't download blocks JSON data.")
 
     def _get_base_name(self, data_row):
         # This function is overridden in the child class
@@ -322,7 +319,6 @@ class UDISEIndiaDataLoaderBase:
                 "schemaName": "national",
                 "reportType": "T"
             }
-            # Wait before calling
             print(data)
             self._pause()
             response = requests.post(DATA_API_URL,
@@ -334,7 +330,7 @@ class UDISEIndiaDataLoaderBase:
                 json_data_file.write(json.dumps(response.json()))
                 json_data_file.close()
             else:
-                raise Exception("Couldn't download data")
+                raise Exception("Couldn't download data.")
 
     def _download_geography(self):
         self._get_states_json_data()
@@ -358,19 +354,15 @@ class UDISEIndiaDataLoaderBase:
         for year in self.years:
             for state in self.states:
                 self._get_data(year, udise_state_code=state["udise_state_code"])
-                break
             for district in self.districts:
                 self._get_data(year,
                                udise_state_code=district["udise_state_code"],
                                udise_dist_code=district["udise_district_code"])
-                break
-
             for block in self.blocks:
                 self._get_data(year,
                                udise_state_code=block["udise_state_code"],
                                udise_dist_code=block["udise_dist_code"],
                                udise_block_code=block["udise_block_code"])
-                break
 
     def _save_mcf(self):
         if path.exists(self.mcf_file_path) is False:
@@ -378,10 +370,12 @@ class UDISEIndiaDataLoaderBase:
                 with open(self.mcf_file_path, 'a', newline='') as f_out:
                     f_out.write(stat_var)
 
-    def process(self):
+    def download(self):
         self._download_geography()
-        self._load_geography()
         self._download_data()
+
+    def process(self):
+        self._load_geography()
 
         for year in self.years:
             for state in self.states:

@@ -16,6 +16,7 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
+import sys
 import json
 import csv
 import pandas as pd
@@ -68,12 +69,15 @@ ATTRIBUTE_MAPPING = {
 class UDISESchoolDropoutRate(UDISEIndiaDataLoaderBase):
 
     def _get_base_name(self, data_row):
-        # This function is overridden in the child class
         name = "DropoutRate_Student"
         return name
 
 
 if __name__ == "__main__":
+    action = "download"
+    if len(sys.argv) > 0:
+        action = sys.argv[0]
+
     years = ["2014-15", "2015-16", "2016-17", "2017-18", "2018-19"]
     api_report_code = "117"
     data_folder = os.path.join(module_dir_, "data")
@@ -91,4 +95,9 @@ if __name__ == "__main__":
                                   mcf_file_path,
                                   years,
                                   attribute_mapping=ATTRIBUTE_MAPPING)
-    base.process()
+    if action == "download":
+        base.download()
+    elif action == "process":
+        base.process()
+    else:
+        print("Valid actions are donwload and process.")
