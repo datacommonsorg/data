@@ -75,9 +75,8 @@ class UDISESchoolDropoutRate(UDISEIndiaDataLoaderBase):
 
 if __name__ == "__main__":
     action = "download"
-    if len(sys.argv) > 0:
-        action = sys.argv[0]
-
+    if len(sys.argv) > 1:
+        action = sys.argv[1]
     years = ["2014-15", "2015-16", "2016-17", "2017-18", "2018-19"]
     api_report_code = "117"
     data_folder = os.path.join(module_dir_, "data")
@@ -100,4 +99,4 @@ if __name__ == "__main__":
     elif action == "process":
         base.process()
     else:
-        print("Valid actions are donwload and process.")
+        print("Valid actions are download and process.")

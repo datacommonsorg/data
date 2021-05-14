@@ -69,7 +69,7 @@ measuredProperty: dcs:{measuredProperty}
 """
 CSV_HEADERS = [
     "Period", "LocationCode", "LocationType", "SocialCategory", "Gender",
-    "SchoolLevel", "StatisticalVariable"
+    "SchoolLevel", "StatisticalVariable", "Value"
 ]
 
 module_dir_ = os.path.dirname(__file__)
@@ -381,19 +381,16 @@ class UDISEIndiaDataLoaderBase:
             for state in self.states:
                 self._process_data(year,
                                    udise_state_code=state["udise_state_code"])
-                break
             for district in self.districts:
                 self._process_data(
                     year,
                     udise_state_code=district["udise_state_code"],
                     udise_dist_code=district["udise_district_code"])
-                break
 
             for block in self.blocks:
                 self._process_data(year,
                                    udise_state_code=block["udise_state_code"],
                                    udise_dist_code=block["udise_dist_code"],
                                    udise_block_code=block["udise_block_code"])
-                break
 
         self._save_mcf()

@@ -27,25 +27,6 @@ module_dir_ = os.path.dirname(__file__)
 class TestPreprocess(unittest.TestCase):
 
     def test_create_csv(self):
-
-        # for test_case_files in [(result_states_csv_file_path,
-        #                          expected_states_csv_file_path),
-        #                         (result_districts_csv_data_file_path,
-        #                          expected_districts_csv_data_file_path),
-        #                         (result_blocks_csv_data_file_path,
-        #                          expected_blocks_csv_data_file_path)]:
-
-        #     result_file = open(test_case_files[0])
-        #     result_data = result_file.read()
-        #     result_file.close()
-
-        #     expected_file = open(test_case_files[1])
-        #     expected_data = expected_file.read()
-        #     expected_file.close()
-
-        #     os.remove(test_case_files[0])
-        #     self.assertEqual(expected_data, result_data)
-
         years = ["2014-15", "2015-16", "2016-17", "2017-18", "2018-19"]
         api_report_code = "117"
         data_folder = os.path.join(module_dir_, "test_data")
@@ -59,10 +40,7 @@ class TestPreprocess(unittest.TestCase):
                                      "UDISEIndia_School_Dropout_Rate.csv")
         mcf_file_path = os.path.join(data_folder,
                                      "UDISEIndia_School_Dropout_Rate.mcf")
-        # if path.exists(csv_file_path):
-        #     os.remove(csv_file_path)
-        # if path.exists(mcf_file_path):
-        #     os.remove(mcf_file_path)
+
         base = UDISESchoolDropoutRate(api_report_code,
                                       data_folder,
                                       csv_file_path,
