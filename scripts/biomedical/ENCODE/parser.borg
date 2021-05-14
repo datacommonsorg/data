@@ -1,0 +1,18 @@
+job encode_parser {
+  name = 'encode_parser_aux_' + real_username()
+  runtime = { cell = 'jc' }
+  permissions = { user = 'datcom' }
+  package_binary = 'bin/parser'
+  packages {
+    package bin {
+      blaze_label = '//datacommons/mcf/encode:encode_parser_mpm'
+    }
+  }
+  args = {
+    parallel = 1
+    parse_auxiliary = true
+  }
+  requirements = { autopilot = true }
+  appclass = { type = 'LATENCY_TOLERANT_PRIMARY' }
+  scheduling = { priority = 119 }
+}
