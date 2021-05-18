@@ -11,15 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Classes and methods to import geography data from Unified District Information System for Education (UDISE)"""
+"""Base Classes and methods to import any dataset from Unified District Information System for Education (UDISE) report system."""
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
+import re
 import json
 import csv
-import pandas as pd
-import numpy as np
 import requests
 import time
 from os import path
@@ -51,14 +50,6 @@ SOCIAL_CATEGORY_MAPPING = {
     "Overall": ""
 }
 
-YEAR_PERIOD_MAPPING = {
-    "2014-15": "2015-03",
-    "2015-16": "2016-03",
-    "2016-17": "2017-03",
-    "2017-18": "2018-03",
-    "2018-19": "2019-03"
-}
-
 TEMPLATE_STAT_VAR = """Node: dcid:{name}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{populationType}
@@ -76,6 +67,24 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class UDISEIndiaDataLoaderBase:
+    """Base Classes and methods to import any dataset from Unified District Information System for Education (UDISE) report system.
+    
+    Attributes:
+        api_report_code (TYPE): This is the report code as per UDISE
+        attribute_mapping (TYPE): This is mapping of downloaded JSON data atributes to constraints
+        blocks (list): List of UDISE blocks
+        blocks_json_data_file_path (TYPE): Path to blocks geo data file
+        csv_file_path (TYPE): Path to store generated CSV file
+        csv_headers (TYPE): List of column names for the generated CSV file
+        data_folder (TYPE):  Path to folder to store the downloaded data files
+        districts (list): List of UDISE districts
+        districts_json_data_file_path (TYPE): Path to districts geo data file
+        mcf (dict): For storing the variables as they are generated
+        mcf_file_path (TYPE): Path to store generated mcf file
+        states (list): List of UDISE states
+        states_json_data_file_path (TYPE):  Path to states geo data file
+        years (TYPE): Years for which the download will run
+    """
 
     def __init__(self,
                  api_report_code,
@@ -85,6 +94,7 @@ class UDISEIndiaDataLoaderBase:
                  years,
                  attribute_mapping,
                  csv_headers=CSV_HEADERS):
+
         self.api_report_code = api_report_code
         self.data_folder = data_folder
         self.states_json_data_file_path = os.path.join(data_folder,
@@ -102,6 +112,10 @@ class UDISEIndiaDataLoaderBase:
         self.districts = []
         self.blocks = []
         self.mcf = {}
+
+    def _year_to_period(self, year):
+        assert re.match(r'^[0-9]{4}-[0-9]{2}$', year), year
+        return year[:2] + year[-2:] + '-03'
 
     def _pause(self):
         time.sleep(1)
@@ -174,7 +188,6 @@ class UDISEIndiaDataLoaderBase:
         return constraints
 
     def _create_variable(self, data_row):
-
         constraints_array = self._get_base_constraints(data_row)
         name_array = []
         name_array.append(self._get_base_name(data_row))
@@ -229,6 +242,18 @@ class UDISEIndiaDataLoaderBase:
                       udise_state_code,
                       udise_dist_code="none",
                       udise_block_code="none"):
+        """This will process the data by loading the data file for a given
+        year, udise_state_code, udise_dist_code and udise_block_code.
+        
+        Args:
+            year (TYPE): Education year of the report
+            udise_state_code (TYPE): UDISE state code
+            udise_dist_code (str, optional): UDISE district code
+            udise_block_code (str, optional): UDISE block code
+        
+        Raises:
+            Exception: Throws an exception if the data file doesn't exist
+        """
         data_file = os.path.join(
             self.data_folder,
             DATA_FILE_NAME_FORMAT.format(year=year,
@@ -248,7 +273,7 @@ class UDISEIndiaDataLoaderBase:
                     if column in row:
                         data_row = {}
                         data_row["Value"] = row[column]
-                        data_row["Period"] = YEAR_PERIOD_MAPPING[year]
+                        data_row["Period"] = self._year_to_period(year)
                         data_row["LocationCode"] = row["location_code"]
                         data_row["LocationType"] = row["rpt_type"]
 
@@ -278,7 +303,7 @@ class UDISEIndiaDataLoaderBase:
                 writer.writerows(data_rows)
                 file_object.close()
         else:
-            print("Data file: {data_file} doesn't exist".format(
+            raise Exception("Data file: {data_file} doesn't exist".format(
                 data_file=data_file))
 
     def _get_data(self,
@@ -286,6 +311,21 @@ class UDISEIndiaDataLoaderBase:
                   udise_state_code,
                   udise_dist_code="none",
                   udise_block_code="none"):
+        """This will download the data for a given year, 
+        udise_state_code, udise_dist_code and udise_block_code.
+        
+        Once downloaded it saves the data to the file system. If the
+        file already exists then it doesn't download the data.
+
+        Args:
+            year (TYPE): Education year of the report
+            udise_state_code (TYPE): UDISE state code
+            udise_dist_code (str, optional): UDISE district code
+            udise_block_code (str, optional): UDISE block code
+        
+        Raises:
+            Exception: Throws an exception if it can't download the data.
+        """
         data_file = os.path.join(
             self.data_folder,
             DATA_FILE_NAME_FORMAT.format(year=year,
@@ -373,6 +413,9 @@ class UDISEIndiaDataLoaderBase:
     def download(self):
         self._download_geography()
         self._load_geography()
+        # Geography needs to be downloaded and loaded first as
+        # dowload_data depends on it to download the data
+        # for each geography (state, district and block)
         self._download_data()
 
     def process(self):

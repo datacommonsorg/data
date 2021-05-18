@@ -27,7 +27,7 @@ module_dir_ = os.path.dirname(__file__)
 class TestPreprocess(unittest.TestCase):
 
     def test_create_csv(self):
-        years = ["2014-15", "2015-16", "2016-17", "2017-18", "2018-19"]
+        years = ["2017-18", "2018-19"]
         api_report_code = "117"
         data_folder = os.path.join(module_dir_, "test_data")
 
@@ -47,6 +47,7 @@ class TestPreprocess(unittest.TestCase):
                                       mcf_file_path,
                                       years,
                                       attribute_mapping=ATTRIBUTE_MAPPING)
+        base.download()
         base.process()
 
         expected_csv_file = open(expected_csv_file_path)

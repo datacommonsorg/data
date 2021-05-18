@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Classes and methods to import geography data from Unified District Information System for Education (UDISE)"""
+"""Classes and methods to import School Dropout Rate data from Unified District Information System for Education (UDISE)"""
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
@@ -86,8 +86,8 @@ if __name__ == "__main__":
                                  "UDISEIndia_School_Dropout_Rate.mcf")
     if path.exists(csv_file_path):
         os.remove(csv_file_path)
-    if path.exists(mcf_file_path):
-        os.remove(mcf_file_path)
+    # if path.exists(mcf_file_path):
+    #     os.remove(mcf_file_path)
     base = UDISESchoolDropoutRate(api_report_code,
                                   data_folder,
                                   csv_file_path,
