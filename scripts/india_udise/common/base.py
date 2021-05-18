@@ -266,6 +266,8 @@ class UDISEIndiaDataLoaderBase:
         if path.exists(data_file):
             json_data_file = open(data_file, "r")
             json_data = json.loads(json_data_file.read())
+            json_data_file.close()
+
             rows = json_data["rowValue"]
             for row in rows:
                 for column in valid_columns:
@@ -381,14 +383,17 @@ class UDISEIndiaDataLoaderBase:
         states_json_data_file = open(self.states_json_data_file_path, "r")
         states_json_data = json.loads(states_json_data_file.read())
         self.states = states_json_data["rowValue"]
+        states_json_data_file.close()
 
         districts_json_data_file = open(self.districts_json_data_file_path, "r")
         districts_json_data = json.loads(districts_json_data_file.read())
         self.districts = districts_json_data["rowValue"]
+        districts_json_data_file.close()
 
         blocks_json_data_file = open(self.blocks_json_data_file_path, "r")
         blocks_json_data = json.loads(blocks_json_data_file.read())
         self.blocks = blocks_json_data["rowValue"]
+        blocks_json_data_file.close()
 
     def _download_data(self):
         for year in self.years:
