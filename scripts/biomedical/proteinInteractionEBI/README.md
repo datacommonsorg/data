@@ -61,7 +61,7 @@ goID, residID, psimiID
 
 #### Cleaned Data
 
-[BioOntologySchemaEnum.mcf](https://github.com/datacommonsorg/schema/new/main/biomedical_schema/BioOntologySchemaEnum.mcf) 
+[MolecularInteractionsControlledVocabularyEnum.mcf](https://github.com/datacommonsorg/schema/new/main/biomedical_schema/MolecularInteractionsControlledVocabularyEnum.mcf) 
 
 #### Scripts 
 
