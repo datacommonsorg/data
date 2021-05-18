@@ -1,0 +1,9 @@
+{"series_id":"NG.N9140US2.A","name":"U.S. Natural Gas Total Consumption, Annual","units":"Million Cubic Feet","f":"A","unitsshort":"MMcf","description":"U.S. Natural Gas Total Consumption","copyright":"None","source":"EIA, U.S. Energy Information Administration","iso3166":"USA","geography":"USA","start":"1949","end":"2020","last_updated":"2021-04-30T12:17:32-04:00","data":[["2020",30482049],["2019",31099061]]}
+{"series_id":"NG.N9140US2.M","name":"U.S. Natural Gas Total Consumption, Monthly","units":"Million Cubic Feet","f":"M","unitsshort":"MMcf","description":"U.S. Natural Gas Total Consumption","copyright":"None","source":"EIA, U.S. Energy Information Administration","iso3166":"USA","geography":"USA","start":"200101","end":"202102","last_updated":"2021-04-30T12:17:32-04:00","data":[["202102",3036972],["202101",3286266]]}
+{"category_id":"714805","parent_category_id":"714804","name":"Summary","notes":"","childseries":[]}
+{"category_id":"456172","parent_category_id":"714805","name":"Natural Gas Annual Supply & Disposition by State","notes":"","childseries":[]}
+{"category_id":"457052","parent_category_id":"714805","name":"Natural Gas Summary","notes":"","childseries":[]}
+{"category_id":"457053","parent_category_id":"457052","name":"by Area","notes":"","childseries":[]}
+{"category_id":"457054","parent_category_id":"457053","name":"U.S.","notes":"","childseries":["NG.N9140US2.M","NG.N9140US2.A"]}
+{"category_id":"459123","parent_category_id":"457052","name":"by Data Series","notes":"","childseries":[]}
+{"category_id":"460678","parent_category_id":"459123","name":"Total Consumption","notes":"","childseries":["NG.N9140US2.M","NG.N9140US2.A"]}
