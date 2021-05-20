@@ -77,14 +77,19 @@ An overview of the ENCODE Consortium Project can be found [here](https://www.enc
 To batch download the data from ENCODE Consortium run `scraper.py`.
 
 ```bash
-python3 format_NCBI_Chromosome.py file_input file_output genome species_abrv
+python3 scraper.py
 ```
-Description: Converts an NIH NCBI assembly reports file on a genome assembly into a mcf output file populating "GenomeAssembly", "GenomeAssemblyUnit", and "Chromosome" entities.
+Then run `parser.py` to convert downloaded data into MCF format.
 
-@file_input		path to the input NCBI file on a genome assembly
-@file_output	path to the output mcf file to write the reformatted data
-@genome 		the shorthand name for the genome assembly represented in the file (e.g. hg38, mm10)
-@species_abrv	the abbreviation used by Data Commons to represent species dcid (e.g. hs, mm)
+```bash
+python3 parser.py
+```
+
+Finally, run `schema.py` to auto generate the schema for the downloaded ENCODE data.
+
+```bash
+python3 schema.py
+```
 
 #### Post-Processing Steps
 
