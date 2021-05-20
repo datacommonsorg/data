@@ -438,7 +438,7 @@ def fix_context_json(path):
 
 # ------------------------------- MAIN FUNCTION -------------------------------
 
-INPUT_PATH = 'input/batch_2/search_results.json'
+INPUT_PATH = 'search_results.json'
 OUTPUT_ROOT = 'output/data'
 
 # Auxiliary file paths
