@@ -61,7 +61,7 @@ goID, residID, psimiID
 
 #### Cleaned Data
 
-[MolecularInteractionsControlledVocabularyEnum.mcf](https://github.com/datacommonsorg/schema/new/main/biomedical_schema/MolecularInteractionsControlledVocabularyEnum.mcf) 
+[molecular_interaction_type_enum.mcf](https://github.com/datacommonsorg/schema/new/main/biomedical_schema/molecular_interaction_type_enum.mcf) 
 
 #### Scripts 
 
