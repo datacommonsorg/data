@@ -12,44 +12,46 @@
 2. [About the Import](#about-the-import)
     1. [Artifacts](#artifacts)
     2. [Import Procedure](#import-procedure)
-    3. [Test](#test)
 
 
 ## About the Dataset
 
 ### Download URL
 
-Assembly report data can be downloaded from the National Center for Biotechnology Information (NCBI) Assembly database using their [Genomes FTP Site](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/). Thus far the latest assembly versions for human genomes hg19 ([GRCh37](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.13_GRCh37/GCF_000001405.13_GRCh37_assembly_report.txt)) and hg38 ([GRCh38](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.26_GRCh38/GCF_000001405.26_GRCh38_assembly_report.txt)) have been downloaded. The data is roughly in tab delimited format (see [Notes and Caveats](#notes-and-caveats) for additional information on formatting).
+Files were [downloaded](https://www.encodeproject.org/help/getting-started/) from the ENCODE Consortium using their batch download feature.
 
 ### Database Overview
 
-This directory stores the script used to import assembly report datasets from NCBI Assembly database. Assembly contains information on genome assemblies including their structure, collection of completely sequenced chromosomes, and unaligned sequence fragments More on the nature of the data contained in Assembly can be found on their [website](https://www.ncbi.nlm.nih.gov/assembly/help/).
+"The Encyclopedia of DNA Elements (ENCODE) Consortium is an ongoing international collaboration of research groups funded by the National Human Genome Research Institute (NHGRI). The goal of ENCODE is to build a comprehensive parts list of functional elements in the human genome, including elements that act at the protein and RNA levels, and regulatory elements that control cells and circumstances in which a gene is active.
+
+ENCODE investigators employ a variety of assays and methods to identify functional elements. The discovery and annotation of gene elements is accomplished primarily by sequencing a diverse range of RNA sources, comparative genomics, integrative bioinformatic methods, and human curation. Regulatory elements are typically investigated through DNA hypersensitivity assays, assays of DNA methylation, and immunoprecipitation (IP) of proteins that interact with DNA and RNA, i.e., modified histones, transcription factors, chromatin regulators, and RNA-binding proteins, followed by sequencing." - [The ENCODE Consortium](https://www.encodeproject.org/help/project-overview/).
+
+We have downloaded all bed (epigenomics data peak calls) and rpkm (transcritomics data) files available as of June 2019. This includes files across all species, biosamples, and assays. We also contain all of the meta data on the ENCODE Experiment, Award, Biosample, Biosample Type, Library, and Lab. Each line of a file was made into it's own node, which allows for querying of the data by genomic coordinates.
 
 ### Schema Overview
 
-The schema representing data from NCBI assembly reports is represented in [encode.mcf](https://github.com/datacommonsorg/schema/tree/main/biomedical_schema/encode.mcf)
+The schema representing data from NCBI assembly reports is represented in [encode.mcf](https://github.com/datacommonsorg/schema/tree/main/biomedical_schema/encode.mcf).
 
-The assembly reports contains instances of entities "GenomeAssembly", "GenomeAssemblyUnit", and "Chromosome". All of these are connected to entity "Species" by property "ofSpecies". "GenomeAssemblyUnit" and "Chromosome" are connected to "GenomeAssembly" entities with property "inGenomeAssembly". "Chromosome" is connected to "GenomeAssemblyUnit" entities by property "inGenomeAssemblyUnit". Finally, genome sequences of type "Chromosome" that are unlocalized scaffolds link to associated "Chromosome" entity by property "inChromosome".
+The ENCODE datasets contain instances of entities "BedLine", "EncodeAward", "EncodeBedFile", "EncodeBiosample", "EncodeBiosampleType", "EncodeExperiment", "EncodeLibrary", and "Lab". "BedLine" is a subclass of "EncodeBedFile" and is connected by property "fromBedFile". "EncodeAward", "EncodeBedFile", "EncodeBiosample", "EncodeBiosampleType", "EncodeExperiment", and "EncodeLibrary" are all subclasses of "EncodeObject". "EncodeBedFile" is connected to "EncodeExperiment" by property "fromExperiment". "EncodeBiosample" is connected to "EncodeAward", "EncodeBiosample", and "EncodeBiosampleType" by properties "award", "partOf", and "biosampleOntology" respectively. "EncodeExperiment" is also connected to "EncodeBiosampleType" by the property "biosampleOntology".
 
-For a "GenomeAssembly" entity whether the assembly is a full genome representation or if RefSeq and GenBank assemblies are identical are represented as boolean values of the properties "isGenomeRepresentationFull" and "isRefSeqGenBankAssembliesIdentical" respectively. Properties representing "genomeAssemblyType", "genomeAssemblyReleaseType", "genomeAssemblyLevel", and "refSeqCategory" are represented by ennummerations "GenomeAssemblyTypeEunum", "GenomeAssemblyReleaseTypeEnum", "GenomeAssemblyLevelEnum", and "RefSeqCategoryEnum" respectively. "GenomeAssembly" has additional text value properties "ncbiTaxonID", "ncbiBioProject", "submitter", "date", "description", "ncbiAssemblyName", "genBankAssemblyAccession", and "refSeqAssemblyAccession".
+Although, not directly linked, "EncodeExperiment" award property "award" contains the url to the Encode award as it's value. Likewise, "Lab" contains url links to Encode Awards by property "awards". Although, not linked directly "EncodeBedFile", "EncodeBiosample", "EncodeExperiment", and "EncodeLibrary" all contain information on the "Lab" that generated the data. Finally, "EncodeLibrary" contains information on "EncodeBiosample" through property "biosample" although it's not linked directly.
 
-For "GenomeAssemblyUnit" text value properties include "genBankAccession" and "refSeqAccession".
-
-For "Chromosome" text value properties include "ncbiDNASequenceName", "genBankAccession", and "refSeqAccession". It also includes "Quantity" value "chromosomeSize" with unit "BasePairs". The property "dnaSequenceRole" property is represented by enummeration "dnaSequenceRoleEnum".
+Additional properties and information on the ENCODE schema can be found in the file [encode.mcf](https://github.com/datacommonsorg/schema/tree/main/biomedical_schema/encode.mcf).
 
 ### Notes and Caveats
 
-Assembly includes viral, prokaryotic, eukaryotic genomes including historical genome assemblies. However, here we only include a subset of the most recent versions of major genome assemblies. The raw data of additional genome assembly reports can be found in [this directory](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/).
-
-Please also note that while assembly report files are loosely tab delimited some data is separated by ":" plus whitespace from its property name. When using the script `format_NCBI_Chromosome.py` to generate data mcfs from the assembly report files of new genomes or new versions of a genome, we recommed reviewing the output mcf for changes in spacing or data separation to ensure that no changes had been made in data formatting of the input file, which effects the output file formatting.
+We have not processed or normalized these files in anyway beyond the initial processing done by the ENCODE Consortium in accordance with their [pipelines](https://www.encodeproject.org/pipelines/). These files are presented the same as what is available for download from the ENCODE Consortium. Also, Google internal libraries were used for extracting the data from ENCODE and those scripts will not be able to run without substituting for publicly available libraries.
 
 ### License
 
-This data is from an NIH National Library of Medicine (NLM) genome unrestricted-access data repository and made accessible under the [NIH Genomic Data Sharing (GDS) Policy](https://osp.od.nih.gov/scientific-sharing/genomic-data-sharing/) and the [NLM Accessibility policy](https://www.nlm.nih.gov/accessibility.html). Additional information on "NCBI Website and Data Usage Policies" can be found [here](https://www.ncbi.nlm.nih.gov/home/about/policies/).
+This data is from the ENCODE Consortium and whose [data use agreement](https://www.encodeproject.org/help/citing-encode/) allows free data use with no restrictions. The ENCODE Consortium requests that researchers that use ENCODE data in publications or presentations [cite](https://www.encodeproject.org/help/citing-encode/) ENCODE in the following ways:
+1. Cite the Consortium's most recent publications
+2. Acknowledge the ENCODE Consortium and the ENCODE production laboratory(s) generating the particular dataset(s)
+3. Reference the ENCODE accession numbers of the datasets (ENCSR...) and files (ENCFF...) used
 
 ### Dataset Documentation and Relevant Links
 
-The database original documentation is accessible on [NCBI Assembly](https://www.ncbi.nlm.nih.gov/assembly/help/). NCBI assembly reports can be accessed using [FTP Download](https://ftp.ncbi.nlm.nih.gov/genomes/all/).
+An overview of the ENCODE Consortium Project can be found [here](https://www.encodeproject.org/help/project-overview/). 
 
 ## About the import
 
@@ -84,11 +86,4 @@ Description: Converts an NIH NCBI assembly reports file on a genome assembly int
 Review output file for issues in incorrect parsing of whitespace for examples of each entity generated "GenomeAssembly", "GenomeAssemblyUnit", and "Chromosome". If incorrect parsing occurs, update `format_NCBI_Chromosome.py` to ensure correct parsing of properties and thier associated values for each entity.
 
 We also recommend checking the input file for new properties or ennumeration types present in the input file. If this is the case, please update the schema GenomeAnnotationEnum.mcf for updates to ennumeration entities and GenomeAnnotation.mcf for updates in properties. Schema changes are manually curated and not script generated for this script. Please note that an error will be thrown for new properties of "GenomeAssembly", but not "GenomeAssemblyUnit" or "Chromosome". There will be a custom error message for new enummeration entities in the input file. Please update the list of current enummeration values for each Enummeration class in `format_NCBI_Chromosome.py` in addition to adding them to the schema to ensure that the message is only thrown when an enummeration type is not currently in the schema.
-
-### Test
-
-To practice generating a data mcf from an assembly report dataset, in this case hg38 (GRCh38) run:
-
-```bash
-python format_NCBI_Chromosome.py GCF_000001405.39_GRCh38.p13_assembly_report.txt hg38_genome_assembly.mcf hg38 hs
 ```
