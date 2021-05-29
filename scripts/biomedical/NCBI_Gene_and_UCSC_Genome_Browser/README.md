@@ -37,7 +37,7 @@ The assembly reports contains instances of entities "Gene" and "RNATranscript". 
 NCBI Gene includes gene annotations for viral, prokaryotic, and eukaryotic genomes. However, here we only include a the gene annotations from a subset of species. The raw data of additional gene annotations can be found in [this directory](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/). In addition, UCSC Genome Browser contains an aggregate of publicly avaialble information primarily for human and mouse genomes, epigenomes, and transcriptomes. We include a susbest of the information avaialbe on the UCSC Genome Browser here pretaining to the gene and transcript annotation for select species. Additional data is available for download on their [browser](https://genome.ucsc.edu/goldenPath/help/ftp.html).
 
 ### License
-
+This data is from an NIH National Library of Medicine (NLM) genome unrestricted-access data repository and made accessible under the NIH Genomic Data Sharing (GDS) Policy and the NLM Accessibility policy. Additional information on "NCBI Website and Data Usage Policies" can be found here.
 
 As detailed by UCSC Genome Browser's [terms of use](https://genome.ucsc.edu/conditions.html), data from the UCSC Genome Browser is "free for academic, nonprofit, and personal use. A [license](https://genome.ucsc.edu/license/) is required for commercial download and installation of most Genome Browser binaries and source code, with some exceptions as detailed on the [license](https://genome.ucsc.edu/license/) page." UCSC Genome Browser states [how to cite](https://genome.ucsc.edu/cite.html) use of their data for journal publication.
 
