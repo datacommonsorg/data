@@ -12,15 +12,17 @@
 2. [About the Import](#about-the-import)
     1. [Artifacts](#artifacts)
     2. [Import Procedure](#import-procedure)
+    3. [Test](#Test)
 
 
 ## About the Dataset
 
 ### Download URL
 
-Gene data can be downloaded from the National Center for Biotechnology Information (NCBI) Assembly database using their [Gene FTP Site](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/). Thus far genes for the following species have been downloaded [Homo sapiens](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz), [Mus musculus](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Mus_musculus.gene_info.gz), [Danio rerio](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Non-mammalian_vertebrates/Danio_rerio.gene_info.gz), [Gallus gallus](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Non-mammalian_vertebrates/Gallus_gallus.gene_info.gz), [Xenopus laevis](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Non-mammalian_vertebrates/Xenopus_laevis.gene_info.gz), [Caenorhabditis elegans](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Invertebrates/Caenorhabditis_elegans.gene_info.gz), [Drosophila melanogaster](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Invertebrates/Drosophila_melanogaster.gene_info.gz), and [Saccharomyces cerevisiae](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Fungi/Saccharomyces_cerevisiae.gene_info.gz). These species were selected because they are common model organisms in biomedical research. The version included on Biomedical Data Commons is the Feburary 19, 2020 release.
+Gene data can be downloaded from the National Center for Biotechnology Information (NCBI) Gene database using their [Gene FTP Site](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/). Thus far genes for the following species have been downloaded [Homo sapiens](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz), [Mus musculus](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Mus_musculus.gene_info.gz), [Danio rerio](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Non-mammalian_vertebrates/Danio_rerio.gene_info.gz), [Gallus gallus](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Non-mammalian_vertebrates/Gallus_gallus.gene_info.gz), [Xenopus laevis](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Non-mammalian_vertebrates/Xenopus_laevis.gene_info.gz), [Caenorhabditis elegans](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Invertebrates/Caenorhabditis_elegans.gene_info.gz), [Drosophila melanogaster](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Invertebrates/Drosophila_melanogaster.gene_info.gz), and [Saccharomyces cerevisiae](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Fungi/Saccharomyces_cerevisiae.gene_info.gz). These species were selected because they are common model organisms in biomedical research. The version included on Biomedical Data Commons is the Feburary 19, 2020 release.
 
-Additional data on genes and RNA transcripts were downloaded for the two most recent genomoe assemblies for each species from the [UCSC Genome Browser](https://genome.ucsc.edu/). This was done by downloading the knownGene table using the [Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables) on August 13, 2019. The following genome assemblies and builds were downloaded: galGal5 (dbSNP Build 147), hg19 (dbSNP Build 151), hg38 (dbSNP Build 151), mm9 (dbSNP Build 128), and mm10 (dbSNP Build 142). The data for all of these datasets are in tab delimited format.
+
+Additional data on genes and RNA transcripts were downloaded for select genome assembly releases from the [UCSC Genome Browser](https://genome.ucsc.edu/). This was done by downloading the `RefSeq All (ncbiRefSeq)` tables under `Gene and Gene Predictions` group for the two most recent genome assemblies of the 8 species listed above using the [Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables) on August 13, 2019. This included ce10, ce11, danRer10, danRer11, dm3, dm6, galGal5, galGal6, hg19, hg38, mm9, mm10, sacCer3, and xenLae2. In addition, the  `RefSeq All (ncbiRefSeq)` tables under `Gene and Gene Predictions` group were downloaded for the two most recent genome assembly releases from all mammalian species listed above.
 
 ### Database Overview
 
@@ -36,7 +38,7 @@ The assembly reports contains instances of entities "Gene" and "RNATranscript". 
 
 NCBI Gene includes gene annotations for viral, prokaryotic, and eukaryotic genomes. However, here we only include a the gene annotations from a subset of species. The raw data of additional gene annotations can be found in [this directory](https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/). In addition, UCSC Genome Browser contains an aggregate of publicly avaialble information primarily for human and mouse genomes, epigenomes, and transcriptomes. We include a susbest of the information avaialbe on the UCSC Genome Browser here pretaining to the gene and transcript annotation for select species. Additional data is available for download on their [browser](https://genome.ucsc.edu/goldenPath/help/ftp.html).
 
-The formatting of the NCBI Gene files are different for mammal and non-mammal species. To account for these differences in the data processing seperate python notebooks were developed to handle mammal and non-mammal species. The appropriate notebook used to convert the data to mcf format should be determined by the species of interest.
+Information from UCSC Genome Browser were only included for mammal species. To account for the differences in the data processing seperate python notebooks were developed to handle mammal and non-mammal species. The appropriate notebook used to convert the data to mcf format should be determined by the species of interest.
 
 ### License
 This data is from an NIH National Library of Medicine (NLM) genome unrestricted-access data repository and made accessible under the [NIH Genomic Data Sharing (GDS) Policy](https://osp.od.nih.gov/scientific-sharing/genomic-data-sharing/) and the [NLM Accessibility Policy](https://www.nlm.nih.gov/accessibility.html). Additional information on "NCBI Website and Data Usage Policies" can be found [here](https://www.ncbi.nlm.nih.gov/home/about/policies/).
@@ -57,11 +59,27 @@ The database original documentation is accessible on [NCBI Assembly](https://www
 `format_non_mammal_gene_coordinates.ipynb`
 
 #### Files
+Test mammalian notebook files:
+`Homo_sapiens.gene_info`
+`hg38_gene_coordinates.txt`
+`hg38_known_canonical_gene_coordinates.txt`
 
-`GCF_000001405.39_GRCh38.p13_assembly_report.txt`
+Test non-mammalian notebook files:
+ `Caenorhabditis_elegans.gene_info`
+ `ce10_gene_coordinates.txt`
 
 ### Import Procedure
 
+#### Pre-Processing Steps
+
+Store the NCBI Gene and UCSC Genome Files being imported in the same directory. The NCBI file should be formatted as `<Species>.gene_info`, for example `Homo_sapiens.gene_info`. The UCSC Genome Broswer RefSeq All (ncbiRefSeq) table files should be formatted as `<genome_assembly>_gene_coordinates.txt` for example `hg38_gene_coordinates.txt`. If applicable, the UCSC Genome Browser knownGene tables should be formatted as `<genome_assembly>_known_canonical_gene_coordinates.txt`, for example `hg38_known_canonical_gene_coordinates.txt`.
+
 #### Processing Steps 
 
-To generate the data mcf from NCBI Gene reports and genome and transcriptome annotation from UCSC Genome Browser download and run the python notebooks. All of the files for import should be stored in the same directory and the filepath should be specified in the cell 3 `path` variable. The following variables should also be specified in cell 3 in accordance with the species and genome assembly being imported: `assembly`, `species`, and `species_abv`.
+To generate the data mcf from NCBI Gene reports and genome and transcriptome annotation from UCSC Genome Browser download and run the python notebooks. All of the files for import should be stored in the same directory and the filepath should be specified in the cell 3 `path` variable. The following variables should also be specified in cell 3 in accordance with the species and genome assembly being imported: `assembly`, `species`, and `species_abv`. The species abreviation is the same as the prefix to the genome assembly notation (e.g. 'ce' for Caenorhabditis elegans, 'mm' for mus musculus, etc) except for Homo sapiens for which the abbreviation is 'hg'.
+
+The output of the python notebooks is two mcf files. One contains data from providence NCBI Gene and the other contains data from providence UCSC Genome Browser. These .mcf files are now formatted and ready for import into the Biomedical Data Commons knowledge grpah.
+
+### Test
+
+Download and place all of the files in the same directory. Set the 'path' variable in cell 3 of the appropriate notebook to be the file path to the directory in which the files are contained. Run the jupyter notebook. The end result should be two .mcf files: one containing information from NCBI Gene and the other from the UCSC Genome Browser.
