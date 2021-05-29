@@ -60,13 +60,13 @@ The database original documentation is accessible on [NCBI Assembly](https://www
 
 #### Files
 Test mammalian notebook files:
-`Homo_sapiens.gene_info`
-`hg38_gene_coordinates.txt`
-`hg38_known_canonical_gene_coordinates.txt`
+`Homo_sapiens.gene_info.gz`
+`hg38_gene_coordinates.txt.gz`
+`hg38_known_canonical_gene_coordinates.txt.gz`
 
 Test non-mammalian notebook files:
- `Caenorhabditis_elegans.gene_info`
- `ce10_gene_coordinates.txt`
+ `Caenorhabditis_elegans.gene_info.gz`
+ `ce10_gene_coordinates.txt.gz`
 
 ### Import Procedure
 
@@ -82,4 +82,8 @@ The output of the python notebooks is two mcf files. One contains data from prov
 
 ### Test
 
-Download and place all of the files in the same directory. Set the 'path' variable in cell 3 of the appropriate notebook to be the file path to the directory in which the files are contained. Run the jupyter notebook. The end result should be two .mcf files: one containing information from NCBI Gene and the other from the UCSC Genome Browser.
+Download and place all of the files in the same directory. Navigate to that directory and unzip the files by running:
+
+`gunzip ./*.gz`
+
+Set the 'path' variable in cell 3 of the appropriate notebook to be the file path to the directory in which the files are contained. Run the jupyter notebook. The end result should be two .mcf files: one containing information from NCBI Gene and the other from the UCSC Genome Browser.
