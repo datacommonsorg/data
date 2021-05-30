@@ -35,8 +35,8 @@ from google3.pipeline.flume.py import runner
 LOGGER = logging.getLogger('encode_scraper')
 
 # Where all schema files are stored
-INPUT_PATTERN = '/cns/jv-d/home/datcom/encode_project/schema/*'
-OUTPUT_PATH = '/cns/jv-d/home/datcom/encode_project/final_schema.txt'
+INPUT_PATTERN = '/tmp/encode/schema/*'
+OUTPUT_PATH = '/tmp/encode/final_schema.txt'
 
 # Flags
 FLAGS = flags.FLAGS
