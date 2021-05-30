@@ -1,5 +1,3 @@
-load("//tools/build_defs/pkg:google.bzl", "pkg_binary_with_runfiles")
-
 py_binary(
     name = "parser",
     srcs = [
@@ -26,11 +24,6 @@ py_binary(
         "//pipeline/flume/py:runner",
         "//third_party/py/apache_beam",
     ],
-)
-
-pkg_binary_with_runfiles(
-    name = "parser_pkg",
-    binary = ":parser",
 )
 
 genmpm(
