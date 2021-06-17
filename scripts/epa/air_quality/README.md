@@ -3,7 +3,7 @@ This directory imports [Outdoor Air Quality Data](https://aqs.epa.gov/aqsweb/doc
 
 The script generates:
 - `EPA_AirQuality.csv`
-- `EPE_AirQuality.tmcf`
+- `EPA_AirQuality.tmcf`
 
 and relies on the following StatisticalVariables:
 - Mean_Concentration_AirPollutant_Ozone
@@ -35,7 +35,7 @@ and relies on the following StatisticalVariables:
     - M10 24-hour 2006
 
 ## Generating Artifacts 
-To generate `EPA_AirQuality.csv` and `EPE_AirQuality.tmcf`, run: 
+To generate `EPA_AirQuality.csv` and `EPA_AirQuality.tmcf`, run: 
 ```
 python3 generate_tmcf.py
 ```
