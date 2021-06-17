@@ -66,7 +66,7 @@ Node: E:EPA_AirQuality->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{var}
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E{site}
+observationAbout: E:EPA_daily_air_quality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->{var}
 unit: C:EPA_AirQuality->Units_{pollutant}
@@ -74,7 +74,7 @@ unit: C:EPA_AirQuality->Units_{pollutant}
 
 # Template MCF for Air Quality Site
 TEMPLATE_MCF_AIR_QUALITY_SITE = '''
-Node: E:EPA_AirQuality->E{index}
+Node: E:EPA_AirQuality->E0
 typeOf: dcs:AirQualitySite
 dcid: C:EPA_AirQuality->Site_Number
 name: C:EPA_AirQuality->Site_Name
@@ -129,17 +129,12 @@ def writeCSV(csv_file_path, d):
 
 def writeTMCF(tmcf_file_path):
     with open(tmcf_file_path, 'w') as f_out:   
-        i = 0
-        f_out.write(
-            TEMPLATE_MCF_AIR_QUALITY_SITE.format_map({
-                'index': 0,
-            }))    
+        f_out.write(TEMPLATE_MCF_AIR_QUALITY_SITE)    
         for i in range(len(STATISTICAL_VARIABLES)):
             f_out.write(
                 TEMPLATE_MCF.format_map({
                     'index': i + 1,
                     'var': STATISTICAL_VARIABLES[i],
-                    'site': 0,
                     'pollutant': STATISTICAL_VARIABLES[i].split('_')[-1]
                 }))
 
