@@ -1,5 +1,5 @@
 # Importing EPA Air Quality Data
-This directory imports [Outdoor Air Quality Data](https://aqs.epa.gov/aqsweb/documents/data_api.html) into Data Commons. This includes the daily concentration and AQI for various air pollutants at various monitoring sites throughout the US, Puerto Rico, and US Virgin Islands. 
+This directory imports [Outdoor Air Quality Data](https://aqs.epa.gov/aqsweb/airdata/download_files.html) into Data Commons. This includes the daily concentration and AQI for various air pollutants at various monitoring sites throughout the US, Puerto Rico, and US Virgin Islands. 
 
 The script generates:
 - `EPA_AirQuality.csv`
@@ -26,7 +26,7 @@ and relies on the following StatisticalVariables:
 - AirQualityIndex_AirPollutant_PM10
 
 ## Data Caveats
-- When using the AQS API to retrieve data, sometimes multiple pollutant standards can be returned for a pollutant. This import uses a single standard for each pollutant. The selected standards are the most recent (in terms of year), and in some cases, those which provided AQI. These standards also match those used in the [pre-generated data files](https://aqs.epa.gov/aqsweb/airdata/download_files.html). These include: 
+- When using the AQS API to retrieve data, sometimes multiple pollutant standards can be returned for a pollutant. This import uses a single standard for each pollutant. The selected standards are the most recent (in terms of year), and in some cases, those which provided AQI. These include: 
     - Ozone 8-hour 2015
     - SO2 1-hour 2010
     - CO 8-hour 1971

@@ -16,7 +16,11 @@ Generates cleaned CSV and template MCF files for the EPA Outdoor Air Quality.
 
 Usage: python3 generate_tmcf.py
 '''
-import urllib.request, json, csv
+import csv, os
+from zipfile import ZipFile
+from io import TextIOWrapper
+
+SOURCE_DATA = "source_data"
 
 # Using the following pollutant standards for each pollutant:
 PARAMETER_CODE = {
@@ -27,11 +31,6 @@ PARAMETER_CODE = {
     '88101': ['PM2.5', 'PM25 24-hour 2012'],  # PM2.5 FRM/FEM Mass
     '81102': ['PM10', 'PM10 24-hour 2006'],  # PM10 Mass
 }
-
-STATE_CODES = 56
-
-# Data will be collected from 1980 to latest available year
-START_DATE, END_DATE = 1980, 2021
 
 STATISTICAL_VARIABLES = [
     'Mean_Concentration_AirPollutant_Ozone', 
@@ -59,7 +58,6 @@ CSV_COLUMNS = [
     'Units_Ozone', 'Units_SO2', 'Units_CO', 'Units_NO2', 'Units_PM2.5', 'Units_PM10'
 ] + STATISTICAL_VARIABLES
 
-
 # Template MCF for StatVarObservation
 TEMPLATE_MCF = '''
 Node: E:EPA_AirQuality->E{index}
@@ -82,41 +80,34 @@ location: C:EPA_AirQuality->Site_Location
 containedInPlace: C:EPA_AirQuality->County
 '''
 
-def getDataUrl(param, year, state): 
-    return f'https://aqs.epa.gov/data/api/dailyData/byState?email=test@aqs.api' \
-        f'&key=test&param={param}&bdate={year}0101&edate={year}1231&state={state}'
+def join(d, observation):
+    # Skip observations that don't match selected pollutant standards
+    if observation['Pollutant Standard'] != PARAMETER_CODE[observation['Parameter Code']][1]:
+        return
+    
+    key = (observation['Date Local'], observation['Site Num'])
+    pollutant = PARAMETER_CODE[observation['Parameter Code']][0]
+    if key in d:
+        d[key][f'Mean_Concentration_AirPollutant_{pollutant}'] = observation['Arithmetic Mean']
+        d[key][f'Max_Concentration_AirPollutant_{pollutant}'] = observation['1st Max Value']
+        d[key][f'AirQualityIndex_AirPollutant_{pollutant}'] = observation['AQI']
+        d[key][f'Units_{pollutant}'] = observation['Units of Measure']
+    else: 
+        d[key] = {
+            'Date': observation['Date Local'],
+            'Site_Number': 'epa/' + observation['Site Num'],
+            'Site_Name': observation['Local Site Name'],
+            'Site_Location': '[latLong {lat} {long}]'.format(
+                lat=observation['Latitude'], long=observation['Longitude']),
+            'County': 'geoId/' + observation['State Code'] + observation['County Code'],  # geoID for county
+            f'Mean_Concentration_AirPollutant_{pollutant}': observation['Arithmetic Mean'],
+            f'Max_Concentration_AirPollutant_{pollutant}': observation['1st Max Value'],
+            f'AirQualityIndex_AirPollutant_{pollutant}': observation['AQI'],
+            f'Units_{pollutant}': observation['Units of Measure']
+        }
 
 
-def join(d, data):
-    for observation in data: 
-        # Skip observations that don't match selected pollutant standards
-        if observation['pollutant_standard'] != PARAMETER_CODE[observation['parameter_code']][1]:
-            continue
-        
-        key = (observation['date_local'], observation['site_number'])
-        pollutant = PARAMETER_CODE[observation['parameter_code']][0]
-        if key in d:
-            d[key][f'Mean_Concentration_AirPollutant_{pollutant}'] = observation['arithmetic_mean']
-            d[key][f'Max_Concentration_AirPollutant_{pollutant}'] = observation['first_max_value']
-            d[key][f'AirQualityIndex_AirPollutant_{pollutant}'] = observation['aqi']
-            d[key][f'Units_{pollutant}'] = observation['units_of_measure']
-        else: 
-            d[key] = {
-                'Date': observation['date_local'],
-                'Site_Number': 'epa/' + observation['site_number'],
-                'Site_Name': observation['local_site_name'],
-                'Site_Location': '[latLong {lat} {long}]'.format(
-                    lat=observation['latitude'], long=observation['longitude']),
-                'County': 'geoId/' + observation['state_code'] + observation['county_code'],  # geoID for county
-                f'Mean_Concentration_AirPollutant_{pollutant}': observation['arithmetic_mean'],
-                f'Max_Concentration_AirPollutant_{pollutant}': observation['first_max_value'],
-                f'AirQualityIndex_AirPollutant_{pollutant}': observation['aqi'],
-                f'Units_{pollutant}': observation['units_of_measure']
-            }
-
-
-
-def writeCSV(csv_file_path, d):
+def write_csv(csv_file_path, d):
     with open(csv_file_path, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
                                 fieldnames=CSV_COLUMNS,
@@ -126,8 +117,7 @@ def writeCSV(csv_file_path, d):
             writer.writerow(d[key])
 
 
-
-def writeTMCF(tmcf_file_path):
+def write_tmcf(tmcf_file_path):
     with open(tmcf_file_path, 'w') as f_out:   
         f_out.write(TEMPLATE_MCF_AIR_QUALITY_SITE)    
         for i in range(len(STATISTICAL_VARIABLES)):
@@ -140,19 +130,15 @@ def writeTMCF(tmcf_file_path):
 
 
 if __name__ == '__main__':
-    #for param in PARAMETER_CODE: 
-    #    for year in range(START_DATE, END_DATE + 1):
-    #        for state in range(1, STATE_CODES + 1):
-    #            print(getDataUrl(param, year, f"{state:02d}"))
-    param = 44201
-    year = 2021
-    for state in range(1,2):
-        with urllib.request.urlopen(getDataUrl(param, year, f"{state:02d}")) as url:
-            response = json.loads(url.read().decode())
-            if response['Header'][0]['rows'] == 0:  # Response failed or is empty
-                continue
-            data = response['Data']
-            d = {}
-            join(d, data)
-    writeCSV('EPA_AirQuality.csv', d)
-    writeTMCF('EPA_AirQuality.tmcf')
+    d = {}
+    for (dirpath, dirnames, filenames) in os.walk(SOURCE_DATA):
+        for filename in filenames:
+            if filename.endswith('.zip'):
+                print(filename)
+                with ZipFile(dirpath + os.sep + filename) as zf:
+                    with zf.open(filename[:-4] + '.csv', 'r') as infile:
+                        reader = csv.DictReader(TextIOWrapper(infile, 'utf-8'))
+                        for row in reader:
+                            join(d, row)
+    write_csv('EPA_AirQuality.csv', d)
+    write_tmcf('EPA_AirQuality.tmcf')
