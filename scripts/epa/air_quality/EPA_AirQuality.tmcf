@@ -1,91 +1,288 @@
 
 Node: E:EPA_AirQuality->E0
-typeOf: dcs:AirQualitySite
-dcid: epa/0023
-name: North Birmingham
-location: [latLong 33.553056 -86.815]
-containedInPlace: geoId/01073
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E1
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_Ozone
+unit: C:EPA_AirQuality->Units_Ozone
 
 Node: E:EPA_AirQuality->E1
 typeOf: dcs:AirQualitySite
-dcid: epa/0011
-name: DECATUR, Alabama
-location: [latLong 34.530717 -86.967536]
-containedInPlace: geoId/01103
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
 
 Node: E:EPA_AirQuality->E2
-typeOf: dcs:AirQualitySite
-dcid: epa/0010
-name: FAIRHOPE, Alabama
-location: [latLong 30.497478 -87.880258]
-containedInPlace: geoId/01003
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_Ozone
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E3
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Max_Concentration_AirPollutant_Ozone
+unit: C:EPA_AirQuality->Units_Ozone
 
 Node: E:EPA_AirQuality->E3
 typeOf: dcs:AirQualitySite
-dcid: epa/1010
-name: Leeds
-location: [latLong 33.545278 -86.549167]
-containedInPlace: geoId/01073
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
 
 Node: E:EPA_AirQuality->E4
-typeOf: dcs:AirQualitySite
-dcid: epa/2005
-name: BAY ROAD
-location: [latLong 30.474305 -88.141022]
-containedInPlace: geoId/01097
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_Ozone
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E5
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_Ozone
+unit: C:EPA_AirQuality->Units_Ozone
 
 Node: E:EPA_AirQuality->E5
 typeOf: dcs:AirQualitySite
-dcid: epa/0003
-name: CHICKASAW
-location: [latLong 30.770181 -88.087761]
-containedInPlace: geoId/01097
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
 
 Node: E:EPA_AirQuality->E6
-typeOf: dcs:AirQualitySite
-dcid: epa/1003
-name: Fairfield
-location: [latLong 33.485556 -86.915]
-containedInPlace: geoId/01073
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_SO2
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E7
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_SO2
+unit: C:EPA_AirQuality->Units_SO2
 
 Node: E:EPA_AirQuality->E7
 typeOf: dcs:AirQualitySite
-dcid: epa/1002
-name: MOMS, ADEM
-location: [latLong 32.412811 -86.263394]
-containedInPlace: geoId/01101
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
 
 Node: E:EPA_AirQuality->E8
-typeOf: dcs:AirQualitySite
-dcid: epa/0004
-name: Wetumpka Westside Technology Park
-location: [latLong 32.53568 -86.255193]
-containedInPlace: geoId/01051
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_SO2
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E9
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Max_Concentration_AirPollutant_SO2
+unit: C:EPA_AirQuality->Units_SO2
 
 Node: E:EPA_AirQuality->E9
 typeOf: dcs:AirQualitySite
-dcid: epa/9991
-name: Sand Mountain
-location: [latLong 34.289001 -85.970065]
-containedInPlace: geoId/01049
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
 
 Node: E:EPA_AirQuality->E10
-typeOf: dcs:AirQualitySite
-dcid: epa/6002
-name: Tarrant Elementary School
-location: [latLong 33.578333 -86.773889]
-containedInPlace: geoId/01073
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_SO2
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E11
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_SO2
+unit: C:EPA_AirQuality->Units_SO2
 
 Node: E:EPA_AirQuality->E11
 typeOf: dcs:AirQualitySite
-dcid: epa/5003
-name: Corner
-location: [latLong 33.801667 -86.9425]
-containedInPlace: geoId/01073
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
 
 Node: E:EPA_AirQuality->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_CO
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E13
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_CO
+unit: C:EPA_AirQuality->Units_CO
+
+Node: E:EPA_AirQuality->E13
 typeOf: dcs:AirQualitySite
-dcid: epa/1005
-name: McAdory
-location: [latLong 33.331111 -87.003611]
-containedInPlace: geoId/01073
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_CO
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E15
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Max_Concentration_AirPollutant_CO
+unit: C:EPA_AirQuality->Units_CO
+
+Node: E:EPA_AirQuality->E15
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_CO
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E17
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_CO
+unit: C:EPA_AirQuality->Units_CO
+
+Node: E:EPA_AirQuality->E17
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E18
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_NO2
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E19
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_NO2
+unit: C:EPA_AirQuality->Units_NO2
+
+Node: E:EPA_AirQuality->E19
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E20
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_NO2
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E21
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Max_Concentration_AirPollutant_NO2
+unit: C:EPA_AirQuality->Units_NO2
+
+Node: E:EPA_AirQuality->E21
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E22
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_NO2
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E23
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_NO2
+unit: C:EPA_AirQuality->Units_NO2
+
+Node: E:EPA_AirQuality->E23
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E24
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E25
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_PM2.5
+unit: C:EPA_AirQuality->Units_PM2.5
+
+Node: E:EPA_AirQuality->E25
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E26
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_PM2.5
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E27
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Max_Concentration_AirPollutant_PM2.5
+unit: C:EPA_AirQuality->Units_PM2.5
+
+Node: E:EPA_AirQuality->E27
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E28
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_PM2.5
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E29
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_PM2.5
+unit: C:EPA_AirQuality->Units_PM2.5
+
+Node: E:EPA_AirQuality->E29
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E30
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_PM10
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E31
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_PM10
+unit: C:EPA_AirQuality->Units_PM10
+
+Node: E:EPA_AirQuality->E31
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E32
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_PM10
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E33
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->Max_Concentration_AirPollutant_PM10
+unit: C:EPA_AirQuality->Units_PM10
+
+Node: E:EPA_AirQuality->E33
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E34
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_PM10
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E35
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_PM10
+unit: C:EPA_AirQuality->Units_PM10
+
+Node: E:EPA_AirQuality->E35
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County

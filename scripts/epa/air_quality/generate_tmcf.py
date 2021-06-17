@@ -55,18 +55,31 @@ STATISTICAL_VARIABLES = [
 ]
 
 CSV_COLUMNS = [
-    'Date', 'Site_Number', 'Units_Ozone', 'Units_SO2', 'Units_CO', 
-    'Units_NO2', 'Units_PM2.5', 'Units_PM10'
+    'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County', 
+    'Units_Ozone', 'Units_SO2', 'Units_CO', 'Units_NO2', 'Units_PM2.5', 'Units_PM10'
 ] + STATISTICAL_VARIABLES
+
+
+# Template MCF for StatVarObservation
+TEMPLATE_MCF = '''
+Node: E:EPA_AirQuality->E{index}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{var}
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_daily_air_quality->E{site}
+observationPeriod: dcs:P1D
+value: C:EPA_AirQuality->{var}
+unit: C:EPA_AirQuality->Units_{pollutant}
+'''
 
 # Template MCF for Air Quality Site
 TEMPLATE_MCF_AIR_QUALITY_SITE = '''
 Node: E:EPA_AirQuality->E{index}
 typeOf: dcs:AirQualitySite
-dcid: {dcid}
-name: {name}
-location: {location}
-containedInPlace: {county}
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
 '''
 
 def getDataUrl(param, year, state): 
@@ -74,20 +87,12 @@ def getDataUrl(param, year, state):
         f'&key=test&param={param}&bdate={year}0101&edate={year}1231&state={state}'
 
 
-def join(d, sites, data):
+def join(d, data):
     for observation in data: 
         # Skip observations that don't match selected pollutant standards
         if observation['pollutant_standard'] != PARAMETER_CODE[observation['parameter_code']][1]:
             continue
         
-        if ('epa/' + observation['site_number']) not in sites: 
-            sites['epa/' + observation['site_number']] = [
-                'geoId/' + observation['state_code'] + observation['county_code'],  # geoID for county
-                observation['local_site_name'],
-                '[latLong {lat} {long}]'.format(
-                    lat=observation['latitude'], long=observation['longitude'])
-            ]
-
         key = (observation['date_local'], observation['site_number'])
         pollutant = PARAMETER_CODE[observation['parameter_code']][0]
         if key in d:
@@ -99,11 +104,16 @@ def join(d, sites, data):
             d[key] = {
                 'Date': observation['date_local'],
                 'Site_Number': 'epa/' + observation['site_number'],
+                'Site_Name': observation['local_site_name'],
+                'Site_Location': '[latLong {lat} {long}]'.format(
+                    lat=observation['latitude'], long=observation['longitude']),
+                'County': 'geoId/' + observation['state_code'] + observation['county_code'],  # geoID for county
                 f'Mean_Concentration_AirPollutant_{pollutant}': observation['arithmetic_mean'],
                 f'Max_Concentration_AirPollutant_{pollutant}': observation['first_max_value'],
                 f'AirQualityIndex_AirPollutant_{pollutant}': observation['aqi'],
                 f'Units_{pollutant}': observation['units_of_measure']
             }
+
 
 
 def writeCSV(csv_file_path, d):
@@ -117,24 +127,22 @@ def writeCSV(csv_file_path, d):
 
 
 
-def writeTMCF(tmcf_file_path, sites):
-    with open(tmcf_file_path, 'w') as f_out:
+def writeTMCF(tmcf_file_path):
+    with open(tmcf_file_path, 'w') as f_out:   
         i = 0
-
-        # Pre-populate TMCF with Air Quality Sites
-        for site in sites: 
+        for var in STATISTICAL_VARIABLES:
+            f_out.write(
+                TEMPLATE_MCF.format_map({
+                    'index': i,
+                    'var': var,
+                    'site': i + 1,
+                    'pollutant': var.split('_')[-1]
+                }))
             f_out.write(
                 TEMPLATE_MCF_AIR_QUALITY_SITE.format_map({
-                    'index': i,
-                    'dcid': site,
-                    'name': sites[site][1],
-                    'location': sites[site][2],
-                    'county': sites[site][0],
-                }))
-            i += 1
-        
-        for var in STATISTICAL_VARIABLES:
-            pass
+                    'index': i + 1,
+                }))          
+            i += 2
 
 
 if __name__ == '__main__':
@@ -150,8 +158,7 @@ if __name__ == '__main__':
             if response['Header'][0]['rows'] == 0:  # Response failed or is empty
                 continue
             data = response['Data']
-            sites, d = {}, {}
-            join(d, sites, data)
+            d = {}
+            join(d, data)
     writeCSV('EPA_AirQuality.csv', d)
-    writeTMCF('EPA_AirQuality.tmcf', sites)
-    print('done')
+    writeTMCF('EPA_AirQuality.tmcf')
