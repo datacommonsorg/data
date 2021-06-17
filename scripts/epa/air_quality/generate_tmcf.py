@@ -64,7 +64,7 @@ Node: E:EPA_AirQuality->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{var}
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->{var}
 unit: C:EPA_AirQuality->Units_{pollutant}

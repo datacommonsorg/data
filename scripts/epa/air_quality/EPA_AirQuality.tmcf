@@ -10,7 +10,7 @@ Node: E:EPA_AirQuality->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_Ozone
 unit: C:EPA_AirQuality->Units_Ozone
@@ -19,7 +19,7 @@ Node: E:EPA_AirQuality->E2
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_Ozone
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Max_Concentration_AirPollutant_Ozone
 unit: C:EPA_AirQuality->Units_Ozone
@@ -28,7 +28,7 @@ Node: E:EPA_AirQuality->E3
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_Ozone
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_Ozone
 unit: C:EPA_AirQuality->Units_Ozone
@@ -37,7 +37,7 @@ Node: E:EPA_AirQuality->E4
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_SO2
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_SO2
 unit: C:EPA_AirQuality->Units_SO2
@@ -46,7 +46,7 @@ Node: E:EPA_AirQuality->E5
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_SO2
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Max_Concentration_AirPollutant_SO2
 unit: C:EPA_AirQuality->Units_SO2
@@ -55,7 +55,7 @@ Node: E:EPA_AirQuality->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_SO2
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_SO2
 unit: C:EPA_AirQuality->Units_SO2
@@ -64,7 +64,7 @@ Node: E:EPA_AirQuality->E7
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_CO
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_CO
 unit: C:EPA_AirQuality->Units_CO
@@ -73,7 +73,7 @@ Node: E:EPA_AirQuality->E8
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_CO
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Max_Concentration_AirPollutant_CO
 unit: C:EPA_AirQuality->Units_CO
@@ -82,7 +82,7 @@ Node: E:EPA_AirQuality->E9
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_CO
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_CO
 unit: C:EPA_AirQuality->Units_CO
@@ -91,7 +91,7 @@ Node: E:EPA_AirQuality->E10
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_NO2
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_NO2
 unit: C:EPA_AirQuality->Units_NO2
@@ -100,7 +100,7 @@ Node: E:EPA_AirQuality->E11
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_NO2
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Max_Concentration_AirPollutant_NO2
 unit: C:EPA_AirQuality->Units_NO2
@@ -109,7 +109,7 @@ Node: E:EPA_AirQuality->E12
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_NO2
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_NO2
 unit: C:EPA_AirQuality->Units_NO2
@@ -118,7 +118,7 @@ Node: E:EPA_AirQuality->E13
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_PM2.5
 unit: C:EPA_AirQuality->Units_PM2.5
@@ -127,7 +127,7 @@ Node: E:EPA_AirQuality->E14
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_PM2.5
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Max_Concentration_AirPollutant_PM2.5
 unit: C:EPA_AirQuality->Units_PM2.5
@@ -136,7 +136,7 @@ Node: E:EPA_AirQuality->E15
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_PM2.5
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_PM2.5
 unit: C:EPA_AirQuality->Units_PM2.5
@@ -145,7 +145,7 @@ Node: E:EPA_AirQuality->E16
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_PM10
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Mean_Concentration_AirPollutant_PM10
 unit: C:EPA_AirQuality->Units_PM10
@@ -154,7 +154,7 @@ Node: E:EPA_AirQuality->E17
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_PM10
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->Max_Concentration_AirPollutant_PM10
 unit: C:EPA_AirQuality->Units_PM10
@@ -163,7 +163,7 @@ Node: E:EPA_AirQuality->E18
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_PM10
 observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_daily_air_quality->E0
+observationAbout: E:EPA_AirQuality->E0
 observationPeriod: dcs:P1D
 value: C:EPA_AirQuality->AirQualityIndex_AirPollutant_PM10
 unit: C:EPA_AirQuality->Units_PM10

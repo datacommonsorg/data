@@ -1,0 +1,169 @@
+
+Node: E:test_import->E0
+typeOf: dcs:AirQualitySite
+dcid: C:test_import->Site_Number
+name: C:test_import->Site_Name
+location: C:test_import->Site_Location
+containedInPlace: C:test_import->County
+
+Node: E:test_import->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Mean_Concentration_AirPollutant_Ozone
+unit: C:test_import->Units_Ozone
+
+Node: E:test_import->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_Ozone
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Max_Concentration_AirPollutant_Ozone
+unit: C:test_import->Units_Ozone
+
+Node: E:test_import->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_Ozone
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->AirQualityIndex_AirPollutant_Ozone
+unit: C:test_import->Units_Ozone
+
+Node: E:test_import->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_SO2
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Mean_Concentration_AirPollutant_SO2
+unit: C:test_import->Units_SO2
+
+Node: E:test_import->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_SO2
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Max_Concentration_AirPollutant_SO2
+unit: C:test_import->Units_SO2
+
+Node: E:test_import->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_SO2
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->AirQualityIndex_AirPollutant_SO2
+unit: C:test_import->Units_SO2
+
+Node: E:test_import->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_CO
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Mean_Concentration_AirPollutant_CO
+unit: C:test_import->Units_CO
+
+Node: E:test_import->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_CO
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Max_Concentration_AirPollutant_CO
+unit: C:test_import->Units_CO
+
+Node: E:test_import->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_CO
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->AirQualityIndex_AirPollutant_CO
+unit: C:test_import->Units_CO
+
+Node: E:test_import->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_NO2
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Mean_Concentration_AirPollutant_NO2
+unit: C:test_import->Units_NO2
+
+Node: E:test_import->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_NO2
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Max_Concentration_AirPollutant_NO2
+unit: C:test_import->Units_NO2
+
+Node: E:test_import->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_NO2
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->AirQualityIndex_AirPollutant_NO2
+unit: C:test_import->Units_NO2
+
+Node: E:test_import->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Mean_Concentration_AirPollutant_PM2.5
+unit: C:test_import->Units_PM2.5
+
+Node: E:test_import->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_PM2.5
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Max_Concentration_AirPollutant_PM2.5
+unit: C:test_import->Units_PM2.5
+
+Node: E:test_import->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_PM2.5
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->AirQualityIndex_AirPollutant_PM2.5
+unit: C:test_import->Units_PM2.5
+
+Node: E:test_import->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_PM10
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Mean_Concentration_AirPollutant_PM10
+unit: C:test_import->Units_PM10
+
+Node: E:test_import->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_PM10
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->Max_Concentration_AirPollutant_PM10
+unit: C:test_import->Units_PM10
+
+Node: E:test_import->E18
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_PM10
+observationDate: C:test_import->Date
+observationAbout: E:test_import->E0
+observationPeriod: dcs:P1D
+value: C:test_import->AirQualityIndex_AirPollutant_PM10
+unit: C:test_import->Units_PM10
