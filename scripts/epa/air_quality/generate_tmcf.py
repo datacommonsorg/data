@@ -130,19 +130,18 @@ def writeCSV(csv_file_path, d):
 def writeTMCF(tmcf_file_path):
     with open(tmcf_file_path, 'w') as f_out:   
         i = 0
-        for var in STATISTICAL_VARIABLES:
+        f_out.write(
+            TEMPLATE_MCF_AIR_QUALITY_SITE.format_map({
+                'index': 0,
+            }))    
+        for i in range(len(STATISTICAL_VARIABLES)):
             f_out.write(
                 TEMPLATE_MCF.format_map({
-                    'index': i,
-                    'var': var,
-                    'site': i + 1,
-                    'pollutant': var.split('_')[-1]
-                }))
-            f_out.write(
-                TEMPLATE_MCF_AIR_QUALITY_SITE.format_map({
                     'index': i + 1,
-                }))          
-            i += 2
+                    'var': STATISTICAL_VARIABLES[i],
+                    'site': 0,
+                    'pollutant': STATISTICAL_VARIABLES[i].split('_')[-1]
+                }))
 
 
 if __name__ == '__main__':
