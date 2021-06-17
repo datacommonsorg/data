@@ -1,0 +1,91 @@
+
+Node: E:EPA_AirQuality->E0
+typeOf: dcs:AirQualitySite
+dcid: epa/0023
+name: North Birmingham
+location: [latLong 33.553056 -86.815]
+containedInPlace: geoId/01073
+
+Node: E:EPA_AirQuality->E1
+typeOf: dcs:AirQualitySite
+dcid: epa/0011
+name: DECATUR, Alabama
+location: [latLong 34.530717 -86.967536]
+containedInPlace: geoId/01103
+
+Node: E:EPA_AirQuality->E2
+typeOf: dcs:AirQualitySite
+dcid: epa/0010
+name: FAIRHOPE, Alabama
+location: [latLong 30.497478 -87.880258]
+containedInPlace: geoId/01003
+
+Node: E:EPA_AirQuality->E3
+typeOf: dcs:AirQualitySite
+dcid: epa/1010
+name: Leeds
+location: [latLong 33.545278 -86.549167]
+containedInPlace: geoId/01073
+
+Node: E:EPA_AirQuality->E4
+typeOf: dcs:AirQualitySite
+dcid: epa/2005
+name: BAY ROAD
+location: [latLong 30.474305 -88.141022]
+containedInPlace: geoId/01097
+
+Node: E:EPA_AirQuality->E5
+typeOf: dcs:AirQualitySite
+dcid: epa/0003
+name: CHICKASAW
+location: [latLong 30.770181 -88.087761]
+containedInPlace: geoId/01097
+
+Node: E:EPA_AirQuality->E6
+typeOf: dcs:AirQualitySite
+dcid: epa/1003
+name: Fairfield
+location: [latLong 33.485556 -86.915]
+containedInPlace: geoId/01073
+
+Node: E:EPA_AirQuality->E7
+typeOf: dcs:AirQualitySite
+dcid: epa/1002
+name: MOMS, ADEM
+location: [latLong 32.412811 -86.263394]
+containedInPlace: geoId/01101
+
+Node: E:EPA_AirQuality->E8
+typeOf: dcs:AirQualitySite
+dcid: epa/0004
+name: Wetumpka Westside Technology Park
+location: [latLong 32.53568 -86.255193]
+containedInPlace: geoId/01051
+
+Node: E:EPA_AirQuality->E9
+typeOf: dcs:AirQualitySite
+dcid: epa/9991
+name: Sand Mountain
+location: [latLong 34.289001 -85.970065]
+containedInPlace: geoId/01049
+
+Node: E:EPA_AirQuality->E10
+typeOf: dcs:AirQualitySite
+dcid: epa/6002
+name: Tarrant Elementary School
+location: [latLong 33.578333 -86.773889]
+containedInPlace: geoId/01073
+
+Node: E:EPA_AirQuality->E11
+typeOf: dcs:AirQualitySite
+dcid: epa/5003
+name: Corner
+location: [latLong 33.801667 -86.9425]
+containedInPlace: geoId/01073
+
+Node: E:EPA_AirQuality->E12
+typeOf: dcs:AirQualitySite
+dcid: epa/1005
+name: McAdory
+location: [latLong 33.331111 -87.003611]
+containedInPlace: geoId/01073
