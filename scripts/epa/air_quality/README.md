@@ -26,7 +26,7 @@ and relies on the following StatisticalVariables:
 - AirQualityIndex_AirPollutant_PM10
 
 ## Data Caveats
-- When using the AQS API to retrieve data, sometimes multiple pollutant standards can be returned for a pollutant. This import uses a single standard for each pollutant. The selected standards are the most recent (in terms of year), and in some cases, those which provided AQI. These include: 
+- Sometimes multiple pollutant standards are provided for a pollutant. This import uses a single standard for each pollutant. The selected standards are the most recent (in terms of year), and in some cases, those which provided AQI. These include: 
     - Ozone 8-hour 2015
     - SO2 1-hour 2010
     - CO 8-hour 1971
@@ -38,4 +38,10 @@ and relies on the following StatisticalVariables:
 To generate `EPA_AirQuality.csv` and `EPA_AirQuality.tmcf`, run: 
 ```
 python3 generate_tmcf.py
+```
+
+### Running Tests
+To run unit tests: 
+```
+python3 generate_tmcf_test.py
 ```
