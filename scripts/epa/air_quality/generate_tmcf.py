@@ -139,7 +139,6 @@ def write_tmcf(tmcf_file_path):
 
 if __name__ == '__main__':
     d = {}
-    '''
     for (dirpath, dirnames, filenames) in os.walk(SOURCE_DATA):
         for filename in filenames:
             if filename.endswith('.zip'):
@@ -149,5 +148,5 @@ if __name__ == '__main__':
                         reader = csv.DictReader(TextIOWrapper(infile, 'utf-8'))
                         for row in reader:
                             join(d, row)
-    write_csv('EPA_AirQuality.csv', d)'''
+    write_csv('EPA_AirQuality.csv', d)
     write_tmcf('EPA_AirQuality.tmcf')
