@@ -1,27 +1,27 @@
 Date,Site_Number,Site_Name,Site_Location,County,Units_Ozone,Units_SO2,Units_CO,Units_NO2,Units_PM2.5,Units_PM10,Mean_Concentration_AirPollutant_Ozone,Max_Concentration_AirPollutant_Ozone,AirQualityIndex_AirPollutant_Ozone,Mean_Concentration_AirPollutant_SO2,Max_Concentration_AirPollutant_SO2,AirQualityIndex_AirPollutant_SO2,Mean_Concentration_AirPollutant_CO,Max_Concentration_AirPollutant_CO,AirQualityIndex_AirPollutant_CO,Mean_Concentration_AirPollutant_NO2,Max_Concentration_AirPollutant_NO2,AirQualityIndex_AirPollutant_NO2,Mean_Concentration_AirPollutant_PM2.5,Max_Concentration_AirPollutant_PM2.5,AirQualityIndex_AirPollutant_PM2.5,Mean_Concentration_AirPollutant_PM10,Max_Concentration_AirPollutant_PM10,AirQualityIndex_AirPollutant_PM10
-2021-01-01,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.028706,0.032,30,,,,,,,,,,,,,,,
-2021-01-02,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.025647,0.029,27,,,,,,,,,,,,,,,
-2021-01-03,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.030706,0.037,34,,,,,,,,,,,,,,,
-2021-01-04,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.034235,0.039,36,,,,,,,,,,,,,,,
-2021-01-05,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.028824,0.033,31,,,,,,,,,,,,,,,
-2021-01-06,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.026118,0.029,27,,,,,,,,,,,,,,,
-2021-01-07,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.026882,0.031,29,,,,,,,,,,,,,,,
-2021-01-08,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.022059,0.024,22,,,,,,,,,,,,,,,
-2021-01-09,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.027353,0.028,26,,,,,,,,,,,,,,,
-2021-01-10,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],geoId/01049,Parts per million,,,,,,0.022176,0.027,25,,,,,,,,,,,,,,,
-2021-01-01,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,Micrograms/cubic meter (LC),Micrograms/cubic meter (25 C),,,,0.358333,0.6,0,0.126316,0.2,2,4.6125,23.2,22,3.8,3.8,16,11,11,10
-2021-01-02,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,,Micrograms/cubic meter (25 C),,,,0.483333,2.6,3,0.175,0.2,2,4.870833,9.8,8,,,,10,10,9
-2021-01-03,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,,Micrograms/cubic meter (25 C),,,,0.204167,0.5,0,0.170833,0.5,6,8.3875,29.7,27,,,,6,6,6
-2021-01-04,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,,Micrograms/cubic meter (25 C),,,,1.083333,3,4,0.408333,0.6,7,15.383333,27.9,25,,,,22,22,20
-2021-01-05,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,Micrograms/cubic meter (LC),Micrograms/cubic meter (25 C),,,,0.571429,2.4,3,0.311111,0.4,5,15.390476,31.5,29,9.1,9.1,38,18,18,17
-2021-01-06,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,,Micrograms/cubic meter (25 C),,,,1,3.9,4,0.333333,0.5,6,16.595238,34.9,32,,,,29,29,27
-2021-01-07,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,Micrograms/cubic meter (LC),Micrograms/cubic meter (25 C),,,,0.420833,0.7,0,0.2125,0.3,3,8.3625,11.8,10,7.6,7.6,32,15,15,14
-2021-01-08,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,,Micrograms/cubic meter (25 C),,,,0.204762,0.4,0,0.2,0.2,2,3.852381,8.2,8,,,,11,11,10
-2021-01-09,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,,Micrograms/cubic meter (25 C),,,,0.1375,0.2,0,0.2,0.2,2,2.9625,5.6,5,,,,12,12,11
-2021-01-10,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,Parts per billion,Parts per million,Parts per billion,Micrograms/cubic meter (LC),Micrograms/cubic meter (25 C),,,,0.720833,4.6,6,0.2,0.2,2,5.454167,16,15,11,11,46,16,16,15
-2021-01-13,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,,,,Micrograms/cubic meter (LC),,,,,,,,,,,,,,17.3,17.3,62,,,
-2021-01-16,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,,,,Micrograms/cubic meter (LC),,,,,,,,,,,,,,4,4,17,,,
-2021-01-20,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,,,,Micrograms/cubic meter (LC),,,,,,,,,,,,,,6.9,6.9,29,,,
-2021-01-22,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,,,,Micrograms/cubic meter (LC),,,,,,,,,,,,,,6.6,6.6,28,,,
-2021-01-26,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,,,,Micrograms/cubic meter (LC),,,,,,,,,,,,,,5.3,5.3,22,,,
-2021-01-28,epa/0023,North Birmingham,[latLong 33.553056 -86.815],geoId/01073,,,,,Micrograms/cubic meter (LC),,,,,,,,,,,,,,4.4,4.4,18,,,
+2021-01-01,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.028706,0.032,30,,,,,,,,,,,,,,,
+2021-01-02,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.025647,0.029,27,,,,,,,,,,,,,,,
+2021-01-03,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.030706,0.037,34,,,,,,,,,,,,,,,
+2021-01-04,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.034235,0.039,36,,,,,,,,,,,,,,,
+2021-01-05,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.028824,0.033,31,,,,,,,,,,,,,,,
+2021-01-06,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.026118,0.029,27,,,,,,,,,,,,,,,
+2021-01-07,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.026882,0.031,29,,,,,,,,,,,,,,,
+2021-01-08,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.022059,0.024,22,,,,,,,,,,,,,,,
+2021-01-09,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.027353,0.028,26,,,,,,,,,,,,,,,
+2021-01-10,epa/9991,Sand Mountain,[latLong 34.289001 -85.970065],dcid:geoId/01049,PartsPerMillion,,,,,,0.022176,0.027,25,,,,,,,,,,,,,,,
+2021-01-01,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,MicrogramsPerCubicMeterLc,MicrogramsPerCubicMeter25C,,,,0.358333,0.6,0,0.126316,0.2,2,4.6125,23.2,22,3.8,3.8,16,11,11,10
+2021-01-02,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,,MicrogramsPerCubicMeter25C,,,,0.483333,2.6,3,0.175,0.2,2,4.870833,9.8,8,,,,10,10,9
+2021-01-03,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,,MicrogramsPerCubicMeter25C,,,,0.204167,0.5,0,0.170833,0.5,6,8.3875,29.7,27,,,,6,6,6
+2021-01-04,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,,MicrogramsPerCubicMeter25C,,,,1.083333,3,4,0.408333,0.6,7,15.383333,27.9,25,,,,22,22,20
+2021-01-05,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,MicrogramsPerCubicMeterLc,MicrogramsPerCubicMeter25C,,,,0.571429,2.4,3,0.311111,0.4,5,15.390476,31.5,29,9.1,9.1,38,18,18,17
+2021-01-06,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,,MicrogramsPerCubicMeter25C,,,,1,3.9,4,0.333333,0.5,6,16.595238,34.9,32,,,,29,29,27
+2021-01-07,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,MicrogramsPerCubicMeterLc,MicrogramsPerCubicMeter25C,,,,0.420833,0.7,0,0.2125,0.3,3,8.3625,11.8,10,7.6,7.6,32,15,15,14
+2021-01-08,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,,MicrogramsPerCubicMeter25C,,,,0.204762,0.4,0,0.2,0.2,2,3.852381,8.2,8,,,,11,11,10
+2021-01-09,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,,MicrogramsPerCubicMeter25C,,,,0.1375,0.2,0,0.2,0.2,2,2.9625,5.6,5,,,,12,12,11
+2021-01-10,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,PartsPerBillion,PartsPerMillion,PartsPerBillion,MicrogramsPerCubicMeterLc,MicrogramsPerCubicMeter25C,,,,0.720833,4.6,6,0.2,0.2,2,5.454167,16,15,11,11,46,16,16,15
+2021-01-13,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,,,,MicrogramsPerCubicMeterLc,,,,,,,,,,,,,,17.3,17.3,62,,,
+2021-01-16,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,,,,MicrogramsPerCubicMeterLc,,,,,,,,,,,,,,4,4,17,,,
+2021-01-20,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,,,,MicrogramsPerCubicMeterLc,,,,,,,,,,,,,,6.9,6.9,29,,,
+2021-01-22,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,,,,MicrogramsPerCubicMeterLc,,,,,,,,,,,,,,6.6,6.6,28,,,
+2021-01-26,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,,,,MicrogramsPerCubicMeterLc,,,,,,,,,,,,,,5.3,5.3,22,,,
+2021-01-28,epa/0023,North Birmingham,[latLong 33.553056 -86.815],dcid:geoId/01073,,,,,MicrogramsPerCubicMeterLc,,,,,,,,,,,,,,4.4,4.4,18,,,

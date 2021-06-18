@@ -32,6 +32,14 @@ PARAMETER_CODE = {
     '81102': ['PM10', 'PM10 24-hour 2006'],  # PM10 Mass
 }
 
+# Convert units to CamelCase 
+UNITS = {
+    'Parts per million': 'PartsPerMillion',
+    'Parts per billion': 'PartsPerBillion',
+    'Micrograms/cubic meter (LC)': 'MicrogramsPerCubicMeterLc',
+    'Micrograms/cubic meter (25 C)': 'MicrogramsPerCubicMeter25C'
+}
+
 STATISTICAL_VARIABLES = [
     'Mean_Concentration_AirPollutant_Ozone', 
     'Max_Concentration_AirPollutant_Ozone', 
@@ -65,7 +73,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{var}
 observationDate: C:EPA_AirQuality->Date
 observationAbout: E:EPA_AirQuality->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:EPA_AirQuality->{var}
 unit: C:EPA_AirQuality->Units_{pollutant}
 '''
@@ -91,7 +99,7 @@ def join(d, observation):
         d[key][f'Mean_Concentration_AirPollutant_{pollutant}'] = observation['Arithmetic Mean']
         d[key][f'Max_Concentration_AirPollutant_{pollutant}'] = observation['1st Max Value']
         d[key][f'AirQualityIndex_AirPollutant_{pollutant}'] = observation['AQI']
-        d[key][f'Units_{pollutant}'] = observation['Units of Measure']
+        d[key][f'Units_{pollutant}'] = UNITS[observation['Units of Measure']]
     else: 
         d[key] = {
             'Date': observation['Date Local'],
@@ -99,11 +107,11 @@ def join(d, observation):
             'Site_Name': observation['Local Site Name'],
             'Site_Location': '[latLong {lat} {long}]'.format(
                 lat=observation['Latitude'], long=observation['Longitude']),
-            'County': 'geoId/' + observation['State Code'] + observation['County Code'],  # geoID for county
+            'County': 'dcid:geoId/' + observation['State Code'] + observation['County Code'],  # geoID for county
             f'Mean_Concentration_AirPollutant_{pollutant}': observation['Arithmetic Mean'],
             f'Max_Concentration_AirPollutant_{pollutant}': observation['1st Max Value'],
             f'AirQualityIndex_AirPollutant_{pollutant}': observation['AQI'],
-            f'Units_{pollutant}': observation['Units of Measure']
+            f'Units_{pollutant}': UNITS[observation['Units of Measure']]
         }
 
 
@@ -131,6 +139,7 @@ def write_tmcf(tmcf_file_path):
 
 if __name__ == '__main__':
     d = {}
+    '''
     for (dirpath, dirnames, filenames) in os.walk(SOURCE_DATA):
         for filename in filenames:
             if filename.endswith('.zip'):
@@ -140,5 +149,5 @@ if __name__ == '__main__':
                         reader = csv.DictReader(TextIOWrapper(infile, 'utf-8'))
                         for row in reader:
                             join(d, row)
-    write_csv('EPA_AirQuality.csv', d)
+    write_csv('EPA_AirQuality.csv', d)'''
     write_tmcf('EPA_AirQuality.tmcf')

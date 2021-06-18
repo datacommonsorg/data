@@ -11,7 +11,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Mean_Concentration_AirPollutant_Ozone
 unit: C:test_import->Units_Ozone
 
@@ -20,7 +20,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_Ozone
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Max_Concentration_AirPollutant_Ozone
 unit: C:test_import->Units_Ozone
 
@@ -29,7 +29,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_Ozone
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->AirQualityIndex_AirPollutant_Ozone
 unit: C:test_import->Units_Ozone
 
@@ -38,7 +38,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_SO2
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Mean_Concentration_AirPollutant_SO2
 unit: C:test_import->Units_SO2
 
@@ -47,7 +47,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_SO2
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Max_Concentration_AirPollutant_SO2
 unit: C:test_import->Units_SO2
 
@@ -56,7 +56,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_SO2
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->AirQualityIndex_AirPollutant_SO2
 unit: C:test_import->Units_SO2
 
@@ -65,7 +65,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_CO
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Mean_Concentration_AirPollutant_CO
 unit: C:test_import->Units_CO
 
@@ -74,7 +74,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_CO
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Max_Concentration_AirPollutant_CO
 unit: C:test_import->Units_CO
 
@@ -83,7 +83,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_CO
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->AirQualityIndex_AirPollutant_CO
 unit: C:test_import->Units_CO
 
@@ -92,7 +92,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_NO2
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Mean_Concentration_AirPollutant_NO2
 unit: C:test_import->Units_NO2
 
@@ -101,7 +101,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_NO2
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Max_Concentration_AirPollutant_NO2
 unit: C:test_import->Units_NO2
 
@@ -110,7 +110,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_NO2
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->AirQualityIndex_AirPollutant_NO2
 unit: C:test_import->Units_NO2
 
@@ -119,7 +119,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Mean_Concentration_AirPollutant_PM2.5
 unit: C:test_import->Units_PM2.5
 
@@ -128,7 +128,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_PM2.5
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Max_Concentration_AirPollutant_PM2.5
 unit: C:test_import->Units_PM2.5
 
@@ -137,7 +137,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_PM2.5
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->AirQualityIndex_AirPollutant_PM2.5
 unit: C:test_import->Units_PM2.5
 
@@ -146,7 +146,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Mean_Concentration_AirPollutant_PM10
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Mean_Concentration_AirPollutant_PM10
 unit: C:test_import->Units_PM10
 
@@ -155,7 +155,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Max_Concentration_AirPollutant_PM10
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->Max_Concentration_AirPollutant_PM10
 unit: C:test_import->Units_PM10
 
@@ -164,6 +164,6 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant_PM10
 observationDate: C:test_import->Date
 observationAbout: E:test_import->E0
-observationPeriod: dcs:P1D
+observationPeriod: dcs:"P1D"
 value: C:test_import->AirQualityIndex_AirPollutant_PM10
 unit: C:test_import->Units_PM10

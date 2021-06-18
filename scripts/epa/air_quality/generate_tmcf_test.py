@@ -32,7 +32,7 @@ class TestGenerateTmcfTest(unittest.TestCase):
                     join(d, row)
 
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
-                write_csv(test_csv, d)
+                write_csv(test_csv, d)             
 
                 expected_csv = os.path.join(module_dir_, 'test_data/expected_csv.csv')
                 with open(test_csv, 'r') as test: 
