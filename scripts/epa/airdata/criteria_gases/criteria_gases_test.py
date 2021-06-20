@@ -12,29 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Unit tests for generate_tmcf.py
+Unit tests for criteria_gases.py
 
-Usage: python3 generate_tmcf_test.py
+Usage: python3 criteria_gases_test.py
 '''
 import unittest, csv, os, tempfile
-from generate_tmcf import join, write_csv, write_tmcf
+from criteria_gases import create_csv, write_csv, write_tmcf
 
 module_dir_ = os.path.dirname(__file__)
 
-class TestGenerateTmcfTest(unittest.TestCase):
+class TestCriteriaGasesTest(unittest.TestCase):
 
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir: 
-            d = {}
-            with open(os.path.join(module_dir_, 'test_data/test_data.csv'), 'r') as f:
+            camel_case = {
+                '': '',
+                ' - ': '',
+            }
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            create_csv(test_csv)
+            with open(os.path.join(module_dir_, 'test_data/test_import_data.csv'), 'r') as f:
                 reader = csv.DictReader(f)
-                for row in reader:
-                    join(d, row)
+                write_csv(test_csv, reader, camel_case)             
 
-                test_csv = os.path.join(tmp_dir, 'test_csv.csv')
-                write_csv(test_csv, d)             
-
-                expected_csv = os.path.join(module_dir_, 'test_data/expected_csv.csv')
+                expected_csv = os.path.join(module_dir_, 'test_data/test_import.csv')
                 with open(test_csv, 'r') as test: 
                     test_str: str = test.read()
                     with open(expected_csv, 'r') as expected:
@@ -48,7 +49,7 @@ class TestGenerateTmcfTest(unittest.TestCase):
             test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
             write_tmcf(test_tmcf)
             
-            expected_tmcf = os.path.join(module_dir_, 'EPA_AirQuality.tmcf')
+            expected_tmcf = os.path.join(module_dir_, 'EPA_CriteriaGases.tmcf')
             with open(test_tmcf, 'r') as test: 
                     test_str: str = test.read()
                     with open(expected_tmcf, 'r') as expected:
