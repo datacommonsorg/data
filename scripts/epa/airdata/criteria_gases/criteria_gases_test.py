@@ -17,7 +17,7 @@ Unit tests for criteria_gases.py
 Usage: python3 criteria_gases_test.py
 '''
 import unittest, csv, os, tempfile
-from criteria_gases import create_csv, write_csv, write_tmcf
+from criteria_gases import join, write_csv, write_tmcf
 
 module_dir_ = os.path.dirname(__file__)
 
@@ -29,12 +29,15 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 '': '',
                 ' - ': '',
             }
-            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
-            create_csv(test_csv)
+            d = {}
             with open(os.path.join(module_dir_, 'test_data/test_import_data.csv'), 'r') as f:
                 reader = csv.DictReader(f)
-                write_csv(test_csv, reader, camel_case)             
+                for row in reader:
+                    join(d, row, camel_case)
 
+                test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+                write_csv(test_csv, d)         
+                
                 expected_csv = os.path.join(module_dir_, 'test_data/test_import.csv')
                 with open(test_csv, 'r') as test: 
                     test_str: str = test.read()

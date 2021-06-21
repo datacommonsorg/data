@@ -23,41 +23,46 @@ from io import TextIOWrapper
 
 SOURCE_DATA = "source_data"
 
-CSV_COLUMNS = [
-    'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County', 
-    'Mean_Name', 'Mean_Value', 'Max_Name', 'Max_Value', 'AQI_Name', 'AQI_Value',
-    'Units', 'Method'
+CSV_COLUMNS = ['Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County']
+
+POLLUTANT_STANDARD = [
+    'Ozone_8hour_2015',
+    'SO2_1hour_2010',
+    'SO2_3hour_1971',
+    'CO_1hour_1971',
+    'CO_8hour_1971',
+    'NO2_1hour',
 ]
 
 # Template MCF for StatVarObservation
 TEMPLATE_MCF = '''
-Node: E:EPA_CriteriaGases->E1
+Node: E:EPA_CriteriaGases->E{mean_index}
 typeOf: dcs:StatVarObservation
-variableMeasured: C:EPA_CriteriaGases->Mean_Name
-measurementMethod: C:EPA_CriteriaGases->Method
+variableMeasured: dcs:Mean_Concentration_AirPollutant_{suffix}
+measurementMethod: C:EPA_CriteriaGases->Method_{suffix}
 observationDate: C:EPA_CriteriaGases->Date
 observationAbout: E:EPA_CriteriaGases->E0
 observationPeriod: dcs:"P1D"
-value: C:EPA_CriteriaGases->Mean_Value
-unit: C:EPA_CriteriaGases->Units
+value: C:EPA_CriteriaGases->Mean_Concentration_AirPollutant_{suffix}
+unit: C:EPA_CriteriaGases->Units_{suffix}
 
-Node: E:EPA_CriteriaGases->E2
+Node: E:EPA_CriteriaGases->E{max_index}
 typeOf: dcs:StatVarObservation
-variableMeasured: C:EPA_CriteriaGases->Max_Name
-measurementMethod: C:EPA_CriteriaGases->Method
+variableMeasured: dcs:Max_Concentration_AirPollutant_{suffix}
+measurementMethod: C:EPA_CriteriaGases->Method_{suffix}
 observationDate: C:EPA_CriteriaGases->Date
 observationAbout: E:EPA_CriteriaGases->E0
 observationPeriod: dcs:"P1D"
-value: C:EPA_CriteriaGases->Max_Value
-unit: C:EPA_CriteriaGases->Units
+value: C:EPA_CriteriaGases->Max_Concentration_AirPollutant_{suffix}
+unit: C:EPA_CriteriaGases->Units_{suffix}
 
-Node: E:EPA_CriteriaGases->E3
+Node: E:EPA_CriteriaGases->E{aqi_index}
 typeOf: dcs:StatVarObservation
-variableMeasured: C:EPA_CriteriaGases->AQI_Name
+variableMeasured: dcs:AirQualityIndex_AirPollutant_{suffix}
 observationDate: C:EPA_CriteriaGases->Date
 observationAbout: E:EPA_CriteriaGases->E0
 observationPeriod: dcs:"P1D"
-value: C:EPA_CriteriaGases->AQI_Value
+value: C:EPA_CriteriaGases->AirQualityIndex_AirPollutant_{suffix}
 '''
 
 # Template MCF for Air Quality Site
@@ -85,76 +90,82 @@ def get_camel_case(camel_case, s):
 
 
 # Hardcoded for consistency in StatisticalVariable names
-def get_suffix(observation):
-    parameter = observation['Parameter Name']
-    standard = observation['Pollutant Standard']
+def get_suffix(parameter, standard):
     if parameter == 'Ozone':
         if standard == 'Ozone 8-hour 2015':
             return 'Ozone_8hour_2015'
-        print(standard)
         return 'Ozone'
     elif parameter == 'Sulfur dioxide':
         if standard == 'SO2 1-hour 2010':
             return 'SO2_1hour_2010'
         elif standard == 'SO2 3-hour 1971':
             return 'SO2_3hour_1971'
-        print(standard)
         return 'SO2'
     elif parameter == 'Carbon monoxide':
         if standard == 'CO 1-hour 1971':
             return 'CO_1hour_1971'
         elif standard == 'CO 8-hour 1971':
             return 'CO_8hour_1971'
-        print(standard)
         return 'CO'
     elif parameter == 'Nitrogen dioxide (NO2)':
         if standard == 'NO2 1-hour':
             return 'NO2_1hour'
-        print(standard)
         return 'NO2'
-    print(standard)
     return ''
 
+def join(d, observation, camel_case):    
+    key = (observation['Date Local'], observation['Site Num'])
+    suffix = get_suffix(observation['Parameter Name'], observation['Pollutant Standard'])
+    if key in d:
+        d[key][f'Mean_Concentration_AirPollutant_{suffix}'] = observation['Arithmetic Mean']
+        d[key][f'Max_Concentration_AirPollutant_{suffix}'] = observation['1st Max Value']
+        d[key][f'AirQualityIndex_AirPollutant_{suffix}'] = observation['AQI']
+        d[key][f'Units_{suffix}'] = get_camel_case(camel_case, observation['Units of Measure'])
+        d[key][f'Method_{suffix}'] = get_camel_case(camel_case, observation['Method Name'])
+    else: 
+        d[key] = {
+            'Date': observation['Date Local'],
+            'Site_Number': 'epa/{state}{county}{site}'.format(
+                state=observation['State Code'], county=observation['County Code'], site=observation['Site Num']),
+            'Site_Name': observation['Local Site Name'],
+            'Site_Location': '[latLong {lat} {long}]'.format(
+                lat=observation['Latitude'], long=observation['Longitude']),
+            'County': 'dcid:geoId/' + observation['State Code'] + observation['County Code'],  # geoID for county
+            f'Mean_Concentration_AirPollutant_{suffix}': observation['Arithmetic Mean'],
+            f'Max_Concentration_AirPollutant_{suffix}': observation['1st Max Value'],
+            f'AirQualityIndex_AirPollutant_{suffix}': observation['AQI'],
+            f'Units_{suffix}': get_camel_case(camel_case, observation['Units of Measure']),
+            f'Method_{suffix}': get_camel_case(camel_case, observation['Method Name']),
+        }
 
-def create_csv(csv_file_path):
+def write_csv(csv_file_path, d):
     with open(csv_file_path, 'w', newline='') as f_out:
+        columns = CSV_COLUMNS
+        for i in range(len(POLLUTANT_STANDARD)):
+            columns.append(f'Mean_Concentration_AirPollutant_{POLLUTANT_STANDARD[i]}')
+            columns.append(f'Max_Concentration_AirPollutant_{POLLUTANT_STANDARD[i]}')
+            columns.append(f'AirQualityIndex_AirPollutant_{POLLUTANT_STANDARD[i]}')
+            columns.append(f'Units_{POLLUTANT_STANDARD[i]}')
+            columns.append(f'Method_{POLLUTANT_STANDARD[i]}')
         writer = csv.DictWriter(f_out,
-                                fieldnames=CSV_COLUMNS,
+                                fieldnames=columns,
                                 lineterminator='\n')
         writer.writeheader()
-
-
-def write_csv(csv_file_path, reader, camel_case):
-    with open(csv_file_path, 'a', newline='') as f_out:
-        writer = csv.DictWriter(f_out,
-                                fieldnames=CSV_COLUMNS,
-                                lineterminator='\n')
-        for observation in reader: 
-            suffix = get_suffix(observation)
-            new_row = {
-                'Date': observation['Date Local'],
-                'Site_Number': 'epa/{state}{county}{site}'.format(
-                    state=observation['State Code'], county=observation['County Code'], site=observation['Site Num']),
-                'Site_Name': observation['Local Site Name'],
-                'Site_Location': '[latLong {lat} {long}]'.format(
-                    lat=observation['Latitude'], long=observation['Longitude']),
-                'County': 'dcid:geoId/' + observation['State Code'] + observation['County Code'],  # geoID for county
-                'Mean_Name': f'dcs:Mean_Concentration_AirPollutant_{suffix}',
-                'Mean_Value': observation['Arithmetic Mean'],
-                'Max_Name': f'dcs:Max_Concentration_AirPollutant_{suffix}',
-                'Max_Value': observation['1st Max Value'],
-                'AQI_Name': f'dcs:AirQualityIndex_AirPollutant_{suffix}',
-                'AQI_Value': observation['AQI'],
-                'Units': get_camel_case(camel_case, observation['Units of Measure']),
-                'Method': get_camel_case(camel_case, observation['Method Name'])
-            }
-            writer.writerow(new_row)
+        for key in d: 
+            writer.writerow(d[key])
 
 
 def write_tmcf(tmcf_file_path):
     with open(tmcf_file_path, 'w') as f_out:   
         f_out.write(TEMPLATE_MCF_AIR_QUALITY_SITE)
-        f_out.write(TEMPLATE_MCF)
+        for i in range(len(POLLUTANT_STANDARD)):
+            f_out.write(
+                TEMPLATE_MCF.format_map({
+                    'mean_index': (3 * i) + 1, 
+                    'max_index': (3 * i) + 2,
+                    'aqi_index': (3 * i) + 3,
+                    'suffix': POLLUTANT_STANDARD[i]
+                }))
 
 
 if __name__ == '__main__':
@@ -162,7 +173,7 @@ if __name__ == '__main__':
         '': '',
         ' - ': '',
     }
-    create_csv('EPA_CriteriaGases.csv')
+    d = {} 
     for (dirpath, dirnames, filenames) in os.walk(SOURCE_DATA):
         for filename in filenames:
             if filename.endswith('.zip'):
@@ -170,6 +181,8 @@ if __name__ == '__main__':
                 with ZipFile(dirpath + os.sep + filename) as zf:
                     with zf.open(filename[:-4] + '.csv', 'r') as infile:
                         reader = csv.DictReader(TextIOWrapper(infile, 'utf-8'))
-                        write_csv('EPA_CriteriaGases.csv', reader, camel_case)  
+                        for row in reader:
+                            join(d, row, camel_case)
+    write_csv('EPA_CriteriaGases.csv', d)
     write_tmcf('EPA_CriteriaGases.tmcf')
     

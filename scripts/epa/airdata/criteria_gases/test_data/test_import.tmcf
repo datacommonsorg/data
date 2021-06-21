@@ -1,34 +1,175 @@
-Node: E:test_import->E0
+
+Node: E:test_input->E0
 typeOf: dcs:AirQualitySite
-dcid: C:test_import->Site_Number
-name: C:test_impot->Site_Name
-location: C:test_import->Site_Location
-containedInPlace: C:test_import->County
+dcid: C:test_input->Site_Number
+name: C:test_input->Site_Name
+location: C:test_input->Site_Location
+containedInPlace: C:test_input->County
 
-Node: E:test_import->E1
+Node: E:test_input->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: C:test_import->Mean_Name
-measurementMethod: C:test_import->Method
-observationDate: C:test_import->Date
-observationAbout: E:test_import->E0
+variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone_8hour_2015
+measurementMethod: C:test_input->Method_Ozone_8hour_2015
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
 observationPeriod: dcs:"P1D"
-value: C:test_import->Mean_Value
-unit: C:test_import->Units
+value: C:test_input->Mean_Concentration_AirPollutant_Ozone_8hour_2015
+unit: C:test_input->Units_Ozone_8hour_2015
 
-Node: E:test_import->E2
+Node: E:test_input->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: C:test_import->Max_Name
-measurementMethod: C:test_import->Method
-observationDate: C:test_import->Date
-observationAbout: E:test_import->E0
+variableMeasured: dcs:Max_Concentration_AirPollutant_Ozone_8hour_2015
+measurementMethod: C:test_input->Method_Ozone_8hour_2015
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
 observationPeriod: dcs:"P1D"
-value: C:test_import->Max_Value
-unit: C:test_import->Units
+value: C:test_input->Max_Concentration_AirPollutant_Ozone_8hour_2015
+unit: C:test_input->Units_Ozone_8hour_2015
 
-Node: E:test_import->E3
+Node: E:test_input->E3
 typeOf: dcs:StatVarObservation
-variableMeasured: C:test_import->AQI_Name
-observationDate: C:test_import->Date
-observationAbout: E:test_import->E0
+variableMeasured: dcs:AirQualityIndex_AirPollutant_Ozone_8hour_2015
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
 observationPeriod: dcs:"P1D"
-value: C:test_import->AQI_Value
+value: C:test_input->AirQualityIndex_AirPollutant_Ozone_8hour_2015
+
+Node: E:test_input->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_SO2_1hour_2010
+measurementMethod: C:test_input->Method_SO2_1hour_2010
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Mean_Concentration_AirPollutant_SO2_1hour_2010
+unit: C:test_input->Units_SO2_1hour_2010
+
+Node: E:test_input->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_SO2_1hour_2010
+measurementMethod: C:test_input->Method_SO2_1hour_2010
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Max_Concentration_AirPollutant_SO2_1hour_2010
+unit: C:test_input->Units_SO2_1hour_2010
+
+Node: E:test_input->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_SO2_1hour_2010
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->AirQualityIndex_AirPollutant_SO2_1hour_2010
+
+Node: E:test_input->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_SO2_3hour_1971
+measurementMethod: C:test_input->Method_SO2_3hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Mean_Concentration_AirPollutant_SO2_3hour_1971
+unit: C:test_input->Units_SO2_3hour_1971
+
+Node: E:test_input->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_SO2_3hour_1971
+measurementMethod: C:test_input->Method_SO2_3hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Max_Concentration_AirPollutant_SO2_3hour_1971
+unit: C:test_input->Units_SO2_3hour_1971
+
+Node: E:test_input->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_SO2_3hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->AirQualityIndex_AirPollutant_SO2_3hour_1971
+
+Node: E:test_input->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_CO_1hour_1971
+measurementMethod: C:test_input->Method_CO_1hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Mean_Concentration_AirPollutant_CO_1hour_1971
+unit: C:test_input->Units_CO_1hour_1971
+
+Node: E:test_input->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_CO_1hour_1971
+measurementMethod: C:test_input->Method_CO_1hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Max_Concentration_AirPollutant_CO_1hour_1971
+unit: C:test_input->Units_CO_1hour_1971
+
+Node: E:test_input->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_CO_1hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->AirQualityIndex_AirPollutant_CO_1hour_1971
+
+Node: E:test_input->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_CO_8hour_1971
+measurementMethod: C:test_input->Method_CO_8hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Mean_Concentration_AirPollutant_CO_8hour_1971
+unit: C:test_input->Units_CO_8hour_1971
+
+Node: E:test_input->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_CO_8hour_1971
+measurementMethod: C:test_input->Method_CO_8hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Max_Concentration_AirPollutant_CO_8hour_1971
+unit: C:test_input->Units_CO_8hour_1971
+
+Node: E:test_input->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_CO_8hour_1971
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->AirQualityIndex_AirPollutant_CO_8hour_1971
+
+Node: E:test_input->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_NO2_1hour
+measurementMethod: C:test_input->Method_NO2_1hour
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Mean_Concentration_AirPollutant_NO2_1hour
+unit: C:test_input->Units_NO2_1hour
+
+Node: E:test_input->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_NO2_1hour
+measurementMethod: C:test_input->Method_NO2_1hour
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->Max_Concentration_AirPollutant_NO2_1hour
+unit: C:test_input->Units_NO2_1hour
+
+Node: E:test_input->E18
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_NO2_1hour
+observationDate: C:test_input->Date
+observationAbout: E:test_input->E0
+observationPeriod: dcs:"P1D"
+value: C:test_input->AirQualityIndex_AirPollutant_NO2_1hour
