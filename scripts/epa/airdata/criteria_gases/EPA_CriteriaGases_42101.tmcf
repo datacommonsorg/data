@@ -1,0 +1,63 @@
+
+Node: E:EPA_CriteriaGases->E0
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_CriteriaGases->Site_Number
+name: C:EPA_CriteriaGases->Site_Name
+location: C:EPA_CriteriaGases->Site_Location
+containedInPlace: C:EPA_CriteriaGases->County
+
+Node: E:EPA_CriteriaGases->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_CO_1hour_1971
+measurementMethod: C:EPA_CriteriaGases->Method_CO_1hour_1971
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->Mean_Concentration_AirPollutant_CO_1hour_1971
+unit: C:EPA_CriteriaGases->Units_CO_1hour_1971
+
+Node: E:EPA_CriteriaGases->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_CO_1hour_1971
+measurementMethod: C:EPA_CriteriaGases->Method_CO_1hour_1971
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->Max_Concentration_AirPollutant_CO_1hour_1971
+unit: C:EPA_CriteriaGases->Units_CO_1hour_1971
+
+Node: E:EPA_CriteriaGases->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_CO_1hour_1971
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->AirQualityIndex_AirPollutant_CO_1hour_1971
+
+Node: E:EPA_CriteriaGases->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_CO_8hour_1971
+measurementMethod: C:EPA_CriteriaGases->Method_CO_8hour_1971
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->Mean_Concentration_AirPollutant_CO_8hour_1971
+unit: C:EPA_CriteriaGases->Units_CO_8hour_1971
+
+Node: E:EPA_CriteriaGases->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_CO_8hour_1971
+measurementMethod: C:EPA_CriteriaGases->Method_CO_8hour_1971
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->Max_Concentration_AirPollutant_CO_8hour_1971
+unit: C:EPA_CriteriaGases->Units_CO_8hour_1971
+
+Node: E:EPA_CriteriaGases->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_CO_8hour_1971
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->AirQualityIndex_AirPollutant_CO_8hour_1971

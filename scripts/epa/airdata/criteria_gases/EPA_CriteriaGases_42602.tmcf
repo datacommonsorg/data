@@ -1,0 +1,35 @@
+
+Node: E:EPA_CriteriaGases->E0
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_CriteriaGases->Site_Number
+name: C:EPA_CriteriaGases->Site_Name
+location: C:EPA_CriteriaGases->Site_Location
+containedInPlace: C:EPA_CriteriaGases->County
+
+Node: E:EPA_CriteriaGases->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_NO2_1hour
+measurementMethod: C:EPA_CriteriaGases->Method_NO2_1hour
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->Mean_Concentration_AirPollutant_NO2_1hour
+unit: C:EPA_CriteriaGases->Units_NO2_1hour
+
+Node: E:EPA_CriteriaGases->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_NO2_1hour
+measurementMethod: C:EPA_CriteriaGases->Method_NO2_1hour
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->Max_Concentration_AirPollutant_NO2_1hour
+unit: C:EPA_CriteriaGases->Units_NO2_1hour
+
+Node: E:EPA_CriteriaGases->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirQualityIndex_AirPollutant_NO2_1hour
+observationDate: C:EPA_CriteriaGases->Date
+observationAbout: E:EPA_CriteriaGases->E0
+observationPeriod: dcs:"P1D"
+value: C:EPA_CriteriaGases->AirQualityIndex_AirPollutant_NO2_1hour

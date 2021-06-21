@@ -1,7 +1,7 @@
 # Importing EPA AirData - Criteria Gases
 The script generates:
-- `EPA_AirQuality.csv`
-- `EPA_AirQuality.tmcf`
+- `EPA_AirQuality_<POLLUTANT_ID>.csv`
+- `EPA_AirQuality_<POLLUTANT_ID>.tmcf`
 
 and relies on the following StatisticalVariables:
 - Mean_Concentration_AirPollutant_Ozone
@@ -24,9 +24,9 @@ and relies on the following StatisticalVariables:
 - AirQualityIndex_AirPollutant_PM10
 
 ## Generating Artifacts 
-To generate `EPA_AirQuality.csv` and `EPA_AirQuality.tmcf`, run: 
+To generate `EPA_AirQuality_<POLLUTANT_ID>.csv` and `EPA_AirQuality_<POLLUTANT_ID>.tmcf`, run: 
 ```
-python3 generate_tmcf.py
+python3 generate_tmcf.py <POLLUTANT_ID>
 ```
 
 ### Running Tests

@@ -25,6 +25,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
 
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir: 
+            pollutant = '44201'  # Ozone
             camel_case = {
                 '': '',
                 ' - ': '',
@@ -36,7 +37,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
                     join(d, row, camel_case)
 
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
-                write_csv(test_csv, d)         
+                write_csv(test_csv, d, pollutant)         
                 
                 expected_csv = os.path.join(module_dir_, 'test_data/test_import.csv')
                 with open(test_csv, 'r') as test: 
@@ -49,10 +50,11 @@ class TestCriteriaGasesTest(unittest.TestCase):
 
     def test_write_tmcf(self):
         with tempfile.TemporaryDirectory() as tmp_dir: 
+            pollutant = '44201'  # Ozone
             test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
-            write_tmcf(test_tmcf)
+            write_tmcf(test_tmcf, pollutant)
             
-            expected_tmcf = os.path.join(module_dir_, 'EPA_CriteriaGases.tmcf')
+            expected_tmcf = os.path.join(module_dir_, 'EPA_CriteriaGases_44201.tmcf')
             with open(test_tmcf, 'r') as test: 
                     test_str: str = test.read()
                     with open(expected_tmcf, 'r') as expected:

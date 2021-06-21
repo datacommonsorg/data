@@ -15,9 +15,9 @@
 Generates cleaned CSV and template MCF files for the EPA AirData Criteria
 Gases.
 
-Usage: python3 criteria_gases.py
+Usage: python3 criteria_gases.py <POLLUTANT_ID>
 '''
-import csv, os
+import csv, os, sys
 from zipfile import ZipFile
 from io import TextIOWrapper
 
@@ -25,14 +25,12 @@ SOURCE_DATA = "source_data"
 
 CSV_COLUMNS = ['Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County']
 
-POLLUTANT_STANDARD = [
-    'Ozone_8hour_2015',
-    'SO2_1hour_2010',
-    'SO2_3hour_1971',
-    'CO_1hour_1971',
-    'CO_8hour_1971',
-    'NO2_1hour',
-]
+POLLUTANT_STANDARD = {
+    '44201': ['Ozone_8hour_2015'],
+    '42401': ['SO2_1hour_2010', 'SO2_3hour_1971'],
+    '42101': ['CO_1hour_1971', 'CO_8hour_1971'],
+    '42602': ['NO2_1hour'],
+}
 
 # Template MCF for StatVarObservation
 TEMPLATE_MCF = '''
@@ -113,8 +111,10 @@ def get_suffix(parameter, standard):
         return 'NO2'
     return ''
 
-def join(d, observation, camel_case):    
-    key = (observation['Date Local'], observation['Site Num'])
+def join(d, observation, camel_case):
+    site = 'epa/{state}{county}{site}'.format(
+        state=observation['State Code'], county=observation['County Code'], site=observation['Site Num'])
+    key = (observation['Date Local'], site)
     suffix = get_suffix(observation['Parameter Name'], observation['Pollutant Standard'])
     if key in d:
         d[key][f'Mean_Concentration_AirPollutant_{suffix}'] = observation['Arithmetic Mean']
@@ -125,8 +125,7 @@ def join(d, observation, camel_case):
     else: 
         d[key] = {
             'Date': observation['Date Local'],
-            'Site_Number': 'epa/{state}{county}{site}'.format(
-                state=observation['State Code'], county=observation['County Code'], site=observation['Site Num']),
+            'Site_Number': site,
             'Site_Name': observation['Local Site Name'],
             'Site_Location': '[latLong {lat} {long}]'.format(
                 lat=observation['Latitude'], long=observation['Longitude']),
@@ -138,15 +137,16 @@ def join(d, observation, camel_case):
             f'Method_{suffix}': get_camel_case(camel_case, observation['Method Name']),
         }
 
-def write_csv(csv_file_path, d):
+def write_csv(csv_file_path, d, pollutant):
     with open(csv_file_path, 'w', newline='') as f_out:
         columns = CSV_COLUMNS
-        for i in range(len(POLLUTANT_STANDARD)):
-            columns.append(f'Mean_Concentration_AirPollutant_{POLLUTANT_STANDARD[i]}')
-            columns.append(f'Max_Concentration_AirPollutant_{POLLUTANT_STANDARD[i]}')
-            columns.append(f'AirQualityIndex_AirPollutant_{POLLUTANT_STANDARD[i]}')
-            columns.append(f'Units_{POLLUTANT_STANDARD[i]}')
-            columns.append(f'Method_{POLLUTANT_STANDARD[i]}')
+        for i in range(len(POLLUTANT_STANDARD[pollutant])):
+            suffix = POLLUTANT_STANDARD[pollutant][i]
+            columns.append(f'Mean_Concentration_AirPollutant_{suffix}')
+            columns.append(f'Max_Concentration_AirPollutant_{suffix}')
+            columns.append(f'AirQualityIndex_AirPollutant_{suffix}')
+            columns.append(f'Units_{suffix}')
+            columns.append(f'Method_{suffix}')
         writer = csv.DictWriter(f_out,
                                 fieldnames=columns,
                                 lineterminator='\n')
@@ -155,26 +155,27 @@ def write_csv(csv_file_path, d):
             writer.writerow(d[key])
 
 
-def write_tmcf(tmcf_file_path):
+def write_tmcf(tmcf_file_path, pollutant):
     with open(tmcf_file_path, 'w') as f_out:   
         f_out.write(TEMPLATE_MCF_AIR_QUALITY_SITE)
-        for i in range(len(POLLUTANT_STANDARD)):
+        for i in range(len(POLLUTANT_STANDARD[pollutant])):
             f_out.write(
                 TEMPLATE_MCF.format_map({
                     'mean_index': (3 * i) + 1, 
                     'max_index': (3 * i) + 2,
                     'aqi_index': (3 * i) + 3,
-                    'suffix': POLLUTANT_STANDARD[i]
+                    'suffix': POLLUTANT_STANDARD[pollutant][i]
                 }))
 
 
 if __name__ == '__main__':
+    pollutant = sys.argv[1]
     camel_case = {
         '': '',
         ' - ': '',
     }
-    d = {} 
-    for (dirpath, dirnames, filenames) in os.walk(SOURCE_DATA):
+    d = {}   
+    for (dirpath, dirnames, filenames) in os.walk(SOURCE_DATA + '/' + pollutant):
         for filename in filenames:
             if filename.endswith('.zip'):
                 print(filename)
@@ -183,6 +184,6 @@ if __name__ == '__main__':
                         reader = csv.DictReader(TextIOWrapper(infile, 'utf-8'))
                         for row in reader:
                             join(d, row, camel_case)
-    write_csv('EPA_CriteriaGases.csv', d)
-    write_tmcf('EPA_CriteriaGases.tmcf')
+    write_csv(f'EPA_CriteriaGases_{pollutant}.csv', d, pollutant) 
+    write_tmcf(f'EPA_CriteriaGases_{pollutant}.tmcf', pollutant)
     
