@@ -1,0 +1,10 @@
+Node: E:productRoles->E1
+typeOf: dcs:Metabolite
+dcid: C:productRoles->dcid
+
+Node: E:productRoles->E2
+typeOf: dcs:Reaction
+dcid: C:productRoles->reactionID
+productMetabolite: E:productRoles->E1
+
+
