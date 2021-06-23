@@ -9,9 +9,10 @@ biggID: C:metabolites->bigg.metabolite
 chebiID: C:metabolites->chebi
 chemblID: C:metabolites->chembl
 keggCompoundID: C:metabolites->kegg_compound
-metanetxID: C:metabolites->metanetx_chemical
+metaNetXID: C:metabolites->metanetx_chemical
 humanMetabolomeDatabaseID: C:metabolites->hmdb
 pubChemCompoundID: C:metabolites->pubchem_compound
-lipidmapsID: C:metabolites->lipidmaps
+lipidMapsID: C:metabolites->lipidmaps
+transportClassificationDatabaseID: C:metabolites->tcdb
 
 
