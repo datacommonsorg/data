@@ -1,13 +1,13 @@
-Node: E:gene_reaction->E1
+Node: E:geneRoles->E1
 typeOf: dcs:Gene
 dcid: C:gene_reaction->hm_38_gene
-geneRole: E:gene_reaction->E2
+geneRole: E:geneRoles->E2
 
-Node: E:gene_reaction->E2
+Node: E:geneRoles->E2
 typeOf: dcs:Reaction
-dcid: C:gene_reaction->reactionID
+dcid: C:geneRoles->reactionID
 
-Node: E:gene_reaction->E3
+Node: E:geneRoles->E3
 typeOf: dcs:Gene
-dcid: C:gene_reaction->hm_19_gene
-geneRole: E:gene_reaction->E2
+dcid: C:geneRoles->hm_19_gene
+geneRole: E:geneRole->E2
