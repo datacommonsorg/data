@@ -1,5 +1,5 @@
 Node: E:reactions->E1
-typeOf: dcs:Reaction
+typeOf: dcs:MetabolicReaction
 dcid: C:reactions->dcid
 humanGEMID: C:reactions->id
 reversibleReaction: C:reactions->reversible
@@ -8,5 +8,7 @@ metabolicFluxRange: C:reactions->fluxRange
 enzymeCommissionNumber: C:reactions->ec
 keggReactionID: C:reactions->kegg
 biggID: C:reactions->bigg
-metanetxID: C:reactions->metanetx
+metaNetXID: C:reactions->metanetx
 reactomeID: C:reactions->reactome
+transportClassificationDatabaseID: C:metabolites->tcdb
+
