@@ -5,5 +5,5 @@ dcid: C:reactantRoles->dcid
 Node: E:reactantRoles->E2
 typeOf: dcs:MetabolicReaction
 dcid: C:reactantRoles->reactionID
-reactantMetabolites: E:reactantRoles->E1
+reactant: E:reactantRoles->E1
 
