@@ -1,5 +1,5 @@
 Node: E:groupMemberships->E1
-typeOf: dcs:Reaction
+typeOf: dcs:MetabolicReaction
 dcid: C:groupMemberships->reactionID
 memberOfMetabolicReactionSubsystem: E:groupMemberships->E2
 
