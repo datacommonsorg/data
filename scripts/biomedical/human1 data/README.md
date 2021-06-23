@@ -23,28 +23,29 @@ An interactive web portal for viewing Human1 data can be found [here](https://me
 
 ### Database Overview 
 
-This directory stores scripts and data for generating csv files which can be combined with the provided tMCF and MCF files to ingest Human1 data to Data Commons knowledge graph. 
+This directory stores scripts and data for generating csv files which can be combined with the provided tMCF to ingest Human1 data to Data Commons knowledge graph. 
 
 #### Data files <br>
+
+Data files can be found in ./data folder 
 
 * Entities:
 
 |File| Description|
 ---------|-----------
-|[genes.tsv](https://github.com/khoahoang1891999/ISB_project/tree/main/data/genes.tsv)| containing information about genes|
-|[metabolites.tsv](https://github.com/khoahoang1891999/ISB_project/tree/main/data/metabolites.tsv)| containing informaion about metabolites|
-|[reactions.tsv](https://github.com/khoahoang1891999/ISB_project/tree/main/data/reactions.tsv)| containing information about reactions|
-|[groups.tsv](https://github.com/khoahoang1891999/ISB_project/tree/main/data/groups.tsv)| containing information about metabolites classification/metabolic subsytems|
+|genes.tsv| containing information about genes|
+|metabolites.tsv| containing informaion about metabolites|
+|reactions.tsv| containing information about reactions|
+|groups.tsv| containing information about metabolites classification/metabolic subsytems|
 
 * Relationships:
 
 |File| Description|
 ---------|-----------
-|[geneRoles.tsv](https://github.com/khoahoang1891999/ISB_project/tree/main/data/geneRoles.tsv)| indicating relationships between gene and reactions|
-|[reactantRoles.tsv](https://github.com/khoahoang1891999/ISB_project/tree/main/data/reactantRoles.tsv)| indicating relationships between reactions and their reatants|
-|[productRoles.tsv](https://github.com/khoahoang1891999/ISB_project/tree/main/data/productRoles.tsv)| inicating relationships between reactions and their products|
-|[groupMemberships.tsv](https://github.com/khoahoang1891999/ISB_project/tree/main/data/groupMemberships.tsv)| indicating relationships between reations and the subsystems they belong to|
-
+|geneRoles.tsv| indicating relationships between gene and reactions|
+|reactantRoles.tsv| indicating relationships between reactions and their reatants|
+|productRoles.tsv| inicating relationships between reactions and their products|
+|groupMemberships.tsv| indicating relationships between reations and the subsystems they belong to|
 
 
 ### Schema Overview 
@@ -63,34 +64,42 @@ Relationship between reactions and metabolic subsystems is defined in [memberOfM
 
 Several gene symbols were not abled to map to existing Gene dcid on Data Commons knowledge graph. Specifically, NTAQ1 couldn't be found on GenomeAssembly hg38. NTAQ1, Z83844.1, AC011462.1, AL845331.1, AC022400.5, AP000812.4, AC093512.2, AL160260.1 couldn't be found on GenomeAssembly hg19. <br>
 
-8 metabolites are metabolite classes, in which case humanGEMIDs are used as dcid <br>
+chemblID are used as dcid for metabolites. For metabolites that lack chemblID, chemical formula is used as dcid. Eight metabolites are metabolite classes, in which case humanGEMIDs are used as dcid <br>
 
 ### License
 
-Creative Commons Attribution 4.0 International
+Creative Commons Attribution 4.0 International <br>
+
 More information about License can be found [here](https://github.com/SysBioChalmers/Human-GEM/blob/master/LICENSE.md)
 
 ## About the Import 
 
+Python scripts file for processing data files are stored in ./script folder <br>
+Please read the description of each file for the appropriate inputs. <br>
+
 ### Scripts
 |File| Description|
 ---------|-----------
-|[format_genes_geneRoles.py](https://github.com/khoahoang1891999/ISB_project/blob/main/scripts/format_genes_geneRoles.py)|Inputs: genes.tsv, geneRoles.tsv <br> Outputs: formatted genes.csv, geneRoles.csv|
-|[format_metabolites_reactantRoles_productRoles.py](https://github.com/khoahoang1891999/ISB_project/blob/main/scripts/format_metabolites_reactantRoles_productRoles.py)|Inputs: metabolites.tsv, reactants.tsv, products.tsv <br> Outputs: formatted metabolites.csv, reactants.csv, products.csv|
-|[format_reactions.py](https://github.com/khoahoang1891999/ISB_project/blob/main/scripts/format_reactions.py)|Inputs: reactions.tsv <br> Outputs: formatted reactions.csv|
-|[format_groups_groupMemberships.py](https://github.com/khoahoang1891999/ISB_project/blob/main/scripts/format_groups_groupMemberships.py)|Inputs: groups.tsv, groupMemberships.tsv<br> Outputs: formatted groups.csv, groupMemberships.tsv|
+|format_genes_geneRoles.py|Inputs: genes.tsv, geneRoles.tsv <br> Outputs: formatted genes.csv, geneRoles.csv|
+|format_metabolites_reactantRoles_productRoles.py|Inputs: metabolites.tsv, reactants.tsv, products.tsv <br> Outputs: formatted metabolites.csv, reactants.csv, products.csv|
+|format_reactions.py|Inputs: reactions.tsv <br> Outputs: formatted reactions.csv|
+|format_groups_groupMemberships.py|Inputs: groups.tsv, groupMemberships.tsv<br> Outputs: formatted groups.csv, groupMemberships.tsv|
 
 ### tMCF files
+
+tMCF files are stored in ./tMCF folder <br>
+These files can be used together with the generated .csv files to ingest human1 data to Data Commons. <br>
+
 |File| Description|
 ---------|-----------
-|[genes.tmcf](https://github.com/khoahoang1891999/ISB_project/blob/main/tMCF%20files/genes.tmcf)| combine with genes.csv for ingestion  |
-|[metabolites.tmcf](https://github.com/khoahoang1891999/ISB_project/blob/main/tMCF%20files/metabolites.tmcf)| combine with metabolites.csv for ingestion  |
-|[reactions.tmcf](https://github.com/khoahoang1891999/ISB_project/blob/main/tMCF%20files/reactions.tmcf)| combine with reactions.csv for ingestion  |
-|[groups.tmcf](https://github.com/khoahoang1891999/ISB_project/blob/main/tMCF%20files/groups.tmcf)| combine with groups.csv for ingestion  |
-|[geneRoles.tmcf](https://github.com/khoahoang1891999/ISB_project/blob/main/tMCF%20files/geneRoles.tmcf)| combine with geneRoles.csv for ingestion  |
-|[reactantRoles.tmcf](https://github.com/khoahoang1891999/ISB_project/blob/main/tMCF%20files/reactantRoles.tmcf)| combine with reactantRoles.csv for ingestion  |
-|[productRoles.tmcf](https://github.com/khoahoang1891999/ISB_project/blob/main/tMCF%20files/productRoles.tmcf)| combine with productRoles.csv for ingestion  |
-|[groupMemberships.tmcf](https://github.com/khoahoang1891999/ISB_project/blob/main/tMCF%20files/groupMemberships.tmcf)| combine with groupMemberships.csv for ingestion  |
+|genes.tmcf| combine with genes.csv for ingestion  |
+|metabolites.tmcf| combine with metabolites.csv for ingestion  |
+|reactions.tmcf| combine with reactions.csv for ingestion  |
+|groups.tmcf| combine with groups.csv for ingestion  |
+|geneRoles.tmcf| combine with geneRoles.csv for ingestion  |
+|reactantRoles.tmcf| combine with reactantRoles.csv for ingestion  |
+|productRoles.tmcf| combine with productRoles.csv for ingestion  |
+|groupMemberships.tmcf| combine with groupMemberships.csv for ingestion  |
 
 ### Example 
 
