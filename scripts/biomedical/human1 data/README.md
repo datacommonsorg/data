@@ -50,15 +50,39 @@ Data files can be found in ./data folder
 
 ### Schema Overview 
 
-Human1 data contains information about the relationships between metabolites, reactions, metabolic subsystems, and proteins/genes involved in reations. 
+Human1 data contains information about the relationships between metabolites, reactions, metabolic subsystems, and proteins/genes involved in reations. <br>
+The schema for Human1 data can be found in Human1.mcf and Human1_Enum.mcf. <br>
 
-"systemsBiologyOntologyTerm" property is defined in [systemsBiologyOntology.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/systemsBiologyOntologyTerm.mcf) <br>
-A new class of Metabolite and its associated properties ("humanGEMID", "chemicalFormula", "cellularCompartment", "biggID", "metanetxID", "lipimapsID") are defined in [Metabolite.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/Metabolite.mcf) and [CellularCompartmentEnum.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/CellularCompartmentEnum.mcf) <br>
-A new class of Reaction and its associated properties ("humanGEMID", "biggID", "metanetxID", "reversiblReaction", "fastReaction", "metabolicFluxRange", "enzymeCommissionNumber", "keggReactionID", "reactomeID") are defined in [Reaction.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/Reaction.mcf)<br>
-A new class of MetabolicReactionSubsystem and its associated properties ("humanGEMID","hierachyType") are defined in [MetabolicReactionSubsystems.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/MetabolicReactionSubsystem.mcf) and [HierachyTypeEnum.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/HierachyTypeEnum.mcf) <br>
-Relationship between genes and reactions is defined in [geneRole.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/geneRole.mcf). as property "geneRole"<br> 
-Relationship between metabolites and reactions are defined in [productMetabolite.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/productMetabolite.mcf) and [reactantMetabolite.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/reactantMetabolite.mcf) as properties "productMetabolite" and "reactantMetabolite" <br>
-Relationship between reactions and metabolic subsystems is defined in [memberOfMetabolicReactionSubsystem.mcf](https://github.com/khoahoang1891999/ISB_project/blob/main/MCF%20files/memberOfMetabolicReactionSubsystem.mcf) as property "memberOfMetabolicReactionSubsystem" .
+"Metabolite" class is defined as a subClass of "ChemicalCompound". It includes the following properties on tops of properties of "ChemicalCompound":
+* "humanGEMID"
+* "cellularCompartment": Enum type, include categories such as ("cellularCompartmentCytosol", "cellularCompartmentLysosomal",etc...)
+* "chemicalFormula"
+* "biggID"
+* "metaNetXID"
+* "lipidMapsID"
+
+"MetabolicReaction" class has the following properties:
+* "humanGEMID"
+* "metaNetXID"
+* "biggID"
+* "isReactionReversible"
+* "isReactionFast"
+* "metabolicFluxRange"
+* "enzymeCommissionNumber"
+* "keggReactionID"
+* "reactomeID"
+* "transporterClassificationDatabaseID"
+* "hierachyType": Enum type, include category such as "partonomy"
+
+"Gene" is connected with  "MetabolicReaction" by property "geneRole", indicating enzyme participating in the reaction.
+
+"MetabolicReaction" and "Metabolite" is connected by "reactant" and "reactionProduct" properties.
+
+"MetabolicReactionSubsystem" class has the following properties:
+* "humanGEMID"
+* "systemBioOntologyTerm", which is also added to the domain of "Gene"
+
+"MetabolicReaction" and "MetabolicReactionSubsystem" is connected by "memberOfMetabolicReactionSubsystem" property.
 
 ### Notes and Caveats
 
