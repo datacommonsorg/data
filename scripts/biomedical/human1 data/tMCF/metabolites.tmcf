@@ -13,6 +13,5 @@ metaNetXID: C:metabolites->metanetx_chemical
 humanMetabolomeDatabaseID: C:metabolites->hmdb
 pubChemCompoundID: C:metabolites->pubchem_compound
 lipidMapsID: C:metabolites->lipidmaps
-transportClassificationDatabaseID: C:metabolites->tcdb
 
 
