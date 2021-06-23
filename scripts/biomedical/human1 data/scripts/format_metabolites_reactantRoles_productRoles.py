@@ -7,15 +7,15 @@ def main():
     metabolite_tsv, reactant_tsv, product_tsv = sys.argv[1],sys.argv[2],sys.argv[3]
 
     compartment_dict = {
-        "c":"dcs:CellularCompartmentEnumCytosol",
-        "s": "dcs:CellularCompartmentEnumExtracellular",
-        "l": "dcs:CellularCompartmentEnumLysosome",
-        "r": "dcs:CellularCompartmentEnumEndoplasmicReticulum",
-        "m": "dcs:CellularCompartmentEnumMitochondria",
-        "p": "dcs:CellularCompartmentEnumPeroxisome",
-        "g": "dcs:CellularCompartmentEnumGolgiApparatus",
-        "n": "dcs:CellularCompartmentEnumNucleus",
-        "c_i": "dcs:CellularCompartmentEnumInnerMitochondria"
+        "c":"dcs:CellularCompartmentCytosol",
+        "s": "dcs:CellularCompartmentExtracellular",
+        "l": "dcs:CellularCompartmentLysosome",
+        "r": "dcs:CellularCompartmentEndoplasmicReticulum",
+        "m": "dcs:CellularCompartmentMitochondria",
+        "p": "dcs:CellularCompartmentPeroxisome",
+        "g": "dcs:CellularCompartmentGolgiApparatus",
+        "n": "dcs:CellularCompartmentNucleus",
+        "c_i": "dcs:CellularCompartmentInnerMitochondria"
     }
 
     df_metabolites = pd.read_csv(metabolite_tsv, sep = "\t")
