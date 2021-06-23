@@ -6,7 +6,7 @@ def main():
 
 
     hierachy_dict = {
-        "partonomy":"dcs:HierachyTypeEnumPartonomy"
+        "partonomy":"dcs:HierachyTypePartonomy"
     }
     
     groups_tsv, groupMemberships_tsv = sys.argv[1], sys.argv[2]
