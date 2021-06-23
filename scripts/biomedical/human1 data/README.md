@@ -94,9 +94,9 @@ More information about License can be found [here](https://github.com/SysBioChal
 
 ### Example 
 
-To format genes.tsv and geneRoles.tsv, run:
+To format genes.tsv and geneRoles.tsv, put the tsv files and the python scipt in the same directory and run:
 ```bash
-python format_genes_geneRoles.py "genes.tsv" "geneRoles.tsv"
+python format_genes_geneRoles.py genes.tsv geneRoles.tsv
 ```
 
 The formatted genes.csv and geneRoles.csv will be generated in the current directory. These csv files can be combined with its corressponding tMCF files for data ingestion to Data Commons.
