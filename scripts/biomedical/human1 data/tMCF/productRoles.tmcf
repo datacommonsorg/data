@@ -3,7 +3,7 @@ typeOf: dcs:Metabolite
 dcid: C:productRoles->dcid
 
 Node: E:productRoles->E2
-typeOf: dcs:Reaction
+typeOf: dcs:MetabolicReaction
 dcid: C:productRoles->reactionID
 productMetabolite: E:productRoles->E1
 
