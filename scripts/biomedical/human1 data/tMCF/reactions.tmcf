@@ -10,5 +10,5 @@ keggReactionID: C:reactions->kegg
 biggID: C:reactions->bigg
 metaNetXID: C:reactions->metanetx
 reactomeID: C:reactions->reactome
-transportClassificationDatabaseID: C:metabolites->tcdb
+transportClassificationDatabaseID: C:reactions->tcdb
 
