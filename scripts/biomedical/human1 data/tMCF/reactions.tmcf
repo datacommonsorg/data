@@ -2,8 +2,8 @@ Node: E:reactions->E1
 typeOf: dcs:MetabolicReaction
 dcid: C:reactions->dcid
 humanGEMID: C:reactions->id
-reversibleReaction: C:reactions->reversible
-fastReaction: C:reactions->fast
+isReactionReversible: C:reactions->reversible
+isReactionFast: C:reactions->fast
 metabolicFluxRange: C:reactions->fluxRange
 enzymeCommissionNumber: C:reactions->ec
 keggReactionID: C:reactions->kegg
