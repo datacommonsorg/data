@@ -67,7 +67,8 @@ Several gene symbols were not abled to map to existing Gene dcid on Data Commons
 
 ### License
 
-Information about License can be found [here](https://github.com/SysBioChalmers/Human-GEM/blob/master/LICENSE.md)
+Creative Commons Attribution 4.0 International
+More information about License can be found [here](https://github.com/SysBioChalmers/Human-GEM/blob/master/LICENSE.md)
 
 ## About the Import 
 
