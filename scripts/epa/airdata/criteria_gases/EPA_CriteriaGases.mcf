@@ -1,143 +1,95 @@
 ## Statistical Variables
 
-Node: dcid:Mean_Concentration_AirPollutant_Ozone_8hour_2015
-description: "Mean ozone concentration in air using the Ozone 8-hour 2015 pollutant standard."
+Node: dcid:Mean_Concentration_AirPollutant_Ozone
+description: "Mean ozone concentration in air."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:concentration
 statType: dcs:meanValue
 pollutant: dcs:Ozone
 
-Node: dcid:Max_Concentration_AirPollutant_Ozone_8hour_2015
-description: "Max ozone concentration in air using the Ozone 8-hour 2015 pollutant standard."
+Node: dcid:Max_Concentration_AirPollutant_Ozone
+description: "Max ozone concentration in air."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:concentration
 statType: dcs:maxValue
 pollutant: dcs:Ozone
 
-Node: dcid:AirQualityIndex_AirPollutant_Ozone_8hour_2015
-description: "Air quality index for ozone using the Ozone 8-hour 2015 pollutant standard."
+Node: dcid:AirQualityIndex_AirPollutant_Ozone
+description: "Air quality index for ozone."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:airQualityIndex
 statType: dcs:measuredValue
 pollutant: dcs:Ozone
 
-Node: dcid:Mean_Concentration_AirPollutant_SO2_1hour_2010
-description: "Mean SO2 concentration in air using the SO2 1-hour 2010 pollutant standard."
+Node: dcid:Mean_Concentration_AirPollutant_SO2
+description: "Mean SO2 concentration in air."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:concentration
 statType: dcs:meanValue
 pollutant: dcs:SulferDioxide
 
-Node: dcid:Max_Concentration_AirPollutant_SO2_1hour_2010 
-description: "Max SO2 concentration in air using the SO2 1-hour 2010 pollutant standard."
+Node: dcid:Max_Concentration_AirPollutant_SO2
+description: "Max SO2 concentration in air."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:concentration
 statType: dcs:maxValue
 pollutant: dcs:SulferDioxide
 
-Node: dcid:AirQualityIndex_AirPollutant_SO2_1hour_2010
-description: "Air quality index for SO2 using the SO2 1-hour 2010 pollutant standard."
+Node: dcid:AirQualityIndex_AirPollutant_SO2
+description: "Air quality index for SO2."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:airQualityIndex
 statType: dcs:measuredValue
 pollutant: dcs:SulferDioxide
 
-Node: dcid:Mean_Concentration_AirPollutant_SO2_3hour_1971
-description: "Mean SO2 concentration in air using the SO2 3-hour 1971 pollutant standard."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:concentration
-statType: dcs:meanValue
-pollutant: dcs:SulferDioxide
-
-Node: dcid:Max_Concentration_AirPollutant_SO2_3hour_1971
-description: "Max SO2 concentration in air using the SO2 3-hour 1971 pollutant standard."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:concentration
-statType: dcs:maxValue
-pollutant: dcs:SulferDioxide
-
-Node: dcid:AirQualityIndex_AirPollutant_SO2_3hour_1971
-description: "Air quality index for SO2 using the SO2 3-hour 1971 pollutant standard."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:airQualityIndex
-statType: dcs:measuredValue
-pollutant: dcs:SulferDioxide
-
-Node: dcid:Mean_Concentration_AirPollutant_CO_1hour_1971
-description: "Mean CO concentration in air using the CO 1-hour 1971 pollutant standard."
+Node: dcid:Mean_Concentration_AirPollutant_CO
+description: "Mean CO concentration in air."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:concentration
 statType: dcs:meanValue
 pollutant: dcs:CarbonMonoxide
 
-Node: dcid:Max_Concentration_AirPollutant_CO_1hour_1971 
-description: "Max CO concentration in air using the CO 1-hour 1971 pollutant standard."
+Node: dcid:Max_Concentration_AirPollutant_CO
+description: "Max CO concentration in air."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:concentration
 statType: dcs:maxValue
 pollutant: dcs:CarbonMonoxide
 
-Node: dcid:AirQualityIndex_AirPollutant_CO_1hour_1971
-description: "Air quality index for CO using the CO 1-hour 1971 pollutant standard."
+Node: dcid:AirQualityIndex_AirPollutant_CO
+description: "Air quality index for CO."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:airQualityIndex
 statType: dcs:measuredValue
 pollutant: dcs:CarbonMonoxide
 
-Node: dcid:Mean_Concentration_AirPollutant_CO_8hour_1971
-description: "Mean CO concentration in air using the CO 8-hour 1971 pollutant standard."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:concentration
-statType: dcs:meanValue
-pollutant: dcs:CarbonMonoxide
-
-Node: dcid:Max_Concentration_AirPollutant_CO_8hour_1971 
-description: "Max CO concentration in air using the CO 8-hour 1971 pollutant standard."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:concentration
-statType: dcs:maxValue
-pollutant: dcs:CarbonMonoxide
-
-Node: dcid:AirQualityIndex_AirPollutant_CO_8hour_1971
-description: "Air quality index for CO using the CO 8-hour 1971 pollutant standard."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:airQualityIndex
-statType: dcs:measuredValue
-pollutant: dcs:CarbonMonoxide
-
-Node: dcid:Mean_Concentration_AirPollutant_NO2_1hour
-description: "Mean NO2 concentration in air using the NO2 1-hour pollutant standard."
+Node: dcid:Mean_Concentration_AirPollutant_NO2
+description: "Mean NO2 concentration in air."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:concentration
 statType: dcs:meanValue
 pollutant: dcs:NitrogenDioxide
 
-Node: dcid:Max_Concentration_AirPollutant_NO2_1hour
-description: "Max NO2 concentration in air using the NO2 1-hour pollutant standard."
+Node: dcid:Max_Concentration_AirPollutant_NO2
+description: "Max NO2 concentration in air."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:concentration
 statType: dcs:maxValue
 pollutant: dcs:NitrogenDioxide
 
-Node: dcid:AirQualityIndex_AirPollutant_NO2_1hour
-description: "Air quality index for NO2 using the NO2 1-hour pollutant standard."
+Node: dcid:AirQualityIndex_AirPollutant_NO2
+description: "Air quality index for NO2."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:airQualityIndex

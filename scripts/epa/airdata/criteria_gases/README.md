@@ -16,12 +16,6 @@ and relies on the following StatisticalVariables:
 - Mean_Concentration_AirPollutant_NO2
 - Max_Concentration_AirPollutant_NO2 
 - AirQualityIndex_AirPollutant_NO2
-- Mean_Concentration_AirPollutant_PM2.5
-- Max_Concentration_AirPollutant_PM2.5 
-- AirQualityIndex_AirPollutant_PM2.5
-- Mean_Concentration_AirPollutant_PM10 
-- Max_Concentration_AirPollutant_PM10 
-- AirQualityIndex_AirPollutant_PM10
 
 ## Generating Artifacts 
 To generate `EPA_AirQuality_<POLLUTANT_ID>.csv` and `EPA_AirQuality_<POLLUTANT_ID>.tmcf`, run: 

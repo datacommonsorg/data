@@ -17,7 +17,7 @@ Unit tests for criteria_gases.py
 Usage: python3 criteria_gases_test.py
 '''
 import unittest, csv, os, tempfile
-from criteria_gases import join, write_csv, write_tmcf
+from criteria_gases import create_csv, write_csv, write_tmcf
 
 module_dir_ = os.path.dirname(__file__)
 
@@ -25,19 +25,13 @@ class TestCriteriaGasesTest(unittest.TestCase):
 
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir: 
-            pollutant = '44201'  # Ozone
-            camel_case = {
-                '': '',
-                ' - ': '',
-            }
-            d = {}
+            pollutant = '42401'  # SO2
             with open(os.path.join(module_dir_, 'test_data/test_import_data.csv'), 'r') as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    join(d, row, camel_case)
-
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
-                write_csv(test_csv, d, pollutant)         
+                create_csv(test_csv)
+                
+                reader = csv.DictReader(f)
+                write_csv(test_csv, reader)         
                 
                 expected_csv = os.path.join(module_dir_, 'test_data/test_import.csv')
                 with open(test_csv, 'r') as test: 
@@ -50,11 +44,11 @@ class TestCriteriaGasesTest(unittest.TestCase):
 
     def test_write_tmcf(self):
         with tempfile.TemporaryDirectory() as tmp_dir: 
-            pollutant = '44201'  # Ozone
+            pollutant = '42401'  # SO2
             test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
             write_tmcf(test_tmcf, pollutant)
             
-            expected_tmcf = os.path.join(module_dir_, 'EPA_CriteriaGases_44201.tmcf')
+            expected_tmcf = os.path.join(module_dir_, 'EPA_CriteriaGases_42401.tmcf')
             with open(test_tmcf, 'r') as test: 
                     test_str: str = test.read()
                     with open(expected_tmcf, 'r') as expected:
