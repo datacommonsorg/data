@@ -132,11 +132,14 @@ def write_csv(csv_file_path, reader):
             new_row = {
                 'Date': observation['Date Local'],
                 'Site_Number': 'epa/{state}{county}{site}'.format(
-                    state=observation['State Code'], county=observation['County Code'], site=observation['Site Num']),
+                    state=observation['State Code'],
+                    county=observation['County Code'],
+                    site=observation['Site Num']
+                ),
                 'Site_Name': observation['Local Site Name'],
                 'Site_Location': '[latLong {lat} {long}]'.format(
                     lat=observation['Latitude'], long=observation['Longitude']),
-                'County': 'dcid:geoId/' + observation['State Code'] + observation['County Code'],  # geoID for county
+                'County': 'dcid:geoId/' + observation['State Code'] + observation['County Code'],
                 'Mean': observation['Arithmetic Mean'],
                 'Max': observation['1st Max Value'],
                 'AQI': observation['AQI'],
