@@ -1,0 +1,15 @@
+import: {
+  import_name: "EPACriteriaGases3"
+  provenance_url: "https://aqs.epa.gov"
+  provenance_description: "The EPA Air Data site tracks various air quality measurements at different sites throughout the US, Puerto Rico, and US Virgin Islands."
+  # Path to the resolved MCF. Can be a repeated field.
+  mcf_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/epa/airdata/criteria_gases/3/nodes.mcf-?????-of-?????"
+  mcf_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/epa/airdata/criteria_gases/3/EPA_CriteriaGases.mcf"
+  # First date of imported data.
+  start_date: "1980-01-01"
+  # Last date of imported data.
+  end_date: "2021-04-20"
+  # Source data release schedule.
+  update_frequency: "P6M"
+  next_release_date: "2021-11-01"
+}
