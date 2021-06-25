@@ -24,17 +24,16 @@ module_dir_ = os.path.dirname(__file__)
 class TestCriteriaGasesTest(unittest.TestCase):
 
     def test_write_csv(self):
-        with tempfile.TemporaryDirectory() as tmp_dir: 
-            pollutant = '42401'  # SO2
+        with tempfile.TemporaryDirectory() as tmp_dir:
             with open(os.path.join(module_dir_, 'test_data/test_import_data.csv'), 'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
                 create_csv(test_csv)
-                
+
                 reader = csv.DictReader(f)
-                write_csv(test_csv, reader)         
-                
+                write_csv(test_csv, reader)
+
                 expected_csv = os.path.join(module_dir_, 'test_data/test_import.csv')
-                with open(test_csv, 'r') as test: 
+                with open(test_csv, 'r') as test:
                     test_str: str = test.read()
                     with open(expected_csv, 'r') as expected:
                         expected_str: str = expected.read()
@@ -43,13 +42,12 @@ class TestCriteriaGasesTest(unittest.TestCase):
 
 
     def test_write_tmcf(self):
-        with tempfile.TemporaryDirectory() as tmp_dir: 
-            pollutant = '42401'  # SO2
+        with tempfile.TemporaryDirectory() as tmp_dir:
             test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
-            write_tmcf(test_tmcf, pollutant)
-            
-            expected_tmcf = os.path.join(module_dir_, 'EPA_CriteriaGases_42401.tmcf')
-            with open(test_tmcf, 'r') as test: 
+            write_tmcf(test_tmcf)
+
+            expected_tmcf = os.path.join(module_dir_, 'EPA_CriteriaGases.tmcf')
+            with open(test_tmcf, 'r') as test:
                     test_str: str = test.read()
                     with open(expected_tmcf, 'r') as expected:
                         expected_str: str = expected.read()
