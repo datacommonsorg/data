@@ -24,9 +24,9 @@ from io import TextIOWrapper
 SOURCE_DATA = "source_data"
 
 CSV_COLUMNS = [
-    'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County',
-    'Mean', 'Max', 'AQI', 'Units', 'Method', 'POC',
-    'Mean_SV', 'Max_SV', 'AQI_SV']
+    'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County', 'Mean',
+    'Max', 'AQI', 'Units', 'Method', 'POC', 'Mean_SV', 'Max_SV', 'AQI_SV'
+]
 
 # Template MCF for StatVarObservation
 TEMPLATE_MCF = '''
@@ -70,6 +70,7 @@ location: C:EPA_CriteriaGases->Site_Location
 containedInPlace: C:EPA_CriteriaGases->County
 airQualitySiteMonitor: C:EPA_CriteriaGases->POC
 '''
+
 
 # Convert to CamelCase (splitting on spaces)
 def get_camel_case(s):
@@ -123,32 +124,48 @@ def write_csv(csv_file_path, reader):
                 state=observation['State Code'],
                 county=observation['County Code'],
                 site=observation['Site Num'],
-                standard=get_pollutant_standard(observation['Pollutant Standard']),
+                standard=get_pollutant_standard(
+                    observation['Pollutant Standard']),
             )
             if key in keys:
                 continue
             keys.add(key)
             suffix = get_suffix(observation["Parameter Code"])
             new_row = {
-                'Date': observation['Date Local'],
-                'Site_Number': 'epa/{state}{county}{site}'.format(
-                    state=observation['State Code'],
-                    county=observation['County Code'],
-                    site=observation['Site Num']
-                ),
-                'Site_Name': observation['Local Site Name'],
-                'Site_Location': '[latLong {lat} {long}]'.format(
-                    lat=observation['Latitude'], long=observation['Longitude']),
-                'County': 'dcid:geoId/' + observation['State Code'] + observation['County Code'],
-                'Mean': observation['Arithmetic Mean'],
-                'Max': observation['1st Max Value'],
-                'AQI': observation['AQI'],
-                'Units': get_camel_case(observation['Units of Measure']),
-                'Method': get_pollutant_standard(observation['Pollutant Standard']),
-                'POC': observation['POC'],
-                'Mean_SV': f'dcs:Mean_Concentration_AirPollutant_{suffix}',
-                'Max_SV': f'dcs:Max_Concentration_AirPollutant_{suffix}',
-                'AQI_SV': f'dcs:AirQualityIndex_AirPollutant_{suffix}',
+                'Date':
+                    observation['Date Local'],
+                'Site_Number':
+                    'epa/{state}{county}{site}'.format(
+                        state=observation['State Code'],
+                        county=observation['County Code'],
+                        site=observation['Site Num']),
+                'Site_Name':
+                    observation['Local Site Name'],
+                'Site_Location':
+                    '[latLong {lat} {long}]'.format(
+                        lat=observation['Latitude'],
+                        long=observation['Longitude']),
+                'County':
+                    'dcid:geoId/' + observation['State Code'] +
+                    observation['County Code'],
+                'Mean':
+                    observation['Arithmetic Mean'],
+                'Max':
+                    observation['1st Max Value'],
+                'AQI':
+                    observation['AQI'],
+                'Units':
+                    get_camel_case(observation['Units of Measure']),
+                'Method':
+                    get_pollutant_standard(observation['Pollutant Standard']),
+                'POC':
+                    observation['POC'],
+                'Mean_SV':
+                    f'dcs:Mean_Concentration_AirPollutant_{suffix}',
+                'Max_SV':
+                    f'dcs:Max_Concentration_AirPollutant_{suffix}',
+                'AQI_SV':
+                    f'dcs:AirQualityIndex_AirPollutant_{suffix}',
             }
             writer.writerow(new_row)
 
