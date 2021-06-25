@@ -182,14 +182,14 @@ def write_tmcf(tmcf_file_path):
 
 
 if __name__ == '__main__':
-    create_csv('EPA_CriteriaGases.csv')
     end_year = sys.argv[1]
+    create_csv('EPA_CriteriaGases.csv')
     for pollutant in POLLUTANTS:
         for year in range(START_YEAR, int(end_year) + 1):
             filename = f'daily_{pollutant}_{year}'
             response = requests.get(f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
             with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
-                with zf.open(f'{filename}.csv' ,'r') as infile:
-                  reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-                  write_csv('EPA_CriteriaGases.csv', reader)
+                  with zf.open(f'{filename}.csv' ,'r') as infile:
+                      reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
+                      write_csv('EPA_CriteriaGases.csv', reader)
     write_tmcf('EPA_CriteriaGases.tmcf')
