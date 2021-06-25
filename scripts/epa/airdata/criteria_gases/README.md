@@ -23,7 +23,7 @@ In the cleaned CSV, observations are provided on the site level. Sometimes a sit
 ## Generating Artifacts
 To generate `EPA_CriteriaGases.csv` and `EPA_CriteriaGases.tmcf`, run:
 ```
-python3 criteria_gases.py
+python3 criteria_gases.py <end_year>
 ```
 
 ### Running Tests

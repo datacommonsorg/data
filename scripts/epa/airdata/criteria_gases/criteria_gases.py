@@ -15,13 +15,18 @@
 Generates cleaned CSV and template MCF files for the EPA AirData Criteria
 Gases.
 
-Usage: python3 criteria_gases.py
+Usage: python3 criteria_gases.py <end_year>
 '''
-import csv, os
-from zipfile import ZipFile
-from io import TextIOWrapper
+import csv, os, sys, requests, io, zipfile
 
-SOURCE_DATA = "source_data"
+POLLUTANTS = [
+  '44201',
+  '42401',
+  '42101',
+  '42602',
+]
+
+START_YEAR = 1980
 
 CSV_COLUMNS = [
     'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County', 'Mean',
@@ -177,13 +182,14 @@ def write_tmcf(tmcf_file_path):
 
 
 if __name__ == '__main__':
-    create_csv(f'EPA_CriteriaGases.csv')
-    for (dirpath, dirnames, filenames) in os.walk(SOURCE_DATA):
-        for filename in filenames:
-            if filename.endswith('.zip'):
-                print(filename)
-                with ZipFile(dirpath + os.sep + filename) as zf:
-                    with zf.open(filename[:-4] + '.csv', 'r') as infile:
-                        reader = csv.DictReader(TextIOWrapper(infile, 'utf-8'))
-                        write_csv(f'EPA_CriteriaGases.csv', reader)
-    write_tmcf(f'EPA_CriteriaGases.tmcf')
+    create_csv('EPA_CriteriaGases.csv')
+    end_year = sys.argv[1]
+    for pollutant in POLLUTANTS:
+        for year in range(START_YEAR, int(end_year) + 1):
+            filename = f'daily_{pollutant}_{year}'
+            response = requests.get(f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
+            with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
+                with zf.open(f'{filename}.csv' ,'r') as infile:
+                  reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
+                  write_csv('EPA_CriteriaGases.csv', reader)
+    write_tmcf('EPA_CriteriaGases.tmcf')
