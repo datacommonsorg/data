@@ -1,0 +1,13 @@
+Node: E:EIA_860_Schedule_1->Utility
+dcid: C:EIA_860_Schedule_1->Dcid
+typeOf: dcs:PublicUtility
+name: C:EIA_860_Schedule_1->Name
+address: C:EIA_860_Schedule_1->Address
+containedInPlace: C:EIA_860_Schedule_1->StateDcid
+containedInPlace: C:EIA_860_Schedule_1->ZipDcid
+eiaUtilityId: C:EIA_860_Schedule_1->UtilityId
+publicUtilityType: C:EIA_860_Schedule_1->EntityTypeEnum
+powerPlantAssociationStatus: C:EIA_860_Schedule_1->OwnerEnum
+powerPlantAssociationStatus: C:EIA_860_Schedule_1->OperatorEnum
+powerPlantAssociationStatus: C:EIA_860_Schedule_1->AssetManagerEnum
+powerPlantAssociationStatus: C:EIA_860_Schedule_1->OtherRelationshipEnum

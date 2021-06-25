@@ -1,0 +1,8 @@
+place,stat_var,date,value,unit,scaling_factor,eia_series_id
+dcid:geoId/08,dcid:eia/PET.KDLVIS_1.A,2019,40989,ThousandGallons,,PET.KDLVISSCO1.A
+dcid:geoId/08,dcid:eia/PET.KDLVIS_1.A,2018,37954,ThousandGallons,,PET.KDLVISSCO1.A
+dcid:geoId/22,dcid:eia/PET.RCRR06_1.A,2019,3,MillionBarrels,,PET.RCRR06SLA_1.A
+dcid:geoId/22,dcid:eia/PET.RCRR06_1.A,2018,6,MillionBarrels,,PET.RCRR06SLA_1.A
+dcid:geoId/22,dcid:eia/PET.RCRR06_1.A,2017,29,MillionBarrels,,PET.RCRR06SLA_1.A
+dcid:country/USA,dcid:eia/PET.M_EPC0_SPT_PER.W,2020-11-30,32.2,Percent,,PET.M_EPC0_SPT_NUS_PER.W
+dcid:country/USA,dcid:eia/PET.M_EPC0_SPT_PER.W,2020-12-06,33.1,Percent,,PET.M_EPC0_SPT_NUS_PER.W
