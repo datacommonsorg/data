@@ -1,5 +1,5 @@
 # Importing EPA AirData
-This directory imports [Outdoor Air Quality Data](https://aqs.epa.gov/aqsweb/airdata/download_files.html) into Data Commons. This includes mean/max concentration and AQI for Ozone, SO2, CO, NO2, PM2.5, and PM10 measured at various monitors throughout the  US, Puerto Rico and US Virgin Islands.
+This directory imports [Outdoor Air Quality Data](https://aqs.epa.gov/aqsweb/airdata/download_files.html) into Data Commons. This includes mean/max concentration and AQI for Ozone, SO2, CO, NO2, PM2.5, and PM10 measured at various monitors throughout the  US, Puerto Rico and US Virgin Islands. Source CSVs are downloaded directly from the pre-generated data files.
 
 The script generates:
 - `EPA_AirQuality.csv`
@@ -33,7 +33,7 @@ To generate `EPA_AirQuality.csv` and `EPA_AirQuality.tmcf`, run:
 ```
 python3 air_quality.py <end_year>
 ```
-This currently includes data up to 2021.
+As of June 2021, this currently includes data up to 2021.
 
 ### Running Tests
 To run unit tests:

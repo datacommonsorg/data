@@ -18,6 +18,7 @@ Usage: python3 air_quality.py <end_year>
 '''
 import csv, os, sys, requests, io, zipfile
 
+# AQS parameter codes: https://aqs.epa.gov/aqsweb/documents/codetables/parameters.html
 POLLUTANTS = {
     '44201': 'Ozone',
     '42401': 'SO2',

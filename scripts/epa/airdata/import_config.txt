@@ -1,15 +1,14 @@
 import: {
-  import_name: "EPACriteriaGases3"
-  provenance_url: "https://aqs.epa.gov"
-  provenance_description: "The EPA Air Data website provides various air quality measurements collected at outdoor monitor sites throughout the US, Puerto Rico, and US Virgin Islands."
-  # Path to the resolved MCF. Can be a repeated field.
-  mcf_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/epa/airdata/criteria_gases/3/nodes.mcf-?????-of-?????"
-  mcf_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/epa/airdata/criteria_gases/3/EPA_CriteriaGases.mcf"
-  # First date of imported data.
-  start_date: "1980-01-01"
-  # Last date of imported data.
-  end_date: "2021-02-28"
-  # Source data release schedule.
-  update_frequency: "P6M"
-  next_release_date: "2021-11-01"
+  import_name: "EPACriteriaAirPollutants"
+  provenance_url: "https://aqs.epa.gov/aqsweb/airdata/download_files.html "
+  mcf_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/epa/airdata/nodes.mcf-?????-of-?????"
+  start_date_in_kg: "1980-01-01"
+  end_date_in_kg: "2021-02-28"
+  end_date_in_source: "2021-02-28"
+  release_frequency: "P6M"
+  next_release_date: "2021-11"  # ESTIMATED
+  table {
+    mapping_path: "/cns/jv-d/home/datcom/v3_mcf/epa/airdata/EPA_AirQuality.tmcf"
+    csv_path: "/cns/jv-d/home/datcom/v3_mcf/epa/airdata/EPA_AirQuality.csv"
+  }
 }
