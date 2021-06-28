@@ -1,7 +1,7 @@
 import: {
   import_name: "EPACriteriaAirPollutants"
   provenance_url: "https://aqs.epa.gov/aqsweb/airdata/download_files.html "
-  mcf_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/epa/airdata/nodes.mcf-?????-of-?????"
+  mcf_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/epa/airdata/nodes.mcf@100"
   start_date_in_kg: "1980-01-01"
   end_date_in_kg: "2021-02-28"
   end_date_in_source: "2021-02-28"
