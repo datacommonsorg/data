@@ -31,9 +31,8 @@ POLLUTANTS = {
 START_YEAR = 1980
 
 CSV_COLUMNS = [
-    'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County',
-    'Units', 'Method', 'POC',
-    'Mean', 'Max', 'AQI',  'Mean_SV', 'Max_SV', 'AQI_SV'
+    'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County', 'Units',
+    'Method', 'POC', 'Mean', 'Max', 'AQI', 'Mean_SV', 'Max_SV', 'AQI_SV'
 ]
 
 # Template MCF for StatVarObservation
@@ -122,8 +121,7 @@ def write_csv(csv_file_path, reader):
                 observation['State Code'],
                 observation['County Code'],
                 observation['Site Num'],
-                get_pollutant_standard(
-                    observation['Pollutant Standard']),
+                get_pollutant_standard(observation['Pollutant Standard']),
             )
             if monitor_key not in monitors:
                 monitors[monitor_key] = observation['POC']
@@ -135,8 +133,7 @@ def write_csv(csv_file_path, reader):
                 observation['State Code'],
                 observation['County Code'],
                 observation['Site Num'],
-                get_pollutant_standard(
-                    observation['Pollutant Standard']),
+                get_pollutant_standard(observation['Pollutant Standard']),
             )
             if key in keys:
                 continue
