@@ -1,6 +1,6 @@
 Node: E:metabolites->E1
 typeOf: dcs:Metabolite
-dcid: C:metabolites->dcid
+dcid: C:metabolites->metabolite_dcid
 humanGEMID: C:metabolites->id
 name: C:metabolites->name
 cellularCompartment: C:metabolites->compartment
