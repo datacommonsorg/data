@@ -1,6 +1,6 @@
 Node: E:reactantRoles->E1
 typeOf: dcs:MetabolicCellularCompartment
-dcid: C:reactantRoles->dcid
+dcid: C:reactantRoles->metabolic_compartment_dcid
 
 Node: E:reactantRoles->E2
 typeOf: dcs:MetabolicReaction
