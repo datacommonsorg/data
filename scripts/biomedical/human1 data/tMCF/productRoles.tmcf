@@ -1,5 +1,5 @@
 Node: E:productRoles->E1
-typeOf: dcs:Metabolite
+typeOf: dcs:MetabolicCellularCompartment
 dcid: C:productRoles->dcid
 
 Node: E:productRoles->E2
