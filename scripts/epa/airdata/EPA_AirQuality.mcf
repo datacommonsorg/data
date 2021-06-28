@@ -94,7 +94,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:airQualityIndex
 statType: dcs:measuredValue
-pollutant: dcs:PM2.5
+pollutant: dcs:NitrogenDioxide
 
 Node: dcid:Mean_Concentration_AirPollutant_PM2.5
 description: "Mean PM2.5 concentration in air."
@@ -118,7 +118,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:airQualityIndex
 statType: dcs:measuredValue
-pollutant: dcs:PM10
+pollutant: dcs:PM2.5
 
 Node: dcid:Mean_Concentration_AirPollutant_PM10
 description: "Mean PM10 concentration in air."
