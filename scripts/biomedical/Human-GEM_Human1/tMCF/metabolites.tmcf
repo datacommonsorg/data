@@ -1,0 +1,17 @@
+Node: E:metabolites->E1
+typeOf: dcs:Metabolite
+dcid: C:metabolites->metabolite_dcid
+humanGEMID: C:metabolites->id
+name: C:metabolites->name
+cellularCompartment: C:metabolites->compartment
+chemicalFormula: C:metabolites->chemicalFormula
+biggID: C:metabolites->bigg.metabolite
+chebiID: C:metabolites->chebi
+chemblID: C:metabolites->chembl
+keggCompoundID: C:metabolites->kegg_compound
+metaNetXID: C:metabolites->metanetx_chemical
+humanMetabolomeDatabaseID: C:metabolites->hmdb
+pubChemCompoundID: C:metabolites->pubchem_compound
+lipidMapsID: C:metabolites->lipidmaps
+
+

@@ -1,0 +1,8 @@
+Node: E:groupMemberships->E1
+typeOf: dcs:MetabolicReaction
+dcid: C:groupMemberships->reactionID
+memberOfMetabolicReactionSubsystem: E:groupMemberships->E2
+
+Node: E:groupMemberships->E2
+typeOf: dcs:MetabolicReactionSubsystem
+dcid: C:groupMemberships->dcid
