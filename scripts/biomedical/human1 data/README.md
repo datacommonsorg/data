@@ -1,4 +1,4 @@
-# Importing Human1 data
+# Importing Human-GEM Human1 data
 
 ## Table of Contents
 
@@ -105,7 +105,7 @@ Please read the description of each file for the appropriate inputs. <br>
 |File| Description|
 ---------|-----------
 |format_genes_geneRoles.py|Inputs: genes.tsv, geneRoles.tsv <br> Outputs: formatted genes.csv, geneRoles.csv|
-|format_metabolites_reactantRoles_productRoles.py|Inputs: metabolites.tsv, reactants.tsv, products.tsv <br> Outputs: formatted metabolites.csv, reactants.csv, products.csv|
+|format_metabolites_reactantRoles_productRoles.py|Inputs: metabolites.tsv, reactants.tsv, products.tsv <br> Outputs: formatted metabolites.csv, metabolicCellularComparment, reactants.csv, products.csv|
 |format_reactions.py|Inputs: reactions.tsv <br> Outputs: formatted reactions.csv|
 |format_groups_groupMemberships.py|Inputs: groups.tsv, groupMemberships.tsv<br> Outputs: formatted groups.csv, groupMemberships.tsv|
 
