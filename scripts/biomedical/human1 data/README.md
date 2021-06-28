@@ -124,6 +124,7 @@ These files can be used together with the generated .csv files to ingest human1 
 |reactantRoles.tmcf| combine with reactantRoles.csv for ingestion  |
 |productRoles.tmcf| combine with productRoles.csv for ingestion  |
 |groupMemberships.tmcf| combine with groupMemberships.csv for ingestion  |
+|metabolicCellularCompartment.tmcf| combine with metabolicCellularCompartment.csv for ingestion|
 
 ### Example 
 
