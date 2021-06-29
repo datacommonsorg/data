@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 def main():
     
+    # dictionary to map values in "compartment" column to CellularCompartmentEnum values
     compartment_dict = {
         "c":"dcs:CellularCompartmentCytosol",
         "s": "dcs:CellularCompartmentExtracellular",
@@ -27,7 +28,7 @@ def main():
     # modify id to humanGEMID format
     df_metabolites["id"] = df_metabolites["id"].str[2:]
     # Create new column for dcid
-    df_metabolites["metabolite_dcid"] = df_metabolites["chembl"]
+    df_metabolites["metabolite_dcids"] = df_metabolites["chembl"]
     # use metaNetX as dcid if chemblID is not available
     df_metabolites["metabolite_dcid"] = df_metabolites["metabolite_dcid"].fillna(df_metabolites["metanetx.chemical"])
     # use chemical name as dcid if metaNetX is not available

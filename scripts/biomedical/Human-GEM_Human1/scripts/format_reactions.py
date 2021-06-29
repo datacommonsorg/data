@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 def main():
 
+    # information of this dictionary is from the original HUMAN-GEM xml file (read Download URL section)
     kinetic_dict = {
         "FB2N0": 0,
         "FB1N1000": -1000,
