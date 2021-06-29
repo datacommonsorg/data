@@ -128,10 +128,26 @@ These files can be used together with the generated .csv files to ingest human1 
 
 ### Example 
 
-To format genes.tsv and geneRoles.tsv, put the tsv files and the python scipt in the same directory and run:
+To format genes.tsv and geneRoles.tsv, put the tsv files and the python script in the same directory and run:
 ```bash
 python format_genes_geneRoles.py genes.tsv geneRoles.tsv
 ```
 
 The formatted genes.csv and geneRoles.csv will be generated in the current directory. These csv files can be combined with its corressponding tMCF files for data ingestion to Data Commons.
+
+Similarly, for other data files:
+```bash 
+python format_metabolites_reactantRoles_productRoles.py metabolites.tsv reactantRoles.tsv productRoles.tsv 
+```
+This will generate 4 formatted files: metabolites.csv, metabolicCellularCompartment.csv reactantRoles.csv, and productRoles.csv
+```bash
+python format_reactions.py reactions.tsv
+```
+This will generate the formatted reactions.csv file 
+
+```bash
+python format_groups_groupMemberships.py groups.tsv groupMemberships.tsv 
+```
+This will generate 2 formatted files: groups.csv and groupMemberships.csv
+
 
