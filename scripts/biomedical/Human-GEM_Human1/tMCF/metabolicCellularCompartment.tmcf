@@ -7,4 +7,4 @@ typeOf: dcs:MetabolicCellularLocation
 dcid: C:metabolicCellularCompartment->metabolic_location_dcid
 cellularCompartment: C:metabolicCellularCompartment->compartment
 humaGEMID: C:metabolicCellularCompartment->id
-cellularCompartmentOfMetabolite: E:metabolicCellularCompartment->E1
+associatedMetabolite: E:metabolicCellularCompartment->E1
