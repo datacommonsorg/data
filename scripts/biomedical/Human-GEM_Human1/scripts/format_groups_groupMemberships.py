@@ -18,7 +18,7 @@ def main():
     # use "name" as dcid, format name: empty space to underscore, lower string, remove comma
     df_groups["dcid"] = "bio/" + df_groups["name"].str.replace(" ", "_")
     df_groups["dcid"] = df_groups["dcid"].str.lower()
-    df_groups["dcid"] = df_groups["dcid"].str.replace(",","")
+    df_groups["dcid"] = df_groups["dcid"].str.replace(",","_")
     # add quotation mark around SBO term 
     df_groups["sboTerm"] = '"' + df_groups["sboTerm"] + '"'
     # generate output file path at current directory 
