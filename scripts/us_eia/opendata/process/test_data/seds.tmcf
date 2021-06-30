@@ -1,0 +1,10 @@
+
+Node: E:EIATable->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:EIATable->place
+variableMeasured: C:EIATable->stat_var
+observationDate: C:EIATable->date
+value: C:EIATable->value
+unit: C:EIATable->unit
+scalingFactor: C:EIATable->scaling_factor
+eiaSeriesId: C:EIATable->eia_series_id
