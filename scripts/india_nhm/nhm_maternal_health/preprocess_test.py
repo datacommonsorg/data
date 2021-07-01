@@ -22,14 +22,12 @@ from base.data_cleaner import NHMDataLoaderBase
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
-    'State':
-    'State',
-    'isoCode':
-    'isoCode',
+    'District':
+    'District',
+    'DistrictCode':
+    'DistrictCode',
     'Date':
     'Date',
-    'Estimated Number of Annual Pregnancies #':
-    'Count_PregnancyEvent',
     'Total number of pregnant women Registered for ANC':
     'Count_PregnantWomen_RegisteredForAntenatalCare',
     'Number of Pregnant women registered within first trimester':
@@ -47,6 +45,31 @@ cols_to_nodes = {
     '% Safe deliveries to Total Reported Deliveries':
     'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
+    
+clean_names = {
+    'District':
+    'District',
+    'DistrictCode':
+    'DistrictCode',
+    'Date':
+    'Date',
+    'Total number of pregnant women Registered for ANC':
+    'Total number of pregnant women registered for Antenatal Care',
+    'Number of Pregnant women registered within first trimester':
+    'Number of pregnant women registered for Antenatal Care within first trimester',
+    'Total reported deliveries':
+    'Total reported deliveries',
+    'Institutional deliveries (Public Insts.+Pvt. Insts.)':
+    'Institutional deliveries (Public Insts.+Pvt. Insts.)',
+    'Deliveries Conducted at Public Institutions':
+    'Deliveries conducted at public institutions',
+    'Number of Home deliveries':
+    'Number of home deliveries',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
+    'Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)',
+    '% Safe deliveries to Total Reported Deliveries':
+    'Percentage of safe deliveries to total reported deliveries'
+}
 
 
 class TestPreprocess(unittest.TestCase):
@@ -61,6 +84,7 @@ class TestPreprocess(unittest.TestCase):
         loader = NHMDataLoaderBase(data_folder=os.path.join(module_dir_, 'test/'),
                                    dataset_name='test_gen',
                                    cols_dict=cols_to_nodes,
+                                   clean_names=clean_names,
                                    final_csv_path=os.path.join(module_dir_, "test/test_gen.csv")
                                    )
         loader.generate_csv()

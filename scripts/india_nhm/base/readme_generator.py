@@ -17,11 +17,12 @@ class ReadMeGen():
     """
     """
     def __init__(self, dataset_name, dataset_description, data_level,
-                 cols_dict):
+                 cols_dict, clean_names):
         self.dataset_name = dataset_name
         self.dataset_description = dataset_description
         self.data_level = data_level
         self.cols_dict = cols_dict
+        self.clean_names = clean_names
 
     def _initial_stuff(self):
         INITIAL_STUFF = """# {dataset_description} - 2008 to 2020
@@ -53,7 +54,7 @@ The dataset contains key performance indicators of {dataset_description} for the
 The cleaned csv has the following columns:
 """
         for k, v in self.cols_dict.items():
-            CLEANED_DATA += "\n- {}: {}".format(v, k)
+            CLEANED_DATA += "\n- {}: {}".format(v, self.clean_names[k])
 
         return CLEANED_DATA.format(dataset_name=self.dataset_name)
 

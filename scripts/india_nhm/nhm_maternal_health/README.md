@@ -8,7 +8,7 @@ Source: Health Information Management System (HIMS), Ministry of Health and Fami
 ### Download URL
 Available for download as xls and zip files.
 
-[Performance of Key Indicators in HIMS (State level)](https://nrhm-mis.nic.in/hmisreports/frmstandard_reports.aspx)
+[Performance of Key Indicators in HIMS (District level)](https://nrhm-mis.nic.in/hmisreports/frmstandard_reports.aspx)
 
 ### Overview
 Maternal Health Data is available for financial year starting from 2008. The xls files are under 'data/' folder.
@@ -19,18 +19,17 @@ The dataset contains key performance indicators of Maternal Health Data for the 
 
 The cleaned csv has the following columns:
 
-- State: State
-- isoCode: isoCode
+- District: District
+- DistrictCode: DistrictCode
 - Date: Date
-- Count_PregnancyEvent: Estimated Number of Annual Pregnancies
-- Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women Registered for Antenatal Care
-- Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of Pregnant women registered within first trimester
+- Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women registered for Antenatal Care
+- Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of pregnant women registered for Antenatal Care within first trimester
 - Count_ChildDeliveryEvent: Total reported deliveries
 - Count_ChildDeliveryEvent_InAnInstitution: Institutional deliveries (Public Insts.+Pvt. Insts.)
-- Count_ChildDeliveryEvent_InPublicInstitution: Deliveries Conducted at Public Institutions
-- Count_ChildDeliveryEvent_AtHome: Number of Home deliveries
-- Count_ChildDeliveryEvent_AtHome_WithStandByAssist: Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)
-- Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent: % Safe deliveries to Total Reported Deliveries
+- Count_ChildDeliveryEvent_InPublicInstitution: Deliveries conducted at public institutions
+- Count_ChildDeliveryEvent_AtHome: Number of home deliveries
+- Count_ChildDeliveryEvent_AtHome_WithStandByAssist: Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)
+- Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent: Percentage of safe deliveries to total reported deliveries
 
 #### TMCF
 - [NHM_MaternalHealth.tmcf](NHM_MaternalHealth.tmcf)

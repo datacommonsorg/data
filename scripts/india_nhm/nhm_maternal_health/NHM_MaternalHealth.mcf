@@ -1,10 +1,3 @@
-Node: dcid:indianNHM/Count_PregnancyEvent
-description: "Estimated number of annual pregnancies"
-typeOf: dcs:StatisticalVariable
-populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_PregnancyEvent
-statType: dcs:measuredValue
-
 Node: dcid:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
 description: "Total number of pregnant women registered for Antenatal Care"
 typeOf: dcs:StatisticalVariable
@@ -13,7 +6,7 @@ measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
-description: "Number of pregnant women registered within first trimester"
+description: "Number of pregnant women registered for Antenatal Care within first trimester"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
@@ -27,7 +20,7 @@ measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_ChildDeliveryEvent_InAnInstitution
-description: "Institutional deliveries (public insts.+pvt. insts.)"
+description: "Institutional deliveries (Public Insts.+Pvt. Insts.)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_InAnInstitution
@@ -48,14 +41,14 @@ measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_AtHome
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_ChildDeliveryEvent_AtHome_WithStandByAssist
-description: "Number of home deliveries attended by sba trained (doctor/nurse/anm)"
+description: "Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_AtHome_WithStandByAssist
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
-description: "% safe deliveries to total reported deliveries"
+description: "Percentage of safe deliveries to total reported deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent

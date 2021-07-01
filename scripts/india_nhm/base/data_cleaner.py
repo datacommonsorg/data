@@ -14,6 +14,7 @@
 
 import os
 import pandas as pd
+import difflib
 
 INDIA_ISO_CODES = {
     "Andhra Pradesh": "IN-AP",
@@ -112,13 +113,14 @@ class NHMDataLoaderBase(object):
         cols_dict: dictionary containing column names in the data files mapped to StatVars
                     (keys contain column names and values contains StatVar names)
     """
-    def __init__(self, data_folder, dataset_name, cols_dict, final_csv_path):
+    def __init__(self, data_folder, dataset_name, cols_dict, clean_names, final_csv_path):
         """
         Constructor
         """
         self.data_folder = data_folder
         self.dataset_name = dataset_name
         self.cols_dict = cols_dict
+        self.clean_names = clean_names
         self.final_csv_path = final_csv_path
 
         self.raw_df = None
@@ -138,6 +140,9 @@ class NHMDataLoaderBase(object):
 
         """
         df_full = pd.DataFrame(columns=list(self.cols_dict.keys()))
+        self.dist_code = pd.read_csv(os.path.join(self.data_folder, 
+                                              'districts-local-directory.csv'),
+                                 dtype={'DistrictCode': 'str'})
 
         # Loop through each year file
         for file in os.listdir(self.data_folder):
@@ -146,16 +151,14 @@ class NHMDataLoaderBase(object):
             date = ''.join(['20', fname[-2:],
                             '-03'])  # date is set as March of every year
 
-            if fext == '.xls':
+            if fext == '.xlsx':
                 # Reading .xls file as html and preprocessing multiindex
-                self.raw_df = pd.read_html(os.path.join(
-                    self.data_folder, file))[0]
-                self.raw_df.columns = self.raw_df.columns.droplevel()
+                self.raw_df = pd.read_excel(os.path.join(
+                                            self.data_folder, file))
+                # self.raw_df.columns = self.raw_df.columns.droplevel()
 
                 cleaned_df = pd.DataFrame()
-                cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']
-                cleaned_df['isoCode'] = cleaned_df['State'].map(
-                    INDIA_ISO_CODES)
+                cleaned_df['District'] = self.raw_df['Unnamed: 2']  # Unnamed:2 column has district names
                 cleaned_df['Date'] = date
 
                 # If no columns specified, extract all except first two (index and state name)
@@ -166,18 +169,21 @@ class NHMDataLoaderBase(object):
                 # Extract specified columns from raw dataframe if it exists
                 for col in self.cols_to_extract:
                     if col in self.raw_df.columns:
-                        cleaned_df[col] = self.raw_df[col][fname]
+                        cleaned_df[col] = self.raw_df[col].iloc[1:]
                     else:
                         continue
 
                 df_full = df_full.append(cleaned_df, ignore_index=True)
-
+                
+             
         # Converting column names according to schema and saving it as csv
-        df_full.columns = df_full.columns.map(self.cols_dict)
+        df_full['DistrictCode'] = df_full.apply(lambda row: self._get_district_code(row),
+                                                axis=1)
         df_full = df_full.groupby(level=0, axis=1, sort=False).sum()
-        df_full.to_csv(self.final_csv_path, index=False)
+        df_full.columns = df_full.columns.map(self.cols_dict)
 
-        return df_full
+        df_full.iloc[2:].to_csv(self.final_csv_path, index=False)
+
 
     def create_mcf_tmcf(self):
         """
@@ -207,6 +213,15 @@ class NHMDataLoaderBase(object):
                     mcf.write(
                         MCF_NODES.format(
                             statvar=self.cols_dict[variable],
-                            description=str(variable).capitalize()))
+                            description=self.clean_names[variable]))
 
                     statvars_written.append(self.cols_dict[variable])
+                    
+    def _get_district_code(self, row):
+        if pd.notna(row['District']):
+            close_match = difflib.get_close_matches(row['District'].upper(), self.dist_code['DistrictName(InEnglish)'],
+                                n=1, cutoff=0.8)
+            if close_match:
+                return self.dist_code[self.dist_code['DistrictName(InEnglish)'] == close_match[0]]['DistrictCode'].values[0]
+            else:
+                return None
