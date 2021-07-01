@@ -2,6 +2,18 @@ import sys
 import os
 import numpy as np
 import pandas as pd
+import datacommons as dc
+import bioservices 
+from bioservices import *
+
+
+def get_unique_values(df, column):
+    val_list = list(df[df["chembl"].isna()][column].unique())
+    if np.nan in val_list:
+        val_list.remove(np.nan) 
+    val_list = np.array(val_list)
+    return val_list
+
 def main():
     
     # dictionary to map values in "compartment" column to CellularCompartmentEnum values
@@ -23,6 +35,97 @@ def main():
     ### Generate metabolites.csv
     # read csv file
     df_metabolites = pd.read_csv(metabolite_tsv, sep = "\t")
+
+    uni = UniChem()  # init mapping tool (bioservices)
+    # Convert Chebi to chembl with bioservices and fill in chmble column 
+    from_ , to_ = "chebi", "chembl"
+    from_list = list(df_metabolites[df_metabolites[to_].isna()][from_].unique())
+    if np.nan in from_list:
+        from_list.remove(np.nan) 
+    mapping = uni.get_mapping("chebi", "chembl")
+    for val in from_list:
+        try:
+            df_metabolites.loc[df_metabolites[from_] == val, "chembl"] =  mapping[val.split(":")[1]]
+        except:
+            pass
+    print("DONE converting chebi to chembl with bioservices")
+
+    # Convert kegg to chembl with bioservices and fill in chembl column 
+    from_ , to_ = "kegg.compound", "chembl"
+    from_list = list(df_metabolites[df_metabolites[to_].isna()][from_].unique())
+    if np.nan in from_list:
+        from_list.remove(np.nan) 
+    mapping = uni.get_mapping("kegg_ligand", "chembl")
+    for val in from_list:
+        try:
+            df_metabolites.loc[df_metabolites[from_] == val, "chembl"] =  mapping[val]
+        except:
+            pass
+
+    print("DONE converting kegg to chembl with boservices")
+
+    chebi_list = get_unique_values(df_metabolites, "chebi")
+    query_str = """
+    SELECT DISTINCT ?chembl ?chebi
+    WHERE{{
+    ?chembl typeOf ChemicalCompound .
+    ?chembl chebiID ?chebi .
+    ?chembl chebiID {0} .
+    }}
+    """.format(chebi_list)
+    result = dc.query(query_str)
+    for res in result:
+        df_metabolites.loc[df_metabolites["chebi"] == res["?chebi"], "chembl"] =  res["?chembl"].split("/")[1]
+    print("DONE converting chebi to chembl with data common query")
+
+    kegg_list = get_unique_values(df_metabolites,"kegg.compound")
+    query_str = """
+    SELECT DISTINCT ?chembl ?kegg
+    WHERE{{
+    ?chembl typeOf ChemicalCompound .
+    ?chembl keggCompoundID ?kegg .
+    ?chembl keggCompoundID {0} .
+    }}
+    """.format(kegg_list)
+    result = dc.query(query_str)
+    for res in result:
+        df_metabolites.loc[df_metabolites["kegg.compound"] == res["?kegg"], "chembl"] =  res["?chembl"].split("/")[1]
+    print("DONE converting kegg to chembl with data common query")      
+
+    pubChem_list = df_metabolites[df_metabolites["chembl"].isna()]["pubchem.compound"].unique()[1:].astype(int).astype(str)
+    # Pubchem Compound float -> int 
+    df_metabolites["pubchem.compound"] = df_metabolites["pubchem.compound"].fillna(-1)
+    df_metabolites["pubchem.compound"] = df_metabolites["pubchem.compound"].astype(int)
+    df_metabolites["pubchem.compound"] = df_metabolites["pubchem.compound"].astype(str)
+    df_metabolites["pubchem.compound"] = df_metabolites["pubchem.compound"].replace('-1', np.nan)
+
+    query_str = """
+    SELECT DISTINCT ?chembl ?pubChem
+    WHERE{{
+    ?chembl typeOf ChemicalCompound .
+    ?chembl pubChemCompoundID ?pubChem .
+    ?chembl pubChemCompoundID {0} .
+    }}
+    """.format(pubChem_list)
+    result = dc.query(query_str)       
+    for res in result:
+        df_metabolites.loc[df_metabolites["pubchem.compound"] == res["?pubChem"], "chembl"] =  res["?chembl"].split("/")[1]
+    print("DONE converting pubchem to chembl with data common query")
+
+    humanMet_list = df_metabolites[df_metabolites["chembl"].isna()]["hmdb"].unique()[1:]
+    query_str = """
+    SELECT DISTINCT ?chembl ?hmdb
+    WHERE{{
+    ?chembl typeOf ChemicalCompound .
+    ?chembl humanMetabolomeDatabaseID ?hmdb .
+    ?chembl humanMetabolomeDatabaseID {0} .
+    }}
+    """.format(humanMet_list)
+    result = dc.query(query_str)
+    for res in result:
+        df_metabolites.loc[df_metabolites["hmdb"] == res["?hmdb"], "chembl"] =  res["?chembl"].split("/")[1]
+    print("DONE converting hmdb to chembl with data common query")
+
     # Remove metabolites with no chemicalFormula
     df_metabolites = df_metabolites[~pd.isna(df_metabolites["chemicalFormula"])]
     # modify id to humanGEMID format
