@@ -5,6 +5,6 @@ dcid: C:productRoles->metabolic_compartment_dcid
 Node: E:productRoles->E2
 typeOf: dcs:MetabolicReaction
 dcid: C:productRoles->reactionID
-reactionProduct: E:productRoles->E1
+productCellularCompartment: E:productRoles->E1
 
 
