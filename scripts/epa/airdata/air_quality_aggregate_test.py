@@ -17,7 +17,7 @@ Unit tests for air_quality.py
 Usage: python3 air_quality_test.py
 '''
 import unittest, csv, os, tempfile
-from air_quality import create_csv, write_csv, write_tmcf
+from air_quality_aggregate import create_csv, write_csv, write_tmcf
 
 module_dir_ = os.path.dirname(__file__)
 
@@ -27,7 +27,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(
-                    os.path.join(module_dir_, 'test_data/test_import_data.csv'),
+                    os.path.join(module_dir_, 'test_data/test_aggregate_import_data.csv'),
                     'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
                 create_csv(test_csv)
@@ -36,7 +36,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 write_csv(test_csv, reader)
 
                 expected_csv = os.path.join(module_dir_,
-                                            'test_data/test_import.csv')
+                                            'test_data/test_aggregate_import.csv')
                 with open(test_csv, 'r') as test:
                     test_str: str = test.read()
                     with open(expected_csv, 'r') as expected:
@@ -49,7 +49,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
             test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
             write_tmcf(test_tmcf)
 
-            expected_tmcf = os.path.join(module_dir_, 'EPA_AirQuality.tmcf')
+            expected_tmcf = os.path.join(module_dir_, 'EPA_AQI.tmcf')
             with open(test_tmcf, 'r') as test:
                 test_str: str = test.read()
                 with open(expected_tmcf, 'r') as expected:
