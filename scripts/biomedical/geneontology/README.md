@@ -20,13 +20,13 @@ The data can be downloaded from https://www.ebi.ac.uk/QuickGO/annotations and ht
 ### Overview
 The Gene Ontology Annotation data comes from two sources:
 
-1. The [https://www.ebi.ac.uk/GOA/index](Gene Ontology Annotation Database) created by the European Bioinformatics Institute (EMBL-EBI)
+1. The [Gene Ontology Annotation Database](https://www.ebi.ac.uk/GOA/index) created by the European Bioinformatics Institute (EMBL-EBI)
 
-2. The [http://current.geneontology.org/products/pages/downloads.html](set of Gene Ontology Annotations) compiled by the Gene Ontology (GO) Consortium.
+2. The [set of Gene Ontology Annotations](http://current.geneontology.org/products/pages/downloads.html) compiled by the Gene Ontology (GO) Consortium.
 
-The GO Consortium’s [http://geneontology.org/docs/introduction-to-go-resource/](resource) “provides a computational representation of our current scientific knowledge about the functions of genes (or, more properly, the protein and non-coding RNA molecules produced by genes) from many different organisms, from humans to bacteria.”
+The GO Consortium’s [resource](http://geneontology.org/docs/introduction-to-go-resource/) “provides a computational representation of our current scientific knowledge about the functions of genes (or, more properly, the protein and non-coding RNA molecules produced by genes) from many different organisms, from humans to bacteria.”
 
-EMBL-EBI’s [https://www.ebi.ac.uk/GOA/newto](GO annotation program) “aims to provide high-quality Gene Ontology (GO) annotations to proteins in the [https://www.uniprot.org/](UniProt) Knowledgebase (UniProtKB), RNA molecules from [http://rnacentral.org/](RNACentral) and protein complexes from the [https://www.ebi.ac.uk/complexportal/home](Complex Portal).” 
+EMBL-EBI’s [GO annotation program](https://www.ebi.ac.uk/GOA/newto) “aims to provide high-quality Gene Ontology (GO) annotations to proteins in the [UniProt](https://www.uniprot.org/) Knowledgebase (UniProtKB), RNA molecules from [RNACentral](http://rnacentral.org/) and protein complexes from the [Complex Portal](https://www.ebi.ac.uk/complexportal/home).” 
 
 In this effort, we imported the gene ontology annotation data for the following species: Homo sapiens (human), Mus musculus (mouse), Drosophila melanogaster (fruit fly), Caenorhabditis elegans (roundworm), Saccharomyces cerevisiae (baker’s yeast), Danio rerio (zebrafish), Gallus gallus (chicken)
 
