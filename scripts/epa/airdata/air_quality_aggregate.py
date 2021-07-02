@@ -49,7 +49,7 @@ definingAirQualitySite: C:EPA_AQI->Site
 def get_place(observation):
   if 'State Code' and 'County Code' in observation:
     return 'dcid:geoId/' + observation['State Code'] + observation['County Code']
-  elif 'CSBA Code':
+  elif 'CSBA Code' in observation:
     return 'dcid:geoId/C' + observation['CBSA Code']
   else:
     return None
