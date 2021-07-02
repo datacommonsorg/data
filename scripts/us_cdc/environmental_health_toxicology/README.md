@@ -1,0 +1,71 @@
+## Importing CDC Air Quality and Precipitation Index Data
+Author: Padma Gundapaneni @padma-g
+
+## Table of Contents
+1. [About the Dataset](#about-the-dataset)
+    1. [Download URL](#download-url)
+    2. [Overview](#overview)
+    3. [Notes and Caveats](#notes-and-caveats)
+    4. [License](#license)
+    5. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
+2. [About the Import](#about-the-import)
+    1. [Artifacts](#artifacts)
+    2. [Import Procedure](#import-procedure)
+
+## About the Dataset
+
+### Download URL
+The air quality data can be downloaded from [the CDC website](https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology&sortBy=last_modified&page=1).
+
+The precipitation index data can be downloaded from the following links:
+* [Palmer Drought Severity Index](https://data.cdc.gov/Environmental-Health-Toxicology/Palmer-Drought-Severity-Index-1895-2016/en5r-5ds4)
+* [Standardized Precipitation Evapotranspiration Index](https://data.cdc.gov/Environmental-Health-Toxicology/Standardized-Precipitation-Evapotranspiration-Inde/6nbv-ifib)
+* [Standardized Precipitation Index](https://data.cdc.gov/Environmental-Health-Toxicology/Standardized-Precipitation-Index-1895-2016/xbk2-5i4e)
+
+All the downloaded data is in .csv format. 
+
+### Overview
+The air quality data comes from the CDC and the EPA. The datasets contain "modeled predictions of PM2.5 and ozone levels from the EPA's Downscaler model". According to the CDC, "these data are used by the CDC's National Environmental Public Health Tracking Network to generate air quality measures."
+
+The precipitation index data comes from the CDC and the Cooperative Institute for Climate and Satellites. The datasets contain "monthly Standardized Precipitation Evapotranspiration Index (SPEI) data from 1895-2016 provided by the Cooperative Institute for Climate and Satellites - North Carolina". According to the CDC, "these data are used by the CDC's National Environmental Public Health Tracking Network to generate drought measures."
+
+In this effort, we imported the census tract-level and county-level PM2.5 and ozone level data for the years 2001-2016. We also imported the Palmer Drought Severity Index (PDSI) for years 1895-2016, the Standardized Precipitation Evapotranspiration Index (SPEI) for years 1895-2016, and the Standardized Precipitation Index (SPI) for years 1895-2016.
+
+Among the air quality datasets, census tract-level datasets contain estimates of the mean predicted concentration and associated standard error, while county-level datasets contain estimates of the mean predicted concentration, the median predicted concentration, the maximum predicted concentration, and the population-weighted predicted concentration.
+
+The precipitation index datasets contain precipitation index data for a given year, month, and county.
+
+### Notes and Caveats
+
+None.
+
+### License
+The data is published by the CDC National Environmental Public Health Tracking Network.
+
+### Dataset Documentation and Relevant Links
+The dataset documentation is accessible on the CDC National Evnvironment Public Health Tracking Network's website: https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm
+
+## About the Import
+
+### Artifacts
+
+#### Scripts
+`parse_air_quality.py`
+
+`parse_precipitation_index.py`
+
+### Import Procedure
+
+#### Processing Steps
+
+To clean the air quality data files, run:
+
+```bash
+$python3 parse_air_quality.py input_file_name output_file_name
+```
+
+To clean the precipitation index data files, run: 
+
+```bash
+$python3 parse_precipitation_index.py input_file_name output_file_name
+```
