@@ -127,7 +127,6 @@ def write_csv(csv_file_path, reader):
                 monitors[monitor_key] = observation['POC']
             elif monitors[monitor_key] != observation['POC']:
                 continue
-            # Select only one observation for a given date, site, and pollutant standard
             key = (
                 observation['Date Local'],
                 observation['State Code'],
