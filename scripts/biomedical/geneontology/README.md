@@ -20,9 +20,9 @@ The data can be downloaded from https://www.ebi.ac.uk/QuickGO/annotations and ht
 ### Overview
 The Gene Ontology Annotation data comes from two sources:
 
-    1. The [https://www.ebi.ac.uk/GOA/index](Gene Ontology Annotation Database) created by the European Bioinformatics Institute (EMBL-EBI)
+1. The [https://www.ebi.ac.uk/GOA/index](Gene Ontology Annotation Database) created by the European Bioinformatics Institute (EMBL-EBI)
     
-    2. The [http://current.geneontology.org/products/pages/downloads.html](set of Gene Ontology Annotations) compiled by the Gene Ontology (GO) Consortium.
+2. The [http://current.geneontology.org/products/pages/downloads.html](set of Gene Ontology Annotations) compiled by the Gene Ontology (GO) Consortium.
 
 The GO Consortium’s [http://geneontology.org/docs/introduction-to-go-resource/](resource) “provides a computational representation of our current scientific knowledge about the functions of genes (or, more properly, the protein and non-coding RNA molecules produced by genes) from many different organisms, from humans to bacteria.”
 
