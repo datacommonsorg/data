@@ -1,0 +1,145 @@
+## Statistical Variables
+
+Node: dcid:Mean_Concentration_AirPollutant_Ozone
+description: "Mean ozone concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:meanValue
+pollutant: dcs:Ozone
+
+Node: dcid:Max_Concentration_AirPollutant_Ozone
+description: "Max ozone concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:Ozone
+
+Node: dcid:AirQualityIndex_AirPollutant_Ozone
+description: "Air quality index for ozone."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:measuredValue
+pollutant: dcs:Ozone
+
+Node: dcid:Mean_Concentration_AirPollutant_SO2
+description: "Mean SO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:meanValue
+pollutant: dcs:SulfurDioxide
+
+Node: dcid:Max_Concentration_AirPollutant_SO2
+description: "Max SO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:SulfurDioxide
+
+Node: dcid:AirQualityIndex_AirPollutant_SO2
+description: "Air quality index for SO2."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:measuredValue
+pollutant: dcs:SulfurDioxide
+
+Node: dcid:Mean_Concentration_AirPollutant_CO
+description: "Mean CO concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:meanValue
+pollutant: dcs:CarbonMonoxide
+
+Node: dcid:Max_Concentration_AirPollutant_CO
+description: "Max CO concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:CarbonMonoxide
+
+Node: dcid:AirQualityIndex_AirPollutant_CO
+description: "Air quality index for CO."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:measuredValue
+pollutant: dcs:CarbonMonoxide
+
+Node: dcid:Mean_Concentration_AirPollutant_NO2
+description: "Mean NO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:meanValue
+pollutant: dcs:NitrogenDioxide
+
+Node: dcid:Max_Concentration_AirPollutant_NO2
+description: "Max NO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:NitrogenDioxide
+
+Node: dcid:AirQualityIndex_AirPollutant_NO2
+description: "Air quality index for NO2."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:measuredValue
+pollutant: dcs:NitrogenDioxide
+
+Node: dcid:Mean_Concentration_AirPollutant_PM2.5
+description: "Mean PM2.5 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:meanValue
+pollutant: dcs:PM2.5
+
+Node: dcid:Max_Concentration_AirPollutant_PM2.5
+description: "Max PM2.5 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:PM2.5
+
+Node: dcid:AirQualityIndex_AirPollutant_PM2.5
+description: "Air quality index for PM2.5."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:measuredValue
+pollutant: dcs:PM2.5
+
+Node: dcid:Mean_Concentration_AirPollutant_PM10
+description: "Mean PM10 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:meanValue
+pollutant: dcs:PM10
+
+Node: dcid:Max_Concentration_AirPollutant_PM10
+description: "Max PM10 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:PM10
+
+Node: dcid:AirQualityIndex_AirPollutant_PM10
+description: "Air quality index for PM10."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:measuredValue
+pollutant: dcs:PM10
