@@ -1,0 +1,36 @@
+Node: E:OzoneCTPollution->E1
+typeOf: dcs:CensusTract
+dcid: C:OzoneCTPollution->dcid
+
+Node: E:OzoneCTPollution->E2
+observationAbout: E:OzoneCTPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:OzoneCTPollution->date
+variableMeasured: E:OzoneCTPollution->E3
+observationPeriod: P8h
+unit: parts per billion (ppb)
+value: C:OzoneCTPollution->Value
+
+Node: E:OzoneCTPollution->E3
+typeOf: dcs:StatisticalVariable
+dcid: Mean_Concentration_AirPollutant_Ozone
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:meanValue
+pollutant: dcs:Ozone
+
+Node: E:OzoneCTPollution->E4
+observationAbout: E:OzoneCTPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:OzoneCTPollution->date
+variableMeasured: E:OzoneCTPollution->E5
+observationPeriod: P8h
+value: C:OzoneCTPollution->Error
+
+Node: E:OzoneCTPollution->E5
+typeOf: dcs:StatisticalVariable
+dcid: MeanConcentrationAirPollutantOzoneStandardError
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:Ozone
+statType: dcs:stdError
