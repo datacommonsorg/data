@@ -1,0 +1,72 @@
+Node: E:PM25CountyPollution->E1
+typeOf: dcs:County
+dcid: C:PM25CountyPollution->dcid
+
+Node: E:PM25CountyPollution->E2
+observationAbout: E:PM25CountyPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:PM25CountyPollution->date
+value: C:PM25CountyPollution->PM25_mean_pred
+observationPeriod: P24h
+unit: μg/m3
+variableMeasured: E:PM25CountyPollution->E3
+
+Node: E:PM25CountyPollution->E3
+typeOf: dcs:StatisticalVariable
+dcid: Mean_Concentration_AirPollutant_PM2.5
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:PM2.5
+statType: dcs:meanValue
+
+Node: E:PM25CountyPollution->E4
+observationAbout: E:PM25CountyPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:PPM25CountyPollution->date
+value: C:PM25CountyPollution->PM25_med_pred
+observationPeriod: P24h
+unit: μg/m3
+variableMeasured: E:PM25CountyPollution->E5
+
+Node: E:PM25CountyPollution->E5
+typeOf: dcs:StatisticalVariable
+dcid: MedianConcentrationAirPollutantPM2.5
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:PM2.5
+statType: dcs:medianValue
+
+Node: E:PM25CountyPollution->E6
+observationAbout: E:PM25CountyPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:PM25CountyPollution->date
+value: C:PM25CountyPollution->PM25_max_pred
+observationPeriod: P24h
+unit: μg/m3
+variableMeasured: E:PM25CountyPollution->E7
+
+Node: E:PM25CountyPollution->E7
+typeOf: dcs:StatisticalVariable
+dcid: Max_Concentration_AirPollutant_PM2.5
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:PM2.5
+statType: dcs:maxValue
+
+Node: E:PM25CountyPollution->E8
+observationAbout: E:PM25CountyPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:PM25CountyPollution->date
+value: C:PM25CountyPollution->PM25_pop_pred
+observationPeriod: P24h
+unit: μg/m3
+variableMeasured: E:PM25CountyPollution->E9
+
+Node: E:PM25CountyPollution->E9
+typeOf: dcs:StatisticalVariable
+dcid: PopulationWeightedConcentrationAirPollutantPM2.5
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:PM2.5
+statType: dcs:measuredValue
+measurementQualifier: dcs:CDCPopulationWeighted

@@ -1,0 +1,72 @@
+Node: E:OzoneCountyPollution->E1
+typeOf: dcs:County
+dcid: C:OzoneCountyPollution->dcid
+
+Node: E:OzoneCountyPollution->E2
+observationAbout: E:OzoneCountyPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:OzoneCountyPollution->date
+value: C:OzoneCountyPollution->O3_mean_pred
+observationPeriod: P8h
+unit: parts per billion (ppb)
+variableMeasured: E:OzoneCountyPollution->E3
+
+Node: E:OzoneCountyPollution->E3
+typeOf: dcs:StatisticalVariable
+dcid: Mean_Concentration_AirPollutant_Ozone
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:Ozone
+statType: dcs:meanValue
+
+Node: E:OzoneCountyPollution->E4
+observationAbout: E:OzoneCountyPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:OzoneCountyPollution->date
+value: C:OzoneCountyPollution->O3_med_pred
+observationPeriod: P8h
+unit: parts per billion (ppb)
+variableMeasured: E:OzoneCountyPollution->E5
+
+Node: E:OzoneCountyPollution->E5
+typeOf: dcs:StatisticalVariable
+dcid: MedianConcentrationAirPollutantOzone
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:Ozone
+statType: dcs:medianValue
+
+Node: E:OzoneCountyPollution->E6
+observationAbout: E:OzoneCountyPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:OzoneCountyPollution->date
+value: C:OzoneCountyPollution->O3_max_pred
+observationPeriod: P8h
+unit: parts per billion (ppb)
+variableMeasured: E:OzoneCountyPollution->E7
+
+Node: E:OzoneCountyPollution->E7
+typeOf: dcs:StatisticalVariable
+dcid: Max_Concentration_AirPollutant_Ozone
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:Ozone
+statType: dcs:maxValue
+
+Node: E:OzoneCountyPollution->E8
+observationAbout: E:OzoneCountyPollution->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:OzoneCountyPollution->date
+value: C:OzoneCountyPollution->O3_pop_pred
+observationPeriod: P8h
+unit: parts per billion (ppb)
+variableMeasured: E:OzoneCountyPollution->E9
+
+Node: E:OzoneCountyPollution->E9
+typeOf: dcs:StatisticalVariable
+dcid: PopulationWeightedConcentrationAirPollutantOzone
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+pollutant: dcs:Ozone
+statType: dcs:measuredValue
+measurementQualifier: dcs:CDCPopulationWeighted
