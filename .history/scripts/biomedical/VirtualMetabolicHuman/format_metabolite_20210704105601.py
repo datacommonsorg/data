@@ -47,7 +47,7 @@ def main():
     ind_count = 0
     dcid_inch = []
     result = dc.query(query_str)
-    for index in enumerate(result):
+    for index in enumerate(result)):
         for key in result[index]:
             dcid_inch.insert(ind_count, result[index][key])
             ind_count += 1
@@ -404,7 +404,7 @@ def main():
     ind_count = 0
     dcid = []
     result = dc.query(query_str)
-    for index in enumerate(result):
+    for index in enumerate(len(result):
         for key in result[index]:
             dcid.insert(ind_count, result[index][key])
             ind_count += 1
