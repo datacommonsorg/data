@@ -1,8 +1,11 @@
 import sys
+import os
 import pandas as pd
 import numpy as np
+import csv
 from SPARQLWrapper import SPARQLWrapper, JSON
 import datacommons as dc
+import bioservices 
 from bioservices import *
 
 def isNaN(num):
@@ -48,9 +51,9 @@ def main():
     dcid_inch = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid_inch.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid_inch.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -75,9 +78,9 @@ def main():
     dcid_inch = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid_inch.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid_inch.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -102,9 +105,9 @@ def main():
     dcid_inch = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid_inch.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid_inch.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -136,9 +139,9 @@ def main():
     dcid_hmdb = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid_hmdb.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid_hmdb.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -162,9 +165,9 @@ def main():
     dcid_hmdb = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid_hmdb.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid_hmdb.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -196,9 +199,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -222,9 +225,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -257,9 +260,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -283,9 +286,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -320,9 +323,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -346,9 +349,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -381,9 +384,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -407,9 +410,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -440,9 +443,9 @@ def main():
     dcid = []
     result = dc.query(query_str)
     for index in range(len(result)):
-        for key in result[index]:
-            dcid.insert(ind_count, result[index][key])
-            ind_count += 1
+            for key in result[index]:
+                dcid.insert(ind_count, result[index][key])
+                ind_count += 1
 
     count_query = 0
     for i in df.index:
@@ -456,9 +459,10 @@ def main():
 
     uni = UniChem()
     mapping = uni.get_mapping("kegg_ligand", "chembl")
+
     # Add chemblID column in the dataframe and add the corresponding chembl ids for each entry 
     chembl_list = [0]*len(df['keggId'])
-    df.insert(7, 'ChEMBL', chembl_list )
+    df.insert(7, 'ChEMBL',chembl_list )
 
     for index, row in df.iterrows():
         try:
@@ -466,27 +470,36 @@ def main():
             chembl_list[index] = mapping[row['keggId']]
         except:
             pass
-    df['ChEMBL'] = chembl_list
+    df['ChEMBL'] = chembl_list 
 
     # Add dcids w.r.t chembl ids and chemical formulae(where chembl is missing)
     for i in df.index:
-        if df.loc[i, 'ChEMBL'] != 0:
-            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'ChEMBL'])
+        if df.loc[i,'ChEMBL'] != 0:
+            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i,'ChEMBL'])
         
 
     # Add dcids based on IUPAC names if no previous matches
     for i in df.index:
-        l = df.loc[i, 'fullName']
-        l = l.replace(' ', '_')
-        l = l.replace(',', '_')
-        df.loc[i, 'fullName'] = l
+        l = df.loc[i,'fullName']
+        l = l.replace(' ','_')
+        l = l.replace(',','_')
+        df.loc[i,'fullName'] = l
 
-    for i in df.index:
-        if isNaN(df.loc[i, 'Id']):
-            df.loc[i, 'Id'] = "bio/" + df.loc[i, 'fullName']
+    for i in df.index:  
+        if isNaN(df.loc[i,'Id']):
+            df.loc[i,'Id'] = "bio/" + df.loc[i,'fullName']
 
+
+        #p = n.replace(",","")
+        #m = p.replace(" ","_")        
+    # Change column names to avoid any abbreviations
+    #df.columns = ['Id','Abbreviation', 'Name', 'Charged_Formula', 'Charge', 'Average_Molecular_Weight', 'Monoisotopic_Weight', 'ChEMBL','KEGGID' , 'PubChemID', 'ChebiID', 'HMDB' , 'PDMapName', 'Reconmap', 'ReconMap3', 'FoodDB', 'ChemSpider', 'BioCyc', 'BiggID', 'Wikipedia', 'DrugBank', 'Seed', 'MetaNetX', 'KNApSAck', 'METLIN', 'CAS_REGISTRY', 'epa_ID', 'InCHIKey', 'InCHIString', 'SMILES']
+    
+    #df.update('"' + df[['Name']].astype(str) + '"')
     # Add output file to the current directory
-    df.to_csv(file_output, index=None)
+    df.to_csv(file_output, index = None)
+    
 
 if __name__ == '__main__':
     main()
+

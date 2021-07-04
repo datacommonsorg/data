@@ -485,6 +485,15 @@ def main():
         if isNaN(df.loc[i, 'Id']):
             df.loc[i, 'Id'] = "bio/" + df.loc[i, 'fullName']
 
+
+    #p = n.replace(",","")
+    #m = p.replace(" ","_")     
+    # Change column names to avoid any abbreviations
+    #df.columns = ['Id','Abbreviation', 'Name', 'Charged_Formula', 'Charge', 'Average_Molecular_Weight', 
+    #'Monoisotopic_Weight', 'ChEMBL','KEGGID' , 'PubChemID', 'ChebiID', 'HMDB' , 'PDMapName', 'Reconmap', 
+    # 'ReconMap3', 'FoodDB', 'ChemSpider', 'BioCyc', 'BiggID', 'Wikipedia', 'DrugBank', 'Seed', 'MetaNetX', 
+    # 'KNApSAck', 'METLIN', 'CAS_REGISTRY', 'epa_ID', 'InCHIKey', 'InCHIString', 'SMILES']
+    #df.update('"' + df[['Name']].astype(str) + '"')
     # Add output file to the current directory
     df.to_csv(file_output, index=None)
 
