@@ -1,5 +1,4 @@
 import pandas as pd
-import sys
 import os
 import numpy as np
 import re
@@ -112,13 +111,14 @@ def main():
     "i": "c_i",
     "c": "c",
     "s": "s",
-    "l": "l",
-    "r": "r",
-    "m": "m",
-    "g": "g",
-    "n": "n"
+        "l": "l",
+        "r": "r",
+        "m": "m",
+        "g": "g",
+        "n": "n"
         
     }
+    count = 0
     chars_to_check = '='
     for i, row in db_dup.iterrows():
         if any(c in chars_to_check for c in db_dup.loc[i,"formula"]):
@@ -130,22 +130,23 @@ def main():
                 #print(p)
             reactants, products = p.split('<=>')
             num_r = len(reactants.split("+"))
+            num_p = len(products.split("+"))
                 #print(reactants)
                 #print("Num_reactants", len(reactants.split("+")))
                 #print("Num_products", len(products.split("+")))
-            db_dup.loc[i, "r_comp"] = m[0]
-            db_dup.loc[i, "p_comp"] = m[0+num_r]
-            if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
+            db_dup.loc[i,"r_comp"] = m[0]
+            db_dup.loc[i,"p_comp"] = m[0+num_r]
+            if(db_dup.loc[i,"humanGEMID"] == db_dup.loc[i,"humanGEMID"]):
                 if m[0] in matchdict:
-                    if((matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"])) | ((matchdict.get(m[0]) == db_dup.loc[i, "product_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "reactant_compartment"])):
-                        db_dup.loc[i, "bool-val"] = 1
+                    if((matchdict.get(m[0]) == db_dup.loc[i,"reactant_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i,"product_compartment"])) | ((matchdict.get(m[0]) == db_dup.loc[i,"product_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i,"reactant_compartment"])):
+                        db_dup.loc[i,"bool-val"] = 1
                     #elif(matchdict.get(m[0]) == db_dup.loc[i,"reactant_compartment"][0]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i,"product_compartment"][0]) | ((matchdict.get(m[0]) == db_dup.loc[i,"product_compartment"][0]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i,"reactant_compartment"][0])):
                         #db_dup.loc[i,"bool-val"] = 1
                     else:
-                        db_dup.loc[i, "bool-val"] = 0
+                        db_dup.loc[i,"bool-val"] = 0
         else:
             #print(i)
-            p = db_dup.loc[i, "formula"]
+            p = db_dup.loc[i,"formula"]
             m = re.findall(r"\[([A-Za-z0-9_]+)\]", row["formula"])
                 #print(m)
                 #print("in ->")
@@ -155,16 +156,16 @@ def main():
             num_p = len(products.split("+"))
                 #print("Num_reactants", len(reactants.split("+")))
                 #print("Num_products", len(products.split("+")))
-            db_dup.loc[i, "r_comp"] = m[0]
-            db_dup.loc[i, "p_comp"] = m[0+num_r]
-            if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
+            db_dup.loc[i,"r_comp"] = m[0]
+            db_dup.loc[i,"p_comp"] = m[0+num_r]
+            if(db_dup.loc[i,"humanGEMID"] == db_dup.loc[i,"humanGEMID"]):
                 if m[0] in matchdict:
-                    if(matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"]):
-                        db_dup.loc[i, "bool-val"] = 1
-                    elif(matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"][0]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"][0]):
-                        db_dup.loc[i, "bool-val"] = 1
+                    if(matchdict.get(m[0]) == db_dup.loc[i,"reactant_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i,"product_compartment"]):
+                        db_dup.loc[i,"bool-val"] = 1
+                    elif(matchdict.get(m[0]) == db_dup.loc[i,"reactant_compartment"][0]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i,"product_compartment"][0]):
+                        db_dup.loc[i,"bool-val"] = 1
                     else:
-                        db_dup.loc[i, "bool-val"] = 0
+                        db_dup.loc[i,"bool-val"] = 0
 
        # drop duplicated abbreviations based on bool vals, keep 1s, remove the zeroes
     sorted_df = db_dup.sort_values("bool-val", ascending=False)
@@ -173,20 +174,20 @@ def main():
     
     # give zeroes to all with no human gemid match at first
     for i in dropped_df.index:
-        if isNaN(dropped_df.loc[i, 'bool-val']):
-            dropped_df.loc[i, 'bool-val'] = 0
+        if isNaN(dropped_df.loc[i,'bool-val']):
+            dropped_df.loc[i,'bool-val'] = 0
 
     # remove human gem ids for bool-val = 0 as it is indicative of imperfect match
     for i in dropped_df.index:
-        if dropped_df.loc[i, 'bool-val'] == 0:
-            dropped_df.loc[i, 'humanGEMID'] = float("NaN")
-            dropped_df.loc[i, 'Id'] = float("NaN")
+        if dropped_df.loc[i,'bool-val'] == 0:
+            dropped_df.loc[i,'humanGEMID'] = float("NaN")   
+            dropped_df.loc[i,'Id'] = float("NaN")
             
 
     # so all zeroes in the bool-val column have no match with human gem
     for i in dropped_df.index:
-        if dropped_df.loc[i, 'bool-val'] == 0:
-            dropped_df.loc[i, 'Id'] = "bio/" + dropped_df.loc[i, 'abbreviation']
+        if dropped_df.loc[i,'bool-val'] == 0:
+            dropped_df.loc[i,'Id'] = "bio/" + dropped_df.loc[i,'abbreviation']
 
     dict_comp_name = {
     "e": "Extracellular",
@@ -194,22 +195,26 @@ def main():
     "i": "InnerMitochondria",
     "c": "Cytosol",
     "s": "Extracellular",
-    "l": "Lysosome",
-    "r": "EndoplasmicReticulum",
-    "m": "Mitochondria",
-    "g": "GolgiApparatus",
-    "n": "Nucleus"
+        "l": "Lysosome",
+        "r": "EndoplasmicReticulum",
+        "m": "Mitochondria",
+        "g": "GolgiApparatus",
+        "n": "Nucleus"
+        
     }
 
     for i in dropped_df.index:
-        if dropped_df.loc[i, 'bool-val'] == 0:
-            if dropped_df.loc[i, 'MetaboliteMatch'] != '0':
-                if "Transport" in dropped_df.loc[i, 'description']:
-                    dropped_df.loc[i, 'rcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
-                    dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'p_comp'])
+        if dropped_df.loc[i,'bool-val'] == 0:
+            if dropped_df.loc[i,'MetaboliteMatch'] != '0':
+                if "Transport" in dropped_df.loc[i,'description']:
+                    dropped_df.loc[i,'rcc'] = dropped_df.loc[i,'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
+                    dropped_df.loc[i,'pcc'] = dropped_df.loc[i,'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'p_comp'])
                 else:
-                    dropped_df.loc[i, 'rcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
-                    dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
+                    dropped_df.loc[i,'rcc'] = dropped_df.loc[i,'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
+                    dropped_df.loc[i,'pcc'] = dropped_df.loc[i,'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
+                
+
+    list_null = list(df_rxn.loc[pd.isna(df_rxn["Id"]), :].index)
     
     #dropped_df.update('"' + df_rxn[['description', 'formula', 'ecnumber']].astype(str) + '"')
     

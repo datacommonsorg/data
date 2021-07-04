@@ -119,6 +119,7 @@ def main():
     "n": "n"
         
     }
+    count = 0
     chars_to_check = '='
     for i, row in db_dup.iterrows():
         if any(c in chars_to_check for c in db_dup.loc[i,"formula"]):
@@ -130,6 +131,7 @@ def main():
                 #print(p)
             reactants, products = p.split('<=>')
             num_r = len(reactants.split("+"))
+            num_p = len(products.split("+"))
                 #print(reactants)
                 #print("Num_reactants", len(reactants.split("+")))
                 #print("Num_products", len(products.split("+")))
@@ -210,6 +212,9 @@ def main():
                 else:
                     dropped_df.loc[i, 'rcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
                     dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
+                
+
+    list_null = list(df_rxn.loc[pd.isna(df_rxn["Id"]), :].index)
     
     #dropped_df.update('"' + df_rxn[['description', 'formula', 'ecnumber']].astype(str) + '"')
     
