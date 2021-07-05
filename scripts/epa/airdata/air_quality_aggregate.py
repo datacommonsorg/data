@@ -47,12 +47,13 @@ definingAirQualitySite: C:EPA_AQI->Site
 
 
 def get_place(observation):
-  if 'State Code' and 'County Code' in observation:
-    return 'dcid:geoId/' + observation['State Code'] + observation['County Code']
-  elif 'CSBA Code' in observation:
-    return 'dcid:geoId/C' + observation['CBSA Code']
-  else:
-    return None
+    if 'State Code' and 'County Code' in observation:
+        return 'dcid:geoId/' + observation['State Code'] + observation[
+            'County Code']
+    elif 'CSBA Code' in observation:
+        return 'dcid:geoId/C' + observation['CBSA Code']
+    else:
+        return None
 
 
 def create_csv(csv_file_path):
@@ -71,7 +72,7 @@ def write_csv(csv_file_path, reader):
         for observation in reader:
             place = get_place(observation)
             if place == None:
-              continue
+                continue
             new_row = {
                 'Date':
                     observation['Date'],
@@ -88,12 +89,12 @@ def write_csv(csv_file_path, reader):
 
 
 def request_and_write_csv(csv_file_path, filename):
-  response = requests.get(
-              f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
-  with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
-      with zf.open(f'{filename}.csv', 'r') as infile:
-          reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-          write_csv(csv_file_path, reader)
+    response = requests.get(
+        f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
+    with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
+        with zf.open(f'{filename}.csv', 'r') as infile:
+            reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
+            write_csv(csv_file_path, reader)
 
 
 def write_tmcf(tmcf_file_path):
@@ -105,8 +106,8 @@ if __name__ == '__main__':
     end_year = sys.argv[1]
     create_csv('EPA_AQI.csv')
     for year in range(START_YEAR, int(end_year) + 1):
-      filename1 = f'daily_aqi_by_county_{year}'
-      filename2 = f'daily_aqi_by_cbsa_{year}'
-      request_and_write_csv('EPA_AQI.csv', filename1)
-      request_and_write_csv('EPA_AQI.csv', filename2)
+        filename1 = f'daily_aqi_by_county_{year}'
+        filename2 = f'daily_aqi_by_cbsa_{year}'
+        request_and_write_csv('EPA_AQI.csv', filename1)
+        request_and_write_csv('EPA_AQI.csv', filename2)
     write_tmcf('EPA_AQI.tmcf')

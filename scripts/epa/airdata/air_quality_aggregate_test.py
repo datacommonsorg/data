@@ -27,7 +27,8 @@ class TestCriteriaGasesTest(unittest.TestCase):
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(
-                    os.path.join(module_dir_, 'test_data/test_aggregate_import_data.csv'),
+                    os.path.join(module_dir_,
+                                 'test_data/test_aggregate_import_data.csv'),
                     'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
                 create_csv(test_csv)
@@ -35,8 +36,8 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 reader = csv.DictReader(f)
                 write_csv(test_csv, reader)
 
-                expected_csv = os.path.join(module_dir_,
-                                            'test_data/test_aggregate_import.csv')
+                expected_csv = os.path.join(
+                    module_dir_, 'test_data/test_aggregate_import.csv')
                 with open(test_csv, 'r') as test:
                     test_str: str = test.read()
                     with open(expected_csv, 'r') as expected:
