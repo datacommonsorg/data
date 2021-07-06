@@ -8,16 +8,7 @@ import os
 import numpy as np
 import pandas as pd
 import datacommons as dc
-import bioservices
 from bioservices import *
-
-
-def get_unique_values(df, column):
-    val_list = list(df[df["chembl"].isna()][column].unique())
-    if np.nan in val_list:
-        val_list.remove(np.nan)
-    val_list = np.array(val_list)
-    return val_list
 
 
 def main():
@@ -82,7 +73,11 @@ def main():
 
     print("DONE converting kegg to chembl with boservices")
 
-    chebi_list = get_unique_values(df_metabolites, "chebi")
+    val_list = list(df_metabolites[df_metabolites["chembl"].isna()]\
+        ["chebi"].unique())
+    if np.nan in val_list:
+        val_list.remove(np.nan)
+    chebi_list = np.array(val_list)
     query_str = """
     SELECT DISTINCT ?chembl ?chebi
     WHERE{{
@@ -97,7 +92,11 @@ def main():
             =  res["?chembl"].split("/")[1]
     print("DONE converting chebi to chembl with data common query")
 
-    kegg_list = get_unique_values(df_metabolites, "kegg.compound")
+    val_list = list(df_metabolites[df_metabolites["chembl"].isna()]\
+        ["kegg.compound"].unique())
+    if np.nan in val_list:
+        val_list.remove(np.nan)
+    kegg_list = np.array(val_list)
     query_str = """
     SELECT DISTINCT ?chembl ?kegg
     WHERE{{
