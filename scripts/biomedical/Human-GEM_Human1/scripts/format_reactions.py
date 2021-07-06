@@ -6,15 +6,13 @@ import sys
 import os
 import numpy as np
 import pandas as pd
+
+
 def main():
 
     # information of this dictionary is from the original
     # HUMAN-GEM xml file (read Download URL section)
-    kinetic_dict = {
-        "FB2N0": 0,
-        "FB1N1000": -1000,
-        "FB3N1000": 1000
-    }
+    kinetic_dict = {"FB2N0": 0, "FB1N1000": -1000, "FB3N1000": 1000}
     # read in 1 data file as the second argument
     file_input = sys.argv[1]
     # read in dataframe
@@ -36,7 +34,8 @@ def main():
         ["lowerFluxBound", "upperFluxBound"], axis = 1)
     # generate output file path at current directory
     output_path = os.path.join(os.getcwd(), "reactions.csv")
-    df_reactions.to_csv(output_path, index = None)
+    df_reactions.to_csv(output_path, index=None)
+
 
 if __name__ == '__main__':
     main()

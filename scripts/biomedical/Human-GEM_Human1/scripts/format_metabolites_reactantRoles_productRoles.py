@@ -19,11 +19,12 @@ def get_unique_values(df, column):
     val_list = np.array(val_list)
     return val_list
 
+
 def main():
-    # dictionary to map values in "compartment" 
+    # dictionary to map values in "compartment"
     # column to CellularCompartmentEnum values
     compartment_dict = {
-        "c":"dcs:CellularCompartmentCytosol",
+        "c": "dcs:CellularCompartmentCytosol",
         "s": "dcs:CellularCompartmentExtracellular",
         "l": "dcs:CellularCompartmentLysosome",
         "r": "dcs:CellularCompartmentEndoplasmicReticulum",
@@ -39,15 +40,15 @@ def main():
         sys.argv[1],sys.argv[2],sys.argv[3]
     ### Generate metabolites.csv
     # read csv file
-    df_metabolites = pd.read_csv(metabolite_tsv, sep = "\t")
+    df_metabolites = pd.read_csv(metabolite_tsv, sep="\t")
 
     uni = UniChem()  # init mapping tool (bioservices)
     # Convert Chebi to chembl with bioservices
     # and fill in chmble column
-    from_ , to_ = "chebi", "chembl"
+    from_, to_ = "chebi", "chembl"
     from_list = list(df_metabolites[df_metabolites[to_].isna()][from_].unique())
     if np.nan in from_list:
-        from_list.remove(np.nan) 
+        from_list.remove(np.nan)
     mapping = uni.get_mapping("chebi", "chembl")
     for val in from_list:
         try:
@@ -58,10 +59,10 @@ def main():
     print("DONE converting chebi to chembl with bioservices")
 
     # Convert kegg to chembl with bioservices and fill in chembl column
-    from_ , to_ = "kegg.compound", "chembl"
+    from_, to_ = "kegg.compound", "chembl"
     from_list = list(df_metabolites[df_metabolites[to_].isna()][from_].unique())
-    if np.nan in from_list :
-        from_list.remove(np.nan) 
+    if np.nan in from_list:
+        from_list.remove(np.nan)
     mapping = uni.get_mapping("kegg_ligand", "chembl")
     for val in from_list:
         try:
@@ -87,7 +88,7 @@ def main():
             =  res["?chembl"].split("/")[1]
     print("DONE converting chebi to chembl with data common query")
 
-    kegg_list = get_unique_values(df_metabolites,"kegg.compound")
+    kegg_list = get_unique_values(df_metabolites, "kegg.compound")
     query_str = """
     SELECT DISTINCT ?chembl ?kegg
     WHERE{{
@@ -102,7 +103,7 @@ def main():
             [df_metabolites["kegg.compound"] == res["?kegg"], "chembl"] \
             =  res["?chembl"].split("/")[1]
     print("DONE converting kegg to chembl with data common query")
-          
+
     pub_chem_list = df_metabolites[df_metabolites["chembl"].isna()]\
         ["pubchem.compound"].unique()[1:].astype(int).astype(str)
     # Pubchem Compound float -> int
@@ -123,7 +124,7 @@ def main():
     ?chembl pubChemCompoundID {0} .
     }}
     """.format(pub_chem_list)
-    result = dc.query(query_str)    
+    result = dc.query(query_str)
     for res in result:
         df_metabolites.loc[df_metabolites["pubchem.compound"] \
             == res["?pubChem"], "chembl"]\
@@ -165,7 +166,7 @@ def main():
     df_metabolites["metabolite_dcid"] =  \
         df_metabolites["metabolite_dcid"].str.replace(",","_")
     # Format chemblID, remove ":"
-    df_metabolites["chembl"] = df_metabolites["chembl"].str.replace(":","")
+    df_metabolites["chembl"] = df_metabolites["chembl"].str.replace(":", "")
     #convert chebiID and chemicalName to string with quotation
     df_metabolites['chebi'] = np.where(pd.isnull(df_metabolites['chebi']),\
         df_metabolites['chebi'],\
@@ -178,8 +179,8 @@ def main():
         df_metabolites["compartment"].map(compartment_dict)
     # generate output file path at current directory
     output_path = os.path.join(os.getcwd(), "metabolites.csv")
-    df_metabolites.to_csv(output_path, index = None)
-    
+    df_metabolites.to_csv(output_path, index=None)
+
     ### Generate metabolicCellularCompartment.csv
     df_metabolic_cellular_compartment = df_metabolites\
         [["id", "compartment","metabolite_dcid"]].copy()
@@ -187,7 +188,7 @@ def main():
          df_metabolic_cellular_compartment["id"]
     # generate output file path at current directory
     output_path = os.path.join(os.getcwd(), "metabolicCellularCompartment.csv")
-    df_metabolic_cellular_compartment.to_csv(output_path, index = None)
+    df_metabolic_cellular_compartment.to_csv(output_path, index=None)
 
     ### generate productRoles.csv
     df_product_roles = pd.read_csv(product_tsv, sep='\t')
@@ -205,7 +206,7 @@ def main():
          df_product_roles["reactionID"].astype("str")
     # generate output file path at current directory
     output_path = os.path.join(os.getcwd(), "productRoles.csv")
-    df_product_roles.to_csv(output_path, index = None)
+    df_product_roles.to_csv(output_path, index=None)
 
     ### generate reactantRoles.csv
     df_reactant_roles = pd.read_csv(reactant_tsv, sep='\t')
@@ -217,12 +218,13 @@ def main():
     df_reactant_roles = df_reactant_roles.merge(\
         df_metabolic_cellular_compartment,left_on = "speciesID", right_on="id")\
              [["reactionID", "metabolic_compartment_dcid"]]
-      # modify reaction id to reaction dcid format
+    # modify reaction id to reaction dcid format
     df_reactant_roles["reactionID"] = "bio/" + \
          df_reactant_roles["reactionID"].astype(str)
     # generate output file path at current directory
     output_path = os.path.join(os.getcwd(), "reactantRoles.csv")
-    df_reactant_roles.to_csv(output_path, index = None)
+    df_reactant_roles.to_csv(output_path, index=None)
+
 
 if __name__ == '__main__':
     main()

@@ -6,10 +6,12 @@ import sys
 import os
 import numpy as np
 import pandas as pd
+
+
 def main():
 
     # read in 2 data files as the second and third arguments
-    gene_tsv, gene_roles_tsv  = sys.argv[1], sys.argv[2]
+    gene_tsv, gene_roles_tsv = sys.argv[1], sys.argv[2]
 
     ### Format genes.tsv
 
@@ -19,7 +21,7 @@ def main():
     df_genes["hm_38_gene"] = "bio/hg38_" + df_genes["symbol"].astype(str)
     df_genes["hm_19_gene"] = "bio/hg19_" + df_genes["symbol"].astype(str)
     # remove redundant columns
-    df_genes = df_genes.drop(labels = ["name", "symbol"], axis = 1)
+    df_genes = df_genes.drop(labels=["name", "symbol"], axis=1)
     # rename columns
     df_genes.columns = ["ensemblID", "systemsBiologyOntologyTerm", \
                         "hm_38_gene", "hm_19_gene"]
@@ -31,7 +33,7 @@ def main():
     # generate output file path at current directory
     output_path = os.path.join(os.getcwd(), "genes.csv")
     # create formatted csv
-    df_genes.to_csv(output_path, index = None)
+    df_genes.to_csv(output_path, index=None)
 
     ### Format geneRoles.tsv
 
@@ -48,7 +50,8 @@ def main():
     # generate output file path at current directory
     output_path = os.path.join(os.getcwd(), "geneRoles.csv")
     # create formatted csv
-    df_gene_roles.to_csv(output_path, index = None)
+    df_gene_roles.to_csv(output_path, index=None)
+
 
 if __name__ == '__main__':
     main()
