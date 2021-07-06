@@ -43,12 +43,21 @@ def main():
     df_metabolites = pd.read_csv(metabolite_tsv, sep="\t")
 
     uni = UniChem()  # init mapping tool (bioservices)
+
+    condition = df_metabolites['chebi'].str.\
+        findall("CHE").explode() == np.array("CHE")
+    df_metabolites["chebi"] = \
+        np.where(condition, df_metabolites["chebi"], np.nan)
+
     # Convert Chebi to chembl with bioservices
-    # and fill in chmble column
+    # and fill in chembl column
     from_, to_ = "chebi", "chembl"
     from_list = list(df_metabolites[df_metabolites[to_].isna()][from_].unique())
-    if np.nan in from_list:
-        from_list.remove(np.nan)
+    #Remove nan
+    for i in from_list:
+        if not isinstance(i, str):
+            from_list.remove(i)
+
     mapping = uni.get_mapping("chebi", "chembl")
     for val in from_list:
         try:
