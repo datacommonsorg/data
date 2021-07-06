@@ -104,10 +104,10 @@ Please read the description of each file for the appropriate inputs. <br>
 ### Scripts
 |File| Description|
 ---------|-----------
-|format_genes_gene_roles.py|Inputs: genes.tsv, geneRoles.tsv <br> Outputs: formatted genes.csv, geneRoles.csv|
-|format_metabolites_metabolite_roles.py|Inputs: metabolites.tsv, reactants.tsv, products.tsv <br> Outputs: formatted metabolites.csv, metabolicCellularComparment, reactants.csv, products.csv|
+|format_genes.py|Inputs: genes.tsv, geneRoles.tsv <br> Outputs: formatted genes.csv, geneRoles.csv|
+|format_metabolites.py|Inputs: metabolites.tsv, reactants.tsv, products.tsv <br> Outputs: formatted metabolites.csv, metabolicCellularComparment, reactants.csv, products.csv|
 |format_reactions.py|Inputs: reactions.tsv <br> Outputs: formatted reactions.csv|
-|format_groups_group_memberships.py|Inputs: groups.tsv, groupMemberships.tsv<br> Outputs: formatted groups.csv, groupMemberships.tsv|
+|format_groups.py|Inputs: groups.tsv, groupMemberships.tsv<br> Outputs: formatted groups.csv, groupMemberships.tsv|
 
 ### tMCF files
 
@@ -130,14 +130,14 @@ These files can be used together with the generated .csv files to ingest human1 
 
 To format genes.tsv and geneRoles.tsv, put the tsv files and the python script in the same directory and run:
 ```bash
-python format_genes_gene_roles.py genes.tsv geneRoles.tsv
+python format_genes.py genes.tsv geneRoles.tsv
 ```
 
 The formatted genes.csv and geneRoles.csv will be generated in the current directory. These csv files can be combined with its corressponding tMCF files for data ingestion to Data Commons.
 
 Similarly, for other data files:
 ```bash 
-python format_metabolites_metabolite_roles.py metabolites.tsv reactantRoles.tsv productRoles.tsv 
+python format_metabolites.py metabolites.tsv reactantRoles.tsv productRoles.tsv 
 ```
 This will generate 4 formatted files: metabolites.csv, metabolicCellularCompartment.csv reactantRoles.csv, and productRoles.csv
 ```bash
@@ -146,7 +146,7 @@ python format_reactions.py reactions.tsv
 This will generate the formatted reactions.csv file 
 
 ```bash
-python format_groups_group_memberships.py groups.tsv groupMemberships.tsv 
+python format_groups.py groups.tsv groupMemberships.tsv 
 ```
 This will generate 2 formatted files: groups.csv and groupMemberships.csv
 
