@@ -54,7 +54,7 @@ def main():
         try:
             df_metabolites.loc[df_metabolites[from_] == val, "chembl"] \
                 =  mapping[val.split(":")[1]]
-        except:
+        except ValueError:
             pass
     print("DONE converting chebi to chembl with bioservices")
 
@@ -68,7 +68,7 @@ def main():
         try:
             df_metabolites.loc[df_metabolites[from_] \
                 == val, "chembl"] =  mapping[val]
-        except:
+        except ValueError:
             pass
 
     print("DONE converting kegg to chembl with boservices")
