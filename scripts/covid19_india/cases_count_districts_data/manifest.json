@@ -1,0 +1,18 @@
+{
+    "import_specifications": [{
+        "import_name":
+        "covid19IndiaCasesCountDistrictsData",
+        "curator": ["Senthamizhan V"],
+        "provenance_url":
+        "https://covid19india.org",
+        "provenance_description":
+        "Community collected, cleaned and organized COVID-19/India datasets, sourced from various government websites.",
+        "scripts": ["preprocess.py"],
+        "import_inputs": [{
+            "template_mcf": "COVID19_cases_indian_districts.tmcf",
+            "cleaned_csv": "COVID19_cases_indian_districts.csv"
+        }],
+        "cron_schedule":
+        "* * * * *"
+    }]
+}
