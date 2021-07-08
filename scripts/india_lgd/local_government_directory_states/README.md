@@ -41,6 +41,8 @@ The WikiData dataset has the following columns
 - isoCode - ISO Code of the state or UT
 - census2001Code - Census 2001 Code
 
+Update the ISO code for Dadra and Nagar Haveli and Daman and Diu based on [ISO documentation](https://www.iso.org/obp/ui/#iso:code:3166:IN).
+
 #### Cleaned Data
 
 The cleaned CSV has the following columns
@@ -69,5 +71,5 @@ python3 -m unittest discover -v -s scripts/ -p *_test.py
 To import data, run the following command:
 
 ```bash
-`python -m india_lgd.local_government_directory_states.preprocess`
+python -m india_lgd.local_government_directory_states.preprocess
 ```

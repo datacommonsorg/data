@@ -3,5 +3,6 @@ typeOf: dcs:Place
 wikidataId: C:LGDRefresh->WikiDataId
 name: C:LGDRefresh->Name
 lgdCode: C:LGDRefresh->StateCode
+isoCode: C:LGDRefresh->IsoCode
 indianCensusAreaCode2011: C:LGDRefresh->Census2011Code
 indianCensusAreaCode2001: C:LGDRefresh->Census2001Code

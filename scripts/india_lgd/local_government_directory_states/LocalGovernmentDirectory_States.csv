@@ -30,7 +30,7 @@ StateCode,Census2001Code,Census2011Code,WikiDataId,IsoCode,Name
 11,11,11,Q1505,IN-SK,Sikkim
 33,33,33,Q1445,IN-TN,Tamil Nadu
 36,,,Q677037,IN-TG,Telangana
-38,38,38,Q77997266,,Dadra and Nagar Haveli and Daman and Diu
+38,38,38,Q77997266,IN-DH,Dadra and Nagar Haveli and Daman and Diu
 16,16,16,Q1363,IN-TR,Tripura
 05,05,05,Q1499,IN-UT,Uttarakhand
 09,09,09,Q1498,IN-UP,Uttar Pradesh

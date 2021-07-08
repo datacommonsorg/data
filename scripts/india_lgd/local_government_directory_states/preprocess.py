@@ -108,14 +108,19 @@ class LocalGovermentDirectoryStatesDataLoader:
         ]
 
         # Reformat the columns as per our CSV requirements
-        self.clean_df['StateCode'] = self.clean_df['StateCode'].apply(
+        self.clean_df["StateCode"] = self.clean_df["StateCode"].apply(
             LocalGovermentDirectoryStatesDataLoader.format_code)
-        self.clean_df['Census2001Code'] = self.clean_df['Census2001Code'].apply(
+        self.clean_df["Census2001Code"] = self.clean_df["Census2001Code"].apply(
             LocalGovermentDirectoryStatesDataLoader.format_code)
-        self.clean_df['Census2011Code'] = self.clean_df['Census2011Code'].apply(
+        self.clean_df["Census2011Code"] = self.clean_df["Census2011Code"].apply(
             LocalGovermentDirectoryStatesDataLoader.format_code)
-        self.clean_df['WikiDataId'] = self.clean_df['WikiDataId'].apply(
+        self.clean_df["WikiDataId"] = self.clean_df["WikiDataId"].apply(
             LocalGovermentDirectoryStatesDataLoader.format_wikidataid)
+
+        # Update the ISO code for Dadra and Nagar Haveli and Daman and Diu
+        self.clean_df.loc[self.clean_df["Name"] ==
+                          "Dadra and Nagar Haveli and Daman and Diu",
+                          "IsoCode"] = "IN-DH"
 
     def save(self):
         self.clean_df.to_csv(self.clean_csv, index=False, header=True)
