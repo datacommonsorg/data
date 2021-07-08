@@ -1,0 +1,37 @@
+StateCode,Census2001Code,Census2011Code,WikiDataId,IsoCode,Name
+35,35,35,Q40888,IN-AN,Andaman and Nicobar Islands
+28,28,28,Q1159,IN-AP,Andhra Pradesh
+12,12,12,Q1162,IN-AR,Arunachal Pradesh
+18,18,18,Q1164,IN-AS,Assam
+10,10,10,Q1165,IN-BR,Bihar
+04,04,04,Q43433,IN-CH,Chandigarh
+22,22,22,Q1168,IN-CT,Chhattisgarh
+07,07,07,Q1353,IN-DL,Delhi
+30,30,30,Q1171,IN-GA,Goa
+24,24,24,Q1061,IN-GJ,Gujarat
+06,06,06,Q1174,IN-HR,Haryana
+02,02,02,Q1177,IN-HP,Himachal Pradesh
+01,01,01,Q66278313,IN-JK,Jammu and Kashmir
+20,20,20,Q1184,IN-JH,Jharkhand
+29,29,29,Q1185,IN-KA,Karnataka
+32,32,32,Q1186,IN-KL,Kerala
+37,,,Q200667,IN-LA,Ladakh
+31,31,31,Q26927,IN-LD,Lakshadweep
+23,23,23,Q1188,IN-MP,Madhya Pradesh
+27,27,27,Q1191,IN-MH,Maharashtra
+14,14,14,Q1193,IN-MN,Manipur
+17,17,17,Q1195,IN-ML,Meghalaya
+15,15,15,Q1502,IN-MZ,Mizoram
+13,13,13,Q1599,IN-NL,Nagaland
+21,21,21,Q22048,IN-OR,Odisha
+34,34,34,Q66743,IN-PY,Puducherry
+03,03,03,Q22424,IN-PB,Punjab
+08,08,08,Q1437,IN-RJ,Rajasthan
+11,11,11,Q1505,IN-SK,Sikkim
+33,33,33,Q1445,IN-TN,Tamil Nadu
+36,,,Q677037,IN-TG,Telangana
+38,38,38,Q77997266,,Dadra and Nagar Haveli and Daman and Diu
+16,16,16,Q1363,IN-TR,Tripura
+05,05,05,Q1499,IN-UT,Uttarakhand
+09,09,09,Q1498,IN-UP,Uttar Pradesh
+19,19,19,Q1356,IN-WB,West Bengal
