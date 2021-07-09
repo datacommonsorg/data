@@ -9,15 +9,13 @@ import datacommons as dc
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
-    
-    df_microbes = pd.read_csv(file_input, sep ='\t')
+    df_microbes = pd.read_csv(file_input, sep = '\t')
     
     ## modify the organism name for a sparql query
-    org_name = ['0']*818
+    org_name = ['0']*len(df_microbes['organism'])
     for i in df_microbes.index:
-        l = df_microbes.loc[i,"organism"].split(' ')
+        l = df_microbes.loc[i, "organism"].split(' ')
         org_name[i] = l[0] + " " + l[1]
-
 
     ## sparql query on datacommons to extract dcids for pre-exisitng organism 
     query_str = '''
@@ -28,11 +26,10 @@ def main():
       ?kingdom name Bacteria .
     }
     '''
-
     result = dc.query(query_str)
     
     #wrap the specie_dcids obtained above, in a list
-    specie_dcids = ['0'] * 3853
+    specie_dcids = ['0'] * len(result)
     for index in range(len(result)):
         for key in result[index]:
             specie_dcids[index] = result[index][key]
@@ -46,7 +43,7 @@ def main():
     df_specie = df_specie.explode('species_name')
 
     #find the rows where the organism name obtained doesnt match the dc query
-    specie_count = ['0']*818
+    specie_count = ['0']*len(df_microbes['organism'])
     for i in range(len(org_name)):
         for j in df_specie.index:
             if(org_name[i] == df_specie.loc[j, "species_name"]):
@@ -61,47 +58,28 @@ def main():
 
     df_microbes.insert(0, 'Id', org_name)
    
-
-
     #format the columns declared as enums
-    df_microbes['metabolism'] = df_microbes['metabolism'].str.replace(',','', regex=True)
-    df_microbes['metabolism'] = df_microbes['metabolism'].str.replace(' ','_', regex=True)
-    df_microbes['oxygenstat'] = df_microbes['oxygenstat'].str.replace(',','', regex=True)
-    df_microbes['oxygenstat'] = df_microbes['oxygenstat'].str.replace(' ','_', regex=True)
-    df_microbes['mtype'] = df_microbes['mtype'].str.replace(',','', regex=True)
-    df_microbes['mtype'] = df_microbes['mtype'].str.replace(' ','_', regex=True)
+    list_col = ['metabolism', 'oxygenstat', 'mtype']
+    for i in list_col: 
+        p = df_microbes[i]
+        p = p.str.replace(',','',regex=True)
+        p = p.str.replace(' ','_',regex=True)
+        df_microbes[i] = p
 
-
-
-
-    for i in df_microbes.index:
-        concat_str = df_microbes.loc[i, "gram"]
-        df_microbes.loc[i, "gram"] = "dcs:BacteriaGramStainType" + str(concat_str)
-
-    for i in df_microbes.index:
-        concat_str = df_microbes.loc[i, "platform"]
-        df_microbes.loc[i, "platform"] = "dcs:DataCollectionPlatform" + str(concat_str)
-    
-    for i in df_microbes.index:
-        concat_str = df_microbes.loc[i, "metabolism"]
-        df_microbes.loc[i, "metabolism"] = "dcs:MicrobialMetabolismType" + str(concat_str)
-
-    for i in df_microbes.index:
-        concat_str = df_microbes.loc[i, "oxygenstat"]
-        df_microbes.loc[i, "oxygenstat"] = "dcs:OxygenRequirementStatus" + str(concat_str)
-    
-    for i in df_microbes.index:
-        concat_str = df_microbes.loc[i, "mtype"]
-        df_microbes.loc[i, "oxygenstat"] = "dcs:PathogenMethodOfInvasionEnum" + str(concat_str)
-    
-
+    # enum-column dict
+    col_enum_dict = {"gram":"dcs:BacteriaGramStainType","platform":"dcs:DataCollectionPlatform",
+                "metabolism":"dcs:MicrobialMetabolismType", "oxygenstat":"dcs:OxygenRequirementStatus",
+                "mtype":"dcs:PathogenMethodOfInvasionEnum"}
+    for i in col_enum_dict:
+        p = col_enum_dict.get(i) + df_microbes[i] 
+        df_microbes[i] = p    
+        
     #Date conversion to ISO format
     for i in df_microbes.index:
-        if df_microbes.loc[i,'draftcreated'] == df_microbes.loc[i,'draftcreated']:
-            l = df_microbes.loc[i,'draftcreated'].split('/')
+        if df_microbes.loc[i, 'draftcreated'] == df_microbes.loc[i, 'draftcreated']:
+            l = df_microbes.loc[i, 'draftcreated'].split('/')
             iso_date = "20" + l[2] + "-" + l[0] + "-" + l[1]
-            df_microbes.loc[i,'draftcreated'] = iso_date
-
+            df_microbes.loc[i, 'draftcreated'] = iso_date
     df_microbes.to_csv(file_output, index = None)
 if __name__ == '__main__':
     main()
