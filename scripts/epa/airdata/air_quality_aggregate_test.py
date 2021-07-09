@@ -27,8 +27,9 @@ class TestCriteriaGasesTest(unittest.TestCase):
     def test_write_csv_county(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(
-                    os.path.join(module_dir_,
-                                 'test_data/test_aggregate_import_data_county.csv'),
+                    os.path.join(
+                        module_dir_,
+                        'test_data/test_aggregate_import_data_county.csv'),
                     'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
                 create_csv(test_csv)
@@ -45,12 +46,12 @@ class TestCriteriaGasesTest(unittest.TestCase):
                         self.assertEqual(test_str, expected_str)
                 os.remove(test_csv)
 
-
     def test_write_csv_csba(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(
-                    os.path.join(module_dir_,
-                                 'test_data/test_aggregate_import_data_cbsa.csv'),
+                    os.path.join(
+                        module_dir_,
+                        'test_data/test_aggregate_import_data_cbsa.csv'),
                     'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
                 create_csv(test_csv)
@@ -66,7 +67,6 @@ class TestCriteriaGasesTest(unittest.TestCase):
                         expected_str: str = expected.read()
                         self.assertEqual(test_str, expected_str)
                 os.remove(test_csv)
-
 
     def test_write_tmcf(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
