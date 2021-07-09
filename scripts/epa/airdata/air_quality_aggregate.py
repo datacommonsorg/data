@@ -50,7 +50,7 @@ def get_place(observation):
     if 'State Code' and 'County Code' in observation:
         return 'dcid:geoId/' + observation['State Code'] + observation[
             'County Code']
-    elif 'CSBA Code' in observation:
+    elif 'CBSA Code' in observation:
         return 'dcid:geoId/C' + observation['CBSA Code']
     else:
         return None
@@ -71,7 +71,7 @@ def write_csv(csv_file_path, reader):
                                 lineterminator='\n')
         for observation in reader:
             place = get_place(observation)
-            if place == None:
+            if not place:
                 continue
             new_row = {
                 'Date':
