@@ -7,29 +7,17 @@ statType: dcs:meanValue
 pollutant: dcs:DieselPM
 
 Node: dcid:AirPollutant_Cancer_Risk
-description: "Lifetime inhalation cancer risk from exposure to air pollutants"
+description: "Probability of contracting cancer over a 70 year lifetime due to air pollutant exposure"
 typeOf: dcs:StatisticalVariable
-populationType: dcs: Atmosphere
-statType: dcs: measuredValue
+populationType: dcs:Atmosphere
+measuredProperty: dcs:lifetimeContractionProbability
+statType: dcs:measuredValue
+pollutantHealthRisk: dcs:Cancer
 
 Node: dcid:AirPollutant_Respiratory_Hazard
-description: "Ratio of exposure concentration to RfC"
-typeOf: dcs:StatisticalVariable
-populationType: dcs: Atmosphere
-statType: dcs: measuredValue
-
-Node: dcid:Mean_Concentration_AirPollutant_Ozone
-description: "Summer seasonal average of daily max ozone concentration in air"
+description: "Ratio of lifetime exposure to reference concentration. Value of 1 or lower means unlikely noncancer health effects."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
-measuredProperty: dcs:concentration
-statType: dcs:meanValue
-Pollutant: dcs:Ozone
-
-Node: dcid:Mean_Concentration_AirPollutant_PM2.5
-description: "Annual average PM2.5"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:concentration
-statType: dcs:meanValue
-Pollutant: dcs:PM2.5
+measuredProperty: dcs:hazardIndex
+statType: dcs:measuredValue
+pollutantHealthRisk: dcs:NonCarcinogenicRespiratoryHazar
