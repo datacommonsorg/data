@@ -97,7 +97,7 @@ def main():
     }}
     """.format(arr_hmdb_1)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid_hmdb = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid_hmdb)):
@@ -113,7 +113,7 @@ def main():
     }}
     """.format(arr_hmdb_2)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid_hmdb = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid_hmdb)):
@@ -135,7 +135,7 @@ def main():
     }}
     """.format(arr_kegg_1)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
@@ -151,7 +151,7 @@ def main():
     }}
     """.format(arr_kegg_2)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid= clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
@@ -175,7 +175,7 @@ def main():
     }}
     """.format(arr_chebi_1)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
@@ -191,7 +191,7 @@ def main():
     }}
     """.format(arr_chebi_2)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1,len(dcid)):
@@ -215,7 +215,7 @@ def main():
     }}
     """.format(arr_pub_1)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
@@ -231,7 +231,7 @@ def main():
     }}
     """.format(arr_pub_2)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
@@ -255,7 +255,7 @@ def main():
     }}
     """.format(arr_chem_1)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
@@ -271,7 +271,7 @@ def main():
     }}
     """.format(arr_chem_2)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
@@ -292,7 +292,7 @@ def main():
     }}
     """.format(arr_drug)
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
+    dcid = clean_result(result)
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
