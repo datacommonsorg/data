@@ -47,13 +47,8 @@ class LocalGovermentDirectoryStatesDataLoader:
         # If the value is `0` then it makes it empty
         # If the length is single character then it prepends it
         # with `0` to make it two character length
-        if len(s) == 1:
-            if s == "0":
-                return ""
-            else:
-                return str("0" + s)
-        else:
-            return str(s)
+        s = s.zfill(2)
+        return "" if s == "00" else s
 
     @staticmethod
     def format_wikidataid(s):
@@ -67,7 +62,7 @@ class LocalGovermentDirectoryStatesDataLoader:
         # Drop title rows in the top and empty rows after 39.
         # The actual data is between 2nd and 40th row. So keep only them.
         self.lgd_df = self.lgd_df.iloc[1:38]
-        # Take the the header row and set it has column header
+        # Take the the header row and set it as column header
         new_header = self.lgd_df.iloc[0]
         self.lgd_df = self.lgd_df[1:]
         self.lgd_df.columns = new_header
