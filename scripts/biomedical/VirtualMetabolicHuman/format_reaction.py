@@ -40,22 +40,15 @@ def main():
     df_metabolite = pd.read_csv(file_metabolite)
     
     df_rxn["subsystem"]  = df_rxn["subsystem"].str.lower()
-  
-    
     # Format the subsystem field
     for i in df_rxn.index:
         l = df_rxn.loc[i, 'subsystem']
         l = l.replace(',', '')
-        df_rxn.loc[i, 'subsystem'] = l
-    for i in df_rxn.index:
-        l = df_rxn.loc[i, 'subsystem']
         l = l.replace(' ', '_')
         df_rxn.loc[i, 'subsystem'] = l
     list_match = ['0']*len(df_rxn['abbreviation'])
     list_dcids = ['0']*len(df_rxn['abbreviation'])
-  
-    # Perform a match between metabolites and reactions
-    # Using abbreviations for both
+    # Perform a match between metabolites and reactions using abbreviations for both
     for p in range(len(df_rxn['abbreviation'])):
         for q in df_metabolite.index:
             test_list = Convert(df_rxn.loc[p, 'abbreviation'])
@@ -72,17 +65,11 @@ def main():
                     list_dcids[p] = df_metabolite.loc[q, "Id"]
 
     df_rxn['metaboliteMatch'] = list_dcids
-    
-    
     #Map the metanetx to humanGemIDs using human1D data
-
-    # create new db with compartments from human gem id (2)
-    #df_map_new = pd.DataFrame()
     df_map_new = df_map[["id", "reactant_compartment", "product_compartment"]].copy()
     l1 = df_map_new['id'].str[2:]
     df_map_new = df_map_new.drop('id', 1)
     df_map_new['humanGEMID'] = l1
-
     hgem_col = []
     for i in df_rxn["metanetx"].values:
         hgem_col.append(df_map[df_map["metanetx"] == i]["id"].values)
@@ -96,10 +83,8 @@ def main():
 
     #merge two db with compartment info from human gemid (4)
     df = pd.merge(df_rxn, df_map_new, on='humanGEMID')
-
     db = df
     db_dup = db
-    #db_dup = db.sample(n = 400)
     # dict to map compartment info b/w gemid and formula (vhm -> human 1d)
     matchdict = {
     "e": "s",
@@ -117,39 +102,24 @@ def main():
     chars_to_check = '='
     for i, row in db_dup.iterrows():
         if any(c in chars_to_check for c in db_dup.loc[i,"formula"]):
-                #print(i)
             p = db_dup.loc[i,"formula"]
             m = re.findall(r"\[([A-Za-z0-9_]+)\]", row["formula"])
-                #print(m)
-                #print("in <=>")
-                #print(p)
             reactants, products = p.split('<=>')
             num_r = len(reactants.split("+"))
-                #print(reactants)
-                #print("Num_reactants", len(reactants.split("+")))
-                #print("Num_products", len(products.split("+")))
             db_dup.loc[i, "r_comp"] = m[0]
             db_dup.loc[i, "p_comp"] = m[0+num_r]
             if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
                 if m[0] in matchdict:
                     if((matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"])) | ((matchdict.get(m[0]) == db_dup.loc[i, "product_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "reactant_compartment"])):
                         db_dup.loc[i, "bool-val"] = 1
-                    #elif(matchdict.get(m[0]) == db_dup.loc[i,"reactant_compartment"][0]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i,"product_compartment"][0]) | ((matchdict.get(m[0]) == db_dup.loc[i,"product_compartment"][0]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i,"reactant_compartment"][0])):
-                        #db_dup.loc[i,"bool-val"] = 1
                     else:
                         db_dup.loc[i, "bool-val"] = 0
         else:
-            #print(i)
             p = db_dup.loc[i, "formula"]
             m = re.findall(r"\[([A-Za-z0-9_]+)\]", row["formula"])
-                #print(m)
-                #print("in ->")
-                #print(p)
             reactants, products = p.split('->')
             num_r = len(reactants.split("+"))
             num_p = len(products.split("+"))
-                #print("Num_reactants", len(reactants.split("+")))
-                #print("Num_products", len(products.split("+")))
             db_dup.loc[i, "r_comp"] = m[0]
             db_dup.loc[i, "p_comp"] = m[0+num_r]
             if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
@@ -161,10 +131,9 @@ def main():
                     else:
                         db_dup.loc[i, "bool-val"] = 0
 
-       # drop duplicated abbreviations based on bool vals, keep 1s, remove the zeroes
+    # drop duplicated abbreviations based on bool vals, keep 1s, remove the zeroes
     sorted_df = db_dup.sort_values("bool-val", ascending=False)
     dropped_df = sorted_df.drop_duplicates("abbreviation").sort_index()
-    #dropped_df.head(50)
     
     # give zeroes to all with no human gemid match at first
     for i in dropped_df.index:
@@ -207,7 +176,6 @@ def main():
                     dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
     
     #dropped_df.update('"' + df_rxn[['description', 'formula', 'ecnumber']].astype(str) + '"')
-    
     dropped_df.to_csv(file_output, index = None)
 
 
