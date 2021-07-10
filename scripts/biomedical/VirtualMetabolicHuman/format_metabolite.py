@@ -1,7 +1,6 @@
 import sys
 import pandas as pd
 import numpy as np
-from SPARQLWrapper import SPARQLWrapper, JSON
 import datacommons as dc
 from bioservices import *
 
@@ -16,6 +15,16 @@ def clean_result(result):
             dcid_inch.insert(ind_count, result[index][key])
             ind_count += 1
     return dcid_inch
+
+def add_query_result(df, col, dcid):
+    count_query = 0
+    for i in df.index:
+        for j in range(1, len(dcid)):
+            if df.loc[i, col] == dcid[j]:
+                count_query += 1
+                df.loc[i, 'Id'] = dcid[j - 1]
+                j += 2
+    return df
 
 def main():
     file_input = sys.argv[1]
@@ -41,13 +50,9 @@ def main():
     """.format(arr_inchi_1)
     result = dc.query(query_str)
     dcid_inch = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid_inch)):
-            if df.loc[i, 'inchiKey'] == dcid_inch[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid_inch[j - 1]
-                j += 2 #inchi match complete(1)      
+    df = add_query_result(df, "inchiKey", dcid_inch)
+
+
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -58,13 +63,9 @@ def main():
     """.format(arr_inchi_2)
     result = dc.query(query_str)
     dcid_inch = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid_inch)):
-            if df.loc[i, 'inchiKey'] == dcid_inch[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid_inch[j - 1]
-                j += 2 #inchi match complete (2)
+    df = add_query_result(df, "inchiKey", dcid_inch)
+    #inchi match complete (2)
+
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -75,13 +76,9 @@ def main():
     """.format(arr_inchi_3)
     result = dc.query(query_str)
     dcid_inch = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid_inch)):
-            if df.loc[i, 'inchiKey'] == dcid_inch[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid_inch[j - 1]
-                j += 2 #inchi match complete (3)
+    df = add_query_result(df, "inchiKey", dcid_inch)
+    #inchi match complete (3)
+
     #hmdb matches with dc
     list_hmdb = df[['hmdb']].T.stack().tolist()
     list_hmdb_1 = list_hmdb[0:1000]
@@ -98,12 +95,8 @@ def main():
     """.format(arr_hmdb_1)
     result = dc.query(query_str)
     dcid_hmdb = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid_hmdb)):
-            if df.loc[i, 'hmdb'] == dcid_hmdb[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid_hmdb[j - 1] #hmdb match complete (1)
+    df = add_query_result(df, "hmdb", dcid_hmdb)
+
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -114,12 +107,8 @@ def main():
     """.format(arr_hmdb_2)
     result = dc.query(query_str)
     dcid_hmdb = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid_hmdb)):
-            if df.loc[i, 'hmdb'] == dcid_hmdb[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid_hmdb[j - 1] #hmdb match complete (2)
+    df = add_query_result(df, "hmdb", dcid_hmdb)
+
     #kegg matches with dc 
     list_kegg = df[['keggId']].T.stack().tolist()
     list_kegg_1 = list_kegg[0:1000]
@@ -136,12 +125,7 @@ def main():
     """.format(arr_kegg_1)
     result = dc.query(query_str)
     dcid = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid)):
-            if df.loc[i, 'keggId'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1] #kegg match complete (2)
+    df = add_query_result(df, "keggId", dcid)
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -151,13 +135,9 @@ def main():
     }}
     """.format(arr_kegg_2)
     result = dc.query(query_str)
-    dcid= clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid)):
-            if df.loc[i, 'keggId'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1] #kegg match complete (2)
+    dcid = clean_result(result)
+    df = add_query_result(df, "keggId", dcid) #kegg match complete (2)
+
     #chebi matches with dc 
     list_chebi = df[['cheBlId']].T.stack().tolist()
     for i in enumerate(list_chebi):
@@ -176,12 +156,7 @@ def main():
     """.format(arr_chebi_1)
     result = dc.query(query_str)
     dcid = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid)):
-            if df.loc[i, 'cheBlId'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1] #chebi match complete (1)
+    df = add_query_result(df, "cheBlId", dcid)
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -192,12 +167,8 @@ def main():
     """.format(arr_chebi_2)
     result = dc.query(query_str)
     dcid = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1,len(dcid)):
-            if df.loc[i, 'cheBlId'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1] #chebi match complete (2)
+    df = add_query_result(df, "cheBlId", dcid)
+
     #pubchem matches with dc
     list_pub = df[['pubChemId']].T.stack().tolist()
     for i in enumerate(list_pub):
@@ -216,12 +187,8 @@ def main():
     """.format(arr_pub_1)
     result = dc.query(query_str)
     dcid = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid)):
-            if df.loc[i, 'pubChemId'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1]  #pubchem match complete (1)
+    df = add_query_result(df, "pubChemId", dcid)
+
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -232,12 +199,8 @@ def main():
     """.format(arr_pub_2)
     result = dc.query(query_str)
     dcid = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid)):
-            if df.loc[i, 'pubChemId'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1]#pubchem match complete (2)
+    df = add_query_result(df, "pubChemId", dcid)
+
     #chemspider matches with dc
     list_chem = df[['chemspider']].T.stack().tolist()
     for i in enumerate(list_chem):
@@ -256,12 +219,7 @@ def main():
     """.format(arr_chem_1)
     result = dc.query(query_str)
     dcid = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid)):
-            if df.loc[i, 'chemspider'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1] #chemspider match complete (1)
+    df = add_query_result(df, "chemspider", dcid)
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -272,12 +230,8 @@ def main():
     """.format(arr_chem_2)
     result = dc.query(query_str)
     dcid = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid)):
-            if df.loc[i, 'chemspider'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1] #chemspider match complete (2)
+    df = add_query_result(df, "chemspider", dcid)
+
     #drug bank matches with dc
     list_drug = df[['drugbank']].T.stack().tolist()
     for i in enumerate(list_drug):
@@ -293,12 +247,7 @@ def main():
     """.format(arr_drug)
     result = dc.query(query_str)
     dcid = clean_result(result)
-    count_query = 0
-    for i in df.index:
-        for j in range(1, len(dcid)):
-            if df.loc[i, 'drugbank'] == dcid[j]:
-                count_query += 1
-                df.loc[i, 'Id'] = dcid[j - 1]   #drug bank match complete
+    df = add_query_result(df, "drugbank", dcid)
 
     uni = UniChem()
     mapping = uni.get_mapping("kegg_ligand", "chembl")
