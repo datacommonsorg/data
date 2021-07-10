@@ -2,15 +2,16 @@
 Author: Suhana Bedi
 Date: 07/10/2021
 Name: format_reaction.py
-Description: Add dcids for all the reactions in the VMH database. 
+Description: Add dcids for all the reactions in the VMH database.
 Map the reactions with corresponding VHM metabolites using
 longest substring match and add it to the dataframe.
-For dcid generation, map the reactions with reactions in 
+For dcid generation, map the reactions with reactions in
 human1 data using metanetx and reaction and product compartment
-match, if there is no perfect match, use the abbreviations for 
-dcid generation. Also, extract reactant and product compartment 
+match, if there is no perfect match, use the abbreviations for
+dcid generation. Also, extract reactant and product compartment
 using the 'formula' column.
-@file_input: input .tsv from VMH with reactions list
+@file_input: input .tsv from VMH with reactions list, csv from human1 data
+and metabolite data from VMH.
 @file_output: csv output file with metabolite match and
 product and reactant compartments.
 '''
