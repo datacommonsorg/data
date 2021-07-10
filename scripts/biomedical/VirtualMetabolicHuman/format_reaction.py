@@ -1,8 +1,7 @@
-import pandas as pd
 import sys
-import os
-import numpy as np
 import re
+import pandas as pd
+import numpy as np
 
 # Convert string to list 
 def Convert(string):
@@ -13,7 +12,7 @@ def Convert(string):
 
 #is_subset function for checking if the small string (metabolite abbreviation) is an exact match with a substring 
 #of the larger string (reaction abbreviation), keeping the order in place and retaining the starts with condition 
-def is_subset(list_long,list_short):
+def is_subset(list_long, list_short):
     short_length = len(list_short)
     subset_list = []
     for i in range(len(list_long)-short_length+1):
@@ -28,27 +27,10 @@ def is_subset(list_long,list_short):
 def isNaN(num):
     return num != num
 
-def main():
-    
-    file_input = sys.argv[1]
-    file_output = sys.argv[2]
-    file_gemid = sys.argv[3]
-    file_metabolite = sys.argv[4]
-
-    df_rxn = pd.read_csv(file_input, sep = '\t')
-    df_map = pd.read_csv(file_gemid)
-    df_metabolite = pd.read_csv(file_metabolite)
-    
-    df_rxn["subsystem"]  = df_rxn["subsystem"].str.lower()
-    # Format the subsystem field
-    for i in df_rxn.index:
-        l = df_rxn.loc[i, 'subsystem']
-        l = l.replace(',', '')
-        l = l.replace(' ', '_')
-        df_rxn.loc[i, 'subsystem'] = l
+# Perform a match between metabolites and reactions using abbreviations for both
+def metabolite_rxn_match(df_rxn, df_metabolite):
     list_match = ['0']*len(df_rxn['abbreviation'])
     list_dcids = ['0']*len(df_rxn['abbreviation'])
-    # Perform a match between metabolites and reactions using abbreviations for both
     for p in range(len(df_rxn['abbreviation'])):
         for q in df_metabolite.index:
             test_list = Convert(df_rxn.loc[p, 'abbreviation'])
@@ -63,9 +45,11 @@ def main():
                 else:
                     list_dcids[p] = sub_list
                     list_dcids[p] = df_metabolite.loc[q, "Id"]
-
     df_rxn['metaboliteMatch'] = list_dcids
-    #Map the metanetx to humanGemIDs using human1D data
+    return df_rxn
+
+#Map the metanetx to humanGemIDs using human1D data
+def vhm_human1_match(df_map, df_rxn):
     df_map_new = df_map[["id", "reactant_compartment", "product_compartment"]].copy()
     l1 = df_map_new['id'].str[2:]
     df_map_new = df_map_new.drop('id', 1)
@@ -79,13 +63,12 @@ def main():
                                     ,df_rxn['humanGEMID'].str[2:])
     df_rxn["Id"] = np.where(pd.isnull(df_rxn['humanGEMID']),df_rxn['humanGEMID'] \
                                    ,"bio/" +df_rxn['humanGEMID'].astype(str))
-
-
     #merge two db with compartment info from human gemid (4)
     df = pd.merge(df_rxn, df_map_new, on='humanGEMID')
-    db = df
-    db_dup = db
-    # dict to map compartment info b/w gemid and formula (vhm -> human 1d)
+    return df
+
+#Add reactant and product compartment columns
+def reactant_product_comp(db_dup):
     matchdict = {
     "e": "s",
     "x": "p",
@@ -119,7 +102,6 @@ def main():
             m = re.findall(r"\[([A-Za-z0-9_]+)\]", row["formula"])
             reactants, products = p.split('->')
             num_r = len(reactants.split("+"))
-            num_p = len(products.split("+"))
             db_dup.loc[i, "r_comp"] = m[0]
             db_dup.loc[i, "p_comp"] = m[0+num_r]
             if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
@@ -130,10 +112,39 @@ def main():
                         db_dup.loc[i, "bool-val"] = 1
                     else:
                         db_dup.loc[i, "bool-val"] = 0
-
     # drop duplicated abbreviations based on bool vals, keep 1s, remove the zeroes
     sorted_df = db_dup.sort_values("bool-val", ascending=False)
     dropped_df = sorted_df.drop_duplicates("abbreviation").sort_index()
+    return dropped_df
+
+
+def main():
+    
+    file_input = sys.argv[1]
+    file_output = sys.argv[2]
+    file_gemid = sys.argv[3]
+    file_metabolite = sys.argv[4]
+
+    df_rxn = pd.read_csv(file_input, sep = '\t')
+    df_map = pd.read_csv(file_gemid)
+    df_metabolite = pd.read_csv(file_metabolite)
+    
+    # Format the subsystem field
+    df_rxn["subsystem"]  = df_rxn["subsystem"].str.lower()
+    for i in df_rxn.index:
+        l = df_rxn.loc[i, 'subsystem']
+        l = l.replace(',', '')
+        l = l.replace(' ', '_')
+        df_rxn.loc[i, 'subsystem'] = l
+
+    # Perform a match between metabolites and reactions using abbreviations for both
+    df_rxn = metabolite_rxn_match(df_rxn, df_metabolite)
+
+    #Map the metanetx to humanGemIDs using human1D data
+    db_dup = vhm_human1_match(df_map, df_rxn)
+
+    # Add reactant and product compartment columns
+    dropped_df = reactant_product_comp(db_dup)
     
     # give zeroes to all with no human gemid match at first
     for i in dropped_df.index:
