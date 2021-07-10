@@ -1,3 +1,20 @@
+'''
+Author: Suhana Bedi
+Date: 07/10/2021
+Name: format_reaction.py
+Description: Add dcids for all the reactions in the VMH database. 
+Map the reactions with corresponding VHM metabolites using
+longest substring match and add it to the dataframe.
+For dcid generation, map the reactions with reactions in 
+human1 data using metanetx and reaction and product compartment
+match, if there is no perfect match, use the abbreviations for 
+dcid generation. Also, extract reactant and product compartment 
+using the 'formula' column.
+@file_input: input .tsv from VMH with reactions list
+@file_output: csv output file with metabolite match and
+product and reactant compartments.
+'''
+
 import sys
 import re
 import pandas as pd
@@ -9,9 +26,9 @@ def Convert(string):
     list1[:0]=string
     return list1
 
-
-#is_subset function for checking if the small string (metabolite abbreviation) is an exact match with a substring 
-#of the larger string (reaction abbreviation), keeping the order in place and retaining the starts with condition 
+#This function is used for checking if the small string (metabolite abbreviation) is 
+#an exact match with a substring, of the larger string (reaction abbreviation), 
+#keeping the order in place and retaining the starts with condition 
 def is_subset(list_long, list_short):
     short_length = len(list_short)
     subset_list = []
@@ -46,7 +63,7 @@ def metabolite_rxn_match(df_rxn, df_metabolite):
                     list_dcids[p] = sub_list
                     list_dcids[p] = df_metabolite.loc[q, "Id"]
     df_rxn['metaboliteMatch'] = list_dcids
-    return df_rxn
+    return(df_rxn)
 
 #Map the metanetx to humanGemIDs using human1D data
 def vhm_human1_match(df_map, df_rxn):
@@ -64,7 +81,7 @@ def vhm_human1_match(df_map, df_rxn):
     df_rxn["Id"] = np.where(pd.isnull(df_rxn['humanGEMID']),df_rxn['humanGEMID'] \
                                    ,"bio/" +df_rxn['humanGEMID'].astype(str))
     #merge two db with compartment info from human gemid (4)
-    df = pd.merge(df_rxn, df_map_new, on='humanGEMID')
+    df = pd.merge(df_rxn, df_map_new, how="left", on='humanGEMID')
     return df
 
 #Add reactant and product compartment columns
@@ -93,7 +110,10 @@ def reactant_product_comp(db_dup):
             db_dup.loc[i, "p_comp"] = m[0+num_r]
             if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
                 if m[0] in matchdict:
-                    if((matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"])) | ((matchdict.get(m[0]) == db_dup.loc[i, "product_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "reactant_compartment"])):
+                    if((matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & \
+                    (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"])) | \
+                    ((matchdict.get(m[0]) == db_dup.loc[i, "product_compartment"]) & \
+                    (matchdict.get(m[0+num_r]) == db_dup.loc[i, "reactant_compartment"])):
                         db_dup.loc[i, "bool-val"] = 1
                     else:
                         db_dup.loc[i, "bool-val"] = 0
@@ -106,9 +126,11 @@ def reactant_product_comp(db_dup):
             db_dup.loc[i, "p_comp"] = m[0+num_r]
             if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
                 if m[0] in matchdict:
-                    if(matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"]):
+                    if(matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & \
+                    (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"]):
                         db_dup.loc[i, "bool-val"] = 1
-                    elif(matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"][0]) & (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"][0]):
+                    elif(matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"][0]) & \
+                    (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"][0]):
                         db_dup.loc[i, "bool-val"] = 1
                     else:
                         db_dup.loc[i, "bool-val"] = 0
@@ -139,13 +161,10 @@ def main():
 
     # Perform a match between metabolites and reactions using abbreviations for both
     df_rxn = metabolite_rxn_match(df_rxn, df_metabolite)
-
     #Map the metanetx to humanGemIDs using human1D data
     db_dup = vhm_human1_match(df_map, df_rxn)
-
     # Add reactant and product compartment columns
     dropped_df = reactant_product_comp(db_dup)
-    
     # give zeroes to all with no human gemid match at first
     for i in dropped_df.index:
         if isNaN(dropped_df.loc[i, 'bool-val']):
@@ -178,15 +197,20 @@ def main():
 
     for i in dropped_df.index:
         if dropped_df.loc[i, 'bool-val'] == 0:
-            if dropped_df.loc[i, 'MetaboliteMatch'] != '0':
+            if dropped_df.loc[i, 'metaboliteMatch'] != '0':
                 if "Transport" in dropped_df.loc[i, 'description']:
-                    dropped_df.loc[i, 'rcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
-                    dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'p_comp'])
+                    dropped_df.loc[i, 'rcc'] = dropped_df.loc[i, 'metaboliteMatch'] + \
+                        "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
+                    dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'metaboliteMatch'] + \
+                    "_" + dict_comp_name.get(dropped_df.loc[i, 'p_comp'])
                 else:
-                    dropped_df.loc[i, 'rcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
-                    dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'MetaboliteMatch'] + "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
+                    dropped_df.loc[i, 'rcc'] = dropped_df.loc[i, 'metaboliteMatch'] + \
+                    "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
+                    dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'metaboliteMatch'] + \
+                    "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
     
-    #dropped_df.update('"' + df_rxn[['description', 'formula', 'ecnumber']].astype(str) + '"')
+    dropped_df.update('"' + df_rxn[['description', 'formula', 'ecnumber']].astype(str) + '"')
+    dropped_df.drop(columns = ['reactant_compartment', 'product_compartment'])
     dropped_df.to_csv(file_output, index = None)
 
 
