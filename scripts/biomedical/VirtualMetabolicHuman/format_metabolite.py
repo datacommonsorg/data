@@ -1,3 +1,14 @@
+'''
+Author: Suhana Bedi
+Date: 07/10/2021
+Name: format_metabolite.py
+Description: Add dcids for all the metabolites in the VMH database. 
+Extract Chembl ids from kegg and chebi matches, and query datacommons 
+to check for pre-existing nodes for the same metabolite.
+@file_input: input .tsv from VMH with metabolite list
+@file_output: csv output file with addition chembl and dcid columns
+'''
+
 import sys
 import pandas as pd
 import numpy as np
@@ -10,7 +21,7 @@ def isNaN(num):
 def clean_result(result):
     ind_count = 0
     dcid_inch = []
-    for index in enumerate(result):
+    for index in range(len(result)):
         for key in result[index]:
             dcid_inch.insert(ind_count, result[index][key])
             ind_count += 1
@@ -138,9 +149,9 @@ def main():
     dcid = clean_result(result)
     df = add_query_result(df, "keggId", dcid) #kegg match complete (2)
 
-    #chebi matches with dc 
+    #chebi matches with dc
     list_chebi = df[['cheBlId']].T.stack().tolist()
-    for i in enumerate(list_chebi):
+    for i in range(len(list_chebi)):
         list_chebi[i] = "CHEBI:" + str(list_chebi[i])
     list_chebi_1 = list_chebi[0:1000]
     list_chebi_2 = list_chebi[1000:1126]
@@ -171,7 +182,7 @@ def main():
 
     #pubchem matches with dc
     list_pub = df[['pubChemId']].T.stack().tolist()
-    for i in enumerate(list_pub):
+    for i in range(len(list_pub)):
         list_pub[i] = str(list_pub[i])
     list_pub_1 = list_pub[0:1000]
     list_pub_2 = list_pub[1000:1104]
@@ -203,7 +214,7 @@ def main():
 
     #chemspider matches with dc
     list_chem = df[['chemspider']].T.stack().tolist()
-    for i in enumerate(list_chem):
+    for i in range(len(list_chem)):
         list_chem[i] = str(list_chem[i])
     list_chem_1 = list_pub[0:1000]
     list_chem_2 = list_pub[1000:1052]
@@ -234,7 +245,7 @@ def main():
 
     #drug bank matches with dc
     list_drug = df[['drugbank']].T.stack().tolist()
-    for i in enumerate(list_drug):
+    for i in range(len(list_drug)):
         list_drug[i] = str(list_drug[i])     
     arr_drug = np.array(list_drug)
     query_str = """
@@ -251,8 +262,8 @@ def main():
 
     uni = UniChem()
     mapping = uni.get_mapping("kegg_ligand", "chembl")
-    # Add chemblID column in the dataframe and add the corresponding chembl ids 
-    # for each entry 
+    #Add chemblID column in the dataframe and add the corresponding chembl ids 
+    #for each entry 
     chembl_list = [0]*len(df['keggId'])
     df.insert(7, 'ChEMBL', chembl_list)
     for index, row in df.iterrows():
@@ -275,7 +286,7 @@ def main():
         df.loc[i, 'fullName'] = l
 
     for i in df.index:
-        if isNaN(df.loc[i, 'Id']):
+        if df.loc[i, 'Id'] == "bio/nan":
             df.loc[i, 'Id'] = "bio/" + df.loc[i, 'fullName']
 
     df.to_csv(file_output, index=None)
