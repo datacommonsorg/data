@@ -1,16 +1,22 @@
+'''
+Author: Suhana Bedi
+Date: 07/10/2021
+Name: format_microbe.py
+Description: Add dcids for all the microbes present in the data base, and query
+using the datacommons to see if a node the microbe already exists.
+Declare the columns, 'oxygenstat', 'metabolism', 'gram', 'mtype' and 'platform'
+as enums
+@file_input: input .tsv from VMH with microbiome data
+@file_output: csv output file with enums and dcids generated
+'''
 import sys
 import pandas as pd
-import os
-import numpy as np
-import csv
-from SPARQLWrapper import SPARQLWrapper, JSON
 import datacommons as dc
 
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
     df_microbes = pd.read_csv(file_input, sep = '\t')
-    
     ## modify the organism name for a sparql query
     org_name = ['0']*len(df_microbes['organism'])
     for i in df_microbes.index:
@@ -21,9 +27,9 @@ def main():
     query_str = '''
     SELECT ?node
     WHERE {
-      ?node typeOf Species .
-      ?node organismTaxonomicKingdom ?kingdom .
-      ?kingdom name Bacteria .
+    ?node typeOf Species .
+    ?node organismTaxonomicKingdom ?kingdom .
+    ?kingdom name Bacteria .
     }
     '''
     result = dc.query(query_str)
@@ -62,18 +68,17 @@ def main():
     list_col = ['metabolism', 'oxygenstat', 'mtype']
     for i in list_col: 
         p = df_microbes[i]
-        p = p.str.replace(',','',regex=True)
-        p = p.str.replace(' ','_',regex=True)
+        p = p.str.replace(',', '', regex=True)
+        p = p.str.replace(' ', '_', regex=True)
         df_microbes[i] = p
 
     # enum-column dict
-    col_enum_dict = {"gram":"dcs:BacteriaGramStainType","platform":"dcs:DataCollectionPlatform",
-                "metabolism":"dcs:MicrobialMetabolismType", "oxygenstat":"dcs:OxygenRequirementStatus",
-                "mtype":"dcs:PathogenMethodOfInvasionEnum"}
+    col_enum_dict = {"gram":"dcs:BacteriaGramStainType", "platform":"dcs:DataCollectionPlatform",
+    "metabolism":"dcs:MicrobialMetabolismType", "oxygenstat":"dcs:OxygenRequirementStatus",
+    "mtype":"dcs:PathogenMethodOfInvasionEnum"}
     for i in col_enum_dict:
         p = col_enum_dict.get(i) + df_microbes[i] 
         df_microbes[i] = p    
-        
     #Date conversion to ISO format
     for i in df_microbes.index:
         if df_microbes.loc[i, 'draftcreated'] == df_microbes.loc[i, 'draftcreated']:
