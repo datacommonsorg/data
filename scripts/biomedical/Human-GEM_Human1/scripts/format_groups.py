@@ -4,7 +4,6 @@ combine with tMCF files for import to data commons
 """
 import sys
 import os
-import numpy as np
 import pandas as pd
 
 
@@ -36,7 +35,7 @@ def main():
     # merge groupMemberships datafram with groups dataframe
     # for groups/subsystems dcid mapping
     df_group_memberships = df_group_memberships.merge(df_groups, \
-        left_on = "groupID", right_on = "id")[["dcid", "reactionID"]]
+        left_on="groupID", right_on="id")[["dcid", "reactionID"]]
     # modify reaction ID to reaction dcid format
     df_group_memberships["reactionID"] = "bio/" +\
          df_group_memberships["reactionID"].str[2:]

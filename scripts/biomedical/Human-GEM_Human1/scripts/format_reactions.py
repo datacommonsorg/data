@@ -4,7 +4,6 @@ combine with tMCF files for import to data commons
 """
 import sys
 import os
-import numpy as np
 import pandas as pd
 
 
@@ -30,8 +29,8 @@ def main():
          df_reactions["lowerFluxBound"].astype(str) + \
         " " + df_reactions["upperFluxBound"].astype(str) + " mmol/gDW" + "]"
     # rop lowerFluxBound and upperFluxBound columns
-    df_reactions = df_reactions.drop(columns = \
-        ["lowerFluxBound", "upperFluxBound"], axis = 1)
+    df_reactions = df_reactions.drop(columns=\
+        ["lowerFluxBound", "upperFluxBound"], axis=1)
     # generate output file path at current directory
     output_path = os.path.join(os.getcwd(), "reactions.csv")
     df_reactions.to_csv(output_path, index=None)

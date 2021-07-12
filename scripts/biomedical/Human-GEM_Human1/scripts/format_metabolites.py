@@ -357,6 +357,7 @@ def main():
                   df_product_roles["reactionID"].astype("str")
     # generate output file path at current directory
     make_csv(df_product_roles, "productRoles.csv")
+    
     ### generate reactantRoles.csv
     df_reactant_roles = pd.read_csv(reactant_tsv, sep='\t')
     # Remove "M_" in speciesID/humanGEMID of metabolites
@@ -365,7 +366,7 @@ def main():
     df_reactant_roles["reactionID"] = df_reactant_roles["reactionID"].str[2:]
     # merge reactantRoles and metabolicCellularCompartment for dcid mapping
     df_reactant_roles = df_reactant_roles.merge(\
-        df_metabolic_cellular_compartment,left_on = "speciesID", right_on="id")\
+        df_metabolic_cellular_compartment,left_on="speciesID", right_on="id")\
             [["reactionID", "metabolic_compartment_dcid"]]
     # modify reaction id to reaction dcid format
     df_reactant_roles["reactionID"] = "bio/" +  \
