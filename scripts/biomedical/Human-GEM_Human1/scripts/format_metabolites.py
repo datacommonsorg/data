@@ -8,7 +8,7 @@ import os
 import numpy as np
 import pandas as pd
 import datacommons as dc
-from bioservices import *
+from bioservices import UniChem
 
 # dictionary to map values in "compartment"
 # column to CellularCompartmentEnum values
@@ -45,9 +45,9 @@ def format_df_metatbolites(df_metabolites):
                 df_metabolites["metabolite_dcid"].fillna(df_metabolites["name"])
     # format dcid -> bio/
     df_metabolites["metabolite_dcid"] = "bio" + "/" +\
-                df_metabolites["metabolite_dcid"].str.replace(":","")
+                df_metabolites["metabolite_dcid"].str.replace(":", "")
     df_metabolites["metabolite_dcid"] =\
-                 df_metabolites["metabolite_dcid"].str.replace(",","_")
+                 df_metabolites["metabolite_dcid"].str.replace(",", "_")
     # Format chemblID, remove ":"
     df_metabolites["chembl"] = df_metabolites["chembl"].str.replace(":", "")
     #convert chebiID and chemicalName to string with quotation
@@ -76,7 +76,7 @@ def fill_chembl_from_hmdb(df):
     result = query_chembl_from_hmdb(human_met_list)
     for res in result:
         df.loc[df["hmdb"] == res["?hmdb"], "chembl"]\
-                         =  res["?chembl"].split("/")[1]
+                        = res["?chembl"].split("/")[1]
     print("DONE converting hmdb to chembl with data common query")
 
 
@@ -94,7 +94,7 @@ def fill_chembl_from_pubchem(df):
     result = query_chembl_from_pubchem(pub_chem_list)
     for res in result:
         df.loc[df["pubchem.compound"] == res["?pubChem"], "chembl"]\
-                         =  res["?chembl"].split("/")[1]
+                         = res["?chembl"].split("/")[1]
     print("DONE converting pubchem to chembl with data common query")
 
 
@@ -115,7 +115,7 @@ def fill_chembl_from_kegg(df):
     result = query_chembl_from_kegg(kegg_list)
     for res in result:
         df.loc[df["kegg.compound"] == res["?kegg"], "chembl"] \
-                       =  res["?chembl"].split("/")[1]
+                       = res["?chembl"].split("/")[1]
     print("DONE converting kegg to chembl with data common query")
 
 
@@ -135,7 +135,7 @@ def fill_chembl_from_chebi(df):
     result = query_chembl_from_chebi(chebi_list)
     for res in result:
         df.loc[df["chebi"] == res["?chebi"], "chembl"]\
-                         =  res["?chembl"].split("/")[1]
+                         = res["?chembl"].split("/")[1]
     print("DONE converting chebi to chembl with data common query")
 
 
@@ -303,7 +303,7 @@ def convert_float_to_int(df, column):
 def main():
     # read in 3 data files as the second, third, and fourth arguments
     metabolite_tsv, reactant_tsv, product_tsv =\
-                 sys.argv[1],sys.argv[2],sys.argv[3]
+                 sys.argv[1], sys.argv[2], sys.argv[3]
     ### Generate metabolites.csv
     # read csv file
     df_metabolites = pd.read_csv(metabolite_tsv, sep="\t")
@@ -334,7 +334,7 @@ def main():
     make_csv(df_metabolites, "metabolites.csv")
     ### Generate metabolicCellularCompartment.csv
     df_metabolic_cellular_compartment = df_metabolites\
-                [["id", "compartment","metabolite_dcid"]].copy()
+                [["id", "compartment", "metabolite_dcid"]].copy()
     df_metabolic_cellular_compartment["metabolic_compartment_dcid"] = "bio/" +\
                  df_metabolic_cellular_compartment["id"]
     # generate output file path at current directory
@@ -350,14 +350,13 @@ def main():
     # merge productRoles and metabolicCellularCompartment for dcid mapping
     df_product_roles = df_product_roles.merge(\
                 df_metabolic_cellular_compartment,\
-                left_on = "speciesID", right_on="id")\
+                left_on="speciesID", right_on="id")\
                 [["reactionID", "metabolic_compartment_dcid"]]
     # modify reaction id to reaction dcid format
     df_product_roles["reactionID"] = "bio/" +\
                   df_product_roles["reactionID"].astype("str")
     # generate output file path at current directory
     make_csv(df_product_roles, "productRoles.csv")
-    
     ### generate reactantRoles.csv
     df_reactant_roles = pd.read_csv(reactant_tsv, sep='\t')
     # Remove "M_" in speciesID/humanGEMID of metabolites
@@ -366,7 +365,7 @@ def main():
     df_reactant_roles["reactionID"] = df_reactant_roles["reactionID"].str[2:]
     # merge reactantRoles and metabolicCellularCompartment for dcid mapping
     df_reactant_roles = df_reactant_roles.merge(\
-        df_metabolic_cellular_compartment,left_on="speciesID", right_on="id")\
+        df_metabolic_cellular_compartment, left_on="speciesID", right_on="id")\
             [["reactionID", "metabolic_compartment_dcid"]]
     # modify reaction id to reaction dcid format
     df_reactant_roles["reactionID"] = "bio/" +  \
