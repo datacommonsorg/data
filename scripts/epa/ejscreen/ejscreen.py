@@ -86,47 +86,51 @@ unit: dcs:MicrogramsPerCubicMeter
 '''
 
 
-def create_csv(outfilename):
-    df = pd.DataFrame()
-    for year in YEARS:
-        print(year)
-        cols = CSV_COLUMNS_BY_YEAR[year]
-
-        # request file
-        zip_filename = ZIP_FILENAMES[year]
-        filename = FILENAMES[year]
-        if zip_filename is not None:
-            response = requests.get(
-                f'https://gaftp.epa.gov/EJSCREEN/{year}/{zip_filename}.zip')
-            with zipfile.ZipFile(io.BytesIO(response.content())) as zfile:
-                with zfile.open(f'{filename}.csv', 'r') as newfile:
-                    df_new = pd.read_csv(newfile, usecols=cols)
-        # some years are not zipped
-        else:
-            response = requests.get(
-                f'https://gaftp.epa.gov/EJSCREEN/{year}/{filename}.csv')
-            df_new = pd.read_csv(response, usecols=cols)
-
-        # rename weird column names to match other years
-        if cols != NORM_CSV_COLUMNS:
-            cols_renamed = dict(zip(cols, NORM_CSV_COLUMNS))
-            df_new = df_new.rename(columns=cols_renamed)
-        df_new['year'] = year  # add year column
-        df = pd.concat(
-            [df, df_new],
+# data: dictionary of dataframes in the format {year: dataframe}
+# outfilename: name of the csv that data will be written to
+# concatenates dataframe from each year together
+def write_csv(data, outfilename):
+    full_df = pd.DataFrame()
+    for curr_year, one_year_df in data.items():
+        one_year_df['year'] = curr_year  # add year column
+        full_df = pd.concat(
+            [full_df, one_year_df],
             ignore_index=True)  # concatenate year onto larger dataframe
 
-    # rename FIPS column and make into dcid
-    df = df.rename(columns={'ID': 'FIPS'})
-    df['FIPS'] = 'dcid:geoId/' + df['FIPS'].astype(str)
-    df.to_csv(outfilename, index=False)
+    # sort by FIPS and make into dcid
+    full_df = full_df.rename(columns={'ID': 'FIPS'})
+    full_df = full_df.sort_values(by=['FIPS'], ignore_index=True)
+    full_df['FIPS'] = 'dcid:geoId/' + full_df['FIPS'].astype(str)
+    full_df.to_csv(outfilename, index=False)
 
 
-def create_tmcf(outfilename):
+def write_tmcf(outfilename):
     with open(outfilename, 'w') as f_out:
         f_out.write(TEMPLATE_MCF)
 
 
 if __name__ == '__main__':
-    create_csv('ejscreen_airpollutants.csv')
-    create_tmcf('ejscreen.tmcf')
+    dfs = {}
+    for year in YEARS:
+        print(year)
+        columns = CSV_COLUMNS_BY_YEAR[year]
+        # request file
+        zip_filename = ZIP_FILENAMES[year]
+        if zip_filename is not None:
+            response = requests.get(
+                f'https://gaftp.epa.gov/EJSCREEN/{year}/{zip_filename}.zip')
+            with zipfile.ZipFile(io.BytesIO(response.content())) as zfile:
+                with zfile.open(f'{FILENAMES[year]}.csv', 'r') as newfile:
+                    dfs[year] = pd.read_csv(newfile, usecols=columns)
+        # some years are not zipped
+        else:
+            response = requests.get(
+                f'https://gaftp.epa.gov/EJSCREEN/{year}/{FILENAMES[year]}.csv')
+            dfs[year] = pd.read_csv(response, usecols=columns)
+        # rename weird column names to match other years
+        if columns != NORM_CSV_COLUMNS:
+            cols_renamed = dict(zip(columns, NORM_CSV_COLUMNS))
+            dfs[year] = dfs[year].rename(columns=cols_renamed)
+
+    write_csv(dfs, 'ejscreen_airpollutants.csv')
+    write_tmcf('ejscreen.tmcf')
