@@ -36,7 +36,11 @@ def format_df_metatbolites(df_metabolites):
     df_metabolites["id"] = df_metabolites["id"].str[2:]
     # Create new column for dcid
     df_metabolites["metabolite_dcid"] = df_metabolites["chembl"]
-    # use metaNetX as dcid if chemblID is not available
+    # use hmdb as dcid if chemblID is not available
+    df_metabolites["metabolite_dcid"] =\
+                df_metabolites["metabolite_dcid"].fillna(\
+                               df_metabolites["hmdb"])
+    # use metaNetX as dcid if hmdb id is not available
     df_metabolites["metabolite_dcid"] =\
                 df_metabolites["metabolite_dcid"].fillna(\
                                df_metabolites["metanetx.chemical"])
@@ -71,10 +75,17 @@ def fill_chembl_from_hmdb(df):
     Returs:
         None
     """
-    human_met_list = df\
-                [df["chembl"].isna()]["hmdb"].unique()[1:]
-    result = query_chembl_from_hmdb(human_met_list)
+    human_met_list = list(df\
+                [df["chembl"].isna()]["hmdb"].unique())
+    if np.nan in human_met_list:
+        human_met_list.remove(np.nan)
+    human_met_list = np.array(human_met_list)
+    result = query_chembl_from_hmdb(human_met_list[:1000])
+    result2 = query_chembl_from_hmdb(human_met_list[1000:])
     for res in result:
+        df.loc[df["hmdb"] == res["?hmdb"], "chembl"]\
+                        = res["?chembl"].split("/")[1]
+    for res in result2:
         df.loc[df["hmdb"] == res["?hmdb"], "chembl"]\
                         = res["?chembl"].split("/")[1]
     print("DONE converting hmdb to chembl with data common query")
@@ -92,6 +103,7 @@ def fill_chembl_from_pubchem(df):
     pub_chem_list = df[df["chembl"].isna()]\
         ["pubchem.compound"].unique()[1:].astype(int).astype(str)
     result = query_chembl_from_pubchem(pub_chem_list)
+    print(len(pub_chem_list))
     for res in result:
         df.loc[df["pubchem.compound"] == res["?pubChem"], "chembl"]\
                          = res["?chembl"].split("/")[1]
@@ -112,6 +124,7 @@ def fill_chembl_from_kegg(df):
     if np.nan in val_list:
         val_list.remove(np.nan)
     kegg_list = np.array(val_list)
+    print(len(kegg_list))
     result = query_chembl_from_kegg(kegg_list)
     for res in result:
         df.loc[df["kegg.compound"] == res["?kegg"], "chembl"] \
@@ -302,11 +315,14 @@ def convert_float_to_int(df, column):
 
 def main():
     # read in 3 data files as the second, third, and fourth arguments
-    metabolite_tsv, reactant_tsv, product_tsv =\
-                 sys.argv[1], sys.argv[2], sys.argv[3]
+    metabolite_tsv, reactant_tsv, product_tsv, human1_hmdb_map =\
+                 sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
     ### Generate metabolites.csv
     # read csv file
     df_metabolites = pd.read_csv(metabolite_tsv, sep="\t")
+    df_map = pd.read_csv(human1_hmdb_map)
+    humangem_hmdb_dict = df_map.set_index("id").to_dict()['master_hmdb']
+    df_metabolites["hmdb"] = df_metabolites["id"].map(humangem_hmdb_dict)
     # init mapping tool (bioservices)
     uni = UniChem()
     # Remove values in chebi column that has wrong format
