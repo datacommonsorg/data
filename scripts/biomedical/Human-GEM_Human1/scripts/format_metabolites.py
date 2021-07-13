@@ -103,7 +103,6 @@ def fill_chembl_from_pubchem(df):
     pub_chem_list = df[df["chembl"].isna()]\
         ["pubchem.compound"].unique()[1:].astype(int).astype(str)
     result = query_chembl_from_pubchem(pub_chem_list)
-    print(len(pub_chem_list))
     for res in result:
         df.loc[df["pubchem.compound"] == res["?pubChem"], "chembl"]\
                          = res["?chembl"].split("/")[1]
@@ -124,7 +123,6 @@ def fill_chembl_from_kegg(df):
     if np.nan in val_list:
         val_list.remove(np.nan)
     kegg_list = np.array(val_list)
-    print(len(kegg_list))
     result = query_chembl_from_kegg(kegg_list)
     for res in result:
         df.loc[df["kegg.compound"] == res["?kegg"], "chembl"] \
