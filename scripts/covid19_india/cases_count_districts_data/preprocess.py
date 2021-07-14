@@ -31,7 +31,8 @@ output_columns = [
 
 
 def _get_district_code(district):
-    dist_code = pd.read_csv('../common/data/districts-local-directory.csv')
+    lgd_url = 'https://india-local-government-directory-bixhnw23da-el.a.run.app/india-local-government-directory/districts.csv?_size=max'
+    dist_code = pd.read_csv(lgd_url)
     if district not in ['Unknown']:
         close_match = difflib.get_close_matches(str(district).upper(), dist_code['DistrictName(InEnglish)'],
                             n=1, cutoff=0.8)
