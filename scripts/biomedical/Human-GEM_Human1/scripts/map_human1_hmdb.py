@@ -84,7 +84,8 @@ def main():
     human1_virtual_columns = list(np.char.add(\
         np.array(virtual_columns), "_virtual"))
     # insert columns in virtual df to human1 df
-    df_human1[human1_virtual_columns] = np.nan
+    for col in human1_virtual_columns:
+        df_human1[col] = np.nan
     #fill values to inserted columns (virtual df) based on
     # mapping between coreesponding columns in 2 dataframes
     for overlap_column in list(zip(overlapped_column_values,\
