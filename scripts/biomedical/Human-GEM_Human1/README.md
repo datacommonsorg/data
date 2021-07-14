@@ -108,8 +108,7 @@ Please read the description of each file for the appropriate inputs. <br>
 ### Scripts
 |File| Description|
 ---------|-----------
-|map_human1_hmdb.py|Inputs: metabolites.tsv, 
-recon-store-metabolites-1.tsv, hmdb.csv<br> Outputs: humanGEM_HMDB_map.csv|
+|map_human1_hmdb.py|Inputs: metabolites.tsv, recon-store-metabolites-1.tsv, hmdb.csv<br> Outputs: humanGEM_HMDB_map.csv|
 |format_genes.py|Inputs: genes.tsv, geneRoles.tsv <br> Outputs: formatted genes.csv, geneRoles.csv|
 |format_metabolites.py|Inputs: metabolites.tsv, reactants.tsv, products.tsv  humanGEM_HMDB_map.csv <br> Outputs: formatted metabolites.csv, metabolicCellularComparment, reactants.csv, products.csv|
 |format_reactions.py|Inputs: reactions.tsv <br> Outputs: formatted reactions.csv|
