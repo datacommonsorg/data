@@ -25,19 +25,15 @@ module_dir_ = os.path.dirname(__file__)
 class TestPreprocessCSVTest(unittest.TestCase):
 
     def test_create_csv(self):
-        expected_file = os.path.join(
-            module_dir_, 'test_data/expected.csv')
-        data = pd.read_csv(os.path.join(
-            module_dir_, 'test_data/test_data.csv'))
-        result_file = os.path.join(
-            module_dir_, 'test_data/testcase1.csv')
+        expected_file = os.path.join(module_dir_, 'test_data/expected.csv')
+        data = pd.read_csv(os.path.join(module_dir_, 'test_data/test_data.csv'))
+        result_file = os.path.join(module_dir_, 'test_data/testcase1.csv')
         create_formatted_csv_file(result_file, data)
-        
+
         same = filecmp.cmp(result_file, expected_file)
         self.assertTrue(same)
-        
-        os.remove(result_file)
 
+        os.remove(result_file)
 
 
 if __name__ == '__main__':
