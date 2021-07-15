@@ -1,0 +1,42 @@
+Node: E:ejscreen_airpollutants->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_DieselPM
+observationDate: C:ejscreen_airpollutants->year
+observationAbout: C:ejscreen_airpollutants->FIPS
+observationPeriod: dcs:P1Y
+value: C:ejscreen_airpollutants->DSLPM
+unit: dcs:MicrogramsPerCubicMeter
+
+Node: E:ejscreen_airpollutants->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirPollutant_Cancer_Risk
+observationDate: C:ejscreen_airpollutants->year
+observationAbout: C:ejscreen_airpollutants->FIPS
+observationPeriod: dcs:P1Y
+value: C:ejscreen_airpollutants->CANCER
+
+Node: E:ejscreen_airpollutants->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:AirPollutant_Respiratory_Hazard
+observationDate: C:ejscreen_airpollutants->year
+observationAbout: C:ejscreen_airpollutants->FIPS
+observationPeriod: dcs:P1Y
+value: C:ejscreen_airpollutants->RESP
+
+Node: E:ejscreen_airpollutants->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone
+observationDate: C:ejscreen_airpollutants->year
+observationAbout: C:ejscreen_airpollutants->FIPS
+observationPeriod: dcs:P1Y
+value: C:ejscreen_airpollutants->OZONE
+unit: dcs:PartsPerBillion
+
+Node: E:ejscreen_airpollutants->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5
+observationDate: C:ejscreen_airpollutants->year
+observationAbout: C:ejscreen_airpollutants->FIPS
+observationPeriod: dcs:P1Y
+value: C:ejscreen_airpollutants->PM25
+unit: dcs:MicrogramsPerCubicMeter
