@@ -75,7 +75,7 @@ def main():
     # enum-column dict
     col_enum_dict = {"gram":"dcs:BacteriaGramStainType", "platform":"dcs:DataCollectionPlatform",
     "metabolism":"dcs:MicrobialMetabolismType", "oxygenstat":"dcs:OxygenRequirementStatus",
-    "mtype":"dcs:PathogenMethodOfInvasionEnum"}
+    "mtype":"dcs:PathogenMethodOfInvasion"}
     for i in col_enum_dict:
         p = col_enum_dict.get(i) + df_microbes[i] 
         df_microbes[i] = p    

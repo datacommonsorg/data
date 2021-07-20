@@ -9,10 +9,10 @@ organismTaxonomicClass: C:Microbe->mclass
 organismTaxonomicOrder: C:Microbe->order
 organismTaxonomicFamily: C:Microbe->family
 organismTaxonomicGenus: C:Microbe->genus
-OxygenRequirementStatus: C:Microbe->oxygenstat
-MicrobialMetabolismType: C:Microbe->metabolism
-BacteriaGramStainType: C:Microbe->gram
-PathogenMethodOfInvasion: C:Microbe->mtype
+OxygenRequirementStatusEnum: C:Microbe->oxygenstat
+MicrobialMetabolismTypeEnum: C:Microbe->metabolism
+BacteriaGramStainTypeEnum: C:Microbe->gram
+PathogenMethodOfInvasionEnum: C:Microbe->mtype
 microbeGeneInteractionMetric: C:Microbe->genes
 microbeReactionMetric: C:Microbe->reactions
 microbeMetaboliteMetric: C:Microbe->metabolites
@@ -21,5 +21,5 @@ dateOfDraftCreation: C:Microbe->draftcreated
 microbePhenotypeMetric: C:Microbe->phenotype
 integratedMicrobialGenomeID: C:Microbe->imgid
 ncbiID: C:Microbe->ncbiid
-DataCollectionPlatform: C:Microbe->platform
+DataCollectionPlatformEnum: C:Microbe->platform
 kBaseID: C:Microbe->kbaseid
