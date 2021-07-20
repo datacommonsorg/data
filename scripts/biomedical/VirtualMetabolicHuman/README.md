@@ -70,13 +70,14 @@ This data is under a [Creative Commons CC0 license](https://creativecommons.org/
 To generate the formatted metabolite file:
 
 ```
-python format_metabolite.py recon-store-metabolites-1.tsv metabolite.csv
+python format_metabolite.py recon-store-metabolites-1.tsv metabolite.csv hmdb.xml
 ```
 
 where
 `format_metabolite.py` - python script
 `recon-store-metabolites-1.tsv` - unformatted input tsv
 `metabolite.csv` - formatted output csv
+`hmdb.xml` - xml file from hmdb with metabolites
 
 To generate the formatted reaction file:
 
