@@ -46,13 +46,14 @@ class TestPreprocess(unittest.TestCase):
 
         # `karbi anglong` should be mapped to `east karbi anglong`
         row = clean_df.loc[clean_df["LGDDistrictName"] == "karbi anglong"]
-        self.assertEqual("east karbi anglong", row.iloc[0]["closestDistrictLabel"])
+        self.assertEqual("east karbi anglong",
+                         row.iloc[0]["closestDistrictLabel"])
         self.assertEqual("Q29025081", row.iloc[0]["WikiDataId"])
-
 
         # `west karbi anglong` should be mapped to `west karbi anglong`
         row = clean_df.loc[clean_df["LGDDistrictName"] == "west karbi anglong"]
-        self.assertEqual("west karbi anglong", row.iloc[0]["closestDistrictLabel"])
+        self.assertEqual("west karbi anglong",
+                         row.iloc[0]["closestDistrictLabel"])
         self.assertEqual("Q24949218", row.iloc[0]["WikiDataId"])
 
         # `tuticorin` should be mapped to `thoothukudi`

@@ -111,7 +111,7 @@ class LocalGovermentDirectoryDistrictsDataLoader:
                 self.wikidata_df["census2011Code"] == lgdCensus2011Code]
             if wikidata_df_row.empty:
                 pass
-            else:                
+            else:
                 return wikidata_df_row.iloc[0]["districtLabel"]
 
         # Let's see if there are any manul overrides or corrections
@@ -182,11 +182,12 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         # Hence I am adding it manually, here
 
         self.wikidata_df.loc[len(self.wikidata_df.index)] = [
-            "http://www.wikidata.org/entity/Q1470987", "malerkotla", "malerkotla"
-            "http://www.wikidata.org/entity/Q22424", "punjab", "punjab", "punjab", None
+            "http://www.wikidata.org/entity/Q1470987", "malerkotla",
+            "malerkotla"
+            "http://www.wikidata.org/entity/Q22424", "punjab", "punjab",
+            "punjab", None
         ]
         self.wikidata_df.fillna('', inplace=True)
-
 
         # Convert name to lower case for matching
         self.wikidata_df['districtLabel'] = self.wikidata_df[
@@ -230,11 +231,13 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         self.clean_df["WikiDataId"] = self.clean_df["district"].apply(
             LocalGovermentDirectoryDistrictsDataLoader.format_wikidataid)
 
-        self.clean_df["LGDDistrictNameTitleCase"] = self.clean_df["LGDDistrictName"].apply(
-            LocalGovermentDirectoryDistrictsDataLoader.format_title)
+        self.clean_df["LGDDistrictNameTitleCase"] = self.clean_df[
+            "LGDDistrictName"].apply(
+                LocalGovermentDirectoryDistrictsDataLoader.format_title)
 
-        self.clean_df["districtLabelTitleCase"] = self.clean_df["districtLabel"].apply(
-            LocalGovermentDirectoryDistrictsDataLoader.format_title)
+        self.clean_df["districtLabelTitleCase"] = self.clean_df[
+            "districtLabel"].apply(
+                LocalGovermentDirectoryDistrictsDataLoader.format_title)
 
     def save(self):
         self.clean_df.to_csv(self.clean_csv, index=False, header=True)
