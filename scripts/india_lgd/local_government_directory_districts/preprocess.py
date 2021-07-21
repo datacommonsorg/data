@@ -110,14 +110,14 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             else:
                 return wikidata_df_row.iloc[0]["districtLabel"]
 
-        # Let's see if there are any manul overrides or corrections
+        # Let's see if there are any manual overrides or corrections
         alternative_wikidata_districts = manual_override[
             lgdStateName] if lgdStateName in manual_override else {}
         if lgdDistrictName in alternative_wikidata_districts:
             return alternative_wikidata_districts[lgdDistrictName]
 
-        # If nothing is found let's try and match them by name
-        # Only within the districts of a state
+        # If nothing is found then let's try and match them by name
+        # Only within the districts of that state
         wikidata_districts = self.wikidata_df.loc[(
             (self.wikidata_df["stateLabel"] == lgdStateName) &
             (self.wikidata_df["census2011Code"] == ""))]['districtLabel']
@@ -144,7 +144,6 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         # The actual data is between 2nd and 740th row. So keep only them.
         self.lgd_df = self.lgd_df.iloc[1:739]
         # Take the the header row and set it as column header
-        new_header = self.lgd_df.iloc[0]
         self.lgd_df = self.lgd_df[1:]
         self.lgd_df.columns = [
             "LGDDistrictCode", "LGDDistrictName", "LGDStateCode",
@@ -211,11 +210,11 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         else:
             raise Exception("States in LGD and Wikidata doesn't match.")
 
-        #Add the mateched wikiData district label into lgd_df data
+        # Add the matched Wikidata district label into lgd_df data
         self.lgd_df['closestDistrictLabel'] = self.lgd_df.apply(
             lambda row: self.get_closest_district_label(row), axis=1)
 
-        # We match both state and district
+        # We match by both state and district names
         self.clean_df = pd.merge(
             self.lgd_df,
             self.wikidata_df,
