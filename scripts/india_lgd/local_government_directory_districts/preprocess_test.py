@@ -13,11 +13,8 @@
 # limitations under the License.
 
 import csv
-import filecmp
 import os
 import pandas as pd
-import json
-import tempfile
 import unittest
 from india_lgd.local_government_directory_districts.preprocess import LocalGovermentDirectoryDistrictsDataLoader
 

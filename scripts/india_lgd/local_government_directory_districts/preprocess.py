@@ -13,13 +13,9 @@
 # limitations under the License.
 
 import os
-import math
-import json
 import csv
 import difflib
 import pandas as pd
-import numpy as np
-import urllib.request
 
 manual_override = {
     "delhi": {
