@@ -4,8 +4,10 @@ Date: 07/10/2021
 Name: format_metabolite.py
 Description: Add dcids for all the metabolites in the VMH database. 
 Extract Chembl ids from kegg and chebi matches, and query datacommons 
-to check for pre-existing nodes for the same metabolite.
-@file_input: input .tsv from VMH with metabolite list
+to check for pre-existing nodes for the same metabolite. In addition,
+extract hmdb ids from the Human Metabolome database and use it as a 
+dcid when chembl is absent.
+@file_input: input .tsv from VMH with metabolite list, and .xml from hmdb
 @file_output: csv output file with addition chembl and dcid columns
 '''
 
@@ -20,6 +22,7 @@ from io import StringIO
 from lxml import etree
 
 ## Taken from http://www.metabolomics-forum.com/index.php?topic=1588.0
+## Used to extract csv from xml 
 def hmdbextract(name, file):
   ns = {'hmdb': 'http://www.hmdb.ca'}
   context = etree.iterparse(name, tag='{http://www.hmdb.ca}metabolite')
@@ -150,6 +153,7 @@ def hmdbextract(name, file):
   del context
   return;
 
+#Used to get hmdb id for common name matches between vmh and hmdb
 def name_map(dfm, dfh):
     dfm['fullName'] = dfm['fullName'].map(lambda x: re.sub(r'\W+', '', x))
     dfm['fullName'] = dfm['fullName'].str.lower()
@@ -163,6 +167,7 @@ def name_map(dfm, dfh):
     df = df.iloc[:,1:len(dfm.columns)]
     return df
 
+#Used to get hmdb id for KEGG id matches between vmh and hmdb
 def kegg_map(dfm, dfh):
     dfh.rename(columns = {'kegg':'keggId'}, inplace = True)
     df = pd.merge(dfm, dfh, on = 'keggId', how = 'left')
@@ -170,6 +175,7 @@ def kegg_map(dfm, dfh):
     df = df.iloc[:,1:len(dfm.columns)]
     return df
 
+#Used to get hmdb id for CHEBI id matches between vmh and hmdb
 def chebi_map(dfm, dfh):
     dfh.rename(columns = {'chebi_id':'cheBlId'}, inplace = True)
     df = pd.merge(dfm, dfh, on = 'cheBlId', how = 'left')
@@ -460,6 +466,9 @@ def main():
         if df.loc[i, 'Id'] == "bio/nan":
             df.loc[i, 'Id'] = "bio/" + df.loc[i, 'fullName']
 
+    # Add "CHEBI:" to all chebi ids
+    df['cheBlId'] = "CHEBI:" + df['cheBlId'].astype(str)
+    
     df.to_csv(file_output, index=None)
 
 if __name__ == '__main__':
