@@ -200,7 +200,6 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         self.wikidata_df['census2011Code'] = self.wikidata_df[
             'census2011Code'].apply(LocalGovermentDirectoryDistrictsDataLoader.
                                     format_census2011_code)
-        print(self.wikidata_df)
 
     def process(self):
         self._load_and_format_lgd()
