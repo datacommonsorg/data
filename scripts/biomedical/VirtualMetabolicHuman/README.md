@@ -5,23 +5,15 @@
 - [Importing VMH Metabolome and Microbiome data](#importing-vmh-metabolome-and-microbiome-data)
   - [Table of Contents](#table-of-contents)
   - [About the Dataset](#about-the-dataset)
-    - [Download URL](#download-url)
-    - [Overview](#overview)
-    - [Schema Overview](#schema-overview)
-    - [Notes and Caveats](#notes-and-caveats)
-    - [License](#license)
   - [About the import](#about-the-import)
-    - [Artifacts](#artifacts)
-      - [Scripts](#scripts)
-  - [Examples](#examples)
 
 ## About the Dataset
 
-### Download URL
+- ### Download URL
 
 The human metabolite and reaction data can be downloaded from the Virtual Metabolic Human database using their web [interface](https://www.vmh.life/#human/all).The gut microbiome data can be downloaded [here](https://www.vmh.life/#microbes/search). The data is in tab delimited format. The data is roughly in tab delimited format (see [Notes and Caveats](#notes-and-caveats) for additional information on formatting).
 
-### Overview
+- ### Overview
 
 This directory stores the scripts used to convert the datasets obtained from VHM into modified versions, for effective ingestion of data into the Data Commons knowledge graph.
 
@@ -33,7 +25,7 @@ For the knowledge graph, three files are imported:
   In addition, this file was also used to generate a new file `subsystem.csv` which contains all the unique biochemical subsystems from the above reactions and the subsystem names were used to generate their corresponding dcids.ß
 - <u>recon-store-microbes-1.tsv</u>: contains information on microbial taxonomic classification, phenotype, metrics about genes, reactions and metabolites linked to microbes and identifiers for various databases, to query the microbes. The datacommons was queried for pre-exisiting microbe dcids using the scientific name, and for the ones with no node on datacommons, new dcids were generated using their genus and specie names. The dates were converted to ISO format.
 
-### Schema Overview
+- ### Schema Overview
 
 The schema representing reaction, metabolite and microbiome data from VMH is defined in [VMH.mcf](https://raw.githubusercontent.com/suhana13/ISB-project/main/combined_list.mcf) and [VMH_enum.mcf](https://raw.githubusercontent.com/suhana13/ISB-project/main/combined_list_enum.mcf). The tmcfs for each of the corresponding csv files can be found [here](https://github.com/suhana13/data/tree/add_Virtual_metabolic_human_data/scripts/biomedical/VirtualMetabolicHuman/tmcf).
 
@@ -45,27 +37,27 @@ The ChemicalReaction entity describes chemical reactions. It has several text va
 
 The Microbe entity describes the microscopic organims in the biological world. It has several text value properties including "organismTaxonomicPhylum", "organismTaxonomicClass", "organismTaxonomicOrder", "organismTaxonomicFamily", "organismTaxonomicGenus", "dataDraftCreator", "dateOfDraftCreation", "integratedMicrobialGenomeID", "ncbiID", "kBaseID". It also has properties with quantity values like "microbeGeneInteractionMetric", "microbeReactionMetric", "microbeMetaboliteMetric", "microbePhenotypeMetric". Lastly, "OxygenRequirementStatus", "MicrobialMetabolismType", "BacteriaGramStainType", "PathogenMethodOfInvasion", are of type enumeration.
 
-### Notes and Caveats
+- ### Notes and Caveats
 
 The identifiers for a lot of databases (like KEGG, metaNetX), were missing in the dataset. So, the dcids couldnt be based off of them, and thus, chemical names were used for the rest of them.
 The runtime for the python scripts maybe more because the downloaded dataset had to be mapped to other datasets, for extraction of required information.The runtime will vary based on the user system RAM, but it can range from anywhere between 1 minute to 15 minutes.
 
-### License
+- ### License
 
 This data is under a [Creative Commons CC0 license](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ## About the import
 
-### Artifacts
+- ### Artifacts
 
-#### Scripts
+- #### Scripts
 
 `format_metabolite.py`
 `format_reaction.py`
 `format_reaction_subsystem.py`
 `format_microbes.py`
 
-## Examples
+- ## Examples
 
 To generate the formatted metabolite file:
 
@@ -74,10 +66,11 @@ python format_metabolite.py recon-store-metabolites-1.tsv metabolite.csv hmdb.xm
 ```
 
 where
-`format_metabolite.py` - python script
-`recon-store-metabolites-1.tsv` - unformatted input tsv
-`metabolite.csv` - formatted output csv
-`hmdb.xml` - xml file from hmdb with metabolites
+
+- `format_metabolite.py` - python script
+- `recon-store-metabolites-1.tsv` - unformatted input tsv
+- `metabolite.csv` - formatted output csv
+- `hmdb.csv` - csv file from hmdb with metabolites
 
 To generate the formatted reaction file:
 
@@ -86,11 +79,12 @@ format_reaction.py recon-store-reactions-1.tsv chemical_reactions.csv reactions.
 ```
 
 where
-`format_reaction.py` - python script
-`recon-store-reactions-1.tsv` - unformatted reaction tsv from VHM
-`chemical_reactions.csv` - formatted output csv
-`reactions.tsv` - input tsv with reactions from human 1d
-`metabolite.csv` - the output file obtained above
+
+- `format_reaction.py` - python script
+- `recon-store-reactions-1.tsv` - unformatted reaction tsv from VHM
+- `chemical_reactions.csv` - formatted output csv
+- `reactions.tsv` - input tsv with reactions from human 1d
+- `metabolite.csv` - the output file obtained above
 
 To generate the formatted reaction subsystem file:
 
@@ -99,9 +93,10 @@ format_reaction_subsystem.py chemical_reactions.csv ubsystem.csv
 ```
 
 where
-`format_reaction_subsystem.py` - python script
-`chemical_reactions.csv` - output file obtained from above
-`subsystem.tsv` - output subsystem file
+
+- `format_reaction_subsystem.py` - python script
+- `chemical_reactions.csv` - output file obtained from above
+- `subsystem.tsv` - output subsystem file
 
 To generate the formatted microbes file:
 
@@ -110,6 +105,7 @@ format_microbes.py recon-store-microbes-1.tsv microbe.csv
 ```
 
 where
-`format_microbes.py` - python script
-`recon-store-microbes-1.tsv` - input microbe tsv
-`microbe.csv` - output formatted csv
+
+- `format_microbes.py` - python script
+- `recon-store-microbes-1.tsv` - input microbe tsv
+- `microbe.csv` - output formatted csv
