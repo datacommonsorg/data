@@ -7,7 +7,7 @@ Extract Chembl ids from kegg and chebi matches, and query datacommons
 to check for pre-existing nodes for the same metabolite. In addition,
 extract hmdb ids from the Human Metabolome database and use it as a 
 dcid when chembl is absent.
-@file_input: input .tsv from VMH with metabolite list, and .xml from hmdb
+@file_input: input .tsv from VMH with metabolite list, and .csv from hmdb
 @file_output: csv output file with addition chembl and dcid columns
 '''
 
@@ -15,150 +15,20 @@ import sys
 import pandas as pd
 import numpy as np
 import datacommons as dc
-from bioservices import *
-import os
-import csv
-from io import StringIO
-from lxml import etree
+from bioservices import UniChem
+import re
 
-## Taken from http://www.metabolomics-forum.com/index.php?topic=1588.0
-## Used to extract csv from xml 
-def hmdbextract(name, file):
-  ns = {'hmdb': 'http://www.hmdb.ca'}
-  context = etree.iterparse(name, tag='{http://www.hmdb.ca}metabolite')
-  csvfile = open(file, 'w')
-  fieldnames = ['accession', 'monisotopic_molecular_weight', 'iupac_name', 
-                'name', 'chemical_formula', 'InChIKey', 'cas_registry_number', 'smiles', 
-                'drugbank','chebi_id', 'pubchem', 'phenol_explorer_compound_id','food','knapsack', 
-                'chemspider', 'kegg', 'meta_cyc','bigg','metlin_id','pdb_id', 'logpexp','kingdom',  
-                'direct_parent', 'super_class', 'class', 'sub_class', 'molecular_framework', 'vmh_id']
-  writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-  writer.writeheader()
-  for event, elem in context:
-    accession = elem.xpath('hmdb:accession/text()', namespaces=ns)[0]
-    try:
-        monisotopic_molecular_weight = elem.xpath('hmdb:monisotopic_molecular_weight/text()', namespaces=ns)[0]
-    except:
-        monisotopic_molecular_weight = 'NA'
-    try:
-        iupac_name = elem.xpath('hmdb:iupac_name/text()', namespaces=ns)[0].encode('utf-8')
-    except:
-        iupac_name = 'NA'
-    name = elem.xpath('hmdb:name/text()', namespaces=ns)[0].encode('utf-8')
-    try:
-        chemical_formula = elem.xpath('hmdb:chemical_formula/text()', namespaces=ns)[0]
-    except:
-        chemical_formula = 'NA'
-    try:
-        inchikey = elem.xpath('hmdb:inchikey/text()', namespaces=ns)[0]
-    except:
-        inchikey = 'NA'
-    try:
-        cas_registry_number = elem.xpath('hmdb:cas_registry_number/text()', namespaces=ns)[0]
-    except:
-        cas_registry_number = 'NA'
-    try:
-        smiles = elem.xpath('hmdb:smiles/text()', namespaces=ns)[0]
-    except:
-        smiles = 'NA'
-    try:
-        drugbank = elem.xpath('hmdb:drugbank_id/text()', namespaces=ns)[0]
-    except:
-        drugbank = 'NA'
-    try:
-        chebi_id = elem.xpath('hmdb:chebi_id/text()', namespaces=ns)[0]
-    except:
-        chebi_id = 'NA'
-    try:
-        pubchem = elem.xpath('hmdb:pubchem_compound_id/text()', namespaces=ns)[0]
-    except:
-        pubchem = 'NA'
-    try:
-        phenol_explorer_compound_idt = elem.xpath('hmdb:phenol_explorer_compound_id/text()', namespaces=ns)[0]
-    except:
-        phenol_explorer_compound_id = 'NA'
-    try:
-        food = elem.xpath('hmdb:foodb_id/text()', namespaces=ns)[0]
-    except:
-        food = 'NA'
-    try:
-        knapsack = elem.xpath('hmdb:knapsack_id/text()', namespaces=ns)[0]
-    except:
-        knapsack = 'NA'
-    try:
-        chemspider = elem.xpath('hmdb:chemspider_id/text()', namespaces=ns)[0]
-    except:
-        chemspider = 'NA'
-    try:
-        kegg = elem.xpath('hmdb:kegg_id/text()', namespaces=ns)[0]
-    except:
-        kegg = 'NA'
-    try:
-        meta_cyc = elem.xpath('hmdb:meta_cyc_id/text()', namespaces=ns)[0]
-    except:
-        meta_cyc = 'NA'
-    try:
-        bigg = elem.xpath('hmdb:bigg_id/text()', namespaces=ns)[0]
-    except:
-        bigg = 'NA'
-    try:
-        metlin_id = elem.xpath('hmdb:metlin_id/text()', namespaces=ns)[0]
-    except:
-        metlin_id = 'NA'
-    try:
-        pdb_id = elem.xpath('hmdb:pdb_id/text()', namespaces=ns)[0]
-    except:
-        pdb_id = 'NA'
-    try:
-        logpexp = elem.xpath('hmdb:experimental_properties/hmdb:property[hmdb:kind = "logp"]/hmdb:value/text()', namespaces=ns)[0]
-    except:
-        logpexp = 'NA'
-    try:
-        kingdom = elem.xpath('hmdb:taxonomy/hmdb:kingdom/text()', namespaces=ns)[0]
-    except:
-        kingdom = 'NA'
-    try:
-        direct_parent = elem.xpath('hmdb:taxonomy/hmdb:direct_parent/text()', namespaces=ns)[0]
-    except:
-        direct_parent = 'NA'
-    try:
-        super_class = elem.xpath('hmdb:taxonomy/hmdb:super_class/text()', namespaces=ns)[0]
-    except:
-        super_class = 'NA'
-    try:
-        classorg = elem.xpath('hmdb:taxonomy/hmdb:class/text()', namespaces=ns)[0]
-    except:
-        classorg = 'NA'
-    try:
-        sub_class = elem.xpath('hmdb:taxonomy/hmdb:sub_class/text()', namespaces=ns)[0]
-    except:
-        sub_class = 'NA'
-    try:
-        molecular_framework = elem.xpath('hmdb:taxonomy/hmdb:molecular_framework/text()', namespaces=ns)[0]
-    except:
-        molecular_framework = 'NA'
-    try:
-        vmh_id = elem.xpath('hmdb:vmh_id/text()', namespaces=ns)[0]
-    except:
-        vmh_id = 'NA'    
-
-    writer.writerow({'accession': accession, 'monisotopic_molecular_weight': monisotopic_molecular_weight, 'iupac_name': iupac_name, 'name': name, 'chemical_formula': chemical_formula, 'InChIKey': inchikey, 'cas_registry_number': cas_registry_number, 'smiles': smiles,'drugbank': drugbank,'chebi_id': chebi_id,'pubchem': pubchem,'phenol_explorer_compound_id':phenol_explorer_compound_id, 'food': food,'knapsack': knapsack, 'chemspider': chemspider,'kegg': kegg, 'meta_cyc': meta_cyc, 'bigg':bigg, 'metlin_id': metlin_id, 'pdb_id':pdb_id,'logpexp':logpexp, 'kingdom': kingdom, 'direct_parent': direct_parent, 'super_class': super_class, 'class': classorg, 'sub_class': sub_class, 'molecular_framework': molecular_framework, 'vmh_id': vmh_id})
-    # It's safe to call clear() here because no descendants will be
-    # accessed
-    elem.clear()
-    # Also eliminate now-empty references from the root node to elem
-    for ancestor in elem.xpath('ancestor-or-self::*'):
-        while ancestor.getprevious() is not None:
-            del ancestor.getparent()[0]
-  del context
-  return;
-
-#Used to get hmdb id for common name matches between vmh and hmdb
 def name_map(dfm, dfh):
-    dfm['fullName'] = dfm['fullName'].map(lambda x: re.sub(r'\W+', '', x))
-    dfm['fullName'] = dfm['fullName'].str.lower()
-    dfh['name'] = dfh['name'].map(lambda x: re.sub(r'\W+', '', x))
-    dfh['name'] = dfh['name'].str.lower()
+    """
+    Finds the rows with the same name in the HMDB
+    and VMH dataset.
+    Args:
+        dfm = VMH data, dfh = HMDB data
+    Returns:
+        VMH data with added HMDB ids
+    """
+    dfm['fullName'] = dfm['fullName'].map(lambda x: re.sub(r'\W+', '', x)).str.lower()
+    dfh['name'] = dfh['name'].map(lambda x: re.sub(r'\W+', '', x)).str.lower()
     dfh['name'] = dfh['name'].str[2:]
     dfh['name'] = dfh['name'].str[:-1]
     dfh.rename(columns = {'name':'fullName'}, inplace = True)
@@ -167,16 +37,31 @@ def name_map(dfm, dfh):
     df = df.iloc[:,1:len(dfm.columns)]
     return df
 
-#Used to get hmdb id for KEGG id matches between vmh and hmdb
+
 def kegg_map(dfm, dfh):
+    """
+    Finds the rows with the same KEGG id in the HMDB
+    and VMH dataset.
+    Args:
+        dfm = VMH data, dfh = HMDB data
+    Returns:
+        VMH data with added HMDB ids
+    """
     dfh.rename(columns = {'kegg':'keggId'}, inplace = True)
     df = pd.merge(dfm, dfh, on = 'keggId', how = 'left')
     df['hmdb'].fillna(df['accession'])
     df = df.iloc[:,1:len(dfm.columns)]
     return df
 
-#Used to get hmdb id for CHEBI id matches between vmh and hmdb
 def chebi_map(dfm, dfh):
+    """
+    Finds the rows with the same CHEBI id in the HMDB
+    and VMH dataset.
+    Args:
+        dfm = VMH data, dfh = HMDB data
+    Returns:
+        VMH data with added HMDB ids
+    """
     dfh.rename(columns = {'chebi_id':'cheBlId'}, inplace = True)
     df = pd.merge(dfm, dfh, on = 'cheBlId', how = 'left')
     df['hmdb'].fillna(df['accession'])
@@ -184,9 +69,20 @@ def chebi_map(dfm, dfh):
     return df
 
 def isNaN(num):
+    """
+    Checks null values
+    """
     return num != num
 
 def clean_result(result):
+    """
+    Converts a list of dicts obtained from dc
+    query into a cleaned and easier to read list
+    Arg:
+        list of dictionaries
+    Returns:
+        list
+    """
     ind_count = 0
     dcid_inch = []
     for index in range(len(result)):
@@ -196,6 +92,16 @@ def clean_result(result):
     return dcid_inch
 
 def add_query_result(df, col, dcid):
+    """
+    Checks if the df row matches with the dc
+    query and if so, adds the dcid to the Id
+    column of df.
+    Args:
+        df = dataframe to which ids are added
+        col = col of df to match the query with
+        dcid = list with dc query results
+
+    """
     count_query = 0
     for i in df.index:
         for j in range(1, len(dcid)):
@@ -205,23 +111,16 @@ def add_query_result(df, col, dcid):
                 j += 2
     return df
 
-def main():
-    file_input = sys.argv[1]
-    file_output = sys.argv[2]
-    file_hmdb = sys.argv[3]
-
-    df = pd.read_csv(file_input, sep='\t')
-    hmdbextract(file_hmdb, 'hmdb.csv')
-    dfh = pd.read_csv('hmdb.csv')
-    #inchikey matches with dc 
-    list_inchi = df[['inchiKey']].T.stack().tolist()
-    list_inchi_1 = list_inchi[1:1000]
-    list_inchi_2 = list_inchi[1000:2000]
-    list_inchi_3 = list_inchi[2000:2982]
-    arr_inchi_1 = np.array(list_inchi_1)
-    arr_inchi_2 = np.array(list_inchi_2)
-    arr_inchi_3 = np.array(list_inchi_3)
-
+def inchi_query(arr_inchi):
+    """
+    Queries dc using the python api, to find
+    if the elements of the input list, have a 
+    pre-existing matching inchikey on dc
+    Args:
+        arr_inchi = array with inchikeys to query
+    Returns:
+        result = result of dc query
+    """
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -229,44 +128,20 @@ def main():
     ?drug inChIKey ?id .
     ?drug inChIKey {0} .
     }}
-    """.format(arr_inchi_1)
+    """.format(arr_inchi)   
     result = dc.query(query_str)
-    dcid_inch = clean_result(result)
-    df = add_query_result(df, "inchiKey", dcid_inch)
+    return result
 
-
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug inChIKey ?id .
-    ?drug inChIKey {0} .
-    }}
-    """.format(arr_inchi_2)
-    result = dc.query(query_str)
-    dcid_inch = clean_result(result)
-    df = add_query_result(df, "inchiKey", dcid_inch)
-    #inchi match complete (2)
-
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug inChIKey ?id .
-    ?drug inChIKey {0} .
-    }}
-    """.format(arr_inchi_3)
-    result = dc.query(query_str)
-    dcid_inch = clean_result(result)
-    df = add_query_result(df, "inchiKey", dcid_inch)
-    #inchi match complete (3)
-
-    #hmdb matches with dc
-    list_hmdb = df[['hmdb']].T.stack().tolist()
-    list_hmdb_1 = list_hmdb[0:1000]
-    list_hmdb_2 = list_hmdb[1000:1513]
-    arr_hmdb_1 = np.array(list_hmdb_1)
-    arr_hmdb_2 = np.array(list_hmdb_2)
+def hmdb_query(arr_hmdb):
+    """
+    Queries dc using the python api, to find
+    if the elements of the input list, have a 
+    pre-existing matching hmdb ids on dc
+    Args:
+        arr_hmdb = array with hmdb ids to query
+    Returns:
+        result = result of dc query
+    """    
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -274,29 +149,20 @@ def main():
     ?drug humanMetabolomeDatabaseID ?id .
     ?drug humanMetabolomeDatabaseID {0} .
     }}
-    """.format(arr_hmdb_1)
-    result = dc.query(query_str)
-    dcid_hmdb = clean_result(result)
-    df = add_query_result(df, "hmdb", dcid_hmdb)
+    """.format(arr_hmdb)
+    result = dc.query(query_str)    
+    return result
 
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug humanMetabolomeDatabaseID ?id .
-    ?drug humanMetabolomeDatabaseID {0} .
-    }}
-    """.format(arr_hmdb_2)
-    result = dc.query(query_str)
-    dcid_hmdb = clean_result(result)
-    df = add_query_result(df, "hmdb", dcid_hmdb)
-
-    #kegg matches with dc 
-    list_kegg = df[['keggId']].T.stack().tolist()
-    list_kegg_1 = list_kegg[0:1000]
-    list_kegg_2 = list_kegg[1000:1266]
-    arr_kegg_1 = np.array(list_kegg_1)
-    arr_kegg_2 = np.array(list_kegg_2)
+def kegg_query(arr_kegg):
+    """
+    Queries dc using the python api, to find
+    if the elements of the input list, have a 
+    pre-existing matching kegg ids on dc
+    Args:
+        arr_hmdb = array with kegg ids to query
+    Returns:
+        result = result of dc query
+    """
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -304,30 +170,20 @@ def main():
     ?drug keggCompoundID ?id .
     ?drug keggCompoundID {0} .
     }}
-    """.format(arr_kegg_1)
+    """.format(arr_kegg)
     result = dc.query(query_str)
-    dcid = clean_result(result)
-    df = add_query_result(df, "keggId", dcid)
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug keggCompoundID ?id .
-    ?drug keggCompoundID {0} .
-    }}
-    """.format(arr_kegg_2)
-    result = dc.query(query_str)
-    dcid = clean_result(result)
-    df = add_query_result(df, "keggId", dcid) #kegg match complete (2)
+    return result
 
-    #chebi matches with dc
-    list_chebi = df[['cheBlId']].T.stack().tolist()
-    for i in range(len(list_chebi)):
-        list_chebi[i] = "CHEBI:" + str(list_chebi[i])
-    list_chebi_1 = list_chebi[0:1000]
-    list_chebi_2 = list_chebi[1000:1126]
-    arr_chebi_1 = np.array(list_chebi_1)
-    arr_chebi_2 = np.array(list_chebi_2)
+def chebi_query(arr_chebi):
+    """
+    Queries dc using the python api, to find
+    if the elements of the input list, have a 
+    pre-existing matching chebi ids on dc
+    Args:
+        arr_hmdb = array with chebi ids to query
+    Returns:
+        result = result of dc query
+    """
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -335,90 +191,20 @@ def main():
     ?drug chebiID ?id .
     ?drug chebiID {0} .
     }}
-    """.format(arr_chebi_1)
+    """.format(arr_chebi)
     result = dc.query(query_str)
-    dcid = clean_result(result)
-    df = add_query_result(df, "cheBlId", dcid)
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug chebiID ?id .
-    ?drug chebiID {0} .
-    }}
-    """.format(arr_chebi_2)
-    result = dc.query(query_str)
-    dcid = clean_result(result)
-    df = add_query_result(df, "cheBlId", dcid)
+    return result
 
-    #pubchem matches with dc
-    list_pub = df[['pubChemId']].T.stack().tolist()
-    for i in range(len(list_pub)):
-        list_pub[i] = str(list_pub[i])
-    list_pub_1 = list_pub[0:1000]
-    list_pub_2 = list_pub[1000:1104]
-    arr_pub_1 = np.array(list_pub_1)
-    arr_pub_2 = np.array(list_pub_2)
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug pubChemCompoundID ?id .
-    ?drug pubChemCompoundID {0} .
-    }}
-    """.format(arr_pub_1)
-    result = dc.query(query_str)
-    dcid = clean_result(result)
-    df = add_query_result(df, "pubChemId", dcid)
-
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug pubChemCompoundID ?id .
-    ?drug pubChemCompoundID {0} .
-    }}
-    """.format(arr_pub_2)
-    result = dc.query(query_str)
-    dcid = clean_result(result)
-    df = add_query_result(df, "pubChemId", dcid)
-
-    #chemspider matches with dc
-    list_chem = df[['chemspider']].T.stack().tolist()
-    for i in range(len(list_chem)):
-        list_chem[i] = str(list_chem[i])
-    list_chem_1 = list_pub[0:1000]
-    list_chem_2 = list_pub[1000:1052]
-    arr_chem_1 = np.array(list_chem_1)
-    arr_chem_2 = np.array(list_chem_2)
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug chemSpiderID ?id .
-    ?drug chemSpiderID {0} .
-    }}
-    """.format(arr_chem_1)
-    result = dc.query(query_str)
-    dcid = clean_result(result)
-    df = add_query_result(df, "chemspider", dcid)
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug chemSpiderID ?id .
-    ?drug chemSpiderID {0} .
-    }}
-    """.format(arr_chem_2)
-    result = dc.query(query_str)
-    dcid = clean_result(result)
-    df = add_query_result(df, "chemspider", dcid)
-
-    #drug bank matches with dc
-    list_drug = df[['drugbank']].T.stack().tolist()
-    for i in range(len(list_drug)):
-        list_drug[i] = str(list_drug[i])     
-    arr_drug = np.array(list_drug)
+def drugbank_query(arr_drug):
+    """
+    Queries dc using the python api, to find
+    if the elements of the input list, have a 
+    pre-existing matching drugbank ids on dc
+    Args:
+        arr_hmdb = array with drugbank ids to query
+    Returns:
+        result = result of dc query
+    """
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -428,13 +214,81 @@ def main():
     }}
     """.format(arr_drug)
     result = dc.query(query_str)
+    return result
+
+def main():
+    file_input = sys.argv[1]
+    file_output = sys.argv[2]
+    file_hmdb = sys.argv[3]
+
+    df = pd.read_csv(file_input, sep='\t')
+    dfh = pd.read_csv('hmdb.csv')
+
+    #inchikey matches with dc 
+    list_inchi = df[['inchiKey']].T.stack().tolist()
+    list_inchi_1 = list_inchi[1:1000]
+    list_inchi_2 = list_inchi[1000:2000]
+    list_inchi_3 = list_inchi[2000:2982]
+    arr_inchi_1 = np.array(list_inchi_1)
+    arr_inchi_2 = np.array(list_inchi_2)
+    arr_inchi_3 = np.array(list_inchi_3)
+    arr_inchi_list = list(arr_inchi_1, arr_inchi_2,arr_inchi_3 )
+    for i in len(range(arr_inchi_list)):
+        result = inchi_query(arr_inchi_list[i])
+        dcid_inch = clean_result(result)
+        df = add_query_result(df, "inchiKey", dcid_inch)
+
+    #hmdb matches with dc
+    list_hmdb = df[['hmdb']].T.stack().tolist()
+    list_hmdb_1 = list_hmdb[0:1000]
+    list_hmdb_2 = list_hmdb[1000:1513]
+    arr_hmdb_1 = np.array(list_hmdb_1)
+    arr_hmdb_2 = np.array(list_hmdb_2)
+    arr_hmdb_list = list(arr_hmdb_1, arr_hmdb_2)
+    for i in len(range(arr_hmdb_list)):
+        result = hmdb_query(arr_hmdb_list[i])
+        dcid_hmdb = clean_result(result)
+        df = add_query_result(df, "hmdb", dcid_hmdb)
+  
+    #kegg matches with dc 
+    list_kegg = df[['keggId']].T.stack().tolist()
+    list_kegg_1 = list_kegg[0:1000]
+    list_kegg_2 = list_kegg[1000:1266]
+    arr_kegg_1 = np.array(list_kegg_1)
+    arr_kegg_2 = np.array(list_kegg_2)
+    arr_kegg_list = list(arr_kegg_1, arr_kegg_2)
+    for i in len(range(arr_kegg_list)):
+        result = kegg_query(arr_kegg_list[i])
+        dcid_kegg = clean_result(result)
+        df = add_query_result(df, "keggId", dcid_kegg)
+
+    #chebi matches with dc
+    list_chebi = df[['cheBlId']].T.stack().tolist()
+    for i in range(len(list_chebi)):
+        list_chebi[i] = "CHEBI:" + str(list_chebi[i])
+    list_chebi_1 = list_chebi[0:1000]
+    list_chebi_2 = list_chebi[1000:1126]
+    arr_chebi_1 = np.array(list_chebi_1)
+    arr_chebi_2 = np.array(list_chebi_2)
+    arr_chebi_list = list(arr_chebi_1, arr_chebi_2)
+    for i in len(range(arr_chebi_list)):
+        result = chebi_query(arr_chebi_list[i])
+        dcid_chebi = clean_result(result)
+        df = add_query_result(df, "cheBlId", dcid_chebi)
+
+    #drug bank matches with dc
+    list_drug = df[['drugbank']].T.stack().tolist()
+    for i in range(len(list_drug)):
+        list_drug[i] = str(list_drug[i])     
+    arr_drug = np.array(list_drug)
+    result = drugbank_query(arr_drug)
     dcid = clean_result(result)
     df = add_query_result(df, "drugbank", dcid)
 
+    #Add chemblID column in the dataframe and add the corresponding chembl ids 
+    #for each entry
     uni = UniChem()
     mapping = uni.get_mapping("kegg_ligand", "chembl")
-    #Add chemblID column in the dataframe and add the corresponding chembl ids 
-    #for each entry 
     chembl_list = [0]*len(df['keggId'])
     df.insert(7, 'ChEMBL', chembl_list)
     for index, row in df.iterrows():
@@ -443,6 +297,7 @@ def main():
         except:
             pass
     df['ChEMBL'] = chembl_list
+    df['ChEMBL'] = df['ChEMBL'].replace({'0':np.nan, 0:np.nan})
     #Get hmdb IDs from the hmdb data
     df = name_map(df, dfh)
     df = kegg_map(df, dfh)
