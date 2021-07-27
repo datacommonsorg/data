@@ -18,7 +18,7 @@ observationDate: C:OzoneCountyPollution->date
 value: C:OzoneCountyPollution->O3_med_pred
 observationPeriod: P8H
 unit: parts per billion (ppb)
-variableMeasured: dcs:MedianConcentrationAirPollutantOzone
+variableMeasured: dcs:Median_Concentration_AirPollutant_Ozone
 
 Node: E:OzoneCountyPollution->E6
 observationAbout: E:OzoneCountyPollution->E1
@@ -43,4 +43,4 @@ observationDate: C:OzoneCountyPollution->date
 value: C:OzoneCountyPollution->O3_pop_pred
 observationPeriod: P8H
 unit: parts per billion (ppb)
-variableMeasured: dcs:PopulationWeightedConcentrationAirPollutantOzone
+variableMeasured: dcs:PopulationWeighted_Concentration_AirPollutant_Ozone
