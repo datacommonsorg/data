@@ -58,8 +58,8 @@ The dataset documentation is accessible on the CDC National Evnvironment Public 
 
 #### Processing Steps
 
-@input_file_name    path to the input csv file to parse
-@output_file_name   path to write the parsed csv file
+@input_file_name    path to the input csv file to be cleaned
+@output_file_name   path to write the cleaned csv file
 
 To clean the air quality data files, run:
 
