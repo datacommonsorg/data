@@ -10,7 +10,7 @@ Author: beets
 
 Country-level boundary information as recognized by the World Bank. This import does not include disputed areas or entities not already included in Data Commons. Both high-resolution and simplified geojson's are included.  Geojson's are simplified using [`geopandas.GeoSeries.simplified`](https://geopandas.readthedocs.io/en/latest/docs/reference/api/geopandas.GeoSeries.simplify.html).
 
-See the [accompanying Python notebook](country_boundaries.ipynb) for more exploration on the dataset.
+See the [accompanying Python notebook](country_boundaries_exploration.ipynb) for more exploration on the dataset.
 
 ### Notes and caveats
 

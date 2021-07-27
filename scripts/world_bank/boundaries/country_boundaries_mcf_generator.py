@@ -135,7 +135,7 @@ class CountryBoundariesMcfGenerator:
             self._export_country_feature(country_code, export_data, dp_level)
 
     def extract_country_geojson(self, all_countries_df, col_to_code):
-        """Extract and export all geojsons."""
+        """Extract and export all geojson to tempfiles."""
         print(f'Exporting geojson to {self.export_dir}')
         for col, country_codes in col_to_code.items():
             for country_code in country_codes:
