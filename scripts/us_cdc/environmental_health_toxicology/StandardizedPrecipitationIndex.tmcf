@@ -1,0 +1,11 @@
+Node: E:CountyStandardizedPrecipitationIndex->E1
+typeOf: dcs:County
+dcid: C:CountyStandardizedPrecipitationIndex->dcid
+
+Node: E:CountyStandardizedPrecipitationIndex->E2
+observationAbout: E:CountyStandardizedPrecipitationIndex->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:CountyStandardizedPrecipitationIndex->date
+value: C:CountyStandardizedPrecipitationIndex->Value
+observationPeriod: P1M
+variableMeasured: dcs:StandardizedPrecipitationIndex
