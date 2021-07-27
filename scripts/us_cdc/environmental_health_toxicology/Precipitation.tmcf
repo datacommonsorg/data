@@ -8,11 +8,4 @@ typeOf: dcs:StatVarObservation
 observationDate: C:CountyPrecipitationIndex->date
 value: C:CountyPrecipitationIndex->Value
 observationPeriod: P1M
-variableMeasured: E:CountyPrecipitationIndex->E3
-
-Node: E:CountyPrecipitationIndex->E3
-typeOf: dcs:StatisticalVariable
-dcid: C:CountyPrecipitationIndex->StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:precipitation
-statType: dcs:measuredValue
+variableMeasured: dcs:StandardizedPrecipitationIndex
