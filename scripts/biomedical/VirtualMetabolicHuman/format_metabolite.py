@@ -228,6 +228,27 @@ def drugbank_query(arr_drug):
     return result
 
 
+def shard(list_to_shard, shard_size):
+    """
+    Breaks down a list into smaller 
+    sublists, converts it into an array
+    and appends the array to the master
+    list
+    Args:
+        list_to_shard = original list
+        shard_size = size of subist
+    Returns:
+        sharded_list = master list with
+        smaller sublists 
+    """
+    sharded_list = []
+    for i in range(0, len(list_to_shard), shard_size):
+        shard = list_to_shard[i, i + shard_size]
+        arr = np.array(shard)
+        sharded_list.append(arr)
+    return sharded_list
+
+
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
@@ -238,13 +259,7 @@ def main():
 
     #inchikey matches with dc
     list_inchi = df[['inchiKey']].T.stack().tolist()
-    list_inchi_1 = list_inchi[1:1000]
-    list_inchi_2 = list_inchi[1000:2000]
-    list_inchi_3 = list_inchi[2000:2982]
-    arr_inchi_1 = np.array(list_inchi_1)
-    arr_inchi_2 = np.array(list_inchi_2)
-    arr_inchi_3 = np.array(list_inchi_3)
-    arr_inchi_list = list(arr_inchi_1, arr_inchi_2, arr_inchi_3)
+    arr_inchi_list = shard(list_inchi, 1000)
     for i in len(range(arr_inchi_list)):
         result = inchi_query(arr_inchi_list[i])
         dcid_inch = clean_result(result)
@@ -252,11 +267,7 @@ def main():
 
     #hmdb matches with dc
     list_hmdb = df[['hmdb']].T.stack().tolist()
-    list_hmdb_1 = list_hmdb[0:1000]
-    list_hmdb_2 = list_hmdb[1000:1513]
-    arr_hmdb_1 = np.array(list_hmdb_1)
-    arr_hmdb_2 = np.array(list_hmdb_2)
-    arr_hmdb_list = list(arr_hmdb_1, arr_hmdb_2)
+    arr_hmdb_list = shard(list_hmdb, 1000)
     for i in len(range(arr_hmdb_list)):
         result = hmdb_query(arr_hmdb_list[i])
         dcid_hmdb = clean_result(result)
@@ -264,11 +275,7 @@ def main():
 
     #kegg matches with dc
     list_kegg = df[['keggId']].T.stack().tolist()
-    list_kegg_1 = list_kegg[0:1000]
-    list_kegg_2 = list_kegg[1000:1266]
-    arr_kegg_1 = np.array(list_kegg_1)
-    arr_kegg_2 = np.array(list_kegg_2)
-    arr_kegg_list = list(arr_kegg_1, arr_kegg_2)
+    arr_kegg_list = shard(list_kegg, 1000)
     for i in len(range(arr_kegg_list)):
         result = kegg_query(arr_kegg_list[i])
         dcid_kegg = clean_result(result)
@@ -278,11 +285,7 @@ def main():
     list_chebi = df[['cheBlId']].T.stack().tolist()
     for i in range(len(list_chebi)):
         list_chebi[i] = "CHEBI:" + str(list_chebi[i])
-    list_chebi_1 = list_chebi[0:1000]
-    list_chebi_2 = list_chebi[1000:1126]
-    arr_chebi_1 = np.array(list_chebi_1)
-    arr_chebi_2 = np.array(list_chebi_2)
-    arr_chebi_list = list(arr_chebi_1, arr_chebi_2)
+    arr_chebi_list = shard(list_chebi, 1000)
     for i in len(range(arr_chebi_list)):
         result = chebi_query(arr_chebi_list[i])
         dcid_chebi = clean_result(result)

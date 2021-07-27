@@ -47,24 +47,24 @@ def org_name_query():
     }
     '''
     result = dc.query(query_str)
-    specie_dcids = ['0'] * len(result)
+    species_dcids = ['0'] * len(result)
     for index in range(len(result)):
         for key in result[index]:
-            specie_dcids[index] = result[index][key]
-    return specie_dcids
+            species_dcids[index] = result[index][key]
+    return species_dcids
 
 
-def scientific_name_query(specie_dcids):
+def scientific_name_query(species_dcids):
     """
     Fetches the scientific names from the list
     of dcids
     Arg:
-        specie_dcids = list of dcids
+        species_dcids = list of dcids
     Returns:
         df_species = df with specie dcids and names
     """
     df_species = pd.DataFrame()
-    df_species['species_dcid'] = specie_dcids
+    df_species['species_dcid'] = species_dcids
 
     df_species['species_name'] = df_species['species_dcid'].map(
         dc.get_property_values(df_species['species_dcid'], 'scientificName'))
@@ -85,16 +85,16 @@ def generate_dcid(df_species, org_name, df_microbes):
     Returns:
         df_microbes = microbes df with dcid addeed
     """
-    specie_count = ['0'] * len(df_microbes['organism'])
+    species_count = ['0'] * len(df_microbes['organism'])
     for i in range(len(org_name)):
         for j in df_species.index:
             if (org_name[i] == df_species.loc[j, "species_name"]):
                 org_name[i] = df_species.loc[j, "species_dcid"]
-                specie_count[i] = '1'
+                species_count[i] = '1'
 
     #map dcids and create new ones, in case they don't exist on dc
-    for j in range(len(specie_count)):
-        if specie_count[j] == '0':
+    for j in range(len(species_count)):
+        if species_count[j] == '0':
             p = org_name[j].split(' ')
             org_name[j] = "bio/" + (p[0][0].upper() + p[0][1].upper() +
                                     p[0][2].upper() + p[1][0].upper() +
@@ -110,9 +110,9 @@ def main():
     df_microbes = pd.read_csv(file_input, sep='\t')
 
     org_name = modify_org_name(df_microbes)
-    specie_dcids = org_name_query
+    species_dcids = org_name_query
 
-    df_species = scientific_name_query(specie_dcids)
+    df_species = scientific_name_query(species_dcids)
     df_microbes = generate_dcid(df_species, org_name, df_microbes)
 
     #format the columns declared as enums
