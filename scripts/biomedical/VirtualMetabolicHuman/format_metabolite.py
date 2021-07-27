@@ -2,10 +2,10 @@
 Author: Suhana Bedi
 Date: 07/10/2021
 Name: format_metabolite.py
-Description: Add dcids for all the metabolites in the VMH database. 
-Extract Chembl ids from kegg and chebi matches, and query datacommons 
+Description: Add dcids for all the metabolites in the VMH database.
+Extract Chembl ids from kegg and chebi matches, and query datacommons
 to check for pre-existing nodes for the same metabolite. In addition,
-extract hmdb ids from the Human Metabolome database and use it as a 
+extract hmdb ids from the Human Metabolome database and use it as a
 dcid when chembl is absent.
 @file_input: input .tsv from VMH with metabolite list, and .csv from hmdb
 @file_output: csv output file with addition chembl and dcid columns
@@ -18,6 +18,7 @@ import datacommons as dc
 from bioservices import UniChem
 import re
 
+
 def name_map(dfm, dfh):
     """
     Finds the rows with the same name in the HMDB
@@ -27,14 +28,15 @@ def name_map(dfm, dfh):
     Returns:
         VMH data with added HMDB ids
     """
-    dfm['fullName'] = dfm['fullName'].map(lambda x: re.sub(r'\W+', '', x)).str.lower()
+    dfm['fullName'] = dfm['fullName'].map(
+        lambda x: re.sub(r'\W+', '', x)).str.lower()
     dfh['name'] = dfh['name'].map(lambda x: re.sub(r'\W+', '', x)).str.lower()
     dfh['name'] = dfh['name'].str[2:]
     dfh['name'] = dfh['name'].str[:-1]
-    dfh.rename(columns = {'name':'fullName'}, inplace = True)
-    df = pd.merge(dfm, dfh, on = 'fullName', how = 'left')
+    dfh.rename(columns={'name': 'fullName'}, inplace=True)
+    df = pd.merge(dfm, dfh, on='fullName', how='left')
     df['hmdb'].fillna(df['accession'])
-    df = df.iloc[:,1:len(dfm.columns)]
+    df = df.iloc[:, 1:len(dfm.columns)]
     return df
 
 
@@ -47,11 +49,12 @@ def kegg_map(dfm, dfh):
     Returns:
         VMH data with added HMDB ids
     """
-    dfh.rename(columns = {'kegg':'keggId'}, inplace = True)
-    df = pd.merge(dfm, dfh, on = 'keggId', how = 'left')
+    dfh.rename(columns={'kegg': 'keggId'}, inplace=True)
+    df = pd.merge(dfm, dfh, on='keggId', how='left')
     df['hmdb'].fillna(df['accession'])
-    df = df.iloc[:,1:len(dfm.columns)]
+    df = df.iloc[:, 1:len(dfm.columns)]
     return df
+
 
 def chebi_map(dfm, dfh):
     """
@@ -62,17 +65,19 @@ def chebi_map(dfm, dfh):
     Returns:
         VMH data with added HMDB ids
     """
-    dfh.rename(columns = {'chebi_id':'cheBlId'}, inplace = True)
-    df = pd.merge(dfm, dfh, on = 'cheBlId', how = 'left')
+    dfh.rename(columns={'chebi_id': 'cheBlId'}, inplace=True)
+    df = pd.merge(dfm, dfh, on='cheBlId', how='left')
     df['hmdb'].fillna(df['accession'])
-    df = df.iloc[:,1:len(dfm.columns)]
+    df = df.iloc[:, 1:len(dfm.columns)]
     return df
+
 
 def isNaN(num):
     """
     Checks null values
     """
     return num != num
+
 
 def clean_result(result):
     """
@@ -90,6 +95,7 @@ def clean_result(result):
             dcid_inch.insert(ind_count, result[index][key])
             ind_count += 1
     return dcid_inch
+
 
 def add_query_result(df, col, dcid):
     """
@@ -111,6 +117,7 @@ def add_query_result(df, col, dcid):
                 j += 2
     return df
 
+
 def inchi_query(arr_inchi):
     """
     Queries dc using the python api, to find
@@ -128,9 +135,10 @@ def inchi_query(arr_inchi):
     ?drug inChIKey ?id .
     ?drug inChIKey {0} .
     }}
-    """.format(arr_inchi)   
+    """.format(arr_inchi)
     result = dc.query(query_str)
     return result
+
 
 def hmdb_query(arr_hmdb):
     """
@@ -141,7 +149,7 @@ def hmdb_query(arr_hmdb):
         arr_hmdb = array with hmdb ids to query
     Returns:
         result = result of dc query
-    """    
+    """
     query_str = """
     SELECT DISTINCT ?drug ?id
     WHERE {{
@@ -150,8 +158,9 @@ def hmdb_query(arr_hmdb):
     ?drug humanMetabolomeDatabaseID {0} .
     }}
     """.format(arr_hmdb)
-    result = dc.query(query_str)    
+    result = dc.query(query_str)
     return result
+
 
 def kegg_query(arr_kegg):
     """
@@ -174,6 +183,7 @@ def kegg_query(arr_kegg):
     result = dc.query(query_str)
     return result
 
+
 def chebi_query(arr_chebi):
     """
     Queries dc using the python api, to find
@@ -194,6 +204,7 @@ def chebi_query(arr_chebi):
     """.format(arr_chebi)
     result = dc.query(query_str)
     return result
+
 
 def drugbank_query(arr_drug):
     """
@@ -216,6 +227,7 @@ def drugbank_query(arr_drug):
     result = dc.query(query_str)
     return result
 
+
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
@@ -224,7 +236,7 @@ def main():
     df = pd.read_csv(file_input, sep='\t')
     dfh = pd.read_csv('hmdb.csv')
 
-    #inchikey matches with dc 
+    #inchikey matches with dc
     list_inchi = df[['inchiKey']].T.stack().tolist()
     list_inchi_1 = list_inchi[1:1000]
     list_inchi_2 = list_inchi[1000:2000]
@@ -232,7 +244,7 @@ def main():
     arr_inchi_1 = np.array(list_inchi_1)
     arr_inchi_2 = np.array(list_inchi_2)
     arr_inchi_3 = np.array(list_inchi_3)
-    arr_inchi_list = list(arr_inchi_1, arr_inchi_2,arr_inchi_3 )
+    arr_inchi_list = list(arr_inchi_1, arr_inchi_2, arr_inchi_3)
     for i in len(range(arr_inchi_list)):
         result = inchi_query(arr_inchi_list[i])
         dcid_inch = clean_result(result)
@@ -249,8 +261,8 @@ def main():
         result = hmdb_query(arr_hmdb_list[i])
         dcid_hmdb = clean_result(result)
         df = add_query_result(df, "hmdb", dcid_hmdb)
-  
-    #kegg matches with dc 
+
+    #kegg matches with dc
     list_kegg = df[['keggId']].T.stack().tolist()
     list_kegg_1 = list_kegg[0:1000]
     list_kegg_2 = list_kegg[1000:1266]
@@ -279,25 +291,25 @@ def main():
     #drug bank matches with dc
     list_drug = df[['drugbank']].T.stack().tolist()
     for i in range(len(list_drug)):
-        list_drug[i] = str(list_drug[i])     
+        list_drug[i] = str(list_drug[i])
     arr_drug = np.array(list_drug)
     result = drugbank_query(arr_drug)
     dcid = clean_result(result)
     df = add_query_result(df, "drugbank", dcid)
 
-    #Add chemblID column in the dataframe and add the corresponding chembl ids 
+    #Add chemblID column in the dataframe and add the corresponding chembl ids
     #for each entry
     uni = UniChem()
     mapping = uni.get_mapping("kegg_ligand", "chembl")
-    chembl_list = [0]*len(df['keggId'])
+    chembl_list = [0] * len(df['keggId'])
     df.insert(7, 'ChEMBL', chembl_list)
     for index, row in df.iterrows():
-        try: #chembl_list.insert(index, mapping[row['keggId']] )
+        try:  #chembl_list.insert(index, mapping[row['keggId']] )
             chembl_list[index] = mapping[row['keggId']]
         except:
             pass
     df['ChEMBL'] = chembl_list
-    df['ChEMBL'] = df['ChEMBL'].replace({'0':np.nan, 0:np.nan})
+    df['ChEMBL'] = df['ChEMBL'].replace({'0': np.nan, 0: np.nan})
     #Get hmdb IDs from the hmdb data
     df = name_map(df, dfh)
     df = kegg_map(df, dfh)
@@ -309,7 +321,7 @@ def main():
         elif ~(isNaN(df.loc[i, 'hmdb'])):
             df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'hmdb'])
         elif ~(isNaN(df.loc[i, 'metanetx'])):
-            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'metanetx'])    
+            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'metanetx'])
     # Add dcids based on IUPAC names if no previous matches
     for i in df.index:
         l = df.loc[i, 'fullName']
@@ -323,8 +335,9 @@ def main():
 
     # Add "CHEBI:" to all chebi ids
     df['cheBlId'] = "CHEBI:" + df['cheBlId'].astype(str)
-    
+
     df.to_csv(file_output, index=None)
+
 
 if __name__ == '__main__':
     main()

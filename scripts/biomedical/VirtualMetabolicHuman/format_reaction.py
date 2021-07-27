@@ -21,62 +21,68 @@ import re
 import pandas as pd
 import numpy as np
 
-# Convert string to list 
+
+# Convert string to list
 def Convert(string):
-    list1=[]
-    list1[:0]=string
+    list1 = []
+    list1[:0] = string
     return list1
 
-#This function is used for checking if the small string (metabolite abbreviation) is 
-#an exact match with a substring, of the larger string (reaction abbreviation), 
-#keeping the order in place and retaining the starts with condition 
+
+#This function is used for checking if the small string (metabolite abbreviation) is
+#an exact match with a substring, of the larger string (reaction abbreviation),
+#keeping the order in place and retaining the starts with condition
 def is_subset(list_long, list_short):
     short_length = len(list_short)
     subset_list = []
-    for i in range(len(list_long)-short_length+1):
-        subset_list.append(list_long[i:i+short_length])
+    for i in range(len(list_long) - short_length + 1):
+        subset_list.append(list_long[i:i + short_length])
     for j in range(len(subset_list)):
-        if(subset_list[j] == list_short):
+        if (subset_list[j] == list_short):
             return True
         else:
             return False
 
-#check nan           
+
+#check nan
 def isNaN(num):
     return num != num
 
+
 # Perform a match between metabolites and reactions using abbreviations for both
 def metabolite_rxn_match(df_rxn, df_metabolite):
-    list_match = ['0']*len(df_rxn['abbreviation'])
-    list_dcids = ['0']*len(df_rxn['abbreviation'])
+    list_match = ['0'] * len(df_rxn['abbreviation'])
+    list_dcids = ['0'] * len(df_rxn['abbreviation'])
     for p in range(len(df_rxn['abbreviation'])):
         for q in df_metabolite.index:
             test_list = Convert(df_rxn.loc[p, 'abbreviation'])
             for i in range(len(test_list)):
                 test_list[i] = test_list[i].lower()
             sub_list = Convert(df_metabolite.loc[q, "abbreviation"])
-            if(is_subset(test_list, sub_list)):
-                if(list_match[p] != '0'):
-                    if(len(list_match[p]) < len(sub_list)):
+            if (is_subset(test_list, sub_list)):
+                if (list_match[p] != '0'):
+                    if (len(list_match[p]) < len(sub_list)):
                         list_match[p] = sub_list
                         list_dcids[p] = df_metabolite.loc[q, "Id"]
                 else:
                     list_dcids[p] = sub_list
                     list_dcids[p] = df_metabolite.loc[q, "Id"]
     df_rxn['metaboliteMatch'] = list_dcids
-    return(df_rxn)
+    return (df_rxn)
+
 
 #Map the metanetx to humanGemIDs using human1D data
 def vhm_human1_match(df_map, df_rxn):
-    df_map_new = df_map[["id", "reactant_compartment", "product_compartment"]].copy()
+    df_map_new = df_map[["id", "reactant_compartment",
+                         "product_compartment"]].copy()
     l1 = df_map_new['id'].str[2:]
     df_map_new = df_map_new.drop('id', 1)
     df_map_new['humanGEMID'] = l1
     hgem_col = []
     for i in df_rxn["metanetx"].values:
         hgem_col.append(df_map[df_map["metanetx"] == i]["id"].values)
-    df_rxn.insert(value = hgem_col, column = "humanGEMID", loc = 0)
-    df_rxn = df_rxn.explode(column = "humanGEMID")
+    df_rxn.insert(value=hgem_col, column="humanGEMID", loc=0)
+    df_rxn = df_rxn.explode(column="humanGEMID")
     df_rxn["humanGEMID"] = np.where(pd.isnull(df_rxn['humanGEMID']),df_rxn['humanGEMID'] \
                                     ,df_rxn['humanGEMID'].str[2:])
     df_rxn["Id"] = np.where(pd.isnull(df_rxn['humanGEMID']),df_rxn['humanGEMID'] \
@@ -85,31 +91,31 @@ def vhm_human1_match(df_map, df_rxn):
     df = pd.merge(df_rxn, df_map_new, how="left", on='humanGEMID')
     return df
 
+
 #Add reactant and product compartment columns
 def reactant_product_comp(db_dup):
     matchdict = {
-    "e": "s",
-    "x": "p",
-    "i": "c_i",
-    "c": "c",
-    "s": "s",
-    "l": "l",
-    "r": "r",
-    "m": "m",
-    "g": "g",
-    "n": "n"
-        
+        "e": "s",
+        "x": "p",
+        "i": "c_i",
+        "c": "c",
+        "s": "s",
+        "l": "l",
+        "r": "r",
+        "m": "m",
+        "g": "g",
+        "n": "n"
     }
     chars_to_check = '='
     for i, row in db_dup.iterrows():
-        if any(c in chars_to_check for c in db_dup.loc[i,"formula"]):
-            p = db_dup.loc[i,"formula"]
+        if any(c in chars_to_check for c in db_dup.loc[i, "formula"]):
+            p = db_dup.loc[i, "formula"]
             m = re.findall(r"\[([A-Za-z0-9_]+)\]", row["formula"])
             reactants, products = p.split('<=>')
             num_r = len(reactants.split("+"))
             db_dup.loc[i, "r_comp"] = m[0]
-            db_dup.loc[i, "p_comp"] = m[0+num_r]
-            if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
+            db_dup.loc[i, "p_comp"] = m[0 + num_r]
+            if (db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
                 if m[0] in matchdict:
                     if((matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & \
                     (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"])) | \
@@ -124,8 +130,8 @@ def reactant_product_comp(db_dup):
             reactants, products = p.split('->')
             num_r = len(reactants.split("+"))
             db_dup.loc[i, "r_comp"] = m[0]
-            db_dup.loc[i, "p_comp"] = m[0+num_r]
-            if(db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
+            db_dup.loc[i, "p_comp"] = m[0 + num_r]
+            if (db_dup.loc[i, "humanGEMID"] == db_dup.loc[i, "humanGEMID"]):
                 if m[0] in matchdict:
                     if(matchdict.get(m[0]) == db_dup.loc[i, "reactant_compartment"]) & \
                     (matchdict.get(m[0+num_r]) == db_dup.loc[i, "product_compartment"]):
@@ -142,18 +148,18 @@ def reactant_product_comp(db_dup):
 
 
 def main():
-    
+
     file_input = sys.argv[1]
     file_output = sys.argv[2]
     file_gemid = sys.argv[3]
     file_metabolite = sys.argv[4]
 
-    df_rxn = pd.read_csv(file_input, sep = '\t')
+    df_rxn = pd.read_csv(file_input, sep='\t')
     df_map = pd.read_csv(file_gemid)
     df_metabolite = pd.read_csv(file_metabolite)
-    
+
     # Format the subsystem field
-    df_rxn["subsystem"]  = df_rxn["subsystem"].str.lower()
+    df_rxn["subsystem"] = df_rxn["subsystem"].str.lower()
     for i in df_rxn.index:
         l = df_rxn.loc[i, 'subsystem']
         l = l.replace(',', '')
@@ -176,7 +182,6 @@ def main():
         if dropped_df.loc[i, 'bool-val'] == 0:
             dropped_df.loc[i, 'humanGEMID'] = float("NaN")
             dropped_df.loc[i, 'Id'] = float("NaN")
-            
 
     # so all zeroes in the bool-val column have no match with human gem
     for i in dropped_df.index:
@@ -184,16 +189,16 @@ def main():
             dropped_df.loc[i, 'Id'] = "bio/" + dropped_df.loc[i, 'abbreviation']
 
     dict_comp_name = {
-    "e": "Extracellular",
-    "x": "Peroxisome",
-    "i": "InnerMitochondria",
-    "c": "Cytosol",
-    "s": "Extracellular",
-    "l": "Lysosome",
-    "r": "EndoplasmicReticulum",
-    "m": "Mitochondria",
-    "g": "GolgiApparatus",
-    "n": "Nucleus"
+        "e": "Extracellular",
+        "x": "Peroxisome",
+        "i": "InnerMitochondria",
+        "c": "Cytosol",
+        "s": "Extracellular",
+        "l": "Lysosome",
+        "r": "EndoplasmicReticulum",
+        "m": "Mitochondria",
+        "g": "GolgiApparatus",
+        "n": "Nucleus"
     }
 
     for i in dropped_df.index:
@@ -209,12 +214,12 @@ def main():
                     "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
                     dropped_df.loc[i, 'pcc'] = dropped_df.loc[i, 'metaboliteMatch'] + \
                     "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
-    
-    dropped_df.update('"' + df_rxn[['description', 'formula', 'ecnumber']].astype(str) + '"')
-    dropped_df.drop(columns = ['reactant_compartment', 'product_compartment'])
-    dropped_df.to_csv(file_output, index = None)
+
+    dropped_df.update(
+        '"' + df_rxn[['description', 'formula', 'ecnumber']].astype(str) + '"')
+    dropped_df.drop(columns=['reactant_compartment', 'product_compartment'])
+    dropped_df.to_csv(file_output, index=None)
 
 
 if __name__ == '__main__':
     main()
-
