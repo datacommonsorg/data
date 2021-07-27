@@ -7,16 +7,16 @@ import sys
 
 """Mapping of column names in file to StatVar names."""
 STATVAR_MAP = {
-    "DS_PM_pred": "MeanConcentrationAirPollutantPM2.5",
-    "DS_O3_pred": "MeanConcentrationAirPollutantOzone",
-    "PM25_max_pred": "MaxConcentrationAirPollutantPM2.5",
-    "PM25_med_pred": "MedianConcentrationAirPollutantPM2.5",
-    "PM25_mean_pred": "MeanConcentrationAirPollutantPM2.5",
-    "PM25_pop_pred": "PopulationWeightedConcentrationAirPollutantPM2.5",
-    "O3_max_pred": "MaxConcentrationAirPollutantOzone",
-    "O3_med_pred": "MedianConcentrationAirPollutantOzone",
-    "O3_mean_pred": "MeanConcentrationAirPollutantOzone",
-    "O3_pop_pred": "PopulationWeightedConcentrationAirPollutantOzone"
+    "DS_PM_pred": "Mean_Concentration_AirPollutant_PM2.5",
+    "DS_O3_pred": "Mean_Concentration_AirPollutant_Ozone",
+    "PM25_max_pred": "Max_Concentration_AirPollutant_PM2.5",
+    "PM25_med_pred": "Median_Concentration_AirPollutant_PM2.5",
+    "PM25_mean_pred": "Mean_Concentration_AirPollutant_PM2.5",
+    "PM25_pop_pred": "PopulationWeighted_Concentration_AirPollutant_PM2.5",
+    "O3_max_pred": "Max_Concentration_AirPollutant_Ozone",
+    "O3_med_pred": "Median_Concentration_AirPollutant_Ozone",
+    "O3_mean_pred": "Mean_Concentration_AirPollutant_Ozone",
+    "O3_pop_pred": "PopulationWeighted_Concentration_AirPollutant_Ozone"
 }
 
 """Mapping of month abbreviations to month numbers."""
