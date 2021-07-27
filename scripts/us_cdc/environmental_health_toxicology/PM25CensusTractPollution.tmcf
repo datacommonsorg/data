@@ -15,6 +15,6 @@ Node: E:PM25CTPollution->E4
 observationAbout: E:PM25CTPollution->E1
 typeOf: dcs:StatVarObservation
 observationDate: C:PM25CTPollution->date
-variableMeasured: dcs:MeanConcentrationAirPollutantPM2.5StandardError
+variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5_StandardError
 observationPeriod: P24H
 value: C:PM25CTPollution->Error
