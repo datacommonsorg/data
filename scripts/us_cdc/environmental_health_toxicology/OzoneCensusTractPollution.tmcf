@@ -15,6 +15,6 @@ Node: E:OzoneCTPollution->E4
 observationAbout: E:OzoneCTPollution->E1
 typeOf: dcs:StatVarObservation
 observationDate: C:OzoneCTPollution->date
-variableMeasured: dcs:MeanConcentrationAirPollutantOzoneStandardError
+variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone_StandardError
 observationPeriod: P8H
 value: C:OzoneCTPollution->Error
