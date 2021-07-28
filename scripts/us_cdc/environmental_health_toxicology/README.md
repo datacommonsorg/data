@@ -57,13 +57,13 @@ The dataset documentation is accessible on the [CDC National Evnvironment Public
 #### tMCFs
 [`OzoneCensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
 
-[`OzoneCountyPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneContryPollution.tmcf)
+[`OzoneCountyPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneCountyPollution.tmcf)
 
 [`PalmerDroughtSeverityIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PalmerDroughtSeverityIndex.tmcf)
 
 [`PM25CensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CensusTractPollution.tmcf)
 
-[`PM25CountyPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CountryPollution.tmcf)
+[`PM25CountyPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CountyPollution.tmcf)
 
 [`StandardizedPrecipitationEvapotranspirationIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationEvapotranspirationIndex.tmcf)
 
