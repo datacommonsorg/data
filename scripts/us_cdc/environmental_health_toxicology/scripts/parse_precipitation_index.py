@@ -6,6 +6,7 @@ Run "python3 parse_precipitation_index.py.
 import sys
 import pandas as pd
 
+
 def main():
     """Main function to generate the cleaned csv file."""
     file_path = sys.argv[1]
@@ -27,32 +28,33 @@ def clean_precipitation_data(file_path, output_file):
     data["date"] = data["year"].astype(str) + "-" + data["month"].astype(str)
     if "Evapotranspiration" in file_path:
         data.rename(columns={"spei":
-        "StandardizedPrecipitationEvapotranspirationIndex"},
-        inplace=True)
+                             "StandardizedPrecipitation"
+                             + "EvapotranspirationIndex"},
+                    inplace=True)
         data["fips"] = "0" + data["fips"].astype(str)
         data = pd.melt(data, id_vars=['state', 'county', 'fips', 'year',
-        'month', 'date'],
-        value_vars=["StandardizedPrecipitationEvapotranspirationIndex"],
-        var_name='StatisticalVariable', value_name='Value')
+                                      'month', 'date'],
+                       value_vars=["StandardizedPrecipitation"
+                                   + "EvapotranspirationIndex"],
+                       var_name='StatisticalVariable', value_name='Value')
         data["dcid"] = "geoId/" + data["fips"].astype(str)
     elif "Palmer" in file_path:
-        data.rename(columns={"pdsi":"PalmerDroughtSeverityIndex"}, inplace=True)
+        data.rename(columns={"pdsi": "PalmerDroughtSeverityIndex"},
+                    inplace=True)
         data["countyfips"] = "0" + data["countyfips"].astype(str)
         data = pd.melt(data, id_vars=['year', 'month', 'date', 'statefips',
-        'countyfips'],
-        value_vars=["PalmerDroughtSeverityIndex"],
-        var_name='StatisticalVariable',
-        value_name='Value')
+                                      'countyfips'],
+                       value_vars=["PalmerDroughtSeverityIndex"],
+                       var_name='StatisticalVariable', value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
     else:
-        data.rename(columns={"spi":"StandardizedPrecipitationIndex"},
-        inplace=True)
+        data.rename(columns={"spi": "StandardizedPrecipitationIndex"},
+                    inplace=True)
         data["countyfips"] = "0" + data["countyfips"].astype(str)
         data = pd.melt(data, id_vars=['year', 'month', 'date', 'statefips',
-        'countyfips'],
-        value_vars=["StandardizedPrecipitationIndex"],
-        var_name='StatisticalVariable',
-        value_name='Value')
+                                      'countyfips'],
+                       value_vars=["StandardizedPrecipitationIndex"],
+                       var_name='StatisticalVariable', value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
     data.to_csv(output_file)
     print("Finished cleaning file!")

@@ -36,6 +36,7 @@ MONTH_MAP = {
     "DEC": 12
 }
 
+
 def main():
     """Main function to generate the cleaned csv file."""
     file_path = sys.argv[1]
@@ -56,19 +57,21 @@ def clean_air_quality_data(file_path, output_file):
     if "Ozone" in file_path and "County" in file_path:
         data["Month"] = data["Month"].map(MONTH_MAP)
         data["date"] = pd.to_datetime(data[["Year", "Month", "Day"]],
-        yearfirst = True)
+                                      yearfirst=True)
     else:
-        data["date"] = pd.to_datetime(data["date"], yearfirst = True)
+        data["date"] = pd.to_datetime(data["date"], yearfirst=True)
     if "PM2.5" in file_path:
         census_tract = "DS_PM"
     elif "Ozone" in file_path:
         census_tract = "DS_O3"
     if "Census" in file_path:
-        data = pd.melt(data, id_vars=['year', 'date', 'statefips', 'countyfips',
-        'ctfips', 'latitude', 'longitude', census_tract + '_stdd'],
-        value_vars=[str(census_tract + '_pred')],
-            var_name='StatisticalVariable', value_name='Value')
-        data.rename(columns={census_tract + '_stdd':'Error'}, inplace=True)
+        data = pd.melt(data, id_vars=['year', 'date', 'statefips',
+                                      'countyfips', 'ctfips', 'latitude',
+                                      'longitude', census_tract + '_stdd'],
+                       value_vars=[str(census_tract + '_pred')],
+                       var_name='StatisticalVariable',
+                       value_name='Value')
+        data.rename(columns={census_tract + '_stdd': 'Error'}, inplace=True)
         data["dcid"] = "geoId/" + data["ctfips"].astype(str)
         data['StatisticalVariable'] = data['StatisticalVariable'].map(STATVARS)
     elif "County" in file_path and "PM" in file_path:
