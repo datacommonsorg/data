@@ -80,11 +80,11 @@ The dataset documentation is accessible on the [CDC National Evnvironment Public
 To clean the air quality data files, run:
 
 ```bash
-$python3 parse_air_quality.py input_file_name output_file_name
+$ python3 parse_air_quality.py input_file_name output_file_name
 ```
 
 To clean the precipitation index data files, run: 
 
 ```bash
-$python3 parse_precipitation_index.py input_file_name output_file_name
+$ python3 parse_precipitation_index.py input_file_name output_file_name
 ```
