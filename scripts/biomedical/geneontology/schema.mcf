@@ -5,8 +5,8 @@ subClassOf: dcs:BiomedicalElement
 description: "A Gene Ontology (GO) annotation is a statement about the function of a particular gene. GO annotations are created by associating a gene or gene product with a GO term. Together, these statements comprise a “snapshot” of current biological knowledge. Hence, GO annotations capture statements about how a gene functions at the molecular level, where in the cell it functions, and what biological processes (pathways, programs) it helps to carry out."
 descriptionUrl: "http://geneontology.org/docs/go-annotations/"
 
-Node: dcid: GeneOntologyAspectEnum
-name: "GeneOntologyAspectEnum"
+Node: dcid: GeneOntologyTypeEnum
+name: "GeneOntologyTypeEnum"
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 description: "An enumeration of the aspects of knowledge in the biological domain, as defined by the Gene Ontology (GO) Consortium, including P (biological process), F (molecular function) and C (cellular component)."
@@ -30,11 +30,11 @@ domainIncludes: dcs:GeneOntologyAnnotation
 rangeIncludes: schema:Text
 description: "The database from which annotated gene ontology entity has been taken."
 
-Node: dcid: geneOntologyAspect
-name: "geneOntologyAspect"
+Node: dcid: geneOntologyType
+name: "geneOntologyType"
 typeOf: schema:Property
 domainIncludes: dcs:GeneOntologyAnnotation
-rangeIncludes: dcs:GeneOntologyAspectEnum
+rangeIncludes: dcs:GeneOntologyTypeEnum
 description: "One of the three aspects used to describe knowledge in the biological domain, as defined by the Gene Ontology (GO): Molecular Function, Cellular Component, and Biological Process."
 descriptionUrl: "http://geneontology.org/docs/ontology-documentation/"
 
@@ -285,20 +285,20 @@ rangeIncludes: schema:Text
 description: "The identifier for an entry from the Protein Ontology (PRO). PRO provides an ontological representation of protein-related entities by explicitly defining them and showing the relationships between them."
 descriptionUrl: "https://proconsortium.org"
 
-Node: dcid:GeneOntologyAspectMolecularFunction
-typeOf: dcs:GeneOntologyAspectEnum
+Node: dcid:GeneOntologyTypeMolecularFunction
+typeOf: dcs:GeneOntologyTypeEnum
 name: "Molecular Function"
 description: "The identifier for gene product activities that occur at the molecular level. GO molecular function terms represent activities rather than the entities (molecules or complexes) that perform the actions, and do not specify where, when, or in what context the action takes place. Molecular functions generally correspond to activities that can be performed by individual gene products (i.e. a protein or RNA), but some activities are performed by molecular complexes composed of multiple gene products."
 descriptionURL: "http://wiki.geneontology.org/index.php/Molecular_Function"
 
-Node: dcid:GeneOntologyAspectBiologicalProcess
-typeOf: dcs:GeneOntologyAspectEnum
+Node: dcid:GeneOntologyTypeBiologicalProcess
+typeOf: dcs:GeneOntologyTypeEnum
 name: "Biological Process"
 description: "The larger processes, or ‘biological programs’ accomplished by multiple molecular activities."
 descriptionURL: "http://wiki.geneontology.org/index.php/Biological_Process"
 
-Node: dcid:GeneOntologyAspectCellularComponent
-typeOf: dcs:GeneOntologyAspectEnum
+Node: dcid:GeneOntologyTypeCellularComponent
+typeOf: dcs:GeneOntologyTypeEnum
 name: "Cellular Component"
 description: "The locations relative to cellular structures in which a gene product performs a function, either cellular compartments (e.g. mitochondrion), or stable macromolecular complexes of which they are parts (e.g. the ribosome)."
 descriptionURL: "http://wiki.geneontology.org/index.php/Cellular_Component"
