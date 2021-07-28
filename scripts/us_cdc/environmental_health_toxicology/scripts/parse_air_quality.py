@@ -7,7 +7,7 @@ import sys
 import pandas as pd
 
 # Mapping of column names in file to StatVar names.
-STATVAR_MAP = {
+STATVARS = {
     "DS_PM_pred": "Mean_Concentration_AirPollutant_PM2.5",
     "DS_O3_pred": "Mean_Concentration_AirPollutant_Ozone",
     "PM25_max_pred": "Max_Concentration_AirPollutant_PM2.5",
@@ -55,7 +55,8 @@ def clean_air_quality_data(file_path, output_file):
     data = pd.read_csv(file_path)
     if "Ozone" in file_path and "County" in file_path:
         data["Month"] = data["Month"].map(MONTH_MAP)
-        data["date"] = pd.to_datetime(data[["Year", "Month", "Day"]], yearfirst = True)
+        data["date"] = pd.to_datetime(data[["Year", "Month", "Day"]],
+        yearfirst = True)
     else:
         data["date"] = pd.to_datetime(data["date"], yearfirst = True)
     if "PM2.5" in file_path:
@@ -69,7 +70,7 @@ def clean_air_quality_data(file_path, output_file):
             var_name='StatisticalVariable', value_name='Value')
         data.rename(columns={census_tract + '_stdd':'Error'}, inplace=True)
         data["dcid"] = "geoId/" + data["ctfips"].astype(str)
-        data["StatisticalVariable"] = data["StatisticalVariable"].map(STATVAR_MAP)
+        data['StatisticalVariable'] = data['StatisticalVariable'].map(STATVARS)
     elif "County" in file_path and "PM" in file_path:
         data["countyfips"] = "1200" + data["countyfips"].astype(str)
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
