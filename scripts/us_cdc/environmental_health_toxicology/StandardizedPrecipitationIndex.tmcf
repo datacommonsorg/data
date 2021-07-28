@@ -4,4 +4,4 @@ typeOf: dcs:StatVarObservation
 observationDate: C:CountyStandardizedPrecipitationIndex->date
 value: C:CountyStandardizedPrecipitationIndex->Value
 observationPeriod: "P1M"
-variableMeasured: dcs:StandardizedPrecipitationIndex
+variableMeasured: dcs:StandardizedPrecipitationIndex_Atmosphere
