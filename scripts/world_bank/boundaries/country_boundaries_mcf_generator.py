@@ -20,21 +20,36 @@ https://geopandas.readthedocs.io/en/latest/docs/reference/api/geopandas.GeoSerie
 
     Typical usage:
     python3 country_boundaries_mcf_generator.py
-"""
-import io
-import os
-import zipfile
-import requests
-import geopandas as gpd
-import pandas as pd
-import numpy as np
-import json
-import datacommons as dc
-import tempfile
-import glob
 
-from absl import flags
+NOTE: this file generates temporary folders that are not deleted.
+"""
+import datacommons as dc
+import geopandas as gpd
+import glob
+import io
+import json
+import numpy as np
+import os
+import pandas as pd
+import requests
+import tempfile
+import zipfile
+
 from absl import app
+from absl import flags
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'download_dir', '',
+    'Dir to use source data from. Leave blank to download from source.')
+flags.DEFINE_string(
+    'export_dir', '',
+    'Dir to output geojson coordinate files too. If blank, a temp folder will be used.'
+)
+flags.DEFINE_string(
+    'mcf_dir', '',
+    'Dir to output generated MCF files too. If blank, a temp folder will be used.'
+)
 
 DOWNLOAD_URI = 'https://development-data-hub-s3-public.s3.amazonaws.com/ddhfiles/779551/wb_boundaries_geojson_highres.zip'
 TMP_PATH = '/tmp/wb_boundaries_geojson_highres'
@@ -56,14 +71,18 @@ MCF_FORMAT_STR = "\n".join([
 
 class CountryBoundariesMcfGenerator:
 
-    def __init__(self):
-        self.download_dir = FLAGS.download_dir
+    def __init__(self, download_dir, export_dir, mcf_dir):
+        self.download_dir = download_dir
         self.should_download = False
         if not self.download_dir:
             self.download_dir = tempfile.mkdtemp(prefix="wb_download_")
             self.should_download = True
-        self.export_dir = tempfile.mkdtemp(prefix="wb_export_")
-        self.mcf_dir = tempfile.mkdtemp(prefix="wb_mcf_")
+        self.export_dir = export_dir
+        if not export_dir:
+            self.export_dir = tempfile.mkdtemp(prefix="wb_export_")
+        self.mcf_dir = mcf_dir
+        if not mcf_dir:
+            self.mcf_dir = tempfile.mkdtemp(prefix="wb_mcf_")
 
     def load_data(self):
         """Download data from source, or use specified data from previous download.
@@ -171,7 +190,8 @@ class CountryBoundariesMcfGenerator:
 
 
 def main(_):
-    gen = CountryBoundariesMcfGenerator()
+    gen = CountryBoundariesMcfGenerator(FLAGS.download_dir, FLAGS.export_dir,
+                                        FLAGS.mcf_dir)
     all_countries = gen.load_data()
     col_to_code = gen.build_import_codes(all_countries)
     gen.extract_country_geojson(all_countries, col_to_code)
@@ -179,8 +199,4 @@ def main(_):
 
 
 if __name__ == '__main__':
-    FLAGS = flags.FLAGS
-    flags.DEFINE_string(
-        'download_dir', '',
-        'Dir to use source data from. Leave blank to download from source.')
     app.run(main)
