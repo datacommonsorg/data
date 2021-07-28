@@ -1,11 +1,12 @@
 '''
+Author: Padma Gundapaneni @padma-g
 This script will generate a cleaned CDC air quality data file.
 Run "python3 parse_air_quality.py.
 '''
-import pandas as pd
 import sys
+import pandas as pd
 
-"""Mapping of column names in file to StatVar names."""
+# Mapping of column names in file to StatVar names.
 STATVAR_MAP = {
     "DS_PM_pred": "Mean_Concentration_AirPollutant_PM2.5",
     "DS_O3_pred": "Mean_Concentration_AirPollutant_Ozone",
@@ -19,7 +20,7 @@ STATVAR_MAP = {
     "O3_pop_pred": "PopulationWeighted_Concentration_AirPollutant_Ozone"
 }
 
-"""Mapping of month abbreviations to month numbers."""
+# Mapping of month abbreviations to month numbers.
 MONTH_MAP = {
     "JAN": 1,
     "FEB": 2,
@@ -58,13 +59,15 @@ def clean_air_quality_data(file_path, output_file):
     else:
         data["date"] = pd.to_datetime(data["date"], yearfirst = True)
     if "PM2.5" in file_path:
-        ct = "DS_PM"
+        census_tract = "DS_PM"
     elif "Ozone" in file_path:
-        ct = "DS_O3"
+        census_tract = "DS_O3"
     if "Census" in file_path:
-        data = pd.melt(data, id_vars=['year', 'date', 'statefips', 'countyfips', 'ctfips', 'latitude', 'longitude', ct + '_stdd'], value_vars=[str(ct + '_pred')],
+        data = pd.melt(data, id_vars=['year', 'date', 'statefips', 'countyfips',
+        'ctfips', 'latitude', 'longitude', census_tract + '_stdd'],
+        value_vars=[str(census_tract + '_pred')],
             var_name='StatisticalVariable', value_name='Value')
-        data.rename(columns={ct + '_stdd':'Error'}, inplace=True)
+        data.rename(columns={census_tract + '_stdd':'Error'}, inplace=True)
         data["dcid"] = "geoId/" + data["ctfips"].astype(str)
         data["StatisticalVariable"] = data["StatisticalVariable"].map(STATVAR_MAP)
     elif "County" in file_path and "PM" in file_path:
