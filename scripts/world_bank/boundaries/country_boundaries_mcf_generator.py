@@ -54,13 +54,13 @@ flags.DEFINE_string(
 DOWNLOAD_URI = 'https://development-data-hub-s3-public.s3.amazonaws.com/ddhfiles/779551/wb_boundaries_geojson_highres.zip'
 TMP_PATH = '/tmp/wb_boundaries_geojson_highres'
 GEO_JSON_PATH = 'WB_Boundaries_GeoJSON_highres/WB_countries_Admin0.geojson'
+
+# Additional country codes to import from the ISO_A3 column in the dataset,
+# applied after importing countries from the preferred WB_A3 column.
 ISO_A3_CODES_TO_IMPORT = ['COD', 'ROU', 'TLS', 'AND', 'IMN', 'UMI', 'USA']
-EPS_LEVEL_MAP = {
-    0: 0,
-    0.01: 1,
-    0.03: 2,
-    0.05: 3
-}  # from scripts/us_census/geojsons_low_res/generate_mcf.py
+
+# Threshold to DP level map, from scripts/us_census/geojsons_low_res/generate_mcf.py
+EPS_LEVEL_MAP = {0: 0, 0.01: 1, 0.03: 2, 0.05: 3}
 
 MCF_PATH = '/{MCF_OUT_FOLDER}/countries.dp{dp_level}.mcfgeojson.mcf'
 MCF_FORMAT_STR = "\n".join([
@@ -70,6 +70,7 @@ MCF_FORMAT_STR = "\n".join([
 
 
 class CountryBoundariesMcfGenerator:
+    """Generates MCF files with simplified json for the WB boundaries dataset."""
 
     def __init__(self, download_dir, export_dir, mcf_dir):
         self.download_dir = download_dir
@@ -109,6 +110,7 @@ class CountryBoundariesMcfGenerator:
           {'WB_A3': ['FRA', 'NDL',...],
           'ISO_A3': ['UMI', 'COD', ...]}
         """
+        # Call DC API to get list of countries
         dc_all_countries = dc.query('''
         SELECT ?place ?name WHERE {
           ?place typeOf Country .
@@ -122,6 +124,7 @@ class CountryBoundariesMcfGenerator:
             matches = filter(lambda x: x['?place'] == dcid, dc_all_countries)
             return len(list(matches)) > 0
 
+        # Compare dataset countries with results from DC
         wb_idx = all_countries['WB_A3'].apply(is_dc_country)
 
         col_to_code = {}
