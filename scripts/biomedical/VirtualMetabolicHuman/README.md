@@ -59,53 +59,78 @@ This data is under a [Creative Commons CC0 license](https://creativecommons.org/
 
 - ## Examples
 
+To generate the formatted csv file from xml:
+
+```
+python hmdb_extract_csv.py
+```
+
 To generate the formatted metabolite file:
 
 ```
-python format_metabolite.py recon-store-metabolites-1.tsv metabolite.csv hmdb.xml
+python format_metabolite.py recon-store-metabolites-1.tsv metabolites_vmh.csv hmdb_metabolites.csv
 ```
 
 where
 
 - `format_metabolite.py` - python script
 - `recon-store-metabolites-1.tsv` - unformatted input tsv
-- `metabolite.csv` - formatted output csv
-- `hmdb.csv` - csv file from hmdb with metabolites
+- `metabolite_vmh.csv` - formatted output csv
+- `hmdb_metabolites.csv` - csv file from hmdb with metabolites
+
+To generate the compartment file from Human1 data
+
+```
+python human1_compartment.py metabolites.tsv reactantRoles.tsv productRoles.tsv reactions.tsv
+```
+
+where
+
+- `human1_compartment.py` - python script
+- `metabolites.tsv` - metabolites from human1
+- `reactantRoles.tsv` - reactant roles from human1
+- `productRoles.tsv` - product roles from human1
+- `reactions.tsv` - reactions from human1
 
 To generate the formatted reaction file:
 
 ```
-format_reaction.py recon-store-reactions-1.tsv chemical_reactions.csv reactions.tsv metabolite.csv
+python format_reaction.py recon-store-reactions-1.tsv reactions_vmh.csv human1_reaction_compartment.csv metabolites_vmh.csv
 ```
 
 where
 
 - `format_reaction.py` - python script
 - `recon-store-reactions-1.tsv` - unformatted reaction tsv from VHM
-- `chemical_reactions.csv` - formatted output csv
-- `reactions.tsv` - input tsv with reactions from human 1d
-- `metabolite.csv` - the output file obtained above
+- `human1_reaction_compartment.csv` - compartment information from the above step
+- `metabolites_vmh.csv` - the output file obtained above
 
 To generate the formatted reaction subsystem file:
 
 ```
-format_reaction_subsystem.py chemical_reactions.csv ubsystem.csv
+python format_reaction_subsystem.py reactions_vmh.csv reaction_subsystem_vmh.csv
 ```
 
 where
 
 - `format_reaction_subsystem.py` - python script
-- `chemical_reactions.csv` - output file obtained from above
-- `subsystem.tsv` - output subsystem file
+- `reactions_vmh.csv` - output file obtained from above
+- `reaction_subsystem_vmh.csv` - output subsystem file
 
 To generate the formatted microbes file:
 
 ```
-format_microbes.py recon-store-microbes-1.tsv microbe.csv
+python format_microbes.py recon-store-microbes-1.tsv microbes_vmh.csv
 ```
 
 where
 
 - `format_microbes.py` - python script
 - `recon-store-microbes-1.tsv` - input microbe tsv
-- `microbe.csv` - output formatted csv
+- `microbe_vmh.csv` - output formatted csv
+
+The User can also generate all the files by running a simple bash script
+
+```
+wrapper_script.sh
+```
