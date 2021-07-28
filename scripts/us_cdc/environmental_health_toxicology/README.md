@@ -43,16 +43,31 @@ None.
 The data is published by the CDC National Environmental Public Health Tracking Network.
 
 ### Dataset Documentation and Relevant Links
-The dataset documentation is accessible on the CDC National Evnvironment Public Health Tracking Network's website: https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm
+The dataset documentation is accessible on the [CDC National Evnvironment Public Health Tracking Network's website](https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm)
 
 ## About the Import
 
 ### Artifacts
 
 #### Scripts
-`parse_air_quality.py`
+[`parse_air_quality.py`](data/scripts/us_cdc/environmental_health_toxicology/)
 
-`parse_precipitation_index.py`
+[`parse_precipitation_index.py`](data/scripts/us_cdc/environmental_health_toxicology/)
+
+#### tMCFs
+[`OzoneCensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
+
+[`OzoneContryPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneContryPollution.tmcf)
+
+[`PalmerDroughtSeverityIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PalmerDroughtSeverityIndex.tmcf)
+
+[`PM25CensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CensusTractPollution.tmcf)
+
+[`PM25CountryPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CountryPollution.tmcf)
+
+[`StandardizedPrecipitationEvapotranspirationIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationEvapotranspirationIndex.tmcf)
+
+[`StandardizedPrecipitationIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationIndex.tmcf)
 
 ### Import Procedure
 
