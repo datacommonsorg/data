@@ -1,12 +1,7 @@
-
 Node: E:CountyStandardizedPrecipitationEvapotranspirationIndex->E1
-typeOf: dcs:County
-dcid: C:CountyStandardizedPrecipitationEvapotranspirationIndex->dcid
-
-Node: E:CountyStandardizedPrecipitationEvapotranspirationIndex->E2
-observationAbout: E:CountyStandardizedPrecipitationEvapotranspirationIndex->E1
+observationAbout: C:CountyStandardizedPrecipitationEvapotranspirationIndex->dcid
 typeOf: dcs:StatVarObservation
 observationDate: C:CountyStandardizedPrecipitationEvapotranspirationIndex->date
 value: C:CountyStandardizedPrecipitationEvapotranspirationIndex->Value
-observationPeriod: P1M
+observationPeriod: "P1M"
 variableMeasured: dcs:StandardizedPrecipitationEvapotranspirationIndex
