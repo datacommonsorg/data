@@ -19,6 +19,24 @@ from bioservices import UniChem
 import re
 
 
+def find_overlapped_id(df1, df2, df1_column, df2_column, id_return_column):
+    """find overlapped id between 2 columns from 2 dataframes
+    Args:
+        df1: pd.DataFrame 1
+        df2: pd.DataFrame 2
+        df1_column: name of column in df1 that needs to be matched
+        df2_column: name of column in df2 that needs to be matched
+        id_return_column: column used to return matched id
+    Returns:
+        panda.Series with matched ids
+    """
+    matched_id = df1[~df1[df1_column].isna()].merge(\
+    df2[~df2[df2_column].isna()], left_on=df1_column,\
+                                       right_on=df2_column)[id_return_column]
+    matched_id = matched_id.drop_duplicates()
+    return matched_id
+
+
 def name_map(dfm, dfh):
     """
     Finds the rows with the same name in the HMDB
@@ -33,11 +51,12 @@ def name_map(dfm, dfh):
     dfh['name'] = dfh['name'].map(lambda x: re.sub(r'\W+', '', x)).str.lower()
     dfh['name'] = dfh['name'].str[2:]
     dfh['name'] = dfh['name'].str[:-1]
-    dfh.rename(columns={'name': 'fullName'}, inplace=True)
-    df = pd.merge(dfm, dfh, on='fullName', how='left')
-    df['hmdb'].fillna(df['accession'])
-    df = df.iloc[:, 1:len(dfm.columns)]
-    return df
+    overlapped_name = find_overlapped_id(dfm, dfh, "fullName", "name",
+                                         "fullName")
+    name_hmdb_dict = dfh[dfh["name"].\
+    isin(overlapped_name)][["name","accession"]].set_index("name").to_dict()["accession"]
+    dfm["hmdb"] = dfm["hmdb"].fillna(dfm["fullName"].map(name_hmdb_dict))
+    return dfm
 
 
 def kegg_map(dfm, dfh):
@@ -49,11 +68,11 @@ def kegg_map(dfm, dfh):
     Returns:
         VMH data with added HMDB ids
     """
-    dfh.rename(columns={'kegg': 'keggId'}, inplace=True)
-    df = pd.merge(dfm, dfh, on='keggId', how='left')
-    df['hmdb'].fillna(df['accession'])
-    df = df.iloc[:, 1:len(dfm.columns)]
-    return df
+    overlapped_kegg = find_overlapped_id(dfm, dfh, "keggId", "kegg", "keggId")
+    kegg_hmdb_dict = dfh[dfh["kegg"].\
+    isin(overlapped_kegg)][["kegg","accession"]].set_index("kegg").to_dict()["accession"]
+    dfm["hmdb"] = dfm["hmdb"].fillna(dfm["keggId"].map(kegg_hmdb_dict))
+    return dfm
 
 
 def chebi_map(dfm, dfh):
@@ -65,11 +84,12 @@ def chebi_map(dfm, dfh):
     Returns:
         VMH data with added HMDB ids
     """
-    dfh.rename(columns={'chebi_id': 'cheBlId'}, inplace=True)
-    df = pd.merge(dfm, dfh, on='cheBlId', how='left')
-    df['hmdb'].fillna(df['accession'])
-    df = df.iloc[:, 1:len(dfm.columns)]
-    return df
+    overlapped_chebi = find_overlapped_id(dfm, dfh, "cheBlId", "chebi_id",
+                                          "cheBlId")
+    chebi_hmdb_dict = dfh[dfh["chebi_id"].\
+    isin(overlapped_chebi)][["chebi_id","accession"]].set_index("chebi_id").to_dict()["accession"]
+    dfm["hmdb"] = dfm["hmdb"].fillna(dfm["cheBlId"].map(chebi_hmdb_dict))
+    return dfm
 
 
 def isNaN(num):
@@ -118,13 +138,16 @@ def add_query_result(df, col, dcid):
     return df
 
 
-def inchi_query(arr_inchi):
+def property_query(property_name, arr_name):
     """
     Queries dc using the python api, to find
     if the elements of the input list, have a 
-    pre-existing matching inchikey on dc
+    pre-existing matching the user input
+    property on dc
     Args:
-        arr_inchi = array with inchikeys to query
+        arr_name = array with property values
+        to query
+        property = name of property value
     Returns:
         result = result of dc query
     """
@@ -132,98 +155,10 @@ def inchi_query(arr_inchi):
     SELECT DISTINCT ?drug ?id
     WHERE {{
     ?drug typeOf ChemicalCompound .
-    ?drug inChIKey ?id .
-    ?drug inChIKey {0} .
+    ?drug {property} ?id .
+    ?drug {property} {value} .
     }}
-    """.format(arr_inchi)
-    result = dc.query(query_str)
-    return result
-
-
-def hmdb_query(arr_hmdb):
-    """
-    Queries dc using the python api, to find
-    if the elements of the input list, have a 
-    pre-existing matching hmdb ids on dc
-    Args:
-        arr_hmdb = array with hmdb ids to query
-    Returns:
-        result = result of dc query
-    """
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug humanMetabolomeDatabaseID ?id .
-    ?drug humanMetabolomeDatabaseID {0} .
-    }}
-    """.format(arr_hmdb)
-    result = dc.query(query_str)
-    return result
-
-
-def kegg_query(arr_kegg):
-    """
-    Queries dc using the python api, to find
-    if the elements of the input list, have a 
-    pre-existing matching kegg ids on dc
-    Args:
-        arr_hmdb = array with kegg ids to query
-    Returns:
-        result = result of dc query
-    """
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug keggCompoundID ?id .
-    ?drug keggCompoundID {0} .
-    }}
-    """.format(arr_kegg)
-    result = dc.query(query_str)
-    return result
-
-
-def chebi_query(arr_chebi):
-    """
-    Queries dc using the python api, to find
-    if the elements of the input list, have a 
-    pre-existing matching chebi ids on dc
-    Args:
-        arr_hmdb = array with chebi ids to query
-    Returns:
-        result = result of dc query
-    """
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug chebiID ?id .
-    ?drug chebiID {0} .
-    }}
-    """.format(arr_chebi)
-    result = dc.query(query_str)
-    return result
-
-
-def drugbank_query(arr_drug):
-    """
-    Queries dc using the python api, to find
-    if the elements of the input list, have a 
-    pre-existing matching drugbank ids on dc
-    Args:
-        arr_hmdb = array with drugbank ids to query
-    Returns:
-        result = result of dc query
-    """
-    query_str = """
-    SELECT DISTINCT ?drug ?id
-    WHERE {{
-    ?drug typeOf ChemicalCompound .
-    ?drug drugBankMetaboliteID ?id .
-    ?drug drugBankMetaboliteID {0} .
-    }}
-    """.format(arr_drug)
+    """.format(property=property_name, value=arr_name)
     result = dc.query(query_str)
     return result
 
@@ -243,10 +178,34 @@ def shard(list_to_shard, shard_size):
     """
     sharded_list = []
     for i in range(0, len(list_to_shard), shard_size):
-        shard = list_to_shard[i, i + shard_size]
+        shard = list_to_shard[i:i + shard_size]
         arr = np.array(shard)
         sharded_list.append(arr)
     return sharded_list
+
+
+def add_property_matches(df, df_col_name, property_name):
+    """
+    Takes in the dataframe and property to be queried on data
+    commons and adds the dcids for the corresponding matches
+    to the original dataframe
+    Args:
+        df = name of original dataframe
+        df_col_name = column name of property to be queried
+        property_name = property to be queried
+    Returns:
+        df = modified dataframe
+    """
+    list_prop = df[[df_col_name]].T.stack().tolist()
+    if property_name == "chebiID":
+        for i in range(len(list_prop)):
+            list_prop[i] = "CHEBI:" + str(list_prop[i])
+    arr_prop = shard(list_prop, 1000)
+    for i in range(len(arr_prop)):
+        result = property_query(property_name, arr_prop[i])
+        dcid = clean_result(result)
+        df = add_query_result(df, df_col_name, dcid)
+    return df
 
 
 def main():
@@ -255,51 +214,18 @@ def main():
     file_hmdb = sys.argv[3]
 
     df = pd.read_csv(file_input, sep='\t')
-    dfh = pd.read_csv('hmdb.csv')
+    dfh = pd.read_csv(file_hmdb)
 
     #inchikey matches with dc
-    list_inchi = df[['inchiKey']].T.stack().tolist()
-    arr_inchi_list = shard(list_inchi, 1000)
-    for i in len(range(arr_inchi_list)):
-        result = inchi_query(arr_inchi_list[i])
-        dcid_inch = clean_result(result)
-        df = add_query_result(df, "inchiKey", dcid_inch)
-
+    df = add_property_matches(df, 'inchiKey', "inChIKey")
     #hmdb matches with dc
-    list_hmdb = df[['hmdb']].T.stack().tolist()
-    arr_hmdb_list = shard(list_hmdb, 1000)
-    for i in len(range(arr_hmdb_list)):
-        result = hmdb_query(arr_hmdb_list[i])
-        dcid_hmdb = clean_result(result)
-        df = add_query_result(df, "hmdb", dcid_hmdb)
-
+    df = add_property_matches(df, 'hmdb', "humanMetabolomeDatabaseID")
     #kegg matches with dc
-    list_kegg = df[['keggId']].T.stack().tolist()
-    arr_kegg_list = shard(list_kegg, 1000)
-    for i in len(range(arr_kegg_list)):
-        result = kegg_query(arr_kegg_list[i])
-        dcid_kegg = clean_result(result)
-        df = add_query_result(df, "keggId", dcid_kegg)
-
+    df = add_property_matches(df, 'keggId', "keggCompoundID")
     #chebi matches with dc
-    list_chebi = df[['cheBlId']].T.stack().tolist()
-    for i in range(len(list_chebi)):
-        list_chebi[i] = "CHEBI:" + str(list_chebi[i])
-    arr_chebi_list = shard(list_chebi, 1000)
-    for i in len(range(arr_chebi_list)):
-        result = chebi_query(arr_chebi_list[i])
-        dcid_chebi = clean_result(result)
-        df = add_query_result(df, "cheBlId", dcid_chebi)
-
+    df = add_property_matches(df, 'cheBlId', "chebiID")
     #drug bank matches with dc
-    list_drug = df[['drugbank']].T.stack().tolist()
-    for i in range(len(list_drug)):
-        list_drug[i] = str(list_drug[i])
-    arr_drug = np.array(list_drug)
-    result = drugbank_query(arr_drug)
-    dcid = clean_result(result)
-    df = add_query_result(df, "drugbank", dcid)
-
+    df = add_property_matches(df, 'drugbank', "drugBankMetaboliteID")
     #Add chemblID column in the dataframe and add the corresponding chembl ids
     #for each entry
     uni = UniChem()

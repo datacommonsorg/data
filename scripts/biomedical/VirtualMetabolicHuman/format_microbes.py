@@ -110,7 +110,7 @@ def main():
     df_microbes = pd.read_csv(file_input, sep='\t')
 
     org_name = modify_org_name(df_microbes)
-    species_dcids = org_name_query
+    species_dcids = org_name_query()
 
     df_species = scientific_name_query(species_dcids)
     df_microbes = generate_dcid(df_species, org_name, df_microbes)
