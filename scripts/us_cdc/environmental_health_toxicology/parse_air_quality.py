@@ -65,9 +65,11 @@ def clean_air_quality_data(file_path, output_file):
     elif "Ozone" in file_path:
         census_tract = "DS_O3"
     if "Census" in file_path:
-        data = pd.melt(data, id_vars=['year', 'date', 'statefips',
-                                      'countyfips', 'ctfips', 'latitude',
-                                      'longitude', census_tract + '_stdd'],
+        data = pd.melt(data,
+                       id_vars=[
+                           'year', 'date', 'statefips', 'countyfips', 'ctfips',
+                           'latitude', 'longitude', census_tract + '_stdd'
+                       ],
                        value_vars=[str(census_tract + '_pred')],
                        var_name='StatisticalVariable',
                        value_name='Value')
