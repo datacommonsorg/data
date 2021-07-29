@@ -264,7 +264,6 @@ def main():
 
     # Add "CHEBI:" to all chebi ids
     df['cheBlId'] = "CHEBI:" + df['cheBlId'].astype(str)
-
     df.to_csv(file_output, index=None)
 
 

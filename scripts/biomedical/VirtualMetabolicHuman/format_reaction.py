@@ -216,7 +216,8 @@ def main():
                     "_" + dict_comp_name.get(dropped_df.loc[i, 'r_comp'])
 
     dropped_df.update(
-        '"' + dropped_df[['description', 'formula', 'ecnumber']].astype(str) + '"')
+        '"' + dropped_df[['description', 'formula', 'ecnumber']].astype(str) +
+        '"')
     dropped_df.drop(columns=['reactant_compartment', 'product_compartment'])
     dropped_df.to_csv(file_output, index=None)
 
