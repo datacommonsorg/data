@@ -4,6 +4,7 @@ from xml.etree import ElementTree
 import sys
 import pandas as pd
 
+
 def get_protein_attribute(protein_element):
     """Get accession and gGO information
     from protein element in xml file"""
@@ -13,7 +14,8 @@ def get_protein_attribute(protein_element):
     }
     protein_accession = protein_element.find(\
                             attribute_dict["accession"]).text
-    go_classification = protein_element.find(attribute_dict["go_classification"])
+    go_classification = protein_element.find(
+        attribute_dict["go_classification"])
     go_classes = list(go_classification)
     parsed_go_classes = []
     for go_class in go_classes:
@@ -22,6 +24,7 @@ def get_protein_attribute(protein_element):
     df_go = pd.DataFrame(parsed_go_classes)
     df_go["accession"] = protein_accession
     return df_go
+
 
 def get_go_attribute(go_class):
     """Get GO category, description, and id
@@ -32,6 +35,7 @@ def get_go_attribute(go_class):
         "go_description": go_class[1].text,
         "go_id": go_class[2].text
     }
+
 
 def main():
     """Main function"""
@@ -48,6 +52,6 @@ def main():
     df_go = pd.concat(df_go_list)
     df_go.to_csv("hmdb_go.csv", index=False)
 
+
 if __name__ == "__main__":
     main()
-    
