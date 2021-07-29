@@ -50,9 +50,9 @@ The dataset documentation is accessible on the [CDC National Evnvironment Public
 ### Artifacts
 
 #### Scripts
-[`parse_air_quality.py`](data/scripts/us_cdc/environmental_health_toxicology/)
+[`parse_air_quality.py`](data/scripts/us_cdc/environmental_health_toxicology/scripts/parse_air_quality.py)
 
-[`parse_precipitation_index.py`](data/scripts/us_cdc/environmental_health_toxicology/)
+[`parse_precipitation_index.py`](data/scripts/us_cdc/environmental_health_toxicology/scripts/parse_precipitation_index.py)
 
 #### tMCFs
 [`OzoneCensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
