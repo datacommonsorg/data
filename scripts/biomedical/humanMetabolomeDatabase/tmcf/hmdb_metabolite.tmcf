@@ -22,9 +22,9 @@ biggID: C:Metabolites->bigg
 metlinID: C:Metabolites->metlin_id
 proteinDataBankID: C:Metabolites->pdb_id
 drugLogP: C:Metabolites->logpexp
-ChemicalCompoundCategoryEnum: C:Metabolites->kingdom
-ChemicalCompoundParentEnum: C:Metabolites->direct_parent
-ChemicalCompoundSuperClassEnum: C:Metabolites->super_class
-ChemicalCompoundClassEnum: C:Metabolites->class
-ChemicalCompoundSubClassEnum: C:Metabolites->sub_class
-ChemicalCompoundMolecularFrameworkEnum: C:Metabolites->molecular_framework
+chemicalCompoundCategory: C:Metabolites->kingdom
+chemicalCompoundParent: C:Metabolites->direct_parent
+chemicalCompoundSuperClass: C:Metabolites->super_class
+chemicalCompoundClass: C:Metabolites->class
+chemicalCompoundSubClass: C:Metabolites->sub_class
+chemicalCompoundMolecularFramework: C:Metabolites->molecular_framework
