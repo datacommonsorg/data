@@ -1,7 +1,28 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 '''
-This script will generate a cleaned gene ontology annotation file
+Author: Padma Gundapaneni @padma-g
+Date: 7/28/21
+Description: This script will generate a cleaned gene ontology annotation file
 with optionally-mapped UniProt items from a .gaf file.
-Run "python3 parse_goa_file.py.
+@input_file         filepath to the original gaf file with gene annotations
+@species            species of gene annotations contained in original gaf file
+@output_file        filepath to the csv to which the cleaned file is written
+@protein_pairings   OPTIONAL - filepath to tab-separated file with
+                    gene-to-UniProt mappings (obtained from
+                    www.uniprot.org/uploadlists)
+python3 parse_goa_file.py input_file species output_file protein_pairings
 '''
 
 from collections import defaultdict
@@ -18,7 +39,8 @@ ASPECT_MAP = {
     "C": "dcs:GeneOntologyTypeCellularComponent",
     "P": "dcs:GeneOntologyTypeBiologicalProcess"
 }
-"""Mapping of evidence codes in file to evidence code enum."""
+
+# Mapping of evidence codes in file to evidence code enum.
 EVIDENCE_MAP = {
     "IEA":
         "dcs:GeneOntologyEvidenceInferredFromElectronicAnnotation",
@@ -65,7 +87,8 @@ EVIDENCE_MAP = {
     "IBA":
         "dcs:GeneOntologyEvidenceInferredFromBiologicalAspectOfAncestor"
 }
-"""Mapping of qualifier values in file to qualifier enum."""
+
+# Mapping of qualifier values in file to qualifier enum.
 QUALIFIER_MAP = {
     "enables":
         "dcs:GeneOntologyQualifierEnables",
