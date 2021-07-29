@@ -139,7 +139,7 @@ def hmdbextract(name, file):
 
 def main():
     file_input = sys.argv[1]
-    hmdbextract(file_input, 'hmdb_proteins.csv')
+    hmdbextract(file_input, 'hmdb_p.csv')
 
 
 if __name__ == '__main__':
