@@ -42,6 +42,13 @@ The WikiData dataset has the following columns
 #### Template MCFs
 - [LocalGovernmentDirectory_Districts.tmcf](LocalGovernmentDirectory_Districts.tmcf).
 
+
+#### Reconciliation
+1. The states are resolved using lgdCode, which is expected to be added to the KG first. All states are expected to resolve.
+2. The districts are expected to be resolved using the wikidataId (because indianCensusAreaCode20* coverage for districts is poor).
+3. New districts might be created.
+
+
 #### Scripts
 - [preprocess.py](preprocess.py): Clean up and import script.
 
@@ -58,3 +65,4 @@ To import data, run the following command:
 ```bash
 python -m india_lgd.local_government_directory_districts.preprocess
 ```
+

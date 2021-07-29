@@ -3,7 +3,7 @@ typeOf: dcs:Place
 lgdCode: C:LocalGovernmentDirectory_Districts->LGDStateCode
 
 Node: E:LocalGovernmentDirectory_Districts->E1
-typeOf: dcs:Place
+typeOf: dcs:AdministrativeArea2
 wikiDataId: C:LocalGovernmentDirectory_Districts->WikiDataId
 name: C:LocalGovernmentDirectory_Districts->LGDDistrictNameTitleCase
 lgdCode: C:LocalGovernmentDirectory_Districts->LGDDistrictCode

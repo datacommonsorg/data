@@ -17,7 +17,10 @@ import csv
 import difflib
 import pandas as pd
 
-manual_override = {
+# Some of the names don't match correctly while using
+# difflib library. This is used to force the match manually.
+
+MANUAL_OVERRIDE = {
     "delhi": {
         "south east": "south east delhi"
     },
@@ -111,8 +114,8 @@ class LocalGovermentDirectoryDistrictsDataLoader:
                 return wikidata_df_row.iloc[0]["districtLabel"]
 
         # Let's see if there are any manual overrides or corrections
-        alternative_wikidata_districts = manual_override[
-            lgdStateName] if lgdStateName in manual_override else {}
+        alternative_wikidata_districts = MANUAL_OVERRIDE[
+            lgdStateName] if lgdStateName in MANUAL_OVERRIDE else {}
         if lgdDistrictName in alternative_wikidata_districts:
             return alternative_wikidata_districts[lgdDistrictName]
 
