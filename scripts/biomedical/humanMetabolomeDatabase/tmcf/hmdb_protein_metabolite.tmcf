@@ -1,0 +1,8 @@
+Node: E:hmdb_protein_metabolite->E1
+typeOf: dcs:Protein
+dcid: C:hmdb_protein_metabolite->protein_dcid
+
+Node: E:hmdb_protein_metabolite->E2
+typeOf: dcs:Metabolite
+dcid: C:hmdb_protein_metabolite->associated_metabolite
+associatedProtein: E:hmdb_protein_metabolite->E1
