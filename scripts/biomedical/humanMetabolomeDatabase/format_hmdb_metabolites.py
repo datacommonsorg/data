@@ -11,6 +11,7 @@ in the data commons schema.
 import sys
 import pandas as pd
 
+
 def main():
 
     file_input = sys.argv[1]
@@ -22,12 +23,13 @@ def main():
 
     # Add enum keywords
     enum_dict = {
-        'kingdom':'dcs:ChemicalCompoundCategory',
-        'direct_parent':'dcs:ChemicalCompoundParent', 
-        'super_class':'dcs:ChemicalCompoundSuperClass',
-        'class':'dcs:ChemicalCompoundClass',
-        'sub_class':'dcs:ChemicalCompoundSubClass',
-        'molecular_framework':'dcs:ChemicalCompoundMolecularFramework'}
+        'kingdom': 'dcs:ChemicalCompoundCategory',
+        'direct_parent': 'dcs:ChemicalCompoundParent',
+        'super_class': 'dcs:ChemicalCompoundSuperClass',
+        'class': 'dcs:ChemicalCompoundClass',
+        'sub_class': 'dcs:ChemicalCompoundSubClass',
+        'molecular_framework': 'dcs:ChemicalCompoundMolecularFramework'
+    }
 
     for i in enum_dict:
         df[i] = df[i].str.lower()
@@ -37,6 +39,7 @@ def main():
         df[i] = df[i].str.replace(nan_remove, '')
 
     df.to_csv(file_output)
+
 
 if __name__ == "__main__":
     main()
