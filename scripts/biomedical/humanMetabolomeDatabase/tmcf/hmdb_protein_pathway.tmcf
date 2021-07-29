@@ -1,8 +1,4 @@
 Node: E:hmdb_protein_pathway->E1
-typeOf: dcs:KeggProteinPathwayEnum
-dcid: C:hmdb_protein_pathway->protein_pathway
-
-Node: E:hmdb_protein_pathway->E2
 typeOf: dcs:Protein
 dcid: C:hmdb_protein_pathway->protein_dcid
-keggProteinPathway: E:hmdb_protein_pathway->E1
+keggProteinPathway: C:hmdb_protein_pathway->protein_pathway
