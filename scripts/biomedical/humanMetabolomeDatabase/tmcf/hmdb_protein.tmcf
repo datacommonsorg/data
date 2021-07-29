@@ -1,4 +1,4 @@
-Node: E:hmdb_proteinrotein->E1
+Node: E:hmdb_protein->E1
 typeOf: dcs:Gene
 dcid: C:hmdb_protein->gene19_dcid
 uniProtID: C:hmdb_protein->uniprot_id
