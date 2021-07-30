@@ -15,7 +15,7 @@
 Author: Padma Gundapaneni @padma-g
 Date: 7/28/21
 Description: This script cleans up a csv file on census tract or county level
-air quality (ozone or 2.5 PM) data downloaded form the CDC.
+air quality (ozone or 2.5 PM) data downloaded from the CDC.
 URL: https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology
 @input_file   filepath to the original csv that needs to be cleaned
 @output_file  filepath to the csv to which the cleaned data is written
