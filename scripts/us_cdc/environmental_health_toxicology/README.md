@@ -59,6 +59,15 @@ The dataset documentation is accessible on the [CDC National Environment Public 
 
 [`parse_precipitation_index_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_precipitation_index_test.py)
 
+#### Test Files
+[`small_Ozone_County.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/small_Ozone_County.csv)
+
+[`small_Ozone_County_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/small_Ozone_County_expected.csv)
+
+[`small_Palmer.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/small_Palmer.csv)
+
+[`small_Palmer_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/small_Palmer_expected.csv)
+
 #### tMCFs
 [`OzoneCensusTractPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
 
@@ -76,6 +85,28 @@ The dataset documentation is accessible on the [CDC National Environment Public 
 
 ### Import Procedure
 
+#### Testing
+
+##### Test Air Quality Data Cleaning Script
+
+To test the air quality data cleaning script, run:
+
+```bash
+$ python3 parse_air_quality_test.py
+```
+
+The expected output of this test can be found in [`small_Ozone_County_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/small_Ozone_County_expected.csv).
+
+##### Test Precipitation Index Data Cleaning Script
+
+To test the precipitation index data cleaning script, run:
+
+```bash
+$ python3 parse_precipitation_index_test.py
+```
+
+The expected output of this test can be found in [`small_Palmer_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/small_Palmer_expected.csv).
+
 #### Processing Steps
 
 `@input_file_name` - path to the input csv file to be cleaned
@@ -92,16 +123,4 @@ To clean the precipitation index data files, run:
 
 ```bash
 $ python3 parse_precipitation_index.py input_file_name output_file_name
-```
-
-To test the air quality data cleaning script, run:
-
-```bash
-$ python3 parse_air_quality_test.py
-```
-
-To test the precipitation index data cleaning script, run:
-
-```bash
-$ python3 parse_precipitation_index_test.py
 ```
