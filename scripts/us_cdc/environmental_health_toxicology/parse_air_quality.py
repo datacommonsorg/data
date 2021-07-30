@@ -1,8 +1,27 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 '''
 Author: Padma Gundapaneni @padma-g
-This script will generate a cleaned CDC air quality data file.
-Run "python3 parse_air_quality.py.
+Date: 7/28/21
+Description: This script cleans up a csv file on census tract or county level
+air quality (ozone or 2.5 PM) data downloaded form the CDC.
+URL: https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology
+@input_file   filepath to the original csv that needs to be cleaned
+@output_file  filepath to the csv to which the cleaned data is written
+python3 parse_air_quality.py input_file output_file
 '''
+
 import sys
 import pandas as pd
 
