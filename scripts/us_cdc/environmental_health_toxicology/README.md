@@ -43,7 +43,7 @@ None.
 The data is published by the CDC National Environmental Public Health Tracking Network.
 
 ### Dataset Documentation and Relevant Links
-The dataset documentation is accessible on the [CDC National Evnvironment Public Health Tracking Network's website](https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm)
+The dataset documentation is accessible on the [CDC National Environment Public Health Tracking Network's website](https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm)
 
 ## About the Import
 
@@ -53,6 +53,11 @@ The dataset documentation is accessible on the [CDC National Evnvironment Public
 [`parse_air_quality.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_air_quality.py)
 
 [`parse_precipitation_index.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_precipitation_index.py)
+
+#### Test Scripts
+[`parse_air_quality_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_air_quality_test.py)
+
+[`parse_precipitation_index_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_precipitation_index_test.py)
 
 #### tMCFs
 [`OzoneCensusTractPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
@@ -87,4 +92,16 @@ To clean the precipitation index data files, run:
 
 ```bash
 $ python3 parse_precipitation_index.py input_file_name output_file_name
+```
+
+To test the air quality data cleaning script, run:
+
+```bash
+$ python3 parse_air_quality_test.py
+```
+
+To test the precipitation index data cleaning script, run:
+
+```bash
+$ python3 parse_precipitation_index_test.py
 ```
