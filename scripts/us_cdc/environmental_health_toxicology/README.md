@@ -50,24 +50,24 @@ The dataset documentation is accessible on the [CDC National Evnvironment Public
 ### Artifacts
 
 #### Scripts
-[`parse_air_quality.py`](data/scripts/us_cdc/environmental_health_toxicology/)
+[`parse_air_quality.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_air_quality.py)
 
-[`parse_precipitation_index.py`](data/scripts/us_cdc/environmental_health_toxicology/)
+[`parse_precipitation_index.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_precipitation_index.py)
 
 #### tMCFs
-[`OzoneCensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
+[`OzoneCensusTractPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
 
-[`OzoneCountyPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneCountyPollution.tmcf)
+[`OzoneCountyPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/OzoneCountyPollution.tmcf)
 
-[`PalmerDroughtSeverityIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PalmerDroughtSeverityIndex.tmcf)
+[`PalmerDroughtSeverityIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PalmerDroughtSeverityIndex.tmcf)
 
-[`PM25CensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CensusTractPollution.tmcf)
+[`PM25CensusTractPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PM25CensusTractPollution.tmcf)
 
-[`PM25CountyPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CountyPollution.tmcf)
+[`PM25CountyPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PM25CountyPollution.tmcf)
 
-[`StandardizedPrecipitationEvapotranspirationIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationEvapotranspirationIndex.tmcf)
+[`StandardizedPrecipitationEvapotranspirationIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationEvapotranspirationIndex.tmcf)
 
-[`StandardizedPrecipitationIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationIndex.tmcf)
+[`StandardizedPrecipitationIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationIndex.tmcf)
 
 ### Import Procedure
 
