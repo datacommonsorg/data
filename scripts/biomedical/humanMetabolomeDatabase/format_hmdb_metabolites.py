@@ -34,10 +34,15 @@ def main():
     for i in enum_dict:
         df[i] = df[i].str.lower()
         df[i] = df[i].str.replace(' ', '_')
+        df[i] = df[i].str.replace(',', '')
         df[i] = enum_dict.get(i) + df[i].astype(str)
         nan_remove = enum_dict.get(i) + 'nan'
         df[i] = df[i].str.replace(nan_remove, '')
 
+    df.update(
+        '"' +
+        df[['iupac_name', 'name', 'chebi_id', 'drugbank', 'smiles', 'chembl'
+           ]].astype(str) + '"')
     df.to_csv(file_output)
 
 

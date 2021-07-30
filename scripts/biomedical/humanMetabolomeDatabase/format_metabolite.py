@@ -264,8 +264,7 @@ def main():
 
     # Add "CHEBI:" to all chebi ids
     df['cheBlId'] = "CHEBI:" + df['cheBlId'].astype(str)
-    df.update('"' + df[['description', 'formula', 'ecnumber']].astype(str) +
-              '"')
+    df['cheBlId'] = df['cheBlId'].str.replace('CHEBI:nan', '')
     df.to_csv(file_output, index=None)
 
 

@@ -36,6 +36,7 @@ def format_df_virtual(df_virtual):
     # remove all special characters in fullName column and lower case.
     df_virtual["fullName"] = df_virtual["fullName"].map(\
         lambda x: re.sub('[^A-Za-z0-9]+', '', x)).str.lower()
+    df_virtual["cheBlId"] = df_virtual["cheBlId"].str[6:].astype(float)
     return df_virtual
 
 

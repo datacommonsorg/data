@@ -470,6 +470,11 @@ def main():
     df_hmdb_p["protein_type"] = df_hmdb_p["protein_type"].map(PROTEIN_TYPE_DICT)
     # drop unnecessary columns
     df_hmdb_p = df_hmdb_p.drop(["gene_name", "gene_loc"], axis=1)
+    df_hmdb_p["specific_function"] = df_hmdb_p["specific_function"].str.replace(
+        "\n", "")
+    df_hmdb_p.update('"' + df_hmdb_p[
+        ['specific_function', 'general_function', "genecard_id"]].astype(str) +
+                     '"')
     df_hmdb_p.to_csv("hmdb_protein.csv")
 
 

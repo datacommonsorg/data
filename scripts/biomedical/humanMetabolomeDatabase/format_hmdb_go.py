@@ -54,6 +54,8 @@ def main():
     df_go["go_id"] = df_go["go_id"].fillna(df_go["go_description"]\
                                     .map(description_id_dict))
     df_go["go_dcid"] = "bio/" + df_go["go_id"].str.replace(":", "_")
+
+    df_go.update('"' + df_go[['go_id']].astype(str) + '"')
     df_go.to_csv("hmdb_go.csv", index=None)
 
 

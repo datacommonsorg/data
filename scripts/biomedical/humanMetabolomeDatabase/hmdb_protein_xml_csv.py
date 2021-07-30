@@ -14,10 +14,9 @@ def hmdbextract(name, file):
     csvfile = open(file, 'w')
     fieldnames = [
         'accession', 'protein_type', 'gene_name', 'general_function',
-        'specific_function', 'go_category', 'go_id', 'go_description',
-        'subcellular_location', 'gene_loc', 'residue_number',
-        'genbank_protein_id', 'uniprot_id', 'genbank_gene_id', 'genecard_id',
-        'hgnc_id'
+        'specific_function', 'subcellular_location', 'gene_loc',
+        'residue_number', 'genbank_protein_id', 'uniprot_id', 'genbank_gene_id',
+        'genecard_id', 'hgnc_id'
     ]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
@@ -42,24 +41,6 @@ def hmdbextract(name, file):
                                            namespaces=ns)[0]
         except:
             specific_function = 'NA'
-        try:
-            go_category = elem.xpath(
-                'hmdb:go_classifications/hmdb:go_class/hmdb:category/text()',
-                namespaces=ns)[0]
-        except:
-            go_category = 'NA'
-        try:
-            go_description = elem.xpath(
-                'hmdb:go_classifications/hmdb:go_class/hmdb:description/text()',
-                namespaces=ns)[0]
-        except:
-            go_description = 'NA'
-        try:
-            go_id = elem.xpath(
-                'hmdb:go_classifications/hmdb:go_class/hmdb:go_id/text()',
-                namespaces=ns)[0]
-        except:
-            go_id = 'NA'
         try:
             subcellular_location = elem.xpath(
                 'hmdb:subcellular_locations/hmdb:subcellular_location/text()',
@@ -103,10 +84,9 @@ def hmdbextract(name, file):
             hgnc_id = 'NA'
             fieldnames = [
                 'accession', 'protein_type', 'gene_name', 'general_function',
-                'specific_function', 'go_category', 'go_id', 'go_description',
-                'subcellular_location', 'gene_loc', 'residue_number',
-                'genbank_protein_id', 'uniprot_id', 'genbank_gene_id',
-                'genecard_id', 'hgnc_id'
+                'specific_function', 'subcellular_location', 'gene_loc',
+                'residue_number', 'genbank_protein_id', 'uniprot_id',
+                'genbank_gene_id', 'genecard_id', 'hgnc_id'
             ]
 
         writer.writerow({
@@ -115,9 +95,6 @@ def hmdbextract(name, file):
             'gene_name': gene_name,
             'general_function': general_function,
             'specific_function': specific_function,
-            'go_category': go_category,
-            'go_id': go_id,
-            'go_description': go_description,
             'subcellular_location': subcellular_location,
             'gene_loc': gene_loc,
             'residue_number': residue_number,
