@@ -101,7 +101,7 @@ def clean_air_quality_data(file_path, output_file):
     elif "County" in file_path and "Ozone" in file_path:
         data["countyfips"] = "1200" + data["countyfips"].astype(str)
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
-    data.to_csv(output_file)
+    data.to_csv(output_file, index=False)
     print("Finished cleaning file!")
 
 
