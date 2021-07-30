@@ -8,7 +8,7 @@ python format_metabolite.py recon-store-metabolites-1.tsv metabolites_vmh.csv hm
 python hmdb_metabolite_add_chembl.py metabolites.tsv metabolites_vmh.csv hmdb_metabolites.csv
 # Format hmdb metabolite data
 python format_hmdb_metabolites.py CHEMBL_HMDB_map.csv hmdb_metabolites_final.csv
-#Convert hmdb metabolites xml to csv
+#Convert hmdb proteins xml to csv
 python hmdb_protein_xml_csv.py hmdb_proteins.xml
 #Format hmdb protein file -> Output: hmdb_protein.csv
 python format_hmdb_protein.py hmdb_p.csv
