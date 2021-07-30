@@ -50,9 +50,9 @@ The dataset documentation is accessible on the [CDC National Environment Public 
 ### Artifacts
 
 #### Scripts
-[`parse_air_quality.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_air_quality.py)
+[`parse_air_quality.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py)
 
-[`parse_precipitation_index.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_precipitation_index.py)
+[`parse_precipitation_index.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_precipitation_index.py)
 
 #### Test Scripts
 [`parse_air_quality_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/scripts/parse_air_quality_test.py)
