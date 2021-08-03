@@ -1,0 +1,24 @@
+Node: E:DiseaseOntology->E1
+typeOf: dcs:Disease
+dcid: C:DiseaseOntology->dcid
+parent: C:DiseaseOntology->subClassOf
+diseaseDescription: C:DiseaseOntology->description 
+alternativeDOIDs : C:DiseaseOntology->hasAlternativeId 
+diseaseSynonym: C:DiseaseOntology->hasExactSynonym
+commonName: C:DiseaseOntology->label
+icdoID: C:DiseaseOntology->ICDO
+meshID: C:DiseaseOntology->MESH
+nciID: C:DiseaseOntology->NCI
+snowmedctusID: C:DiseaseOntology->SNOMEDCTUS20200901
+snowmedctusID: C:DiseaseOntology->SNOMEDCTUS20200301
+snowmedctusID: C:DiseaseOntology->SNOMEDCTUS20180301
+snowmedctusID: C:DiseaseOntology->SNOMEDCTUS20190901
+umlscuiID: C:DiseaseOntology->UMLSCUI
+icd10CMID: C:DiseaseOntology->ICD10CM
+icd9CMID: C:DiseaseOntology->ICD9CM
+orDOID: C:DiseaseOntology->ORDO
+gardID: C:DiseaseOntology->GARD
+omimID: C:DiseaseOntology->OMIM
+efoID: C:DiseaseOntology->EFO
+keggDiseaseID: C:DiseaseOntology->KEGG
+medDraID: C:DiseaseOntology->MEDDRA
