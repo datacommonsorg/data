@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Author: Padma Gundapaneni @padma-g
-Date: 7/28/21
+Author: Samantha Piekos @spiekos and Padma Gundapaneni @padma-g
+Date: 8/2/21
 Description: This script cleans up a csv file on county level
 precipitation data downloaded from the CDC.
 URL: https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology
@@ -25,66 +25,60 @@ python3 parse_precipitation_index.py input_file output_file
 import sys
 import pandas as pd
 
+def generate_dcid(fips):
+    list_dcids = []
+    for index, fip in fips.items():
+        fip = str(fip)
+        if len(fip) < 5:
+            fip = '0' + fip
+        list_dcids.append("geoId/" + fip)
+    return(pd.DataFrame(list_dcids, columns=['dcid']))
 
-def main():
-    """Main function to generate the cleaned csv file."""
-    file_path = sys.argv[1]
-    output_file = sys.argv[2]
-    clean_precipitation_data(file_path, output_file)
+def clean_spei_file(data):
+    data.rename(columns={"spei": "value"}, inplace=True)
+    data["dcid"] = generate_dcid(data["fips"])
+    data = data.drop(labels=['state', 'county', 'fips'], axis=1)
+    return(data)
 
+def clean_pdsi_file(data):
+    data.rename(columns={"pdsi": "value"}, inplace=True)
+    data["dcid"] = generate_dcid(data["countyfips"])
+    data = data.drop(labels=['statefips', 'countyfips'], axis=1)
+    return(data)
 
-def clean_precipitation_data(file_path, output_file):
+def clean_spi_file(data):
+    data.rename(columns={"spi": "value"}, inplace=True)
+    data["dcid"] = generate_dcid(data["countyfips"])
+    data = data.drop(labels=['statefips', 'countyfips'], axis=1)
+    return(data)
+
+def clean_precipitation_data(input_file, output_file):
     """
     Args:
-        file_path: path to a comma-separated CDC precipitation index data file
+        input_file: path to a comma-separated CDC precipitation index data file
         output_file: path for the cleaned csv to be stored
     Returns:
         a cleaned csv file
     """
     print("Cleaning file...")
-    data = pd.DataFrame(pd.read_csv(file_path))
-    data["month"] = data["month"].map("{:02}".format)
-    data["date"] = data["year"].astype(str) + "-" + data["month"].astype(str)
-    if "Evapotranspiration" in file_path:
-        data.rename(columns={
-            "spei": "StandardizedPrecipitation" + "EvapotranspirationIndex"
-        },
-                    inplace=True)
-        data["fips"] = "0" + data["fips"].astype(str)
-        data = pd.melt(
-            data,
-            id_vars=['state', 'county', 'fips', 'year', 'month', 'date'],
-            value_vars=[
-                "StandardizedPrecipitation" + "EvapotranspirationIndex"
-            ],
-            var_name='StatisticalVariable',
-            value_name='Value')
-        data["dcid"] = "geoId/" + data["fips"].astype(str)
-    elif "Palmer" in file_path:
-        data.rename(columns={"pdsi": "PalmerDroughtSeverityIndex"},
-                    inplace=True)
-        data["countyfips"] = "0" + data["countyfips"].astype(str)
-        data = pd.melt(
-            data,
-            id_vars=['year', 'month', 'date', 'statefips', 'countyfips'],
-            value_vars=["PalmerDroughtSeverityIndex"],
-            var_name='StatisticalVariable',
-            value_name='Value')
-        data["dcid"] = "geoId/" + data["countyfips"].astype(str)
-    else:
-        data.rename(columns={"spi": "StandardizedPrecipitationIndex"},
-                    inplace=True)
-        data["countyfips"] = "0" + data["countyfips"].astype(str)
-        data = pd.melt(
-            data,
-            id_vars=['year', 'month', 'date', 'statefips', 'countyfips'],
-            value_vars=["StandardizedPrecipitationIndex"],
-            var_name='StatisticalVariable',
-            value_name='Value')
-        data["dcid"] = "geoId/" + data["countyfips"].astype(str)
+    data = pd.DataFrame(pd.read_csv(input_file))
+    month = data["month"].map("{:02}".format).astype(str)
+    data["date"] = data["year"].astype(str) + "-" + month
+    if "Standardized_Precipitation_Evapotranspiration_Index" in input_file:
+        data =  clean_spei_file(data)
+    elif "Palmer_Drought_Severity_Index" in input_file:
+        data = clean_pdsi_file(data)
+    elif "Standardized_Precipitation_Index" in input_file:
+        data = clean_spi_file(data)
+    data = data.drop(labels=['year', 'month'], axis=1)
     data.to_csv(output_file, index=False)
     print("Finished cleaning file!")
 
+def main():
+    """Main function to generate the cleaned csv file."""
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    clean_precipitation_data(input_file, output_file)
 
 if __name__ == "__main__":
     main()
