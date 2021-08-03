@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Author: Padma Gundapaneni @padma-g
-Date: 7/28/21
+Author: Samantha Piekos @spiekos and Padma Gundapaneni @padma-g
+Date: 8/3/21
 Description: This script contains unit tests for the parse_air_quality.py script.
 @input_file   filepath to the original csv that needs to be cleaned
 @output_file  filepath to the csv to which the cleaned data is written
@@ -22,6 +22,7 @@ python3 parse_air_quality_test.py input_file output_file
 
 import unittest
 import os
+import sys
 from parse_air_quality import clean_air_quality_data
 
 module_dir_ = os.path.dirname(__file__)
@@ -32,18 +33,13 @@ class TestParseAirQuality(unittest.TestCase):
     Tests the functions in parse_air_quality.py.
     """
 
-    def test_clean_air_quality_data(self):
+    def test_clean_air_quality_data(self, test_csv, expected_csv):
         """
         Tests the clean_air_quality_data function.
         """
         print(module_dir_)
-        test_csv = os.path.join(module_dir_, 'test_data/small_Ozone_County.csv')
-        output_csv = os.path.join(module_dir_,
-                                  'test_data/small_Ozone_County_output.csv')
+        output_csv = test_csv[:-4] + '_output.csv'
         clean_air_quality_data(test_csv, output_csv)
-
-        expected_csv = os.path.join(
-            module_dir_, 'test_data/small_Ozone_County_expected.csv')
         with open(output_csv, 'r') as test:
             test_str: str = test.read()
             with open(expected_csv, 'r') as expected:
@@ -51,6 +47,12 @@ class TestParseAirQuality(unittest.TestCase):
                 self.assertEqual(test_str, expected_str)
         os.remove(output_csv)
 
+def main():
+    """Main function to generate the cleaned csv file."""
+    input_file = sys.argv[1]
+    expected_output_file = sys.argv[2]
+    test = TestParseAirQuality()
+    TestParseAirQuality.test_clean_air_quality_data(test, input_file, expected_output_file)
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
