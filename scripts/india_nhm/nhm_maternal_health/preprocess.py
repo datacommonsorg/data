@@ -21,29 +21,29 @@ from base.readme_generator import ReadMeGen
 # Mapping dictionary for data columns and StatVars
 cols_to_nodes = {
     'State':
-    'State',
+        'State',
     'isoCode':
-    'isoCode',
+        'isoCode',
     'Date':
-    'Date',
+        'Date',
     'Estimated Number of Annual Pregnancies #':
-    'Count_PregnancyEvent',
+        'Count_PregnancyEvent',
     'Total number of pregnant women Registered for ANC':
-    'Count_PregnantWomen_RegisteredForAntenatalCare',
+        'Count_PregnantWomen_RegisteredForAntenatalCare',
     'Number of Pregnant women registered within first trimester':
-    'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
+        'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
     'Total reported deliveries':
-    'Count_ChildDeliveryEvent',
+        'Count_ChildDeliveryEvent',
     'Institutional deliveries (Public Insts.+Pvt. Insts.)':
-    'Count_ChildDeliveryEvent_InAnInstitution',
+        'Count_ChildDeliveryEvent_InAnInstitution',
     'Deliveries Conducted at Public Institutions':
-    'Count_ChildDeliveryEvent_InPublicInstitution',
+        'Count_ChildDeliveryEvent_InPublicInstitution',
     'Number of Home deliveries':
-    'Count_ChildDeliveryEvent_AtHome',
+        'Count_ChildDeliveryEvent_AtHome',
     'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-    'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
     '% Safe deliveries to Total Reported Deliveries':
-    'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
+        'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
 
 if __name__ == '__main__':

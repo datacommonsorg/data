@@ -17,35 +17,35 @@ sys.path.append("..")
 
 import os
 import unittest
-from base.data_cleaner import NHMDataLoaderBase
+from india_nhm.base.data_cleaner import NHMDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
     'State':
-    'State',
+        'State',
     'isoCode':
-    'isoCode',
+        'isoCode',
     'Date':
-    'Date',
+        'Date',
     'Estimated Number of Annual Pregnancies #':
-    'Count_PregnancyEvent',
+        'Count_PregnancyEvent',
     'Total number of pregnant women Registered for ANC':
-    'Count_PregnantWomen_RegisteredForAntenatalCare',
+        'Count_PregnantWomen_RegisteredForAntenatalCare',
     'Number of Pregnant women registered within first trimester':
-    'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
+        'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
     'Total reported deliveries':
-    'Count_ChildDeliveryEvent',
+        'Count_ChildDeliveryEvent',
     'Institutional deliveries (Public Insts.+Pvt. Insts.)':
-    'Count_ChildDeliveryEvent_InAnInstitution',
+        'Count_ChildDeliveryEvent_InAnInstitution',
     'Deliveries Conducted at Public Institutions':
-    'Count_ChildDeliveryEvent_InPublicInstitution',
+        'Count_ChildDeliveryEvent_InPublicInstitution',
     'Number of Home deliveries':
-    'Count_ChildDeliveryEvent_AtHome',
+        'Count_ChildDeliveryEvent_AtHome',
     'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-    'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
     '% Safe deliveries to Total Reported Deliveries':
-    'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
+        'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
 
 
@@ -53,16 +53,16 @@ class TestPreprocess(unittest.TestCase):
 
     maxDiff = None
 
-    def test_create_csv(self):        
+    def test_create_csv(self):
         expected_file = open(os.path.join(module_dir_, 'test/expected.csv'))
         expected_data = expected_file.read()
         expected_file.close()
 
-        loader = NHMDataLoaderBase(data_folder=os.path.join(module_dir_, 'test/'),
-                                   dataset_name='test_gen',
-                                   cols_dict=cols_to_nodes,
-                                   final_csv_path=os.path.join(module_dir_, "test/test_gen.csv")
-                                   )
+        loader = NHMDataLoaderBase(
+            data_folder=os.path.join(module_dir_, 'test/'),
+            dataset_name='test_gen',
+            cols_dict=cols_to_nodes,
+            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"))
         loader.generate_csv()
 
         result_file = open(os.path.join(module_dir_, 'test/test_gen.csv'))
