@@ -40,10 +40,10 @@ The precipitation index datasets contain precipitation index data for a given ye
 None.
 
 ### License
-The data is published by the CDC National Environmental Public Health Tracking Network.
+The data is made available for public-use by the [CDC](https://www.cdc.gov/nchs/data_access/ftp_data.htm). Users of CDC National Center for Health Statistics Data must comply with the CDC's [data use agreement](https://www.cdc.gov/nchs/data_access/restrictions.htm).
 
 ### Dataset Documentation and Relevant Links
-The dataset documentation is accessible on the [CDC National Environment Public Health Tracking Network's website](https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm)
+These data were collected as part of the [CDC National Environment Public Health Tracking Network](https://ephtracking.cdc.gov/). The documentation for the air quality datasets is accessible [here](https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm). The documentation for the drought data sets is accessible [here](https://www.cdc.gov/nceh/tracking/topics/Drought.htm).
 
 ## About the Import
 
@@ -118,7 +118,6 @@ $ python3 parse_air_quality_test.py input_file expected_output_file
 ```
 
 The test files for the 4 types of air quality datasets and their paired expected output files can be found [here](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_files/air_quality).
-
 
 To test the precipitation index data cleaning script, run:
 
