@@ -108,10 +108,7 @@ The dataset documentation is accessible on the [CDC National Environment Public 
 #### Testing
 
 `@input_file` - path to the test input csv file to be cleaned
-
 `@expected_output_file` - path to cleaned csv file with the expected output
-
-##### Testing Air Quality Data
 
 To test the air quality data cleaning script, run:
 
@@ -121,7 +118,7 @@ $ python3 parse_air_quality_test.py input_file expected_output_file
 
 The test files for the 4 types of air quality datasets and their paired expected output files can be found [here](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_files/air_quality).
 
-##### Testing Precipitation Data
+
 To test the precipitation index data cleaning script, run:
 
 ```bash
@@ -135,14 +132,12 @@ The test files for the 3 types of precipitation datasets and their paired expect
 `@input_file` - path to the input csv file to be cleaned
 `@output_file` - path to write the cleaned csv file
 
-##### Processing Air Quality Data
-
 To clean the air quality data files, run:
 
 ```bash
 $ python3 parse_air_quality.py input_file output_file
 ```
-##### Processing Precipitation Data
+
 
 To clean the precipitation index data files, run: 
 
