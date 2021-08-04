@@ -1,5 +1,5 @@
 ## Importing CDC Air Quality and Precipitation Index Data
-Author: Padma Gundapaneni @padma-g
+Author: Samantha Piekos @spiekos and Padma Gundapaneni @padma-g
 
 ## Table of Contents
 1. [About the Dataset](#about-the-dataset)
