@@ -21,7 +21,7 @@ Raw data retrieved using API by covid19india.org (https://www.covid19india.org/)
 """
 
 output_columns = [
-    'Date', 'District', 'districtCode',
+    'Date', 'District', 'lgdCode',
     'Count_MedicalTest_ConditionCOVID_19_Positive',
     'Count_MedicalConditionIncident_COVID_19_PatientRecovered',
     'Count_MedicalConditionIncident_COVID_19_PatientDeceased'
@@ -29,8 +29,19 @@ output_columns = [
 
 
 def _get_district_code(district):
+    """
+    Function to get a complete match or partial match to district names.
+    For example, this function can identify 'Nilgiris' and 'The Niligris' as same name
+    
+    Cutoff = 0.8 captures all of the variations in the same district name
+    
+    """
     lgd_url = 'https://india-local-government-directory-bixhnw23da-el.a.run.app/india-local-government-directory/districts.csv?_size=max'
-    dist_code = pd.read_csv(lgd_url)
+    dist_code = pd.read_csv(lgd_url, dtype={'DistrictCode': str})
+
+    # if there is a close match for district name,
+    # return district code from Local Govt. Directory (LGD)
+    # else return None
     if district not in ['Unknown']:
         close_match = difflib.get_close_matches(
             str(district).upper(),
@@ -53,12 +64,13 @@ def create_formatted_csv_file(csv_file_path, df):
     dist_codes_dict = dict(zip(df['District'].unique().tolist(),
                                district_codes))
 
-    #get the district codes and drop rows that do not have district codes
-    df['districtCode'] = df.apply(lambda row: dist_codes_dict[row['District']],
-                                  axis=1)
-    df = df[~df['districtCode'].isnull()]
+    # get the district codes and drop rows that do not have district codes
+    # dropping 61 districts without LGD code match (643 -> 582)
+    df['lgdCode'] = df.apply(lambda row: dist_codes_dict[row['District']],
+                             axis=1)
+    df = df[~df['lgdCode'].isnull()]
 
-    #prepare for exporting
+    # #prepare for exporting
     df = df.rename(
         columns={
             'Confirmed':
@@ -74,6 +86,6 @@ def create_formatted_csv_file(csv_file_path, df):
 
 if __name__ == '__main__':
     api_url = "https://api.covid19india.org/csv/latest/districts.csv"
-    data = pd.read_csv(api_url)
+    df = pd.read_csv(api_url)
 
-    create_formatted_csv_file('COVID19_cases_indian_districts.csv', data)
+    create_formatted_csv_file('COVID19_cases_indian_districts.csv', df)
