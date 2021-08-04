@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import sys
+
 sys.path.append('../')
 from utils import multi_index_to_single_index, generate_geo_id
 import csv
