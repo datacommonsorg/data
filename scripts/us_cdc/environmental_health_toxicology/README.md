@@ -108,6 +108,7 @@ The dataset documentation is accessible on the [CDC National Environment Public 
 #### Testing
 
 `@input_file` - path to the test input csv file to be cleaned
+
 `@expected_output_file` - path to cleaned csv file with the expected output
 
 To test the air quality data cleaning script, run:
@@ -130,6 +131,7 @@ The test files for the 3 types of precipitation datasets and their paired expect
 #### Processing Steps
 
 `@input_file` - path to the input csv file to be cleaned
+
 `@output_file` - path to write the cleaned csv file
 
 To clean the air quality data files, run:
