@@ -1,0 +1,525 @@
+From 3ae0248c6400225425dde16e2859d39593172264 Mon Sep 17 00:00:00 2001
+From: Thejesh GN <i@thejeshgn.com>
+Date: Mon, 2 Aug 2021 19:53:16 +0530
+Subject: [PATCH] YAPF and Fixed test cases
+
+---
+ scripts/india_nhm/base/data_cleaner.py        |  8 ++--
+ scripts/india_nhm/base/readme_generator.py    |  1 +
+ .../india_nhm/nhm_birth_control/preprocess.py | 34 +++++++-------
+ .../nhm_birth_control/preprocess_test.py      | 34 +++++++-------
+ .../india_nhm/nhm_child_health/preprocess.py  | 38 +++++++++-------
+ .../nhm_child_health/preprocess_test.py       | 38 +++++++++-------
+ .../india_nhm/nhm_general_stats/preprocess.py | 38 +++++++++-------
+ .../nhm_general_stats/preprocess_test.py      | 29 +++++++-----
+ .../nhm_maternal_health/preprocess.py         | 24 +++++-----
+ .../nhm_maternal_health/preprocess_test.py    | 44 ++++++++++---------
+ 10 files changed, 163 insertions(+), 125 deletions(-)
+
+diff --git a/scripts/india_nhm/base/data_cleaner.py b/scripts/india_nhm/base/data_cleaner.py
+index 9207f1b..d1767fe 100644
+--- a/scripts/india_nhm/base/data_cleaner.py
++++ b/scripts/india_nhm/base/data_cleaner.py
+@@ -112,6 +112,7 @@ class NHMDataLoaderBase(object):
+         cols_dict: dictionary containing column names in the data files mapped to StatVars
+                     (keys contain column names and values contains StatVar names)
+     """
++
+     def __init__(self, data_folder, dataset_name, cols_dict, final_csv_path):
+         """
+         Constructor
+@@ -148,14 +149,13 @@ class NHMDataLoaderBase(object):
+ 
+             if fext == '.xls':
+                 # Reading .xls file as html and preprocessing multiindex
+-                self.raw_df = pd.read_html(os.path.join(
+-                    self.data_folder, file))[0]
++                self.raw_df = pd.read_html(os.path.join(self.data_folder,
++                                                        file))[0]
+                 self.raw_df.columns = self.raw_df.columns.droplevel()
+ 
+                 cleaned_df = pd.DataFrame()
+                 cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']
+-                cleaned_df['isoCode'] = cleaned_df['State'].map(
+-                    INDIA_ISO_CODES)
++                cleaned_df['isoCode'] = cleaned_df['State'].map(INDIA_ISO_CODES)
+                 cleaned_df['Date'] = date
+ 
+                 # If no columns specified, extract all except first two (index and state name)
+diff --git a/scripts/india_nhm/base/readme_generator.py b/scripts/india_nhm/base/readme_generator.py
+index 4e592be..0d266cd 100644
+--- a/scripts/india_nhm/base/readme_generator.py
++++ b/scripts/india_nhm/base/readme_generator.py
+@@ -16,6 +16,7 @@
+ class ReadMeGen():
+     """
+     """
++
+     def __init__(self, dataset_name, dataset_description, data_level,
+                  cols_dict):
+         self.dataset_name = dataset_name
+diff --git a/scripts/india_nhm/nhm_birth_control/preprocess.py b/scripts/india_nhm/nhm_birth_control/preprocess.py
+index 20eb773..0012663 100644
+--- a/scripts/india_nhm/nhm_birth_control/preprocess.py
++++ b/scripts/india_nhm/nhm_birth_control/preprocess.py
+@@ -23,39 +23,39 @@ from base.readme_generator import ReadMeGen
+ # Mutiple keys for some same StatVar since column name is changed in recent datasets
+ cols_to_nodes = {
+     'State':
+-    'State',
++        'State',
+     'isoCode':
+-    'isoCode',
++        'isoCode',
+     'Date':
+-    'Date',
++        'Date',
+     'Number of Vasectomies Conducted (Public + Pvt.)':
+-    'Count_BirthControlEvent_Vasectomy',
++        'Count_BirthControlEvent_Vasectomy',
+     'Number of Vasectomies Conducted':
+-    'Count_BirthControlEvent_Vasectomy',
++        'Count_BirthControlEvent_Vasectomy',
+     'Number of Tubectomies Conducted (Public + Pvt.)':
+-    'Count_BirthControlEvent_Tubectomy',
++        'Count_BirthControlEvent_Tubectomy',
+     'Number of Tubectomies Conducted':
+-    'Count_BirthControlEvent_Tubectomy',
++        'Count_BirthControlEvent_Tubectomy',
+     'Total Sterilisation Conducted':
+-    'Count_BirthControlEvent_Sterilization',
++        'Count_BirthControlEvent_Sterilization',
+     '% Male Sterlisation (Vasectomies) to Total sterilisation':
+-    'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
++        'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
+     'Total cases of deaths following Sterlisation ( Male + Female)':
+-    'Count_Death_BirthControlSterilization',
++        'Count_Death_BirthControlSterilization',
+     'Total IUCD Insertions done(public+private)':
+-    'Count_BirthControlEvent_IUCDInsertion',
++        'Count_BirthControlEvent_IUCDInsertion',
+     'Total Interval IUCD Insertions done':
+-    'Count_BirthControlEvent_IUCDInsertion',
++        'Count_BirthControlEvent_IUCDInsertion',
+     '% IUCD insertions in public plus private institutions to all family planning methods ( IUCD plus permanent)':
+-    'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
++        'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
+     '% IUCD insertions to all family planning methods ( IUCD plus permanent)':
+-    'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
++        'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
+     'Oral Pills distributed':
+-    'Count_ContraceptiveDistribution_OralPill',
++        'Count_ContraceptiveDistribution_OralPill',
+     'Combined Oral Pills distributed':
+-    'Count_ContraceptiveDistribution_OralPill',
++        'Count_ContraceptiveDistribution_OralPill',
+     'Condom pieces distributed':
+-    'Count_ContraceptiveDistribution_Condom',
++        'Count_ContraceptiveDistribution_Condom',
+ }
+ 
+ if __name__ == '__main__':
+diff --git a/scripts/india_nhm/nhm_birth_control/preprocess_test.py b/scripts/india_nhm/nhm_birth_control/preprocess_test.py
+index 0679929..1c1d221 100644
+--- a/scripts/india_nhm/nhm_birth_control/preprocess_test.py
++++ b/scripts/india_nhm/nhm_birth_control/preprocess_test.py
+@@ -24,39 +24,39 @@ from base.data_cleaner import NHMDataLoaderBase
+ module_dir_ = os.path.dirname(__file__)
+ cols_to_nodes = {
+     'State':
+-    'State',
++        'State',
+     'isoCode':
+-    'isoCode',
++        'isoCode',
+     'Date':
+-    'Date',
++        'Date',
+     'Number of Vasectomies Conducted (Public + Pvt.)':
+-    'Count_BirthControlEvent_Vasectomy',
++        'Count_BirthControlEvent_Vasectomy',
+     'Number of Vasectomies Conducted':
+-    'Count_BirthControlEvent_Vasectomy',
++        'Count_BirthControlEvent_Vasectomy',
+     'Number of Tubectomies Conducted (Public + Pvt.)':
+-    'Count_BirthControlEvent_Tubectomy',
++        'Count_BirthControlEvent_Tubectomy',
+     'Number of Tubectomies Conducted':
+-    'Count_BirthControlEvent_Tubectomy',
++        'Count_BirthControlEvent_Tubectomy',
+     'Total Sterilisation Conducted':
+-    'Count_BirthControlEvent_Sterilization',
++        'Count_BirthControlEvent_Sterilization',
+     '% Male Sterlisation (Vasectomies) to Total sterilisation':
+-    'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
++        'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
+     'Total cases of deaths following Sterlisation ( Male + Female)':
+-    'Count_Death_BirthControlSterilization',
++        'Count_Death_BirthControlSterilization',
+     'Total IUCD Insertions done(public+private)':
+-    'Count_BirthControlEvent_IUCDInsertion',
++        'Count_BirthControlEvent_IUCDInsertion',
+     'Total Interval IUCD Insertions done':
+-    'Count_BirthControlEvent_IUCDInsertion',
++        'Count_BirthControlEvent_IUCDInsertion',
+     '% IUCD insertions in public plus private institutions to all family planning methods ( IUCD plus permanent)':
+-    'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
++        'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
+     '% IUCD insertions to all family planning methods ( IUCD plus permanent)':
+-    'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
++        'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
+     'Oral Pills distributed':
+-    'Count_ContraceptiveDistribution_OralPill',
++        'Count_ContraceptiveDistribution_OralPill',
+     'Combined Oral Pills distributed':
+-    'Count_ContraceptiveDistribution_OralPill',
++        'Count_ContraceptiveDistribution_OralPill',
+     'Condom pieces distributed':
+-    'Count_ContraceptiveDistribution_Condom',
++        'Count_ContraceptiveDistribution_Condom',
+ }
+ 
+ 
+diff --git a/scripts/india_nhm/nhm_child_health/preprocess.py b/scripts/india_nhm/nhm_child_health/preprocess.py
+index 5b2758d..67b572a 100644
+--- a/scripts/india_nhm/nhm_child_health/preprocess.py
++++ b/scripts/india_nhm/nhm_child_health/preprocess.py
+@@ -21,28 +21,36 @@ from base.readme_generator import ReadMeGen
+ 
+ # Mapping dictionary for data columns and StatVars
+ cols_to_nodes = {
+-    'State': 'State',
+-    'isoCode': 'isoCode',
+-    'Date': 'Date',
+-    'Total Number of reported live births': 'Count_BirthEvent_LiveBirth',
+-    'Total Number of reported Still Births': 'Count_BirthEvent_StillBirth',
++    'State':
++        'State',
++    'isoCode':
++        'isoCode',
++    'Date':
++        'Date',
++    'Total Number of reported live births':
++        'Count_BirthEvent_LiveBirth',
++    'Total Number of reported Still Births':
++        'Count_BirthEvent_StillBirth',
+     '% Total Reported Live Births to Total Deliveries':
+-    'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
+-    'Number of Infants given BCG': 'Count_Infant_VaccineAdministered_BCG',
++        'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
++    'Number of Infants given BCG':
++        'Count_Infant_VaccineAdministered_BCG',
+     'Number of Infants given OPV 0 (Birth Dose)':
+-    'Count_Infant_VaccineAdministered_OPV',
++        'Count_Infant_VaccineAdministered_OPV',
+     'Number of Infants given DPT1':
+-    'Count_Infant_VaccineAdministered_DPTDose1',
++        'Count_Infant_VaccineAdministered_DPTDose1',
+     'Number of Infants given DPT2':
+-    'Count_Infant_VaccineAdministered_DPTDose2',
++        'Count_Infant_VaccineAdministered_DPTDose2',
+     'Number of Infants given DPT3':
+-    'Count_Infant_VaccineAdministered_DPTDose3',
+-    'Number of Infants given Measles': 'Count_ChildVaccinationEvent_MMR',
++        'Count_Infant_VaccineAdministered_DPTDose3',
++    'Number of Infants given Measles':
++        'Count_ChildVaccinationEvent_MMR',
+     'Adverse Events Following Imunisation (Deaths)':
+-    'Count_Infant_VaccineSideEffect_Adverse_Deaths',
++        'Count_Infant_VaccineSideEffect_Adverse_Deaths',
+     'Adverse Events Following Imunisation (Others)':
+-    'Count_Infant_VaccineSideEffect_Adverse_Others',
+-    'Total Number of Infant Deaths reported': 'Count_Death_Infant'
++        'Count_Infant_VaccineSideEffect_Adverse_Others',
++    'Total Number of Infant Deaths reported':
++        'Count_Death_Infant'
+ }
+ 
+ if __name__ == '__main__':
+diff --git a/scripts/india_nhm/nhm_child_health/preprocess_test.py b/scripts/india_nhm/nhm_child_health/preprocess_test.py
+index cfeae2b..39001ca 100644
+--- a/scripts/india_nhm/nhm_child_health/preprocess_test.py
++++ b/scripts/india_nhm/nhm_child_health/preprocess_test.py
+@@ -23,28 +23,36 @@ from base.data_cleaner import NHMDataLoaderBase
+ # module_dir_ is the path to where this test is running from.
+ module_dir_ = os.path.dirname(__file__)
+ cols_to_nodes = {
+-    'State': 'State',
+-    'isoCode': 'isoCode',
+-    'Date': 'Date',
+-    'Total Number of reported live births': 'Count_BirthEvent_LiveBirth',
+-    'Total Number of reported Still Births': 'Count_BirthEvent_StillBirth',
++    'State':
++        'State',
++    'isoCode':
++        'isoCode',
++    'Date':
++        'Date',
++    'Total Number of reported live births':
++        'Count_BirthEvent_LiveBirth',
++    'Total Number of reported Still Births':
++        'Count_BirthEvent_StillBirth',
+     '% Total Reported Live Births to Total Deliveries':
+-    'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
+-    'Number of Infants given BCG': 'Count_Infant_VaccineAdministered_BCG',
++        'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
++    'Number of Infants given BCG':
++        'Count_Infant_VaccineAdministered_BCG',
+     'Number of Infants given OPV 0 (Birth Dose)':
+-    'Count_Infant_VaccineAdministered_OPV',
++        'Count_Infant_VaccineAdministered_OPV',
+     'Number of Infants given DPT1':
+-    'Count_Infant_VaccineAdministered_DPTDose1',
++        'Count_Infant_VaccineAdministered_DPTDose1',
+     'Number of Infants given DPT2':
+-    'Count_Infant_VaccineAdministered_DPTDose2',
++        'Count_Infant_VaccineAdministered_DPTDose2',
+     'Number of Infants given DPT3':
+-    'Count_Infant_VaccineAdministered_DPTDose3',
+-    'Number of Infants given Measles': 'Count_ChildVaccinationEvent_MMR',
++        'Count_Infant_VaccineAdministered_DPTDose3',
++    'Number of Infants given Measles':
++        'Count_ChildVaccinationEvent_MMR',
+     'Adverse Events Following Imunisation (Deaths)':
+-    'Count_Infant_VaccineSideEffect_Adverse_Deaths',
++        'Count_Infant_VaccineSideEffect_Adverse_Deaths',
+     'Adverse Events Following Imunisation (Others)':
+-    'Count_Infant_VaccineSideEffect_Adverse_Others',
+-    'Total Number of Infant Deaths reported': 'Count_Death_Infant'
++        'Count_Infant_VaccineSideEffect_Adverse_Others',
++    'Total Number of Infant Deaths reported':
++        'Count_Death_Infant'
+ }
+ 
+ 
+diff --git a/scripts/india_nhm/nhm_general_stats/preprocess.py b/scripts/india_nhm/nhm_general_stats/preprocess.py
+index 0f32163..e6b9e2c 100644
+--- a/scripts/india_nhm/nhm_general_stats/preprocess.py
++++ b/scripts/india_nhm/nhm_general_stats/preprocess.py
+@@ -21,17 +21,26 @@ from base.readme_generator import ReadMeGen
+ 
+ # Mapping dictionary for data columns and StatVars
+ cols_to_nodes = {
+-    'State': 'State',
+-    'isoCode': 'isoCode',
+-    'Date': 'Date',
+-    'IPD (Number)': 'Count_InPatient',
+-    'OPD (Number)': 'Count_OutPatient',
+-    'OPD (Allopathic)': 'Count_OutPatient',
+-    'Number of Major Operations': 'Count_SurgicalProcedure_Major',
+-    'Number of Minor Operations': 'Count_SurgicalProcedure_Minor',
++    'State':
++        'State',
++    'isoCode':
++        'isoCode',
++    'Date':
++        'Date',
++    'IPD (Number)':
++        'Count_InPatient',
++    'OPD (Number)':
++        'Count_OutPatient',
++    'OPD (Allopathic)':
++        'Count_OutPatient',
++    'Number of Major Operations':
++        'Count_SurgicalProcedure_Major',
++    'Number of Minor Operations':
++        'Count_SurgicalProcedure_Minor',
+     '% Inpatient Deaths to Total IPD':
+-    'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
+-    'Ayush OPD (Number)': 'Count_OutPatient_Ayush',
++        'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
++    'Ayush OPD (Number)':
++        'Count_OutPatient_Ayush',
+ }
+ 
+ if __name__ == '__main__':
+@@ -46,9 +55,8 @@ if __name__ == '__main__':
+     loader.create_mcf_tmcf()
+ 
+     # Write README file
+-    readme_gen = ReadMeGen(
+-        dataset_name=dataset_name,
+-        dataset_description="General Health Statistics Data",
+-        data_level="State level",
+-        cols_dict=cols_to_nodes)
++    readme_gen = ReadMeGen(dataset_name=dataset_name,
++                           dataset_description="General Health Statistics Data",
++                           data_level="State level",
++                           cols_dict=cols_to_nodes)
+     readme_gen.gen_readme()
+diff --git a/scripts/india_nhm/nhm_general_stats/preprocess_test.py b/scripts/india_nhm/nhm_general_stats/preprocess_test.py
+index 418add8..228e9ca 100644
+--- a/scripts/india_nhm/nhm_general_stats/preprocess_test.py
++++ b/scripts/india_nhm/nhm_general_stats/preprocess_test.py
+@@ -23,17 +23,26 @@ from base.data_cleaner import NHMDataLoaderBase
+ # module_dir_ is the path to where this test is running from.
+ module_dir_ = os.path.dirname(__file__)
+ cols_to_nodes = {
+-    'State': 'State',
+-    'isoCode': 'isoCode',
+-    'Date': 'Date',
+-    'IPD (Number)': 'Count_InPatient',
+-    'OPD (Number)': 'Count_OutPatient',
+-    'OPD (Allopathic)': 'Count_OutPatient',
+-    'Number of Major Operations': 'Count_SurgicalProcedure_Major',
+-    'Number of Minor Operations': 'Count_SurgicalProcedure_Minor',
++    'State':
++        'State',
++    'isoCode':
++        'isoCode',
++    'Date':
++        'Date',
++    'IPD (Number)':
++        'Count_InPatient',
++    'OPD (Number)':
++        'Count_OutPatient',
++    'OPD (Allopathic)':
++        'Count_OutPatient',
++    'Number of Major Operations':
++        'Count_SurgicalProcedure_Major',
++    'Number of Minor Operations':
++        'Count_SurgicalProcedure_Minor',
+     '% Inpatient Deaths to Total IPD':
+-    'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
+-    'Ayush OPD (Number)': 'Count_OutPatient_Ayush',
++        'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
++    'Ayush OPD (Number)':
++        'Count_OutPatient_Ayush',
+ }
+ 
+ 
+diff --git a/scripts/india_nhm/nhm_maternal_health/preprocess.py b/scripts/india_nhm/nhm_maternal_health/preprocess.py
+index f39ceb5..7dfcf54 100644
+--- a/scripts/india_nhm/nhm_maternal_health/preprocess.py
++++ b/scripts/india_nhm/nhm_maternal_health/preprocess.py
+@@ -21,29 +21,29 @@ from ..base.readme_generator import ReadMeGen
+ # Mapping dictionary for data columns and StatVars
+ cols_to_nodes = {
+     'State':
+-    'State',
++        'State',
+     'isoCode':
+-    'isoCode',
++        'isoCode',
+     'Date':
+-    'Date',
++        'Date',
+     'Estimated Number of Annual Pregnancies #':
+-    'Count_PregnancyEvent',
++        'Count_PregnancyEvent',
+     'Total number of pregnant women Registered for ANC':
+-    'Count_PregnantWomen_RegisteredForAntenatalCare',
++        'Count_PregnantWomen_RegisteredForAntenatalCare',
+     'Number of Pregnant women registered within first trimester':
+-    'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
++        'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
+     'Total reported deliveries':
+-    'Count_ChildDeliveryEvent',
++        'Count_ChildDeliveryEvent',
+     'Institutional deliveries (Public Insts.+Pvt. Insts.)':
+-    'Count_ChildDeliveryEvent_InAnInstitution',
++        'Count_ChildDeliveryEvent_InAnInstitution',
+     'Deliveries Conducted at Public Institutions':
+-    'Count_ChildDeliveryEvent_InPublicInstitution',
++        'Count_ChildDeliveryEvent_InPublicInstitution',
+     'Number of Home deliveries':
+-    'Count_ChildDeliveryEvent_AtHome',
++        'Count_ChildDeliveryEvent_AtHome',
+     'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
+-    'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
++        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+     '% Safe deliveries to Total Reported Deliveries':
+-    'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
++        'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
+ }
+ 
+ if __name__ == '__main__':
+diff --git a/scripts/india_nhm/nhm_maternal_health/preprocess_test.py b/scripts/india_nhm/nhm_maternal_health/preprocess_test.py
+index e34ea69..37dab52 100644
+--- a/scripts/india_nhm/nhm_maternal_health/preprocess_test.py
++++ b/scripts/india_nhm/nhm_maternal_health/preprocess_test.py
+@@ -17,35 +17,35 @@
+ 
+ import os
+ import unittest
+-from ..base.data_cleaner import NHMDataLoaderBase
++from india_nhm.base.data_cleaner import NHMDataLoaderBase
+ 
+ # module_dir_ is the path to where this test is running from.
+ module_dir_ = os.path.dirname(__file__)
+ cols_to_nodes = {
+     'State':
+-    'State',
++        'State',
+     'isoCode':
+-    'isoCode',
++        'isoCode',
+     'Date':
+-    'Date',
++        'Date',
+     'Estimated Number of Annual Pregnancies #':
+-    'Count_PregnancyEvent',
++        'Count_PregnancyEvent',
+     'Total number of pregnant women Registered for ANC':
+-    'Count_PregnantWomen_RegisteredForAntenatalCare',
++        'Count_PregnantWomen_RegisteredForAntenatalCare',
+     'Number of Pregnant women registered within first trimester':
+-    'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
++        'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
+     'Total reported deliveries':
+-    'Count_ChildDeliveryEvent',
++        'Count_ChildDeliveryEvent',
+     'Institutional deliveries (Public Insts.+Pvt. Insts.)':
+-    'Count_ChildDeliveryEvent_InAnInstitution',
++        'Count_ChildDeliveryEvent_InAnInstitution',
+     'Deliveries Conducted at Public Institutions':
+-    'Count_ChildDeliveryEvent_InPublicInstitution',
++        'Count_ChildDeliveryEvent_InPublicInstitution',
+     'Number of Home deliveries':
+-    'Count_ChildDeliveryEvent_AtHome',
++        'Count_ChildDeliveryEvent_AtHome',
+     'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
+-    'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
++        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+     '% Safe deliveries to Total Reported Deliveries':
+-    'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
++        'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
+ }
+ 
+ 
+@@ -54,21 +54,25 @@ class TestPreprocess(unittest.TestCase):
+     maxDiff = None
+ 
+     def test_create_csv(self):
+-        expected_file = open(os.path.join(module_dir_, 'test/expected.csv'))
++        expected_file = open(
++            os.path.join(os.path.dirname(__file__), 'test/expected.csv'))
+         expected_data = expected_file.read()
+         expected_file.close()
+ 
+-        loader = NHMDataLoaderBase(data_folder='test/',
+-                                   dataset_name='test_gen',
+-                                   cols_dict=cols_to_nodes,
+-                                   final_csv_path="test/test_gen.csv")
++        loader = NHMDataLoaderBase(
++            data_folder=os.path.join(os.path.dirname(__file__), 'test/'),
++            dataset_name='test_gen',
++            cols_dict=cols_to_nodes,
++            final_csv_path=os.path.join(os.path.dirname(__file__),
++                                        "test/test_gen.csv"))
+         loader.generate_csv()
+ 
+-        result_file = open('test/test_gen.csv')
++        result_file = open(
++            os.path.join(os.path.dirname(__file__), 'test/test_gen.csv'))
+         result_data = result_file.read()
+         result_file.close()
+ 
+-        os.remove('test/test_gen.csv')
++        os.remove(os.path.join(os.path.dirname(__file__), 'test/test_gen.csv'))
+         self.assertEqual(u'{}'.format(expected_data), result_data)
+ 
+ 
+-- 
+2.17.1
+

@@ -24,39 +24,39 @@ from base.data_cleaner import NHMDataLoaderBase
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
     'State':
-    'State',
+        'State',
     'isoCode':
-    'isoCode',
+        'isoCode',
     'Date':
-    'Date',
+        'Date',
     'Number of Vasectomies Conducted (Public + Pvt.)':
-    'Count_BirthControlEvent_Vasectomy',
+        'Count_BirthControlEvent_Vasectomy',
     'Number of Vasectomies Conducted':
-    'Count_BirthControlEvent_Vasectomy',
+        'Count_BirthControlEvent_Vasectomy',
     'Number of Tubectomies Conducted (Public + Pvt.)':
-    'Count_BirthControlEvent_Tubectomy',
+        'Count_BirthControlEvent_Tubectomy',
     'Number of Tubectomies Conducted':
-    'Count_BirthControlEvent_Tubectomy',
+        'Count_BirthControlEvent_Tubectomy',
     'Total Sterilisation Conducted':
-    'Count_BirthControlEvent_Sterilization',
+        'Count_BirthControlEvent_Sterilization',
     '% Male Sterlisation (Vasectomies) to Total sterilisation':
-    'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
+        'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
     'Total cases of deaths following Sterlisation ( Male + Female)':
-    'Count_Death_BirthControlSterilization',
+        'Count_Death_BirthControlSterilization',
     'Total IUCD Insertions done(public+private)':
-    'Count_BirthControlEvent_IUCDInsertion',
+        'Count_BirthControlEvent_IUCDInsertion',
     'Total Interval IUCD Insertions done':
-    'Count_BirthControlEvent_IUCDInsertion',
+        'Count_BirthControlEvent_IUCDInsertion',
     '% IUCD insertions in public plus private institutions to all family planning methods ( IUCD plus permanent)':
-    'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
+        'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
     '% IUCD insertions to all family planning methods ( IUCD plus permanent)':
-    'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
+        'Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent',
     'Oral Pills distributed':
-    'Count_ContraceptiveDistribution_OralPill',
+        'Count_ContraceptiveDistribution_OralPill',
     'Combined Oral Pills distributed':
-    'Count_ContraceptiveDistribution_OralPill',
+        'Count_ContraceptiveDistribution_OralPill',
     'Condom pieces distributed':
-    'Count_ContraceptiveDistribution_Condom',
+        'Count_ContraceptiveDistribution_Condom',
 }
 
 

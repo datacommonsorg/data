@@ -23,17 +23,26 @@ from base.data_cleaner import NHMDataLoaderBase
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
-    'State': 'State',
-    'isoCode': 'isoCode',
-    'Date': 'Date',
-    'IPD (Number)': 'Count_InPatient',
-    'OPD (Number)': 'Count_OutPatient',
-    'OPD (Allopathic)': 'Count_OutPatient',
-    'Number of Major Operations': 'Count_SurgicalProcedure_Major',
-    'Number of Minor Operations': 'Count_SurgicalProcedure_Minor',
+    'State':
+        'State',
+    'isoCode':
+        'isoCode',
+    'Date':
+        'Date',
+    'IPD (Number)':
+        'Count_InPatient',
+    'OPD (Number)':
+        'Count_OutPatient',
+    'OPD (Allopathic)':
+        'Count_OutPatient',
+    'Number of Major Operations':
+        'Count_SurgicalProcedure_Major',
+    'Number of Minor Operations':
+        'Count_SurgicalProcedure_Minor',
     '% Inpatient Deaths to Total IPD':
-    'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
-    'Ayush OPD (Number)': 'Count_OutPatient_Ayush',
+        'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
+    'Ayush OPD (Number)':
+        'Count_OutPatient_Ayush',
 }
 
 
