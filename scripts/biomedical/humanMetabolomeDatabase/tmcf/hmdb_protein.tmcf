@@ -7,6 +7,14 @@ geneCardID: C:hmdb_protein->genecard_id
 hgncID: C:hmdb_protein->hgnc_id
 
 Node: E:hmdb_protein->E2
+typeOf: dcs:Gene
+dcid: C:hmdb_protein->gene38_dcid
+uniProtID: C:hmdb_protein->uniprot_id
+genBankID: C:hmdb_protein->genbank_gene_id
+geneCardID: C:hmdb_protein->genecard_id
+hgncID: C:hmdb_protein->hgnc_id
+
+Node: E:hmdb_protein->E3
 typeOf: dcs:Protein
 dcid: C:hmdb_protein->protein_dcid
 humanMetabolomeDatabaseID: C:hmdb_protein->accession
@@ -17,11 +25,3 @@ cellularCompartment: C:hmdb_protein->subcellular_location
 aminoAcidResidueNumber: C:hmdb_protein->residue_number
 genBankID: C:hmdb_protein->genbank_protein_id
 uniProtID: C:hmdb_protein->uniprot_id
-
-Node: E:hmdb_protein->E5
-typeOf: dcs:Gene
-dcid: C:hmdb_protein->gene38_dcid
-uniProtID: C:hmdb_protein->uniprot_id
-genBankID: C:hmdb_protein->genbank_gene_id
-geneCardID: C:hmdb_protein->genecard_id
-hgncID: C:hmdb_protein->hgnc_id
