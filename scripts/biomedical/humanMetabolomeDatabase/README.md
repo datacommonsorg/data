@@ -5,41 +5,34 @@
 - [Importing HMDB Metabolome and Proteome Data](#importing-hmdb-metabolome-and-proteome-data)
   - [Table of Contents](#table-of-contents)
   - [About the Dataset](#about-the-dataset)
-  - [About the import](#about-the-import)
+  - [About the Import](#about-the-import)
 
 ## About the Dataset
 
-- ### Download URL
+### Download URL
 
 The HMDB (Human Metabolome database) hosts a variety of datasets including, metabolites, proteins, diseases, pathways etc. The human metabolite and protein data can be downloaded from the official HMDB [webpage](https://hmdb.ca/downloads). The data is in xml format and had to be parsed into a csv version (see [Notes and Caveats](#notes-and-caveats) for additional information on formatting).
 
-- ### Overview
+### Overview
 
 This directory stores the scripts used to convert the datasets obtained from HMDB into modified versions, for effective ingestion of data into the Data Commons knowledge graph.
 
 The database links chemical, clinical and biochemical data of about 115,000 metabolites and multiple proteins. It also hosts multiple identifiers for various databases, linking the proteins and metabolites to multiple other data sources.
 For the knowledge graph, two files are imported:
 
-- <u>hmdb_metabolites.xml</u>: contains information on clinical and biochemical properties of metabolites. The HMDB metabolites file was first parsed into a csv version. Then, it lacked the `ChEMBL` ID for the metabolites. So the ChEMBL IDs were generated in three steps:
+- <u>hmdb_metabolites.xml</u>: contains information on clinical and biochemical properties of metabolites. This HMDB metabolites file was first parsed into a csv file. Then, `ChEMBL` IDs for the metabolites were added by mapping metabolites in the hmdb dataset to those in Virtual Metabolic Human and Human-human1 datasets, which contain dcids. The remaining were mapped using the [bioservices package](https://bioservices.readthedocs.io/en/master/).
 
-1. The Virtual Metabolic Human Data was mapped with the hmdb metabolite data, based on the `metabolite common name`, `KEGG ID` and `CHEBI ID`. Thereafter, the corresponding ChEMBL ids for perfect matches were added the the HMDB metabolite dataset.
-2. The HumanGEM-human1 Data was mapped with the Virtual Metabolic Human Data and then the combined output was mapped with hmdb metabolite data, based on these properties: `metabolite common name`, `BIDD`, `CHEBI ID`, `KEGG ID`, `pubchemID`, `chemspiderID`, `drugbankID`, `metlin_id`, `cas_registry_number`, `InChIKey`, `smiles`.
-3. The remaining are mapped using the [bioservices package](https://bioservices.readthedocs.io/en/master/).
-
-- <u>hmdb_proteins.xml</u>: contains information about the protein functions, kegg_pathways, gene ontology annotations, subcellular locations and protein type. It also contains identifiers to various protein databases. The dcid for all the proteins was queried for on data commons, using various properties and for the ones with no matches, the IDs were manually curated.
-
-- ### Schema Overview
+### Schema Overview
 
 The schema representing metabolome and proteome data from HMDB is defined in [HMDB.mcf](https://raw.githubusercontent.com/suhana13/ISB-project/main/combined_list.mcf) and [HMDB_enum.mcf](https://raw.githubusercontent.com/suhana13/ISB-project/main/combined_list_enum.mcf). The tmcfs for each of the corresponding csv files can be found [here](https://github.com/suhana13/data/tree/add_hmdb_metabolites/scripts/biomedical/humanMetabolomeDatabase/tmcf).
 
 The Metabolite entity is used to describe chemical substances which are intermediates or end products in a metabolic reaction. It has several text value properties, representing "humanMetabolomeDatabaseID", "monoIsotropicWeight", "iupacName", "chemicalName", "chemicalFormula", "inChIKey", "casRegistry", "simplifiedMolecularInputLineEntrySystem", "drugBankID", "chebiID", "pubChemCompoundID", "phenolExplorerCompoundID", "foodB", "knapsack", "chemSpiderID", "keggCompoundID", "metaCycID", "biggID", "metlinID", "proteinDataBankID", "drugLogP", and various enumeration classes, namely, "ChemicalCompoundCategoryEnum", "ChemicalCompoundParentEnum", "ChemicalCompoundSuperClassEnum", "ChemicalCompoundClassEnum", "ChemicalCompoundSubClassEnum", and "ChemicalCompoundMolecularFrameworkEnum".
 
-The Protein entity is used to describe a class of nitrogenous organic compounds that are composed of large molecules called amino acids. It has several text value properties representing, "uniProtID", "genBankID", "geneCardID", "hgncID", "proteinGeneralFunction", "proteinSpecificFunction",
-"aminoAcidResidueNumber", and various enumeration classes, namely, "KeggProteinPathway", and "CellularCompartment".
+The Protein entity is used to describe a class of nitrogenous organic compounds that are composed of large molecules called amino acids. It has several text value properties representing, "uniProtID", "genBankID", "geneCardID", "hgncID", "proteinGeneralFunction", "proteinSpecificFunction", "aminoAcidResidueNumber", and various enumeration classes, namely, "KeggProteinPathway", and "CellularCompartment".
 
 - ### Notes and Caveats
 
-The ChEMBL Id for the metabolites was missing, so it had to be generated using other databases, like VMH and HumanGEM-Human1, and also using the bioservices package. In addition, the proteins dcids were queried for on the data commons using multiple properties and in case there were no matches, they had to be manually curated. Also, all the data was present in xml format, so it had to be parsed which contributed to the total increase in runtime of the wrapper bash script.
+The ChEMBL Id for the metabolites was missing, so it had to be generated using other databases, like VMH and HumanGEM-Human1, and also using the bioservices package. In addition, the proteins in hmdb were mapped to preexisting protein entities in Data Commons knowledge graph by querying multiple properties to identify the corresponding dcid. The dcid was manually currated in the handful of cases in which no matches were programatically found. Also, all the original data was formatted in xml format necesitating parsing which contributed to the total increase in runtime of the wrapper bash script.
 
 - ### License
 
@@ -62,7 +55,7 @@ This data is freely available to all users. However, the commercial usage of the
 `parse_hmdb_go.py`
 `format_hmdb_go.py`
 
-- ## Examples
+## Examples
 
 To generate the formatted csv file from xml:
 
