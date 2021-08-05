@@ -25,34 +25,44 @@ import os
 import sys
 from parse_air_quality import clean_air_quality_data
 
-module_dir_ = os.path.dirname(__file__)
-
+TEST_CASE_FILES = [
+# Pairs of input CSV and expected CSV files.
+('PM2.5_Concentrations_Daily_County_test_file.csv', 
+    'PM2.5_Concentrations_Daily_County_test_file_expected_output.csv', ','),
+('PM2.5_Daily_Census_Tract_test_file.csv', 
+    'PM2.5_Daily_Census_Tract_test_file_expected_output.csv', ','),
+('Ozone_Daily_County_test_file.csv', 
+    'Ozone_Daily_County_test_file_expected_output.csv', ';'),
+('Ozone_Daily_Census_Tract_test_file.csv', 
+    'Ozone_Daily_Census_Tract_test_file_expected_output.csv', ',')
+]
 
 class TestParseAirQuality(unittest.TestCase):
     """
     Tests the functions in parse_air_quality.py.
     """
 
-    def test_clean_air_quality_data(self, test_csv, expected_csv):
+    def test_clean_air_quality_data(self):
         """
         Tests the clean_air_quality_data function.
         """
+        module_dir_ = os.path.dirname(__file__)
         print(module_dir_)
-        output_csv = test_csv[:-4] + '_output.csv'
-        clean_air_quality_data(test_csv, output_csv)
+        for input_file, expected_output_file, sep in TEST_CASE_FILES:
+            print('\n')
+            print('Input File: ' + input_file)
+            test_csv = os.path.join(module_dir_, input_file)
+            output_csv = os.path.join(module_dir_,
+                (input_file[:-4] + '_output.csv'))
+            clean_air_quality_data(test_csv, output_csv, sep=sep)
+            expected_csv = os.path.join(module_dir_, expected_output_file)
         with open(output_csv, 'r') as test:
             test_str: str = test.read()
             with open(expected_csv, 'r') as expected:
                 expected_str: str = expected.read()
                 self.assertEqual(test_str, expected_str)
         os.remove(output_csv)
-
-def main():
-    """Main function to generate the cleaned csv file."""
-    input_file = sys.argv[1]
-    expected_output_file = sys.argv[2]
-    test = TestParseAirQuality()
-    TestParseAirQuality.test_clean_air_quality_data(test, input_file, expected_output_file)
+        print('Passed test!')
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
