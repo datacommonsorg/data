@@ -22,37 +22,44 @@ python3 parse_precipitation_index_test.py input_file expected_output_file
 
 import unittest
 import os
-import sys
 from parse_precipitation_index import clean_precipitation_data
 
-module_dir_ = os.path.dirname(__file__)
-
+TEST_CASE_FILES = [
+# Pairs of input CSV and expected CSV files.
+('Palmer_Drought_Severity_Index_test_file.csv', 
+    'Palmer_Drought_Severity_Index_test_file_expected_output.csv'),
+('Standardized_Precipitation_Evapotranspiration_Index_test_file.csv', 
+    'Standardized_Precipitation_Evapotranspiration_Index_test_file_expected_output.csv'),
+('Standardized_Precipitation_Index_test_file.csv', 
+    'Standardized_Precipitation_Index_test_file_expected_output.csv')
+]
 
 class TestParsePrecipitationData(unittest.TestCase):
     """
     Tests the functions in parse_precipitation_index.py.
     """
-
-    def test_clean_precipitation_data(self, test_csv, expected_csv):
+    def test_clean_precipitation_data(self):
         """
         Tests the clean_precipitation_data function.
         """
-        print(module_dir_)
-        output_csv = test_csv[:-4] + '_output.csv'
-        clean_precipitation_data(test_csv, output_csv)
-        with open(output_csv, 'r') as test:
-            test_str: str = test.read()
-            with open(expected_csv, 'r') as expected:
-                expected_str: str = expected.read()
-                self.assertEqual(test_str, expected_str)
-        os.remove(output_csv)
+        module_dir_ = os.path.dirname(__file__)
+        print('Directory: ' + module_dir_)
+        for input_file, expected_output_file in TEST_CASE_FILES:
+            print('\n')
+            print('Input File: ' + input_file)
+            test_csv = os.path.join(module_dir_, input_file)
+            output_csv = os.path.join(module_dir_,
+                (input_file[:-4] + '_output.csv'))
+            clean_precipitation_data(test_csv, output_csv)
 
-def main():
-    """Main function to generate the cleaned csv file."""
-    input_file = sys.argv[1]
-    expected_output_file = sys.argv[2]
-    test = TestParsePrecipitationData()
-    TestParsePrecipitationData.test_clean_precipitation_data(test, input_file, expected_output_file)
+            expected_csv = os.path.join(module_dir_, expected_output_file)
+            with open(output_csv, 'r') as test:
+                test_str: str = test.read()
+                with open(expected_csv, 'r') as expected:
+                    expected_str: str = expected.read()
+                    self.assertEqual(test_str, expected_str)
+            os.remove(output_csv)
+            print('Passed test!')
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
