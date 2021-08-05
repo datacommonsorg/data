@@ -28,11 +28,9 @@ import pandas as pd
 def generate_dcid(fips):
     list_dcids = []
     for index, fip in fips.items():
-        fip = str(fip)
-        if len(fip) < 5:
-            fip = '0' + fip
-        list_dcids.append("geoId/" + fip)
-    return(pd.DataFrame(list_dcids, columns=['dcid']))
+        fip = 'dcid:geoId/' + str(fip).zfill(5)
+        list_dcids.append(fip)
+    return(list_dcids)
 
 def clean_spei_file(data):
     data.rename(columns={"spei": "value"}, inplace=True)
