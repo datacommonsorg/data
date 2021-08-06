@@ -225,15 +225,31 @@ def icd10_query(df):
         df.ICD10CM.update(df.ICD10CM.map(result1_df.set_index('element').id))
     return df
 
+def col_drop(df_do):
+    """
+    Drops required columns 
+    Args:
+        df_do = dataframe to change
+    Returns
+        df_do = modified dataframe 
+    """
+    df_do = df_do.drop([
+    'Class', 'exactMatch', 'deprecated', 'hasRelatedSynonym', 'comment',
+    'OBI_9991118', 'narrowMatch', 'hasBroadSynonym', 'disjointWith',
+    'hasNarrowSynonym', 'broadMatch', 'created_by', 'creation_date',
+    'inSubset', 'hasOBONamespace'
+],
+                    axis=1)
+    return df_do
+
+
 
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
     # Read disease ontology .owl file
     tree = ElementTree.parse(file_input)
-    # Get file root
     root = tree.getroot()
-    # Find owl classes elements
     all_classes = root.findall('{http://www.w3.org/2002/07/owl#}Class')
     # Parse owl classes to human-readble dictionary format
     parsed_owl_classes = []
@@ -243,13 +259,7 @@ def main():
     # Convert to pandas Dataframe
     df_do = pd.DataFrame(parsed_owl_classes)
     format_cols(df_do)
-    df_do = df_do.drop([
-        'Class', 'exactMatch', 'deprecated', 'hasRelatedSynonym', 'comment',
-        'OBI_9991118', 'narrowMatch', 'hasBroadSynonym', 'disjointWith',
-        'hasNarrowSynonym', 'broadMatch', 'created_by', 'creation_date',
-        'inSubset', 'hasOBONamespace'
-    ],
-                       axis=1)
+    df_do = col_drop(df_do)
     df_do = col_explode(df_do)
     df_do = mesh_query(df_do)
     df_do = icd10_query(df_do)
