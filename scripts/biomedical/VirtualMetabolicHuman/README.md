@@ -33,7 +33,7 @@ For the knowledge graph, three files are imported:
 
 - ### Schema Overview
 
-The schema representing reaction, metabolite and microbiome data from VMH is defined in [VMH.mcf](https://raw.githubusercontent.com/suhana13/ISB-project/main/combined_list.mcf) and [VMH_enum.mcf](https://raw.githubusercontent.com/suhana13/ISB-project/main/combined_list_enum.mcf). The tmcfs for each of the corresponding csv files can be found [here](https://github.com/suhana13/data/tree/add_Virtual_metabolic_human_data/scripts/biomedical/VirtualMetabolicHuman/tmcf).
+The schema representing reaction and metabolite data from VMH is defined in [chemical_compound.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/chemical_compound.mcf) and [chemical_compound_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/chemical_compound_enum.mcf). The schema representing the microbiome data is defined in [microbiome.mcf](https://github.com/suhana13/ISB-project/blob/main/combined_list.mcf). The tmcfs for each of the corresponding csv files can be found [here](https://github.com/suhana13/data/tree/add_Virtual_metabolic_human_data/scripts/biomedical/VirtualMetabolicHuman/tmcf).
 
 The imported data, contains several instances of entities "Metabolite", "ChemicalReaction", "memberOfMetabolicReactionSubsystem", and "Microbe".
 
