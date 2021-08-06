@@ -61,69 +61,72 @@ This data is freely available to all users. However, the commercial usage of the
 
 ## Examples
 
-To generate the formatted csv file from xml:
+This is a step-by-step workflow showing all the bash commands that need to be run in a sequential manner.
+
+**1.** To generate the formatted csv file from xml:
 
 ```
 python hmdb_metabolite_xml_csv.py hmdb_metabolites.xml
 
 ```
 
-To process Virtual Metabolic Human metabolites and H data for next step (i.e. ChEMBL matching)
+**2.** To process Virtual Metabolic Human metabolites and H data for next step (i.e. ChEMBL matching)
 
 ```
 python format_metabolite.py recon-store-metabolites-1.tsv metabolites_vmh.csv hmdb_metabolites.csv
 
 ```
 
-To add ChEMBL to hmdb metabolite data
+**3.** To add ChEMBL to hmdb metabolite data
 
 ```
 python hmdb_metabolite_add_chembl.py metabolites.tsv metabolites_vmh.csv hmdb_metabolites.csv
 ```
 
-To format hmdb metabolite data:
+**4.** To format hmdb metabolite data:
 
 ```
 python format_hmdb_metabolites.py CHEMBL_HMDB_map.csv hmdb_metabolites_final.csv
 ```
 
-To convert hmdb proteins xml to csv:
+**5.** To convert hmdb proteins xml to csv:
 
 ```
 python hmdb_protein_xml_csv.py hmdb_proteins.xml
 ```
 
-To format hmdb protein file -> Output: hmdb_protein.csv:
+**6.** To format hmdb protein file -> Output: hmdb_protein.csv:
 
 ```
 python format_hmdb_protein.py hmdb_p.csv
 ```
 
-To format hmdb protein, metabolite association -> Output: hmdb_protein_metabolite.csv
+**7.** To format hmdb protein, metabolite association -> Output: hmdb_protein_metabolite.csv
 
 ```
 python format_hmdb_protein_metabolite.py hmdb_protein.csv hmdb_pm_association.csv CHEMBL_HMDB_map.csv
 ```
 
-To format hmdb protein kegg pathway -> Output: hmdb_protein_pathway.csv
+**8.** To format hmdb protein kegg pathway -> Output: hmdb_protein_pathway.csv
 
 ```
 python format_hmdb_protein_pathway.py protein_pathways.csv hmdb_protein.csv
 ```
 
-To parse Gene Ontology information from hmdb xml file -> Output: hmdb_go.csv
+**9.** To parse Gene Ontology information from hmdb xml file -> Output: hmdb_go.csv
 
 ```
 python parse_hmdb_go.py hmdb_proteins.xml
 ```
 
-To format hmdb Gene Ontology file -> Output: hmdb_go.csv
+**10.** To format hmdb Gene Ontology file -> Output: hmdb_go.csv
 
 ```
 python format_hmdb_go.py hmdb_go.csv hmdb_protein.csv
 ```
 
-OR
+**OR**
+
 The user can simply run the entire bash script
 
 ```
