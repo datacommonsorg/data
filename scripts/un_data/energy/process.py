@@ -45,6 +45,7 @@ flags.DEFINE_list('csv_data_files', [],
 flags.DEFINE_string('dataset_name', 'undata-energy',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
+flags.DEFINE_bool('generate_enum_mcf', True, 'Generate MCF nodes for enums')
 
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
@@ -131,6 +132,7 @@ def generate_stat_var(data_row, sv_pv, counters=None) -> str:
 def get_stat_var_mcf(sv_id, sv_pv) -> str:
     stat_var = []
     stat_var.append(f'Node: {sv_id}')
+    stat_var.append('typeOf: dcs:StatisticalVariable')
     for p in sorted(sv_pv.keys()):
         stat_var.append('{}: {}'.format(p, sv_pv[p]))
     return '\n'.join(stat_var)
@@ -216,6 +218,16 @@ def process(in_paths: str, out_path: str):
                         process_row(data_row, sv_map, csv_writer,
                                     f_out_mcf, counters)
                         _print_counters(counters, 10000)
+
+            # Generate MCF nodes for enums
+            if FLAGS.generate_enum_mcf:
+                enum_mcf = un_energy_codes.generate_un_energy_code_enums(sv_map)
+                if enum_mcf is not None:
+                    for node in enum_mcf:
+                        if len(node) > 0:
+                            f_out_mcf.write('\n\n')
+                            f_out_mcf.write('\n'.join(node))
+            
     end_ts = time.perf_counter()
     counters['total_time_seconds'] = end_ts - start_ts
     _print_counters(counters)

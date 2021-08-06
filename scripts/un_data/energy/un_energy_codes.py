@@ -107,28 +107,6 @@ def get_energy_source_dcid(fuel_type: str) -> str:
     return None
 
 
-UN_ENERGY_ACTIVITY_CODE = {
-    '01':  'dcs:Production',
-    #  '02':  'dcs:receipt',
-    #  '03':  'dcs:Imports',
-    #  '04':  'dcs:Exports',
-    #  '05':  'dcs:Bunkers',
-    #  '06':  'dcs:Stock changes',
-    #  '07':  'dcs:Transfers and recycled products',
-    '08':  'dcs:Transformation',
-    '09':  'dcs:Energy industry own use',
-    '10':  'dcs:Losses',
-    '11':  'dcs:Consumption',  # Consumption non-energy
-    '12':  'dcs:Consumption',
-    '13':  'dcs:Refinery capacity',
-    #  '14:',
-    '15':  'dcs:Total resources in place',
-    '16':  'dcs:Reserves',
-    '17':  'dcs:Total resources',
-    'GA':  'dcs:Total energy supply',
-    'NA':  'dcs:Final consumption',
-}
-
 # Values for property: energyProducerType
 UN_ENERGY_PRODUCER_TYPE = {
     '0': 'OffShore',
@@ -182,6 +160,149 @@ UN_ENERGY_PLANT_TYPE = {
     'E': 'ElectricityGeneratingPowerPlant',  # use dcid:ElectricUtility?
 }
 
+# TODO(ajaits): Add to ElectricityConsumer
+UN_ENERGY_CONSUMING_INDUSTRY = {
+    # Manufacturing industry
+    '1': 'Manufacturing',  # new
+    '11': 'IronSteel',  # new
+    '13': 'ChemicalPetrochemicalIndustry',  # new
+    '14': 'OtherIndustry',  # new
+    '14a': 'NonferrousMetalsIndustry',  # new
+    '14b': 'NonmetallicMineralsIndustry',  # new
+    '14c': 'TransportEquipmentIndustry',  # new
+    '14d': 'MachineryIndustry',  # new
+    '14e': 'Mining',  # new
+    '14f': 'FoodIndustry',  # new
+    '14g': 'PaperIndustry',  # new
+    '14h': 'WoodIndustry',  # new
+    '14i': 'ConstructionIndustry',  # new
+    '14j': 'TextileIndustry',  # new
+    '14o': 'OtherManufacturingIndustry',  # new
+
+    # Transport
+    '2': 'TransportIndustry',  # new
+    '22': 'RailTransport',  # new
+    '23': 'DomesticAviation',  # new
+    '24': 'DomesticNavigationTransport',  # new
+    '25': 'OtherTransport',  # new
+    '26': 'PipelineTransport',  # new
+    '3': 'OtherIndustry',  # new
+    '31': 'Households',  # new
+    '32': 'Agriculture',  # new
+    '35': 'Commerce_PublicServices',  # new
+    '34': 'OtherIndustry',  # new
+
+    # Other comsumption flows
+    '051': 'InternationalMarineBunkers',  # new
+    '052': 'InternationalAviationBunkers',  # new
+}
+
+UN_ENERGY_USAGE_CODES = {
+    # Transfmation of energy
+    '08': 'Transformation',  # new
+    '081': 'CokeOvens',  # new
+    '082': 'GasWorks',  # new
+    '083': 'BriquettingPlants',  # new
+    '084': 'BlastFurnaces',  # new
+    '085CH': 'CharcoalPlants',  # new
+    '085EP': 'ElectricityProduction',  # new
+    '085GL': 'Gas_to_LiquidPlant',  # new
+    '085LP': 'CoalLiquefactionPlant',  # new
+    '085PP': 'PetrochemicalPlant',  # new
+    '086': 'OilRefinery',  # new
+    '087': 'NaturalGasBlendingPlants',  # new
+    '0889E': 'ElectricBoilers',  # new
+    '0889H': 'HeatPumps',  # new
+    '088': 'ElectricityGeneration',  # new
+    '08811': 'ElectricityMainActivityProducer',  # new
+    '08812': 'ElectricityAutoproducer',  # new
+    '08821': 'CHPMainActivityProducers',  # new
+    '08822': 'CHPAutoproducer',  # new
+    '08831': 'HeatPlantMainActivityProducer',  # new
+    '08832': 'HeatPlantAutoproducer',  # new
+
+    # Energy industry own use
+    '09': 'EnergyIndustry',  # new
+    '0911': 'CoalMines',  # new
+    '0912': 'OilGasExtraction',  # new
+    '0914': 'BiogasProduction',  # new
+    '0915': 'NuclearFuelProcessing',  # new
+    '0921': 'CokeOvens',  # new
+    '0922': 'GasWorks',  # new
+    '0923': 'BriquettingPlants',  # new
+    '0924': 'BlastFurnaces',  # new
+    '0925': 'OilRefineries',  # new
+    '0926': 'PumpStoragePlants',  # new
+    '0927': 'ElectricityGeneration',  # new
+    '0928': 'Industry',  # new
+    '0930': 'CoalLiquefactionPlants',  # new
+    '0931': 'NaturalGasPlants',  # new
+    '0932': 'GasToLiquidPlants',  # new
+    '0933': 'CharcoalPlants',  # new
+    '0934': 'LNGPlants',  # new
+}
+
+UN_ENERGY_FLOW_CODES = {
+    '02': 'Receipts',  # new
+    '03': 'Imports',  # new
+    '04': 'Exports',  # new
+    '06': 'FuelStocks',  # new
+    '07': 'EnergyProductTransfer',  # new
+    '11': 'NonEnergyConsumption',  # new
+    'NA': 'EnergyConsumption',  # new
+    'GA': 'EnergySupply',  # new
+    '21': 'EnergyStocksOpening',  # new
+    '22': 'EnergyStocksClosing',  # new
+}
+
+# energy capacity codes '13*' EnergySource
+# TODO(ajaits): suffix of 1/2 for Main/Auto producer dropped
+UN_ENERGY_CAPACITY_CODES = {
+    '1': 'Refinery',  # new
+    '3': 'ElectricityMainActivityAutoProducer',  # new
+    '31': 'Nuclear',  # new
+    '311': 'PublicNuclear',  # new
+    '312': 'SelfProducerNuclear',  # new
+    '32': 'dcs:EIA_Water',  # 'Hydro'
+    '33': 'Geothermal',  # new
+    '34': 'CombustibleFuel',  # new
+    '35': 'dcs:Wind',
+    '36': 'dcs:Solar',
+    '37': 'Tide',  # new
+    '39': 'Others',  # new
+    'PH': 'PumpedHydro',
+    'PV': 'SolarPV',  # new
+    'ST': 'SolarThermal',  # new
+}
+
+# Energy Loss codes
+# Prefixed with 10* for measuredProperty EnergyLoss, property energyLostAs
+UN_ENERGY_LOSS_CODES = {
+    '101': 'EnergyLost',  # new
+    '103': 'EnergyReInjected',  # new
+    '104': 'GasLostAsFlaredVented',  # new
+    '104A': 'GasLostFlared',  # new
+    '104B': 'GasLostVented',  # new
+    '105': 'FuelLossDuringExtraction',  # new
+}
+
+# Energy reserves: prefixed with code 15* or 16*
+UN_ENERGY_RESERVE_CODES = {
+    '15': 'EnergyResourcesInPlace',  # new
+    '151': 'EnergyKnownReserves',  # new
+    '1511': 'EnergyRecoverableReserves',  # new
+    '152': 'EnergyAdditionalResources',  # new
+    '161': 'EnergyReserves',  # new
+    '162': 'EnergyReservesOilShaleTarSands',  # new
+    '1621': 'EnergyReservesOilShale',  # new
+    '1622': 'EnergyReservesTarSands',  # new
+    '163': 'EnergyReservesOther',  # new
+    '17': 'EnergyResources',  # new
+    '181': 'Energy ReservesAssured',  # new
+    '182': 'EnergyReservesAdditional',  # new
+    '19': 'HydraulicResources',  # new
+}
+
 # If the value_code exists in the map code_map,
 # the property is added with the mapped value into stat_var_pv
 
@@ -194,6 +315,18 @@ def add_pv_from_map(prop: str, value_code: str, code_map, stat_var_pv) -> bool:
         return False
     stat_var_pv[prop] = 'dcid:' + prop_value
     return True
+
+
+# If the value_code exists in the map code_map,
+# the property is added with the mapped value into stat_var_pv
+def add_pv_from_map_for_prefix(prop: str, value_code: str,
+                               code_map, stat_var_pv) -> bool:
+    # Look for codes in map from longest prefix to the shortest
+    for l in reversed(range(1, len(value_code) + 1)):
+        if add_pv_from_map(prop, value_code[:l], code_map, stat_var_pv):
+            return True
+    # No codes in map for any prefix length.
+    return False
 
 
 def get_pv_for_production_code(code: str, counters=None) -> {str: str}:
@@ -214,7 +347,7 @@ def get_pv_for_production_code(code: str, counters=None) -> {str: str}:
         return pv
     code = code.removeprefix('01')
     # Add default production variables.
-    pv['measuredProperty'] = 'Production'
+    pv['measuredProperty'] = 'dcs:EnergyGeneration'
 
     # Add an optional producer type.
     if add_pv_from_map('energyProducerType', code[:1], UN_ENERGY_PRODUCER_TYPE, pv):
@@ -236,6 +369,37 @@ def get_pv_for_production_code(code: str, counters=None) -> {str: str}:
     return pv
 
 
+def get_pv_for_consumption_code(code: str, counters=None) -> {str: str}:
+    """Consumption code is formatted as follows:
+       12<1-digit-ConsumingSector><sub-sector>
+       ConsumingSectors are:
+         '1': Manufacturing
+         '2': Transport
+         '3': others
+    """
+    pv = {}
+    if not code.startswith('12'):
+        return pv
+    code = code.removeprefix('12')
+    pv['measuredProperty'] = 'dcs:EnergyConsumption'  # new
+    if not add_pv_from_map_for_prefix('energyConsumerType', code,
+                                      UN_ENERGY_CONSUMING_INDUSTRY, pv):
+        counters['error_ignored_consumer_code'] += 1
+    return pv
+
+
+def get_pv_for_capacity_code(code: str, counters=None) -> {str: str}:
+    pv = {}
+    if not code.startswith('13'):
+        return pv
+    code = code.removeprefix('13')
+    # TODO(ajaits): create a new code for capacity?
+    pv['measuredProperty'] = 'dcs:EnergyGeneration'
+    if not add_pv_from_map_for_prefix('energySource', code, UN_ENERGY_CAPACITY_CODES, pv):
+        counters['error_ignored_capacity_code'] += 1
+    return pv
+
+
 def get_pv_for_energy_code(code: str, counters=None) -> {str: str}:
     """Get the property values for the given transaction code.
        The prefix of the transaction code indicates the activity.
@@ -244,6 +408,30 @@ def get_pv_for_energy_code(code: str, counters=None) -> {str: str}:
     """
     if code.startswith('01'):
         return get_pv_for_production_code(code, counters)
+
+    if code.startswith('12'):
+        return get_pv_for_consumption_code(code, counters)
+
+    if code.startswith('13'):
+        return get_pv_for_capacity_code(code, counters)
+
+    pv = {}
+    if add_pv_from_map_for_prefix('energyConsumerType', code, UN_ENERGY_USAGE_CODES, pv):
+        pv['measuredProperty'] = 'dcs:EnergyConsumption'  # new
+        return pv
+
+    if add_pv_from_map_for_prefix('measuredProperty', code, UN_ENERGY_FLOW_CODES, pv):
+        return pv
+
+    if code.startswith('10'):
+        if add_pv_from_map_for_prefix('dcid:energyLostAs', code, UN_ENERGY_LOSS_CODES, pv):
+            pv['measuredProperty'] = 'dcs:EnergyLoss'  # new
+        return pv
+
+    if add_pv_from_map_for_prefix('dcid:energyReserveType', code,
+                                  UN_ENERGY_RESERVE_CODES, pv):
+        pv['measuredProperty'] = 'dcs:EnergyReserves'  # new
+        return pv
 
     if len(code) > 0 and counters is not None:
         counters['error_ignored_energy_code'] += 1
@@ -286,3 +474,73 @@ def get_unit_dcid_scale(units_scale: str) -> (str, str):
     if multiplier is not None and multiplier in UN_ENERGY_UNITS_MULTIPLIER:
         multiplier_num = UN_ENERGY_UNITS_MULTIPLIER[multiplier]
     return (units_dcid, multiplier_num)
+
+def get_name_from_id(dcid: str) -> str:
+    """Converts the camel case into a space separated name """
+    if dcid is None:
+        return None
+    start_idx = [i for i, e in enumerate(dcid)
+                 if e.isupper() or e == '_'] + [len(dcid)]
+    words = [dcid[x: y] for x, y in zip(start_idx, start_idx[1:]) if dcid[x: y] != '_']
+    return ' '.join(words)
+  
+
+# TODO(ajaits): declare return of list of list
+def generate_enum_mcf_for_list(enum_dcid: str, enum_list, node_id_map):
+    """Given a map with property values, returns enum MCF nodes for each value.
+    """
+    mcf_nodes = []
+    if enum_dcid is None:
+        return None
+    if enum_dcid not in node_id_map:
+        # Add a node for the enum itself.
+        node_mcf = []
+        node_mcf.append(f'Node: dcid:{enum_dcid}')
+        node_mcf.append(f'typeOf: schema:Class')
+        node_mcf.append(f'subClassOf: schema.Enumeration')
+        name = get_name_from_id(enum_dcid)
+        if name is not None:
+            node_mcf.append(f'name: {name}')
+        node_id_map[enum_dcid] += 1
+    
+    for code in enum_list:
+        if code is not None:
+            if code not in node_id_map:
+                node_mcf = []
+                node_mcf.append(f'Node: dcid:{code}')
+                node_mcf.append(f'typeOf: dcid:{enum_dcid}')
+                name = get_name_from_id(code)
+                if name is not None:
+                    node_mcf.append(f'name: {name}')
+                mcf_nodes.append(node_mcf)
+                node_id_map[enum_dcid] += 1
+            node_id_map[code] += 1
+
+    return mcf_nodes
+
+def generate_un_energy_code_enums(node_id_map):
+    """Generate a set of MCF nodes for all UN energy code enums."""
+    mcf_nodes = []
+    mcf_nodes += generate_enum_mcf_for_list('EnergySourceEnum', UN_ENERGY_CODES.values(),
+                                            node_id_map)
+    mcf_nodes += generate_enum_mcf_for_list('EnergySourceEnum', UN_ENERGY_FUEL_TYPE.values(),
+                                            node_id_map)
+    
+    mcf_nodes += generate_enum_mcf_for_list('EnergyProducerEnum', UN_ENERGY_PRODUCER_TYPE.values(),
+                                            node_id_map)
+    mcf_nodes += generate_enum_mcf_for_list('EnergyProducerEnum', UN_ENERGY_PLANT_TYPE.values(),
+                                            node_id_map)
+    mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_CONSUMING_INDUSTRY.values(),
+                                            node_id_map)
+    mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_USAGE_CODES.values(),
+                                            node_id_map)
+    mcf_nodes += generate_enum_mcf_for_list('EnergyFlowEnum', UN_ENERGY_FLOW_CODES.values(),
+                                            node_id_map)
+    mcf_nodes += generate_enum_mcf_for_list('EnergySourceEnum', UN_ENERGY_CAPACITY_CODES.values(),
+                                            node_id_map)
+    mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_LOSS_CODES.values(),
+                                            node_id_map)
+    mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_RESERVE_CODES.values(),
+                                            node_id_map)
+    return mcf_nodes
+
