@@ -5,7 +5,11 @@
 - [Importing HMDB Metabolome and Proteome Data](#importing-hmdb-metabolome-and-proteome-data)
   - [Table of Contents](#table-of-contents)
   - [About the Dataset](#about-the-dataset)
-  - [About the Import](#about-the-import)
+    - [Download URL](#download-url)
+    - [Overview](#overview)
+    - [Schema Overview](#schema-overview)
+  - [About the import](#about-the-import)
+  - [Examples](#examples)
 
 ## About the Dataset
 
@@ -44,16 +48,16 @@ This data is freely available to all users. However, the commercial usage of the
 
 - #### Scripts
 
-`hmdb_metabolite_xml_csv.py`
-`format_metabolite.py`
-`hmdb_metabolite_add_chembl.py`
-`format_hmdb_metabolites.py`
-`hmdb_protein_xml_csv.py`
-`format_hmdb_protein.py`
-`format_hmdb_protein_metabolite.py`
-`format_hmdb_protein_pathway.py`
-`parse_hmdb_go.py`
-`format_hmdb_go.py`
+[`hmdb_metabolite_xml_csv.py`](hmdb_metabolite_xml_csv.py)
+[`format_metabolite.py`](format_metabolite.py)
+[`hmdb_metabolite_add_chembl.py`](hmdb_metabolite_add_chembl.py)
+[`format_hmdb_metabolites.py`](format_hmdb_metabolites.py)
+[`hmdb_protein_xml_csv.py`](hmdb_protein_xml_csv.py)
+[`format_hmdb_protein.py`](format_hmdb_protein.py)
+[`format_hmdb_protein_metabolite.py`](format_hmdb_protein_metabolite.py)
+[`format_hmdb_protein_pathway.py`](format_hmdb_protein_pathway.py)
+[`parse_hmdb_go.py`](parse_hmdb_go.py)
+[`format_hmdb_go.py`](format_hmdb_go.py)
 
 ## Examples
 
