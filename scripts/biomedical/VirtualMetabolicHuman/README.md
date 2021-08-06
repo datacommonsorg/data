@@ -59,10 +59,12 @@ This data is under a [Creative Commons CC0 license](https://creativecommons.org/
 
 #### Scripts
 
-`format_metabolite.py`
-`format_reaction.py`
-`format_reaction_subsystem.py`
-`format_microbes.py`
+[`format_metabolite.py`](format_metabolite.py)
+[`format_reaction.py`](format_reaction.py)
+[`format_reaction_subsystem.py`](format_reaction_subsystem.py)
+[`format_microbes.py`](format_microbes.py)
+[`hmdb_extract_csv.py`](hmdb_extract_csv.py)
+[`human1_compartment.py`](human1_compartment.py)
 
 ## Examples
 
