@@ -34,73 +34,30 @@ def hmdbextract(name, file):
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
     for event, elem in context:
+
+        def hmdbproperty(path):
+            try:
+                var = elem.xpath(path, namespaces=ns)[0]
+            except:
+                var = 'NA'
+            return var
+
         accession = elem.xpath('hmdb:accession/text()', namespaces=ns)[0]
-        try:
-            protein_type = elem.xpath('hmdb:protein_type/text()',
-                                      namespaces=ns)[0]
-        except:
-            protein_type = 'NA'
-        try:
-            gene_name = elem.xpath('hmdb:gene_name/text()', namespaces=ns)[0]
-        except:
-            gene_name = 'NA'
-        try:
-            general_function = elem.xpath('hmdb:general_function/text()',
-                                          namespaces=ns)[0]
-        except:
-            general_function = 'NA'
-        try:
-            specific_function = elem.xpath('hmdb:specific_function/text()',
-                                           namespaces=ns)[0]
-        except:
-            specific_function = 'NA'
-        try:
-            subcellular_location = elem.xpath(
-                'hmdb:subcellular_locations/hmdb:subcellular_location/text()',
-                namespaces=ns)[0]
-        except:
-            subcellular_location = 'NA'
-        try:
-            gene_loc = elem.xpath(
-                'hmdb:gene_properties/hmdb:chromosome_location/text()',
-                namespaces=ns)[0]
-        except:
-            gene_loc = 'NA'
-        try:
-            residue_number = elem.xpath(
-                'hmdb:protein_properties/hmdb:residue_number/text()',
-                namespaces=ns)[0]
-        except:
-            residue_number = 'NA'
-        try:
-            genbank_protein_id = elem.xpath('hmdb:genbank_protein_id/text()',
-                                            namespaces=ns)[0]
-        except:
-            genbank_protein_id = 'NA'
-        try:
-            uniprot_id = elem.xpath('hmdb:uniprot_id/text()', namespaces=ns)[0]
-        except:
-            uniprot_id = 'NA'
-        try:
-            genbank_gene_id = elem.xpath('hmdb:genbank_gene_id/text()',
-                                         namespaces=ns)[0]
-        except:
-            genbank_gene_id = 'NA'
-        try:
-            genecard_id = elem.xpath('hmdb:genecard_id/text()',
-                                     namespaces=ns)[0]
-        except:
-            genecard_id = 'NA'
-        try:
-            hgnc_id = elem.xpath('hmdb:hgnc_id/text()', namespaces=ns)[0]
-        except:
-            hgnc_id = 'NA'
-            fieldnames = [
-                'accession', 'protein_type', 'gene_name', 'general_function',
-                'specific_function', 'subcellular_location', 'gene_loc',
-                'residue_number', 'genbank_protein_id', 'uniprot_id',
-                'genbank_gene_id', 'genecard_id', 'hgnc_id'
-            ]
+        protein_type = hmdbproperty('hmdb:protein_type/text()')
+        gene_name = hmdbproperty('hmdb:gene_name/text()')
+        general_function = hmdbproperty('hmdb:general_function/text()')
+        specific_function = hmdbproperty('hmdb:specific_function/text()')
+        subcellular_location = hmdbproperty(
+            'hmdb:subcellular_locations/hmdb:subcellular_location/text()')
+        gene_loc = hmdbproperty(
+            'hmdb:gene_properties/hmdb:chromosome_location/text()')
+        residue_number = hmdbproperty(
+            'hmdb:protein_properties/hmdb:residue_number/text()')
+        genbank_protein_id = hmdbproperty('hmdb:genbank_protein_id/text()')
+        uniprot_id = hmdbproperty('hmdb:uniprot_id/text()')
+        genbank_gene_id = hmdbproperty('hmdb:genbank_gene_id/text()')
+        genecard_id = hmdbproperty('hmdb:genecard_id/text()')
+        hgnc_id = hmdbproperty('hmdb:hgnc_id/text()')
 
         writer.writerow({
             'accession': accession,

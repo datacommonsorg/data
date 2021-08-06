@@ -45,129 +45,51 @@ def hmdbextract(name, file):
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
     for event, elem in context:
-        accession = elem.xpath('hmdb:accession/text()', namespaces=ns)[0]
-        try:
-            monisotopic_molecular_weight = elem.xpath(
-                'hmdb:monisotopic_molecular_weight/text()', namespaces=ns)[0]
-        except:
-            monisotopic_molecular_weight = 'NA'
-        try:
-            iupac_name = elem.xpath('hmdb:iupac_name/text()',
-                                    namespaces=ns)[0].encode('utf-8')
-        except:
-            iupac_name = 'NA'
-        name = elem.xpath('hmdb:name/text()', namespaces=ns)[0].encode('utf-8')
-        try:
-            chemical_formula = elem.xpath('hmdb:chemical_formula/text()',
-                                          namespaces=ns)[0]
-        except:
-            chemical_formula = 'NA'
-        try:
-            inchikey = elem.xpath('hmdb:inchikey/text()', namespaces=ns)[0]
-        except:
-            inchikey = 'NA'
-        try:
-            cas_registry_number = elem.xpath('hmdb:cas_registry_number/text()',
-                                             namespaces=ns)[0]
-        except:
-            cas_registry_number = 'NA'
-        try:
-            smiles = elem.xpath('hmdb:smiles/text()', namespaces=ns)[0]
-        except:
-            smiles = 'NA'
-        try:
-            drugbank = elem.xpath('hmdb:drugbank_id/text()', namespaces=ns)[0]
-        except:
-            drugbank = 'NA'
-        try:
-            chebi_id = elem.xpath('hmdb:chebi_id/text()', namespaces=ns)[0]
-        except:
-            chebi_id = 'NA'
-        try:
-            pubchem = elem.xpath('hmdb:pubchem_compound_id/text()',
-                                 namespaces=ns)[0]
-        except:
-            pubchem = 'NA'
-        try:
-            phenol_explorer_compound_id = elem.xpath(
-                'hmdb:phenol_explorer_compound_id/text()', namespaces=ns)[0]
-        except:
-            phenol_explorer_compound_id = 'NA'
-        try:
-            food = elem.xpath('hmdb:foodb_id/text()', namespaces=ns)[0]
-        except:
-            food = 'NA'
-        try:
-            knapsack = elem.xpath('hmdb:knapsack_id/text()', namespaces=ns)[0]
-        except:
-            knapsack = 'NA'
-        try:
-            chemspider = elem.xpath('hmdb:chemspider_id/text()',
-                                    namespaces=ns)[0]
-        except:
-            chemspider = 'NA'
-        try:
-            kegg = elem.xpath('hmdb:kegg_id/text()', namespaces=ns)[0]
-        except:
-            kegg = 'NA'
-        try:
-            meta_cyc = elem.xpath('hmdb:meta_cyc_id/text()', namespaces=ns)[0]
-        except:
-            meta_cyc = 'NA'
-        try:
-            bigg = elem.xpath('hmdb:bigg_id/text()', namespaces=ns)[0]
-        except:
-            bigg = 'NA'
-        try:
-            metlin_id = elem.xpath('hmdb:metlin_id/text()', namespaces=ns)[0]
-        except:
-            metlin_id = 'NA'
-        try:
-            pdb_id = elem.xpath('hmdb:pdb_id/text()', namespaces=ns)[0]
-        except:
-            pdb_id = 'NA'
-        try:
-            logpexp = elem.xpath(
-                'hmdb:experimental_properties/hmdb:property[hmdb:kind = "logp"]/hmdb:value/text()',
-                namespaces=ns)[0]
-        except:
-            logpexp = 'NA'
-        try:
-            kingdom = elem.xpath('hmdb:taxonomy/hmdb:kingdom/text()',
-                                 namespaces=ns)[0]
-        except:
-            kingdom = 'NA'
-        try:
-            direct_parent = elem.xpath(
-                'hmdb:taxonomy/hmdb:direct_parent/text()', namespaces=ns)[0]
-        except:
-            direct_parent = 'NA'
-        try:
-            super_class = elem.xpath('hmdb:taxonomy/hmdb:super_class/text()',
-                                     namespaces=ns)[0]
-        except:
-            super_class = 'NA'
-        try:
-            classorg = elem.xpath('hmdb:taxonomy/hmdb:class/text()',
-                                  namespaces=ns)[0]
-        except:
-            classorg = 'NA'
-        try:
-            sub_class = elem.xpath('hmdb:taxonomy/hmdb:sub_class/text()',
-                                   namespaces=ns)[0]
-        except:
-            sub_class = 'NA'
-        try:
-            molecular_framework = elem.xpath(
-                'hmdb:taxonomy/hmdb:molecular_framework/text()',
-                namespaces=ns)[0]
-        except:
-            molecular_framework = 'NA'
-        try:
-            vmh_id = elem.xpath('hmdb:vmh_id/text()', namespaces=ns)[0]
-        except:
-            vmh_id = 'NA'
 
+        def hmdbproperty(path):
+            if (path == 'hmdb:name/text()'):
+                var = elem.xpath('hmdb:name/text()',
+                                 namespaces=ns)[0].encode('utf-8')
+            else:
+                try:
+                    var = elem.xpath(path, namespaces=ns)[0]
+                except:
+                    var = 'NA'
+            return var
+
+        accession = elem.xpath('hmdb:accession/text()', namespaces=ns)[0]
+        monisotopic_molecular_weight = hmdbproperty(
+            'hmdb:monisotopic_molecular_weight/text()')
+        iupac_name = hmdbproperty('hmdb:iupac_name/text()')
+        name = hmdbproperty('hmdb:name/text()')
+        chemical_formula = hmdbproperty('hmdb:chemical_formula/text()')
+        inchikey = hmdbproperty('hmdb:inchikey/text()')
+        cas_registry_number = hmdbproperty('hmdb:cas_registry_number/text()')
+        smiles = hmdbproperty('hmdb:smiles/text()')
+        drugbank = hmdbproperty('hmdb:drugbank_id/text()')
+        chebi_id = hmdbproperty('hmdb:chebi_id/text()')
+        pubchem = hmdbproperty('hmdb:pubchem_compound_id/text()')
+        phenol_explorer_compound_id = hmdbproperty(
+            'hmdb:phenol_explorer_compound_id/text()')
+        food = hmdbproperty('hmdb:foodb_id/text()')
+        knapsack = hmdbproperty('hmdb:knapsack_id/text()')
+        chemspider = hmdbproperty('hmdb:chemspider_id/text()')
+        kegg = hmdbproperty('hmdb:kegg_id/text()')
+        meta_cyc = hmdbproperty('hmdb:meta_cyc_id/text()')
+        bigg = hmdbproperty('hmdb:bigg_id/text()')
+        metlin_id = hmdbproperty('hmdb:metlin_id/text()')
+        pdb_id = hmdbproperty('hmdb:pdb_id/text()')
+        logpexp = hmdbproperty(
+            'hmdb:experimental_properties/hmdb:property[hmdb:kind = "logp"]/hmdb:value/text()'
+        )
+        kingdom = hmdbproperty('hmdb:taxonomy/hmdb:kingdom/text()')
+        direct_parent = hmdbproperty('hmdb:taxonomy/hmdb:direct_parent/text()')
+        super_class = hmdbproperty('hmdb:taxonomy/hmdb:super_class/text()')
+        classorg = hmdbproperty('hmdb:taxonomy/hmdb:class/text()')
+        sub_class = hmdbproperty('hmdb:taxonomy/hmdb:sub_class/text()')
+        molecular_framework = hmdbproperty(
+            'hmdb:taxonomy/hmdb:molecular_framework/text()')
+        vmh_id = hmdbproperty('hmdb:vmh_id/text()')
         writer.writerow({
             'accession': accession,
             'monisotopic_molecular_weight': monisotopic_molecular_weight,
