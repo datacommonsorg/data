@@ -5,7 +5,14 @@
 - [Importing the Disease Ontology (DO) data](#importing-the-disease-ontology-do-data)
   - [Table of Contents](#table-of-contents)
   - [About the Dataset](#about-the-dataset)
-  - [About the Import](#about-the-import)
+    - [Download URL](#download-url)
+    - [Overview](#overview)
+    - [Schema Overview](#schema-overview)
+    - [Notes and Caveats](#notes-and-caveats)
+  - [About the import](#about-the-import)
+    - [Artifacts](#artifacts)
+      - [Scripts](#scripts)
+  - [Examples](#examples)
 
 ## About the Dataset
 
@@ -15,7 +22,7 @@ The human disease ontology data can be downloaded from their official github rep
 
 ### Overview
 
-The Disease Ontology database provides a standardized ontology for human diseases, for the purposes of consistency and reusability. It has contains extensive cross mapping of DO terms to other databases, namely, MeSH, ICD, NCI’s thesaurus, SNOMED and OMIM. More information on the database can be found [here](https://disease-ontology.org).
+The Disease Ontology database provides a standardized ontology for human diseases, for the purposes of consistency and reusability. It contains extensive cross mapping of DO terms to other databases, namely, MeSH, ICD, NCI’s thesaurus, SNOMED and OMIM. More information on the database can be found [here](https://disease-ontology.org).
 
 This directory stores the script used to convert the dataset obtained from DO into a modified version, for effective ingestion of data into the Data Commons knowledge graph.
 

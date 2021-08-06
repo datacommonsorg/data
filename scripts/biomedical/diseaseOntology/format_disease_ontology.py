@@ -38,7 +38,7 @@ def format_tag(tag: str) -> str:
         tag: tag of an element in xml file,
              containg human-readable string after '}'
     Returns:
-        tag_readable: human-readble string after '}'
+        tag_readable: human-readable string after '}'
     
     """
     tag_readable = tag.split("}")[1]
@@ -92,8 +92,8 @@ def format_cols(df):
     Returns:
         none
     """
+    df = df.astype(str)
     for i, col in enumerate(df.columns):
-        df[col] = df[col].astype(str)
         df[col] = df[col].map(lambda x: re.sub(r'[\([{})\]]', '', x))
         df.iloc[:, i] = df.iloc[:, i].str.replace("'", '')
         df.iloc[:, i] = df.iloc[:, i].str.replace('"', '')
