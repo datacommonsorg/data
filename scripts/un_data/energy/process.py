@@ -49,7 +49,7 @@ flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
 OUTPUT_CSV_COLUMNS = [
-    'Fuel_dcid', 'Country_dcid', 'Quantity', 'Unit_dcid', 'Scaling_factor', 'IsEstimate', 'StatVar'
+    'Fuel_dcid', 'Country_dcid', 'Year', 'Quantity', 'Unit_dcid', 'Scaling_factor', 'IsEstimate', 'StatVar'
 ]
 
 _DEFAULT_STAT_VAR_PV = {
