@@ -117,18 +117,15 @@ def generate_dcid(df_species, org_name, df_microbes):
     return df_microbes
 
 
-def main():
-    file_input = sys.argv[1]
-    file_output = sys.argv[2]
-    df_microbes = pd.read_csv(file_input, sep='\t')
+def format_enum_col(df_microbes):
+    """
+    Formats the columns used as enums
+    Arg:
+        df_microbes = dataframe with formatting required
+    Returns:
+        df_microbes = modified dataframe
+    """
 
-    org_name = modify_org_name(df_microbes)
-    species_dcids = org_name_query()
-
-    df_species = scientific_name_query(species_dcids)
-    df_microbes = generate_dcid(df_species, org_name, df_microbes)
-
-    #format the columns declared as enums
     list_col = ['metabolism', 'oxygenstat', 'mtype']
     for i in list_col:
         p = df_microbes[i]
@@ -147,6 +144,23 @@ def main():
     for i in col_enum_dict:
         p = col_enum_dict.get(i) + df_microbes[i]
         df_microbes[i] = p
+
+    return df_microbes
+
+
+def main():
+    file_input = sys.argv[1]
+    file_output = sys.argv[2]
+    df_microbes = pd.read_csv(file_input, sep='\t')
+
+    org_name = modify_org_name(df_microbes)
+    species_dcids = org_name_query()
+
+    df_species = scientific_name_query(species_dcids)
+    df_microbes = generate_dcid(df_species, org_name, df_microbes)
+
+    #format the columns declared as enums
+    df_microbes = format_enum_col(df_microbes)
     #Date conversion to ISO format
     for i in df_microbes.index:
         if df_microbes.loc[i,
