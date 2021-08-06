@@ -24,17 +24,15 @@ in the data commons schema.
 import sys
 import pandas as pd
 
+def add_enum(df):
+    """
+    Add appropriate keywords to columns defined as enums.
+    Args:
+        df = dataframe which needs to be modified
+    Returns:
+        df = modified dataframe
+    """
 
-def main():
-
-    file_input = sys.argv[1]
-    file_output = sys.argv[2]
-    df = pd.read_csv(file_input)
-
-    # Add dcid
-    df['Id'] = 'bio/' + df['accession'].astype(str)
-
-    # Add enum keywords
     enum_dict = {
         'kingdom': 'dcs:ChemicalCompoundCategory',
         'direct_parent': 'dcs:ChemicalCompoundParent',
@@ -51,7 +49,22 @@ def main():
         df[i] = enum_dict.get(i) + df[i].astype(str)
         nan_remove = enum_dict.get(i) + 'nan'
         df[i] = df[i].str.replace(nan_remove, '')
+    
+    return df
 
+
+
+def main():
+
+    file_input = sys.argv[1]
+    file_output = sys.argv[2]
+    df = pd.read_csv(file_input)
+
+    # Add dcid
+    df['Id'] = 'bio/' + df['accession'].astype(str)
+
+    # Add enum keywords
+    df = add_enum(df)
     df.update(
         '"' +
         df[['iupac_name', 'name', 'chebi_id', 'drugbank', 'smiles', 'chembl'
