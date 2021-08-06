@@ -167,6 +167,25 @@ def convert_chebi_to_chembl(df):
             pass
     return df
 
+def add_chembl_vhm_hmdb(df_hmdb, df_virtual):
+    """
+    Adds chembl matches from VHM data to HMDB
+    Args:
+        df_hmdb = HMDB data
+        df_virtual = VMH data
+    Returns:
+        df_hmdb = HMDB data with chembl added
+    """
+    df_hmdb = name_map(df_virtual, df_hmdb)
+    df_hmdb = kegg_map(df_virtual, df_hmdb)
+    df_hmdb = chebi_map(df_virtual, df_hmdb)
+    df_hmdb['chembl'] = df_hmdb['chembl'].replace({'0': np.nan, 0: np.nan})
+    df_hmdb = convert_kegg_to_chembl(df_hmdb)
+    df_hmdb = convert_chebi_to_chembl(df_hmdb)
+    return df_hmdb
+
+
+
 
 def main():
     # get argument from input
@@ -250,14 +269,8 @@ def main():
                    drop_duplicates().set_index("master_hmdb").\
                    to_dict()["chembl"]
     df_hmdb["chembl"] = df_hmdb["accession"].map(hmdb_chembl_dict)
-
-    df_hmdb = name_map(df_virtual, df_hmdb)
-    df_hmdb = kegg_map(df_virtual, df_hmdb)
-    df_hmdb = chebi_map(df_virtual, df_hmdb)
-    df_hmdb['chembl'] = df_hmdb['chembl'].replace({'0': np.nan, 0: np.nan})
-    df_hmdb = convert_kegg_to_chembl(df_hmdb)
-    df_hmdb = convert_chebi_to_chembl(df_hmdb)
-
+ 
+    df_hmdb = add_chembl_vhm_hmdb(df_hmdb, df_virtual)
     df_hmdb.to_csv(output_path, index=None)
 
 
