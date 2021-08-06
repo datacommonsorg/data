@@ -221,6 +221,60 @@ def add_property_matches(df, df_col_name, property_name):
     return df
 
 
+def add_chembl_bioservices(df):
+    """
+    Takes in the dataframe to be modfied and adds the chembl
+    ids using the bioservices packages
+    Args:
+        df = name of original dataframe
+    Returns:
+        df = modified dataframe
+    """
+    uni = UniChem()
+    mapping = uni.get_mapping("kegg_ligand", "chembl")
+    chembl_list = [0] * len(df['keggId'])
+    df.insert(7, 'ChEMBL', chembl_list)
+    for index, row in df.iterrows():
+        try:
+            chembl_list[index] = mapping[row['keggId']]
+        except:
+            pass
+    df['ChEMBL'] = chembl_list
+    df['ChEMBL'] = df['ChEMBL'].replace({'0': np.nan, 0: np.nan})
+    return df
+
+
+def generate_dcid(df):
+    """
+    Takes in the dataframe to be modfied and generates
+    the dcids based on chembl, hmdb, metanetx
+    and full name
+    Args:
+        df = name of original dataframe
+    Returns:
+        df = modified dataframe
+    """
+    for i in df.index:
+        if df.loc[i, 'ChEMBL'] != 0:
+            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'ChEMBL'])
+        elif ~(isNaN(df.loc[i, 'hmdb'])):
+            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'hmdb'])
+        elif ~(isNaN(df.loc[i, 'metanetx'])):
+            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'metanetx'])
+    # Add dcids based on IUPAC names if no previous matches
+    for i in df.index:
+        l = df.loc[i, 'fullName']
+        l = l.replace(' ', '_')
+        l = l.replace(',', '_')
+        df.loc[i, 'fullName'] = l
+
+    for i in df.index:
+        if df.loc[i, 'Id'] == "bio/nan":
+            df.loc[i, 'Id'] = "bio/" + df.loc[i, 'fullName']
+
+    return df
+
+
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
@@ -241,40 +295,13 @@ def main():
     df = add_property_matches(df, 'drugbank', "drugBankMetaboliteID")
     #Add chemblID column in the dataframe and add the corresponding chembl ids
     #for each entry
-    uni = UniChem()
-    mapping = uni.get_mapping("kegg_ligand", "chembl")
-    chembl_list = [0] * len(df['keggId'])
-    df.insert(7, 'ChEMBL', chembl_list)
-    for index, row in df.iterrows():
-        try:  #chembl_list.insert(index, mapping[row['keggId']] )
-            chembl_list[index] = mapping[row['keggId']]
-        except:
-            pass
-    df['ChEMBL'] = chembl_list
-    df['ChEMBL'] = df['ChEMBL'].replace({'0': np.nan, 0: np.nan})
+    df = add_chembl_bioservices(df)
     #Get hmdb IDs from the hmdb data
     df = name_map(df, dfh)
     df = kegg_map(df, dfh)
     df = chebi_map(df, dfh)
     # Add dcids w.r.t chembl ids, hmdb and metanetx
-    for i in df.index:
-        if df.loc[i, 'ChEMBL'] != 0:
-            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'ChEMBL'])
-        elif ~(isNaN(df.loc[i, 'hmdb'])):
-            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'hmdb'])
-        elif ~(isNaN(df.loc[i, 'metanetx'])):
-            df.loc[i, 'Id'] = 'bio/' + str(df.loc[i, 'metanetx'])
-    # Add dcids based on IUPAC names if no previous matches
-    for i in df.index:
-        l = df.loc[i, 'fullName']
-        l = l.replace(' ', '_')
-        l = l.replace(',', '_')
-        df.loc[i, 'fullName'] = l
-
-    for i in df.index:
-        if df.loc[i, 'Id'] == "bio/nan":
-            df.loc[i, 'Id'] = "bio/" + df.loc[i, 'fullName']
-
+    df = generate_dcid(df)
     # Add "CHEBI:" to all chebi ids
     df['cheBlId'] = "CHEBI:" + df['cheBlId'].astype(str)
     df.to_csv(file_output, index=None)
