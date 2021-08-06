@@ -40,36 +40,72 @@ The precipitation index datasets contain precipitation index data for a given ye
 None.
 
 ### License
-The data is published by the CDC National Environmental Public Health Tracking Network.
+The data is made available for public-use by the [CDC](https://www.cdc.gov/nchs/data_access/ftp_data.htm). Users of CDC National Center for Health Statistics Data must comply with the CDC's [data use agreement](https://www.cdc.gov/nchs/data_access/restrictions.htm).
 
 ### Dataset Documentation and Relevant Links
-The dataset documentation is accessible on the [CDC National Evnvironment Public Health Tracking Network's website](https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm)
+These data were collected as part of the [CDC National Environment Public Health Tracking Network](https://ephtracking.cdc.gov/). The documentation for the air quality datasets is accessible [here](https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm). The documentation for the drought data sets is accessible [here](https://www.cdc.gov/nceh/tracking/topics/Drought.htm).
 
 ## About the Import
 
 ### Artifacts
 
 #### Scripts
-[`parse_air_quality.py`](data/scripts/us_cdc/environmental_health_toxicology/)
+[`parse_air_quality.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py)
 
-[`parse_precipitation_index.py`](data/scripts/us_cdc/environmental_health_toxicology/)
+[`parse_precipitation_index.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_precipitation_index.py)
+
+#### Test Scripts
+[`parse_air_quality_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_air_quality_test.py)
+
+[`parse_precipitation_index_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_precipitation_index_test.py)
+
+#### Test Files
+[`small_Ozone_County.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Ozone_County.csv)
+
+[`small_Ozone_County_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Ozone_County_expected.csv)
+
+[`small_Palmer.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Palmer.csv)
+
+[`small_Palmer_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Palmer_expected.csv)
 
 #### tMCFs
-[`OzoneCensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
+[`OzoneCensusTractPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
 
-[`OzoneCountyPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/OzoneCountyPollution.tmcf)
+[`OzoneCountyPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/OzoneCountyPollution.tmcf)
 
-[`PalmerDroughtSeverityIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PalmerDroughtSeverityIndex.tmcf)
+[`PalmerDroughtSeverityIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PalmerDroughtSeverityIndex.tmcf)
 
-[`PM25CensusTractPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CensusTractPollution.tmcf)
+[`PM25CensusTractPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PM25CensusTractPollution.tmcf)
 
-[`PM25CountyPollution.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/PM25CountyPollution.tmcf)
+[`PM25CountyPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PM25CountyPollution.tmcf)
 
-[`StandardizedPrecipitationEvapotranspirationIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationEvapotranspirationIndex.tmcf)
+[`StandardizedPrecipitationEvapotranspirationIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationEvapotranspirationIndex.tmcf)
 
-[`StandardizedPrecipitationIndex.tmcf`](data/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationIndex.tmcf)
+[`StandardizedPrecipitationIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationIndex.tmcf)
 
 ### Import Procedure
+
+#### Testing
+
+##### Test Air Quality Data Cleaning Script
+
+To test the air quality data cleaning script, run:
+
+```bash
+$ python3 parse_air_quality_test.py
+```
+
+The expected output of this test can be found in [`small_Ozone_County_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Ozone_County_expected.csv).
+
+##### Test Precipitation Index Data Cleaning Script
+
+To test the precipitation index data cleaning script, run:
+
+```bash
+$ python3 parse_precipitation_index_test.py
+```
+
+The expected output of this test can be found in [`small_Palmer_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Palmer_expected.csv).
 
 #### Processing Steps
 
