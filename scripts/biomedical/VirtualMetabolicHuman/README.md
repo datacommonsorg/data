@@ -5,7 +5,13 @@
 - [Importing VMH Metabolome and Microbiome data](#importing-vmh-metabolome-and-microbiome-data)
   - [Table of Contents](#table-of-contents)
   - [About the Dataset](#about-the-dataset)
-  - [About the Import](#about-the-import)
+    - [Download URL](#download-url)
+    - [Overview](#overview)
+    - [Notes and Caveats](#notes-and-caveats)
+  - [About the import](#about-the-import)
+    - [Artifacts](#artifacts)
+      - [Scripts](#scripts)
+  - [Examples](#examples)
 
 ## About the Dataset
 
@@ -20,7 +26,7 @@ This directory stores the scripts used to convert the datasets obtained from VHM
 The VHM database explicity connects human metabolism with genetics and human-associated microbial metabolism. It consists of five interconnected resources: `Human metabolism`, `Gut microbiome`, `Disease`, `Nutrition` and `ReconMaps`. More information on the database can be found on their official [website](https://www.vmh.life/#home) and [manuscript](https://academic.oup.com/nar/article/47/D1/D614/5146204).
 For the knowledge graph, three files are imported:
 
-- <u>recon-store-metabolites-1.tsv</u> : contains information on chemical properties of metabolites, and identifiers for various databases to query the metabolites. To generate dcids the keggID for each metabolite was converted to the ChEMBL ID, using the [bioservices packages](https://bioservices.readthedocs.io/en/master/compound_tutorial.html). For metabolites with missing keggIDs the chemical formula were used to generate the dcids.
+- <u>recon-store-metabolites-1.tsv</u> : contains information on chemical properties of metabolites, and identifiers for various databases to query the metabolites. To generate dcids the keggID for each metabolite was converted to the ChEMBL ID, using the [bioservices packages](https://bioservices.readthedocs.io/en/master/compound_tutorial.html). For metabolites with missing keggIDs the IUPAC names were used to generate the dcids.
 - <u>recon-store-reactions-1.tsv</u> : contains information on the chemical equations and formula of metabolic reactions, biochemical subsytem where the reactions take place and identifiers for various databases, to query the reactions. The reaction and metabolite abbreviations were mapped to one another using the longest substring match and the dcid for longest matched metabolite was appended to the respective reaction column. In addition, for generation of reaction dcids, the humanGEMIDs were obtained for reactions, using the metaNetX IDs and [Human1 data](https://raw.githubusercontent.com/khoahoang1891999/Importing-Human1-data/main/data/reactions.tsv). For reactions with no metaNetX IDs, the chemical abbreviations were used are reactions dcids.
   In addition, this file was also used to generate a new file `subsystem.csv` which contains all the unique biochemical subsystems from the above reactions and the subsystem names were used to generate their corresponding dcids.ß
 - <u>recon-store-microbes-1.tsv</u>: contains information on microbial taxonomic classification, phenotype, metrics about genes, reactions and metabolites linked to microbes and identifiers for various databases, to query the microbes. The datacommons was queried for pre-exisiting microbe dcids using the scientific name, and for the ones with no node on datacommons, new dcids were generated using their genus and specie names. The dates were converted to ISO format.
@@ -87,11 +93,11 @@ python human1_compartment.py metabolites.tsv reactantRoles.tsv productRoles.tsv 
 
 where
 
-@human1_compartment.py  python script
-@metabolites.tsv        metabolites from human1
-@reactantRoles.tsv      reactant roles from human1
-@productRoles.tsv       product roles from human1
-@reactions.tsv          reactions from human1
+@human1_compartment.py python script
+@metabolites.tsv metabolites from human1
+@reactantRoles.tsv reactant roles from human1
+@productRoles.tsv product roles from human1
+@reactions.tsv reactions from human1
 
 To generate the formatted reaction file:
 
@@ -101,10 +107,10 @@ python format_reaction.py recon-store-reactions-1.tsv reactions_vmh.csv human1_r
 
 where
 
-@format_reaction.py               python script
-@recon-store-reactions-1.tsv      unformatted reaction tsv from VHM
-@human1_reaction_compartment.csv  compartment information from the above step
-@metabolites_vmh.csv              the output file obtained above
+@format_reaction.py python script
+@recon-store-reactions-1.tsv unformatted reaction tsv from VHM
+@human1_reaction_compartment.csv compartment information from the above step
+@metabolites_vmh.csv the output file obtained above
 
 To generate the formatted reaction subsystem file:
 
@@ -114,9 +120,9 @@ python format_reaction_subsystem.py reactions_vmh.csv reaction_subsystem_vmh.csv
 
 where
 
-@format_reaction_subsystem.py     python script
-@reactions_vmh.csv                output file obtained from above
-reaction_subsystem_vmh.csv        output subsystem file
+@format_reaction_subsystem.py python script
+@reactions_vmh.csv output file obtained from above
+reaction_subsystem_vmh.csv output subsystem file
 
 To generate the formatted microbes file:
 
