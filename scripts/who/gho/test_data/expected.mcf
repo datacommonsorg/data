@@ -1,0 +1,29 @@
+Node: dcid:EMFLIMITELECTRIC_Public_LowFrequency
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/EMFLIMITELECTRIC
+statType: dcs:measurementResult
+emfExposureGroup: dcs:WHO/Public
+emfFrequency: dcs:WHO/LowFrequency
+
+Node: dcid:EMFLIMITELECTRIC_Public_Static
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/EMFLIMITELECTRIC
+statType: dcs:measurementResult
+emfExposureGroup: dcs:WHO/Public
+emfFrequency: dcs:WHO/Static
+
+Node: dcid:EMFLIMITELECTRIC_Workers_Static
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/EMFLIMITELECTRIC
+statType: dcs:measurementResult
+emfExposureGroup: dcs:WHO/Workers
+emfFrequency: dcs:WHO/Static
+
+Node: dcid:WSH_8
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/WSH_8
+statType: dcs:measuredValue
