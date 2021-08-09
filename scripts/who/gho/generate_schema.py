@@ -22,76 +22,132 @@ from absl import flags
 from absl import app
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('data_dir',
-                    '',
-                    'Path to folder that contains the raw json data from the indicators.')
-flags.DEFINE_string('curated_dim_file',
-                    '',
-                    'path to a json file containing mapping of dimension types and values to their schema dcid. (For curated values)')
-flags.DEFINE_string('artifact_dir',
-                    '',
-                    'dir to output generated artifacts (dimension categories and dimension to schema dcid mapping). If blank, will not output dimension categories')
-flags.DEFINE_string('mcf_dir',
-                    '',
-                    'dir to output generated MCF file to. If blank, will output the generated MCF files to current directory')
+flags.DEFINE_string(
+    'data_dir', '',
+    'Path to folder that contains the raw json data from the indicators.')
+flags.DEFINE_string(
+    'curated_dim_file', '',
+    'path to a json file containing mapping of dimension types and values to their schema dcid. (For curated values)'
+)
+flags.DEFINE_string(
+    'artifact_dir', '',
+    'dir to output generated artifacts (dimension categories and dimension to schema dcid mapping). If blank, will not output dimension categories'
+)
+flags.DEFINE_string(
+    'mcf_dir', '',
+    'dir to output generated MCF file to. If blank, will output the generated MCF files to current directory'
+)
 
 PROP_TITLE_MAP = {
-    "GOVERNMENTBENEFIT": "Substance Use Disorder Government Benefit",
-    "GROUP": "substance Use Disorder Resource Group",
-    "RSUDPREVENTIONPROGRAMME": "Substance Use Disorder Prevention Programmes",
-    "RSUDMAINSUBSTANCEATTREATMENT": "Main Substance At Treatment",
-    "POLICYADOPTIONLEVEL": "Policy Adopted At",
-    "SUBSTANCETYPE": "Substance Type",
-    "EMFFREQUENCY": "Emf Frequency",
-    "EMFEXPOSED": "Emf Exposure Group ",
-    "DRUG": "Drug Used",
-    "RSUDHWF": "Occupation",
-    "PROGRAMME": "Substance Use Disorder Program",
-    "RSUDREP": "Representative Type",
-    "RSUDSPECIFICPOPULATION": "Grouping Of People",
-    "DRUGSUPERVISION": "Drug Supervision Requirement",
-    "DRUGPRESCRIPTION": "Drug Prescription Requirement",
-    "RSUDMONITORING": "Substance Use Disorder Monitoring System",
-    "PUBLICPLACE": "Public Location Type",
-    "MEASUREIMPORTANCETYPE": "Substance Abuse Reduction Measure Type",
-    "NATIONALSYSTEMTYPE": "Substance Use Disorder Monitoring System",
-    "EMFBODYPART": "Emf Exposure Body Part",
-    "SEATTYPE": "Vehicle Occupant Type",
-    "MOTOCYCLEOCCUPANTTYPE": "Vehicle Occupant Type",
-    "RSUDMAINTENANCEACCESSRESTRICTIONS": "Substance Use Disorder Treatment Access Restrictions",
-    "RSUD_HIVHEP_CT": "Hiv Hepatitis Services Available",
-    "STANDARDOFCARE": "Standard Of Care",
-    "BACGROUP": "Grouping Of People",
-    "SUNBED_CONTROL": "Sunbed Compliance Measure",
-    "RSUDTREATMENT": "Substance Use Disorder Treatment Type",
-    "RSUDSUBSTANCEDEPENDENCE": "Substance Type",
-    "PRICEMEASURETYPE": "Pricing Constraint Type",
-    "SPONSORSHIPORIGINATOR": "Sponsorship Industry",
-    "PUBLICPRIVATESETTING": "Location Type Of Service",
-    "GOEQUESTION": "Global Observatory For EHealth Question",
-    "RSUDREP": "Substance Use Disorder Resource Representative Type",
-    "EMFRADIOBAND": "Emf Radio Band",
-    "DRIVERTYPE": "Vehicle Driver Type",
-    "OPENACCESSSERVICE": "Substance Use Disorder Open Access Service",
-    "GOVERNMENTBENEFIT": "Substance Use Disorder Government Benefit",
-    "RSUDPHARMACOTHERAPYOPTION": "Pharmacotherapy Option",
-    "COORDINATINGENTITIES": "Substance Abuse Coordinating Entity",
-    "PENALTYTYPE": "Legal Penalty Type",
-    "CONSUMPTIONTYPE": "Alcohol Consumption Record Type",
-    "COMMUNITYACTIONTYPE": "Government Supportable Community Action",
-    "VEHICLESTANDARD": "Vehicle Feature Type",
-    "HARMANDCONSEQUENCE": "Substance Abuse Consequence",
-    "RSUDREPORTING": "Reporting Data Source"
+    "GOVERNMENTBENEFIT":
+        "Substance Use Disorder Government Benefit",
+    "GROUP":
+        "substance Use Disorder Resource Group",
+    "RSUDPREVENTIONPROGRAMME":
+        "Substance Use Disorder Prevention Programmes",
+    "RSUDMAINSUBSTANCEATTREATMENT":
+        "Main Substance At Treatment",
+    "POLICYADOPTIONLEVEL":
+        "Policy Adopted At",
+    "SUBSTANCETYPE":
+        "Substance Type",
+    "EMFFREQUENCY":
+        "Emf Frequency",
+    "EMFEXPOSED":
+        "Emf Exposure Group ",
+    "DRUG":
+        "Drug Used",
+    "RSUDHWF":
+        "Occupation",
+    "PROGRAMME":
+        "Substance Use Disorder Program",
+    "RSUDREP":
+        "Representative Type",
+    "RSUDSPECIFICPOPULATION":
+        "Grouping Of People",
+    "DRUGSUPERVISION":
+        "Drug Supervision Requirement",
+    "DRUGPRESCRIPTION":
+        "Drug Prescription Requirement",
+    "RSUDMONITORING":
+        "Substance Use Disorder Monitoring System",
+    "PUBLICPLACE":
+        "Public Location Type",
+    "MEASUREIMPORTANCETYPE":
+        "Substance Abuse Reduction Measure Type",
+    "NATIONALSYSTEMTYPE":
+        "Substance Use Disorder Monitoring System",
+    "EMFBODYPART":
+        "Emf Exposure Body Part",
+    "SEATTYPE":
+        "Vehicle Occupant Type",
+    "MOTOCYCLEOCCUPANTTYPE":
+        "Vehicle Occupant Type",
+    "RSUDMAINTENANCEACCESSRESTRICTIONS":
+        "Substance Use Disorder Treatment Access Restrictions",
+    "RSUD_HIVHEP_CT":
+        "Hiv Hepatitis Services Available",
+    "STANDARDOFCARE":
+        "Standard Of Care",
+    "BACGROUP":
+        "Grouping Of People",
+    "SUNBED_CONTROL":
+        "Sunbed Compliance Measure",
+    "RSUDTREATMENT":
+        "Substance Use Disorder Treatment Type",
+    "RSUDSUBSTANCEDEPENDENCE":
+        "Substance Type",
+    "PRICEMEASURETYPE":
+        "Pricing Constraint Type",
+    "SPONSORSHIPORIGINATOR":
+        "Sponsorship Industry",
+    "PUBLICPRIVATESETTING":
+        "Location Type Of Service",
+    "GOEQUESTION":
+        "Global Observatory For EHealth Question",
+    "RSUDREP":
+        "Substance Use Disorder Resource Representative Type",
+    "EMFRADIOBAND":
+        "Emf Radio Band",
+    "DRIVERTYPE":
+        "Vehicle Driver Type",
+    "OPENACCESSSERVICE":
+        "Substance Use Disorder Open Access Service",
+    "GOVERNMENTBENEFIT":
+        "Substance Use Disorder Government Benefit",
+    "RSUDPHARMACOTHERAPYOPTION":
+        "Pharmacotherapy Option",
+    "COORDINATINGENTITIES":
+        "Substance Abuse Coordinating Entity",
+    "PENALTYTYPE":
+        "Legal Penalty Type",
+    "CONSUMPTIONTYPE":
+        "Alcohol Consumption Record Type",
+    "COMMUNITYACTIONTYPE":
+        "Government Supportable Community Action",
+    "VEHICLESTANDARD":
+        "Vehicle Feature Type",
+    "HARMANDCONSEQUENCE":
+        "Substance Abuse Consequence",
+    "RSUDREPORTING":
+        "Reporting Data Source"
 }
 
 PROP_NODE_NAME_MAP = {
-    "IHRSPARCAPACITYLEVEL": "International Health Regulations (IHR) State Party Self-Assessment Annual Report (SPAR) Capacity Level",
-    "AMRGLASSCATEGORY": "Antimicrobial resistance (amr) Global Antimicrobial Resistance and Use Surveillance System (GLASS) Category",
-    "EMFEXPOSED": "Electromagnetic Fields Exposure Group",
-    "EMFFREQUENCY": "Electromagnetic Fields Frequency",
-    "EMFRADIOBAND": "Electromagnetic Fields Radio Band",
-    "EMFBODYPART": "Electromagnetic Fields Exposure Body Part"
+    "IHRSPARCAPACITYLEVEL":
+        "International Health Regulations (IHR) State Party Self-Assessment Annual Report (SPAR) Capacity Level",
+    "AMRGLASSCATEGORY":
+        "Antimicrobial resistance (amr) Global Antimicrobial Resistance and Use Surveillance System (GLASS) Category",
+    "EMFEXPOSED":
+        "Electromagnetic Fields Exposure Group",
+    "EMFFREQUENCY":
+        "Electromagnetic Fields Frequency",
+    "EMFRADIOBAND":
+        "Electromagnetic Fields Radio Band",
+    "EMFBODYPART":
+        "Electromagnetic Fields Exposure Body Part"
 }
+
 
 def categorize_dimensions(data_files):
     """ Categorize dimensions as cprops, spatial dimensions or time dimensions
@@ -134,14 +190,17 @@ def categorize_dimensions(data_files):
             cprop_dim[dim3Type] = dim3Count + 1
     cprop_list = []
     for prop in cprop_dim:
-        cprop_list.append({ "id": prop, "num": cprop_dim.get(prop) })
-    sorted_cprop_list = sorted(cprop_list, key=lambda x: x.get("num"), reverse=True)
+        cprop_list.append({"id": prop, "num": cprop_dim.get(prop)})
+    sorted_cprop_list = sorted(cprop_list,
+                               key=lambda x: x.get("num"),
+                               reverse=True)
     result = {
         "spatial": spatial_dim,
         "time": list(time_dim),
         "cprop": sorted_cprop_list
     }
     return result
+
 
 def get_enum_node(dcid):
     node = []
@@ -151,6 +210,7 @@ def get_enum_node(dcid):
     node.append(f'name: "{dcid}"')
     node.append("")
     return node
+
 
 def get_prop_node(dcid, description, range_dcid):
     node = []
@@ -164,6 +224,7 @@ def get_prop_node(dcid, description, range_dcid):
     node.append("")
     return node
 
+
 def get_val_node(dcid, type_of):
     node = []
     node.append("Node: dcid:" + dcid)
@@ -171,6 +232,7 @@ def get_val_node(dcid, type_of):
     node.append("typeOf: dcs:" + type_of)
     node.append("")
     return node
+
 
 def generate_dimensions_schema(curated_dim_types, dim_categories):
     """ Autogenerate schema and the mapping from dimension to schema
@@ -195,7 +257,8 @@ def generate_dimensions_schema(curated_dim_types, dim_categories):
     mcf_result = []
     dim_type_map = {}
     dim_value_map = {}
-    dimensions = requests.get("https://ghoapi.azureedge.net/api/Dimension").json().get("value", [])
+    dimensions = requests.get(
+        "https://ghoapi.azureedge.net/api/Dimension").json().get("value", [])
     for d in dimensions:
         d_code = d.get('Code', "")
         if not d_code in cprops or d_code in curated_dim_types:
@@ -216,7 +279,9 @@ def generate_dimensions_schema(curated_dim_types, dim_categories):
         seen_dcids[prop_dcid] = set()
         dim_type_map[d_code] = prop_dcid
         dim_value_map[d_code] = {}
-        d_values = requests.get(f"https://ghoapi.azureedge.net/api/Dimension/{d_code}/DimensionValues").json().get("value", [])
+        d_values = requests.get(
+            f"https://ghoapi.azureedge.net/api/Dimension/{d_code}/DimensionValues"
+        ).json().get("value", [])
         for value in d_values:
             v_code = value.get('Code')
             v_title = value.get('Title').title()
@@ -228,6 +293,7 @@ def generate_dimensions_schema(curated_dim_types, dim_categories):
             dim_value_map[d_code][v_code] = "dcs:" + node_dcid
     dim_map = {"dimTypes": dim_type_map, "dimValues": dim_value_map}
     return mcf_result, dim_map
+
 
 def build_indicator_node(dcid, i_name):
     description = format_indicator_description(i_name)
@@ -241,12 +307,14 @@ def build_indicator_node(dcid, i_name):
     result.append("")
     return result
 
+
 def format_indicator_description(description):
     description = re.sub("\–|\−", "-", description)
     description = re.sub('\“|\”', '"', description)
     description = description.replace(" ", "")
     description = description.replace("m²", "square metre")
     return description
+
 
 def generate_indicators_schema():
     """ Autogenerate schema and the mapping from indicator to schema
@@ -256,7 +324,8 @@ def generate_indicators_schema():
     """
     mcf_result = []
     indicator_map = {}
-    indicator_list = requests.get("https://ghoapi.azureedge.net/api/Indicator").json().get("value", [])
+    indicator_list = requests.get(
+        "https://ghoapi.azureedge.net/api/Indicator").json().get("value", [])
     for indicator in indicator_list:
         code = indicator.get("IndicatorCode", "")
         name = indicator.get("IndicatorName", "")
@@ -265,6 +334,7 @@ def generate_indicators_schema():
         mcf_result.extend(indicator_mcf)
         indicator_map[code] = dcid
     return mcf_result, indicator_map
+
 
 def generate_schema(data_files, curated_dim_file, artifact_dir, mcf_dir):
     """ Autogenerate a schema and the mapping from dimensions/indicators to
@@ -288,7 +358,8 @@ def generate_schema(data_files, curated_dim_file, artifact_dir, mcf_dir):
     dim_categories = categorize_dimensions(data_files)
     with open(curated_dim_file, "r+") as curated_dim_map:
         curated_dim_map = json.load(curated_dim_map)
-    dim_mcf, dim_map = generate_dimensions_schema(curated_dim_map.get("dimTypes", {}), dim_categories)
+    dim_mcf, dim_map = generate_dimensions_schema(
+        curated_dim_map.get("dimTypes", {}), dim_categories)
     indicator_mcf, indicator_map = generate_indicators_schema()
     cprop_mapping = {}
     values_mapping = {}
@@ -296,25 +367,35 @@ def generate_schema(data_files, curated_dim_file, artifact_dir, mcf_dir):
     cprop_mapping.update(curated_dim_map.get("dimTypes", {}))
     values_mapping.update(dim_map.get("dimValues", {}))
     values_mapping.update(curated_dim_map.get("dimValues", {}))
-    schema_mapping = { "cprops": cprop_mapping, "values": values_mapping, "indicators": indicator_map }
+    schema_mapping = {
+        "cprops": cprop_mapping,
+        "values": values_mapping,
+        "indicators": indicator_map
+    }
     # save mcf file
-    with open(os.path.join(mcf_dir, "who_generated_schema.mcf"), "w+") as dim_mcf_file:
+    with open(os.path.join(mcf_dir, "who_generated_schema.mcf"),
+              "w+") as dim_mcf_file:
         dim_mcf_file.write("\n".join(dim_mcf + indicator_mcf))
     # save artifacts
     if artifact_dir:
-        with open(os.path.join(artifact_dir, "schema_mapping.json"), "w+") as schema_mapping_file:
+        with open(os.path.join(artifact_dir, "schema_mapping.json"),
+                  "w+") as schema_mapping_file:
             schema_mapping_file.write(json.dumps(schema_mapping))
-        with open(os.path.join(artifact_dir, "dim_categories.json"), "w+") as dim_categories_file:
+        with open(os.path.join(artifact_dir, "dim_categories.json"),
+                  "w+") as dim_categories_file:
             dim_categories_file.write(json.dumps(dim_categories))
     return schema_mapping
+
 
 def main(args):
     data_dir = FLAGS.data_dir
     data_files = []
     if FLAGS.data_dir:
         for f in os.listdir(data_dir):
-          data_files.append(os.path.join(data_dir, f))
-    generate_schema(data_files, FLAGS.curated_dim_file, FLAGS.artifact_dir, FLAGS.mcf_dir)
+            data_files.append(os.path.join(data_dir, f))
+    generate_schema(data_files, FLAGS.curated_dim_file, FLAGS.artifact_dir,
+                    FLAGS.mcf_dir)
+
 
 if __name__ == '__main__':
     app.run(main)

@@ -22,18 +22,20 @@ from absl import flags
 from absl import app
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('raw_data_dir',
-                    '',
-                    'Path to folder that contains the raw json data from the indicators.')
-flags.DEFINE_string('schema_mapping',
-                    '',
-                    'path to a json file containing mapping of dimensions and indicators to their corresponding schema dcid.')
-flags.DEFINE_string('output_dir',
-                    '',
+flags.DEFINE_string(
+    'raw_data_dir', '',
+    'Path to folder that contains the raw json data from the indicators.')
+flags.DEFINE_string(
+    'schema_mapping', '',
+    'path to a json file containing mapping of dimensions and indicators to their corresponding schema dcid.'
+)
+flags.DEFINE_string('output_dir', '',
                     'directory to output the csv and stat var mcf to.')
 VALUES_TO_DROP = {
-  "No data", "Data not available", "Not available", "Not applicable", "*Filler*"
+    "No data", "Data not available", "Not available", "Not applicable",
+    "*Filler*"
 }
+
 
 def get_time_period(entry):
     """For a data entry, get the time period.
@@ -76,6 +78,7 @@ def get_time_period(entry):
         time_period = f"P{diff + 1}Y"
     return time_period
 
+
 def get_value(entry):
     """For a data entry, get the value.
     Args: 
@@ -89,12 +92,13 @@ def get_value(entry):
         statType = "measurementResult"
         value = entry.get("Value", "")
         if value:
-          value = value.replace(',', '').replace('\n', '')
-          if not re.findall('\w', value):
-            value = ''
-          if "[" in value:
-            value = f"'{value}'"
+            value = value.replace(',', '').replace('\n', '')
+            if not re.findall('\w', value):
+                value = ''
+            if "[" in value:
+                value = f"'{value}'"
     return value, statType
+
 
 def get_dimension_pv(cprop_mapping, value_mapping, type_key, value_key, entry):
     """ Get the mapped cprop and value for a dimension in a data entry.
@@ -113,6 +117,7 @@ def get_dimension_pv(cprop_mapping, value_mapping, type_key, value_key, entry):
     val = value_mapping.get(d_type, {}).get(d_value, "")
     return prop, val
 
+
 def update_dcid(dcid, prop, val):
     """Given a dcid and pv, update the dcid to include the pv.
     Args:
@@ -126,8 +131,10 @@ def update_dcid(dcid, prop, val):
     if val_dcid[0:4] == "WHO/":
         val_dcid = val_dcid[4:]
     if prop == "age":
-        val_dcid = val_dcid.replace("+", "PLUS").replace("-", "TO").replace("TOPLUS","PLUS")
+        val_dcid = val_dcid.replace("+", "PLUS").replace("-", "TO").replace(
+            "TOPLUS", "PLUS")
     return dcid + "_" + val_dcid
+
 
 def get_value_to_write(values_list):
     """Given a list of values, choose the one ranked highest.
@@ -144,10 +151,15 @@ def get_value_to_write(values_list):
     Returns:
         a single value object
     """
-    values_list = sorted(values_list, key = lambda x: x.get("commentsLength"), reverse=True)
-    values_list = sorted(values_list, key = lambda x: x.get("date", ""), reverse=True)
-    values_list = sorted(values_list, key = lambda x: x.get("hasEmptyDimVal"))
+    values_list = sorted(values_list,
+                         key=lambda x: x.get("commentsLength"),
+                         reverse=True)
+    values_list = sorted(values_list,
+                         key=lambda x: x.get("date", ""),
+                         reverse=True)
+    values_list = sorted(values_list, key=lambda x: x.get("hasEmptyDimVal"))
     return values_list[0]
+
 
 def process_dimensions(cprop_mapping, value_mapping, entry, mcf, sv_dcid):
     """ Process each of the dimensions in the data entry (up to 3)
@@ -162,19 +174,22 @@ def process_dimensions(cprop_mapping, value_mapping, entry, mcf, sv_dcid):
         has_empty_mapped_val: whether any dimension values mapped to an empty string
     """
     has_empty_mapped_val = False
-    d1_prop, d1_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim1Type", "Dim1", entry)
+    d1_prop, d1_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim1Type",
+                                       "Dim1", entry)
     if d1_prop and not d1_val:
         has_empty_mapped_val = True
     if d1_prop and d1_val:
         mcf.append(f"{d1_prop}: {d1_val}")
         sv_dcid = update_dcid(sv_dcid, d1_prop, d1_val)
-    d2_prop, d2_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim2Type", "Dim2", entry)
+    d2_prop, d2_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim2Type",
+                                       "Dim2", entry)
     if d2_prop and not d2_val:
         has_empty_mapped_val = True
     if d2_prop and d2_val:
         mcf.append(f"{d2_prop}: {d2_val}")
         sv_dcid = update_dcid(sv_dcid, d2_prop, d2_val)
-    d3_prop, d3_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim3Type", "Dim3", entry)
+    d3_prop, d3_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim3Type",
+                                       "Dim3", entry)
     if d3_prop and not d3_val:
         has_empty_mapped_val = True
     if d3_prop and d3_val:
@@ -182,8 +197,9 @@ def process_dimensions(cprop_mapping, value_mapping, entry, mcf, sv_dcid):
         sv_dcid = update_dcid(sv_dcid, d3_prop, d3_val)
     return sv_dcid, has_empty_mapped_val
 
+
 def generate_csv_and_sv(data_files, schema_mapping, output_dir):
-  """ Generate the csv and stat var mcf files.
+    """ Generate the csv and stat var mcf files.
   Args:
       data_files: list of the raw data json files
       schema_mapping: an object: {
@@ -193,81 +209,87 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
       }
       output_dir: directory to output the csv and stat var mcf to
   """
-  print(data_files)
-  seen_sv = set()
-  mcf_result = []
-  cprop_mapping = schema_mapping.get("cprops", {})
-  value_mapping = schema_mapping.get("values", {})
-  indicator_mapping = schema_mapping.get("indicators", {})
-  with open(os.path.join(output_dir, "who.csv"), "w+") as csv_file:
-    writer = csv.writer(csv_file)
-    writer.writerow(["year", "period", "country", "statVar", "value"])
-    for f in data_files:
-      with open(f, "r+") as indicator_values:
-        indicator_values = json.load(indicator_values).get("value", [])
-      value_map = {}
-      for entry in indicator_values:
-        time_dim_value = entry.get("TimeDim")
-        if not time_dim_value:
-          continue
-        time_period = get_time_period(entry)
-        spatial_dim_type = entry.get("SpatialDimType")
-        if not spatial_dim_type == "COUNTRY":
-          continue
-        spatial_dim = entry.get("SpatialDim")
-        i_code = entry.get("IndicatorCode", "")
-        sv_dcid = i_code
-        measured_prop = indicator_mapping.get(i_code, i_code)
-        mcf = ["typeOf: dcs:StatisticalVariable", "populationType: dcs:Thing", f"measuredProperty: dcs:who/{i_code}"]
-        value, statType = get_value(entry)
-        mcf.append(f"statType: dcs:{statType}")
-        if not value or value in VALUES_TO_DROP:
-          continue 
-        sv_dcid, has_empty_mapped_val = process_dimensions(cprop_mapping, value_mapping, entry, mcf, sv_dcid)
-        if not sv_dcid in seen_sv:
-          value_map[sv_dcid] = {}
-          mcf.insert(0, f"Node: dcid:{sv_dcid}")
-          mcf_result.extend(mcf + [""])
-        seen_sv.add(sv_dcid)
-        map_key = f"{spatial_dim}^{time_dim_value}^{time_period}"
-        if not map_key in value_map[sv_dcid]:
-          value_map[sv_dcid][map_key] = []
-        comments_length = 0 
-        if entry.get("Comments", ""):
-          comments_length = len(entry.get("Comments"))
-        new_value_entry = {
-          "spatial_dim": spatial_dim,
-          "time_dim_value": time_dim_value,
-          "time_period": time_period,
-          "value": value,
-          "date": entry.get("Date", ""),
-          "commentsLength": comments_length,
-          "hasEmptyDimVal": has_empty_mapped_val
-        }
-        value_map[sv_dcid][map_key].append(new_value_entry)
-      for sv_dcid in value_map:
-        for key in value_map[sv_dcid]:
-          val_to_write = get_value_to_write(value_map[sv_dcid][key])
-          spatial_dim = val_to_write.get("spatial_dim")
-          writer.writerow([
-            val_to_write.get("time_dim_value"),
-            val_to_write.get("time_period"),
-            f"country/{spatial_dim}",
-            f"dcs:{sv_dcid}",
-            val_to_write.get("value")
-          ])
-    with open(os.path.join(output_dir, "who_sv.mcf"), "w+") as mcf_file:
-      mcf_file.write("\n".join(mcf_result))
+    print(data_files)
+    seen_sv = set()
+    mcf_result = []
+    cprop_mapping = schema_mapping.get("cprops", {})
+    value_mapping = schema_mapping.get("values", {})
+    indicator_mapping = schema_mapping.get("indicators", {})
+    with open(os.path.join(output_dir, "who.csv"), "w+") as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(["year", "period", "country", "statVar", "value"])
+        for f in data_files:
+            with open(f, "r+") as indicator_values:
+                indicator_values = json.load(indicator_values).get("value", [])
+            value_map = {}
+            for entry in indicator_values:
+                time_dim_value = entry.get("TimeDim")
+                if not time_dim_value:
+                    continue
+                time_period = get_time_period(entry)
+                spatial_dim_type = entry.get("SpatialDimType")
+                if not spatial_dim_type == "COUNTRY":
+                    continue
+                spatial_dim = entry.get("SpatialDim")
+                i_code = entry.get("IndicatorCode", "")
+                sv_dcid = i_code
+                measured_prop = indicator_mapping.get(i_code, i_code)
+                mcf = [
+                    "typeOf: dcs:StatisticalVariable",
+                    "populationType: dcs:Thing",
+                    f"measuredProperty: dcs:who/{i_code}"
+                ]
+                value, statType = get_value(entry)
+                mcf.append(f"statType: dcs:{statType}")
+                if not value or value in VALUES_TO_DROP:
+                    continue
+                sv_dcid, has_empty_mapped_val = process_dimensions(
+                    cprop_mapping, value_mapping, entry, mcf, sv_dcid)
+                if not sv_dcid in seen_sv:
+                    value_map[sv_dcid] = {}
+                    mcf.insert(0, f"Node: dcid:{sv_dcid}")
+                    mcf_result.extend(mcf + [""])
+                seen_sv.add(sv_dcid)
+                map_key = f"{spatial_dim}^{time_dim_value}^{time_period}"
+                if not map_key in value_map[sv_dcid]:
+                    value_map[sv_dcid][map_key] = []
+                comments_length = 0
+                if entry.get("Comments", ""):
+                    comments_length = len(entry.get("Comments"))
+                new_value_entry = {
+                    "spatial_dim": spatial_dim,
+                    "time_dim_value": time_dim_value,
+                    "time_period": time_period,
+                    "value": value,
+                    "date": entry.get("Date", ""),
+                    "commentsLength": comments_length,
+                    "hasEmptyDimVal": has_empty_mapped_val
+                }
+                value_map[sv_dcid][map_key].append(new_value_entry)
+            for sv_dcid in value_map:
+                for key in value_map[sv_dcid]:
+                    val_to_write = get_value_to_write(value_map[sv_dcid][key])
+                    spatial_dim = val_to_write.get("spatial_dim")
+                    writer.writerow([
+                        val_to_write.get("time_dim_value"),
+                        val_to_write.get("time_period"),
+                        f"country/{spatial_dim}", f"dcs:{sv_dcid}",
+                        val_to_write.get("value")
+                    ])
+        with open(os.path.join(output_dir, "who_sv.mcf"), "w+") as mcf_file:
+            mcf_file.write("\n".join(mcf_result))
+
 
 def main(args):
     data_dir = FLAGS.raw_data_dir
     data_files = []
     if FLAGS.data_dir:
         for f in os.listdir(data_dir):
-          data_files.append(os.path.join(data_dir, f))
+            data_files.append(os.path.join(data_dir, f))
     with open(FLAGS.schema_mapping, "r+") as schema_mapping:
-      schema_mapping = json.load(schema_mapping)
+        schema_mapping = json.load(schema_mapping)
     generate_sv(data_files, schema_mapping, FLAGS.output_dir)
+
 
 if __name__ == '__main__':
     app.run(main)

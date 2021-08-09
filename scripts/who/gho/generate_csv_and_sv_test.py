@@ -17,12 +17,15 @@ import json
 import os
 from generate_csv_and_sv import generate_csv_and_sv
 
+
 class TestGenerateCsvAndSv(unittest.TestCase):
 
     def test_generate_csv_and_sv(self):
-        data_files = ["./test_data/EMFLIMITELECTRIC.json", "./test_data/WSH_8.json"]
+        data_files = [
+            "./test_data/EMFLIMITELECTRIC.json", "./test_data/WSH_8.json"
+        ]
         with open("./test_data/schema_mapping.json", "r+") as schema_mapping:
-          schema_mapping = json.load(schema_mapping)
+            schema_mapping = json.load(schema_mapping)
         output_dir = "./test_data"
         expected_csv = "./test_data/expected.csv"
         expected_mcf = "./test_data/expected.mcf"

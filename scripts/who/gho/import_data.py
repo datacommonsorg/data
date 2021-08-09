@@ -19,17 +19,22 @@ from absl import app
 from generate_schema import generate_schema, FLAGS
 from generate_csv_and_sv import generate_csv_and_sv
 
+
 def import_data(data_files, curated_dim_file, artifact_dir, mcf_dir):
-    schema_mapping = generate_schema(data_files, curated_dim_file, artifact_dir, mcf_dir)
+    schema_mapping = generate_schema(data_files, curated_dim_file, artifact_dir,
+                                     mcf_dir)
     generate_csv_and_sv(data_files, schema_mapping, "")
+
 
 def main(args):
     data_dir = FLAGS.data_dir
     data_files = []
     if FLAGS.data_dir:
         for f in os.listdir(data_dir):
-          data_files.append(os.path.join(data_dir, f))
-    import_data(data_files, FLAGS.curated_dim_file, FLAGS.artifact_dir, FLAGS.mcf_dir)
+            data_files.append(os.path.join(data_dir, f))
+    import_data(data_files, FLAGS.curated_dim_file, FLAGS.artifact_dir,
+                FLAGS.mcf_dir)
+
 
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)
