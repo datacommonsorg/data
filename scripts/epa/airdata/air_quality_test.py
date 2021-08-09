@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Unit tests for criteria_gases.py
+Unit tests for air_quality.py
 
-Usage: python3 criteria_gases_test.py
+Usage: python3 air_quality_test.py
 '''
 import unittest, csv, os, tempfile
 from air_quality import create_csv, write_csv, write_tmcf
