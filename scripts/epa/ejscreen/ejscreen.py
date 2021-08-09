@@ -100,7 +100,8 @@ def write_csv(data, outfilename):
     # sort by FIPS and make into dcid
     full_df = full_df.rename(columns={'ID': 'FIPS'})
     full_df = full_df.sort_values(by=['FIPS'], ignore_index=True)
-    full_df['FIPS'] = 'dcid:geoId/' + (full_df['FIPS'].astype(str).str.zfill(12))
+    full_df['FIPS'] = 'dcid:geoId/' + (
+        full_df['FIPS'].astype(str).str.zfill(12))
     full_df = full_df.fillna('')
     full_df.to_csv(outfilename, index=False)
 
