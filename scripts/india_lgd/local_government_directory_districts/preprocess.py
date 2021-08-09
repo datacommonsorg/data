@@ -12,11 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+__author__ = ["Thejesh GN (i@thejeshgn.com)"]
+
 import os
 import csv
 import difflib
 import pandas as pd
-
+from india.geo.states import IndiaStatesMapper
+from india.formatters import CodeFormatter
 # Some of the names don't match correctly while using
 # difflib library. This is used to force the match manually.
 
@@ -62,42 +65,12 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         return " ".join(first_list)
 
     @staticmethod
-    def format_state_code(s):
-        # Converts into two character length code
-        # If the value is `0` then it makes it empty
-        # If the length is single character then it prepends it
-        # with `0` to make it two character length
-        s = s.zfill(2)
-        return "" if s == "00" else s
-
-    @staticmethod
-    def format_district_code(s):
-        # Converts into three character length code
-        # If the value is `0` then it makes it empty
-        # If the length is less than three characters
-        # then it prepends it with `0`s to make it
-        # three characters length
-        s = s.zfill(3)
-        return "" if s == "000" else s
-
-    @staticmethod
-    def format_census2011_code(s):
-        # Converts into three character length code
-        # If the value is `0` then it makes it empty
-        # If the length is less than three characters
-        # then it prepends it with `0`s to make it
-        # three characters length
-        s = s.zfill(3)
-        return "" if s == "000" else s
-
-    @staticmethod
-    def format_census2001_code(s):
-        # Converts into two character length code
-        # If the value is `0` then it makes it empty
-        # If the length is single character then it prepends it
-        # with `0` to make it two character length
-        s = s.zfill(2)
-        return "" if s == "00" else s
+    def get_census2001_code(s):
+        census2001_state_code = IndiaStatesMapper.get_state_name_to_census2001_code_mapping(
+            s["LGDStateName"], s["LGDDistrictName"])
+        census2001_code = s["LGDCensus2001Code"]
+        CodeFormatter.format_census2001_district_code(census2001_state_code,
+                                                      census2001_code)
 
     def get_closest_district_label(self, lgddata_row):
         lgdStateName = lgddata_row["LGDStateName"]
@@ -162,17 +135,16 @@ class LocalGovermentDirectoryDistrictsDataLoader:
 
         # Format state code, district code and census code
         self.lgd_df['LGDDistrictCode'] = self.lgd_df['LGDDistrictCode'].apply(
-            LocalGovermentDirectoryDistrictsDataLoader.format_district_code)
+            CodeFormatter.format_lgd_district_code)
         self.lgd_df['LGDStateCode'] = self.lgd_df['LGDStateCode'].apply(
-            LocalGovermentDirectoryDistrictsDataLoader.format_state_code)
+            CodeFormatter.format_lgd_state_code)
         self.lgd_df['LGDCensus2011Code'] = self.lgd_df[
-            'LGDCensus2011Code'].apply(
-                LocalGovermentDirectoryDistrictsDataLoader.
-                format_census2011_code)
-        self.lgd_df['LGDCensus2001Code'] = self.lgd_df[
-            'LGDCensus2001Code'].apply(
-                LocalGovermentDirectoryDistrictsDataLoader.
-                format_census2001_code)
+            'LGDCensus2011Code'].apply(CodeFormatter.format_census2011_code)
+
+        self.lgd_df['LGDCensus2001Code'] = self.lgd_df.apply(
+            lambda row: LocalGovermentDirectoryDistrictsDataLoader.
+            get_census2001_code(row),
+            axis=1)
 
     def _load_and_format_wikidata(self):
         self.wikidata_df = pd.read_csv(self.wikidata_csv, dtype=str)
@@ -197,8 +169,7 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         self.wikidata_df['stateLabel'] = self.wikidata_df[
             'stateLabel'].str.lower()
         self.wikidata_df['census2011Code'] = self.wikidata_df[
-            'census2011Code'].apply(LocalGovermentDirectoryDistrictsDataLoader.
-                                    format_census2011_code)
+            'census2011Code'].apply(CodeFormatter.format_census2011_code)
 
     def process(self):
         self._load_and_format_lgd()
