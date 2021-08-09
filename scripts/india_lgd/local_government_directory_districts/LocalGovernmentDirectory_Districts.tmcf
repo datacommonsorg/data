@@ -7,6 +7,6 @@ typeOf: dcs:AdministrativeArea2
 wikiDataId: C:LocalGovernmentDirectory_Districts->WikiDataId
 name: C:LocalGovernmentDirectory_Districts->LGDDistrictNameTitleCase
 lgdCode: C:LocalGovernmentDirectory_Districts->LGDDistrictCode
-indianCensusAreaCode2011: C:LocalGovernmentDirectory_Districts->LGDCensus2001Code
-indianCensusAreaCode2001:  C:LocalGovernmentDirectory_Districts->LGDCensus2011Code
+indianCensusAreaCode2011: C:LocalGovernmentDirectory_Districts->LGDCensus2011Code
+indianCensusAreaCode2001:  C:LocalGovernmentDirectory_Districts->LGDCensus2001Code
 containedInPlace: E:LocalGovernmentDirectory_Districts->E0
