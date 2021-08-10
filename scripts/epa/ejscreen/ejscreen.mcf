@@ -20,4 +20,4 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Atmosphere
 measuredProperty: dcs:hazardIndex
 statType: dcs:measuredValue
-pollutantHealthRisk: dcs:NonCarcinogenicRespiratoryHazar
+pollutantHealthRisk: dcs:NonCarcinogenicRespiratoryHazard
