@@ -234,7 +234,8 @@ def get_val_node(dcid, type_of):
     return node
 
 
-def generate_dimensions_schema(curated_dim_types, person_dim_types, dim_categories):
+def generate_dimensions_schema(curated_dim_types, person_dim_types,
+                               dim_categories):
     """ Autogenerate schema and the mapping from dimension to schema
     Args:
         curated_dim_types: dictionary of dimension code to corresponding schema dcid for curated schema mappings
@@ -279,7 +280,8 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types, dim_categori
             if d_code in person_dim_types:
                 domainType = "Person"
             mcf_result.extend(get_enum_node(enum_dcid))
-            mcf_result.extend(get_prop_node(prop_dcid, name, enum_dcid, domainType))
+            mcf_result.extend(
+                get_prop_node(prop_dcid, name, enum_dcid, domainType))
         seen_dcids[prop_dcid] = set()
         dim_type_map[d_code] = prop_dcid
         dim_value_map[d_code] = {}
@@ -364,8 +366,9 @@ def generate_schema(data_files, curated_dim_file, artifact_dir, mcf_dir):
         curated_dim_map = json.load(curated_dim_map)
     curated_dim_types = curated_dim_map.get("dimTypes", {})
     person_dim_types = curated_dim_map.get("personDimensions", {})
-    dim_mcf, dim_map = generate_dimensions_schema(
-       curated_dim_types, person_dim_types, dim_categories)
+    dim_mcf, dim_map = generate_dimensions_schema(curated_dim_types,
+                                                  person_dim_types,
+                                                  dim_categories)
     indicator_mcf, indicator_map = generate_indicators_schema()
     cprop_mapping = {}
     values_mapping = {}

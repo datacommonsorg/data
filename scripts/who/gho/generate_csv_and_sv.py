@@ -161,7 +161,8 @@ def get_value_to_write(values_list):
     return values_list[0]
 
 
-def process_dimensions(cprop_mapping, value_mapping, person_dimensions, entry, mcf, sv_dcid):
+def process_dimensions(cprop_mapping, value_mapping, person_dimensions, entry,
+                       mcf, sv_dcid):
     """ Process each of the dimensions in the data entry (up to 3)
     Args:
         cprop_mapping: map of dimension type code to corresponding schema dcid
@@ -255,7 +256,8 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
                 if not value or value in VALUES_TO_DROP:
                     continue
                 sv_dcid, has_empty_mapped_val = process_dimensions(
-                    cprop_mapping, value_mapping, person_dimensions, entry, mcf, sv_dcid)
+                    cprop_mapping, value_mapping, person_dimensions, entry, mcf,
+                    sv_dcid)
                 if not sv_dcid in seen_sv:
                     value_map[sv_dcid] = {}
                     mcf.insert(0, f"Node: dcid:{sv_dcid}")
