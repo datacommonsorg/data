@@ -161,11 +161,12 @@ def get_value_to_write(values_list):
     return values_list[0]
 
 
-def process_dimensions(cprop_mapping, value_mapping, entry, mcf, sv_dcid):
+def process_dimensions(cprop_mapping, value_mapping, person_dimensions, entry, mcf, sv_dcid):
     """ Process each of the dimensions in the data entry (up to 3)
     Args:
         cprop_mapping: map of dimension type code to corresponding schema dcid
         values_mapping: map of dimension type code to map of dimension value to corresponding schema dcid
+        person_dimensions: list of cprops that indicate populationType of person
         entry: an entry from the WHO indicator api
         mcf: list of strings that correspond to the statvar mcf file
         sv_dcid: dcid of the current stat var
@@ -174,10 +175,13 @@ def process_dimensions(cprop_mapping, value_mapping, entry, mcf, sv_dcid):
         has_empty_mapped_val: whether any dimension values mapped to an empty string
     """
     has_empty_mapped_val = False
+    has_person_dimension = False
     d1_prop, d1_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim1Type",
                                        "Dim1", entry)
     if d1_prop and not d1_val:
         has_empty_mapped_val = True
+    if entry.get("Dim1Type", "") in person_dimensions:
+        has_person_dimension = True
     if d1_prop and d1_val:
         mcf.append(f"{d1_prop}: {d1_val}")
         sv_dcid = update_dcid(sv_dcid, d1_prop, d1_val)
@@ -185,6 +189,8 @@ def process_dimensions(cprop_mapping, value_mapping, entry, mcf, sv_dcid):
                                        "Dim2", entry)
     if d2_prop and not d2_val:
         has_empty_mapped_val = True
+    if entry.get("Dim2Type", "") in person_dimensions:
+        has_person_dimension = True
     if d2_prop and d2_val:
         mcf.append(f"{d2_prop}: {d2_val}")
         sv_dcid = update_dcid(sv_dcid, d2_prop, d2_val)
@@ -192,9 +198,15 @@ def process_dimensions(cprop_mapping, value_mapping, entry, mcf, sv_dcid):
                                        "Dim3", entry)
     if d3_prop and not d3_val:
         has_empty_mapped_val = True
+    if entry.get("Dim3Type", "") in person_dimensions:
+        has_person_dimension = True
     if d3_prop and d3_val:
         mcf.append(f"{d3_prop}: {d3_val}")
         sv_dcid = update_dcid(sv_dcid, d3_prop, d3_val)
+    if has_person_dimension:
+        mcf.append("populationType: dcs:Person")
+    else:
+        mcf.append("populationType: dcs:Thing")
     return sv_dcid, has_empty_mapped_val
 
 
@@ -209,12 +221,12 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
       }
       output_dir: directory to output the csv and stat var mcf to
   """
-    print(data_files)
     seen_sv = set()
     mcf_result = []
     cprop_mapping = schema_mapping.get("cprops", {})
     value_mapping = schema_mapping.get("values", {})
     indicator_mapping = schema_mapping.get("indicators", {})
+    person_dimensions = schema_mapping.get("personDimensions", {})
     with open(os.path.join(output_dir, "who.csv"), "w+") as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(["year", "period", "country", "statVar", "value"])
@@ -236,7 +248,6 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
                 measured_prop = indicator_mapping.get(i_code, i_code)
                 mcf = [
                     "typeOf: dcs:StatisticalVariable",
-                    "populationType: dcs:Thing",
                     f"measuredProperty: dcs:who/{i_code}"
                 ]
                 value, statType = get_value(entry)
@@ -244,7 +255,7 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
                 if not value or value in VALUES_TO_DROP:
                     continue
                 sv_dcid, has_empty_mapped_val = process_dimensions(
-                    cprop_mapping, value_mapping, entry, mcf, sv_dcid)
+                    cprop_mapping, value_mapping, person_dimensions, entry, mcf, sv_dcid)
                 if not sv_dcid in seen_sv:
                     value_map[sv_dcid] = {}
                     mcf.insert(0, f"Node: dcid:{sv_dcid}")

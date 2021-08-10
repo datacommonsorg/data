@@ -22,7 +22,7 @@ class TestGenerateCsvAndSv(unittest.TestCase):
 
     def test_generate_csv_and_sv(self):
         data_files = [
-            "./test_data/EMFLIMITELECTRIC.json", "./test_data/WSH_8.json"
+            "./test_data/EMFLIMITELECTRIC.json", "./test_data/WSH_8.json", "./test_data/Adult_curr_cig_smoking.json"
         ]
         with open("./test_data/schema_mapping.json", "r+") as schema_mapping:
             schema_mapping = json.load(schema_mapping)

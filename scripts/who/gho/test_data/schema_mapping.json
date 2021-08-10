@@ -975,5 +975,6 @@
   "indicators": {
     "WSH_8": "who/WSH_8",
     "EMFLIMITELECTRIC": "who/EMFLIMITELECTRIC"
-  }
+  },
+  "personDimensions": ["SEX"]
 }

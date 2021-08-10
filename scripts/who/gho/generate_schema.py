@@ -212,14 +212,14 @@ def get_enum_node(dcid):
     return node
 
 
-def get_prop_node(dcid, description, range_dcid):
+def get_prop_node(dcid, description, range_dcid, domainType):
     node = []
     node.append("Node: dcid:" + dcid)
     node.append(f'name: "{dcid}"')
     if description:
         node.append(f'description: "{description}"')
     node.append("typeOf: schema:Property")
-    node.append("domainIncludes: dcs:Thing")
+    node.append(f"domainIncludes: dcs:{domainType}")
     node.append("rangeIncludes: dcs:" + range_dcid)
     node.append("")
     return node
@@ -234,10 +234,11 @@ def get_val_node(dcid, type_of):
     return node
 
 
-def generate_dimensions_schema(curated_dim_types, dim_categories):
+def generate_dimensions_schema(curated_dim_types, person_dim_types, dim_categories):
     """ Autogenerate schema and the mapping from dimension to schema
     Args:
         curated_dim_types: dictionary of dimension code to corresponding schema dcid for curated schema mappings
+        person_dim_types: list of dimension codes where domainIncludes should be person
         dim_categories: an object: {
             spatial: map of spatial dimensions to the number of occurences,
             time: list of time dimensions,
@@ -274,8 +275,11 @@ def generate_dimensions_schema(curated_dim_types, dim_categories):
             name = ""
             if d_code in PROP_NODE_NAME_MAP:
                 name = PROP_NODE_NAME_MAP[d_code]
+            domainType = "Thing"
+            if d_code in person_dim_types:
+                domainType = "Person"
             mcf_result.extend(get_enum_node(enum_dcid))
-            mcf_result.extend(get_prop_node(prop_dcid, name, enum_dcid))
+            mcf_result.extend(get_prop_node(prop_dcid, name, enum_dcid, domainType))
         seen_dcids[prop_dcid] = set()
         dim_type_map[d_code] = prop_dcid
         dim_value_map[d_code] = {}
@@ -358,19 +362,22 @@ def generate_schema(data_files, curated_dim_file, artifact_dir, mcf_dir):
     dim_categories = categorize_dimensions(data_files)
     with open(curated_dim_file, "r+") as curated_dim_map:
         curated_dim_map = json.load(curated_dim_map)
+    curated_dim_types = curated_dim_map.get("dimTypes", {})
+    person_dim_types = curated_dim_map.get("personDimensions", {})
     dim_mcf, dim_map = generate_dimensions_schema(
-        curated_dim_map.get("dimTypes", {}), dim_categories)
+       curated_dim_types, person_dim_types, dim_categories)
     indicator_mcf, indicator_map = generate_indicators_schema()
     cprop_mapping = {}
     values_mapping = {}
     cprop_mapping.update(dim_map.get("dimTypes", {}))
-    cprop_mapping.update(curated_dim_map.get("dimTypes", {}))
+    cprop_mapping.update(curated_dim_types)
     values_mapping.update(dim_map.get("dimValues", {}))
     values_mapping.update(curated_dim_map.get("dimValues", {}))
     schema_mapping = {
         "cprops": cprop_mapping,
         "values": values_mapping,
-        "indicators": indicator_map
+        "indicators": indicator_map,
+        "personDimensions": person_dim_types
     }
     # save mcf file
     with open(os.path.join(mcf_dir, "who_generated_schema.mcf"),

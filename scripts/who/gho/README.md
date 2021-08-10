@@ -21,6 +21,9 @@ These indicators fall under a wide range of categories including:
 #### Template MCFs
 - [who_stats.tmcf](who_stats.tmcf)
 
+#### Other Files
+- [curated_dim_map.json](curated_dim_map.json): schema mapping for dimensions with curated schema and list of dimensions that indicate populationType of person
+- [curated_dim.mcf](curated_dim.mcf): The curated schema for select dimension types and values
 #### Scripts
 - [import_data.py](import_data.py): Script to generate the clean csv, statistical variable mcf files, and schema mcf files needed for importing the WHO GHO dataset.
 - [download_data.py](download_data.py): Script to download all the who gho observations data from the who site.

@@ -1,4 +1,17 @@
 {
+  "personDimensions": [
+    "AGEGROUP",
+    "SEX",
+    "EDUCATIONLEVEL",
+    "CHILDCAUSE",
+    "ENVCAUSE",
+    "GHECAUSES",
+    "WEALTHQUINTILE",
+    "WEALTHDECILE",
+    "SEATTYPE",
+    "ROADUSERTYPE",
+    "CONSUMPTIONTYPE"
+  ],
   "dimTypes": {
     "AGEGROUP": "age",
     "SEX": "gender",
