@@ -7,16 +7,15 @@ import os
 import numpy as np
 import pandas as pd
 
-
-def main():
-
-    # read in 2 data files as the second and third arguments
-    gene_tsv, gene_roles_tsv = sys.argv[1], sys.argv[2]
-
-    ### Format genes.tsv
-
+def format_genes_data(genes_tsv):
+    """Format genes.tsv file
+    Args:
+        genes_tsv: genes.tsv file path
+    Returns:
+        Write formatted csv file: geneRoles.csv
+    """
     # create pandas dataframe
-    df_genes = pd.read_csv(gene_tsv, sep='\t')
+    df_genes = pd.read_csv(genes_tsv, sep='\t')
     # from gene symbol, generate dcids for genes on both hg38 and hg19 assembly
     df_genes["hm_38_gene"] = "bio/hg38_" + df_genes["symbol"].astype(str)
     df_genes["hm_19_gene"] = "bio/hg19_" + df_genes["symbol"].astype(str)
@@ -35,8 +34,17 @@ def main():
     # create formatted csv
     df_genes.to_csv(output_path, index=None)
 
-    ### Format geneRoles.tsv
+    return df_genes
 
+def format_gene_roles_data(gene_roles_tsv, df_genes):
+    """Format geneRoles.tsv file
+    Args:
+        gene_roles_tsv: geneRoles.tsv file path
+        df_genes: formatted genes.csv dataframe
+                result of format_genes_data()
+    Returns:
+        Write formatted csv file: geneRoles.csv
+    """
     # create pandas dataframe
     df_gene_roles = pd.read_csv(gene_roles_tsv, sep='\t')
     # remove "R_" of reactions
@@ -52,6 +60,24 @@ def main():
     # create formatted csv
     df_gene_roles.to_csv(output_path, index=None)
 
+def format_gene_and_gene_role(gene_tsv, gene_roles_tsv):
+    """Format genes.tsv and geneRoles.tsv file
+    Args:
+        gene_tsv: genes.tsv file path
+        gene_roles_tsv: geneRoles.tsv file path
+    Returns:
+        Write formatted csv file: genes.csv and geneRoles.csv
+    """
+    # format genes.tsv
+    df_genes = format_genes_data(gene_tsv)
+    # format geneRoles.tsv
+    format_gene_roles_data(gene_roles_tsv, df_genes)
+
+def main():
+    """Main function"""
+    # read in 2 data files as the second and third arguments
+    gene_tsv, gene_roles_tsv = sys.argv[1], sys.argv[2]
+    format_gene_and_gene_role(gene_tsv, gene_roles_tsv)
 
 if __name__ == '__main__':
     main()
