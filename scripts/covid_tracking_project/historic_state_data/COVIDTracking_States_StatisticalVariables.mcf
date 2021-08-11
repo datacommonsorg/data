@@ -1,4 +1,4 @@
-Node: dcid:CumulativeCount_MedicalTest_COVID_19
+Node: dcid:CumulativeCount_MedicalTest_ConditionCOVID_19
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 medicalCondition: dcs:COVID_19
@@ -6,7 +6,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
 testResult: dcs:Ready
 
-Node: dcid:CumulativeCount_MedicalTest_COVID_19_Positive
+Node: dcid:CumulativeCount_MedicalTest_ConditionCOVID_19_Positive
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 medicalCondition: dcs:COVID_19
@@ -14,7 +14,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
 testResult: dcs:Positive
 
-Node: dcid:CumulativeCount_MedicalTest_COVID_19_Negative
+Node: dcid:CumulativeCount_MedicalTest_ConditionCOVID_19_Negative
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 medicalCondition: dcs:COVID_19
@@ -22,7 +22,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:cumulativeCount
 testResult: dcs:Negative
 
-Node: dcid:Count_MedicalTest_COVID_19_Pending
+Node: dcid:Count_MedicalTest_ConditionCOVID_19_Pending
 typeOf: dcs:StatisticalVariable
 populationType: dcs:MedicalTest
 medicalCondition: dcs:COVID_19

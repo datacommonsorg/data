@@ -1,0 +1,5 @@
+place,stat_var,date,value,unit,scaling_factor,eia_series_id
+dcid:geoId/06,dcid:eia/SEDS.TNISB.A,2018,1053194,BillionBtu,,SEDS.TNISB.CA.A
+dcid:geoId/06,dcid:eia/SEDS.TNISB.A,2017,1056142,BillionBtu,,SEDS.TNISB.CA.A
+dcid:country/USA,dcid:eia/SEDS.WXICD.A,2019,29.79,DollarsPerMillionBtu,,SEDS.WXICD.US.A
+dcid:country/USA,dcid:eia/SEDS.WXICD.A,2018,32.94,DollarsPerMillionBtu,,SEDS.WXICD.US.A

@@ -27,7 +27,7 @@ This directory stores the script used to import assembly report datasets from NC
 
 ### Schema Overview
 
-The schema representing data from NCBI assembly reports is represented in [GenomeAnnotation.mcf](https://github.com/datacommonsorg/data/tree/master/schema/GenomeAnnotation.mcf) and [GenomeAnnotationEnum.mcf](https://github.com/datacommonsorg/data/tree/master/schema/GenomeAnnotationEnum.mcf).
+The schema representing data from NCBI assembly reports is represented in [GenomeAnnotation.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/genome_annotation.mcf) and [GenomeAnnotationEnum.mcf](https://github.com/datacommonsorg/schema/tree/main/biomedical_schema/genome_annotation_enum.mcf).
 
 The assembly reports contains instances of entities "GenomeAssembly", "GenomeAssemblyUnit", and "Chromosome". All of these are connected to entity "Species" by property "ofSpecies". "GenomeAssemblyUnit" and "Chromosome" are connected to "GenomeAssembly" entities with property "inGenomeAssembly". "Chromosome" is connected to "GenomeAssemblyUnit" entities by property "inGenomeAssemblyUnit". Finally, genome sequences of type "Chromosome" that are unlocalized scaffolds link to associated "Chromosome" entity by property "inChromosome".
 
