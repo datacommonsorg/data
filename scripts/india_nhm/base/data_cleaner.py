@@ -52,7 +52,9 @@ class NHMDataLoaderBase(object):
         cols_dict: dictionary containing column names in the data files mapped to StatVars
                     (keys contain column names and values contains StatVar names)
     """
-    def __init__(self, data_folder, dataset_name, cols_dict, clean_names, final_csv_path):
+
+    def __init__(self, data_folder, dataset_name, cols_dict, clean_names,
+                 final_csv_path):
         """
         Constructor
         """
@@ -79,10 +81,9 @@ class NHMDataLoaderBase(object):
 
         """
         df_full = pd.DataFrame(columns=list(self.cols_dict.keys()))
-        
+
         lgd_url = 'https://india-local-government-directory-bixhnw23da-el.a.run.app/india-local-government-directory/districts.csv?_size=max'
         self.dist_code = pd.read_csv(lgd_url, dtype={'DistrictCode': str})
-        
 
         # Loop through each year file
         for file in os.listdir(self.data_folder):
@@ -94,11 +95,12 @@ class NHMDataLoaderBase(object):
             if fext == '.xlsx':
                 # Reading .xls file as html and preprocessing multiindex
                 self.raw_df = pd.read_excel(os.path.join(
-                                            self.data_folder, file))
+                    self.data_folder, file))
                 # self.raw_df.columns = self.raw_df.columns.droplevel()
 
                 cleaned_df = pd.DataFrame()
-                cleaned_df['District'] = self.raw_df['Unnamed: 2']  # Unnamed:2 column has district names
+                cleaned_df['District'] = self.raw_df[
+                    'Unnamed: 2']  # Unnamed:2 column has district names
                 cleaned_df['Date'] = date
 
                 # If no columns specified, extract all except first two (index and state name)
@@ -114,15 +116,13 @@ class NHMDataLoaderBase(object):
                         continue
 
                 df_full = df_full.append(cleaned_df, ignore_index=True)
-                
-             
+
         # Converting column names according to schema and saving it as csv
-        df_full['DistrictCode'] = df_full.apply(lambda row: self._get_district_code(row),
-                                                axis=1)
+        df_full['DistrictCode'] = df_full.apply(
+            lambda row: self._get_district_code(row), axis=1)
         df_full.columns = df_full.columns.map(self.cols_dict)
 
         df_full.iloc[2:].to_csv(self.final_csv_path, index=False)
-
 
     def create_mcf_tmcf(self):
         """
@@ -155,7 +155,7 @@ class NHMDataLoaderBase(object):
                             description=self.clean_names[variable]))
 
                     statvars_written.append(self.cols_dict[variable])
-                    
+
     def _get_district_code(self, row):
         """
         Function to get a complete match or partial match to district names.
@@ -168,9 +168,14 @@ class NHMDataLoaderBase(object):
         # return district code from Local Govt. Directory (LGD)
         # else return None
         if pd.notna(row['District']):
-            close_match = difflib.get_close_matches(row['District'].upper(), self.dist_code['DistrictName(InEnglish)'],
-                                n=1, cutoff=0.8)
+            close_match = difflib.get_close_matches(
+                row['District'].upper(),
+                self.dist_code['DistrictName(InEnglish)'],
+                n=1,
+                cutoff=0.8)
             if close_match:
-                return self.dist_code[self.dist_code['DistrictName(InEnglish)'] == close_match[0]]['DistrictCode'].values[0]
+                return self.dist_code[self.dist_code['DistrictName(InEnglish)']
+                                      ==
+                                      close_match[0]]['DistrictCode'].values[0]
             else:
                 return None
