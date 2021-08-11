@@ -13,14 +13,14 @@ measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCareWi
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_ChildDeliveryEvent
-description: "Total reported deliveries"
+description: "Total reported child deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent
 statType: dcs:measuredValue
 
 Node: dcid:indianNHM/Count_ChildDeliveryEvent_InAnInstitution
-description: "Institutional deliveries (Public Insts.+Pvt. Insts.)"
+description: "Institutional deliveries (includes public and private institutions)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_InAnInstitution

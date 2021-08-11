@@ -16,70 +16,9 @@ import os
 import pandas as pd
 import difflib
 
-INDIA_ISO_CODES = {
-    "Andhra Pradesh": "IN-AP",
-    "Andhra Pradesh Old": "IN-AP",
-    "Arunachal Pradesh": "IN-AR",
-    "Assam": "IN-AS",
-    "Bihar": "IN-BR",
-    "Chattisgarh": "IN-CT",
-    "Chhattisgarh": "IN-CT",
-    "Goa": "IN-GA",
-    "Gujarat": "IN-GJ",
-    "Haryana": "IN-HR",
-    "Himachal Pradesh": "IN-HP",
-    "Jharkhand": "IN-JH",
-    "Jharkhand#": "IN-JH",
-    "Karnataka": "IN-KA",
-    "Kerala": "IN-KL",
-    "Madhya Pradesh": "IN-MP",
-    "Madhya Pradesh#": "IN-MP",
-    "Maharashtra": "IN-MH",
-    "Manipur": "IN-MN",
-    "Meghalaya": "IN-ML",
-    "Mizoram": "IN-MZ",
-    "Nagaland": "IN-NL",
-    "Nagaland#": "IN-NL",
-    "Odisha": "IN-OR",
-    "Punjab": "IN-PB",
-    "Rajasthan": "IN-RJ",
-    "Sikkim": "IN-SK",
-    "Tamil Nadu": "IN-TN",
-    "Tamilnadu": "IN-TN",
-    "Telengana": "IN-TG",
-    "Telangana": "IN-TG",
-    "Tripura": "IN-TR",
-    "Uttarakhand": "IN-UT",
-    "Uttar Pradesh": "IN-UP",
-    "West Bengal": "IN-WB",
-    "Andaman and Nicobar Islands": "IN-AN",
-    "Andaman & Nicobar Islands": "IN-AN",
-    "Andaman & N. Island": "IN-AN",
-    "A & N Islands": "IN-AN",
-    "Chandigarh": "IN-CH",
-    "Dadra and Nagar Haveli": "IN-DN",
-    "Dadra & Nagar Haveli": "IN-DN",
-    "Dadar Nagar Haveli": "IN-DN",
-    "Daman and Diu": "IN-DD",
-    "Daman & Diu": "IN-DD",
-    "Delhi": "IN-DL",
-    "Jammu and Kashmir": "IN-JK",
-    "Jammu & Kashmir": "IN-JK",
-    "Ladakh": "IN-LA",
-    "Lakshadweep": "IN-LD",
-    "Lakshwadeep": "IN-LD",
-    "Pondicherry": "IN-PY",
-    "Puducherry": "IN-PY",
-    "Puduchery": "IN-PY",
-    "Dadra and Nagar Haveli and Daman and Diu": "IN-DN_DD",
-    "all India": "IN",
-    "all-India": "IN",
-    "All India": "IN"
-}
-
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
-typeOf: schema:Place
-isoCode: C:{dataset_name}->isoCode
+typeOf: dcs:AdministrativeArea2
+lgdCode: C:{dataset_name}->lgdCode
 """
 
 TMCF_NODES = """
@@ -140,9 +79,10 @@ class NHMDataLoaderBase(object):
 
         """
         df_full = pd.DataFrame(columns=list(self.cols_dict.keys()))
-        self.dist_code = pd.read_csv(os.path.join(self.data_folder, 
-                                              'districts-local-directory.csv'),
-                                 dtype={'DistrictCode': 'str'})
+        
+        lgd_url = 'https://india-local-government-directory-bixhnw23da-el.a.run.app/india-local-government-directory/districts.csv?_size=max'
+        self.dist_code = pd.read_csv(lgd_url, dtype={'DistrictCode': str})
+        
 
         # Loop through each year file
         for file in os.listdir(self.data_folder):
@@ -179,7 +119,6 @@ class NHMDataLoaderBase(object):
         # Converting column names according to schema and saving it as csv
         df_full['DistrictCode'] = df_full.apply(lambda row: self._get_district_code(row),
                                                 axis=1)
-        df_full = df_full.groupby(level=0, axis=1, sort=False).sum()
         df_full.columns = df_full.columns.map(self.cols_dict)
 
         df_full.iloc[2:].to_csv(self.final_csv_path, index=False)
@@ -218,6 +157,16 @@ class NHMDataLoaderBase(object):
                     statvars_written.append(self.cols_dict[variable])
                     
     def _get_district_code(self, row):
+        """
+        Function to get a complete match or partial match to district names.
+        For example, this function can identify 'Nilgiris' and 'The Niligris' as same name
+        
+        Cutoff = 0.8 captures all of the variations in the same district name
+        
+        """
+        # if there is a close match for district name,
+        # return district code from Local Govt. Directory (LGD)
+        # else return None
         if pd.notna(row['District']):
             close_match = difflib.get_close_matches(row['District'].upper(), self.dist_code['DistrictName(InEnglish)'],
                                 n=1, cutoff=0.8)

@@ -1,6 +1,6 @@
 Node: E:NHM_MaternalHealth->E0
-typeOf: schema:Place
-isoCode: C:NHM_MaternalHealth->isoCode
+typeOf: dcs:AdministrativeArea2
+lgdCode: C:NHM_MaternalHealth->lgdCode
 
 Node: E:NHM_MaternalHealth->E1
 typeOf: dcs:StatVarObservation

@@ -12,11 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-sys.path.append("..")
-
-from base.data_cleaner import NHMDataLoaderBase
-from base.readme_generator import ReadMeGen
+from india_nhm.base.data_cleaner import NHMDataLoaderBase
+from india_nhm.base.readme_generator import ReadMeGen
 
 # Mapping dictionary for data columns and StatVars
 cols_to_nodes = {
@@ -56,9 +53,9 @@ clean_names = {
     'Number of Pregnant women registered within first trimester':
     'Number of pregnant women registered for Antenatal Care within first trimester',
     'Total reported deliveries':
-    'Total reported deliveries',
+    'Total reported child deliveries',
     'Institutional deliveries (Public Insts.+Pvt. Insts.)':
-    'Institutional deliveries (Public Insts.+Pvt. Insts.)',
+    'Institutional deliveries (includes public and private institutions)',
     'Deliveries Conducted at Public Institutions':
     'Deliveries conducted at public institutions',
     'Number of Home deliveries':

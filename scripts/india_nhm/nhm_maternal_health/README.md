@@ -24,8 +24,8 @@ The cleaned csv has the following columns:
 - Date: Date
 - Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women registered for Antenatal Care
 - Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of pregnant women registered for Antenatal Care within first trimester
-- Count_ChildDeliveryEvent: Total reported deliveries
-- Count_ChildDeliveryEvent_InAnInstitution: Institutional deliveries (Public Insts.+Pvt. Insts.)
+- Count_ChildDeliveryEvent: Total reported child deliveries
+- Count_ChildDeliveryEvent_InAnInstitution: Institutional deliveries (includes public and private institutions)
 - Count_ChildDeliveryEvent_InPublicInstitution: Deliveries conducted at public institutions
 - Count_ChildDeliveryEvent_AtHome: Number of home deliveries
 - Count_ChildDeliveryEvent_AtHome_WithStandByAssist: Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)
