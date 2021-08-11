@@ -6,5 +6,3 @@ Node: E:productRoles->E2
 typeOf: dcs:MetabolicReaction
 dcid: C:productRoles->reactionID
 productCellularCompartment: E:productRoles->E1
-
-
