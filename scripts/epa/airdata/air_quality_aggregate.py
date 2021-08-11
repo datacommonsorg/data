@@ -39,7 +39,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:AirQualityIndex_AirPollutant
 observationDate: C:EPA_AQI->Date
 observationAbout: C:EPA_AQI->Place
-observationPeriod: dcs:"P1D"
+observationPeriod: "P1D"
 value: C:EPA_AQI->AQI
 definingPollutant: C:EPA_AQI->Pollutant
 definingAirQualitySite: C:EPA_AQI->Site
