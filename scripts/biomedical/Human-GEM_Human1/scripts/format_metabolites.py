@@ -30,7 +30,7 @@ def format_df_metatbolites(df_metabolites):
    Args:
        df_metabolites: pd.DataFrame of metabolites file
    Returns:
-       None
+       df_metabolites: formatted metabolites Dataframe
    """
     # modify id to humanGEMID format
     df_metabolites["id"] = df_metabolites["id"].str[2:]
@@ -64,7 +64,7 @@ def format_df_metatbolites(df_metabolites):
     # modify compartment to Enum type
     df_metabolites["compartment"] = \
                df_metabolites["compartment"].map(COMPARTMENT_DICT)
-
+    return df_metabolites
 
 def fill_chembl_from_hmdb(df):
     """convert all chebi to pubchem with
@@ -310,51 +310,14 @@ def convert_float_to_int(df, column):
     df[column] = df[column].replace('-1', np.nan)
     return None
 
-
-def main():
-    # read in 3 data files as the second, third, and fourth arguments
-    metabolite_tsv, reactant_tsv, product_tsv, human1_hmdb_map =\
-                 sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
-    ### Generate metabolites.csv
-    # read csv file
-    df_metabolites = pd.read_csv(metabolite_tsv, sep="\t")
-    df_map = pd.read_csv(human1_hmdb_map)
-    humangem_hmdb_dict = df_map.set_index("id").to_dict()['master_hmdb']
-    df_metabolites["hmdb"] = df_metabolites["id"].map(humangem_hmdb_dict)
-    # init mapping tool (bioservices)
-    uni = UniChem()
-    # Remove values in chebi column that has wrong format
-    # does not start with "CHEBI"
-    condition = df_metabolites['chebi'].str.\
-                findall("CHE").explode() == np.array("CHE")
-    df_metabolites["chebi"] =\
-                 np.where(condition, df_metabolites["chebi"], np.nan)
-    # Convert Chebi to chembl with bioservices
-    # and fill in chembl column
-    bioservice_chebi_to_chembl(df_metabolites, uni)
-    # Convert kegg to chembl with bioservices
-    # and fill in chembl column
-    bioservice_kegg_to_chembl(df_metabolites, uni)
-    #fill chemble from other columns with data commons query
-    fill_chembl_from_chebi(df_metabolites)
-    fill_chembl_from_kegg(df_metabolites)
-    # Pubchem Compound float -> int
-    convert_float_to_int(df_metabolites, "pubchem.compound")
-    fill_chembl_from_pubchem(df_metabolites)
-    fill_chembl_from_hmdb(df_metabolites)
-    # format df_metabolites to sync with Data Commons format
-    format_df_metatbolites(df_metabolites)
-    # generate output file path at current directory
-    make_csv(df_metabolites, "metabolites.csv")
-    ### Generate metabolicCellularCompartment.csv
-    df_metabolic_cellular_compartment = df_metabolites\
-                [["id", "compartment", "metabolite_dcid"]].copy()
-    df_metabolic_cellular_compartment["metabolic_compartment_dcid"] = "bio/" +\
-                 df_metabolic_cellular_compartment["id"]
-    # generate output file path at current directory
-    make_csv(df_metabolic_cellular_compartment,\
-         "metabolicCellularCompartment.csv")
-
+def format_product_role_data(product_tsv, df_metabolic_cellular_compartment):
+    """Format product role data
+    Args:
+        product_tsv: productRoles.tsv file path
+        df_metabolic_cellular_compartment:
+    Returns:
+        df_product_roles: formattted product role dataframe
+    """
     ### generate productRoles.csv
     df_product_roles = pd.read_csv(product_tsv, sep='\t')
     # Remove "M_" in speciesID/humanGEMID of metabolites
@@ -369,8 +332,16 @@ def main():
     # modify reaction id to reaction dcid format
     df_product_roles["reactionID"] = "bio/" +\
                   df_product_roles["reactionID"].astype("str")
-    # generate output file path at current directory
-    make_csv(df_product_roles, "productRoles.csv")
+    return df_product_roles
+
+def format_reactant_role_data(reactant_tsv, df_metabolic_cellular_compartment):
+    """Format reactant role data
+    Args:
+        reactant_tsv: reactantRoles.tsv file path
+        df_metabolic_cellular_compartment:
+    Returns:
+        df_reactant_roles: formattted reactant role dataframe
+    """
     ### generate reactantRoles.csv
     df_reactant_roles = pd.read_csv(reactant_tsv, sep='\t')
     # Remove "M_" in speciesID/humanGEMID of metabolites
@@ -384,9 +355,90 @@ def main():
     # modify reaction id to reaction dcid format
     df_reactant_roles["reactionID"] = "bio/" +  \
         df_reactant_roles["reactionID"].astype(str)
-    # generate output file path at current directory
-    make_csv(df_reactant_roles, "reactantRoles.csv")
+    return df_reactant_roles
 
+def generate_metabolic_cellular_compartment(df_metabolites):
+    """Generate metabolicCellularCompartment.csv
+    Args:
+        df_metabolites: human1 metabolite dataframe
+    Returns:
+        df_metabolic_cellular_compartment
+    """
+    df_metabolic_cellular_compartment = df_metabolites\
+                [["id", "compartment", "metabolite_dcid"]].copy()
+    df_metabolic_cellular_compartment["metabolic_compartment_dcid"] = "bio/" +\
+                 df_metabolic_cellular_compartment["id"]
+
+    return df_metabolic_cellular_compartment
+
+def mapping_across_columns(df_metabolites):
+    """Using bioservice and google datacommons to map
+    different IDs in df_metabolites columns
+    Args:
+        df_metabolites: metabolites dataframe
+    Returns
+        format data in place
+    """
+    # init mapping tool (bioservices)
+    uni = UniChem()
+    # Convert Chebi to chembl with bioservices
+    # and fill in chembl column
+    bioservice_chebi_to_chembl(df_metabolites, uni)
+    # Convert kegg to chembl with bioservices
+    # and fill in chembl column
+    bioservice_kegg_to_chembl(df_metabolites, uni)
+    #fill chemble from other columns with data commons query
+    fill_chembl_from_chebi(df_metabolites)
+    fill_chembl_from_kegg(df_metabolites)
+    # Pubchem Compound float -> int
+    convert_float_to_int(df_metabolites, "pubchem.compound")
+    fill_chembl_from_pubchem(df_metabolites)
+    fill_chembl_from_hmdb(df_metabolites)
+
+def format_metabolite_and_metabolite_relationships(metabolite_tsv, \
+                        human1_hmdb_map, reactant_tsv, product_tsv):
+    """Format metabolites.tsv, reactantRoles.tsv, productRoes.tsv files
+    Args:
+        metabolite_tsv: metabolite file path
+        human1_hmdb_map: human1_hmdb file path
+        reactant_tsv: reactantRole file path
+        product_tsv: productRole file path
+    Returns:
+        Write formatted csv files
+    """
+    # read metabolite file to dataframe
+    df_metabolites = pd.read_csv(metabolite_tsv, sep="\t")
+    df_map = pd.read_csv(human1_hmdb_map)
+    # map humangem_id to hmdb_id
+    humangem_hmdb_dict = df_map.set_index("id").to_dict()['master_hmdb']
+    df_metabolites["hmdb"] = df_metabolites["id"].map(humangem_hmdb_dict)
+    # Remove values in chebi column that has wrong format
+    # does not start with "CHEBI"
+    condition = df_metabolites['chebi'].str.\
+                findall("CHE").explode() == np.array("CHE")
+    df_metabolites["chebi"] =\
+                 np.where(condition, df_metabolites["chebi"], np.nan)
+    mapping_across_columns(df_metabolites)
+    df_metabolites = format_df_metatbolites(df_metabolites)
+    df_metabolic_cellular_compartment = \
+        generate_metabolic_cellular_compartment(df_metabolites)
+    df_reactant_roles = format_reactant_role_data(reactant_tsv, \
+        df_metabolic_cellular_compartment)
+    df_product_roles = format_product_role_data(product_tsv, \
+        df_metabolic_cellular_compartment)
+    make_csv(df_metabolites, "metabolites.csv")
+    make_csv(df_metabolic_cellular_compartment,\
+         "metabolicCellularCompartment.csv")
+    make_csv(df_reactant_roles, "reactantRoles.csv")
+    make_csv(df_product_roles, "productRoles.csv")
+
+def main():
+    """Main function"""
+    # read in 3 data files as the second, third, and fourth arguments
+    metabolite_tsv, reactant_tsv, product_tsv, human1_hmdb_map =\
+                 sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+    format_metabolite_and_metabolite_relationships(\
+        metabolite_tsv, human1_hmdb_map, reactant_tsv, product_tsv)
 
 if __name__ == '__main__':
     main()
