@@ -12,11 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-sys.path.append("..")
-
 import os
 import unittest
+import filecmp
 from india_nhm.base.data_cleaner import NHMDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.
@@ -54,9 +52,9 @@ class TestPreprocess(unittest.TestCase):
     maxDiff = None
 
     def test_create_csv(self):
-        expected_file = open(os.path.join(module_dir_, 'test/expected.csv'))
-        expected_data = expected_file.read()
-        expected_file.close()
+        expected_file = os.path.join(module_dir_, 'test/expected.csv')
+        # expected_data = expected_file.read()
+        # expected_file.close()
 
         loader = NHMDataLoaderBase(
             data_folder=os.path.join(module_dir_, 'test/'),
@@ -65,12 +63,15 @@ class TestPreprocess(unittest.TestCase):
             final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"))
         loader.generate_csv()
 
-        result_file = open(os.path.join(module_dir_, 'test/test_gen.csv'))
-        result_data = result_file.read()
-        result_file.close()
+        result_file = os.path.join(module_dir_, 'test/test_gen.csv')
+        # result_data = result_file.read()
+        # result_file.close()
 
-        os.remove(os.path.join(module_dir_, 'test/test_gen.csv'))
-        self.assertEqual(u'{}'.format(expected_data), result_data)
+        same = filecmp.cmp(result_file, expected_file)
+        self.assertTrue(same)
+
+        # os.remove(result_file)
+        # self.assertEqual(u'{}'.format(expected_data), result_data)
 
 
 if __name__ == '__main__':

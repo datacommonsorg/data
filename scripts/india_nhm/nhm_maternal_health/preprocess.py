@@ -12,11 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-sys.path.append("..")
-
-from base.data_cleaner import NHMDataLoaderBase
-from base.readme_generator import ReadMeGen
+from india_nhm.base.data_cleaner import NHMDataLoaderBase
+from india_nhm.base.readme_generator import ReadMeGen
 
 # Mapping dictionary for data columns and StatVars
 cols_to_nodes = {
@@ -55,11 +52,11 @@ if __name__ == '__main__':
                                cols_dict=cols_to_nodes,
                                final_csv_path="{}.csv".format(dataset_name))
     loader.generate_csv()
-    loader.create_mcf_tmcf()
+    # loader.create_mcf_tmcf()
 
-    # Write README file
-    readme_gen = ReadMeGen(dataset_name=dataset_name,
-                           dataset_description="Maternal Health Data",
-                           data_level="State level",
-                           cols_dict=cols_to_nodes)
-    readme_gen.gen_readme()
+    # # Write README file
+    # readme_gen = ReadMeGen(dataset_name=dataset_name,
+    #                        dataset_description="Maternal Health Data",
+    #                        data_level="State level",
+    #                        cols_dict=cols_to_nodes)
+    # readme_gen.gen_readme()

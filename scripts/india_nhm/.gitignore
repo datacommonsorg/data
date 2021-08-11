@@ -1,2 +1,7 @@
 # pylint directory
 .pylint.d/
+__pycache__/
+
+# cache files
+*.pyc
+*.stats
