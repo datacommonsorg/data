@@ -6,21 +6,24 @@ import sys
 import os
 import pandas as pd
 
+# information of this dictionary is from the original
+# HUMAN-GEM xml file (read Download URL section)
+KINETIC_DICT = {"FB2N0": 0, "FB1N1000": -1000, "FB3N1000": 1000}
 
-def main():
 
-    # information of this dictionary is from the original
-    # HUMAN-GEM xml file (read Download URL section)
-    kinetic_dict = {"FB2N0": 0, "FB1N1000": -1000, "FB3N1000": 1000}
-    # read in 1 data file as the second argument
-    file_input = sys.argv[1]
-    # read in dataframe
-    df_reactions = pd.read_csv(file_input, sep='\t')
+def format_reactions_data(reactions_tsv):
+    """Format reactions.tsv file
+    Args:
+        reactions_tsv: reactions.tsv file path
+    Returns:
+        Write formatted csv file: reactions.csv
+    """
+    df_reactions = pd.read_csv(reactions_tsv, sep='\t')
     # map lowerFluxBound and upperFluxBound to dictionary
     df_reactions["lowerFluxBound"] = \
-        df_reactions["lowerFluxBound"].map(kinetic_dict)
+        df_reactions["lowerFluxBound"].map(KINETIC_DICT)
     df_reactions["upperFluxBound"] = \
-        df_reactions["upperFluxBound"].map(kinetic_dict)
+        df_reactions["upperFluxBound"].map(KINETIC_DICT)
     # modify reaction ID to humanGEMID format
     df_reactions["id"] = df_reactions["id"].str[2:]
     df_reactions["dcid"] = "bio/" + df_reactions["id"].astype(str)
@@ -35,6 +38,13 @@ def main():
     output_path = os.path.join(os.getcwd(), "reactions.csv")
     df_reactions.to_csv(output_path, index=None)
 
+
+def main():
+
+    # read in 1 data file as the second argument
+    reactions_tsv = sys.argv[1]
+    # format reactions.tsv
+    format_reactions_data(reactions_tsv)
 
 if __name__ == '__main__':
     main()
