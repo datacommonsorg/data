@@ -40,7 +40,7 @@ flags.DEFINE_integer('end_year', datetime.datetime.now().year,
 flags.DEFINE_integer('years_per_batch', 10,
                      'Data set downloaded in batches of years.')
 
-_DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:${energy_code};yr={years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
+_DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr={years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
 
 
 def download_zip_file(url: str, save_path: str):

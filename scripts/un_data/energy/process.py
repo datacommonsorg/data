@@ -45,7 +45,7 @@ flags.DEFINE_list('csv_data_files', [],
 flags.DEFINE_string('dataset_name', 'undata-energy',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
-flags.DEFINE_bool('generate_enum_mcf', True, 'Generate MCF nodes for enums')
+flags.DEFINE_string('schema_mcf', '', 'Generate schema MCF nodes for enums and properties')
 
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
@@ -219,15 +219,7 @@ def process(in_paths: str, out_path: str):
                                     f_out_mcf, counters)
                         _print_counters(counters, 10000)
 
-            # Generate MCF nodes for enums
-            if FLAGS.generate_enum_mcf:
-                enum_mcf = un_energy_codes.generate_un_energy_code_enums(sv_map)
-                if enum_mcf is not None:
-                    for node in enum_mcf:
-                        if len(node) > 0:
-                            f_out_mcf.write('\n\n')
-                            f_out_mcf.write('\n'.join(node))
-            
+           
     end_ts = time.perf_counter()
     counters['total_time_seconds'] = end_ts - start_ts
     _print_counters(counters)
@@ -236,10 +228,25 @@ def process(in_paths: str, out_path: str):
           counters['inputs_processed'] / (end_ts - start_ts)), 'rows/sec')
 
 
+def generate_schema_mcf(mcf_filename: str):
+    """Generate MCF for schema such as enums and properties.
+    """
+    sv_map = defaultdict(lambda: 0)
+    with open(mcf_filename, 'w+', newline='') as f_out_mcf:
+        # Generate MCF nodes for enums
+        enum_mcf = un_energy_codes.generate_un_energy_code_enums(sv_map)
+        if enum_mcf is not None:
+            for node in enum_mcf:
+                if len(node) > 0:
+                    f_out_mcf.write('\n\n')
+                    f_out_mcf.write('\n'.join(node))
+    _print_counters(sv_map)
+ 
 def main(_):
-    assert FLAGS.csv_data_files
-    assert FLAGS.dataset_name
-    process(FLAGS.csv_data_files, FLAGS.dataset_name)
+    if len(FLAGS.csv_data_files) > 0 and FLAGS.dataset_name != '':
+        process(FLAGS.csv_data_files, FLAGS.dataset_name)
+    if FLAGS.schema_mcf != '':
+        generate_schema_mcf(FLAGS.schema_mcf)
 
 
 if __name__ == '__main__':
