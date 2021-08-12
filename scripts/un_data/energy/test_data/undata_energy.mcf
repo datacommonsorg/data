@@ -630,9 +630,9 @@ populationType: dcs:Energy
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_EnergyGeneration_Energy_dcs:EIA_Water
+Node: Annual_EnergyGeneration_Energy_EIA_Water
 typeOf: dcs:StatisticalVariable
-energySource: dcid:dcs:EIA_Water
+energySource: dcs:EIA_Water
 measuredProperty: dcs:EnergyGeneration
 measurementQualifier: dcs:Annual
 populationType: dcs:Energy
@@ -648,9 +648,9 @@ populationType: dcs:Energy
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_EnergyGeneration_Energy_dcs:Solar
+Node: Annual_EnergyGeneration_Energy_Solar
 typeOf: dcs:StatisticalVariable
-energySource: dcid:dcs:Solar
+energySource: dcs:Solar
 measuredProperty: dcs:EnergyGeneration
 measurementQualifier: dcs:Annual
 populationType: dcs:Energy
@@ -666,9 +666,9 @@ populationType: dcs:Energy
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_EnergyGeneration_Energy_dcs:Wind
+Node: Annual_EnergyGeneration_Energy_Wind
 typeOf: dcs:StatisticalVariable
-energySource: dcid:dcs:Wind
+energySource: dcs:Wind
 measuredProperty: dcs:EnergyGeneration
 measurementQualifier: dcs:Annual
 populationType: dcs:Energy

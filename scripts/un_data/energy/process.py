@@ -175,12 +175,16 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
                            f'Unit: {units}, Transaction: {ct_name}', counters)
         return
     data_row['Unit_dcid'] = unit_dcid
-    data_row['Scaling_factor'] = scaling_factor
+    if scaling_factor != 1:
+      data_row['Scaling_factor'] = scaling_factor
+    else:
+      data_row['Scaling_factor'] = ''
 
     if notes == "1":
       data_row['IsEstimate'] = 'dcs:True'
-    #else:
-    #  data_row['IsEstimate'] = 'dcs:False'
+    else:
+      data_row['IsEstimate'] = ''
+
 
     sv_pv = {}
     sv_id = generate_stat_var(data_row, sv_pv, counters)
