@@ -103,6 +103,7 @@ def write_csv(data, outfilename):
     full_df['FIPS'] = 'dcid:geoId/' + (
         full_df['FIPS'].astype(str).str.zfill(12))
     full_df = full_df.fillna('')
+    full_df = full_df.replace('None', '')
     full_df.to_csv(outfilename, index=False)
 
 
