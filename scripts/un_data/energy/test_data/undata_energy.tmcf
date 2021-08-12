@@ -6,3 +6,4 @@ observationDate: C:UNDataEnergy->Year
 value: C:UNDataEnergy->Quantity
 unit: C:UNDataEnergy->Unit_dcid
 scalingFactor: C:UNDataEnergy->Scaling_factor
+isEstimate: C:UNDataEnergy->IsEstimate
