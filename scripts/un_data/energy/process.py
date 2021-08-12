@@ -167,7 +167,7 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
         _add_error_counter('error_unknown_country_code',
                            f'Country code: {country_code}, name: {country_name}', counters)
         return
-    data_row['Country_dcid'] = fuel_dcid
+    data_row['Country_dcid'] = f'dcs:{country_dcid}'
 
     unit_dcid, scaling_factor = un_energy_codes.get_unit_dcid_scale(units)
     if not unit_dcid or not scaling_factor:
@@ -175,6 +175,12 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
                            f'Unit: {units}, Transaction: {ct_name}', counters)
         return
     data_row['Unit_dcid'] = unit_dcid
+    data_row['Scaling_factor'] = scaling_factor
+
+    if notes == "1":
+      data_row['IsEstimate'] = 'dcs:True'
+    #else:
+    #  data_row['IsEstimate'] = 'dcs:False'
 
     sv_pv = {}
     sv_id = generate_stat_var(data_row, sv_pv, counters)
@@ -217,7 +223,7 @@ def process(in_paths: str, out_path: str):
                     for data_row in reader:
                         process_row(data_row, sv_map, csv_writer,
                                     f_out_mcf, counters)
-                        _print_counters(counters, 10000)
+                        _print_counters(counters, 100000)
 
            
     end_ts = time.perf_counter()

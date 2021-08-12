@@ -313,7 +313,9 @@ def add_pv_from_map(prop: str, value_code: str, code_map, stat_var_pv) -> bool:
     prop_value = code_map[value_code]
     if prop_value is None:
         return False
-    stat_var_pv[prop] = 'dcid:' + prop_value
+    if prop_value.find(':') == -1:
+      prop_value = f'dcid:{prop_value}'
+    stat_var_pv[prop] = prop_value
     return True
 
 
@@ -424,11 +426,11 @@ def get_pv_for_energy_code(code: str, counters=None) -> {str: str}:
         return pv
 
     if code.startswith('10'):
-        if add_pv_from_map_for_prefix('dcid:energyLostAs', code, UN_ENERGY_LOSS_CODES, pv):
+        if add_pv_from_map_for_prefix('energyLostAs', code, UN_ENERGY_LOSS_CODES, pv):
             pv['measuredProperty'] = 'dcs:EnergyLoss'  # new
         return pv
 
-    if add_pv_from_map_for_prefix('dcid:energyReserveType', code,
+    if add_pv_from_map_for_prefix('energyReserveType', code,
                                   UN_ENERGY_RESERVE_CODES, pv):
         pv['measuredProperty'] = 'dcs:EnergyReserves'  # new
         return pv
@@ -460,7 +462,7 @@ UN_ENERGY_UNITS_MULTIPLIER = {
 }
 
 
-def get_unit_dcid_scale(units_scale: str) -> (str, str):
+def get_unit_dcid_scale(units_scale: str) -> (str, int):
     units = re.sub('[^a-z,]', '', units_scale.lower())
     multiplier = None
     if ',' in units:
@@ -475,12 +477,18 @@ def get_unit_dcid_scale(units_scale: str) -> (str, str):
         multiplier_num = UN_ENERGY_UNITS_MULTIPLIER[multiplier]
     return (units_dcid, multiplier_num)
 
-def get_name_from_id(dcid: str) -> str:
+def get_name_from_id(dcid_str: str) -> str:
     """Converts the camel case into a space separated name """
-    if dcid is None:
+    if dcid_str is None:
         return None
+    # Strip any namespace prefix
+    dcid = dcid_str[dcid_str.find(':') + 1:]
+    
+    # Find all case changes
     start_idx = [i for i, e in enumerate(dcid)
                  if e.isupper() or e == '_'] + [len(dcid)]
+
+    # Insert spaces at positions where case changes
     words = [dcid[x: y] for x, y in zip(start_idx, start_idx[1:]) if dcid[x: y] != '_']
     return ' '.join(words)
   
