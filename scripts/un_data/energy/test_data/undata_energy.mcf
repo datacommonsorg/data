@@ -1,0 +1,1451 @@
+
+
+Node: Annual_EnergyGeneration_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_Receipts_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:Receipts
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_Imports_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:Imports
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_ElectricityMainActivityAutoProducer
+typeOf: dcs:StatisticalVariable
+energySource: dcid:ElectricityMainActivityAutoProducer
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_OilRefinery
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:OilRefinery
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyRecoverableReserves
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyRecoverableReserves
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_Energy ReservesAssured
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:Energy ReservesAssured
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_HydraulicResources
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:HydraulicResources
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_Exports_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:Exports
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_Transformation
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:Transformation
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_FuelStocks_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:FuelStocks
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_TransportIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:TransportIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergySupply_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:EnergySupply
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyLoss_Energy_EnergyLost
+typeOf: dcs:StatisticalVariable
+energyLostAs: dcid:EnergyLost
+measuredProperty: dcs:EnergyLoss
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_OtherIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:OtherIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_Agriculture
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:Agriculture
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_Households
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:Households
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyProductTransfer_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:EnergyProductTransfer
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_DomesticNavigationTransport
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:DomesticNavigationTransport
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_Commerce_PublicServices
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:Commerce_PublicServices
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_Manufacturing
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:Manufacturing
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_ConstructionIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:ConstructionIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_Mining
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:Mining
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_OtherTransport
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:OtherTransport
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_ChemicalPetrochemicalIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:ChemicalPetrochemicalIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_EnergyIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:EnergyIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_CoalMines
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:CoalMines
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_OilGasExtraction
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:OilGasExtraction
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_NonmetallicMineralsIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:NonmetallicMineralsIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_IronSteel
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:IronSteel
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_OtherManufacturingIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:OtherManufacturingIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_ElectricityGeneration
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:ElectricityGeneration
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_ElectricityMainActivityProducer
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:ElectricityMainActivityProducer
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_NonEnergyConsumption_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:NonEnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_FoodIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:FoodIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_PaperIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:PaperIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_BlastFurnaces
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:BlastFurnaces
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_NonferrousMetalsIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:NonferrousMetalsIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_MachineryIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:MachineryIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_TextileIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:TextileIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_CHPMainActivityProducers
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:CHPMainActivityProducers
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_CHPAutoproducer
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:CHPAutoproducer
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_HeatPlantMainActivityProducer
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:HeatPlantMainActivityProducer
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_CokeOvens
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:CokeOvens
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_BriquettingPlants
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:BriquettingPlants
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_HeatPlantAutoproducer
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:HeatPlantAutoproducer
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_WoodIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:WoodIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_Industry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:Industry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_ElectricityAutoproducer
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:ElectricityAutoproducer
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_RailTransport
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:RailTransport
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_DomesticAviation
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:DomesticAviation
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Refinery
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:Refinery
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_TransportEquipmentIndustry
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:TransportEquipmentIndustry
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_GasWorks
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:GasWorks
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_OilRefineries
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:OilRefineries
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_NaturalGasBlendingPlants
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:NaturalGasBlendingPlants
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_BiogasProduction
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:BiogasProduction
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyResourcesInPlace
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyResourcesInPlace
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyKnownReserves
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyKnownReserves
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyAdditionalResources
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyAdditionalResources
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_CoalLiquefactionPlant
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:CoalLiquefactionPlant
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_CoalLiquefactionPlants
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:CoalLiquefactionPlants
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyReserves
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyReserves
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyReservesOilShaleTarSands
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyReservesOilShaleTarSands
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyReservesTarSands
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyReservesTarSands
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_PipelineTransport
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:PipelineTransport
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_OffShore
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:OffShore
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyReservesOilShale
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyReservesOilShale
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_PetrochemicalPlant
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:PetrochemicalPlant
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyReservesOther
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyReservesOther
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_dcs:EIA_Water
+typeOf: dcs:StatisticalVariable
+energySource: dcid:dcs:EIA_Water
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_CombustibleFuel
+typeOf: dcs:StatisticalVariable
+energySource: dcid:CombustibleFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_dcs:Solar
+typeOf: dcs:StatisticalVariable
+energySource: dcid:dcs:Solar
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_SolarThermal
+typeOf: dcs:StatisticalVariable
+energySource: dcid:SolarThermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_dcs:Wind
+typeOf: dcs:StatisticalVariable
+energySource: dcid:dcs:Wind
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_SolarPV
+typeOf: dcs:StatisticalVariable
+energySource: dcid:SolarPV
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Nuclear
+typeOf: dcs:StatisticalVariable
+energySource: dcid:Nuclear
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_PublicNuclear
+typeOf: dcs:StatisticalVariable
+energySource: dcid:PublicNuclear
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Geothermal
+typeOf: dcs:StatisticalVariable
+energySource: dcid:Geothermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_PumpedHydro
+typeOf: dcs:StatisticalVariable
+energySource: dcid:PumpedHydro
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Tide
+typeOf: dcs:StatisticalVariable
+energySource: dcid:Tide
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Others
+typeOf: dcs:StatisticalVariable
+energySource: dcid:Others
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_SelfProducerNuclear
+typeOf: dcs:StatisticalVariable
+energySource: dcid:SelfProducerNuclear
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_CombustibleFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:CombustibleFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_ElectricityGeneratingPowerPlant_CombustibleFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:ElectricityGeneratingPowerPlant
+energySource: dcid:CombustibleFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_ConventionalHydroelectric
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:ConventionalHydroelectric
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_Solar
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:Solar
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_CombustibleFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:CombustibleFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_ConventionalHydroelectric
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:ConventionalHydroelectric
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_SolarPhotovoltaic
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:SolarPhotovoltaic
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_Wind
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:Wind
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_LNGPlants
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:LNGPlants
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_Nuclear
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:Nuclear
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_ElectricityGeneratingPowerPlant_Nuclear
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:ElectricityGeneratingPowerPlant
+energySource: dcid:Nuclear
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_PumpedHydro
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:PumpedHydro
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_PumpStoragePlants
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:PumpStoragePlants
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_CHPGeneratingPowerPlant_CombustibleFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:CHPGeneratingPowerPlant
+energySource: dcid:CombustibleFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_Solar
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:Solar
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_SolarPhotovoltaic
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:SolarPhotovoltaic
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_Geothermal
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:Geothermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_ElectricityGeneratingPowerPlant_Geothermal
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:ElectricityGeneratingPowerPlant
+energySource: dcid:Geothermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_SolarThermal
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:SolarThermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_ChemicalHeat
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:ChemicalHeat
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_ElectricityGeneratingPowerPlant_ChemicalHeat
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:ElectricityGeneratingPowerPlant
+energySource: dcid:ChemicalHeat
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_ElectricBoilers
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:ElectricBoilers
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_Wind
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:Wind
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_ChemicalHeat
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:ChemicalHeat
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_CHPGeneratingPowerPlant_ChemicalHeat
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:CHPGeneratingPowerPlant
+energySource: dcid:ChemicalHeat
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_OtherFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:OtherFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_ElectricityGeneratingPowerPlant_OtherFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:ElectricityGeneratingPowerPlant
+energySource: dcid:OtherFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_OtherFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:OtherFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_NuclearFuelProcessing
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:NuclearFuelProcessing
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_GasToLiquidPlants
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:GasToLiquidPlants
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_Tidal
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:Tidal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_CharcoalPlants
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:CharcoalPlants
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_Geothermal
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:Geothermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_CHPGeneratingPowerPlant_OtherFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:CHPGeneratingPowerPlant
+energySource: dcid:OtherFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_HeatPumps
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:HeatPumps
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_Nuclear
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:Nuclear
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_PumpedHydro
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:PumpedHydro
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_CHPGeneratingPowerPlant_Nuclear
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:CHPGeneratingPowerPlant
+energySource: dcid:Nuclear
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_CHPGeneratingPowerPlant_Geothermal
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:CHPGeneratingPowerPlant
+energySource: dcid:Geothermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_SolarThermal
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerAutoProducer
+energySource: dcid:SolarThermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Coal
+typeOf: dcs:StatisticalVariable
+energySource: dcid:Coal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_DieselOil
+typeOf: dcs:StatisticalVariable
+energySource: dcid:DieselOil
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_FuelOil
+typeOf: dcs:StatisticalVariable
+energySource: dcid:FuelOil
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_OilShale
+typeOf: dcs:StatisticalVariable
+energySource: dcid:OilShale
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_OilProducts
+typeOf: dcs:StatisticalVariable
+energySource: dcid:OilProducts
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_NaturalGas
+typeOf: dcs:StatisticalVariable
+energySource: dcid:NaturalGas
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_NonRenewableWaste
+typeOf: dcs:StatisticalVariable
+energySource: dcid:NonRenewableWaste
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_MunicipalWaste
+typeOf: dcs:StatisticalVariable
+energySource: dcid:MunicipalWaste
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Bagasse
+typeOf: dcs:StatisticalVariable
+energySource: dcid:Bagasse
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_SolidBioFuel
+typeOf: dcs:StatisticalVariable
+energySource: dcid:SolidBioFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_LiquidBioFuel
+typeOf: dcs:StatisticalVariable
+energySource: dcid:LiquidBioFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_ManufaturedGas
+typeOf: dcs:StatisticalVariable
+energySource: dcid:ManufaturedGas
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Biogas
+typeOf: dcs:StatisticalVariable
+energySource: dcid:Biogas
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_CoalProducts
+typeOf: dcs:StatisticalVariable
+energySource: dcid:CoalProducts
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_BrownCoal
+typeOf: dcs:StatisticalVariable
+energySource: dcid:BrownCoal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_Peat
+typeOf: dcs:StatisticalVariable
+energySource: dcid:Peat
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyLoss_Energy_GasLostAsFlaredVented
+typeOf: dcs:StatisticalVariable
+energyLostAs: dcid:GasLostAsFlaredVented
+measuredProperty: dcs:EnergyLoss
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyLoss_Energy_FuelLossDuringExtraction
+typeOf: dcs:StatisticalVariable
+energyLostAs: dcid:FuelLossDuringExtraction
+measuredProperty: dcs:EnergyLoss
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyResources
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyResources
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyLoss_Energy_EnergyReInjected
+typeOf: dcs:StatisticalVariable
+energyLostAs: dcid:EnergyReInjected
+measuredProperty: dcs:EnergyLoss
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyLoss_Energy_GasLostFlared
+typeOf: dcs:StatisticalVariable
+energyLostAs: dcid:GasLostFlared
+measuredProperty: dcs:EnergyLoss
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_NaturalGasPlants
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:NaturalGasPlants
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyLoss_Energy_GasLostVented
+typeOf: dcs:StatisticalVariable
+energyLostAs: dcid:GasLostVented
+measuredProperty: dcs:EnergyLoss
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyStocksOpening_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:EnergyStocksOpening
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyStocksClosing_Energy
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:EnergyStocksClosing
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_Gas_to_LiquidPlant
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:Gas_to_LiquidPlant
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_HeatGeneratingPowerPlant_CombustibleFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:HeatGeneratingPowerPlant
+energySource: dcid:CombustibleFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_ElectricBoiler
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:ElectricBoiler
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_HeatGeneratingPowerPlant_Geothermal
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:HeatGeneratingPowerPlant
+energySource: dcid:Geothermal
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_EnergyProducerMainActivity_HeatPump
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:EnergyProducerMainActivity
+energySource: dcid:HeatPump
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_HeatGeneratingPowerPlant_ChemicalHeat
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:HeatGeneratingPowerPlant
+energySource: dcid:ChemicalHeat
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyConsumption_Energy_ElectricityProduction
+typeOf: dcs:StatisticalVariable
+energyConsumerType: dcid:ElectricityProduction
+measuredProperty: dcs:EnergyConsumption
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyGeneration_Energy_HeatGeneratingPowerPlant_OtherFuel
+typeOf: dcs:StatisticalVariable
+energyProducerType: dcid:HeatGeneratingPowerPlant
+energySource: dcid:OtherFuel
+measuredProperty: dcs:EnergyGeneration
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_EnergyReserves_Energy_EnergyReservesAdditional
+typeOf: dcs:StatisticalVariable
+energyReserveType: dcid:EnergyReservesAdditional
+measuredProperty: dcs:EnergyReserves
+measurementQualifier: dcs:Annual
+populationType: dcs:Energy
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
