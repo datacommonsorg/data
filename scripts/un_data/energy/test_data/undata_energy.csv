@@ -69,7 +69,7 @@ Heat,dcs:country/ALB,2019,150.67,dcid:Terajoule,,,Annual_EnergyGeneration_Energy
 Uranium,dcs:country/DZA,2011,19500,dcid:MetricTon,,,Annual_EnergyReserves_Energy_Energy ReservesAssured
 VegetalWaste,dcs:country/AGO,2018,105044.4,dcid:Terajoule,,,Annual_EnergyGeneration_Energy
 FallingWater,dcs:country/AFG,2008,394000,dcid:KilowattHour,1000000,,Annual_EnergyReserves_Energy_HydraulicResources
-White spirit and special boiling point industrial spirits,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy
+WhiteSpirit,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy
 Biodiesel,dcs:country/ALB,2019,130,dcid:MetricTon,1000,,Annual_Imports_Energy
 Biogasoline,dcs:country/ARG,2019,850,dcid:MetricTon,1000,,Annual_Receipts_Energy
 BioJetKerosene,dcs:country/FIN,2015,1,dcid:MetricTon,1000,,Annual_Exports_Energy
@@ -2792,43 +2792,43 @@ VegetalWaste,dcs:country/CHN,2018,91195,dcid:Terajoule,,,Annual_EnergyConsumptio
 VegetalWaste,dcs:country/FIN,1997,0,dcid:Terajoule,,dcs:True,Annual_EnergyConsumption_Energy_CHPAutoproducer
 VegetalWaste,dcs:country/KOR,2011,583,dcid:Terajoule,,dcs:True,Annual_EnergyConsumption_Energy_CHPMainActivityProducers
 FallingWater,dcs:country/AFG,2008,394000,dcid:KilowattHour,1000000,,Annual_EnergyReserves_Energy_HydraulicResources
-White spirit and special boiling point industrial spirits,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy
-White spirit and special boiling point industrial spirits,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_NonEnergyConsumption_Energy
-White spirit and special boiling point industrial spirits,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_EnergySupply_Energy
-White spirit and special boiling point industrial spirits,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_EnergyConsumption_Energy
-White spirit and special boiling point industrial spirits,dcs:country/ALB,2017,0,dcid:MetricTon,1000,,Annual_Exports_Energy
-White spirit and special boiling point industrial spirits,dcs:country/DZA,2005,13,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
-White spirit and special boiling point industrial spirits,dcs:country/DZA,2005,13,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy_Refinery
-White spirit and special boiling point industrial spirits,dcs:country/DZA,2003,2,dcid:MetricTon,1000,,Annual_FuelStocks_Energy
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.151,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.141,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Manufacturing
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.141,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.006,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NonmetallicMineralsIndustry
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.03,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_MachineryIndustry
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.022,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_FoodIndustry
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.067,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ConstructionIndustry
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.016,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherManufacturingIndustry
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.01,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
-White spirit and special boiling point industrial spirits,dcs:country/ARM,2018,0.01,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
-White spirit and special boiling point industrial spirits,dcs:country/AUT,2003,6,dcid:MetricTon,1000,,Annual_EnergyProductTransfer_Energy
-White spirit and special boiling point industrial spirits,dcs:country/AUT,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportEquipmentIndustry
-White spirit and special boiling point industrial spirits,dcs:country/AUT,2018,13,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry
-White spirit and special boiling point industrial spirits,dcs:country/AUT,2018,13,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry
-White spirit and special boiling point industrial spirits,dcs:country/AUT,2004,4,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_RailTransport
-White spirit and special boiling point industrial spirits,dcs:country/BOL,2018,63,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
-White spirit and special boiling point industrial spirits,dcs:country/BOL,2018,1,dcid:MetricTon,1000,,Annual_EnergyLoss_Energy_EnergyLost
-White spirit and special boiling point industrial spirits,dcs:country/CAN,1991,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_EnergyIndustry
-White spirit and special boiling point industrial spirits,dcs:country/CAN,1991,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OilRefineries
-White spirit and special boiling point industrial spirits,dcs:country/CHN,2016,0.4,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Industry
-White spirit and special boiling point industrial spirits,dcs:country/CHN,2018,2.5,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ChemicalPetrochemicalIndustry
-White spirit and special boiling point industrial spirits,dcs:country/CHN,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NonferrousMetalsIndustry
-White spirit and special boiling point industrial spirits,dcs:country/CHN,2015,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Mining
-White spirit and special boiling point industrial spirits,dcs:country/CHN,2018,3.5,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PaperIndustry
-White spirit and special boiling point industrial spirits,dcs:country/CHN,2016,0.1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_WoodIndustry
-White spirit and special boiling point industrial spirits,dcs:country/CHN,2018,1.6,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TextileIndustry
-White spirit and special boiling point industrial spirits,dcs:country/DEU,2018,29,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Transformation
-White spirit and special boiling point industrial spirits,dcs:country/DEU,2018,29,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PetrochemicalPlant
-White spirit and special boiling point industrial spirits,dcs:country/JPN,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_IronSteel
+WhiteSpirit,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy
+WhiteSpirit,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_NonEnergyConsumption_Energy
+WhiteSpirit,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_EnergySupply_Energy
+WhiteSpirit,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_EnergyConsumption_Energy
+WhiteSpirit,dcs:country/ALB,2017,0,dcid:MetricTon,1000,,Annual_Exports_Energy
+WhiteSpirit,dcs:country/DZA,2005,13,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
+WhiteSpirit,dcs:country/DZA,2005,13,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy_Refinery
+WhiteSpirit,dcs:country/DZA,2003,2,dcid:MetricTon,1000,,Annual_FuelStocks_Energy
+WhiteSpirit,dcs:country/ARM,2018,0.151,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy
+WhiteSpirit,dcs:country/ARM,2018,0.141,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Manufacturing
+WhiteSpirit,dcs:country/ARM,2018,0.141,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
+WhiteSpirit,dcs:country/ARM,2018,0.006,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NonmetallicMineralsIndustry
+WhiteSpirit,dcs:country/ARM,2018,0.03,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_MachineryIndustry
+WhiteSpirit,dcs:country/ARM,2018,0.022,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_FoodIndustry
+WhiteSpirit,dcs:country/ARM,2018,0.067,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ConstructionIndustry
+WhiteSpirit,dcs:country/ARM,2018,0.016,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherManufacturingIndustry
+WhiteSpirit,dcs:country/ARM,2018,0.01,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
+WhiteSpirit,dcs:country/ARM,2018,0.01,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
+WhiteSpirit,dcs:country/AUT,2003,6,dcid:MetricTon,1000,,Annual_EnergyProductTransfer_Energy
+WhiteSpirit,dcs:country/AUT,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportEquipmentIndustry
+WhiteSpirit,dcs:country/AUT,2018,13,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry
+WhiteSpirit,dcs:country/AUT,2018,13,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry
+WhiteSpirit,dcs:country/AUT,2004,4,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_RailTransport
+WhiteSpirit,dcs:country/BOL,2018,63,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
+WhiteSpirit,dcs:country/BOL,2018,1,dcid:MetricTon,1000,,Annual_EnergyLoss_Energy_EnergyLost
+WhiteSpirit,dcs:country/CAN,1991,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_EnergyIndustry
+WhiteSpirit,dcs:country/CAN,1991,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OilRefineries
+WhiteSpirit,dcs:country/CHN,2016,0.4,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Industry
+WhiteSpirit,dcs:country/CHN,2018,2.5,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ChemicalPetrochemicalIndustry
+WhiteSpirit,dcs:country/CHN,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NonferrousMetalsIndustry
+WhiteSpirit,dcs:country/CHN,2015,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Mining
+WhiteSpirit,dcs:country/CHN,2018,3.5,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PaperIndustry
+WhiteSpirit,dcs:country/CHN,2016,0.1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_WoodIndustry
+WhiteSpirit,dcs:country/CHN,2018,1.6,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TextileIndustry
+WhiteSpirit,dcs:country/DEU,2018,29,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Transformation
+WhiteSpirit,dcs:country/DEU,2018,29,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PetrochemicalPlant
+WhiteSpirit,dcs:country/JPN,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_IronSteel
 Biodiesel,dcs:country/ALB,2019,130,dcid:MetricTon,1000,,Annual_Imports_Energy
 Biodiesel,dcs:country/ALB,2019,130,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy
 Biodiesel,dcs:country/ALB,2019,130,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry

@@ -92,7 +92,7 @@ UN_ENERGY_CODES = {
     'EL':  'dcs:Electricity',  # Total Electricity
     'GR':  'TotalRefineryOutput',  # new
     'UR':  'Uranium',  # new
-    'WS':  'White spirit and special boiling point industrial spirits',  # new
+    'WS':  'WhiteSpirit',  # new
     'EW': 'dcs:Wind',  # Wind Electricity
 }
 

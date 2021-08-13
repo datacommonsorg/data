@@ -1,44 +1,12 @@
 
 
-Node: dcid:ParaffinWaxes
+Node: dcid:Ethane
 typeOf: dcid:EnergySourceEnum
-name: "Paraffin Waxes"
+name: "Ethane"
 
-Node: dcid:dcs:Nuclear
+Node: dcid:WhiteSpirit
 typeOf: dcid:EnergySourceEnum
-name: "Nuclear"
-
-Node: dcid:Liquified Petroleum Gas
-typeOf: dcid:EnergySourceEnum
-name: "Liquified  Petroleum  Gas"
-
-Node: dcid:Biodiesel
-typeOf: dcid:EnergySourceEnum
-name: "Biodiesel"
-
-Node: dcid:OtherOilProducts
-typeOf: dcid:EnergySourceEnum
-name: "Other Oil Products"
-
-Node: dcid:PeatProducts
-typeOf: dcid:EnergySourceEnum
-name: "Peat Products"
-
-Node: dcid:BlastFurnaceGas
-typeOf: dcid:EnergySourceEnum
-name: "Blast Furnace Gas"
-
-Node: dcid:Uranium
-typeOf: dcid:EnergySourceEnum
-name: "Uranium"
-
-Node: dcid:IndustrialWaste
-typeOf: dcid:EnergySourceEnum
-name: "Industrial Waste"
-
-Node: dcid:dcs:LigniteCoal
-typeOf: dcid:EnergySourceEnum
-name: "Lignite Coal"
+name: "White Spirit"
 
 Node: dcid:BrownCoalBriquettes
 typeOf: dcid:EnergySourceEnum
@@ -48,333 +16,369 @@ Node: dcid:OtherLiquidBiofuels
 typeOf: dcid:EnergySourceEnum
 name: "Other Liquid Biofuels"
 
-Node: dcid:Bagasse
+Node: dcid:MotorGasoline
 typeOf: dcid:EnergySourceEnum
-name: "Bagasse"
-
-Node: dcid:BlackLiquor
-typeOf: dcid:EnergySourceEnum
-name: "Black Liquor"
-
-Node: dcid:FuelOil
-typeOf: dcid:EnergySourceEnum
-name: "Fuel Oil"
-
-Node: dcid:dcs:NaturalGas
-typeOf: dcid:EnergySourceEnum
-name: "Natural Gas"
-
-Node: dcid:OilShale
-typeOf: dcid:EnergySourceEnum
-name: "Oil Shale"
-
-Node: dcid:ThermalElectricity
-typeOf: dcid:EnergySourceEnum
-name: "Thermal Electricity"
-
-Node: dcid:AnimalWaste
-typeOf: dcid:EnergySourceEnum
-name: "Animal Waste"
-
-Node: dcid:CrudeOil
-typeOf: dcid:EnergySourceEnum
-name: "Crude Oil"
-
-Node: dcid:BioJetKerosene
-typeOf: dcid:EnergySourceEnum
-name: "Bio Jet Kerosene"
-
-Node: dcid:MunicipalWastes
-typeOf: dcid:EnergySourceEnum
-name: "Municipal Wastes"
-
-Node: dcid:DieselOil
-typeOf: dcid:EnergySourceEnum
-name: "Diesel Oil"
-
-Node: dcid:OtherBituminousCoal
-typeOf: dcid:EnergySourceEnum
-name: "Other Bituminous Coal"
+name: "Motor Gasoline"
 
 Node: dcid:NaturalGasLiquids
 typeOf: dcid:EnergySourceEnum
 name: "Natural Gas Liquids"
 
-Node: dcid:dcs:Geothermal
-typeOf: dcid:EnergySourceEnum
-name: "Geothermal"
-
-Node: dcid:PatentFuel
-typeOf: dcid:EnergySourceEnum
-name: "Patent Fuel"
-
-Node: dcid:Peat
-typeOf: dcid:EnergySourceEnum
-name: "Peat"
-
-Node: dcid:CokeOvenGas
-typeOf: dcid:EnergySourceEnum
-name: "Coke Oven Gas"
-
-Node: dcid:Heat
-typeOf: dcid:EnergySourceEnum
-name: "Heat"
-
 Node: dcid:dcs:EIA_Water
 typeOf: dcid:EnergySourceEnum
 name: "E I A Water"
-
-Node: dcid:dcs:EIA_SubbituminousCoal
-typeOf: dcid:EnergySourceEnum
-name: "E I A Subbituminous Coal"
-
-Node: dcid:dcs:EIA_Kerosene
-typeOf: dcid:EnergySourceEnum
-name: "E I A Kerosene"
-
-Node: dcid:VegetalWaste
-typeOf: dcid:EnergySourceEnum
-name: "Vegetal Waste"
-
-Node: dcid:White spirit and special boiling point industrial spirits
-typeOf: dcid:EnergySourceEnum
-name: "White spirit and special boiling point industrial spirits"
-
-Node: dcid:dcs:Wind
-typeOf: dcid:EnergySourceEnum
-name: "Wind"
-
-Node: dcid:Biogases
-typeOf: dcid:EnergySourceEnum
-name: "Biogases"
-
-Node: dcid:Ethane
-typeOf: dcid:EnergySourceEnum
-name: "Ethane"
-
-Node: dcid:RefineryGas
-typeOf: dcid:EnergySourceEnum
-name: "Refinery Gas"
-
-Node: dcid:dcs:Electricity
-typeOf: dcid:EnergySourceEnum
-name: "Electricity"
-
-Node: dcid:ElectricityCapacity
-typeOf: dcid:EnergySourceEnum
-name: "Electricity Capacity"
-
-Node: dcid:CokingCoal
-typeOf: dcid:EnergySourceEnum
-name: "Coking Coal"
-
-Node: dcid:GasworksGas
-typeOf: dcid:EnergySourceEnum
-name: "Gasworks Gas"
-
-Node: dcid:CoalProducts
-typeOf: dcid:EnergySourceEnum
-name: "Coal Products"
-
-Node: dcid:OtherRecoveredGases
-typeOf: dcid:EnergySourceEnum
-name: "Other Recovered Gases"
-
-Node: dcid:dcs:Solar
-typeOf: dcid:EnergySourceEnum
-name: "Solar"
-
-Node: dcid:Fuelwood
-typeOf: dcid:EnergySourceEnum
-name: "Fuelwood"
-
-Node: dcid:dcs:EIA_AnthraciteCoal
-typeOf: dcid:EnergySourceEnum
-name: "E I A Anthracite Coal"
-
-Node: dcid:MotorGasoline
-typeOf: dcid:EnergySourceEnum
-name: "Motor Gasoline"
-
-Node: dcid:Lubricants
-typeOf: dcid:EnergySourceEnum
-name: "Lubricants"
-
-Node: dcid:OtherHydrocarbons
-typeOf: dcid:EnergySourceEnum
-name: "Other Hydrocarbons"
-
-Node: dcid:KeroseneJetFuel
-typeOf: dcid:EnergySourceEnum
-name: "Kerosene Jet Fuel"
-
-Node: dcid:OceanElectricity
-typeOf: dcid:EnergySourceEnum
-name: "Ocean Electricity"
-
-Node: dcid:GasolineJetFuel
-typeOf: dcid:EnergySourceEnum
-name: "Gasoline Jet Fuel"
-
-Node: dcid:Geothermal
-typeOf: dcid:EnergySourceEnum
-name: "Geothermal"
-
-Node: dcid:AdditivesOxygenates
-typeOf: dcid:EnergySourceEnum
-name: "Additives Oxygenates"
-
-Node: dcid:AviationGasoline
-typeOf: dcid:EnergySourceEnum
-name: "Aviation Gasoline"
-
-Node: dcid:Charcoal
-typeOf: dcid:EnergySourceEnum
-name: "Charcoal"
-
-Node: dcid:CokeOvenCoke
-typeOf: dcid:EnergySourceEnum
-name: "Coke Oven Coke"
-
-Node: dcid:dcs:EIA_BituminousCoal
-typeOf: dcid:EnergySourceEnum
-name: "E I A Bituminous Coal"
-
-Node: dcid:SolarThermal
-typeOf: dcid:EnergySourceEnum
-name: "Solar Thermal"
-
-Node: dcid:CoalTar
-typeOf: dcid:EnergySourceEnum
-name: "Coal Tar"
-
-Node: dcid:HeatCombustibleFuels
-typeOf: dcid:EnergySourceEnum
-name: "Heat Combustible Fuels"
-
-Node: dcid:Naphtha
-typeOf: dcid:EnergySourceEnum
-name: "Naphtha"
-
-Node: dcid:dcs:PetroleumCoke
-typeOf: dcid:EnergySourceEnum
-name: "Petroleum Coke"
-
-Node: dcid:FallingWater
-typeOf: dcid:EnergySourceEnum
-name: "Falling Water"
 
 Node: dcid:Biogasoline
 typeOf: dcid:EnergySourceEnum
 name: "Biogasoline"
 
-Node: dcid:HardCoal
+Node: dcid:CrudeOil
 typeOf: dcid:EnergySourceEnum
-name: "Hard Coal"
+name: "Crude Oil"
 
-Node: dcid:RefineryFeedstocks
+Node: dcid:Lubricants
 typeOf: dcid:EnergySourceEnum
-name: "Refinery Feedstocks"
+name: "Lubricants"
 
-Node: dcid:TotalRefineryOutput
+Node: dcid:dcs:Geothermal
 typeOf: dcid:EnergySourceEnum
-name: "Total Refinery Output"
+name: "Geothermal"
+
+Node: dcid:dcs:Wind
+typeOf: dcid:EnergySourceEnum
+name: "Wind"
+
+Node: dcid:CoalTar
+typeOf: dcid:EnergySourceEnum
+name: "Coal Tar"
+
+Node: dcid:Biogases
+typeOf: dcid:EnergySourceEnum
+name: "Biogases"
 
 Node: dcid:GasCoke
 typeOf: dcid:EnergySourceEnum
 name: "Gas Coke"
 
+Node: dcid:Charcoal
+typeOf: dcid:EnergySourceEnum
+name: "Charcoal"
+
+Node: dcid:DieselOil
+typeOf: dcid:EnergySourceEnum
+name: "Diesel Oil"
+
+Node: dcid:GasolineJetFuel
+typeOf: dcid:EnergySourceEnum
+name: "Gasoline Jet Fuel"
+
+Node: dcid:Liquified Petroleum Gas
+typeOf: dcid:EnergySourceEnum
+name: "Liquified  Petroleum  Gas"
+
+Node: dcid:dcs:Solar
+typeOf: dcid:EnergySourceEnum
+name: "Solar"
+
+Node: dcid:dcs:EIA_SubbituminousCoal
+typeOf: dcid:EnergySourceEnum
+name: "E I A Subbituminous Coal"
+
+Node: dcid:TotalRefineryOutput
+typeOf: dcid:EnergySourceEnum
+name: "Total Refinery Output"
+
+Node: dcid:dcs:EIA_BituminousCoal
+typeOf: dcid:EnergySourceEnum
+name: "E I A Bituminous Coal"
+
+Node: dcid:OtherHydrocarbons
+typeOf: dcid:EnergySourceEnum
+name: "Other Hydrocarbons"
+
+Node: dcid:SolarThermal
+typeOf: dcid:EnergySourceEnum
+name: "Solar Thermal"
+
+Node: dcid:Fuelwood
+typeOf: dcid:EnergySourceEnum
+name: "Fuelwood"
+
+Node: dcid:Bagasse
+typeOf: dcid:EnergySourceEnum
+name: "Bagasse"
+
+Node: dcid:dcs:EIA_Kerosene
+typeOf: dcid:EnergySourceEnum
+name: "E I A Kerosene"
+
+Node: dcid:FallingWater
+typeOf: dcid:EnergySourceEnum
+name: "Falling Water"
+
+Node: dcid:CoalProducts
+typeOf: dcid:EnergySourceEnum
+name: "Coal Products"
+
+Node: dcid:Heat
+typeOf: dcid:EnergySourceEnum
+name: "Heat"
+
+Node: dcid:BlackLiquor
+typeOf: dcid:EnergySourceEnum
+name: "Black Liquor"
+
+Node: dcid:dcs:LigniteCoal
+typeOf: dcid:EnergySourceEnum
+name: "Lignite Coal"
+
+Node: dcid:RefineryGas
+typeOf: dcid:EnergySourceEnum
+name: "Refinery Gas"
+
+Node: dcid:ThermalElectricity
+typeOf: dcid:EnergySourceEnum
+name: "Thermal Electricity"
+
+Node: dcid:GasworksGas
+typeOf: dcid:EnergySourceEnum
+name: "Gasworks Gas"
+
+Node: dcid:OtherBituminousCoal
+typeOf: dcid:EnergySourceEnum
+name: "Other Bituminous Coal"
+
+Node: dcid:CokeOvenCoke
+typeOf: dcid:EnergySourceEnum
+name: "Coke Oven Coke"
+
+Node: dcid:Uranium
+typeOf: dcid:EnergySourceEnum
+name: "Uranium"
+
+Node: dcid:RefineryFeedstocks
+typeOf: dcid:EnergySourceEnum
+name: "Refinery Feedstocks"
+
+Node: dcid:ElectricityCapacity
+typeOf: dcid:EnergySourceEnum
+name: "Electricity Capacity"
+
+Node: dcid:dcs:PetroleumCoke
+typeOf: dcid:EnergySourceEnum
+name: "Petroleum Coke"
+
+Node: dcid:OceanElectricity
+typeOf: dcid:EnergySourceEnum
+name: "Ocean Electricity"
+
+Node: dcid:AviationGasoline
+typeOf: dcid:EnergySourceEnum
+name: "Aviation Gasoline"
+
+Node: dcid:Biodiesel
+typeOf: dcid:EnergySourceEnum
+name: "Biodiesel"
+
+Node: dcid:CokeOvenGas
+typeOf: dcid:EnergySourceEnum
+name: "Coke Oven Gas"
+
+Node: dcid:OilShale
+typeOf: dcid:EnergySourceEnum
+name: "Oil Shale"
+
+Node: dcid:AdditivesOxygenates
+typeOf: dcid:EnergySourceEnum
+name: "Additives Oxygenates"
+
+Node: dcid:PeatProducts
+typeOf: dcid:EnergySourceEnum
+name: "Peat Products"
+
+Node: dcid:dcs:Electricity
+typeOf: dcid:EnergySourceEnum
+name: "Electricity"
+
+Node: dcid:dcs:Nuclear
+typeOf: dcid:EnergySourceEnum
+name: "Nuclear"
+
+Node: dcid:IndustrialWaste
+typeOf: dcid:EnergySourceEnum
+name: "Industrial Waste"
+
+Node: dcid:dcs:NaturalGas
+typeOf: dcid:EnergySourceEnum
+name: "Natural Gas"
+
+Node: dcid:Geothermal
+typeOf: dcid:EnergySourceEnum
+name: "Geothermal"
+
+Node: dcid:AnimalWaste
+typeOf: dcid:EnergySourceEnum
+name: "Animal Waste"
+
+Node: dcid:BioJetKerosene
+typeOf: dcid:EnergySourceEnum
+name: "Bio Jet Kerosene"
+
+Node: dcid:KeroseneJetFuel
+typeOf: dcid:EnergySourceEnum
+name: "Kerosene Jet Fuel"
+
+Node: dcid:BlastFurnaceGas
+typeOf: dcid:EnergySourceEnum
+name: "Blast Furnace Gas"
+
+Node: dcid:PatentFuel
+typeOf: dcid:EnergySourceEnum
+name: "Patent Fuel"
+
+Node: dcid:FuelOil
+typeOf: dcid:EnergySourceEnum
+name: "Fuel Oil"
+
+Node: dcid:CokingCoal
+typeOf: dcid:EnergySourceEnum
+name: "Coking Coal"
+
+Node: dcid:HardCoal
+typeOf: dcid:EnergySourceEnum
+name: "Hard Coal"
+
+Node: dcid:dcs:EIA_AnthraciteCoal
+typeOf: dcid:EnergySourceEnum
+name: "E I A Anthracite Coal"
+
+Node: dcid:MunicipalWastes
+typeOf: dcid:EnergySourceEnum
+name: "Municipal Wastes"
+
+Node: dcid:Naphtha
+typeOf: dcid:EnergySourceEnum
+name: "Naphtha"
+
+Node: dcid:HeatCombustibleFuels
+typeOf: dcid:EnergySourceEnum
+name: "Heat Combustible Fuels"
+
 Node: dcid:BrownCoal
 typeOf: dcid:EnergySourceEnum
 name: "Brown Coal"
 
-Node: dcid:ManufaturedGas
+Node: dcid:OtherOilProducts
 typeOf: dcid:EnergySourceEnum
-name: "Manufatured Gas"
+name: "Other Oil Products"
 
-Node: dcid:OilProducts
+Node: dcid:OtherRecoveredGases
 typeOf: dcid:EnergySourceEnum
-name: "Oil Products"
+name: "Other Recovered Gases"
 
-Node: dcid:NaturalGas
+Node: dcid:ParaffinWaxes
 typeOf: dcid:EnergySourceEnum
-name: "Natural Gas"
+name: "Paraffin Waxes"
 
-Node: dcid:SolidBioFuel
+Node: dcid:Peat
 typeOf: dcid:EnergySourceEnum
-name: "Solid Bio Fuel"
+name: "Peat"
 
-Node: dcid:OtherFuel
+Node: dcid:VegetalWaste
 typeOf: dcid:EnergySourceEnum
-name: "Other Fuel"
-
-Node: dcid:Tidal
-typeOf: dcid:EnergySourceEnum
-name: "Tidal"
-
-Node: dcid:ConventionalHydroelectric
-typeOf: dcid:EnergySourceEnum
-name: "Conventional Hydroelectric"
-
-Node: dcid:Coal
-typeOf: dcid:EnergySourceEnum
-name: "Coal"
-
-Node: dcid:NonRenewableWaste
-typeOf: dcid:EnergySourceEnum
-name: "Non Renewable Waste"
-
-Node: dcid:Biogas
-typeOf: dcid:EnergySourceEnum
-name: "Biogas"
-
-Node: dcid:Nuclear
-typeOf: dcid:EnergySourceEnum
-name: "Nuclear"
-
-Node: dcid:SolarPhotovoltaic
-typeOf: dcid:EnergySourceEnum
-name: "Solar Photovoltaic"
-
-Node: dcid:Solar
-typeOf: dcid:EnergySourceEnum
-name: "Solar"
+name: "Vegetal Waste"
 
 Node: dcid:LiquidBioFuel
 typeOf: dcid:EnergySourceEnum
 name: "Liquid Bio Fuel"
 
-Node: dcid:PumpedHydro
+Node: dcid:NonRenewableWaste
 typeOf: dcid:EnergySourceEnum
-name: "Pumped Hydro"
+name: "Non Renewable Waste"
+
+Node: dcid:OilProducts
+typeOf: dcid:EnergySourceEnum
+name: "Oil Products"
 
 Node: dcid:HeatPump
 typeOf: dcid:EnergySourceEnum
 name: "Heat Pump"
 
-Node: dcid:ChemicalHeat
+Node: dcid:ManufaturedGas
 typeOf: dcid:EnergySourceEnum
-name: "Chemical Heat"
+name: "Manufatured Gas"
 
-Node: dcid:ElectricBoiler
+Node: dcid:NaturalGas
 typeOf: dcid:EnergySourceEnum
-name: "Electric Boiler"
+name: "Natural Gas"
 
-Node: dcid:MunicipalWaste
+Node: dcid:Biogas
 typeOf: dcid:EnergySourceEnum
-name: "Municipal Waste"
+name: "Biogas"
 
-Node: dcid:Wind
+Node: dcid:ConventionalHydroelectric
 typeOf: dcid:EnergySourceEnum
-name: "Wind"
+name: "Conventional Hydroelectric"
 
 Node: dcid:CombustibleFuel
 typeOf: dcid:EnergySourceEnum
 name: "Combustible Fuel"
 
+Node: dcid:OtherFuel
+typeOf: dcid:EnergySourceEnum
+name: "Other Fuel"
+
+Node: dcid:Nuclear
+typeOf: dcid:EnergySourceEnum
+name: "Nuclear"
+
+Node: dcid:Tidal
+typeOf: dcid:EnergySourceEnum
+name: "Tidal"
+
+Node: dcid:Wind
+typeOf: dcid:EnergySourceEnum
+name: "Wind"
+
+Node: dcid:MunicipalWaste
+typeOf: dcid:EnergySourceEnum
+name: "Municipal Waste"
+
+Node: dcid:ChemicalHeat
+typeOf: dcid:EnergySourceEnum
+name: "Chemical Heat"
+
+Node: dcid:SolarPhotovoltaic
+typeOf: dcid:EnergySourceEnum
+name: "Solar Photovoltaic"
+
+Node: dcid:PumpedHydro
+typeOf: dcid:EnergySourceEnum
+name: "Pumped Hydro"
+
+Node: dcid:SolidBioFuel
+typeOf: dcid:EnergySourceEnum
+name: "Solid Bio Fuel"
+
+Node: dcid:ElectricBoiler
+typeOf: dcid:EnergySourceEnum
+name: "Electric Boiler"
+
+Node: dcid:Solar
+typeOf: dcid:EnergySourceEnum
+name: "Solar"
+
+Node: dcid:Coal
+typeOf: dcid:EnergySourceEnum
+name: "Coal"
+
 Node: dcid:EnergyProducerAutoProducer
 typeOf: dcid:EnergyProducerEnum
 name: "Energy Producer Auto Producer"
+
+Node: dcid:Refinery
+typeOf: dcid:EnergyProducerEnum
+name: "Refinery"
 
 Node: dcid:EnergyProducerMainActivity
 typeOf: dcid:EnergyProducerEnum
@@ -384,9 +388,9 @@ Node: dcid:OffShore
 typeOf: dcid:EnergyProducerEnum
 name: "Off Shore"
 
-Node: dcid:Refinery
+Node: dcid:ElectricityGeneratingPowerPlant
 typeOf: dcid:EnergyProducerEnum
-name: "Refinery"
+name: "Electricity Generating Power Plant"
 
 Node: dcid:CHPGeneratingPowerPlant
 typeOf: dcid:EnergyProducerEnum
@@ -396,89 +400,61 @@ Node: dcid:HeatGeneratingPowerPlant
 typeOf: dcid:EnergyProducerEnum
 name: "Heat Generating Power Plant"
 
-Node: dcid:ElectricityGeneratingPowerPlant
-typeOf: dcid:EnergyProducerEnum
-name: "Electricity Generating Power Plant"
-
-Node: dcid:ConstructionIndustry
+Node: dcid:Households
 typeOf: dcid:EnergyConsumerEnum
-name: "Construction Industry"
+name: "Households"
 
-Node: dcid:PaperIndustry
+Node: dcid:MachineryIndustry
 typeOf: dcid:EnergyConsumerEnum
-name: "Paper Industry"
-
-Node: dcid:NonferrousMetalsIndustry
-typeOf: dcid:EnergyConsumerEnum
-name: "Nonferrous Metals Industry"
-
-Node: dcid:OtherManufacturingIndustry
-typeOf: dcid:EnergyConsumerEnum
-name: "Other Manufacturing Industry"
-
-Node: dcid:TransportIndustry
-typeOf: dcid:EnergyConsumerEnum
-name: "Transport Industry"
-
-Node: dcid:DomesticNavigationTransport
-typeOf: dcid:EnergyConsumerEnum
-name: "Domestic Navigation Transport"
-
-Node: dcid:IronSteel
-typeOf: dcid:EnergyConsumerEnum
-name: "Iron Steel"
-
-Node: dcid:ChemicalPetrochemicalIndustry
-typeOf: dcid:EnergyConsumerEnum
-name: "Chemical Petrochemical Industry"
-
-Node: dcid:PipelineTransport
-typeOf: dcid:EnergyConsumerEnum
-name: "Pipeline Transport"
-
-Node: dcid:TransportEquipmentIndustry
-typeOf: dcid:EnergyConsumerEnum
-name: "Transport Equipment Industry"
-
-Node: dcid:FoodIndustry
-typeOf: dcid:EnergyConsumerEnum
-name: "Food Industry"
-
-Node: dcid:WoodIndustry
-typeOf: dcid:EnergyConsumerEnum
-name: "Wood Industry"
+name: "Machinery Industry"
 
 Node: dcid:DomesticAviation
 typeOf: dcid:EnergyConsumerEnum
 name: "Domestic Aviation"
 
-Node: dcid:Commerce_PublicServices
-typeOf: dcid:EnergyConsumerEnum
-name: "Commerce Public Services"
-
-Node: dcid:OtherTransport
-typeOf: dcid:EnergyConsumerEnum
-name: "Other Transport"
-
 Node: dcid:Manufacturing
 typeOf: dcid:EnergyConsumerEnum
 name: "Manufacturing"
 
-Node: dcid:NonmetallicMineralsIndustry
+Node: dcid:TransportEquipmentIndustry
 typeOf: dcid:EnergyConsumerEnum
-name: "Nonmetallic Minerals Industry"
+name: "Transport Equipment Industry"
 
 Node: dcid:InternationalAviationBunkers
 typeOf: dcid:EnergyConsumerEnum
 name: "International Aviation Bunkers"
 
+Node: dcid:TextileIndustry
+typeOf: dcid:EnergyConsumerEnum
+name: "Textile Industry"
+
+Node: dcid:NonmetallicMineralsIndustry
+typeOf: dcid:EnergyConsumerEnum
+name: "Nonmetallic Minerals Industry"
+
+Node: dcid:WoodIndustry
+typeOf: dcid:EnergyConsumerEnum
+name: "Wood Industry"
+
+Node: dcid:IronSteel
+typeOf: dcid:EnergyConsumerEnum
+name: "Iron Steel"
+
+Node: dcid:Mining
+typeOf: dcid:EnergyConsumerEnum
+name: "Mining"
+
 Node: dcid:Agriculture
 typeOf: dcid:EnergyConsumerEnum
 name: "Agriculture"
 
-Node: dcid:OtherIndustry
+Node: dcid:ChemicalPetrochemicalIndustry
 typeOf: dcid:EnergyConsumerEnum
-name: "Other Industry"
+name: "Chemical Petrochemical Industry"
+
+Node: dcid:PaperIndustry
+typeOf: dcid:EnergyConsumerEnum
+name: "Paper Industry"
 
 Node: dcid:RailTransport
 typeOf: dcid:EnergyConsumerEnum
@@ -488,61 +464,93 @@ Node: dcid:InternationalMarineBunkers
 typeOf: dcid:EnergyConsumerEnum
 name: "International Marine Bunkers"
 
-Node: dcid:MachineryIndustry
+Node: dcid:NonferrousMetalsIndustry
 typeOf: dcid:EnergyConsumerEnum
-name: "Machinery Industry"
+name: "Nonferrous Metals Industry"
 
-Node: dcid:TextileIndustry
+Node: dcid:TransportIndustry
 typeOf: dcid:EnergyConsumerEnum
-name: "Textile Industry"
+name: "Transport Industry"
 
-Node: dcid:Households
+Node: dcid:DomesticNavigationTransport
 typeOf: dcid:EnergyConsumerEnum
-name: "Households"
+name: "Domestic Navigation Transport"
 
-Node: dcid:Mining
+Node: dcid:PipelineTransport
 typeOf: dcid:EnergyConsumerEnum
-name: "Mining"
+name: "Pipeline Transport"
 
-Node: dcid:Gas_to_LiquidPlant
+Node: dcid:Commerce_PublicServices
 typeOf: dcid:EnergyConsumerEnum
-name: "Gas _to Liquid Plant"
+name: "Commerce Public Services"
 
-Node: dcid:OilRefinery
+Node: dcid:FoodIndustry
 typeOf: dcid:EnergyConsumerEnum
-name: "Oil Refinery"
+name: "Food Industry"
 
-Node: dcid:OilGasExtraction
+Node: dcid:ConstructionIndustry
 typeOf: dcid:EnergyConsumerEnum
-name: "Oil Gas Extraction"
+name: "Construction Industry"
 
-Node: dcid:LNGPlants
+Node: dcid:OtherTransport
 typeOf: dcid:EnergyConsumerEnum
-name: "L N G Plants"
+name: "Other Transport"
+
+Node: dcid:OtherManufacturingIndustry
+typeOf: dcid:EnergyConsumerEnum
+name: "Other Manufacturing Industry"
+
+Node: dcid:OtherIndustry
+typeOf: dcid:EnergyConsumerEnum
+name: "Other Industry"
+
+Node: dcid:ElectricityAutoproducer
+typeOf: dcid:EnergyConsumerEnum
+name: "Electricity Autoproducer"
+
+Node: dcid:EnergyIndustry
+typeOf: dcid:EnergyConsumerEnum
+name: "Energy Industry"
+
+Node: dcid:CokeOvens
+typeOf: dcid:EnergyConsumerEnum
+name: "Coke Ovens"
 
 Node: dcid:Industry
 typeOf: dcid:EnergyConsumerEnum
 name: "Industry"
 
-Node: dcid:HeatPlantMainActivityProducer
+Node: dcid:CoalLiquefactionPlant
 typeOf: dcid:EnergyConsumerEnum
-name: "Heat Plant Main Activity Producer"
+name: "Coal Liquefaction Plant"
 
-Node: dcid:ElectricityProduction
+Node: dcid:PumpStoragePlants
 typeOf: dcid:EnergyConsumerEnum
-name: "Electricity Production"
+name: "Pump Storage Plants"
 
-Node: dcid:CHPAutoproducer
+Node: dcid:NaturalGasPlants
 typeOf: dcid:EnergyConsumerEnum
-name: "C H P Autoproducer"
+name: "Natural Gas Plants"
 
-Node: dcid:CoalLiquefactionPlants
+Node: dcid:LNGPlants
 typeOf: dcid:EnergyConsumerEnum
-name: "Coal Liquefaction Plants"
+name: "L N G Plants"
 
-Node: dcid:OilRefineries
+Node: dcid:CoalMines
 typeOf: dcid:EnergyConsumerEnum
-name: "Oil Refineries"
+name: "Coal Mines"
+
+Node: dcid:OilGasExtraction
+typeOf: dcid:EnergyConsumerEnum
+name: "Oil Gas Extraction"
+
+Node: dcid:ElectricityGeneration
+typeOf: dcid:EnergyConsumerEnum
+name: "Electricity Generation"
+
+Node: dcid:NaturalGasBlendingPlants
+typeOf: dcid:EnergyConsumerEnum
+name: "Natural Gas Blending Plants"
 
 Node: dcid:PetrochemicalPlant
 typeOf: dcid:EnergyConsumerEnum
@@ -552,149 +560,133 @@ Node: dcid:NuclearFuelProcessing
 typeOf: dcid:EnergyConsumerEnum
 name: "Nuclear Fuel Processing"
 
-Node: dcid:ElectricBoilers
+Node: dcid:GasWorks
 typeOf: dcid:EnergyConsumerEnum
-name: "Electric Boilers"
+name: "Gas Works"
 
-Node: dcid:CHPMainActivityProducers
+Node: dcid:ElectricityProduction
 typeOf: dcid:EnergyConsumerEnum
-name: "C H P Main Activity Producers"
-
-Node: dcid:ElectricityAutoproducer
-typeOf: dcid:EnergyConsumerEnum
-name: "Electricity Autoproducer"
-
-Node: dcid:PumpStoragePlants
-typeOf: dcid:EnergyConsumerEnum
-name: "Pump Storage Plants"
+name: "Electricity Production"
 
 Node: dcid:GasToLiquidPlants
 typeOf: dcid:EnergyConsumerEnum
 name: "Gas To Liquid Plants"
 
-Node: dcid:GasWorks
+Node: dcid:CoalLiquefactionPlants
 typeOf: dcid:EnergyConsumerEnum
-name: "Gas Works"
-
-Node: dcid:NaturalGasPlants
-typeOf: dcid:EnergyConsumerEnum
-name: "Natural Gas Plants"
-
-Node: dcid:CharcoalPlants
-typeOf: dcid:EnergyConsumerEnum
-name: "Charcoal Plants"
-
-Node: dcid:CoalLiquefactionPlant
-typeOf: dcid:EnergyConsumerEnum
-name: "Coal Liquefaction Plant"
-
-Node: dcid:EnergyIndustry
-typeOf: dcid:EnergyConsumerEnum
-name: "Energy Industry"
-
-Node: dcid:BlastFurnaces
-typeOf: dcid:EnergyConsumerEnum
-name: "Blast Furnaces"
-
-Node: dcid:BiogasProduction
-typeOf: dcid:EnergyConsumerEnum
-name: "Biogas Production"
-
-Node: dcid:NaturalGasBlendingPlants
-typeOf: dcid:EnergyConsumerEnum
-name: "Natural Gas Blending Plants"
+name: "Coal Liquefaction Plants"
 
 Node: dcid:Transformation
 typeOf: dcid:EnergyConsumerEnum
 name: "Transformation"
 
-Node: dcid:HeatPlantAutoproducer
-typeOf: dcid:EnergyConsumerEnum
-name: "Heat Plant Autoproducer"
-
 Node: dcid:HeatPumps
 typeOf: dcid:EnergyConsumerEnum
 name: "Heat Pumps"
 
-Node: dcid:ElectricityMainActivityProducer
+Node: dcid:BlastFurnaces
 typeOf: dcid:EnergyConsumerEnum
-name: "Electricity Main Activity Producer"
-
-Node: dcid:CoalMines
-typeOf: dcid:EnergyConsumerEnum
-name: "Coal Mines"
-
-Node: dcid:CokeOvens
-typeOf: dcid:EnergyConsumerEnum
-name: "Coke Ovens"
+name: "Blast Furnaces"
 
 Node: dcid:BriquettingPlants
 typeOf: dcid:EnergyConsumerEnum
 name: "Briquetting Plants"
 
-Node: dcid:ElectricityGeneration
+Node: dcid:BiogasProduction
 typeOf: dcid:EnergyConsumerEnum
-name: "Electricity Generation"
+name: "Biogas Production"
 
-Node: dcid:PublicNuclear
-typeOf: dcid:EnergySourceEnum
-name: "Public Nuclear"
+Node: dcid:CHPMainActivityProducers
+typeOf: dcid:EnergyConsumerEnum
+name: "C H P Main Activity Producers"
 
-Node: dcid:Tide
-typeOf: dcid:EnergySourceEnum
-name: "Tide"
+Node: dcid:HeatPlantAutoproducer
+typeOf: dcid:EnergyConsumerEnum
+name: "Heat Plant Autoproducer"
+
+Node: dcid:CHPAutoproducer
+typeOf: dcid:EnergyConsumerEnum
+name: "C H P Autoproducer"
+
+Node: dcid:ElectricityMainActivityProducer
+typeOf: dcid:EnergyConsumerEnum
+name: "Electricity Main Activity Producer"
+
+Node: dcid:ElectricBoilers
+typeOf: dcid:EnergyConsumerEnum
+name: "Electric Boilers"
+
+Node: dcid:Gas_to_LiquidPlant
+typeOf: dcid:EnergyConsumerEnum
+name: "Gas _to Liquid Plant"
+
+Node: dcid:OilRefinery
+typeOf: dcid:EnergyConsumerEnum
+name: "Oil Refinery"
+
+Node: dcid:CharcoalPlants
+typeOf: dcid:EnergyConsumerEnum
+name: "Charcoal Plants"
+
+Node: dcid:OilRefineries
+typeOf: dcid:EnergyConsumerEnum
+name: "Oil Refineries"
+
+Node: dcid:HeatPlantMainActivityProducer
+typeOf: dcid:EnergyConsumerEnum
+name: "Heat Plant Main Activity Producer"
 
 Node: dcid:Others
 typeOf: dcid:EnergySourceEnum
 name: "Others"
 
-Node: dcid:ElectricityMainActivityAutoProducer
-typeOf: dcid:EnergySourceEnum
-name: "Electricity Main Activity Auto Producer"
-
 Node: dcid:SolarPV
 typeOf: dcid:EnergySourceEnum
 name: "Solar P V"
+
+Node: dcid:Tide
+typeOf: dcid:EnergySourceEnum
+name: "Tide"
 
 Node: dcid:SelfProducerNuclear
 typeOf: dcid:EnergySourceEnum
 name: "Self Producer Nuclear"
 
-Node: dcid:GasLostFlared
-typeOf: dcid:EnergyConsumerEnum
-name: "Gas Lost Flared"
+Node: dcid:ElectricityMainActivityAutoProducer
+typeOf: dcid:EnergySourceEnum
+name: "Electricity Main Activity Auto Producer"
+
+Node: dcid:PublicNuclear
+typeOf: dcid:EnergySourceEnum
+name: "Public Nuclear"
 
 Node: dcid:EnergyReInjected
 typeOf: dcid:EnergyConsumerEnum
 name: "Energy Re Injected"
 
-Node: dcid:GasLostVented
+Node: dcid:FuelLossDuringExtraction
 typeOf: dcid:EnergyConsumerEnum
-name: "Gas Lost Vented"
-
-Node: dcid:GasLostAsFlaredVented
-typeOf: dcid:EnergyConsumerEnum
-name: "Gas Lost As Flared Vented"
+name: "Fuel Loss During Extraction"
 
 Node: dcid:EnergyLost
 typeOf: dcid:EnergyConsumerEnum
 name: "Energy Lost"
 
-Node: dcid:FuelLossDuringExtraction
+Node: dcid:GasLostVented
 typeOf: dcid:EnergyConsumerEnum
-name: "Fuel Loss During Extraction"
+name: "Gas Lost Vented"
 
-Node: dcid:EnergyResources
+Node: dcid:GasLostFlared
 typeOf: dcid:EnergyConsumerEnum
-name: "Energy Resources"
+name: "Gas Lost Flared"
 
-Node: dcid:EnergyReservesOilShale
+Node: dcid:GasLostAsFlaredVented
 typeOf: dcid:EnergyConsumerEnum
-name: "Energy Reserves Oil Shale"
+name: "Gas Lost As Flared Vented"
 
-Node: dcid:EnergyResourcesInPlace
+Node: dcid:EnergyReservesOther
 typeOf: dcid:EnergyConsumerEnum
-name: "Energy Resources In Place"
+name: "Energy Reserves Other"
 
 Node: dcid:Energy ReservesAssured
 typeOf: dcid:EnergyConsumerEnum
@@ -708,25 +700,29 @@ Node: dcid:HydraulicResources
 typeOf: dcid:EnergyConsumerEnum
 name: "Hydraulic Resources"
 
-Node: dcid:EnergyReserves
-typeOf: dcid:EnergyConsumerEnum
-name: "Energy Reserves"
-
 Node: dcid:EnergyKnownReserves
 typeOf: dcid:EnergyConsumerEnum
 name: "Energy Known Reserves"
 
-Node: dcid:EnergyReservesAdditional
+Node: dcid:EnergyReserves
 typeOf: dcid:EnergyConsumerEnum
-name: "Energy Reserves Additional"
+name: "Energy Reserves"
 
 Node: dcid:EnergyReservesOilShaleTarSands
 typeOf: dcid:EnergyConsumerEnum
 name: "Energy Reserves Oil Shale Tar Sands"
 
-Node: dcid:EnergyReservesOther
+Node: dcid:EnergyResourcesInPlace
 typeOf: dcid:EnergyConsumerEnum
-name: "Energy Reserves Other"
+name: "Energy Resources In Place"
+
+Node: dcid:EnergyReservesOilShale
+typeOf: dcid:EnergyConsumerEnum
+name: "Energy Reserves Oil Shale"
+
+Node: dcid:EnergyReservesAdditional
+typeOf: dcid:EnergyConsumerEnum
+name: "Energy Reserves Additional"
 
 Node: dcid:EnergyAdditionalResources
 typeOf: dcid:EnergyConsumerEnum
@@ -736,80 +732,79 @@ Node: dcid:EnergyReservesTarSands
 typeOf: dcid:EnergyConsumerEnum
 name: "Energy Reserves Tar Sands"
 
-Node: fuelStocks
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Fuel Stocks"
-
-Node: energyGeneration
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Energy Generation"
-
-Node: energyReserves
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Energy Reserves"
-
-Node: energyConsumption
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Energy Consumption"
-
-Node: energyLoss
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Energy Loss"
-
-Node: energyProductTransfer
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Energy Product Transfer"
-
-Node: energyStocksOpening
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Energy Stocks Opening"
-
-Node: receipts
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Receipts"
-
-Node: nonEnergyConsumption
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Non Energy Consumption"
-
-Node: energySupply
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Energy Supply"
-
-Node: exports
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Exports"
-
-Node: imports
-typeOf: dcs:Property
-rangeIncludes: Number
-name: "Imports"
+Node: dcid:EnergyResources
+typeOf: dcid:EnergyConsumerEnum
+name: "Energy Resources"
 
 Node: energyStocksClosing
 typeOf: dcs:Property
 rangeIncludes: Number
 name: "Energy Stocks Closing"
 
+Node: nonEnergyConsumption
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Non Energy Consumption"
+
+Node: energyLoss
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Energy Loss"
+
+Node: energyGeneration
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Energy Generation"
+
+Node: receipts
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Receipts"
+
+Node: energyProductTransfer
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Energy Product Transfer"
+
+Node: exports
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Exports"
+
+Node: energyConsumption
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Energy Consumption"
+
+Node: energyReserves
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Energy Reserves"
+
+Node: energyStocksOpening
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Energy Stocks Opening"
+
+Node: energySupply
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Energy Supply"
+
+Node: imports
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Imports"
+
+Node: fuelStocks
+typeOf: dcs:Property
+rangeIncludes: Number
+name: "Fuel Stocks"
+
 Node: energyProducerType
 typeOf: dcs:Property
 rangeIncludes: EnergyProducerEnum
 name: "Energy Producer Type"
-
-Node: energyConsumerType
-typeOf: dcs:Property
-rangeIncludes: EnergyConsumerEnum
-name: "Energy Consumer Type"
 
 Node: energyLostAs
 typeOf: dcs:Property
@@ -820,6 +815,11 @@ Node: energySource
 typeOf: dcs:Property
 rangeIncludes: EnergySourceEnum
 name: "Energy Source"
+
+Node: energyConsumerType
+typeOf: dcs:Property
+rangeIncludes: EnergyConsumerEnum
+name: "Energy Consumer Type"
 
 Node: energyReserveType
 typeOf: dcs:Property
