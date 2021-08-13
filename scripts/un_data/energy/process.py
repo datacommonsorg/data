@@ -45,7 +45,8 @@ flags.DEFINE_list('csv_data_files', [],
 flags.DEFINE_string('dataset_name', 'undata-energy',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
-flags.DEFINE_string('schema_mcf', '', 'Generate schema MCF nodes for enums and properties')
+flags.DEFINE_string(
+    'schema_mcf', '', 'Generate schema MCF nodes for enums and properties')
 
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
@@ -93,7 +94,7 @@ def add_property_value_name(pv_dict, prop: str, name_list, ignore_list=None):
         return
     # strip out any prefix such as 'dcs:' or 'dcid:' or 'schema:'
     prefix_len = value.find(':') + 1
-    name_list.append(value[prefix_len:])
+    name_list.append(value[prefix_len].upper() + value[prefix_len + 1:])
 
 
 def get_stat_var_id(sv_pv) -> str:
@@ -132,7 +133,6 @@ def generate_stat_var(data_row, sv_pv, counters=None) -> str:
 def get_stat_var_mcf(sv_id, sv_pv) -> str:
     stat_var = []
     stat_var.append(f'Node: {sv_id}')
-    stat_var.append('typeOf: dcs:StatisticalVariable')
     for p in sorted(sv_pv.keys()):
         stat_var.append('{}: {}'.format(p, sv_pv[p]))
     return '\n'.join(stat_var)
@@ -176,15 +176,14 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
         return
     data_row['Unit_dcid'] = unit_dcid
     if scaling_factor != 1:
-      data_row['Scaling_factor'] = scaling_factor
-    else:
-      data_row['Scaling_factor'] = ''
+        data_row['Scaling_factor'] = scaling_factor
+    # else:
+    #  data_row['Scaling_factor'] = ''
 
     if notes == "1":
-      data_row['IsEstimate'] = 'dcs:True'
-    else:
-      data_row['IsEstimate'] = ''
-
+        data_row['IsEstimate'] = 'dcs:True'
+    # else:
+    #  data_row['IsEstimate'] = ''
 
     sv_pv = {}
     sv_id = generate_stat_var(data_row, sv_pv, counters)
@@ -229,7 +228,6 @@ def process(in_paths: str, out_path: str):
                                     f_out_mcf, counters)
                         _print_counters(counters, 100000)
 
-           
     end_ts = time.perf_counter()
     counters['total_time_seconds'] = end_ts - start_ts
     _print_counters(counters)
@@ -251,7 +249,8 @@ def generate_schema_mcf(mcf_filename: str):
                     f_out_mcf.write('\n\n')
                     f_out_mcf.write('\n'.join(node))
     _print_counters(sv_map)
- 
+
+
 def main(_):
     if len(FLAGS.csv_data_files) > 0 and FLAGS.dataset_name != '':
         process(FLAGS.csv_data_files, FLAGS.dataset_name)

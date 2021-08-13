@@ -243,16 +243,22 @@ UN_ENERGY_USAGE_CODES = {
 }
 
 UN_ENERGY_FLOW_CODES = {
-    '02': 'Receipts',  # new
-    '03': 'Imports',  # new
-    '04': 'Exports',  # new
-    '06': 'FuelStocks',  # new
-    '07': 'EnergyProductTransfer',  # new
-    '11': 'NonEnergyConsumption',  # new
-    'NA': 'EnergyConsumption',  # new
-    'GA': 'EnergySupply',  # new
-    '21': 'EnergyStocksOpening',  # new
-    '22': 'EnergyStocksClosing',  # new
+    '02': 'receipts',  # new
+    '03': 'imports',  # new
+    '04': 'exports',  # new
+    '06': 'fuelStocks',  # new
+    '07': 'energyProductTransfer',  # new
+    '11': 'nonEnergyConsumption',  # new
+    'NA': 'energyConsumption',  # new
+    'NAprop': 'energyConsumerType',  # new
+    'GA': 'energySupply',  # new
+    '21': 'energyStocksOpening',  # new
+    '22': 'energyStocksClosing',  # new
+    '15': 'energyReserves',  # new
+    '16': 'energyReserves',  # new
+    '16prop': 'energyReserveType',  # new
+    '10': 'energyLoss',  # new
+    '10prop': 'energyLostAs',  # new
 }
 
 # energy capacity codes '13*' EnergySource
@@ -342,14 +348,14 @@ def get_pv_for_production_code(code: str, counters=None) -> {str: str}:
        PlantType:
           C: CHP plant
           E: Electricity plant
-          H: Heat plant 
+          H: Heat plant
     """
     pv = {}
     if not code.startswith('01'):
         return pv
     code = code.removeprefix('01')
     # Add default production variables.
-    pv['measuredProperty'] = 'dcs:EnergyGeneration'
+    pv['measuredProperty'] = 'dcs:energyGeneration'
 
     # Add an optional producer type.
     if add_pv_from_map('energyProducerType', code[:1], UN_ENERGY_PRODUCER_TYPE, pv):
@@ -383,7 +389,7 @@ def get_pv_for_consumption_code(code: str, counters=None) -> {str: str}:
     if not code.startswith('12'):
         return pv
     code = code.removeprefix('12')
-    pv['measuredProperty'] = 'dcs:EnergyConsumption'  # new
+    pv['measuredProperty'] = 'dcs:energyConsumption'  # new
     if not add_pv_from_map_for_prefix('energyConsumerType', code,
                                       UN_ENERGY_CONSUMING_INDUSTRY, pv):
         counters['error_ignored_consumer_code'] += 1
@@ -396,7 +402,7 @@ def get_pv_for_capacity_code(code: str, counters=None) -> {str: str}:
         return pv
     code = code.removeprefix('13')
     # TODO(ajaits): create a new code for capacity?
-    pv['measuredProperty'] = 'dcs:EnergyGeneration'
+    pv['measuredProperty'] = 'dcs:energyGeneration'
     if not add_pv_from_map_for_prefix('energySource', code, UN_ENERGY_CAPACITY_CODES, pv):
         counters['error_ignored_capacity_code'] += 1
     return pv
@@ -419,20 +425,20 @@ def get_pv_for_energy_code(code: str, counters=None) -> {str: str}:
 
     pv = {}
     if add_pv_from_map_for_prefix('energyConsumerType', code, UN_ENERGY_USAGE_CODES, pv):
-        pv['measuredProperty'] = 'dcs:EnergyConsumption'  # new
-        return pv
-
-    if add_pv_from_map_for_prefix('measuredProperty', code, UN_ENERGY_FLOW_CODES, pv):
+        pv['measuredProperty'] = 'dcs:energyConsumption'  # new
         return pv
 
     if code.startswith('10'):
         if add_pv_from_map_for_prefix('energyLostAs', code, UN_ENERGY_LOSS_CODES, pv):
-            pv['measuredProperty'] = 'dcs:EnergyLoss'  # new
+            pv['measuredProperty'] = 'dcs:energyLoss'  # new
         return pv
 
     if add_pv_from_map_for_prefix('energyReserveType', code,
                                   UN_ENERGY_RESERVE_CODES, pv):
-        pv['measuredProperty'] = 'dcs:EnergyReserves'  # new
+        pv['measuredProperty'] = 'dcs:energyReserves'  # new
+        return pv
+
+    if add_pv_from_map_for_prefix('measuredProperty', code, UN_ENERGY_FLOW_CODES, pv):
         return pv
 
     if len(code) > 0 and counters is not None:
@@ -477,21 +483,53 @@ def get_unit_dcid_scale(units_scale: str) -> (str, int):
         multiplier_num = UN_ENERGY_UNITS_MULTIPLIER[multiplier]
     return (units_dcid, multiplier_num)
 
+
 def get_name_from_id(dcid_str: str) -> str:
     """Converts the camel case into a space separated name """
     if dcid_str is None:
         return None
     # Strip any namespace prefix
     dcid = dcid_str[dcid_str.find(':') + 1:]
-    
+
+    if len(dcid) < 2:
+      return dcid
+
     # Find all case changes
+    dcid = dcid[0].upper() + dcid[1:]
     start_idx = [i for i, e in enumerate(dcid)
                  if e.isupper() or e == '_'] + [len(dcid)]
 
     # Insert spaces at positions where case changes
-    words = [dcid[x: y] for x, y in zip(start_idx, start_idx[1:]) if dcid[x: y] != '_']
+    words = [dcid[x: y]
+        for x, y in zip(start_idx, start_idx[1:]) if dcid[x: y] != '_']
     return ' '.join(words)
-  
+
+
+def get_unique_list(list_elements):
+    """Return a list of unique elements
+    """
+    list_set = set(list_elements)
+    return list(list_set)
+
+
+def generate_property_mcf_for_list(prop_list, node_id_map):
+    """Generate property node mcfs for each property in the list
+    """
+    mcf_nodes = []
+    unique_props = get_unique_list(prop_list)
+    for prop in unique_props:
+        if prop not in node_id_map:
+            node_mcf = []
+            node_mcf.append(f'Node: {prop}')
+            node_mcf.append(f'typeOf: Property')
+            node_mcf.append(f'rangeIncludes: Number')
+            name = get_name_from_id(prop)
+            node_mcf.append(f'name: "{name}"')
+            mcf_nodes.append(node_mcf)
+        node_id_map[prop] += 1
+
+    return mcf_nodes 
+    
 
 # TODO(ajaits): declare return of list of list
 def generate_enum_mcf_for_list(enum_dcid: str, enum_list, node_id_map):
@@ -508,10 +546,10 @@ def generate_enum_mcf_for_list(enum_dcid: str, enum_list, node_id_map):
         node_mcf.append(f'subClassOf: schema.Enumeration')
         name = get_name_from_id(enum_dcid)
         if name is not None:
-            node_mcf.append(f'name: {name}')
+            node_mcf.append(f'name: "{name}"')
         node_id_map[enum_dcid] += 1
     
-    for code in enum_list:
+    for code in get_unique_list(enum_list):
         if code is not None:
             if code not in node_id_map:
                 node_mcf = []
@@ -519,7 +557,7 @@ def generate_enum_mcf_for_list(enum_dcid: str, enum_list, node_id_map):
                 node_mcf.append(f'typeOf: dcid:{enum_dcid}')
                 name = get_name_from_id(code)
                 if name is not None:
-                    node_mcf.append(f'name: {name}')
+                    node_mcf.append(f'name: "{name}"')
                 mcf_nodes.append(node_mcf)
                 node_id_map[enum_dcid] += 1
             node_id_map[code] += 1
@@ -542,13 +580,12 @@ def generate_un_energy_code_enums(node_id_map):
                                             node_id_map)
     mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_USAGE_CODES.values(),
                                             node_id_map)
-    mcf_nodes += generate_enum_mcf_for_list('EnergyFlowEnum', UN_ENERGY_FLOW_CODES.values(),
-                                            node_id_map)
     mcf_nodes += generate_enum_mcf_for_list('EnergySourceEnum', UN_ENERGY_CAPACITY_CODES.values(),
                                             node_id_map)
     mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_LOSS_CODES.values(),
                                             node_id_map)
     mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_RESERVE_CODES.values(),
                                             node_id_map)
+    mcf_nodes += generate_property_mcf_for_list(UN_ENERGY_FLOW_CODES.values(), node_id_map)
     return mcf_nodes
 

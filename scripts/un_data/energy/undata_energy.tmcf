@@ -3,6 +3,8 @@ typeOf: dcs:StatVarObservation
 observationAbout: C:UNDataEnergy->Country_dcid
 variableMeasured: C:UNDataEnergy->StatVar
 observationDate: C:UNDataEnergy->Year
+observationPeriod: "P1Y"
 value: C:UNDataEnergy->Quantity
 unit: C:UNDataEnergy->Unit_dcid
 scalingFactor: C:UNDataEnergy->Scaling_factor
+isEstimate: C:UNDataEnergy->IsEstimate
