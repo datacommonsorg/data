@@ -22,17 +22,14 @@ These indicators fall under a wide range of categories including:
 - [who_stats.tmcf](who_stats.tmcf)
 
 #### Other Files
-- [curated_dim_map.json](curated_dim_map.json): schema mapping for dimensions with curated schema and list of dimensions that indicate populationType of person
-- [curated_dim.mcf](curated_dim.mcf): The curated schema for select dimension types and values
+- [curated_dim_map.json](curated_dim_map.json): manually curated schema mapping for dimension types and values, and the manually curated list of dimensions that indicate populationType of person
+- [curated_dim.mcf](curated_dim.mcf): The manually curated schema for select dimension types and values
 #### Scripts
 - [import_data.py](import_data.py): Script to generate the clean csv, statistical variable mcf files, and schema mcf files needed for importing the WHO GHO dataset.
 - [download_data.py](download_data.py): Script to download all the who gho observations data from the who site.
-- [generate_schema.py](generate_schema.py): Script to generate the schema for the dimension types, dimension values and indicators, and the mapping from their identifiers to schema dcid
-- [generate_csv_and_sv.py](generate_csv_and_sv.py): Script to generate the clean csv and statistical variable mcf files
-
 ## Import Procedure
 
->To import BJS National Prison Statistics data:
+>To import WHO GHO data:
 1. Get the raw data in one of 2 ways:
     - To get the pre-downloaded data from our Google Cloud Storage, run and then unzip the file:
      ```

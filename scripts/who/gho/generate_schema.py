@@ -18,31 +18,13 @@ import requests
 import json
 import re
 import os
-from absl import flags
-from absl import app
 
-FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'data_dir', '',
-    'Path to folder that contains the raw json data from the indicators.')
-flags.DEFINE_string(
-    'curated_dim_file', '',
-    'path to a json file containing mapping of dimension types and values to their schema dcid. (For curated values)'
-)
-flags.DEFINE_string(
-    'artifact_dir', '',
-    'dir to output generated artifacts (dimension categories and dimension to schema dcid mapping). If blank, will not output dimension categories'
-)
-flags.DEFINE_string(
-    'mcf_dir', '',
-    'dir to output generated MCF file to. If blank, will output the generated MCF files to current directory'
-)
-
+# Map of dimension code to title to use to build a dcid for that dimension
 PROP_TITLE_MAP = {
     "GOVERNMENTBENEFIT":
         "Substance Use Disorder Government Benefit",
     "GROUP":
-        "substance Use Disorder Resource Group",
+        "Substance Use Disorder Resource Group",
     "RSUDPREVENTIONPROGRAMME":
         "Substance Use Disorder Prevention Programmes",
     "RSUDMAINSUBSTANCEATTREATMENT":
@@ -133,7 +115,8 @@ PROP_TITLE_MAP = {
         "Reporting Data Source"
 }
 
-PROP_NODE_NAME_MAP = {
+# Map of dimension code to description to use for the property node.
+PROP_NODE_DESCRIPTION_MAP = {
     "IHRSPARCAPACITYLEVEL":
         "International Health Regulations (IHR) State Party Self-Assessment Annual Report (SPAR) Capacity Level",
     "AMRGLASSCATEGORY":
@@ -157,7 +140,8 @@ def categorize_dimensions(data_files):
         an object: {
             spatial: map of spatial dimensions to the number of occurences,
             time: list of time dimensions,
-            cprop: sorted list of {id: dimension code as string, num: number of occurences}
+            cprop: sorted list of {id: dimension code as string,
+                                   num: number of occurences}
         }
     """
     spatial_dim = {}
@@ -238,18 +222,23 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types,
                                dim_categories):
     """ Autogenerate schema and the mapping from dimension to schema
     Args:
-        curated_dim_types: dictionary of dimension code to corresponding schema dcid for curated schema mappings
-        person_dim_types: list of dimension codes where domainIncludes should be person
+        curated_dim_types: dictionary of dimension code to corresponding schema
+                        dcid for curated schema mappings
+        person_dim_types: list of dimension codes where domainIncludes should be
+                        person
         dim_categories: an object: {
             spatial: map of spatial dimensions to the number of occurences,
             time: list of time dimensions,
-            cprop: sorted list of {id: dimension code as string, num: number of occurences}
+            cprop: sorted list of {id: dimension code as string,
+                                   num: number of occurences}
         }
     Returns:
-        mcf_result: list of strings that correspond to the schema mcf file generated
+        mcf_result: list of strings that correspond to the schema mcf file
+                    generated
         dim_map: an object: {
             dimTypes: map of dimension code to its corresponding schema dcid
-            dimValues: map of dimension code to map of dimension value to its corresponding schema dcid
+            dimValues: map of dimension code to map of dimension value to its
+                       corresponding schema dcid
         }
     """
     cprops = set()
@@ -265,23 +254,35 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types,
         d_code = d.get('Code', "")
         if not d_code in cprops or d_code in curated_dim_types:
             continue
+        # Make the dimension title usable as a dcid by replacing _ with space,
+        # capitalizing the first letter of every word and removing an end "s"
+        # eg. "SUBSTANCE_ABUSE_AWARENESS_ACTIVITY_TYPES" ->
+        # "Substance Abuse Awareness Activity Type"
         d_title = d.get('Title').replace("_", " ").title()
         if d_title[-1:] == "s":
             d_title = d_title[:-1]
         if d_code in PROP_TITLE_MAP:
             d_title = PROP_TITLE_MAP[d_code]
+        # Get the dcid for the property node by making the first letter in the
+        # title lowercase and removing white spaces
+        # eg. "Substance Abuse Awareness Activity Type" ->
+        # "substanceAbuseAwarenessActivityType"
         prop_dcid = (d_title[0].lower() + d_title[1:]).replace(" ", "")
+        # Get the dcid for the enum node by taking the dcid for the property
+        # node, making the first letter uppercase and add "Enum" to the end
+        # eg. "substanceAbuseAwarenessActivityType" ->
+        # "SubstanceAbuseAwarenessActivityTypeEnum"
         enum_dcid = prop_dcid[0].upper() + prop_dcid[1:] + "Enum"
         if not prop_dcid in seen_dcids:
-            name = ""
-            if d_code in PROP_NODE_NAME_MAP:
-                name = PROP_NODE_NAME_MAP[d_code]
+            description = ""
+            if d_code in PROP_NODE_DESCRIPTION_MAP:
+                name = PROP_NODE_DESCRIPTION_MAP[d_code]
             domainType = "Thing"
             if d_code in person_dim_types:
                 domainType = "Person"
             mcf_result.extend(get_enum_node(enum_dcid))
             mcf_result.extend(
-                get_prop_node(prop_dcid, name, enum_dcid, domainType))
+                get_prop_node(prop_dcid, description, enum_dcid, domainType))
         seen_dcids[prop_dcid] = set()
         dim_type_map[d_code] = prop_dcid
         dim_value_map[d_code] = {}
@@ -291,8 +292,13 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types,
         for value in d_values:
             v_code = value.get('Code')
             v_title = value.get('Title').title()
-            v_dcid = re.sub("\s|\,|\-|\.", "", v_title)
-            node_dcid = "WHO/" + v_dcid.replace("/", "Or")
+            # Get node dcid from v_title by removing white space, comma, -, and
+            # period, adding "WHO/" prefix, and replacing "/" with "Or"
+            # eg. "Finance/taxation" -> "WHO/FinanceOrTaxation" or
+            # "Government-sponsored mHealth programmes are being evaluated" ->
+            # "WHO/GovernmentSponsoredMhealthProgrammesAreBeingEvaluated"
+            v_title = re.sub("\s|\,|\-|\.", "", v_title)
+            node_dcid = "WHO/" + v_title.replace("/", "Or")
             if not node_dcid in seen_dcids[prop_dcid]:
                 mcf_result.extend(get_val_node(node_dcid, enum_dcid))
             seen_dcids[prop_dcid].add(node_dcid)
@@ -302,7 +308,7 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types,
 
 
 def build_indicator_node(dcid, i_name):
-    description = format_indicator_description(i_name)
+    description = get_indicator_description(i_name)
     result = []
     result.append(f"Node: dcid:{dcid}")
     result.append(f'name: "{dcid}"')
@@ -314,8 +320,15 @@ def build_indicator_node(dcid, i_name):
     return result
 
 
-def format_indicator_description(description):
-    description = re.sub("\–|\−", "-", description)
+def get_indicator_description(indicator_name):
+    """Replace non ascii characters in indicator name to create a string
+    that can be used as a node description.
+    Args:
+        indicator_name: the indicator name as a string.
+    Returns:
+        description: a string that can be used as a node description.
+    """
+    description = re.sub("\–|\−", "-", indicator_name)
     description = re.sub('\“|\”', '"', description)
     description = description.replace(" ", "")
     description = description.replace("m²", "square metre")
@@ -395,17 +408,3 @@ def generate_schema(data_files, curated_dim_file, artifact_dir, mcf_dir):
                   "w+") as dim_categories_file:
             dim_categories_file.write(json.dumps(dim_categories))
     return schema_mapping
-
-
-def main(args):
-    data_dir = FLAGS.data_dir
-    data_files = []
-    if FLAGS.data_dir:
-        for f in os.listdir(data_dir):
-            data_files.append(os.path.join(data_dir, f))
-    generate_schema(data_files, FLAGS.curated_dim_file, FLAGS.artifact_dir,
-                    FLAGS.mcf_dir)
-
-
-if __name__ == '__main__':
-    app.run(main)

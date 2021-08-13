@@ -18,19 +18,9 @@ import json
 import csv
 import re
 import os
-from absl import flags
-from absl import app
 
-FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'raw_data_dir', '',
-    'Path to folder that contains the raw json data from the indicators.')
-flags.DEFINE_string(
-    'schema_mapping', '',
-    'path to a json file containing mapping of dimensions and indicators to their corresponding schema dcid.'
-)
-flags.DEFINE_string('output_dir', '',
-                    'directory to output the csv and stat var mcf to.')
+# Drop these values because they just indicate that there's no data for the
+# particular observation
 VALUES_TO_DROP = {
     "No data", "Data not available", "Not available", "Not applicable",
     "*Filler*"
@@ -59,7 +49,11 @@ def get_time_period(entry):
           "NumericValue": null,
           "Low": null,
           "High": null,
-          "Comments": "5 kV/m : continuous exposure 5 - 10 kV/m : exposure limited to a few hours a day > 10 kV/m : exposure limited to a few minutes a day, provided the induced current density does not exceed 2 mA/m2 and precautions are taken to prevent hazardous indirect coupling",
+          "Comments": "5 kV/m : continuous exposure 5 - 10 kV/m :
+                    exposure limited to a few hours a day > 10 kV/m : exposure
+                    limited to a few minutes a day, provided the induced current
+                    density does not exceed 2 mA/m2 and precautions are taken to
+                    prevent hazardous indirect coupling",
           "Date": "2016-05-27T13:50:19.3+02:00",
           "TimeDimensionValue": "2014",
           "TimeDimensionBegin": "2014-01-01T00:00:00+01:00",
@@ -68,6 +62,7 @@ def get_time_period(entry):
     Returns:
         time_period as a string
     """
+    # TODO: Look into using standard Date/Time parsers to do this
     time_begin = entry.get("TimeDimensionBegin", "").split("-")
     time_begin_year = time_begin[0]
     time_end = entry.get("TimeDimensionEnd", "").split("-")
@@ -104,7 +99,8 @@ def get_dimension_pv(cprop_mapping, value_mapping, type_key, value_key, entry):
     """ Get the mapped cprop and value for a dimension in a data entry.
     Args:
         cprop_mapping: map of dimension type code to corresponding schema dcid
-        value_mapping: map of dimension type code to map of dimension value to corresponding schema dcid
+        value_mapping: map of dimension type code to map of dimension value to
+                       corresponding schema dcid
         type_key: key to get the dimension type from the data entry
         value_key: key to get the dimension value from the data entry
         entry: an entry from the WHO indicator api
@@ -146,7 +142,8 @@ def get_value_to_write(values_list):
           "value": the value,
           "date": the exact date of this value,
           "commentsLength": length of the comments,
-          "hasEmptyDimVal": whether this value has any dimension values that mapped to an empty string
+          "hasEmptyDimVal": whether this value has any dimension values that
+                            mapped to an empty string
         }
     Returns:
         a single value object
@@ -166,14 +163,16 @@ def process_dimensions(cprop_mapping, value_mapping, person_dimensions, entry,
     """ Process each of the dimensions in the data entry (up to 3)
     Args:
         cprop_mapping: map of dimension type code to corresponding schema dcid
-        values_mapping: map of dimension type code to map of dimension value to corresponding schema dcid
+        values_mapping: map of dimension type code to map of dimension value to
+                        corresponding schema dcid
         person_dimensions: list of cprops that indicate populationType of person
         entry: an entry from the WHO indicator api
         mcf: list of strings that correspond to the statvar mcf file
         sv_dcid: dcid of the current stat var
     Returns:
         sv_dcid: the updated sv_dcid
-        has_empty_mapped_val: whether any dimension values mapped to an empty string
+        has_empty_mapped_val: whether any dimension values mapped to an empty
+                              string
     """
     has_empty_mapped_val = False
     has_person_dimension = False
@@ -217,7 +216,8 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
       data_files: list of the raw data json files
       schema_mapping: an object: {
             cprops: map of dimension type code to its corresponding schema dcid,
-            values: map of dimension type code to map of dimension value to its corresponding schema dcid,
+            values: map of dimension type code to map of dimension value to its
+                    corresponding schema dcid,
             indicators: map of indicator codes to its corresponding schema dcid
       }
       output_dir: directory to output the csv and stat var mcf to
@@ -245,7 +245,7 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
                     continue
                 spatial_dim = entry.get("SpatialDim")
                 i_code = entry.get("IndicatorCode", "")
-                sv_dcid = i_code
+                sv_dcid = "WHO/" + i_code
                 measured_prop = indicator_mapping.get(i_code, i_code)
                 mcf = [
                     "typeOf: dcs:StatisticalVariable",
@@ -274,6 +274,8 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
                     "time_dim_value": time_dim_value,
                     "time_period": time_period,
                     "value": value,
+                    # date, commentsLength, and hasEmptyDimVal used to choose
+                    # the value entry to use when there are duplicate obs values
                     "date": entry.get("Date", ""),
                     "commentsLength": comments_length,
                     "hasEmptyDimVal": has_empty_mapped_val
@@ -291,18 +293,3 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
                     ])
         with open(os.path.join(output_dir, "who_sv.mcf"), "w+") as mcf_file:
             mcf_file.write("\n".join(mcf_result))
-
-
-def main(args):
-    data_dir = FLAGS.raw_data_dir
-    data_files = []
-    if FLAGS.data_dir:
-        for f in os.listdir(data_dir):
-            data_files.append(os.path.join(data_dir, f))
-    with open(FLAGS.schema_mapping, "r+") as schema_mapping:
-        schema_mapping = json.load(schema_mapping)
-    generate_sv(data_files, schema_mapping, FLAGS.output_dir)
-
-
-if __name__ == '__main__':
-    app.run(main)

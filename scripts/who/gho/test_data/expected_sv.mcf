@@ -1,4 +1,4 @@
-Node: dcid:EMFLIMITELECTRIC_Public_LowFrequency
+Node: dcid:WHO/EMFLIMITELECTRIC_Public_LowFrequency
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/EMFLIMITELECTRIC
 statType: dcs:measurementResult
@@ -6,7 +6,7 @@ emfExposureGroup: dcs:WHO/Public
 emfFrequency: dcs:WHO/LowFrequency
 populationType: dcs:Thing
 
-Node: dcid:EMFLIMITELECTRIC_Public_Static
+Node: dcid:WHO/EMFLIMITELECTRIC_Public_Static
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/EMFLIMITELECTRIC
 statType: dcs:measurementResult
@@ -14,7 +14,7 @@ emfExposureGroup: dcs:WHO/Public
 emfFrequency: dcs:WHO/Static
 populationType: dcs:Thing
 
-Node: dcid:EMFLIMITELECTRIC_Workers_Static
+Node: dcid:WHO/EMFLIMITELECTRIC_Workers_Static
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/EMFLIMITELECTRIC
 statType: dcs:measurementResult
@@ -22,27 +22,27 @@ emfExposureGroup: dcs:WHO/Workers
 emfFrequency: dcs:WHO/Static
 populationType: dcs:Thing
 
-Node: dcid:WSH_8
+Node: dcid:WHO/WSH_8
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/WSH_8
 statType: dcs:measuredValue
 populationType: dcs:Thing
 
-Node: dcid:Adult_curr_cig_smoking_Male
+Node: dcid:WHO/Adult_curr_cig_smoking_Male
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/Adult_curr_cig_smoking
 statType: dcs:measuredValue
 gender: schema:Male
 populationType: dcs:Person
 
-Node: dcid:Adult_curr_cig_smoking_Female
+Node: dcid:WHO/Adult_curr_cig_smoking_Female
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/Adult_curr_cig_smoking
 statType: dcs:measuredValue
 gender: schema:Female
 populationType: dcs:Person
 
-Node: dcid:Adult_curr_cig_smoking
+Node: dcid:WHO/Adult_curr_cig_smoking
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/Adult_curr_cig_smoking
 statType: dcs:measuredValue
