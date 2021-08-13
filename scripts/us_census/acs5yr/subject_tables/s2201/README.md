@@ -3,7 +3,7 @@
 ## Input Data
 
 The data is downloaded from
-`https://www.census.gov/acs/www/data/data-tables-and-tools/subject-tables/`.
+`https://www.census.gov/acs/www/data/data-tables-and-tools/subject-tables/` and is organized by year.
 Currently, we have data from 2010-2019 and observations for the Statistical
 Variables listed in
 `stat_vars.csv` for US states, counties, and places (cities).
