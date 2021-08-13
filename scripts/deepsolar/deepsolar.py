@@ -41,6 +41,7 @@ def write_csv(infilename, outfilename):
     df['block_group_FIPS'] = 'dcid:geoId/' + (
         df['block_group_FIPS'].astype(str).str.zfill(12))
     df = df.fillna('')
+    df = df.replace('None', '')
     df.to_csv(outfilename, index=False)
 
 
