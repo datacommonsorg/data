@@ -52,8 +52,8 @@ populationType: dcs:Energy
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_EnergyReserves_Energy_Energy ReservesAssured
-energyReserveType: dcid:Energy ReservesAssured
+Node: Annual_EnergyReserves_Energy_EnergyReservesAssured
+energyReserveType: dcid:EnergyReservesAssured
 measuredProperty: dcs:energyReserves
 measurementQualifier: dcs:Annual
 populationType: dcs:Energy

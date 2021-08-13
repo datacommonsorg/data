@@ -58,7 +58,7 @@ UN_ENERGY_CODES = {
     'IW':  'IndustrialWaste',  # new
     'JF':  'KeroseneJetFuel',  # new
     'LN': 'dcs:LigniteCoal',  # Lignite
-    'LP':  'Liquified Petroleum Gas',  # new
+    'LP':  'LiquifiedPetroleumGas',  # new
     'LU':  'Lubricants',  # new
     'MO':  'MotorGasoline',  # new
     'MW':  'MunicipalWastes',  # new
@@ -310,7 +310,7 @@ UN_ENERGY_RESERVE_CODES = {
     '1622': 'EnergyReservesTarSands',  # new
     '163': 'EnergyReservesOther',  # new
     '17': 'EnergyResources',  # new
-    '181': 'Energy ReservesAssured',  # new
+    '181': 'EnergyReservesAssured',  # new
     '182': 'EnergyReservesAdditional',  # new
     '19': 'HydraulicResources',  # new
 }
@@ -527,8 +527,10 @@ def generate_property_mcf_node(prop: str, rangeIncludes):
     node_mcf.append(f'typeOf: dcs:Property')
     if rangeIncludes is not None:
         node_mcf.append(f'rangeIncludes: {",".join(rangeIncludes)}')
-    name = get_name_from_id(prop)
-    node_mcf.append(f'name: "{name}"')
+    # TODO(ajaits): check if name is needed as
+    #               dc-import requires this to start with lower case
+    # name = get_name_from_id(prop)
+    # node_mcf.append(f'name: "{name}"')
     return node_mcf
 
 

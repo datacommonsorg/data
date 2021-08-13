@@ -45,7 +45,7 @@ KeroseneJetFuel,dcs:country/AFG,2019,67.2,dcid:MetricTon,1000,dcs:True,Annual_Im
 dcs:EIA_Kerosene,dcs:country/AFG,2019,0,dcid:MetricTon,1000,,Annual_Imports_Energy
 BrownCoal,dcs:country/ALB,2014,0,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
 dcs:LigniteCoal,dcs:country/ALB,2014,0,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
-Liquified Petroleum Gas,dcs:country/ALB,2004,1,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
+LiquifiedPetroleumGas,dcs:country/ALB,2004,1,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
 Lubricants,dcs:country/AFG,2019,4.4,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy
 MotorGasoline,dcs:country/AFG,2019,606.3,dcid:MetricTon,1000,,Annual_Imports_Energy
 MunicipalWastes,dcs:country/AND,2019,377.424,dcid:Terajoule,,dcs:True,Annual_EnergyGeneration_Energy
@@ -66,7 +66,7 @@ FuelOil,dcs:country/AFG,2019,1,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energ
 RefineryGas,dcs:country/ALB,2019,7.2,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
 dcs:EIA_SubbituminousCoal,dcs:country/AUS,2019,26268,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
 Heat,dcs:country/ALB,2019,150.67,dcid:Terajoule,,,Annual_EnergyGeneration_Energy
-Uranium,dcs:country/DZA,2011,19500,dcid:MetricTon,,,Annual_EnergyReserves_Energy_Energy ReservesAssured
+Uranium,dcs:country/DZA,2011,19500,dcid:MetricTon,,,Annual_EnergyReserves_Energy_EnergyReservesAssured
 VegetalWaste,dcs:country/AGO,2018,105044.4,dcid:Terajoule,,,Annual_EnergyGeneration_Energy
 FallingWater,dcs:country/AFG,2008,394000,dcid:KilowattHour,1000000,,Annual_EnergyReserves_Energy_HydraulicResources
 WhiteSpirit,dcs:country/AFG,2019,3,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy
@@ -1758,67 +1758,67 @@ dcs:LigniteCoal,dcs:country/KAZ,2012,0,dcid:MetricTon,1000,,Annual_EnergyConsump
 dcs:LigniteCoal,dcs:country/KAZ,2013,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_DomesticNavigationTransport
 dcs:LigniteCoal,dcs:country/KAZ,2013,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherTransport
 dcs:LigniteCoal,dcs:country/UKR,2010,2,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Transformation
-Liquified Petroleum Gas,dcs:country/ALB,2004,1,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
-Liquified Petroleum Gas,dcs:country/ALB,2004,1,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy_Refinery
-Liquified Petroleum Gas,dcs:country/ALB,2019,173.44,dcid:MetricTon,1000,,Annual_Imports_Energy
-Liquified Petroleum Gas,dcs:country/ALB,2017,0,dcid:MetricTon,1000,,Annual_Exports_Energy
-Liquified Petroleum Gas,dcs:country/ALB,2019,2,dcid:MetricTon,1000,,Annual_FuelStocks_Energy
-Liquified Petroleum Gas,dcs:country/ALB,2019,3.2,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_EnergyIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,3.2,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OilGasExtraction
-Liquified Petroleum Gas,dcs:country/ALB,2017,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OilRefineries
-Liquified Petroleum Gas,dcs:country/ALB,2019,168.24,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy
-Liquified Petroleum Gas,dcs:country/ALB,2019,7.2,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Manufacturing
-Liquified Petroleum Gas,dcs:country/ALB,2019,1.34,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ChemicalPetrochemicalIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,5.86,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,3.87,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_FoodIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,1.99,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherManufacturingIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,10.56,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,10.56,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,150.48,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,97,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Households
-Liquified Petroleum Gas,dcs:country/ALB,2019,3.4,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Agriculture
-Liquified Petroleum Gas,dcs:country/ALB,2006,6,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
-Liquified Petroleum Gas,dcs:country/ALB,2019,50.08,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Commerce_PublicServices
-Liquified Petroleum Gas,dcs:country/ALB,2019,171.44,dcid:MetricTon,1000,,Annual_EnergySupply_Energy
-Liquified Petroleum Gas,dcs:country/ALB,2019,168.24,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy
-Liquified Petroleum Gas,dcs:country/DZA,2018,8314,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
-Liquified Petroleum Gas,dcs:country/DZA,2018,31,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Industry
-Liquified Petroleum Gas,dcs:country/DZA,2018,11,dcid:MetricTon,1000,,Annual_EnergyLoss_Energy_EnergyLost
-Liquified Petroleum Gas,dcs:country/DZA,2018,8,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ConstructionIndustry
-Liquified Petroleum Gas,dcs:country/AGO,2003,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherTransport
-Liquified Petroleum Gas,dcs:country/ARG,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Transformation
-Liquified Petroleum Gas,dcs:country/ARG,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ElectricityGeneration
-Liquified Petroleum Gas,dcs:country/ARG,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ElectricityAutoproducer
-Liquified Petroleum Gas,dcs:country/ARG,2012,420,dcid:MetricTon,1000,,Annual_NonEnergyConsumption_Energy
-Liquified Petroleum Gas,dcs:country/ARM,2017,0.008,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_IronSteel
-Liquified Petroleum Gas,dcs:country/ARM,2018,0.001,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NonferrousMetalsIndustry
-Liquified Petroleum Gas,dcs:country/ARM,2018,0.001,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NonmetallicMineralsIndustry
-Liquified Petroleum Gas,dcs:country/ARM,2018,0.006,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_MachineryIndustry
-Liquified Petroleum Gas,dcs:country/ARM,2018,0.031,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Mining
-Liquified Petroleum Gas,dcs:country/AUS,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_GasWorks
-Liquified Petroleum Gas,dcs:country/AUS,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_CoalMines
-Liquified Petroleum Gas,dcs:country/AUS,2012,5,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_GasWorks
-Liquified Petroleum Gas,dcs:country/AUS,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ElectricityGeneration
-Liquified Petroleum Gas,dcs:country/AUS,2001,15,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportEquipmentIndustry
-Liquified Petroleum Gas,dcs:country/AUS,2018,3,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PaperIndustry
-Liquified Petroleum Gas,dcs:country/AUS,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_WoodIndustry
-Liquified Petroleum Gas,dcs:country/AUS,2018,4,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TextileIndustry
-Liquified Petroleum Gas,dcs:country/AUS,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_RailTransport
-Liquified Petroleum Gas,dcs:country/AUT,1997,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ElectricityMainActivityProducer
-Liquified Petroleum Gas,dcs:country/AUT,2002,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_CHPMainActivityProducers
-Liquified Petroleum Gas,dcs:country/AUT,1999,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_HeatPlantMainActivityProducer
-Liquified Petroleum Gas,dcs:country/BLR,2018,-97,dcid:MetricTon,1000,,Annual_EnergyProductTransfer_Energy
-Liquified Petroleum Gas,dcs:country/BLR,2003,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Transformation
-Liquified Petroleum Gas,dcs:country/BEL,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_CHPAutoproducer
-Liquified Petroleum Gas,dcs:country/BEL,2007,20,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_CokeOvens
-Liquified Petroleum Gas,dcs:country/BEL,2008,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_BlastFurnaces
-Liquified Petroleum Gas,dcs:country/CHL,2017,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PetrochemicalPlant
-Liquified Petroleum Gas,dcs:country/CHL,2017,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NaturalGasBlendingPlants
-Liquified Petroleum Gas,dcs:country/CHN,2018,38.1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_HeatPlantAutoproducer
-Liquified Petroleum Gas,dcs:country/CHN,2018,0.5,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_DomesticAviation
-Liquified Petroleum Gas,dcs:country/CHN,2018,6,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_DomesticNavigationTransport
-Liquified Petroleum Gas,dcs:country/CHN,2018,0.1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PipelineTransport
-Liquified Petroleum Gas,dcs:country/IRN,2018,2680,dcid:MetricTon,1000,dcs:True,Annual_Receipts_Energy
+LiquifiedPetroleumGas,dcs:country/ALB,2004,1,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
+LiquifiedPetroleumGas,dcs:country/ALB,2004,1,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy_Refinery
+LiquifiedPetroleumGas,dcs:country/ALB,2019,173.44,dcid:MetricTon,1000,,Annual_Imports_Energy
+LiquifiedPetroleumGas,dcs:country/ALB,2017,0,dcid:MetricTon,1000,,Annual_Exports_Energy
+LiquifiedPetroleumGas,dcs:country/ALB,2019,2,dcid:MetricTon,1000,,Annual_FuelStocks_Energy
+LiquifiedPetroleumGas,dcs:country/ALB,2019,3.2,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_EnergyIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,3.2,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OilGasExtraction
+LiquifiedPetroleumGas,dcs:country/ALB,2017,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OilRefineries
+LiquifiedPetroleumGas,dcs:country/ALB,2019,168.24,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy
+LiquifiedPetroleumGas,dcs:country/ALB,2019,7.2,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Manufacturing
+LiquifiedPetroleumGas,dcs:country/ALB,2019,1.34,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ChemicalPetrochemicalIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,5.86,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,3.87,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_FoodIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,1.99,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherManufacturingIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,10.56,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,10.56,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,150.48,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,97,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Households
+LiquifiedPetroleumGas,dcs:country/ALB,2019,3.4,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Agriculture
+LiquifiedPetroleumGas,dcs:country/ALB,2006,6,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherIndustry
+LiquifiedPetroleumGas,dcs:country/ALB,2019,50.08,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Commerce_PublicServices
+LiquifiedPetroleumGas,dcs:country/ALB,2019,171.44,dcid:MetricTon,1000,,Annual_EnergySupply_Energy
+LiquifiedPetroleumGas,dcs:country/ALB,2019,168.24,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy
+LiquifiedPetroleumGas,dcs:country/DZA,2018,8314,dcid:MetricTon,1000,,Annual_EnergyGeneration_Energy
+LiquifiedPetroleumGas,dcs:country/DZA,2018,31,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Industry
+LiquifiedPetroleumGas,dcs:country/DZA,2018,11,dcid:MetricTon,1000,,Annual_EnergyLoss_Energy_EnergyLost
+LiquifiedPetroleumGas,dcs:country/DZA,2018,8,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ConstructionIndustry
+LiquifiedPetroleumGas,dcs:country/AGO,2003,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_OtherTransport
+LiquifiedPetroleumGas,dcs:country/ARG,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Transformation
+LiquifiedPetroleumGas,dcs:country/ARG,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ElectricityGeneration
+LiquifiedPetroleumGas,dcs:country/ARG,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ElectricityAutoproducer
+LiquifiedPetroleumGas,dcs:country/ARG,2012,420,dcid:MetricTon,1000,,Annual_NonEnergyConsumption_Energy
+LiquifiedPetroleumGas,dcs:country/ARM,2017,0.008,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_IronSteel
+LiquifiedPetroleumGas,dcs:country/ARM,2018,0.001,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NonferrousMetalsIndustry
+LiquifiedPetroleumGas,dcs:country/ARM,2018,0.001,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NonmetallicMineralsIndustry
+LiquifiedPetroleumGas,dcs:country/ARM,2018,0.006,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_MachineryIndustry
+LiquifiedPetroleumGas,dcs:country/ARM,2018,0.031,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Mining
+LiquifiedPetroleumGas,dcs:country/AUS,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_GasWorks
+LiquifiedPetroleumGas,dcs:country/AUS,2016,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_CoalMines
+LiquifiedPetroleumGas,dcs:country/AUS,2012,5,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_GasWorks
+LiquifiedPetroleumGas,dcs:country/AUS,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ElectricityGeneration
+LiquifiedPetroleumGas,dcs:country/AUS,2001,15,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TransportEquipmentIndustry
+LiquifiedPetroleumGas,dcs:country/AUS,2018,3,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PaperIndustry
+LiquifiedPetroleumGas,dcs:country/AUS,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_WoodIndustry
+LiquifiedPetroleumGas,dcs:country/AUS,2018,4,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_TextileIndustry
+LiquifiedPetroleumGas,dcs:country/AUS,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_RailTransport
+LiquifiedPetroleumGas,dcs:country/AUT,1997,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_ElectricityMainActivityProducer
+LiquifiedPetroleumGas,dcs:country/AUT,2002,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_CHPMainActivityProducers
+LiquifiedPetroleumGas,dcs:country/AUT,1999,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_HeatPlantMainActivityProducer
+LiquifiedPetroleumGas,dcs:country/BLR,2018,-97,dcid:MetricTon,1000,,Annual_EnergyProductTransfer_Energy
+LiquifiedPetroleumGas,dcs:country/BLR,2003,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_Transformation
+LiquifiedPetroleumGas,dcs:country/BEL,2018,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_CHPAutoproducer
+LiquifiedPetroleumGas,dcs:country/BEL,2007,20,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_CokeOvens
+LiquifiedPetroleumGas,dcs:country/BEL,2008,1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_BlastFurnaces
+LiquifiedPetroleumGas,dcs:country/CHL,2017,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PetrochemicalPlant
+LiquifiedPetroleumGas,dcs:country/CHL,2017,0,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_NaturalGasBlendingPlants
+LiquifiedPetroleumGas,dcs:country/CHN,2018,38.1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_HeatPlantAutoproducer
+LiquifiedPetroleumGas,dcs:country/CHN,2018,0.5,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_DomesticAviation
+LiquifiedPetroleumGas,dcs:country/CHN,2018,6,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_DomesticNavigationTransport
+LiquifiedPetroleumGas,dcs:country/CHN,2018,0.1,dcid:MetricTon,1000,,Annual_EnergyConsumption_Energy_PipelineTransport
+LiquifiedPetroleumGas,dcs:country/IRN,2018,2680,dcid:MetricTon,1000,dcs:True,Annual_Receipts_Energy
 Lubricants,dcs:country/AFG,2019,4.4,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy
 Lubricants,dcs:country/AFG,2019,4.4,dcid:MetricTon,1000,dcs:True,Annual_NonEnergyConsumption_Energy
 Lubricants,dcs:country/AFG,2019,4.4,dcid:MetricTon,1000,dcs:True,Annual_EnergySupply_Energy
@@ -2746,7 +2746,7 @@ Heat,dcs:country/ISL,2018,10160,dcid:Terajoule,,,Annual_EnergyGeneration_Energy_
 Heat,dcs:country/ROU,2008,0,dcid:Terajoule,,,Annual_EnergyGeneration_Energy_CHPGeneratingPowerPlant_Geothermal
 Heat,dcs:country/SVK,2018,1,dcid:Terajoule,,,Annual_EnergyGeneration_Energy_EnergyProducerAutoProducer_SolarThermal
 Heat,dcs:country/SVK,2018,602,dcid:Terajoule,,,Annual_EnergyConsumption_Energy_BlastFurnaces
-Uranium,dcs:country/DZA,2011,19500,dcid:MetricTon,,,Annual_EnergyReserves_Energy_Energy ReservesAssured
+Uranium,dcs:country/DZA,2011,19500,dcid:MetricTon,,,Annual_EnergyReserves_Energy_EnergyReservesAssured
 Uranium,dcs:country/ARG,2004,1,dcid:MetricTon,,,Annual_EnergyGeneration_Energy
 Uranium,dcs:country/ARG,2011,11000,dcid:MetricTon,,,Annual_EnergyReserves_Energy_EnergyReservesAdditional
 VegetalWaste,dcs:country/AGO,2018,105044.4,dcid:Terajoule,,,Annual_EnergyGeneration_Energy
@@ -2902,4 +2902,4 @@ AnimalWaste,dcs:country/ARM,2018,1289.328,dcid:Terajoule,,,Annual_EnergyGenerati
 ElectricityCapacity,dcs:country/AFG,2019,519,dcid:Kilowatt,1000,dcs:True,Annual_EnergyGeneration_Energy_ElectricityMainActivityAutoProducer
 dcs:Geothermal,dcs:country/AUS,2018,0,dcid:KilowattHour,1000000,,Annual_EnergyGeneration_Energy
 Fuelwood,dcs:country/AFG,2019,1856.559,dcid:CubicMeter,1000,,Annual_EnergyGeneration_Energy
-Uranium,dcs:country/DZA,2011,19500,dcid:MetricTon,,,Annual_EnergyReserves_Energy_Energy ReservesAssured
+Uranium,dcs:country/DZA,2011,19500,dcid:MetricTon,,,Annual_EnergyReserves_Energy_EnergyReservesAssured
