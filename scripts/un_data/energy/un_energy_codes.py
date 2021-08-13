@@ -243,6 +243,7 @@ UN_ENERGY_USAGE_CODES = {
 }
 
 UN_ENERGY_FLOW_CODES = {
+    '01prop': 'energyGeneration',  # new
     '02': 'receipts',  # new
     '03': 'imports',  # new
     '04': 'exports',  # new
@@ -250,15 +251,20 @@ UN_ENERGY_FLOW_CODES = {
     '07': 'energyProductTransfer',  # new
     '11': 'nonEnergyConsumption',  # new
     'NA': 'energyConsumption',  # new
-    'NAprop': 'energyConsumerType',  # new
     'GA': 'energySupply',  # new
     '21': 'energyStocksOpening',  # new
     '22': 'energyStocksClosing',  # new
     '15': 'energyReserves',  # new
     '16': 'energyReserves',  # new
-    '16prop': 'energyReserveType',  # new
     '10': 'energyLoss',  # new
-    '10prop': 'energyLostAs',  # new
+}
+
+UN_ENERGY_PROPERTY_RANGES = {
+    'energySource': ['EnergySourceEnum'],
+    'energyProducerType':  ['EnergyProducerEnum'],
+    'energyConsumerType':  ['EnergyConsumerEnum'],
+    'energyReserveType': ['EnergyConsumerEnum'],
+    'energyLostAs': ['EnergyConsumerEnum'],
 }
 
 # energy capacity codes '13*' EnergySource
@@ -320,7 +326,7 @@ def add_pv_from_map(prop: str, value_code: str, code_map, stat_var_pv) -> bool:
     if prop_value is None:
         return False
     if prop_value.find(':') == -1:
-      prop_value = f'dcid:{prop_value}'
+        prop_value = f'dcid:{prop_value}'
     stat_var_pv[prop] = prop_value
     return True
 
@@ -492,7 +498,7 @@ def get_name_from_id(dcid_str: str) -> str:
     dcid = dcid_str[dcid_str.find(':') + 1:]
 
     if len(dcid) < 2:
-      return dcid
+        return dcid
 
     # Find all case changes
     dcid = dcid[0].upper() + dcid[1:]
@@ -501,7 +507,7 @@ def get_name_from_id(dcid_str: str) -> str:
 
     # Insert spaces at positions where case changes
     words = [dcid[x: y]
-        for x, y in zip(start_idx, start_idx[1:]) if dcid[x: y] != '_']
+             for x, y in zip(start_idx, start_idx[1:]) if dcid[x: y] != '_']
     return ' '.join(words)
 
 
@@ -512,24 +518,36 @@ def get_unique_list(list_elements):
     return list(list_set)
 
 
-def generate_property_mcf_for_list(prop_list, node_id_map):
+def generate_property_mcf_node(prop: str, rangeIncludes):
+    """Generate a property node mcf for the given property
+       with the list of range includes.
+    """
+    node_mcf = []
+    node_mcf.append(f'Node: {prop}')
+    node_mcf.append(f'typeOf: dcs:Property')
+    if rangeIncludes is not None:
+        node_mcf.append(f'rangeIncludes: {",".join(rangeIncludes)}')
+    name = get_name_from_id(prop)
+    node_mcf.append(f'name: "{name}"')
+    return node_mcf
+
+
+def generate_property_mcf_for_list(prop_list, prop_range_map, default_ranges, node_id_map):
     """Generate property node mcfs for each property in the list
     """
     mcf_nodes = []
     unique_props = get_unique_list(prop_list)
     for prop in unique_props:
         if prop not in node_id_map:
-            node_mcf = []
-            node_mcf.append(f'Node: {prop}')
-            node_mcf.append(f'typeOf: Property')
-            node_mcf.append(f'rangeIncludes: Number')
-            name = get_name_from_id(prop)
-            node_mcf.append(f'name: "{name}"')
+            range_props = default_ranges
+            if prop_range_map is not None and prop in prop_range_map:
+                range_props = prop_range_map[prop]
+            node_mcf = generate_property_mcf_node(prop, range_props)
             mcf_nodes.append(node_mcf)
         node_id_map[prop] += 1
 
-    return mcf_nodes 
-    
+    return mcf_nodes
+
 
 # TODO(ajaits): declare return of list of list
 def generate_enum_mcf_for_list(enum_dcid: str, enum_list, node_id_map):
@@ -548,7 +566,7 @@ def generate_enum_mcf_for_list(enum_dcid: str, enum_list, node_id_map):
         if name is not None:
             node_mcf.append(f'name: "{name}"')
         node_id_map[enum_dcid] += 1
-    
+
     for code in get_unique_list(enum_list):
         if code is not None:
             if code not in node_id_map:
@@ -564,6 +582,7 @@ def generate_enum_mcf_for_list(enum_dcid: str, enum_list, node_id_map):
 
     return mcf_nodes
 
+
 def generate_un_energy_code_enums(node_id_map):
     """Generate a set of MCF nodes for all UN energy code enums."""
     mcf_nodes = []
@@ -571,7 +590,7 @@ def generate_un_energy_code_enums(node_id_map):
                                             node_id_map)
     mcf_nodes += generate_enum_mcf_for_list('EnergySourceEnum', UN_ENERGY_FUEL_TYPE.values(),
                                             node_id_map)
-    
+
     mcf_nodes += generate_enum_mcf_for_list('EnergyProducerEnum', UN_ENERGY_PRODUCER_TYPE.values(),
                                             node_id_map)
     mcf_nodes += generate_enum_mcf_for_list('EnergyProducerEnum', UN_ENERGY_PLANT_TYPE.values(),
@@ -586,6 +605,9 @@ def generate_un_energy_code_enums(node_id_map):
                                             node_id_map)
     mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_RESERVE_CODES.values(),
                                             node_id_map)
-    mcf_nodes += generate_property_mcf_for_list(UN_ENERGY_FLOW_CODES.values(), node_id_map)
-    return mcf_nodes
+    mcf_nodes += generate_property_mcf_for_list(
+        UN_ENERGY_FLOW_CODES.values(), {}, ['Number'], node_id_map)
 
+    mcf_nodes += generate_property_mcf_for_list(
+        UN_ENERGY_PROPERTY_RANGES.keys(), UN_ENERGY_PROPERTY_RANGES, None, node_id_map)
+    return mcf_nodes
