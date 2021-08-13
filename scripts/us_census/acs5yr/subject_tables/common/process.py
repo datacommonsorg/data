@@ -1,12 +1,27 @@
 """Process the data from Census ACS5Year Table S2201."""
 
 import csv
-from google.cloud import storage
 import io
+import os
+import requests
+import zipfile
+from absl import app
+from absl import flags
 
-_STAT_VAR_LIST = 'stat_vars.csv'
-_BUCKET = 'datcom-csv'
-_INPUT = 'census/acs5yr/subject_tables/s2201/'
+FLAGS = flags.FLAGS
+
+flags.DEFINE_string(
+    'output',
+    None,
+    'Path to folder for output files')
+flags.DEFINE_string(
+    'download_id',
+    None,
+    'Download id for input data')
+flags.DEFINE_string(
+    'stat_vars',
+    None,
+    'Path to list of supported stat_vars')
 
 _TMCF_TEMPLATE = """
 Node: E:S2201->E{index}
@@ -223,14 +238,24 @@ def create_tmcf(output, stat_vars):
                                       unit=unit))
 
 
-if __name__ == '__main__':
-    client = storage.Client()
-    f = open(_STAT_VAR_LIST)
+def main(argv):
+    f = open(FLAGS.stat_vars)
     stat_vars = f.read().splitlines()
     f.close()
-    create_csv('s2201.csv', stat_vars)
-    for blob in client.list_blobs(_BUCKET, prefix=_INPUT):
-        s = blob.download_as_string().decode('utf-8')
-        reader = csv.DictReader(io.StringIO(s))
-        write_csv(blob.name, reader, 's2201.csv', stat_vars)
-    create_tmcf('s2201.tmcf', stat_vars)
+    output_csv = os.path.join(FLAGS.output, 'output.csv')
+    create_csv(output_csv, stat_vars)
+    response = requests.get(
+      f'https://data.census.gov/api/access/table/download?download_id={FLAGS.download_id}')
+    with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
+      for filename in zf.namelist():
+        if 'data_with_overlays' in filename:
+          print(filename)
+          with zf.open(filename, 'r') as infile:
+            reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
+            write_csv(filename, reader, output_csv, stat_vars)
+    create_tmcf(os.path.join(FLAGS.output, 'output.tmcf'), stat_vars)
+
+
+if __name__ == '__main__':
+    flags.mark_flags_as_required(['output', 'download_id', 'stat_vars'])
+    app.run(main)

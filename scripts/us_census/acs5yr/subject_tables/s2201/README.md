@@ -3,25 +3,23 @@
 ## Input Data
 
 The data is downloaded from
-`https://www.census.gov/acs/www/data/data-tables-and-tools/subject-tables/` and
-is stored in GCS at
-`datcom-csv/census/acs5yr/subject_tables/s2201/`.
+`https://www.census.gov/acs/www/data/data-tables-and-tools/subject-tables/`.
 Currently, we have data from 2010-2019 and observations for the Statistical
 Variables listed in
-`stat_vars.csv`.
+`stat_vars.csv` for US states, counties, and places (cities).
 
 ## Generate Import Files
 
-To generate tMCF and CSV files:
+To generate TMCF and CSV files, from this folder, run:
 
 ```
-python3 process.py
+python3 ../common/process.py --output=../s2201 --download_id=481c88cbd59972e8aadea8f62d8bce06c7db242f4af880d2050b3ee377612286 --stat_vars=../s2201/stat_vars.csv
 ```
 
 The outputs will be
-`s2201.tmcf` and `s2201.csv`.
+`ouput.tmcf` and `output.csv`.
 
-To run unit tests:
+To run unit tests, from this folder, run:
 
 ```
 python3 process_test.py

@@ -1,16 +1,20 @@
-"""Tests for process.py."""
+"""Tests for process.py. for S2201"""
 
 import csv
 import os
 import tempfile
+import sys
 import unittest
 
-import process
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
+from common import process
 
 _STAT_VAR_LIST = 'stat_vars.csv'
-_TEST_DATA = 'testdata/'
-_EXPECTED_TMCF = 's2201.tmcf'
-
+_TEST_DATA = 'testdata'
+_EXPECTED_TMCF = 'output.tmcf'
 
 class ProcessTest(unittest.TestCase):
 
@@ -43,12 +47,12 @@ class ProcessTest(unittest.TestCase):
             process.create_csv(test_csv, stat_vars)
             for year in range(2010, 2020):
                 filename = f'testACSST5Y{year}.csv'
-                with open(_TEST_DATA + filename) as f:
+                with open(os.path.join(_TEST_DATA, filename)) as f:
                     reader = csv.DictReader(f)
                     process.write_csv(filename, reader, test_csv, stat_vars)
             with open(test_csv) as f_result:
                 test_result = f_result.read()
-                with open(_TEST_DATA + 'expected.csv') as f_test:
+                with open(os.path.join(_TEST_DATA, 'expected.csv')) as f_test:
                     expected = f_test.read()
                     self.assertEqual(test_result, expected)
             os.remove(test_csv)
@@ -66,7 +70,6 @@ class ProcessTest(unittest.TestCase):
                     expected = f_test.read()
                     self.assertEqual(test_result, expected)
             os.remove(test_tmcf)
-
 
 if __name__ == '__main__':
     unittest.main()
