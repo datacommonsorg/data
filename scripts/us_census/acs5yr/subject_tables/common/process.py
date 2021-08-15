@@ -77,7 +77,7 @@ def convert_column_to_stat_var(column, features):
             sv.append(features['properties'][p])
 
     # Set default base SV
-    if not base and 'base' in features:
+    if not base and 'base' in features and '_DEFAULT' in features['base']:
       sv = [features['base']['_DEFAULT']] + sv
 
     # Prefix MOE SVs
