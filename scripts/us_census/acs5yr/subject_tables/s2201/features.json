@@ -1,4 +1,8 @@
 {
+  "base": {
+    "Median income (dollars)": "Median_Income_Household",
+    "_DEFAULT": "Count_Household"
+  },
   "properties": {
     "Households receiving food stamps":
         "WithFoodStampsInThePast12Months",
