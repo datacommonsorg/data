@@ -42,6 +42,8 @@ value: C:Subject_Table->{stat_var}{unit}
 _UNIT_TEMPLATE = """
 unit: dcs:{unit}"""
 
+_IGNORED_VALUES = set(['**', '-', '***', '*****', 'N', '(X)', 'null'])
+
 def convert_column_to_stat_var(column, features):
     """Converts input CSV column name to Statistical Variable DCID."""
     s = column.split('!!')
@@ -124,9 +126,7 @@ def write_csv(filename, reader, output, features, stat_vars):
                 sv = valid_columns[c]
 
                 # Exclude missing values
-                if (row[c] == '**' or row[c] == '-' or row[c] == '***' or
-                        row[c] == '*****' or row[c] == 'N' or row[c] == '(X)' or
-                        row[c] == 'null'):
+                if row[c] in _IGNORED_VALUES:
                     continue
 
                 # Exclude percentages
