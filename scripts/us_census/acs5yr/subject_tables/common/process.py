@@ -45,15 +45,15 @@ unit: dcs:{unit}"""
 def convert_column_to_stat_var(column, features):
     """Converts input CSV column name to Statistical Variable DCID."""
     s = column.split('!!')
-    if 'Median income (dollars)' in s:
-        sv = ['Median_Income_Household']
-    else:
-        sv = ['Count_Household']
+    sv = []
+    base = False
     for p in s:
 
-        # Prefix MOE SVs
-        if p == 'Margin of Error':
-            sv = ['MarginOfError'] + sv
+        # Set base SV for special cases
+        if not base and 'base' in features:
+          if p in features['base']:
+            sv = [features['base'][p]] + sv
+            base = True
 
         # Skip implied properties
         if 'implied_properties' in features and p in features['implied_properties']:
@@ -71,7 +71,16 @@ def convert_column_to_stat_var(column, features):
             if 'inferred_properties' in features and p in features['inferred_properties'] and features['inferred_properties'][p] not in s:
               sv.append(features['properties'][features['inferred_properties'][p]])
 
+            # Add current property
             sv.append(features['properties'][p])
+
+    # Set default base SV
+    if not base and 'base' in features:
+      sv = [features['base']['_DEFAULT']] + sv
+
+    # Prefix MOE SVs
+    if 'Margin of Error' in s:
+      sv = ['MarginOfError'] + sv
     return '_'.join(sv)
 
 
