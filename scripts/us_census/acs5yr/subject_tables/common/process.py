@@ -116,6 +116,7 @@ def write_csv(filename, reader, output, features, stat_vars):
 
             new_row = {
                 'observationDate': observation_date,
+                # TODO: Expand to support other prefixes?
                 'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
             }
             for c in row:
