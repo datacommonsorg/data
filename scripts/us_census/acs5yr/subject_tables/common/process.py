@@ -2,6 +2,7 @@
 
 import csv
 import io
+import json
 import os
 import requests
 import zipfile
@@ -19,6 +20,11 @@ flags.DEFINE_string(
     None,
     'Download id for input data')
 flags.DEFINE_string(
+    'features',
+    None,
+    'JSON of feature maps'
+)
+flags.DEFINE_string(
     'stat_vars',
     None,
     'Path to list of supported stat_vars')
@@ -34,101 +40,9 @@ value: C:S2201->{stat_var}{unit}
 """
 
 _UNIT_TEMPLATE = """
-unit: dcs:USDollar"""
+unit: dcs:{unit}"""
 
-_FEATURE_TO_PROPERTY = {
-    'Households receiving food stamps':
-        'WithFoodStampsInThePast12Months',
-    'Households receiving food stamps/SNAP':
-        'WithFoodStampsInThePast12Months',
-    'Households receiving food stamps/SNAP MOE':
-        'WithFoodStampsInThePast12Months',
-    'With one or more people 60 years and over':
-        'WithPeopleOver60',
-    'With one or more people in the household 60 years and over':
-        'WithPeopleOver60',
-    'No people in the household 60 years and over':
-        'WithoutPeopleOver60',
-    'Married-couple family':
-        'MarriedCoupleFamilyHousehold',
-    'Other family':
-        'OtherFamilyHousehold',
-    'Other family:':
-        'OtherFamilyHousehold',
-    'Male householder, no wife present':
-        'SingleFatherFamilyHousehold',
-    'Male householder, no spouse present':
-        'SingleFatherFamilyHousehold',
-    'Female householder, no husband present':
-        'SingleMotherFamilyHousehold',
-    'Female householder, no spouse present':
-        'SingleMotherFamilyHousehold',
-    'Nonfamily households':
-        'NonfamilyHousehold',
-    'With children under 18 years':
-        'WithChildrenUnder18',
-    'No children under 18 years':
-        'WithoutChildrenUnder18',
-    'Below poverty level':
-        'BelowPovertyLevelInThePast12Months',
-    'At or above poverty level':
-        'AbovePovertyLevelInThePast12Months',
-    'At or above  poverty level':
-        'AbovePovertyLevelInThePast12Months',
-    'With one or more people with a disability':
-        'WithDisability',
-    'With no persons with a disability':
-        'NoDisability',
-    'One race':
-        'OneRace',
-    'White':
-        'WhiteAlone',
-    'White alone':
-        'WhiteAlone',
-    'Black or African American':
-        'BlackOrAfricanAmericanAlone',
-    'Black or African American alone':
-        'BlackOrAfricanAmericanAlone',
-    'American Indian and Alaska Native':
-        'AmericanIndianOrAlaskaNativeAlone',
-    'American Indian and Alaska Native alone':
-        'AmericanIndianOrAlaskaNativeAlone',
-    'Asian':
-        'AsianAlone',
-    'Asian alone':
-        'AsianAlone',
-    'Native Hawaiian and Other Pacific Islander':
-        'NativeHawaiianOrOtherPacificIslanderAlone',
-    'Native Hawaiian and Other Pacific Islander alone':
-        'NativeHawaiianOrOtherPacificIslanderAlone',
-    'Some other race':
-        'SomeOtherRaceAlone',
-    'Some other race alone':
-        'SomeOtherRaceAlone',
-    'Two or more races':
-        'TwoOrMoreRaces',
-    'Hispanic or Latino origin (of any race)':
-        'HispanicOrLatino',
-    'White alone, not Hispanic or Latino':
-        'WhiteAloneNotHispanicOrLatino',
-    'Families':
-        'FamilyHousehold',
-    'No workers in past 12 months':
-        'NoWorkersInThePast12Months',
-    '1 worker in past 12 months':
-        'OneWorkerInThePast12Months',
-    '2 or more workers in past 12 months':
-        'TwoOrMoreWorkersInThePast12Months',
-    'Households not receiving food stamps':
-        'WithoutFoodStampsInThePast12Months',
-    'Households not receiving food stamps/SNAP':
-        'WithoutFoodStampsInThePast12Months',
-    'Households not receiving food stamps/SNAP MOE':
-        'WithoutFoodStampsInThePast12Months',
-}
-
-
-def convert_column_to_stat_var(column):
+def convert_column_to_stat_var(column, features):
     """Converts input CSV column name to Statistical Variable DCID."""
     s = column.split('!!')
     if 'Median income (dollars)' in s:
@@ -141,31 +55,23 @@ def convert_column_to_stat_var(column):
         if p == 'Margin of Error':
             sv = ['MarginOfError'] + sv
 
-        # Only include the most specific enum value when there are multiple
-        elif p == 'Other family:' and (
-                'Male householder, no spouse present' in s or
-                'Female householder, no spouse present' in s):
-            continue
-        elif p == 'Other family' and (
-                'Male householder, no wife present' in s or
-                'Female householder, no husband present' in s):
-            continue
-        elif p == 'One race' and (
-                'White' in s or 'Black or African American' in s or
-                'American Indian and Alaska Native' in s or 'Asian' in s or
-                'Native Hawaiian and Other Pacific Islander' in s or
-                'Some other race' in s):
+        # Skip implied properties
+        if 'implied_properties' in features and p in features['implied_properties']:
+          dependent = False
+          for feature in features['implied_properties'][p]:
+            if feature in s:
+              dependent = True
+              break
+          if dependent:
             continue
 
-        elif p in _FEATURE_TO_PROPERTY:
+        if 'properties' in features and p in features['properties']:
 
-            # Work status is only provided for FamilyHousehold
-            if ((p == 'No workers in past 12 months' or
-                 p == '1 worker in past 12 months' or
-                 p == '2 or more workers in past 12 months') and
-                    'Families' not in s):
-                sv.append(_FEATURE_TO_PROPERTY['Families'])
-            sv.append(_FEATURE_TO_PROPERTY[p])
+            # Add inferred properties
+            if 'inferred_properties' in features and p in features['inferred_properties'] and features['inferred_properties'][p] not in s:
+              sv.append(features['properties'][features['inferred_properties'][p]])
+
+            sv.append(features['properties'][p])
     return '_'.join(sv)
 
 
@@ -177,7 +83,7 @@ def create_csv(output, stat_vars):
         writer.writeheader()
 
 
-def write_csv(filename, reader, output, stat_vars):
+def write_csv(filename, reader, output, features, stat_vars):
     """Reads input_file and writes cleaned CSV to output."""
     if 'ACSST5Y' not in filename:
         return
@@ -192,7 +98,7 @@ def write_csv(filename, reader, output, stat_vars):
 
                 # Map feature names to stat vars
                 for c in row:
-                    sv = convert_column_to_stat_var(row[c])
+                    sv = convert_column_to_stat_var(row[c], features)
                     if sv in stat_var_set:
                         valid_columns[c] = sv
                 continue
@@ -226,19 +132,22 @@ def write_csv(filename, reader, output, stat_vars):
             writer.writerow(new_row)
 
 
-def create_tmcf(output, stat_vars):
+def create_tmcf(output, features, stat_vars):
     """Writes tMCF to output."""
     with open(output, 'w') as f_out:
         for i in range(len(stat_vars)):
             unit = ''
-            if 'Income' in stat_vars[i]:
-                unit = _UNIT_TEMPLATE
+            if stat_vars[i] in features['units']:
+                unit = _UNIT_TEMPLATE.format(unit=features['units'][stat_vars[i]])
             f_out.write(
                 _TMCF_TEMPLATE.format(index=i, stat_var=stat_vars[i],
                                       unit=unit))
 
 
 def main(argv):
+    f = open(FLAGS.features)
+    features = json.load(f)
+    f.close()
     f = open(FLAGS.stat_vars)
     stat_vars = f.read().splitlines()
     f.close()
@@ -252,10 +161,10 @@ def main(argv):
           print(filename)
           with zf.open(filename, 'r') as infile:
             reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-            write_csv(filename, reader, output_csv, stat_vars)
-    create_tmcf(os.path.join(FLAGS.output, 'output.tmcf'), stat_vars)
+            write_csv(filename, reader, output_csv, features, stat_vars)
+    create_tmcf(os.path.join(FLAGS.output, 'output.tmcf'), features, stat_vars)
 
 
 if __name__ == '__main__':
-    flags.mark_flags_as_required(['output', 'download_id', 'stat_vars'])
+    flags.mark_flags_as_required(['output', 'download_id', 'features', 'stat_vars'])
     app.run(main)
