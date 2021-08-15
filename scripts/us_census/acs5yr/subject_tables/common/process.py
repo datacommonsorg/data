@@ -30,13 +30,13 @@ flags.DEFINE_string(
     'Path to list of supported stat_vars')
 
 _TMCF_TEMPLATE = """
-Node: E:S2201->E{index}
+Node: E:Subject_Table->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
 measurementMethod: dcs:CensusACS5yrSurvey
-observationDate: C:S2201->observationDate
-observationAbout: C:S2201->observationAbout
-value: C:S2201->{stat_var}{unit}
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->{stat_var}{unit}
 """
 
 _UNIT_TEMPLATE = """
