@@ -1,0 +1,125 @@
+{
+  "base": {
+    "Median income (dollars)": "Median_Income_Household",
+    "_DEFAULT": "Count_Household"
+  },
+  "properties": {
+    "Households receiving food stamps":
+        "WithFoodStampsInThePast12Months",
+    "Households receiving food stamps/SNAP":
+        "WithFoodStampsInThePast12Months",
+    "Households receiving food stamps/SNAP MOE":
+        "WithFoodStampsInThePast12Months",
+    "With one or more people 60 years and over":
+        "WithPeopleOver60",
+    "With one or more people in the household 60 years and over":
+        "WithPeopleOver60",
+    "No people in the household 60 years and over":
+        "WithoutPeopleOver60",
+    "Married-couple family":
+        "MarriedCoupleFamilyHousehold",
+    "Other family":
+        "OtherFamilyHousehold",
+    "Other family:":
+        "OtherFamilyHousehold",
+    "Male householder, no wife present":
+        "SingleFatherFamilyHousehold",
+    "Male householder, no spouse present":
+        "SingleFatherFamilyHousehold",
+    "Female householder, no husband present":
+        "SingleMotherFamilyHousehold",
+    "Female householder, no spouse present":
+        "SingleMotherFamilyHousehold",
+    "Nonfamily households":
+        "NonfamilyHousehold",
+    "With children under 18 years":
+        "WithChildrenUnder18",
+    "No children under 18 years":
+        "WithoutChildrenUnder18",
+    "Below poverty level":
+        "BelowPovertyLevelInThePast12Months",
+    "At or above poverty level":
+        "AbovePovertyLevelInThePast12Months",
+    "At or above  poverty level":
+        "AbovePovertyLevelInThePast12Months",
+    "With one or more people with a disability":
+        "WithDisability",
+    "With no persons with a disability":
+        "NoDisability",
+    "One race":
+        "OneRace",
+    "White":
+        "WhiteAlone",
+    "White alone":
+        "WhiteAlone",
+    "Black or African American":
+        "BlackOrAfricanAmericanAlone",
+    "Black or African American alone":
+        "BlackOrAfricanAmericanAlone",
+    "American Indian and Alaska Native":
+        "AmericanIndianOrAlaskaNativeAlone",
+    "American Indian and Alaska Native alone":
+        "AmericanIndianOrAlaskaNativeAlone",
+    "Asian":
+        "AsianAlone",
+    "Asian alone":
+        "AsianAlone",
+    "Native Hawaiian and Other Pacific Islander":
+        "NativeHawaiianOrOtherPacificIslanderAlone",
+    "Native Hawaiian and Other Pacific Islander alone":
+        "NativeHawaiianOrOtherPacificIslanderAlone",
+    "Some other race":
+        "SomeOtherRaceAlone",
+    "Some other race alone":
+        "SomeOtherRaceAlone",
+    "Two or more races":
+        "TwoOrMoreRaces",
+    "Hispanic or Latino origin (of any race)":
+        "HispanicOrLatino",
+    "White alone, not Hispanic or Latino":
+        "WhiteAloneNotHispanicOrLatino",
+    "Families":
+        "FamilyHousehold",
+    "No workers in past 12 months":
+        "NoWorkersInThePast12Months",
+    "1 worker in past 12 months":
+        "OneWorkerInThePast12Months",
+    "2 or more workers in past 12 months":
+        "TwoOrMoreWorkersInThePast12Months",
+    "Households not receiving food stamps":
+        "WithoutFoodStampsInThePast12Months",
+    "Households not receiving food stamps/SNAP":
+        "WithoutFoodStampsInThePast12Months",
+    "Households not receiving food stamps/SNAP MOE":
+        "WithoutFoodStampsInThePast12Months"
+  },
+  "implied_properties": {
+    "Other family:": [
+      "Male householder, no spouse present",
+      "Female householder, no spouse present"
+    ],
+    "Other family": [
+      "Male householder, no wife present",
+      "Female householder, no husband present"
+    ],
+    "One race": [
+      "White",
+      "Black or African American",
+      "American Indian and Alaska Native",
+      "Asian",
+      "Native Hawaiian and Other Pacific Islander",
+      "Some other race"
+    ]
+  },
+  "inferred_properties": {
+    "No workers in past 12 months": "Families",
+    "1 worker in past 12 months": "Families",
+    "2 or more workers in past 12 months": "Families"
+  },
+  "units": {
+    "Median_Income_Household_WithFoodStampsInThePast12Months": "USDollar",
+    "MarginOfError_Median_Income_Household_WithFoodStampsInThePast12Months": "USDollar",
+    "Median_Income_Household_WithoutFoodStampsInThePast12Months": "USDollar",
+    "MarginOfError_Median_Income_Household_WithoutFoodStampsInThePast12Months": "USDollar"
+  }
+}
