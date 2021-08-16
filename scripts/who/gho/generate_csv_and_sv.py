@@ -288,7 +288,7 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
                     writer.writerow([
                         val_to_write.get("time_dim_value"),
                         val_to_write.get("time_period"),
-                        f"country/{spatial_dim}", f"dcs:{sv_dcid}",
+                        f"dcid:country/{spatial_dim}", f"dcs:{sv_dcid}",
                         val_to_write.get("value")
                     ])
         with open(os.path.join(output_dir, "who_sv.mcf"), "w+") as mcf_file:

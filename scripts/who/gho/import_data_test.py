@@ -44,7 +44,6 @@ class TestImportData(unittest.TestCase):
             TEST_DATA_DIR, "expected_generated_schema.mcf")
 
         import_data(data_files, curated_dim_map, TEST_DATA_DIR, "")
-        #generate_csv_and_sv(data_files, schema_mapping, TEST_DATA_DIR)
 
         # check csv.
         with open(os.path.join(TEST_DATA_DIR, "who.csv"), 'r+') as actual_f:
