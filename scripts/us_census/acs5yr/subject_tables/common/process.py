@@ -11,23 +11,10 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'output',
-    None,
-    'Path to folder for output files')
-flags.DEFINE_string(
-    'download_id',
-    None,
-    'Download id for input data')
-flags.DEFINE_string(
-    'features',
-    None,
-    'JSON of feature maps'
-)
-flags.DEFINE_string(
-    'stat_vars',
-    None,
-    'Path to list of supported stat_vars')
+flags.DEFINE_string('output', None, 'Path to folder for output files')
+flags.DEFINE_string('download_id', None, 'Download id for input data')
+flags.DEFINE_string('features', None, 'JSON of feature maps')
+flags.DEFINE_string('stat_vars', None, 'Path to list of supported stat_vars')
 
 _TMCF_TEMPLATE = """
 Node: E:Subject_Table->E{index}
@@ -44,6 +31,7 @@ unit: dcs:{unit}"""
 
 _IGNORED_VALUES = set(['**', '-', '***', '*****', 'N', '(X)', 'null'])
 
+
 def convert_column_to_stat_var(column, features):
     """Converts input CSV column name to Statistical Variable DCID."""
     s = column.split('!!')
@@ -53,36 +41,40 @@ def convert_column_to_stat_var(column, features):
 
         # Set base SV for special cases
         if not base and 'base' in features:
-          if p in features['base']:
-            sv = [features['base'][p]] + sv
-            base = True
+            if p in features['base']:
+                sv = [features['base'][p]] + sv
+                base = True
 
         # Skip implied properties
-        if 'implied_properties' in features and p in features['implied_properties']:
-          dependent = False
-          for feature in features['implied_properties'][p]:
-            if feature in s:
-              dependent = True
-              break
-          if dependent:
-            continue
+        if 'implied_properties' in features and p in features[
+                'implied_properties']:
+            dependent = False
+            for feature in features['implied_properties'][p]:
+                if feature in s:
+                    dependent = True
+                    break
+            if dependent:
+                continue
 
         if 'properties' in features and p in features['properties']:
 
             # Add inferred properties
-            if 'inferred_properties' in features and p in features['inferred_properties'] and features['inferred_properties'][p] not in s:
-              sv.append(features['properties'][features['inferred_properties'][p]])
+            if 'inferred_properties' in features and p in features[
+                    'inferred_properties'] and features['inferred_properties'][
+                        p] not in s:
+                sv.append(
+                    features['properties'][features['inferred_properties'][p]])
 
             # Add current property
             sv.append(features['properties'][p])
 
     # Set default base SV
     if not base and 'base' in features and '_DEFAULT' in features['base']:
-      sv = [features['base']['_DEFAULT']] + sv
+        sv = [features['base']['_DEFAULT']] + sv
 
     # Prefix MOE SVs
     if 'Margin of Error' in s:
-      sv = ['MarginOfError'] + sv
+        sv = ['MarginOfError'] + sv
     return '_'.join(sv)
 
 
@@ -148,7 +140,8 @@ def create_tmcf(output, features, stat_vars):
         for i in range(len(stat_vars)):
             unit = ''
             if stat_vars[i] in features['units']:
-                unit = _UNIT_TEMPLATE.format(unit=features['units'][stat_vars[i]])
+                unit = _UNIT_TEMPLATE.format(
+                    unit=features['units'][stat_vars[i]])
             f_out.write(
                 _TMCF_TEMPLATE.format(index=i, stat_var=stat_vars[i],
                                       unit=unit))
@@ -164,17 +157,19 @@ def main(argv):
     output_csv = os.path.join(FLAGS.output, 'output.csv')
     create_csv(output_csv, stat_vars)
     response = requests.get(
-      f'https://data.census.gov/api/access/table/download?download_id={FLAGS.download_id}')
+        f'https://data.census.gov/api/access/table/download?download_id={FLAGS.download_id}'
+    )
     with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
-      for filename in zf.namelist():
-        if 'data_with_overlays' in filename:
-          print(filename)
-          with zf.open(filename, 'r') as infile:
-            reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-            write_csv(filename, reader, output_csv, features, stat_vars)
+        for filename in zf.namelist():
+            if 'data_with_overlays' in filename:
+                print(filename)
+                with zf.open(filename, 'r') as infile:
+                    reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
+                    write_csv(filename, reader, output_csv, features, stat_vars)
     create_tmcf(os.path.join(FLAGS.output, 'output.tmcf'), features, stat_vars)
 
 
 if __name__ == '__main__':
-    flags.mark_flags_as_required(['output', 'download_id', 'features', 'stat_vars'])
+    flags.mark_flags_as_required(
+        ['output', 'download_id', 'features', 'stat_vars'])
     app.run(main)
