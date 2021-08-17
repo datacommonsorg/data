@@ -16,7 +16,7 @@ STATS:
 	output_csv_rows = 2904
 	output_stat_vars = 2154
 	outputs_with_fuel_dcid = 2758
-	total_time_seconds = 0.09062871686182916
+	total_time_seconds = 0.0883976190816611
 
 
 STATS:
@@ -2175,7 +2175,7 @@ STATS:
 	Annual_Stocks_Energy_VegetalWaste = 1
 	Annual_Stocks_Energy_WhiteSpirit = 1
 
-Processing rate: 32451.08 rows/sec
+Processing rate: 33270.13 rows/sec
 
 STATS:
 	AdditivesOxygenates = 1
