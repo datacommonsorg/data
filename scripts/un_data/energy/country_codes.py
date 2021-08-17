@@ -45,6 +45,7 @@ UN_COUNTRY_CODES = {
     64: 'country/BTN',  # Bhutan, BT
     68: 'country/BOL',  # Bolivia, Plurinational State of, BO
     68: 'country/BOL',  # Bolivia, BO
+    535: 'country/BES',  # Bonaire St Eustatius Saba, BQ
     70: 'country/BIH',  # Bosnia and Herzegovina, BA
     72: 'country/BWA',  # Botswana, BW
     74: 'country/BVT',  # Bouvet Island, BV
@@ -76,6 +77,7 @@ UN_COUNTRY_CODES = {
     384: 'country/CIV',  # Ivory Coast, CI
     191: 'country/HRV',  # Croatia, HR
     192: 'country/CUB',  # Cuba, CU
+    531: 'country/CUW',  # Curacao, CW
     196: 'country/CYP',  # Cyprus, CY
     200: 'country/CZE',  # Czechoslovakia (former), CZ (additional)
     203: 'country/CZE',  # Czech Republic, CZ
@@ -247,6 +249,8 @@ UN_COUNTRY_CODES = {
     728: 'country/SSD',  # South Sudan, SS
     724: 'country/ESP',  # Spain, ES
     144: 'country/LKA',  # Sri Lanka, LK
+    534: 'country/SXM',  # Sint Maarten (Dutch part), SX
+    729: 'country/SDN',  # Sudan, SD
     736: 'country/SDN',  # Sudan, SD
     740: 'country/SUR',  # Suriname, SR
     744: 'country/SJM',  # Svalbard and Jan Mayen, SJ
@@ -294,6 +298,7 @@ UN_COUNTRY_CODES = {
     887: 'country/YEM',  # Yemen, YE
     890: 'country/YUG',  # Yugoslavia (former), YU (additional)
     894: 'country/ZMB',  # Zambia, ZM
+    716: 'country/ZWE',  # Zimbabwe, ZW
 }
 
 

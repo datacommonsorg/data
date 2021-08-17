@@ -45,6 +45,7 @@ flags.DEFINE_list('csv_data_files', [],
 flags.DEFINE_string('dataset_name', 'undata-energy',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
+flags.DEFINE_integer('debug_lines', 1000, 'Print error logs every N lines')
 flags.DEFINE_string(
     'schema_mcf', '', 'Generate schema MCF nodes for enums and properties')
 
@@ -77,10 +78,10 @@ def _print_counters(counters, steps=None):
 
 
 def _add_error_counter(counter_name: str, error_msg: str, counters):
-    counters[counter_name] += 1
     print_debug(2, "Error: ", counter_name, error_msg)
-    if counters[counter_name] % 1000 == 1:
+    if counters[counter_name] % FLAGS.debug_lines == 0:
         print("ERROR: ", counter_name, ": ", error_msg)
+    counters[counter_name] += 1
 
 
 def add_property_value_name(pv_dict, prop: str, name_list, ignore_list=None):

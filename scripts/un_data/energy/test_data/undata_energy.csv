@@ -128,6 +128,7 @@ Biogasoline,dcs:country/UKR,2018,4,dcid:MetricTon,1000,,Annual_Generation_Energy
 Biogasoline,dcs:country/GBR,2019,208,dcid:MetricTon,1000,,Annual_Generation_Energy_Biogasoline
 Biogasoline,dcs:country/USA,2019,46385,dcid:MetricTon,1000,,Annual_Generation_Energy_Biogasoline
 Biogasoline,dcs:country/URY,2019,64.6,dcid:MetricTon,1000,,Annual_Generation_Energy_Biogasoline
+Biogasoline,dcs:country/ZWE,2018,62,dcid:MetricTon,1000,,Annual_Generation_Energy_Biogasoline
 AdditivesOxygenates,dcs:country/BLR,2017,20,dcid:MetricTon,1000,,Annual_Receipt_Energy_AdditivesOxygenates
 AdditivesOxygenates,dcs:country/BRN,2018,9,dcid:MetricTon,1000,,Annual_Imports_Energy_AdditivesOxygenates
 AdditivesOxygenates,dcs:country/KHM,2018,2,dcid:MetricTon,1000,,Annual_Imports_Energy_AdditivesOxygenates
@@ -170,6 +171,7 @@ AviationGasoline,dcs:country/TCD,2018,2.7,dcid:MetricTon,1000,dcs:True,Annual_Im
 AviationGasoline,dcs:country/COM,2019,1.26,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy_AviationGasoline
 AviationGasoline,dcs:country/COG,1998,0,dcid:MetricTon,1000,,Annual_Generation_Energy_AviationGasoline
 AviationGasoline,dcs:country/CIV,2006,1,dcid:MetricTon,1000,,Annual_Imports_Energy_AviationGasoline
+AviationGasoline,dcs:country/CUW,2018,4,dcid:MetricTon,1000,,Annual_Generation_Energy_AviationGasoline
 AviationGasoline,dcs:country/COD,2000,1,dcid:MetricTon,1000,,Annual_Imports_Energy_AviationGasoline
 AviationGasoline,dcs:country/DJI,2019,0.8,dcid:MetricTon,1000,,Annual_Imports_Energy_AviationGasoline
 AviationGasoline,dcs:country/DOM,2018,0.49,dcid:MetricTon,1000,,Annual_Imports_Energy_AviationGasoline
@@ -272,6 +274,7 @@ Bagasse,dcs:country/MOZ,2018,951,dcid:MetricTon,1000,dcs:True,Annual_Generation_
 Bagasse,dcs:country/RWA,2019,17,dcid:MetricTon,1000,dcs:True,Annual_Generation_Energy_Bagasse
 Bagasse,dcs:country/SOM,2019,71.224148871421,dcid:MetricTon,1000,dcs:True,Annual_Generation_Energy_Bagasse
 Bagasse,dcs:country/KNA,2005,65,dcid:MetricTon,1000,,Annual_Generation_Energy_Bagasse
+Bagasse,dcs:country/SDN,2018,2200,dcid:MetricTon,1000,dcs:True,Annual_Generation_Energy_Bagasse
 Bagasse,dcs:country/VNM,2018,6285.6347366649,dcid:MetricTon,1000,dcs:True,Annual_Generation_Energy_Bagasse
 dcs:EIA_BituminousCoal,dcs:country/BHR,2019,331,dcid:MetricTon,1000,,Annual_Generation_Energy_EIA_BituminousCoal
 dcs:EIA_BituminousCoal,dcs:country/BTN,2018,26.76,dcid:MetricTon,1000,,Annual_Imports_Energy_EIA_BituminousCoal
@@ -285,6 +288,7 @@ dcs:EIA_BituminousCoal,dcs:country/SPM,1997,0,dcid:MetricTon,1000,,Annual_Import
 dcs:EIA_BituminousCoal,dcs:country/PSE,2018,33.6,dcid:MetricTon,1000,,Annual_Imports_Energy_EIA_BituminousCoal
 Charcoal,dcs:country/AND,2018,0.029,dcid:MetricTon,1000,,Annual_Imports_Energy_Charcoal
 Charcoal,dcs:country/ABW,2018,0.239,dcid:MetricTon,1000,,Annual_Generation_Energy_Charcoal
+Charcoal,dcs:country/BES,2019,0.1,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy_Charcoal
 Charcoal,dcs:country/VGB,2019,0.078,dcid:MetricTon,1000,dcs:True,Annual_Generation_Energy_Charcoal
 Charcoal,dcs:country/DMA,2018,0.234,dcid:MetricTon,1000,,Annual_Generation_Energy_Charcoal
 Charcoal,dcs:country/GMB,2018,69.328,dcid:MetricTon,1000,,Annual_Generation_Energy_Charcoal
@@ -293,6 +297,7 @@ Charcoal,dcs:country/GNB,2019,78.7,dcid:MetricTon,1000,dcs:True,Annual_Generatio
 Charcoal,dcs:country/FSM,2018,0.38,dcid:MetricTon,1000,,Annual_Generation_Energy_Charcoal
 Charcoal,dcs:country/MNG,1998,0.01,dcid:MetricTon,1000,,Annual_Imports_Energy_Charcoal
 Charcoal,dcs:country/QAT,2019,0.78,dcid:MetricTon,1000,,Annual_Generation_Energy_Charcoal
+Charcoal,dcs:country/SXM,2019,0.1,dcid:MetricTon,1000,dcs:True,Annual_Imports_Energy_Charcoal
 Charcoal,dcs:country/SSD,2018,9,dcid:MetricTon,1000,,Annual_Generation_Energy_Charcoal
 Charcoal,dcs:country/TKM,2018,10,dcid:MetricTon,1000,,Annual_Imports_Energy_Charcoal
 Charcoal,dcs:country/TCA,2018,0.151,dcid:MetricTon,1000,,Annual_Generation_Energy_Charcoal
