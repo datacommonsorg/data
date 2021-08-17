@@ -123,9 +123,21 @@ def generate_stat_var(data_row, sv_pv, counters=None) -> str:
     if data_sv_pv is None or len(data_sv_pv) == 0:
         return None
     sv_pv.update(data_sv_pv)
+    fuel_dcid = data_row['Fuel_dcid']
+    if 'energySource' in sv_pv:
+        energy_dcid = sv_pv['energySource']
+        if fuel_dcid != energy_dcid:
+            _add_error_counter('error_mismatch_energy_source',
+                               f'Mismatch in energySource:{energy_dcid} ' +
+                               f'!= Fuel:{fuel_dcid} for {sv_pv}',
+                               counters)
+    elif fuel_dcid is not None:
+        sv_pv['energySource'] = fuel_dcid
+        counters['outputs_with_fuel_dcid'] += 1
     node_name = get_stat_var_id(sv_pv)
     if node_name is None or len(node_name) == 0:
-        _add_error_counter('error_null_stat_var_name', counters)
+        _add_error_counter('error_null_stat_var_name',
+                           f'No node id for statVar {sv_pv}', counters)
         return None
     return node_name
 

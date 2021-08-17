@@ -18,6 +18,7 @@ from typing import List
 import re
 
 # Map from UNData Energy commodity codes to EnergySourceEnum
+# Used as values for property: energySource
 UN_ENERGY_CODES = {
     'AO':  'AdditivesOxygenates',  # new
     'AW':  'AnimalWaste',  # new
@@ -155,7 +156,7 @@ UN_ENERGY_FUEL_TYPE = {
 # TODO(ajaits): extent dcid:PowerPlantSectorEnum
 # values for property: energyGeneratingPlantType
 UN_ENERGY_PLANT_TYPE = {
-    'C': 'CHPGeneratingPowerPlant',
+    'C': 'CombinedHeatPowerGeneratingPowerPlant',
     'H': 'HeatGeneratingPowerPlant',
     'E': 'ElectricityGeneratingPowerPlant',  # use dcid:ElectricUtility?
 }
@@ -216,8 +217,8 @@ UN_ENERGY_USAGE_CODES = {
     '088': 'ElectricityGeneration',  # new
     '08811': 'ElectricityMainActivityProducer',  # new
     '08812': 'ElectricityAutoproducer',  # new
-    '08821': 'CHPMainActivityProducers',  # new
-    '08822': 'CHPAutoproducer',  # new
+    '08821': 'CombinedHeatPowerMainActivityProducers',  # new
+    '08822': 'CombinedHeatPowerAutoproducer',  # new
     '08831': 'HeatPlantMainActivityProducer',  # new
     '08832': 'HeatPlantAutoproducer',  # new
 
@@ -239,23 +240,23 @@ UN_ENERGY_USAGE_CODES = {
     '0931': 'NaturalGasPlants',  # new
     '0932': 'GasToLiquidPlants',  # new
     '0933': 'CharcoalPlants',  # new
-    '0934': 'LNGPlants',  # new
+    '0934': 'LiquifiedNaturalGasPlants',  # new
 }
 
 UN_ENERGY_FLOW_CODES = {
-    '01prop': 'energyGeneration',  # new
-    '02': 'receipts',  # new
+    '01prop': 'generation',  # new
+    '02': 'receipt',  # new
     '03': 'imports',  # new
     '04': 'exports',  # new
-    '06': 'fuelStocks',  # new
-    '07': 'energyProductTransfer',  # new
+    '06': 'stocks',  # new
+    '07': 'productReclassification',  # new
     '11': 'nonEnergyConsumption',  # new
-    'NA': 'energyConsumption',  # new
+    'NA': 'consumption',  # new
     'GA': 'energySupply',  # new
     '21': 'energyStocksOpening',  # new
     '22': 'energyStocksClosing',  # new
-    '15': 'energyReserves',  # new
-    '16': 'energyReserves',  # new
+    '15': 'energyReserve',  # new
+    '16': 'energyReserve',  # new
     '10': 'energyLoss',  # new
 }
 
@@ -292,7 +293,7 @@ UN_ENERGY_CAPACITY_CODES = {
 UN_ENERGY_LOSS_CODES = {
     '101': 'EnergyLost',  # new
     '103': 'EnergyReInjected',  # new
-    '104': 'GasLostAsFlaredVented',  # new
+    '104': 'GasLostFlaredAndVented',  # new
     '104A': 'GasLostFlared',  # new
     '104B': 'GasLostVented',  # new
     '105': 'FuelLossDuringExtraction',  # new
@@ -352,7 +353,7 @@ def get_pv_for_production_code(code: str, counters=None) -> {str: str}:
        FuelType:
           1 or 2 letter code
        PlantType:
-          C: CHP plant
+          C: CombinedHeatPower plant
           E: Electricity plant
           H: Heat plant
     """
@@ -361,7 +362,7 @@ def get_pv_for_production_code(code: str, counters=None) -> {str: str}:
         return pv
     code = code.removeprefix('01')
     # Add default production variables.
-    pv['measuredProperty'] = 'dcs:energyGeneration'
+    pv['measuredProperty'] = 'dcs:generation'
 
     # Add an optional producer type.
     if add_pv_from_map('energyProducerType', code[:1], UN_ENERGY_PRODUCER_TYPE, pv):
@@ -395,7 +396,7 @@ def get_pv_for_consumption_code(code: str, counters=None) -> {str: str}:
     if not code.startswith('12'):
         return pv
     code = code.removeprefix('12')
-    pv['measuredProperty'] = 'dcs:energyConsumption'  # new
+    pv['measuredProperty'] = 'dcs:consumption'  # new
     if not add_pv_from_map_for_prefix('energyConsumerType', code,
                                       UN_ENERGY_CONSUMING_INDUSTRY, pv):
         counters['error_ignored_consumer_code'] += 1
@@ -408,7 +409,7 @@ def get_pv_for_capacity_code(code: str, counters=None) -> {str: str}:
         return pv
     code = code.removeprefix('13')
     # TODO(ajaits): create a new code for capacity?
-    pv['measuredProperty'] = 'dcs:energyGeneration'
+    pv['measuredProperty'] = 'dcs:generation'
     if not add_pv_from_map_for_prefix('energySource', code, UN_ENERGY_CAPACITY_CODES, pv):
         counters['error_ignored_capacity_code'] += 1
     return pv
@@ -431,7 +432,7 @@ def get_pv_for_energy_code(code: str, counters=None) -> {str: str}:
 
     pv = {}
     if add_pv_from_map_for_prefix('energyConsumerType', code, UN_ENERGY_USAGE_CODES, pv):
-        pv['measuredProperty'] = 'dcs:energyConsumption'  # new
+        pv['measuredProperty'] = 'dcs:consumption'  # new
         return pv
 
     if code.startswith('10'):
@@ -603,9 +604,9 @@ def generate_un_energy_code_enums(node_id_map):
                                             node_id_map)
     mcf_nodes += generate_enum_mcf_for_list('EnergySourceEnum', UN_ENERGY_CAPACITY_CODES.values(),
                                             node_id_map)
-    mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_LOSS_CODES.values(),
+    mcf_nodes += generate_enum_mcf_for_list('EnergyLossEnum', UN_ENERGY_LOSS_CODES.values(),
                                             node_id_map)
-    mcf_nodes += generate_enum_mcf_for_list('EnergyConsumerEnum', UN_ENERGY_RESERVE_CODES.values(),
+    mcf_nodes += generate_enum_mcf_for_list('EnergyReservesEnum', UN_ENERGY_RESERVE_CODES.values(),
                                             node_id_map)
     mcf_nodes += generate_property_mcf_for_list(
         UN_ENERGY_FLOW_CODES.values(), {}, ['Number'], node_id_map)
