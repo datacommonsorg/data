@@ -107,7 +107,7 @@ def get_energy_source_dcid(fuel_type: str) -> str:
         return UN_ENERGY_CODES[fuel_type]
     return None
 
-
+# Types of EnergyProducerEnum
 # Values for property: energyProducerType
 UN_ENERGY_PRODUCER_TYPE = {
     '0': 'OffShore',
@@ -119,6 +119,8 @@ UN_ENERGY_PRODUCER_TYPE = {
     '9': None,  # net production
 }
 
+# Types of EnergySourceEnum
+# TODO(ajaits): should this be EnergySourceTypeEnum for energySourceType?
 # Values for property: energySource
 UN_ENERGY_FUEL_TYPE = {
     'C': 'CombustibleFuel',
@@ -154,7 +156,8 @@ UN_ENERGY_FUEL_TYPE = {
 }
 
 # TODO(ajaits): extent dcid:PowerPlantSectorEnum
-# values for property: energyGeneratingPlantType
+# Types for EnergyProducerEnum
+# values for property: energyProducerType
 UN_ENERGY_PLANT_TYPE = {
     'C': 'CombinedHeatPowerGeneratingPowerPlant',
     'H': 'HeatGeneratingPowerPlant',
@@ -162,6 +165,8 @@ UN_ENERGY_PLANT_TYPE = {
 }
 
 # TODO(ajaits): Add to ElectricityConsumer
+# Types of EnergyConsumerEnum by industry type.
+# values for property: energyConsumerType
 UN_ENERGY_CONSUMING_INDUSTRY = {
     # Manufacturing industry
     '1': 'Manufacturing',  # new
@@ -198,6 +203,8 @@ UN_ENERGY_CONSUMING_INDUSTRY = {
     '052': 'InternationalAviationBunkers',  # new
 }
 
+# Types of EnergyConsumerEnum by industry type.
+# values for property: energyConsumerType
 UN_ENERGY_USAGE_CODES = {
     # Transfmation of energy
     '08': 'Transformation',  # new
@@ -243,8 +250,9 @@ UN_ENERGY_USAGE_CODES = {
     '0934': 'LiquifiedNaturalGasPlants',  # new
 }
 
+# Properties used as measuredProperty
 UN_ENERGY_FLOW_CODES = {
-    '01prop': 'generation',  # new
+    '01prop': 'generation',
     '02': 'receipt',  # new
     '03': 'imports',  # new
     '04': 'exports',  # new
@@ -260,6 +268,7 @@ UN_ENERGY_FLOW_CODES = {
     '10': 'energyLoss',  # new
 }
 
+# List of rangeIncludes for new properties.
 UN_ENERGY_PROPERTY_RANGES = {
     'energySource': ['EnergySourceEnum'],
     'energyProducerType':  ['EnergyProducerEnum'],
@@ -270,6 +279,8 @@ UN_ENERGY_PROPERTY_RANGES = {
 
 # energy capacity codes '13*' EnergySource
 # TODO(ajaits): suffix of 1/2 for Main/Auto producer dropped
+# Additional types for EnergySourceEnum
+# used as property for energySource.
 UN_ENERGY_CAPACITY_CODES = {
     '1': 'Refinery',  # new
     '3': 'ElectricityMainActivityAutoProducer',  # new
@@ -289,7 +300,9 @@ UN_ENERGY_CAPACITY_CODES = {
 }
 
 # Energy Loss codes
-# Prefixed with 10* for measuredProperty EnergyLoss, property energyLostAs
+# Prefixed with 10*
+# Types of EnergyLossEnum
+# Used as values for property energyLostAs
 UN_ENERGY_LOSS_CODES = {
     '101': 'EnergyLost',  # new
     '103': 'EnergyReInjected',  # new
@@ -300,6 +313,8 @@ UN_ENERGY_LOSS_CODES = {
 }
 
 # Energy reserves: prefixed with code 15* or 16*
+# Types of EnergyReservesEnum
+# Used as values for property type: energyReserveType
 UN_ENERGY_RESERVE_CODES = {
     '15': 'EnergyResourcesInPlace',  # new
     '151': 'EnergyKnownReserves',  # new
