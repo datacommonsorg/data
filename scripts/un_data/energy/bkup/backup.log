@@ -1,7 +1,0 @@
-1;  ; ./bkup/backup-0-20210803-121125 ;  download.py process.py un_energy_codes_map.py
-2; Tue 03 Aug 2021 12:12:35 PM IST ; ./bkup/backup-1-20210803-121235 zip;  download.py process.py un_energy_codes_map.py
-3; Wed 04 Aug 2021 02:18:59 PM IST ; bkup/backup-3-20210804-141859.tgz zip;  country_codes.py download.py process.py un_energy_codes.py
-4; Wed 04 Aug 2021 06:09:09 PM IST ; bkup/backup-4-20210804-180909.tgz zip;  country_codes.py download.py process.py un_energy_codes.py
-5; Fri 06 Aug 2021 05:44:01 PM IST ; bkup/backup-5-20210806-174401.tgz zip;  country_codes.py download.py process.py un_energy_codes.py
-6; Mon 09 Aug 2021 03:41:12 PM IST ; bkup/backup-6-20210809-154112.tgz zip;  country_codes.py download.py process.py un_energy_codes.py
-7; Tue 10 Aug 2021 07:30:04 PM IST ; bkup/backup-7-20210810-193004 ;  country_codes.py download.py process.py un_energy_codes.py

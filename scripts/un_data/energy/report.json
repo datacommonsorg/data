@@ -1,0 +1,27 @@
+{
+  "levelSummary": {
+    "LEVEL_ERROR": "2"
+  },
+  "counterSet": {
+    "counters": {
+      "Sanity_SpaceInDcid": "2"
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "undata_energy_schema.mcf",
+      "lineNumber": "127"
+    },
+    "userMessage": "Found a whitespace in dcid value (Liquified Petroleum Gas) in node dcid:Liquified Petroleum Gas",
+    "counterKey": "Sanity_SpaceInDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "undata_energy_schema.mcf",
+      "lineNumber": "723"
+    },
+    "userMessage": "Found a whitespace in dcid value (Energy ReservesAssured) in node dcid:Energy ReservesAssured",
+    "counterKey": "Sanity_SpaceInDcid"
+  }]
+}
