@@ -22,25 +22,23 @@ cols_to_nodes = {
     'District':
         'District',
     'DistrictCode':
-        'lgdCode',
+        'DistrictCode',
     'Date':
         'Date',
-    'Total number of pregnant women Registered for ANC':
-        'Count_PregnantWomen_RegisteredForAntenatalCare',
-    'Number of Pregnant women registered within first trimester':
-        'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
-    'Total reported deliveries':
-        'Count_ChildDeliveryEvent',
-    'Institutional deliveries (Public Insts.+Pvt. Insts.)':
-        'Count_ChildDeliveryEvent_InAnInstitution',
-    'Deliveries Conducted at Public Institutions':
-        'Count_ChildDeliveryEvent_InPublicInstitution',
-    'Number of Home deliveries':
-        'Count_ChildDeliveryEvent_AtHome',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
-    '% Safe deliveries to Total Reported Deliveries':
-        'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
+    'IPD (Number)':
+        'Count_InPatient',
+    'OPD (Number)':
+        'Count_OutPatient',
+    'OPD (Allopathic)':
+        'Count_OutPatient',
+    'Number of Major Operations':
+        'Count_SurgicalProcedure_Major',
+    'Number of Minor Operations':
+        'Count_SurgicalProcedure_Minor',
+    '% Inpatient Deaths to Total IPD':
+        'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
+    'Ayush OPD (Number)':
+        'Count_OutPatient_Ayush',
 }
 
 clean_names = {
@@ -50,22 +48,20 @@ clean_names = {
         'lgdCode',
     'Date':
         'Date',
-    'Total number of pregnant women Registered for ANC':
-        'Total number of pregnant women registered for Antenatal Care',
-    'Number of Pregnant women registered within first trimester':
-        'Number of pregnant women registered for Antenatal Care within first trimester',
-    'Total reported deliveries':
-        'Total reported deliveries',
-    'Institutional deliveries (Public Insts.+Pvt. Insts.)':
-        'Institutional deliveries (Public Insts.+Pvt. Insts.)',
-    'Deliveries Conducted at Public Institutions':
-        'Deliveries conducted at public institutions',
-    'Number of Home deliveries':
-        'Number of home deliveries',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)',
-    '% Safe deliveries to Total Reported Deliveries':
-        'Percentage of safe deliveries to total reported deliveries'
+    'IPD (Number)':
+        'Number of In-Patients',
+    'OPD (Number)':
+        'Number of Out-Patients',
+    'OPD (Allopathic)':
+        'Number of Out-Patients',
+    'Number of Major Operations':
+        'Number of Major Surgeries',
+    'Number of Minor Operations':
+        'Number of Minor Surgeries',
+    '% Inpatient Deaths to Total IPD':
+        'Percent of In-patient Deaths to Total In-patients',
+    'Ayush OPD (Number)':
+        'Number of Out-Patients (AYUSH)',
 }
 
 

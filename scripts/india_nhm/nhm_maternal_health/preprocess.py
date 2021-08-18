@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from india_nhm.base.data_cleaner import NHMDataLoaderBase
-from india_nhm.base.readme_generator import ReadMeGen
+from data_cleaner import NHMDataLoaderBase
+from readme_generator import ReadMeGen
 
 # Mapping dictionary for data columns and StatVars
 cols_to_nodes = {
     'District':
         'District',
     'DistrictCode':
-        'DistrictCode',
+        'lgdCode',
     'Date':
         'Date',
     'Total number of pregnant women Registered for ANC':
@@ -45,7 +45,7 @@ clean_names = {
     'District':
         'District',
     'DistrictCode':
-        'DistrictCode',
+        'lgdCode',
     'Date':
         'Date',
     'Total number of pregnant women Registered for ANC':
