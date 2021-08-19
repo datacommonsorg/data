@@ -15,7 +15,7 @@
 Author: Padma Gundapaneni @padma-g
 Date: 8/19/2021
 Description: This script cleans a csv file of census tract, county,
-zip code, or city level CDC 500 PLACES data downloaded from the CDC.
+or city level CDC 500 PLACES data downloaded from the CDC.
 URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 @input_file     filepath to the original csv that needs to be cleaned
 @output_file    filepath to the csv to which the cleaned data is written
@@ -189,6 +189,17 @@ def generate_city_dcids(cityfips):
     return dcid
 
 
+def generate_zip_code_dcids(zipcode):
+    """
+    Args:
+        zipcode: a zip code
+    Returns:
+        the matching dcid for the zip code
+    """
+    dcid = "dcid:zip/" + str(zipcode).zfill(5)
+    return dcid
+
+
 def clean_census_tract_data(data):
     """
     Args:
@@ -256,6 +267,27 @@ def clean_city_data(data):
     return data
 
 
+def clean_zip_code_data(data):
+    """
+    Args:
+        data: pandas dataframe with zip code-level data to be cleaned
+    Returns:
+        a dataframe with cleaned zip code-level data
+    """
+    data["LocationID"] = data["LocationID"].apply(generate_zip_code_dcids)
+    data.rename(columns={
+        'MeasureId': 'StatVar',
+        'LocationID': 'Location'
+    },
+                inplace=True)
+    data = data.drop(columns=[
+        "Measure", "Category", "DataSource", "Data_Value_Type",
+        "Data_Value_Unit", "Data_Value_Footnote_Symbol", "Data_Value_Footnote",
+        "Geolocation", "LocationName", "CategoryID", "Short_Question_Text"
+    ])
+    return data
+
+
 def generate_statvar_names(data):
     """
     Args:
@@ -289,12 +321,14 @@ def clean_cdc_places_data(input_file, output_file, sep):
     print("Cleaning file...")
     data = pd.read_csv(input_file, sep=sep)
     data = generate_statvar_names(data)
-    if "Tract" in input_file:
+    if "tract" in input_file:
         data = clean_census_tract_data(data)
-    elif "County" in input_file:
+    elif "county" in input_file:
         data = clean_county_data(data)
-    elif "City" in input_file:
+    elif "city" in input_file:
         data = clean_city_data(data)
+    elif "zip" in input_file:
+        data = clean_zip_code_data(data)
     data = data.replace(np.nan, '', regex=True)
     print("Writing to output file...")
     data.to_csv(output_file, index=False)
