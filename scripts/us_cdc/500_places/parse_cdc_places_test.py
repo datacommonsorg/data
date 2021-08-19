@@ -44,14 +44,14 @@ class TestParseCDCPlaces(unittest.TestCase):
         """
         module_dir_ = os.path.dirname(__file__)
         print(module_dir_)
-        for input_file, expected_output_file, sep in TEST_CASE_FILES:
+        for input_file, expected_output, sep in TEST_CASE_FILES:
             print('\n')
             print('Input File: ' + input_file)
             test_csv = os.path.join(module_dir_, input_file)
             output_csv = os.path.join(module_dir_,
                                       (input_file[:-4] + '_output.csv'))
             clean_cdc_places_data(test_csv, output_csv, sep=sep)
-            expected_csv = os.path.join(module_dir_, expected_output_file)
+            expected_csv = os.path.join(module_dir_, expected_output)
         with open(output_csv, 'r') as test:
             test_str: str = test.read()
             with open(expected_csv, 'r') as expected:
