@@ -9,7 +9,7 @@ Centers for Disease Control and Prevention (CDC) into Data Commons.
 
 The [`500_places`](https://github.com/datacommonsorg/data/tree/master/scripts/us_cdc/500_places) directory contains information on data that was collected by the [National Center for Chronic Disease Prevention and Health Promotion](https://www.cdc.gov/chronicdisease/index.htm).
 
-Datasets include estimates for 5 chronic disease-related unhealthy behaviors, 13 health outcomes, and 9 preventive services at the Census Tract, County, City, and Country level from 2017-2018.
+Datasets include estimates for 5 chronic disease-related unhealthy behaviors, 13 health outcomes, and 9 preventive services at the Census Tract, County, City, Zip Code, and Country level from 2017-2018.
 
 ### National Environmental Public Health Tracking Network
 
