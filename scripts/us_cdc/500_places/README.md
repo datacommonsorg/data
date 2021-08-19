@@ -20,6 +20,7 @@ The datasets can be downloaded at the following links from [the CDC website](htt
 - [PLACES: Local Data for Better Health, Census Tract Data](https://chronicdata.cdc.gov/500-Cities-Places/PLACES-Local-Data-for-Better-Health-Census-Tract-D/cwsq-ngmh)
 - [PLACES: Local Data for Better Health, County/Country Data](https://chronicdata.cdc.gov/500-Cities-Places/PLACES-Local-Data-for-Better-Health-County-Data-20/swc5-untb)
 - [PLACES: Local Data for Better Health, Place (City) Data](https://chronicdata.cdc.gov/500-Cities-Places/PLACES-Local-Data-for-Better-Health-Place-Data-202/eav7-hnsx)
+- [PLACES: Local Data for Better Health, ZCTA (Zip Code) Data](https://chronicdata.cdc.gov/500-Cities-Places/PLACES-Local-Data-for-Better-Health-ZCTA-Data-2020/qnzd-25i4)
 
 All the downloaded data is in .csv format. 
 
@@ -58,6 +59,10 @@ These data were collected and provided by the [CDC National Center for Chronic D
 [`sample_census_tract.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_census_tract.csv)
 
 [`sample_census_tract_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_census_tract_expected.csv)
+
+[`sample_zip_code.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_zip_code.csv)
+
+[`sample_zip_code_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_zip_code_expected.csv)
 
 #### tMCFs
 [`cdc_places.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/cdc_places.tmcf)
