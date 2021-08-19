@@ -1,4 +1,4 @@
-# CDC 500 Places
+# Importing CDC 500 PLACES Data
 
 Author: Padma Gundapaneni @padma-g
 
