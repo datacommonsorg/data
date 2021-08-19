@@ -44,11 +44,7 @@ These data were collected and provided by the [CDC National Center for Chronic D
 [`parse_cdc_places.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places.py)
 
 #### Test Scripts
-[`parse_cdc_places_county_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places_county_test.py)
-
-[`parse_cdc_places_city_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places_city_test.py)
-
-[`parse_cdc_places_census_tract_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places_census_tract_test.py)
+[`parse_cdc_places_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places_test.py)
 
 #### Test Files
 [`sample_county.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_county.csv)
@@ -75,26 +71,10 @@ These data were collected and provided by the [CDC National Center for Chronic D
 To test the data cleaning script for county-level data, run:
 
 ```bash
-$ python3 parse_cdc_places_county_test.py
+$ python3 parse_cdc_places_test.py
 ```
 
-The expected output of this test can be found in [`sample_county_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_county_expected.csv).
-
-To test the data cleaning script for city-level data, run:
-
-```bash
-$ python3 parse_cdc_places_city_test.py
-```
-
-The expected output of this test can be found in [`sample_city_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_city_expected.csv).
-
-To test the data cleaning script for census tract-level data, run:
-
-```bash
-$ python3 parse_cdc_places_census_tract_test.py
-```
-
-The expected output of this test can be found in [`sample_census_tract_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_census_tract_expected.csv).
+The expected output of this test can be found in [`test_data`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/).
 
 #### Processing Steps
 
