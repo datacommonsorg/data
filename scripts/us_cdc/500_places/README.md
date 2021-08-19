@@ -73,7 +73,7 @@ These data were collected and provided by the [CDC National Center for Chronic D
 
 ##### Test Data Cleaning Script
 
-To test the data cleaning script for county-level data, run:
+To test the data cleaning script, run:
 
 ```bash
 $ python3 parse_cdc_places_test.py
