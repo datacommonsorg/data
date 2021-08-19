@@ -79,7 +79,7 @@ To test the data cleaning script, run:
 $ python3 parse_cdc_places_test.py
 ```
 
-The expected output of this test can be found in [`test_data`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/).
+The expected output of this test can be found in the [`test_data`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/) directory.
 
 #### Processing Steps
 
