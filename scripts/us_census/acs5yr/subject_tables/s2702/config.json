@@ -1,0 +1,26 @@
+[
+	{
+		"populationType": {
+			"_DEFAULT_": "Person"
+		},
+		"measurement": {
+		
+		},
+		"pvs": {},
+		"enumSpecializations": {},
+		"inferredSpec": {},
+		"universePVs": {
+			"armedForceStatus": "Civilian",
+			"institutionalization": "NonInstitutionalized"
+		},
+	},	
+	{
+		"populationType": {},
+		"measurement": {},
+		"pvs": {},
+		"enumSpecializations": {},
+		"inferredSpec": {},
+		"universePVs": {},
+	}
+]
+
