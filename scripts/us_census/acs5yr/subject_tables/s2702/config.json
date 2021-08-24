@@ -4,23 +4,29 @@
 			"_DEFAULT_": "Person"
 		},
 		"measurement": {
-		
+			"Median income (dollars)": {
+				"measuredProperty": "income",
+				"statType": "medianValue",
+				"unit": "
+
+			}
 		},
 		"pvs": {},
 		"enumSpecializations": {},
 		"inferredSpec": {},
 		"universePVs": {
 			"armedForceStatus": "Civilian",
-			"institutionalization": "NonInstitutionalized"
-		},
-	},	
+			"institutionalization": "NonInstitutionalized",
+			"insurance": "NoHealthInsurance"
+		}
+	},
 	{
 		"populationType": {},
 		"measurement": {},
 		"pvs": {},
 		"enumSpecializations": {},
 		"inferredSpec": {},
-		"universePVs": {},
+		"universePVs": {}
 	}
 ]
 
