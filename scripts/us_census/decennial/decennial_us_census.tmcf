@@ -1,0 +1,7 @@
+Node: E:DecennialCensus->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:DecennialCensus->variableMeasured
+observationAbout: C:DecennialCensus->observationAbout
+observationDate: C:DecennialCensus->observationDate
+value: C:DecennialCensus->value
+measurementMethod: dcs:CensusACS5yrSurvey

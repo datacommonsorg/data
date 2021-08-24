@@ -42,5 +42,7 @@ It is saved in GCS at gs://datcom-csv/census/decennial.
 
   ```python3 process.py```
 
-  This will generate all the CSVs under `output/<year>/<state|National>.csv`.
+  This will generate all the CSVs under `output/<year>/<state|National>.csv`. To
+  gether with `decennial_us_census.tmcf`, they can be validated and imported
+  into Data Commons.
 
