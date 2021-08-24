@@ -10,6 +10,18 @@ The import contains new data for about 11 existing StatVars (see
 *  [DECENNIALPL2010.P1](https://data.census.gov/cedsci/table?q=p1&tid=DECENNIALPL2010.P1&hidePreview=true)
 *  [DECENNIALPL2010.H1](https://data.census.gov/cedsci/table?q=p1&tid=DECENNIALPL2010.H1&hidePreview=true)
 
+Includes the following place types in the US:
+* Country
+* State
+* County
+* County Subdivision
+* Census Tract
+* Census Block Group
+* Place (aka City)
+
+Notably, Census ZCTA is missing from this dataset, and there doesn't seem to be
+a reference to it in the docs (linked below).
+
 ## File Format
 
 These files have a very specific coded format, containing a geo-file that has
