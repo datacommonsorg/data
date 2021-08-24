@@ -1,11 +1,11 @@
 """Tests for process.py"""
 
 import csv
-import process
 import os
 import tempfile
 import sys
 import unittest
+from .process import process
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _RAW_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
@@ -18,7 +18,7 @@ class ProcessTest(unittest.TestCase):
     def test_e2e(self):
         self.maxDiff = None
         with tempfile.TemporaryDirectory() as tmp_dir:
-            process.process(_RAW_DATA_DIR, tmp_dir, verbose=False)
+            process(_RAW_DATA_DIR, tmp_dir, verbose=False)
             for csv_fname in _OUT_FILES:
                 with open(os.path.join(tmp_dir, csv_fname)) as gotf:
                     got = gotf.read()
