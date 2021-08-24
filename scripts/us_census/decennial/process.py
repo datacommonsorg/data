@@ -145,6 +145,7 @@ def _slice(line, pair):
 
 
 def _build_2010_geomap(geof, is_national):
+    """Builds a map from logical-record-number to DCID for 2010."""
     geomap = {}
     for line in geof:
         line = line.strip()
@@ -171,7 +172,7 @@ def _build_2010_geomap(geof, is_national):
 
 
 def _build_2020_geomap(geof, is_national):
-    """Builds a map from logical-record-number to DCID."""
+    """Builds a map from logical-record-number to DCID for 2020."""
     geomap = {}
     for line in geof:
         parts = line.strip().split('|')
@@ -200,6 +201,7 @@ def _build_2020_geomap(geof, is_national):
 
 
 def _build_geomap(year, geof, is_national):
+    """Builds a map from logical-record-number to DCID."""
     if year == '2010':
         return _build_2010_geomap(geof, is_national)
     else:
@@ -241,7 +243,7 @@ def _generate_csv(year, dataf, csvw, geomap, verbose):
 
 
 def _process_geodir(year, geodir, output_dir, verbose):
-    """Process a directory for a state or US national."""
+    """Processes a directory for a state or US national and produces CSV."""
 
     is_national = os.path.basename(geodir) == 'National'
     csv_fname = os.path.join(output_dir, os.path.basename(geodir) + '.csv')
@@ -279,7 +281,7 @@ def _process_geodir(year, geodir, output_dir, verbose):
 
 
 def process(raw_data_path, output_path, verbose):
-
+    """Processes decennial census zip-files and produces CSV files."""
     for year in _YEARS:
         print('Processing year ' + year)
 
