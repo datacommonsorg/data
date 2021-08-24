@@ -1,7 +1,7 @@
-# Decennnial Census Redistricting Files Import
+# Decennnial Census - Redistricting Files
 
 Includes cleaning scripts to process the 2010 and 2020 Decennial Census'
-Redistricting File. This is a preliminary release before the full Summary Files
+Redistricting Files. This is a preliminary release before the full Summary Files
 are released and before the data is available on https://data.census.gov.
 
 The import contains new data for about 11 existing StatVars (see
