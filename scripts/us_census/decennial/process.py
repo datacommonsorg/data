@@ -27,7 +27,8 @@ _DIR_PREFIX = 'data/01-Redistricting_File--PL_94-171'
 #
 # Mappings for 2020 Geo File.
 #
-# - https://screenshot.googleplex.com/3XRruEfm5jiXM59
+# - https://user-images.githubusercontent.com/4375037/130695847-b0955d19-9b8b-4021-b195-86357cfb03ec.png
+#
 
 # Summary level in geo file.
 _GEOF_2020_SUMLEV_COL = 2
@@ -36,9 +37,8 @@ _GEOF_2020_LOGRECNO_COL = 7
 
 # summary-level -> [column1, column2, ...] (from 0) which form parts of DCID
 #
-# Relevant summary levels: https://screenshot.googleplex.com/BYs5FaBLAPCfYEg
+# Relevant summary levels: https://user-images.githubusercontent.com/4375037/130695894-365a96b6-8bec-4a98-ab91-fe90ea3c2e57.png
 _GEOF_2020_DCID_MAP = {
-    # https://screenshot.googleplex.com/3XRruEfm5jiXM59
     # State
     '040': [12],
     # County
@@ -54,17 +54,17 @@ _GEOF_2020_DCID_MAP = {
 }
 
 #
-# Mappings for 2020 Geo File. These are not really delimited. Rather, they have
+# Mappings for 2010 Geo File. These are not really delimited. Rather, they have
 # start-position and length for the fields.
 #
-# - https://screenshot.googleplex.com/B33B5gi9rSEDhhi
+# - https://user-images.githubusercontent.com/4375037/130695985-6996cd98-66c9-4a59-87c7-48b9e389e2bc.png
 #
 _GEOF_2010_SUMLEV = (9, 3)
 _GEOF_2010_LOGRECNO = (19, 7)
 
 # summary-level -> [(start1, length1), (start2, length2), ...]
 #
-# Relevant summary levels: https://screenshot.googleplex.com/BYs5FaBLAPCfYEg
+# Relevant summary levels: https://user-images.githubusercontent.com/4375037/130695894-365a96b6-8bec-4a98-ab91-fe90ea3c2e57.png
 _GEOF_2010_DCID_MAP = {
     # State
     '040': [(28, 2)],
@@ -85,8 +85,8 @@ _GEOF_2010_DCID_MAP = {
 _US_SUMLEV = '010'
 
 # Logical Record Number in datafile is same across years.
-# 2020 - https://screenshot.googleplex.com/5bd2gEFWtHfkZCY
-# 2010 - https://screenshot.googleplex.com/7HwvgzXnbNod7nE
+# 2020 - https://user-images.githubusercontent.com/4375037/130696087-14199c77-58f7-40cb-8010-3355356d7275.png
+# 2010 - https://user-images.githubusercontent.com/4375037/130696096-a40d7306-1707-4359-92af-a7bd391e2623.png
 _DATAF_LOGRECNO_COL = 4
 
 
@@ -96,12 +96,12 @@ _DATAF_DELIM_CHAR = {
     '2020': '|',
 }
 
-# Table name as it appears in Data Dictionary Reference
-# (https://screenshot.googleplex.com/4fsYLSujP7rv6NT)
+# Table name as it appears in Data Dictionary Reference:
+# https://user-images.githubusercontent.com/4375037/130696166-da194721-c8e1-484e-8722-09202d3fe5c3.png
 #
-# The column offsets are the same across 2020 and 2010:
-# - https://screenshot.googleplex.com/5bd2gEFWtHfkZCY
-# - https://screenshot.googleplex.com/7HwvgzXnbNod7nE
+# The column offsets are the same across years:
+# 2020 - https://user-images.githubusercontent.com/4375037/130696087-14199c77-58f7-40cb-8010-3355356d7275.png
+# 2010 - https://user-images.githubusercontent.com/4375037/130696096-a40d7306-1707-4359-92af-a7bd391e2623.png
 _TABLE_COLOFFSET_MAP = {
     'P001': 5,
     'P002': 5 + 71,
@@ -111,12 +111,11 @@ _TABLE_COLOFFSET_MAP = {
 }
 
 # The column that stores the file shard number. Same across years.
-# - https://screenshot.googleplex.com/5bd2gEFWtHfkZCY
 _DATAF_CIFSN_COL = 3
 
 # CIFSN value -> Variable Name -> stat-var DCID
 _DATAF_STATVAR_MAP = {
-    # https://screenshot.googleplex.com/C6Fs9miRDBnVhVA
+    # https://user-images.githubusercontent.com/4375037/130696166-da194721-c8e1-484e-8722-09202d3fe5c3.png
     '01': {
         'P0010001': 'Count_Person',
         'P0010003': 'Count_Person_WhiteAlone',
@@ -127,7 +126,7 @@ _DATAF_STATVAR_MAP = {
         'P0010008': 'Count_Person_SomeOtherRaceAlone',
         'P0020002': 'Count_Person_HispanicOrLatino',
     },
-    # https://screenshot.googleplex.com/7eSGcqTjKArKBMW
+    # https://user-images.githubusercontent.com/4375037/130696328-34c79c4d-69f2-4c9a-892a-7bf26602160f.png
     '02': {
         'H0010001': 'Count_HousingUnit',
         'H0010002': 'Count_HousingUnit_OccupiedHousingUnit',
