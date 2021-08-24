@@ -17,6 +17,14 @@ the "local-record-id" for all geos.  There are 3 data-files that are keyed by
 that "local-record-id", followed by a hundred or so StatVar values. Such a set
 of files exist for every year and state/US.
 
+The format of the geo-file and data-files are described in these documents:
+* [2010](https://www.census.gov/prod/cen2010/doc/pl94-171.pdf)
+* [2020](https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/summary-file/2020Census_PL94_171Redistricting_NationalTechDoc.pdf)
+
+Generally, between 2010 and 2020, the Data tables and data-file formats have
+stayed the same (except for a change in delimiter), but the geo-file format is
+quite different. Thus, the code has different maps for 2010 and 2020 geo-files.
+
 ## Download
 
 The data is available at the Census FTP site:
