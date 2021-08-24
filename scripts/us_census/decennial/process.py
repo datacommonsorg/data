@@ -96,7 +96,6 @@ _DATAF_DELIM_CHAR = {
     '2020': '|',
 }
 
-
 # Table name as it appears in Data Dictionary Reference
 # (https://screenshot.googleplex.com/4fsYLSujP7rv6NT)
 #
@@ -111,11 +110,9 @@ _TABLE_COLOFFSET_MAP = {
     'H001': 5 + 71 + 73,
 }
 
-
 # The column that stores the file shard number. Same across years.
 # - https://screenshot.googleplex.com/5bd2gEFWtHfkZCY
 _DATAF_CIFSN_COL = 3
-
 
 # CIFSN value -> Variable Name -> stat-var DCID
 _DATAF_STATVAR_MAP = {
@@ -138,7 +135,6 @@ _DATAF_STATVAR_MAP = {
     },
 }
 
-
 _CSV_COLUMNS = ['observationAbout', 'variableMeasured',
                 'value', 'observationDate']
 
@@ -148,35 +144,6 @@ def _get_geo_file(zf):
     if 'geo' in f:
       return f
   return ''
-
-
-def _build_2020_geomap(geof, is_national):
-  """Builds a map from logical-record-number to DCID."""
-  geomap = {}
-  for line in geof:
-    parts = line.strip().split('|')
-
-    logrecno = parts[_GEOF_2020_LOGRECNO_COL]
-    sumlev = parts[_GEOF_2020_SUMLEV_COL]
-
-    if is_national:
-      # This is national file. Extract only US geo
-      if sumlev == _US_SUMLEV:
-        geomap[logrecno] = 'country/USA'
-      continue
-
-    if sumlev not in _GEOF_2020_DCID_MAP:
-      # Not an interesting summary-level
-      continue
-
-    # Combine the values in the columns.
-    dcid_parts = ['geoId/']
-    for c in _GEOF_2020_DCID_MAP[sumlev]:
-      dcid_parts.append(parts[c])
-
-    geomap[logrecno] = ''.join(dcid_parts)
-
-  return geomap
 
 
 def _slice(line, pair):
@@ -209,6 +176,35 @@ def _build_2010_geomap(geof, is_national):
   return geomap
 
 
+def _build_2020_geomap(geof, is_national):
+  """Builds a map from logical-record-number to DCID."""
+  geomap = {}
+  for line in geof:
+    parts = line.strip().split('|')
+
+    logrecno = parts[_GEOF_2020_LOGRECNO_COL]
+    sumlev = parts[_GEOF_2020_SUMLEV_COL]
+
+    if is_national:
+      # This is national file. Extract only US geo
+      if sumlev == _US_SUMLEV:
+        geomap[logrecno] = 'country/USA'
+      continue
+
+    if sumlev not in _GEOF_2020_DCID_MAP:
+      # Not an interesting summary-level
+      continue
+
+    # Combine the values in the columns.
+    dcid_parts = ['geoId/']
+    for c in _GEOF_2020_DCID_MAP[sumlev]:
+      dcid_parts.append(parts[c])
+
+    geomap[logrecno] = ''.join(dcid_parts)
+
+  return geomap
+
+
 def _build_geomap(year, geof, is_national):
   if year == '2010':
     return _build_2010_geomap(geof, is_national)
@@ -217,12 +213,10 @@ def _build_geomap(year, geof, is_national):
     return _build_2020_geomap(geof, is_national)
 
 
-def _generate_csv(year, dataf, csvw, geomap):
+def _generate_csv(year, dataf, csvw, geomap, verbose):
   """Reads the data from 'dataf' for 'year' and writes cleaned-csv to 'csvw'."""
   for line in dataf:
     parts = line.strip().split(_DATAF_DELIM_CHAR[year])
-    if FLAGS.verbose:
-      print(line)
 
     cifsn = parts[_DATAF_CIFSN_COL]
     if cifsn not in _DATAF_STATVAR_MAP:
@@ -233,6 +227,7 @@ def _generate_csv(year, dataf, csvw, geomap):
     if logrecno not in geomap:
       # This geo is not in our map.
       continue
+
     place_dcid = geomap[logrecno]
 
     # This is a legit file and geo.  Select the interesting StatVar columns.
@@ -244,12 +239,12 @@ def _generate_csv(year, dataf, csvw, geomap):
       # _TABLE_COLOFFSET_MAP for P001 contains 5, which is where P0010001 starts
       val_col = _TABLE_COLOFFSET_MAP[tab] + idx - 1
 
-      if FLAGS.verbose:
+      if verbose:
         print('Emitting: ', place_dcid, ' : ', sv, ' : ', parts[val_col])
       csvw.writerow(['dcid:' + place_dcid, 'dcid:' + sv, parts[val_col], year])
 
 
-def _process_geodir(year, geodir, output_dir):
+def _process_geodir(year, geodir, output_dir, verbose):
   """Process a directory for a state or US national."""
 
   is_national = os.path.basename(geodir) == 'National'
@@ -269,7 +264,7 @@ def _process_geodir(year, geodir, output_dir):
         assert geo_fname, 'Did not find geo file in ' + zip_fname
         with io.TextIOWrapper(zipf.open(geo_fname, 'r'), encoding='ISO-8859-1') as geof:
           geomap = _build_geomap(year, geof, is_national)
-          if FLAGS.verbose:
+          if verbose:
             print('Geo Map:')
             for k, v in geomap.items():
               print('\t', k, ' -> ', v)
@@ -282,10 +277,10 @@ def _process_geodir(year, geodir, output_dir):
             # 2010 directories have a .txt file, skip it
             continue
           with io.TextIOWrapper(zipf.open(data_fname, 'r'), encoding='ISO-8859-1') as dataf:
-            _generate_csv(year, dataf, csvw, geomap)
+            _generate_csv(year, dataf, csvw, geomap, verbose)
 
 
-def _process(raw_data_path, output_path):
+def process(raw_data_path, output_path, verbose):
 
   for year in _YEARS:
     print('Processing year ' + year)
@@ -297,11 +292,11 @@ def _process(raw_data_path, output_path):
     parent_dir = os.path.join(raw_data_path, year, _DIR_PREFIX, '*')
     for geodir in glob.glob(parent_dir):
       if os.path.isdir(geodir):
-        _process_geodir(year, geodir, year_output_dir)
+        _process_geodir(year, geodir, year_output_dir, verbose)
 
 
 def main(_):
-  _process(FLAGS.raw_data_path, FLAGS.output_path)
+  process(FLAGS.raw_data_path, FLAGS.output_path, FLAGS.verbose)
 
 
 if __name__ == '__main__':
