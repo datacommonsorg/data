@@ -1,32 +1,108 @@
-[
-	{
-		"populationType": {
-			"_DEFAULT_": "Person"
-		},
-		"measurement": {
-			"Median income (dollars)": {
-				"measuredProperty": "income",
-				"statType": "medianValue",
-				"unit": "
+{
+{
+   "populationType":{
+      "_DEFAULT_":"Person",
+      "Household" : "Household"
+   },
+   "measurement":{
+      "Median income (dollars)":{
+         “measuredProperty”:"income",
+         “statType”:”medianValue”,
+         “unit”:”USDollar”
+      "_DEFAULT_":{
+         “measuredProperty”: "count",
+         “statType”:”measuredValue”
+   },
+   "pvs":{
+      "benefitsStatus":{
+         "Households receiving food stamps":"WithFoodStampsInThePast12Months",
+         "Households receiving food stamps/SNAP":"WithFoodStampsInThePast12Months",
+         "Households receiving food stamps/SNAP MOE":"WithFoodStampsInThePast12Months",
+         "Households not receiving food stamps":"WithoutFoodStampsInThePast12Months",
+         "Households not receiving food stamps/SNAP":"WithoutFoodStampsInThePast12Months",
+         "Households not receiving food stamps/SNAP MOE":"WithoutFoodStampsInThePast12Months"
+      },
+      "memberStatus":{
+         "With one or more people 60 years and over":"WithPeopleOver60",
+         "With one or more people in the household 60 years and over":"WithPeopleOver60",
+         "No people in the household 60 years and over":"WithoutPeopleOver60",
+         "With children under 18 years":"WithChildrenUnder18",
+         "No children under 18 years":"WithoutChildrenUnder18"
+      },
+      "householdType":{
+         "Married-couple family":"MarriedCoupleFamilyHousehold",
+         "Other family":"OtherFamilyHousehold",
+         "Other family:":"OtherFamilyHousehold",
+         "Male householder, no wife present":"SingleFatherFamilyHousehold",
+         "Male householder, no spouse present":"SingleFatherFamilyHousehold",
+         "Female householder, no husband present":"SingleMotherFamilyHousehold",
+         "Female householder, no spouse present":"SingleMotherFamilyHousehold",
+         "Nonfamily households":"NonfamilyHousehold",
+         "Families":"FamilyHousehold"
+      },
+      "povertyStatus":{
+         "Below poverty level":"BelowPovertyLevelInThePast12Months",
+         "At or above poverty level":"AbovePovertyLevelInThePast12Months",
+         "At or above  poverty level":"AbovePovertyLevelInThePast12Months"
+      },
+      "disabilityStatus":{
+         "With one or more people with a disability":"WithDisability",
+         "With no persons with a disability":"NoDisability"
+      },
+      "householderRace":{
+         "One race":"OneRace",
+         "White":"WhiteAlone",
+         "White alone":"WhiteAlone",
+         "Black or African American":"BlackOrAfricanAmericanAlone",
+         "Black or African American alone":"BlackOrAfricanAmericanAlone",
+         "American Indian and Alaska Native":"AmericanIndianOrAlaskaNativeAlone",
+         "American Indian and Alaska Native alone":"AmericanIndianOrAlaskaNativeAlone",
+         "Asian":"AsianAlone",
+         "Asian alone":"AsianAlone",
+         "Native Hawaiian and Other Pacific Islander":"NativeHawaiianOrOtherPacificIslanderAlone",
+         "Native Hawaiian and Other Pacific Islander alone":"NativeHawaiianOrOtherPacificIslanderAlone",
+         "Some other race":"SomeOtherRaceAlone",
+         "Some other race alone":"SomeOtherRaceAlone",
+         "Two or more races":"TwoOrMoreRaces",
+         "Hispanic or Latino origin (of any race)":"HispanicOrLatino",
+         "White alone, not Hispanic or Latino":"WhiteAloneNotHispanicOrLatino"
+      },
+      "workStatus":{
+         "No workers in past 12 months":"NoWorkersInThePast12Months",
+         "1 worker in past 12 months":"OneWorkerInThePast12Months",
+         "2 or more workers in past 12 months":"TwoOrMoreWorkersInThePast12Months"
+      }
+   },
+   "enumSpecializations":{
+      "SingleFatherFamilyHousehold":"OtherFamilyHousehold",
+      "SingleMotherFamilyHousehold":"OtherFamilyHousehold",
+      "WhiteAlone":"OneRace",
+      "BlackOrAfricanAmericanAlone":"OneRace",
+      "AmericanIndianOrAlaskaNativeAlone":"OneRace",
+      "AsianAlone":"OneRace",
+      "NativeHawaiianOrOtherPacificIslanderAlone":"OneRace",
+      "SomeOtherRaceAlone":"OneRace"
+   },
+   "inferredSpec":{
+      "workStatus":{
+         "householdType":"FamilyHousehold"
+      }
+   },
+   “universePvs”:[
+      {
+        “populationType”: “Person”,
+        “contraintProperties”: [“healthInsurance”],
+        “dependentPv”: {
+             “institutionalization”: “USC_NonInstitutionalized”,
+             “armedForcesStatus”: “Civilian”,
+          },
+      }
+   ]
+},
 
-			}
-		},
-		"pvs": {},
-		"enumSpecializations": {},
-		"inferredSpec": {},
-		"universePVs": {
-			"armedForceStatus": "Civilian",
-			"institutionalization": "NonInstitutionalized",
-			"insurance": "NoHealthInsurance"
-		}
-	},
-	{
-		"populationType": {},
-		"measurement": {},
-		"pvs": {},
-		"enumSpecializations": {},
-		"inferredSpec": {},
-		"universePVs": {}
-	}
-]
-
+"_comment": "denominator -> numerator stat-vars",
+	
+“denominators”: {
+   “<column-name-from-csv>”: [“<column-name-from-csv>”, “<column-name-from-csv>”, ...],
+}
+}
