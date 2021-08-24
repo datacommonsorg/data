@@ -125,6 +125,7 @@ pip3 install -r requirements.txt
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
     as specified in
     [.pylintrc](https://github.com/datacommonsorg/data/blob/master/.pylintrc).
+*   Add a `__init__.py` file in your import script directory.
 *   Tests must succeed.
 
 Consider automating coding to satisfy some of these requirements.

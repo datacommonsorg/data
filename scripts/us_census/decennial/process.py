@@ -20,6 +20,11 @@ flags.DEFINE_boolean('verbose', False, 'Print debug info')
 _YEARS = ['2010', '2020']
 _DIR_PREFIX = 'data/01-Redistricting_File--PL_94-171'
 
+# NOTE: Almost all screenshots below are from the documentation PDFs mentioned
+# in the README.md:
+# * 2010: https://www.census.gov/prod/cen2010/doc/pl94-171.pdf
+# * 2020: https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/summary-file/2020Census_PL94_171Redistricting_NationalTechDoc.pdf
+
 #
 # Mappings for 2020 Geo File.
 #
