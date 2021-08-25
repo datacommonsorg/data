@@ -13,7 +13,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:CDC_Places->Year
 variableMeasured: C:CDC_Places->Low_Confidence_Limit_StatVar
 observationPeriod: "P1Y"
-measurementMethod: C:CDC_Places->ConfidenceLevelTypeID
+measurementMethod: C:CDC_Places->DataValueTypeID
 value: C:CDC_Places->Low_Confidence_Limit
 
 Node: E:CDC_Places->E2
@@ -22,7 +22,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:CDC_Places->Year
 variableMeasured: C:CDC_Places->High_Confidence_Limit_StatVar
 observationPeriod: "P1Y"
-measurementMethod: C:CDC_Places->ConfidenceLevelTypeID
+measurementMethod: C:CDC_Places->DataValueTypeID
 value: C:CDC_Places->High_Confidence_Limit
 
 Node: E:CDC_Places->E3
