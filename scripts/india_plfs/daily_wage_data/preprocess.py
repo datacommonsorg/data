@@ -24,56 +24,55 @@ import urllib.request
 from os import path
 from india.geo.states import IndiaStatesMapper
 
-DATASETS = [
-    {
-        "period": "2017-07",
-        "data_file": "Table_43_07_09_2017.xlsx"
-    },
-    {
-        "period": "2017-10",
-        "data_file": "Table_43_10_12_2017.xlsx"
-    },
-    {
-        "period": "2018-01",
-        "data_file": "Table_43_01_03_2018.xlsx"
-    },
-    {
-        "period": "2018-04",
-        "data_file": "Table_43_04_06_2018.xlsx"
-    },
-    {
-        "period": "2018-07",
-        "data_file": "Table_43_07_09_2018.xlsx"
-    },
-    {
-        "period": "2018-10",
-        "data_file": "Table_43_10_12_2018.xlsx"
-    },
-    {
-        "period": "2019-01",
-        "data_file": "Table_43_01_03_2019.xlsx"
-    },
-    {
-        "period": "2019-04",
-        "data_file": "Table_43_04_06_2019.xlsx"
-    },
-    {
-        "period": "2019-07",
-        "data_file": "Table_43_07_09_2019.csv"
-    },
-    {
-        "period": "2019-10",
-        "data_file": "Table_43_10_12_2019.csv"
-    },
-    {
-        "period": "2020-01",
-        "data_file": "Table_43_01_03_2020.csv"
-    },
-    {
-        "period": "2020-04",
-        "data_file": "Table_43_04_06_2020.csv"
-    },
-]
+DATASETS = [{
+    "period": "2017-07",
+    "data_file": "Table_43_07_09_2017.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2017-10",
+    "data_file": "Table_43_10_12_2017.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2018-01",
+    "data_file": "Table_43_01_03_2018.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2018-04",
+    "data_file": "Table_43_04_06_2018.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2018-07",
+    "data_file": "Table_43_07_09_2018.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2018-10",
+    "data_file": "Table_43_10_12_2018.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2019-01",
+    "data_file": "Table_43_01_03_2019.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2019-04",
+    "data_file": "Table_43_04_06_2019.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2019-07",
+    "data_file": "Table_43_07_09_2019.csv",
+    "data_rows": 38
+}, {
+    "period": "2019-10",
+    "data_file": "Table_43_10_12_2019.csv",
+    "data_rows": 38
+}, {
+    "period": "2020-01",
+    "data_file": "Table_43_01_03_2020.csv",
+    "data_rows": 38
+}, {
+    "period": "2020-04",
+    "data_file": "Table_43_04_06_2020.csv",
+    "data_rows": 38
+}]
 
 
 class PLFSDailyWageDataLoader:
@@ -91,9 +90,10 @@ class PLFSDailyWageDataLoader:
         "wage_total_person",
     ]
 
-    def __init__(self, source, period):
+    def __init__(self, source, period, data_rows):
         self.source = source
         self.period = period
+        self.data_rows = data_rows
         self.raw_df = None
         self.clean_df = None
 
@@ -102,9 +102,10 @@ class PLFSDailyWageDataLoader:
             df = pd.read_excel(self.source)
         else:
             df = pd.read_csv(self.source)
-        # Drop title rows in the top and  rows after 41.
-        # The actual data is between 4nd and 41st row. So keep only them.
-        df = df.iloc[4:41]
+        # Drop title rows in the top and  rows after `data_rows`.
+        # The actual data is between 4nd and (4 + data_rows) row. So keep only them.
+        df = df.iloc[4:(4 + self.data_rows)]
+
         self.raw_df = df
 
     def _setup_location(self):
@@ -161,11 +162,12 @@ def main():
     for dataset in DATASETS:
         period = dataset["period"]
         data_file = dataset["data_file"]
+        data_rows = dataset["data_rows"]
         data_file_path = os.path.join(
             os.path.dirname(__file__),
             "data/{data_file}".format(data_file=data_file),
         )
-        loader = PLFSDailyWageDataLoader(data_file_path, period)
+        loader = PLFSDailyWageDataLoader(data_file_path, period, data_rows)
         loader.load()
         loader.process()
         loader.save(csv_file_path)
