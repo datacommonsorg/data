@@ -1,9 +1,5 @@
-Node: E:IndiaPost->E0
-typeOf: dcs:Place
-isoCode: C:IndiaPost->StateCode
-
-Node: E:IndiaPost->E1
-typeOf: dcs:PincodeArea
-name: C:IndiaPost->Pincode
-dcid: C:IndiaPost->PincodeDCID
-containedInPlace: E:IndiaPost->E0
+Node: dcid:PincodeArea
+typeOf: schema:Class
+subClassOf: schema:AdministrativeArea
+name: "IndiaPostPincodeArea"
+description: "Postal delivery area representations of India Post."
