@@ -31,4 +31,5 @@ typeOf: dcs:StatVarObservation
 observationDate: C:CDC_Places->Year
 variableMeasured: C:CDC_Places->Population_StatVar
 observationPeriod: "P1Y"
+measurementMethod: C:CDC_Places->DataValueTypeID
 value: C:CDC_Places->TotalPopulation
