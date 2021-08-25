@@ -6,11 +6,35 @@ Average wage earnings (Rs. 0.00) per day from casual labour work other than publ
 
 ### Download Data
 
+#### PLES July 2019 - Jun 2020
+Wage data from PLES July 2019 - Jun 2020 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual_Report_PLFS_2019_20.pdf). Table format is the same.
+
+* Page 384 has the data for July-Sep 2019 
+* Page 385 has the data for Oct-Dec 2019
+* Page 386 has the data for Jan-Mar 2020
+* Page 387 has the data for Apr-Jun 2020
+
+Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
+
+```
+java -jar tabula-java.jar --lattice -a 24.731,106.819,519.359,637.228 -p 385 Annual_Report_PLFS_2019_20.pdf  -o Table_43_07_09_2019.csv
+java -jar tabula-java.jar --lattice  -a 24.731,106.819,519.359,637.228 -p 386 Annual_Report_PLFS_2019_20.pdf   -o Table_43_10_12_2019.csv
+java -jar tabula-java.jar --lattice -a 24.731,106.819,519.359,637.228 -p 387 Annual_Report_PLFS_2019_20.pdf   -o Table_43_01_03_2020.csv
+java -jar tabula-java.jar --lattice -a 24.731,106.819,519.359,637.228 -p 388 Annual_Report_PLFS_2019_20.pdf   -o Table_43_04_06_2020.csv
+```
+
 #### PLES July 2018 - June 2019
 Wage data from PLES July 2018 - June 2019 is available as [XLSX](http://mospi.nic.in/sites/default/files/reports_and_publication/PLFS_2018_19_Anual/Table_43.xlsx).
 
 #### PLES July 2017 - June 2018
-Wage data from PLES July 2017 - June 2018 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual%20Report%2C%20PLFS%202017-18_31052019.pdf). Table format is the same. Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
+Wage data from PLES July 2017 - June 2018 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual%20Report%2C%20PLFS%202017-18_31052019.pdf). Table format is the same. 
+
+* Page 404 has the data for July-Sept 2017 
+* Page 405 has the data for Oct-Dec 2017      
+* Page 406 has the data for Jan-Mar 2018
+* Page 407 has the data for Apr-June 2018
+
+Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
 
 ```
 java -jar tabula-java.jar  -a 40.506,97.049,521.453,782.161 -p 404 "$1" 
@@ -18,11 +42,6 @@ java -jar tabula-java.jar  -a 40.506,97.049,521.453,782.161 -p 405 "$1"
 java -jar tabula-java.jar  -a 40.506,97.049,521.453,782.161 -p 406 "$1" 
 java -jar tabula-java.jar  -a 40.506,97.049,521.453,782.161 -p 407 "$1" 
 ```
-
-* Page 404 has the data for July-Sept 2017 
-* Page 405 has the data for Oct-Dec 2017      
-* Page 406 has the data for Jan-Mar 2018
-* Page 407 has the data for Apr-June 2018
 
     
 ### Overview

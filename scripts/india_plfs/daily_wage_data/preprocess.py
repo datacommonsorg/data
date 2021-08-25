@@ -22,99 +22,56 @@ import pandas as pd
 import numpy as np
 import urllib.request
 from os import path
-
-INDIA_ISO_CODES = {
-    "Andhra Pradesh": "IN-AP",
-    "Arunachal Pradesh": "IN-AR",
-    "Assam": "IN-AS",
-    "Bihar": "IN-BR",
-    "Chattisgarh": "IN-CT",
-    "Chhattisgarh": "IN-CT",
-    "Goa": "IN-GA",
-    "Gujarat": "IN-GJ",
-    "Haryana": "IN-HR",
-    "Himachal Pradesh": "IN-HP",
-    "Jharkhand": "IN-JH",
-    "Jharkhand#": "IN-JH",
-    "Karnataka": "IN-KA",
-    "Kerala": "IN-KL",
-    "Madhya Pradesh": "IN-MP",
-    "Madhya Pradesh#": "IN-MP",
-    "Maharashtra": "IN-MH",
-    "Manipur": "IN-MN",
-    "Meghalaya": "IN-ML",
-    "Mizoram": "IN-MZ",
-    "Nagaland": "IN-NL",
-    "Nagaland#": "IN-NL",
-    "Odisha": "IN-OR",
-    "Punjab": "IN-PB",
-    "Rajasthan": "IN-RJ",
-    "Sikkim": "IN-SK",
-    "Tamil Nadu": "IN-TN",
-    "Tamilnadu": "IN-TN",
-    "Telengana": "IN-TG",
-    "Telangana": "IN-TG",
-    "Tripura": "IN-TR",
-    "Uttarakhand": "IN-UT",
-    "Uttar Pradesh": "IN-UP",
-    "West Bengal": "IN-WB",
-    "Andaman and Nicobar Islands": "IN-AN",
-    "Andaman & Nicobar Islands": "IN-AN",
-    "Andaman & N. Island": "IN-AN",
-    "A & N Islands": "IN-AN",
-    "Chandigarh": "IN-CH",
-    "Dadra and Nagar Haveli": "IN-DN",
-    "Dadra & Nagar Haveli": "IN-DN",
-    "Dadar Nagar Haveli": "IN-DN",
-    "Daman and Diu": "IN-DD",
-    "Daman & Diu": "IN-DD",
-    "Delhi": "IN-DL",
-    "Jammu and Kashmir": "IN-JK",
-    "Jammu & Kashmir": "IN-JK",
-    "Ladakh": "IN-LA",
-    "Lakshadweep": "IN-LD",
-    "Lakshwadeep": "IN-LD",
-    "Pondicherry": "IN-PY",
-    "Puducherry": "IN-PY",
-    "Puduchery": "IN-PY",
-    "Dadra and Nagar Haveli and Daman and Diu": "IN-DH",
-    "Telangana": "IN-TG",
-    "all India": "IN",
-    "all-India": "IN",
-}
+from india.geo.states import IndiaStatesMapper
 
 DATASETS = [
     {
         "period": "2017-07",
-        "data_file": "Table_43_07_09_2017"
+        "data_file": "Table_43_07_09_2017.xlsx"
     },
     {
         "period": "2017-10",
-        "data_file": "Table_43_10_12_2017"
+        "data_file": "Table_43_10_12_2017.xlsx"
     },
     {
         "period": "2018-01",
-        "data_file": "Table_43_01_03_2018"
+        "data_file": "Table_43_01_03_2018.xlsx"
     },
     {
         "period": "2018-04",
-        "data_file": "Table_43_04_06_2018"
+        "data_file": "Table_43_04_06_2018.xlsx"
     },
     {
         "period": "2018-07",
-        "data_file": "Table_43_07_09_2018"
+        "data_file": "Table_43_07_09_2018.xlsx"
     },
     {
         "period": "2018-10",
-        "data_file": "Table_43_10_12_2018"
+        "data_file": "Table_43_10_12_2018.xlsx"
     },
     {
         "period": "2019-01",
-        "data_file": "Table_43_01_03_2019"
+        "data_file": "Table_43_01_03_2019.xlsx"
     },
     {
         "period": "2019-04",
-        "data_file": "Table_43_04_06_2019"
+        "data_file": "Table_43_04_06_2019.xlsx"
+    },
+    {
+        "period": "2019-07",
+        "data_file": "Table_43_07_09_2019.csv"
+    },
+    {
+        "period": "2019-10",
+        "data_file": "Table_43_10_12_2019.csv"
+    },
+    {
+        "period": "2020-01",
+        "data_file": "Table_43_01_03_2020.csv"
+    },
+    {
+        "period": "2020-04",
+        "data_file": "Table_43_04_06_2020.csv"
     },
 ]
 
@@ -141,7 +98,10 @@ class PLFSDailyWageDataLoader:
         self.clean_df = None
 
     def load(self):
-        df = pd.read_excel(self.source)
+        if self.source.endswith("xlsx"):
+            df = pd.read_excel(self.source)
+        else:
+            df = pd.read_csv(self.source)
         # Drop title rows in the top and  rows after 41.
         # The actual data is between 4nd and 41st row. So keep only them.
         df = df.iloc[4:41]
@@ -149,7 +109,7 @@ class PLFSDailyWageDataLoader:
 
     def _setup_location(self):
         self.clean_df["territory"] = self.clean_df["territory"].apply(
-            lambda x: INDIA_ISO_CODES[x])
+            IndiaStatesMapper.get_state_name_to_iso_code_mapping)
 
     def _make_column_numerical(self, column):
         self.clean_df[column] = self.clean_df[column].astype(str).str.replace(
@@ -203,7 +163,7 @@ def main():
         data_file = dataset["data_file"]
         data_file_path = os.path.join(
             os.path.dirname(__file__),
-            "data/{data_file}.xlsx".format(data_file=data_file),
+            "data/{data_file}".format(data_file=data_file),
         )
         loader = PLFSDailyWageDataLoader(data_file_path, period)
         loader.load()
