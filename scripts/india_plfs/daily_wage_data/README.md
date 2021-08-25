@@ -7,12 +7,12 @@ Average wage earnings (Rs. 0.00) per day from casual labour work other than publ
 ### Download Data
 
 #### PLES July 2019 - Jun 2020
-Wage data from PLES July 2019 - Jun 2020 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual_Report_PLFS_2019_20.pdf). Table format is the same.
+Wage data from PLES July 2019 - Jun 2020 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual_Report_PLFS_2019_20.pdf). Standard table format.
 
-* Page 384 has the data for July-Sep 2019 
-* Page 385 has the data for Oct-Dec 2019
-* Page 386 has the data for Jan-Mar 2020
-* Page 387 has the data for Apr-Jun 2020
+* Page 385 has the data for July-Sep 2019 
+* Page 386 has the data for Oct-Dec 2019
+* Page 387 has the data for Jan-Mar 2020
+* Page 388 has the data for Apr-Jun 2020
 
 Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
 
