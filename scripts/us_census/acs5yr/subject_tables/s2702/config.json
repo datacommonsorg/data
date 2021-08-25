@@ -1,108 +1,208 @@
 {
-{
-   "populationType":{
-      "_DEFAULT_":"Person",
-      "Household" : "Household"
-   },
-   "measurement":{
-      "Median income (dollars)":{
-         “measuredProperty”:"income",
-         “statType”:”medianValue”,
-         “unit”:”USDollar”
-      "_DEFAULT_":{
-         “measuredProperty”: "count",
-         “statType”:”measuredValue”
-   },
-   "pvs":{
-      "benefitsStatus":{
-         "Households receiving food stamps":"WithFoodStampsInThePast12Months",
-         "Households receiving food stamps/SNAP":"WithFoodStampsInThePast12Months",
-         "Households receiving food stamps/SNAP MOE":"WithFoodStampsInThePast12Months",
-         "Households not receiving food stamps":"WithoutFoodStampsInThePast12Months",
-         "Households not receiving food stamps/SNAP":"WithoutFoodStampsInThePast12Months",
-         "Households not receiving food stamps/SNAP MOE":"WithoutFoodStampsInThePast12Months"
-      },
-      "memberStatus":{
-         "With one or more people 60 years and over":"WithPeopleOver60",
-         "With one or more people in the household 60 years and over":"WithPeopleOver60",
-         "No people in the household 60 years and over":"WithoutPeopleOver60",
-         "With children under 18 years":"WithChildrenUnder18",
-         "No children under 18 years":"WithoutChildrenUnder18"
-      },
-      "householdType":{
-         "Married-couple family":"MarriedCoupleFamilyHousehold",
-         "Other family":"OtherFamilyHousehold",
-         "Other family:":"OtherFamilyHousehold",
-         "Male householder, no wife present":"SingleFatherFamilyHousehold",
-         "Male householder, no spouse present":"SingleFatherFamilyHousehold",
-         "Female householder, no husband present":"SingleMotherFamilyHousehold",
-         "Female householder, no spouse present":"SingleMotherFamilyHousehold",
-         "Nonfamily households":"NonfamilyHousehold",
-         "Families":"FamilyHousehold"
-      },
-      "povertyStatus":{
-         "Below poverty level":"BelowPovertyLevelInThePast12Months",
-         "At or above poverty level":"AbovePovertyLevelInThePast12Months",
-         "At or above  poverty level":"AbovePovertyLevelInThePast12Months"
-      },
-      "disabilityStatus":{
-         "With one or more people with a disability":"WithDisability",
-         "With no persons with a disability":"NoDisability"
-      },
-      "householderRace":{
-         "One race":"OneRace",
-         "White":"WhiteAlone",
-         "White alone":"WhiteAlone",
-         "Black or African American":"BlackOrAfricanAmericanAlone",
-         "Black or African American alone":"BlackOrAfricanAmericanAlone",
-         "American Indian and Alaska Native":"AmericanIndianOrAlaskaNativeAlone",
-         "American Indian and Alaska Native alone":"AmericanIndianOrAlaskaNativeAlone",
-         "Asian":"AsianAlone",
-         "Asian alone":"AsianAlone",
-         "Native Hawaiian and Other Pacific Islander":"NativeHawaiianOrOtherPacificIslanderAlone",
-         "Native Hawaiian and Other Pacific Islander alone":"NativeHawaiianOrOtherPacificIslanderAlone",
-         "Some other race":"SomeOtherRaceAlone",
-         "Some other race alone":"SomeOtherRaceAlone",
-         "Two or more races":"TwoOrMoreRaces",
-         "Hispanic or Latino origin (of any race)":"HispanicOrLatino",
-         "White alone, not Hispanic or Latino":"WhiteAloneNotHispanicOrLatino"
-      },
-      "workStatus":{
-         "No workers in past 12 months":"NoWorkersInThePast12Months",
-         "1 worker in past 12 months":"OneWorkerInThePast12Months",
-         "2 or more workers in past 12 months":"TwoOrMoreWorkersInThePast12Months"
-      }
-   },
-   "enumSpecializations":{
-      "SingleFatherFamilyHousehold":"OtherFamilyHousehold",
-      "SingleMotherFamilyHousehold":"OtherFamilyHousehold",
-      "WhiteAlone":"OneRace",
-      "BlackOrAfricanAmericanAlone":"OneRace",
-      "AmericanIndianOrAlaskaNativeAlone":"OneRace",
-      "AsianAlone":"OneRace",
-      "NativeHawaiianOrOtherPacificIslanderAlone":"OneRace",
-      "SomeOtherRaceAlone":"OneRace"
-   },
-   "inferredSpec":{
-      "workStatus":{
-         "householdType":"FamilyHousehold"
-      }
-   },
-   “universePvs”:[
-      {
-        “populationType”: “Person”,
-        “contraintProperties”: [“healthInsurance”],
-        “dependentPv”: {
-             “institutionalization”: “USC_NonInstitutionalized”,
-             “armedForcesStatus”: “Civilian”,
-          },
-      }
-   ]
-},
-
-"_comment": "denominator -> numerator stat-vars",
-	
-“denominators”: {
-   “<column-name-from-csv>”: [“<column-name-from-csv>”, “<column-name-from-csv>”, ...],
-}
+	"populationType": {
+		"_DEFAULT": "Person",
+		"HOUSEHOLD": "Household"
+	},
+	"measurement": {
+		"Median age (years)": {
+			"measuredProperty": "age",
+			"statType": "medianValue",
+			"unit": "Years"
+		},
+		"Median earnings (dollars)": {
+			"measuredProperty": "income",
+			"statType": "medianValue",
+			"unit": "USDollar"
+		},
+		"Median household income of householders": {
+			"measuredProperty": "income",
+			"statType": "medianValue",
+			"unit": "USDollar"
+		},
+		"_DEFAULT": {
+			"measuredProperty": "count",
+			"statType": "measuredValue"
+		}
+	},
+	"pvs": {
+		"age": {
+			"Under 19 years": "Below19Years",
+			"Under 6 years": "Below6Years",
+			"6 to 18 years": "6To18Year",
+			"19 to 64 years": "19To64Years",
+			"19 to 25 years": "19To25Years",
+			"26 to 34 years": "26To34Years",
+			"35 to 44 years": "35To44Years",
+			"45 to 54 years": "45To54Years",
+			"55 to 64 years": "53To64Years",
+			"65 years and older": "65OrMoreYears",
+			"65 to 74 years": "65To74Years",
+			"75 years and older": "75OrMoreYears"
+		},
+		"race": {
+			"One race": "OneRace",
+			"White alone": "WhiteAlone",
+			"Black or African American alone": "BlackOrAfricanAmericanAlone",
+			"American Indian and Alaska Native alone": "AmericanIndianOrAlaskaNativeAlone",
+			"Asian alone": "AsianAlone",
+			"Native Hawaiian and Other Pacific Islander alone": "NativeHawaiianOrOtherPacificIslanderAlone",
+			"Some other race alone": "SomeOtherRaceAlone",
+			"Two or more races": "TwoOrMoreRaces",
+			"Hispanic or Latino (of any race)": "HispanicOrLatino",
+			"White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino"
+		},
+		"citizenship": {
+			"Native born": "NativeBorn",
+			"Foreign born": "ForeignBorn",
+			"Naturalized": "USCitizenByNaturalization",
+			"Not a citizen": "NotAUSCitizen"
+		},
+		"disabilityStatus": {
+			"With a disability": "WithDisability",
+			"No disability": "NoDisability"
+		},
+		"residentStatus": {
+			"Same house": "SameHouse1YearAgo",
+			"Different House in the U.S.": "DifferentHouseInTheUS",
+			"Same county": "DifferentHouseInSameCounty",
+			"Different county": "DifferentHouseInDifferentCounty",
+			"Same state": "DifferentHouseInDifferentCountySameState",
+			"Different state": "DifferentHouseInDifferentCountyDifferentState",
+			"Abroad": "DifferentHouseAbroad"
+		},
+		"educationalAttainment": {
+			"Less than high school graduate": "LessThanHighSchoolGraduate",
+			"High school graduate (includes equivalency)": "HighSchoolGraduateIncludesEquivalency",
+			"Some college or associate's degree": "SomeCollegeOrAssociatesDegree",
+			"Bachelor's degree or higher": "BachelorDegreeOrHigher"
+		},
+		"employmentStatus": {
+			"In labor force": "InLaborForce",
+			"Not in labor force": "NotInLaborForce"
+		},
+		"workExperience": {
+			"Worked full-time, year round in the past 12 months": "USC_FullTimeYearRoundWorker",
+			"Worked less than full-time, year round in the past 12 months": "LessThanFullTimeYearRoundWorker",
+			"Did not work": "DidNotWork"
+		},
+		"workerClass": {
+			"Private for-profit wage and salary workers": "PrivateForProfit_wageAndSalaryWorkers",
+			"Employee of private company workers": "PrivateCompany_employeeWorkers",
+			"Self-employed in own incorporated business workers": "OwnIncoporated_selfEmployedWorkers",
+			"Private not-for-profit wage and salary workers": "PrivateNotForProfit_wageAndSalaryWorkers",
+			"Local government workers": "LocalGovernentWorkers",
+			"State government workers": "StateGovernmentWorkers",
+			"Federal government workers": "FederalGovernmentWorkers",
+			"Self-employed workers in own not incorporated business workers": "NotOwnIncorporated_selfEmployedWorkers",
+			"Unpaid family workers": "UnpaidFamilyWorkers"
+		},
+		"industry": {
+			"Agriculture, forestry, fishing and hunting, and mining": "NAICS/11_21",
+			"Construction": "NAICS/23",
+			"Manufacturing": "NAICS/33",
+			"Wholesale trade": "NAICS/42",
+			"Retail trade": "NAICS/44-45",
+			"Transportation and warehousing, and utilities": "NAICS/48-49_22",
+			"Information": "NAICS/51",
+			"Finance and insurance, and real estate and rental and leasing": "NAICS/52-53",
+			"Professional, scientific, and management, and administrative and waste management services": "NAICS/54-56",
+			"Educational services, and health care and social assistance": "NAICS/61-62",
+			"Arts, entertainment, and recreation, and accommodation and food services": "NAICS/71-72",
+			"Other services (except public administration)": "NAICS/81",
+			"Public administration": "NAICS/82"
+		},
+		"occupation": {
+			"Sales and office occupations": "SalesAndOfficeOccupations",
+			"Service occupations": "ServiceOccupations",
+			"Management, business, science, and arts occupations": "ManagementOrBusinessOrScienceOrArtsOccupations",
+			"Natural resources, construction, and maintenance occupations": "NaturalResourcesOrConstructionOrMaintenanceOccupations",
+			"Production, transportation, and material moving occupations": "ProductionOrTransportationOrMaterialMovingOccupations"
+		},
+		"income": {
+			"$1 to $4,999 or loss": "USDollarUpTo4999",
+			"$5,000 to $14,999": "USDollar5000To14999",
+			"$15,000 to $24,999": "USDollar15000To24999",
+			"$25,000 to $34,999": "USDollar25000To34999",
+			"$35,000 to $49,999": "USDollar35000To49999",
+			"$50,000 to $74,999": "USDollar50000To74999",
+			"$75,000 or more": "USDollar75000OrMore"
+		},
+		"householdIncome": {
+			"Under $25,000": "USDollarUpTo25000",
+			"$25,000 to $49,999": "USDollar25000To49999",
+			"$50,000 to $74,999": "USDollar50000To74999",
+			"$75,000 to $99,999": "USDollar75000To99999",
+			"$100,000 and over": "USDollar100000OrMore"
+		},
+		"ratioToPovertyLine": {
+			"Below 50 percent of the poverty level": "Below50PercentPovertyLevel",
+			"50 to 99 percent of the poverty level": "Between50to99PercentOfPovertyLevel",
+			"100 to 149 percent of the poverty level": "Between100to149PercentOfPovertyLevel",
+			"150 to 199 percent of the poverty level": "Between150to199PercentOfPovertyLevel",
+			"200 to 299 percent of the poverty level": "Between200to299PercentOfPovertyLevel",
+			"At or above 300 percent of the poverty level": "300PercentOrAbovePovertyLevel"
+		}
+	},
+	"enumSpecializations": {
+		"Below6Years": "Below19Years",
+		"6To18Year": "Below19Years",
+		"19To25Years": "19To64Years",
+		"26To34Years": "19To64Years",
+		"35To44Years": "19To64Years",
+		"45To54Years": "19To64Years",
+		"53To64Years": "19To64Years",
+		"65To74Years": "65OrMoreYears",
+		"75OrMoreYears": "65OrMoreYears",
+		"WhiteAlone": "OneRace",
+		"BlackOrAfricanAmericanAlone": "OneRace",
+		"AmericanIndianOrAlaskaNativeAlone": "OneRace",
+		"AsianAlone": "OneRace",
+		"NativeHawaiianOrOtherPacificIslanderAlone": "OneRace",
+		"SomeOtherRaceAlone": "OneRace",
+		"DifferentHouseInTheUS": "DifferentHouse1YearAgo",
+		"DifferentHouseInSameCounty": "DifferentHouseInTheUS",
+		"DifferentHouseInDifferentCounty": "DifferentHouseInTheUS",
+		"DifferentHouseInDifferentCountySameState": "DifferentHouseInDifferentCounty",
+		"DifferentHouseInDifferentCountyDifferentState": "DifferentHouseInDifferentCounty"
+	},
+	"inferredSpec": {
+		"educationalAttainment": {
+			"age": "Years25Onwards"
+		},
+		"employment": {
+			"employmentStatus": "BLS_InLaborForce",
+			"age": "Years16Onwards"
+		},
+		"workExperience": {
+			"age": "Years16To64"
+		},
+		"workerClass": {
+			"age": "Years16Onwards"
+		},
+		"industry": {
+			"age": "Years16Onwards"
+		},
+		"occupation": {
+			"age": "Years16Onwards"
+		}
+	},
+	"universePVs": [{
+		"populationType": "Person",
+		"constraintProperties": ["healthInsurance"],
+		"dependentPVs": {
+			"armedForceStatus": "Civilian",
+			"institutionalization": "USC_NonInstitutionalized"
+		}
+	}],
+	"denominators": {
+		"Total civilian noninstitutionalized population": ["Under 19 years", "Under 6 years", "6 to 18 years", "19 to 64 years", "19 to 25 years", "26 to 34 years", "35 to 44 years", "45 to 54 years", "55 to 64 years", "65 years and older", "65 to 74 years", "75 years and older", "Male", "Female", "One race", "White alone", "Black or African American alone", "American Indian and Alaska Native alone", "Asian alone", "Native Hawaiian and Other Pacific Islander alone", "Some other race alone", "Two or more races", "Hispanic or Latino (of any race)", "White alone, not Hispanic or Latino", "Native born", "Foreign born", "Naturalized", "Not a citizen", "With a disability", "No disability"],
+		"Civilian noninstitutionalized population 1 year and over": ["Same house", "Different House in the U.S.", "Same county", "Different county", "Same state", "Different state", "Abroad"],
+		"Civilian noninstitutionalized population 25 years and over": ["Less than high school graduate", "High school graduate (includes equivalency)", "Some college or associate's degree", "Bachelor's degree or higher"],
+		"Civilian noninstitutionalized population 16 years and over": ["In labor force", "Employed", "Unemployed", "Not in labor force"],
+		"Civilian noninstitutionalized population 16 to 64 years": ["Worked full-time, year round in the past 12 months", "Worked less than full-time, year round in the past 12 months", "Did not work"],
+		"Civilian noninstitutionalized workers 16 years and over": ["Private for-profit wage and salary workers", "Employee of private company workers", "Self-employed in own incorporated business workers", "Private not-for-profit wage and salary workers", "Local government workers", "State government workers", "Federal government workers", "Self-employed workers in own not incorporated business workers", "Unpaid family workers", "Agriculture, forestry, fishing and hunting, and mining", "Construction", "Manufacturing", "Wholesale trade", "Retail trade", "Transportation and warehousing, and utilities", "Information", "Finance and insurance, and real estate and rental and leasing", "Professional, scientific, and management, and administrative and waste management services", "Educational services, and health care and social assistance", "Arts, entertainment, and recreation, and accommodation and food services", "Other services (except public administration)", "Public administration", "Sales and office occupations", "Natural resources, construction, and maintenance occupations", "Production, transportation, and material moving occupations"],
+		"Civilian noninstitutionalized population 16 years and over with earnings": ["$1 to $4,999 or loss", "$5,000 to $14,999", "$15,000 to $24,999", "$25,000 to $34,999", "$35,000 to $49,999", "$50,000 to $74,999", "$75,000 or more"],
+		"Total household population": ["Under $25,000", "$25,000 to $49,999", "$50,000 to $74,999", "$75,000 to $99,999", "$100,000 and over"],
+		"Civilian noninstitutionalized population for whom poverty status is determined": ["Below 50 percent of the poverty level", "50 to 99 percent of the poverty level", "100 to 149 percent of the poverty level", "150 to 199 percent of the poverty level", "200 to 299 percent of the poverty level", "At or above 300 percent of the poverty level"]
+	}
 }
