@@ -70,32 +70,32 @@ _GEOF_OLDER_LOGRECNO = (19, 7)
 # Relevant summary levels: https://user-images.githubusercontent.com/4375037/130695894-365a96b6-8bec-4a98-ab91-fe90ea3c2e57.png
 _GEOF_OLDER_DCID_MAP = {
     '2010': {
-      # State
-      '040': [(28, 2)],
-      # County
-      '050': [(28, 2), (30, 3)],
-      # CouSub
-      '060': [(28, 2), (30, 3), (37, 5)],
-      # Tract
-      '140': [(28, 2), (30, 3), (55, 6)],
-      # BlockGroup
-      '150': [(28, 2), (30, 3), (55, 6), (61, 1)],
-      # Place
-      '160': [(28, 2), (46, 5)],
+        # State
+        '040': [(28, 2)],
+        # County
+        '050': [(28, 2), (30, 3)],
+        # CouSub
+        '060': [(28, 2), (30, 3), (37, 5)],
+        # Tract
+        '140': [(28, 2), (30, 3), (55, 6)],
+        # BlockGroup
+        '150': [(28, 2), (30, 3), (55, 6), (61, 1)],
+        # Place
+        '160': [(28, 2), (46, 5)],
     },
     '2000': {
-      # State
-      '040': [(30, 2)],
-      # County
-      '050': [(30, 2), (32, 3)],
-      # CouSub
-      '060': [(30, 2), (32, 3), (37, 5)],
-      # Tract
-      '140': [(30, 2), (32, 3), (56, 6)],
-      # BlockGroup
-      '150': [(30, 2), (32, 3), (56, 6), (62, 1)],
-      # Place
-      '160': [(30, 2), (46, 5)],
+        # State
+        '040': [(30, 2)],
+        # County
+        '050': [(30, 2), (32, 3)],
+        # CouSub
+        '060': [(30, 2), (32, 3), (37, 5)],
+        # Tract
+        '140': [(30, 2), (32, 3), (56, 6)],
+        # BlockGroup
+        '150': [(30, 2), (32, 3), (56, 6), (62, 1)],
+        # Place
+        '160': [(30, 2), (46, 5)],
     },
 }
 
@@ -173,16 +173,20 @@ def _get_geo_file(zf):
             return f
     return ''
 
+
 # In 2000 census, 0US_Summary files have double quotes around cell values.  To
 # be safe, always trim space and strip surrounding quotes for all cell-values.
 def _strip(token):
     return token.strip().strip('"')
 
+
 def _slice(line, pair):
     return _strip(line[pair[0] - 1:pair[0] - 1 + pair[1]])
 
+
 def _index(line, idx):
     return _strip(line[idx])
+
 
 def _build_older_geomap(geof, year, is_national):
     """Builds a map from logical-record-number to DCID for 2000 and 2010."""
@@ -282,8 +286,10 @@ def _generate_csv(year, dataf, csvw, geomap, verbose):
             if verbose:
                 print('Emitting: ', place_dcid, ' : ', sv, ' : ',
                       _index(parts, val_col))
-            csvw.writerow(['dcid:' + place_dcid, 'dcid:' + sv,
-                          _index(parts, val_col), year])
+            csvw.writerow([
+                'dcid:' + place_dcid, 'dcid:' + sv,
+                _index(parts, val_col), year
+            ])
 
 
 def _process_geodir(year, geodir, output_dir, verbose):
