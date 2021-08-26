@@ -42,6 +42,7 @@ INDIA_STATES_ISO_CODES = {
     "RAJASTHAN": "IN-RJ",
     "SIKKIM": "IN-SK",
     "TAMIL NADU": "IN-TN",
+    "TAMILNADU": "IN-TN",
     "TELENGANA": "IN-TG",
     "TELANGANA": "IN-TG",
     "TRIPURA": "IN-TR",
@@ -50,6 +51,8 @@ INDIA_STATES_ISO_CODES = {
     "WEST BENGAL": "IN-WB",
     "ANDAMAN AND NICOBAR ISLANDS": "IN-AN",
     "ANDAMAN & NICOBAR ISLANDS": "IN-AN",
+    "A & N ISLANDS": "IN-AN",
+    "ANDAMAN & N. ISLAND": "IN-AN",
     "CHANDIGARH": "IN-CH",
     "DADRA AND NAGAR HAVELI": "IN-DN",
     "DADRA & NAGAR HAVELI": "IN-DN",
@@ -64,9 +67,11 @@ INDIA_STATES_ISO_CODES = {
     "LAKSHWADEEP": "IN-LD",
     "PONDICHERRY": "IN-PY",
     "PUDUCHERRY": "IN-PY",
+    "PUDUCHERY": "IN-PY",
     "DADRA AND NAGAR HAVELI AND DAMAN AND DIU": "IN-DH",
     "TELANGANA": "IN-TG",
-    "ALL INDIA": "IN"
+    "ALL INDIA": "IN",
+    "ALL-INDIA": "IN"
 }
 
 INDIA_STATES_CENSUS2001_CODES = {
@@ -106,9 +111,14 @@ INDIA_STATES_CENSUS2001_CODES = {
     "LAKSHADWEEP": "31",
     "KERALA": "32",
     "TAMIL NADU": "33",
+    "TAMILNADU": "33",
+    "PONDICHERRY": "34",
     "PUDUCHERRY": "34",
+    "PUDUCHERY": "34",
     "ANDAMAN & NICOBAR ISLANDS": "35",
-    "ANDAMAN AND NICOBAR ISLANDS": "35"
+    "ANDAMAN AND NICOBAR ISLANDS": "35",
+    "A & N ISLANDS": "35",
+    "ANDAMAN & N. ISLAND": "35"
 }
 
 
@@ -128,7 +138,8 @@ class IndiaStatesMapper:
             return INDIA_STATES_ISO_CODES[state_name]
         else:
             raise Exception(
-                "State name is not found in the INDIA_STATES_ISO_CODES mapping")
+                "State name - {state_name} is not found in the INDIA_STATES_ISO_CODES mapping"
+                .format(state_name=state_name))
 
     @staticmethod
     def get_state_name_to_census2001_code_mapping(state_name,
