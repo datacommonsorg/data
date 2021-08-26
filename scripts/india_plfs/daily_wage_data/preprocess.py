@@ -106,6 +106,11 @@ class PLFSDailyWageDataLoader:
         # The actual data is between 4nd and (4 + data_rows) row. So keep only them.
         df = df.iloc[4:(4 + self.data_rows)]
 
+        # Cell value zero(0) indicates no sample observation
+        # in the respective category
+        df = df.replace(0, '')
+        df = df.replace("0", '')
+
         self.raw_df = df
 
     def _setup_location(self):
