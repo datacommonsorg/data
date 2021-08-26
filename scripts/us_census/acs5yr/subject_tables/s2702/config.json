@@ -77,24 +77,39 @@
 			"Bachelor's degree or higher": "BachelorDegreeOrHigher"
 		},
 		"employmentStatus": {
-			"In labor force": "InLaborForce",
-			"Not in labor force": "NotInLaborForce"
+			"In labor force": "BLS_InLaborForce",
+			"Not in labor force": "BLS_NotInLaborForce"
+		},
+		"employment": {
+			"Employed": "BLS_Employed",
+			"Unemployed": "BLS_Unemployed"
 		},
 		"workExperience": {
 			"Worked full-time, year round in the past 12 months": "USC_FullTimeYearRoundWorker",
 			"Worked less than full-time, year round in the past 12 months": "LessThanFullTimeYearRoundWorker",
 			"Did not work": "DidNotWork"
 		},
-		"workerClass": {
-			"Private for-profit wage and salary workers": "PrivateForProfit_wageAndSalaryWorkers",
-			"Employee of private company workers": "PrivateCompany_employeeWorkers",
-			"Self-employed in own incorporated business workers": "OwnIncoporated_selfEmployedWorkers",
-			"Private not-for-profit wage and salary workers": "PrivateNotForProfit_wageAndSalaryWorkers",
-			"Local government workers": "LocalGovernentWorkers",
-			"State government workers": "StateGovernmentWorkers",
-			"Federal government workers": "FederalGovernmentWorkers",
-			"Self-employed workers in own not incorporated business workers": "NotOwnIncorporated_selfEmployedWorkers",
-			"Unpaid family workers": "UnpaidFamilyWorkers"
+		"establishmentOwnership": {
+			"Private for-profit wage and salary workers": "PrivateOwnedForProfit",
+			"Employee of private company workers": "PrivateOwnedForProfit",
+			"Self-employed in own incorporated business workers": "PrivateOwnedForProfit",
+			"Private not-for-profit wage and salary workers": "PrivateNotOwnedForProfit",
+			"Local government workers": "LocalGovernment",
+			"State government workers": "StateGovernment",
+			"Federal government workers": "FederalGovernment",
+			"Self-employed workers in own not incorporated business workers": "PrivatelyOwned",
+			"Unpaid family workers": "PrivatelyOwned"
+		},
+		"workerClassification": {
+			"Private for-profit wage and salary workers": "PaidWorker",
+			"Employee of private company workers": "PaidEmployee",
+			"Self-employed in own incorporated business workers": "IncorporatedBusinessOwner",
+			"Private not-for-profit wage and salary workers": "PaidWorker",
+			"Local government workers": "Worker",
+			"State government workers": "Worker",
+			"Federal government workers": "Worker",
+			"Self-employed workers in own not incorporated business workers": "UnincorporatedBusinessOwner",
+			"Unpaid family workers": "USC_UnpaidFamilyWorker"
 		},
 		"industry": {
 			"Agriculture, forestry, fishing and hunting, and mining": "NAICS/11_21",
@@ -119,28 +134,28 @@
 			"Production, transportation, and material moving occupations": "ProductionOrTransportationOrMaterialMovingOccupations"
 		},
 		"income": {
-			"$1 to $4,999 or loss": "USDollarUpTo4999",
-			"$5,000 to $14,999": "USDollar5000To14999",
+			"$1 to $4,999 or loss": "[- 4999 USDollar]",
+			"$5,000 to $14,999": "[5000 14999 USDollar]",
 			"$15,000 to $24,999": "USDollar15000To24999",
 			"$25,000 to $34,999": "USDollar25000To34999",
 			"$35,000 to $49,999": "USDollar35000To49999",
 			"$50,000 to $74,999": "USDollar50000To74999",
-			"$75,000 or more": "USDollar75000OrMore"
+			"$75,000 or more": "[75000 - USDollar]"
 		},
 		"householdIncome": {
 			"Under $25,000": "USDollarUpTo25000",
 			"$25,000 to $49,999": "USDollar25000To49999",
 			"$50,000 to $74,999": "USDollar50000To74999",
 			"$75,000 to $99,999": "USDollar75000To99999",
-			"$100,000 and over": "USDollar100000OrMore"
+			"$100,000 and over": "[100000 - USDollar]"
 		},
 		"ratioToPovertyLine": {
-			"Below 50 percent of the poverty level": "Below50PercentPovertyLevel",
-			"50 to 99 percent of the poverty level": "Between50to99PercentOfPovertyLevel",
-			"100 to 149 percent of the poverty level": "Between100to149PercentOfPovertyLevel",
-			"150 to 199 percent of the poverty level": "Between150to199PercentOfPovertyLevel",
-			"200 to 299 percent of the poverty level": "Between200to299PercentOfPovertyLevel",
-			"At or above 300 percent of the poverty level": "300PercentOrAbovePovertyLevel"
+			"Below 50 percent of the poverty level": "[- 0.5 RatioToPovertyLine]",
+			"50 to 99 percent of the poverty level": "[0.5 0.99 RatioToPovertyLine]",
+			"100 to 149 percent of the poverty level": "[1 1.49 RatioToPovertyLine]",
+			"150 to 199 percent of the poverty level": "[1.5 1.99 RatioToPovertyLine]",
+			"200 to 299 percent of the poverty level": "[2.0 2.99 RatioToPovertyLine]",
+			"At or above 300 percent of the poverty level": "[3 - RatioToPovertyLine]"
 		}
 	},
 	"enumSpecializations": {
@@ -188,11 +203,18 @@
 	},
 	"universePVs": [{
 		"populationType": "Person",
-		"constraintProperties": ["healthInsurance"],
+		"constraintProperties": [{
+			"healthInsurance": "NoHealthInsurance"
+		}],
 		"dependentPVs": {
 			"armedForceStatus": "Civilian",
 			"institutionalization": "USC_NonInstitutionalized"
 		}
+	},{
+		"populationType": "Household",
+		"constraintProperties": [{
+			"healthInsurance": "NoHealthInsurance"
+		}]
 	}],
 	"denominators": {
 		"Total civilian noninstitutionalized population": ["Under 19 years", "Under 6 years", "6 to 18 years", "19 to 64 years", "19 to 25 years", "26 to 34 years", "35 to 44 years", "45 to 54 years", "55 to 64 years", "65 years and older", "65 to 74 years", "75 years and older", "Male", "Female", "One race", "White alone", "Black or African American alone", "American Indian and Alaska Native alone", "Asian alone", "Native Hawaiian and Other Pacific Islander alone", "Some other race alone", "Two or more races", "Hispanic or Latino (of any race)", "White alone, not Hispanic or Latino", "Native born", "Foreign born", "Naturalized", "Not a citizen", "With a disability", "No disability"],
