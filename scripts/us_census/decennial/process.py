@@ -60,7 +60,7 @@ _GEOF_2020_DCID_MAP = {
 # have start-position and length for the fields.
 #
 # * 2010 - https://user-images.githubusercontent.com/4375037/130695985-6996cd98-66c9-4a59-87c7-48b9e389e2bc.png
-# * 2000 - https://screenshot.googleplex.com/4neUJR5KNX6YNrK
+# * 2000 - https://user-images.githubusercontent.com/4375037/130900239-ba4e889e-eb42-45b3-9acd-bd366ffd0d04.png
 #
 _GEOF_OLDER_SUMLEV = (9, 3)
 _GEOF_OLDER_LOGRECNO = (19, 7)
@@ -112,7 +112,7 @@ _US_DIRECTORY = {
 # Logical Record Number in datafile is same across years.
 # 2020 - https://user-images.githubusercontent.com/4375037/130696087-14199c77-58f7-40cb-8010-3355356d7275.png
 # 2010 - https://user-images.githubusercontent.com/4375037/130696096-a40d7306-1707-4359-92af-a7bd391e2623.png
-# 2000 - https://screenshot.googleplex.com/dDJnvwF3STj2iZn
+# 2000 - https://user-images.githubusercontent.com/4375037/130900154-893de0c2-f0ae-4ec9-9fe0-34056a6a1572.png
 _DATAF_LOGRECNO_COL = 4
 
 # Delimiter for data file varies across years.
@@ -128,7 +128,7 @@ _DATAF_DELIM_CHAR = {
 # The column offsets are the same across years:
 # 2020 - https://user-images.githubusercontent.com/4375037/130696087-14199c77-58f7-40cb-8010-3355356d7275.png
 # 2010 - https://user-images.githubusercontent.com/4375037/130696096-a40d7306-1707-4359-92af-a7bd391e2623.png
-# 2000 - https://screenshot.googleplex.com/Ar2ySSYTLEszZVo
+# 2000 - https://user-images.githubusercontent.com/4375037/130900349-bd344711-4ce4-4b78-a4fa-fa71eefd2f88.png
 #
 # One exception is that H001 tables do not exist in 2000. We'll handle it
 # specially below.
