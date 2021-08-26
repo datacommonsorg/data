@@ -1,6 +1,6 @@
 # Decennnial Census - Redistricting Files
 
-Includes cleaning scripts to process the 2010 and 2020 Decennial Census'
+Includes cleaning scripts to process the 2000, 2010 and 2020 Decennial Census'
 Redistricting Files. This is a preliminary release before the full Summary Files
 are released and before the data is available on https://data.census.gov.
 
@@ -30,6 +30,7 @@ that "local-record-id", followed by a set of values, one per StatVar. This set
 of files repeats for every year and every state/US.
 
 The format of the geo-file and data-files are described in these documents:
+* [2000](https://www2.census.gov/programs-surveys/decennial/2000/technical-documentation/complete-tech-docs/summary-files/public-law-summary-files/pl-00-1.pdf)
 * [2010](https://www.census.gov/prod/cen2010/doc/pl94-171.pdf)
 * [2020](https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/summary-file/2020Census_PL94_171Redistricting_NationalTechDoc.pdf)
 
@@ -40,10 +41,14 @@ quite different. Thus, the code has different maps for 2010 and 2020 geo-files.
 ## Download
 
 The data is available at the Census FTP site:
+* [2000](https://www2.census.gov/census_2000/datasets/redistricting_file--pl_94-171/)
 * [2010](https://www2.census.gov/programs-surveys/decennial/2010/data/01-Redistricting_File--PL_94-171/)
 * [2020](https://www2.census.gov/programs-surveys/decennial/2020/data/01-Redistricting_File--PL_94-171/)
 
-It is saved in GCS at `gs://datcom-csv/census/decennial`.
+It is saved in GCS at `gs://datcom-csv/census/decennial`.  The 2000's path in
+GCS was slightly tweaked for consistency (i.e., replace
+`census_2000/datasets/redistricting_file--pl_94-171` with
+`2000/data/01-Redistricting_File--PL_94-171`).
 
 ## Generation
 

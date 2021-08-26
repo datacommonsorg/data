@@ -4,4 +4,4 @@ variableMeasured: C:DecennialCensus->variableMeasured
 observationAbout: C:DecennialCensus->observationAbout
 observationDate: C:DecennialCensus->observationDate
 value: C:DecennialCensus->value
-measurementMethod: dcs:CensusACS5yrSurvey
+measurementMethod: dcs:USDecennialCensus
