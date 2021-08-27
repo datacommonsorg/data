@@ -19,6 +19,7 @@ import os
 import json
 import tempfile
 import unittest
+import pandas as pd
 from india_plfs.wage_data.preprocess import PLFSWageDataLoader
 
 # module_dir_ is the path to where this test is running from.
@@ -54,6 +55,32 @@ class TestPreprocess(unittest.TestCase):
 
         self.maxDif = None
         self.assertEqual(expected_file_data, result_file_data)
+
+    def test_data_in_cleaned_csv(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            xlsx_file = os.path.join(module_dir_, 'test_data/test.csv')
+            result_file_path = os.path.join(module_dir_,
+                                            'test_data/test_cleaned2.csv')
+
+            loader = PLFSWageDataLoader(xlsx_file,
+                                        period="2019-10",
+                                        data_rows=38)
+            loader.load()
+            loader.process()
+            loader.save(csv_file_path=result_file_path)
+
+            df = pd.read_csv(result_file_path)
+            os.remove(result_file_path)
+            # Test various data points
+            self.assertEqual(
+                df[df["territory"] == "IN-UT"]["wage_rural_male"].values[0],
+                11383.88)
+            self.assertEqual(
+                df[df["territory"] == "IN-KA"]["wage_urban_female"].values[0],
+                16787.13)
+            self.assertEqual(
+                df[df["territory"] == "IN-GA"]["wage_total_person"].values[0],
+                20515.56)
 
 
 if __name__ == '__main__':

@@ -65,6 +65,26 @@ DATASETS = [
         "data_file": "Table_42_04_06_2019.xlsx",
         "data_rows": 37
     },
+    {
+        "period": "2019-07",
+        "data_file": "Table_42_07_09_2019.csv",
+        "data_rows": 38
+    },
+    {
+        "period": "2019-10",
+        "data_file": "Table_42_10_12_2019.csv",
+        "data_rows": 38
+    },
+    {
+        "period": "2020-01",
+        "data_file": "Table_42_01_03_2020.csv",
+        "data_rows": 38
+    },
+    {
+        "period": "2020-04",
+        "data_file": "Table_42_04_07_2020.csv",
+        "data_rows": 38
+    },
 ]
 
 
