@@ -30,7 +30,8 @@ from absl import app
 from un_energy_codes import get_all_energy_source_codes
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Data dir to download into')
+flags.DEFINE_string('download_data_dir', 'tmp_raw_data/un_energy',
+                    'Data dir to download into')
 flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
 flags.DEFINE_integer('start_year', 1990,
                      'Data set downloaded from the start year.')
@@ -40,50 +41,108 @@ flags.DEFINE_integer('end_year',
 flags.DEFINE_integer('years_per_batch', 10,
                      'Data set downloaded in batches of years.')
 
+# Template for the UN Energy data set download.
+# Parameters:
+#   energy_code: two-letter code for the energy source
+#   years: comma separated list of years
 _DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr={years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
 
 
-def download_zip_file(url: str, save_path: str):
+def download_zip_file(url: str, csv_save_path: str) -> bool:
+    """Download a zip file from the url and save the extracted file.
+
+    Args:
+      url: string with URL and parameters to download.
+      csv_save_path: Output file name into which uncompressed contents are saved.
+
+    Returns:
+      True if the download was successful.
+    """
     print(f'Downloading {url} to {save_path}')
     r = requests.get(url, stream=True)
     if r.status_code != 200:
         print(f'Failed to download {url}, response code: ', r.status_code)
+        return False
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall(save_path)
+    return True
 
 
-def download_energy_dataset(energy_dataset: str):
+def download_energy_dataset(
+    energy_dataset: str,
+    start_year: int,
+    end_year: int,
+    years_per_batch: int,
+    output_path: str,
+) -> list:
+    """Download the data files for a given energy code for a range of years.
+    The data is downloaded as a CSV and saved into a file with the energy code prefix.
+
+    Args:
+      energy_dataset: 2-letter code for the energy data set
+      start_year: Download data form this year onwards.
+      end_year: download data upto this year. This is the current year by default.
+      years_per_batch: Download upto years_per_batch at a time.
+          The range of years to download is split into batches of this size
+          as all years exceed the API download limit size.
+      output_path: Directory file prefix for downloaded files.
+          Each downloaded batch will be saved into a file for the form:
+          {output_path}-un_energy-{energy_dataset}-{start_year}-{end_year}
+
+    Returns:
+      A list of output files downloaded.
+    """
+    output_files = []
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
         print(f'Dataset "{energy_dataset}" not in list of supported codes:' +
               str(supported_datasets))
-        return
+        return output_files
     # Download data in batches of years as the download has a limit of 100k rows.
-    years_list = list(range(FLAGS.start_year, FLAGS.years_per_batch + 1))
-    years_list = [str(y) for y in range(FLAGS.start_year, FLAGS.end_year + 1)]
+    years_list = list(range(start_year, years_per_batch + 1))
+    years_list = [str(y) for y in range(start_year, end_year + 1)]
     batch_years = [
-        years_list[i:i + FLAGS.years_per_batch]
-        for i in range(0, len(years_list), FLAGS.years_per_batch)
+        years_list[i:i + years_per_batch]
+        for i in range(0, len(years_list), years_per_batch)
     ]
+    errors = 0
     for year_batch in batch_years:
         start_year = year_batch[0]
         end_year = year_batch[-1]
         years_str = ','.join(year_batch)
-        output = f'{FLAGS.data_dir}/undata-{energy_dataset}-{start_year}-{end_year}'
+        output = f'{output_path}-{energy_dataset}-{start_year}-{end_year}.csv'
         print('Downloading UNData energy dataset: ',
               f'{energy_dataset} from {start_year} to {end_year}')
         download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
                                             years=years_str)
-        download_zip_file(download_url, output)
+        if not download_zip_file(download_url, output):
+            errors += 1
+        output_files.append(output)
+    return output_files
 
 
-def main(_):
-    assert FLAGS.data_dir
+def download_un_energy_dataset() -> list:
+    """Download the required energy data set files.
+    If no energy codes are specified, downloads data for all known energy codes.
+    """
+    assert FLAGS.download_data_dir
     supported_datasets = get_all_energy_source_codes()
     energy_datasets = FLAGS.datasets if FLAGS.datasets else supported_datasets
+    output_files = []
     for energy_code in energy_datasets:
-        download_energy_dataset(energy_code)
+        downloaded_files = download_energy_dataset(energy_code,
+                                                   FLAGS.start_year,
+                                                   FLAGS.end_year,
+                                                   FLAGS.years_per_batch,
+                                                   FLAGS.download_data_dir)
+        if len(downloaded_files) == 0:
+            errors += 1
+        output_files.append(downloaded_files)
+    print(f'Downloaded the following files: {output_files}')
+    return output_files
 
+def main(_):
+    download_un_energy_dataset()
 
 if __name__ == '__main__':
     print('running main')

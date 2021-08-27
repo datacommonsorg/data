@@ -258,7 +258,7 @@ UN_ENERGY_FUEL_CODES = {
     },
     'SB': {
         'populationType': 'Fuel',
-        'fuelType': 'dcs:EIA_SubbituminousCoal'
+        'fuelType': 'dcs:EIA_SubBituminousCoal'
     },
     'UR': {
         'populationType': 'Fuel',
@@ -284,7 +284,7 @@ UN_ENERGY_FUEL_CODES = {
     },
     'ST': {
         'populationType': 'Energy',
-        'usedFor': 'Heat'
+        'energySource': 'Heat'
     },
     'HF': {
         'populationType': 'Energy',
@@ -381,6 +381,9 @@ UN_ENERGY_SOURCE_TYPE = {
     'CP': {
         'energySource': 'CoalProducts'
     },
+    'CR': {
+        'energySource': 'CrudeOil'
+    },
     'DL': {
         'energySource': 'DieselOil'
     },
@@ -442,15 +445,6 @@ UN_ENERGY_PRODUCER_TYPE = {
     },
     '8': {},  # gross production
     '9': {},  # net production
-    'C': {
-        'powerPlantSector': 'CombinedHeatPowerPlants'
-    },
-    'H': {
-        'powerPlantSector': 'HeatPlants'
-    },
-    'E': {
-        'powerPlantSector': 'ElectricityPowerPlants'
-    },
     '5C': {
         'powerPlantSector': 'MainActivityProducerCombinedHeatPowerPlants'
     },
@@ -835,12 +829,10 @@ UN_ENERGY_CAPACITY_CODES = {
     '3': {
         'powerPlantSector': 'ElectricityPowerPlants'
     },
-    '31': {
+    '31': {  # includes 311:PublicNuclear and 312:SelfProducerNuclear
         'energySource': 'Nuclear',
         'powerPlantSector': 'ElectricityPowerPlants'
     },
-    # '311': {'energySource': 'PublicNuclear'},
-    # '312': {'energySource': 'SelfProducerNuclear'},
     '32': {
         'energySource': 'dcs:EIA_Water',
         'powerPlantSector': 'ElectricityPowerPlants'
@@ -980,10 +972,16 @@ UN_ENERGY_MERGED_CODES = {
 }
 
 
-def _add_error_counter(counter_name: str, error_msg: str, counters):
-    """Increments the counter for 'counter_name'
-       Prints the error_msg at most once in N times
-       where N is the counter value of 'debug_lines' and default to 1.
+def _add_error_counter(counter_name: str, error_msg: str, counters: dict):
+    """Increments the counter for 'counter_name'.
+
+    Also prints error_msg at most once in N times where N is the counter value
+    of 'debug_lines' that defaults to 1.
+
+    Args:
+      counter_name: Name of the counter to be incremented
+      error_msg: String to be printed with prefix 'Error: '
+      counters: dictionary of counters modified
     """
     if counters is None:
         return
@@ -996,15 +994,14 @@ def _add_error_counter(counter_name: str, error_msg: str, counters):
 
 
 def remove_namespace_prefix(value: str) -> str:
-    """Returns the string without the 'namespace:' prefix
-    """
+    """Returns the string without the 'namespace:' prefix."""
     delim = value.find(':')
     return value[delim + 1:]
 
 
 def get_merged_values(values: list) -> str:
-    """Returns a merged string for the given list of values
-       by removing prefix, sorting alphabetically and joining with '_'
+    """Returns a merged string for the given list of values.
+    The values have prefix removed, sorted alphabetically and joined with '_'.
     """
     merge_values = []
     for v in values:
@@ -1014,8 +1011,14 @@ def get_merged_values(values: list) -> str:
 
 def add_pv_to_stat_var(prop: str, value: str, stat_var_pv: dict, counters=None):
     """Add a property with value to the statVar.
-       If the property already exists, the value is overridden with the
-       merged value if one exists or the new value.
+    If the property already exists, the value is overridden with the
+    merged value if one exists or the new value.
+
+    Args:
+      prop: property to be added to the stat_var_pv dict as key
+      value: value to be added to the stat_var_pv dict for the key 'prop'
+      stat_var_pv: Dictionary into which prop is added.
+      counters: [optional] error counters to be incremented
     """
     if prop in stat_var_pv:
         old_value = remove_namespace_prefix(stat_var_pv[prop])
@@ -1039,13 +1042,20 @@ def add_pv_from_map(key: str,
                     code_map: dict,
                     stat_var_pv: dict,
                     counters=None) -> bool:
-    """Adds a property and its value from the code_map for the given key into
-       the stat_var_pv dict.
-       If the code_map contains properties already existing in stat_var_pv,
-       the value is merged or replaced.
-       Counters are updated in case of any errors.
+    """Adds a property and its value from the code_map into the stat_var_pv dict.
+    If the code_map contains properties already existing in stat_var_pv,
+    the value is merged or replaced.
+    Counters are updated in case of any errors.
 
-       Retruns True if the key exisits in the code_map with a non None value.
+    Args:
+      key: string to be looked up in the code_map dict
+      code_map: dictionary of code strings to set of property:values
+      stat_var_pv: dictionary of PVs for the statVar into which the properties
+        from the code_map will be added.
+      counters: [optional] error counters to be updated
+
+    Retruns:
+      True: if the key exisits in the code_map with a non-None value.
     """
     if key not in code_map:
         return False
@@ -1061,9 +1071,17 @@ def add_pv_from_map_for_prefix(value_code: str,
                                code_map: dict,
                                stat_var_pv: dict,
                                counters=None) -> str:
-    """Adds property, value for the longest prefix of value_code in the code_map
-       into the stat_var_pv dict.
-       Returns the prefix of the value_code for which properties were found.
+    """Adds property, value for the longest prefix of value_code in the code_map.
+
+    Args:
+      value_code: string whose prefixes will be looked up in code_map
+      code_map: dictionary of codes to set of PVs
+      stat_var_pv: dictionary of StatVar PVs into which
+          new PVs from the code_map will be added.
+      counters: [optional] error counters to be updated
+
+    Returns:
+      The prefix of the value_code found in code_map for which PVs were added.
     """
     # Look for codes in map from longest prefix to the shortest
     for l in reversed(range(1, len(value_code) + 1)):
@@ -1076,19 +1094,26 @@ def add_pv_from_map_for_prefix(value_code: str,
 
 def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
     """Adds property and values energy production code into the pv dict.
-       Returns true if the any PVs were added for the code.
 
-       The production code is roughly formatted as:
-         01<ProducerType><FuelType><PlantType> where
-         ProducerType is:
-            '5': Main activity
-            '6': Auto producer
-         FuelType:
-            1 or 2 letter code
-         PlantType:
-            C: CombinedHeatPower plant
-            E: Electricity plant
-            H: Heat plant
+    The production code is roughly formatted as:
+        01<ProducerType><FuelType><PlantType> where
+        ProducerType is:
+           '5': Main activity
+           '6': Auto producer
+        FuelType:
+           1 or 2 letter code
+        PlantType:
+           C: CombinedHeatPower plant
+           E: Electricity plant
+           H: Heat plant
+
+    Args:
+      code: the string for the UN Energy production code
+      pv: dictionary of PVs to be updated.
+      counters: [optional] error counters to be updated
+
+    Returns:
+      True if the any PVs were added for the code.
     """
     orig_code = code
     if not code.startswith('01'):
@@ -1138,12 +1163,19 @@ def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
 
 def add_pv_for_consumption_code(code: str, pv: dict, counters=None) -> bool:
     """Adds PVs for energy consumption code into the pv dict.
-       Returns True if any properties were added into the pv.
 
-       The consumption code is prefixed as follows:
-         '1': Manufacturing
-         '2': Transport
-         '3': others
+    The consumption code is prefixed as follows:
+      '1': Manufacturing
+      '2': Transport
+      '3': others
+
+    Args:
+      code: string for the UN Energy code for energy consumption
+      pv: dictionary of PVs to be updated
+      counters: [optional] error counters to be updated
+
+    Returns:
+      True if any properties were added into the pv.
     """
     if not code.startswith('12'):
         return False
@@ -1158,7 +1190,14 @@ def add_pv_for_consumption_code(code: str, pv: dict, counters=None) -> bool:
 
 def add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
     """Adds PVs for energy capacity code into the pv dict.
-       Returns True if any properties were added into the pv.
+
+    Args:
+      code: UN energy capacity code string
+      pv: dictionary of PVs to be updated
+      counters: [optional] error counters to be updated
+    
+    Returns:
+      True if any properties were added into the pv.
     """
     if not code.startswith('13'):
         return False
@@ -1181,10 +1220,18 @@ def add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
 def get_pv_for_energy_code(energy_source: str,
                            code: str,
                            counters=None) -> dict:
-    """Get the property values for the given transaction code.
-       The prefix of the transaction code indicates the activity.
-       Based on the activity the transaction code is further split to
-       get constriants for the activity.
+    """Get the property values for the given UN energy transaction code.
+    The prefix of the transaction code indicates the activity.
+    Based on the activity the transaction code is further split to
+    get constriants for the activity.
+
+    Args:
+      energy_source: string representing the energy source such as 'KR' for Kerosene.
+      code: the transaction code indicating one of production, consumption, etc.
+      counters: [optional] error counters to be updated
+
+    Returns:
+      dictionary with PVs for the statVar for the given codes.
     """
     pv = {}
     if not add_pv_from_map(energy_source, UN_ENERGY_FUEL_CODES, pv, counters):
@@ -1250,11 +1297,16 @@ UN_ENERGY_UNITS_MULTIPLIER = {
 
 
 def get_unit_dcid_scale(units_scale: str) -> (str, int):
-    """Returns the tuple of (unit-dcid, scaling-factor) for the given string
-       with a default of '1' for scaling-factor.
-       Returns None for units or scaling factor if it cannot be processed. 
-       The units_scale is of the form: "<unit>, scale" with an optional
-       scale string such as 'thousand'.
+    """Returns the tuple with the dcid for unit and a scaling factor
+    that has a default of '1'.
+
+    Args:
+      units_scale: string with the units and multiplier in words
+         for instance 'kilowatts, thousand'.
+    
+    Returns:
+      A tuple of the form (unit, scaling_factor) where
+       units or scaling factor is None if it cannot be processed. 
     """
     # Remove any extra characters from the unit string.
     units = re.sub('[^a-z,]', '', units_scale.lower())

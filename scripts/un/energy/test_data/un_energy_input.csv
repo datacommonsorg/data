@@ -312,7 +312,6 @@
 "CR","886","Yemen Arab Rep. (former)","01","CR01","Conventional crude oil - production","1990","Metric tons,  thousand","8468","1"
 "DL","16","American Samoa","08","DL08","Gas Oil/ Diesel Oil - Transformation","2019","Metric tons,  thousand","38","1"
 "DL","660","Anguilla","03","DL03","Gas Oil/ Diesel Oil - Imports","2019","Metric tons,  thousand","34.5","1"
-"DL","81","Antarctic Fisheries","03","DL03","Gas Oil/ Diesel Oil - Imports","2007","Metric tons,  thousand","77","1"
 "DL","184","Cook Islands","03","DL03","Gas Oil/ Diesel Oil - Imports","2019","Metric tons,  thousand","15.7","1"
 "DL","831","Guernsey","08","DL08","Gas Oil/ Diesel Oil - Transformation","2019","Metric tons,  thousand","1","1"
 "DL","584","Marshall Islands","03","DL03","Gas Oil/ Diesel Oil - Imports","2019","Metric tons,  thousand","36.3","1"
@@ -325,8 +324,6 @@
 "EC","798","Tuvalu","133","EC133","Electricity - total net installed capacity of electric power plants, main activity & autoproducer","2019","Kilowatts,  thousand","5.2","1"
 "EC","850","United States Virgin Is.","133","EC133","Electricity - total net installed capacity of electric power plants, main activity & autoproducer","2019","Kilowatts,  thousand","19.99","1"
 "EC","876","Wallis and Futuna Is.","133","EC133","Electricity - total net installed capacity of electric power plants, main activity & autoproducer","2019","Kilowatts,  thousand","8.879","1"
-"FW","172","Commonwealth of Independent States (CIS)","03","FW03","Fuelwood - Imports","1997","Cubic metres, thousand","0.04",""
-
 "AL","32","Argentina","01","AL01","Biogasoline - production","2019","Metric tons,  thousand","850",""
 "AL","32","Argentina","06","AL06","Biogasoline - stock changes","2012","Metric tons,  thousand","12",""
 "AL","32","Argentina","12","AL12","Biogasoline - Final energy consumption","2019","Metric tons,  thousand","842",""

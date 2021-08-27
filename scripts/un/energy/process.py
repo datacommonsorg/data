@@ -38,11 +38,12 @@ from absl import app
 
 import un_energy_codes
 from country_codes import get_country_dcid
+import download
 
 FLAGS = flags.FLAGS
 flags.DEFINE_list('csv_data_files', [],
                   'csv files from UNData Energy datasets to process')
-flags.DEFINE_string('dataset_name', 'undata-energy',
+flags.DEFINE_string('output_path', 'tmp_raw_data/un_energy_output',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
 flags.DEFINE_integer('debug_lines', 10000, 'Print error logs every N lines')
@@ -60,6 +61,19 @@ _DEFAULT_STAT_VAR_PV = {
     'populationType': 'dcs:Energy',
     'statType': 'dcs:measuredValue',
 }
+
+UN_ENERGY_TMCF = """
+Node: E:UNEnergy->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:UNEnergy->Country_dcid
+variableMeasured: C:UNEnergy->StatVar
+observationDate: C:UNEnergy->Year
+observationPeriod: "P1Y"
+value: C:UNEnergy->Quantity
+unit: C:UNEnergy->Unit_dcid
+scalingFactor: C:UNEnergy->Scaling_factor
+measurementMethod: C:UNEnergy->Estimate
+"""
 
 
 def print_debug(debug_level: int, *args):
@@ -86,10 +100,18 @@ def _add_error_counter(counter_name: str, error_msg: str, counters):
 
 
 def remove_extra_characters(name: str) -> str:
-    """Removes the parts of the name that is not used in thenode id, including:
+    """Removes the parts of the name that is not used in the node id,
+    including:
          - any namespace: prefix, such as 'dcs:' or 'dcid:'
          - capitalized prefix of two or more letters
          - Any '_'
+    For example: 'dcid:EIA_Other_fuel' will be converted to: 'OtherFuel'
+
+    Args:
+      name: string to be normalized.
+
+    Returns:
+      string without the extra characters and capitalized appropriately.
     """
     if name is None:
         return name
@@ -121,8 +143,17 @@ def add_property_value_name(pv_dict: dict,
                             name_list: list,
                             ignore_list=None):
     """Append value of the property in the pc_dict to the name_list.
-       The value string is normalized by stripping prefix and removing '_'.
-       The property is removed from the pv_dict as well.
+    The value string is normalized by stripping prefix and removing '_'.
+    The property is removed from the pv_dict as well.
+
+    Args:
+      pv_dict: dictionary of property and values.
+         the matching property is remove from this dictionary.
+      prop: string with the property code whose vales is to be extracted
+      name_list: output list of strings into which the nornalized value
+         string is added.
+      ignore_list: [optional] list of strings of property or value
+         that is not added to the name_list
     """
     if prop not in pv_dict:
         return
@@ -140,21 +171,31 @@ def add_property_value_name(pv_dict: dict,
 
 def get_stat_var_id(sv_pv: dict, ignore_list=None) -> str:
     """Generate a statvar id from a dictionary of PVs in the following syntax:
-       <mqualifier>_<statype>_<measuredProp>_<PopulationType>_<constraint1>_<constraint2>_...
-         where <prop> represents the normalized value string for the property
-         and constraints are sorted alphabetically.
-       property and values in the ignore_list are not added to the id.
-       Returns a string that can be used as the node id for a StatVar.
+    <mqualifier>_<statype>_<measuredProp>_<PopulationType>_<constraint1>_<constraint2>_...
+        where <prop> represents the normalized value string for the property
+        and constraints are sorted alphabetically.
+    property and values in the ignore_list are not added to the id.
+
+    Args:
+      sv_pv: dictionary of properties and respective values for a StatVar
+        for which the node id is to be generated.
+      ignore_list: List of property of value strings not to be added to the name
+
+    Returns:
+      String with the node id containing values of PVs
+      that can be used as the node id for a StatVar.
     """
     pv = dict(sv_pv)
     ids = []
+    ignore_values = ['MeasuredValue']
+    if ignore_list is not None:
+        ignore_values.extend(ignore_list)
 
     # Add default properties
-    add_property_value_name(pv, 'measurementQualifier', ids, ignore_list)
-    add_property_value_name(pv, 'statType', ids,
-                            ['MeasuredValue'].append(ignore_list))
-    add_property_value_name(pv, 'measuredProperty', ids, ignore_list)
-    add_property_value_name(pv, 'populationType', ids, ignore_list)
+    add_property_value_name(pv, 'measurementQualifier', ids, ignore_values)
+    add_property_value_name(pv, 'statType', ids, ignore_values)
+    add_property_value_name(pv, 'measuredProperty', ids, ignore_values)
+    add_property_value_name(pv, 'populationType', ids, ignore_values)
     pv.pop('typeOf')
 
     # Add the remaining properties in sorted order
@@ -164,21 +205,43 @@ def get_stat_var_id(sv_pv: dict, ignore_list=None) -> str:
     return '_'.join(ids)
 
 
-def is_valid_stat_var(sv_pv, counters=None) -> bool:
+def is_valid_stat_var(sv_pv: dict, counters=None) -> bool:
+    """Check if a StatVar is valid.
+    Verifies if the statVar has the required properties.
+
+    Args:
+      sv_pv: Dictionary of property and value for a StatVar
+      counters: [optional] error counters to be updated
+
+    Returns:
+      True if the statVar is valid.
+    """
+    # Check StatVar has all required properties.
     STAT_VAR_REQUIRED_PROPERTIES = [
         'measuredProperty',
         'populationType',
     ]
-    for p in STAT_VAR_REQUIRED_PROPERTIES:
-        if p not in sv_pv:
+    for prop in STAT_VAR_REQUIRED_PROPERTIES:
+        if prop not in sv_pv:
             _add_error_counter(
                 f'error_missing_property_{p}',
                 f'Stat var missing property {p}, statVar: {sv_pv}', counters)
             return False
+
     return True
 
 
-def generate_stat_var(data_row, sv_pv, counters=None) -> str:
+def generate_stat_var(data_row: dict, sv_pv: dict, counters=None) -> str:
+    """Add property:values for a StatVar for the given data row.
+
+    Args:
+      data_row: dictionary of a cells in a CSV row keyed by the column name
+      sv_pv: dictinary of PVs for a statVar into which new properties are added
+      counters: [optional] error counters to be updated
+
+    Returns:
+      string for the stat_var node id with all PVs in sv_pv
+    """
     sv_pv.update(_DEFAULT_STAT_VAR_PV)
     t_code = data_row['Transaction Code']
     fuel = data_row['Commodity Code']
@@ -186,17 +249,6 @@ def generate_stat_var(data_row, sv_pv, counters=None) -> str:
     if data_sv_pv is None or len(data_sv_pv) == 0:
         return None
     sv_pv.update(data_sv_pv)
-    #fuel_dcid = data_row['Fuel_dcid']
-    # if 'energySource' in sv_pv:
-    #    energy_dcid = sv_pv['energySource']
-    #    if fuel_dcid != energy_dcid:
-    #        _add_error_counter('error_mismatch_energy_source',
-    #                           f'Mismatch in energySource:{energy_dcid} ' +
-    #                           f'!= Fuel:{fuel_dcid} for {sv_pv}',
-    #                           counters)
-    # elif fuel_dcid is not None:
-    #    sv_pv['energySource'] = fuel_dcid
-    #    counters['outputs_with_fuel_dcid'] += 1
     if not is_valid_stat_var(sv_pv):
         _add_error_counter('error_invalid_stat_var',
                            f'Invalid statVar {sv_pv} for row {data_row}',
@@ -210,7 +262,17 @@ def generate_stat_var(data_row, sv_pv, counters=None) -> str:
     return node_name
 
 
-def get_stat_var_mcf(sv_id, sv_pv) -> str:
+def get_stat_var_mcf(sv_id: str, sv_pv: dict) -> str:
+    """Generate a MCF node string for a statVar
+
+    Args:
+      sv_id: Node Id string for the StatVar
+      sv_pv: dictionary of all property:values for the StatVar
+
+    Returns:
+      a string with StatVar node in MCF format with each property in a new line
+      and properties are sorted in alphabetical order.
+    """
     stat_var = []
     stat_var.append(f'Node: {sv_id}')
     for p in sorted(sv_pv.keys()):
@@ -218,9 +280,18 @@ def get_stat_var_mcf(sv_id, sv_pv) -> str:
     return '\n'.join(stat_var)
 
 
-def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
+def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
     """Process a single row of input data for un energy.
-       Generate a statvar for the fuel and transaction code
+    Generate a statvar for the fuel and transaction code and adds the MCF for the
+    unique StatVars into the f_out_mcf file and the columns for the StatVarObservation
+    into the csv_writer.
+
+    Args:
+      data_row: dictionary of CSV column values from the input file.
+      sv_map: dictionary of statVar ids that are alerady emitted into f_out_mcf
+      csv_writer: file handle to write statvar observation values into.
+      f_out_mcf: file handle to write unique statVar MCF nodes
+      counters: counters to be updated
     """
     counters['inputs_processed'] += 1
     fuel = data_row['Commodity Code']
@@ -233,21 +304,16 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
     units = data_row['Unit']
     quantity = data_row['Quantity']
     notes = data_row['Quantity Footnotes']
-    if fuel == 'Commodity Code':
+
+    # Ignore the column header and footers in case csv files were concatenated.
+    if fuel == 'Commodity Code' or fuel == 'fnSeqID' or fuel == '1' or fuel == '':
         return
     if fuel is None or country_code is None or t_code is None or year is None or quantity is None:
         _add_error_counter(f'error_invalid_input_row',
                            f'Invalid data row {data_row}', counters)
         return
 
-    #fuel_dcid = un_energy_codes.get_energy_source_dcid(fuel)
-    # if not fuel_dcid:
-    #    _add_error_counter('error_unknown_fuel_code',
-    #                       f'Fuel: {fuel}, Commodity code: {ct_code}, '
-    #                       'Transaction: {ct_name}', counters)
-    #    return
-    #data_row['Fuel_dcid'] = fuel_dcid
-
+    # Get the country from the numeric code.
     country_dcid = get_country_dcid(country_code)
     if not country_dcid:
         _add_error_counter(
@@ -256,6 +322,7 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
         return
     data_row['Country_dcid'] = f'dcs:{country_dcid}'
 
+    # Add the quantity units and scaling factor value if any.
     unit_dcid, scaling_factor = un_energy_codes.get_unit_dcid_scale(units)
     if not unit_dcid or not scaling_factor:
         _add_error_counter('error_unknown_units',
@@ -264,14 +331,12 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
     data_row['Unit_dcid'] = unit_dcid
     if scaling_factor != 1:
         data_row['Scaling_factor'] = scaling_factor
-    # else:
-    #  data_row['Scaling_factor'] = ''
 
+    # The observation is an estimated value if it has a footnote.
     if notes == "1":
         data_row['Estimate'] = 'Estimate'
-    # else:
-    #  data_row['IsEstimate'] = ''
 
+    # Generate a StatVar for the row using the fuel and transaction code values.
     sv_pv = {}
     sv_id = generate_stat_var(data_row, sv_pv, counters)
     if not sv_id:
@@ -281,7 +346,7 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
     data_row['StatVar'] = sv_id
 
     if sv_id not in sv_map:
-        # New stat var generated. Output PVs to the mcf.
+        # New stat var generated. Output PVs to the statvar mcf file.
         stat_var_mcf = get_stat_var_mcf(sv_id, sv_pv)
         print_debug(1, 'Generating stat var node: ', stat_var_mcf)
         f_out_mcf.write('\n\n')
@@ -292,24 +357,37 @@ def process_row(data_row, sv_map, csv_writer, f_out_mcf, counters):
     counters['output_csv_rows'] += 1
 
 
-def process(in_paths: str, out_path: str):
-    """Read data from CSV and create CSV,MCF with StatVars and tMCF for DC import"""
+def process(in_paths: list, out_path: str):
+    """Read data from CSV and create CSV,MCF with StatVars and tMCF for DC import.
+    Generates the following output files:
+      - .csv: File with StatVarObservations
+      - .mcf: File with StatVar Nodes in MCF format
+      - .tmcf: File with tMCF for the StatVarObservation
+
+    Args:
+      in_paths: list of UN Energy CSV data files to be processed.
+      out_path: prefix for the output StatVarObs csv and StatVar mcf files.
+    """
     counters = defaultdict(lambda: 0)
     counters['debug_lines'] = FLAGS.debug_lines
     sv_map = defaultdict(lambda: 0)
     csv_file_path = out_path + '.csv'
     start_ts = time.perf_counter()
+    counters['time_start'] = start_ts
+    # Setup the output file handles for MCF and CSV.
     with open(csv_file_path, 'w', newline='') as f_out_csv:
         csv_writer = csv.DictWriter(f_out_csv,
                                     fieldnames=OUTPUT_CSV_COLUMNS,
                                     extrasaction='ignore',
                                     lineterminator='\n')
         csv_writer.writeheader()
-
         mcf_file_path = out_path + '.mcf'
         with open(mcf_file_path, 'w+', newline='') as f_out_mcf:
+            # Process each CSV input file, one row at a time.
             for in_file in in_paths:
+                print(f'Processing data file: {in_file}')
                 with open(in_file) as csvfile:
+                    counters['input_files'] += 1 
                     line = 0
                     reader = csv.DictReader(csvfile)
                     for data_row in reader:
@@ -319,9 +397,16 @@ def process(in_paths: str, out_path: str):
                         process_row(data_row, sv_map, csv_writer, f_out_mcf,
                                     counters)
                         _print_counters(counters, 100000)
+                print(f'Processed {line} rows from data file: {in_file}')
+
+    # Generate the tMCF file
+    tmcf_file_path = out_path + '.tmcf'
+    with open(tmcf_file_path, 'w', newline='') as f_out_tmcf:
+        f_out_tmcf.write(UN_ENERGY_TMCF)
 
     end_ts = time.perf_counter()
-    counters['total_time_seconds'] = end_ts - start_ts
+    counters['time_end'] = end_ts
+    counters['time_total_seconds'] = end_ts - start_ts
     _print_counters(counters)
     _print_counters(sv_map)
     print(
@@ -329,24 +414,16 @@ def process(in_paths: str, out_path: str):
                                          (end_ts - start_ts)), 'rows/sec')
 
 
-def generate_schema_mcf(mcf_filename: str):
-    """Generate MCF for schema such as enums and properties.
-    """
-    sv_map = defaultdict(lambda: 0)
-    with open(mcf_filename, 'w+', newline='') as f_out_mcf:
-        # Generate MCF nodes for enums
-        enum_mcf = un_energy_codes.generate_un_energy_code_enums(sv_map)
-        if enum_mcf is not None:
-            for node in enum_mcf:
-                if len(node) > 0:
-                    f_out_mcf.write('\n\n')
-                    f_out_mcf.write('\n'.join(node))
-    _print_counters(sv_map)
-
-
 def main(_):
-    if len(FLAGS.csv_data_files) > 0 and FLAGS.dataset_name != '':
-        process(FLAGS.csv_data_files, FLAGS.dataset_name)
+    csv_data_files = FLAGS.csv_data_files
+    if len(csv_data_files) == 0:
+       print(f'Downloading energy data set files')
+       csv_data_files = download.download_un_energy_dataset()
+
+    if len(csv_data_files) > 0 and FLAGS.output_path != '':
+        process(FLAGS.csv_data_files, FLAGS.output_path)
+    else:
+        print(f'Please specify files to process with --csv_data_files=<,>')
 
 
 if __name__ == '__main__':
