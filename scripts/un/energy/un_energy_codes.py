@@ -15,7 +15,14 @@
 
 from typing import List
 
+import os
 import re
+import sys
+
+# Allows the following module imports to work when running as a script
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
 
 # Map from UNData Energy commodity codes to EnergySourceEnum
 UN_ENERGY_FUEL_CODES = {

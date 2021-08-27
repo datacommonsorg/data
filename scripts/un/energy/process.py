@@ -24,7 +24,6 @@ import csv
 import io
 import os
 import sys
-from collections import defaultdict
 import datetime
 import time
 
@@ -35,10 +34,16 @@ import typing
 
 from absl import flags
 from absl import app
+from collections import defaultdict
 
-import un_energy_codes
-from country_codes import get_country_dcid
-import download
+# Allows the following module imports to work when running as a script
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+
+from un.energy import download
+from un.energy import un_energy_codes
+from un.energy.country_codes import get_country_dcid
 
 FLAGS = flags.FLAGS
 flags.DEFINE_list('csv_data_files', [],
@@ -46,7 +51,7 @@ flags.DEFINE_list('csv_data_files', [],
 flags.DEFINE_string('output_path', 'tmp_raw_data/un_energy_output',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
-flags.DEFINE_integer('debug_lines', 10000, 'Print error logs every N lines')
+flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
 
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
@@ -77,7 +82,7 @@ measurementMethod: C:UNEnergy->Estimate
 
 
 def print_debug(debug_level: int, *args):
-    if FLAGS.debug_level >= debug_level:
+    if debug_level > 1:
         print("[", datetime.datetime.now(), "] ", *args, file=sys.stderr)
 
 
@@ -87,7 +92,7 @@ def _print_counters(counters, steps=None):
             row_key] % steps == 0:
         print('\nSTATS:')
         for k in sorted(counters):
-            print(f"\t{k} = {counters[k]}")
+            print(f"\t{k} = {counters[k]}", flush=True)
         print('')
 
 
@@ -357,7 +362,7 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
     counters['output_csv_rows'] += 1
 
 
-def process(in_paths: list, out_path: str):
+def process(in_paths: list, out_path: str, debug_lines = 1) -> dict:
     """Read data from CSV and create CSV,MCF with StatVars and tMCF for DC import.
     Generates the following output files:
       - .csv: File with StatVarObservations
@@ -367,9 +372,13 @@ def process(in_paths: list, out_path: str):
     Args:
       in_paths: list of UN Energy CSV data files to be processed.
       out_path: prefix for the output StatVarObs csv and StatVar mcf files.
+      debug_lines: Generate each error message once every debug_lines.
+
+    Returns:
+      Counters after processing
     """
     counters = defaultdict(lambda: 0)
-    counters['debug_lines'] = FLAGS.debug_lines
+    counters['debug_lines'] = debug_lines
     sv_map = defaultdict(lambda: 0)
     csv_file_path = out_path + '.csv'
     start_ts = time.perf_counter()
@@ -396,7 +405,7 @@ def process(in_paths: list, out_path: str):
                         data_row['_Row'] = line
                         process_row(data_row, sv_map, csv_writer, f_out_mcf,
                                     counters)
-                        _print_counters(counters, 100000)
+                        _print_counters(counters, counters['debug_lines'])
                 print(f'Processed {line} rows from data file: {in_file}')
 
     # Generate the tMCF file
@@ -412,6 +421,7 @@ def process(in_paths: list, out_path: str):
     print(
         'Processing rate: {:.2f}'.format(counters['inputs_processed'] /
                                          (end_ts - start_ts)), 'rows/sec')
+    return counters
 
 
 def main(_):
@@ -421,7 +431,7 @@ def main(_):
         csv_data_files = download.download_un_energy_dataset()
 
     if len(csv_data_files) > 0 and FLAGS.output_path != '':
-        process(csv_data_files, FLAGS.output_path)
+        process(csv_data_files, FLAGS.output_path, FLAGS.debug_lines)
     else:
         print(f'Please specify files to process with --csv_data_files=<,>')
 

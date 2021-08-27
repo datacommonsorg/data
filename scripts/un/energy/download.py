@@ -23,12 +23,18 @@ import datetime
 import io
 import os
 import requests
+import sys
 import zipfile
 
 from absl import flags
 from absl import app
 
-from un_energy_codes import get_all_energy_source_codes
+# Allows the following module imports to work when running as a script
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+
+from un.energy.un_energy_codes import get_all_energy_source_codes
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('download_data_dir', 'tmp_raw_data/un_energy',
