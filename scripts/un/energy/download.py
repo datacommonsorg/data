@@ -31,11 +31,11 @@ from un_energy_codes import get_all_energy_source_codes
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Data dir to download into')
-flags.DEFINE_list(
-    'datasets', [], 'Datasets to download. Everything, if empty.')
+flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
 flags.DEFINE_integer('start_year', 1990,
                      'Data set downloaded from the start year.')
-flags.DEFINE_integer('end_year', datetime.datetime.now().year,
+flags.DEFINE_integer('end_year',
+                     datetime.datetime.now().year,
                      'Data set downloaded until the end_year.')
 flags.DEFINE_integer('years_per_batch', 10,
                      'Data set downloaded in batches of years.')
@@ -55,15 +55,16 @@ def download_zip_file(url: str, save_path: str):
 def download_energy_dataset(energy_dataset: str):
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
-        print(
-            f'Dataset "{energy_dataset}" not in list of supported codes:'
-            + str(supported_datasets))
+        print(f'Dataset "{energy_dataset}" not in list of supported codes:' +
+              str(supported_datasets))
         return
     # Download data in batches of years as the download has a limit of 100k rows.
     years_list = list(range(FLAGS.start_year, FLAGS.years_per_batch + 1))
     years_list = [str(y) for y in range(FLAGS.start_year, FLAGS.end_year + 1)]
-    batch_years = [years_list[i: i + FLAGS.years_per_batch]
-                   for i in range(0, len(years_list), FLAGS.years_per_batch)]
+    batch_years = [
+        years_list[i:i + FLAGS.years_per_batch]
+        for i in range(0, len(years_list), FLAGS.years_per_batch)
+    ]
     for year_batch in batch_years:
         start_year = year_batch[0]
         end_year = year_batch[-1]
@@ -71,8 +72,8 @@ def download_energy_dataset(energy_dataset: str):
         output = f'{FLAGS.data_dir}/undata-{energy_dataset}-{start_year}-{end_year}'
         print('Downloading UNData energy dataset: ',
               f'{energy_dataset} from {start_year} to {end_year}')
-        download_url = _DOWNLOAD_URL.format(
-            energy_code=energy_dataset, years=years_str)
+        download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
+                                            years=years_str)
         download_zip_file(download_url, output)
 
 
