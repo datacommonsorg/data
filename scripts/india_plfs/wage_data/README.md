@@ -65,6 +65,7 @@ Average wage/salary earnings are per state and by quarter. There are three sets 
 **Notes from the data page:** 
 1. Reported earnings from regular wage/salaried employment
 2. The Current Weekly Status (CWS) approach to measuring uses seven days preceding the date of survey as the reference period. 
+3. Cell value zero(0) indicates no sample observation in the respective category
 
 
 
