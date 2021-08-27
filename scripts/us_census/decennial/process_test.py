@@ -10,7 +10,7 @@ from .process import process
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _RAW_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
 _EXPECTED_DIR = os.path.join(_CODEDIR, 'testdata', 'expected')
-_OUT_FILES = ['2010/Alabama.csv', '2020/Wyoming.csv']
+_OUT_FILES = ['2000/0US_Summary.csv', '2010/Alabama.csv', '2020/Wyoming.csv']
 
 
 class ProcessTest(unittest.TestCase):
