@@ -126,32 +126,35 @@ def add_property_value_name(pv_dict: dict,
     """
     if prop not in pv_dict:
         return
-    value = remove_extra_characters(pv_dict[prop])
+    orig_value = pv_dict[prop]
+    value = remove_extra_characters(orig_value)
     pv_dict.pop(prop)
     if value is None:
         return
     if ignore_list is not None:
-        if prop in ignore_list or value in ignore_list:
+        if prop in ignore_list or value in ignore_list or orig_value in ignore_list:
             return
     prefix_len = value.find(':') + 1
     name_list.append(value[prefix_len].upper() + value[prefix_len + 1:])
 
 
-def get_stat_var_id(sv_pv: dict) -> str:
+def get_stat_var_id(sv_pv: dict, ignore_list=None) -> str:
     """Generate a statvar id from a dictionary of PVs in the following syntax:
        <mqualifier>_<statype>_<measuredProp>_<PopulationType>_<constraint1>_<constraint2>_...
          where <prop> represents the normalized value string for the property
          and constraints are sorted alphabetically.
+       property and values in the ignore_list are not added to the id.
        Returns a string that can be used as the node id for a StatVar.
     """
     pv = dict(sv_pv)
     ids = []
 
     # Add default properties
-    add_property_value_name(pv, 'measurementQualifier', ids)
-    add_property_value_name(pv, 'statType', ids, ['MeasuredValue'])
-    add_property_value_name(pv, 'measuredProperty', ids)
-    add_property_value_name(pv, 'populationType', ids)
+    add_property_value_name(pv, 'measurementQualifier', ids, ignore_list)
+    add_property_value_name(pv, 'statType', ids,
+                            ['MeasuredValue'].append(ignore_list))
+    add_property_value_name(pv, 'measuredProperty', ids, ignore_list)
+    add_property_value_name(pv, 'populationType', ids, ignore_list)
     pv.pop('typeOf')
 
     # Add the remaining properties in sorted order
