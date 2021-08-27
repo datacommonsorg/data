@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""UNData Energy codes to DCID and properties"""
+"""Utilities to map UNData Energy codes to StatVar properties and values"""
 
 from typing import List
 
@@ -57,10 +57,8 @@ UN_ENERGY_FUEL_CODES = {
     'MO':  {'populationType': 'Fuel', 'fuelType': 'MotorGasoline'},
     'MW':  {'populationType': 'Fuel', 'fuelType': 'MunicipalWaste'},
     'NP':  {'populationType': 'Fuel', 'fuelType': 'Naphtha'},
-    # Natural Gas (including LNG)
     'NG':  {'populationType': 'Fuel', 'fuelType': 'dcs:NaturalGas'},
     'GL':  {'populationType': 'Fuel', 'fuelType': 'NaturalGasLiquids'},
-    # Nuclear Electricity
     'EN':  {'populationType': 'Fuel', 'fuelType': 'dcs:Nuclear'},
     'ZJ':  {'populationType': 'Fuel', 'fuelType': 'BioJetKerosene'},
     'ZD':  {'populationType': 'Fuel', 'fuelType': 'BioDiesel'},
@@ -69,7 +67,6 @@ UN_ENERGY_FUEL_CODES = {
     'OB':  {'populationType': 'Fuel', 'fuelType': 'UN_OtherBituminousCoal'},
     'CP':  {'populationType': 'Fuel', 'fuelType': 'CoalProducts'},
     'OH':  {'populationType': 'Fuel', 'fuelType': 'UN_OtherHydrocarbons'},
-    # Other kerosene
     'KR':  {'populationType': 'Fuel', 'fuelType': 'dcs:EIA_Kerosene'},
     'OL':  {'populationType': 'Fuel', 'fuelType': 'UN_OtherLiquidBiofuels'},
     'PP':  {'populationType': 'Fuel', 'fuelType': 'UN_OtherOilProducts'},
@@ -79,11 +76,9 @@ UN_ENERGY_FUEL_CODES = {
     'BC':  {'populationType': 'Fuel', 'fuelType': 'PatentFuel'},
     'PT':  {'populationType': 'Fuel', 'fuelType': 'Peat'},
     'BP':  {'populationType': 'Fuel', 'fuelType': 'PeatProducts'},
-    # Petroleum Coke
     'PK':  {'populationType': 'Fuel', 'fuelType': 'dcs:PetroleumCoke'},
     'FS':  {'populationType': 'Fuel', 'fuelType': 'RefineryFeedstocks'},
     'RG':  {'populationType': 'Fuel', 'fuelType': 'RefineryGas'},
-    # Sub-bituminous coal
     'SB':  {'populationType': 'Fuel', 'fuelType': 'dcs:EIA_SubbituminousCoal'},
     'UR':  {'populationType': 'Fuel', 'fuelType': 'Uranium'},
     'WS':  {'populationType': 'Fuel', 'fuelType': 'WhiteSpirit'},
@@ -91,16 +86,15 @@ UN_ENERGY_FUEL_CODES = {
     # StatVars with populationType: Energy, property: energySource
     'DG':  {'populationType': 'Energy', 'energySource': 'Geothermal'},
     'DS':  {'populationType': 'Energy', 'energySource': 'SolarThermal'},
-    # Geothermal
     'EG':  {'populationType': 'Energy', 'energySource': 'dcs:Geothermal'},
-    'ST':  {'populationType': 'Energy', 'energySource': 'Heat'},
+    'ST':  {'populationType': 'Energy', 'usedFor': 'Heat'},
     'HF':  {'populationType': 'Energy', 'energySource': 'HeatCombustibleFuels'},
     'EH':  {'populationType': 'Energy', 'energySource': 'dcs:EIA_Water'},  # Hydro
     # Solar Electricity
     'ES':  {'populationType': 'Energy', 'energySource': 'dcs:Solar'},
-    # Wind Electricity
-    'EW':  {'populationType': 'Energy', 'energySource': 'dcs:Wind'},
-    'ET':  {'populationType': 'Electricity', 'energySource': 'ThermalElectricity'},
+
+    'EW':  {'populationType': 'Electricity', 'energySource': 'dcs:Wind'},
+    'ET':  {'populationType': 'Electricity', 'usedFor': 'ThermalElectricity'},
     'EO':  {'populationType': 'Electricity', 'energySource': 'OceanElectricity'},
     'EL':  {'populationType': 'Electricity'},  # Total Electricity
     'GR':  {'populationType': 'Energy', 'powerPlantSector': 'Refinery'},
@@ -355,7 +349,21 @@ UN_ENERGY_RESERVE_CODES = {
 }
 
 
+# Set of property enum values that are a combination of other values.
+# The key is the sorted set of values to be merged, with an _ delimiter.
+UN_ENERGY_MERGED_CODES = {
+  'CombinedHeatPowerPlants_MainActivityProducer': 'MainActivityProducerCombinedHeatPowerPlants',
+  'HeatPlants_MainActivityProducer':  'MainActivityProducerHeatPowerPlants',
+  'ElectricityPowerPlants_MainActivityProducer': 'MainActivityProducerElectricityPowerPlants',
+  'AutoProducer_CombinedHeatPowerPlants': 'AutoProducerCombinedHeatPowerPlants',
+  'AutoProducer_HeatPlants':  'AutoProducerHeatPowerPlants',
+  'AutoProducer_ElectricityPowerPlants': 'AutoProducerElectricityPowerPlants',
+}
+
+
 def _add_error_counter(counter_name: str, error_msg: str, counters):
+    if counters is None:
+        return
     mod_lines = 1
     if 'debug_lines' in counters and counters['debug_lines'] > 0:
         mod_lines = counters['debug_lines']
@@ -363,18 +371,38 @@ def _add_error_counter(counter_name: str, error_msg: str, counters):
         print("Error: ", counter_name, ": ", error_msg)
     counters[counter_name] += 1
 
+def remove_namespace_prefix(value: str) -> str:
+    """Returns the string without the 'namespace:' prefix
+    """
+    delim = value.find(':')
+    return value[delim + 1:]
+
+def get_merged_values(values: list) -> str:
+    """Returns a merged string for the given list of values
+       by removing prefix, sorting alphabetically and joining with '_'
+    """
+    merge_values = []
+    for v in values:
+       merge_values.append(remove_namespace_prefix(v))
+    return '_'.join(sorted(merge_values))
 
 def add_pv_to_stat_var(prop: str, value: str, stat_var_pv, counters=None):
     """Add a property with value to the statVar.
        If the property already exists, the value is overridden.
     """
+    if prop in stat_var_pv:
+        old_value = remove_namespace_prefix(stat_var_pv[prop])
+        current_value = remove_namespace_prefix(value)
+        if current_value != old_value:
+            # Check if there is specific merged value
+            merged_value  = get_merged_values([old_value, current_value])
+            if merged_value in UN_ENERGY_MERGED_CODES:
+                value = UN_ENERGY_MERGED_CODES[merged_value]
+            else:
+                _add_error_counter(f'warning_overwriten_property_{prop}',
+                                   f'Overwriting value for property:{prop} from {old_value} to {value}', counters)
     if value.find(':') == -1:
         value = f'dcid:{value}'
-    if prop in stat_var_pv and value != stat_var_pv[prop]:
-        old_value = stat_var_pv[prop]
-        if counters is not None:
-            _add_error_counter(f'warning_overwriten_property_{prop}',
-                               f'Overwriting value for property:{prop} from {old_value} to {value}', counters)
     stat_var_pv[prop] = value
 
 
@@ -454,7 +482,7 @@ def add_pv_for_production_code(code: str, pv, counters=None) -> bool:
     if add_pv_from_map(producer_code, UN_ENERGY_PLANT_TYPE, pv, counters) or add_pv_from_map(code[:1], UN_ENERGY_PLANT_TYPE, pv, counters):
         code = code[1:]
 
-    if len(code) > 0 and counters is not None:
+    if len(code) > 0:
         _add_error_counter(f'warning_ignored_producer_code_{code}',
                            f'Ignored producer code sufffix: {code} in {orig_code}', counters)
     return pv
@@ -536,7 +564,7 @@ def get_pv_for_energy_code(energy_source: str, code: str, counters=None) -> {str
     if add_pv_from_map_for_prefix(code, UN_ENERGY_FLOW_CODES, pv, counters):
         return pv
 
-    if len(code) > 0 and counters is not None:
+    if len(code) > 0:
         _add_error_counter(f'error_ignored_energy_code_{code}',
                            f'Ignored energy transaction code {code}', counters)
     return pv
