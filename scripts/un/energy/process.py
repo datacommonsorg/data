@@ -387,7 +387,7 @@ def process(in_paths: list, out_path: str):
             for in_file in in_paths:
                 print(f'Processing data file: {in_file}')
                 with open(in_file) as csvfile:
-                    counters['input_files'] += 1 
+                    counters['input_files'] += 1
                     line = 0
                     reader = csv.DictReader(csvfile)
                     for data_row in reader:
@@ -417,11 +417,11 @@ def process(in_paths: list, out_path: str):
 def main(_):
     csv_data_files = FLAGS.csv_data_files
     if len(csv_data_files) == 0:
-       print(f'Downloading energy data set files')
-       csv_data_files = download.download_un_energy_dataset()
+        print(f'Downloading energy data set files')
+        csv_data_files = download.download_un_energy_dataset()
 
     if len(csv_data_files) > 0 and FLAGS.output_path != '':
-        process(FLAGS.csv_data_files, FLAGS.output_path)
+        process(csv_data_files, FLAGS.output_path)
     else:
         print(f'Please specify files to process with --csv_data_files=<,>')
 

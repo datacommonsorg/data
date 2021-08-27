@@ -21,6 +21,7 @@ python3 download.py
 
 import datetime
 import io
+import os
 import requests
 import zipfile
 
@@ -48,24 +49,27 @@ flags.DEFINE_integer('years_per_batch', 10,
 _DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr={years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
 
 
-def download_zip_file(url: str, csv_save_path: str) -> bool:
+def download_zip_file(url: str, output_dir: str) -> list:
     """Download a zip file from the url and save the extracted file.
 
     Args:
       url: string with URL and parameters to download.
-      csv_save_path: Output file name into which uncompressed contents are saved.
+      save_path: Output file name into which uncompressed contents are saved.
 
     Returns:
-      True if the download was successful.
+      A list of files downloaded and unzipped.
     """
-    print(f'Downloading {url} to {save_path}')
+    print(f'Downloading {url} to {output_dir}/\n')
     r = requests.get(url, stream=True)
     if r.status_code != 200:
         print(f'Failed to download {url}, response code: ', r.status_code)
         return False
     z = zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall(save_path)
-    return True
+    z.extractall(output_dir)
+    output_files = []
+    for f in os.listdir(output_dir):
+        output_files.append(os.path.join(output_dir, f))
+    return output_files
 
 
 def download_energy_dataset(
@@ -110,14 +114,15 @@ def download_energy_dataset(
         start_year = year_batch[0]
         end_year = year_batch[-1]
         years_str = ','.join(year_batch)
-        output = f'{output_path}-{energy_dataset}-{start_year}-{end_year}.csv'
+        output = f'{output_path}-{energy_dataset}-{start_year}-{end_year}'
         print('Downloading UNData energy dataset: ',
               f'{energy_dataset} from {start_year} to {end_year}')
         download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
                                             years=years_str)
-        if not download_zip_file(download_url, output):
+        downloaded_files = download_zip_file(download_url, output)
+        if len(downloaded_files) == 0:
             errors += 1
-        output_files.append(output)
+        output_files.extend(downloaded_files)
     return output_files
 
 
@@ -137,12 +142,14 @@ def download_un_energy_dataset() -> list:
                                                    FLAGS.download_data_dir)
         if len(downloaded_files) == 0:
             errors += 1
-        output_files.append(downloaded_files)
+        output_files.extend(downloaded_files)
     print(f'Downloaded the following files: {output_files}')
     return output_files
 
+
 def main(_):
     download_un_energy_dataset()
+
 
 if __name__ == '__main__':
     print('running main')
