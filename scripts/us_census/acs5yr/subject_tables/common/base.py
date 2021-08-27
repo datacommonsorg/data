@@ -7,7 +7,6 @@ import pandas as pd
 from io import BytesIO
 from requests import get
 from zipfile import ZipFile
-from common.makeCon
 
 _TEMPLATE_STAT_VAR = """Node: dcid:{name}
 typeOf: dcs:StatisticalVariable
