@@ -92,8 +92,14 @@ def _print_counters(counters, steps=None):
             row_key] % steps == 0:
         print('\nSTATS:')
         for k in sorted(counters):
-            print(f"\t{k} = {counters[k]}", flush=True)
-        print('')
+            print(f"\t{k} = {counters[k]}")
+        if 'inputs_processed' in counters:
+            start_ts = counters['time_start']
+            end_ts = time.perf_counter()
+            print('Processing rate: {:.2f}'.format(counters['inputs_processed'] /
+                                                   (end_ts - start_ts)),
+                  'rows/sec')
+        print('', flush=True)
 
 
 def _add_error_counter(counter_name: str, error_msg: str, counters):
@@ -359,10 +365,13 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
         counters['output_stat_vars'] += 1
     sv_map[sv_id] += 1
     csv_writer.writerow(data_row)
+
+    for prop in sv_pv:
+        counters[f'outputs_with_property_{prop}'] += 1
     counters['output_csv_rows'] += 1
 
 
-def process(in_paths: list, out_path: str, debug_lines = 1) -> dict:
+def process(in_paths: list, out_path: str, debug_lines=1) -> dict:
     """Read data from CSV and create CSV,MCF with StatVars and tMCF for DC import.
     Generates the following output files:
       - .csv: File with StatVarObservations

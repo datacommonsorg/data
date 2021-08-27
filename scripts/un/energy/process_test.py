@@ -32,6 +32,7 @@ from un.energy import process
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 
+
 class TestUNEnergyProcess(unittest.TestCase):
 
     def test_un_energy_process(self):
@@ -42,7 +43,8 @@ class TestUNEnergyProcess(unittest.TestCase):
         data_input = os.path.join(module_dir_, 'test_data/un_energy_input.csv')
         test_output = os.path.join(module_dir_,
                                    'test_data/un_energy_test_output')
-        expected_output = os.path.join(module_dir_, 'test_data/un_energy_output')
+        expected_output = os.path.join(module_dir_,
+                                       'test_data/un_energy_output')
         print(f'test file path: {data_input}, output: {test_output}')
 
         test_counters = process.process([data_input], test_output)
@@ -62,6 +64,7 @@ class TestUNEnergyProcess(unittest.TestCase):
         for output in ['.csv', '.mcf', '.tmcf']:
             self.assertTrue(
                 filecmp.cmp(test_output + output, expected_output + output))
+
 
 if __name__ == '__main__':
     app.run()
