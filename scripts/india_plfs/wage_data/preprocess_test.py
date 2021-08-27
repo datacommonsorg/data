@@ -35,7 +35,9 @@ class TestPreprocess(unittest.TestCase):
             result_file_path = os.path.join(module_dir_,
                                             'test_data/test_cleaned.csv')
 
-            loader = PLFSWageDataLoader(xlsx_file, period="2018-10")
+            loader = PLFSWageDataLoader(xlsx_file,
+                                        period="2018-10",
+                                        data_rows=37)
             loader.load()
             loader.process()
             loader.save(csv_file_path=result_file_path)
