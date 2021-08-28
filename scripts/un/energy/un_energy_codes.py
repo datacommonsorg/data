@@ -187,15 +187,18 @@ UN_ENERGY_FUEL_CODES = {
         'populationType': 'Fuel',
         'fuelType': 'dcs:Nuclear'
     },
-    'ZJ': {
+    'ZJ': {  # Duplicate of 'BJ', ignored
+        'Ignore' : 'duplicate_BJ',
         'populationType': 'Fuel',
         'fuelType': 'BioJetKerosene'
     },
-    'ZD': {
-        'populationType': 'Fuel',
-        'fuelType': 'BioDiesel'
+    'ZD': {  # Duplicate of 'BD', ignored
+        'Ignore': 'duplicate_BD',
+         'populationType': 'Fuel',
+         'fuelType': 'BioDiesel'
     },
-    'ZG': {
+    'ZG': {  # Duplicate of 'AL', ignored
+        'Ignore' : 'duplicate_AL',
         'populationType': 'Fuel',
         'fuelType': 'BioGasoline'
     },
@@ -443,15 +446,21 @@ UN_ENERGY_PRODUCER_TYPE = {
     '3': {
         'powerPlantSector': 'Refinery'
     },
-    '4': {},  # Plants producing petroleum products
+    '4': {
+        'powerPlantSector': 'PetroleumPlants'
+    },
     '5': {
         'powerPlantSector': 'MainActivityProducer'
     },
     '6': {
         'powerPlantSector': 'AutoProducer'
     },
-    '8': {},  # gross production
-    '9': {},  # net production
+    '8': {  # gross production, covered by production code '01'
+        'Ignore': 'duplicate_production_01',
+    },
+    '9': {  # net production, covered by production code '01'
+        'Ignore': 'duplicate_production_01',
+    },
     '5C': {
         'powerPlantSector': 'MainActivityProducerCombinedHeatPowerPlants'
     },
@@ -500,7 +509,7 @@ UN_ENERGY_CONSUMING_INDUSTRY = {
         'consumingSector': 'ChemicalPetrochemicalIndustry'
     },
     '14': {
-        'consumingSector': 'UN_OtherIndustry'
+        'consumingSector': 'UN_OtherManufacturingIndustry'
     },
     '14a': {
         'consumingSector': 'NonFerrousMetalsIndustry'
@@ -533,12 +542,15 @@ UN_ENERGY_CONSUMING_INDUSTRY = {
         'consumingSector': 'TextileAndLeatherIndustry'
     },
     '14o': {
-        'consumingSector': 'UN_OtherManufacturingIndustry'
+        'consumingSector': 'UN_OtherIndustry'
     },
 
     # Transport
     '2': {
         'consumingSector': 'TransportIndustry'
+    },
+    '21': {
+        'consumingSector': 'RoadTransport'
     },
     '22': {
         'consumingSector': 'RailTransport'
@@ -556,7 +568,7 @@ UN_ENERGY_CONSUMING_INDUSTRY = {
         'consumingSector': 'PipelineTransport'
     },
     '3': {
-        'consumingSector': 'UN_OtherIndustry'
+        'consumingSector': 'UN_OtherSector'
     },
     '31': {
         'consumingSector': 'Households'
@@ -568,7 +580,7 @@ UN_ENERGY_CONSUMING_INDUSTRY = {
         'consumingSector': 'CommerceAndPublicServices'
     },
     '34': {
-        'consumingSector': 'UN_OtherIndustry'
+        'consumingSector': 'UN_UnspecifiedSector'
     },
 }
 
@@ -764,11 +776,11 @@ UN_ENERGY_FLOW_CODES = {
         'measuredProperty': 'consumption',
         'usedFor': 'NonEnergyUse'
     },
-    'NA': {
-        'measuredProperty': 'consumption'
+    'NA': {  # duplicate of consumption code '12', ignored
+        # 'measuredProperty': 'consumption'
     },
-    'GA': {
-        'measuredProperty': 'generation'
+    'GA': {  # duplicate of generation code '01', ignored
+        # 'measuredProperty': 'generation'
     },
     # 'measurementQualifier: 'OpeningStocks'
     '21': {
@@ -1268,11 +1280,11 @@ def add_pv_for_property(code: str,
     if len(code) != len(orig_code):
         if 'measuredProperty' not in pv and measured_prop is not None:
             pv['measuredProperty'] = measured_prop
-        if measured_prop is None:
-            measured_prop = 'default'
+        if 'measuredProperty' in pv:
+            measured_prop = remove_namespace_prefix(pv['measuredProperty'])
         if len(code) > 0:
             _add_error_counter(
-                f'error_ignored_code_{measured_prop}_{code}',
+                f'warning_ignored_code_{measured_prop}_{code}',
                 f'Ignored {measured_prop} code: {orig_code}, suffix: {code}',
                 counters)
         return True
@@ -1293,7 +1305,10 @@ def get_pv_for_energy_code(energy_source: str,
       counters: [optional] error counters to be updated
 
     Returns:
-      dictionary with PVs for the statVar for the given codes.
+      dictionary with PVs for the statVar for the given codes or
+      None if the code is to be ignored.
+      If the StatVar is a duplicate of another code, the pv will have a property
+      'Ignore' with the reason.
     """
     orig_code = code
     pv = {}
@@ -1328,11 +1343,12 @@ def get_pv_for_energy_code(energy_source: str,
                            counters):
         return pv
 
-    if add_pv_for_property(code,
-                           UN_ENERGY_FLOW_CODES,
-                           None,
-                           pv,
-                           counters):
+    if add_pv_for_property(code, UN_ENERGY_FLOW_CODES, None, pv, counters):
+        if 'measuredProperty' not in pv:
+            # Code is ignored. Drop the pv.
+            _add_error_counter(f'warning_ignored_energy_code_{code}',
+                           f'Dropped energy transaction code {code}', counters)
+            return None
         return pv
 
     if len(code) > 0:

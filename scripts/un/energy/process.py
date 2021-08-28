@@ -52,13 +52,25 @@ flags.DEFINE_string('output_path', 'tmp_raw_data/un_energy_output',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
 flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
+flags.DEFINE_bool('copy_input_columns', False,
+                  'Add columns from the input csv into the output')
 
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
 OUTPUT_CSV_COLUMNS = [
-    'Country_dcid', 'Year', 'Quantity', 'Unit_dcid', 'Scaling_factor',
-    'Estimate', 'StatVar', 'Commodity Code', 'Country or Area',
-    'Commodity - Transaction Code', 'Commodity - Transaction'
+    'Country_dcid',
+    'Year',
+    'Quantity',
+    'Unit_dcid',
+    'Scaling_factor',
+    'Estimate',
+    'StatVar',
+]
+
+INPUT_CSV_COLUMNS_COPIED = [
+    'Commodity Code', 'Country or Area', 'Transaction Code',
+    'Commodity - Transaction Code', 'Commodity - Transaction', 'Unit',
+    'Quantity Footnotes'
 ]
 
 _DEFAULT_STAT_VAR_PV = {
@@ -260,6 +272,15 @@ def generate_stat_var(data_row: dict, sv_pv: dict, counters=None) -> str:
     fuel = data_row['Commodity Code']
     data_sv_pv = un_energy_codes.get_pv_for_energy_code(fuel, t_code, counters)
     if data_sv_pv is None or len(data_sv_pv) == 0:
+        # data row is ignored
+        return None
+    if 'Ignore' in data_sv_pv:
+        # statVar is to be ignored.
+        ignore_reason = data_sv_pv['Ignore']
+        ignore_reason = ignore_reason[ignore_reason.find(':') + 1:]
+        _add_error_counter(f'warning_ignored_stat_var_{ignore_reason}',
+                           f'Invalid statVar {sv_pv} for row {data_row}',
+                           counters)
         return None
     sv_pv.update(data_sv_pv)
     if not is_valid_stat_var(sv_pv):
@@ -353,8 +374,6 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
     sv_pv = {}
     sv_id = generate_stat_var(data_row, sv_pv, counters)
     if not sv_id:
-        _add_error_counter('error_invalid_stat_var',
-                           f'Commodity code: {ct_code}, {ct_name}', counters)
         return
     data_row['StatVar'] = sv_id
 
@@ -373,7 +392,10 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
     counters['output_csv_rows'] += 1
 
 
-def process(in_paths: list, out_path: str, debug_lines=1) -> dict:
+def process(in_paths: list,
+            out_path: str,
+            debug_lines=1,
+            copy_input_columns=False) -> dict:
     """Read data from CSV and create CSV,MCF with StatVars and tMCF for DC import.
     Generates the following output files:
       - .csv: File with StatVarObservations
@@ -384,6 +406,9 @@ def process(in_paths: list, out_path: str, debug_lines=1) -> dict:
       in_paths: list of UN Energy CSV data files to be processed.
       out_path: prefix for the output StatVarObs csv and StatVar mcf files.
       debug_lines: Generate each error message once every debug_lines.
+      copy_input_columns: Copy contents of input csv columns that are not used
+         in statVarObs as well into the output csv.
+         INPUT_CSV_COLUMNS_COPIED is the list of such columns.
 
     Returns:
       Counters after processing
@@ -395,6 +420,9 @@ def process(in_paths: list, out_path: str, debug_lines=1) -> dict:
     start_ts = time.perf_counter()
     counters['time_start'] = start_ts
     # Setup the output file handles for MCF and CSV.
+    output_columns = OUTPUT_CSV_COLUMNS
+    if copy_input_columns:
+        output_columns.extend(INPUT_CSV_COLUMNS_COPIED)
     with open(csv_file_path, 'w', newline='') as f_out_csv:
         csv_writer = csv.DictWriter(f_out_csv,
                                     fieldnames=OUTPUT_CSV_COLUMNS,
@@ -442,7 +470,8 @@ def main(_):
         csv_data_files = download.download_un_energy_dataset()
 
     if len(csv_data_files) > 0 and FLAGS.output_path != '':
-        process(csv_data_files, FLAGS.output_path, FLAGS.debug_lines)
+        process(csv_data_files, FLAGS.output_path, FLAGS.debug_lines,
+                FLAGS.copy_input_columns)
     else:
         print(f'Please specify files to process with --csv_data_files=<,>')
 
