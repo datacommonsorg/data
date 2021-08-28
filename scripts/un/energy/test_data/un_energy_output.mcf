@@ -732,7 +732,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_BioGasoline
 fuelType: dcid:BioGasoline
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -1066,7 +1066,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_AnthraciteCoal
 fuelType: dcs:EIA_AnthraciteCoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -1390,7 +1390,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_AviationGasoline
 fuelType: dcid:AviationGasoline
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -1927,7 +1927,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_BrownCoalBriquettes
 fuelType: dcid:BrownCoalBriquettes
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -2251,7 +2251,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_PatentFuel
 fuelType: dcid:PatentFuel
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -2590,7 +2590,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_BioDiesel
 fuelType: dcid:BioDiesel
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -2719,7 +2719,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_BlastFurnaceGas
 fuelType: dcid:BlastFurnaceGas
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -3288,7 +3288,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_BioGas
 fuelType: dcid:BioGas
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -3459,7 +3459,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_OtherRecoveredGases
 fuelType: dcid:UN_OtherRecoveredGases
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -3684,7 +3684,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_PeatProducts
 fuelType: dcid:PeatProducts
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -4276,7 +4276,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_BituminousCoal
 fuelType: dcs:EIA_BituminousCoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -4714,7 +4714,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_CokingCoal
 fuelType: dcid:CokingCoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -4970,7 +4970,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_Charcoal
 fuelType: dcid:Charcoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -5168,7 +5168,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Reserves_Fuel_HardCoal
 fuelType: dcid:HardCoal
-measuredProperty: dcs:reserves
+measuredProperty: dcid:reserves
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -5454,7 +5454,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_HardCoal
 fuelType: dcid:HardCoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -5700,7 +5700,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Reserves_Fuel_CrudeOil
 fuelType: dcid:CrudeOil
-measuredProperty: dcs:reserves
+measuredProperty: dcid:reserves
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -5709,7 +5709,7 @@ typeOf: dcs:StatisticalVariable
 Node: Annual_Reserves_Fuel_OilShaleAndTarSands_CrudeOil
 energySource: dcid:OilShaleAndTarSands
 fuelType: dcid:CrudeOil
-measuredProperty: dcs:reserves
+measuredProperty: dcid:reserves
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -5718,7 +5718,7 @@ typeOf: dcs:StatisticalVariable
 Node: Annual_Reserves_Fuel_TarSands_CrudeOil
 energySource: dcid:TarSands
 fuelType: dcid:CrudeOil
-measuredProperty: dcs:reserves
+measuredProperty: dcid:reserves
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -5774,7 +5774,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_CrudeOil
 fuelType: dcid:CrudeOil
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -5845,7 +5845,7 @@ typeOf: dcs:StatisticalVariable
 Node: Annual_Reserves_Fuel_OilShale_CrudeOil
 energySource: dcid:OilShale
 fuelType: dcid:CrudeOil
-measuredProperty: dcs:reserves
+measuredProperty: dcid:reserves
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -6763,7 +6763,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_DieselOil
 fuelType: dcid:DieselOil
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -7702,7 +7702,7 @@ typeOf: dcs:StatisticalVariable
 usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Electricity
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Electricity
 statType: dcs:measuredValue
@@ -9131,7 +9131,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_GasworksGas
 fuelType: dcid:GasworksGas
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -9663,7 +9663,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_NaturalGasLiquids
 fuelType: dcid:NaturalGasLiquids
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -10398,7 +10398,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_IndustrialWaste
 fuelType: dcid:IndustrialWaste
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -10530,7 +10530,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_KeroseneJetFuel
 fuelType: dcid:KeroseneJetFuel
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -11119,7 +11119,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_Kerosene
 fuelType: dcs:EIA_Kerosene
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -11426,7 +11426,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Reserves_Fuel_BrownCoal
 fuelType: dcid:BrownCoal
-measuredProperty: dcs:reserves
+measuredProperty: dcid:reserves
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -11666,7 +11666,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_BrownCoal
 fuelType: dcid:BrownCoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -12046,7 +12046,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_LigniteCoal
 fuelType: dcs:LigniteCoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -12404,7 +12404,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_LiquifiedPetroleumGas
 fuelType: dcid:LiquifiedPetroleumGas
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -12932,7 +12932,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_Lubricants
 fuelType: dcid:Lubricants
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -13218,7 +13218,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_MotorGasoline
 fuelType: dcid:MotorGasoline
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -13794,7 +13794,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_MunicipalWaste
 fuelType: dcid:MunicipalWaste
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -13872,7 +13872,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Reserves_Fuel_NaturalGas
 fuelType: dcs:NaturalGas
-measuredProperty: dcs:reserves
+measuredProperty: dcid:reserves
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -14040,7 +14040,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_NaturalGas
 fuelType: dcs:NaturalGas
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -14549,7 +14549,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_Naphtha
 fuelType: dcid:Naphtha
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -15060,7 +15060,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_OtherBituminousCoal
 fuelType: dcid:UN_OtherBituminousCoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -15241,7 +15241,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_CokeOvenGas
 fuelType: dcid:CokeOvenGas
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -15734,7 +15734,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_OtherHydrocarbons
 fuelType: dcid:UN_OtherHydrocarbons
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -15803,7 +15803,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_CokeOvenCoke
 fuelType: dcid:CokeOvenCoke
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -16683,7 +16683,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_OilShale
 fuelType: dcid:OilShale
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -17066,7 +17066,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_PetroleumCoke
 fuelType: dcs:PetroleumCoke
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -17294,7 +17294,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_OtherOilProducts
 fuelType: dcid:UN_OtherOilProducts
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -17633,7 +17633,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Reserves_Fuel_Peat
 fuelType: dcid:Peat
-measuredProperty: dcs:reserves
+measuredProperty: dcid:reserves
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -17807,7 +17807,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_Peat
 fuelType: dcid:Peat
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -18188,7 +18188,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_BlackLiquor
 fuelType: dcid:BlackLiquor
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -18464,7 +18464,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_ParaffinWaxes
 fuelType: dcid:ParaffinWaxes
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -18907,7 +18907,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_FuelOil
 fuelType: dcid:FuelOil
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -19058,7 +19058,7 @@ usedFor: dcid:FuelTransformation
 
 Node: Annual_Loss_Fuel_RefineryGas
 fuelType: dcid:RefineryGas
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -19611,7 +19611,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_SubBituminousCoal
 fuelType: dcs:EIA_SubBituminousCoal
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -19798,7 +19798,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Energy_Heat
 energySource: dcid:Heat
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Energy
 statType: dcs:measuredValue
@@ -20627,7 +20627,7 @@ usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Loss_Fuel_VegetalWaste
 fuelType: dcid:VegetalWaste
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -20877,7 +20877,7 @@ typeOf: dcs:StatisticalVariable
 
 Node: Annual_Loss_Fuel_WhiteSpirit
 fuelType: dcid:WhiteSpirit
-measuredProperty: dcs:loss
+measuredProperty: dcid:loss
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue

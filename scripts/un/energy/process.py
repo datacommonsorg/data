@@ -57,7 +57,8 @@ flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
 OUTPUT_CSV_COLUMNS = [
     'Country_dcid', 'Year', 'Quantity', 'Unit_dcid', 'Scaling_factor',
-    'Estimate', 'StatVar'
+    'Estimate', 'StatVar', 'Commodity Code', 'Country or Area',
+    'Commodity - Transaction Code', 'Commodity - Transaction'
 ]
 
 _DEFAULT_STAT_VAR_PV = {
@@ -96,9 +97,10 @@ def _print_counters(counters, steps=None):
         if 'inputs_processed' in counters:
             start_ts = counters['time_start']
             end_ts = time.perf_counter()
-            print('Processing rate: {:.2f}'.format(counters['inputs_processed'] /
-                                                   (end_ts - start_ts)),
-                  'rows/sec')
+            print(
+                'Processing rate: {:.2f}'.format(counters['inputs_processed'] /
+                                                 (end_ts - start_ts)),
+                'rows/sec')
         print('', flush=True)
 
 

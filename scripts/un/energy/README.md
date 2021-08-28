@@ -14,9 +14,10 @@ Where ${ID} is a 2-letter energy code, for eg: 'BT' for Bitumen, 'MO' for Motor 
 
 ## Run
 
+Run all following commands from the data/scripts directory.
+
 To download and process the data:
 ```bash
-# from the data/scripts directory
 python3 un/energy/process.py
 ```
 This downloads multiple csv files into a tmp_data_dir/ folder and generates .csv with accompanying .mcf and .tmcf.
@@ -26,7 +27,7 @@ To download the data:
 python3 un/energy/download.py --download_data_dir=tmp_data_dir/un_energy
 
 # Merge all csv into a single file
-cat tmp_data_dir/un_energy*/*.csv > tmp_data_dir/un_energy_all.csv
+cat tmp_data_dir/un_energy*/*.csv > tmp_raw_data/un_energy_all.csv
 ```
 
 To process a set of downloaded files:
@@ -35,8 +36,6 @@ python3 un/energy/process.py --csv_data_files=tmp_data_dir/un_energy_all.csv --o
 ```
 
 This would generate the files: tmp_raw_data/un_energy_output.{csv, mcf, tmcf}
-
-
 
 To run tests:
 ```bash
