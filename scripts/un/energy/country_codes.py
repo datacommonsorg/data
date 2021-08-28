@@ -299,6 +299,10 @@ UN_COUNTRY_CODES = {
     890: 'country/YUG',  # Yugoslavia (former), YU (additional)
     894: 'country/ZMB',  # Zambia, ZM
     716: 'country/ZWE',  # Zimbabwe, ZW
+
+    # Ignored countries
+    172: '',  # Commonwealth of Independent States (CIS)
+    81: '',  # Antarctic Fisheries
 }
 
 
@@ -307,6 +311,9 @@ def get_all_country_codes() -> List[str]:
 
 
 def get_country_dcid(country_code: str) -> str:
+    """Returns the country dcid code for the ISO 3166 numeric code.
+       Returns empty string if the country can be ignored.
+    """
     numeric_code = int(country_code, 10)
     if numeric_code in UN_COUNTRY_CODES:
         return UN_COUNTRY_CODES[numeric_code]

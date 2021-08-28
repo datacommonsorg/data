@@ -782,13 +782,13 @@ UN_ENERGY_FLOW_CODES = {
     'GA': {  # duplicate of generation code '01', ignored
         # 'measuredProperty': 'generation'
     },
-    # 'measurementQualifier: 'OpeningStocks'
     '21': {
-        'measuredProperty': 'stocks'
+        'measuredProperty': 'stocks',
+        'measurementQualifier': 'OpeningStocks',
     },
-    # 'measurementQualifier': 'ClosingStocks'
     '22': {
-        'measuredProperty': 'stocks'
+        'measuredProperty': 'stocks',
+        'measurementQualifier': 'ClosingStocks',
     },
     '15': {
         'measuredProperty': 'reserves'
@@ -1049,7 +1049,7 @@ def add_pv_to_stat_var(prop: str, value: str, stat_var_pv: dict, counters=None):
                 value = UN_ENERGY_MERGED_CODES[merged_value]
             else:
                 _add_error_counter(
-                    f'warning_overwriten_property_{prop}',
+                    f'warning_overwritten_property_{prop}',
                     f'Overwriting value for property:{prop} from {old_value} to {value}',
                     counters)
     if value.find(':') == -1:
@@ -1111,6 +1111,15 @@ def add_pv_from_map_for_prefix(value_code: str,
     return None
 
 
+def get_energy_source_from_stat_var(pv: dict) -> str:
+    """Returns the value of property energySource or fuelType"""
+    if 'energySource' in pv:
+        return pv['energySource']
+    if 'fuelType' in pv:
+        return pv['fuelType']
+    return None
+
+
 def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
     """Adds property and values energy production code into the pv dict.
 
@@ -1147,29 +1156,26 @@ def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
         code = code[1:]
 
     # Add fuel type as energySource which could be a 1-3 letter prefix.
-    energy_source = None
-    if 'energySource' in pv:
-        energy_source = pv['energySource']
+    prev_fuel = get_energy_source_from_stat_var(pv)
     for l in [3, 2, 1]:
         value_code = code[:l]
         if add_pv_from_map(code[:l], UN_ENERGY_SOURCE_TYPE, pv, counters):
             code = code[l:]
-            if energy_source is not None and energy_source != pv['energySource']:
-                if energy_source == 'Electricity':
+            fuel = get_energy_source_from_stat_var(pv)
+            if prev_fuel is not None and fuel is not None and prev_fuel != fuel:
+                if prev_fuel == 'Electricity':
                     pv['producedThing'] = 'dcid:Electricity'
                 else:
-                    new_energy_source = pv['energySource']
-                    _add_error_counter(
-                        'warning_energy_source_change',
-                        f'Fuel changed {energy_source}->{new_energy_source}',
-                        counters)
+                    _add_error_counter('warning_energy_source_change',
+                                       f'Fuel changed {prev_fuel}->{fuel}',
+                                       counters)
             break
 
     # Add plant type from the remaining code
     producer_code += code[:1]
-    if add_pv_from_map(producer_code,
-                       UN_ENERGY_PLANT_TYPE, pv, counters) or add_pv_from_map(
-                           code[:1], UN_ENERGY_PLANT_TYPE, pv, counters):
+    if add_pv_from_map(producer_code, UN_ENERGY_PLANT_TYPE, pv, counters):
+        code = code[1:]
+    elif add_pv_from_map(code[:1], UN_ENERGY_PLANT_TYPE, pv, counters):
         code = code[1:]
 
     if len(code) > 0:

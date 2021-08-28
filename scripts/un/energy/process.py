@@ -316,6 +316,7 @@ def get_stat_var_mcf(sv_id: str, sv_pv: dict) -> str:
         stat_var.append('{}: {}'.format(p, sv_pv[p]))
     return '\n'.join(stat_var)
 
+
 def get_stat_var_prop(prop_list: list, sv_pv: dict) -> str:
     """Get the value of the first property from the list in the StatVar.
 
@@ -347,10 +348,12 @@ def add_stat_var_description(data_row: dict, sv_pv: dict):
         return
     code = data_row['Commodity - Transaction Code']
     transaction = data_row['Commodity - Transaction']
-    fuel_name = get_stat_var_prop(['energySource', 'fuelType', 'populationType'], sv_pv)
+    fuel_name = get_stat_var_prop(
+        ['energySource', 'fuelType', 'populationType'], sv_pv)
     measured_prop = get_stat_var_prop(['measuredProperty'], sv_pv)
-    sv_pv['description'] = f'"UN Energy data for {fuel_name} {measured_prop}, {transaction} (code: {code})"'
-    
+    sv_pv[
+        'description'] = f'"UN Energy data for {fuel_name} {measured_prop}, {transaction} (code: {code})"'
+
 
 def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
     """Process a single row of input data for un energy.
@@ -387,11 +390,17 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
 
     # Get the country from the numeric code.
     country_dcid = get_country_dcid(country_code)
-    if not country_dcid:
+    if country_dcid is None:
         _add_error_counter(
             f'error_unknown_country_code_{country_code}',
             f'Country code: {country_code}, name: {country_name}', counters)
         return
+    if len(country_dcid) == 0:
+        _add_error_counter(
+            f'warning_ignoring_country_code_{country_code}',
+            f'Country ignored: {country_code}, name: {country_name}', counters)
+        return
+
     data_row['Country_dcid'] = f'dcs:{country_dcid}'
 
     # Add the quantity units and scaling factor value if any.
