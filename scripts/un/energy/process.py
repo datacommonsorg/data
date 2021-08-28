@@ -215,7 +215,7 @@ def get_stat_var_id(sv_pv: dict, ignore_list=None) -> str:
     """
     pv = dict(sv_pv)
     ids = []
-    ignore_values = ['MeasuredValue']
+    ignore_values = ['MeasuredValue', 'description']
     if ignore_list is not None:
         ignore_values.extend(ignore_list)
 
@@ -316,6 +316,41 @@ def get_stat_var_mcf(sv_id: str, sv_pv: dict) -> str:
         stat_var.append('{}: {}'.format(p, sv_pv[p]))
     return '\n'.join(stat_var)
 
+def get_stat_var_prop(prop_list: list, sv_pv: dict) -> str:
+    """Get the value of the first property from the list in the StatVar.
+
+    Args:
+      prop_list: order list of properties looked up in the StatVar
+      sv_pv: dictionary of StatVar PVs.
+
+    Returns:
+      value of the property without the namespace prefix or
+      None if none of the properties exist in the statVar.
+    """
+    for prop in prop_list:
+        if prop in sv_pv:
+            prop_value = sv_pv[prop]
+            if prop_value is not None:
+                return prop_value[prop_value.find(':') + 1:]
+    return ''
+
+
+def add_stat_var_description(data_row: dict, sv_pv: dict):
+    """Adds a description to the StatVar using the input data_row containing
+    the codes and text fields.
+
+    Args:
+      data_row: Dictionary with input/output CSV columns.
+      sv_pv: Dictionary of StatVar PVs
+    """
+    if 'description' in sv_pv:
+        return
+    code = data_row['Commodity - Transaction Code']
+    transaction = data_row['Commodity - Transaction']
+    fuel_name = get_stat_var_prop(['energySource', 'fuelType', 'populationType'], sv_pv)
+    measured_prop = get_stat_var_prop(['measuredProperty'], sv_pv)
+    sv_pv['description'] = f'"UN Energy data for {fuel_name} {measured_prop}, {transaction} (code: {code})"'
+    
 
 def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
     """Process a single row of input data for un energy.
@@ -382,6 +417,7 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
 
     if sv_id not in sv_map:
         # New stat var generated. Output PVs to the statvar mcf file.
+        add_stat_var_description(data_row, sv_pv)
         stat_var_mcf = get_stat_var_mcf(sv_id, sv_pv)
         print_debug(1, 'Generating stat var node: ', stat_var_mcf)
         f_out_mcf.write('\n\n')

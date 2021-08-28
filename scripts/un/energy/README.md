@@ -28,7 +28,7 @@ The energy data file has the following columns:
 The import process generates the following files:
 - mcf: all StatVar definitions
 - tmcf: template for mapping csv to a StatVarObservation
-- csv: file with the following columns
+- csv: with one row for each StatVarObs with the following columns
     - Country_dcid
     - Year
     - Quantity
