@@ -12,6 +12,32 @@ https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:${ID}&DataMart
 Where ${ID} is a 2-letter energy code, for eg: 'BT' for Bitumen, 'MO' for Motor gasoline, 'KR' for Kerosene.
 ```
 
+The energy data file has the following columns:
+- Commodity Code:  2-letter code for the energy/fuel source
+- Country or Area Code: ISO-3166 numeric country code
+- Country or Area: Name of the country
+- Transaction Code: Alphanumeric code indicating the energy generation or usage
+- Commodity - Transaction Code: Concatenated commodity transaction code
+- Commodity - Transaction: Description of the energy transaction
+- Year
+- Unit
+- Quantity
+- Quantity Footnotes: Indicates if the Quantity is an estimate
+
+
+The import process generates the following files:
+- mcf: all StatVar definitions
+- tmcf: template for mapping csv to a StatVarObservation
+- csv: file with the following columns
+    - Country_dcid
+    - Year
+    - Quantity
+    - Unit_dcid
+    - Scaling_factor
+    - Estimate
+    - StatVar
+
+
 ## Run
 
 Run all following commands from the data/scripts directory.
@@ -27,7 +53,7 @@ To download the data:
 python3 un/energy/download.py --download_data_dir=tmp_data_dir/un_energy
 
 # Merge all csv into a single file
-cat tmp_data_dir/un_energy*/*.csv > tmp_raw_data/un_energy_all.csv
+cat tmp_data_dir/un_energy*/*.csv > tmp_data_dir/un_energy_all.csv
 ```
 
 To process a set of downloaded files:
