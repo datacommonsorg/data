@@ -119,7 +119,10 @@ def _print_counters(counters, steps=None):
 def _add_error_counter(counter_name: str, error_msg: str, counters):
     print_debug(2, "Error: ", counter_name, error_msg)
     if counters is not None:
-        if counters[counter_name] % FLAGS.debug_lines == 0:
+        debug_lines = 1
+        if 'debug_lines' in counters:
+            debug_lines = counters['debug_lines']
+        if counters[counter_name] % debug_lines == 0:
             print("ERROR: ", counter_name, ": ", error_msg)
         counters[counter_name] += 1
 

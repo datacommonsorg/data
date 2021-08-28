@@ -188,17 +188,17 @@ UN_ENERGY_FUEL_CODES = {
         'fuelType': 'dcs:Nuclear'
     },
     'ZJ': {  # Duplicate of 'BJ', ignored
-        'Ignore' : 'duplicate_BJ',
+        'Ignore': 'duplicate_BJ',
         'populationType': 'Fuel',
         'fuelType': 'BioJetKerosene'
     },
     'ZD': {  # Duplicate of 'BD', ignored
         'Ignore': 'duplicate_BD',
-         'populationType': 'Fuel',
-         'fuelType': 'BioDiesel'
+        'populationType': 'Fuel',
+        'fuelType': 'BioDiesel'
     },
     'ZG': {  # Duplicate of 'AL', ignored
-        'Ignore' : 'duplicate_AL',
+        'Ignore': 'duplicate_AL',
         'populationType': 'Fuel',
         'fuelType': 'BioGasoline'
     },
@@ -1347,7 +1347,8 @@ def get_pv_for_energy_code(energy_source: str,
         if 'measuredProperty' not in pv:
             # Code is ignored. Drop the pv.
             _add_error_counter(f'warning_ignored_energy_code_{code}',
-                           f'Dropped energy transaction code {code}', counters)
+                               f'Dropped energy transaction code {code}',
+                               counters)
             return None
         return pv
 

@@ -41,13 +41,16 @@ class TestUNEnergyProcess(unittest.TestCase):
         expected output files.
         """
         data_input = os.path.join(module_dir_, 'test_data/un_energy_input.csv')
-        test_output = os.path.join(module_dir_,
-                                   'test_data/un_energy_test_output')
+        # create a tmp output directory
+        tmp_dir = os.path.join(module_dir_, 'tmp')
+        if not os.path.exists(tmp_dir):
+            os.mkdir(tmp_dir)
+        test_output = os.path.join(tmp_dir, 'un_energy_test_output')
         expected_output = os.path.join(module_dir_,
                                        'test_data/un_energy_output')
         print(f'test file path: {data_input}, output: {test_output}')
 
-        test_counters = process.process([data_input], test_output)
+        test_counters = process.process([data_input], test_output, 10000)
         self.assertTrue(test_counters['input_files'] > 0)
         self.assertTrue(test_counters['inputs_processed'] > 0)
         self.assertTrue(test_counters['output_csv_rows'] > 0)
