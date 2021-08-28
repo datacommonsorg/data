@@ -65,10 +65,12 @@ def download_zip_file(url: str, output_dir: str) -> list:
     Returns:
       A list of files downloaded and unzipped.
     """
-    print(f'Downloading {url} to {output_dir}/\n')
+    print(f'Downloading {url} to {output_dir}/', flush=True)
     r = requests.get(url, stream=True)
     if r.status_code != 200:
-        print(f'Failed to download {url}, response code: ', r.status_code)
+        print(f'Failed to download {url}, response code: ',
+              r.status_code,
+              flush=True)
         return False
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall(output_dir)
@@ -106,7 +108,8 @@ def download_energy_dataset(
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
         print(f'Dataset "{energy_dataset}" not in list of supported codes:' +
-              str(supported_datasets))
+              str(supported_datasets),
+              flush=True)
         return output_files
     # Download data in batches of years as the download has a limit of 100k rows.
     years_list = list(range(start_year, years_per_batch + 1))
@@ -122,7 +125,8 @@ def download_energy_dataset(
         years_str = ','.join(year_batch)
         output = f'{output_path}-{energy_dataset}-{start_year}-{end_year}'
         print('Downloading UNData energy dataset: ',
-              f'{energy_dataset} from {start_year} to {end_year}')
+              f'{energy_dataset} from {start_year} to {end_year}',
+              flush=True)
         download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
                                             years=years_str)
         downloaded_files = download_zip_file(download_url, output)
@@ -149,7 +153,7 @@ def download_un_energy_dataset() -> list:
         if len(downloaded_files) == 0:
             errors += 1
         output_files.extend(downloaded_files)
-    print(f'Downloaded the following files: {output_files}')
+    print(f'Downloaded the following files: {output_files}', flush=True)
     return output_files
 
 
@@ -158,5 +162,4 @@ def main(_):
 
 
 if __name__ == '__main__':
-    print('running main')
     app.run(main)

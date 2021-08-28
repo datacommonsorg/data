@@ -477,17 +477,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_CokeOvens_AnthraciteCoal_FuelTransformation
-consumingSector: dcid:CokeOvens
-description: "UN Energy data for EIA_AnthraciteCoal consumption, Anthracite - transformation in coke ovens (code: AT081)"
-fuelType: dcs:EIA_AnthraciteCoal
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Consumption_Fuel_MainActivityProducerElectricityPowerPlants_AnthraciteCoal_FuelTransformation
 consumingSector: dcid:MainActivityProducerElectricityPowerPlants
 description: "UN Energy data for EIA_AnthraciteCoal consumption, Anthracite - transformation in electricity plants - main activity producers (code: AT08811)"
@@ -1065,36 +1054,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_OtherManufacturingIndustry_AnimalWaste
-consumingSector: dcid:UN_OtherManufacturingIndustry
-description: "UN Energy data for AnimalWaste consumption, Animal waste - Consumption by other manuf., const. and non-fuel min. ind. (code: AW1214)"
-fuelType: dcid:AnimalWaste
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_OtherIndustry_AnimalWaste
-consumingSector: dcid:UN_OtherIndustry
-description: "UN Energy data for AnimalWaste consumption, Animal waste - Consumption not elsewhere specified (industry) (code: AW1214o)"
-fuelType: dcid:AnimalWaste
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_Manufacturing_AnimalWaste
-consumingSector: dcid:Manufacturing
-description: "UN Energy data for AnimalWaste consumption, Animal waste - Consumption by manufacturing, construction and non-fuel industry (code: AW121)"
-fuelType: dcid:AnimalWaste
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
 Node: Annual_Consumption_Fuel_FoodAndTobaccoIndustry_AnimalWaste
 consumingSector: dcid:FoodAndTobaccoIndustry
 description: "UN Energy data for AnimalWaste consumption, Animal waste - Consumption by food and tobacco  (code: AW1214f)"
@@ -1298,15 +1257,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Generation_Fuel_BrownCoalBriquettes
-description: "UN Energy data for BrownCoalBriquettes generation, Brown coal briquettes - production (code: BB01)"
-fuelType: dcid:BrownCoalBriquettes
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
 Node: Annual_Consumption_Fuel_BriquettingPlants_BrownCoalBriquettes_EnergyIndustryOwnUse
 consumingSector: dcid:BriquettingPlants
 description: "UN Energy data for BrownCoalBriquettes consumption, Brown coal briquettes - consumption by briquetting plants (code: BB0923)"
@@ -1322,37 +1272,6 @@ Node: Annual_Loss_Fuel_BrownCoalBriquettes
 description: "UN Energy data for BrownCoalBriquettes loss, Brown coal briquettes - losses (code: BB101)"
 fuelType: dcid:BrownCoalBriquettes
 measuredProperty: dcid:loss
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_BlastFurnaces_BrownCoalBriquettes_FuelTransformation
-consumingSector: dcid:BlastFurnaces
-description: "UN Energy data for BrownCoalBriquettes consumption, Brown coal briquettes - Transformation in blast furnaces (code: BB084)"
-fuelType: dcid:BrownCoalBriquettes
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
-Node: Annual_Consumption_Fuel_BrownCoalBriquettes_NonEnergyUse
-description: "UN Energy data for BrownCoalBriquettes consumption, Brown coal briquettes - Consumption for non-energy uses (code: BB11)"
-fuelType: dcid:BrownCoalBriquettes
-measuredProperty: dcid:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:NonEnergyUse
-
-Node: Annual_Consumption_Fuel_IronSteel_BrownCoalBriquettes
-consumingSector: dcid:IronSteel
-description: "UN Energy data for BrownCoalBriquettes consumption, Brown coal briquettes - consumption by iron and steel industry (code: BB1211)"
-fuelType: dcid:BrownCoalBriquettes
-measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -1401,17 +1320,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_GasWorks_BrownCoalBriquettes_FuelTransformation
-consumingSector: dcid:GasWorks
-description: "UN Energy data for BrownCoalBriquettes consumption, Brown coal briquettes - transformation in gas works (code: BB082)"
-fuelType: dcid:BrownCoalBriquettes
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Consumption_Fuel_AutoProducerHeatPowerPlants_BrownCoalBriquettes_FuelTransformation
 consumingSector: dcid:AutoProducerHeatPowerPlants
 description: "UN Energy data for BrownCoalBriquettes consumption, Brown Coal Briquettes - Transformation in heat plants - autoproducers (code: BB08832)"
@@ -1422,6 +1330,15 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
+
+Node: Annual_Generation_Fuel_BrownCoalBriquettes
+description: "UN Energy data for BrownCoalBriquettes generation, Brown coal briquettes - production (code: BB01)"
+fuelType: dcid:BrownCoalBriquettes
+measuredProperty: dcs:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
 
 Node: Annual_Exports_Fuel_BrownCoalBriquettes
 description: "UN Energy data for BrownCoalBriquettes exports, Brown coal briquettes - exports (code: BB04)"
@@ -1758,87 +1675,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
-
-Node: Annual_Consumption_Fuel_BlastFurnaces_PatentFuel_FuelTransformation
-consumingSector: dcid:BlastFurnaces
-description: "UN Energy data for PatentFuel consumption, Patent fuel - Conversion in blast furnaces (code: BC084)"
-fuelType: dcid:PatentFuel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
-Node: Annual_Consumption_Fuel_PatentFuel_NonEnergyUse
-description: "UN Energy data for PatentFuel consumption, Patent fuel - non energy uses (code: BC11)"
-fuelType: dcid:PatentFuel
-measuredProperty: dcid:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:NonEnergyUse
-
-Node: Annual_Consumption_Fuel_IronSteel_PatentFuel
-consumingSector: dcid:IronSteel
-description: "UN Energy data for PatentFuel consumption, Patent fuel - consumption by iron and steel industry (code: BC1211)"
-fuelType: dcid:PatentFuel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_PatentFuel
-consumingSector: dcid:ChemicalPetrochemicalIndustry
-description: "UN Energy data for PatentFuel consumption, Patent fuel - consumption by chemical and petrochemicalindustry (code: BC1213)"
-fuelType: dcid:PatentFuel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_NonMetallicMineralsIndustry_PatentFuel
-consumingSector: dcid:NonMetallicMineralsIndustry
-description: "UN Energy data for PatentFuel consumption, Patent fuel - Consumption by non-metallic minerals  (code: BC1214b)"
-fuelType: dcid:PatentFuel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_FoodAndTobaccoIndustry_PatentFuel
-consumingSector: dcid:FoodAndTobaccoIndustry
-description: "UN Energy data for PatentFuel consumption, Patent fuel - Consumption by food and tobacco  (code: BC1214f)"
-fuelType: dcid:PatentFuel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_Agriculture_PatentFuel
-consumingSector: dcid:Agriculture
-description: "UN Energy data for PatentFuel consumption, Patent fuel - consumption by agriculture, forestry and fishing (code: BC1232)"
-fuelType: dcid:PatentFuel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_UnspecifiedSector_PatentFuel
-consumingSector: dcid:UN_UnspecifiedSector
-description: "UN Energy data for PatentFuel consumption, Patent fuel - Consumption not elsewhere specified (other) (code: BC1234)"
-fuelType: dcid:PatentFuel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
 
 Node: Annual_Consumption_Fuel_BriquettingPlants_PatentFuel_FuelTransformation
 consumingSector: dcid:BriquettingPlants
@@ -2230,17 +2066,6 @@ measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_BioDiesel_FuelTransformation
-consumingSector: dcid:MainActivityProducerCombinedHeatPowerPlants
-description: "UN Energy data for BioDiesel consumption, Biodiesel - Transformation in CHP plants - main activity producers (code: BD08821)"
-fuelType: dcid:BioDiesel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
 
 Node: Annual_Consumption_Fuel_OtherManufacturingIndustry_BioDiesel
 consumingSector: dcid:UN_OtherManufacturingIndustry
@@ -2656,17 +2481,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_OtherIndustry_BlastFurnaceGas_FuelTransformation
-consumingSector: dcid:UN_OtherIndustry
-description: "UN Energy data for BlastFurnaceGas consumption, Blast Furnace Gas - Other transformation (code: BG089)"
-fuelType: dcid:BlastFurnaceGas
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Consumption_Fuel_TransportEquipmentIndustry_BlastFurnaceGas
 consumingSector: dcid:TransportEquipmentIndustry
 description: "UN Energy data for BlastFurnaceGas consumption, Blast Furnace Gas - Consumption by transport equipment  (code: BG1214c)"
@@ -2697,17 +2511,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
-
-Node: Annual_Consumption_Fuel_Industry_BlastFurnaceGas_EnergyIndustryOwnUse
-consumingSector: dcid:Industry
-description: "UN Energy data for BlastFurnaceGas consumption, Blast Furnace Gas - Own use by other energy producers (code: BG0928)"
-fuelType: dcid:BlastFurnaceGas
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Consumption_Fuel_CokeOvens_BlastFurnaceGas_FuelTransformation
 consumingSector: dcid:CokeOvens
@@ -3315,25 +3118,6 @@ Node: Annual_Loss_Fuel_BioGas
 description: "UN Energy data for BioGas loss, Biogases - Losses (code: BI101)"
 fuelType: dcid:BioGas
 measuredProperty: dcid:loss
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Stocks_Fuel_BioGas
-description: "UN Energy data for BioGas stocks, Biogases - Stock changes (code: BI06)"
-fuelType: dcid:BioGas
-measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_OtherTransport_BioGas
-consumingSector: dcid:UN_OtherTransport
-description: "UN Energy data for BioGas consumption, Biogases - Consumption not elsewhere specified (transport) (code: BI1225)"
-fuelType: dcid:BioGas
-measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -4232,17 +4016,6 @@ measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_Bagasse_FuelTransformation
-consumingSector: dcid:MainActivityProducerCombinedHeatPowerPlants
-description: "UN Energy data for Bagasse consumption, Bagasse - Transformation in CHP plants - main activity producers (code: BS08821)"
-fuelType: dcid:Bagasse
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
 
 Node: Annual_Consumption_Fuel_Industry_Bagasse_EnergyIndustryOwnUse
 consumingSector: dcid:Industry
@@ -7064,16 +6837,6 @@ populationType: dcid:Energy
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Energy_UnspecifiedSector_Geothermal
-consumingSector: dcid:UN_UnspecifiedSector
-description: "UN Energy data for Geothermal consumption, Direct use of geothermal heat - Consumption not elsewhere specified (other) (code: DG1234)"
-energySource: dcid:Geothermal
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Energy
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
 Node: Annual_Consumption_Energy_CommerceAndPublicServices_Geothermal
 consumingSector: dcid:CommerceAndPublicServices
 description: "UN Energy data for Geothermal consumption, Direct use of geothermal heat - Consumption by commerce and public services (code: DG1235)"
@@ -7953,60 +7716,6 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:NonEnergyUse
 
-Node: Annual_Generation_Fuel_Ethane_Refinery
-description: "UN Energy data for Ethane generation, Ethane - Production from refineries (code: EA013)"
-fuelType: dcid:Ethane
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-powerPlantSector: dcid:Refinery
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_PetrochemicalPlants_Ethane_FuelTransformation
-consumingSector: dcid:PetrochemicalPlants
-description: "UN Energy data for Ethane consumption, Ethane - Transformation in petrochemical plants (code: EA085PP)"
-fuelType: dcid:Ethane
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
-Node: Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_Ethane_FuelTransformation
-consumingSector: dcid:AutoProducerCombinedHeatPowerPlants
-description: "UN Energy data for Ethane consumption, Ethane - Transformation in CHP plants - autoproducers (code: EA08822)"
-fuelType: dcid:Ethane
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
-Node: Annual_Consumption_Fuel_ElectricityGeneration_Ethane_FuelTransformation
-consumingSector: dcid:ElectricityGeneration
-description: "UN Energy data for Ethane consumption, Ethane - Transformation in electricity, CHP and heat plants (code: EA088)"
-fuelType: dcid:Ethane
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
-Node: Annual_Consumption_Fuel_FuelTransformationIndustry_Ethane_FuelTransformation
-consumingSector: dcid:FuelTransformationIndustry
-description: "UN Energy data for Ethane consumption, Ethane - Transformation (code: EA08)"
-fuelType: dcid:Ethane
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Receipts_Fuel_Ethane
 description: "UN Energy data for Ethane receipts, Ethane - Receipts from other sources (code: EA022)"
 fuelType: dcid:Ethane
@@ -8080,24 +7789,6 @@ Node: Annual_Imports_Fuel_Ethane
 description: "UN Energy data for Ethane imports, Ethane - Imports (code: EA03)"
 fuelType: dcid:Ethane
 measuredProperty: dcid:imports
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Exports_Fuel_Ethane
-description: "UN Energy data for Ethane exports, Ethane - Exports (code: EA04)"
-fuelType: dcid:Ethane
-measuredProperty: dcid:exports
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Stocks_Fuel_Ethane
-description: "UN Energy data for Ethane stocks, Ethane - Stock changes (code: EA06)"
-fuelType: dcid:Ethane
-measuredProperty: dcid:stocks
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -10246,44 +9937,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Imports_Fuel_GasworksGas
-description: "UN Energy data for GasworksGas imports, Gasworks Gas - Imports (code: GG03)"
-fuelType: dcid:GasworksGas
-measuredProperty: dcid:imports
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Exports_Fuel_GasworksGas
-description: "UN Energy data for GasworksGas exports, Gasworks Gas - Exports (code: GG04)"
-fuelType: dcid:GasworksGas
-measuredProperty: dcid:exports
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Stocks_Fuel_GasworksGas
-description: "UN Energy data for GasworksGas stocks, Gasworks Gas - Stock changes (code: GG06)"
-fuelType: dcid:GasworksGas
-measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_OtherIndustry_GasworksGas_FuelTransformation
-consumingSector: dcid:UN_OtherIndustry
-description: "UN Energy data for GasworksGas consumption, Gasworks Gas - Other transformation (code: GG089)"
-fuelType: dcid:GasworksGas
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_GasworksGas_FuelTransformation
 consumingSector: dcid:AutoProducerElectricityPowerPlants
 description: "UN Energy data for GasworksGas consumption, Gasworks Gas - Transformation in electricity plants - autoproducers (code: GG08812)"
@@ -10732,15 +10385,6 @@ consumingSector: dcid:InternationalAviationBunkers
 description: "UN Energy data for GasolineJetFuel consumption, Gasoline-type jet fuel - International aviation bunkers (code: GJ052)"
 fuelType: dcid:GasolineJetFuel
 measuredProperty: dcid:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_GasCoke
-description: "UN Energy data for GasCoke generation, Gas coke - production (code: GK01)"
-fuelType: dcid:GasCoke
-measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -11501,27 +11145,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_ElectricityGeneration_IndustrialWaste_EnergyIndustryOwnUse
-consumingSector: dcid:ElectricityGeneration
-description: "UN Energy data for IndustrialWaste consumption, Industrial Waste - Own use by electricity, heat and CHP plants (code: IW0927)"
-fuelType: dcid:IndustrialWaste
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:EnergyIndustryOwnUse
-
-Node: Annual_Consumption_Fuel_Mining_IndustrialWaste
-consumingSector: dcid:Mining
-description: "UN Energy data for IndustrialWaste consumption, Industrial Waste - Consumption by mining and quarrying  (code: IW1214e)"
-fuelType: dcid:IndustrialWaste
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
 Node: Annual_Consumption_Fuel_OilRefineries_IndustrialWaste_EnergyIndustryOwnUse
 consumingSector: dcid:OilRefineries
 description: "UN Energy data for IndustrialWaste consumption, Industrial Waste - Own use by oil refineries (code: IW0925)"
@@ -11882,17 +11505,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_CoalMines_IndustrialWaste_EnergyIndustryOwnUse
-consumingSector: dcid:CoalMines
-description: "UN Energy data for IndustrialWaste consumption, Industrial Waste - Own use by coal mines (code: IW0911)"
-fuelType: dcid:IndustrialWaste
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:EnergyIndustryOwnUse
-
 Node: Annual_Consumption_Fuel_CokeOvens_IndustrialWaste_EnergyIndustryOwnUse
 consumingSector: dcid:CokeOvens
 description: "UN Energy data for IndustrialWaste consumption, Industrial Waste - Own use by coke ovens (code: IW0921)"
@@ -12096,16 +11708,6 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:EnergyIndustryOwnUse
 
-Node: Annual_Consumption_Fuel_InternationalMarineBunkers_KeroseneJetFuel
-consumingSector: dcid:InternationalMarineBunkers
-description: "UN Energy data for KeroseneJetFuel consumption, Kerosene-type Jet Fuel - International marine bunkers (code: JF051)"
-fuelType: dcid:KeroseneJetFuel
-measuredProperty: dcid:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
 Node: Annual_Consumption_Fuel_Industry_KeroseneJetFuel_EnergyIndustryOwnUse
 consumingSector: dcid:Industry
 description: "UN Energy data for KeroseneJetFuel consumption, Kerosene-type Jet Fuel - Other energy industry own use (code: JF0928)"
@@ -12171,16 +11773,6 @@ usedFor: dcid:EnergyIndustryOwnUse
 Node: Annual_Consumption_Fuel_OtherTransport_KeroseneJetFuel
 consumingSector: dcid:UN_OtherTransport
 description: "UN Energy data for KeroseneJetFuel consumption, Kerosene-type Jet Fuel - Consumption not elsewhere specified (transport) (code: JF1225)"
-fuelType: dcid:KeroseneJetFuel
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_MachineryIndustry_KeroseneJetFuel
-consumingSector: dcid:MachineryIndustry
-description: "UN Energy data for KeroseneJetFuel consumption, Kerosene-type Jet Fuel - Consumption by machinery  (code: JF1214d)"
 fuelType: dcid:KeroseneJetFuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
@@ -12684,17 +12276,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_Kerosene_FuelTransformation
-consumingSector: dcid:AutoProducerCombinedHeatPowerPlants
-description: "UN Energy data for EIA_Kerosene consumption, Other kerosene - Transformation in CHP plants - autoproducers (code: KR08822)"
-fuelType: dcs:EIA_Kerosene
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Consumption_Fuel_InternationalMarineBunkers_Kerosene
 consumingSector: dcid:InternationalMarineBunkers
 description: "UN Energy data for EIA_Kerosene consumption, Other kerosene - International marine bunkers (code: KR051)"
@@ -12969,17 +12550,6 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
 
-Node: Annual_Consumption_Fuel_BlastFurnaces_BrownCoal_FuelTransformation
-consumingSector: dcid:BlastFurnaces
-description: "UN Energy data for BrownCoal consumption, Brown coal - transformation in blast furnaces (code: LB084)"
-fuelType: dcid:BrownCoal
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Consumption_Fuel_BriquettingPlants_BrownCoal_EnergyIndustryOwnUse
 consumingSector: dcid:BriquettingPlants
 description: "UN Energy data for BrownCoal consumption, Brown coal - own use by briquetting plants (code: LB0923)"
@@ -13001,17 +12571,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:EnergyIndustryOwnUse
-
-Node: Annual_Consumption_Fuel_CokeOvens_BrownCoal_FuelTransformation
-consumingSector: dcid:CokeOvens
-description: "UN Energy data for BrownCoal consumption, Brown coal - transformation in coke ovens (code: LB081)"
-fuelType: dcid:BrownCoal
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
 
 Node: Annual_Reserves_Fuel_BrownCoal_EnergyAdditionalResources
 description: "UN Energy data for BrownCoal reserves, Lignite brown coal - additional resources (code: LB152)"
@@ -13659,17 +13218,6 @@ measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_BlastFurnaces_LigniteCoal_FuelTransformation
-consumingSector: dcid:BlastFurnaces
-description: "UN Energy data for LigniteCoal consumption, Lignite - Transformation in blast furnaces (code: LN084)"
-fuelType: dcs:LigniteCoal
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
 
 Node: Annual_Consumption_Fuel_CokeOvens_LigniteCoal_FuelTransformation
 consumingSector: dcid:CokeOvens
@@ -15766,27 +15314,6 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:EnergyIndustryOwnUse
 
-Node: Annual_Consumption_Fuel_Industry_MunicipalWaste_EnergyIndustryOwnUse
-consumingSector: dcid:Industry
-description: "UN Energy data for MunicipalWaste consumption, Municipal Wastes - Other energy industry own use (code: MW0928)"
-fuelType: dcid:MunicipalWaste
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:EnergyIndustryOwnUse
-
-Node: Annual_Consumption_Fuel_ConstructionIndustry_MunicipalWaste
-consumingSector: dcid:ConstructionIndustry
-description: "UN Energy data for MunicipalWaste consumption, Municipal Wastes - Consumption by construction  (code: MW1214i)"
-fuelType: dcid:MunicipalWaste
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
 Node: Annual_Consumption_Fuel_NonFerrousMetalsIndustry_MunicipalWaste
 consumingSector: dcid:NonFerrousMetalsIndustry
 description: "UN Energy data for MunicipalWaste consumption, Municipal Wastes - Consumption by non-ferrous metals  (code: MW1214a)"
@@ -16768,28 +16295,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_Naphtha_FuelTransformation
-consumingSector: dcid:MainActivityProducerCombinedHeatPowerPlants
-description: "UN Energy data for Naphtha consumption, Naphtha - Transformation in CHP plants - main activity producers (code: NP08821)"
-fuelType: dcid:Naphtha
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
-Node: Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_Naphtha_FuelTransformation
-consumingSector: dcid:AutoProducerCombinedHeatPowerPlants
-description: "UN Energy data for Naphtha consumption, Naphtha - Transformation in CHP plants - autoproducers (code: NP08822)"
-fuelType: dcid:Naphtha
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Consumption_Fuel_OilRefineries_Naphtha_EnergyIndustryOwnUse
 consumingSector: dcid:OilRefineries
 description: "UN Energy data for Naphtha consumption, Naphtha - Own use by oil refineries (code: NP0925)"
@@ -17150,17 +16655,6 @@ measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_CokeOvens_OtherBituminousCoal_EnergyIndustryOwnUse
-consumingSector: dcid:CokeOvens
-description: "UN Energy data for UN_OtherBituminousCoal consumption, Other bituminous coal - own use by coke ovens (code: OB0921)"
-fuelType: dcid:UN_OtherBituminousCoal
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Consumption_Fuel_BriquettingPlants_OtherBituminousCoal_EnergyIndustryOwnUse
 consumingSector: dcid:BriquettingPlants
@@ -17837,16 +17331,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_ConstructionIndustry_CokeOvenGas
-consumingSector: dcid:ConstructionIndustry
-description: "UN Energy data for CokeOvenGas consumption, Coke Oven Gas - Consumption by construction  (code: OG1214i)"
-fuelType: dcid:CokeOvenGas
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
 Node: Annual_Consumption_Fuel_OilRefineries_CokeOvenGas_EnergyIndustryOwnUse
 consumingSector: dcid:OilRefineries
 description: "UN Energy data for CokeOvenGas consumption, Coke Oven Gas - Own use by oil refineries (code: OG0925)"
@@ -17917,17 +17401,6 @@ measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_OtherIndustry_CokeOvenGas_FuelTransformation
-consumingSector: dcid:UN_OtherIndustry
-description: "UN Energy data for CokeOvenGas consumption, Coke Oven Gas - Other transformation (code: OG089)"
-fuelType: dcid:CokeOvenGas
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
 
 Node: Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_CokeOvenGas_FuelTransformation
 consumingSector: dcid:AutoProducerElectricityPowerPlants
@@ -18242,6 +17715,16 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
 
+Node: Annual_Receipts_Fuel_Hydrogen_OtherHydrocarbons
+description: "UN Energy data for Hydrogen receipts, Production of hydrogen - receipts from other sources (code: OH022H)"
+energySource: dcid:Hydrogen
+fuelType: dcid:UN_OtherHydrocarbons
+measuredProperty: dcid:receipts
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Generation_Fuel_OtherHydrocarbons
 description: "UN Energy data for UN_OtherHydrocarbons generation, Other hydrocarbons - production (code: OH01)"
 fuelType: dcid:UN_OtherHydrocarbons
@@ -18496,17 +17979,6 @@ measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_BlastFurnaces_CokeOvenCoke_EnergyIndustryOwnUse
-consumingSector: dcid:BlastFurnaces
-description: "UN Energy data for CokeOvenCoke consumption, Coke-oven coke - Own use by blast furnaces (code: OK0924)"
-fuelType: dcid:CokeOvenCoke
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:EnergyIndustryOwnUse
 
 Node: Annual_Consumption_Fuel_CokeOvens_CokeOvenCoke_FuelTransformation
 consumingSector: dcid:CokeOvens
@@ -19425,17 +18897,6 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: Annual_Consumption_Fuel_OtherIndustry_OilShale_FuelTransformation
-consumingSector: dcid:UN_OtherIndustry
-description: "UN Energy data for OilShale consumption, Oil Shale - Other transformation (code: OS089)"
-fuelType: dcid:OilShale
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
-
 Node: Annual_Generation_Fuel_OilShale
 description: "UN Energy data for OilShale generation, Oil shale - Production (code: OS01)"
 fuelType: dcid:OilShale
@@ -20078,16 +19539,6 @@ typeOf: dcs:StatisticalVariable
 Node: Annual_Consumption_Fuel_WoodAndWoodProductsIndustry_OtherOilProducts
 consumingSector: dcid:WoodAndWoodProductsIndustry
 description: "UN Energy data for UN_OtherOilProducts consumption, Other oil products n.e.c. - Consumption by wood and wood products  (code: PP1214h)"
-fuelType: dcid:UN_OtherOilProducts
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_RoadTransport_OtherOilProducts
-consumingSector: dcid:RoadTransport
-description: "UN Energy data for UN_OtherOilProducts consumption, Other oil products n.e.c. - Consumption by road (code: PP1221)"
 fuelType: dcid:UN_OtherOilProducts
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
@@ -22287,17 +21738,6 @@ measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_CokeOvens_RefineryGas_FuelTransformation
-consumingSector: dcid:CokeOvens
-description: "UN Energy data for RefineryGas consumption, Refinery gas - Transformation in coke ovens (code: RG081)"
-fuelType: dcid:RefineryGas
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-usedFor: dcid:FuelTransformation
 
 Node: Annual_Stocks_Fuel_RefineryGas
 description: "UN Energy data for RefineryGas stocks, Refinery gas - Stock changes (code: RG06)"

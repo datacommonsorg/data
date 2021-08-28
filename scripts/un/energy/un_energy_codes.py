@@ -760,6 +760,13 @@ UN_ENERGY_FLOW_CODES = {
     '02': {
         'measuredProperty': 'receipts'
     },
+    '022': {
+        'measuredProperty': 'receipts'
+    },
+    '022H': {
+        'measuredProperty': 'receipts',
+        'energySource': 'Hydrogen',
+    },
     '03': {
         'measuredProperty': 'imports'
     },

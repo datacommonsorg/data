@@ -79,7 +79,7 @@ UN_COUNTRY_CODES = {
     192: 'country/CUB',  # Cuba, CU
     531: 'country/CUW',  # Curacao, CW
     196: 'country/CYP',  # Cyprus, CY
-    200: 'country/CZE',  # Czechoslovakia (former), CZ (additional)
+    200: '',  # Czechoslovakia (former), CZ (additional)
     203: 'country/CZE',  # Czech Republic, CZ
     208: 'country/DNK',  # Denmark, DK
     262: 'country/DJI',  # Djibouti, DJ
@@ -91,31 +91,31 @@ UN_COUNTRY_CODES = {
     226: 'country/GNQ',  # Equatorial Guinea, GQ
     232: 'country/ERI',  # Eritrea, ER
     233: 'country/EST',  # Estonia, EE
-    230: 'country/ETH',  # Ethiopia, incl. Eritrea, ET (additional)
+    230: '',  # Ethiopia, incl. Eritrea, ET (additional)
     231: 'country/ETH',  # Ethiopia, ET
     238: 'country/FLK',  # Falkland Islands (Malvinas), FK
     234: 'country/FRO',  # Faroe Islands, FO
     242: 'country/FJI',  # Fiji, FJ
     246: 'country/FIN',  # Finland, FI
     250: 'country/FRA',  # France, FR
-    251: 'country/FRA',  # France, FR (additional)
+    251: '',  # France, FR (additional)
     254: 'country/GUF',  # French Guiana, GF
-    255: 'country/GUF',  # French Guiana, GF (additional)
+    255: '',  # French Guiana, GF (additional)
     258: 'country/PYF',  # French Polynesia, PF
     260: 'country/ATF',  # French Southern Territories, TF
     266: 'country/GAB',  # Gabon, GA
     270: 'country/GMB',  # Gambia, GM
     268: 'country/GEO',  # Georgia, GE
     276: 'country/DEU',  # Germany, DE
-    278: 'country/DEU',  # German Dem. R. (former), DE (additional)
-    280: 'country/DEU',  # German Dem. R. (former), DE (additional)
+    278: '',  # German Dem. R. (former), DE (additional)
+    280: '',  # German Dem. R. (former), DE (additional)
     288: 'country/GHA',  # Ghana, GH
     292: 'country/GIB',  # Gibraltar, GI
     300: 'country/GRC',  # Greece, GR
     304: 'country/GRL',  # Greenland, GL
     308: 'country/GRD',  # Grenada, GD
     312: 'country/GLP',  # Guadeloupe, GP
-    313: 'country/GLP',  # Guadeloupe, GP (additional)
+    313: '',  # Guadeloupe, GP (additional)
     316: 'country/GUM',  # Guam, GU
     320: 'country/GTM',  # Guatemala, GT
     831: 'country/GGY',  # Guernsey, GG
@@ -137,7 +137,7 @@ UN_COUNTRY_CODES = {
     833: 'country/IMN',  # Isle of Man, IM
     376: 'country/ISR',  # Israel, IL
     380: 'country/ITA',  # Italy, IT
-    382: 'country/ITA',  # Italy, IT (additional)
+    382: '',  # Italy, IT (additional)
     388: 'country/JAM',  # Jamaica, JM
     392: 'country/JPN',  # Japan, JP
     832: 'country/JEY',  # Jersey, JE
@@ -171,11 +171,11 @@ UN_COUNTRY_CODES = {
     470: 'country/MLT',  # Malta, MT
     584: 'country/MHL',  # Marshall Islands, MH
     474: 'country/MTQ',  # Martinique, MQ
-    475: 'country/MTQ',  # Martinique, MQ (additional)
+    475: '',  # Martinique, MQ (additional)
     478: 'country/MRT',  # Mauritania, MR
     480: 'country/MUS',  # Mauritius, MU
     175: 'country/MYT',  # Mayotte, YT
-    176: 'country/MYT',  # Mayotte, YT (additional)
+    176: '',  # Mayotte, YT (additional)
     484: 'country/MEX',  # Mexico, MX
     583: 'country/FSM',  # Micronesia, Federated States of, FM
     498: 'country/MDA',  # Moldova, Republic of, MD
@@ -201,7 +201,7 @@ UN_COUNTRY_CODES = {
     574: 'country/NFK',  # Norfolk Island, NF
     580: 'country/MNP',  # Northern Mariana Islands, MP
     578: 'country/NOR',  # Norway, NO
-    579: 'country/NOR',  # Norway, NO (additional)
+    579: '',  # Norway, NO (additional)
     512: 'country/OMN',  # Oman, OM
     586: 'country/PAK',  # Pakistan, PK
     585: 'country/PLW',  # Palau, PW
@@ -218,7 +218,7 @@ UN_COUNTRY_CODES = {
     630: 'country/PRI',  # Puerto Rico, PR
     634: 'country/QAT',  # Qatar, QA
     638: 'country/REU',  # Réunion, RE
-    639: 'country/REU',  # Réunion, RE (additional)
+    639: '',  # Réunion, RE (additional)
     642: 'country/ROU',  # Romania, RO
     643: 'country/RUS',  # Russian Federation, RU
     643: 'country/RUS',  # Russia, RU
@@ -236,7 +236,7 @@ UN_COUNTRY_CODES = {
     682: 'country/SAU',  # Saudi Arabia, SA
     686: 'country/SEN',  # Senegal, SN
     688: 'country/SRB',  # Serbia, RS
-    891: 'country/SCG',  # Serbia and Montenegro (former), RS (additional)
+    891: '',  # Serbia and Montenegro (former), RS (additional)
     690: 'country/SYC',  # Seychelles, SC
     694: 'country/SLE',  # Sierra Leone, SL
     702: 'country/SGP',  # Singapore, SG
@@ -257,7 +257,7 @@ UN_COUNTRY_CODES = {
     748: 'country/SWZ',  # Swaziland, SZ
     752: 'country/SWE',  # Sweden, SE
     756: 'country/CHE',  # Switzerland, CH
-    757: 'country/CHE',  # Switzerland, CH (additional)
+    757: '',  # Switzerland, CH (additional)
     760: 'country/SYR',  # Syrian Arab Republic, SY
     158: 'country/TWN',  # Taiwan, Province of China, TW
     158: 'country/TWN',  # Taiwan, TW
@@ -281,7 +281,7 @@ UN_COUNTRY_CODES = {
     840: 'country/USA',  # United States, US
     581: 'country/UMI',  # United States Minor Outlying Islands, UM
     858: 'country/URY',  # Uruguay, UY
-    810: 'country/SUN',  # USSR (former), SU (additional)
+    810: '',  # USSR (former), SU (additional)
     860: 'country/UZB',  # Uzbekistan, UZ
     548: 'country/VUT',  # Vanuatu, VU
     862: 'country/VEN',  # Venezuela, Bolivarian Republic of, VE
@@ -293,9 +293,8 @@ UN_COUNTRY_CODES = {
     876: 'country/WLF',  # Wallis and Futuna, WF
     732: 'country/ESH',  # Western Sahara, EH
     887: 'country/YEM',  # Yemen, YE
-    886: 'country/YEM',  # Yemen Arab Rep. (former), YE (additional)
-    720: 'country/YEM',  # Yemen Dem. (former), YE (additional)
-    887: 'country/YEM',  # Yemen, YE
+    886: '',  # Yemen Arab Rep. (former), YE (additional)
+    720: '',  # Yemen Dem. (former), YE (additional)
     890: 'country/YUG',  # Yugoslavia (former), YU (additional)
     894: 'country/ZMB',  # Zambia, ZM
     716: 'country/ZWE',  # Zimbabwe, ZW

@@ -18,7 +18,6 @@ dcs:country/FIN,2015,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/FIN,2018,3,dcid:MetricTon,1000,,Annual_Consumption_Fuel_DomesticNavigationTransport_BioGasoline
 dcs:country/FIN,2009,5,dcid:MetricTon,1000,,Annual_Consumption_Fuel_UnspecifiedSector_BioGasoline
 dcs:country/FIN,2018,2,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CommerceAndPublicServices_BioGasoline
-dcs:country/FRA,2019,935,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/DEU,2019,543,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/DEU,2018,5,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherManufacturingIndustry_BioGasoline
 dcs:country/DEU,2018,5,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ConstructionIndustry_BioGasoline
@@ -34,7 +33,6 @@ dcs:country/HUN,2018,476,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/ISL,2019,7,dcid:MetricTon,1000,,Annual_Imports_Fuel_BioGasoline
 dcs:country/AUS,2019,199,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/IRL,2006,1,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
-dcs:country/ITA,2019,11,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/JAM,2018,56,dcid:MetricTon,1000,,Annual_Imports_Fuel_BioGasoline
 dcs:country/JPN,2017,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/AUT,2019,205,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
@@ -46,7 +44,6 @@ dcs:country/ARM,2018,1.65,dcid:MetricTon,1000,,Annual_Exports_Fuel_BioGasoline
 dcs:country/NLD,2013,414,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/NZL,2018,4,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/BEL,2019,310,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
-dcs:country/NOR,2019,71,dcid:MetricTon,1000,,Annual_Imports_Fuel_BioGasoline
 dcs:country/PRY,2019,312.16,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/PER,2018,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/PER,2018,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Mining_BioGasoline
@@ -63,7 +60,6 @@ dcs:country/ESP,2019,429,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/ESP,2012,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherTransport_BioGasoline
 dcs:country/SWE,2019,168,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/SWE,2015,2,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_BioGasoline
-dcs:country/CHE,2009,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/THA,2018,1178,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/BRA,2019,27366,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioGasoline
 dcs:country/BRA,2019,154,dcid:MetricTon,1000,,Annual_Loss_Fuel_BioGasoline
@@ -117,7 +113,6 @@ dcs:country/AUS,2019,31,dcid:MetricTon,1000,,Annual_Generation_Fuel_AnthraciteCo
 dcs:country/AUS,2018,-2,dcid:MetricTon,1000,,Annual_Stocks_Fuel_AnthraciteCoal
 dcs:country/AUS,2018,12,dcid:MetricTon,1000,,Annual_Consumption_Fuel_IronSteel_AnthraciteCoal
 dcs:country/AUS,2018,75,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherIndustry_AnthraciteCoal
-dcs:country/ITA,2018,71,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CokeOvens_AnthraciteCoal_FuelTransformation
 dcs:country/PRK,2019,21749,dcid:MetricTon,1000,,Annual_Generation_Fuel_AnthraciteCoal
 dcs:country/AUT,2007,121,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivityProducerElectricityPowerPlants_AnthraciteCoal_FuelTransformation
 dcs:country/AUT,2007,121,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ElectricityGeneration_AnthraciteCoal_FuelTransformation
@@ -181,7 +176,6 @@ dcs:country/COL,2012,6.92,dcid:MetricTon,1000,,Annual_Consumption_Fuel_NonMetall
 dcs:country/COL,2012,1.71,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ConstructionIndustry_AviationGasoline
 dcs:country/COM,2019,1.26,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/MYT,2016,0.0160583941605839,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
-dcs:country/MYT,2010,0.049,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/COG,1998,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_AviationGasoline
 dcs:country/COD,2000,1,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/CRI,2019,0.006712,dcid:MetricTon,1000,,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_AviationGasoline
@@ -189,23 +183,19 @@ dcs:country/CRI,2019,0.100575,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Agric
 dcs:country/BEN,1990,0,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/DOM,2018,0.49,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/SLV,1995,2,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
-dcs:country/ETH,1993,5,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/FRO,1991,0,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/FLK,2019,0.1971,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/FJI,2019,1,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/GUF,2016,0.1,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
-dcs:country/GUF,2010,0.1,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/PYF,2019,1,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/DJI,2019,0.8,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/GAB,2018,19,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
-dcs:country/DEU,1990,28,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/GHA,2018,10,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/ATG,2019,1.8,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/KIR,2019,0.027,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/GRL,2018,0.022,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/GRD,2018,0.400462387,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/GLP,2016,0.48,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
-dcs:country/GLP,2010,0.5,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/AZE,1998,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_AviationGasoline
 dcs:country/GTM,2009,1,dcid:MetricTon,1000,,Annual_Generation_Fuel_AviationGasoline
 dcs:country/GIN,2018,17.8,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
@@ -230,7 +220,6 @@ dcs:country/MDV,2019,0.29,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_Aviat
 dcs:country/MLI,2018,7,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/MLT,2012,1,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/MTQ,2016,0.17,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
-dcs:country/MTQ,2010,0.18,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/MRT,2019,1,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/AFG,1992,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_InternationalAviationBunkers_AviationGasoline
 dcs:country/AFG,1992,0,dcid:MetricTon,1000,,Annual_Stocks_Fuel_AviationGasoline
@@ -258,7 +247,6 @@ dcs:country/STP,2019,1.2,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_Aviati
 dcs:country/SEN,2002,25,dcid:MetricTon,1000,,Annual_Generation_Fuel_AviationGasoline
 dcs:country/SYC,2019,0.024,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/SLE,2019,1.4,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
-dcs:country/YEM,1990,1,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/BWA,2018,2,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/SDN,1997,5,dcid:MetricTon,1000,Estimate,Annual_Generation_Fuel_AviationGasoline
 dcs:country/SUR,1994,0,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
@@ -267,7 +255,6 @@ dcs:country/TGO,1998,1,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_Aviation
 dcs:country/TON,2019,0.2,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/TTO,2017,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_AviationGasoline
 dcs:country/UGA,1993,2,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
-dcs:country/SUN,1991,380,dcid:MetricTon,1000,,Annual_Generation_Fuel_AviationGasoline
 dcs:country/EGY,1996,5,dcid:MetricTon,1000,Estimate,Annual_Generation_Fuel_AviationGasoline
 dcs:country/GBR,2004,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_TransportEquipmentIndustry_AviationGasoline
 dcs:country/JEY,2018,11.095485,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AviationGasoline
@@ -281,9 +268,6 @@ dcs:country/YUG,1991,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_AviationGasol
 dcs:country/ZMB,2016,0,dcid:MetricTon,1000,,Annual_Imports_Fuel_AviationGasoline
 dcs:country/SLB,2019,1.431,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_AviationGasoline
 dcs:country/ERI,2018,2636.254,dcid:Terajoule,,,Annual_Generation_Fuel_AnimalWaste
-dcs:country/FRA,2018,2340,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_OtherManufacturingIndustry_AnimalWaste
-dcs:country/FRA,2018,2340,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_OtherIndustry_AnimalWaste
-dcs:country/FRA,2018,2340,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_Manufacturing_AnimalWaste
 dcs:country/HUN,2018,241,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_AnimalWaste
 dcs:country/IRL,2018,93,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_NonMetallicMineralsIndustry_AnimalWaste
 dcs:country/MDA,2018,11,dcid:Terajoule,,,Annual_Consumption_Fuel_OtherIndustry_AnimalWaste_FuelTransformation
@@ -301,7 +285,6 @@ dcs:country/PAK,1996,0,dcid:Terajoule,,,Annual_Consumption_Fuel_UnspecifiedSecto
 dcs:country/ESP,2018,449,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_MainActivityProducerElectricityPowerPlants_AnimalWaste_FuelTransformation
 dcs:country/ESP,2018,449,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_ElectricityGeneration_AnimalWaste_FuelTransformation
 dcs:country/TUN,2018,1551.272,dcid:Terajoule,,Estimate,Annual_Generation_Fuel_AnimalWaste
-dcs:country/SCG,1995,8791,dcid:Terajoule,,,Annual_Generation_Fuel_AnimalWaste
 dcs:country/BGR,2007,12,dcid:MetricTon,1000,,Annual_Receipts_Fuel_BrownCoalBriquettes
 dcs:country/BGR,2018,543,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_BrownCoalBriquettes_FuelTransformation
 dcs:country/BGR,2007,14,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_BrownCoalBriquettes_FuelTransformation
@@ -309,18 +292,12 @@ dcs:country/BGR,2001,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherIndustr
 dcs:country/BGR,2006,2,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ConstructionIndustry_BrownCoalBriquettes
 dcs:country/BGR,2004,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_RailTransport_BrownCoalBriquettes
 dcs:country/BGR,2004,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_TransportIndustry_BrownCoalBriquettes
-dcs:country/CZE,1991,892,dcid:MetricTon,1000,,Annual_Generation_Fuel_BrownCoalBriquettes
 dcs:country/CZE,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BriquettingPlants_BrownCoalBriquettes_EnergyIndustryOwnUse
 dcs:country/CZE,2018,1,dcid:MetricTon,1000,,Annual_Loss_Fuel_BrownCoalBriquettes
-dcs:country/FRA,2015,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BlastFurnaces_BrownCoalBriquettes_FuelTransformation
-dcs:country/FRA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BrownCoalBriquettes_NonEnergyUse
-dcs:country/FRA,2017,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_IronSteel_BrownCoalBriquettes
 dcs:country/DEU,1995,11,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BriquettingPlants_BrownCoalBriquettes_FuelTransformation
 dcs:country/DEU,2018,104,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_BrownCoalBriquettes_FuelTransformation
 dcs:country/DEU,1995,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilRefineries_BrownCoalBriquettes_EnergyIndustryOwnUse
 dcs:country/DEU,2018,120,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Mining_BrownCoalBriquettes
-dcs:country/DEU,1990,46000,dcid:MetricTon,1000,Estimate,Annual_Generation_Fuel_BrownCoalBriquettes
-dcs:country/DEU,1990,2413,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_GasWorks_BrownCoalBriquettes_FuelTransformation
 dcs:country/HUN,1997,3,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerHeatPowerPlants_BrownCoalBriquettes_FuelTransformation
 dcs:country/IND,2018,461,dcid:MetricTon,1000,Estimate,Annual_Generation_Fuel_BrownCoalBriquettes
 dcs:country/AUS,2016,0,dcid:MetricTon,1000,,Annual_Exports_Fuel_BrownCoalBriquettes
@@ -357,14 +334,6 @@ dcs:country/BGR,2009,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ElectricityG
 dcs:country/BGR,2009,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_FuelTransformationIndustry_PatentFuel_FuelTransformation
 dcs:country/DZA,1992,10,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_PatentFuel
 dcs:country/FJI,2019,0.008,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_MainActivityProducerElectricityPowerPlants_PatentFuel_FuelTransformation
-dcs:country/FRA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BlastFurnaces_PatentFuel_FuelTransformation
-dcs:country/FRA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_PatentFuel_NonEnergyUse
-dcs:country/FRA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_IronSteel_PatentFuel
-dcs:country/FRA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_PatentFuel
-dcs:country/FRA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_NonMetallicMineralsIndustry_PatentFuel
-dcs:country/FRA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_PatentFuel
-dcs:country/FRA,2018,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Agriculture_PatentFuel
-dcs:country/FRA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_UnspecifiedSector_PatentFuel
 dcs:country/HUN,2008,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BriquettingPlants_PatentFuel_FuelTransformation
 dcs:country/HUN,2011,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BriquettingPlants_PatentFuel_EnergyIndustryOwnUse
 dcs:country/HUN,2011,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_EnergyIndustry_PatentFuel_EnergyIndustryOwnUse
@@ -405,7 +374,6 @@ dcs:country/ARG,2012,37,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivit
 dcs:country/ARG,2012,37,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ElectricityGeneration_BioDiesel_FuelTransformation
 dcs:country/ARG,2012,37,dcid:MetricTon,1000,,Annual_Consumption_Fuel_FuelTransformationIndustry_BioDiesel_FuelTransformation
 dcs:country/HUN,2011,-17,dcid:MetricTon,1000,,Annual_ProductReclassification_Fuel_BioDiesel
-dcs:country/ITA,2018,2,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_BioDiesel_FuelTransformation
 dcs:country/AUT,2018,14,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherManufacturingIndustry_BioDiesel
 dcs:country/AUT,2018,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MachineryIndustry_BioDiesel
 dcs:country/AUT,2018,13,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ConstructionIndustry_BioDiesel
@@ -447,11 +415,9 @@ dcs:country/CHN,2018,7200,dcid:Terajoule,,,Annual_Consumption_Fuel_CoalMines_Bla
 dcs:country/CHN,2011,2260.016,dcid:Terajoule,,,Annual_Consumption_Fuel_ElectricityGeneration_BlastFurnaceGas_EnergyIndustryOwnUse
 dcs:country/CHN,2018,2880,dcid:Terajoule,,,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_BlastFurnaceGas
 dcs:country/CHN,2018,102160,dcid:Terajoule,,,Annual_Consumption_Fuel_OtherIndustry_BlastFurnaceGas
-dcs:country/CZE,1990,426,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_OtherIndustry_BlastFurnaceGas_FuelTransformation
 dcs:country/CZE,1997,1,dcid:Terajoule,,,Annual_Consumption_Fuel_TransportEquipmentIndustry_BlastFurnaceGas
 dcs:country/CZE,2016,1,dcid:Terajoule,,,Annual_Consumption_Fuel_MachineryIndustry_BlastFurnaceGas
 dcs:country/FIN,2018,163,dcid:Terajoule,,,Annual_Consumption_Fuel_MainActivityProducerHeatPowerPlants_BlastFurnaceGas_FuelTransformation
-dcs:country/FRA,2018,16375,dcid:Terajoule,,,Annual_Consumption_Fuel_Industry_BlastFurnaceGas_EnergyIndustryOwnUse
 dcs:country/DEU,1992,4,dcid:Terajoule,,,Annual_Consumption_Fuel_CokeOvens_BlastFurnaceGas_FuelTransformation
 dcs:country/ARG,2019,2226.4,dcid:Terajoule,,,Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_BlastFurnaceGas_FuelTransformation
 dcs:country/ARG,2019,2226,dcid:Terajoule,,,Annual_Consumption_Fuel_ElectricityGeneration_BlastFurnaceGas_FuelTransformation
@@ -516,10 +482,7 @@ dcs:country/LTU,2006,0,dcid:Terajoule,,,Annual_Consumption_Fuel_OtherIndustry_Bi
 dcs:country/MUS,2018,81,dcid:Terajoule,,,Annual_Generation_Fuel_BioGas
 dcs:country/BEL,2018,2,dcid:Terajoule,,,Annual_Consumption_Fuel_NaturalGasPlants_BioGas_FuelTransformation
 dcs:country/BEL,2018,23,dcid:Terajoule,,,Annual_Loss_Fuel_BioGas
-dcs:country/NOR,2018,-58,dcid:Terajoule,,,Annual_Stocks_Fuel_BioGas
 dcs:country/REU,2016,196.78,dcid:Terajoule,,,Annual_Generation_Fuel_BioGas
-dcs:country/REU,2010,80.4,dcid:Terajoule,,,Annual_Generation_Fuel_BioGas
-dcs:country/CHE,2012,3,dcid:Terajoule,,,Annual_Consumption_Fuel_OtherTransport_BioGas
 dcs:country/MKD,2018,200.416,dcid:Terajoule,,,Annual_Imports_Fuel_BioGas
 dcs:country/FIN,2015,1,dcid:MetricTon,1000,,Annual_Generation_Fuel_BioJetKerosene
 dcs:country/FIN,2015,2,dcid:MetricTon,1000,,Annual_Exports_Fuel_BioJetKerosene
@@ -610,7 +573,6 @@ dcs:country/AUS,2018,3879.51463980005,dcid:MetricTon,1000,Estimate,Annual_Consum
 dcs:country/MOZ,2018,951,dcid:MetricTon,1000,Estimate,Annual_Generation_Fuel_Bagasse
 dcs:country/BGD,2018,229.3,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_OtherIndustry_Bagasse
 dcs:country/BRB,2018,0.0906489167454449,dcid:MetricTon,1000,,Annual_Stocks_Fuel_Bagasse
-dcs:country/REU,2010,542.7,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_Bagasse_FuelTransformation
 dcs:country/RWA,2019,17,dcid:MetricTon,1000,Estimate,Annual_Generation_Fuel_Bagasse
 dcs:country/KNA,2005,65,dcid:MetricTon,1000,,Annual_Generation_Fuel_Bagasse
 dcs:country/BOL,2018,205,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_Industry_Bagasse_EnergyIndustryOwnUse
@@ -871,7 +833,6 @@ dcs:country/THA,2018,725,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Petrochemi
 dcs:country/BLZ,2018,1.15370165484634,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivityProducerElectricityPowerPlants_CrudeOil_FuelTransformation
 dcs:country/BLZ,2018,1.15370165484634,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ElectricityGeneration_CrudeOil_FuelTransformation
 dcs:country/BLZ,2018,4.57807635933806,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_OtherTransport_CrudeOil
-dcs:country/YEM,1990,8468,dcid:MetricTon,1000,Estimate,Annual_Generation_Fuel_CrudeOil
 dcs:country/ALB,2019,1005.09,dcid:MetricTon,1000,,Annual_Generation_Fuel_CrudeOil
 dcs:country/ALB,1999,0,dcid:MetricTon,1000,,Annual_Imports_Fuel_CrudeOil
 dcs:country/ALB,2019,631.216,dcid:MetricTon,1000,,Annual_Exports_Fuel_CrudeOil
@@ -923,7 +884,6 @@ dcs:country/HUN,2018,8,dcid:Terajoule,,,Annual_Consumption_Energy_MachineryIndus
 dcs:country/HUN,2018,45,dcid:Terajoule,,,Annual_Consumption_Energy_FoodAndTobaccoIndustry_Geothermal
 dcs:country/HUN,2018,7,dcid:Terajoule,,,Annual_Consumption_Energy_ConstructionIndustry_Geothermal
 dcs:country/HUN,2014,0,dcid:Terajoule,,,Annual_Consumption_Energy_TextileAndLeatherIndustry_Geothermal
-dcs:country/ITA,1999,8916,dcid:Terajoule,,,Annual_Consumption_Energy_UnspecifiedSector_Geothermal
 dcs:country/AUT,2018,497,dcid:Terajoule,,,Annual_Consumption_Energy_CommerceAndPublicServices_Geothermal
 dcs:country/AUT,2018,497,dcid:Terajoule,,,Annual_Consumption_Energy_OtherSector_Geothermal
 dcs:country/AUT,2018,497,dcid:Terajoule,,,Annual_Consumption_Energy_Geothermal
@@ -1018,11 +978,6 @@ dcs:country/ALB,2019,558.18,dcid:Terajoule,,,Annual_Consumption_Energy_SolarTher
 dcs:country/DZA,2016,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_Ethane_PetroleumPlants
 dcs:country/DZA,2016,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_Ethane
 dcs:country/DZA,2016,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Ethane_NonEnergyUse
-dcs:country/FRA,2019,32,dcid:MetricTon,1000,,Annual_Generation_Fuel_Ethane_Refinery
-dcs:country/FRA,2018,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_PetrochemicalPlants_Ethane_FuelTransformation
-dcs:country/FRA,2012,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_Ethane_FuelTransformation
-dcs:country/FRA,2012,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ElectricityGeneration_Ethane_FuelTransformation
-dcs:country/FRA,2018,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_FuelTransformationIndustry_Ethane_FuelTransformation
 dcs:country/IRN,2018,6482.87,dcid:MetricTon,1000,Estimate,Annual_Receipts_Fuel_Ethane
 dcs:country/AUS,2019,-422,dcid:MetricTon,1000,,Annual_ProductReclassification_Fuel_Ethane
 dcs:country/AUS,2018,14,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilGasExtraction_Ethane_EnergyIndustryOwnUse
@@ -1031,8 +986,6 @@ dcs:country/AUS,2008,19,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ChemicalPet
 dcs:country/AUS,2008,19,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Manufacturing_Ethane
 dcs:country/AUS,2008,19,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Ethane
 dcs:country/MAC,2018,41,dcid:MetricTon,1000,,Annual_Imports_Fuel_Ethane
-dcs:country/NOR,2019,1150,dcid:MetricTon,1000,,Annual_Exports_Fuel_Ethane
-dcs:country/NOR,2019,2,dcid:MetricTon,1000,,Annual_Stocks_Fuel_Ethane
 dcs:country/SAU,2006,1781,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilRefineries_Ethane_EnergyIndustryOwnUse
 dcs:country/GBR,2007,49,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherManufacturingIndustry_Ethane
 dcs:country/GBR,2007,49,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherIndustry_Ethane
@@ -1258,10 +1211,6 @@ dcs:country/CHN,2009,135.69,dcid:Terajoule,,,Annual_Consumption_Fuel_RailTranspo
 dcs:country/CHN,2009,135.69,dcid:Terajoule,,,Annual_Consumption_Fuel_TransportIndustry_GasworksGas
 dcs:country/HRV,2007,1,dcid:Terajoule,,,Annual_Consumption_Fuel_PaperPulpPrintIndustry_GasworksGas
 dcs:country/HRV,2003,0,dcid:Terajoule,,,Annual_Consumption_Fuel_Agriculture_GasworksGas
-dcs:country/CZE,1991,4,dcid:Terajoule,,,Annual_Imports_Fuel_GasworksGas
-dcs:country/CZE,1991,1,dcid:Terajoule,,,Annual_Exports_Fuel_GasworksGas
-dcs:country/CZE,1991,-1750,dcid:Terajoule,,,Annual_Stocks_Fuel_GasworksGas
-dcs:country/CZE,1990,2000,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_OtherIndustry_GasworksGas_FuelTransformation
 dcs:country/CZE,1994,2,dcid:Terajoule,,,Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_GasworksGas_FuelTransformation
 dcs:country/CZE,1995,87,dcid:Terajoule,,,Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_GasworksGas_FuelTransformation
 dcs:country/CZE,2018,13502,dcid:Terajoule,,,Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_GasworksGas_FuelTransformation
@@ -1307,7 +1256,6 @@ dcs:country/AGO,2019,20.406,dcid:MetricTon,1000,,Annual_Generation_Fuel_Gasoline
 dcs:country/AGO,2019,20.406,dcid:MetricTon,1000,,Annual_Generation_Fuel_GasolineJetFuel
 dcs:country/AGO,2019,20.406,dcid:MetricTon,1000,Estimate,Annual_Exports_Fuel_GasolineJetFuel
 dcs:country/IRN,2018,45,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_InternationalAviationBunkers_GasolineJetFuel
-dcs:country/CZE,1991,0,dcid:MetricTon,1000,,Annual_Generation_Fuel_GasCoke
 dcs:country/AFG,2019,202.6,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_GasCoke
 dcs:country/AFG,2019,202.6,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_OtherManufacturingIndustry_GasCoke
 dcs:country/AFG,2019,202.6,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_OtherIndustry_GasCoke
@@ -1385,8 +1333,6 @@ dcs:country/ALB,2019,150.67,dcid:Terajoule,,,Annual_Generation_Energy_HeatCombus
 dcs:country/ALB,2019,150.67,dcid:Terajoule,,,Annual_Generation_Energy_OilProducts
 dcs:country/CYP,2017,0,dcid:Terajoule,,,Annual_Imports_Fuel_IndustrialWaste
 dcs:country/CYP,2018,1,dcid:Terajoule,,,Annual_Stocks_Fuel_IndustrialWaste
-dcs:country/FRA,2010,14,dcid:Terajoule,,,Annual_Consumption_Fuel_ElectricityGeneration_IndustrialWaste_EnergyIndustryOwnUse
-dcs:country/FRA,2018,1,dcid:Terajoule,,,Annual_Consumption_Fuel_Mining_IndustrialWaste
 dcs:country/DEU,2010,0,dcid:Terajoule,,,Annual_Consumption_Fuel_OilRefineries_IndustrialWaste_EnergyIndustryOwnUse
 dcs:country/AUS,2019,4092,dcid:Terajoule,,,Annual_Generation_Fuel_IndustrialWaste
 dcs:country/AUS,2018,3615,dcid:Terajoule,,,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_IndustrialWaste
@@ -1422,7 +1368,6 @@ dcs:country/MWI,2018,48,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_OtherIn
 dcs:country/MDA,2017,87,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_Households_IndustrialWaste
 dcs:country/MDA,2017,0,dcid:Terajoule,,,Annual_Consumption_Fuel_Agriculture_IndustrialWaste
 dcs:country/BEL,2018,67,dcid:Terajoule,,,Annual_Consumption_Fuel_IronSteel_IndustrialWaste
-dcs:country/NOR,2015,1,dcid:Terajoule,,,Annual_Consumption_Fuel_CoalMines_IndustrialWaste_EnergyIndustryOwnUse
 dcs:country/POL,2018,9,dcid:Terajoule,,,Annual_Consumption_Fuel_CokeOvens_IndustrialWaste_EnergyIndustryOwnUse
 dcs:country/SVK,2015,0,dcid:Terajoule,,,Annual_Exports_Fuel_IndustrialWaste
 dcs:country/CAN,2014,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilRefineries_KeroseneJetFuel_EnergyIndustryOwnUse
@@ -1443,7 +1388,6 @@ dcs:country/BEN,2017,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherManufac
 dcs:country/BEN,2017,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherIndustry_KeroseneJetFuel
 dcs:country/BEN,2017,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Manufacturing_KeroseneJetFuel
 dcs:country/ECU,2019,3.15,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilGasExtraction_KeroseneJetFuel_EnergyIndustryOwnUse
-dcs:country/FRA,1999,2,dcid:MetricTon,1000,,Annual_Consumption_Fuel_InternationalMarineBunkers_KeroseneJetFuel
 dcs:country/GRL,2018,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Industry_KeroseneJetFuel_EnergyIndustryOwnUse
 dcs:country/GRL,2018,0.09,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_ConstructionIndustry_KeroseneJetFuel
 dcs:country/ARG,2012,326,dcid:MetricTon,1000,,Annual_ProductReclassification_Fuel_KeroseneJetFuel
@@ -1451,7 +1395,6 @@ dcs:country/ISL,2012,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_RoadTranspor
 dcs:country/AUS,2014,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ElectricityGeneration_KeroseneJetFuel_EnergyIndustryOwnUse
 dcs:country/AUS,2014,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_EnergyIndustry_KeroseneJetFuel_EnergyIndustryOwnUse
 dcs:country/AUS,2018,9,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherTransport_KeroseneJetFuel
-dcs:country/ITA,2018,5,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MachineryIndustry_KeroseneJetFuel
 dcs:country/KOR,2006,2,dcid:MetricTon,1000,,Annual_Consumption_Fuel_TransportEquipmentIndustry_KeroseneJetFuel
 dcs:country/AFG,2019,67.2,dcid:MetricTon,1000,Estimate,Annual_Imports_Fuel_KeroseneJetFuel
 dcs:country/AFG,2019,10.5,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_InternationalAviationBunkers_KeroseneJetFuel
@@ -1501,7 +1444,6 @@ dcs:country/AUS,2011,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_NonFerrousMe
 dcs:country/AUS,2016,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_NonMetallicMineralsIndustry_Kerosene
 dcs:country/AUS,2016,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_Kerosene
 dcs:country/AUS,2018,8,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CommerceAndPublicServices_Kerosene
-dcs:country/ITA,2017,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_Kerosene_FuelTransformation
 dcs:country/JPN,2017,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_InternationalMarineBunkers_Kerosene
 dcs:country/JPN,2005,7,dcid:MetricTon,1000,,Annual_Consumption_Fuel_NaturalGasPlants_Kerosene_FuelTransformation
 dcs:country/JPN,2017,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivityProducerHeatPowerPlants_Kerosene_FuelTransformation
@@ -1529,10 +1471,8 @@ dcs:country/BGR,1996,5,dcid:MetricTon,1000,,Annual_Consumption_Fuel_RailTranspor
 dcs:country/HRV,2012,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_TransportEquipmentIndustry_BrownCoal
 dcs:country/HRV,1999,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherTransport_BrownCoal
 dcs:country/CZE,2018,1362,dcid:MetricTon,1000,,Annual_Consumption_Fuel_GasWorks_BrownCoal_FuelTransformation
-dcs:country/FRA,2016,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BlastFurnaces_BrownCoal_FuelTransformation
 dcs:country/DEU,2018,682,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BriquettingPlants_BrownCoal_EnergyIndustryOwnUse
 dcs:country/DEU,1992,146,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilRefineries_BrownCoal_EnergyIndustryOwnUse
-dcs:country/DEU,1990,13,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_CokeOvens_BrownCoal_FuelTransformation
 dcs:country/ARG,2005,273000,dcid:MetricTon,1000,,Annual_Reserves_Fuel_BrownCoal_EnergyAdditionalResources
 dcs:country/IND,1997,945,dcid:MetricTon,1000,,Annual_Consumption_Fuel_GasWorks_BrownCoal_EnergyIndustryOwnUse
 dcs:country/AUS,2002,2934,dcid:MetricTon,1000,,Annual_Stocks_Fuel_BrownCoal
@@ -1597,7 +1537,6 @@ dcs:country/CZE,2018,29,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProduce
 dcs:country/CZE,2018,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_NonFerrousMetalsIndustry_LigniteCoal
 dcs:country/CZE,2017,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_RailTransport_LigniteCoal
 dcs:country/CZE,2017,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_TransportIndustry_LigniteCoal
-dcs:country/FRA,2016,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BlastFurnaces_LigniteCoal_FuelTransformation
 dcs:country/DEU,2018,496,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CokeOvens_LigniteCoal_FuelTransformation
 dcs:country/DEU,2018,682,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BriquettingPlants_LigniteCoal_EnergyIndustryOwnUse
 dcs:country/DEU,1992,146,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilRefineries_LigniteCoal_EnergyIndustryOwnUse
@@ -1804,8 +1743,6 @@ dcs:country/AND,2019,377.424,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_El
 dcs:country/AND,2019,377.424,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_FuelTransformationIndustry_MunicipalWaste_FuelTransformation
 dcs:country/EST,2016,459,dcid:Terajoule,,,Annual_Consumption_Fuel_ElectricityGeneration_MunicipalWaste_EnergyIndustryOwnUse
 dcs:country/EST,2016,459,dcid:Terajoule,,,Annual_Consumption_Fuel_EnergyIndustry_MunicipalWaste_EnergyIndustryOwnUse
-dcs:country/FRA,2010,850,dcid:Terajoule,,,Annual_Consumption_Fuel_Industry_MunicipalWaste_EnergyIndustryOwnUse
-dcs:country/FRA,2018,304,dcid:Terajoule,,,Annual_Consumption_Fuel_ConstructionIndustry_MunicipalWaste
 dcs:country/DEU,2007,164,dcid:Terajoule,,,Annual_Consumption_Fuel_NonFerrousMetalsIndustry_MunicipalWaste
 dcs:country/DEU,2017,4,dcid:Terajoule,,,Annual_Consumption_Fuel_TransportEquipmentIndustry_MunicipalWaste
 dcs:country/HND,2018,7446,dcid:Terajoule,,Estimate,Annual_Consumption_Fuel_UnspecifiedSector_MunicipalWaste
@@ -1902,8 +1839,6 @@ dcs:country/FIN,2008,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivity
 dcs:country/ARG,2012,1288,dcid:MetricTon,1000,,Annual_ProductReclassification_Fuel_Naphtha
 dcs:country/IND,2012,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_IronSteel_Naphtha
 dcs:country/AUS,2004,14,dcid:MetricTon,1000,,Annual_Consumption_Fuel_NonFerrousMetalsIndustry_Naphtha
-dcs:country/ITA,2007,7,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_Naphtha_FuelTransformation
-dcs:country/ITA,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_Naphtha_FuelTransformation
 dcs:country/AUT,2004,146,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilRefineries_Naphtha_EnergyIndustryOwnUse
 dcs:country/AUT,2004,146,dcid:MetricTon,1000,,Annual_Consumption_Fuel_EnergyIndustry_Naphtha_EnergyIndustryOwnUse
 dcs:country/KOR,2003,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_NonMetallicMineralsIndustry_Naphtha
@@ -1940,7 +1875,6 @@ dcs:country/BLR,2019,43,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherBitumi
 dcs:country/BLR,2011,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_TransportEquipmentIndustry_OtherBituminousCoal
 dcs:country/BLR,2011,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ConstructionIndustry_OtherBituminousCoal
 dcs:country/BLR,1999,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherTransport_OtherBituminousCoal
-dcs:country/FRA,2004,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CokeOvens_OtherBituminousCoal_EnergyIndustryOwnUse
 dcs:country/DEU,1993,4,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BriquettingPlants_OtherBituminousCoal_EnergyIndustryOwnUse
 dcs:country/ARG,2019,211,dcid:MetricTon,1000,,Annual_Imports_Fuel_OtherBituminousCoal
 dcs:country/ARG,2019,59,dcid:MetricTon,1000,,Annual_Exports_Fuel_OtherBituminousCoal
@@ -2007,7 +1941,6 @@ dcs:country/CHN,2018,15127.4,dcid:Terajoule,,,Annual_Consumption_Fuel_OtherSecto
 dcs:country/CZE,2006,7,dcid:Terajoule,,,Annual_Consumption_Fuel_MainActivityProducerHeatPowerPlants_CokeOvenGas_FuelTransformation
 dcs:country/CZE,2001,12,dcid:Terajoule,,,Annual_Consumption_Fuel_TransportEquipmentIndustry_CokeOvenGas
 dcs:country/CZE,2016,28,dcid:Terajoule,,,Annual_Consumption_Fuel_MachineryIndustry_CokeOvenGas
-dcs:country/FRA,1998,374,dcid:Terajoule,,,Annual_Consumption_Fuel_ConstructionIndustry_CokeOvenGas
 dcs:country/DEU,2018,1022,dcid:Terajoule,,,Annual_Consumption_Fuel_OilRefineries_CokeOvenGas_EnergyIndustryOwnUse
 dcs:country/DEU,2002,61,dcid:Terajoule,,,Annual_Consumption_Fuel_NonFerrousMetalsIndustry_CokeOvenGas
 dcs:country/DEU,2004,14,dcid:Terajoule,,,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_CokeOvenGas
@@ -2015,7 +1948,6 @@ dcs:country/DEU,2002,928,dcid:Terajoule,,,Annual_Consumption_Fuel_PaperPulpPrint
 dcs:country/DEU,2002,829,dcid:Terajoule,,,Annual_Consumption_Fuel_WoodAndWoodProductsIndustry_CokeOvenGas
 dcs:country/DEU,2002,279,dcid:Terajoule,,,Annual_Consumption_Fuel_TextileAndLeatherIndustry_CokeOvenGas
 dcs:country/DEU,1991,414,dcid:Terajoule,,,Annual_Consumption_Fuel_CommerceAndPublicServices_CokeOvenGas
-dcs:country/DEU,1990,2527,dcid:Terajoule,,,Annual_Consumption_Fuel_OtherIndustry_CokeOvenGas_FuelTransformation
 dcs:country/ARG,2019,504,dcid:Terajoule,,,Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_CokeOvenGas_FuelTransformation
 dcs:country/ARG,2019,504,dcid:Terajoule,,,Annual_Consumption_Fuel_ElectricityGeneration_CokeOvenGas_FuelTransformation
 dcs:country/ARG,2019,2772,dcid:Terajoule,,,Annual_Consumption_Fuel_CokeOvens_CokeOvenGas_EnergyIndustryOwnUse
@@ -2046,7 +1978,7 @@ dcs:country/AUS,2018,0,dcid:MetricTon,1000,,Annual_Receipts_Fuel_OtherHydrocarbo
 dcs:country/AUS,2018,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilRefineries_OtherHydrocarbons_FuelTransformation
 dcs:country/AUS,2018,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_FuelTransformationIndustry_OtherHydrocarbons_FuelTransformation
 dcs:country/JPN,2006,309,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_OtherHydrocarbons_FuelTransformation
-dcs:country/BEL,2019,34,dcid:MetricTon,1000,,Annual_Receipts_Fuel_OtherHydrocarbons
+dcs:country/BEL,2019,34,dcid:MetricTon,1000,,Annual_Receipts_Fuel_Hydrogen_OtherHydrocarbons
 dcs:country/BRA,2015,8442,dcid:MetricTon,1000,,Annual_Generation_Fuel_OtherHydrocarbons
 dcs:country/VEN,2002,19,dcid:MetricTon,1000,,Annual_Loss_Fuel_OtherHydrocarbons
 dcs:country/BGR,2010,2,dcid:MetricTon,1000,,Annual_Receipts_Fuel_CokeOvenCoke
@@ -2072,7 +2004,6 @@ dcs:country/CHN,2016,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_DomesticNavi
 dcs:country/CHN,2018,30,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_OtherTransport_CokeOvenCoke
 dcs:country/CHN,2018,30.1,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_TransportIndustry_CokeOvenCoke
 dcs:country/HRV,1996,3,dcid:MetricTon,1000,,Annual_Consumption_Fuel_WoodAndWoodProductsIndustry_CokeOvenCoke
-dcs:country/CZE,1991,4315,dcid:MetricTon,1000,,Annual_Consumption_Fuel_BlastFurnaces_CokeOvenCoke_EnergyIndustryOwnUse
 dcs:country/CZE,2018,96,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CokeOvens_CokeOvenCoke_FuelTransformation
 dcs:country/CZE,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_CokeOvenCoke_FuelTransformation
 dcs:country/CZE,2015,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MainActivityProducerHeatPowerPlants_CokeOvenCoke_FuelTransformation
@@ -2163,7 +2094,6 @@ dcs:country/EST,1997,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_TextileAndLe
 dcs:country/EST,2018,106,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OtherManufacturingIndustry_OilShale
 dcs:country/EST,2018,106,dcid:MetricTon,1000,,Annual_Consumption_Fuel_Manufacturing_OilShale
 dcs:country/EST,2018,106,dcid:MetricTon,1000,,Annual_Consumption_Fuel_OilShale
-dcs:country/SUN,1991,3000,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_OtherIndustry_OilShale_FuelTransformation
 dcs:country/ALB,1998,10,dcid:MetricTon,1000,Estimate,Annual_Generation_Fuel_OilShale
 dcs:country/ALB,1998,10,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_MainActivityProducerElectricityPowerPlants_OilShale_FuelTransformation
 dcs:country/ALB,1998,10,dcid:MetricTon,1000,Estimate,Annual_Consumption_Fuel_ElectricityGeneration_OilShale_FuelTransformation
@@ -2227,7 +2157,6 @@ dcs:country/AUS,2017,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CoalMines_Ot
 dcs:country/AUS,2016,0,dcid:MetricTon,1000,,Annual_Consumption_Fuel_ElectricityGeneration_OtherOilProducts_EnergyIndustryOwnUse
 dcs:country/AUS,2014,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_MachineryIndustry_OtherOilProducts
 dcs:country/AUS,2017,2,dcid:MetricTon,1000,,Annual_Consumption_Fuel_WoodAndWoodProductsIndustry_OtherOilProducts
-dcs:country/ITA,2004,8,dcid:MetricTon,1000,,Annual_Consumption_Fuel_RoadTransport_OtherOilProducts
 dcs:country/AUT,1994,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_GasWorks_OtherOilProducts_FuelTransformation
 dcs:country/BEL,1993,1,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CokeOvens_OtherOilProducts_EnergyIndustryOwnUse
 dcs:country/BRA,2019,970,dcid:MetricTon,1000,,Annual_Generation_Fuel_OtherOilProducts_PetroleumPlants
@@ -2444,7 +2373,6 @@ dcs:country/CHN,2016,6,dcid:MetricTon,1000,,Annual_Consumption_Fuel_FoodAndTobac
 dcs:country/ECU,2019,33.65,dcid:MetricTon,1000,,Annual_Receipts_Fuel_RefineryGas
 dcs:country/DEU,1992,14,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CokeOvens_RefineryGas_EnergyIndustryOwnUse
 dcs:country/DEU,1996,28,dcid:MetricTon,1000,,Annual_Consumption_Fuel_PaperPulpPrintIndustry_RefineryGas
-dcs:country/DEU,1990,1.003,dcid:MetricTon,1000,,Annual_Consumption_Fuel_CokeOvens_RefineryGas_FuelTransformation
 dcs:country/ARG,2012,90,dcid:MetricTon,1000,,Annual_Stocks_Fuel_RefineryGas
 dcs:country/ARG,2019,55,dcid:MetricTon,1000,,Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_RefineryGas_FuelTransformation
 dcs:country/ARG,2012,116,dcid:MetricTon,1000,,Annual_Loss_Fuel_RefineryGas
