@@ -355,7 +355,7 @@ def add_stat_var_description(data_row: dict, sv_pv: dict):
         'description'] = f'"UN Energy data for {fuel_name} {measured_prop}, {transaction} (code: {code})"'
 
 
-def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
+def process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict, csv_writer, f_out_mcf, counters):
     """Process a single row of input data for un energy.
     Generate a statvar for the fuel and transaction code and adds the MCF for the
     unique StatVars into the f_out_mcf file and the columns for the StatVarObservation
@@ -363,7 +363,10 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
 
     Args:
       data_row: dictionary of CSV column values from the input file.
-      sv_map: dictionary of statVar ids that are alerady emitted into f_out_mcf
+      sv_map: dictionary of statVar ids that are already emitted into f_out_mcf
+      row_map: dictionary of data rows already processed.
+	Used to dedup input rows.
+      sv_obs: dictionary of StatVarObs already emitted
       csv_writer: file handle to write statvar observation values into.
       f_out_mcf: file handle to write unique statVar MCF nodes
       counters: counters to be updated
@@ -386,6 +389,15 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
     if fuel is None or country_code is None or t_code is None or year is None or quantity is None:
         _add_error_counter(f'error_invalid_input_row',
                            f'Invalid data row {data_row}', counters)
+        return
+
+    # Check for duplicate rows
+    row_key = f'{fuel}-{t_code}-{country_code}-{quantity}-{units}-{notes}'
+    row_map[row_key] += 1
+    if row_map[row_key] > 1:
+        _add_error_counter(
+            'inputs_ignored_duplicate',
+            f'Duplicate input row: {data_row}', counters)
         return
 
     # Get the country from the numeric code.
@@ -433,8 +445,22 @@ def process_row(data_row: dict, sv_map: dict, csv_writer, f_out_mcf, counters):
         f_out_mcf.write(stat_var_mcf)
         counters['output_stat_vars'] += 1
     sv_map[sv_id] += 1
+
+    # Check for duplicate StatVarObs.
+    obs_key = f'{sv_id}-{country_dcid}-{year}'
+    cur_value = f'{quantity}-{notes}'
+    if obs_key in sv_obs:
+        prev_value = sv_obs[obs_key]
+        _add_error_counter('warning_duplicate_obs_dropped',
+                           f'Duplicate value {cur_value} for SVO: {obs_key}, prev: {prev_value}',
+                           counters)
+        return
+    sv_obs[obs_key] = cur_value
+
+    # Write the StatVarObs into the csv file.
     csv_writer.writerow(data_row)
 
+    # Update counters.
     for prop in sv_pv:
         counters[f'outputs_with_property_{prop}'] += 1
     counters['output_csv_rows'] += 1
@@ -464,6 +490,8 @@ def process(in_paths: list,
     counters = defaultdict(lambda: 0)
     counters['debug_lines'] = debug_lines
     sv_map = defaultdict(lambda: 0)
+    row_map = defaultdict(lambda: 0)
+    sv_obs = {}
     csv_file_path = out_path + '.csv'
     start_ts = time.perf_counter()
     counters['time_start'] = start_ts
@@ -490,7 +518,7 @@ def process(in_paths: list,
                         line += 1
                         data_row['_File'] = in_file
                         data_row['_Row'] = line
-                        process_row(data_row, sv_map, csv_writer, f_out_mcf,
+                        process_row(data_row, sv_map, row_map, sv_obs, csv_writer, f_out_mcf,
                                     counters)
                         _print_counters(counters, counters['debug_lines'])
                 print(f'Processed {line} rows from data file: {in_file}')

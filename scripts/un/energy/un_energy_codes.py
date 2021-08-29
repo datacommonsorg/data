@@ -300,12 +300,11 @@ UN_ENERGY_FUEL_CODES = {
         'populationType': 'Energy',
         'energySource': 'HeatCombustibleFuels'
     },
-    'EH': {
+    'EH': {  # Hydro
         'populationType': 'Energy',
         'energySource': 'dcs:EIA_Water'
-    },  # Hydro
-    # Solar Electricity
-    'ES': {
+    },
+    'ES': {  # Solar Electricity
         'populationType': 'Energy',
         'energySource': 'dcs:Solar'
     },
@@ -784,10 +783,10 @@ UN_ENERGY_FLOW_CODES = {
         'usedFor': 'NonEnergyUse'
     },
     'NA': {  # duplicate of consumption code '12', ignored
-        # 'measuredProperty': 'consumption'
+         'measuredProperty': 'consumption'
     },
     'GA': {  # duplicate of generation code '01', ignored
-        # 'measuredProperty': 'generation'
+         'measuredProperty': 'generation'
     },
     '21': {
         'measuredProperty': 'stocks',

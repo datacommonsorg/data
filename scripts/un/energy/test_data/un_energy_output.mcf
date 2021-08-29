@@ -4504,6 +4504,15 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
 
+Node: Annual_Generation_Fuel_CokingCoal
+description: "UN Energy data for CokingCoal generation, Coking coal - total energy supply (code: CCGA)"
+fuelType: dcid:CokingCoal
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Receipts_Fuel_CokingCoal
 description: "UN Energy data for CokingCoal receipts, Coking coal - receipts from other sources (code: CC022)"
 fuelType: dcid:CokingCoal
@@ -4626,15 +4635,6 @@ Node: Annual_Loss_Fuel_CokingCoal
 description: "UN Energy data for CokingCoal loss, Coking coal - losses (code: CC101)"
 fuelType: dcid:CokingCoal
 measuredProperty: dcid:loss
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_CokingCoal
-description: "UN Energy data for CokingCoal generation, Coking coal - production (code: CC01)"
-fuelType: dcid:CokingCoal
-measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -5877,6 +5877,15 @@ Node: Annual_Consumption_Fuel_CoalProducts
 description: "UN Energy data for CoalProducts consumption, Other coal products - Final energy consumption (code: CP12)"
 fuelType: dcid:CoalProducts
 measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_Generation_Fuel_CoalProducts
+description: "UN Energy data for CoalProducts generation, Other coal products - Total energy supply (code: CPGA)"
+fuelType: dcid:CoalProducts
+measuredProperty: dcid:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -7187,6 +7196,15 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
+Node: Annual_Generation_Fuel_DieselOil
+description: "UN Energy data for DieselOil generation, Gas Oil/ Diesel Oil - Total energy supply (code: DLGA)"
+fuelType: dcid:DieselOil
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Generation_Fuel_DieselOil_PetroleumPlants
 description: "UN Energy data for DieselOil generation, Gas Oil/ Diesel Oil - production from plants (code: DL014)"
 fuelType: dcid:DieselOil
@@ -7256,15 +7274,6 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 powerPlantSector: dcid:Refinery
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_DieselOil
-description: "UN Energy data for DieselOil generation, Gas Oil/ Diesel Oil - Production (code: DL01)"
-fuelType: dcid:DieselOil
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
@@ -7716,6 +7725,15 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:NonEnergyUse
 
+Node: Annual_Consumption_Fuel_Ethane
+description: "UN Energy data for Ethane consumption, Ethane - Final consumption (code: EANA)"
+fuelType: dcid:Ethane
+measuredProperty: dcid:consumption
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Receipts_Fuel_Ethane
 description: "UN Energy data for Ethane receipts, Ethane - Receipts from other sources (code: EA022)"
 fuelType: dcid:Ethane
@@ -7769,15 +7787,6 @@ typeOf: dcs:StatisticalVariable
 Node: Annual_Consumption_Fuel_Manufacturing_Ethane
 consumingSector: dcid:Manufacturing
 description: "UN Energy data for Ethane consumption, Ethane - Consumption by manufacturing, construction and non-fuel mining industry (code: EA121)"
-fuelType: dcid:Ethane
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_Ethane
-description: "UN Energy data for Ethane consumption, Ethane - Final energy consumption (code: EA12)"
 fuelType: dcid:Ethane
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
@@ -9324,6 +9333,15 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
 
+Node: Annual_Generation_Fuel_RefineryFeedstocks
+description: "UN Energy data for RefineryFeedstocks generation, Feedstocks - total energy supply (code: FSGA)"
+fuelType: dcid:RefineryFeedstocks
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Imports_Fuel_RefineryFeedstocks
 description: "UN Energy data for RefineryFeedstocks imports, Feedstocks - imports (code: FS03)"
 fuelType: dcid:RefineryFeedstocks
@@ -9358,15 +9376,6 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 powerPlantSector: dcid:Refinery
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_RefineryFeedstocks
-description: "UN Energy data for RefineryFeedstocks generation, Feedstocks - production (code: FS01)"
-fuelType: dcid:RefineryFeedstocks
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
@@ -10193,6 +10202,15 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
+Node: Annual_Generation_Fuel_GasworksGas
+description: "UN Energy data for GasworksGas generation, Gasworks Gas - Total energy supply (code: GGGA)"
+fuelType: dcid:GasworksGas
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Loss_Fuel_GasworksGas
 description: "UN Energy data for GasworksGas loss, Gasworks Gas - Losses (code: GG101)"
 fuelType: dcid:GasworksGas
@@ -10207,15 +10225,6 @@ consumingSector: dcid:NonMetallicMineralsIndustry
 description: "UN Energy data for GasworksGas consumption, Gasworks Gas - Consumption by non-metallic minerals  (code: GG1214b)"
 fuelType: dcid:GasworksGas
 measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_GasworksGas
-description: "UN Energy data for GasworksGas generation, Gasworks Gas - Production (code: GG01)"
-fuelType: dcid:GasworksGas
-measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -10433,6 +10442,15 @@ Node: Annual_Consumption_Fuel_GasCoke
 description: "UN Energy data for GasCoke consumption, Gas Coke - Final energy consumption (code: GK12)"
 fuelType: dcid:GasCoke
 measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_Generation_Fuel_GasCoke
+description: "UN Energy data for GasCoke generation, Gas coke - Total energy supply (code: GKGA)"
+fuelType: dcid:GasCoke
+measuredProperty: dcid:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -11847,6 +11865,15 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
+Node: Annual_Generation_Fuel_KeroseneJetFuel
+description: "UN Energy data for KeroseneJetFuel generation, Kerosene-type Jet Fuel - Total energy supply (code: JFGA)"
+fuelType: dcid:KeroseneJetFuel
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Consumption_Fuel_UnspecifiedSector_KeroseneJetFuel
 consumingSector: dcid:UN_UnspecifiedSector
 description: "UN Energy data for KeroseneJetFuel consumption, Kerosene-type Jet Fuel - Consumption not elsewhere specified (other) (code: JF1234)"
@@ -11907,15 +11934,6 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 powerPlantSector: dcid:Refinery
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_KeroseneJetFuel
-description: "UN Energy data for KeroseneJetFuel generation, Kerosene-type Jet Fuel - Production (code: JF01)"
-fuelType: dcid:KeroseneJetFuel
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
@@ -12367,6 +12385,15 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
+Node: Annual_Generation_Fuel_Kerosene
+description: "UN Energy data for EIA_Kerosene generation, Other kerosene - Total energy supply (code: KRGA)"
+fuelType: dcs:EIA_Kerosene
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Consumption_Fuel_ElectricityGeneration_Kerosene_FuelTransformation
 consumingSector: dcid:ElectricityGeneration
 description: "UN Energy data for EIA_Kerosene consumption, Other kerosene - Transformation in electricity, CHP and heat plants (code: KR088)"
@@ -12487,15 +12514,6 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 powerPlantSector: dcid:Refinery
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_Kerosene
-description: "UN Energy data for EIA_Kerosene generation, Other kerosene - Production (code: KR01)"
-fuelType: dcs:EIA_Kerosene
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
@@ -14476,6 +14494,24 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:NonEnergyUse
 
+Node: Annual_Generation_Fuel_Lubricants
+description: "UN Energy data for Lubricants generation, Lubricants - Total energy supply (code: LUGA)"
+fuelType: dcid:Lubricants
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: Annual_Consumption_Fuel_Lubricants
+description: "UN Energy data for Lubricants consumption, Lubricants - Final consumption (code: LUNA)"
+fuelType: dcid:Lubricants
+measuredProperty: dcid:consumption
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Consumption_Fuel_CoalMines_Lubricants_EnergyIndustryOwnUse
 consumingSector: dcid:CoalMines
 description: "UN Energy data for Lubricants consumption, Lubricants - Own use in coal mines (code: LU0911)"
@@ -14514,15 +14550,6 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 powerPlantSector: dcid:Refinery
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_Lubricants
-description: "UN Energy data for Lubricants generation, Lubricants - Production (code: LU01)"
-fuelType: dcid:Lubricants
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
@@ -14579,15 +14606,6 @@ typeOf: dcs:StatisticalVariable
 Node: Annual_Consumption_Fuel_TransportIndustry_Lubricants
 consumingSector: dcid:TransportIndustry
 description: "UN Energy data for Lubricants consumption, Lubricants - Consumption by transport (code: LU122)"
-fuelType: dcid:Lubricants
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_Lubricants
-description: "UN Energy data for Lubricants consumption, Lubricants - Final energy consumption (code: LU12)"
 fuelType: dcid:Lubricants
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
@@ -14973,6 +14991,15 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
+Node: Annual_Generation_Fuel_MotorGasoline
+description: "UN Energy data for MotorGasoline generation, Motor Gasoline - Total energy supply (code: MOGA)"
+fuelType: dcid:MotorGasoline
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Generation_Fuel_MotorGasoline_Refinery
 description: "UN Energy data for MotorGasoline generation, Motor Gasoline - production from refineries (code: MO013)"
 fuelType: dcid:MotorGasoline
@@ -14980,15 +15007,6 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 powerPlantSector: dcid:Refinery
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_MotorGasoline
-description: "UN Energy data for MotorGasoline generation, Motor Gasoline - Production (code: MO01)"
-fuelType: dcid:MotorGasoline
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
@@ -17704,6 +17722,15 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
 
+Node: Annual_Generation_Fuel_OtherHydrocarbons
+description: "UN Energy data for UN_OtherHydrocarbons generation, Other hydrocarbons - total energy supply (code: OHGA)"
+fuelType: dcid:UN_OtherHydrocarbons
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Consumption_Fuel_AutoProducerElectricityPowerPlants_OtherHydrocarbons_FuelTransformation
 consumingSector: dcid:AutoProducerElectricityPowerPlants
 description: "UN Energy data for UN_OtherHydrocarbons consumption, Other hydrocarbons - transformation in electricity plants - autoproducers (code: OH08812)"
@@ -17720,15 +17747,6 @@ description: "UN Energy data for Hydrogen receipts, Production of hydrogen - rec
 energySource: dcid:Hydrogen
 fuelType: dcid:UN_OtherHydrocarbons
 measuredProperty: dcid:receipts
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_OtherHydrocarbons
-description: "UN Energy data for UN_OtherHydrocarbons generation, Other hydrocarbons - production (code: OH01)"
-fuelType: dcid:UN_OtherHydrocarbons
-measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 statType: dcs:measuredValue
@@ -20901,6 +20919,15 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:NonEnergyUse
 
+Node: Annual_Consumption_Fuel_ParaffinWaxes
+description: "UN Energy data for ParaffinWaxes consumption, Paraffin waxes - Final consumption (code: PWNA)"
+fuelType: dcid:ParaffinWaxes
+measuredProperty: dcid:consumption
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Consumption_Fuel_UnspecifiedSector_ParaffinWaxes
 consumingSector: dcid:UN_UnspecifiedSector
 description: "UN Energy data for ParaffinWaxes consumption, Paraffin waxes - Consumption by other consumers (code: PW1234)"
@@ -20944,15 +20971,6 @@ typeOf: dcs:StatisticalVariable
 Node: Annual_Consumption_Fuel_Manufacturing_ParaffinWaxes
 consumingSector: dcid:Manufacturing
 description: "UN Energy data for ParaffinWaxes consumption, Paraffin waxes - Consumption by manufacturing, construction and non-fuel mining industry (code: PW121)"
-fuelType: dcid:ParaffinWaxes
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_ParaffinWaxes
-description: "UN Energy data for ParaffinWaxes consumption, Paraffin waxes - Final energy consumption (code: PW12)"
 fuelType: dcid:ParaffinWaxes
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
@@ -21373,6 +21391,15 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
 
+Node: Annual_Generation_Fuel_FuelOil
+description: "UN Energy data for FuelOil generation, Fuel oil - Total energy supply (code: RFGA)"
+fuelType: dcid:FuelOil
+measuredProperty: dcid:generation
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Consumption_Fuel_ElectricityGeneration_FuelOil_EnergyIndustryOwnUse
 consumingSector: dcid:ElectricityGeneration
 description: "UN Energy data for FuelOil consumption, Fuel oil - Own use by electricity, heat and CHP plants (code: RF0927)"
@@ -21400,15 +21427,6 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 populationType: dcid:Fuel
 powerPlantSector: dcid:Refinery
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Generation_Fuel_FuelOil
-description: "UN Energy data for FuelOil generation, Fuel oil - Production (code: RF01)"
-fuelType: dcid:FuelOil
-measuredProperty: dcs:generation
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
@@ -23857,6 +23875,15 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:NonEnergyUse
 
+Node: Annual_Consumption_Fuel_WhiteSpirit
+description: "UN Energy data for WhiteSpirit consumption, White spirit and special boiling point industrial spirits - final consumption (code: WSNA)"
+fuelType: dcid:WhiteSpirit
+measuredProperty: dcid:consumption
+measurementQualifier: dcs:Annual
+populationType: dcid:Fuel
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: Annual_Consumption_Fuel_NonMetallicMineralsIndustry_WhiteSpirit
 consumingSector: dcid:NonMetallicMineralsIndustry
 description: "UN Energy data for WhiteSpirit consumption, White spirit and special boiling point industrial spirits - Consumption by non-metallic minerals  (code: WS1214b)"
@@ -23940,15 +23967,6 @@ typeOf: dcs:StatisticalVariable
 Node: Annual_Consumption_Fuel_OtherSector_WhiteSpirit
 consumingSector: dcid:UN_OtherSector
 description: "UN Energy data for WhiteSpirit consumption, White spirit and special boiling point industrial spirits - Consumption by other (code: WS123)"
-fuelType: dcid:WhiteSpirit
-measuredProperty: dcs:consumption
-measurementQualifier: dcs:Annual
-populationType: dcid:Fuel
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: Annual_Consumption_Fuel_WhiteSpirit
-description: "UN Energy data for WhiteSpirit consumption, White spirit and special boiling point industrial spirits - Final energy consumption (code: WS12)"
 fuelType: dcid:WhiteSpirit
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
