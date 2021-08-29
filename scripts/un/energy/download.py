@@ -37,7 +37,7 @@ sys.path.append(
 from un.energy.un_energy_codes import get_all_energy_source_codes
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('download_data_dir', 'tmp_raw_data/un_energy',
+flags.DEFINE_string('download_data_dir', 'tmp_data_dir/un_energy',
                     'Data dir to download into')
 flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
 flags.DEFINE_integer('start_year', 1990,
@@ -52,7 +52,7 @@ flags.DEFINE_integer('years_per_batch', 10,
 # Parameters:
 #   energy_code: two-letter code for the energy source
 #   years: comma separated list of years
-_DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr={years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
+_DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
 
 
 def download_zip_file(url: str, output_dir: str) -> list:

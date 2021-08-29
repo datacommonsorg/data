@@ -48,7 +48,7 @@ from un.energy.country_codes import get_country_dcid
 FLAGS = flags.FLAGS
 flags.DEFINE_list('csv_data_files', [],
                   'csv files from UNData Energy datasets to process')
-flags.DEFINE_string('output_path', 'tmp_raw_data/un_energy_output',
+flags.DEFINE_string('output_path', 'tmp_data_dir/un_energy_output',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
 flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
@@ -524,6 +524,7 @@ def process(in_paths: list,
                                     csv_writer, f_out_mcf, counters)
                         _print_counters(counters, counters['debug_lines'])
                 print(f'Processed {line} rows from data file: {in_file}')
+            f_out_mcf.write('\n')
 
     # Generate the tMCF file
     tmcf_file_path = out_path + '.tmcf'
