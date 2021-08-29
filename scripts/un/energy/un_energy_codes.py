@@ -783,10 +783,10 @@ UN_ENERGY_FLOW_CODES = {
         'usedFor': 'NonEnergyUse'
     },
     'NA': {  # duplicate of consumption code '12', ignored
-         'measuredProperty': 'consumption'
+        'measuredProperty': 'consumption'
     },
     'GA': {  # duplicate of generation code '01', ignored
-         'measuredProperty': 'generation'
+        'measuredProperty': 'generation'
     },
     '21': {
         'measuredProperty': 'stocks',
@@ -1018,6 +1018,16 @@ def _add_error_counter(counter_name: str, error_msg: str, counters: dict):
     counters[counter_name] += 1
 
 
+def remove_prefix(value: str, prefix: str) -> str:
+    """Returns the value without the prefix.
+    Equivalent of str.removeprefix in python 3.9
+    """
+    prefix_len = len(prefix)
+    if value[:prefix_len] == prefix:
+        return value[prefix_len:]
+    return value
+
+
 def remove_namespace_prefix(value: str) -> str:
     """Returns the string without the 'namespace:' prefix."""
     delim = value.find(':')
@@ -1154,7 +1164,7 @@ def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
         return False
     # Code is production type. Add properties for the remaining code suffix.
     pv['measuredProperty'] = 'dcs:generation'
-    code = code.removeprefix('01')
+    code = remove_prefix(code, '01')
     producer_code = ''
     # Add an optional producer type.
     if add_pv_from_map(code[:1], UN_ENERGY_PRODUCER_TYPE, pv, counters):
@@ -1211,13 +1221,13 @@ def add_pv_for_consumption_code(code: str, pv: dict, counters=None) -> bool:
     orig_code = code
     if not code.startswith('12'):
         return False
-    code = code.removeprefix('12')
+    code = remove_prefix(code, '12')
     pv['measuredProperty'] = 'dcs:consumption'
     if len(code) > 0:
         prefix = add_pv_from_map_for_prefix(code, UN_ENERGY_CONSUMING_INDUSTRY,
                                             pv, counters)
         if prefix is not None:
-            code = code.removeprefix(prefix)
+            code = remove_prefix(code, prefix)
     if len(code) > 0:
         _add_error_counter(
             f'error_ignored_consumption_code_{code}',
@@ -1239,7 +1249,7 @@ def add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
     orig_code = code
     if not code.startswith('13'):
         return False
-    code = code.removeprefix('13')
+    code = remove_prefix(code, '13')
     pv['measuredProperty'] = 'dcs:capacity'
     prefix = add_pv_from_map_for_prefix(code, UN_ENERGY_CAPACITY_CODES, pv,
                                         counters)
@@ -1247,13 +1257,13 @@ def add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
         _add_error_counter('error_ignored_capacity_code',
                            f'Ignored energy capacity code {code}', counters)
         return False
-    code = code.removeprefix(prefix)
+    code = remove_prefix(code, prefix)
     if len(code) > 0:
         # Add plant type
         prefix = add_pv_from_map_for_prefix(code, UN_ENERGY_CAPACITY_PLANT_CODE,
                                             pv, counters)
         if prefix is not None:
-            code = code.removeprefix(code)
+            code = remove_prefix(code, code)
 
     if len(code) > 0:
         _add_error_counter(
@@ -1286,7 +1296,7 @@ def add_pv_for_property(code: str,
     while len(code) > 0:
         prefix = add_pv_from_map_for_prefix(code, code_map, pv, counters)
         if prefix is not None:
-            code = code.removeprefix(prefix)
+            code = remove_prefix(code, prefix)
         else:
             break
     if len(code) != len(orig_code):

@@ -153,7 +153,8 @@ def remove_extra_characters(name: str) -> str:
         upper_prefix += 1
     if upper_prefix > 1:
         name = name[upper_prefix:]
-        name = name.removeprefix('_')
+        if name[0] == '_':
+            name = name[1:]
     # Replace all '_' with a capitalized letter.
     # Find all occurences of '_'.
     upper_idx = [-1] + [i for i, e in enumerate(name) if e == '_'] + [len(name)]
@@ -355,7 +356,8 @@ def add_stat_var_description(data_row: dict, sv_pv: dict):
         'description'] = f'"UN Energy data for {fuel_name} {measured_prop}, {transaction} (code: {code})"'
 
 
-def process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict, csv_writer, f_out_mcf, counters):
+def process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
+                csv_writer, f_out_mcf, counters):
     """Process a single row of input data for un energy.
     Generate a statvar for the fuel and transaction code and adds the MCF for the
     unique StatVars into the f_out_mcf file and the columns for the StatVarObservation
@@ -395,9 +397,8 @@ def process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict, csv_w
     row_key = f'{fuel}-{t_code}-{country_code}-{quantity}-{units}-{notes}'
     row_map[row_key] += 1
     if row_map[row_key] > 1:
-        _add_error_counter(
-            'inputs_ignored_duplicate',
-            f'Duplicate input row: {data_row}', counters)
+        _add_error_counter('inputs_ignored_duplicate',
+                           f'Duplicate input row: {data_row}', counters)
         return
 
     # Get the country from the numeric code.
@@ -451,9 +452,10 @@ def process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict, csv_w
     cur_value = f'{quantity}-{notes}'
     if obs_key in sv_obs:
         prev_value = sv_obs[obs_key]
-        _add_error_counter('warning_duplicate_obs_dropped',
-                           f'Duplicate value {cur_value} for SVO: {obs_key}, prev: {prev_value}',
-                           counters)
+        _add_error_counter(
+            'warning_duplicate_obs_dropped',
+            f'Duplicate value {cur_value} for SVO: {obs_key}, prev: {prev_value}',
+            counters)
         return
     sv_obs[obs_key] = cur_value
 
@@ -518,8 +520,8 @@ def process(in_paths: list,
                         line += 1
                         data_row['_File'] = in_file
                         data_row['_Row'] = line
-                        process_row(data_row, sv_map, row_map, sv_obs, csv_writer, f_out_mcf,
-                                    counters)
+                        process_row(data_row, sv_map, row_map, sv_obs,
+                                    csv_writer, f_out_mcf, counters)
                         _print_counters(counters, counters['debug_lines'])
                 print(f'Processed {line} rows from data file: {in_file}')
 
