@@ -15,7 +15,7 @@
 
 from typing import List
 
-# Map from UNData country codes to dcids.
+# Map from numeric ISO 3166 country codes used in UN Data to dcids.
 # This includes some older country coded marked as '(additional)'
 UN_COUNTRY_CODES = {
     4: 'country/AFG',  # Afghanistan, AF
