@@ -1,0 +1,1252 @@
+
+Node: E:Subject_Table->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months
+
+Node: E:Subject_Table->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months
+
+Node: E:Subject_Table->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithPeopleOver60
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithPeopleOver60
+
+Node: E:Subject_Table->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithPeopleOver60
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithPeopleOver60
+
+Node: E:Subject_Table->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithoutPeopleOver60
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithoutPeopleOver60
+
+Node: E:Subject_Table->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutPeopleOver60
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutPeopleOver60
+
+Node: E:Subject_Table->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_OtherFamilyHousehold
+
+Node: E:Subject_Table->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_OtherFamilyHousehold
+
+Node: E:Subject_Table->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_NonfamilyHousehold
+
+Node: E:Subject_Table->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_NonfamilyHousehold
+
+Node: E:Subject_Table->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18
+
+Node: E:Subject_Table->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18
+
+Node: E:Subject_Table->E18
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E19
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E20
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_OtherFamilyHousehold
+
+Node: E:Subject_Table->E21
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_OtherFamilyHousehold
+
+Node: E:Subject_Table->E22
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E23
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E24
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E25
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E26
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_NonfamilyHousehold
+
+Node: E:Subject_Table->E27
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithChildrenUnder18_NonfamilyHousehold
+
+Node: E:Subject_Table->E28
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18
+
+Node: E:Subject_Table->E29
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18
+
+Node: E:Subject_Table->E30
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E31
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E32
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_OtherFamilyHousehold
+
+Node: E:Subject_Table->E33
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_OtherFamilyHousehold
+
+Node: E:Subject_Table->E34
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E35
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E36
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E37
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E38
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_NonfamilyHousehold
+
+Node: E:Subject_Table->E39
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithoutChildrenUnder18_NonfamilyHousehold
+
+Node: E:Subject_Table->E40
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months
+
+Node: E:Subject_Table->E41
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months
+
+Node: E:Subject_Table->E42
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_AbovePovertyLevelInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_AbovePovertyLevelInThePast12Months
+
+Node: E:Subject_Table->E43
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_AbovePovertyLevelInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_AbovePovertyLevelInThePast12Months
+
+Node: E:Subject_Table->E44
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WithDisability
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WithDisability
+
+Node: E:Subject_Table->E45
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithDisability
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WithDisability
+
+Node: E:Subject_Table->E46
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_NoDisability
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_NoDisability
+
+Node: E:Subject_Table->E47
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_NoDisability
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_NoDisability
+
+Node: E:Subject_Table->E48
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_OneRace
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_OneRace
+
+Node: E:Subject_Table->E49
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_OneRace
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_OneRace
+
+Node: E:Subject_Table->E50
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WhiteAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WhiteAlone
+
+Node: E:Subject_Table->E51
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WhiteAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WhiteAlone
+
+Node: E:Subject_Table->E52
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_BlackOrAfricanAmericanAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_BlackOrAfricanAmericanAlone
+
+Node: E:Subject_Table->E53
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_BlackOrAfricanAmericanAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_BlackOrAfricanAmericanAlone
+
+Node: E:Subject_Table->E54
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_AmericanIndianOrAlaskaNativeAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_AmericanIndianOrAlaskaNativeAlone
+
+Node: E:Subject_Table->E55
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_AmericanIndianOrAlaskaNativeAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_AmericanIndianOrAlaskaNativeAlone
+
+Node: E:Subject_Table->E56
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_AsianAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_AsianAlone
+
+Node: E:Subject_Table->E57
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_AsianAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_AsianAlone
+
+Node: E:Subject_Table->E58
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_NativeHawaiianOrOtherPacificIslanderAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: E:Subject_Table->E59
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_NativeHawaiianOrOtherPacificIslanderAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: E:Subject_Table->E60
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_SomeOtherRaceAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_SomeOtherRaceAlone
+
+Node: E:Subject_Table->E61
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_SomeOtherRaceAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_SomeOtherRaceAlone
+
+Node: E:Subject_Table->E62
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_TwoOrMoreRaces
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_TwoOrMoreRaces
+
+Node: E:Subject_Table->E63
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_TwoOrMoreRaces
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_TwoOrMoreRaces
+
+Node: E:Subject_Table->E64
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_HispanicOrLatino
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_HispanicOrLatino
+
+Node: E:Subject_Table->E65
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_HispanicOrLatino
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_HispanicOrLatino
+
+Node: E:Subject_Table->E66
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_WhiteAloneNotHispanicOrLatino
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_WhiteAloneNotHispanicOrLatino
+
+Node: E:Subject_Table->E67
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WhiteAloneNotHispanicOrLatino
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_WhiteAloneNotHispanicOrLatino
+
+Node: E:Subject_Table->E68
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_WithFoodStampsInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Median_Income_Household_WithFoodStampsInThePast12Months
+unit: dcs:USDollar
+
+Node: E:Subject_Table->E69
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Median_Income_Household_WithFoodStampsInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Median_Income_Household_WithFoodStampsInThePast12Months
+unit: dcs:USDollar
+
+Node: E:Subject_Table->E70
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold
+
+Node: E:Subject_Table->E71
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold
+
+Node: E:Subject_Table->E72
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_NoWorkersInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_NoWorkersInThePast12Months
+
+Node: E:Subject_Table->E73
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_NoWorkersInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_NoWorkersInThePast12Months
+
+Node: E:Subject_Table->E74
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_OneWorkerInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_OneWorkerInThePast12Months
+
+Node: E:Subject_Table->E75
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_OneWorkerInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_OneWorkerInThePast12Months
+
+Node: E:Subject_Table->E76
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_TwoOrMoreWorkersInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_TwoOrMoreWorkersInThePast12Months
+
+Node: E:Subject_Table->E77
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_TwoOrMoreWorkersInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithFoodStampsInThePast12Months_FamilyHousehold_TwoOrMoreWorkersInThePast12Months
+
+Node: E:Subject_Table->E78
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months
+
+Node: E:Subject_Table->E79
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months
+
+Node: E:Subject_Table->E80
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithPeopleOver60
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithPeopleOver60
+
+Node: E:Subject_Table->E81
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithPeopleOver60
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithPeopleOver60
+
+Node: E:Subject_Table->E82
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithoutPeopleOver60
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithoutPeopleOver60
+
+Node: E:Subject_Table->E83
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutPeopleOver60
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutPeopleOver60
+
+Node: E:Subject_Table->E84
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E85
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E86
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_OtherFamilyHousehold
+
+Node: E:Subject_Table->E87
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_OtherFamilyHousehold
+
+Node: E:Subject_Table->E88
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E89
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E90
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E91
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E92
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_NonfamilyHousehold
+
+Node: E:Subject_Table->E93
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_NonfamilyHousehold
+
+Node: E:Subject_Table->E94
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18
+
+Node: E:Subject_Table->E95
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18
+
+Node: E:Subject_Table->E96
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E97
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E98
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_OtherFamilyHousehold
+
+Node: E:Subject_Table->E99
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_OtherFamilyHousehold
+
+Node: E:Subject_Table->E100
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E101
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E102
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E103
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E104
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_NonfamilyHousehold
+
+Node: E:Subject_Table->E105
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithChildrenUnder18_NonfamilyHousehold
+
+Node: E:Subject_Table->E106
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18
+
+Node: E:Subject_Table->E107
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18
+
+Node: E:Subject_Table->E108
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E109
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_MarriedCoupleFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_MarriedCoupleFamilyHousehold
+
+Node: E:Subject_Table->E110
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_OtherFamilyHousehold
+
+Node: E:Subject_Table->E111
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_OtherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_OtherFamilyHousehold
+
+Node: E:Subject_Table->E112
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E113
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleFatherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleFatherFamilyHousehold
+
+Node: E:Subject_Table->E114
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E115
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleMotherFamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_SingleMotherFamilyHousehold
+
+Node: E:Subject_Table->E116
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_NonfamilyHousehold
+
+Node: E:Subject_Table->E117
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_NonfamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithoutChildrenUnder18_NonfamilyHousehold
+
+Node: E:Subject_Table->E118
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months
+
+Node: E:Subject_Table->E119
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months
+
+Node: E:Subject_Table->E120
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_AbovePovertyLevelInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_AbovePovertyLevelInThePast12Months
+
+Node: E:Subject_Table->E121
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_AbovePovertyLevelInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_AbovePovertyLevelInThePast12Months
+
+Node: E:Subject_Table->E122
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WithDisability
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WithDisability
+
+Node: E:Subject_Table->E123
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithDisability
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WithDisability
+
+Node: E:Subject_Table->E124
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_NoDisability
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_NoDisability
+
+Node: E:Subject_Table->E125
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_NoDisability
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_NoDisability
+
+Node: E:Subject_Table->E126
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_OneRace
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_OneRace
+
+Node: E:Subject_Table->E127
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_OneRace
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_OneRace
+
+Node: E:Subject_Table->E128
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WhiteAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WhiteAlone
+
+Node: E:Subject_Table->E129
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WhiteAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WhiteAlone
+
+Node: E:Subject_Table->E130
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_BlackOrAfricanAmericanAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_BlackOrAfricanAmericanAlone
+
+Node: E:Subject_Table->E131
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_BlackOrAfricanAmericanAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_BlackOrAfricanAmericanAlone
+
+Node: E:Subject_Table->E132
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_AmericanIndianOrAlaskaNativeAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_AmericanIndianOrAlaskaNativeAlone
+
+Node: E:Subject_Table->E133
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_AmericanIndianOrAlaskaNativeAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_AmericanIndianOrAlaskaNativeAlone
+
+Node: E:Subject_Table->E134
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_AsianAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_AsianAlone
+
+Node: E:Subject_Table->E135
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_AsianAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_AsianAlone
+
+Node: E:Subject_Table->E136
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_NativeHawaiianOrOtherPacificIslanderAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: E:Subject_Table->E137
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_NativeHawaiianOrOtherPacificIslanderAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: E:Subject_Table->E138
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_SomeOtherRaceAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_SomeOtherRaceAlone
+
+Node: E:Subject_Table->E139
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_SomeOtherRaceAlone
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_SomeOtherRaceAlone
+
+Node: E:Subject_Table->E140
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_TwoOrMoreRaces
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_TwoOrMoreRaces
+
+Node: E:Subject_Table->E141
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_TwoOrMoreRaces
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_TwoOrMoreRaces
+
+Node: E:Subject_Table->E142
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_HispanicOrLatino
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_HispanicOrLatino
+
+Node: E:Subject_Table->E143
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_HispanicOrLatino
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_HispanicOrLatino
+
+Node: E:Subject_Table->E144
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_WhiteAloneNotHispanicOrLatino
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_WhiteAloneNotHispanicOrLatino
+
+Node: E:Subject_Table->E145
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WhiteAloneNotHispanicOrLatino
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_WhiteAloneNotHispanicOrLatino
+
+Node: E:Subject_Table->E146
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_WithoutFoodStampsInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Median_Income_Household_WithoutFoodStampsInThePast12Months
+unit: dcs:USDollar
+
+Node: E:Subject_Table->E147
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Median_Income_Household_WithoutFoodStampsInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Median_Income_Household_WithoutFoodStampsInThePast12Months
+unit: dcs:USDollar
+
+Node: E:Subject_Table->E148
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold
+
+Node: E:Subject_Table->E149
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold
+
+Node: E:Subject_Table->E150
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_NoWorkersInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_NoWorkersInThePast12Months
+
+Node: E:Subject_Table->E151
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_NoWorkersInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_NoWorkersInThePast12Months
+
+Node: E:Subject_Table->E152
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_OneWorkerInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_OneWorkerInThePast12Months
+
+Node: E:Subject_Table->E153
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_OneWorkerInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_OneWorkerInThePast12Months
+
+Node: E:Subject_Table->E154
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_TwoOrMoreWorkersInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_TwoOrMoreWorkersInThePast12Months
+
+Node: E:Subject_Table->E155
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_TwoOrMoreWorkersInThePast12Months
+measurementMethod: dcs:CensusACS5yrSurvey
+observationDate: C:Subject_Table->observationDate
+observationAbout: C:Subject_Table->observationAbout
+value: C:Subject_Table->MarginOfError_Count_Household_WithoutFoodStampsInThePast12Months_FamilyHousehold_TwoOrMoreWorkersInThePast12Months

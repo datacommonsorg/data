@@ -43,7 +43,7 @@ variableMeasured: C:EPA_AirQuality->Mean_SV
 measurementMethod: C:EPA_AirQuality->Method
 observationDate: C:EPA_AirQuality->Date
 observationAbout: E:EPA_AirQuality->E0
-observationPeriod: dcs:"P1D"
+observationPeriod: "P1D"
 value: C:EPA_AirQuality->Mean
 unit: C:EPA_AirQuality->Units
 airQualitySiteMonitor: C:EPA_AirQuality->POC
@@ -54,7 +54,7 @@ variableMeasured: C:EPA_AirQuality->Max_SV
 measurementMethod: C:EPA_AirQuality->Method
 observationDate: C:EPA_AirQuality->Date
 observationAbout: E:EPA_AirQuality->E0
-observationPeriod: dcs:"P1D"
+observationPeriod: "P1D"
 value: C:EPA_AirQuality->Max
 unit: C:EPA_AirQuality->Units
 airQualitySiteMonitor: C:EPA_AirQuality->POC
@@ -65,7 +65,7 @@ variableMeasured: C:EPA_AirQuality->AQI_SV
 measurementMethod: C:EPA_AirQuality->Method
 observationDate: C:EPA_AirQuality->Date
 observationAbout: E:EPA_AirQuality->E0
-observationPeriod: dcs:"P1D"
+observationPeriod: "P1D"
 value: C:EPA_AirQuality->AQI
 airQualitySiteMonitor: C:EPA_AirQuality->POC
 '''
