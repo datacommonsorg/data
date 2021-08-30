@@ -44,13 +44,13 @@ class SubjectTableDataLoaderBase:
     self.estimatePeriod = acsEstimatePeriod
     self.configJSON = json.load(open(config_json_path, 'r'))
     self.statVarList = open(statVarListPath, 'r').read().splitlines()
+    
     self.csvOutPath = f'{outputPath}/{tableID}_cleaned.csv'
     self.tmcfOutPath = f'{outputPath}/{tableID}.tmcf'
     self.mcfOutPath = f'{outputPath}/{tableID}.mcf'
 
     ## default initializations
     self.baseURL = 'https://data.census.gov/api/access/table/download'
-    self.columnMap = {}
     self.statVars = []
     self.rawData = None
     self.cleanCSV = pd.DataFrame(columns=['observationAbout',\
@@ -69,7 +69,7 @@ class SubjectTableDataLoaderBase:
     with ZipFile(zipFile) as zf:
       for filename in zf.namelist():
         if 'data_with_overlays' in filename:
-            self._clean_csv(filename)
+            columnMap = self._clean_csv(filename)
 
   def _clean_csv(self, filename):
     """reads a data csv file into self.raw_data class for each data file,
@@ -82,12 +82,14 @@ class SubjectTableDataLoaderBase:
 
     #for each column in the dataset, make statVars, from the third column
     #columns 1 and 2 contains the geographic code and name respectively.
+    columnMap = {}
     for column in self.rawData[2:]:
-      self._convert_column_to_statVar(column)
-    return True
+      columnMap[column] = self._convert_column_to_statVar(column)
+    return columnMap
 
   def _convert_percentages_to_count(self):
-    """
+    """utility the converts the percentage values in a column to absolute
+    counts using the 'denominators' key in the configJSON.
     """
     for countCol, percentColList in self.configJSON['denominator'].items():
       self.raw_data[percentColList] = self.raw_data[percentColList].multiply(
@@ -101,7 +103,21 @@ class SubjectTableDataLoaderBase:
     """
     return 'dcs:geoId/' + row.split('US')[1]
 
+  def _convert_to_lowerCamelCase(string):
+    """utility that converts string to camelCase,
+     used for mapping columsn to keys in features['pvs']"""
+    string = string.title()
+    string = string.replace(' ', '')
+    return string[0].lower() + string[1:]
 
+  def _get_populationType(part, features=features):
+    """
+    """
+    for c in part.split():
+       if c in features['populationType'].keys():
+         return features['populationType'][c]
+       else:
+         return features['populationType']['_DEFAULT']
 
   def download_and_process(self, download_id=None):
     zf = _download(download_id)
