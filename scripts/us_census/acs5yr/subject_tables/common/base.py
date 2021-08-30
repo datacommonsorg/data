@@ -16,13 +16,15 @@ measuredProperty: dcs:{measuredProperty}
 {constraints}
 """
 
-_TEMPLATE_TMCF = """Node: E:Subject_Table->E{index}
+_TEMPLATE_TMCF = """Node: E:SubjectTable->E{index}
 typeOf: dcs:StatVarObservation
-variableMeasured: C:Subject_Table->dcs:{statVar}
+variableMeasured: C:SubjectTable->dcs:{statVar}
 measurementMethod: dcs:CesnsusACS{estimatePeriod}yrSurvey
-observationDate: C:Subject_Table->ObservationDate
-observationAbout: C:Subject_Table->ObservationAbout
-value: C:Subject_Table->{statVar}{unit}
+observationDate: C:SubjectTable->ObservationDate
+observationAbout: C:SubjectTable->ObservationAbout
+value: C:SubjectTable->{statVar}
+scalingFactor: C:SubjectTable->{scalingFactor}
+unit: C:SubjectTable->{unit}
 """
 
 ## A dictionary that maps the desired prefix for statVar based on statType
@@ -42,25 +44,31 @@ class SubjectTableDataLoaderBase:
     ## inputs specified by the user
     self.tableID = tableID
     self.estimatePeriod = acsEstimatePeriod
-    self.configJSON = json.load(open(config_json_path, 'r'))
+    self.features = json.load(open(config_json_path, 'r'))
     self.statVarList = open(statVarListPath, 'r').read().splitlines()
-    
+
+    ## default outputPaths
     self.csvOutPath = f'{outputPath}/{tableID}_cleaned.csv'
     self.tmcfOutPath = f'{outputPath}/{tableID}.tmcf'
     self.mcfOutPath = f'{outputPath}/{tableID}.mcf'
 
     ## default initializations
     self.baseURL = 'https://data.census.gov/api/access/table/download'
-    self.statVars = []
+    self.statVars = None
+    self.colMap = None
     self.rawData = None
     self.cleanCSV = pd.DataFrame(columns=['observationAbout',\
                                            'observationAbout', 'statVar',\
-                                           'unit'])
+                                           'unit', 'scalingFactor'])
 
   def _download(self, download_id):
     """given an baseURL and download_id for the session, the data download is
     done through a get request."""
     response = get(f'{self.baseURL}?download_id={download_id}')
+    if response.status_code != 200:
+      print(f'Error while downloading from {self.baseURL}?download_id={download_id} with code {respsonse.status_code}')
+      print('Exiting.....')
+      exit()
     return BytesIO(response.content)
 
   def _process(self, zipFile):
@@ -70,31 +78,20 @@ class SubjectTableDataLoaderBase:
       for filename in zf.namelist():
         if 'data_with_overlays' in filename:
             columnMap = self._clean_csv(filename)
-
-  def _clean_csv(self, filename):
-    """reads a data csv file into self.raw_data class for each data file,
-    processes the file by converting percentage columns to counts"""
-    self.rawData = pd.read_csv(filename, header=1)
-    self.rawData['id'] = self.rawData['id'].apply(lambda row:
-                                                  self._convert_to_geoId(row))
-    #TODO[sharadshriram]: Convert percent columns to count based on a flag
-    self._convert_percentages_to_count()
-
-    #for each column in the dataset, make statVars, from the third column
-    #columns 1 and 2 contains the geographic code and name respectively.
-    columnMap = {}
-    for column in self.rawData[2:]:
-      columnMap[column] = self._convert_column_to_statVar(column)
-    return columnMap
-
-  def _convert_percentages_to_count(self):
+  
+  def _convert_percentages_to_count(self, df, features=self.features):
     """utility the converts the percentage values in a column to absolute
     counts using the 'denominators' key in the configJSON.
     """
-    for countCol, percentColList in self.configJSON['denominator'].items():
-      self.raw_data[percentColList] = self.raw_data[percentColList].multiply(
-                                      self.raw[countCol], axis="index")
-      return True
+    for countCol, percentColList in features['denominators'].items():
+      const = 0
+      for col in df.columns.tolist():
+        if countCol in col:
+          count = df[col]
+        for percentCol in percentColList:
+          if percentCol in col:
+            df[col] = df[col] * count
+    return df
 
   def _convert_to_geoId(self, row):
     """extracts geoId from the Geographic ID column in the dataset.
@@ -103,29 +100,139 @@ class SubjectTableDataLoaderBase:
     """
     return 'dcs:geoId/' + row.split('US')[1]
 
-  def _convert_to_lowerCamelCase(string):
+  def _get_populationType(self, part, features=self.features):
+    """
+    """
+    for c in features['populationType'].keys():
+      if c in part:
+        print(c)
+        return features['populationType'][c]
+      else:
+        return features['populationType']['_DEFAULT']
+
+  def _convert_to_lowerCamelCase(self, string):
     """utility that converts string to camelCase,
-     used for mapping columsn to keys in features['pvs']"""
+       used for mapping columsn to keys in features['pvs']"""
     string = string.title()
     string = string.replace(' ', '')
     return string[0].lower() + string[1:]
 
-  def _get_populationType(part, features=features):
-    """
-    """
-    for c in part.split():
-       if c in features['populationType'].keys():
-         return features['populationType'][c]
-       else:
-         return features['populationType']['_DEFAULT']
 
-  def download_and_process(self, download_id=None):
-    zf = _download(download_id)
-    _process(zf)
-    _create_mcf()
-    _create_tmcf()
+  def _column_to_statVar(self, column, features=self.features):
+    #TODO[sharadshriram]: Handle dcs prefixes in each statVar node
+    """generates a dictionary statistical variable with all properties specified in the JSON spec 
+        for a single column"""
+    base = False
+    pvFlag = False
+    statVar = {}
+    partList = column.split('!!')
 
-  def process_zip(self, zipFile=None):
-    _process(zipFile)
-    _create_mcf()
-    _create_tmcf()
+    for idx, part in enumerate(partList):
+
+      #set the base for special cases like median, etc.
+      if not base and 'measurement' in features:
+        if part in features['measurement']:
+          statVar.update(features['measurement'][part])
+          base = True
+      #set the default statVar definition
+      if not base and 'measurement' in features and '_DEFAULT' in features['measurement']:
+        statVar.update(features['measurement']['_DEFAULT'])
+    
+      #TODO[sharadshriram]: resolve the toggle for non-default populationTypes
+      statVar['populationType'] = _get_populationType(column)
+
+      # associate pvs to statVar
+      if partList[-1] not in features['measurement']:
+        ## find the whole words
+        if not pvFlag and 'pvs' in features and _convert_to_lowerCamelCase(partList[idx]) in features['pvs']:
+          for p in partList[(idx+1):]:
+            try:
+              statVar[_convert_to_lowerCamelCase(partList[idx])] = features['pvs'][_convert_to_lowerCamelCase(partList[idx])][p]
+              if 'inferredSpec' in features and _convert_to_lowerCamelCase(partList[idx]) in features['inferredSpec']:
+                statVar.update(features['inferredSpec'][_convert_to_lowerCamelCase(partList[idx])])
+              pvFlag = True
+            except KeyError:
+              continue #handles the count
+        ## handle the case to map race and citizenship which occur as substrings
+        for p in [*map(_convert_to_lowerCamelCase, part.split())]:
+          if not pvFlag and 'pvs' in features and p in features['pvs']:
+            try:
+              statVar[p] = features['pvs'][p][partList[-1]]
+            except KeyError:
+              continue #handles the count
+
+        ## handle special cases: gender/ residence status / worker class
+        if not pvFlag and 'SEX' in partList:
+          statVar['gender'] = features['pvs']['gender'][partList[-1]]
+        if not pvFlag and 'RESIDENCE 1 YEAR AGO' in partList:
+          try:
+            statVar['residentStatus'] = features['pvs']['residentStatus'][partList[-1]]
+          except KeyError:
+            continue # Handles the count
+
+        if not pvFlag and 'CLASS OF WORKER' in partList:
+          statVar['establishmentOwnership'] = features['pvs']['establishmentOwnership'][partList[-1]]
+          statVar['workerClassification'] = features['pvs']['workerClassification'][partList[-1]]       
+
+        # handle the case to attribute employment property based on status
+        if 'EMPLOYMENT STATUS' in partList:
+          try:
+            statVar['employment'] = features['pvs']['employment'][partList[-1]]
+          except KeyError:
+            continue # Handles the count
+        
+      #if the column is Margin of Error, update statType key
+      if 'Margin Of Error' in column:
+        statVar.update({
+            'statType':'marginOfError',
+            })
+
+    ## if statVar column in enumSpecializations' value's value then remove
+    ##Add the defaultPV
+    if 'defaultPVs' in features and features['defaultPVs'].keys():
+      for k, v in features['defaultPVs'].items():
+        statVar[k] = v
+        statVar['constraintProperties'] = k
+
+    ## TODO[sharadshriram]: Make the statVar and call Anush's function
+    # statVar['dcid'] = get_stat_var_name(stat_var_dict, ignore_props=None)
+    #
+    ##Add Universe PVs based on the populationType of StatVar
+    if 'universePVs' in features:
+      for elem in features['universePVs']:
+        if statVar['populationType'] == elem['populationType'] and statVar['constraintProperties'] in elem['constraintProperties']:
+          for k, v in elem['dependentPVs'].items():
+            statVar[k] = v
+    return statVar
+
+
+
+
+  def _clean_csv(self, filename):
+    """reads a data csv file into self.raw_data class for each data file,
+    processes the file by converting percentage columns to counts"""
+    df = pd.read_csv(filename, header=1)
+    df['id'] = df['id'].apply(lambda row: _convert_to_geoId(row))
+    df = _convert_percentages_to_count(df)
+    colMap = {}
+    #starting from col index 2, since the first two columns are the geoId and geoName
+    for col in df.columns.tolist[2:]:
+      colMap[col] = self._column_to_statVar(col)
+
+    #clean up the colMap
+    for key in columnMap.keys():
+      ## 1. remove keys that are defined as keys in denominators
+      if key in features['denominators']:
+        del columnMap[key]
+      ## 2. remove keys that are defined are values in enumSpecializations
+      for k in features['enumSpecializations'].keys():
+        if features['enumSpecializations'][k] == key:
+          del columnMap[key]
+
+    ## columnMap checks
+    if self.columnMap is None:
+      self.columnMap = colMap
+    if self.columnMap != colMap:
+      print("WARNING! The statVar nodes seems to differ")
+
+
