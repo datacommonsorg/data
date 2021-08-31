@@ -27,13 +27,8 @@ import sys
 import datetime
 import time
 
-import pandas as pd
-import pandas.api.types as pd_types
-import numpy as np
-import typing
-
-from absl import flags
 from absl import app
+from absl import flags
 from collections import defaultdict
 
 # Allows the following module imports to work when running as a script
@@ -94,7 +89,7 @@ measurementMethod: C:UNEnergy->Estimate
 """
 
 
-def print_debug(debug_level: int, *args):
+def _print_debug(debug_level: int, *args):
     if debug_level > 1:
         print("[", datetime.datetime.now(), "] ", *args, file=sys.stderr)
 
@@ -117,7 +112,7 @@ def _print_counters(counters, steps=None):
 
 
 def _add_error_counter(counter_name: str, error_msg: str, counters):
-    print_debug(2, "Error: ", counter_name, error_msg)
+    _print_debug(2, "Error: ", counter_name, error_msg)
     if counters is not None:
         debug_lines = 1
         if 'debug_lines' in counters:
@@ -127,7 +122,7 @@ def _add_error_counter(counter_name: str, error_msg: str, counters):
         counters[counter_name] += 1
 
 
-def remove_extra_characters(name: str) -> str:
+def _remove_extra_characters(name: str) -> str:
     """Removes the parts of the name that is not used in the node id,
     including:
          - any namespace: prefix, such as 'dcs:' or 'dcid:'
@@ -167,10 +162,10 @@ def remove_extra_characters(name: str) -> str:
     return ''.join(words)
 
 
-def add_property_value_name(pv_dict: dict,
-                            prop: str,
-                            name_list: list,
-                            ignore_list=None):
+def _add_property_value_name(pv_dict: dict,
+                             prop: str,
+                             name_list: list,
+                             ignore_list=None):
     """Append value of the property in the pc_dict to the name_list.
     The value string is normalized by stripping prefix and removing '_'.
     The property is removed from the pv_dict as well.
@@ -187,7 +182,7 @@ def add_property_value_name(pv_dict: dict,
     if prop not in pv_dict:
         return
     orig_value = pv_dict[prop]
-    value = remove_extra_characters(orig_value)
+    value = _remove_extra_characters(orig_value)
     pv_dict.pop(prop)
     if value is None:
         return
@@ -198,7 +193,7 @@ def add_property_value_name(pv_dict: dict,
     name_list.append(value[prefix_len].upper() + value[prefix_len + 1:])
 
 
-def get_stat_var_id(sv_pv: dict, ignore_list=None) -> str:
+def _get_stat_var_id(sv_pv: dict, ignore_list=None) -> str:
     """Generate a statvar id from a dictionary of PVs in the following syntax:
     <mqualifier>_<statype>_<measuredProp>_<PopulationType>_<constraint1>_<constraint2>_...
         where <prop> represents the normalized value string for the property
@@ -221,15 +216,15 @@ def get_stat_var_id(sv_pv: dict, ignore_list=None) -> str:
         ignore_values.extend(ignore_list)
 
     # Add default properties
-    add_property_value_name(pv, 'measurementQualifier', ids, ignore_values)
-    add_property_value_name(pv, 'statType', ids, ignore_values)
-    add_property_value_name(pv, 'measuredProperty', ids, ignore_values)
-    add_property_value_name(pv, 'populationType', ids, ignore_values)
+    _add_property_value_name(pv, 'measurementQualifier', ids, ignore_values)
+    _add_property_value_name(pv, 'statType', ids, ignore_values)
+    _add_property_value_name(pv, 'measuredProperty', ids, ignore_values)
+    _add_property_value_name(pv, 'populationType', ids, ignore_values)
     pv.pop('typeOf')
 
     # Add the remaining properties in sorted order
     for prop in sorted(pv.keys()):
-        add_property_value_name(pv, prop, ids)
+        _add_property_value_name(pv, prop, ids)
 
     return '_'.join(ids)
 
@@ -292,7 +287,7 @@ def generate_stat_var(data_row: dict, sv_pv: dict, counters=None) -> str:
                            f'Invalid statVar {sv_pv} for row {data_row}',
                            counters)
         return None
-    node_name = get_stat_var_id(sv_pv)
+    node_name = _get_stat_var_id(sv_pv)
     if node_name is None or len(node_name) == 0:
         _add_error_counter('error_null_stat_var_name',
                            f'No node id for statVar {sv_pv}', counters)
@@ -300,7 +295,7 @@ def generate_stat_var(data_row: dict, sv_pv: dict, counters=None) -> str:
     return node_name
 
 
-def get_stat_var_mcf(sv_id: str, sv_pv: dict) -> str:
+def _get_stat_var_mcf(sv_id: str, sv_pv: dict) -> str:
     """Generate a MCF node string for a statVar
 
     Args:
@@ -318,7 +313,7 @@ def get_stat_var_mcf(sv_id: str, sv_pv: dict) -> str:
     return '\n'.join(stat_var)
 
 
-def get_stat_var_prop(prop_list: list, sv_pv: dict) -> str:
+def _get_stat_var_prop(prop_list: list, sv_pv: dict) -> str:
     """Get the value of the first property from the list in the StatVar.
 
     Args:
@@ -337,7 +332,7 @@ def get_stat_var_prop(prop_list: list, sv_pv: dict) -> str:
     return ''
 
 
-def add_stat_var_description(data_row: dict, sv_pv: dict):
+def _add_stat_var_description(data_row: dict, sv_pv: dict):
     """Adds a description to the StatVar using the input data_row containing
     the codes and text fields.
 
@@ -349,15 +344,15 @@ def add_stat_var_description(data_row: dict, sv_pv: dict):
         return
     code = data_row['Commodity - Transaction Code']
     transaction = data_row['Commodity - Transaction']
-    fuel_name = get_stat_var_prop(
+    fuel_name = _get_stat_var_prop(
         ['energySource', 'fuelType', 'populationType'], sv_pv)
-    measured_prop = get_stat_var_prop(['measuredProperty'], sv_pv)
+    measured_prop = _get_stat_var_prop(['measuredProperty'], sv_pv)
     sv_pv[
         'description'] = f'"UN Energy data for {fuel_name} {measured_prop}, {transaction} (code: {code})"'
 
 
-def process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
-                csv_writer, f_out_mcf, counters):
+def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
+                 csv_writer, f_out_mcf, counters):
     """Process a single row of input data for un energy.
     Generate a statvar for the fuel and transaction code and adds the MCF for the
     unique StatVars into the f_out_mcf file and the columns for the StatVarObservation
@@ -439,9 +434,9 @@ def process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
 
     if sv_id not in sv_map:
         # New stat var generated. Output PVs to the statvar mcf file.
-        add_stat_var_description(data_row, sv_pv)
-        stat_var_mcf = get_stat_var_mcf(sv_id, sv_pv)
-        print_debug(1, 'Generating stat var node: ', stat_var_mcf)
+        _add_stat_var_description(data_row, sv_pv)
+        stat_var_mcf = _get_stat_var_mcf(sv_id, sv_pv)
+        _print_debug(1, 'Generating stat var node: ', stat_var_mcf)
         f_out_mcf.write('\n\n')
         f_out_mcf.write(stat_var_mcf)
         counters['output_stat_vars'] += 1
@@ -520,8 +515,8 @@ def process(in_paths: list,
                         line += 1
                         data_row['_File'] = in_file
                         data_row['_Row'] = line
-                        process_row(data_row, sv_map, row_map, sv_obs,
-                                    csv_writer, f_out_mcf, counters)
+                        _process_row(data_row, sv_map, row_map, sv_obs,
+                                     csv_writer, f_out_mcf, counters)
                         _print_counters(counters, counters['debug_lines'])
                 print(f'Processed {line} rows from data file: {in_file}')
             f_out_mcf.write('\n')

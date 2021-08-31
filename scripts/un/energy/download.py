@@ -26,8 +26,8 @@ import requests
 import sys
 import zipfile
 
-from absl import flags
 from absl import app
+from absl import flags
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
