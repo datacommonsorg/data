@@ -10,21 +10,23 @@ import statvar_dcid_generator
 
 dcid_gen = statvar_dcid_generator.StatVarDcidGenerator()
 
-class generateColMap:
+class generateColMapBase:
   """module to generate a column map given a list of columns of the dataset and a JSON Spec"""
   def __init__(self, specDict=None, columnList=None):
     """module init """
-    features = specDict
-    columnMap = {}
+    self.features = specDict
+    self.columnList = columnList
+    self.columnMap = {}
+    self.makeColMap()
+
+  def makeColMap(self):
     #for each column generate the definition of their respective statistical variable node
-    for col in columnList:
-      if 'ignoreColumns' in features and col not in self.features['ignoreColumns']:
-          columnMap[col] = self.column_to_statVar(col)
-    #validate the generate columnMap
-    if self.valid_colMap():
-      return columnMap
-    else:
-      return {'Error': 'Encountered an error while generating column map'}
+    for col in self.columnList:
+      if 'ignoreColumns' in self.features and col not in self.features['ignoreColumns']:
+          self.columnMap[col] = self.column_to_statVar(col)
+    #TODO: Enable validating the generate columnMap
+    #self.valid_colMap():
+    return self.columnMap
 
   def column_to_statVar(self, column):
     """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
@@ -34,7 +36,7 @@ class generateColMap:
 
     for part in partList:
       #set the base for special cases like median, etc.
-      if not base and 'measurement' in self.self.features:
+      if not base and 'measurement' in self.features:
         if part in self.features['measurement']:
           statVar.update(self.features['measurement'][part])
           base = True

@@ -1,4 +1,3 @@
-
 Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years
 Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years
 Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years
@@ -14,5 +13,4 @@ Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 
 Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years
 Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years
 Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years
-Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 yearswq
-
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years

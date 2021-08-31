@@ -4,7 +4,7 @@ import json
 import generateColMap
 
 class generColMapTest(unittest.TestCase):
-  def example_usage(self):
+  def test_generating_columnMap(self):
     specPath = './testdata/colMapInputs/spec.json'
     columnFile = './testdata/colMapInputs/columns.txt'
     expectedOut = './testdata/colMapInputs/expected.json'
@@ -15,9 +15,10 @@ class generColMapTest(unittest.TestCase):
     expectedMap = json.load(open(expectedOut, 'r'))
 
     #create the column map for the inputs
-    generatedMap = generateColMap.generateColMap(specPath, columnFile)
+    generatedMap = generateColMap.generateColMapBase(specDict=specDict, columnList=columnList).makeColMap()
 
     #validate
+    self.maxDiff = None
     self.assertEqual(expectedMap, generatedMap)
 
 if __name__ == '__main__':
