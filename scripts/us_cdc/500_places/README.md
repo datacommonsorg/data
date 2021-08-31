@@ -75,7 +75,7 @@ The expected output of this test can be found in the [`test_data`](https://githu
 
 #### Processing Steps
 
-To clean all the raw data files at once, run `clean_files.sh` after running `download_bulk.py`:
+To clean all the data files at once, run `clean_files.sh` after downloading the raw data using `download_bulk.py`:
 
 ```bash
 $ sh clean_files.sh
