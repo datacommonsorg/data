@@ -86,66 +86,6 @@ MEASURE_TO_STATVAR_MAP = {
         "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening"
 }
 
-# Mapping of StatVar dcids to StatVar names
-STATVAR_NAMES_MAP = {
-    "Percent_Person_65OrMoreYears_WithAllTeethLoss":
-        "Prevalence of 65 Or More Years, All Teeth Loss",
-    "Percent_Person_50To74Years_Female_ReceivedMammography":
-        "Prevalence of 50 - 74 Years, Female, Mammography",
-    "Percent_Person_WithArthritis":
-        "Prevalence of Arthritis",
-    "Percent_Person_WithStroke":
-        "Prevalence of Stroke",
-    "Percent_Person_Obesity":
-        "Prevalence of Obesity",
-    "Percent_Person_WithAsthma":
-        "Prevalence of Asthma",
-    "Percent_Person_WithDiabetes":
-        "Prevalence of Diabetes",
-    "Percent_Person_BingeDrinking":
-        "Prevalence of Binge Drinking",
-    "Percent_Person_Smoking":
-        "Prevalence of Smoking",
-    "Percent_Person_SleepLessThan7Hours":
-        "Prevalence of Sleep Less Than 7 Hours",
-    "Percent_Person_50To75Years_ReceivedColorectalCancerScreening":
-        "Prevalence of 50 - 75 Years, Colorectal Cancer Screening",
-    "Percent_Person_WithCancerExcludingSkinCancer":
-        "Prevalence of Cancer Excluding Skin Cancer",
-    "Percent_Person_WithPhysicalHealthNotGood":
-        "Prevalence of Physical Health Not Good",
-    "Percent_Person_65OrMoreYears_Male_ReceivedCorePreventiveServices":
-        "Prevalence of 65 Years or More, Male, Core Preventive Services",
-    "Percent_Person_65OrMoreYears_Female_ReceivedCorePreventiveServices":
-        "Prevalence of 65 Years or More, Female, Core Preventive Services",
-    "Percent_Person_ReceivedAnnualCheckup":
-        "Prevalence of Annual Checkup",
-    "Percent_Person_WithHighBloodPressure":
-        "Prevalence of High Blood Pressure",
-    "Percent_Person_ReceivedDentalVisit":
-        "Prevalence of Dental Visit",
-    "Percent_Person_WithMentalHealthNotGood":
-        "Prevalence of Mental Health Not Good",
-    "Percent_Person_PhysicalInactivity":
-        "Prevalence of Physical Inactivity",
-    "Percent_Person_18To64Years_ReceivedNoHealthInsurance":
-        "Prevalence of 18 - 64 Years, No Health Insurance",
-    "Percent_Person_WithChronicObstructivePulmonaryDisease":
-        "Prevalence of Chronic Obstructive Pulmonary Disease",
-    "Percent_Person_ReceivedCholesterolScreening":
-        "Prevalence of Cholesterol Screening",
-    "Percent_Person_WithChronicKidneyDisease":
-        "Prevalence of Chronic Kidney Disease",
-    "Percent_Person_WithHighCholesterol":
-        "Prevalence of High Cholesterol",
-    "Percent_Person_18OrMoreYears_WithHighBloodPressure_ReceivedTakingBloodPressureMedication":
-        "Prevalence of 18 Years or More, High Blood Pressure, Taking Blood Pressure Medication",
-    "Percent_Person_WithCoronaryHeartDisease":
-        "Prevalence of Coronary Heart Disease",
-    "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening":
-        "Prevalence of 21 - 65 Years, Female, Received Cervical Cancer Screening"
-}
-
 # Mapping of data value type abbreviations to StatVar dcids
 DATA_VALUE_TYPE_MAP = {
     "CrdPrv": "CrudePrevalence",
@@ -306,7 +246,6 @@ def generate_statvar_names(data):
     data["MeasureId"] = "dcs:" + data["MeasureId"].map(MEASURE_TO_STATVAR_MAP)
     data["DataValueTypeID"] = "dcs:" + data["DataValueTypeID"].map(
         DATA_VALUE_TYPE_MAP)
-    data["ConfidenceLevelTypeID"] = data["DataValueTypeID"] + "ConfidenceLevel"
     return data
 
 
