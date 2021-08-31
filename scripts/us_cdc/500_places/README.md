@@ -70,8 +70,10 @@ The expected output of this test can be found in the [`test_data`](https://githu
 
 `@output_file_name` - path to write the cleaned csv file
 
+`delimiter` - delimiter for the input csv file
+
 To clean the data files, run:
 
 ```bash
-$ python3 parse_cdc_places.py input_file_name output_file_name
+$ python3 parse_cdc_places.py input_file_name output_file_name delimiter
 ```
