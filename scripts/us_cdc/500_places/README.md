@@ -51,6 +51,8 @@ These data were collected and provided by the [CDC National Center for Chronic D
 
 [`parse_cdc_places.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places.py)
 
+[`clean_files.sh`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/clean_files.sh)
+
 #### Test Scripts
 [`parse_cdc_places_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places_test.py)
 
@@ -73,14 +75,8 @@ The expected output of this test can be found in the [`test_data`](https://githu
 
 #### Processing Steps
 
-`@input_file_name` - path to the input csv file to be cleaned
-
-`@output_file_name` - path to write the cleaned csv file
-
-`@delimiter` - delimiter for the input csv file
-
-To clean the data files, run:
+To clean all the raw data files at once, run `clean_files.sh` after running `download_bulk.py`:
 
 ```bash
-$ python3 parse_cdc_places.py input_file_name output_file_name delimiter
+$ sh clean_files.sh
 ```
