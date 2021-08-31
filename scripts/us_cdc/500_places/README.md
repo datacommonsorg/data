@@ -79,5 +79,6 @@ To download and clean all the data files at once, run `download_bulk.py` and the
 
 ```bash
 $ python3 download_bulk.py
+
 $ sh clean_files.sh
 ```
