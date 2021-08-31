@@ -18,6 +18,7 @@ import re
 
 class StatVarDcidGenerator:
     """Helper class to generate dcid for a statistical variable."""
+    STAT_TYPE_LOOKUP = {'meanValue': 'mean', 'medianValue': 'median'}
 
     def __init__(self):
         pass
@@ -94,9 +95,15 @@ class StatVarDcidGenerator:
             del svd['measurementQualifier']
 
         if (svd['statType'] != 'measuredValue'):
-            dcid = self.append_to_dcid(dcid,
-                                       svd['statType'],
-                                       end_underscore=True)
+            if svd['statType'] in self.STAT_TYPE_LOOKUP:
+                dcid = self.append_to_dcid(
+                    dcid,
+                    self.STAT_TYPE_LOOKUP[svd['statType']],
+                    end_underscore=True)
+            else:
+                dcid = self.append_to_dcid(dcid,
+                                           svd['statType'],
+                                           end_underscore=True)
         del svd['statType']
 
         dcid = self.append_to_dcid(dcid,
