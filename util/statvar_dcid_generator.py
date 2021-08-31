@@ -118,12 +118,13 @@ class StatVarDcidGenerator:
 
         constraint_props = sorted(svd.keys(), key=str.casefold)
         for prop in constraint_props:
-            if re.match('\[(-|\d(\.\d+)?) (-|\d(\.\d+)?) [a-zA-Z]+\]',
+            if re.match('\[(-|\d+(\.\d+)?) (-|\d+(\.\d+)?) [a-zA-Z]+\]',
                         svd[prop]):  #quantity range
                 q_name = self.generate_quantity_range_name(svd[prop])
                 dcid = self.append_to_dcid(dcid, q_name, end_underscore=True)
 
-            elif re.match('\[(-|\d(\.\d+)?) [a-zA-Z]+\]', svd[prop]):  #quantity
+            elif re.match('\[(-|\d+(\.\d+)?) [a-zA-Z]+\]',
+                          svd[prop]):  #quantity
                 q_name = self.generate_quantity_name(svd[prop])
                 dcid = self.append_to_dcid(dcid, q_name, end_underscore=True)
 
