@@ -21,7 +21,7 @@ See the `s2201` folder for an example of these files.
 To run the script, from the parent directory (`subject_tables`), run:
 
 ```
-python3 common/process.py --output=[OUTPUT] --download_id=[DOWNLOAD_ID] --features=[FEATURES] --stat_vars=[STAT_VARS]
+python3 process.py --output=[OUTPUT] --download_id=[DOWNLOAD_ID] --features=[FEATURES] --stat_vars=[STAT_VARS]
 ```
 
 This will generate the files `output.tmcf` and `output.csv` in the path specified by the `output` flag.
