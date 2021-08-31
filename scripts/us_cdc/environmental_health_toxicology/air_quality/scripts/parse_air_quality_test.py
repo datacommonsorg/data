@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Author: Padma Gundapaneni @padma-g
-Date: 7/28/21
+Author: Samantha Piekos @spiekos and Padma Gundapaneni @padma-g
+Date: 8/3/21
 Description: This script contains unit tests for the parse_air_quality.py script.
 @input_file   filepath to the original csv that needs to be cleaned
 @output_file  filepath to the csv to which the cleaned data is written
@@ -22,10 +22,20 @@ python3 parse_air_quality_test.py input_file output_file
 
 import unittest
 import os
+import sys
 from parse_air_quality import clean_air_quality_data
 
-module_dir_ = os.path.dirname(__file__)
-
+TEST_CASE_FILES = [
+# Pairs of input CSV and expected CSV files.
+('PM2.5_Concentrations_Daily_County_test_file.csv', 
+    'PM2.5_Concentrations_Daily_County_test_file_expected_output.csv', ','),
+('PM2.5_Daily_Census_Tract_test_file.csv', 
+    'PM2.5_Daily_Census_Tract_test_file_expected_output.csv', ','),
+('Ozone_Daily_County_test_file.csv', 
+    'Ozone_Daily_County_test_file_expected_output.csv', ';'),
+('Ozone_Daily_Census_Tract_test_file.csv', 
+    'Ozone_Daily_Census_Tract_test_file_expected_output.csv', ',')
+]
 
 class TestParseAirQuality(unittest.TestCase):
     """
@@ -36,21 +46,23 @@ class TestParseAirQuality(unittest.TestCase):
         """
         Tests the clean_air_quality_data function.
         """
+        module_dir_ = os.path.dirname(__file__)
         print(module_dir_)
-        test_csv = os.path.join(module_dir_, 'test_data/small_Ozone_County.csv')
-        output_csv = os.path.join(module_dir_,
-                                  'test_data/small_Ozone_County_output.csv')
-        clean_air_quality_data(test_csv, output_csv)
-
-        expected_csv = os.path.join(
-            module_dir_, 'test_data/small_Ozone_County_expected.csv')
+        for input_file, expected_output_file, sep in TEST_CASE_FILES:
+            print('\n')
+            print('Input File: ' + input_file)
+            test_csv = os.path.join(module_dir_, input_file)
+            output_csv = os.path.join(module_dir_,
+                (input_file[:-4] + '_output.csv'))
+            clean_air_quality_data(test_csv, output_csv, sep=sep)
+            expected_csv = os.path.join(module_dir_, expected_output_file)
         with open(output_csv, 'r') as test:
             test_str: str = test.read()
             with open(expected_csv, 'r') as expected:
                 expected_str: str = expected.read()
                 self.assertEqual(test_str, expected_str)
         os.remove(output_csv)
-
+        print('Passed test!')
 
 if __name__ == '__main__':
     unittest.main()

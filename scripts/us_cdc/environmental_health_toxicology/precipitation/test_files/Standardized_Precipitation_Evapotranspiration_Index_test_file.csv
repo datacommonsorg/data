@@ -1,0 +1,20 @@
+state,county,fips,year,month,spei
+AL,Autauga County,1001,1895,1,0.98
+CA,El Dorado County,6017,1901,1,0.44
+CA,El Dorado County,6017,1902,1,-1.24
+CA,Sierra County,6091,1971,1,-0.15
+IN,Tippecanoe County,18157,1905,1,0.39
+LA,Tensas Parish,22107,1977,1,0.54
+LA,Tensas Parish,22107,1981,1,-1.11
+TN,Hardin County,47071,2006,1,0.82
+TN,Hawkins County,47073,1910,1,-0.1
+VA,Alleghany County,51005,1903,1,0.83
+WI,Langlade County,55067,1951,1,-0.82
+AR,Benton County,5007,2009,2,-0.02
+CO,Crowley County,8025,1957,2,-1.44
+IA,Webster County,19187,2013,2,-0.11
+IN,Vanderburgh County,18163,1952,2,0.63
+MO,Greene County,29077,2010,2,0.09
+OR,Malheur County,41045,1989,3,1.54
+SD,Minnehaha County,46099,1997,3,-0.85
+SD,Minnehaha County,46099,2000,3,-1.23

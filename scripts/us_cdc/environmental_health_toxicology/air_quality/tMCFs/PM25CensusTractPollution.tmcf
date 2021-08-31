@@ -5,7 +5,7 @@ observationDate: C:PM25CTPollution->date
 variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5
 observationPeriod: "P24H"
 unit: μg/m3
-value: C:PM25CTPollution->Value
+value: C:PM25CTPollution->DS_PM_pred
 
 Node: E:PM25CTPollution->E2
 observationAbout: C:PM25CTPollution->dcid
@@ -13,4 +13,4 @@ typeOf: dcs:StatVarObservation
 observationDate: C:PM25CTPollution->date
 variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5_StandardError
 observationPeriod: "P24H"
-value: C:PM25CTPollution->Error
+value: C:PM25CTPollution->DS_PM_stdd
