@@ -38,6 +38,7 @@ _UNIT_TEMPLATE = """unit: dcs{unit}"""
 _IGNORED_VALUES = set(['-', '*', '***', '*****', 'N', '(X)', 'null'])
 
 class SubjectTableDataLoaderBase:
+  ##TODO: Move utilty methods to a separate module
   """Base dataloader specification for processing subjectTables"""
   def __init__(self, tableID='S2702', acsEstimatePeriod='5',
                config_json_path=None, outputPath=None, statVarListPath=None):
@@ -196,7 +197,7 @@ class SubjectTableDataLoaderBase:
 
     ## TODO[sharadshriram]: Make the statVar and call Anush's function
     # statVar['dcid'] = get_stat_var_name(stat_var_dict, ignore_props=None)
-    #
+    
     ##Add Universe PVs based on the populationType of StatVar
     if 'universePVs' in features:
       for elem in features['universePVs']:
@@ -205,34 +206,51 @@ class SubjectTableDataLoaderBase:
             statVar[k] = v
     return statVar
 
+  def validate_columnMap(self, columnMap):
+    ##TODO: needs to be improved with better rules
+    """utility function which validates mapping of csv columns and statistcal variables on set of rules"""
+    #clean up the colMap
+    for key in columnMap.keys():
+      ## 1. remove keys that are defined as keys in denominators
+      if key in self.features['denominators']:
+        del columnMap[key]
+      ## 2. remove keys that are defined are values in enumSpecializations
+      for k in self.features['enumSpecializations'].keys():
+        if self.features['enumSpecializations'][k] == key:
+          del columnMap[key]
 
+    ## columnMap checks
+    if self.columnMap is None:
+      self.columnMap = columnMap
+    if self.columnMap != columnMap:
+      print("WARNING! The statVar nodes seems to differ")
+    return columnMap
+
+
+
+  def _generate_columnMap(self, columnList):
+    """generates definitions fo statistical variables based on the columns of the raw data"""
+    if self.columnMap is not None and 'ignoreColumns' in self.features and len(columnList) > 0:
+      columnMap = {}
+      for column in columnList:
+        if col not in self.features['ignoreColumns']:
+            columnMap[col] = self._column_to_statVar(col)
+      self.columnMap = validate_columnMap(columnMap)
+      return True
+    else:
+      return True
 
 
   def _clean_csv(self, filename):
     """reads a data csv file into self.raw_data class for each data file,
     processes the file by converting percentage columns to counts"""
     df = pd.read_csv(filename, header=1)
+    ## generate or update columnMap is not defined or modified
+    if self.columnMap is None:
+      self._generate_columnMap(df.columns.tolist())
+    ## Process CSV
     df['id'] = df['id'].apply(lambda row: _convert_to_geoId(row))
     df = _convert_percentages_to_count(df)
-    colMap = {}
-    #starting from col index 2, since the first two columns are the geoId and geoName
-    for col in df.columns.tolist[2:]:
-      colMap[col] = self._column_to_statVar(col)
 
-    #clean up the colMap
-    for key in columnMap.keys():
-      ## 1. remove keys that are defined as keys in denominators
-      if key in features['denominators']:
-        del columnMap[key]
-      ## 2. remove keys that are defined are values in enumSpecializations
-      for k in features['enumSpecializations'].keys():
-        if features['enumSpecializations'][k] == key:
-          del columnMap[key]
-
-    ## columnMap checks
-    if self.columnMap is None:
-      self.columnMap = colMap
-    if self.columnMap != colMap:
-      print("WARNING! The statVar nodes seems to differ")
-
+  
 
