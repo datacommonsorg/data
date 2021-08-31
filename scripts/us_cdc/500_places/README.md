@@ -73,10 +73,11 @@ $ python3 parse_cdc_places_test.py
 
 The expected output of this test can be found in the [`test_data`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/) directory.
 
-#### Processing Steps
+#### Data Download and Processing Steps
 
-To clean all the data files at once, run `clean_files.sh` after downloading the raw data using `download_bulk.py`:
+To download and clean all the data files at once, run `download_bulk.py` and then `clean_files.sh`:
 
 ```bash
+$ python3 download_bulk.py
 $ sh clean_files.sh
 ```
