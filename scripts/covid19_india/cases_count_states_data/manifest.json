@@ -13,6 +13,6 @@
             "cleaned_csv": "COVID19_cases_indian_states.csv"
         }],
         "cron_schedule":
-        "* * * * *"
+        "0 5 * * *"
     }]
 }
