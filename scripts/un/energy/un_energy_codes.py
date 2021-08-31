@@ -268,7 +268,7 @@ UN_ENERGY_FUEL_CODES = {
     },
     'SB': {
         'populationType': 'Fuel',
-        'fuelType': 'dcs:EIA_SubBituminousCoal'
+        'fuelType': 'dcs:EIA_SubbituminousCoal'
     },
     'UR': {
         'populationType': 'Fuel',
@@ -912,7 +912,7 @@ UN_ENERGY_CAPACITY_PLANT_CODE = {
 # Used as values for property energyLostAs
 UN_ENERGY_LOSS_CODES = {
     '101': {
-        'measuredProperty': 'dcid:loss'
+        'measuredProperty': 'loss'
     },
     '103': {
         'lossReason': 'EnergyReInjected'
@@ -1018,7 +1018,7 @@ def _add_error_counter(counter_name: str, error_msg: str, counters: dict):
     counters[counter_name] += 1
 
 
-def remove_prefix(value: str, prefix: str) -> str:
+def _remove_prefix(value: str, prefix: str) -> str:
     """Returns the value without the prefix.
     Equivalent of str.removeprefix in python 3.9
     """
@@ -1028,23 +1028,26 @@ def remove_prefix(value: str, prefix: str) -> str:
     return value
 
 
-def remove_namespace_prefix(value: str) -> str:
+def _remove_namespace_prefix(value: str) -> str:
     """Returns the string without the 'namespace:' prefix."""
     delim = value.find(':')
     return value[delim + 1:]
 
 
-def get_merged_values(values: list) -> str:
+def _get_merged_values(values: list) -> str:
     """Returns a merged string for the given list of values.
     The values have prefix removed, sorted alphabetically and joined with '_'.
     """
     merge_values = []
     for v in values:
-        merge_values.append(remove_namespace_prefix(v))
+        merge_values.append(_remove_namespace_prefix(v))
     return '_'.join(sorted(merge_values))
 
 
-def add_pv_to_stat_var(prop: str, value: str, stat_var_pv: dict, counters=None):
+def _add_pv_to_stat_var(prop: str,
+                        value: str,
+                        stat_var_pv: dict,
+                        counters=None):
     """Add a property with value to the statVar.
     If the property already exists, the value is overridden with the
     merged value if one exists or the new value.
@@ -1056,11 +1059,11 @@ def add_pv_to_stat_var(prop: str, value: str, stat_var_pv: dict, counters=None):
       counters: [optional] error counters to be incremented
     """
     if prop in stat_var_pv:
-        old_value = remove_namespace_prefix(stat_var_pv[prop])
-        current_value = remove_namespace_prefix(value)
+        old_value = _remove_namespace_prefix(stat_var_pv[prop])
+        current_value = _remove_namespace_prefix(value)
         if current_value != old_value:
             # Check if there is specific merged value
-            merged_value = get_merged_values([old_value, current_value])
+            merged_value = _get_merged_values([old_value, current_value])
             if merged_value in UN_ENERGY_MERGED_CODES:
                 value = UN_ENERGY_MERGED_CODES[merged_value]
             else:
@@ -1069,14 +1072,14 @@ def add_pv_to_stat_var(prop: str, value: str, stat_var_pv: dict, counters=None):
                     f'Overwriting value for property:{prop} from {old_value} to {value}',
                     counters)
     if value.find(':') == -1:
-        value = f'dcid:{value}'
+        value = f'{value}'
     stat_var_pv[prop] = value
 
 
-def add_pv_from_map(key: str,
-                    code_map: dict,
-                    stat_var_pv: dict,
-                    counters=None) -> bool:
+def _add_pv_from_map(key: str,
+                     code_map: dict,
+                     stat_var_pv: dict,
+                     counters=None) -> bool:
     """Adds a property and its value from the code_map into the stat_var_pv dict.
     If the code_map contains properties already existing in stat_var_pv,
     the value is merged or replaced.
@@ -1098,14 +1101,14 @@ def add_pv_from_map(key: str,
     if prop_value is None:
         return False
     for p in prop_value:
-        add_pv_to_stat_var(p, prop_value[p], stat_var_pv, counters)
+        _add_pv_to_stat_var(p, prop_value[p], stat_var_pv, counters)
     return True
 
 
-def add_pv_from_map_for_prefix(value_code: str,
-                               code_map: dict,
-                               stat_var_pv: dict,
-                               counters=None) -> str:
+def _add_pv_from_map_for_prefix(value_code: str,
+                                code_map: dict,
+                                stat_var_pv: dict,
+                                counters=None) -> str:
     """Adds property, value for the longest prefix of value_code in the code_map.
 
     Args:
@@ -1121,13 +1124,13 @@ def add_pv_from_map_for_prefix(value_code: str,
     # Look for codes in map from longest prefix to the shortest
     for l in reversed(range(1, len(value_code) + 1)):
         prefix = value_code[:l]
-        if add_pv_from_map(prefix, code_map, stat_var_pv, counters):
+        if _add_pv_from_map(prefix, code_map, stat_var_pv, counters):
             return prefix
     # No codes in map for any prefix length.
     return None
 
 
-def get_energy_source_from_stat_var(pv: dict) -> str:
+def _get_energy_source_from_stat_var(pv: dict) -> str:
     """Returns the value of property energySource or fuelType"""
     if 'energySource' in pv:
         return pv['energySource']
@@ -1136,7 +1139,7 @@ def get_energy_source_from_stat_var(pv: dict) -> str:
     return None
 
 
-def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
+def _add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
     """Adds property and values energy production code into the pv dict.
 
     The production code is roughly formatted as:
@@ -1164,23 +1167,23 @@ def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
         return False
     # Code is production type. Add properties for the remaining code suffix.
     pv['measuredProperty'] = 'dcs:generation'
-    code = remove_prefix(code, '01')
+    code = _remove_prefix(code, '01')
     producer_code = ''
     # Add an optional producer type.
-    if add_pv_from_map(code[:1], UN_ENERGY_PRODUCER_TYPE, pv, counters):
+    if _add_pv_from_map(code[:1], UN_ENERGY_PRODUCER_TYPE, pv, counters):
         producer_code = code[:1]
         code = code[1:]
 
     # Add fuel type as energySource which could be a 1-3 letter prefix.
-    prev_fuel = get_energy_source_from_stat_var(pv)
+    prev_fuel = _get_energy_source_from_stat_var(pv)
     for l in [3, 2, 1]:
         value_code = code[:l]
-        if add_pv_from_map(code[:l], UN_ENERGY_SOURCE_TYPE, pv, counters):
+        if _add_pv_from_map(code[:l], UN_ENERGY_SOURCE_TYPE, pv, counters):
             code = code[l:]
-            fuel = get_energy_source_from_stat_var(pv)
+            fuel = _get_energy_source_from_stat_var(pv)
             if prev_fuel is not None and fuel is not None and prev_fuel != fuel:
                 if prev_fuel == 'Electricity':
-                    pv['producedThing'] = 'dcid:Electricity'
+                    pv['producedThing'] = 'Electricity'
                 else:
                     _add_error_counter('warning_energy_source_change',
                                        f'Fuel changed {prev_fuel}->{fuel}',
@@ -1189,9 +1192,9 @@ def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
 
     # Add plant type from the remaining code
     producer_code += code[:1]
-    if add_pv_from_map(producer_code, UN_ENERGY_PLANT_TYPE, pv, counters):
+    if _add_pv_from_map(producer_code, UN_ENERGY_PLANT_TYPE, pv, counters):
         code = code[1:]
-    elif add_pv_from_map(code[:1], UN_ENERGY_PLANT_TYPE, pv, counters):
+    elif _add_pv_from_map(code[:1], UN_ENERGY_PLANT_TYPE, pv, counters):
         code = code[1:]
 
     if len(code) > 0:
@@ -1202,7 +1205,7 @@ def add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
     return True
 
 
-def add_pv_for_consumption_code(code: str, pv: dict, counters=None) -> bool:
+def _add_pv_for_consumption_code(code: str, pv: dict, counters=None) -> bool:
     """Adds PVs for energy consumption code into the pv dict.
 
     The consumption code is prefixed as follows:
@@ -1221,13 +1224,13 @@ def add_pv_for_consumption_code(code: str, pv: dict, counters=None) -> bool:
     orig_code = code
     if not code.startswith('12'):
         return False
-    code = remove_prefix(code, '12')
+    code = _remove_prefix(code, '12')
     pv['measuredProperty'] = 'dcs:consumption'
     if len(code) > 0:
-        prefix = add_pv_from_map_for_prefix(code, UN_ENERGY_CONSUMING_INDUSTRY,
-                                            pv, counters)
+        prefix = _add_pv_from_map_for_prefix(code, UN_ENERGY_CONSUMING_INDUSTRY,
+                                             pv, counters)
         if prefix is not None:
-            code = remove_prefix(code, prefix)
+            code = _remove_prefix(code, prefix)
     if len(code) > 0:
         _add_error_counter(
             f'error_ignored_consumption_code_{code}',
@@ -1235,7 +1238,7 @@ def add_pv_for_consumption_code(code: str, pv: dict, counters=None) -> bool:
     return True
 
 
-def add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
+def _add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
     """Adds PVs for energy capacity code into the pv dict.
 
     Args:
@@ -1249,21 +1252,22 @@ def add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
     orig_code = code
     if not code.startswith('13'):
         return False
-    code = remove_prefix(code, '13')
+    code = _remove_prefix(code, '13')
     pv['measuredProperty'] = 'dcs:capacity'
-    prefix = add_pv_from_map_for_prefix(code, UN_ENERGY_CAPACITY_CODES, pv,
-                                        counters)
+    prefix = _add_pv_from_map_for_prefix(code, UN_ENERGY_CAPACITY_CODES, pv,
+                                         counters)
     if prefix is None:
         _add_error_counter('error_ignored_capacity_code',
                            f'Ignored energy capacity code {code}', counters)
         return False
-    code = remove_prefix(code, prefix)
+    code = _remove_prefix(code, prefix)
     if len(code) > 0:
         # Add plant type
-        prefix = add_pv_from_map_for_prefix(code, UN_ENERGY_CAPACITY_PLANT_CODE,
-                                            pv, counters)
+        prefix = _add_pv_from_map_for_prefix(code,
+                                             UN_ENERGY_CAPACITY_PLANT_CODE, pv,
+                                             counters)
         if prefix is not None:
-            code = remove_prefix(code, code)
+            code = _remove_prefix(code, code)
 
     if len(code) > 0:
         _add_error_counter(
@@ -1272,11 +1276,11 @@ def add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
     return True
 
 
-def add_pv_for_property(code: str,
-                        code_map: dict,
-                        measured_prop: str,
-                        pv: dict,
-                        counters=None) -> bool:
+def _add_pv_for_property(code: str,
+                         code_map: dict,
+                         measured_prop: str,
+                         pv: dict,
+                         counters=None) -> bool:
     """Adds properties for the code from the map.
     If the map contains any prefix of the code, the measured_prop is also added.
 
@@ -1294,16 +1298,16 @@ def add_pv_for_property(code: str,
     """
     orig_code = code
     while len(code) > 0:
-        prefix = add_pv_from_map_for_prefix(code, code_map, pv, counters)
+        prefix = _add_pv_from_map_for_prefix(code, code_map, pv, counters)
         if prefix is not None:
-            code = remove_prefix(code, prefix)
+            code = _remove_prefix(code, prefix)
         else:
             break
     if len(code) != len(orig_code):
         if 'measuredProperty' not in pv and measured_prop is not None:
             pv['measuredProperty'] = measured_prop
         if 'measuredProperty' in pv:
-            measured_prop = remove_namespace_prefix(pv['measuredProperty'])
+            measured_prop = _remove_namespace_prefix(pv['measuredProperty'])
         if len(code) > 0:
             _add_error_counter(
                 f'warning_ignored_code_{measured_prop}_{code}',
@@ -1334,38 +1338,38 @@ def get_pv_for_energy_code(energy_source: str,
     """
     orig_code = code
     pv = {}
-    if not add_pv_from_map(energy_source, UN_ENERGY_FUEL_CODES, pv, counters):
+    if not _add_pv_from_map(energy_source, UN_ENERGY_FUEL_CODES, pv, counters):
         _add_error_counter(
             f'error_unknown_energy_code_{energy_source}',
             f'Unknown energy source: {energy_source} with transaction: {code}',
             counters)
 
     if code.startswith('01'):
-        add_pv_for_production_code(code, pv, counters)
+        _add_pv_for_production_code(code, pv, counters)
         return pv
 
     if code.startswith('12'):
-        add_pv_for_consumption_code(code, pv, counters)
+        _add_pv_for_consumption_code(code, pv, counters)
         return pv
 
     if code.startswith('13'):
-        add_pv_for_capacity_code(code, pv, counters)
+        _add_pv_for_capacity_code(code, pv, counters)
         return pv
 
     if code.startswith('10'):
-        if add_pv_for_property(code, UN_ENERGY_LOSS_CODES, 'dcs:loss', pv,
-                               counters):
+        if _add_pv_for_property(code, UN_ENERGY_LOSS_CODES, 'dcs:loss', pv,
+                                counters):
             return pv
 
-    if add_pv_for_property(code, UN_ENERGY_USAGE_CODES, 'dcs:consumption', pv,
-                           counters):
+    if _add_pv_for_property(code, UN_ENERGY_USAGE_CODES, 'dcs:consumption', pv,
+                            counters):
         return pv
 
-    if add_pv_for_property(code, UN_ENERGY_RESERVE_CODES, 'dcs:reserves', pv,
-                           counters):
+    if _add_pv_for_property(code, UN_ENERGY_RESERVE_CODES, 'dcs:reserves', pv,
+                            counters):
         return pv
 
-    if add_pv_for_property(code, UN_ENERGY_FLOW_CODES, None, pv, counters):
+    if _add_pv_for_property(code, UN_ENERGY_FLOW_CODES, None, pv, counters):
         if 'measuredProperty' not in pv:
             # Code is ignored. Drop the pv.
             _add_error_counter(f'warning_ignored_energy_code_{code}',
@@ -1382,18 +1386,18 @@ def get_pv_for_energy_code(energy_source: str,
 
 # Map for energy units for StatVarObs.
 UN_ENERGY_UNITS = {
-    'cubicmetres': 'dcid:CubicMeter',
-    'kilowatthours': 'dcid:KilowattHour',
-    'kilowatthour': 'dcid:KilowattHour',
-    'kwh': 'dcid:KilowattHour',
-    'kilowatts': 'dcid:Kilowatt',
-    'kilowatt': 'dcid:Kilowatt',
-    'kw': 'dcid:Kilowatt',
-    'metrictons': 'dcid:MetricTon',
-    'metricton': 'dcid:MetricTon',
-    'terajoules': 'dcid:Terajoule',
-    'terajoule': 'dcid:Terajoule',
-    'tj': 'dcid:Terajoule',
+    'cubicmetres': 'CubicMeter',
+    'kilowatthours': 'KilowattHour',
+    'kilowatthour': 'KilowattHour',
+    'kwh': 'KilowattHour',
+    'kilowatts': 'Kilowatt',
+    'kilowatt': 'Kilowatt',
+    'kw': 'Kilowatt',
+    'metrictons': 'MetricTon',
+    'metricton': 'MetricTon',
+    'terajoules': 'Terajoule',
+    'terajoule': 'Terajoule',
+    'tj': 'Terajoule',
 }
 
 UN_ENERGY_UNITS_MULTIPLIER = {

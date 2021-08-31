@@ -17,6 +17,7 @@ from typing import List
 
 # Map from numeric ISO 3166 country codes used in UN Data to dcids.
 # This includes some older country coded marked as '(additional)'
+# TODO(ajaits): Add property 'countryNumeric3Code' for 'dcs:Country'.
 UN_COUNTRY_CODES = {
     4: 'country/AFG',  # Afghanistan, AF
     8: 'country/ALB',  # Albania, AL

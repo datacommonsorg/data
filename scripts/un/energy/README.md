@@ -46,7 +46,7 @@ To download and process the data:
 ```bash
 python3 un/energy/process.py
 ```
-This downloads multiple csv files into a tmp_data_dir/ folder and generates .csv with accompanying .mcf and .tmcf.
+This downloads multiple csv files into a tmp_data_dir/ folder and generates .csv with accompanying .mcf and .tmcf. There are about 300 csv files that take about 10 minutes to download.
 
 To download the data:
 ```bash

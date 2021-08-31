@@ -428,7 +428,7 @@ def process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
 
     # The observation is an estimated value if it has a footnote.
     if notes == "1":
-        data_row['Estimate'] = 'Estimate'
+        data_row['Estimate'] = 'UNStatsEstimate'
 
     # Generate a StatVar for the row using the fuel and transaction code values.
     sv_pv = {}
