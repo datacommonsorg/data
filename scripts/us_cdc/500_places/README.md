@@ -22,7 +22,7 @@ The datasets can be downloaded at the following links from [the CDC website](htt
 - [PLACES: Local Data for Better Health, Place (City) Data](https://chronicdata.cdc.gov/500-Cities-Places/PLACES-Local-Data-for-Better-Health-Place-Data-202/eav7-hnsx)
 - [PLACES: Local Data for Better Health, ZCTA (Zip Code) Data](https://chronicdata.cdc.gov/500-Cities-Places/PLACES-Local-Data-for-Better-Health-ZCTA-Data-2020/qnzd-25i4)
 
-To download all datasets available, run the following command. Files will be downloaded and extracted to a `raw_data` folder.
+To download all datasets available, run the following command. The download will take 5-10 minutes total. Files will be downloaded and extracted to a `raw_data` folder.
 ```bash
 $ python3 download_bulk.py
 ```
