@@ -292,7 +292,7 @@ def generate_stat_var(data_row: dict, sv_pv: dict, counters=None) -> str:
         _add_error_counter('error_null_stat_var_name',
                            f'No node id for statVar {sv_pv}', counters)
         return None
-    return node_name
+    return f'dcid:{node_name}'
 
 
 def _get_stat_var_mcf(sv_id: str, sv_pv: dict) -> str:

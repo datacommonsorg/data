@@ -523,7 +523,7 @@ UN_ENERGY_CONSUMING_INDUSTRY = {
         'consumingSector': 'MachineryIndustry'
     },
     '14e': {
-        'consumingSector': 'Mining'
+        'consumingSector': 'MiningAndQuarryingIndustry'
     },
     '14f': {
         'consumingSector': 'FoodAndTobaccoIndustry'
@@ -1072,7 +1072,7 @@ def _add_pv_to_stat_var(prop: str,
                     f'Overwriting value for property:{prop} from {old_value} to {value}',
                     counters)
     if value.find(':') == -1:
-        value = f'{value}'
+        value = f'dcid:{value}'
     stat_var_pv[prop] = value
 
 
