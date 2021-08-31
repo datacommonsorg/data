@@ -13,7 +13,7 @@
 # limitations under the License.
 '''
 Author: Padma Gundapaneni @padma-g
-Date: 8/19/2021
+Date: 8/30/2021
 Description: This script cleans a csv file of census tract, county,
 or city level CDC 500 PLACES data downloaded from the CDC.
 URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
