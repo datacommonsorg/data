@@ -47,6 +47,7 @@ These data were collected and provided by the [CDC National Center for Chronic D
 ### Artifacts
 
 #### Scripts
+[`download_bulk.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/download_bulk.py)
 [`parse_cdc_places.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places.py)
 
 #### Test Scripts
