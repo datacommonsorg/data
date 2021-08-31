@@ -47,23 +47,6 @@ These data were collected and provided by the [CDC National Center for Chronic D
 #### Test Scripts
 [`parse_cdc_places_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places_test.py)
 
-#### Test Files
-[`sample_county.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_county.csv)
-
-[`sample_county_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_county_expected.csv)
-
-[`sample_city.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_city.csv)
-
-[`sample_city_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_city_expected.csv)
-
-[`sample_census_tract.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_census_tract.csv)
-
-[`sample_census_tract_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_census_tract_expected.csv)
-
-[`sample_zip_code.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_zip_code.csv)
-
-[`sample_zip_code_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/test_data/sample_zip_code_expected.csv)
-
 #### tMCFs
 [`cdc_places.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/cdc_places.tmcf)
 
