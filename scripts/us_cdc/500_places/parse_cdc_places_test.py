@@ -13,7 +13,7 @@
 # limitations under the License.
 '''
 Author: Padma Gundapaneni @padma-g
-Date: 8/19/2021
+Date: 8/30/2021
 Description: This script contains unit tests for the parse_cdc_places.py script.
 @input_file   filepath to the original csv that needs to be cleaned
 @output_file  filepath to the csv to which the cleaned data is written
