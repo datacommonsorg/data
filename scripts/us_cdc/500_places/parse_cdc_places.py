@@ -19,7 +19,8 @@ or city level CDC 500 PLACES data downloaded from the CDC.
 URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 @input_file     filepath to the original csv that needs to be cleaned
 @output_file    filepath to the csv to which the cleaned data is written
-python3 parse_cdc_places.py input_file output_file
+@delimiter      delimiter used in the original csv
+python3 parse_cdc_places.py input_file output_file delimiter
 '''
 
 import sys
