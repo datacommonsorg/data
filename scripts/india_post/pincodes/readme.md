@@ -26,7 +26,9 @@ In this set we will have unique pincodes along with the districts they belong.
 - PincodeDCID
 - District
 - StateName
-- DistrictLGDCode
+- DistrictLGDCode0
+- DistrictLGDCode1
+- DistrictLGDCode<N> - Can have N columns 
 
 #### Template MCFs
 - [IndiaPost_Pincodes.tmcf](IndiaPost_Pincodes.tmcf).
