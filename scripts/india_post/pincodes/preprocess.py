@@ -19,6 +19,7 @@ import math
 import json
 import csv
 import pandas as pd
+from pandasql import sqldf
 import numpy as np
 import urllib.request
 
@@ -39,19 +40,14 @@ class IndiaPostPincodesDataLoader:
         self.raw_df.drop_duplicates(subset=["Pincode","StateName","District"], inplace=True)
         self.raw_df.drop(["CircleName","RegionName","DivisionName","OfficeName","OfficeType","Delivery","Latitude","Longitude"],axis=1,inplace=True,errors="ignore")
         self.raw_df.sort_values(by=["Pincode","StateName","District"], inplace=True)
+        # Group by StateName and Pincode. Then for that combination have the Distict column that
+        # concatenates all the districts seaparated by comma
+        self.raw_df = self.raw_df.groupby(by=["StateName","Pincode"])["District"].apply(','.join).reset_index()
+        # Now split the single column District into multiple with column name Distict<N>
+        self.raw_df = self.raw_df.join(self.raw_df['District'].str.split(',', expand=True).add_prefix('District'))
+        # Drop the District Column
+        self.raw_df.drop(["District"],axis=1,inplace=True,errors="ignore")        
         self.clean_df = self.raw_df
-        df = self.raw_df
-        print(df)
-        new_df = df.groupby("Pincode","StateName").cumcount()
-           # .set_index(["Pincode","StateName","col"])
-           # .unstack("col")
-           # .sort_index(level=(1,0), axis=1))
-
-
-
-
-        print(new_df)
-
     def save(self):
         self.clean_df.to_csv(self.clean_csv, index=False, header=True)
 
