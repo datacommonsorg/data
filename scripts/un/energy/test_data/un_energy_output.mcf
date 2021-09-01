@@ -97,11 +97,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_BioGasoline
+Node: dcid:AnnualChange_Stocks_Fuel_BioGasoline
 description: "UN Energy data for BioGasoline stocks, Biogasoline - stock changes (code: AL06)"
 fuelType: dcid:BioGasoline
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -281,11 +281,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_AdditivesOxygenates
+Node: dcid:AnnualChange_Stocks_Fuel_AdditivesOxygenates
 description: "UN Energy data for AdditivesOxygenates stocks, Additives and Oxygenates - Stock changes (code: AO06)"
 fuelType: dcid:AdditivesOxygenates
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -448,11 +448,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_AnthraciteCoal
+Node: dcid:AnnualChange_Stocks_Fuel_AnthraciteCoal
 description: "UN Energy data for EIA_AnthraciteCoal stocks, Anthracite - stock changes (code: AT06)"
 fuelType: dcs:EIA_AnthraciteCoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -977,11 +977,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_AviationGasoline
+Node: dcid:AnnualChange_Stocks_Fuel_AviationGasoline
 description: "UN Energy data for AviationGasoline stocks, Aviation gasoline - Stock changes (code: AV06)"
 fuelType: dcid:AviationGasoline
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -1349,11 +1349,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_BrownCoalBriquettes
+Node: dcid:AnnualChange_Stocks_Fuel_BrownCoalBriquettes
 description: "UN Energy data for BrownCoalBriquettes stocks, Brown coal briquettes - stock changes (code: BB06)"
 fuelType: dcid:BrownCoalBriquettes
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -1718,11 +1718,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_PatentFuel
+Node: dcid:AnnualChange_Stocks_Fuel_PatentFuel
 description: "UN Energy data for PatentFuel stocks, Patent fuel - stock changes (code: BC06)"
 fuelType: dcid:PatentFuel
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -2016,11 +2016,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_BioDiesel
+Node: dcid:AnnualChange_Stocks_Fuel_BioDiesel
 description: "UN Energy data for BioDiesel stocks, Biodiesel - Stock changes (code: BD06)"
 fuelType: dcid:BioDiesel
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -3150,11 +3150,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_BioJetKerosene
+Node: dcid:AnnualChange_Stocks_Fuel_BioJetKerosene
 description: "UN Energy data for BioJetKerosene stocks, Bio jet kerosene - Stock changes (code: BJ06)"
 fuelType: dcid:BioJetKerosene
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -3406,11 +3406,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_PeatProducts
+Node: dcid:AnnualChange_Stocks_Fuel_PeatProducts
 description: "UN Energy data for PeatProducts stocks, Peat products - stock changes (code: BP06)"
 fuelType: dcid:PeatProducts
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -4008,11 +4008,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_Bagasse
+Node: dcid:AnnualChange_Stocks_Fuel_Bagasse
 description: "UN Energy data for Bagasse stocks, Bagasse - Stock changes (code: BS06)"
 fuelType: dcid:Bagasse
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -4434,11 +4434,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_BituminousCoal
+Node: dcid:AnnualChange_Stocks_Fuel_BituminousCoal
 description: "UN Energy data for EIA_BituminousCoal stocks, Bitumen - Stock changes (code: BT06)"
 fuelType: dcs:EIA_BituminousCoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -4462,11 +4462,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_CokingCoal
+Node: dcid:AnnualChange_Stocks_Fuel_CokingCoal
 description: "UN Energy data for CokingCoal stocks, Coking coal - stock changes (code: CC06)"
 fuelType: dcid:CokingCoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -5010,11 +5010,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_Charcoal
+Node: dcid:AnnualChange_Stocks_Fuel_Charcoal
 description: "UN Energy data for Charcoal stocks, Charcoal - Stock changes (code: CH06)"
 fuelType: dcid:Charcoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -5273,11 +5273,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_HardCoal
+Node: dcid:AnnualChange_Stocks_Fuel_HardCoal
 description: "UN Energy data for HardCoal stocks, Hard coal - stock changes (code: CL06)"
 fuelType: dcid:HardCoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -6358,11 +6358,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_CrudeOil
+Node: dcid:AnnualChange_Stocks_Fuel_CrudeOil
 description: "UN Energy data for CrudeOil stocks, Conventional crude oil - stock changes (code: CR06)"
 fuelType: dcid:CrudeOil
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -6685,11 +6685,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_CoalTar
+Node: dcid:AnnualChange_Stocks_Fuel_CoalTar
 description: "UN Energy data for CoalTar stocks, Coal Tar - Stock changes (code: CT06)"
 fuelType: dcid:CoalTar
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -7296,11 +7296,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_DieselOil
+Node: dcid:AnnualChange_Stocks_Fuel_DieselOil
 description: "UN Energy data for DieselOil stocks, Gas Oil/ Diesel Oil - Stock changes (code: DL06)"
 fuelType: dcid:DieselOil
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -9360,11 +9360,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_RefineryFeedstocks
+Node: dcid:AnnualChange_Stocks_Fuel_RefineryFeedstocks
 description: "UN Energy data for RefineryFeedstocks stocks, Feedstocks - stock changes (code: FS06)"
 fuelType: dcid:RefineryFeedstocks
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -9568,11 +9568,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_Fuelwood
+Node: dcid:AnnualChange_Stocks_Fuel_Fuelwood
 description: "UN Energy data for Fuelwood stocks, Fuelwood - Stock changes (code: FW06)"
 fuelType: dcid:Fuelwood
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -10282,11 +10282,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_GasolineJetFuel
+Node: dcid:AnnualChange_Stocks_Fuel_GasolineJetFuel
 description: "UN Energy data for GasolineJetFuel stocks, Gasoline-type jet fuel - Stock changes (code: GJ06)"
 fuelType: dcid:GasolineJetFuel
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -10530,11 +10530,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_GasCoke
+Node: dcid:AnnualChange_Stocks_Fuel_GasCoke
 description: "UN Energy data for GasCoke stocks, Gas coke - stock changes (code: GK06)"
 fuelType: dcid:GasCoke
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -10567,11 +10567,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_NaturalGasLiquids
+Node: dcid:AnnualChange_Stocks_Fuel_NaturalGasLiquids
 description: "UN Energy data for NaturalGasLiquids stocks, Natural gas liquids - Stock changes (code: GL06)"
 fuelType: dcid:NaturalGasLiquids
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -11154,11 +11154,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_IndustrialWaste
+Node: dcid:AnnualChange_Stocks_Fuel_IndustrialWaste
 description: "UN Energy data for IndustrialWaste stocks, Industrial Waste - Stock changes (code: IW06)"
 fuelType: dcid:IndustrialWaste
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -11827,11 +11827,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_KeroseneJetFuel
+Node: dcid:AnnualChange_Stocks_Fuel_KeroseneJetFuel
 description: "UN Energy data for KeroseneJetFuel stocks, Kerosene-type Jet Fuel - Stock changes (code: JF06)"
 fuelType: dcid:KeroseneJetFuel
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -11976,11 +11976,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_Kerosene
+Node: dcid:AnnualChange_Stocks_Fuel_Kerosene
 description: "UN Energy data for EIA_Kerosene stocks, Other kerosene - Stock changes (code: KR06)"
 fuelType: dcs:EIA_Kerosene
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -12611,11 +12611,11 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:EnergyIndustryOwnUse
 
-Node: dcid:Annual_Stocks_Fuel_BrownCoal
+Node: dcid:AnnualChange_Stocks_Fuel_BrownCoal
 description: "UN Energy data for BrownCoal stocks, Brown coal - changes in stocks (code: LB06)"
 fuelType: dcid:BrownCoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -13416,11 +13416,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_LigniteCoal
+Node: dcid:AnnualChange_Stocks_Fuel_LigniteCoal
 description: "UN Energy data for LigniteCoal stocks, Lignite - Stock changes (code: LN06)"
 fuelType: dcs:LigniteCoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -14030,11 +14030,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_LiquifiedPetroleumGas
+Node: dcid:AnnualChange_Stocks_Fuel_LiquifiedPetroleumGas
 description: "UN Energy data for LiquifiedPetroleumGas stocks, Liquefied petroleum gas (LPG) - Stock changes (code: LP06)"
 fuelType: dcid:LiquifiedPetroleumGas
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -14201,11 +14201,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_Lubricants
+Node: dcid:AnnualChange_Stocks_Fuel_Lubricants
 description: "UN Energy data for Lubricants stocks, Lubricants - Stock changes (code: LU06)"
 fuelType: dcid:Lubricants
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -15019,11 +15019,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_MotorGasoline
+Node: dcid:AnnualChange_Stocks_Fuel_MotorGasoline
 description: "UN Energy data for MotorGasoline stocks, Motor Gasoline - Stock changes (code: MO06)"
 fuelType: dcid:MotorGasoline
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -15158,11 +15158,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_MunicipalWaste
+Node: dcid:AnnualChange_Stocks_Fuel_MunicipalWaste
 description: "UN Energy data for MunicipalWaste stocks, Municipal Wastes - Stock changes (code: MW06)"
 fuelType: dcid:MunicipalWaste
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -15511,11 +15511,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_NaturalGas
+Node: dcid:AnnualChange_Stocks_Fuel_NaturalGas
 description: "UN Energy data for NaturalGas stocks, Natural gas (including LNG) - stock changes (code: NG06)"
 fuelType: dcs:NaturalGas
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -16512,11 +16512,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_Naphtha
+Node: dcid:AnnualChange_Stocks_Fuel_Naphtha
 description: "UN Energy data for Naphtha stocks, Naphtha - Stock changes (code: NP06)"
 fuelType: dcid:Naphtha
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -16713,11 +16713,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_OtherBituminousCoal
+Node: dcid:AnnualChange_Stocks_Fuel_OtherBituminousCoal
 description: "UN Energy data for UN_OtherBituminousCoal stocks, Other bituminous coal - stock changes (code: OB06)"
 fuelType: dcid:UN_OtherBituminousCoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -17549,11 +17549,11 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
 
-Node: dcid:Annual_Stocks_Fuel_CokeOvenGas
+Node: dcid:AnnualChange_Stocks_Fuel_CokeOvenGas
 description: "UN Energy data for CokeOvenGas stocks, Coke Oven Gas - Stock changes (code: OG06)"
 fuelType: dcid:CokeOvenGas
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -17671,11 +17671,11 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 usedFor: dcid:FuelTransformation
 
-Node: dcid:Annual_Stocks_Fuel_OtherHydrocarbons
+Node: dcid:AnnualChange_Stocks_Fuel_OtherHydrocarbons
 description: "UN Energy data for UN_OtherHydrocarbons stocks, Other hydrocarbons - stock changes (code: OH06)"
 fuelType: dcid:UN_OtherHydrocarbons
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -17791,11 +17791,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_CokeOvenCoke
+Node: dcid:AnnualChange_Stocks_Fuel_CokeOvenCoke
 description: "UN Energy data for CokeOvenCoke stocks, Coke-oven coke - stock changes (code: OK06)"
 fuelType: dcid:CokeOvenCoke
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -18314,11 +18314,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_OtherLiquidBiofuels
+Node: dcid:AnnualChange_Stocks_Fuel_OtherLiquidBiofuels
 description: "UN Energy data for UN_OtherLiquidBiofuels stocks, Other liquid biofuels - Stock changes (code: OL06)"
 fuelType: dcid:UN_OtherLiquidBiofuels
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -18679,11 +18679,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_OilShale
+Node: dcid:AnnualChange_Stocks_Fuel_OilShale
 description: "UN Energy data for OilShale stocks, Oil shale - Stock changes (code: OS06)"
 fuelType: dcid:OilShale
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -19257,11 +19257,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_PetroleumCoke
+Node: dcid:AnnualChange_Stocks_Fuel_PetroleumCoke
 description: "UN Energy data for PetroleumCoke stocks, Petroleum coke - Stock changes (code: PK06)"
 fuelType: dcs:PetroleumCoke
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -19664,11 +19664,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_OtherOilProducts
+Node: dcid:AnnualChange_Stocks_Fuel_OtherOilProducts
 description: "UN Energy data for UN_OtherOilProducts stocks, Other oil products n.e.c. - Stock changes (code: PP06)"
 fuelType: dcid:UN_OtherOilProducts
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -19979,11 +19979,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_Peat
+Node: dcid:AnnualChange_Stocks_Fuel_Peat
 description: "UN Energy data for Peat stocks, Peat - stock changes (code: PT06)"
 fuelType: dcid:Peat
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -20532,11 +20532,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_BlackLiquor
+Node: dcid:AnnualChange_Stocks_Fuel_BlackLiquor
 description: "UN Energy data for BlackLiquor stocks, Black Liquor - Stock changes (code: PU06)"
 fuelType: dcid:BlackLiquor
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -20900,11 +20900,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_ParaffinWaxes
+Node: dcid:AnnualChange_Stocks_Fuel_ParaffinWaxes
 description: "UN Energy data for ParaffinWaxes stocks, Paraffin waxes - Stock changes (code: PW06)"
 fuelType: dcid:ParaffinWaxes
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -21439,11 +21439,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_FuelOil
+Node: dcid:AnnualChange_Stocks_Fuel_FuelOil
 description: "UN Energy data for FuelOil stocks, Fuel oil - Stock changes (code: RF06)"
 fuelType: dcid:FuelOil
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -21757,11 +21757,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_RefineryGas
+Node: dcid:AnnualChange_Stocks_Fuel_RefineryGas
 description: "UN Energy data for RefineryGas stocks, Refinery gas - Stock changes (code: RG06)"
 fuelType: dcid:RefineryGas
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -22174,11 +22174,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_SubbituminousCoal
+Node: dcid:AnnualChange_Stocks_Fuel_SubbituminousCoal
 description: "UN Energy data for EIA_SubbituminousCoal stocks, Sub-bituminous coal - Stock changes (code: SB06)"
 fuelType: dcs:EIA_SubbituminousCoal
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -23564,11 +23564,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_VegetalWaste
+Node: dcid:AnnualChange_Stocks_Fuel_VegetalWaste
 description: "UN Energy data for VegetalWaste stocks, Vegetal waste - Stock changes (code: VW06)"
 fuelType: dcid:VegetalWaste
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
@@ -23695,11 +23695,11 @@ populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Annual_Stocks_Fuel_WhiteSpirit
+Node: dcid:AnnualChange_Stocks_Fuel_WhiteSpirit
 description: "UN Energy data for WhiteSpirit stocks, White spirit and special boiling point industrial spirits - Stock changes (code: WS06)"
 fuelType: dcid:WhiteSpirit
 measuredProperty: dcid:stocks
-measurementQualifier: dcs:Annual
+measurementQualifier: dcid:AnnualChange
 populationType: dcid:Fuel
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable

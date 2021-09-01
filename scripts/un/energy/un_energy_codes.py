@@ -773,7 +773,8 @@ UN_ENERGY_FLOW_CODES = {
         'measuredProperty': 'exports'
     },
     '06': {
-        'measuredProperty': 'stocks'
+        'measuredProperty': 'stocks',
+        'measurementQualifier': 'AnnualChange',
     },
     '07': {
         'measuredProperty': 'productReclassification'
