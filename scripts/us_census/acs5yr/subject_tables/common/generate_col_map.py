@@ -80,6 +80,7 @@ class generateColMapBase:
               if c in part:
                 stat_var[p] = v
 
+    #TODO: If quantityRanges occurs as values in multiple properties, find the property that relates to the column
     #TODO: Add units and scalingFactor
 
     # if the column is Margin of Error, update statType key
