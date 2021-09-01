@@ -33,7 +33,11 @@ class SubjectTableDataLoaderBase:
     ## inputs specified by the user
     tableID = 'S2702'
     self.estimatePeriod = 5
-    self.features = json.load(open(config_json_path, 'r'))
+    ## read JSON spec
+    f = open(config_json_path, 'r')
+    self.features = json.load(f)
+    f.close()
+
     self.hasPercentages = has_percentages
     ## default outputPaths
     self.csv_out_path = f'{output_path}/{tableID}.csv'
