@@ -99,7 +99,6 @@ class generateColMapBase:
               for k, v in elem['dependentPVs'].items():
                 stat_var[k] = v
                 dependent_properties.append(k)
-
     #generating dcid using the utils/statvar_dcid_generator.py
     stat_var['dcid'] = dcid_gen.get_stat_var_dcid(stat_var, ignore_props=dependent_properties)
     return stat_var
@@ -111,7 +110,9 @@ class generateColMapBase:
         for k, v in self.features['populationType'].items():
           if k in part:
             return self.features['populationType'][k]
+      #If populationType not in column name, take the default from the spec
+      return self.features['populationType']['_DEFAULT']
     else:
-      ## The default populationType if it is specified, is Person.
+      ## The default populationType if populationType is not specified in the spec, is Person.
       ## Since most of the ACS Subject Tables describe different qualitative and quantitative characteristics of individuals
       return 'Person'

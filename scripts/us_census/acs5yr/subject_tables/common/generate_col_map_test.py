@@ -10,9 +10,18 @@ class generColMapTest(unittest.TestCase):
     expected_out = './testdata/expected.json'
 
     # load the files
-    spec_dict = json.load(open(spec_path, 'r'))
-    column_list = open(column_file, 'r').read().splitlines()
-    expected_map = json.load(open(expected_out, 'r'))
+    f = open(spec_path, 'r')
+    spec_dict = json.load(f)
+    f.close()
+
+    f = open(column_file, 'r')
+    column_list = f.read().splitlines()
+    f.close()
+
+    f = open(expected_out, 'r')
+    expected_map = json.load(f)
+    f.close()
+
     # create the column map for the inputs
     generated_map = generate(spec_dict, column_list)
     # validate
