@@ -99,9 +99,10 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
         stat_var_dict: A dictionary with property: values of the statistical
           variable as key-value pairs.
         ignore_props: A list of properties to ignore from stat_var_dict when
-          generating the dcid. The ignore_props can be used to account for
-          dependent PVs to ignore when generating the dcid. For example in the
-          following statVar,
+          generating the dcid. This list of ignore_props will be added to the
+          default set of properties that are ignored. The ignore_props can be
+          used to account for dependent PVs to ignore when generating the dcid.
+          For example in the following statVar,
           {
             populationType: Person
             measuredProperty: count
@@ -133,6 +134,8 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
 
     if ignore_props is None:
         ignore_props = _ignore_props
+    else:
+        ignore_props.extend(_ignore_props)
 
     for prop in ignore_props:
         if prop in svd:
