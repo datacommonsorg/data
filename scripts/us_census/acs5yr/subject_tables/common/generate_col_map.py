@@ -9,9 +9,8 @@ import pandas as pd
 os.system(
     'curl https://raw.githubusercontent.com/Abilityguy/data/dcid_gen/util/statvar_dcid_generator.py -LO statvar_dcid_generator.py'
 )
-import statvar_dcid_generator
+from statvar_dcid_generator import get_stat_var_dcid
 
-dcid_gen = statvar_dcid_generator.StatVarDcidGenerator()
 
 
 def generate(specDict: dict, columnList: list) -> dict:
@@ -123,7 +122,7 @@ class GenerateColMapBase:
                         dependent_properties = list(elem['dependentPVs'].keys())
 
         # generating dcid using the utils/statvar_dcid_generator.py
-        stat_var['dcid'] = dcid_gen.get_stat_var_dcid(
+        stat_var['dcid'] = get_stat_var_dcid(
             stat_var, ignore_props=dependent_properties)
         return stat_var
 
