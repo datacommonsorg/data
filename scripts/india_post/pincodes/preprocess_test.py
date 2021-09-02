@@ -68,7 +68,7 @@ class TestPreprocess(unittest.TestCase):
             os.remove(clean_tmcf_file_path)
 
             self.maxDif = None
-            self.assertEqual(len(clean_df.columns), 4)
+            self.assertEqual(len(clean_df.columns), 5)
             self.assertEqual(len(clean_df), 1405)
             self.assertEqual(expected_tmcf_file_data, result_tmcf_file_data)
             self.assertEqual(expected_csv_file_data, result_csv_file_data)

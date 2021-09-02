@@ -1,5 +1,5 @@
 Node: dcid:PincodeArea
 typeOf: schema:Class
 subClassOf: schema:AdministrativeArea
-name: "IndiaPostPincodeArea"
+name: "PincodeArea"
 description: "Postal delivery area representations of India Post."

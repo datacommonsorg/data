@@ -45,6 +45,8 @@ python -m india_post.pincodes.preprocess_test
 # TO run all test cases
 python -m unittest discover -v -s scripts/ -p *_test.py
 ```
+### Reconciliation
+1. The districts are resolved using lgdCode, which is expected to be added to the KG first. All districts are expected to resolve.
 
 ### Import Procedure
 

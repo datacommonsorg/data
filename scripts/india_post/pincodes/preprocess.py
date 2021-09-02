@@ -55,6 +55,9 @@ class IndiaPostPincodesDataLoader:
         return self.mapper.get_district_name_to_lgd_code_mapping(
             row["StateName"], row["District"])
 
+    def _pincode_dcid(self, pincode):
+        return "pincode/{pincode}".format(pincode=pincode)
+
     def process(self):
         self.raw_df = pd.read_csv(self.pincode_csv, dtype=str)
         self.raw_df.fillna('', inplace=True)
@@ -86,6 +89,10 @@ class IndiaPostPincodesDataLoader:
                          axis=1,
                          inplace=True,
                          errors="ignore")
+
+        # Add column PincodeDCID derived from Pincode
+        self.raw_df["PincodeDCID"] = self.raw_df["Pincode"].apply(
+            self._pincode_dcid)
 
         # No of columns in DataFrame which starts with DistrictLGDCode
         self.max_districts_per_pincode = len([
