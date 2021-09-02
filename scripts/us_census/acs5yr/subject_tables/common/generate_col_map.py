@@ -89,30 +89,20 @@ class GenerateColMapBase:
           stat_var['populationType'] = self._get_population_type(part_list)
 
         # associate pvs to stat_var
-        if val_prop_col not in self.features['measurement']:
-            if 'pvs' in self.features:
-                #p = property, k = dictionary of substrings in column that points to a propertyValue
-                for p, k in self.features['pvs'].items():
-                    for c, v in k.items():
-                        ## check if the current key of dict matches with any substring from the tokens of a column name
-                        for part in part_list:
-                            # check if column substring matches with a column token
-                            if c == part:
-                                stat_var[p] = v
-                                # add inferred properties from property 'p' to the stat_var
-                                if 'inferredSpec' in self.features and p in self.features['inferredSpec']:
-                                      stat_var.update(self.features['inferredSpec'][p])
- 
-                            # check if column substring matches with any
-                            # substring within column token. Applicable when
-                            # only a substring in the column's token
-                            # Eg: Civilian noninstitutionalized population 16 to
-                            # 64 years when specified as Civilian
-                            # noninstitutionalized population, in order to make
-                            # it a generic 'c' to map all columns withi
-                            # 'Civilian' and 'noninstitutionalized'
-                            #if c in part.split():
-                            #  self._set_pvs(stat_var, p, v)
+        if 'pvs' in self.features:
+            #p = property, k = dictionary of substrings in column that points to a propertyValue
+            for p, k in self.features['pvs'].items():
+                for c, v in k.items():
+                    ## check if the current key of dict matches with any substring from the tokens of a column name
+                    for part in part_list:
+                        # check if column substring matches with a column token
+                        if c == part:
+                            stat_var[p] = v
+                            # add inferred properties from property 'p' to the stat_var
+                            if 'inferredSpec' in self.features and p in self.features['inferredSpec']:
+                                  stat_var.update(self.features['inferredSpec'][p])
+
+
       
         #TODO: If quantityRanges occurs as values in multiple properties, find the property that relates to the column
         #Suggestion from Prashnath: using _DISAMBIGUATING_POP_TYPE for pvs (income and earnings -- in the test) 
