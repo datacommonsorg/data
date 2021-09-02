@@ -1,7 +1,14 @@
-# Importing Census ACS5Year S2201
+# Importing Census ACS5Year Table S2201
 
-This folder contains a general-purpose script for importing ACS subject tables. It is based off the import for the S2201 table, so might need some tweaks to support additional tables. Please feel free to update the script!
+## Input Data
 
+The data is downloaded from
+`https://www.census.gov/acs/www/data/data-tables-and-tools/subject-tables/` and is organized by year.
+Currently, we have data from 2010-2019 and observations for the Statistical
+Variables listed in
+`stat_vars.csv` for US states, counties, and places (cities).
+
+## Generate Import Files
 Note: the script currently only supports dcids with the `geoId/` prefix (states, counties, places, etc.).
 
 The script expects the following flags:
@@ -16,16 +23,17 @@ The script expects the following flags:
   * `units`: This maps a Stastical Variable to a unit, which will be added to the TMCF. (For example, the Statistical Variable `Median_Income_Household_WithFoodStampsInThePast12Months` is mapped to the unit `USDollar`.)
 * `stat_vars`: This is the path to a file that contains a list of supported Statistical Variables. When generating new Statiscal Variables from descriptive column names, variables not in this list will be skipped.
 
-To run the script:
-
-```
-python3 process.py --output=[OUTPUT] --download_id=[DOWNLOAD_ID] --features=[FEATURES] --stat_vars=[STAT_VARS]
-```
-
-This will generate the files `output.tmcf` and `output.csv` in the path specified by the `output` flag.
+To generate TMCF and CSV files, run:
 
 ```
 python3 process.py --output=s2201 --download_id=481c88cbd59972e8aadea8f62d8bce06c7db242f4af880d2050b3ee377612286 --features=s2201/features.json --stat_vars=s2201/stat_vars.csv
 ```
 
+The outputs will be
+`s2201/ouput.tmcf` and `s2201/output.csv`.
 
+To run unit tests, from this directory, run:
+
+```
+python3 process_test.py
+```
