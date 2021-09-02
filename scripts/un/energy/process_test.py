@@ -15,6 +15,7 @@
 Test UN energy data processing
 """
 
+from un.energy import process
 import filecmp
 import os
 import sys
@@ -26,8 +27,6 @@ from absl import app
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-
-from un.energy import process
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

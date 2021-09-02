@@ -20,6 +20,9 @@ Run this script in this folder:
 python3 process.py
 """
 
+from un.energy.country_codes import get_country_dcid
+from un.energy import un_energy_codes
+from un.energy import download
 import csv
 import io
 import os
@@ -35,10 +38,6 @@ from collections import defaultdict
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-
-from un.energy import download
-from un.energy import un_energy_codes
-from un.energy.country_codes import get_country_dcid
 
 FLAGS = flags.FLAGS
 flags.DEFINE_list('csv_data_files', [],
@@ -152,7 +151,8 @@ def _remove_extra_characters(name: str) -> str:
             name = name[1:]
     # Replace all '_' with a capitalized letter.
     # Find all occurences of '_'.
-    upper_idx = [-1] + [i for i, e in enumerate(name) if e == '_'] + [len(name)]
+    upper_idx = [-1] + \
+        [i for i, e in enumerate(name) if e == '_'] + [len(name)]
     # Capitalize the next letter after '_'.
     words = [
         name[x + 1].upper() + name[x + 2:y]
@@ -362,7 +362,7 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
       data_row: dictionary of CSV column values from the input file.
       sv_map: dictionary of statVar ids that are already emitted into f_out_mcf
       row_map: dictionary of data rows already processed.
-	Used to dedup input rows.
+        Used to dedup input rows.
       sv_obs: dictionary of StatVarObs already emitted
       csv_writer: file handle to write statvar observation values into.
       f_out_mcf: file handle to write unique statVar MCF nodes

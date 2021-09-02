@@ -1246,7 +1246,7 @@ def _add_pv_for_capacity_code(code: str, pv: dict, counters=None) -> bool:
       code: UN energy capacity code string
       pv: dictionary of PVs to be updated
       counters: [optional] error counters to be updated
-    
+
     Returns:
       True if any properties were added into the pv.
     """
@@ -1293,7 +1293,7 @@ def _add_pv_for_property(code: str,
          in the statVar pv and a prefix of the code is present in the code_map.
       pv: dictionary of PVs for the current statVar
       counters: [optional] error counters to be updated
-      
+
     Returns:
       True if any properties were added to the statVar pv.
     """
@@ -1414,10 +1414,11 @@ def get_unit_dcid_scale(units_scale: str) -> (str, int):
     Args:
       units_scale: string with the units and multiplier in words
          for instance 'kilowatts, thousand'.
-    
+
     Returns:
       A tuple of the form (unit, scaling_factor) where
-       units or scaling factor is None if it cannot be processed. 
+       units or scaling factor is None if it cannot be processed.
+  test a long comment is wrapped automatically to 80 characters splitting at a word boundary
     """
     # Remove any extra characters from the unit string.
     units = re.sub('[^a-z,]', '', units_scale.lower())

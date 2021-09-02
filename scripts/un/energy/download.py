@@ -19,6 +19,7 @@ Run this script in this folder:
 python3 download.py
 """
 
+from un.energy.un_energy_codes import get_all_energy_source_codes
 import datetime
 import io
 import os
@@ -34,12 +35,11 @@ sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
 
-from un.energy.un_energy_codes import get_all_energy_source_codes
-
 FLAGS = flags.FLAGS
 flags.DEFINE_string('download_data_dir', 'tmp_data_dir/un_energy',
                     'Data dir to download into')
-flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
+flags.DEFINE_list(
+    'datasets', [], 'Datasets to download. Everything, if empty.')
 flags.DEFINE_integer('start_year', 1990,
                      'Data set downloaded from the start year.')
 flags.DEFINE_integer('end_year',
