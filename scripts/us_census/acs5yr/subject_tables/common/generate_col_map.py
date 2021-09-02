@@ -12,7 +12,6 @@ os.system(
 from statvar_dcid_generator import get_stat_var_dcid
 
 
-
 def generate(specDict: dict, columnList: list) -> dict:
     """Wrapper function for generateColMapBase class to generate column map.
 
@@ -96,7 +95,24 @@ class GenerateColMapBase:
                     for c, v in k.items():
                         ## check if the current key of dict matches with any substring from the tokens of a column name
                         for part in part_list:
+                            # check if column substring matches with a column token
                             if c in part:
+                                stat_var[p] = v
+                                # add inferred properties from property 'p' to the stat_var
+                                if 'inferredSpec' in self.features.keys(
+                                ) and p in self.features['inferredSpec'].keys():
+                                    stat_var.update(
+                                        self.features['inferredSpec'][p])
+
+                            # check if column substring matches with any
+                            # substring within column token. Applicable when
+                            # only a substring in the column's token
+                            # Eg: Civilian noninstitutionalized population 16 to
+                            # 64 years when specified as Civilian
+                            # noninstitutionalized population, in order to make
+                            # it a generic 'c' to map all columns withi
+                            # 'Civilian' and 'noninstitutionalized'
+                            if c in part.split():
                                 stat_var[p] = v
                                 # add inferred properties from property 'p' to the stat_var
                                 if 'inferredSpec' in self.features.keys(
@@ -122,8 +138,8 @@ class GenerateColMapBase:
                         dependent_properties = list(elem['dependentPVs'].keys())
 
         # generating dcid using the utils/statvar_dcid_generator.py
-        stat_var['dcid'] = get_stat_var_dcid(
-            stat_var, ignore_props=dependent_properties)
+        stat_var['dcid'] = get_stat_var_dcid(stat_var,
+                                             ignore_props=dependent_properties)
         return stat_var
 
     def _get_population_type(self, part_list):

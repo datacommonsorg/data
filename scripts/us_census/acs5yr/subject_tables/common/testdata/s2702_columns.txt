@@ -1,0 +1,422 @@
+id
+Geographic Area Name
+Estimate!!Total!!Total civilian noninstitutionalized population
+Margin of Error!!Total!!Total civilian noninstitutionalized population
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!55 to 64 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!55 to 64 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!65 years and older
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!65 years and older
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!65 to 74 years
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!65 to 74 years
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!75 years and older
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!75 years and older
+Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Median age (years)
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!Median age (years)
+Estimate!!Total!!Total civilian noninstitutionalized population!!SEX!!Male
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!SEX!!Male
+Estimate!!Total!!Total civilian noninstitutionalized population!!SEX!!Female
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!SEX!!Female
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White alone
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White alone
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American alone
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American alone
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native alone
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native alone
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian alone
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian alone
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander alone
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander alone
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race alone
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race alone
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)
+Estimate!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone not Hispanic or Latino
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone not Hispanic or Latino
+Estimate!!Total!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Native born
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Native born
+Estimate!!Total!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born
+Estimate!!Total!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Naturalized
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Naturalized
+Estimate!!Total!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Not a citizen
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Not a citizen
+Estimate!!Total!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability
+Estimate!!Total!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability
+Margin of Error!!Total!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability
+Estimate!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over
+Margin of Error!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over
+Estimate!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Same house
+Margin of Error!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Same house
+Estimate!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.
+Margin of Error!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.
+Estimate!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Same county
+Margin of Error!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Same county
+Estimate!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county
+Margin of Error!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county
+Estimate!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county!!Same state
+Margin of Error!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county!!Same state
+Estimate!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county!!Different state
+Margin of Error!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county!!Different state
+Estimate!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Abroad
+Margin of Error!!Total!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Abroad
+Estimate!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over
+Margin of Error!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over
+Estimate!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Less than high school graduate
+Margin of Error!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Less than high school graduate
+Estimate!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!High school graduate (includes equivalency)
+Margin of Error!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!High school graduate (includes equivalency)
+"Estimate!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Some college or associates degree"
+"Margin of Error!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Some college or associates degree"
+"Estimate!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Bachelors degree or higher"
+"Margin of Error!!Total!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Bachelors degree or higher"
+Estimate!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over
+Margin of Error!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over
+Estimate!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force
+Margin of Error!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force
+Estimate!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force!!Employed
+Margin of Error!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force!!Employed
+Estimate!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force!!Unemployed
+Margin of Error!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force!!Unemployed
+Estimate!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!Not in labor force
+Margin of Error!!Total!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!Not in labor force
+Estimate!!Total!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years
+Margin of Error!!Total!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years
+Estimate!!Total!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Worked full-time year round in the past 12 months
+Margin of Error!!Total!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Worked full-time year round in the past 12 months
+Estimate!!Total!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Worked less than full-time year round in the past 12 months
+Margin of Error!!Total!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Worked less than full-time year round in the past 12 months
+Estimate!!Total!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Did not work
+Margin of Error!!Total!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Did not work
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Employee of private company workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Employee of private company workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private not-for-profit wage and salary workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private not-for-profit wage and salary workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Local government workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Local government workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!State government workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!State government workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Federal government workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Federal government workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Self-employed workers in own not incorporated business workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Self-employed workers in own not incorporated business workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Unpaid family workers
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Unpaid family workers
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Agriculture forestry fishing and hunting and mining
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Agriculture forestry fishing and hunting and mining
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Construction
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Construction
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Manufacturing
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Manufacturing
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Wholesale trade
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Wholesale trade
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Retail trade
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Retail trade
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Transportation and warehousing and utilities
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Transportation and warehousing and utilities
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Information
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Information
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Finance and insurance and real estate and rental and leasing
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Finance and insurance and real estate and rental and leasing
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Professional scientific and management and administrative and waste management services
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Professional scientific and management and administrative and waste management services
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Educational services and health care and social assistance
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Educational services and health care and social assistance
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Arts entertainment and recreation and accommodation and food services
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Arts entertainment and recreation and accommodation and food services
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Other services (except public administration)
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Other services (except public administration)
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Public administration
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Public administration
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Management business science and arts occupations
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Management business science and arts occupations
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Service occupations
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Service occupations
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Sales and office occupations
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Sales and office occupations
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Natural resources construction and maintenance occupations
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Natural resources construction and maintenance occupations
+Estimate!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Production transportation and material moving occupations
+Margin of Error!!Total!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Production transportation and material moving occupations
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$1 to $4999 or loss
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$1 to $4999 or loss
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$5000 to $14999
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$5000 to $14999
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$15000 to $24999
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$15000 to $24999
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$25000 to $34999
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$25000 to $34999
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$35000 to $49999
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$35000 to $49999
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$50000 to $74999
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$50000 to $74999
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$75000 or more
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$75000 or more
+Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!Median earnings (dollars)
+Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!Median earnings (dollars)
+Estimate!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population
+Margin of Error!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population
+Estimate!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25000
+Margin of Error!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25000
+Estimate!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25000 to $49999
+Margin of Error!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25000 to $49999
+Estimate!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50000 to $74999
+Margin of Error!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50000 to $74999
+Estimate!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75000 to $99999
+Margin of Error!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75000 to $99999
+Estimate!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100000 and over
+Margin of Error!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100000 and over
+Estimate!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders
+Margin of Error!!Total!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders
+Estimate!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined
+Margin of Error!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined
+Estimate!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!Below 50 percent of the poverty level
+Margin of Error!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!Below 50 percent of the poverty level
+Estimate!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!50 to 99 percent of the poverty level
+Margin of Error!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!50 to 99 percent of the poverty level
+Estimate!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!100 to 149 percent of the poverty level
+Margin of Error!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!100 to 149 percent of the poverty level
+Estimate!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!150 to 199 percent of the poverty level
+Margin of Error!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!150 to 199 percent of the poverty level
+Estimate!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!200 to 299 percent of the poverty level
+Margin of Error!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!200 to 299 percent of the poverty level
+Estimate!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!At or above 300 percent of the poverty level
+Margin of Error!!Total!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!At or above 300 percent of the poverty level
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!55 to 64 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!55 to 64 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!65 to 74 years
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!65 to 74 years
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!75 years and older
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!75 years and older
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Median age (years)
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Median age (years)
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Male
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Male
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Female
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Female
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White alone
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White alone
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American alone
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American alone
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native alone
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native alone
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian alone
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian alone
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander alone
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander alone
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race alone
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race alone
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone not Hispanic or Latino
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone not Hispanic or Latino
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Native born
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Native born
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Naturalized
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Naturalized
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Not a citizen
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Not a citizen
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability
+Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability
+Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability
+Estimate!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over
+Margin of Error!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over
+Estimate!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Same house
+Margin of Error!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Same house
+Estimate!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.
+Margin of Error!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.
+Estimate!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Same county
+Margin of Error!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Same county
+Estimate!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county
+Margin of Error!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county
+Estimate!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county!!Same state
+Margin of Error!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county!!Same state
+Estimate!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county!!Different state
+Margin of Error!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Different House in the U.S.!!Different county!!Different state
+Estimate!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Abroad
+Margin of Error!!Total Uninsured!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over!!Abroad
+Estimate!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over
+Margin of Error!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over
+Estimate!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Less than high school graduate
+Margin of Error!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Less than high school graduate
+Estimate!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!High school graduate (includes equivalency)
+Margin of Error!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!High school graduate (includes equivalency)
+"Estimate!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Some college or associates degree"
+"Margin of Error!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Some college or associates degree"
+"Estimate!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Bachelors degree or higher"
+"Margin of Error!!Total Uninsured!!EDUCATIONAL ATTAINMENT!!Civilian noninstitutionalized population 25 years and over!!Bachelors degree or higher"
+Estimate!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over
+Margin of Error!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over
+Estimate!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force
+Margin of Error!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force
+Estimate!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force!!Employed
+Margin of Error!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force!!Employed
+Estimate!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force!!Unemployed
+Margin of Error!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!In labor force!!Unemployed
+Estimate!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!Not in labor force
+Margin of Error!!Total Uninsured!!EMPLOYMENT STATUS!!Civilian noninstitutionalized population 16 years and over!!Not in labor force
+Estimate!!Total Uninsured!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years
+Margin of Error!!Total Uninsured!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years
+Estimate!!Total Uninsured!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Worked full-time year round in the past 12 months
+Margin of Error!!Total Uninsured!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Worked full-time year round in the past 12 months
+Estimate!!Total Uninsured!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Worked less than full-time year round in the past 12 months
+Margin of Error!!Total Uninsured!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Worked less than full-time year round in the past 12 months
+Estimate!!Total Uninsured!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Did not work
+Margin of Error!!Total Uninsured!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years!!Did not work
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Employee of private company workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Employee of private company workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private not-for-profit wage and salary workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Private not-for-profit wage and salary workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Local government workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Local government workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!State government workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!State government workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Federal government workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Federal government workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Self-employed workers in own not incorporated business workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Self-employed workers in own not incorporated business workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Unpaid family workers
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!CLASS OF WORKER!!Unpaid family workers
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Agriculture forestry fishing and hunting and mining
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Agriculture forestry fishing and hunting and mining
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Construction
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Construction
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Manufacturing
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Manufacturing
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Wholesale trade
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Wholesale trade
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Retail trade
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Retail trade
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Transportation and warehousing and utilities
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Transportation and warehousing and utilities
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Information
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Information
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Finance and insurance and real estate and rental and leasing
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Finance and insurance and real estate and rental and leasing
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Professional scientific and management and administrative and waste management services
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Professional scientific and management and administrative and waste management services
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Educational services and health care and social assistance
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Educational services and health care and social assistance
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Arts entertainment and recreation and accommodation and food services
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Arts entertainment and recreation and accommodation and food services
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Other services (except public administration)
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Other services (except public administration)
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Public administration
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!INDUSTRY!!Public administration
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Management business science and arts occupations
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Management business science and arts occupations
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Service occupations
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Service occupations
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Sales and office occupations
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Sales and office occupations
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Natural resources construction and maintenance occupations
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Natural resources construction and maintenance occupations
+Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Production transportation and material moving occupations
+Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Production transportation and material moving occupations
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$1 to $4999 or loss
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$1 to $4999 or loss
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$5000 to $14999
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$5000 to $14999
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$15000 to $24999
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$15000 to $24999
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$25000 to $34999
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$25000 to $34999
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$35000 to $49999
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$35000 to $49999
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$50000 to $74999
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$50000 to $74999
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$75000 or more
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$75000 or more
+Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!Median earnings (dollars)
+Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!Median earnings (dollars)
+Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population
+Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population
+Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25000
+Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25000
+Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25000 to $49999
+Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25000 to $49999
+Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50000 to $74999
+Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50000 to $74999
+Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75000 to $99999
+Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75000 to $99999
+Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100000 and over
+Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100000 and over
+Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders
+Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders
+Estimate!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined
+Margin of Error!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined
+Estimate!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!Below 50 percent of the poverty level
+Margin of Error!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!Below 50 percent of the poverty level
+Estimate!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!50 to 99 percent of the poverty level
+Margin of Error!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!50 to 99 percent of the poverty level
+Estimate!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!100 to 149 percent of the poverty level
+Margin of Error!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!100 to 149 percent of the poverty level
+Estimate!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!150 to 199 percent of the poverty level
+Margin of Error!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!150 to 199 percent of the poverty level
+Estimate!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!200 to 299 percent of the poverty level
+Margin of Error!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!200 to 299 percent of the poverty level
+Estimate!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!At or above 300 percent of the poverty level
+Margin of Error!!Total Uninsured!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined!!At or above 300 percent of the poverty level
