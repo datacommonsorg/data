@@ -25,111 +25,111 @@ class TestStatVarDcidGenerator(unittest.TestCase):
 
     def test_ignore_props(self):
         stat_var_dict = {
-            'typeOf': 'StatisticalVariable',
-            'statType': 'medianValue',
-            'measuredProperty': 'income',
-            'populationType': 'Person',
-            'age': '[15 - Years]',
-            'incomeStatus': 'WithIncome'
+            "typeOf": "StatisticalVariable",
+            "statType": "medianValue",
+            "measuredProperty": "income",
+            "populationType": "Person",
+            "age": "[15 - Years]",
+            "incomeStatus": "WithIncome"
         }
-        ignore_props = ['age', 'incomeStatus']
+        ignore_props = ["age", "incomeStatus"]
         dcid = statvar_dcid_generator.get_stat_var_dcid(
             stat_var_dict, ignore_props=ignore_props)
-        expected_dcid = ('Median_Income_Person')
+        expected_dcid = ("Median_Income_Person")
         self.assertEqual(dcid, expected_dcid)
 
     def test_quantity_name_generation(self):
         stat_var_dict = {
-            'statType': 'measuredValue',
-            'measuredProperty': 'count',
-            'populationType': 'Person',
-            'gender': 'Female',
-            'age': '[20 Years]'
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "populationType": "Person",
+            "gender": "Female",
+            "age": "[20 Years]"
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
-        expected_dcid = 'Count_Person_20Years_Female'
+        expected_dcid = "Count_Person_20Years_Female"
         self.assertEqual(dcid, expected_dcid)
 
     def test_quantity_range_name_generation(self):
         stat_var_dict1 = {
-            'statType': 'measuredValue',
-            'measuredProperty': 'count',
-            'populationType': 'HousingUnit',
-            'numberOfRooms': '[9 - Rooms]',
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "populationType": "HousingUnit",
+            "numberOfRooms": "[9 - Rooms]",
         }
         dcid1 = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
-        expected_dcid1 = 'Count_HousingUnit_9OrMoreRooms'
+        expected_dcid1 = "Count_HousingUnit_9OrMoreRooms"
         self.assertEqual(dcid1, expected_dcid1)
 
         stat_var_dict2 = {
-            'statType': 'measuredValue',
-            'measuredProperty': 'count',
-            'populationType': 'Household',
-            'householdWorkerSize': '[- 3 Worker]',
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "populationType": "Household",
+            "householdWorkerSize": "[- 3 Worker]",
         }
         dcid2 = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
-        expected_dcid2 = 'Count_Household_3OrLessWorker'
+        expected_dcid2 = "Count_Household_3OrLessWorker"
         self.assertEqual(dcid2, expected_dcid2)
 
         stat_var_dict3 = {
-            'statType': 'measuredValue',
-            'measuredProperty': 'count',
-            'populationType': 'Person',
-            'income': '[10000 14999 USDollar]',
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "populationType": "Person",
+            "income": "[10000 14999 USDollar]",
         }
         dcid3 = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict3)
-        expected_dcid3 = 'Count_Person_10000To14999USDollar'
+        expected_dcid3 = "Count_Person_10000To14999USDollar"
         self.assertEqual(dcid3, expected_dcid3)
 
     def test_sorted_constraints(self):
         stat_var_dict = {
-            'statType': 'measuredValue',
-            'measuredProperty': 'count',
-            'populationType': 'Person',
-            'age': '[25 - Years]',
-            'educationalAttainment': 'BachelorsDegreeOrHigher',
-            'race': 'AsianAlone',
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "populationType": "Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "BachelorsDegreeOrHigher",
+            "race": "AsianAlone",
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
-        expected_dcid = ('Count_Person_25OrMoreYears_BachelorsDegreeOrHigher'
-                         '_AsianAlone')
+        expected_dcid = ("Count_Person_25OrMoreYears_BachelorsDegreeOrHigher"
+                         "_AsianAlone")
         self.assertEqual(dcid, expected_dcid)
 
     def test_measured_property(self):
         stat_var_dict = {
-            'statType': 'meanValue',
-            'measuredProperty': 'wagesDaily',
-            'populationType': 'Person',
-            'placeOfResidenceClassification': 'Urban'
+            "statType": "meanValue",
+            "measuredProperty": "wagesDaily",
+            "populationType": "Person",
+            "placeOfResidenceClassification": "Urban"
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
-        expected_dcid = 'Mean_WagesDaily_Person_Urban'
+        expected_dcid = "Mean_WagesDaily_Person_Urban"
         self.assertEqual(dcid, expected_dcid)
 
     def test_measurement_qualifier(self):
         stat_var_dict = {
-            'statType': 'measuredValue',
-            'measuredProperty': 'precipitationRate',
-            'populationType': 'Place',
-            'memberOf': 'Climate',
-            'measurementQualifier': 'Daily'
+            "statType": "measuredValue",
+            "measuredProperty": "precipitationRate",
+            "populationType": "Place",
+            "memberOf": "Climate",
+            "measurementQualifier": "Daily"
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
-        expected_dcid = 'Daily_PrecipitationRate_Place'
+        expected_dcid = "Daily_PrecipitationRate_Place"
         self.assertEqual(dcid, expected_dcid)
 
     def test_measurement_denominator(self):
         stat_var_dict = {
-            'statType': 'measuredValue',
-            'measuredProperty': 'count',
-            'populationType': 'Person',
-            'age': '[25 64 Years]',
-            'educationalAttainment': 'TertiaryEducation',
-            'measurementDenominator': 'Count_Person_25To64Years'
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "populationType": "Person",
+            "age": "[25 64 Years]",
+            "educationalAttainment": "TertiaryEducation",
+            "measurementDenominator": "Count_Person_25To64Years"
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
-        expected_dcid = ('Count_Person_25To64Years_TertiaryEducation'
-                         '_AsAFractionOf_Count_Person_25To64Years')
+        expected_dcid = ("Count_Person_25To64Years_TertiaryEducation"
+                         "_AsAFractionOf_Count_Person_25To64Years")
         self.assertEqual(dcid, expected_dcid)
 
 
