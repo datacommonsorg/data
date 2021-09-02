@@ -115,7 +115,7 @@ class PLFSDailyWageDataLoader:
 
     def _setup_location(self):
         self.clean_df["territory"] = self.clean_df["territory"].apply(
-            IndiaStatesMapper.get_district_name_to_lgd_code_mapping)
+            IndiaStatesMapper.get_state_name_to_iso_code_mapping)
 
     def _make_column_numerical(self, column):
         self.clean_df[column] = self.clean_df[column].astype(str).str.replace(
