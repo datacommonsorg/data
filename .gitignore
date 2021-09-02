@@ -1,3 +1,5 @@
+./scripts/us_census/acs5yr/subject_tables/s2702/data
+
 *.pyc
 __pycache__/
 .pylint.d/

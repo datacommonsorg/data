@@ -3,10 +3,10 @@ import unittest
 import json
 from generate_col_map import generate
 
-
-class generColMapTest(unittest.TestCase):
-
+class GenerColMapTest(unittest.TestCase):
+    """ Test Cases for checking the generation of column map from JSON Spec"""
     def test_generating_column_map(self):
+        """tests the column map on a subset of columns from S2702 """
         spec_path = './testdata/spec.json'
         column_file = './testdata/columns.txt'
         expected_out = './testdata/expected.json'
