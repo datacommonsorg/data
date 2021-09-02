@@ -1,10 +1,10 @@
 # India Post - Pincodes
 
 ## About the Dataset
-[Local Government Directory](https://lgdirectory.gov.in/) is a complete directory of land regions/revenue, rural and urban local governments.
+[All India Pincode Directory](https://data.gov.in/node/6818285) is shared by Ministry of CommunicationsDepartment of Posts on data.go.in.
 
 ### Overview
-[All India Pincode Directory](https://data.gov.in/node/6818285) is share by Ministry of CommunicationsDepartment of Posts on data.go.in.  All India Pincode Directory contains the pincode list across India with relevant information like Circle Name, Region Name, Division Name, Office Name, Pincode, Office Type, Delivery, District, State Name. Postal Index Number (PIN or PIN Code) is a 6 digit code of Post Office numbering used by India Post. 
+All India Pincode Directory contains the Pincode list across India with relevant information like Circle Name, Region Name, Division Name, Office Name, Pincode, Office Type, Delivery, District, State Name. Postal Index Number (PIN or PIN Code) is a 6 digit code of Post Office numbering used by India Post. 
 
 - CircleName
 - RegionName
@@ -20,7 +20,7 @@
 
 
 #### Cleaned Data
-In this set we will have unique pincodes along with the districts they belong.
+In this set, we will have unique pincodes along with the districts they belong.
 
 - Pincode
 - PincodeDCID
@@ -34,12 +34,16 @@ In this set we will have unique pincodes along with the districts they belong.
 - [IndiaPost_Pincodes.tmcf](IndiaPost_Pincodes.tmcf).
 
 #### Scripts
-- [preprocess.py](preprocess.py): Clean up and import script.
+- [preprocess.py](preprocess.py): Clean up and import script. The script also generates the TMCF file.
 
 ### Running Tests
 
 ```bash
-python3 -m unittest discover -v -s scripts/ -p *_test.py
+# To run test cases specific to this process
+python -m india_post.pincodes.preprocess_test
+
+# TO run all test cases
+python -m unittest discover -v -s scripts/ -p *_test.py
 ```
 
 ### Import Procedure

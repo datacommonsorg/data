@@ -38,7 +38,7 @@ class TestPreprocess(unittest.TestCase):
         district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
             "tamil nadu", "tuticorin")
         self.assertEqual(district_lgd_code, "594")
-        
+
         district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
             "tamilnadu", "thoothukudi")
         self.assertEqual(district_lgd_code, "594")

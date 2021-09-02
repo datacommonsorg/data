@@ -52,7 +52,6 @@ class IndiaPostPincodesDataLoader:
         self.max_districts_per_pincode = 0
 
     def _setup_location(self, row):
-        print(row)
         return self.mapper.get_district_name_to_lgd_code_mapping(
             row["StateName"], row["District"])
 
@@ -73,8 +72,8 @@ class IndiaPostPincodesDataLoader:
         self.raw_df["DistrictLGDCode"] = self.raw_df.apply(
             lambda row: self._setup_location(row), axis=1)
 
-        # Group by StateName and Pincode. Then for that combination have the DistrictLGDCode column that
-        # concatenates all the codes seaparated by comma
+        # Group by StateName and Pincode. Then for that combination, have the DistrictLGDCode column that
+        # concatenates all the codes separated by comma
         self.raw_df = self.raw_df.groupby(
             by=["StateName", "Pincode"])["DistrictLGDCode"].apply(
                 ','.join).reset_index()

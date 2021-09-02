@@ -39,15 +39,18 @@ class IndiaDistrictsMapper:
         state_lgd_code = IndiaStatesMapper.get_state_name_to_lgd_code_mapping(
             state_name)
         district_name = district_name.lower().strip()
+        # Get the districts for the state. This will reduce
+        # The mismatchs
         df_districts_by_state = self.districts_df.loc[
             self.districts_df['LGDStateCode'] == state_lgd_code]
+
         # Try match directly by name
         df_districts = df_districts_by_state.loc[
             df_districts_by_state['LGDDistrictName'] == district_name]
         if len(df_districts.index) == 1:
             return list(df_districts["LGDDistrictCode"])[0]
 
-        # Try match directly by closestDistrictLabel
+        # Try match using closestDistrictLabel
         df_districts = df_districts_by_state.loc[
             df_districts_by_state['closestDistrictLabel'] == district_name]
         if len(df_districts.index) == 1:
