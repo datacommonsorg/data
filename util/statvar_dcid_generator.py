@@ -16,29 +16,51 @@
 import copy
 import re
 
-#Constants
-_QUANTITY_REGEX = r"\[(?P<value>-|-?\d+(\.\d+)?) (?P<quantity>[A-Za-z]+)\]"
-_QUANTITY_RANGE_REGEX = (r"\[(?P<lower_limit>-|-?\d+(\.\d+)?) "
-                         r"(?P<upper_limit>-|-?\d+(\.\d+)?) "
-                         r"(?P<quantity>[A-Za-z]+)\]")
+# Global constants
+# A regex to match the quantity notation [value quantity]
+# Example match: [2 Person]
+_QUANTITY_REGEX = r'\[(?P<value>-|-?\d+(\.\d+)?) (?P<quantity>[A-Za-z_/\d]+)\]'
 
-# This is a lookup to ensure "Mean" and "Median" are used in the dcid when
-# statType is meanValue or medianValue"
-_stat_type_lookup = {"meanValue": "Mean", "medianValue": "Median"}
+# A regex to match the quantity range notation
+# [lower_limit upper_limit quantity]
+# Example match: [10000 14999 USDollar]
+_QUANTITY_RANGE_REGEX = (r'\[(?P<lower_limit>-|-?\d+(\.\d+)?) '
+                         r'(?P<upper_limit>-|-?\d+(\.\d+)?) '
+                         r'(?P<quantity>[A-Za-z_/\d]+)\]')
+
+# Global variables
+# This is a lookup to ensure 'Mean' and 'Median' are used in the dcid when
+# statType is meanValue or medianValue. This lookup is used after running
+# capitalize_process_word on the value.
+_stat_type_lookup = {'MeanValue': 'Mean', 'MedianValue': 'Median'}
 
 # These are the default properties ignored during dcid generation
-_ignore_props = {"unit", "Node", "memberOf", "typeOf"}
+_default_ignore_props = [
+    'unit', 'Node', 'memberOf', 'typeOf', 'constraintProperties', 'name'
+]
 
 
-def capitalize_word(word):
-    """Capitalizes the first character of a string.
+def capitalize_process_word(word):
+    """Capitalizes, removes namespaces and removes underscores from a word.
 
-    This function differs from the builtin function str.capitalize() in that it
-    changes only the case of the first character and ignores the case of other
-    characters.
+    This function changes the case of the first character to upper case.
+    Manual upper casing is preferred compared to the builtin function
+    str.capitalize() because we want to change only the case of the first
+    character and ignores the case of other characters. After upper casing,
+    all namespaces and underscores are removed from the string.
+
+    Args:
+        word: A string literal to capitalize and process.
+
+    Returns:
+        Returns a string that can be used in dcid generation.
+        Returns None if the string is empty.
     """
     if word:
-        return word[0].upper() + word[1:]
+        word = word[word.find(':') + 1:]
+        word = word.replace('_', '')
+        word = word[0].upper() + word[1:]
+        return word
     return None
 
 
@@ -49,26 +71,30 @@ def generate_quantity_range_name(match_dict):
         match_dict: A dictionary containing quantity range regex groups.
           Expected syntax of match_dict is
           {
-            "lower_limit": <value>,
-            "upper_limit": <value>,
-            "quantity": <value>
+            'lower_limit': <value>,
+            'upper_limit': <value>,
+            'quantity': <value>
           }
 
     Returns:
         A string representing the quantity range name to be used in the dcid.
+        Returns None if any of the expected keys are not in the dictionary.
     """
-    lower_limit = match_dict["lower_limit"]
-    upper_limit = match_dict["upper_limit"]
-    quantity = match_dict["quantity"]
+    try:
+        lower_limit = match_dict['lower_limit']
+        upper_limit = match_dict['upper_limit']
+        quantity = match_dict['quantity']
+    except KeyError:
+        return None
 
-    quantity = capitalize_word(quantity)
-    if upper_limit == "-":
-        return f"{lower_limit}OrMore{quantity}"
+    quantity = capitalize_process_word(quantity)
+    if upper_limit == '-':
+        return f'{lower_limit}OrMore{quantity}'
 
-    if lower_limit == "-":
-        return f"{upper_limit}OrLess{quantity}"
+    if lower_limit == '-':
+        return f'{upper_limit}OrLess{quantity}'
 
-    return f"{lower_limit}To{upper_limit}{quantity}"
+    return f'{lower_limit}To{upper_limit}{quantity}'
 
 
 def generate_quantity_name(match_dict):
@@ -78,18 +104,22 @@ def generate_quantity_name(match_dict):
         match_dict: A dictionary containing quantity regex groups.
           Expected syntax of match_dict
           {
-            "value": <value>,
-            "quantity": <value>
+            'value': <value>,
+            'quantity': <value>
           }
 
     Returns:
         A string representing the quantity name to be used in the dcid.
+        Returns None if any of the expected keys are not in the dictionary.
     """
-    value = match_dict["value"]
-    quantity = match_dict["quantity"]
+    try:
+        value = match_dict['value']
+        quantity = match_dict['quantity']
+    except KeyError:
+        return None
 
-    quantity = capitalize_word(quantity)
-    return f"{value}{quantity}"
+    quantity = capitalize_process_word(quantity)
+    return f'{value}{quantity}'
 
 
 def get_stat_var_dcid(stat_var_dict, ignore_props=None):
@@ -113,13 +143,13 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
           }
           since the healthInsurance property indicates they are Civilian and
           USC_NonInstitutionalized, ignore_props can be the list
-          ["armedForceStatus", "institutionalization"]. During the dcid
+          ['armedForceStatus', 'institutionalization']. During the dcid
           generation process, these PVs will not be considered.
 
     Returns:
         A string represting the dcid of the statistical variable.
     """
-    # TODO: Allow support for values with namespaces (dcs: , schema:, ...)
+
     # TODO: Add support for naming boolean constraints
     # TODO: Stripping measurement properties (USC_) from constraints
     # TODO: Replacing NAICS industry codes with the NAICS names
@@ -128,46 +158,46 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
     # TODO: Prepend or append text to some constraints to improve readability
     # TODO: InsuredUmemploymentRate should become Rate_Insured_Unemployment
 
+    # Helper function to add a property to the dcid list.
+    def add_prop_to_list(prop: str, svd: dict, dcid_list: list):
+        if prop in svd:
+            token = capitalize_process_word(svd[prop])
+            if token is not None:
+                dcid_list.append(token)
+            del svd[prop]
+
     dcid_list = list()
     denominator_suffix = ''
     svd = copy.deepcopy(stat_var_dict)
 
     if ignore_props is None:
-        ignore_props = _ignore_props
+        ig_p = _default_ignore_props
     else:
-        ignore_props.extend(_ignore_props)
+        ig_p = copy.deepcopy(ignore_props)
+        ig_p.extend(_default_ignore_props)
 
-    for prop in ignore_props:
+    for prop in ig_p:
         if prop in svd:
             del svd[prop]
 
-    if "measurementDenominator" in svd:
-        denominator_suffix = "AsAFractionOf_" + svd["measurementDenominator"]
-        del svd["measurementDenominator"]
+    if 'measurementDenominator' in svd:
+        denominator_suffix = 'AsAFractionOf_' + svd['measurementDenominator']
+        del svd['measurementDenominator']
 
-    if "measurementQualifier" in svd:
-        token = capitalize_word(svd["measurementQualifier"])
-        dcid_list.append(token)
-        del svd["measurementQualifier"]
+    add_prop_to_list('measurementQualifier', svd, dcid_list)
 
-    if ("statType" in svd) and (svd["statType"]
-                                not in ["measuredValue", "Unknown"]):
-        if svd["statType"] in _stat_type_lookup:
-            dcid_list.append(_stat_type_lookup[svd["statType"]])
+    if ('statType' in svd) and (svd['statType'].find("measuredValue") == -1):
+        token = capitalize_process_word(svd['statType'])
+        if token in _stat_type_lookup:
+            dcid_list.append(_stat_type_lookup[token])
+            del svd['statType']
         else:
-            token = capitalize_word(svd["statType"])
-            dcid_list.append(token)
-    del svd["statType"]
+            add_prop_to_list('statType', svd, dcid_list)
+    else:
+        del svd['statType']
 
-    if "measuredProperty" in svd:
-        token = capitalize_word(svd["measuredProperty"])
-        dcid_list.append(token)
-        del svd["measuredProperty"]
-
-    if "populationType" in svd:
-        token = capitalize_word(svd["populationType"])
-        dcid_list.append(token)
-        del svd["populationType"]
+    add_prop_to_list('measuredProperty', svd, dcid_list)
+    add_prop_to_list('populationType', svd, dcid_list)
 
     constraint_props = sorted(svd.keys(), key=str.casefold)
     for prop in constraint_props:
@@ -183,11 +213,10 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
                 dcid_list.append(q_name)
 
             else:
-                token = capitalize_word(svd[prop])
-                dcid_list.append(token)
+                add_prop_to_list(prop, svd, dcid_list)
 
     if denominator_suffix:
         dcid_list.append(denominator_suffix)
 
-    dcid = "_".join(dcid_list)
+    dcid = '_'.join(dcid_list)
     return dcid
