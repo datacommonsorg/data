@@ -433,6 +433,7 @@ UN_ENERGY_SOURCE_TYPE = {
 
 
 def get_all_energy_source_codes() -> List[str]:
+    """Returns a list of all 2-letter energy codes in the UN energy dataset"""
     return list(UN_ENERGY_FUEL_CODES.keys())
 
 
@@ -1178,7 +1179,6 @@ def _add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
     # Add fuel type as energySource which could be a 1-3 letter prefix.
     prev_fuel = _get_energy_source_from_stat_var(pv)
     for l in [3, 2, 1]:
-        value_code = code[:l]
         if _add_pv_from_map(code[:l], UN_ENERGY_SOURCE_TYPE, pv, counters):
             code = code[l:]
             fuel = _get_energy_source_from_stat_var(pv)
@@ -1337,7 +1337,6 @@ def get_pv_for_energy_code(energy_source: str,
       If the StatVar is a duplicate of another code, the pv will have a property
       'Ignore' with the reason.
     """
-    orig_code = code
     pv = {}
     if not _add_pv_from_map(energy_source, UN_ENERGY_FUEL_CODES, pv, counters):
         _add_error_counter(
@@ -1427,11 +1426,6 @@ def get_unit_dcid_scale(units_scale: str) -> (str, int):
     if ',' in units:
         units, multiplier = units.split(',', 2)
 
-    units_dcid = None
-    if units in UN_ENERGY_UNITS:
-        units_dcid = UN_ENERGY_UNITS[units]
-
-    multiplier_num = 1
-    if multiplier is not None and multiplier in UN_ENERGY_UNITS_MULTIPLIER:
-        multiplier_num = UN_ENERGY_UNITS_MULTIPLIER[multiplier]
+    units_dcid = UN_ENERGY_UNITS.get(units)
+    multiplier_num = UN_ENERGY_UNITS_MULTIPLIER.get(multiplier, 1)
     return (units_dcid, multiplier_num)
