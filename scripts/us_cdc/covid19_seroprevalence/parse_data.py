@@ -127,14 +127,14 @@ def get_cleaned_dates_period(date_range):
     cleaned_start_date, cleaned_end_date = (datetime(
         start_year, start_month,
         start_day)).date(), (datetime(end_year, end_month, end_day)).date()
-    # Calculate the data collection period by finding the difference in days
+    # Calculate the observation period by finding the difference in days
     # between the end date and the start date
     period = (cleaned_end_date - cleaned_start_date).days
     # If the period is equal to 0 (means the start date and end date are the same),
     # set the period to be 1 day.
     if period == 0:
         period = 1
-    # Return the cleaned end date and correctly-formatted period of data collection
+    # Return the cleaned end date and correctly-formatted period of observation
     return cleaned_end_date, "P" + str(period) + "D"
 
 
@@ -164,9 +164,9 @@ def clean_data(file_path, out_path):
     # Map the location abbreviations to their dcids
     data["Site"] = data["Site"].map(LOCATION_DCID_MAP)
     # Get the cleaned end date using the date cleaning function
-    data["End Date"] = data["Date Range of Specimen Collection"].apply(
+    data["End_Date"] = data["Date Range of Specimen Collection"].apply(
         lambda x: get_cleaned_dates_period(x)[0])
-    # Get the data collection period using the date cleaning function
+    # Get the observation period using the date cleaning function
     data["Period"] = data["Date Range of Specimen Collection"].apply(
         lambda x: get_cleaned_dates_period(x)[1])
     # Drop columns that are not needed
@@ -191,7 +191,7 @@ def clean_data(file_path, out_path):
         "LC_Percent_Female", "UC_Percent_Female", "Count_Cumulative",
         "Percent_Cumulative", "LC_Percent_Cumulative", "UC_Percent_Cumulative",
         "Count_Cumulative_Infections", "LC_Count_Cumulative_Infections",
-        "UC_Count_Cumulative_Infections", "End Date", "Period"
+        "UC_Count_Cumulative_Infections", "End_Date", "Period"
     ]
     # Convert the columns with counts from floats to integers
     data["Count_Cumulative_Infections"] = data[
