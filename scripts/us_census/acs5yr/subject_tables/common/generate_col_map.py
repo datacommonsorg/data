@@ -23,8 +23,18 @@ def generate_stat_var_map(spec_dict: dict, column_list: list) -> dict:
 
   Returns:
     A dict mapping each column to their respective stat_var node definitions.
+    Example output: {
+      "Total Civilian population": {
+        "populationType": "Person",
+        "statType": "measuredValue",
+        "measuredProperty": "Count Person"
+        "armedForceStatus": "Civilian"
+      },
+      "<column-name-2>": {}, .....
+    }
   """
-    col_map_obj = GenerateColMapBase(spec_dict=spec_dict, column_list=column_list)
+    col_map_obj = GenerateColMapBase(spec_dict=spec_dict,
+                                     column_list=column_list)
     return col_map_obj._generate_stat_vars_from_spec()
 
 
@@ -37,15 +47,31 @@ class GenerateColMapBase:
     delimiter: The delimiting string that is used for tokenising the column name
   """
 
-    def __init__(self, spec_dict=None, column_list=None, delimiter='!!'):
-        """module init """
+    def __init__(self, spec_dict={}, column_list=[], delimiter='!!'):
+        """module init"""
         self.features = spec_dict
         self.column_list = column_list
         self.column_map = {}
         self.delimiter = delimiter
+    
+    def _update_stat_var_dict(self, stat_var, part_list):
+      """changes certain properties of the stat_var dict based on column name"""
+      # if Margin of Error columns are present change the statType
+      if 'Margin of Error' in part_list:
+        stat_var['statType'] = 'marginOfError'  
+      return stat_var
 
     def _generate_stat_vars_from_spec(self):
-        """generates stat_var nodes for each column in column list and returns a dictionary of columns with their respective stat_var nodes"""
+        """generates stat_var nodes for each column in column list and returns a dictionary of columns with their respective stat_var nodes
+        Example output: {
+      "Total Civilian population": {
+        "populationType": "Person",
+        "statType": "measuredValue",
+        "measuredProperty": "Count Person"
+        "armedForceStatus": "Civilian"
+      },
+      "<column-name-2>": {}, .....
+    }"""
         # for each column generate the definition of their respective statistical variable node
         for col in self.column_list:
             if 'ignoreColumns' in self.features and col not in self.features[
@@ -81,12 +107,13 @@ class GenerateColMapBase:
                     measurement_assigned = True
 
         # set the default statVar definition
-        if not measurement_assigned and 'measurement' in self.features and '_DEFAULT' in self.features['measurement']:
+        if not measurement_assigned and 'measurement' in self.features and '_DEFAULT' in self.features[
+                'measurement']:
             stat_var.update(self.features['measurement']['_DEFAULT'])
 
         # set the populationType attribute
         if 'populationType' not in stat_var:
-          stat_var['populationType'] = self._get_population_type(part_list)
+            stat_var['populationType'] = self._get_population_type(part_list)
 
         # associate pvs to stat_var
         if 'pvs' in self.features:
@@ -96,23 +123,22 @@ class GenerateColMapBase:
                     ## check if the current key of dict matches with any substring from the tokens of a column name
                     for part in part_list:
                         # check if column substring matches with a column token
-                        if c == part:
+                        # the check is done by ignoring the case
+                        if c.lower() in part.lower():
                             stat_var[p] = v
                             # add inferred properties from property 'p' to the stat_var
-                            if 'inferredSpec' in self.features and p in self.features['inferredSpec']:
-                                  stat_var.update(self.features['inferredSpec'][p])
+                            if 'inferredSpec' in self.features and p in self.features[
+                                    'inferredSpec']:
+                                stat_var.update(
+                                    self.features['inferredSpec'][p])
 
-
-      
         #TODO: If quantityRanges occurs as values in multiple properties, find the property that relates to the column
-        #Suggestion from Prashnath: using _DISAMBIGUATING_POP_TYPE for pvs (income and earnings -- in the test) 
+        #Suggestion from Prashanth: using _DISAMBIGUATING_POP_TYPE for pvs (income and earnings -- in the test)
 
         #TODO: Add units and scalingFactor
-
+        
         # if the column is Margin of Error, update statType key
-        if 'Margin of Error' in part_list:
-            stat_var['statType'] = 'marginOfError'
-
+        stat_var = self._update_stat_var_dict(stat_var, part_list)
         ## add Universe PVs based on the populationType of StatVar
         dependent_properties = None
         if 'universePVs' in self.features:
@@ -130,12 +156,14 @@ class GenerateColMapBase:
 
     def _get_population_type(self, part_list):
         """From tokenized column name, find the most relevant populationType from the JSON Spec """
-        if 'populationType' in self.features:
+        # if 'populationType' in self.features:
+        try:
             for part in part_list:
                 for k, v in self.features['populationType'].items():
                     if k in part:
                         return self.features['populationType'][k]
-            # If populationType not in column name, take the default from the spec
+        # If populationType not in column name, take the default from the spec
+        except:
             return self.features['populationType']['_DEFAULT']
         else:
             ## The default populationType if populationType is not specified in the spec, is Person.
