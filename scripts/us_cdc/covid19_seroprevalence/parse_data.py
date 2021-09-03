@@ -162,7 +162,7 @@ def clean_data(file_path, out_path):
     """
     data = pd.read_csv(file_path)
     # Map the location abbreviations to their dcids
-    data["Site"] = data["Site"].map(LOCATION_DCID_MAP)
+    data["Site"] = "dcid:" + data["Site"].map(LOCATION_DCID_MAP)
     # Get the cleaned end date using the date cleaning function
     data["End_Date"] = data["Date Range of Specimen Collection"].apply(
         lambda x: get_cleaned_dates_period(x)[0])
