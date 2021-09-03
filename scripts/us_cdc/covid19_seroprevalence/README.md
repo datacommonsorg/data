@@ -63,8 +63,12 @@ The expected output of this test can be found in the [`test_data`](https://githu
 
 #### Data Processing Steps
 
+`@input_file_name` - path to the input csv file to be cleaned
+
+`@output_file_name` - path to write the cleaned csv file
+
 To clean the data, run `parse_data.py`:
 
 ```bash
-$ python3 parse_data.py
+$ python3 parse_data.py input_file_name output_file_name
 ```
