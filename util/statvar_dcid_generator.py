@@ -26,7 +26,7 @@ _QUANTITY_RANGE_REGEX = (r"\[(?P<lower_limit>-|-?\d+(\.\d+)?) "
 # statType is meanValue or medianValue"
 _stat_type_lookup = {"meanValue": "Mean", "medianValue": "Median"}
 
-# These properties are ignored during dcid generation
+# These are the default properties ignored during dcid generation
 _ignore_props = {"unit", "Node", "memberOf", "typeOf"}
 
 
