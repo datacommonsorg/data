@@ -53,13 +53,13 @@ class GenerateColMapBase:
         self.column_list = column_list
         self.column_map = {}
         self.delimiter = delimiter
-    
+
     def _update_stat_var_dict(self, stat_var, part_list):
-      """changes certain properties of the stat_var dict based on column name"""
-      # if Margin of Error columns are present change the statType
-      if 'Margin of Error' in part_list:
-        stat_var['statType'] = 'marginOfError'  
-      return stat_var
+        """changes certain properties of the stat_var dict based on column name"""
+        # if Margin of Error columns are present change the statType
+        if 'Margin of Error' in part_list:
+            stat_var['statType'] = 'marginOfError'
+        return stat_var
 
     def _generate_stat_vars_from_spec(self):
         """generates stat_var nodes for each column in column list and returns a dictionary of columns with their respective stat_var nodes
@@ -133,10 +133,10 @@ class GenerateColMapBase:
                                     self.features['inferredSpec'][p])
 
         #TODO: If quantityRanges occurs as values in multiple properties, find the property that relates to the column
-        #Suggestion from Prashanth: using _DISAMBIGUATING_POP_TYPE for pvs (income and earnings -- in the test)
+        #Suggestion: using _DISAMBIGUATING_POP_TYPE for pvs (income and earnings -- in the test)
 
         #TODO: Add units and scalingFactor
-        
+
         # if the column is Margin of Error, update statType key
         stat_var = self._update_stat_var_dict(stat_var, part_list)
         ## add Universe PVs based on the populationType of StatVar
@@ -147,6 +147,7 @@ class GenerateColMapBase:
                     # check if all constraints of this populationType is in stat_var
                     if (set(elem['constraintProperties']).issubset(
                             set(list(stat_var.keys())))):
+                        #TODO: add dependent PVs to the stat_var dict if it is not present
                         dependent_properties = list(elem['dependentPVs'].keys())
 
         # generating dcid using the utils/statvar_dcid_generator.py
