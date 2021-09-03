@@ -53,7 +53,7 @@ These data were collected and provided by the [National Center for Immunization 
 
 ##### Test Data Cleaning Script
 
-To test the data cleaning script, run:
+To test the data cleaning script, run `parse_data_test.py`:
 
 ```bash
 $ python3 parse_data_test.py
