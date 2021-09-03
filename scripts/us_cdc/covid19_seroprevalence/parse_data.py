@@ -84,6 +84,88 @@ LOCATION_DCID_MAP = {
     'US': 'country/USA'
 }
 
+# Mapping of column names in the dataset to StatVar names
+COLUMN_MAP = {
+    'n [0-17 Years Prevalence]':
+        'Count_Years0To17_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Rate (%) [0-17 Years Prevalence]':
+        'Percent_Years0To17_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Lower CI [0-17 Years Prevalence]':
+        'LowerConfidenceIntervalLimit_Percent_Years0To17_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Upper CI [0-17 Years Prevalence]':
+        'UpperConfidenceIntervalLimit_Percent_Years0To17_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'n [18-49 Years Prevalence]':
+        'Count_Years18To49_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Rate (%) [18-49 Years Prevalence]':
+        'Percent_Years18To49_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Lower CI [18-49 Years Prevalence]':
+        'LowerConfidenceIntervalLimit_Percent_Years18To49_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Upper CI [18-49 Years Prevalence]':
+        'UpperConfidenceIntervalLimit_Percent_Years18To49_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'n [50-64 Years Prevalence]':
+        'Count_Years50To64_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Rate (%) [50-64 Years Prevalence]':
+        'Percent_Years50To64_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Lower CI [50-64 Years Prevalence]':
+        'LowerConfidenceIntervalLimit_Percent_Years50To64_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Upper CI [50-64 Years Prevalence]':
+        'UpperConfidenceIntervalLimit_Percent_Years50To64_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'n [65+ Years Prevalence]':
+        'Count_65OrMoreYears_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Rate (%) [65+ Years Prevalence]':
+        'Percent_65OrMoreYears_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Lower CI [65+ Years Prevalence]':
+        'LowerConfidenceIntervalLimit_Percent_65OrMoreYears_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Upper CI [65+ Years Prevalence]':
+        'UpperConfidenceIntervalLimit_Percent_65OrMoreYears_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'n [Male Prevalence]':
+        'Count_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Rate (%) [Male Prevalence]':
+        'Percent_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Lower CI [Male Prevalence]':
+        'LowerConfidenceIntervalLimit_Percent_Male_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Upper CI [Male Prevalence]':
+        'UpperConfidenceIntervalLimit_Percent_Male_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'n [Female Prevalence]':
+        'Count_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Rate (%) [Female Prevalence]':
+        'Percent_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Lower CI [Female Prevalence]':
+        'LowerConfidenceIntervalLimit_Percent_Female_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Upper CI [Female Prevalence]':
+        'UpperConfidenceIntervalLimit_Percent_Female_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'n [Cumulative Prevalence]':
+        'CumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Rate (%) [Cumulative Prevalence]':
+        'CumulativePercent_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Lower CI [Cumulative Prevalence]':
+        'LowerConfidenceIntervalLimit_CumulativePercent_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Upper CI [Cumulative Prevalence]':
+        'UpperConfidenceIntervalLimit_CumulativePercent_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Estimated cumulative infections count':
+        'EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Estimated cumulative infections lower CI 7':
+        'LowerConfidenceIntervalLimit_EstimatedCumulativeCount_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence',
+    'Estimated cumulative infections upper CI 7':
+        'UpperConfidenceIntervalLimit_EstimatedCumulativeCount_'\
+        +'MedicalConditionIncident_COVID_19_Seroprevalence'
+}
+
 
 def get_cleaned_dates_period(date_range):
     """
@@ -180,47 +262,34 @@ def clean_data(file_path, out_path):
         "All age-sex strata had at least one positive", "Site Large CI Flag"
     ],
                      axis=1)
-    # Rename the columns that are needed with shorter names
-    data.columns = [
-        "Site", "Count_0_17", "Percent_0_17", "LC_Percent_0_17",
-        "UC_Percent_0_17", "Count_18_49", "Percent_18_49", "LC_Percent_18_49",
-        "UC_Percent_18_49", "Count_50_64", "Percent_50_64", "LC_Percent_50_64",
-        "UC_Percent_50_64", "Count_65", "Percent_65", "LC_Percent_65",
-        "UC_Percent_65", "Count_Male", "Percent_Male", "LC_Percent_Male",
-        "UC_Percent_Male", "Count_Female", "Percent_Female",
-        "LC_Percent_Female", "UC_Percent_Female", "Count_Cumulative",
-        "Percent_Cumulative", "LC_Percent_Cumulative", "UC_Percent_Cumulative",
-        "Count_Cumulative_Infections", "LC_Count_Cumulative_Infections",
-        "UC_Count_Cumulative_Infections", "End_Date", "Period"
-    ]
+    # Rename the columns that are needed with StatVar names
+    data.rename(columns=COLUMN_MAP, inplace=True)
     # Convert the columns with counts from floats to integers
-    data["Count_Cumulative_Infections"] = data[
-        "Count_Cumulative_Infections"].astype("Int64")
-    data["LC_Count_Cumulative_Infections"] = data[
-        "LC_Count_Cumulative_Infections"].astype("Int64")
-    data["UC_Count_Cumulative_Infections"] = data[
-        "UC_Count_Cumulative_Infections"].astype("Int64")
-    # Create a list of all the columns with measured percents
-    percent_cols = [
-        "Percent_0_17", "Percent_18_49", "Percent_50_64", "Percent_65",
-        "Percent_Male", "Percent_Female", "Percent_Cumulative"
-    ]
+    data["EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence"] = data[
+        "EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence"].astype(
+            "Int64")
+    data["LowerConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
+    +"COVID_19_Seroprevalence"] = data[
+        "LowerConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
+        +"COVID_19_Seroprevalence"].astype("Int64")
+    data["UpperConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
+    +"COVID_19_Seroprevalence"] = data[
+        "UpperConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
+        +"COVID_19_Seroprevalence"].astype("Int64")
     # For each column that has measured percent values, remove all values
     # that equal to 666 or 777. 666 or 777 means that there is no specimen was
     # collected or there was a small cell size.
-    for col in percent_cols:
-        data[col] = data[col].apply(clean_col_values)
-    # Create a list of all the columns with NaN string values
-    na_cols = [
-        "LC_Percent_0_17", "UC_Percent_0_17", "LC_Percent_18_49",
-        "UC_Percent_18_49", "LC_Percent_50_64", "UC_Percent_50_64",
-        "LC_Percent_65", "UC_Percent_65", "LC_Percent_Male", "UC_Percent_Male",
-        "LC_Percent_Female", "UC_Percent_Female", "LC_Percent_Cumulative",
-        "UC_Percent_Cumulative"
-    ]
+    for col in data.columns:
+        if "Percent" in col and "ConfidenceIntervalLimit" not in col:
+            data[col] = data[col].apply(clean_col_values)
     # Replace NaN values with blank strings
-    for col in na_cols:
-        data[col] = data[col].fillna("")
+    for col in data.columns:
+        if "ConfidenceIntervalLimit" in col and "EstimatedCumulativeCount" not in col:
+            data[col] = data[col].fillna("")
+    data = pd.melt(data,
+                   id_vars=data.columns[[0, 32, 33]],
+                   value_vars=data.columns[1:31],
+                   var_name='StatVar')
     # Output the cleaned csv
     data.to_csv(out_path, index=False)
 

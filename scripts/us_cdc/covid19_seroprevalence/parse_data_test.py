@@ -22,7 +22,7 @@ python3 parse_data_test.py input_file output_file
 
 import unittest
 import os
-from covid19_seroprevalence.parse_data import clean_data
+from parse_data import clean_data
 
 TEST_CASE_FILES = [
     # Input CSV and expected CSV files.
