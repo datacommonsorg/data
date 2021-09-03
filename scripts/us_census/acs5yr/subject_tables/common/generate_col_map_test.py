@@ -53,8 +53,8 @@ class GenerateColMapTest(unittest.TestCase):
             spec_path, column_file, expected_out)
         #generate column map for s2702 table
         generated_map = generate_stat_var_map(spec_dict, column_list)
-
         #validate
+        #TODO: assertion fails since the order changes -- needs to be reviewed
         self.assertEqual(expected_map, generated_map)
 
 

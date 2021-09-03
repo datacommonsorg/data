@@ -168,18 +168,16 @@ class GenerateColMapBase:
                                 f"For column: {column} | Property {p} has an existing value {stat_var[p]} which is modified to value {p}"
                             )
                         stat_var[p] = v
-
         # If quantityRanges occurs as values in multiple properties, we pick the related property based on
         # populationType using _DISAMBIGUATING_POP_TYPE for pvs. Example: In
         # subject table S2702,  income (for Households) and earnings(for Person)
         # appears based on the values and needs to be disambiguated.
-        for k, v in _DISAMBIGUATING_POP_TYPE.items():
-            try:
-                if not _DISAMBIGUATING_POP_TYPE[k] in stat_var['populationType']:
-                    del stat_var[
-                        k]  #remove property that does not match with the mapping
-            except:  #found no pvs that need to be disambiguated
-                continue
+        # TODO: Fix this logic for Margin Of Error where this part did not work
+        for k in stat_var:
+            if k in _DISAMBIGUATING_POP_TYPE:
+                if stat_var['populationType'] != _DISAMBIGUATING_POP_TYPE[k]:
+                    del stat_var[k]
+                    break
 
         ## add Universe PVs based on the populationType of StatVar
         dependent_properties = None
@@ -202,6 +200,7 @@ class GenerateColMapBase:
         # generating dcid using the utils/statvar_dcid_generator.py
         stat_var['Node'] = 'dcid:' + get_stat_var_dcid(
             stat_var, ignore_props=dependent_properties)
+
         #prefix the values if they are not QuantityRanges with dcs:
         stat_var = self._format_stat_var_node(stat_var)
 
@@ -229,10 +228,12 @@ class GenerateColMapBase:
       """
         # iterate over the column_names, since the column_names are descriptive in
         # the census tables
+        # TODO: Improve this implementation
         for column_name in self.column_map:
             for k, v in self.features['enumSpecializations']:
                 if k in column_name and v in column_name:
-                    del self.column_map[v]
+                    del self.column_map[column_name]
+                    break
 
     def _isvalid_stat_var(self, stat_var):
         """method validates if stat_var has mandatory properties, specified in _MANDATORY_PROPS"""
