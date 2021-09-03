@@ -2,6 +2,7 @@
 
 	"populationType": {
 		"_DEFAULT": "Person",
+		"household": "Household",
 		"HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)": "Household"
 	},
 	"measurement": {
@@ -153,20 +154,20 @@
 			"Production, transportation, and material moving occupations": "ProductionOrTransportationOrMaterialMovingOccupations"
 		},
 		"earnings": {
-			"$1 to $4,999 or loss": "[- 4999 USDollar]",
-			"$5,000 to $14,999": "[5000 14999 USDollar]",
-			"$15,000 to $24,999": "[15000 24999 USDollar]",
-			"$25,000 to $34,999": "[25000 34999 USDollar]",
-			"$35,000 to $49,999": "[35000 49999 USDollar]",
-			"$50,000 to $74,999": "[50000 74999 USDollar]",
-			"$75,000 or more": "[75000 - USDollar]"
+			"$1 to $4999 or loss": "[- 4999 USDollar]",
+			"$5000 to $14999": "[5000 14999 USDollar]",
+			"$15000 to $24999": "[15000 24999 USDollar]",
+			"$25000 to $34999": "[25000 34999 USDollar]",
+			"$35000 to $49999": "[35000 49999 USDollar]",
+			"$50000 to $74999": "[50000 74999 USDollar]",
+			"$75000 or more": "[75000 - USDollar]"
 		},
 		"income": {
-			"Under $25,000": "[- 25000 USDollar]",
-			"$25,000 to $49,999": "[25000 49999 USDollar]",
-			"$50,000 to $74,999": "[50000 74999 USDollar]",
-			"$75,000 to $99,999": "[75000 99999 USDollar]",
-			"$100,000 and over": "[100000 - USDollar]"
+			"Under $25000": "[- 25000 USDollar]",
+			"$25000 to $49999": "[25000 49999 USDollar]",
+			"$50000 to $74999": "[50000 74999 USDollar]",
+			"$75000 to $99999": "[75000 99999 USDollar]",
+			"$100000 and over": "[100000 - USDollar]"
 		},
 		"ratioToPovertyLine": {
 			"Below 50 percent of the poverty level": "[- 0.5 RatioToPovertyLine]",
