@@ -22,8 +22,7 @@ The downloaded data is in .csv format.
 
 ### Overview
 The data imported in this effort is from the CDC's [Nationwide Commerical Laboratory Seroprevalence Survey](https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/commercial-lab-surveys.html), and is provided by
-the [National Center for Immunization and Respiratory Diseases (NCIRD), Division of Viral Diseases](https://www.cdc.gov/ncird/index.html). The dataset provides prevalence estimates of "the percentage of
-people who were previously infected with SARS-CoV-2, the virus that causes COVID-19 disease".
+the [National Center for Immunization and Respiratory Diseases (NCIRD), Division of Viral Diseases](https://www.cdc.gov/ncird/index.html). The dataset provides prevalence estimates of "the percentage of people who were previously infected with SARS-CoV-2, the virus that causes COVID-19 disease" for February 2020 to June 2021.
 
 ### Notes and Caveats
 
