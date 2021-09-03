@@ -2,10 +2,13 @@
 
 	"populationType": {
 		"_DEFAULT": "Person",
-		"household": "Household",
-		"HOUSEHOLD": "Household"
+		"HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)": "Household"
 	},
 	"measurement": {
+		"Margin of Error": {
+			"measuredProperty": "count",
+			"statType": "marginOfError"
+		},
 		"Median age (years)": {
 			"measuredProperty": "age",
 			"statType": "medianValue",
@@ -64,10 +67,14 @@
 			"White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino"
 		},
 		"citizenship": {
-			"Native born": "NativeBorn",
-			"Foreign born": "ForeignBorn",
+			"Native born": "USCitizenBornInTheUnitedStates",
 			"Naturalized": "USCitizenByNaturalization",
 			"Not a citizen": "NotAUSCitizen"
+		},
+		"nativity": {
+			"Native born": "USC_Native",
+			"Naturalized": "USC_ForeignBorn",
+			"Not a citizen": "USC_ForeignBorn"
 		},
 		"disabilityStatus": {
 			"With a disability": "WithDisability",
@@ -192,7 +199,11 @@
 		"Same county": "Different House in the U.S.",
 		"Different county": "Different House in the U.S.",
 		"Same state": "Different county",
-		"Different state": "Different county"
+		"Different state": "Different county",
+        	"Naturalized": "Foreign born",
+                "Not a citizen": "Foreign born",
+                "Employee of private company workers": "Private for-profit wage and salary workers",
+                "Self-employed in own incorporated business workers": "Private for-profit wage and salary workers"
 	},
 	"inferredSpec": {
 		"educationalAttainment": {
