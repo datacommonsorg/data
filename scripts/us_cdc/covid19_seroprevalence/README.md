@@ -61,7 +61,7 @@ $ python3 parse_data_test.py
 
 The expected output of this test can be found in the [`test_data`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/covid19_seroprevalence/test_data/) directory.
 
-#### Data Download and Processing Steps
+#### Data Processing Steps
 
 To clean the data, run `parse_data.py`:
 
