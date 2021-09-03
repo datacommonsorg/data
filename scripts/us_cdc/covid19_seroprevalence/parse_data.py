@@ -87,82 +87,82 @@ LOCATION_DCID_MAP = {
 # Mapping of column names in the dataset to StatVar names
 COLUMN_MAP = {
     'n [0-17 Years Prevalence]':
-        'Count_Years0To17_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Count_Years0To17_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [0-17 Years Prevalence]':
-        'Percent_Years0To17_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Percent_Years0To17_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [0-17 Years Prevalence]':
-        'LowerConfidenceIntervalLimit_Percent_Years0To17_'\
+        'dcs:LowerConfidenceIntervalLimit_Percent_Years0To17_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [0-17 Years Prevalence]':
-        'UpperConfidenceIntervalLimit_Percent_Years0To17_'\
+        'dcs:UpperConfidenceIntervalLimit_Percent_Years0To17_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [18-49 Years Prevalence]':
-        'Count_Years18To49_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Count_Years18To49_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [18-49 Years Prevalence]':
-        'Percent_Years18To49_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Percent_Years18To49_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [18-49 Years Prevalence]':
-        'LowerConfidenceIntervalLimit_Percent_Years18To49_'\
+        'dcs:LowerConfidenceIntervalLimit_Percent_Years18To49_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [18-49 Years Prevalence]':
-        'UpperConfidenceIntervalLimit_Percent_Years18To49_'\
+        'dcs:UpperConfidenceIntervalLimit_Percent_Years18To49_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [50-64 Years Prevalence]':
-        'Count_Years50To64_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Count_Years50To64_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [50-64 Years Prevalence]':
-        'Percent_Years50To64_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Percent_Years50To64_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [50-64 Years Prevalence]':
-        'LowerConfidenceIntervalLimit_Percent_Years50To64_'\
+        'dcs:LowerConfidenceIntervalLimit_Percent_Years50To64_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [50-64 Years Prevalence]':
-        'UpperConfidenceIntervalLimit_Percent_Years50To64_'\
+        'dcs:UpperConfidenceIntervalLimit_Percent_Years50To64_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [65+ Years Prevalence]':
-        'Count_65OrMoreYears_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Count_65OrMoreYears_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [65+ Years Prevalence]':
-        'Percent_65OrMoreYears_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Percent_65OrMoreYears_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [65+ Years Prevalence]':
-        'LowerConfidenceIntervalLimit_Percent_65OrMoreYears_'\
+        'dcs:LowerConfidenceIntervalLimit_Percent_65OrMoreYears_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [65+ Years Prevalence]':
-        'UpperConfidenceIntervalLimit_Percent_65OrMoreYears_'\
+        'dcs:UpperConfidenceIntervalLimit_Percent_65OrMoreYears_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [Male Prevalence]':
-        'Count_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Count_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [Male Prevalence]':
-        'Percent_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Percent_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [Male Prevalence]':
-        'LowerConfidenceIntervalLimit_Percent_Male_'\
+        'dcs:LowerConfidenceIntervalLimit_Percent_Male_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [Male Prevalence]':
-        'UpperConfidenceIntervalLimit_Percent_Male_'\
+        'dcs:UpperConfidenceIntervalLimit_Percent_Male_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [Female Prevalence]':
-        'Count_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Count_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [Female Prevalence]':
-        'Percent_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:Percent_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [Female Prevalence]':
-        'LowerConfidenceIntervalLimit_Percent_Female_'\
+        'dcs:LowerConfidenceIntervalLimit_Percent_Female_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [Female Prevalence]':
-        'UpperConfidenceIntervalLimit_Percent_Female_'\
+        'dcs:UpperConfidenceIntervalLimit_Percent_Female_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [Cumulative Prevalence]':
-        'CumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:CumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [Cumulative Prevalence]':
-        'CumulativePercent_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:CumulativePercent_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [Cumulative Prevalence]':
-        'LowerConfidenceIntervalLimit_CumulativePercent_'\
+        'dcs:LowerConfidenceIntervalLimit_CumulativePercent_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [Cumulative Prevalence]':
-        'UpperConfidenceIntervalLimit_CumulativePercent_'\
+        'dcs:UpperConfidenceIntervalLimit_CumulativePercent_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Estimated cumulative infections count':
-        'EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'dcs:EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Estimated cumulative infections lower CI 7':
-        'LowerConfidenceIntervalLimit_EstimatedCumulativeCount_'\
+        'dcs:LowerConfidenceIntervalLimit_EstimatedCumulativeCount_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Estimated cumulative infections upper CI 7':
-        'UpperConfidenceIntervalLimit_EstimatedCumulativeCount_'\
+        'dcs:UpperConfidenceIntervalLimit_EstimatedCumulativeCount_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence'
 }
 
@@ -265,16 +265,16 @@ def clean_data(file_path, out_path):
     # Rename the columns that are needed with StatVar names
     data.rename(columns=COLUMN_MAP, inplace=True)
     # Convert the columns with counts from floats to integers
-    data["EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence"] = data[
-        "EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence"].astype(
+    data["dcs:EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence"] = data[
+        "dcs:EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_Seroprevalence"].astype(
             "Int64")
-    data["LowerConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
+    data["dcs:LowerConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
     +"COVID_19_Seroprevalence"] = data[
-        "LowerConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
+        "dcs:LowerConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
         +"COVID_19_Seroprevalence"].astype("Int64")
-    data["UpperConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
+    data["dcs:UpperConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
     +"COVID_19_Seroprevalence"] = data[
-        "UpperConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
+        "dcs:UpperConfidenceIntervalLimit_EstimatedCumulativeCount_MedicalConditionIncident_"\
         +"COVID_19_Seroprevalence"].astype("Int64")
     # For each column that has measured percent values, remove all values
     # that equal to 666 or 777. 666 or 777 means that there is no specimen was
@@ -286,6 +286,7 @@ def clean_data(file_path, out_path):
     for col in data.columns:
         if "ConfidenceIntervalLimit" in col and "EstimatedCumulativeCount" not in col:
             data[col] = data[col].fillna("")
+    # Combine columns into single StatVar column
     data = pd.melt(data,
                    id_vars=data.columns[[0, 32, 33]],
                    value_vars=data.columns[1:31],
