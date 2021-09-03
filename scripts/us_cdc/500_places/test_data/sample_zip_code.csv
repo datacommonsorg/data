@@ -1,0 +1,10 @@
+Year,LocationName,DataSource,Category,Measure,Data_Value_Unit,Data_Value_Type,Data_Value,Data_Value_Footnote_Symbol,Data_Value_Footnote,Low_Confidence_Limit,High_Confidence_Limit,TotalPopulation,Geolocation,LocationID,CategoryID,MeasureId,DataValueTypeID,Short_Question_Text
+2018,01008,BRFSS,Unhealthy Behaviors,Obesity among adults aged >=18 years,%,Crude prevalence,29.8,,,28.4,31.1,1263,POINT (-72.95202996 42.18429555),01008,UNHBEH,OBESITY,CrdPrv,Obesity
+2018,01034,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Crude prevalence,3.1,,,2.7,3.5,2021,POINT (-73.014384 42.08994721),01034,HLTHOUT,STROKE,CrdPrv,Stroke
+2018,01035,BRFSS,Unhealthy Behaviors,Current smoking among adults aged >=18 years,%,Crude prevalence,13.6,,,11.0,16.2,5250,POINT (-72.56921312 42.35560086),01035,UNHBEH,CSMOKING,CrdPrv,Current Smoking
+2018,01069,BRFSS,Health Outcomes,Diagnosed diabetes among adults aged >=18 years,%,Crude prevalence,8.6,,,8.0,9.1,8469,POINT (-72.305378 42.1881815),01069,HLTHOUT,DIABETES,CrdPrv,Diabetes
+2018,01070,BRFSS,Prevention,Mammography use among women aged 50-74 years,%,Crude prevalence,81.8,,,77.8,85.2,629,POINT (-72.92387449 42.51846792),01070,PREVENT,MAMMOUSE,CrdPrv,Mammography
+2018,01094,BRFSS,Unhealthy Behaviors,Binge drinking among adults aged >=18 years,%,Crude prevalence,17.7,,,16.9,18.4,351,POINT (-72.1410545 42.35277567),01094,UNHBEH,BINGE,CrdPrv,Binge Drinking
+2018,01094,BRFSS,Health Outcomes,Diagnosed diabetes among adults aged >=18 years,%,Crude prevalence,10.2,,,9.1,11.2,351,POINT (-72.1410545 42.35277567),01094,HLTHOUT,DIABETES,CrdPrv,Diabetes
+2018,01244,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Crude prevalence,2.5,,,2.1,2.9,151,POINT (-73.26273144 42.11608719),01244,HLTHOUT,STROKE,CrdPrv,Stroke
+2018,01330,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Crude prevalence,2.7,,,2.3,3.1,1506,POINT (-72.81389418 42.51386047),01330,HLTHOUT,STROKE,CrdPrv,Stroke
