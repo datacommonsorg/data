@@ -38,8 +38,7 @@ sys.path.append(
 FLAGS = flags.FLAGS
 flags.DEFINE_string('download_data_dir', 'tmp_data_dir/un_energy',
                     'Data dir to download into')
-flags.DEFINE_list(
-    'datasets', [], 'Datasets to download. Everything, if empty.')
+flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
 flags.DEFINE_integer('start_year', 1990,
                      'Data set downloaded from the start year.')
 flags.DEFINE_integer('end_year',
