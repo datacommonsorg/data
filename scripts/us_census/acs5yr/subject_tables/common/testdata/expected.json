@@ -1,146 +1,162 @@
 {
 	"Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years": {
-		"measuredProperty": "count",
-		"statType": "measuredValue",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:measuredValue",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[- 19 Years]",
-		"dcid": "Count_Person_19OrLessYears_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:Count_Person_19OrLessYears_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years": {
-		"measuredProperty": "count",
-		"statType": "marginOfError",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:marginOfError",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[- 19 Years]",
-		"dcid": "MarginOfError_Count_Person_19OrLessYears_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:MarginOfError_Count_Person_19OrLessYears_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years": {
-		"measuredProperty": "count",
-		"statType": "measuredValue",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:measuredValue",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[- 6 Years]",
-		"dcid": "Count_Person_6OrLessYears_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:Count_Person_6OrLessYears_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years": {
-		"measuredProperty": "count",
-		"statType": "marginOfError",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:marginOfError",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[- 6 Years]",
-		"dcid": "MarginOfError_Count_Person_6OrLessYears_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:MarginOfError_Count_Person_6OrLessYears_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years": {
-		"measuredProperty": "count",
-		"statType": "measuredValue",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:measuredValue",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[6 18 Years]",
-		"dcid": "Count_Person_6To18Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:Count_Person_6To18Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years": {
-		"measuredProperty": "count",
-		"statType": "marginOfError",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcaid:count",
+		"statType": "dcid:marginOfError",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[6 18 Years]",
-		"dcid": "MarginOfError_Count_Person_6To18Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:MarginOfError_Count_Person_6To18Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years": {
-		"measuredProperty": "count",
-		"statType": "measuredValue",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:measuredValue",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[19 64 Years]",
-		"dcid": "Count_Person_19To64Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:Count_Person_19To64Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years": {
-		"measuredProperty": "count",
-		"statType": "marginOfError",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:marginOfError",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[19 64 Years]",
-		"dcid": "MarginOfError_Count_Person_19To64Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:MarginOfError_Count_Person_19To64Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years": {
-		"measuredProperty": "count",
-		"statType": "measuredValue",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:measuredValue",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[19 25 Years]",
-		"dcid": "Count_Person_19To25Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:Count_Person_19To25Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years": {
-		"measuredProperty": "count",
-		"statType": "marginOfError",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:marginOfError",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[19 25 Years]",
-		"dcid": "MarginOfError_Count_Person_19To25Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:MarginOfError_Count_Person_19To25Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years": {
-		"measuredProperty": "count",
-		"statType": "measuredValue",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:measuredValue",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[26 34 Years]",
-		"dcid": "Count_Person_26To34Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:Count_Person_26To34Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years": {
-		"measuredProperty": "count",
-		"statType": "marginOfError",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:marginOfError",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[26 34 Years]",
-		"dcid": "MarginOfError_Count_Person_26To34Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:MarginOfError_Count_Person_26To34Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years": {
-		"measuredProperty": "count",
-		"statType": "measuredValue",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:measuredValue",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[35 44 Years]",
-		"dcid": "Count_Person_35To44Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:Count_Person_35To44Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years": {
-		"measuredProperty": "count",
-		"statType": "marginOfError",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:marginOfError",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[35 44 Years]",
-		"dcid": "MarginOfError_Count_Person_35To44Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:MarginOfError_Count_Person_35To44Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Estimate!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years": {
-		"measuredProperty": "count",
-		"statType": "measuredValue",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:measuredValue",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[45 54 Years]",
-		"dcid": "Count_Person_45To54Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:Count_Person_45To54Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	},
 	"Margin of Error!!Total!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years": {
-		"measuredProperty": "count",
-		"statType": "marginOfError",
-		"populationType": "Person",
-		"armedForceStatus": "Civilian",
-		"institutionalization": "USC_NonInstitutionalized",
+		"measuredProperty": "dcid:count",
+		"statType": "dcid:marginOfError",
+		"populationType": "dcid:Person",
+		"armedForceStatus": "dcid:Civilian",
+		"institutionalization": "dcid:USC_NonInstitutionalized",
 		"age": "[45 54 Years]",
-		"dcid": "MarginOfError_Count_Person_45To54Years_Civilian_USC_NonInstitutionalized"
+		"Node": "dcid:MarginOfError_Count_Person_45To54Years_Civilian_USCNonInstitutionalized",
+		"typeOf": "dcs:StatisticalVariable"
 	}
 }
