@@ -45,7 +45,7 @@ def _capitalize_process_word(word):
     This function changes the case of the first character to upper case.
     Manual upper casing is preferred compared to the builtin function
     str.capitalize() because we want to change only the case of the first
-    character and ignores the case of other characters. After upper casing,
+    character and ignore the case of other characters. After upper casing,
     all namespaces and underscores are removed from the string.
 
     Args:
@@ -125,13 +125,13 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
     """Generates the dcid given a statistical variable.
 
     Args:
-        stat_var_dict: A dictionary with property: values of the statistical
+        stat_var_dict: A dictionary with property: value of the statistical
           variable as key-value pairs.
         ignore_props: A list of properties to ignore from stat_var_dict when
           generating the dcid. This list of ignore_props will be added to the
           default set of properties that are ignored. The ignore_props can be
-          used to account for dependent PVs to ignore when generating the dcid.
-          For example in the following statVar,
+          used to account for dependent properties to ignore when generating
+          the dcid. For example in the following statVar,
           {
             populationType: Person
             measuredProperty: count
@@ -143,10 +143,10 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
           since the healthInsurance property indicates they are Civilian and
           USC_NonInstitutionalized, ignore_props can be the list
           ['armedForceStatus', 'institutionalization']. During the dcid
-          generation process, these PVs will not be considered.
+          generation process, these properties will not be considered.
 
     Returns:
-        A string represting the dcid of the statistical variable.
+        A string representing the dcid of the statistical variable.
     """
 
     # TODO: Add support for naming boolean constraints
