@@ -51,14 +51,25 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         self.assertEqual(dcid, expected_dcid)
 
     def test_quantity_name_generation(self):
-        stat_var_dict = {
+        stat_var_dict1 = {
             'statType': 'dcs:measuredValue',
             'measuredProperty': 'count',
             'populationType': 'Person',
             'gender': 'Female',
             'age': '[20 Years]'
         }
-        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
+        expected_dcid = 'Count_Person_20Years_Female'
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict2 = {
+            'statType': 'dcs:measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Person',
+            'gender': 'Female',
+            'age': '[Years 20]'
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
         expected_dcid = 'Count_Person_20Years_Female'
         self.assertEqual(dcid, expected_dcid)
 
@@ -69,29 +80,59 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'populationType': 'HousingUnit',
             'numberOfRooms': '[9 - Rooms]',
         }
-        dcid1 = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
-        expected_dcid1 = 'Count_HousingUnit_9OrMoreRooms'
-        self.assertEqual(dcid1, expected_dcid1)
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
+        expected_dcid = 'Count_HousingUnit_9OrMoreRooms'
+        self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict2 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'HousingUnit',
+            'numberOfRooms': '[Rooms 9 -]',
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
+        expected_dcid = 'Count_HousingUnit_9OrMoreRooms'
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict3 = {
             'statType': 'measuredValue',
             'measuredProperty': 'count',
             'populationType': 'Household',
             'householdWorkerSize': '[- 3 Worker]',
         }
-        dcid2 = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
-        expected_dcid2 = 'Count_Household_3OrLessWorker'
-        self.assertEqual(dcid2, expected_dcid2)
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict3)
+        expected_dcid = 'Count_Household_3OrLessWorker'
+        self.assertEqual(dcid, expected_dcid)
 
-        stat_var_dict3 = {
+        stat_var_dict4 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Household',
+            'householdWorkerSize': '[Worker - 3]',
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict4)
+        expected_dcid = 'Count_Household_3OrLessWorker'
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict5 = {
             'statType': 'measuredValue',
             'measuredProperty': 'count',
             'populationType': 'Person',
             'income': '[10000 14999 USDollar]',
         }
-        dcid3 = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict3)
-        expected_dcid3 = 'Count_Person_10000To14999USDollar'
-        self.assertEqual(dcid3, expected_dcid3)
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict5)
+        expected_dcid = 'Count_Person_10000To14999USDollar'
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict6 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Person',
+            'income': '[USDollar 10000 14999]',
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict6)
+        expected_dcid = 'Count_Person_10000To14999USDollar'
+        self.assertEqual(dcid, expected_dcid)
 
     def test_sorted_constraints(self):
         stat_var_dict = {

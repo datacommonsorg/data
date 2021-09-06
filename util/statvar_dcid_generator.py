@@ -17,30 +17,29 @@ import copy
 import re
 
 # Global constants
-# A regex to match the quantity notation [value quantity]
-# Example match: [2 Person]
-_QUANTITY_REGEX = r'\[(?P<value>-|-?\d+(\.\d+)?) (?P<quantity>[A-Za-z_/\d]+)\]'
+# Regex to match the quantity notations - [value quantity], [quantity value]
+# Example matches: [2 Person], [Person 2]
+_QUANTITY_REGEX_1 = re.compile(
+    r'\[(?P<value>-|-?\d+(\.\d+)?) (?P<quantity>[A-Za-z_/\d]+)\]')
+_QUANTITY_REGEX_2 = re.compile(
+    r'\[(?P<quantity>[A-Za-z_/\d]+) (?P<value>-|-?\d+(\.\d+)?)\]')
 
-# A regex to match the quantity range notation
-# [lower_limit upper_limit quantity]
-# Example match: [10000 14999 USDollar]
-_QUANTITY_RANGE_REGEX = (r'\[(?P<lower_limit>-|-?\d+(\.\d+)?) '
-                         r'(?P<upper_limit>-|-?\d+(\.\d+)?) '
-                         r'(?P<quantity>[A-Za-z_/\d]+)\]')
-
-# Global variables
-# This is a lookup to ensure 'Mean' and 'Median' are used in the dcid when
-# statType is meanValue or medianValue. This lookup is used after running
-# capitalize_process_word on the value.
-_stat_type_lookup = {'MeanValue': 'Mean', 'MedianValue': 'Median'}
+# Regex to match the quantity range notations -
+# [lower_limit upper_limit quantity], [quantity lower_limit upper_limit]
+# Example matches: [10000 14999 USDollar], [USDollar 10000 14999]
+_QUANTITY_RANGE_REGEX_1 = re.compile(r'\[(?P<lower_limit>-|-?\d+(\.\d+)?) '
+                                     r'(?P<upper_limit>-|-?\d+(\.\d+)?) '
+                                     r'(?P<quantity>[A-Za-z_/\d]+)\]')
+_QUANTITY_RANGE_REGEX_2 = re.compile(r'\[(?P<quantity>[A-Za-z_/\d]+) '
+                                     r'(?P<lower_limit>-|-?\d+(\.\d+)?) '
+                                     r'(?P<upper_limit>-|-?\d+(\.\d+)?)\]')
 
 # These are the default properties ignored during dcid generation
-_default_ignore_props = [
-    'unit', 'Node', 'memberOf', 'typeOf', 'constraintProperties', 'name'
-]
+_DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
+                         'constraintProperties', 'name')
 
 
-def capitalize_process_word(word):
+def _capitalize_process_word(word):
     """Capitalizes, removes namespaces and removes underscores from a word.
 
     This function changes the case of the first character to upper case.
@@ -64,7 +63,7 @@ def capitalize_process_word(word):
     return None
 
 
-def generate_quantity_range_name(match_dict):
+def _generate_quantity_range_name(match_dict):
     """Generate a name for a quantity range.
 
     Args:
@@ -87,7 +86,7 @@ def generate_quantity_range_name(match_dict):
     except KeyError:
         return None
 
-    quantity = capitalize_process_word(quantity)
+    quantity = _capitalize_process_word(quantity)
     if upper_limit == '-':
         return f'{lower_limit}OrMore{quantity}'
 
@@ -97,7 +96,7 @@ def generate_quantity_range_name(match_dict):
     return f'{lower_limit}To{upper_limit}{quantity}'
 
 
-def generate_quantity_name(match_dict):
+def _generate_quantity_name(match_dict):
     """Generate a name for a quantity.
 
     Args:
@@ -118,7 +117,7 @@ def generate_quantity_name(match_dict):
     except KeyError:
         return None
 
-    quantity = capitalize_process_word(quantity)
+    quantity = _capitalize_process_word(quantity)
     return f'{value}{quantity}'
 
 
@@ -161,7 +160,7 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
     # Helper function to add a property to the dcid list.
     def add_prop_to_list(prop: str, svd: dict, dcid_list: list):
         if prop in svd:
-            token = capitalize_process_word(svd[prop])
+            token = _capitalize_process_word(svd[prop])
             if token is not None:
                 dcid_list.append(token)
             del svd[prop]
@@ -171,10 +170,10 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
     svd = copy.deepcopy(stat_var_dict)
 
     if ignore_props is None:
-        ig_p = _default_ignore_props
+        ig_p = _DEFAULT_IGNORE_PROPS
     else:
         ig_p = copy.deepcopy(ignore_props)
-        ig_p.extend(_default_ignore_props)
+        ig_p.extend(_DEFAULT_IGNORE_PROPS)
 
     for prop in ig_p:
         if prop in svd:
@@ -187,12 +186,10 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
     add_prop_to_list('measurementQualifier', svd, dcid_list)
 
     if ('statType' in svd) and (svd['statType'].find("measuredValue") == -1):
-        token = capitalize_process_word(svd['statType'])
-        if token in _stat_type_lookup:
-            dcid_list.append(_stat_type_lookup[token])
-            del svd['statType']
-        else:
-            add_prop_to_list('statType', svd, dcid_list)
+        token = svd['statType']
+        # Removing suffix 'Value' from statTypes
+        svd['statType'] = token[:token.find("Value")]
+        add_prop_to_list('statType', svd, dcid_list)
     else:
         del svd['statType']
 
@@ -201,17 +198,19 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
 
     constraint_props = sorted(svd.keys(), key=str.casefold)
     for prop in constraint_props:
-        match = re.match(_QUANTITY_RANGE_REGEX, svd[prop])
-        if match:
-            q_name = generate_quantity_range_name(match.groupdict())
+        match1 = _QUANTITY_RANGE_REGEX_1.match(svd[prop])
+        match2 = _QUANTITY_RANGE_REGEX_2.match(svd[prop])
+        if match1 or match2:
+            m_dict = match1.groupdict() if match1 else match2.groupdict()
+            q_name = _generate_quantity_range_name(m_dict)
             dcid_list.append(q_name)
-
         else:
-            match = re.match(_QUANTITY_REGEX, svd[prop])
-            if match:
-                q_name = generate_quantity_name(match.groupdict())
+            match1 = _QUANTITY_REGEX_1.match(svd[prop])
+            match2 = _QUANTITY_REGEX_2.match(svd[prop])
+            if match1 or match2:
+                m_dict = match1.groupdict() if match1 else match2.groupdict()
+                q_name = _generate_quantity_name(m_dict)
                 dcid_list.append(q_name)
-
             else:
                 add_prop_to_list(prop, svd, dcid_list)
 
