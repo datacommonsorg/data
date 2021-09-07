@@ -148,6 +148,30 @@ class TestStatVarDcidGenerator(unittest.TestCase):
                          '_AsianAlone')
         self.assertEqual(dcid, expected_dcid)
 
+    def test_stat_type(self):
+        stat_var_dict1 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:marginOfError',
+            'populationType': 'dcid:Person',
+            'ratioToPovertyLine': '[1 1.49 RatioToPovertyLine]',
+            'healthInsurance': 'dcid:NoHealthInsurance',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
+        expected_dcid = ('MarginOfError_Count_Person_NoHealthInsurance_'
+                         '1To1.49RatioToPovertyLine')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict2 = {
+            'measuredProperty': 'concentration',
+            'statType': 'meanValue',
+            'populationType': 'Atmosphere',
+            'pollutant': 'PM2.5'
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
+        expected_dcid = 'Mean_Concentration_Atmosphere_PM2.5'
+        self.assertEqual(dcid, expected_dcid)
+
     def test_measured_property(self):
         stat_var_dict = {
             'statType': 'meanValue',

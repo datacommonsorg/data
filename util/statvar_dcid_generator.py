@@ -188,11 +188,12 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
 
     if ('statType' in svd) and (svd['statType'].find("measuredValue") == -1):
         token = svd['statType']
-        # Removing suffix 'Value' from statTypes
-        svd['statType'] = token[:token.find("Value")]
+        if token.find("Value") != -1:  # Removing suffix 'Value' from statTypes
+            svd['statType'] = token[:token.find("Value")]
         add_prop_to_list('statType', svd, dcid_list)
     else:
-        del svd['statType']
+        if 'statType' in svd:
+            del svd['statType']
 
     add_prop_to_list('measuredProperty', svd, dcid_list)
     add_prop_to_list('populationType', svd, dcid_list)
