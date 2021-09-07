@@ -39,15 +39,19 @@ _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
                          'constraintProperties', 'name', 'description',
                          'descriptionUrl')
 
+# Regex to match prefixes to be removed from constraints
+_CONSTRAINT_PREFIX_REGEX = re.compile(r'(USC|CDC|DAD|BLS|NCES)')
+
 
 def _capitalize_process_word(word):
-    """Capitalizes, removes namespaces and removes underscores from a word.
+    """Capitalizes, removes namespaces, measurement constraint prefixes and
+    underscores from a word.
 
-    This function changes the case of the first character to upper case.
     Manual upper casing is preferred compared to the builtin function
     str.capitalize() because we want to change only the case of the first
-    character and ignore the case of other characters. After upper casing,
-    all namespaces and underscores are removed from the string.
+    character and ignore the case of other characters. Firstly, all namespaces
+    are removed from the string. Then, constraint prefixes and underscores
+    are removed. Lastly, the first character is upper cased.
 
     Args:
         word: A string literal to capitalize and process.
@@ -57,8 +61,16 @@ def _capitalize_process_word(word):
         Returns None if the string is empty.
     """
     if word:
+        # Removing namespaces
         word = word[word.find(':') + 1:]
+
+        # Removing constraint prefixes
+        word = _CONSTRAINT_PREFIX_REGEX.sub('', word)
+
+        # Removing all underscores
         word = word.replace('_', '')
+
+        # Upper casing the first character
         word = word[0].upper() + word[1:]
         return word
     return None
@@ -122,7 +134,7 @@ def _generate_quantity_name(match_dict):
     return f'{value}{quantity}'
 
 
-def get_stat_var_dcid(stat_var_dict, ignore_props=None):
+def get_stat_var_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     """Generates the dcid given a statistical variable.
 
     Args:
@@ -151,7 +163,6 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
     """
 
     # TODO: Add support for naming boolean constraints
-    # TODO: Stripping measurement properties (USC_) from constraints
     # TODO: Replacing NAICS industry codes with the NAICS names
     # TODO: Renaming cause of death properties
     # TODO: Renaming DEA drug names
@@ -164,7 +175,7 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
             token = _capitalize_process_word(svd[prop])
             if token is not None:
                 dcid_list.append(token)
-            del svd[prop]
+            svd.pop(prop, None)
 
     dcid_list = list()
     denominator_suffix = ''
@@ -177,27 +188,36 @@ def get_stat_var_dcid(stat_var_dict, ignore_props=None):
         ig_p.extend(_DEFAULT_IGNORE_PROPS)
 
     for prop in ig_p:
-        if prop in svd:
-            del svd[prop]
+        svd.pop(prop, None)
 
-    if 'measurementDenominator' in svd:
-        denominator_suffix = 'AsAFractionOf_' + svd['measurementDenominator']
-        del svd['measurementDenominator']
-
+    # measurementQualifier is added as a prefix
     add_prop_to_list('measurementQualifier', svd, dcid_list)
 
-    if ('statType' in svd) and (svd['statType'].find("measuredValue") == -1):
-        token = svd['statType']
-        if token.find("Value") != -1:  # Removing suffix 'Value' from statTypes
-            svd['statType'] = token[:token.find("Value")]
+    # Add statType if statType is not measuredValue
+    if ('statType' in svd) and (svd['statType'].find('measuredValue') == -1):
+        svd['statType'] = svd['statType'].replace('Value', '')
         add_prop_to_list('statType', svd, dcid_list)
-    else:
-        if 'statType' in svd:
-            del svd['statType']
+    svd.pop('statType', None)
 
+    # Adding measuredProperty and populationType
     add_prop_to_list('measuredProperty', svd, dcid_list)
     add_prop_to_list('populationType', svd, dcid_list)
 
+    # measurementDenominator is added as a suffix
+    if 'measurementDenominator' in svd:
+        md = svd['measurementDenominator']
+        # Special case: PerCapita is directly appended.
+        if md == 'PerCapita':
+            denominator_suffix = 'PerCapita'
+        # MD that are properties (camelCase) are added as Per(MD)
+        elif md[0].islower():
+            denominator_suffix = 'Per' + _capitalize_process_word(md)
+        # Everything else is AsAFractionOf
+        else:
+            denominator_suffix = 'AsAFractionOf_' + md
+        svd.pop('measurementDenominator', None)
+
+    # Adding constraint properties in alphabetical order
     constraint_props = sorted(svd.keys(), key=str.casefold)
     for prop in constraint_props:
         match1 = _QUANTITY_RANGE_REGEX_1.match(svd[prop])

@@ -47,7 +47,20 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'nativity': 'USC_Native',
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
-        expected_dcid = 'Median_Age_Person_USCNative'
+        expected_dcid = 'Median_Age_Person_Native'
+        self.assertEqual(dcid, expected_dcid)
+
+    def test_measurement_constraint_removal(self):
+        stat_var_dict = {
+            'typeOf': 'StatisticalVariable',
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Student',
+            'race': 'USC_AsianAlone',
+            'schoolGradeLevel': 'NCESThirdGrade',
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
+        expected_dcid = 'Count_Student_AsianAlone_ThirdGrade'
         self.assertEqual(dcid, expected_dcid)
 
     def test_quantity_name_generation(self):
@@ -196,7 +209,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         self.assertEqual(dcid, expected_dcid)
 
     def test_measurement_denominator(self):
-        stat_var_dict = {
+        stat_var_dict1 = {
             'statType': 'measuredValue',
             'measuredProperty': 'count',
             'populationType': 'Person',
@@ -204,9 +217,20 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'educationalAttainment': 'TertiaryEducation',
             'measurementDenominator': 'Count_Person_25To64Years'
         }
-        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict)
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
         expected_dcid = ('Count_Person_25To64Years_TertiaryEducation'
                          '_AsAFractionOf_Count_Person_25To64Years')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict2 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'amount',
+            'populationType': 'Consumption',
+            'consumedThing': 'Electricity',
+            'measurementDenominator': 'PerCapita'
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
+        expected_dcid = ('Amount_Consumption_Electricity_PerCapita')
         self.assertEqual(dcid, expected_dcid)
 
 
