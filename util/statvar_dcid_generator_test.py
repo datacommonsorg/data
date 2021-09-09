@@ -211,26 +211,37 @@ class TestStatVarDcidGenerator(unittest.TestCase):
     def test_measurement_denominator(self):
         stat_var_dict1 = {
             'statType': 'measuredValue',
+            'measuredProperty': 'amount',
+            'populationType': 'Consumption',
+            'consumedThing': 'Electricity',
+            'measurementDenominator': 'PerCapita'
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
+        expected_dcid = ('Amount_Consumption_Electricity_PerCapita')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict2 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Person',
+            'memberOf': 'Demographics',
+            'measurementDenominator': 'area'
+        }
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
+        expected_dcid = ('Count_Person_PerArea')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict3 = {
+            'statType': 'measuredValue',
             'measuredProperty': 'count',
             'populationType': 'Person',
             'age': '[25 64 Years]',
             'educationalAttainment': 'TertiaryEducation',
             'measurementDenominator': 'Count_Person_25To64Years'
         }
-        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict3)
         expected_dcid = ('Count_Person_25To64Years_TertiaryEducation'
                          '_AsAFractionOf_Count_Person_25To64Years')
-        self.assertEqual(dcid, expected_dcid)
-
-        stat_var_dict2 = {
-            'statType': 'measuredValue',
-            'measuredProperty': 'amount',
-            'populationType': 'Consumption',
-            'consumedThing': 'Electricity',
-            'measurementDenominator': 'PerCapita'
-        }
-        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
-        expected_dcid = ('Amount_Consumption_Electricity_PerCapita')
         self.assertEqual(dcid, expected_dcid)
 
 

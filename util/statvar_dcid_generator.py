@@ -37,10 +37,10 @@ _QUANTITY_RANGE_REGEX_2 = re.compile(r'\[(?P<quantity>[A-Za-z_/\d]+) '
 # These are the default properties ignored during dcid generation
 _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
                          'constraintProperties', 'name', 'description',
-                         'descriptionUrl')
+                         'descriptionUrl', 'label', 'url', 'alternateName')
 
 # Regex to match prefixes to be removed from constraints
-_CONSTRAINT_PREFIX_REGEX = re.compile(r'(USC|CDC|DAD|BLS|NCES)')
+_CONSTRAINT_PREFIX_REGEX = re.compile(r'^(USC|CDC|DAD|BLS|NCES|ACSED)')
 
 
 def _capitalize_process_word(word):
@@ -210,6 +210,7 @@ def get_stat_var_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
         if md == 'PerCapita':
             denominator_suffix = 'PerCapita'
         # MD that are properties (camelCase) are added as Per(MD)
+        # An example would be the property 'area' in Count_Person_PerArea
         elif md[0].islower():
             denominator_suffix = 'Per' + _capitalize_process_word(md)
         # Everything else is AsAFractionOf
