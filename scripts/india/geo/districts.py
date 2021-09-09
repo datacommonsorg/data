@@ -47,6 +47,10 @@ class IndiaDistrictsMapper:
         # Try match directly by name using LGD District Name
         df_districts = df_districts_by_state.loc[
             df_districts_by_state['LGDDistrictName'] == district_name]
+        # If the match results in exactly one row, then that is the
+        # matched district hence return.
+        # If it's 0, then there are no matches
+        # If it's more than one, then there are duplicate matches
         if len(df_districts.index) == 1:
             return list(df_districts["LGDDistrictCode"])[0]
 
