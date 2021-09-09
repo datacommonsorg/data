@@ -7,7 +7,7 @@ typeOf: dcs:Place
 lgdCode: C:IndiaPost->DistrictLGDCode1
 
 Node: E:IndiaPost->E2
-typeOf: dcs:PincodeArea
+typeOf: dcs:PinCodeArea
 name: C:IndiaPost->Pincode
 pinCode: C:IndiaPost->Pincode
 dcid: C:IndiaPost->PincodeDCID

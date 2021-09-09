@@ -24,11 +24,10 @@ In this set, we will have unique pincodes along with the districts they belong.
 
 - Pincode
 - PincodeDCID
-- District
 - StateName
 - DistrictLGDCode0
 - DistrictLGDCode1
-- DistrictLGDCode<N> - Can have N columns 
+- DistrictLGDCode<N> - Can have N columns. A Pincode area can overlap (they have some but not all points in common) one or more districts. Columns DistrictLGDCode0 to DistrictLGDCode<N> will have the `lgdCode` for these overlaps. 
 
 #### Template MCFs
 - [IndiaPost_Pincodes.tmcf](IndiaPost_Pincodes.tmcf).

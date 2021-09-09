@@ -1,4 +1,4 @@
-Node: dcid:PincodeArea
+Node: dcid:PinCodeArea
 typeOf: schema:Class
 subClassOf: schema:AdministrativeArea
 name: "PincodeArea"

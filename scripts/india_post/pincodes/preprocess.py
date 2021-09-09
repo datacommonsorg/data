@@ -25,12 +25,17 @@ from india.formatters import CodeFormatter
 from india.geo.districts import IndiaDistrictsMapper
 
 PINCODE_TMCF = """Node: E:IndiaPost->E{index}
-typeOf: dcs:PincodeArea
+typeOf: dcs:PinCodeArea
 name: C:IndiaPost->Pincode
 pinCode: C:IndiaPost->Pincode
 dcid: C:IndiaPost->PincodeDCID
 {district_overlaps}
 """
+
+# A PinCodeArea can overlap (they have some but not all points in common)
+# one or more districts. We use geoOverlaps to map it.
+# We do that by creating as many District template-nodes
+# as the max number of overlapping districts currently possible
 
 GEO_OVERLAPS_TMCF = """geoOverlaps: E:IndiaPost->E{district_index}
 """

@@ -44,15 +44,15 @@ class IndiaDistrictsMapper:
         df_districts_by_state = self.districts_df.loc[
             self.districts_df['LGDStateCode'] == state_lgd_code]
 
-        # Try match directly by name
+        # Try match directly by name using LGD District Name
         df_districts = df_districts_by_state.loc[
             df_districts_by_state['LGDDistrictName'] == district_name]
         if len(df_districts.index) == 1:
             return list(df_districts["LGDDistrictCode"])[0]
 
-        # Try match using closestDistrictLabel
+        # Try match using districtLabel (WikiData District Name)
         df_districts = df_districts_by_state.loc[
-            df_districts_by_state['closestDistrictLabel'] == district_name]
+            df_districts_by_state['districtLabel'] == district_name]
         if len(df_districts.index) == 1:
             return list(df_districts["LGDDistrictCode"])[0]
 
