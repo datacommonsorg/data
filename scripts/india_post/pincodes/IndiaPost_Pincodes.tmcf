@@ -21,6 +21,7 @@ lgdCode: C:IndiaPost->DistrictLGDCode4
 Node: E:IndiaPost->E5
 typeOf: dcs:PincodeArea
 name: C:IndiaPost->Pincode
+pinCode: C:IndiaPost->Pincode
 dcid: C:IndiaPost->PincodeDCID
 geoOverlaps: E:IndiaPost->E0
 geoOverlaps: E:IndiaPost->E1

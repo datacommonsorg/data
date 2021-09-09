@@ -27,6 +27,7 @@ from india.geo.districts import IndiaDistrictsMapper
 PINCODE_TMCF = """Node: E:IndiaPost->E{index}
 typeOf: dcs:PincodeArea
 name: C:IndiaPost->Pincode
+pinCode: C:IndiaPost->Pincode
 dcid: C:IndiaPost->PincodeDCID
 {district_overlaps}
 """
@@ -56,7 +57,7 @@ class IndiaPostPincodesDataLoader:
             row["StateName"], row["District"])
 
     def _pincode_dcid(self, pincode):
-        return "pincode/{pincode}".format(pincode=pincode)
+        return "pinCode/{pincode}".format(pincode=pincode)
 
     def process(self):
         self.raw_df = pd.read_csv(self.pincode_csv, dtype=str)
