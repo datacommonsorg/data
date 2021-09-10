@@ -116,7 +116,8 @@ pip3 install -r requirements.txt
 ##### Testing
 
 Scripts should be accompanied with tests using the [`unittest`
-framework](https://docs.python.org/3/library/unittest.html).
+framework](https://docs.python.org/3/library/unittest.html), and named with
+an `_test` suffix.
 
 A common test pattern is to drive your main processing function through some
 sample input files (e.g., with a few rows of the real csv/xls/etc.) and
@@ -126,18 +127,24 @@ expected ones.  An example test following this pattern is
 
 **Note:**
 
-*   Please add a `__init__.py` file with your import scripts. This will allow
-    presubmit to run your tests automatically.
+*   Please add an `__init__.py` file with your import scripts to include a
+    package. This is necessary for `unittest` framework to automatically
+    discover and run the tests as part of presubmit.
 
 *   In the presence of `__init__.py`, you will need to adjust the way you
     import modules and run tests.
 
-    - Import modules in your test (like
-      [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8)).
+    - You will need to import modules in your test with a dotted prefix like
+      [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8).
 
-    - You cannot just run your test as `python3 foo_test.py`, instead run as:
+    - You cannot run your test as `python3 foo_test.py`, instead run as:
 
       `python3 -m unittest discover -v -s ../ -p "*_test.py"`
+
+      Its useful to create an alias to this command, like: `alias
+      dc-data-py-test='python3 -m unittest discover -v -s ../ -p
+      "*_test.py"'`
+
 
 ##### Guidelines
 
