@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Module to download and do light processing on import data."""
+# TODO(beets): Add tests
+
 import io
 import os
 import pandas as pd
@@ -127,9 +130,6 @@ class Downloader:
             all_facilities_df = all_facilities_df.append(df)
         all_facilities_df = all_facilities_df.join(
             oris_df.set_index(GHGRP_ID_COL), on=GHGRP_ID_COL, how='left')
-        all_facilities_df.to_csv(self._csv_path('crosswalk.csv'),
-                                 header=True,
-                                 index=None)
         return all_facilities_df
 
 
