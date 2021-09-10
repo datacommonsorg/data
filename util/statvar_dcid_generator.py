@@ -90,9 +90,11 @@ _NAICS_MAP = {
 }
 
 # Regex to match NAICS Codes. These codes could be a single code or a range
+# Example matches: 53-56, 44
 _NAICS_CODE_REGEX = re.compile(r'(\d+-\d+|\d+)')
 
 # Regex to extract the lower and upper ranges in a range of NAICS codes
+# Example matches: 53-56, 11-21
 _NAICS_RANGE_REGEX = re.compile(r'(?P<lower_limit>\d+)-(?P<upper_limit>\d+)')
 
 # Certain properties have text prepended, appended or replaced in the dcid to

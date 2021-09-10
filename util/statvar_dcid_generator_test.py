@@ -35,7 +35,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         ignore_props = ['age', 'incomeStatus']
         dcid = statvar_dcid_generator.get_stat_var_dcid(
             stat_var_dict, ignore_props=ignore_props)
-        expected_dcid = ('Median_Income_Person')
+        expected_dcid = 'Median_Income_Person'
         self.assertEqual(dcid, expected_dcid)
 
     def test_namespace_removal(self):
@@ -195,7 +195,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'naics': 'NAICS/23',
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict4)
-        expected_dcid = ('Count_Establishment_NAICSConstruction')
+        expected_dcid = 'Count_Establishment_NAICSConstruction'
         self.assertEqual(dcid, expected_dcid)
 
     def test_prepend_append_replace(self):
@@ -220,7 +220,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'languageSpokenAtHome': 'OnlyEnglish',
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
-        expected_dcid = ('Count_Person_OnlyEnglishSpokenAtHome')
+        expected_dcid = 'Count_Person_OnlyEnglishSpokenAtHome'
         self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict3 = {
@@ -230,7 +230,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'householderRelatedChildrenUnder18Years': '[1 2 Child]',
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict3)
-        expected_dcid = ('Count_Household_Householder1To2RelatedChildren')
+        expected_dcid = 'Count_Household_Householder1To2RelatedChildren'
         self.assertEqual(dcid, expected_dcid)
 
     def test_sorted_constraints(self):
@@ -304,7 +304,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'measurementDenominator': 'PerCapita'
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict1)
-        expected_dcid = ('Amount_Consumption_Electricity_PerCapita')
+        expected_dcid = 'Amount_Consumption_Electricity_PerCapita'
         self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict2 = {
@@ -315,7 +315,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'measurementDenominator': 'area'
         }
         dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
-        expected_dcid = ('Count_Person_PerArea')
+        expected_dcid = 'Count_Person_PerArea'
         self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict3 = {
