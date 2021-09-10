@@ -3,14 +3,18 @@
 import csv
 import os.path
 import pathlib
+import sys
 
 from absl import app
 from absl import flags
 
+sys.path.insert(1, '../../')
+from us_epa.util.crosswalk import Crosswalk
+
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
-    'epa_input_tables_path', 'data',
+    'epa_input_tables_path', 'tmp_data',
     'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
 )
 flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
@@ -37,7 +41,7 @@ _CLEAN_CSV_HDR = (_DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_CODE, _NAME,
                   _ADDRESS, _CIP, _NAICS, _LAT, _LNG)
 
 _OUT_FILE_PREFIX = 'us_epa_facility'
-_CROSSWALK_FILE = 'crosswalk.csv'
+_CROSSWALK_FILE = 'crosswalks.csv'
 
 
 def _gen_tmcf():
@@ -48,17 +52,6 @@ def _gen_tmcf():
     for p in _CLEAN_CSV_HDR:
         lines.append(f'{p}: C:FacilityTable->{p}')
     return '\n'.join(lines)
-
-
-# Returns a map from epaGhgrpFacilityId -> (epaFrsId, [eiaPlantCode1, ...])
-def _load_crosswalk_map(id_crosswalk_csv):
-    result = {}
-    with open(id_crosswalk_csv, 'r') as fp:
-        for row in csv.reader(fp):
-            # The isnumeric() is because there are "No Match" values.
-            result[row[0]] = (row[1],
-                              [x for x in row[2:] if x and x.isnumeric()])
-    return result
 
 
 def _v(table, row, col):
@@ -103,18 +96,6 @@ def _get_cip(table, row):
     return cip
 
 
-def _get_dcid(ghg_id, frs_id, pp_codes):
-    # Prefer pp_codes over frs_id over ghg_id
-    if pp_codes:
-        # pp_codes are ordered
-        return 'eia/pp/' + pp_codes[0]
-
-    if frs_id:
-        return _EPA_FRS_ID + '/' + frs_id
-
-    return _EPA_GHG_ID + '/' + ghg_id
-
-
 def _get_naics(table, row):
     column = 'NAICS_CODE' if table == 'V_GHG_INJECTION_FACILITIES' else 'PRIMARY_NAICS_CODE'
     naics = _v(table, row, column)
@@ -124,8 +105,7 @@ def _get_naics(table, row):
 
 
 def process(input_tables_path, output_path):
-    crosswalk_map = _load_crosswalk_map(
-        os.path.join(input_tables_path, _CROSSWALK_FILE))
+    crosswalk = Crosswalk(os.path.join(input_tables_path, _CROSSWALK_FILE))
     processed_ids = set()
     with open(os.path.join(output_path, _OUT_FILE_PREFIX + '.csv'), 'w') as wfp:
         # IMPORTANT: We want to escape double quote (\") if it is specified in the cell
@@ -146,22 +126,32 @@ def process(input_tables_path, output_path):
                     assert ghg_id
                     if ghg_id in processed_ids:
                         continue
-
                     processed_ids.add(ghg_id)
-                    frs_id = crosswalk_map.get(ghg_id, ('', []))[0]
-                    pp_codes = crosswalk_map.get(ghg_id, ('', []))[1]
 
                     out_row = {
-                        _DCID: _str(_get_dcid(ghg_id, frs_id, pp_codes)),
-                        _EPA_GHG_ID: _str(ghg_id),
-                        _EPA_FRS_ID: _str(frs_id),
-                        _EIA_PP_CODE: ', '.join([_str(v) for v in pp_codes]),
-                        _NAME: _str(_get_name(table, in_row)),
-                        _ADDRESS: _str(_get_address(table, in_row)),
-                        _CIP: ', '.join(_get_cip(table, in_row)),
-                        _NAICS: _get_naics(table, in_row),
-                        _LAT: _str(_v(table, in_row, 'LATITUDE')),
-                        _LNG: _str(_v(table, in_row, 'LONGITUDE')),
+                        _DCID:
+                            _str(crosswalk.get_dcid(ghg_id)),
+                        _EPA_GHG_ID:
+                            _str(ghg_id),
+                        _EPA_FRS_ID:
+                            _str(crosswalk.get_frs_id(ghg_id)),
+                        _EIA_PP_CODE:
+                            ', '.join([
+                                _str(v)
+                                for v in crosswalk.get_power_plant_ids(ghg_id)
+                            ]),
+                        _NAME:
+                            _str(_get_name(table, in_row)),
+                        _ADDRESS:
+                            _str(_get_address(table, in_row)),
+                        _CIP:
+                            ', '.join(_get_cip(table, in_row)),
+                        _NAICS:
+                            _get_naics(table, in_row),
+                        _LAT:
+                            _str(_v(table, in_row, 'LATITUDE')),
+                        _LNG:
+                            _str(_v(table, in_row, 'LONGITUDE')),
                     }
                     rows_written += 1
                     cw.writerow(out_row)
