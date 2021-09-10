@@ -139,15 +139,15 @@ expected ones.  An example test following this pattern is
 
     - You cannot run your test as `python3 foo_test.py`, instead run as:
 
-      ```python3 -m unittest discover -v -s ../ -p "*_test.py"```
+      `python3 -m unittest discover -v -s ../ -p "*_test.py"`
 
       Consider creating an alias by once running:
 
-          ```alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'```
+          `alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'`
 
       Then, you can run your tests as:
 
-          ```dc-data-py-test```
+          `dc-data-py-test`
 
 
 ##### Guidelines
