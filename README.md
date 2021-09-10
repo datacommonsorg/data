@@ -117,7 +117,7 @@ pip3 install -r requirements.txt
 
 Scripts should be accompanied with tests using the [`unittest`
 framework](https://docs.python.org/3/library/unittest.html), and named with
-an `_test` suffix.
+an `_test.py` suffix.
 
 A common test pattern is to drive your main processing function through some
 sample input files (e.g., with a few rows of the real csv/xls/etc.) and
