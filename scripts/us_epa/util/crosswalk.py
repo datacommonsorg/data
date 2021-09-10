@@ -3,7 +3,7 @@ import csv
 
 class Crosswalk:
     """
-    A class to load the crosswalk map, lookup corresponding IDs and compute DCID.
+    A class to load the crosswalk map, lookup FRS/PowerPlant IDs from facility, and compute DCID.
     """
 
     def __init__(self, crosswalk_csv):
