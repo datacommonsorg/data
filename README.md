@@ -125,29 +125,27 @@ compare the actual output files (e.g., cleaned csv, mcf, tmcf) against
 expected ones.  An example test following this pattern is
 [here](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py).
 
-**Note:**
+Please add an `__init__.py` file with your import scripts to include a
+package. This is necessary for `unittest` framework to automatically discover
+and run the tests as part of presubmit.
 
-*   Please add an `__init__.py` file with your import scripts to include a
-    package. This is necessary for `unittest` framework to automatically
-    discover and run the tests as part of presubmit.
+In the presence of `__init__.py`, you will need to adjust the way you import
+modules and run tests.
 
-*   In the presence of `__init__.py`, you will need to adjust the way you
-    import modules and run tests.
+- You will need to import modules in your test with a dotted prefix like
+  [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8).
 
-    - You will need to import modules in your test with a dotted prefix like
-      [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8).
+- You cannot run your test as `python3 foo_test.py`, instead run as:
 
-    - You cannot run your test as `python3 foo_test.py`, instead run as:
+  `python3 -m unittest discover -v -s ../ -p "*_test.py"`
 
-      `python3 -m unittest discover -v -s ../ -p "*_test.py"`
+  Consider creating an alias by once running:
 
-      Consider creating an alias by once running:
+  - `alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'`
 
-          `alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'`
+  Then, you can run your tests as:
 
-      Then, you can run your tests as:
-
-          `dc-data-py-test`
+  - `dc-data-py-test`
 
 
 ##### Guidelines
