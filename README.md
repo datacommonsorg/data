@@ -118,10 +118,10 @@ pip3 install -r requirements.txt
 Scripts should be accompanied with tests using the [`unittest`
 framework](https://docs.python.org/3/library/unittest.html).
 
-A common test pattern is to drive your main processing function through a
-small, but real, sample input files (e.g., csv, xls, etc) and compare the
-produced output (e.g., cleaned csv, mcf, tmcf) against expected output files.
-An example test following this pattern is
+A common test pattern is to drive your main processing function through
+sample small, but real, input files (e.g., csv, xls, etc) and compare the
+actual output files (e.g., cleaned csv, mcf, tmcf) against expected ones.  An
+example test following this pattern is
 [here](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py).
 
 **Note:**
