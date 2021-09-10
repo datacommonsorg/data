@@ -230,7 +230,7 @@ def _naics_code_to_name(naics_val):
     Returns:
         A string with all NAICS codes changed to their respective industry.
         This string can be used in dcid generation. Returns None if the string
-        is empty.
+        is empty or if the string does not follow the expected syntax.
     """
 
     # Helper function to process NAICS ranges
@@ -284,7 +284,8 @@ def _prepend_append_replace(word, prepend='', append='', old='', new=''):
         append: A string literal to append to word.
         old: A string literal that repersents a substring in word to be
           replaced.
-        new: A string literal. All occurances of old will be replaced by new.
+        new: A string literal. In word, all occurances of old will be replaced
+          by new.
 
     Returns:
         A string after appending, prepending and replacing to word.
