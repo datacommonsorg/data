@@ -73,6 +73,11 @@ def _str(v):
     return '"' + v + '"'
 
 
+def _get_name(table, row):
+    name = _cv(table, row, 'FACILITY_NAME')
+    return name.replace(' Llc', ' LLC')
+
+
 def _get_address(table, row):
     parts = []
     for k in ['ADDRESS1', 'ADDRESS2', 'CITY', 'STATE_NAME']:
@@ -151,7 +156,7 @@ def process(input_tables_path, output_path):
                         _EPA_GHG_ID: _str(ghg_id),
                         _EPA_FRS_ID: _str(frs_id),
                         _EIA_PP_CODE: ', '.join([_str(v) for v in pp_codes]),
-                        _NAME: _str(_cv(table, in_row, 'FACILITY_NAME')),
+                        _NAME: _str(_get_name(table, in_row)),
                         _ADDRESS: _str(_get_address(table, in_row)),
                         _CIP: ', '.join(_get_cip(table, in_row)),
                         _NAICS: _get_naics(table, in_row),
