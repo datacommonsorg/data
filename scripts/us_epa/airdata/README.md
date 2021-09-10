@@ -47,6 +47,5 @@ As of June 2021, this currently includes data up to 2021.
 ### Running Tests
 To run unit tests:
 ```
-python3 air_quality_test.py
-python3 air_quality_aggregate_test.py
+python3 -m unittest discover -v -s ../ -p "*_test.py"
 ```

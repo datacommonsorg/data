@@ -1,13 +1,13 @@
 '''
 Unit tests for ejscreen.py
-Usage: python3 ejscreen_test.py
+Usage: python3 -m unittest discover -v -s ../ -p "ejscreen_test.py"
 '''
 
 import unittest
 import os
 import tempfile
 import pandas as pd
-from ejscreen import write_csv
+from .ejscreen import write_csv
 
 module_dir_ = os.path.dirname(__file__)
 
