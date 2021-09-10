@@ -93,7 +93,7 @@ def _get_cip(row):
 def _get_dcid(ghg_id, frs_id, pp_codes):
     # Prefer pp_codes over frs_id over ghg_id
     if pp_codes:
-        pp_codes.sort()
+        # pp_codes are ordered
         return 'eia/pp/' + pp_codes[0]
 
     if frs_id:
