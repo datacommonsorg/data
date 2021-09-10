@@ -16,9 +16,8 @@ flags.DEFINE_string('id_crosswalk_csv', '',
                     'Path to the CSV file with ID mappings')
 
 # Cleaned CSV Columns
-# - 'containedInPlace' is a repeated list of refs to CensusBlockGroup, County, Census ZCTA,
-#   CongressionalDistrict entities.
-# - eiaPlantCode and naics can also be repeated.
+# - 'containedInPlace' is a repeated list of refs to County and Census ZCTA
+# - eiaPlantCode can also be repeated
 _DCID = 'dcid'
 _EPA_GHG_ID = 'epaGhgrpFacilityId'
 _EPA_FRS_ID = 'epaFrsId'
