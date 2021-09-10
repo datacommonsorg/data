@@ -65,10 +65,16 @@ class Downloader:
 
     def extract_all_years(self):
         """Saves relevant sheets from each year's Excel file to a csv."""
+        headers = {}
+        for sheet, _ in SHEET_NAMES_TO_CSV_FILENAMES.items():
+            headers[sheet] = {}
         for current_year in self.years:
             print(f'Extracting data for {current_year}')
             self.current_year = current_year
-            self._extract_data()
+            self._extract_data(headers)
+        for sheet, csv_name in SHEET_NAMES_TO_CSV_FILENAMES.items():
+            headers_df = pd.DataFrame.from_dict(headers[sheet], orient='index')
+            headers_df.transpose().to_csv(os.path.join(SAVE_PATH, f'cols_{csv_name}'), index=None)
 
     def save_all_crosswalks(self):
         """Builds individual year crosswalks, as well as a join crosswalk for all years."""
@@ -88,7 +94,7 @@ class Downloader:
     def _csv_path(self, csv_filename):
         return os.path.join(SAVE_PATH, f'{self.current_year}_{csv_filename}')
 
-    def _extract_data(self):
+    def _extract_data(self, headers):
         summary_filename = os.path.join(
             SAVE_PATH, YEAR_DATA_FILENAME.format(year=self.current_year))
         xl = pd.ExcelFile(summary_filename)
@@ -101,6 +107,7 @@ class Downloader:
             summary_file.to_csv(self._csv_path(csv_filename),
                                 index=None,
                                 header=True)
+            headers[sheet][self.current_year] = summary_file.columns
 
     def _save_crosswalk(self):
         oris_df = pd.read_excel(CROSSWALK_URI,
