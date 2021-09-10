@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Module to download and do light processing on import data."""
 # TODO(beets): Add tests
 
@@ -77,7 +76,9 @@ class Downloader:
             self._extract_data(headers)
         for sheet, csv_name in SHEET_NAMES_TO_CSV_FILENAMES.items():
             headers_df = pd.DataFrame.from_dict(headers[sheet], orient='index')
-            headers_df.transpose().to_csv(os.path.join(SAVE_PATH, f'cols_{csv_name}'), index=None)
+            headers_df.transpose().to_csv(os.path.join(SAVE_PATH,
+                                                       f'cols_{csv_name}'),
+                                          index=None)
 
     def save_all_crosswalks(self):
         """Builds individual year crosswalks, as well as a join crosswalk for all years."""
