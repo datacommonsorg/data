@@ -11,8 +11,8 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('table_name', '', 'Name of table to download')
-flags.DEFINE_string('output_path', 'output', 'Output directory')
+flags.DEFINE_string('epa_table_name', '', 'Name of table to download')
+flags.DEFINE_string('epa_output_path', 'data', 'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
@@ -45,10 +45,10 @@ def download(table_name, output_path):
 
 
 def main(_):
-    assert FLAGS.output_path
-    assert FLAGS.table_name
-    pathlib.Path(FLAGS.output_path).mkdir(exist_ok=True)
-    download(FLAGS.table_name, FLAGS.output_path)
+    assert FLAGS.epa_output_path
+    assert FLAGS.epa_table_name
+    pathlib.Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
+    download(FLAGS.epa_table_name, FLAGS.epa_output_path)
 
 
 if __name__ == '__main__':

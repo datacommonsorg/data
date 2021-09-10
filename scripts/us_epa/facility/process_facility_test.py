@@ -17,8 +17,7 @@ class ProcessTest(unittest.TestCase):
     def test_e2e(self):
         self.maxDiff = None
         with tempfile.TemporaryDirectory() as tmp_dir:
-            process(os.path.join(_RAW_DATA_DIR, 'ghg_emitter_facilities.csv'),
-                    os.path.join(_RAW_DATA_DIR, 'crosswalk.csv'), tmp_dir)
+            process(_RAW_DATA_DIR, tmp_dir)
             for fname in ['us_epa_facility.csv', 'us_epa_facility.tmcf']:
                 with open(os.path.join(tmp_dir, fname)) as gotf:
                     got = gotf.read()
