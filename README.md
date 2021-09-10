@@ -141,9 +141,10 @@ expected ones.  An example test following this pattern is
 
       `python3 -m unittest discover -v -s ../ -p "*_test.py"`
 
-      Its useful to create an alias to this command, like: `alias
+      Consider creating an alias by once running `alias
       dc-data-py-test='python3 -m unittest discover -v -s ../ -p
-      "*_test.py"'`
+      "*_test.py"'` in your shell. Then, you can run your tests with
+      `dc-data-py-test`.
 
 
 ##### Guidelines
