@@ -16,6 +16,8 @@
 
 import io
 import os
+import ssl
+
 import pandas as pd
 import requests
 import zipfile
@@ -90,7 +92,7 @@ class Downloader:
         all_crosswalks_df = all_crosswalks_df.sort_values(
             by=[GHGRP_ID_COL, 'FRS Id', 'ORIS CODE'])
         all_crosswalks_df = all_crosswalks_df.drop_duplicates()
-        all_crosswalks_df.to_csv(os.path.join(SAVE_PATH, 'all_crosswalks.csv'),
+        all_crosswalks_df.to_csv(os.path.join(SAVE_PATH, 'crosswalks.csv'),
                                  header=True,
                                  index=None)
         return all_crosswalks_df
@@ -101,7 +103,7 @@ class Downloader:
     def _extract_data(self, headers):
         summary_filename = os.path.join(
             SAVE_PATH, YEAR_DATA_FILENAME.format(year=self.current_year))
-        xl = pd.ExcelFile(summary_filename)
+        xl = pd.ExcelFile(summary_filename, engine='openpyxl')
         for sheet in xl.sheet_names:
             csv_filename = SHEET_NAMES_TO_CSV_FILENAMES.get(sheet, None)
             if not csv_filename:
@@ -114,11 +116,15 @@ class Downloader:
             headers[sheet][self.current_year] = summary_file.columns
 
     def _save_crosswalk(self):
+        # Per https://stackoverflow.com/a/56230607
+        ssl._create_default_https_context = ssl._create_unverified_context
+
         oris_df = pd.read_excel(CROSSWALK_URI,
                                 'ORIS Crosswalk',
                                 header=0,
                                 dtype=str,
-                                usecols=CROSSWALK_COLS_TO_KEEP)
+                                usecols=CROSSWALK_COLS_TO_KEEP,
+                                engine='openpyxl')
         oris_df = oris_df.rename(columns={'GHGRP Facility ID': GHGRP_ID_COL})
         all_facilities_df = pd.DataFrame()
         for sheet, csv_filename in SHEET_NAMES_TO_CSV_FILENAMES.items():

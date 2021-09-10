@@ -3,16 +3,18 @@
 import csv
 import os.path
 import pathlib
+import sys
 
 from absl import app
 from absl import flags
 
-from util.crosswalk import Crosswalk
+sys.path.insert(1, '../../')
+from us_epa.util.crosswalk import Crosswalk
 
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
-    'epa_input_tables_path', 'data',
+    'epa_input_tables_path', 'tmp_data',
     'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
 )
 flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
@@ -39,7 +41,7 @@ _CLEAN_CSV_HDR = (_DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_CODE, _NAME,
                   _ADDRESS, _CIP, _NAICS, _LAT, _LNG)
 
 _OUT_FILE_PREFIX = 'us_epa_facility'
-_CROSSWALK_FILE = 'crosswalk.csv'
+_CROSSWALK_FILE = 'crosswalks.csv'
 
 
 def _gen_tmcf():
