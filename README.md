@@ -137,9 +137,9 @@ modules and run tests.
 
 - You cannot run your test as `python3 foo_test.py`, instead run as:
 
-  `python3 -m unittest discover -v -s ../ -p "*_test.py"`
+  `python3 -m unittest discover -v -s ../ -p "foo_test.py"`
 
-  Consider creating an alias by once running:
+  Consider creating a generic alias like this:
 
   - `alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'`
 
