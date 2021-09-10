@@ -11,7 +11,7 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string('ghg_emitter_facilities_csv', '',
                     'Path to the v_ghg_emitter_facilities table')
-flags.DEFINE_string('output_path', 'output', 'Output directory')
+flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
 flags.DEFINE_string('id_crosswalk_csv', '',
                     'Path to the CSV file with ID mappings')
 
@@ -28,8 +28,10 @@ _CIP = 'containedInPlace'
 _NAICS = 'naics'
 _LAT = 'latitude'
 _LNG = 'longitude'
-_CLEAN_CSV_HDR = [_DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_CODE, _NAME, _ADDRESS,
-                  _CIP, _NAICS, _LAT, _LNG]
+_CLEAN_CSV_HDR = [
+    _DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_CODE, _NAME, _ADDRESS, _CIP,
+    _NAICS, _LAT, _LNG
+]
 _OUT_FILE = 'us_epa_facility'
 
 
@@ -49,7 +51,8 @@ def _load_crosswalk_map(id_crosswalk_csv):
     with open(id_crosswalk_csv, 'r') as fp:
         for row in csv.reader(fp):
             # The isnumeric() is because there are "No Match" values.
-            result[row[0]] = (row[1], [x for x in row[2:] if x and x.isnumeric()])
+            result[row[0]] = (row[1],
+                              [x for x in row[2:] if x and x.isnumeric()])
     return result
 
 
@@ -80,7 +83,7 @@ def _get_address(row):
 
 def _get_cip(row):
     cip = []
-    zip = _v(row, 'ZIP')[:5]   # zips can have extension
+    zip = _v(row, 'ZIP')[:5]  # zips can have extension
     if zip and zip != '00000':
         cip.append('dcid:zip/' + zip)
     cf = _v(row, 'COUNTY_FIPS')
@@ -115,7 +118,10 @@ def process(ghg_emitter_facilities_csv, id_crosswalk_csv, output_path):
     with open(os.path.join(output_path, _OUT_FILE + '.csv'), 'w') as wfp:
         # IMPORTANT: We want to escape double quote (\") if it is specified in the cell
         # value, rather than the default of using two double quotes ("")
-        cw = csv.DictWriter(wfp, _CLEAN_CSV_HDR, doublequote=False, escapechar='\\')
+        cw = csv.DictWriter(wfp,
+                            _CLEAN_CSV_HDR,
+                            doublequote=False,
+                            escapechar='\\')
         cw.writeheader()
         # Schema: https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_GHG_EMITTER_FACILITIES
         with open(ghg_emitter_facilities_csv, 'r') as rfp:
@@ -149,11 +155,12 @@ def process(ghg_emitter_facilities_csv, id_crosswalk_csv, output_path):
 
 
 def main(_):
-    assert FLAGS.output_path
+    assert FLAGS.epa_output_path
     assert FLAGS.ghg_emitter_facilities_csv
     assert FLAGS.id_crosswalk_csv
-    pathlib.Path(FLAGS.output_path).mkdir(exist_ok=True)
-    process(FLAGS.ghg_emitter_facilities_csv, FLAGS.id_crosswalk_csv, FLAGS.output_path)
+    pathlib.Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
+    process(FLAGS.ghg_emitter_facilities_csv, FLAGS.id_crosswalk_csv,
+            FLAGS.epa_output_path)
 
 
 if __name__ == '__main__':

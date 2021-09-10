@@ -27,7 +27,8 @@ def download(table_name, output_path):
     first_time = True
     while True:
         # Since 10K rows shouldn't consume too much memory, just use pandas.
-        url = _API_ROOT + table_name + '/ROWS/' + str(idx) + ':' + str(idx + _MAX_ROWS - 1) + '/csv'
+        url = _API_ROOT + table_name + '/ROWS/' + str(idx) + ':' + str(
+            idx + _MAX_ROWS - 1) + '/csv'
         df = pd.read_csv(url, dtype=str)
         print('Downloaded ' + str(len(df)) + ' rows from ' + url)
         if len(df) == 0:
