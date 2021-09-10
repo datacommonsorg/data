@@ -60,11 +60,13 @@ class Downloader:
     def extract_data(self):
         summary_filename = os.path.join(
             SAVE_PATH, YEAR_DATA_FILENAME.format(year=self.year))
-        for sheet, csv_filename in SHEET_NAMES_TO_CSV_FILENAMES.items():
-            summary_file = pd.read_excel(summary_filename,
-                                         sheet,
-                                         header=HEADER_ROW,
-                                         dtype=str)
+        xl = pd.ExcelFile(summary_filename)
+        for sheet in xl.sheet_names:
+            csv_filename = SHEET_NAMES_TO_CSV_FILENAMES.get(sheet, None)
+            if not csv_filename:
+              print(f'Skipping sheet: {sheet}')
+              continue
+            summary_file = xl.parse(sheet, header=HEADER_ROW, dtype=str)
             summary_file.to_csv(self.csv_path(csv_filename),
                                 index=None,
                                 header=True)
@@ -75,22 +77,31 @@ class Downloader:
                                 header=0,
                                 dtype=str,
                                 usecols=CROSSWALK_COLS_TO_KEEP)
-        oris_df = oris_df.set_index('GHGRP Facility ID')
+        oris_df = oris_df.rename(columns={'GHGRP Facility ID': GHGRP_ID_COL})
         all_facilities_df = pd.DataFrame()
         for sheet, csv_filename in SHEET_NAMES_TO_CSV_FILENAMES.items():
-            df = pd.read_csv(self.csv_path(csv_filename),
+            csv_path = self.csv_path(csv_filename)
+            if not os.path.exists(csv_path):
+                continue
+            df = pd.read_csv(csv_path,
                              usecols=[GHGRP_ID_COL, 'FRS Id'],
                              dtype=str)
             all_facilities_df = all_facilities_df.append(df)
-        all_facilities_df = all_facilities_df.set_index('Facility Id')
-        all_facilities_df = all_facilities_df.join(oris_df)
+        all_facilities_df = all_facilities_df.join(oris_df.set_index(GHGRP_ID_COL), on=GHGRP_ID_COL, how='left')
         all_facilities_df.to_csv(self.csv_path('crosswalk.csv'),
-                                 header=True,
-                                 index_label=GHGRP_ID_COL)
+                                 header=True, index=None)
+        return all_facilities_df
 
 
 if __name__ == '__main__':
-    downloader = Downloader('2019')
-    downloader.download_data()
-    downloader.extract_data()
-    downloader.save_crosswalk()
+    crosswalks = []
+    for year in range(2010, 2020):
+        print(f'Downloading data for {year}')
+        downloader = Downloader(str(year))
+        # downloader.download_data()
+        downloader.extract_data()
+        crosswalks.append(downloader.save_crosswalk())
+    all_crosswalks_df = pd.concat(crosswalks, join='outer')
+    all_crosswalks_df = all_crosswalks_df.sort_values(by=[GHGRP_ID_COL, 'FRS Id','ORIS CODE'])
+    all_crosswalks_df = all_crosswalks_df.drop_duplicates()
+    all_crosswalks_df.to_csv(os.path.join(SAVE_PATH, 'all_crosswalks.csv'), header=True, index=None)
