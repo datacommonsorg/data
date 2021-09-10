@@ -12,7 +12,7 @@ from absl import flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('epa_table_name', '', 'Name of table to download')
-flags.DEFINE_string('epa_output_path', 'data', 'Output directory')
+flags.DEFINE_string('epa_output_path', 'tmp_data', 'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
