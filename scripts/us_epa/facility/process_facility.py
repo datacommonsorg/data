@@ -62,10 +62,6 @@ def _cv(row, col):
     return _v(row, col).strip().title()
 
 
-def _multi(v):
-    return v
-
-
 def _str(v):
     return '"' + v + '"'
 
@@ -76,7 +72,7 @@ def _get_address(row):
         p = _cv(row, k)
         if p:
             parts.append(p)
-    address = ','.join(parts)
+    address = ', '.join(parts)
     p = _cv(row, 'ZIP')
     if p:
         address += ' - ' + p
@@ -88,7 +84,7 @@ def _get_cip(row):
     zip = _v(row, 'ZIP')[:5]   # zips can have extension
     if zip and zip != '00000':
         cip.append('dcid:zip/' + zip)
-    cf = _v(row, 'COUNTY_FIPS)')
+    cf = _v(row, 'COUNTY_FIPS')
     if cf and cf != '00000':
         assert len(cf) == 5
         cip.append('dcid:geoId/' + cf)
@@ -118,10 +114,9 @@ def process(frs_national_csv, id_crosswalk_csv, output_path):
     crosswalk_map = _load_crosswalk_map(id_crosswalk_csv)
     processed_ids = set()
     with open(os.path.join(output_path, _OUT_FILE + '.csv'), 'w') as wfp:
-        # The quoting arguments are important. We want to use '\' as escape char if double quotes
-        # is specified in the cell value, and want the CSV writer to always enclose double quotes.
-        cw = csv.DictWriter(wfp, _CLEAN_CSV_HDR, quoting=csv.QUOTE_ALL,
-                            doublequote=False, escapechar='\\')
+        # IMPORTANT: We want to escape double quote (\") if it is specified in the cell
+        # value, rather than the default of using two double quotes ("")
+        cw = csv.DictWriter(wfp, _CLEAN_CSV_HDR, doublequote=False, escapechar='\\')
         cw.writeheader()
         with open(frs_national_csv, 'r') as rfp:
             # Schema is in https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_GHG_EMITTER_FACILITIES
@@ -142,14 +137,14 @@ def process(frs_national_csv, id_crosswalk_csv, output_path):
                     _EPA_GHG_ID: _str(ghg_id),
                     # cell value with a single string
                     _EPA_FRS_ID: _str(frs_id),
-                    # cell value with repeated strings (so the '\"')
-                    _EIA_PP_CODE: _multi(','.join(['"' + v + '"' for v in pp_codes])),
+                    # cell value with repeated strings
+                    _EIA_PP_CODE: ', '.join(['"' + v + '"' for v in pp_codes]),
                     # cell value with a single string
                     _NAME: _str(_cv(in_row, 'FACILITY_NAME')),
                     # cell value with a single string
                     _ADDRESS: _str(_get_address(in_row)),
                     # cell value with repeated refs, and thus needs simple double-quoting.
-                    _CIP: _multi(','.join(_get_cip(in_row))),
+                    _CIP: ', '.join(_get_cip(in_row)),
                     # cell value with single ref
                     _NAICS: _get_naics(in_row),
                     # cell value with a single string

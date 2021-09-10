@@ -1,0 +1,4 @@
+dcid,epaGhgrpFacilityId,epaFrsId,eiaPlantCode,name,address,containedInPlace,naics,latitude,longitude
+\"epaFrsId/110037615694\",\"1000035\",\"110037615694\",,\"The Andersons Marathon Holdings Llc\","\"5728 E Sebring Warner Rd, Greenville, Ohio - 45331\"","dcid:zip/45331, dcid:geoId/39037",dcs:NAICS/325193,\"40.081111\",\"-84.591667\"
+\"eia/pp/57908\",\"1000036\",\"110043974287\","\"57908\", \"57929\"",\"University Of Cincinnati\","\"3000 Glendora Ave., Cincinnati, Ohio - 45219\"","dcid:zip/45219, dcid:geoId/39061",dcs:NAICS/611310,\"39.13457\",\"-84.50982\"
+\"epaGhgrpFacilityId/1000103\",\"1000103\",\"\",,\"Trunk L Compressor Station\","\"Blanco, New Mexico - 87412\"","dcid:zip/87412, dcid:geoId/35039",dcs:NAICS/213112,\"36.6432\",\"-107.3553\"
