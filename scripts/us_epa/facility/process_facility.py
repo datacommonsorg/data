@@ -9,15 +9,16 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('epa_input_tables_path', 'data',
-                    'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.')
+flags.DEFINE_string(
+    'epa_input_tables_path', 'data',
+    'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
+)
 flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
-
 
 # Input tables we process
 # Schema: https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=<table>
-_TABLES = ('V_GHG_EMITTER_FACILITIES', 'V_GHG_SUPPLIER_FACILITIES', 'V_GHG_INJECTION_FACILITIES')
-
+_TABLES = ('V_GHG_EMITTER_FACILITIES', 'V_GHG_SUPPLIER_FACILITIES',
+           'V_GHG_INJECTION_FACILITIES')
 
 # Cleaned CSV Columns
 # - 'containedInPlace' is a repeated list of refs to County and Census ZCTA
@@ -32,10 +33,8 @@ _CIP = 'containedInPlace'
 _NAICS = 'naics'
 _LAT = 'latitude'
 _LNG = 'longitude'
-_CLEAN_CSV_HDR = (
-    _DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_CODE, _NAME, _ADDRESS, _CIP,
-    _NAICS, _LAT, _LNG
-)
+_CLEAN_CSV_HDR = (_DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_CODE, _NAME,
+                  _ADDRESS, _CIP, _NAICS, _LAT, _LNG)
 
 _OUT_FILE_PREFIX = 'us_epa_facility'
 _CROSSWALK_FILE = 'crosswalk.csv'
@@ -62,7 +61,7 @@ def _load_crosswalk_map(id_crosswalk_csv):
     return result
 
 
-def _v(table,row, col):
+def _v(table, row, col):
     return row.get(table + '.' + col, '')
 
 
@@ -120,7 +119,8 @@ def _get_naics(table, row):
 
 
 def process(input_tables_path, output_path):
-    crosswalk_map = _load_crosswalk_map(os.path.join(input_tables_path, _CROSSWALK_FILE))
+    crosswalk_map = _load_crosswalk_map(
+        os.path.join(input_tables_path, _CROSSWALK_FILE))
     processed_ids = set()
     with open(os.path.join(output_path, _OUT_FILE_PREFIX + '.csv'), 'w') as wfp:
         # IMPORTANT: We want to escape double quote (\") if it is specified in the cell
@@ -170,11 +170,11 @@ def main(_):
     # Validate inputs.
     assert FLAGS.epa_output_path
     assert FLAGS.epa_input_tables_path
-    assert os.path.exists(os.path.join(FLAGS.epa_input_tables_path,
-        _CROSSWALK_FILE))
+    assert os.path.exists(
+        os.path.join(FLAGS.epa_input_tables_path, _CROSSWALK_FILE))
     for t in _TABLES:
         assert os.path.exists(
-                os.path.join(FLAGS.epa_input_tables_path, t + '.csv'))
+            os.path.join(FLAGS.epa_input_tables_path, t + '.csv'))
     pathlib.Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
 
     process(FLAGS.epa_input_tables_path, FLAGS.epa_output_path)
