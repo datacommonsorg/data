@@ -14,7 +14,9 @@ class Crosswalk:
         with open(id_crosswalk_csv, 'r') as fp:
             for row in csv.reader(fp):
                 # The isnumeric() is because there are "No Match" values.
-                self._crosswalk_map[row[0]] = (row[1], [x for x in row[2:] if x and x.isnumeric()])
+                self._crosswalk_map[row[0]] = (row[1], [
+                    x for x in row[2:] if x and x.isnumeric()
+                ])
 
     def get_dcid(self, ghgrp_facility_id):
         # Prefer pp_codes over frs_id over ghg_id
@@ -34,4 +36,3 @@ class Crosswalk:
 
     def get_power_plant_ids(self, ghgrp_facility_id):
         return self._crosswalk_map.get(ghgrp_facility_id, ('', []))[1]
-

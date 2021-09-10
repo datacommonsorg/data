@@ -127,17 +127,29 @@ def process(input_tables_path, output_path):
                     processed_ids.add(ghg_id)
 
                     out_row = {
-                        _DCID: _str(crosswalk.get_dcid(ghg_id)),
-                        _EPA_GHG_ID: _str(ghg_id),
-                        _EPA_FRS_ID: _str(crosswalk.get_frs_id(ghg_id)),
+                        _DCID:
+                            _str(crosswalk.get_dcid(ghg_id)),
+                        _EPA_GHG_ID:
+                            _str(ghg_id),
+                        _EPA_FRS_ID:
+                            _str(crosswalk.get_frs_id(ghg_id)),
                         _EIA_PP_CODE:
-                            ', '.join([_str(v) for v in crosswalk.get_power_plant_ids(ghg_id)]),
-                        _NAME: _str(_get_name(table, in_row)),
-                        _ADDRESS: _str(_get_address(table, in_row)),
-                        _CIP: ', '.join(_get_cip(table, in_row)),
-                        _NAICS: _get_naics(table, in_row),
-                        _LAT: _str(_v(table, in_row, 'LATITUDE')),
-                        _LNG: _str(_v(table, in_row, 'LONGITUDE')),
+                            ', '.join([
+                                _str(v)
+                                for v in crosswalk.get_power_plant_ids(ghg_id)
+                            ]),
+                        _NAME:
+                            _str(_get_name(table, in_row)),
+                        _ADDRESS:
+                            _str(_get_address(table, in_row)),
+                        _CIP:
+                            ', '.join(_get_cip(table, in_row)),
+                        _NAICS:
+                            _get_naics(table, in_row),
+                        _LAT:
+                            _str(_v(table, in_row, 'LATITUDE')),
+                        _LNG:
+                            _str(_v(table, in_row, 'LONGITUDE')),
                     }
                     rows_written += 1
                     cw.writerow(out_row)
