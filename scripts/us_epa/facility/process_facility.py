@@ -109,7 +109,7 @@ def _get_naics(row):
     return 'dcs:NAICS/' + naics
 
 
-def process(frs_national_csv, id_crosswalk_csv, output_path):
+def process(ghg_emitter_facilities_csv, id_crosswalk_csv, output_path):
     crosswalk_map = _load_crosswalk_map(id_crosswalk_csv)
     processed_ids = set()
     with open(os.path.join(output_path, _OUT_FILE + '.csv'), 'w') as wfp:
@@ -117,11 +117,12 @@ def process(frs_national_csv, id_crosswalk_csv, output_path):
         # value, rather than the default of using two double quotes ("")
         cw = csv.DictWriter(wfp, _CLEAN_CSV_HDR, doublequote=False, escapechar='\\')
         cw.writeheader()
-        with open(frs_national_csv, 'r') as rfp:
-            # Schema is in https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_GHG_EMITTER_FACILITIES
+        # Schema: https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_GHG_EMITTER_FACILITIES
+        with open(ghg_emitter_facilities_csv, 'r') as rfp:
             cr = csv.DictReader(rfp)
             for in_row in cr:
-                ghg_id = in_row['V_GHG_EMITTER_FACILITIES.FACILITY_ID']
+                ghg_id = _v(in_row, 'FACILITY_ID')
+                assert ghg_id
                 if ghg_id in processed_ids:
                     continue
 
@@ -130,28 +131,17 @@ def process(frs_national_csv, id_crosswalk_csv, output_path):
                 pp_codes = crosswalk_map.get(ghg_id, ('', []))[1]
 
                 out_row = {
-                    # cell value with a single string
                     _DCID: _str(_get_dcid(ghg_id, frs_id, pp_codes)),
-                    # cell value with a single string
                     _EPA_GHG_ID: _str(ghg_id),
-                    # cell value with a single string
                     _EPA_FRS_ID: _str(frs_id),
-                    # cell value with repeated strings
-                    _EIA_PP_CODE: ', '.join(['"' + v + '"' for v in pp_codes]),
-                    # cell value with a single string
+                    _EIA_PP_CODE: ', '.join([_str(v) for v in pp_codes]),
                     _NAME: _str(_cv(in_row, 'FACILITY_NAME')),
-                    # cell value with a single string
                     _ADDRESS: _str(_get_address(in_row)),
-                    # cell value with repeated refs, and thus needs simple double-quoting.
                     _CIP: ', '.join(_get_cip(in_row)),
-                    # cell value with single ref
                     _NAICS: _get_naics(in_row),
-                    # cell value with a single string
                     _LAT: _str(_v(in_row, 'LATITUDE')),
-                    # cell value with a single string
                     _LNG: _str(_v(in_row, 'LONGITUDE')),
                 }
-                # print(out_row)
                 cw.writerow(out_row)
 
     with open(os.path.join(output_path, _OUT_FILE + '.tmcf'), 'w') as fp:
