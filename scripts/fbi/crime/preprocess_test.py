@@ -16,9 +16,7 @@ import filecmp
 import os
 import tempfile
 import unittest
-from preprocess import create_formatted_csv_file
-from preprocess import calculate_crimes
-from preprocess import create_tmcf_file
+from .preprocess import * 
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

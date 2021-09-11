@@ -16,17 +16,17 @@ import filecmp
 import os
 import tempfile
 import unittest
-import geocode_cities
+from .geocode_cities import *
 
 
 class GeocodeCitiesTest(unittest.TestCase):
 
     def setUp(self):
-        self.geo_codes = geocode_cities.read_geocodes()
+        self.geo_codes = read_geocodes()
 
     def test_geocode_city(self):
         state = 'ca'
-        city = geocode_cities.normalize_fbi_city('Mountain View', state)
+        city = normalize_fbi_city('Mountain View', state)
         city_state = '{} {}'.format(city, state)
         self.assertEqual(city_state, 'mountain view ca')
         self.assertEqual(self.geo_codes[city_state], '0649670')
@@ -34,7 +34,7 @@ class GeocodeCitiesTest(unittest.TestCase):
     def test_manual_geocode_city(self):
         # west bloomfield township mi	2612585480 is from manual_geocodes.csv.
         state = 'mi'
-        city = geocode_cities.normalize_fbi_city('West Bloomfield Township',
+        city = normalize_fbi_city('West Bloomfield Township',
                                                  state)
         city_state = '{} {}'.format(city, state)
         self.assertEqual(city_state, 'west bloomfield township mi')
@@ -50,7 +50,7 @@ class GeocodeCitiesTest(unittest.TestCase):
         }
         found_set = set()
         cities_not_found_set = set()
-        result = geocode_cities.update_crime_geocode(crime, geo_codes,
+        result = update_crime_geocode(crime, geo_codes,
                                                      found_set,
                                                      cities_not_found_set)
         self.assertTrue(result)
@@ -59,7 +59,7 @@ class GeocodeCitiesTest(unittest.TestCase):
 
         # Deuplicate state and city, assert exception.
         with self.assertRaises(Exception):
-            geocode_cities.update_crime_geocode(crime, geo_codes, found_set,
+            update_crime_geocode(crime, geo_codes, found_set,
                                                 cities_not_found_set)
 
         not_found_crime = {
@@ -68,7 +68,7 @@ class GeocodeCitiesTest(unittest.TestCase):
             'City': 'Random City',
             'Population': 1.0
         }
-        result = geocode_cities.update_crime_geocode(not_found_crime, geo_codes,
+        result = update_crime_geocode(not_found_crime, geo_codes,
                                                      found_set,
                                                      cities_not_found_set)
         self.assertFalse(result)

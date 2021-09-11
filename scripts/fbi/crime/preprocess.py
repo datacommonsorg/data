@@ -20,11 +20,11 @@ import sys
 import requests
 import re
 import os
-import common_util as cu
+from .common_util import *
 
 import pandas as pd
 import logging
-import geocode_cities
+from .geocode_cities import *
 
 # Years that FBI doesn't public arson data.
 # 2019, 2018, 2017
@@ -111,13 +111,13 @@ def calculate_crimes(r):
     # If a field is empty, it is treated as 0
 
     # Category 1: Violent Crimes
-    violent = cu.int_from_field(r['Violent'])
+    violent = int_from_field(r['Violent'])
 
-    murder = cu.int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
-    rape = cu.int_from_field(r['ViolentRape'])
-    rape2 = cu.int_from_field(r['Rape2'])
-    robbery = cu.int_from_field(r['ViolentRobbery'])
-    assault = cu.int_from_field(r['ViolentAggravatedAssault'])
+    murder = int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
+    rape = int_from_field(r['ViolentRape'])
+    rape2 = int_from_field(r['Rape2'])
+    robbery = int_from_field(r['ViolentRobbery'])
+    assault = int_from_field(r['ViolentAggravatedAssault'])
     # Fix rape value
     rape += rape2
 
@@ -135,11 +135,11 @@ def calculate_crimes(r):
                                                        violent_computed))
 
     # Category 2: Property Crime
-    property = cu.int_from_field(r['Property'])
+    property = int_from_field(r['Property'])
 
-    burglary = cu.int_from_field(r['PropertyBurglary'])
-    theft = cu.int_from_field(r['PropertyLarcenyTheft'])
-    motor = cu.int_from_field(r['PropertyMotorVehicleTheft'])
+    burglary = int_from_field(r['PropertyBurglary'])
+    theft = int_from_field(r['PropertyLarcenyTheft'])
+    motor = int_from_field(r['PropertyMotorVehicleTheft'])
 
     # Add the property crime values as ints.
     r['PropertyBurglary'] = burglary
@@ -155,7 +155,7 @@ def calculate_crimes(r):
                                                         property_computed))
 
     # Category 3: Arson
-    arson = cu.int_from_field(r['PropertyArson'])
+    arson = int_from_field(r['PropertyArson'])
     r['PropertyArson'] = arson
 
     total = violent_computed + property_computed + arson
@@ -204,11 +204,11 @@ def _clean_crime_file(f_input, f_output):
         # Replace commas and quotes in fields e.g. "1,234" -> 1234
         # Remove any other leading or trailing whitespace
         for i in range(_FIELDS_IN_CRIME_FILE):
-            field[i] = cu.remove_extra_chars(field[i])
+            field[i] = remove_extra_chars(field[i])
 
         # Skip if the line does not contain data or if population is empty.
         if (not field[_POPULATION_INDEX] or
-                not cu.is_digit(field[_POPULATION_INDEX]) or
+                not is_digit(field[_POPULATION_INDEX]) or
                 field[_POPULATION_INDEX] == '0'):
             count_header_footer += 1
             continue
@@ -216,11 +216,11 @@ def _clean_crime_file(f_input, f_output):
         # If field[_STATE_INDEX] is present, use it as the State.
         if field[_STATE_INDEX]:
             # Remove numeric values from state names (comes from footnotes)
-            state = cu.remove_digits(field[_STATE_INDEX])
+            state = remove_digits(field[_STATE_INDEX])
             count_state += 1
         field[_STATE_INDEX] = state
         # Remove any numeric characters from city names.
-        field[_CITY_INDEX] = cu.remove_digits(field[_CITY_INDEX])
+        field[_CITY_INDEX] = remove_digits(field[_CITY_INDEX])
         count_city += 1
 
         output_line = '{}\n'.format(','.join(field[:_FIELDS_IN_CRIME_FILE]))
@@ -240,7 +240,7 @@ def _update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
         found_set = set()
         cities_not_found_set = set()
         for crime in crimes:
-            if geocode_cities.update_crime_geocode(crime, geo_codes, found_set,
+            if update_crime_geocode(crime, geo_codes, found_set,
                                                    cities_not_found_set):
                 calculate_crimes(crime)
 
@@ -288,14 +288,14 @@ def create_tmcf_file(tmcf_file_path):
     with open(tmcf_file_path, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
-                cu.TEMPLATE_MCF_TEMPLATE.format_map({
+                TEMPLATE_MCF_TEMPLATE.format_map({
                     'index': i,
                     'stat_var': stat_vars[i]
                 }))
 
 
 def create_formatted_csv_file(csv_files, city_output):
-    geo_codes = geocode_cities.read_geocodes()
+    geo_codes = read_geocodes()
 
     with open(city_output, 'w') as csv_output_f:
         writer = csv.DictWriter(csv_output_f, fieldnames=OUTPUT_COLUMNS)
