@@ -24,9 +24,7 @@ power plant import), and FRS ID is more general than GHG Facility ID.
 
 ## Generating and Validating Artifacts
 
-1. To download and regenerate the TMCF/CSV, run:
-
-      TODO: Update the script to include `crosswalk.csv` generation
+1. To compute crosswalks, download tables and regenerate the TMCF/CSV, run:
 
       ```
       ./generate.sh
