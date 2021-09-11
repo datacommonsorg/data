@@ -25,7 +25,6 @@ import zipfile
 DOWNLOAD_URI = 'https://www.epa.gov/sites/default/files/2020-11/2019_data_summary_spreadsheets.zip'
 YEAR_DATA_FILENAME = 'ghgp_data_{year}.xlsx'
 HEADER_ROW = 3
-SAVE_PATH = 'tmp_data'
 CROSSWALK_URI = 'https://www.epa.gov/sites/default/files/2020-12/ghgrp_oris_power_plant_crosswalk_11_24_20.xlsx'
 CROSSWALK_COLS_TO_KEEP = [
     'GHGRP Facility ID', 'ORIS CODE', 'ORIS CODE 2', 'ORIS CODE 3',
@@ -33,8 +32,9 @@ CROSSWALK_COLS_TO_KEEP = [
 ]
 GHGRP_ID_COL = 'Facility Id'
 
+_DIRECT_EMITTERS_SHEET = 'Direct Emitters'
 SHEET_NAMES_TO_CSV_FILENAMES = {
-    'Direct Emitters': 'direct_emitters.csv',
+    _DIRECT_EMITTERS_SHEET: 'direct_emitters.csv',
     'Onshore Oil & Gas Prod.': 'oil_and_gas.csv',
     'Gathering & Boosting': 'gathering_and_boosting.csv',
     'LDC - Direct Emissions': 'local_distribution.csv',
@@ -56,16 +56,18 @@ class Downloader:
     - save_all_crosswalks
     """
 
-    def __init__(self):
+    def __init__(self, save_path):
         self.years = list(range(2010, 2020))
         self.current_year = None
+        self.files = []  # list of (year, filename) of all extracted files
+        self.save_path = save_path
 
     def download_data(self):
         """Downloads and unzips excel files from DOWNLOAD_URI."""
         print(f'Downloading data')
         r = requests.get(DOWNLOAD_URI)
         z = zipfile.ZipFile(io.BytesIO(r.content))
-        z.extractall(SAVE_PATH)
+        z.extractall(self.save_path)
 
     def extract_all_years(self):
         """Saves relevant sheets from each year's Excel file to a csv."""
@@ -78,31 +80,32 @@ class Downloader:
             self._extract_data(headers)
         for sheet, csv_name in SHEET_NAMES_TO_CSV_FILENAMES.items():
             headers_df = pd.DataFrame.from_dict(headers[sheet], orient='index')
-            headers_df.transpose().to_csv(os.path.join(SAVE_PATH,
+            headers_df.transpose().to_csv(os.path.join(self.save_path,
                                                        f'cols_{csv_name}'),
                                           index=None)
+        return self.files
 
-    def save_all_crosswalks(self):
+    def save_all_crosswalks(self, filepath):
         """Builds individual year crosswalks, as well as a join crosswalk for all years."""
         print(f'Saving all ID crosswalks')
         crosswalks = []
         for current_year in self.years:
-            crosswalks.append(downloader._save_crosswalk())
+            crosswalks.append(self._gen_crosswalk())
         all_crosswalks_df = pd.concat(crosswalks, join='outer')
         all_crosswalks_df = all_crosswalks_df.sort_values(
             by=[GHGRP_ID_COL, 'FRS Id', 'ORIS CODE'])
         all_crosswalks_df = all_crosswalks_df.drop_duplicates()
-        all_crosswalks_df.to_csv(os.path.join(SAVE_PATH, 'crosswalks.csv'),
-                                 header=True,
-                                 index=None)
+        all_crosswalks_df.to_csv(filepath, header=True, index=None)
         return all_crosswalks_df
 
-    def _csv_path(self, csv_filename):
-        return os.path.join(SAVE_PATH, f'{self.current_year}_{csv_filename}')
+    def _csv_path(self, csv_filename, year=None):
+        if not year:
+            year = self.current_year
+        return os.path.join(self.save_path, f'{year}_{csv_filename}')
 
     def _extract_data(self, headers):
         summary_filename = os.path.join(
-            SAVE_PATH, YEAR_DATA_FILENAME.format(year=self.current_year))
+            self.save_path, YEAR_DATA_FILENAME.format(year=self.current_year))
         xl = pd.ExcelFile(summary_filename, engine='openpyxl')
         for sheet in xl.sheet_names:
             csv_filename = SHEET_NAMES_TO_CSV_FILENAMES.get(sheet, None)
@@ -110,12 +113,12 @@ class Downloader:
                 print(f'Skipping sheet: {sheet}')
                 continue
             summary_file = xl.parse(sheet, header=HEADER_ROW, dtype=str)
-            summary_file.to_csv(self._csv_path(csv_filename),
-                                index=None,
-                                header=True)
+            csv_filename = self._csv_path(csv_filename)
+            summary_file.to_csv(csv_filename, index=None, header=True)
             headers[sheet][self.current_year] = summary_file.columns
+            self.files.append((self.current_year, csv_filename))
 
-    def _save_crosswalk(self):
+    def _gen_crosswalk(self):
         # Per https://stackoverflow.com/a/56230607
         ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -141,7 +144,8 @@ class Downloader:
 
 
 if __name__ == '__main__':
-    downloader = Downloader()
+    downloader = Downloader('tmp_data')
     downloader.download_data()
     downloader.extract_all_years()
-    downloader.save_all_crosswalks()
+    downloader.save_all_crosswalks(
+        os.path.join(self.save_path, 'crosswalks.csv'))

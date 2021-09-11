@@ -10,6 +10,7 @@ geojson==2.5.0
 geopandas==0.8.1
 matplotlib==3.3.0
 numpy==1.18.5
+openpyxl==3.0.7
 pandas==1.0.4
 pylint
 pytest
