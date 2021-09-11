@@ -125,13 +125,16 @@ compare the produced output files (e.g., cleaned csv, mcf, tmcf) against
 expected ones.  An example test following this pattern is
 [here](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py).
 
- :exclamation: --- Please ensure that there is an `__init__.py` file in the
-directory of your import scripts, and every parent directory until
-`scripts/`.  This is necessary for the `unittest` framework to automatically
-discover and run your tests as part of presubmit.
+---
+**NOTE**
 
- :memo: --- In the presence of `__init__.py`, you will need to adjust the way
-you import modules and run tests, as follows:
+Please ensure that there is an `__init__.py` file in the directory of your
+import scripts, and every parent directory until `scripts/`.  This is
+necessary for the `unittest` framework to automatically discover and run your
+tests as part of presubmit.
+
+In the presence of `__init__.py`, you will need to adjust the way you import
+modules and run tests, as follows:
 
 - You will need to import modules in your test with a dotted prefix like
   [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8).
@@ -148,6 +151,7 @@ you import modules and run tests, as follows:
 
   - `dc-data-py-test`
 
+---
 
 ##### Guidelines
 
