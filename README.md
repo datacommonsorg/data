@@ -125,12 +125,12 @@ compare the produced output files (e.g., cleaned csv, mcf, tmcf) against
 expected ones.  An example test following this pattern is
 [here](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py).
 
-> **NOTE**  Please ensure that there is an `__init__.py` file in the
+> **IMPORTANT:**  Please ensure that there is an `__init__.py` file in the
 directory of your import scripts, and every parent directory until
 `scripts/`.  This is necessary for the `unittest` framework to automatically
 discover and run your tests as part of presubmit.
 
-> **NOTE** In the presence of `__init__.py`, you will need to adjust the way
+> **NOTE:** In the presence of `__init__.py`, you will need to adjust the way
 you import modules and run tests, as below.
 
 1. You should import modules in your test with a dotted prefix like
@@ -160,8 +160,6 @@ you import modules and run tests, as below.
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
     as specified in
     [.pylintrc](https://github.com/datacommonsorg/data/blob/master/.pylintrc).
-*   Add a `__init__.py` file with your import scripts, so presubmit will run
-    your tests.
 *   Tests must succeed.
 
 Consider automating coding to satisfy some of these requirements.
