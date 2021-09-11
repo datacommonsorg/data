@@ -60,9 +60,7 @@ class Downloader:
     def __init__(self):
         self.years = list(range(2010, 2020))
         self.current_year = None
-        self.files = {}  # sheet name -> list of files
-        for sheet, _ in SHEET_NAMES_TO_CSV_FILENAMES.items():
-            self.files[sheet] = {}
+        self.files = []  # list of (year, filename) of all extracted files
 
     def download_data(self):
         """Downloads and unzips excel files from DOWNLOAD_URI."""
@@ -85,6 +83,7 @@ class Downloader:
             headers_df.transpose().to_csv(os.path.join(SAVE_PATH,
                                                        f'cols_{csv_name}'),
                                           index=None)
+        return self.files
 
     def save_all_crosswalks(self):
         """Builds individual year crosswalks, as well as a join crosswalk for all years."""
@@ -100,9 +99,6 @@ class Downloader:
                                  header=True,
                                  index=None)
         return all_crosswalks_df
-
-    def get_direct_emitter_files(self):
-        return self.files[_DIRECT_EMITTERS_SHEET]
 
     def _csv_path(self, csv_filename, year=None):
         if not year:
@@ -122,7 +118,7 @@ class Downloader:
             csv_filename = self._csv_path(csv_filename)
             summary_file.to_csv(csv_filename, index=None, header=True)
             headers[sheet][self.current_year] = summary_file.columns
-            self.files[sheet][self.current_year] = csv_filename
+            self.files.append((self.current_year, csv_filename))
 
     def _save_crosswalk(self):
         # Per https://stackoverflow.com/a/56230607

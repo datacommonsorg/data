@@ -30,6 +30,7 @@ GAS_COLUMNS_TO_NAME = {
     'Total reported emissions from Onshore Oil & Gas Production': None,
     'Total reported emissions from Gathering & Boosting': None,
     'Total reported direct emissions from Local Distribution Companies': None,
+    'Total reported direct emissions from Electrical Equipment Use': None,
 }
 
 GAS_MCF_TEMPLATE = """
