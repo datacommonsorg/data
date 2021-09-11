@@ -8,7 +8,10 @@ import sys
 from absl import app
 from absl import flags
 
-sys.path.insert(1, '../../')
+# Allows the following module imports to work when running as a script
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
 from us_epa.util.crosswalk import Crosswalk
 
 FLAGS = flags.FLAGS
