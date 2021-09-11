@@ -6,7 +6,7 @@ Usage: python3 deepsolar_test.py
 import unittest
 import os
 import tempfile
-from deepsolar import write_csv
+from .deepsolar import write_csv
 
 module_dir_ = os.path.dirname(__file__)
 

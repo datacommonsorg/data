@@ -20,7 +20,7 @@ which are a small subset of the available EJSCREEN variables.
 
 To generate `ejscreen_airpollutants.csv` and `ejscreen.tmcf` run the following:  
 
-    python3 ejscreen.py
+    `python3 ejscreen.py`
 
 As of July, 2021 this includes data through the end of 2020.
 
@@ -28,7 +28,7 @@ As of July, 2021 this includes data through the end of 2020.
 
 To run unit tests:
 
-    python3 ejscreen_test.py
+    `python3 -m unittest discover -v -s ../ -p "*_test.py"`
 
 ## Data Download and Documentation
 https://www.epa.gov/ejscreen/download-ejscreen-data
