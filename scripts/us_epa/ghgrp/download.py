@@ -33,8 +33,9 @@ CROSSWALK_COLS_TO_KEEP = [
 ]
 GHGRP_ID_COL = 'Facility Id'
 
+_DIRECT_EMITTERS_SHEET = 'Direct Emitters'
 SHEET_NAMES_TO_CSV_FILENAMES = {
-    'Direct Emitters': 'direct_emitters.csv',
+    _DIRECT_EMITTERS_SHEET: 'direct_emitters.csv',
     'Onshore Oil & Gas Prod.': 'oil_and_gas.csv',
     'Gathering & Boosting': 'gathering_and_boosting.csv',
     'LDC - Direct Emissions': 'local_distribution.csv',
@@ -59,6 +60,9 @@ class Downloader:
     def __init__(self):
         self.years = list(range(2010, 2020))
         self.current_year = None
+        self.files = {}  # sheet name -> list of files
+        for sheet, _ in SHEET_NAMES_TO_CSV_FILENAMES.items():
+            self.files[sheet] = {}
 
     def download_data(self):
         """Downloads and unzips excel files from DOWNLOAD_URI."""
@@ -97,8 +101,13 @@ class Downloader:
                                  index=None)
         return all_crosswalks_df
 
-    def _csv_path(self, csv_filename):
-        return os.path.join(SAVE_PATH, f'{self.current_year}_{csv_filename}')
+    def get_direct_emitter_files(self):
+        return self.files[_DIRECT_EMITTERS_SHEET]
+
+    def _csv_path(self, csv_filename, year=None):
+        if not year:
+            year = self.current_year
+        return os.path.join(SAVE_PATH, f'{year}_{csv_filename}')
 
     def _extract_data(self, headers):
         summary_filename = os.path.join(
@@ -110,10 +119,10 @@ class Downloader:
                 print(f'Skipping sheet: {sheet}')
                 continue
             summary_file = xl.parse(sheet, header=HEADER_ROW, dtype=str)
-            summary_file.to_csv(self._csv_path(csv_filename),
-                                index=None,
-                                header=True)
+            csv_filename = self._csv_path(csv_filename)
+            summary_file.to_csv(csv_filename, index=None, header=True)
             headers[sheet][self.current_year] = summary_file.columns
+            self.files[sheet][self.current_year] = csv_filename
 
     def _save_crosswalk(self):
         # Per https://stackoverflow.com/a/56230607

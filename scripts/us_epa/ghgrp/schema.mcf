@@ -1,0 +1,40 @@
+Node: dcs:GreenhouseGas
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+domainIncludes: dcs:emittedThing
+description: "Gases that trap heat in the atmosphere."
+descriptionUrl: "https://www.epa.gov/ghgemissions/overview-greenhouse-gases"
+
+Node: dcs:EmissionSourceTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+
+Node: dcs:BiogenicEmissionSource
+typeOf: dcs:EmissionSourceTypeEnum
+description: "Biogenic emission sources are emissions that come from natural sources. Most types are widespread and ubiquitous contributors to background air chemistry. Often only the emissions from vegetation and soils are included, but other relevant sources include volcanic emissions, lightning, and sea salt."
+descriptionUrl: "https://www.epa.gov/air-emissions-modeling/biogenic-emission-sources"
+
+Node: dcs:NonBiogenicEmissionSource
+typeof: dcs:EmissionSourceTypeEnum
+description: "Biogenic emission sources are emissions that come from non-natural sources."
+descriptionUrl: "https://www.epa.gov/air-emissions-modeling/biogenic-emission-sources"
+
+Node: dcs:EmissionUnitOfMeasure
+typeOf: dcs:UnitOfMeasure
+description: "A unit used to denote a measurement of emissions."
+
+Node: dcs:MetricTonCO2e
+typeOf: dcs:EmissionUnitOfMeasure
+description: "Represents an amount of a Greenhouse Gas whose atmospheric impact has been standardized to that of one unit mass of carbon dioxide (CO2), based on the global warming potential (GWP) of the gas."
+
+Node: dcs:emissionSource
+typeOf: schema:Property
+description: "Source of emission."
+domainIncludes: dcs:Emissions
+rangeIncludes: dcs:EmissionSourceEnum
+
+Node: dcs:emissionSourceType
+typeOf: schema:Property
+description: "Type of emission source."
+domainIncludes: dcs:Emissions
+rangeIncludes: dcs:EmissionSourceTypeEnum
