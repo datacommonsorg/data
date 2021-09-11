@@ -37,21 +37,21 @@ class GasTest(unittest.TestCase):
             'Nitrous Oxide (N2O) emissions':
                 'Annual_Emissions_NitrousOxide',
             'HFC emissions':
-                'Annual_Emissions_HFC',
+                'Annual_Emissions_Hydrofluorocarbon',
             'PFC emissions':
-                'Annual_Emissions_PFC',
+                'Annual_Emissions_Perfluorocarbon',
             'SF6 emissions':
-                'Annual_Emissions_SF6',
+                'Annual_Emissions_SulfurHexafluoride',
             'NF3 emissions':
-                'Annual_Emissions_NF3',
+                'Annual_Emissions_NitrogenTrifluoride',
             'Other Fully Fluorinated GHG emissions':
-                'Annual_Emissions_EPA_OtherFullyFluorinatedGHG',
+                'Annual_Emissions_EPA_OtherFullyFluorinatedCompound',
             'HFE emissions':
-                'Annual_Emissions_HFE',
+                'Annual_Emissions_Hydrofluoroether',
             'Very Short-lived Compounds emissions':
                 'Annual_Emissions_VeryShortLivedCompounds',
             'Other GHGs (metric tons CO2e)':
-                'Annual_Emissions_EPA_OtherGHGs',
+                'Annual_Emissions_EPA_OtherGreenhouseGas',
             'Biogenic CO2 emissions (metric tons)':
                 'Annual_Emissions_CarbonDioxide_Biogenic',
             'Total reported emissions from Onshore Oil & Gas Production':

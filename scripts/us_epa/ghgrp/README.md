@@ -22,6 +22,11 @@ were included in the import from [EPA GHG facility import](../facility/README.md
       ```
       python3 -m unittest discover -v -s ../ -p "*_test.py"
       ```
+      or
+      ```
+      cd ../../../
+      ./run_tests.sh -p scripts/us_epa/ghgrp
+      ```
 
 3. To validate the import, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:
 
@@ -35,8 +40,8 @@ were included in the import from [EPA GHG facility import](../facility/README.md
       {
         "counterSet": {
           "counters": {
-            "Existence_NumChecks": "4362086",
-            "Existence_NumDcCalls": "28",
+            "Existence_NumChecks": "4362098",
+            "Existence_NumDcCalls": "29",
             "NumNodeSuccesses": "396460",
             "NumPVSuccesses": "3171680",
             "NumRowSuccesses": "396460"

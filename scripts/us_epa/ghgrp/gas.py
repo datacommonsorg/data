@@ -29,15 +29,15 @@ GAS_COLUMNS_TO_NAME = {
     'NF3 emissions':
         'Nitrogen Trifluoride',
     'HFE emissions':
-        'Hydrofluoroethers',
+        'Hydrofluoroether',
     'CO2 emissions (non-biogenic)':
         'Carbon Dioxide',
     'Other Fully Fluorinated GHG emissions':
-        'Other Fully Fluorinated Compounds',
+        'Other Fully Fluorinated Compound',
     'Very Short-lived Compounds emissions':
         'Very Short-lived Compounds',
     'Other GHGs (metric tons CO2e)':
-        'Other Greenhouse Gasses',
+        'Other Greenhouse Gas',
     'Biogenic CO2 emissions (metric tons)':
         None,
     'Total reported direct emissions':
@@ -86,12 +86,13 @@ def col_to_sv(col):
     elif dcid.startswith('CO2') and '(non-biogenic)' in dcid:
         suffix = 'CarbonDioxide_NonBiogenic'
     elif dcid in GAS_COLUMNS_TO_NAME:
-        suffix = name_to_dcid(dcid.strip())
+        suffix = col_to_dcid(dcid.strip())
     assert suffix != None
     return f'Annual_Emissions_{suffix}'
 
 
-def name_to_dcid(name):
+def col_to_dcid(col):
+    name = GAS_COLUMNS_TO_NAME[col]
     gas_dcid = name.replace(' emissions', '').replace(' ', '')
     if '-' in gas_dcid:
         idx = gas_dcid.rfind('-')
@@ -110,7 +111,7 @@ def append_gas_mcf(fp):
         if not gas_name:
             continue
         fp.write(
-            GAS_MCF_TEMPLATE.format(gas_dcid=name_to_dcid(gas_name),
+            GAS_MCF_TEMPLATE.format(gas_dcid=col_to_dcid(gas_col),
                                     gas_name=gas_name))
 
 
@@ -118,7 +119,7 @@ def append_sv_mcf(fp):
     for col, name in GAS_COLUMNS_TO_NAME.items():
         sv_dcid = col_to_sv(col)
         if name:
-            gas_dcid = name_to_dcid(name)
+            gas_dcid = col_to_dcid(col)
         else:
             gas_dcid = 'GreenhouseGas'
         fp.write(SV_MCF_TEMPLATE.format(sv_dcid=sv_dcid, gas_dcid=gas_dcid))
@@ -129,6 +130,7 @@ def append_sv_mcf(fp):
 
 
 if __name__ == '__main__':
-    with open(os.path.join('import_data', 'gas.mcf'), 'w') as fp:
+    with open(os.path.join('import_data', 'gas_node.mcf'), 'w') as fp:
         append_gas_mcf(fp)
+    with open(os.path.join('import_data', 'gas_sv.mcf'), 'w') as fp:
         append_sv_mcf(fp)

@@ -107,6 +107,7 @@ def append_sv_mcf(fp):
 
 
 if __name__ == '__main__':
-    with open(os.path.join('import_data', 'sources.mcf'), 'w') as fp:
+    with open(os.path.join('import_data', 'sources_node.mcf'), 'w') as fp:
         append_source_mcf(fp)
+    with open(os.path.join('import_data', 'sources_sv.mcf'), 'w') as fp:
         append_sv_mcf(fp)
