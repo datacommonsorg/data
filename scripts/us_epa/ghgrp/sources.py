@@ -13,6 +13,8 @@
 # limitations under the License.
 """Simple utility for emission source-related operations, such as generating MCF."""
 
+import os
+
 SOURCE_COLS = [
     'Stationary Combustion',
     'Electricity Generation',
@@ -96,12 +98,15 @@ def append_source_mcf(fp):
         fp.write(
             SOURCE_MCF_TEMPLATE.format(dcid=_name_to_dcid(source), name=source))
 
+
 def append_sv_mcf(fp):
     for source in SOURCE_COLS:
         fp.write(
-            SV_MCF_TEMPLATE.format(sv_dcid=col_to_sv(source), source_dcid=_name_to_dcid(source)))
+            SV_MCF_TEMPLATE.format(sv_dcid=col_to_sv(source),
+                                   source_dcid=_name_to_dcid(source)))
+
 
 if __name__ == '__main__':
-    with open('tmp_data/sources.mcf', 'w') as fp:
+    with open(os.path.join('import_data', 'sources.mcf'), 'w') as fp:
         append_source_mcf(fp)
         append_sv_mcf(fp)

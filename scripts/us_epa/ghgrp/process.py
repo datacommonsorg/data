@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Module to generate flattened CSV file of all observations across years."""
 
 import os
 import sys
@@ -30,6 +31,8 @@ _SV = 'sv'
 _YEAR = 'year'
 _VALUE = 'value'
 _OUT_FIELDNAMES = [_DCID, _SV, _YEAR, _VALUE]
+_SAVE_PATH = 'tmp_data'
+_OUT_PATH = 'import_data'
 
 
 def process_data(data_filepaths, crosswalk, out_filepath):
@@ -59,8 +62,10 @@ def process_data(data_filepaths, crosswalk, out_filepath):
 
 
 if __name__ == '__main__':
-    crosswalk = cw.Crosswalk('tmp_data/crosswalks.csv')
-    downloader = download.Downloader()
-    # downloader.download_data()
-    # files = downloader.extract_all_years()
-    # process_data(files, crosswalk, 'tmp_data/all_data.csv')
+    downloader = download.Downloader(_SAVE_PATH)
+    downloader.download_data()
+    files = downloader.extract_all_years()
+    crosswalk_file = os.path.join(_SAVE_PATH, 'crosswalks.csv')
+    downloader.save_all_crosswalks(crosswalk_file)
+    crosswalk = cw.Crosswalk(crosswalk_file)
+    process_data(files, crosswalk, os.path.join(_OUT_PATH, 'all_data.csv'))
