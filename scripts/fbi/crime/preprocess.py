@@ -241,7 +241,7 @@ def _update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
         cities_not_found_set = set()
         for crime in crimes:
             if update_crime_geocode(crime, geo_codes, found_set,
-                                                   cities_not_found_set):
+                                    cities_not_found_set):
                 calculate_crimes(crime)
 
                 processed_dict = {

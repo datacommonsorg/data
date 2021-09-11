@@ -19,7 +19,7 @@ class WriteMCFTest(unittest.TestCase):
         with open(csv_file, 'rt') as f_in:
             f_out = io.StringIO()
             write_mcf(f_in, f_out, "AwesomePlaces", "fooId",
-                    "List of awesome test places.")
+                      "List of awesome test places.")
         self.assertEqual(f_out.getvalue(), expected_mcf)
 
 

@@ -34,8 +34,7 @@ class GeocodeCitiesTest(unittest.TestCase):
     def test_manual_geocode_city(self):
         # west bloomfield township mi	2612585480 is from manual_geocodes.csv.
         state = 'mi'
-        city = normalize_fbi_city('West Bloomfield Township',
-                                                 state)
+        city = normalize_fbi_city('West Bloomfield Township', state)
         city_state = '{} {}'.format(city, state)
         self.assertEqual(city_state, 'west bloomfield township mi')
         self.assertEqual(self.geo_codes[city_state], '2612585480')
@@ -50,9 +49,8 @@ class GeocodeCitiesTest(unittest.TestCase):
         }
         found_set = set()
         cities_not_found_set = set()
-        result = update_crime_geocode(crime, geo_codes,
-                                                     found_set,
-                                                     cities_not_found_set)
+        result = update_crime_geocode(crime, geo_codes, found_set,
+                                      cities_not_found_set)
         self.assertTrue(result)
         self.assertEqual(found_set, {'mineral point wi'})
         self.assertEqual(5553100, crime['Geocode'])
@@ -60,7 +58,7 @@ class GeocodeCitiesTest(unittest.TestCase):
         # Deuplicate state and city, assert exception.
         with self.assertRaises(Exception):
             update_crime_geocode(crime, geo_codes, found_set,
-                                                cities_not_found_set)
+                                 cities_not_found_set)
 
         not_found_crime = {
             'Year': 2019,
@@ -68,9 +66,8 @@ class GeocodeCitiesTest(unittest.TestCase):
             'City': 'Random City',
             'Population': 1.0
         }
-        result = update_crime_geocode(not_found_crime, geo_codes,
-                                                     found_set,
-                                                     cities_not_found_set)
+        result = update_crime_geocode(not_found_crime, geo_codes, found_set,
+                                      cities_not_found_set)
         self.assertFalse(result)
         self.assertEqual(found_set, {'mineral point wi'})
         self.assertEqual(5553100, crime['Geocode'])
