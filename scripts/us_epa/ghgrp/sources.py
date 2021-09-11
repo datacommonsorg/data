@@ -99,6 +99,10 @@ def append_source_mcf(fp):
         fp.write(
             SOURCE_MCF_TEMPLATE.format(dcid=_name_to_dcid(source), name=source))
 
+def append_sv_mcf(fp):
+    for source in SOURCE_COLS:
+        fp.write(
+            SV_MCF_TEMPLATE.format(sv_dcid=col_to_sv(source), source_dcid=_name_to_dcid(source)))
 
 def append_sv_mcf(fp):
     for source in SOURCE_COLS:
