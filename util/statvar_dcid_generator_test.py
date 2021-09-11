@@ -223,13 +223,13 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = ('Count_Person_OnlyEnglishSpokenAtHome')
         self.assertEqual(dcid, expected_dcid)
 
-        stat_var_dict3 = {
+        stat_var_dict2 = {
             'statType': 'measuredValue',
             'measuredProperty': 'count',
             'populationType': 'Household',
             'householderRelatedChildrenUnder18Years': '[1 2 Child]',
         }
-        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict3)
+        dcid = statvar_dcid_generator.get_stat_var_dcid(stat_var_dict2)
         expected_dcid = ('Count_Household_Householder1To2RelatedChildren')
         self.assertEqual(dcid, expected_dcid)
 
