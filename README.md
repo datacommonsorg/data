@@ -125,33 +125,28 @@ compare the produced output files (e.g., cleaned csv, mcf, tmcf) against
 expected ones.  An example test following this pattern is
 [here](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py).
 
----
-**NOTE**
+> **NOTE**  Please ensure that there is an `__init__.py` file in the
+directory of your import scripts, and every parent directory until
+`scripts/`.  This is necessary for the `unittest` framework to automatically
+discover and run your tests as part of presubmit.
 
-Please ensure that there is an `__init__.py` file in the directory of your
-import scripts, and every parent directory until `scripts/`.  This is
-necessary for the `unittest` framework to automatically discover and run your
-tests as part of presubmit.
+> **NOTE** In the presence of `__init__.py`, you will need to adjust the way
+you import modules and run tests, as below.
 
-In the presence of `__init__.py`, you will need to adjust the way you import
-modules and run tests, as follows:
+1. You should import modules in your test with a dotted prefix like
+   [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8).
 
-- You will need to import modules in your test with a dotted prefix like
-  [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8).
+2. Instead of running your test as `python3 foo_test.py`, run as:
 
-- You cannot run your test as `python3 foo_test.py`, instead run as:
+    `python3 -m unittest discover -v -s ../ -p "foo_test.py"`
 
-  `python3 -m unittest discover -v -s ../ -p "foo_test.py"`
+   Consider creating a generic alias like this:
 
-  Consider creating a generic alias like this:
+    - `alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'`
 
-  - `alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'`
+   Then, you can run your tests as:
 
-  Then, you can run your tests as:
-
-  - `dc-data-py-test`
-
----
+    - `dc-data-py-test`
 
 ##### Guidelines
 
