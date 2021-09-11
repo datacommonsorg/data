@@ -69,6 +69,7 @@ measuredProperty: dcs:amount
 statType: dcs:measuredValue
 measurementQualifier: dcs:Annual
 emissionSource: dcs:{source_dcid}
+emissionSourceType: dcs:NonBiogenicEmissionSource
 """
 
 

@@ -27,7 +27,7 @@ GAS_COLUMNS_TO_NAME = {
     'Other Fully Fluorinated GHG emissions': 'Other Fully Fluorinated Compound',
     'Very Short-lived Compounds emissions': 'Very Short-lived Compounds',
     'Other GHGs (metric tons CO2e)': 'Other Greenhouse Gas',
-    'Biogenic CO2 emissions (metric tons)': None,
+    'Biogenic CO2 emissions (metric tons)': 'Carbon Dioxide',
     'Total reported direct emissions': None,
     'Total reported emissions from Onshore Oil & Gas Production': None,
     'Total reported emissions from Gathering & Boosting': None,
@@ -99,14 +99,19 @@ def append_gas_mcf(fp):
 
 
 def append_sv_mcf(fp):
+    processed_total = False
     for col, name in GAS_COLUMNS_TO_NAME.items():
+        if processed_total:
+            continue
+        if col.startswith('Total') and not processed_total:
+            processed_total = True
         sv_dcid = col_to_sv(col)
         if name:
             gas_dcid = col_to_dcid(col)
         else:
             gas_dcid = 'GreenhouseGas'
         fp.write(SV_MCF_TEMPLATE.format(sv_dcid=sv_dcid, gas_dcid=gas_dcid))
-        if col.startswith('Total reported') or col.startswith('Biogenic'):
+        if col.startswith('Biogenic'):
             fp.write(f'emissionSourceType: dcs:NonBiogenicEmissionSource')
         if 'non-biogenic' in col:
             fp.write(f'emissionSourceType: dcs:BiogenicEmissionSource')

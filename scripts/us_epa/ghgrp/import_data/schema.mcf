@@ -51,11 +51,6 @@ description: "Type of emission source."
 domainIncludes: dcs:Emissions
 rangeIncludes: dcs:EmissionSourceTypeEnum
 
-Node: dcs:emittedThing
-name: "emittedThing"
-typeOf: schema:Property
-rangeIncludes: dcs:GreenhouseGas
-
 Node: dcs:EPA_GHGRP
 name: "EPA_GHGRP"
 typeOf: dcs:MeasurementMethodEnum
