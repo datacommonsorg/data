@@ -51,8 +51,8 @@ def process_direct_emitters(data_filepaths, crosswalk, out_filepath):
                             if not sv:
                                 continue
                         csv_writer.writerow({
-                            _DCID: dcid,
-                            _SV: sv,
+                            _DCID: f'dcid:{dcid}',
+                            _SV: f'dcid:{sv}',
                             _YEAR: year,
                             _VALUE: value
                         })
@@ -63,21 +63,16 @@ if __name__ == '__main__':
     downloader = download.Downloader()
     # downloader.download_data()
     # downloader.extract_all_years()
-    # process_direct_emitters(downloader.get_direct_emitter_files(), crosswalk)
+    # process_direct_emitters(downloader.get_direct_emitter_files(), crosswalk, 'tmp_data/out_direct_emitters.csv')
     process_direct_emitters(
-        {
-            '2010': 'test_data/2010_direct_emitters.csv',
-            '2019': 'test_data/2019_direct_emitters.csv',
-        }, crosswalk, 'tmp_data/out_direct_emitters.csv')
-    # process_direct_emitters(
-    #  {'2010': 'tmp_data/2010_direct_emitters.csv',},
-    # '2011': 'tmp_data/2011_direct_emitters.csv',
-    # '2012': 'tmp_data/2012_direct_emitters.csv',
-    # '2013': 'tmp_data/2013_direct_emitters.csv',
-    # '2014': 'tmp_data/2014_direct_emitters.csv',
-    # '2015': 'tmp_data/2015_direct_emitters.csv',
-    # '2016': 'tmp_data/2016_direct_emitters.csv',
-    # '2017': 'tmp_data/2017_direct_emitters.csv',
-    # '2018': 'tmp_data/2018_direct_emitters.csv',
-    # {'2019': 'tmp_data/2019_direct_emitters.csv'},
-    # crosswalk)
+     {'2010': 'tmp_data/2010_direct_emitters.csv',
+    '2011': 'tmp_data/2011_direct_emitters.csv',
+    '2012': 'tmp_data/2012_direct_emitters.csv',
+    '2013': 'tmp_data/2013_direct_emitters.csv',
+    '2014': 'tmp_data/2014_direct_emitters.csv',
+    '2015': 'tmp_data/2015_direct_emitters.csv',
+    '2016': 'tmp_data/2016_direct_emitters.csv',
+    '2017': 'tmp_data/2017_direct_emitters.csv',
+    '2018': 'tmp_data/2018_direct_emitters.csv',
+    '2019': 'tmp_data/2019_direct_emitters.csv'},
+    crosswalk, 'tmp_data/out_direct_emitters.csv')

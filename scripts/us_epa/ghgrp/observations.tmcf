@@ -5,5 +5,5 @@ variableMeasured: C:GHGRP->sv
 observationDate: C:GHGRP->year
 observationPeriod: "P1Y"
 value: C:GHGRP->value
-unit: dcs:MetricTonCo2e
-measurementMethod: EPA_GHGRP
+unit: dcs:MetricTonCO2e
+measurementMethod: dcs:EPA_GHGRP

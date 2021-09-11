@@ -1,9 +1,12 @@
 Node: dcs:GreenhouseGas
 typeOf: schema:Class
 subClassOf: dcs:Enumeration
-domainIncludes: dcs:emittedThing
 description: "Gases that trap heat in the atmosphere."
 descriptionUrl: "https://www.epa.gov/ghgemissions/overview-greenhouse-gases"
+
+Node: dcs:EmissionSourceEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
 
 Node: dcs:EmissionSourceTypeEnum
 typeOf: schema:Class
@@ -15,7 +18,7 @@ description: "Biogenic emission sources are emissions that come from natural sou
 descriptionUrl: "https://www.epa.gov/air-emissions-modeling/biogenic-emission-sources"
 
 Node: dcs:NonBiogenicEmissionSource
-typeof: dcs:EmissionSourceTypeEnum
+typeOf: dcs:EmissionSourceTypeEnum
 description: "Biogenic emission sources are emissions that come from non-natural sources."
 descriptionUrl: "https://www.epa.gov/air-emissions-modeling/biogenic-emission-sources"
 
@@ -38,3 +41,15 @@ typeOf: schema:Property
 description: "Type of emission source."
 domainIncludes: dcs:Emissions
 rangeIncludes: dcs:EmissionSourceTypeEnum
+
+Node: dcs:emittedThing
+typeOf: schema:Property
+rangeIncludes: dcs:GreenhouseGas
+
+Node: dcid:EPA_GHGRP
+typeOf: dcs:MeasurementMethodEnum
+description: "Measurement method for data from US EPA Greenhouse Gas Reporting Program."
+
+Node: dcid:amount
+typeOf: Property
+domainIncludes: dcs:Emissions

@@ -13,37 +13,23 @@
 # limitations under the License.
 """Simple utility for gas-related operations, such as generating MCF."""
 
-GAS_COLUMNS = [
-    'Total reported direct emissions',
-    'CO2 emissions (non-biogenic)',
-    'Methane (CH4) emissions',
-    'Nitrous Oxide (N2O) emissions',
-    'HFC emissions',
-    'PFC emissions',
-    'SF6 emissions',
-    'NF3 emissions',
-    'Other Fully Fluorinated GHG emissions',
-    'HFE emissions',
-    'Very Short-lived Compounds emissions',
-    'Other GHGs (metric tons CO2e)',
-    'Biogenic CO2 emissions (metric tons)',
-    'Total reported emissions from Onshore Oil & Gas Production',
-    'Total reported emissions from Gathering & Boosting',
-    'Total reported direct emissions from Local Distribution Companies',
-]
-
-GAS_COL_TO_NAME = {
-    'Methane (CH4)': 'Methane',
-    'Nitrous Oxide (N2O)': 'Nitrous Oxide',
-    'HFC': 'Hydrofluorocarbon',
-    'PFC': 'Perfluorocarbon',
-    'SF6': 'Sulfur Hexafluoride',
-    'NF3': 'Nitrogen Trifluoride',
-    'HFE': 'Hydrofluoroethers',
-    'Very Short-lived Compounds': 'Very Short-lived Compounds',
-    'Other Fully Fluorinated GHG': 'Other Fully Fluorinated Compounds',
+GAS_COLUMNS_TO_NAME = {
+    'Methane (CH4) emissions': 'Methane',
+    'Nitrous Oxide (N2O) emissions': 'Nitrous Oxide',
+    'HFC emissions': 'Hydrofluorocarbon',
+    'PFC emissions': 'Perfluorocarbon',
+    'SF6 emissions': 'Sulfur Hexafluoride',
+    'NF3 emissions': 'Nitrogen Trifluoride',
+    'HFE emissions': 'Hydrofluoroethers',
+    'CO2 emissions (non-biogenic)': 'Carbon Dioxide',
+    'Other Fully Fluorinated GHG emissions': 'Other Fully Fluorinated Compounds',
+    'Very Short-lived Compounds emissions': 'Very Short-lived Compounds',
     'Other GHGs (metric tons CO2e)': 'Other Greenhouse Gasses',
-    'CO2 (non-biogenic)': 'Carbon Dioxide',
+    'Biogenic CO2 emissions (metric tons)': None,
+    'Total reported direct emissions': None,
+    'Total reported emissions from Onshore Oil & Gas Production': None,
+    'Total reported emissions from Gathering & Boosting': None,
+    'Total reported direct emissions from Local Distribution Companies': None,
 }
 
 GAS_MCF_TEMPLATE = """
@@ -52,15 +38,27 @@ typeOf: dcs:GreenhouseGas
 name: "{gas_name}"
 """
 
+SV_MCF_TEMPLATE = """
+
+Node: dcid:{sv_dcid}
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+measurementQualifier: dcs:Annual
+emittedThing: dcs:{gas_dcid}
+"""
+
 
 def is_gas_col(col):
-    return col.strip() in GAS_COLUMNS
+    return col.strip() in GAS_COLUMNS_TO_NAME
 
 
 def col_to_sv(col):
     if not is_gas_col(col):
         return None
-    dcid = col.strip().replace(' emissions', '')
+    # dcid = col.strip().replace(' emissions', '')
+    dcid = col.strip()
     suffix = ''
     if dcid.startswith('Total'):
         suffix = 'GreenhouseGas'
@@ -68,14 +66,14 @@ def col_to_sv(col):
         suffix = 'CarbonDioxide_Biogenic'
     elif dcid.startswith('CO2') and '(non-biogenic)' in dcid:
         suffix = 'CarbonDioxide_NonBiogenic'
-    elif dcid in GAS_COL_TO_NAME:
-        suffix = _name_to_dcid(dcid.strip())
+    elif dcid in GAS_COLUMNS_TO_NAME:
+        suffix = name_to_dcid(dcid.strip())
     assert suffix != None
     return f'Annual_Emissions_{suffix}'
 
 
-def _name_to_dcid(name):
-    gas_dcid = name.replace(' ', '')
+def name_to_dcid(name):
+    gas_dcid = name.replace(' emissions', '').replace(' ', '')
     if '-' in gas_dcid:
         idx = gas_dcid.rfind('-')
         if idx < len(gas_dcid) - 1:  # we don't expect a trailing '-'
@@ -88,13 +86,31 @@ def _name_to_dcid(name):
     return gas_dcid
 
 
-def append_mcf(fp):
-    for gas_col, gas_name in GAS_COL_TO_NAME.items():
+def append_gas_mcf(fp):
+    for gas_col, gas_name in GAS_COLUMNS_TO_NAME.items():
+        if not gas_name:
+            continue
         fp.write(
-            GAS_MCF_TEMPLATE.format(gas_dcid=_name_to_dcid(gas_name),
+            GAS_MCF_TEMPLATE.format(gas_dcid=name_to_dcid(gas_name),
                                     gas_name=gas_name))
 
 
+def append_sv_mcf(fp):
+    for col, name in GAS_COLUMNS_TO_NAME.items():
+        sv_dcid = col_to_sv(col)
+        if name:
+            gas_dcid = name_to_dcid(name)
+        else:
+            gas_dcid = 'GreenhouseGas'
+        fp.write(
+            SV_MCF_TEMPLATE.format(sv_dcid=sv_dcid,
+                                gas_dcid=gas_dcid))
+        if col.startswith('Total reported') or col.startswith('Biogenic'):
+            fp.write(f'emissionSourceType: dcs:NonBiogenicEmissionSource')
+        if 'non-biogenic' in col:
+            fp.write(f'emissionSourceType: dcs:BiogenicEmissionSource')
+
 if __name__ == '__main__':
     with open('tmp_data/gas.mcf', 'w') as fp:
-        append_mcf(fp)
+        append_gas_mcf(fp)
+        append_sv_mcf(fp)

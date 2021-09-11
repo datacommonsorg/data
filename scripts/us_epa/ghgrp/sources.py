@@ -59,6 +59,16 @@ typeOf: dcs:EmissionSourceEnum
 name: "{name}"
 """
 
+SV_MCF_TEMPLATE = """
+Node: dcid:{sv_dcid}
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+measurementQualifier: dcs:Annual
+emissionSource: dcs:{source_dcid}
+"""
+
 
 def is_source_col(col):
     return col.strip() in SOURCE_COLS
@@ -67,7 +77,7 @@ def is_source_col(col):
 def col_to_sv(col):
     if not is_source_col(col):
         return None
-    return f'Annual_Emissions_{_name_to_dcid(col)}'
+    return f'Annual_Emissions_GreenhouseGas_{_name_to_dcid(col)}'
 
 
 def _name_to_dcid(name):
@@ -81,12 +91,17 @@ def _name_to_dcid(name):
     return dcid
 
 
-def append_mcf(fp):
+def append_source_mcf(fp):
     for source in SOURCE_COLS:
         fp.write(
             SOURCE_MCF_TEMPLATE.format(dcid=_name_to_dcid(source), name=source))
 
+def append_sv_mcf(fp):
+    for source in SOURCE_COLS:
+        fp.write(
+            SV_MCF_TEMPLATE.format(sv_dcid=col_to_sv(source), source_dcid=_name_to_dcid(source)))
 
 if __name__ == '__main__':
     with open('tmp_data/sources.mcf', 'w') as fp:
-        append_mcf(fp)
+        append_source_mcf(fp)
+        append_sv_mcf(fp)
