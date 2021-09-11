@@ -53,8 +53,8 @@ class GeojsonSimplifierTest(unittest.TestCase):
                                                   'alabama-simple.geojson')
         self.assertDictEqual(result, exp_result)
 
-    def test_small_adjustement(self):
-        """Tests a small adjustement (removed point is very well approximated
+    def test_small_adjustment(self):
+        """Tests a small adjustment (removed point is very well approximated
         by the resulting line) on a small, custom-made Polygon.
         """
         polygon_ex = {
@@ -70,8 +70,8 @@ class GeojsonSimplifierTest(unittest.TestCase):
         simplifier.simplify(epsilon=0.1)
         self.assertDictEqual(simplifier.geojson, polygon_simple_ex)
 
-    def test_larger_adjustement(self):
-        """Tests a moderate adjustement (removed point is poorly approximated
+    def test_larger_adjustment(self):
+        """Tests a moderate adjustment (removed point is poorly approximated
         by the resulting line) on a small, custom-made Polygon.
         """
         polygon_ex = {
