@@ -7,16 +7,15 @@ import tempfile
 import sys
 import unittest
 
-currentdir = os.path.dirname(os.path.realpath(__file__))
-parentdir = os.path.dirname(currentdir)
-sys.path.append(parentdir)
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
+sys.path.insert(1, os.path.join(_CODEDIR, '..'))
 from common import process
 
-_FEATURES = 'features.json'
-_STAT_VAR_LIST = 'stat_vars.csv'
-_TEST_DATA = 'testdata'
-_EXPECTED_TMCF = 'output.tmcf'
+_FEATURES = os.path.join(_CODEDIR, 'features.json')
+_STAT_VAR_LIST = os.path.join(_CODEDIR, 'stat_vars.csv')
+_TEST_DATA = os.path.join(_CODEDIR, 'testdata')
+_EXPECTED_TMCF = os.path.join(_CODEDIR, 'output.tmcf')
 
 
 class ProcessTest(unittest.TestCase):
