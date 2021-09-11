@@ -16,40 +16,23 @@
 import os
 
 GAS_COLUMNS_TO_NAME = {
-    'Methane (CH4) emissions':
-        'Methane',
-    'Nitrous Oxide (N2O) emissions':
-        'Nitrous Oxide',
-    'HFC emissions':
-        'Hydrofluorocarbon',
-    'PFC emissions':
-        'Perfluorocarbon',
-    'SF6 emissions':
-        'Sulfur Hexafluoride',
-    'NF3 emissions':
-        'Nitrogen Trifluoride',
-    'HFE emissions':
-        'Hydrofluoroether',
-    'CO2 emissions (non-biogenic)':
-        'Carbon Dioxide',
-    'Other Fully Fluorinated GHG emissions':
-        'Other Fully Fluorinated Compound',
-    'Very Short-lived Compounds emissions':
-        'Very Short-lived Compounds',
-    'Other GHGs (metric tons CO2e)':
-        'Other Greenhouse Gas',
-    'Biogenic CO2 emissions (metric tons)':
-        None,
-    'Total reported direct emissions':
-        None,
-    'Total reported emissions from Onshore Oil & Gas Production':
-        None,
-    'Total reported emissions from Gathering & Boosting':
-        None,
-    'Total reported direct emissions from Local Distribution Companies':
-        None,
-    'Total reported direct emissions from Electrical Equipment Use':
-        None,
+    'Methane (CH4) emissions': 'Methane',
+    'Nitrous Oxide (N2O) emissions': 'Nitrous Oxide',
+    'HFC emissions': 'Hydrofluorocarbon',
+    'PFC emissions': 'Perfluorocarbon',
+    'SF6 emissions': 'Sulfur Hexafluoride',
+    'NF3 emissions': 'Nitrogen Trifluoride',
+    'HFE emissions': 'Hydrofluoroether',
+    'CO2 emissions (non-biogenic)': 'Carbon Dioxide',
+    'Other Fully Fluorinated GHG emissions': 'Other Fully Fluorinated Compound',
+    'Very Short-lived Compounds emissions': 'Very Short-lived Compounds',
+    'Other GHGs (metric tons CO2e)': 'Other Greenhouse Gas',
+    'Biogenic CO2 emissions (metric tons)': None,
+    'Total reported direct emissions': None,
+    'Total reported emissions from Onshore Oil & Gas Production': None,
+    'Total reported emissions from Gathering & Boosting': None,
+    'Total reported direct emissions from Local Distribution Companies': None,
+    'Total reported direct emissions from Electrical Equipment Use': None,
 }
 
 GAS_MCF_TEMPLATE = """
