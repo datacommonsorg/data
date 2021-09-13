@@ -1,0 +1,11 @@
+Node: E:mesh_qualifier->E1
+typeOf: dcs:MeSHQualifier
+dcid: C:mesh_qualifier->Qualifier_dcid
+qualifierID: C:mesh_qualifier->QualifierID
+qualifierName: C:mesh_qualifier->QualifierName
+qualifierAbbreviation: C:mesh_qualifier->QualifierAbbreviation
+descriptorID: C:mesh_qualifier->E2
+
+Node: E:mesh_qualifier->E2
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_qualifier->Descriptor_dcid

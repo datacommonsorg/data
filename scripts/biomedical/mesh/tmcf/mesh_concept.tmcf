@@ -1,0 +1,10 @@
+Node: E:mesh_concept->E1
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_concept->Concept_dcid
+conceptID: C:mesh_concept->ConceptID
+conceptName: C:mesh_concept->ConceptName
+descriptorID: C:mesh_concept->E2
+
+Node: E:mesh_concept->E2
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_concept->Descriptor_dcid

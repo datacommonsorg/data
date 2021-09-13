@@ -1,0 +1,11 @@
+Node: E:mesh_term->E1
+typeOf: dcs:MeSHTerm
+dcid: C:mesh_term->Term_dcid
+termID: C:mesh_term->TermID
+termName: C:mesh_term->TermName
+conceptID: C:mesh_term->E2
+conceptName: C:mesh_term->ConceptName
+
+Node: E:mesh_term->E2
+typeOf: dcs:mesh_term
+dcid: C:mesh_term->concept_dcid

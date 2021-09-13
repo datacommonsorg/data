@@ -1,0 +1,8 @@
+Node: E:mesh_descriptor->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_descriptor->Descriptor_dcid
+dateCreated: C:mesh_descriptor->DateCreated
+dateRevised: C:mesh_descriptor->DateRevised
+dateEstablished: C:mesh_descriptor->DateEstablished
+descriptorID: C:mesh_descriptor->DescriptorId
+descriptorName: C:mesh_descriptor->DescriptorName
