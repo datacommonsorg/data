@@ -22,7 +22,7 @@ python3 parse_cdc_places_test.py input_file output_file
 
 import unittest
 import os
-from parse_cdc_places import clean_cdc_places_data
+from .parse_cdc_places import clean_cdc_places_data
 
 TEST_CASE_FILES = [
     # Pairs of input CSV and expected CSV files.
@@ -42,16 +42,15 @@ class TestParseCDCPlaces(unittest.TestCase):
         """
         Tests the clean_cdc_places_data function.
         """
-        module_dir_ = os.path.dirname(__file__)
-        print(module_dir_)
+        test_dir = os.path.join(os.path.dirname(__file__), 'test_data')
         for input_file, expected_output, sep in TEST_CASE_FILES:
             print('\n')
             print('Input File: ' + input_file)
-            test_csv = os.path.join(module_dir_, input_file)
-            output_csv = os.path.join(module_dir_,
+            test_csv = os.path.join(test_dir, input_file)
+            output_csv = os.path.join(test_dir,
                                       (input_file[:-4] + '_output.csv'))
             clean_cdc_places_data(test_csv, output_csv, sep=sep)
-            expected_csv = os.path.join(module_dir_, expected_output)
+            expected_csv = os.path.join(test_dir, expected_output)
         with open(output_csv, 'r') as test:
             test_str: str = test.read()
             with open(expected_csv, 'r') as expected:

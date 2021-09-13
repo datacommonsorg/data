@@ -1,0 +1,9 @@
+Node: E:GHGRP->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:GHGRP->dcid
+variableMeasured: C:GHGRP->sv
+observationDate: C:GHGRP->year
+observationPeriod: "P1Y"
+value: C:GHGRP->value
+unit: dcs:MetricTonCO2e
+measurementMethod: dcs:EPA_GHGRP
