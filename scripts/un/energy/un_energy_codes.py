@@ -1405,9 +1405,19 @@ UN_ENERGY_UNITS_MULTIPLIER = {
     'million': 1000000,
 }
 
+UN_ENERGY_SCALED_UNITS = {
+  'KilowattHour': {
+      1000: 'MegawattHour',
+   },
+   'Kilowatt': {
+      1000: 'Megawatt',
+      1000000: 'Gigawatt'
+   },
+}
+
 
 def get_unit_dcid_scale(units_scale: str) -> (str, int):
-    """Returns the tuple with the dcid for unit and a scaling factor
+    """Returns the tuple with the dcid for unit and a multiplier
     that has a default of '1'.
 
     Args:
@@ -1415,9 +1425,8 @@ def get_unit_dcid_scale(units_scale: str) -> (str, int):
          for instance 'kilowatts, thousand'.
 
     Returns:
-      A tuple of the form (unit, scaling_factor) where
+      A tuple of the form (unit, multiplier) where
        units or scaling factor is None if it cannot be processed.
-  test a long comment is wrapped automatically to 80 characters splitting at a word boundary
     """
     # Remove any extra characters from the unit string.
     units = re.sub('[^a-z,]', '', units_scale.lower())
@@ -1425,7 +1434,11 @@ def get_unit_dcid_scale(units_scale: str) -> (str, int):
     # Get the unit and scale strings.
     if ',' in units:
         units, multiplier = units.split(',', 2)
-
     units_dcid = UN_ENERGY_UNITS.get(units)
     multiplier_num = UN_ENERGY_UNITS_MULTIPLIER.get(multiplier, 1)
+    # Look for any scaled units
+    if units_dcid in UN_ENERGY_SCALED_UNITS:
+        scaled_units = UN_ENERGY_SCALED_UNITS[units_dcid]
+        if multiplier_num in scaled_units:
+            return (scaled_units[multiplier_num], 1)
     return (units_dcid, multiplier_num)

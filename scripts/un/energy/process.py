@@ -20,9 +20,6 @@ Run this script in this folder:
 python3 process.py
 """
 
-from un.energy.country_codes import get_country_dcid
-from un.energy import un_energy_codes
-from un.energy import download
 import csv
 import io
 import os
@@ -35,9 +32,13 @@ from absl import flags
 from collections import defaultdict
 
 # Allows the following module imports to work when running as a script
-sys.path.append(
-    os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))
+# module_dir_ is the path to where this code is running from.
+module_dir_ = os.path.dirname(__file__)
+sys.path.append(os.path.join(module_dir_))
+
+from country_codes import get_country_dcid
+import un_energy_codes
+import download
 
 FLAGS = flags.FLAGS
 flags.DEFINE_list('csv_data_files', [],
@@ -56,7 +57,6 @@ OUTPUT_CSV_COLUMNS = [
     'Year',
     'Quantity',
     'Unit_dcid',
-    'Scaling_factor',
     'Estimate',
     'StatVar',
 ]
@@ -83,7 +83,6 @@ observationDate: C:UNEnergy->Year
 observationPeriod: "P1Y"
 value: C:UNEnergy->Quantity
 unit: C:UNEnergy->Unit_dcid
-scalingFactor: C:UNEnergy->Scaling_factor
 measurementMethod: C:UNEnergy->Estimate
 """
 
@@ -254,6 +253,22 @@ def is_valid_stat_var(sv_pv: dict, counters=None) -> bool:
 
     return True
 
+def _get_scaled_value(value: str, multiplier: int) -> str:
+    """Returns a scaled value for the given value and multiplier.
+
+    Args:
+      value: Original value in string. If it contains a decimal point
+        the returned value will have the same precision.
+    """
+    round_digits = 0
+    fraction_digits = value.find('.')
+    if fraction_digits >= 0:
+        round_digits = len(value) - fraction_digits - 1
+    scaled_value = float(value) * multiplier
+    if round_digits == 0:
+        return str(int(scaled_value))
+    return str(round(scaled_value, round_digits))
+
 
 def generate_stat_var(data_row: dict, sv_pv: dict, counters=None) -> str:
     """Add property:values for a StatVar for the given data row.
@@ -411,15 +426,15 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
 
     data_row['Country_dcid'] = f'dcs:{country_dcid}'
 
-    # Add the quantity units and scaling factor value if any.
-    unit_dcid, scaling_factor = un_energy_codes.get_unit_dcid_scale(units)
-    if not unit_dcid or not scaling_factor:
+    # Add the quantity units and multiplier for the value if any.
+    unit_dcid, multiplier = un_energy_codes.get_unit_dcid_scale(units)
+    if not unit_dcid or not multiplier:
         _add_error_counter('error_unknown_units',
                            f'Unit: {units}, Transaction: {ct_name}', counters)
         return
     data_row['Unit_dcid'] = unit_dcid
-    if scaling_factor != 1:
-        data_row['Scaling_factor'] = scaling_factor
+    if multiplier > 1:
+        data_row['Quantity'] = _get_scaled_value(quantity, multiplier)
 
     # The observation is an estimated value if it has a footnote.
     if notes == "1":
