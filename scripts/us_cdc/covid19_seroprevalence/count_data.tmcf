@@ -5,5 +5,4 @@ observationDate: C:CDC_COVID_Seroprevalence->End_Date
 variableMeasured: C:CDC_COVID_Seroprevalence->StatVar
 observationPeriod: C:CDC_COVID_Seroprevalence->Period
 measurementMethod: dcs:CDC_COVID19_Seroprevalence
-measuredProperty: dcs:cumulativeCount
 value: C:CDC_COVID_Seroprevalence->value
