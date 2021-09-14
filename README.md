@@ -113,6 +113,41 @@ source .env/bin/activate
 pip3 install -r requirements.txt
 ```
 
+##### Testing
+
+Scripts should be accompanied with tests using the [`unittest`
+framework](https://docs.python.org/3/library/unittest.html), and named with
+an `_test.py` suffix.
+
+A common test pattern is to drive your main processing function through some
+sample input files (e.g., with a few rows of the real csv/xls/etc.) and
+compare the produced output files (e.g., cleaned csv, mcf, tmcf) against
+expected ones.  An example test following this pattern is
+[here](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py).
+
+> **IMPORTANT:**  Please ensure that there is an `__init__.py` file in the
+directory of your import scripts, and every parent directory until
+`scripts/`.  This is necessary for the `unittest` framework to automatically
+discover and run your tests as part of presubmit.
+
+> **NOTE:** In the presence of `__init__.py`, you will need to adjust the way
+you import modules and run tests, as below.
+
+1. You should import modules in your test with a dotted prefix like
+   [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8).
+
+2. Instead of running your test as `python3 foo_test.py`, run as:
+
+    `python3 -m unittest discover -v -s ../ -p "foo_test.py"`
+
+   Consider creating a generic alias like this:
+
+    - `alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'`
+
+   Then, you can run your tests as:
+
+    - `dc-data-py-test`
+
 ##### Guidelines
 
 *   Any additional package required must be specified in the requirements.txt
@@ -125,8 +160,6 @@ pip3 install -r requirements.txt
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
     as specified in
     [.pylintrc](https://github.com/datacommonsorg/data/blob/master/.pylintrc).
-*   Add a `__init__.py` file with your import scripts, so presubmit will run
-    your tests.
 *   Tests must succeed.
 
 Consider automating coding to satisfy some of these requirements.

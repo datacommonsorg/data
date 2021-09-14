@@ -1,0 +1,12 @@
+Node: dcid:PinCodeArea
+typeOf: schema:Class
+subClassOf: schema:AdministrativeArea
+name: "PinCodeArea"
+description: "Postal delivery area representations of India Post."
+
+Node: dcid:pinCode
+typeOf: schema:Property
+name: "pinCode"
+description: "PIN code is a six digit code in Indian postal code system used by India Post."
+domainIncludes: schema:Place
+rangeIncludes: schema:Text

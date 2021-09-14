@@ -20,8 +20,8 @@ import sys
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-from generate_csv_and_sv import generate_csv_and_sv
-from import_data import import_data
+from .generate_csv_and_sv import generate_csv_and_sv
+from .import_data import import_data
 
 MODULE_DIR = os.path.dirname(__file__)
 TEST_DATA_DIR = os.path.join(MODULE_DIR, "test_data")

@@ -7,18 +7,18 @@ import importlib
 import os
 import re
 import csv
-import states
+from .states import *
 
 import logging
 
-_CITY_MAP = {'monroe township nj': 'monroe township gloucester county nj'}
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
-# flags.DEFINE_boolean('test', False, 'Run a subset for test?')
+_CITY_MAP = {'monroe township nj': 'monroe township gloucester county nj'}
 
 _all_prefixes = set()
 
 
-def _normalize_fbi_city(name, state):
+def normalize_fbi_city(name, state):
     # Remove any trailing digit due to footnote
     new_name = name.lower().strip()
     new_name = re.sub(r'[\s\d]+$', '', new_name)
@@ -29,7 +29,7 @@ def _normalize_fbi_city(name, state):
 
 
 def _get_all_states():
-    return states.get_states()
+    return get_states()
 
 
 def _init_geocodes_from_file(csv_reader, city):
@@ -54,11 +54,13 @@ def _remap_ambiguous_cities(city):
 def read_geocodes():
     """ Read geo codes from city_geocodes and update."""
     city = {}
-    with open('city_geocodes.csv', encoding="utf8") as csvfile:
+    with open(os.path.join(_CODEDIR, 'city_geocodes.csv'),
+              encoding="utf8") as csvfile:
         csv_reader = csv.reader(csvfile)
         _init_geocodes_from_file(csv_reader, city)
 
-    with open('manual_geocodes.csv', encoding="utf8") as csvfile:
+    with open(os.path.join(_CODEDIR, 'manual_geocodes.csv'),
+              encoding="utf8") as csvfile:
         csv_reader = csv.reader(csvfile, delimiter="\t")
         _init_geocodes_from_file(csv_reader, city)
 
@@ -84,7 +86,7 @@ def update_crime_geocode(crime, geo_codes, found_set, cities_not_found_set):
     except KeyError:
         logging.error('{} state not found'.format(crime['State']))
         return False
-    city = _normalize_fbi_city(crime['City'], state)
+    city = normalize_fbi_city(crime['City'], state)
     city_state = '{} {}'.format(city, state)
     city_state = _remap_ambiguous_cities(city_state)
 
