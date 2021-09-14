@@ -3,3 +3,6 @@
 
 ## States Dataset
 - Refer the read me inside [local_government_directory_states](./local_government_directory_states/README.md) folder.
+
+## Districts Dataset
+- Refer the read me inside [local_government_directory_districts](./local_government_directory_districts/README.md) folder.
