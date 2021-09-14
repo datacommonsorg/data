@@ -46,6 +46,7 @@ These data were collected and provided by the [National Center for Immunization 
 
 #### tMCFs
 [`count_data.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/covid19_seroprevalence/count_data.tmcf)
+
 [`percent_data.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/covid19_seroprevalence/percent_data.tmcf)
 
 ### Import Procedure
