@@ -45,7 +45,8 @@ These data were collected and provided by the [National Center for Immunization 
 [`parse_data_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/covid19_seroprevalence/parse_data_test.py)
 
 #### tMCFs
-[`cdc_covid19_seroprevalence.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/covid19_seroprevalence/cdc_covid19_seroprevalence.tmcf)
+[`count_data.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/covid19_seroprevalence/count_data.tmcf)
+[`percent_data.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/covid19_seroprevalence/percent_data.tmcf)
 
 ### Import Procedure
 
@@ -65,10 +66,12 @@ The expected output of this test can be found in the [`test_data`](https://githu
 
 `@input_file_name` - path to the input csv file to be cleaned
 
-`@output_file_name` - path to write the cleaned csv file
+`@output_file_count` - path to write the cleaned count data csv file
+
+`@output_file_percent` - path to write the cleaned percent data csv file
 
 To clean the data, run `parse_data.py`:
 
 ```bash
-$ python3 parse_data.py input_file_name output_file_name
+$ python3 parse_data.py input_file_name output_file_count output_file_percent
 ```
