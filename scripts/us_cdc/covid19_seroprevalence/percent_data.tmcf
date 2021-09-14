@@ -1,0 +1,11 @@
+Node: E:CDC_COVID_Seroprevalence->E0
+observationAbout: C:CDC_COVID_Seroprevalence->Site
+typeOf: dcs:StatVarObservation
+observationDate: C:CDC_COVID_Seroprevalence->End_Date
+variableMeasured: C:CDC_COVID_Seroprevalence->StatVar
+observationPeriod: C:CDC_COVID_Seroprevalence->Period
+measurementMethod: dcs:CDC_COVID19_Seroprevalence
+measuredProperty: dcs:cumulativeCount
+measurementDenominator: dcs:Count_Person
+scalingFactor: 100
+value: C:CDC_COVID_Seroprevalence->value

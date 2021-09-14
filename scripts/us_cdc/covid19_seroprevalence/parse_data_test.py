@@ -13,20 +13,22 @@
 # limitations under the License.
 """
 Author: Padma Gundapaneni @padma-g
-Date: 9/3/2021
+Date: 9/13/2021
 Description: This script contains unit tests for the parse_data.py script.
-@input_file   filepath to the original csv that needs to be cleaned
-@output_file  filepath to the csv to which the cleaned data is written
-python3 parse_data_test.py input_file output_file
+@input_file         filepath to the original csv that needs to be cleaned
+@output_total_pop   filepath to output the data for the total population
+@output_stratified  filepath to output the stratified data
+python3 parse_data_test.py input_file output_total_pop output_stratified
 """
 
 import unittest
 import os
-from parse_data import clean_data
+from .parse_data import clean_data
 
 TEST_CASE_FILES = [
     # Input CSV and expected CSV files.
-    ('test_data/sample_raw_data.csv', 'test_data/sample_raw_data_expected.csv')
+    ('test_data/sample_raw_data.csv', 'test_data/sample_count_expected.csv',
+     'test_data/sample_percent_expected.csv')
 ]
 
 
@@ -41,20 +43,33 @@ class TestParseData(unittest.TestCase):
         """
         module_dir_ = os.path.dirname(__file__)
         print(module_dir_)
-        for input_file, expected_output in TEST_CASE_FILES:
+        for input_file, expected_count,\
+        expected_percent in TEST_CASE_FILES:
             print('\n')
             print('Input File: ' + input_file)
             test_csv = os.path.join(module_dir_, input_file)
-            output_csv = os.path.join(module_dir_,
-                                      (input_file[:-4] + '_output.csv'))
-            clean_data(test_csv, output_csv)
-            expected_csv = os.path.join(module_dir_, expected_output)
-        with open(output_csv, 'r') as test:
+            output_csv_count = os.path.join(
+                module_dir_, (input_file[:-4] + '_output_count.csv'))
+            output_csv_percent = os.path.join(module_dir_,
+                                      (input_file[:-4] +\
+                                        '_output_percent.csv'))
+            clean_data(test_csv, output_csv_count, output_csv_percent)
+            expected_count_file = os.path.join(module_dir_,\
+                expected_count)
+            expected_percent_file = os.path.join(module_dir_,\
+                expected_percent)
+        with open(output_csv_count, 'r') as test:
             test_str: str = test.read()
-            with open(expected_csv, 'r') as expected:
+            with open(expected_count_file, 'r') as expected:
                 expected_str: str = expected.read()
                 self.assertEqual(test_str, expected_str)
-        os.remove(output_csv)
+        os.remove(output_csv_count)
+        with open(output_csv_percent, 'r') as test:
+            test_str: str = test.read()
+            with open(expected_percent_file, 'r') as expected:
+                expected_str: str = expected.read()
+                self.assertEqual(test_str, expected_str)
+        os.remove(output_csv_percent)
         print('Passed test!')
 
 
