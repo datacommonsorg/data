@@ -1406,13 +1406,13 @@ UN_ENERGY_UNITS_MULTIPLIER = {
 }
 
 UN_ENERGY_SCALED_UNITS = {
-  'KilowattHour': {
-      1000: 'MegawattHour',
-   },
-   'Kilowatt': {
-      1000: 'Megawatt',
-      1000000: 'Gigawatt'
-   },
+    'KilowattHour': {
+        1000: 'MegawattHour',
+    },
+    'Kilowatt': {
+        1000: 'Megawatt',
+        1000000: 'Gigawatt'
+    },
 }
 
 

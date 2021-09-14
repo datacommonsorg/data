@@ -253,6 +253,7 @@ def is_valid_stat_var(sv_pv: dict, counters=None) -> bool:
 
     return True
 
+
 def _get_scaled_value(value: str, multiplier: int) -> str:
     """Returns a scaled value for the given value and multiplier.
 
