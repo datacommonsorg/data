@@ -33,14 +33,14 @@ _TABLES = ('V_GHG_EMITTER_FACILITIES', 'V_GHG_SUPPLIER_FACILITIES',
 _DCID = 'dcid'
 _EPA_GHG_ID = 'epaGhgrpFacilityId'
 _EPA_FRS_ID = 'epaFrsId'
-_EIA_PP_CODE = 'eiaPlantCode'
+_EIA_PP_RELATION = 'partOf'
 _NAME = 'name'
 _ADDRESS = 'address'
 _CIP = 'containedInPlace'
 _NAICS = 'naics'
 _LAT = 'latitude'
 _LNG = 'longitude'
-_CLEAN_CSV_HDR = (_DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_CODE, _NAME,
+_CLEAN_CSV_HDR = (_DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_RELATION, _NAME,
                   _ADDRESS, _CIP, _NAICS, _LAT, _LNG)
 
 _OUT_FILE_PREFIX = 'us_epa_facility'
@@ -138,9 +138,9 @@ def process(input_tables_path, output_path):
                             _str(ghg_id),
                         _EPA_FRS_ID:
                             _str(crosswalk.get_frs_id(ghg_id)),
-                        _EIA_PP_CODE:
+                        _EIA_PP_RELATION:
                             ', '.join([
-                                _str(v)
+                                'dcid:eia/pp/' + v
                                 for v in crosswalk.get_power_plant_ids(ghg_id)
                             ]),
                         _NAME:
