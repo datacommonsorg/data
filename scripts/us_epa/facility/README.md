@@ -14,13 +14,14 @@ attached to a `CensusZipCodeTabulationArea` and `County` (via
 ## Resolution
 
 We use the "crosswalk" maps between the GHG Facility ID
-(`epaGhgrpFacilityId`), FRS ID (`epaFrsId`) and ORIS ID (`eiaPlantCode`) for
-the following purpose:
-- To prefer to assign dcid using the ORIS ID before FRS ID before GHG Facility ID.
-- To include all IDs in the generated facilities
+(`epaGhgrpFacilityId`), FRS ID (`epaFrsId`) and ORIS ID (`eiaPlantCode`).
 
-This is because some of these facilities already exist in the KG (from EIA
-power plant import), and FRS ID is more general than GHG Facility ID.
+Note that a single FRS ID or ORIS ID can have multiple GHG Facility IDs.
+Thus, the DCID is constructed using `epaGhgrpFacilityId`, but include all the
+IDs as properties.
+
+Entities related to some of these facilities already exist in the KG (from
+EIA power plant import), so we refer to them from `EpaReportingFacility` nodes.
 
 ## Generating and Validating Artifacts
 
