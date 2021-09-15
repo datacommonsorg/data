@@ -1,5 +1,5 @@
 # NHM Datasets
-Datasets collected from Health Information Management Portal, maintained by Ministry of Health and Family Welfare, India.
+Datasets collected from Health Information Management Portal, maintained by Ministry of Health and Family Welfare (MoHFW), India. This folder contains state-wise data for Key Performance Indicatores as dictated by MoHFW.
 
 ## Maternal Health
 - Refer the read me inside [maternal_health](./nhm_maternal_health/README.md) folder.
