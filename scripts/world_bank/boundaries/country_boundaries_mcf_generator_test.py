@@ -33,13 +33,12 @@ DP3_FNAME = 'countries.dp3.mcfgeojson.mcf'
 
 
 class CountyBoundariesMcfGeneratorTest(unittest.TestCase):
-
     def test_output_mcf(self):
         with tempfile.TemporaryDirectory() as test_mcf_dir:
             test_export_dir = os.path.join(module_dir_, 'test_data')
             mcf_gen.EPS_LEVEL_MAP = {0: 0, 0.05: 3}
-            gen = mcf_gen.CountryBoundariesMcfGenerator('', test_export_dir,
-                                                        test_mcf_dir)
+            gen = mcf_gen.CountryBoundariesMcfGenerator(
+                '', test_export_dir, test_mcf_dir)
             gen.output_mcf({'code': ['LIE']})
 
             with open(os.path.join(test_mcf_dir, DP3_FNAME)) as test_dp3, open(

@@ -64,7 +64,8 @@ TOTAL = 'Total'
 OUTPUT_COLUMNS = [
     'Year', 'GeoId', 'Count_CriminalActivities_ViolentCrime',
     'Count_CriminalActivities_MurderAndNonNegligentManslaughter',
-    'Count_CriminalActivities_ForcibleRape', 'Count_CriminalActivities_Robbery',
+    'Count_CriminalActivities_ForcibleRape',
+    'Count_CriminalActivities_Robbery',
     'Count_CriminalActivities_AggravatedAssault',
     'Count_CriminalActivities_PropertyCrime',
     'Count_CriminalActivities_Burglary',
@@ -79,30 +80,28 @@ YEARS_WITH_TWO_RAPE_COLUMNS = {'2013', '2014', '2015', '2016'}
 
 YEAR_TO_URL = {
     '2019':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-8/table-8.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-8/table-8.xls',
     '2018':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-8/table-8.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-8/table-8.xls',
     '2017':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-8/table-8.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-8/table-8.xls',
     '2016':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-6/table-6.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-6/table-6.xls',
     '2015':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2015.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2015.xls',
     '2014':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-8/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2014.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-8/Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_2014.xls',
     '2013':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2013.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/table-8/table_8_offenses_known_to_law_enforcement_by_state_by_city_2013.xls',
     '2012':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/8tabledatadecpdf/table_8_offenses_known_to_law_enforcement_by_state_by_city_2012.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/8tabledatadecpdf/table_8_offenses_known_to_law_enforcement_by_state_by_city_2012.xls',
     '2011':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table_8_offenses_known_to_law_enforcement_by_state_by_city_2011.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table_8_offenses_known_to_law_enforcement_by_state_by_city_2011.xls',
     # Sanity check 2008-2010 don't have duplicate city state.
     '2010':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl08.xls',
-    '2009':
-        'https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl08.xls',
-    '2008':
-        'https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl08.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl08.xls',
+    '2009': 'https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl08.xls',
+    '2008': 'https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl08.xls',
 }
 
 
@@ -150,9 +149,8 @@ def calculate_crimes(r):
     property_computed = burglary + theft + motor
 
     if property_computed != property:
-        print('{} {} {} property mismatch {} {}'.format(r['Year'], r['City'],
-                                                        r['State'], property,
-                                                        property_computed))
+        print('{} {} {} property mismatch {} {}'.format(
+            r['Year'], r['City'], r['State'], property, property_computed))
 
     # Category 3: Arson
     arson = cu.int_from_field(r['PropertyArson'])
@@ -207,9 +205,9 @@ def _clean_crime_file(f_input, f_output):
             field[i] = cu.remove_extra_chars(field[i])
 
         # Skip if the line does not contain data or if population is empty.
-        if (not field[_POPULATION_INDEX] or
-                not cu.is_digit(field[_POPULATION_INDEX]) or
-                field[_POPULATION_INDEX] == '0'):
+        if (not field[_POPULATION_INDEX]
+                or not cu.is_digit(field[_POPULATION_INDEX])
+                or field[_POPULATION_INDEX] == '0'):
             count_header_footer += 1
             continue
 
@@ -246,31 +244,31 @@ def _update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
 
                 processed_dict = {
                     'Year':
-                        crime['Year'],
+                    crime['Year'],
                     'GeoId':
-                        "dcid:geoId/{}".format(crime[GEO_CODE]),
+                    "dcid:geoId/{}".format(crime[GEO_CODE]),
                     'Count_CriminalActivities_ViolentCrime':
-                        crime['Violent'],
+                    crime['Violent'],
                     'Count_CriminalActivities_MurderAndNonNegligentManslaughter':
-                        crime['ViolentMurderAndNonNegligentManslaughter'],
+                    crime['ViolentMurderAndNonNegligentManslaughter'],
                     'Count_CriminalActivities_ForcibleRape':
-                        crime['ViolentRape'],
+                    crime['ViolentRape'],
                     'Count_CriminalActivities_Robbery':
-                        crime['ViolentRobbery'],
+                    crime['ViolentRobbery'],
                     'Count_CriminalActivities_AggravatedAssault':
-                        crime['ViolentAggravatedAssault'],
+                    crime['ViolentAggravatedAssault'],
                     'Count_CriminalActivities_PropertyCrime':
-                        crime['Property'],
+                    crime['Property'],
                     'Count_CriminalActivities_Burglary':
-                        crime['PropertyBurglary'],
+                    crime['PropertyBurglary'],
                     'Count_CriminalActivities_LarcenyTheft':
-                        crime['PropertyLarcenyTheft'],
+                    crime['PropertyLarcenyTheft'],
                     'Count_CriminalActivities_MotorVehicleTheft':
-                        crime['PropertyMotorVehicleTheft'],
+                    crime['PropertyMotorVehicleTheft'],
                     'Count_CriminalActivities_Arson':
-                        crime['PropertyArson'],
+                    crime['PropertyArson'],
                     'Count_CriminalActivities_CombinedCrime':
-                        crime[TOTAL],
+                    crime[TOTAL],
                 }
                 writer.writerow(processed_dict)
 

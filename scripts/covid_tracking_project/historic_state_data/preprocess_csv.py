@@ -42,39 +42,39 @@ with open('COVIDTracking_States.csv', 'w', newline='') as f_out:
         for row_dict in reader:
             processed_dict = {
                 'Date':
-                    '%s-%s-%s' % (row_dict['date'][:4], row_dict['date'][4:6],
-                                  row_dict['date'][6:]),
+                '%s-%s-%s' % (row_dict['date'][:4], row_dict['date'][4:6],
+                              row_dict['date'][6:]),
                 'GeoId':
-                    'dcid:geoId/%s' % row_dict['fips'],
+                'dcid:geoId/%s' % row_dict['fips'],
                 'CumulativeCount_MedicalTest_ConditionCOVID_19':
-                    row_dict['totalTestResults'],
+                row_dict['totalTestResults'],
                 'CumulativeCount_MedicalTest_ConditionCOVID_19_Positive':
-                    row_dict['positive'],
+                row_dict['positive'],
                 'CumulativeCount_MedicalTest_ConditionCOVID_19_Negative':
-                    row_dict['negative'],
+                row_dict['negative'],
                 'Count_MedicalTest_ConditionCOVID_19_Pending':
-                    row_dict['pending'],
+                row_dict['pending'],
                 ('CumulativeCount_MedicalConditionIncident'
                  '_COVID_19_PatientRecovered'):
-                    row_dict['recovered'],
+                row_dict['recovered'],
                 ('CumulativeCount_MedicalConditionIncident'
                  '_COVID_19_PatientDeceased'):
-                    row_dict['death'],
+                row_dict['death'],
                 'Count_MedicalConditionIncident_COVID_19_PatientHospitalized':
-                    row_dict['hospitalizedCurrently'],
+                row_dict['hospitalizedCurrently'],
                 ('CumulativeCount_MedicalConditionIncident'
                  '_COVID_19_PatientHospitalized'):
-                    row_dict['hospitalizedCumulative'],
+                row_dict['hospitalizedCumulative'],
                 'Count_MedicalConditionIncident_COVID_19_PatientInICU':
-                    row_dict['inIcuCurrently'],
+                row_dict['inIcuCurrently'],
                 ('CumulativeCount_MedicalConditionIncident'
                  '_COVID_19_PatientInICU'):
-                    row_dict['inIcuCumulative'],
+                row_dict['inIcuCumulative'],
                 'Count_MedicalConditionIncident_COVID_19_PatientOnVentilator':
-                    row_dict['onVentilatorCurrently'],
+                row_dict['onVentilatorCurrently'],
                 ('CumulativeCount_MedicalConditionIncident'
                  '_COVID_19_PatientOnVentilator'):
-                    row_dict['onVentilatorCumulative'],
+                row_dict['onVentilatorCumulative'],
             }
 
             writer.writerow(processed_dict)

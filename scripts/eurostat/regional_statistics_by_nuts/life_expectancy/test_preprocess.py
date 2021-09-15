@@ -18,7 +18,6 @@ import generate_mcf
 
 
 class PreprocessTest(unittest.TestCase):
-
     @parameterized.expand([('singlevalue', '80Years', '[Years 80]'),
                            ('interval', '40To50Years', '[Years 40 50]'),
                            ('upperlimit', 'Upto1Years', '[Years - 1]'),

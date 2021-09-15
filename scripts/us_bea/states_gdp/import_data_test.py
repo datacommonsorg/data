@@ -38,7 +38,6 @@ _TEST_DATA_DIR = os.path.join(_MODULE_DIR, "test_csvs")
 
 
 class USStateQuarterlyGDPImportTest(unittest.TestCase):
-
     def test_date_converter(self):
         """Tests the date converter function used to process raw data."""
         date_conv_fn = import_data.StateGDPDataLoader.date_to_obs_date
@@ -76,7 +75,8 @@ class USStateQuarterlyGDPImportTest(unittest.TestCase):
 
     def test_data_processing_small(self):
         """Tests end-to-end data cleaning on a small example."""
-        raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR, "test_small_raw.csv"),
+        raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
+                                          "test_small_raw.csv"),
                              index_col=0)
         clean_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
                                             "test_small_cleaned.csv"),
@@ -87,7 +87,6 @@ class USStateQuarterlyGDPImportTest(unittest.TestCase):
 
 
 class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
-
     def test_data_processing_tiny(self):
         """Tests end-to-end data cleaning on a tiny example."""
         raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
@@ -125,7 +124,8 @@ class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
         self.assertEqual(ind_conv_fn("987"), prefix + "987")
         self.assertEqual(ind_conv_fn("35-37"), prefix + "35_37")
         self.assertEqual(ind_conv_fn("35-37,40"), prefix + "35_37&40")
-        self.assertEqual(ind_conv_fn("13-97,2,45-78"), prefix + "13_97&2&45_78")
+        self.assertEqual(ind_conv_fn("13-97,2,45-78"),
+                         prefix + "13_97&2&45_78")
 
 
 if __name__ == "__main__":

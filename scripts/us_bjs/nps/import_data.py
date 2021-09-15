@@ -66,18 +66,26 @@ value: C:{filename}->{stat_var}
                 if col in AGGREGATE_COLUMNS:
                     tmcf_f.write(
                         template.format_map({
-                            'i': col_num,
-                            'stat_var': col,
-                            'filename': FILENAME,
-                            'mmethod': 'dcAggregate/NationalPrisonerStatistics'
+                            'i':
+                            col_num,
+                            'stat_var':
+                            col,
+                            'filename':
+                            FILENAME,
+                            'mmethod':
+                            'dcAggregate/NationalPrisonerStatistics'
                         }))
                 else:
                     tmcf_f.write(
                         template.format_map({
-                            'i': col_num,
-                            'stat_var': col,
-                            'filename': FILENAME,
-                            'mmethod': 'NationalPrisonerStatistics'
+                            'i':
+                            col_num,
+                            'stat_var':
+                            col,
+                            'filename':
+                            FILENAME,
+                            'mmethod':
+                            'NationalPrisonerStatistics'
                         }))
             col_num += 1
 

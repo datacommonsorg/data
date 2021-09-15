@@ -24,7 +24,6 @@ from app.executor import validation
 
 
 class ValidationTest(unittest.TestCase):
-
     def setUp(self):
         self.tmp_dir = tempfile.TemporaryDirectory()
         self.repo_dir = self.tmp_dir.name

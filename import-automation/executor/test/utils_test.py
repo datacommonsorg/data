@@ -29,7 +29,6 @@ import test.utils
 
 class AppUtilsTest(unittest.TestCase):
     """Tests for app/utils.py."""
-
     def test_pacific_time_to_datetime(self):
         """Tests that the string returned by pacific_time can be converted to
         a datetime object and the timezone component is correct."""
@@ -80,7 +79,6 @@ class AppUtilsTest(unittest.TestCase):
 
 class TestUtilsTest(unittest.TestCase):
     """Tests for test/utils.py."""
-
     def test_compare_lines(self):
         lines = 100
         with tempfile.NamedTemporaryFile(mode='w+') as expected:
@@ -95,8 +93,8 @@ class TestUtilsTest(unittest.TestCase):
                     test.utils.compare_lines(expected.name, to_test.name,
                                              lines))
                 self.assertTrue(
-                    test.utils.compare_lines(expected.name, to_test.name, lines,
-                                             True))
+                    test.utils.compare_lines(expected.name, to_test.name,
+                                             lines, True))
 
                 self.assertTrue(
                     test.utils.compare_lines(expected.name, to_test.name,
@@ -111,8 +109,8 @@ class TestUtilsTest(unittest.TestCase):
                     test.utils.compare_lines(expected.name, to_test.name,
                                              lines))
                 self.assertFalse(
-                    test.utils.compare_lines(expected.name, to_test.name, lines,
-                                             True))
+                    test.utils.compare_lines(expected.name, to_test.name,
+                                             lines, True))
 
                 to_test.seek(0)
                 to_test.write('one-more-line-at-start\n')
@@ -121,5 +119,5 @@ class TestUtilsTest(unittest.TestCase):
                     test.utils.compare_lines(expected.name, to_test.name,
                                              lines))
                 self.assertFalse(
-                    test.utils.compare_lines(expected.name, to_test.name, lines,
-                                             True))
+                    test.utils.compare_lines(expected.name, to_test.name,
+                                             lines, True))

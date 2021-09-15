@@ -20,7 +20,6 @@ _EXPECTED_TMCF = 'output.tmcf'
 
 
 class ProcessTest(unittest.TestCase):
-
     def test_convert_column_to_stat_var(self):
         f = open(_FEATURES)
         features = json.load(f)

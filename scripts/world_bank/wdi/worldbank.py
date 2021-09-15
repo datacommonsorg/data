@@ -149,13 +149,12 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
 
 def build_stat_vars_from_indicator_list(row):
     """ Generates World Bank StatVar for a row in the indicators dataframe. """
-
     def row_to_constraints(row):
         """ Helper to generate list of constraints. """
         constraints_text = ""
         next_constraint = 1
-        while (f"p{next_constraint}" in row and
-               not pd.isna(row[f"p{next_constraint}"])):
+        while (f"p{next_constraint}" in row
+               and not pd.isna(row[f"p{next_constraint}"])):
             variable = row[f'p{next_constraint}']
             constraint = row[f'v{next_constraint}']
             constraints_text += f"{variable}: dcs:{constraint}\n"
@@ -234,10 +233,10 @@ def group_stat_vars_by_observation_properties(indicator_codes):
                 base_template_mcf += f"{column}: C:WorldBank->{column}\n"
                 cols_to_include_in_csv.append(f"{column}")
 
-        tmcfs_for_stat_vars.append(
-            (base_template_mcf, cols_to_include_in_csv,
-             list(
-                 indicator_codes.loc[codes_that_match.index]['IndicatorCode'])))
+        tmcfs_for_stat_vars.append((
+            base_template_mcf, cols_to_include_in_csv,
+            list(
+                indicator_codes.loc[codes_that_match.index]['IndicatorCode'])))
     return tmcfs_for_stat_vars
 
 
@@ -295,7 +294,8 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
     """
     # Only include a subset of columns in the final csv
     output_csv = worldbank_dataframe[[
-        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year', 'Value'
+        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
+        'Value'
     ]]
 
     # Output tmcf and csv for each unique World Bank grouping.
@@ -420,7 +420,8 @@ def main(_):
     worldbank_subset = worldbank_dataframe[
         worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
     worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(
-        worldbank_dataframe.loc[worldbank_subset, "Value"], downcast="integer"))
+        worldbank_dataframe.loc[worldbank_subset,
+                                "Value"], downcast="integer"))
 
     # Output final CSVs and variables.
     output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,

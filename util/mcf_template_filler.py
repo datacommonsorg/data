@@ -35,7 +35,6 @@ import logging
 
 class Filler:
     """Helper class for filling in MCF Templates and removing unused PVs."""
-
     def __init__(self, template, required_vars=None):
         for node in template.strip().split('\n\n'):
             node = node.strip()
@@ -58,10 +57,10 @@ class Filler:
                 # Completed line.
                 template_copy.append(line)
                 continue
-            if not (line.startswith(('Node: ', 'observedNode: ')) or
-                    re.fullmatch(r'\{p[0-9]\}:\s\{v[0-9]\}', line)):
+            if not (line.startswith(('Node: ', 'observedNode: '))
+                    or re.fullmatch(r'\{p[0-9]\}:\s\{v[0-9]\}', line)):
                 assert (len(set(matches)) == 1
-                       ), 'Line should have only 1 var:\n%s' % line
+                        ), 'Line should have only 1 var:\n%s' % line
             write_line = True
             for template_var in matches:
                 if template_var in template_dict:

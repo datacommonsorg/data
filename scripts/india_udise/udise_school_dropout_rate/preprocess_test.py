@@ -25,7 +25,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestPreprocess(unittest.TestCase):
-
     def test_create_csv(self):
         years = ["2017-18", "2018-19"]
         api_report_code = "117"

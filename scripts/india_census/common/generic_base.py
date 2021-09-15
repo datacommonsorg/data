@@ -56,7 +56,6 @@ indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_
         stat_var_index (dict): local storage for census column name and corresponding statvar
         tmcf_file_path : Path where generated tmcf file will be saved
     """
-
     def __init__(self, data_file_path, metadata_file_path, mcf_file_path,
                  tmcf_file_path, csv_file_path, existing_stat_var, census_year,
                  dataset_name):

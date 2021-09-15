@@ -52,7 +52,6 @@ class ProgressLogList(progress_log.ProgressLog):
     Attributes:
         See ProgressLog.
     """
-
     def post(self):
         """Creates a new progress log with the fields provided in the
         request body.

@@ -31,7 +31,6 @@ class TestParsePrecipitationData(unittest.TestCase):
     """
     Tests the functions in parse_precipitation_index.py.
     """
-
     def test_clean_precipitation_data(self):
         """
         Tests the clean_precipitation_data function.

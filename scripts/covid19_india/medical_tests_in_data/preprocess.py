@@ -43,9 +43,10 @@ def create_formatted_csv_file(csv_file_path, data):
     df = df.groupby([df["Date"], df["isoCode"]], as_index=False).last()
 
     #prepare for exporting
-    df = df.rename(columns={
-        'value.samples': "CumulativeCount_MedicalTest_ConditionCOVID_19"
-    })
+    df = df.rename(
+        columns={
+            'value.samples': "CumulativeCount_MedicalTest_ConditionCOVID_19"
+        })
     df = df.drop(['value.report_time'], axis=1)
     df = df[[
         "Date", "isoCode", "CumulativeCount_MedicalTest_ConditionCOVID_19"

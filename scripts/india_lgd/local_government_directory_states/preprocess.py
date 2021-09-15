@@ -22,7 +22,6 @@ import urllib.request
 
 
 class LocalGovermentDirectoryStatesDataLoader:
-
     def __init__(self, lgd_csv, wikidata_csv, clean_csv):
         self.lgd_csv = lgd_csv
         self.wikidata_csv = wikidata_csv
@@ -105,10 +104,12 @@ class LocalGovermentDirectoryStatesDataLoader:
         # Reformat the columns as per our CSV requirements
         self.clean_df["StateCode"] = self.clean_df["StateCode"].apply(
             LocalGovermentDirectoryStatesDataLoader.format_code)
-        self.clean_df["Census2001Code"] = self.clean_df["Census2001Code"].apply(
-            LocalGovermentDirectoryStatesDataLoader.format_code)
-        self.clean_df["Census2011Code"] = self.clean_df["Census2011Code"].apply(
-            LocalGovermentDirectoryStatesDataLoader.format_code)
+        self.clean_df["Census2001Code"] = self.clean_df[
+            "Census2001Code"].apply(
+                LocalGovermentDirectoryStatesDataLoader.format_code)
+        self.clean_df["Census2011Code"] = self.clean_df[
+            "Census2011Code"].apply(
+                LocalGovermentDirectoryStatesDataLoader.format_code)
         self.clean_df["WikiDataId"] = self.clean_df["WikiDataId"].apply(
             LocalGovermentDirectoryStatesDataLoader.format_wikidataid)
 

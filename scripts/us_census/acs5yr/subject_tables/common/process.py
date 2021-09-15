@@ -109,7 +109,8 @@ def write_csv(filename, reader, output, features, stat_vars):
             new_row = {
                 'observationDate': observation_date,
                 # TODO: Expand to support other prefixes?
-                'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
+                'observationAbout':
+                'dcid:geoId/' + row['GEO_ID'].split('US')[1]
             }
             for c in row:
 
@@ -143,7 +144,8 @@ def create_tmcf(output, features, stat_vars):
                 unit = _UNIT_TEMPLATE.format(
                     unit=features['units'][stat_vars[i]])
             f_out.write(
-                _TMCF_TEMPLATE.format(index=i, stat_var=stat_vars[i],
+                _TMCF_TEMPLATE.format(index=i,
+                                      stat_var=stat_vars[i],
                                       unit=unit))
 
 
@@ -165,7 +167,8 @@ def main(argv):
                 print(filename)
                 with zf.open(filename, 'r') as infile:
                     reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-                    write_csv(filename, reader, output_csv, features, stat_vars)
+                    write_csv(filename, reader, output_csv, features,
+                              stat_vars)
     create_tmcf(os.path.join(FLAGS.output, 'output.tmcf'), features, stat_vars)
 
 

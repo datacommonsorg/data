@@ -67,5 +67,5 @@ class ImportAttemptStatus(enum.Enum):
     FAILED = 'failed'
 
 
-IMPORT_ATTEMPT_STATUS = frozenset(
-    status.value for status in ImportAttemptStatus)
+IMPORT_ATTEMPT_STATUS = frozenset(status.value
+                                  for status in ImportAttemptStatus)

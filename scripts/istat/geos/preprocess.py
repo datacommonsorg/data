@@ -69,17 +69,17 @@ def preprocess(data):
     """"preprocess the csv file for importing into Data Commons"""
     columns_rename = {
         "Province Code (Historic) (1)":
-            "Province Code",
+        "Province Code",
         "Name of the supra-municipal territorial unit (valid for statistical purposes)":
-            "Province name",
+        "Province name",
         "Automotive abbreviation":
-            "Province Abbreviation",
+        "Province Abbreviation",
         "NUTS2(3)":
-            "NUTS2",
+        "NUTS2",
         "Common Code numeric format":
-            "Municipal Code",
+        "Municipal Code",
         "Name in Italian":
-            "Municipal Name"
+        "Municipal Name"
     }
     data = data.rename(columns=columns_rename)
 

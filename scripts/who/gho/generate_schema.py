@@ -21,114 +21,65 @@ import os
 
 # Map of dimension code to title to use to build a dcid for that dimension
 PROP_TITLE_MAP = {
-    "GOVERNMENTBENEFIT":
-        "Substance Use Disorder Government Benefit",
-    "GROUP":
-        "Substance Use Disorder Resource Group",
-    "RSUDPREVENTIONPROGRAMME":
-        "Substance Use Disorder Prevention Programmes",
-    "RSUDMAINSUBSTANCEATTREATMENT":
-        "Main Substance At Treatment",
-    "POLICYADOPTIONLEVEL":
-        "Policy Adopted At",
-    "SUBSTANCETYPE":
-        "Substance Type",
-    "EMFFREQUENCY":
-        "Emf Frequency",
-    "EMFEXPOSED":
-        "Emf Exposure Group ",
-    "DRUG":
-        "Drug Used",
-    "RSUDHWF":
-        "Occupation",
-    "PROGRAMME":
-        "Substance Use Disorder Program",
-    "RSUDREP":
-        "Representative Type",
-    "RSUDSPECIFICPOPULATION":
-        "Grouping Of People",
-    "DRUGSUPERVISION":
-        "Drug Supervision Requirement",
-    "DRUGPRESCRIPTION":
-        "Drug Prescription Requirement",
-    "RSUDMONITORING":
-        "Substance Use Disorder Monitoring System",
-    "PUBLICPLACE":
-        "Public Location Type",
-    "MEASUREIMPORTANCETYPE":
-        "Substance Abuse Reduction Measure Type",
-    "NATIONALSYSTEMTYPE":
-        "Substance Use Disorder Monitoring System",
-    "EMFBODYPART":
-        "Emf Exposure Body Part",
-    "SEATTYPE":
-        "Vehicle Occupant Type",
-    "MOTOCYCLEOCCUPANTTYPE":
-        "Vehicle Occupant Type",
+    "GOVERNMENTBENEFIT": "Substance Use Disorder Government Benefit",
+    "GROUP": "Substance Use Disorder Resource Group",
+    "RSUDPREVENTIONPROGRAMME": "Substance Use Disorder Prevention Programmes",
+    "RSUDMAINSUBSTANCEATTREATMENT": "Main Substance At Treatment",
+    "POLICYADOPTIONLEVEL": "Policy Adopted At",
+    "SUBSTANCETYPE": "Substance Type",
+    "EMFFREQUENCY": "Emf Frequency",
+    "EMFEXPOSED": "Emf Exposure Group ",
+    "DRUG": "Drug Used",
+    "RSUDHWF": "Occupation",
+    "PROGRAMME": "Substance Use Disorder Program",
+    "RSUDREP": "Representative Type",
+    "RSUDSPECIFICPOPULATION": "Grouping Of People",
+    "DRUGSUPERVISION": "Drug Supervision Requirement",
+    "DRUGPRESCRIPTION": "Drug Prescription Requirement",
+    "RSUDMONITORING": "Substance Use Disorder Monitoring System",
+    "PUBLICPLACE": "Public Location Type",
+    "MEASUREIMPORTANCETYPE": "Substance Abuse Reduction Measure Type",
+    "NATIONALSYSTEMTYPE": "Substance Use Disorder Monitoring System",
+    "EMFBODYPART": "Emf Exposure Body Part",
+    "SEATTYPE": "Vehicle Occupant Type",
+    "MOTOCYCLEOCCUPANTTYPE": "Vehicle Occupant Type",
     "RSUDMAINTENANCEACCESSRESTRICTIONS":
-        "Substance Use Disorder Treatment Access Restrictions",
-    "RSUD_HIVHEP_CT":
-        "Hiv Hepatitis Services Available",
-    "STANDARDOFCARE":
-        "Standard Of Care",
-    "BACGROUP":
-        "Grouping Of People",
-    "SUNBED_CONTROL":
-        "Sunbed Compliance Measure",
-    "RSUDTREATMENT":
-        "Substance Use Disorder Treatment Type",
-    "RSUDSUBSTANCEDEPENDENCE":
-        "Substance Type",
-    "PRICEMEASURETYPE":
-        "Pricing Constraint Type",
-    "SPONSORSHIPORIGINATOR":
-        "Sponsorship Industry",
-    "PUBLICPRIVATESETTING":
-        "Location Type Of Service",
-    "GOEQUESTION":
-        "Global Observatory For EHealth Question",
-    "RSUDREP":
-        "Substance Use Disorder Resource Representative Type",
-    "EMFRADIOBAND":
-        "Emf Radio Band",
-    "DRIVERTYPE":
-        "Vehicle Driver Type",
-    "OPENACCESSSERVICE":
-        "Substance Use Disorder Open Access Service",
-    "GOVERNMENTBENEFIT":
-        "Substance Use Disorder Government Benefit",
-    "RSUDPHARMACOTHERAPYOPTION":
-        "Pharmacotherapy Option",
-    "COORDINATINGENTITIES":
-        "Substance Abuse Coordinating Entity",
-    "PENALTYTYPE":
-        "Legal Penalty Type",
-    "CONSUMPTIONTYPE":
-        "Alcohol Consumption Record Type",
-    "COMMUNITYACTIONTYPE":
-        "Government Supportable Community Action",
-    "VEHICLESTANDARD":
-        "Vehicle Feature Type",
-    "HARMANDCONSEQUENCE":
-        "Substance Abuse Consequence",
-    "RSUDREPORTING":
-        "Reporting Data Source"
+    "Substance Use Disorder Treatment Access Restrictions",
+    "RSUD_HIVHEP_CT": "Hiv Hepatitis Services Available",
+    "STANDARDOFCARE": "Standard Of Care",
+    "BACGROUP": "Grouping Of People",
+    "SUNBED_CONTROL": "Sunbed Compliance Measure",
+    "RSUDTREATMENT": "Substance Use Disorder Treatment Type",
+    "RSUDSUBSTANCEDEPENDENCE": "Substance Type",
+    "PRICEMEASURETYPE": "Pricing Constraint Type",
+    "SPONSORSHIPORIGINATOR": "Sponsorship Industry",
+    "PUBLICPRIVATESETTING": "Location Type Of Service",
+    "GOEQUESTION": "Global Observatory For EHealth Question",
+    "RSUDREP": "Substance Use Disorder Resource Representative Type",
+    "EMFRADIOBAND": "Emf Radio Band",
+    "DRIVERTYPE": "Vehicle Driver Type",
+    "OPENACCESSSERVICE": "Substance Use Disorder Open Access Service",
+    "GOVERNMENTBENEFIT": "Substance Use Disorder Government Benefit",
+    "RSUDPHARMACOTHERAPYOPTION": "Pharmacotherapy Option",
+    "COORDINATINGENTITIES": "Substance Abuse Coordinating Entity",
+    "PENALTYTYPE": "Legal Penalty Type",
+    "CONSUMPTIONTYPE": "Alcohol Consumption Record Type",
+    "COMMUNITYACTIONTYPE": "Government Supportable Community Action",
+    "VEHICLESTANDARD": "Vehicle Feature Type",
+    "HARMANDCONSEQUENCE": "Substance Abuse Consequence",
+    "RSUDREPORTING": "Reporting Data Source"
 }
 
 # Map of dimension code to description to use for the property node.
 PROP_NODE_DESCRIPTION_MAP = {
     "IHRSPARCAPACITYLEVEL":
-        "International Health Regulations (IHR) State Party Self-Assessment Annual Report (SPAR) Capacity Level",
+    "International Health Regulations (IHR) State Party Self-Assessment Annual Report (SPAR) Capacity Level",
     "AMRGLASSCATEGORY":
-        "Antimicrobial resistance (amr) Global Antimicrobial Resistance and Use Surveillance System (GLASS) Category",
-    "EMFEXPOSED":
-        "Electromagnetic Fields Exposure Group",
-    "EMFFREQUENCY":
-        "Electromagnetic Fields Frequency",
-    "EMFRADIOBAND":
-        "Electromagnetic Fields Radio Band",
-    "EMFBODYPART":
-        "Electromagnetic Fields Exposure Body Part"
+    "Antimicrobial resistance (amr) Global Antimicrobial Resistance and Use Surveillance System (GLASS) Category",
+    "EMFEXPOSED": "Electromagnetic Fields Exposure Group",
+    "EMFFREQUENCY": "Electromagnetic Fields Frequency",
+    "EMFRADIOBAND": "Electromagnetic Fields Radio Band",
+    "EMFBODYPART": "Electromagnetic Fields Exposure Body Part"
 }
 
 

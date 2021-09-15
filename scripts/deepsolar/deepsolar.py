@@ -19,7 +19,8 @@ value: C:deepsolar->{col_name}
 TMCF_AREA_TEMPLATE = TMCF_COUNT_TEMPLATE + 'unit: dcs:SquareMeter\n'
 
 STAT_VARS = [
-    'Count_SolarInstallation_Residential', 'Count_SolarInstallation_Commercial',
+    'Count_SolarInstallation_Residential',
+    'Count_SolarInstallation_Commercial',
     'Count_SolarInstallation_UtilityScale',
     'Count_SolarThermalInstallation_NonUtility', 'Count_SolarInstallation',
     'Mean_CoverageArea_SolarInstallation_Residential',
@@ -51,16 +52,22 @@ def write_tmcf(filename):
             if i < 5:
                 f_out.write(
                     TMCF_COUNT_TEMPLATE.format_map({
-                        'index': i,
-                        'stat_var_name': sv,
-                        'col_name': CSV_DATA_COLUMNS[i]
+                        'index':
+                        i,
+                        'stat_var_name':
+                        sv,
+                        'col_name':
+                        CSV_DATA_COLUMNS[i]
                     }))
             else:
                 f_out.write(
                     TMCF_AREA_TEMPLATE.format_map({
-                        'index': i,
-                        'stat_var_name': sv,
-                        'col_name': CSV_DATA_COLUMNS[i]
+                        'index':
+                        i,
+                        'stat_var_name':
+                        sv,
+                        'col_name':
+                        CSV_DATA_COLUMNS[i]
                     }))
 
 

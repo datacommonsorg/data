@@ -61,7 +61,6 @@ class ExecutionError(Exception):
         result: ExecutionResult object describing the result
             of the execution.
     """
-
     def __init__(self, execution_result: ExecutionResult):
         super().__init__()
         self.result = execution_result
@@ -84,7 +83,6 @@ class ImportExecutor:
         importer: ImportServiceClient object for invoking the
             Data Commons importer.
     """
-
     def __init__(self,
                  uploader: file_uploader.FileUploader,
                  github: github_api.GitHubRepoAPI,
@@ -128,14 +126,15 @@ class ImportExecutor:
                                           pr_number=pr_number)['run_id']
         except Exception:
             logging.exception(_SYSTEM_RUN_INIT_FAILED_MESSAGE)
-            return _create_system_run_init_failed_result(traceback.format_exc())
+            return _create_system_run_init_failed_result(
+                traceback.format_exc())
 
         return run_and_handle_exception(run_id, self.dashboard,
                                         self._execute_imports_on_commit_helper,
                                         commit_sha, run_id)
 
-    def execute_imports_on_update(self,
-                                  absolute_import_name: str) -> ExecutionResult:
+    def execute_imports_on_update(
+            self, absolute_import_name: str) -> ExecutionResult:
         """Executes imports upon a scheduled update.
 
         Args:
@@ -154,7 +153,8 @@ class ImportExecutor:
                 run_id = _init_run_helper(self.dashboard)['run_id']
         except Exception:
             logging.exception(_SYSTEM_RUN_INIT_FAILED_MESSAGE)
-            return _create_system_run_init_failed_result(traceback.format_exc())
+            return _create_system_run_init_failed_result(
+                traceback.format_exc())
 
         return run_and_handle_exception(run_id, self.dashboard,
                                         self._execute_imports_on_update_helper,
@@ -224,7 +224,7 @@ class ImportExecutor:
     def _execute_imports_on_commit_helper(self,
                                           commit_sha: str,
                                           run_id: str = None
-                                         ) -> ExecutionResult:
+                                          ) -> ExecutionResult:
         """Helper for execute_imports_on_commit.
 
         Args:
@@ -487,7 +487,8 @@ class ImportExecutor:
                 path = import_input.get(input_type)
                 if path:
                     dest = f'{output_dir}/{version}/{os.path.basename(path)}'
-                    self._upload_file_helper(src=os.path.join(import_dir, path),
+                    self._upload_file_helper(src=os.path.join(
+                        import_dir, path),
                                              dest=dest,
                                              attempt_id=attempt_id)
                     setattr(uploaded, input_type, dest)
@@ -681,11 +682,16 @@ def _init_attempt_helper(dashboard: dashboard_api.DashboardAPI, run_id: str,
                          provenance_description: str) -> Dict:
     """Initializes an import attempt with the import progress dashboard."""
     return dashboard.init_attempt({
-        'run_id': run_id,
-        'import_name': import_name,
-        'absolute_import_name': absolute_import_name,
-        'provenance_url': provenance_url,
-        'provenance_description': provenance_description
+        'run_id':
+        run_id,
+        'import_name':
+        import_name,
+        'absolute_import_name':
+        absolute_import_name,
+        'provenance_url':
+        provenance_url,
+        'provenance_description':
+        provenance_description
     })
 
 

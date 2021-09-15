@@ -22,7 +22,6 @@ from app.service import validation
 
 class BaseResource(flask_restful.Resource):
     """Base class for system run, import attempt, and progress log resources."""
-
     @classmethod
     def _get_helper(cls, database, id_field, entity_id):
         """Retrieves an entity specified by its entity_id from the database.

@@ -47,7 +47,8 @@ def clean_precipitation_data(file_path, output_file):
     data["date"] = data["year"].astype(str) + "-" + data["month"].astype(str)
     if "Evapotranspiration" in file_path:
         data.rename(columns={
-            "spei": "StandardizedPrecipitation" + "EvapotranspirationIndex"
+            "spei":
+            "StandardizedPrecipitation" + "EvapotranspirationIndex"
         },
                     inplace=True)
         data["fips"] = "0" + data["fips"].astype(str)

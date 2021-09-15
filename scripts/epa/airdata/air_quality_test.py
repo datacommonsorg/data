@@ -23,12 +23,11 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestCriteriaGasesTest(unittest.TestCase):
-
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(
-                    os.path.join(module_dir_, 'test_data/test_import_data.csv'),
-                    'r') as f:
+                    os.path.join(module_dir_,
+                                 'test_data/test_import_data.csv'), 'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
                 create_csv(test_csv)
 

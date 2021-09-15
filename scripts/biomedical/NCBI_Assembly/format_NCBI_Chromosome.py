@@ -77,54 +77,31 @@ def write_genome_assembly(file_output, dict_genome_assembly, genome,
                 species dcid (e.g. hs, mm)
     '''
     dict_conversion = {
-        'Assembly name':
-            'genomeReferenceConsortiumAssemblyName',
-        'Description':
-            'description',
-        'Taxid':
-            'ncbiTaxonID',
-        'BioProject':
-            'ncbiBioProject',
-        'BioSample':
-            'ncbiBioSample',
-        'Submitter':
-            'submitter',
-        'Date':
-            'date',
-        'Assemblytype':
-            'genomeAssemblyType',
-        'Releasetype':
-            'genomeAssemblyReleaseType',
-        'Assemblylevel':
-            'genomeAssemblyLevel',
-        'Genomerepresentation':
-            'isGenomeRepresentationFull',
-        'RefSeqcategory':
-            'refSeqCategory',
-        'GenBankassemblyaccession':
-            'genBankAssemblyAccession',
-        'RefSeqassemblyaccession':
-            'refSeqAssemblyAccession',
+        'Assembly name': 'genomeReferenceConsortiumAssemblyName',
+        'Description': 'description',
+        'Taxid': 'ncbiTaxonID',
+        'BioProject': 'ncbiBioProject',
+        'BioSample': 'ncbiBioSample',
+        'Submitter': 'submitter',
+        'Date': 'date',
+        'Assemblytype': 'genomeAssemblyType',
+        'Releasetype': 'genomeAssemblyReleaseType',
+        'Assemblylevel': 'genomeAssemblyLevel',
+        'Genomerepresentation': 'isGenomeRepresentationFull',
+        'RefSeqcategory': 'refSeqCategory',
+        'GenBankassemblyaccession': 'genBankAssemblyAccession',
+        'RefSeqassemblyaccession': 'refSeqAssemblyAccession',
         'RefSeqassemblyandGenBankassembliesidentical':
-            'isRefSeqGenBankAssembliesIdentical',
-        'Assemblyname':
-            'ncbiAssemblyName',
-        'Infraspecificname':
-            'infraspecificName',
-        'Synonyms':
-            'alternativeName',
-        'WGSproject':
-            'wgsProject',
-        'Assemblymethod':
-            'assemblyMethod',
-        'GenomeCoverage':
-            'genomeCoverage',
-        'Sequencingtechnology':
-            'sequencingTechnology',
-        'Sex':
-            'gender',
-        'Organismname':
-            'ofSpecies'
+        'isRefSeqGenBankAssembliesIdentical',
+        'Assemblyname': 'ncbiAssemblyName',
+        'Infraspecificname': 'infraspecificName',
+        'Synonyms': 'alternativeName',
+        'WGSproject': 'wgsProject',
+        'Assemblymethod': 'assemblyMethod',
+        'GenomeCoverage': 'genomeCoverage',
+        'Sequencingtechnology': 'sequencingTechnology',
+        'Sex': 'gender',
+        'Organismname': 'ofSpecies'
     }  # convert NCBI fields to property names
     list_key_enums = [
         'Assemblytype', 'Releasetype', 'RefSeqcategory', 'Assemblylevel'
@@ -236,15 +213,17 @@ def main():
                 is_genome_assembly = False
                 continue
             key, value = line[0].split(':')
-            dict_genome_assembly[key.replace(' ', '')] = ' '.join(value.split())
-        elif (line[0].startswith('##') and len(line) == 3 and
-              'Accession' not in line[1]):
+            dict_genome_assembly[key.replace(' ',
+                                             '')] = ' '.join(value.split())
+        elif (line[0].startswith('##') and len(line) == 3
+              and 'Accession' not in line[1]):
             # write GenomeAssemblyUnit node
             write_assembly_unit(line, file_output, genome)
         elif line[0].startswith('#'):
             continue
         else:
-            write_chromosome(line, file_output, genome)  # write Chromosome node
+            write_chromosome(line, file_output,
+                             genome)  # write Chromosome node
     # write GenomeAssembly node
     write_genome_assembly(file_output, dict_genome_assembly, genome,
                           species_abrv)

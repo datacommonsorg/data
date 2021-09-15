@@ -23,7 +23,6 @@ from test import integration_test
 
 
 class GCSFileUploaderTest(unittest.TestCase):
-
     @mock.patch('google.cloud.storage.Client')
     def setUp(self, _):
         self.io = file_uploader.GCSFileUploader(project_id='project-id',
@@ -56,7 +55,6 @@ class GCSFileUploaderTest(unittest.TestCase):
 
 
 class LocalFileUploaderTest(unittest.TestCase):
-
     def test_upload_file(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             uploader = file_uploader.LocalFileUploader(tmp_dir)

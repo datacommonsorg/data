@@ -64,7 +64,8 @@ TOTAL = 'Total'
 OUTPUT_COLUMNS = [
     'Year', 'GeoId', 'Count_CriminalActivities_ViolentCrime',
     'Count_CriminalActivities_MurderAndNonNegligentManslaughter',
-    'Count_CriminalActivities_ForcibleRape', 'Count_CriminalActivities_Robbery',
+    'Count_CriminalActivities_ForcibleRape',
+    'Count_CriminalActivities_Robbery',
     'Count_CriminalActivities_AggravatedAssault',
     'Count_CriminalActivities_PropertyCrime',
     'Count_CriminalActivities_Burglary',
@@ -75,29 +76,27 @@ OUTPUT_COLUMNS = [
 
 YEAR_TO_URL = {
     '2019':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-5/table-5.xls/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-5/table-5.xls/output.xls',
     '2018':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-5/table-5.xls/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-5/table-5.xls/output.xls',
     '2017':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-5/table-5.xls/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-5/table-5.xls/output.xls',
     '2016':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-3/table-3.xls/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-3/table-3.xls/output.xls',
     '2015':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-5/table_5_crime_in_the_united_states_by_state_2015.xls/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-5/table_5_crime_in_the_united_states_by_state_2015.xls/output.xls',
     '2014':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-5/table_5_crime_in_the_united_states_by_state_2014.xls/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-5/table_5_crime_in_the_united_states_by_state_2014.xls/output.xls',
     '2013':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2013.xls/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2013.xls/output.xls',
     '2012':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2012.xls/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2012.xls/output.xls',
     '2011':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-5/output.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-5/output.xls',
     '2010':
-        'https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl05.xls/output.xls',
-    '2009':
-        'https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl05.xls',
-    '2008':
-        'https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl05.xls',
+    'https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl05.xls/output.xls',
+    '2009': 'https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl05.xls',
+    '2008': 'https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl05.xls',
 }
 
 
@@ -237,29 +236,29 @@ def _update_and_calculate_state_crime(crime_csv, writer):
 
             processed_dict = {
                 'Year':
-                    crime['Year'],
+                crime['Year'],
                 'GeoId':
-                    "dcid:{}".format(crime[GEO_CODE]),
+                "dcid:{}".format(crime[GEO_CODE]),
                 'Count_CriminalActivities_ViolentCrime':
-                    crime['Violent'],
+                crime['Violent'],
                 'Count_CriminalActivities_MurderAndNonNegligentManslaughter':
-                    crime['ViolentMurderAndNonNegligentManslaughter'],
+                crime['ViolentMurderAndNonNegligentManslaughter'],
                 'Count_CriminalActivities_ForcibleRape':
-                    crime['ViolentRape'],
+                crime['ViolentRape'],
                 'Count_CriminalActivities_Robbery':
-                    crime['ViolentRobbery'],
+                crime['ViolentRobbery'],
                 'Count_CriminalActivities_AggravatedAssault':
-                    crime['ViolentAggravatedAssault'],
+                crime['ViolentAggravatedAssault'],
                 'Count_CriminalActivities_PropertyCrime':
-                    crime['Property'],
+                crime['Property'],
                 'Count_CriminalActivities_Burglary':
-                    crime['PropertyBurglary'],
+                crime['PropertyBurglary'],
                 'Count_CriminalActivities_LarcenyTheft':
-                    crime['PropertyLarcenyTheft'],
+                crime['PropertyLarcenyTheft'],
                 'Count_CriminalActivities_MotorVehicleTheft':
-                    crime['PropertyMotorVehicleTheft'],
+                crime['PropertyMotorVehicleTheft'],
                 'Count_CriminalActivities_CombinedCrime':
-                    crime[TOTAL],
+                crime[TOTAL],
             }
             writer.writerow(processed_dict)
 

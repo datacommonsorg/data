@@ -25,7 +25,6 @@ TEST_DATA_DIR = "test-data"
 
 
 class GeojsonSimplifierTest(unittest.TestCase):
-
     @staticmethod
     def get_file_output(raw_file, simple_file):
         simplifier = simplify.GeojsonSimplifier()

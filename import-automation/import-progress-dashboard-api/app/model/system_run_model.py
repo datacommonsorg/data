@@ -53,8 +53,8 @@ class SystemRun:
     status = 'status'
 
 
-FIELDS = frozenset(
-    name for name in vars(SystemRun) if not name.startswith('__'))
+FIELDS = frozenset(name for name in vars(SystemRun)
+                   if not name.startswith('__'))
 
 
 class SystemRunStatus(enum.Enum):

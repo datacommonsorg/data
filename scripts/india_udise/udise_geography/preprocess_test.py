@@ -24,7 +24,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestPreprocess(unittest.TestCase):
-
     def test_create_csv(self):
         test_states_json_data_file_path = os.path.join(
             os.path.dirname(__file__), "test_data/test_UDISE_States.json")
@@ -38,7 +37,8 @@ class TestPreprocess(unittest.TestCase):
         result_districts_csv_data_file_path = os.path.join(
             os.path.dirname(__file__), "test_data/result_UDISE_Districts.csv")
         expected_districts_csv_data_file_path = os.path.join(
-            os.path.dirname(__file__), "test_data/expected_UDISE_Districts.csv")
+            os.path.dirname(__file__),
+            "test_data/expected_UDISE_Districts.csv")
 
         test_blocks_json_data_file_path = os.path.join(
             os.path.dirname(__file__), "test_data/test_UDISE_Blocks.json")

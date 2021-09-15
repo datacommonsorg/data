@@ -25,7 +25,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class CleanCrimeFileTest(unittest.TestCase):
-
     def test_clean_crime_file(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_csv_file = os.path.join(module_dir_,

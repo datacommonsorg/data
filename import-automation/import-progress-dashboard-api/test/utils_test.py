@@ -30,7 +30,6 @@ IMPORT_ATTEMPT_DATABASE = ('app.resource.import_attempt'
 
 class UCTTest(unittest.TestCase):
     """Tests for utctime function."""
-
     def test_to_datetime(self):
         """Tests that the string returned by utctime can be converted to
         a datetime object and the timezone component is correct."""
@@ -49,7 +48,6 @@ class UCTTest(unittest.TestCase):
 
 class RequestParserAddFieldsTest(unittest.TestCase):
     """Tests for utility functions that deal with RequestParser."""
-
     def test_optional_fields(self):
         """Tests that add_fields correctly adds optional fields
         to the parser."""

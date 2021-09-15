@@ -40,7 +40,6 @@ class DashboardAPI:
         iap: IAPRequest object for making HTTP requests to
             Identity-Aware Proxy protected resources.
     """
-
     def __init__(self, client_id: str):
         """Constructs a DashboardAPI.
 
@@ -66,8 +65,8 @@ class DashboardAPI:
     def get_logs_by_attempt_id(self, attempt_id: str) -> List[Dict]:
         """Returns the logs of an import attempt with the attempt_id."""
         return self._get_json(
-            _DASHBOARD_ATTEMPT_BY_ID_LOGS.format_map({'attempt_id': attempt_id
-                                                     }))
+            _DASHBOARD_ATTEMPT_BY_ID_LOGS.format_map(
+                {'attempt_id': attempt_id}))
 
     def _get_json(self, query):
         """Sends a GET request and returns the json from the response."""

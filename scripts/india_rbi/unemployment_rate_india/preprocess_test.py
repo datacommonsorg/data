@@ -24,13 +24,12 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestPreprocess(unittest.TestCase):
-
     def test_create_csv(self):
         xlsx_file = os.path.join(module_dir_, 'test_data/test.XLSX')
         sheet_no = 0
         statisticalVariable = "dcs:UnemploymentRate_Person_Urban"
-        expected_file = open(os.path.join(module_dir_,
-                                          'test_data/expected.csv'))
+        expected_file = open(
+            os.path.join(module_dir_, 'test_data/expected.csv'))
         expected_data = expected_file.read()
         expected_file.close()
 

@@ -24,7 +24,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestPreprocessCsvTest(unittest.TestCase):
-
     def test_create_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             f = os.path.join(module_dir_, 'test_data/test_data.csv')

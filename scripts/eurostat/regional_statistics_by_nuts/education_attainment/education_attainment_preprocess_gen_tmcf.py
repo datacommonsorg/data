@@ -76,7 +76,8 @@ def translate_wide_to_long(data_url):
     df = df.pivot_table(values='value',
                         index=['geo', 'time', 'unit', 'age'],
                         columns=['sex-level'],
-                        aggfunc='first').reset_index().rename_axis(None, axis=1)
+                        aggfunc='first').reset_index().rename_axis(None,
+                                                                   axis=1)
     return df
 
 
@@ -89,33 +90,33 @@ def preprocess(df, cleaned_csv):
         for _, row in df.iterrows():
             writer.writerow({
                 'Date':
-                    '%s' % (row['time'][:4]),
+                '%s' % (row['time'][:4]),
                 'GeoId':
-                    'dcid:nuts/%s' % (row['geo']),
+                'dcid:nuts/%s' % (row['geo']),
                 'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years':
-                    (row['T_ED0-2']),
+                (row['T_ED0-2']),
                 'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years':
-                    (row['T_ED3-8']),
+                (row['T_ED3-8']),
                 'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_25To64Years':
-                    (row['T_ED3_4']),
+                (row['T_ED3_4']),
                 'Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years':
-                    (row['T_ED5-8']),
+                (row['T_ED5-8']),
                 'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F_ED0-2']),
+                (row['F_ED0-2']),
                 'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F_ED3-8']),
+                (row['F_ED3-8']),
                 'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F_ED3_4']),
+                (row['F_ED3_4']),
                 'Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F_ED5-8']),
+                (row['F_ED5-8']),
                 'Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M_ED0-2']),
+                (row['M_ED0-2']),
                 'Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M_ED3-8']),
+                (row['M_ED3-8']),
                 'Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M_ED3_4']),
+                (row['M_ED3_4']),
                 'Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M_ED5-8']),
+                (row['M_ED5-8']),
             })
 
 
@@ -137,8 +138,10 @@ def get_template_mcf(output_columns):
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
-                    'index': i,
-                    'stat_var': output_columns[2:][i]
+                    'index':
+                    i,
+                    'stat_var':
+                    output_columns[2:][i]
                 }))
 
 

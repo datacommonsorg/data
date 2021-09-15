@@ -83,7 +83,6 @@ CONST_PSIMI_TO_DCID = {
 
 class TestParseEbi(unittest.TestCase):
     """Test the functions in parse_mint.py"""
-
     def test_main(self):
         """Test in the main function"""
         file = CONST_INPUT

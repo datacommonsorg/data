@@ -49,7 +49,6 @@ _TEST_CASES = [
 
 
 class TestProcess(unittest.TestCase):
-
     def test_process(self):
         for (dataset, dataset_name, test_fname, extract_fn,
              schema_fn) in _TEST_CASES:
@@ -67,12 +66,15 @@ class TestProcess(unittest.TestCase):
                 act_mcf = os.path.join(tmp_dir, exp_mcf)
                 act_svg_mcf = os.path.join(tmp_dir, exp_svg_mcf)
                 act_tmcf = os.path.join(tmp_dir, exp_tmcf)
-                common.process(dataset, dataset_name, in_file, act_csv, act_mcf,
-                               act_svg_mcf, act_tmcf, extract_fn, schema_fn)
+                common.process(dataset, dataset_name, in_file, act_csv,
+                               act_mcf, act_svg_mcf, act_tmcf, extract_fn,
+                               schema_fn)
 
-                with open(os.path.join(module_dir_, 'test_data', exp_csv)) as f:
+                with open(os.path.join(module_dir_, 'test_data',
+                                       exp_csv)) as f:
                     exp_csv_data = f.read()
-                with open(os.path.join(module_dir_, 'test_data', exp_mcf)) as f:
+                with open(os.path.join(module_dir_, 'test_data',
+                                       exp_mcf)) as f:
                     exp_mcf_data = f.read()
                 with open(os.path.join(module_dir_, 'test_data',
                                        exp_svg_mcf)) as f:

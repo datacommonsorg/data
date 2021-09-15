@@ -17,14 +17,14 @@ import generate_conversion_files as gen
 
 
 class test_suite(unittest.TestCase):
-
     def test_pharm_to_chembl(self):
         #test pharm to chembl
         self.assertEqual(gen.pharm_to_chembl(['PA452629']), ['CHEMBL53904'])
 
     def test_pubchem_to_chembl(self):
         #test pubchem to chembl
-        self.assertEqual(gen.pubchem_to_chembl(['67462786']), ['CHEMBL3545376'])
+        self.assertEqual(gen.pubchem_to_chembl(['67462786']),
+                         ['CHEMBL3545376'])
 
     def test_inchi_to_inchi_key(self):
         # test inchi to inchi key

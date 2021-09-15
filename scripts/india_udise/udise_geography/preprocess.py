@@ -87,21 +87,16 @@ INDIA_ISO_CODES = {
 
 API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getMasterData"
 DEFAULT_HEADERS = {
-    "Connection":
-        "keep-alive",
-    "Accept":
-        "application/json, text/plain, */*",
+    "Connection": "keep-alive",
+    "Accept": "application/json, text/plain, */*",
     "User-Agent":
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-    "Content-Type":
-        "application/json",
-    "Accept-Language":
-        "en-GB,en-US;q=0.9,en;q=0.8",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+    "Content-Type": "application/json",
+    "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
 }
 
 
 class UDISEGeography:
-
     def __init__(
         self,
         states_json_data_file_path,
@@ -140,7 +135,8 @@ class UDISEGeography:
         df.to_csv(self.states_json_csv_file_path, index=False, header=True)
 
     def _process_districts_data(self):
-        districts_json_data_file = open(self.districts_json_data_file_path, "r")
+        districts_json_data_file = open(self.districts_json_data_file_path,
+                                        "r")
         districts_json_data = json.loads(districts_json_data_file.read())
         df = pd.DataFrame(districts_json_data["rowValue"])
         df = df.drop_duplicates()

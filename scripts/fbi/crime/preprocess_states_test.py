@@ -25,11 +25,10 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class CleanCrimeFileTest(unittest.TestCase):
-
     def test_clean_crime_file(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            test_csv_file = os.path.join(module_dir_,
-                                         'test_data/test_state_data_basic.csv')
+            test_csv_file = os.path.join(
+                module_dir_, 'test_data/test_state_data_basic.csv')
             result_csv_file = os.path.join(tmp_dir, 'state_crime.csv')
             expected_csv_file = os.path.join(
                 module_dir_, 'test_data/expected_state_crime.csv')

@@ -34,7 +34,6 @@ def setUpModule():
 
 class ImportAttemptListTest(unittest.TestCase):
     """Tests for ImportAttemptList."""
-
     def setUp(self):
         """Injects a system run and several import attempts to the database."""
         client = utils.create_test_datastore_client()

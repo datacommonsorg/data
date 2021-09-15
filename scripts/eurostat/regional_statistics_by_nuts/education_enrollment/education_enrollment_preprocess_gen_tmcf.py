@@ -64,7 +64,8 @@ def translate_wide_to_long(data_url):
     df = df.pivot_table(values='value',
                         index=['geo', 'time', 'unit', 'age'],
                         columns=['sex'],
-                        aggfunc='first').reset_index().rename_axis(None, axis=1)
+                        aggfunc='first').reset_index().rename_axis(None,
+                                                                   axis=1)
     return df
 
 
@@ -77,15 +78,15 @@ def preprocess(df, cleaned_csv):
         for _, row in df.iterrows():
             writer.writerow({
                 'Date':
-                    '%s' % (row['time'][:4]),
+                '%s' % (row['time'][:4]),
                 'GeoId':
-                    'dcid:nuts/%s' % row['geo'],
+                'dcid:nuts/%s' % row['geo'],
                 'Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female':
-                    (row['F']),
+                (row['F']),
                 'Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male':
-                    (row['M']),
+                (row['M']),
                 'Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years':
-                    (row['T']),
+                (row['T']),
             })
 
 
@@ -107,8 +108,10 @@ def get_template_mcf():
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
-                    'index': i,
-                    'stat_var': _OUTPUT_COLUMNS[2:][i]
+                    'index':
+                    i,
+                    'stat_var':
+                    _OUTPUT_COLUMNS[2:][i]
                 }))
 
 

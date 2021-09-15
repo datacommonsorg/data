@@ -69,7 +69,6 @@ class StandaloneUpdateTest(unittest.TestCase):
        @mock.patch('test.integration_test.GCSFileUploaderMock._REVERSE', True)
        to compare the last NUM_LINES_TO_CHECK lines.
     """
-
     def setUp(self):
         self.app = main.FLASK_APP.test_client()
 
@@ -78,18 +77,19 @@ class StandaloneUpdateTest(unittest.TestCase):
             '/update',
             json={
                 'absolute_import_name':
-                    'scripts/us_fed/treasury_constant_maturity_rates:all',
-                'configs':
-                    CONFIGS
+                'scripts/us_fed/treasury_constant_maturity_rates:all',
+                'configs': CONFIGS
             })
         self.assertEqual(200, response.status_code)
         expected_result = {
-            'status': 'succeeded',
+            'status':
+            'succeeded',
             'imports_executed': [
                 'scripts/us_fed/treasury_constant_maturity_rates'
                 ':us_treasury_constant_maturity_rates'
             ],
-            'message': 'No issues'
+            'message':
+            'No issues'
         }
         self.assertEqual(expected_result, response.json)
 
@@ -99,18 +99,19 @@ class StandaloneUpdateTest(unittest.TestCase):
             '/update',
             json={
                 'absolute_import_name':
-                    'scripts/covid_tracking_project/historic_state_data:all',
-                'configs':
-                    CONFIGS
+                'scripts/covid_tracking_project/historic_state_data:all',
+                'configs': CONFIGS
             })
         self.assertEqual(200, response.status_code)
         expected_result = {
-            'status': 'succeeded',
+            'status':
+            'succeeded',
             'imports_executed': [
                 'scripts/covid_tracking_project/historic_state_data'
                 ':historic_state_data'
             ],
-            'message': 'No issues'
+            'message':
+            'No issues'
         }
         self.assertEqual(expected_result, response.json)
 
@@ -122,7 +123,6 @@ class StandaloneUpdateTest(unittest.TestCase):
             lambda: '2020-07-15T12:07:17.365264-07:00')
 @mock.patch('app.service.file_uploader.GCSFileUploader', GCSFileUploaderMock)
 class CommitTest(unittest.TestCase):
-
     def setUp(self):
         self.app = main.FLASK_APP.test_client()
 
@@ -135,12 +135,14 @@ class CommitTest(unittest.TestCase):
             })
         self.assertEqual(200, response.status_code)
         expected_result = {
-            'status': 'succeeded',
+            'status':
+            'succeeded',
             'imports_executed': [
                 'scripts/us_fed/treasury_constant_maturity_rates'
                 ':us_treasury_constant_maturity_rates'
             ],
-            'message': 'No issues'
+            'message':
+            'No issues'
         }
         self.assertEqual(expected_result, response.json)
 
@@ -169,7 +171,6 @@ class CommitTest(unittest.TestCase):
             lambda job, preserving_proto_field_name=False: dict(job))
 class ScheduleTest(unittest.TestCase):
     """Tests for scheduling import updates."""
-
     def setUp(self):
         self.app = main.FLASK_APP.test_client()
 

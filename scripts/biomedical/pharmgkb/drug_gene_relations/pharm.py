@@ -47,13 +47,13 @@ def download_pharmgkb_datasets():
     """
     urls = {
         'chemicals':
-            'https://api.pharmgkb.org/v1/download/file/data/chemicals.zip',
+        'https://api.pharmgkb.org/v1/download/file/data/chemicals.zip',
         'drugs':
-            'https://api.pharmgkb.org/v1/download/file/data/drugs.zip',
+        'https://api.pharmgkb.org/v1/download/file/data/drugs.zip',
         'genes':
-            'https://api.pharmgkb.org/v1/download/file/data/genes.zip',
+        'https://api.pharmgkb.org/v1/download/file/data/genes.zip',
         'relationships':
-            'https://api.pharmgkb.org/v1/download/file/data/relationships.zip',
+        'https://api.pharmgkb.org/v1/download/file/data/relationships.zip',
     }
     for zip_dir, url in urls.items():
         download = requests.get(url)
@@ -403,7 +403,8 @@ def get_gene_mcf(row, gene_dcid):
     }
     # remove empty values from dict
     template_dict = {
-        key: value for key, value in template_dict.items() if value
+        key: value
+        for key, value in template_dict.items() if value
     }
 
     mcf = templater.fill(template_dict)
@@ -477,7 +478,8 @@ def get_drug_mcf(row, drug_dcid):
         'pubchem_compound_ids': pubchem,
     }
     template_dict = {
-        key: value for key, value in template_dict.items() if value
+        key: value
+        for key, value in template_dict.items() if value
     }
 
     mcf = templater.fill(template_dict)
@@ -549,7 +551,8 @@ def get_relation_mcf(row, drug_dcid, gene_dcid):
         'evid_enums': evid_enum,
     }
     template_dict = {
-        key: value for key, value in template_dict.items() if value
+        key: value
+        for key, value in template_dict.items() if value
     }
 
     mcf = templater.fill(template_dict)
@@ -644,8 +647,8 @@ def main():
 
     # get rows of relation_df where Entity1 is a Chemical(Drug) and Entity2 is
     # a Gene
-    drug_gene_df = relation_df[(relation_df['Entity1_type'] == 'Chemical') &
-                               (relation_df['Entity2_type'] == 'Gene')]
+    drug_gene_df = relation_df[(relation_df['Entity1_type'] == 'Chemical')
+                               & (relation_df['Entity2_type'] == 'Gene')]
 
     # write drug-gene relations (where drug is Entity1) to mcf file
     drug_first = True  # indicates that Entity1 is a Drug
@@ -655,8 +658,8 @@ def main():
 
     # get rows of relation_df where Entity1 is a Gene and Entity2 is
     # a Chemical(Drug)
-    gene_drug_df = relation_df[(relation_df['Entity1_type'] == 'Gene') &
-                               (relation_df['Entity2_type'] == 'Chemical')]
+    gene_drug_df = relation_df[(relation_df['Entity1_type'] == 'Gene')
+                               & (relation_df['Entity2_type'] == 'Chemical')]
 
     # write drug-gene relations (where drug is Entity2) to mcf file
     drug_first = False  # indicates that Entity1 is a Gene

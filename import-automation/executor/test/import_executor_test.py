@@ -24,7 +24,6 @@ from app.executor import import_executor
 
 
 class ImportExecutorTest(unittest.TestCase):
-
     def test_clean_time(self):
         self.assertEqual(
             '2020_07_15T12_07_17_365264_00_00',
@@ -44,7 +43,7 @@ class ImportExecutorTest(unittest.TestCase):
             requirements.flush()
             with tempfile.TemporaryDirectory() as venv_dir:
                 interpreter_path, proc = import_executor._create_venv(
-                    (requirements.name,), venv_dir, 20)
+                    (requirements.name, ), venv_dir, 20)
                 self.assertEqual(0, proc.returncode)
                 with tempfile.NamedTemporaryFile(mode='w+') as script:
                     script.write('import bs4\nimport requests\nprint(123)\n')
@@ -56,10 +55,10 @@ class ImportExecutorTest(unittest.TestCase):
                     self.assertEqual(0, proc.returncode)
                     self.assertEqual('123\n', proc.stdout)
 
-    @mock.patch('app.utils.utctime', lambda: '2020-07-28T20:22:18.311294+00:00')
+    @mock.patch('app.utils.utctime',
+                lambda: '2020-07-28T20:22:18.311294+00:00')
     @mock.patch('app.service.dashboard_api.DashboardAPI')
     def test_run_and_handle_exception(self, dashboard):
-
         def raise_exception():
             raise Exception
 
@@ -82,7 +81,8 @@ class ImportExecutorTest(unittest.TestCase):
                                  shell=True,
                                  text=True,
                                  capture_output=True)
-        message = import_executor._construct_process_message('message', process)
+        message = import_executor._construct_process_message(
+            'message', process)
         expected = (
             'message\n'
             '[Subprocess command]: printf "out" & >&2 printf "err" & exit 1\n'
@@ -100,7 +100,8 @@ class ImportExecutorTest(unittest.TestCase):
                                  shell=True,
                                  text=True,
                                  capture_output=True)
-        message = import_executor._construct_process_message('message', process)
+        message = import_executor._construct_process_message(
+            'message', process)
         expected = ('message\n'
                     '[Subprocess command]: exit 0\n'
                     '[Subprocess return code]: 0')

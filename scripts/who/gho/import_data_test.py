@@ -28,7 +28,6 @@ TEST_DATA_DIR = os.path.join(MODULE_DIR, "test_data")
 
 
 class TestImportData(unittest.TestCase):
-
     def test_import_data(self):
         # data files are from downloading the data for 3 of the indicators using
         # the WHO API: https://ghoapi.azureedge.net/api/<INDICATOR CODE>

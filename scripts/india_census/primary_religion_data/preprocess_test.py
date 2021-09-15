@@ -24,7 +24,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
-
     def test_create_cleaned_religion_data_csv(self):
         data_file_path = os.path.join(os.path.dirname(__file__),
                                       './test_data/test_input.xlsx')
@@ -39,8 +38,8 @@ class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
         ]
 
         data_categories = [
-            "Total", "Hindu", "Muslim", "Christian", "Sikh", "Buddhist", "Jain",
-            "Other religions and persuasions", "Religion not stated"
+            "Total", "Hindu", "Muslim", "Christian", "Sikh", "Buddhist",
+            "Jain", "Other religions and persuasions", "Religion not stated"
         ]
 
         mcf_file_path = os.path.join(os.path.dirname(__file__),

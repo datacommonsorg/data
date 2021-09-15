@@ -71,11 +71,11 @@ def create_formatted_csv_file(csv_file_path, data):
     df = df.rename(
         columns={
             'value.confirmed':
-                "CumulativeCount_MedicalTest_ConditionCOVID_19_Positive",
+            "CumulativeCount_MedicalTest_ConditionCOVID_19_Positive",
             'value.death':
-                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased',
+            'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased',
             'value.cured':
-                'CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered'
+            'CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered'
         })
     df = df.drop(['value.report_time', 'value.state'], axis=1)
     df = df[[

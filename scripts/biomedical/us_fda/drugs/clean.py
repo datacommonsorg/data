@@ -107,7 +107,7 @@ def get_drug_ref(drug_name, active_ingred):
 
     # find ChEMBL ID from chembl python api
     try:
-        chembl_id = func_timeout(15, chembl_from_api, args=(synonym,))
+        chembl_id = func_timeout(15, chembl_from_api, args=(synonym, ))
     except:
         chembl_id = None
 
@@ -323,7 +323,8 @@ def expand_admin_route(row):
         if admin_route in DOSAGE_FORM_IN_ADMIN_ROUTE:
             if not 'DosageFormEnums' in row:
                 row['DosageFormEnums'] = ''
-            row['DosageFormEnums'] += DOSAGE_FORM_IN_ADMIN_ROUTE[admin_route][0]
+            row['DosageFormEnums'] += DOSAGE_FORM_IN_ADMIN_ROUTE[admin_route][
+                0]
             admin_enums += DOSAGE_FORM_IN_ADMIN_ROUTE[admin_route][1]
         # append administration route enum
         else:
@@ -369,7 +370,8 @@ def expand_df(appl_key_to_ms_enum, appl_key_to_te_enum, row, df_length):
     if appl_type in APPLICATION_TYPE_ENUMS:
         row['ApplTypeEnum'] = 'dcid:' + APPLICATION_TYPE_ENUMS[appl_type]
 
-    row['DrugRef'] = get_drug_ref(row['DrugName'], row['CleanActiveIngredient'])
+    row['DrugRef'] = get_drug_ref(row['DrugName'],
+                                  row['CleanActiveIngredient'])
 
     return row
 

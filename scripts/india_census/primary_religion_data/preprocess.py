@@ -45,7 +45,6 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
         data_category_column: Name of the data category column
 
     """
-
     def __init__(self, data_file_path, metadata_file_path, mcf_file_path,
                  tmcf_file_path, csv_file_path, existing_stat_var, census_year,
                  dataset_name, data_categories, data_category_column):
@@ -79,7 +78,6 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
         self.data_category_column = data_category_column
 
     def _format_data(self):
-
         def stat_var_index_key(row, data_category_column=None):
             key = "{0}_{1}".format(row["columnName"], row["TRU"])
             if data_category_column:

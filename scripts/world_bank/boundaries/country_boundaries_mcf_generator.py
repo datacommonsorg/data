@@ -71,7 +71,6 @@ MCF_FORMAT_STR = "\n".join([
 
 class CountryBoundariesMcfGenerator:
     """Generates MCF files with simplified json for the WB boundaries dataset."""
-
     def __init__(self, download_dir, export_dir, mcf_dir):
         self.download_dir = download_dir
         self.should_download = False

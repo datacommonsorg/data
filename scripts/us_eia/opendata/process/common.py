@@ -166,7 +166,8 @@ def _generate_default_statvar(raw_sv, sv_map):
 
 # Name patterns for US and US states.
 _NAME_PATTERNS = {
-    v: [k.lower()] for k, v in name_to_alpha2.USSTATE_MAP_SPACE.items()
+    v: [k.lower()]
+    for k, v in name_to_alpha2.USSTATE_MAP_SPACE.items()
 }
 _NAME_PATTERNS['US'] = [
     'united states of america', 'united states', 'u.s.a.', 'u.s.'

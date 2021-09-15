@@ -29,7 +29,6 @@ from test import integration_test
 
 
 class GitHubAPITest(unittest.TestCase):
-
     def setUp(self):
         self.github = github_api.GitHubRepoAPI('ownerA', 'repoB',
                                                'authusernameC',
@@ -92,11 +91,9 @@ class GitHubAPITest(unittest.TestCase):
                 "size": 39
             }, {
                 'filename':
-                    'scripts/google/covid_mobility/TestCovidMobility.py',
-                'status':
-                    'removed',
-                "size":
-                    12
+                'scripts/google/covid_mobility/TestCovidMobility.py',
+                'status': 'removed',
+                "size": 12
             }, {
                 'filename': 'scripts/google/covid_mobility/covidmobility.py',
                 'status': 'added',
@@ -106,11 +103,12 @@ class GitHubAPITest(unittest.TestCase):
                 'status': 'removed',
             }]
         }
-        expected = [('scripts/google/covid_mobility/README.md', 'modified'),
-                    ('scripts/google/covid_mobility/TestCovidMobility.py',
-                     'removed'),
-                    ('scripts/google/covid_mobility/covidmobility.py', 'added'),
-                    ('scripts/google/covid_mobility/input/data.csv', 'removed')]
+        expected = [
+            ('scripts/google/covid_mobility/README.md', 'modified'),
+            ('scripts/google/covid_mobility/TestCovidMobility.py', 'removed'),
+            ('scripts/google/covid_mobility/covidmobility.py', 'added'),
+            ('scripts/google/covid_mobility/input/data.csv', 'removed')
+        ]
         get.return_value = utils.ResponseMock(200, data)
         self.assertEqual(
             expected, self.github._query_changed_files_in_commit('commitCCC'))
@@ -152,8 +150,8 @@ class GitHubAPITest(unittest.TestCase):
     @mock.patch('requests.get')
     def test_query_files_in_dir_raise(self, get):
         get.return_value = utils.ResponseMock(400)
-        self.assertRaises(exceptions.HTTPError, self.github._query_files_in_dir,
-                          'committt', 'dirrr')
+        self.assertRaises(exceptions.HTTPError,
+                          self.github._query_files_in_dir, 'committt', 'dirrr')
 
     @mock.patch('app.service.github_api.GitHubRepoAPI._query_files_in_dir',
                 lambda *args: ['aaa', 'bbb', 'ccc'])
@@ -178,8 +176,8 @@ class GitHubAPITest(unittest.TestCase):
             'committt', 'scripts/us_fed/foo', 'manifest.json', searched)
         self.assertEqual({'scripts/us_fed/foo', 'scripts'}, found_dirs)
         expected_searched = {
-            'scripts/us_fed/foo', 'scripts/us_fed', 'scripts/us_fed', 'scripts',
-            ''
+            'scripts/us_fed/foo', 'scripts/us_fed', 'scripts/us_fed',
+            'scripts', ''
         }
         self.assertEqual(expected_searched, searched)
 
@@ -297,12 +295,14 @@ class GitHubAPITest(unittest.TestCase):
         tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
         with open(tar_path, 'rb') as tar:
             headers = {'Content-Disposition': 'attachment; filename=abc'}
-            get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
+            get.return_value = utils.ResponseMock(200,
+                                                  raw=tar,
+                                                  headers=headers)
 
             with tempfile.TemporaryDirectory() as dir_path:
                 downloaded = self.github.download_repo(dir_path, 'commit-sha')
-                self.assertEqual(f'{dir_path}/treasury_constant_maturity_rates',
-                                 downloaded)
+                self.assertEqual(
+                    f'{dir_path}/treasury_constant_maturity_rates', downloaded)
 
                 file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.csv')
@@ -327,17 +327,22 @@ class GitHubAPITest(unittest.TestCase):
         tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
         with open(tar_path, 'rb') as tar:
             headers = {'Content-Disposition': 'attachment; filename=abc'}
-            get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
+            get.return_value = utils.ResponseMock(200,
+                                                  raw=tar,
+                                                  headers=headers)
 
             with tempfile.TemporaryDirectory() as dir_path:
-                self.assertRaises(exceptions.Timeout, self.github.download_repo,
-                                  dir_path, 'commit-sha', 0.000001)
+                self.assertRaises(exceptions.Timeout,
+                                  self.github.download_repo, dir_path,
+                                  'commit-sha', 0.000001)
 
     @mock.patch('requests.get')
     def test_download_repo_empty(self, get):
         with open('test/data/empty.tar.gz', 'rb') as tar:
             headers = {'Content-Disposition': 'attachment; filename=abc'}
-            get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
+            get.return_value = utils.ResponseMock(200,
+                                                  raw=tar,
+                                                  headers=headers)
 
             with tempfile.TemporaryDirectory() as dir_path:
                 self.assertRaises(FileNotFoundError, self.github.download_repo,
@@ -359,6 +364,7 @@ class GitHubAPITest(unittest.TestCase):
             'data',
             github_api._get_path_first_component('data/foo/bar/README.md'))
         self.assertEqual(
-            '', github_api._get_path_first_component('/data/foo/bar/README.md'))
+            '',
+            github_api._get_path_first_component('/data/foo/bar/README.md'))
         self.assertEqual('data', github_api._get_path_first_component('data'))
         self.assertEqual('', github_api._get_path_first_component(''))

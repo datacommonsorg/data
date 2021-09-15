@@ -52,11 +52,11 @@ class ImportAttempt(base_resource.BaseResource):
     parser = reqparse.RequestParser()
     # The parser looks for these fields in the request body.
     # The Content-Type of the request must be application/json.
-    optional_fields = ((_MODEL.attempt_id, str), (_MODEL.run_id,
-                                                  str), (_MODEL.import_name,),
-                       (_MODEL.absolute_import_name,), (_MODEL.provenance_url,),
-                       (_MODEL.provenance_description,), (_MODEL.status,),
-                       (_MODEL.time_created,), (_MODEL.time_completed,),
+    optional_fields = ((_MODEL.attempt_id, str), (_MODEL.run_id, str),
+                       (_MODEL.import_name, ), (_MODEL.absolute_import_name, ),
+                       (_MODEL.provenance_url, ),
+                       (_MODEL.provenance_description, ), (_MODEL.status, ),
+                       (_MODEL.time_created, ), (_MODEL.time_completed, ),
                        (_MODEL.logs, str, 'append'), (_MODEL.import_inputs,
                                                       dict, 'append'))
     utils.add_fields(parser, optional_fields, required=False)
@@ -76,7 +76,6 @@ class ImportAttemptByID(ImportAttempt):
 
     See ImportAttempt.
     """
-
     def get(self, attempt_id):
         """Retrieves an import attempt by its attempt_id.
 
@@ -105,8 +104,8 @@ class ImportAttemptByID(ImportAttempt):
             where the error message is a string and the error code is an int.
         """
         args = ImportAttempt.parser.parse_args()
-        if (_MODEL.attempt_id in args or _MODEL.run_id in args or
-                _MODEL.logs in args):
+        if (_MODEL.attempt_id in args or _MODEL.run_id in args
+                or _MODEL.logs in args):
             return validation.get_patch_forbidden_error(
                 (_MODEL.attempt_id, _MODEL.run_id, _MODEL.logs))
         valid, err, code = validation.is_import_attempt_valid(

@@ -19,7 +19,6 @@ from import_data import save_csv
 
 
 class TestPreprocess(unittest.TestCase):
-
     def test_preprocess(self):
         input_path = "./test/test_data.tsv"
         output_path = "./test/test_data_processed"

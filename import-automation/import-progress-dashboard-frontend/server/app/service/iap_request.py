@@ -29,7 +29,6 @@ class IAPRequest:
         client_id: Oauth client ID used to authenticate with
             Identity-Aware Proxy, as a string.
     """
-
     def __init__(self, client_id: str):
         self.client_id = client_id
 

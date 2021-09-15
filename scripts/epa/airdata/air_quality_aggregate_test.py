@@ -23,7 +23,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestCriteriaGasesTest(unittest.TestCase):
-
     def test_write_csv_county(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(

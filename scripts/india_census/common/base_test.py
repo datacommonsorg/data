@@ -23,7 +23,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestCensusPrimaryAbstractDataLoaderBase(unittest.TestCase):
-
     def test_create_csv(self):
         data_file_path = os.path.join(os.path.dirname(__file__),
                                       './test_data/test_input.xlsx')

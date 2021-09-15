@@ -67,7 +67,6 @@ ATTRIBUTE_MAPPING = {
 
 
 class UDISESchoolDropoutRate(UDISEIndiaDataLoaderBase):
-
     def _get_base_name(self, data_row):
         name = "DropoutRate_Student"
         return name

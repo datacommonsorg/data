@@ -20,7 +20,6 @@ import config
 
 
 class TestSuite(unittest.TestCase):
-
     def test_format_text_list(self):
         test_str = 'test1, "Aftate for jock itch sprinkle powder","Carbanilic acid, M,N-dimethylthio-, O-2-naphthyl ester","Carbanilic acid, N,M-dimethylthio-, O-2-naphthyl ester","Chinofungin","Dermoxin","Dr. Scholl\'s athlete\'s foot spray","Dungistop"'
         ref_str = '"test1","Aftate for jock itch sprinkle powder","Carbanilic acid, M,N-dimethylthio-, O-2-naphthyl ester","Carbanilic acid, N,M-dimethylthio-, O-2-naphthyl ester","Chinofungin","Dermoxin","Dr. Scholl\'s athlete\'s foot spray","Dungistop"'
@@ -61,23 +60,23 @@ class TestSuite(unittest.TestCase):
     def test_get_gene_mcf(self):
         row = {
             'PharmGKB Accession Id':
-                'PA24444',
+            'PA24444',
             'NCBI Gene ID':
-                '8309',
+            '8309',
             'HGNC ID':
-                '120',
+            '120',
             'Ensembl Id':
-                'ENSG00000168306',
+            'ENSG00000168306',
             'Name':
-                'acyl-CoA oxidase 2',
+            'acyl-CoA oxidase 2',
             'Symbol':
-                'ACOX2',
+            'ACOX2',
             'Alternate Names':
-                '"3-alpha,7-alpha,12-alpha-trihydroxy-5-beta-cholestanoyl-CoA 24-hydroxylase","acyl-CoA oxidase 2, branched chain","branched chain acyl-CoA oxidase","trihydroxycoprostanoyl-CoA oxidase"',
+            '"3-alpha,7-alpha,12-alpha-trihydroxy-5-beta-cholestanoyl-CoA 24-hydroxylase","acyl-CoA oxidase 2, branched chain","branched chain acyl-CoA oxidase","trihydroxycoprostanoyl-CoA oxidase"',
             'Alternate Symbols':
-                '"BRCACOX","BRCOX","THCCox"',
+            '"BRCACOX","BRCOX","THCCox"',
             'Cross-references':
-                '"ALFRED:LO061936Z","Comparative Toxicogenomics Database:8309","Ensembl:ENSG00000168306","GenAtlas:ACOX2","GO:GO:0003995"',
+            '"ALFRED:LO061936Z","Comparative Toxicogenomics Database:8309","Ensembl:ENSG00000168306","GenAtlas:ACOX2","GO:GO:0003995"',
         }
         gene_templater = pharm.mcf_template_filler.Filler(
             config.GENE_TEMPLATE, required_vars=['dcid'])
@@ -95,35 +94,27 @@ class TestSuite(unittest.TestCase):
         })
         xref_mcf = ('alfredID: "LO061936Z"\n' +
                     'comparativeToxicogenomicsDBID: "8309"\n' +
-                    'ensemblID: "ENSG00000168306"\n' + 'genAtlasID: "ACOX2"\n' +
-                    'geneOntologyID: "GO:0003995"\n')
+                    'ensemblID: "ENSG00000168306"\n' +
+                    'genAtlasID: "ACOX2"\n' + 'geneOntologyID: "GO:0003995"\n')
 
-        self.assertEqual(pharm.get_gene_mcf(row, gene_dcid), ref_mcf + xref_mcf)
+        self.assertEqual(pharm.get_gene_mcf(row, gene_dcid),
+                         ref_mcf + xref_mcf)
 
     def test_get_drug_mcf(self):
         row = {
-            'PharmGKB Accession Id':
-                'PA166181082',
-            'Name':
-                '3,4-dihydroxyphenylacetaldehyde',
-            'Type':
-                '"Metabolite","Biological Intermediate"',
+            'PharmGKB Accession Id': 'PA166181082',
+            'Name': '3,4-dihydroxyphenylacetaldehyde',
+            'Type': '"Metabolite","Biological Intermediate"',
             'Cross-references':
-                '"ChEBI:CHEBI:27978","HMDB:HMDB0003791","PubChem Compound:119219"',
-            'SMILES':
-                'C1=CC(=C(C=C1CC=O)O)O',
+            '"ChEBI:CHEBI:27978","HMDB:HMDB0003791","PubChem Compound:119219"',
+            'SMILES': 'C1=CC(=C(C=C1CC=O)O)O',
             'InChI':
-                'InChI=1S/C8H8O3/c9-4-3-6-1-2-7(10)8(11)5-6/h1-2,4-5,10-11H,3H2',
-            'InChI Key':
-                'IADQVXRMSNIUEL-UHFFFAOYSA-N',
-            'PubChem Compound Identifiers':
-                '119219',
-            'Trade Names':
-                'test1,"test2"',
-            'RxNorm Identifiers':
-                'rx_test',
-            'ATC Identifiers':
-                'atc_test',
+            'InChI=1S/C8H8O3/c9-4-3-6-1-2-7(10)8(11)5-6/h1-2,4-5,10-11H,3H2',
+            'InChI Key': 'IADQVXRMSNIUEL-UHFFFAOYSA-N',
+            'PubChem Compound Identifiers': '119219',
+            'Trade Names': 'test1,"test2"',
+            'RxNorm Identifiers': 'rx_test',
+            'ATC Identifiers': 'atc_test',
         }
         drug_templater = pharm.mcf_template_filler.Filler(
             config.DRUG_TEMPLATE, required_vars=['dcid'])
@@ -147,7 +138,8 @@ class TestSuite(unittest.TestCase):
                     'humanMetabolomeDatabaseID: "HMDB0003791"\n' +
                     'pubChemCompoundID: "119219"\n')
 
-        self.assertEqual(pharm.get_drug_mcf(row, drug_dcid), ref_mcf + xref_mcf)
+        self.assertEqual(pharm.get_drug_mcf(row, drug_dcid),
+                         ref_mcf + xref_mcf)
 
     def test_get_relation_mcf(self):
         row = {
@@ -163,16 +155,24 @@ class TestSuite(unittest.TestCase):
         gene_dcid = 'bio/gene_dcid'
 
         ref_mcf = relation_templater.fill({
-            'dcid': 'bio/CGA_drug_dcid_gene_dcid',
-            'gene_dcid': gene_dcid,
-            'drug_dcid': drug_dcid,
-            'name': 'CGA_drug_dcid_gene_dcid',
+            'dcid':
+            'bio/CGA_drug_dcid_gene_dcid',
+            'gene_dcid':
+            gene_dcid,
+            'drug_dcid':
+            drug_dcid,
+            'name':
+            'CGA_drug_dcid_gene_dcid',
             'evid_enums': ('dcid:RelationshipEvidenceTypeClinicalAnnotation,'
                            'dcid:RelationshipEvidenceTypeVariantAnnotation'),
-            'assoc_enums': 'dcid:RelationshipAssociationTypeAssociated',
-            'pk_bool': 'True',
-            'pd_bool': 'True',
-            'pubmed_ids': '"27163851","32423989"',
+            'assoc_enums':
+            'dcid:RelationshipAssociationTypeAssociated',
+            'pk_bool':
+            'True',
+            'pd_bool':
+            'True',
+            'pubmed_ids':
+            '"27163851","32423989"',
         })
 
         self.assertEqual(pharm.get_relation_mcf(row, drug_dcid, gene_dcid),

@@ -35,7 +35,6 @@ class BaseDatabase:
         kind: Kind of entities to store as a string
         client: datastore Client object to communicate with Datastore
     """
-
     def __init__(self, kind, client=None, id_field=None):
         """Constructs an BaseDatabase.
 

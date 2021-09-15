@@ -26,7 +26,6 @@ from import_data import StateGDPDataLoader
 
 
 class USStateQuarterlyGDPImportVal(unittest.TestCase):
-
     def test_download_data(self):
         """Tests that data gets downloaded properly.
 

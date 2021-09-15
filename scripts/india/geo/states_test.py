@@ -20,7 +20,6 @@ from india.geo.states import IndiaStatesMapper
 
 
 class TestPreprocess(unittest.TestCase):
-
     def test_get_state_name_to_iso_code_mapping(self):
         self.assertEqual(
             IndiaStatesMapper.get_state_name_to_iso_code_mapping(

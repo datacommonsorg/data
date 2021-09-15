@@ -562,7 +562,6 @@ availableStrength: dcid:bio/CHEMBL1200705_Strength-4-4_0
 
 
 class TestSuite(unittest.TestCase):
-
     def test_reformat_paren_with_semi(self):
         test_str = '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)'
         ref_str = '700 UNITS/10ML(70 UNITS/ML);300 UNITS/10ML(30 UNITS/ML)'
@@ -571,17 +570,15 @@ class TestSuite(unittest.TestCase):
     def test_expand_strength(self):
         row = {
             'Strength':
-                '2%;70% (100ML)**Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy',
+            '2%;70% (100ML)**Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy',
         }
         expanded = {
             'Strength':
-                '2%;70% (100ML)**Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy',
+            '2%;70% (100ML)**Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy',
             'AdditionalInfo':
-                'Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy. ',
-            'FinalVolQty':
-                '[100 ML]',
-            'CleanStrength':
-                '2%;70%'
+            'Indicated for use and comarketed with Interferon ALFA-2B, Recombinant (INTRON A), as Rebetron Combination Therapy. ',
+            'FinalVolQty': '[100 ML]',
+            'CleanStrength': '2%;70%'
         }
         self.assertEqual(clean.expand_strength(row), expanded)
 
@@ -595,26 +592,26 @@ class TestSuite(unittest.TestCase):
 
         row = {
             'Strength':
-                '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)'
+            '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)'
         }
         expanded = {
             'Strength':
-                '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)',
+            '700 UNITS/10ML; 300 UNITS/10ML (70 UNITS/ML; 30 UNITS/ML)',
             'CleanStrength':
-                '700 UNITS/10ML(70 UNITS/ML);300 UNITS/10ML(30 UNITS/ML)'
+            '700 UNITS/10ML(70 UNITS/ML);300 UNITS/10ML(30 UNITS/ML)'
         }
         self.assertEqual(clean.expand_strength(row), expanded)
 
     def test_expand_dosage_form(self):
         row = {
             'DosageForm':
-                'Aerosol, Foam,Capsule, Coated, Extended Release,Injection, Powder, For Suspension, Extended Release,Injection, Powder, Lyophilized, For Suspension, Extended Release'
+            'Aerosol, Foam,Capsule, Coated, Extended Release,Injection, Powder, For Suspension, Extended Release,Injection, Powder, Lyophilized, For Suspension, Extended Release'
         }
         expanded = {
             'DosageForm':
-                'Aerosol, Foam,Capsule, Coated, Extended Release,Injection, Powder, For Suspension, Extended Release,Injection, Powder, Lyophilized, For Suspension, Extended Release',
+            'Aerosol, Foam,Capsule, Coated, Extended Release,Injection, Powder, For Suspension, Extended Release,Injection, Powder, Lyophilized, For Suspension, Extended Release',
             'DosageFormEnums':
-                'dcid:DosageFormInjectionPowderLyophilizedForSuspensionExtendedRelease,dcid:DosageFormInjectionPowderForSuspensionExtendedRelease,dcid:DosageFormCapsuleCoatedExtendedRelease,dcid:DosageFormAerosolFoam'
+            'dcid:DosageFormInjectionPowderLyophilizedForSuspensionExtendedRelease,dcid:DosageFormInjectionPowderForSuspensionExtendedRelease,dcid:DosageFormCapsuleCoatedExtendedRelease,dcid:DosageFormAerosolFoam'
         }
         self.assertEqual(clean.expand_dosage_form(row), expanded)
 
@@ -640,11 +637,11 @@ class TestSuite(unittest.TestCase):
         }
         expanded = {
             'AdminRoute':
-                'SUBCUTANEOUS LYOPHILIZED POWER, ORAL',
+            'SUBCUTANEOUS LYOPHILIZED POWER, ORAL',
             'DosageFormEnums':
-                'dcid:DosageFormPowderLyophilizedPowder',
+            'dcid:DosageFormPowderLyophilizedPowder',
             'AdminRouteEnums':
-                'dcid:AdministrationRouteSubcutaneous,dcid:AdministrationRouteOral'
+            'dcid:AdministrationRouteSubcutaneous,dcid:AdministrationRouteOral'
         }
         self.assertEqual(clean.expand_admin_route(row), expanded)
 

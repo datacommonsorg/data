@@ -31,20 +31,21 @@ from test import utils
 class UpdateSchedulerTest(unittest.TestCase):
     """Tests for create_schedule and delete_schedule. schedule_on_commit is
     tested in test_integration.py."""
-
     def setUp(self):
-        config = configs.ExecutorConfig(gcp_project_id='google.com:datcom-data',
-                                        scheduler_location='us-central1',
-                                        github_auth_username='username',
-                                        github_auth_access_token='access-token',
-                                        dashboard_oauth_client_id='dashboard',
-                                        importer_oauth_client_id='importer',
-                                        email_account='@google',
-                                        email_token='token')
+        config = configs.ExecutorConfig(
+            gcp_project_id='google.com:datcom-data',
+            scheduler_location='us-central1',
+            github_auth_username='username',
+            github_auth_access_token='access-token',
+            dashboard_oauth_client_id='dashboard',
+            importer_oauth_client_id='importer',
+            email_account='@google',
+            email_token='token')
         self.scheduler = update_scheduler.UpdateScheduler(
             utils.SchedulerClientMock(), None, config, None)
 
-    @mock.patch('app.utils.utctime', lambda: '2020-07-24T16:27:22.609304+00:00')
+    @mock.patch('app.utils.utctime',
+                lambda: '2020-07-24T16:27:22.609304+00:00')
     def test_create_schedule(self):
         job = self.scheduler.create_schedule('scripts/us_fed:treasury',
                                              '5 4 * * *')

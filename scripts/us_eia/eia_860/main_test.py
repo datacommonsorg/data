@@ -35,7 +35,6 @@ _TEST_CASES = [
 
 
 class TestProcess(unittest.TestCase):
-
     def test_process(self):
         for (processor, in_file, out_csv) in _TEST_CASES:
             with tempfile.TemporaryDirectory() as tmp_dir:
@@ -44,7 +43,8 @@ class TestProcess(unittest.TestCase):
 
                 processor(in_file, test_csv)
 
-                with open(os.path.join(module_dir_, 'test_data', out_csv)) as f:
+                with open(os.path.join(module_dir_, 'test_data',
+                                       out_csv)) as f:
                     exp_csv_data = f.read()
                 with open(test_csv) as f:
                     test_csv_data = f.read()

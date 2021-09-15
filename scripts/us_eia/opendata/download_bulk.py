@@ -31,7 +31,8 @@ MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Data dir to download into')
-flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
+flags.DEFINE_list('datasets', [],
+                  'Datasets to download. Everything, if empty.')
 
 
 def download_file(url: str, save_path: str):

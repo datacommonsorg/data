@@ -26,7 +26,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestPreprocess(unittest.TestCase):
-
     def test_create_cleaned_wage_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             xlsx_file = os.path.join(module_dir_, 'test_data/test.xlsx')

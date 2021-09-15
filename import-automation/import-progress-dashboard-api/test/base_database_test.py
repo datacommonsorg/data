@@ -30,7 +30,6 @@ def setUpModule():
 
 class BaseDatabaseTest(unittest.TestCase):
     """Tests for BaseDatabase."""
-
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
     def setUp(self):

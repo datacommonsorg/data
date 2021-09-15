@@ -176,8 +176,8 @@ def process_dimensions(cprop_mapping, value_mapping, person_dimensions, entry,
     """
     has_empty_mapped_val = False
     has_person_dimension = False
-    d1_prop, d1_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim1Type",
-                                       "Dim1", entry)
+    d1_prop, d1_val = get_dimension_pv(cprop_mapping, value_mapping,
+                                       "Dim1Type", "Dim1", entry)
     if d1_prop and not d1_val:
         has_empty_mapped_val = True
     if entry.get("Dim1Type", "") in person_dimensions:
@@ -185,8 +185,8 @@ def process_dimensions(cprop_mapping, value_mapping, person_dimensions, entry,
     if d1_prop and d1_val:
         mcf.append(f"{d1_prop}: {d1_val}")
         sv_dcid = update_dcid(sv_dcid, d1_prop, d1_val)
-    d2_prop, d2_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim2Type",
-                                       "Dim2", entry)
+    d2_prop, d2_val = get_dimension_pv(cprop_mapping, value_mapping,
+                                       "Dim2Type", "Dim2", entry)
     if d2_prop and not d2_val:
         has_empty_mapped_val = True
     if entry.get("Dim2Type", "") in person_dimensions:
@@ -194,8 +194,8 @@ def process_dimensions(cprop_mapping, value_mapping, person_dimensions, entry,
     if d2_prop and d2_val:
         mcf.append(f"{d2_prop}: {d2_val}")
         sv_dcid = update_dcid(sv_dcid, d2_prop, d2_val)
-    d3_prop, d3_val = get_dimension_pv(cprop_mapping, value_mapping, "Dim3Type",
-                                       "Dim3", entry)
+    d3_prop, d3_val = get_dimension_pv(cprop_mapping, value_mapping,
+                                       "Dim3Type", "Dim3", entry)
     if d3_prop and not d3_val:
         has_empty_mapped_val = True
     if entry.get("Dim3Type", "") in person_dimensions:
@@ -256,8 +256,8 @@ def generate_csv_and_sv(data_files, schema_mapping, output_dir):
                 if not value or value in VALUES_TO_DROP:
                     continue
                 sv_dcid, has_empty_mapped_val = process_dimensions(
-                    cprop_mapping, value_mapping, person_dimensions, entry, mcf,
-                    sv_dcid)
+                    cprop_mapping, value_mapping, person_dimensions, entry,
+                    mcf, sv_dcid)
                 if not sv_dcid in seen_sv:
                     value_map[sv_dcid] = {}
                     mcf.insert(0, f"Node: dcid:{sv_dcid}")

@@ -74,16 +74,13 @@ def write_csv(csv_file_path, reader):
             if not place:
                 continue
             new_row = {
-                'Date':
-                    observation['Date'],
-                'Place':
-                    place,
-                'AQI':
-                    observation['AQI'],
+                'Date': observation['Date'],
+                'Place': place,
+                'AQI': observation['AQI'],
                 'Pollutant':
-                    'dcs:' + POLLUTANTS[observation['Defining Parameter']],
+                'dcs:' + POLLUTANTS[observation['Defining Parameter']],
                 'Site':
-                    'dcid:epa/' + observation['Defining Site'].replace('-', '')
+                'dcid:epa/' + observation['Defining Site'].replace('-', '')
             }
             writer.writerow(new_row)
 

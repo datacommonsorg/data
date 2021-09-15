@@ -12,7 +12,6 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestDeepSolar(unittest.TestCase):
-
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_input = os.path.join(module_dir_, 'test_data/test_data.csv')

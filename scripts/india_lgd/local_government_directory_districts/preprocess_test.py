@@ -23,10 +23,10 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestPreprocess(unittest.TestCase):
-
     def test_create_csv(self):
-        lgd_csv = os.path.join(os.path.dirname(__file__),
-                               "./test_data/lgd_allDistrictofIndia_export.csv")
+        lgd_csv = os.path.join(
+            os.path.dirname(__file__),
+            "./test_data/lgd_allDistrictofIndia_export.csv")
         wikidata_csv = os.path.join(
             os.path.dirname(__file__),
             "./test_data/wikidata_india_districts_export.csv")

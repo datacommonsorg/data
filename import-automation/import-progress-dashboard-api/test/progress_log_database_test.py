@@ -33,7 +33,6 @@ def setUpModule():
 
 class ProgressLogDatabaseTest(unittest.TestCase):
     """Tests for BaseDatabase."""
-
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
     @mock.patch('app.service.log_message_manager.LogMessageManager',

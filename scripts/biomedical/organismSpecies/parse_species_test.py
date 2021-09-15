@@ -73,7 +73,6 @@ dcid: "bio/9ABAC"
 
 class TestParseSpecies(unittest.TestCase):
     """Test the functions in parse_mint.py"""
-
     def test_main(self):
         """Test in the main function"""
         seen_name_to_dcid = {
@@ -93,8 +92,8 @@ class TestParseSpecies(unittest.TestCase):
         virtual_lines = content_chunks[8].split('\n\n')[1].split('\n')
         combine_lines = real_lines + virtual_lines
 
-        mcf_seen_list, mcf_list = parse_species.get_mcf(combine_lines,
-                                                        seen_name_to_dcid)
+        mcf_seen_list, mcf_list = parse_species.get_mcf(
+            combine_lines, seen_name_to_dcid)
 
         all_mcf = '\n'.join(mcf_seen_list + mcf_list)
 

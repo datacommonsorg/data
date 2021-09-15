@@ -47,8 +47,9 @@ class ProgressLog(flask_restful.Resource):
             import attempts using the client.
     """
     parser = reqparse.RequestParser()
-    required_fields = [(_LOG.level,), (_LOG.message,)]
-    optional_fields = [(_LOG.time_logged,), (_LOG.run_id,), (_LOG.attempt_id,)]
+    required_fields = [(_LOG.level, ), (_LOG.message, )]
+    optional_fields = [(_LOG.time_logged, ), (_LOG.run_id, ),
+                       (_LOG.attempt_id, )]
     utils.add_fields(parser, required_fields, required=True)
     utils.add_fields(parser, optional_fields, required=False)
 
@@ -77,7 +78,6 @@ class ProgressLogByID(ProgressLog):
     Attributes:
         See ImportLog.
     """
-
     def get(self, log_id):
         """Queries the progress logs by its log_id.
 
@@ -101,7 +101,6 @@ class ProgressLogByRunID(ProgressLog):
     Attributes:
         See ImportLog.
     """
-
     def get(self, run_id):
         """Queries the progress logs of a system run.
 
@@ -127,7 +126,6 @@ class ProgressLogByAttemptID(ProgressLog):
     Attributes:
         See ImportLog.
     """
-
     def get(self, attempt_id):
         """Queries the progress logs of an import attempt.
 
