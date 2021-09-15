@@ -61,7 +61,6 @@ class NHMDataLoaderBase(object):
                     (keys contain column names and values contains StatVar names)
     """
 
-
     def __init__(self, data_folder, dataset_name, cols_dict, clean_names,
                  final_csv_path):
         """
@@ -103,13 +102,14 @@ class NHMDataLoaderBase(object):
 
             if fext == '.xlsx':
                 # Reading .xls file as html and preprocessing multiindex
-                self.raw_df = pd.read_html(os.path.join(self.data_folder,
-                                                        file))[0]
-                self.raw_df.columns = self.raw_df.columns.droplevel()
+
+                self.raw_df = pd.read_excel(os.path.join(
+                    self.data_folder, file))
+                # self.raw_df.columns = self.raw_df.columns.droplevel()
 
                 cleaned_df = pd.DataFrame()
-                cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']
-                cleaned_df['isoCode'] = cleaned_df['State'].map(INDIA_ISO_CODES)
+                cleaned_df['District'] = self.raw_df[
+                    'Unnamed: 2']  # Unnamed:2 column has district names
                 cleaned_df['Date'] = date
 
                 # If no columns specified, extract all except first two (index and state name)
@@ -130,7 +130,8 @@ class NHMDataLoaderBase(object):
         df_full['DistrictCode'] = df_full.apply(
             lambda row: self._get_district_code(row), axis=1)
         df_full.columns = df_full.columns.map(self.cols_dict)
-        df_full.to_csv(self.final_csv_path, index=False)
+        df_full = df_full.groupby(
+            level=0, axis=1).first()  # merging columns with same names
 
         df_full.iloc[2:].to_csv(self.final_csv_path, index=False)
 
