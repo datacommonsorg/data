@@ -84,7 +84,11 @@ isoCode: C:{dataset_name}->isoCode
 TMCF_NODES = """
 Node: E:{dataset_name}->E{index}
 typeOf: dcs:StatVarObservation
+<<<<<<< HEAD
 variableMeasured: dcs:{statvar}
+=======
+variableMeasured: dcs:indianNHM/{statvar}
+>>>>>>> refs/remotes/origin/master
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
@@ -97,6 +101,10 @@ description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/{statvar}
+<<<<<<< HEAD
+=======
+statType: dcs:measuredValue
+>>>>>>> refs/remotes/origin/master
 
 """
 
@@ -162,9 +170,18 @@ class NHMDataLoaderBase(object):
                     self.cols_to_extract = list(
                         set(self.raw_df.columns.droplevel(-1)[2:]))
 
+<<<<<<< HEAD
                 # Extract specified columns from raw dataframe to cleaned dataframe
                 for col in self.cols_to_extract:
                     cleaned_df[col] = self.raw_df[col][fname]
+=======
+                # Extract specified columns from raw dataframe if it exists
+                for col in self.cols_to_extract:
+                    if col in self.raw_df.columns:
+                        cleaned_df[col] = self.raw_df[col][fname]
+                    else:
+                        continue
+>>>>>>> refs/remotes/origin/master
 
                 df_full = df_full.append(cleaned_df, ignore_index=True)
 
@@ -186,6 +203,7 @@ class NHMDataLoaderBase(object):
             # Writing isoCODE entity
             tmcf.write(TMCF_ISOCODE.format(dataset_name=self.dataset_name))
 
+<<<<<<< HEAD
             # Writing nodes for each StatVar
             for idx, variable in enumerate(self.cols_to_extract):
                 # Writing TMCF
@@ -197,3 +215,24 @@ class NHMDataLoaderBase(object):
                 mcf.write(
                     MCF_NODES.format(statvar=self.cols_dict[variable],
                                      description=variable))
+=======
+            # Keeping track of written StatVars
+            # Some columns in NHM_FamilyPlanning have same StatVar for multiple cols
+            statvars_written = []
+
+            # Writing nodes for each StatVar
+            for idx, variable in enumerate(self.cols_to_extract):
+                if self.cols_dict[variable] not in statvars_written:
+                    # Writing TMCF
+                    tmcf.write(
+                        TMCF_NODES.format(dataset_name=self.dataset_name,
+                                          index=idx + 1,
+                                          statvar=self.cols_dict[variable]))
+                    # Writing MCF
+                    mcf.write(
+                        MCF_NODES.format(
+                            statvar=self.cols_dict[variable],
+                            description=str(variable).capitalize()))
+
+                    statvars_written.append(self.cols_dict[variable])
+>>>>>>> refs/remotes/origin/master

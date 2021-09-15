@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+<<<<<<< HEAD
 import os
 import sys
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 class ReadMeGen():
     """

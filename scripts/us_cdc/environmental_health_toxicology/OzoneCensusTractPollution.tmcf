@@ -1,0 +1,16 @@
+Node: E:OzoneCTPollution->E1
+observationAbout: C:OzoneCTPollution->dcid
+typeOf: dcs:StatVarObservation
+observationDate: C:OzoneCTPollution->date
+variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone
+observationPeriod: "P8H"
+unit: parts per billion (ppb)
+value: C:OzoneCTPollution->Value
+
+Node: E:OzoneCTPollution->E2
+observationAbout: C:OzoneCTPollution->dcid
+typeOf: dcs:StatVarObservation
+observationDate: C:OzoneCTPollution->date
+variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone_StandardError
+observationPeriod: "P8H"
+value: C:OzoneCTPollution->Error
