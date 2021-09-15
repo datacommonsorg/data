@@ -161,10 +161,12 @@ def clean_census_tract_data(data):
         "Data_Value_Footnote_Symbol", "Data_Value_Footnote", "Geolocation",
         "LocationID", "CategoryID", "Short_Question_Text"
     ])
-    data = data[['Year', 'Data_Value', 'Low_Confidence_Limit',
-    'High_Confidence_Limit', 'TotalPopulation', 'Location', 'StatVar',
-    'DataValueTypeID', 'Low_Confidence_Limit_StatVar',
-    'High_Confidence_Limit_StatVar', 'Population_StatVar']]
+    data = data[[
+        'Year', 'Data_Value', 'Low_Confidence_Limit', 'High_Confidence_Limit',
+        'TotalPopulation', 'Location', 'StatVar', 'DataValueTypeID',
+        'Low_Confidence_Limit_StatVar', 'High_Confidence_Limit_StatVar',
+        'Population_StatVar'
+    ]]
     return data
 
 
