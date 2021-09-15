@@ -43,9 +43,12 @@ def process_data(data_filepaths, crosswalk, out_filepath):
         all_processed_facilities = {}  # map of year -> set(dcid)
         for (year, filepath) in data_filepaths:
             print(f'Processing {filepath}')
-            year_processed_facilities = all_processed_facilities.get(year, set())
+            year_processed_facilities = all_processed_facilities.get(
+                year, set())
             with open(filepath, 'r') as fp:
                 for row in csv.DictReader(fp):
+                    if not row[_FACILITY_ID]:
+                        continue
                     dcid = crosswalk.get_dcid(row[_FACILITY_ID])
                     assert dcid
                     if dcid in year_processed_facilities:
@@ -65,6 +68,7 @@ def process_data(data_filepaths, crosswalk, out_filepath):
                             _VALUE: value
                         })
                     year_processed_facilities.add(dcid)
+            all_processed_facilities[year] = year_processed_facilities
 
 
 if __name__ == '__main__':
