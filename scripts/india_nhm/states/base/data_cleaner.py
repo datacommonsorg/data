@@ -14,11 +14,71 @@
 
 import os
 import pandas as pd
-import difflib
+
+INDIA_ISO_CODES = {
+    "Andhra Pradesh": "IN-AP",
+    "Andhra Pradesh Old": "IN-AP",
+    "Arunachal Pradesh": "IN-AR",
+    "Assam": "IN-AS",
+    "Bihar": "IN-BR",
+    "Chattisgarh": "IN-CT",
+    "Chhattisgarh": "IN-CT",
+    "Goa": "IN-GA",
+    "Gujarat": "IN-GJ",
+    "Haryana": "IN-HR",
+    "Himachal Pradesh": "IN-HP",
+    "Jharkhand": "IN-JH",
+    "Jharkhand#": "IN-JH",
+    "Karnataka": "IN-KA",
+    "Kerala": "IN-KL",
+    "Madhya Pradesh": "IN-MP",
+    "Madhya Pradesh#": "IN-MP",
+    "Maharashtra": "IN-MH",
+    "Manipur": "IN-MN",
+    "Meghalaya": "IN-ML",
+    "Mizoram": "IN-MZ",
+    "Nagaland": "IN-NL",
+    "Nagaland#": "IN-NL",
+    "Odisha": "IN-OR",
+    "Punjab": "IN-PB",
+    "Rajasthan": "IN-RJ",
+    "Sikkim": "IN-SK",
+    "Tamil Nadu": "IN-TN",
+    "Tamilnadu": "IN-TN",
+    "Telengana": "IN-TG",
+    "Telangana": "IN-TG",
+    "Tripura": "IN-TR",
+    "Uttarakhand": "IN-UT",
+    "Uttar Pradesh": "IN-UP",
+    "West Bengal": "IN-WB",
+    "Andaman and Nicobar Islands": "IN-AN",
+    "Andaman & Nicobar Islands": "IN-AN",
+    "Andaman & N. Island": "IN-AN",
+    "A & N Islands": "IN-AN",
+    "Chandigarh": "IN-CH",
+    "Dadra and Nagar Haveli": "IN-DN",
+    "Dadra & Nagar Haveli": "IN-DN",
+    "Dadar Nagar Haveli": "IN-DN",
+    "Daman and Diu": "IN-DD",
+    "Daman & Diu": "IN-DD",
+    "Delhi": "IN-DL",
+    "Jammu and Kashmir": "IN-JK",
+    "Jammu & Kashmir": "IN-JK",
+    "Ladakh": "IN-LA",
+    "Lakshadweep": "IN-LD",
+    "Lakshwadeep": "IN-LD",
+    "Pondicherry": "IN-PY",
+    "Puducherry": "IN-PY",
+    "Puduchery": "IN-PY",
+    "Dadra and Nagar Haveli and Daman and Diu": "IN-DN_DD",
+    "all India": "IN",
+    "all-India": "IN",
+    "All India": "IN"
+}
 
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
-typeOf: dcs:AdministrativeArea2
-lgdCode: C:{dataset_name}->lgdCode
+typeOf: schema:Place
+isoCode: C:{dataset_name}->isoCode
 """
 
 TMCF_NODES = """
@@ -29,15 +89,7 @@ measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
 observationPeriod: "P1Y"
-<<<<<<< HEAD:scripts/india_nhm/states/base/data_cleaner.py
-<<<<<<< HEAD
 value: C:{dataset_name}->{statvar}
-=======
-value: C:{dataset_name}->indianNHM/{statvar}
->>>>>>> nhm_others
-=======
-value: C:{dataset_name}->{statvar}
->>>>>>> nhm_district_others:scripts/india_nhm/districts/base/data_cleaner.py
 """
 
 MCF_NODES = """Node: dcid:indianNHM/{statvar}
@@ -46,7 +98,6 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/{statvar}
 statType: dcs:measuredValue
-
 """
 
 
@@ -60,15 +111,13 @@ class NHMDataLoaderBase(object):
         cols_dict: dictionary containing column names in the data files mapped to StatVars
                     (keys contain column names and values contains StatVar names)
     """
-    def __init__(self, data_folder, dataset_name, cols_dict, clean_names,
-                 final_csv_path):
+    def __init__(self, data_folder, dataset_name, cols_dict, final_csv_path):
         """
         Constructor
         """
         self.data_folder = data_folder
         self.dataset_name = dataset_name
         self.cols_dict = cols_dict
-        self.clean_names = clean_names
         self.final_csv_path = final_csv_path
 
         self.raw_df = None
@@ -82,15 +131,10 @@ class NHMDataLoaderBase(object):
         he columns and map the columns to schema.
         
         The dataframe is saved as a csv file in current directory.
-
         Returns:
             pandas dataframe: Cleaned dataframe.
-
         """
         df_full = pd.DataFrame(columns=list(self.cols_dict.keys()))
-
-        lgd_url = 'https://india-local-government-directory-bixhnw23da-el.a.run.app/india-local-government-directory/districts.csv?_size=max'
-        self.dist_code = pd.read_csv(lgd_url, dtype={'DistrictCode': str})
 
         # Loop through each year file
         for file in os.listdir(self.data_folder):
@@ -99,7 +143,7 @@ class NHMDataLoaderBase(object):
             date = ''.join(['20', fname[-2:],
                             '-03'])  # date is set as March of every year
 
-            if fext == '.xlsx':
+            if fext == '.xls':
                 # Reading .xls file as html and preprocessing multiindex
                 self.raw_df = pd.read_html(os.path.join(
                     self.data_folder, file))[0]
@@ -119,19 +163,17 @@ class NHMDataLoaderBase(object):
                 # Extract specified columns from raw dataframe if it exists
                 for col in self.cols_to_extract:
                     if col in self.raw_df.columns:
-                        cleaned_df[col] = self.raw_df[col].iloc[1:]
+                        cleaned_df[col] = self.raw_df[col][fname]
                     else:
                         continue
 
                 df_full = df_full.append(cleaned_df, ignore_index=True)
 
         # Converting column names according to schema and saving it as csv
-        df_full['DistrictCode'] = df_full.apply(
-            lambda row: self._get_district_code(row), axis=1)
         df_full.columns = df_full.columns.map(self.cols_dict)
         df_full.to_csv(self.final_csv_path, index=False)
 
-        df_full.iloc[2:].to_csv(self.final_csv_path, index=False)
+        return df_full
 
     def create_mcf_tmcf(self):
         """
@@ -161,30 +203,6 @@ class NHMDataLoaderBase(object):
                     mcf.write(
                         MCF_NODES.format(
                             statvar=self.cols_dict[variable],
-                            description=self.clean_names[variable]))
+                            description=str(variable).capitalize()))
 
                     statvars_written.append(self.cols_dict[variable])
-
-    def _get_district_code(self, row):
-        """
-        Function to get a complete match or partial match to district names.
-        For example, this function can identify 'Nilgiris' and 'The Niligris' as same name
-        
-        Cutoff = 0.8 captures all of the variations in the same district name
-        
-        """
-        # if there is a close match for district name,
-        # return district code from Local Govt. Directory (LGD)
-        # else return None
-        if pd.notna(row['District']):
-            close_match = difflib.get_close_matches(
-                row['District'].upper(),
-                self.dist_code['DistrictName(InEnglish)'],
-                n=1,
-                cutoff=0.8)
-            if close_match:
-                return self.dist_code[self.dist_code['DistrictName(InEnglish)']
-                                      ==
-                                      close_match[0]]['DistrictCode'].values[0]
-            else:
-                return None
