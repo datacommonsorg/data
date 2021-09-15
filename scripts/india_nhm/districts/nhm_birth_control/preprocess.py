@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from india_nhm.base.data_cleaner import NHMDataLoaderBase
-from india_nhm.base.readme_generator import ReadMeGen
+from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
+from india_nhm.districts.base.readme_generator import ReadMeGen
 
 # Mapping dictionary for data columns and StatVars
 # Mutiple keys for some same StatVar since column name is changed in recent datasets

@@ -12,12 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-
-sys.path.append("..")
-
-from base.data_cleaner import NHMDataLoaderBase
-from base.readme_generator import ReadMeGen
+from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
+from india_nhm.states.base.readme_generator import ReadMeGen
 
 # Mapping dictionary for data columns and StatVars
 cols_to_nodes = {

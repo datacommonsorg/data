@@ -16,8 +16,8 @@ import sys
 
 sys.path.append("..")
 
-from base.data_cleaner import NHMDataLoaderBase
-from base.readme_generator import ReadMeGen
+from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
+from india_nhm.states.base.readme_generator import ReadMeGen
 
 # Mapping dictionary for data columns and StatVars
 # Mutiple keys for some same StatVar since column name is changed in recent datasets

@@ -14,8 +14,7 @@
 
 import os
 import unittest
-import filecmp
-from india_nhm.base.data_cleaner import NHMDataLoaderBase
+from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -52,26 +51,22 @@ class TestPreprocess(unittest.TestCase):
     maxDiff = None
 
     def test_create_csv(self):
-        expected_file = os.path.join(module_dir_, 'test/expected.csv')
-        # expected_data = expected_file.read()
-        # expected_file.close()
+        expected_file = open(os.path.join(module_dir_, 'test/expected.csv'))
+        expected_data = expected_file.read()
+        expected_file.close()
 
-        loader = NHMDataLoaderBase(
-            data_folder=os.path.join(module_dir_, 'test/'),
-            dataset_name='test_gen',
-            cols_dict=cols_to_nodes,
-            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"))
+        loader = NHMDataLoaderBase(data_folder='test/',
+                                   dataset_name='test_gen',
+                                   cols_dict=cols_to_nodes,
+                                   final_csv_path="test/test_gen.csv")
         loader.generate_csv()
 
-        result_file = os.path.join(module_dir_, 'test/test_gen.csv')
-        # result_data = result_file.read()
-        # result_file.close()
+        result_file = open('test/test_gen.csv')
+        result_data = result_file.read()
+        result_file.close()
 
-        same = filecmp.cmp(result_file, expected_file)
-        self.assertTrue(same)
-
-        # os.remove(result_file)
-        # self.assertEqual(u'{}'.format(expected_data), result_data)
+        os.remove('test/test_gen.csv')
+        self.assertEqual(u'{}'.format(expected_data), result_data)
 
 
 if __name__ == '__main__':
