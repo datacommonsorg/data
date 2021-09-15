@@ -19,16 +19,6 @@ class Crosswalk:
                 ])
 
     def get_dcid(self, ghgrp_facility_id):
-        # Prefer pp_codes over frs_id over ghg_id
-        pp_codes = self.get_power_plant_ids(ghgrp_facility_id)
-        if pp_codes:
-            # pp_codes are ordered
-            return 'eia/pp/' + pp_codes[0]
-
-        frs_id = self.get_frs_id(ghgrp_facility_id)
-        if frs_id:
-            return 'epaFrsId/' + frs_id
-
         return 'epaGhgrpFacilityId/' + ghgrp_facility_id
 
     def get_frs_id(self, ghgrp_facility_id):
