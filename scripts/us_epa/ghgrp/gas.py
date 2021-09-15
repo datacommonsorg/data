@@ -42,7 +42,6 @@ name: "{gas_name}"
 """
 
 SV_MCF_TEMPLATE = """
-
 Node: dcid:{sv_dcid}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
@@ -50,6 +49,7 @@ measuredProperty: dcs:amount
 statType: dcs:measuredValue
 measurementQualifier: dcs:Annual
 emittedThing: dcs:{gas_dcid}
+emissionSourceType: dcs:{source_type}
 """
 
 
@@ -63,13 +63,11 @@ def col_to_sv(col):
     dcid = col.strip()
     suffix = ''
     if dcid.startswith('Total'):
-        suffix = 'GreenhouseGas'
+        suffix = 'GreenhouseGas_NonBiogenic'
     elif dcid.startswith('Biogenic CO2'):
         suffix = 'CarbonDioxide_Biogenic'
-    elif dcid.startswith('CO2') and '(non-biogenic)' in dcid:
-        suffix = 'CarbonDioxide_NonBiogenic'
     elif dcid in GAS_COLUMNS_TO_NAME:
-        suffix = col_to_dcid(dcid.strip())
+        suffix = f'{col_to_dcid(dcid.strip())}_NonBiogenic'
     assert suffix != None
     return f'Annual_Emissions_{suffix}'
 
@@ -110,11 +108,10 @@ def append_sv_mcf(fp):
             gas_dcid = col_to_dcid(col)
         else:
             gas_dcid = 'GreenhouseGas'
-        fp.write(SV_MCF_TEMPLATE.format(sv_dcid=sv_dcid, gas_dcid=gas_dcid))
+        source_type = 'NonBiogenicEmissionSource'
         if col.startswith('Biogenic'):
-            fp.write(f'emissionSourceType: dcs:NonBiogenicEmissionSource')
-        if 'non-biogenic' in col:
-            fp.write(f'emissionSourceType: dcs:BiogenicEmissionSource')
+            source_type = 'BiogenicEmissionSource'
+        fp.write(SV_MCF_TEMPLATE.format(sv_dcid=sv_dcid, gas_dcid=gas_dcid, source_type=source_type))
 
 
 if __name__ == '__main__':
