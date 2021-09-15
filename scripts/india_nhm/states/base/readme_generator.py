@@ -16,9 +16,8 @@
 class ReadMeGen():
     """
     """
-
-    def __init__(self, dataset_name, dataset_description, data_level, cols_dict,
-                 clean_names):
+    def __init__(self, dataset_name, dataset_description, data_level,
+                 cols_dict, clean_names):
         self.dataset_name = dataset_name
         self.dataset_description = dataset_description
         self.data_level = data_level

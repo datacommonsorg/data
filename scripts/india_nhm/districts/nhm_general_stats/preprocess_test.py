@@ -19,49 +19,31 @@ from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
-    'District':
-        'District',
-    'DistrictCode':
-        'DistrictCode',
-    'Date':
-        'Date',
-    'IPD (Number)':
-        'Count_InPatient',
-    'OPD (Number)':
-        'Count_OutPatient',
-    'OPD (Allopathic)':
-        'Count_OutPatient',
-    'Number of Major Operations':
-        'Count_SurgicalProcedure_Major',
-    'Number of Minor Operations':
-        'Count_SurgicalProcedure_Minor',
+    'District': 'District',
+    'DistrictCode': 'DistrictCode',
+    'Date': 'Date',
+    'IPD (Number)': 'Count_InPatient',
+    'OPD (Number)': 'Count_OutPatient',
+    'OPD (Allopathic)': 'Count_OutPatient',
+    'Number of Major Operations': 'Count_SurgicalProcedure_Major',
+    'Number of Minor Operations': 'Count_SurgicalProcedure_Minor',
     '% Inpatient Deaths to Total IPD':
-        'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
-    'Ayush OPD (Number)':
-        'Count_OutPatient_Ayush',
+    'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
+    'Ayush OPD (Number)': 'Count_OutPatient_Ayush',
 }
 
 clean_names = {
-    'District':
-        'District',
-    'DistrictCode':
-        'lgdCode',
-    'Date':
-        'Date',
-    'IPD (Number)':
-        'Number of In-Patients',
-    'OPD (Number)':
-        'Number of Out-Patients',
-    'OPD (Allopathic)':
-        'Number of Out-Patients',
-    'Number of Major Operations':
-        'Number of Major Surgeries',
-    'Number of Minor Operations':
-        'Number of Minor Surgeries',
+    'District': 'District',
+    'DistrictCode': 'lgdCode',
+    'Date': 'Date',
+    'IPD (Number)': 'Number of In-Patients',
+    'OPD (Number)': 'Number of Out-Patients',
+    'OPD (Allopathic)': 'Number of Out-Patients',
+    'Number of Major Operations': 'Number of Major Surgeries',
+    'Number of Minor Operations': 'Number of Minor Surgeries',
     '% Inpatient Deaths to Total IPD':
-        'Percent of In-patient Deaths to Total In-patients',
-    'Ayush OPD (Number)':
-        'Number of Out-Patients (AYUSH)',
+    'Percent of In-patient Deaths to Total In-patients',
+    'Ayush OPD (Number)': 'Number of Out-Patients (AYUSH)',
 }
 
 

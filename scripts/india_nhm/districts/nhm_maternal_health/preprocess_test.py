@@ -20,52 +20,52 @@ from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
     'District':
-        'District',
+    'District',
     'DistrictCode':
-        'lgdCode',
+    'lgdCode',
     'Date':
-        'Date',
+    'Date',
     'Total number of pregnant women Registered for ANC':
-        'Count_PregnantWomen_RegisteredForAntenatalCare',
+    'Count_PregnantWomen_RegisteredForAntenatalCare',
     'Number of Pregnant women registered within first trimester':
-        'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
+    'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester',
     'Total reported deliveries':
-        'Count_ChildDeliveryEvent',
+    'Count_ChildDeliveryEvent',
     'Institutional deliveries (Public Insts.+Pvt. Insts.)':
-        'Count_ChildDeliveryEvent_InAnInstitution',
+    'Count_ChildDeliveryEvent_InAnInstitution',
     'Deliveries Conducted at Public Institutions':
-        'Count_ChildDeliveryEvent_InPublicInstitution',
+    'Count_ChildDeliveryEvent_InPublicInstitution',
     'Number of Home deliveries':
-        'Count_ChildDeliveryEvent_AtHome',
+    'Count_ChildDeliveryEvent_AtHome',
     'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+    'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
     '% Safe deliveries to Total Reported Deliveries':
-        'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
+    'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
 
 clean_names = {
     'District':
-        'District',
+    'District',
     'DistrictCode':
-        'lgdCode',
+    'lgdCode',
     'Date':
-        'Date',
+    'Date',
     'Total number of pregnant women Registered for ANC':
-        'Total number of pregnant women registered for Antenatal Care',
+    'Total number of pregnant women registered for Antenatal Care',
     'Number of Pregnant women registered within first trimester':
-        'Number of pregnant women registered for Antenatal Care within first trimester',
+    'Number of pregnant women registered for Antenatal Care within first trimester',
     'Total reported deliveries':
-        'Total reported deliveries',
+    'Total reported deliveries',
     'Institutional deliveries (Public Insts.+Pvt. Insts.)':
-        'Institutional deliveries (Public Insts.+Pvt. Insts.)',
+    'Institutional deliveries (Public Insts.+Pvt. Insts.)',
     'Deliveries Conducted at Public Institutions':
-        'Deliveries conducted at public institutions',
+    'Deliveries conducted at public institutions',
     'Number of Home deliveries':
-        'Number of home deliveries',
+    'Number of home deliveries',
     'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)',
+    'Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)',
     '% Safe deliveries to Total Reported Deliveries':
-        'Percentage of safe deliveries to total reported deliveries'
+    'Percentage of safe deliveries to total reported deliveries'
 }
 
 

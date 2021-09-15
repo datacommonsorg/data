@@ -60,8 +60,6 @@ class NHMDataLoaderBase(object):
         cols_dict: dictionary containing column names in the data files mapped to StatVars
                     (keys contain column names and values contains StatVar names)
     """
-
-
     def __init__(self, data_folder, dataset_name, cols_dict, clean_names,
                  final_csv_path):
         """
@@ -103,13 +101,14 @@ class NHMDataLoaderBase(object):
 
             if fext == '.xlsx':
                 # Reading .xls file as html and preprocessing multiindex
-                self.raw_df = pd.read_html(os.path.join(self.data_folder,
-                                                        file))[0]
+                self.raw_df = pd.read_html(os.path.join(
+                    self.data_folder, file))[0]
                 self.raw_df.columns = self.raw_df.columns.droplevel()
 
                 cleaned_df = pd.DataFrame()
                 cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']
-                cleaned_df['isoCode'] = cleaned_df['State'].map(INDIA_ISO_CODES)
+                cleaned_df['isoCode'] = cleaned_df['State'].map(
+                    INDIA_ISO_CODES)
                 cleaned_df['Date'] = date
 
                 # If no columns specified, extract all except first two (index and state name)
