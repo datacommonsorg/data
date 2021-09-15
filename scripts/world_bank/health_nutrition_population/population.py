@@ -15,7 +15,7 @@ import pandas as pd
 
 series and countries used here: All countries, population age 0 to 25 seperated on basis of gender
 """
-
+#trying to get the csv - program keeps crashing when i run it for all data points
 series  = ['SP.POP.AG05.FE.IN', 'SP.POP.AG02.FE.IN', 'SP.POP.AG19.FE.IN',
            'SP.POP.AG07.MA.IN', 'SP.POP.AG04.FE.IN', 'SP.POP.AG04.MA.IN',
            'SP.POP.AG03.MA.IN', 'SP.POP.AG18.MA.IN', 'SP.POP.AG15.FE.IN',
@@ -72,6 +72,7 @@ def get_df(serieses, countries):
         print(series)
         for country in countries:
             url = f"https://api.worldbank.org/v2/country/{country}/indicator/{series}?format=JSON"
+            url = url + "&per_page=61"
             response = requests.get(url)
             response = response.json()
             responses.append(response)
