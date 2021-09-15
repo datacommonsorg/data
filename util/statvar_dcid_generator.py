@@ -43,7 +43,7 @@ _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
 _CONSTRAINT_PREFIX_REGEX = re.compile(r'^(USC|CDC|DAD|BLS|NCES|ACSED)')
 
 
-def _capitalize_process_word(word):
+def _capitalize_process_word(word: str) -> str:
     """Capitalizes, removes namespaces, measurement constraint prefixes and
     underscores from a word.
 
@@ -76,7 +76,7 @@ def _capitalize_process_word(word):
     return None
 
 
-def _generate_quantity_range_name(match_dict):
+def _generate_quantity_range_name(match_dict: dict) -> str:
     """Generate a name for a quantity range.
 
     Args:
@@ -109,7 +109,7 @@ def _generate_quantity_range_name(match_dict):
     return f'{lower_limit}To{upper_limit}{quantity}'
 
 
-def _generate_quantity_name(match_dict):
+def _generate_quantity_name(match_dict: dict) -> str:
     """Generate a name for a quantity.
 
     Args:
