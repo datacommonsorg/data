@@ -111,7 +111,10 @@ def append_sv_mcf(fp):
         source_type = 'NonBiogenicEmissionSource'
         if col.startswith('Biogenic'):
             source_type = 'BiogenicEmissionSource'
-        fp.write(SV_MCF_TEMPLATE.format(sv_dcid=sv_dcid, gas_dcid=gas_dcid, source_type=source_type))
+        fp.write(
+            SV_MCF_TEMPLATE.format(sv_dcid=sv_dcid,
+                                   gas_dcid=gas_dcid,
+                                   source_type=source_type))
 
 
 if __name__ == '__main__':
