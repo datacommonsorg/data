@@ -7,145 +7,139 @@ Original file is located at
     https://colab.research.google.com/drive/1f5j8kacwOd_dZqxoO_XCtwuk2jck67bz
 """
 
-import urllib
 import requests
 import pandas as pd
 
-"""schema doc: https://docs.google.com/document/d/16Qz9C3-Eyqd6KcwQ1hkMowfXnBQvyVg-L5b0EBhNWWU/edit#
+series  = ['SP.POP.AG00.FE.IN', 'SP.POP.AG00.MA.IN', 'SP.POP.AG01.FE.IN',
+           'SP.POP.AG01.MA.IN', 'SP.POP.AG02.FE.IN', 'SP.POP.AG02.MA.IN',
+           'SP.POP.AG03.FE.IN', 'SP.POP.AG03.MA.IN', 'SP.POP.AG04.FE.IN',
+           'SP.POP.AG04.MA.IN', 'SP.POP.AG05.FE.IN', 'SP.POP.AG05.MA.IN',
+           'SP.POP.AG06.FE.IN', 'SP.POP.AG06.MA.IN', 'SP.POP.AG07.FE.IN',
+           'SP.POP.AG07.MA.IN', 'SP.POP.AG08.FE.IN', 'SP.POP.AG08.MA.IN',
+           'SP.POP.AG09.FE.IN', 'SP.POP.AG09.MA.IN', 'SP.POP.AG10.FE.IN',
+           'SP.POP.AG10.MA.IN', 'SP.POP.AG11.FE.IN', 'SP.POP.AG11.MA.IN',
+           'SP.POP.AG12.FE.IN', 'SP.POP.AG12.MA.IN', 'SP.POP.AG13.FE.IN',
+           'SP.POP.AG13.MA.IN', 'SP.POP.AG14.FE.IN', 'SP.POP.AG14.MA.IN',
+           'SP.POP.AG15.FE.IN', 'SP.POP.AG15.MA.IN', 'SP.POP.AG16.FE.IN',
+           'SP.POP.AG16.MA.IN', 'SP.POP.AG17.FE.IN', 'SP.POP.AG17.MA.IN',
+           'SP.POP.AG18.FE.IN', 'SP.POP.AG18.MA.IN', 'SP.POP.AG19.FE.IN',
+           'SP.POP.AG19.MA.IN', 'SP.POP.AG20.FE.IN', 'SP.POP.AG20.MA.IN',
+           'SP.POP.AG21.FE.IN', 'SP.POP.AG21.MA.IN', 'SP.POP.AG22.FE.IN',
+           'SP.POP.AG22.MA.IN', 'SP.POP.AG23.FE.IN', 'SP.POP.AG23.MA.IN',
+           'SP.POP.AG24.FE.IN', 'SP.POP.AG24.MA.IN', 'SP.POP.AG25.FE.IN',
+           'SP.POP.AG25.MA.IN']
+countries = ['ABW', 'AFE', 'AFG', 'AFW', 'AGO', 'ALB', 'AND', 'ARB', 'ARE', 'ARG',
+             'ASM', 'ATG', 'AUS', 'AUT', 'AZE', 'BDI', 'BEL', 'BEN', 'BFA', 'BGD',
+             'BGR', 'BHR', 'BHS', 'BIH', 'BLR', 'BLZ', 'BMU', 'BOL', 'BRA', 'BRB',
+             'BRN', 'BTN', 'BWA', 'CAF', 'CANARM', 'CEB', 'CHE', 'CHI', 'CHL',
+             'CHN', 'CIV', 'CMR', 'COD', 'COG', 'COL', 'COM', 'CPV', 'CRI', 'CSS',
+             'CUB', 'CUW', 'CYM', 'CYP', 'CZE', 'DEU', 'DJI', 'DMA', 'DNK', 'DOM',
+             'DZA', 'EAP', 'EAR', 'EAS', 'ECA', 'ECS', 'ECU', 'EGY', 'EMU', 'ERI',
+             'ESP', 'EST', 'ETH', 'EUU', 'FCS', 'FIN', 'FJI', 'FRA', 'FRO', 'FSM',
+             'GAB', 'GBR', 'GEO', 'GHA', 'GIB', 'GIN', 'GMB', 'GNB', 'GNQ', 'GRC',
+             'GRD', 'GRL', 'GTM', 'GUM', 'GUY', 'HIC', 'HKG', 'HND', 'HPC', 'HRV',
+             'HTI', 'HUN', 'IDN', 'IMN', 'IND', 'INX', 'IRL', 'IRN', 'IRQ', 'ISL',
+             'ISR', 'ITA', 'JAM', 'JOR', 'JPN', 'KAZ', 'KEN', 'KGZ', 'KHM', 'KIR',
+             'KNA', 'KOR', 'KWT', 'LAC', 'LAO', 'LBN', 'LBR', 'LBY', 'LCA', 'LCN',
+             'LDC', 'LIC', 'LIE', 'LKA', 'LMC', 'LMY', 'LSO', 'LTE', 'LTU', 'LUX',
+             'LVA', 'MAC', 'MAF', 'MAR', 'MCO', 'MDA', 'MDG', 'MDV', 'MEA', 'MEX',
+             'MHL', 'MIC', 'MKD', 'MLI', 'MLT', 'MMR', 'MNA', 'MNE', 'MNG', 'MNP',
+             'MOZ', 'MRT', 'MUS', 'MWI', 'MYS', 'NAC', 'NAM', 'NCL', 'NER', 'NGA',
+             'NIC', 'NLD', 'NOR', 'NPL', 'NRU', 'NZL', 'OED', 'OMN', 'OSS', 'PAK',
+             'PAN', 'PER', 'PHL', 'PLW', 'PNG', 'POL', 'PRE', 'PRI', 'PRK', 'PRT',
+             'PRY', 'PSE', 'PSS', 'PST', 'PYF', 'QAT', 'ROU', 'RUS', 'RWA', 'SAS',
+             'SAU', 'SDN', 'SEN', 'SGP', 'SLB', 'SLE', 'SLV', 'SMR', 'SOM', 'SRB',
+             'SSA', 'SSD', 'SSF', 'SST', 'STP', 'SUR', 'SVK', 'SVN', 'SWE', 'SWZ',
+             'SXM', 'SYC', 'SYR', 'TCA', 'TCD', 'TEA', 'TEC', 'TGO', 'THA', 'TJK',
+             'TKM', 'TLA', 'TLS', 'TMN', 'TON', 'TSA', 'TSS', 'TTO', 'TUN', 'TUR',
+             'TUV', 'TZA', 'UGA', 'UKR', 'UMC', 'URY', 'USA', 'UZB', 'VCT', 'VEN',
+             'VGB', 'VIR', 'VNM', 'VUT', 'WLD', 'WSM', 'XKX', 'YEM', 'ZAF', 'ZMB',
+             'ZWE']
 
-series and countries used here: All countries, population age 0 to 25 seperated on basis of gender
-"""
-#trying to get the csv - program keeps crashing when i run it for all data points
-series  = ['SP.POP.AG05.FE.IN', 'SP.POP.AG02.FE.IN', 'SP.POP.AG19.FE.IN',
-           'SP.POP.AG07.MA.IN', 'SP.POP.AG04.FE.IN', 'SP.POP.AG04.MA.IN',
-           'SP.POP.AG03.MA.IN', 'SP.POP.AG18.MA.IN', 'SP.POP.AG15.FE.IN',
-           'SP.POP.AG16.FE.IN', 'SP.POP.AG16.MA.IN', 'SP.POP.AG11.FE.IN',
-           'SP.POP.AG22.MA.IN', 'SP.POP.AG00.MA.IN', 'SP.POP.AG08.FE.IN',
-           'SP.POP.AG19.MA.IN', 'SP.POP.AG13.FE.IN', 'SP.POP.AG01.MA.IN',
-           'SP.POP.AG23.FE.IN', 'SP.POP.AG07.FE.IN', 'SP.POP.AG03.FE.IN',
-           'SP.POP.AG10.MA.IN', 'SP.POP.AG24.MA.IN', 'SP.POP.AG06.FE.IN',
-           'SP.POP.AG18.FE.IN', 'SP.POP.AG24.FE.IN', 'SP.POP.AG13.MA.IN',
-           'SP.POP.AG20.FE.IN', 'SP.POP.AG05.MA.IN', 'SP.POP.AG01.FE.IN',
-           'SP.POP.AG25.MA.IN', 'SP.POP.AG02.MA.IN', 'SP.POP.AG09.MA.IN',
-           'SP.POP.AG23.MA.IN', 'SP.POP.AG15.MA.IN', 'SP.POP.AG25.FE.IN',
-           'SP.POP.AG08.MA.IN', 'SP.POP.AG11.MA.IN', 'SP.POP.AG21.FE.IN',
-           'SP.POP.AG17.FE.IN', 'SP.POP.AG17.MA.IN', 'SP.POP.AG14.MA.IN',
-           'SP.POP.AG22.FE.IN', 'SP.POP.AG21.MA.IN', 'SP.POP.AG06.MA.IN',
-           'SP.POP.AG12.MA.IN', 'SP.POP.AG20.MA.IN', 'SP.POP.AG14.FE.IN',
-           'SP.POP.AG10.FE.IN', 'SP.POP.AG00.FE.IN', 'SP.POP.AG12.FE.IN',
-           'SP.POP.AG09.FE.IN']
-countries = ['CEB', 'CSS', 'QAT', 'NLD', 'SRB', 'TTO', 'ATG', 'KEN', 'CAN'
-             'ARM', 'ISL', 'ARG', 'MLT', 'GTM', 'LCA', 'VIR', 'TGO', 'LMC',
-             'NER', 'YEM', 'SST', 'MYS', 'UKR', 'VEN', 'ZMB', 'BRA', 'ECS',
-             'NPL', 'MKD', 'TUV', 'CHE', 'GIN', 'UMC', 'GUY', 'TZA', 'BFA',
-             'TON', 'HTI', 'DNK', 'UGA', 'AFE', 'GAB', 'PAK', 'SGP', 'PRI',
-             'BOL', 'NAM', 'AFW', 'BMU', 'LIE', 'SSF', 'BIH', 'GNQ', 'VNM',
-             'CHI', 'CHL', 'JPN', 'NGA', 'PST', 'AUT', 'MDG', 'FSM', 'KHM',
-             'AND', 'OMN', 'SWZ', 'EAP', 'TEC', 'PRY', 'TEA', 'GRL', 'AFG',
-             'ABW', 'INX', 'AGO', 'MDV', 'ERI', 'GHA', 'URY', 'LBR', 'KNA',
-             'SLE', 'PYF', 'MEX', 'TLS', 'PAN', 'MRT', 'MUS', 'SVK', 'BLR',
-             'UZB', 'CMR', 'CUW', 'BHS', 'VGB', 'SSA', 'RUS', 'DMA', 'SOM',
-             'SDN', 'LMY', 'COL', 'NZL', 'VUT', 'HND', 'BLZ', 'SUR', 'BEL',
-             'MHL', 'LDC', 'CZE', 'GNB', 'BEN', 'WLD', 'FRA', 'BTN', 'MDA',
-             'RWA', 'MNA', 'HKG', 'HUN', 'IRL', 'SEN', 'GRD', 'TUR', 'CYM',
-             'MAC', 'DEU', 'KOR', 'PRT', 'SXM', 'EAR', 'COG', 'IRQ', 'SLB',
-             'MLI', 'PLW', 'CRI', 'PNG', 'MAF', 'KAZ', 'LVA', 'TCA', 'MOZ',
-             'ARB', 'LIC', 'BGD', 'ZAF', 'CUB', 'SSD', 'MIC', 'CHN', 'HIC',
-             'KIR', 'SAU', 'GIB', 'GEO', 'CIV', 'KGZ', 'BDI', 'SWE', 'COM',
-             'VCT', 'NAC', 'MNG', 'ECU', 'FIN', 'ITA', 'LAC', 'CAF', 'OSS',
-             'LBY', 'MWI', 'FJI', 'POL', 'USA', 'PER', 'LUX', 'SMR', 'BRN',
-             'CPV', 'ROU', 'AUS', 'JOR', 'COD', 'SVN', 'LAO', 'GRC', 'NRU',
-             'PRE', 'IND', 'ECA', 'LTU', 'TSA', 'MMR', 'SAS', 'BWA', 'GUM',
-             'JAM', 'WSM', 'CYP', 'LTE', 'TSS', 'THA', 'NCL', 'HPC', 'NIC',
-             'IRN', 'LCN', 'MNE', 'STP', 'TLA', 'XKX', 'MCO', 'SYR', 'PHL',
-             'MAR', 'GMB', 'AZE', 'ALB', 'EAS', 'FCS', 'MEA', 'ESP', 'TMN',
-             'OED', 'EST', 'ETH', 'GBR', 'EUU', 'PSS', 'ISR', 'HRV', 'PRK',
-             'LSO', 'MNP', 'NOR', 'LKA', 'SYC', 'ASM', 'DJI', 'DOM', 'EMU',
-             'BHR', 'EGY', 'TKM', 'BGR', 'PSE', 'KWT', 'SLV', 'FRO', 'TJK',
-             'TCD', 'ARE', 'LBN', 'TUN', 'ZWE', 'IDN', 'IMN', 'DZA', 'BRB']
-
-def get_df(serieses, countries):
+def get_df(serieses, country_lst):
+    '''
+    gets df by iteratively running code for each country + series
+    '''
     print("get_df")
     responses = []
     df2 = pd.DataFrame
-    for series in list(serieses):
-        print(series)
-        for country in countries:
-            url = f"https://api.worldbank.org/v2/country/{country}/indicator/{series}?format=JSON"
-            url = url + "&per_page=61"
+    i = 0
+    print()
+    for country in country_lst:
+        print(i, end = ', ')
+        i += 1
+        for current_series in serieses:
+            print(country, end = ', ')
+            url = f"https://api.worldbank.org/v2/country/{country}/indicator/{current_series}?"
+            url = url + "format=JSON"
             response = requests.get(url)
             response = response.json()
             responses.append(response)
-    
-  
+
+
     df2 = pd.DataFrame(columns = ['Series Name', 'Series Code', 'Country Code', 'Country',
                                   'Year', 'Value'])
     for res in responses:
-        for i in range(len(res[1])):
-            row = {"Series Name" : res[1][i]['indicator']['value'], 
-                "Series Code" : res[1][i]['indicator']['id'],
-                "Country Code" : res[1][i]['countryiso3code'], 
-                "Country" : res[1][i]['country']['value'], 
-                "Year" : res[1][i]['date'],
-                'Value' : res[1][i]['value']
-                 
-                }      
+        for counter in range(len(res[1])):
+            row = {"Series Name" : res[1][counter]['indicator']['value'],
+                "Series Code" : res[1][counter]['indicator']['id'],
+                "Country Code" : res[1][counter]['countryiso3code'],
+                "Country" : res[1][counter]['country']['value'],
+                "Year" : res[1][counter]['date'],
+                'Value' : res[1][counter]['value']
+
+                }
         df2 = df2.append(row, ignore_index = 1)
     return df2
 
-"""MCF generation code:"""
-
-def get_mcf(df):
+def get_mcf(df_in):
+    '''
+    gets mcf by splitting description and using fstrings
+    '''
     print("get_mcf")
-    nodes = list()
-    used_series = list()
-    file = open("World_bank_hnp_population.mcf", 'w')
-    file.close()
-    for line in range(len(df)):
-        if df['Series Name'][line] not in used_series:
-          statvars = ['Node', 'typeOf', 'description', 'populationType',
-                      'measuredProperty', 'gender', 'statType', 'age']
-          node, age, gender = '', '', ''
-            
-          try:
-              age = str(int(df['Series Name'][line].split(',')[1].split()[-1]))
-              gender = df['Series Name'][line].split(',')[-2].strip()
-              gender = gender[0].upper() + gender[1:]
-              node = f'Count_Persons_{age}Years_{gender}'
-              country = df['Country Code'][line]
-                
-          except:
-              continue
-                
-          value = df['Value'][line]
-          nodes.append(node)
-          values = [node, 'dcs:StatisticalVariable', f'''"{df['Series Name'][line]}"''',
-                    'dcs:Person', 'dcs:count', 'dcs:Female', 'dcs:measuredValue', f'[Years {age}]']
-          mcf = ''
-          for i in range (len(statvars)):
-              mcf = mcf + f'{statvars[i]}: {values[i]}\n'
-          mcf = mcf + '\n'
-          with open("World_bank_hnp_population.mcf", 'a+') as file:
-              file.write(mcf)
-              print(mcf)
-          used_series.append(df['Series Name'][line])
+    nodes = []
+    used_series = []
+    with open("World_bank_hnp_population.mcf", 'w', enoding = None) as file:
+        print(end = '')
 
-def get_csv(df):
+    for line in range(len(df_in)):
+        if df_in['Series Name'][line] not in used_series:
+            statvars = ['Node', 'typeOf', 'description', 'populationType',
+                      'measuredProperty', 'gender', 'statType', 'age']
+            node, age, gender = '', '', ''
+            age = str(int(df_in['Series Name'][line].split(',')[1].split()[-1]))
+            gender = df_in['Series Name'][line].split(',')[-2].strip()
+            gender = gender[0].upper() + gender[1:]
+            node = f'Count_Persons_{age}Years_{gender}'
+
+            nodes.append(node)
+            values = [node, 'dcs:StatisticalVariable', f'''"{df['Series Name'][line]}"''',
+                    'dcs:Person', 'dcs:count', 'dcs:Female', 'dcs:measuredValue', f'[Years {age}]']
+            mcf = ''
+            for i in range (len(statvars)):
+                mcf = mcf + f'{statvars[i]}: {values[i]}\n'
+                mcf = mcf + '\n'
+            with open("World_bank_hnp_population.mcf", 'a+', encoding = None) as file:
+                file.write(mcf)
+                print(mcf)
+            used_series.append(df_in['Series Name'][line])
+
+def get_csv(df_in):
     """Creation of csv according to tmcf:"""
     print("get_csv")
     df2 = pd.DataFrame(columns = ['Country', 'Year', 'Gender', 'Age', "StatVar", 'Population'])
     for line in range(len(df)):
         gender, age, statvar = '', 0, ''
-        age = df['Series Name'][line].split(',')[1].split()[-1]
-        gender = df['Series Name'][line].split(',')[-2].strip()
+        age = df_in['Series Name'][line].split(',')[1].split()[-1]
+        gender = df_in['Series Name'][line].split(',')[-2].strip()
         gender = gender[0].upper() + gender[1:]
         statvar = f'Count_Persons_{age}years_{gender}'
-        d = ({'Country' : df['Country'][line], 'Year' : df['Year'][line], 'Age' : age,
+        df_append = ({'Country' : df['Country'][line], 'Year' : df['Year'][line], 'Age' : age,
               'Gender' : gender, 'StatVar' : statvar, 'Population' : df['Value'][line]})
-        df2.loc[len(df2.index)]=list(d.values())
+        df2.loc[len(df2.index)]=list(df_append.values())
     print(df2.head())
     df2.to_csv("WorldBankPopulation.csv")
 
-"""Main:"""
 df = get_df(series, countries)
+get_mcf(df)
 get_csv(df)
