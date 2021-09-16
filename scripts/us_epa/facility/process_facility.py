@@ -14,7 +14,8 @@ from shapely import geometry
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for Crosswalk
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util')) # for alpha2_to_dcid
+sys.path.append(os.path.join(_SCRIPT_PATH,
+                             '../../../util'))  # for alpha2_to_dcid
 from us_epa.util.crosswalk import Crosswalk
 import alpha2_to_dcid
 
@@ -129,6 +130,8 @@ def _validate_state(facility, state, cfips):
 # Map view. Or maybe we should compute the places based on lat/lngs.
 
 _DISTANCE_THRESHOLD = 0.1  # ~7-10 KMs
+
+
 def _is_nearby(polygon, point):
     if polygon.geom_type == 'MultiPolygon':
         for p in list(polygon):
@@ -187,7 +190,7 @@ def process(input_tables_path, output_path):
 
                     lat = _v(table, in_row, 'LATITUDE')
                     lng = _v(table, in_row, 'LONGITUDE')
-                    zip = _v(table, in_row, 'ZIP')[:5]   # zips have extension
+                    zip = _v(table, in_row, 'ZIP')[:5]  # zips have extension
                     cfips = _v(table, in_row, 'COUNTY_FIPS')
                     state = _v(table, in_row, 'STATE')
 
@@ -196,15 +199,15 @@ def process(input_tables_path, output_path):
                         bad_county_fips += 1
                         cfips = ''
 
-                    if (cfips and lat and lng and not
-                            _validate_geo(ghg_id, 'geoId/' + cfips, lat, lng)):
+                    if (cfips and lat and lng and not _validate_geo(
+                            ghg_id, 'geoId/' + cfips, lat, lng)):
                         bad_county_fips += 1
                         cfips = ''
 
                     if zip == '00000':
                         zip = ''
-                    if (zip and lat and lng and not
-                            _validate_geo(ghg_id, 'zip/' + zip, lat, lng)):
+                    if (zip and lat and lng and
+                            not _validate_geo(ghg_id, 'zip/' + zip, lat, lng)):
                         bad_zip += 1
                         zip = ''
 
@@ -228,8 +231,10 @@ def process(input_tables_path, output_path):
                             ', '.join(_get_cip(zip, cfips)),
                         _NAICS:
                             _get_naics(table, in_row),
-                        _LAT: _str(lat),
-                        _LNG: _str(lng),
+                        _LAT:
+                            _str(lat),
+                        _LNG:
+                            _str(lng),
                     }
                     rows_written += 1
                     cw.writerow(out_row)
