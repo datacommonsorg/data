@@ -99,7 +99,7 @@ def get_mcf(df_in):
     print("get_mcf")
     nodes = []
     used_series = []
-    with open("World_bank_hnp_population.mcf", 'w', enoding = None) as file:
+    with open("World_bank_hnp_population.mcf", 'w', encoding = 'utf-8') as file:
         print(end = '')
 
     for line in range(len(df_in)):
@@ -116,10 +116,11 @@ def get_mcf(df_in):
             values = [node, 'dcs:StatisticalVariable', f'''"{df['Series Name'][line]}"''',
                     'dcs:Person', 'dcs:count', 'dcs:Female', 'dcs:measuredValue', f'[Years {age}]']
             mcf = ''
-            for i in range (len(statvars)):
+            req_len = len(statvars)
+            for i in range(req_len):
                 mcf = mcf + f'{statvars[i]}: {values[i]}\n'
                 mcf = mcf + '\n'
-            with open("World_bank_hnp_population.mcf", 'a+', encoding = None) as file:
+            with open("World_bank_hnp_population.mcf", 'a+', encoding = 'utf-8') as file:
                 file.write(mcf)
                 print(mcf)
             used_series.append(df_in['Series Name'][line])
