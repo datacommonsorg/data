@@ -1,18 +1,23 @@
 """A script to clean US EPA's Facility data from GHG Emitter Facilities table"""
 
 import csv
+import datacommons
+import json
 import os.path
 import pathlib
 import sys
 
 from absl import app
 from absl import flags
+from shapely import geometry
 
 # Allows the following module imports to work when running as a script
-sys.path.append(
-    os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for Crosswalk
+sys.path.append(os.path.join(_SCRIPT_PATH,
+                             '../../../util'))  # for alpha2_to_dcid
 from us_epa.util.crosswalk import Crosswalk
+import alpha2_to_dcid
 
 FLAGS = flags.FLAGS
 
@@ -45,6 +50,8 @@ _CLEAN_CSV_HDR = (_DCID, _EPA_GHG_ID, _EPA_FRS_ID, _EIA_PP_RELATION, _NAME,
 
 _OUT_FILE_PREFIX = 'us_epa_facility'
 _CROSSWALK_FILE = 'crosswalks.csv'
+
+_GEOJSON_CACHE = {}
 
 
 def _gen_tmcf():
@@ -87,12 +94,10 @@ def _get_address(table, row):
     return address
 
 
-def _get_cip(table, row):
+def _get_cip(zip, cf):
     cip = []
-    zip = _v(table, row, 'ZIP')[:5]  # zips can have extension
     if zip and zip != '00000':
         cip.append('dcid:zip/' + zip)
-    cf = _v(table, row, 'COUNTY_FIPS')
     if cf and cf != '00000':
         assert len(cf) == 5
         cip.append('dcid:geoId/' + cf)
@@ -107,6 +112,56 @@ def _get_naics(table, row):
     return 'dcs:NAICS/' + naics
 
 
+def _validate_state(facility, state, cfips):
+    dcid = alpha2_to_dcid.USSTATE_MAP.get(state, '')
+
+    assert dcid, 'Did not find ' + state
+    if not cfips.startswith(dcid[len('geoId/'):]):
+        print(f'Facility {facility} has county {cfips} that is not in {state}')
+        return False
+
+    return True
+
+
+# This is currently unused. Now, we drop 172 county relations and 2275 zip
+# relations.  But if we add a _is_nearby() filter in _validate_geo(), for a
+# distance of 7-10 KMs, that reduces the dropped relations to 95 for counties
+# and 890 for zips. One concern with doing so is the viz of these points on
+# Map view. Or maybe we should compute the places based on lat/lngs.
+
+_DISTANCE_THRESHOLD = 0.1  # ~7-10 KMs
+
+
+def _is_nearby(polygon, point):
+    if polygon.geom_type == 'MultiPolygon':
+        for p in list(polygon):
+            if p.exterior.distance(point) <= _DISTANCE_THRESHOLD:
+                return True
+        return False
+    return polygon.exterior.distance(point) <= _DISTANCE_THRESHOLD
+
+
+def _validate_geo(facility, dcid, lat, lng):
+    gj = ''
+    if dcid in _GEOJSON_CACHE:
+        gj = _GEOJSON_CACHE[dcid]
+    else:
+        resp = datacommons.get_property_values([dcid], 'geoJsonCoordinates')
+        if not resp[dcid]:
+            print(f'Did not find GEO JSON for {dcid}')
+            return False
+        gj = resp[dcid][0]
+        _GEOJSON_CACHE[dcid] = gj
+
+    point = geometry.Point(float(lng), float(lat))
+    polygon = geometry.shape(json.loads(gj))
+    if not polygon.contains(point):
+        print(f'Facility {facility} has ({lat}, {lng}) outside entity {dcid}')
+        return False
+
+    return True
+
+
 def process(input_tables_path, output_path):
     crosswalk = Crosswalk(os.path.join(input_tables_path, _CROSSWALK_FILE))
     processed_ids = set()
@@ -119,6 +174,8 @@ def process(input_tables_path, output_path):
                             escapechar='\\')
         cw.writeheader()
 
+        bad_county_fips = 0
+        bad_zip = 0
         for table in _TABLES:
             table_path = os.path.join(input_tables_path, table + '.csv')
             rows_written = 0
@@ -130,6 +187,29 @@ def process(input_tables_path, output_path):
                     if ghg_id in processed_ids:
                         continue
                     processed_ids.add(ghg_id)
+
+                    lat = _v(table, in_row, 'LATITUDE')
+                    lng = _v(table, in_row, 'LONGITUDE')
+                    zip = _v(table, in_row, 'ZIP')[:5]  # zips have extension
+                    cfips = _v(table, in_row, 'COUNTY_FIPS')
+                    state = _v(table, in_row, 'STATE')
+
+                    if (cfips and state and
+                            not _validate_state(ghg_id, state, cfips)):
+                        bad_county_fips += 1
+                        cfips = ''
+
+                    if (cfips and lat and lng and not _validate_geo(
+                            ghg_id, 'geoId/' + cfips, lat, lng)):
+                        bad_county_fips += 1
+                        cfips = ''
+
+                    if zip == '00000':
+                        zip = ''
+                    if (zip and lat and lng and
+                            not _validate_geo(ghg_id, 'zip/' + zip, lat, lng)):
+                        bad_zip += 1
+                        zip = ''
 
                     out_row = {
                         _DCID:
@@ -148,17 +228,20 @@ def process(input_tables_path, output_path):
                         _ADDRESS:
                             _str(_get_address(table, in_row)),
                         _CIP:
-                            ', '.join(_get_cip(table, in_row)),
+                            ', '.join(_get_cip(zip, cfips)),
                         _NAICS:
                             _get_naics(table, in_row),
                         _LAT:
-                            _str(_v(table, in_row, 'LATITUDE')),
+                            _str(lat),
                         _LNG:
-                            _str(_v(table, in_row, 'LONGITUDE')),
+                            _str(lng),
                     }
                     rows_written += 1
                     cw.writerow(out_row)
             print('Produced ' + str(rows_written) + ' rows from ' + table)
+            print('NOTE: ' + str(bad_county_fips) +
+                  ' facilities had wrong county fips')
+            print('NOTE: ' + str(bad_zip) + ' facilities had wrong zip codes')
 
     with open(os.path.join(output_path, _OUT_FILE_PREFIX + '.tmcf'), 'w') as fp:
         fp.write(_gen_tmcf())
