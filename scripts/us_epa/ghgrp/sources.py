@@ -80,7 +80,7 @@ def is_source_col(col):
 def col_to_sv(col):
     if not is_source_col(col):
         return None
-    return f'Annual_Emissions_GreenhouseGas_{_name_to_dcid(col)}'
+    return f'Annual_Emissions_GreenhouseGas_{_name_to_dcid(col)}_NonBiogenic'
 
 
 def _name_to_dcid(name):
