@@ -184,7 +184,7 @@ def _resolve_places(facility_id, zip, provided_county, lat, lng):
         # Prefer the county with lat/lng match.
         for list in county_candidates:
             for c in list:
-                if _validate_latlng(facility_id, lat, lng, c):
+                if _validate_latlng(lat, lng, c):
                     _COUNTERS['zipbased_county_correct_latlng'].append(
                         facility_id)
                     return zip, c, lat, lng
