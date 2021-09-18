@@ -11,11 +11,21 @@ from .process_facility import _COUNTERS
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _RAW_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
 _EXPECTED_DIR = os.path.join(_CODEDIR, 'testdata', 'expected')
+
+# We have test-cases to cover all the different mapping scenarios.
 _EXPECTED_COUNTERS = {
-    'given_county_correct_latlng': ['1000035', '1000413', '1001812'],
+    # This is the expected common case where the given county and lat/lng are right.
+    'given_county_correct_latlng': ['1000035', '1001812'],
+    # For this, the Choctaw County is right, but the lat/lng is just outside the county. We drop it.
     'given_county_wrong_latlng': ['1008370'],
+    # For this, the zip is not a valid ZCTA (zip/71443), so we have nothing to validate
+    # that it is indeed in "Sabish Parish".
     'missing_zip_and_county': ['1002223'],
+    # For this, the county info is actually missing in CSV, but we match Kern County from DC,
+    # and it also matches the lat/lng.
     'zipbased_county_correct_latlng': ['1012147'],
+    # This is the case of GHG facility being different from FRS facility. The CSV has Jefferson
+    # County CO and corresponding lat/lng, but the zip 82001 is from Laramie County, WY.
     'zipbased_county_wrong_latlng': ['1006603']
 }
 

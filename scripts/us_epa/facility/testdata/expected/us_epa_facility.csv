@@ -3,6 +3,5 @@ dcid,epaGhgrpFacilityId,epaFrsId,partOf,name,address,containedInPlace,naics,lati
 \"epaGhgrpFacilityId/1008370\",\"1008370\",,,"\"Sng Station 5230 York, Al\"","\"12965 Ward 10, Ward, Alabama - 36922\"","dcid:zip/36922, dcid:geoId/01023",dcs:NAICS/486210,,
 \"epaGhgrpFacilityId/1012147\",\"1012147\",,,\"17Z Gas Plant - Chevron Usa Inc.\","\"22845 Highway 33, Mckittrick, California - 93251\"","dcid:zip/93251, dcid:geoId/06029",dcs:NAICS/211130,\"35.3181871\",\"-119.6338842\"
 \"epaGhgrpFacilityId/1002223\",\"1002223\",,,\"Sabine Parish Landfill\","\"955 Sabine Landfill Road, Many, Louisiana - 71443\"",,dcs:NAICS/562212,,
-\"epaGhgrpFacilityId/1000413\",\"1000413\",,,"\"Pacific Ethanol Pekin, LLC\"","\"1300 South 2Nd Street, Pekin, Illinois - 61554\"","dcid:zip/61554, dcid:geoId/17179",dcs:NAICS/325193,\"40.555\",\"-89.6628\"
 \"epaGhgrpFacilityId/1006603\",\"1006603\",,,"\"Black Hills Gas Distribution Wyoming LLC, Dba Black Hills Energy\"","\"1301 West 24Th Street, Cheyenne, Wyoming - 82001\"","dcid:zip/82001, dcid:geoId/56021",dcs:NAICS/221210,,
 \"epaGhgrpFacilityId/1001812\",\"1001812\",,,\"San Juan River Gas Plant\","\"99 Road 6500, Kirtland, New Mexico - 87417\"","dcid:zip/87417, dcid:geoId/35045",dcs:NAICS/211111,\"36.7592\",\"-108.35967\"
