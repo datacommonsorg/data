@@ -14,7 +14,7 @@ _EXPECTED_DIR = os.path.join(_CODEDIR, 'testdata', 'expected')
 _EXPECTED_COUNTERS = {
     # This is the expected common case where the given county and lat/lng are right.
     'given_county_correct_latlng': ['1000035', '1001812'],
-    # For this, the Choctaw County is right, but the lat/lng is just outside the county. We drop it.
+    # For this, the Choctaw County is right, but the lat/lng is just outside the county.
     'given_county_wrong_latlng': ['1008370'],
     # For this, the zip is not a valid ZCTA (zip/71443), so we have nothing to validate
     # that it is indeed in "Sabish Parish".
