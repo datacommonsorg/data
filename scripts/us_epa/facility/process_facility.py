@@ -14,10 +14,7 @@ from shapely import geometry
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for Crosswalk
-sys.path.append(os.path.join(_SCRIPT_PATH,
-                             '../../../util'))  # for alpha2_to_dcid
 from us_epa.util.crosswalk import Crosswalk
-import alpha2_to_dcid
 
 FLAGS = flags.FLAGS
 
@@ -52,6 +49,7 @@ _OUT_FILE_PREFIX = 'us_epa_facility'
 _CROSSWALK_FILE = 'crosswalks.csv'
 
 _GEOJSON_CACHE = {}
+_COUNTY_CANDIDATES_CACHE = {}
 
 
 def _gen_tmcf():
@@ -73,6 +71,8 @@ def _cv(table, row, col):
 
 
 def _str(v):
+    if not v:
+        return ''
     return '"' + v + '"'
 
 
@@ -94,13 +94,12 @@ def _get_address(table, row):
     return address
 
 
-def _get_cip(zip, cf):
+def _get_cip(zip, county):
     cip = []
-    if zip and zip != '00000':
-        cip.append('dcid:zip/' + zip)
-    if cf and cf != '00000':
-        assert len(cf) == 5
-        cip.append('dcid:geoId/' + cf)
+    if zip:
+        cip.append('dcid:' + zip)
+    if county:
+        cip.append('dcid:' + county)
     return cip
 
 
@@ -112,36 +111,22 @@ def _get_naics(table, row):
     return 'dcs:NAICS/' + naics
 
 
-def _validate_state(facility, state, cfips):
-    dcid = alpha2_to_dcid.USSTATE_MAP.get(state, '')
+def _get_county_candidates(zcta):
+    """Returns counties that the zcta is associated with.
 
-    assert dcid, 'Did not find ' + state
-    if not cfips.startswith(dcid[len('geoId/'):]):
-        print(f'Facility {facility} has county {cfips} that is not in {state}')
-        return False
-
-    return True
-
-
-# This is currently unused. Now, we drop 172 county relations and 2275 zip
-# relations.  But if we add a _is_nearby() filter in _validate_geo(), for a
-# distance of 7-10 KMs, that reduces the dropped relations to 95 for counties
-# and 890 for zips. One concern with doing so is the viz of these points on
-# Map view. Or maybe we should compute the places based on lat/lngs.
-
-_DISTANCE_THRESHOLD = 0.1  # ~7-10 KMs
+       Returns: two lists of candidate ordered counties.
+    """
+    if zcta in _COUNTY_CANDIDATES_CACHE:
+        return _COUNTY_CANDIDATES_CACHE[zcta]
+    candidate_lists = []
+    for prop in ['containedInPlace', 'geoOverlaps']:
+        resp = datacommons.get_property_values([zcta], prop, out=True, value_type='County')
+        candidate_lists.append(sorted(resp[zcta]))
+    _COUNTY_CANDIDATES_CACHE[zcta] = candidate_lists
+    return candidate_lists
 
 
-def _is_nearby(polygon, point):
-    if polygon.geom_type == 'MultiPolygon':
-        for p in list(polygon):
-            if p.exterior.distance(point) <= _DISTANCE_THRESHOLD:
-                return True
-        return False
-    return polygon.exterior.distance(point) <= _DISTANCE_THRESHOLD
-
-
-def _validate_geo(facility, dcid, lat, lng):
+def _validate_latlng(facility, lat, lng, dcid):
     gj = ''
     if dcid in _GEOJSON_CACHE:
         gj = _GEOJSON_CACHE[dcid]
@@ -156,10 +141,60 @@ def _validate_geo(facility, dcid, lat, lng):
     point = geometry.Point(float(lng), float(lat))
     polygon = geometry.shape(json.loads(gj))
     if not polygon.contains(point):
-        print(f'Facility {facility} has ({lat}, {lng}) outside entity {dcid}')
         return False
 
     return True
+
+
+_COUNTERS = {
+    'given_county_wrong_latlng': [],
+    'given_county_correct_latlng': [],
+    'zipbased_county_wrong_latlng': [],
+    'zipbased_county_correct_latlng': [],
+    'missing_zip_and_county': [],
+}
+
+
+def _resolve_places(facility_id, zip, provided_county, lat, lng):
+    if zip == 'zip/00000':
+        _COUNTERS['missing_zip_and_county'].append(facility_id)
+        return '', '', '', ''
+
+    county_candidates = _get_county_candidates(zip)
+    if any(provided_county in l for l in county_candidates):
+        # Provided county is in the candidate list, use that.
+
+        if lat and lng and _validate_latlng(facility_id, lat, lng, provided_county):
+            # Lat/lng is in the chosen county
+            _COUNTERS['given_county_correct_latlng'].append(facility_id)
+            return zip, provided_county, lat, lng
+
+        _COUNTERS['given_county_wrong_latlng'].append(facility_id)
+        return zip, provided_county, '', ''
+
+    if lat and lng:
+        # Prefer the county with lat/lng match.
+        for list in county_candidates:
+            for c in list:
+                if _validate_latlng(facility_id, lat, lng, c):
+                    _COUNTERS['zipbased_county_correct_latlng'].append(facility_id)
+                    return zip, c, lat, lng
+
+    # Lat or lng is empty or did not match any county. Pick a candidate county prefering
+    # containedInPlace over geoOverlaps.
+    for list in county_candidates:
+        if list:
+            _COUNTERS['zipbased_county_wrong_latlng'].append(facility_id)
+            return zip, list[0], '', ''
+    _COUNTERS['missing_zip_and_county'].append(facility_id)
+    return '', '', '', ''
+
+
+def counters_string():
+    result = []
+    for k, v in _COUNTERS.items():
+        result.append(k + ' -> ' + str(len(v)) + ' - ' + ', '.join(v[:3]))
+    return '\n'.join(result)
 
 
 def process(input_tables_path, output_path):
@@ -174,8 +209,6 @@ def process(input_tables_path, output_path):
                             escapechar='\\')
         cw.writeheader()
 
-        bad_county_fips = 0
-        bad_zip = 0
         for table in _TABLES:
             table_path = os.path.join(input_tables_path, table + '.csv')
             rows_written = 0
@@ -190,26 +223,10 @@ def process(input_tables_path, output_path):
 
                     lat = _v(table, in_row, 'LATITUDE')
                     lng = _v(table, in_row, 'LONGITUDE')
-                    zip = _v(table, in_row, 'ZIP')[:5]  # zips have extension
-                    cfips = _v(table, in_row, 'COUNTY_FIPS')
-                    state = _v(table, in_row, 'STATE')
+                    zip = 'zip/' + _v(table, in_row, 'ZIP')[:5]  # zips have extension
+                    county = 'geoId/' + _v(table, in_row, 'COUNTY_FIPS')
 
-                    if (cfips and state and
-                            not _validate_state(ghg_id, state, cfips)):
-                        bad_county_fips += 1
-                        cfips = ''
-
-                    if (cfips and lat and lng and not _validate_geo(
-                            ghg_id, 'geoId/' + cfips, lat, lng)):
-                        bad_county_fips += 1
-                        cfips = ''
-
-                    if zip == '00000':
-                        zip = ''
-                    if (zip and lat and lng and
-                            not _validate_geo(ghg_id, 'zip/' + zip, lat, lng)):
-                        bad_zip += 1
-                        zip = ''
+                    zip, county, lat, lng = _resolve_places(ghg_id, zip, county, lat, lng)
 
                     out_row = {
                         _DCID:
@@ -228,7 +245,7 @@ def process(input_tables_path, output_path):
                         _ADDRESS:
                             _str(_get_address(table, in_row)),
                         _CIP:
-                            ', '.join(_get_cip(zip, cfips)),
+                            ', '.join(_get_cip(zip, county)),
                         _NAICS:
                             _get_naics(table, in_row),
                         _LAT:
@@ -237,11 +254,11 @@ def process(input_tables_path, output_path):
                             _str(lng),
                     }
                     rows_written += 1
+                    if rows_written % 100 == 99:
+                        print('Geo Resolution Stats: \n' + counters_string())
                     cw.writerow(out_row)
             print('Produced ' + str(rows_written) + ' rows from ' + table)
-            print('NOTE: ' + str(bad_county_fips) +
-                  ' facilities had wrong county fips')
-            print('NOTE: ' + str(bad_zip) + ' facilities had wrong zip codes')
+            print('Geo Resolution Stats: \n' + counters_string())
 
     with open(os.path.join(output_path, _OUT_FILE_PREFIX + '.tmcf'), 'w') as fp:
         fp.write(_gen_tmcf())
