@@ -1,9 +1,7 @@
 """Tests for process_facility.py"""
 
-import csv
 import os
 import tempfile
-import sys
 import unittest
 from .process_facility import process
 from .process_facility import _COUNTERS

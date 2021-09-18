@@ -114,19 +114,23 @@ def _get_naics(table, row):
 def _get_county_candidates(zcta):
     """Returns counties that the zcta is associated with.
 
-       Returns: two lists of candidate ordered counties.
+       Returns: two candidate county lists corresponding to cip and geoOverlaps respectively.
     """
     if zcta in _COUNTY_CANDIDATES_CACHE:
         return _COUNTY_CANDIDATES_CACHE[zcta]
     candidate_lists = []
     for prop in ['containedInPlace', 'geoOverlaps']:
-        resp = datacommons.get_property_values([zcta], prop, out=True, value_type='County')
+        resp = datacommons.get_property_values([zcta],
+                                               prop,
+                                               out=True,
+                                               value_type='County')
         candidate_lists.append(sorted(resp[zcta]))
     _COUNTY_CANDIDATES_CACHE[zcta] = candidate_lists
     return candidate_lists
 
 
-def _validate_latlng(facility, lat, lng, dcid):
+def _validate_latlng(lat, lng, dcid):
+    """Validate whether the lat/lng is located within the given entity's geo boundary"""
     gj = ''
     if dcid in _GEOJSON_CACHE:
         gj = _GEOJSON_CACHE[dcid]
@@ -156,6 +160,10 @@ _COUNTERS = {
 
 
 def _resolve_places(facility_id, zip, provided_county, lat, lng):
+    """Resolve the geo relations for the given Facility
+
+    Returns resolved <zip>, <county>, <lat>, <lng>
+    """
     if zip == 'zip/00000':
         _COUNTERS['missing_zip_and_county'].append(facility_id)
         return '', '', '', ''
@@ -164,7 +172,7 @@ def _resolve_places(facility_id, zip, provided_county, lat, lng):
     if any(provided_county in l for l in county_candidates):
         # Provided county is in the candidate list, use that.
 
-        if lat and lng and _validate_latlng(facility_id, lat, lng, provided_county):
+        if lat and lng and _validate_latlng(lat, lng, provided_county):
             # Lat/lng is in the chosen county
             _COUNTERS['given_county_correct_latlng'].append(facility_id)
             return zip, provided_county, lat, lng
@@ -177,7 +185,8 @@ def _resolve_places(facility_id, zip, provided_county, lat, lng):
         for list in county_candidates:
             for c in list:
                 if _validate_latlng(facility_id, lat, lng, c):
-                    _COUNTERS['zipbased_county_correct_latlng'].append(facility_id)
+                    _COUNTERS['zipbased_county_correct_latlng'].append(
+                        facility_id)
                     return zip, c, lat, lng
 
     # Lat or lng is empty or did not match any county. Pick a candidate county prefering
@@ -223,10 +232,12 @@ def process(input_tables_path, output_path):
 
                     lat = _v(table, in_row, 'LATITUDE')
                     lng = _v(table, in_row, 'LONGITUDE')
-                    zip = 'zip/' + _v(table, in_row, 'ZIP')[:5]  # zips have extension
+                    zip = 'zip/' + _v(table, in_row,
+                                      'ZIP')[:5]  # zips have extension
                     county = 'geoId/' + _v(table, in_row, 'COUNTY_FIPS')
 
-                    zip, county, lat, lng = _resolve_places(ghg_id, zip, county, lat, lng)
+                    zip, county, lat, lng = _resolve_places(
+                        ghg_id, zip, county, lat, lng)
 
                     out_row = {
                         _DCID:
