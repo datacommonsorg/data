@@ -27,6 +27,14 @@ from xml.etree.ElementTree import parse
 
 
 def format_mesh_xml(mesh_xml):
+    """
+    Parses the xml file and converts it to a csv with 
+    required columns
+    Args:
+        mesh_xml = xml file to be parsed
+    Returns:
+        df1 = pandas df after parsing
+    """
     document = parse(mesh_xml)
     dfcols = [
         'DescriptorId', 'DescriptorName', 'DateCreated-Year',
@@ -123,6 +131,14 @@ def format_mesh_xml(mesh_xml):
 
 
 def date_modify(df1):
+    """
+    Modifies the dates in a df, into an ISO format
+    Args:
+        df1 = df with date columns
+    Returns:
+        df1 = df with modified date columns
+
+    """
     df1['DateCreated'] = df1['DateCreated-Year'].astype(
         str) + "-" + df1['DateCreated-Month'].astype(
             str) + "-" + df1['DateCreated-Day'].astype(str)
@@ -141,6 +157,14 @@ def date_modify(df1):
 
 
 def format_descriptor_df(df):
+    """
+    Modifies the original dataframe to retain all
+    descriptor entries/properties only
+    Args:
+        df = pandas df with date columns
+    Returns:
+        df_1 = df with descriptor properties only
+    """
     df_1 = df
     df_1 = df_1.drop(columns=[
         'QualifierID', 'QualifierName', 'QualifierAbbreviation', 'ConceptID',
@@ -151,6 +175,14 @@ def format_descriptor_df(df):
 
 
 def format_qualifier_df(df):
+    """
+    Modifies the original dataframe to retain all
+    descriptor entries/properties only
+    Args:
+        df = pandas df with date columns
+    Returns:
+        df_2 = df with qualifier properties only
+    """
     df_2 = df
     df_2 = df_2.drop(columns=[
         'DescriptorName', 'DateCreated-Year', 'DateCreated-Month',
@@ -161,10 +193,19 @@ def format_qualifier_df(df):
     df_2 = (df_2.set_index('DescriptorId').apply(
         lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
     df_2['Qualifier_dcid'] = 'bio/' + df_2['QualifierID'].astype(str)
+    df_2['Descriptor_dcid'] = 'bio/' + df_2['DescriptorId'].astype(str)
     return df_2
 
 
 def format_concept_df(df):
+    """
+    Modifies the original dataframe to retain all
+    descriptor entries/properties only
+    Args:
+        df = pandas df with date columns
+    Returns:
+        df_3 = df with concept properties only
+    """
     df_3 = df
     df_3 = df_3.drop(columns=[
         'DescriptorName', 'DateCreated-Year', 'DateCreated-Month',
@@ -176,10 +217,19 @@ def format_concept_df(df):
     df_3 = df_3 = (df_3.set_index('DescriptorId').apply(
         lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
     df_3['Concept_dcid'] = 'bio/' + df_3['ConceptID'].astype(str)
+    df_3['Descriptor_dcid'] = 'bio/' + df_3['DescriptorId'].astype(str)
     return df_3
 
 
 def format_term_df(df):
+    """
+    Modifies the original dataframe to retain all
+    descriptor entries/properties only
+    Args:
+        df = pandas df with date columns
+    Returns:
+        df_4 = df with term properties only
+    """
     df_4 = df
     df_4 = df_4.drop(columns=[
         'DateCreated-Year', 'DateCreated-Month', 'DateCreated-Day',
@@ -194,10 +244,17 @@ def format_term_df(df):
     df_4 = df_4.apply(lambda x: x.explode()
                       if x.name in ['TermID', 'TermName'] else x)
     df_4['Term_dcid'] = 'bio/' + df_4['TermID'].astype(str)
+    df_4['Concept_dcid'] = 'bio/' + df_4['ConceptID'].astype(str)
     return df_4
 
 
 def mesh_wrapper(file_input):
+    """
+    Takes in the xml file, runs all helper functions
+    and outputs resulting files
+    Args:
+        file_input = path to mesh xml file
+    """
     df = format_mesh_xml(file_input)
     df1 = date_modify(df)
     df1 = format_descriptor_df(df1)
