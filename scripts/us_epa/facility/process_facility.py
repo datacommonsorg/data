@@ -114,7 +114,7 @@ def _get_naics(table, row):
 def _get_county_candidates(zcta):
     """Returns counties that the zcta is associated with.
 
-       Returns: two candidate county lists corresponding to cip and geoOverlaps respectively.
+       Returns: two candidate county lists corresponding to zip and geoOverlaps respectively.
     """
     if zcta in _COUNTY_CANDIDATES_CACHE:
         return _COUNTY_CANDIDATES_CACHE[zcta]
