@@ -36,15 +36,23 @@ _OUT_PATH = 'import_data'
 
 
 def process_data(data_filepaths, crosswalk, out_filepath):
-    print(data_filepaths)
+    print(f'Writing to {out_filepath}')
     with open(out_filepath, 'w') as out_fp:
         csv_writer = csv.DictWriter(out_fp, fieldnames=_OUT_FIELDNAMES)
         csv_writer.writeheader()
+        all_processed_facilities = {}  # map of year -> set(dcid)
         for (year, filepath) in data_filepaths:
+            print(f'Processing {filepath}')
+            year_processed_facilities = all_processed_facilities.get(
+                year, set())
             with open(filepath, 'r') as fp:
                 for row in csv.DictReader(fp):
+                    if not row[_FACILITY_ID]:
+                        continue
                     dcid = crosswalk.get_dcid(row[_FACILITY_ID])
                     assert dcid
+                    if dcid in year_processed_facilities:
+                        continue
                     for key, value in row.items():
                         if not value:
                             continue
@@ -59,6 +67,8 @@ def process_data(data_filepaths, crosswalk, out_filepath):
                             _YEAR: year,
                             _VALUE: value
                         })
+                    year_processed_facilities.add(dcid)
+            all_processed_facilities[year] = year_processed_facilities
 
 
 if __name__ == '__main__':

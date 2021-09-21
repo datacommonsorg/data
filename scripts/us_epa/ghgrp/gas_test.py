@@ -29,39 +29,37 @@ class GasTest(unittest.TestCase):
     def test_name_to_dcid(self):
         GAS_COL_NAMES_TO_DCID = {
             'Total reported direct emissions':
-                'Annual_Emissions_GreenhouseGas',
+                'Annual_Emissions_GreenhouseGas_NonBiogenic',
             'CO2 emissions (non-biogenic)':
                 'Annual_Emissions_CarbonDioxide_NonBiogenic',
             'Methane (CH4) emissions':
-                'Annual_Emissions_Methane',
+                'Annual_Emissions_Methane_NonBiogenic',
             'Nitrous Oxide (N2O) emissions':
-                'Annual_Emissions_NitrousOxide',
+                'Annual_Emissions_NitrousOxide_NonBiogenic',
             'HFC emissions':
-                'Annual_Emissions_Hydrofluorocarbon',
+                'Annual_Emissions_Hydrofluorocarbon_NonBiogenic',
             'PFC emissions':
-                'Annual_Emissions_Perfluorocarbon',
+                'Annual_Emissions_Perfluorocarbon_NonBiogenic',
             'SF6 emissions':
-                'Annual_Emissions_SulfurHexafluoride',
+                'Annual_Emissions_SulfurHexafluoride_NonBiogenic',
             'NF3 emissions':
-                'Annual_Emissions_NitrogenTrifluoride',
+                'Annual_Emissions_NitrogenTrifluoride_NonBiogenic',
             'Other Fully Fluorinated GHG emissions':
-                'Annual_Emissions_EPA_OtherFullyFluorinatedCompound',
+                'Annual_Emissions_EPA_OtherFullyFluorinatedCompound_NonBiogenic',
             'HFE emissions':
-                'Annual_Emissions_Hydrofluoroether',
+                'Annual_Emissions_Hydrofluoroether_NonBiogenic',
             'Very Short-lived Compounds emissions':
-                'Annual_Emissions_VeryShortLivedCompounds',
+                'Annual_Emissions_VeryShortLivedCompounds_NonBiogenic',
             'Other GHGs (metric tons CO2e)':
-                'Annual_Emissions_EPA_OtherGreenhouseGas',
+                'Annual_Emissions_EPA_OtherGreenhouseGas_NonBiogenic',
             'Biogenic CO2 emissions (metric tons)':
                 'Annual_Emissions_CarbonDioxide_Biogenic',
             'Total reported emissions from Onshore Oil & Gas Production':
-                'Annual_Emissions_GreenhouseGas',
+                'Annual_Emissions_GreenhouseGas_NonBiogenic',
             'Total reported emissions from Gathering & Boosting':
-                'Annual_Emissions_GreenhouseGas',
+                'Annual_Emissions_GreenhouseGas_NonBiogenic',
             'Total reported direct emissions from Local Distribution Companies':
-                'Annual_Emissions_GreenhouseGas',
-            'Methane (CH4) emissions ':
-                'Annual_Emissions_Methane',
+                'Annual_Emissions_GreenhouseGas_NonBiogenic',
         }
         for col, expected in GAS_COL_NAMES_TO_DCID.items():
             self.assertEqual(gas.col_to_sv(col), expected)
