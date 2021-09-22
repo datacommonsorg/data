@@ -1830,7 +1830,7 @@
             "healthInsurance": "dcid:NoHealthInsurance",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000": {
+        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Total household population!!Under $25,000": {
             "Node": "dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
@@ -1839,7 +1839,7 @@
             "income": "[- 25000 USDollar]",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000": {
+        "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Total household population!!Under $25,000": {
             "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
@@ -1848,7 +1848,7 @@
             "income": "[- 25000 USDollar]",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999": {
+        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Total household population!!$25,000 to $49,999": {
             "Node": "dcid:Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
@@ -1857,7 +1857,7 @@
             "income": "[25000 49999 USDollar]",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999": {
+        "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Total household population!!$25,000 to $49,999": {
             "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
@@ -1884,7 +1884,7 @@
             "income": "[50000 74999 USDollar]",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999": {
+        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Total household population!!$75,000 to $99,999": {
             "Node": "dcid:Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
@@ -1893,7 +1893,7 @@
             "income": "[75000 99999 USDollar]",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999": {
+        "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Total household population!!$75,000 to $99,999": {
             "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
@@ -1902,7 +1902,7 @@
             "income": "[75000 99999 USDollar]",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over": {
+        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Total household population!!$100,000 and over": {
             "Node": "dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
@@ -1911,7 +1911,7 @@
             "income": "[100000 - USDollar]",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over": {
+        "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Total household population!!$100,000 and over": {
             "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
@@ -4088,92 +4088,76 @@
             "healthInsurance": "dcid:NoHealthInsurance",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!Under $25,000": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Uninsured Population!!Estimate!!Total household population!!Under $25,000": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!Under $25,000": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!Under $25,000": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$25,000 to $49,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$25,000 to $49,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$75,000 to $99,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$75,000 to $99,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$100,000 and over": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$100,000 and over": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$100,000 and over": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$100,000 and over": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!Median household income of householders": {
@@ -6344,92 +6328,76 @@
             "healthInsurance": "dcid:NoHealthInsurance",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!Under $25,000": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Uninsured Population!!Estimate!!Total household population!!Under $25,000": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!Under $25,000": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!Under $25,000": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$25,000 to $49,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$25,000 to $49,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$75,000 to $99,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$75,000 to $99,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$100,000 and over": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$100,000 and over": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$100,000 and over": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$100,000 and over": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!Median household income of householders": {
@@ -8604,92 +8572,76 @@
             "healthInsurance": "dcid:NoHealthInsurance",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!Under $25,000": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Estimate!!Total Uninsured!!Total household population!!Under $25,000": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured MOE!!Under $25,000": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Margin of Error!!Total Uninsured MOE!!Total household population!!Under $25,000": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!$25,000 to $49,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Estimate!!Total Uninsured!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured MOE!!$25,000 to $49,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Margin of Error!!Total Uninsured MOE!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!$75,000 to $99,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Estimate!!Total Uninsured!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured MOE!!$75,000 to $99,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Margin of Error!!Total Uninsured MOE!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!$100,000 and over": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Estimate!!Total Uninsured!!Total household population!!$100,000 and over": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured MOE!!$100,000 and over": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Margin of Error!!Total Uninsured MOE!!Total household population!!$100,000 and over": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Median household income of householders": {
@@ -10864,92 +10816,76 @@
             "healthInsurance": "dcid:NoHealthInsurance",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!Under $25,000": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Estimate!!Total Uninsured!!Total household population!!Under $25,000": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured MOE!!Under $25,000": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Margin of Error!!Total Uninsured MOE!!Total household population!!Under $25,000": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!$25,000 to $49,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Estimate!!Total Uninsured!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured MOE!!$25,000 to $49,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Margin of Error!!Total Uninsured MOE!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!$75,000 to $99,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Estimate!!Total Uninsured!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured MOE!!$75,000 to $99,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Margin of Error!!Total Uninsured MOE!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total Uninsured!!$100,000 and over": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Estimate!!Total Uninsured!!Total household population!!$100,000 and over": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total Uninsured MOE!!$100,000 and over": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Margin of Error!!Total Uninsured MOE!!Total household population!!$100,000 and over": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Median household income of householders": {
@@ -13120,92 +13056,76 @@
             "healthInsurance": "dcid:NoHealthInsurance",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!Under $25,000": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Uninsured Population!!Estimate!!Total household population!!Under $25,000": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!Under $25,000": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!Under $25,000": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$25,000 to $49,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$25,000 to $49,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$75,000 to $99,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$75,000 to $99,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$100,000 and over": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$100,000 and over": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$100,000 and over": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$100,000 and over": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!Median household income of householders": {
@@ -15376,92 +15296,76 @@
             "healthInsurance": "dcid:NoHealthInsurance",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!Under $25,000": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Uninsured Population!!Estimate!!Total household population!!Under $25,000": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!Under $25,000": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000OrLessUSDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!Under $25,000": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[- 25000 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$25,000 to $49,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$25,000 to $49,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_25000To49999USDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$25,000 to $49,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[25000 49999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$75,000 to $99,999": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$75,000 to $99,999": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_75000To99999USDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$75,000 to $99,999": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[75000 99999 USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Estimate!!$100,000 and over": {
-            "Node": "dcid:Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Uninsured Population!!Estimate!!Total household population!!$100,000 and over": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Uninsured Population!!Margin of Error!!$100,000 and over": {
-            "Node": "dcid:MarginOfError_Count_Person_NoHealthInsurance_100000OrMoreUSDollar",
+        "Uninsured Population!!Margin of Error!!Total household population!!$100,000 and over": {
+            "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
-            "populationType": "dcid:Person",
+            "populationType": "dcid:Household",
             "healthInsurance": "dcid:NoHealthInsurance",
             "income": "[100000 - USDollar]",
-            "armedForcesStatus": "dcid:Civilian",
-            "institutionalization": "dcid:USC_NonInstitutionalized",
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!Median household income of householders": {
