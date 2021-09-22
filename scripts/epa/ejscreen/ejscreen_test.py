@@ -13,6 +13,7 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestEjscreen(unittest.TestCase):
+
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             dfs = {}

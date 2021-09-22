@@ -62,29 +62,29 @@ def create_formatted_csv_file(f_in, csv_file_path):
                 continue
             processed_dict = {
                 'Date':
-                row_dict['date'],
+                    row_dict['date'],
                 'GeoId':
-                place_dcid,
+                    place_dcid,
                 'CumulativeCount_Vaccine_COVID_19_Administered':
-                row_dict['total_vaccinations'],
+                    row_dict['total_vaccinations'],
                 'IncrementalCount_Vaccine_COVID_19_Administered':
-                row_dict['new_vaccinations'],
+                    row_dict['new_vaccinations'],
                 'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase':
-                row_dict['total_cases'],
+                    row_dict['total_cases'],
                 'IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase':
-                row_dict['new_cases'],
+                    row_dict['new_cases'],
                 'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased':
-                row_dict['total_deaths'],
+                    row_dict['total_deaths'],
                 'IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased':
-                row_dict['new_deaths'],
+                    row_dict['new_deaths'],
                 'Count_MedicalConditionIncident_COVID_19_PatientInICU':
-                row_dict['icu_patients'],
+                    row_dict['icu_patients'],
                 'Count_MedicalConditionIncident_COVID_19_PatientHospitalized':
-                row_dict['hosp_patients'],
+                    row_dict['hosp_patients'],
                 'CumulativeCount_MedicalTest_ConditionCOVID_19':
-                row_dict['total_tests'],
+                    row_dict['total_tests'],
                 'IncrementalCount_MedicalTest_ConditionCOVID_19':
-                row_dict['new_tests'],
+                    row_dict['new_tests'],
             }
 
             writer.writerow(processed_dict)
@@ -96,10 +96,8 @@ def create_tmcf_file(tmcf_file_path):
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
-                    'index':
-                    i,
-                    'stat_var':
-                    output_columns[2:][i]
+                    'index': i,
+                    'stat_var': output_columns[2:][i]
                 }))
 
 

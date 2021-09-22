@@ -95,28 +95,22 @@ SERIES_TYPES_TO_DATA_URLS = frozendict.frozendict({
               f"{_PREFIX}/cw/cw.data.17.USEducationAndCommunication",
               f"{_PREFIX}/cw/cw.data.18.USOtherGoodsAndServices",
               f"{_PREFIX}/cw/cw.data.20.USCommoditiesServicesSpecial"),
-    "c_cpi_u": (f"{_PREFIX}/su/su.data.1.AllItems", )
+    "c_cpi_u": (f"{_PREFIX}/su/su.data.1.AllItems",)
 })
 
 # From series types to URLs of CSVs describing the series
 SERIES_TYPES_TO_INFO_URLS = frozendict.frozendict({
-    "cpi_u":
-    f"{_PREFIX}/cu/cu.series",
-    "cpi_w":
-    f"{_PREFIX}/cw/cw.series",
-    "c_cpi_u":
-    f"{_PREFIX}/su/su.series"
+    "cpi_u": f"{_PREFIX}/cu/cu.series",
+    "cpi_w": f"{_PREFIX}/cw/cw.series",
+    "c_cpi_u": f"{_PREFIX}/su/su.series"
 })
 
 # From series types to URLs of CSVs containing mappings from
 # item code to item name
 SERIES_TYPES_TO_EXPENDITURE_TYPES_URLS = frozendict.frozendict({
-    "cpi_u":
-    f"{_PREFIX}/cu/cu.item",
-    "cpi_w":
-    f"{_PREFIX}/cw/cw.item",
-    "c_cpi_u":
-    f"{_PREFIX}/su/su.item"
+    "cpi_u": f"{_PREFIX}/cu/cu.item",
+    "cpi_w": f"{_PREFIX}/cw/cw.item",
+    "c_cpi_u": f"{_PREFIX}/su/su.item"
 })
 
 
@@ -142,8 +136,8 @@ class SeriesInfo:
         Raises:
             ValueError: Some field(s) is invalid.
         """
-        if (not self.series_id or len(self.series_id) < 11
-                or len(self.series_id) > 17):
+        if (not self.series_id or len(self.series_id) < 11 or
+                len(self.series_id) > 17):
             self._raise_validation_error("invalid series_id")
         if self.survey_abbreviation not in ("SU", "CU", "CW"):
             self._raise_validation_error(
@@ -155,8 +149,7 @@ class SeriesInfo:
             self._raise_validation_error(
                 f"invalid periodicity_code: {self.periodicity_code}")
         if (not self.area_code or len(self.area_code) != 4):
-            self._raise_validation_error(
-                f"invalid area_code: {self.area_code}")
+            self._raise_validation_error(f"invalid area_code: {self.area_code}")
 
     def _raise_validation_error(self, message: str) -> None:
         raise ValueError(f"{self.series_id}: {message}")
@@ -236,8 +229,7 @@ class SeriesInfo:
             year_end = year_start[:2] + year_end
             return (
                 f"IndexPointBasePeriod{year_start}To{year_end}Equals100",
-                f"The reference base is {year_start} to {year_end} equals 100."
-            )
+                f"The reference base is {year_start} to {year_end} equals 100.")
         year, _ = base.split("=")
         return (f"IndexPointBasePeriod{year}Equals100",
                 f"The reference base is {year} equals 100.")

@@ -26,6 +26,7 @@ from app.service import dashboard_api
 
 @mock.patch('app.utils.utctime', lambda: '2020-07-15T12:07:17.365264+00:00')
 class DashboardAPITest(unittest.TestCase):
+
     def setUp(self):
         self.dashboard = dashboard_api.DashboardAPI('client-id')
 
@@ -104,7 +105,6 @@ class DashboardAPITest(unittest.TestCase):
         funcs = [(self.dashboard.critical, 'critical'),
                  (self.dashboard.error, 'error'),
                  (self.dashboard.warning, 'warning'),
-                 (self.dashboard.info, 'info'),
-                 (self.dashboard.debug, 'debug')]
+                 (self.dashboard.info, 'info'), (self.dashboard.debug, 'debug')]
         for func, level in funcs:
             self.assertEqual(level, func(**args)['level'])

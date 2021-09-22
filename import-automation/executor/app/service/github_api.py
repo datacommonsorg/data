@@ -55,6 +55,7 @@ class GitHubRepoAPI:
         auth: Tuple consisting of the username of the account to authenticate
             with GitHub and the access token.
     """
+
     def __init__(self,
                  repo_owner_username: str,
                  repo_name: str,
@@ -128,12 +129,12 @@ class GitHubRepoAPI:
         searched = set()
         for file_path, status in changed_files:
             dir_path = os.path.dirname(file_path)
-            if (status == 'removed'
-                    and not self._dir_exists(commit_sha, dir_path)):
+            if (status == 'removed' and
+                    not self._dir_exists(commit_sha, dir_path)):
                 continue
             found_dirs.update(
-                self._find_dirs_up_path_containing_file(
-                    commit_sha, dir_path, containing, searched))
+                self._find_dirs_up_path_containing_file(commit_sha, dir_path,
+                                                        containing, searched))
         logging.info(
             'GitHubRepoAPI.find_dirs_in_commit_containing_file: '
             'Found %s', found_dirs)
@@ -175,12 +176,9 @@ class GitHubRepoAPI:
         if not commit_sha:
             commit_sha = ''
         download_query = _GITHUB_DOWNLOAD_API.format_map({
-            'owner_username':
-            self.owner,
-            'repo_name':
-            self.repo,
-            'commit_sha':
-            commit_sha
+            'owner_username': self.owner,
+            'repo_name': self.repo,
+            'commit_sha': commit_sha
         })
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -360,8 +358,8 @@ class GitHubRepoAPI:
             'contains' if contains else 'does not contain', containing)
         return contains
 
-    def _find_dirs_up_path_containing_file(self, commit_sha: str,
-                                           dir_path: str, containing: str,
+    def _find_dirs_up_path_containing_file(self, commit_sha: str, dir_path: str,
+                                           containing: str,
                                            searched: Set[str]) -> Set[str]:
         """Given a path pointing at a directory in the repository, searches for
         a file in the directory and its parent directories.

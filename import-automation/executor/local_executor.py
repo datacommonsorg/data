@@ -53,11 +53,10 @@ flags.DEFINE_string(name='output_dir',
                     default='.',
                     help='Path to the output directory.',
                     short_name='o')
-flags.DEFINE_string(
-    name='repo_name',
-    default='data',
-    help='Name of the GitHub repository containing the import.',
-    short_name='r')
+flags.DEFINE_string(name='repo_name',
+                    default='data',
+                    help='Name of the GitHub repository containing the import.',
+                    short_name='r')
 flags.DEFINE_string(
     name='owner_username',
     default='datacommonsorg',

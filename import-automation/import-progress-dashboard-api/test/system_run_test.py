@@ -32,6 +32,7 @@ def setUpModule():
 
 class SystemRunByIDTest(unittest.TestCase):
     """Tests for SystemRunByID."""
+
     def setUp(self):
         """Creates the endpoints before every test."""
         client = utils.create_test_datastore_client()

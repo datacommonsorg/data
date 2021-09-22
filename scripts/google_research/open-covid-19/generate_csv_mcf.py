@@ -98,77 +98,77 @@ CONFIRMED_COLS = ('confirmed_cases', 'confirmed_deaths')
 # The policy columns need to be added.
 COL_TO_STATVAR_PARTIAL = frozendict.frozendict({
     'cases_cumulative':
-    'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
+        'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
     'cases_new':
-    'IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
+        'IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
     'deaths_cumulative':
-    'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased',
+        'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased',
     'deaths_new':
-    'IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased',
+        'IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased',
     'tests_cumulative_people_tested':
-    'CumulativeCount_Person_COVID_19_Tested_PCR',
+        'CumulativeCount_Person_COVID_19_Tested_PCR',
     'tests_cumulative_samples_tested':
-    'CumulativeCount_MedicalTest_COVID_19_PCR',
+        'CumulativeCount_MedicalTest_COVID_19_PCR',
     'tests_cumulative_tests_performed':
-    'CumulativeCount_MedicalTest_COVID_19_PCR',
+        'CumulativeCount_MedicalTest_COVID_19_PCR',
     'tests_cumulative_units_unclear':
-    'CumulativeCount_MedicalTest_COVID_19_PCR',
+        'CumulativeCount_MedicalTest_COVID_19_PCR',
     'tests_new_people_tested':
-    'IncrementalCount_Person_COVID_19_Tested_PCR',
+        'IncrementalCount_Person_COVID_19_Tested_PCR',
     'tests_new_samples_tested':
-    'IncrementalCount_MedicalTest_COVID_19_PCR',
+        'IncrementalCount_MedicalTest_COVID_19_PCR',
     'tests_new_tests_performed':
-    'IncrementalCount_MedicalTest_COVID_19_PCR',
+        'IncrementalCount_MedicalTest_COVID_19_PCR',
     'tests_new_units_unclear':
-    'IncrementalCount_MedicalTest_COVID_19_PCR',
+        'IncrementalCount_MedicalTest_COVID_19_PCR',
     'hospitalized_current':
-    'Count_MedicalConditionIncident_COVID_19_PatientHospitalized',
+        'Count_MedicalConditionIncident_COVID_19_PatientHospitalized',
     'hospitalized_new':
-    'IncrementalCount_MedicalConditionIncident_COVID_19_PatientHospitalized',
+        'IncrementalCount_MedicalConditionIncident_COVID_19_PatientHospitalized',
     'hospitalized_cumulative':
-    'CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized',
+        'CumulativeCount_MedicalConditionIncident_COVID_19_PatientHospitalized',
     'icu_current':
-    'Count_MedicalConditionIncident_COVID_19_PatientInICU',
+        'Count_MedicalConditionIncident_COVID_19_PatientInICU',
     'icu_cumulative':
-    'CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU',
+        'CumulativeCount_MedicalConditionIncident_COVID_19_PatientInICU',
     'ventilator_current':
-    'Count_MedicalConditionIncident_COVID_19_PatientOnVentilator',
+        'Count_MedicalConditionIncident_COVID_19_PatientOnVentilator',
     'international_travel_controls':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternationalTravelRestriction',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternationalTravelRestriction',
     'debt_contract_relief':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_DebtOrContractRelief',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_DebtOrContractRelief',
     'testing_policy':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_TestingEligibility',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_TestingEligibility',
     'contact_tracing':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_ContactTracing',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_ContactTracing',
     'emergency_investment_in_healthcare':
-    'Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_HealthcareExpenditure',
+        'Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_HealthcareExpenditure',
     'investment_in_vaccines':
-    'Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_VaccineExpenditure',
+        'Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_VaccineExpenditure',
     'fiscal_measures':
-    'Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_EconomicStimulusExpenditure',
+        'Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_EconomicStimulusExpenditure',
     'international_support':
-    'Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_InternationalAidExpenditure',
+        'Amount_Legislation_COVID19Pandemic_GovernmentOrganization_ShortTermSpending_InternationalAidExpenditure',
     'confirmed_cases':
-    'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
+        'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase',
     'confirmed_deaths':
-    'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedPatientDeceased',
+        'CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedPatientDeceased',
     'stringency_index':
-    'Covid19StringencyIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
+        'Covid19StringencyIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
     'stringency_index_for_display':
-    'Covid19StringencyIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
+        'Covid19StringencyIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
     'government_response_index':
-    'Covid19ResponseIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
+        'Covid19ResponseIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
     'government_response_index_for_display':
-    'Covid19ResponseIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
+        'Covid19ResponseIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
     'containment_health_index':
-    'Covid19ContainmentAndHealthIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
+        'Covid19ContainmentAndHealthIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
     'containment_health_index_for_display':
-    'Covid19ContainmentAndHealthIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
+        'Covid19ContainmentAndHealthIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
     'economic_support_index':
-    'Covid19EconomicSupportIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
+        'Covid19EconomicSupportIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
     'economic_support_index_for_display':
-    'Covid19EconomicSupportIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
+        'Covid19EconomicSupportIndex_Legislation_COVID19Pandemic_GovernmentOrganization',
 })
 # Policy column names to StatVar DCID prefixes.
 # Flag values need to be appended to the key prefixes and spatial coverage
@@ -176,61 +176,61 @@ COL_TO_STATVAR_PARTIAL = frozendict.frozendict({
 # the correct mappings.
 POLICY_COL_PREFIX_TO_STATVAR_PREFIX = frozendict.frozendict({
     'school_closing':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_SchoolClosure',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_SchoolClosure',
     'workplace_closing':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_WorkplaceClosure',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_WorkplaceClosure',
     'restrictions_on_gatherings':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PrivateGatheringRestriction',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PrivateGatheringRestriction',
     'close_public_transit':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PublicTransitClosure',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_PublicTransitClosure',
     'stay_at_home_requirements':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_StayAtHomeRequirement',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_StayAtHomeRequirement',
     'restrictions_on_internal_movement':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternalMovementRestriction',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_InternalMovementRestriction',
     'income_support':
-    'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_IncomeSupport',
+        'PolicyExtent_Legislation_COVID19Pandemic_GovernmentOrganization_GovernmentBenefit_IncomeSupport',
     'public_information_campaigns':
-    'CampaignExtent_PublicInformationCampaign_COVID19Pandemic_GovernmentOrganization'
+        'CampaignExtent_PublicInformationCampaign_COVID19Pandemic_GovernmentOrganization'
 })
 # Policy column name prefixes to their units.
 # Flag values need to be appended to the prefixes to produce
 # the correct columns.
 POLICY_COL_PREFIX_TO_UNIT = frozendict.frozendict({
     'school_closing':
-    'dcs:ExtentOfPolicySchoolClosure',
+        'dcs:ExtentOfPolicySchoolClosure',
     'workplace_closing':
-    'dcs:ExtentOfPolicyWorkplaceClosure',
+        'dcs:ExtentOfPolicyWorkplaceClosure',
     'restrictions_on_gatherings':
-    'dcs:ExtentOfPolicyPrivateGatheringRestriction',
+        'dcs:ExtentOfPolicyPrivateGatheringRestriction',
     'close_public_transit':
-    'dcs:ExtentOfPolicyPublicTransitClosure',
+        'dcs:ExtentOfPolicyPublicTransitClosure',
     'stay_at_home_requirements':
-    'dcs:ExtentOfPolicyStayAtHomeRequirement',
+        'dcs:ExtentOfPolicyStayAtHomeRequirement',
     'restrictions_on_internal_movement':
-    'dcs:ExtentOfPolicyInternalMovementRestriction',
+        'dcs:ExtentOfPolicyInternalMovementRestriction',
     'income_support':
-    'dcs:ExtentOfPolicyIncomeSupport',
+        'dcs:ExtentOfPolicyIncomeSupport',
     'public_information_campaigns':
-    'dcs:ExtentOfPublicInformationCampaign',
+        'dcs:ExtentOfPublicInformationCampaign',
 })
 # Incomplete column names to units mappings.
 COL_TO_UNIT_PARTIAL = frozendict.frozendict({
     'emergency_investment_in_healthcare':
-    'schema:USDollar',
+        'schema:USDollar',
     'investment_in_vaccines':
-    'schema:USDollar',
+        'schema:USDollar',
     'fiscal_measures':
-    'schema:USDollar',
+        'schema:USDollar',
     'international_support':
-    'schema:USDollar',
+        'schema:USDollar',
     'international_travel_controls':
-    'dcs:ExtentOfPolicyInternationalTravelRestriction',
+        'dcs:ExtentOfPolicyInternationalTravelRestriction',
     'debt_contract_relief':
-    'dcs:ExtentOfPolicyDebtOrContractRelief',
+        'dcs:ExtentOfPolicyDebtOrContractRelief',
     'testing_policy':
-    'dcs:ExtentOfPolicyTestingEligibility',
+        'dcs:ExtentOfPolicyTestingEligibility',
     'contact_tracing':
-    'dcs:ExtentOfPolicyContactTracing'
+        'dcs:ExtentOfPolicyContactTracing'
 })
 
 
@@ -247,8 +247,9 @@ def generate_df(cols_to_keep: List[str]) -> pd.DataFrame:
                   left_on='open_covid_region_code',
                   right_on='region_code')
     df = df[df['region_code_type'] != 'other']
-    df['observationAbout'] = df[['region_code', 'datacommons_id'
-                                 ]].apply(get_observation_about, axis=1)
+    df['observationAbout'] = df[['region_code',
+                                 'datacommons_id']].apply(get_observation_about,
+                                                          axis=1)
     assert not any(pd.isna(df['observationAbout']))
     assert get_unique_values(df['test_units']) == [
         'people tested', 'people tested (incl. non-PCR)', 'samples tested',
@@ -490,8 +491,7 @@ def main():
         **COL_TO_STATVAR_PARTIAL,
         **get_policy_col_to_statvar(POLICY_COL_PREFIX_TO_STATVAR_PREFIX)
     }
-    df = generate_df(['observationAbout', 'date'] +
-                     list(col_to_statvar.keys()))
+    df = generate_df(['observationAbout', 'date'] + list(col_to_statvar.keys()))
     df.to_csv(CSV_OUT, index=False)
     write_strs(generate_tmcfs(col_to_statvar), TMCF_OUT)
     write_strs(generate_geo_mcfs(df['observationAbout']), GEOS_OUT)

@@ -37,6 +37,7 @@ module_dir_ = os.path.dirname(__file__)
 
 
 class TestPreprocessCSVTest(unittest.TestCase):
+
     def test_generate_tmcf(self):
         output_columns = [
             'Date', 'GeoId', 'COVID19CumulativeTestResults',
@@ -55,10 +56,8 @@ class TestPreprocessCSVTest(unittest.TestCase):
                 for i in range(len(stat_vars)):
                     f_out.write(
                         TEMPLATE_MCF_TEMPLATE.format_map({
-                            'index':
-                            i + 1,
-                            'stat_var':
-                            output_columns[2:][i]
+                            'index': i + 1,
+                            'stat_var': output_columns[2:][i]
                         }))
 
             same = filecmp.cmp(tmp_file, golden_file)

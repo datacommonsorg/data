@@ -37,6 +37,7 @@ class GeojsonSimplifier:
                  to be simplified. After calling simplify(), it contains the
                  simplified GeoJSON.
     """
+
     def __init__(self):
         self.geojson = None
 

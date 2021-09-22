@@ -28,12 +28,16 @@ DATA_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getTabularD
 MASTER_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getMasterData"
 
 DEFAULT_HEADERS = {
-    "Connection": "keep-alive",
-    "Accept": "application/json, text/plain, */*",
+    "Connection":
+        "keep-alive",
+    "Accept":
+        "application/json, text/plain, */*",
     "User-Agent":
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-    "Content-Type": "application/json",
-    "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+    "Content-Type":
+        "application/json",
+    "Accept-Language":
+        "en-GB,en-US;q=0.9,en;q=0.8",
 }
 
 DATA_FILE_NAME_FORMAT = "{year}_{udise_state_code}_{udise_dist_code}_{udise_block_code}.json"
@@ -81,6 +85,7 @@ class UDISEIndiaDataLoaderBase:
         states_json_data_file_path (TYPE):  Path to states geo data file
         years (TYPE): Years for which the download will run
     """
+
     def __init__(self,
                  api_report_code,
                  data_folder,
@@ -380,8 +385,7 @@ class UDISEIndiaDataLoaderBase:
         self.states = states_json_data["rowValue"]
         states_json_data_file.close()
 
-        districts_json_data_file = open(self.districts_json_data_file_path,
-                                        "r")
+        districts_json_data_file = open(self.districts_json_data_file_path, "r")
         districts_json_data = json.loads(districts_json_data_file.read())
         self.districts = districts_json_data["rowValue"]
         districts_json_data_file.close()
@@ -394,8 +398,7 @@ class UDISEIndiaDataLoaderBase:
     def _download_data(self):
         for year in self.years:
             for state in self.states:
-                self._get_data(year,
-                               udise_state_code=state["udise_state_code"])
+                self._get_data(year, udise_state_code=state["udise_state_code"])
             for district in self.districts:
                 self._get_data(year,
                                udise_state_code=district["udise_state_code"],

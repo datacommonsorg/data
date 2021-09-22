@@ -140,38 +140,39 @@ def write_csv(csv_file_path, reader):
             suffix = POLLUTANTS[observation["Parameter Code"]]
             new_row = {
                 'Date':
-                observation['Date Local'],
+                    observation['Date Local'],
                 'Site_Number':
-                'epa/{state}{county}{site}'.format(
-                    state=observation['State Code'],
-                    county=observation['County Code'],
-                    site=observation['Site Num']),
+                    'epa/{state}{county}{site}'.format(
+                        state=observation['State Code'],
+                        county=observation['County Code'],
+                        site=observation['Site Num']),
                 'Site_Name':
-                observation['Local Site Name'],
+                    observation['Local Site Name'],
                 'Site_Location':
-                '[latLong {lat} {long}]'.format(lat=observation['Latitude'],
-                                                long=observation['Longitude']),
+                    '[latLong {lat} {long}]'.format(
+                        lat=observation['Latitude'],
+                        long=observation['Longitude']),
                 'County':
-                'dcid:geoId/' + observation['State Code'] +
-                observation['County Code'],
+                    'dcid:geoId/' + observation['State Code'] +
+                    observation['County Code'],
                 'POC':
-                observation['POC'],
+                    observation['POC'],
                 'Units':
-                get_camel_case(observation['Units of Measure']),
+                    get_camel_case(observation['Units of Measure']),
                 'Method':
-                get_pollutant_standard(observation['Pollutant Standard']),
+                    get_pollutant_standard(observation['Pollutant Standard']),
                 'Mean':
-                observation['Arithmetic Mean'],
+                    observation['Arithmetic Mean'],
                 'Max':
-                observation['1st Max Value'],
+                    observation['1st Max Value'],
                 'AQI':
-                observation['AQI'],
+                    observation['AQI'],
                 'Mean_SV':
-                f'dcs:Mean_Concentration_AirPollutant_{suffix}',
+                    f'dcs:Mean_Concentration_AirPollutant_{suffix}',
                 'Max_SV':
-                f'dcs:Max_Concentration_AirPollutant_{suffix}',
+                    f'dcs:Max_Concentration_AirPollutant_{suffix}',
                 'AQI_SV':
-                f'dcs:AirQualityIndex_AirPollutant_{suffix}',
+                    f'dcs:AirQualityIndex_AirPollutant_{suffix}',
             }
             writer.writerow(new_row)
 

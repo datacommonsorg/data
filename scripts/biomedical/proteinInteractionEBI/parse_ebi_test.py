@@ -84,7 +84,8 @@ def get_file_terms(file):
     "Ruturns a list of text blocks."
     file_terms = file.split('\n\n')
     file_terms = [
-        term_text.split('\n') for term_text in file_terms
+        term_text.split('\n')
+        for term_text in file_terms
         if term_text.startswith('[Term]')
     ]
     return file_terms
@@ -97,13 +98,13 @@ CONST_INTERACTION_TYPE_ID_SET = set(['MI:0045', 'MI:0091', 'MI:0401'])
 
 class TestParseEbi(unittest.TestCase):
     """Test the functions in parse_ebi.py"""
+
     def test_get_id_maps(self):
         """Test function get_id_maps. Note that id_to_node here doesn't have parent_child
         relation, so only map keys are tested."""
         id_to_class_name, id_to_node = parse_ebi.get_id_maps(CONST_FILE_TERMS)
         self.assertEqual(id_to_class_name, CONST_ID_TO_CLASS_NAME)
-        self.assertEqual(id_to_node.keys(),
-                         CONST_ID_TO_NODE_NO_RELATION.keys())
+        self.assertEqual(id_to_node.keys(), CONST_ID_TO_NODE_NO_RELATION.keys())
 
     def test_build_child_parent_link(self):
         """Test function build_child_parent_link by checking the values of
@@ -135,8 +136,7 @@ class TestParseEbi(unittest.TestCase):
         INTERACTION_TYPE_ROOT = 'MI:0001'
         interaction_type_id_set = dfs_caller.get_subset_id(
             INTERACTION_TYPE_ROOT)
-        self.assertEqual(interaction_type_id_set,
-                         CONST_INTERACTION_TYPE_ID_SET)
+        self.assertEqual(interaction_type_id_set, CONST_INTERACTION_TYPE_ID_SET)
 
     def test_get_schema_from_text(self):
         """Test function get_schema_from_text by comparing the final schema."""

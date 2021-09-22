@@ -21,6 +21,7 @@ import google.api_core.exceptions
 
 class ResponseMock:
     """Mock class for request.Response."""
+
     def __init__(self, code, data=None, raw=None, headers=None):
         self.status_code = code
         self.data = data
@@ -90,6 +91,7 @@ def compare_lines(expected_path, to_test_path, num_lines, reverse=False):
 
 class SchedulerJobMock(dict):
     """Mock class for google.cloud.scheduler.types.Job."""
+
     @property
     def app_engine_http_target(self):
         return SchedulerJobMock(self.__getitem__('app_engine_http_target'))
@@ -101,6 +103,7 @@ class SchedulerJobMock(dict):
 
 class SchedulerClientMock:
     """Mock class for google.cloud.scheduler.CloudSchedulerClient."""
+
     def __init__(self):
         self.jobs = {}
 

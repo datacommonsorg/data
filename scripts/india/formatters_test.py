@@ -20,6 +20,7 @@ from india.formatters import CodeFormatter
 
 
 class TestPreprocess(unittest.TestCase):
+
     def test_format_lgd_state_code(self):
         self.assertEqual(CodeFormatter.format_lgd_state_code("01"), "01")
         self.assertEqual(CodeFormatter.format_lgd_state_code("9"), "09")

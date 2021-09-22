@@ -58,6 +58,7 @@ measuredValue: {mval}
 
 
 class MCFTemplateFillerTest(unittest.TestCase):
+
     def test_example_usage(self):
         example_template = """
 Node: People_in_geoId_{geo_id}_{race}_{gender}_{random_field}
@@ -153,8 +154,7 @@ measuredValue: 144
         # Can combine templates, like Pop + Obs
         pop_obs_template = POP_TEMPLATE + OBS_TEMPLATE
         templater = mcf_template_filler.Filler(
-            pop_obs_template,
-            required_vars=['geo_id', 'year', 'mprop', 'mval'])
+            pop_obs_template, required_vars=['geo_id', 'year', 'mprop', 'mval'])
         template_vars = {
             'geo_id': 'geoId/06',
             'naics_code': '11',

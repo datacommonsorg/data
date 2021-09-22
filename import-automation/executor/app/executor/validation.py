@@ -80,8 +80,8 @@ def are_import_targets_valid(import_targets: typing.List[str],
         ValueError: Some of the targets are not valid.
     """
     relative_names = import_target.filter_relative_import_names(import_targets)
-    if ('all' not in import_targets and len(manifest_dirs) > 1
-            and relative_names):
+    if ('all' not in import_targets and len(manifest_dirs) > 1 and
+            relative_names):
         raise ValueError('Commit touched multiple directories '
                          f'({manifest_dirs}) but {relative_names} '
                          'are relative import names')
@@ -166,8 +166,8 @@ def _import_name_exists_in_manifest(repo_dir, import_dir, import_name,
     except FileNotFoundError:
         raise ValueError(
             f'{os.path.join(import_dir, manifest_filename)} does not exist')
-    if (import_name != 'all'
-            and import_name not in _get_import_names_in_manifest(manifest)):
+    if (import_name != 'all' and
+            import_name not in _get_import_names_in_manifest(manifest)):
         raise ValueError(f'{import_name} not found in '
                          f'{os.path.join(import_dir, manifest_filename)}')
 

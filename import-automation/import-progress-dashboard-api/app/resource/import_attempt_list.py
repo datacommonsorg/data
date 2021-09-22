@@ -37,6 +37,7 @@ class ImportAttemptList(import_attempt.ImportAttempt):
         run_database: SystemRunDatabase object for querying system runs
             using the client.
     """
+
     def __init__(self, client=None):
         """Constructs an ImportAttemptList."""
         super().__init__(client)
@@ -65,7 +66,7 @@ class ImportAttemptList(import_attempt.ImportAttempt):
         if not valid:
             return err, code
         present, err, code = validation.required_fields_present(
-            (_ATTEMPT.run_id, ), args)
+            (_ATTEMPT.run_id,), args)
         if not present:
             return err, code
 

@@ -22,6 +22,7 @@ from app.service import validation
 
 class ValidationTest(unittest.TestCase):
     """Tests for validation.py."""
+
     def test_is_import_attempt_valid(self):
         """Tests is_import_attempt_valid."""
         attempt = {
@@ -208,8 +209,8 @@ class ValidationTest(unittest.TestCase):
         """Tests _is_value_defined."""
         # Not defined
         entity = {'cba': 'not-defined'}
-        valid, err, code = validation._is_value_defined(
-            entity, 'cba', ('defined', 'definedd'))
+        valid, err, code = validation._is_value_defined(entity, 'cba',
+                                                        ('defined', 'definedd'))
         self.assertFalse(valid)
         self.assertIn('not-defined', err)
         self.assertEqual(403, code)

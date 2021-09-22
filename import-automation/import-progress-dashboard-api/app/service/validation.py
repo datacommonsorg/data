@@ -169,8 +169,8 @@ def required_fields_present(fields, entity, all_present=True):
         See module docstring.
     """
     absent = [field for field in fields if field not in entity]
-    if ((all_present and absent)
-            or (not all_present and len(absent) == len(fields))):
+    if ((all_present and absent) or
+        (not all_present and len(absent) == len(fields))):
         return (False,
                 f'missing {utils.list_to_str(absent)} in the request body',
                 http.HTTPStatus.FORBIDDEN)

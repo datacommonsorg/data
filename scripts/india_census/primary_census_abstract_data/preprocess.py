@@ -17,7 +17,8 @@ from ..common.base import CensusPrimaryAbstractDataLoaderBase
 
 
 class CensusPrimaryCensusAbstractDataLoader(CensusPrimaryAbstractDataLoaderBase
-                                            ):
+                                           ):
+
     def _get_base_name(self, row):
         name = "Count_" + row["populationType"]
         return name
@@ -38,15 +39,13 @@ if __name__ == '__main__':
         "Count_Household", "Count_Person", "Count_Person_Urban",
         "Count_Person_Rural", "Count_Person_Male", "Count_Person_Female"
     ]
-    mcf_file_path = os.path.join(
-        os.path.dirname(__file__),
-        './IndiaCensus2011_Primary_Abstract_Data.mcf')
+    mcf_file_path = os.path.join(os.path.dirname(__file__),
+                                 './IndiaCensus2011_Primary_Abstract_Data.mcf')
     tmcf_file_path = os.path.join(
         os.path.dirname(__file__),
         './IndiaCensus2011_Primary_Abstract_Data.tmcf')
-    csv_file_path = os.path.join(
-        os.path.dirname(__file__),
-        './IndiaCensus2011_Primary_Abstract_Data.csv')
+    csv_file_path = os.path.join(os.path.dirname(__file__),
+                                 './IndiaCensus2011_Primary_Abstract_Data.csv')
 
     loader = CensusPrimaryCensusAbstractDataLoader(
         data_file_path=data_file_path,

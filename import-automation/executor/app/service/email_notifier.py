@@ -32,6 +32,7 @@ class EmailNotifier:
             as a string.
         host: SMTP host address, as a string.
     """
+
     def __init__(self,
                  account: str,
                  password: str,

@@ -38,8 +38,8 @@ flags.DEFINE_string(
 
 
 def import_data(data_files, curated_dim_file, output_dir, artifact_dir):
-    schema_mapping = generate_schema(data_files, curated_dim_file,
-                                     artifact_dir, output_dir)
+    schema_mapping = generate_schema(data_files, curated_dim_file, artifact_dir,
+                                     output_dir)
     generate_csv_and_sv(data_files, schema_mapping, output_dir)
 
 

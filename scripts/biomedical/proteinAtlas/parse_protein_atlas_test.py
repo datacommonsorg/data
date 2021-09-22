@@ -48,6 +48,7 @@ humanProteinOccurrenceReliability: dcs:ProteinOccurrenceReliabilityApproved
 
 class TestParseProteinAtlas(unittest.TestCase):
     """Test the functions in parse_mint.py"""
+
     def test_main(self):
         """Test in the main function"""
         gene_to_uniprot_list = {'TSPAN6': ['O43657']}

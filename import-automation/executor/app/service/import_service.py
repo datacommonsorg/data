@@ -54,6 +54,7 @@ class PreviousImportNotFinishedError(Exception):
         import_name: Import name submitted to the importer as a string.
         curator_email: Email submitted to the importer as a string.
     """
+
     def __init__(self, import_name: str, curator_email: str):
         import_info = _format_import_info(import_name, curator_email)
         super().__init__(f'Previous import {import_info} '
@@ -71,12 +72,12 @@ class ImportNotFoundError(Exception):
         curator_email: Email submitted to the importer as a string.
         import_id: ID assigned by the importer, if applicable.
     """
+
     def __init__(self,
                  import_name: str,
                  curator_email: str,
                  import_id: str = None):
-        import_info = _format_import_info(import_name, curator_email,
-                                          import_id)
+        import_info = _format_import_info(import_name, curator_email, import_id)
         super().__init__(f'Import <{import_info}> not found in import logs')
         self.import_name = import_name
         self.curator_email = curator_email
@@ -90,6 +91,7 @@ class ImportFailedError(Exception):
     Attributes:
         log: Log entry created by the importer for the import.
     """
+
     def __init__(self, log: Dict):
         import_info = _format_import_info(log['importName'], log['userEmail'],
                                           log['id'])
@@ -180,8 +182,8 @@ class ImportServiceClient:
         if import_inputs.cleaned_csv and import_inputs.template_mcf:
             return self.import_table(import_dir, import_inputs, import_spec,
                                      block, timeout)
-        if (import_inputs.node_mcf and not import_inputs.cleaned_csv
-                and not import_inputs.template_mcf):
+        if (import_inputs.node_mcf and not import_inputs.cleaned_csv and
+                not import_inputs.template_mcf):
             return self.import_node(import_dir, import_inputs, import_spec,
                                     block, timeout)
         raise ValueError(f'Invalid import inputs {import_inputs}')
@@ -202,11 +204,14 @@ class ImportServiceClient:
                 'importName': absolute_import_name,
                 'curatorEmail': curator_email,
                 'table': {
-                    'tableName': absolute_import_name,
-                    'csvPath': self._fix_input_path(import_inputs.cleaned_csv),
+                    'tableName':
+                        absolute_import_name,
+                    'csvPath':
+                        self._fix_input_path(import_inputs.cleaned_csv),
                     'mappingPath':
-                    self._fix_input_path(import_inputs.template_mcf),
-                    'fieldDelim': ','
+                        self._fix_input_path(import_inputs.template_mcf),
+                    'fieldDelim':
+                        ','
                 },
                 'provenanceUrl': import_spec['provenance_url'],
                 'provenanceDescription': import_spec['provenance_description'],
@@ -367,8 +372,7 @@ class ImportServiceClient:
         try:
             if not _are_imports_finished(logs_before, import_name,
                                          curator_email):
-                raise PreviousImportNotFinishedError(import_name,
-                                                     curator_email)
+                raise PreviousImportNotFinishedError(import_name, curator_email)
         except ImportNotFoundError as exc:
             # This might be the first attempt
             logging.warning(str(exc))
@@ -474,8 +478,8 @@ def _get_import_id(import_name: str, curator_email: str,
     new_ids = ids_after - ids_before
     for log in logs_after:
         import_id = log['id']
-        if (import_id in new_ids and log['importName'] == import_name
-                and log['userEmail'] == curator_email):
+        if (import_id in new_ids and log['importName'] == import_name and
+                log['userEmail'] == curator_email):
             return import_id
     raise ImportNotFoundError(import_name, curator_email)
 
@@ -511,8 +515,8 @@ def _are_imports_finished(logs: Iterable[Dict], import_name: str,
     """
     found = False
     for log in logs:
-        if (log['userEmail'] == curator_email
-                and log['importName'] == import_name):
+        if (log['userEmail'] == curator_email and
+                log['importName'] == import_name):
             found = True
             finished = _is_import_finished(log)
             if not finished:

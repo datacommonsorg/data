@@ -33,6 +33,7 @@ def setUpModule():
 
 class SystemRunListTest(unittest.TestCase):
     """Tests for SystemRunList."""
+
     @mock.patch('app.utils.create_datastore_client',
                 utils.create_test_datastore_client)
     def setUp(self):

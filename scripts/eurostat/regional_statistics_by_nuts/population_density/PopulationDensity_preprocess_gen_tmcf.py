@@ -89,10 +89,8 @@ def get_template_mcf():
         for i in range(len(stat_vars)):
             f_out.write(
                 TEMPLATE_MCF_TEMPLATE.format_map({
-                    'index':
-                    i,
-                    'stat_var':
-                    _OUTPUT_COLUMNS[2:][i]
+                    'index': i,
+                    'stat_var': _OUTPUT_COLUMNS[2:][i]
                 }))
 
 

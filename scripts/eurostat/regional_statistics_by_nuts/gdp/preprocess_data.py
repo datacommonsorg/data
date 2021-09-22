@@ -65,8 +65,7 @@ def first_stage_processing(df, separation_symbol):
     for i in range(len(df)):
         row_values = list(df.iloc[i])
         variable_value_list = row_values[0].split(',')
-        time_invariant_var_value = variable_value_list[
-            time_invariant_var_index]
+        time_invariant_var_value = variable_value_list[time_invariant_var_index]
         del variable_value_list[time_invariant_var_index]
         current_combined_variable_value = separation_symbol.join(
             variable_value_list)

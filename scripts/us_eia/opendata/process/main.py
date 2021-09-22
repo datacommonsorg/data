@@ -34,8 +34,8 @@ flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
 # Value: (name, extract_fn, schema_fn)
 _DATASETS = {
     'COAL': ('Coal', coal.extract_place_statvar, coal.generate_statvar_schema),
-    'ELEC':
-    ('Electricity', elec.extract_place_statvar, elec.generate_statvar_schema),
+    'ELEC': ('Electricity', elec.extract_place_statvar,
+             elec.generate_statvar_schema),
     'INTL': ('Energy Overview (INTL)', intl.extract_place_statvar, None),
     'PET': ('Petroleum', pet.extract_place_statvar, None),
     'NG': ('Natural Gas', ng.extract_place_statvar, None),

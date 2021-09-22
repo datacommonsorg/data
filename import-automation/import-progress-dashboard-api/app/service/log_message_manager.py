@@ -26,6 +26,7 @@ class LogMessageManager:
     Attributes:
         bucket: storage bucket object in which log messages are stored.
     """
+
     def __init__(self):
         """Constructs a LogMessageManager."""
         self.bucket = utils.create_storage_bucket()

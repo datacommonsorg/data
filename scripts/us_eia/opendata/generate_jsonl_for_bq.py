@@ -75,8 +75,7 @@ def extract_category_to_jsonl(line, dataset):
 def process_dataset(dataset, in_file_path, out_file_path):
     with open(in_file_path) as data_fp:
         with open(out_file_path + '.series.jsonl', 'w+') as series_fp:
-            with open(out_file_path + '.categories.jsonl',
-                      'w+') as category_fp:
+            with open(out_file_path + '.categories.jsonl', 'w+') as category_fp:
                 for line in data_fp:
                     data = json.loads(line)
                     series_id = data.get('series_id', None)

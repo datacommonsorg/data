@@ -45,6 +45,7 @@ MANUAL_OVERRIDE = {
 
 
 class LocalGovermentDirectoryDistrictsDataLoader:
+
     def __init__(self, lgd_csv, wikidata_csv, clean_csv):
         self.lgd_csv = lgd_csv
         self.wikidata_csv = wikidata_csv
@@ -219,8 +220,8 @@ def main():
                                 "./data/wikidata_india_districts_export.csv")
     clean_csv = os.path.join(os.path.dirname(__file__),
                              "LocalGovernmentDirectory_Districts.csv")
-    loader = LocalGovermentDirectoryDistrictsDataLoader(
-        lgd_csv, wikidata_csv, clean_csv)
+    loader = LocalGovermentDirectoryDistrictsDataLoader(lgd_csv, wikidata_csv,
+                                                        clean_csv)
     loader.process()
     loader.save()
 

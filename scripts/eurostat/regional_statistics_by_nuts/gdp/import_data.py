@@ -99,8 +99,8 @@ class EurostatGDPImporter:
 
         def geo_converter(geo):
             """Converts geo codes to nuts or country codes."""
-            if any(char.isdigit()
-                   for char in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES):
+            if any(char.isdigit() for char in geo) or ('nuts/' + geo
+                                                       in NUTS1_CODES_NAMES):
                 return 'nuts/' + geo
             return COUNTRY_MAP.get(geo, '~' + geo + '~')
 
@@ -182,8 +182,7 @@ class EurostatGDPImporter:
                     var = ("dcid:Amount_EconomicActivity_"
                            "GrossDomesticProduction_Nominal")
                 tmcf_f.write(
-                    temp.format(i=col_num, var_ref=var, val_col=col,
-                                unit=unit))
+                    temp.format(i=col_num, var_ref=var, val_col=col, unit=unit))
 
 
 if __name__ == "__main__":

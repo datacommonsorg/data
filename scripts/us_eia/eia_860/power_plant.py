@@ -188,14 +188,13 @@ def _update_frames(raw_df: pd.DataFrame) -> pd.DataFrame:
         _to_enum, enum=REGULATORY_STATUS_ENUM)
     raw_df['PowerPlantSector'] = raw_df['Sector'].apply(_to_enum,
                                                         enum=SECTOR_CODE_ENUM)
-    raw_df['FercCogenerationStatus'] = raw_df[
-        'FERC Cogeneration Status'].apply(_to_enum,
-                                          enum=FERC_COGENERATION_STATUS_ENUM)
+    raw_df['FercCogenerationStatus'] = raw_df['FERC Cogeneration Status'].apply(
+        _to_enum, enum=FERC_COGENERATION_STATUS_ENUM)
     raw_df['FercCogenerationDocketNumber'] = raw_df[
         'FercCogenerationDocketNumber'].apply(utils.escape_value)
     raw_df['FercSmallPowerProducerStatus'] = raw_df[
-        'FERC Small Power Producer Status'].apply(
-            _to_enum, enum=FERC_SMALL_PRODUCER_ENUM)
+        'FERC Small Power Producer Status'].apply(_to_enum,
+                                                  enum=FERC_SMALL_PRODUCER_ENUM)
     raw_df['FercSmallPowerProducerDocketNumber'] = raw_df[
         'FercSmallPowerProducerDocketNumber'].apply(utils.escape_value)
     raw_df['FercExemptWholesaleGeneratorStatus'] = raw_df[
@@ -207,9 +206,8 @@ def _update_frames(raw_df: pd.DataFrame) -> pd.DataFrame:
         _to_enum, enum=ASH_IMPOUNDMENT_STATUS_ENUM)
     raw_df['IsAshLined'] = raw_df['Ash Impoundment Lined?'].apply(
         _to_enum, enum=ASH_IMPOUNDMENT_STATUS_ENUM)
-    raw_df['AshImpoundmentStatusEnum'] = raw_df[
-        'Ash Impoundment Status'].apply(_to_enum,
-                                        enum=ASH_IMPOUNDMENT_STATUS_ENUM)
+    raw_df['AshImpoundmentStatusEnum'] = raw_df['Ash Impoundment Status'].apply(
+        _to_enum, enum=ASH_IMPOUNDMENT_STATUS_ENUM)
     raw_df['GridVoltage1'] = raw_df['Grid Voltage 1'].apply(_to_kv_quantity)
     raw_df['GridVoltage2'] = raw_df['Grid Voltage 2'].apply(_to_kv_quantity)
     raw_df['GridVoltage3'] = raw_df['Grid Voltage 3'].apply(_to_kv_quantity)

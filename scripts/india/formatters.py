@@ -16,6 +16,7 @@ __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 
 class CodeFormatter:
+
     @staticmethod
     def format_lgd_state_code(s):
         # Converts into two character length code

@@ -26,6 +26,7 @@ from us_bls.cpi import generate_csv_mcf
 
 
 class TestGenerateCSVMCF(unittest.TestCase):
+
     def test_parse_series_id(self):
         info = generate_csv_mcf.parse_series_id('CUSR0000SA0')
         self.assertEqual('CU', info.survey_abbreviation)
@@ -50,8 +51,8 @@ class TestGenerateCSVMCF(unittest.TestCase):
                           'The reference base is December 2009 equals 100.'),
                          info.get_unit(
                              pd.DataFrame({
-                                 'series_id': ('CUUR0000SEFV02', ),
-                                 'base_period': ('DECEMBER 2009=100', )
+                                 'series_id': ('CUUR0000SEFV02',),
+                                 'base_period': ('DECEMBER 2009=100',)
                              })))
 
     def test_invalid_series_id(self):
@@ -67,15 +68,15 @@ class TestGenerateCSVMCF(unittest.TestCase):
             ValueError,
             generate_csv_mcf.parse_series_id('CWUR0000SEFV02').get_unit,
             pd.DataFrame({
-                'series_id': ('CUUR0000SEFV02', ),
-                'base_period': ('DECEMBER 2009=100', )
+                'series_id': ('CUUR0000SEFV02',),
+                'base_period': ('DECEMBER 2009=100',)
             }))
         self.assertRaises(
             ValueError,
             generate_csv_mcf.parse_series_id('CWUR0000SEFV02').get_unit,
             pd.DataFrame({
-                'series_id': ('CWUR0000SEFV02', ),
-                'base_period': ('DECEMBER2009=100', )
+                'series_id': ('CWUR0000SEFV02',),
+                'base_period': ('DECEMBER2009=100',)
             }))
 
     def test_filter_series(self):
@@ -83,8 +84,8 @@ class TestGenerateCSVMCF(unittest.TestCase):
                               generate_csv_mcf.filter_series(
                                   pd.DataFrame({
                                       'series_id':
-                                      ('CWUR0001SEFV02', 'CWUS0000SEFV02',
-                                       'CWUR0000SEFV02')
+                                          ('CWUR0001SEFV02', 'CWUS0000SEFV02',
+                                           'CWUR0000SEFV02')
                                   })))
 
     def test_generate_statvar(self):

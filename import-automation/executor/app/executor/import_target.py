@@ -35,9 +35,8 @@ from app.executor import import_executor
 
 _ALLOWED_PATH_CHARS = 'A-Za-z0-9-_/'
 _ALLOWED_RELATIVE_IMPORT_NAME_CHARS = 'A-Za-z0-9-_'
-_ALLOWED_ABSOLUTE_IMPORT_NAME_CHARS = (
-    f'{_ALLOWED_PATH_CHARS}:'
-    f'{_ALLOWED_RELATIVE_IMPORT_NAME_CHARS}')
+_ALLOWED_ABSOLUTE_IMPORT_NAME_CHARS = (f'{_ALLOWED_PATH_CHARS}:'
+                                       f'{_ALLOWED_RELATIVE_IMPORT_NAME_CHARS}')
 _ABSOLUTE_IMPORT_NAME_REGEX = r'[{}]+:[{}]+'.format(
     _ALLOWED_PATH_CHARS, _ALLOWED_RELATIVE_IMPORT_NAME_CHARS)
 _RELATIVE_IMPORT_NAME_REGEX = r'[{}]+'.format(
@@ -102,9 +101,9 @@ def parse_commit_message_targets(commit_message: str,
     targets = utils.parse_tag_list(commit_message, tag,
                                    _ALLOWED_ABSOLUTE_IMPORT_NAME_CHARS)
     for target in targets:
-        if (not target or target.isspace()
-                or (not is_absolute_import_name(target)
-                    and not is_relative_import_name(target))):
+        if (not target or target.isspace() or
+            (not is_absolute_import_name(target) and
+             not is_relative_import_name(target))):
             raise ValueError(f'Target "{target}" is not valid')
     return targets
 
@@ -127,8 +126,8 @@ def is_import_targetted_by_commit(import_dir: str, import_name: str,
     """
     absolute_name = get_absolute_import_name(import_dir, import_name)
     absolute_all = get_absolute_import_name(import_dir, 'all')
-    return ('all' in import_targets or absolute_name in import_targets
-            or import_name in import_targets or absolute_all in import_targets)
+    return ('all' in import_targets or absolute_name in import_targets or
+            import_name in import_targets or absolute_all in import_targets)
 
 
 def find_targets_in_commit(commit_sha: str, tag: str,

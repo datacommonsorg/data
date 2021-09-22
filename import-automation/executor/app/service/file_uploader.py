@@ -24,6 +24,7 @@ from google.cloud import storage
 
 class FileUploader:
     """Base class for all file uploaders."""
+
     def upload_file(self, src: str, dest: str) -> None:
         """Uploads the file at src to a file at dest."""
         raise NotImplementedError
@@ -42,6 +43,7 @@ class GCSFileUploader(FileUploader):
         path_prefix: Path prefix in the bucket as a string. Destinations
             will be prepended by this prefix.
     """
+
     def __init__(self,
                  project_id: str,
                  bucket_name: str,
@@ -104,8 +106,8 @@ class GCSFileUploader(FileUploader):
                      string, dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_string(string)
-        logging.info('GCSFileUploader.upload_string: Uploaded %s to %s',
-                     string, dest)
+        logging.info('GCSFileUploader.upload_string: Uploaded %s to %s', string,
+                     dest)
 
     def _fix_path(self, path):
         """Returns {self.path_prefix}/{path}."""
@@ -120,6 +122,7 @@ class LocalFileUploader(FileUploader):
             LocalFileUploader('/tmp').upload_file('/foo/file', 'bar/file') will
             copy '/foo/file' to '/tmp/bar/file'.
     """
+
     def __init__(self, output_dir: str = ''):
         self.output_dir = os.path.abspath(output_dir)
         logging.info(

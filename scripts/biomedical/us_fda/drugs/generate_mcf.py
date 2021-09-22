@@ -106,8 +106,7 @@ def zip_ingred_comma_sep(mcf_file, strength_format_map, row):
             active_ingred_dcids)
 
         strength_format_map = {
-            key: value
-            for key, value in strength_format_map.items() if value
+            key: value for key, value in strength_format_map.items() if value
         }
         strength_templater = mcf_template_filler.Filler(STRENGTH_TEMPLATE,
                                                         required_vars=['dcid'])
@@ -160,8 +159,7 @@ def zip_ingred_semi_sep(mcf_file, strength_format_map, row):
             active_ingred_dcids)
 
         strength_format_map = {
-            key: value
-            for key, value in strength_format_map.items() if value
+            key: value for key, value in strength_format_map.items() if value
         }
         strength_templater = mcf_template_filler.Filler(STRENGTH_TEMPLATE,
                                                         required_vars=['dcid'])
@@ -199,28 +197,28 @@ def parse_strength_nodes(mcf_file, fda_app, row):
         [ingred.strip() for ingred in row['CleanActiveIngredient'].split(';')])
     strength_format_map = {
         'strength_dcid':
-        strength_dcid,
+            strength_dcid,
         'fda_app_dcid':
-        fda_app,
+            fda_app,
         'fda_prod_no':
-        str(row['ProductNo']),
+            str(row['ProductNo']),
         'name':
-        row['DrugRef'] + '_Strength-' + str(row['ApplNo']) + '-' +
-        str(row['ProductNo']),
+            row['DrugRef'] + '_Strength-' + str(row['ApplNo']) + '-' +
+            str(row['ProductNo']),
         'ingred_names':
-        ingred_name_list,
+            ingred_name_list,
         'te_enums':
-        row['TECodes'],
+            row['TECodes'],
         'ms_enums':
-        row['MarketStatus'],
+            row['MarketStatus'],
         'course_qty':
-        row['DrugCourse'],
+            row['DrugCourse'],
         'is_single_dose':
-        row['SingleDose'],
+            row['SingleDose'],
         'sponsor':
-        row['SponsorName'].title(),
+            row['SponsorName'].title(),
         'final_vol_qty':
-        row['FinalVolQty'],
+            row['FinalVolQty'],
     }
 
     strengths = row['CleanStrength']
@@ -238,8 +236,7 @@ def parse_strength_nodes(mcf_file, fda_app, row):
     strength_format_map['strength_qty'] = get_strength_qtys(
         row['CleanStrength'])
     strength_format_map = {
-        key: value
-        for key, value in strength_format_map.items() if value
+        key: value for key, value in strength_format_map.items() if value
     }
     strength_templater = mcf_template_filler.Filler(STRENGTH_TEMPLATE,
                                                     required_vars=['dcid'])
@@ -269,8 +266,7 @@ def parse_row(mcf_file, seen_fda_apps, row):
             'appl_type_enums': row['ApplTypeEnum'],
         }
         app_template_map = {
-            key: value
-            for key, value in app_template_map.items() if value
+            key: value for key, value in app_template_map.items() if value
         }
         fda_app_templater = mcf_template_filler.Filler(FDA_APP_TEMPLATE,
                                                        required_vars=['dcid'])
@@ -303,8 +299,7 @@ def parse_row(mcf_file, seen_fda_apps, row):
         drug_format_map['is_available_generically'] = 'True'
 
     drug_format_map = {
-        key: value
-        for key, value in drug_format_map.items() if value
+        key: value for key, value in drug_format_map.items() if value
     }
     drug_templater = mcf_template_filler.Filler(DRUG_TEMPLATE,
                                                 required_vars=['dcid'])

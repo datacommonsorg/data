@@ -106,8 +106,7 @@ def get_reference_mcf(info):
         id_num = reference_map[database]
         if database not in database_to_property:
             return ''
-        mcf_list.append(database_to_property[database] + ': "' + id_num +
-                        '"\n')
+        mcf_list.append(database_to_property[database] + ': "' + id_num + '"\n')
 
     return ''.join(mcf_list)
 

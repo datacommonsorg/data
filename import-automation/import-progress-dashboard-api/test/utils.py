@@ -35,6 +35,7 @@ PARSE_ARGS = 'flask_restful.reqparse.RequestParser.parse_args'
 
 
 class LogMessageManagerMock:
+
     def __init__(self):
         self.data = {}
 
@@ -51,6 +52,7 @@ class LogMessageManagerMock:
 
 
 class DatastoreEmulator:
+
     def __init__(self):
         self.process = None
 

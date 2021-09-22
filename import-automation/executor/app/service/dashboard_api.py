@@ -54,6 +54,7 @@ class DashboardAPI:
         iap: IAPRequest object for making HTTP requests to
             Identity-Aware Proxy protected resources.
     """
+
     def __init__(self, client_id: str):
         """Constructs a DashboardAPI.
 

@@ -295,8 +295,8 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
         value = psimi_to_dcid[terms[idx].split(':"')[1].split('(')[0][:-1]]
         term_map[key].append(value)
 
-    key_idx_pairs = [('interactionDetectionMethod', 6),
-                     ('interactionType', 11), ('interactionSource', 12)]
+    key_idx_pairs = [('interactionDetectionMethod', 6), ('interactionType', 11),
+                     ('interactionSource', 12)]
     for key, idx in key_idx_pairs:
         get_value_helper(key, idx)
 
@@ -389,9 +389,7 @@ def main(argv):
         psimi_to_dcid_content = file_object.readlines()
 
     psimi_to_dcid = {}
-    psimi_to_dcid_content = [
-        line.split(': ') for line in psimi_to_dcid_content
-    ]
+    psimi_to_dcid_content = [line.split(': ') for line in psimi_to_dcid_content]
     for line in psimi_to_dcid_content:
         psimi_to_dcid[line[0]] = line[1]
 

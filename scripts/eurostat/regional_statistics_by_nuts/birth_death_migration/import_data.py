@@ -92,8 +92,7 @@ def preprocess_data(raw_df):
             ",", n=1, expand=True)
         preprocessed_df['statistical_variable'] = split_df[0]
         preprocessed_df['geo'] = split_df[1]
-        preprocessed_df.drop(columns=[preprocessed_df.columns[0]],
-                             inplace=True)
+        preprocessed_df.drop(columns=[preprocessed_df.columns[0]], inplace=True)
 
         preprocessed_df = (preprocessed_df.set_index(["geo", "time"]).pivot(
             columns="statistical_variable")['value'].reset_index().rename_axis(
@@ -132,8 +131,8 @@ def clean_data(preprocessed_df, output_path):
     # trim the space in the time column i.e. '2020 ' -> '2020'
     clean_df['time'] = clean_df['time'].astype('int32')
     original_names = [
-        'geo', 'time', 'DEATH', 'GBIRTHRT', 'GDEATHRT', 'GROW', 'GROWRT',
-        'JAN', 'LBIRTH'
+        'geo', 'time', 'DEATH', 'GBIRTHRT', 'GDEATHRT', 'GROW', 'GROWRT', 'JAN',
+        'LBIRTH'
     ]
     new_names = [
         'geo', 'time', 'Count_Death',

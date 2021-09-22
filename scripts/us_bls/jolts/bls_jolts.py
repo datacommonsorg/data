@@ -58,7 +58,7 @@ _CODE_MAPPINGS = {
     '920000': '92',
     '923000': '923000:State and local government education',  # New Code
     '929000':
-    '929000:State and local government excluding education'  # New Code
+        '929000:State and local government excluding education'  # New Code
 }
 
 
@@ -149,9 +149,7 @@ def generate_cleaned_dataframe():
     jolts_df['Date'] = jolts_df.apply(period_year_to_iso_8601, axis=1)
 
     # Add relevant columns from series information.
-    series_cols = [
-        'industry_code', 'region_code', 'seasonal', 'ratelevel_code'
-    ]
+    series_cols = ['industry_code', 'region_code', 'seasonal', 'ratelevel_code']
     jolts_df = jolts_df.merge(series_desc[series_cols],
                               left_on=["series_id"],
                               right_index=True)

@@ -74,10 +74,8 @@ def preprocess(filepath):
     assert (~data['sex'].isnull()).all()
     age_except = data['age'].isin(['Y_GE85', 'Y_LT1'])
     data.loc[age_except, 'age'] = data.loc[age_except, 'age'].map({
-        'Y_GE85':
-        '85OrMoreYears',
-        'Y_LT1':
-        'Upto1Years'
+        'Y_GE85': '85OrMoreYears',
+        'Y_LT1': 'Upto1Years'
     })
     data.loc[~age_except, 'age'] = data.loc[~age_except, 'age'].str.replace(
         'Y', '') + "Years"

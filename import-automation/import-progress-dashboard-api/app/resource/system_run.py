@@ -59,12 +59,12 @@ class SystemRun(base_resource.BaseResource):
             system runs using the client
     """
     parser = reqparse.RequestParser()
-    optional_fields = ((_MODEL.run_id, str), (_MODEL.repo_name, ),
-                       (_MODEL.branch_name, ), (_MODEL.pr_number, int),
-                       (_MODEL.commit_sha, ), (_MODEL.time_created, ),
-                       (_MODEL.time_completed, ), (_MODEL.import_attempts, str,
-                                                   'append'),
-                       (_MODEL.logs, str, 'append'), (_MODEL.status, ))
+    optional_fields = ((_MODEL.run_id, str), (_MODEL.repo_name,),
+                       (_MODEL.branch_name,), (_MODEL.pr_number, int),
+                       (_MODEL.commit_sha,), (_MODEL.time_created,),
+                       (_MODEL.time_completed,), (_MODEL.import_attempts, str,
+                                                  'append'),
+                       (_MODEL.logs, str, 'append'), (_MODEL.status,))
     utils.add_fields(parser, optional_fields, required=False)
 
     def __init__(self, client=None):
@@ -81,6 +81,7 @@ class SystemRunByID(SystemRun):
 
     See SystemRun.
     """
+
     def get(self, run_id):
         """Retrieves a system run by its run_id.
 
@@ -109,8 +110,8 @@ class SystemRunByID(SystemRun):
             where the error message is a string and the error code is an int.
         """
         args = SystemRunByID.parser.parse_args()
-        if (_MODEL.run_id in args or _MODEL.import_attempts in args
-                or _MODEL.logs in args):
+        if (_MODEL.run_id in args or _MODEL.import_attempts in args or
+                _MODEL.logs in args):
             return validation.get_patch_forbidden_error(
                 (_MODEL.run_id, _MODEL.import_attempts, _MODEL.logs))
         valid, err, code = validation.is_system_run_valid(args, run_id=run_id)

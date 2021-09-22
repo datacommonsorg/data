@@ -16,6 +16,7 @@
 
 class ShardingWriter:
     """Helper class for writing strings to sharded files."""
+
     def __init__(self, base_path, file_extension='mcf', shard_size=104857600):
         self._base_path = base_path
         self._file_extension = file_extension

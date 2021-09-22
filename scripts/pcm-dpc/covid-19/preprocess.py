@@ -10,6 +10,7 @@ import pandas as pd
 class PcmDpc:
     """Download the csv files and preprocess it for importing into
     DataCommons."""
+
     def preprocess(self):
         """Clean and save the CSV file."""
         self.data = pd.read_csv(self.csvpath)
@@ -44,27 +45,18 @@ class PcmDpc:
     def _translate(self):
         """Translate coloumn names from italian to english."""
         it2en = {
-            'data':
-            'Date',
-            'stato':
-            'State',
-            'codice_regione':
-            'RegionCode',
-            'denominazione_regione':
-            'RegionName',
-            'codice_provincia':
-            'ProvinceCode',
-            'denominazione_provincia':
-            'ProvinceName',
-            'sigla_provincia':
-            'ProvinceAbbreviation',
-            'lat':
-            'Latitude',
-            'long':
-            'Longitude',
+            'data': 'Date',
+            'stato': 'State',
+            'codice_regione': 'RegionCode',
+            'denominazione_regione': 'RegionName',
+            'codice_provincia': 'ProvinceCode',
+            'denominazione_provincia': 'ProvinceName',
+            'sigla_provincia': 'ProvinceAbbreviation',
+            'lat': 'Latitude',
+            'long': 'Longitude',
             'ricoverati_con_sintomi':
-            ('Count_MedicalConditionIncident'
-             '_COVID_19_PatientHospitalizedWithSymptoms'),
+                ('Count_MedicalConditionIncident'
+                 '_COVID_19_PatientHospitalizedWithSymptoms'),
             'terapia_intensiva': ('Count_MedicalConditionIncident'
                                   '_COVID_19_PatientInICU'),
             'totale_ospedalizzati': ('Count_MedicalConditionIncident'
@@ -74,8 +66,8 @@ class PcmDpc:
             'totale_positivi': ('Count_MedicalConditionIncident'
                                 '_COVID_19_ActiveCase'),
             'variazione_totale_positivi':
-            ('IncrementalCount_Medical'
-             'ConditionIncident_COVID_19_PositiveCase'),
+                ('IncrementalCount_Medical'
+                 'ConditionIncident_COVID_19_PositiveCase'),
             'nuovi_positivi': ('IncrementalCount_MedicalConditionIncident'
                                '_COVID_19_ActiveCase'),
             'dimessi_guariti': ('CumulativeCount_MedicalConditionIncident'
@@ -84,14 +76,10 @@ class PcmDpc:
                          '_PatientDeceased'),
             'totale_casi': ('CumulativeCount_MedicalConditionIncident_'
                             'COVID_19_PositiveCase'),
-            'tamponi':
-            'CumulativeCount_MedicalTest_COVID_19',
-            'casi_testati':
-            'CumulativeCount_Person_COVID_19_Tested',
-            'casi_da_sospetto_diagnostico':
-            'PositiveCasesFromClinicActivity',
-            'casi_da_screening':
-            'PositiveCasesFromSurveyAndTest'
+            'tamponi': 'CumulativeCount_MedicalTest_COVID_19',
+            'casi_testati': 'CumulativeCount_Person_COVID_19_Tested',
+            'casi_da_sospetto_diagnostico': 'PositiveCasesFromClinicActivity',
+            'casi_da_screening': 'PositiveCasesFromSurveyAndTest'
         }
         for col in self.data.columns:
             assert col in it2en
@@ -121,13 +109,13 @@ _STAT_VARS = [('Count_MedicalConditionIncident_COVID_19_'
               ('CumulativeCount_MedicalConditionIncident_COVID_19'
                '_PatientDeceased'),
               ('CumulativeCount_MedicalConditionIncident_'
-               'COVID_19_PositiveCase'),
-              'CumulativeCount_MedicalTest_COVID_19',
+               'COVID_19_PositiveCase'), 'CumulativeCount_MedicalTest_COVID_19',
               'CumulativeCount_Person_COVID_19_Tested']
 
 
 class PcmDpcNational(PcmDpc):
     """Subclass processing national data."""
+
     def __init__(self):
         self.csvpath = ('https://raw.githubusercontent.com/pcm-dpc/COVID-19/'
                         'master/dati-andamento-nazionale/dpc-covid19-ita-and'
@@ -145,6 +133,7 @@ class PcmDpcNational(PcmDpc):
 
 class PcmDpcRegions(PcmDpc):
     """Subclass processing regional data."""
+
     def __init__(self):
         self.csvpath = ('https://raw.githubusercontent.com/pcm-dpc/COVID-19/'
                         'master/dati-regioni/dpc-covid19-ita-regioni.csv')
@@ -174,6 +163,7 @@ class PcmDpcRegions(PcmDpc):
 
 class PcmDpcProvinces(PcmDpc):
     """Subclass of provinces data."""
+
     def __init__(self):
         self.csvpath = ('https://raw.githubusercontent.com/pcm-dpc/COVID-19/'
                         'master/dati-province/dpc-covid19-ita-province.csv')
@@ -188,8 +178,8 @@ class PcmDpcProvinces(PcmDpc):
         province_code = pd.read_csv(province_code_path)[[
             'Province Abbreviation', 'NUTS3'
         ]]
-        province_dict = (province_code.set_index(
-            'Province Abbreviation').to_dict()['NUTS3'])
+        province_dict = (
+            province_code.set_index('Province Abbreviation').to_dict()['NUTS3'])
         # Drop the data whose location is "being defined/updated",
         # i.e. ProvinceCode > 111.
         # Location Sud Sardegna (Province Code = 111) is not defined as a

@@ -24,6 +24,7 @@ _CLIENT = 'app.service.import_service.ImportServiceClient'
 
 
 class ImportServiceTest(unittest.TestCase):
+
     @mock.patch('google.cloud.storage.Client', mock.MagicMock)
     def setUp(self):
         self.importer = import_service.ImportServiceClient(

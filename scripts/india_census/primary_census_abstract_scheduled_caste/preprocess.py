@@ -21,6 +21,7 @@ CENSUS_DATA_COLUMN_START = 5
 
 class CensusPrimaryCensusAbstractScheduleCasteDataLoader(
         CensusPrimaryAbstractDataLoaderBase):
+
     def _download_and_standardize(self):
         dtype = {'State': str, 'District': str}
         self.raw_df = pd.read_excel(self.data_file_path, dtype=dtype)

@@ -51,6 +51,7 @@ class UpdateScheduler:
     Returns:
         Created job as a dict.
     """
+
     def __init__(self,
                  client: scheduler.CloudSchedulerClient,
                  github: github_api.GitHubRepoAPI,
@@ -96,8 +97,8 @@ class UpdateScheduler:
                 traceback.format_exc())
 
         return import_executor.run_and_handle_exception(
-            run_id, self.dashboard, self._schedule_on_commit_helper,
-            commit_sha, run_id)
+            run_id, self.dashboard, self._schedule_on_commit_helper, commit_sha,
+            run_id)
 
     def _schedule_on_commit_helper(
             self, commit_sha: str,
@@ -151,8 +152,8 @@ class UpdateScheduler:
                         self.create_schedule(absolute_name, schedule))
                 except Exception:
                     raise import_executor.ExecutionError(
-                        import_executor.ExecutionResult(
-                            'failed', scheduled, traceback.format_exc()))
+                        import_executor.ExecutionResult('failed', scheduled,
+                                                        traceback.format_exc()))
 
             if self.dashboard:
                 self.dashboard.update_run(
@@ -163,8 +164,7 @@ class UpdateScheduler:
             return import_executor.ExecutionResult('succeeded', scheduled,
                                                    'No issues')
 
-    def create_schedule(self, absolute_import_name: str,
-                        schedule: str) -> Dict:
+    def create_schedule(self, absolute_import_name: str, schedule: str) -> Dict:
         """Schedules periodic updates for an import.
 
         The body field of the app_engine_http_target field is converted from
@@ -241,34 +241,37 @@ class UpdateScheduler:
             'time_zone': 'Etc/UTC',
             'app_engine_http_target': {
                 'http_method':
-                'POST',
+                    'POST',
                 'app_engine_routing': {
                     'service': 'default',
                 },
                 'relative_uri':
-                '/update',
+                    '/update',
                 'headers': {
                     'Content-Type': 'application/json'
                 },
                 'body':
-                json.dumps({
-                    'absolute_import_name': absolute_import_name,
-                    'configs': {
-                        'github_repo_name': self.config.github_repo_name,
-                        'github_repo_owner_username':
-                        self.config.github_repo_owner_username,
-                        'github_auth_username':
-                        self.config.github_auth_username,
-                        'github_auth_access_token':
-                        self.config.github_auth_access_token,
-                        'dashboard_oauth_client_id':
-                        self.config.dashboard_oauth_client_id,
-                        'importer_oauth_client_id':
-                        self.config.importer_oauth_client_id,
-                        'email_account': self.config.email_account,
-                        'email_token': self.config.email_token
-                    }
-                }).encode()
+                    json.dumps({
+                        'absolute_import_name': absolute_import_name,
+                        'configs': {
+                            'github_repo_name':
+                                self.config.github_repo_name,
+                            'github_repo_owner_username':
+                                self.config.github_repo_owner_username,
+                            'github_auth_username':
+                                self.config.github_auth_username,
+                            'github_auth_access_token':
+                                self.config.github_auth_access_token,
+                            'dashboard_oauth_client_id':
+                                self.config.dashboard_oauth_client_id,
+                            'importer_oauth_client_id':
+                                self.config.importer_oauth_client_id,
+                            'email_account':
+                                self.config.email_account,
+                            'email_token':
+                                self.config.email_token
+                        }
+                    }).encode()
             },
             'retry_config': {
                 'retry_count': 2,

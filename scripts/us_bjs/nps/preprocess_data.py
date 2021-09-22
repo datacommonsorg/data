@@ -23,29 +23,29 @@ def total_jurisdiction_columns_helper(df):
     df["PVINM_Temp"] = df["PVINM"].apply(convert_nan_for_calculation)
     df["PVOTHM_Temp"] = df["PVOTHM"].apply(convert_nan_for_calculation)
     df["Female_Total_Temp"] = df[["JURTOTF", "PVINF_Temp", "PVOTHF_Temp"
-                                  ]].sum(axis=1).where(df["PVINCLF"] == 2,
-                                                       df["JURTOTF"])
+                                 ]].sum(axis=1).where(df["PVINCLF"] == 2,
+                                                      df["JURTOTF"])
     df["Male_Total_Temp"] = df[["JURTOTM", "PVINM_Temp", "PVOTHM_Temp"
-                                ]].sum(axis=1).where(df["PVINCLM"] == 2,
-                                                     df["JURTOTM"])
+                               ]].sum(axis=1).where(df["PVINCLM"] == 2,
+                                                    df["JURTOTM"])
     """calculation to include local facility numbers"""
     df["LFF_Temp"] = df["LFF"].apply(convert_nan_for_calculation)
     df["LFM_Temp"] = df["LFM"].apply(convert_nan_for_calculation)
     df["Female_Total_Temp"] = df[["Female_Total_Temp", "LFF_Temp"
-                                  ]].sum(axis=1).where(df["LFINCLF"] == 2,
-                                                       df["Female_Total_Temp"])
+                                 ]].sum(axis=1).where(df["LFINCLF"] == 2,
+                                                      df["Female_Total_Temp"])
     df["Male_Total_Temp"] = df[["Male_Total_Temp", "LFM_Temp"
-                                ]].sum(axis=1).where(df["LFINCLM"] == 2,
-                                                     df["Male_Total_Temp"])
+                               ]].sum(axis=1).where(df["LFINCLM"] == 2,
+                                                    df["Male_Total_Temp"])
     """calculation to include numbers from local facilities solely to ease crowding"""
     df["LFCRSTF_Temp"] = df["LFCRSTF"].apply(convert_nan_for_calculation)
     df["LFCRSTM_Temp"] = df["LFCRSTM"].apply(convert_nan_for_calculation)
     df["Female_Total_Temp"] = df[["Female_Total_Temp", "LFCRSTF_Temp"
-                                  ]].sum(axis=1).where(df["LFCRINCF"] == 2,
-                                                       df["Female_Total_Temp"])
+                                 ]].sum(axis=1).where(df["LFCRINCF"] == 2,
+                                                      df["Female_Total_Temp"])
     df["Male_Total_Temp"] = df[["Male_Total_Temp", "LFCRSTM_Temp"
-                                ]].sum(axis=1).where(df["LFCRINCM"] == 2,
-                                                     df["Male_Total_Temp"])
+                               ]].sum(axis=1).where(df["LFCRINCM"] == 2,
+                                                    df["Male_Total_Temp"])
     """calculation to include federal and other state facility numbers"""
     df["FEDF_Temp"] = df["FEDF"].apply(convert_nan_for_calculation)
     df["OTHSTF_Temp"] = df["OTHSTF"].apply(convert_nan_for_calculation)
@@ -55,8 +55,8 @@ def total_jurisdiction_columns_helper(df):
         "Female_Total_Temp", "FEDF_Temp", "OTHSTF_Temp"
     ]].sum(axis=1).where(df["FACINCLF"] == 2, df["Female_Total_Temp"])
     df["Male_Total_Temp"] = df[["Male_Total_Temp", "FEDM_Temp", "OTHSTM_Temp"
-                                ]].sum(axis=1).where(df["FACINCLM"] == 2,
-                                                     df["Male_Total_Temp"])
+                               ]].sum(axis=1).where(df["FACINCLM"] == 2,
+                                                    df["Male_Total_Temp"])
 
 
 def get_columns(df):
@@ -64,9 +64,8 @@ def get_columns(df):
     total_jurisdiction_columns_helper(df)
     df_out["GeoId"] = df["GeoId"]
     df_out["YEAR"] = df["YEAR"]
-    df_out[
-        "Count_Person_Female_Incarcerated_MeasuredBasedOnJurisdiction"] = df[
-            "Female_Total_Temp"]
+    df_out["Count_Person_Female_Incarcerated_MeasuredBasedOnJurisdiction"] = df[
+        "Female_Total_Temp"]
     df_out[
         "Count_Person_Female_Incarcerated_WhiteAlone_MeasuredBasedOnJurisdiction"] = df[
             "WHITEF"]
@@ -401,8 +400,7 @@ def main(args):
     print('Processing {0}'.format(filename))
     df = pd.read_csv(filename, delimiter='\t')
     processed_df = preprocess_df(df)
-    processed_df.to_csv(filename.replace('.tsv', '_processed.csv'),
-                        index=False)
+    processed_df.to_csv(filename.replace('.tsv', '_processed.csv'), index=False)
     print('Done processing {0}'.format(filename))
 
 

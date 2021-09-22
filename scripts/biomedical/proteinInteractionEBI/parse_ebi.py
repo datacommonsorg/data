@@ -85,6 +85,7 @@ class Node():
             have multiple parent nodes.
         child_list: A list of Node contains the child nodes.
     """
+
     def __init__(self, value):
         self.value = value
         self.parent_list = []
@@ -128,6 +129,7 @@ class TreeBuilder():
     Attributes:
         nodeValueSet: a set to save and return all the node values in the subtree
     """
+
     def __init__(self, id_to_node):
 
         self.node_value_set = set()
@@ -266,8 +268,7 @@ def get_schema_from_text(term, id_to_node, new_source_map, id_to_class_name,
     current_line = 'descriptionUrl: "http://psidev.info/groups/controlled-vocabularies"'
     schema_piece_list.append(current_line)
 
-    return '\n'.join(
-        schema_piece_list), term_map['id'][0], dcid, new_source_map
+    return '\n'.join(schema_piece_list), term_map['id'][0], dcid, new_source_map
 
 
 def write_new_source(new_source_map):
@@ -320,7 +321,8 @@ def main(argv):
     file = file.replace('name: clip\ndef', 'name: clip interaction\ndef')
     file_terms = file.split('\n\n')[1:]
     file_terms = [
-        term_text.split('\n') for term_text in file_terms
+        term_text.split('\n')
+        for term_text in file_terms
         if term_text.startswith('[Term]')
     ]
     # Parsing Steps:

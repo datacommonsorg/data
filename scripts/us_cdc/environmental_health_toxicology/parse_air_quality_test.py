@@ -31,13 +31,13 @@ class TestParseAirQuality(unittest.TestCase):
     """
     Tests the functions in parse_air_quality.py.
     """
+
     def test_clean_air_quality_data(self):
         """
         Tests the clean_air_quality_data function.
         """
         print(module_dir_)
-        test_csv = os.path.join(module_dir_,
-                                'test_data/small_Ozone_County.csv')
+        test_csv = os.path.join(module_dir_, 'test_data/small_Ozone_County.csv')
         output_csv = os.path.join(module_dir_,
                                   'test_data/small_Ozone_County_output.csv')
         clean_air_quality_data(test_csv, output_csv)

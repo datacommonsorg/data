@@ -114,6 +114,7 @@ INDIA_STATES_CENSUS2001_CODES = {
 
 class IndiaStatesMapper:
     """Class for resolving various mappings for Indian states and UTs """
+
     @staticmethod
     def get_state_name_to_iso_code_mapping(state_name):
         """
@@ -127,8 +128,7 @@ class IndiaStatesMapper:
             return INDIA_STATES_ISO_CODES[state_name]
         else:
             raise Exception(
-                "State name is not found in the INDIA_STATES_ISO_CODES mapping"
-            )
+                "State name is not found in the INDIA_STATES_ISO_CODES mapping")
 
     @staticmethod
     def get_state_name_to_census2001_code_mapping(state_name,
