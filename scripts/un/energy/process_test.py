@@ -15,7 +15,6 @@
 Test UN energy data processing
 """
 
-from un.energy import process
 import filecmp
 import os
 import sys
@@ -24,12 +23,11 @@ import unittest
 from absl import app
 
 # Allows the following module imports to work when running as a script
-sys.path.append(
-    os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))
-
-# module_dir_ is the path to where this test is running from.
+# module_dir_ is the path to where this code is running from.
 module_dir_ = os.path.dirname(__file__)
+sys.path.append(os.path.join(module_dir_))
+
+import process
 
 
 class TestUNEnergyProcess(unittest.TestCase):
