@@ -10,137 +10,89 @@ Original file is located at
 import requests
 import pandas as pd
 
-series  = ['SP.POP.AG00.FE.IN', 'SP.POP.AG00.MA.IN', 'SP.POP.AG01.FE.IN',
-           'SP.POP.AG01.MA.IN', 'SP.POP.AG02.FE.IN', 'SP.POP.AG02.MA.IN',
-           'SP.POP.AG03.FE.IN', 'SP.POP.AG03.MA.IN', 'SP.POP.AG04.FE.IN',
-           'SP.POP.AG04.MA.IN', 'SP.POP.AG05.FE.IN', 'SP.POP.AG05.MA.IN',
-           'SP.POP.AG06.FE.IN', 'SP.POP.AG06.MA.IN', 'SP.POP.AG07.FE.IN',
-           'SP.POP.AG07.MA.IN', 'SP.POP.AG08.FE.IN', 'SP.POP.AG08.MA.IN',
-           'SP.POP.AG09.FE.IN', 'SP.POP.AG09.MA.IN', 'SP.POP.AG10.FE.IN',
-           'SP.POP.AG10.MA.IN', 'SP.POP.AG11.FE.IN', 'SP.POP.AG11.MA.IN',
-           'SP.POP.AG12.FE.IN', 'SP.POP.AG12.MA.IN', 'SP.POP.AG13.FE.IN',
-           'SP.POP.AG13.MA.IN', 'SP.POP.AG14.FE.IN', 'SP.POP.AG14.MA.IN',
-           'SP.POP.AG15.FE.IN', 'SP.POP.AG15.MA.IN', 'SP.POP.AG16.FE.IN',
-           'SP.POP.AG16.MA.IN', 'SP.POP.AG17.FE.IN', 'SP.POP.AG17.MA.IN',
-           'SP.POP.AG18.FE.IN', 'SP.POP.AG18.MA.IN', 'SP.POP.AG19.FE.IN',
-           'SP.POP.AG19.MA.IN', 'SP.POP.AG20.FE.IN', 'SP.POP.AG20.MA.IN',
-           'SP.POP.AG21.FE.IN', 'SP.POP.AG21.MA.IN', 'SP.POP.AG22.FE.IN',
-           'SP.POP.AG22.MA.IN', 'SP.POP.AG23.FE.IN', 'SP.POP.AG23.MA.IN',
-           'SP.POP.AG24.FE.IN', 'SP.POP.AG24.MA.IN', 'SP.POP.AG25.FE.IN',
-           'SP.POP.AG25.MA.IN']
-countries = ['ABW', 'AFE', 'AFG', 'AFW', 'AGO', 'ALB', 'AND', 'ARB', 'ARE', 'ARG',
-             'ASM', 'ATG', 'AUS', 'AUT', 'AZE', 'BDI', 'BEL', 'BEN', 'BFA', 'BGD',
-             'BGR', 'BHR', 'BHS', 'BIH', 'BLR', 'BLZ', 'BMU', 'BOL', 'BRA', 'BRB',
-             'BRN', 'BTN', 'BWA', 'CAF', 'CANARM', 'CEB', 'CHE', 'CHI', 'CHL',
-             'CHN', 'CIV', 'CMR', 'COD', 'COG', 'COL', 'COM', 'CPV', 'CRI', 'CSS',
-             'CUB', 'CUW', 'CYM', 'CYP', 'CZE', 'DEU', 'DJI', 'DMA', 'DNK', 'DOM',
-             'DZA', 'EAP', 'EAR', 'EAS', 'ECA', 'ECS', 'ECU', 'EGY', 'EMU', 'ERI',
-             'ESP', 'EST', 'ETH', 'EUU', 'FCS', 'FIN', 'FJI', 'FRA', 'FRO', 'FSM',
-             'GAB', 'GBR', 'GEO', 'GHA', 'GIB', 'GIN', 'GMB', 'GNB', 'GNQ', 'GRC',
-             'GRD', 'GRL', 'GTM', 'GUM', 'GUY', 'HIC', 'HKG', 'HND', 'HPC', 'HRV',
-             'HTI', 'HUN', 'IDN', 'IMN', 'IND', 'INX', 'IRL', 'IRN', 'IRQ', 'ISL',
-             'ISR', 'ITA', 'JAM', 'JOR', 'JPN', 'KAZ', 'KEN', 'KGZ', 'KHM', 'KIR',
-             'KNA', 'KOR', 'KWT', 'LAC', 'LAO', 'LBN', 'LBR', 'LBY', 'LCA', 'LCN',
-             'LDC', 'LIC', 'LIE', 'LKA', 'LMC', 'LMY', 'LSO', 'LTE', 'LTU', 'LUX',
-             'LVA', 'MAC', 'MAF', 'MAR', 'MCO', 'MDA', 'MDG', 'MDV', 'MEA', 'MEX',
-             'MHL', 'MIC', 'MKD', 'MLI', 'MLT', 'MMR', 'MNA', 'MNE', 'MNG', 'MNP',
-             'MOZ', 'MRT', 'MUS', 'MWI', 'MYS', 'NAC', 'NAM', 'NCL', 'NER', 'NGA',
-             'NIC', 'NLD', 'NOR', 'NPL', 'NRU', 'NZL', 'OED', 'OMN', 'OSS', 'PAK',
-             'PAN', 'PER', 'PHL', 'PLW', 'PNG', 'POL', 'PRE', 'PRI', 'PRK', 'PRT',
-             'PRY', 'PSE', 'PSS', 'PST', 'PYF', 'QAT', 'ROU', 'RUS', 'RWA', 'SAS',
-             'SAU', 'SDN', 'SEN', 'SGP', 'SLB', 'SLE', 'SLV', 'SMR', 'SOM', 'SRB',
-             'SSA', 'SSD', 'SSF', 'SST', 'STP', 'SUR', 'SVK', 'SVN', 'SWE', 'SWZ',
-             'SXM', 'SYC', 'SYR', 'TCA', 'TCD', 'TEA', 'TEC', 'TGO', 'THA', 'TJK',
-             'TKM', 'TLA', 'TLS', 'TMN', 'TON', 'TSA', 'TSS', 'TTO', 'TUN', 'TUR',
-             'TUV', 'TZA', 'UGA', 'UKR', 'UMC', 'URY', 'USA', 'UZB', 'VCT', 'VEN',
-             'VGB', 'VIR', 'VNM', 'VUT', 'WLD', 'WSM', 'XKX', 'YEM', 'ZAF', 'ZMB',
-             'ZWE']
+AGES = 26
 
-def get_df(serieses, country_lst):
+series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(AGES)
+           for gender in ['FE', 'MA']]
+
+def get_df(serieses):
     '''
     gets df by iteratively running code for each country + series
     '''
-    print("get_df")
-    responses = []
     df2 = pd.DataFrame
-    i = 0
-    print()
-    for country in country_lst:
-        print(i, end = ', ')
-        i += 1
-        for current_series in serieses:
-            print(country, end = ', ')
-            url = f"https://api.worldbank.org/v2/country/{country}/indicator/{current_series}?"
-            url = url + "format=JSON"
-            response = requests.get(url)
-            response = response.json()
-            responses.append(response)
-
-
     df2 = pd.DataFrame(columns = ['Series Name', 'Series Code', 'Country Code', 'Country',
                                   'Year', 'Value'])
-    for res in responses:
-        for counter in range(len(res[1])):
-            row = {"Series Name" : res[1][counter]['indicator']['value'],
-                "Series Code" : res[1][counter]['indicator']['id'],
-                "Country Code" : res[1][counter]['countryiso3code'],
-                "Country" : res[1][counter]['country']['value'],
-                "Year" : res[1][counter]['date'],
-                'Value' : res[1][counter]['value']
+    current_series = "&".join(serieses)
+    MAX_PER_PAGE = 32767
+    url = f"https://api.worldbank.org/v2/country/all/indicator/{current_series}?"
+    url = url + f"format=JSON&per_page={MAX_PER_PAGE}"
+    print(url)
+
+    response = requests.get(url)
+    response = response.json()
+    for counter in range(len(response[1])):
+        val = response[1][counter]['value']
+        if val is not None:
+            row = {"Series Name" : response[1][counter]['indicator']['value'],
+                "Series Code" : response[1][counter]['indicator']['id'],
+                "Country Code" : response[1][counter]['countryiso3code'],
+                "Country" : response[1][counter]['country']['value'],
+                "Year" : response[1][counter]['date'],
+                'Value' : response[1][counter]['value']
 
                 }
-        df2 = df2.append(row, ignore_index = 1)
+            df2.loc[len(df2)] = row
     return df2
 
-def get_mcf(df_in):
+def get_mcf(series_lst):
     '''
     gets mcf by splitting description and using fstrings
     '''
-    print("get_mcf")
     nodes = []
-    used_series = []
+    #don't  use df; automate
     with open("World_bank_hnp_population.mcf", 'w', encoding = 'utf-8') as file:
         print(end = '')
-
-    for line in range(len(df_in)):
-        if df_in['Series Name'][line] not in used_series:
+        mcf = ''
+        for current_series in series_lst:
+            print('\n'+current_series)
             statvars = ['Node', 'typeOf', 'description', 'populationType',
                       'measuredProperty', 'gender', 'statType', 'age']
             node, age, gender = '', '', ''
-            age = str(int(df_in['Series Name'][line].split(',')[1].split()[-1]))
-            gender = df_in['Series Name'][line].split(',')[-2].strip()
-            gender = gender[0].upper() + gender[1:]
-            node = f'Count_Persons_{age}Years_{gender}'
-
+            age = current_series[9:11]
+            gender = ''
+            if 'MA' in current_series:
+                gender = 'Male'
+            else:
+                gender = 'Female'
+            node = f'Count_Persons_{(int(age))}Years_{gender}'
+            desc = f'Age population, age {age}, {gender.lower()}, interpolated'
             nodes.append(node)
-            values = [node, 'dcs:StatisticalVariable', f'''"{df['Series Name'][line]}"''',
-                    'dcs:Person', 'dcs:count', 'dcs:Female', 'dcs:measuredValue', f'[Years {age}]']
-            mcf = ''
+            values = [node, 'dcs:StatisticalVariable', f'"{desc}"',
+                    'dcs:Person', 'dcs:count', f'dcs:{gender}',
+                    'dcs:measuredValue', f'[Years {age}]']
             req_len = len(statvars)
             for i in range(req_len):
                 mcf = mcf + f'{statvars[i]}: {values[i]}\n'
-                mcf = mcf + '\n'
-            with open("World_bank_hnp_population.mcf", 'a+', encoding = 'utf-8') as file:
-                file.write(mcf)
-                print(mcf)
-            used_series.append(df_in['Series Name'][line])
+            mcf = mcf + '\n'
+
+        file.write(mcf)
+
 
 def get_csv(df_in):
     """Creation of csv according to tmcf:"""
-    print("get_csv")
     df2 = pd.DataFrame(columns = ['Country', 'Year', 'Gender', 'Age', "StatVar", 'Population'])
     for line in range(len(df)):
         gender, age, statvar = '', 0, ''
         age = df_in['Series Name'][line].split(',')[1].split()[-1]
         gender = df_in['Series Name'][line].split(',')[-2].strip()
         gender = gender[0].upper() + gender[1:]
-        statvar = f'Count_Persons_{age}years_{gender}'
-        df_append = ({'Country' : df['Country'][line], 'Year' : df['Year'][line], 'Age' : age,
-              'Gender' : gender, 'StatVar' : statvar, 'Population' : df['Value'][line]})
-        df2.loc[len(df2.index)]=list(df_append.values())
+        statvar = f'Count_Persons_{int(age)}years_{gender}'
+        addto_df2 = [df['Country'][line], df['Year'][line], gender, int(age), statvar,
+                                   df['Value'][line]]
+        df2.loc[len(df2.index)] = addto_df2
     print(df2.head())
     df2.to_csv("WorldBankPopulation.csv")
 
-df = get_df(series, countries)
-get_mcf(df)
+get_mcf(series)
+df = get_df(series)
 get_csv(df)
