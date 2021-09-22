@@ -29,17 +29,17 @@ class SourcesTest(unittest.TestCase):
     def test_name_to_dcid(self):
         SOURCE_COLS_TO_DCID = {
             'Stationary Combustion':
-                'Annual_Emissions_GreenhouseGas_StationaryCombustion',
+                'Annual_Emissions_GreenhouseGas_StationaryCombustion_NonBiogenic',
             'Electricity Generation':
-                'Annual_Emissions_GreenhouseGas_ElectricityGeneration',
+                'Annual_Emissions_GreenhouseGas_ElectricityGeneration_NonBiogenic',
             'Adipic Acid Production':
-                'Annual_Emissions_GreenhouseGas_AdipicAcidProduction',
+                'Annual_Emissions_GreenhouseGas_AdipicAcidProduction_NonBiogenic',
             'HCFC–22 Production from HFC–23 Destruction':
-                'Annual_Emissions_GreenhouseGas_HCFC22ProductionFromHFC23Destruction',
+                'Annual_Emissions_GreenhouseGas_HCFC22ProductionFromHFC23Destruction_NonBiogenic',
             'Petroleum and Natural Gas Systems – Transmission/Compression':
-                'Annual_Emissions_GreenhouseGas_PetroleumAndNaturalGasSystems_TransmissionOrCompression',
+                'Annual_Emissions_GreenhouseGas_PetroleumAndNaturalGasSystems_TransmissionOrCompression_NonBiogenic',
             'Manufacture of Electric Transmission and Distribution Equipment':
-                'Annual_Emissions_GreenhouseGas_ManufactureOfElectricTransmissionAndDistributionEquipment',
+                'Annual_Emissions_GreenhouseGas_ManufactureOfElectricTransmissionAndDistributionEquipment_NonBiogenic',
         }
         for col, expected in SOURCE_COLS_TO_DCID.items():
             self.assertEqual(sources.col_to_sv(col), expected)

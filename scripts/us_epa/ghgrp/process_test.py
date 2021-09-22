@@ -35,7 +35,7 @@ _CROSSWALK_PATH = os.path.join(_RAW_DATA_DIR, 'crosswalks.csv')
 
 class ProcessTest(unittest.TestCase):
 
-    def test_process_direct_emistters(self):
+    def test_process_direct_emitters(self):
         self.maxDiff = None
         crosswalk = cw.Crosswalk(_CROSSWALK_PATH)
         with tempfile.TemporaryDirectory() as tmp_dir:
