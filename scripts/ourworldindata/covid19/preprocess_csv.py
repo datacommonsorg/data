@@ -14,11 +14,13 @@
 
 import csv
 import io
+import os
 import ssl
 import urllib.request
 import sys
 
-sys.path.insert(1, '../../../util')
+module_dir_ = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, os.path.join(module_dir_, '../../../util'))
 from alpha2_to_dcid import COUNTRY_MAP
 
 country_set = set(COUNTRY_MAP.values())
