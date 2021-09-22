@@ -14,220 +14,116 @@ https://docs.google.com/document/d/1NC47jMIpmxweZH-dED3oDRAnEkERsWdJgKU3BVz1c04/
 
 import pandas as pd
 import requests
-import urllib
 
-series = ['SH.SGR.CRSK.ZS', 'SH.UHC.NOP1.CG', 'SH.UHC.NOP1.TO', 
-          'SH.UHC.NOP1.ZG', 'SH.UHC.NOP1.ZS', 'SH.UHC.NOP2.CG', 'SH.UHC.NOP2.TO', 
+series = ['SH.SGR.CRSK.ZS', 'SH.UHC.NOP1.CG', 'SH.UHC.NOP1.TO',
+          'SH.UHC.NOP1.ZG', 'SH.UHC.NOP1.ZS', 'SH.UHC.NOP2.CG', 'SH.UHC.NOP2.TO',
           'SH.UHC.NOP2.ZG', 'SH.UHC.NOP2.ZS', 'SH.UHC.OOPC.10.TO', 'SH.UHC.OOPC.10.ZS',
           'SH.UHC.OOPC.25.TO', 'SH.UHC.OOPC.25.ZS']
 
 def get_df(serieses):
-  df2 = pd.DataFrame(columns = ['Series Name', 'Series Code', 'Country Code', 'Country', 'Year', 'Value'])
-  for series in list(serieses):
-    url = f"https://api.worldbank.org/v2/country/all/indicator/{series}?format=JSON&per_page=17000"
-    r = requests.get(url)
-    r = r.json()
-    for i in range(len(r[1])):
-      d = {"Series Name" : r[1][i]['indicator']['value'], 
-          "Series Code" : r[1][i]['indicator']['id'],
-          "Country Code" : r[1][i]['countryiso3code'], 
-          "Country" : r[1][i]['country']['value'], 
-          "Year" : r[1][i]['date'],
-          'Value' : r[1][i]['value']
-          }
-    
-      df2.loc[len(df2)] = d
-  return df2
+    '''gets df from json webpage'''
+    df2 = pd.DataFrame(columns = ['Series Name', 'Series Code', 'Country Code',
+                                  'Country', 'Year', 'Value'])
+    for current_series in list(serieses):
+        url = "https://api.worldbank.org/v2/country/all/indicator/"
+        url = url + f"{current_series}?format=JSON&per_page=17000"
+        response = requests.get(url)
+        response = response.json()
+        for i in range(len(response[1])):
+            row = {"Series Name" : response[1][i]['indicator']['value'],
+                "Series Code" : response[1][i]['indicator']['id'],
+                "Country Code" : response[1][i]['countryiso3code'],
+                "Country" : response[1][i]['country']['value'],
+                "Year" : response[1][i]['date'],
+                'Value' : response[1][i]['value']
+                }
+
+            df2.loc[len(df2)] = row
+    return df2
 df = get_df(series)
 df.head(len(df))
 
-mcf_string = ['''Node: Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person
-name: Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-description: "Proportion of population spending more than 10% of household consumption or income on out-of-pocket health care expenditure (%)"
-populationType: dcs:Person
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person
-statType: dcs:measuredValue''',
-
-'''Node: Count_Person_SpendingMoreThan25PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person
-name: Count_Person_SpendingMoreThan25PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-description: "Proportion of population spending more than 25% of household consumption or income on out-of-pocket health care expenditure (%)"
-populationType: dcs:Person
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person
-statType: dcs:measuredValue''',
-
-'''Node: Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare
-name: Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare
-typeOf: dcs:StatisticalVariable
-description: "Number of people spending more than 10% of household consumption or income on out-of-pocket health care expenditure"
-populationType: dcs:Person
-measuredProperty: dcs:count
-statType: dcs:measuredValue''',
-
-'''Node: Count_Person_AtRiskCatastrophicExpenditureOnSurgicalCare_AsAFractionOf_Count_Person
-name: Count_Person_AtRiskCatastrophicExpenditureOnSurgicalCare_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-description: "Risk of catastrophic expenditure for surgical care (% of people at risk)"
-populationType: dcs:Person
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person
-statType: dcs:measuredValue
-''',
-
-'''Node: Count_Person_SpendingMoreThan25PercentOfIncomeOnHealthcare
-name: Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-description: "Number of people spending more than 25% of household consumption or income on out-of-pocket health care expenditure"
-populationType: dcs:Person
-measuredProperty: dcs:count
-statType: dcs:measuredValue''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_NP_190_LEVEL_MILLION
-name: "who/FINPROTECTION_IMP_NP_190_LEVEL_MILLION"
-description: "Number of people pushed below the $1.90 ($ 2011 PPP) poverty line by out-of-pocket health care expenditure"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_NP_190_LEVEL_SH
-name: "who/FINPROTECTION_IMP_NP_190_LEVEL_SH"
-description: "Total population  pushed below the $1.90 a day  poverty line by household  health expenditures (%)"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_NP_310_LEVEL_MILLION
-name: "who/FINPROTECTION_IMP_NP_310_LEVEL_MILLION"
-description: "Total population  pushed below the $3.10 a day  poverty line by household  health expenditures (millions)"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_NP_310_LEVEL_SH
-name: "who/FINPROTECTION_IMP_NP_310_LEVEL_SH"
-description: "Total population  pushed below the $3.10 a day  poverty line by household  health expenditures (%)"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_NP190_POP
-name: "who/FINPROTECTION_IMP_NP190_POP"
-description: "Population  pushed below the $1.90 a day  poverty line by household  health expenditures (%)"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_NP310_POP
-name: "who/FINPROTECTION_IMP_NP310_POP"
-description: "Population  pushed below the $3.10 a day  poverty line by household  health expenditures (%)"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_PG_190
-name: "who/FINPROTECTION_IMP_PG_190"
-description: "Increase in poverty gap at $1.90 ($ 2011 PPP) poverty line due to out-of-pocket health care expenditure (% of poverty line)"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_PG_190_STD
-name: "who/FINPROTECTION_IMP_PG_190_STD"
-description: "Increase in poverty gap due to household  health expenditures, expressed as a proportion of the $1.90 a-day poverty line (%)"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_PG_310
-name: "who/FINPROTECTION_IMP_PG_310"
-description: "Increase in poverty gap  due to household  health expenditures at the $3.10a day poverty line, in cents of international dollars"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''',
-
-'''Node: dcid:who/FINPROTECTION_IMP_PG_310_STD
-name: "who/FINPROTECTION_IMP_PG_310_STD"
-description: "Increase in poverty gap due to household  health expenditures, expressed as a proportion of the 3.10 a-day poverty line (%)"
-typeOf: schema:Property
-domainIncludes: dcs:Thing
-rangeIncludes: schema:Number, schema:Text''']
-
-mcf_file = open("worldbank_hnp_healthcareExpenditure.mcf", 'w')
-
-for i in range(len(mcf_string)):
-  mcf_file.write(mcf_string[i] + '\n\n')
-
-print(len(mcf_string))
-mcf_file.close()
-
-def get_var(mcf_str):
-  var_desc_dict = {}
-  for i in mcf_str:
-    l = i.split(': ')
-    var_desc_dict[l[3].split('\n')[0]] = l[2].split('\n')[0].split(':')[-1]
-  return var_desc_dict
-
 var_desc_dict = {
-"Proportion of population spending more than 10% of household consumption or income on out-of-pocket health care expenditure (%)"  :  'Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person',
-"Proportion of population spending more than 25% of household consumption or income on out-of-pocket health care expenditure (%)"  :  'Count_Person_SpendingMoreThan25PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person',
-"Number of people spending more than 10% of household consumption or income on out-of-pocket health care expenditure" : 'Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare',
-"Number of people spending more than 25% of household consumption or income on out-of-pocket health care expenditure" : 'Count_Person_SpendingMoreThan25PercentOfIncomeOnHealthcare',
-"Risk of catastrophic expenditure for surgical care (% of people at risk)" : 'Count_Person_AtRiskCatastrophicExpenditureOnSurgicalCare_AsAFractionOf_Count_Person',
-"Total population  pushed below the $1.90 a day  poverty line by household  health expenditures (millions)"  :  "who/FINPROTECTION_IMP_NP_190_LEVEL_MILLION",
-"Total population  pushed below the $1.90 a day  poverty line by household  health expenditures (%)"  :  "who/FINPROTECTION_IMP_NP_190_LEVEL_SH",
-"Total population  pushed below the $3.10 a day  poverty line by household  health expenditures (millions)"  :  "who/FINPROTECTION_IMP_NP_310_LEVEL_MILLION",
-"Total population  pushed below the $3.10 a day  poverty line by household  health expenditures (%)"  :  "who/FINPROTECTION_IMP_NP_310_LEVEL_SH",
-"Population  pushed below the $1.90 a day  poverty line by household  health expenditures (%)"  :  "who/FINPROTECTION_IMP_NP190_POP",
-"Population  pushed below the $3.10 a day  poverty line by household  health expenditures (%)"  :  "who/FINPROTECTION_IMP_NP310_POP",
-"Increase in poverty gap at $1.90 ($ 2011 PPP) poverty line due to out-of-pocket health care expenditure (USD)"  :  "who/FINPROTECTION_IMP_PG_190",
-"Proportion of population pushed below the $1.90 ($ 2011 PPP) poverty line by out-of-pocket health care expenditure (%)"  :  "who/FINPROTECTION_IMP_PG_190_STD",
-"Increase in poverty gap at $3.10 ($ 2011 PPP) poverty line due to out-of-pocket health care expenditure (USD)"  :  "who/FINPROTECTION_IMP_PG_310",
-"Proportion of population pushed below the $3.10 ($ 2011 PPP) poverty line by out-of-pocket health care expenditure (%)"  :  "who/FINPROTECTION_IMP_PG_310_STD",
-"Proportion of population pushed below the $3.20 ($ 2011 PPP) poverty line by out-of-pocket health care expenditure (%)"  :  "who/FINPROTECTION_IMP_PG_320_STD",
-'Number of people pushed below the $1.90 ($ 2011 PPP) poverty line by out-of-pocket health care expenditure' : 'dcid:who/FINPROTECTION_IMP_NP_190_LEVEL_MILLION',
-'Number of people pushed below the $3.10 ($ 2011 PPP) poverty line by out-of-pocket health care expenditure' : 'dcid:who/FINPROTECTION_IMP_NP_310_LEVEL_MILLION',
-'Increase in poverty gap at $3.20 ($ 2011 PPP) poverty line due to out-of-pocket health care expenditure (USD)' : "who/FINPROTECTION_IMP_PG_320",
-'Number of people pushed below the $3.20 ($ 2011 PPP) poverty line by out-of-pocket health care expenditure' : 'dcid:who/FINPROTECTION_IMP_NP_320_LEVEL_MILLION',
-"Increase in poverty gap at $1.90 ($ 2011 PPP) poverty line due to out-of-pocket health care expenditure (% of poverty line)"  :  "who/FINPROTECTION_IMP_PG_190_AsAfFractionOf_PovertyLine",
-"Increase in poverty gap at $3.20 ($ 2011 PPP) poverty line due to out-of-pocket health care expenditure (% of poverty line)"  :  "who/FINPROTECTION_IMP_PG_320_AsAfFractionOf_PovertyLine",
-'Number of people pushed below the $3.20 ($ 2011 PPP) poverty line by out-of-pocket health care expenditure' : 'dcid:who/FINPROTECTION_IMP_NP_320_LEVEL_MILLION',
+"Proportion of population spending more than 10% of household consumption or income on" +
+"out-of-pocket health care expenditure (%)"  :
+'Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person',
+"Proportion of population spending more than 25% of household consumption or income" +
+" on out-of-pocket health care expenditure (%)"  :
+'Count_Person_SpendingMoreThan25PercentOfIncomeOnHealthcare_AsAFractionOf_Count_Person',
+"Number of people spending more than 10% of household consumption or income on"
++ "out-of-pocket health " +
+"care expenditure" : 'Count_Person_SpendingMoreThan10PercentOfIncomeOnHealthcare',
+"Number of people spending more than 25% of household consumption or income on out-of-pocket " +
+"health care expenditure" : 'Count_Person_SpendingMoreThan25PercentOfIncomeOnHealthcare',
+"Risk of catastrophic expenditure for surgical care (% of people at risk)" :
+'Count_Person_AtRiskCatastrophicExpenditureOnSurgicalCare_AsAFractionOf_Count_Person',
+"Total population  pushed below the $1.90 a day  poverty line by household" +
+" health expenditures (millions)"  :  "who/FINPROTECTION_IMP_NP_190_LEVEL_MILLION",
+"Total population  pushed below the $1.90 a day  poverty line by household" +
+"health expenditures (%)"  :  "who/FINPROTECTION_IMP_NP_190_LEVEL_SH",
+"Total population  pushed below the $3.10 a day  poverty line by household" +
+"health expenditures (millions)"  :  "who/FINPROTECTION_IMP_NP_310_LEVEL_MILLION",
+"Total population  pushed below the $3.10 a day  poverty line by household" +
+"health expenditures (%)"  :  "who/FINPROTECTION_IMP_NP_310_LEVEL_SH",
+"Population  pushed below the $1.90 a day  poverty line by household  health expenditures (%)" :
+"who/FINPROTECTION_IMP_NP190_POP",
+"Population  pushed below the $3.10 a day  poverty line by household  health expenditures (%)" :
+"who/FINPROTECTION_IMP_NP310_POP",
+"Increase in poverty gap at $1.90 ($ 2011 PPP) poverty line due to out-of-pocket health care" +
+"expenditure (USD)"  :  "who/FINPROTECTION_IMP_PG_190",
+"Proportion of population pushed below the $1.90 ($ 2011 PPP) poverty line by" +
+"out-of-pocket health care expenditure (%)"  :  "who/FINPROTECTION_IMP_PG_190_STD",
+"Increase in poverty gap at $3.10 ($ 2011 PPP) poverty line due to out-of-pocket health care" +
+"expenditure (USD)"  :  "who/FINPROTECTION_IMP_PG_310",
+"Proportion of population pushed below the $3.10 ($ 2011 PPP) poverty line by " +
+"out-of-pocket health care expenditure (%)"  :
+"who/FINPROTECTION_IMP_PG_310_STD",
+"Proportion of population pushed below the $3.20 ($ 2011 PPP) poverty line by" +
+" out-of-pocket health care expenditure (%)"  :
+"who/FINPROTECTION_IMP_PG_320_STD",
+'Number of people pushed below the $1.90 ($ 2011 PPP) poverty line by ' +
+'out-of-pocket health care expenditure' : 'dcid:who/FINPROTECTION_IMP_NP_190_LEVEL_MILLION',
+'Number of people pushed below the $3.10 ($ 2011 PPP) poverty line by ' +
+'out-of-pocket health care expenditure' : 'dcid:who/FINPROTECTION_IMP_NP_310_LEVEL_MILLION',
+'Increase in poverty gap at $3.20 ($ 2011 PPP) poverty line due to out-of-pocket health ' +
+'care expenditure (USD)' : "who/FINPROTECTION_IMP_PG_320",
+'Number of people pushed below the $3.20 ($ 2011 PPP) poverty line by out-of-pocket health ' +
+'care expenditure' : 'dcid:who/FINPROTECTION_IMP_NP_320_LEVEL_MILLION',
+"Increase in poverty gap at $1.90 ($ 2011 PPP) poverty line due to out-of-pocket" +
+"health care expenditure (% of poverty line)"  :
+"who/FINPROTECTION_IMP_PG_190_AsAfFractionOf_PovertyLine",
+"Increase in poverty gap at $3.20 ($ 2011 PPP) poverty line due to out-of-pocket" +
+" health care expenditure (% of poverty line)"  :
+"who/FINPROTECTION_IMP_PG_320_AsAfFractionOf_PovertyLine",
+'Number of people pushed below the $3.20 ($ 2011 PPP) poverty line by out-of-pocket health care' +
+'expenditure' : 'dcid:who/FINPROTECTION_IMP_NP_320_LEVEL_MILLION',
 
 }
 
 #slight changes
 def get_csv(input_df):
-    print("get_csv")
+    '''
+    create csv according to tmcf
+    '''
+
     df2 = pd.DataFrame(columns = ['Country', 'Year', 'Unit', "StatVar", 'Value'])
-    for line in range(len(df)):
+    row_count = len(df)
+    for line in range(row_count):
         desc = input_df['Series Name'][line]
         unit = 'Number of people'
         if "%" in desc:
-          unit = '%'
+            unit = '%'
         elif "millions" in desc:
-          unit = "millions"
+            unit = "millions"
 
-        try:
-          d = ({'Country' : input_df['Country'][line], 
-                'Year' : input_df['Year'][line], 'Unit' : unit, 
-                'StatVar' : var_desc_dict[desc], 
-                'Value' : input_df['Value'][line]})
-          
-          df2.loc[len(df2.index)]=list(d.values())
-        except:
-          print(input_df['Series Code'][line])#, " : ", input_df['Series Name'][line])
-          continue
+
+        row = ({'Country' : input_df['Country'][line],
+              'Year' : input_df['Year'][line], 'Unit' : unit,
+              'StatVar' : var_desc_dict[desc],
+              'Value' : input_df['Value'][line]})
+
+        df2.loc[len(df2.index)]=list(row.values())
     print(df2.head(len(df2)))
     df2.to_csv("WorldBankHealthcareExpenditure.csv")
-pd.set_option('display.max_columns', None)
-get_csv(df)
-
-df = get_df(series)
-
-df.head()
-
-get_mcf(df)
 
 get_csv(df)
