@@ -137,7 +137,7 @@ def _generate_quantity_name(match_dict: dict) -> str:
     return f'{value}{quantity}'
 
 
-def _process_constraint_property(prop, value):
+def _process_constraint_property(prop: str, value: str) -> str:
     """Processes constraint property, value and returns a name that can be used
     in dcid generation.
     Args:
