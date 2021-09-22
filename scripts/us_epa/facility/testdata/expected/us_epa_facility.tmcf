@@ -3,7 +3,7 @@ typeOf: dcs:EpaReportingFacility
 dcid: C:FacilityTable->dcid
 epaGhgrpFacilityId: C:FacilityTable->epaGhgrpFacilityId
 epaFrsId: C:FacilityTable->epaFrsId
-eiaPlantCode: C:FacilityTable->eiaPlantCode
+partOf: C:FacilityTable->partOf
 name: C:FacilityTable->name
 address: C:FacilityTable->address
 containedInPlace: C:FacilityTable->containedInPlace
