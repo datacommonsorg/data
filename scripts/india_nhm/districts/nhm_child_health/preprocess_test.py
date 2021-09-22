@@ -19,61 +19,69 @@ from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 cols_to_nodes = {
-    'District': 'District',
-    'DistrictCode': 'DistrictCode',
-    'Date': 'Date',
-    'Total Number of reported live births': 'Count_BirthEvent_LiveBirth',
-    'Total Number of reported Still Births': 'Count_BirthEvent_StillBirth',
+    'District':
+        'District',
+    'DistrictCode':
+        'DistrictCode',
+    'Date':
+        'Date',
+    'Total Number of reported live births':
+        'Count_BirthEvent_LiveBirth',
+    'Total Number of reported Still Births':
+        'Count_BirthEvent_StillBirth',
     '% Total Reported Live Births to Total Deliveries':
-    'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
-    'Number of Infants given BCG': 'Count_Infant_VaccineAdministered_BCG',
+        'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
+    'Number of Infants given BCG':
+        'Count_Infant_VaccineAdministered_BCG',
     'Number of Infants given OPV 0 (Birth Dose)':
-    'Count_Infant_VaccineAdministered_OPV',
+        'Count_Infant_VaccineAdministered_OPV',
     'Number of Infants given DPT1':
-    'Count_Infant_VaccineAdministered_DPTDose1',
+        'Count_Infant_VaccineAdministered_DPTDose1',
     'Number of Infants given DPT2':
-    'Count_Infant_VaccineAdministered_DPTDose2',
+        'Count_Infant_VaccineAdministered_DPTDose2',
     'Number of Infants given DPT3':
-    'Count_Infant_VaccineAdministered_DPTDose3',
-    'Number of Infants given Measles': 'Count_ChildVaccinationEvent_MMR',
+        'Count_Infant_VaccineAdministered_DPTDose3',
+    'Number of Infants given Measles':
+        'Count_ChildVaccinationEvent_MMR',
     'Adverse Events Following Imunisation (Deaths)':
-    'Count_Infant_VaccineSideEffect_Adverse_Deaths',
+        'Count_Infant_VaccineSideEffect_Adverse_Deaths',
     'Adverse Events Following Imunisation (Others)':
-    'Count_Infant_VaccineSideEffect_Adverse_Others',
-    'Total Number of Infant Deaths reported': 'Count_Death_Infant'
+        'Count_Infant_VaccineSideEffect_Adverse_Others',
+    'Total Number of Infant Deaths reported':
+        'Count_Death_Infant'
 }
 
 clean_names = {
     'District':
-    'District',
+        'District',
     'DistrictCode':
-    'lgdCode',
+        'lgdCode',
     'Date':
-    'Date',
+        'Date',
     'Total Number of reported live births':
-    'Total number of reported live births',
+        'Total number of reported live births',
     'Total Number of reported Still Births':
-    'Total number of reported still births',
+        'Total number of reported still births',
     '% Total Reported Live Births to Total Deliveries':
-    'Percent of total reported live births to total deliveries',
+        'Percent of total reported live births to total deliveries',
     'Number of Infants given BCG':
-    'Number of infants given BCG vaccine',
+        'Number of infants given BCG vaccine',
     'Number of Infants given OPV 0 (Birth Dose)':
-    'Number of infants given OPV 0 Vaccine (Birth Dose)',
+        'Number of infants given OPV 0 Vaccine (Birth Dose)',
     'Number of Infants given DPT1':
-    'Number of infants given DPT Vaccine Dose 1',
+        'Number of infants given DPT Vaccine Dose 1',
     'Number of Infants given DPT2':
-    'Number of infants given DPT Vaccine Dose 2',
+        'Number of infants given DPT Vaccine Dose 2',
     'Number of Infants given DPT3':
-    'Number of infants given DPT Vaccine Dose 3',
+        'Number of infants given DPT Vaccine Dose 3',
     'Number of Infants given Measles':
-    'Number of infants given MMR Vaccine',
+        'Number of infants given MMR Vaccine',
     'Adverse Events Following Imunisation (Deaths)':
-    'Adverse events following immunization (Deaths)',
+        'Adverse events following immunization (Deaths)',
     'Adverse Events Following Imunisation (Others)':
-    'Adverse events following immunization (Others)',
+        'Adverse events following immunization (Others)',
     'Total Number of Infant Deaths reported':
-    'Total number of infant deaths reported'
+        'Total number of infant deaths reported'
 }
 
 

@@ -18,31 +18,49 @@ from india_nhm.districts.base.readme_generator import ReadMeGen
 # Mapping dictionary for data columns and StatVars
 # Mutiple keys for some same StatVar since column name is changed in recent datasets
 cols_to_nodes = {
-    'District': 'District',
-    'DistrictCode': 'lgdCode',
-    'Date': 'Date',
-    'IPD (Number)': 'Count_InPatient',
-    'OPD (Number)': 'Count_OutPatient',
-    'OPD (Allopathic)': 'Count_OutPatient',
-    'Number of Major Operations': 'Count_SurgicalProcedure_Major',
-    'Number of Minor Operations': 'Count_SurgicalProcedure_Minor',
+    'District':
+        'District',
+    'DistrictCode':
+        'lgdCode',
+    'Date':
+        'Date',
+    'IPD (Number)':
+        'Count_InPatient',
+    'OPD (Number)':
+        'Count_OutPatient',
+    'OPD (Allopathic)':
+        'Count_OutPatient',
+    'Number of Major Operations':
+        'Count_SurgicalProcedure_Major',
+    'Number of Minor Operations':
+        'Count_SurgicalProcedure_Minor',
     '% Inpatient Deaths to Total IPD':
-    'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
-    'Ayush OPD (Number)': 'Count_OutPatient_Ayush',
+        'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
+    'Ayush OPD (Number)':
+        'Count_OutPatient_Ayush',
 }
 
 clean_names = {
-    'District': 'District',
-    'DistrictCode': 'lgdCode',
-    'Date': 'Date',
-    'IPD (Number)': 'Number of In-Patients',
-    'OPD (Number)': 'Number of Out-Patients',
-    'OPD (Allopathic)': 'Number of Out-Patients',
-    'Number of Major Operations': 'Number of Major Surgeries',
-    'Number of Minor Operations': 'Number of Minor Surgeries',
+    'District':
+        'District',
+    'DistrictCode':
+        'lgdCode',
+    'Date':
+        'Date',
+    'IPD (Number)':
+        'Number of In-Patients',
+    'OPD (Number)':
+        'Number of Out-Patients',
+    'OPD (Allopathic)':
+        'Number of Out-Patients',
+    'Number of Major Operations':
+        'Number of Major Surgeries',
+    'Number of Minor Operations':
+        'Number of Minor Surgeries',
     '% Inpatient Deaths to Total IPD':
-    'Percent of In-patient Deaths to Total In-patients',
-    'Ayush OPD (Number)': 'Number of Out-Patients (AYUSH)',
+        'Percent of In-patient Deaths to Total In-patients',
+    'Ayush OPD (Number)':
+        'Number of Out-Patients (AYUSH)',
 }
 
 if __name__ == '__main__':
@@ -58,10 +76,9 @@ if __name__ == '__main__':
     loader.create_mcf_tmcf()
 
     # Write README file
-    readme_gen = ReadMeGen(
-        dataset_name=dataset_name,
-        dataset_description="General Health Statistics Data",
-        data_level="District level",
-        cols_dict=cols_to_nodes,
-        clean_names=clean_names)
+    readme_gen = ReadMeGen(dataset_name=dataset_name,
+                           dataset_description="General Health Statistics Data",
+                           data_level="District level",
+                           cols_dict=cols_to_nodes,
+                           clean_names=clean_names)
     readme_gen.gen_readme()

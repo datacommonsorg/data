@@ -17,28 +17,36 @@ from india_nhm.states.base.readme_generator import ReadMeGen
 
 # Mapping dictionary for data columns and StatVars
 cols_to_nodes = {
-    'State': 'State',
-    'isoCode': 'isoCode',
-    'Date': 'Date',
-    'Total Number of reported live births': 'Count_BirthEvent_LiveBirth',
-    'Total Number of reported Still Births': 'Count_BirthEvent_StillBirth',
+    'State':
+        'State',
+    'isoCode':
+        'isoCode',
+    'Date':
+        'Date',
+    'Total Number of reported live births':
+        'Count_BirthEvent_LiveBirth',
+    'Total Number of reported Still Births':
+        'Count_BirthEvent_StillBirth',
     '% Total Reported Live Births to Total Deliveries':
-    'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
-    'Number of Infants given BCG': 'Count_Infant_VaccineAdministered_BCG',
+        'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent',
+    'Number of Infants given BCG':
+        'Count_Infant_VaccineAdministered_BCG',
     'Number of Infants given OPV 0 (Birth Dose)':
-    'Count_Infant_VaccineAdministered_OPV',
+        'Count_Infant_VaccineAdministered_OPV',
     'Number of Infants given DPT1':
-    'Count_Infant_VaccineAdministered_DPTDose1',
+        'Count_Infant_VaccineAdministered_DPTDose1',
     'Number of Infants given DPT2':
-    'Count_Infant_VaccineAdministered_DPTDose2',
+        'Count_Infant_VaccineAdministered_DPTDose2',
     'Number of Infants given DPT3':
-    'Count_Infant_VaccineAdministered_DPTDose3',
-    'Number of Infants given Measles': 'Count_ChildVaccinationEvent_MMR',
+        'Count_Infant_VaccineAdministered_DPTDose3',
+    'Number of Infants given Measles':
+        'Count_ChildVaccinationEvent_MMR',
     'Adverse Events Following Imunisation (Deaths)':
-    'Count_Infant_VaccineSideEffect_Adverse_Deaths',
+        'Count_Infant_VaccineSideEffect_Adverse_Deaths',
     'Adverse Events Following Imunisation (Others)':
-    'Count_Infant_VaccineSideEffect_Adverse_Others',
-    'Total Number of Infant Deaths reported': 'Count_Death_Infant'
+        'Count_Infant_VaccineSideEffect_Adverse_Others',
+    'Total Number of Infant Deaths reported':
+        'Count_Death_Infant'
 }
 
 if __name__ == '__main__':
