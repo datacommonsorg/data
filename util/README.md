@@ -31,11 +31,18 @@ To date, all our util libraries cater to writing MCF.
     templating library that helps handle Python string templating. See the file
     docstring for more detail.
 
+-   `statvar_dcid_generator`: This library helps to generate the dcid for
+    statistical variables.
+ 
 ### Testing libraries
 
 #### Testing `mcf_template_filler`
 
 `python3 -m unittest mcf_template_filler_test`
+
+#### Testing `statvar_dcid_generator`
+
+`python3 -m unittest statvar_dcid_generator_test.py`
 
 #### Testing `sharding_writer`
 

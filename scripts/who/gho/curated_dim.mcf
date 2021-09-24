@@ -1,0 +1,1073 @@
+Node: dcid:archiveDate
+name: "archiveDate"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Date
+
+Node: dcid:AlcoholicBeverageTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "AlcoholicBeverageTypeEnum"
+
+Node: dcid:alcoholicBeverageType
+name: "Alcoholic Beverage Type"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:Beer
+name: "Beer"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:WHO/OtherAlcoholicBeverages
+name: "WHO/OtherAlcoholicBeverages"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:Spirits
+name: "Spirits"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:WHO/AllTypesAlcohol
+name: "WHO/AllTypesAlcohol"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:Wine
+name: "Wine"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:500mlsMostPopularBeer
+name: "500mlsMostPopularBeer"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:750mlsMostPopularImportedSpirits
+name: "750mlsMostPopularImportedSpirits"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:750mlsMostPopularLocalSpirits
+name: "750mlsMostPopularLocalSpirits"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:750mlStableWine
+name: "750mlStableWine"
+typeOf: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:WHO_EducationalAttainmentEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "WHO_EducationalAttainmentEnum"
+
+Node: dcid:Primary
+name: "Primary"
+typeOf: dcs:WHO_EducationalAttainmentEnum
+
+Node: dcid:SecondaryOrHigher
+name: "SecondaryOrHigher"
+typeOf: dcs:USC_EducationalAttainmentEnum
+
+Node: dcid:ShortCycleTertiaryEducation
+name: "ShortCycleTertiaryEducation"
+typeOf: dcs:USC_EducationalAttainmentEnum
+
+Node: dcid:AlcoholUseAndAlcoholUseDisorders
+name: "AlcoholUseAndAlcoholUseDisorders"
+typeOf: dcs:SubstanceUseDisorderEnum
+
+Node: dcid:AlcoholUseDisorders
+name: "AlcoholUseDisorders"
+typeOf: dcs:SubstanceUseDisorderEnum
+
+Node: dcid:AlcoholAndDrugUseDisorders
+name: "AlcoholAndDrugUseDisorders"
+typeOf: dcs:SubstanceUseDisorderEnum
+
+Node: dcid:DrugUseAndDrugUseDisorders
+name: "DrugUseAndDrugUseDisorders"
+typeOf: dcs:SubstanceUseDisorderEnum
+
+Node: dcid:DrugUseDisorders
+name: "DrugUseDisorders"
+typeOf: dcs:SubstanceUseDisorderEnum
+
+Node: dcid:AlcoholProductionMadeIllegal
+name: "AlcoholProductionMadeIllegal"
+typeOf: dcs:LegislationTypeEnum
+
+Node: dcid:AlcoholSalesMadeIllegal
+name: "AlcoholSalesMadeIllegal"
+typeOf: dcs:LegislationTypeEnum
+
+Node: dcid:CauseOfDeathAndDisabilityEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "CauseOfDeathAndDisabilityEnum"
+
+Node: dcid:causeOfDeathAndDisability
+name: "causeOfDeathAndDisability"
+typeOf: schema:Property
+domainIncludes: dcs:Person
+rangeIncludes: dcs:CauseOfDeathAndDisabilityEnum, dcs:ICD10_113CausesOfDeath, dcs:HealthOutcomeEnum
+
+Node: dcid:Prematurity
+name: "Prematurity"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:BirthAsphyxiaAndBirthTrauma
+name: "BirthAsphyxiaAndBirthTrauma"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:SepsisAndOtherInfectiousConditionsOfTheNewborn
+name: "SepsisAndOtherInfectiousConditionsOfTheNewborn"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherCommunicablePerinatalAndNutritionalConditions
+name: "WHO/OtherCommunicablePerinatalAndNutritionalConditions"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CongenitalAnomalies
+name: "CongenitalAnomalies"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherNoncommunicableDiseases
+name: "WHO/OtherNoncommunicableDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MeningitisOrEncephalitis
+name: "Meningitis/Encephalitis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Malaria
+name: "Malaria"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:AcuteLowerRespiratoryInfections
+name: "AcuteLowerRespiratoryInfections"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Injuries
+name: "Injuries"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:HivOrAids
+name: "HivOrAids"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:DiarrhoealDiseases
+name: "DiarrhoealDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Pertussis
+name: "Pertussis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Tetanus
+name: "Tetanus"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Measles
+name: "Measles"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Asthma
+name: "Asthma"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherCancers
+name: "WHO/OtherCancers"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:EatingDisorders
+name: "EatingDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ChagasDisease
+name: "ChagasDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:FireHeatAndHotSubstances
+name: "FireHeatAndHotSubstances"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:BipolarDisorder
+name: "BipolarDisorder"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherHearingLoss
+name: "WHO/OtherHearingLoss"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:KidneyDiseases
+name: "KidneyDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ProteinEnergyMalnutrition
+name: "ProteinEnergyMalnutrition"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Drowning
+name: "Drowning"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:LymphaticFilariasis
+name: "LymphaticFilariasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:InterpersonalViolence
+name: "InterpersonalViolence"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Migraine
+name: "Migraine"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Epilepsy
+name: "Epilepsy"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:RheumatoidArthritis
+name: "RheumatoidArthritis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:SexuallyTransmittedDiseases(Stds)ExcludingHiv
+name: "SexuallyTransmittedDiseases(Stds)ExcludingHiv"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Tuberculosis
+name: "Tuberculosis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:TracheaBronchusLungCancers
+name: "TracheaBronchusLungCancers"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CardiovascularDiseases
+name: "CardiovascularDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:RheumaticHeartDisease
+name: "RheumaticHeartDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:UpperRespiratoryInfectionsAndOtitis
+name: "UpperRespiratoryInfectionsAndOtitis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:PervasiveDevelopmentalDisorders
+name: "PervasiveDevelopmentalDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Schizophrenia
+name: "Schizophrenia"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:HypertensiveHeartDisease
+name: "HypertensiveHeartDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ParkinsonsDisease
+name: "ParkinsonsDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:IdiopathicIntellectualDisability
+name: "IdiopathicIntellectualDisability"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Falls
+name: "Falls"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:NoncommunicableDiseases
+name: "NoncommunicableDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:IschaemicHeartDisease
+name: "IschaemicHeartDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MultipleSclerosis
+name: "MultipleSclerosis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:SenseOrganDiseases
+name: "SenseOrganDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Dengue
+name: "Dengue"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:DrugUseDisorders
+name: "DrugUseDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:NeonatalConditions
+name: "NeonatalConditions"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:RoadInjury
+name: "RoadInjury"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Stroke
+name: "Stroke"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ChildhoodBehaviouralDisorders
+name: "ChildhoodBehaviouralDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Poisonings
+name: "Poisonings"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Schistosomiasis
+name: "Schistosomiasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Trachoma
+name: "Trachoma"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherCirculatoryDiseases
+name: "OtherCirculatoryDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:InfectiousParasiticNeonatalAndNutritional
+name: "InfectiousParasiticNeonatalAndNutritional"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:SelfHarm
+name: "SelfHarm"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:NonMigraineHeadache
+name: "NonMigraineHeadache"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherMentalBehaviouralAndNeurologicalConditions
+name: "WHO/OtherMentalBehaviouralAndNeurologicalConditions"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:AlzheimersDiseaseAndOtherDementias
+name: "AlzheimersDiseaseAndOtherDementias"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Onchocerciasis
+name: "Onchocerciasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:AnxietyDisorders
+name: "AnxietyDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:UnipolarDepressiveDisorders
+name: "UnipolarDepressiveDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:LowerRespiratoryInfections
+name: "LowerRespiratoryInfections"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ChronicObstructivePulmonaryDisease
+name: "ChronicObstructivePulmonaryDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:BackAndNeckPain
+name: "BackAndNeckPain"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherUnintentionalInjuries
+name: "WHO/OtherUnintentionalInjuries"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:AcuteHepatitisB
+name: "AcuteHepatitisB"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Osteoarthritis
+name: "Osteoarthritis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherMusculoskeletalDisorders
+name: "WHO/OtherMusculoskeletalDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Leishmaniasis
+name: "Leishmaniasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:AlcoholUseDisorders
+name: "AlcoholUseDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Cataracts
+name: "Cataracts"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:IntestinalNematodeInfections
+name: "IntestinalNematodeInfections"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherInfectiousDiseases
+name: "WHO/OtherInfectiousDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/AllCauses
+name: "WHO/AllCauses"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CommunicableAndOtherGroupIDiseases
+name: "CommunicableAndOtherGroupIDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:InfectiousAndParasiticDiseases
+name: "Infectious And Parasitic Diseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:StdsExcludingHiv
+name: "StdsExcludingHiv"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Syphilis
+name: "Syphilis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CollectiveViolenceAndLegalIntervention
+name: "CollectiveViolenceAndLegalIntervention"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ExposureToForcesOfNature
+name: "ExposureToForcesOfNature"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:IntentionalInjuries
+name: "IntentionalInjuries"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Edentulism
+name: "Edentulism"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:UnintentionalInjuries
+name: "UnintentionalInjuries"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CongenitalHeartAnomalies
+name: "CongenitalHeartAnomalies"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherChromosomalAnomalies
+name: "WHO/OtherChromosomalAnomalies"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherCongenitalAnomalies
+name: "WHO/OtherCongenitalAnomalies"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:OralConditions
+name: "OralConditions"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:DentalCaries
+name: "DentalCaries"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:PeriodontalDisease
+name: "PeriodontalDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:NeuralTubeDefects
+name: "NeuralTubeDefects"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CleftLipAndCleftPalate
+name: "CleftLipAndCleftPalate"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:DownsSyndrome
+name: "DownsSyndrome"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:GynecologicalDiseases
+name: "GynecologicalDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:SkinDiseases
+name: "SkinDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MusculoskeletalDiseases
+name: "MusculoskeletalDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Gout
+name: "Gout"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:GenitourinaryDiseases
+name: "GenitourinaryDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:HyperplasiaOfProstate
+name: "HyperplasiaOfProstate"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Urolithiasis
+name: "Urolithiasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherGenitourinaryDiseases
+name: "OtherGenitourinaryDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Infertility
+name: "Infertility"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherRespiratoryDiseases
+name: "OtherRespiratoryDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:DigestiveDiseases
+name: "DigestiveDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:PepticUlcerDisease
+name: "PepticUlcerDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CirrhosisOfTheLiver
+name: "CirrhosisOfTheLiver"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Appendicitis
+name: "Appendicitis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherDigestiveDiseases
+name: "OtherDigestiveDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CardiomyopathyMyocarditisEndocarditis
+name: "CardiomyopathyMyocarditisEndocarditis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ChronicRespiratoryDiseases
+name: "ChronicRespiratoryDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherSenseOrganDisorders
+name: "OtherSenseOrganDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Glaucoma
+name: "Glaucoma"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:RefractiveErrors
+name: "RefractiveErrors"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MacularDegeneration
+name: "MacularDegeneration"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherVisionLoss
+name: "OtherVisionLoss"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherNeurologicalConditions
+name: "WHO/OtherNeurologicalConditions"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherMentalAndBehaviouralDisorders
+name: "WHO/OtherMentalAndBehaviouralDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:NeurologicalConditions
+name: "NeurologicalConditions"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherMalignantNeoplasms
+name: "WHO/OtherMalignantNeoplasms"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherNeoplasms
+name: "WHO/OtherNeoplasms"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:DiabetesMellitus
+name: "DiabetesMellitus"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:EndocrineBloodImmuneDisorders
+name: "EndocrineBloodImmuneDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MentalAndBehavioralDisorders
+name: "MentalAndBehavioralDisorders"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CorpusUteriCancer
+name: "CorpusUteriCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:OvaryCancer
+name: "OvaryCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ProstateCancer
+name: "ProstateCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:BladderCancer
+name: "BladderCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:LymphomasMultipleMyeloma
+name: "LymphomasMultiple Myeloma"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Leukaemia
+name: "Leukaemia"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:LiverCancer
+name: "Liver Cancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:PancreasCancer
+name: "PancreasCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MelanomaAndOtherSkinCancers
+name: "MelanomaAndOtherSkinCancers"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:BreastCancer
+name: "BreastCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:CervixUteriCancer
+name: "CervixUteriCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MalignantNeoplasms
+name: "MalignantNeoplasms"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MouthAndOropharynxCancers
+name: "MouthAndOropharynxCancers"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:OesophagusCancer
+name: "OesophagusCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:StomachCancer
+name: "StomachCancer"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ColonAndRectumCancers
+name: "ColonAndRectumCancers"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:NutritionalDeficiencies
+name: "NutritionalDeficiencies"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:IodineDeficiency
+name: "IodineDeficiency"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:VitaminADeficiency
+name: "VitaminADeficiency"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:IronDeficiencyAnaemia
+name: "IronDeficiencyAnaemia"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherNutritionalDeficiencies
+name: "WHO/OtherNutritionalDeficiencies"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:MaternalConditions
+name: "MaternalConditions"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:PretermBirthComplications
+name: "PretermBirthComplications"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:NeonatalSepsisAndInfections
+name: "NeonatalSepsisAndInfections"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherNeonatalConditions
+name: "WHO/OtherNeonatalConditions"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:HookwormDisease
+name: "HookwormDisease"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:RespiratoryInfections
+name: "RespiratoryInfections"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:UpperRespiratoryInfections
+name: "UpperRespiratoryInfections"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:OtitisMedia
+name: "OtitisMedia"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Rabies
+name: "Rabies"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Ascariasis
+name: "Ascariasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Trichuriasis
+name: "Trichuriasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Leprosy
+name: "Leprosy"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Encephalitis
+name: "Encephalitis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:AcuteHepatitisC
+name: "AcuteHepatitisC"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ParasiticAndVectorDiseases
+name: "ParasiticAndVectorDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Trypanosomiasis
+name: "Trypanosomiasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:ChildhoodClusterDiseases
+name: "ChildhoodClusterDiseases"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WhoopingCough
+name: "WhoopingCough"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Diphtheria
+name: "Diphtheria"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Meningitis
+name: "Meningitis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Chlamydia
+name: "Chlamydia"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Gonorrhoea
+name: "Gonorrhoea"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:Trichomoniasis
+name: "Trichomoniasis"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:WHO/OtherStds
+name: "WHO/OtherStds"
+typeOf: dcs:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:substanceUseDisorderNGO
+name: "substanceUseDisorderNGO"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Text
+
+Node: dcid:Cannabis
+name: "Cannabis"
+typeOf: dcs:SubstanceTypeEnum
+
+Node: dcid:Drugs
+name: "Drugs"
+typeOf: dcs:SubstanceTypeEnum
+
+Node: dcid:PrescriptionDrugs
+name: "PrescriptionDrugs"
+typeOf: dcs:SubstanceTypeEnum
+
+Node: dcid:advertisedProduct
+name: "advertisedProduct"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: dcs:AlcoholicBeverageTypeEnum
+
+Node: dcid:TreatmentLocationTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "TreatmentLocationTypeEnum"
+
+Node: dcid:treatmentLocationType
+name: "treatmentLocationType"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:WHO/OtherAreas
+name: "WHO/OtherAreas"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:WHO/OtherMajorCities
+name: "WHO/OtherMajorCities"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:CapitalCity
+name: "CapitalCity"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:QuintileEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "QuintileEnum"
+
+Node: dcid:wealthQuintile
+name: "wealthQuintile"
+typeOf: schema:Property
+domainIncludes: dcs:Person
+rangeIncludes: dcs:QuintileEnum
+
+Node: dcid:Quintile1
+name: "Quintile1"
+typeOf: dcs:QuintileEnum
+
+Node: dcid:Quintile2
+name: "Quintile2"
+typeOf: dcs:QuintileEnum
+
+Node: dcid:Quintile3
+name: "Quintile3"
+typeOf: dcs:QuintileEnum
+
+Node: dcid:Quintile4
+name: "Quintile4"
+typeOf: dcs:QuintileEnum
+
+Node: dcid:Quintile5
+name: "Quintile5"
+typeOf: dcs:QuintileEnum
+
+Node: dcid:sponsorProductType
+name: "sponsorProductType"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: dcs:alcoholicBeverageTypeEnum
+
+Node: dcid:CommunityPharmacies
+name: "CommunityPharmacies"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:PrimaryHealthCare
+name: "PrimaryHealthCare"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:Prisons
+name: "Prisons"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:PrivatePractice
+name: "PrivatePractice"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:PrivateTreatmentCenters
+name: "PrivateTreatmentCenters"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:PublicDrugTreatmentCenters
+name: "PublicDrugTreatmentCenters"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:PublicGeneralHospitals
+name: "PublicGeneralHospitals"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:PublicMentalHealthHospitals
+name: "PublicMentalHealthHospitals"
+typeOf: dcs:TreatmentLocationTypeEnum
+
+Node: dcid:drugUsed
+name: "drugUsed"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: dcs:Drug
+
+Node: dcid:Acamprosate
+name: "Acamprosate"
+typeOf: dcs:Drug
+
+Node: dcid:AlcoholInfusion
+name: "AlcoholInfusion"
+typeOf: dcs:Drug
+
+Node: dcid:AntipsychoticsOrNeuroleptics
+name: "AntipsychoticsOrNeuroleptics"
+typeOf: dcs:Drug
+
+Node: dcid:Benzodiazepines
+name: "Benzodiazepines"
+typeOf: dcs:Drug
+
+Node: dcid:Buprenorphine
+name: "Buprenorphine"
+typeOf: dcs:Drug
+
+Node: dcid:BuprenorphineOrNaloxone
+name: "BuprenorphineOrNaloxone"
+typeOf: dcs:Drug
+
+Node: dcid:NaltrexoneInTablets
+name: "NaltrexoneInTablets"
+typeOf: dcs:Drug
+
+Node: dcid:NewAntipsychotics
+name: "NewAntipsychotics"
+typeOf: dcs:Drug
+
+Node: dcid:NitrousOxide
+name: "NitrousOxide"
+typeOf: dcs:Drug
+
+Node: dcid:Tiagabine
+name: "Tiagabine"
+typeOf: dcs:Drug
+
+Node: dcid:Lofexidine
+name: "Lofexidine"
+typeOf: dcs:Drug
+
+Node: dcid:Methadone
+name: "Methadone"
+typeOf: dcs:Drug
+
+Node: dcid:MethadoneInLiquidFormulation
+name: "MethadoneInLiquidFormulation"
+typeOf: dcs:Drug
+
+Node: dcid:MethadoneInTablets
+name: "MethadoneInTablets"
+typeOf: dcs:Drug
+
+Node: dcid:Naloxone
+name: "Naloxone"
+typeOf: dcs:Drug
+
+Node: dcid:Naltrexone
+name: "Naltrexone"
+typeOf: dcs:Drug
+
+Node: dcid:Diazepam
+name: "Diazepam"
+typeOf: dcs:Drug
+
+Node: dcid:Disulfiram
+name: "Disulfiram"
+typeOf: dcs:Drug
+
+Node: dcid:Flumazenil
+name: "Flumazenil"
+typeOf: dcs:Drug
+
+Node: dcid:FlumazenilInfusion
+name: "FlumazenilInfusion"
+typeOf: dcs:Drug
+
+Node: dcid:Gabapentin
+name: "Gabapentin"
+typeOf: dcs:Drug
+
+Node: dcid:GradualBenzodiazepineReduction
+name: "GradualBenzodiazepineReduction"
+typeOf: dcs:Drug
+
+Node: dcid:BuprenorphineOrNaloxoneInSublingualFilm
+name: "BuprenorphineOrNaloxoneInSublingualFilm"
+typeOf: dcs:Drug
+
+Node: dcid:BuprenorphineOrNaloxoneInSublingualTablets
+name: "BuprenorphineOrNaloxoneInSublingualTablets"
+typeOf: dcs:Drug
+
+Node: dcid:BuprenorphineInSublingualTablets
+name: "BuprenorphineInSublingualTablets"
+typeOf: dcs:Drug
+
+Node: dcid:Carbamazepine
+name: "Carbamazepine"
+typeOf: dcs:Drug
+
+Node: dcid:Chlorpromazine
+name: "Chlorpromazine"
+typeOf: dcs:Drug
+
+Node: dcid:Clonidine
+name: "Clonidine"
+typeOf: dcs:Drug
+
+Node: dcid:wealthDecile
+name: "wealthDecile"
+typeOf: schema:Property
+domainIncludes: dcs:Person
+rangeIncludes: dcs:DecileEnum
+
+Node: dcid:DecileEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "DecileEnum"
+
+Node: dcid:Decile1
+name: "Decile1"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile2
+name: "Decile2"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile3
+name: "Decile3"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile4
+name: "Decile4"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile5
+name: "Decile5"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile6
+name: "Decile6"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile7
+name: "Decile7"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile8
+name: "Decile8"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile9
+name: "Decile9"
+typeOf: dcs:DecileEnum
+
+Node: dcid:Decile10
+name: "Decile10"
+typeOf: dcs:DecileEnum
