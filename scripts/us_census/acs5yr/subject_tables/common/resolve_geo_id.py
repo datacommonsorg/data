@@ -22,30 +22,30 @@ Reference:
 
 # Map for summary levels with expected geo prefix and FIPS code length
 _SUMMARY_LEVELS_FIPS_CODE = {
-    # State-level
-    '040': ('geoId/', 2),
-    # County-level
-    '050': ('geoId/', 5),
-    # State-County-County Subdivision
-    '060': ('geoId/', 10),
-    # Census tract
-    '140': ('geoId/', 11),
-    # Block group
-    '150': ('geoId', 12),
-    # City (places)
-    '160': ('geoId/', 7),
-    # Congressional district (111th)
-    '500': ('geoId', 4),
-    # 5-Digit ZIP code Tabulation Area
-    '860': ('zip/', 5),
-    # State-School District (Elementary)/Remainder
-    '950': ('geoId/sch', 7),
-    # State-School District (Secondary)/Remainder
-    '960': ('geoId/sch', 7),
-    # State-School District (Unified)/Remainder
-    '970': ('geoId/sch', 7),
-    # Country-level
-    '010': ('country/USA', 1)
+    # State-level (fips_code length=2)
+    '040': 'geoId/',
+    # County-level (fips_code length=5)
+    '050': 'geoId/',
+    # State-County-County Subdivision (fips_code length=10)
+    '060': 'geoId/',
+    # Census tract (fips_code length=11)
+    '140': 'geoId/',
+    # Block group (fips_code length=12)
+    '150': 'geoId',
+    # City/ Places (fips_code length=7)
+    '160': 'geoId/',
+    # Congressional district [111th] (fips_code length=4)
+    '500': 'geoId',
+    # 5-Digit ZIP code Tabulation Area (fips_code length=5)
+    '860': 'zip/',
+    # State-School District [Elementary](fips_code length=7)
+    '950': 'geoId/sch',
+    # State-School District [Secondary](fips_code length=7)
+    '960': 'geoId/sch',
+    # State-School District [Unified](fips_code length=7)
+    '970': 'geoId/sch',
+    # Country-level, fips_code is expected to be empty string(fips_code length=1)
+    '010': 'country/USA'
 }
 
 
@@ -60,7 +60,7 @@ def convert_to_place_dcid(row):
 
     ## Based on summary level and FIPS code, genereate geoId
     if summary_level in _SUMMARY_LEVELS_FIPS_CODE:
-        return _SUMMARY_LEVELS_FIPS_CODE[summary_level][0] + fips_code
+        return _SUMMARY_LEVELS_FIPS_CODE[summary_level] + fips_code
     else:
         ## if not an interesting summary level
         return ''

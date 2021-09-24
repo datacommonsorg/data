@@ -1,10 +1,10 @@
 """Tests for resolve_geo_id."""
 
 import unittest
-from resolve_geo_id import convert_to_place_dcid
+from .resolve_geo_id import convert_to_place_dcid
 
 
-class ResolveGeoIdForTheUSTest(unittest.TestCase):
+class ResolveCensusGeoIdTest(unittest.TestCase):
 
     def test_county_geoId(self):
         # Sussex County, Delaware (0500000US10005)
@@ -35,6 +35,10 @@ class ResolveGeoIdForTheUSTest(unittest.TestCase):
     def test_zip_code(self):
         # 65203
         self.assertEqual(convert_to_place_dcid("86000US65203"), 'zip/65203')
+
+    def test_country(self):
+        # USA
+        self.assertEqual(convert_to_place_dcid("0100000US"), 'country/USA')
 
 
 if __name__ == '__main__':
