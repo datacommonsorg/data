@@ -4,7 +4,7 @@ import csv
 import json
 import unittest
 
-from generate_col_map import generate_stat_var_map, process_zip_file
+from .generate_col_map import generate_stat_var_map, process_zip_file
 
 
 class GenerateColMapTest(unittest.TestCase):

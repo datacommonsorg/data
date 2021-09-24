@@ -36,7 +36,7 @@ _MANDATORY_PROPS = ['measuredProperty', 'populationType', 'statType']
 _JSON_KEYS = [
     'populationType', 'measurement', 'pvs', 'inferredSpec',
     'enumSpecializations', 'pvs', 'universePVs', 'ignoreColumns',
-    'overwrite_dcids', 'preprocess', 'find_and_replace'
+    'overwrite_dcids', 'preprocess'
 ]
 
 
@@ -153,9 +153,14 @@ class GenerateColMapBase:
         """
         if spec has find_and_replace defined, this function updates column name
         """
-        if 'preprocess' in self.features:
-            if 'find_and_replace' in self.features['preprocess']:
-                for col_idx, column in enumerate(df_column_list):
+        if 'find_and_replace' in self.features['preprocess']:
+            for col_idx, column in enumerate(df_column_list):
+                # replace entire column name
+                if column in self.features['preprocess']['find_and_replace']:
+                    df_column_list[col_idx] = self.features['preprocess'][
+                        'find_and_replace'][column]
+                # replace a token in the column name
+                else:
                     part_list = column.split(self.delimiter)
                     for idx, part in enumerate(part_list):
                         if part in self.features['preprocess'][
@@ -197,10 +202,8 @@ class GenerateColMapBase:
                     self.column_map[col] = self._column_to_statvar(col)
                 except Exception as e:
                     exec_type, exec_obj, exec_tb = sys.exc_info()
-                    logger.error(
-                        f"""Exeception: {exec_type} occured in
-                        generate_col_map.py at line {exec_tb.tb_lineno}"""
-                    )
+                    logger.error(f"""Exeception: {exec_type} occured in
+                        generate_col_map.py at line {exec_tb.tb_lineno}""")
             continue
         # Drop stat_vars based on enumSpecializations mentioned in spec
         self._keep_only_enum_specializations()
@@ -253,8 +256,7 @@ class GenerateColMapBase:
                             logger.warning(
                                 f"""For column: {column} | Property {p} has an
                                 existing value {stat_var[p]} which is modified
-                                to value {p}"""
-                            )
+                                to value {p}""")
                         stat_var[p] = v
 
         ## add Universe PVs based on the populationType of StatVar
@@ -310,8 +312,7 @@ class GenerateColMapBase:
             except ValueError:
                 logger.error(
                     f"""One or more mandatory properties of the stat_var is missing.
-                    \nDump of the stat_var:: {stat_var}"""
-                )
+                    \nDump of the stat_var:: {stat_var}""")
 
     def _keep_only_enum_specializations(self):
         """
@@ -344,8 +345,7 @@ class GenerateColMapBase:
                             logger.info(
                                 f"""Removing the base class column: {col_name}
                                 from the column map based on enumSpecialization
-                                of the spec"""
-                            )
+                                of the spec""")
                         except KeyError:
                             logger.info(
                                 f"""Attempted removal of base class column:
