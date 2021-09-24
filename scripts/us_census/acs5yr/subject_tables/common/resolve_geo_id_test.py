@@ -3,40 +3,36 @@
 import unittest
 from .resolve_geo_id import convert_to_place_dcid
 
+_TEST_GEOIDS = {
+    '0100000US': 'country/USA',  # Country (US)
+    '0400000US06': 'geoId/06',  # California State
+    '0400000US36': 'geoId/36',  # New York State
+    '0500000US10005': 'geoId/10005',  # Sussex County, Delaware (0500000US10005)
+    '0500000US22069':
+        'geoId/22069',  # Natchitoches Parish, Louisiana (0500000US22069)
+    '1400000US06007000104':
+        'geoId/06007000104',  # Census Tract 1.04, Butte County, California
+    '1500000USC17020': 'geoId/C17020',  # Chico, CA Metro Area
+    '1600000US5103000':
+        'geoId/5103000',  # Arlington CDP, Virginia(1600000US5103000)
+    '5000000US0601':
+        'geoId/0601',  # Congressional District 1 (113th Congress), California
+    '86000US65203': 'zip/65203',  # Zip Code (ZCTA)
+    '9500000US0602250':
+        'geoId/sch0602250',  # Alta-Dutch Flat Union Elementary School District
+    '9600000US0605940':
+        'geoId/sch0605940',  # Bret Harte Union High School District
+    '9700000US5103000':
+        'geoId/sch5103000',  # Portsmouth City Public Schools, Virginia (9700000US5103000)
+    '400C100US22069': ''  # Dalton, GA Urbanized Area (2010)[400C100US22069]
+}
+
 
 class ResolveCensusGeoIdTest(unittest.TestCase):
 
-    def test_county_geoId(self):
-        # Sussex County, Delaware (0500000US10005)
-        self.assertEqual(convert_to_place_dcid("0500000US10005"), 'geoId/10005')
-        # Natchitoches Parish, Louisiana (0500000US22069)
-        self.assertEqual(convert_to_place_dcid("0500000US22069"), 'geoId/22069')
-
-    def test_state_geoId(self):
-        # California
-        self.assertEqual(convert_to_place_dcid("0400000US06"), 'geoId/06')
-
-    def test_city_geoId(self):
-        # Arlington CDP, Virginia(1600000US5103000)
-        self.assertEqual(convert_to_place_dcid("1600000US5103000"),
-                         'geoId/5103000')
-
-    def test_school_district_geoId(self):
-        # Portsmouth City Public Schools, Virginia (9700000US5103000)
-        self.assertEqual(convert_to_place_dcid("9700000US5103000"),
-                         'geoId/sch5103000')
-
-    def test_not_interesting_summary_levels(self):
-        # Dalton, GA Urbanized Area (2010)[400C100US22069]
-        self.assertEqual(convert_to_place_dcid("400C100US22069"), '')
-
-    def test_zip_code(self):
-        # 65203
-        self.assertEqual(convert_to_place_dcid("86000US65203"), 'zip/65203')
-
-    def test_country(self):
-        # USA
-        self.assertEqual(convert_to_place_dcid("0100000US"), 'country/USA')
+    def test_geoIds_at_all_summary_levels(self):
+        for geo_str, expected_geoId in _TEST_GEOIDS.items():
+            self.assertEqual(convert_to_place_dcid(geo_str), expected_geoId)
 
 
 if __name__ == '__main__':
