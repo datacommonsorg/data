@@ -14,17 +14,18 @@
 """Process EIA datasets to produce TMCF and CSV."""
 
 import os
+import sys
+
 from absl import flags
 from absl import app
 
-import coal
-import common
-import elec
-import intl
-import ng
-import pet
-import seds
-import total
+# Allows the following module imports to work when running as a script
+# relative to scripts/
+sys.path.append(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
@@ -38,6 +39,8 @@ _DATASETS = {
     'INTL': ('Energy Overview (INTL)', intl.extract_place_statvar, None),
     'PET': ('Petroleum', pet.extract_place_statvar, None),
     'NG': ('Natural Gas', ng.extract_place_statvar, None),
+    'NUC_STATUS': ('Nuclear Outages', nuclear.extract_place_statvar,
+                   nuclear.generate_statvar_schema),
     'SEDS': ('Consumption, Production, Prices and Expenditure (SEDS)',
              seds.extract_place_statvar, None),
     'TOTAL': ('Energy Overview (TOTAL)', total.extract_place_statvar, None)

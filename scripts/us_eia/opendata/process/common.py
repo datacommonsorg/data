@@ -25,10 +25,11 @@ path.insert(1, '../../../../')
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.name_to_alpha2 as name_to_alpha2
 
-import category
+from . import category
 
 PERIOD_MAP = {
     'A': 'Annual',
+    'D': 'Daily',
     'M': 'Monthly',
     'Q': 'Quarterly',
 }
@@ -102,7 +103,7 @@ def _parse_date(d):
 
 
 def _sv_dcid(raw_sv):
-    return 'dcid:eia/' + raw_sv
+    return 'eia/' + raw_sv
 
 
 def _enumify(in_str):
@@ -117,6 +118,8 @@ def _print_counters(counters):
 
 
 def _find_dc_place(raw_place, is_us_place, counters):
+    if raw_place.startswith('eia/'):
+        return raw_place
     if is_us_place:
         if raw_place == 'US' or raw_place == 'USA':
             return 'country/USA'
@@ -153,10 +156,10 @@ def _generate_default_statvar(raw_sv, sv_map):
         return
     raw_sv_id = _sv_dcid(raw_sv)
     sv_map[raw_sv] = '\n'.join([
-        f"Node: {raw_sv_id}",
+        f"Node: dcid:{raw_sv_id}",
         'typeOf: dcs:StatisticalVariable',
         'populationType: schema:Thing',
-        f"measuredProperty: {raw_sv_id}",
+        f"measuredProperty: dcid:{raw_sv_id}",
         'statType: dcs:measuredValue',
     ])
 
@@ -169,6 +172,30 @@ _NAME_PATTERNS['US'] = [
     'united states of america', 'united states', 'u.s.a.', 'u.s.'
 ]
 _NAME_PATTERNS['USA'] = _NAME_PATTERNS['US']
+
+
+def cleanup_name(name):
+    # Trim unnecessary whitespaces.
+    name = name.strip()
+    name = re.sub(r" +", ' ', name)
+
+    # Trim any leading/trailing ',' or ':'.  To handle names like "Measure
+    # Foo, California"
+    name = re.sub(r"([,: ]+$|^[,: ]+)", '', name)
+
+    # Replace ':' with ','.
+    name = name.replace(':', ',')
+
+    # Trim repeated ','s and have correct spaces. This can happen from:
+    # "Stocks : California : electric utility : quarterly"
+    parts = []
+    for part in name.split(','):
+        part = part.strip()
+        if part:
+            parts.append(part)
+    name = ', '.join(parts)
+
+    return name
 
 
 def _maybe_parse_name(name, raw_place, is_us_place, counters):
@@ -185,33 +212,33 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
         # Replace only the pattern, otherwise retaining the case of the name.
         name = name[0:idx] + name[idx + len(p):]
 
-        # Trim unnecessary whitespaces.
-        name = name.strip()
-        name = re.sub(r" +", ' ', name)
-
-        # Trim any leading/trailing ',' or ':'.  To handle names like "Measure
-        # Foo, California"
-        name = re.sub(r"([,:]+$|^[,:]+)", '', name)
-
-        return name
+        return cleanup_name(name)
 
     # If we didn't find the name for the place, likely the name doesn't include
     # the place (e.g., TOTAL).
     counters['info_unmodified_names'] += 1
-    return name
+    return cleanup_name(name)
 
 
-def _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map, svg_info):
+def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map,
+                       sv_schemaful2raw, svg_info):
     nodes = []
-    for k, v in sv_map.items():
-        pvs = [v]
-        if k in sv_name_map:
-            pvs.append(f'name: "{sv_name_map[k]}"')
-        if k in sv_membership_map:
-            for svg in sorted(sv_membership_map[k]):
+    for sv, mcf in sv_map.items():
+        raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
+
+        pvs = [mcf]
+        if raw_sv in sv_name_map:
+            pvs.append(f'name: "{sv_name_map[raw_sv]}"')
+
+        if dataset == 'NUC_STATUS':
+            pvs.append(f'memberOf: dcid:{category.NUC_STATUS_ROOT}')
+        if raw_sv in sv_membership_map:
+            for svg in sorted(sv_membership_map[raw_sv]):
                 if svg in svg_info:
                     pvs.append(f'memberOf: dcid:{svg}')
+
         nodes.append('\n'.join(pvs))
+
     return nodes
 
 
@@ -229,7 +256,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
         out_tmcf: Output TMCF file
 
         extract_place_statvar_fn:
-                            Required function to extract raw place and stat-var from series_id
+                            Required function to extract raw place and stat-var from series_id.
+                            raw-place-id could be a code that is resolvable
+                            by _find_dc_place, or a specified place (prefixed with 'eia/').
                             Args:
                                 series_id: series_id field from EIA
                                 counters: map of counters with frequency
@@ -242,8 +271,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                                 rows: list of dicts representing rows with _COLUMNS as keys
                                 sv-map: map from stat-var-id to MCF content
                                 counters: map of counters with frequency
-                            Returns True if schema was generated, False otherwise.
-                                On True, rows and sv-map are also updated.
+                            Returns schema-ful stat-var ID if schema was generated,
+                                None otherwise. If stat-var is returned,
+                                rows and sv-map are also updated.
     """
     assert extract_place_statvar_fn, 'Must provide extract_place_statvar_fn'
 
@@ -251,6 +281,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
     svg_info = {}
     # Raw SV -> set(SVGs)
     sv_membership_map = {}
+    # Schema-ful SV -> Raw SV
+    sv_schemaful2raw = {}
     counters = defaultdict(lambda: 0)
     sv_map = {}
     sv_name_map = {}
@@ -331,7 +363,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
                 rows.append({
                     'place': f"dcid:{dc_place}",
-                    'stat_var': _sv_dcid(raw_sv),
+                    'stat_var': f"dcid:{_sv_dcid(raw_sv)}",
                     'date': dt,
                     'value': v,
                     'eia_series_id': series_id,
@@ -342,8 +374,12 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 counters['error_empty_series'] += 1
                 continue
 
-            if (generate_statvar_schema_fn and
-                    generate_statvar_schema_fn(raw_sv, rows, sv_map, counters)):
+            schema_sv = None
+            if generate_statvar_schema_fn:
+                schema_sv = generate_statvar_schema_fn(raw_sv, rows, sv_map,
+                                                       counters)
+            if schema_sv:
+                sv_schemaful2raw[schema_sv] = raw_sv
                 counters['info_schemaful_series'] += 1
             else:
                 counters['info_schemaless_series'] += 1
@@ -355,7 +391,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
     category.trim_area_categories(svg_info, counters)
 
     with open(out_sv_mcf, 'w') as out_fp:
-        nodes = _generate_sv_nodes(sv_map, sv_name_map, sv_membership_map,
+        nodes = _generate_sv_nodes(dataset, sv_map, sv_name_map,
+                                   sv_membership_map, sv_schemaful2raw,
                                    svg_info)
 
         out_fp.write('\n\n'.join(nodes))

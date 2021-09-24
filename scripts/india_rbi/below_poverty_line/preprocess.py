@@ -68,7 +68,7 @@ INDIA_ISO_CODES = {
     "Lakshwadeep": "IN-LD",
     "Pondicherry": "IN-PY",
     "Puducherry": "IN-PY",
-    "Dadra and Nagar Haveli and Daman and Diu": "IN-DN_DD",
+    "Dadra and Nagar Haveli and Daman and Diu": "IN-DH",
     "Telangana": "IN-TG",
     "All India": "IN"
 }

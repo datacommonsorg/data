@@ -3,7 +3,7 @@ typeOf: dcs:StatVarGroup
 name: "Other Data (eia.gov)"
 specializationOf: dcid:dc/g/Energy
 
-Node: dcid:dcid:eia/g/NG.714804
+Node: dcid:eia/g/NG.714804
 typeOf: dcs:StatVarGroup
 name: "Natural Gas"
 specializationOf: dcid:eia/g/Root

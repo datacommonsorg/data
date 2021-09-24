@@ -14,17 +14,17 @@
 """Test for common.py"""
 
 import os
+import sys
 import tempfile
 import unittest
 
-import coal
-import common
-import elec
-import intl
-import ng
-import pet
-import seds
-import total
+# Allows the following module imports to work when running as a script
+# relative to scripts/
+sys.path.append(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -38,6 +38,8 @@ _TEST_CASES = [
      elec.generate_statvar_schema),
     ('INTL', 'Internationa', 'intl', intl.extract_place_statvar, None),
     ('NG', 'Natural Gas', 'ng', ng.extract_place_statvar, None),
+    ('NUC_STATUS', 'Nuclear Outages', 'nuc_status',
+     nuclear.extract_place_statvar, nuclear.generate_statvar_schema),
     ('PET', 'Petroleum', 'pet', pet.extract_place_statvar, None),
     ('SEDS', 'State Energy', 'seds', seds.extract_place_statvar, None),
     ('TOTAL', 'Total Energy', 'total', total.extract_place_statvar, None),
@@ -97,6 +99,15 @@ class TestProcess(unittest.TestCase):
             self.assertEqual(exp_mcf_data, act_mcf_data)
             self.assertEqual(exp_svg_mcf_data, act_svg_mcf_data)
             self.assertEqual(exp_tmcf_data, act_tmcf_data)
+
+    def test_cleanup_name(self):
+        self.assertEqual(
+            'Natural Gas Gross Withdrawals, Monthly',
+            common.cleanup_name(' Natural Gas Gross Withdrawals, Monthly'))
+        self.assertEqual(
+            'Stocks, electric utility, quarterly',
+            common.cleanup_name(
+                ' : Stocks : : electric utility : quarterly : '))
 
 
 if __name__ == '__main__':
