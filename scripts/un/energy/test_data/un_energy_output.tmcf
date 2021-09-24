@@ -7,5 +7,4 @@ observationDate: C:UNEnergy->Year
 observationPeriod: "P1Y"
 value: C:UNEnergy->Quantity
 unit: C:UNEnergy->Unit_dcid
-scalingFactor: C:UNEnergy->Scaling_factor
 measurementMethod: C:UNEnergy->Estimate
