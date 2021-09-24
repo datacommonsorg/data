@@ -1,0 +1,12 @@
+Node: E:FacilityTable->E0
+typeOf: dcs:EpaReportingFacility
+dcid: C:FacilityTable->dcid
+epaGhgrpFacilityId: C:FacilityTable->epaGhgrpFacilityId
+epaFrsId: C:FacilityTable->epaFrsId
+partOf: C:FacilityTable->partOf
+name: C:FacilityTable->name
+address: C:FacilityTable->address
+containedInPlace: C:FacilityTable->containedInPlace
+naics: C:FacilityTable->naics
+latitude: C:FacilityTable->latitude
+longitude: C:FacilityTable->longitude
