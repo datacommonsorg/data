@@ -8,11 +8,9 @@ class ResolveCensusGeoIdTest(unittest.TestCase):
 
     def test_county_geoId(self):
         # Sussex County, Delaware (0500000US10005)
-        self.assertEqual(convert_to_place_dcid("0500000US10005"),
-                         'geoId/10005')
+        self.assertEqual(convert_to_place_dcid("0500000US10005"), 'geoId/10005')
         # Natchitoches Parish, Louisiana (0500000US22069)
-        self.assertEqual(convert_to_place_dcid("0500000US22069"),
-                         'geoId/22069')
+        self.assertEqual(convert_to_place_dcid("0500000US22069"), 'geoId/22069')
 
     def test_state_geoId(self):
         # California

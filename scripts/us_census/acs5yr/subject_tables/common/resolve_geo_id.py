@@ -11,9 +11,9 @@ For example: The GEOID for California is 0400000US06, where
 US  - represents the United States
 06  - FIPS code for California State
 
-The code maps the place dcid based on the summary level (eg. state, zip code)
-and the Federal Information Processing Standards (FIPS) code for a given place.
+The code maps the place dcid based on the summary level (eg. state, zip code).
 The expected length of the fips_code for each summary level is tabulated in [1].
+The expected length of the fips_code can be used to debug issues in geoId resolution.
 
 Reference:
 1. https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html
@@ -21,7 +21,7 @@ Reference:
 """
 
 # Map for summary levels with expected geo prefix and FIPS code length
-_SUMMARY_LEVELS_FIPS_CODE = {
+_SUMMARY_LEVEL_PREFIX_MAP = {
     # State-level (fips_code length=2)
     '040': 'geoId/',
     # County-level (fips_code length=5)
@@ -49,18 +49,17 @@ _SUMMARY_LEVELS_FIPS_CODE = {
 }
 
 
-def convert_to_place_dcid(row):
-    """resolves GEOID based on the Census Summary level and the expected FIPS
-    code length for that summary level. If a geoId could not be resolved,
-    the fucntion returns an empty string ('').
+def convert_to_place_dcid(geoid_str):
+    """resolves GEOID based on the Census Summary level. If a geoId could not be resolved,
+    the function returns an empty string ('').
     """
-    geographic_component, fips_code = row.split('US')
+    geographic_component, fips_code = geoid_str.split('US')
 
     summary_level = geographic_component[:3]
 
-    ## Based on summary level and FIPS code, genereate geoId
-    if summary_level in _SUMMARY_LEVELS_FIPS_CODE:
-        return _SUMMARY_LEVELS_FIPS_CODE[summary_level] + fips_code
+    ## Based on summary level, generate place dcid
+    if summary_level in _SUMMARY_LEVEL_PREFIX_MAP:
+        return _SUMMARY_LEVEL_PREFIX_MAP[summary_level] + fips_code
     else:
         ## if not an interesting summary level
         return ''
