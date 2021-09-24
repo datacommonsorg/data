@@ -1,0 +1,8 @@
+Node: E:who->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WHO->statVar
+measurementMethod: dcs:WorldHealthOrganizationEstimates
+observationAbout: C:who->country
+observationDate: C:who->year
+observationPeriod: C:who->period
+value: C:who->value

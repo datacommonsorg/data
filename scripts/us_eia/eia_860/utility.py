@@ -27,7 +27,7 @@ import pandas.api.types as pd_types
 import numpy as np
 from typing import Callable
 
-import utils
+from us_eia.eia_860 import utils
 
 # For import util.alpha2_to_dcid
 sys.path.insert(1, '../../../util')

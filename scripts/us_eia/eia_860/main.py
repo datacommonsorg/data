@@ -22,10 +22,14 @@ from absl import app, flags
 import io
 import os
 import requests
+import sys
 import zipfile
 
-import utility
-import power_plant
+# Allows the following module imports to work when running as a script
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+from us_eia.eia_860 import utility, power_plant
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('skip_import', False, 'Skips downloading data.')

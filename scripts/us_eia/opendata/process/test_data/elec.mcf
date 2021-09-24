@@ -6,6 +6,8 @@ typeOf: dcs:StatisticalVariable
 measurementQualifier: dcs:Monthly
 energySource: dcs:Solar
 producingSector: dcs:IndependentPowerProducers
+name: "Net generation, all solar, independent power producers (total), monthly"
+memberOf: dcid:eia/g/ELEC.1718688
 
 Node: dcid:Quarterly_RetailSales_Electricity_Residential
 populationType: dcs:Electricity
@@ -14,3 +16,24 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 measurementQualifier: dcs:Quarterly
 consumingSector: dcs:Residential
+name: "Retail sales of electricity, residential, monthly"
+memberOf: dcid:eia/g/ELEC.1002
+
+Node: dcid:Quarterly_Consumption_Fuel_ForElectricityGeneration_Coal_ElectricUtilityNonCogen
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+usedFor: dcs:ElectricityGeneration
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Quarterly
+fuelType: dcs:Coal
+electricityProducingSector: dcs:ElectricUtilityNonCogen
+name: "Consumption for electricity generation (Btu), coal, electric utility non-cogen, quarterly"
+
+Node: dcid:Monthly_SalesRevenue_Electricity
+populationType: dcs:Electricity
+measuredProperty: dcs:salesRevenue
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+measurementQualifier: dcs:Monthly
+name: "Revenue from retail sales of electricity, all sectors, monthly"

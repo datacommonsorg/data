@@ -14,11 +14,15 @@
 """Test for process_*.py"""
 
 import os
+import sys
 import tempfile
 import unittest
 
-import utility
-import power_plant
+# Allows the following module imports to work when running as a script
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+from us_eia.eia_860 import utility, power_plant
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

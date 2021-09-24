@@ -59,7 +59,7 @@ function run_py_test {
   fi
   setup_python
   echo "#### Testing Python code in $1"
-  python3 -m unittest discover -v -s $1 -p *_test.py
+  python3 -m unittest discover -v -s $1 -p *_test.py >/dev/null
 }
 
 function help {
