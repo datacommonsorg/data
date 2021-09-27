@@ -1,3 +1,16 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 Resolving place dcid given the GEOID string from data,census.gov.
 
@@ -39,6 +52,9 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     '500': 'geoId/',
     # 5-Digit ZIP code Tabulation Area (fips_code length=5)
     '860': 'zip/',
+    # TODO (sharadshriram) Look into the resolution of FIPS code for the school
+    # districts summary-levels where the resolved geoId is being the same across
+    # mulitple summary levels leading to duplicate observations.
     # State-School District [Elementary](fips_code length=7)
     '950': 'geoId/sch',
     # State-School District [Secondary](fips_code length=7)
