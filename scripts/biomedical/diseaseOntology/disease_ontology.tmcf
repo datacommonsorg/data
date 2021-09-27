@@ -2,7 +2,7 @@ Node: E:DiseaseOntology->E1
 typeOf: dcs:Disease
 dcid: C:DiseaseOntology->dcid
 parent: C:DiseaseOntology->subClassOf
-diseaseDescription: C:DiseaseOntology->description 
+diseaseDescription: C:DiseaseOntology->IAO_0000115
 alternativeDOIDs : C:DiseaseOntology->hasAlternativeId 
 diseaseSynonym: C:DiseaseOntology->hasExactSynonym
 commonName: C:DiseaseOntology->label
@@ -20,5 +20,4 @@ orDOID: C:DiseaseOntology->ORDO
 gardID: C:DiseaseOntology->GARD
 omimID: C:DiseaseOntology->OMIM
 efoID: C:DiseaseOntology->EFO
-keggDiseaseID: C:DiseaseOntology->KEGG
 medDraID: C:DiseaseOntology->MEDDRA
