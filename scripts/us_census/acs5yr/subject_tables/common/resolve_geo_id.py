@@ -36,31 +36,32 @@ Reference:
 
 # Map for summary levels with expected geo prefix
 _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
+    # TODO: For the inital release, geos are restricted to state/county/places.
     # State-level (fips_code length=2)
     '040': 'geoId/',
     # County-level (fips_code length=5)
     '050': 'geoId/',
     # State-County-County Subdivision (fips_code length=10)
-    '060': 'geoId/',
+    #'060': 'geoId/',
     # Census tract (fips_code length=11)
-    '140': 'geoId/',
+    #'140': 'geoId/',
     # Block group (fips_code length=12)
-    '150': 'geoId/',
+    #'150': 'geoId/',
     # City/ Places (fips_code length=7)
     '160': 'geoId/',
     # Congressional district [111th] (fips_code length=4)
-    '500': 'geoId/',
+    #'500': 'geoId/',
     # 5-Digit ZIP code Tabulation Area (fips_code length=5)
-    '860': 'zip/',
+    #'860': 'zip/',
     # TODO (sharadshriram) Look into the resolution of FIPS code for the school
     # districts summary-levels where the resolved geoId is being the same across
     # mulitple summary levels leading to duplicate observations.
     # State-School District [Elementary](fips_code length=7)
-    '950': 'geoId/sch',
+    #'950': 'geoId/sch',
     # State-School District [Secondary](fips_code length=7)
-    '960': 'geoId/sch',
+    #'960': 'geoId/sch',
     # State-School District [Unified](fips_code length=7)
-    '970': 'geoId/sch',
+    #'970': 'geoId/sch',
     # Country-level, fips_code is expected to be empty string(fips_code length=1)
     '010': 'country/USA'
 }
