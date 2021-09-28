@@ -13,7 +13,7 @@ import numpy as np
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 
-from data_loader import SubjectTableDataLoaderBase # commit hash - 4bc5102
+from data_loader import SubjectTableDataLoaderBase  # commit hash - 4bc5102
 from resolve_geo_id import convert_to_place_dcid
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
@@ -146,4 +146,3 @@ class S2303SubjectTableDataLoader(SubjectTableDataLoaderBase):
             f" Completed with {n_obs} observation for {n_sv} StatVars at "
             f"{n_geos} places. ",
             flush=True)
-

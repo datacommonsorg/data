@@ -64,33 +64,32 @@
     "enumSpecializations": {},
     "inferredSpec": {},
     "universePVs": [
+    {
+        "populationType": "Person",		
+        "constraintProperties": ["workStatus"],
+        "dependentPVs": 
         {
-        "populationType": "Person",
-		"constraintProperties": ["workStatus"],
-		"dependentPVs": 
-            {
-			    "age": "[16 64 Years]"
-            }
-        },
-        {
-            "populationType": "Person",
-            "constraintProperties": ["workPeriod"],
-            "dependentPVs": 
-            {
-                "workStatus": "WorkedInThePast12Months",
-                "age": "[16 64 Years]"
-            }
-        },
-        {
-            "populationType": "Person",
-            "constraintProperties": ["usualHoursWorked"],
-            "dependentPVs": 
-            {
-                "workStatus": "WorkedInThePast12Months",
-                "age": "[16 64 Years]"
-            }
+            "age": "[16 64 Years]"
         }
-    ],
+    },
+    {
+        "populationType": "Person",
+        "constraintProperties": ["workPeriod"],
+        "dependentPVs": 
+        {
+            "workStatus": "WorkedInThePast12Months",
+            "age": "[16 64 Years]"
+        }
+    },
+    {
+        "populationType": "Person",
+        "constraintProperties": ["usualHoursWorked"],
+        "dependentPVs": 
+        {
+            "workStatus": "WorkedInThePast12Months",
+            "age": "[16 64 Years]"
+        }
+    }],
     "ignoreColumns": [
         "id",
         "Geographic Area Name",
