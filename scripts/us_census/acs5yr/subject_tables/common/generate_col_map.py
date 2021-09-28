@@ -214,7 +214,7 @@ class GenerateColMapBase:
         self._keep_only_enum_specializations()
 
         # TODO: Before returning the column map, call self._isvalid_column_map()
-        # where we check of the same statvar is generated for more than one column? 
+        # where we check of the same statvar is generated for more than one column?
         # Should that be considered an error for subject tables?
         return self.column_map
 
