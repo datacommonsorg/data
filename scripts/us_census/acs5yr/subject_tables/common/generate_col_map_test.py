@@ -1,3 +1,16 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Tests for generateColMap."""
 import os
 import csv
@@ -7,6 +20,9 @@ import unittest
 from .generate_col_map import generate_stat_var_map, process_zip_file
 
 
+# TODO: use a smaller spec which exercises all functions in the module
+# TODO: Add smaller unittests for each class / function in the module
+# TODO: Update tests to use smaller input / expected files for end-to-end test.
 class GenerateColMapTest(unittest.TestCase):
     """ Test Cases for checking the generation of column map from JSON Spec"""
 

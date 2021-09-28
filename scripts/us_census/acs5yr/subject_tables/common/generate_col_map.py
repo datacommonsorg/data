@@ -1,5 +1,18 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
-Module to generate StatVar nodes from column maps
+Module to generate a column map to their corresponding statistical variable defintions.
 """
 import os
 import io
@@ -20,13 +33,14 @@ from statvar_dcid_generator import get_stat_var_dcid
 
 # intitalize the logger
 logging.basicConfig(
-    filename='make_column_map.log',
+    level=logging.ERROR,
+    filename=os.path.join(_SCRIPT_PATH, 'make_column_map.log'),
     format="{asctime} {processName:<12} {message} ({filename}:{lineno})",
     style="{",
     filemode='w')
-
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
+logging.StreamHandler(stream=None)
+logger = logging.getLogger(__file__)
+logger.setLevel(logging.CRITICAL)
 
 # list of properties that every statistical variable should contain
 _MANDATORY_PROPS = ['measuredProperty', 'populationType', 'statType']
@@ -40,6 +54,8 @@ _JSON_KEYS = [
 ]
 
 
+# TODO: Extend support to csv file and input directory
+# TODO - add typing hints and document the format of inputs
 def process_zip_file(zip_file_path,
                      spec_path,
                      write_output=True,
@@ -129,16 +145,14 @@ class GenerateColMapBase:
     delimiter: The delimiting string that is used for tokenising the column name
   """
 
+    # TODO - add typing hints and document the format.
     def __init__(self, spec_dict={}, column_list=[], delimiter='!!'):
         """module init"""
         self.features = spec_dict
         self.column_list = column_list
         self.column_map = {}
         self.delimiter = delimiter
-        #TODO: Add a dictionary of counters withsummary stats of number of
-        # columns, number of statvars generated, statvars of differnt population
-        # types, errors or warnings,
-
+        # TODO: Add a dictionary of counters with summary stats of number of columns, number of statvars generated, statvars of differnt population types, errors or warnings,
         # fill missing keys in JSON spec with empty values
         for key in _JSON_KEYS:
             if key not in self.features:
@@ -146,34 +160,26 @@ class GenerateColMapBase:
                     self.features[key] = []
                 else:
                     self.features[key] = {}
-        # if columns names need to be normalized
-        self.column_list = self._find_and_replace_column_names(self.column_list)
 
-    def _find_and_replace_column_names(self, df_column_list):
-        """
-        if spec has find_and_replace defined, this function updates column name
-        """
+    def _find_and_replace_column_names(self, column):
+        """if spec has find_and_replace defined, this function updates column names"""
         if 'find_and_replace' in self.features['preprocess']:
-            for col_idx, column in enumerate(df_column_list):
-                # replace entire column name
-                if column in self.features['preprocess']['find_and_replace']:
-                    df_column_list[col_idx] = self.features['preprocess'][
-                        'find_and_replace'][column]
-                # replace a token in the column name
-                else:
-                    part_list = column.split(self.delimiter)
-                    for idx, part in enumerate(part_list):
-                        if part in self.features['preprocess'][
-                                'find_and_replace']:
-                            part_list[idx] = self.features['preprocess'][
-                                'find_and_replace'][part]
-                            df_column_list[col_idx] = self.delimiter.join(
-                                part_list)
-        return df_column_list
+            find_and_replace_dict = self.features['preprocess'][
+                'find_and_replace']
+            # replace entire column name
+            if column in find_and_replace_dict:
+                return find_and_replace_dict[column]
+            # replace a token in the column name
+            else:
+                part_list = column.split(self.delimiter)
+                for idx, part in enumerate(part_list):
+                    if part in find_and_replace_dict:
+                        part_list[idx] = find_and_replace_dict[part]
+                        return self.delimiter.join(part_list)
+        return column
 
     def _generate_stat_vars_from_spec(self):
-        """generates stat_var nodes for each column in column list and returns
-        a dictionary of columns with their respective stat_var nodes
+        """generates stat_var nodes for each column in column list and returns a dictionary of columns with their respective stat_var nodes
             Example output: {
           "Total Civilian population": {
             "populationType": "Person",
@@ -182,10 +188,8 @@ class GenerateColMapBase:
             "armedForceStatus": "Civilian"
           },
           "<column-name-2>": {}, .....
-        }
-        """
-        # for each column generate the definition of their respective
-        # statistical variable node
+        }"""
+        # for each column generate the definition of their respective statistical variable node
         for col in self.column_list:
             ignore_token_count = 0
             for part in col.split(self.delimiter):
@@ -197,28 +201,26 @@ class GenerateColMapBase:
 
             # if no tokens of the columns are in ignoreColumns of the spec
             if ignore_token_count == 0:
-                self.column_map[col] = self._column_to_statvar(col)
-                try:
-                    self.column_map[col] = self._column_to_statvar(col)
-                except Exception as e:
-                    exec_type, exec_obj, exec_tb = sys.exc_info()
-                    logger.error(f"""Exeception: {exec_type} occured in
-                        generate_col_map.py at line {exec_tb.tb_lineno}""")
-            continue
-        # Drop stat_vars based on enumSpecializations mentioned in spec
+                renamed_col = self._find_and_replace_column_names(col)
+                # TODO: Before calling the column_to_statvar method,
+                # remove the base class or generalization token in the
+                # column name from the enumSpecialization section of the
+                # spec.
+                self.column_map[col] = self._column_to_statvar(renamed_col)
+
+        # TODO: Deprecate this function, since enumSpecialization are used to
+        # remove the generalized token from the column name
         self._keep_only_enum_specializations()
-        #TODO: Enable validating the generate columnMap.
-        # Dependent implementation _isvalid_column_map
+
+        # TODO: Before returning the column map, call self._isvalid_column_map()
         return self.column_map
 
     def _column_to_statvar(self, column):
-        """
-        generates a dictionary statistical variable with all properties
-        specified in the JSON spec for a single column"""
+        """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
         measurement_assigned = False
         stat_var = {}
-        # part_list contains a list of tokens of the column name after splitting
-        # the column name based on the '!!' delimiter
+        # part_list contains a list of tokens of the column name after splitting the
+        # column name based on the '!!' delimiter
         part_list = column.split(self.delimiter)
 
         ## set the measurement for special cases: Median, Mean, etc.
@@ -245,18 +247,17 @@ class GenerateColMapBase:
 
         # associate pvs to stat_var
         for part in part_list:
-            ##  p = property and k = dictionary of column tokens mapped to a propertyValue
+            ##  p = property and k = dictionary of substrings in column that points to a propertyValue
             for p, k in self.features['pvs'].items():
-                ## check if the current key of dict matches with tokens of a column name
+                ## check if the current key of dict matches with any substring from the tokens of a column name
                 for c, v in k.items():
                     # check if column substring matches with a column token
                     # the check is done by ignoring the case
                     if part.lower() == c.lower():
                         if p in stat_var:
                             logger.warning(
-                                f"""For column: {column} | Property {p} has an
-                                existing value {stat_var[p]} which is modified
-                                to value {p}""")
+                                f"For column: {column} | Property {p} has an existing value {stat_var[p]} which is modified to value {p}"
+                            )
                         stat_var[p] = v
 
         ## add Universe PVs based on the populationType of StatVar
@@ -274,10 +275,9 @@ class GenerateColMapBase:
                         ## add the depedent keys to a list
                         dependent_properties = list(elem['dependentPVs'].keys())
                     except KeyError:
-                        # Skip, when dependentPVs are not specified in spec
-                        continue
-                # if constraintProperties is empty, then add the defaultPVs to
-                # the stat_var node
+                        continue  #when dependentPVs are not specified in spec, skip
+                # if constraintProperties is empty, then add the defaultPVs to the
+                # stat_var node
                 if len(elem['constraintProperties']) == 0:
                     stat_var.update(elem['dependentPVs'])
 
@@ -310,29 +310,29 @@ class GenerateColMapBase:
             try:
                 raise ValueError
             except ValueError:
-                logger.error(
-                    f"""One or more mandatory properties of the stat_var is missing.
-                    \nDump of the stat_var:: {stat_var}""")
+                logger.critical(
+                    f'One or more mandatory properties of the stat_var is missing. \n Dump of the stat_var:: {stat_var}'
+                )
 
+    # TODO: Rename and re-define this function, since enumSpecializations are used to remove the base class token in the column name and does not affect the stat var defined.
     def _keep_only_enum_specializations(self):
-        """
-      removes the stat var nodes for columns that are defined as generalizations.
+        """removes generalization token from column name.
 
       Example: if the enumSpecicalization is defined as
       {
         "Under 6 years": "Under 19 years, Under 18 years",
         "6 to 18 years": "Under 19 years",
       }
-      It means that "Under 6 years" and "6 to 18 years" are specializations of
-      Under 19 years. Hence, we do not add a stat var for "Under 19 Years".
-      If the enumSpecialisation field is empty this will not be done.
+      It means that "Under 6 years" and "6 to 18 years" are specializations of "Under 19 years".
+      Hence, if hte token "Under 19 years" and "Under 6 years" occur in the same column name, we drop the token "Under 19 years" from the column
       """
+        # TODO:The function call takes as an argument a  column name, it removes
+        # the base class from the column name and keeps only the specialization
         column_map = self.column_map.copy()
         for column_name, stat_var in column_map.items():
             part_list = column_name.split(self.delimiter)
-            ## The assumption of using the last token of the column as the
-            ##specialization holds for ACS Subject tables.
-            ## TODO: Check if this assumption hold for non-subject tables
+            ## The assumption of using the last token of the column as the specialization holds for ACS Subject tables.
+            # TODO: This assumption might break for other tables, we might need to thing of removing this assumption
             last_column_token = part_list[-1]
             if last_column_token in self.features['enumSpecializations']:
                 base_class = self.features['enumSpecializations'][
@@ -343,30 +343,22 @@ class GenerateColMapBase:
                         try:
                             del self.column_map[col_name]
                             logger.info(
-                                f"""Removing the base class column: {col_name}
-                                from the column map based on enumSpecialization
-                                of the spec""")
+                                f"Removing the base class column: {col_name} from the column map based on enumSpecialization of the spec"
+                            )
                         except KeyError:
                             logger.info(
-                                f"""Attempted removal of base class column:
-                                {col_name} failed. It might be already removed."""
+                                f"Attempted removal of base class column: {col_name} failed. It might be already removed."
                             )
 
     def _isvalid_stat_var(self, stat_var):
-        """
-        method validates if stat_var has mandatory properties, specified in
-        _MANDATORY_PROPS
-        """
+        """method validates if stat_var has mandatory properties, specified in _MANDATORY_PROPS"""
         if set(_MANDATORY_PROPS).issubset(set(list(stat_var.keys()))):
             return True
         else:
             return False
 
     def _format_stat_var_node(self, stat_var):
-        """
-        utility to format the stat_var dict values to ensure they conform to
-        the specifications of StatVar
-        """
+        """utility to format the stat_var dict values to ensure they conform to the specifications of StatVar"""
         # add typeOf property to the node if undefined
         if 'typeOf' not in stat_var:
             stat_var['typeOf'] = 'dcs:StatisticalVariable'
@@ -389,7 +381,7 @@ class GenerateColMapBase:
 
     def _isvalid_column_map(self):
         """check the generated column_map against a set of validation rules"""
-        ##TODO: defintion of different rules which are used to validate a generated column map
+        # TODO: defintion of different rules which are used to validate a generated column map
         ## Rule ideas:
         ## 1. condition to handle case when 2 columns have same SV DCID
         ## 2. condition to handle case when 2 SV nodes have same SV DCID
@@ -398,10 +390,7 @@ class GenerateColMapBase:
         pass
 
     def _get_population_type(self, part_list):
-        """
-        From tokenized column name, find the most relevant populationType from
-        the JSON Spec
-        """
+        """From tokenized column name, find the most relevant populationType from the JSON Spec """
         # if 'populationType' in self.features:
         for k, v in self.features['populationType'].items():
             for part in part_list:
@@ -411,8 +400,6 @@ class GenerateColMapBase:
         try:
             return self.features['populationType']['_DEFAULT']
         except KeyError:
-            ## The default populationType if populationType is not specified in
-            ## the spec, is Person. Since most of the ACS Subject Tables
-            ## describe different qualitative and quantitative characteristics
-            ## of individuals
+            ## The default populationType if populationType is not specified in the spec, is Person.
+            ## Since most of the ACS Subject Tables describe different qualitative and quantitative characteristics of individuals
             return 'Person'
