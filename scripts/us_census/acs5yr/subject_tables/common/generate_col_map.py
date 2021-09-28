@@ -206,6 +206,7 @@ class GenerateColMapBase:
                 # remove the base class or generalization token in the
                 # column name from the enumSpecialization section of the
                 # spec.
+                # TODO: Should we generate an error _column_to_statvar() returns an empty statvar?
                 self.column_map[col] = self._column_to_statvar(renamed_col)
 
         # TODO: Deprecate this function, since enumSpecialization are used to
@@ -213,6 +214,8 @@ class GenerateColMapBase:
         self._keep_only_enum_specializations()
 
         # TODO: Before returning the column map, call self._isvalid_column_map()
+        # where we check of the same statvar is generated for more than one column? 
+        # Should that be considered an error for subject tables?
         return self.column_map
 
     def _column_to_statvar(self, column):
@@ -245,6 +248,7 @@ class GenerateColMapBase:
         if 'populationType' not in stat_var:
             stat_var['populationType'] = self._get_population_type(part_list)
 
+        # TODO: To check if there are edge-cases with values not being full columns
         # associate pvs to stat_var
         for part in part_list:
             ##  p = property and k = dictionary of substrings in column that points to a propertyValue
