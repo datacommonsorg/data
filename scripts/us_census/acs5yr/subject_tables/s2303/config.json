@@ -1,0 +1,239 @@
+{
+    "populationType": {
+        "_DEFAULT": "Person"
+    },
+    "measurement": {
+        "Mean usual hours worked for workers": {
+            "measuredProperty": "usualHoursWorked",
+            "statType": "meanValue",
+            "unit": "Hour"
+        },
+        "Median age of workers 16 to 64 years": {
+            "measuredProperty": "age",
+            "statType": "medianValue",
+            "unit": "Year"
+        },
+        "_DEFAULT": {
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        }
+    },
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"   
+        },
+        "age": {
+            "Population 16 to 64 years": "[16 64 Years]"
+        },
+        "workPeriod": {
+            "Worked 50 to 52 weeks": "[50 52 Week]",
+            "Worked 48 to 49 weeks": "[48 49 Week]",
+            "Worked 40 to 47 weeks": "[40 47 Week]",
+            "Worked 27 to 39 weeks": "[27 39 Week]",
+            "Worked 14 to 26 weeks": "[14 26 Week]",
+            "Worked 1 to 13 weeks": "[1 13 Week]",
+            "50 to 52 weeks": "[50 52 Week]",
+            "48 to 49 weeks": "[48 49 Week]",
+            "40 to 47 weeks": "[40 47 Week]",
+            "27 to 39 weeks": "[27 39 Week]",
+            "14 to 26 weeks": "[14 26 Week]",
+            "1 to 13 weeks": "[1 13 Week]",
+            "40 or more weeks": "[40 - Week]",
+            "Worked 40 to 49 weeks": "[40 49 Week]"
+        },
+        "usualHoursWorked": {
+            "Usually worked 35 or more hours per week": "[35 - Hour]",
+	        "Usually worked 15 to 34 hours per week": "[15 34 Hour]",
+	        "Usually worked 1 to 14 hours per week": "[1 14 Hour]"
+        },
+        "workStatus": {
+            "WEEKS WORKED": "WorkedInThePast12Months",
+            "USUAL HOURS WORKED": "WorkedInThePast12Months",
+            "Mean usual hours worked for workers": "WorkedInThePast12Months",
+            "Median age of workers 16 to 64 years": "WorkedInThePast12Months",
+            "Workers 16 to 64 years who worked full-time, year-round": "USC_FullTimeYearRoundWorker",
+	        "Did not work": "DidNotWork"
+        },
+        "gender": {
+            "Male": "Male",
+            "Female": "Female", 
+            "Male MOE": "Male",
+            "Female MOE": "Female"
+        }
+    },
+    "enumSpecializations": {},
+    "inferredSpec": {},
+    "universePVs": [
+        {
+        "populationType": "Person",
+		"constraintProperties": ["workStatus"],
+		"dependentPVs": 
+            {
+			    "age": "[16 64 Years]"
+            }
+        },
+        {
+            "populationType": "Person",
+            "constraintProperties": ["workPeriod"],
+            "dependentPVs": 
+            {
+                "workStatus": "WorkedInThePast12Months",
+                "age": "[16 64 Years]"
+            }
+        },
+        {
+            "populationType": "Person",
+            "constraintProperties": ["usualHoursWorked"],
+            "dependentPVs": 
+            {
+                "workStatus": "WorkedInThePast12Months",
+                "age": "[16 64 Years]"
+            }
+        }
+    ],
+    "ignoreColumns": [
+        "id",
+        "Geographic Area Name",
+        "Percent",
+        "Percent Male",
+        "Percent Female",
+        "Percent MOE",
+        "Percent Male MOE",
+        "Percent Female MOE",
+        "Percent Total",
+        "PERCENT IMPUTED",
+     	"Estimate!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Estimate!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Estimate!!Male!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Male!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Total MOE!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Male MOE!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Female MOE!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Total!!Estimate!!USUAL HOURS WORKED!!Did not work",
+        "Female!!Estimate!!USUAL HOURS WORKED!!Did not work",
+        "Male!!Estimate!!USUAL HOURS WORKED!!Did not work",
+        "Total!!Margin of Error!!USUAL HOURS WORKED!!Did not work",
+        "Female!!Margin of Error!!USUAL HOURS WORKED!!Did not work",
+        "Male!!Margin of Error!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Total!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Total!!Margin of Error!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Total MOE!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Female!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Female MOE!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Female!!Margin of Error!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Male!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Male MOE!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Male!!Margin of Error!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Total!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Margin of Error!!Total MOE!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Total!!Margin of Error!!Mean usual hours worked for workers",
+        "Margin of Error!!Male!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Margin of Error!!Male MOE!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Male!!Margin of Error!!Mean usual hours worked for workers",
+        "Margin of Error!!Female!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Margin of Error!!Female MOE!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Female!!Margin of Error!!Mean usual hours worked for workers"
+    ],
+    "denominators": {
+        "Total!!Estimate!!Population 16 to 64 years": [
+            "Total!!Estimate!!WEEKS WORKED!!Worked 50 to 52 weeks",
+            "Total!!Margin of Error!!WEEKS WORKED!!Worked 50 to 52 weeks",
+            "Total!!Estimate!!WEEKS WORKED!!Worked 40 to 49 weeks",
+            "Total!!Margin of Error!!WEEKS WORKED!!Worked 40 to 49 weeks",
+            "Total!!Estimate!!WEEKS WORKED!!Worked 27 to 39 weeks",
+            "Total!!Margin of Error!!WEEKS WORKED!!Worked 27 to 39 weeks",
+            "Total!!Estimate!!WEEKS WORKED!!Worked 14 to 26 weeks",
+            "Total!!Margin of Error!!WEEKS WORKED!!Worked 14 to 26 weeks",
+            "Total!!Estimate!!WEEKS WORKED!!Worked 1 to 13 weeks",
+            "Total!!Margin of Error!!WEEKS WORKED!!Worked 1 to 13 weeks",
+            "Total!!Estimate!!WEEKS WORKED!!Did not work",
+            "Total!!Margin of Error!!WEEKS WORKED!!Did not work",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!40 or more weeks",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!40 or more weeks",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!50 to 52 weeks",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!50 to 52 weeks",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!40 or more weeks",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!40 or more weeks",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!50 to 52 weeks",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!50 to 52 weeks",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!40 or more weeks",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!40 or more weeks",
+            "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks",
+            "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks"
+        ],
+        "Male!!Estimate!!Population 16 to 64 years":[
+            "Male!!Estimate!!WEEKS WORKED!!Worked 50 to 52 weeks",
+            "Male!!Margin of Error!!WEEKS WORKED!!Worked 50 to 52 weeks",
+            "Male!!Estimate!!WEEKS WORKED!!Worked 40 to 49 weeks",
+            "Male!!Margin of Error!!WEEKS WORKED!!Worked 40 to 49 weeks",
+            "Male!!Estimate!!WEEKS WORKED!!Worked 27 to 39 weeks",
+            "Male!!Margin of Error!!WEEKS WORKED!!Worked 27 to 39 weeks",
+            "Male!!Estimate!!WEEKS WORKED!!Worked 14 to 26 weeks",
+            "Male!!Margin of Error!!WEEKS WORKED!!Worked 14 to 26 weeks",
+            "Male!!Estimate!!WEEKS WORKED!!Worked 1 to 13 weeks",
+            "Male!!Margin of Error!!WEEKS WORKED!!Worked 1 to 13 weeks",
+            "Male!!Estimate!!WEEKS WORKED!!Did not work",
+            "Male!!Margin of Error!!WEEKS WORKED!!Did not work",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!40 or more weeks",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!40 or more weeks",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!50 to 52 weeks",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!50 to 52 weeks",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!40 or more weeks",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!40 or more weeks",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!50 to 52 weeks",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!50 to 52 weeks",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!40 or more weeks",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!40 or more weeks",
+            "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks",
+            "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks"
+        ],
+        "Female!!Estimate!!Population 16 to 64 years":[
+            "Female!!Estimate!!WEEKS WORKED!!Worked 50 to 52 weeks",
+            "Female!!Margin of Error!!WEEKS WORKED!!Worked 50 to 52 weeks",
+            "Female!!Estimate!!WEEKS WORKED!!Worked 40 to 49 weeks",
+            "Female!!Margin of Error!!WEEKS WORKED!!Worked 40 to 49 weeks",
+            "Female!!Estimate!!WEEKS WORKED!!Worked 27 to 39 weeks",
+            "Female!!Margin of Error!!WEEKS WORKED!!Worked 27 to 39 weeks",
+            "Female!!Estimate!!WEEKS WORKED!!Worked 14 to 26 weeks",
+            "Female!!Margin of Error!!WEEKS WORKED!!Worked 14 to 26 weeks",
+            "Female!!Estimate!!WEEKS WORKED!!Worked 1 to 13 weeks",
+            "Female!!Margin of Error!!WEEKS WORKED!!Worked 1 to 13 weeks",
+            "Female!!Estimate!!WEEKS WORKED!!Did not work",
+            "Female!!Margin of Error!!WEEKS WORKED!!Did not work",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!40 or more weeks",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!40 or more weeks",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!50 to 52 weeks",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 35 or more hours per week!!50 to 52 weeks",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!40 or more weeks",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!40 or more weeks",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!50 to 52 weeks",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 15 to 34 hours per week!!50 to 52 weeks",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!40 or more weeks",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!40 or more weeks",
+            "Female!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks",
+            "Female!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks"
+        ]
+    }
+}
+
+
