@@ -17,8 +17,9 @@ import unittest
 from .data_loader import process_subject_tables
 
 
+# TODO: Use a smaller spec for tests
 class DataLoaderBaseTest(unittest.TestCase):
-
+    # TODO: resolve issues to the spec and column map based on current working directory
     def test_zip_file_input(self):
         process_subject_tables(
             table_prefix='test_zip_alabama',
@@ -41,7 +42,8 @@ class DataLoaderBaseTest(unittest.TestCase):
             delimiter='!!',
             has_percent=True)
 
-    #TODO: add tests for processing a directory of files
+    # TODO: add tests for processing a directory of files
+
 
 if __name__ == '__main__':
     unittest.main()
