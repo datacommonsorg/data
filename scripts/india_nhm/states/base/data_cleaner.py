@@ -84,15 +84,7 @@ isoCode: C:{dataset_name}->isoCode
 TMCF_NODES = """
 Node: E:{dataset_name}->E{index}
 typeOf: dcs:StatVarObservation
-<<<<<<< HEAD:scripts/india_nhm/base/data_cleaner.py
-<<<<<<< HEAD
-variableMeasured: dcs:{statvar}
-=======
 variableMeasured: dcs:indianNHM/{statvar}
->>>>>>> refs/remotes/origin/master
-=======
-variableMeasured: dcs:indianNHM/{statvar}
->>>>>>> 105e47f2d0ad9910fcdbfb941a7556ca9c8af45c:scripts/india_nhm/states/base/data_cleaner.py
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
@@ -105,15 +97,7 @@ description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:indianNHM/{statvar}
-<<<<<<< HEAD:scripts/india_nhm/base/data_cleaner.py
-<<<<<<< HEAD
-=======
 statType: dcs:measuredValue
->>>>>>> refs/remotes/origin/master
-
-=======
-statType: dcs:measuredValue
->>>>>>> 105e47f2d0ad9910fcdbfb941a7556ca9c8af45c:scripts/india_nhm/states/base/data_cleaner.py
 """
 
 
@@ -176,24 +160,12 @@ class NHMDataLoaderBase(object):
                     self.cols_to_extract = list(
                         set(self.raw_df.columns.droplevel(-1)[2:]))
 
-<<<<<<< HEAD:scripts/india_nhm/base/data_cleaner.py
-<<<<<<< HEAD
-                # Extract specified columns from raw dataframe to cleaned dataframe
-                for col in self.cols_to_extract:
-                    cleaned_df[col] = self.raw_df[col][fname]
-=======
-=======
->>>>>>> 105e47f2d0ad9910fcdbfb941a7556ca9c8af45c:scripts/india_nhm/states/base/data_cleaner.py
                 # Extract specified columns from raw dataframe if it exists
                 for col in self.cols_to_extract:
                     if col in self.raw_df.columns:
                         cleaned_df[col] = self.raw_df[col][fname]
                     else:
                         continue
-<<<<<<< HEAD:scripts/india_nhm/base/data_cleaner.py
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> 105e47f2d0ad9910fcdbfb941a7556ca9c8af45c:scripts/india_nhm/states/base/data_cleaner.py
 
                 df_full = df_full.append(cleaned_df, ignore_index=True)
 
@@ -215,22 +187,6 @@ class NHMDataLoaderBase(object):
             # Writing isoCODE entity
             tmcf.write(TMCF_ISOCODE.format(dataset_name=self.dataset_name))
 
-<<<<<<< HEAD:scripts/india_nhm/base/data_cleaner.py
-<<<<<<< HEAD
-            # Writing nodes for each StatVar
-            for idx, variable in enumerate(self.cols_to_extract):
-                # Writing TMCF
-                tmcf.write(
-                    TMCF_NODES.format(dataset_name=self.dataset_name,
-                                      index=idx + 1,
-                                      statvar=self.cols_dict[variable]))
-
-                mcf.write(
-                    MCF_NODES.format(statvar=self.cols_dict[variable],
-                                     description=variable))
-=======
-=======
->>>>>>> 105e47f2d0ad9910fcdbfb941a7556ca9c8af45c:scripts/india_nhm/states/base/data_cleaner.py
             # Keeping track of written StatVars
             # Some columns in NHM_FamilyPlanning have same StatVar for multiple cols
             statvars_written = []
@@ -250,7 +206,3 @@ class NHMDataLoaderBase(object):
                             description=str(variable).capitalize()))
 
                     statvars_written.append(self.cols_dict[variable])
-<<<<<<< HEAD:scripts/india_nhm/base/data_cleaner.py
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> 105e47f2d0ad9910fcdbfb941a7556ca9c8af45c:scripts/india_nhm/states/base/data_cleaner.py

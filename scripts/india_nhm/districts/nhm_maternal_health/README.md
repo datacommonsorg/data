@@ -22,17 +22,6 @@ The cleaned csv has the following columns:
 - District: District
 - DistrictCode: lgdCode
 - Date: Date
-<<<<<<< HEAD:scripts/india_nhm/states/nhm_maternal_health/README.md
-- Count_PregnancyEvent: Estimated Number of Annual Pregnancies
-- Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women Registered for Antenatal Care
-- Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of Pregnant women registered within first trimester
-- Count_ChildDeliveryEvent: Total reported deliveries
-- Count_ChildDeliveryEvent_InAnInstitution: Institutional deliveries (Public Insts.+Pvt. Insts.)
-- Count_ChildDeliveryEvent_InPublicInstitution: Deliveries Conducted at Public Institutions
-- Count_ChildDeliveryEvent_AtHome: Number of Home deliveries
-- Count_ChildDeliveryEvent_AtHome_WithStandByAssist: Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)
-- Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent: % Safe deliveries to Total Reported Deliveries
-=======
 - Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women registered for Antenatal Care
 - Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of pregnant women registered for Antenatal Care within first trimester
 - Count_ChildDeliveryEvent: Total reported child deliveries
@@ -41,7 +30,6 @@ The cleaned csv has the following columns:
 - Count_ChildDeliveryEvent_AtHome: Number of home deliveries
 - Count_ChildDeliveryEvent_AtHome_WithStandByAssist: Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)
 - Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent: Percentage of safe deliveries to total reported deliveries
->>>>>>> nhm_district_others:scripts/india_nhm/districts/nhm_maternal_health/README.md
 
 #### TMCF
 - [NHM_MaternalHealth.tmcf](NHM_MaternalHealth.tmcf)

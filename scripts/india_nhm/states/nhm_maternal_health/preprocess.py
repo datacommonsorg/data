@@ -52,11 +52,11 @@ if __name__ == '__main__':
                                cols_dict=cols_to_nodes,
                                final_csv_path="{}.csv".format(dataset_name))
     loader.generate_csv()
-    # loader.create_mcf_tmcf()
+    loader.create_mcf_tmcf()
 
-    # # Write README file
-    # readme_gen = ReadMeGen(dataset_name=dataset_name,
-    #                        dataset_description="Maternal Health Data",
-    #                        data_level="State level",
-    #                        cols_dict=cols_to_nodes)
-    # readme_gen.gen_readme()
+    # Write README file
+    readme_gen = ReadMeGen(dataset_name=dataset_name,
+                            dataset_description="Maternal Health Data",
+                            data_level="State level",
+                            cols_dict=cols_to_nodes)
+    readme_gen.gen_readme()

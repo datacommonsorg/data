@@ -29,15 +29,7 @@ measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
 observationPeriod: "P1Y"
-<<<<<<< HEAD:scripts/india_nhm/states/base/data_cleaner.py
-<<<<<<< HEAD
 value: C:{dataset_name}->{statvar}
-=======
-value: C:{dataset_name}->indianNHM/{statvar}
->>>>>>> nhm_others
-=======
-value: C:{dataset_name}->{statvar}
->>>>>>> nhm_district_others:scripts/india_nhm/districts/base/data_cleaner.py
 """
 
 MCF_NODES = """Node: dcid:indianNHM/{statvar}

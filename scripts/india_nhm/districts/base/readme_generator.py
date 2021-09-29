@@ -12,15 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-<<<<<<< HEAD:scripts/india_nhm/base/readme_generator.py
-<<<<<<< HEAD
+
 import os
 import sys
 
-=======
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> 105e47f2d0ad9910fcdbfb941a7556ca9c8af45c:scripts/india_nhm/districts/base/readme_generator.py
 
 class ReadMeGen():
     """
