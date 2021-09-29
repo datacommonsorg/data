@@ -156,6 +156,7 @@ class GenerateColMapBase:
         # fill missing keys in JSON spec with empty values
         for key in _JSON_KEYS:
             if key not in self.features:
+                # TODO: initialize UniversePVs as empty list
                 if key == 'ignoreColumns':
                     self.features[key] = []
                 else:
