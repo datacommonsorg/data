@@ -83,14 +83,13 @@ def get_mcf(series_lst):
 
 def get_csv(df_in):
     """Creation of csv according to tmcf:"""
-    df2 = pd.DataFrame(columns = ['Country', 'Year', 'Gender', 'Age', "StatVar", 'Population'])
+    df2 = pd.DataFrame(columns = ['Country', 'Year', "StatVar", 'Population'])
     for line in range(len(df)):
-        gender, age, statvar = '', 0, ''
-        age = df_in['Series Name'][line].split(',')[1].split()[-1]
+        gender, statvar = '', ''
         gender = df_in['Series Name'][line].split(',')[-2].strip()
         gender = gender[0].upper() + gender[1:]
         statvar = f'Count_Persons_{int(age)}years_{gender}'
-        addto_df2 = [df['Country'][line], df['Year'][line], gender, int(age), statvar,
+        addto_df2 = [df['Country'][line], df['Year'][line], statvar,
                                    df['Value'][line]]
         df2.loc[len(df2.index)] = addto_df2
     print(df2.head())
