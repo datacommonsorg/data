@@ -1,0 +1,868 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "11908",
+        "NumPVSuccesses": "95438",
+        "Existence_NumChecks": "101320",
+        "NumNodeSuccesses": "11908",
+        "Existence_NumDcCalls": "3"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "23",
+        "StrSplit_EmptyToken_unit": "11734",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "531"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702PR_state_county_places_cleaned.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "geoId/72127",
+    "statVarDcid": "Count_Person_NoHealthInsurance_0.5To0.99RatioToPovertyLine",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 19.4,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "3607"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 6200.805,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "9364"
+          }]
+        }]
+      }],
+      "percentDifference": 31862.91
+    }]
+  }, {
+    "placeDcid": "geoId/72025",
+    "statVarDcid": "Count_Person_16OrMoreYears_FederalGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2015",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "1098"
+          }]
+        }]
+      }, {
+        "date": "2016",
+        "values": [{
+          "value": 41.752,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "4784"
+          }]
+        }]
+      }],
+      "percentDifference": 4.1752E9
+    }]
+  }, {
+    "placeDcid": "geoId/72127",
+    "statVarDcid": "Count_Person_NoHealthInsurance_2.0To2.99RatioToPovertyLine",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 10.7,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "3661"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 3402.493,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "9418"
+          }]
+        }]
+      }],
+      "percentDifference": 31699.0
+    }]
+  }, {
+    "placeDcid": "geoId/7206593",
+    "statVarDcid": "MarginOfError_Count_Person_16OrMoreYears_InLaborForce_NoHealthInsurance",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 3.1,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2675"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 355.41,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "8420"
+          }]
+        }]
+      }],
+      "percentDifference": 11364.84
+    }]
+  }, {
+    "placeDcid": "geoId/7206593",
+    "statVarDcid": "MarginOfError_Count_Person_NoHealthInsurance_0.5To0.99RatioToPovertyLine",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 3.3,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "3611"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 351.0,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "9374"
+          }]
+        }]
+      }],
+      "percentDifference": 10536.36
+    }]
+  }, {
+    "placeDcid": "geoId/7206593",
+    "statVarDcid": "MarginOfError_Count_Person_NoHealthInsurance_2.0To2.99RatioToPovertyLine",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 3.6,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "3665"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 444.6,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "9428"
+          }]
+        }]
+      }],
+      "percentDifference": 12250.0
+    }]
+  }, {
+    "placeDcid": "geoId/72127",
+    "statVarDcid": "MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentLessThanHighSchoolGraduate_NoHealthInsurance",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 2.3,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2590"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 586.914,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "8329"
+          }]
+        }]
+      }],
+      "percentDifference": 25418.0
+    }]
+  }, {
+    "placeDcid": "geoId/7276770",
+    "statVarDcid": "MarginOfError_Count_Person_16OrMoreYears_Unemployed_InLaborForce_NoHealthInsurance",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 1.7,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2713"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 579.88,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "8457"
+          }]
+        }]
+      }],
+      "percentDifference": 34010.59
+    }]
+  }, {
+    "placeDcid": "geoId/72",
+    "statVarDcid": "MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseAbroad",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 208.998,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2552"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 430.132,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "8297"
+          }]
+        }]
+      }],
+      "percentDifference": 105.81
+    }]
+  }, {
+    "placeDcid": "geoId/72",
+    "statVarDcid": "MarginOfError_Count_Person_16OrMoreYears_FederalGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 105.115,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "6840"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 317.454,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2948"
+          }]
+        }]
+      }],
+      "percentDifference": 202.01
+    }]
+  }, {
+    "placeDcid": "geoId/72031",
+    "statVarDcid": "MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentSomeCollegeOrAssociatesDegree_NoHealthInsurance",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 3.8,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2629"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 342.79,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "8361"
+          }]
+        }]
+      }],
+      "percentDifference": 8920.79
+    }]
+  }, {
+    "placeDcid": "geoId/72113",
+    "statVarDcid": "Count_Person_NoHealthInsurance_2.0To2.99RatioToPovertyLine",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 13.0,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "3663"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 934.847,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "9416"
+          }]
+        }]
+      }],
+      "percentDifference": 7091.13
+    }]
+  }, {
+    "placeDcid": "geoId/72031",
+    "statVarDcid": "MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedEstablishment_NoHealthInsurance_UnpaidFamilyWorker_Worker",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 15.294,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "6881"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 37.195,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2989"
+          }]
+        }]
+      }],
+      "percentDifference": 143.2
+    }]
+  }, {
+    "placeDcid": "geoId/72",
+    "statVarDcid": "MarginOfError_Count_Person_NoHealthInsurance_AsianAlone",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 209.792,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2210"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 431.654,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "7955"
+          }]
+        }]
+      }],
+      "percentDifference": 105.75
+    }]
+  }, {
+    "placeDcid": "geoId/72113",
+    "statVarDcid": "MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICSFinanceInsuranceRealEstateRentalLeasing_Worker",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 34.83,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "7026"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 92.924,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "3132"
+          }]
+        }]
+      }],
+      "percentDifference": 166.79
+    }]
+  }, {
+    "placeDcid": "geoId/7214290",
+    "statVarDcid": "Count_Person_16OrMoreYears_FederalGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2014",
+        "values": [{
+          "value": 8.38,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "10911"
+          }]
+        }]
+      }, {
+        "date": "2015",
+        "values": [{
+          "value": 31.5,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "1092"
+          }]
+        }]
+      }],
+      "percentDifference": 275.89
+    }]
+  }, {
+    "placeDcid": "geoId/7214290",
+    "statVarDcid": "MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICSAgricultureForestryFishingHuntingMiningQuarryingOilGasExtraction_Worker",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 14.98,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "4851"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 42.726,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "6895"
+          }]
+        }]
+      }],
+      "percentDifference": 185.22
+    }]
+  }, {
+    "placeDcid": "geoId/72031",
+    "statVarDcid": "Count_Person_16OrMoreYears_FederalGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2014",
+        "values": [{
+          "value": 8.812,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "10904"
+          }]
+        }]
+      }, {
+        "date": "2015",
+        "values": [{
+          "value": 33.736,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "1096"
+          }]
+        }]
+      }],
+      "percentDifference": 282.84
+    }]
+  }, {
+    "placeDcid": "geoId/72021",
+    "statVarDcid": "Count_Person_NoHealthInsurance_WhiteAloneNotHispanicOrLatino",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 40.026,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "6187"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 126.04,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "2294"
+          }]
+        }]
+      }],
+      "percentDifference": 214.9
+    }]
+  }, {
+    "placeDcid": "geoId/72025",
+    "statVarDcid": "Count_Person_NoHealthInsurance_TwoOrMoreRaces",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 161.874,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "4100"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 347.624,
+          "locations": [{
+            "file": "S2702PR_state_county_places_cleaned.csv",
+            "lineNumber": "6154"
+          }]
+        }]
+      }],
+      "percentDifference": 114.75
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}
