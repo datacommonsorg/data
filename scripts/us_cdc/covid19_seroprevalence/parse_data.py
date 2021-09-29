@@ -26,6 +26,7 @@ python3 parse_data.py input_file output_count output_percent
 from datetime import datetime
 import calendar
 import sys
+import numpy as np
 import pandas as pd
 
 # Map of location abbreviations in the dataset to respective dcids
@@ -313,6 +314,8 @@ def clean_data(file_path, output_count, output_percent):
     # Output the cleaned csvs
     data_count = data[(~data['StatVar'].str.contains("Percent"))]
     data_percent = data[((data['StatVar'].str.contains("Percent")))]
+    data_percent = data_percent.replace(r'^\s*$', np.nan, regex=True)
+    data_percent = data_percent.dropna(subset=['value'])
     data_count.to_csv(output_count, index=False)
     data_percent.to_csv(output_percent, index=False)
 
