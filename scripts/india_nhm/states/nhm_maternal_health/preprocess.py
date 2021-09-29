@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     # Write README file
     readme_gen = ReadMeGen(dataset_name=dataset_name,
-                            dataset_description="Maternal Health Data",
-                            data_level="State level",
-                            cols_dict=cols_to_nodes)
+                           dataset_description="Maternal Health Data",
+                           data_level="State level",
+                           cols_dict=cols_to_nodes)
     readme_gen.gen_readme()
