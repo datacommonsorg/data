@@ -80,7 +80,20 @@ def get_mcf(series_lst):
 
         file.write(mcf)
 
-
+def get_statvars(gender, age):
+    from util import statvar_dcid_generator
+    statvars = ['typeOf', 'description', 'populationType',
+                'measuredProperty', 'gender', 'statType', 'age']
+    values = ['dcs:StatisticalVariable', 
+              f'Age population, {gender}, Age {age}, interpolated',
+              'dcs:Person', 'dcs:count', f'dcs:{gender}',
+              'dcs:measuredValue', f'[Years {age}]']
+    file = dict()
+    for i in range(len(statvars)):
+        file[statvars[i]] = values[i]
+    dcid = statvar_dcid_generator.get_stat_var_dcid(file)
+    return dcid
+    
 def get_csv(df_in):
     """Creation of csv according to tmcf:"""
     df2 = pd.DataFrame(columns = ['Country', 'Year', "StatVar", 'Population'])
