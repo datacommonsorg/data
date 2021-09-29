@@ -1,0 +1,63 @@
+Node: dcid:indianNHM/Count_BirthControlEvent_Vasectomy
+description: "Number of vasectomies conducted (public + pvt.)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_BirthControlEvent_Vasectomy
+statType: dcs:measuredValue
+
+Node: dcid:indianNHM/Count_BirthControlEvent_Tubectomy
+description: "Number of tubectomies conducted (public + pvt.)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_BirthControlEvent_Tubectomy
+statType: dcs:measuredValue
+
+Node: dcid:indianNHM/Count_BirthControlEvent_Sterilization
+description: "Total sterilisation conducted"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_BirthControlEvent_Sterilization
+statType: dcs:measuredValue
+
+Node: dcid:indianNHM/Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
+description: "Percent of male sterlisation (vasectomies) to total sterilisation"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
+statType: dcs:measuredValue
+
+Node: dcid:indianNHM/Count_Death_BirthControlSterilization
+description: "Total cases of deaths following sterlisation ( male + female)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_Death_BirthControlSterilization
+statType: dcs:measuredValue
+
+Node: dcid:indianNHM/Count_BirthControlEvent_IUCDInsertion
+description: "Total IUCD insertions done(public+private)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_BirthControlEvent_IUCDInsertion
+statType: dcs:measuredValue
+
+Node: dcid:indianNHM/Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent
+description: "Percent of IUCD insertions in public plus private institutions to all family planning methods ( iucd plus permanent)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent
+statType: dcs:measuredValue
+
+Node: dcid:indianNHM/Count_ContraceptiveDistribution_OralPill
+description: "Oral pills distributed"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_ContraceptiveDistribution_OralPill
+statType: dcs:measuredValue
+
+Node: dcid:indianNHM/Count_ContraceptiveDistribution_Condom
+description: "Condom pieces distributed"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:indianNHM/Count_ContraceptiveDistribution_Condom
+statType: dcs:measuredValue
+
