@@ -6,22 +6,19 @@ The world bank HNP dataset contains information about population, nutrition and 
 The dataset from 1960 onwards is available online. For this import, the series selected are all population statistics – male and female, age 00 to 25.
 
 
-Size
-5447kb
+Size: 5447kb
 
-Format
-Json (access is directly from browser)
+Format: Json (access is directly from browser)
 
-Time period
-Annual, from 1960
+Time period: Annual, from 1960
 
-Granularity
-Country level
-Variables
-Age
-26
-Gender
-2
+Granularity: Country level
+
+Variables: 
+
+Age: 26
+      
+Gender:2
 
 
 Population
