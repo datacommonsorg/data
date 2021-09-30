@@ -26,7 +26,9 @@ def get_df(serieses):
     df2 = pd.DataFrame(columns = ['Series Name', 'Series Code', 'Country Code', 'Country',
                                   'Year', 'Value'])
     current_series = "&".join(serieses)
-    MAX_PER_PAGE = 32767
+    MAX_PER_PAGE = 32767 
+    # maximum that can be displayed per page according to API rules
+    #will not need to change this, well within reasonable limits
     url = f"https://api.worldbank.org/v2/country/all/indicator/{current_series}?"
     url = url + f"format=JSON&per_page={MAX_PER_PAGE}"
     print(url)
@@ -52,9 +54,7 @@ def get_mcf(series_lst):
     gets mcf by splitting description and using fstrings
     '''
     nodes = []
-    #don't  use df; automate
     with open("World_bank_hnp_population.mcf", 'w', encoding = 'utf-8') as file:
-        print(end = '')
         mcf = ''
         for current_series in series_lst:
             print('\n'+current_series)
@@ -101,11 +101,11 @@ def get_csv(df_in):
         gender, statvar = '', ''
         gender = df_in['Series Name'][line].split(',')[-2].strip()
         gender = gender[0].upper() + gender[1:]
-        statvar = f'Count_Persons_{int(age)}years_{gender}'
+        age = df_in['Series Name'][line].split(',')[-1].strip()
+        statvar = get_statvars(gender, age)'
         addto_df2 = [df['Country'][line], df['Year'][line], statvar,
                                    df['Value'][line]]
         df2.loc[len(df2.index)] = addto_df2
-    print(df2.head())
     df2.to_csv("WorldBankPopulation.csv")
 
 get_mcf(series)
