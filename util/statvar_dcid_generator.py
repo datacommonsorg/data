@@ -39,11 +39,14 @@ _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
                          'constraintProperties', 'name', 'description',
                          'descriptionUrl', 'label', 'url', 'alternateName')
 
-# Regex to match prefixes to be removed from constraints
-_CONSTRAINT_PREFIX_REGEX = re.compile(r'^(USC|CDC|DAD|BLS|NCES|ACSED)')
+# Regex to match prefixes to be removed from constraints. The regex checks for
+# specific prefixes followed by an upper case letter or underscore. This helps
+# to avoid false positives like 'USCitizenBornInTheUnitedStates'.
+_CONSTRAINT_PREFIX_REGEX = re.compile(
+    r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED))(?P<ucase_uscore>[A-Z_])')
 
 
-def _capitalize_process_word(word: str) -> str:
+def _capitalize_process(word: str) -> str:
     """Capitalizes, removes namespaces, measurement constraint prefixes and
     underscores from a word.
 
@@ -65,7 +68,7 @@ def _capitalize_process_word(word: str) -> str:
         word = word[word.find(':') + 1:]
 
         # Removing constraint prefixes
-        word = _CONSTRAINT_PREFIX_REGEX.sub('', word)
+        word = _CONSTRAINT_PREFIX_REGEX.sub(r'\g<ucase_uscore>', word)
 
         # Removing all underscores
         word = word.replace('_', '')
@@ -99,7 +102,7 @@ def _generate_quantity_range_name(match_dict: dict) -> str:
     except KeyError:
         return None
 
-    quantity = _capitalize_process_word(quantity)
+    quantity = _capitalize_process(quantity)
     if upper_limit == '-':
         return f'{lower_limit}OrMore{quantity}'
 
@@ -130,11 +133,38 @@ def _generate_quantity_name(match_dict: dict) -> str:
     except KeyError:
         return None
 
-    quantity = _capitalize_process_word(quantity)
+    quantity = _capitalize_process(quantity)
     return f'{value}{quantity}'
 
 
-def get_stat_var_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
+def _process_constraint_property(prop: str, value: str) -> str:
+    """Processes constraint property, value and returns a name that can be used
+    in dcid generation.
+    Args:
+        prop: A string literal representing the constraint property name.
+        value: A string literal representing the constraint property value.
+    Returns:
+        A string that can be used in dcid generation.
+    """
+    match1 = _QUANTITY_RANGE_REGEX_1.match(value)
+    match2 = _QUANTITY_RANGE_REGEX_2.match(value)
+
+    if match1 or match2:  # Quantity Range
+        m_dict = match1.groupdict() if match1 else match2.groupdict()
+        name = _generate_quantity_range_name(m_dict)
+    else:
+        match1 = _QUANTITY_REGEX_1.match(value)
+        match2 = _QUANTITY_REGEX_2.match(value)
+        if match1 or match2:  # Quantity
+            m_dict = match1.groupdict() if match1 else match2.groupdict()
+            name = _generate_quantity_name(m_dict)
+        else:
+            name = _capitalize_process(value)
+
+    return name
+
+
+def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     """Generates the dcid given a statistical variable.
 
     Args:
@@ -172,7 +202,7 @@ def get_stat_var_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     # Helper function to add a property to the dcid list.
     def add_prop_to_list(prop: str, svd: dict, dcid_list: list):
         if prop in svd:
-            token = _capitalize_process_word(svd[prop])
+            token = _capitalize_process(svd[prop])
             if token is not None:
                 dcid_list.append(token)
             svd.pop(prop, None)
@@ -212,7 +242,7 @@ def get_stat_var_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
         # MD that are properties (camelCase) are added as Per(MD)
         # An example would be the property 'area' in Count_Person_PerArea
         elif md[0].islower():
-            denominator_suffix = 'Per' + _capitalize_process_word(md)
+            denominator_suffix = 'Per' + _capitalize_process(md)
         # Everything else is AsAFractionOf
         else:
             denominator_suffix = 'AsAFractionOf_' + md
@@ -221,21 +251,8 @@ def get_stat_var_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     # Adding constraint properties in alphabetical order
     constraint_props = sorted(svd.keys(), key=str.casefold)
     for prop in constraint_props:
-        match1 = _QUANTITY_RANGE_REGEX_1.match(svd[prop])
-        match2 = _QUANTITY_RANGE_REGEX_2.match(svd[prop])
-        if match1 or match2:
-            m_dict = match1.groupdict() if match1 else match2.groupdict()
-            q_name = _generate_quantity_range_name(m_dict)
-            dcid_list.append(q_name)
-        else:
-            match1 = _QUANTITY_REGEX_1.match(svd[prop])
-            match2 = _QUANTITY_REGEX_2.match(svd[prop])
-            if match1 or match2:
-                m_dict = match1.groupdict() if match1 else match2.groupdict()
-                q_name = _generate_quantity_name(m_dict)
-                dcid_list.append(q_name)
-            else:
-                add_prop_to_list(prop, svd, dcid_list)
+        name = _process_constraint_property(prop, svd[prop])
+        dcid_list.append(name)
 
     if denominator_suffix:
         dcid_list.append(denominator_suffix)
