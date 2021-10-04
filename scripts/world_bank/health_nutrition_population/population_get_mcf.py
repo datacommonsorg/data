@@ -3,14 +3,10 @@ def get_mcf(series_lst):
     gets mcf by splitting description and using fstrings
     '''
     nodes = []
-    #don't  use df; automate
-    with open("output\World_bank_hnp_population.mcf", 'w', encoding = 'utf-8') as file:
-        print(end = '')
+    with open("World_bank_hnp_population.mcf", 'w', encoding = 'utf-8') as file:
         mcf = ''
         for current_series in series_lst:
             print('\n'+current_series)
-            statvars = ['Node', 'typeOf', 'description', 'populationType',
-                      'measuredProperty', 'gender', 'statType', 'age']
             node, age, gender = '', '', ''
             age = current_series[9:11]
             gender = ''
@@ -18,18 +14,21 @@ def get_mcf(series_lst):
                 gender = 'Male'
             else:
                 gender = 'Female'
-            node = f'Count_Persons_{(int(age))}Years_{gender}'
+            property_dict = {'typeOf': 'dcs:StatisticalVariable',
+                     'description': f'Age population, {gender}, Age {age}, interpolated',
+                     'populationType': 'dcs:Person', 'measuredProperty':
+                     'dcs:count','gender': 'dcs:{gender}',
+                     'statType': 'dcs:measuredValue', 'age': '[Years {age}]'}
+            node = get_statvars(gender, age)
             desc = f'Age population, age {age}, {gender.lower()}, interpolated'
             nodes.append(node)
-            values = [node, 'dcs:StatisticalVariable', f'"{desc}"',
-                    'dcs:Person', 'dcs:count', f'dcs:{gender}',
-                    'dcs:measuredValue', f'[Years {age}]']
-            req_len = len(statvars)
-            for i in range(req_len):
-                mcf = mcf + f'{statvars[i]}: {values[i]}\n'
-            mcf = mcf + '\n'
-
+            property_dict['node'] = node
+            
+            for i in range(len(poperty_dict.keys())):
+                mcf = mcf + f'{property_dict.keys[i]}:'
+                + ' {property_dict[property_dict.keys()[i]}\n'
         file.write(mcf)
+
 series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(AGES)
            for gender in ['FE', 'MA']]
 get_mcf(series)
