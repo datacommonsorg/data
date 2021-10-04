@@ -1,0 +1,97 @@
+{
+    "summary": {
+        "column map generator commit SHA": "",
+        "data processing script commit SHA": "",
+        "total StatVarObservations": 7486
+    },
+    "2011": {
+        "filename": "ACSST5Y2011.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 218,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 178,
+        "number of observations": 836,
+        "number of unique StatVars with observations": 178,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 178
+    },
+    "2012": {
+        "filename": "ACSST5Y2012.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 218,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 178,
+        "number of observations": 836,
+        "number of unique StatVars with observations": 178,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 178
+    },
+    "2013": {
+        "filename": "ACSST5Y2013.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 218,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 178,
+        "number of observations": 836,
+        "number of unique StatVars with observations": 178,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 178
+    },
+    "2014": {
+        "filename": "ACSST5Y2014.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 218,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 178,
+        "number of observations": 918,
+        "number of unique StatVars with observations": 178,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 178
+    },
+    "2015": {
+        "filename": "ACSST5Y2015.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 218,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 178,
+        "number of observations": 836,
+        "number of unique StatVars with observations": 178,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 178
+    },
+    "2016": {
+        "filename": "ACSST5Y2016.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 218,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 178,
+        "number of observations": 836,
+        "number of unique StatVars with observations": 178,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 178
+    },
+    "2017": {
+        "filename": "ACSST5Y2017.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 458,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 194,
+        "number of observations": 735,
+        "number of unique StatVars with observations": 105,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 194
+    },
+    "2018": {
+        "filename": "ACSST5Y2018.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 458,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 194,
+        "number of observations": 735,
+        "number of unique StatVars with observations": 105,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 194
+    },
+    "2019": {
+        "filename": "ACSST5Y2019.S0101_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 458,
+        "number of rows in dataset": 9,
+        "number of statVars generated for columns": 194,
+        "number of observations": 918,
+        "number of unique StatVars with observations": 194,
+        "number of unique geos": 7,
+        "number of StatVars in mcf_dict": 194
+    }
+}

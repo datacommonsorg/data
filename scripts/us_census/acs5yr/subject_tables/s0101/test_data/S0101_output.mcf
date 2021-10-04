@@ -1,0 +1,1475 @@
+Node: dcid:Count_Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrLessYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrLessYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To9Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To9Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10To14Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_10To14Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To19Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To24Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_20To24Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To29Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To29Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_30To34Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_30To34Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To39Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To39Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To44Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To44Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To49Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To49Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50To54Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_50To54Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To59Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To59Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60To64Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_60To64Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To69Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To69Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_70To74Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_70To74Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75To79Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75To79Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_80To84Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_80To84Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_85OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To14Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [5 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To14Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [5 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To17Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To17Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To44Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To44Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [60 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_60OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [60 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_62OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_62OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person
+measuredProperty: dcid:age
+statType: dcid:medianValue
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Age_Person
+measuredProperty: dcid:age
+statType: dcid:marginOfError
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_AsAFractionOf_Count_Person_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+measurementDenominator: dcid:Count_Person_Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:censusACS5YearSurvey/Count_Person_Under18OrOver64Years_AsAFractionOf_Count_Person_18To64Years
+measuredProperty: dcid:censusACS5YearSurvey/Count_Person_Under18OrOver64Years_AsAFractionOf_Count_Person_18To64Years
+statType: dcid:measuredValue
+populationType: dcid:Person
+measurementDenominator: dcid:Count_Person_18To64Years
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_AsAFractionOf_Count_Person_18To64Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+measurementDenominator: dcid:Count_Person_18To64Years
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_17OrLessYears_AsAFractionOf_Count_Person_18To64Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+measurementDenominator: dcid:Count_Person_18To64Years
+age: [- 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrLessYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrLessYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To9Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To9Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10To14Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_10To14Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To19Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To24Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_20To24Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To29Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To29Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_30To34Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_30To34Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To39Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To39Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To44Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To44Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To49Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To49Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50To54Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_50To54Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To59Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To59Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60To64Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_60To64Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To69Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To69Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_70To74Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_70To74Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75To79Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75To79Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_80To84Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_80To84Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_85OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To14Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [5 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To14Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [5 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To17Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To17Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To44Years_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To44Years_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_60OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [60 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_62OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_62OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Male
+measuredProperty: dcid:age
+statType: dcid:medianValue
+populationType: dcid:Person
+gender: dcid:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Age_Person_Male
+measuredProperty: dcid:age
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrLessYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrLessYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To9Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To9Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10To14Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_10To14Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To19Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To24Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_20To24Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To29Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To29Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_30To34Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_30To34Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To39Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To39Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To44Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To44Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To49Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To49Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50To54Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_50To54Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To59Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To59Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60To64Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_60To64Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To69Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To69Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_70To74Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_70To74Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75To79Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75To79Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_80To84Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_80To84Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_85OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To14Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [5 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To14Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [5 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To17Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To17Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To44Years_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To44Years_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_62OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Female
+measuredProperty: dcid:age
+statType: dcid:medianValue
+populationType: dcid:Person
+gender: dcid:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_21OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_21OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_21OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Male
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_21OrMoreYears_Male
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Male
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_21OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_21OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_60OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+age: [60 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_62OrMoreYears_Female
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+gender: dcid:Female
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Age_Person_Female
+measuredProperty: dcid:age
+statType: dcid:marginOfError
+populationType: dcid:Person
+gender: dcid:Female
+typeOf: dcs:StatisticalVariable
+
