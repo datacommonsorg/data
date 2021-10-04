@@ -167,7 +167,7 @@ def _generate_quantity_range_name(match_dict: dict) -> str:
     return f'{lower_limit}To{upper_limit}{quantity}'
 
 
-def _naics_code_to_name(naics_val):
+def _naics_code_to_name(naics_val: str) -> str:
     """Converts NAICS codes to their industry using the _NAICS_MAP.
     Args:
         naics_val: A NAICS string literal to process.
@@ -184,7 +184,7 @@ def _naics_code_to_name(naics_val):
     """
 
     # Helper function to process NAICS ranges
-    def _process_naics_range(range_str):
+    def _process_naics_range(range_str: str) -> str:
         industry_str = ''
         match = _NAICS_RANGE_REGEX.search(range_str)
         m_dict = match.groupdict()
