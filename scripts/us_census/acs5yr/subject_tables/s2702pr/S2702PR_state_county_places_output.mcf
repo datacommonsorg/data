@@ -637,9 +637,9 @@ statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
 residenceType: dcid:Household
-age: [1 - Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold
@@ -648,9 +648,9 @@ statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
 residenceType: dcid:Household
-age: [1 - Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_SameHouse1YearAgo
@@ -826,9 +826,9 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [25 - Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_25OrMoreYears_NoHealthInsurance
@@ -836,9 +836,9 @@ measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [25 - Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_25OrMoreYears_EducationalAttainmentLessThanHighSchoolGraduate_NoHealthInsurance
@@ -934,9 +934,9 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 - Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance
@@ -944,9 +944,9 @@ measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 - Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16OrMoreYears_InLaborForce_NoHealthInsurance
@@ -1046,9 +1046,9 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 64 Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To64Years_NoHealthInsurance
@@ -1056,9 +1056,9 @@ measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 64 Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To64Years_NoHealthInsurance_FullTimeYearRoundWorker
@@ -1132,10 +1132,10 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 - Years]
-workerStatus: dcid:Worker
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_Worker
@@ -1143,10 +1143,10 @@ measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 - Years]
-workerStatus: dcid:Worker
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfitEstablishment_NoHealthInsurance_PaidWorker_Worker
@@ -1695,7 +1695,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3_Worker
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
@@ -1707,7 +1707,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3_Worker
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
@@ -1719,7 +1719,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5_Worker
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
@@ -1731,7 +1731,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5_Worker
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
@@ -1743,7 +1743,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1_Worker
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
@@ -1755,7 +1755,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1_Worker
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
@@ -1767,7 +1767,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4_Worker
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
@@ -1779,7 +1779,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4_Worker
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
@@ -1791,7 +1791,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5_Worker
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
@@ -1803,7 +1803,7 @@ age: [16 - Years]
 workerStatus: dcid:Worker
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5_Worker
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
@@ -1820,10 +1820,10 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_WithEarnings
@@ -1831,178 +1831,178 @@ measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_NoHealthInsurance_IncomeOf4999OrLessUSDollar
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf4999OrLessUSDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [- 4999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_IncomeOf4999OrLessUSDollar
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf4999OrLessUSDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [- 4999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_NoHealthInsurance_IncomeOf5000To14999USDollar
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf5000To14999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [5000 14999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_IncomeOf5000To14999USDollar
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf5000To14999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [5000 14999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_NoHealthInsurance_IncomeOf15000To24999USDollar
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf15000To24999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [15000 24999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_IncomeOf15000To24999USDollar
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf15000To24999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [15000 24999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_NoHealthInsurance_IncomeOf25000To34999USDollar
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf25000To34999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [25000 34999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_IncomeOf25000To34999USDollar
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf25000To34999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [25000 34999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_NoHealthInsurance_IncomeOf35000To49999USDollar
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf35000To49999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [35000 49999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_IncomeOf35000To49999USDollar
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf35000To49999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 income: [35000 49999 USDollar]
-armedForcesStatus: dcid:Civilian
-institutionalization: dcid:USC_NonInstitutionalized
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_NoHealthInsurance_IncomeOf50000To74999USDollar
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf50000To74999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-income: [50000 74999 USDollar]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
 age: [16 - Years]
 incomeStatus: dcid:WithEarnings
+income: [50000 74999 USDollar]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_IncomeOf50000To74999USDollar
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf50000To74999USDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-income: [50000 74999 USDollar]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
 age: [16 - Years]
 incomeStatus: dcid:WithEarnings
+income: [50000 74999 USDollar]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_NoHealthInsurance_IncomeOf75000OrMoreUSDollar
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf75000OrMoreUSDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-income: [75000 - USDollar]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
 age: [16 - Years]
 incomeStatus: dcid:WithEarnings
+income: [75000 - USDollar]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_IncomeOf75000OrMoreUSDollar
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf75000OrMoreUSDollar_WithEarnings
 measuredProperty: dcid:count
 statType: dcid:marginOfError
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-income: [75000 - USDollar]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
 age: [16 - Years]
 incomeStatus: dcid:WithEarnings
+income: [75000 - USDollar]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Median_Income_Person_16OrMoreYears_NoHealthInsurance_WithEarnings
@@ -2010,10 +2010,10 @@ measuredProperty: dcid:income
 statType: dcid:medianValue
 populationType: dcid:Person
 healthInsurance: dcid:NoHealthInsurance
-age: [16 - Years]
-incomeStatus: dcid:WithEarnings
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_NoHealthInsurance
@@ -2339,21 +2339,5 @@ healthInsurance: dcid:NoHealthInsurance
 age: [26 34 Years]
 armedForcesStatus: dcid:Civilian
 institutionalization: dcid:USC_NonInstitutionalized
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_NoHealthInsurance_IncomeOf50000To74999USDollar
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Household
-healthInsurance: dcid:NoHealthInsurance
-income: [50000 74999 USDollar]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_NoHealthInsurance_IncomeOf50000To74999USDollar
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Household
-healthInsurance: dcid:NoHealthInsurance
-income: [50000 74999 USDollar]
 typeOf: dcs:StatisticalVariable
 

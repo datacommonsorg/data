@@ -2,7 +2,7 @@
     "summary": {
         "column map generator commit SHA": "",
         "data processing script commit SHA": "",
-        "total StatVarObservations": 11908
+        "total StatVarObservations": 11890
     },
     "2015": {
         "filename": "ACSST5Y2015.S2702PR_data_with_overlays_2021-09-10T172246.csv",
@@ -58,11 +58,11 @@
         "filename": "ACSST5Y2019.S2702PR_data_with_overlays_2021-09-10T173339.csv",
         "number of columns in dataset": 422,
         "number of rows in dataset": 195110,
-        "number of statVars generated for columns": 207,
-        "number of observations": 1863,
-        "number of unique StatVars with observations": 207,
+        "number of statVars generated for columns": 205,
+        "number of observations": 1845,
+        "number of unique StatVars with observations": 205,
         "number of unique geos": 9,
-        "number of StatVars in mcf_dict": 217
+        "number of StatVars in mcf_dict": 215
     },
     "2014": {
         "filename": "ACSST5Y2014.S2702PR_data_with_overlays_2021-09-10T173550.csv",
@@ -72,6 +72,6 @@
         "number of observations": 2460,
         "number of unique StatVars with observations": 205,
         "number of unique geos": 12,
-        "number of StatVars in mcf_dict": 217
+        "number of StatVars in mcf_dict": 215
     }
 }
