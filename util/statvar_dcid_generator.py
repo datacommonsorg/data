@@ -93,9 +93,11 @@ _NAICS_MAP = {
 }
 
 # Regex to match NAICS Codes. These codes could be a single code or a range
+# Example matches: 53-56, 44
 _NAICS_CODE_REGEX = re.compile(r'(\d+-\d+|\d+)')
 
 # Regex to extract the lower and upper ranges in a range of NAICS codes
+# Example matches: 53-56, 11-21
 _NAICS_RANGE_REGEX = re.compile(r'(?P<lower_limit>\d+)-(?P<upper_limit>\d+)')
 
 
@@ -178,7 +180,7 @@ def _naics_code_to_name(naics_val):
     Returns:
         A string with all NAICS codes changed to their respective industry.
         This string can be used in dcid generation. Returns None if the string
-        is empty.
+        is empty or if the string does not follow the expected syntax.
     """
 
     # Helper function to process NAICS ranges

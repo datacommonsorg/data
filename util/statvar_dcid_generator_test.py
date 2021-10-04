@@ -291,8 +291,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'naics': 'NAICS/44-45_51',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict3)
-        expected_dcid = (
-            'WagesAnnual_Establishment_NAICSRetailTradeInformation')
+        expected_dcid = 'WagesAnnual_Establishment_NAICSRetailTradeInformation'
         self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict4 = {
@@ -302,7 +301,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'naics': 'NAICS/23',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict4)
-        expected_dcid = ('Count_Establishment_NAICSConstruction')
+        expected_dcid = 'Count_Establishment_NAICSConstruction'
         self.assertEqual(dcid, expected_dcid)
 
 
