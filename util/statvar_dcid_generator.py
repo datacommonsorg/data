@@ -46,7 +46,7 @@ _CONSTRAINT_PREFIX_REGEX = re.compile(
     r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED))(?P<ucase_uscore>[A-Z_])')
 
 # A mapping of NAICS codes to industry topics
-# This map was generated using the code from
+# This map was generated using the code from the _create_naics_map function at
 # https://github.com/datacommonsorg/tools/blob/master/stat_var_renaming/stat_var_renaming_constants.py
 _NAICS_MAP = {
     '00': 'Unclassified',
