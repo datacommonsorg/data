@@ -12,11 +12,24 @@ https://drive.google.com/file/d/1YY8ewSuZD-wx9qJNdvjmz9MB0qJxP-7L/view?usp=shari
 
 import requests
 import pandas as pd
+import app
+import flags
+from util import statvar_dcid_generator
+
+
+FLAGS = flags.FLAGS
+flags.DEFINE_integer("age", 2,
+                     "Age to which this program is run, max value 26")
+flags.DEFINE_string("Gender", "FE MA", "Gender: FE forr female, MA for male")
+flags.DEFINE_string("Country", "all", "Country codes")
+#maximum the API Can display is 32767
+flags.DEFINE_integer("perPage", 32767, "rows per page")
+flags.DEFINE_string("Path", "WorldBankHNP_Population.csv", "Path of final csv")
 
 AGES = 26
 
-series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(AGES)
-           for gender in ['FE', 'MA']]
+series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(flags.age)
+           for gender in (flags.Gender.split())]
 
 def get_df(serieses):
     '''
@@ -25,25 +38,25 @@ def get_df(serieses):
     df2 = pd.DataFrame
     df2 = pd.DataFrame(columns = ['Series Name', 'Series Code', 'Country Code', 'Country',
                                   'Year', 'Value'])
-    current_series = "&".join(serieses)
-    MAX_PER_PAGE = 32767 
-    # maximum that can be displayed per page according to API rules
-    #will not need to change this, well within reasonable limits
-    url = f"https://api.worldbank.org/v2/country/all/indicator/{current_series}?"
-    url = url + f"format=JSON&per_page={MAX_PER_PAGE}"
-    print(url)
+    for current_series in sereises:
+        # maximum that can be displayed per page according to API rules
+        #will not need to change this, well within reasonable limits
+        MAX_PER_PAGE = 32767
+        url = f"https://api.worldbank.org/v2/country/{flags.Country}/indicator/{current_series}?"
+        url = url + f"format=JSON&per_page={flags.perPage}"
+        print(url)
 
-    response = requests.get(url)
-    response = response.json()
-    for counter in range(len(response[1])):
-        val = response[1][counter]['value']
-        if val is not None:
-            row = {"Series Name" : response[1][counter]['indicator']['value'],
-                "Series Code" : response[1][counter]['indicator']['id'],
-                "Country Code" : response[1][counter]['countryiso3code'],
-                "Country" : response[1][counter]['country']['value'],
-                "Year" : response[1][counter]['date'],
-                'Value' : response[1][counter]['value']
+        response = requests.get(url)
+        response = response.json()
+        for counter in range(len(response[1])):
+            val = response[1][counter]['value']
+            if val is not None:
+                row = {"Series Name" : response[1][counter]['indicator']['value'],
+                    "Series Code" : response[1][counter]['indicator']['id'],
+                    "Country Code" : response[1][counter]['countryiso3code'],
+                    "Country" : response[1][counter]['country']['value'],
+                    "Year" : response[1][counter]['date'],
+                    'Value' : response[1][counter]['value']
 
                 }
             df2.loc[len(df2)] = row
@@ -58,8 +71,6 @@ def get_mcf(series_lst):
         mcf = ''
         for current_series in series_lst:
             print('\n'+current_series)
-            statvars = ['Node', 'typeOf', 'description', 'populationType',
-                      'measuredProperty', 'gender', 'statType', 'age']
             node, age, gender = '', '', ''
             age = current_series[9:11]
             gender = ''
@@ -67,32 +78,29 @@ def get_mcf(series_lst):
                 gender = 'Male'
             else:
                 gender = 'Female'
-            node = f'Count_Persons_{(int(age))}Years_{gender}'
+            property_dict = {'typeOf': 'dcs:StatisticalVariable',
+                     'description': f'Age population, {gender}, Age {age}, interpolated',
+                     'populationType': 'dcs:Person', 'measuredProperty':
+                     'dcs:count','gender': 'dcs:{gender}',
+                     'statType': 'dcs:measuredValue', 'age': '[Years {age}]'}
+            node = get_statvars(gender, age)
             desc = f'Age population, age {age}, {gender.lower()}, interpolated'
             nodes.append(node)
-            values = [node, 'dcs:StatisticalVariable', f'"{desc}"',
-                    'dcs:Person', 'dcs:count', f'dcs:{gender}',
-                    'dcs:measuredValue', f'[Years {age}]']
-            req_len = len(statvars)
-            for i in range(req_len):
-                mcf = mcf + f'{statvars[i]}: {values[i]}\n'
-            mcf = mcf + '\n'
-
+            property_dict['node'] = node
+            
+            for i in range(len(poperty_dict.keys())):
+                mcf = mcf + f'{property_dict.keys[i]}:'
+                + ' {property_dict[property_dict.keys()[i]}\n'
         file.write(mcf)
 
 def get_statvars(gender, age):
-    from util import statvar_dcid_generator
-    statvars = ['typeOf', 'description', 'populationType',
-                'measuredProperty', 'gender', 'statType', 'age']
-    values = ['dcs:StatisticalVariable', 
-              f'Age population, {gender}, Age {age}, interpolated',
-              'dcs:Person', 'dcs:count', f'dcs:{gender}',
-              'dcs:measuredValue', f'[Years {age}]']
-    file = dict()
-    for i in range(len(statvars)):
-        file[statvars[i]] = values[i]
-    dcid = statvar_dcid_generator.get_stat_var_dcid(file)
-    return dcid
+    property_dict = {'typeOf': 'dcs:StatisticalVariable',
+                     'description': f'Age population, {gender}, Age {age}, interpolated',
+                     'populationType': 'dcs:Person', 'measuredProperty':
+                     'dcs:count','gender': 'dcs:{gender}',
+                     'statType': 'dcs:measuredValue', 'age': '[Years {age}]'}
+    dcid = statvar_dcid_generator.get_stat_var_dcid(property_dict)
+    return (dcid)
     
 def get_csv(df_in):
     """Creation of csv according to tmcf:"""
@@ -102,11 +110,11 @@ def get_csv(df_in):
         gender = df_in['Series Name'][line].split(',')[-2].strip()
         gender = gender[0].upper() + gender[1:]
         age = df_in['Series Name'][line].split(',')[-1].strip()
-        statvar = get_statvars(gender, age)'
+        statvar = get_statvars(gender, age)
         addto_df2 = [df['Country'][line], df['Year'][line], statvar,
                                    df['Value'][line]]
         df2.loc[len(df2.index)] = addto_df2
-    df2.to_csv("WorldBankPopulation.csv")
+    df2.to_csv(flags.Path)
 
 get_mcf(series)
 df = get_df(series)
