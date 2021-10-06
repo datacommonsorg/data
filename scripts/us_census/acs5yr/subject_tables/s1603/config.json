@@ -1,0 +1,304 @@
+{
+  "overwrite_dcids": {
+		"Count_Person_5OrMoreYears_Native": "Count_Person_Native"
+	},
+  "populationType": {
+    "_DEFAULT": "Person"
+  },
+  "measurement": {
+    "Speak a language other than English at home": {
+      "measuredProperty": "count",
+      "statType": "measuredValue",
+      "languageSpokenAtHome": "LanguageOtherThanEnglish",
+      "age": "[5 - Years]"
+    },
+    "Percent distribution of people who speak a language other than English at home": {
+      "measuredProperty": "count",
+      "statType": "measuredValue",
+      "languageSpokenAtHome": "LanguageOtherThanEnglish",
+      "age": "[5 - Years]"
+    },
+    "_DEFAULT": {
+      "measuredProperty": "count",
+      "statType": "measuredValue",
+      "age": "[5 - Years]"
+    }
+  },
+  "enumSpecializations": {},
+  "pvs": {
+    "statType": {
+      "Margin of Error": "marginOfError"
+    },
+    "age": {
+      "5 to 17 years": "[5 17 Years]",
+      "18 to 64 years": "[18 64 Years]",
+      "65 years and over": "[65 - Years]",
+      "Population 25 years and over": "[25 - Years]"
+    },
+    "nativity": {
+      "Foreign born": "USC_ForeignBorn",
+      "Foreign-born population 5 years and over": "USC_ForeignBorn",
+      "Native": "USC_Native",
+      "Native population 5 years and over": "USC_Native"
+    },
+    "educationalAttainment": {
+      "Less than high school graduate": "LessThanHighSchoolGraduate",
+      "High school graduate (includes equivalency)": "HighSchoolGraduateIncludesEquivalency",
+      "Some college or associate's degree": "SomeCollegeOrAssociatesDegree",
+      "Bachelor's degree or higher": "BachelorsDegreeOrHigher"
+    },
+    "citizenship": {
+      "Naturalized U.S. citizen": "USCitizenByNaturalization",
+      "Not a U.S. citizen": "NotAUSCitizen"
+    },
+    "povertyStatus": {
+      "Below poverty level": "BelowPovertyLevelInThePast12Months",
+      "At or above poverty level": "AbovePovertyLevelInThePast12Months",
+      "Population 5 years and over for whom poverty status is determined": "PovertyStatusDetermined"
+    },
+    "languageSpokenAtHome": {
+      "Speak Spanish at home": "Spanish",
+      "Speak Spanish at home MOE": "Spanish",
+      "Spanish or Spanish Creole":"SpanishOrSpanishCreole",
+      "Speak only English at home": "OnlyEnglish",
+      "Speak only English at home MOE": "OnlyEnglish",
+      "People who speak only English at home": "OnlyEnglish"
+    }
+  },
+  "inferredSpec": {
+    "educationalAttainment": {
+      "age": "[25 - Years]"
+    }
+  },
+  "universePVs": [
+  {
+    "populationType": "Person",
+    "constraintProperties": ["educationalAttainment"],
+    "dependentPVs": 
+    {
+      "age": "[25 - Years]"
+    }
+  }
+  ],
+  "denominators": {
+    "Total!!Estimate!!Total population 5 years and over": [
+      "Total!!Estimate!!AGE!!5 to 17 years",
+      "Total!!Margin of Error!!AGE!!5 to 17 years",
+      "Total!!Estimate!!AGE!!18 to 64 years",
+      "Total!!Margin of Error!!AGE!!18 to 64 years",
+      "Total!!Estimate!!AGE!!65 years and over",
+      "Total!!Margin of Error!!AGE!!65 years and over",
+      "Total!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Total!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Total!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Total!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Total!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Total!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Total!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Total!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Total!!Estimate!!CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Total!!Margin of Error!!CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Total!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Total!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Total!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Total!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Total!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Total!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen"
+    ],
+    "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined": [
+      "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!Below poverty level",
+      "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!Below poverty level",
+      "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!At or above poverty level",
+      "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!At or above poverty level",
+      "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level",
+      "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level"
+    ],
+    "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
+      "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
+      "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)",
+      "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)",
+      "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree",
+      "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree",
+      "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher"
+    ],
+    "People who speak only English at home!!Estimate!!Total population 5 years and over": [
+      "People who speak only English at home!!Estimate!!AGE!!5 to 17 years",
+      "People who speak only English at home!!Margin of Error!!AGE!!5 to 17 years",
+      "People who speak only English at home!!Estimate!!AGE!!18 to 64 years",
+      "People who speak only English at home!!Margin of Error!!AGE!!18 to 64 years",
+      "People who speak only English at home!!Estimate!!AGE!!65 years and over",
+      "People who speak only English at home!!Margin of Error!!AGE!!65 years and over",
+      "People who speak only English at home!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Native population 5 years and over",
+      "People who speak only English at home!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Native population 5 years and over",
+      "People who speak only English at home!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "People who speak only English at home!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "People who speak only English at home!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "People who speak only English at home!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "People who speak only English at home!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "People who speak only English at home!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "People who speak only English at home!!Estimate!!CITIZENSHIP STATUS!!Native population 5 years and over",
+      "People who speak only English at home!!Margin of Error!!CITIZENSHIP STATUS!!Native population 5 years and over",
+      "People who speak only English at home!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "People who speak only English at home!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "People who speak only English at home!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "People who speak only English at home!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "People who speak only English at home!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "People who speak only English at home!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen"
+    ],
+    "People who speak only English at home!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined": [
+      "People who speak only English at home!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!Below poverty level",
+      "People who speak only English at home!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!Below poverty level",
+      "People who speak only English at home!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!At or above poverty level",
+      "People who speak only English at home!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!At or above poverty level",
+      "People who speak only English at home!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "People who speak only English at home!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "People who speak only English at home!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level",
+      "People who speak only English at home!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level"
+    ],
+    "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
+      "People who speak only English at home!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
+      "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)",
+      "People who speak only English at home!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)",
+      "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree",
+      "People who speak only English at home!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree",
+      "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "People who speak only English at home!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "People who speak only English at home!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "People who speak only English at home!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "People who speak only English at home!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "People who speak only English at home!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "People who speak only English at home!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher"
+    ],
+    "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!Total population 5 years and over": [
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!AGE!!5 to 17 years",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!AGE!!5 to 17 years",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!AGE!!18 to 64 years",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!AGE!!18 to 64 years",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!AGE!!65 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!AGE!!65 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen"
+    ],
+    "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined": [
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!Below poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!Below poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!At or above poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!At or above poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level"      
+    ],
+    "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher"
+    ],
+    "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!Total population 5 years and over": [
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!AGE!!5 to 17 years",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!AGE!!5 to 17 years",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!AGE!!18 to 64 years",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!AGE!!18 to 64 years",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!AGE!!65 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!AGE!!65 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!NATIVITY AND CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!CITIZENSHIP STATUS!!Native population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Naturalized U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!CITIZENSHIP STATUS!!Foreign-born population 5 years and over!!Not a U.S. citizen"
+    ],
+    "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined": [
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!Below poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!Below poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!At or above poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population 5 years and over for whom poverty status is determined!!At or above poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level"
+    ],
+    "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Percent distribution of people who speak a language other than English at home!!Spanish or Spanish Creole!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher"
+    ]
+  },
+  "ignoreColumns": [
+    "id",
+    "Geographic Area Name",
+    "Percent",
+    "Percent MOE",
+    "Percent speak Spanish at home",
+    "Percent speak Spanish at home MOE",
+    "Percent speak only English at home",
+    "Percent speak only English at home MOE",
+    "PERCENT IMPUTED"
+  ]
+}

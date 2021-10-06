@@ -1,0 +1,1378 @@
+Node: dcid:Count_Person_5OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 17 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 17 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [65 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Native
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_Native
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_USCitizenByNaturalization_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_USCitizenByNaturalization_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_NotAUSCitizen_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_NotAUSCitizen_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 17 Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 17 Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [65 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_Native
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_Native
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_USCitizenByNaturalization_OnlyEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_USCitizenByNaturalization_OnlyEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_NotAUSCitizen_OnlyEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_NotAUSCitizen_OnlyEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_OnlyEnglishSpokenAtHome_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [5 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_OnlyEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [25 - Years]
+populationType: dcid:Person
+languageSpokenAtHome: dcid:OnlyEnglish
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 17 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 17 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [18 64 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [18 64 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [65 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [65 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_Native
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_Native
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_USCitizenByNaturalization_LanguageOtherThanEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_USCitizenByNaturalization_LanguageOtherThanEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_NotAUSCitizen_LanguageOtherThanEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_NotAUSCitizen_LanguageOtherThanEnglishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_LanguageOtherThanEnglishSpokenAtHome_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:LanguageOtherThanEnglish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 17 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 17 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [18 64 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [18 64 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [65 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [65 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishSpokenAtHome_Native
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishSpokenAtHome_Native
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_USCitizenByNaturalization_SpanishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_USCitizenByNaturalization_SpanishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_NotAUSCitizen_SpanishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_NotAUSCitizen_SpanishSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishSpokenAtHome_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishSpokenAtHome_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishSpokenAtHome_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishSpokenAtHome_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishSpokenAtHome_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishSpokenAtHome_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:Spanish
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 17 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 17 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [18 64 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [18 64 Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [65 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [65 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_Native
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_Native
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_USCitizenByNaturalization_SpanishOrSpanishCreoleSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_USCitizenByNaturalization_SpanishOrSpanishCreoleSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_NotAUSCitizen_SpanishOrSpanishCreoleSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_NotAUSCitizen_SpanishOrSpanishCreoleSpokenAtHome_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_BelowPovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome_AbovePovertyLevelInThePast12Months
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [5 - Years]
+populationType: dcid:Person
+povertyStatus: dcid:AbovePovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_SpanishOrSpanishCreoleSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+languageSpokenAtHome: dcid:SpanishOrSpanishCreole
+age: [25 - Years]
+populationType: dcid:Person
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
