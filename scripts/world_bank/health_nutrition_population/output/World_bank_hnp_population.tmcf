@@ -3,7 +3,5 @@ typeOf: dcs:StatVarObservation
 variableMeasured: C: WorldBankPopulation ->StatVar
 observationAbout: C:WorldBankPopulation ->Country
 observationDate: C:WorldBankPopulation->Year
-observationGender: C: WorldBankPopulation->Gender
-observationAge: C:WorldBankPopulation->Age
 value: C: WorldBankPopulation ->Population
 unit: dcs:count
