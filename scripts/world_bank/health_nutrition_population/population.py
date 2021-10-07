@@ -12,24 +12,23 @@ https://drive.google.com/file/d/1YY8ewSuZD-wx9qJNdvjmz9MB0qJxP-7L/view?usp=shari
 
 import requests
 import pandas as pd
-import app
-import flags
+from absl import app
+from absl import flags
 from util import statvar_dcid_generator
 
 
 FLAGS = flags.FLAGS
 flags.DEFINE_integer("age", 2,
                      "Age to which this program is run, max value 26")
-flags.DEFINE_string("Gender", "FE MA", "Gender: FE forr female, MA for male")
+flags.DEFINE_string("Gender", "FE MA", "Gender: FE for female, MA for male")
 flags.DEFINE_string("Country", "all", "Country codes")
 #maximum the API Can display is 32767
 flags.DEFINE_integer("perPage", 32767, "rows per page")
 flags.DEFINE_string("Path", "WorldBankHNP_Population.csv", "Path of final csv")
 
-AGES = 26
 
-series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(flags.age)
-           for gender in (flags.Gender.split())]
+series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(FLAGS.age)
+           for gender in (FLAGS.Gender.split())]
 
 def get_df(serieses):
     '''
@@ -42,8 +41,8 @@ def get_df(serieses):
         # maximum that can be displayed per page according to API rules
         #will not need to change this, well within reasonable limits
         MAX_PER_PAGE = 32767
-        url = f"https://api.worldbank.org/v2/country/{flags.Country}/indicator/{current_series}?"
-        url = url + f"format=JSON&per_page={flags.perPage}"
+        url = f"https://api.worldbank.org/v2/country/{FLAGS.Country}/indicator/{current_series}?"
+        url = url + f"format=JSON&per_page={FLAGS.perPage}"
         print(url)
 
         response = requests.get(url)
@@ -84,7 +83,10 @@ def get_csv(df_in):
                                    df['Value'][line]]
         df2.loc[len(df2.index)] = addto_df2
     df2.to_csv(flags.Path)
-
-get_mcf(series)
-df = get_df(series)
-get_csv(df)
+    
+def main():
+    get_mcf(series)
+    df = get_df(series)
+    get_csv(df)
+   
+app.run(main)
