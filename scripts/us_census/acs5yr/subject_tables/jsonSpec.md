@@ -98,7 +98,7 @@ In the example, if the `populationType` is a `Person` and the constraint propert
 
 
 #### `inferedSpec` [optional]
-Adds additional property-value pairs to a stat-var node based on the inference of an existing property in that stat-var node.
+Adds additional property-value pairs to a stat-var node based on the inference of an another property in that stat-var node.
 
 For instance, in the example, if the stat-var node has a property `employment` defined, additional property-values for `employmentStatus` and `age` are added to the stat-var node.
 
@@ -133,12 +133,15 @@ This section is not used in the stat-var node but is used to process the column 
 		"65 to 75 years": "65 years and older"
    }
 ```
-For instance, if the column name is *Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years*, the column token *Under 6 years* is a specialization of *Under 19 years*. So, while generating the stat-var node for this column we would like to keep only the specialization, which will mean the stat-var node generated will be for the column *Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 6 years*
+For instance, if the column name is *Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years*, the column token *Under 6 years* is a specialization of *Under 19 years*. The current implementation of the code, drops the stat-var node generated for the column *Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years* and retains only the stat-var generated for the column with the specializaion token namely, *Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years*. This behavior will be modified in a subsequent PR, please refer the note for more information of the upcoming change.
+
+> **NOTE:** This function will be updated in a subsequnt PR where generating the stat-var node for the column *Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years*  will rename the column to keep only the specialization, which will mean the stat-var node generated will be for the column *Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 6 years*
 
 
 #### `ignoreColumns` [optional]
 This section of the spec specifies a list of tokens that if present in the column name, no stat-var node is generated for that column and the column is ignored.
-
+The columns to be ignored can be specified either with full column name (eg.
+Geographic Area Name) or can be sepcified as token (eg. Total).
 ```json
 	"ignoreColumns": [
 		"id",
@@ -155,6 +158,9 @@ The JSON spec can be further extended and customized for each subject tables. At
 If the subject table has percentage values, and you are interested to convert them to numerical counts, then the columns to map can be specified in the denominators section.
 For instance `Uninsured Population!!Estimate!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years` represents the total count of population between 16 and 64 years and the column `Uninsured Population!!Estimate!!Worked full-time, year round in the past 12 months` represents a fraction of the total count of population between 16 and 64 years who worked full-time, year round in the past 12 months.
 
+The example can represented through the following expression:
+<img src="https://render.githubusercontent.com/render/math?math=\frac{\text{Uninsured Population!!Estimate!!Worked full-time, year round in the past 12 months}}{100} * \text{Uninsured Population!!Estimate!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years}">
+
 ```json
 	"denominators":{
 		"Uninsured Population!!Estimate!!WORK EXPERIENCE!!Civilian noninstitutionalized population 16 to 64 years": [
@@ -167,7 +173,8 @@ For instance `Uninsured Population!!Estimate!!WORK EXPERIENCE!!Civilian noninsti
 		]
 	}
 ```
-
+**NOTE:** This section supports only full column names, but can be over-written
+through class inheritance to support column tokens.
 
 #### `find_and_replace` [optional]
 The `preprocess` section of the spec broadly contains definitons of pre-processing steps

@@ -20,7 +20,9 @@ from zipfile import ZipFile
 
 import numpy as np
 import pandas as pd
-
+# TODO: Consider using logs for logging warning messages for debug at a later
+# date
+#
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -37,7 +39,10 @@ def process_subject_tables(table_prefix='',
                            spec_path=None,
                            debug=False,
                            delimiter='!!',
-                           has_percent=False):
+                           has_percent=False,
+                           decimal_places=3,
+                           header_row=1,
+                           estimate_period=5):
     """
     Wrapper method for invoking the data processing module, maps files with the
     corresponding processing function based on input format (*.zip/*.csv),
@@ -50,21 +55,43 @@ def process_subject_tables(table_prefix='',
   an error, stating that the column_map is a required input.
 
   Args:
-  table_prefix: sting prefix that will be added to differentiate outputs
-  input_path: path to the input file(s). The module supports inputs as a either
+  table_prefix: string prefix that will be added to differentiate outputs
+  input_path: path to the input file(s). The module supports inputs as either
     a zip file or a csv file or a directory with zip/ csv files
   output_dir: path to the output directory
   column_map_path: path to the column_map generated with `generate_col_map.py`
   spec_path: path to the JSON specification for the subject table
   debug: if set, adds additional columns to output csv for debugging (default: False)
-  col_delimiter: String denoting the delimiter character in dataset (default: '!!')
+  delimiter: String denoting the delimiter character in dataset (default: '!!')
   has_percent: if set, converts percent to count values (default: False)
   decimal_places: specifies the number of digits after decimal place (default: 3)
   estimate_period: specifies the duration of the subject period estimate (default: 5)
-                : since we use the 5 year subject table estiamte
+                : since we use the 5 year subject table estimate
     header_row: specifies the row index to be considered as the dataframe's
     header for column name assignment. For subject tables, the second row (row index = 1)
     has a human readable column header. (default: 1)
+  header_row: specifies the row index to be considered as the dataframe's header
+  for column name assignment. For subject tables, the second row (row index = 1)
+  has a human readable column header. (default: 1)
+
+  Outputs:
+  The module will write the following files to the specified output directory
+  <table_prefix>_cleaned.csv:
+    csv file with StatVarObservations i.e. quantity measured for a stat_var at a particular place and date.
+    It also has additional columns like units, and scalingFactor if they are specified in the JSON spec.
+  <table_prefix>_output.mcf:
+    file in mcf format with all the StatVars generated in the column map
+  <table_prefix>_output.tmcf:
+    template mcf file used in combination with the csv file for data import
+  <table_prefix>_summary.json:
+    summary stats of data processing year-wise
+
+  If debug=True, additional output files are written to the output directory
+  column_to_dcid.csv:
+    maps the stat var dcid associated to each column of the data file
+  column_to_statvar_map.json:
+    a json file with column mapped to the complete stat-var node
+  <table_prefix>_cleaned.csv will have an additional column containing the name of column in the dataset for which each StatVarObservation was recorded
   """
     ## create a data loader object with base parameters
     data_loader = SubjectTableDataLoaderBase(table_id=table_prefix,
@@ -74,9 +101,9 @@ def process_subject_tables(table_prefix='',
                                              output_path_dir=output_dir,
                                              json_spec=spec_path,
                                              column_map_path=column_map_path,
-                                             decimal_places=3,
-                                             estimate_period=5,
-                                             header_row=1)
+                                             decimal_places=decimal_places,
+                                             estimate_period=estimate_period,
+                                             header_row=header_row)
 
     ## if input_path is a file, select csv/zip processing methods
     _, file_extension = os.path.splitext(input_path)
@@ -96,8 +123,8 @@ class SubjectTableDataLoaderBase:
 
 
   Attributes:
-  table_prefix: sting prefix that will be added to differentiate outputs
-  input_path: path to the input file(s). The module supports inputs as a either
+  table_prefix: string prefix that will be added to differentiate outputs
+  input_path: path to the input file(s). The module supports inputs as either
     a zip file or a csv file or a directory with zip/ csv files
   output_dir: path to the output directory
   column_map_path: path to the column_map generated with `generate_col_map.py`
@@ -107,7 +134,7 @@ class SubjectTableDataLoaderBase:
   has_percent: if set, converts percent to count values (default: False)
   decimal_places: specifies the number of digits after decimal place (default: 3)
   estimate_period: specifies the duration of the subject period estimate (default: 5)
-                : since we use the 5 year subject table estiamte
+                : since we use the 5 year subject table estimate
   header_row: specifies the row index to be considered as the dataframe's header
   for column name assignment. For subject tables, the second row (row index = 1)
   has a human readable column header. (default: 1)
@@ -195,6 +222,7 @@ class SubjectTableDataLoaderBase:
         df_columns = df.columns.tolist()
         for count_col, percent_col_list in self.json_spec['denominators'].items(
         ):
+            # TODO: add a warning message
             if count_col in df_columns:
                 for col in percent_col_list:
                     if col in df_columns:
@@ -209,7 +237,7 @@ class SubjectTableDataLoaderBase:
     def _get_summary(self):
         """
         method returns the total number of columns, stat vars and other stats
-        from the colum_map and csv.
+        from the column_map and csv.
         """
         for key, count_dict in self.counter_dict.items():
             if key != 'summary':
@@ -281,8 +309,8 @@ class SubjectTableDataLoaderBase:
                     scalingFactor = column_map[column]['scalingFactor']
                     del column_map[column]['scalingFactor']
                 except KeyError:
-                    unit = np.nan
                     scalingFactor = np.nan
+                obs_df['ScalingFactor'] = scalingFactor
 
                 # if StatVar not in mcf_dict, add dcid
                 dcid = column_map[column]['Node']
@@ -295,7 +323,6 @@ class SubjectTableDataLoaderBase:
                         if key != 'Node':
                             self.mcf_dict[dcid][key] = value
 
-                obs_df['ScalingFactor'] = scalingFactor
                 obs_df['Year'] = year
                 obs_df['Column'] = column
 
@@ -343,11 +370,14 @@ class SubjectTableDataLoaderBase:
 
         for column, stat_var in self.mcf_dict.items():
             col_stat_var = []
+            # TODO: Add 'Node:' as the first element of col_stat_var, and append
+            # all the stat-var node information to col_stat_var
             dcid = 'Node: ' + column + '\n'
 
             for p, v in stat_var.items():
                 if p != 'unit' or p != 'scalingFactor':
                     col_stat_var.append(f"{p}: {v}")
+            # TODO: Replace the next two lines with final_mcf = final_mcf + '\n'.join(col_stat_var) + '\n\n'
             col_stat_var = dcid + '\n'.join(col_stat_var)
             final_mcf = final_mcf + col_stat_var + "\n\n"
         return final_mcf
