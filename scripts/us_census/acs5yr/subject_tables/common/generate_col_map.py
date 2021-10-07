@@ -29,7 +29,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(
     _SCRIPT_PATH, '../../../../../util/'))  # for statvar_dcid_generator
 
-from statvar_dcid_generator import get_stat_var_dcid
+from statvar_dcid_generator import get_statvar_dcid
 
 # intitalize the logger
 logging.basicConfig(
@@ -319,7 +319,7 @@ class GenerateColMapBase:
                 stat_var.update(self.features['inferredSpec'][p])
 
         # generating dcid using the utils/statvar_dcid_generator.py
-        stat_var_dcid = get_stat_var_dcid(stat_var,
+        stat_var_dcid = get_statvar_dcid(stat_var,
                                           ignore_props=dependent_properties)
 
         ## overwrite stat_var_dcids from the spec (for existing dcids)
