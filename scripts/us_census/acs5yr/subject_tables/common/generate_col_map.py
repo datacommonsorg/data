@@ -281,7 +281,7 @@ class GenerateColMapBase:
         ## add Universe PVs based on the populationType of StatVar
         # TODO: While adding dependentPVs, set values only for properties not already
         # in stat_var so as to not overwrite an existing property. Maybe useful
-        # to add a class local function that sets value for a property with a 
+        # to add a class local function that sets value for a property with a
         # bool arg to allow overwrite.
         dependent_properties = None
         for elem in self.features['universePVs']:
@@ -299,10 +299,10 @@ class GenerateColMapBase:
                     except KeyError:
                         continue  #when dependentPVs are not specified in spec, skip
                 # TODO: While adding dependentPVs, set values only for properties
-                # not already in stat_var so as to not overwrite an existing 
+                # not already in stat_var so as to not overwrite an existing
                 # property. Maybe useful to add a class local function that sets
                 # value for a property with a bool arg to allow overwrite.
-                
+
                 #
                 # if constraintProperties is empty, then add the defaultPVs to the
                 # stat_var node
@@ -313,14 +313,14 @@ class GenerateColMapBase:
         for p in list(stat_var):
             if p in self.features['inferredSpec']:
                 # TODO: While adding inferredSpec, set values only for properties
-                # not already in stat_var so as to not overwrite an existing 
+                # not already in stat_var so as to not overwrite an existing
                 # property. Maybe useful to add a class local function that sets
                 # value for a property with a bool arg to allow overwrite.
                 stat_var.update(self.features['inferredSpec'][p])
 
         # generating dcid using the utils/statvar_dcid_generator.py
         stat_var_dcid = get_statvar_dcid(stat_var,
-                                          ignore_props=dependent_properties)
+                                         ignore_props=dependent_properties)
 
         ## overwrite stat_var_dcids from the spec (for existing dcids)
         # TODO: If  "Node" not found in stat_var, then throw a warning message
