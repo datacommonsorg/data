@@ -1,0 +1,85 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "1080",
+        "NumPVSuccesses": "8640",
+        "Existence_NumChecks": "11228",
+        "NumNodeSuccesses": "1080",
+        "Existence_NumDcCalls": "2"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "2"
+      }
+    }
+  },
+  "statsCheckSummary": [{
+    "placeDcid": "geoId/01",
+    "statVarDcid": "MarginOfError_Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2015",
+        "values": [{
+          "value": 370.0,
+          "locations": [{
+            "file": "S0902_state_county_places_cleaned.csv",
+            "lineNumber": "435"
+          }]
+        }]
+      }, {
+        "date": "2016",
+        "values": [{
+          "value": 1229.0,
+          "locations": [{
+            "file": "S0902_state_county_places_cleaned.csv",
+            "lineNumber": "327"
+          }]
+        }]
+      }],
+      "percentDifference": 232.16
+    }]
+  }, {
+    "placeDcid": "geoId/01",
+    "statVarDcid": "MarginOfError_Count_Person_15To19Years_Male_WhiteAloneNotHispanicOrLatino",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2015",
+        "values": [{
+          "value": 273.0,
+          "locations": [{
+            "file": "S0902_state_county_places_cleaned.csv",
+            "lineNumber": "445"
+          }]
+        }]
+      }, {
+        "date": "2016",
+        "values": [{
+          "value": 1184.0,
+          "locations": [{
+            "file": "S0902_state_county_places_cleaned.csv",
+            "lineNumber": "337"
+          }]
+        }]
+      }],
+      "percentDifference": 333.7
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}
