@@ -49,8 +49,8 @@ _MANDATORY_PROPS = ['measuredProperty', 'populationType', 'statType']
 # empty dictionary
 _JSON_KEYS = [
     'populationType', 'measurement', 'pvs', 'inferredSpec',
-    'enumSpecializations', 'pvs', 'universePVs', 'ignoreColumns',
-    'overwrite_dcids', 'preprocess'
+    'enumSpecializations', 'universePVs', 'ignoreColumns', 'overwrite_dcids',
+    'preprocess'
 ]
 
 
@@ -152,7 +152,10 @@ class GenerateColMapBase:
         self.column_list = column_list
         self.column_map = {}
         self.delimiter = delimiter
-        # TODO: Add a dictionary of counters with summary stats of number of columns, number of statvars generated, statvars of differnt population types, errors or warnings,
+        # TODO: Add a dictionary of counters with summary stats of number of
+        # columns, number of statvars generated, statvars of differnt population
+        # types, errors or warnings,
+        #
         # fill missing keys in JSON spec with empty values
         for key in _JSON_KEYS:
             if key not in self.features:
@@ -163,7 +166,9 @@ class GenerateColMapBase:
                     self.features[key] = {}
 
     def _find_and_replace_column_names(self, column):
-        """if spec has find_and_replace defined, this function updates column names"""
+        """
+        if spec has find_and_replace defined, this function updates column names
+        """
         if 'find_and_replace' in self.features['preprocess']:
             find_and_replace_dict = self.features['preprocess'][
                 'find_and_replace']
@@ -172,6 +177,7 @@ class GenerateColMapBase:
                 return find_and_replace_dict[column]
             # replace a token in the column name
             else:
+                # TODO: Support the find_and_replace of more than one token
                 part_list = column.split(self.delimiter)
                 for idx, part in enumerate(part_list):
                     if part in find_and_replace_dict:
@@ -180,7 +186,9 @@ class GenerateColMapBase:
         return column
 
     def _generate_stat_vars_from_spec(self):
-        """generates stat_var nodes for each column in column list and returns a dictionary of columns with their respective stat_var nodes
+        """generates stat_var nodes for each column in column list and 
+        returns a dictionary of columns with their respective stat_var nodes
+
             Example output: {
           "Total Civilian population": {
             "populationType": "Person",
@@ -191,7 +199,12 @@ class GenerateColMapBase:
           "<column-name-2>": {}, .....
         }"""
         # for each column generate the definition of their respective statistical variable node
+        # TODO: This code block can be simplified to the following:
+        # if col in self.features['ignoreColumns'] or
+        # len((set(self.features['ignoreColumns']) &
+        # set(col.split(self.delimiter)) > 0:
         for col in self.column_list:
+            # TODO: Replace the type of ignore_token_count to boolean
             ignore_token_count = 0
             for part in col.split(self.delimiter):
                 for token in self.features['ignoreColumns']:
@@ -266,6 +279,10 @@ class GenerateColMapBase:
                         stat_var[p] = v
 
         ## add Universe PVs based on the populationType of StatVar
+        # TODO: While adding dependentPVs, set values only for properties not already
+        # in stat_var so as to not overwrite an existing property. Maybe useful
+        # to add a class local function that sets value for a property with a 
+        # bool arg to allow overwrite.
         dependent_properties = None
         for elem in self.features['universePVs']:
             if stat_var['populationType'] == elem['populationType']:
@@ -281,14 +298,24 @@ class GenerateColMapBase:
                         dependent_properties = list(elem['dependentPVs'].keys())
                     except KeyError:
                         continue  #when dependentPVs are not specified in spec, skip
+                # TODO: While adding dependentPVs, set values only for properties
+                # not already in stat_var so as to not overwrite an existing 
+                # property. Maybe useful to add a class local function that sets
+                # value for a property with a bool arg to allow overwrite.
+                
+                #
                 # if constraintProperties is empty, then add the defaultPVs to the
                 # stat_var node
                 if len(elem['constraintProperties']) == 0:
                     stat_var.update(elem['dependentPVs'])
 
-        # add inferred propoerties if applicable
+        # add inferred properties if applicable
         for p in list(stat_var):
             if p in self.features['inferredSpec']:
+                # TODO: While adding inferredSpec, set values only for properties
+                # not already in stat_var so as to not overwrite an existing 
+                # property. Maybe useful to add a class local function that sets
+                # value for a property with a bool arg to allow overwrite.
                 stat_var.update(self.features['inferredSpec'][p])
 
         # generating dcid using the utils/statvar_dcid_generator.py
@@ -296,6 +323,7 @@ class GenerateColMapBase:
                                           ignore_props=dependent_properties)
 
         ## overwrite stat_var_dcids from the spec (for existing dcids)
+        # TODO: If  "Node" not found in stat_var, then throw a warning message
         if stat_var_dcid in self.features['overwrite_dcids']:
             stat_var_dcid = self.features['overwrite_dcids'][stat_var_dcid]
         stat_var['Node'] = 'dcid:' + stat_var_dcid
@@ -319,7 +347,6 @@ class GenerateColMapBase:
                     f'One or more mandatory properties of the stat_var is missing. \n Dump of the stat_var:: {stat_var}'
                 )
 
-    # TODO: Rename and re-define this function, since enumSpecializations are used to remove the base class token in the column name and does not affect the stat var defined.
     def _keep_only_enum_specializations(self):
         """removes generalization token from column name.
 
@@ -329,10 +356,15 @@ class GenerateColMapBase:
         "6 to 18 years": "Under 19 years",
       }
       It means that "Under 6 years" and "6 to 18 years" are specializations of "Under 19 years".
-      Hence, if hte token "Under 19 years" and "Under 6 years" occur in the same column name, we drop the token "Under 19 years" from the column
+      Example: If the column was Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years and we had defined
+      a stat_var for Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years which is the broader class. This function would
+      delete the stat_var node generated for vEstimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years and will preserve only
+      the stat_var node generated for column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years. Since,
+      Under 6 years is defined as the specialization of Under 19 years.
       """
-        # TODO:The function call takes as an argument a  column name, it removes
-        # the base class from the column name and keeps only the specialization
+        # TODO: Re-define this function, since enumSpecializations are used to remove the base class token in the column name and does not affect the stat var defined.
+        # The current implementation of the function removes the statVar node for the base class and keeps the specialization, which is not the desired output
+        # In the above example if both 6 to 18 years and Under 19 years appear as tokens in the column name, we remove Under 19 years from the column name and not remove the StatVarNode which describes the population  Under 19 years.
         column_map = self.column_map.copy()
         for column_name, stat_var in column_map.items():
             part_list = column_name.split(self.delimiter)
