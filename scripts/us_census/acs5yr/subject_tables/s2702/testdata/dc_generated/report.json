@@ -1,0 +1,297 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "1435",
+        "NumPVSuccesses": "11501",
+        "Existence_NumChecks": "17188",
+        "NumNodeSuccesses": "1435",
+        "Existence_NumDcCalls": "3"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StrSplit_EmptyToken_unit": "1414",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "1"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "S2702_state_county_places_cleaned.csv",
+      "lineNumber": "32"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Unit', property: 'unit', node: 'E:SubjectTable->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "geoId/01",
+    "statVarDcid": "Count_Person_NoHealthInsurance_NativeHawaiianOrOtherPacificIslanderAlone",
+    "measurementMethod": "CensusACS5yrSurveySubjectTable",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2014",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "S2702_state_county_places_cleaned.csv",
+            "lineNumber": "453"
+          }]
+        }]
+      }, {
+        "date": "2015",
+        "values": [{
+          "value": 601.159,
+          "locations": [{
+            "file": "S2702_state_county_places_cleaned.csv",
+            "lineNumber": "1273"
+          }]
+        }]
+      }],
+      "percentDifference": 6.01159E10
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}
