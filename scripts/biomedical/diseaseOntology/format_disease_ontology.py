@@ -38,7 +38,7 @@ def format_tag(tag: str) -> str:
         tag: tag of an element in xml file,
              containg human-readable string after '}'
     Returns:
-        tag_readable: human-readable string after '}'
+        tag_readable: human-readble string after '}'
     
     """
     tag_readable = tag.split("}")[1]
@@ -92,8 +92,8 @@ def format_cols(df):
     Returns:
         none
     """
-    df = df.astype(str)
     for i, col in enumerate(df.columns):
+        df[col] = df[col].astype(str)
         df[col] = df[col].map(lambda x: re.sub(r'[\([{})\]]', '', x))
         df.iloc[:, i] = df.iloc[:, i].str.replace("'", '')
         df.iloc[:, i] = df.iloc[:, i].str.replace('"', '')
@@ -157,8 +157,8 @@ def col_string(df):
         col_rep = str(newcol) + ":" + "nan"
         df[newcol] = df[newcol].replace(col_rep, np.nan)
     col_names = [
-        'hasAlternativeId', 'IAO_0000115', 'hasExactSynonym', 'label', 'ICDO',
-        'MESH', 'NCI', 'SNOMEDCTUS20200901', 'UMLSCUI', 'ICD10CM', 'ICD9CM',
+        'hasAlternativeId', 'hasExactSynonym', 'label', 'ICDO', 'MESH', 'NCI',
+        'SNOMEDCTUS20200901', 'UMLSCUI', 'ICD10CM', 'ICD9CM',
         'SNOMEDCTUS20200301', 'ORDO', 'SNOMEDCTUS20180301', 'GARD', 'OMIM',
         'EFO', 'KEGG', 'MEDDRA', 'SNOMEDCTUS20190901'
     ]
@@ -225,31 +225,26 @@ def icd10_query(df):
         df.ICD10CM.update(df.ICD10CM.map(result1_df.set_index('element').id))
     return df
 
-def col_drop(df_do):
-    """
-    Drops required columns 
-    Args:
-        df_do = dataframe to change
-    Returns
-        df_do = modified dataframe 
-    """
-    df_do = df_do.drop([
-    'Class', 'exactMatch', 'deprecated', 'hasRelatedSynonym', 'comment',
-    'OBI_9991118', 'narrowMatch', 'hasBroadSynonym', 'disjointWith',
-    'hasNarrowSynonym', 'broadMatch', 'created_by', 'creation_date',
-    'inSubset', 'hasOBONamespace'
-],
-                    axis=1)
-    return df_do
+
+def remove_newline(df):
+    df.loc[2505, 'IAO_0000115'] = df.loc[2505, 'IAO_0000115'].replace("\\n", "")
+    df.loc[2860, 'IAO_0000115'] = df.loc[2860, 'IAO_0000115'].replace("\\n", "")
+    df.loc[2895, 'IAO_0000115'] = df.loc[2895, 'IAO_0000115'].replace("\\n", "")
+    df.loc[2934, 'IAO_0000115'] = df.loc[2934, 'IAO_0000115'].replace("\\n", "")
+    df.loc[3036, 'IAO_0000115'] = df.loc[3036, 'IAO_0000115'].replace("\\n", "")
+    df.loc[11305, 'IAO_0000115'] = df.loc[11305,
+                                          'IAO_0000115'].replace("\\n", "")
+    return df
 
 
-
-def main():
+def wrapper_fun(file_input, file_output):
     file_input = sys.argv[1]
     file_output = sys.argv[2]
     # Read disease ontology .owl file
     tree = ElementTree.parse(file_input)
+    # Get file root
     root = tree.getroot()
+    # Find owl classes elements
     all_classes = root.findall('{http://www.w3.org/2002/07/owl#}Class')
     # Parse owl classes to human-readble dictionary format
     parsed_owl_classes = []
@@ -259,7 +254,13 @@ def main():
     # Convert to pandas Dataframe
     df_do = pd.DataFrame(parsed_owl_classes)
     format_cols(df_do)
-    df_do = col_drop(df_do)
+    df_do = df_do.drop([
+        'Class', 'exactMatch', 'deprecated', 'hasRelatedSynonym', 'comment',
+        'OBI_9991118', 'narrowMatch', 'hasBroadSynonym', 'disjointWith',
+        'hasNarrowSynonym', 'broadMatch', 'created_by', 'creation_date',
+        'inSubset', 'hasOBONamespace'
+    ],
+                       axis=1)
     df_do = col_explode(df_do)
     df_do = mesh_query(df_do)
     df_do = icd10_query(df_do)
@@ -269,8 +270,17 @@ def main():
     df_do = df_do.reset_index(drop=True)
     df_do = df_do.replace('"nan"', np.nan)
     #generate dcids
-    df_do['id'] = "bio/DOID_" + df_do['id']
+    df_do['id'] = "bio/" + df_do['id']
+    ##df_do.loc[2505, 'IAO_0000115'] = df_do.loc[2505, 'IAO_0000115'].replace("\\n", "")
+    df_do = remove_newline(df_do)
+    df_do['IAO_0000115'] = df_do['IAO_0000115'].str.replace("_", " ")
     df_do.to_csv(file_output)
+
+
+def main():
+    file_input = sys.argv[1]
+    file_output = sys.argv[2]
+    wrapper_fun(file_input, file_output)
 
 
 if __name__ == '__main__':
