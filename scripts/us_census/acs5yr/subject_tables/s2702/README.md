@@ -4,7 +4,7 @@ Data Source: [ACS 5Yr Estimates](https://data.census.gov/cedsci/table?q=S2702&g=
 Data Granularity: County, State and Country
 
 ### About the dataset
-The dataset describes various characteristics of the population that are uninsured in the United States. The dataset is based on estimates based on the US 2010 Census and may not accurately capture current, on-ground changes. Thus, the dataset comes with a margin of error which gives the estimate minus the margin of error and the estimate plus the margin of error (the lower and upper confidence bounds) contains the true value. In addition to sampling variability, the ACS estimates are subject to nonsampling error (for a discussion of non sampling variability.
+The dataset describes various characteristics of the population that are uninsured in the United States. The dataset is based on estimates based on the US 2010 Census and may not accurately capture current, on-ground changes.
 
 The dataset has 215 StatisticalVariable. In this import, we do not include
 StatisticalVariable for Households with Income between $50,000 to $74,999. These
