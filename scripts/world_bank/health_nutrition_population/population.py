@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from absl import app
 from absl import flags
-#from util import statvar_dcid_generator
+from util import statvar_dcid_generator
 
 
 FLAGS = flags.FLAGS
@@ -35,15 +35,16 @@ def get_df(serieses, per_page, country):
         for counter in range(len(response[1])):
             row = 0
             val = response[1][counter]['value']
-            if val is not None:
-                row = {"Series Name" : response[1][counter]['indicator']['value'],
-                    "Series Code" : response[1][counter]['indicator']['id'],
-                    "Country Code" : response[1][counter]['countryiso3code'],
-                    "Country" : response[1][counter]['country']['value'],
-                    "Year" : response[1][counter]['date'],
-                    'Value' : response[1][counter]['value']
+            if val is None:
+                val = "unavaliable"
+            row = {"Series Name" : response[1][counter]['indicator']['value'],
+                "Series Code" : response[1][counter]['indicator']['id'],
+                "Country Code" : response[1][counter]['countryiso3code'],
+                "Country" : response[1][counter]['country']['value'],
+                "Year" : response[1][counter]['date'],
+                'Value' : val
 
-                }
+            }
             df2.loc[len(df2)] = row
     return df2
 
@@ -63,10 +64,10 @@ def get_csv(df_in, df_out_path):
         gender, statvar = '', ''
         gender = df_in['Series Name'][line].split(',')[-2].strip()
         gender = gender[0].upper() + gender[1:]
-        age = df_in['Series Name'][line].split(',')[-1].strip()
+        age = df_in['Series Name'][line].split(',')[-3].strip().split()[-1]
         statvar = get_statvars(gender, age)
-        addto_df2 = [df['Country'][line], df['Year'][line], statvar,
-                                   df['Value'][line]]
+        addto_df2 = [df_in['Country'][line], df_in['Year'][line], statvar,
+                                   df_in['Value'][line]]
         df2.loc[len(df2.index)] = addto_df2
     df2.to_csv(df_out_path)
     
