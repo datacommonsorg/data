@@ -21,3 +21,10 @@ Commons.
       --input_district_geojson=<Path-to-District-GeoJson> \
       --output_geojson_dir=/tmp/
    ```
+
+## Testing
+
+```
+cd scripts/
+python3 -m unittest discover -v -s india_datameet -p "generate_mcf_test.py"
+```
