@@ -28,16 +28,26 @@ DATA_API_URL = "https://dashboard.udiseplus.gov.in/BackEnd-master/api/report/get
 MASTER_API_URL = "https://dashboard.udiseplus.gov.in/BackEnd-master/api/report/getMasterData"
 
 DEFAULT_HEADERS = {
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Connection': 'keep-alive',
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Origin': 'https://dashboard.udiseplus.gov.in',
-        'Referer': 'https://dashboard.udiseplus.gov.in/',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0',
+    'Accept':
+        'application/json, text/plain, */*',
+    'Accept-Language':
+        'en-US,en;q=0.5',
+    'Connection':
+        'keep-alive',
+    'Content-Type':
+        'text/plain; charset=utf-8',
+    'Origin':
+        'https://dashboard.udiseplus.gov.in',
+    'Referer':
+        'https://dashboard.udiseplus.gov.in/',
+    'Sec-Fetch-Dest':
+        'empty',
+    'Sec-Fetch-Mode':
+        'cors',
+    'Sec-Fetch-Site':
+        'same-origin',
+    'User-Agent':
+        'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0',
 }
 
 DEFAULT_COOKIES = {
@@ -47,24 +57,24 @@ DEFAULT_COOKIES = {
 
 DATA_FILE_NAME_FORMAT = "{udise_report_id}_{udise_map_id}_{geographic_level}_{udise_state_code}_{udise_dist_code}_{udise_block_code}_{year}.json"
 
-SCHOOL_MANAGEMENT ={
-    "Department of Education":"DepartmentOfEducation",
-    "Tribal Welfare Department":"TribalWelfareDeaprtment",
-    "Local body":"LocalBody",
-    "Government Aided":"GovermentAided",
-    "Private Unaided (Recognized)":"PrivateUnaidedRecognized",
-    "Other Govt. managed schools":"OtherGovermentManaged",
-    "Unrecognized":"Unrecognized",
-    "Social welfare Department":"SocialWelfareDepartment",
-    "Ministry of Labor":"MinistryOfLabor",
-    "Kendriya Vidyalaya / Central School":"KendriyaVidyalaya",
-    "Jawahar Navodaya Vidyalaya":"JawaharNavodayaVidyalaya",
-    "Sainik School":"SainikSchool",
-    "Railway School":"RailwaySchool",
-    "Central Tibetan School":"CentralTibetanSchool",
-    "Madarsa recognized (by Wakf board/Madarsa Board)":"MadrasaRecognized",
-    "Madarsa unrecognized":"MadrasaUnrecognized",
-    "Other Central Govt. Schools" :"OtherCentralGovtSchools",
+SCHOOL_MANAGEMENT = {
+    "Department of Education": "DepartmentOfEducation",
+    "Tribal Welfare Department": "TribalWelfareDeaprtment",
+    "Local body": "LocalBody",
+    "Government Aided": "GovermentAided",
+    "Private Unaided (Recognized)": "PrivateUnaidedRecognized",
+    "Other Govt. managed schools": "OtherGovermentManaged",
+    "Unrecognized": "Unrecognized",
+    "Social welfare Department": "SocialWelfareDepartment",
+    "Ministry of Labor": "MinistryOfLabor",
+    "Kendriya Vidyalaya / Central School": "KendriyaVidyalaya",
+    "Jawahar Navodaya Vidyalaya": "JawaharNavodayaVidyalaya",
+    "Sainik School": "SainikSchool",
+    "Railway School": "RailwaySchool",
+    "Central Tibetan School": "CentralTibetanSchool",
+    "Madarsa recognized (by Wakf board/Madarsa Board)": "MadrasaRecognized",
+    "Madarsa unrecognized": "MadrasaUnrecognized",
+    "Other Central Govt. Schools": "OtherCentralGovtSchools",
     "Total": "Total"
 }
 
@@ -143,11 +153,13 @@ class UDISEIndiaSchoolDataLoaderBase:
         time.sleep(1)
 
     def _get_states_json_data(self):
-        print("self.states_json_data_file_path", self.states_json_data_file_path)
+        print("self.states_json_data_file_path",
+              self.states_json_data_file_path)
         if path.exists(self.states_json_data_file_path):
             print("States JSON already exists.")
         else:
-            condition = " where ac_year ='{LATEST_YEAR}' ".format(LATEST_YEAR=LATEST_YEAR)
+            condition = " where ac_year ='{LATEST_YEAR}' ".format(
+                LATEST_YEAR=LATEST_YEAR)
             data = {"extensionCall": "GET_STATE", "condition": condition}
             self._pause()
             response = requests.post(MASTER_API_URL,
@@ -167,7 +179,8 @@ class UDISEIndiaSchoolDataLoaderBase:
         if path.exists(self.districts_json_data_file_path):
             print("Districts JSON already exists.")
         else:
-            condition = " where ac_year ='{LATEST_YEAR}' order by district_name ".format(LATEST_YEAR=LATEST_YEAR)
+            condition = " where ac_year ='{LATEST_YEAR}' order by district_name ".format(
+                LATEST_YEAR=LATEST_YEAR)
             data = {
                 "extensionCall": "GET_DISTRICT",
                 "condition": condition,
@@ -188,11 +201,9 @@ class UDISEIndiaSchoolDataLoaderBase:
         if path.exists(self.blocks_json_data_file_path):
             print("Blocks JSON already exists.")
         else:
-            condition = " where ac_year ='{LATEST_YEAR}' order by block_name ".format(LATEST_YEAR=LATEST_YEAR)
-            data = {
-                "extensionCall": "GET_BLOCK",
-                "condition": condition
-            }
+            condition = " where ac_year ='{LATEST_YEAR}' order by block_name ".format(
+                LATEST_YEAR=LATEST_YEAR)
+            data = {"extensionCall": "GET_BLOCK", "condition": condition}
             self._pause()
             response = requests.post(MASTER_API_URL,
                                      headers=DEFAULT_HEADERS,
@@ -222,22 +233,24 @@ class UDISEIndiaSchoolDataLoaderBase:
         if "LevelOfSchool" in data_row:
             school_level = data_row["LevelOfSchool"]
             if school_level == "Total":
-                # If the level is total 
+                # If the level is total
                 # then no need to add Constraint
                 pass
             else:
                 name_array.append(school_level)
-                constraints_array.append("levelOfSchool: dcs:UDISE_{}".format(school_level))
+                constraints_array.append(
+                    "levelOfSchool: dcs:UDISE_{}".format(school_level))
 
         if "SchoolManagement" in data_row:
             school_management = data_row["SchoolManagement"]
             if school_management == "Total":
-                # If the level is total 
+                # If the level is total
                 # then no need to add Constraint
                 pass
             else:
                 name_array.append(school_management)
-                constraints_array.append("schoolManagement: dcs:UDISE_{}".format(school_management))
+                constraints_array.append(
+                    "schoolManagement: dcs:UDISE_{}".format(school_management))
 
         variable_name = "_".join(name_array)
 
@@ -274,8 +287,8 @@ class UDISEIndiaSchoolDataLoaderBase:
             self.data_folder,
             DATA_FILE_NAME_FORMAT.format(year=year,
                                          geographic_level=geographic_level,
-                                         udise_report_id=self.udise_report_id, 
-                                         udise_map_id =self.udise_map_id,
+                                         udise_report_id=self.udise_report_id,
+                                         udise_map_id=self.udise_map_id,
                                          udise_state_code=udise_state_code,
                                          udise_dist_code=udise_dist_code,
                                          udise_block_code=udise_block_code))
@@ -299,14 +312,16 @@ class UDISEIndiaSchoolDataLoaderBase:
                         data_row["LocationType"] = geographic_level
                         if geographic_level == "state":
                             data_row["UDISECode"] = udise_state_code
-                        elif  geographic_level == "state":
+                        elif geographic_level == "state":
                             data_row["UDISECode"] = udise_dist_code
 
-                        data_row["SchoolManagement"] = SCHOOL_MANAGEMENT[(row["sch_mgmt_name"]).strip()]
+                        data_row["SchoolManagement"] = SCHOOL_MANAGEMENT[(
+                            row["sch_mgmt_name"]).strip()]
 
                         attribute_map = self.attribute_mapping[column]
 
-                        data_row["LevelOfSchool"] = attribute_map["levelOfSchool"]
+                        data_row["LevelOfSchool"] = attribute_map[
+                            "levelOfSchool"]
                         stat_var, variable_name = self._create_variable(
                             data_row)
                         data_row["StatisticalVariable"] = variable_name
@@ -355,8 +370,8 @@ class UDISEIndiaSchoolDataLoaderBase:
             self.data_folder,
             DATA_FILE_NAME_FORMAT.format(year=year,
                                          geographic_level=geographic_level,
-                                         udise_report_id=self.udise_report_id, 
-                                         udise_map_id =self.udise_map_id,
+                                         udise_report_id=self.udise_report_id,
+                                         udise_map_id=self.udise_map_id,
                                          udise_state_code=udise_state_code,
                                          udise_dist_code=udise_dist_code,
                                          udise_block_code=udise_block_code))
@@ -419,19 +434,20 @@ class UDISEIndiaSchoolDataLoaderBase:
 
         #TODO: Load blocks data
 
-
     def _download_data(self):
         for year in self.years:
             for state in self.states:
-                self._get_data(year, geographic_level="state", udise_state_code=state["udise_state_code"])
+                self._get_data(year,
+                               geographic_level="state",
+                               udise_state_code=state["udise_state_code"])
 
             for district in self.districts:
-                self._get_data(year,geographic_level="district",
+                self._get_data(year,
+                               geographic_level="district",
                                udise_state_code=district["udise_state_code"],
                                udise_dist_code=district["udise_district_code"])
 
             #TODO: Download blocks data
-
 
     def _save_mcf(self):
         if path.exists(self.mcf_file_path) is False:
@@ -452,15 +468,16 @@ class UDISEIndiaSchoolDataLoaderBase:
 
         for year in self.years:
             for state in self.states:
-                self._process_data(year,geographic_level="state",
+                self._process_data(year,
+                                   geographic_level="state",
                                    udise_state_code=state["udise_state_code"])
             for district in self.districts:
                 self._process_data(
-                    year,geographic_level="district",
+                    year,
+                    geographic_level="district",
                     udise_state_code=district["udise_state_code"],
                     udise_dist_code=district["udise_district_code"])
 
             #TODO: Process blocks data
-
 
         self._save_mcf()

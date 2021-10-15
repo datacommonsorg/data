@@ -34,21 +34,25 @@ class TestPreprocess(unittest.TestCase):
         data_folder = os.path.join(module_dir_, "test_data")
 
         expected_csv_file_path = os.path.join(
-            data_folder, "expected_UDISEIndia_Schools_With_Functional_Toilet.csv")
+            data_folder,
+            "expected_UDISEIndia_Schools_With_Functional_Toilet.csv")
         expected_mcf_file_path = os.path.join(
-            data_folder, "expected_UDISEIndia_Schools_With_Functional_Toilet.mcf")
+            data_folder,
+            "expected_UDISEIndia_Schools_With_Functional_Toilet.mcf")
 
-        csv_file_path = os.path.join(data_folder,
-                                     "UDISEIndia_Schools_With_Functional_Toilet.csv")
-        mcf_file_path = os.path.join(data_folder,
-                                     "UDISEIndia_Schools_With_Functional_Toilet.mcf")
+        csv_file_path = os.path.join(
+            data_folder, "UDISEIndia_Schools_With_Functional_Toilet.csv")
+        mcf_file_path = os.path.join(
+            data_folder, "UDISEIndia_Schools_With_Functional_Toilet.mcf")
 
-        base = UDISESchoolsWithFunctionalToilet(api_report_code, api_map_id,
-                                      data_folder,
-                                      csv_file_path,
-                                      mcf_file_path,
-                                      years,
-                                      attribute_mapping=ATTRIBUTE_MAPPING)
+        base = UDISESchoolsWithFunctionalToilet(
+            api_report_code,
+            api_map_id,
+            data_folder,
+            csv_file_path,
+            mcf_file_path,
+            years,
+            attribute_mapping=ATTRIBUTE_MAPPING)
         base.process()
 
         expected_csv_file = open(expected_csv_file_path)
