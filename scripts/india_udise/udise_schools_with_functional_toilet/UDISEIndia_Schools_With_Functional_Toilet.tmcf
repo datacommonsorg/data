@@ -1,0 +1,11 @@
+Node: E:UDISESchoolWithFunctionalToiletCount->E0
+typeOf: schema:Place
+udiseCode: C:UDISESchoolWithFunctionalToiletCount->UDISECode
+
+Node: E:UDISESchoolWithFunctionalToiletCount->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:UDISESchoolWithFunctionalToiletCount->StatisticalVariable
+value: C:UDISESchoolWithFunctionalToiletCount->Value
+observationDate: C:UDISESchoolWithFunctionalToiletCount->Period
+observationPeriod: "P1Y"
+observationAbout: E:UDISESchoolWithFunctionalToiletCount->E0
