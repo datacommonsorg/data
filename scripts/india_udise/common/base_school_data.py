@@ -19,10 +19,13 @@ import os
 import re
 import json
 import csv
+import enum
 import requests
 import time
 from os import path
 from csv import writer
+
+module_dir_ = os.path.dirname(__file__)
 
 DATA_API_URL = "https://dashboard.udiseplus.gov.in/BackEnd-master/api/report/getTabularData"
 MASTER_API_URL = "https://dashboard.udiseplus.gov.in/BackEnd-master/api/report/getMasterData"
@@ -92,7 +95,11 @@ CSV_HEADERS = [
     "Period", "UDISECode", "LocationType", "StatisticalVariable", "Value"
 ]
 
-module_dir_ = os.path.dirname(__file__)
+
+class GeographicLevel(enum.Enum):
+    STATE = "state"
+    DISTRICT = "district"
+    BLOCK = "block"
 
 
 class UDISEIndiaSchoolDataLoaderBase:
@@ -310,9 +317,9 @@ class UDISEIndiaSchoolDataLoaderBase:
                         data_row["Value"] = row[column]
                         data_row["Period"] = self._year_to_period(year)
                         data_row["LocationType"] = geographic_level
-                        if geographic_level == "state":
+                        if geographic_level == GeographicLevel.STATE.value:
                             data_row["UDISECode"] = udise_state_code
-                        elif geographic_level == "state":
+                        elif geographic_level == GeographicLevel.DISTRICT.value:
                             data_row["UDISECode"] = udise_dist_code
 
                         data_row["SchoolManagement"] = SCHOOL_MANAGEMENT[(
@@ -438,12 +445,12 @@ class UDISEIndiaSchoolDataLoaderBase:
         for year in self.years:
             for state in self.states:
                 self._get_data(year,
-                               geographic_level="state",
+                               geographic_level=GeographicLevel.STATE.value,
                                udise_state_code=state["udise_state_code"])
 
             for district in self.districts:
                 self._get_data(year,
-                               geographic_level="district",
+                               geographic_level=GeographicLevel.DISTRICT.value,
                                udise_state_code=district["udise_state_code"],
                                udise_dist_code=district["udise_district_code"])
 

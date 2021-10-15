@@ -42,6 +42,14 @@ Cleaned data will be inside [UDISEIndia_Schools_With_Functional_Toilet.zip](UDIS
 
 ### Running Tests
 
+Run all the test cases
+
+```bash
+python3 -m unittest discover -v -s scripts/ -p *_test.py
+```
+
+Run only the test cases related to this import
+
 ```bash
 python3 -m unittest india_udise.udise_schools_with_functional_toilet.preprocess_test.TestPreprocess
 ```
