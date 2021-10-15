@@ -78,7 +78,7 @@ SCHOOL_MANAGEMENT = {
     "Madarsa recognized (by Wakf board/Madarsa Board)": "MadrasaRecognized",
     "Madarsa unrecognized": "MadrasaUnrecognized",
     "Other Central Govt. Schools": "OtherCentralGovtSchools",
-    "Central Govt":"CentralGovt",
+    "Central Govt": "CentralGovt",
     "No response": "UnknownSchoolManagement",
     "Total": "Total"
 }
