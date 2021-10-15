@@ -1,0 +1,3699 @@
+{
+    "columnName":
+    [
+        "udise_state_code",
+        "udise_district_code",
+        "district_name"
+    ],
+    "rowValue":
+    [
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3601",
+            "district_name": "ADILABAD"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2351",
+            "district_name": "AGAR MALWA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0915",
+            "district_name": "AGRA"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2726",
+            "district_name": "AHMADNAGAR"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2407",
+            "district_name": "AHMEDABAD"
+        },
+        {
+            "udise_state_code": "15",
+            "udise_district_code": "1503",
+            "district_name": "AIZAWL"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0821",
+            "district_name": "AJMER"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2705",
+            "district_name": "AKOLA"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3211",
+            "district_name": "ALAPPUZHA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0912",
+            "district_name": "ALIGARH"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1922",
+            "district_name": "ALIPURDUAR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2349",
+            "district_name": "ALIRAJPUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0945",
+            "district_name": "ALLAHABAD"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0509",
+            "district_name": "ALMORA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0806",
+            "district_name": "ALWAR"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0602",
+            "district_name": "AMBALA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0948",
+            "district_name": "AMBEDKAR NAGAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0973",
+            "district_name": "AMETHI - CSM NAGAR"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2707",
+            "district_name": "AMRAVATI"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2413",
+            "district_name": "AMRELI"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0302",
+            "district_name": "AMRITSAR"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2415",
+            "district_name": "ANAND"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2822",
+            "district_name": "ANANTAPUR"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0106",
+            "district_name": "ANANTNAG"
+        },
+        {
+            "udise_state_code": "35",
+            "udise_district_code": "3501",
+            "district_name": "ANDAMANS"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2115",
+            "district_name": "ANGUL"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1216",
+            "district_name": "ANJAW"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2347",
+            "district_name": "ANUPPUR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1007",
+            "district_name": "ARARIA"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2427",
+            "district_name": "ARAVALLI"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3332",
+            "district_name": "ARIYALUR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1038",
+            "district_name": "ARWAL"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2346",
+            "district_name": "ASHOKNAGAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0932",
+            "district_name": "AURAIYA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1034",
+            "district_name": "AURANGABAD (BIHAR)"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2719",
+            "district_name": "AURANGABAD (MAHARASHTRA)"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0961",
+            "district_name": "AZAMGARH"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0104",
+            "district_name": "BADGAM"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2902",
+            "district_name": "BAGALKOT"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0508",
+            "district_name": "BAGESHWAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0908",
+            "district_name": "BAGHPAT"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0950",
+            "district_name": "BAHRAICH"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1824",
+            "district_name": "BAKSA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2345",
+            "district_name": "BALAGHAT"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2108",
+            "district_name": "BALASORE"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2912",
+            "district_name": "BALLARI"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0963",
+            "district_name": "BALLIA"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2222",
+            "district_name": "BALOD"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2224",
+            "district_name": "BALODABAZAR"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2226",
+            "district_name": "BALRAMPUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0952",
+            "district_name": "BALRAMPUR"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2402",
+            "district_name": "BANAS KANTHA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0940",
+            "district_name": "BANDA"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0116",
+            "district_name": "BANDIPORA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1023",
+            "district_name": "BANKA"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1913",
+            "district_name": "BANKURA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0828",
+            "district_name": "BANSWARA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0946",
+            "district_name": "BARABANKI"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2101",
+            "district_name": "BARAGARH"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0102",
+            "district_name": "BARAMULA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0831",
+            "district_name": "BARAN"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1909",
+            "district_name": "BARDDHAMAN"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0920",
+            "district_name": "BAREILLY"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0817",
+            "district_name": "BARMER"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0320",
+            "district_name": "BARNALA"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1805",
+            "district_name": "BARPETA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2328",
+            "district_name": "BARWANI"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2215",
+            "district_name": "BASTER"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0955",
+            "district_name": "BASTI"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0314",
+            "district_name": "BATHINDA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1020",
+            "district_name": "BEGUSARAI"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2901",
+            "district_name": "BELAGAVI"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2930",
+            "district_name": "BELAGAVI CHIKKODI"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2223",
+            "district_name": "BEMETARA"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2921",
+            "district_name": "BENGALURU RURAL"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2928",
+            "district_name": "BENGALURU U NORTH"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2920",
+            "district_name": "BENGALURU U SOUTH"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2335",
+            "district_name": "BETUL"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0971",
+            "district_name": "BHADOI"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3609",
+            "district_name": "BHADRADRI"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2109",
+            "district_name": "BHADRAK"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1022",
+            "district_name": "BHAGALPUR"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2710",
+            "district_name": "BHANDARA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0807",
+            "district_name": "BHARATPUR"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2421",
+            "district_name": "BHARUCH"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2414",
+            "district_name": "BHAVNAGAR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0824",
+            "district_name": "BHILWARA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2303",
+            "district_name": "BHIND"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0613",
+            "district_name": "BHIWANI"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1029",
+            "district_name": "BHOJPUR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2332",
+            "district_name": "BHOPAL"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2727",
+            "district_name": "BID"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2905",
+            "district_name": "BIDAR"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2220",
+            "district_name": "BIJAPUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0903",
+            "district_name": "BIJNOR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0803",
+            "district_name": "BIKANER"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2207",
+            "district_name": "BILASPUR"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0208",
+            "district_name": "BILASPUR (H.P.)"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1908",
+            "district_name": "BIRBHUM"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1404",
+            "district_name": "BISHNUPUR"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1828",
+            "district_name": "BISWANATH"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2013",
+            "district_name": "BOKARO"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2124",
+            "district_name": "BOLANGIR"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1804",
+            "district_name": "BONGAIGAON"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2428",
+            "district_name": "BOTAD"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2122",
+            "district_name": "BOUDH"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0919",
+            "district_name": "BUDAUN"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0911",
+            "district_name": "BULANDSHAHR"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2704",
+            "district_name": "BULDANA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0823",
+            "district_name": "BUNDI"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2348",
+            "district_name": "BURHANPUR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1030",
+            "district_name": "BUXAR"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1821",
+            "district_name": "CACHAR"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1223",
+            "district_name": "CAPITAL COMPLEX ITANAGAR"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0721",
+            "district_name": "Central"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2927",
+            "district_name": "CHAMARAJANAGARA"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0201",
+            "district_name": "CHAMBA"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0502",
+            "district_name": "CHAMOLI"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0510",
+            "district_name": "CHAMPAWAT"
+        },
+        {
+            "udise_state_code": "15",
+            "udise_district_code": "1504",
+            "district_name": "CHAMPHAI"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0966",
+            "district_name": "CHANDAULI"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1409",
+            "district_name": "CHANDEL"
+        },
+        {
+            "udise_state_code": "04",
+            "udise_district_code": "0401",
+            "district_name": "CHANDIGARH"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2713",
+            "district_name": "CHANDRAPUR"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1212",
+            "district_name": "CHANGLANG"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1829",
+            "district_name": "CHARAIDEO"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0622",
+            "district_name": "CHARKHI DADRI"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2003",
+            "district_name": "CHATRA"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3302",
+            "district_name": "CHENNAI"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2309",
+            "district_name": "CHHATARPUR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2343",
+            "district_name": "CHHINDWARA"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2432",
+            "district_name": "CHHOTAUDEPUR"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2929",
+            "district_name": "CHIKKABALLAPURA"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2917",
+            "district_name": "CHIKKAMANGALURU"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1825",
+            "district_name": "CHIRANG"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2913",
+            "district_name": "CHITRADURGA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0941",
+            "district_name": "CHITRAKOOT"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0829",
+            "district_name": "CHITTAURGARH"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2823",
+            "district_name": "CHITTOOR"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1403",
+            "district_name": "CHURACHANDPUR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0804",
+            "district_name": "CHURU"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3312",
+            "district_name": "COIMBATORE"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1903",
+            "district_name": "COOCH BIHAR"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3318",
+            "district_name": "CUDDALORE"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2112",
+            "district_name": "CUTTACK"
+        },
+        {
+            "udise_state_code": "26",
+            "udise_district_code": "2601",
+            "district_name": "DADRA AND NAGAR HAVELI(UT)"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2924",
+            "district_name": "DAKSHINA KANNADA"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1905",
+            "district_name": "DAKSHIN DINAJPUR"
+        },
+        {
+            "udise_state_code": "25",
+            "udise_district_code": "2502",
+            "district_name": "DAMAN"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2312",
+            "district_name": "DAMOH"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2216",
+            "district_name": "DANTEWADA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1013",
+            "district_name": "DARBHANGA"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1901",
+            "district_name": "DARJEELING"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1808",
+            "district_name": "DARRANG"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2305",
+            "district_name": "DATIA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0811",
+            "district_name": "DAUSA"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2914",
+            "district_name": "DAVANAGERE"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0505",
+            "district_name": "DEHRADUN"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2104",
+            "district_name": "DEOGARH"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2007",
+            "district_name": "DEOGHAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0960",
+            "district_name": "DEORIA"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2429",
+            "district_name": "DEVBHOOMI DWARKA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2323",
+            "district_name": "DEWAS"
+        },
+        {
+            "udise_state_code": "16",
+            "udise_district_code": "1603",
+            "district_name": "DHALAI"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2213",
+            "district_name": "DHAMTARI"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2012",
+            "district_name": "DHANBAD"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2325",
+            "district_name": "DHAR"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3305",
+            "district_name": "DHARMAPURI"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2909",
+            "district_name": "DHARWAD"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0808",
+            "district_name": "DHAULPUR"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1813",
+            "district_name": "DHEMAJI"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2114",
+            "district_name": "DHENKANAL"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1802",
+            "district_name": "DHUBRI"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2702",
+            "district_name": "DHULE"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1210",
+            "district_name": "DIBANG VALLEY"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1815",
+            "district_name": "DIBRUGARH"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1820",
+            "district_name": "DIMA HASAO"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1306",
+            "district_name": "DIMAPUR"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3313",
+            "district_name": "DINDIGUL"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2341",
+            "district_name": "DINDORI"
+        },
+        {
+            "udise_state_code": "25",
+            "udise_district_code": "2501",
+            "district_name": "DIU"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0109",
+            "district_name": "DODA"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2418",
+            "district_name": "DOHAD"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2011",
+            "district_name": "DUMKA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0827",
+            "district_name": "DUNGARPUR"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2210",
+            "district_name": "DURG"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0710",
+            "district_name": "East"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1702",
+            "district_name": "EAST GARO HILLS"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2814",
+            "district_name": "EAST GODAVARI"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1709",
+            "district_name": "EAST JAINTIA HILLS"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1203",
+            "district_name": "EAST KAMENG"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1706",
+            "district_name": "EAST KHASI HILLS"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1208",
+            "district_name": "EAST SIANG"
+        },
+        {
+            "udise_state_code": "11",
+            "udise_district_code": "1104",
+            "district_name": "EAST SIKKIM"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3208",
+            "district_name": "ERNAKULAM"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3310",
+            "district_name": "ERODE"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0917",
+            "district_name": "ETAH"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0931",
+            "district_name": "ETAWAH"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0947",
+            "district_name": "FAIZABAD"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0619",
+            "district_name": "FARIDABAD"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0313",
+            "district_name": "FARIDKOT"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0929",
+            "district_name": "FARRUKHABAD"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0610",
+            "district_name": "FATEHABAD"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0308",
+            "district_name": "FATEHGARH SAHIB"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0942",
+            "district_name": "FATEHPUR"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0321",
+            "district_name": "Fazilka"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0916",
+            "district_name": "FIROZABAD"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0311",
+            "district_name": "FIROZPUR"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2908",
+            "district_name": "GADAG"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2712",
+            "district_name": "GADCHIROLI"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2120",
+            "district_name": "GAJAPATI"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0119",
+            "district_name": "GANDERBAL"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2406",
+            "district_name": "GANDHINAGAR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0801",
+            "district_name": "GANGANAGAR"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2119",
+            "district_name": "GANJAM"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2001",
+            "district_name": "GARHWA"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2225",
+            "district_name": "GARIABAND"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0910",
+            "district_name": "GAUTAM BUDDHA NAGAR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1035",
+            "district_name": "GAYA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0909",
+            "district_name": "GHAZIABAD"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0965",
+            "district_name": "GHAZIPUR"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2006",
+            "district_name": "GIRIDIH"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2430",
+            "district_name": "GIR SOMNATH"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1803",
+            "district_name": "GOALPARA"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2008",
+            "district_name": "GODDA"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1818",
+            "district_name": "GOLAGHAT"
+        },
+        {
+            "udise_state_code": "16",
+            "udise_district_code": "1607",
+            "district_name": "GOMATI"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0953",
+            "district_name": "GONDA"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2711",
+            "district_name": "GONDIYA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1015",
+            "district_name": "GOPALGANJ"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0958",
+            "district_name": "GORAKHPUR"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2016",
+            "district_name": "GUMLA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2307",
+            "district_name": "GUNA"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2817",
+            "district_name": "GUNTUR"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0301",
+            "district_name": "GURDASPUR"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0618",
+            "district_name": "GURUGRAM"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2304",
+            "district_name": "GWALIOR"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1823",
+            "district_name": "HAILAKANDI"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0206",
+            "district_name": "HAMIRPUR (H.P.)"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0938",
+            "district_name": "HAMIRPUR (U.P.)"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0802",
+            "district_name": "HANUMANGARH"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0975",
+            "district_name": "HAPUR (PANCHSHEEL NAGAR)"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2336",
+            "district_name": "HARDA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0925",
+            "district_name": "HARDOI"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0513",
+            "district_name": "HARDWAR"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2923",
+            "district_name": "HASSAN"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0913",
+            "district_name": "HATHRAS"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2911",
+            "district_name": "HAVERI"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2004",
+            "district_name": "HAZARIBAG"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2716",
+            "district_name": "HINGOLI"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0612",
+            "district_name": "HISAR"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1830",
+            "district_name": "HOJAI"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1912",
+            "district_name": "HOOGHLY"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2337",
+            "district_name": "HOSHANGABAD"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0305",
+            "district_name": "HOSHIARPUR"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1916",
+            "district_name": "HOWRAH"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3622",
+            "district_name": "HYDERABAD"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3209",
+            "district_name": "IDUKKI"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1407",
+            "district_name": "IMPHAL EAST"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1406",
+            "district_name": "IMPHAL WEST"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2326",
+            "district_name": "INDORE"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2339",
+            "district_name": "JABALPUR"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2111",
+            "district_name": "JAGATSINGHPUR"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3606",
+            "district_name": "JAGTIAL"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0812",
+            "district_name": "JAIPUR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0816",
+            "district_name": "JAISALMER"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2113",
+            "district_name": "JAJPUR"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0304",
+            "district_name": "JALANDHAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0935",
+            "district_name": "JALAUN"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2703",
+            "district_name": "JALGAON"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2718",
+            "district_name": "JALNA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0818",
+            "district_name": "JALOR"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1902",
+            "district_name": "JALPAIGURI"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0113",
+            "district_name": "JAMMU"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2410",
+            "district_name": "JAMNAGAR"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2019",
+            "district_name": "JAMTARA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1037",
+            "district_name": "JAMUI"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3619",
+            "district_name": "JANGAON"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2206",
+            "district_name": "JANJGIR - CHAMPA"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2203",
+            "district_name": "JASHPUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0964",
+            "district_name": "JAUNPUR"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3608",
+            "district_name": "JAYASHANKAR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1033",
+            "district_name": "JEHANABAD"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2324",
+            "district_name": "JHABUA"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0615",
+            "district_name": "JHAJJAR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0832",
+            "district_name": "JHALAWAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0936",
+            "district_name": "JHANSI"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1923",
+            "district_name": "JHARGRAM"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2102",
+            "district_name": "JHARSUGUDA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0805",
+            "district_name": "JHUNJHUNU"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0609",
+            "district_name": "JIND"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1413",
+            "district_name": "JIRIBAM"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0815",
+            "district_name": "JODHPUR"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3626",
+            "district_name": "JOGULAMBA"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1817",
+            "district_name": "JORHAT"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2412",
+            "district_name": "JUNAGADH"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0906",
+            "district_name": "Jyotiba Phule Nagar (AMROHA)"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2401",
+            "district_name": "KACHCHH"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2820",
+            "district_name": "KADAPA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1031",
+            "district_name": "KAIMUR (BHABUA)"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0605",
+            "district_name": "KAITHAL"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1414",
+            "district_name": "KAKCHING"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2126",
+            "district_name": "KALAHANDI"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2904",
+            "district_name": "KALBURGI"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1924",
+            "district_name": "KALIMPONG"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3615",
+            "district_name": "KAMAREDDY"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1415",
+            "district_name": "KAMJONG"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1222",
+            "district_name": "KAMLE"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1827",
+            "district_name": "KAMRUP-METRO"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1806",
+            "district_name": "KAMRUP-RURAL"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3303",
+            "district_name": "KANCHEEPURAM"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2121",
+            "district_name": "KANDHAMAL"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1410",
+            "district_name": "KANGPOKPI"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0202",
+            "district_name": "KANGRA"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2214",
+            "district_name": "KANKER"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0930",
+            "district_name": "KANNAUJ"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3330",
+            "district_name": "KANNIYAKUMARI"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3202",
+            "district_name": "KANNUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0933",
+            "district_name": "KANPUR DEHAT"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0934",
+            "district_name": "KANPUR NAGAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0972",
+            "district_name": "KANSHIRAM NAGAR"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0303",
+            "district_name": "KAPURTHALA"
+        },
+        {
+            "udise_state_code": "34",
+            "udise_district_code": "3404",
+            "district_name": "KARAIKAL"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0809",
+            "district_name": "KARAULI"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1819",
+            "district_name": "KARBI ANGLONG"
+        },
+        {
+            "udise_state_code": "37",
+            "udise_district_code": "3708",
+            "district_name": "KARGIL"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1822",
+            "district_name": "KARIMGANJ"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3613",
+            "district_name": "KARIMNAGAR"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0606",
+            "district_name": "KARNAL"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3314",
+            "district_name": "KARUR"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3201",
+            "district_name": "KASARAGOD"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0114",
+            "district_name": "KATHUA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1010",
+            "district_name": "KATIHAR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2338",
+            "district_name": "KATNI"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0944",
+            "district_name": "KAUSHAMBI"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2208",
+            "district_name": "KAWARDHA"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2110",
+            "district_name": "KENDRAPARA"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2106",
+            "district_name": "KEONJHAR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1021",
+            "district_name": "KHAGARIA"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3631",
+            "district_name": "KHAMMAM"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2329",
+            "district_name": "KHANDWA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2327",
+            "district_name": "KHARGONE"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2416",
+            "district_name": "KHEDA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0923",
+            "district_name": "KHERI"
+        },
+        {
+            "udise_state_code": "16",
+            "udise_district_code": "1606",
+            "district_name": "KHOWAI"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2023",
+            "district_name": "KHUNTI"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2117",
+            "district_name": "KHURDHA"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0212",
+            "district_name": "KINNAUR"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1310",
+            "district_name": "KIPHIRE"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1008",
+            "district_name": "KISHANGANJ"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0117",
+            "district_name": "KISHTWAR"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2925",
+            "district_name": "KODAGU"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2005",
+            "district_name": "KODARMA"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1307",
+            "district_name": "KOHIMA"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1801",
+            "district_name": "KOKRAJHAR"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2919",
+            "district_name": "KOLAR"
+        },
+        {
+            "udise_state_code": "15",
+            "udise_district_code": "1502",
+            "district_name": "KOLASIB"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2734",
+            "district_name": "KOLHAPUR"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1917",
+            "district_name": "KOLKATA"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3213",
+            "district_name": "KOLLAM"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3602",
+            "district_name": "KOMARAM BHEEM"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2217",
+            "district_name": "KONDAGAON"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2907",
+            "district_name": "KOPPAL"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2129",
+            "district_name": "KORAPUT"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2205",
+            "district_name": "KORBA"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2201",
+            "district_name": "KORIYA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0830",
+            "district_name": "KOTA"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3210",
+            "district_name": "KOTTAYAM"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3204",
+            "district_name": "KOZHIKODE"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1219",
+            "district_name": "KRA DADI"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2816",
+            "district_name": "KRISHNA"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3331",
+            "district_name": "KRISHNAGIRI"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0120",
+            "district_name": "KULGAM"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0204",
+            "district_name": "KULLU"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0101",
+            "district_name": "KUPWARA"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2821",
+            "district_name": "KURNOOL"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0604",
+            "district_name": "KURUKSHETRA"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1214",
+            "district_name": "KURUNG KUMEY"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0959",
+            "district_name": "KUSHINAGAR"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0203",
+            "district_name": "LAHUL & SPITI"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1812",
+            "district_name": "LAKHIMPUR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1025",
+            "district_name": "LAKHISARAI"
+        },
+        {
+            "udise_state_code": "31",
+            "udise_district_code": "3101",
+            "district_name": "LAKSHADWEEP"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0937",
+            "district_name": "LALITPUR"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2022",
+            "district_name": "LATEHAR"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2728",
+            "district_name": "LATUR"
+        },
+        {
+            "udise_state_code": "15",
+            "udise_district_code": "1507",
+            "district_name": "LAWNGTLAI"
+        },
+        {
+            "udise_state_code": "37",
+            "udise_district_code": "3707",
+            "district_name": "LEH (LADAKH)"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1226",
+            "district_name": "LEPA RADA"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2015",
+            "district_name": "LOHARDAGA"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1211",
+            "district_name": "LOHIT"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1217",
+            "district_name": "LONGDING"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1309",
+            "district_name": "LONGLENG"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1215",
+            "district_name": "LOWER DIBANG VALLEY"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1221",
+            "district_name": "LOWER SIANG"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1205",
+            "district_name": "LOWER SUBANSIRI"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0927",
+            "district_name": "LUCKNOW"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0309",
+            "district_name": "LUDHIANA"
+        },
+        {
+            "udise_state_code": "15",
+            "udise_district_code": "1506",
+            "district_name": "LUNGLEI"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1011",
+            "district_name": "MADHEPURA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1005",
+            "district_name": "MADHUBANI"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3324",
+            "district_name": "MADURAI"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3610",
+            "district_name": "MAHABUBABAD"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3625",
+            "district_name": "MAHABUBNAGAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0957",
+            "district_name": "MAHARAJGANJ"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2212",
+            "district_name": "MAHASAMUND"
+        },
+        {
+            "udise_state_code": "34",
+            "udise_district_code": "3403",
+            "district_name": "MAHE"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0616",
+            "district_name": "MAHENDRAGARH"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2404",
+            "district_name": "MAHESANA"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2431",
+            "district_name": "MAHISAGAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0939",
+            "district_name": "MAHOBA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0918",
+            "district_name": "MAINPURI"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1831",
+            "district_name": "MAJULI"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3205",
+            "district_name": "MALAPPURAM"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1906",
+            "district_name": "MALDAH"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2130",
+            "district_name": "MALKANGIRI"
+        },
+        {
+            "udise_state_code": "15",
+            "udise_district_code": "1501",
+            "district_name": "MAMIT"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3603",
+            "district_name": "MANCHERIAL"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0205",
+            "district_name": "MANDI"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2342",
+            "district_name": "MANDLA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2319",
+            "district_name": "MANDSAUR"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2922",
+            "district_name": "MANDYA"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0315",
+            "district_name": "MANSA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0914",
+            "district_name": "MATHURA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0962",
+            "district_name": "MAU"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2107",
+            "district_name": "MAYURBHANJ"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3617",
+            "district_name": "MEDAK"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3621",
+            "district_name": "MEDCHAL"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0907",
+            "district_name": "MEERUT"
+        },
+        {
+            "udise_state_code": "35",
+            "udise_district_code": "3503",
+            "district_name": "MIDDLE AND NORTH ANDAMANS"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0969",
+            "district_name": "MIRZAPUR"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0310",
+            "district_name": "MOGA"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0318",
+            "district_name": "MOHALI"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1303",
+            "district_name": "MOKOKCHUNG"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1301",
+            "district_name": "MON"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0904",
+            "district_name": "MORADABAD"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2433",
+            "district_name": "MORBI"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2302",
+            "district_name": "MORENA"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1809",
+            "district_name": "MORIGAON"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0312",
+            "district_name": "MUKTSAR"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3632",
+            "district_name": "MULUGU"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2723",
+            "district_name": "MUMBAI II"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2722",
+            "district_name": "MUMBAI (SUBURBAN)"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2219",
+            "district_name": "MUNGELI"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1024",
+            "district_name": "MUNGER"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1907",
+            "district_name": "MURSHIDABAD"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0902",
+            "district_name": "MUZAFFARNAGAR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1014",
+            "district_name": "MUZAFFARPUR"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2926",
+            "district_name": "MYSURU"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2128",
+            "district_name": "NABARANGPUR"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1910",
+            "district_name": "NADIA"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1810",
+            "district_name": "NAGAON"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3319",
+            "district_name": "NAGAPATTINAM"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3628",
+            "district_name": "NAGARKURNOOL"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0814",
+            "district_name": "NAGAUR"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2709",
+            "district_name": "NAGPUR"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0511",
+            "district_name": "NAINITAL"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1027",
+            "district_name": "NALANDA"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1807",
+            "district_name": "NALBARI"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3629",
+            "district_name": "NALGONDA"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3309",
+            "district_name": "NAMAKKAL"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1218",
+            "district_name": "NAMSAI"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2715",
+            "district_name": "NANDED"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2701",
+            "district_name": "NANDURBAR"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3633",
+            "district_name": "NARAYANAPET"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2218",
+            "district_name": "NARAYANPUR"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2420",
+            "district_name": "NARMADA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2340",
+            "district_name": "NARSIMHAPUR"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2720",
+            "district_name": "NASHIK"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2424",
+            "district_name": "NAVSARI"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1036",
+            "district_name": "NAWADA"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0306",
+            "district_name": "NAWANSHAHR"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2116",
+            "district_name": "NAYAGARH"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2318",
+            "district_name": "NEEMUCH"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2819",
+            "district_name": "NELLORE"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0720",
+            "district_name": "New Delhi"
+        },
+        {
+            "udise_state_code": "35",
+            "udise_district_code": "3502",
+            "district_name": "NICOBARS"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3604",
+            "district_name": "NIRMAL"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2352",
+            "district_name": "NIWARI"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3605",
+            "district_name": "NIZAMABAD"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1416",
+            "district_name": "NONEY"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0712",
+            "district_name": "North"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1911",
+            "district_name": "NORTH 24 PARGANAS"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0711",
+            "district_name": "North East"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1708",
+            "district_name": "NORTH GARO HILLS"
+        },
+        {
+            "udise_state_code": "30",
+            "udise_district_code": "3001",
+            "district_name": "NORTH GOA"
+        },
+        {
+            "udise_state_code": "11",
+            "udise_district_code": "1101",
+            "district_name": "NORTH SIKKIM"
+        },
+        {
+            "udise_state_code": "16",
+            "udise_district_code": "1604",
+            "district_name": "NORTH TRIPURA"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0713",
+            "district_name": "North West A"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0714",
+            "district_name": "North West B"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2125",
+            "district_name": "NUAPADA"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0620",
+            "district_name": "NUH"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2729",
+            "district_name": "OSMANABAD"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2010",
+            "district_name": "PAKAUR"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1224",
+            "district_name": "PAKKE KESSANG"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3206",
+            "district_name": "PALAKKAD"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2002",
+            "district_name": "PALAMU"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2736",
+            "district_name": "PALGHAR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0820",
+            "district_name": "PALI"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0621",
+            "district_name": "PALWAL"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0601",
+            "district_name": "PANCHKULA"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2417",
+            "district_name": "PANCH MAHALS"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0607",
+            "district_name": "PANIPAT"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2310",
+            "district_name": "PANNA"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1204",
+            "district_name": "PAPUM PARE"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2717",
+            "district_name": "PARBHANI"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1926",
+            "district_name": "PASCHIM BARDHAMAN"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1920",
+            "district_name": "PASCHIM MEDINIPUR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1001",
+            "district_name": "PASHCHIM CHAMPARAN"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2017",
+            "district_name": "PASHCHIMI SINGHBHUM"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2403",
+            "district_name": "PATAN"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3212",
+            "district_name": "PATHANAMTHITTA"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0322",
+            "district_name": "PATHANKOT"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0317",
+            "district_name": "PATIALA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1028",
+            "district_name": "PATNA"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0506",
+            "district_name": "PAURI"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3607",
+            "district_name": "PEDDAPALLI"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3316",
+            "district_name": "PERAMBALUR"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1311",
+            "district_name": "PEREN"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1308",
+            "district_name": "PHEK"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1412",
+            "district_name": "PHERZAWL"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0921",
+            "district_name": "PILIBHIT"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0507",
+            "district_name": "PITHORAGARH"
+        },
+        {
+            "udise_state_code": "34",
+            "udise_district_code": "3402",
+            "district_name": "PONDICHERRY"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2411",
+            "district_name": "PORBANDAR"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2818",
+            "district_name": "PRAKASAM"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0943",
+            "district_name": "PRATAPGARH"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0833",
+            "district_name": "PRATAPGARH (RAJ.)"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3322",
+            "district_name": "PUDUKKOTTAI"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0105",
+            "district_name": "PULWAMA"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0111",
+            "district_name": "PUNCH"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2725",
+            "district_name": "PUNE"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1925",
+            "district_name": "PURBA BARDHAMAN"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1002",
+            "district_name": "PURBA CHAMPARAN"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1919",
+            "district_name": "PURBA MEDINIPUR"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2018",
+            "district_name": "PURBI SINGHBHUM"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2118",
+            "district_name": "PURI"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1009",
+            "district_name": "PURNIA"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1914",
+            "district_name": "PURULIA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0928",
+            "district_name": "RAE BARELI"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2906",
+            "district_name": "RAICHUR"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2204",
+            "district_name": "RAIGARH"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2724",
+            "district_name": "RAIGARH (MAHARASHTRA)"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2211",
+            "district_name": "RAIPUR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2334",
+            "district_name": "RAISEN"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3614",
+            "district_name": "RAJANNA"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0112",
+            "district_name": "RAJAURI"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2330",
+            "district_name": "RAJGARH"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2409",
+            "district_name": "RAJKOT"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2209",
+            "district_name": "RAJNANDGAON"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0825",
+            "district_name": "RAJSAMAND"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2932",
+            "district_name": "RAMANAGARA"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3327",
+            "district_name": "RAMANATHAPURAM"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0118",
+            "district_name": "RAMBAN"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2024",
+            "district_name": "RAMGARH"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0905",
+            "district_name": "RAMPUR"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2014",
+            "district_name": "RANCHI"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3623",
+            "district_name": "RANGAREDDY"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2320",
+            "district_name": "RATLAM"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2732",
+            "district_name": "RATNAGIRI"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2127",
+            "district_name": "RAYAGADA"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0121",
+            "district_name": "REASI"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2314",
+            "district_name": "REWA"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0617",
+            "district_name": "REWARI"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1705",
+            "district_name": "RI BHOI"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0614",
+            "district_name": "ROHTAK"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1032",
+            "district_name": "ROHTAS"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0503",
+            "district_name": "RUDRAPRAYAG"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0307",
+            "district_name": "RUPNAGAR"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2405",
+            "district_name": "SABAR KANTHA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2311",
+            "district_name": "SAGAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0901",
+            "district_name": "SAHARANPUR"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1012",
+            "district_name": "SAHARSA"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2009",
+            "district_name": "SAHIBGANJ"
+        },
+        {
+            "udise_state_code": "15",
+            "udise_district_code": "1508",
+            "district_name": "SAIHA"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3308",
+            "district_name": "SALEM"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1019",
+            "district_name": "SAMASTIPUR"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0122",
+            "district_name": "SAMBA"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2103",
+            "district_name": "SAMBALPUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0968",
+            "district_name": "SAMBHAL (BHIM NAGAR)"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3616",
+            "district_name": "SANGAREDDY"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2735",
+            "district_name": "SANGLI"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0316",
+            "district_name": "SANGRUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0956",
+            "district_name": "SANT KABIR NAGAR"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2020",
+            "district_name": "SARAIKELA-KHARSAWAN"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1017",
+            "district_name": "SARAN"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2731",
+            "district_name": "SATARA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2313",
+            "district_name": "SATNA"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0810",
+            "district_name": "SAWAI MADHOPUR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2333",
+            "district_name": "SEHORE"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1401",
+            "district_name": "SENAPATI"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2344",
+            "district_name": "SEONI"
+        },
+        {
+            "udise_state_code": "16",
+            "udise_district_code": "1605",
+            "district_name": "SEPAHIJALA"
+        },
+        {
+            "udise_state_code": "15",
+            "udise_district_code": "1505",
+            "district_name": "SERCHHIP"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2316",
+            "district_name": "SHAHDOL"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0922",
+            "district_name": "SHAHJAHANPUR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2322",
+            "district_name": "SHAJAPUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0974",
+            "district_name": "SHAMLI (PRABUDH NAGAR)"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1026",
+            "district_name": "SHEIKHPURA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1003",
+            "district_name": "SHEOHAR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2301",
+            "district_name": "SHEOPUR"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0211",
+            "district_name": "SHIMLA"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2915",
+            "district_name": "SHIVAMOGGA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2306",
+            "district_name": "SHIVPURI"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1225",
+            "district_name": "SHI YOMI"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0115",
+            "district_name": "SHOPIAN"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0951",
+            "district_name": "SHRAWASTI"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1220",
+            "district_name": "SIANG"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1816",
+            "district_name": "SIBSAGAR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0954",
+            "district_name": "SIDDHARTHNAGAR"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3618",
+            "district_name": "SIDDIPET"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2317",
+            "district_name": "SIDHI"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0813",
+            "district_name": "SIKAR"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1921",
+            "district_name": "SILIGURI"
+        },
+        {
+            "udise_state_code": "20",
+            "udise_district_code": "2021",
+            "district_name": "SIMDEGA"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2733",
+            "district_name": "SINDHUDURG"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2350",
+            "district_name": "SINGRAULI"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0210",
+            "district_name": "SIRMAUR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0819",
+            "district_name": "SIROHI"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0611",
+            "district_name": "SIRSA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1004",
+            "district_name": "SITAMARHI"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0924",
+            "district_name": "SITAPUR"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3323",
+            "district_name": "SIVAGANGAI"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1016",
+            "district_name": "SIWAN"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0209",
+            "district_name": "SOLAN"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2730",
+            "district_name": "SOLAPUR"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0970",
+            "district_name": "SONBHADRA"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2123",
+            "district_name": "SONEPUR"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0608",
+            "district_name": "SONIPAT"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1811",
+            "district_name": "SONITPUR"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0719",
+            "district_name": "South"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1918",
+            "district_name": "SOUTH 24 PARGANAS"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0722",
+            "district_name": "South East"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1703",
+            "district_name": "SOUTH GARO HILLS"
+        },
+        {
+            "udise_state_code": "30",
+            "udise_district_code": "3002",
+            "district_name": "SOUTH GOA"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1832",
+            "district_name": "SOUTH SALMARA-MANKACHAR"
+        },
+        {
+            "udise_state_code": "11",
+            "udise_district_code": "1103",
+            "district_name": "SOUTH SIKKIM"
+        },
+        {
+            "udise_state_code": "16",
+            "udise_district_code": "1602",
+            "district_name": "SOUTH TRIPURA"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0717",
+            "district_name": "South West A"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0718",
+            "district_name": "South West B"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1711",
+            "district_name": "SOUTH WEST GARO HILLS"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1710",
+            "district_name": "SOUTH WEST KHASI HILLS"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2811",
+            "district_name": "SRIKAKULAM"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0103",
+            "district_name": "SRINAGAR"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2221",
+            "district_name": "SUKMA"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0949",
+            "district_name": "SULTANPUR"
+        },
+        {
+            "udise_state_code": "21",
+            "udise_district_code": "2105",
+            "district_name": "SUNDERGARH"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1006",
+            "district_name": "SUPAUL"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2227",
+            "district_name": "SURAJPUR"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2422",
+            "district_name": "SURAT"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2408",
+            "district_name": "SURENDRANAGAR"
+        },
+        {
+            "udise_state_code": "22",
+            "udise_district_code": "2202",
+            "district_name": "SURGUJA"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3630",
+            "district_name": "SURYAPET"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1402",
+            "district_name": "TAMENGLONG"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2426",
+            "district_name": "TAPI"
+        },
+        {
+            "udise_state_code": "03",
+            "udise_district_code": "0319",
+            "district_name": "TARAN TARAN"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1201",
+            "district_name": "TAWANG"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0504",
+            "district_name": "TEHRI GARHWAL"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1411",
+            "district_name": "TENGNOUPAL"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2721",
+            "district_name": "THANE"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3321",
+            "district_name": "THANJAVUR"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2423",
+            "district_name": "THE DANGS"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3325",
+            "district_name": "THENI"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3311",
+            "district_name": "THE NILGIRIS"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3214",
+            "district_name": "THIRUVANANTHAPURAM"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3328",
+            "district_name": "THOOTHUKKUDI"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1405",
+            "district_name": "THOUBAL"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3207",
+            "district_name": "THRISSUR"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2308",
+            "district_name": "TIKAMGARH"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1814",
+            "district_name": "TINSUKIA"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1213",
+            "district_name": "TIRAP"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3315",
+            "district_name": "TIRUCHIRAPPALLI"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3329",
+            "district_name": "TIRUNELVELI"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3333",
+            "district_name": "TIRUPPUR"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3301",
+            "district_name": "TIRUVALLUR"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3306",
+            "district_name": "TIRUVANNAMALAI"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3320",
+            "district_name": "TIRUVARUR"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0822",
+            "district_name": "TONK"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1302",
+            "district_name": "TUENSANG"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2918",
+            "district_name": "TUMAKURU"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2931",
+            "district_name": "TUMAKURU MADHUGIRI"
+        },
+        {
+            "udise_state_code": "08",
+            "udise_district_code": "0826",
+            "district_name": "UDAIPUR"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1826",
+            "district_name": "UDALGURI"
+        },
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0110",
+            "district_name": "UDHAMPUR"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0512",
+            "district_name": "UDHAM SINGH NAGAR"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2916",
+            "district_name": "UDUPI"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2321",
+            "district_name": "UJJAIN"
+        },
+        {
+            "udise_state_code": "14",
+            "udise_district_code": "1408",
+            "district_name": "UKHRUL"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2315",
+            "district_name": "UMARIA"
+        },
+        {
+            "udise_state_code": "02",
+            "udise_district_code": "0207",
+            "district_name": "UNA"
+        },
+        {
+            "udise_state_code": "16",
+            "udise_district_code": "1608",
+            "district_name": "UNAKOTI"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0926",
+            "district_name": "UNNAO"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1209",
+            "district_name": "UPPER SIANG"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1206",
+            "district_name": "UPPER SUBANSIRI"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2910",
+            "district_name": "UTTARA KANNADA"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2934",
+            "district_name": "UTTARA KANNADA SIRSI"
+        },
+        {
+            "udise_state_code": "19",
+            "udise_district_code": "1904",
+            "district_name": "UTTAR DINAJPUR"
+        },
+        {
+            "udise_state_code": "05",
+            "udise_district_code": "0501",
+            "district_name": "UTTARKASHI"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2419",
+            "district_name": "VADODARA"
+        },
+        {
+            "udise_state_code": "10",
+            "udise_district_code": "1018",
+            "district_name": "VAISHALI"
+        },
+        {
+            "udise_state_code": "24",
+            "udise_district_code": "2425",
+            "district_name": "VALSAD"
+        },
+        {
+            "udise_state_code": "09",
+            "udise_district_code": "0967",
+            "district_name": "VARANASI"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3304",
+            "district_name": "VELLORE"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2331",
+            "district_name": "VIDISHA"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2903",
+            "district_name": "VIJAYAPURA"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3624",
+            "district_name": "VIKARABAD"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3307",
+            "district_name": "VILLUPURAM"
+        },
+        {
+            "udise_state_code": "33",
+            "udise_district_code": "3326",
+            "district_name": "VIRUDHUNAGAR"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2813",
+            "district_name": "VISAKHAPATNAM"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2812",
+            "district_name": "VIZIANAGARAM"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3627",
+            "district_name": "WANAPARTHY"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3611",
+            "district_name": "WARANGAL RURAL"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3612",
+            "district_name": "WARANGAL URBAN"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2708",
+            "district_name": "WARDHA"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2706",
+            "district_name": "WASHIM"
+        },
+        {
+            "udise_state_code": "32",
+            "udise_district_code": "3203",
+            "district_name": "WAYANAD"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0715",
+            "district_name": "West A"
+        },
+        {
+            "udise_state_code": "07",
+            "udise_district_code": "0716",
+            "district_name": "West B"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1701",
+            "district_name": "WEST GARO HILLS"
+        },
+        {
+            "udise_state_code": "28",
+            "udise_district_code": "2815",
+            "district_name": "WEST GODAVARI"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1707",
+            "district_name": "WEST JAINTIA HILLS"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1202",
+            "district_name": "WEST KAMENG"
+        },
+        {
+            "udise_state_code": "18",
+            "udise_district_code": "1833",
+            "district_name": "WEST KARBI ANGLONG"
+        },
+        {
+            "udise_state_code": "17",
+            "udise_district_code": "1704",
+            "district_name": "WEST KHASI HILLS"
+        },
+        {
+            "udise_state_code": "12",
+            "udise_district_code": "1207",
+            "district_name": "WEST SIANG"
+        },
+        {
+            "udise_state_code": "11",
+            "udise_district_code": "1102",
+            "district_name": "WEST SIKKIM"
+        },
+        {
+            "udise_state_code": "16",
+            "udise_district_code": "1601",
+            "district_name": "WEST TRIPURA"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1305",
+            "district_name": "WOKHA"
+        },
+        {
+            "udise_state_code": "36",
+            "udise_district_code": "3620",
+            "district_name": "YADADRI"
+        },
+        {
+            "udise_state_code": "29",
+            "udise_district_code": "2933",
+            "district_name": "YADAGIRI"
+        },
+        {
+            "udise_state_code": "06",
+            "udise_district_code": "0603",
+            "district_name": "YAMUNANAGAR"
+        },
+        {
+            "udise_state_code": "34",
+            "udise_district_code": "3401",
+            "district_name": "YANAM"
+        },
+        {
+            "udise_state_code": "27",
+            "udise_district_code": "2714",
+            "district_name": "YAVATMAL"
+        },
+        {
+            "udise_state_code": "13",
+            "udise_district_code": "1304",
+            "district_name": "ZUNHEBOTO"
+        }
+    ],
+    "staticFilter": null,
+    "columnView": null,
+    "columnDataType": null,
+    "msData": null,
+    "status": "1",
+    "errorMessage": null,
+    "jsonString": null,
+    "yearList":
+    [
+        "2019-20",
+        "2018-19",
+        "2017-18",
+        "2016-17",
+        "2015-16",
+        "2014-15",
+        "2013-14",
+        "2012-13"
+    ]
+}
