@@ -85,8 +85,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         action = sys.argv[1]
 
-    #years = sorted(["2013-14","2014-15","2015-16","2016-17","2017-18","2018-19","2019-20"], reverse=True)
-    years = sorted(["2019-20"], reverse=True)
+    years = sorted(["2013-14","2014-15","2015-16","2016-17","2017-18","2018-19","2019-20"], reverse=True)
 
     api_report_code = "3061"
     api_map_id = "64"
