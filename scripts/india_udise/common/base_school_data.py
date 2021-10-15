@@ -256,7 +256,7 @@ class UDISEIndiaSchoolDataLoaderBase:
 
         fileds = {}
         fileds["name"] = variable_name
-        fileds["populationType"] = "school"
+        fileds["populationType"] = "School"
         fileds["statType"] = "measuredValue"
         fileds["measuredProperty"] = "count"
         fileds["constraints"] = "\n".join(constraints_array)
