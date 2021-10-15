@@ -96,201 +96,201 @@ measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
-Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_GovermentAided
+Node: dcid:Count_School_HasFunctionalToilet_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
-schoolManagement: dcs:UDISE_GovermentAided
+schoolManagement: dcs:UDISE_GovernmentAided
 
-Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
-Node: dcid:Count_School_HasFunctionalToilet_PrivateUnaidedRecognized
+Node: dcid:Count_School_HasFunctionalToilet_PrivateUnaidedButRecognized
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
-schoolManagement: dcs:UDISE_PrivateUnaidedRecognized
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
 Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_Unrecognized
 typeOf: dcs:StatisticalVariable
@@ -869,103 +869,103 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 
-Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
-Node: dcid:Count_School_HasFunctionalToilet_TribalWelfareDeaprtment
+Node: dcid:Count_School_HasFunctionalToilet_TribalWelfareDepartment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
-schoolManagement: dcs:UDISE_TribalWelfareDeaprtment
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
 
 Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_LocalBody
 typeOf: dcs:StatisticalVariable
@@ -1065,103 +1065,103 @@ measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 schoolManagement: dcs:UDISE_LocalBody
 
-Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
-Node: dcid:Count_School_HasFunctionalToilet_OtherGovermentManaged
+Node: dcid:Count_School_HasFunctionalToilet_OtherGovernmentManaged
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
-schoolManagement: dcs:UDISE_OtherGovermentManaged
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
 Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_SainikSchool
 typeOf: dcs:StatisticalVariable
@@ -1359,103 +1359,103 @@ measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 schoolManagement: dcs:UDISE_CentralTibetanSchool
 
-Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
-Node: dcid:Count_School_HasFunctionalToilet_OtherCentralGovtSchools
+Node: dcid:Count_School_HasFunctionalToilet_OtherCentralGovernmentSchools
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
-schoolManagement: dcs:UDISE_OtherCentralGovtSchools
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
 Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_SocialWelfareDepartment
 typeOf: dcs:StatisticalVariable
@@ -1751,103 +1751,103 @@ measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 schoolManagement: dcs:UDISE_RailwaySchool
 
-Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade1To8_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade1To12_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To8_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_UpperPrimarySchool_Grade6To12_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade1To10_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade6To10_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_SeniorSecondarySchool_Grade9To10_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade9To12_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
-Node: dcid:Count_School_HasFunctionalToilet_CentralGovt
+Node: dcid:Count_School_HasFunctionalToilet_CentralGovernment
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 hasFunctionalToilet: dcs:True
-schoolManagement: dcs:UDISE_CentralGovt
+schoolManagement: dcs:UDISE_CentralGovernment
 
 Node: dcid:Count_School_HasFunctionalToilet_PrimarySchool_Grade1To5_UnknownSchoolManagement
 typeOf: dcs:StatisticalVariable

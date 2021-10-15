@@ -85,7 +85,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         action = sys.argv[1]
 
-    # Academic years or school years. 
+    # Academic years or school years.
     # `2013-14` means - April 1st, 2013 to March 31st, 2014
     years = sorted([
         "2013-14", "2014-15", "2015-16", "2016-17", "2017-18", "2018-19",
