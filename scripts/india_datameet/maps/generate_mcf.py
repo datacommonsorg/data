@@ -31,11 +31,14 @@ flags.DEFINE_string('output_geojson_dir', '/tmp',
                     'Output directory path.')
 
 
-# Note: When we emit geojson string, we use two json.dumps() so it automatically
-# escapes all inner quotes, and encloses the entire string in quotes.
+# Note1: When we emit geojson string, we use two json.dumps() so it
+# automatically escapes all inner quotes, and encloses the entire string in
+# quotes.
+# Note2: Having the appropriate type helps downstream consumers of this data
+#        (e.g., IPCC pipeline).
 _MCF_FORMAT = """
 Node: india_place_{ext_id}
-typeOf: schema:Place
+typeOf: dcs:{place_type}
 {ext_id_prop}: "{ext_id}"
 geoJsonCoordinates: {gj_str}
 """
@@ -63,6 +66,7 @@ def _generate_states(fin, fout):
                   f['properties']['ST_NM'])
         gj = json.dumps(json.dumps(f['geometry']))
         fout.write(_MCF_FORMAT.format(ext_id=iso,
+                                      place_type='AdministrativeArea1',
                                       ext_id_prop='isoCode',
                                       gj_str=gj))
 
@@ -77,6 +81,7 @@ def _generate_districts(fin, fout):
         census2011 = CodeFormatter.format_census2011_code(census2011)
         gj = json.dumps(json.dumps(f['geometry']))
         fout.write(_MCF_FORMAT.format(ext_id=census2011,
+                                      place_type='AdministrativeArea2',
                                       ext_id_prop='indianCensusAreaCode2011',
                                       gj_str=gj))
 
