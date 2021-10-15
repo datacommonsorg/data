@@ -3,6 +3,8 @@
 ## About the Dataset
 This dataset gives the number of schools that have functional toilet facility. This dataset (Report Id:3061) has count of schools by school level and school management.
 
+Data is available at State, District, and Block levels. Currently, we are importing State and District level data.
+
 ### Download URL
 A backend API allows the data to be queryable and responds with JSON data. The API endpoint is at `https://dashboard.udiseplus.gov.in/BackEnd-master/api/report/getTabularData`. The API takes JSON input with two main attributes.
 
@@ -14,7 +16,7 @@ These are the attributes that we will use
 | Attribute       | Description                                                  |
 |--------|--------------------------------------------------------------|
 | cat1   | PS (I-V) - Primary only with grades 1 to 5                   |
-| cat2   | UPS (I-VIII) - Upper Primary with grades1 to 8               |
+| cat2   | UPS (I-VIII) - Upper Primary with grades 1 to 8               |
 | cat3   |  HSS (I-XII) - HigherSecondary with grades 1 to 12           |
 | cat4   | UPS (VI-VIII) - Upper Primary only with grades 6 to 8        |
 | cat5   | HSS (VI-XII)    - Higher Secondary with grades 6 to 12       |

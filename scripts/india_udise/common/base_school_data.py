@@ -62,11 +62,11 @@ DATA_FILE_NAME_FORMAT = "{udise_report_id}_{udise_map_id}_{geographic_level}_{ud
 
 SCHOOL_MANAGEMENT = {
     "Department of Education": "DepartmentOfEducation",
-    "Tribal Welfare Department": "TribalWelfareDeaprtment",
+    "Tribal Welfare Department": "TribalWelfareDepartment",
     "Local body": "LocalBody",
-    "Government Aided": "GovermentAided",
-    "Private Unaided (Recognized)": "PrivateUnaidedRecognized",
-    "Other Govt. managed schools": "OtherGovermentManaged",
+    "Government Aided": "GovernmentAided",
+    "Private Unaided (Recognized)": "PrivateUnaidedButRecognized",
+    "Other Govt. managed schools": "OtherGovernmentManaged",
     "Unrecognized": "Unrecognized",
     "Social welfare Department": "SocialWelfareDepartment",
     "Ministry of Labor": "MinistryOfLabor",
@@ -77,8 +77,8 @@ SCHOOL_MANAGEMENT = {
     "Central Tibetan School": "CentralTibetanSchool",
     "Madarsa recognized (by Wakf board/Madarsa Board)": "MadrasaRecognized",
     "Madarsa unrecognized": "MadrasaUnrecognized",
-    "Other Central Govt. Schools": "OtherCentralGovtSchools",
-    "Central Govt": "CentralGovt",
+    "Other Central Govt. Schools": "OtherCentralGovernmentSchools",
+    "Central Govt": "CentralGovernment",
     "No response": "UnknownSchoolManagement",
     "Total": "Total"
 }
@@ -395,11 +395,11 @@ class UDISEIndiaSchoolDataLoaderBase:
                 "dist": "none",
                 "block": "none"
             }
-            if udise_state_code:
+            if udise_state_code != "NA":
                 query["state"] = udise_state_code
-            if udise_dist_code:
+            if udise_dist_code != "NA":
                 query["dist"] = udise_dist_code
-            if udise_block_code:
+            if udise_block_code != "NA":
                 query["block"] = udise_block_code
 
             data = {

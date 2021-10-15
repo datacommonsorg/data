@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Classes and methods to import School Dropout Rate data from Unified District Information System for Education (UDISE)"""
+"""Classes and methods to import Number of Schools having Functional Toilet Facility from Unified District Information System for Education (UDISE)"""
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
@@ -85,6 +85,8 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         action = sys.argv[1]
 
+    # Academic years or school years. 
+    # `2013-14` means - April 1st, 2013 to March 31st, 2014
     years = sorted([
         "2013-14", "2014-15", "2015-16", "2016-17", "2017-18", "2018-19",
         "2019-20"
