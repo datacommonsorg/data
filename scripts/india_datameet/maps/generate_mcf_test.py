@@ -19,8 +19,7 @@ class ProcessTest(unittest.TestCase):
         self.maxDiff = None
         with tempfile.TemporaryDirectory() as tmp_dir:
             generate(os.path.join(_RAW_DATA_DIR, 'states.geojson'),
-                     os.path.join(_RAW_DATA_DIR, 'districts.geojson'),
-                     tmp_dir)
+                     os.path.join(_RAW_DATA_DIR, 'districts.geojson'), tmp_dir)
             for csv_fname in _OUT_FILES:
                 with open(os.path.join(tmp_dir, csv_fname)) as gotf:
                     got = gotf.read()

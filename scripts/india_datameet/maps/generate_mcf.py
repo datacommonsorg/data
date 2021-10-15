@@ -20,16 +20,13 @@ from absl import flags
 from india.geo.states import IndiaStatesMapper
 from india.formatters import CodeFormatter
 
-
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('input_state_geojson', '',
                     'Path to the India State geojson file.')
 flags.DEFINE_string('input_district_geojson', '',
-                     'Path to the India District geojson file.')
-flags.DEFINE_string('output_geojson_dir', '/tmp',
-                    'Output directory path.')
-
+                    'Path to the India District geojson file.')
+flags.DEFINE_string('output_geojson_dir', '/tmp', 'Output directory path.')
 
 # Note1: When we emit geojson string, we use two json.dumps() so it
 # automatically escapes all inner quotes, and encloses the entire string in
@@ -60,30 +57,32 @@ def _generate_states(fin, fout):
     j = json.load(fin)
     for f in j['features']:
         if ('properties' not in f or 'ST_NM' not in f['properties'] or
-            'geometry' not in f):
+                'geometry' not in f):
             continue
         iso = IndiaStatesMapper.get_state_name_to_iso_code_mapping(
-                  f['properties']['ST_NM'])
+            f['properties']['ST_NM'])
         gj = json.dumps(json.dumps(f['geometry']))
-        fout.write(_MCF_FORMAT.format(ext_id=iso,
-                                      place_type='AdministrativeArea1',
-                                      ext_id_prop='isoCode',
-                                      gj_str=gj))
+        fout.write(
+            _MCF_FORMAT.format(ext_id=iso,
+                               place_type='AdministrativeArea1',
+                               ext_id_prop='isoCode',
+                               gj_str=gj))
 
 
 def _generate_districts(fin, fout):
     j = json.load(fin)
     for f in j['features']:
         if ('properties' not in f or 'censuscode' not in f['properties'] or
-            'geometry' not in f):
+                'geometry' not in f):
             continue
         census2011 = str(f['properties']['censuscode'])
         census2011 = CodeFormatter.format_census2011_code(census2011)
         gj = json.dumps(json.dumps(f['geometry']))
-        fout.write(_MCF_FORMAT.format(ext_id=census2011,
-                                      place_type='AdministrativeArea2',
-                                      ext_id_prop='indianCensusAreaCode2011',
-                                      gj_str=gj))
+        fout.write(
+            _MCF_FORMAT.format(ext_id=census2011,
+                               place_type='AdministrativeArea2',
+                               ext_id_prop='indianCensusAreaCode2011',
+                               gj_str=gj))
 
 
 def main(_):
