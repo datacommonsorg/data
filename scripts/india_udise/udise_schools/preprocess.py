@@ -89,16 +89,15 @@ if __name__ == "__main__":
     years = sorted([
         "2013-14", "2014-15", "2015-16", "2016-17", "2017-18", "2018-19",
         "2019-20"
-    ],reverse=True)
+    ],
+                   reverse=True)
 
     api_report_code = "1003"
     api_map_id = "81"
 
     data_folder = os.path.join(module_dir_, "data")
-    csv_file_path = os.path.join(
-        module_dir_, "UDISEIndia_Schools.csv")
-    mcf_file_path = os.path.join(
-        module_dir_, "UDISEIndia_Schools.mcf")
+    csv_file_path = os.path.join(module_dir_, "UDISEIndia_Schools.csv")
+    mcf_file_path = os.path.join(module_dir_, "UDISEIndia_Schools.mcf")
     if path.exists(csv_file_path):
         os.remove(csv_file_path)
 
@@ -106,12 +105,12 @@ if __name__ == "__main__":
         os.remove(mcf_file_path)
 
     base = UDISESchools(api_report_code,
-                                            api_map_id,
-                                            data_folder,
-                                            csv_file_path,
-                                            mcf_file_path,
-                                            years,
-                                            attribute_mapping=ATTRIBUTE_MAPPING)
+                        api_map_id,
+                        data_folder,
+                        csv_file_path,
+                        mcf_file_path,
+                        years,
+                        attribute_mapping=ATTRIBUTE_MAPPING)
     if action == "download":
         base.download()
     elif action == "process":

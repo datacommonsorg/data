@@ -34,25 +34,20 @@ class TestPreprocess(unittest.TestCase):
         data_folder = os.path.join(module_dir_, "test_data")
 
         expected_csv_file_path = os.path.join(
-            data_folder,
-            "expected_UDISEIndia_Schools.csv")
+            data_folder, "expected_UDISEIndia_Schools.csv")
         expected_mcf_file_path = os.path.join(
-            data_folder,
-            "expected_UDISEIndia_Schools.mcf")
+            data_folder, "expected_UDISEIndia_Schools.mcf")
 
-        csv_file_path = os.path.join(
-            data_folder, "UDISEIndia_Schools.csv")
-        mcf_file_path = os.path.join(
-            data_folder, "UDISEIndia_Schools.mcf")
+        csv_file_path = os.path.join(data_folder, "UDISEIndia_Schools.csv")
+        mcf_file_path = os.path.join(data_folder, "UDISEIndia_Schools.mcf")
 
-        base = UDISESchools(
-            api_report_code,
-            api_map_id,
-            data_folder,
-            csv_file_path,
-            mcf_file_path,
-            years,
-            attribute_mapping=ATTRIBUTE_MAPPING)
+        base = UDISESchools(api_report_code,
+                            api_map_id,
+                            data_folder,
+                            csv_file_path,
+                            mcf_file_path,
+                            years,
+                            attribute_mapping=ATTRIBUTE_MAPPING)
         base.process()
 
         expected_csv_file = open(expected_csv_file_path)
