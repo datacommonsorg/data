@@ -7,3 +7,4 @@ __pycache__/
 .vscode/
 .idea/
 *.iml
+scripts/india_udise/udise_schools_with_functional_toilet/data/3061_*.json
