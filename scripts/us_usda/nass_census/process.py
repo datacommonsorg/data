@@ -64,28 +64,22 @@ def write_csv(reader, out, d):
       observationAbout = 'dcid:geoId/' + r['STATE_FIPS_CODE']
     elif r['AGG_LEVEL_DESC'] == 'COUNTY':
       observationAbout = 'dcid:geoId/' + r['STATE_FIPS_CODE'] + r['COUNTY_CODE']
-    unit = ''
-    if len(value) > 1:
-      unit = 'dcs:' + value[1]
     row = {
       'variableMeasured': 'dcs:' + value[0],
       'observationAbout': observationAbout,
       'value': int(r['VALUE'].replace(',', '')),
-      'unit': unit,
     }
+    if len(value) > 1:
+      row['unit'] = 'dcs:' + value[1]
     writer.writerow(row)
 
 
 if __name__ == '__main__':
   d = get_statvars('statvars')
   client = storage.Client()
-  print('one')
   bucket = client.get_bucket('datcom-csv')
-  print('two')
   blob = bucket.get_blob('usda/2017_cdqt_data.txt')
-  print('three')
   s = blob.download_as_string().decode('utf-8')
-  print('downloaded')
   reader = csv.DictReader(io.StringIO(s), delimiter='\t')
   out = open('agriculture.csv', 'w', newline='')
   write_csv(reader, out, d)

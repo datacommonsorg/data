@@ -1284,7 +1284,7 @@ statType: dcs:measuredValue
 ownershipStatus: PrimaryProducer
 race: TwoOrMoreRaces
 
-## Population Types
+## Classes
 
 Node: dcid:Farm
 typeOf: schema:Class
@@ -1297,6 +1297,39 @@ typeOf: schema:Class
 description: "Something grown or produced on a farm."
 subClassOf: schema:Thing
 name: "FarmInventory"
+
+Node: dcid:Bushel
+typeOf: dcs:VolumeUnitOfMeasure
+description: "A measure of capacity equal to 64 US pints (equivalent to 35.2 liters), used for dry goods."
+name: "Bushel"
+
+Node: dcid:Bale
+typeOf: dcs:VolumeUnitOfMeasure
+description: "A bundle of paper, hay, cotton, etc., tightly wrapped and bound with cords or hoops."
+name: "Bale"
+
+Node: dcid:Ton
+typeOf: dcs:WeightUnitOfMeasure
+description: "A unit of weight equal to 2,000 pounds avoirdupois (907.19 kg)."
+name: "Ton"
+
+Node: dcid:Pound
+typeOf: dcs:WeightUnitOfMeasure
+description: "A unit of weight in general use equal to 16 oz. avoirdupois (0.4536 kg)."
+name: "Pound"
+
+Node: dcid:Hundredweight
+typeOf: dcs:WeightUnitOfMeasure
+description: "A unit of weight equal to 100 lb avoirdupois (about 45.4 kg)."
+name: "Hundredweight"
+
+Node: dcid:USDollarPerFarm
+typeOf: dcs:CurrencyUnitOfMeasure
+name: "USDollarPerFarm"
+
+Node: dcid:USDollarPerAcre
+typeOf: dcs:CurrencyUnitOfMeasure
+name: "USDollarPerAcre"
 
 ## Properties
 
@@ -1365,6 +1398,22 @@ typeOf: schema:Property
 domainIncludes: dcs:Farm
 rangeIncludes: dcs:OwnershipStatusEnum
 name: "ownershipStatus"
+
+Node: dcid:amount
+typeOf: schema:Property
+domainIncludes: dcs:FarmInventory
+
+Node: dcid:area
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+
+Node: dcid:income
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+
+Node: dcid:value
+typeOf: schema:Property
+domainIncludes: dcs:Farm
 
 ## Enums
 
@@ -1625,19 +1674,3 @@ name: "Producer"
 Node: dcid:PrimaryProducer
 typeOf: dcs:OwnershipStatusEnum
 name: "PrimaryProducer"
-
-Node: dcid:amount
-typeOf: schema:Property
-domainIncludes: dcs:FarmInventory
-
-Node: dcid:area
-typeOf: schema:Property
-domainIncludes: dcs:Farm
-
-Node: dcid:income
-typeOf: schema:Property
-domainIncludes: dcs:Farm
-
-Node: dcid:value
-typeOf: schema:Property
-domainIncludes: dcs:Farm
