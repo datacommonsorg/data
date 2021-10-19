@@ -49,7 +49,7 @@ example, this includes maps to and from common geographic identifiers.
 1. Fork this repo - follow the [Github guide to forking a repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
    - In https://github.com/datacommonsorg/data, click on "Fork" button to
    fork the repo.
-
+   - Add upstream: `git remote add upstream https://github.com/datacommonsorg/data.git`
    - Clone your forked repo to your desktop. Please do not directly clone
    this repo, verify by running `git remote -v`, the output should look like
    this:
