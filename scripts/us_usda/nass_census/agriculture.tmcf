@@ -1,0 +1,9 @@
+Node: E:USDA_AgricultureCensus->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:USDA_AgricultureCensus->variableMeasured
+observationDate: "2017"
+observationAbout: C:USDA_AgricultureCensus->observationAbout
+observationPeriod: "P5Y"
+value: C:USDA_AgricultureCensus->value
+unit: C:USDA_AgricultureCensus->unit
+measurementQualifier: C:USDA_AgricultureCensus->measurementQualifier
