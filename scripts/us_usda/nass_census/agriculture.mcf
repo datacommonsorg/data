@@ -309,7 +309,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Farm
 measuredProperty: dcs:count
 statType: dcs:measuredValue
-farmInventoryType: dcs:CattleAndCows
+farmInventoryType: dcs:CattleAndCalves
 
 Node: dcid:Count_FarmInventory_CattleAndCalves
 description: "Number of cattle and calves on farms."
@@ -583,7 +583,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Farm
 measuredProperty: dcs:area
 statType: dcs:measuredValue
-farmInventoryType: dcs:WinteWheatForGrain
+farmInventoryType: dcs:WinterWheatForGrain
 
 Node: dcid:AmountFarmInventory_WinterWheatForGrain
 description: "Amount of winter wheat for grain on farms."
