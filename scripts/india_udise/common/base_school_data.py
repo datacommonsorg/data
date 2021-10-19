@@ -140,6 +140,8 @@ ATTRIBUTE_MAPPING = {
     }
 }
 
+BASE_DATA_FOLDER = os.path.join(module_dir_, "data")
+
 
 class UDISEIndiaSchoolDataLoaderBase:
     """Base Classes and methods to import any school level from Unified District Information System for Education (UDISE) report system.

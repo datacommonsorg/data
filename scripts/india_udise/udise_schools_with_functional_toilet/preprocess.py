@@ -25,6 +25,7 @@ import requests
 import time
 from os import path
 from india_udise.common.base_school_data import UDISEIndiaSchoolDataLoaderBase
+from india_udise.common.base_school_data import BASE_DATA_FOLDER
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -60,7 +61,7 @@ if __name__ == "__main__":
     api_report_code = "3061"
     api_map_id = "64"
 
-    data_folder = os.path.join(module_dir_, "data")
+    data_folder = BASE_DATA_FOLDER
     csv_file_path = os.path.join(
         module_dir_, "UDISEIndia_Schools_With_Functional_Toilet.csv")
     mcf_file_path = os.path.join(
