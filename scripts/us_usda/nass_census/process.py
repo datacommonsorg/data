@@ -23,7 +23,6 @@ CSV_COLUMNS = [
   'observationAbout',
   'value',
   'unit',
-  'measurementQualifier',
 ]
 
 SKIPPED_VALUES = [
@@ -68,15 +67,11 @@ def write_csv(reader, out, d):
     unit = ''
     if len(value) > 1:
       unit = 'dcs:' + value[1]
-    measurementQualifier = ''
-    if len(value) > 2:
-      measurementQualifier = 'dcs:' + value[2]
     row = {
       'variableMeasured': 'dcs:' + value[0],
       'observationAbout': observationAbout,
       'value': int(r['VALUE'].replace(',', '')),
       'unit': unit,
-      'measurementQualifier': measurementQualifier,
     }
     writer.writerow(row)
 
@@ -84,9 +79,13 @@ def write_csv(reader, out, d):
 if __name__ == '__main__':
   d = get_statvars('statvars')
   client = storage.Client()
+  print('one')
   bucket = client.get_bucket('datcom-csv')
+  print('two')
   blob = bucket.get_blob('usda/2017_cdqt_data.txt')
+  print('three')
   s = blob.download_as_string().decode('utf-8')
+  print('downloaded')
   reader = csv.DictReader(io.StringIO(s), delimiter='\t')
   out = open('agriculture.csv', 'w', newline='')
   write_csv(reader, out, d)

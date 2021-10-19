@@ -291,15 +291,17 @@ Node: dcid:Net_Income_Farm
 description: "Net income from farms."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Farm
-measuredProperty: dcs:value
+measuredProperty: dcs:income
 statType: dcs:measuredValue
+measurementQualifier: dcs:Net
 
 Node: dcid:Mean_Net_Income_Farm
 description: "Mean net income from farms."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Farm
-measuredProperty: dcs:value
+measuredProperty: dcs:income
 statType: dcs:meanValue
+measurementQualifier: dcs:Net
 
 Node: dcid:Count_Farm_CattleAndCalves
 description: "Number of farms with cattle and calves."
@@ -1282,3 +1284,360 @@ statType: dcs:measuredValue
 ownershipStatus: PrimaryProducer
 race: TwoOrMoreRaces
 
+## Population Types
+
+Node: dcid:Farm
+typeOf: schema:Class
+description: "An area of land and its buildings used for growing crops and rearing animals."
+subClassOf: schema:Place
+name: "Farm"
+
+Node: dcid:FarmInventory
+typeOf: schema:Class
+description: "Something grown or produced on a farm."
+subClassOf: schema:Thing
+name: "FarmInventory"
+
+## Properties
+
+Node: dcid:marketValue
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:Quantity
+name: "marketValue"
+
+Node: dcid:farmSize
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:QuantityRange
+name: "farmSize"
+
+Node: dcid:valueOfSales
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:QuantityRange
+name: "valueOfSales"
+
+Node: dcid:farmType
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:FarmTypeEnum
+name: "farmType"
+
+Node: dcid:governmentPaymentStatus
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:GovernmentPaymentStatusEnum
+name: "governmentPaymentStatus"
+
+Node: dcid:incomeStatus
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:IncomeStatusEnum
+name: "incomeStatus"
+
+Node: dcid:expenses
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:Quantity
+name: "expenses"
+
+Node: dcid:farmInventoryType
+typeOf: schema:Property
+domainIncludes: dcs:Farm, dcs:FarmInventory
+rangeIncludes: dcs:FarmInventoryTypeEnum
+name: "farmInventoryType"
+
+Node: dcid:quantitySold
+typeOf: schema:Property
+domainIncludes: dcs:FarmInventory
+rangeIncludes: dcs:Quantity
+name: "quantitySold"
+
+Node: dcid:farmInventoryStatus
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:FarmInventoryStatusEnum
+name: "farmInventoryStatus"
+
+Node: dcid:ownershipStatus
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:OwnershipStatusEnum
+name: "ownershipStatus"
+
+## Enums
+
+Node: dcid:FarmTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "FarmTypeEnum"
+
+Node: dcid:Cropland
+typeOf: dcs:FarmTypeEnum
+name: "Cropland"
+
+Node: dcid:HarvestedCropland
+typeOf: dcs:FarmTypeEnum
+name: "HarvestedCropland"
+specializationOf: dcs:Cropland
+
+Node: dcid:IrrigatedLand
+typeOf: dcs:FarmTypeEnum
+name: "IrrigatedLand"
+
+Node: dcid:GovernmentPaymentStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "GovernmentPaymentStatusEnum"
+
+Node: dcid:GovernmentPayment
+typeOf: dcs:GovernmentPaymentStatusEnum
+name: "GovernmentPayment"
+
+Node: dcid:IncomePaymentStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "IncomePaymentStatusEnum"
+
+Node: dcid:ReportedIncome
+typeOf: dcs:IncomePaymentStatusEnum
+name: "ReportedIncome"
+
+Node: dcid:ReportedNetIncome
+typeOf: dcs:IncomePaymentStatusEnum
+name: "ReportedNetIncome"
+
+Node: dcid:IncomeMeasurementEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "IncomeMeasurementEnum"
+
+Node: dcid:Net
+typeOf: dcs:IncomeMeasurementEnum
+name: "Net"
+
+Node: dcid:FarmInventoryTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "FarmInventoryTypeEnum"
+
+Node: dcid:LandAndBuildings
+typeOf: dcs:FarmInventoryTypeEnum
+name: "LandAndBuildings"
+
+Node: dcid:MachineryAndEquipment
+typeOf: dcs:FarmInventoryTypeEnum
+name: "MachineryAndEquipment"
+
+Node: dcid:AgriculturalProducts
+typeOf: dcs:FarmInventoryTypeEnum
+name: "AgriculturalProducts"
+
+Node: dcid:LivestockAndPoultry
+typeOf: dcs:FarmInventoryTypeEnum
+name: "LivestockAndPoultry"
+specializationOf: dcs:AgriculturalProducts
+
+Node: dcid:CattleAndCalves
+typeOf: dcs:FarmInventoryTypeEnum
+name: "CattleAndCalves"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:BeefCows
+typeOf: dcs:FarmInventoryTypeEnum
+name: "BeefCows"
+specializationOf: dcs:CattleAndCalves
+
+Node: dcid:MilkCows
+typeOf: dcs:FarmInventoryTypeEnum
+name: "MilkCows"
+specializationOf: dcs:CattleAndCalves
+
+Node: dcid:HogsAndPigs
+typeOf: dcs:FarmInventoryTypeEnum
+name: "HogsAndPigs"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:SheepAndLambs
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SheepAndLambs"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:Layers
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Layers"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:Broilers
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Broilers"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:Crops
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Crops"
+specializationOf: dcs:AgriculturalProducts
+
+Node: dcid:Corn
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Corn"
+specializationOf: dcs:Crops
+
+Node: dcid:CornForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "CornForGrain"
+specializationOf: dcs:Corn
+
+Node: dcid:CornForSilageOrGreenchop
+typeOf: dcs:FarmInventoryTypeEnum
+name: "CornForSilageOrGreenchop"
+specializationOf: dcs:Corn
+
+Node: dcid:WheatForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "WheatForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:DurumWheatForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "DurumWheatForGrain"
+specializationOf: dcs:WheatForGrain
+
+Node: dcid:OtherSpringWheatForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "OtherSpringWheatForGrain"
+specializationOf: dcs:WheatForGrain
+
+Node: dcid:WinterWheatForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "WinterWheatForGrain"
+specializationOf: dcs:WheatForGrain
+
+Node: dcid:OatsForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "OatsForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:BarleyForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "BarleyForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:BarleyForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "BarleyForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:SorghumForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SorghumForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:SorghumForSilageOrGreenchop
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SorghumForSilageOrGreenchop"
+specializationOf: dcs:Crops
+
+Node: dcid:DryEdibleBeans
+typeOf: dcs:FarmInventoryTypeEnum
+name: "DryEdibleBeans"
+specializationOf: dcs:Crops
+
+Node: dcid:Cotton
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Cotton"
+specializationOf: dcs:Crops
+
+Node: dcid:UplandCotton
+typeOf: dcs:FarmInventoryTypeEnum
+name: "UplandCotton"
+specializationOf: dcs:Cotton
+
+Node: dcid:PimaCotton
+typeOf: dcs:FarmInventoryTypeEnum
+name: "PimaCotton"
+specializationOf: dcs:Cotton
+
+Node: dcid:Forage
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Forage"
+specializationOf: dcs:Crops
+
+Node: dcid:Rice
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Rice"
+specializationOf: dcs:Crops
+
+Node: dcid:SunflowerSeed
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SunflowerSeed"
+specializationOf: dcs:Crops
+
+Node: dcid:SugarbeetsForSugar
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SugarbeetsForSugar"
+specializationOf: dcs:Crops
+
+Node: dcid:PeanutsForNuts
+typeOf: dcs:FarmInventoryTypeEnum
+name: "PeanutsForNuts"
+specializationOf: dcs:Crops
+
+Node: dcid:VegetablesHarvestedForSale
+typeOf: dcs:FarmInventoryTypeEnum
+name: "VegetablesHarvestedForSale"
+specializationOf: dcs:Crops
+
+Node: dcid:Potatoes
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Potatoes"
+specializationOf: dcs:VegetablesHarvestedForSale
+
+Node: dcid:SweetPotatoes
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SweetPotatoes"
+specializationOf: dcs:VegetablesHarvestedForSale
+
+Node: dcid:Orchards
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Orchards"
+specializationOf: dcs:Crops
+
+Node: dcid:FarmInventoryStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "FarmInventoryStatusEnum"
+
+Node: dcid:InventorySold
+typeOf: dcs:FarmInventoryStatusEnum
+name: "InventorySold"
+
+Node: dcid:OwnershipStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "OwnershipStatusEnum"
+
+Node: dcid:Producer
+typeOf: dcs:OwnershipStatusEnum
+name: "Producer"
+
+Node: dcid:PrimaryProducer
+typeOf: dcs:OwnershipStatusEnum
+name: "PrimaryProducer"
+
+Node: dcid:amount
+typeOf: schema:Property
+domainIncludes: dcs:FarmInventory
+
+Node: dcid:area
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+
+Node: dcid:income
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+
+Node: dcid:value
+typeOf: schema:Property
+domainIncludes: dcs:Farm
