@@ -13,21 +13,23 @@
 # limitations under the License.
 """
 Author: Padma Gundapaneni @padma-g
-Date: 9/13/2021
+Date: 10/12/2021
 Description: This script cleans a csv file of COVID-19 seroprevalence
-data downloaded from the CDC. census tract, county,
+data downloaded from the CDC.
 URL: https://data.cdc.gov/api/views/d2tw-32xv/rows.csv?accessType=DOWNLOAD
-@input_file         filepath to the original csv that needs to be cleaned
-@output_count       filepath to output the data with counts as a csv
-@output_percent     filepath to output the data with percents as a csv
-python3 parse_data.py input_file output_count output_percent
+python3 parse_data.py
 """
 
 from datetime import datetime
 import calendar
-import sys
-import numpy as np
+import os
+import requests
 import pandas as pd
+
+DOWNLOAD_URL = {
+    "raw_data.csv":
+        "https://data.cdc.gov/api/views/d2tw-32xv/rows.csv?accessType=DOWNLOAD"
+}
 
 # Map of location abbreviations in the dataset to respective dcids
 LOCATION_DCID_MAP = {
@@ -89,93 +91,107 @@ LOCATION_DCID_MAP = {
 # Mapping of column names in the dataset to StatVar names
 COLUMN_MAP = {
     'n [0-17 Years Prevalence]':
-        'dcs:Count_Years0To17_MedicalConditionIncident_COVID_19_'\
+        'Count_Years0To17_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Rate (%) [0-17 Years Prevalence]':
-        'dcs:Percent_Years0To17_MedicalConditionIncident_COVID_19_'\
+        'Percent_Years0To17_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Lower CI [0-17 Years Prevalence]':
-        'dcs:LowerConfidenceIntervalLimit_Percent_Years0To17_'\
+        'LowerConfidenceIntervalLimit_Percent_Years0To17_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [0-17 Years Prevalence]':
-        'dcs:UpperConfidenceIntervalLimit_Percent_Years0To17_'\
+        'UpperConfidenceIntervalLimit_Percent_Years0To17_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [18-49 Years Prevalence]':
-        'dcs:Count_Years18To49_MedicalConditionIncident_COVID_19_'\
+        'Count_Years18To49_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Rate (%) [18-49 Years Prevalence]':
-        'dcs:Percent_Years18To49_MedicalConditionIncident_COVID_19_'\
+        'Percent_Years18To49_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Lower CI [18-49 Years Prevalence]':
-        'dcs:LowerConfidenceIntervalLimit_Percent_Years18To49_'\
+        'LowerConfidenceIntervalLimit_Percent_Years18To49_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [18-49 Years Prevalence]':
-        'dcs:UpperConfidenceIntervalLimit_Percent_Years18To49_'\
+        'UpperConfidenceIntervalLimit_Percent_Years18To49_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [50-64 Years Prevalence]':
-        'dcs:Count_Years50To64_MedicalConditionIncident_COVID_19_'\
+        'Count_Years50To64_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Rate (%) [50-64 Years Prevalence]':
-        'dcs:Percent_Years50To64_MedicalConditionIncident_COVID_19_'\
+        'Percent_Years50To64_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Lower CI [50-64 Years Prevalence]':
-        'dcs:LowerConfidenceIntervalLimit_Percent_Years50To64_'\
+        'LowerConfidenceIntervalLimit_Percent_Years50To64_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [50-64 Years Prevalence]':
-        'dcs:UpperConfidenceIntervalLimit_Percent_Years50To64_'\
+        'UpperConfidenceIntervalLimit_Percent_Years50To64_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [65+ Years Prevalence]':
-        'dcs:Count_65OrMoreYears_MedicalConditionIncident_COVID_19_'\
+        'Count_65OrMoreYears_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Rate (%) [65+ Years Prevalence]':
-        'dcs:Percent_65OrMoreYears_MedicalConditionIncident_COVID_19_'\
+        'Percent_65OrMoreYears_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Lower CI [65+ Years Prevalence]':
-        'dcs:LowerConfidenceIntervalLimit_Percent_65OrMoreYears_'\
+        'LowerConfidenceIntervalLimit_Percent_65OrMoreYears_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [65+ Years Prevalence]':
-        'dcs:UpperConfidenceIntervalLimit_Percent_65OrMoreYears_'\
+        'UpperConfidenceIntervalLimit_Percent_65OrMoreYears_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [Male Prevalence]':
-        'dcs:Count_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'Count_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [Male Prevalence]':
-        'dcs:Percent_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'Percent_Male_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [Male Prevalence]':
-        'dcs:LowerConfidenceIntervalLimit_Percent_Male_'\
+        'LowerConfidenceIntervalLimit_Percent_Male_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [Male Prevalence]':
-        'dcs:UpperConfidenceIntervalLimit_Percent_Male_'\
+        'UpperConfidenceIntervalLimit_Percent_Male_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [Female Prevalence]':
-        'dcs:Count_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'Count_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [Female Prevalence]':
-        'dcs:Percent_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'Percent_Female_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [Female Prevalence]':
-        'dcs:LowerConfidenceIntervalLimit_Percent_Female_'\
+        'LowerConfidenceIntervalLimit_Percent_Female_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [Female Prevalence]':
-        'dcs:UpperConfidenceIntervalLimit_Percent_Female_'\
+        'UpperConfidenceIntervalLimit_Percent_Female_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'n [Cumulative Prevalence]':
-        'dcs:Count_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'Count_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Rate (%) [Cumulative Prevalence]':
-        'dcs:Percent_MedicalConditionIncident_COVID_19_Seroprevalence',
+        'Percent_MedicalConditionIncident_COVID_19_Seroprevalence',
     'Lower CI [Cumulative Prevalence]':
-        'dcs:LowerConfidenceIntervalLimit_Percent_'\
+        'LowerConfidenceIntervalLimit_Percent_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Upper CI [Cumulative Prevalence]':
-        'dcs:UpperConfidenceIntervalLimit_Percent_'\
+        'UpperConfidenceIntervalLimit_Percent_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Estimated cumulative infections count':
-        'dcs:EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_'\
+        'EstimatedCumulativeCount_MedicalConditionIncident_COVID_19_'\
         +'Seroprevalence',
     'Estimated cumulative infections lower CI 7':
-        'dcs:LowerConfidenceIntervalLimit_EstimatedCumulativeCount_'\
+        'LowerConfidenceIntervalLimit_EstimatedCumulativeCount_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence',
     'Estimated cumulative infections upper CI 7':
-        'dcs:UpperConfidenceIntervalLimit_EstimatedCumulativeCount_'\
+        'UpperConfidenceIntervalLimit_EstimatedCumulativeCount_'\
         +'MedicalConditionIncident_COVID_19_Seroprevalence'
 }
+
+
+def download_file(url: str, save_path: str):
+    """
+    Args:
+        url: url to the file to be downloaded
+        save_path: path for the downloaded file to be stored
+    Returns:
+        a downloaded csv file in the specified file path
+    """
+    print(f'Downloading {url} to {save_path}')
+    request = requests.get(url, stream=True)
+    with open(save_path, 'wb') as file:
+        file.write(request.content)
 
 
 def get_cleaned_dates_period(date_range):
@@ -246,14 +262,13 @@ def clean_col_values(value):
     return value
 
 
-def clean_data(file_path, output_count, output_percent):
+def clean_data(file_path, output_file):
     """
     Args:
         file_path: path to a comma-separated data file to be cleaned
-        output_count: path for the cleaned csv of counts
-        output_percent: path for the cleaned csv of percents
+        output_file: path for the cleaned csv
     Returns:
-        2 cleaned csv files
+        cleaned csv file
     """
     data = pd.read_csv(file_path)
     # Map the location abbreviations to their dcids
@@ -278,21 +293,21 @@ def clean_data(file_path, output_count, output_percent):
     # Rename the columns that are needed with StatVar names
     data.rename(columns=COLUMN_MAP, inplace=True)
     # Convert the columns with counts from floats to integers
-    data["dcs:EstimatedCumulativeCount_MedicalConditionIncident_"\
+    data["EstimatedCumulativeCount_MedicalConditionIncident_"\
     +"COVID_19_Seroprevalence"] = data[
-        "dcs:EstimatedCumulativeCount_MedicalConditionIncident_"\
+        "EstimatedCumulativeCount_MedicalConditionIncident_"\
         +"COVID_19_Seroprevalence"].astype(
             "Int64")
-    data["dcs:LowerConfidenceIntervalLimit_EstimatedCumulativeCount_"\
+    data["LowerConfidenceIntervalLimit_EstimatedCumulativeCount_"\
     +"MedicalConditionIncident_"\
     +"COVID_19_Seroprevalence"] = data[
-        "dcs:LowerConfidenceIntervalLimit_EstimatedCumulativeCount_"\
+        "LowerConfidenceIntervalLimit_EstimatedCumulativeCount_"\
         +"MedicalConditionIncident_"\
         +"COVID_19_Seroprevalence"].astype("Int64")
-    data["dcs:UpperConfidenceIntervalLimit_EstimatedCumulativeCount_"\
+    data["UpperConfidenceIntervalLimit_EstimatedCumulativeCount_"\
     +"MedicalConditionIncident_"\
     +"COVID_19_Seroprevalence"] = data[
-        "dcs:UpperConfidenceIntervalLimit_EstimatedCumulativeCount_"\
+        "UpperConfidenceIntervalLimit_EstimatedCumulativeCount_"\
         +"MedicalConditionIncident_"\
         +"COVID_19_Seroprevalence"].astype("Int64")
     # For each column that has measured percent values, remove all values
@@ -306,26 +321,28 @@ def clean_data(file_path, output_count, output_percent):
         if "ConfidenceIntervalLimit" in col and "EstimatedCumulativeCount"\
         not in col:
             data[col] = data[col].fillna("")
-    # Combine columns into single StatVar column
-    data = pd.melt(data,
-                   id_vars=data.columns[[0, 32, 33]],
-                   value_vars=data.columns[1:31],
-                   var_name='StatVar')
-    # Output the cleaned csvs
-    data_count = data[(~data['StatVar'].str.contains("Percent"))]
-    data_percent = data[((data['StatVar'].str.contains("Percent")))]
-    data_percent = data_percent.replace(r'^\s*$', np.nan, regex=True)
-    data_percent = data_percent.dropna(subset=['value'])
-    data_count.to_csv(output_count, index=False)
-    data_percent.to_csv(output_percent, index=False)
+    # Drop unnecessary columns
+    data = data.drop(['Period'], axis=1)
+    # Output the cleaned csv
+    data.to_csv(output_file, index=False)
 
 
 def main():
-    """Main function to generate the cleaned csv files."""
-    file_path = sys.argv[1]
-    output_count = sys.argv[2]
-    output_percent = sys.argv[3]
-    clean_data(file_path, output_count, output_percent)
+    """Main function to generate the cleaned csv file."""
+    raw_data_dir = os.path.join(os.getcwd(), 'raw_data')
+    cleaned_data_dir = os.path.join(os.getcwd(), 'cleaned_data')
+    if not os.path.exists(raw_data_dir):
+        os.makedirs(raw_data_dir)
+    if not os.path.exists(cleaned_data_dir):
+        os.makedirs(cleaned_data_dir)
+    for dataset_name, url in DOWNLOAD_URL.items():
+        print(dataset_name)
+        save_path = os.path.join(raw_data_dir, dataset_name)
+        download_file(url, save_path)
+    file_path = "raw_data/raw_data.csv"
+    output_file = "cleaned_data/cleaned_data.csv"
+    clean_data(file_path, output_file)
+    os.remove("raw_data/raw_data.csv")
 
 
 if __name__ == "__main__":
