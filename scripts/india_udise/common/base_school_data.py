@@ -104,6 +104,43 @@ class GeographicLevel(enum.Enum):
     BLOCK = "block"
 
 
+ATTRIBUTE_MAPPING = {
+    "cat1": {
+        "levelOfSchool": "PrimarySchool_Grade1To5"
+    },
+    "cat2": {
+        "levelOfSchool": "UpperPrimarySchool_Grade1To8"
+    },
+    "cat3": {
+        "levelOfSchool": "HigherSecondarySchool_Grade1To12"
+    },
+    "cat4": {
+        "levelOfSchool": "UpperPrimarySchool_Grade6To8"
+    },
+    "cat5": {
+        "levelOfSchool": "UpperPrimarySchool_Grade6To12"
+    },
+    "cat6": {
+        "levelOfSchool": "SeniorSecondarySchool_Grade1To10"
+    },
+    "cat7": {
+        "levelOfSchool": "SeniorSecondarySchool_Grade6To10"
+    },
+    "cat8": {
+        "levelOfSchool": "SeniorSecondarySchool_Grade9To10"
+    },
+    "cat10": {
+        "levelOfSchool": "HigherSecondarySchool_Grade9To12"
+    },
+    "cat11": {
+        "levelOfSchool": "HigherSecondarySchool_Grade11To12"
+    },
+    "Total": {
+        "levelOfSchool": "Total"
+    }
+}
+
+
 class UDISEIndiaSchoolDataLoaderBase:
     """Base Classes and methods to import any school level from Unified District Information System for Education (UDISE) report system.
     
@@ -132,7 +169,7 @@ class UDISEIndiaSchoolDataLoaderBase:
                  csv_file_path,
                  mcf_file_path,
                  years,
-                 attribute_mapping,
+                 attribute_mapping=ATTRIBUTE_MAPPING,
                  csv_headers=CSV_HEADERS):
 
         self.udise_report_id = udise_report_id
