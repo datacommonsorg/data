@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for process.py"""
 
 import csv
@@ -22,7 +21,7 @@ from process import get_statvars, write_csv
 
 class ProcessTest(unittest.TestCase):
 
-  def test_write_csv(self):
+    def test_write_csv(self):
         with open('./testdata/input.csv') as f_in:
             d = get_statvars('statvars')
             reader = csv.DictReader(f_in, delimiter='\t')
