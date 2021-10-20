@@ -242,7 +242,7 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 governmentPaymentStatus: dcs:GovernmentPayment
 
-Node: dcid:Value_Farm_GovernmentPayment
+Node: dcid:MonetaryValue_Farm_GovernmentPayment
 description: "Value of government payments to farms."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Farm
