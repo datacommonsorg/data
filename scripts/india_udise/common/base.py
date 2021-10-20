@@ -199,7 +199,7 @@ class UDISEIndiaDataLoaderBase:
                 constraints_array.append("gender: schema:Male")
             if gender == "Female":
                 constraints_array.append("gender: schema:Female")
-        
+
         if "SchoolLevel" in data_row:
             school_level = data_row["SchoolLevel"]
             name_array.append(school_level)
