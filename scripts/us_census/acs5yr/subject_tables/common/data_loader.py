@@ -230,8 +230,8 @@ class SubjectTableDataLoaderBase:
                         df[count_col] = df[count_col].astype(float)
                         df[col] = (df[col] / 100) * df[count_col]
                         df[col] = df[col].round(
-                            3
-                        )  # TODO: replace with parameter self.decimal_places
+                            self.decimal_places
+                        )
         return df
 
     def _get_summary(self):

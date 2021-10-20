@@ -84,7 +84,7 @@ Defines a set of additional properties and values to the stat-var based on a spe
 In the example, if the `populationType` is a `Person` and the constraint property is `healthInsurance`, the additional property-values for `armedForcesStatus` and `institutionalization` are added. If there are multiple constrainProperties, the additionals pvs (dependent PVs) are added with a logical `AND` condition.
 
 ```json
-  "universePvs":[
+  "universePVs":[
 		{
 			"populationType": "Person",
 			"constraintProperties": ["healthInsurance"],
