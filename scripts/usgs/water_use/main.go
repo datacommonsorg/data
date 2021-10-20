@@ -306,6 +306,9 @@ func processData(inputDir, outputDir string) error {
 		reader := csv.NewReader(fileReader)
 		reader.Comma = '\t'
 		rows, err := reader.ReadAll()
+		if err != nil {
+			return fmt.Errorf("reader.ReadAll() = %s", err)
+		}
 		for _, row := range rows {
 			// Basic check for the row size.
 			if len(row) != 283 {
