@@ -105,5 +105,6 @@ def main(argv):
     get_mcf(series)
     df = get_df(series, FLAGS.per_page, FLAGS.country)
     get_csv(df, FLAGS.path)
-   
-app.run(main)
+
+if __name__ == '__main__':
+    app.run(main)
