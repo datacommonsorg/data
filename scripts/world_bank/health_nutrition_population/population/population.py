@@ -8,7 +8,7 @@ from util import statvar_dcid_generator
 FLAGS = flags.FLAGS
 flags.DEFINE_integer("age", 2,
                      "Age to which this program is run, max value 26")
-flags.DEFINE_string("gender", "FE MA", "Gender: FE for female, MA for male")
+flags.DEFINE_list("gender", ["FE", "MA"], "Gender: FE for female, MA for male")
 flags.DEFINE_string("country", "USA", "Country codes")
 #maximum the API Can display is 32767
 flags.DEFINE_integer("per_page", 32, "rows per page")
@@ -101,7 +101,7 @@ def get_mcf(series_lst):
     
 def main(argv):
     series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(FLAGS.age)
-               for gender in (FLAGS.gender.split())]
+               for gender in (FLAGS.gender)]
     get_mcf(series)
     df = get_df(series, FLAGS.per_page, FLAGS.country)
     get_csv(df, FLAGS.path)
