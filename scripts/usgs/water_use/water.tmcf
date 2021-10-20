@@ -1,0 +1,584 @@
+Node: E:water->E0
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water
+value: C:water->WithdrawalRate_Water
+
+Node: E:water->E1
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply
+value: C:water->WithdrawalRate_Water_PublicSupply
+
+Node: E:water->E2
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_GroundWater
+value: C:water->WithdrawalRate_Water_PublicSupply_GroundWater
+
+Node: E:water->E3
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_SurfaceWater
+value: C:water->WithdrawalRate_Water_PublicSupply_SurfaceWater
+
+Node: E:water->E4
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_FreshWater
+value: C:water->WithdrawalRate_Water_PublicSupply_FreshWater
+
+Node: E:water->E5
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_FreshWater_GroundWater
+value: C:water->WithdrawalRate_Water_PublicSupply_FreshWater_GroundWater
+
+Node: E:water->E6
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_FreshWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_PublicSupply_FreshWater_SurfaceWater
+
+Node: E:water->E7
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_SalineWater
+value: C:water->WithdrawalRate_Water_PublicSupply_SalineWater
+
+Node: E:water->E8
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_SalineWater_GroundWater
+value: C:water->WithdrawalRate_Water_PublicSupply_SalineWater_GroundWater
+
+Node: E:water->E9
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_SalineWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_PublicSupply_SalineWater_SurfaceWater
+
+Node: E:water->E10
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic
+value: C:water->WithdrawalRate_Water_Domestic
+
+Node: E:water->E11
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic_GroundWater
+value: C:water->WithdrawalRate_Water_Domestic_GroundWater
+
+Node: E:water->E12
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic_SurfaceWater
+value: C:water->WithdrawalRate_Water_Domestic_SurfaceWater
+
+Node: E:water->E13
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic_FreshWater
+value: C:water->WithdrawalRate_Water_Domestic_FreshWater
+
+Node: E:water->E14
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic_FreshWater_GroundWater
+value: C:water->WithdrawalRate_Water_Domestic_FreshWater_GroundWater
+
+Node: E:water->E15
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic_FreshWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Domestic_FreshWater_SurfaceWater
+
+Node: E:water->E16
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic_SalineWater
+value: C:water->WithdrawalRate_Water_Domestic_SalineWater
+
+Node: E:water->E17
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic_SalineWater_GroundWater
+value: C:water->WithdrawalRate_Water_Domestic_SalineWater_GroundWater
+
+Node: E:water->E18
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Domestic_SalineWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Domestic_SalineWater_SurfaceWater
+
+Node: E:water->E19
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial
+value: C:water->WithdrawalRate_Water_Industrial
+
+Node: E:water->E20
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial_GroundWater
+value: C:water->WithdrawalRate_Water_Industrial_GroundWater
+
+Node: E:water->E21
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial_SurfaceWater
+value: C:water->WithdrawalRate_Water_Industrial_SurfaceWater
+
+Node: E:water->E22
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial_FreshWater
+value: C:water->WithdrawalRate_Water_Industrial_FreshWater
+
+Node: E:water->E23
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial_FreshWater_GroundWater
+value: C:water->WithdrawalRate_Water_Industrial_FreshWater_GroundWater
+
+Node: E:water->E24
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial_FreshWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Industrial_FreshWater_SurfaceWater
+
+Node: E:water->E25
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial_SalineWater
+value: C:water->WithdrawalRate_Water_Industrial_SalineWater
+
+Node: E:water->E26
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial_SalineWater_GroundWater
+value: C:water->WithdrawalRate_Water_Industrial_SalineWater_GroundWater
+
+Node: E:water->E27
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Industrial_SalineWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Industrial_SalineWater_SurfaceWater
+
+Node: E:water->E28
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation
+value: C:water->WithdrawalRate_Water_Irrigation
+
+Node: E:water->E29
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation_GroundWater
+value: C:water->WithdrawalRate_Water_Irrigation_GroundWater
+
+Node: E:water->E30
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation_SurfaceWater
+value: C:water->WithdrawalRate_Water_Irrigation_SurfaceWater
+
+Node: E:water->E31
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation_FreshWater
+value: C:water->WithdrawalRate_Water_Irrigation_FreshWater
+
+Node: E:water->E32
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation_FreshWater_GroundWater
+value: C:water->WithdrawalRate_Water_Irrigation_FreshWater_GroundWater
+
+Node: E:water->E33
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation_FreshWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Irrigation_FreshWater_SurfaceWater
+
+Node: E:water->E34
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation_SalineWater
+value: C:water->WithdrawalRate_Water_Irrigation_SalineWater
+
+Node: E:water->E35
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation_SalineWater_GroundWater
+value: C:water->WithdrawalRate_Water_Irrigation_SalineWater_GroundWater
+
+Node: E:water->E36
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Irrigation_SalineWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Irrigation_SalineWater_SurfaceWater
+
+Node: E:water->E37
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric
+value: C:water->WithdrawalRate_Water_Thermoelectric
+
+Node: E:water->E38
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_GroundWater
+value: C:water->WithdrawalRate_Water_Thermoelectric_GroundWater
+
+Node: E:water->E39
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_SurfaceWater
+value: C:water->WithdrawalRate_Water_Thermoelectric_SurfaceWater
+
+Node: E:water->E40
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater
+value: C:water->WithdrawalRate_Water_Thermoelectric_FreshWater
+
+Node: E:water->E41
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater_GroundWater
+value: C:water->WithdrawalRate_Water_Thermoelectric_FreshWater_GroundWater
+
+Node: E:water->E42
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Thermoelectric_FreshWater_SurfaceWater
+
+Node: E:water->E43
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater
+value: C:water->WithdrawalRate_Water_Thermoelectric_SalineWater
+
+Node: E:water->E44
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater_GroundWater
+value: C:water->WithdrawalRate_Water_Thermoelectric_SalineWater_GroundWater
+
+Node: E:water->E45
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Thermoelectric_SalineWater_SurfaceWater
+
+Node: E:water->E46
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining
+value: C:water->WithdrawalRate_Water_Mining
+
+Node: E:water->E47
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining_GroundWater
+value: C:water->WithdrawalRate_Water_Mining_GroundWater
+
+Node: E:water->E48
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining_SurfaceWater
+value: C:water->WithdrawalRate_Water_Mining_SurfaceWater
+
+Node: E:water->E49
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining_FreshWater
+value: C:water->WithdrawalRate_Water_Mining_FreshWater
+
+Node: E:water->E50
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining_FreshWater_GroundWater
+value: C:water->WithdrawalRate_Water_Mining_FreshWater_GroundWater
+
+Node: E:water->E51
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining_FreshWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Mining_FreshWater_SurfaceWater
+
+Node: E:water->E52
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining_SalineWater
+value: C:water->WithdrawalRate_Water_Mining_SalineWater
+
+Node: E:water->E53
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining_SalineWater_GroundWater
+value: C:water->WithdrawalRate_Water_Mining_SalineWater_GroundWater
+
+Node: E:water->E54
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Mining_SalineWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Mining_SalineWater_SurfaceWater
+
+Node: E:water->E55
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock
+value: C:water->WithdrawalRate_Water_Livestock
+
+Node: E:water->E56
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock_GroundWater
+value: C:water->WithdrawalRate_Water_Livestock_GroundWater
+
+Node: E:water->E57
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock_SurfaceWater
+value: C:water->WithdrawalRate_Water_Livestock_SurfaceWater
+
+Node: E:water->E58
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock_FreshWater
+value: C:water->WithdrawalRate_Water_Livestock_FreshWater
+
+Node: E:water->E59
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock_FreshWater_GroundWater
+value: C:water->WithdrawalRate_Water_Livestock_FreshWater_GroundWater
+
+Node: E:water->E60
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock_FreshWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Livestock_FreshWater_SurfaceWater
+
+Node: E:water->E61
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock_SalineWater
+value: C:water->WithdrawalRate_Water_Livestock_SalineWater
+
+Node: E:water->E62
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock_SalineWater_GroundWater
+value: C:water->WithdrawalRate_Water_Livestock_SalineWater_GroundWater
+
+Node: E:water->E63
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Livestock_SalineWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Livestock_SalineWater_SurfaceWater
+
+Node: E:water->E64
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture
+value: C:water->WithdrawalRate_Water_Aquaculture
+
+Node: E:water->E65
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_GroundWater
+value: C:water->WithdrawalRate_Water_Aquaculture_GroundWater
+
+Node: E:water->E66
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_SurfaceWater
+value: C:water->WithdrawalRate_Water_Aquaculture_SurfaceWater
+
+Node: E:water->E67
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_FreshWater
+value: C:water->WithdrawalRate_Water_Aquaculture_FreshWater
+
+Node: E:water->E68
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_FreshWater_GroundWater
+value: C:water->WithdrawalRate_Water_Aquaculture_FreshWater_GroundWater
+
+Node: E:water->E69
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_FreshWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Aquaculture_FreshWater_SurfaceWater
+
+Node: E:water->E70
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_SalineWater
+value: C:water->WithdrawalRate_Water_Aquaculture_SalineWater
+
+Node: E:water->E71
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_SalineWater_GroundWater
+value: C:water->WithdrawalRate_Water_Aquaculture_SalineWater_GroundWater
+
+Node: E:water->E72
+typeOf: dcs:StatVarObservation
+observationDate: C:water->year
+observationAbout: C:water->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_SalineWater_SurfaceWater
+value: C:water->WithdrawalRate_Water_Aquaculture_SalineWater_SurfaceWater
+
