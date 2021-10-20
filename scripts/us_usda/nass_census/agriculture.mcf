@@ -246,7 +246,7 @@ Node: dcid:Value_Farm_GovernmentPayment
 description: "Value of government payments to farms."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Farm
-measuredProperty: dcs:value
+measuredProperty: dcs:monetaryValue
 statType: dcs:measuredValue
 governmentPaymentStatus: dcs:GovernmentPayment
 
@@ -287,21 +287,21 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 incomeStatus: dcs:ReportedNetIncome
 
-Node: dcid:Net_Income_Farm
+Node: dcid:NetMeasure_Income_Farm
 description: "Net income from farms."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Farm
 measuredProperty: dcs:income
 statType: dcs:measuredValue
-measurementQualifier: dcs:Net
+measurementQualifier: dcs:NetMeasure
 
-Node: dcid:Mean_Net_Income_Farm
+Node: dcid:Mean_NetMeasure_Income_Farm
 description: "Mean net income from farms."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Farm
 measuredProperty: dcs:income
 statType: dcs:meanValue
-measurementQualifier: dcs:Net
+measurementQualifier: dcs:NetMeasure
 
 Node: dcid:Count_Farm_CattleAndCalves
 description: "Number of farms with cattle and calves."
@@ -1411,7 +1411,7 @@ Node: dcid:income
 typeOf: schema:Property
 domainIncludes: dcs:Farm
 
-Node: dcid:value
+Node: dcid:monetaryValue
 typeOf: schema:Property
 domainIncludes: dcs:Farm
 
@@ -1462,9 +1462,9 @@ typeOf: schema:Class
 subClassOf: schema:Enumeration
 name: "IncomeMeasurementEnum"
 
-Node: dcid:Net
+Node: dcid:NetMeasure
 typeOf: dcs:IncomeMeasurementEnum
-name: "Net"
+name: "NetMeasure"
 
 Node: dcid:FarmInventoryTypeEnum
 typeOf: schema:Class
