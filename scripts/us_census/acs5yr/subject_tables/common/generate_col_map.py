@@ -90,19 +90,13 @@ def process_zip_file(zip_file_path,
 
     column_map = {}
     counter_dict = {}
+    zf = ZipFile(zip_file_path)
+    for filename in zf.namelist():
+      if 'data_with_overlays' in filename:
+        df = pd.read_csv(zf.open(filename, 'r'), header=header_row, low_memory=False)
+        year = filename.split(f'ACSST5Y')[1][:4]
+        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
 
-    with ZipFile(zip_file_path) as zf:
-        for filename in zf.namelist():
-            if 'data_with_overlays' in filename:
-                with io.TextIOWrapper(zf.open(filename, 'r')) as csv_file:
-                    csv_reader = csv.reader(csv_file)
-                    for index, line in enumerate(csv_reader):
-                        if index == header_row:
-                            year = filename.split(f'ACSST5Y')[1][:4]
-                            column_map[year] = generate_stat_var_map(
-                                spec_dict, line, delimiter)
-                            break
-                        continue
     ## save the column_map
     if write_output:
         f = open(f'{output_dir_path}/column_map.json', 'w')
@@ -160,7 +154,7 @@ class GenerateColMapBase:
         for key in _JSON_KEYS:
             if key not in self.features:
                 # TODO: initialize UniversePVs as empty list
-                if key == 'ignoreColumns':
+                if key == 'ignoreColumns' or keys == 'universePVs':
                     self.features[key] = []
                 else:
                     self.features[key] = {}
@@ -199,22 +193,21 @@ class GenerateColMapBase:
           "<column-name-2>": {}, .....
         }"""
         # for each column generate the definition of their respective statistical variable node
-        # TODO: This code block can be simplified to the following:
-        # if col in self.features['ignoreColumns'] or
-        # len((set(self.features['ignoreColumns']) &
-        # set(col.split(self.delimiter)) > 0:
         for col in self.column_list:
-            # TODO: Replace the type of ignore_token_count to boolean
-            ignore_token_count = 0
-            for part in col.split(self.delimiter):
-                for token in self.features['ignoreColumns']:
-                    if part == token:
-                        ignore_token_count = 1
-                    if token == col:
-                        ignore_token_count = 1
+            ignore_token_flag = False
+            # if ignoreColumn token is a single token in the column name or the
+            # entire column name, set ignore_token_flag
+            if col in self.features['ignoreColumns'] or len(set(self.features['ignoreColumns']) & set(col.split(self.delimiter))) > 0:
+              ignore_token_flag = True
+            # set ignore_token_flag when multiple tokens of a column name
+            # appears not in order
+            if not ignore_token_flag:
+              for token in self.features['ignoreColumns']:
+                if set(token.split(self.delimiter)).issubset(set(col.split(self.delimiter))):
+                  ignore_token_flag = True
 
             # if no tokens of the columns are in ignoreColumns of the spec
-            if ignore_token_count == 0:
+            if not ignore_token_flag:
                 renamed_col = self._find_and_replace_column_names(col)
                 # TODO: Before calling the column_to_statvar method,
                 # remove the base class or generalization token in the
