@@ -216,14 +216,22 @@ class GenerateColMapBase:
                 # TODO: Should we generate an error _column_to_statvar() returns an empty statvar?
                 self.column_map[col] = self._column_to_statvar(renamed_col)
 
-        # TODO: Deprecate this function, since enumSpecialization are used to
-        # remove the generalized token from the column name
-        self._keep_only_enum_specializations()
-
         # TODO: Before returning the column map, call self._isvalid_column_map()
         # where we check of the same statvar is generated for more than one column?
         # Should that be considered an error for subject tables?
         return self.column_map
+
+    def _keep_only_specializations(self, part_list):
+      """
+      While generating the stat-var node for the column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years will rename the column to keep only the specialization, which will mean the stat-var node generated will be for the column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 6 years.
+
+      There can also be a case where the specialization appears with more than one base class. For instance "Under 6 years" occurs with both "Under 18 years" and "Under 19 years". In this case, the base classes are comma-space separated (since that makes the JSON more humnan-readable)
+      """
+      for specialization, base_classes in self.features['enumSpecializations'].items():
+        for base in  base_class.split(", "):
+          part_list.remove(base) #removes the base class from the column tokens
+      return part_list
+
 
     def _column_to_statvar(self, column):
         """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
@@ -232,6 +240,11 @@ class GenerateColMapBase:
         # part_list contains a list of tokens of the column name after splitting the
         # column name based on the '!!' delimiter
         part_list = column.split(self.delimiter)
+
+        # check if the column contains tokens bath the base and specialization
+        # of a particular enum. This check uses the enumSpecialization section
+        # of the spec.
+        part_list = self._keep_only_specializations(part_list)
 
         ## set the measurement for special cases: Median, Mean, etc.
         ## Pass 1: Check if the entire column is present in spec
@@ -340,45 +353,6 @@ class GenerateColMapBase:
                     f'One or more mandatory properties of the stat_var is missing. \n Dump of the stat_var:: {stat_var}'
                 )
 
-    def _keep_only_enum_specializations(self):
-        """removes generalization token from column name.
-
-      Example: if the enumSpecicalization is defined as
-      {
-        "Under 6 years": "Under 19 years, Under 18 years",
-        "6 to 18 years": "Under 19 years",
-      }
-      It means that "Under 6 years" and "6 to 18 years" are specializations of "Under 19 years".
-      Example: If the column was Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years and we had defined
-      a stat_var for Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years which is the broader class. This function would
-      delete the stat_var node generated for vEstimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years and will preserve only
-      the stat_var node generated for column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years. Since,
-      Under 6 years is defined as the specialization of Under 19 years.
-      """
-        # TODO: Re-define this function, since enumSpecializations are used to remove the base class token in the column name and does not affect the stat var defined.
-        # The current implementation of the function removes the statVar node for the base class and keeps the specialization, which is not the desired output
-        # In the above example if both 6 to 18 years and Under 19 years appear as tokens in the column name, we remove Under 19 years from the column name and not remove the StatVarNode which describes the population  Under 19 years.
-        column_map = self.column_map.copy()
-        for column_name, stat_var in column_map.items():
-            part_list = column_name.split(self.delimiter)
-            ## The assumption of using the last token of the column as the specialization holds for ACS Subject tables.
-            # TODO: This assumption might break for other tables, we might need to thing of removing this assumption
-            last_column_token = part_list[-1]
-            if last_column_token in self.features['enumSpecializations']:
-                base_class = self.features['enumSpecializations'][
-                    last_column_token]
-                for base in base_class.split(', '):
-                    if base in part_list:
-                        col_name = self.delimiter.join(part_list[:-1])
-                        try:
-                            del self.column_map[col_name]
-                            logger.info(
-                                f"Removing the base class column: {col_name} from the column map based on enumSpecialization of the spec"
-                            )
-                        except KeyError:
-                            logger.info(
-                                f"Attempted removal of base class column: {col_name} failed. It might be already removed."
-                            )
 
     def _isvalid_stat_var(self, stat_var):
         """method validates if stat_var has mandatory properties, specified in _MANDATORY_PROPS"""
