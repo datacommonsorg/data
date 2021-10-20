@@ -3,6 +3,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water
 value: C:water->WithdrawalRate_Water
 
@@ -11,6 +12,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply
 value: C:water->WithdrawalRate_Water_PublicSupply
 
@@ -19,6 +21,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_GroundWater
 value: C:water->WithdrawalRate_Water_PublicSupply_GroundWater
 
@@ -27,6 +30,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_SurfaceWater
 value: C:water->WithdrawalRate_Water_PublicSupply_SurfaceWater
 
@@ -35,6 +39,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_FreshWater
 value: C:water->WithdrawalRate_Water_PublicSupply_FreshWater
 
@@ -43,6 +48,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_FreshWater_GroundWater
 value: C:water->WithdrawalRate_Water_PublicSupply_FreshWater_GroundWater
 
@@ -51,6 +57,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_FreshWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_PublicSupply_FreshWater_SurfaceWater
 
@@ -59,6 +66,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_SalineWater
 value: C:water->WithdrawalRate_Water_PublicSupply_SalineWater
 
@@ -67,6 +75,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_SalineWater_GroundWater
 value: C:water->WithdrawalRate_Water_PublicSupply_SalineWater_GroundWater
 
@@ -75,6 +84,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_PublicSupply_SalineWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_PublicSupply_SalineWater_SurfaceWater
 
@@ -83,6 +93,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic
 value: C:water->WithdrawalRate_Water_Domestic
 
@@ -91,6 +102,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic_GroundWater
 value: C:water->WithdrawalRate_Water_Domestic_GroundWater
 
@@ -99,6 +111,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic_SurfaceWater
 value: C:water->WithdrawalRate_Water_Domestic_SurfaceWater
 
@@ -107,6 +120,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic_FreshWater
 value: C:water->WithdrawalRate_Water_Domestic_FreshWater
 
@@ -115,6 +129,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic_FreshWater_GroundWater
 value: C:water->WithdrawalRate_Water_Domestic_FreshWater_GroundWater
 
@@ -123,6 +138,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic_FreshWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Domestic_FreshWater_SurfaceWater
 
@@ -131,6 +147,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic_SalineWater
 value: C:water->WithdrawalRate_Water_Domestic_SalineWater
 
@@ -139,6 +156,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic_SalineWater_GroundWater
 value: C:water->WithdrawalRate_Water_Domestic_SalineWater_GroundWater
 
@@ -147,6 +165,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Domestic_SalineWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Domestic_SalineWater_SurfaceWater
 
@@ -155,6 +174,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial
 value: C:water->WithdrawalRate_Water_Industrial
 
@@ -163,6 +183,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial_GroundWater
 value: C:water->WithdrawalRate_Water_Industrial_GroundWater
 
@@ -171,6 +192,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial_SurfaceWater
 value: C:water->WithdrawalRate_Water_Industrial_SurfaceWater
 
@@ -179,6 +201,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial_FreshWater
 value: C:water->WithdrawalRate_Water_Industrial_FreshWater
 
@@ -187,6 +210,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial_FreshWater_GroundWater
 value: C:water->WithdrawalRate_Water_Industrial_FreshWater_GroundWater
 
@@ -195,6 +219,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial_FreshWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Industrial_FreshWater_SurfaceWater
 
@@ -203,6 +228,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial_SalineWater
 value: C:water->WithdrawalRate_Water_Industrial_SalineWater
 
@@ -211,6 +237,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial_SalineWater_GroundWater
 value: C:water->WithdrawalRate_Water_Industrial_SalineWater_GroundWater
 
@@ -219,6 +246,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Industrial_SalineWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Industrial_SalineWater_SurfaceWater
 
@@ -227,6 +255,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation
 value: C:water->WithdrawalRate_Water_Irrigation
 
@@ -235,6 +264,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation_GroundWater
 value: C:water->WithdrawalRate_Water_Irrigation_GroundWater
 
@@ -243,6 +273,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation_SurfaceWater
 value: C:water->WithdrawalRate_Water_Irrigation_SurfaceWater
 
@@ -251,6 +282,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation_FreshWater
 value: C:water->WithdrawalRate_Water_Irrigation_FreshWater
 
@@ -259,6 +291,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation_FreshWater_GroundWater
 value: C:water->WithdrawalRate_Water_Irrigation_FreshWater_GroundWater
 
@@ -267,6 +300,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation_FreshWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Irrigation_FreshWater_SurfaceWater
 
@@ -275,6 +309,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation_SalineWater
 value: C:water->WithdrawalRate_Water_Irrigation_SalineWater
 
@@ -283,6 +318,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation_SalineWater_GroundWater
 value: C:water->WithdrawalRate_Water_Irrigation_SalineWater_GroundWater
 
@@ -291,6 +327,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Irrigation_SalineWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Irrigation_SalineWater_SurfaceWater
 
@@ -299,6 +336,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric
 value: C:water->WithdrawalRate_Water_Thermoelectric
 
@@ -307,6 +345,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_GroundWater
 value: C:water->WithdrawalRate_Water_Thermoelectric_GroundWater
 
@@ -315,6 +354,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_SurfaceWater
 value: C:water->WithdrawalRate_Water_Thermoelectric_SurfaceWater
 
@@ -323,6 +363,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater
 value: C:water->WithdrawalRate_Water_Thermoelectric_FreshWater
 
@@ -331,6 +372,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater_GroundWater
 value: C:water->WithdrawalRate_Water_Thermoelectric_FreshWater_GroundWater
 
@@ -339,6 +381,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Thermoelectric_FreshWater_SurfaceWater
 
@@ -347,6 +390,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater
 value: C:water->WithdrawalRate_Water_Thermoelectric_SalineWater
 
@@ -355,6 +399,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater_GroundWater
 value: C:water->WithdrawalRate_Water_Thermoelectric_SalineWater_GroundWater
 
@@ -363,6 +408,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Thermoelectric_SalineWater_SurfaceWater
 
@@ -371,6 +417,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining
 value: C:water->WithdrawalRate_Water_Mining
 
@@ -379,6 +426,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining_GroundWater
 value: C:water->WithdrawalRate_Water_Mining_GroundWater
 
@@ -387,6 +435,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining_SurfaceWater
 value: C:water->WithdrawalRate_Water_Mining_SurfaceWater
 
@@ -395,6 +444,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining_FreshWater
 value: C:water->WithdrawalRate_Water_Mining_FreshWater
 
@@ -403,6 +453,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining_FreshWater_GroundWater
 value: C:water->WithdrawalRate_Water_Mining_FreshWater_GroundWater
 
@@ -411,6 +462,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining_FreshWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Mining_FreshWater_SurfaceWater
 
@@ -419,6 +471,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining_SalineWater
 value: C:water->WithdrawalRate_Water_Mining_SalineWater
 
@@ -427,6 +480,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining_SalineWater_GroundWater
 value: C:water->WithdrawalRate_Water_Mining_SalineWater_GroundWater
 
@@ -435,6 +489,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Mining_SalineWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Mining_SalineWater_SurfaceWater
 
@@ -443,6 +498,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock
 value: C:water->WithdrawalRate_Water_Livestock
 
@@ -451,6 +507,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock_GroundWater
 value: C:water->WithdrawalRate_Water_Livestock_GroundWater
 
@@ -459,6 +516,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock_SurfaceWater
 value: C:water->WithdrawalRate_Water_Livestock_SurfaceWater
 
@@ -467,6 +525,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock_FreshWater
 value: C:water->WithdrawalRate_Water_Livestock_FreshWater
 
@@ -475,6 +534,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock_FreshWater_GroundWater
 value: C:water->WithdrawalRate_Water_Livestock_FreshWater_GroundWater
 
@@ -483,6 +543,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock_FreshWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Livestock_FreshWater_SurfaceWater
 
@@ -491,6 +552,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock_SalineWater
 value: C:water->WithdrawalRate_Water_Livestock_SalineWater
 
@@ -499,6 +561,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock_SalineWater_GroundWater
 value: C:water->WithdrawalRate_Water_Livestock_SalineWater_GroundWater
 
@@ -507,6 +570,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Livestock_SalineWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Livestock_SalineWater_SurfaceWater
 
@@ -515,6 +579,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture
 value: C:water->WithdrawalRate_Water_Aquaculture
 
@@ -523,6 +588,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_GroundWater
 value: C:water->WithdrawalRate_Water_Aquaculture_GroundWater
 
@@ -531,6 +597,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_SurfaceWater
 value: C:water->WithdrawalRate_Water_Aquaculture_SurfaceWater
 
@@ -539,6 +606,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_FreshWater
 value: C:water->WithdrawalRate_Water_Aquaculture_FreshWater
 
@@ -547,6 +615,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_FreshWater_GroundWater
 value: C:water->WithdrawalRate_Water_Aquaculture_FreshWater_GroundWater
 
@@ -555,6 +624,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_FreshWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Aquaculture_FreshWater_SurfaceWater
 
@@ -563,6 +633,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_SalineWater
 value: C:water->WithdrawalRate_Water_Aquaculture_SalineWater
 
@@ -571,6 +642,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_SalineWater_GroundWater
 value: C:water->WithdrawalRate_Water_Aquaculture_SalineWater_GroundWater
 
@@ -579,6 +651,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:water->year
 observationAbout: C:water->dcid
 observationPeriod: "P1Y"
+unit: dcs:MillionGallonsPerDay
 variableMeasured: dcid:WithdrawalRate_Water_Aquaculture_SalineWater_SurfaceWater
 value: C:water->WithdrawalRate_Water_Aquaculture_SalineWater_SurfaceWater
 

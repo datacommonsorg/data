@@ -453,6 +453,7 @@ func generateTMCF(outputDir string) error {
 	nodeBase += "observationDate: C:water->year\n"
 	nodeBase += "observationAbout: C:water->dcid\n"
 	nodeBase += "observationPeriod: \"P1Y\"\n"
+	nodeBase += "unit: dcs:MillionGallonsPerDay\n"
 
 	writeNode := func(entityIndex int, statVarName string) {
 		id := idBase + strconv.Itoa(entityIndex)
