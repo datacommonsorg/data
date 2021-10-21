@@ -53,9 +53,103 @@ _JSON_KEYS = [
     'preprocess'
 ]
 
+def process_csv_file(csv_file_path,
+                     spec_path,
+                     write_output=True,
+                     output_dir_path='./',
+                     delimiter='!!',
+                     header_row=1):
+    """Given a csv census data file, the function builds a column map for each year
+  Args:
+    csv_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
+    spec_path: File path where the JSON specification to be used for generating the column map is present
+    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+    output_dir_path: File path to the directory where column map is to be saved (default=./)
+    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+    header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
 
-# TODO: Extend support to csv file and input directory
-# TODO - add typing hints and document the format of inputs
+  Returns:
+    A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+    Example:
+      "2016": {
+        "Total Civilian population": {
+          "populationType": "Person",
+          "statType": "measuredValue",
+          "measuredProperty": "Count Person"
+          "armedForceStatus": "Civilian"
+        },
+        "<column-name-2>": {}, .....,
+      }
+  """
+    f = open(spec_path, 'r')
+    spec_dict = json.load(f)
+    f.close()
+
+    column_map = {}
+    counter_dict = {}
+    filename = csv_file_path
+
+    if 'data_with_overlays' in filename:
+        df = pd.read_csv(filename, header=header_row, low_memory=False)
+        year = filename.split(f'ACSST5Y')[1][:4]
+        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
+
+    ## save the column_map
+    if write_output:
+        f = open(f'{output_dir_path}/column_map.json', 'w')
+        json.dump(column_map, f, indent=4)
+        f.close()
+    return column_map
+
+
+
+def process_input_directory(input_path,
+                     spec_path,
+                     write_output=True,
+                     output_dir_path='./',
+                     delimiter='!!',
+                     header_row=1):
+    """Given a directory of input files, the function builds a column map for each year
+  Args:
+    input_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
+    spec_path: File path where the JSON specification to be used for generating the column map is present
+    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+    output_dir_path: File path to the directory where column map is to be saved (default=./)
+    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+    header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+
+  Returns:
+    A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+    Example:
+      "2016": {
+        "Total Civilian population": {
+          "populationType": "Person",
+          "statType": "measuredValue",
+          "measuredProperty": "Count Person"
+          "armedForceStatus": "Civilian"
+        },
+        "<column-name-2>": {}, .....,
+      }
+  """
+    f = open(spec_path, 'r')
+    spec_dict = json.load(f)
+    f.close()
+
+    column_map = {}
+    counter_dict = {}
+    for filename in os.listdir(input_path):
+      if 'data_with_overlays' in filename:
+        df = pd.read_csv(filename, header=header_row, low_memory=False)
+        year = filename.split(f'ACSST5Y')[1][:4]
+        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
+
+    ## save the column_map
+    if write_output:
+        f = open(f'{output_dir_path}/column_map.json', 'w')
+        json.dump(column_map, f, indent=4)
+        f.close()
+    return column_map
+
 def process_zip_file(zip_file_path,
                      spec_path,
                      write_output=True,
