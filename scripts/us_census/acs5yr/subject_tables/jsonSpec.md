@@ -83,6 +83,8 @@ Defines a set of additional properties and values to the stat-var based on a spe
 
 In the example, if the `populationType` is a `Person` and the constraint property is `healthInsurance`, the additional property-values for `armedForcesStatus` and `institutionalization` are added. If there are multiple constrainProperties, the additionals pvs (dependent PVs) are added with a logical `AND` condition.
 
+To account for depndent PVs with no constraint properties, the key `obs_props` can be used to a add measuredProperty constraint.
+
 ```json
   "universePvs":[
 		{
@@ -92,10 +94,29 @@ In the example, if the `populationType` is a `Person` and the constraint propert
 				"armedForcesStatus": "Civilian",
 				"institutionalization": "USC_NonInstitutionalized"
 			}
+		},
+		{
+			"populationType": "Person",
+			"constraintProperties": [],
+			"obs_props": { "mprop": "earnings"},
+			"dependentPVs": {
+				"age": "[16 - Years]",
+				"incomeStatus": "WithEarnings"
+			}
 		}
-   ]
+	]
 ```
 
+#### `measurementDenominator` [optional]
+Used to point a column to it's corresponding measurementDenominator column name. 
+Accepts only full column names.
+
+```json
+  "measurementDenominator": {
+    "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings":
+      "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings"
+  }
+```
 
 #### `inferedSpec` [optional]
 Adds additional property-value pairs to a stat-var node based on the inference of an another property in that stat-var node.
