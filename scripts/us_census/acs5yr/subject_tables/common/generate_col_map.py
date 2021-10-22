@@ -278,6 +278,17 @@ class GenerateColMapBase:
                             )
                         stat_var[p] = v
 
+        # Handling measurementDenominator
+        if column in self.features['measurementDenominator']:
+            md_col = self.features['measurementDenominator'][column]
+            if md_col in self.column_map:
+                stat_var['measurementDenominator'] = self.column_map[md_col][
+                    'Node']
+            else:
+                logger.critical(
+                    f'Invalid entry {md_col} for column {column} in measurementDenominator'
+                )
+
         ## add Universe PVs based on the populationType of StatVar
         # TODO: While adding dependentPVs, set values only for properties not already
         # in stat_var so as to not overwrite an existing property. Maybe useful
@@ -290,6 +301,11 @@ class GenerateColMapBase:
                 if (set(elem['constraintProperties']).issubset(
                         set(list(stat_var.keys())))):
                     try:
+                        # Check for measuredProperty
+                        if 'obs_props' in elem:
+                            if elem['obs_props']['mprop'] != stat_var[
+                                    'measuredProperty']:
+                                continue
                         ## if the dependentPVs are not in statVar add them
                         if not set(list(elem['dependentPVs'].keys())).issubset(
                                 set(list(stat_var.keys()))):
