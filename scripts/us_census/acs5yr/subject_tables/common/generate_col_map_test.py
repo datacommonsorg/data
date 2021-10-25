@@ -16,7 +16,6 @@ import os
 import csv
 import json
 import unittest
-from deepdiff import DeepDiff
 
 from .generate_col_map import generate_stat_var_map, process_zip_file
 
