@@ -52,18 +52,18 @@
 			"unit": "USDollar"
 		},
 		"Women's earnings as a percentage of men's earning": {
-            "measuredProperty": "earnings",
-            "incomeStatus": "WithEarnings",
-            "statType": "medianValue",
-            "gender": "Female"
-        },
-        "Median earnings (dollars) for male": {
-            "measuredProperty": "earnings",
-            "incomeStatus": "WithEarnings",
-            "statType": "medianValue",
-            "gender": "Male",
-            "unit": "USDollar"
-        },
+			"measuredProperty": "earnings",
+			"incomeStatus": "WithEarnings",
+			"statType": "medianValue",
+			"gender": "Female"
+		},
+		"Median earnings (dollars) for male": {
+			"measuredProperty": "earnings",
+			"incomeStatus": "WithEarnings",
+			"statType": "medianValue",
+			"gender": "Male",
+			"unit": "USDollar"
+		},
 		"_DEFAULT": {
 			"measuredProperty": "count",
 			"statType": "measuredValue"
