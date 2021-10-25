@@ -2,6 +2,7 @@
 
 absl-py==0.9.0
 chembl-webresource-client==0.10.2
+dataclasses==0.6
 datacommons==1.4.3
 frozendict==1.2
 func-timeout==4.3.5
@@ -10,13 +11,15 @@ geopandas==0.8.1
 lxml==4.6.3
 matplotlib==3.3.0
 numpy==1.18.5
+openpyxl==3.0.7
 pandas==1.0.4
 pylint
 pytest
 rdp==0.8
 requests==2.24.0
 retry==0.9.2
-urllib3==1.25.9
+shapely==1.7
+urllib3==1.26.5
 xlrd==1.2.0
 yapf
 zipp
