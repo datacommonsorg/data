@@ -57,25 +57,26 @@ def generate(in_01m_gj, in_10m_gj, in_20m_gj, out_dir):
 
 def _generate_file(in_dir, out_dir, res, lvl, gj_prop):
     with open(os.path.join(in_dir, _fname(res, lvl)), 'r') as fin:
-        with open(os.path.join(out_dir,
-                               'EU_NUTS' + lvl + '_' + gj_prop + '.mcf'), 'w') as fout:
+        with open(
+                os.path.join(out_dir, 'EU_NUTS' + lvl + '_' + gj_prop + '.mcf'),
+                'w') as fout:
             j = json.load(fin)
             for f in j['features']:
                 if ('properties' not in f or 'NUTS_ID' not in f['properties'] or
-                    'geometry' not in f):
+                        'geometry' not in f):
                     continue
                 gj = json.dumps(json.dumps(f['geometry']))
-                fout.write(_MCF_FORMAT.format(nuts_dcid='nuts/' + f['properties']['NUTS_ID'],
-                                              place_type='EurostatNUTS' + lvl,
-                                              gj_prop=gj_prop,
-                                              gj_val=gj))
+                fout.write(
+                    _MCF_FORMAT.format(nuts_dcid='nuts/' +
+                                       f['properties']['NUTS_ID'],
+                                       place_type='EurostatNUTS' + lvl,
+                                       gj_prop=gj_prop,
+                                       gj_val=gj))
 
 
 def main(_):
-    generate(FLAGS.input_eu_01m_geojson,
-             FLAGS.input_eu_10m_geojson,
-             FLAGS.input_eu_20m_geojson,
-             FLAGS.output_geojson_dir)
+    generate(FLAGS.input_eu_01m_geojson, FLAGS.input_eu_10m_geojson,
+             FLAGS.input_eu_20m_geojson, FLAGS.output_geojson_dir)
 
 
 if __name__ == "__main__":
