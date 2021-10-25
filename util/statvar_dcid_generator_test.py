@@ -22,6 +22,7 @@ from util import statvar_dcid_generator
 
 
 class TestStatVarDcidGenerator(unittest.TestCase):
+
     def test_ignore_props(self):
         statvar_dict = {
             'typeOf': 'StatisticalVariable',
