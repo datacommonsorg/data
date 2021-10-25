@@ -51,6 +51,19 @@
 			"statType": "medianValue",
 			"unit": "USDollar"
 		},
+		"Women's earnings as a percentage of men's earning": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "gender": "Female"
+        },
+        "Median earnings (dollars) for male": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "gender": "Male",
+            "unit": "USDollar"
+        },
 		"_DEFAULT": {
 			"measuredProperty": "count",
 			"statType": "measuredValue"
@@ -64,7 +77,8 @@
 			"Civilian noninstitutionalized population 1 year and over": "Civilian",
 			"Civilian noninstitutionalized population 25 years and over": "Civilian",
 			"Civilian noninstitutionalized population 16 years and over": "Civilian",
-			"Civilian noninstitutionalized population 16 to 64 years": "Civilian"
+			"Civilian noninstitutionalized population 16 to 64 years": "Civilian",
+			"Civilian employed population 16 years and over with earnings": "Civilian"
 		},
 		"institutionalization": {
 			"Total civilian noninstitutionalized population": "USC_NonInstitutionalized",
@@ -103,7 +117,8 @@
 			"Civilian noninstitutionalized population 16 years and over": "[16 - Years]",
 			"Civilian noninstitutionalized population 16 to 64 years": "[16 64 Years]",
 			"Civilian noninstitutionalized workers 16 years and over": "[16 - Years]",
-			"Civilian noninstitutionalized population 16 years and over with earnings": "[16 - Years]"
+			"Civilian noninstitutionalized population 16 years and over with earnings": "[16 - Years]",
+			"Civilian employed population 16 years and over with earnings": "[16 - Years]"
 		},
 		"gender": {
 			"Male": "Male",
@@ -158,7 +173,8 @@
 		},
 		"employment": {
 			"Employed": "BLS_Employed",
-			"Unemployed": "BLS_Unemployed"
+			"Unemployed": "BLS_Unemployed",
+			"Civilian employed population 16 years and over with earnings": "BLS_Employed"
 		},
 		"workerStatus": {
 			"Civilian noninstitutionalized workers 16 years and over": "Worker"
@@ -213,7 +229,8 @@
 			"Production, transportation, and material moving occupations": "SOCv2018/highLevelAggregation-5"
 		},
 		"incomeStatus": {
-			"Civilian noninstitutionalized population 16 years and over with earnings": "WithEarnings"
+			"Civilian noninstitutionalized population 16 years and over with earnings": "WithEarnings",
+			"Civilian employed population 16 years and over with earnings": "WithEarnings"
 		},
 		"income": {
 			"$1 to $4,999 or loss": "[- 4999 USDollar]",
@@ -276,7 +293,18 @@
 			"armedForcesStatus": "Civilian",
 			"institutionalization": "USC_NonInstitutionalized"
 		}
+	},
+	{
+		"populationType": "Person",
+		"obs_props": { "mprop": "earnings"},
+		"dependentPVs": {
+			"age": "[16 - Years]",
+			"incomeStatus": "WithEarnings"
+		}
 	}],
+	"measurementDenominator": {
+		"Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings"
+	},
 	"ignoreColumns": [
 		"id",
 		"Geographic Area Name",

@@ -50,7 +50,7 @@ _MANDATORY_PROPS = ['measuredProperty', 'populationType', 'statType']
 _JSON_KEYS = [
     'populationType', 'measurement', 'pvs', 'inferredSpec',
     'enumSpecializations', 'universePVs', 'ignoreColumns', 'overwrite_dcids',
-    'preprocess'
+    'preprocess', 'measurementDenominator'
 ]
 
 
@@ -297,15 +297,19 @@ class GenerateColMapBase:
         dependent_properties = None
         for elem in self.features['universePVs']:
             if stat_var['populationType'] == elem['populationType']:
+                # Check for measuredProperty
+                if 'obs_props' in elem:
+                    if elem['obs_props']['mprop'] != stat_var['measuredProperty']:
+                        continue
+                
+                # Initialising 'constraintProperties' if it doesn't exist
+                if 'constraintProperties' not in elem:
+                    elem['constraintProperties'] = list()
+                
                 # check if all constraints of this populationType is in stat_var
                 if (set(elem['constraintProperties']).issubset(
                         set(list(stat_var.keys())))):
                     try:
-                        # Check for measuredProperty
-                        if 'obs_props' in elem:
-                            if elem['obs_props']['mprop'] != stat_var[
-                                    'measuredProperty']:
-                                continue
                         ## if the dependentPVs are not in statVar add them
                         if not set(list(elem['dependentPVs'].keys())).issubset(
                                 set(list(stat_var.keys()))):

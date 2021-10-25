@@ -16,6 +16,7 @@ import os
 import csv
 import json
 import unittest
+from deepdiff import DeepDiff
 
 from .generate_col_map import generate_stat_var_map, process_zip_file
 
@@ -33,7 +34,7 @@ class GenerateColMapTest(unittest.TestCase):
         input_csv_path = os.path.join(base_path,
                                       "./testdata/ACSST5Y2013_S2702.csv")
         expected_map_path = os.path.join(
-            base_path, "./testdata/column_map_from_zip_expected.json")
+            base_path, "./testdata/column_map_from_csv_expected.json")
 
         f = open(spec_path, 'r')
         spec_dict = json.load(f)
@@ -53,7 +54,7 @@ class GenerateColMapTest(unittest.TestCase):
         expected_map = json.load(f)
         f.close()
 
-        self.assertEqual(expected_map['2013'], generated_col_map)
+        self.assertEqual(expected_map, generated_col_map)
 
     def test_generating_column_map_from_zip(self):
         base_path = os.path.dirname(__file__)
