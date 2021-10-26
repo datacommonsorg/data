@@ -281,6 +281,7 @@ class GenerateColMapBase:
         # Handling measurementDenominator
         if column in self.features['measurementDenominator']:
             md_col = self.features['measurementDenominator'][column]
+            # Expects md_col to be in column_map before processing of column
             if md_col in self.column_map:
                 stat_var['measurementDenominator'] = self.column_map[md_col][
                     'Node']

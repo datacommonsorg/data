@@ -98,7 +98,7 @@ In the example, if the `populationType` is a `Person` and the constraint propert
   ]
 ```
 
-To account for depndent PVs with no constraint properties, the key `obs_props` can be used to a add measuredProperty value constraint.
+To account for dependent PVs with no constraint properties, the key `obs_props` can be used to a add measuredProperty value constraint.
 In the example, if the `populationType` is `Person` and the `measuredProperty` is `earnings`, the additional property-values for `age` and `incomeStatus` are added.
 
 ```json
@@ -121,6 +121,8 @@ Used to point a column to it's corresponding measurementDenominator column name.
 Accepts only full column names.
 
 In the example, in the the stat var generated for the column `Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings` will have a property `measurementDenominator` whose value is the dcid of the stat var generated for the column `Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings`.
+
+This key expects that the `measurementDenominator` column(`Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings` in the example) must be processed earlier to the key column (`Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings`)
 
 ```json
   "measurementDenominator": {
