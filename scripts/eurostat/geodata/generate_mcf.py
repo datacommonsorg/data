@@ -39,6 +39,23 @@ typeOf: dcs:{place_type}
 {gj_prop}: {gj_val}
 """
 
+# Outermost regions:
+# https://en.wikipedia.org/wiki/Special_member_state_territories_and_the_European_Union#Outermost_regions
+# https://user-images.githubusercontent.com/4375037/138797281-834bdcfe-a355-439b-af6f-4569a99cd27b.png
+_OUTERMOST_REGIONS_NUTS1 = {
+    'FRY',  # French outermost regions
+    'ES7',  # Spanish Canary Islands
+    'PT2',  # Portugese Azores
+    'PT3',  # Portueges Madeira
+}
+
+
+def _is_outermost_geo(nuts_id):
+    for n in _OUTERMOST_REGIONS_NUTS1:
+        if nuts_id.startswith(n):
+            return True
+    return False
+
 
 # From https://gisco-services.ec.europa.eu/distribution/v2/nuts/nuts-2016-files.html
 # (https://user-images.githubusercontent.com/4375037/138574628-68bb52e5-87dc-4e02-9218-bb3bad836177.png)
@@ -66,9 +83,11 @@ def _generate_file(in_dir, out_dir, res, lvl, gj_prop):
                         'geometry' not in f):
                     continue
                 gj = json.dumps(json.dumps(f['geometry']))
+                nuts_id = f['properties']['NUTS_ID']
+                if _is_outermost_geo(nuts_id):
+                    continue
                 fout.write(
-                    _MCF_FORMAT.format(nuts_dcid='nuts/' +
-                                       f['properties']['NUTS_ID'],
+                    _MCF_FORMAT.format(nuts_dcid='nuts/' + nuts_id,
                                        place_type='EurostatNUTS' + lvl,
                                        gj_prop=gj_prop,
                                        gj_val=gj))
