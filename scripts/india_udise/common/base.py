@@ -200,6 +200,16 @@ class UDISEIndiaDataLoaderBase:
             if gender == "Female":
                 constraints_array.append("gender: schema:Female")
 
+        if "SchoolLevel" in data_row:
+            school_level = data_row["SchoolLevel"]
+            name_array.append(school_level)
+            if school_level == "PrimarySchool":
+                constraints_array.append("levelOfSchool: dcs:PrimarySchool")
+            if school_level == "MiddleSchool":
+                constraints_array.append("levelOfSchool: dcs:MiddleSchool")
+            if school_level == "SecondarySchool":
+                constraints_array.append("levelOfSchool: dcs:SecondarySchool")
+
         if "SocialCategory" in data_row:
             social_category = data_row["SocialCategory"]
             if social_category == "GeneralCategory":
@@ -215,21 +225,11 @@ class UDISEIndiaDataLoaderBase:
             if social_category != "":
                 name_array.append(social_category)
 
-        if "SchoolLevel" in data_row:
-            school_level = data_row["SchoolLevel"]
-            name_array.append(school_level)
-            if school_level == "PrimarySchool":
-                constraints_array.append("levelOfSchool: dcs:PrimarySchool")
-            if school_level == "MiddleSchool":
-                constraints_array.append("levelOfSchool: dcs:MiddleSchool")
-            if school_level == "SecondarySchool":
-                constraints_array.append("levelOfSchool: dcs:SecondarySchool")
-
         variable_name = "_".join(name_array)
 
         fileds = {}
         fileds["name"] = variable_name
-        fileds["populationType"] = "Person"
+        fileds["populationType"] = "Student"
         fileds["statType"] = "measuredValue"
         fileds["measuredProperty"] = "dropoutRate"
         fileds["constraints"] = "\n".join(constraints_array)

@@ -9,3 +9,4 @@ __pycache__/
 *.iml
 scripts/india_udise/udise_schools_with_functional_toilet/data/3061_*.json
 scripts/india_udise/udise_schools/data/1003_*.json
+scripts/india_udise/udise_school_dropout_rate/data/*.json
