@@ -21,6 +21,7 @@ import logging
 import json
 import re
 import csv
+import pandas as pd
 from zipfile import ZipFile
 from collections import OrderedDict
 
@@ -59,29 +60,31 @@ def process_csv_file(csv_file_path: str,
                      write_output: bool = True,
                      output_dir_path: str = './',
                      delimiter: str = '!!',
-                     header_row: int = 1) -> dict[str, dict]:
-    """Given a csv census data file, the function builds a column map for each year
-  Args:
-    csv_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
-    spec_path: File path where the JSON specification to be used for generating the column map is present
-    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
-    output_dir_path: File path to the directory where column map is to be saved (default=./)
-    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
-    header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+                     header_row: int = 1) -> dict:
+    """
+    Given a csv census data file, the function builds a column map for each year
+    
+      Args:
+        csv_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
+        spec_path: File path where the JSON specification to be used for generating the column map is present
+        write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+        output_dir_path: File path to the directory where column map is to be saved (default=./)
+        delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+        header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
 
-  Returns:
-    A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
-    Example:
-      "2016": {
-        "Total Civilian population": {
-          "populationType": "Person",
-          "statType": "measuredValue",
-          "measuredProperty": "Count Person"
-          "armedForceStatus": "Civilian"
-        },
-        "<column-name-2>": {}, .....,
-      }
-  """
+      Returns:
+        A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+        Example:
+          "2016": {
+            "Total Civilian population": {
+              "populationType": "Person",
+              "statType": "measuredValue",
+              "measuredProperty": "Count Person"
+              "armedForceStatus": "Civilian"
+            },
+            "<column-name-2>": {}, .....,
+          }
+    """
     f = open(spec_path, 'r')
     spec_dict = json.load(f)
     f.close()
@@ -110,31 +113,33 @@ def process_input_directory(input_path: str,
                             output_dir_path: str = './',
                             delimiter: str = '!!',
                             header_row: int = 1,
-                            replace_inplace: bool = False) -> dict[str, dict]:
-    """Given a directory of input files, the function builds a column map for each year
-  Args:
-    input_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
-    spec_path: File path where the JSON specification to be used for generating the column map is present
-    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
-    output_dir_path: File path to the directory where column map is to be saved (default=./)
-    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
-    header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
-    replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
-lse` by default
+                            replace_inplace: bool = False) -> dict:
+    """
+    Given a directory of input files, the function builds a column map for each year
+  
+    Args:
+        input_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
+        spec_path: File path where the JSON specification to be used for generating the column map is present
+        write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+        output_dir_path: File path to the directory where column map is to be saved (default=./)
+        delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+        header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+        replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
+        lse` by default
 
-  Returns:
-    A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
-    Example:
-      "2016": {
-        "Total Civilian population": {
-          "populationType": "Person",
-          "statType": "measuredValue",
-          "measuredProperty": "Count Person"
-          "armedForceStatus": "Civilian"
-        },
-        "<column-name-2>": {}, .....,
-      }
-  """
+      Returns:
+        A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+        Example:
+          "2016": {
+            "Total Civilian population": {
+              "populationType": "Person",
+              "statType": "measuredValue",
+              "measuredProperty": "Count Person"
+              "armedForceStatus": "Civilian"
+            },
+            "<column-name-2>": {}, .....,
+          }
+    """
     f = open(spec_path, 'r')
     spec_dict = json.load(f)
     f.close()
@@ -163,31 +168,31 @@ def process_zip_file(zip_file_path: str,
                      output_dir_path: str = './',
                      delimiter: str = '!!',
                      header_row: int = 1,
-                     replace_inplace: bool = False) -> dict[str, dict]:
+                     replace_inplace: bool = False) -> dict:
     """Given a zip file of datasets in csv format, the function builds a column map for each year
-  Args:
-    zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
-    spec_path: File path where the JSON specification to be used for generating the column map is present
-    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
-    output_dir_path: File path to the directory where column map is to be saved (default=./)
-    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
-    header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
-    replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
-lse` by default
+      Args:
+        zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
+        spec_path: File path where the JSON specification to be used for generating the column map is present
+        write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+        output_dir_path: File path to the directory where column map is to be saved (default=./)
+        delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+        header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+        replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
+        lse` by default
 
-  Returns:
-    A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
-    Example:
-      "2016": {
-        "Total Civilian population": {
-          "populationType": "Person",
-          "statType": "measuredValue",
-          "measuredProperty": "Count Person"
-          "armedForceStatus": "Civilian"
-        },
-        "<column-name-2>": {}, .....,
-      }
-  """
+      Returns:
+        A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+        Example:
+          "2016": {
+            "Total Civilian population": {
+              "populationType": "Person",
+              "statType": "measuredValue",
+              "measuredProperty": "Count Person"
+              "armedForceStatus": "Civilian"
+            },
+            "<column-name-2>": {}, .....,
+          }
+    """
     f = open(spec_path, 'r')
     spec_dict = json.load(f)
     f.close()
@@ -213,29 +218,31 @@ lse` by default
     return column_map
 
 
-def generate_stat_var_map(spec_dict: dict[str, [dict, list]],
+def generate_stat_var_map(spec_dict: dict,
                           column_list: list[str],
                           delimiter: str = '!!',
                           replace_inplace: bool = False) -> dict[str, dict]:
-    """Wrapper function for generateColMapBase class to generate column map.
+    """
+    Wrapper function for generateColMapBase class to generate column map.
 
-  Args:
-    specdict: A dictionary containing specifications for the different properties of the statistical variable.
-    columnList: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
-    replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
-lse` by default
-  Returns:
-    A dictionary mapping each column to their respective stat_var node definitions.
-    Example: {
-      "Total Civilian population": {
-        "populationType": "Person",
-        "statType": "measuredValue",
-        "measuredProperty": "Count Person"
-        "armedForceStatus": "Civilian"
-      },
-      "<column-name-2>": {}, .....,
-    }
-  """
+    Args:
+        specdict: A dictionary containing specifications for the different properties of the statistical variable.
+        columnList: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
+        replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
+        lse` by default
+
+    Returns:
+        A dictionary mapping each column to their respective stat_var node definitions.
+        Example: {
+          "Total Civilian population": {
+            "populationType": "Person",
+            "statType": "measuredValue",
+            "measuredProperty": "Count Person"
+            "armedForceStatus": "Civilian"
+          },
+          "<column-name-2>": {}, .....,
+        }
+    """
     col_map_obj = GenerateColMapBase(spec_dict=spec_dict,
                                      column_list=column_list,
                                      delimiter=delimiter,
@@ -244,20 +251,21 @@ lse` by default
 
 
 class GenerateColMapBase:
-    """module to generate a column map given a list of columns of the dataset and a JSON Spec
+    """
+    module to generate a column map given a list of columns of the dataset and a JSON Spec
 
-  Attributes:
-    specdict: A dictionary containing specifications for the different properties of the statistical variable.
-    columnList: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
-    delimiter: The delimiting string that is used for tokenising the column name
-    replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `False` by default
-  """
+      Attributes:
+        specdict: A dictionary containing specifications for the different properties of the statistical variable.
+        columnList: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
+        delimiter: The delimiting string that is used for tokenising the column name
+        replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `False` by default
+    """
 
     def __init__(self,
-                 spec_dict: dict[str, [dict, list]] = {},
+                 spec_dict: dict = {},
                  column_list: list = [],
                  delimiter: str = '!!',
-                 replace_inplace: bool = True):
+                 replace_inplace: bool = False):
         """module init"""
         self.features = spec_dict
         self.column_list = column_list
@@ -271,7 +279,7 @@ class GenerateColMapBase:
         # fill missing keys in JSON spec with empty values
         for key in _JSON_KEYS:
             if key not in self.features:
-                if key == 'ignoreColumns' or keys == 'universePVs':
+                if key == 'ignoreColumns' or key == 'universePVs':
                     self.features[key] = []
                 else:
                     self.features[key] = {}
@@ -291,7 +299,7 @@ class GenerateColMapBase:
                 part_list = column.split(self.delimiter)
                 for key, val in find_and_replace_dict.items():
                     # check if one or more token is a subset of the column
-                    if key.split(self.delimiter).issubset(part_list):
+                    if set(key.split(self.delimiter)).issubset(set(part_list)):
                         # we find the elements that contains the tokens to replace
                         # and update the part_list (tokenized column name) with the
                         # replacement token
@@ -342,7 +350,7 @@ class GenerateColMapBase:
         # Should that be considered an error for subject tables?
         return self.column_map
 
-    def _keep_only_specializations(self, part_list):
+    def _keep_only_specializations(self, part_list: list):
         """
       While generating the stat-var node for the column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years will rename the column to keep only the specialization, which will mean the stat-var node generated will be for the column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 6 years.
 
@@ -355,7 +363,7 @@ class GenerateColMapBase:
                     base)  #removes the base class from the column tokens
         return part_list
 
-    def _column_to_statvar(self, column):
+    def _column_to_statvar(self, column: str):
         """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
         measurement_assigned = False
         stat_var = {}
@@ -410,7 +418,7 @@ class GenerateColMapBase:
         # replace_inplace is a boolean to flag if existing pvs get overwritten
         # with incoming values from the spec. By default, this is set to False,
         # as in no overwriting of existing pvs.
-        replace_inplace = self.replace
+        replace_inplace = self.replace_inplace
         dependent_properties = None
         for elem in self.features['universePVs']:
             if stat_var['populationType'] == elem['populationType']:
@@ -475,14 +483,14 @@ class GenerateColMapBase:
                     f'One or more mandatory properties of the stat_var is missing. \n Dump of the stat_var:: {stat_var}'
                 )
 
-    def _isvalid_stat_var(self, stat_var):
+    def _isvalid_stat_var(self, stat_var: dict):
         """method validates if stat_var has mandatory properties, specified in _MANDATORY_PROPS"""
         if set(_MANDATORY_PROPS).issubset(set(list(stat_var.keys()))):
             return True
         else:
             return False
 
-    def _format_stat_var_node(self, stat_var):
+    def _format_stat_var_node(self, stat_var: dict):
         """utility to format the stat_var dict values to ensure they conform to the specifications of StatVar"""
         # add typeOf property to the node if undefined
         if 'typeOf' not in stat_var:
@@ -514,7 +522,7 @@ class GenerateColMapBase:
         ## 4. check if column map matches with the spec
         pass
 
-    def _get_population_type(self, part_list):
+    def _get_population_type(self, part_list: list):
         """From tokenized column name, find the most relevant populationType from the JSON Spec """
         # if 'populationType' in self.features:
         for k, v in self.features['populationType'].items():
