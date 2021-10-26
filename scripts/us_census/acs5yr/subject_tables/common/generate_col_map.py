@@ -53,13 +53,13 @@ _JSON_KEYS = [
     'preprocess'
 ]
 
-# TODO: Add typing hints
-def process_csv_file(csv_file_path,
-                     spec_path,
-                     write_output=True,
-                     output_dir_path='./',
-                     delimiter='!!',
-                     header_row=1):
+
+def process_csv_file(csv_file_path: str,
+                     spec_path: str,
+                     write_output: bool = True,
+                     output_dir_path: str = './',
+                     delimiter: str = '!!',
+                     header_row: int = 1) -> dict[str, dict]:
     """Given a csv census data file, the function builds a column map for each year
   Args:
     csv_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
@@ -93,7 +93,8 @@ def process_csv_file(csv_file_path,
     if 'data_with_overlays' in filename:
         df = pd.read_csv(filename, header=header_row, low_memory=False)
         year = filename.split(f'ACSST5Y')[1][:4]
-        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
+        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(),
+                                                 delimiter)
 
     ## save the column_map
     if write_output:
@@ -103,13 +104,13 @@ def process_csv_file(csv_file_path,
     return column_map
 
 
-
-def process_input_directory(input_path,
-                     spec_path,
-                     write_output=True,
-                     output_dir_path='./',
-                     delimiter='!!',
-                     header_row=1):
+def process_input_directory(input_path: str,
+                            spec_path: str,
+                            write_output: bool = True,
+                            output_dir_path: str = './',
+                            delimiter: str = '!!',
+                            header_row: int = 1,
+                            replace_inplace: bool = False) -> dict[str, dict]:
     """Given a directory of input files, the function builds a column map for each year
   Args:
     input_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
@@ -118,6 +119,8 @@ def process_input_directory(input_path,
     output_dir_path: File path to the directory where column map is to be saved (default=./)
     delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
     header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+    replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
+lse` by default
 
   Returns:
     A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
@@ -138,11 +141,13 @@ def process_input_directory(input_path,
 
     column_map = {}
     counter_dict = {}
-    for filename in os.listdir(input_path):
-      if 'data_with_overlays' in filename:
-        df = pd.read_csv(filename, header=header_row, low_memory=False)
-        year = filename.split(f'ACSST5Y')[1][:4]
-        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
+    for filename in sorted(os.listdir(input_path)):
+        if 'data_with_overlays' in filename:
+            df = pd.read_csv(filename, header=header_row, low_memory=False)
+            year = filename.split(f'ACSST5Y')[1][:4]
+            column_map[year] = generate_stat_var_map(spec_dict,
+                                                     df.columns.tolist(),
+                                                     delimiter, replace_inplace)
 
     ## save the column_map
     if write_output:
@@ -151,12 +156,14 @@ def process_input_directory(input_path,
         f.close()
     return column_map
 
-def process_zip_file(zip_file_path,
-                     spec_path,
-                     write_output=True,
-                     output_dir_path='./',
-                     delimiter='!!',
-                     header_row=1):
+
+def process_zip_file(zip_file_path: str,
+                     spec_path: str,
+                     write_output: bool = True,
+                     output_dir_path: str = './',
+                     delimiter: str = '!!',
+                     header_row: int = 1,
+                     replace_inplace: bool = False) -> dict[str, dict]:
     """Given a zip file of datasets in csv format, the function builds a column map for each year
   Args:
     zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
@@ -165,6 +172,8 @@ def process_zip_file(zip_file_path,
     output_dir_path: File path to the directory where column map is to be saved (default=./)
     delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
     header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+    replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
+lse` by default
 
   Returns:
     A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
@@ -186,11 +195,15 @@ def process_zip_file(zip_file_path,
     column_map = {}
     counter_dict = {}
     zf = ZipFile(zip_file_path)
-    for filename in zf.namelist():
-      if 'data_with_overlays' in filename:
-        df = pd.read_csv(zf.open(filename, 'r'), header=header_row, low_memory=False)
-        year = filename.split(f'ACSST5Y')[1][:4]
-        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
+    for filename in sorted(zf.namelist()):
+        if 'data_with_overlays' in filename:
+            df = pd.read_csv(zf.open(filename, 'r'),
+                             header=header_row,
+                             low_memory=False)
+            year = filename.split(f'ACSST5Y')[1][:4]
+            column_map[year] = generate_stat_var_map(spec_dict,
+                                                     df.columns.tolist(),
+                                                     delimiter, replace_inplace)
 
     ## save the column_map
     if write_output:
@@ -200,13 +213,17 @@ def process_zip_file(zip_file_path,
     return column_map
 
 
-def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
+def generate_stat_var_map(spec_dict: dict[str, [dict, list]],
+                          column_list: list[str],
+                          delimiter: str = '!!',
+                          replace_inplace: bool = False) -> dict[str, dict]:
     """Wrapper function for generateColMapBase class to generate column map.
 
   Args:
-    specDict: A dictionary containing specifications for the different properties of the statistical variable.
+    specdict: A dictionary containing specifications for the different properties of the statistical variable.
     columnList: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
-
+    replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `Fa
+lse` by default
   Returns:
     A dictionary mapping each column to their respective stat_var node definitions.
     Example: {
@@ -221,7 +238,8 @@ def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
   """
     col_map_obj = GenerateColMapBase(spec_dict=spec_dict,
                                      column_list=column_list,
-                                     delimiter=delimiter)
+                                     delimiter=delimiter,
+                                     replace_inplace=replace_inplace)
     return col_map_obj._generate_stat_vars_from_spec()
 
 
@@ -229,18 +247,23 @@ class GenerateColMapBase:
     """module to generate a column map given a list of columns of the dataset and a JSON Spec
 
   Attributes:
-    specDict: A dictionary containing specifications for the different properties of the statistical variable.
+    specdict: A dictionary containing specifications for the different properties of the statistical variable.
     columnList: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
     delimiter: The delimiting string that is used for tokenising the column name
+    replace_inplace: Boolean flag to allow overwritng pvs with values in inferredSpec or dependent PVs. Disable with `False` by default
   """
 
-    # TODO - add typing hints and document the format.
-    def __init__(self, spec_dict={}, column_list=[], delimiter='!!'):
+    def __init__(self,
+                 spec_dict: dict[str, [dict, list]] = {},
+                 column_list: list = [],
+                 delimiter: str = '!!',
+                 replace_inplace: bool = True):
         """module init"""
         self.features = spec_dict
         self.column_list = column_list
         self.column_map = {}
         self.delimiter = delimiter
+        self.replace_inplace = replace_inplace
         # TODO: Add a dictionary of counters with summary stats of number of
         # columns, number of statvars generated, statvars of differnt population
         # types, errors or warnings,
@@ -248,13 +271,12 @@ class GenerateColMapBase:
         # fill missing keys in JSON spec with empty values
         for key in _JSON_KEYS:
             if key not in self.features:
-                # TODO: initialize UniversePVs as empty list
                 if key == 'ignoreColumns' or keys == 'universePVs':
                     self.features[key] = []
                 else:
                     self.features[key] = {}
 
-    def _find_and_replace_column_names(self, column):
+    def _find_and_replace_column_names(self, column: str):
         """
         if spec has find_and_replace defined, this function updates column names
         """
@@ -266,16 +288,21 @@ class GenerateColMapBase:
                 return find_and_replace_dict[column]
             # replace a token in the column name
             else:
-                # TODO: Support the find_and_replace of more than one token
                 part_list = column.split(self.delimiter)
-                for idx, part in enumerate(part_list):
-                    if part in find_and_replace_dict:
-                        part_list[idx] = find_and_replace_dict[part]
+                for key, val in find_and_replace_dict.items():
+                    # check if one or more token is a subset of the column
+                    if key.split(self.delimiter).issubset(part_list):
+                        # we find the elements that contains the tokens to replace
+                        # and update the part_list (tokenized column name) with the
+                        # replacement token
+                        for change in key.split(self.delimiter):
+                            idx = part_list.index(change)
+                            part_list[idx] = val
                         return self.delimiter.join(part_list)
         return column
 
     def _generate_stat_vars_from_spec(self):
-        """generates stat_var nodes for each column in column list and 
+        """generates stat_var nodes for each column in column list and
         returns a dictionary of columns with their respective stat_var nodes
 
             Example output: {
@@ -292,14 +319,17 @@ class GenerateColMapBase:
             ignore_token_flag = False
             # if ignoreColumn token is a single token in the column name or the
             # entire column name, set ignore_token_flag
-            if col in self.features['ignoreColumns'] or len(set(self.features['ignoreColumns']) & set(col.split(self.delimiter))) > 0:
-              ignore_token_flag = True
+            if col in self.features['ignoreColumns'] or len(
+                    set(self.features['ignoreColumns']) &
+                    set(col.split(self.delimiter))) > 0:
+                ignore_token_flag = True
             # set ignore_token_flag when multiple tokens of a column name
             # appears not in order
             if not ignore_token_flag:
-              for token in self.features['ignoreColumns']:
-                if set(token.split(self.delimiter)).issubset(set(col.split(self.delimiter))):
-                  ignore_token_flag = True
+                for token in self.features['ignoreColumns']:
+                    if set(token.split(self.delimiter)).issubset(
+                            set(col.split(self.delimiter))):
+                        ignore_token_flag = True
 
             # if no tokens of the columns are in ignoreColumns of the spec
             if not ignore_token_flag:
@@ -313,16 +343,17 @@ class GenerateColMapBase:
         return self.column_map
 
     def _keep_only_specializations(self, part_list):
-      """
+        """
       While generating the stat-var node for the column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years will rename the column to keep only the specialization, which will mean the stat-var node generated will be for the column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 6 years.
 
       There can also be a case where the specialization appears with more than one base class. For instance "Under 6 years" occurs with both "Under 18 years" and "Under 19 years". In this case, the base classes are comma-space separated (since that makes the JSON more humnan-readable)
       """
-      for specialization, base_classes in self.features['enumSpecializations'].items():
-        for base in  base_class.split(", "):
-          part_list.remove(base) #removes the base class from the column tokens
-      return part_list
-
+        for specialization, base_classes in self.features[
+                'enumSpecializations'].items():
+            for base in base_class.split(", "):
+                part_list.remove(
+                    base)  #removes the base class from the column tokens
+        return part_list
 
     def _column_to_statvar(self, column):
         """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
@@ -376,10 +407,10 @@ class GenerateColMapBase:
                         stat_var[p] = v
 
         ## add Universe PVs based on the populationType of StatVar
-        # TODO: While adding dependentPVs, set values only for properties not already
-        # in stat_var so as to not overwrite an existing property. Maybe useful
-        # to add a class local function that sets value for a property with a
-        # bool arg to allow overwrite.
+        # replace_inplace is a boolean to flag if existing pvs get overwritten
+        # with incoming values from the spec. By default, this is set to False,
+        # as in no overwriting of existing pvs.
+        replace_inplace = self.replace
         dependent_properties = None
         for elem in self.features['universePVs']:
             if stat_var['populationType'] == elem['populationType']:
@@ -387,33 +418,30 @@ class GenerateColMapBase:
                 if (set(elem['constraintProperties']).issubset(
                         set(list(stat_var.keys())))):
                     try:
-                        ## if the dependentPVs are not in statVar add them
-                        if not set(list(elem['dependentPVs'].keys())).issubset(
-                                set(list(stat_var.keys()))):
+                        ## if the dependentPVs are not in statVar add them if replace_inplace is True
+                        if replace_inplace and set(
+                                list(elem['dependentPVs'].keys())).issubset(
+                                    set(list(stat_var.keys()))):
                             stat_var.update(elem['dependentPVs'])
-                        ## add the depedent keys to a list
+
+                        ## add the keys of dependentPVs to dependent_properties
                         dependent_properties = list(elem['dependentPVs'].keys())
                     except KeyError:
                         continue  #when dependentPVs are not specified in spec, skip
-                # TODO: While adding dependentPVs, set values only for properties
-                # not already in stat_var so as to not overwrite an existing
-                # property. Maybe useful to add a class local function that sets
-                # value for a property with a bool arg to allow overwrite.
-
-                #
                 # if constraintProperties is empty, then add the defaultPVs to the
                 # stat_var node
                 if len(elem['constraintProperties']) == 0:
                     stat_var.update(elem['dependentPVs'])
 
         # add inferred properties if applicable
+        # overwritting pvs depends on replace_inplace value. Default behavior is
+        # to disable overwritten
         for p in list(stat_var):
             if p in self.features['inferredSpec']:
-                # TODO: While adding inferredSpec, set values only for properties
-                # not already in stat_var so as to not overwrite an existing
-                # property. Maybe useful to add a class local function that sets
-                # value for a property with a bool arg to allow overwrite.
-                stat_var.update(self.features['inferredSpec'][p])
+                if replace_inplace and set(
+                        list(self.features['inferredSpec'][p])).issubset(
+                            set(list(stat_var.keys()))):
+                    stat_var.update(self.features['inferredSpec'][p])
 
         # generating dcid using the utils/statvar_dcid_generator.py
         stat_var_dcid = get_statvar_dcid(stat_var,
@@ -426,11 +454,13 @@ class GenerateColMapBase:
 
         #Move the dcid to begining of the dict, uses OrderedDict
         try:
-          stat_var = OrderedDict(stat_var)
-          stat_var.move_to_end('Node', last=False)
-          stat_var = json.loads(json.dumps(stat_var))
+            stat_var = OrderedDict(stat_var)
+            stat_var.move_to_end('Node', last=False)
+            stat_var = json.loads(json.dumps(stat_var))
         except:
-          logger.warning(f"The 'Node' is not found for that statvar node generated with dcid={stat_var_dcid}")
+            logger.warning(
+                f"The 'Node' is not found for that statvar node generated with dcid={stat_var_dcid}"
+            )
         #prefix the values if they are not QuantityRanges with dcs:
         stat_var = self._format_stat_var_node(stat_var)
 
@@ -444,7 +474,6 @@ class GenerateColMapBase:
                 logger.critical(
                     f'One or more mandatory properties of the stat_var is missing. \n Dump of the stat_var:: {stat_var}'
                 )
-
 
     def _isvalid_stat_var(self, stat_var):
         """method validates if stat_var has mandatory properties, specified in _MANDATORY_PROPS"""
