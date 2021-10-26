@@ -60,7 +60,7 @@ def process_csv_file(csv_file_path: str,
                      write_output: bool = True,
                      output_dir_path: str = './',
                      delimiter: str = '!!',
-                     header_row: int = 1) -> dict:
+                     header_row: int = 1):
     """
     Given a csv census data file, the function builds a column map for each year
     
@@ -113,7 +113,7 @@ def process_input_directory(input_path: str,
                             output_dir_path: str = './',
                             delimiter: str = '!!',
                             header_row: int = 1,
-                            replace_inplace: bool = False) -> dict:
+                            replace_inplace: bool = False):
     """
     Given a directory of input files, the function builds a column map for each year
   
@@ -168,7 +168,7 @@ def process_zip_file(zip_file_path: str,
                      output_dir_path: str = './',
                      delimiter: str = '!!',
                      header_row: int = 1,
-                     replace_inplace: bool = False) -> dict:
+                     replace_inplace: bool = False):
     """Given a zip file of datasets in csv format, the function builds a column map for each year
       Args:
         zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
@@ -221,7 +221,7 @@ def process_zip_file(zip_file_path: str,
 def generate_stat_var_map(spec_dict: dict,
                           column_list: list[str],
                           delimiter: str = '!!',
-                          replace_inplace: bool = False) -> dict:
+                          replace_inplace: bool = False):
     """
     Wrapper function for generateColMapBase class to generate column map.
 
