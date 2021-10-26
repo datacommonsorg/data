@@ -204,7 +204,7 @@ _PREPEND_APPEND_REPLACE_MAP = {
 }
 
 # To map stat vars which do not follow the conventions of stat var dcid naming
-_LEGACY_MAPPING = {
+_LEGACY_MAP = {
     'Count_Person_WithDisability_NoHealthInsurance':
         'Count_Person_NoHealthInsurance_WithDisability',
     'Count_Person_NoDisability_NoHealthInsurance':
@@ -514,5 +514,5 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
         dcid_list.append(denominator_suffix)
 
     dcid = '_'.join(dcid_list)
-    dcid = _LEGACY_MAPPING.get(dcid, dcid)
+    dcid = _LEGACY_MAP.get(dcid, dcid)
     return dcid
