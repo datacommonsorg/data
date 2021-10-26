@@ -85,7 +85,7 @@ def _generate_file(in_dir, out_dir, res, lvl, gj_prop):
                 gj = json.dumps(json.dumps(f['geometry']))
                 nuts_id = f['properties']['NUTS_ID']
                 if (gj_prop != 'geoJsonCoordinates' and
-                    _is_outermost_geo(nuts_id)):
+                        _is_outermost_geo(nuts_id)):
                     continue
                 fout.write(
                     _MCF_FORMAT.format(nuts_dcid='nuts/' + nuts_id,
