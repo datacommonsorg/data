@@ -105,7 +105,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'numberOfRooms': '[9 - Rooms]',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict1)
-        expected_dcid = 'Count_HousingUnit_9OrMoreRooms'
+        expected_dcid = 'Count_HousingUnit_WithTotal9OrMoreRooms'
         self.assertEqual(dcid, expected_dcid)
 
         statvar_dict2 = {
@@ -115,7 +115,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'numberOfRooms': '[Rooms 9 -]',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict2)
-        expected_dcid = 'Count_HousingUnit_9OrMoreRooms'
+        expected_dcid = 'Count_HousingUnit_WithTotal9OrMoreRooms'
         self.assertEqual(dcid, expected_dcid)
 
         statvar_dict3 = {
@@ -125,7 +125,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'householdWorkerSize': '[- 3 Worker]',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict3)
-        expected_dcid = 'Count_Household_3OrLessWorker'
+        expected_dcid = 'Count_Household_With3OrLessWorker'
         self.assertEqual(dcid, expected_dcid)
 
         statvar_dict4 = {
@@ -135,7 +135,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'householdWorkerSize': '[Worker - 3]',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict4)
-        expected_dcid = 'Count_Household_3OrLessWorker'
+        expected_dcid = 'Count_Household_With3OrLessWorker'
         self.assertEqual(dcid, expected_dcid)
 
         statvar_dict5 = {
@@ -145,7 +145,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'income': '[10000 14999 USDollar]',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict5)
-        expected_dcid = 'Count_Person_10000To14999USDollar'
+        expected_dcid = 'Count_Person_IncomeOf10000To14999USDollar'
         self.assertEqual(dcid, expected_dcid)
 
         statvar_dict6 = {
@@ -155,7 +155,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'income': '[USDollar 10000 14999]',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict6)
-        expected_dcid = 'Count_Person_10000To14999USDollar'
+        expected_dcid = 'Count_Person_IncomeOf10000To14999USDollar'
         self.assertEqual(dcid, expected_dcid)
 
     def test_sorted_constraints(self):
@@ -168,8 +168,9 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'race': 'AsianAlone',
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict)
-        expected_dcid = ('Count_Person_25OrMoreYears_BachelorsDegreeOrHigher'
-                         '_AsianAlone')
+        expected_dcid = ('Count_Person_25OrMoreYears_'
+                         'EducationalAttainmentBachelorsDegreeOrHigher_'
+                         'AsianAlone')
         self.assertEqual(dcid, expected_dcid)
 
     def test_stat_type(self):
@@ -248,11 +249,12 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'populationType': 'Person',
             'age': '[25 64 Years]',
             'educationalAttainment': 'TertiaryEducation',
-            'measurementDenominator': 'Count_Person_25To64Years'
+            'measurementDenominator': 'dcid:Count_Person_25To64Years'
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict3)
-        expected_dcid = ('Count_Person_25To64Years_TertiaryEducation'
-                         '_AsAFractionOf_Count_Person_25To64Years')
+        expected_dcid = ('Count_Person_25To64Years_'
+                         'EducationalAttainmentTertiaryEducation_'
+                         'AsAFractionOf_Count_Person_25To64Years')
         self.assertEqual(dcid, expected_dcid)
 
     def test_naics_name_generation(self):
@@ -303,6 +305,86 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict4)
         expected_dcid = 'Count_Establishment_NAICSConstruction'
+        self.assertEqual(dcid, expected_dcid)
+
+    def test_legacy_mapping(self):
+        stat_var_dict = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'healthInsurance': 'dcid:NoHealthInsurance',
+            'disabilityStatus': 'dcid:WithDisability',
+            'armedForcesStatus': 'dcid:Civilian',
+            'institutionalization': 'dcid:USC_NonInstitutionalized'
+        }
+        ignore_props = ['armedForcesStatus', 'institutionalization']
+        dcid = statvar_dcid_generator.get_statvar_dcid(
+            stat_var_dict, ignore_props=ignore_props)
+        expected_dcid = 'Count_Person_NoHealthInsurance_WithDisability'
+        self.assertEqual(dcid, expected_dcid)
+
+    def test_prepend_append_replace(self):
+        stat_var_dict1 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Household',
+            'householderAge': '[25 44 Years]',
+            'householderRace': 'AmericanIndianOrAlaskaNativeAlone',
+            'income': '[60000 74999 USDollar]',
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict1)
+        expected_dcid = ('Count_Household_HouseholderAge25To44Years_'
+                         'HouseholderRaceAmericanIndianOrAlaskaNativeAlone_'
+                         'IncomeOf60000To74999USDollar')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict2 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Person',
+            'languageSpokenAtHome': 'OnlyEnglish',
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict2)
+        expected_dcid = 'Count_Person_OnlyEnglishSpokenAtHome'
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict3 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Household',
+            'householderRelatedChildrenUnder18Years': '[1 2 Child]',
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict3)
+        expected_dcid = 'Count_Household_Householder1To2RelatedChildren'
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict4 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'age': '[16 64 Years]',
+            'workStatus': 'dcid:WorkedInThePast12Months',
+            'usualHoursWorked': '[35 - Hour]',
+            'workPeriod': '[48 49 Week]',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        ignore_props = ['age', 'workStatus']
+        dcid = statvar_dcid_generator.get_statvar_dcid(
+            stat_var_dict4, ignore_props=ignore_props)
+        expected_dcid = ('Count_Person_WorkPerWeek35OrMoreHour_'
+                         'WorkPerYear48To49Week')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict5 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'nativity': 'dcid:USC_ForeignBorn',
+            'dateOfEntry': '[2000 2009 Date]',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict5)
+        expected_dcid = 'Count_Person_DateOfEntry2000To2009_ForeignBorn'
         self.assertEqual(dcid, expected_dcid)
 
 

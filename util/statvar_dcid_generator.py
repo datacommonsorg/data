@@ -100,6 +100,117 @@ _NAICS_CODE_REGEX = re.compile(r'(\d+-\d+|\d+)')
 # Example matches: 53-56, 11-21
 _NAICS_RANGE_REGEX = re.compile(r'(?P<lower_limit>\d+)-(?P<upper_limit>\d+)')
 
+# Certain properties have text prepended, appended or replaced in the dcid to
+# improve readability. For example, p='householderRace', v='AsianAlone' is
+# changed to v='HouseholderRaceAsianAlone'. The initial map was picked from
+# https://github.com/datacommonsorg/tools/blob/master/stat_var_renaming/stat_var_renaming_functions.py
+_PREPEND_APPEND_REPLACE_MAP = {
+    'languageSpokenAtHome': {
+        'append': 'SpokenAtHome'
+    },
+    'childSchoolEnrollment': {
+        'prepend': 'Child'
+    },
+    'residenceType': {
+        'prepend': 'ResidesIn'
+    },
+    'healthPrevented': {
+        'prepend': 'Received'
+    },
+    'householderAge': {
+        'prepend': 'HouseholderAge'
+    },
+    'householderRace': {
+        'prepend': 'HouseholderRace'
+    },
+    'dateBuilt': {
+        'append': 'Built'
+    },
+    'homeValue': {
+        'prepend': 'HomeValue'
+    },
+    'numberOfRooms': {
+        'prepend': 'WithTotal'
+    },
+    'isic': {
+        'prepend': 'ISIC'
+    },
+    'establishmentOwnership': {
+        'append': 'Establishment'
+    },
+    'householdSize': {
+        'prepend': 'With'
+    },
+    'householdWorkerSize': {
+        'prepend': 'With'
+    },
+    'numberOfVehicles': {
+        'prepend': 'With'
+    },
+    'income': {
+        'prepend': 'IncomeOf'
+    },
+    'grossRent': {
+        'prepend': 'GrossRent'
+    },
+    'healthOutcome': {
+        'prepend': 'With'
+    },
+    'healthPrevention': {
+        'prepend': 'Received'
+    },
+    'propertyTax': {
+        'prepend': 'YearlyTax'
+    },
+    'detailedLevelOfSchool': {
+        'prepend': 'Detailed'
+    },
+    'medicalCondition': {
+        'prepend': 'Condition'
+    },
+    'educationalAttainment': {
+        'prepend': 'EducationalAttainment'
+    },
+    'householderEducationalAttainment': {
+        'prepend': 'HouseholderEducationalAttainment'
+    },
+    'householderRelatedChildrenUnder18Years': {
+        'prepend': 'Householder',
+        'replace': 'Child',
+        'replacement': 'RelatedChildren'
+    },
+    'householderOwnChildrenUnder18Years': {
+        'prepend': 'Householder',
+        'replace': 'Child',
+        'replacement': 'OwnChildren'
+    },
+    'occupation': {
+        'append': 'Occupation'
+    },
+    'usualHoursWorked': {
+        'prepend': 'WorkPerWeek'
+    },
+    'workPeriod': {
+        'prepend': 'WorkPerYear'
+    },
+    'dateOfEntry': {
+        'prepend': 'DateOfEntry',
+        'replace': 'Date',
+        'replacement': ''
+    },
+    'placeOfBirth': {
+        'prepend': 'PlaceOfBirth'
+    }
+}
+
+# To map stat vars which do not follow the conventions of stat var dcid naming
+_LEGACY_MAPPING = {
+    'Count_Person_WithDisability_NoHealthInsurance':
+        'Count_Person_NoHealthInsurance_WithDisability',
+    'Count_Person_NoDisability_NoHealthInsurance':
+        'Count_Person_NoHealthInsurance_NoDisability'
+}
+
 
 def _capitalize_process(word: str) -> str:
     """Capitalizes, removes namespaces, measurement constraint prefixes and
@@ -225,6 +336,28 @@ def _naics_code_to_name(naics_val: str) -> str:
     return None
 
 
+def _prepend_append_replace(word, prepend='', append='', old='', new=''):
+    """Prepends, appends and replaces text in a word.
+    Args:
+        word: A string literal to prepend, append or replace on.
+        prepend: A string literal to prepend to word.
+        append: A string literal to append to word.
+        old: A string literal that repersents a substring in word to be
+          replaced.
+        new: A string literal. In word, all occurances of old will be replaced
+          by new.
+    Returns:
+        A string after appending, prepending and replacing to word.
+    """
+    if old:
+        word = word.replace(old, new)
+    if prepend:
+        word = prepend + word
+    if append:
+        word = word + append
+    return word
+
+
 def _generate_quantity_name(match_dict: dict) -> str:
     """Generate a name for a quantity.
 
@@ -277,6 +410,14 @@ def _process_constraint_property(prop: str, value: str) -> str:
             else:
                 name = _capitalize_process(value)
 
+    if prop in _PREPEND_APPEND_REPLACE_MAP:
+        name = _prepend_append_replace(
+            name,
+            append=_PREPEND_APPEND_REPLACE_MAP[prop].get('append', ''),
+            prepend=_PREPEND_APPEND_REPLACE_MAP[prop].get('prepend', ''),
+            old=_PREPEND_APPEND_REPLACE_MAP[prop].get('replace', ''),
+            new=_PREPEND_APPEND_REPLACE_MAP[prop].get('replacement', ''))
+
     return name
 
 
@@ -311,7 +452,6 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     # TODO: Add support for naming boolean constraints
     # TODO: Renaming cause of death properties
     # TODO: Renaming DEA drug names
-    # TODO: Prepend or append text to some constraints to improve readability
     # TODO: InsuredUmemploymentRate should become Rate_Insured_Unemployment
 
     # Helper function to add a property to the dcid list.
@@ -351,6 +491,7 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     # measurementDenominator is added as a suffix
     if 'measurementDenominator' in svd:
         md = svd['measurementDenominator']
+        md = md[md.find(':') + 1:]  # Removing namespaces
         # Special case: PerCapita is directly appended.
         if md == 'PerCapita':
             denominator_suffix = 'PerCapita'
@@ -373,4 +514,5 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
         dcid_list.append(denominator_suffix)
 
     dcid = '_'.join(dcid_list)
+    dcid = _LEGACY_MAPPING.get(dcid, dcid)
     return dcid
