@@ -221,7 +221,7 @@ def process_zip_file(zip_file_path: str,
 def generate_stat_var_map(spec_dict: dict,
                           column_list: list[str],
                           delimiter: str = '!!',
-                          replace_inplace: bool = False) -> dict[str, dict]:
+                          replace_inplace: bool = False) -> dict:
     """
     Wrapper function for generateColMapBase class to generate column map.
 
