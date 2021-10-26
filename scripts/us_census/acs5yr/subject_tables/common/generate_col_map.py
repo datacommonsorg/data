@@ -53,6 +53,7 @@ _JSON_KEYS = [
     'preprocess'
 ]
 
+# TODO: Add typing hints
 def process_csv_file(csv_file_path,
                      spec_path,
                      write_output=True,
@@ -303,10 +304,6 @@ class GenerateColMapBase:
             # if no tokens of the columns are in ignoreColumns of the spec
             if not ignore_token_flag:
                 renamed_col = self._find_and_replace_column_names(col)
-                # TODO: Before calling the column_to_statvar method,
-                # remove the base class or generalization token in the
-                # column name from the enumSpecialization section of the
-                # spec.
                 # TODO: Should we generate an error _column_to_statvar() returns an empty statvar?
                 self.column_map[col] = self._column_to_statvar(renamed_col)
 
@@ -423,16 +420,17 @@ class GenerateColMapBase:
                                          ignore_props=dependent_properties)
 
         ## overwrite stat_var_dcids from the spec (for existing dcids)
-        # TODO: If  "Node" not found in stat_var, then throw a warning message
         if stat_var_dcid in self.features['overwrite_dcids']:
             stat_var_dcid = self.features['overwrite_dcids'][stat_var_dcid]
         stat_var['Node'] = 'dcid:' + stat_var_dcid
 
         #Move the dcid to begining of the dict, uses OrderedDict
-        stat_var = OrderedDict(stat_var)
-        stat_var.move_to_end('Node', last=False)
-        stat_var = json.loads(json.dumps(stat_var))
-
+        try:
+          stat_var = OrderedDict(stat_var)
+          stat_var.move_to_end('Node', last=False)
+          stat_var = json.loads(json.dumps(stat_var))
+        except:
+          logger.warning(f"The 'Node' is not found for that statvar node generated with dcid={stat_var_dcid}")
         #prefix the values if they are not QuantityRanges with dcs:
         stat_var = self._format_stat_var_node(stat_var)
 
