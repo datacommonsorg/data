@@ -12,11 +12,9 @@ Node properties can be found in the [mcf](./India_WRIS_Rainfall.mcf) and [tmcf](
 
 ### Dataset info
 
-Spatial resolution - District Level
-
-Observation Period - Monthly
-
-Data availability - 2011 to 2021
+- Spatial resolution - District Level
+- Observation Period - Monthly
+- Data availability - 2011 to 2021
 
 ### Raw data download
 
