@@ -83,16 +83,14 @@ with open(mcf_file, 'w') as mcf, open(tmcf_file, 'w') as tmcf:
         # 'variable' contains StatVar name
         # Example: Arsenic (As) -> Pollutant_Arsenic
         variable = '_'.join([property_type, statvar])
-        
+
         # Writing MCF Node
         mcf.write(
             MCF_NODES.format(variable=variable,
                              propertyType=property_type,
                              statvar=statvar))
         # Writing TMCF Location Node
-        tmcf.write(
-            TMCF_ISOCODE.format(dataset_name=DATASET_NAME)
-                )
+        tmcf.write(TMCF_ISOCODE.format(dataset_name=DATASET_NAME))
         # Writing TMCF Property Node
         tmcf.write(
             TMCF_NODES.format(dataset_name=DATASET_NAME,

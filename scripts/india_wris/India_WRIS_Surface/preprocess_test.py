@@ -48,7 +48,8 @@ class TestPreprocess(unittest.TestCase):
 
     # Test if all columns in dataset are represented as nodes in MCF files
     def test_all_columns_in_mcf_tmcf(self):
-        data = pd.read_csv(os.path.join(module_dir, '{}.csv'.format(DATASET_NAME)))
+        data = pd.read_csv(
+            os.path.join(module_dir, '{}.csv'.format(DATASET_NAME)))
         with open(mcf_file, 'r') as mcf, open(tmcf_file, 'r') as tmcf:
             for column in data.columns:
                 self.assertTrue(mcf.read().find(column))
