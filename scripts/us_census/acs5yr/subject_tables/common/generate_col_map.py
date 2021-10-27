@@ -232,6 +232,13 @@ class GenerateColMapBase:
         # Should that be considered an error for subject tables?
         return self.column_map
 
+    def check_obs_props(self, obs_props, stat_var):
+        """Checks for property values match in obs_props"""
+        # Check for measuredProperty
+        if obs_props['mprop'] != stat_var['measuredProperty']:
+            return False
+        return True
+
     def _column_to_statvar(self, column):
         """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
         measurement_assigned = False
@@ -298,10 +305,8 @@ class GenerateColMapBase:
         dependent_properties = None
         for elem in self.features['universePVs']:
             if stat_var['populationType'] == elem['populationType']:
-                # Check for measuredProperty
                 if 'obs_props' in elem:
-                    if elem['obs_props']['mprop'] != stat_var[
-                            'measuredProperty']:
+                    if not self.check_obs_props(elem['obs_props'], stat_var):
                         continue
 
                 # Initialising 'constraintProperties' if it doesn't exist
