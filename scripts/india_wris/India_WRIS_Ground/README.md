@@ -30,7 +30,9 @@ Node properties can be found in the [mcf](./India_WRIS_Ground.mcf) and [tmcf](./
 ### Dataset info
 
 Spatial resolution - City Level
+
 Observation Period - Yearly
+
 Data availability - 2000 to 2018
 
 ### Scripts
