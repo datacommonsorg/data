@@ -216,22 +216,22 @@ _MEASURE_MAP['RECEIPTS_BTU'] = _MEASURE_MAP['RECEIPTS']
 # Unit with this value is handled specially depending on the fuel type.
 _PLACEHOLDER_FUEL_UNIT = '_XYZ_'
 
-# The value is a pair of (unit, scalingFactor) for each measure.
+# The value is a pair of (unit, scalingFactor, multiplier) for each measure.
 _UNIT_MAP = {
-    'ASH_CONTENT': ('', '100'),
-    'CONS_EG': (_PLACEHOLDER_FUEL_UNIT, '1000'),
-    'CONS_EG_BTU': ('MMBtu', '1000000'),
-    'COST': (_PLACEHOLDER_FUEL_UNIT, ''),
-    'COST_BTU': ('MMBtu', ''),
-    'CUSTOMERS': ('', ''),
-    'GEN': ('MegawattHour', '1000'),
-    'PRICE': ('USCentPerKilowattHour', ''),
-    'RECEIPTS': (_PLACEHOLDER_FUEL_UNIT, '1000'),
-    'RECEIPTS_BTU': ('Btu', '1000000000'),
-    'REV': ('USDollar', '1000000'),
-    'SALES': ('KilowattHour', '1000000'),
-    'STOCKS': (_PLACEHOLDER_FUEL_UNIT, '1000'),
-    'SULFUR_CONTENT': ('', '100'),
+    'ASH_CONTENT': ('', '100', 1),
+    'CONS_EG': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
+    'CONS_EG_BTU': ('MMBtu', '', 1000000),
+    'COST': (_PLACEHOLDER_FUEL_UNIT, '', 1),
+    'COST_BTU': ('MMBtu', '', 1),
+    'CUSTOMERS': ('', '', 1),
+    'GEN': ('GigawattHour', '', 1),
+    'PRICE': ('USCentPerKilowattHour', '', 1),
+    'RECEIPTS': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
+    'RECEIPTS_BTU': ('Btu', '', 1000000000),
+    'REV': ('USDollar', '', 1000000),
+    'SALES': ('GigawattHour', '', 1),
+    'STOCKS': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
+    'SULFUR_CONTENT': ('', '100', 1),
 }
 
 _UNIT_MAP['CONS_TOT'] = _UNIT_MAP['CONS_EG']
@@ -333,7 +333,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     if measure not in _UNIT_MAP:
         counters['error_missing_unit'] += 1
         return None
-    (unit, sfactor) = _UNIT_MAP[measure]
+    (unit, sfactor, multiplier) = _UNIT_MAP[measure]
 
     if unit == _PLACEHOLDER_FUEL_UNIT:
         if not fuel_type:
@@ -355,6 +355,8 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
             row['unit'] = ''
         if sfactor:
             row['scaling_factor'] = sfactor
+        if multiplier > 1:
+            row['value'] = str(float(row['value']) * multiplier)
 
     if sv_id not in sv_map:
         node = f'Node: dcid:{sv_id}'
