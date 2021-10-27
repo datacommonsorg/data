@@ -1,0 +1,136 @@
+[
+    {
+        "Pollutant": [
+            {
+                "name": "Arsenic (As)",
+                "statvar": "Arsenic",
+                "unit": "dcid:MicrogramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "carbonate (CO3)",
+                "statvar": "Carbonate",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Calcium (Ca)",
+                "statvar": "Calcium",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Chloride (Cl)",
+                "statvar": "Chloride",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Fluorine (F)",
+                "statvar": "Fluorine",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Iron (Fe)",
+                "statvar": "Iron",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Hydrogencarbonate (HCO3)",
+                "statvar": "HydrogenCarbonate",
+                "unit": "",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Potassium (K)",
+                "statvar": "Potassium",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Magnesium (Mg)",
+                "statvar": "Magnesium",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Nitrate (NO3)",
+                "statvar": "Nitrate",
+                "unit": "",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Sodium (Na)",
+                "statvar": "Sodium",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Phosphate Ion (PO4)",
+                "statvar": "PhosphateIon",
+                "unit": "",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Sulfate (SO4)",
+                "statvar": "Sulfate",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            },
+            {
+                "name": "Silicon dioxide (SiO2)",
+                "statvar": "SiliconDiOxide",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "Pollutant"
+            }
+        ]    
+    },
+    {
+        "ChemicalProperty": [
+            {
+                "name": "Electrical Conductivity",
+                "statvar": "ElectricalConductivity",
+                "unit": "",
+                "property": "ChemicalProperty"
+            },
+            {
+                "name": "Residual Sodium Carbonate",
+                "statvar": "ResidualSodiumCarbonate",
+                "unit": "",
+                "property": "ChemicalProperty"
+            },
+            {
+                "name": "Sodium absorption ratio (SAR)",
+                "statvar": "SodiumAbsorptionRatio",
+                "unit": "",
+                "property": "ChemicalProperty"
+            },
+            {
+                "name": "Hardness Total",
+                "statvar": "TotalHardness",
+                "unit": "dcid:MilligramsCaCO3PerLitre",
+                "property": "ChemicalProperty"
+            },
+            {
+                "name": "Alkalinity Total",
+                "statvar": "TotalAlkalinity",
+                "unit": "dcid:MilligramsCaCO3PerLitre",
+                "property": "ChemicalProperty"
+            },
+            {
+                "name": "Total Dissolved Solids",
+                "statvar": "TotalDissolvedSolids",
+                "unit": "dcid:MilligramsPerLitre",
+                "property": "ChemicalProperty"
+            },
+            {
+                "name": "Potential of Hydrogen (pH)",
+                "statvar": "PH",
+                "unit": "",
+                "property": "ChemicalProperty"
+            }
+        ]    
+    }
+]
