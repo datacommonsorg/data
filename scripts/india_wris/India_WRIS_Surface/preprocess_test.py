@@ -23,15 +23,16 @@ module_dir = os.path.dirname(__file__)
 json_file_path = os.path.join(module_dir, "../util/surfaceWater.json")
 
 with open(json_file_path, 'r') as j:
-     properties = json.loads(j.read())
-     
+    properties = json.loads(j.read())
+
 pollutants, chem_props = properties
 
 tmcf_file = os.path.join(module_dir, "{}.tmcf".format(DATASET_NAME))
 mcf_file = os.path.join(module_dir, "{}.mcf".format(DATASET_NAME))
 
+
 class TestPreprocess(unittest.TestCase):
-    
+
     # Test if all properties are in MCF and TMCF files
     def test_all_nodes_in_mcf_tmcf(self):
         with open(mcf_file, 'r') as mcf, open(tmcf_file, 'r') as tmcf:
@@ -40,19 +41,19 @@ class TestPreprocess(unittest.TestCase):
             for pollutant in pollutants['Pollutant']:
                 self.assertTrue(mcf.read().find(pollutant['statvar']))
                 self.assertTrue(tmcf.read().find(pollutant['statvar']))
-                
+
             for chem_prop in chem_props['ChemicalProperty']:
                 self.assertTrue(mcf.read().find(chem_prop['statvar']))
                 self.assertTrue(tmcf.read().find(chem_prop['statvar']))
-    
+
     # Test if all columns in dataset are represented as nodes in MCF files
     def test_all_columns_in_mcf_tmcf(self):
-        data = pd.read_csv(os.path.join(module_dir, 'data.csv'))
+        data = pd.read_csv(os.path.join(module_dir, '{}.csv'.format(DATASET_NAME)))
         with open(mcf_file, 'r') as mcf, open(tmcf_file, 'r') as tmcf:
             for column in data.columns:
                 self.assertTrue(mcf.read().find(column))
                 self.assertTrue(tmcf.read().find(column))
-                
+
 
 if __name__ == '__main__':
     unittest.main()

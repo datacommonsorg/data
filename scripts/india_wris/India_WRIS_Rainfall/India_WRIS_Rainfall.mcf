@@ -1,0 +1,26 @@
+Node: dcid:MonthlyRainfall_Actual
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Place
+measurementQualifier: Monthly
+measuredProperty: dcs:rainfallActual
+memberOf: dcid:dc/g/Climate
+statType: measuredValue
+description: “Actual rainfall measurement in a place”
+
+Node: dcid:MonthlyRainfall_Normal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Place
+measurementQualifier: Monthly
+measuredProperty: dcs:rainfallNormal
+memberOf: dcid:dc/g/Climate
+statType: measuredValue
+description: “Average (or normal) rainfall measurement in a place”
+
+Node: dcid:MonthlyRainfall_Deviation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Place
+measurementQualifier: Monthly
+measuredProperty: dcs:rainfallDeviation
+memberOf: dcid:dc/g/Climate
+statType: measuredValue
+description: “Percentage change in rainfall between RainfallNormal and RainfallActual

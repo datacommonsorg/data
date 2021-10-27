@@ -1,0 +1,33 @@
+Node: E:India_WRIS_Rainfall->E0
+typeOf: dcs:AdministrativeArea2
+dcid: C:India_WRIS_Rainfall->lgdCode
+
+Node: E:India_WRIS_Rainfall->E1
+observationDate: E:India_WRIS_Rainfall->ObsMonth
+observationAbout: E:India_WRIS_Rainfall->lgdCode
+observationPeriod: "P1M"
+unit: dcid:Millimeter
+variableMeasured: dcid:MonthlyRainfall_Actual
+measurementMethod: dcid:India_WRIS
+value: E:India_WRIS_Rainfall->Rainfall Actuall
+typeOf: dcid:StatVarObservation
+
+Node: E:India_WRIS_Rainfall->E2
+observationDate: E:India_WRIS_Rainfall->ObsMonth
+observationAbout: E:India_WRIS_Rainfall->lgdCode
+observationPeriod: "P1M"
+unit: dcid:Millimeter
+variableMeasured: dcid:MonthlyRainfall_Normal
+measurementMethod: dcid:India_WRIS
+value: E:India_WRIS_Rainfall->Rainfall Normal
+typeOf: dcid:StatVarObservation
+
+Node: E:India_WRIS_Rainfall->E3
+observationDate: E:India_WRIS_Rainfall->ObsMonth
+observationAbout: E:India_WRIS_Rainfall->lgdCode
+observationPeriod: "P1M"
+unit: dcid:Percent
+variableMeasured: dcid:MonthlyRainfall_Deviation
+measurementMethod: dcid:India_WRIS
+value: E:India_WRIS_Rainfall->Rainfall Deviation
+typeOf: dcid:StatVarObservation
