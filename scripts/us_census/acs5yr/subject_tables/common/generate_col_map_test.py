@@ -53,7 +53,7 @@ class GenerateColMapTest(unittest.TestCase):
         expected_map = json.load(f)
         f.close()
 
-        self.assertEqual(expected_map['2013'], generated_col_map)
+        self.assertEqual(expected_map, generated_col_map)
 
     def test_generating_column_map_from_zip(self):
         base_path = os.path.dirname(__file__)
