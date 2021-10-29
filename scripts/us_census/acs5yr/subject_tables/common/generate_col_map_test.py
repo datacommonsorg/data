@@ -52,8 +52,7 @@ class GenerateColMapTest(unittest.TestCase):
         f = open(expected_map_path, 'r')
         expected_map = json.load(f)
         f.close()
-        with open('csv_map.json', 'w') as f:
-            json.dump(generated_col_map, f)
+
         self.assertEqual(expected_map, generated_col_map)
 
     def test_generating_column_map_from_zip(self):
@@ -70,8 +69,7 @@ class GenerateColMapTest(unittest.TestCase):
         f = open(expected_map_path, 'r')
         expected_map = json.load(f)
         f.close()
-        with open('json_map.json', 'w') as f:
-            json.dump(generated_col_map, f)
+
         self.assertEqual(expected_map, generated_col_map)
 
 
