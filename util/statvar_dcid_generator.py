@@ -45,6 +45,61 @@ _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
 _CONSTRAINT_PREFIX_REGEX = re.compile(
     r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED))(?P<ucase_uscore>[A-Z_])')
 
+# A mapping of NAICS codes to industry topics
+# This map was generated using the code from the _create_naics_map function at
+# https://github.com/datacommonsorg/tools/blob/master/stat_var_renaming/stat_var_renaming_constants.py
+_NAICS_MAP = {
+    '00': 'Unclassified',
+    '11': 'AgricultureForestryFishingHunting',
+    '21': 'MiningQuarryingOilGasExtraction',
+    '22': 'Utilities',
+    '23': 'Construction',
+    '31': 'Manufacturing',
+    '32': 'Manufacturing',
+    '33': 'Manufacturing',
+    '42': 'WholesaleTrade',
+    '44': 'RetailTrade',
+    '45': 'RetailTrade',
+    '48': 'TransportationWarehousing',
+    '49': 'TransportationWarehousing',
+    '51': 'Information',
+    '52': 'FinanceInsurance',
+    '53': 'RealEstateRentalLeasing',
+    '54': 'ProfessionalScientificTechnicalServices',
+    '55': 'ManagementOfCompaniesEnterprises',
+    '56': 'AdministrativeSupportWasteManagementRemediationServices',
+    '61': 'EducationalServices',
+    '62': 'HealthCareSocialAssistance',
+    '71': 'ArtsEntertainmentRecreation',
+    '72': 'AccommodationFoodServices',
+    '81': 'OtherServices',
+    '92': 'PublicAdministration',
+    '99': 'Nonclassifiable',
+    '10': 'TotalAllIndustries',
+    '101': 'GoodsProducing',
+    '1011': 'NaturalResourcesMining',
+    '1012': 'Construction',
+    '1013': 'Manufacturing',
+    '102': 'ServiceProviding',
+    '1021': 'TradeTransportationUtilities',
+    '1022': 'Information',
+    '1023': 'FinancialActivities',
+    '1024': 'ProfessionalBusinessServices',
+    '1025': 'EducationHealthServices',
+    '1026': 'LeisureHospitality',
+    '1027': 'OtherServices',
+    '1028': 'PublicAdministration',
+    '1029': 'Unclassified'
+}
+
+# Regex to match NAICS Codes. These codes could be a single code or a range
+# Example matches: 53-56, 44
+_NAICS_CODE_REGEX = re.compile(r'(\d+-\d+|\d+)')
+
+# Regex to extract the lower and upper ranges in a range of NAICS codes
+# Example matches: 53-56, 11-21
+_NAICS_RANGE_REGEX = re.compile(r'(?P<lower_limit>\d+)-(?P<upper_limit>\d+)')
+
 
 def _capitalize_process(word: str) -> str:
     """Capitalizes, removes namespaces, measurement constraint prefixes and
@@ -112,6 +167,64 @@ def _generate_quantity_range_name(match_dict: dict) -> str:
     return f'{lower_limit}To{upper_limit}{quantity}'
 
 
+def _naics_code_to_name(naics_val: str) -> str:
+    """Converts NAICS codes to their industry using the _NAICS_MAP.
+    Args:
+        naics_val: A NAICS string literal to process.
+          Expected syntax of naics_val - NAICS/{codes}
+          '-' can be used to denote range of codes that may or may not belong
+          to the same industry. For eg, 44-45 will be mapped to 'RetailTrade'.
+          '_' can be used to represent multiple industries. For eg, 51_52 will
+          be mapped to 'InformationFinanceInsurance'. A combination of '-' and
+          '_' is acceptable.
+    Returns:
+        A string with all NAICS codes changed to their respective industry.
+        This string can be used in dcid generation. Returns None if the string
+        is empty or if the string does not follow the expected syntax.
+    """
+
+    # Helper function to process NAICS ranges
+    def _process_naics_range(range_str: str) -> str:
+        industry_str = ''
+        match = _NAICS_RANGE_REGEX.search(range_str)
+        m_dict = match.groupdict()
+        lower_limit = int(m_dict['lower_limit'])
+        upper_limit = int(m_dict['upper_limit'])
+
+        prev_str = None  # To ensure the same industry is not added twice
+        for code in range(lower_limit, upper_limit + 1):
+            code_str = str(code)
+            if code_str in _NAICS_MAP and prev_str != _NAICS_MAP[code_str]:
+                industry_str = industry_str + _NAICS_MAP[code_str]
+                prev_str = _NAICS_MAP[code_str]
+            else:
+                continue
+
+        return industry_str
+
+    if naics_val:
+        processed_str = 'NAICS'
+
+        # Remove namespaces
+        naics_val = naics_val[naics_val.find(':') + 1:]
+
+        # Strip NAICS/
+        naics_val = naics_val.replace('NAICS/', '')
+
+        matches = _NAICS_CODE_REGEX.findall(naics_val)
+        if not matches:
+            return None
+
+        for match_str in matches:
+            if match_str.find('-') != -1:  # Range
+                industry_str = _process_naics_range(match_str)
+            else:
+                industry_str = _NAICS_MAP[match_str]
+            processed_str = processed_str + industry_str
+        return processed_str
+    return None
+
+
 def _generate_quantity_name(match_dict: dict) -> str:
     """Generate a name for a quantity.
 
@@ -146,20 +259,23 @@ def _process_constraint_property(prop: str, value: str) -> str:
     Returns:
         A string that can be used in dcid generation.
     """
-    match1 = _QUANTITY_RANGE_REGEX_1.match(value)
-    match2 = _QUANTITY_RANGE_REGEX_2.match(value)
-
-    if match1 or match2:  # Quantity Range
-        m_dict = match1.groupdict() if match1 else match2.groupdict()
-        name = _generate_quantity_range_name(m_dict)
+    if prop == 'naics':
+        name = _naics_code_to_name(value)
     else:
-        match1 = _QUANTITY_REGEX_1.match(value)
-        match2 = _QUANTITY_REGEX_2.match(value)
-        if match1 or match2:  # Quantity
+        match1 = _QUANTITY_RANGE_REGEX_1.match(value)
+        match2 = _QUANTITY_RANGE_REGEX_2.match(value)
+
+        if match1 or match2:  # Quantity Range
             m_dict = match1.groupdict() if match1 else match2.groupdict()
-            name = _generate_quantity_name(m_dict)
+            name = _generate_quantity_range_name(m_dict)
         else:
-            name = _capitalize_process(value)
+            match1 = _QUANTITY_REGEX_1.match(value)
+            match2 = _QUANTITY_REGEX_2.match(value)
+            if match1 or match2:  # Quantity
+                m_dict = match1.groupdict() if match1 else match2.groupdict()
+                name = _generate_quantity_name(m_dict)
+            else:
+                name = _capitalize_process(value)
 
     return name
 
@@ -193,7 +309,6 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     """
 
     # TODO: Add support for naming boolean constraints
-    # TODO: Replacing NAICS industry codes with the NAICS names
     # TODO: Renaming cause of death properties
     # TODO: Renaming DEA drug names
     # TODO: Prepend or append text to some constraints to improve readability
