@@ -33,7 +33,7 @@ class GenerateColMapTest(unittest.TestCase):
         input_csv_path = os.path.join(base_path,
                                       "./testdata/ACSST5Y2013_S2702.csv")
         expected_map_path = os.path.join(
-            base_path, "./testdata/column_map_from_zip_expected.json")
+            base_path, "./testdata/column_map_from_csv_expected.json")
 
         f = open(spec_path, 'r')
         spec_dict = json.load(f)
@@ -52,8 +52,9 @@ class GenerateColMapTest(unittest.TestCase):
         f = open(expected_map_path, 'r')
         expected_map = json.load(f)
         f.close()
-
-        self.assertEqual(expected_map['2013'], generated_col_map)
+        with open('csv_map.json', 'w') as f:
+            json.dump(generated_col_map, f)
+        self.assertEqual(expected_map, generated_col_map)
 
     def test_generating_column_map_from_zip(self):
         base_path = os.path.dirname(__file__)
@@ -69,7 +70,8 @@ class GenerateColMapTest(unittest.TestCase):
         f = open(expected_map_path, 'r')
         expected_map = json.load(f)
         f.close()
-
+        with open('json_map.json', 'w') as f:
+            json.dump(generated_col_map, f)
         self.assertEqual(expected_map, generated_col_map)
 
 
