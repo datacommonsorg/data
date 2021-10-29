@@ -1,26 +1,26 @@
-Node: dcid:MonthlyRainfall_Actual
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Place
+Node: dcid:rainfallAverage
+name: "Rainfall Average"
+typeOf: schema:Property
+domainIncludes: schema:Place
+rangeIncludes: dcs:Quantity
+measuredProperty: dcs:rainfall
+statType: dcs:meanValue
 measurementQualifier: Monthly
-measuredProperty: dcs:rainfallActual
-memberOf: dcid:dc/g/Climate
-statType: measuredValue
-description: “Actual rainfall measurement in a place”
+description: "Average (or normal) rainfall measurement in a place"
 
-Node: dcid:MonthlyRainfall_Normal
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Place
-measurementQualifier: Monthly
-measuredProperty: dcs:rainfallNormal
-memberOf: dcid:dc/g/Climate
+Node: dcid:rainfall
+name: "rainfall"
+typeOf: schema:Property
+domainIncludes: schema:Place
+rangeIncludes: dcs:Quantity
 statType: measuredValue
-description: “Average (or normal) rainfall measurement in a place”
+measurementQualifier: Monthly
+description: "“"Actual rainfall measurement in a place at that time period"
 
-Node: dcid:MonthlyRainfall_Deviation
+Node: dcid:rainfallDeviation
 typeOf: dcs:StatisticalVariable
-populationType: dcs:Place
+typeOf: schema:Property
+domainIncludes: schema:Place
+rangeIncludes: dcs:Quantity
 measurementQualifier: Monthly
-measuredProperty: dcs:rainfallDeviation
-memberOf: dcid:dc/g/Climate
-statType: measuredValue
-description: “Percentage change in rainfall between RainfallNormal and RainfallActual
+description: "Percentage change in rainfall between rainfall and rainfallAverage"

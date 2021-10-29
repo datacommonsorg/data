@@ -7,7 +7,7 @@ observationDate: E:India_WRIS_Rainfall->ObsMonth
 observationAbout: E:India_WRIS_Rainfall->lgdCode
 observationPeriod: "P1M"
 unit: dcid:Millimeter
-variableMeasured: dcid:MonthlyRainfall_Actual
+variableMeasured: dcid:rainfall
 measurementMethod: dcid:India_WRIS
 value: E:India_WRIS_Rainfall->Rainfall Actuall
 typeOf: dcid:StatVarObservation
@@ -17,7 +17,7 @@ observationDate: E:India_WRIS_Rainfall->ObsMonth
 observationAbout: E:India_WRIS_Rainfall->lgdCode
 observationPeriod: "P1M"
 unit: dcid:Millimeter
-variableMeasured: dcid:MonthlyRainfall_Normal
+variableMeasured: dcid:rainfallAverage
 measurementMethod: dcid:India_WRIS
 value: E:India_WRIS_Rainfall->Rainfall Normal
 typeOf: dcid:StatVarObservation
@@ -27,7 +27,7 @@ observationDate: E:India_WRIS_Rainfall->ObsMonth
 observationAbout: E:India_WRIS_Rainfall->lgdCode
 observationPeriod: "P1M"
 unit: dcid:Percent
-variableMeasured: dcid:MonthlyRainfall_Deviation
+variableMeasured: dcid:rainfallDeviation
 measurementMethod: dcid:India_WRIS
 value: E:India_WRIS_Rainfall->Rainfall Deviation
 typeOf: dcid:StatVarObservation
