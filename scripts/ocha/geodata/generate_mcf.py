@@ -13,6 +13,7 @@
 # limitations under the License.
 """Generates ID maps and GeoJSON MCF for Pakistan, Nepal and Bangladesh."""
 
+import csv
 import glob
 import os
 import json
@@ -22,59 +23,146 @@ from absl import flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('ocha_input_geojson_pattern', '', 'GeoJSON file pattern')
+flags.DEFINE_string('ocha_resolved_id_map', '', 'Resolved ID map')
 flags.DEFINE_string('ocha_output_dir', '/tmp', 'Output directory path.')
+flags.DEFINE_boolean(
+    'ocha_generate_id_map', False, 'If true, then this just generates '
+    'the ID maps for resolution')
 
 # Note1: When we emit geojson string, we use two json.dumps() so it
 # automatically escapes all inner quotes, and encloses the entire string in
 # quotes.
 # Note2: Having the appropriate type helps downstream consumers of this data
 #        (e.g., IPCC pipeline).
-_MCF_FORMAT = """
+_GJ_MCF = """
 Node: dcid:{dcid}
 typeOf: dcs:{place_type}
-{gj_prop}: {gj_val}
+geoJsonCoordinates: {gj}
 """
 
-_FILE_ID_PROP = {
-    'bgd_admbnda_adm1_bbs_20201113.geojson': ('ADM1', 'Division', 'Bangladesh'),
-    'bgd_admbnda_adm2_bbs_20201113.geojson': ('ADM2', 'District', 'Bangladesh'),
-    'npl_admbnda_adm1_nd_20201117.geojson': ('ADM1', 'Province', 'Nepal'),
-    'npl_admbnda_districts_nd_20201117.geojson': ('DIST', 'District', 'Nepal'),
-    'pak_admbnda_adm1_ocha_pco_gaul_20181218.geojson': ('ADM1', 'Province', 'Pakistan'),
-    'pak_admbnda_adm2_ocha_pco_gaul_20181218.geojson': ('ADM2', 'District', 'Pakistan'),
+_ID_MCF = """
+Node: dcid:{dcid}
+typeOf: dcs:{place_type}
+ochaPCode: "{pcode}"
+"""
+
+_ID_CONTAINS_MCF = """
+Node: dcid:{dcid}
+typeOf: dcs:{place_type}
+ochaPCode: "{pcode}"
+containedInPlace: dcid:{parent}
+"""
+
+_FILE_METADATA = {
+    'bgd_admbnda_adm1_bbs_20201113.geojson':
+        ('ADM1', 'Division', 'Bangladesh', 'AdministrativeArea1'),
+    'bgd_admbnda_adm2_bbs_20201113.geojson':
+        ('ADM2', 'District', 'Bangladesh', 'AdministrativeArea2'),
+    'npl_admbnda_adm1_nd_20201117.geojson':
+        ('ADM1', 'Province', 'Nepal', 'AdministrativeArea1'),
+    'npl_admbnda_districts_nd_20201117.geojson':
+        ('DIST', 'District', 'Nepal', 'AdministrativeArea2'),
+    'pak_admbnda_adm1_ocha_pco_gaul_20181218.geojson':
+        ('ADM1', 'Province', 'Pakistan', 'AdministrativeArea1'),
+    'pak_admbnda_adm2_ocha_pco_gaul_20181218.geojson':
+        ('ADM2', 'District', 'Pakistan', 'AdministrativeArea3'),
 }
 
 
-def generate_id_map(in_pattern, out_dir):
-    with open(os.path.join(out_dir, 'id_map.csv'), 'w') as out_fp:
-        out_fp.write('ochaPCode,name\n')
-        for fpath in glob.glob(in_pattern):
-            fname = os.path.basename(fpath)
-            if fname not in _FILE_ID_PROP:
+def _process_file(in_fp, md, args):
+    pcode_key = md[0] + '_PCODE'
+    name_key = md[0] + '_EN'
+    type_name = md[1]
+    country = md[2]
+    place_type = md[3]
+
+    if not args['generate_id_map']:
+        fname = '_'.join([country, place_type, 'GeoJSON']) + '.mcf'
+        gj_mcf = open(os.path.join(args['out_dir'], fname), 'w')
+
+        fname = '_'.join([country, place_type, 'PCode']) + '.mcf'
+        id_mcf = open(os.path.join(args['out_dir'], fname), 'w')
+
+    j = json.load(in_fp)
+    for f in j['features']:
+        if ('properties' not in f or pcode_key not in f['properties'] or
+                name_key not in f['properties'] or 'geometry' not in f):
+            print(f['properties'])
+            continue
+        pcode_val = f['properties'][pcode_key]
+        name_val = f['properties'][name_key]
+
+        if args['generate_id_map']:
+            args['id_fp'].write(pcode_val + ',"' + name_val + ' ' + type_name +
+                                ', ' + country + '"\n')
+        else:
+            # Write Geo JSON
+            gj = json.dumps(json.dumps(f['geometry']))
+            if pcode_val not in args['id_map']:
+                print('Missing DCID for ' + pcode_val)
                 continue
-            vals = _FILE_ID_PROP[fname]
-            print('Processing ' + fname)
-            _generate_id_map_from_file(fpath, out_fp, vals[0] + '_PCODE',
-                                       vals[0] + '_EN', vals[1], vals[2])
+            dcid = args['id_map'][pcode_val]
+            gj_mcf.write(_GJ_MCF.format(dcid=dcid, place_type=place_type,
+                                        gj=gj))
+
+            # Write PCode and containment
+            pcode_parent = pcode_val[:-2]
+            if (place_type != 'AdministrativeArea1' and
+                    pcode_parent in args['id_map']):
+                id_mcf_str = _ID_CONTAINS_MCF.format(
+                    dcid=dcid,
+                    place_type=place_type,
+                    pcode=pcode_val,
+                    parent=args['id_map'][pcode_parent])
+            else:
+                id_mcf_str = _ID_MCF.format(dcid=dcid,
+                                            place_type=place_type,
+                                            pcode=pcode_val)
+            id_mcf.write(id_mcf_str)
+
+    if not args['generate_id_map']:
+        gj_mcf.close()
+        id_mcf.close()
 
 
-def _generate_id_map_from_file(in_file, out_fp, id_key,
-                               name_key, place_type, country):
-    with open(os.path.join(in_file), 'r') as fin:
-        j = json.load(fin)
-        for f in j['features']:
-            if ('properties' not in f or id_key not in f['properties'] or
-                    name_key not in f['properties']):
-                print(f['properties'])
+def _process(in_pattern, args):
+    for fpath in glob.glob(in_pattern):
+        fname = os.path.basename(fpath)
+        if fname not in _FILE_METADATA:
+            continue
+        print('Processing ' + fname)
+        with open(os.path.join(fpath), 'r') as in_fp:
+            _process_file(in_fp, _FILE_METADATA[fname], args)
+
+
+def _generate_mcf(in_pattern, id_file, out_dir):
+    id_map = {}
+    with open(id_file, 'r') as id_fp:
+        csvr = csv.DictReader(id_fp)
+        for row in csvr:
+            if not row['dcid']:
                 continue
-            id_val = f['properties'][id_key]
-            name_val = f['properties'][name_key]
-            out_fp.write(id_val + ',"' + name_val + ' ' +
-                         place_type + ', ' + country + '"\n')
+            id_map[row['ochaPCode']] = row['dcid']
+    _process(in_pattern, {
+        'generate_id_map': False,
+        'id_map': id_map,
+        'out_dir': out_dir
+    })
+
+
+def _generate_id_map(in_pattern, out_dir):
+    with open(os.path.join(out_dir, 'id_map.csv'), 'w') as id_fp:
+        id_fp.write('ochaPCode,name\n')
+        _process(in_pattern, {'generate_id_map': True, 'id_fp': id_fp})
 
 
 def main(_):
-    generate_id_map(FLAGS.ocha_input_geojson_pattern, FLAGS.ocha_output_dir)
+    if FLAGS.ocha_generate_id_map:
+        _generate_id_map(FLAGS.ocha_input_geojson_pattern,
+                         FLAGS.ocha_output_dir)
+    else:
+        _generate_mcf(FLAGS.ocha_input_geojson_pattern,
+                      FLAGS.ocha_resolved_id_map, FLAGS.ocha_output_dir)
 
 
 if __name__ == "__main__":

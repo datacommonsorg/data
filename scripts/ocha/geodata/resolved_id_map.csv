@@ -104,7 +104,7 @@ NP0324,"Kabhrepalanchok District, Nepal",wikidataId/Q28569,
 NP0771,"Kailali District, Nepal",wikidataId/Q28153,
 NP0664,"Kalikot District, Nepal",wikidataId/Q28102,
 NP0772,"Kanchanpur District, Nepal",wikidataId/Q28981,
-NP0549,"Kapilbastu District, Nepal",,Missing dcid for placeId ChIJzUvChrT6ljkRQFGK03G0030
+NP0549,"Kapilbastu District, Nepal",wikidataId/Q28574,Missing dcid for placeId ChIJzUvChrT6ljkRQFGK03G0030
 NP0439,"Kaski District, Nepal",wikidataId/Q28436,
 NP0327,"Kathmandu District, Nepal",wikidataId/Q797472,
 NP0112,"Khotang District, Nepal",wikidataId/Q28599,
@@ -125,7 +125,7 @@ NP0546,"Palpa District, Nepal",wikidataId/Q28440,
 NP0102,"Panchthar District, Nepal",wikidataId/Q28155,
 NP0442,"Parbat District, Nepal",wikidataId/Q28421,
 NP0234,"Parsa District, Nepal",wikidataId/Q28625,
-NP0555,"Pyuthan District, Nepal",,Missing dcid for placeId ChIJBeOw7ojKlzkRc7WOa0daOTM
+NP0555,"Pyuthan District, Nepal",wikidataId/Q28094,Missing dcid for placeId ChIJBeOw7ojKlzkRc7WOa0daOTM
 NP0321,"Ramechhap District, Nepal",wikidataId/Q28611,
 NP0329,"Rasuwa District, Nepal",wikidataId/Q28605,
 NP0232,"Rautahat District, Nepal",wikidataId/Q28098,
@@ -148,13 +148,13 @@ NP0440,"Tanahu District, Nepal",wikidataId/Q28446,
 NP0101,"Taplejung District, Nepal",wikidataId/Q28590,
 NP0108,"Terhathum District, Nepal",wikidataId/Q28585,
 NP0114,"Udayapur District, Nepal",wikidataId/Q28582,
-NP01,"Province 1 Province, Nepal",,Missing dcid for placeId ChIJJTMWst7W6DkRYeNF5qo7HsY
-NP02,"Province 2 Province, Nepal",,Missing dcid for placeId ChIJ3VcY0zB-7DkR4ZeNT1Gt-QQ
-NP03,"Bagmati Province, Nepal",wikidataId/Q9046,
-NP04,"Gandaki Province, Nepal",wikidataId/Q9133,
-NP05,"Lumbini Province, Nepal",wikidataId/Q9172,
-NP06,"Karnali Province, Nepal",wikidataId/Q9164,
-NP07,"Sudurpaschim Province, Nepal",,Missing dcid for placeId ChIJm4QKVy1ZoTkR6IGi80pLKog
+NP01,"Province 1 Province, Nepal",wikidataId/Q25104008,Missing dcid for placeId ChIJJTMWst7W6DkRYeNF5qo7HsY
+NP02,"Province 2 Province, Nepal",wikidataId/Q25104009,Missing dcid for placeId ChIJ3VcY0zB-7DkR4ZeNT1Gt-QQ
+NP03,"Bagmati Province, Nepal",wikidataId/Q25104015,
+NP04,"Gandaki Province, Nepal",wikidataId/Q25104016,
+NP05,"Lumbini Province, Nepal",wikidataId/Q25104014,
+NP06,"Karnali Province, Nepal",wikidataId/Q25104017,
+NP07,"Sudurpaschim Province, Nepal",wikidataId/Q25104019,Missing dcid for placeId ChIJm4QKVy1ZoTkR6IGi80pLKog
 PK7,"Balochistan Province, Pakistan",wikidataId/Q163239,
 PK5,"Federal Capital Territory Province, Pakistan",wikidataId/Q848613,
 PK2,"Khyber Pakhtunkhwa Province, Pakistan",wikidataId/Q183314,
@@ -182,13 +182,13 @@ PK705,"Dera Bugti District, Pakistan",wikidataId/Q2315565,
 PK607,"Dera Ghazi Khan District, Pakistan",wikidataId/Q2315476,
 PK207,"Dera Ismail Khan District, Pakistan",wikidataId/Q284210,
 PK608,"Faisalabad District, Pakistan",wikidataId/Q173985,
-PK239,"FR Bannu District, Pakistan",wikidataId/Q3030995,
-PK240,"FR Dera Ismail Khan District, Pakistan",wikidataId/Q284210,
+PK239,"FR Bannu District, Pakistan",,
+PK240,"FR Dera Ismail Khan District, Pakistan",,
 PK241,"FR Kohat District, Pakistan",,Missing dcid for placeId ChIJg_aHFdDn2DgRykB7TukCbxg
 PK242,"FR Lakki Marwat District, Pakistan",,Missing dcid for placeId ChIJG-xv6jYKKDkR11B49R5vDUE
 PK243,"FR Peshawar District, Pakistan",,Missing dcid for placeId ChIJwZkbfUDY2DgRqAY1WTcUfj8
 PK244,"FR Tank District, Pakistan",,Missing dcid for placeId ChIJLZgr-s5wKDkRxpbt2fgihVM
-PK803,"Ghotki District, Pakistan",,Missing dcid for placeId ChIJOXuXQfOqNzkR4bV6r_stRDw
+PK803,"Ghotki District, Pakistan",wikidataId/Q2418935,Missing dcid for placeId ChIJOXuXQfOqNzkR4bV6r_stRDw
 PK609,"Gujranwala District, Pakistan",wikidataId/Q243322,
 PK610,"Gujrat District, Pakistan",wikidataId/Q929062,
 PK706,"Gwadar District, Pakistan",wikidataId/Q2081818,
@@ -244,13 +244,13 @@ PK235,"Mohmand District, Pakistan",wikidataId/Q1579737,
 PK622,"Multan District, Pakistan",wikidataId/Q185453,
 PK721,"Musakhel District, Pakistan",wikidataId/Q2315489,
 PK623,"Muzaffargarh District, Pakistan",wikidataId/Q12156132,
-PK624,"Nankana Sahib District, Pakistan",,Missing dcid for placeId ChIJAXflv4acGDkRvb-zZdg22ew
+PK624,"Nankana Sahib District, Pakistan",wikidataId/Q2503781,Missing dcid for placeId ChIJAXflv4acGDkRvb-zZdg22ew
 PK625,"Narowal District, Pakistan",wikidataId/Q2419016,
 PK722,"Nasirabad District, Pakistan",wikidataId/Q2315447,
 PK813,"Naushahro Feroze District, Pakistan",wikidataId/Q63711,
 PK236,"North Waziristan District, Pakistan",wikidataId/Q1915545,
 PK218,"Nowshera District, Pakistan",wikidataId/Q2003745,
-PK723,"Nushki District, Pakistan",,Missing dcid for placeId ChIJe2WmdlH60T4R8vtzPcIAOic
+PK723,"Nushki District, Pakistan",wikidataId/Q2427113,Missing dcid for placeId ChIJe2WmdlH60T4R8vtzPcIAOic
 PK626,"Okara District, Pakistan",wikidataId/Q968211,
 PK237,"Orakzai District, Pakistan",wikidataId/Q2580389,
 PK627,"Pakpattan District, Pakistan",wikidataId/Q121203,
@@ -267,7 +267,7 @@ PK814,"Sanghar District, Pakistan",wikidataId/Q1777286,
 PK632,"Sargodha District, Pakistan",wikidataId/Q855997,
 PK816,"Shaheed Benazirabad District, Pakistan",wikidataId/Q64170,
 PK220,"Shangla District, Pakistan",wikidataId/Q2379122,
-PK727,"Sheerani District, Pakistan",,Missing dcid for placeId ChIJsSZk55HbKDkRSaIqPEa7pTM
+PK727,"Sheerani District, Pakistan",wikidataId/Q2414501,Missing dcid for placeId ChIJsSZk55HbKDkRSaIqPEa7pTM
 PK633,"Sheikhupura District, Pakistan",wikidataId/Q2503836,
 PK817,"Shikarpur District, Pakistan",wikidataId/Q2315433,
 PK634,"Sialkot District, Pakistan",wikidataId/Q643883,
