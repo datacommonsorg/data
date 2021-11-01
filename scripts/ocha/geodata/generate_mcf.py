@@ -17,6 +17,7 @@ import csv
 import glob
 import os
 import json
+from shapely import geometry
 from absl import app
 from absl import flags
 
@@ -37,7 +38,7 @@ flags.DEFINE_boolean(
 _GJ_MCF = """
 Node: dcid:{dcid}
 typeOf: dcs:{place_type}
-geoJsonCoordinates: {gj}
+{gj_prop}: {gj_val}
 """
 
 _ID_MCF = """
@@ -69,6 +70,11 @@ _FILE_METADATA = {
 }
 
 
+# Threshold to DP level map, from
+# scripts/us_census/geojsons_low_res/generate_mcf.py
+_DP_LEVEL_MAP = {1: 0.01, 2: 0.03, 3: 0.05}
+
+
 def _process_file(in_fp, md, args):
     pcode_key = md[0] + '_PCODE'
     name_key = md[0] + '_EN'
@@ -79,6 +85,9 @@ def _process_file(in_fp, md, args):
     if not args['generate_id_map']:
         fname = '_'.join([country, place_type, 'GeoJSON']) + '.mcf'
         gj_mcf = open(os.path.join(args['out_dir'], fname), 'w')
+
+        fname = '_'.join([country, place_type, 'GeoJSON_Simplified']) + '.mcf'
+        simplified_gj_mcf = open(os.path.join(args['out_dir'], fname), 'w')
 
         fname = '_'.join([country, place_type, 'PCode']) + '.mcf'
         id_mcf = open(os.path.join(args['out_dir'], fname), 'w')
@@ -103,7 +112,17 @@ def _process_file(in_fp, md, args):
                 continue
             dcid = args['id_map'][pcode_val]
             gj_mcf.write(_GJ_MCF.format(dcid=dcid, place_type=place_type,
-                                        gj=gj))
+                                        gj_prop='geoJsonCoordinates',
+                                        gj_val=gj))
+
+            poly = geometry.shape(f['geometry'])
+            for dp, tolerance in _DP_LEVEL_MAP.items():
+                spoly = poly.simplify(tolerance)
+                gjs = json.dumps(json.dumps(geometry.mapping(spoly)))
+                simplified_gj_mcf.write(_GJ_MCF.format(
+                    dcid=dcid, place_type=place_type,
+                    gj_prop='geoJsonCoordinatesDP' + str(dp),
+                    gj_val=gjs))
 
             # Write PCode and containment
             pcode_parent = pcode_val[:-2]
@@ -122,6 +141,7 @@ def _process_file(in_fp, md, args):
 
     if not args['generate_id_map']:
         gj_mcf.close()
+        simplified_gj_mcf.close()
         id_mcf.close()
 
 
