@@ -697,7 +697,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over": {
-        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household",
+        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -709,7 +709,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!RESIDENCE 1 YEAR AGO!!Civilian noninstitutionalized population 1 year and over": {
-        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household",
+        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -721,7 +721,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Same house": {
-        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_SameHouse1YearAgo",
+        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_SameHouse1YearAgo",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -734,7 +734,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Same house": {
-        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_SameHouse1YearAgo",
+        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_SameHouse1YearAgo",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -747,7 +747,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Different House in the U.S.": {
-        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInTheUS",
+        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInTheUS",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -760,7 +760,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Different House in the U.S.": {
-        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInTheUS",
+        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInTheUS",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -773,7 +773,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Different House in the U.S.!!Same county": {
-        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInSameCounty",
+        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInSameCounty",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -786,7 +786,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Different House in the U.S.!!Same county": {
-        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInSameCounty",
+        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInSameCounty",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -799,7 +799,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Different House in the U.S.!!Different county": {
-        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCounty",
+        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInDifferentCounty",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -812,7 +812,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Different House in the U.S.!!Different county": {
-        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCounty",
+        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInDifferentCounty",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -825,7 +825,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Different House in the U.S.!!Different county!!Same state": {
-        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCountySameState",
+        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInDifferentCountySameState",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -838,7 +838,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Different House in the U.S.!!Different county!!Same state": {
-        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCountySameState",
+        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInDifferentCountySameState",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -851,7 +851,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Different House in the U.S.!!Different county!!Different state": {
-        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCountyDifferentState",
+        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInDifferentCountyDifferentState",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -864,7 +864,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Different House in the U.S.!!Different county!!Different state": {
-        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCountyDifferentState",
+        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInDifferentCountyDifferentState",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -877,7 +877,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Abroad": {
-        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseAbroad",
+        "Node": "dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseAbroad",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -890,7 +890,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Abroad": {
-        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseAbroad",
+        "Node": "dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseAbroad",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -925,7 +925,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Less than high school graduate": {
-        "Node": "dcid:Count_Person_25OrMoreYears_LessThanHighSchoolGraduate_NoHealthInsurance",
+        "Node": "dcid:Count_Person_25OrMoreYears_EducationalAttainmentLessThanHighSchoolGraduate_NoHealthInsurance",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -937,7 +937,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Less than high school graduate": {
-        "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears_LessThanHighSchoolGraduate_NoHealthInsurance",
+        "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentLessThanHighSchoolGraduate_NoHealthInsurance",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -949,7 +949,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!High school graduate (includes equivalency)": {
-        "Node": "dcid:Count_Person_25OrMoreYears_HighSchoolGraduateIncludesEquivalency_NoHealthInsurance",
+        "Node": "dcid:Count_Person_25OrMoreYears_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_NoHealthInsurance",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -961,7 +961,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!High school graduate (includes equivalency)": {
-        "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears_HighSchoolGraduateIncludesEquivalency_NoHealthInsurance",
+        "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_NoHealthInsurance",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -973,7 +973,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Some college or associate's degree": {
-        "Node": "dcid:Count_Person_25OrMoreYears_SomeCollegeOrAssociatesDegree_NoHealthInsurance",
+        "Node": "dcid:Count_Person_25OrMoreYears_EducationalAttainmentSomeCollegeOrAssociatesDegree_NoHealthInsurance",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -985,7 +985,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Some college or associate's degree": {
-        "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears_SomeCollegeOrAssociatesDegree_NoHealthInsurance",
+        "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentSomeCollegeOrAssociatesDegree_NoHealthInsurance",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -997,7 +997,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Bachelor's degree or higher": {
-        "Node": "dcid:Count_Person_25OrMoreYears_BachelorsDegreeOrHigher_NoHealthInsurance",
+        "Node": "dcid:Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_NoHealthInsurance",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1009,7 +1009,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Bachelor's degree or higher": {
-        "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears_BachelorsDegreeOrHigher_NoHealthInsurance",
+        "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_NoHealthInsurance",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1261,7 +1261,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!Private for-profit wage and salary workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_PaidWorker_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfitEstablishment_NoHealthInsurance_PaidWorker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1275,7 +1275,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!Private for-profit wage and salary workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_PaidWorker_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfitEstablishment_NoHealthInsurance_PaidWorker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1289,7 +1289,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Employee of private company workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_PaidEmployee_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfitEstablishment_NoHealthInsurance_PaidEmployee_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1303,7 +1303,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Employee of private company workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_PaidEmployee_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfitEstablishment_NoHealthInsurance_PaidEmployee_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1317,7 +1317,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_IncorporatedBusinessOwner_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfitEstablishment_NoHealthInsurance_IncorporatedBusinessOwner_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1331,7 +1331,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_IncorporatedBusinessOwner_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfitEstablishment_NoHealthInsurance_IncorporatedBusinessOwner_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1345,7 +1345,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!Private not-for-profit wage and salary workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedNotForProfit_NoHealthInsurance_PaidWorker_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedNotForProfitEstablishment_NoHealthInsurance_PaidWorker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1359,7 +1359,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!Private not-for-profit wage and salary workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedNotForProfit_NoHealthInsurance_PaidWorker_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedNotForProfitEstablishment_NoHealthInsurance_PaidWorker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1373,7 +1373,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!Local government workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_LocalGovernmentOwned_NoHealthInsurance_Worker_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_LocalGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1387,7 +1387,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!Local government workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_LocalGovernmentOwned_NoHealthInsurance_Worker_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_LocalGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1401,7 +1401,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!State government workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_StateGovernmentOwned_NoHealthInsurance_Worker_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_StateGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1415,7 +1415,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!State government workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_StateGovernmentOwned_NoHealthInsurance_Worker_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_StateGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1429,7 +1429,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!Federal government workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_FederalGovernmentOwned_NoHealthInsurance_Worker_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_FederalGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1443,7 +1443,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!Federal government workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_FederalGovernmentOwned_NoHealthInsurance_Worker_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_FederalGovernmentOwnedEstablishment_NoHealthInsurance_Worker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1457,7 +1457,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!Self-employed workers in own not incorporated business workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwned_NoHealthInsurance_UnincorporatedBusinessOwner_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedEstablishment_NoHealthInsurance_UnincorporatedBusinessOwner_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1471,7 +1471,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!Self-employed workers in own not incorporated business workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwned_NoHealthInsurance_UnincorporatedBusinessOwner_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedEstablishment_NoHealthInsurance_UnincorporatedBusinessOwner_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1485,7 +1485,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!CLASS OF WORKER!!Unpaid family workers": {
-        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwned_NoHealthInsurance_UnpaidFamilyWorker_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_PrivatelyOwnedEstablishment_NoHealthInsurance_UnpaidFamilyWorker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1499,7 +1499,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!CLASS OF WORKER!!Unpaid family workers": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwned_NoHealthInsurance_UnpaidFamilyWorker_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedEstablishment_NoHealthInsurance_UnpaidFamilyWorker_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1851,7 +1851,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!OCCUPATION!!Management, business, science, and arts occupations": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1864,7 +1864,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!OCCUPATION!!Management, business, science, and arts occupations": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1877,7 +1877,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!OCCUPATION!!Service occupations": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1890,7 +1890,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!OCCUPATION!!Service occupations": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1903,7 +1903,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!OCCUPATION!!Sales and office occupations": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1916,7 +1916,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!OCCUPATION!!Sales and office occupations": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1929,7 +1929,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1942,7 +1942,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -1955,7 +1955,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!OCCUPATION!!Production, transportation, and material moving occupations": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5_Worker",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -1968,7 +1968,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!OCCUPATION!!Production, transportation, and material moving occupations": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5_Worker",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -2005,7 +2005,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$1 to $4,999 or loss": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_4999OrLessUSDollar_WithEarnings",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf4999OrLessUSDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -2018,7 +2018,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$1 to $4,999 or loss": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_4999OrLessUSDollar_WithEarnings",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf4999OrLessUSDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -2031,7 +2031,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$5,000 to $14,999": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_5000To14999USDollar_WithEarnings",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf5000To14999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -2044,7 +2044,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$5,000 to $14,999": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_5000To14999USDollar_WithEarnings",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf5000To14999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -2057,7 +2057,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$15,000 to $24,999": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_15000To24999USDollar_WithEarnings",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf15000To24999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -2070,7 +2070,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$15,000 to $24,999": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_15000To24999USDollar_WithEarnings",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf15000To24999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -2083,7 +2083,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$25,000 to $34,999": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_25000To34999USDollar_WithEarnings",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf25000To34999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -2096,7 +2096,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$25,000 to $34,999": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_25000To34999USDollar_WithEarnings",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf25000To34999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -2109,7 +2109,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$35,000 to $49,999": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_35000To49999USDollar_WithEarnings",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf35000To49999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -2122,7 +2122,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$35,000 to $49,999": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_35000To49999USDollar_WithEarnings",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf35000To49999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -2135,7 +2135,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$50,000 to $74,999": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_50000To74999USDollar_WithEarnings",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf50000To74999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -2148,7 +2148,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$50,000 to $74,999": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_50000To74999USDollar_WithEarnings",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf50000To74999USDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -2161,7 +2161,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$75,000 or more": {
-        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_75000OrMoreUSDollar_WithEarnings",
+        "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf75000OrMoreUSDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Person",
@@ -2174,7 +2174,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$75,000 or more": {
-        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_75000OrMoreUSDollar_WithEarnings",
+        "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf75000OrMoreUSDollar_WithEarnings",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Person",
@@ -2216,7 +2216,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!Under $25,000": {
-        "Node": "dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar",
+        "Node": "dcid:Count_Household_NoHealthInsurance_IncomeOf25000OrLessUSDollar",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Household",
@@ -2225,7 +2225,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!Under $25,000": {
-        "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar",
+        "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_IncomeOf25000OrLessUSDollar",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Household",
@@ -2234,7 +2234,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$25,000 to $49,999": {
-        "Node": "dcid:Count_Household_NoHealthInsurance_25000To49999USDollar",
+        "Node": "dcid:Count_Household_NoHealthInsurance_IncomeOf25000To49999USDollar",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Household",
@@ -2243,7 +2243,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$25,000 to $49,999": {
-        "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar",
+        "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_IncomeOf25000To49999USDollar",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Household",
@@ -2252,7 +2252,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$75,000 to $99,999": {
-        "Node": "dcid:Count_Household_NoHealthInsurance_75000To99999USDollar",
+        "Node": "dcid:Count_Household_NoHealthInsurance_IncomeOf75000To99999USDollar",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Household",
@@ -2261,7 +2261,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$75,000 to $99,999": {
-        "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar",
+        "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_IncomeOf75000To99999USDollar",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Household",
@@ -2270,7 +2270,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Estimate!!$100,000 and over": {
-        "Node": "dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
+        "Node": "dcid:Count_Household_NoHealthInsurance_IncomeOf100000OrMoreUSDollar",
         "measuredProperty": "dcid:count",
         "statType": "dcid:measuredValue",
         "populationType": "dcid:Household",
@@ -2279,7 +2279,7 @@
         "typeOf": "dcs:StatisticalVariable"
     },
     "Uninsured Population!!Margin of Error!!$100,000 and over": {
-        "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar",
+        "Node": "dcid:MarginOfError_Count_Household_NoHealthInsurance_IncomeOf100000OrMoreUSDollar",
         "measuredProperty": "dcid:count",
         "statType": "dcid:marginOfError",
         "populationType": "dcid:Household",
