@@ -99,6 +99,13 @@ def get_mcf(series_lst):
                 + ' {property_dict[property_dict.keys()[i]}\n'
         file.write(mcf)
     
+def process(country, max_age, per_page, path):
+    series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(max_age)
+               for gender in ['MA', 'FE']]
+    get_mcf(series)
+    df = get_df(series, per_page, country)
+    get_csv(df, path)
+
 def main(argv):
     series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(FLAGS.age)
                for gender in (FLAGS.gender)]
