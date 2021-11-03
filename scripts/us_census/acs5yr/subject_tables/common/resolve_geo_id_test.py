@@ -34,7 +34,9 @@ _TEST_GEOIDS = {
     '9600000US0605940': '',  # Bret Harte Union High School District
     '9700000US5103000':
         '',  # Portsmouth City Public Schools, Virginia (9700000US5103000)
-    '400C100US22069': ''  # Dalton, GA Urbanized Area (2010)[400C100US22069]
+    '400C100US22069': '',  # Dalton, GA Urbanized Area (2010)[400C100US22069] 
+    '1600000US1377652': 'geoId/1377652',  # Tucker city, Georgia 
+    '1600000US1377625': 'geoId/1377652'  # Tucker city, Georgia
 }
 
 
