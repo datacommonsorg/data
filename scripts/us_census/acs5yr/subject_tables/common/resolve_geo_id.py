@@ -66,7 +66,7 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     '010': 'country/USA'
 }
 
-_US_REPLACE_GEO_CODE_MAP = {
+_US_GEO_CODE_UPDATE_MAP = {
     # Replacing/Updating GeoID given in the data. Required in case of wrong geoid mentioned in the data.
     # Reference : https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2017/geography-changes.html
     # Invalid fips code for Tucker City 1377625 replaced by 1377652
@@ -85,8 +85,8 @@ def convert_to_place_dcid(geoid_str):
     ## Based on summary level, generate place dcid
     if summary_level in _US_SUMMARY_LEVEL_GEO_PREFIX_MAP:
         ## Update fips code
-        if fips_code in _US_REPLACE_GEO_CODE_MAP:
-            fips_code = _US_REPLACE_GEO_CODE_MAP[fips_code]
+        if fips_code in _US_GEO_CODE_UPDATE_MAP:
+            fips_code = _US_GEO_CODE_UPDATE_MAP[fips_code]
         return _US_SUMMARY_LEVEL_GEO_PREFIX_MAP[summary_level] + fips_code
     else:
         ## if not an interesting summary level
