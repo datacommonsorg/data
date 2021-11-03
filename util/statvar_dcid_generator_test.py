@@ -437,6 +437,86 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = 'Count_Establishment_NAICSConstruction'
         self.assertEqual(dcid, expected_dcid)
 
+    def test_soc_name_generation(self):
+        stat_var_dict1 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'healthInsurance': 'dcid:NoHealthInsurance',
+            'occupation': 'dcid:SOCv2018/highLevelAggregation-5',
+            'armedForcesStatus': 'dcid:Civilian',
+            'institutionalization': 'dcid:USC_NonInstitutionalized',
+            'age': '[16 - Years]',
+            'workerStatus': 'dcid:Worker',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        ignore_props = ['armedForcesStatus', 'institutionalization']
+        dcid = statvar_dcid_generator.get_statvar_dcid(
+            stat_var_dict1, ignore_props=ignore_props)
+        expected_dcid = ('Count_Person_16OrMoreYears_NoHealthInsurance_'
+                         'SOCProductionTransportationMaterialMoving'
+                         'Occupation_Worker')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict2 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'occupation': 'dcid:SOCv2018/highLevelAggregation-3',
+            'workerStatus': 'dcid:Worker',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict2)
+        expected_dcid = 'Count_Person_SOCSalesOfficeOccupation_Worker'
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict3 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'occupation': 'dcid:SOCv2018/highLevelAggregation-1',
+            'age': '[16 - Years]',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict3)
+        expected_dcid = ('Count_Person_16OrMoreYears_'
+                         'SOCManagementBusinessScienceArtsOccupation')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict4 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'healthInsurance': 'dcid:NoHealthInsurance',
+            'occupation': 'dcid:SOCv2018/highLevelAggregation-4',
+            'workerStatus': 'dcid:Worker',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict4)
+        expected_dcid = ('Count_Person_NoHealthInsurance_'
+                         'SOCNaturalResourcesConstructionMaintenance'
+                         'Occupation_Worker')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict5 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'healthInsurance': 'dcid:NoHealthInsurance',
+            'occupation': 'dcid:SOCv2018/intermediateAggregation-5',
+            'armedForcesStatus': 'dcid:Civilian',
+            'institutionalization': 'dcid:USC_NonInstitutionalized',
+            'age': '[16 - Years]',
+            'workerStatus': 'dcid:Worker',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        ignore_props = ['armedForcesStatus', 'institutionalization']
+        dcid = statvar_dcid_generator.get_statvar_dcid(
+            stat_var_dict5, ignore_props=ignore_props)
+        expected_dcid = ('Count_Person_16OrMoreYears_NoHealthInsurance_'
+                         'SOCServiceOccupation_Worker')
+        self.assertEqual(dcid, expected_dcid)
+
 
 if __name__ == '__main__':
     unittest.main()

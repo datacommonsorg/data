@@ -1852,7 +1852,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -1865,7 +1865,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -1878,7 +1878,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -1891,7 +1891,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -1904,7 +1904,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -1917,7 +1917,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -1930,7 +1930,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -1943,7 +1943,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -1956,7 +1956,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -1969,7 +1969,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -4305,7 +4305,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -4318,7 +4318,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -4331,7 +4331,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -4344,7 +4344,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -4357,7 +4357,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -4370,7 +4370,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -4383,7 +4383,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -4396,7 +4396,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -4409,7 +4409,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -4422,7 +4422,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -6758,7 +6758,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -6771,7 +6771,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -6784,7 +6784,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -6797,7 +6797,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -6810,7 +6810,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -6823,7 +6823,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -6836,7 +6836,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -6849,7 +6849,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -6862,7 +6862,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -6875,7 +6875,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -9211,7 +9211,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -9224,7 +9224,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -9237,7 +9237,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -9250,7 +9250,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -9263,7 +9263,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -9276,7 +9276,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -9289,7 +9289,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -9302,7 +9302,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -9315,7 +9315,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Estimate!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -9328,7 +9328,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Uninsured Population!!Margin of Error!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -11664,7 +11664,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Management, business, science, and arts occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -11677,7 +11677,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Management, business, science, and arts occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -11690,7 +11690,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Service occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -11703,7 +11703,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Service occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -11716,7 +11716,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Sales and office occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -11729,7 +11729,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Sales and office occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -11742,7 +11742,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -11755,7 +11755,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -11768,7 +11768,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -11781,7 +11781,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -14117,7 +14117,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Management, business, science, and arts occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -14130,7 +14130,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Management, business, science, and arts occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -14143,7 +14143,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Service occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -14156,7 +14156,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Service occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -14169,7 +14169,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Sales and office occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -14182,7 +14182,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Sales and office occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -14195,7 +14195,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -14208,7 +14208,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -14221,7 +14221,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -14234,7 +14234,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured MOE!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -16570,7 +16570,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -16583,7 +16583,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Management, business, science, and arts occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -16596,7 +16596,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -16609,7 +16609,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Service occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCServiceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -16622,7 +16622,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -16635,7 +16635,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Sales and office occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCSalesOfficeOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -16648,7 +16648,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -16661,7 +16661,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",
@@ -16674,7 +16674,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:measuredValue",
             "populationType": "dcid:Person",
@@ -16687,7 +16687,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over!!OCCUPATION!!Production, transportation, and material moving occupations": {
-            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5Occupation_Worker",
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCProductionTransportationMaterialMovingOccupation_Worker",
             "measuredProperty": "dcid:count",
             "statType": "dcid:marginOfError",
             "populationType": "dcid:Person",

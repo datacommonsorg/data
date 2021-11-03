@@ -15,6 +15,14 @@
 
 import copy
 import re
+import os
+import sys
+
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '.')) # For soc_codes_names
+
+from soc_codes_names import SOC_MAP
 
 # Global constants
 # Regex to match the quantity notations - [value quantity], [quantity value]
@@ -341,6 +349,30 @@ def _naics_code_to_name(naics_val: str) -> str:
         return processed_str
     return None
 
+def _soc_code_to_name(soc_val):
+    """Converts SOCv2018 codes to their industry using the SOC_MAP from 
+    soc_codes_names.py
+
+    Args:
+        soc_val: A SOCv2018 string literal to process.
+          Expected syntax of soc_val - SOCv2018/{codes}
+    Returns:
+        A string with SOC code changed to it's occupation.
+        This string can be used in dcid generation. Returns None if the string
+        is empty.
+    """
+    if soc_val:
+        processed_str = 'SOC'
+
+        # Remove namespaces
+        soc_val = soc_val[soc_val.find(':') + 1:]
+
+        # Strip SOCv2018/
+        soc_val = soc_val.replace('SOCv2018/', '')
+
+        processed_str = processed_str + SOC_MAP[soc_val]
+        return processed_str
+    return None
 
 def _prepend_append_replace(word,
                             prepend='',
@@ -404,6 +436,8 @@ def _process_constraint_property(prop: str, value: str) -> str:
     """
     if prop == 'naics':
         name = _naics_code_to_name(value)
+    elif prop == 'occupation':
+        name = _soc_code_to_name(value)
     else:
         match1 = _QUANTITY_RANGE_REGEX_1.match(value)
         match2 = _QUANTITY_RANGE_REGEX_2.match(value)
