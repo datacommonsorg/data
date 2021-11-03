@@ -68,12 +68,12 @@ def get_csv(df_in, df_out_path):
         df2.loc[len(df2.index)] = addto_df2
     df2.to_csv(df_out_path)
     
-def get_mcf(series_lst):
+def get_mcf(series_lst, path = "World_bank_hnp_population.mcf"):
     '''
     gets mcf by splitting description and using fstrings
     '''
     nodes = []
-    with open("World_bank_hnp_population.mcf", 'w', encoding = 'utf-8') as file:
+    with open(path, 'w', encoding = 'utf-8') as file:
         mcf = ''
         for current_series in series_lst:
             print('\n'+current_series)
