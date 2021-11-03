@@ -29,7 +29,7 @@ class TestWBPopulation(unittest.TestCase):
                                        'tests/wb_population_output')
         print(f'test file path: {data_input}, output: {test_output}')
 
-        #test_counters = population.(call the functions here) ([data_input], test_output, 10000)
+        test_counters = population.process(26, test_output, 10000, "wb_hnp_pop_test.csv")
         
         for output in ['.csv', '.mcf']:
             self.assertTrue(
