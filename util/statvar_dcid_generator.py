@@ -18,11 +18,16 @@ import re
 import os
 import sys
 
+#pylint: disable=wrong-import-position
+#pylint: disable=import-error
+
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '.')) # For soc_codes_names
+sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # For soc_codes_names
 
 from soc_codes_names import SOC_MAP
+#pylint: enable=wrong-import-position
+#pylint: enable=import-error
 
 # Global constants
 # Regex to match the quantity notations - [value quantity], [quantity value]
@@ -349,8 +354,9 @@ def _naics_code_to_name(naics_val: str) -> str:
         return processed_str
     return None
 
+
 def _soc_code_to_name(soc_val):
-    """Converts SOCv2018 codes to their industry using the SOC_MAP from 
+    """Converts SOCv2018 codes to their industry using the SOC_MAP from
     soc_codes_names.py
 
     Args:
@@ -373,6 +379,7 @@ def _soc_code_to_name(soc_val):
         processed_str = processed_str + SOC_MAP[soc_val]
         return processed_str
     return None
+
 
 def _prepend_append_replace(word,
                             prepend='',

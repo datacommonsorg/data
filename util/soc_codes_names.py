@@ -13,8 +13,8 @@
 # limitations under the License.
 """SOCv2018 codes -> Occupation names"""
 
-import requests
 import re
+import requests
 
 
 def _create_soc_codes_map():
@@ -22,7 +22,7 @@ def _create_soc_codes_map():
 
     # A regex to clean SOC names. This regex catches any kind of whitespace,
     # double quotes, the string 'and', commas and the word Occupations.
-    _SOC_NAME_CLEAN_REGEX = re.compile(r'\s+|"|,|\band\b|\bOccupations\b')
+    soc_name_clean_regex = re.compile(r'\s+|"|,|\band\b|\bOccupations\b')
 
     soc_map = dict()
     soc_mcf = requests.get(
@@ -39,7 +39,7 @@ def _create_soc_codes_map():
         # Extracting occupation from name
         if line.startswith('name'):
             occupation = line.split(':')[1].strip()
-            occupation = _SOC_NAME_CLEAN_REGEX.sub('', occupation)
+            occupation = soc_name_clean_regex.sub('', occupation)
             soc_map[code] = occupation  # Assign occupation to code from dcid
 
     return soc_map

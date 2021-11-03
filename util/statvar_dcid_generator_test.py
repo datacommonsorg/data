@@ -257,56 +257,6 @@ class TestStatVarDcidGenerator(unittest.TestCase):
                          'AsAFractionOf_Count_Person_25To64Years')
         self.assertEqual(dcid, expected_dcid)
 
-    def test_naics_name_generation(self):
-        stat_var_dict1 = {
-            'typeOf': 'dcs:StatisticalVariable',
-            'populationType': 'dcs:Person',
-            'measuredProperty': 'dcs:count',
-            'statType': 'dcs:measuredValue',
-            'naics': 'dcid:NAICS/54-56',
-            'age': '[16 - Years]',
-            'healthInsurance': 'dcs:NoHealthInsurance'
-        }
-        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict1)
-        expected_dcid = (
-            'Count_Person_16OrMoreYears_NoHealthInsurance_'
-            'NAICSProfessionalScientificTechnicalServices'
-            'ManagementOfCompaniesEnterprises'
-            'AdministrativeSupportWasteManagementRemediationServices')
-        self.assertEqual(dcid, expected_dcid)
-
-        stat_var_dict2 = {
-            'populationType': 'dcs:Person',
-            'measuredProperty': 'dcs:count',
-            'statType': 'dcs:measuredValue',
-            'naics': 'NAICS/11_21',
-            'race': 'TwoOrMoreRaces'
-        }
-        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict2)
-        expected_dcid = ('Count_Person_NAICSAgricultureForestryFishingHunting'
-                         'MiningQuarryingOilGasExtraction_TwoOrMoreRaces')
-        self.assertEqual(dcid, expected_dcid)
-
-        stat_var_dict3 = {
-            'populationType': 'USCEstablishment',
-            'measuredProperty': 'wagesAnnual',
-            'statType': 'dcs:measuredValue',
-            'naics': 'NAICS/44-45_51',
-        }
-        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict3)
-        expected_dcid = 'WagesAnnual_Establishment_NAICSRetailTradeInformation'
-        self.assertEqual(dcid, expected_dcid)
-
-        stat_var_dict4 = {
-            'populationType': 'BLSEstablishment',
-            'measuredProperty': 'count',
-            'statType': 'dcs:measuredValue',
-            'naics': 'NAICS/23',
-        }
-        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict4)
-        expected_dcid = 'Count_Establishment_NAICSConstruction'
-        self.assertEqual(dcid, expected_dcid)
-
     def test_legacy_mapping(self):
         stat_var_dict = {
             'measuredProperty': 'dcid:count',
