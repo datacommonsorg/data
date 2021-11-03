@@ -102,7 +102,7 @@ def get_mcf(series_lst, path = "World_bank_hnp_population.mcf"):
 def process(country, max_age, per_page, path):
     series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(max_age)
                for gender in ['MA', 'FE']]
-    get_mcf(series)
+    get_mcf(series, (path.split(".")[0] + ".mcf"))
     df = get_df(series, per_page, country)
     get_csv(df, path)
 
