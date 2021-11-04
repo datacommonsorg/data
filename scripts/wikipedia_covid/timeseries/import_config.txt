@@ -1,0 +1,9 @@
+
+import: {
+  import_name: "WikipediaCOVID19"
+  provenance_url: "https://www.wikipedia.org"
+  provenance_description: "Wikipedia Time Series Tables for Places Worldwide."
+  mcf_url: "gs://resolved_mcf/external_tables/WikipediaCOVID19/nodes.mcf"
+  start_date: "2020-01-21"
+  update_frequency: "P1D"
+}
