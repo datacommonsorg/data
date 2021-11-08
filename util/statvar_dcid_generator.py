@@ -355,7 +355,7 @@ def _naics_code_to_name(naics_val: str) -> str:
     return None
 
 
-def _soc_code_to_name(soc_val):
+def _soc_code_to_name(soc_val: str) -> str:
     """Converts SOCv2018 codes to their industry using the SOC_MAP from
     soc_codes_names.py
 
