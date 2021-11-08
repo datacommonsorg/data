@@ -467,6 +467,19 @@ class TestStatVarDcidGenerator(unittest.TestCase):
                          'SOCServiceOccupation_Worker')
         self.assertEqual(dcid, expected_dcid)
 
+        # Test for code not in SOC_MAP
+        stat_var_dict6 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Person',
+            'occupation': 'SOCv2018/highLevelAggregation-99',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict6)
+        expected_dcid = ('Count_Person_'
+                         'SOCv2018/highLevelAggregation-99Occupation')
+        self.assertEqual(dcid, expected_dcid)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -361,22 +361,23 @@ def _soc_code_to_name(soc_val):
 
     Args:
         soc_val: A SOCv2018 string literal to process.
-          Expected syntax of soc_val - SOCv2018/{codes}
+          Expected syntax of soc_val - SOCv2018/{code}
     Returns:
         A string with SOC code changed to it's occupation.
-        This string can be used in dcid generation. Returns None if the string
-        is empty.
+        This string can be used in dcid generation. Returns the original string
+        if the code is not in the SOC_MAP. Returns None if the string is empty.
     """
     if soc_val:
-        processed_str = 'SOC'
+        processed_str = soc_val
 
         # Remove namespaces
-        soc_val = soc_val[soc_val.find(':') + 1:]
+        soc_val_ns_removed = soc_val[soc_val.find(':') + 1:]
 
-        # Strip SOCv2018/
-        soc_val = soc_val.replace('SOCv2018/', '')
+        # Strip SOCv2018/ to get the code
+        soc_code = soc_val_ns_removed.replace('SOCv2018/', '')
 
-        processed_str = processed_str + SOC_MAP[soc_val]
+        if soc_code in SOC_MAP:
+            processed_str = 'SOC' + SOC_MAP[soc_code]
         return processed_str
     return None
 
