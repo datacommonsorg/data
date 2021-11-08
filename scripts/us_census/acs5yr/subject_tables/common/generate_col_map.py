@@ -232,12 +232,15 @@ class GenerateColMapBase:
         # Should that be considered an error for subject tables?
         return self.column_map
 
-    def check_obs_props(self, obs_props, stat_var):
+    def check_obs_props(self, obs_props: dict, stat_var: dict) -> bool:
         """Checks for property values match in obs_props"""
         # Check for measuredProperty
-        if obs_props['mprop'] != stat_var['measuredProperty']:
-            return False
-        return True
+        if obs_props.get('mprop',
+                         'mrop') == stat_var.get('measuredProperty',
+                                                 'measuredProperty'):
+            if 'mprop' in obs_props:
+                return True
+        return False
 
     def _column_to_statvar(self, column):
         """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
