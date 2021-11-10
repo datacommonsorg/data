@@ -1,0 +1,898 @@
+Node: dcid:Count_Person_Civilian_Employed
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Civilian_Employed
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SOCManagementBusinessScienceArtsOccupation
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_SOCManagementBusinessScienceArtsOccupation
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SOCServiceOccupation
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_SOCServiceOccupation
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SOCSalesOfficeOccupation
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_SOCSalesOfficeOccupation
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SOCNaturalResourcesConstructionMaintenanceOccupation
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_SOCNaturalResourcesConstructionMaintenanceOccupation
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SOCProductionTransportationMaterialMovingOccupation
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_SOCProductionTransportationMaterialMovingOccupation
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCServiceOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCServiceOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCSalesOfficeOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCSalesOfficeOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_PaidEmployee
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCServiceOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCServiceOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCSalesOfficeOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCSalesOfficeOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_IncorporatedBusinessOwner
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCServiceOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCServiceOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCSalesOfficeOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCSalesOfficeOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_PaidWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_GovernmentOwnedEstablishment_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCManagementBusinessScienceArtsOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCManagementBusinessScienceArtsOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCServiceOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCServiceOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCSalesOfficeOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCSalesOfficeOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCProductionTransportationMaterialMovingOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCProductionTransportationMaterialMovingOccupation_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:GovernmentOwned
+workerClassification: dcid:Worker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCManagementBusinessScienceArtsOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCManagementBusinessScienceArtsOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-1
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCServiceOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCServiceOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-2
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCSalesOfficeOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCSalesOfficeOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-3
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-4
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCProductionTransportationMaterialMovingOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCProductionTransportationMaterialMovingOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+armedForcesStatus: dcid:Civilian
+employment: dcid:BLS_Employed
+occupation: dcid:SOCv2018/highLevelAggregation-5
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+

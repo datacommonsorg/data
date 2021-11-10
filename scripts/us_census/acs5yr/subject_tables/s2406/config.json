@@ -1,0 +1,282 @@
+{
+    "populationType": {
+        "_DEFAULT": "Person"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        }
+    },
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "establishmentOwnership": {
+            "Employee of private company workers": "PrivatelyOwnedForProfit",
+            "Self-employed in own incorporated business workers": "PrivatelyOwnedForProfit",
+            "Private not-for-profit wage and salary workers": "PrivatelyOwnedNotForProfit",
+            "Local, state, and federal government workers": "GovernmentOwned",
+            "Self-employed in own not incorporated business workers and unpaid family workers": "PrivatelyOwned",
+            "Employee of private company workers MOE": "PrivatelyOwnedForProfit",
+            "Self-employed in own incorporated business workers MOE": "PrivatelyOwnedForProfit",
+            "Private not-for-profit wage and salary workers MOE": "PrivatelyOwnedNotForProfit",
+            "Local, state, and federal government workers MOE": "GovernmentOwned",
+            "Self-employed in own not incorporated business workers and unpaid family workers MOE": "PrivatelyOwned"
+        },
+        "workerClassification": {
+            "Employee of private company workers": "PaidEmployee",
+            "Self-employed in own incorporated business workers": "IncorporatedBusinessOwner",
+            "Private not-for-profit wage and salary workers": "PaidWorker",
+            "Local, state, and federal government workers": "Worker",
+            "Self-employed in own not incorporated business workers and unpaid family workers": "UnincorporatedBusinessOwnerOrUnpaidFamilyWorker",
+            "Employee of private company workers MOE": "PaidEmployee",
+            "Self-employed in own incorporated business workers MOE": "IncorporatedBusinessOwner",
+            "Private not-for-profit wage and salary workers MOE": "PaidWorker",
+            "Local, state, and federal government workers MOE": "Worker",
+            "Self-employed in own not incorporated business workers and unpaid family workers MOE": "UnincorporatedBusinessOwnerOrUnpaidFamilyWorker"
+        },
+        "occupation": {
+            "Sales and office occupations": "SOCv2018/highLevelAggregation-3",
+            "Service occupations": "SOCv2018/highLevelAggregation-2",
+            "Management, business, science, and arts occupations": "SOCv2018/highLevelAggregation-1",
+            "Natural resources, construction, and maintenance occupations": "SOCv2018/highLevelAggregation-4",
+            "Production, transportation, and material moving occupations": "SOCv2018/highLevelAggregation-5"
+        },
+        "age": {
+            "Civilian employed population 16 years and over": "[16 - Years]"
+        },
+        "armedForcesStatus": {
+            "Civilian employed population 16 years and over": "Civilian"
+        },
+        "employment": {
+            "Civilian employed population 16 years and over": "BLS_Employed"
+        }
+    },
+    "enumSpecializations": {},
+    "inferredSpec": {
+        "workerClassification": {
+            "age": "[16 - Years]",
+            "workerStatus": "Worker"
+        }
+    },
+    "universePVs": [
+        {
+            "populationType": "Person",
+            "constraintProperties": [
+                "armedForcesStatus"
+            ],
+            "dependentPVs": {
+                "age": "[16 - Years]"
+            }
+        },
+        {
+            "populationType": "Person",
+            "constraintProperties": [
+                "workerClassification",
+                "establishmentOwnership"
+            ],
+            "dependentPVs": {
+                "age": "[16 - Years]",
+                "workerStatus": "Worker",
+                "employment": "BLS_Employed",
+                "armedForcesStatus": "Civilian"
+            }
+        },
+        {
+            "populationType": "Person",
+            "constraintProperties": [
+                "occupation"
+            ],
+            "dependentPVs": {
+                "age": "[16 - Years]",
+                "workerStatus": "Worker",
+                "employment": "BLS_Employed",
+                "armedForcesStatus": "Civilian"
+            }
+        }
+    ],
+    "denominators": {
+        "Estimate!!Total!!Civilian employed population 16 years and over": [
+            "Estimate!!Employee of private company workers!!Civilian employed population 16 years and over",
+            "Margin of Error!!Employee of private company workers!!Civilian employed population 16 years and over",
+            "Estimate!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over",
+            "Margin of Error!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over",
+            "Estimate!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over",
+            "Margin of Error!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over",
+            "Estimate!!Local, state, and federal government workers!!Civilian employed population 16 years and over",
+            "Margin of Error!!Local, state, and federal government workers!!Civilian employed population 16 years and over",
+            "Estimate!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over",
+            "Margin of Error!!Employee of private company workers MOE!!Civilian employed population 16 years and over",
+            "Margin of Error!!Self-employed in own incorporated business workers MOE!!Civilian employed population 16 years and over",
+            "Margin of Error!!Private not-for-profit wage and salary workers MOE!!Civilian employed population 16 years and over",
+            "Margin of Error!!Local, state, and federal government workers MOE!!Civilian employed population 16 years and over",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers MOE!!Civilian employed population 16 years and over"
+        ],
+        "Total!!Estimate!!Civilian employed population 16 years and over": [
+            "Employee of private company workers!!Estimate!!Civilian employed population 16 years and over",
+            "Employee of private company workers!!Margin of Error!!Civilian employed population 16 years and over",
+            "Self-employed in own incorporated business workers!!Estimate!!Civilian employed population 16 years and over",
+            "Self-employed in own incorporated business workers!!Margin of Error!!Civilian employed population 16 years and over",
+            "Private not-for-profit wage and salary workers!!Estimate!!Civilian employed population 16 years and over",
+            "Private not-for-profit wage and salary workers!!Margin of Error!!Civilian employed population 16 years and over",
+            "Local, state, and federal government workers!!Estimate!!Civilian employed population 16 years and over",
+            "Local, state, and federal government workers!!Margin of Error!!Civilian employed population 16 years and over",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Estimate!!Civilian employed population 16 years and over",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Margin of Error!!Civilian employed population 16 years and over"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations": [
+            "Estimate!!Employee of private company workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Employee of private company workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Estimate!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Estimate!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Estimate!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Estimate!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Employee of private company workers MOE!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers MOE!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers MOE!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Local, state, and federal government workers MOE!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers MOE!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations"
+        ],
+        "Total!!Estimate!!Management, business, science, and arts occupations": [
+            "Employee of private company workers!!Estimate!!Management, business, science, and arts occupations",
+            "Employee of private company workers!!Margin of Error!!Management, business, science, and arts occupations",
+            "Self-employed in own incorporated business workers!!Estimate!!Management, business, science, and arts occupations",
+            "Self-employed in own incorporated business workers!!Margin of Error!!Management, business, science, and arts occupations",
+            "Private not-for-profit wage and salary workers!!Estimate!!Management, business, science, and arts occupations",
+            "Private not-for-profit wage and salary workers!!Margin of Error!!Management, business, science, and arts occupations",
+            "Local, state, and federal government workers!!Estimate!!Management, business, science, and arts occupations",
+            "Local, state, and federal government workers!!Margin of Error!!Management, business, science, and arts occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Estimate!!Management, business, science, and arts occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Margin of Error!!Management, business, science, and arts occupations"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Service occupations": [
+            "Estimate!!Employee of private company workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Employee of private company workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Estimate!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Estimate!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Estimate!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Estimate!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Employee of private company workers MOE!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers MOE!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers MOE!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Local, state, and federal government workers MOE!!Civilian employed population 16 years and over!!Service occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers MOE!!Civilian employed population 16 years and over!!Service occupations"
+        ],
+        "Total!!Estimate!!Service occupations": [
+            "Employee of private company workers!!Estimate!!Service occupations",
+            "Employee of private company workers!!Margin of Error!!Service occupations",
+            "Self-employed in own incorporated business workers!!Estimate!!Service occupations",
+            "Self-employed in own incorporated business workers!!Margin of Error!!Service occupations",
+            "Private not-for-profit wage and salary workers!!Estimate!!Service occupations",
+            "Private not-for-profit wage and salary workers!!Margin of Error!!Service occupations",
+            "Local, state, and federal government workers!!Estimate!!Service occupations",
+            "Local, state, and federal government workers!!Margin of Error!!Service occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Estimate!!Service occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Margin of Error!!Service occupations"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Sales and office occupations": [
+            "Estimate!!Employee of private company workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Employee of private company workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Estimate!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Estimate!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Estimate!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Estimate!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Employee of private company workers MOE!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers MOE!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers MOE!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Local, state, and federal government workers MOE!!Civilian employed population 16 years and over!!Sales and office occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers MOE!!Civilian employed population 16 years and over!!Sales and office occupations"
+        ],
+        "Total!!Estimate!!Sales and office occupations": [
+            "Employee of private company workers!!Estimate!!Sales and office occupations",
+            "Employee of private company workers!!Margin of Error!!Sales and office occupations",
+            "Self-employed in own incorporated business workers!!Estimate!!Sales and office occupations",
+            "Self-employed in own incorporated business workers!!Margin of Error!!Sales and office occupations",
+            "Private not-for-profit wage and salary workers!!Estimate!!Sales and office occupations",
+            "Private not-for-profit wage and salary workers!!Margin of Error!!Sales and office occupations",
+            "Local, state, and federal government workers!!Estimate!!Sales and office occupations",
+            "Local, state, and federal government workers!!Margin of Error!!Sales and office occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Estimate!!Sales and office occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Margin of Error!!Sales and office occupations"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations": [
+            "Estimate!!Employee of private company workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Employee of private company workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Estimate!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Estimate!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Estimate!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Estimate!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Employee of private company workers MOE!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers MOE!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers MOE!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Local, state, and federal government workers MOE!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers MOE!!Civilian employed population 16 years and over!!Natural resources, construction, and maintenance occupations"
+        ],
+        "Total!!Estimate!!Natural resources, construction, and maintenance occupations": [
+            "Employee of private company workers!!Estimate!!Natural resources, construction, and maintenance occupations",
+            "Employee of private company workers!!Margin of Error!!Natural resources, construction, and maintenance occupations",
+            "Self-employed in own incorporated business workers!!Estimate!!Natural resources, construction, and maintenance occupations",
+            "Self-employed in own incorporated business workers!!Margin of Error!!Natural resources, construction, and maintenance occupations",
+            "Private not-for-profit wage and salary workers!!Estimate!!Natural resources, construction, and maintenance occupations",
+            "Private not-for-profit wage and salary workers!!Margin of Error!!Natural resources, construction, and maintenance occupations",
+            "Local, state, and federal government workers!!Estimate!!Natural resources, construction, and maintenance occupations",
+            "Local, state, and federal government workers!!Margin of Error!!Natural resources, construction, and maintenance occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Estimate!!Natural resources, construction, and maintenance occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Margin of Error!!Natural resources, construction, and maintenance occupations"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations": [
+            "Estimate!!Employee of private company workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Employee of private company workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Estimate!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Estimate!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Estimate!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Local, state, and federal government workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Estimate!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Employee of private company workers MOE!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Self-employed in own incorporated business workers MOE!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Private not-for-profit wage and salary workers MOE!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Local, state, and federal government workers MOE!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+            "Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers MOE!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
+        ],
+        "Total!!Estimate!!Production, transportation, and material moving occupations": [
+            "Employee of private company workers!!Estimate!!Production, transportation, and material moving occupations",
+            "Employee of private company workers!!Margin of Error!!Production, transportation, and material moving occupations",
+            "Self-employed in own incorporated business workers!!Estimate!!Production, transportation, and material moving occupations",
+            "Self-employed in own incorporated business workers!!Margin of Error!!Production, transportation, and material moving occupations",
+            "Private not-for-profit wage and salary workers!!Estimate!!Production, transportation, and material moving occupations",
+            "Private not-for-profit wage and salary workers!!Margin of Error!!Production, transportation, and material moving occupations",
+            "Local, state, and federal government workers!!Estimate!!Production, transportation, and material moving occupations",
+            "Local, state, and federal government workers!!Margin of Error!!Production, transportation, and material moving occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Estimate!!Production, transportation, and material moving occupations",
+            "Self-employed in own not incorporated business workers and unpaid family workers!!Margin of Error!!Production, transportation, and material moving occupations"
+        ]
+    },
+    "ignoreColumns": [
+        "id",
+        "Geographic Area Name",
+        "PERCENT IMPUTED",
+        "Percent Imputed",
+        "PERCENT ALLOCATED"
+    ]
+}
