@@ -66,7 +66,7 @@ def process_zip_file(zip_file_path,
   Args:
     zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
     spec_path: File path where the JSON specification to be used for generating the column map is present
-    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = True)
     output_dir_path: File path to the directory where column map is to be saved (default=./)
     delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
     header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
@@ -84,12 +84,15 @@ def process_zip_file(zip_file_path,
         "<column-name-2>": {}, .....,
       }
   """
+    zip_file_path = os.path.expanduser(zip_file_path)
+    spec_path = os.path.expanduser(spec_path)
+    output_dir_path = os.path.expanduser(output_dir_path)
+    
     f = open(spec_path, 'r')
     spec_dict = json.load(f)
     f.close()
 
     column_map = {}
-    counter_dict = {}
 
     with ZipFile(zip_file_path) as zf:
         for filename in zf.namelist():
@@ -99,12 +102,14 @@ def process_zip_file(zip_file_path,
                     for index, line in enumerate(csv_reader):
                         if index == header_row:
                             year = filename.split(f'ACSST5Y')[1][:4]
+                            print('Generating column map for year:', year)
                             column_map[year] = generate_stat_var_map(
                                 spec_dict, line, delimiter)
                             break
                         continue
     ## save the column_map
     if write_output:
+        print('Writing output to', output_dir_path)
         f = open(f'{output_dir_path}/column_map.json', 'w')
         json.dump(column_map, f, indent=4)
         f.close()
@@ -135,6 +140,43 @@ def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
                                      delimiter=delimiter)
     return col_map_obj._generate_stat_vars_from_spec()
 
+
+def generate_mcf_from_column_map(column_map, output_path_dir):
+    mcf_dict = {}
+    
+    for year in column_map:
+        for column_name in column_map[year]:
+            dcid = column_map[year][column_name]['Node']
+            if dcid not in mcf_dict:
+                ## key --> node dcid
+                mcf_dict[dcid] = {}
+                ## add pvs to dict
+                for key, value in column_map[year][column_name].items():
+                        mcf_dict[dcid][key] = value
+
+    ## create final output string to be written to mcf file
+    final_mcf = ""
+
+    for dcid, stat_var in mcf_dict.items():
+        col_stat_var = []
+
+        dcid = 'Node: ' + dcid
+        col_stat_var.append(dcid)
+        
+        for p, v in stat_var.items():
+            if p != 'unit' and p != 'scalingFactor' and p != 'Node':
+                col_stat_var.append(f"{p}: {v}")
+
+        final_mcf = final_mcf + '\n'.join(col_stat_var) + "\n\n"
+    
+    print('Writing mcf output to', output_path_dir)
+    f = open(
+            os.path.join(output_path_dir, 'statvars_all.mcf'),
+            'w')
+    f.write(final_mcf)
+    f.close()
+
+    return final_mcf
 
 class GenerateColMapBase:
     """module to generate a column map given a list of columns of the dataset and a JSON Spec

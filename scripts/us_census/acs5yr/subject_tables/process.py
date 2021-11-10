@@ -25,7 +25,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              './common'))  # for col_map_generator, data_loader
 
-from generate_col_map import generate_stat_var_map, process_zip_file
+from generate_col_map import generate_stat_var_map, process_zip_file, generate_mcf_from_column_map
 from data_loader import process_subject_tables
 
 FLAGS = flags.FLAGS
@@ -42,6 +42,10 @@ flags.DEFINE_string(
     'Path to input directory with (current support only for zip files)')
 flags.DEFINE_string('output_dir', './', 'Path to the output directory')
 flags.DEFINE_boolean(
+    'create_mcf', True,
+    '[for colmap]Set False to prevent generation of StatVar mcf file with column map'
+)
+flags.DEFINE_boolean(
     'has_percent', False,
     '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
 )
@@ -50,13 +54,17 @@ flags.DEFINE_boolean(
     '[for processing]set the flag to add additional columns to debug')
 
 
-def set_column_map(input_path, spec_path, output_dir):
+def set_column_map(input_path, spec_path, output_dir, create_mcf):
     generated_col_map = process_zip_file(input_path,
                                          spec_path,
                                          write_output=False)
+    output_dir = os.path.expanduser(output_dir)
     f = open(os.path.join(output_dir, 'column_map.json'), 'w')
     json.dump(generated_col_map, f, indent=4)
     f.close()
+
+    if create_mcf:
+        generate_mcf_from_column_map(generated_col_map, output_dir)
 
 
 def main(argv):
@@ -67,6 +75,7 @@ def main(argv):
     input_path = FLAGS.input_path
     output_dir = FLAGS.output_dir
     has_percent = FLAGS.has_percent
+    create_mcf = FLAGS.create_mcf
     debug = FLAGS.debug
 
     # TODO: remove the constraint of inputs being only zip file
@@ -77,34 +86,40 @@ def main(argv):
 
     if file_extension == '.zip':
         if option == 'colmap':
-            set_column_map(input_path, spec_path, output_dir)
+            set_column_map(input_path, spec_path, output_dir, create_mcf)
         if option == 'process':
-            process_subject_tables(table_prefix=table_prefix,
-                                   input_path=input_path,
-                                   output_dir=output_dir,
-                                   column_map_path=os.path.join(
-                                       output_dir, 'column_map.json'),
-                                   spec_path=spec_path,
-                                   debug=debug,
-                                   delimiter='!!',
-                                   has_percent=has_percent)
+            if not table_prefix:
+                print('table_prefix required to run data loader')
+            else:
+                process_subject_tables(table_prefix=table_prefix,
+                                       input_path=input_path,
+                                       output_dir=output_dir,
+                                       column_map_path=os.path.join(
+                                           output_dir, 'column_map.json'),
+                                       spec_path=spec_path,
+                                       debug=debug,
+                                       delimiter='!!',
+                                       has_percent=has_percent)
 
         if option == 'all':
-            set_column_map(input_path, spec_path, output_dir)
-            process_subject_tables(table_prefix=table_prefix,
-                                   input_path=input_path,
-                                   output_dir=output_dir,
-                                   column_map_path=os.path.join(
-                                       output_dir, 'column_map.json'),
-                                   spec_path=spec_path,
-                                   debug=debug,
-                                   delimiter='!!',
-                                   has_percent=has_percent)
+            set_column_map(input_path, spec_path, output_dir, create_mcf)
+            if not table_prefix:
+                print('table_prefix required to run data loader')
+            else:
+                process_subject_tables(table_prefix=table_prefix,
+                                       input_path=input_path,
+                                       output_dir=output_dir,
+                                       column_map_path=os.path.join(
+                                           output_dir, 'column_map.json'),
+                                       spec_path=spec_path,
+                                       debug=debug,
+                                       delimiter='!!',
+                                       has_percent=has_percent)
     else:
         print("At the moment, we support only zip files.")
 
 
 if __name__ == '__main__':
     flags.mark_flags_as_required(
-        ['table_prefix', 'spec_path', 'input_path', 'output_dir'])
+        ['spec_path', 'input_path'])
     app.run(main)
