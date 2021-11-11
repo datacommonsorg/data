@@ -18,6 +18,7 @@
 # pylint: disable=missing-function-docstring
 
 import unittest
+import re
 from util import statvar_dcid_generator
 
 
@@ -337,6 +338,19 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = 'Count_Person_DateOfEntry2000To2009_ForeignBorn'
         self.assertEqual(dcid, expected_dcid)
 
+        stat_var_dict6 = {
+            'statType': 'dcid:measuredValue',
+            'measuredProperty': 'dcid:count',
+            'populationType': 'dcid:HousingUnit',
+            'occupancyStatus': 'dcid:OccupiedHousingUnit',
+            'dateMovedIntoHousingUnit': '[2017 - Date]',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict6)
+        expected_dcid = ('Count_HousingUnit_MovedIn2017OrMoreDate_'
+                         'OccupiedHousingUnit')
+        self.assertEqual(dcid, expected_dcid)
+
     def test_naics_name_generation(self):
         stat_var_dict1 = {
             'typeOf': 'dcs:StatisticalVariable',
@@ -479,6 +493,13 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = ('Count_Person_'
                          'SOCv2018/highLevelAggregation-99Occupation')
         self.assertEqual(dcid, expected_dcid)
+
+    def test_soc_map(self):
+        soc_values = statvar_dcid_generator.SOC_MAP.values()
+        alphanumeric_regex = re.compile(r'[A-Za-z0-9]+')
+        # Check if all values contain only alphanumeric characters
+        for val in soc_values:
+            self.assertTrue(alphanumeric_regex.fullmatch(val) is not None)
 
 
 if __name__ == '__main__':

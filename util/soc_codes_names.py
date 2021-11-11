@@ -20,9 +20,9 @@ import requests
 def _create_soc_codes_map():
     """Generates SOC codes to occupation map from the SOCv2018 MCF file"""
 
-    # A regex to clean SOC names. This regex catches any kind of whitespace,
-    # double quotes, the string 'and', commas and the word Occupations.
-    soc_name_clean_regex = re.compile(r'\s+|"|,|\band\b|\bOccupations\b')
+    # A regex to clean SOC names. This regex catches non alphanumeric characters
+    # (excluding whitespace), 'and', 'Occupations'.
+    soc_name_clean_regex = re.compile(r'[^A-Za-z0-9 ]+|\band\b|\bOccupations\b')
 
     soc_map = dict()
     soc_mcf = requests.get(
@@ -34,12 +34,19 @@ def _create_soc_codes_map():
         # Extracting the SOC code from the dcid
         # The dcid is of the form 'dcid:SOCv2018/<code>'
         if line.startswith('Node:'):
-            code = line.split('SOCv2018/')[1]
+            if 'SOCv2018' in line:
+                code = line.split('SOCv2018/')[1]
+            else:
+                code = None
 
         # Extracting occupation from name
-        if line.startswith('name'):
+        if line.startswith('name') and code is not None:
             occupation = line.split(':')[1].strip()
             occupation = soc_name_clean_regex.sub('', occupation)
+            # Capitalize first letter in each word
+            occupation = "".join(
+                [word[0].upper() + word[1:] for word in occupation.split()])
+            occupation = re.sub(r'\s+', '', occupation)  # Remove whitespace
             soc_map[code] = occupation  # Assign occupation to code from dcid
 
     return soc_map
@@ -135,7 +142,7 @@ SOC_MAP = {
     '11-9031':
         'EducationChildcareAdministratorsPreschoolDaycare',
     '11-9032':
-        'EducationAdministratorsKindergartenthroughSecondary',
+        'EducationAdministratorsKindergartenThroughSecondary',
     '11-9033':
         'EducationAdministratorsPostsecondary',
     '11-9039':
@@ -197,9 +204,9 @@ SOC_MAP = {
     '13-1000':
         'BusinessOperationsSpecialists',
     '13-1010':
-        'AgentsBusinessManagersofArtistsPerformersAthletes',
+        'AgentsBusinessManagersOfArtistsPerformersAthletes',
     '13-1011':
-        'AgentsBusinessManagersofArtistsPerformersAthletes',
+        'AgentsBusinessManagersOfArtistsPerformersAthletes',
     '13-1020':
         'BuyersPurchasingAgents',
     '13-1021':
@@ -273,9 +280,9 @@ SOC_MAP = {
     '13-2020':
         'PropertyAppraisersAssessors',
     '13-2022':
-        'AppraisersofPersonalBusinessProperty',
+        'AppraisersOfPersonalBusinessProperty',
     '13-2023':
-        'AppraisersAssessorsofRealEstate',
+        'AppraisersAssessorsOfRealEstate',
     '13-2030':
         'BudgetAnalysts',
     '13-2031':
@@ -493,7 +500,7 @@ SOC_MAP = {
     '17-3023':
         'ElectricalElectronicEngineeringTechnologistsTechnicians',
     '17-3024':
-        'Electro-MechanicalMechatronicsTechnologistsTechnicians',
+        'ElectroMechanicalMechatronicsTechnologistsTechnicians',
     '17-3025':
         'EnvironmentalEngineeringTechnologistsTechnicians',
     '17-3026':
@@ -589,7 +596,7 @@ SOC_MAP = {
     '19-3030':
         'Psychologists',
     '19-3032':
-        'Industrial-OrganizationalPsychologists',
+        'IndustrialOrganizationalPsychologists',
     '19-3033':
         'ClinicalCounselingPsychologists',
     '19-3034':
@@ -847,7 +854,7 @@ SOC_MAP = {
     '25-1193':
         'RecreationFitnessStudiesTeachersPostsecondary',
     '25-1194':
-        'Career/TechnicalEducationTeachersPostsecondary',
+        'CareerTechnicalEducationTeachersPostsecondary',
     '25-1199':
         'PostsecondaryTeachersAllOther',
     '25-2000':
@@ -863,15 +870,15 @@ SOC_MAP = {
     '25-2021':
         'ElementarySchoolTeachersExceptSpecialEducation',
     '25-2022':
-        'MiddleSchoolTeachersExceptSpecialCareer/TechnicalEducation',
+        'MiddleSchoolTeachersExceptSpecialCareerTechnicalEducation',
     '25-2023':
-        'Career/TechnicalEducationTeachersMiddleSchool',
+        'CareerTechnicalEducationTeachersMiddleSchool',
     '25-2030':
         'SecondarySchoolTeachers',
     '25-2031':
-        'SecondarySchoolTeachersExceptSpecialCareer/TechnicalEducation',
+        'SecondarySchoolTeachersExceptSpecialCareerTechnicalEducation',
     '25-2032':
-        'Career/TechnicalEducationTeachersSecondarySchool',
+        'CareerTechnicalEducationTeachersSecondarySchool',
     '25-2050':
         'SpecialEducationTeachers',
     '25-2051':
@@ -889,17 +896,17 @@ SOC_MAP = {
     '25-3000':
         'OtherTeachersInstructors',
     '25-3010':
-        'AdultBasicEducationAdultSecondaryEducationEnglishasaSecondLanguageInstructors',
+        'AdultBasicEducationAdultSecondaryEducationEnglishAsASecondLanguageInstructors',
     '25-3011':
-        'AdultBasicEducationAdultSecondaryEducationEnglishasaSecondLanguageInstructors',
+        'AdultBasicEducationAdultSecondaryEducationEnglishAsASecondLanguageInstructors',
     '25-3020':
-        'Self-EnrichmentTeachers',
+        'SelfEnrichmentTeachers',
     '25-3021':
-        'Self-EnrichmentTeachers',
+        'SelfEnrichmentTeachers',
     '25-3030':
-        'SubstituteTeachersShort-Term',
+        'SubstituteTeachersShortTerm',
     '25-3031':
-        'SubstituteTeachersShort-Term',
+        'SubstituteTeachersShortTerm',
     '25-3040':
         'Tutors',
     '25-3041':
@@ -1077,7 +1084,7 @@ SOC_MAP = {
     '29-0000':
         'HealthcarePractitionersTechnical',
     '29-1000':
-        'HealthcareDiagnosingorTreatingPractitioners',
+        'HealthcareDiagnosingOrTreatingPractitioners',
     '29-1010':
         'Chiropractors',
     '29-1011':
@@ -1127,7 +1134,7 @@ SOC_MAP = {
     '29-1126':
         'RespiratoryTherapists',
     '29-1127':
-        'Speech-LanguagePathologists',
+        'SpeechLanguagePathologists',
     '29-1128':
         'ExercisePhysiologists',
     '29-1129':
@@ -1195,13 +1202,13 @@ SOC_MAP = {
     '29-1249':
         'SurgeonsAllOther',
     '29-1290':
-        'MiscellaneousHealthcareDiagnosingorTreatingPractitioners',
+        'MiscellaneousHealthcareDiagnosingOrTreatingPractitioners',
     '29-1291':
         'Acupuncturists',
     '29-1292':
         'DentalHygienists',
     '29-1299':
-        'HealthcareDiagnosingorTreatingPractitionersAllOther',
+        'HealthcareDiagnosingOrTreatingPractitionersAllOther',
     '29-2000':
         'HealthTechnologistsTechnicians',
     '29-2010':
@@ -1283,7 +1290,7 @@ SOC_MAP = {
     '31-0000':
         'HealthcareSupport',
     '31-1100':
-        'HomeHealthPersonalCareAides;NursingAssistantsOrderliesPsychiatricAides',
+        'HomeHealthPersonalCareAidesNursingAssistantsOrderliesPsychiatricAides',
     '31-1120':
         'HomeHealthPersonalCareAides',
     '31-1121':
@@ -1339,23 +1346,23 @@ SOC_MAP = {
     '33-0000':
         'ProtectiveService',
     '33-1000':
-        'SupervisorsofProtectiveServiceWorkers',
+        'SupervisorsOfProtectiveServiceWorkers',
     '33-1010':
-        'First-LineSupervisorsofLawEnforcementWorkers',
+        'FirstLineSupervisorsOfLawEnforcementWorkers',
     '33-1011':
-        'First-LineSupervisorsofCorrectionalOfficers',
+        'FirstLineSupervisorsOfCorrectionalOfficers',
     '33-1012':
-        'First-LineSupervisorsofPoliceDetectives',
+        'FirstLineSupervisorsOfPoliceDetectives',
     '33-1020':
-        'First-LineSupervisorsofFirefightingPreventionWorkers',
+        'FirstLineSupervisorsOfFirefightingPreventionWorkers',
     '33-1021':
-        'First-LineSupervisorsofFirefightingPreventionWorkers',
+        'FirstLineSupervisorsOfFirefightingPreventionWorkers',
     '33-1090':
-        'MiscellaneousFirst-LineSupervisorsProtectiveServiceWorkers',
+        'MiscellaneousFirstLineSupervisorsProtectiveServiceWorkers',
     '33-1091':
-        'First-LineSupervisorsofSecurityWorkers',
+        'FirstLineSupervisorsOfSecurityWorkers',
     '33-1099':
-        'First-LineSupervisorsofProtectiveServiceWorkersAllOther',
+        'FirstLineSupervisorsOfProtectiveServiceWorkersAllOther',
     '33-2000':
         'FirefightingPreventionWorkers',
     '33-2010':
@@ -1391,7 +1398,7 @@ SOC_MAP = {
     '33-3050':
         'PoliceOfficers',
     '33-3051':
-        'PoliceSheriff’sPatrolOfficers',
+        'PoliceSheriffsPatrolOfficers',
     '33-3052':
         'TransitRailroadPolice',
     '33-9000':
@@ -1425,13 +1432,13 @@ SOC_MAP = {
     '35-0000':
         'FoodPreparationServingRelated',
     '35-1000':
-        'SupervisorsofFoodPreparationServingWorkers',
+        'SupervisorsOfFoodPreparationServingWorkers',
     '35-1010':
-        'SupervisorsofFoodPreparationServingWorkers',
+        'SupervisorsOfFoodPreparationServingWorkers',
     '35-1011':
         'ChefsHeadCooks',
     '35-1012':
-        'First-LineSupervisorsofFoodPreparationServingWorkers',
+        'FirstLineSupervisorsOfFoodPreparationServingWorkers',
     '35-2000':
         'CooksFoodPreparationWorkers',
     '35-2010':
@@ -1491,13 +1498,13 @@ SOC_MAP = {
     '37-0000':
         'BuildingGroundsCleaningMaintenance',
     '37-1000':
-        'SupervisorsofBuildingGroundsCleaningMaintenanceWorkers',
+        'SupervisorsOfBuildingGroundsCleaningMaintenanceWorkers',
     '37-1010':
-        'First-LineSupervisorsofBuildingGroundsCleaningMaintenanceWorkers',
+        'FirstLineSupervisorsOfBuildingGroundsCleaningMaintenanceWorkers',
     '37-1011':
-        'First-LineSupervisorsofHousekeepingJanitorialWorkers',
+        'FirstLineSupervisorsOfHousekeepingJanitorialWorkers',
     '37-1012':
-        'First-LineSupervisorsofLandscapingLawnServiceGroundskeepingWorkers',
+        'FirstLineSupervisorsOfLandscapingLawnServiceGroundskeepingWorkers',
     '37-2000':
         'BuildingCleaningPestControlWorkers',
     '37-2010':
@@ -1527,17 +1534,17 @@ SOC_MAP = {
     '39-0000':
         'PersonalCareService',
     '39-1000':
-        'SupervisorsofPersonalCareServiceWorkers',
+        'SupervisorsOfPersonalCareServiceWorkers',
     '39-1010':
-        'First-LineSupervisorsofEntertainmentRecreationWorkers',
+        'FirstLineSupervisorsOfEntertainmentRecreationWorkers',
     '39-1013':
-        'First-LineSupervisorsofGamblingServicesWorkers',
+        'FirstLineSupervisorsOfGamblingServicesWorkers',
     '39-1014':
-        'First-LineSupervisorsofEntertainmentRecreationWorkersExceptGamblingServices',
+        'FirstLineSupervisorsOfEntertainmentRecreationWorkersExceptGamblingServices',
     '39-1020':
-        'First-LineSupervisorsofPersonalServiceWorkers',
+        'FirstLineSupervisorsOfPersonalServiceWorkers',
     '39-1022':
-        'First-LineSupervisorsofPersonalServiceWorkers',
+        'FirstLineSupervisorsOfPersonalServiceWorkers',
     '39-2000':
         'AnimalCareServiceWorkers',
     '39-2010':
@@ -1649,13 +1656,13 @@ SOC_MAP = {
     '41-0000':
         'SalesRelated',
     '41-1000':
-        'SupervisorsofSalesWorkers',
+        'SupervisorsOfSalesWorkers',
     '41-1010':
-        'First-LineSupervisorsofSalesWorkers',
+        'FirstLineSupervisorsOfSalesWorkers',
     '41-1011':
-        'First-LineSupervisorsofRetailSalesWorkers',
+        'FirstLineSupervisorsOfRetailSalesWorkers',
     '41-1012':
-        'First-LineSupervisorsofNon-RetailSalesWorkers',
+        'FirstLineSupervisorsOfNonRetailSalesWorkers',
     '41-2000':
         'RetailSalesWorkers',
     '41-2010':
@@ -1695,7 +1702,7 @@ SOC_MAP = {
     '41-3090':
         'MiscellaneousSalesRepresentativesServices',
     '41-3091':
-        'SalesRepresentativesofServicesExceptAdvertisingInsuranceFinancialServicesTravel',
+        'SalesRepresentativesOfServicesExceptAdvertisingInsuranceFinancialServicesTravel',
     '41-4000':
         'SalesRepresentativesWholesaleManufacturing',
     '41-4010':
@@ -1729,17 +1736,17 @@ SOC_MAP = {
     '41-9090':
         'MiscellaneousSalesRelatedWorkers',
     '41-9091':
-        'Door-to-DoorSalesWorkersNewsStreetVendorsRelatedWorkers',
+        'DoortoDoorSalesWorkersNewsStreetVendorsRelatedWorkers',
     '41-9099':
         'SalesRelatedWorkersAllOther',
     '43-0000':
         'OfficeAdministrativeSupport',
     '43-1000':
-        'SupervisorsofOfficeAdministrativeSupportWorkers',
+        'SupervisorsOfOfficeAdministrativeSupportWorkers',
     '43-1010':
-        'First-LineSupervisorsofOfficeAdministrativeSupportWorkers',
+        'FirstLineSupervisorsOfOfficeAdministrativeSupportWorkers',
     '43-1011':
-        'First-LineSupervisorsofOfficeAdministrativeSupportWorkers',
+        'FirstLineSupervisorsOfOfficeAdministrativeSupportWorkers',
     '43-2000':
         'CommunicationsEquipmentOperators',
     '43-2010':
@@ -1953,11 +1960,11 @@ SOC_MAP = {
     '45-0000':
         'FarmingFishingForestry',
     '45-1000':
-        'SupervisorsofFarmingFishingForestryWorkers',
+        'SupervisorsOfFarmingFishingForestryWorkers',
     '45-1010':
-        'First-LineSupervisorsofFarmingFishingForestryWorkers',
+        'FirstLineSupervisorsOfFarmingFishingForestryWorkers',
     '45-1011':
-        'First-LineSupervisorsofFarmingFishingForestryWorkers',
+        'FirstLineSupervisorsOfFarmingFishingForestryWorkers',
     '45-2000':
         'AgriculturalWorkers',
     '45-2010':
@@ -2007,11 +2014,11 @@ SOC_MAP = {
     '47-0000':
         'ConstructionExtraction',
     '47-1000':
-        'SupervisorsofConstructionExtractionWorkers',
+        'SupervisorsOfConstructionExtractionWorkers',
     '47-1010':
-        'First-LineSupervisorsofConstructionTradesExtractionWorkers',
+        'FirstLineSupervisorsOfConstructionTradesExtractionWorkers',
     '47-1011':
-        'First-LineSupervisorsofConstructionTradesExtractionWorkers',
+        'FirstLineSupervisorsOfConstructionTradesExtractionWorkers',
     '47-2000':
         'ConstructionTradesWorkers',
     '47-2010':
@@ -2117,17 +2124,17 @@ SOC_MAP = {
     '47-3010':
         'HelpersConstructionTrades',
     '47-3011':
-        'Helpers--BrickmasonsBlockmasonsStonemasonsTileMarbleSetters',
+        'HelpersBrickmasonsBlockmasonsStonemasonsTileMarbleSetters',
     '47-3012':
-        'Helpers--Carpenters',
+        'HelpersCarpenters',
     '47-3013':
-        'Helpers--Electricians',
+        'HelpersElectricians',
     '47-3014':
-        'Helpers--PaintersPaperhangersPlasterersStuccoMasons',
+        'HelpersPaintersPaperhangersPlasterersStuccoMasons',
     '47-3015':
-        'Helpers--PipelayersPlumbersPipefittersSteamfitters',
+        'HelpersPipelayersPlumbersPipefittersSteamfitters',
     '47-3016':
-        'Helpers--Roofers',
+        'HelpersRoofers',
     '47-3019':
         'HelpersConstructionTradesAllOther',
     '47-4000':
@@ -2153,9 +2160,9 @@ SOC_MAP = {
     '47-4051':
         'HighwayMaintenanceWorkers',
     '47-4060':
-        'Rail-TrackLayingMaintenanceEquipmentOperators',
+        'RailTrackLayingMaintenanceEquipmentOperators',
     '47-4061':
-        'Rail-TrackLayingMaintenanceEquipmentOperators',
+        'RailTrackLayingMaintenanceEquipmentOperators',
     '47-4070':
         'SepticTankServicersSewerPipeCleaners',
     '47-4071':
@@ -2205,9 +2212,9 @@ SOC_MAP = {
     '47-5071':
         'RoustaboutsOilGas',
     '47-5080':
-        'Helpers--ExtractionWorkers',
+        'HelpersExtractionWorkers',
     '47-5081':
-        'Helpers--ExtractionWorkers',
+        'HelpersExtractionWorkers',
     '47-5090':
         'MiscellaneousExtractionWorkers',
     '47-5099':
@@ -2215,11 +2222,11 @@ SOC_MAP = {
     '49-0000':
         'InstallationMaintenanceRepair',
     '49-1000':
-        'SupervisorsofInstallationMaintenanceRepairWorkers',
+        'SupervisorsOfInstallationMaintenanceRepairWorkers',
     '49-1010':
-        'First-LineSupervisorsofMechanicsInstallersRepairers',
+        'FirstLineSupervisorsOfMechanicsInstallersRepairers',
     '49-1011':
-        'First-LineSupervisorsofMechanicsInstallersRepairers',
+        'FirstLineSupervisorsOfMechanicsInstallersRepairers',
     '49-2000':
         'ElectricalElectronicEquipmentMechanicsInstallersRepairers',
     '49-2010':
@@ -2321,7 +2328,7 @@ SOC_MAP = {
     '49-9050':
         'LineInstallersRepairers',
     '49-9051':
-        'ElectricalPower-LineInstallersRepairers',
+        'ElectricalPowerLineInstallersRepairers',
     '49-9052':
         'TelecommunicationsLineInstallersRepairers',
     '49-9060':
@@ -2359,17 +2366,17 @@ SOC_MAP = {
     '49-9097':
         'SignalTrackSwitchRepairers',
     '49-9098':
-        'Helpers--InstallationMaintenanceRepairWorkers',
+        'HelpersInstallationMaintenanceRepairWorkers',
     '49-9099':
         'InstallationMaintenanceRepairWorkersAllOther',
     '51-0000':
         'Production',
     '51-1000':
-        'SupervisorsofProductionWorkers',
+        'SupervisorsOfProductionWorkers',
     '51-1010':
-        'First-LineSupervisorsofProductionOperatingWorkers',
+        'FirstLineSupervisorsOfProductionOperatingWorkers',
     '51-1011':
-        'First-LineSupervisorsofProductionOperatingWorkers',
+        'FirstLineSupervisorsOfProductionOperatingWorkers',
     '51-2000':
         'AssemblersFabricators',
     '51-2010':
@@ -2459,7 +2466,7 @@ SOC_MAP = {
     '51-4050':
         'MetalFurnaceOperatorsTendersPourersCasters',
     '51-4051':
-        'Metal-RefiningFurnaceOperatorsTenders',
+        'MetalRefiningFurnaceOperatorsTenders',
     '51-4052':
         'PourersCastersMetal',
     '51-4060':
@@ -2513,9 +2520,9 @@ SOC_MAP = {
     '51-6000':
         'TextileApparelFurnishingsWorkers',
     '51-6010':
-        'LaundryDry-CleaningWorkers',
+        'LaundryDryCleaningWorkers',
     '51-6011':
-        'LaundryDry-CleaningWorkers',
+        'LaundryDryCleaningWorkers',
     '51-6020':
         'PressersTextileGarmentRelatedMaterials',
     '51-6021':
@@ -2697,25 +2704,25 @@ SOC_MAP = {
     '51-9197':
         'TireBuilders',
     '51-9198':
-        'Helpers--ProductionWorkers',
+        'HelpersProductionWorkers',
     '51-9199':
         'ProductionWorkersAllOther',
     '53-0000':
         'TransportationMaterialMoving',
     '53-1000':
-        'SupervisorsofTransportationMaterialMovingWorkers',
+        'SupervisorsOfTransportationMaterialMovingWorkers',
     '53-1040':
-        'First-LineSupervisorsofTransportationMaterialMovingWorkers',
+        'FirstLineSupervisorsOfTransportationMaterialMovingWorkers',
     '53-1041':
         'AircraftCargoHandlingSupervisors',
     '53-1042':
-        'First-LineSupervisorsofHelpersLaborersMaterialMoversHand',
+        'FirstLineSupervisorsOfHelpersLaborersMaterialMoversHand',
     '53-1043':
-        'First-LineSupervisorsofMaterial-MovingMachineVehicleOperators',
+        'FirstLineSupervisorsOfMaterialMovingMachineVehicleOperators',
     '53-1044':
-        'First-LineSupervisorsofPassengerAttendants',
+        'FirstLineSupervisorsOfPassengerAttendants',
     '53-1049':
-        'First-LineSupervisorsofTransportationWorkersAllOther',
+        'FirstLineSupervisorsOfTransportationWorkersAllOther',
     '53-2000':
         'AirTransportationWorkers',
     '53-2010':
@@ -2741,11 +2748,11 @@ SOC_MAP = {
     '53-3011':
         'AmbulanceDriversAttendantsExceptEmergencyMedicalTechnicians',
     '53-3030':
-        'Driver/SalesWorkersTruckDrivers',
+        'DriverSalesWorkersTruckDrivers',
     '53-3031':
-        'Driver/SalesWorkers',
+        'DriverSalesWorkers',
     '53-3032':
-        'HeavyTractor-TrailerTruckDrivers',
+        'HeavyTractorTrailerTruckDrivers',
     '53-3033':
         'LightTruckDrivers',
     '53-3050':
@@ -2795,7 +2802,7 @@ SOC_MAP = {
     '53-5020':
         'ShipBoatCaptainsOperators',
     '53-5021':
-        'CaptainsMatesPilotsofWaterVessels',
+        'CaptainsMatesPilotsOfWaterVessels',
     '53-5022':
         'MotorboatOperators',
     '53-5030':
@@ -2859,7 +2866,7 @@ SOC_MAP = {
     '53-7060':
         'LaborersMaterialMovers',
     '53-7061':
-        'CleanersofVehiclesEquipment',
+        'CleanersOfVehiclesEquipment',
     '53-7062':
         'LaborersFreightStockMaterialMoversHand',
     '53-7063':
@@ -2911,19 +2918,19 @@ SOC_MAP = {
     '55-1019':
         'MilitaryOfficerSpecialTacticalOperationsLeadersAllOther',
     '55-2000':
-        'First-LineEnlistedMilitarySupervisors',
+        'FirstLineEnlistedMilitarySupervisors',
     '55-2010':
-        'First-LineEnlistedMilitarySupervisors',
+        'FirstLineEnlistedMilitarySupervisors',
     '55-2011':
-        'First-LineSupervisorsofAirCrewMembers',
+        'FirstLineSupervisorsOfAirCrewMembers',
     '55-2012':
-        'First-LineSupervisorsofWeaponsSpecialists/CrewMembers',
+        'FirstLineSupervisorsOfWeaponsSpecialistsCrewMembers',
     '55-2013':
-        'First-LineSupervisorsofAllOtherTacticalOperationsSpecialists',
+        'FirstLineSupervisorsOfAllOtherTacticalOperationsSpecialists',
     '55-3000':
-        'MilitaryEnlistedTacticalOperationsAir/WeaponsSpecialistsCrewMembers',
+        'MilitaryEnlistedTacticalOperationsAirWeaponsSpecialistsCrewMembers',
     '55-3010':
-        'MilitaryEnlistedTacticalOperationsAir/WeaponsSpecialistsCrewMembers',
+        'MilitaryEnlistedTacticalOperationsAirWeaponsSpecialistsCrewMembers',
     '55-3011':
         'AirCrewMembers',
     '55-3012':
@@ -2939,7 +2946,7 @@ SOC_MAP = {
     '55-3018':
         'SpecialForces',
     '55-3019':
-        'MilitaryEnlistedTacticalOperationsAir/WeaponsSpecialistsCrewMembersAllOther',
+        'MilitaryEnlistedTacticalOperationsAirWeaponsSpecialistsCrewMembersAllOther',
     'intermediateAggregation-1':
         'ManagementBusinessFinancial',
     'intermediateAggregation-2':
@@ -2973,3 +2980,6 @@ SOC_MAP = {
     'highLevelAggregation-6':
         'MilitarySpecific'
 }
+
+if __name__ == "__main__":
+    print(_create_soc_codes_map())
