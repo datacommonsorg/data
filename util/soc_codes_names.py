@@ -34,7 +34,7 @@ def _create_soc_codes_map():
         # Extracting the SOC code from the dcid
         # The dcid is of the form 'dcid:SOCv2018/<code>'
         if line.startswith('Node:'):
-            if 'SOCv2018' in line:
+            if 'SOCv2018/' in line:
                 code = line.split('SOCv2018/')[1]
             else:
                 code = None

@@ -460,7 +460,7 @@ def _process_constraint_property(prop: str, value: str) -> str:
     """
     if prop == 'naics':
         name = _naics_code_to_name(value)
-    elif 'SOCv2018' in value:
+    elif 'SOCv2018/' in value:
         name = _soc_code_to_name(value)
     else:
         match1 = _QUANTITY_RANGE_REGEX_1.match(value)
