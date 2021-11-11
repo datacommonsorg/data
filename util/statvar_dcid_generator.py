@@ -219,7 +219,9 @@ _PREPEND_APPEND_REPLACE_MAP = {
         'prepend': 'PlaceOfBirth'
     },
     'dateMovedIntoHousingUnit': {
-        'prepend': 'MovedIn'
+        'prepend': 'MovedIn',
+        'replace': 'Date',
+        'replacement': ''
     },
     'bachelorDegreeMajor': {
         'prepend': 'BachelorOf'
@@ -293,12 +295,20 @@ def _generate_quantity_range_name(match_dict: dict) -> str:
     except KeyError:
         return None
 
+    # Joining word to be used when upper_limit or lower_limit is '-'
+    ul_conjunction = 'More'
+    ll_conjunction = 'Less'
     quantity = _capitalize_process(quantity)
+
+    if quantity == 'Date':  # Special case
+        ul_conjunction = 'Later'
+        ll_conjunction = 'Earlier'
+
     if upper_limit == '-':
-        return f'{lower_limit}OrMore{quantity}'
+        return f'{lower_limit}Or{ul_conjunction}{quantity}'
 
     if lower_limit == '-':
-        return f'{upper_limit}OrLess{quantity}'
+        return f'{upper_limit}Or{ll_conjunction}{quantity}'
 
     return f'{lower_limit}To{upper_limit}{quantity}'
 

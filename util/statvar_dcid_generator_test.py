@@ -347,7 +347,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'typeOf': 'dcs:StatisticalVariable'
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict6)
-        expected_dcid = ('Count_HousingUnit_MovedIn2017OrMoreDate_'
+        expected_dcid = ('Count_HousingUnit_MovedIn2017OrLater_'
                          'OccupiedHousingUnit')
         self.assertEqual(dcid, expected_dcid)
 
