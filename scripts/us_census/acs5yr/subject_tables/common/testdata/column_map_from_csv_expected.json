@@ -2449,5 +2449,33 @@
         "armedForcesStatus": "dcid:Civilian",
         "institutionalization": "dcid:USC_NonInstitutionalized",
         "typeOf": "dcs:StatisticalVariable"
+    },
+    "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings": {
+        "Node": "dcid:Median_Earnings_Person_Civilian_Employed_InLaborForce_Male",
+        "measuredProperty": "dcid:earnings",
+        "incomeStatus": "dcid:WithEarnings",
+        "statType": "dcid:medianValue",
+        "gender": "dcid:Male",
+        "unit": "USDollar",
+        "populationType": "dcid:Person",
+        "armedForcesStatus": "dcid:Civilian",
+        "age": "[16 - Years]",
+        "employment": "dcid:BLS_Employed",
+        "employmentStatus": "dcid:BLS_InLaborForce",
+        "typeOf": "dcs:StatisticalVariable"
+    },
+    "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings": {
+        "Node": "dcid:Median_Earnings_Person_Civilian_Employed_InLaborForce_Female_AsAFractionOf_Median_Earnings_Person_Civilian_Employed_InLaborForce_Male",
+        "measuredProperty": "dcid:earnings",
+        "incomeStatus": "dcid:WithEarnings",
+        "statType": "dcid:medianValue",
+        "gender": "dcid:Female",
+        "populationType": "dcid:Person",
+        "armedForcesStatus": "dcid:Civilian",
+        "age": "[16 - Years]",
+        "employment": "dcid:BLS_Employed",
+        "measurementDenominator": "dcid:Median_Earnings_Person_Civilian_Employed_InLaborForce_Male",
+        "employmentStatus": "dcid:BLS_InLaborForce",
+        "typeOf": "dcs:StatisticalVariable"
     }
 }
