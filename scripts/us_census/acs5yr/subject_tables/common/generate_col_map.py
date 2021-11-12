@@ -20,7 +20,7 @@ import sys
 import logging
 import json
 import re
-import csv
+import pandas as pd
 from zipfile import ZipFile
 from collections import OrderedDict
 
@@ -53,8 +53,104 @@ _JSON_KEYS = [
     'preprocess', 'measurementDenominator'
 ]
 
+def process_directory(input_dir_path,
+                     spec_path,
+                     write_output=True,
+                     output_dir_path='./',
+                     delimiter='!!',
+                     header_row=1):
+    """Given a zip file of datasets in csv format, the function builds a column map for each year
+  Args:
+    input_dir_path: input directory path with data files in csv format, file naming expected to be consistent with data.census.gov
+    spec_path: File path where the JSON specification to be used for generating the column map is present
+    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+    output_dir_path: File path to the directory where column map is to be saved (default=./)
+    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+    header_row: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
 
-# TODO: Extend support to csv file and input directory
+  Returns:
+    A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+    Example:
+      "2016": {
+        "Total Civilian population": {
+          "populationType": "Person",
+          "statType": "measuredValue",
+          "measuredProperty": "Count Person"
+          "armedForceStatus": "Civilian"
+        },
+        "<column-name-2>": {}, .....,
+      }
+  """
+    f = open(spec_path, 'r')
+    spec_dict = json.load(f)
+    f.close()
+
+    column_map = {}
+    counter_dict = {}
+
+    print(input_dir_path)
+
+    for filename in os.listdir(input_dir_path):
+        if 'data_with_overlays' in filename:
+            filename = os.path.join(input_dir_path, filename)
+            df = pd.read_csv(filename, header=header_row, low_memory=False)
+            year = filename.split(f'ACSST5Y')[1][:4]
+            column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
+
+    ## save the column_map
+    if write_output:
+        f = open(f'{output_dir_path}/column_map.json', 'w')
+        json.dump(column_map, f, indent=4)
+        f.close()
+    return column_map
+
+def process_csv_file(csv_file_path,
+                     spec_path,
+                     write_output=True,
+                     output_dir_path='./',
+                     delimiter='!!',
+                     header_row=1):
+    """Given a csv file of datasets in csv format, the function builds a column map for each year
+  Args:
+    csv_file_path: input csv file, file naming expected to be consistent with data.census.gov
+    spec_path: File path where the JSON specification to be used for generating the column map is present
+    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+    output_dir_path: File path to the directory where column map is to be saved (default=./)
+    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+    header_row: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+
+  Returns:
+    A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+    Example:
+      "2016": {
+        "Total Civilian population": {
+          "populationType": "Person",
+          "statType": "measuredValue",
+          "measuredProperty": "Count Person"
+          "armedForceStatus": "Civilian"
+        },
+        "<column-name-2>": {}, .....,
+      }
+  """
+    f = open(spec_path, 'r')
+    spec_dict = json.load(f)
+    f.close()
+
+    column_map = {}
+    counter_dict = {}
+
+    if 'data_with_overlays' in csv_file_path:
+        df = pd.read_csv(csv_file_path, header=header_row, low_memory=False)
+        year = csv_file_path.split(f'ACSST5Y')[1][:4]
+        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
+
+    ## save the column_map
+    if write_output:
+        f = open(f'{output_dir_path}/column_map.json', 'w')
+        json.dump(column_map, f, indent=4)
+        f.close()
+    return column_map
+
 # TODO - add typing hints and document the format of inputs
 def process_zip_file(zip_file_path,
                      spec_path,
@@ -69,7 +165,7 @@ def process_zip_file(zip_file_path,
     write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
     output_dir_path: File path to the directory where column map is to be saved (default=./)
     delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
-    header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+    header_row: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
 
   Returns:
     A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
@@ -94,15 +190,10 @@ def process_zip_file(zip_file_path,
     with ZipFile(zip_file_path) as zf:
         for filename in zf.namelist():
             if 'data_with_overlays' in filename:
-                with io.TextIOWrapper(zf.open(filename, 'r')) as csv_file:
-                    csv_reader = csv.reader(csv_file)
-                    for index, line in enumerate(csv_reader):
-                        if index == header_row:
-                            year = filename.split(f'ACSST5Y')[1][:4]
-                            column_map[year] = generate_stat_var_map(
-                                spec_dict, line, delimiter)
-                            break
-                        continue
+                df = pd.read_csv(zf.open(filename, 'r'), header=header_row, low_memory=False)
+                year = filename.split(f'ACSST5Y')[1][:4]
+                column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(), delimiter)
+
     ## save the column_map
     if write_output:
         f = open(f'{output_dir_path}/column_map.json', 'w')
@@ -160,7 +251,7 @@ class GenerateColMapBase:
         for key in _JSON_KEYS:
             if key not in self.features:
                 # TODO: initialize UniversePVs as empty list
-                if key == 'ignoreColumns':
+                if key == 'ignoreColumns' or key == 'universePVs':
                     self.features[key] = []
                 else:
                     self.features[key] = {}
@@ -186,7 +277,7 @@ class GenerateColMapBase:
         return column
 
     def _generate_stat_vars_from_spec(self):
-        """generates stat_var nodes for each column in column list and 
+        """generates stat_var nodes for each column in column list and
         returns a dictionary of columns with their respective stat_var nodes
 
             Example output: {
@@ -358,12 +449,12 @@ class GenerateColMapBase:
             stat_var_dcid = self.features['overwrite_dcids'][stat_var_dcid]
         stat_var['Node'] = 'dcid:' + stat_var_dcid
 
-        #Move the dcid to begining of the dict, uses OrderedDict
+        # Move the dcid to begining of the dict, uses OrderedDict
         stat_var = OrderedDict(stat_var)
         stat_var.move_to_end('Node', last=False)
         stat_var = json.loads(json.dumps(stat_var))
 
-        #prefix the values if they are not QuantityRanges with dcs:
+        # prefix the values if they are not QuantityRanges with dcs:
         stat_var = self._format_stat_var_node(stat_var)
 
         #check if the stat_var dict has the mandatory properties
@@ -436,14 +527,14 @@ class GenerateColMapBase:
             if v[0] == '[' and v[-1] == ']':
                 continue
             # do not prefix units or scalingFactors
-            if k in ['unit', 'units', 'scalingFactor']:
+            if k in ['unit', 'units', 'scalingFactor', 'Node']:
                 continue
             # if value is not prefixed apriori with dcs: or schema:
             elif 'schema:' in v or 'dcs:' in v or 'dcid:' in v:
                 continue
-            # add dcid: prefix to the value
+            # add dcs: prefix to the value
             else:
-                stat_var[k] = 'dcid:' + v
+                stat_var[k] = 'dcs:' + v
         return stat_var
 
     def _isvalid_column_map(self):

@@ -17,19 +17,15 @@ import csv
 import json
 import unittest
 
-from .generate_col_map import generate_stat_var_map, process_zip_file
+from .generate_col_map import *
 
-
-# TODO: use a smaller spec which exercises all functions in the module
-# TODO: Add smaller unittests for each class / function in the module
-# TODO: Update tests to use smaller input / expected files for end-to-end test.
 class GenerateColMapTest(unittest.TestCase):
     """ Test Cases for checking the generation of column map from JSON Spec"""
 
     def test_generating_column_map_from_csv(self):
         header_row = 1
         base_path = os.path.dirname(__file__)
-        spec_path = os.path.join(base_path, "./testdata/spec_s2702.json")
+        spec_path = os.path.join(base_path, "./testdata/short_spec_s2702.json")
         input_csv_path = os.path.join(base_path,
                                       "./testdata/ACSST5Y2013_S2702.csv")
         expected_map_path = os.path.join(
@@ -57,7 +53,7 @@ class GenerateColMapTest(unittest.TestCase):
 
     def test_generating_column_map_from_zip(self):
         base_path = os.path.dirname(__file__)
-        spec_path = os.path.join(base_path, "./testdata/spec_s2702.json")
+        spec_path = os.path.join(base_path, "./testdata/short_spec_s2702.json")
         input_zip_path = os.path.join(base_path, "./testdata/s2702_alabama.zip")
         expected_map_path = os.path.join(
             base_path, "./testdata/column_map_from_zip_expected.json")
@@ -72,6 +68,22 @@ class GenerateColMapTest(unittest.TestCase):
 
         self.assertEqual(expected_map, generated_col_map)
 
+    def test_generating_column_map_from_input_directory(self):
+        base_path = os.path.dirname(__file__)
+        spec_path = os.path.join(base_path, "./testdata/short_spec_s2702.json")
+        input_dir_path = os.path.join(base_path, "./testdata/s2702_alabama_test_dir")
+        expected_map_path = os.path.join(
+            base_path, "./testdata/column_map_from_zip_expected.json")
+
+        generated_col_map = process_directory(input_dir_path,
+                                             spec_path,
+                                             write_output=False)
+
+        f = open(expected_map_path, 'r')
+        expected_map = json.load(f)
+        f.close()
+
+        self.assertEqual(expected_map, generated_col_map)
 
 if __name__ == '__main__':
     unittest.main()
