@@ -56,15 +56,15 @@ def get_paths(table_dir):
 
     # Find spec, Expects spec to be in table_dir
     for filename in os.listdir(table_dir):
-        if '_spec.json' in filename:
+        if 'spec.json' in filename:
             spec_path = os.path.join(table_dir, filename)
 
     # Expects StatVar MCF, Column Map, CSV and test zip to be in testdata folder
     testdata_path = os.path.join(table_dir, 'testdata')
     for filename in os.listdir(testdata_path):
-        if '_cleaned.csv' in filename:
+        if 'cleaned.csv' in filename:
             csv_path = os.path.join(testdata_path, filename)
-        elif '_output.mcf' in filename:
+        elif 'output.mcf' in filename:
             statvar_mcf_path = os.path.join(testdata_path, filename)
         elif 'column_map.json' in filename:
             column_map_path = os.path.join(testdata_path, filename)
