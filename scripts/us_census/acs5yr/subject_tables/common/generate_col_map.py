@@ -441,9 +441,9 @@ class GenerateColMapBase:
             # if value is not prefixed apriori with dcs: or schema:
             elif 'schema:' in v or 'dcs:' in v or 'dcid:' in v:
                 continue
-            # add dcid: prefix to the value
+            # add dcs: prefix to the value
             else:
-                stat_var[k] = 'dcid:' + v
+                stat_var[k] = 'dcs:' + v
         return stat_var
 
     def _isvalid_column_map(self):
