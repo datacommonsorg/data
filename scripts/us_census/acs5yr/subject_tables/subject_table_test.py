@@ -28,7 +28,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))
 
 # These directories are excluded from testing
-_EXCLUDE_DIRS = ['common', 's2201']
+_EXCLUDE_DIRS = ['common', 's2201', '__pycache__']
 
 
 def get_paths(table_dir):
