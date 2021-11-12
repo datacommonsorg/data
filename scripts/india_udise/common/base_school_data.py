@@ -349,9 +349,6 @@ class UDISEIndiaSchoolDataLoaderBase:
                     writer.writeheader()
                 writer.writerows(data_rows)
                 file_object.close()
-        else:
-            raise Exception("Data file: {data_file} doesn't exist".format(
-                data_file=data_file))
 
     def _get_data(self,
                   year,

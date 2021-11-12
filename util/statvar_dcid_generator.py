@@ -15,6 +15,19 @@
 
 import copy
 import re
+import os
+import sys
+
+#pylint: disable=wrong-import-position
+#pylint: disable=import-error
+
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # For soc_codes_names
+
+from soc_codes_names import SOC_MAP
+#pylint: enable=wrong-import-position
+#pylint: enable=import-error
 
 # Global constants
 # Regex to match the quantity notations - [value quantity], [quantity value]
@@ -44,6 +57,186 @@ _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
 # to avoid false positives like 'USCitizenBornInTheUnitedStates'.
 _CONSTRAINT_PREFIX_REGEX = re.compile(
     r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED))(?P<ucase_uscore>[A-Z_])')
+
+# A mapping of NAICS codes to industry topics
+# This map was generated using the code from the _create_naics_map function at
+# https://github.com/datacommonsorg/tools/blob/master/stat_var_renaming/stat_var_renaming_constants.py
+_NAICS_MAP = {
+    '00': 'Unclassified',
+    '11': 'AgricultureForestryFishingHunting',
+    '21': 'MiningQuarryingOilGasExtraction',
+    '22': 'Utilities',
+    '23': 'Construction',
+    '31': 'Manufacturing',
+    '32': 'Manufacturing',
+    '33': 'Manufacturing',
+    '42': 'WholesaleTrade',
+    '44': 'RetailTrade',
+    '45': 'RetailTrade',
+    '48': 'TransportationWarehousing',
+    '49': 'TransportationWarehousing',
+    '51': 'Information',
+    '52': 'FinanceInsurance',
+    '53': 'RealEstateRentalLeasing',
+    '54': 'ProfessionalScientificTechnicalServices',
+    '55': 'ManagementOfCompaniesEnterprises',
+    '56': 'AdministrativeSupportWasteManagementRemediationServices',
+    '61': 'EducationalServices',
+    '62': 'HealthCareSocialAssistance',
+    '71': 'ArtsEntertainmentRecreation',
+    '72': 'AccommodationFoodServices',
+    '81': 'OtherServices',
+    '92': 'PublicAdministration',
+    '99': 'Nonclassifiable',
+    '10': 'TotalAllIndustries',
+    '101': 'GoodsProducing',
+    '1011': 'NaturalResourcesMining',
+    '1012': 'Construction',
+    '1013': 'Manufacturing',
+    '102': 'ServiceProviding',
+    '1021': 'TradeTransportationUtilities',
+    '1022': 'Information',
+    '1023': 'FinancialActivities',
+    '1024': 'ProfessionalBusinessServices',
+    '1025': 'EducationHealthServices',
+    '1026': 'LeisureHospitality',
+    '1027': 'OtherServices',
+    '1028': 'PublicAdministration',
+    '1029': 'Unclassified'
+}
+
+# Regex to match NAICS Codes. These codes could be a single code or a range
+# Example matches: 53-56, 44
+_NAICS_CODE_REGEX = re.compile(r'(\d+-\d+|\d+)')
+
+# Regex to extract the lower and upper ranges in a range of NAICS codes
+# Example matches: 53-56, 11-21
+_NAICS_RANGE_REGEX = re.compile(r'(?P<lower_limit>\d+)-(?P<upper_limit>\d+)')
+
+# Certain properties have text prepended, appended or replaced in the dcid to
+# improve readability. For example, p='householderRace', v='AsianAlone' is
+# changed to v='HouseholderRaceAsianAlone'. The initial map was picked from
+# https://github.com/datacommonsorg/tools/blob/master/stat_var_renaming/stat_var_renaming_functions.py
+# In the map, the keys are properties, the value to the key is a dict which can
+# have four keys. The 'prepend' and 'append' keys can be used to prepend and
+# append to a property value.The value in 'replace' is replaced with the value
+# in 'replacement'.
+_PREPEND_APPEND_REPLACE_MAP = {
+    'languageSpokenAtHome': {
+        'append': 'SpokenAtHome'
+    },
+    'childSchoolEnrollment': {
+        'prepend': 'Child'
+    },
+    'residenceType': {
+        'prepend': 'ResidesIn'
+    },
+    'healthPrevented': {
+        'prepend': 'Received'
+    },
+    'householderAge': {
+        'prepend': 'HouseholderAge'
+    },
+    'householderRace': {
+        'prepend': 'HouseholderRace'
+    },
+    'dateBuilt': {
+        'append': 'Built'
+    },
+    'homeValue': {
+        'prepend': 'HomeValue'
+    },
+    'numberOfRooms': {
+        'prepend': 'WithTotal'
+    },
+    'isic': {
+        'prepend': 'ISIC'
+    },
+    'establishmentOwnership': {
+        'append': 'Establishment'
+    },
+    'householdSize': {
+        'prepend': 'With'
+    },
+    'householdWorkerSize': {
+        'prepend': 'With'
+    },
+    'numberOfVehicles': {
+        'prepend': 'With'
+    },
+    'income': {
+        'prepend': 'IncomeOf'
+    },
+    'grossRent': {
+        'prepend': 'GrossRent'
+    },
+    'healthOutcome': {
+        'prepend': 'With'
+    },
+    'healthPrevention': {
+        'prepend': 'Received'
+    },
+    'propertyTax': {
+        'prepend': 'YearlyTax'
+    },
+    'detailedLevelOfSchool': {
+        'prepend': 'Detailed'
+    },
+    'medicalCondition': {
+        'prepend': 'Condition'
+    },
+    'educationalAttainment': {
+        'prepend': 'EducationalAttainment'
+    },
+    'householderEducationalAttainment': {
+        'prepend': 'HouseholderEducationalAttainment'
+    },
+    'householderRelatedChildrenUnder18Years': {
+        'prepend': 'Householder',
+        'replace': 'Child',
+        'replacement': 'RelatedChildren'
+    },
+    'householderOwnChildrenUnder18Years': {
+        'prepend': 'Householder',
+        'replace': 'Child',
+        'replacement': 'OwnChildren'
+    },
+    'occupation': {
+        'append': 'Occupation'
+    },
+    'usualHoursWorked': {
+        'prepend': 'WorkPerWeek'
+    },
+    'workPeriod': {
+        'prepend': 'WorkPerYear'
+    },
+    'dateOfEntry': {
+        'prepend': 'DateOfEntry',
+        'replace': 'Date',
+        'replacement': ''
+    },
+    'placeOfBirth': {
+        'prepend': 'PlaceOfBirth'
+    },
+    'dateMovedIntoHousingUnit': {
+        'prepend': 'MovedIn',
+        'replace': 'Date',
+        'replacement': ''
+    },
+    'bachelorDegreeMajor': {
+        'prepend': 'BachelorOf'
+    }
+}
+
+# To map stat vars which do not follow the conventions of stat var dcid naming
+# The key is the dcid generated by the get_statvar_dcid function. The value is
+# the replacement dcid.
+_LEGACY_MAP = {
+    'Count_Person_WithDisability_NoHealthInsurance':
+        'Count_Person_NoHealthInsurance_WithDisability',
+    'Count_Person_NoDisability_NoHealthInsurance':
+        'Count_Person_NoHealthInsurance_NoDisability'
+}
 
 
 def _capitalize_process(word: str) -> str:
@@ -102,14 +295,133 @@ def _generate_quantity_range_name(match_dict: dict) -> str:
     except KeyError:
         return None
 
+    # Joining word to be used when upper_limit or lower_limit is '-'
+    ul_conjunction = 'More'
+    ll_conjunction = 'Less'
     quantity = _capitalize_process(quantity)
+
+    if quantity == 'Date':  # Special case
+        ul_conjunction = 'Later'
+        ll_conjunction = 'Earlier'
+
     if upper_limit == '-':
-        return f'{lower_limit}OrMore{quantity}'
+        return f'{lower_limit}Or{ul_conjunction}{quantity}'
 
     if lower_limit == '-':
-        return f'{upper_limit}OrLess{quantity}'
+        return f'{upper_limit}Or{ll_conjunction}{quantity}'
 
     return f'{lower_limit}To{upper_limit}{quantity}'
+
+
+def _naics_code_to_name(naics_val: str) -> str:
+    """Converts NAICS codes to their industry using the _NAICS_MAP.
+    Args:
+        naics_val: A NAICS string literal to process.
+          Expected syntax of naics_val - NAICS/{codes}
+          '-' can be used to denote range of codes that may or may not belong
+          to the same industry. For eg, 44-45 will be mapped to 'RetailTrade'.
+          '_' can be used to represent multiple industries. For eg, 51_52 will
+          be mapped to 'InformationFinanceInsurance'. A combination of '-' and
+          '_' is acceptable.
+    Returns:
+        A string with all NAICS codes changed to their respective industry.
+        This string can be used in dcid generation. Returns None if the string
+        is empty or if the string does not follow the expected syntax.
+    """
+
+    # Helper function to process NAICS ranges
+    def _process_naics_range(range_str: str) -> str:
+        industry_str = ''
+        match = _NAICS_RANGE_REGEX.search(range_str)
+        m_dict = match.groupdict()
+        lower_limit = int(m_dict['lower_limit'])
+        upper_limit = int(m_dict['upper_limit'])
+
+        prev_str = None  # To ensure the same industry is not added twice
+        for code in range(lower_limit, upper_limit + 1):
+            code_str = str(code)
+            if code_str in _NAICS_MAP and prev_str != _NAICS_MAP[code_str]:
+                industry_str = industry_str + _NAICS_MAP[code_str]
+                prev_str = _NAICS_MAP[code_str]
+            else:
+                continue
+
+        return industry_str
+
+    if naics_val:
+        processed_str = 'NAICS'
+
+        # Remove namespaces
+        naics_val = naics_val[naics_val.find(':') + 1:]
+
+        # Strip NAICS/
+        naics_val = naics_val.replace('NAICS/', '')
+
+        matches = _NAICS_CODE_REGEX.findall(naics_val)
+        if not matches:
+            return None
+
+        for match_str in matches:
+            if match_str.find('-') != -1:  # Range
+                industry_str = _process_naics_range(match_str)
+            else:
+                industry_str = _NAICS_MAP[match_str]
+            processed_str = processed_str + industry_str
+        return processed_str
+    return None
+
+
+def _soc_code_to_name(soc_val: str) -> str:
+    """Converts SOCv2018 codes to their industry using the SOC_MAP from
+    soc_codes_names.py
+
+    Args:
+        soc_val: A SOCv2018 string literal to process.
+          Expected syntax of soc_val - SOCv2018/{code}
+    Returns:
+        A string with SOC code changed to it's occupation.
+        This string can be used in dcid generation. Returns the original string
+        if the code is not in the SOC_MAP. Returns None if the string is empty.
+    """
+    if soc_val:
+        processed_str = soc_val
+
+        # Remove namespaces
+        soc_val_ns_removed = soc_val[soc_val.find(':') + 1:]
+
+        # Strip SOCv2018/ to get the code
+        soc_code = soc_val_ns_removed.replace('SOCv2018/', '')
+
+        if soc_code in SOC_MAP:
+            processed_str = 'SOC' + SOC_MAP[soc_code]
+        return processed_str
+    return None
+
+
+def _prepend_append_replace(word,
+                            prepend='',
+                            append='',
+                            replace='',
+                            replacement=''):
+    """Prepends, appends and replaces text in a word.
+    Args:
+        word: A string literal to prepend, append or replace on.
+        prepend: A string literal to prepend to word.
+        append: A string literal to append to word.
+        replace: A string literal that repersents a substring in word to be
+          replaced.
+        replacement: A string literal. In word, all occurances of replace will
+          be changed to replacement.
+    Returns:
+        A string after appending, prepending and replacing to word.
+    """
+    if replace:
+        word = word.replace(replace, replacement)
+    if prepend:
+        word = prepend + word
+    if append:
+        word = word + append
+    return word
 
 
 def _generate_quantity_name(match_dict: dict) -> str:
@@ -146,20 +458,29 @@ def _process_constraint_property(prop: str, value: str) -> str:
     Returns:
         A string that can be used in dcid generation.
     """
-    match1 = _QUANTITY_RANGE_REGEX_1.match(value)
-    match2 = _QUANTITY_RANGE_REGEX_2.match(value)
-
-    if match1 or match2:  # Quantity Range
-        m_dict = match1.groupdict() if match1 else match2.groupdict()
-        name = _generate_quantity_range_name(m_dict)
+    if prop == 'naics':
+        name = _naics_code_to_name(value)
+    elif 'SOCv2018/' in value:
+        name = _soc_code_to_name(value)
     else:
-        match1 = _QUANTITY_REGEX_1.match(value)
-        match2 = _QUANTITY_REGEX_2.match(value)
-        if match1 or match2:  # Quantity
+        match1 = _QUANTITY_RANGE_REGEX_1.match(value)
+        match2 = _QUANTITY_RANGE_REGEX_2.match(value)
+
+        if match1 or match2:  # Quantity Range
             m_dict = match1.groupdict() if match1 else match2.groupdict()
-            name = _generate_quantity_name(m_dict)
+            name = _generate_quantity_range_name(m_dict)
         else:
-            name = _capitalize_process(value)
+            match1 = _QUANTITY_REGEX_1.match(value)
+            match2 = _QUANTITY_REGEX_2.match(value)
+            if match1 or match2:  # Quantity
+                m_dict = match1.groupdict() if match1 else match2.groupdict()
+                name = _generate_quantity_name(m_dict)
+            else:
+                name = _capitalize_process(value)
+
+    if prop in _PREPEND_APPEND_REPLACE_MAP:
+        name = _prepend_append_replace(name,
+                                       **_PREPEND_APPEND_REPLACE_MAP[prop])
 
     return name
 
@@ -193,10 +514,8 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     """
 
     # TODO: Add support for naming boolean constraints
-    # TODO: Replacing NAICS industry codes with the NAICS names
     # TODO: Renaming cause of death properties
     # TODO: Renaming DEA drug names
-    # TODO: Prepend or append text to some constraints to improve readability
     # TODO: InsuredUmemploymentRate should become Rate_Insured_Unemployment
 
     # Helper function to add a property to the dcid list.
@@ -236,6 +555,7 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     # measurementDenominator is added as a suffix
     if 'measurementDenominator' in svd:
         md = svd['measurementDenominator']
+        md = md[md.find(':') + 1:]  # Removing namespaces
         # Special case: PerCapita is directly appended.
         if md == 'PerCapita':
             denominator_suffix = 'PerCapita'
@@ -258,4 +578,5 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
         dcid_list.append(denominator_suffix)
 
     dcid = '_'.join(dcid_list)
+    dcid = _LEGACY_MAP.get(dcid, dcid)
     return dcid
