@@ -21,17 +21,20 @@ import os
 import sys
 import tempfile
 import unittest
-import subprocess
 
-# Allows the unittest to access table directories in relative path
+# Allows the unittest to access table directories in relative path. Also used to
+# import modules for generating cleaned CSV, MCF and Column Map
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))
+
+from common.data_loader import process_subject_tables
+from process import set_column_map
 
 # These directories are excluded from testing
 _EXCLUDE_DIRS = ['common', 's2201', '__pycache__']
 
 
-def get_paths(table_dir):
+def _get_paths(table_dir):
     """Gets paths to the spec, CSV, StatVar MCF, Column Map and test zip file.
     Args:
         table_dir: Path to the subject table directory.
@@ -48,30 +51,34 @@ def get_paths(table_dir):
         A tuple of the paths to the spec, CSV, Stat Var MCF, column map and test
         zip file.
     """
-    spec_path = None
-    statvar_mcf_path = None
-    csv_path = None
-    column_map_path = None
-    zip_path = None
+    paths = dict()
 
     # Find spec, Expects spec to be in table_dir
     for filename in os.listdir(table_dir):
         if 'spec.json' in filename:
-            spec_path = os.path.join(table_dir, filename)
+            paths['spec'] = os.path.join(table_dir, filename)
 
     # Expects StatVar MCF, Column Map, CSV and test zip to be in testdata folder
     testdata_path = os.path.join(table_dir, 'testdata')
     for filename in os.listdir(testdata_path):
         if 'cleaned.csv' in filename:
-            csv_path = os.path.join(testdata_path, filename)
+            paths['csv'] = os.path.join(testdata_path, filename)
         elif 'output.mcf' in filename:
-            statvar_mcf_path = os.path.join(testdata_path, filename)
+            paths['mcf'] = os.path.join(testdata_path, filename)
         elif 'column_map.json' in filename:
-            column_map_path = os.path.join(testdata_path, filename)
+            paths['cmap'] = os.path.join(testdata_path, filename)
         elif filename.endswith('.zip'):
-            zip_path = os.path.join(testdata_path, filename)
+            paths['zip'] = os.path.join(testdata_path, filename)
 
-    return spec_path, csv_path, statvar_mcf_path, column_map_path, zip_path
+    return paths
+
+
+def _read_files(test_path, expected_path):
+    with open(test_path, 'r') as test_f:
+        test_result = test_f.read()
+    with open(expected_path, 'r') as expected_f:
+        expected_result = expected_f.read()
+    return test_result, expected_result
 
 
 class TestSubjectTable(unittest.TestCase):
@@ -93,53 +100,44 @@ class TestSubjectTable(unittest.TestCase):
     def test_csv_mcf_column_map(self):
 
         for table_dir_path in self.test_dirs:
-            with self.subTest(table_dir_path=table_dir_path):
-                spec_path, csv_path, statvar_mcf_path, column_map_path, \
-                    zip_path = get_paths(table_dir_path)
+            paths = _get_paths(table_dir_path)
 
-                # Check if all required files exist
-                self.assertTrue(spec_path is not None)
-                self.assertTrue(csv_path is not None)
-                self.assertTrue(statvar_mcf_path is not None)
-                self.assertTrue(column_map_path is not None)
-                self.assertTrue(zip_path is not None)
+            # Check if all required files exist
+            expected_keys = ['spec', 'csv', 'mcf', 'cmap', 'zip']
+            for file_key in expected_keys:
+                with self.subTest(table=table_dir_path, file_key=file_key):
+                    self.assertTrue(file_key in paths)
 
-                # TODO: Look into speeding up this section of the code
-                with tempfile.TemporaryDirectory() as tmp_dir:
-                    # Run scripts/us_census/acs5yr/subject_tables/process.py
-                    process_arg = ['python']
-                    process_arg.append(os.path.join(_SCRIPT_PATH, 'process.py'))
-                    process_arg.append('--table_prefix=test')
-                    process_arg.append(f'--spec_path={spec_path}')
-                    process_arg.append(f'--input_path={zip_path}')
-                    process_arg.append(f'--output_dir={tmp_dir}')
-                    process_arg.append('--has_percent=True')
-                    process_arg.append('--debug=False')
+            # TODO: Look into speeding up this section of the code
+            with tempfile.TemporaryDirectory() as tmp_dir:
+                # generate CSV, MCF and Column Map
+                set_column_map(paths['zip'], paths['spec'], tmp_dir)
+                process_subject_tables(table_prefix='test',
+                                       input_path=paths['zip'],
+                                       output_dir=tmp_dir,
+                                       column_map_path=os.path.join(
+                                           tmp_dir, 'column_map.json'),
+                                       spec_path=paths['spec'],
+                                       debug=False,
+                                       delimiter='!!',
+                                       has_percent=True)
 
-                    subprocess.run(process_arg, check=True)
+                test_mcf_path = os.path.join(tmp_dir, 'test_output.mcf')
+                test_cmap_path = os.path.join(tmp_dir, 'column_map.json')
+                test_csv_path = os.path.join(tmp_dir, 'test_cleaned.csv')
 
-                    test_mcf_path = os.path.join(tmp_dir, 'test_output.mcf')
-                    test_column_map_path = os.path.join(tmp_dir,
-                                                        'column_map.json')
-                    test_csv_path = os.path.join(tmp_dir, 'test_cleaned.csv')
-
+                with self.subTest(table=table_dir_path):
                     # Test StatVar MCF
-                    with open(test_mcf_path, 'r') as mcf_f:
-                        mcf_result = mcf_f.read()
-                        with open(statvar_mcf_path, 'r') as expected_mcf_f:
-                            expected_mcf_result = expected_mcf_f.read()
-                            self.assertEqual(mcf_result, expected_mcf_result)
+                    test_mcf, expected_mcf = _read_files(
+                        test_mcf_path, paths['mcf'])
+                    self.assertEqual(test_mcf, expected_mcf)
 
                     # Test Column Map
-                    with open(test_column_map_path, 'r') as cmap_f:
-                        cmap_result = cmap_f.read()
-                        with open(column_map_path, 'r') as expected_cmap_f:
-                            expected_cmap_result = expected_cmap_f.read()
-                            self.assertEqual(cmap_result, expected_cmap_result)
+                    test_cmap, expected_cmap = _read_files(
+                        test_cmap_path, paths['cmap'])
+                    self.assertEqual(test_cmap, expected_cmap)
 
                     # Test CSV
-                    with open(test_csv_path, 'r') as csv_f:
-                        csv_result = csv_f.read()
-                        with open(csv_path, 'r') as expected_csv_f:
-                            expected_csv_result = expected_csv_f.read()
-                            self.assertEqual(csv_result, expected_csv_result)
+                    test_csv, expected_csv = _read_files(
+                        test_csv_path, paths['csv'])
+                    self.assertEqual(test_csv, expected_csv)
