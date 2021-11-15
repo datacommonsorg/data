@@ -24,7 +24,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))
 
 from common.data_loader import process_subject_tables
-from process import set_column_map
+from .process import set_column_map
 
 # These directories are excluded from testing
 _EXCLUDE_DIRS = ['common', 's2201', '__pycache__']
