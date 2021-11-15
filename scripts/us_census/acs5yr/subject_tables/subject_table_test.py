@@ -13,10 +13,6 @@
 # limitations under the License.
 """Generic test for subject tables"""
 
-# pylint: disable=missing-module-docstring
-# pylint: disable=missing-class-docstring
-# pylint: disable=missing-function-docstring
-
 import os
 import sys
 import tempfile
@@ -51,7 +47,7 @@ def _get_paths(table_dir):
         A tuple of the paths to the spec, CSV, Stat Var MCF, column map and test
         zip file.
     """
-    paths = dict()
+    paths = {}
 
     # Find spec, Expects spec to be in table_dir
     for filename in os.listdir(table_dir):
@@ -85,8 +81,7 @@ class TestSubjectTable(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        # A list of all directories to be tested
-        cls.test_dirs = []
+        cls.test_dirs = []  # A list of all directories to be tested
         for table_dir in os.listdir(_SCRIPT_PATH):
             table_dir_path = os.path.join(_SCRIPT_PATH, table_dir)
             process_path = os.path.join(_SCRIPT_PATH, table_dir, 'process.py')
