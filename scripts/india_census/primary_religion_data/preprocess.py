@@ -22,10 +22,43 @@ import tempfile
 from os import path
 import urllib.request
 from ..common.utils import title_case
-from ..common.generic_base import CensusGenericDataLoaderBase
+
+CENSUS_DATA_COLUMN_START = 7
+
+dcid_mapping = {}
+dcid_mapping["Hindu"] = "dcid:Hindu"
+dcid_mapping["Muslim"] = "dcid:Muslim"
+dcid_mapping["Christian"] = "dcid:Christian"
+dcid_mapping["Sikh"] = "dcid:Sikh"
+dcid_mapping["Buddhist"] = "dcid:Buddhist"
+dcid_mapping["Jain"] = "dcid:Jain"
+dcid_mapping["Other religions and persuasions"] = "dcid:OtherReligionAndPersuasions"
+dcid_mapping["Religion not stated"] = "dcid:ReligionNotStated"
+
+GENERIC_TEMPLATE_STAT_VAR = """Node: dcid:{name}
+description: "{description}"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:{populationType}
+statType: dcs:{statType}
+measuredProperty: dcs:{measuredProperty}
+{constraints}
+
+"""
+
+GENERIC_TEMPLATE_TMCF = """Node: E:IndiaCensus{year}_{dataset_name}->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaCensus{year}_{dataset_name}->StatisticalVariable
+observationDate: C:IndiaCensus{year}_{dataset_name}->Year
+observationAbout: E:IndiaCensus{year}_{dataset_name}->E1
+value: C:IndiaCensus{year}_{dataset_name}->Value
+
+Node: E:IndiaCensus{year}_{dataset_name}->E1
+typeOf: schema:Place
+indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_id"""
 
 
-class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
+class CensusPrimaryReligiousDataLoader():
+
     """An object that represents Census Data and its variables.
     
     Attributes:
@@ -77,6 +110,35 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
         self.census_columns = []
         self.data_categories = data_categories
         self.data_category_column = data_category_column
+
+    def _download_and_standardize(self):
+        dtype = {
+            'State': str,
+            'District': str,
+            'Subdistt': str,
+            "Town/Village": str
+        }
+        self.raw_df = pd.read_excel(self.data_file_path, dtype=dtype)
+        self.census_columns = self.raw_df.columns[CENSUS_DATA_COLUMN_START:]
+
+    def _format_location(self, row):
+        # In this specific format there is no Level defined.
+        # A non zero location code from the lowest administration area
+        # takes the precedence.
+        if row["Town/Village"] != "000000":
+            return row["Town/Village"]
+
+        elif row["Subdistt"] != "00000":
+            return row["Subdistt"]
+
+        elif row["District"] != "000":
+            return row["District"]
+
+        elif row["State"] != "00":
+            return row["State"]
+        else:
+            # This is india level location
+            return "0"
 
     def _format_data(self):
 
@@ -147,14 +209,18 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
     def _get_base_name(self, row):
         # To make the name meaningful add Religion to the
         # the name of the stat var
-        name = "Count_" + row["populationType"] + "_Religion"
+        name = "Count_" + row["populationType"]
         return name
+    
+    def _get_base_constraints(self, row):
+        constraints = ""
+        return constraints
 
     def _get_stat_var_name(self, name):
-        return "dcid:indianCensus/{}".format(name)
+        return "dcid:{}".format(name)
 
     def _get_measured_property_name(self, name):
-        return "dcs:indianCensus/{}".format(name)
+        return "dcs:count"
 
     def _create_variable(self,
                          data_row,
@@ -162,67 +228,98 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
                          data_category=None):
         row = copy.deepcopy(data_row)
         name_array = []
+        constraints_array = []
 
         name_array.append(self._get_base_name(row))
 
+        # No need to add empty constraint to the list
+        if self._get_base_constraints(row) != "":
+            constraints_array.append(self._get_base_constraints(row))
+
         if data_category:
-            name_array.append(title_case(data_category))
+            name_array.append(title_case(data_category))            
             row["description"] = row["description"] + " - " + data_category
+            if data_category in ["Total"]:
+                pass
+            else:
+                constraints_array.append("religion: "+dcid_mapping[data_category])
+
 
         if row["age"] == "YearsUpto6":
             name_array.append("YearsUpto6")
+            constraints_array.append("age: dcid:YearsUpto6")
 
         if row["socialCategory"] == "ScheduledCaste":
             name_array.append("ScheduledCaste")
+            constraints_array.append("socialCategory: dcs:ScheduledCaste")
         if row["socialCategory"] == "ScheduledTribe":
             name_array.append("ScheduledTribe")
+            constraints_array.append("socialCategory: dcs:ScheduledTribe")            
 
         if row["literacyStatus"] == "Literate":
             name_array.append("Literate")
-        if row["literacyStatus"] == "Illiterate":
+            constraints_array.append("literacyStatus: dcs:Literate")
+        elif row["literacyStatus"] == "Illiterate":
             name_array.append("Illiterate")
-        else:
-            pass
+            constraints_array.append("literacyStatus: dcs:Illiterate")
 
         if row["workerStatus"] == "Worker":
             if row["workerClassification"] == "MainWorker":
                 name_array.append("MainWorker")
+                constraints_array.append("workerClassification: dcs:MainWorker")
                 if row["workCategory"] != "":
                     name_array.append(row["workCategory"])
+                    constraints_array.append("workCategory: dcs:" +
+                                             row["workCategory"])
 
             elif row["workerClassification"] == "MarginalWorker":
                 name_array.append("MarginalWorker")
+                constraints_array.append(
+                    "workerClassification: dcs:MarginalWorker")
 
                 if row["workCategory"] != "":
                     name_array.append(row["workCategory"])
+                    constraints_array.append("workCategory: dcs:" +
+                                             row["workCategory"])
 
                 if row["workPeriod"] == "[Month - 3]":
                     name_array.append("WorkedUpto3Months")
+                    constraints_array.append("workPeriod:" + row["workPeriod"])
 
                 if row["workPeriod"] == "[Month 3 6]":
                     name_array.append("Worked3To6Months")
+                    constraints_array.append("workPeriod:" + row["workPeriod"])
+
             else:
                 name_array.append("Workers")
 
         elif row["workerStatus"] == "NonWorker":
             name_array.append("NonWorker")
+            constraints_array.append("workerStatus: dcs:NonWorker")
 
         if place_of_residence == "Urban":
             name_array.append("Urban")
+            constraints_array.append(
+                "placeOfResidenceClassification: dcs:Urban")            
             row["description"] = row["description"] + " - Urban"
 
-        elif place_of_residence == "Rural":
+        elif place_of_residence == "Rural":            
             name_array.append("Rural")
+            constraints_array.append(
+                "placeOfResidenceClassification: dcs:Rural")            
             row["description"] = row["description"] + " - Rural"
 
         if row["gender"] == "Male":
             name_array.append("Male")
+            constraints_array.append("gender: schema:Male")
 
         elif row["gender"] == "Female":
             name_array.append("Female")
+            constraints_array.append("gender: schema:Female")
 
         name = "_".join(name_array)
         row["name"] = name
+        row["constraints"] = "\n".join(constraints_array)
 
         key = "{0}_{1}".format(
             row["columnName"],
@@ -236,7 +333,7 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
         row["measuredProperty"] = self._get_measured_property_name(name)
         self.mcf.append(row)
 
-        stat_var = self.GENERIC_TEMPLATE_STAT_VAR.format(**dict(row))
+        stat_var = GENERIC_TEMPLATE_STAT_VAR.format(**dict(row))
 
         return name, stat_var
 
@@ -280,6 +377,17 @@ class CensusPrimaryReligiousDataLoader(CensusGenericDataLoaderBase):
                                     pass
                                 else:
                                     f_out.write(stat_var)
+    def _create_tmcf(self):
+        with open(self.tmcf_file_path, 'w+', newline='') as f_out:
+            f_out.write(
+                GENERIC_TEMPLATE_TMCF.format(
+                    year=self.census_year, dataset_name=self.dataset_name))
+
+    def process(self):
+        self._download_and_standardize()
+        self._create_mcf()
+        self._create_tmcf()
+        self._format_data()
 
 
 if __name__ == '__main__':
@@ -289,7 +397,14 @@ if __name__ == '__main__':
         '../common/primary_abstract_data_variables.csv')
 
     # These are basic statvars
-    existing_stat_var = []
+    existing_stat_var = [
+        "Count_Household",
+        "Count_Person",
+        "Count_Person_Urban",
+        "Count_Person_Rural",
+        "Count_Person_Male",
+        "Count_Person_Female",
+    ]
 
     # These are generated as part of `primary_census_abstract_data`
     # No need to create them again or include them in MCF
@@ -339,36 +454,39 @@ if __name__ == '__main__':
     # Iterate through state files and just create the final CSV file
     # We already have the MCF and TMCF file
 
-    state_data_files = [
-        "RL-0100", "RL-0200", "RL-0300", "RL-0400", "RL-0500", "RL-0600",
-        "RL-0700", "RL-0800", "RL-0900", "RL-1000", "RL-1100", "RL-1200",
-        "RL-1300", "RL-1400", "RL-1500", "RL-1600", "RL-1700", "RL-1800",
-        "RL-1900", "RL-2000", "RL-2100", "RL-2200", "RL-2300", "RL-2400",
-        "RL-2500", "RL-2600", "RL-2700", "RL-2800", "RL-2900", "RL-3000",
-        "RL-3100", "RL-3200", "RL-3300", "RL-3400", "RL-3500"
-    ]
-    tmp_dir = tempfile.gettempdir()
+    # state_data_files = [
+    #     "RL-0100", "RL-0200", "RL-0300", "RL-0400", "RL-0500", "RL-0600",
+    #     "RL-0700", "RL-0800", "RL-0900", "RL-1000", "RL-1100", "RL-1200",
+    #     "RL-1300", "RL-1400", "RL-1500", "RL-1600", "RL-1700", "RL-1800",
+    #     "RL-1900", "RL-2000", "RL-2100", "RL-2200", "RL-2300", "RL-2400",
+    #     "RL-2500", "RL-2600", "RL-2700", "RL-2800", "RL-2900", "RL-3000",
+    #     "RL-3100", "RL-3200", "RL-3300", "RL-3400", "RL-3500"
+    # ]
+    # state_data_files = [
+    #     "RL-0100","RL-0200", "RL-0300"
+    # ]
+    # tmp_dir = tempfile.gettempdir()
 
-    # we dont need to redefine the tmcf file and mcf file
-    # we can reuse the ones we used already. Hence discard them
-    tmcf_file_path = os.path.join(tmp_dir, "temp.tmcf")
-    mcf_file_path = os.path.join(tmp_dir, "temp.mcf")
+    # # we dont need to redefine the tmcf file and mcf file
+    # # we can reuse the ones we used already. Hence discard them
+    # tmcf_file_path = os.path.join(tmp_dir, "temp.tmcf")
+    # mcf_file_path = os.path.join(tmp_dir, "temp.mcf")
 
-    for state_data_file in state_data_files:
+    # for state_data_file in state_data_files:
 
-        data_file_path = os.path.join(
-            os.path.dirname(__file__), 'data/{state_data_file}.xlsx'.format(
-                state_data_file=state_data_file))
+    #     data_file_path = os.path.join(
+    #         os.path.dirname(__file__), 'data/{state_data_file}.xlsx'.format(
+    #             state_data_file=state_data_file))
 
-        loader = CensusPrimaryReligiousDataLoader(
-            data_file_path=data_file_path,
-            metadata_file_path=metadata_file_path,
-            mcf_file_path=mcf_file_path,
-            tmcf_file_path=tmcf_file_path,
-            csv_file_path=csv_file_path,
-            existing_stat_var=existing_stat_var,
-            census_year=2011,
-            dataset_name="Primary_Abstract_Religion",
-            data_categories=data_categories,
-            data_category_column="Religion")
-        loader.process()
+    #     loader = CensusPrimaryReligiousDataLoader(
+    #         data_file_path=data_file_path,
+    #         metadata_file_path=metadata_file_path,
+    #         mcf_file_path=mcf_file_path,
+    #         tmcf_file_path=tmcf_file_path,
+    #         csv_file_path=csv_file_path,
+    #         existing_stat_var=existing_stat_var,
+    #         census_year=2011,
+    #         dataset_name="Primary_Abstract_Religion",
+    #         data_categories=data_categories,
+    #         data_category_column="Religion")
+    #     loader.process()
