@@ -68,11 +68,11 @@ class TestPreprocess(unittest.TestCase):
         self.assertEqual("malerkotla", row.iloc[0]["closestDistrictLabel"])
         self.assertEqual("Q1470987", row.iloc[0]["WikiDataId"])
 
-        # `Warangal Urban` renamed `Hanamkonda` 
+        # `Warangal Urban` renamed `Hanamkonda`
         row = clean_df.loc[clean_df["WikiDataId"] == "Q213077"]
         self.assertEqual("hanumakonda", row.iloc[0]["LGDDistrictName"])
 
-        # `Warangal Rural` renamed `Warangal` 
+        # `Warangal Rural` renamed `Warangal`
         row = clean_df.loc[clean_df["WikiDataId"] == "Q28169759"]
         self.assertEqual("warangal", row.iloc[0]["LGDDistrictName"])
 

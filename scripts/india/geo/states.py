@@ -258,4 +258,5 @@ class IndiaStatesMapper:
             return INDIA_STATES_LGD_CODES[state_name]
         else:
             raise Exception(
-                "State name - {state_name} is not found in the INDIA_STATES_LGD_CODES mapping".format(state_name=state_name))
+                "State name - {state_name} is not found in the INDIA_STATES_LGD_CODES mapping"
+                .format(state_name=state_name))
