@@ -103,7 +103,8 @@ class GeographicLevel(enum.Enum):
     DISTRICT = "district"
     BLOCK = "block"
 
-
+# UDISE School Category Mapping. Currently UDISE doesn't
+# have category 9.
 ATTRIBUTE_MAPPING = {
     "cat1": {
         "levelOfSchool": "PrimarySchool_Grade1To5"
