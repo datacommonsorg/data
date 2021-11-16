@@ -39,7 +39,8 @@ MANUAL_OVERRIDE = {
     },
     "telangana": {
         "jagitial": "jagtial",
-        "jangoan": "jangaon"
+        "jangoan": "jangaon",
+        "hanumakonda":"hanamkonda"
     },
 }
 
@@ -69,7 +70,7 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         census2001_state_code = IndiaStatesMapper.get_state_name_to_census2001_code_mapping(
             s["LGDStateName"], s["LGDDistrictName"])
         census2001_code = s["LGDCensus2001Code"]
-        CodeFormatter.format_census2001_district_code(census2001_state_code,
+        return CodeFormatter.format_census2001_district_code(census2001_state_code,
                                                       census2001_code)
 
     def get_closest_district_label(self, lgddata_row):
@@ -105,7 +106,7 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             return match[0]
 
         # Throw an exception if nothing is found
-        raise Exception("No matching district was found.")
+        raise Exception("No matching district was found for {lgdStateName} - {lgdDistrictName}".format(lgdStateName=lgdStateName, lgdDistrictName=lgdDistrictName))
 
     @staticmethod
     def format_wikidataid(s):

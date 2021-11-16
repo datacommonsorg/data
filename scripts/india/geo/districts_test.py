@@ -42,3 +42,19 @@ class TestPreprocess(unittest.TestCase):
         district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
             "tamilnadu", "thoothukudi")
         self.assertEqual(district_lgd_code, "594")
+
+        district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
+            "karnataka", "vijayanagar")
+        self.assertEqual(district_lgd_code, "738")
+
+        district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
+            "karnataka", "vijayapura")
+        self.assertEqual(district_lgd_code, "530")
+
+        district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
+            "telangana","hanamkonda")
+        self.assertEqual(district_lgd_code, "686")
+
+        district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
+            "telangana", "warangal")
+        self.assertEqual(district_lgd_code, "522")
