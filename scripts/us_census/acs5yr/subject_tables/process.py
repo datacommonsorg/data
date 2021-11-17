@@ -25,7 +25,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              './common'))  # for col_map_generator, data_loader
 
-from generate_col_map import generate_stat_var_map, process_zip_file, generate_mcf_from_column_map
+from generate_col_map import process_zip_file, generate_mcf_from_column_map
 from data_loader import process_subject_tables
 
 FLAGS = flags.FLAGS
