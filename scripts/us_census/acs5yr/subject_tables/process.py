@@ -78,6 +78,11 @@ def main(argv):
     create_mcf = FLAGS.create_mcf
     debug = FLAGS.debug
 
+    input_path = os.path.expanduser(input_path)
+    output_dir = os.path.expanduser(output_dir)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir, exist_ok=True)
+
     # TODO: remove the constraint of inputs being only zip file
     # context: the current implementation of the column map generator accepts
     # only zip files as input and we will need to add new methods to handle inputs

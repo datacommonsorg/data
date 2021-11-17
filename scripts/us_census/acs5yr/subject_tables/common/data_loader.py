@@ -103,6 +103,7 @@ def process_subject_tables(table_prefix='',
                                              header_row=header_row)
 
     ## if input_path is a file, select csv/zip processing methods
+    input_path = os.path.expanduser(input_path)
     _, file_extension = os.path.splitext(input_path)
     if file_extension == '.zip':
         data_loader._process_zip_file(input_path)
@@ -166,7 +167,7 @@ class SubjectTableDataLoaderBase:
 
         ## set the output path, if not exists, make directory
         if not os.path.exists(output_path_dir):
-            os.mkdir(output_path_dir)
+            os.makedirs(output_path_dir, exist_ok=True)
         self.output_path_dir = output_path_dir
         self.base_tmcf_path = os.path.join(_SCRIPT_PATH,
                                            './subject_table_base.tmcf')

@@ -88,6 +88,9 @@ def process_zip_file(zip_file_path,
     spec_path = os.path.expanduser(spec_path)
     output_dir_path = os.path.expanduser(output_dir_path)
     
+    if not os.path.exists(output_dir_path):
+        os.makedirs(output_dir_path, exist_ok=True)
+
     f = open(spec_path, 'r')
     spec_dict = json.load(f)
     f.close()
@@ -110,7 +113,7 @@ def process_zip_file(zip_file_path,
     ## save the column_map
     if write_output:
         print('Writing output to', output_dir_path)
-        f = open(f'{output_dir_path}/column_map.json', 'w')
+        f = open(os.path.join(output_dir_path,'column_map.json'), 'w')
         json.dump(column_map, f, indent=4)
         f.close()
     return column_map
@@ -142,6 +145,9 @@ def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
 
 
 def generate_mcf_from_column_map(column_map, output_path_dir):
+    if not os.path.exists(output_path_dir):
+        os.makedirs(output_path_dir, exist_ok=True)
+    
     mcf_dict = {}
     
     for year in column_map:
