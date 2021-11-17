@@ -125,6 +125,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    flags.mark_flags_as_required(
-        ['spec_path', 'input_path'])
+    flags.mark_flags_as_required(['spec_path', 'input_path'])
     app.run(main)

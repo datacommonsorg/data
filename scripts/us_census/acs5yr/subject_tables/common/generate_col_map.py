@@ -87,7 +87,7 @@ def process_zip_file(zip_file_path,
     zip_file_path = os.path.expanduser(zip_file_path)
     spec_path = os.path.expanduser(spec_path)
     output_dir_path = os.path.expanduser(output_dir_path)
-    
+
     if not os.path.exists(output_dir_path):
         os.makedirs(output_dir_path, exist_ok=True)
 
@@ -113,7 +113,7 @@ def process_zip_file(zip_file_path,
     ## save the column_map
     if write_output:
         print('Writing output to', output_dir_path)
-        f = open(os.path.join(output_dir_path,'column_map.json'), 'w')
+        f = open(os.path.join(output_dir_path, 'column_map.json'), 'w')
         json.dump(column_map, f, indent=4)
         f.close()
     return column_map
@@ -144,7 +144,8 @@ def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
     return col_map_obj._generate_stat_vars_from_spec()
 
 
-def generate_mcf_from_column_map(column_map: dict, output_path_dir: str = './') -> str:
+def generate_mcf_from_column_map(column_map: dict,
+                                 output_path_dir: str = './') -> str:
     """Function that generates and stores mcf file from given column map
     Args:
         column_map: dict containing yearwise mapping of column name to it's statvar
@@ -154,9 +155,9 @@ def generate_mcf_from_column_map(column_map: dict, output_path_dir: str = './') 
     """
     if not os.path.exists(output_path_dir):
         os.makedirs(output_path_dir, exist_ok=True)
-    
+
     mcf_dict = {}
-    
+
     for year in column_map:
         for column_name in column_map[year]:
             dcid = column_map[year][column_name]['Node']
@@ -165,7 +166,7 @@ def generate_mcf_from_column_map(column_map: dict, output_path_dir: str = './') 
                 mcf_dict[dcid] = {}
                 ## add pvs to dict
                 for key, value in column_map[year][column_name].items():
-                        mcf_dict[dcid][key] = value
+                    mcf_dict[dcid][key] = value
 
     ## create final output string to be written to mcf file
     final_mcf = ""
@@ -175,21 +176,20 @@ def generate_mcf_from_column_map(column_map: dict, output_path_dir: str = './') 
 
         dcid = 'Node: ' + dcid
         col_stat_var.append(dcid)
-        
+
         for p, v in stat_var.items():
             if p != 'unit' and p != 'scalingFactor' and p != 'Node':
                 col_stat_var.append(f"{p}: {v}")
 
         final_mcf = final_mcf + '\n'.join(col_stat_var) + "\n\n"
-    
+
     print('Writing mcf output to', output_path_dir)
-    f = open(
-            os.path.join(output_path_dir, 'statvars_all.mcf'),
-            'w')
+    f = open(os.path.join(output_path_dir, 'statvars_all.mcf'), 'w')
     f.write(final_mcf)
     f.close()
 
     return final_mcf
+
 
 class GenerateColMapBase:
     """module to generate a column map given a list of columns of the dataset and a JSON Spec
