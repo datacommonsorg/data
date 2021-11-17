@@ -371,7 +371,7 @@ class SubjectTableDataLoaderBase:
 
         #get cleaned column map
         final_mcf = ""
-
+        # NOTE: this code is duplicated in generate_col_map, any changes here should also be copied there
         for column, stat_var in self.mcf_dict.items():
             col_stat_var = []
             # TODO: Add 'Node:' as the first element of col_stat_var, and append

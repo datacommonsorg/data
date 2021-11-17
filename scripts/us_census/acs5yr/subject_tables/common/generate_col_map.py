@@ -144,7 +144,14 @@ def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
     return col_map_obj._generate_stat_vars_from_spec()
 
 
-def generate_mcf_from_column_map(column_map, output_path_dir):
+def generate_mcf_from_column_map(column_map: dict, output_path_dir: str = './') -> str:
+    """Function that generates and stores mcf file from given column map
+    Args:
+        column_map: dict containing yearwise mapping of column name to it's statvar
+        output_path_dir: path at which the output file is to be stored
+    Returns:
+        str containing the statvar definitions, this is the string written to output file (statvars_all.mcf)
+    """
     if not os.path.exists(output_path_dir):
         os.makedirs(output_path_dir, exist_ok=True)
     
