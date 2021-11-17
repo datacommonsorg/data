@@ -15,6 +15,19 @@
 
 import copy
 import re
+import os
+import sys
+
+#pylint: disable=wrong-import-position
+#pylint: disable=import-error
+
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # For soc_codes_names
+
+from soc_codes_names import SOC_MAP
+#pylint: enable=wrong-import-position
+#pylint: enable=import-error
 
 # Global constants
 # Regex to match the quantity notations - [value quantity], [quantity value]
@@ -204,6 +217,14 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'placeOfBirth': {
         'prepend': 'PlaceOfBirth'
+    },
+    'dateMovedIntoHousingUnit': {
+        'prepend': 'MovedIn',
+        'replace': 'Date',
+        'replacement': ''
+    },
+    'bachelorDegreeMajor': {
+        'prepend': 'BachelorOf'
     }
 }
 
@@ -274,12 +295,20 @@ def _generate_quantity_range_name(match_dict: dict) -> str:
     except KeyError:
         return None
 
+    # Joining word to be used when upper_limit or lower_limit is '-'
+    ul_conjunction = 'More'
+    ll_conjunction = 'Less'
     quantity = _capitalize_process(quantity)
+
+    if quantity == 'Date':  # Special case
+        ul_conjunction = 'Later'
+        ll_conjunction = 'Earlier'
+
     if upper_limit == '-':
-        return f'{lower_limit}OrMore{quantity}'
+        return f'{lower_limit}Or{ul_conjunction}{quantity}'
 
     if lower_limit == '-':
-        return f'{upper_limit}OrLess{quantity}'
+        return f'{upper_limit}Or{ll_conjunction}{quantity}'
 
     return f'{lower_limit}To{upper_limit}{quantity}'
 
@@ -338,6 +367,33 @@ def _naics_code_to_name(naics_val: str) -> str:
             else:
                 industry_str = _NAICS_MAP[match_str]
             processed_str = processed_str + industry_str
+        return processed_str
+    return None
+
+
+def _soc_code_to_name(soc_val: str) -> str:
+    """Converts SOCv2018 codes to their industry using the SOC_MAP from
+    soc_codes_names.py
+
+    Args:
+        soc_val: A SOCv2018 string literal to process.
+          Expected syntax of soc_val - SOCv2018/{code}
+    Returns:
+        A string with SOC code changed to it's occupation.
+        This string can be used in dcid generation. Returns the original string
+        if the code is not in the SOC_MAP. Returns None if the string is empty.
+    """
+    if soc_val:
+        processed_str = soc_val
+
+        # Remove namespaces
+        soc_val_ns_removed = soc_val[soc_val.find(':') + 1:]
+
+        # Strip SOCv2018/ to get the code
+        soc_code = soc_val_ns_removed.replace('SOCv2018/', '')
+
+        if soc_code in SOC_MAP:
+            processed_str = 'SOC' + SOC_MAP[soc_code]
         return processed_str
     return None
 
@@ -404,6 +460,8 @@ def _process_constraint_property(prop: str, value: str) -> str:
     """
     if prop == 'naics':
         name = _naics_code_to_name(value)
+    elif 'SOCv2018/' in value:
+        name = _soc_code_to_name(value)
     else:
         match1 = _QUANTITY_RANGE_REGEX_1.match(value)
         match2 = _QUANTITY_RANGE_REGEX_2.match(value)
