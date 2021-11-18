@@ -1,0 +1,146 @@
+Node: dcid:Count_Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+languageSpokenAtHome: dcid:Spanish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_SpanishSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+languageSpokenAtHome: dcid:Spanish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_OtherIndoEuropeanLanguagesSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+languageSpokenAtHome: dcid:OtherIndoEuropeanLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_OtherIndoEuropeanLanguagesSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+languageSpokenAtHome: dcid:OtherIndoEuropeanLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_AsianAndPacificIslandLanguagesSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+languageSpokenAtHome: dcid:AsianAndPacificIslandLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_AsianAndPacificIslandLanguagesSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+languageSpokenAtHome: dcid:AsianAndPacificIslandLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_OtherLanguagesSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+languageSpokenAtHome: dcid:OtherLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_OtherLanguagesSpokenAtHome
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+languageSpokenAtHome: dcid:OtherLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold_SpanishSpokenAtHome
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+languageSpokenAtHome: dcid:Spanish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold_SpanishSpokenAtHome
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+languageSpokenAtHome: dcid:Spanish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold_OtherIndoEuropeanLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+languageSpokenAtHome: dcid:OtherIndoEuropeanLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold_OtherIndoEuropeanLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+languageSpokenAtHome: dcid:OtherIndoEuropeanLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold_AsianAndPacificIslandLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+languageSpokenAtHome: dcid:AsianAndPacificIslandLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold_AsianAndPacificIslandLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+languageSpokenAtHome: dcid:AsianAndPacificIslandLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold_OtherLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+languageSpokenAtHome: dcid:OtherLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold_OtherLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcid:LimitedEnglishSpeakingHousehold
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+languageSpokenAtHome: dcid:OtherLanguages
+typeOf: dcs:StatisticalVariable
+
