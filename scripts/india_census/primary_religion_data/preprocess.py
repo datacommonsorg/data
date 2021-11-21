@@ -26,14 +26,14 @@ from ..common.utils import title_case
 CENSUS_DATA_COLUMN_START = 7
 
 dcid_mapping = {}
-dcid_mapping["Hindu"] = "dcid:Hindu"
-dcid_mapping["Muslim"] = "dcid:Muslim"
-dcid_mapping["Christian"] = "dcid:Christian"
-dcid_mapping["Sikh"] = "dcid:Sikh"
-dcid_mapping["Buddhist"] = "dcid:Buddhist"
-dcid_mapping["Jain"] = "dcid:Jain"
-dcid_mapping["Other religions and persuasions"] = "dcid:OtherReligionAndPersuasions"
-dcid_mapping["Religion not stated"] = "dcid:ReligionNotStated"
+dcid_mapping["Hindu"] = "dcs:Hindu"
+dcid_mapping["Muslim"] = "dcs:Muslim"
+dcid_mapping["Christian"] = "dcs:Christian"
+dcid_mapping["Sikh"] = "dcs:Sikh"
+dcid_mapping["Buddhist"] = "dcs:Buddhist"
+dcid_mapping["Jain"] = "dcs:Jain"
+dcid_mapping["Other religions and persuasions"] = "dcs:OtherReligionAndPersuasions"
+dcid_mapping["Religion not stated"] = "dcs:ReligionNotStated"
 
 GENERIC_TEMPLATE_STAT_VAR = """Node: dcid:{name}
 description: "{description}"
