@@ -226,7 +226,7 @@ class CensusPrimaryReligiousDataLoader():
         return "dcid:{}".format(name)
 
     def _get_measured_property_name(self, name):
-        return "dcs:count"
+        return "count"
 
     def _create_variable(self,
                          data_row,
