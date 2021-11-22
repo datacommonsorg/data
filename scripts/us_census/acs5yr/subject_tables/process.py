@@ -80,6 +80,8 @@ def main(argv):
 
     input_path = os.path.expanduser(input_path)
     output_dir = os.path.expanduser(output_dir)
+    spec_path = os.path.expanduser(spec_path)
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir, exist_ok=True)
 

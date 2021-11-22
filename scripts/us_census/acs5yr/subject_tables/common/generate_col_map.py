@@ -84,9 +84,6 @@ def process_zip_file(zip_file_path,
         "<column-name-2>": {}, .....,
       }
   """
-    zip_file_path = os.path.expanduser(zip_file_path)
-    spec_path = os.path.expanduser(spec_path)
-    output_dir_path = os.path.expanduser(output_dir_path)
 
     if not os.path.exists(output_dir_path):
         os.makedirs(output_dir_path, exist_ok=True)
