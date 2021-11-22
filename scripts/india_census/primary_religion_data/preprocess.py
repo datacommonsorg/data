@@ -439,39 +439,37 @@ if __name__ == '__main__':
     # Iterate through state files and just create the final CSV file
     # We already have the MCF and TMCF file
 
-    # state_data_files = [
-    #     "RL-0100", "RL-0200", "RL-0300", "RL-0400", "RL-0500", "RL-0600",
-    #     "RL-0700", "RL-0800", "RL-0900", "RL-1000", "RL-1100", "RL-1200",
-    #     "RL-1300", "RL-1400", "RL-1500", "RL-1600", "RL-1700", "RL-1800",
-    #     "RL-1900", "RL-2000", "RL-2100", "RL-2200", "RL-2300", "RL-2400",
-    #     "RL-2500", "RL-2600", "RL-2700", "RL-2800", "RL-2900", "RL-3000",
-    #     "RL-3100", "RL-3200", "RL-3300", "RL-3400", "RL-3500"
-    # ]
-    # state_data_files = [
-    #     "RL-0100","RL-0200", "RL-0300"
-    # ]
-    # tmp_dir = tempfile.gettempdir()
+    state_data_files = [
+        "RL-0100", "RL-0200", "RL-0300", "RL-0400", "RL-0500", "RL-0600",
+        "RL-0700", "RL-0800", "RL-0900", "RL-1000", "RL-1100", "RL-1200",
+        "RL-1300", "RL-1400", "RL-1500", "RL-1600", "RL-1700", "RL-1800",
+        "RL-1900", "RL-2000", "RL-2100", "RL-2200", "RL-2300", "RL-2400",
+        "RL-2500", "RL-2600", "RL-2700", "RL-2800", "RL-2900", "RL-3000",
+        "RL-3100", "RL-3200", "RL-3300", "RL-3400", "RL-3500"
+    ]
+    state_data_files = ["RL-0100", "RL-0200", "RL-0300"]
+    tmp_dir = tempfile.gettempdir()
 
-    # # we dont need to redefine the tmcf file and mcf file
-    # # we can reuse the ones we used already. Hence discard them
-    # tmcf_file_path = os.path.join(tmp_dir, "temp.tmcf")
-    # mcf_file_path = os.path.join(tmp_dir, "temp.mcf")
+    # we dont need to redefine the tmcf file and mcf file
+    # we can reuse the ones we used already. Hence discard them
+    tmcf_file_path = os.path.join(tmp_dir, "temp.tmcf")
+    mcf_file_path = os.path.join(tmp_dir, "temp.mcf")
 
-    # for state_data_file in state_data_files:
+    for state_data_file in state_data_files:
 
-    #     data_file_path = os.path.join(
-    #         os.path.dirname(__file__), 'data/{state_data_file}.xlsx'.format(
-    #             state_data_file=state_data_file))
+        data_file_path = os.path.join(
+            os.path.dirname(__file__), 'data/{state_data_file}.xlsx'.format(
+                state_data_file=state_data_file))
 
-    #     loader = CensusPrimaryReligiousDataLoader(
-    #         data_file_path=data_file_path,
-    #         metadata_file_path=metadata_file_path,
-    #         mcf_file_path=mcf_file_path,
-    #         tmcf_file_path=tmcf_file_path,
-    #         csv_file_path=csv_file_path,
-    #         existing_stat_var=existing_stat_var,
-    #         census_year=2011,
-    #         dataset_name="Primary_Abstract_Religion",
-    #         data_categories=data_categories,
-    #         data_category_column="Religion")
-    #     loader.process()
+        loader = CensusPrimaryReligiousDataLoader(
+            data_file_path=data_file_path,
+            metadata_file_path=metadata_file_path,
+            mcf_file_path=mcf_file_path,
+            tmcf_file_path=tmcf_file_path,
+            csv_file_path=csv_file_path,
+            existing_stat_var=existing_stat_var,
+            census_year=2011,
+            dataset_name="Primary_Abstract_Religion",
+            data_categories=data_categories,
+            data_category_column="Religion")
+        loader.process()
