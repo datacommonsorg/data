@@ -39,7 +39,7 @@ class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
         ]
 
         data_categories = [
-            "Total", "Hindu", "Muslim", "Christian", "Sikh", "Buddhist", "Jain",
+            "Hindu", "Muslim", "Christian", "Sikh", "Buddhist", "Jain",
             "Other religions and persuasions", "Religion not stated"
         ]
 
@@ -105,4 +105,4 @@ class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
 
         self.assertEqual(expected_mcf_data, result_mcf_data)
         self.assertEqual(expected_tmcf_data, result_tmcf_data)
-        # self.assertEqual(expected_csv_data, result_csv_data)
+        self.assertEqual(expected_csv_data, result_csv_data)

@@ -74,9 +74,19 @@ Cleaned data for India level data is in the CSV [IndiaCensus2011_Primary_Abstrac
 - [IndiaCensus2011_Primary_Abstract_Religion.mcf](IndiaCensus2011_Primary_Abstract_Religion.mcf)
 - [IndiaCensus2011_Primary_Abstract_Religion.tmcf](IndiaCensus2011_Primary_Abstract_Religion.tmcf)
 
+### Running Tests
 
-**Note:** The schema for StatisticalVariables are not defined yet. It needs to be defined.
+Run all the test cases
 
+```bash
+python3 -m unittest discover -v -s scripts/ -p *_test.py
+```
+
+Run only the test cases related to this import
+
+```bash
+python3 -m unittest india_census.primary_religion_data.preprocess_test.TestCensusCensusPrimaryReligiousDataLoader
+```
 
 ### Import Procedure
 

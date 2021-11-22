@@ -26,16 +26,18 @@ from ..common.utils import title_case
 CENSUS_DATA_COLUMN_START = 7
 
 dcid_mapping = {}
-dcid_mapping["Hindu"] = "dcs:Hindu"
-dcid_mapping["Muslim"] = "dcs:Muslim"
-dcid_mapping["Christian"] = "dcs:Christian"
-dcid_mapping["Sikh"] = "dcs:Sikh"
-dcid_mapping["Buddhist"] = "dcs:Buddhist"
-dcid_mapping["Jain"] = "dcs:Jain"
-dcid_mapping["Other religions and persuasions"] = "dcs:OtherReligionAndPersuasions"
+dcid_mapping["Hindu"] = "dcs:Hinduism"
+dcid_mapping["Muslim"] = "dcs:Islam"
+dcid_mapping["Christian"] = "dcs:Christianity"
+dcid_mapping["Sikh"] = "dcs:Sikhism"
+dcid_mapping["Buddhist"] = "dcs:Buddhism"
+dcid_mapping["Jain"] = "dcs:Jainism"
+dcid_mapping[
+    "Other religions and persuasions"] = "dcs:IndiaCensus_OtherReligionAndPersuasions"
 dcid_mapping["Religion not stated"] = "dcs:ReligionNotStated"
 
-GENERIC_TEMPLATE_STAT_VAR = """Node: dcid:{name}
+TEMPLATE_STAT_VAR = """Node: dcid:{name}
+Name: "{description}"
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{populationType}
@@ -45,7 +47,7 @@ measuredProperty: dcs:{measuredProperty}
 
 """
 
-GENERIC_TEMPLATE_TMCF = """Node: E:IndiaCensus{year}_{dataset_name}->E0
+TEMPLATE_TMCF = """Node: E:IndiaCensus{year}_{dataset_name}->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus{year}_{dataset_name}->StatisticalVariable
 observationDate: C:IndiaCensus{year}_{dataset_name}->Year
@@ -58,7 +60,6 @@ indianCensusAreaCode{year}: C:IndiaCensus{year}_{dataset_name}->census_location_
 
 
 class CensusPrimaryReligiousDataLoader():
-
     """An object that represents Census Data and its variables.
     
     Attributes:
@@ -173,6 +174,11 @@ class CensusPrimaryReligiousDataLoader():
         self.raw_df[self.data_category_column] = self.raw_df[
             self.data_category_column].apply(lambda x: title_case(x))
 
+        # When data_category i.e religion is "Total" remove those rows
+        # As they are not required
+        self.raw_df = self.raw_df[
+            self.raw_df[self.data_category_column] != "Total"]
+
         # Converting rows in to columns. So the final structure will be
         # Name,TRU,columnName,value
         self.raw_df = self.raw_df.melt(
@@ -211,7 +217,7 @@ class CensusPrimaryReligiousDataLoader():
         # the name of the stat var
         name = "Count_" + row["populationType"]
         return name
-    
+
     def _get_base_constraints(self, row):
         constraints = ""
         return constraints
@@ -236,14 +242,9 @@ class CensusPrimaryReligiousDataLoader():
         if self._get_base_constraints(row) != "":
             constraints_array.append(self._get_base_constraints(row))
 
-        if data_category:
-            name_array.append(title_case(data_category))            
-            row["description"] = row["description"] + " - " + data_category
-            if data_category in ["Total"]:
-                pass
-            else:
-                constraints_array.append("religion: "+dcid_mapping[data_category])
-
+        name_array.append(title_case(data_category))
+        row["description"] = row["description"] + " - " + data_category
+        constraints_array.append("religion: " + dcid_mapping[data_category])
 
         if row["age"] == "YearsUpto6":
             name_array.append("YearsUpto6")
@@ -254,7 +255,7 @@ class CensusPrimaryReligiousDataLoader():
             constraints_array.append("socialCategory: dcs:ScheduledCaste")
         if row["socialCategory"] == "ScheduledTribe":
             name_array.append("ScheduledTribe")
-            constraints_array.append("socialCategory: dcs:ScheduledTribe")            
+            constraints_array.append("socialCategory: dcs:ScheduledTribe")
 
         if row["literacyStatus"] == "Literate":
             name_array.append("Literate")
@@ -300,13 +301,13 @@ class CensusPrimaryReligiousDataLoader():
         if place_of_residence == "Urban":
             name_array.append("Urban")
             constraints_array.append(
-                "placeOfResidenceClassification: dcs:Urban")            
+                "placeOfResidenceClassification: dcs:Urban")
             row["description"] = row["description"] + " - Urban"
 
-        elif place_of_residence == "Rural":            
+        elif place_of_residence == "Rural":
             name_array.append("Rural")
             constraints_array.append(
-                "placeOfResidenceClassification: dcs:Rural")            
+                "placeOfResidenceClassification: dcs:Rural")
             row["description"] = row["description"] + " - Rural"
 
         if row["gender"] == "Male":
@@ -333,7 +334,7 @@ class CensusPrimaryReligiousDataLoader():
         row["measuredProperty"] = self._get_measured_property_name(name)
         self.mcf.append(row)
 
-        stat_var = GENERIC_TEMPLATE_STAT_VAR.format(**dict(row))
+        stat_var = TEMPLATE_STAT_VAR.format(**dict(row))
 
         return name, stat_var
 
@@ -344,44 +345,28 @@ class CensusPrimaryReligiousDataLoader():
             with open(self.mcf_file_path, 'w+', newline='') as f_out:
                 for data_row in reader:
                     for place_of_residence in [None, "Urban", "Rural"]:
-                        if len(self.data_categories) == 0:
+                        for data_category in self.data_categories:
                             name, stat_var = self._create_variable(
                                 data_row,
                                 place_of_residence,
-                                data_category=None)
+                                data_category=data_category)
                             # If the statvar already exists then we don't
                             # need to recreate it
                             if name in self.existing_stat_var:
                                 pass
-                            # we need to create statvars only for those columns that
+                            # We need to create statvars only for those columns that
                             # exist in the current data file
                             elif data_row[
                                     "columnName"] not in self.census_columns:
                                 pass
                             else:
                                 f_out.write(stat_var)
-                        else:
-                            for data_category in self.data_categories:
-                                name, stat_var = self._create_variable(
-                                    data_row,
-                                    place_of_residence,
-                                    data_category=data_category)
-                                # If the statvar already exists then we don't
-                                # need to recreate it
-                                if name in self.existing_stat_var:
-                                    pass
-                                # We need to create statvars only for those columns that
-                                # exist in the current data file
-                                elif data_row[
-                                        "columnName"] not in self.census_columns:
-                                    pass
-                                else:
-                                    f_out.write(stat_var)
+
     def _create_tmcf(self):
         with open(self.tmcf_file_path, 'w+', newline='') as f_out:
             f_out.write(
-                GENERIC_TEMPLATE_TMCF.format(
-                    year=self.census_year, dataset_name=self.dataset_name))
+                TEMPLATE_TMCF.format(year=self.census_year,
+                                     dataset_name=self.dataset_name))
 
     def process(self):
         self._download_and_standardize()
@@ -411,7 +396,7 @@ if __name__ == '__main__':
     existing_stat_var.extend([])
 
     data_categories = [
-        "Total", "Hindu", "Muslim", "Christian", "Sikh", "Buddhist", "Jain",
+        "Hindu", "Muslim", "Christian", "Sikh", "Buddhist", "Jain",
         "Other religions and persuasions", "Religion not stated"
     ]
 
