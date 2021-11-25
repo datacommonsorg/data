@@ -50,7 +50,7 @@ _MANDATORY_PROPS = ['measuredProperty', 'populationType', 'statType']
 _JSON_KEYS = [
     'populationType', 'measurement', 'pvs', 'inferredSpec',
     'enumSpecializations', 'universePVs', 'ignoreColumns', 'overwrite_dcids',
-    'preprocess'
+    'preprocess', 'measurementDenominator'
 ]
 
 
@@ -232,6 +232,16 @@ class GenerateColMapBase:
         # Should that be considered an error for subject tables?
         return self.column_map
 
+    def check_obs_props(self, obs_props: dict, stat_var: dict) -> bool:
+        """Checks for property values match in obs_props"""
+        # Check for measuredProperty
+        if obs_props.get('mprop',
+                         'mrop') == stat_var.get('measuredProperty',
+                                                 'measuredProperty'):
+            if 'mprop' in obs_props:
+                return True
+        return False
+
     def _column_to_statvar(self, column):
         """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
         measurement_assigned = False
@@ -278,6 +288,18 @@ class GenerateColMapBase:
                             )
                         stat_var[p] = v
 
+        # Handling measurementDenominator
+        if column in self.features['measurementDenominator']:
+            md_col = self.features['measurementDenominator'][column]
+            # Expects md_col to be in column_map before processing of column
+            if md_col in self.column_map:
+                stat_var['measurementDenominator'] = self.column_map[md_col][
+                    'Node']
+            else:
+                logger.critical(
+                    f'Invalid entry {md_col} for column {column} in measurementDenominator'
+                )
+
         ## add Universe PVs based on the populationType of StatVar
         # TODO: While adding dependentPVs, set values only for properties not already
         # in stat_var so as to not overwrite an existing property. Maybe useful
@@ -286,6 +308,14 @@ class GenerateColMapBase:
         dependent_properties = None
         for elem in self.features['universePVs']:
             if stat_var['populationType'] == elem['populationType']:
+                if 'obs_props' in elem:
+                    if not self.check_obs_props(elem['obs_props'], stat_var):
+                        continue
+
+                # Initialising 'constraintProperties' if it doesn't exist
+                if 'constraintProperties' not in elem:
+                    elem['constraintProperties'] = list()
+
                 # check if all constraints of this populationType is in stat_var
                 if (set(elem['constraintProperties']).issubset(
                         set(list(stat_var.keys())))):
@@ -411,9 +441,9 @@ class GenerateColMapBase:
             # if value is not prefixed apriori with dcs: or schema:
             elif 'schema:' in v or 'dcs:' in v or 'dcid:' in v:
                 continue
-            # add dcid: prefix to the value
+            # add dcs: prefix to the value
             else:
-                stat_var[k] = 'dcid:' + v
+                stat_var[k] = 'dcs:' + v
         return stat_var
 
     def _isvalid_column_map(self):
