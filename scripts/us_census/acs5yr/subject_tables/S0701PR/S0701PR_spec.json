@@ -19,13 +19,13 @@
       "measuredProperty": "age",
       "statType": "medianValue",
       "age": "[1 - Years]",
-      "incomeStatus": "WithIncome",
       "unit": "Years"
     },
     "Median income (dollars)": {
       "measuredProperty": "income",
       "statType": "medianValue",
       "age": "[15 - Years]",
+      "incomeStatus": "WithIncome",
       "unit": "USDollar"
     }
   },
@@ -35,7 +35,7 @@
       "Margin of Error": "marginOfError"
     },
     "age": {
-      "1 to 4 years" : "[1 4 Years]",
+      "1 to 4 years": "[1 4 Years]",
       "5 to 17 years": "[5 17 Years]",
       "18 to 24 years": "[18 24 Years]",
       "25 to 34 years": "[25 34 Years]",
@@ -100,7 +100,7 @@
     },
     "maritalStatus": {
       "Widowed": "Widowed",
-      "Divorced or separated" : "DivorcedOrSeparated",
+      "Divorced or separated": "DivorcedOrSeparated",
       "Never married": "NeverMarried",
       "Now married, except separated": "MarriedAndNotSeparated"
     },
