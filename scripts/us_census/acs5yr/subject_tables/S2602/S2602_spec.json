@@ -1,0 +1,1597 @@
+{
+  "overwrite_dcids": {
+    "Mean_Earnings_Person_Male_WithEarnings": "Mean_Earnings_Person_Male",
+    "Mean_Earnings_Person_Female_WithEarnings": "Mean_Earnings_Person_Female",
+    "Mean_Earnings_Person_Male_WithEarnings_ResidesInGroupQuarters": "Mean_Earnings_Person_Male_ResidesInGroupQuarters",
+    "Mean_Earnings_Person_Female_WithEarnings_ResidesInGroupQuarters": "Mean_Earnings_Person_Female_ResidesInGroupQuarters",
+    "Mean_Earnings_Person_Male_WithEarnings_ResidesInAdultCorrectionalFacilities": "Mean_Earnings_Person_Male_ResidesInAdultCorrectionalFacilities",
+    "Mean_Earnings_Person_Female_WithEarnings_ResidesInAdultCorrectionalFacilities": "Mean_Earnings_Person_Female_ResidesInAdultCorrectionalFacilities",
+    "Mean_Earnings_Person_Male_WithEarnings_ResidesInNursingFacilities": "Mean_Earnings_Person_Male_ResidesInNursingFacilities",
+    "Mean_Earnings_Person_Female_WithEarnings_ResidesInNursingFacilities": "Mean_Earnings_Person_Female_ResidesInNursingFacilities",
+    "Mean_Earnings_Person_Male_WithEarnings_ResidesInJuvenileFacilities": "Mean_Earnings_Person_Male_ResidesInJuvenileFacilities",
+    "Mean_Earnings_Person_Female_WithEarnings_ResidesInJuvenileFacilities": "Mean_Earnings_Person_Female_ResidesInJuvenileFacilities",
+    "Mean_Earnings_Person_Male_WithEarnings_ResidesInCollegeOrUniversityStudentHousing": "Mean_Earnings_Person_Male_ResidesInCollegeOrUniversityStudentHousing",
+    "Mean_Earnings_Person_Female_WithEarnings_ResidesInCollegeOrUniversityStudentHousing": "Mean_Earnings_Person_Female_ResidesInCollegeOrUniversityStudentHousing",
+    "Mean_Earnings_Person_Male_WithEarnings_ResidesInMilitaryQuartersOrMilitaryShips": "Mean_Earnings_Person_Male_ResidesInMilitaryQuartersOrMilitaryShips",
+    "Mean_Earnings_Person_Female_WithEarnings_ResidesInMilitaryQuartersOrMilitaryShips": "Mean_Earnings_Person_Female_ResidesInMilitaryQuartersOrMilitaryShips",
+    "Count_Person_16OrMoreYears_InArmedForces_InLaborForce": "Count_Person_InArmedForces",
+    "MarginOfError_Count_Person_16OrMoreYears_InArmedForces_InLaborForce": "MarginOfError_Count_Person_InArmedForces",
+    "Count_Person_18OrLessYears": "Count_Person_Upto18Years",
+    "Count_Person_18OrLessYears_ResidesInAdultCorrectionalFacilities": "Count_Person_Upto18Years_ResidesInAdultCorrectionalFacilities",
+    "Count_Person_18OrLessYears_ResidesInCollegeOrUniversityStudentHousing": "Count_Person_Upto18Years_ResidesInCollegeOrUniversityStudentHousing",
+    "Count_Person_18OrLessYears_ResidesInGroupQuarters": "Count_Person_Upto18Years_ResidesInGroupQuarters",
+    "Count_Person_18OrLessYears_ResidesInNursingFacilities": "Count_Person_Upto18Years_ResidesInNursingFacilities",
+    "Count_Person_SameHouse1YearAgo": "Count_Person_1OrMoreYears_SameHouse1YearAgo",
+    "Count_Person_InArmedForces_InLaborForce": "Count_Person_InArmedForces",
+    "MarginOfError_Count_Person_InArmedForces_InLaborForce": "MarginOfError_Count_Person_InArmedForces",
+    "Count_Person_InArmedForces_InLaborForce_ResidesInGroupQuarters": "Count_Person_InArmedForces_ResidesInGroupQuarters",
+    "MarginOfError_Count_Person_InArmedForces_InLaborForce_ResidesInGroupQuarters": "MarginOfError_Count_Person_InArmedForces_ResidesInGroupQuarters",
+    "Count_Person_InArmedForces_InLaborForce_ResidesInAdultCorrectionalFacilities": "Count_Person_InArmedForces_ResidesInAdultCorrectionalFacilities",
+    "MarginOfError_Count_Person_InArmedForces_InLaborForce_ResidesInAdultCorrectionalFacilities": "MarginOfError_Count_Person_InArmedForces_ResidesInAdultCorrectionalFacilities",
+    "Count_Person_InArmedForces_InLaborForce_ResidesInNursingFacilities": "Count_Person_InArmedForces_ResidesInNursingFacilities",
+    "MarginOfError_Count_Person_InArmedForces_InLaborForce_ResidesInNursingFacilities": "MarginOfError_Count_Person_InArmedForces_ResidesInNursingFacilities",
+    "Count_Person_InArmedForces_InLaborForce_ResidesInJuvenileFacilities": "Count_Person_InArmedForces_ResidesInJuvenileFacilities",
+    "MarginOfError_Count_Person_InArmedForces_InLaborForce_ResidesInJuvenileFacilities": "MarginOfError_Count_Person_InArmedForces_ResidesInJuvenileFacilities",
+    "Count_Person_InArmedForces_InLaborForce_ResidesInCollegeOrUniversityStudentHousing": "Count_Person_InArmedForces_ResidesInCollegeOrUniversityStudentHousing",
+    "MarginOfError_Count_Person_InArmedForces_InLaborForce_ResidesInCollegeOrUniversityStudentHousing": "MarginOfError_Count_Person_InArmedForces_ResidesInCollegeOrUniversityStudentHousing",
+    "Count_Person_InArmedForces_InLaborForce_ResidesInMilitaryQuartersOrMilitaryShips": "Count_Person_InArmedForces_ResidesInMilitaryQuartersOrMilitaryShips",
+    "MarginOfError_Count_Person_InArmedForces_InLaborForce_ResidesInMilitaryQuartersOrMilitaryShips": "MarginOfError_Count_Person_InArmedForces_ResidesInMilitaryQuartersOrMilitaryShips",
+    "Count_Person_EnrolledInCollegeOrGraduateSchool_EnrolledInSchool": "Count_Person_EnrolledInCollegeOrGraduateSchool",
+    "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_EnrolledInSchool": "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool",
+    "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInGroupQuarters_EnrolledInSchool": "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInGroupQuarters",
+    "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInGroupQuarters_EnrolledInSchool": "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInGroupQuarters",
+    "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInAdultCorrectionalFacilities_EnrolledInSchool": "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInAdultCorrectionalFacilities",
+    "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInAdultCorrectionalFacilities_EnrolledInSchool": "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInAdultCorrectionalFacilities",
+    "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInNursingFacilities_EnrolledInSchool": "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInNursingFacilities",
+    "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInNursingFacilities_EnrolledInSchool": "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInNursingFacilities",
+    "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInJuvenileFacilities_EnrolledInSchool": "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInJuvenileFacilities",
+    "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInJuvenileFacilities_EnrolledInSchool": "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInJuvenileFacilities",
+    "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInCollegeOrUniversityStudentHousing_EnrolledInSchool": "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInCollegeOrUniversityStudentHousing",
+    "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInCollegeOrUniversityStudentHousing_EnrolledInSchool": "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInCollegeOrUniversityStudentHousing",
+    "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInMilitaryQuartersOrMilitaryShips_EnrolledInSchool": "Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInMilitaryQuartersOrMilitaryShips",
+    "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInMilitaryQuartersOrMilitaryShips_EnrolledInSchool": "MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ResidesInMilitaryQuartersOrMilitaryShips"
+  },
+  "populationType": {
+    "_DEFAULT": "Person"
+  },
+  "measurement": {
+    "_DEFAULT": {
+      "measuredProperty": "count",
+      "statType": "measuredValue"
+    },
+    "Median age (years)": {
+      "measuredProperty": "age",
+      "statType": "medianValue",
+      "unit": "Years"
+    },
+    "Median earnings (dollars)": {
+      "measuredProperty": "earnings",
+      "statType": "medianValue",
+      "unit": "InflationAdjustedUSD_CurrentYear",
+      "incomeStatus": "WithEarnings"
+    },
+    "Median earnings (dollars):": {
+      "measuredProperty": "earnings",
+      "statType": "medianValue",
+      "unit": "InflationAdjustedUSD_CurrentYear",
+      "incomeStatus": "WithEarnings"
+    },
+    "Mean earnings (dollars)": {
+      "measuredProperty": "earnings",
+      "statType": "meanValue",
+      "unit": "InflationAdjustedUSD_CurrentYear",
+      "incomeStatus": "WithEarnings"
+    },
+    "Mean earnings (dollars):": {
+      "measuredProperty": "earnings",
+      "statType": "meanValue",
+      "unit": "InflationAdjustedUSD_CurrentYear",
+      "incomeStatus": "WithEarnings"
+    }
+  },
+  "enumSpecializations": {},
+  "pvs": {
+    "statType": {
+      "Margin of Error": "marginOfError"
+    },
+    "age": {
+      "Under 15 years": "[- 15 Years]",
+      "15 to 17 years": "[15 17 Years]",
+      "Under 18 years": "[- 18 Years]",
+      "18 to 24 years": "[18 24 Years]",
+      "25 to 34 years": "[25 34 Years]",
+      "35 to 44 years": "[35 44 Years]",
+      "45 to 54 years": "[45 54 Years]",
+      "55 to 64 years": "[55 64 Years]",
+      "65 to 74 years": "[65 74 Years]",
+      "75 to 84 years": "[75 84 Years]",
+      "65 years and over": "[65 - Years]",
+      "85 years and over": "[85 - Years]",
+      "Population 1 year and over": "[1 - Years]",
+      "Population 5 years and over": "[5 - Years]",
+      "Population 25 years and over": "[25 - Years]",
+      "Population 15 years and over": "[15 - Years]",
+      "Population 16 years and over": "[16 - Years]",
+      "Population 18 to 64 years": "[18 64 Years]",
+      "Population 65 years and over": "[65 - Years]",
+      "Civilian population 18 years and over": "[18 - Years]",
+      "Civilian employed population 16 years and over": "[16 - Years]"
+    },
+    "gender": {
+      "Male": "Male",
+      "Female": "Female"
+    },
+    "race": {
+      "One race": "OneRace",
+      "Two or more races": "TwoOrMoreRaces",
+      "Hispanic or Latino (of any race)": "HispanicOrLatino",
+      "White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino",
+      "White": "WhiteAlone",
+      "Black or African American": "BlackOrAfricanAmericanAlone",
+      "American Indian and Alaska Native": "AmericanIndianOrAlaskaNativeAlone",
+      "Asian": "AsianAlone",
+      "Native Hawaiian and Other Pacific Islander": "NativeHawaiianOrOtherPacificIslanderAlone",
+      "Some other race": "SomeOtherRaceAlone"
+    },
+    "citizenship": {
+      "Naturalized U.S. citizen": "USCitizenByNaturalization",
+      "Native": "USCitizenBornInTheUnitedStates",
+      "Not a U.S. citizen": "NotAUSCitizen"
+    },
+    "nativity": {
+      "Foreign born": "USC_ForeignBorn",
+      "Native": "USC_Native"
+    },
+    "disabilityStatus": {
+      "With a disability": "WithDisability",
+      "No disability": "NoDisability"
+    },
+    "residentStatus": {
+      "Same county": "DifferentHouseInSameCounty",
+      "Different county": "DifferentHouseInDifferentCounty",
+      "Same state": "DifferentHouseInDifferentCountySameState",
+      "Different state": "DifferentHouseInDifferentCountyDifferentState",
+      "Abroad": "DifferentHouseAbroad",
+      "Different address in the United States": "DifferentHouseInTheUS",
+      "Same address": "SameHouse1YearAgo"
+    },
+    "educationalAttainment": {
+      "Bachelor's degree or higher": "BachelorsDegreeOrHigher",
+      "High school graduate or higher": "HighSchoolGraduateOrHigher"
+    },
+    "employmentStatus": {
+      "In labor force": "BLS_InLaborForce",
+      "Civilian labor force": "BLS_InLaborForce",
+      "Not in labor force": "BLS_NotInLaborForce"
+    },
+    "employment": {
+      "Civilian employed population 16 years and over": "BLS_Employed",
+      "Unemployed": "BLS_Unemployed"
+    },
+    "occupation": {
+      "Management, business, science, and arts occupations": "SOCv2018/highLevelAggregation-1",
+      "Service occupations": "SOCv2018/highLevelAggregation-2",
+      "Sales and office occupations": "SOCv2018/highLevelAggregation-3",
+      "Natural resources, construction, extraction, and maintenance occupations": "SOCv2018/highLevelAggregation-4",
+      "Production, transportation, and material moving occupations": "SOCv2018/highLevelAggregation-5"
+    },
+    "maritalStatus": {
+      "Widowed": "Widowed",
+      "Never married": "NeverMarried",
+      "Now married, except separated": "MarriedAndNotSeparated",
+      "Separated": "Separated",
+      "Divorced": "Divorced"
+    },
+    "schoolEnrollment": {
+      "Population 3 years and over enrolled in school": "EnrolledInSchool",
+      "Nursery school through 12th grade": "EnrolledInSchool"
+    },
+    "collegeOrGraduateSchoolEnrollment": {
+      "College or graduate school": "EnrolledInCollegeOrGraduateSchool"
+    },
+    "levelOfSchool": {
+      "Nursery school through 12th grade": "EnrolledInNurseryThroughGrade12"
+    },
+    "veteranStatus": {
+      "Civilian veteran": "Veteran"
+    },
+    "languageSpokenAtHome": {
+      "English only": "OnlyEnglish",
+      "Language other than English": "LanguageOtherThanEnglish"
+    },
+    "armedForcesStatus": {
+      "Civilian population 18 years and over": "Civilian",
+      "Civilian employed population 16 years and over": "Civilian",
+      "Civilian labor force": "Civilian",
+      "Armed Forces": "InArmedForces",
+      "Civilian veteran": "Civilian"
+    },
+    "abilityToSpeakEnglish": {
+      "Speak English less than very well\"\"": "SpeakEnglishLessThanVeryWell"
+    },
+    "benefitsStatus": {
+      "With Food Stamp/SNAP benefits": "WithFoodStampsInThePast12Months"
+    },
+    "incomeStatus": {
+      "With earnings": "WithEarnings",
+      "With earnings:": "WithEarnings"
+    },
+    "residenceType": {
+      "Total group quarters population": "GroupQuarters",
+      "Total group quarters population MOE": "GroupQuarters",
+      "Adult correctional facilities": "AdultCorrectionalFacilities",
+      "Adult correctional facilities MOE": "AdultCorrectionalFacilities",
+      "Nursing facilities/skilled nursing facilities": "NursingFacilities",
+      "Nursing facilities/skilled nursing facilities MOE": "NursingFacilities",
+      "College/university housing": "CollegeOrUniversityStudentHousing",
+      "College/university housing MOE": "CollegeOrUniversityStudentHousing"
+    }
+  },
+  "inferredSpec": {
+    "citizenship": {
+      "age": "[15 - Years]"
+    },
+    "languageSpokenAtHome": {
+      "age": "[5 - Years]"
+    },
+    "abilityToSpeakEnglish": {
+      "age": "[5 - Years]",
+      "languageSpokenAtHome": "LanguageOtherThanEnglish"
+    }
+  },
+  "universePVs": [
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "maritalStatus"
+      ],
+      "dependentPVs": {
+        "age": "[15 - Years]"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "educationalAttainment"
+      ],
+      "dependentPVs": {
+        "age": "[25 - Years]"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "schoolEnrollment"
+      ],
+      "dependentPVs": {
+        "age": "[3 - Years]"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "detailedLevelOfSchool"
+      ],
+      "dependentPVs": {
+        "age": "[3 - Years]"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "veteranStatus"
+      ],
+      "dependentPVs": {
+        "age": "[18 - Years]",
+        "armedForcesStatus": "Civilian"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "employmentStatus"
+      ],
+      "dependentPVs": {
+        "age": "[16 - Years]"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "employment"
+      ],
+      "dependentPVs": {
+        "age": "[16 - Years]",
+        "employmentStatus": "BLS_InLaborForce"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "occupation"
+      ],
+      "dependentPVs": {
+        "age": "[16 - Years]",
+        "armedForcesStatus": "Civilian",
+        "employment": "BLS_Employed",
+        "employmentStatus": "BLS_InLaborForce"
+      }
+    }
+  ],
+  "ignoreColumns": [
+    "id",
+    "Geographic Area Name",
+    "Percent of civilian labor force",
+    "Employed",
+    "Margin of Error!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!College/university housing MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!Total group quarters population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Total population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!College/university housing MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!Total population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!Total group quarters population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!College/university housing MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Total group quarters population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!Adult correctional facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!Total population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!College/university housing MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!College/university housing MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!Adult correctional facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!Total population!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Adult correctional facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!Total group quarters population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Total group quarters population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!Total group quarters population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!College/university housing MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!Adult correctional facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!Median age (years)",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male",
+    "Margin of Error!!Adult correctional facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female",
+    "Margin of Error!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities MOE!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male"
+  ],
+  "denominators": {
+    "Estimate!!Total population!!Total population": [
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!Male",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!Female",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!Under 15 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!85 years and over",
+      "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!Total population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Total population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino"
+    ],
+    "Estimate!!Total population!!Total population!!SEX AND AGE!!Under 18 years": [
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!Under 18 years!!Female"
+    ],
+    "Estimate!!Total population!!Total population!!SEX AND AGE!!65 years and over": [
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Estimate!!Total population!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!Total population!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!Total population MOE!!Total population!!SEX AND AGE!!65 years and over!!Female"
+    ],
+    "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race": [
+      "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Estimate!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!Total population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!Total population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!Total population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!Total population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!Total population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!Total population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!Total population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race"
+    ],
+    "Estimate!!Total population!!MARITAL STATUS!!Population 15 years and over": [
+      "Estimate!!Total population!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!Total population!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Estimate!!Total population!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!Total population!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Estimate!!Total population!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!Total population!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Estimate!!Total population!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!Total population!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Estimate!!Total population!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!Total population!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!Total population MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!Total population MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!Total population MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!Total population MOE!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!Total population MOE!!MARITAL STATUS!!Population 15 years and over!!Never married"
+    ],
+    "Estimate!!Total population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
+      "Estimate!!Total population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!Total population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Estimate!!Total population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!Total population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!Total population MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!Total population MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school"
+    ],
+    "Estimate!!Total population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "Estimate!!Total population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!Total population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Estimate!!Total population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Total population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Total population MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!Total population MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Total population!!VETERAN STATUS!!Civilian population 18 years and over": [
+      "Estimate!!Total population!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!Total population!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!Total population MOE!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran"
+    ],
+    "Estimate!!Total population!!DISABILITY STATUS!!Total population": [
+      "Estimate!!Total population!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!Total population!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!Total population MOE!!DISABILITY STATUS!!Total population!!With a disability"
+    ],
+    "Estimate!!Total population!!DISABILITY STATUS!!Population 18 to 64 years": [
+      "Estimate!!Total population!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!Total population!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Estimate!!Total population!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!Total population!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!Total population MOE!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!Total population MOE!!DISABILITY STATUS!!Population 18 to 64 years!!No disability"
+    ],
+    "Estimate!!Total population!!DISABILITY STATUS!!Population 65 years and over": [
+      "Estimate!!Total population!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!Total population!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!Total population MOE!!DISABILITY STATUS!!Population 65 years and over!!With a disability"
+    ],
+    "Estimate!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over": [
+      "Estimate!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Estimate!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Estimate!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Estimate!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Estimate!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Estimate!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Estimate!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!Total population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!Total population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!Total population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!Total population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!Total population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!Total population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!Total population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!Total population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad"
+    ],
+    "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native": [
+      "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!Total population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!Total population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female"
+    ],
+    "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born": [
+      "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!Total population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!Total population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female"
+    ],
+    "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen": [
+      "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!Total population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!Total population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female"
+    ],
+    "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen": [
+      "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Estimate!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!Total population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!Total population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!Total population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female"
+    ],
+    "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over": [
+      "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
+    ],
+    "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over": [
+      "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Total population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Total population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!Total population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!Total population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!Total population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Total population!!OCCUPATION!!Civilian employed population 16 years and over": [
+      "Estimate!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Estimate!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Estimate!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Estimate!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Estimate!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!Total population!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!Total population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!Total population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!Total population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!Total population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!Total population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
+    ],
+    "Estimate!!Total group quarters population!!Total population": [
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!Male",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!Female",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!Under 15 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!85 years and over",
+      "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino"
+    ],
+    "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!Under 18 years": [
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!Under 18 years!!Female"
+    ],
+    "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!65 years and over": [
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Estimate!!Total group quarters population!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!Total group quarters population!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!SEX AND AGE!!65 years and over!!Female"
+    ],
+    "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race": [
+      "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Estimate!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!Total group quarters population!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!Total group quarters population MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race"
+    ],
+    "Estimate!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over": [
+      "Estimate!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Estimate!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Estimate!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Estimate!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Estimate!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!Total group quarters population MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!Total group quarters population MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!Total group quarters population MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!Total group quarters population MOE!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!Total group quarters population MOE!!MARITAL STATUS!!Population 15 years and over!!Never married"
+    ],
+    "Estimate!!Total group quarters population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
+      "Estimate!!Total group quarters population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!Total group quarters population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Estimate!!Total group quarters population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!Total group quarters population!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!Total group quarters population MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!Total group quarters population MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school"
+    ],
+    "Estimate!!Total group quarters population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "Estimate!!Total group quarters population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!Total group quarters population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Estimate!!Total group quarters population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Total group quarters population!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Total group quarters population MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!Total group quarters population MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Total group quarters population!!VETERAN STATUS!!Civilian population 18 years and over": [
+      "Estimate!!Total group quarters population!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!Total group quarters population!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!Total group quarters population MOE!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran"
+    ],
+    "Estimate!!Total group quarters population!!DISABILITY STATUS!!Total population": [
+      "Estimate!!Total group quarters population!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!Total group quarters population!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!Total group quarters population MOE!!DISABILITY STATUS!!Total population!!With a disability"
+    ],
+    "Estimate!!Total group quarters population!!DISABILITY STATUS!!Population 18 to 64 years": [
+      "Estimate!!Total group quarters population!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!Total group quarters population!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Estimate!!Total group quarters population!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!Total group quarters population!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!Total group quarters population MOE!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!Total group quarters population MOE!!DISABILITY STATUS!!Population 18 to 64 years!!No disability"
+    ],
+    "Estimate!!Total group quarters population!!DISABILITY STATUS!!Population 65 years and over": [
+      "Estimate!!Total group quarters population!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!Total group quarters population!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!Total group quarters population MOE!!DISABILITY STATUS!!Population 65 years and over!!With a disability"
+    ],
+    "Estimate!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over": [
+      "Estimate!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Estimate!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Estimate!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Estimate!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Estimate!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Estimate!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Estimate!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!Total group quarters population!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!Total group quarters population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!Total group quarters population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!Total group quarters population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!Total group quarters population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!Total group quarters population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!Total group quarters population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!Total group quarters population MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad"
+    ],
+    "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native": [
+      "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!Total group quarters population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!Total group quarters population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female"
+    ],
+    "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born": [
+      "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!Total group quarters population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!Total group quarters population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female"
+    ],
+    "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen": [
+      "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!Total group quarters population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!Total group quarters population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female"
+    ],
+    "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen": [
+      "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Estimate!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!Total group quarters population!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!Total group quarters population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!Total group quarters population MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female"
+    ],
+    "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over": [
+      "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
+    ],
+    "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over": [
+      "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Total group quarters population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Total group quarters population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!Total group quarters population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!Total group quarters population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!Total group quarters population MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over": [
+      "Estimate!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Estimate!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Estimate!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Estimate!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Estimate!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!Total group quarters population!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!Total group quarters population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!Total group quarters population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!Total group quarters population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!Total group quarters population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!Total group quarters population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
+    ],
+    "Estimate!!College/university housing!!Total population": [
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!Male",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!Female",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!Under 15 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!85 years and over",
+      "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!College/university housing MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!College/university housing MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino"
+    ],
+    "Estimate!!College/university housing!!Total population!!SEX AND AGE!!Under 18 years": [
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!Under 18 years!!Female"
+    ],
+    "Estimate!!College/university housing!!Total population!!SEX AND AGE!!65 years and over": [
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Estimate!!College/university housing!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!College/university housing!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!College/university housing MOE!!Total population!!SEX AND AGE!!65 years and over!!Female"
+    ],
+    "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race": [
+      "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Estimate!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!College/university housing!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!College/university housing MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!College/university housing MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!College/university housing MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!College/university housing MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!College/university housing MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!College/university housing MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race"
+    ],
+    "Estimate!!College/university housing!!MARITAL STATUS!!Population 15 years and over": [
+      "Estimate!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Estimate!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Estimate!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Estimate!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Estimate!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!College/university housing!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!College/university housing MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!College/university housing MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!College/university housing MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!College/university housing MOE!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!College/university housing MOE!!MARITAL STATUS!!Population 15 years and over!!Never married"
+    ],
+    "Estimate!!College/university housing!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
+      "Estimate!!College/university housing!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!College/university housing!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Estimate!!College/university housing!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!College/university housing!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!College/university housing MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!College/university housing MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school"
+    ],
+    "Estimate!!College/university housing!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "Estimate!!College/university housing!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!College/university housing!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Estimate!!College/university housing!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!College/university housing!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!College/university housing MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!College/university housing MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!College/university housing!!VETERAN STATUS!!Civilian population 18 years and over": [
+      "Estimate!!College/university housing!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!College/university housing!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!College/university housing MOE!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran"
+    ],
+    "Estimate!!College/university housing!!DISABILITY STATUS!!Total population": [
+      "Estimate!!College/university housing!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!College/university housing!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!College/university housing MOE!!DISABILITY STATUS!!Total population!!With a disability"
+    ],
+    "Estimate!!College/university housing!!DISABILITY STATUS!!Population 18 to 64 years": [
+      "Estimate!!College/university housing!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!College/university housing!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Estimate!!College/university housing!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!College/university housing!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!College/university housing MOE!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!College/university housing MOE!!DISABILITY STATUS!!Population 18 to 64 years!!No disability"
+    ],
+    "Estimate!!College/university housing!!DISABILITY STATUS!!Population 65 years and over": [
+      "Estimate!!College/university housing!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!College/university housing!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!College/university housing MOE!!DISABILITY STATUS!!Population 65 years and over!!With a disability"
+    ],
+    "Estimate!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over": [
+      "Estimate!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Estimate!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Estimate!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Estimate!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Estimate!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Estimate!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Estimate!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!College/university housing!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!College/university housing MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!College/university housing MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!College/university housing MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!College/university housing MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!College/university housing MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!College/university housing MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!College/university housing MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad"
+    ],
+    "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native": [
+      "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!College/university housing MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!College/university housing MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female"
+    ],
+    "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born": [
+      "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!College/university housing MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!College/university housing MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female"
+    ],
+    "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen": [
+      "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!College/university housing MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!College/university housing MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female"
+    ],
+    "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen": [
+      "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Estimate!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!College/university housing!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!College/university housing MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!College/university housing MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female"
+    ],
+    "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over": [
+      "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
+    ],
+    "Estimate!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over": [
+      "Estimate!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Estimate!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Estimate!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Estimate!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Estimate!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!College/university housing MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!College/university housing MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!College/university housing MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!College/university housing MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!College/university housing MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over": [
+      "Estimate!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Estimate!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Estimate!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Estimate!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Estimate!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!College/university housing!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!College/university housing MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!College/university housing MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!College/university housing MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!College/university housing MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!College/university housing MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!Total population": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Male",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Female",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Under 15 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!85 years and over",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Under 18 years": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!Under 18 years!!Female"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!65 years and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!SEX AND AGE!!65 years and over!!Female"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Never married"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!VETERAN STATUS!!Civilian population 18 years and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Total population": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!DISABILITY STATUS!!Total population!!With a disability"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Population 18 to 64 years": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!DISABILITY STATUS!!Population 18 to 64 years!!No disability"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Population 65 years and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!DISABILITY STATUS!!Population 65 years and over!!With a disability"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over": [
+      "Estimate!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
+    ],
+    "Estimate!!Adult correctional facilities!!Total population": [
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!Male",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!Female",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!Under 15 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!85 years and over",
+      "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!Male",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!Female",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!Under 15 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!15 to 17 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!18 to 24 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!25 to 34 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!35 to 44 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!45 to 54 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!55 to 64 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!65 to 74 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!75 to 84 years",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!85 years and over",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!White alone, Not Hispanic or Latino"
+    ],
+    "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!Under 18 years": [
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!Under 18 years!!Female",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!Under 18 years!!Male",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!Under 18 years!!Female"
+    ],
+    "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!65 years and over": [
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Estimate!!Adult correctional facilities!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!Adult correctional facilities!!Total population!!SEX AND AGE!!65 years and over!!Female",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!65 years and over!!Male",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!SEX AND AGE!!65 years and over!!Female"
+    ],
+    "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race": [
+      "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Estimate!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!Adult correctional facilities!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!White",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Black or African American",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Asian",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "Margin of Error!!Adult correctional facilities MOE!!Total population!!RACE AND HISPANIC ORIGIN OR LATINO ORIGIN!!One race!!Some other race"
+    ],
+    "Estimate!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over": [
+      "Estimate!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Estimate!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Estimate!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Estimate!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Estimate!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!Adult correctional facilities!!MARITAL STATUS!!Population 15 years and over!!Never married",
+      "Margin of Error!!Adult correctional facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+      "Margin of Error!!Adult correctional facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+      "Margin of Error!!Adult correctional facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced",
+      "Margin of Error!!Adult correctional facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Separated",
+      "Margin of Error!!Adult correctional facilities MOE!!MARITAL STATUS!!Population 15 years and over!!Never married"
+    ],
+    "Estimate!!Adult correctional facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
+      "Estimate!!Adult correctional facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!Adult correctional facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Estimate!!Adult correctional facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!Adult correctional facilities!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school",
+      "Margin of Error!!Adult correctional facilities MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school through 12th grade",
+      "Margin of Error!!Adult correctional facilities MOE!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school"
+    ],
+    "Estimate!!Adult correctional facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
+      "Estimate!!Adult correctional facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!Adult correctional facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Estimate!!Adult correctional facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Adult correctional facilities!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Adult correctional facilities MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate or higher",
+      "Margin of Error!!Adult correctional facilities MOE!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Adult correctional facilities!!VETERAN STATUS!!Civilian population 18 years and over": [
+      "Estimate!!Adult correctional facilities!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!Adult correctional facilities!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran",
+      "Margin of Error!!Adult correctional facilities MOE!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veteran"
+    ],
+    "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Total population": [
+      "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!Adult correctional facilities!!DISABILITY STATUS!!Total population!!With a disability",
+      "Margin of Error!!Adult correctional facilities MOE!!DISABILITY STATUS!!Total population!!With a disability"
+    ],
+    "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Population 18 to 64 years": [
+      "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!Adult correctional facilities!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!Adult correctional facilities!!DISABILITY STATUS!!Population 18 to 64 years!!No disability",
+      "Margin of Error!!Adult correctional facilities MOE!!DISABILITY STATUS!!Population 18 to 64 years!!With a disability",
+      "Margin of Error!!Adult correctional facilities MOE!!DISABILITY STATUS!!Population 18 to 64 years!!No disability"
+    ],
+    "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Population 65 years and over": [
+      "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!Adult correctional facilities!!DISABILITY STATUS!!Population 65 years and over!!With a disability",
+      "Margin of Error!!Adult correctional facilities MOE!!DISABILITY STATUS!!Population 65 years and over!!With a disability"
+    ],
+    "Estimate!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over": [
+      "Estimate!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Estimate!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Estimate!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Estimate!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Estimate!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Estimate!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Estimate!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!Adult correctional facilities!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad",
+      "Margin of Error!!Adult correctional facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same address",
+      "Margin of Error!!Adult correctional facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States",
+      "Margin of Error!!Adult correctional facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Same county",
+      "Margin of Error!!Adult correctional facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county",
+      "Margin of Error!!Adult correctional facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Same state",
+      "Margin of Error!!Adult correctional facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different address in the United States!!Different county!!Different state",
+      "Margin of Error!!Adult correctional facilities MOE!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Abroad"
+    ],
+    "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native": [
+      "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female",
+      "Margin of Error!!Adult correctional facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Male",
+      "Margin of Error!!Adult correctional facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Native!!Female"
+    ],
+    "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born": [
+      "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female",
+      "Margin of Error!!Adult correctional facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Male",
+      "Margin of Error!!Adult correctional facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Female"
+    ],
+    "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen": [
+      "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female",
+      "Margin of Error!!Adult correctional facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Male",
+      "Margin of Error!!Adult correctional facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Naturalized U.S. citizen!!Female"
+    ],
+    "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen": [
+      "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Estimate!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!Adult correctional facilities!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female",
+      "Margin of Error!!Adult correctional facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Male",
+      "Margin of Error!!Adult correctional facilities MOE!!PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY!!Total population!!Foreign born!!Not a U.S. citizen!!Female"
+    ],
+    "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over": [
+      "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
+      "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
+    ],
+    "Estimate!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over": [
+      "Estimate!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Estimate!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Estimate!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Estimate!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Estimate!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Adult correctional facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Adult correctional facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force",
+      "Margin of Error!!Adult correctional facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed",
+      "Margin of Error!!Adult correctional facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces",
+      "Margin of Error!!Adult correctional facilities MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over": [
+      "Estimate!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Estimate!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Estimate!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Estimate!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Estimate!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!Adult correctional facilities!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations",
+      "Margin of Error!!Adult correctional facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Management, business, science, and arts occupations",
+      "Margin of Error!!Adult correctional facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Service occupations",
+      "Margin of Error!!Adult correctional facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Sales and office occupations",
+      "Margin of Error!!Adult correctional facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Natural resources, construction, extraction, and maintenance occupations",
+      "Margin of Error!!Adult correctional facilities MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
+    ]
+  },
+  "ignoreTokens": [
+    "DISABILITY STATUS",
+    "Estimate",
+    "OCCUPATION",
+    "MARITAL STATUS",
+    "EDUCATIONAL ATTAINMENT",
+    "LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH",
+    "SCHOOL ENROLLMENT",
+    "EMPLOYMENT STATUS",
+    "EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)",
+    "EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)",
+    "EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)",
+    "RESIDENCE 1 YEAR AGO",
+    "PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY",
+    "SEX AND AGE",
+    "RACE AND HISPANIC ORIGIN OR LATINO ORIGIN",
+    "VETERAN STATUS"
+  ]
+}
