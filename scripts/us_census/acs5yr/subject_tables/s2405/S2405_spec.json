@@ -14,7 +14,7 @@
             "Margin of Error": "marginOfError"
         },
         "age": {
-            "Civilian employed population 16 years and over": "[16 - Years]"
+            "Civilian employed population 16 years and over": "[Years 16 -]"
         },
         "armedForcesStatus": {
             "Civilian employed population 16 years and over": "Civilian"
@@ -52,8 +52,7 @@
     },
     "inferredSpec": {
         "naics": {
-            "age": "[16 - Years]",
-            "workerStatus": "Worker",
+            "age": "[Years 16 -]",
             "armedForcesStatus": "Civilian",
             "employment": "BLS_Employed"
         }
@@ -65,7 +64,7 @@
                 "armedForcesStatus"
             ],
             "dependentPVs": {
-                "age": "[16 - Years]"
+                "age": "[Years 16 -]"
             }
         },
         {
@@ -74,8 +73,7 @@
                 "occupation"
             ],
             "dependentPVs": {
-                "age": "[16 - Years]",
-                "workerStatus": "Worker",
+                "age": "[Years 16 -]",
                 "employment": "BLS_Employed",
                 "armedForcesStatus": "Civilian"
             }
@@ -86,8 +84,7 @@
                 "naics"
             ],
             "dependentPVs": {
-                "age": "[16 - Years]",
-                "workerStatus": "Worker",
+                "age": "[Years 16 -]",
                 "employment": "BLS_Employed",
                 "armedForcesStatus": "Civilian"
             }
