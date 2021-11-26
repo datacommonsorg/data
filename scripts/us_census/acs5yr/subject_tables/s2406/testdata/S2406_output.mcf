@@ -24,7 +24,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_SOCManagementBusinessScienceArtsOccupation
@@ -35,7 +34,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_SOCServiceOccupation
@@ -46,7 +44,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_SOCServiceOccupation
@@ -57,7 +54,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_SOCSalesOfficeOccupation
@@ -68,7 +64,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_SOCSalesOfficeOccupation
@@ -79,7 +74,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_SOCNaturalResourcesConstructionMaintenanceOccupation
@@ -90,7 +84,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_SOCNaturalResourcesConstructionMaintenanceOccupation
@@ -101,7 +94,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_SOCProductionTransportationMaterialMovingOccupation
@@ -112,7 +104,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_SOCProductionTransportationMaterialMovingOccupation
@@ -123,7 +114,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee
@@ -135,7 +125,6 @@ workerClassification: dcs:PaidEmployee
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee
@@ -147,7 +136,6 @@ workerClassification: dcs:PaidEmployee
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_PaidEmployee
@@ -160,7 +148,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_PaidEmployee
@@ -173,7 +160,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCServiceOccupation_PaidEmployee
@@ -186,7 +172,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCServiceOccupation_PaidEmployee
@@ -199,7 +184,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCSalesOfficeOccupation_PaidEmployee
@@ -212,7 +196,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCSalesOfficeOccupation_PaidEmployee
@@ -225,7 +208,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_PaidEmployee
@@ -238,7 +220,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_PaidEmployee
@@ -251,7 +232,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_PaidEmployee
@@ -264,7 +244,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_PaidEmployee
@@ -277,7 +256,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner
@@ -289,7 +267,6 @@ workerClassification: dcs:IncorporatedBusinessOwner
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner
@@ -301,7 +278,6 @@ workerClassification: dcs:IncorporatedBusinessOwner
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_IncorporatedBusinessOwner
@@ -314,7 +290,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_IncorporatedBusinessOwner
@@ -327,7 +302,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCServiceOccupation_IncorporatedBusinessOwner
@@ -340,7 +314,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCServiceOccupation_IncorporatedBusinessOwner
@@ -353,7 +326,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCSalesOfficeOccupation_IncorporatedBusinessOwner
@@ -366,7 +338,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCSalesOfficeOccupation_IncorporatedBusinessOwner
@@ -379,7 +350,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_IncorporatedBusinessOwner
@@ -392,7 +362,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_IncorporatedBusinessOwner
@@ -405,7 +374,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_IncorporatedBusinessOwner
@@ -418,7 +386,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_IncorporatedBusinessOwner
@@ -431,7 +398,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker
@@ -443,7 +409,6 @@ workerClassification: dcs:PaidWorker
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker
@@ -455,7 +420,6 @@ workerClassification: dcs:PaidWorker
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_PaidWorker
@@ -468,7 +432,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCManagementBusinessScienceArtsOccupation_PaidWorker
@@ -481,7 +444,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCServiceOccupation_PaidWorker
@@ -494,7 +456,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCServiceOccupation_PaidWorker
@@ -507,7 +468,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCSalesOfficeOccupation_PaidWorker
@@ -520,7 +480,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCSalesOfficeOccupation_PaidWorker
@@ -533,7 +492,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_PaidWorker
@@ -546,7 +504,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_PaidWorker
@@ -559,7 +516,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_PaidWorker
@@ -572,7 +528,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_SOCProductionTransportationMaterialMovingOccupation_PaidWorker
@@ -585,7 +540,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_GovernmentOwnedEstablishment_Worker
@@ -597,7 +551,6 @@ workerClassification: dcs:Worker
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_Worker
@@ -609,7 +562,6 @@ workerClassification: dcs:Worker
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCManagementBusinessScienceArtsOccupation_Worker
@@ -622,7 +574,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCManagementBusinessScienceArtsOccupation_Worker
@@ -635,7 +586,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCServiceOccupation_Worker
@@ -648,7 +598,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCServiceOccupation_Worker
@@ -661,7 +610,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCSalesOfficeOccupation_Worker
@@ -674,7 +622,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCSalesOfficeOccupation_Worker
@@ -687,7 +634,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker
@@ -700,7 +646,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_Worker
@@ -713,7 +658,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_GovernmentOwnedEstablishment_SOCProductionTransportationMaterialMovingOccupation_Worker
@@ -726,7 +670,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_GovernmentOwnedEstablishment_SOCProductionTransportationMaterialMovingOccupation_Worker
@@ -739,7 +682,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -751,7 +693,6 @@ workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -763,7 +704,6 @@ workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
 age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCManagementBusinessScienceArtsOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -776,7 +716,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCManagementBusinessScienceArtsOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -789,7 +728,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-1
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCServiceOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -802,7 +740,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCServiceOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -815,7 +752,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-2
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCSalesOfficeOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -828,7 +764,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCSalesOfficeOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -841,7 +776,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-3
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -854,7 +788,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCNaturalResourcesConstructionMaintenanceOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -867,7 +800,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-4
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_SOCProductionTransportationMaterialMovingOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -880,7 +812,6 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_SOCProductionTransportationMaterialMovingOccupation_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -893,6 +824,5 @@ age: [16 - Years]
 armedForcesStatus: dcs:Civilian
 employment: dcs:BLS_Employed
 occupation: dcs:SOCv2018/highLevelAggregation-5
-workerStatus: dcs:Worker
 typeOf: dcs:StatisticalVariable
 
