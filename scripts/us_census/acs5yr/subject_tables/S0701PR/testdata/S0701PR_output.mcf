@@ -579,147 +579,147 @@ populationType: dcs:Person
 age: [15 - Years]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear
+Node: dcid:Count_Person_IncomeOfUpto9999USDollar
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
@@ -1503,163 +1503,163 @@ residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear_DifferentHouseInSameCounty
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInSameCounty
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInSameCounty
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
@@ -2458,163 +2458,163 @@ residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountySameState
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInDifferentCountySameState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountySameState
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
@@ -3413,163 +3413,163 @@ residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear_DifferentHouseInDifferentCountyDifferentState
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInDifferentCountyDifferentState
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
@@ -4368,163 +4368,163 @@ residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessInflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [- 9999 InflationAdjustedUSD_CurrentYear]
+income: [- 9999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+income: [10000 14999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+income: [15000 24999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+income: [25000 34999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+income: [35000 49999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [50000 64999 InflationAdjustedUSD_CurrentYear]
+income: [50000 64999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999InflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [65000 74999 InflationAdjustedUSD_CurrentYear]
+income: [65000 74999 USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreInflationAdjustedUSDCurrentYear_DifferentHouseAbroad
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseAbroad
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
 residentStatus: dcs:DifferentHouseAbroad
 age: [15 - Years]
-income: [75000 - InflationAdjustedUSD_CurrentYear]
+income: [75000 - USDollar]
 incomeStatus: dcs:WithIncome
 typeOf: dcs:StatisticalVariable
 
