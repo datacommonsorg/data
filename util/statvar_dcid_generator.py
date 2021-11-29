@@ -218,8 +218,8 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'placeOfBirth': {
         'prepend': 'PlaceOfBirth'
     },
-    'dateMovedIn': {
-        'prepend': 'MovedInDate',
+    'dateMovedIntoHousingUnit': {
+        'prepend': 'MovedIn',
         'replace': 'Date',
         'replacement': ''
     },
