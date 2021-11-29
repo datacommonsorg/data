@@ -1,0 +1,11 @@
+Node: E:UDISESchoolWithComputerCount->E0
+typeOf: schema:Place
+udiseCode: C:UDISESchoolWithComputerCount->UDISECode
+
+Node: E:UDISESchoolWithComputerCount->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:UDISESchoolWithComputerCount->StatisticalVariable
+value: C:UDISESchoolWithComputerCount->Value
+observationDate: C:UDISESchoolWithComputerCount->Period
+observationPeriod: "P1Y"
+observationAbout: E:UDISESchoolWithComputerCount->E0
