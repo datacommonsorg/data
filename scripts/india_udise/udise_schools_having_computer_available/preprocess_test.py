@@ -81,32 +81,30 @@ class TestPreprocess(unittest.TestCase):
         # https://dashboard.udiseplus.gov.in/#/reportDashboard/sReport
 
         # For Year 2015-16, SRINAGAR District(0103), Total
-        # Count_School_HasComputerAvailable should be 524
-        row = clean_df.loc[clean_df["StatisticalVariable"].eq(
-            "Count_School_HasComputerAvailable") &
-                           clean_df["UDISECode"].eq("0103") &
-                           clean_df["Period"].eq("2016-03")]
+        # Count_School_HasComputer should be 524
+        row = clean_df.loc[
+            clean_df["StatisticalVariable"].eq("Count_School_HasComputer") &
+            clean_df["UDISECode"].eq("0103") & clean_df["Period"].eq("2016-03")]
         self.assertEqual("524", row.iloc[0]["Value"])
 
-        # For Year 2015-16, SRINAGAR District(0103), Count_School_HasComputerAvailable_UpperPrimarySchool_Grade1To8
-        # Count_School_HasComputerAvailable_UpperPrimarySchool_Grade1To8 should be 203
+        # For Year 2015-16, SRINAGAR District(0103), Count_School_HasComputer_UpperPrimarySchool_Grade1To8
+        # Count_School_HasComputer_UpperPrimarySchool_Grade1To8 should be 203
         row = clean_df.loc[clean_df["StatisticalVariable"].eq(
-            "Count_School_HasComputerAvailable_UpperPrimarySchool_Grade1To8") &
+            "Count_School_HasComputer_UpperPrimarySchool_Grade1To8") &
                            clean_df["UDISECode"].eq("0103") &
                            clean_df["Period"].eq("2016-03")]
         self.assertEqual("203", row.iloc[0]["Value"])
 
-        # For Year 2015-16, SRINAGAR District(0103), Count_School_HasComputerAvailable_SeniorSecondarySchool_Grade1To10_DepartmentOfEducation
-        # Count_School_HasComputerAvailable_SeniorSecondarySchool_Grade1To10_DepartmentOfEducation should be 23
+        # For Year 2015-16, SRINAGAR District(0103), Count_School_HasComputer_SeniorSecondarySchool_Grade1To10_DepartmentOfEducation
+        # Count_School_HasComputer_SeniorSecondarySchool_Grade1To10_DepartmentOfEducation should be 23
         row = clean_df.loc[clean_df["StatisticalVariable"].eq(
-            "Count_School_HasComputerAvailable_SeniorSecondarySchool_Grade1To10_DepartmentOfEducation"
+            "Count_School_HasComputer_SeniorSecondarySchool_Grade1To10_DepartmentOfEducation"
         ) & clean_df["UDISECode"].eq("0103") & clean_df["Period"].eq("2016-03")]
         self.assertEqual("23", row.iloc[0]["Value"])
 
         # For Year 2019-20, Ladakh District(37), Total
-        # Count_School_HasComputerAvailable should be 336
-        row = clean_df.loc[clean_df["StatisticalVariable"].eq(
-            "Count_School_HasComputerAvailable") &
-                           clean_df["UDISECode"].eq("37") &
-                           clean_df["Period"].eq("2020-03")]
+        # Count_School_HasComputer should be 336
+        row = clean_df.loc[
+            clean_df["StatisticalVariable"].eq("Count_School_HasComputer") &
+            clean_df["UDISECode"].eq("37") & clean_df["Period"].eq("2020-03")]
         self.assertEqual("336", row.iloc[0]["Value"])
