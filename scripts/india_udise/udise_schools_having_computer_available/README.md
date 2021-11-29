@@ -1,7 +1,7 @@
 # UDISE+ - Number of Schools having Computer Available by School Category and Management 
 
 ## About the Dataset
-This dataset gives the number of schools that have functional toilet facility. This dataset (Report Id:3109) has count of schools by school level and school management.
+This dataset gives the number of schools that have computer available. This dataset (Report Id:3109) has count of schools by school level and school management.
 
 Data is available at State, District, and Block levels. Currently, we are importing State and District level data.
 

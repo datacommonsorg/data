@@ -34,7 +34,7 @@ module_dir_ = os.path.dirname(__file__)
 class UDISESchoolsHavingComputerAvailable(UDISEIndiaSchoolDataLoaderBase):
 
     def _get_base_name(self, data_row):
-        name = "Count_School_HasComputerAvailable"
+        name = "Count_School_HasComputer"
         return name
 
     def _get_base_constraints(self, data_row):
