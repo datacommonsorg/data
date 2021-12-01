@@ -1,4 +1,4 @@
-*Artefacts for US census ACS5YR S2409 Subject Table import*
+# Artefacts for US census ACS5YR S2409 Subject Table import #
 
 This import includes the class of worker characteristics for full-time, year-round, 16 year and over civilian employed population characterized by the gender.
 For years 2010-2014, Median Earnings (in Dollars Inflation Adjusted) are also available.
