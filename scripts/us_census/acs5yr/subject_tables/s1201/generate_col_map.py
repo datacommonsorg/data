@@ -29,7 +29,7 @@ import pandas as pd
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../common'))  # for statvar_dcid_generator
-from generate_col_map import GenerateColMapBase
+from generate_col_map import generate_stat_var_map
 
 
 def process_zip_file(zip_file_path,
@@ -82,28 +82,3 @@ def process_zip_file(zip_file_path,
         json.dump(column_map, f, indent=4)
         f.close()
     return column_map
-
-
-def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
-    """Wrapper function for generateColMapBase class to generate column map.
-
-  Args:
-    specDict: A dictionary containing specifications for the different properties of the statistical variable.
-    columnList: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
-
-  Returns:
-    A dictionary mapping each column to their respective stat_var node definitions.
-    Example: {
-      "Total Civilian population": {
-        "populationType": "Person",
-        "statType": "measuredValue",
-        "measuredProperty": "Count Person"
-        "armedForceStatus": "Civilian"
-      },
-      "<column-name-2>": {}, .....,
-    }
-  """
-    col_map_obj = GenerateColMapBase(spec_dict=spec_dict,
-                                     column_list=column_list,
-                                     delimiter=delimiter)
-    return col_map_obj._generate_stat_vars_from_spec()
