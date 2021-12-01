@@ -20,58 +20,106 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('input_csv', 'periodic_table.csv',
-                    'CSV file with properties of all elements.')
-flags.DEFINE_string('output_prefix', 'elements',
+flags.DEFINE_list('input_csv', 'periodic_table.csv,compounds.csv',
+                  'CSV file with properties of all elements.')
+flags.DEFINE_string('output_prefix', 'substance',
                     'Output path for csv and tmcf files.')
 
 _OUTPUT_COLUMNS = [
-    'AtomicNumber',
-    'Element',
+    'Name',
+    'TypeOf',
+    'ChemicalName',
     'Symbol',
     'Type',
+    'AtomicNumber',
 ]
 
 _NODE_TEMPLATE = """
-Node: E:Elements->E0
-typeOf: dcs:ChemicalElement
-name: C:Elements->Element
-chemicalName: C:Elements->Element
-chemicalSymbol: C:Elements->Symbol
-atomicNumber: C:Elements->AtomicNumber
-chemicalSubstanceType: C:Elements->Type
+Node: E:Substance->E0
+typeOf: C:Substance->TypeOf
+name: C:Substance->Name
+chemicalName: C:Substance->ChemicalName
+chemicalSymbol: C:Substance->Symbol
+atomicNumber: C:Substance->AtomicNumber
+chemicalSubstanceType: C:Substance->Type
 """
 
-def process(input_csv: str, output: str) -> None:
-  """Read the data from the input csv, clean it up and generate the
+
+def _process_file(input_csv: str) -> pd.DataFrame:
+    """Read the data from the input csv, clean it up and return a DataFrame
+
+  Args:
+    input_csv: CSV downloaded from the data source
+
+  Returns:
+    DataFrame with the output columns from the input
+  """
+
+    df = pd.read_csv(input_csv)
+
+    # Remove extra whitespaces from string columns
+    for col in ['Element', 'Symbol', 'Name', 'ChemicalName', 'Type', 'TypeOf']:
+        if col in df:
+            df[col] = df[col].str.strip()
+
+    # Add Type for periodic table without TypeOf column
+    if 'TypeOf' not in df:
+        df['TypeOf'] = 'dcs:ChemicalElement'
+    # Prepare the 'Type' column removing whitespaces and adding 'dcs:' prefix.
+    if 'Type' in df:
+        df['Type'] = df['Type'].apply(lambda t: 'dcs:' + t.replace(" ", "") if
+                                      pd.notnull(t) and t.find(':') < 0 else '')
+
+    # Add output columns
+    if 'Name' not in df and 'Element' in df:
+        df['Name'] = df['Element']
+
+    if 'ChemicalName' not in df and 'Name' in df:
+        df['ChemicalName'] = df['Name']
+
+    return df
+
+
+def process(input_csvs: list, output: str) -> None:
+    """Read the data from the input csv, clean it up and generate the
   output csv and mcf with the required columns.
 
   Args:
     input_csv: CSV downloaded from the data source
     output: Output file prefix for generated csv and tmcf.
   """
+    df_list = []
+    for input_file in input_csvs:
+        df_list.append(_process_file(input_file))
 
-  df = pd.read_csv(input_csv)
+    # Merge DataFrames from all input files.
+    df = pd.concat(df_list)
 
-  # Remove extra whitespaces
-  for col in ['Element', 'Symbol']:
-    df[col] = df[col].str.strip()
+    # Get list of output columns available.
+    output_columns = []
+    for col in _OUTPUT_COLUMNS:
+        if col in df:
+            output_columns.append(col)
 
-  # Clean the 'Type' column to remove whitespace and add 'dcs:' prefix.
-  df['Type'] = df['Type'].apply(lambda t:
-                                 'dcs:'+t.replace(" ", "") if pd.notnull(t) else '')
+    # Write into the output csv
+    df.to_csv(output + '.csv',
+              columns=output_columns,
+              index=False,
+              header=True,
+              mode='w')
 
-  # Write into the output csv
-  df.to_csv(output + '.csv', columns = _OUTPUT_COLUMNS, index = False, header = True, mode = 'w')
-  # Generate the tMCF file
-  tmcf_file_path = output + '.tmcf'
-  with open(tmcf_file_path, 'w', newline='') as f_out_tmcf:
-      f_out_tmcf.write(_NODE_TEMPLATE)
+    # Generate the tMCF file
+    tmcf_file_path = output + '.tmcf'
+    with open(tmcf_file_path, 'w', newline='') as f_out_tmcf:
+        f_out_tmcf.write(_NODE_TEMPLATE)
+
 
 def main(_) -> None:
-  process(FLAGS.input_csv, FLAGS.output_prefix)
+    process(FLAGS.input_csv, FLAGS.output_prefix)
+
 
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)

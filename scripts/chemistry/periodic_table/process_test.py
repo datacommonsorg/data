@@ -31,23 +31,23 @@ import process
 
 class TestPeriodicTableProcess(unittest.TestCase):
 
-  def test_csv_process(self):
-     tmp_dir = tempfile.mkdtemp()
-     process.process('periodic_table.csv', path.join(tmp_dir, 'elements'))
+    def test_csv_process(self):
+        tmp_dir = tempfile.mkdtemp()
+        process.process(['periodic_table.csv', 'compounds.csv'],
+                        path.join(tmp_dir, 'test_output'))
 
-     with open(path.join(tmp_dir, 'elements.csv')) as csv_file:
-       out_csv = csv_file.read()
-     with open(path.join(module_dir_, 'elements.csv')) as expected_csv:
-       expected_out_csv = expected_csv.read()
-     self.assertEqual(out_csv, expected_out_csv)
+        with open(path.join(tmp_dir, 'test_output.csv')) as csv_file:
+            out_csv = csv_file.read()
+        with open(path.join(module_dir_, 'substances.csv')) as expected_csv:
+            expected_out_csv = expected_csv.read()
+        self.assertEqual(out_csv, expected_out_csv)
 
-     with open(path.join(tmp_dir, 'elements.tmcf')) as tmcf_file:
-       out_tmcf = tmcf_file.read()
-     with open(path.join(module_dir_, 'elements.tmcf')) as expected_tmcf:
-       expected_out_tmcf = expected_tmcf.read()
-     self.assertEqual(out_tmcf, expected_out_tmcf)
-
+        with open(path.join(tmp_dir, 'test_output.tmcf')) as tmcf_file:
+            out_tmcf = tmcf_file.read()
+        with open(path.join(module_dir_, 'substances.tmcf')) as expected_tmcf:
+            expected_out_tmcf = expected_tmcf.read()
+        self.assertEqual(out_tmcf, expected_out_tmcf)
 
 
 if __name__ == '__main__':
-  unittest.main()
+    unittest.main()

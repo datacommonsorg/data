@@ -1,0 +1,15 @@
+Name,TypeOf,ChemicalName,Symbol
+CarbonDioxide,dcs:ChemicalCompound,Carbon Dioxide,CO2
+Methane,dcs:ChemicalCompound,Methane,CH4
+NitrousOxide,dcs:ChemicalCompound,Nitrous Oxide,NO2
+SulfurHexaflouride,dcs:ChemicalCompound,Sulphur Hexaflouride,SF6
+NitrogenTrifluoride,dcs:ChemicalCompound,Nitrogen Trifluoride,NF3
+CalciumCarbonate,dcs:ChemicalCompound,Calcium Carbonate,CaCO3
+Carbonate,dcs:ChemicalCompound,Carbonate,CO3
+Nitrate,dcs:ChemicalCompound,Nitrate,NO3
+Sulfate,dcs:ChemicalCompound,Sulfate,SO4
+Silica,dcs:ChemicalCompound,Silicon Dioxide,SiO2
+SodiumCarbonate,dcs:ChemicalCompound,Sodium Carbonate,Na2CO3
+
+
+
