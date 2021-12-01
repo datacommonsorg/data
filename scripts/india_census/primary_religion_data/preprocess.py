@@ -25,16 +25,24 @@ from ..common.utils import title_case
 
 CENSUS_DATA_COLUMN_START = 7
 
-dcid_mapping = {}
-dcid_mapping["Hindu"] = "dcs:Hinduism"
-dcid_mapping["Muslim"] = "dcs:Islam"
-dcid_mapping["Christian"] = "dcs:Christianity"
-dcid_mapping["Sikh"] = "dcs:Sikhism"
-dcid_mapping["Buddhist"] = "dcs:Buddhism"
-dcid_mapping["Jain"] = "dcs:Jainism"
-dcid_mapping[
-    "Other religions and persuasions"] = "dcs:IndiaCensus_OtherReligionAndPersuasions"
-dcid_mapping["Religion not stated"] = "dcs:ReligionNotStated"
+_RELIGION_DCID_MAPPING = {
+    "Hindu":
+        "dcs:Hinduism",
+    "Muslim":
+        "dcs:Islam",
+    "Christian":
+        "dcs:Christianity",
+    "Sikh":
+        "dcs:Sikhism",
+    "Buddhist":
+        "dcs:Buddhism",
+    "Jain":
+        "dcs:Jainism",
+    "Other religions and persuasions":
+        "dcs:IndiaCensus_OtherReligionAndPersuasions",
+    "Religion not stated":
+        "dcs:ReligionNotStated"
+}
 
 TEMPLATE_STAT_VAR = """Node: dcid:{name}
 name: "{description}"
@@ -244,7 +252,8 @@ class CensusPrimaryReligiousDataLoader():
 
         name_array.append(title_case(data_category))
         row["description"] = row["description"] + " - " + data_category
-        constraints_array.append("religion: " + dcid_mapping[data_category])
+        constraints_array.append("religion: " +
+                                 _RELIGION_DCID_MAPPING[data_category])
 
         if row["age"] == "YearsUpto6":
             name_array.append("YearsUpto6")
