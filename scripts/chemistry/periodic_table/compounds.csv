@@ -10,6 +10,236 @@ Nitrate,dcs:ChemicalCompound,Nitrate,NO3
 Sulfate,dcs:ChemicalCompound,Sulfate,SO4
 Silica,dcs:ChemicalCompound,Silicon Dioxide,SiO2
 SodiumCarbonate,dcs:ChemicalCompound,Sodium Carbonate,Na2CO3
-
-
-
+Benzene,dcs:ChemicalCompound,Benzene,C6H6
+Toluene,dcs:ChemicalCompound,Toluene,C7H8
+Ethylbenzene,dcs:ChemicalCompound,Ethylbenzene,C8H10
+Naphthalene,dcs:ChemicalCompound,Naphthalene,C10H8
+Chloroform,dcs:ChemicalCompound,Chloroform,CHCl3
+Chrysene,dcs:ChemicalCompound,Chrysene,C18H12
+Chlorobenzene,dcs:ChemicalCompound,Chlorobenzene,C6H5Cl
+Acetone,dcs:ChemicalCompound,Acetone,C3H6O
+Dieldrin,dcs:ChemicalCompound,Red Shield,C12H8Cl6O
+Phenanthrene,dcs:ChemicalCompound,Phenanthrene,C14H10
+Pyrene,dcs:ChemicalCompound,Pyrene,C16H10
+Fluoranthene,dcs:ChemicalCompound,Fluoranthene,C16H10
+Phenol,dcs:ChemicalCompound,Phenol,C6H6O
+Cyanide,dcs:ChemicalCompound,Cyanide Ion,CN-
+2-methylnaphthalene,dcs:ChemicalCompound,2-methylnaphthalene,C11H10
+CarbonTetrachloride,dcs:ChemicalCompound,Carbon Tetrachloride,CCl4
+Pentachlorophenol,dcs:ChemicalCompound,Pentachlorophenol,C6HCl5O
+Aroclor1254,dcs:ChemicalCompound,Aroclor 1254,C12H5Cl5
+9h-fluorene,dcs:ChemicalCompound,Fluorene,C13H10
+Anthracene,dcs:ChemicalCompound,Anthracene,C14H10
+DibutylPhthalate,dcs:ChemicalCompound,Dibutyl Phthalate,C16H22O4
+Aldrin,dcs:ChemicalCompound,Aldrin,C12H8Cl6
+Dibenzofuran,dcs:ChemicalCompound,Dibenzofuran,C12H8O
+CarbonDisulfide,dcs:ChemicalCompound,Carbon Disulfide,CS2
+HeptachlorEpoxide,dcs:ChemicalCompound,Heptachlor Epoxide,C10H5Cl7O
+Chlordane,dcs:ChemicalCompound,Chlordane,C10H6Cl8
+Acenaphthylene,dcs:ChemicalCompound,Acenaphthylene,C12H8
+Heptachlor,dcs:ChemicalCompound,Heptachlor,C10H5Cl7
+Radium-226,dcs:ChemicalCompound,Radium-226,Ra
+BenzoicAcid,dcs:ChemicalCompound,Benzoic Acid,C7H6O2
+Styrene,dcs:ChemicalCompound,Styrene,C8H8
+Chloroethane,dcs:ChemicalCompound,Chloroethane,C2H5Cl
+DiethylPhthalate,dcs:ChemicalCompound,Diethyl Phthalate,C12H14O4
+Endrin,dcs:ChemicalCompound,Endrin,C12H8Cl6O
+Chloromethane,dcs:ChemicalCompound,Chloromethane,CH3Cl
+Hexachlorobenzene,dcs:ChemicalCompound,Hexachlorobenzene,C6Cl6
+Alpha-chlordane,dcs:ChemicalCompound,Alpha-chlordane,C10H6Cl8
+9h-carbazole,dcs:ChemicalCompound,Carbazole,C12H9N
+Trichlorofluoromethane,dcs:ChemicalCompound,Trichlorofluoromethane,CCl3F
+Bromodichloromethane,dcs:ChemicalCompound,Bromodichloromethane,CHBrCl2
+Fluoride,dcs:ChemicalCompound,Fluoride Ion,F-
+Toxaphene,dcs:ChemicalCompound,Toxaphene,C10H8Cl8
+Strontium-90,dcs:ChemicalCompound,Strontium-90,Sr
+Nitrobenzene,dcs:ChemicalCompound,Nitrobenzene,C6H5NO2
+2-hexanone,dcs:ChemicalCompound,2-hexanone,C6H12O
+Ammonia,dcs:ChemicalCompound,Ammonia,H3N
+Tritium,dcs:ChemicalCompound,Tritium,H2
+DimethylPhthalate,dcs:ChemicalCompound,Dimethyl Phthalate,C10H10O4
+Methoxychlor,dcs:ChemicalCompound,Methoxychlor,C16H15Cl3O2
+EndrinAldehyde,dcs:ChemicalCompound,Endrin Aldehyde,C12H8Cl6O
+Tetrahydrofuran,dcs:ChemicalCompound,Tetrahydrofuran,C4H8O
+Dichlorodifluoromethane,dcs:ChemicalCompound,Dichlorodifluoromethane,CCl2F2
+Phenylmethanol,dcs:ChemicalCompound,Benzyl Alcohol,C7H8O
+EndosulfanSulfate,dcs:ChemicalCompound,Endosulfan Sulfate,C9H6Cl6O4S
+Cumene,dcs:ChemicalCompound,Cumene,C9H12
+Perchlorate,dcs:ChemicalCompound,Perchlorate,ClO4-
+Hexachloroethane,dcs:ChemicalCompound,Hexachloroethane,C2Cl6
+4-chloro-3-methylphenol,dcs:ChemicalCompound,4-chloro-3-methylphenol,C7H7ClO
+1-methylnaphthalene,dcs:ChemicalCompound,1-methylnaphthalene,C11H10
+2-chlorophenol,dcs:ChemicalCompound,2-chlorophenol,C6H5ClO
+4-nitrophenol,dcs:ChemicalCompound,4-nitrophenol,C6H5NO3
+Atrazine,dcs:ChemicalCompound,Atrazine,C8H14ClN5
+Hexachlorocyclopentadiene,dcs:ChemicalCompound,Hexachlorocyclopentadiene,C5Cl6
+4-(4-amino-3-chlorophenyl)-2-chloroaniline,dcs:ChemicalCompound,"3,3'-dichlorobenzidine",C12H10Cl2N2
+Propylbenzene,dcs:ChemicalCompound,Propylbenzene,C9H12
+Aniline,dcs:ChemicalCompound,Aniline,C6H7N
+Bromoform,dcs:ChemicalCompound,Bromoform,CHBr3
+N-nitrosodimethylamine,dcs:ChemicalCompound,N-nitrosodimethylamine,C2H6N2O
+Bromomethane,dcs:ChemicalCompound,Bromomethane,CH3Br
+2-nitrophenol,dcs:ChemicalCompound,2-nitrophenol,C6H5NO3
+Methylcyclohexane,dcs:ChemicalCompound,Methylcyclohexane,C7H14
+Pentachloroethane,dcs:ChemicalCompound,Pentachloroethane,C2HCl5
+Butan-2-ylbenzene,dcs:ChemicalCompound,Sec-butylbenzene,C10H14
+Bis(2-chloroisopropyl)Ether,dcs:ChemicalCompound,Bis(2-chloroisopropyl) Ether,C6H12Cl2O
+1-phenylethanone,dcs:ChemicalCompound,Acetophenone,C8H8O
+Malathion,dcs:ChemicalCompound,Malathion,C10H19O6PS2
+4-chloroaniline,dcs:ChemicalCompound,4-chloroaniline,C6H6ClN
+Cyclohexane,dcs:ChemicalCompound,Cyclohexane,C6H12
+Benzidine,dcs:ChemicalCompound,Benzidine,C12H12N2
+SulfuricAcid,dcs:ChemicalCompound,Sulfuric Acid,H2O4S
+Mirex,dcs:ChemicalCompound,Mirex,C10Cl12
+AluminumOxide,dcs:ChemicalCompound,Aluminum Oxide,Al2O3
+Parathion,dcs:ChemicalCompound,Parathion,C10H14NO5PS
+Dicyclopentadiene,dcs:ChemicalCompound,Dicyclopentadiene,C10H12
+Butylbenzene,dcs:ChemicalCompound,Butylbenzene,C10H14
+2-chloronaphthalene,dcs:ChemicalCompound,2-chloronaphthalene,C10H7Cl
+Pyridine,dcs:ChemicalCompound,Pyridine,C5H5N
+Isodrin,dcs:ChemicalCompound,Isodrin,C12H8Cl6
+Creosote,dcs:ChemicalCompound,Creosote,C6H4N2O2
+Vernolate,dcs:ChemicalCompound,Vernolate,C10H21NOS
+Molinate,dcs:ChemicalCompound,Molinate,C9H17NOS
+Mecoprop,dcs:ChemicalCompound,Mecoprop,C10H11ClO3
+Hexane,dcs:ChemicalCompound,Hexane,C6H14
+Simazine,dcs:ChemicalCompound,Simazine,C7H12ClN5
+MethylAcetate,dcs:ChemicalCompound,Methyl Acetate,C3H6O2
+Ethion,dcs:ChemicalCompound,Ethion,C9H22O4P2S4
+Disulfoton,dcs:ChemicalCompound,Disulfoton,C8H19O2PS3
+Acrolein,dcs:ChemicalCompound,Acrolein,C3H4O
+(4-chloro-2-methylphenoxy)aceticAcid,dcs:ChemicalCompound,(4-chloro-2-methylphenoxy)acetic Acid,C9H9ClO3
+3-nitroaniline,dcs:ChemicalCompound,3-nitroaniline,C6H6N2O2
+2-nitroaniline,dcs:ChemicalCompound,2-nitroaniline,C6H6N2O2
+1-bromo-4-phenoxybenzene,dcs:ChemicalCompound,1-bromo-4-phenoxybenzene,C12H9BrO
+VinylAcetate,dcs:ChemicalCompound,Vinyl Acetate,C4H6O2
+TributylPhosphate,dcs:ChemicalCompound,Tributyl Phosphate,C12H27O4P
+Pentachlorobenzene,dcs:ChemicalCompound,Pentachlorobenzene,C6HCl5
+Pebulate,dcs:ChemicalCompound,Pebulate,C10H21NOS
+Nitrite,dcs:ChemicalCompound,Nitrite,NO2-
+MethylParathion,dcs:ChemicalCompound,Methyl Parathion,C8H10NO5PS
+Benzaldehyde,dcs:ChemicalCompound,Benzaldehyde,C7H6O
+4-nitroaniline,dcs:ChemicalCompound,4-nitroaniline,C6H6N2O2
+Diazinon,dcs:ChemicalCompound,Diazinon,C12H21N2O3PS
+Chlorobenzilate,dcs:ChemicalCompound,Chlorobenzilate,C16H14Cl2O3
+4-methoxyphenol,dcs:ChemicalCompound,4-methoxyphenol,C7H8O2
+2-propanol,dcs:ChemicalCompound,Isopropyl Alcohol,C3H8O
+VanadiumPentoxide,dcs:ChemicalCompound,Vanadium Pentoxide,O5V2
+SulfurDioxide,dcs:ChemicalCompound,Sulfur Dioxide,O2S
+Prometon,dcs:ChemicalCompound,Prometon,C10H19N5O
+P-cymene,dcs:ChemicalCompound,P-cymene,C10H14
+Nitroglycerin,dcs:ChemicalCompound,Nitroglycerin,C3H5N3O9
+MethylmercuryDicyandiamide,dcs:ChemicalCompound,Methylmercury Dicyandiamide,C3H6HgN4
+Methyl2-methylprop-2-enoate,dcs:ChemicalCompound,Methyl Methacrylate,C5H8O2
+Methanol,dcs:ChemicalCompound,Methanol,CH4O
+Formaldehyde,dcs:ChemicalCompound,Formaldehyde,CH2O
+Chloromethylbenzene,dcs:ChemicalCompound,Benzyl Chloride,C7H7Cl
+ChloroaceticAcid,dcs:ChemicalCompound,Chloroacetic Acid,C2H3ClO2
+Chlordecone,dcs:ChemicalCompound,Chlordecone,C10Cl10O
+Bromochloromethane,dcs:ChemicalCompound,Bromochloromethane,CH2BrCl
+Bromacil,dcs:ChemicalCompound,Bromacil,C9H13BrN2O2
+Benzonitrile,dcs:ChemicalCompound,Benzonitrile,C7H5N
+Azepan-2-one,dcs:ChemicalCompound,Caprolactam,C6H11NO
+2-fluoroaceticAcid,dcs:ChemicalCompound,Fluoroacetic Acid,C2H3FO2
+1-chloro-4-phenoxybenzene,dcs:ChemicalCompound,4-chlorodiphenyl Ether,C12H9ClO
+10h-phenothiazine,dcs:ChemicalCompound,Phenothiazine,C12H9NS
+SodiumNitrate,dcs:ChemicalCompound,Sodium Nitrate,NNaO3
+SodiumHydroxide,dcs:ChemicalCompound,Sodium Hydroxide,HNaO
+Quinoline,dcs:ChemicalCompound,Quinoline,C9H7N
+PotassiumNitrate,dcs:ChemicalCompound,Potassium Nitrate,KNO3
+Linuron,dcs:ChemicalCompound,Linuron,C9H10Cl2N2O2
+HydrogenSulfide,dcs:ChemicalCompound,Hydrogen Sulfide,H2S
+Heptane,dcs:ChemicalCompound,Heptane,C7H16
+Fensulfothion,dcs:ChemicalCompound,Fensulfothion,C11H17O4PS2
+Diphenylamine,dcs:ChemicalCompound,Diphenylamine,C12H11N
+Chlorpyrifos,dcs:ChemicalCompound,Chlorpyrifos,C9H11Cl3NO3PS
+Carbaryl,dcs:ChemicalCompound,Carbaryl,C12H11NO2
+CalciumOxide,dcs:ChemicalCompound,Calcium Oxide,CaO
+2-methylaniline,dcs:ChemicalCompound,O-toluidine,C7H9N
+1h-indene,dcs:ChemicalCompound,Indene,C9H8
+TetraethylLead,dcs:ChemicalCompound,Tetraethyl Lead,C8H20Pb
+SodiumCyanide,dcs:ChemicalCompound,Sodium Cyanide,CNNa
+Prometryn,dcs:ChemicalCompound,Prometryn,C10H19N5S
+PotassiumCyanide,dcs:ChemicalCompound,Potassium Cyanide,CKN
+PhosphoricAcid,dcs:ChemicalCompound,Phosphoric Acid,H3O4P
+Phorate,dcs:ChemicalCompound,Phorate,C7H17O2PS3
+Nonane,dcs:ChemicalCompound,Nonane,C9H20
+Methiocarb,dcs:ChemicalCompound,Methiocarb,C11H15NO2S
+Furan,dcs:ChemicalCompound,Furan,C4H4O
+Diphenamid,dcs:ChemicalCompound,Diphenamid,C16H17NO
+Coumaphos,dcs:ChemicalCompound,Coumaphos,C14H16ClO5PS
+Carbophenothion,dcs:ChemicalCompound,Carbophenothion,C11H16ClO2PS3
+Camphor,dcs:ChemicalCompound,Camphor,C10H16O
+Butylate,dcs:ChemicalCompound,Butylate,C11H23NOS
+Bis(chloromethyl)Ether,dcs:ChemicalCompound,Bis(chloromethyl) Ether,C2H4Cl2O
+Alachlor,dcs:ChemicalCompound,Alachlor,C14H20ClNO2
+Acetonitrile,dcs:ChemicalCompound,Acetonitrile,C2H3N
+2-propan-2-yloxypropane,dcs:ChemicalCompound,Diisopropyl Ether,C6H14O
+2-ethoxyethanol,dcs:ChemicalCompound,2-ethoxyethanol,C4H10O2
+2-chloroaniline,dcs:ChemicalCompound,2-chloroaniline,C6H6ClN
+2-chloro-1-phenylethanone,dcs:ChemicalCompound,2-chloroacetophenone,C8H7ClO
+2-butoxyethanol,dcs:ChemicalCompound,2-butoxyethanol,C6H14O2
+1-chloro-2-ethenoxyethane,dcs:ChemicalCompound,2-chloroethyl Vinyl Ether,C4H7ClO
+Tungsten,dcs:ChemicalCompound,Tungsten,W
+TriphenylPhosphate,dcs:ChemicalCompound,Triphenyl Phosphate,C18H15O4P
+Trifluralin,dcs:ChemicalCompound,Trifluralin,C13H16F3N3O4
+Trichloro(nitro)methane,dcs:ChemicalCompound,Chloropicrin,CCl3NO2
+Tributyl(chloro)stannane,dcs:ChemicalCompound,Tributyltin Chloride,C12H27ClSn
+Trans-nonachlor,dcs:ChemicalCompound,Trans-nonachlor,C10H5Cl9
+TitaniumDioxide,dcs:ChemicalCompound,Titanium Dioxide,O2Ti
+ThalliumChloride,dcs:ChemicalCompound,Thallium Chloride,ClTl
+SodiumNitrite,dcs:ChemicalCompound,Sodium Nitrite,NNaO2
+Sabadilla,dcs:ChemicalCompound,Sabadilla,C68H100N2O20
+PotassiumPermanganate,dcs:ChemicalCompound,Potassium Permanganate,KMnO4
+PotassiumHydroxide,dcs:ChemicalCompound,Potassium Hydroxide,HKO
+Phenazopyridine,dcs:ChemicalCompound,Phenazopyridine,C11H11N5
+Phenacetin,dcs:ChemicalCompound,Phenacetin,C10H13NO2
+Pentane,dcs:ChemicalCompound,Pentane,C5H12
+Pentachloronitrobenzene,dcs:ChemicalCompound,Pentachloronitrobenzene,C6Cl5NO2
+Pendimethalin,dcs:ChemicalCompound,Pendimethalin,C13H19N3O4
+Oxamyl,dcs:ChemicalCompound,Oxamyl,C7H13N3O3S
+O-ethylO-(4-nitrophenyl)Phenylphosphonothioate,dcs:ChemicalCompound,O-ethyl O-(4-nitrophenyl) Phenylphosphonothioate,C14H14NO4PS
+Octane,dcs:ChemicalCompound,Octane,C8H18
+NaphthenicAcids,dcs:ChemicalCompound,Naphthenic Acids,C10H18O2
+Monocrotophos,dcs:ChemicalCompound,Monocrotophos,C7H14NO5P
+Mevinphos,dcs:ChemicalCompound,Mevinphos,C7H13O6P
+MethylProp-2-enoate,dcs:ChemicalCompound,Methyl Acrylate,C4H6O2
+MethylphosphonicAcid,dcs:ChemicalCompound,Methylphosphonic Acid,CH5O3P
+Methanethiol,dcs:ChemicalCompound,Methanethiol,CH4S
+Lead(ii)Acetate,dcs:ChemicalCompound,Lead(ii) Acetate,C4H6O4Pb
+HydrogenCyanide,dcs:ChemicalCompound,Hydrogen Cyanide,CHN
+Hydrazine,dcs:ChemicalCompound,Hydrazine,H4N2
+Formothion,dcs:ChemicalCompound,Formothion,C6H12NO4PS2
+FormicAcid,dcs:ChemicalCompound,Formic Acid,CH2O2
+Fonofos,dcs:ChemicalCompound,Fonofos,C10H15OPS2
+EthylCarbonochloridate,dcs:ChemicalCompound,Ethyl Chloroformate,C3H5ClO2
+EthylAcetate,dcs:ChemicalCompound,Ethyl Acetate,C4H8O2
+Ethanol,dcs:ChemicalCompound,Ethanol,C2H6O
+Ethanethiol,dcs:ChemicalCompound,Ethanethiol,C2H6S
+Ethane,dcs:ChemicalCompound,Ethane,C2H6
+DimethylSulfide,dcs:ChemicalCompound,Dimethyl Sulfide,C2H6S
+Dimethylmercury,dcs:ChemicalCompound,Dimethylmercury,C2H6Hg
+Dimethoxymethane,dcs:ChemicalCompound,Dimethoxymethane,C3H8O2
+Dibromomethane,dcs:ChemicalCompound,Dibromomethane,CH2Br2
+Cyclohexanol,dcs:ChemicalCompound,Cyclohexanol,C6H12O
+ChromicAcid,dcs:ChemicalCompound,Chromic Acid,CrH2O4
+ChlorendicAcid,dcs:ChemicalCompound,Chlorendic Acid,C9H4Cl6O4
+Carbofuran,dcs:ChemicalCompound,Carbofuran,C12H15NO3
+ButylAcetate,dcs:ChemicalCompound,Butyl Acetate,C6H12O2
+Bis(2-ethylhexyl)Adipate,dcs:ChemicalCompound,Bis(2-ethylhexyl) Adipate,C22H42O4
+BenzoylChloride,dcs:ChemicalCompound,Benzoyl Chloride,C7H5ClO
+BenzoylBenzenecarboperoxoate,dcs:ChemicalCompound,Benzoyl Peroxide,C14H10O4
+BariumChloride,dcs:ChemicalCompound,Barium Chloride,BaCl2
+AmmoniumNitrate,dcs:ChemicalCompound,Ammonium Nitrate,H4N2O3
+AmmoniumHydroxide,dcs:ChemicalCompound,Ammonium Hydroxide,H5NO
+Acrylamide,dcs:ChemicalCompound,Acrylamide,C3H5NO
+4-phenylaniline,dcs:ChemicalCompound,4-aminobiphenyl,C12H11N
+4-(4-amino-3-methylphenyl)-2-methylaniline,dcs:ChemicalCompound,"3,3'-dimethylbenzidine",C14H16N2
+3-chloroaniline,dcs:ChemicalCompound,3-chloroaniline,C6H6ClN
+2-methylprop-2-enenitrile,dcs:ChemicalCompound,Methacrylonitrile,C4H5N
+2-methyloxirane,dcs:ChemicalCompound,Propylene Oxide,C3H6O
+1-nitrosopyrrolidine,dcs:ChemicalCompound,N-nitrosopyrrolidine,C4H8N2O
+1-methyl-3-nitrobenzene,dcs:ChemicalCompound,3-nitrotoluene,C7H7NO2
+1-methyl-2-nitrobenzene,dcs:ChemicalCompound,2-nitrotoluene,C7H7NO2
+1-butoxybutane,dcs:ChemicalCompound,Dibutyl Ether,C8H18O
+10-chloro-5h-phenarsazinine,dcs:ChemicalCompound,"10-chloro-5,10-dihydrophenarsazine",C12H9AsClN
