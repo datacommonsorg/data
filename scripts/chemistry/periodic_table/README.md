@@ -5,6 +5,8 @@ This folder contains scripts to generate Nodes for chemical substances.
 It generates a CSV and tMCF for a Node for each substance
 with the following properties:
 
+| Property | Description |
+|----------|-------------|
 | `typeOf` |  one of `dcs:ChemicalElement` or `dcs:ChemicalCompound` |
 | `name` | The dcid for the node |
 | `chemicalName` | The chemical term for the substance |
