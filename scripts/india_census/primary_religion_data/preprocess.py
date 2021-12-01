@@ -37,7 +37,7 @@ dcid_mapping[
 dcid_mapping["Religion not stated"] = "dcs:ReligionNotStated"
 
 TEMPLATE_STAT_VAR = """Node: dcid:{name}
-Name: "{description}"
+name: "{description}"
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{populationType}
