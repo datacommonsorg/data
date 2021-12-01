@@ -34,7 +34,8 @@ save it as `periodic_table.csv`
 and run process script to generate `elements.csv` and `elements.tmcf` files.
 
 ```
-python3 process.py --input_csv=periodic_table.csv --output_prefix=elements
+python3 process.py --input_csv=periodic_table.csv,compounds.csv \
+  --output_prefix=substances
 ```
 
 To run the unittest:
