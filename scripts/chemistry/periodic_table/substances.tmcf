@@ -1,6 +1,7 @@
 
 Node: E:Substance->E0
 typeOf: C:Substance->TypeOf
+dcid: C:Substance->Name
 name: C:Substance->Name
 chemicalName: C:Substance->ChemicalName
 chemicalSymbol: C:Substance->Symbol

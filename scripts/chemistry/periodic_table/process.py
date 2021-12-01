@@ -40,6 +40,7 @@ _OUTPUT_COLUMNS = [
 _NODE_TEMPLATE = """
 Node: E:Substance->E0
 typeOf: C:Substance->TypeOf
+dcid: C:Substance->Name
 name: C:Substance->Name
 chemicalName: C:Substance->ChemicalName
 chemicalSymbol: C:Substance->Symbol
@@ -79,6 +80,9 @@ def _process_file(input_csv: str) -> pd.DataFrame:
 
     if 'ChemicalName' not in df and 'Name' in df:
         df['ChemicalName'] = df['Name']
+
+    if 'AtomicNumber' in df:
+        df['AtomicNumber'] = df['AtomicNumber'].astype(int)
 
     return df
 
