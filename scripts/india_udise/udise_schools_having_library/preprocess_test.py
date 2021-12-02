@@ -34,20 +34,18 @@ class TestPreprocess(unittest.TestCase):
         data_folder = os.path.join(module_dir_, "test_data")
 
         expected_csv_file_path = os.path.join(
-            data_folder,
-            "expected_UDISEIndia_Schools_Having_Library.csv")
+            data_folder, "expected_UDISEIndia_Schools_Having_Library.csv")
         expected_mcf_file_path = os.path.join(
-            data_folder,
-            "expected_UDISEIndia_Schools_Having_Library.mcf")
+            data_folder, "expected_UDISEIndia_Schools_Having_Library.mcf")
 
-        csv_file_path = os.path.join(
-            data_folder, "UDISEIndia_Schools_Having_Library.csv")
-        mcf_file_path = os.path.join(
-            data_folder, "UDISEIndia_Schools_Having_Library.mcf")
+        csv_file_path = os.path.join(data_folder,
+                                     "UDISEIndia_Schools_Having_Library.csv")
+        mcf_file_path = os.path.join(data_folder,
+                                     "UDISEIndia_Schools_Having_Library.mcf")
 
         base = UDISESchoolsHavingLibrary(api_report_code, api_map_id,
-                                                   data_folder, csv_file_path,
-                                                   mcf_file_path, years)
+                                         data_folder, csv_file_path,
+                                         mcf_file_path, years)
         base.process()
 
         expected_csv_file = open(expected_csv_file_path)
@@ -95,9 +93,8 @@ class TestPreprocess(unittest.TestCase):
                            clean_df["Period"].eq("2018-03")]
         self.assertEqual("520", row.iloc[0]["Value"])
 
-
         # For Year 2019-20, Himachal Pradesh(02), Total
-        # Count_School_HasLibrary should be 
+        # Count_School_HasLibrary should be
         row = clean_df.loc[
             clean_df["StatisticalVariable"].eq("Count_School_HasLibrary") &
             clean_df["UDISECode"].eq("02") & clean_df["Period"].eq("2020-03")]

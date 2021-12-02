@@ -60,19 +60,18 @@ if __name__ == "__main__":
     api_map_id = "54"
 
     data_folder = BASE_DATA_FOLDER
-    csv_file_path = os.path.join(
-        module_dir_, "UDISEIndia_Schools_Having_Library.csv")
-    mcf_file_path = os.path.join(
-        module_dir_, "UDISEIndia_Schools_Having_Library.mcf")
+    csv_file_path = os.path.join(module_dir_,
+                                 "UDISEIndia_Schools_Having_Library.csv")
+    mcf_file_path = os.path.join(module_dir_,
+                                 "UDISEIndia_Schools_Having_Library.mcf")
     if path.exists(csv_file_path):
         os.remove(csv_file_path)
 
     if path.exists(mcf_file_path):
         os.remove(mcf_file_path)
 
-    base = UDISESchoolsHavingLibrary(api_report_code, api_map_id,
-                                               data_folder, csv_file_path,
-                                               mcf_file_path, years)
+    base = UDISESchoolsHavingLibrary(api_report_code, api_map_id, data_folder,
+                                     csv_file_path, mcf_file_path, years)
     if action == "download":
         base.download()
     elif action == "process":
