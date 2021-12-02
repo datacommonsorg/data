@@ -4,86 +4,72 @@
             {
                 "name": "Arsenic (As)",
                 "statvar": "Arsenic",
-                "unit": "dcid:MicrogramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MicrogramsPerLitre"
             },
             {
                 "name": "carbonate (CO3)",
                 "statvar": "Carbonate",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Calcium (Ca)",
                 "statvar": "Calcium",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Chloride (Cl)",
                 "statvar": "Chloride",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Fluorine (F)",
                 "statvar": "Fluorine",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Iron (Fe)",
                 "statvar": "Iron",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Hydrogencarbonate (HCO3)",
                 "statvar": "HydrogenCarbonate",
-                "unit": "",
-                "property": "Pollutant"
+                "unit": ""
             },
             {
                 "name": "Potassium (K)",
                 "statvar": "Potassium",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Magnesium (Mg)",
                 "statvar": "Magnesium",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Nitrate (NO3)",
                 "statvar": "Nitrate",
-                "unit": "",
-                "property": "Pollutant"
+                "unit": ""
             },
             {
                 "name": "Sodium (Na)",
                 "statvar": "Sodium",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Phosphate Ion (PO4)",
-                "statvar": "PhosphateIon",
-                "unit": "",
-                "property": "Pollutant"
+                "statvar": "Phosphate",
+                "unit": ""
             },
             {
                 "name": "Sulfate (SO4)",
                 "statvar": "Sulfate",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "unit": "dcid:MilligramsPerLitre"
             },
             {
                 "name": "Silicon dioxide (SiO2)",
-                "statvar": "SiliconDiOxide",
-                "unit": "dcid:MilligramsPerLitre",
-                "property": "Pollutant"
+                "statvar": "Silica",
+                "unit": "dcid:MilligramsPerLitre"
             }
         ]    
     },
@@ -93,43 +79,43 @@
                 "name": "Electrical Conductivity",
                 "statvar": "ElectricalConductivity",
                 "unit": "",
-                "property": "ChemicalProperty"
+                "dcid": "electricalConductivity"
             },
             {
                 "name": "Residual Sodium Carbonate",
                 "statvar": "ResidualSodiumCarbonate",
                 "unit": "",
-                "property": "ChemicalProperty"
+                "dcid": "residualSodiumCarbonate"
             },
             {
                 "name": "Sodium absorption ratio (SAR)",
                 "statvar": "SodiumAbsorptionRatio",
                 "unit": "",
-                "property": "ChemicalProperty"
+                "dcid": "sodiumAbsorptionRatio"
             },
             {
                 "name": "Hardness Total",
                 "statvar": "TotalHardness",
                 "unit": "dcid:MilligramsCaCO3PerLitre",
-                "property": "ChemicalProperty"
+                "dcid": "totalHardness"
             },
             {
                 "name": "Alkalinity Total",
                 "statvar": "TotalAlkalinity",
                 "unit": "dcid:MilligramsCaCO3PerLitre",
-                "property": "ChemicalProperty"
+                "dcid": "totalAlkalinity"
             },
             {
                 "name": "Total Dissolved Solids",
                 "statvar": "TotalDissolvedSolids",
                 "unit": "dcid:MilligramsPerLitre",
-                "property": "ChemicalProperty"
+                "dcid": "totalDissolvedSolids"
             },
             {
                 "name": "Potential of Hydrogen (pH)",
-                "statvar": "PH",
+                "statvar": "pH",
                 "unit": "",
-                "property": "ChemicalProperty"
+                "dcid": "pH"
             }
         ]    
     }

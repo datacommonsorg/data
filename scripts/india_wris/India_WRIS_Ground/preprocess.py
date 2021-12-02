@@ -20,13 +20,22 @@ DATASET_NAME = 'India_WRIS_Ground'
 
 ## Defining MCF and TMCF template nodes
 
-MCF_NODES = """Node: dcid:WaterQualityIndex_GroundWater_{variable}
+SOLUTE_MCF_NODES = """Node: dcid:WaterQuality_Concentration_GroundWater_{variable}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-measuredProperty: dcs:waterQualityIndex
-waterLocation: dcs:GroundWater
-waterProperty: dcs:{propertyType}
-water{propertyType}: dcs:{statvar}
+waterSource: dcs:GroundWater
+measuredProperty: dcs:concentration
+solute: dcs:{variable}
+measurementMethod: WRIS_India
+statType: measuredValue
+
+"""
+
+CHEMPROP_MCF_NODES = """Node: dcid:WaterQuality_GroundWater_{variable}
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BodyOfWater
+waterSource: dcs:GroundWater
+measuredProperty: dcs:{dcid}
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -34,17 +43,27 @@ statType: measuredValue
 
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
 typeOf: dcs:City
-dcid: C:{dataset_name}->dcid
+dcid: C:{dataset_name}->location_id
 
 """
 
-TMCF_NODES = """Node: E:{dataset_name}->E{index}
+SOLUTE_TMCF_NODES = """Node: E:{dataset_name}->E{index}
 typeOf: dcid:StatVarObservation
 observationDate: E:{dataset_name}->Year
 observationAbout: E:{dataset_name}->dcid
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQualityIndex_GroundWater_{variable}
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_GroundWater_{variable}
+measuredProperty: dcs:concentration
+value: E:{dataset_name}->{name}
+"""
+
+CHEMPROP_TMCF_NODES = """Node: E:{dataset_name}->E{index}
+typeOf: dcid:StatVarObservation
+observationDate: E:{dataset_name}->Year
+observationAbout: E:{dataset_name}->dcid
+observationPeriod: "P1Y"
+variableMeasured: dcid:WaterQuality_GroundWater_{variable}
+measuredProperty: dcs:{dcid}
 value: E:{dataset_name}->{name}
 """
 
@@ -73,29 +92,26 @@ idx = 1
 
 with open(mcf_file, 'w') as mcf, open(tmcf_file, 'w') as tmcf:
 
+    # Writing TMCF Location Node
+    tmcf.write(TMCF_ISOCODE.format(dataset_name=DATASET_NAME))
+    
+    
     # Pollutant nodes are written first
     for pollutant in pollutants['Pollutant']:
         name = pollutant['name']
         statvar = pollutant['statvar']
         unit = pollutant['unit']
-        property_type = pollutant['property']
-
-        # 'variable' contains StatVar name
-        # Example: Arsenic (As) -> Pollutant_Arsenic
-        variable = '_'.join([property_type, statvar])
 
         # Writing MCF Node
         mcf.write(
-            MCF_NODES.format(variable=variable,
-                             propertyType=property_type,
-                             statvar=statvar))
-        # Writing TMCF Location Node
-        tmcf.write(TMCF_ISOCODE.format(dataset_name=DATASET_NAME))
+            SOLUTE_MCF_NODES.format(variable=statvar)
+            )
+        
         # Writing TMCF Property Node
         tmcf.write(
-            TMCF_NODES.format(dataset_name=DATASET_NAME,
+            SOLUTE_TMCF_NODES.format(dataset_name=DATASET_NAME,
                               index=idx,
-                              variable=variable,
+                              variable=statvar,
                               name=name))
 
         # If unit is available for a property, unit is written in TMCF
@@ -112,20 +128,18 @@ with open(mcf_file, 'w') as mcf, open(tmcf_file, 'w') as tmcf:
         name = chem_prop['name']
         statvar = chem_prop['statvar']
         unit = chem_prop['unit']
-        property_type = chem_prop['property']
-
-        # Example: Total Dissolved Solids -> ChemicalProperty_TotalDissolvedSolids
-        variable = '_'.join([property_type, statvar])
+        dcid = chem_prop['dcid']
 
         mcf.write(
-            MCF_NODES.format(variable=variable,
-                             propertyType=property_type,
+            CHEMPROP_MCF_NODES.format(variable=statvar,
+                             dcid=dcid,
                              statvar=statvar))
         tmcf.write(
-            TMCF_NODES.format(dataset_name=DATASET_NAME,
+            CHEMPROP_TMCF_NODES.format(dataset_name=DATASET_NAME,
                               index=idx,
                               unit=unit,
-                              variable=variable,
+                              variable=statvar,
+                              dcid=dcid,
                               name=name))
         if unit:
             tmcf.write(UNIT.format(unit=unit))

@@ -1,266 +1,270 @@
+Node: E:India_WRIS_Surface->E0
+typeOf: dcs:City
+dcid: C:India_WRIS_Surface->location_id
+
 Node: E:India_WRIS_Surface->E1
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Aluminium
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Aluminium
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Aluminium (Al)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E2
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Arsenic
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Arsenic
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Arsenic (As)
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E3
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Cyanides
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Cyanides
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->cyanides (CN)
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E4
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Carbonate
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Carbonate
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Carbonate (CO3)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E5
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Calcium
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Calcium
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Calcium (Ca)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E6
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Chloride
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Chloride
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Chloride (Cl)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E7
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Fluorine
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Fluorine
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Fluorine (F)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E8
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Iron
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Iron
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Iron (Fe)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E9
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_HydrogenCarbonate
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_HydrogenCarbonate
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Hydrogencarbonate (HCO3)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E10
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Mercury
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Mercury
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Mercury (Hg)
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E11
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Potassium
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Potassium
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Potassium (K)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E12
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Magnesium
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Magnesium
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Magnesium (Mg)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E13
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Ammonia
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Ammonia
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->ammonia (NH3)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E14
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Nitrate
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Nitrate
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Nitrate (NO3)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E15
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Lead
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Lead
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Lead (Pb)
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E16
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Silver
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Silver
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Silver (Ag)
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E17
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Sulfate
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Sulfate
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Sulfate (SO4)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E18
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_SiliconDiOxide
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_SiliconDiOxide
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Silicon dioxide (SiO2)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E19
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_Pollutant_Zinc
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_Zinc
+measuredProperty: dcs:concentration
 value: E:India_WRIS_Surface->Zinc (Zn)
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E20
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_ChemicalProperty_DissolvedOxygen
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_SurfaceWater_DissolvedOxygen
+measuredProperty: dcs:DissolvedOxygen
 value: E:India_WRIS_Surface->Disolved Oxygen (DO)
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E21
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_ChemicalProperty_ElectricalConductivity
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_SurfaceWater_ElectricalConductivity
+measuredProperty: dcs:ElectricalConductivity
 value: E:India_WRIS_Surface->Electrical Conductivity
 
 Node: E:India_WRIS_Surface->E22
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_ChemicalProperty_TotalHardness
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_SurfaceWater_TotalHardness
+measuredProperty: dcs:TotalHardness
 value: E:India_WRIS_Surface->Hardness Total
 unit: dcid:MilligramsCaCO3PerLitre
 
 Node: E:India_WRIS_Surface->E23
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_ChemicalProperty_TotalAlkalinity
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_SurfaceWater_TotalAlkalinity
+measuredProperty: dcs:TotalAlkalinity
 value: E:India_WRIS_Surface->Alkalinity Total
 unit: dcid:MilligramsCaCO3PerLitre
 
 Node: E:India_WRIS_Surface->E24
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_ChemicalProperty_ResidualSodiumCarbonate
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_SurfaceWater_ResidualSodiumCarbonate
+measuredProperty: dcs:ResidualSodiumCarbonate
 value: E:India_WRIS_Surface->Residual Sodium Carbonate
 
 Node: E:India_WRIS_Surface->E25
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_ChemicalProperty_SodiumAbsorptionRatio
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_SurfaceWater_SodiumAbsorptionRatio
+measuredProperty: dcs:SodiumAbsorptionRatio
 value: E:India_WRIS_Surface->Sodium absorption ratio (SAR)
 
 Node: E:India_WRIS_Surface->E26
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_ChemicalProperty_TotalDissolvedSolids
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_SurfaceWater_TotalDissolvedSolids
+measuredProperty: dcs:TotalDissolvedSolids
 value: E:India_WRIS_Surface->Total Dissolved Solids
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E27
 typeOf: dcid:StatVarObservation
-observationDate: E:India_WRIS_Surface->ObsMonth
+observationDate: E:India_WRIS_Surface->Year
 observationAbout: E:India_WRIS_Surface->dcid
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQualityIndex_SurfaceWater_ChemicalProperty_PH
-measuredProperty: dcs:waterQualityIndex
+variableMeasured: dcid:WaterQuality_SurfaceWater_pH
+measuredProperty: dcs:pH
 value: E:India_WRIS_Surface->Potential of Hydrogen (pH)
 
