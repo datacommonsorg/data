@@ -1,0 +1,115 @@
+{
+    "_COMMON_": {
+        "statType": "measuredValue",
+        "measuredProperty": "count",
+        "isHateCrime": "True",
+        "typeOf": "StatisticalVariable"
+    },
+    "BIAS_DESC": {
+        "Anti-Black or African American": {
+            "race": "Black or African American"
+        },
+        "Anti-White": {
+            "race": "White"
+        },
+        "Anti-Jewish": {
+            "race": "Jewish"
+        },
+        "Anti-Arab": {
+            "race": "Arab"
+        },
+        "Anti-Protestant": {
+            "race": "Protestant"
+        },
+        "Anti-Other Religion": {
+            "race": "Other Religion"
+        },
+        "Anti-Islamic (Muslim)": {
+            "race": "Islamic (Muslim)"
+        },
+        "Anti-Gay (Male)": {
+            "race": "Gay (Male)"
+        },
+        "Anti-Asian": {
+            "race": "Asian"
+        },
+        "Anti-Catholic": {
+            "race": "Catholic"
+        },
+        "Anti-Heterosexual": {
+            "race": "Heterosexual"
+        },
+        "Anti-Hispanic or Latino": {
+            "race": "Hispanic or Latino"
+        },
+        "Anti-Other Race/Ethnicity/Ancestry": {
+            "race": "Other Race/Ethnicity/Ancestry"
+        },
+        "Anti-Multiple Religions, Group": {
+            "race": "Multiple Religions, Group"
+        },
+        "Anti-Multiple Races, Group": {
+            "race": "Multiple Races, Group"
+        },
+        "Anti-Lesbian (Female)": {
+            "race": "Lesbian (Female)"
+        },
+        "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)": {
+            "race": "Lesbian, Gay, Bisexual, or Transgender (Mixed Group)"
+        },
+        "Anti-American Indian or Alaska Native": {
+            "race": "American Indian or Alaska Native"
+        },
+        "Anti-Atheism/Agnosticism": {
+            "race": "Atheism/Agnosticism"
+        },
+        "Anti-Bisexual": {
+            "race": "Bisexual"
+        },
+        "Anti-Physical Disability": {
+            "race": "Physical Disability"
+        },
+        "Anti-Mental Disability": {
+            "race": "Mental Disability"
+        },
+        "Anti-Gender Non-Conforming": {
+            "race": "Gender Non-Conforming"
+        },
+        "Anti-Female": {
+            "race": "Female"
+        },
+        "Anti-Transgender": {
+            "race": "Transgender"
+        },
+        "Anti-Native Hawaiian or Other Pacific Islander": {
+            "race": "Native Hawaiian or Other Pacific Islander"
+        },
+        "Anti-Male": {
+            "race": "Male"
+        },
+        "Anti-Jehovah's Witness": {
+            "race": "Jehovah's Witness"
+        },
+        "Anti-Mormon": {
+            "race": "Mormon"
+        },
+        "Anti-Buddhist": {
+            "race": "Buddhist"
+        },
+        "Anti-Sikh": {
+            "race": "Sikh"
+        },
+        "Anti-Other Christian": {
+            "race": "Other Christian"
+        },
+        "Anti-Hindu": {
+            "race": "Hindu"
+        },
+        "Anti-Eastern Orthodox (Russian, Greek, Other)": {
+            "race": "Eastern Orthodox (Russian, Greek, Other)"
+        },
+        "Unknown (offender's motivation not known)": {
+            "race": "wn (offender's motivation not known)"
+        }
+    }
+}

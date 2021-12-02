@@ -1,0 +1,287 @@
+Node: dcid:Count_CriminalIncidents_HateCrime_Black or African American
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Black or African American
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_White
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:White
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Jewish
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Jewish
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Arab
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Arab
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Protestant
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Protestant
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Other Religion
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Other Religion
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Islamic (Muslim)
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Islamic (Muslim)
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Gay (Male)
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Gay (Male)
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Asian
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Asian
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Catholic
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Catholic
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Heterosexual
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Heterosexual
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Hispanic or Latino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Hispanic or Latino
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Other Race/Ethnicity/Ancestry
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Other Race/Ethnicity/Ancestry
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Multiple Religions, Group
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Multiple Religions, Group
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Multiple Races, Group
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Multiple Races, Group
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Lesbian (Female)
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Lesbian (Female)
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Lesbian, Gay, Bisexual, or Transgender (Mixed Group)
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Lesbian, Gay, Bisexual, or Transgender (Mixed Group)
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_American Indian or Alaska Native
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:American Indian or Alaska Native
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Atheism/Agnosticism
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Atheism/Agnosticism
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Bisexual
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Bisexual
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Physical Disability
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Physical Disability
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Mental Disability
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Mental Disability
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Gender Non-Conforming
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Gender Non-Conforming
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Female
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Transgender
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Transgender
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Native Hawaiian or Other Pacific Islander
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Native Hawaiian or Other Pacific Islander
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Male
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Jehovah's Witness
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Jehovah's Witness
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Mormon
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Mormon
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Buddhist
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Buddhist
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Sikh
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Sikh
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Other Christian
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Other Christian
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Hindu
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Hindu
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Eastern Orthodox (Russian, Greek, Other)
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:Eastern Orthodox (Russian, Greek, Other)
+populationType: dcs:CriminalIncidents
+
+Node: dcid:Count_CriminalIncidents_HateCrime_Wn (offender's motivation not known)
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+race: dcs:wn (offender's motivation not known)
+populationType: dcs:CriminalIncidents
+

@@ -462,6 +462,9 @@ def _process_constraint_property(prop: str, value: str) -> str:
         name = _naics_code_to_name(value)
     elif 'SOCv2018/' in value:
         name = _soc_code_to_name(value)
+    elif prop == 'isHateCrime':
+        if value == "True":
+            name = "HateCrime"
     else:
         match1 = _QUANTITY_RANGE_REGEX_1.match(value)
         match2 = _QUANTITY_RANGE_REGEX_2.match(value)
