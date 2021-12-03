@@ -16,7 +16,7 @@ import filecmp
 import os
 import tempfile
 import unittest
-from .geo_id_resolver_refactored import GeoIdResolver
+from .geo_id_resolver import *
 
 _Test_Cases = [{
     'input': {
@@ -145,24 +145,20 @@ _City_Test_Cases = [{
 
 class GeoIdResolverTest(unittest.TestCase):
 
-    def setUp(self):
-        self.resolver = GeoIdResolver()
-
     def test_convert_to_place_dcid(self):
 
         for test_case in _Test_Cases:
-            self.assertEqual(
-                self.resolver.convert_to_place_dcid(**test_case['input']),
-                test_case['expected_dcid'])
+            self.assertEqual(convert_to_place_dcid(**test_case['input']),
+                             test_case['expected_dcid'])
 
     def test_county_to_dcid(self):
         for test_case in _County_Test_Cases:
-            self.assertEqual(self.resolver.county_to_dcid(**test_case['input']),
+            self.assertEqual(county_to_dcid(**test_case['input']),
                              test_case['expected_dcid'])
 
     def test_city_to_dcid(self):
         for test_case in _City_Test_Cases:
-            self.assertEqual(self.resolver.city_to_dcid(**test_case['input']),
+            self.assertEqual(city_to_dcid(**test_case['input']),
                              test_case['expected_dcid'])
 
 

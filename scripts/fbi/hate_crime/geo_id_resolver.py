@@ -46,122 +46,130 @@ _IGNORE_COUNTY_SUFFIX = [
     'Unified Police Department', 'Police Department', 'Public Safety'
 ]
 
+city_geo_codes = {}
+with open(os.path.join(city_geocodes_csv_path), encoding="utf8") as csvfile:
+    csv_reader = csv.reader(csvfile)
+    for a in csv_reader:
+        city_geo_codes[a[0]] = a[1]
 
-class GeoIdResolver:
 
-    def __init__(self):
-        self.city_geo_codes = self.read_city_geocodes()
+def update_state_abbr(state_abbr):
+    if state_abbr in _US_GEO_CODE_UPDATE_MAP:
+        state_abbr = _US_GEO_CODE_UPDATE_MAP[state_abbr]
+    return state_abbr
 
-    def update_state_abbr(self, state_abbr):
-        if state_abbr in _US_GEO_CODE_UPDATE_MAP:
-            state_abbr = _US_GEO_CODE_UPDATE_MAP[state_abbr]
-        return state_abbr
 
-    def get_city_variants(self, city):
-        city = city.strip().lower()
-        city_variants = [city]
+def get_city_variants(city):
+    city = city.strip().lower()
+    city_variants = [city]
 
-        # for delim in [",", "-"]:
-        #     if delim in city:
-        #         city_variants.extend(city.split(delim))
+    # for delim in [",", "-"]:
+    #     if delim in city:
+    #         city_variants.extend(city.split(delim))
 
-        city_variants.extend([
-            city + " city", city + " village",
-            city.removesuffix("city"),
-            city.removesuffix("village"),
-            city.removesuffix("town"),
-            city.removesuffix("township"),
-            city.removesuffix("borough")
-        ])
+    city_variants.extend([
+        city + " city", city + " village",
+        city.removesuffix("city"),
+        city.removesuffix("village"),
+        city.removesuffix("town"),
+        city.removesuffix("township"),
+        city.removesuffix("borough")
+    ])
 
-        return city_variants
+    return city_variants
 
-    def read_city_geocodes(self):
-        """ Read geo codes from city_geocodes """
-        city = {}
-        with open(os.path.join(city_geocodes_csv_path),
-                  encoding="utf8") as csvfile:
-            csv_reader = csv.reader(csvfile)
-            for a in csv_reader:
-                city[a[0]] = a[1]
-        return city
 
-    def city_to_dcid(self, state_abbr, city):
-        city_valid_names = self.get_city_variants(city)
-        city_state_list = [
-            city.strip().lower() + " " + state_abbr.lower()
-            for city in city_valid_names
-        ]
+def read_city_geocodes():
+    """ Read geo codes from city_geocodes """
+    city = {}
+    with open(os.path.join(city_geocodes_csv_path), encoding="utf8") as csvfile:
+        csv_reader = csv.reader(csvfile)
+        for a in csv_reader:
+            city[a[0]] = a[1]
+    return city
 
-        for city_state in city_state_list:
-            if city_state in self.city_geo_codes:
-                return "geoId/" + self.city_geo_codes[city_state]
+
+def city_to_dcid(state_abbr, city):
+    city_valid_names = get_city_variants(city)
+    city_state_list = [
+        city.strip().lower() + " " + state_abbr.lower()
+        for city in city_valid_names
+    ]
+
+    for city_state in city_state_list:
+        if city_state in city_geo_codes:
+            return "geoId/" + city_geo_codes[city_state]
+    return ''
+
+
+def preprocess_county(county):
+    for suffix in _IGNORE_COUNTY_SUFFIX:
+        if suffix in county.strip():
+            return county.removesuffix(suffix).strip()
+    return county.strip()
+
+
+def get_county_variants(county):
+    county_variants = [
+        county,
+        county + " County",
+        county.removesuffix('County'),
+        county + " Parish",
+    ]
+    return county_variants
+
+
+def county_to_dcid(state_abbr, county):
+
+    county = preprocess_county(county)
+
+    county_valid_names = get_county_variants(county)
+
+    geo_id = ''
+
+    if state_abbr in COUNTY_MAP:
+        for county in county_valid_names:
+            if county in COUNTY_MAP[state_abbr]:
+                geo_id = COUNTY_MAP[state_abbr][county]
+                return geo_id
+
+    if state_abbr in MANUAL_COUNTY_MAP:
+        for county in county_valid_names:
+            if county in MANUAL_COUNTY_MAP[state_abbr]:
+                geo_id = MANUAL_COUNTY_MAP[state_abbr][county]
+                return geo_id
+
+    return geo_id
+
+
+def state_to_dcid(state_code):
+
+    if state_code in _IGNORE_STATE_ABBR:
         return ''
 
-    def preprocess_county(self, county):
-        for suffix in _IGNORE_COUNTY_SUFFIX:
-            if suffix in county.strip():
-                return county.removesuffix(suffix).strip()
-        return county.strip()
+    if state_code in USSTATE_MAP:
+        return USSTATE_MAP[state_code]
+    else:
+        return ''
 
-    def get_county_variants(self, county):
-        county_variants = [
-            county,
-            county + " County",
-            county.removesuffix('County'),
-            county + " Parish",
-        ]
-        return county_variants
 
-    def county_to_dcid(self, state_abbr, county):
+def convert_to_place_dcid(state_abbr, geo_name='', geo_type='State'):
+    """resolves GEOID based on the FBI Hate crime dataset Agency Type and Name. 
+    If a geoId could not be resolved, the function returns an empty string ('').
+    """
 
-        county = self.preprocess_county(county)
+    # Update anonymous State Abbreviations
+    state_abbr = update_state_abbr(state_abbr)
 
-        county_valid_names = self.get_county_variants(county)
+    if geo_type == 'State':
+        return state_to_dcid(state_abbr)
 
-        geo_id = ''
+    elif geo_type == 'County':
+        return county_to_dcid(state_abbr, geo_name)
 
-        if state_abbr in COUNTY_MAP:
-            for county in county_valid_names:
-                if county in COUNTY_MAP[state_abbr]:
-                    geo_id = COUNTY_MAP[state_abbr][county]
-                    return geo_id
+    elif geo_type == 'City':
+        return city_to_dcid(state_abbr, geo_name)
 
-        if state_abbr in MANUAL_COUNTY_MAP:
-            for county in county_valid_names:
-                if county in MANUAL_COUNTY_MAP[state_abbr]:
-                    geo_id = MANUAL_COUNTY_MAP[state_abbr][county]
-                    return geo_id
-
-        return geo_id
-
-    def state_to_dcid(self, state_code):
-
-        if state_code in _IGNORE_STATE_ABBR:
-            return ''
-
-        if state_code in USSTATE_MAP:
-            return USSTATE_MAP[state_code]
-        else:
-            return ''
-
-    def convert_to_place_dcid(self, state_abbr, geo_name='', geo_type='State'):
-        """resolves GEOID based on the FBI Hate crime dataset Agency Type and Name. 
-        If a geoId could not be resolved, the function returns an empty string ('').
-        """
-
-        # Update anonymous State Abbreviations
-        state_abbr = self.update_state_abbr(state_abbr)
-
-        if geo_type == 'State':
-            return self.state_to_dcid(state_abbr)
-
-        elif geo_type == 'County':
-            return self.county_to_dcid(state_abbr, geo_name)
-
-        elif geo_type == 'City':
-            return self.city_to_dcid(state_abbr, geo_name)
-
-        else:
-            # geo type currently not handled
-            return ''
+    else:
+        # geo type currently not handled
+        return ''
