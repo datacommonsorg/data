@@ -494,6 +494,51 @@ class TestStatVarDcidGenerator(unittest.TestCase):
                          'SOCv2018/highLevelAggregation-99Occupation')
         self.assertEqual(dcid, expected_dcid)
 
+    def test_boolean_naming(self):
+        stat_var_dict1 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:CriminalActivities',
+            'isHateCrime': 'True',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict1)
+        expected_dcid = ('Count_CriminalActivities_IsHateCrime')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict2 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:CriminalActivities',
+            'isHateCrime': 'False',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict2)
+        expected_dcid = ('Count_CriminalActivities_NotHateCrime')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict3 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Household',
+            'hasComputer': 'True',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict3)
+        expected_dcid = ('Count_Household_HasComputer')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict4 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Household',
+            'hasComputer': 'False',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict4)
+        expected_dcid = ('Count_Household_NoComputer')
+        self.assertEqual(dcid, expected_dcid)
+
     def test_soc_map(self):
         soc_values = statvar_dcid_generator.SOC_MAP.values()
         alphanumeric_regex = re.compile(r'[A-Za-z0-9]+')
