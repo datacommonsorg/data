@@ -16,7 +16,7 @@ import filecmp
 import os
 import tempfile
 import unittest
-from .geo_id_resolver import *
+from .geo_id_resolver_refactored import GeoIdResolver
 
 _Test_Cases = [{
     'input': {
@@ -49,25 +49,78 @@ _Test_Cases = [{
     'expected_dcid': 'geoId/0541000'
 }]
 
-_County_Test_Cases = [{
-    'input': {
-        'state_abbr': 'AR',
-        'county': 'Governors State University'
+_County_Test_Cases = [
+    {
+        'input': {
+            'state_abbr': 'AR',
+            'county': 'Governors State University'
+        },
+        'expected_dcid': ''
     },
-    'expected_dcid': ''
-}, {
-    'input': {
-        'state_abbr': 'ID',
-        'county': 'Latah'
+    {
+        'input': {
+            'state_abbr': 'ID',
+            'county': 'Latah'
+        },
+        'expected_dcid': 'geoId/16057'
     },
-    'expected_dcid': 'geoId/16057'
-}, {
-    'input': {
-        'state_abbr': 'FS',
-        'county': 'Latah'
+    {
+        'input': {
+            'state_abbr': 'FS',
+            'county': 'Latah'
+        },
+        'expected_dcid': ''
     },
-    'expected_dcid': ''
-}]
+    {
+        'input': {
+            'state_abbr': 'MD',
+            'county': 'Montgomery County Police Department'
+        },
+        'expected_dcid': 'geoId/24031'
+    },
+    {
+        'input': {
+            'state_abbr': 'NY',
+            'county': 'Westchester Public Safety'
+        },
+        'expected_dcid': 'geoId/36119'
+    },
+    {
+        'input': {
+            'state_abbr': 'LA',
+            'county': 'Acadia'
+        },
+        'expected_dcid': 'geoId/22001'
+    },
+    {
+        'input': {
+            'state_abbr': 'PA',
+            'county': 'Lancaster '
+        },
+        'expected_dcid': 'geoId/42071'
+    },
+    {
+        'input': {
+            'state_abbr': 'IL',
+            'county': 'DeWitt'
+        },
+        'expected_dcid': 'geoId/17039'
+    },
+    {
+        'input': {
+            'state_abbr': 'ND',
+            'county': 'Lamoure '
+        },
+        'expected_dcid': 'geoId/38045'
+    },
+    {
+        'input': {
+            'state_abbr': 'UT',
+            'county': 'Salt Lake County Unified Police Department'
+        },
+        'expected_dcid': 'geoId/49035'
+    },
+]
 
 _City_Test_Cases = [{
     'input': {
@@ -81,25 +134,35 @@ _City_Test_Cases = [{
         'city': 'University of Delaware'
     },
     'expected_dcid': ''
+}, {
+    'input': {
+        'state_abbr': 'GA',
+        'city': 'Dunwoody '
+    },
+    'expected_dcid': 'geoId/1324768'
 }]
 
 
 class GeoIdResolverTest(unittest.TestCase):
 
+    def setUp(self):
+        self.resolver = GeoIdResolver()
+
     def test_convert_to_place_dcid(self):
 
         for test_case in _Test_Cases:
-            self.assertEqual(convert_to_place_dcid(**test_case['input']),
-                             test_case['expected_dcid'])
+            self.assertEqual(
+                self.resolver.convert_to_place_dcid(**test_case['input']),
+                test_case['expected_dcid'])
 
     def test_county_to_dcid(self):
         for test_case in _County_Test_Cases:
-            self.assertEqual(county_to_dcid(**test_case['input']),
+            self.assertEqual(self.resolver.county_to_dcid(**test_case['input']),
                              test_case['expected_dcid'])
 
     def test_city_to_dcid(self):
         for test_case in _City_Test_Cases:
-            self.assertEqual(city_to_dcid(**test_case['input']),
+            self.assertEqual(self.resolver.city_to_dcid(**test_case['input']),
                              test_case['expected_dcid'])
 
 
