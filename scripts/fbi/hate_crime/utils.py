@@ -47,14 +47,13 @@ def flatten_by_column(df, column_name, sep=";"):
     df_copy[column_name] = df_copy[column_name].str.split(sep)
     return df_copy.explode(column_name)
 
-def make_time_place_aggregation(df, groupby_cols=[], agg_dict={}, multi_index=False):
-    #TODO: Fill this for year, city, county, state
+def make_time_place_aggregation(dataframe, groupby_cols=[], agg_dict={}, multi_index=False):
     """
     Utiltiy function where different aggregations of the hate crime dataset is done, by specific how specific columns
     needs to be aggregated. By default aggregations are done by year, place and state.
     
     Params:
-    - df (pandas.DataFrame): raw dataframe of fbi_hatecrimes csv file
+    - dataframe (pandas.DataFrame): raw dataframe of fbi_hatecrimes csv file
     - groupby_cols (list): list of additional columns to be used for group by. Default aggregation is done with
     columns like year, place and state, additional columns based on which groupby needs to be done can be specified 
     as a list. (default: [])
@@ -68,14 +67,21 @@ def make_time_place_aggregation(df, groupby_cols=[], agg_dict={}, multi_index=Fa
     To aggregate the incident counts by year, place and state, the function call will be:
     agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
     """
-    ## Year
-    count_incident_by_year = agg_hate_crime_df(df, groupby_cols=(['DATA_YEAR'] + groupby_cols), agg_dict=agg_dict, multi_index=multi_index)
+    ## Year + Country
+    agg_country = agg_hate_crime_df(dataframe, groupby_cols=(['DATA_YEAR'] + groupby_cols), agg_dict=agg_dict, multi_index=multi_index)
+    agg_country['STATE_ABBR'] = 'USA'
     
-    ## City
-    count_incident_by_city = agg_hate_crime_df(df[df['AGENCY_TYPE_NAME'] == 'City'], groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=multi_index)
+    ## Year + State
+    agg_state = agg_hate_crime_df(dataframe, groupby_cols=(['DATA_YEAR', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=False)
 
-    ## State
-    count_incident_by_state = agg_hate_crime_df(df, groupby_cols=(['DATA_YEAR', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=False)
+    ## Year + County
+    county_df = dataframe[dataframe['AGENCY_TYPE_NAME'] == 'County']
+    county_df['STATE_ABBR'] = county_df['PUB_AGENCY_NAME'] + ' ' + county_df['STATE_ABBR']
+    agg_county = agg_hate_crime_df(county_df, groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=multi_index)
 
-    ## County
-    count_incident_by_county = agg_hate_crime_df(df[df['AGENCY_TYPE_NAME'] == 'County'], groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=False)
+    ## Year + City
+    city_df = dataframe[dataframe['AGENCY_TYPE_NAME'] == 'City']
+    city_df['STATE_ABBR'] = city_df['PUB_AGENCY_NAME'] + ' ' + city_df['STATE_ABBR']
+    agg_city = agg_hate_crime_df(city_df, groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=multi_index)
+
+    return agg_country, agg_state, agg_county, agg_city

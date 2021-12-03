@@ -17,7 +17,7 @@ import sys
 import pandas as pd
 import json
 import csv
-from utils import agg_hate_crime_df, flatten_by_column
+from utils import flatten_by_column, make_time_place_aggregation
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -146,14 +146,8 @@ if __name__ == "__main__":
         incident_df = _write_mcf(incident_df, config, f)
         offense_df = _write_mcf(offense_df, config, f)
 
-    count_incident_by_year = agg_hate_crime_df(incident_df, groupby_cols=['DATA_YEAR', 'StatVar'], agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
-    count_incident_by_year['STATE_ABBR'] = 'country/USA'
-    count_offense_by_year = agg_hate_crime_df(offense_df, groupby_cols=['DATA_YEAR', 'StatVar'], agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
-    count_offense_by_year['STATE_ABBR'] = 'country/USA'
+    count_incident_by_year, count_incident_by_state, count_incident_by_county, count_incident_by_city = make_time_place_aggregation(incident_df, groupby_cols=['StatVar'], agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
 
-    count_incident_by_state = agg_hate_crime_df(incident_df, groupby_cols=(['DATA_YEAR', 'STATE_ABBR', 'StatVar']), agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
-    count_offense_by_state = agg_hate_crime_df(offense_df, groupby_cols=(['DATA_YEAR', 'STATE_ABBR', 'StatVar']), agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
-    
-    final_df = pd.concat([count_incident_by_year, count_offense_by_year, count_incident_by_state, count_offense_by_state])
+    final_df = pd.concat([count_incident_by_year, count_incident_by_state, count_incident_by_county, count_incident_by_city])
     print(final_df.head())
     final_df.to_csv('test.csv')
