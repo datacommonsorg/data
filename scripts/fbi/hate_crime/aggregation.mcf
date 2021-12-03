@@ -1,0 +1,7 @@
+Node: dcid:Count_CriminalIncidents_HateCrime
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+isHateCrime: dcs:True
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CriminalIncidents
+

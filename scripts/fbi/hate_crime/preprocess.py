@@ -21,72 +21,110 @@ from utils import flatten_by_column, make_time_place_aggregation
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(
-    _SCRIPT_PATH, '../../../util/'))  # for statvar_dcid_generator
+sys.path.append(os.path.join(_SCRIPT_PATH,
+                             '../../../util/'))  # for statvar_dcid_generator
 
 from statvar_dcid_generator import get_statvar_dcid
 
 YEAR_INDEX = 0
 
-INPUT_COLUMNS = ['INCIDENT_ID', 'DATA_YEAR', 'OFFENDER_RACE', 'OFFENDER_ETHNICITY',
-       'STATE_ABBR', 'OFFENSE_NAME', 'LOCATION_NAME', 'BIAS_DESC', 'AGENCY_TYPE_NAME',
-       'VICTIM_TYPES', 'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'PUB_AGENCY_NAME']
-
-OUTPUT_COLUMNS = [
-    'Year', 'Place', 'StatVar', 'Quantity'
+INPUT_COLUMNS = [
+    'INCIDENT_ID', 'DATA_YEAR', 'OFFENDER_RACE', 'OFFENDER_ETHNICITY',
+    'STATE_ABBR', 'OFFENSE_NAME', 'LOCATION_NAME', 'BIAS_DESC',
+    'AGENCY_TYPE_NAME', 'VICTIM_TYPES', 'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS',
+    'PUB_AGENCY_NAME'
 ]
 
+OUTPUT_COLUMNS = ['Year', 'Place', 'StatVar', 'Quantity']
+
 map_dict = {
-  "Anti-Black or African American": "race",
-  "Anti-White": "race",
-  "Anti-Native Hawaiian or Other Pacific Islander": "race",
-  "Anti-Arab": "race",
-  "Anti-Asian": "race",
-  "Anti-American Indian or Alaska Native": "race",
-  "Anti-Other Race/Ethnicity/Ancestry": "race",
-  "Anti-Multiple Races, Group": "race",
-  "Anti-Protestant": "religion",
-  "Anti-Other Religion": "religion",
-  "Anti-Jewish": "religion",
-  "Anti-Islamic (Muslim)": "religion",
-  "Anti-Jehovah's Witness": "religion",
-  "Anti-Mormon": "religion",
-  "Anti-Buddhist": "religion",
-  "Anti-Sikh": "religion",
-  "Anti-Other Christian": "religion",
-  "Anti-Hindu": "religion",
-  "Anti-Catholic": "religion",
-  "Anti-Eastern Orthodox (Russian, Greek, Other)": "religion",
-  "Anti-Atheism/Agnosticism": "religion",
-  "Anti-Multiple Religions, Group": "religion",
-  "Anti-Heterosexual": "sexualOrientation",
-  "Anti-Lesbian (Female)": "sexualOrientation",
-  "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)": "sexualOrientation",
-  "Anti-Bisexual": "sexualOrientation",
-  "Anti-Gay (Male)": "sexualOrientation",
-  "Anti-Hispanic or Latino": "ethnicity",
-  "Anti-Physical Disability": "disabilityStatus",
-  "Anti-Mental Disability": "disabilityStatus",
-  "Anti-Male": "gender",
-  "Anti-Female": "gender",
-  "Anti-Transgender": "TransgenderAndGenderNonConforming",
-  "Anti-Gender Non-Conforming": "TransgenderAndGenderNonConforming",
-  "Unknown (offender's motivation not known)": "Unknown"
+    "Anti-Black or African American":
+        "race",
+    "Anti-White":
+        "race",
+    "Anti-Native Hawaiian or Other Pacific Islander":
+        "race",
+    "Anti-Arab":
+        "race",
+    "Anti-Asian":
+        "race",
+    "Anti-American Indian or Alaska Native":
+        "race",
+    "Anti-Other Race/Ethnicity/Ancestry":
+        "race",
+    "Anti-Multiple Races, Group":
+        "race",
+    "Anti-Protestant":
+        "religion",
+    "Anti-Other Religion":
+        "religion",
+    "Anti-Jewish":
+        "religion",
+    "Anti-Islamic (Muslim)":
+        "religion",
+    "Anti-Jehovah's Witness":
+        "religion",
+    "Anti-Mormon":
+        "religion",
+    "Anti-Buddhist":
+        "religion",
+    "Anti-Sikh":
+        "religion",
+    "Anti-Other Christian":
+        "religion",
+    "Anti-Hindu":
+        "religion",
+    "Anti-Catholic":
+        "religion",
+    "Anti-Eastern Orthodox (Russian, Greek, Other)":
+        "religion",
+    "Anti-Atheism/Agnosticism":
+        "religion",
+    "Anti-Multiple Religions, Group":
+        "religion",
+    "Anti-Heterosexual":
+        "sexualOrientation",
+    "Anti-Lesbian (Female)":
+        "sexualOrientation",
+    "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)":
+        "sexualOrientation",
+    "Anti-Bisexual":
+        "sexualOrientation",
+    "Anti-Gay (Male)":
+        "sexualOrientation",
+    "Anti-Hispanic or Latino":
+        "ethnicity",
+    "Anti-Physical Disability":
+        "disabilityStatus",
+    "Anti-Mental Disability":
+        "disabilityStatus",
+    "Anti-Male":
+        "gender",
+    "Anti-Female":
+        "gender",
+    "Anti-Transgender":
+        "TransgenderAndGenderNonConforming",
+    "Anti-Gender Non-Conforming":
+        "TransgenderAndGenderNonConforming",
+    "Unknown (offender's motivation not known)":
+        "Unknown"
 }
 
+
 def add_bias_type(row):
-  if len(row['BIAS_DESC'].split(";")) > 1:
-    row['BIAS_AGAINST'] = 'MultipleBias'
+    if len(row['BIAS_DESC'].split(";")) > 1:
+        row['BIAS_AGAINST'] = 'MultipleBias'
 
-  elif row['BIAS_DESC'] in map_dict:
-    row['BIAS_AGAINST'] = map_dict[row['BIAS_DESC']]
-  
-  else:
-    print(f"WARNING: No bias type found for {row['BIAS_DESC']}")
-  
-  return row
+    elif row['BIAS_DESC'] in map_dict:
+        row['BIAS_AGAINST'] = map_dict[row['BIAS_DESC']]
 
-def _write_mcf(df, config, f):
+    else:
+        print(f"WARNING: No bias type found for {row['BIAS_DESC']}")
+
+    return row
+
+
+def _gen_statvar_mcf(df, config, population_type='CriminalIncidents'):
     statvar_list = []
     statvar_dcid_list = []
     df_copy = df.copy()
@@ -99,12 +137,15 @@ def _write_mcf(df, config, f):
             # else:
             #     print(f"ERROR: {col} not in config")
 
-        statvar['populationType'] = row['POPULATION_TYPE']
+        statvar['populationType'] = population_type
         statvar['Node'] = get_statvar_dcid(statvar)
         statvar_dcid_list.append(statvar['Node'])
         statvar_list.append(statvar)
-    
     df_copy['StatVar'] = statvar_dcid_list
+    return df_copy, statvar_list
+
+
+def _write_statvar_mcf(statvar_list, f):
     dcid_set = set()
     final_mcf = ''
     for sv in statvar_list:
@@ -121,33 +162,66 @@ def _write_mcf(df, config, f):
 
     f.write(final_mcf)
 
-    return df_copy
 
 def _write_cleaned_csv(df, csv_file_name, mode='w'):
 
     with open(csv_file_name, mode) as output_f:
         writer = csv.DictWriter(output_f, fieldnames=OUTPUT_COLUMNS)
         writer.writeheader()
- 
+
+
 if __name__ == "__main__":
     df = pd.read_csv('source_data/hate_crime.csv', usecols=INPUT_COLUMNS)
+    df[df.columns[df.isnull().any()].tolist()].fillna('Unknown')
 
     df['BIAS_AGAINST'] = ''
     incident_df = df.apply(add_bias_type, axis=1)
-    offense_df = flatten_by_column(incident_df, 'OFFENSE_NAME')
 
-    incident_df['POPULATION_TYPE'] = 'CriminalIncidents'
-    offense_df['POPULATION_TYPE'] = 'CriminalActivities'
+    offense_df = flatten_by_column(incident_df, 'OFFENSE_NAME')
 
     with open('config.json', 'r') as f:
         config = json.load(f)
 
     with open('output.mcf', 'w') as f:
-        incident_df = _write_mcf(incident_df, config, f)
-        offense_df = _write_mcf(offense_df, config, f)
+        incident_df, statvar_list = _gen_statvar_mcf(
+            incident_df, config, population_type='CriminalIncidents')
+        _write_statvar_mcf(statvar_list, f)
 
-    count_incident_by_year, count_incident_by_state, count_incident_by_county, count_incident_by_city = make_time_place_aggregation(incident_df, groupby_cols=['StatVar'], agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
+    final_df = pd.DataFrame()
+    # Incidents by StatVar
+    incident_by_statvar = make_time_place_aggregation(
+        incident_df,
+        groupby_cols=['StatVar'],
+        agg_dict={'INCIDENT_ID': 'count'},
+        multi_index=False)
+    final_df = pd.concat(incident_by_statvar)
+    final_df.to_csv('output.csv')
 
-    final_df = pd.concat([count_incident_by_year, count_incident_by_state, count_incident_by_county, count_incident_by_city])
-    print(final_df.head())
-    final_df.to_csv('test.csv')
+    # Aggregations
+
+    # Total Incidents
+    statvar_list = []
+    total_incidents = make_time_place_aggregation(
+        incident_df,
+        groupby_cols=[],
+        agg_dict={'INCIDENT_ID': 'count'},
+        multi_index=False)
+    for idx in range(len(total_incidents)):
+        total_incidents[idx], statvars = _gen_statvar_mcf(
+            total_incidents[idx], config, population_type='CriminalIncidents')
+        statvar_list.extend(statvars)
+
+    final_df = pd.concat(total_incidents[1:])
+
+    # Total Incidents by Bias
+    # single_bias_incidents = incident_df[incident_df['MUTLIPLE_BIAS'] == 'S']
+
+    # incidents_by_bias = make_time_place_aggregation(incident_df, groupby_cols=[''], agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
+
+    # final_df = pd.concat(([final_df] + list))
+    # total_incidents = _write_mcf(total_incidents, config, f)
+    # final_df = pd.concat(total_incidents)
+
+    with open('aggregation.mcf', 'w') as f:
+        _write_statvar_mcf(statvar_list, f)
+    final_df.to_csv('aggregation.csv')

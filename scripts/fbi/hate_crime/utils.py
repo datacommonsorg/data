@@ -84,4 +84,4 @@ def make_time_place_aggregation(dataframe, groupby_cols=[], agg_dict={}, multi_i
     city_df['STATE_ABBR'] = city_df['PUB_AGENCY_NAME'] + ' ' + city_df['STATE_ABBR']
     agg_city = agg_hate_crime_df(city_df, groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=multi_index)
 
-    return agg_country, agg_state, agg_county, agg_city
+    return [agg_country, agg_state, agg_county, agg_city]
