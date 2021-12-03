@@ -41,11 +41,11 @@ def agg_hate_crime_df(df, groupby_cols=['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_A
         return df
     else:
         return df.groupby(by=groupby_cols, as_index=multi_index).agg(agg_dict)
-  
+
 def flatten_by_column(df, column_name, sep=";"):
-    df_f = df.copy()
-    df_f[column_name] = df_f[column_name].str.split(sep)
-    return df_f.explode(column_name)
+    df_copy = df.copy()
+    df_copy[column_name] = df_copy[column_name].str.split(sep)
+    return df_copy.explode(column_name)
 
 def make_time_place_aggregation(df, groupby_cols=[], agg_dict={}, multi_index=False):
     #TODO: Fill this for year, city, county, state

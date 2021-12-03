@@ -225,6 +225,15 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'bachelorDegreeMajor': {
         'prepend': 'BachelorOf'
+    },
+    'biasAgainst': {
+        'prepend': 'BiasAgainst'
+    },
+    'offenderRace': {
+        'prepend': 'OffenderRace'
+    },
+    'offenderEthnicity': {
+        'prepend': 'OffenderEthnicity'
     }
 }
 
