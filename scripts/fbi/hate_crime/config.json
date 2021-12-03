@@ -5,111 +5,353 @@
         "isHateCrime": "True",
         "typeOf": "StatisticalVariable"
     },
+    "OFFENDER_RACE": {
+        "White": {
+            "offenderRace": "WhiteAlone"
+        },
+        "Black or African American": {
+            "offenderRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Unknown": {
+            "offenderRace": "UCR_UnknownRace"
+        },
+        "Multiple": {
+            "offenderRace": "TwoOrMoreRaces"
+        },
+        "Asian": {
+            "offenderRace": "AsianAlone"
+        },
+        "American Indian or Alaska Native": {
+            "offenderRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "Native Hawaiian or Other Pacific Islander": {
+            "offenderRace": "NativeHawaiianOrOtherPacificIslanderAlone"
+        }
+    },
+    "OFFENDER_ETHNICITY": {
+        "Unknown": {
+            "offenderEthnicity": "UCR_UnknownEthnicity"
+        },
+        "Not Hispanic or Latino": {
+            "offenderEthnicity": "NotHispanicOrLatino"
+        },
+        "Hispanic or Latino": {
+            "offenderEthnicity": "HispanicOrLatino"
+        },
+        "Multiple": {
+            "offenderEthnicity": "UCR_MultipleEthnicity"
+        }
+    },
     "BIAS_DESC": {
         "Anti-Black or African American": {
-            "race": "Black or African American"
+            "biasAgainst": "race",
+            "race": "BlackOrAfricanAmericanAlone"
         },
         "Anti-White": {
-            "race": "White"
+            "biasAgainst": "race",
+            "race": "WhiteAlone"
         },
         "Anti-Jewish": {
-            "race": "Jewish"
+            "biasAgainst": "religion",
+            "religion": "Jewish"
         },
         "Anti-Arab": {
+            "biasAgainst": "race",
             "race": "Arab"
         },
         "Anti-Protestant": {
-            "race": "Protestant"
+            "biasAgainst": "religion",
+            "religion": "Protestant"
         },
         "Anti-Other Religion": {
-            "race": "Other Religion"
+            "biasAgainst": "religion",
+            "religion": "UCR_OtherReligion"
         },
         "Anti-Islamic (Muslim)": {
-            "race": "Islamic (Muslim)"
+            "biasAgainst": "religion",
+            "religion": "Islam"
         },
         "Anti-Gay (Male)": {
-            "race": "Gay (Male)"
+            "biasAgainst": "sexualOrientation",
+            "sexualOrientation": "Gay"
         },
         "Anti-Asian": {
-            "race": "Asian"
+            "biasAgainst": "race",
+            "race": "AsianAlone"
         },
         "Anti-Catholic": {
-            "race": "Catholic"
+            "biasAgainst": "religion",
+            "religion": "Catholic"
         },
         "Anti-Heterosexual": {
-            "race": "Heterosexual"
+            "biasAgainst": "sexualOrientation",
+            "sexualOrientation": "Heterosexual"
         },
         "Anti-Hispanic or Latino": {
-            "race": "Hispanic or Latino"
+            "biasAgainst": "ethnicity",
+            "ethnicity": "HispanicOrLatino"
         },
         "Anti-Other Race/Ethnicity/Ancestry": {
-            "race": "Other Race/Ethnicity/Ancestry"
+            "biasAgainst": "RaceOrEthnicity"
         },
         "Anti-Multiple Religions, Group": {
-            "race": "Multiple Religions, Group"
+            "biasAgainst": "religion",
+            "religion": "MultipleReligionsOrGroup"
         },
         "Anti-Multiple Races, Group": {
-            "race": "Multiple Races, Group"
+            "biasAgainst": "race",
+            "race": "TwoOrMoreRaces"
         },
         "Anti-Lesbian (Female)": {
-            "race": "Lesbian (Female)"
+            "biasAgainst": "sexualOrientation",
+            "sexualOrientation": "Lesbian"
         },
         "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)": {
-            "race": "Lesbian, Gay, Bisexual, or Transgender (Mixed Group)"
+            "biasAgainst": "sexualOrientation",
+            "sexualOrientation": "LGBT"
         },
         "Anti-American Indian or Alaska Native": {
-            "race": "American Indian or Alaska Native"
+            "biasAgainst": "race",
+            "race": "AmericanIndianOrAlaskaNativeAlone"
         },
         "Anti-Atheism/Agnosticism": {
-            "race": "Atheism/Agnosticism"
+            "biasAgainst": "religion",
+            "religion": "AtheismOrAgnosticism"
         },
         "Anti-Bisexual": {
-            "race": "Bisexual"
+            "biasAgainst": "sexualOrientation",
+            "sexualOrientation": "Bisexual"
         },
         "Anti-Physical Disability": {
-            "race": "Physical Disability"
+            "biasAgainst": "disabilityStatus",
+            "disabilityStatus": "PhysicalDisability"
         },
         "Anti-Mental Disability": {
-            "race": "Mental Disability"
+            "biasAgainst": "disabilityStatus",
+            "disabilityStatus": "MentalDisability"
         },
         "Anti-Gender Non-Conforming": {
-            "race": "Gender Non-Conforming"
+            "biasAgainst": "gender",
+            "gender": "GenderNonConforming"
         },
         "Anti-Female": {
-            "race": "Female"
+            "biasAgainst": "gender",
+            "gender": "Female"
         },
         "Anti-Transgender": {
-            "race": "Transgender"
+            "biasAgainst": "gender",
+            "gender": "Transgender"
         },
         "Anti-Native Hawaiian or Other Pacific Islander": {
-            "race": "Native Hawaiian or Other Pacific Islander"
+            "biasAgainst": "race",
+            "race": "NativeHawaiianOrOtherPacificIslanderAlone"
         },
         "Anti-Male": {
-            "race": "Male"
+            "biasAgainst": "gender",
+            "gender": "Male"
         },
         "Anti-Jehovah's Witness": {
-            "race": "Jehovah's Witness"
+            "biasAgainst": "religion",
+            "religion": "JehovahsWitness"
         },
         "Anti-Mormon": {
-            "race": "Mormon"
+            "biasAgainst": "religion",
+            "religion": "Mormon"
         },
         "Anti-Buddhist": {
-            "race": "Buddhist"
+            "biasAgainst": "religion",
+            "religion": "Buddhism"
         },
         "Anti-Sikh": {
-            "race": "Sikh"
+            "biasAgainst": "religion",
+            "religion": "Sikhism"
         },
         "Anti-Other Christian": {
-            "race": "Other Christian"
+            "biasAgainst": "religion",
+            "religion": "UCR_OtherChristian"
         },
         "Anti-Hindu": {
-            "race": "Hindu"
+            "biasAgainst": "religion",
+            "religion": "Hinduism"
         },
         "Anti-Eastern Orthodox (Russian, Greek, Other)": {
-            "race": "Eastern Orthodox (Russian, Greek, Other)"
+            "biasAgainst": "religion",
+            "religion": "EasternOrthodox"
         },
         "Unknown (offender's motivation not known)": {
-            "race": "wn (offender's motivation not known)"
+            "biasAgainst": "UCR_UnknownBias"
+        }
+    },
+    "OFFENSE_NAME": {
+        "Intimidation": {
+            "crimeType": "Intimidation"
+        },
+        "Simple Assault": {
+            "crimeType": "SimpleAssault"
+        },
+        "Aggravated Assault": {
+            "crimeType": "AggravatedAssault"
+        },
+        "Robbery": {
+            "crimeType": "Robbery"
+        },
+        "Destruction/Damage/Vandalism of Property": {
+            "crimeType": "DestructionDamageVandalismofProperty"
+        },
+        "Arson": {
+            "crimeType": "Arson"
+        },
+        "Murder and Nonnegligent Manslaughter": {
+            "crimeType": "MurderAndNonNegligentManslaughter"
+        },
+        "Burglary/Breaking & Entering": {
+            "crimeType": "BurglaryBreakingAndEntering"
+        },
+        "Not Specified": {
+            "crimeType": "UCR_NotSpecified"
+        },
+        "Rape": {
+            "crimeType": "Rape"
+        },
+        "Motor Vehicle Theft": {
+            "crimeType": "MotorVehicleTheft"
+        },
+        "Drug/Narcotic Violations": {
+            "crimeType": "DrugNarcoticViolations"
+        },
+        "Weapon Law Violations": {
+            "crimeType": "WeaponLawViolations"
+        },
+        "Theft From Motor Vehicle": {
+            "crimeType": "TheftFromMotorVehicle"
+        },
+        "Shoplifting": {
+            "crimeType": "Shoplifting"
+        },
+        "All Other Larceny": {
+            "crimeType": "AllOtherLarceny"
+        },
+        "Theft of Motor Vehicle Parts or Accessories": {
+            "crimeType": "TheftofMotorVehiclePartsorAccessories"
+        },
+        "Fondling": {
+            "crimeType": "Fondling"
+        },
+        "Counterfeiting/Forgery": {
+            "crimeType": "CounterfeitingForgery"
+        },
+        "Kidnapping/Abduction": {
+            "crimeType": "KidnappingAbduction"
+        },
+        "Theft From Building": {
+            "crimeType": "TheftFromBuilding"
+        },
+        "Pornography/Obscene Material": {
+            "crimeType": "PornographyObsceneMaterial"
+        },
+        "Embezzlement": {
+            "crimeType": "Embezzlement"
+        },
+        "Purse-snatching": {
+            "crimeType": "PurseSnatching"
+        },
+        "Drug Equipment Violations": {
+            "crimeType": "DrugEquipmentViolations"
+        },
+        "Credit Card/Automated Teller Machine Fraud": {
+            "crimeType": "CreditCardAutomatedTellerMachineFraud"
+        },
+        "Sexual Assault With An Object": {
+            "crimeType": "SexualAssaultWithAnObject"
+        },
+        "False Pretenses/Swindle/Confidence Game": {
+            "crimeType": "FalsePretensesSwindleConfidenceGame"
+        },
+        "Pocket-picking": {
+            "crimeType": "PocketPicking"
+        },
+        "Welfare Fraud": {
+            "crimeType": "WelfareFraud"
+        },
+        "Extortion/Blackmail": {
+            "crimeType": "ExtortionBlackmail"
+        },
+        "Stolen Property Offenses": {
+            "crimeType": "StolenPropertyOffenses"
+        },
+        "Incest": {
+            "crimeType": "Incest"
+        },
+        "Sodomy": {
+            "crimeType": "Sodomy"
+        },
+        "Negligent Manslaughter": {
+            "crimeType": "NegligentManslaughter"
+        },
+        "Statutory Rape": {
+            "crimeType": "StatutoryRape"
+        },
+        "Theft From Coin-Operated Machine or Device": {
+            "crimeType": "TheftFromCoinOperatedMachineorDevice"
+        },
+        "Impersonation": {
+            "crimeType": "Impersonation"
+        },
+        "Prostitution": {
+            "crimeType": "Prostitution"
+        },
+        "Wire Fraud": {
+            "crimeType": "WireFraud"
+        },
+        "Assisting or Promoting Prostitution": {
+            "crimeType": "AssistingorPromotingProstitution"
+        },
+        "Purchasing Prostitution": {
+            "crimeType": "PurchasingProstitution"
+        },
+        "Bribery": {
+            "crimeType": "Bribery"
+        },
+        "Identity Theft": {
+            "crimeType": "IdentityTheft"
+        },
+        "Human Trafficking, Commercial Sex Acts": {
+            "crimeType": "HumanTraffickingCommercialSexActs"
+        },
+        "Hacking/Computer Invasion": {
+            "crimeType": "HackingComputerInvasion"
+        },
+        "Betting/Wagering": {
+            "crimeType": "BettingWagering"
+        },
+        "Animal Cruelty": {
+            "crimeType": "AnimalCruelty"
+        }
+    },
+    "VICTIM_TYPES": {
+        "Individual": {
+            "victimType": "Person"
+        },
+        "Religious Organization": {
+            "victimType": "ReligiousOrganization"
+        },
+        "Society/Public": {
+            "victimType": "Society"
+        },
+        "Business": {
+            "victimType": "USC_Establishment"
+        },
+        "Other": {
+            "victimType": "UCR_OtherVictimType"
+        },
+        "Government": {
+            "victimType": "Government"
+        },
+        "Unknown": {
+            "victimType": "UCR_UnknownVictimType"
+        },
+        "Financial Institution": {
+            "victimType": "FinancialInstitution"
         }
     }
 }

@@ -17,6 +17,7 @@ import sys
 import pandas as pd
 import json
 import csv
+from utils import agg_hate_crime_df, flatten_by_column
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -28,11 +29,11 @@ from statvar_dcid_generator import get_statvar_dcid
 YEAR_INDEX = 0
 
 INPUT_COLUMNS = ['INCIDENT_ID', 'DATA_YEAR', 'OFFENDER_RACE', 'OFFENDER_ETHNICITY',
-       'OFFENSE_NAME', 'LOCATION_NAME', 'BIAS_DESC', 
-       'VICTIM_TYPES', 'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS']
+       'STATE_ABBR', 'OFFENSE_NAME', 'LOCATION_NAME', 'BIAS_DESC', 'AGENCY_TYPE_NAME',
+       'VICTIM_TYPES', 'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'PUB_AGENCY_NAME']
 
 OUTPUT_COLUMNS = [
-    'Year', 'StatVar', 'Quantity'
+    'Year', 'Place', 'StatVar', 'Quantity'
 ]
 
 map_dict = {
@@ -73,71 +74,6 @@ map_dict = {
   "Unknown (offender's motivation not known)": "Unknown"
 }
 
-def agg_hate_crime_df(df, groupby_cols=['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'], agg_dict={}, multi_index=False):
-    """
-    Utiltiy function where different aggregations of the hate crime dataset is done, by specific how specific columns
-    needs to be aggregated. By default aggregations are done by year, place and state.
-    
-    Params:
-    - df (pandas.DataFrame): raw dataframe of fbi_hatecrimes csv file
-    - groupby_cols (list): list of additional columns to be used for group by. Default aggregation is done with
-    columns like year, place and state, additional columns based on which groupby needs to be done can be specified 
-    as a list. (default: [])
-    - agg_dict (dictionary): dictionary containing which column is aggregated by which aggregation method.(default: {})
-    - multi_index (bool): Flag if set returns multi-index dataframe (default: False)
-    
-    Output:
-    - agg_df (pandas.DataFrame): output will be the aggregated dataframe
-    
-    Example:
-    To aggregate the incident counts by year, place and state, the function call will be:
-    agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
-    """
-    #columns_to_groupby = ['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols
-    
-    if not agg_dict:
-        print("ERROR: Atleast one column with an aggregation method is required, the given call has an empty agg_dict param. No aggregations are attempted.")
-        return df
-    else:
-        return df.groupby(by=groupby_cols, as_index=multi_index).agg(agg_dict)
-  
-def flatten_by_column(df, column_name, sep=";"):
-  df[column_name] = df[column_name].str.split(sep)
-  return df.explode(column_name)
-
-def make_time_place_aggregation(df, groupby_cols=[], agg_dict={}, multi_index=False):
-    #TODO: Fill this for year, city, county, state
-    """
-    Utiltiy function where different aggregations of the hate crime dataset is done, by specific how specific columns
-    needs to be aggregated. By default aggregations are done by year, place and state.
-    
-    Params:
-    - df (pandas.DataFrame): raw dataframe of fbi_hatecrimes csv file
-    - groupby_cols (list): list of additional columns to be used for group by. Default aggregation is done with
-    columns like year, place and state, additional columns based on which groupby needs to be done can be specified 
-    as a list. (default: [])
-    - agg_dict (dictionary): dictionary containing which column is aggregated by which aggregation method.(default: {})
-    - multi_index (bool): Flag if set returns multi-index dataframe (default: False)
-    
-    Output:
-    - agg_df (pandas.DataFrame): output will be the aggregated dataframe
-    
-    Example:
-    To aggregate the incident counts by year, place and state, the function call will be:
-    agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
-    """
-    ## Year
-    count_incident_by_year = agg_hate_crime_df(df, groupby_cols=(['DATA_YEAR'] + groupby_cols), agg_dict=agg_dict, multi_index=multi_index)
-    
-    ## City
-    count_incident_by_city = agg_hate_crime_df(df[df['AGENCY_TYPE_NAME'] == 'City'], groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=multi_index)
-
-    ## State
-    count_incident_by_state = agg_hate_crime_df(df, groupby_cols=(['DATA_YEAR', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=False)
-
-    ## County
-    count_incident_by_county = agg_hate_crime_df(df[df['AGENCY_TYPE_NAME'] == 'County'], groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols), agg_dict=agg_dict, multi_index=False)
-
 def add_bias_type(row):
   if len(row['BIAS_DESC'].split(";")) > 1:
     row['BIAS_AGAINST'] = 'MultipleBias'
@@ -150,23 +86,25 @@ def add_bias_type(row):
   
   return row
 
-def _write_mcf(df, config, mcf_file_name):
+def _write_mcf(df, config, f):
     statvar_list = []
+    statvar_dcid_list = []
     df_copy = df.copy()
-    df_copy['StatVar'] = ''
     for idx, row in df_copy.iterrows():
         statvar = {**config['_COMMON_']}
         for col in df_copy.columns:
-            if col in config and row[col] in config[col]:
-                statvar.update(config[col][row[col]])
+            if col in config:
+                if row[col] in config[col]:
+                    statvar.update(config[col][row[col]])
             # else:
-            #     print("ERROR: Col not in config")
+            #     print(f"ERROR: {col} not in config")
 
         statvar['populationType'] = row['POPULATION_TYPE']
         statvar['Node'] = get_statvar_dcid(statvar)
-        df_copy.at[idx, 'StatVar'] = statvar['Node']
+        statvar_dcid_list.append(statvar['Node'])
         statvar_list.append(statvar)
     
+    df_copy['StatVar'] = statvar_dcid_list
     dcid_set = set()
     final_mcf = ''
     for sv in statvar_list:
@@ -181,8 +119,7 @@ def _write_mcf(df, config, mcf_file_name):
         statvar_mcf = 'Node: dcid:' + dcid + '\n' + '\n'.join(statvar_mcf_list)
         final_mcf += statvar_mcf + '\n\n'
 
-    with open(mcf_file_name, 'w') as f:
-        f.write(final_mcf)
+    f.write(final_mcf)
 
     return df_copy
 
@@ -193,8 +130,7 @@ def _write_cleaned_csv(df, csv_file_name, mode='w'):
         writer.writeheader()
  
 if __name__ == "__main__":
-    df = pd.read_csv('source_data/hate_crime.csv', low_memory=False)
-    df = df[INPUT_COLUMNS]
+    df = pd.read_csv('source_data/hate_crime.csv', usecols=INPUT_COLUMNS)
 
     df['BIAS_AGAINST'] = ''
     incident_df = df.apply(add_bias_type, axis=1)
@@ -206,12 +142,18 @@ if __name__ == "__main__":
     with open('config.json', 'r') as f:
         config = json.load(f)
 
-    incident_df = _write_mcf(incident_df, config, 'output.mcf')
+    with open('output.mcf', 'w') as f:
+        incident_df = _write_mcf(incident_df, config, f)
+        offense_df = _write_mcf(offense_df, config, f)
 
     count_incident_by_year = agg_hate_crime_df(incident_df, groupby_cols=['DATA_YEAR', 'StatVar'], agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
-    count_incident_by_year.to_csv('test.csv', index=False)
-    
-    _write_cleaned_csv(incident_df, 'cleaned.csv')
+    count_incident_by_year['STATE_ABBR'] = 'country/USA'
+    count_offense_by_year = agg_hate_crime_df(offense_df, groupby_cols=['DATA_YEAR', 'StatVar'], agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
+    count_offense_by_year['STATE_ABBR'] = 'country/USA'
 
-    # for p in incident_df[incident_df['MULTIPLE_BIAS'] == 'S']['BIAS_DESC'].unique():
-    #     print(p)
+    count_incident_by_state = agg_hate_crime_df(incident_df, groupby_cols=(['DATA_YEAR', 'STATE_ABBR', 'StatVar']), agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
+    count_offense_by_state = agg_hate_crime_df(offense_df, groupby_cols=(['DATA_YEAR', 'STATE_ABBR', 'StatVar']), agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
+    
+    final_df = pd.concat([count_incident_by_year, count_offense_by_year, count_incident_by_state, count_offense_by_state])
+    print(final_df.head())
+    final_df.to_csv('test.csv')
