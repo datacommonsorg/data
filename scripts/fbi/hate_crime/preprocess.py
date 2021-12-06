@@ -16,7 +16,7 @@ import os
 import sys
 import pandas as pd
 import json
-import csv
+import numpy as np
 from utils import flatten_by_column, make_time_place_aggregation
 
 # Allows the following module imports to work when running as a script
@@ -26,17 +26,21 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 
 from statvar_dcid_generator import get_statvar_dcid
 
-YEAR_INDEX = 0
-
+# Columns to input from source data
 INPUT_COLUMNS = [
     'INCIDENT_ID', 'DATA_YEAR', 'OFFENDER_RACE', 'OFFENDER_ETHNICITY',
-    'STATE_ABBR', 'OFFENSE_NAME', 'LOCATION_NAME', 'BIAS_DESC',
-    'AGENCY_TYPE_NAME', 'VICTIM_TYPES', 'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS',
-    'PUB_AGENCY_NAME'
+    'STATE_ABBR', 'OFFENSE_NAME', 'BIAS_DESC', 'AGENCY_TYPE_NAME', 
+    'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'PUB_AGENCY_NAME'
 ]
 
-OUTPUT_COLUMNS = ['Year', 'Place', 'StatVar', 'Quantity']
+# Columns which do not contribute to a constraint property value in stat var
+NONPV_COLUMNS = [
+    'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'INCIDENT_ID', 'DATA_YEAR',
+    'STATE_ABBR', 'AGENCY_TYPE_NAME', 'PUB_AGENCY_NAME', 'LOCATION_NAME',
+    'BIAS_AGAINST'
+]
 
+# A dict to map bias descriptions to their category
 map_dict = {
     "Anti-Black or African American":
         "race",
@@ -103,11 +107,11 @@ map_dict = {
     "Anti-Female":
         "gender",
     "Anti-Transgender":
-        "TransgenderAndGenderNonConforming",
+        "TransgenderOrGenderNonConforming",
     "Anti-Gender Non-Conforming":
-        "TransgenderAndGenderNonConforming",
+        "TransgenderOrGenderNonConforming",
     "Unknown (offender's motivation not known)":
-        "Unknown"
+        "UnknownBias"
 }
 
 
@@ -128,14 +132,20 @@ def _gen_statvar_mcf(df, config, population_type='CriminalIncidents'):
     statvar_list = []
     statvar_dcid_list = []
     df_copy = df.copy()
-    for idx, row in df_copy.iterrows():
+    for _, row in df_copy.iterrows():
         statvar = {**config['_COMMON_']}
         for col in df_copy.columns:
-            if col in config:
+            if col == 'BIAS_AGAINST':
+                statvar['biasMotivation'] = row[col]
+            elif col in config:
                 if row[col] in config[col]:
                     statvar.update(config[col][row[col]])
-            # else:
-            #     print(f"ERROR: {col} not in config")
+                # else:
+                #     print(f"ERROR: {row[col]}: {col} not in config")
+            else:
+                pass
+                # if col not in NONPV_COLUMNS:
+                #     print(f"ERROR: {col} not in config")
 
         statvar['populationType'] = population_type
         statvar['Node'] = get_statvar_dcid(statvar)
@@ -162,23 +172,34 @@ def _write_statvar_mcf(statvar_list, f):
 
     f.write(final_mcf)
 
+def create_aggr(input_df, config, statvar_list, groupby_cols, agg_dict,
+                population_type):
+    output_df_list = make_time_place_aggregation(input_df,
+                                                 groupby_cols=groupby_cols,
+                                                 agg_dict=agg_dict,
+                                                 multi_index=False)
 
-def _write_cleaned_csv(df, csv_file_name, mode='w'):
+    for idx in range(len(output_df_list)):
+        output_df_list[idx], statvars = _gen_statvar_mcf(
+            output_df_list[idx], config, population_type=population_type)
+        statvar_list.extend(statvars)
 
-    with open(csv_file_name, mode) as output_f:
-        writer = csv.DictWriter(output_f, fieldnames=OUTPUT_COLUMNS)
-        writer.writeheader()
+    return output_df_list[1:]  # Skipping national level
 
+def _write_to_csv(df, csv_file_name):
+    df['Place'].replace('', np.nan, inplace=True)
+    df.dropna(subset=['Place'], inplace=True)
+    df.to_csv(csv_file_name, index=False)
 
 if __name__ == "__main__":
     df = pd.read_csv('source_data/hate_crime.csv', usecols=INPUT_COLUMNS)
-    df[df.columns[df.isnull().any()].tolist()].fillna('Unknown')
-
+    fill_col = df.columns[df.isnull().any()].tolist()
+    df[fill_col] = df[fill_col].fillna('Unknown')
     df['BIAS_AGAINST'] = ''
     incident_df = df.apply(add_bias_type, axis=1)
 
     offense_df = flatten_by_column(incident_df, 'OFFENSE_NAME')
-
+    
     with open('config.json', 'r') as f:
         config = json.load(f)
 
@@ -188,6 +209,7 @@ if __name__ == "__main__":
         _write_statvar_mcf(statvar_list, f)
 
     final_df = pd.DataFrame()
+
     # Incidents by StatVar
     incident_by_statvar = make_time_place_aggregation(
         incident_df,
@@ -195,7 +217,7 @@ if __name__ == "__main__":
         agg_dict={'INCIDENT_ID': 'count'},
         multi_index=False)
     final_df = pd.concat(incident_by_statvar)
-    final_df.to_csv('output.csv')
+    _write_to_csv(final_df, 'output.csv')
 
     # Aggregations
 
@@ -214,14 +236,120 @@ if __name__ == "__main__":
     final_df = pd.concat(total_incidents[1:])
 
     # Total Incidents by Bias
-    # single_bias_incidents = incident_df[incident_df['MUTLIPLE_BIAS'] == 'S']
+    single_bias_incidents = incident_df[incident_df['MULTIPLE_BIAS'] == 'S']
+    single_bias_offense = offense_df[offense_df['MULTIPLE_BIAS'] == 'S']
 
-    # incidents_by_bias = make_time_place_aggregation(incident_df, groupby_cols=[''], agg_dict={'INCIDENT_ID': 'count'}, multi_index=False)
+    bias_list = []
+    output_df_list = create_aggr(single_bias_incidents, config, statvar_list,
+                                 ['BIAS_DESC'], {'INCIDENT_ID': 'count'},
+                                 'CriminalIncidents')
+    bias_list.extend(output_df_list)
 
-    # final_df = pd.concat(([final_df] + list))
-    # total_incidents = _write_mcf(total_incidents, config, f)
-    # final_df = pd.concat(total_incidents)
+    # Total incidents by bias single/multiple
+    output_df_list = create_aggr(incident_df, config, statvar_list,
+                                 ['MULTIPLE_BIAS'], {'INCIDENT_ID': 'count'},
+                                 'CriminalIncidents')
+    bias_list.extend(output_df_list)
+
+    # Total incidents by bias type
+    output_df_list = create_aggr(incident_df, config, statvar_list,
+                                 ['BIAS_AGAINST'], {'INCIDENT_ID': 'count'},
+                                 'CriminalIncidents')
+    bias_list.extend(output_df_list)
+
+    final_df = pd.concat(bias_list)
+    _write_to_csv(final_df, 'bias.csv')
+
+    # Total incidents by offense type
+    output_df_list = create_aggr(offense_df, config, statvar_list,
+                                 ['OFFENSE_NAME'], {'INCIDENT_ID': 'nunique'},
+                                 'CriminalIncidents')
+
+    final_df = pd.concat(output_df_list)
+    _write_to_csv(final_df, 'offense.csv')
+
+    offense_list = []
+
+    # Total incidents by single bias and offense
+    output_df_list = create_aggr(single_bias_offense, config, statvar_list,
+                                 ['BIAS_DESC', 'OFFENSE_NAME'],
+                                 {'INCIDENT_ID': 'nunique'},
+                                 'CriminalIncidents')
+    offense_list.extend(output_df_list)
+
+    # Total incidents by bias single/multiple and offense
+    output_df_list = create_aggr(offense_df, config, statvar_list,
+                                 ['MULTIPLE_BIAS', 'OFFENSE_NAME'],
+                                 {'INCIDENT_ID': 'nunique'},
+                                 'CriminalIncidents')
+    offense_list.extend(output_df_list)
+
+    # Total incidents by bias type and offense
+    output_df_list = create_aggr(offense_df, config, statvar_list,
+                                 ['BIAS_AGAINST', 'OFFENSE_NAME'],
+                                 {'INCIDENT_ID': 'nunique'},
+                                 'CriminalIncidents')
+    offense_list.extend(output_df_list)
+
+    final_df = pd.concat(offense_list)
+    _write_to_csv(final_df, 'offense_by_bias.csv')
+
+    # Total incidents by offender race
+    output_df_list = create_aggr(incident_df, config, statvar_list,
+                                 ['OFFENDER_RACE'], {'INCIDENT_ID': 'count'},
+                                 'CriminalIncidents')
+
+    final_df = pd.concat(output_df_list)
+    _write_to_csv(final_df, 'offender_race.csv')
+
+    # Total incidents by offender ethnicity
+    output_df_list = create_aggr(incident_df, config, statvar_list,
+                                 ['OFFENDER_ETHNICITY'],
+                                 {'INCIDENT_ID': 'count'}, 'CriminalIncidents')
+
+    final_df = pd.concat(output_df_list)
+    _write_to_csv(final_df, 'offender_ethnicity.csv')
+
+    # Total incidents by offender race bias
+    offender_race_list = []
+    output_df_list = create_aggr(single_bias_incidents, config, statvar_list,
+                                 ['OFFENDER_RACE', 'BIAS_DESC'],
+                                 {'INCIDENT_ID': 'count'}, 'CriminalIncidents')
+    offender_race_list.extend(output_df_list)
+
+    output_df_list = create_aggr(incident_df, config, statvar_list,
+                                 ['OFFENDER_RACE', 'MULTIPLE_BIAS'],
+                                 {'INCIDENT_ID': 'count'}, 'CriminalIncidents')
+    offender_race_list.extend(output_df_list)
+
+    output_df_list = create_aggr(incident_df, config, statvar_list,
+                                 ['OFFENDER_RACE', 'BIAS_AGAINST'],
+                                 {'INCIDENT_ID': 'count'}, 'CriminalIncidents')
+    offender_race_list.extend(output_df_list)
+
+    final_df = pd.concat(offender_race_list)
+    _write_to_csv(final_df, 'offender_race_by_bias.csv')
+
+
+    # Total incidents by offender ethnicity bias
+    offender_ethnicity_list = []
+    output_df_list = create_aggr(single_bias_incidents, config, statvar_list,
+                                 ['OFFENDER_ETHNICITY', 'BIAS_DESC'],
+                                 {'INCIDENT_ID': 'count'}, 'CriminalIncidents')
+    offender_ethnicity_list.extend(output_df_list)
+
+    output_df_list = create_aggr(incident_df, config, statvar_list,
+                                 ['OFFENDER_ETHNICITY', 'MULTIPLE_BIAS'],
+                                 {'INCIDENT_ID': 'count'}, 'CriminalIncidents')
+    offender_ethnicity_list.extend(output_df_list)
+
+    output_df_list = create_aggr(incident_df, config, statvar_list,
+                                 ['OFFENDER_ETHNICITY', 'BIAS_AGAINST'],
+                                 {'INCIDENT_ID': 'count'}, 'CriminalIncidents')
+    offender_ethnicity_list.extend(output_df_list)
+
+    final_df = pd.concat(offender_ethnicity_list)
+    _write_to_csv(final_df, 'offender_ethnicity_by_bias.csv')
 
     with open('aggregation.mcf', 'w') as f:
         _write_statvar_mcf(statvar_list, f)
-    final_df.to_csv('aggregation.csv')

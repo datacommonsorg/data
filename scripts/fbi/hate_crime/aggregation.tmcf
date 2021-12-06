@@ -1,7 +1,7 @@
 Node: E:FBI_HateCrime->E0
 typeOf: dcs:StatVarObservation
 measurementMethod: dcs:DataCommonsAggregate
-observationAbout: C:FBI_HateCrime->STATE_ABBR
+observationAbout: C:FBI_HateCrime->Place
 observationDate: C:FBI_HateCrime->DATA_YEAR
 variableMeasured: C:FBI_HateCrime->StatVar
 value: C:FBI_HateCrime->INCIDENT_ID
