@@ -13,7 +13,7 @@
             "offenderRace": "BlackOrAfricanAmericanAlone"
         },
         "Unknown": {
-            "offenderRace": "UCR_UnknownRace"
+            "offenderRace": "UnknownRace"
         },
         "Multiple": {
             "offenderRace": "TwoOrMoreRaces"
@@ -42,144 +42,152 @@
             "offenderEthnicity": "UCR_MultipleEthnicity"
         }
     },
+    "MULTIPLE_BIAS": {
+        "S": {
+            "biasMotivation": "SingleBias"
+        },
+        "M": {
+            "biasMotivation": "MultipleBias"
+        }
+    },
     "BIAS_DESC": {
         "Anti-Black or African American": {
-            "biasAgainst": "race",
-            "race": "BlackOrAfricanAmericanAlone"
+            "biasMotivation": "race",
+            "targetedRace": "BlackOrAfricanAmericanAlone"
         },
         "Anti-White": {
-            "biasAgainst": "race",
-            "race": "WhiteAlone"
-        },
-        "Anti-Jewish": {
-            "biasAgainst": "religion",
-            "religion": "Jewish"
+            "biasMotivation": "race",
+            "targetedRace": "WhiteAlone"
         },
         "Anti-Arab": {
-            "biasAgainst": "race",
-            "race": "Arab"
-        },
-        "Anti-Protestant": {
-            "biasAgainst": "religion",
-            "religion": "Protestant"
-        },
-        "Anti-Other Religion": {
-            "biasAgainst": "religion",
-            "religion": "UCR_OtherReligion"
-        },
-        "Anti-Islamic (Muslim)": {
-            "biasAgainst": "religion",
-            "religion": "Islam"
-        },
-        "Anti-Gay (Male)": {
-            "biasAgainst": "sexualOrientation",
-            "sexualOrientation": "Gay"
-        },
-        "Anti-Asian": {
-            "biasAgainst": "race",
-            "race": "AsianAlone"
-        },
-        "Anti-Catholic": {
-            "biasAgainst": "religion",
-            "religion": "Catholic"
-        },
-        "Anti-Heterosexual": {
-            "biasAgainst": "sexualOrientation",
-            "sexualOrientation": "Heterosexual"
-        },
-        "Anti-Hispanic or Latino": {
-            "biasAgainst": "ethnicity",
-            "ethnicity": "HispanicOrLatino"
-        },
-        "Anti-Other Race/Ethnicity/Ancestry": {
-            "biasAgainst": "RaceOrEthnicity"
-        },
-        "Anti-Multiple Religions, Group": {
-            "biasAgainst": "religion",
-            "religion": "MultipleReligionsOrGroup"
-        },
-        "Anti-Multiple Races, Group": {
-            "biasAgainst": "race",
-            "race": "TwoOrMoreRaces"
-        },
-        "Anti-Lesbian (Female)": {
-            "biasAgainst": "sexualOrientation",
-            "sexualOrientation": "Lesbian"
-        },
-        "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)": {
-            "biasAgainst": "sexualOrientation",
-            "sexualOrientation": "LGBT"
+            "biasMotivation": "race",
+            "targetedRace": "Arab"
         },
         "Anti-American Indian or Alaska Native": {
-            "biasAgainst": "race",
-            "race": "AmericanIndianOrAlaskaNativeAlone"
+            "biasMotivation": "race",
+            "targetedRace": "AmericanIndianOrAlaskaNativeAlone"
         },
-        "Anti-Atheism/Agnosticism": {
-            "biasAgainst": "religion",
-            "religion": "AtheismOrAgnosticism"
+        "Anti-Asian": {
+            "biasMotivation": "race",
+            "targetedRace": "AsianAlone"
         },
-        "Anti-Bisexual": {
-            "biasAgainst": "sexualOrientation",
-            "sexualOrientation": "Bisexual"
-        },
-        "Anti-Physical Disability": {
-            "biasAgainst": "disabilityStatus",
-            "disabilityStatus": "PhysicalDisability"
-        },
-        "Anti-Mental Disability": {
-            "biasAgainst": "disabilityStatus",
-            "disabilityStatus": "MentalDisability"
-        },
-        "Anti-Gender Non-Conforming": {
-            "biasAgainst": "gender",
-            "gender": "GenderNonConforming"
-        },
-        "Anti-Female": {
-            "biasAgainst": "gender",
-            "gender": "Female"
-        },
-        "Anti-Transgender": {
-            "biasAgainst": "gender",
-            "gender": "Transgender"
+        "Anti-Multiple Races, Group": {
+            "biasMotivation": "race",
+            "targetedRace": "TwoOrMoreRaces"
         },
         "Anti-Native Hawaiian or Other Pacific Islander": {
-            "biasAgainst": "race",
-            "race": "NativeHawaiianOrOtherPacificIslanderAlone"
+            "biasMotivation": "race",
+            "targetedRace": "NativeHawaiianOrOtherPacificIslanderAlone"
         },
-        "Anti-Male": {
-            "biasAgainst": "gender",
-            "gender": "Male"
+        "Anti-Hispanic or Latino": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "HispanicOrLatino"
+        },
+        "Anti-Other Race/Ethnicity/Ancestry": {
+            "biasMotivation": "UCR_OtherRaceOrEthnicity"
+        },
+        "Anti-Jewish": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Judaism"
+        },
+        "Anti-Protestant": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Protestantism"
+        },
+        "Anti-Other Religion": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_OtherReligion"
+        },
+        "Anti-Islamic (Muslim)": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Islam"
+        },
+        "Anti-Catholic": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Catholicism"
         },
         "Anti-Jehovah's Witness": {
-            "biasAgainst": "religion",
-            "religion": "JehovahsWitness"
+            "biasMotivation": "religion",
+            "targetedReligion": "JehovahsWitnesses"
         },
         "Anti-Mormon": {
-            "biasAgainst": "religion",
-            "religion": "Mormon"
+            "biasMotivation": "religion",
+            "targetedReligion": "Mormonism"
         },
         "Anti-Buddhist": {
-            "biasAgainst": "religion",
-            "religion": "Buddhism"
+            "biasMotivation": "religion",
+            "targetedReligion": "Buddhism"
         },
         "Anti-Sikh": {
-            "biasAgainst": "religion",
-            "religion": "Sikhism"
+            "biasMotivation": "religion",
+            "targetedReligion": "Sikhism"
         },
         "Anti-Other Christian": {
-            "biasAgainst": "religion",
-            "religion": "UCR_OtherChristian"
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_OtherChristian"
         },
         "Anti-Hindu": {
-            "biasAgainst": "religion",
-            "religion": "Hinduism"
+            "biasMotivation": "religion",
+            "targetedReligion": "Hinduism"
         },
         "Anti-Eastern Orthodox (Russian, Greek, Other)": {
-            "biasAgainst": "religion",
-            "religion": "EasternOrthodox"
+            "biasMotivation": "religion",
+            "targetedReligion": "EasternChristianity"
+        },
+        "Anti-Atheism/Agnosticism": {
+            "biasMotivation": "religion",
+            "targetedReligion": "AtheismOrAgnosticism"
+        },
+        "Anti-Multiple Religions, Group": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_MultipleReligion"
+        },
+        "Anti-Heterosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Heterosexual"
+        },
+        "Anti-Gay (Male)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Gay"
+        },
+        "Anti-Bisexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Bisexual"
+        },
+        "Anti-Lesbian (Female)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Lesbian"
+        },
+        "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "LGBT"
+        },
+        "Anti-Physical Disability": {
+            "biasMotivation": "disabilityStatus",
+            "targetedDisabilityStatus": "PhysicalDisability"
+        },
+        "Anti-Mental Disability": {
+            "biasMotivation": "disabilityStatus",
+            "targetedDisabilityStatus": "MentalDisability"
+        },
+        "Anti-Gender Non-Conforming": {
+            "biasMotivation": "gender",
+            "targetedGender": "GenderNonConforming"
+        },
+        "Anti-Female": {
+            "biasMotivation": "gender",
+            "targetedGender": "Female"
+        },
+        "Anti-Transgender": {
+            "biasMotivation": "gender",
+            "targetedGender": "Transgender"
+        },
+        "Anti-Male": {
+            "biasMotivation": "gender",
+            "targetedGender": "Male"
         },
         "Unknown (offender's motivation not known)": {
-            "biasAgainst": "UCR_UnknownBias"
+            "biasMotivation": "UnknownBias"
         }
     },
     "OFFENSE_NAME": {
@@ -196,7 +204,7 @@
             "crimeType": "Robbery"
         },
         "Destruction/Damage/Vandalism of Property": {
-            "crimeType": "DestructionDamageVandalismofProperty"
+            "crimeType": "DestructionDamageVandalismOfProperty"
         },
         "Arson": {
             "crimeType": "Arson"
@@ -205,13 +213,13 @@
             "crimeType": "MurderAndNonNegligentManslaughter"
         },
         "Burglary/Breaking & Entering": {
-            "crimeType": "BurglaryBreakingAndEntering"
+            "crimeType": "Burglary"
         },
         "Not Specified": {
             "crimeType": "UCR_NotSpecified"
         },
         "Rape": {
-            "crimeType": "Rape"
+            "crimeType": "ForcibleRape"
         },
         "Motor Vehicle Theft": {
             "crimeType": "MotorVehicleTheft"
@@ -232,7 +240,7 @@
             "crimeType": "AllOtherLarceny"
         },
         "Theft of Motor Vehicle Parts or Accessories": {
-            "crimeType": "TheftofMotorVehiclePartsorAccessories"
+            "crimeType": "TheftOfMotorVehiclePartsOrAccessories"
         },
         "Fondling": {
             "crimeType": "Fondling"
@@ -292,7 +300,7 @@
             "crimeType": "StatutoryRape"
         },
         "Theft From Coin-Operated Machine or Device": {
-            "crimeType": "TheftFromCoinOperatedMachineorDevice"
+            "crimeType": "TheftFromCoinOperatedMachineOrDevice"
         },
         "Impersonation": {
             "crimeType": "Impersonation"
@@ -304,7 +312,7 @@
             "crimeType": "WireFraud"
         },
         "Assisting or Promoting Prostitution": {
-            "crimeType": "AssistingorPromotingProstitution"
+            "crimeType": "AssistingOrPromotingProstitution"
         },
         "Purchasing Prostitution": {
             "crimeType": "PurchasingProstitution"
@@ -326,32 +334,6 @@
         },
         "Animal Cruelty": {
             "crimeType": "AnimalCruelty"
-        }
-    },
-    "VICTIM_TYPES": {
-        "Individual": {
-            "victimType": "Person"
-        },
-        "Religious Organization": {
-            "victimType": "ReligiousOrganization"
-        },
-        "Society/Public": {
-            "victimType": "Society"
-        },
-        "Business": {
-            "victimType": "USC_Establishment"
-        },
-        "Other": {
-            "victimType": "UCR_OtherVictimType"
-        },
-        "Government": {
-            "victimType": "Government"
-        },
-        "Unknown": {
-            "victimType": "UCR_UnknownVictimType"
-        },
-        "Financial Institution": {
-            "victimType": "FinancialInstitution"
         }
     }
 }
