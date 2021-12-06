@@ -27,103 +27,103 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 from statvar_dcid_generator import get_statvar_dcid
 
 # Columns to input from source data
-INPUT_COLUMNS = [
+_INPUT_COLUMNS = [
     'INCIDENT_ID', 'DATA_YEAR', 'OFFENDER_RACE', 'OFFENDER_ETHNICITY',
     'STATE_ABBR', 'OFFENSE_NAME', 'BIAS_DESC', 'AGENCY_TYPE_NAME',
     'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'PUB_AGENCY_NAME'
 ]
 
 # Columns which do not contribute to a constraint property value in stat var
-NONPV_COLUMNS = [
+_NONPV_COLUMNS = [
     'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'INCIDENT_ID', 'DATA_YEAR',
     'STATE_ABBR', 'AGENCY_TYPE_NAME', 'PUB_AGENCY_NAME', 'LOCATION_NAME',
     'BIAS_AGAINST'
 ]
 
-# A dict to map bias descriptions to their category
-map_dict = {
-    "Anti-Black or African American":
-        "race",
-    "Anti-White":
-        "race",
-    "Anti-Native Hawaiian or Other Pacific Islander":
-        "race",
-    "Anti-Arab":
-        "race",
-    "Anti-Asian":
-        "race",
-    "Anti-American Indian or Alaska Native":
-        "race",
-    "Anti-Other Race/Ethnicity/Ancestry":
-        "race",
-    "Anti-Multiple Races, Group":
-        "race",
-    "Anti-Protestant":
-        "religion",
-    "Anti-Other Religion":
-        "religion",
-    "Anti-Jewish":
-        "religion",
-    "Anti-Islamic (Muslim)":
-        "religion",
-    "Anti-Jehovah's Witness":
-        "religion",
-    "Anti-Mormon":
-        "religion",
-    "Anti-Buddhist":
-        "religion",
-    "Anti-Sikh":
-        "religion",
-    "Anti-Other Christian":
-        "religion",
-    "Anti-Hindu":
-        "religion",
-    "Anti-Catholic":
-        "religion",
-    "Anti-Eastern Orthodox (Russian, Greek, Other)":
-        "religion",
-    "Anti-Atheism/Agnosticism":
-        "religion",
-    "Anti-Multiple Religions, Group":
-        "religion",
-    "Anti-Heterosexual":
-        "sexualOrientation",
-    "Anti-Lesbian (Female)":
-        "sexualOrientation",
-    "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)":
-        "sexualOrientation",
-    "Anti-Bisexual":
-        "sexualOrientation",
-    "Anti-Gay (Male)":
-        "sexualOrientation",
-    "Anti-Hispanic or Latino":
-        "ethnicity",
-    "Anti-Physical Disability":
-        "disabilityStatus",
-    "Anti-Mental Disability":
-        "disabilityStatus",
-    "Anti-Male":
-        "gender",
-    "Anti-Female":
-        "gender",
-    "Anti-Transgender":
-        "TransgenderOrGenderNonConforming",
-    "Anti-Gender Non-Conforming":
-        "TransgenderOrGenderNonConforming",
-    "Unknown (offender's motivation not known)":
-        "UnknownBias"
+# A dict to map bias descriptions to their bias category
+_BIAS_CATEGORY_MAP = {
+    'Anti-Black or African American':
+        'race',
+    'Anti-White':
+        'race',
+    'Anti-Native Hawaiian or Other Pacific Islander':
+        'race',
+    'Anti-Arab':
+        'race',
+    'Anti-Asian':
+        'race',
+    'Anti-American Indian or Alaska Native':
+        'race',
+    'Anti-Other Race/Ethnicity/Ancestry':
+        'race',
+    'Anti-Multiple Races, Group':
+        'race',
+    'Anti-Protestant':
+        'religion',
+    'Anti-Other Religion':
+        'religion',
+    'Anti-Jewish':
+        'religion',
+    'Anti-Islamic (Muslim)':
+        'religion',
+    'Anti-Jehovah\'s Witness':
+        'religion',
+    'Anti-Mormon':
+        'religion',
+    'Anti-Buddhist':
+        'religion',
+    'Anti-Sikh':
+        'religion',
+    'Anti-Other Christian':
+        'religion',
+    'Anti-Hindu':
+        'religion',
+    'Anti-Catholic':
+        'religion',
+    'Anti-Eastern Orthodox (Russian, Greek, Other)':
+        'religion',
+    'Anti-Atheism/Agnosticism':
+        'religion',
+    'Anti-Multiple Religions, Group':
+        'religion',
+    'Anti-Heterosexual':
+        'sexualOrientation',
+    'Anti-Lesbian (Female)':
+        'sexualOrientation',
+    'Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)':
+        'sexualOrientation',
+    'Anti-Bisexual':
+        'sexualOrientation',
+    'Anti-Gay (Male)':
+        'sexualOrientation',
+    'Anti-Hispanic or Latino':
+        'ethnicity',
+    'Anti-Physical Disability':
+        'disabilityStatus',
+    'Anti-Mental Disability':
+        'disabilityStatus',
+    'Anti-Male':
+        'gender',
+    'Anti-Female':
+        'gender',
+    'Anti-Transgender':
+        'TransgenderOrGenderNonConforming',
+    'Anti-Gender Non-Conforming':
+        'TransgenderOrGenderNonConforming',
+    'Unknown (offender\'s motivation not known)':
+        'UnknownBias'
 }
 
 
 def add_bias_type(row):
-    if len(row['BIAS_DESC'].split(";")) > 1:
+    if len(row['BIAS_DESC'].split(';')) > 1:
         row['BIAS_AGAINST'] = 'MultipleBias'
 
-    elif row['BIAS_DESC'] in map_dict:
-        row['BIAS_AGAINST'] = map_dict[row['BIAS_DESC']]
+    elif row['BIAS_DESC'] in _BIAS_CATEGORY_MAP:
+        row['BIAS_AGAINST'] = _BIAS_CATEGORY_MAP[row['BIAS_DESC']]
 
     else:
-        print(f"WARNING: No bias type found for {row['BIAS_DESC']}")
+        print(f'WARNING: No bias type found for {row['BIAS_DESC']}')
 
     return row
 
@@ -187,8 +187,8 @@ def _write_to_csv(df, csv_file_name):
     df.to_csv(csv_file_name, index=False)
 
 
-if __name__ == "__main__":
-    df = pd.read_csv('source_data/hate_crime.csv', usecols=INPUT_COLUMNS)
+if __name__ == '__main__':
+    df = pd.read_csv('source_data/hate_crime.csv', usecols=_INPUT_COLUMNS)
     fill_col = df.columns[df.isnull().any()].tolist()
     df[fill_col] = df[fill_col].fillna('Unknown')
     df['BIAS_AGAINST'] = ''

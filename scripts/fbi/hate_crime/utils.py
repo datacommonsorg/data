@@ -44,14 +44,14 @@ def agg_hate_crime_df(
 
     if not agg_dict:
         print(
-            "ERROR: Atleast one column with an aggregation method is required, the given call has an empty agg_dict param. No aggregations are attempted."
+            'ERROR: Atleast one column with an aggregation method is required, the given call has an empty agg_dict param. No aggregations are attempted.'
         )
         return df
     else:
         return df.groupby(by=groupby_cols, as_index=multi_index).agg(agg_dict)
 
 
-def flatten_by_column(df, column_name, sep=";"):
+def flatten_by_column(df, column_name, sep=';'):
     df_copy = df.copy()
     df_copy[column_name] = df_copy[column_name].str.split(sep)
     return df_copy.explode(column_name)
