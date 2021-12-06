@@ -29,7 +29,7 @@ from statvar_dcid_generator import get_statvar_dcid
 # Columns to input from source data
 INPUT_COLUMNS = [
     'INCIDENT_ID', 'DATA_YEAR', 'OFFENDER_RACE', 'OFFENDER_ETHNICITY',
-    'STATE_ABBR', 'OFFENSE_NAME', 'BIAS_DESC', 'AGENCY_TYPE_NAME', 
+    'STATE_ABBR', 'OFFENSE_NAME', 'BIAS_DESC', 'AGENCY_TYPE_NAME',
     'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'PUB_AGENCY_NAME'
 ]
 
@@ -172,6 +172,7 @@ def _write_statvar_mcf(statvar_list, f):
 
     f.write(final_mcf)
 
+
 def create_aggr(input_df, config, statvar_list, groupby_cols, agg_dict,
                 population_type):
     output_df_list = make_time_place_aggregation(input_df,
@@ -186,10 +187,12 @@ def create_aggr(input_df, config, statvar_list, groupby_cols, agg_dict,
 
     return output_df_list[1:]  # Skipping national level
 
+
 def _write_to_csv(df, csv_file_name):
     df['Place'].replace('', np.nan, inplace=True)
     df.dropna(subset=['Place'], inplace=True)
     df.to_csv(csv_file_name, index=False)
+
 
 if __name__ == "__main__":
     df = pd.read_csv('source_data/hate_crime.csv', usecols=INPUT_COLUMNS)
@@ -199,7 +202,7 @@ if __name__ == "__main__":
     incident_df = df.apply(add_bias_type, axis=1)
 
     offense_df = flatten_by_column(incident_df, 'OFFENSE_NAME')
-    
+
     with open('config.json', 'r') as f:
         config = json.load(f)
 
@@ -329,7 +332,6 @@ if __name__ == "__main__":
 
     final_df = pd.concat(offender_race_list)
     _write_to_csv(final_df, 'offender_race_by_bias.csv')
-
 
     # Total incidents by offender ethnicity bias
     offender_ethnicity_list = []
