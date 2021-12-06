@@ -54,12 +54,32 @@ with open(os.path.join(city_geocodes_csv_path), encoding="utf8") as csvfile:
 
 
 def update_state_abbr(state_abbr):
+    """
+    Replaces the incorrect state code with the correct one
+
+    Parameters:
+        state_abbr (str): Two letter code for US State
+    
+    Returns:
+        state_abbr(str): Corrected two letter US State code
+    """
+
     if state_abbr in _US_GEO_CODE_UPDATE_MAP:
         state_abbr = _US_GEO_CODE_UPDATE_MAP[state_abbr]
     return state_abbr
 
 
 def get_city_variants(city):
+    """
+    Get a list of all the variants of the input city name available
+
+    Parameters:
+        city (str): input city name
+    
+    Returns:
+        city_variants(list): list of all the variants of the input city name
+    """
+
     city = city.strip().lower()
     city_variants = [city]
 
@@ -68,7 +88,8 @@ def get_city_variants(city):
     #         city_variants.extend(city.split(delim))
 
     city_variants.extend([
-        city + " city", city + " village",
+        city + " city", city + " village", city + " town", city + " township",
+        city + " borough",
         city.removesuffix("city"),
         city.removesuffix("village"),
         city.removesuffix("town"),
@@ -79,17 +100,19 @@ def get_city_variants(city):
     return city_variants
 
 
-def read_city_geocodes():
-    """ Read geo codes from city_geocodes """
-    city = {}
-    with open(os.path.join(city_geocodes_csv_path), encoding="utf8") as csvfile:
-        csv_reader = csv.reader(csvfile)
-        for a in csv_reader:
-            city[a[0]] = a[1]
-    return city
-
-
 def city_to_dcid(state_abbr, city):
+    """
+    Resolve the input city name to geoId using city_geo_codes map
+
+    Parameters:
+        state_abbr(str): two digit US State code to uniquely identify the input city
+        city (str): input city name
+    
+    Returns:
+        geo_id(str): geoId string if the city name geoId is resolved else ''
+    """
+
+    geo_id = ''
     city_valid_names = get_city_variants(city)
     city_state_list = [
         city.strip().lower() + " " + state_abbr.lower()
@@ -98,33 +121,62 @@ def city_to_dcid(state_abbr, city):
 
     for city_state in city_state_list:
         if city_state in city_geo_codes:
-            return "geoId/" + city_geo_codes[city_state]
-    return ''
+            geo_id = "geoId/" + city_geo_codes[city_state]
+            break
+    return geo_id
 
 
 def preprocess_county(county):
+    """
+    Helper function to preprocess the input county name
+
+    Parameters:
+        county (str): input county name
+    
+    Returns:
+        county(str): preprocessed county name
+    """
+
+    county = county.strip()
     for suffix in _IGNORE_COUNTY_SUFFIX:
-        if suffix in county.strip():
+        if county.endswith(suffix):
             return county.removesuffix(suffix).strip()
-    return county.strip()
+    return county
 
 
 def get_county_variants(county):
+    """
+    Get a list of all the variants of the input county name available
+
+    Parameters:
+        county (str): input county name
+    
+    Returns:
+        county_variants(list): list of all the variants of the input county name
+    """
     county_variants = [
         county,
+        county + " Parish",
         county + " County",
         county.removesuffix('County'),
-        county + " Parish",
     ]
     return county_variants
 
 
 def county_to_dcid(state_abbr, county):
+    """
+    Resolve the input county name to geoId using county to dcid maps
+
+    Parameters:
+        state_abbr(str): two digit US State code to uniquely identify the input county
+        county (str): input county name
+    
+    Returns:
+        geo_id (str): geoId string if the county name geoId is resolved else ''
+    """
 
     county = preprocess_county(county)
-
     county_valid_names = get_county_variants(county)
-
     geo_id = ''
 
     if state_abbr in COUNTY_MAP:
@@ -143,6 +195,15 @@ def county_to_dcid(state_abbr, county):
 
 
 def state_to_dcid(state_code):
+    """
+    Resolve the input state code to geoId using state to dcid map
+
+    Parameters:
+        state_code(str): two digit US State code
+        
+    Returns:
+        (str): geoId string if the state code geoId is resolved else ''
+    """
 
     if state_code in _IGNORE_STATE_ABBR:
         return ''
@@ -154,14 +215,22 @@ def state_to_dcid(state_code):
 
 
 def convert_to_place_dcid(state_abbr, geo_name='', geo_type='State'):
-    """resolves GEOID based on the FBI Hate crime dataset Agency Type and Name. 
-    If a geoId could not be resolved, the function returns an empty string ('').
+    """
+    Wrapper function to resolve the GEOID based on the FBI Hate crime dataset Agency Type and Name
+
+    Parameters:
+        state_abbr(str): two digit US State code
+        geo_name (str): name of the geo (e.g. county/city name etc)
+        geo_type (str): type of the input geo (State/County/City, default : State)
+    
+    Returns:
+        (str): geoId string if the geoId is resolved else returns ''
     """
 
     # Update anonymous State Abbreviations
     state_abbr = update_state_abbr(state_abbr)
 
-    if geo_type == 'State':
+    if geo_type == 'State' and not geo_name:
         return state_to_dcid(state_abbr)
 
     elif geo_type == 'County':

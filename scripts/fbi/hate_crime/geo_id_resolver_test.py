@@ -47,6 +47,13 @@ _Test_Cases = [{
         'geo_type': 'City'
     },
     'expected_dcid': 'geoId/0541000'
+}, {
+    'input': {
+        'state_abbr': 'CA',
+        'geo_name': 'Las vegas',
+        'geo_type': 'State'
+    },
+    'expected_dcid': ''
 }]
 
 _County_Test_Cases = [
