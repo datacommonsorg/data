@@ -173,8 +173,8 @@ def create_aggr(input_df, config, statvar_list, groupby_cols, agg_dict,
                                                  agg_dict=agg_dict,
                                                  multi_index=False)
 
-    output_df_list.pop(2) # Remove county level data
-    output_df_list.pop(0) # Remove country level data
+    output_df_list.pop(2)  # Remove county level data
+    output_df_list.pop(0)  # Remove country level data
 
     for idx in range(len(output_df_list)):
         output_df_list[idx], statvars = _gen_statvar_mcf(
@@ -204,14 +204,14 @@ if __name__ == '__main__':
 
     # Incidents by StatVar
     incident_df, statvar_list = _gen_statvar_mcf(
-            incident_df, config, population_type='CriminalIncidents')
+        incident_df, config, population_type='CriminalIncidents')
 
     incident_by_statvar = make_time_place_aggregation(
         incident_df,
         groupby_cols=['StatVar'],
         agg_dict={'INCIDENT_ID': 'count'},
         multi_index=False)
-    incident_by_statvar.pop(2) # Drop county level
+    incident_by_statvar.pop(2)  # Drop county level
     final_df = pd.concat(incident_by_statvar)
     _write_to_csv(final_df, 'output.csv')
 
