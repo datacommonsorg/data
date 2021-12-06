@@ -3,7 +3,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -12,7 +12,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -21,7 +21,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -30,7 +30,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -39,7 +39,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -48,7 +48,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -57,7 +57,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -66,7 +66,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -75,7 +75,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -84,7 +84,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
@@ -93,7 +93,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_DepartmentOfEducation
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5_PrivateUnaidedButRecognized
@@ -101,7 +101,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -110,7 +110,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -119,7 +119,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -128,7 +128,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -137,7 +137,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -146,7 +146,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -155,7 +155,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -164,7 +164,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -173,7 +173,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -182,7 +182,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
@@ -191,7 +191,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5_OtherGovernmentManaged
@@ -199,7 +199,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -208,7 +208,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -217,7 +217,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -226,7 +226,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -235,7 +235,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -244,7 +244,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -253,7 +253,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -262,7 +262,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -271,7 +271,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -280,7 +280,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
@@ -289,7 +289,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_OtherGovernmentManaged
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5_CentralGovernment
@@ -297,7 +297,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -306,7 +306,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -315,7 +315,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -324,7 +324,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -333,7 +333,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -342,7 +342,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -351,7 +351,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -360,7 +360,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -369,7 +369,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -378,7 +378,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_CentralGovernment
 
@@ -387,7 +387,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_CentralGovernment
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5_Unrecognized
@@ -395,7 +395,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -404,7 +404,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -413,7 +413,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -422,7 +422,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -431,7 +431,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -440,7 +440,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -449,7 +449,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -458,7 +458,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -467,7 +467,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -476,7 +476,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_Unrecognized
 
@@ -485,7 +485,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_Unrecognized
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5
@@ -493,7 +493,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 
 Node: dcid:Count_School_HasComputer_UpperPrimarySchool_Grade1To8
@@ -501,7 +501,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 
 Node: dcid:Count_School_HasComputer_HigherSecondarySchool_Grade1To12
@@ -509,7 +509,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 
 Node: dcid:Count_School_HasComputer_UpperPrimarySchool_Grade6To8
@@ -517,7 +517,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 
 Node: dcid:Count_School_HasComputer_UpperPrimarySchool_Grade6To12
@@ -525,7 +525,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 
 Node: dcid:Count_School_HasComputer_SeniorSecondarySchool_Grade1To10
@@ -533,7 +533,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 
 Node: dcid:Count_School_HasComputer_SeniorSecondarySchool_Grade6To10
@@ -541,7 +541,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 
 Node: dcid:Count_School_HasComputer_SeniorSecondarySchool_Grade9To10
@@ -549,7 +549,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 
 Node: dcid:Count_School_HasComputer_HigherSecondarySchool_Grade9To12
@@ -557,7 +557,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 
 Node: dcid:Count_School_HasComputer_HigherSecondarySchool_Grade11To12
@@ -565,7 +565,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 
 Node: dcid:Count_School_HasComputer
@@ -573,14 +573,14 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5_GovernmentAided
 typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -589,7 +589,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -598,7 +598,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -607,7 +607,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -616,7 +616,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -625,7 +625,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -634,7 +634,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -643,7 +643,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -652,7 +652,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -661,7 +661,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_GovernmentAided
 
@@ -670,7 +670,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_GovernmentAided
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5_KendriyaVidyalaya
@@ -678,7 +678,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -687,7 +687,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -696,7 +696,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -705,7 +705,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -714,7 +714,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -723,7 +723,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -732,7 +732,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -741,7 +741,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -750,7 +750,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -759,7 +759,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
@@ -768,7 +768,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_KendriyaVidyalaya
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5_JawaharNavodayaVidyalaya
@@ -776,7 +776,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -785,7 +785,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -794,7 +794,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -803,7 +803,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -812,7 +812,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -821,7 +821,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -830,7 +830,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -839,7 +839,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -848,7 +848,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -857,7 +857,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
@@ -866,7 +866,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
 
 Node: dcid:Count_School_HasComputer_PrimarySchool_Grade1To5_OtherCentralGovernmentSchools
@@ -874,7 +874,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -883,7 +883,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -892,7 +892,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -901,7 +901,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -910,7 +910,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -919,7 +919,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -928,7 +928,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -937,7 +937,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -946,7 +946,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -955,7 +955,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 
@@ -964,6 +964,6 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:School
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-amenityFeature: dcs:Computer
+amenityFeature: dcs:ComputerFacility
 schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
 

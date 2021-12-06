@@ -39,7 +39,7 @@ class UDISESchoolsHavingComputerAvailable(UDISEIndiaSchoolDataLoaderBase):
 
     def _get_base_constraints(self, data_row):
         constraints = []
-        constraints.append("amenityFeature: dcs:Computer")
+        constraints.append("amenityFeature: dcs:ComputerFacility")
         return constraints
 
 
