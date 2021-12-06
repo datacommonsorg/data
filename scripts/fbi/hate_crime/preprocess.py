@@ -140,13 +140,6 @@ def _gen_statvar_mcf(df, config, population_type='CriminalIncidents'):
             elif col in config:
                 if row[col] in config[col]:
                     statvar.update(config[col][row[col]])
-                # else:
-                #     print(f"ERROR: {row[col]}: {col} not in config")
-            else:
-                pass
-                # if col not in NONPV_COLUMNS:
-                #     print(f"ERROR: {col} not in config")
-
         statvar['populationType'] = population_type
         statvar['Node'] = get_statvar_dcid(statvar)
         statvar_dcid_list.append(statvar['Node'])
@@ -226,17 +219,14 @@ if __name__ == "__main__":
 
     # Total Incidents
     statvar_list = []
-    total_incidents = make_time_place_aggregation(
-        incident_df,
-        groupby_cols=[],
-        agg_dict={'INCIDENT_ID': 'count'},
-        multi_index=False)
-    for idx in range(len(total_incidents)):
-        total_incidents[idx], statvars = _gen_statvar_mcf(
-            total_incidents[idx], config, population_type='CriminalIncidents')
-        statvar_list.extend(statvars)
-
-    final_df = pd.concat(total_incidents[1:])
+    output_df_list = create_aggr(incident_df,
+                                 config,
+                                 statvar_list,
+                                 groupby_cols=[],
+                                 agg_dict={'INCIDENT_ID': 'count'},
+                                 population_type='CriminalIncidents')
+    final_df = pd.concat(output_df_list)
+    _write_to_csv(final_df, 'total_incidents.csv')
 
     # Total Incidents by Bias
     single_bias_incidents = incident_df[incident_df['MULTIPLE_BIAS'] == 'S']
