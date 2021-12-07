@@ -30,7 +30,8 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 from alpha2_to_dcid import USSTATE_MAP
 from county_to_dcid import COUNTY_MAP
 
-city_geocodes_csv_path = os.path.join(_SCRIPT_PATH, '../crime/city_geocodes.csv')
+city_geocodes_csv_path = os.path.join(_SCRIPT_PATH,
+                                      '../crime/city_geocodes.csv')
 
 _US_GEO_CODE_UPDATE_MAP = {
     # Replacing/Updating GeoID given in the data. Required in case of wrong geoid mentioned in the data.

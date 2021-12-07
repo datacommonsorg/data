@@ -40,7 +40,6 @@ def agg_hate_crime_df(
     To aggregate the incident counts by year, place and state, the function call will be:
     agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
     """
-    #columns_to_groupby = ['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] + groupby_cols
 
     if not agg_dict:
         print(
