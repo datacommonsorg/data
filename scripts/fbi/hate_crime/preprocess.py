@@ -33,13 +33,6 @@ _INPUT_COLUMNS = [
     'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'PUB_AGENCY_NAME'
 ]
 
-# Columns which do not contribute to a constraint property value in stat var
-_NONPV_COLUMNS = [
-    'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'INCIDENT_ID', 'DATA_YEAR',
-    'STATE_ABBR', 'AGENCY_TYPE_NAME', 'PUB_AGENCY_NAME', 'LOCATION_NAME',
-    'BIAS_AGAINST'
-]
-
 # A dict to map bias descriptions to their bias category
 _BIAS_CATEGORY_MAP = {
     'Anti-Black or African American':

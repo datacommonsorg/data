@@ -204,7 +204,7 @@
             "crimeType": "Robbery"
         },
         "Destruction/Damage/Vandalism of Property": {
-            "crimeType": "DestructionDamageVandalismOfProperty"
+            "crimeType": "DestructionOrDamageOrVandalismOfProperty"
         },
         "Arson": {
             "crimeType": "Arson"
@@ -219,13 +219,13 @@
             "crimeType": "UCR_NotSpecified"
         },
         "Rape": {
-            "crimeType": "ForcibleRape"
+            "crimeType": "Rape"
         },
         "Motor Vehicle Theft": {
             "crimeType": "MotorVehicleTheft"
         },
         "Drug/Narcotic Violations": {
-            "crimeType": "DrugNarcoticViolations"
+            "crimeType": "DrugOrNarcoticViolations"
         },
         "Weapon Law Violations": {
             "crimeType": "WeaponLawViolations"
@@ -237,7 +237,7 @@
             "crimeType": "Shoplifting"
         },
         "All Other Larceny": {
-            "crimeType": "AllOtherLarceny"
+            "crimeType": "UCR_AllOtherLarceny"
         },
         "Theft of Motor Vehicle Parts or Accessories": {
             "crimeType": "TheftOfMotorVehiclePartsOrAccessories"
@@ -246,16 +246,16 @@
             "crimeType": "Fondling"
         },
         "Counterfeiting/Forgery": {
-            "crimeType": "CounterfeitingForgery"
+            "crimeType": "CounterfeitingOrForgery"
         },
         "Kidnapping/Abduction": {
-            "crimeType": "KidnappingAbduction"
+            "crimeType": "KidnappingOrAbduction"
         },
         "Theft From Building": {
             "crimeType": "TheftFromBuilding"
         },
         "Pornography/Obscene Material": {
-            "crimeType": "PornographyObsceneMaterial"
+            "crimeType": "PornographyOrObsceneMaterial"
         },
         "Embezzlement": {
             "crimeType": "Embezzlement"
@@ -267,13 +267,13 @@
             "crimeType": "DrugEquipmentViolations"
         },
         "Credit Card/Automated Teller Machine Fraud": {
-            "crimeType": "CreditCardAutomatedTellerMachineFraud"
+            "crimeType": "CreditCardOrAutomatedTellerMachineFraud"
         },
         "Sexual Assault With An Object": {
             "crimeType": "SexualAssaultWithAnObject"
         },
         "False Pretenses/Swindle/Confidence Game": {
-            "crimeType": "FalsePretensesSwindleConfidenceGame"
+            "crimeType": "FalsePretenseOrSwindleOrConfidenceGame"
         },
         "Pocket-picking": {
             "crimeType": "PocketPicking"
@@ -282,7 +282,7 @@
             "crimeType": "WelfareFraud"
         },
         "Extortion/Blackmail": {
-            "crimeType": "ExtortionBlackmail"
+            "crimeType": "ExtortionOrBlackmail"
         },
         "Stolen Property Offenses": {
             "crimeType": "StolenPropertyOffenses"
@@ -324,13 +324,13 @@
             "crimeType": "IdentityTheft"
         },
         "Human Trafficking, Commercial Sex Acts": {
-            "crimeType": "HumanTraffickingCommercialSexActs"
+            "crimeType": "HumanTrafficking_CommercialSexActs"
         },
         "Hacking/Computer Invasion": {
-            "crimeType": "HackingComputerInvasion"
+            "crimeType": "HackingOrComputerInvasion"
         },
         "Betting/Wagering": {
-            "crimeType": "BettingWagering"
+            "crimeType": "BettingOrWagering"
         },
         "Animal Cruelty": {
             "crimeType": "AnimalCruelty"
