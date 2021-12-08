@@ -11,136 +11,89 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Utility functions for the FBI Hate Crime import."""
 
 import pandas as pd
 from geo_id_resolver import state_to_dcid, county_to_dcid, city_to_dcid
 
 
-def agg_hate_crime_df(
-        df,
-        groupby_cols=['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'],
-        agg_dict={},
-        multi_index=False):
-    """
-    Utility function where different aggregations of the hate crime dataset is done, by specific how specific columns
-    needs to be aggregated. By default aggregations are done by year, place and state.
-    
-    Params:
-    - df (pandas.DataFrame): raw dataframe of fbi_hatecrimes csv file
-    - groupby_cols (list): list of additional columns to be used for group by. Default aggregation is done with
-    columns like year, place and state, additional columns based on which groupby needs to be done can be specified 
-    as a list. (default: [])
-    - agg_dict (dictionary): dictionary containing which column is aggregated by which aggregation method.(default: {})
-    - multi_index (bool): Flag if set returns multi-index dataframe (default: False)
-    
-    Output:
-    - agg_df (pandas.DataFrame): output will be the aggregated dataframe
-    
+def agg_hate_crime_df(df: pd.DataFrame,
+                      groupby_cols: list = None,
+                      agg_dict: dict = None,
+                      multi_index: bool = False) -> pd.DataFrame:
+    """Utility function where different aggregations of the a dataframe can be
+    computed. By default aggregations are done by year, place and state.
+
+    Args:
+        df: dataframe to aggregate on.
+        groupby_cols: list of additional columns to be used for group by.
+          Default aggregation is done with columns like year, place and state,
+          additional columns based on which groupby needs to be done can be
+          specified as a list. Defaults to
+          ['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'].
+        agg_dict: dictionary where the key is the column to aggregate on and
+          it's value is the aggregation method. Defaults to {}.
+        multi_index: Flag if set returns multi-index dataframe.
+
+    Returns:
+        The aggregated dataframe after calling pandas.DataFrame.groupby().
+        Returns the original dataframe if agg_dict is None.
+
     Example:
-    To aggregate the incident counts by year, place and state, the function call will be:
-    agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
+        To aggregate the incident counts by year, place and state, use
+        agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
     """
-
-    if not agg_dict:
-        print(
-            'ERROR: Atleast one column with an aggregation method is required, the given call has an empty agg_dict param. No aggregations are attempted.'
-        )
-        return df
-    else:
-        return df.groupby(by=groupby_cols, as_index=multi_index).agg(agg_dict)
+    if groupby_cols is None:
+        groupby_cols = ['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR']
+    if agg_dict is None:
+        agg_dict = {}
+    return df.groupby(by=groupby_cols, as_index=multi_index).agg(agg_dict)
 
 
-def flatten_by_column(df, column_name, sep=';'):
+def flatten_by_column(df: pd.DataFrame,
+                      column_name: str,
+                      sep: str = ';') -> pd.DataFrame:
+    """Transforms each element which contains multiple values to a row,
+    replicating index values
+
+    Args:
+        df: A pandas dataframe to flatten
+        column_name: The column where elements contain multiple values
+        sep: The separator in elements with multiple values
+
+    Returns:
+        A dataframe after calling pandas.DataFrame.explode().
+    """
     df_copy = df.copy()
     df_copy[column_name] = df_copy[column_name].str.split(sep)
     return df_copy.explode(column_name)
 
 
 def make_time_place_aggregation(dataframe,
-                                groupby_cols=[],
-                                agg_dict={},
+                                groupby_cols=None,
+                                agg_dict=None,
                                 multi_index=False):
+    """Utility function where different aggregations of the hate crime dataset
+    is done, by year and geo type (country, state, county and city).
+
+    Args:
+        dataframe: dataframe to aggregate on.
+        groupby_cols: list of additional columns to be used for group by.
+          Default aggregation is done with columns like year, place and state,
+          additional columns based on which groupby needs to be done can be
+          specified as a list. Defaults to [].
+        agg_dict: dictionary where the key is the column to aggregate on and
+          it's value is the aggregation method. Defaults to {}
+        multi_index: Flag if set returns multi-index dataframe.
+
+    Returns:
+        A list whose elements are dataframes aggregated at a country, state,
+        county and city level.
     """
-    Utility function where different aggregations of the hate crime dataset is done, by specific how specific columns
-    needs to be aggregated. By default aggregations are done by year, place and state.
-    
-    Params:
-    - dataframe (pandas.DataFrame): raw dataframe of fbi_hatecrimes csv file
-    - groupby_cols (list): list of additional columns to be used for group by. Default aggregation is done with
-    columns like year, place and state, additional columns based on which groupby needs to be done can be specified 
-    as a list. (default: [])
-    - agg_dict (dictionary): dictionary containing which column is aggregated by which aggregation method.(default: {})
-    - multi_index (bool): Flag if set returns multi-index dataframe (default: False)
-    
-    Output:
-    - agg_df (pandas.DataFrame): output will be the aggregated dataframe
-    
-    Example:
-    To aggregate the incident counts by year, place and state, the function call will be:
-    agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
-    """
-    ## Year + Country
-    agg_country = agg_hate_crime_df(dataframe,
-                                    groupby_cols=(['DATA_YEAR'] + groupby_cols),
-                                    agg_dict=agg_dict,
-                                    multi_index=multi_index)
-    agg_country['STATE_ABBR'] = 'USA'
-
-    ## Year + State
-    agg_state = agg_hate_crime_df(dataframe,
-                                  groupby_cols=(['DATA_YEAR', 'STATE_ABBR'] +
-                                                groupby_cols),
-                                  agg_dict=agg_dict,
-                                  multi_index=False)
-
-    ## Year + County
-    county_df = dataframe[dataframe['AGENCY_TYPE_NAME'] == 'County']
-    county_df['STATE_ABBR'] = county_df['PUB_AGENCY_NAME'] + ' ' + county_df[
-        'STATE_ABBR']
-    agg_county = agg_hate_crime_df(
-        county_df,
-        groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] +
-                      groupby_cols),
-        agg_dict=agg_dict,
-        multi_index=multi_index)
-
-    ## Year + City
-    city_df = dataframe[dataframe['AGENCY_TYPE_NAME'] == 'City']
-    city_df[
-        'STATE_ABBR'] = city_df['PUB_AGENCY_NAME'] + ' ' + city_df['STATE_ABBR']
-    agg_city = agg_hate_crime_df(
-        city_df,
-        groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] +
-                      groupby_cols),
-        agg_dict=agg_dict,
-        multi_index=multi_index)
-
-    return [agg_country, agg_state, agg_county, agg_city]
-
-
-def make_time_place_aggregation(dataframe,
-                                groupby_cols=[],
-                                agg_dict={},
-                                multi_index=False):
-    """
-    Utility function where different aggregations of the hate crime dataset is done, by specific how specific columns
-    needs to be aggregated. By default aggregations are done by year, place and state.
-    
-    Params:
-    - dataframe (pandas.DataFrame): raw dataframe of fbi_hatecrimes csv file
-    - groupby_cols (list): list of additional columns to be used for group by. Default aggregation is done with
-    columns like year, place and state, additional columns based on which groupby needs to be done can be specified 
-    as a list. (default: [])
-    - agg_dict (dictionary): dictionary containing which column is aggregated by which aggregation method.(default: {})
-    - multi_index (bool): Flag if set returns multi-index dataframe (default: False)
-    
-    Output:
-    - agg_df (pandas.DataFrame): output will be the aggregated dataframe
-    
-    Example:
-    To aggregate the incident counts by year, place and state, the function call will be:
-    agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
-    """
+    if groupby_cols is None:
+        groupby_cols = []
+    if agg_dict is None:
+        agg_dict = {}
     ## Year + Country
     agg_country = agg_hate_crime_df(dataframe,
                                     groupby_cols=(['DATA_YEAR'] + groupby_cols),

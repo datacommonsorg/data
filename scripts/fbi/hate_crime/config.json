@@ -50,6 +50,32 @@
             "biasMotivation": "MultipleBias"
         }
     },
+    "BIAS_CATEGORY": {
+        "race": {
+            "biasMotivation": "race"
+        },
+        "religion": {
+            "biasMotivation": "religion"
+        },
+        "sexualOrientation": {
+            "biasMotivation": "sexualOrientation"
+        },
+        "ethnicity": {
+            "biasMotivation": "ethnicity"
+        },
+        "disabilityStatus": {
+            "biasMotivation": "disabilityStatus"
+        },
+        "gender": {
+            "biasMotivation": "gender"
+        },
+        "TransgenderOrGenderNonConforming": {
+            "biasMotivation": "TransgenderOrGenderNonConforming"
+        },
+        "UnknownBias": {
+            "biasMotivation": "UnknownBias"
+        }
+    },
     "BIAS_DESC": {
         "Anti-Black or African American": {
             "biasMotivation": "race",

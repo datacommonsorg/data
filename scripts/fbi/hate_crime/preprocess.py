@@ -11,18 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""A script to process FBI Hate Crime data."""
 
 import os
 import sys
-import pandas as pd
 import json
+import pandas as pd
 import numpy as np
 from utils import flatten_by_column, make_time_place_aggregation
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH,
-                             '../../../util/'))  # for statvar_dcid_generator
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 
 from statvar_dcid_generator import get_statvar_dcid
 
@@ -109,65 +109,60 @@ _BIAS_CATEGORY_MAP = {
 
 # A map to generate aggregations on the source data
 _AGGREGATIONS = {
-    'total_incidents.csv': [  # Total Criminal Incidents
-        {
-            'df': 'incident_df',
+    'total_incidents.csv': [{  # Total Criminal Incidents
+        'df': 'incident_df',
+        'args': {
+            'groupby_cols': [],
+            'agg_dict': {
+                'INCIDENT_ID': 'count'
+            },
+            'population_type': 'CriminalIncidents'
+        }
+    }],
+    'bias.csv': [
+        {  # Incidents grouped by bias motivation (anti-white, ...)
+            'df': 'single_bias_incidents',
             'args': {
-                'groupby_cols': [],
+                'groupby_cols': ['BIAS_DESC'],
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
                 'population_type': 'CriminalIncidents'
             }
-        }
-    ],
-    'bias.csv':
-        [  # Total Incidents grouped by bias motivation and bias category
-            {
-                'df': 'single_bias_incidents',
-                'args': {
-                    'groupby_cols': ['BIAS_DESC'],
-                    'agg_dict': {
-                        'INCIDENT_ID': 'count'
-                    },
-                    'population_type': 'CriminalIncidents'
-                }
-            },
-            {
-                'df': 'incident_df',
-                'args': {
-                    'groupby_cols': ['MULTIPLE_BIAS'],
-                    'agg_dict': {
-                        'INCIDENT_ID': 'count'
-                    },
-                    'population_type': 'CriminalIncidents'
-                }
-            },
-            {
-                'df': 'incident_df',
-                'args': {
-                    'groupby_cols': ['BIAS_AGAINST'],
-                    'agg_dict': {
-                        'INCIDENT_ID': 'count'
-                    },
-                    'population_type': 'CriminalIncidents'
-                }
-            },
-        ],
-    'offense.csv': [  # Total incidents by offense type
-        {
-            'df': 'offense_df',
+        },
+        {  # Incidents grouped into single bias / multiple bias
+            'df': 'incident_df',
             'args': {
-                'groupby_cols': ['OFFENSE_NAME'],
+                'groupby_cols': ['MULTIPLE_BIAS'],
                 'agg_dict': {
-                    'INCIDENT_ID': 'nunique'
+                    'INCIDENT_ID': 'count'
                 },
                 'population_type': 'CriminalIncidents'
             }
-        }
+        },
+        {  # Incidents grouped by bias category (race,religion, gender, ...)
+            'df': 'incident_df',
+            'args': {
+                'groupby_cols': ['BIAS_CATEGORY'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'count'
+                },
+                'population_type': 'CriminalIncidents'
+            }
+        },
     ],
-    'offense_by_bias.csv': [  # Total incidents by offense type and bias 
-        {
+    'offense.csv': [{  # Incidents by crime type (arson, robbery, ...)
+        'df': 'offense_df',
+        'args': {
+            'groupby_cols': ['OFFENSE_NAME'],
+            'agg_dict': {
+                'INCIDENT_ID': 'nunique'
+            },
+            'population_type': 'CriminalIncidents'
+        }
+    }],
+    'offense_by_bias.csv': [
+        {  # Incidents by crime type and bias motivation
             'df': 'single_bias_offenses',
             'args': {
                 'groupby_cols': ['BIAS_DESC', 'OFFENSE_NAME'],
@@ -176,7 +171,8 @@ _AGGREGATIONS = {
                 },
                 'population_type': 'CriminalIncidents'
             }
-        }, {
+        },
+        {  # Incidents grouped by crime type and single bias / multiple bias
             'df': 'offense_df',
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS', 'OFFENSE_NAME'],
@@ -185,10 +181,11 @@ _AGGREGATIONS = {
                 },
                 'population_type': 'CriminalIncidents'
             }
-        }, {
+        },
+        {  # Incidents grouped by crime type and bias category
             'df': 'offense_df',
             'args': {
-                'groupby_cols': ['BIAS_AGAINST', 'OFFENSE_NAME'],
+                'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_NAME'],
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
@@ -196,32 +193,28 @@ _AGGREGATIONS = {
             }
         }
     ],
-    'offender_race.csv': [  # Total incidents by offender race
-        {
-            'df': 'incident_df',
-            'args': {
-                'groupby_cols': ['OFFENDER_RACE'],
-                'agg_dict': {
-                    'INCIDENT_ID': 'count'
-                },
-                'population_type': 'CriminalIncidents'
-            }
+    'offender_race.csv': [{  # Total incidents by offender race
+        'df': 'incident_df',
+        'args': {
+            'groupby_cols': ['OFFENDER_RACE'],
+            'agg_dict': {
+                'INCIDENT_ID': 'count'
+            },
+            'population_type': 'CriminalIncidents'
         }
-    ],
-    'offender_ethnicity.csv': [  # Total incidents by offender ethnicity
-        {
-            'df': 'incident_df',
-            'args': {
-                'groupby_cols': ['OFFENDER_ETHNICITY'],
-                'agg_dict': {
-                    'INCIDENT_ID': 'count'
-                },
-                'population_type': 'CriminalIncidents'
-            }
+    }],
+    'offender_ethnicity.csv': [{  # Total incidents by offender ethnicity
+        'df': 'incident_df',
+        'args': {
+            'groupby_cols': ['OFFENDER_ETHNICITY'],
+            'agg_dict': {
+                'INCIDENT_ID': 'count'
+            },
+            'population_type': 'CriminalIncidents'
         }
-    ],
-    'offender_race_by_bias.csv': [  # Total incidents by offender race and bias
-        {
+    }],
+    'offender_race_by_bias.csv': [
+        {  # Incidents by offender race and bias motivation
             'df': 'single_bias_incidents',
             'args': {
                 'groupby_cols': ['OFFENDER_RACE', 'BIAS_DESC'],
@@ -230,7 +223,8 @@ _AGGREGATIONS = {
                 },
                 'population_type': 'CriminalIncidents'
             }
-        }, {
+        },
+        {  # Incidents by offender race and single bias / multiple bias
             'df': 'incident_df',
             'args': {
                 'groupby_cols': ['OFFENDER_RACE', 'MULTIPLE_BIAS'],
@@ -239,10 +233,11 @@ _AGGREGATIONS = {
                 },
                 'population_type': 'CriminalIncidents'
             }
-        }, {
+        },
+        {  # Incidents by offender race and bias category
             'df': 'incident_df',
             'args': {
-                'groupby_cols': ['OFFENDER_RACE', 'BIAS_AGAINST'],
+                'groupby_cols': ['OFFENDER_RACE', 'BIAS_CATEGORY'],
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
@@ -250,46 +245,76 @@ _AGGREGATIONS = {
             }
         }
     ],
-    'offender_ethnicity_by_bias.csv':
-        [  # Total incidents by offender ethnicity and bias
-            {
-                'df': 'single_bias_incidents',
-                'args': {
-                    'groupby_cols': ['OFFENDER_ETHNICITY', 'BIAS_DESC'],
-                    'agg_dict': {
-                        'INCIDENT_ID': 'count'
-                    },
-                    'population_type': 'CriminalIncidents'
-                }
-            }, {
-                'df': 'incident_df',
-                'args': {
-                    'groupby_cols': ['OFFENDER_ETHNICITY', 'MULTIPLE_BIAS'],
-                    'agg_dict': {
-                        'INCIDENT_ID': 'count'
-                    },
-                    'population_type': 'CriminalIncidents'
-                }
-            }, {
-                'df': 'incident_df',
-                'args': {
-                    'groupby_cols': ['OFFENDER_ETHNICITY', 'BIAS_AGAINST'],
-                    'agg_dict': {
-                        'INCIDENT_ID': 'count'
-                    },
-                    'population_type': 'CriminalIncidents'
-                }
+    'offender_ethnicity_by_bias.csv': [
+        {  # Incidents by offender ethnicity and bias motivation
+            'df': 'single_bias_incidents',
+            'args': {
+                'groupby_cols': ['OFFENDER_ETHNICITY', 'BIAS_DESC'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'count'
+                },
+                'population_type': 'CriminalIncidents'
             }
-        ]
+        },
+        {  # Incidents by offender ethnicity and single bias / multiple bias
+            'df': 'incident_df',
+            'args': {
+                'groupby_cols': ['OFFENDER_ETHNICITY', 'MULTIPLE_BIAS'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'count'
+                },
+                'population_type': 'CriminalIncidents'
+            }
+        },
+        {  # Incidents by offender ethnicity and bias category
+            'df': 'incident_df',
+            'args': {
+                'groupby_cols': ['OFFENDER_ETHNICITY', 'BIAS_CATEGORY'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'count'
+                },
+                'population_type': 'CriminalIncidents'
+            }
+        }
+    ]
 }
 
 
-def add_bias_type(row):
+def _create_df_dict(df: pd.DataFrame) -> dict:
+    """Applies transformations on the hate crime dataframe. These transformed
+    dataframes are then used in the aggregations.
+
+    Args:
+        df: A pandas.DataFrame of the hate crime data.
+
+    Returns:
+        A dictionary which has transformation name as key and the transformed
+        dataframe as it's value.
+    """
+    df['BIAS_CATEGORY'] = ''
+
+    df_dict = {}
+    df_dict['incident_df'] = df.apply(_add_bias_category, axis=1)
+    df_dict['offense_df'] = flatten_by_column(df_dict['incident_df'],
+                                              'OFFENSE_NAME')
+    df_dict['single_bias_incidents'] = df_dict['incident_df'][
+        df_dict['incident_df']['MULTIPLE_BIAS'] == 'S']
+    df_dict['single_bias_offenses'] = df_dict['offense_df'][
+        df_dict['offense_df']['MULTIPLE_BIAS'] == 'S']
+
+    return df_dict
+
+
+def _add_bias_category(row):
+    """
+    A function to add the bias category based on the bias motivation. To be used
+    with pandas.DataFrame.apply().
+    """
     if len(row['BIAS_DESC'].split(';')) > 1:
-        row['BIAS_AGAINST'] = 'MultipleBias'
+        row['BIAS_CATEGORY'] = 'MultipleBias'
 
     elif row['BIAS_DESC'] in _BIAS_CATEGORY_MAP:
-        row['BIAS_AGAINST'] = _BIAS_CATEGORY_MAP[row['BIAS_DESC']]
+        row['BIAS_CATEGORY'] = _BIAS_CATEGORY_MAP[row['BIAS_DESC']]
 
     else:
         print(f"WARNING: No bias type found for {row['BIAS_DESC']}")
@@ -297,16 +322,33 @@ def add_bias_type(row):
     return row
 
 
-def _gen_statvar_mcf(df, config, population_type='CriminalIncidents'):
+def _gen_statvar_mcf(df: pd.DataFrame,
+                     config: dict,
+                     population_type: str = 'CriminalIncidents'):
+    """
+    A function that creates statvars and assigns the dcid after going through
+    each row in the dataframe.
+
+    Args:
+        df: A pandas dataframe whose rows are referenced to create the statvar.
+        config: A dict which expects the keys to be the column name and
+          value to be another dict. This dict maps column values to key-value
+          pairs of a statvar. See scripts/fbi/hate_crime/config.json for an
+          example.
+        population_type: The populationType to assign to each statvar.
+
+    Returns:
+        A modified dataframe with an additional column 'StatVar' whose value is
+        the statvar dcid for it's corresponding row. Also returns a statvar list
+        which containts all the generated statvars.
+    """
     statvar_list = []
     statvar_dcid_list = []
     df_copy = df.copy()
     for _, row in df_copy.iterrows():
         statvar = {**config['_COMMON_']}
         for col in df_copy.columns:
-            if col == 'BIAS_AGAINST':
-                statvar['biasMotivation'] = row[col]
-            elif col in config:
+            if col in config:
                 if row[col] in config[col]:
                     statvar.update(config[col][row[col]])
         statvar['populationType'] = population_type
@@ -317,7 +359,13 @@ def _gen_statvar_mcf(df, config, population_type='CriminalIncidents'):
     return df_copy, statvar_list
 
 
-def _write_statvar_mcf(statvar_list, f):
+def _write_statvar_mcf(statvar_list: list, f):
+    """Writes statvars to a file.
+
+    Args:
+        statvar_list: A list of statvars. Each statvar is expected to be a dict.
+        f: file handle for the .mcf file.
+    """
     dcid_set = set()
     final_mcf = ''
     for sv in statvar_list:
@@ -335,8 +383,19 @@ def _write_statvar_mcf(statvar_list, f):
     f.write(final_mcf)
 
 
-def create_aggr(input_df, config, statvar_list, groupby_cols, agg_dict,
-                population_type):
+def _create_aggr(input_df: pd.DataFrame, config: dict, statvar_list: list,
+                 groupby_cols: list, agg_dict: dict, population_type: str):
+    """A wrapper function that calls utils.make_time_place_aggregations and uses
+    it's output to generate statvar MCF.
+
+    Args:
+        df: A list of statvars. Each statvar is expected to be a dict.
+        f: file handle for the .mcf file.
+
+    Returns:
+        A list of transformed dataframes with an additional column in each
+        that points to it's statvar dcid.
+    """
     output_df_list = make_time_place_aggregation(input_df,
                                                  groupby_cols=groupby_cols,
                                                  agg_dict=agg_dict,
@@ -353,7 +412,14 @@ def create_aggr(input_df, config, statvar_list, groupby_cols, agg_dict,
     return output_df_list
 
 
-def _write_to_csv(df, csv_file_name):
+def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
+    """Writes a dataframe to a .csv file. Removes rows with an empty place value
+    before writing.
+
+    Args:
+        df: A pandas dataframe to write to csv.
+        csv_file_name: The filename of the csv.
+    """
     df['Place'].replace('', np.nan, inplace=True)
     df.dropna(subset=['Place'], inplace=True)
     df.to_csv(csv_file_name, index=False)
@@ -369,23 +435,15 @@ if __name__ == '__main__':
 
     fill_col = df.columns[df.isnull().any()].tolist()
     df[fill_col] = df[fill_col].fillna('Unknown')
-    df['BIAS_AGAINST'] = ''
 
-    DF_DICT = {}
-    DF_DICT['incident_df'] = df.apply(add_bias_type, axis=1)
-    DF_DICT['offense_df'] = flatten_by_column(DF_DICT['incident_df'],
-                                              'OFFENSE_NAME')
-    DF_DICT['single_bias_incidents'] = DF_DICT['incident_df'][
-        DF_DICT['incident_df']['MULTIPLE_BIAS'] == 'S']
-    DF_DICT['single_bias_offenses'] = DF_DICT['offense_df'][
-        DF_DICT['offense_df']['MULTIPLE_BIAS'] == 'S']
+    df_dict = _create_df_dict(df)
 
     # Incidents by StatVar
-    DF_DICT['incident_df'], statvar_list = _gen_statvar_mcf(
-        DF_DICT['incident_df'], config, population_type='CriminalIncidents')
+    df_dict['incident_df'], statvar_list = _gen_statvar_mcf(
+        df_dict['incident_df'], config, population_type='CriminalIncidents')
 
     incident_by_statvar = make_time_place_aggregation(
-        DF_DICT['incident_df'],
+        df_dict['incident_df'],
         groupby_cols=['StatVar'],
         agg_dict={'INCIDENT_ID': 'count'},
         multi_index=False)
@@ -400,12 +458,12 @@ if __name__ == '__main__':
     if not os.path.exists(os.path.join(_SCRIPT_PATH, 'aggregations')):
         os.mkdir(os.path.join(_SCRIPT_PATH, 'aggregations'))
 
-    for file_name in _AGGREGATIONS:
+    for file_name, aggregations in _AGGREGATIONS.items():
         aggr_list = []
-        for aggr_map in _AGGREGATIONS[file_name]:
-            aggr_df = DF_DICT[aggr_map['df']]
-            aggr = create_aggr(aggr_df, config, statvar_list,
-                               **aggr_map['args'])
+        for aggr_map in aggregations:
+            aggr_df = df_dict[aggr_map['df']]
+            aggr = _create_aggr(aggr_df, config, statvar_list,
+                                **aggr_map['args'])
             aggr_list.extend(aggr)
         _write_to_csv(pd.concat(aggr_list),
                       os.path.join('aggregations', file_name))
