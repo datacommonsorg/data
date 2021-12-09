@@ -1,7 +1,7 @@
 package main
 
 import (
-	"cloud.google.com/go/storage"
+	"bytes"
 	"context"
 	"encoding/csv"
 	"encoding/json"
@@ -11,6 +11,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"sync"
 	"time"
@@ -19,39 +20,42 @@ import (
 var (
 	inCsvPath = flag.String("in_csv_path", "", "Input CSV file. Column names are supposed to be Place properties or "+
 		"literal 'Node' to represent a local ID. containedInPlace is always assumed to be a local reference.")
-	outCsvPath = flag.String("out_csv_path", "", "Same as input with additional column for DCID.")
-	mapsApiKey = flag.String("maps_api_key", "", "Key for accessing Geocoding Maps API.")
+	outCsvPath      = flag.String("out_csv_path", "", "Same as input with additional column for DCID.")
+	mapsApiKey      = flag.String("maps_api_key", "", "Key for accessing Geocoding Maps API.")
 	generatePlaceID = flag.Bool("generate_place_id", false, "If set, placeID is generated in output CSV instead of DCID.")
 )
 
 const (
 	// Query limit: 50 qps
-	batchSize          = 50
-	placeId2DcidBucket = "datcom-browser-prod.appspot.com"
-	placeId2DcidObject = "placeid2dcid.json"
+	batchSize = 50
+	// TODO: Switch to prod
+	dcAPI = "https://autopush.recon.datacommons.org/id/resolve"
 )
 
 //
 // PlaceId2Dcid Reader.
 //
-type PlaceId2Dcid interface {
-	Read() ([]byte, error)
+type ResolveApi interface {
+	Resolve(req *resolveReq) (*resolveResp, error)
 }
 
-type RealPlaceId2Dcid struct{}
+type RealResolveApi struct{}
 
-func (r *RealPlaceId2Dcid) Read() ([]byte, error) {
-	ctx := context.Background()
-	gcsCli, err := storage.NewClient(ctx)
+func (r *RealResolveApi) Resolve(req *resolveReq) (*resolveResp, error) {
+	jReq, err := json.Marshal(req)
+	jResp, err := http.Post(dcAPI, "application/json", bytes.NewBuffer(jReq))
 	if err != nil {
 		return nil, err
 	}
-	fp, err := gcsCli.Bucket(placeId2DcidBucket).Object(placeId2DcidObject).NewReader(ctx)
+	defer jResp.Body.Close()
+	jBytes, err := ioutil.ReadAll(jResp.Body)
 	if err != nil {
 		return nil, err
 	}
-	defer fp.Close()
-	return ioutil.ReadAll(fp)
+
+	var resp resolveResp
+	err = json.Unmarshal(jBytes, &resp)
+	return &resp, nil
 }
 
 //
@@ -86,9 +90,9 @@ type tableInfo struct {
 	node2row map[string]int
 
 	// Column index of 'Node'. -1 if missing.
-	nidIdx  int
+	nidIdx int
 	// Column index of 'containedInPlace'. -1 if missing.
-	cipIdx  int
+	cipIdx int
 	// Column index of 'name'. -1 if missing.
 	nameIdx int
 }
@@ -187,19 +191,7 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	return tinfo, nil
 }
 
-func loadPlaceIdToDcidMap(p2d PlaceId2Dcid, placeId2Dcid map[string]string) error {
-	bytes, err := p2d.Read()
-	if err != nil {
-		return err
-	}
-	err = json.Unmarshal(bytes, &placeId2Dcid)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func geocodeOneRow(idx int, placeId2Dcid map[string]string, tinfo *tableInfo, mapCli MapsClient, wg *sync.WaitGroup) {
+func geocodeOneRow(idx int, tinfo *tableInfo, mapCli MapsClient, wg *sync.WaitGroup) {
 	defer wg.Done()
 	extName := tinfo.extNames[idx]
 	req := &maps.GeocodingRequest{
@@ -217,20 +209,26 @@ func geocodeOneRow(idx int, placeId2Dcid map[string]string, tinfo *tableInfo, ma
 	}
 	// TODO: Deal with place-type checks and multiple results.
 	for _, result := range results[:1] {
-		if len(placeId2Dcid) == 0 {
-			tinfo.rows[idx] = append(tinfo.rows[idx], result.PlaceID, "")
-			continue
-		}
-		dcid, ok := placeId2Dcid[result.PlaceID]
-		if !ok {
-			tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Missing dcid for placeId %s", result.PlaceID))
-		} else {
-			tinfo.rows[idx] = append(tinfo.rows[idx], dcid, "")
-		}
+		tinfo.rows[idx] = append(tinfo.rows[idx], result.PlaceID, "")
 	}
 }
 
-func geocodePlaces(mapCli MapsClient, placeId2Dcid map[string]string, tinfo *tableInfo) error {
+type resolveReq struct {
+	InProp  string   `json:"inProp"`
+	OutProp string   `json:"outProp"`
+	Ids     []string `json:"ids"`
+}
+
+type resolveRespEntity struct {
+	InId   string   `json:"inId"`
+	OutIds []string `json:"outIds"`
+}
+
+type resolveResp struct {
+	Entities []resolveRespEntity `json:"entities"`
+}
+
+func geocodePlaces(mapCli MapsClient, tinfo *tableInfo) error {
 	for i := 0; i < len(tinfo.rows); i += batchSize {
 		var wg sync.WaitGroup
 		jMax := i + batchSize
@@ -239,12 +237,52 @@ func geocodePlaces(mapCli MapsClient, placeId2Dcid map[string]string, tinfo *tab
 		}
 		for j := i; j < jMax; j++ {
 			wg.Add(1)
-			go geocodeOneRow(j, placeId2Dcid, tinfo, mapCli, &wg)
+			go geocodeOneRow(j, tinfo, mapCli, &wg)
 		}
 		wg.Wait()
 		// Make sure we are under the 50 QPS limit set by Google Maps API.
 		time.Sleep(1 * time.Second)
 		log.Printf("Processed %d rows, %d left.", jMax, len(tinfo.rows)-jMax)
+	}
+	return nil
+}
+
+func mapPlaceIDsToDCIDs(rApi ResolveApi, tinfo *tableInfo) error {
+	// Collect all place IDs and build the REST API call.
+	placeID2Idx := map[string]int{}
+	req := &resolveReq{
+		InProp:  "placeId",
+		OutProp: "dcid",
+	}
+	for i, r := range tinfo.rows {
+		if len(r) < 2 {
+			continue
+		}
+		placeID := r[len(r)-2]
+		placeID2Idx[placeID] = i
+		req.Ids = append(req.Ids, placeID)
+	}
+
+	resp, err := rApi.Resolve(req)
+	if err != nil {
+		return err
+	}
+
+	// Replace all resolved placeIDs with DCIDs
+	for _, ent := range resp.Entities {
+		idx := placeID2Idx[ent.InId]
+		tinfo.rows[idx][len(tinfo.rows[idx])-2] = ent.OutIds[0]
+		placeID2Idx[ent.InId] = -1
+	}
+	for placeID, idx := range placeID2Idx {
+		if idx == -1 {
+			// Resolved entry
+			continue
+		}
+		// Set error.
+		l := len(tinfo.rows[idx])
+		tinfo.rows[idx][l-2] = ""
+		tinfo.rows[idx][l-1] = fmt.Sprintf("Missing dcid for placeId %s", placeID)
 	}
 	return nil
 }
@@ -267,21 +305,17 @@ func writeOutput(outCsvPath string, tinfo *tableInfo) error {
 	return nil
 }
 
-func resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool, p2d PlaceId2Dcid, mapCli MapsClient) error {
+func resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool, rApi ResolveApi, mapCli MapsClient) error {
 	tinfo, err := buildTableInfo(inCsvPath)
 	if err != nil {
 		return err
 	}
-	placeId2Dcid := map[string]string{}
-	if !generatePlaceID {
-		err = loadPlaceIdToDcidMap(p2d, placeId2Dcid)
-		if err != nil {
-			return err
-		}
-	}
-	err = geocodePlaces(mapCli, placeId2Dcid, tinfo)
+	err = geocodePlaces(mapCli, tinfo)
 	if err != nil {
 		return err
+	}
+	if !generatePlaceID {
+		err = mapPlaceIDsToDCIDs(rApi, tinfo)
 	}
 	return writeOutput(outCsvPath, tinfo)
 }
@@ -295,7 +329,7 @@ func main() {
 		log.Fatalf("Maps API init failed: %v", err)
 	}
 
-	err = resolvePlacesByName(*inCsvPath, *outCsvPath, *generatePlaceID, &RealPlaceId2Dcid{}, &RealMapsClient{Client: mapCli})
+	err = resolvePlacesByName(*inCsvPath, *outCsvPath, *generatePlaceID, &RealResolveApi{}, &RealMapsClient{Client: mapCli})
 	if err != nil {
 		log.Fatalf("resolvePlacesByName failed: %v", err)
 	}
