@@ -316,6 +316,9 @@ func resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool, rAp
 	}
 	if !generatePlaceID {
 		err = mapPlaceIDsToDCIDs(rApi, tinfo)
+		if err != nil {
+			return err
+		}
 	}
 	return writeOutput(outCsvPath, tinfo)
 }
