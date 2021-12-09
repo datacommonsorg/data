@@ -43,6 +43,9 @@ type RealResolveApi struct{}
 
 func (r *RealResolveApi) Resolve(req *resolveReq) (*resolveResp, error) {
 	jReq, err := json.Marshal(req)
+	if err != nil {
+		return nil, err
+	}
 	jResp, err := http.Post(dcAPI, "application/json", bytes.NewBuffer(jReq))
 	if err != nil {
 		return nil, err
@@ -52,9 +55,11 @@ func (r *RealResolveApi) Resolve(req *resolveReq) (*resolveResp, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	var resp resolveResp
 	err = json.Unmarshal(jBytes, &resp)
+	if err != nil {
+		return nil, err
+	}
 	return &resp, nil
 }
 
