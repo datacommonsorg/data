@@ -107,6 +107,57 @@ _BIAS_CATEGORY_MAP = {
         'UnknownBias'
 }
 
+# A dict to map offenses to offense type
+_OFFENSE_CATEGORY_MAP = {
+    'FalsePretenseOrSwindleOrConfidenceGame': 'CrimeAgainstProperty',
+    'MurderAndNonNegligentManslaughter': 'CrimeAgainstPerson',
+    'Impersonation': 'CrimeAgainstProperty',
+    'SimpleAssault': 'CrimeAgainstPerson',
+    'WeaponLawViolations': 'CrimeAgainstSociety',
+    'StatutoryRape': 'CrimeAgainstPerson',
+    'TheftOfMotorVehiclePartsOrAccessories': 'CrimeAgainstProperty',
+    'CreditCardOrAutomatedTellerMachineFraud': 'CrimeAgainstProperty',
+    'SexualAssaultWithAnObject': 'CrimeAgainstPerson',
+    'HumanTrafficking_CommercialSexActs': 'CrimeAgainstPerson',
+    'HackingOrComputerInvasion': 'CrimeAgainstProperty',
+    'PocketPicking': 'CrimeAgainstProperty',
+    'Intimidation': 'CrimeAgainstPerson',
+    'Burglary': 'CrimeAgainstProperty',
+    'PurseSnatching': 'CrimeAgainstProperty',
+    'IdentityTheft': 'CrimeAgainstProperty',
+    'StolenPropertyOffenses': 'CrimeAgainstProperty',
+    'Fondling': 'CrimeAgainstPerson',
+    'TheftFromCoinOperatedMachineOrDevice': 'CrimeAgainstProperty',
+    'Arson': 'CrimeAgainstProperty',
+    'BettingOrWagering': 'CrimeAgainstSociety',
+    'WireFraud': 'CrimeAgainstProperty',
+    'DestructionOrDamageOrVandalismOfProperty': 'CrimeAgainstProperty',
+    'NegligentManslaughter': 'CrimeAgainstPerson',
+    'Sodomy': 'CrimeAgainstPerson',
+    'AggravatedAssault': 'CrimeAgainstPerson',
+    'Robbery': 'CrimeAgainstProperty',
+    'AnimalCruelty': 'CrimeAgainstSociety',
+    'PurchasingProstitution': 'CrimeAgainstSociety',
+    'ExtortionOrBlackmail': 'CrimeAgainstProperty',
+    'WelfareFraud': 'CrimeAgainstProperty',
+    'TheftFromMotorVehicle': 'CrimeAgainstProperty',
+    'CounterfeitingOrForgery': 'CrimeAgainstProperty',
+    'MotorVehicleTheft': 'CrimeAgainstProperty',
+    'Bribery': 'CrimeAgainstProperty',
+    'ForcibleRape': 'CrimeAgainstPerson',
+    'Shoplifting': 'CrimeAgainstProperty',
+    'DrugEquipmentViolations': 'CrimeAgainstSociety',
+    'PornographyOrObsceneMaterial': 'CrimeAgainstSociety',
+    'TheftFromBuilding': 'CrimeAgainstProperty',
+    'Prostitution': 'CrimeAgainstSociety',
+    'AssistingOrPromotingProstitution': 'CrimeAgainstSociety',
+    'Embezzlement': 'CrimeAgainstProperty',
+    'Incest': 'CrimeAgainstPerson',
+    'UCR_AllOtherLarceny': 'CrimeAgainstProperty',
+    'DrugOrNarcoticViolations': 'CrimeAgainstSociety',
+    'KidnappingOrAbduction': 'CrimeAgainstPerson'
+}
+
 # A map to generate aggregations on the source data
 _AGGREGATIONS = {
     'total_incidents.csv': [{  # Total Criminal Incidents
@@ -297,6 +348,8 @@ def _create_df_dict(df: pd.DataFrame) -> dict:
     df_dict['incident_df'] = df.apply(_add_bias_category, axis=1)
     df_dict['offense_df'] = flatten_by_column(df_dict['incident_df'],
                                               'OFFENSE_NAME')
+    df_dict['offense_df'] = df_dict['offense_df'].apply(_add_offense_category,
+                                                        axis=1)
     df_dict['single_bias_incidents'] = df_dict['incident_df'][
         df_dict['incident_df']['MULTIPLE_BIAS'] == 'S']
     df_dict['single_bias_offenses'] = df_dict['offense_df'][
@@ -306,19 +359,20 @@ def _create_df_dict(df: pd.DataFrame) -> dict:
 
 
 def _add_bias_category(row):
+    """A function to add the bias category based on the bias motivation. To be
+    used with pandas.DataFrame.apply().
     """
-    A function to add the bias category based on the bias motivation. To be used
-    with pandas.DataFrame.apply().
+    row['BIAS_CATEGORY'] = _BIAS_CATEGORY_MAP.get(row['BIAS_DESC'],
+                                                  'MultipleBias')
+    return row
+
+
+def _add_offense_category(row):
+    """A function to add the offense category based on the offense type. To be
+    used with pandas.DataFrame.apply()
     """
-    if len(row['BIAS_DESC'].split(';')) > 1:
-        row['BIAS_CATEGORY'] = 'MultipleBias'
-
-    elif row['BIAS_DESC'] in _BIAS_CATEGORY_MAP:
-        row['BIAS_CATEGORY'] = _BIAS_CATEGORY_MAP[row['BIAS_DESC']]
-
-    else:
-        print(f"WARNING: No bias type found for {row['BIAS_DESC']}")
-
+    row['OFFENSE_CATEGORY'] = _OFFENSE_CATEGORY_MAP.get(row['OFFENSE_NAME'],
+                                                        'MultipleOffense')
     return row
 
 
@@ -402,7 +456,6 @@ def _create_aggr(input_df: pd.DataFrame, config: dict, statvar_list: list,
                                                  multi_index=False)
 
     output_df_list.pop(2)  # Remove county level data
-    output_df_list.pop(0)  # Remove country level data
 
     for idx in range(len(output_df_list)):
         output_df_list[idx], statvars = _gen_statvar_mcf(
