@@ -1,11 +1,13 @@
 import ast
 import csv
+import math
 import os
 import sys
 
 import s2sphere
 from absl import app
 from absl import flags
+from datetime import datetime
 from dateutil import parser
 
 
@@ -52,15 +54,18 @@ class Processor:
             self._params = ast.literal_eval(fp.read())
         self._level = self._params['s2lvl']
         self._aggr_func = self._params['aggrfunc']
-        fname = os.path.basename(in_csv)
+        fname = os.path.basename(in_csv).split('.')[0]
         self._in_cfp = open(in_csv, 'r')
-        self._out_cfp = open(os.path.join(out_dir, f"cleaned_{fname}.csv"), 'w')
-        self._out_mfp = open(os.path.join(out_dir, f"s2_{fname}.mcf"), 'w')
+        self._out_cfp = open(os.path.join(out_dir, f"mapped_{fname}.csv"), 'w')
+        self._out_mfp = open(os.path.join(out_dir, f"s2cells_{fname}.mcf"), 'w')
         # Key: {cellid, date}, Value: numeric
         self._aggr_map = {}
 
     def generate(self):
         emitted_cids = set()
+        num_processed = 0
+        num_bad_fmt = 0
+        num_nans = 0
         for row in csv.DictReader(self._in_cfp):
             # Load row values
             try:
@@ -69,6 +74,11 @@ class Processor:
                 val = float(row[self._params['valcol']])
                 date = parser.parse(row[self._params['datecol']])
             except ValueError:
+                num_bad_fmt += 1
+                continue
+
+            if math.isnan(val):
+                num_nans += 1
                 continue
 
             # Compute S2Cell
@@ -91,6 +101,13 @@ class Processor:
                 self._aggr_map[akey] = []
             self._aggr_map[akey].append(val)
 
+            num_processed += 1
+            if num_processed % 100000 == 0:
+                print('Rows processed so far:', num_processed,
+                      ':: bad-fmt:', num_bad_fmt, ':: nans:', num_nans)
+
+        print('Rows processed so far:', num_processed,
+              ':: bad-fmt:', num_bad_fmt, ':: nans:', num_nans)
         self._aggr_and_write()
         self._close()
 
@@ -111,7 +128,8 @@ class Processor:
                                   lat=_llformat(latlng.lat().degrees),
                                   lng=_llformat(latlng.lng().degrees))
 
-    def _aggr(self, vals):
+    def _aggr(self, vals, cid, date):
+        assert len(vals) > 0, cid + date
         if self._aggr_func == 'sum':
             return sum(vals)
         elif self._aggr_func == 'max':
@@ -125,9 +143,8 @@ class Processor:
 
     def _aggr_and_write(self):
         self._out_cfp.write("observationDate,observationAbout,value\n")
-        for (cid, date) in sorted(self._aggr_map.keys()):
-            vals = self._aggr_map[(cid, date)]
-            sval = str(self._aggr(vals))
+        for (cid, date), vals in self._aggr_map.iteritems():
+            sval = str(self._aggr(vals, cid, date))
             self._out_cfp.write(f"dcid:s2CellId/{cid},{date},{sval}" + "\n")
 
     def _close(self):

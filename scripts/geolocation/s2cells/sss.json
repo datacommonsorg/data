@@ -1,0 +1,9 @@
+{
+  "s2lvl": 11,
+  "latcol": "latitude",
+  "lngcol": "longitude",
+  "valcol": "sss",
+  "datecol": "time",
+  "datefmt": "%Y-%m-%d",
+  "aggrfunc": "mean"
+}
