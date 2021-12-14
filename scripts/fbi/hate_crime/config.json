@@ -1,10 +1,55 @@
 {
+    "_COMMENT_": "This is a JSON Config to add constraint props to statvars based on values in the columns of CSV/XLS files. Properties under _COMMON_ are added to all stat vars. The _DPV_ section is used to identify dependent properties based on other constraint properties.",
     "_COMMON_": {
         "statType": "measuredValue",
         "measuredProperty": "count",
         "isHateCrime": "True",
         "typeOf": "StatisticalVariable"
     },
+    "_DPV_": [
+        {
+            "cprop": "targetedRace",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "race"
+            }
+        },
+        {
+            "cprop": "targetedEthnicity",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "ethnicity"
+            }
+        },
+        {
+            "cprop": "targetedReligion",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "religion"
+            }
+        },
+        {
+            "cprop": "targetedSexualOrientation",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "sexualOrientation"
+            }
+        },
+        {
+            "cprop": "targetedDisabilityStatus",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "disabilityStatus"
+            }
+        },
+        {
+            "cprop": "targetedGender",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "gender"
+            }
+        }
+    ],
     "OFFENDER_RACE": {
         "White": {
             "offenderRace": "WhiteAlone"
@@ -70,7 +115,8 @@
             "biasMotivation": "gender"
         },
         "TransgenderOrGenderNonConforming": {
-            "biasMotivation": "TransgenderOrGenderNonConforming"
+            "biasMotivation": "gender",
+            "targetedGender": "TransgenderOrGenderNonConforming"
         },
         "UnknownBias": {
             "biasMotivation": "UnknownBias"

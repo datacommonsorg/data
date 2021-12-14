@@ -74,7 +74,7 @@ def make_time_place_aggregation(dataframe,
                                 agg_dict=None,
                                 multi_index=False):
     """Utility function where different aggregations of the hate crime dataset
-    is done, by year and geo type (country, state, county and city).
+    is done, by year and geo type (country, state, and city).
 
     Args:
         dataframe: dataframe to aggregate on.
@@ -88,20 +88,20 @@ def make_time_place_aggregation(dataframe,
 
     Returns:
         A list whose elements are dataframes aggregated at a country, state,
-        county and city level.
+        and city level.
     """
     if groupby_cols is None:
         groupby_cols = []
     if agg_dict is None:
         agg_dict = {}
-    ## Year + Country
+    # Year + Country
     agg_country = agg_hate_crime_df(dataframe,
                                     groupby_cols=(['DATA_YEAR'] + groupby_cols),
                                     agg_dict=agg_dict,
                                     multi_index=multi_index)
     agg_country['Place'] = 'country/USA'
 
-    ## Year + State
+    # Year + State
     agg_state = agg_hate_crime_df(dataframe,
                                   groupby_cols=(['DATA_YEAR', 'STATE_ABBR'] +
                                                 groupby_cols),
@@ -111,20 +111,7 @@ def make_time_place_aggregation(dataframe,
         lambda row: state_to_dcid(row['STATE_ABBR']), axis=1)
     agg_state.drop(columns=['STATE_ABBR'], inplace=True)
 
-    ## Year + County
-    county_df = dataframe[dataframe['AGENCY_TYPE_NAME'] == 'County']
-    agg_county = agg_hate_crime_df(
-        county_df,
-        groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] +
-                      groupby_cols),
-        agg_dict=agg_dict,
-        multi_index=multi_index)
-    agg_county['Place'] = agg_county.apply(
-        lambda row: county_to_dcid(row['STATE_ABBR'], row['PUB_AGENCY_NAME']),
-        axis=1)
-    agg_county.drop(columns=['PUB_AGENCY_NAME', 'STATE_ABBR'], inplace=True)
-
-    ## Year + City
+    # Year + City
     city_df = dataframe[dataframe['AGENCY_TYPE_NAME'] == 'City']
     agg_city = agg_hate_crime_df(
         city_df,
@@ -137,4 +124,4 @@ def make_time_place_aggregation(dataframe,
         axis=1)
     agg_city.drop(columns=['PUB_AGENCY_NAME', 'STATE_ABBR'], inplace=True)
 
-    return [agg_country, agg_state, agg_county, agg_city]
+    return [agg_country, agg_state, agg_city]

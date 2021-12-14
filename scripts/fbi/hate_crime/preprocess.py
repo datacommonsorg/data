@@ -376,11 +376,35 @@ def _add_offense_category(row):
     return row
 
 
+def _get_dpv(statvar: dict, config: dict) -> list:
+    """A function that goes through the statvar dict and the config and returns
+    a list of properties to ignore when generating the dcid.
+
+    Args:
+        statvar: A dictionary of prop:values of the statvar
+        config: A dict which expects the keys to be the column name and
+          value to be another dict. This dict maps column values to key-value
+          pairs of a statvar. See scripts/fbi/hate_crime/config.json for an
+          example. In this function, the '_DPV_' key is used to identify 
+          dependent properties.
+
+    Returns:
+        A list of properties to ignore when generating the dcid
+    """
+    ignore_props = []
+    for spec in config['_DPV_']:
+        if spec['cprop'] in statvar:
+            dpv_prop = spec['dpv']['prop']
+            dpv_val = spec['dpv']['val']
+            if dpv_val == statvar.get(dpv_prop, None):
+                ignore_props.append(dpv_prop)
+    return ignore_props
+
+
 def _gen_statvar_mcf(df: pd.DataFrame,
                      config: dict,
                      population_type: str = 'CriminalIncidents'):
-    """
-    A function that creates statvars and assigns the dcid after going through
+    """A function that creates statvars and assigns the dcid after going through
     each row in the dataframe.
 
     Args:
@@ -406,7 +430,8 @@ def _gen_statvar_mcf(df: pd.DataFrame,
                 if row[col] in config[col]:
                     statvar.update(config[col][row[col]])
         statvar['populationType'] = population_type
-        statvar['Node'] = get_statvar_dcid(statvar)
+        ignore_props = _get_dpv(statvar, config)
+        statvar['Node'] = get_statvar_dcid(statvar, ignore_props=ignore_props)
         statvar_dcid_list.append(statvar['Node'])
         statvar_list.append(statvar)
     df_copy['StatVar'] = statvar_dcid_list
@@ -455,8 +480,6 @@ def _create_aggr(input_df: pd.DataFrame, config: dict, statvar_list: list,
                                                  agg_dict=agg_dict,
                                                  multi_index=False)
 
-    output_df_list.pop(2)  # Remove county level data
-
     for idx in range(len(output_df_list)):
         output_df_list[idx], statvars = _gen_statvar_mcf(
             output_df_list[idx], config, population_type=population_type)
@@ -500,10 +523,11 @@ if __name__ == '__main__':
         groupby_cols=['StatVar'],
         agg_dict={'INCIDENT_ID': 'count'},
         multi_index=False)
-    incident_by_statvar.pop(2)  # Drop county level
-    _write_to_csv(pd.concat(incident_by_statvar), 'output.csv')
+    output_csv_path = os.path.join(_SCRIPT_PATH, 'output', 'output.csv')
+    _write_to_csv(pd.concat(incident_by_statvar), output_csv_path)
 
-    with open(os.path.join(_SCRIPT_PATH, 'output.mcf'), 'w') as f:
+    output_mcf_path = os.path.join(_SCRIPT_PATH, 'output', 'output.mcf')
+    with open(output_mcf_path, 'w') as f:
         _write_statvar_mcf(statvar_list, f)
 
     # Aggregations
@@ -518,9 +542,10 @@ if __name__ == '__main__':
             aggr = _create_aggr(aggr_df, config, statvar_list,
                                 **aggr_map['args'])
             aggr_list.extend(aggr)
-        _write_to_csv(pd.concat(aggr_list),
-                      os.path.join('aggregations', file_name))
+        aggr_csv_path = os.path.join(_SCRIPT_PATH, 'aggregations', file_name)
+        _write_to_csv(pd.concat(aggr_list), aggr_csv_path)
 
-    with open(os.path.join(_SCRIPT_PATH, 'aggregations', 'aggregation.mcf'),
-              'w') as f:
+    aggr_mcf_path = os.path.join(_SCRIPT_PATH, 'aggregations',
+                                 'aggregation.mcf')
+    with open(aggr_mcf_path, 'w') as f:
         _write_statvar_mcf(statvar_list, f)

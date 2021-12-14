@@ -352,7 +352,11 @@ _US_GEO_CODE_UPDATE_MAP = {
     'allentown nj':
         'allentown borough nj',
     'alpha nj':
-        'alpha borough nj'
+        'alpha borough nj',
+    'bernardsville nj':
+        'bernardsville borough nj',
+    'frankfort village ny':
+        'frankfort ny'
 }
 
 _IGNORE_STATE_ABBR = ['FS']
