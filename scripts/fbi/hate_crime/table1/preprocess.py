@@ -11,13 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+"""A script to process FBI Hate Crime table 1 publications."""
 import os
 import sys
-import pandas as pd
 import tempfile
 import csv
 import json
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -184,7 +184,7 @@ def _create_csv_mcf(csv_files: list, cleaned_csv_path: str,
         config: A dict which maps constraint props to the statvar based on
           values in the CSV. See scripts/fbi/hate_crime/table1/config.json for
           an example.
-    
+
     Returns:
         A list of statvars.
     """
@@ -255,8 +255,8 @@ def _get_dpv(statvar: dict, config: dict) -> list:
 
 def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
                       config: dict) -> list:
-    """Reads each row of a CSV and creates statvars for counts of 
-    Incidents, Offenses, Victims and Known Offenders with different bias 
+    """Reads each row of a CSV and creates statvars for counts of
+    Incidents, Offenses, Victims and Known Offenders with different bias
     motivations.
 
     Args:
@@ -320,16 +320,16 @@ def _create_mcf(stat_vars: list, mcf_file_path):
 
 def _clean_dataframe(df: pd.DataFrame):
     """Clean the column names and bias motivation values in a dataframe."""
-    df.columns = df.columns.str.replace('\n', ' ')
-    df.columns = df.columns.str.replace('\s+', ' ', regex=True)
-    df.columns = df.columns.str.replace('\d+', '', regex=True)
+    df.columns = df.columns.str.replace(r'\n', ' ')
+    df.columns = df.columns.str.replace(r'\s+', ' ', regex=True)
+    df.columns = df.columns.str.replace(r'\d+', '', regex=True)
     df.columns = df.columns.str.lower()
     df.columns = df.columns.str.strip()
 
-    df['bias motivation'] = df['bias motivation'].replace('[\d:]+',
+    df['bias motivation'] = df['bias motivation'].replace(r'[\d:]+',
                                                           '',
                                                           regex=True)
-    df['bias motivation'] = df['bias motivation'].replace('\s+',
+    df['bias motivation'] = df['bias motivation'].replace(r'\s+',
                                                           ' ',
                                                           regex=True)
     df['bias motivation'] = df['bias motivation'].str.strip()
