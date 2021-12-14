@@ -143,7 +143,7 @@ class Processor:
 
     def _aggr_and_write(self):
         self._out_cfp.write("observationDate,observationAbout,value\n")
-        for (cid, date), vals in self._aggr_map.iteritems():
+        for (cid, date), vals in self._aggr_map.items():
             sval = str(self._aggr(vals, cid, date))
             self._out_cfp.write(f"dcid:s2CellId/{cid},{date},{sval}" + "\n")
 
