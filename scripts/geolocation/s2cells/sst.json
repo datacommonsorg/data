@@ -1,5 +1,5 @@
 {
-  "s2lvl": 10,
+  "s2lvl": 11,
   "latcol": "latitude",
   "lngcol": "longitude",
   "valcol": "analysed_sst",
