@@ -142,7 +142,7 @@ class Processor:
             raise ValueError(f"Unexpected aggr_func {self._aggr_func}")
 
     def _aggr_and_write(self):
-        self._out_cfp.write("observationDate,observationAbout,value\n")
+        self._out_cfp.write("observationAbout,observationDate,value\n")
         for (cid, date), vals in self._aggr_map.items():
             sval = str(self._aggr(vals, cid, date))
             self._out_cfp.write(f"dcid:s2CellId/{cid},{date},{sval}" + "\n")
