@@ -22,7 +22,8 @@ FLAGS = flags.FLAGS
 #   "lngcol": <col-name>,
 #   "datecol": <col-name>,
 #   "valcol": <col-name>,
-#   "datefmt": "YYYY-mm-dd" | "YYYY-mm" | "YYYY"  #  Optional
+#   "datefmt": "YYYY-mm-dd" | "YYYY-mm" | "YYYY",  #  Optional
+#   "containedIn": "europe"
 # }
 flags.DEFINE_string('in_params', '', 'Input param file')
 flags.DEFINE_string('in_csv', '', 'Input CSV file')
@@ -121,12 +122,16 @@ class Processor:
 
     def _s2mcf(self, cid, cell):
         latlng = cell.to_lat_lng()
-        typeof = 'S2CellIdLevel' + str(self._level)
-        return _MCF_FORMAT.format(cid=cid,
-                                  level=self._level,
-                                  typeof=typeof,
-                                  lat=_llformat(latlng.lat().degrees),
-                                  lng=_llformat(latlng.lng().degrees))
+        typeof = 'S2CellLevel' + str(self._level)
+        mcf_str = _MCF_FORMAT.format(cid=cid,
+                                     level=self._level,
+                                     typeof=typeof,
+                                     lat=_llformat(latlng.lat().degrees),
+                                     lng=_llformat(latlng.lng().degrees))
+        if 'containedIn' in self._params:
+            cip = 'containedInPlace: dcid:' + self._params['containedIn']
+            mcf_str = cip + '\n'
+        return mcf_str
 
     def _aggr(self, vals, cid, date):
         assert len(vals) > 0, cid + date
