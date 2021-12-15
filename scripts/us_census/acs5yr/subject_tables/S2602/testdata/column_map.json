@@ -1633,7 +1633,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings",
+            "Node": "dcid:Median_Earnings_Person_Male",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -1643,7 +1643,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings",
+            "Node": "dcid:Median_Earnings_Person_Female",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -3482,7 +3482,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInGroupQuarters",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -3493,7 +3493,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInGroupQuarters",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -5335,7 +5335,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInAdultCorrectionalFacilities",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -5346,7 +5346,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInAdultCorrectionalFacilities",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -7188,7 +7188,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInNursingFacilities",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -7199,7 +7199,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInNursingFacilities",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -9041,7 +9041,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -9052,7 +9052,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars):!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -10715,7 +10715,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings",
+            "Node": "dcid:Median_Earnings_Person_Male",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -10725,7 +10725,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings",
+            "Node": "dcid:Median_Earnings_Person_Female",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -12564,7 +12564,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInGroupQuarters",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -12575,7 +12575,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInGroupQuarters",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -14417,7 +14417,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInAdultCorrectionalFacilities",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -14428,7 +14428,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInAdultCorrectionalFacilities",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -16270,7 +16270,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInNursingFacilities",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -16281,7 +16281,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInNursingFacilities",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -18123,7 +18123,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -18134,7 +18134,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -19797,7 +19797,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings",
+            "Node": "dcid:Median_Earnings_Person_Male",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -19807,7 +19807,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings",
+            "Node": "dcid:Median_Earnings_Person_Female",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -21646,7 +21646,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInGroupQuarters",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -21657,7 +21657,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total group quarters population!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInGroupQuarters",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -23499,7 +23499,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInAdultCorrectionalFacilities",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -23510,7 +23510,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Adult correctional facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInAdultCorrectionalFacilities",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -25352,7 +25352,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInNursingFacilities",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -25363,7 +25363,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Nursing facilities/skilled nursing facilities!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInNursingFacilities",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -27205,7 +27205,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Male": {
-            "Node": "dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
+            "Node": "dcid:Median_Earnings_Person_Male_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",
@@ -27216,7 +27216,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!College/university housing!!EARNINGS AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median earnings (dollars)!!Female": {
-            "Node": "dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
+            "Node": "dcid:Median_Earnings_Person_Female_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
             "unit": "InflationAdjustedUSD_CurrentYear",

@@ -1408,7 +1408,7 @@ populationType: dcs:Person
 gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Male_WithEarnings
+Node: dcid:Median_Earnings_Person_Male
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -1416,7 +1416,7 @@ populationType: dcs:Person
 gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Female_WithEarnings
+Node: dcid:Median_Earnings_Person_Female
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -3023,7 +3023,7 @@ residenceType: dcs:GroupQuarters
 gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInGroupQuarters
+Node: dcid:Median_Earnings_Person_Male_ResidesInGroupQuarters
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -3032,7 +3032,7 @@ residenceType: dcs:GroupQuarters
 gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInGroupQuarters
+Node: dcid:Median_Earnings_Person_Female_ResidesInGroupQuarters
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -4642,7 +4642,7 @@ residenceType: dcs:AdultCorrectionalFacilities
 gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInAdultCorrectionalFacilities
+Node: dcid:Median_Earnings_Person_Male_ResidesInAdultCorrectionalFacilities
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -4651,7 +4651,7 @@ residenceType: dcs:AdultCorrectionalFacilities
 gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInAdultCorrectionalFacilities
+Node: dcid:Median_Earnings_Person_Female_ResidesInAdultCorrectionalFacilities
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -6261,7 +6261,7 @@ residenceType: dcs:NursingFacilities
 gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInNursingFacilities
+Node: dcid:Median_Earnings_Person_Male_ResidesInNursingFacilities
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -6270,7 +6270,7 @@ residenceType: dcs:NursingFacilities
 gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInNursingFacilities
+Node: dcid:Median_Earnings_Person_Female_ResidesInNursingFacilities
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -7880,7 +7880,7 @@ residenceType: dcs:CollegeOrUniversityStudentHousing
 gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Male_WithEarnings_ResidesInCollegeOrUniversityStudentHousing
+Node: dcid:Median_Earnings_Person_Male_ResidesInCollegeOrUniversityStudentHousing
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings
@@ -7889,7 +7889,7 @@ residenceType: dcs:CollegeOrUniversityStudentHousing
 gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Median_Earnings_Person_Female_WithEarnings_ResidesInCollegeOrUniversityStudentHousing
+Node: dcid:Median_Earnings_Person_Female_ResidesInCollegeOrUniversityStudentHousing
 measuredProperty: dcs:earnings
 statType: dcs:medianValue
 incomeStatus: dcs:WithEarnings

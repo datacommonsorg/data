@@ -261,6 +261,13 @@
   "universePVs": [
     {
       "populationType": "Person",
+      "obs_props": { "mprop": "earnings"},
+      "dependentPVs": {
+        "incomeStatus": "WithEarnings"
+      }
+    },
+    {
+      "populationType": "Person",
       "constraintProperties": [
         "maritalStatus"
       ],
