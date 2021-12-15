@@ -115,6 +115,7 @@ class TestSubjectTable(unittest.TestCase):
                                        spec_path=paths['spec'],
                                        debug=False,
                                        delimiter='!!',
+                                       decimal_places=3,
                                        has_percent=True)
 
                 test_mcf_path = os.path.join(tmp_dir, 'test_output.mcf')
