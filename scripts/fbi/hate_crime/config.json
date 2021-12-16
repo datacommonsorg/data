@@ -3,7 +3,6 @@
     "_COMMON_": {
         "statType": "measuredValue",
         "measuredProperty": "count",
-        "isHateCrime": "True",
         "typeOf": "StatisticalVariable"
     },
     "_DPV_": [
