@@ -107,7 +107,7 @@ _BIAS_CATEGORY_MAP = {
         'UnknownBias'
 }
 
-# A dict to map offenses to offense type
+# A dict to map offenses to categories of crime
 _OFFENSE_CATEGORY_MAP = {
     'FalsePretenseOrSwindleOrConfidenceGame': 'CrimeAgainstProperty',
     'MurderAndNonNegligentManslaughter': 'CrimeAgainstPerson',
@@ -158,7 +158,70 @@ _OFFENSE_CATEGORY_MAP = {
     'KidnappingOrAbduction': 'CrimeAgainstPerson'
 }
 
-# A map to generate aggregations on the source data
+# A dict to map locations to instances of LocationOfCrimeEnum
+_LOCATION_MAP = {
+    'Cyberspace': '',
+    'Rest Area': '',
+    'Commercial/Office Building': '',
+    'Grocery/Supermarket': '',
+    'School-Elementary/Secondary': '',
+    'Construction Site': '',
+    'Air/Bus/Train Terminal': '',
+    'Camp/Campground': '',
+    'Military Installation': '',
+    'Government/Public Building': '',
+    'Church/Synagogue/Temple/Mosque': '',
+    'Park/Playground': '',
+    'Farm Facility': '',
+    'Community Center': '',
+    'Other/Unknown': '',
+    'Abandoned/Condemned Structure': '',
+    'Department/Discount Store': '',
+    'Amusement Park': '',
+    'Highway/Road/Alley/Street/Sidewalk': '',
+    'Jail/Prison/Penitentiary/Corrections Facility': '',
+    'Tribal Lands': '',
+    'Arena/Stadium/Fairgrounds/Coliseum': '',
+    'Auto Dealership New/Used': '',
+    'Shelter-Mission/Homeless': '',
+    'Hotel/Motel/Etc.': '',
+    'Field/Woods': '',
+    'Specialty Store': '',
+    'Industrial Site': '',
+    'School/College': '',
+    'Residence/Home': '',
+    'Restaurant': '',
+    'Gambling Facility/Casino/Race Track': '',
+    'Convenience Store': '',
+    'Rental Storage Facility': '',
+    'School-College/University': '',
+    'ATM Separate from Bank': '',
+    'Service/Gas Station': '',
+    'Parking/Drop Lot/Garage': '',
+    'Bank/Savings and Loan': '',
+    'Dock/Wharf/Freight/Modal Terminal': '',
+    'Bar/Nightclub': '',
+    'Lake/Waterway/Beach': '',
+    'Shopping Mall': '',
+    "Drug Store/Doctor's Office/Hospital": '',
+    'Liquor Store': '',
+    'Daycare Facility': ''
+}
+
+# A dict to map victim types to instances of VictimTypeEnum
+_VICTIM_TYPE_MAP = {
+    'Financial Institution': 'FinancialInstitution',
+    'Law Enforcement Officer': 'LawEnforcementOfficer',
+    'Society/Public': 'Society',
+    'Individual': 'Person',
+    'Government': 'Government',
+    'Unknown': 'UCR_UnknownVictimType',
+    'Religious Organization': 'ReligiousOrganization',
+    'Business': 'Business',
+    'Other': 'UCR_OtherVictimType'
+}
+
+# A dict to generate aggregations on the source data
 _AGGREGATIONS = {
     'total_incidents.csv': [{  # Total Criminal Incidents
         'df': 'incident_df',

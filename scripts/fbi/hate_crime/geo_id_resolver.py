@@ -14,11 +14,9 @@
 """
 Resolving place dcid given the Pub_agency_name, Agency_type_name, State_Abbr
 from FBI hate crime dataset
-
 """
 
 import os
-import io
 import sys
 import csv
 
@@ -34,9 +32,7 @@ city_geocodes_csv_path = os.path.join(_SCRIPT_PATH,
                                       '../crime/city_geocodes.csv')
 
 _US_GEO_CODE_UPDATE_MAP = {
-    # Replacing/Updating GeoID given in the data. Required in case of wrong geoid mentioned in the data.
-    # Reference : https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2017/geography-changes.html
-    # Invalid fips code for Tucker City 1377625 replaced by 1377652
+    # Mapping geos in data to geos in csv / map
     'NB':
         'NE',
     'GM':
@@ -317,8 +313,6 @@ _US_GEO_CODE_UPDATE_MAP = {
         'teterboro borough nj',
     'tinton falls nj':
         'tinton falls borough nj',
-    #'town of madison wi':
-    #    'madison wi',
     'tuckerton nj':
         'tuckerton borough nj',
     'verona nj':
@@ -343,8 +337,6 @@ _US_GEO_CODE_UPDATE_MAP = {
         'wharton borough nj',
     'wildwood crest nj':
         'wildwood crest borough nj',
-    #'york area regional pa':
-    #    'york pa',
     'yorktown town ny':
         'yorktown ny',
     'allenhurst nj':
@@ -359,7 +351,7 @@ _US_GEO_CODE_UPDATE_MAP = {
         'frankfort ny'
 }
 
-_IGNORE_STATE_ABBR = ['FS']
+_IGNORE_STATE_ABBR = ['FS'] # Ignoring federal codes
 
 city = {}
 with open(os.path.join(city_geocodes_csv_path), encoding="utf8") as csvfile:
@@ -412,7 +404,6 @@ def county_to_dcid(state_abbr, county):
 
 
 def city_to_dcid(state_abbr, city_name):
-    _IGNORE_LIST = ['5129600']
     if state_abbr in _IGNORE_STATE_ABBR:
         return ''
 

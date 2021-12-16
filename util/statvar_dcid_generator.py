@@ -50,7 +50,8 @@ _QUANTITY_RANGE_REGEX_2 = re.compile(r'\[(?P<quantity>[A-Za-z_/\d]+) '
 # These are the default properties ignored during dcid generation
 _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
                          'constraintProperties', 'name', 'description',
-                         'descriptionUrl', 'label', 'url', 'alternateName')
+                         'descriptionUrl', 'label', 'url', 'alternateName',
+                         'scalingFactor')
 
 # Regex to match prefixes to be removed from constraints. The regex checks for
 # specific prefixes followed by an upper case letter or underscore. This helps
@@ -234,6 +235,24 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'offenderEthnicity': {
         'prepend': 'OffenderEthnicity'
+    },
+    'targetedRace': {
+        'prepend': 'TargetedRace'
+    },
+    'targetedEthnicity': {
+        'prepend': 'TargetedEthnicity'
+    },
+    'targetedReligion': {
+        'prepend': 'TargetedReligion'
+    },    
+    'targetedSexualOrientation': {
+        'prepend': 'TargetedSexualOrientation'
+    },    
+    'targetedDisabilityStatus': {
+        'prepend': 'TargetedDisabilityStatus'
+    },
+    'targetedGender': {
+        'prepend': 'TargetedGender'
     }
 }
 
