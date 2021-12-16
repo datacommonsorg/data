@@ -1,0 +1,2343 @@
+Node: dcid:Count_Person_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19OrLessYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [- 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19OrLessYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [- 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_6OrLessYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [- 6 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_6OrLessYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [- 6 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_6To18Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [6 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_6To18Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [6 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To64Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [19 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To64Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [19 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To25Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [19 25 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To25Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [19 25 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_26To34Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [26 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_26To34Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [26 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To44Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To44Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To64Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To64Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_NoHealthInsurance
+measuredProperty: dcid:age
+statType: dcid:medianValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+gender: dcid:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+gender: dcid:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+gender: dcid:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+gender: dcid:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_OneRace
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_OneRace
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_WhiteAlone
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_WhiteAlone
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_BlackOrAfricanAmericanAlone
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_BlackOrAfricanAmericanAlone
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_AmericanIndianOrAlaskaNativeAlone
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_AmericanIndianOrAlaskaNativeAlone
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_AsianAlone
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_AsianAlone
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_NativeHawaiianOrOtherPacificIslanderAlone
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_NativeHawaiianOrOtherPacificIslanderAlone
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_SomeOtherRaceAlone
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_SomeOtherRaceAlone
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_TwoOrMoreRaces
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_TwoOrMoreRaces
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_HispanicOrLatino
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_HispanicOrLatino
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_WhiteAloneNotHispanicOrLatino
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_WhiteAloneNotHispanicOrLatino
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+race: dcid:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_USCitizenBornInTheUnitedStates_NoHealthInsurance_Native
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+citizenship: dcid:USCitizenBornInTheUnitedStates
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_USCitizenBornInTheUnitedStates_NoHealthInsurance_Native
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+citizenship: dcid:USCitizenBornInTheUnitedStates
+nativity: dcid:USC_Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_USCitizenByNaturalization_NoHealthInsurance_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_USCitizenByNaturalization_NoHealthInsurance_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotAUSCitizen_NoHealthInsurance_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NotAUSCitizen_NoHealthInsurance_ForeignBorn
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_WithDisability
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+disabilityStatus: dcid:WithDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+disabilityStatus: dcid:WithDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_NoDisability
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+disabilityStatus: dcid:NoDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoDisability_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+disabilityStatus: dcid:NoDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_SameHouse1YearAgo
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:SameHouse1YearAgo
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_SameHouse1YearAgo
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:SameHouse1YearAgo
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInTheUS
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInTheUS
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInTheUS
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInTheUS
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInSameCounty
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInSameCounty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInSameCounty
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInSameCounty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCounty
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInDifferentCounty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCounty
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInDifferentCounty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCountySameState
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInDifferentCountySameState
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCountySameState
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInDifferentCountySameState
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInDifferentCountyDifferentState
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseInDifferentCountyDifferentState
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseAbroad
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseAbroad
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NoHealthInsurance_Household_DifferentHouseAbroad
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+residenceType: dcid:Household
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [1 - Years]
+residentStatus: dcid:DifferentHouseAbroad
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_LessThanHighSchoolGraduate_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_LessThanHighSchoolGraduate_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+educationalAttainment: dcid:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_HighSchoolGraduateIncludesEquivalency_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_HighSchoolGraduateIncludesEquivalency_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+educationalAttainment: dcid:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_SomeCollegeOrAssociatesDegree_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_SomeCollegeOrAssociatesDegree_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_BachelorsDegreeOrHigher_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_BachelorsDegreeOrHigher_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [25 - Years]
+educationalAttainment: dcid:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_InLaborForce_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+employmentStatus: dcid:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_InLaborForce_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+employmentStatus: dcid:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Employed_InLaborForce_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+employmentStatus: dcid:BLS_InLaborForce
+employment: dcid:BLS_Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Employed_InLaborForce_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+employmentStatus: dcid:BLS_InLaborForce
+employment: dcid:BLS_Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Unemployed_InLaborForce_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+employmentStatus: dcid:BLS_InLaborForce
+employment: dcid:BLS_Unemployed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Unemployed_InLaborForce_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+employmentStatus: dcid:BLS_InLaborForce
+employment: dcid:BLS_Unemployed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NotInLaborForce_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+employmentStatus: dcid:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NotInLaborForce_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+employmentStatus: dcid:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To64Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To64Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To64Years_NoHealthInsurance_FullTimeYearRoundWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
+workExperience: dcid:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To64Years_NoHealthInsurance_FullTimeYearRoundWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
+workExperience: dcid:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To64Years_NoHealthInsurance_LessThanFullTimeYearRoundWorker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
+workExperience: dcid:LessThanFullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To64Years_NoHealthInsurance_LessThanFullTimeYearRoundWorker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
+workExperience: dcid:LessThanFullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To64Years_NoHealthInsurance_DidNotWork
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
+workExperience: dcid:DidNotWork
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To64Years_NoHealthInsurance_DidNotWork
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 64 Years]
+workExperience: dcid:DidNotWork
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_PaidWorker_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_PaidWorker_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_PaidEmployee_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_PaidEmployee_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:PaidEmployee
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_IncorporatedBusinessOwner_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedForProfit_NoHealthInsurance_IncorporatedBusinessOwner_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+workerClassification: dcid:IncorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_PrivatelyOwnedNotForProfit_NoHealthInsurance_PaidWorker_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwnedNotForProfit_NoHealthInsurance_PaidWorker_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+workerClassification: dcid:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_LocalGovernmentOwned_NoHealthInsurance_Worker_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:LocalGovernmentOwned
+workerClassification: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_LocalGovernmentOwned_NoHealthInsurance_Worker_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:LocalGovernmentOwned
+workerClassification: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_StateGovernmentOwned_NoHealthInsurance_Worker_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:StateGovernmentOwned
+workerClassification: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_StateGovernmentOwned_NoHealthInsurance_Worker_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:StateGovernmentOwned
+workerClassification: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_FederalGovernmentOwned_NoHealthInsurance_Worker_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:FederalGovernmentOwned
+workerClassification: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_FederalGovernmentOwned_NoHealthInsurance_Worker_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:FederalGovernmentOwned
+workerClassification: dcid:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_PrivatelyOwned_NoHealthInsurance_UnincorporatedBusinessOwner_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwned_NoHealthInsurance_UnincorporatedBusinessOwner_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnincorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_PrivatelyOwned_NoHealthInsurance_UnpaidFamilyWorker_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnpaidFamilyWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_PrivatelyOwned_NoHealthInsurance_UnpaidFamilyWorker_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+establishmentOwnership: dcid:PrivatelyOwned
+workerClassification: dcid:UnpaidFamilyWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/1121_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/11_21
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/1121_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/11_21
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/23_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/23
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/23_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/23
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/33_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/33
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/33_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/33
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/42_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/42
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/42_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/42
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/44-45_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/44-45
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/44-45_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/44-45
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/48-4922_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/48-49_22
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/48-4922_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/48-49_22
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/51_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/51
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/51_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/51
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/52-53_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/52-53
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/52-53_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/52-53
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/54-56_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/54-56
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/54-56_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/54-56
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/61-62_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/61-62
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/61-62_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/61-62
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/71-72_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/71-72
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/71-72_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/71-72
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/81_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/81
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/81_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/81
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/92_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/92
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_NAICS/92_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+naics: dcid:NAICS/92
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/highLevelAggregation-1
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-1_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/highLevelAggregation-1
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/intermediateAggregation-5
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/intermediateAggregation-5_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/intermediateAggregation-5
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/highLevelAggregation-3
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-3_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/highLevelAggregation-3
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/highLevelAggregation-4
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-4_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/highLevelAggregation-4
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5_Worker
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/highLevelAggregation-5
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_SOCv2018/highLevelAggregation-5_Worker
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcid:Worker
+occupation: dcid:SOCv2018/highLevelAggregation-5
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_4999OrLessUSDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [- 4999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_4999OrLessUSDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [- 4999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_5000To14999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [5000 14999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_5000To14999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [5000 14999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_15000To24999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [15000 24999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_15000To24999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [15000 24999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_25000To34999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [25000 34999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_25000To34999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [25000 34999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_35000To49999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [35000 49999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_35000To49999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [35000 49999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_50000To74999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [50000 74999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_50000To74999USDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [50000 74999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_75000OrMoreUSDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [75000 - USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_NoHealthInsurance_75000OrMoreUSDollar_WithEarnings
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+income: [75000 - USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Person_16OrMoreYears_NoHealthInsurance_WithEarnings
+measuredProperty: dcid:income
+statType: dcid:medianValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcid:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NoHealthInsurance_25000OrLessUSDollar
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+income: [- 25000 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NoHealthInsurance_25000OrLessUSDollar
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+income: [- 25000 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NoHealthInsurance_25000To49999USDollar
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+income: [25000 49999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NoHealthInsurance_25000To49999USDollar
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+income: [25000 49999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NoHealthInsurance_75000To99999USDollar
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+income: [75000 99999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NoHealthInsurance_75000To99999USDollar
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+income: [75000 99999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NoHealthInsurance_100000OrMoreUSDollar
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+income: [100000 - USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NoHealthInsurance_100000OrMoreUSDollar
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+income: [100000 - USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_NoHealthInsurance
+measuredProperty: dcid:income
+statType: dcid:medianValue
+populationType: dcid:Household
+healthInsurance: dcid:NoHealthInsurance
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: dcid:PovertyStatusDetermined
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_PovertyStatusDetermined
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: dcid:PovertyStatusDetermined
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_0.5OrLessRatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [- 0.5 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_0.5OrLessRatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [- 0.5 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_0.5To0.99RatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [0.5 0.99 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_0.5To0.99RatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [0.5 0.99 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_1To1.49RatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [1 1.49 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_1To1.49RatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [1 1.49 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_1.5To1.99RatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [1.5 1.99 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_1.5To1.99RatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [1.5 1.99 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_2.0To2.99RatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [2.0 2.99 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_2.0To2.99RatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [2.0 2.99 RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_3OrMoreRatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [3 - RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance_3OrMoreRatioToPovertyLine
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+povertyStatus: [3 - RatioToPovertyLine]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [- 18 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [- 18 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_6To17Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [6 17 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_6To17Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [6 17 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [18 64 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [18 64 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [18 24 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [18 24 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To34Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [25 34 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To34Years_NoHealthInsurance
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+populationType: dcid:Person
+healthInsurance: dcid:NoHealthInsurance
+age: [25 34 Years]
+armedForcesStatus: dcid:Civilian
+institutionalization: dcid:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+

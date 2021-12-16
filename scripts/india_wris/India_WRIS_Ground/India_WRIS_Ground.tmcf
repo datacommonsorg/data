@@ -1,11 +1,11 @@
 Node: E:India_WRIS_Ground->E0
-typeOf: dcs:City
-dcid: C:India_WRIS_Ground->location_id
+dcid: C:India_WRIS_Ground->dcid
+typeOf: dcs:WaterQualitySite
 
 Node: E:India_WRIS_Ground->E1
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Arsenic
 measuredProperty: dcs:concentration
@@ -15,7 +15,7 @@ unit: dcid:MicrogramsPerLitre
 Node: E:India_WRIS_Ground->E2
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Carbonate
 measuredProperty: dcs:concentration
@@ -25,7 +25,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E3
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Calcium
 measuredProperty: dcs:concentration
@@ -35,7 +35,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E4
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Chloride
 measuredProperty: dcs:concentration
@@ -45,7 +45,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E5
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Fluorine
 measuredProperty: dcs:concentration
@@ -55,7 +55,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E6
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Iron
 measuredProperty: dcs:concentration
@@ -65,7 +65,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E7
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_HydrogenCarbonate
 measuredProperty: dcs:concentration
@@ -74,7 +74,7 @@ value: E:India_WRIS_Ground->Hydrogencarbonate (HCO3)
 Node: E:India_WRIS_Ground->E8
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Potassium
 measuredProperty: dcs:concentration
@@ -84,7 +84,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E9
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Magnesium
 measuredProperty: dcs:concentration
@@ -94,7 +94,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E10
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Nitrate
 measuredProperty: dcs:concentration
@@ -103,7 +103,7 @@ value: E:India_WRIS_Ground->Nitrate (NO3)
 Node: E:India_WRIS_Ground->E11
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Sodium
 measuredProperty: dcs:concentration
@@ -113,7 +113,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E12
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Phosphate
 measuredProperty: dcs:concentration
@@ -122,7 +122,7 @@ value: E:India_WRIS_Ground->Phosphate Ion (PO4)
 Node: E:India_WRIS_Ground->E13
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Sulfate
 measuredProperty: dcs:concentration
@@ -132,9 +132,9 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E14
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_Concentration_GroundWater_Silica
+variableMeasured: dcid:WaterQuality_Concentration_GroundWater_SiliconDioxide
 measuredProperty: dcs:concentration
 value: E:India_WRIS_Ground->Silicon dioxide (SiO2)
 unit: dcid:MilligramsPerLitre
@@ -142,7 +142,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E15
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_GroundWater_ElectricalConductivity
 measuredProperty: dcs:electricalConductivity
@@ -151,7 +151,7 @@ value: E:India_WRIS_Ground->Electrical Conductivity
 Node: E:India_WRIS_Ground->E16
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_GroundWater_ResidualSodiumCarbonate
 measuredProperty: dcs:residualSodiumCarbonate
@@ -160,7 +160,7 @@ value: E:India_WRIS_Ground->Residual Sodium Carbonate
 Node: E:India_WRIS_Ground->E17
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_GroundWater_SodiumAbsorptionRatio
 measuredProperty: dcs:sodiumAbsorptionRatio
@@ -169,7 +169,7 @@ value: E:India_WRIS_Ground->Sodium absorption ratio (SAR)
 Node: E:India_WRIS_Ground->E18
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_GroundWater_TotalHardness
 measuredProperty: dcs:totalHardness
@@ -179,7 +179,7 @@ unit: dcid:MilligramsCaCO3PerLitre
 Node: E:India_WRIS_Ground->E19
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_GroundWater_TotalAlkalinity
 measuredProperty: dcs:totalAlkalinity
@@ -189,7 +189,7 @@ unit: dcid:MilligramsCaCO3PerLitre
 Node: E:India_WRIS_Ground->E20
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_GroundWater_TotalDissolvedSolids
 measuredProperty: dcs:totalDissolvedSolids
@@ -199,7 +199,7 @@ unit: dcid:MilligramsPerLitre
 Node: E:India_WRIS_Ground->E21
 typeOf: dcid:StatVarObservation
 observationDate: E:India_WRIS_Ground->Year
-observationAbout: E:India_WRIS_Ground->dcid
+observationAbout: E:India_WRIS_Ground->E0
 observationPeriod: "P1Y"
 variableMeasured: dcid:WaterQuality_GroundWater_pH
 measuredProperty: dcs:pH

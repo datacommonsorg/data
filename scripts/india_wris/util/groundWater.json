@@ -68,7 +68,7 @@
             },
             {
                 "name": "Silicon dioxide (SiO2)",
-                "statvar": "Silica",
+                "statvar": "SiliconDioxide",
                 "unit": "dcid:MilligramsPerLitre"
             }
         ]    

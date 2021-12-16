@@ -10,4 +10,6 @@ India WRIS is managed by the National Water Informatics Centre (NWIC), a unit of
 
 The water quality indices imported in Ground Water quality data and Surface Water quality data can be found inside `./util/` folder. [groundWater.json](./util/groundWater.json) contains the pollutants and chemical properties dictated in the ground water dataset. Similarly, [surfaceWater.json](./util/surfaceWater.json) contains the pollutants and chemical properties dictated in the surface water dataset.
 
-To know more about the datasets and the portal, visit [WRIS website](https://indiawris.gov.in/wris/#/home).
+Raw data can be found inside [data](./data/) folder.
+
+To know more about the datasets and WRIS, visit [WRIS website](https://indiawris.gov.in/wris/#/home).

@@ -1,126 +1,126 @@
 Node: dcid:WaterQuality_Concentration_GroundWater_Arsenic
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Arsenic
 measuredProperty: dcs:concentration
-solute: dcs:Arsenic
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Carbonate
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Carbonate
 measuredProperty: dcs:concentration
-solute: dcs:Carbonate
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Calcium
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Calcium
 measuredProperty: dcs:concentration
-solute: dcs:Calcium
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Chloride
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Chloride
 measuredProperty: dcs:concentration
-solute: dcs:Chloride
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Fluorine
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Fluorine
 measuredProperty: dcs:concentration
-solute: dcs:Fluorine
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Iron
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Iron
 measuredProperty: dcs:concentration
-solute: dcs:Iron
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_HydrogenCarbonate
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:HydrogenCarbonate
 measuredProperty: dcs:concentration
-solute: dcs:HydrogenCarbonate
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Potassium
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Potassium
 measuredProperty: dcs:concentration
-solute: dcs:Potassium
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Magnesium
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Magnesium
 measuredProperty: dcs:concentration
-solute: dcs:Magnesium
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Nitrate
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Nitrate
 measuredProperty: dcs:concentration
-solute: dcs:Nitrate
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Sodium
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Sodium
 measuredProperty: dcs:concentration
-solute: dcs:Sodium
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Phosphate
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Phosphate
 measuredProperty: dcs:concentration
-solute: dcs:Phosphate
 measurementMethod: WRIS_India
 statType: measuredValue
 
 Node: dcid:WaterQuality_Concentration_GroundWater_Sulfate
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:Sulfate
 measuredProperty: dcs:concentration
-solute: dcs:Sulfate
 measurementMethod: WRIS_India
 statType: measuredValue
 
-Node: dcid:WaterQuality_Concentration_GroundWater_Silica
+Node: dcid:WaterQuality_Concentration_GroundWater_SiliconDioxide
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:GroundWater
+contaminatedThing: dcs:GroundWater
+contaminant: dcs:SiliconDioxide
 measuredProperty: dcs:concentration
-solute: dcs:Silica
 measurementMethod: WRIS_India
 statType: measuredValue
 

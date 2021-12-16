@@ -13,7 +13,7 @@
             },
             {
                 "name": "cyanides (CN)",
-                "statvar": "Cyanides",
+                "statvar": "Cyanide",
                 "unit": "dcid:MicrogramsPerLitre"
             },
             {
@@ -90,7 +90,7 @@
             },
             {
                 "name": "Silicon dioxide (SiO2)",
-                "statvar": "SiliconDiOxide",
+                "statvar": "SiliconDioxide",
                 "unit": "dcid:MilligramsPerLitre"
             },
             {
