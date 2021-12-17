@@ -106,43 +106,43 @@
                 "name": "Disolved Oxygen (DO)",
                 "statvar": "DissolvedOxygen",
                 "unit": "dcid:MilligramsPerLitre",
-                "dcid": "DissolvedOxygen"
+                "dcid": "dissolvedOxygen"
             },
             {
                 "name": "Electrical Conductivity",
                 "statvar": "ElectricalConductivity",
                 "unit": "",
-                "dcid": "ElectricalConductivity"
+                "dcid": "electricalConductivity"
             },
             {
                 "name": "Hardness Total",
                 "statvar": "TotalHardness",
                 "unit": "dcid:MilligramsCaCO3PerLitre",
-                "dcid": "TotalHardness"
+                "dcid": "totalHardness"
             },
             {
                 "name": "Alkalinity Total",
                 "statvar": "TotalAlkalinity",
                 "unit": "dcid:MilligramsCaCO3PerLitre",
-                "dcid": "TotalAlkalinity"
+                "dcid": "totalAlkalinity"
             },
             {
                 "name": "Residual Sodium Carbonate",
                 "statvar": "ResidualSodiumCarbonate",
                 "unit": "",
-                "dcid": "ResidualSodiumCarbonate"
+                "dcid": "residualSodiumCarbonate"
             },
             {
                 "name": "Sodium absorption ratio (SAR)",
                 "statvar": "SodiumAbsorptionRatio",
                 "unit": "",
-                "dcid": "SodiumAbsorptionRatio"
+                "dcid": "sodiumAbsorptionRatio"
             },
             {
                 "name": "Total Dissolved Solids",
                 "statvar": "TotalDissolvedSolids",
                 "unit": "dcid:MilligramsPerLitre",
-                "dcid": "TotalDissolvedSolids"
+                "dcid": "totalDissolvedSolids"
             },
             {
                 "name": "Potential of Hydrogen (pH)",

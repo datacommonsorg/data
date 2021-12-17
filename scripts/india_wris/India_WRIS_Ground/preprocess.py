@@ -19,10 +19,10 @@ DATASET_NAME = 'India_WRIS_Ground'
 
 ## Defining MCF and TMCF template nodes
 
-SOLUTE_MCF_NODES = """Node: dcid:WaterQuality_Concentration_{water_type}_{variable}
+SOLUTE_MCF_NODES = """Node: dcid:WaterQuality_Concentration_GroundWater_{variable}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-contaminatedThing: dcs:{water_type}
+contaminatedThing: dcs:GroundWater
 contaminant: dcs:{variable}
 measuredProperty: dcs:concentration
 measurementMethod: WRIS_India
@@ -30,10 +30,10 @@ statType: measuredValue
 
 """
 
-CHEMPROP_MCF_NODES = """Node: dcid:WaterQuality_{water_type}_{variable}
+CHEMPROP_MCF_NODES = """Node: dcid:WaterQuality_GroundWater_{variable}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
-waterSource: dcs:{water_type}
+waterSource: dcs:GroundWater
 measuredProperty: dcs:{dcid}
 measurementMethod: WRIS_India
 statType: measuredValue
@@ -44,26 +44,32 @@ TMCF_ISOCODE = """Node: E:{dataset_name}->E0
 dcid: C:{dataset_name}->dcid
 typeOf: dcs:WaterQualitySite
 
+Node: E:{dataset_name}->E1
+typeOf: dcs:Place
+lgdCode: C:{dataset_name}->DistrictCode
+
 """
 
 SOLUTE_TMCF_NODES = """Node: E:{dataset_name}->E{index}
 typeOf: dcid:StatVarObservation
-observationDate: E:{dataset_name}->Year
+observationDate: C:{dataset_name}->Year
 observationAbout: E:{dataset_name}->E0
+containedIn: E:{dataset_name}->E1
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_Concentration_{water_type}_{variable}
+variableMeasured: dcid:WaterQuality_Concentration_GroundWater_{variable}
 measuredProperty: dcs:concentration
-value: E:{dataset_name}->{name}
+value: C:{dataset_name}->{name}
 """
 
 CHEMPROP_TMCF_NODES = """Node: E:{dataset_name}->E{index}
 typeOf: dcid:StatVarObservation
-observationDate: E:{dataset_name}->Year
+observationDate: C:{dataset_name}->Year
 observationAbout: E:{dataset_name}->E0
+containedIn: E:{dataset_name}->E1
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_{water_type}_{variable}
+variableMeasured: dcid:WaterQuality_GroundWater_{variable}
 measuredProperty: dcs:{dcid}
-value: E:{dataset_name}->{name}
+value: C:{dataset_name}->{name}
 """
 
 UNIT = """unit: {unit}
@@ -80,7 +86,6 @@ template_strings = {
 }
 
 preprocessor = WaterQualityBase(dataset_name=DATASET_NAME,
-                                water_type='GroundWater',
                                 util_names='groundWater',
                                 template_strings=template_strings)
 

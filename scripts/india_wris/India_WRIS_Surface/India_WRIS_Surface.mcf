@@ -173,7 +173,7 @@ Node: dcid:WaterQuality_SurfaceWater_DissolvedOxygen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:DissolvedOxygen
+measuredProperty: dcs:dissolvedOxygen
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -181,7 +181,7 @@ Node: dcid:WaterQuality_SurfaceWater_ElectricalConductivity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:ElectricalConductivity
+measuredProperty: dcs:electricalConductivity
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -189,7 +189,7 @@ Node: dcid:WaterQuality_SurfaceWater_TotalHardness
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:TotalHardness
+measuredProperty: dcs:totalHardness
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -197,7 +197,7 @@ Node: dcid:WaterQuality_SurfaceWater_TotalAlkalinity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:TotalAlkalinity
+measuredProperty: dcs:totalAlkalinity
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -205,7 +205,7 @@ Node: dcid:WaterQuality_SurfaceWater_ResidualSodiumCarbonate
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:ResidualSodiumCarbonate
+measuredProperty: dcs:residualSodiumCarbonate
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -213,7 +213,7 @@ Node: dcid:WaterQuality_SurfaceWater_SodiumAbsorptionRatio
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:SodiumAbsorptionRatio
+measuredProperty: dcs:sodiumAbsorptionRatio
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -221,7 +221,7 @@ Node: dcid:WaterQuality_SurfaceWater_TotalDissolvedSolids
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:TotalDissolvedSolids
+measuredProperty: dcs:totalDissolvedSolids
 measurementMethod: WRIS_India
 statType: measuredValue
 

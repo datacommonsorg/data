@@ -15,13 +15,14 @@
 import os
 import pandas as pd
 import json
+import re
 from india.geo.districts import IndiaDistrictsMapper
 
 
 class WaterQualityBase():
-    def __init__(self, dataset_name, water_type, util_names, template_strings):
+
+    def __init__(self, dataset_name, util_names, template_strings):
         self.dataset_name = dataset_name
-        self.water_type = water_type
         self.util_names = util_names
         self.module_dir = os.path.dirname(__file__)
 
@@ -46,7 +47,10 @@ class WaterQualityBase():
         self.df = pd.read_csv(
             os.path.join(self.module_dir,
                          'data/{}.csv'.format(self.util_names)))
+        # Dropping rows with all data missing
+        self.df.dropna(thresh=11, inplace=True)
 
+        # Mapping district names to LGD Codes
         mapper = IndiaDistrictsMapper()
         df_map = self.df[['StateName',
                           'DistrictName']].drop_duplicates().dropna()
@@ -55,15 +59,18 @@ class WaterQualityBase():
                 x['StateName'], x['DistrictName']),
             axis=1)
 
+        # Merging LGD codes with original df and creating dcids
         self.df = self.df.merge(df_map.drop('StateName', axis=1),
                                 on='DistrictName',
                                 how='left')
         self.df['dcid'] = self.df.apply(lambda x: ''.join([
             'india_wris/',
-            str(x['DistrictCode']), '_', x['Station Name'].strip()
+            str(x['DistrictCode']), '_', ''.join(
+                re.split('\W+', x['Station Name']))
         ]),
                                         axis=1)
 
+        # Saving the df with codes and dcids in `csv_save_path`
         csv_save_path = os.path.join(self.module_dir,
                                      '{}'.format(self.dataset_name),
                                      "{}.csv".format(self.dataset_name))
@@ -82,8 +89,7 @@ class WaterQualityBase():
         tmcf_file = os.path.join(self.module_dir,
                                  '{}'.format(self.dataset_name),
                                  "{}.tmcf".format(self.dataset_name))
-        mcf_file = os.path.join(self.module_dir,
-                                '{}'.format(self.dataset_name),
+        mcf_file = os.path.join(self.module_dir, '{}'.format(self.dataset_name),
                                 "{}.mcf".format(self.dataset_name))
 
         ## Importing water quality indices from util/
@@ -91,12 +97,12 @@ class WaterQualityBase():
             properties = json.loads(j.read())
 
         pollutants, chem_props = properties
-        idx = 1
+        idx = 2  # StatVarObs start from E2; E0 and E1 are location nodes
 
         ## Writing MCF and TMCF files
         with open(mcf_file, 'w') as mcf, open(tmcf_file, 'w') as tmcf:
 
-            # Writing TMCF Location Node
+            # Writing TMCF Location Nodes
             tmcf.write(self.site_dcid.format(dataset_name=self.dataset_name))
 
             # Pollutant nodes are written first
@@ -106,19 +112,16 @@ class WaterQualityBase():
                 unit = pollutant['unit']
 
                 # Writing MCF Node
-                mcf.write(
-                    self.solute_mcf.format(variable=statvar,
-                                           water_type=self.water_type))
+                mcf.write(self.solute_mcf.format(variable=statvar))
 
                 # Writing TMCF Property Node
                 tmcf.write(
                     self.solute_tmcf.format(dataset_name=self.dataset_name,
                                             index=idx,
                                             variable=statvar,
-                                            water_type=self.water_type,
                                             name=name))
 
-                # If unit is available for a property, unit is written in TMCF
+                # If unit is available for a StatVar, unit is written in TMCF
                 if unit:
                     tmcf.write(self.unit_node.format(unit=unit))
                 # else, unit is omitted from the node
@@ -137,15 +140,13 @@ class WaterQualityBase():
                 mcf.write(
                     self.chemprop_mcf.format(variable=statvar,
                                              dcid=dcid,
-                                             statvar=statvar,
-                                             water_type=self.water_type))
+                                             statvar=statvar))
                 tmcf.write(
                     self.chemprop_tmcf.format(dataset_name=self.dataset_name,
                                               index=idx,
                                               unit=unit,
                                               variable=statvar,
                                               dcid=dcid,
-                                              water_type=self.water_type,
                                               name=name))
                 if unit:
                     tmcf.write(self.unit_node.format(unit=unit))
