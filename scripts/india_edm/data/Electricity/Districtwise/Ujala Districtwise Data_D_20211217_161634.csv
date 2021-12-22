@@ -1,0 +1,6 @@
+Detail Data For Ujala Districtwise Data Having Year : ALL
+.
+StateLocationCode,StateLocationName,DistrictLocationCode,DistrictLocationName,ApplianceId,YearValue,MonthValue,AvoidedPeakDemand,Co2Reduction,CostSaved,EnergySaved,TotalIssued
+UTK-23,UTTARAKHAND,B_THR,TEHRI,2,2021,4,8.00,30628.00,151247.00,37812.00,291158.00
+BGL-72,WEST BENGAL,F_WMID,WEST MIDNAPORE,3,2021,4,0.00,2.00,8979.00,2641.00,6815.00
+BGL-72,WEST BENGAL,T_WMID,WEST MIDNAPORE,4,2021,4,1.00,7.00,27434.00,8069.00,67241.00

@@ -1,0 +1,17 @@
+{
+    "CoalTypes": {
+        "COKE": "CokingCoal",
+        "COKING": "CokingCoal",
+        "NON-COKING": "CoalProducts",
+        "LIGNITE": "LigniteCoal",
+        "MIDDLINGS": "CoalProducts",
+        "RAW COAL": "CoalProducts",
+        "WASHED COAL": "CoalProducts",
+        "TOTAL COAL": "CoalProducts",
+        "MEDIUM COKING": "CokingCoal",
+        "SEMI-COKING": "CokingCoal",
+        "PRIME COKING": "CokingCoal",
+        "HIGH SULPHUR": "CoalProducts",
+        "COAL PRODUCT": "CoalProducts"
+    }
+}
