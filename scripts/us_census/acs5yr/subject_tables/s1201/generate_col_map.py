@@ -69,6 +69,8 @@ def process_zip_file(zip_file_path,
     with ZipFile(zip_file_path) as zf:
         for filename in zf.namelist():
             if 'data_with_overlays' in filename:
+              #  Reading csv file using pandas instead of csv library
+              #  Storing csv data in a pandas dataframe
                 df = pd.read_csv(zf.open(filename, 'r'),
                                  header=header_row,
                                  low_memory=False)
