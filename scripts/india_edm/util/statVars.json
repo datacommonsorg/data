@@ -113,11 +113,11 @@
 			"unit": "GigawattHour",
 			"scale": "1"
 		},
-		"Consumption_GWh_PerCapita": {
+		"Consumption_KWh_PerCapita": {
 			"property": "Consumption",
 			"popType": "Electricity",
 			"consumingSector": "True",
-			"unit": "GigawattHour",
+			"unit": "KilowattHour",
 			"scale": "1"
 		},
 		"Generation_GWh": {

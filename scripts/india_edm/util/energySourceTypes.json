@@ -1,5 +1,5 @@
 {
-    "EnergySourceTypes": {
+    "EnergySource": {
         "BIOMASS": "OtherBiomass",
         "SMALL HYDRO": "PumpedHydro",
         "SOLAR": "Solar",

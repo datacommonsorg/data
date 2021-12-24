@@ -1,5 +1,5 @@
 {
-    "OilTypes": {
+    "OilType": {
         "LPG": "LiquefiedPetroleumGas",
         "PETROL": "PetroleumLiquids",
         "NAPHTHA": "Naphtha",
@@ -20,7 +20,7 @@
         "WAXES": "ParaffinWaxes"
     },
     
-    "GasTypes": {
+    "GasType": {
         "NATURAL GAS": "NaturalGas",
         "LIQUIFIED NATURAL GAS (LNG)": "NaturalGasLiquids",
         "COAL BED METHANE (CBM)": "EIA_CoalDerivedSynthesisGas"

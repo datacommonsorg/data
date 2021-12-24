@@ -1,0 +1,148 @@
+YearValue,GasType,Onshore_OffShore,State,value,mQual,MonthValue,Date,mProp,popType,type,StatVar
+2008,NATURAL GAS,ONSHORE,WEST BENGAL,15000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2009,NATURAL GAS,ONSHORE,WEST BENGAL,20000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,ONSHORE,WEST BENGAL,38400000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,ONSHORE,WEST BENGAL,41400000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,WEST BENGAL,79100000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,WEST BENGAL,100800000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,WEST BENGAL,156500000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,WEST BENGAL,223700000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,WEST BENGAL,389400000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,WEST BENGAL,555067000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,WEST BENGAL,531068000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,WEST BENGAL,350222000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,WEST BENGAL,305900000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,JHARKHAND,3560000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,JHARKHAND,2950000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,JHARKHAND,3380000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,JHARKHAND,2480000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,JHARKHAND,2040000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,JHARKHAND,3083000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,JHARKHAND,3964000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,JHARKHAND,3580000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,JHARKHAND,4650000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,MADHYA PRADESH,1530000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,MADHYA PRADESH,3440000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,MADHYA PRADESH,5650000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,MADHYA PRADESH,2080000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,MADHYA PRADESH,1400000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,MADHYA PRADESH,6439000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,MADHYA PRADESH,199772000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,MADHYA PRADESH,356662000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,MADHYA PRADESH,344900000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2006,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1663000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2007,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1525000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2008,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1567000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2009,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1524000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1479260000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1384390000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1363780000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1248550000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1171340000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,ANDHRA PRADESH,540590000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,ANDHRA PRADESH,619360000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,ANDHRA PRADESH,867775000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,ANDHRA PRADESH,959161000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1081306000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,ANDHRA PRADESH,912320000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2006,NATURAL GAS,ONSHORE,ASSAM,2455000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2007,NATURAL GAS,ONSHORE,ASSAM,2561000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2008,NATURAL GAS,ONSHORE,ASSAM,2628000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2009,NATURAL GAS,ONSHORE,ASSAM,2603000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,ONSHORE,ASSAM,2703010000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,ONSHORE,ASSAM,2679850000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,ASSAM,2904540000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,ASSAM,2909790000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,ASSAM,2868030000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,ASSAM,2958250000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,ASSAM,3024780000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,ASSAM,3127880000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,ASSAM,3219024000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,ASSAM,3289059000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,ASSAM,3141230000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,39600000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,44490000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,39500000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,41070000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,41390000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,33530000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,29560000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,27543000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,29513000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,27810000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,45590000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2006,NATURAL GAS,ONSHORE,GUJARAT,3831000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2007,NATURAL GAS,ONSHORE,GUJARAT,3294000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2008,NATURAL GAS,ONSHORE,GUJARAT,2931000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2009,NATURAL GAS,ONSHORE,GUJARAT,2605000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,ONSHORE,GUJARAT,2444180000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,ONSHORE,GUJARAT,2261830000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,GUJARAT,2172930000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,GUJARAT,2032090000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,GUJARAT,1656940000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,GUJARAT,1526820000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,GUJARAT,1490080000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,GUJARAT,1580267000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,GUJARAT,1606663000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,GUJARAT,1402223000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,GUJARAT,1342330000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2006,NATURAL GAS,ONSHORE,RAJASTHAN,242000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2007,NATURAL GAS,ONSHORE,RAJASTHAN,242000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2008,NATURAL GAS,ONSHORE,RAJASTHAN,255000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2009,NATURAL GAS,ONSHORE,RAJASTHAN,216000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,ONSHORE,RAJASTHAN,238860000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,ONSHORE,RAJASTHAN,432490000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,RAJASTHAN,590180000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,RAJASTHAN,685420000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,RAJASTHAN,982200000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,RAJASTHAN,1177770000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,RAJASTHAN,1338010000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,RAJASTHAN,1277341000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,RAJASTHAN,1441934000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,RAJASTHAN,1483249000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,RAJASTHAN,1882520000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2006,NATURAL GAS,ONSHORE,TAMILNADU,906000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2007,NATURAL GAS,ONSHORE,TAMILNADU,1130000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2008,NATURAL GAS,ONSHORE,TAMILNADU,1169000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2009,NATURAL GAS,ONSHORE,TAMILNADU,1242000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,ONSHORE,TAMILNADU,1177750000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,ONSHORE,TAMILNADU,1119180000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,TAMILNADU,1284760000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,TAMILNADU,1206040000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,TAMILNADU,1304020000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,TAMILNADU,1191570000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,TAMILNADU,1010870000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,TAMILNADU,983168000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,TAMILNADU,1207218000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,TAMILNADU,1207853000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,TAMILNADU,1096650000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2006,NATURAL GAS,ONSHORE,TRIPURA,480000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2007,NATURAL GAS,ONSHORE,TRIPURA,520000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2008,NATURAL GAS,ONSHORE,TRIPURA,534000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2009,NATURAL GAS,ONSHORE,TRIPURA,553000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,ONSHORE,TRIPURA,563790000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,ONSHORE,TRIPURA,609980000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,ONSHORE,TRIPURA,643900000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,ONSHORE,TRIPURA,646740000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,ONSHORE,TRIPURA,822240000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,ONSHORE,TRIPURA,1140040000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,ONSHORE,TRIPURA,1331960000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,ONSHORE,TRIPURA,1429908000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,ONSHORE,TRIPURA,1440370000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,ONSHORE,TRIPURA,1554303000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,ONSHORE,TRIPURA,1472750000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2006,NATURAL GAS,OFFSHORE,OFFSHORE,22624000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2007,NATURAL GAS,OFFSHORE,OFFSHORE,22476000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2008,NATURAL GAS,OFFSHORE,OFFSHORE,23318000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2009,NATURAL GAS,OFFSHORE,OFFSHORE,24081000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2010,NATURAL GAS,OFFSHORE,OFFSHORE,38811390000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2011,NATURAL GAS,OFFSHORE,OFFSHORE,43645090000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2012,NATURAL GAS,OFFSHORE,OFFSHORE,38474840000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2013,NATURAL GAS,OFFSHORE,OFFSHORE,31802340000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2014,NATURAL GAS,OFFSHORE,OFFSHORE,26395200000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2015,NATURAL GAS,OFFSHORE,OFFSHORE,24860640000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2016,NATURAL GAS,OFFSHORE,OFFSHORE,23011740000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2017,NATURAL GAS,OFFSHORE,OFFSHORE,22038231000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2018,NATURAL GAS,OFFSHORE,OFFSHORE,22010620000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2019,NATURAL GAS,OFFSHORE,OFFSHORE,22117104000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+2020,NATURAL GAS,OFFSHORE,OFFSHORE,20635390000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas

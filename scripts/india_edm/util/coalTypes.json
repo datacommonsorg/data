@@ -1,5 +1,5 @@
 {
-    "CoalTypes": {
+    "CoalType": {
         "COKE": "CokingCoal",
         "COKING": "CokingCoal",
         "NON-COKING": "CoalProducts",

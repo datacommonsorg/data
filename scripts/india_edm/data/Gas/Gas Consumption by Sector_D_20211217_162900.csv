@@ -1,6 +1,6 @@
 Detail Data For Gas Consumption by Sector Having Year : ALL
 .
-YearValue,Energy_NonEnergy,ConsumingSector,GasType,Qty_MMSCM
+YearValue,Energy_NonEnergy,ConsumingSector,GasType,QtyMMSCM_Consumption
 2006,ENERGY,POWER,NATURAL GAS,11878.000
 2008,ENERGY,POWER,NATURAL GAS,12037.000
 2009,ENERGY,POWER,NATURAL GAS,12603.000
