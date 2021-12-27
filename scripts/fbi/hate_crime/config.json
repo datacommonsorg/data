@@ -417,5 +417,187 @@
         "CrimeAgainstSociety": {
             "crimeType": "CrimeAgainstSociety"
         }
+    },
+    "OFFENDER_CATEGORY": {
+        "UnknownOffender": {
+            "offenderType": "UnknownOffender"
+        },
+        "KnownOffender": {
+            "offenderType": "KnownOffender"
+        }
+    },
+    "VICTIM_TYPES": {
+        "Financial Institution": {
+            "victimType": "FinancialInstitution"
+        },
+        "Law Enforcement Officer": {
+            "victimType": "LawEnforcementOfficer"
+        },
+        "Society/Public": {
+            "victimType": "Society"
+        },
+        "Individual": {
+            "victimType": "Person"
+        },
+        "Government": {
+            "victimType": "Government"
+        },
+        "Unknown": {
+            "victimType": "UCR_UnknownVictimType"
+        },
+        "Religious Organization": {
+            "victimType": "ReligiousOrganization"
+        },
+        "Business": {
+            "victimType": "Business"
+        },
+        "Other": {
+            "victimType": "UCR_OtherVictimType"
+        }
+    },
+    "MULTIPLE_VICTIM_TYPE": {
+        "M": {
+            "victimType": "MultipleVictimType"
+        }
+    },
+    "LOCATION_NAME": {
+        "Cyberspace": {
+            "locationOfCrime": "Cyberspace"
+        },
+        "Rest Area": {
+            "locationOfCrime": "RestArea"
+        },
+        "Commercial/Office Building": {
+            "locationOfCrime": "CommercialOrOfficeBuilding"
+        },
+        "Grocery/Supermarket": {
+            "locationOfCrime": "GroceryStore__Supermarket"
+        },
+        "School-Elementary/Secondary": {
+            "locationOfCrime": "ElementarySchool__HighSchool"
+        },
+        "Construction Site": {
+            "locationOfCrime": "ConstructionSite"
+        },
+        "Air/Bus/Train Terminal": {
+            "locationOfCrime": "Airport__BusStation__TrainStation"
+        },
+        "Camp/Campground": {
+            "locationOfCrime": "Campground"
+        },
+        "Military Installation": {
+            "locationOfCrime": "MilitaryInstallation"
+        },
+        "Government/Public Building": {
+            "locationOfCrime": "GovernmentOrPublicBuilding"
+        },
+        "Church/Synagogue/Temple/Mosque": {
+            "locationOfCrime": "PlaceOfWorship"
+        },
+        "Park/Playground": {
+            "locationOfCrime": "Park__Playground"
+        },
+        "Farm Facility": {
+            "locationOfCrime": "FarmFacility"
+        },
+        "Community Center": {
+            "locationOfCrime": "CommunityCenter"
+        },
+        "Other/Unknown": {
+            "locationOfCrime": "UCR_UnclassifiedLocation"
+        },
+        "Abandoned/Condemned Structure": {
+            "locationOfCrime": "AbandonedOrCondemnedStructure"
+        },
+        "Department/Discount Store": {
+            "locationOfCrime": "DepartmentStore"
+        },
+        "Amusement Park": {
+            "locationOfCrime": "AmusementPark"
+        },
+        "Highway/Road/Alley/Street/Sidewalk": {
+            "locationOfCrime": "HighwayOrRoadOrAlleyOrStreetOrSidewalk"
+        },
+        "Jail/Prison/Penitentiary/Corrections Facility": {
+            "locationOfCrime": "Prisons"
+        },
+        "Tribal Lands": {
+            "locationOfCrime": "TribalLands"
+        },
+        "Arena/Stadium/Fairgrounds/Coliseum": {
+            "locationOfCrime": "StadiumOrArena"
+        },
+        "Auto Dealership New/Used": {
+            "locationOfCrime": "AutoDealer"
+        },
+        "Shelter-Mission/Homeless": {
+            "locationOfCrime": "MissionOrHomelessShelter"
+        },
+        "Hotel/Motel/Etc.": {
+            "locationOfCrime": "LodgingBusiness"
+        },
+        "Field/Woods": {
+            "locationOfCrime": "FieldOrWoods"
+        },
+        "Specialty Store": {
+            "locationOfCrime": "SpecialtyStore"
+        },
+        "Industrial Site": {
+            "locationOfCrime": "IndustrialSite"
+        },
+        "School/College": {
+            "locationOfCrime": "School__CollegeOrUniversity"
+        },
+        "Residence/Home": {
+            "locationOfCrime": "Residence"
+        },
+        "Restaurant": {
+            "locationOfCrime": "Restaurant"
+        },
+        "Gambling Facility/Casino/Race Track": {
+            "locationOfCrime": "GamblingFacilityOrCasinoOrRaceTrack"
+        },
+        "Convenience Store": {
+            "locationOfCrime": "ConvenienceStore"
+        },
+        "Rental Storage Facility": {
+            "locationOfCrime": "SelfStorage"
+        },
+        "School-College/University": {
+            "locationOfCrime": "CollegeOrUniversity"
+        },
+        "ATM Separate from Bank": {
+            "locationOfCrime": "ATMSeparateFromBank"
+        },
+        "Service/Gas Station": {
+            "locationOfCrime": "GasStation"
+        },
+        "Parking/Drop Lot/Garage": {
+            "locationOfCrime": "ParkingFacility"
+        },
+        "Bank/Savings and Loan": {
+            "locationOfCrime": "BankOrSavingsAndLoan"
+        },
+        "Dock/Wharf/Freight/Modal Terminal": {
+            "locationOfCrime": "DockOrWharfOrFreightOrModalTerminal"
+        },
+        "Bar/Nightclub": {
+            "locationOfCrime": "BarOrPub__NightClub"
+        },
+        "Lake/Waterway/Beach": {
+            "locationOfCrime": "BodyOfWater__Beach"
+        },
+        "Shopping Mall": {
+            "locationOfCrime": "ShoppingCenter"
+        },
+        "Drug Store/Doctor's Office/Hospital": {
+            "locationOfCrime": "MedicalBusiness"
+        },
+        "Liquor Store": {
+            "locationOfCrime": "LiquorStore"
+        },
+        "Daycare Facility": {
+            "locationOfCrime": "ChildCare"
+        }
     }
 }

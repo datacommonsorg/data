@@ -498,23 +498,23 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         stat_var_dict1 = {
             'measuredProperty': 'dcid:count',
             'statType': 'dcid:measuredValue',
-            'populationType': 'dcid:CriminalActivities',
-            'isHateCrime': 'True',
+            'populationType': 'dcid:Person',
+            'isInternetUser': 'True',
             'typeOf': 'dcs:StatisticalVariable'
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict1)
-        expected_dcid = ('Count_CriminalActivities_IsHateCrime')
+        expected_dcid = ('Count_Person_IsInternetUser')
         self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict2 = {
             'measuredProperty': 'dcid:count',
             'statType': 'dcid:measuredValue',
-            'populationType': 'dcid:CriminalActivities',
-            'isHateCrime': 'False',
+            'populationType': 'dcid:Person',
+            'isInternetUser': 'False',
             'typeOf': 'dcs:StatisticalVariable'
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict2)
-        expected_dcid = ('Count_CriminalActivities_NotHateCrime')
+        expected_dcid = ('Count_Person_NotInternetUser')
         self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict3 = {

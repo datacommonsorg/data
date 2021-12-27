@@ -351,7 +351,7 @@ _US_GEO_CODE_UPDATE_MAP = {
         'frankfort ny'
 }
 
-_IGNORE_STATE_ABBR = ['FS'] # Ignoring federal codes
+_IGNORE_STATE_ABBR = ['FS']  # Ignoring federal codes
 
 city = {}
 with open(os.path.join(city_geocodes_csv_path), encoding="utf8") as csvfile:
@@ -416,9 +416,6 @@ def city_to_dcid(state_abbr, city_name):
         city_state = _US_GEO_CODE_UPDATE_MAP[city_state]
 
     if city_state in city:
-        city_dcid = city[city_state]
-        if city_dcid in _IGNORE_LIST:
-            return ''
         return "geoId/" + city[city_state]
     else:
         return ''

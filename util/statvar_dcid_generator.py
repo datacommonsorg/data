@@ -244,10 +244,10 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'targetedReligion': {
         'prepend': 'TargetedReligion'
-    },    
+    },
     'targetedSexualOrientation': {
         'prepend': 'TargetedSexualOrientation'
-    },    
+    },
     'targetedDisabilityStatus': {
         'prepend': 'TargetedDisabilityStatus'
     },
@@ -263,7 +263,7 @@ _BOOLEAN_PROPS = [
     'isGenomeRepresentationFull', 'isGift', 'isInternetUser',
     'isLiquefiedNaturalGasStored', 'isLiveBroadcast', 'isNaturalGasStored',
     'isPharmacodynamicRelationship', 'isPharmacokineticRelationship',
-    'isRefSeqGenBankAssembliesIdentical', 'isHateCrime'
+    'isRefSeqGenBankAssembliesIdentical'
 ]
 
 # To map stat vars which do not follow the conventions of stat var dcid naming
