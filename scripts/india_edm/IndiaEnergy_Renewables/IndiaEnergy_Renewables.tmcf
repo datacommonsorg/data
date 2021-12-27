@@ -1,0 +1,11 @@
+Node: E:IndiaEnergy_Renewables->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaEnergy_Renewables->StatVar
+observationDate: C:IndiaEnergy_Renewables->Date
+observationAbout: E:IndiaEnergy_Renewables->E1
+value: C:IndiaEnergy_Renewables->value
+unit: C:IndiaEnergy_Renewables->unit
+
+Node: E:IndiaEnergy_Renewables->E1
+typeOf: schema:Place
+isoCode: C:IndiaEnergy_Renewables->StateCode

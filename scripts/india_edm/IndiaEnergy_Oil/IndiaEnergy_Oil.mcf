@@ -1,0 +1,252 @@
+Node: dcid:Annual_Consumption_Fuel_OilGasExtraction_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:OilGasExtraction
+
+Node: dcid:Annual_Consumption_Fuel_Agriculture_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:Agriculture
+
+Node: dcid:Annual_Consumption_Fuel_Manufacturing_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:Manufacturing
+
+Node: dcid:Annual_Consumption_Fuel_MiningAndQuarryingIndustry_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:MiningAndQuarryingIndustry
+
+Node: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:UN_UnspecifiedSector
+
+Node: dcid:Annual_Consumption_Fuel_ElectricityGeneration_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:ElectricityGeneration
+
+Node: dcid:Annual_Consumption_Fuel_CommerceAndPublicServices_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:CommerceAndPublicServices
+
+Node: dcid:Annual_Consumption_Fuel_TransportIndustry_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:TransportIndustry
+
+Node: dcid:Annual_Consumption_Fuel_Households_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:Households
+
+Node: dcid:Annual_Consumption_Fuel_IronSteel_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:IronSteel
+
+Node: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:ChemicalPetrochemicalIndustry
+
+Node: dcid:Annual_Consumption_Fuel_Industry_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:Industry
+
+Node: dcid:Annual_Consumption_Fuel_NonEnergyIndustry_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:NonEnergyIndustry
+
+Node: dcid:Annual_Consumption_Fuel_OilRefineries_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:
+consumingSector: dcs:OilRefineries
+
+Node: dcid:Annual_Capacity_Fuel_LiquefiedPetroleumGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:capacity
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LiquefiedPetroleumGas
+
+
+Node: dcid:Annual_Capacity_Fuel_CrudeOil
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:capacity
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CrudeOil
+
+
+Node: dcid:Annual_Capacity_Fuel_PetroleumLiquids
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:capacity
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:PetroleumLiquids
+
+
+Node: dcid:Monthly_Imports_Fuel_LiquefiedPetroleumGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:LiquefiedPetroleumGas
+
+
+Node: dcid:Monthly_Imports_Fuel_Naphtha
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:Naphtha
+
+
+Node: dcid:Monthly_Imports_Fuel_EIA_Kerosene
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:EIA_Kerosene
+
+
+Node: dcid:Monthly_Imports_Fuel_GasolineJetFuel
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:GasolineJetFuel
+
+
+Node: dcid:Monthly_Imports_Fuel_DieselOil
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:DieselOil
+
+
+Node: dcid:Monthly_Imports_Fuel_OilShaleAndTarSands
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:OilShaleAndTarSands
+
+
+Node: dcid:Monthly_Imports_Fuel_PetroleumCoke
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:PetroleumCoke
+
+
+Node: dcid:Monthly_Imports_Fuel_UN_OtherOilProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:UN_OtherOilProducts
+
+
+Node: dcid:Monthly_Imports_Fuel_FuelOil
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:FuelOil
+
+
+Node: dcid:Monthly_Imports_Fuel_MotorGasoline
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:MotorGasoline
+
+
+Node: dcid:Monthly_Imports_Fuel_Lubricants
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:Lubricants
+
+

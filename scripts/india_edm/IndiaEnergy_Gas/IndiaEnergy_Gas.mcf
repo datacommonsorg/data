@@ -1,0 +1,162 @@
+Node: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:ElectricityGeneration
+
+Node: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:Industry
+
+Node: dcid:Annual_Consumption_Fuel_Manufacturing_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:Manufacturing
+
+Node: dcid:Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:CommerceAndPublicServices
+
+Node: dcid:Annual_Consumption_Fuel_FoodAndTobaccoIndustry_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:FoodAndTobaccoIndustry
+
+Node: dcid:Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:EnergyIndustryOwnUse
+
+Node: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:OilRefineries
+
+Node: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:UN_UnspecifiedSector
+
+Node: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:Agriculture
+
+Node: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:ChemicalPetrochemicalIndustry
+
+Node: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:IronSteel
+
+Node: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:OilGasExtraction
+
+Node: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:Households
+
+Node: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+consumingSector: dcs:TransportIndustry
+
+Node: dcid:Monthly_Generation_Fuel_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:generation
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+
+
+Node: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:generation
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+energySource: dcs:EIA_CoalDerivedSynthesisGas
+
+
+Node: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:imports
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGasLiquids
+
+
+Node: dcid:Annual_Generation_Fuel_NaturalGas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Fuel
+measuredProperty: dcs:generation
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:NaturalGas
+
+

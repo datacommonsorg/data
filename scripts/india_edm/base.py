@@ -1,23 +1,54 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import pandas as pd
 import json
 from datetime import datetime
-os.chdir('../')
 from india.geo.states import IndiaStatesMapper
 
 module_dir = os.path.dirname(__file__)
 
+TMCF_STRING = """Node: E:{dataset_name}->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:{dataset_name}->StatVar
+observationDate: C:{dataset_name}->Date
+observationAbout: E:{dataset_name}->E1
+value: C:{dataset_name}->value
+unit: C:{dataset_name}->unit
+
+Node: E:{dataset_name}->E1
+typeOf: schema:Place
+isoCode: C:{dataset_name}->StateCode
+"""
+
 class EnergyIndiaBase():
     
-    def __init__(self, category, json_file, json_key, popType):
+    def __init__(self, category, json_file, json_key, dataset_name,
+                 mcf_path, tmcf_path, mcf_strings):
         self.cat = category
         self.json_file = json_file
         self.json_key = json_key
-        self.popType = popType
-        self.mcf_path = os.path.join(module_dir, 
-                                     "IndiaEnergy_{}.mcf")
+        self.dataset_name = dataset_name
+        self.mcf_path = mcf_path
+        self.tmcf_path = tmcf_path
         
-        self.columns = ['Date', 'StateCode', 'value', 'StatVar']
+        self.NODE = mcf_strings['node']
+        self.TYPE = mcf_strings['type']
+        self.SECTOR = mcf_strings['sector']
+
+        self.columns = ['Date', 'StateCode', 'value', 'StatVar', 'unit']
     
     def _load_jsons(self):
         util_path = os.path.join(module_dir, 'util/')
@@ -54,7 +85,7 @@ class EnergyIndiaBase():
         df['mProp'] = self.js_statvars[self.cat][statvar]['property']
         df['popType'] = self.js_statvars[self.cat][statvar]['popType']
         df['unit'] = self.js_statvars[self.cat][statvar]['unit']
-        
+        print(df.columns)
         try:
             df['type'] = df[self.json_key].apply(lambda x: self.js_types[self.json_key][x])
         except KeyError:
@@ -87,45 +118,41 @@ class EnergyIndiaBase():
             
         return df
     
-    def _create_mcfs(self, df):
-        NODE = """Node: dcid:{statvar}
-                typeOf: dcs:StatisticalVariable
-                populationType: dcs:{pop}
-                measuredProperty: dcs:{mProp}
-                measurementQualifier: dcs:{mQual}
-                {:energy_type}
-                {:consumingSector}
-                statType: dcs:measuredValue
-                """
-        TYPE = "energySource: dcs:{}"
-        SECTOR = "consumingSector: dcs:{}"
+    def create_mcfs(self, df):
+        
+        mcf = open(self.mcf_path, 'w')
         
         for statvar in df['StatVar'].unique().tolist():
-            pop = self.popType
-            mProp = df.loc[df['StatVar'] == statvar]['mProp'].unique()[0]
-            mQual = df.loc[df['StatVar'] == statvar]['mQual'].unique()[0]
-            if not df['type'].isnull().values.any():
-                energy_type = df.loc[df['StatVar'] == statvar]['type'].unique()[0]
-                type_ = TYPE.format(energy_type)
+            df_temp = df.loc[df['StatVar'] == statvar]
+            pop = df_temp['popType'].unique()[0]
+            mProp = df_temp['mProp'].unique()[0]
+            mQual = df_temp['mQual'].unique()[0]
+            if not df_temp['type'].isnull().values.any():
+                energy_type = df_temp['type'].unique()[0]
+                type_ = self.TYPE.format(energy_type)
             else:
                 type_ = ""
-            if 'dcConsumingSector' in df.columns:
-                consumingSector = df.loc[df['StatVar'] == statvar]['dcConsumingSector'].unique()[0]
-                sector = SECTOR.format(consumingSector)
+            if not df_temp['dcConsumingSector'].isnull().values.any():
+                consumingSector = df_temp['dcConsumingSector'].unique()[0]
+                sector = self.SECTOR.format(consumingSector)
             else:
                 sector = ""
-                
-            with open(self.mcf_path, 'w') as mcf:
-                mcf.write(NODE.format(statvar=statvar,
+                                
+            mcf.write(self.NODE.format(statvar=statvar,
                                       pop=pop,
-                                      mProp=mProp,
+                                      mProp=mProp.lower(),
                                       mQual=mQual,
                                       energy_type=type_,
                                       consumingSector=sector)
-                          )
+                      )
+        mcf.close()
+    
+    def create_tmcf(self):
+        with open(self.tmcf_path, 'w') as tmcf:
+            tmcf.write(TMCF_STRING.format(dataset_name=self.dataset_name))
     
     def preprocess_data(self):
-        final_df = pd.DataFrame(columns=self.columns)
+        final_df = pd.DataFrame()
         
         data_path = os.path.join(module_dir, 'data/{}/'.format(self.cat))
         
@@ -141,16 +168,13 @@ class EnergyIndiaBase():
             df = self._create_date(df)
             df = self._create_helper_columns(df, statvar)
             df = self._map_state_code(df)
-            df = self._create_mcfs(df)
-
+            
             df = df.rename({statvar: 'value'}, axis=1)
             df['value'] = df['value'] * int(self.js_statvars[self.cat][statvar]['scale'])
         
             final_df = final_df.append(df)
-                        
-        return final_df
+            
+        self.create_mcfs(final_df)
+        self.create_tmcf()
 
-        
-test = EnergyIndiaBase('Gas', 'oilAndGasTypes.json', 'GasType', 'Fuel')
-t = test.preprocess_data()
-# t.to_csv(os.path.join(module_dir, 'test.csv'), index=False)
+        return final_df[self.columns]
