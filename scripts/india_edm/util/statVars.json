@@ -104,6 +104,7 @@
 		"ConsumerNo": {
 			"property": "Count",
 			"popType": "ElectricityConsumer",
+			"unit": "count",
 			"scale": "1"
 		},
 		"Consumption_GWh": {

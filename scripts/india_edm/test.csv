@@ -1,148 +1,810 @@
-YearValue,GasType,Onshore_OffShore,State,value,mQual,MonthValue,Date,mProp,popType,type,StatVar
-2008,NATURAL GAS,ONSHORE,WEST BENGAL,15000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2009,NATURAL GAS,ONSHORE,WEST BENGAL,20000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,ONSHORE,WEST BENGAL,38400000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,ONSHORE,WEST BENGAL,41400000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,WEST BENGAL,79100000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,WEST BENGAL,100800000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,WEST BENGAL,156500000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,WEST BENGAL,223700000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,WEST BENGAL,389400000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,WEST BENGAL,555067000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,WEST BENGAL,531068000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,WEST BENGAL,350222000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,WEST BENGAL,305900000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,JHARKHAND,3560000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,JHARKHAND,2950000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,JHARKHAND,3380000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,JHARKHAND,2480000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,JHARKHAND,2040000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,JHARKHAND,3083000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,JHARKHAND,3964000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,JHARKHAND,3580000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,JHARKHAND,4650000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,MADHYA PRADESH,1530000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,MADHYA PRADESH,3440000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,MADHYA PRADESH,5650000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,MADHYA PRADESH,2080000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,MADHYA PRADESH,1400000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,MADHYA PRADESH,6439000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,MADHYA PRADESH,199772000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,MADHYA PRADESH,356662000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,MADHYA PRADESH,344900000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2006,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1663000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2007,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1525000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2008,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1567000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2009,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1524000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1479260000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1384390000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1363780000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1248550000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1171340000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,ANDHRA PRADESH,540590000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,ANDHRA PRADESH,619360000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,ANDHRA PRADESH,867775000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,ANDHRA PRADESH,959161000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,ANDHRA PRADESH,1081306000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,ANDHRA PRADESH,912320000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2006,NATURAL GAS,ONSHORE,ASSAM,2455000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2007,NATURAL GAS,ONSHORE,ASSAM,2561000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2008,NATURAL GAS,ONSHORE,ASSAM,2628000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2009,NATURAL GAS,ONSHORE,ASSAM,2603000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,ONSHORE,ASSAM,2703010000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,ONSHORE,ASSAM,2679850000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,ASSAM,2904540000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,ASSAM,2909790000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,ASSAM,2868030000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,ASSAM,2958250000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,ASSAM,3024780000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,ASSAM,3127880000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,ASSAM,3219024000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,ASSAM,3289059000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,ASSAM,3141230000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,39600000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,44490000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,39500000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,41070000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,41390000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,33530000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,29560000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,27543000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,29513000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,27810000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,ARUNACHAL PRADESH,45590000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2006,NATURAL GAS,ONSHORE,GUJARAT,3831000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2007,NATURAL GAS,ONSHORE,GUJARAT,3294000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2008,NATURAL GAS,ONSHORE,GUJARAT,2931000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2009,NATURAL GAS,ONSHORE,GUJARAT,2605000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,ONSHORE,GUJARAT,2444180000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,ONSHORE,GUJARAT,2261830000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,GUJARAT,2172930000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,GUJARAT,2032090000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,GUJARAT,1656940000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,GUJARAT,1526820000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,GUJARAT,1490080000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,GUJARAT,1580267000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,GUJARAT,1606663000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,GUJARAT,1402223000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,GUJARAT,1342330000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2006,NATURAL GAS,ONSHORE,RAJASTHAN,242000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2007,NATURAL GAS,ONSHORE,RAJASTHAN,242000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2008,NATURAL GAS,ONSHORE,RAJASTHAN,255000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2009,NATURAL GAS,ONSHORE,RAJASTHAN,216000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,ONSHORE,RAJASTHAN,238860000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,ONSHORE,RAJASTHAN,432490000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,RAJASTHAN,590180000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,RAJASTHAN,685420000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,RAJASTHAN,982200000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,RAJASTHAN,1177770000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,RAJASTHAN,1338010000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,RAJASTHAN,1277341000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,RAJASTHAN,1441934000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,RAJASTHAN,1483249000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,RAJASTHAN,1882520000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2006,NATURAL GAS,ONSHORE,TAMILNADU,906000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2007,NATURAL GAS,ONSHORE,TAMILNADU,1130000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2008,NATURAL GAS,ONSHORE,TAMILNADU,1169000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2009,NATURAL GAS,ONSHORE,TAMILNADU,1242000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,ONSHORE,TAMILNADU,1177750000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,ONSHORE,TAMILNADU,1119180000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,TAMILNADU,1284760000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,TAMILNADU,1206040000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,TAMILNADU,1304020000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,TAMILNADU,1191570000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,TAMILNADU,1010870000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,TAMILNADU,983168000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,TAMILNADU,1207218000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,TAMILNADU,1207853000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,TAMILNADU,1096650000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2006,NATURAL GAS,ONSHORE,TRIPURA,480000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2007,NATURAL GAS,ONSHORE,TRIPURA,520000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2008,NATURAL GAS,ONSHORE,TRIPURA,534000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2009,NATURAL GAS,ONSHORE,TRIPURA,553000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,ONSHORE,TRIPURA,563790000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,ONSHORE,TRIPURA,609980000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,ONSHORE,TRIPURA,643900000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,ONSHORE,TRIPURA,646740000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,ONSHORE,TRIPURA,822240000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,ONSHORE,TRIPURA,1140040000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,ONSHORE,TRIPURA,1331960000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,ONSHORE,TRIPURA,1429908000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,ONSHORE,TRIPURA,1440370000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,ONSHORE,TRIPURA,1554303000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,ONSHORE,TRIPURA,1472750000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2006,NATURAL GAS,OFFSHORE,OFFSHORE,22624000000.0,Annual,3,2006-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2007,NATURAL GAS,OFFSHORE,OFFSHORE,22476000000.0,Annual,3,2007-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2008,NATURAL GAS,OFFSHORE,OFFSHORE,23318000000.0,Annual,3,2008-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2009,NATURAL GAS,OFFSHORE,OFFSHORE,24081000000.0,Annual,3,2009-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2010,NATURAL GAS,OFFSHORE,OFFSHORE,38811390000.0,Annual,3,2010-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2011,NATURAL GAS,OFFSHORE,OFFSHORE,43645090000.0,Annual,3,2011-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2012,NATURAL GAS,OFFSHORE,OFFSHORE,38474840000.0,Annual,3,2012-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2013,NATURAL GAS,OFFSHORE,OFFSHORE,31802340000.0,Annual,3,2013-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2014,NATURAL GAS,OFFSHORE,OFFSHORE,26395200000.0,Annual,3,2014-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2015,NATURAL GAS,OFFSHORE,OFFSHORE,24860640000.0,Annual,3,2015-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2016,NATURAL GAS,OFFSHORE,OFFSHORE,23011740000.0,Annual,3,2016-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2017,NATURAL GAS,OFFSHORE,OFFSHORE,22038231000.0,Annual,3,2017-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2018,NATURAL GAS,OFFSHORE,OFFSHORE,22010620000.0,Annual,3,2018-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2019,NATURAL GAS,OFFSHORE,OFFSHORE,22117104000.0,Annual,3,2019-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
-2020,NATURAL GAS,OFFSHORE,OFFSHORE,20635390000.0,Annual,3,2020-03-01,Generation,Fuel,NaturalGas,Annual_Generation_Fuel_NaturalGas
+Date,StateCode,value,StatVar
+2006-03-01,country/IND,11878000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2008-03-01,country/IND,12037000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2009-03-01,country/IND,12603000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2010-03-01,country/IND,21365000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2011-03-01,country/IND,25787000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2012-03-01,country/IND,22628000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2013-03-01,country/IND,16078000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2014-03-01,country/IND,11284000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2015-03-01,country/IND,10720000000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2016-03-01,country/IND,10889200000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2017-03-01,country/IND,11616260000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2018-03-01,country/IND,12028290000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2019-03-01,country/IND,12004700000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2020-03-01,country/IND,11028890000.0,Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+2006-03-01,country/IND,3780000000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2007-03-01,country/IND,3205000000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2008-03-01,country/IND,3323000000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2009-03-01,country/IND,2745752000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2010-03-01,country/IND,1172446000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2011-03-01,country/IND,1564631000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2012-03-01,country/IND,2869544000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2013-03-01,country/IND,2908244000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2014-03-01,country/IND,2926032000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2015-03-01,country/IND,3005306000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2016-03-01,country/IND,3039924000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2017-03-01,country/IND,688150000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2018-03-01,country/IND,873010000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2019-03-01,country/IND,944260000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2020-03-01,country/IND,568330000.0,Annual_Consumption_Fuel_Industry_NaturalGas
+2017-03-01,country/IND,105500000.0,Annual_Consumption_Fuel_Manufacturing_NaturalGas
+2018-03-01,country/IND,126260000.0,Annual_Consumption_Fuel_Manufacturing_NaturalGas
+2019-03-01,country/IND,141810000.0,Annual_Consumption_Fuel_Manufacturing_NaturalGas
+2020-03-01,country/IND,132259999.99999999,Annual_Consumption_Fuel_Manufacturing_NaturalGas
+2017-03-01,country/IND,4237505000.0,Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+2018-03-01,country/IND,5114009000.0,Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+2019-03-01,country/IND,5158987000.0,Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+2020-03-01,country/IND,6610278000.0,Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+2017-03-01,country/IND,183330000.0,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_NaturalGas
+2018-03-01,country/IND,188560000.0,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_NaturalGas
+2019-03-01,country/IND,192260000.0,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_NaturalGas
+2020-03-01,country/IND,200270000.0,Annual_Consumption_Fuel_FoodAndTobaccoIndustry_NaturalGas
+2017-03-01,country/IND,471180000.0,Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+2018-03-01,country/IND,495620000.0,Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+2019-03-01,country/IND,540710000.0,Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+2020-03-01,country/IND,525110000.0,Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+2009-03-01,country/IND,611000000.0,Annual_Consumption_Fuel_OilRefineries_NaturalGas
+2010-03-01,country/IND,703000000.0,Annual_Consumption_Fuel_OilRefineries_NaturalGas
+2011-03-01,country/IND,1529000000.0,Annual_Consumption_Fuel_OilRefineries_NaturalGas
+2017-03-01,country/IND,5374370000.0,Annual_Consumption_Fuel_OilRefineries_NaturalGas
+2018-03-01,country/IND,6533130000.0,Annual_Consumption_Fuel_OilRefineries_NaturalGas
+2019-03-01,country/IND,7047310000.0,Annual_Consumption_Fuel_OilRefineries_NaturalGas
+2020-03-01,country/IND,7785990000.0,Annual_Consumption_Fuel_OilRefineries_NaturalGas
+2017-03-01,country/IND,3745960000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2018-03-01,country/IND,3226490000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2019-03-01,country/IND,3392600000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2020-03-01,country/IND,4209000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2006-03-01,country/IND,7762000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2007-03-01,country/IND,8497000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2008-03-01,country/IND,9823000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2009-03-01,country/IND,9082000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2010-03-01,country/IND,13168000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2011-03-01,country/IND,11464000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2012-03-01,country/IND,14003320000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2013-03-01,country/IND,14733290000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2014-03-01,country/IND,15869370000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2015-03-01,country/IND,15190300000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2016-03-01,country/IND,16134610000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2017-03-01,country/IND,15428570000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2018-03-01,country/IND,14675670000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2019-03-01,country/IND,14986910000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2020-03-01,country/IND,16115240000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2017-03-01,country/IND,4170060000.0000005,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2018-03-01,country/IND,4024130000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2019-03-01,country/IND,3386090000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2020-03-01,country/IND,3568790000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2009-03-01,country/IND,1535000000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2010-03-01,country/IND,1838000000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2011-03-01,country/IND,765000000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2012-03-01,country/IND,1333260000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2013-03-01,country/IND,1105740000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2014-03-01,country/IND,274120000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2015-03-01,country/IND,153590000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2016-03-01,country/IND,544320000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2017-03-01,country/IND,885050000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2018-03-01,country/IND,1278000000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2019-03-01,country/IND,1123710000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2020-03-01,country/IND,567000000.0,Annual_Consumption_Fuel_IronSteel_NaturalGas
+2012-03-01,country/IND,1068369999.9999999,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2013-03-01,country/IND,1027290000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2014-03-01,country/IND,981850000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2015-03-01,country/IND,1005480000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2016-03-01,country/IND,754190000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2017-03-01,country/IND,759450000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2018-03-01,country/IND,797870000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2019-03-01,country/IND,873520000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2020-03-01,country/IND,857940000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2006-03-01,country/IND,75000000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2007-03-01,country/IND,443000000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2008-03-01,country/IND,38000000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2009-03-01,country/IND,427249000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2010-03-01,country/IND,182437000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2011-03-01,country/IND,243462000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2012-03-01,country/IND,397752000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2013-03-01,country/IND,410614000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2014-03-01,country/IND,414731000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2015-03-01,country/IND,384730000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2016-03-01,country/IND,388168000.0,Annual_Consumption_Fuel_Households_NaturalGas
+2009-03-01,country/IND,2840999000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2010-03-01,country/IND,1213117000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2011-03-01,country/IND,1618906000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2012-03-01,country/IND,2644855000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2013-03-01,country/IND,2730382000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2014-03-01,country/IND,2824058000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2015-03-01,country/IND,2558284000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2016-03-01,country/IND,2581128000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2017-03-01,country/IND,3112495000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2018-03-01,country/IND,3471361000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2019-03-01,country/IND,4047013000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2020-03-01,country/IND,4272782000.0,Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+2006-03-01,country/IND,151000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2007-03-01,country/IND,170000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2008-03-01,country/IND,160000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2009-03-01,country/IND,154000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2010-03-01,country/IND,167000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2011-03-01,country/IND,193000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2012-03-01,country/IND,175000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2013-03-01,country/IND,182000000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2014-03-01,country/IND,195720000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2015-03-01,country/IND,180480000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2016-03-01,country/IND,188240000.0,Annual_Consumption_Fuel_Agriculture_NaturalGas
+2006-03-01,country/IND,6168000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2006-03-01,country/IND,36000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2007-03-01,country/IND,5074000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2007-03-01,country/IND,639000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2008-03-01,country/IND,3128000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2008-03-01,country/IND,638000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2009-03-01,country/IND,3420000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2010-03-01,country/IND,7272000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2011-03-01,country/IND,7546000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2012-03-01,country/IND,13705740000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2013-03-01,country/IND,12253260000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2014-03-01,country/IND,11819910000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2015-03-01,country/IND,10867000000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2016-03-01,country/IND,9596590000.0,Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+2006-03-01,country/IND,1175000000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2007-03-01,country/IND,1377000000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2008-03-01,country/IND,1432000000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2009-03-01,country/IND,1105000000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2010-03-01,country/IND,1264000000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2011-03-01,country/IND,1309000000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2012-03-01,country/IND,1857690000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2013-03-01,country/IND,2485960000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2014-03-01,country/IND,2404660000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2015-03-01,country/IND,2889670000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2016-03-01,country/IND,3733280000.0,Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+2006-03-01,country/IND,6648840000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2007-03-01,country/IND,8948340000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2008-03-01,country/IND,10932480000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2009-03-01,country/IND,10590840000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2010-03-01,country/IND,11599992000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2011-03-01,country/IND,11758986000.0,Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+2019-04-01,country/IND,269430000.0,Monthly_Generation_Fuel_NaturalGas
+2019-04-01,country/IND,129160000.0,Monthly_Generation_Fuel_NaturalGas
+2019-04-01,country/IND,113750000.0,Monthly_Generation_Fuel_NaturalGas
+2019-04-01,country/IND,100780000.0,Monthly_Generation_Fuel_NaturalGas
+2019-04-01,country/IND,79260000.0,Monthly_Generation_Fuel_NaturalGas
+2019-04-01,country/IND,132100000.0,Monthly_Generation_Fuel_NaturalGas
+2019-04-01,country/IND,54350000.0,Monthly_Generation_Fuel_NaturalGas
+2019-04-01,country/IND,1777040000.0,Monthly_Generation_Fuel_NaturalGas
+2019-04-01,country/IND,-76440000.0,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,269260000.0,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,130949999.99999999,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,113340000.0,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,99000000.0,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,73480000.0,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,147780000.0,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,55480000.0,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,1849620000.0,Monthly_Generation_Fuel_NaturalGas
+2019-05-01,country/IND,-76560000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,68200000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,4840000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,224860000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,89100000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,137880000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,67750000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,136150000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,1382180000.0,Monthly_Generation_Fuel_NaturalGas
+2020-05-01,country/IND,68710000.0,Monthly_Generation_Fuel_NaturalGas
+2020-05-01,country/IND,4240000.0,Monthly_Generation_Fuel_NaturalGas
+2020-05-01,country/IND,265950000.0,Monthly_Generation_Fuel_NaturalGas
+2020-05-01,country/IND,91180000.0,Monthly_Generation_Fuel_NaturalGas
+2020-05-01,country/IND,148820000.0,Monthly_Generation_Fuel_NaturalGas
+2020-05-01,country/IND,77760000.0,Monthly_Generation_Fuel_NaturalGas
+2020-05-01,country/IND,143770000.0,Monthly_Generation_Fuel_NaturalGas
+2020-05-01,country/IND,1446760000.0,Monthly_Generation_Fuel_NaturalGas
+2020-06-01,country/IND,67820000.0,Monthly_Generation_Fuel_NaturalGas
+2020-06-01,country/IND,3280000.0,Monthly_Generation_Fuel_NaturalGas
+2020-06-01,country/IND,262779999.99999997,Monthly_Generation_Fuel_NaturalGas
+2020-06-01,country/IND,93370000.0,Monthly_Generation_Fuel_NaturalGas
+2020-06-01,country/IND,156980000.0,Monthly_Generation_Fuel_NaturalGas
+2020-06-01,country/IND,76050000.0,Monthly_Generation_Fuel_NaturalGas
+2020-06-01,country/IND,129610000.00000001,Monthly_Generation_Fuel_NaturalGas
+2020-06-01,country/IND,1484080000.0,Monthly_Generation_Fuel_NaturalGas
+2020-07-01,country/IND,61840000.0,Monthly_Generation_Fuel_NaturalGas
+2020-07-01,country/IND,4790000.0,Monthly_Generation_Fuel_NaturalGas
+2020-07-01,country/IND,244770000.0,Monthly_Generation_Fuel_NaturalGas
+2020-07-01,country/IND,98870000.0,Monthly_Generation_Fuel_NaturalGas
+2020-07-01,country/IND,177920000.0,Monthly_Generation_Fuel_NaturalGas
+2020-07-01,country/IND,76480000.0,Monthly_Generation_Fuel_NaturalGas
+2020-07-01,country/IND,133020000.00000001,Monthly_Generation_Fuel_NaturalGas
+2020-07-01,country/IND,1592350000.0,Monthly_Generation_Fuel_NaturalGas
+2020-01-01,country/IND,77570000.0,Monthly_Generation_Fuel_NaturalGas
+2020-01-01,country/IND,4210000.0,Monthly_Generation_Fuel_NaturalGas
+2020-01-01,country/IND,238090000.0,Monthly_Generation_Fuel_NaturalGas
+2020-01-01,country/IND,115550000.0,Monthly_Generation_Fuel_NaturalGas
+2020-01-01,country/IND,198090000.0,Monthly_Generation_Fuel_NaturalGas
+2020-01-01,country/IND,97080000.0,Monthly_Generation_Fuel_NaturalGas
+2020-01-01,country/IND,113100000.0,Monthly_Generation_Fuel_NaturalGas
+2020-01-01,country/IND,1709030000.0,Monthly_Generation_Fuel_NaturalGas
+2020-02-01,country/IND,71790000.0,Monthly_Generation_Fuel_NaturalGas
+2020-02-01,country/IND,4630000.0,Monthly_Generation_Fuel_NaturalGas
+2020-02-01,country/IND,229220000.0,Monthly_Generation_Fuel_NaturalGas
+2020-02-01,country/IND,107330000.0,Monthly_Generation_Fuel_NaturalGas
+2020-02-01,country/IND,161390000.0,Monthly_Generation_Fuel_NaturalGas
+2020-02-01,country/IND,86760000.0,Monthly_Generation_Fuel_NaturalGas
+2020-02-01,country/IND,90640000.0,Monthly_Generation_Fuel_NaturalGas
+2020-02-01,country/IND,1532390000.0,Monthly_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,74140000.0,Monthly_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,5000000.0,Monthly_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,241820000.0,Monthly_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,107670000.0,Monthly_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,179240000.0,Monthly_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,88630000.0,Monthly_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,95370000.0,Monthly_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,1565200000.0,Monthly_Generation_Fuel_NaturalGas
+2019-06-01,country/IND,73440000.0,Monthly_Generation_Fuel_NaturalGas
+2019-06-01,country/IND,2640000.0,Monthly_Generation_Fuel_NaturalGas
+2019-06-01,country/IND,263450000.0,Monthly_Generation_Fuel_NaturalGas
+2019-06-01,country/IND,112670000.0,Monthly_Generation_Fuel_NaturalGas
+2019-06-01,country/IND,133139999.99999999,Monthly_Generation_Fuel_NaturalGas
+2019-06-01,country/IND,90400000.0,Monthly_Generation_Fuel_NaturalGas
+2019-06-01,country/IND,145060000.0,Monthly_Generation_Fuel_NaturalGas
+2019-06-01,country/IND,1761120000.0,Monthly_Generation_Fuel_NaturalGas
+2019-07-01,country/IND,77890000.0,Monthly_Generation_Fuel_NaturalGas
+2019-07-01,country/IND,2950000.0,Monthly_Generation_Fuel_NaturalGas
+2019-07-01,country/IND,287470000.0,Monthly_Generation_Fuel_NaturalGas
+2019-07-01,country/IND,114790000.0,Monthly_Generation_Fuel_NaturalGas
+2019-07-01,country/IND,150790000.0,Monthly_Generation_Fuel_NaturalGas
+2019-07-01,country/IND,67870000.0,Monthly_Generation_Fuel_NaturalGas
+2019-07-01,country/IND,148920000.0,Monthly_Generation_Fuel_NaturalGas
+2019-07-01,country/IND,1811380000.0,Monthly_Generation_Fuel_NaturalGas
+2019-08-01,country/IND,76930000.0,Monthly_Generation_Fuel_NaturalGas
+2019-08-01,country/IND,4350000.0,Monthly_Generation_Fuel_NaturalGas
+2019-08-01,country/IND,286340000.0,Monthly_Generation_Fuel_NaturalGas
+2019-08-01,country/IND,113660000.0,Monthly_Generation_Fuel_NaturalGas
+2019-08-01,country/IND,160560000.0,Monthly_Generation_Fuel_NaturalGas
+2019-08-01,country/IND,96270000.0,Monthly_Generation_Fuel_NaturalGas
+2019-08-01,country/IND,128639999.99999999,Monthly_Generation_Fuel_NaturalGas
+2019-08-01,country/IND,1767280000.0,Monthly_Generation_Fuel_NaturalGas
+2019-09-01,country/IND,74870000.0,Monthly_Generation_Fuel_NaturalGas
+2019-09-01,country/IND,4260000.0,Monthly_Generation_Fuel_NaturalGas
+2019-09-01,country/IND,277460000.0,Monthly_Generation_Fuel_NaturalGas
+2019-09-01,country/IND,107280000.0,Monthly_Generation_Fuel_NaturalGas
+2019-09-01,country/IND,152510000.0,Monthly_Generation_Fuel_NaturalGas
+2019-09-01,country/IND,90740000.0,Monthly_Generation_Fuel_NaturalGas
+2019-09-01,country/IND,123490000.0,Monthly_Generation_Fuel_NaturalGas
+2019-09-01,country/IND,1685230000.0,Monthly_Generation_Fuel_NaturalGas
+2019-10-01,country/IND,75490000.0,Monthly_Generation_Fuel_NaturalGas
+2019-10-01,country/IND,4490000.0,Monthly_Generation_Fuel_NaturalGas
+2019-10-01,country/IND,284470000.0,Monthly_Generation_Fuel_NaturalGas
+2019-10-01,country/IND,108620000.0,Monthly_Generation_Fuel_NaturalGas
+2019-10-01,country/IND,154240000.0,Monthly_Generation_Fuel_NaturalGas
+2019-10-01,country/IND,90560000.0,Monthly_Generation_Fuel_NaturalGas
+2019-10-01,country/IND,126340000.0,Monthly_Generation_Fuel_NaturalGas
+2019-10-01,country/IND,1743270000.0,Monthly_Generation_Fuel_NaturalGas
+2019-11-01,country/IND,3000000.0,Monthly_Generation_Fuel_NaturalGas
+2019-11-01,country/IND,4570000.0,Monthly_Generation_Fuel_NaturalGas
+2019-11-01,country/IND,273180000.0,Monthly_Generation_Fuel_NaturalGas
+2019-11-01,country/IND,111110000.0,Monthly_Generation_Fuel_NaturalGas
+2019-11-01,country/IND,158740000.0,Monthly_Generation_Fuel_NaturalGas
+2019-11-01,country/IND,92360000.0,Monthly_Generation_Fuel_NaturalGas
+2019-11-01,country/IND,109720000.0,Monthly_Generation_Fuel_NaturalGas
+2019-11-01,country/IND,1683810000.0,Monthly_Generation_Fuel_NaturalGas
+2019-12-01,country/IND,79690000.0,Monthly_Generation_Fuel_NaturalGas
+2019-12-01,country/IND,4470000.0,Monthly_Generation_Fuel_NaturalGas
+2019-12-01,country/IND,225080000.0,Monthly_Generation_Fuel_NaturalGas
+2019-12-01,country/IND,116420000.0,Monthly_Generation_Fuel_NaturalGas
+2019-12-01,country/IND,173700000.0,Monthly_Generation_Fuel_NaturalGas
+2019-12-01,country/IND,96260000.0,Monthly_Generation_Fuel_NaturalGas
+2019-12-01,country/IND,111760000.0,Monthly_Generation_Fuel_NaturalGas
+2019-12-01,country/IND,1750020000.0,Monthly_Generation_Fuel_NaturalGas
+2020-08-01,country/IND,72280000.0,Monthly_Generation_Fuel_NaturalGas
+2020-08-01,country/IND,5130000.0,Monthly_Generation_Fuel_NaturalGas
+2020-08-01,country/IND,240750000.0,Monthly_Generation_Fuel_NaturalGas
+2020-08-01,country/IND,98310000.0,Monthly_Generation_Fuel_NaturalGas
+2020-08-01,country/IND,170930000.0,Monthly_Generation_Fuel_NaturalGas
+2020-08-01,country/IND,72500000.0,Monthly_Generation_Fuel_NaturalGas
+2020-08-01,country/IND,137120000.0,Monthly_Generation_Fuel_NaturalGas
+2020-08-01,country/IND,1580670000.0,Monthly_Generation_Fuel_NaturalGas
+2020-09-01,country/IND,69420000.0,Monthly_Generation_Fuel_NaturalGas
+2020-09-01,country/IND,5160000.0,Monthly_Generation_Fuel_NaturalGas
+2020-09-01,country/IND,253640000.0,Monthly_Generation_Fuel_NaturalGas
+2020-09-01,country/IND,94640000.0,Monthly_Generation_Fuel_NaturalGas
+2020-09-01,country/IND,163120000.0,Monthly_Generation_Fuel_NaturalGas
+2020-09-01,country/IND,79570000.0,Monthly_Generation_Fuel_NaturalGas
+2020-09-01,country/IND,133970000.0,Monthly_Generation_Fuel_NaturalGas
+2020-09-01,country/IND,1441600000.0,Monthly_Generation_Fuel_NaturalGas
+2020-10-01,country/IND,73120000.0,Monthly_Generation_Fuel_NaturalGas
+2020-10-01,country/IND,4870000.0,Monthly_Generation_Fuel_NaturalGas
+2020-10-01,country/IND,274740000.0,Monthly_Generation_Fuel_NaturalGas
+2020-10-01,country/IND,96840000.0,Monthly_Generation_Fuel_NaturalGas
+2020-10-01,country/IND,168720000.0,Monthly_Generation_Fuel_NaturalGas
+2020-10-01,country/IND,88270000.0,Monthly_Generation_Fuel_NaturalGas
+2020-10-01,country/IND,137100000.0,Monthly_Generation_Fuel_NaturalGas
+2020-10-01,country/IND,1521090000.0,Monthly_Generation_Fuel_NaturalGas
+2020-12-01,country/IND,71190000.0,Monthly_Generation_Fuel_NaturalGas
+2020-12-01,country/IND,4740000.0,Monthly_Generation_Fuel_NaturalGas
+2020-12-01,country/IND,248920000.0,Monthly_Generation_Fuel_NaturalGas
+2020-12-01,country/IND,98460000.0,Monthly_Generation_Fuel_NaturalGas
+2020-12-01,country/IND,180700000.0,Monthly_Generation_Fuel_NaturalGas
+2020-12-01,country/IND,75220000.0,Monthly_Generation_Fuel_NaturalGas
+2020-12-01,country/IND,136260000.0,Monthly_Generation_Fuel_NaturalGas
+2020-12-01,country/IND,1552990000.0,Monthly_Generation_Fuel_NaturalGas
+2021-01-01,country/IND,69190000.0,Monthly_Generation_Fuel_NaturalGas
+2021-01-01,country/IND,4600000.0,Monthly_Generation_Fuel_NaturalGas
+2021-01-01,country/IND,262529999.99999997,Monthly_Generation_Fuel_NaturalGas
+2021-01-01,country/IND,98830000.0,Monthly_Generation_Fuel_NaturalGas
+2021-01-01,country/IND,189260000.0,Monthly_Generation_Fuel_NaturalGas
+2021-01-01,country/IND,72550000.0,Monthly_Generation_Fuel_NaturalGas
+2021-01-01,country/IND,147180000.0,Monthly_Generation_Fuel_NaturalGas
+2021-01-01,country/IND,1650230000.0,Monthly_Generation_Fuel_NaturalGas
+2020-11-01,country/IND,70930000.0,Monthly_Generation_Fuel_NaturalGas
+2020-11-01,country/IND,4230000.0,Monthly_Generation_Fuel_NaturalGas
+2020-11-01,country/IND,253100000.0,Monthly_Generation_Fuel_NaturalGas
+2020-11-01,country/IND,92550000.0,Monthly_Generation_Fuel_NaturalGas
+2020-11-01,country/IND,163250000.0,Monthly_Generation_Fuel_NaturalGas
+2020-11-01,country/IND,82010000.0,Monthly_Generation_Fuel_NaturalGas
+2020-11-01,country/IND,134080000.00000001,Monthly_Generation_Fuel_NaturalGas
+2020-11-01,country/IND,1477180000.0,Monthly_Generation_Fuel_NaturalGas
+2021-02-01,country/IND,64069999.99999999,Monthly_Generation_Fuel_NaturalGas
+2021-02-01,country/IND,4590000.0,Monthly_Generation_Fuel_NaturalGas
+2021-02-01,country/IND,219650000.0,Monthly_Generation_Fuel_NaturalGas
+2021-02-01,country/IND,87910000.0,Monthly_Generation_Fuel_NaturalGas
+2021-02-01,country/IND,171770000.0,Monthly_Generation_Fuel_NaturalGas
+2021-02-01,country/IND,62180000.0,Monthly_Generation_Fuel_NaturalGas
+2021-02-01,country/IND,136320000.0,Monthly_Generation_Fuel_NaturalGas
+2021-02-01,country/IND,1509100000.0,Monthly_Generation_Fuel_NaturalGas
+2021-03-01,country/IND,70700000.0,Monthly_Generation_Fuel_NaturalGas
+2021-03-01,country/IND,4900000.0,Monthly_Generation_Fuel_NaturalGas
+2021-03-01,country/IND,243690000.0,Monthly_Generation_Fuel_NaturalGas
+2021-03-01,country/IND,98270000.0,Monthly_Generation_Fuel_NaturalGas
+2021-03-01,country/IND,210300000.0,Monthly_Generation_Fuel_NaturalGas
+2021-03-01,country/IND,80580000.0,Monthly_Generation_Fuel_NaturalGas
+2021-03-01,country/IND,129360000.00000001,Monthly_Generation_Fuel_NaturalGas
+2021-03-01,country/IND,1790830000.0,Monthly_Generation_Fuel_NaturalGas
+2021-04-01,country/IND,68730000.0,Monthly_Generation_Fuel_NaturalGas
+2021-04-01,country/IND,4980000.0,Monthly_Generation_Fuel_NaturalGas
+2021-04-01,country/IND,252380000.0,Monthly_Generation_Fuel_NaturalGas
+2021-04-01,country/IND,91690000.0,Monthly_Generation_Fuel_NaturalGas
+2021-04-01,country/IND,209360000.0,Monthly_Generation_Fuel_NaturalGas
+2021-04-01,country/IND,80420000.0,Monthly_Generation_Fuel_NaturalGas
+2021-04-01,country/IND,80870000.0,Monthly_Generation_Fuel_NaturalGas
+2021-04-01,country/IND,1806550000.0,Monthly_Generation_Fuel_NaturalGas
+2021-05-01,country/IND,67830000.0,Monthly_Generation_Fuel_NaturalGas
+2021-05-01,country/IND,4780000.0,Monthly_Generation_Fuel_NaturalGas
+2021-05-01,country/IND,259459999.99999997,Monthly_Generation_Fuel_NaturalGas
+2021-05-01,country/IND,87490000.0,Monthly_Generation_Fuel_NaturalGas
+2021-05-01,country/IND,227630000.0,Monthly_Generation_Fuel_NaturalGas
+2021-05-01,country/IND,80870000.0,Monthly_Generation_Fuel_NaturalGas
+2021-05-01,country/IND,107030000.0,Monthly_Generation_Fuel_NaturalGas
+2021-05-01,country/IND,1845670000.0,Monthly_Generation_Fuel_NaturalGas
+2021-06-01,country/IND,67840000.0,Monthly_Generation_Fuel_NaturalGas
+2021-06-01,country/IND,4630000.0,Monthly_Generation_Fuel_NaturalGas
+2021-06-01,country/IND,259880000.0,Monthly_Generation_Fuel_NaturalGas
+2021-06-01,country/IND,84690000.0,Monthly_Generation_Fuel_NaturalGas
+2021-06-01,country/IND,235120000.0,Monthly_Generation_Fuel_NaturalGas
+2021-06-01,country/IND,80730000.0,Monthly_Generation_Fuel_NaturalGas
+2021-06-01,country/IND,107890000.0,Monthly_Generation_Fuel_NaturalGas
+2021-06-01,country/IND,1879970000.0,Monthly_Generation_Fuel_NaturalGas
+2020-04-01,country/IND,50000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-04-01,country/IND,28690000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-04-01,country/IND,21640000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-05-01,country/IND,50000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-05-01,country/IND,29430000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-05-01,country/IND,23340000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-06-01,country/IND,80000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-06-01,country/IND,28130000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-06-01,country/IND,21630000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-07-01,country/IND,90000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-07-01,country/IND,29370000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-07-01,country/IND,23820000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-01-01,country/IND,300000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-01-01,country/IND,29420000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-01-01,country/IND,25920000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-02-01,country/IND,330000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-02-01,country/IND,28680000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-02-01,country/IND,27360000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-03-01,country/IND,200000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-03-01,country/IND,29750000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-03-01,country/IND,28410000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-06-01,country/IND,490000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-06-01,country/IND,28140000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-06-01,country/IND,25550000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-07-01,country/IND,430000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-07-01,country/IND,29170000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-07-01,country/IND,26260000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-08-01,country/IND,400000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-08-01,country/IND,28480000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-08-01,country/IND,25330000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-09-01,country/IND,440000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-09-01,country/IND,28150000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-09-01,country/IND,23680000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-10-01,country/IND,500000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-10-01,country/IND,28940000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-10-01,country/IND,24120000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-11-01,country/IND,410000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-11-01,country/IND,28120000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-11-01,country/IND,23640000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-12-01,country/IND,360000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-12-01,country/IND,29200000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2019-12-01,country/IND,23420000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-08-01,country/IND,140000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-08-01,country/IND,29290000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-08-01,country/IND,24800000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-09-01,country/IND,170000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-09-01,country/IND,27760000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-09-01,country/IND,24470000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-10-01,country/IND,200000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-10-01,country/IND,28090000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-10-01,country/IND,25850000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-12-01,country/IND,140000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-12-01,country/IND,27780000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-12-01,country/IND,28520000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-01-01,country/IND,130000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-01-01,country/IND,27100000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-01-01,country/IND,29020000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-11-01,country/IND,160000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-11-01,country/IND,27230000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2020-11-01,country/IND,26530000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-02-01,country/IND,200000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-02-01,country/IND,24230000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-02-01,country/IND,27130000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-03-01,country/IND,270000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-03-01,country/IND,26590000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-03-01,country/IND,30270000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-04-01,country/IND,290000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-04-01,country/IND,25450000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-04-01,country/IND,30770000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-05-01,country/IND,300000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-05-01,country/IND,26110000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-05-01,country/IND,32470000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-06-01,country/IND,350000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-06-01,country/IND,24870000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2021-06-01,country/IND,31480000.0,Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+2007-03-01,country/IND,131255.0,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,123008.0,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,228314.0,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,61520.0,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,122321.0,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,64458.23,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,623803.0,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,5471813.5,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,106176.0,Annual_Imports_Fuel_NaturalGasLiquids
+2007-03-01,country/IND,111786.0,Annual_Imports_Fuel_NaturalGasLiquids
+2005-03-01,country/IND,6534.0,Annual_Imports_Fuel_NaturalGasLiquids
+2005-03-01,country/IND,2365314.25,Annual_Imports_Fuel_NaturalGasLiquids
+2006-03-01,country/IND,113949.84,Annual_Imports_Fuel_NaturalGasLiquids
+2006-03-01,country/IND,57391.0,Annual_Imports_Fuel_NaturalGasLiquids
+2006-03-01,country/IND,4462693.5,Annual_Imports_Fuel_NaturalGasLiquids
+2006-03-01,country/IND,142757.27,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,372912.0,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,60039.0,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,61760.0,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,59326.0,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,434317.0,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,329509.0,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,6476690.5,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,291550.03,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,240835.02,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,66372.7,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,63880.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,169687.02,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,104819.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,124670.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,57404.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,59310.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,285133.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,62902.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,186442.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,6480479.5,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,72124.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,178276.98,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,95833.0,Annual_Imports_Fuel_NaturalGasLiquids
+2009-03-01,country/IND,58600.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,118478.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,638767.63,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,185930.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,177547.02,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,62367.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,124657.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,118292.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,65910.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,6795541.5,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,551046.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,162035.02,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,60312.0,Annual_Imports_Fuel_NaturalGasLiquids
+2010-03-01,country/IND,49688.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,177724.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,68000.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,292968.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,60000.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,62064.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,8053129.5,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,129601.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,55497.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,263200.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,68150.0,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,184419.02,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,137512.98,Annual_Imports_Fuel_NaturalGasLiquids
+2011-03-01,country/IND,213496.98,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,188814.0,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,40534.0,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,522342.84,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,71865.0,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,60437.0,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,56008.97,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,1356008.13,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,135612.98,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,10271012.0,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,319526.06,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,46560.0,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,169732.98,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,179526.0,Annual_Imports_Fuel_NaturalGasLiquids
+2012-03-01,country/IND,52640.0,Annual_Imports_Fuel_NaturalGasLiquids
+2013-03-01,country/IND,396946.69,Annual_Imports_Fuel_NaturalGasLiquids
+2013-03-01,country/IND,574076.06,Annual_Imports_Fuel_NaturalGasLiquids
+2013-03-01,country/IND,61040.39,Annual_Imports_Fuel_NaturalGasLiquids
+2013-03-01,country/IND,116750.0,Annual_Imports_Fuel_NaturalGasLiquids
+2013-03-01,country/IND,1159479.38,Annual_Imports_Fuel_NaturalGasLiquids
+2013-03-01,country/IND,10302368.0,Annual_Imports_Fuel_NaturalGasLiquids
+2013-03-01,country/IND,128743.27,Annual_Imports_Fuel_NaturalGasLiquids
+2013-03-01,country/IND,396465.97,Annual_Imports_Fuel_NaturalGasLiquids
+2014-03-01,country/IND,61712.11,Annual_Imports_Fuel_NaturalGasLiquids
+2014-03-01,country/IND,192035.02,Annual_Imports_Fuel_NaturalGasLiquids
+2014-03-01,country/IND,609892.69,Annual_Imports_Fuel_NaturalGasLiquids
+2014-03-01,country/IND,64847.78,Annual_Imports_Fuel_NaturalGasLiquids
+2014-03-01,country/IND,11579139.0,Annual_Imports_Fuel_NaturalGasLiquids
+2014-03-01,country/IND,513062.03,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,137208.67,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,6888.21,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,63154.24,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,52950.0,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,68140.95,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,886799.5,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,65704.09,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,74361.99,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,10896163.0,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,209485.09,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,115215.74,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,79058.6,Annual_Imports_Fuel_NaturalGasLiquids
+2015-03-01,country/IND,634024.0,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,55000.0,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,415341.66,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,1405808.5,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,133118.59,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,66542.66,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,1008882.25,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,68607.29,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,59523.13,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,2309662.25,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,31594.16,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,323825.56,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,64827.05,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,58463.0,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,10065500.0,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,215413.17,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,445306.88,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,565249.25,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,66300.44,Annual_Imports_Fuel_NaturalGasLiquids
+2017-03-01,country/IND,424361.31,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,267069.06,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,1354273.0,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,1748797.25,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,386255.0,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,1034287.0,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,246214.75,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,69322.0,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,253064.75,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,261044.34,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,60000.0,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,3004489.25,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,137194.55,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,508745.69,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,9969158.0,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,65000.0,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,65186.62,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,65129.68,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,334076.09,Annual_Imports_Fuel_NaturalGasLiquids
+2018-03-01,country/IND,347505.31,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,213425.66,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,1511723.0,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,1246811.75,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,62564.93,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,273280.69,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,64000.0,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,878170.94,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,163261.97,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,0.04,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,262863.63,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,159316.89,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,2780447.25,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,1296097.88,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,10261372.0,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,65837.67,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,67785.67,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,61487.25,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,366621.69,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,366982.72,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,208838.11,Annual_Imports_Fuel_NaturalGasLiquids
+2019-03-01,country/IND,1233773.13,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,151978.78,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,2577518.75,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,957482.44,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,0.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,593940.19,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,0.12,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,199962.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,653337.5,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,242094.83,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,0.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,260757.58,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,0.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,2901944.25,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,68894.55,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,763883.5,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,10067544.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,102350.75,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,0.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,0.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,0.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,210344.14,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,3028335.75,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,0.0,Annual_Imports_Fuel_NaturalGasLiquids
+2020-03-01,country/IND,1636237.13,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,713025.881,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,264249.69,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,338942.06,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,258920.42,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,114000.0,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,101694.0,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,1518749.88,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,101272.0,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,480206.75,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,74208.0,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,33700.0,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,9504899.0,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,413438.28,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,127814.2,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,218372.11,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,113397.38,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,0.14,Annual_Imports_Fuel_NaturalGasLiquids
+2016-03-01,country/IND,35.0,Annual_Imports_Fuel_NaturalGasLiquids
+2008-03-01,country/IND,15000000.0,Annual_Generation_Fuel_NaturalGas
+2009-03-01,country/IND,20000000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,38400000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,41400000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,79100000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,100800000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,156500000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,223700000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,389400000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,555067000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,531068000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,350222000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,305900000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,3560000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,2950000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,3380000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,2480000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,2040000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,3083000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,3964000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,3580000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,4650000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,1530000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,3440000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,5650000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,2080000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,1400000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,6439000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,199772000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,356662000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,344900000.0,Annual_Generation_Fuel_NaturalGas
+2006-03-01,country/IND,1663000000.0,Annual_Generation_Fuel_NaturalGas
+2007-03-01,country/IND,1525000000.0,Annual_Generation_Fuel_NaturalGas
+2008-03-01,country/IND,1567000000.0,Annual_Generation_Fuel_NaturalGas
+2009-03-01,country/IND,1524000000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,1479260000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,1384390000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,1363780000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,1248550000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,1171340000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,540590000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,619360000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,867775000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,959161000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,1081306000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,912320000.0,Annual_Generation_Fuel_NaturalGas
+2006-03-01,country/IND,2455000000.0,Annual_Generation_Fuel_NaturalGas
+2007-03-01,country/IND,2561000000.0,Annual_Generation_Fuel_NaturalGas
+2008-03-01,country/IND,2628000000.0,Annual_Generation_Fuel_NaturalGas
+2009-03-01,country/IND,2603000000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,2703010000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,2679850000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,2904540000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,2909790000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,2868030000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,2958250000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,3024780000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,3127880000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,3219024000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,3289059000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,3141230000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,39600000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,44490000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,39500000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,41070000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,41390000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,33530000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,29560000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,27543000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,29513000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,27810000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,45590000.0,Annual_Generation_Fuel_NaturalGas
+2006-03-01,country/IND,3831000000.0,Annual_Generation_Fuel_NaturalGas
+2007-03-01,country/IND,3294000000.0,Annual_Generation_Fuel_NaturalGas
+2008-03-01,country/IND,2931000000.0,Annual_Generation_Fuel_NaturalGas
+2009-03-01,country/IND,2605000000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,2444180000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,2261830000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,2172930000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,2032090000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,1656940000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,1526820000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,1490080000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,1580267000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,1606663000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,1402223000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,1342330000.0,Annual_Generation_Fuel_NaturalGas
+2006-03-01,country/IND,242000000.0,Annual_Generation_Fuel_NaturalGas
+2007-03-01,country/IND,242000000.0,Annual_Generation_Fuel_NaturalGas
+2008-03-01,country/IND,255000000.0,Annual_Generation_Fuel_NaturalGas
+2009-03-01,country/IND,216000000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,238860000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,432490000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,590180000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,685420000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,982200000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,1177770000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,1338010000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,1277341000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,1441934000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,1483249000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,1882520000.0,Annual_Generation_Fuel_NaturalGas
+2006-03-01,country/IND,906000000.0,Annual_Generation_Fuel_NaturalGas
+2007-03-01,country/IND,1130000000.0,Annual_Generation_Fuel_NaturalGas
+2008-03-01,country/IND,1169000000.0,Annual_Generation_Fuel_NaturalGas
+2009-03-01,country/IND,1242000000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,1177750000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,1119180000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,1284760000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,1206040000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,1304020000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,1191570000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,1010870000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,983168000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,1207218000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,1207853000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,1096650000.0,Annual_Generation_Fuel_NaturalGas
+2006-03-01,country/IND,480000000.0,Annual_Generation_Fuel_NaturalGas
+2007-03-01,country/IND,520000000.0,Annual_Generation_Fuel_NaturalGas
+2008-03-01,country/IND,534000000.0,Annual_Generation_Fuel_NaturalGas
+2009-03-01,country/IND,553000000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,563790000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,609980000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,643900000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,646740000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,822240000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,1140040000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,1331960000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,1429908000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,1440370000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,1554303000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,1472750000.0,Annual_Generation_Fuel_NaturalGas
+2006-03-01,country/IND,22624000000.0,Annual_Generation_Fuel_NaturalGas
+2007-03-01,country/IND,22476000000.0,Annual_Generation_Fuel_NaturalGas
+2008-03-01,country/IND,23318000000.0,Annual_Generation_Fuel_NaturalGas
+2009-03-01,country/IND,24081000000.0,Annual_Generation_Fuel_NaturalGas
+2010-03-01,country/IND,38811390000.0,Annual_Generation_Fuel_NaturalGas
+2011-03-01,country/IND,43645090000.0,Annual_Generation_Fuel_NaturalGas
+2012-03-01,country/IND,38474840000.0,Annual_Generation_Fuel_NaturalGas
+2013-03-01,country/IND,31802340000.0,Annual_Generation_Fuel_NaturalGas
+2014-03-01,country/IND,26395200000.0,Annual_Generation_Fuel_NaturalGas
+2015-03-01,country/IND,24860640000.0,Annual_Generation_Fuel_NaturalGas
+2016-03-01,country/IND,23011740000.0,Annual_Generation_Fuel_NaturalGas
+2017-03-01,country/IND,22038231000.0,Annual_Generation_Fuel_NaturalGas
+2018-03-01,country/IND,22010620000.0,Annual_Generation_Fuel_NaturalGas
+2019-03-01,country/IND,22117104000.0,Annual_Generation_Fuel_NaturalGas
+2020-03-01,country/IND,20635390000.0,Annual_Generation_Fuel_NaturalGas

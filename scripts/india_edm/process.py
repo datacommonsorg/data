@@ -2,15 +2,22 @@ import os
 import pandas as pd
 import json
 from datetime import datetime
+os.chdir('../')
+from india.geo.states import IndiaStatesMapper
 
 module_dir = os.path.dirname(__file__)
 
 class EnergyIndiaBase():
     
-    def __init__(self, category, json_file, json_key):
+    def __init__(self, category, json_file, json_key, popType):
         self.cat = category
         self.json_file = json_file
         self.json_key = json_key
+        self.popType = popType
+        self.mcf_path = os.path.join(module_dir, 
+                                     "IndiaEnergy_{}.mcf")
+        
+        self.columns = ['Date', 'StateCode', 'value', 'StatVar']
     
     def _load_jsons(self):
         util_path = os.path.join(module_dir, 'util/')
@@ -31,7 +38,7 @@ class EnergyIndiaBase():
                 df['Date'] = df.apply(lambda x: datetime.strptime("{0}-{1}".format(x['YearValue'],
                                                                                    x['MonthValue']), 
                                                                                   "%Y-%m"),
-                                                      axis=1)
+                                      axis=1)
         else:
             df['mQual'] = 'Annual'
             df['MonthValue'] = '03'
@@ -40,13 +47,14 @@ class EnergyIndiaBase():
             df['Date'] = df.apply(lambda x: datetime.strptime("{0}-{1}".format(x['YearValue'],
                                                                                x['MonthValue']), 
                                                                               "%Y-%m"),
-                                                  axis=1)
+                                      axis=1)
         return df
     
     def _create_helper_columns(self, df, statvar):       
         df['mProp'] = self.js_statvars[self.cat][statvar]['property']
         df['popType'] = self.js_statvars[self.cat][statvar]['popType']
-                    
+        df['unit'] = self.js_statvars[self.cat][statvar]['unit']
+        
         try:
             df['type'] = df[self.json_key].apply(lambda x: self.js_types[self.json_key][x])
         except KeyError:
@@ -60,19 +68,64 @@ class EnergyIndiaBase():
                                                                 x['popType'],
                                                                 x['dcConsumingSector'],
                                                                 x['type']]),
-                                             axis=1)
+                                     axis=1)
         else:
             df['StatVar'] = df.apply(lambda x: '_'.join([x['mQual'],
                                                                 x['mProp'],
                                                                 x['popType'],
                                                                 x['type']]),
-                                             axis=1)
+                                     axis=1)
             
         return df
-            
     
-    def parse_csv(self):
-        final_df = pd.DataFrame(columns=['Date', 'StateCode', 'value', 'StatVar'])
+    def _map_state_code(self, df):
+        mapper = IndiaStatesMapper()
+        try:
+            df['StateCode'] = df['State'].apply(lambda x: mapper.get_state_name_to_iso_code_mapping(x))
+        except (KeyError, Exception):
+            df['StateCode'] = 'country/IND'
+            
+        return df
+    
+    def _create_mcfs(self, df):
+        NODE = """Node: dcid:{statvar}
+                typeOf: dcs:StatisticalVariable
+                populationType: dcs:{pop}
+                measuredProperty: dcs:{mProp}
+                measurementQualifier: dcs:{mQual}
+                {:energy_type}
+                {:consumingSector}
+                statType: dcs:measuredValue
+                """
+        TYPE = "energySource: dcs:{}"
+        SECTOR = "consumingSector: dcs:{}"
+        
+        for statvar in df['StatVar'].unique().tolist():
+            pop = self.popType
+            mProp = df.loc[df['StatVar'] == statvar]['mProp'].unique()[0]
+            mQual = df.loc[df['StatVar'] == statvar]['mQual'].unique()[0]
+            if not df['type'].isnull().values.any():
+                energy_type = df.loc[df['StatVar'] == statvar]['type'].unique()[0]
+                type_ = TYPE.format(energy_type)
+            else:
+                type_ = ""
+            if 'dcConsumingSector' in df.columns:
+                consumingSector = df.loc[df['StatVar'] == statvar]['dcConsumingSector'].unique()[0]
+                sector = SECTOR.format(consumingSector)
+            else:
+                sector = ""
+                
+            with open(self.mcf_path, 'w') as mcf:
+                mcf.write(NODE.format(statvar=statvar,
+                                      pop=pop,
+                                      mProp=mProp,
+                                      mQual=mQual,
+                                      energy_type=type_,
+                                      consumingSector=sector)
+                          )
+    
+    def preprocess_data(self):
+        final_df = pd.DataFrame(columns=self.columns)
         
         data_path = os.path.join(module_dir, 'data/{}/'.format(self.cat))
         
@@ -87,44 +140,17 @@ class EnergyIndiaBase():
             df = data[data[statvar].notna()].dropna(axis=1)
             df = self._create_date(df)
             df = self._create_helper_columns(df, statvar)
+            df = self._map_state_code(df)
+            df = self._create_mcfs(df)
 
             df = df.rename({statvar: 'value'}, axis=1)
             df['value'] = df['value'] * int(self.js_statvars[self.cat][statvar]['scale'])
         
-            final_df.append(df[['Date', 'StateCode', 'value', 'StatVar']])
+            final_df = final_df.append(df)
                         
-        return df
+        return final_df
+
         
-test = EnergyIndiaBase('Gas', 'oilAndGasTypes.json', 'GasType')
-t = test.parse_csv()
-t.to_csv('test.csv', index=False)
-
-# dfC = pd.concat([pd.read_csv('./data/Coal/' + file, skiprows=2) 
-#                 for file in os.listdir('./data/Coal/') if file != 'Districtwise'],
-#                 join='outer')
-# dfE = pd.concat([pd.read_csv('./data/Electricity/' + file, skiprows=2) 
-#                 for file in os.listdir('./data/Electricity/') if file != 'Districtwise'],
-#                 join='outer')
-# dfG = pd.concat([pd.read_csv('./data/Gas/' + file, skiprows=2) 
-#                 for file in os.listdir('./data/Gas/') if file != 'Districtwise'],
-#                 join='outer')
-# dfO = pd.concat([pd.read_csv('./data/Oil/' + file, skiprows=2) 
-#                 for file in os.listdir('./data/Oil/') if file != 'Districtwise'],
-#                 join='outer')
-# dfR = pd.concat([pd.read_csv('./data/Renewables/' + file, skiprows=2) 
-#                 for file in os.listdir('./data/Renewables/') if file != 'Districtwise'],
-#                 join='outer')
-
-# df1 = dfC[dfC['QtyInMillionTonnes_Consumption'].notna()].dropna(axis=1)
-# df2 = dfG[dfG['GrossProduction_MMSCM_M'].notna()].dropna(axis=1)
-
-# for df in [df1, df2]:
-#     if 'MonthValue' in df.columns:
-#         df['mQual'] = 'Monthly'
-#     else:
-#         df['mQual'] = 'Yearly'
-        
-# with open('util/statVars.json', 'r') as j:
-#     js = json.loads(j.read())
-    
-# df1['dcConsumingSector'] = df1['ConsumingSector'].apply(lambda x: js['ConsumingSectorTypes'][x])
+test = EnergyIndiaBase('Gas', 'oilAndGasTypes.json', 'GasType', 'Fuel')
+t = test.preprocess_data()
+# t.to_csv(os.path.join(module_dir, 'test.csv'), index=False)
