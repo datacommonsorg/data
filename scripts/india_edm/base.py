@@ -20,6 +20,7 @@ from india.geo.states import IndiaStatesMapper
 
 module_dir = os.path.dirname(__file__)
 
+# Template for TMCF File
 TMCF_STRING = """Node: E:{dataset_name}->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:{dataset_name}->StatVar
@@ -35,6 +36,9 @@ isoCode: C:{dataset_name}->StateCode
 
 
 class EnergyIndiaBase():
+    """
+    Base class to process data files, create MCF/TMCF files
+    """
 
     def __init__(self, category, json_file, json_key, dataset_name, mcf_path,
                  tmcf_path, mcf_strings):
@@ -45,13 +49,24 @@ class EnergyIndiaBase():
         self.mcf_path = mcf_path
         self.tmcf_path = tmcf_path
 
+        # Template strings for MCF nodes
         self.NODE = mcf_strings['node']
         self.TYPE = mcf_strings['type']
         self.SECTOR = mcf_strings['sector']
 
+        # Columns to be added in the preprocessed CSV file
         self.columns = ['Date', 'StateCode', 'value', 'StatVar', 'unit']
 
     def _load_jsons(self):
+        """
+        Method to load the json files in `util/` folder. `util/` folder contains 
+        json mappings for the consuming sector, energy/fuel types and StatisticalVariable 
+        configs. 
+        
+        These json files are create to help in mapping the terms in datasets to their
+        corresponding dcids.
+        """
+
         util_path = os.path.join(module_dir, 'util/')
 
         with open(util_path + 'consumingSectorTypes.json', 'r') as sector, \
@@ -63,8 +78,15 @@ class EnergyIndiaBase():
             self.js_types = json.loads(types.read())
 
     def _load_data(self):
+        """
+        Method to collate all csv files under the data/{category}/ and return
+        a single dataframe
+        """
+
         data_path = os.path.join(module_dir, 'data/{}/'.format(self.cat))
 
+        # Concatenate all csvs into one dataframe
+        # Skipping 2 rows since it corresponds to title of the file
         data = pd.concat([
             pd.read_csv(data_path + f, skiprows=2)
             for f in os.listdir(data_path)
@@ -75,6 +97,15 @@ class EnergyIndiaBase():
         return data
 
     def _create_date(self, df):
+        """
+        Method to identify periodicity of the StatVar and fill the
+        measurementQualifier (mQual) column.
+        
+        Then, the date columns are combined to form one column 'Date'.
+        'Date' column will have YYYY-MM-DD format.
+        """
+
+        # Month and Year are combined to 'Date' if Month is present
         if 'MonthValue' in df.columns:
             df['mQual'] = 'Monthly'
             df['YearValue'] = df['YearValue'].astype('int')
@@ -82,6 +113,9 @@ class EnergyIndiaBase():
             df['Date'] = df.apply(lambda x: datetime.strptime(
                 "{0}-{1}".format(x['YearValue'], x['MonthValue']), "%Y-%m"),
                                   axis=1)
+
+        # else, Year is used to create the 'Date' column
+        # Month is set to a default value of '03' (March)
         else:
             df['mQual'] = 'Annual'
             df['MonthValue'] = '03'
@@ -93,12 +127,29 @@ class EnergyIndiaBase():
         return df
 
     def _create_helper_columns(self, df, statvar):
+        """
+        Method to create helper columns which in turn create the name of StatVar.
+        
+        Five helper columns are created based on the data available:
+            'mProp' has value of measuredProperty
+            'popType' has value of populationType
+            'unit' has measurement unit of the StatVar
+            'type' has the type of energy/fuel source used
+            'dcConsumingSector' has the consuming sector for the energy/fuel
+        
+        The jsons loaded earlier are used to map the energy terms to their
+        corresponding dcids here.
+        """
+
         df['mProp'] = self.js_statvars[self.cat][statvar]['property']
         df['popType'] = self.js_statvars[self.cat][statvar]['popType']
         df['unit'] = self.js_statvars[self.cat][statvar]['unit']
 
         df = self._map_energy_fuel_source(df, statvar)
 
+        ## Consuming Sector or Energy Type can be missing in some StatVars
+
+        # Build StatVar if consuming sector and source type is present
         if 'consumingSector' in self.js_statvars[
                 self.cat][statvar] and not df['type'].isnull().values.any():
             df['dcConsumingSector'] = df['ConsumingSector'].apply(
@@ -109,6 +160,8 @@ class EnergyIndiaBase():
                     'type']
             ]),
                                      axis=1)
+
+        # Build StatVar if only consuming sector is present
         elif 'consumingSector' in self.js_statvars[
                 self.cat][statvar] and df['type'].isnull().values.any():
             df['dcConsumingSector'] = df['ConsumingSector'].apply(
@@ -117,6 +170,8 @@ class EnergyIndiaBase():
             df['StatVar'] = df.apply(lambda x: '_'.join(
                 [x['mQual'], x['mProp'], x['popType'], x['dcConsumingSector']]),
                                      axis=1)
+
+        # Build StatVar if both are absent
         elif df['type'].isnull().values.any():
             df['dcConsumingSector'] = None
 
@@ -124,6 +179,7 @@ class EnergyIndiaBase():
                 lambda x: '_'.join([x['mQual'], x['mProp'], x['popType']]),
                 axis=1)
 
+        # Build StatVar if only source type is present
         else:
             df['dcConsumingSector'] = None
 
@@ -134,6 +190,10 @@ class EnergyIndiaBase():
         return df
 
     def _map_energy_fuel_source(self, df, statvar):
+        """
+        Method to map source type. Overridden by child class in `./IndiaEnergy_Oil/`.
+        """
+
         try:
             df['type'] = df[self.json_key].apply(
                 lambda x: self.js_types[self.json_key][x])
@@ -143,35 +203,46 @@ class EnergyIndiaBase():
         return df
 
     def _map_state_code(self, df):
+        """
+        Method to map state names to their isoCodes
+        """
+
         mapper = IndiaStatesMapper()
         try:
             df['StateCode'] = df['State'].apply(
                 lambda x: mapper.get_state_name_to_iso_code_mapping(x))
+        # If state code not present, map the name to country code
         except (KeyError, Exception):
             df['StateCode'] = 'country/IND'
 
         return df
 
     def create_mcfs(self, df):
+        """
+        Method to build MCF nodes from the StatVar info.
+        """
 
         mcf = open(self.mcf_path, 'w')
 
+        # Individual nodes are created for each unique StatVar
         for statvar in df['StatVar'].unique().tolist():
             df_temp = df.loc[df['StatVar'] == statvar]
-            pop = df_temp['popType'].unique()[0]
-            mProp = df_temp['mProp'].unique()[0]
-            mQual = df_temp['mQual'].unique()[0]
+            pop = df_temp['popType'].unique()[0]  # populationType
+            mProp = df_temp['mProp'].unique()[0]  # measuredProperty
+            mQual = df_temp['mQual'].unique()[0]  # measurementQualifier
             if not df_temp['type'].isnull().values.any():
-                energy_type = df_temp['type'].unique()[0]
+                energy_type = df_temp['type'].unique()[0]  # energySource
                 type_ = self.TYPE.format(energy_type)
             else:
                 type_ = ""
             if not df_temp['dcConsumingSector'].isnull().values.any():
-                consumingSector = df_temp['dcConsumingSector'].unique()[0]
+                consumingSector = df_temp['dcConsumingSector'].unique()[
+                    0]  # consumingSector
                 sector = self.SECTOR.format(consumingSector)
             else:
                 sector = ""
 
+            # Create the node and remove empty lines from strings
             node = self.NODE.format(statvar=statvar,
                                     pop=pop,
                                     mProp=mProp.lower(),
@@ -180,29 +251,47 @@ class EnergyIndiaBase():
                                     consumingSector=sector)
             node = os.linesep.join([s for s in node.splitlines() if s])
 
+            # Write node to MCF file
             mcf.write(node)
             mcf.write('\n\n')
 
         mcf.close()
 
     def create_tmcf(self):
+        """
+        Method to build TMCF nodes and write to TMCF file
+        """
+
         with open(self.tmcf_path, 'w') as tmcf:
             tmcf.write(TMCF_STRING.format(dataset_name=self.dataset_name))
 
     def preprocess_data(self):
+        """
+        Base method that calls other methods to process CSVs and create MCF files
+        """
+
+        # Processed rows are added to final_df subsequently
         final_df = pd.DataFrame()
-        data = self._load_data()
+        data = self._load_data()  # Load data
 
-        self._load_jsons()
+        self._load_jsons()  # Load json mappings
 
+        # Each iteration deals with a measuredProperty in an energy category
         for statvar in self.js_statvars[self.cat]:
             try:
+                # Retrieve rows and columns relevant for StatVar
                 df = data[data[statvar].notna()].dropna(axis=1)
+
+                # Build helper columns to create MCF nodes
                 df = self._create_date(df)
                 df = self._create_helper_columns(df, statvar)
                 df = self._map_state_code(df)
 
+                # Rename StatVar column to 'value'
                 df = df.rename({statvar: 'value'}, axis=1)
+
+                # Values are multiplied by a scale factor mentioned in `util/statVars.json`
+                # Scale factors are taken from names of units in data files
                 df['value'] = df['value'] * int(
                     self.js_statvars[self.cat][statvar]['scale'])
 
@@ -210,7 +299,9 @@ class EnergyIndiaBase():
             except KeyError:
                 continue
 
+        # Create MCF and TMCF files
         self.create_mcfs(final_df)
         self.create_tmcf()
 
+        # Return only required columns in the final_df
         return final_df[self.columns]

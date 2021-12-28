@@ -13,12 +13,11 @@
 # limitations under the License.
 
 import os
-
-os.chdir('../../')
 from india_edm.base import EnergyIndiaBase
 
 DATASET_NAME = "IndiaEnergy_Gas"
 
+# Template strings for MCF node
 NODE = """Node: dcid:{statvar}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{pop}
@@ -32,12 +31,15 @@ statType: dcs:measuredValue
 TYPE = "energySource: dcs:{}"
 SECTOR = "consumingSector: dcs:{}"
 
+# Packaging template strings into single dictionary
 mcf_strings = {'node': NODE, 'type': TYPE, 'sector': SECTOR}
 
+# Defining file paths
 module_dir = os.path.dirname(__file__)
 mcf_path = os.path.join(module_dir, "{}.mcf".format(DATASET_NAME))
 tmcf_path = os.path.join(module_dir, "{}.tmcf".format(DATASET_NAME))
 
+# Calling base class and saving processed df as csv
 base_class = EnergyIndiaBase(category='Gas',
                              json_file='oilAndGasTypes.json',
                              json_key='GasType',

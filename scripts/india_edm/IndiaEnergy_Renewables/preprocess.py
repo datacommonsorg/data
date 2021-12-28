@@ -13,12 +13,11 @@
 # limitations under the License.
 
 import os
-
-os.chdir('../../')
 from india_edm.base import EnergyIndiaBase
 
 DATASET_NAME = "IndiaEnergy_Renewables"
 
+# Template strings for MCF node
 NODE = """Node: dcid:{statvar}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{pop}
@@ -31,14 +30,19 @@ statType: dcs:measuredValue
 TYPE = "energySource: dcs:{}"
 SECTOR = "consumingSector: dcs:{}"
 
+# Packaging template strings into single dictionary
 mcf_strings = {'node': NODE, 'type': TYPE, 'sector': SECTOR}
 
+# Defining file paths
 module_dir = os.path.dirname(__file__)
 mcf_path = os.path.join(module_dir, "{}.mcf".format(DATASET_NAME))
 tmcf_path = os.path.join(module_dir, "{}.tmcf".format(DATASET_NAME))
 
 
 class EnergyIndiaRenewables(EnergyIndiaBase):
+    """
+    Overriding base class to remove Consuming Sector property in MCf
+    """
 
     def create_mcfs(self, df):
 
@@ -64,6 +68,7 @@ class EnergyIndiaRenewables(EnergyIndiaBase):
         mcf.close()
 
 
+# Calling base class and saving processed df as csv
 base_class = EnergyIndiaRenewables(category='Renewables',
                                    json_file='energySourceTypes.json',
                                    json_key='EnergySource',

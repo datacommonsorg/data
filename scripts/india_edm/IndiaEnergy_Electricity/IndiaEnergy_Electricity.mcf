@@ -6,6 +6,7 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Coal
 
+
 Node: dcid:Annual_Capacity_Electricity_DieselOil
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -13,6 +14,7 @@ measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:DieselOil
+
 
 Node: dcid:Annual_Capacity_Electricity_NaturalGas
 typeOf: dcs:StatisticalVariable
@@ -22,6 +24,7 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NaturalGas
 
+
 Node: dcid:Annual_Capacity_Electricity_PumpedHydro
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -29,6 +32,7 @@ measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:PumpedHydro
+
 
 Node: dcid:Annual_Capacity_Electricity_RenewableEnergy
 typeOf: dcs:StatisticalVariable
@@ -38,6 +42,7 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:RenewableEnergy
 
+
 Node: dcid:Annual_Capacity_Electricity_Wind
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -45,6 +50,7 @@ measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Wind
+
 
 Node: dcid:Annual_Capacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable
@@ -54,6 +60,7 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Solar
 
+
 Node: dcid:Annual_Capacity_Electricity_Nuclear
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -62,7 +69,8 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Nuclear
 
-Node: dcid:Annual_Count_ElectricityConsumer
+
+id:Annual_Count_ElectricityConsumer
 typeOf: dcs:StatisticalVariable
 populationType: dcs:ElectricityConsumer
 measuredProperty: dcs:count

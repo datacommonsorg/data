@@ -15,8 +15,6 @@
 import os
 import unittest
 import pandas as pd
-
-os.chdir('../../')
 from india_edm.base import EnergyIndiaBase
 
 DATASET_NAME = "IndiaEnergy_Coal"
