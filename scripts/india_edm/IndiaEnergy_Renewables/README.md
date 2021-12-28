@@ -16,7 +16,7 @@ This directory has CSV, MCF and TMCF files to import renewable electricity consu
 ## List of Statistical Variables
 
 StatVar column contains all the Statistical Variables available for Renewable Electricity data. In general, a Statistical Variable name is based on the following pattern:
-"{Periodicity}_{MeasuredProperty}_{EnergyCategory}_{ConsumingSector}_{EnergySource}". Consuming Sector is available only for consumption related Statistical Variables.
+"{Periodicity}\_{MeasuredProperty}\_{EnergyCategory}\_{ConsumingSector}\_{EnergySource}". Consuming Sector is available only for consumption related Statistical Variables.
 
 The list of all the StatVars available in this import are given below:
 - Annual_Generation_Electricity_Coal

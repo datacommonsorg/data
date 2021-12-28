@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+
 os.chdir('../../')
 from india_edm.base import EnergyIndiaBase
 
@@ -31,35 +32,33 @@ statType: dcs:measuredValue
 TYPE = "energySource: dcs:{}"
 SECTOR = "consumingSector: dcs:{}"
 
-mcf_strings = {'node': NODE,
-               'type': TYPE,
-               'sector': SECTOR}
+mcf_strings = {'node': NODE, 'type': TYPE, 'sector': SECTOR}
 
 module_dir = os.path.dirname(__file__)
-mcf_path = os.path.join(module_dir,
-                        "{}.mcf".format(DATASET_NAME))
-tmcf_path = os.path.join(module_dir,
-                        "{}.tmcf".format(DATASET_NAME))
+mcf_path = os.path.join(module_dir, "{}.mcf".format(DATASET_NAME))
+tmcf_path = os.path.join(module_dir, "{}.tmcf".format(DATASET_NAME))
+
 
 class EnergyIndiaOil(EnergyIndiaBase):
+
     def _map_energy_fuel_source(self, df, statvar):
         try:
-            df['type'] = df[self.json_key].apply(lambda x: self.js_types[self.json_key][x])
+            df['type'] = df[self.json_key].apply(
+                lambda x: self.js_types[self.json_key][x])
         except KeyError:
             df['type'] = "FuelOil"
-            
-        return df
-    
 
-base_class = EnergyIndiaOil(category='Oil', 
-                             json_file='oilAndGasTypes.json',
-                             json_key='OilType',
-                             dataset_name=DATASET_NAME,
-                             mcf_path=mcf_path,
-                             tmcf_path=tmcf_path,
-                             mcf_strings=mcf_strings)
+        return df
+
+
+base_class = EnergyIndiaOil(category='Oil',
+                            json_file='oilAndGasTypes.json',
+                            json_key='OilType',
+                            dataset_name=DATASET_NAME,
+                            mcf_path=mcf_path,
+                            tmcf_path=tmcf_path,
+                            mcf_strings=mcf_strings)
 
 final_csv = base_class.preprocess_data()
-final_csv.to_csv(os.path.join(module_dir, 
-                              "{}.csv".format(DATASET_NAME)), 
+final_csv.to_csv(os.path.join(module_dir, "{}.csv".format(DATASET_NAME)),
                  index=False)
