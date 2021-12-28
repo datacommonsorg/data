@@ -61,6 +61,16 @@ class EnergyIndiaBase():
         with open(util_path + self.json_file, 'r') as types:
             self.js_types = json.loads(types.read())
             
+    def _load_data(self):
+        data_path = os.path.join(module_dir, 'data/{}/'.format(self.cat))
+        
+        data = pd.concat([pd.read_csv(data_path + f, skiprows=2)
+                        for f in os.listdir(data_path)
+                        if os.path.isfile(os.path.join(module_dir, data_path, f))],
+                       join='outer')
+        
+        return data
+            
     def _create_date(self, df):
         if 'MonthValue' in df.columns:
                 df['mQual'] = 'Monthly'
@@ -85,27 +95,55 @@ class EnergyIndiaBase():
         df['mProp'] = self.js_statvars[self.cat][statvar]['property']
         df['popType'] = self.js_statvars[self.cat][statvar]['popType']
         df['unit'] = self.js_statvars[self.cat][statvar]['unit']
-        print(df.columns)
-        try:
-            df['type'] = df[self.json_key].apply(lambda x: self.js_types[self.json_key][x])
-        except KeyError:
-            df['type'] = ""
-        
-        if 'consumingSector' in self.js_statvars[self.cat][statvar]:
+
+        df = self._map_energy_fuel_source(df, statvar)
+
+        if 'consumingSector' in self.js_statvars[self.cat][statvar] and not df['type'].isnull().values.any():
             df['dcConsumingSector'] = df['ConsumingSector'].apply(lambda x: self.js_sector['ConsumingSectorTypes'][x])
 
             df['StatVar'] = df.apply(lambda x: '_'.join([x['mQual'],
                                                                 x['mProp'],
                                                                 x['popType'],
                                                                 x['dcConsumingSector'],
-                                                                x['type']]),
+                                                                x['type']
+                                                                ]),
                                      axis=1)
-        else:
+        elif 'consumingSector' in self.js_statvars[self.cat][statvar] and df['type'].isnull().values.any():
+            df['dcConsumingSector'] = df['ConsumingSector'].apply(lambda x: self.js_sector['ConsumingSectorTypes'][x])
+            
             df['StatVar'] = df.apply(lambda x: '_'.join([x['mQual'],
-                                                                x['mProp'],
-                                                                x['popType'],
-                                                                x['type']]),
+                                                        x['mProp'],
+                                                        x['popType'],
+                                                        x['dcConsumingSector']
+                                                        ]),
                                      axis=1)
+        elif df['type'].isnull().values.any():
+            df['dcConsumingSector'] = None
+            
+            df['StatVar'] = df.apply(lambda x: '_'.join([x['mQual'],
+                                                    x['mProp'],
+                                                    x['popType']
+                                                    ]),
+                         axis=1)
+            
+        else:
+            df['dcConsumingSector'] = None
+            
+            df['StatVar'] = df.apply(lambda x: '_'.join([x['mQual'],
+                                                    x['mProp'],
+                                                    x['popType'],
+                                                    x['type']
+                                                    ]),
+                         axis=1)
+            
+            
+        return df
+    
+    def _map_energy_fuel_source(self, df, statvar):
+        try:
+            df['type'] = df[self.json_key].apply(lambda x: self.js_types[self.json_key][x])
+        except KeyError:
+            df['type'] = None
             
         return df
     
@@ -137,14 +175,18 @@ class EnergyIndiaBase():
                 sector = self.SECTOR.format(consumingSector)
             else:
                 sector = ""
-                                
-            mcf.write(self.NODE.format(statvar=statvar,
+                              
+            node = self.NODE.format(statvar=statvar,
                                       pop=pop,
                                       mProp=mProp.lower(),
                                       mQual=mQual,
                                       energy_type=type_,
                                       consumingSector=sector)
-                      )
+            node = os.linesep.join([s for s in node.splitlines() if s])
+            
+            mcf.write(node)
+            mcf.write('\n\n')
+            
         mcf.close()
     
     def create_tmcf(self):
@@ -153,26 +195,23 @@ class EnergyIndiaBase():
     
     def preprocess_data(self):
         final_df = pd.DataFrame()
-        
-        data_path = os.path.join(module_dir, 'data/{}/'.format(self.cat))
-        
-        data = pd.concat([pd.read_csv(data_path + f, skiprows=2)
-                        for f in os.listdir(data_path)
-                        if os.path.isfile(os.path.join(module_dir, data_path, f))],
-                       join='outer')
+        data = self._load_data()
         
         self._load_jsons()
         
         for statvar in self.js_statvars[self.cat]:
-            df = data[data[statvar].notna()].dropna(axis=1)
-            df = self._create_date(df)
-            df = self._create_helper_columns(df, statvar)
-            df = self._map_state_code(df)
+            try:
+                df = data[data[statvar].notna()].dropna(axis=1)
+                df = self._create_date(df)
+                df = self._create_helper_columns(df, statvar)
+                df = self._map_state_code(df)
+                
+                df = df.rename({statvar: 'value'}, axis=1)
+                df['value'] = df['value'] * int(self.js_statvars[self.cat][statvar]['scale'])
             
-            df = df.rename({statvar: 'value'}, axis=1)
-            df['value'] = df['value'] * int(self.js_statvars[self.cat][statvar]['scale'])
-        
-            final_df = final_df.append(df)
+                final_df = final_df.append(df)
+            except KeyError:
+                continue;
             
         self.create_mcfs(final_df)
         self.create_tmcf()

@@ -132,7 +132,6 @@ measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
 energySource: dcs:NaturalGas
 
-
 Node: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Fuel
@@ -140,7 +139,6 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
 energySource: dcs:EIA_CoalDerivedSynthesisGas
-
 
 Node: dcid:Annual_Imports_Fuel_NaturalGasLiquids
 typeOf: dcs:StatisticalVariable
@@ -150,7 +148,6 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NaturalGasLiquids
 
-
 Node: dcid:Annual_Generation_Fuel_NaturalGas
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Fuel
@@ -158,5 +155,4 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NaturalGas
-
 

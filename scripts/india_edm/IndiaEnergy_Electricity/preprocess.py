@@ -42,12 +42,12 @@ tmcf_path = os.path.join(module_dir,
                         "{}.tmcf".format(DATASET_NAME))
 
 base_class = EnergyIndiaBase(category='Electricity', 
-                             json_file='energySourceTypes.json',
-                             json_key='EnergySource',
-                             dataset_name=DATASET_NAME,
-                             mcf_path=mcf_path,
-                             tmcf_path=tmcf_path,
-                             mcf_strings=mcf_strings)
+                            json_file='energySourceTypes.json',
+                            json_key='EnergySource',
+                            dataset_name=DATASET_NAME,
+                            mcf_path=mcf_path,
+                            tmcf_path=tmcf_path,
+                            mcf_strings=mcf_strings)
 
 final_csv = base_class.preprocess_data()
 final_csv.to_csv(os.path.join(module_dir, 

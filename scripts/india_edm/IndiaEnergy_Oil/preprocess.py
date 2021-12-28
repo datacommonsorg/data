@@ -41,7 +41,17 @@ mcf_path = os.path.join(module_dir,
 tmcf_path = os.path.join(module_dir,
                         "{}.tmcf".format(DATASET_NAME))
 
-base_class = EnergyIndiaBase(category='Oil', 
+class EnergyIndiaOil(EnergyIndiaBase):
+    def _map_energy_fuel_source(self, df, statvar):
+        try:
+            df['type'] = df[self.json_key].apply(lambda x: self.js_types[self.json_key][x])
+        except KeyError:
+            df['type'] = "FuelOil"
+            
+        return df
+    
+
+base_class = EnergyIndiaOil(category='Oil', 
                              json_file='oilAndGasTypes.json',
                              json_key='OilType',
                              dataset_name=DATASET_NAME,

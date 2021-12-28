@@ -11,7 +11,7 @@ Datasets are classified into five categories:
 - [Oil](./IndiaEnergy_Oil/)
 - [Renewables](./IndiaEnergy_Renewables/)
 
-All these categories cover generation, stock and consumption data for the corresponding energy type. For more information on the datasets and graphical overview, visit [NITI Aayog's Energy Dashboard for India](https://niti.gov.in/edm/)
+All these categories cover generation, stock and consumption data for the corresponding energy type. For more information on the datasets and graphical overview, visit [NITI Aayog's Energy Dashboard for India](https://niti.gov.in/edm/). All datasets can be downloaded from [NITI Aayog's EDM portal](https://edm.niti.gov.in/?dataKey=)
 
 ## Top level files
 

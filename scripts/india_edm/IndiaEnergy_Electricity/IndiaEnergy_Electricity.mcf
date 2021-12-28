@@ -6,7 +6,6 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Coal
 
-
 Node: dcid:Annual_Capacity_Electricity_DieselOil
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -14,7 +13,6 @@ measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:DieselOil
-
 
 Node: dcid:Annual_Capacity_Electricity_NaturalGas
 typeOf: dcs:StatisticalVariable
@@ -24,7 +22,6 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NaturalGas
 
-
 Node: dcid:Annual_Capacity_Electricity_PumpedHydro
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -32,7 +29,6 @@ measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:PumpedHydro
-
 
 Node: dcid:Annual_Capacity_Electricity_RenewableEnergy
 typeOf: dcs:StatisticalVariable
@@ -42,7 +38,6 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:RenewableEnergy
 
-
 Node: dcid:Annual_Capacity_Electricity_Wind
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -50,7 +45,6 @@ measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Wind
-
 
 Node: dcid:Annual_Capacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable
@@ -60,7 +54,6 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Solar
 
-
 Node: dcid:Annual_Capacity_Electricity_Nuclear
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -69,141 +62,115 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Nuclear
 
-
-Node: dcid:Annual_Count_ElectricityConsumer_
+Node: dcid:Annual_Count_ElectricityConsumer
 typeOf: dcs:StatisticalVariable
 populationType: dcs:ElectricityConsumer
 measuredProperty: dcs:count
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 
-
-Node: dcid:Annual_Generation_Electricity_Agriculture_
+Node: dcid:Annual_Generation_Electricity_Agriculture
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:Agriculture
 
-Node: dcid:Annual_Generation_Electricity_CommerceAndPublicServices_
+Node: dcid:Annual_Generation_Electricity_CommerceAndPublicServices
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:CommerceAndPublicServices
 
-Node: dcid:Annual_Generation_Electricity_Households_
+Node: dcid:Annual_Generation_Electricity_Households
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:Households
 
-Node: dcid:Annual_Generation_Electricity_Industry_
+Node: dcid:Annual_Generation_Electricity_Industry
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:Industry
 
-Node: dcid:Annual_Generation_Electricity_UN_UnspecifiedSector_
+Node: dcid:Annual_Generation_Electricity_UN_UnspecifiedSector
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:UN_UnspecifiedSector
 
-Node: dcid:Annual_Generation_Electricity_EnergyIndustryOwnUse_
+Node: dcid:Annual_Generation_Electricity_EnergyIndustryOwnUse
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:EnergyIndustryOwnUse
 
-Node: dcid:Annual_Consumption_Electricity_Agriculture_
+Node: dcid:Annual_Consumption_Electricity_Agriculture
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:Agriculture
 
-Node: dcid:Annual_Consumption_Electricity_CommerceAndPublicServices_
+Node: dcid:Annual_Consumption_Electricity_CommerceAndPublicServices
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:CommerceAndPublicServices
 
-Node: dcid:Annual_Consumption_Electricity_Households_
+Node: dcid:Annual_Consumption_Electricity_Households
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:Households
 
-Node: dcid:Annual_Consumption_Electricity_Industry_
+Node: dcid:Annual_Consumption_Electricity_Industry
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:Industry
 
-Node: dcid:Annual_Consumption_Electricity_UN_UnspecifiedSector_
+Node: dcid:Annual_Consumption_Electricity_UN_UnspecifiedSector
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:UN_UnspecifiedSector
 
-Node: dcid:Annual_Consumption_Electricity_EnergyIndustryOwnUse_
+Node: dcid:Annual_Consumption_Electricity_EnergyIndustryOwnUse
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
 consumingSector: dcs:EnergyIndustryOwnUse
 
-Node: dcid:Annual_Generation_Electricity_
+Node: dcid:Annual_Generation_Electricity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
-
-
-Node: dcid:Annual_Potential_Electricity_Wind
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Electricity
-measuredProperty: dcs:potential
-measurementQualifier: dcs:Annual
-statType: dcs:measuredValue
-energySource: dcs:Wind
-
 
 Node: dcid:Annual_Potential_Electricity_PumpedHydro
 typeOf: dcs:StatisticalVariable
@@ -213,7 +180,6 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:PumpedHydro
 
-
 Node: dcid:Annual_Potential_Electricity_OtherBiomass
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -221,7 +187,6 @@ measuredProperty: dcs:potential
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:OtherBiomass
-
 
 Node: dcid:Annual_Potential_Electricity_Solar
 typeOf: dcs:StatisticalVariable
@@ -231,7 +196,6 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Solar
 
-
 Node: dcid:Annual_Potential_Electricity_NonRenewableWaste
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
@@ -240,6 +204,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NonRenewableWaste
 
+Node: dcid:Annual_Potential_Electricity_Wind
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Electricity
+measuredProperty: dcs:potential
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:Wind
 
 Node: dcid:Annual_Potential_Electricity_Bagasse
 typeOf: dcs:StatisticalVariable
@@ -249,13 +220,10 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Bagasse
 
-
-Node: dcid:Annual_Loss_Electricity_
+Node: dcid:Annual_Loss_Electricity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:loss
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:
-
 
