@@ -39,6 +39,19 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = 'Median_Income_Person'
         self.assertEqual(dcid, expected_dcid)
 
+    def test_double_underscore(self):
+        statvar_dict = {
+            'typeOf': 'StatisticalVariable',
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'CriminalIncidents',
+            'locationOfCrime': 'Park__Playground',
+            'crimeType': 'UCR_OtherCrimeAgainstProperty'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict)
+        expected_dcid = 'Count_CriminalIncidents_OtherCrimeAgainstProperty_LocationOfCrimeParkOrPlayground'
+        self.assertEqual(dcid, expected_dcid)
+
     def test_namespace_removal(self):
         statvar_dict = {
             'typeOf': 'StatisticalVariable',
@@ -498,23 +511,23 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         stat_var_dict1 = {
             'measuredProperty': 'dcid:count',
             'statType': 'dcid:measuredValue',
-            'populationType': 'dcid:CriminalActivities',
-            'isHateCrime': 'True',
+            'populationType': 'dcid:Person',
+            'isInternetUser': 'True',
             'typeOf': 'dcs:StatisticalVariable'
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict1)
-        expected_dcid = ('Count_CriminalActivities_IsHateCrime')
+        expected_dcid = ('Count_Person_IsInternetUser')
         self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict2 = {
             'measuredProperty': 'dcid:count',
             'statType': 'dcid:measuredValue',
-            'populationType': 'dcid:CriminalActivities',
-            'isHateCrime': 'False',
+            'populationType': 'dcid:Person',
+            'isInternetUser': 'False',
             'typeOf': 'dcs:StatisticalVariable'
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict2)
-        expected_dcid = ('Count_CriminalActivities_NotHateCrime')
+        expected_dcid = ('Count_Person_NotInternetUser')
         self.assertEqual(dcid, expected_dcid)
 
         stat_var_dict3 = {

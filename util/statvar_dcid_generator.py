@@ -56,7 +56,7 @@ _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
 # specific prefixes followed by an upper case letter or underscore. This helps
 # to avoid false positives like 'USCitizenBornInTheUnitedStates'.
 _CONSTRAINT_PREFIX_REGEX = re.compile(
-    r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED))(?P<ucase_uscore>[A-Z_])')
+    r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED|UCR))(?P<ucase_uscore>[A-Z_])')
 
 # A mapping of NAICS codes to industry topics
 # This map was generated using the code from the _create_naics_map function at
@@ -225,6 +225,36 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'bachelorDegreeMajor': {
         'prepend': 'BachelorOf'
+    },
+    'biasMotivation': {
+        'prepend': 'BiasMotivation'
+    },
+    'offenderRace': {
+        'prepend': 'OffenderRace'
+    },
+    'offenderEthnicity': {
+        'prepend': 'OffenderEthnicity'
+    },
+    'targetedRace': {
+        'prepend': 'TargetedRace'
+    },
+    'targetedEthnicity': {
+        'prepend': 'TargetedEthnicity'
+    },
+    'targetedReligion': {
+        'prepend': 'TargetedReligion'
+    },    
+    'targetedSexualOrientation': {
+        'prepend': 'TargetedSexualOrientation'
+    },    
+    'targetedDisabilityStatus': {
+        'prepend': 'TargetedDisabilityStatus'
+    },
+    'targetedGender': {
+        'prepend': 'TargetedGender'
+    },
+    'locationOfCrime': {
+        'prepend': 'LocationOfCrime'
     }
 }
 
@@ -235,7 +265,7 @@ _BOOLEAN_PROPS = [
     'isGenomeRepresentationFull', 'isGift', 'isInternetUser',
     'isLiquefiedNaturalGasStored', 'isLiveBroadcast', 'isNaturalGasStored',
     'isPharmacodynamicRelationship', 'isPharmacokineticRelationship',
-    'isRefSeqGenBankAssembliesIdentical', 'isHateCrime'
+    'isRefSeqGenBankAssembliesIdentical'
 ]
 
 # To map stat vars which do not follow the conventions of stat var dcid naming
@@ -272,6 +302,9 @@ def _capitalize_process(word: str) -> str:
 
         # Removing constraint prefixes
         word = _CONSTRAINT_PREFIX_REGEX.sub(r'\g<ucase_uscore>', word)
+
+        # Replace __ (double underscore) with 'Or'
+        word = word.replace('__', 'Or')
 
         # Removing all underscores
         word = word.replace('_', '')
