@@ -28,7 +28,7 @@ from common.data_loader import process_subject_tables
 from .process import set_column_map
 
 # These directories are excluded from testing
-_EXCLUDE_DIRS = ['common', 's2201', 's0902', 's2408', '__pycache__']
+_EXCLUDE_DIRS = ['common', 's2201', 's0902', '__pycache__']
 
 
 def _get_paths(table_dir):
