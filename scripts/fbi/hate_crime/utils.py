@@ -47,7 +47,8 @@ def agg_hate_crime_df(df: pd.DataFrame,
         groupby_cols = ['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR']
     if agg_dict is None:
         agg_dict = {}
-    return df.groupby(by=groupby_cols, as_index=multi_index).agg(agg_dict)
+    agg_tuple = list(agg_dict.items())[-1]
+    return df.groupby(by=groupby_cols, as_index=multi_index).agg(Value=agg_tuple)
 
 
 def flatten_by_column(df: pd.DataFrame,
@@ -106,7 +107,7 @@ def make_time_place_aggregation(dataframe,
                                   groupby_cols=(['DATA_YEAR', 'STATE_ABBR'] +
                                                 groupby_cols),
                                   agg_dict=agg_dict,
-                                  multi_index=False)
+                                  multi_index=multi_index)
     agg_state['Place'] = agg_state.apply(
         lambda row: state_to_dcid(row['STATE_ABBR']), axis=1)
     agg_state.drop(columns=['STATE_ABBR'], inplace=True)

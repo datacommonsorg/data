@@ -168,7 +168,7 @@ _AGGREGATIONS = {
         'args': {
             'groupby_cols': [],
             'agg_dict': {
-                'INCIDENT_ID': 'count'
+                'INCIDENT_ID': 'nunique'
             },
             'population_type': 'HateCrimeIncidents'
         }
@@ -225,7 +225,7 @@ _AGGREGATIONS = {
             'args': {
                 'groupby_cols': ['BIAS_DESC'],
                 'agg_dict': {
-                    'INCIDENT_ID': 'count'
+                    'INCIDENT_ID': 'nunique'
                 },
                 'population_type': 'HateCrimeIncidents'
             }
@@ -235,7 +235,7 @@ _AGGREGATIONS = {
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS'],
                 'agg_dict': {
-                    'INCIDENT_ID': 'count'
+                    'INCIDENT_ID': 'nunique'
                 },
                 'population_type': 'HateCrimeIncidents'
             }
@@ -245,7 +245,7 @@ _AGGREGATIONS = {
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY'],
                 'agg_dict': {
-                    'INCIDENT_ID': 'count'
+                    'INCIDENT_ID': 'nunique'
                 },
                 'population_type': 'HateCrimeIncidents'
             }
@@ -264,6 +264,7 @@ _AGGREGATIONS = {
         },
         {  # Incidents by crime category
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -306,6 +307,7 @@ _AGGREGATIONS = {
         },
         {  # Incidents by crime type and bias motivation
             'df': 'single_bias_offenses',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_DESC', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -316,6 +318,7 @@ _AGGREGATIONS = {
         },
         {  # Incidents grouped by crime type and single bias / multiple bias
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -326,6 +329,7 @@ _AGGREGATIONS = {
         },
         {  # Incidents grouped by crime type and bias category
             'df': 'single_bias_offenses',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -543,6 +547,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -567,6 +572,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_single_victimtype_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'VICTIM_TYPES'],
                 'agg_dict': {
@@ -591,6 +597,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_multiple_victimtype_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'MULTIPLE_VICTIM_TYPE'],
                 'agg_dict': {
@@ -615,6 +622,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_RACE'],
                 'agg_dict': {
@@ -639,6 +647,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_ETHNICITY'],
                 'agg_dict': {
@@ -663,6 +672,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_CATEGORY'],
                 'agg_dict': {
@@ -709,6 +719,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses by crime type and bias motivation
             'df': 'single_bias_offenses',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_DESC', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -720,6 +731,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by crime type and single bias / multiple bias
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -731,6 +743,7 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by crime type and bias category
             'df': 'single_bias_offenses',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -890,7 +903,10 @@ _AGGREGATIONS = {
                     'ADULT_VICTIM_COUNT': 'sum'
                 },
                 'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Victim'
+                'measurement_qualifier': 'Victim',
+                'common_pvs': {
+                    'victimAge': '[18 - Years]'
+                }
             }
         },
         {  # Victims grouped into single bias / multiple bias
@@ -901,7 +917,10 @@ _AGGREGATIONS = {
                     'ADULT_VICTIM_COUNT': 'sum'
                 },
                 'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Victim'
+                'measurement_qualifier': 'Victim',
+                'common_pvs': {
+                    'victimAge': '[18 - Years]'
+                }
             }
         },
         {  # Victims grouped by bias category (race,religion, gender, ...)
@@ -912,7 +931,10 @@ _AGGREGATIONS = {
                     'ADULT_VICTIM_COUNT': 'sum'
                 },
                 'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Victim'
+                'measurement_qualifier': 'Victim',
+                'common_pvs': {
+                    'victimAge': '[18 - Years]'
+                }
             }
         }
     ],
@@ -925,7 +947,10 @@ _AGGREGATIONS = {
                     'JUVENILE_VICTIM_COUNT': 'sum'
                 },
                 'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Victim'
+                'measurement_qualifier': 'Victim',
+                'common_pvs': {
+                    'victimAge': '[- 17 Years]'
+                }
             }
         },
         {  # Victims grouped into single bias / multiple bias
@@ -936,7 +961,10 @@ _AGGREGATIONS = {
                     'JUVENILE_VICTIM_COUNT': 'sum'
                 },
                 'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Victim'
+                'measurement_qualifier': 'Victim',
+                'common_pvs': {
+                    'victimAge': '[- 17 Years]'
+                }
             }
         },
         {  # Victims grouped by bias category (race,religion, gender, ...)
@@ -947,7 +975,10 @@ _AGGREGATIONS = {
                     'JUVENILE_VICTIM_COUNT': 'sum'
                 },
                 'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Victim'
+                'measurement_qualifier': 'Victim',
+                'common_pvs': {
+                    'victimAge': '[- 17 Years]'
+                }
             }
         }
     ],
@@ -966,6 +997,7 @@ _AGGREGATIONS = {
         {  # Victims by crime category
             # TODO double counting
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1014,6 +1046,7 @@ _AGGREGATIONS = {
         {  # Offenses by crime type and bias motivation
             # TODO double counting
             'df': 'single_bias_offenses',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_DESC', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1026,6 +1059,7 @@ _AGGREGATIONS = {
         {  # Offenses grouped by crime type and single bias / multiple bias
             # TODO double counting
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1038,6 +1072,7 @@ _AGGREGATIONS = {
         {  # Offenses grouped by crime type and bias category
             # TODO double counting
             'df': 'single_bias_offenses',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1133,6 +1168,7 @@ _AGGREGATIONS = {
         {  # Offenders by crime category
             # TODO double counting
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1158,6 +1194,7 @@ _AGGREGATIONS = {
         {  # Offenders by crime category
             # TODO double counting
             'df': 'offense_df',
+            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_CATEGORY'],
                 'agg_dict': {
@@ -1203,7 +1240,10 @@ _AGGREGATIONS = {
                     'ADULT_OFFENDER_COUNT': 'sum'
                 },
                 'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Offender'
+                'measurement_qualifier': 'Offender',
+                'common_pvs': {
+                    'offenderAge': '[18 - Years]'
+                }
             }
         }
     ],
@@ -1216,7 +1256,10 @@ _AGGREGATIONS = {
                     'JUVENILE_OFFENDER_COUNT': 'sum'
                 },
                 'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Offender'
+                'measurement_qualifier': 'Offender',
+                'common_pvs': {
+                    'offenderAge': '[- 17 Years]'
+                }
             }
         }
     ]
@@ -1241,45 +1284,42 @@ def _create_df_dict(df: pd.DataFrame) -> dict:
 
     df[fill_unknown_cols] = df[fill_unknown_cols].fillna('Unknown')
 
-    df_dict['incident_df'] = df.apply(_add_bias_category, axis=1)
+    incident_df = df.apply(_add_bias_category, axis=1)
+    incident_df = incident_df.apply(_add_offender_category, axis=1)
+    incident_df = incident_df.apply(_add_multiple_victims, axis=1)
+    df_dict['incident_df'] = incident_df
 
-    df_dict['incident_df'] = df_dict['incident_df'].apply(
-        _add_offender_category, axis=1)
-    df_dict['incident_df'] = df_dict['incident_df'].apply(_add_quarter, axis=1)
-    df_dict['incident_df'] = df_dict['incident_df'].apply(_add_multiple_victims,
-                                                          axis=1)
+    offense_df = flatten_by_column(incident_df, 'OFFENSE_NAME')
+    offense_df = offense_df.apply(_add_offense_category, axis=1)
+    df_dict['offense_df'] = offense_df
 
-    df_dict['offense_df'] = flatten_by_column(df_dict['incident_df'],
-                                              'OFFENSE_NAME')
-    df_dict['offense_df'] = df_dict['offense_df'].apply(_add_offense_category,
-                                                        axis=1)
+    location_df = flatten_by_column(incident_df, 'LOCATION_NAME')
+    df_dict['location_df'] = location_df
 
-    df_dict['location_df'] = flatten_by_column(df_dict['incident_df'],
-                                               'LOCATION_NAME')
+    victim_df = flatten_by_column(incident_df, 'VICTIM_TYPES')
+    df_dict['victim_df'] = victim_df
 
-    df_dict['victim_df'] = flatten_by_column(df_dict['incident_df'],
-                                             'VICTIM_TYPES')
+    single_bias_incidents = incident_df[incident_df['MULTIPLE_BIAS'] == 'S']
+    df_dict['single_bias_incidents'] = single_bias_incidents
 
-    df_dict['single_bias_incidents'] = df_dict['incident_df'][
-        df_dict['incident_df']['MULTIPLE_BIAS'] == 'S']
+    single_bias_offenses = offense_df[offense_df['MULTIPLE_BIAS'] == 'S']
+    df_dict['single_bias_offenses'] = single_bias_offenses
 
-    df_dict['single_bias_offenses'] = df_dict['offense_df'][
-        df_dict['offense_df']['MULTIPLE_BIAS'] == 'S']
+    single_bias_location = location_df[location_df['MULTIPLE_BIAS'] == 'S']
+    df_dict['single_bias_location'] = single_bias_location
 
-    df_dict['single_bias_location'] = df_dict['location_df'][
-        df_dict['location_df']['MULTIPLE_BIAS'] == 'S']
+    single_bias_victim = victim_df[victim_df['MULTIPLE_BIAS'] == 'S']
+    df_dict['single_bias_victim'] = single_bias_victim
 
-    df_dict['single_bias_victim'] = df_dict['victim_df'][
-        df_dict['victim_df']['MULTIPLE_BIAS'] == 'S']
+    known_offender = incident_df[incident_df['OFFENDER_CATEGORY'] == 'KnownOffender']
+    df_dict['known_offender'] = known_offender
 
-    df_dict['known_offender'] = df_dict['incident_df'][
-        df_dict['incident_df']['OFFENDER_CATEGORY'] == 'KnownOffender']
+    offense_single_victimtype_df = offense_df[offense_df['MULTIPLE_VICTIM_TYPE'] == 'S']
+    df_dict['offense_single_victimtype_df'] = offense_single_victimtype_df
 
-    df_dict['offense_single_victimtype_df'] = df_dict['offense_df'][
-        df_dict['offense_df']['MULTIPLE_VICTIM_TYPE'] == 'S']
-
-    df_dict['offense_multiple_victimtype_df'] = df_dict['offense_df'][
-        df_dict['offense_df']['MULTIPLE_VICTIM_TYPE'] == 'M']
+    offense_multiple_victimtype_df = offense_df[offense_df['MULTIPLE_VICTIM_TYPE'] == 'M']
+    df_dict['offense_multiple_victimtype_df'] = offense_multiple_victimtype_df
+    
     return df_dict
 
 
@@ -1296,8 +1336,7 @@ def _add_offense_category(row):
     """A function to add the offense category based on the offense type. To be
     used with pandas.DataFrame.apply()
     """
-    row['OFFENSE_CATEGORY'] = _OFFENSE_CATEGORY_MAP.get(row['OFFENSE_NAME'],
-                                                        'MultipleOffense')
+    row['OFFENSE_CATEGORY'] = _OFFENSE_CATEGORY_MAP.get(row['OFFENSE_NAME'], '')
     return row
 
 
@@ -1314,29 +1353,6 @@ def _add_offender_category(row):
                                                     np.nan):
         row['OFFENDER_CATEGORY'] = 'KnownOffender'
     return row
-
-
-def _add_quarter(row):
-    """A function to add the quarter of incident. To be
-    used with pandas.DataFrame.apply().
-    """
-    month_list = [
-        '', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
-        'OCT', 'NOV', 'DEC'
-    ]
-    d = row['INCIDENT_DATE']
-    d = d.split('-')
-    m = month_list.index(d[1])
-    if m <= 3:
-        row['QUARTER'] = 1
-    elif m <= 6:
-        row['QUARTER'] = 2
-    elif m <= 9:
-        row['QUARTER'] = 3
-    elif m <= 12:
-        row['QUARTER'] = 4
-    return row
-
 
 def _add_multiple_victims(row):
     """A function to add the victim types. To be used with
@@ -1376,7 +1392,8 @@ def _get_dpv(statvar: dict, config: dict) -> list:
 def _gen_statvar_mcf(df: pd.DataFrame,
                      config: dict,
                      population_type: str = None,
-                     measurement_qualifier: str = None):
+                     measurement_qualifier: str = None,
+                     common_pvs: dict = None):
     """A function that creates statvars and assigns the dcid after going through
     each row in the dataframe.
 
@@ -1410,6 +1427,8 @@ def _gen_statvar_mcf(df: pd.DataFrame,
             statvar['populationType'] = population_type
         if measurement_qualifier is not None:
             statvar['measurementQualifier'] = measurement_qualifier
+        if common_pvs is not None:
+            statvar.update(common_pvs)
 
         ignore_props = _get_dpv(statvar, config)
         statvar['Node'] = get_statvar_dcid(statvar, ignore_props=ignore_props)
@@ -1450,7 +1469,8 @@ def _create_aggr(input_df: pd.DataFrame,
                  groupby_cols: list,
                  agg_dict: dict,
                  population_type: str = None,
-                 measurement_qualifier: str = None):
+                 measurement_qualifier: str = None,
+                 common_pvs: dict = None):
     """A wrapper function that calls utils.make_time_place_aggregations and uses
     it's output to generate statvar MCF.
 
@@ -1472,7 +1492,8 @@ def _create_aggr(input_df: pd.DataFrame,
             output_df_list[idx],
             config,
             population_type=population_type,
-            measurement_qualifier=measurement_qualifier)
+            measurement_qualifier=measurement_qualifier,
+            common_pvs=common_pvs)
         statvar_list.extend(statvars)
 
     return output_df_list
@@ -1526,6 +1547,8 @@ if __name__ == '__main__':
         aggr_list = []
         for aggr_map in aggregations:
             aggr_df = df_dict[aggr_map['df']]
+            if 'query' in aggr_map:
+                aggr_df = df_dict[aggr_map['df']].query(aggr_map['query'])
             aggr = _create_aggr(aggr_df, config, statvar_list,
                                 **aggr_map['args'])
             aggr_list.extend(aggr)
