@@ -98,7 +98,8 @@ def process_site_funding(input_path:str, output_path:str)->int:
     npl_sites = pd.read_csv("./data/Superfund National Priorities List (NPL) Sites with Status Information.csv", usecols=['Site EPA ID', 'Status', 'Proposed Date', 'Listing Date', 'Deletion Date'])
 
     status_csv = pd.DataFrame(columns=['observationAbout', 'observationDate', 'variableMeasured', 'value'])
-
+    
+    # convert dates to appropriate format
     npl_sites['Proposed Date'] = pd.to_datetime(npl_sites['Proposed Date']).dt.strftime('%Y-%m-%d')
     npl_sites['Listing Date'] = pd.to_datetime(npl_sites['Listing Date']).dt.strftime('%Y-%m-%d')
     npl_sites['Deletion Date'] = pd.to_datetime(npl_sites['Deletion Date']).dt.strftime('%Y-%m-%d')

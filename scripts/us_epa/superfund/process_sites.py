@@ -50,7 +50,6 @@ dcid: C:SuperfundSite->dcid
 name: C:SuperfundSite->siteName
 epaSuperfundSiteId: C:SuperfundSite->epaId
 epaRegionCode: C:SuperfundSite->regionCode
-epaSuperfundSiteScore: C:SuperfundSite->siteScore
 containedInPlace: C:SuperfundSite->containedInPlace
 location: C:SuperfundSite->location
 establishmentOwnership: C:SuperfundSite->establishmentOwnership
