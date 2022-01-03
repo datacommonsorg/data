@@ -18,6 +18,7 @@ import sys
 import tempfile
 import unittest
 import pandas as pd
+from pandas.testing import assert_frame_equal
 
 # Allows the unittest to access table directories in relative path. Also used to
 # import modules for generating cleaned CSV, MCF and Column Map
@@ -78,11 +79,11 @@ def _read_files(test_path, expected_path):
     return test_result, expected_result
 
 
-def _test_csv_files(test_path, expected_path, precision=3):
+def _read_csv_files(test_path, expected_path, precision=3):
     test_df = pd.read_csv(test_path).round(precision)
     expected_df = pd.read_csv(expected_path).round(precision)
 
-    return test_df.equals(expected_df)
+    return test_df, expected_df
 
 
 class TestSubjectTable(unittest.TestCase):
@@ -141,6 +142,6 @@ class TestSubjectTable(unittest.TestCase):
                     self.assertEqual(test_cmap, expected_cmap)
 
                     # Test CSV
-                    csv_compare_bool = _test_csv_files(test_csv_path,
-                                                       paths['csv'])
-                    self.assertEqual(csv_compare_bool, True)
+                    test_df, expected_df = _read_csv_files(
+                        test_csv_path, paths['csv'])
+                    assert_frame_equal(test_df, expected_df)
