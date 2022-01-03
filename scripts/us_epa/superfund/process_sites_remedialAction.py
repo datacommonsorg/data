@@ -19,7 +19,7 @@ TODO(sharadshriram): DO NOT SUBMIT without a detailed description of process_sit
 from typing import Sequence
 
 from absl import app
-from .utils import write_tmcf
+from utils import write_tmcf
 
 import string
 import pandas as pd

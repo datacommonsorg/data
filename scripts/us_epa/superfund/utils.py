@@ -37,7 +37,7 @@ def make_list_of_geos_to_resolve(latitude:np.float64, longitude:np.float64)->Non
   """
   _GEO_COORDS.append({"latitude":str(latitude),"longitude":str(longitude)})
 
-def resolve_with_recon(output_path, coords_list:list=_GEO_COORDS, batch_size:int=50)->None:
+def resolve_with_recon(output_path:str, coords_list:list=_GEO_COORDS, batch_size:int=50)->None:
     """
     ABout this function
     """

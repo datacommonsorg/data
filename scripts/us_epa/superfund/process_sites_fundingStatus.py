@@ -11,27 +11,50 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""TODO(sharadshriram): DO NOT SUBMIT without one-line documentation for process_sites_fundingStatus.
+"""Script proceses data files for fundingStatus of EPA NPL Superfund sites
 
-TODO(sharadshriram): DO NOT SUBMIT without a detailed description of process_sites_fundingStatus.
+About this script:
+This script processes data from:
+- ./data/Superfund National Priorities List (NPL) Sites with Status Information.csv
+  This file lists all superfund sites on the NPL with a note on the site's status on the NPL. This file also provides different dates when the NPL status of a site changed. This dataset is exported from the data view in  https://epa.maps.arcgis.com/apps/webappviewer/index.html?id=33cebcdfdd1b4c3a8b51d416956c41f1
 """
+from absl import app, flags
+import os
+import sys
 import pandas as pd
 
-from typing import Sequence
-from absl import app
-from .utils import write_tmcf
 
-### 2. Generate the tmcf and csv for the date observations on when NPL site status for a superfund changes
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../'))  # for utils
+from superfund.utils import write_tmcf
 
+FLAGS = flags.FLAGS
+flags.DEFINE_string(
+  'input_path', './', 'Path to the directory with input files'
+)
+flags.DEFINE_string(
+  'output_path', './', 'Path to the directory where generated files are to be stored.'
+)
 
+_STATUS_TEMPALTE_MCF = """Node: E:SuperfundSite->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:SuperfundSite->observationAbout
+observationDate: C:SuperfundSite->observationDate
+variableMeasured: C:SuperfundSite->variableMeasured
+value: C:SuperfundSite->value
+"""
 
-def add_rows_to_status_csv(row):
-    status_to_schema = {
+_STATUS_SCHEMA_MAP = {
         'NPL Site': 'dcid:FinalNPLSite',
         'Deleted NPL Site': 'dcid:DeletedNPLSite',
         'Proposed NPL Site': 'dcid:ProposedNPLSite'
     }
     
+def add_rows_to_status_csv(row):
+    """
+    Utility function that creates the clean csv from each row of source dataset.
+    """
     df = pd.DataFrame()
     
     ## add observation to current status StatVar
@@ -39,7 +62,7 @@ def add_rows_to_status_csv(row):
         'observationAbout': 'dcid:epaSuperfundSiteId/' +  row['Site EPA ID'],
         'observationDate': '2021',
         'variableMeasured': 'dcid:FundingStatus_SuperfundSite',
-        'value': status_to_schema[row['Status']]
+        'value': _STATUS_SCHEMA_MAP[row['Status']]
     }, ignore_index=True)
      
     ## add observations for proposed, listing and deletion dates based on notnull()
@@ -66,42 +89,35 @@ def add_rows_to_status_csv(row):
                 'variableMeasured': 'dcid:FundingStatus_SuperfundSite',
                 'value': 'dcid:DeletedNPLSite'
             }, ignore_index=True)
-    
     return df
 
+def process_site_funding(input_path:str, output_path:str)->int:
+    """
+    Process input files to generate clean csv and tmcf files
+    """
+    npl_sites = pd.read_csv("./data/Superfund National Priorities List (NPL) Sites with Status Information.csv", usecols=['Site EPA ID', 'Status', 'Proposed Date', 'Listing Date', 'Deletion Date'])
 
-npl_sites = pd.read_csv("./data/Superfund National Priorities List (NPL) Sites with Status Information.csv", usecols=['Site EPA ID', 'Status', 'Proposed Date', 'Listing Date', 'Deletion Date'])
+    status_csv = pd.DataFrame(columns=['observationAbout', 'observationDate', 'variableMeasured', 'value'])
 
-status_csv = pd.DataFrame(columns=['observationAbout', 'observationDate', 'variableMeasured', 'value'])
+    npl_sites['Proposed Date'] = pd.to_datetime(npl_sites['Proposed Date']).dt.strftime('%Y-%m-%d')
+    npl_sites['Listing Date'] = pd.to_datetime(npl_sites['Listing Date']).dt.strftime('%Y-%m-%d')
+    npl_sites['Deletion Date'] = pd.to_datetime(npl_sites['Deletion Date']).dt.strftime('%Y-%m-%d')
 
-npl_sites['Proposed Date'] = pd.to_datetime(npl_sites['Proposed Date']).dt.strftime('%Y-%m-%d')
-npl_sites['Listing Date'] = pd.to_datetime(npl_sites['Listing Date']).dt.strftime('%Y-%m-%d')
-npl_sites['Deletion Date'] = pd.to_datetime(npl_sites['Deletion Date']).dt.strftime('%Y-%m-%d')
+    df_list = [status_csv]
+    npl_sites.apply(lambda row: df_list.append(add_rows_to_status_csv(row)), axis=1)
 
-df_list = [status_csv]
-npl_sites.apply(lambda row: df_list.append(add_rows_to_status_csv(row)), axis=1)
+    status_csv = pd.concat(df_list, ignore_index=True)
 
-status_csv = pd.concat(df_list, ignore_index=True)
+    if output_path:
+        status_csv.to_csv(os.path.join(output_path, "superfund_fundingStatus.csv"), index=False)
+        write_tmcf(_STATUS_TEMPALTE_MCF, os.path.join(output_path, "superfund_fundingStatus.tmcf"))
+    site_count = len(status_csv['observationAbout'].unique())
+    return int(site_count)
 
-_STATUS_TEMPALTE_MCF = """Node: E:SuperfundSite->E0
-typeOf: dcs:StatVarObservation
-observationAbout: C:SuperfundSite->observationAbout
-observationDate: C:SuperfundSite->observationDate
-variableMeasured: C:SuperfundSite->variableMeasured
-value: C:SuperfundSite->value
-"""
 
-f = open("./superfund_fundingStatus.tmcf", "w")
-f.write(_STATUS_TEMPALTE_MCF)
-f.close()
-
-status_csv.to_csv("./superfund_fundingStatus.csv", index=False)
-
-status_csv
-
-def main(argv: Sequence[str]) -> None:
-  if len(argv) > 1:
-    raise app.UsageError('Too many command-line arguments.')
+def main(_) -> None:
+    site_count = process_site_funding(FLAGS.input_path, FLAGS.output_path)
+    print(f"Processing of {site_count} superfund sites is complete.")
 
 
 if __name__ == '__main__':

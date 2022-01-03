@@ -11,15 +11,32 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""TODO(sharadshriram): DO NOT SUBMIT without one-line documentation for process_sites_hazards.
+"""Exposure and risks of superfund sites to natural hazards
 
-TODO(sharadshriram): DO NOT SUBMIT without a detailed description of process_sites_hazards.
+This dataset is associated with the following publication: Summers, K., A. Lamaper, and K. Buck. National Hazards Vulnerability and the Remediation, Restoration and Revitalization of Contaminated Sites – 1. Superfund. ENVIRONMENTAL MANAGEMENT. Springer-Verlag, New York, NY, USA, 14, (2021). 
+
+This script proecsses the file:
+- ./data/SF_CRSI_OLEM.xlsx
+  The dataset lists all active and upcoming Superfund sites and their vulnerability to 12 natural hazards using a vulnerability score between 0 and 100. Additional risk/exposure metrices are also imported.
 """
-
-from typing import Sequence
-from absl import app
-from .utils import write_tmcf
+import os
+import sys
+from absl import app, flags
+from utils import write_tmcf
 import pandas as pd
+
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../'))  # for utils
+from superfund.utils import write_tmcf
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string(
+  'input_path', './', 'Path to the directory with input files'
+)
+flags.DEFINE_string(
+  'output_path', './', 'Path to the directory where generated files are to be stored.'
+)
 
 _RISK_TEMPLATE_MCF="""Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation
@@ -127,18 +144,27 @@ variableMeasured: dcid:CRSIScore_SuperfundSite
 value: C:SuperfundSite->CRSI_SCORE
 """
 
-def main(argv: Sequence[str]) -> None:
-  ## Spreadsheet lists all active and upcoming Superfund sites and their vulnerability to 12 natural hazards using a vulnerability score between 0 and 100.
-  risk_score = pd.read_excel("./data/SF_CRSI_OLEM.xlsx", usecols=['Site_EPA_ID', 'CFLD_EXP', 'IFLD_EXP',
+def process_site_hazards(input_path:str, output_path:str) -> int:
+  """
+  Processes ./data/SF_CRSI_OLEM.xlsx to generate clean csv and tmcf files
+  """
+  risk_score = pd.read_excel(os.path.join(input_path, "./data/SF_CRSI_OLEM.xlsx"), usecols=['Site_EPA_ID', 'CFLD_EXP', 'IFLD_EXP',
         'DRGH_EXP', 'EQ_EXP', 'FIRE_EXP', 'HAIL_EXP', 'HTMP_EXP', 'LTMP_EXP',
         'HURR_EXP', 'LSLD_EXP', 'TORN_EXP', 'WIND_EXP', 'EXPOSURE_SCORE',
         'RISK_SCORE', 'CRSI_SCORE'])
 
   risk_score['Site_EPA_ID'] = 'dcid:epaSuperfundSiteId/' + risk_score['Site_EPA_ID']
   risk_score['observationDate'] = '2019'
-  risk_score.to_csv(os.path.join(f'{output_dir}, superfund_hazardExposure.csv'), index=False)
-  write_tmcf(_RISK_TEMPLATE_MCF, f'{output_dir}, superfund_hazardExposure.tmcf')
 
+  if output_path:
+    risk_score.to_csv(os.path.join(output_path, 'superfund_hazardExposure.csv'), index=False)
+    write_tmcf(_RISK_TEMPLATE_MCF, os.path.join(output_path, 'superfund_hazardExposure.tmcf'))
+  site_count = len(risk_score['Site_EPA_ID'].unique())
+  return int(site_count)
+
+def main(_) -> None:
+  site_count = process_site_hazards(FLAGS.input_path, FLAGS.output_path)
+  print(f"Processing of {site_count} superfund sites is complete.")
 
 if __name__ == '__main__':
   app.run(main)
