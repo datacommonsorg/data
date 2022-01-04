@@ -366,6 +366,7 @@ def process_site_remedialAction(input_path:str, output_path:str)->int:
 
     remedial_action = pd.merge(remedial_action, sv_df, on=['Media', 'Remedy Component'], how="inner")
     remedial_action = remedial_action.drop_duplicates()
+    remedial_action = remedial_action.dropna()
     remedial_action.drop(columns=['Media'], inplace=True)
     remedial_action.columns = ['observationAbout', 'observationDate', 'value', 'variableMeasured']
     if output_path:
