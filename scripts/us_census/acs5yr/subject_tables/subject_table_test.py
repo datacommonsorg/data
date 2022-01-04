@@ -27,7 +27,7 @@ from common.data_loader import process_subject_tables
 from .process import set_column_map
 
 # These directories are excluded from testing
-_EXCLUDE_DIRS = ['common', 's2201', '__pycache__', '~']
+_EXCLUDE_DIRS = ['common', 's2201', '__pycache__']
 
 
 def _get_paths(table_dir):
@@ -115,7 +115,6 @@ class TestSubjectTable(unittest.TestCase):
                                        spec_path=paths['spec'],
                                        debug=False,
                                        delimiter='!!',
-                                       decimal_places=3,
                                        has_percent=True)
 
                 test_mcf_path = os.path.join(tmp_dir, 'test_output.mcf')
