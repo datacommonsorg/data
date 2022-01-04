@@ -124,7 +124,7 @@ measuredProperty: dcs:concentration
 measurementMethod: WRIS_India
 statType: measuredValue
 
-Node: dcid:WaterQuality_GroundWater_ElectricalConductivity
+Node: dcid:WaterQuality_GroundWater_electricalConductivity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:GroundWater
@@ -148,19 +148,19 @@ measuredProperty: dcs:sodiumAbsorptionRatio
 measurementMethod: WRIS_India
 statType: measuredValue
 
-Node: dcid:WaterQuality_GroundWater_TotalHardness
+Node: dcid:WaterQuality_GroundWater_WaterHardness
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:GroundWater
-measuredProperty: dcs:totalHardness
+measuredProperty: dcs:waterHardness
 measurementMethod: WRIS_India
 statType: measuredValue
 
-Node: dcid:WaterQuality_GroundWater_TotalAlkalinity
+Node: dcid:WaterQuality_GroundWater_WaterAlkalinity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:GroundWater
-measuredProperty: dcs:totalAlkalinity
+measuredProperty: dcs:waterAlkalinity
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -172,11 +172,11 @@ measuredProperty: dcs:totalDissolvedSolids
 measurementMethod: WRIS_India
 statType: measuredValue
 
-Node: dcid:WaterQuality_GroundWater_pH
+Node: dcid:WaterQuality_GroundWater_PotentialOfHydrogen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:GroundWater
-measuredProperty: dcs:pH
+measuredProperty: dcs:potentialOfHydrogen
 measurementMethod: WRIS_India
 statType: measuredValue
 

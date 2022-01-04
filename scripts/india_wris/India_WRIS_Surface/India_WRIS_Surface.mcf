@@ -185,19 +185,19 @@ measuredProperty: dcs:electricalConductivity
 measurementMethod: WRIS_India
 statType: measuredValue
 
-Node: dcid:WaterQuality_SurfaceWater_TotalHardness
+Node: dcid:WaterQuality_SurfaceWater_WaterHardness
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:totalHardness
+measuredProperty: dcs:waterHardness
 measurementMethod: WRIS_India
 statType: measuredValue
 
-Node: dcid:WaterQuality_SurfaceWater_TotalAlkalinity
+Node: dcid:WaterQuality_SurfaceWater_WaterAlkalinity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:totalAlkalinity
+measuredProperty: dcs:waterAlkalinity
 measurementMethod: WRIS_India
 statType: measuredValue
 
@@ -225,11 +225,11 @@ measuredProperty: dcs:totalDissolvedSolids
 measurementMethod: WRIS_India
 statType: measuredValue
 
-Node: dcid:WaterQuality_SurfaceWater_pH
+Node: dcid:WaterQuality_SurfaceWater_PotentialOfHydrogen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:pH
+measuredProperty: dcs:potentialOfHydrogen
 measurementMethod: WRIS_India
 statType: measuredValue
 

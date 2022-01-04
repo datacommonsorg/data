@@ -242,8 +242,8 @@ observationDate: C:India_WRIS_Surface->Month
 observationAbout: E:India_WRIS_Surface->E0
 containedIn: E:India_WRIS_Surface->E1
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQuality_SurfaceWater_TotalHardness
-measuredProperty: dcs:totalHardness
+variableMeasured: dcid:WaterQuality_SurfaceWater_WaterHardness
+measuredProperty: dcs:waterHardness
 value: C:India_WRIS_Surface->Hardness Total
 unit: dcid:MilligramsCaCO3PerLitre
 
@@ -253,8 +253,8 @@ observationDate: C:India_WRIS_Surface->Month
 observationAbout: E:India_WRIS_Surface->E0
 containedIn: E:India_WRIS_Surface->E1
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQuality_SurfaceWater_TotalAlkalinity
-measuredProperty: dcs:totalAlkalinity
+variableMeasured: dcid:WaterQuality_SurfaceWater_WaterAlkalinity
+measuredProperty: dcs:waterAlkalinity
 value: C:India_WRIS_Surface->Alkalinity Total
 unit: dcid:MilligramsCaCO3PerLitre
 
@@ -295,7 +295,7 @@ observationDate: C:India_WRIS_Surface->Month
 observationAbout: E:India_WRIS_Surface->E0
 containedIn: E:India_WRIS_Surface->E1
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQuality_SurfaceWater_pH
-measuredProperty: dcs:pH
+variableMeasured: dcid:WaterQuality_SurfaceWater_PotentialOfHydrogen
+measuredProperty: dcs:potentialOfHydrogen
 value: C:India_WRIS_Surface->Potential of Hydrogen (pH)
 

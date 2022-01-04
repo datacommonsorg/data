@@ -163,7 +163,7 @@ observationDate: C:India_WRIS_Ground->Year
 observationAbout: E:India_WRIS_Ground->E0
 containedIn: E:India_WRIS_Ground->E1
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_GroundWater_ElectricalConductivity
+variableMeasured: dcid:WaterQuality_GroundWater_electricalConductivity
 measuredProperty: dcs:electricalConductivity
 value: C:India_WRIS_Ground->Electrical Conductivity
 
@@ -193,8 +193,8 @@ observationDate: C:India_WRIS_Ground->Year
 observationAbout: E:India_WRIS_Ground->E0
 containedIn: E:India_WRIS_Ground->E1
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_GroundWater_TotalHardness
-measuredProperty: dcs:totalHardness
+variableMeasured: dcid:WaterQuality_GroundWater_WaterHardness
+measuredProperty: dcs:waterHardness
 value: C:India_WRIS_Ground->Hardness Total
 unit: dcid:MilligramsCaCO3PerLitre
 
@@ -204,8 +204,8 @@ observationDate: C:India_WRIS_Ground->Year
 observationAbout: E:India_WRIS_Ground->E0
 containedIn: E:India_WRIS_Ground->E1
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_GroundWater_TotalAlkalinity
-measuredProperty: dcs:totalAlkalinity
+variableMeasured: dcid:WaterQuality_GroundWater_WaterAlkalinity
+measuredProperty: dcs:waterAlkalinity
 value: C:India_WRIS_Ground->Alkalinity Total
 unit: dcid:MilligramsCaCO3PerLitre
 
@@ -226,7 +226,7 @@ observationDate: C:India_WRIS_Ground->Year
 observationAbout: E:India_WRIS_Ground->E0
 containedIn: E:India_WRIS_Ground->E1
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_GroundWater_pH
-measuredProperty: dcs:pH
+variableMeasured: dcid:WaterQuality_GroundWater_PotentialOfHydrogen
+measuredProperty: dcs:potentialOfHydrogen
 value: C:India_WRIS_Ground->Potential of Hydrogen (pH)
 

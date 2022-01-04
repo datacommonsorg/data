@@ -77,7 +77,7 @@
         "ChemicalProperty": [
             {
                 "name": "Electrical Conductivity",
-                "statvar": "ElectricalConductivity",
+                "statvar": "electricalConductivity",
                 "unit": "",
                 "dcid": "electricalConductivity"
             },
@@ -95,15 +95,15 @@
             },
             {
                 "name": "Hardness Total",
-                "statvar": "TotalHardness",
+                "statvar": "WaterHardness",
                 "unit": "dcid:MilligramsCaCO3PerLitre",
-                "dcid": "totalHardness"
+                "dcid": "waterHardness"
             },
             {
                 "name": "Alkalinity Total",
-                "statvar": "TotalAlkalinity",
+                "statvar": "WaterAlkalinity",
                 "unit": "dcid:MilligramsCaCO3PerLitre",
-                "dcid": "totalAlkalinity"
+                "dcid": "waterAlkalinity"
             },
             {
                 "name": "Total Dissolved Solids",
@@ -113,9 +113,9 @@
             },
             {
                 "name": "Potential of Hydrogen (pH)",
-                "statvar": "pH",
+                "statvar": "PotentialOfHydrogen",
                 "unit": "",
-                "dcid": "pH"
+                "dcid": "potentialOfHydrogen"
             }
         ]    
     }
