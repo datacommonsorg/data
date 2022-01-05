@@ -4,7 +4,7 @@ lgdCode: C:LocalGovernmentDirectory_Districts->LGDStateCode
 
 Node: E:LocalGovernmentDirectory_Districts->E1
 typeOf: dcs:AdministrativeArea2
-wikiDataId: C:LocalGovernmentDirectory_Districts->WikiDataId
+wikidataId: C:LocalGovernmentDirectory_Districts->WikiDataId
 name: C:LocalGovernmentDirectory_Districts->LGDDistrictNameTitleCase
 lgdCode: C:LocalGovernmentDirectory_Districts->LGDDistrictCode
 indianCensusAreaCode2011: C:LocalGovernmentDirectory_Districts->LGDCensus2011Code
