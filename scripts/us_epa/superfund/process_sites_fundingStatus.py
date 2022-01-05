@@ -23,19 +23,17 @@ import os
 import sys
 import pandas as pd
 
-
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../'))  # for utils
 from superfund.utils import write_tmcf
 
 FLAGS = flags.FLAGS
+flags.DEFINE_string('input_path', './',
+                    'Path to the directory with input files')
 flags.DEFINE_string(
-  'input_path', './', 'Path to the directory with input files'
-)
-flags.DEFINE_string(
-  'output_path', './', 'Path to the directory where generated files are to be stored.'
-)
+    'output_path', './',
+    'Path to the directory where generated files are to be stored.')
 
 _STATUS_TEMPALTE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation
@@ -46,72 +44,108 @@ value: C:SuperfundSite->value
 """
 
 _STATUS_SCHEMA_MAP = {
-        'NPL Site': 'dcid:FinalNPLSite',
-        'Deleted NPL Site': 'dcid:DeletedNPLSite',
-        'Proposed NPL Site': 'dcid:ProposedNPLSite'
-    }
-    
+    'NPL Site': 'dcid:FinalNPLSite',
+    'Deleted NPL Site': 'dcid:DeletedNPLSite',
+    'Proposed NPL Site': 'dcid:ProposedNPLSite'
+}
+
+
 def add_rows_to_status_csv(row):
     """
     Utility function that creates the clean csv from each row of source dataset.
     """
     df = pd.DataFrame()
-    
+
     ## add observation to current status StatVar
-    df = df.append({
-        'observationAbout': 'dcid:epaSuperfundSiteId/' +  row['Site EPA ID'],
-        'observationDate': '2021',
-        'variableMeasured': 'dcid:FundingStatus_SuperfundSite',
-        'value': _STATUS_SCHEMA_MAP[row['Status']]
-    }, ignore_index=True)
-     
+    df = df.append(
+        {
+            'observationAbout': 'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
+            'observationDate': '2021',
+            'variableMeasured': 'dcid:FundingStatus_SuperfundSite',
+            'value': _STATUS_SCHEMA_MAP[row['Status']]
+        },
+        ignore_index=True)
+
     ## add observations for proposed, listing and deletion dates based on notnull()
     if not pd.isnull(row['Proposed Date']):
-            df = df.append({
-                'observationAbout': 'dcid:epaSuperfundSiteId/' +  row['Site EPA ID'],
-                'observationDate': row['Proposed Date'],
-                'variableMeasured': 'dcid:FundingStatus_SuperfundSite',
-                'value': 'dcid:ProposedNPLSite'
-            }, ignore_index=True)
-            
+        df = df.append(
+            {
+                'observationAbout':
+                    'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
+                'observationDate':
+                    row['Proposed Date'],
+                'variableMeasured':
+                    'dcid:FundingStatus_SuperfundSite',
+                'value':
+                    'dcid:ProposedNPLSite'
+            },
+            ignore_index=True)
+
     if not pd.isnull(row['Listing Date']):
-            df = df.append({
-                'observationAbout': 'dcid:epaSuperfundSiteId/' +  row['Site EPA ID'],
-                'observationDate': row['Listing Date'],
-                'variableMeasured': 'dcid:FundingStatus_SuperfundSite',
-                'value': 'dcid:FinalNPLSite'
-            }, ignore_index=True)
-            
+        df = df.append(
+            {
+                'observationAbout':
+                    'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
+                'observationDate':
+                    row['Listing Date'],
+                'variableMeasured':
+                    'dcid:FundingStatus_SuperfundSite',
+                'value':
+                    'dcid:FinalNPLSite'
+            },
+            ignore_index=True)
+
     if not pd.isnull(row['Deletion Date']):
-            df = df.append({
-                'observationAbout': 'dcid:epaSuperfundSiteId/' +  row['Site EPA ID'],
-                'observationDate': row['Deletion Date'],
-                'variableMeasured': 'dcid:FundingStatus_SuperfundSite',
-                'value': 'dcid:DeletedNPLSite'
-            }, ignore_index=True)
+        df = df.append(
+            {
+                'observationAbout':
+                    'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
+                'observationDate':
+                    row['Deletion Date'],
+                'variableMeasured':
+                    'dcid:FundingStatus_SuperfundSite',
+                'value':
+                    'dcid:DeletedNPLSite'
+            },
+            ignore_index=True)
     return df
 
-def process_site_funding(input_path:str, output_path:str)->int:
+
+def process_site_funding(input_path: str, output_path: str) -> int:
     """
     Process input files to generate clean csv and tmcf files
     """
-    npl_sites = pd.read_csv("./data/Superfund National Priorities List (NPL) Sites with Status Information.csv", usecols=['Site EPA ID', 'Status', 'Proposed Date', 'Listing Date', 'Deletion Date'])
+    npl_sites = pd.read_csv(
+        "./data/Superfund National Priorities List (NPL) Sites with Status Information.csv",
+        usecols=[
+            'Site EPA ID', 'Status', 'Proposed Date', 'Listing Date',
+            'Deletion Date'
+        ])
 
-    status_csv = pd.DataFrame(columns=['observationAbout', 'observationDate', 'variableMeasured', 'value'])
-    
+    status_csv = pd.DataFrame(columns=[
+        'observationAbout', 'observationDate', 'variableMeasured', 'value'
+    ])
+
     # convert dates to appropriate format
-    npl_sites['Proposed Date'] = pd.to_datetime(npl_sites['Proposed Date']).dt.strftime('%Y-%m-%d')
-    npl_sites['Listing Date'] = pd.to_datetime(npl_sites['Listing Date']).dt.strftime('%Y-%m-%d')
-    npl_sites['Deletion Date'] = pd.to_datetime(npl_sites['Deletion Date']).dt.strftime('%Y-%m-%d')
+    npl_sites['Proposed Date'] = pd.to_datetime(
+        npl_sites['Proposed Date']).dt.strftime('%Y-%m-%d')
+    npl_sites['Listing Date'] = pd.to_datetime(
+        npl_sites['Listing Date']).dt.strftime('%Y-%m-%d')
+    npl_sites['Deletion Date'] = pd.to_datetime(
+        npl_sites['Deletion Date']).dt.strftime('%Y-%m-%d')
 
     df_list = [status_csv]
-    npl_sites.apply(lambda row: df_list.append(add_rows_to_status_csv(row)), axis=1)
+    npl_sites.apply(lambda row: df_list.append(add_rows_to_status_csv(row)),
+                    axis=1)
 
     status_csv = pd.concat(df_list, ignore_index=True)
 
     if output_path:
-        status_csv.to_csv(os.path.join(output_path, "superfund_fundingStatus.csv"), index=False)
-        write_tmcf(_STATUS_TEMPALTE_MCF, os.path.join(output_path, "superfund_fundingStatus.tmcf"))
+        status_csv.to_csv(os.path.join(output_path,
+                                       "superfund_fundingStatus.csv"),
+                          index=False)
+        write_tmcf(_STATUS_TEMPALTE_MCF,
+                   os.path.join(output_path, "superfund_fundingStatus.tmcf"))
     site_count = len(status_csv['observationAbout'].unique())
     return int(site_count)
 
@@ -122,4 +156,4 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)

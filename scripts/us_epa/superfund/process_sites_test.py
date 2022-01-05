@@ -6,6 +6,7 @@ from .process_sites import process_sites
 
 _EXPECTED_SITE_COUNT = 1715
 
+
 class ProcessTest(unittest.TestCase):
 
     def test_e2e(self):

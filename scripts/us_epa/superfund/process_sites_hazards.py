@@ -31,14 +31,13 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../'))  # for utils
 from superfund.utils import write_tmcf
 
 FLAGS = flags.FLAGS
+flags.DEFINE_string('input_path', './',
+                    'Path to the directory with input files')
 flags.DEFINE_string(
-  'input_path', './', 'Path to the directory with input files'
-)
-flags.DEFINE_string(
-  'output_path', './', 'Path to the directory where generated files are to be stored.'
-)
+    'output_path', './',
+    'Path to the directory where generated files are to be stored.')
 
-_RISK_TEMPLATE_MCF="""Node: E:SuperfundSite->E0
+_RISK_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
@@ -144,27 +143,39 @@ variableMeasured: dcid:CRSIScore_SuperfundSite
 value: C:SuperfundSite->CRSI_SCORE
 """
 
-def process_site_hazards(input_path:str, output_path:str) -> int:
-  """
+
+def process_site_hazards(input_path: str, output_path: str) -> int:
+    """
   Processes ./data/SF_CRSI_OLEM.xlsx to generate clean csv and tmcf files
   """
-  risk_score = pd.read_excel(os.path.join(input_path, "./data/SF_CRSI_OLEM.xlsx"), usecols=['Site_EPA_ID', 'CFLD_EXP', 'IFLD_EXP',
-        'DRGH_EXP', 'EQ_EXP', 'FIRE_EXP', 'HAIL_EXP', 'HTMP_EXP', 'LTMP_EXP',
-        'HURR_EXP', 'LSLD_EXP', 'TORN_EXP', 'WIND_EXP', 'EXPOSURE_SCORE',
-        'RISK_SCORE', 'CRSI_SCORE'])
+    risk_score = pd.read_excel(os.path.join(input_path,
+                                            "./data/SF_CRSI_OLEM.xlsx"),
+                               usecols=[
+                                   'Site_EPA_ID', 'CFLD_EXP', 'IFLD_EXP',
+                                   'DRGH_EXP', 'EQ_EXP', 'FIRE_EXP', 'HAIL_EXP',
+                                   'HTMP_EXP', 'LTMP_EXP', 'HURR_EXP',
+                                   'LSLD_EXP', 'TORN_EXP', 'WIND_EXP',
+                                   'EXPOSURE_SCORE', 'RISK_SCORE', 'CRSI_SCORE'
+                               ])
 
-  risk_score['Site_EPA_ID'] = 'dcid:epaSuperfundSiteId/' + risk_score['Site_EPA_ID']
-  risk_score['observationDate'] = '2019'
+    risk_score[
+        'Site_EPA_ID'] = 'dcid:epaSuperfundSiteId/' + risk_score['Site_EPA_ID']
+    risk_score['observationDate'] = '2019'
 
-  if output_path:
-    risk_score.to_csv(os.path.join(output_path, 'superfund_hazardExposure.csv'), index=False)
-    write_tmcf(_RISK_TEMPLATE_MCF, os.path.join(output_path, 'superfund_hazardExposure.tmcf'))
-  site_count = len(risk_score['Site_EPA_ID'].unique())
-  return int(site_count)
+    if output_path:
+        risk_score.to_csv(os.path.join(output_path,
+                                       'superfund_hazardExposure.csv'),
+                          index=False)
+        write_tmcf(_RISK_TEMPLATE_MCF,
+                   os.path.join(output_path, 'superfund_hazardExposure.tmcf'))
+    site_count = len(risk_score['Site_EPA_ID'].unique())
+    return int(site_count)
+
 
 def main(_) -> None:
-  site_count = process_site_hazards(FLAGS.input_path, FLAGS.output_path)
-  print(f"Processing of {site_count} superfund sites is complete.")
+    site_count = process_site_hazards(FLAGS.input_path, FLAGS.output_path)
+    print(f"Processing of {site_count} superfund sites is complete.")
+
 
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)

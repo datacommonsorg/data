@@ -23,40 +23,58 @@ import requests
 _GEO_COORDS = []
 _DC_RECON_API = "https://autopush.recon.datacommons.org/coordinate/resolve"
 
-def write_tmcf(tmcf_str:str, output_file:str) -> None:
-  """
+
+def write_tmcf(tmcf_str: str, output_file: str) -> None:
+    """
   Utility function that writes a tmcf file contents to file
   """
-  f = open(output_file, 'w')
-  f.write(tmcf_str)
-  f.close()
+    f = open(output_file, 'w')
+    f.write(tmcf_str)
+    f.close()
 
-def make_list_of_geos_to_resolve(latitude:np.float64, longitude:np.float64)->None:
-  """
+
+def make_list_of_geos_to_resolve(latitude: np.float64,
+                                 longitude: np.float64) -> None:
+    """
   Utility function that adds a pair of latitiude and longitude to a list
   """
-  _GEO_COORDS.append({"latitude":str(latitude),"longitude":str(longitude)})
+    _GEO_COORDS.append({"latitude": str(latitude), "longitude": str(longitude)})
 
-def resolve_with_recon(output_path:str, coords_list:list=_GEO_COORDS, batch_size:int=50)->None:
+
+def resolve_with_recon(output_path: str,
+                       coords_list: list = _GEO_COORDS,
+                       batch_size: int = 50) -> None:
     """
     ABout this function
     """
     # divide the list into non-overlapping chunk of batch_size
-    coords_chunk_list = [coords_list[i:i + batch_size] for i in range(0, len(coords_list), batch_size)]
-    
+    coords_chunk_list = [
+        coords_list[i:i + batch_size]
+        for i in range(0, len(coords_list), batch_size)
+    ]
+
     resolved_geos_map = {}
-    
+
     # for each chunk resolve the coords to geoIds
     for chunk in coords_chunk_list:
         payload = {"coordinates": chunk}
-        response_json = requests.post(_DC_RECON_API, data=json.dumps(payload), timeout=100.000).json()
+        response_json = requests.post(_DC_RECON_API,
+                                      data=json.dumps(payload),
+                                      timeout=100.000).json()
         for response_elem in response_json['placeCoordinates']:
             try:
-                place_dcid = [x for x in response_elem["placeDcids"] if 'zip' in x or 'geoId' in x][0]
-                resolved_geos_map[(str(response_elem["latitude"]) + ',' + str(response_elem["longitude"]))] = place_dcid
+                place_dcid = [
+                    x for x in response_elem["placeDcids"]
+                    if 'zip' in x or 'geoId' in x
+                ][0]
+                resolved_geos_map[(
+                    str(response_elem["latitude"]) + ',' +
+                    str(response_elem["longitude"]))] = place_dcid
             except:
-                print("This coordinate pair needs to be manually resolved: ", response_elem)
-                resolved_geos_map[(str(response_elem["latitude"]) + ',' + str(response_elem["longitude"]))] = ''
+                print("This coordinate pair needs to be manually resolved: ",
+                      response_elem)
+                resolved_geos_map[(str(response_elem["latitude"]) + ',' +
+                                   str(response_elem["longitude"]))] = ''
 
     # manual resolution for the missing geoIds
     ## resolution for zip code done by lookups at https://www.zipdatamaps.com/ & GMaps based on location name
@@ -72,21 +90,20 @@ def resolve_with_recon(output_path:str, coords_list:list=_GEO_COORDS, batch_size
     resolved_geos_map["34.125,-118.0"] = 'zip/91016'
     resolved_geos_map["41.266669,-112.0"] = 'zip/84404'
     resolved_geos_map["40.75,-75.0"] = 'zip/07882'
-    
+
     # write resolved geo map to file
     f = open(f"{output_path}/resolved_superfund_site_geoIds.json", "w")
     json.dump(resolved_geos_map, f, indent=4)
     f.close()
 
+
 # from typing import Sequence
 
 # from absl import app
 
-
 # def main(argv: Sequence[str]) -> None:
 #   if len(argv) > 1:
 #     raise app.UsageError('Too many command-line arguments.')
-
 
 # if __name__ == '__main__':
 #   app.run(main)

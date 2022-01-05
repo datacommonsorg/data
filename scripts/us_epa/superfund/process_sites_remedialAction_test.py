@@ -6,6 +6,7 @@ from .process_sites_remedialAction import process_site_remedialAction
 
 _EXPECTED_SITE_COUNT = 1426
 
+
 class ProcessTest(unittest.TestCase):
 
     def test_e2e(self):

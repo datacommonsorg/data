@@ -6,6 +6,7 @@ from .process_sites_hazards import process_site_hazards
 
 _EXPECTED_SITE_COUNT = 1364
 
+
 class ProcessTest(unittest.TestCase):
 
     def test_e2e(self):
