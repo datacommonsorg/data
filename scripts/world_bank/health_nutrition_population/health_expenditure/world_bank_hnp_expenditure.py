@@ -16,10 +16,11 @@ def get_df(serieses):
     '''gets df from json webpage'''
     df2 = pd.DataFrame(columns = ['Series Name', 'Series Code', 'Country Code',
                                   'Country', 'Year', 'Value'])
-    series = ['SH.XPD.KHEX.GD.ZS', 'SH.XPD.CHEX.GD.ZS', 'SH.XPD.CHEX.PC.CD',          'SH.XPD.CHEX.PP.CD', 'SH.XPD.GHED.CH.ZS', 'SH.XPD.GHED.GD.ZS',
-          'SH.XPD.GHED.GE.ZS', 'SH.XPD.GHED.PC.CD', 'SH.XPD.EHEX.CH.ZS',
-          'SH.XPD.EHEX.EH.ZS', 'SH.XPD.PVTD.PP.CD', 'SH.XPD.PVTD.CH.ZS',
-          'SH.XPD.PVTD.PC.CD', 'SH.XPD.GHED.PP.CD']
+    series = ['SH.XPD.KHEX.GD.ZS', 'SH.XPD.CHEX.GD.ZS', 'SH.XPD.CHEX.PC.CD',
+	      'SH.XPD.CHEX.PP.CD', 'SH.XPD.GHED.CH.ZS', 'SH.XPD.GHED.GD.ZS',
+              'SH.XPD.GHED.GE.ZS', 'SH.XPD.GHED.PC.CD', 'SH.XPD.EHEX.CH.ZS',
+              'SH.XPD.EHEX.EH.ZS', 'SH.XPD.PVTD.PP.CD', 'SH.XPD.PVTD.CH.ZS',
+              'SH.XPD.PVTD.PC.CD', 'SH.XPD.GHED.PP.CD']
     for current_series in list(serieses):
         url = "https://api.worldbank.org/v2/country/all/indicator/"
         url = url + f"{current_series}?format=JSON&per_page=17000"
@@ -55,8 +56,6 @@ def from_mcf(mcf):
 			print(end = '')
 	return desc_var_dict
 
-
-#slight changes
 def get_csv(input_df):
     '''
     create csv according to tmcf
@@ -82,4 +81,3 @@ def main(argv):
 
 if __name__ == '__main__':
     app.run(main)
-main()
