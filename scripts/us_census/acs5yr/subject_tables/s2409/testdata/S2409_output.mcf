@@ -1,0 +1,1035 @@
+Node: dcid:Count_Person_Civilian_Employed_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Civilian_Employed_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_LocalGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_LocalGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_StateGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_StateGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_FederalGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_FederalGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Civilian_Employed_Male_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Civilian_Employed_Male_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Male_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Male_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_Male_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_Male_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_LocalGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_LocalGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_StateGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_StateGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_FederalGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_FederalGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_Male_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_Male_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Civilian_Employed_Female_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Civilian_Employed_Female_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Female_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Female_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_Female_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_Female_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_LocalGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_LocalGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_StateGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_StateGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_FederalGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_FederalGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_PrivatelyOwnedEstablishment_Female_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_Female_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_Civilian_Employed_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_LocalGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_StateGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_FederalGovernmentOwnedEstablishment_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_Civilian_Employed_Male_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Male_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedNotForProfitEstablishment_Male_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_LocalGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_StateGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_FederalGovernmentOwnedEstablishment_Male_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedEstablishment_Male_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Male
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_Civilian_Employed_Female_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+employment: dcs:BLS_Employed
+age: [16 - Years]
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidEmployee_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Female_IncorporatedBusinessOwner_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedNotForProfitEstablishment_Female_PaidWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
+workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_LocalGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+establishmentOwnership: dcs:LocalGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_StateGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+establishmentOwnership: dcs:StateGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_FederalGovernmentOwnedEstablishment_Female_Worker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+establishmentOwnership: dcs:FederalGovernmentOwned
+workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_PrivatelyOwnedEstablishment_Female_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_FullTimeYearRoundWorker
+measuredProperty: dcs:earnings
+incomeStatus: dcs:WithEarnings
+statType: dcs:medianValue
+gender: dcs:Female
+populationType: dcs:Person
+establishmentOwnership: dcs:PrivatelyOwned
+workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
