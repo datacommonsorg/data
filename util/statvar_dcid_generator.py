@@ -224,7 +224,7 @@ _PREPEND_APPEND_REPLACE_MAP = {
         'replace': 'Date',
         'replacement': ''
     },
-    'bachelorDegreeMajor': {
+    'bachelorsDegreeMajor': {
         'prepend': 'BachelorOf'
     },
     'biasMotivation': {
