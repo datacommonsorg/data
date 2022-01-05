@@ -349,31 +349,30 @@ def write_sv_to_file(row,file_obj):
 
 
 def process_site_remedialAction(input_path:str, output_path:str)->int:
-    remedial_action_path = os.path.join(input_path, "./data/401052.xlsx")
-    remedial_action = pd.read_excel(remedial_action_path, header=1, usecols=['EPA ID', 'Actual Completion Date', 'Media', 'Remedy Component'])
-    remedial_action = remedial_action.drop_duplicates()
+	remedial_action_path = os.path.join(input_path, "./data/401052.xlsx")
+	remedial_action = pd.read_excel(remedial_action_path, header=1, usecols=['EPA ID', 'Actual Completion Date', 'Media', 'Remedy Component'])
+	remedial_action = remedial_action.drop_duplicates()
+	remedial_action = remedial_action.dropna()
 
-    # convert dates to appropriate format
-    remedial_action['Actual Completion Date'] = pd.to_datetime(remedial_action['Actual Completion Date']).dt.strftime('%Y-%m-%d')
+	# convert dates to appropriate format
+	remedial_action['Actual Completion Date'] = pd.to_datetime(remedial_action['Actual Completion Date']).dt.strftime('%Y-%m-%d')
 
-    remedial_action['EPA ID'] = 'dcid:epaSuperfundSiteId/' + remedial_action['EPA ID']
+	remedial_action['EPA ID'] = 'dcid:epaSuperfundSiteId/' + remedial_action['EPA ID']
 
-    sv_df = remedial_action[['Media', 'Remedy Component']].drop_duplicates()
-    sv_df = sv_df.dropna()
-    f = open("remedial_action_statvars.mcf", "w")
-    sv_df = sv_df.apply(write_sv_to_file, args=(f,), axis=1)
-    f.close()
+	sv_df = remedial_action[['Media', 'Remedy Component']].drop_duplicates()
+	sv_df = sv_df.dropna()
+	f = open("remedial_action_statvars.mcf", "w")
+	sv_df = sv_df.apply(write_sv_to_file, args=(f,), axis=1)
+	f.close()
 
-    remedial_action = pd.merge(remedial_action, sv_df, on=['Media', 'Remedy Component'], how="inner")
-    remedial_action = remedial_action.drop_duplicates()
-    remedial_action = remedial_action.dropna()
-    remedial_action.drop(columns=['Media'], inplace=True)
-    remedial_action.columns = ['observationAbout', 'observationDate', 'value', 'variableMeasured']
-    if output_path:
-        remedial_action.to_csv(os.path.join(output_path, "superfund_remedialAction.csv"), index=False)
-        write_tmcf(_TEMPALTE_MCF, os.path.join(output_path, "superfund_remedialAction.tmcf"))
-    site_count = len(remedial_action['observationAbout'].unique())
-    return int(site_count)
+	remedial_action = pd.merge(remedial_action, sv_df, on=['Media', 'Remedy Component'], how="inner")
+	remedial_action.drop(columns=['Media'], inplace=True)
+	remedial_action.columns = ['observationAbout', 'observationDate', 'value', 'variableMeasured']
+	if output_path:
+		remedial_action.to_csv(os.path.join(output_path, "superfund_remedialAction.csv"), index=False)
+		write_tmcf(_TEMPALTE_MCF, os.path.join(output_path, "superfund_remedialAction.tmcf"))
+	site_count = len(remedial_action['observationAbout'].unique())
+	return int(site_count)
 
 def main(_) -> None:
     site_count = process_site_remedialAction(FLAGS.input_path, FLAGS.output_path)
