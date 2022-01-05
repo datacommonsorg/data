@@ -1264,7 +1264,7 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
     # Create cache dir if not present
     if use_cache and not os.path.exists(_CACHE_DIR):
         os.mkdir(_CACHE_DIR)
-    
+
     fill_unknown_cols = ['OFFENDER_RACE', 'OFFENDER_ETHNICITY']
 
     df['BIAS_CATEGORY'] = ''
@@ -1343,7 +1343,8 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
     if use_cache and os.path.exists(known_offender_path):
         known_offender = pd.read_csv(known_offender_path)
     else:
-        known_offender = incident_df[incident_df['OFFENDER_CATEGORY'] == 'KnownOffender']
+        known_offender = incident_df[incident_df['OFFENDER_CATEGORY'] ==
+                                     'KnownOffender']
         known_offender.to_csv(known_offender_path, index=False)
     df_dict['known_offender'] = known_offender
 
@@ -1351,7 +1352,8 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
     if use_cache and os.path.exists(os_victimtype_path):
         offense_single_victimtype_df = pd.read_csv(os_victimtype_path)
     else:
-        offense_single_victimtype_df = offense_df[offense_df['MULTIPLE_VICTIM_TYPE'] == 'S']
+        offense_single_victimtype_df = offense_df[
+            offense_df['MULTIPLE_VICTIM_TYPE'] == 'S']
         offense_single_victimtype_df.to_csv(os_victimtype_path, index=False)
     df_dict['offense_single_victimtype_df'] = offense_single_victimtype_df
 
@@ -1359,10 +1361,11 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
     if use_cache and os.path.exists(om_victimtype_path):
         offense_multiple_victimtype_df = pd.read_csv(om_victimtype_path)
     else:
-        offense_multiple_victimtype_df = offense_df[offense_df['MULTIPLE_VICTIM_TYPE'] == 'M']
+        offense_multiple_victimtype_df = offense_df[
+            offense_df['MULTIPLE_VICTIM_TYPE'] == 'M']
         offense_multiple_victimtype_df.to_csv(om_victimtype_path, index=False)
     df_dict['offense_multiple_victimtype_df'] = offense_multiple_victimtype_df
-    
+
     return df_dict
 
 
@@ -1396,6 +1399,7 @@ def _add_offender_category(row):
                                                     np.nan):
         row['OFFENDER_CATEGORY'] = 'KnownOffender'
     return row
+
 
 def _add_multiple_victims(row):
     """A function to add the victim types. To be used with
@@ -1481,12 +1485,14 @@ def _gen_statvar_mcf(df: pd.DataFrame,
     df_copy['StatVar'] = statvar_dcid_list
     return df_copy, statvar_list
 
+
 def is_quantity_range(val: str) -> bool:
     """Checks if [] are present in val.
     """
     if '[' in val and ']' in val:
         return True
     return False
+
 
 def _write_statvar_mcf(statvar_list: list, f):
     """Writes statvars to a file.
