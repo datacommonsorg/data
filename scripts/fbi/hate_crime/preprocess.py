@@ -26,6 +26,8 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 
 from statvar_dcid_generator import get_statvar_dcid
 
+_CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
+
 # Columns to input from source data
 _INPUT_COLUMNS = [
     'INCIDENT_ID', 'DATA_YEAR', 'OFFENDER_RACE', 'OFFENDER_ETHNICITY',
@@ -158,7 +160,8 @@ _OFFENSE_CATEGORY_MAP = {
     "Human Trafficking, Commercial Sex Acts": "CrimeAgainstPerson",
     "Hacking/Computer Invasion": "CrimeAgainstProperty",
     "Betting/Wagering": "CrimeAgainstSociety",
-    "Animal Cruelty": "CrimeAgainstSociety"
+    "Animal Cruelty": "CrimeAgainstSociety",
+    "Not Specified": "Not Specified"
 }
 
 # A dict to generate aggregations on the source data
@@ -264,7 +267,6 @@ _AGGREGATIONS = {
         },
         {  # Incidents by crime category
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -307,7 +309,6 @@ _AGGREGATIONS = {
         },
         {  # Incidents by crime type and bias motivation
             'df': 'single_bias_offenses',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_DESC', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -318,7 +319,6 @@ _AGGREGATIONS = {
         },
         {  # Incidents grouped by crime type and single bias / multiple bias
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -329,7 +329,6 @@ _AGGREGATIONS = {
         },
         {  # Incidents grouped by crime type and bias category
             'df': 'single_bias_offenses',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -547,7 +546,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -572,7 +570,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_single_victimtype_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'VICTIM_TYPES'],
                 'agg_dict': {
@@ -597,7 +594,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_multiple_victimtype_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'MULTIPLE_VICTIM_TYPE'],
                 'agg_dict': {
@@ -622,7 +618,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_RACE'],
                 'agg_dict': {
@@ -647,7 +642,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_ETHNICITY'],
                 'agg_dict': {
@@ -672,7 +666,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by offense category
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_CATEGORY'],
                 'agg_dict': {
@@ -719,7 +712,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses by crime type and bias motivation
             'df': 'single_bias_offenses',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_DESC', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -731,7 +723,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by crime type and single bias / multiple bias
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -743,7 +734,6 @@ _AGGREGATIONS = {
         },
         {  # Offenses grouped by crime type and bias category
             'df': 'single_bias_offenses',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -997,7 +987,6 @@ _AGGREGATIONS = {
         {  # Victims by crime category
             # TODO double counting
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1046,7 +1035,6 @@ _AGGREGATIONS = {
         {  # Offenses by crime type and bias motivation
             # TODO double counting
             'df': 'single_bias_offenses',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_DESC', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1059,7 +1047,6 @@ _AGGREGATIONS = {
         {  # Offenses grouped by crime type and single bias / multiple bias
             # TODO double counting
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1072,7 +1059,6 @@ _AGGREGATIONS = {
         {  # Offenses grouped by crime type and bias category
             # TODO double counting
             'df': 'single_bias_offenses',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1168,7 +1154,6 @@ _AGGREGATIONS = {
         {  # Offenders by crime category
             # TODO double counting
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
@@ -1194,7 +1179,6 @@ _AGGREGATIONS = {
         {  # Offenders by crime category
             # TODO double counting
             'df': 'offense_df',
-            'query': 'OFFENSE_NAME != "Not Specified"',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_CATEGORY'],
                 'agg_dict': {
@@ -1266,7 +1250,7 @@ _AGGREGATIONS = {
 }
 
 
-def _create_df_dict(df: pd.DataFrame) -> dict:
+def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
     """Applies transformations on the hate crime dataframe. These transformed
     dataframes are then used in the aggregations.
 
@@ -1277,6 +1261,10 @@ def _create_df_dict(df: pd.DataFrame) -> dict:
         A dictionary which has transformation name as key and the transformed
         dataframe as it's value.
     """
+    # Create cache dir if not present
+    if use_cache and not os.path.exists(_CACHE_DIR):
+        os.mkdir(_CACHE_DIR)
+    
     fill_unknown_cols = ['OFFENDER_RACE', 'OFFENDER_ETHNICITY']
 
     df['BIAS_CATEGORY'] = ''
@@ -1284,40 +1272,95 @@ def _create_df_dict(df: pd.DataFrame) -> dict:
 
     df[fill_unknown_cols] = df[fill_unknown_cols].fillna('Unknown')
 
-    incident_df = df.apply(_add_bias_category, axis=1)
-    incident_df = incident_df.apply(_add_offender_category, axis=1)
-    incident_df = incident_df.apply(_add_multiple_victims, axis=1)
+    incident_path = os.path.join(_CACHE_DIR, 'incident.csv')
+    if use_cache and os.path.exists(incident_path):
+        incident_df = pd.read_csv(incident_path)
+    else:
+        incident_df = df.apply(_add_bias_category, axis=1)
+        incident_df = incident_df.apply(_add_offender_category, axis=1)
+        incident_df = incident_df.apply(_add_multiple_victims, axis=1)
+        incident_df.to_csv(incident_path, index=False)
     df_dict['incident_df'] = incident_df
 
-    offense_df = flatten_by_column(incident_df, 'OFFENSE_NAME')
-    offense_df = offense_df.apply(_add_offense_category, axis=1)
+    offense_path = os.path.join(_CACHE_DIR, 'offense.csv')
+    if use_cache and os.path.exists(offense_path):
+        offense_df = pd.read_csv(offense_path)
+    else:
+        offense_df = flatten_by_column(incident_df, 'OFFENSE_NAME')
+        offense_df = offense_df.apply(_add_offense_category, axis=1)
+        offense_df.to_csv(offense_path, index=False)
     df_dict['offense_df'] = offense_df
 
-    location_df = flatten_by_column(incident_df, 'LOCATION_NAME')
+    location_path = os.path.join(_CACHE_DIR, 'location.csv')
+    if use_cache and os.path.exists(location_path):
+        location_df = pd.read_csv(location_path)
+    else:
+        location_df = flatten_by_column(incident_df, 'LOCATION_NAME')
+        location_df.to_csv(location_path, index=False)
     df_dict['location_df'] = location_df
 
-    victim_df = flatten_by_column(incident_df, 'VICTIM_TYPES')
+    victim_path = os.path.join(_CACHE_DIR, 'victim.csv')
+    if use_cache and os.path.exists(victim_path):
+        victim_df = pd.read_csv(victim_path)
+    else:
+        victim_df = flatten_by_column(incident_df, 'VICTIM_TYPES')
+        victim_df.to_csv(victim_path, index=False)
     df_dict['victim_df'] = victim_df
 
-    single_bias_incidents = incident_df[incident_df['MULTIPLE_BIAS'] == 'S']
+    sb_incidents_path = os.path.join(_CACHE_DIR, 'sb_incidents.csv')
+    if use_cache and os.path.exists(sb_incidents_path):
+        single_bias_incidents = pd.read_csv(sb_incidents_path)
+    else:
+        single_bias_incidents = incident_df[incident_df['MULTIPLE_BIAS'] == 'S']
+        single_bias_incidents.to_csv(sb_incidents_path, index=False)
     df_dict['single_bias_incidents'] = single_bias_incidents
 
-    single_bias_offenses = offense_df[offense_df['MULTIPLE_BIAS'] == 'S']
+    sb_offenses_path = os.path.join(_CACHE_DIR, 'sb_offenses.csv')
+    if use_cache and os.path.exists(sb_offenses_path):
+        single_bias_offenses = pd.read_csv(sb_offenses_path)
+    else:
+        single_bias_offenses = offense_df[offense_df['MULTIPLE_BIAS'] == 'S']
+        single_bias_offenses.to_csv(sb_offenses_path, index=False)
     df_dict['single_bias_offenses'] = single_bias_offenses
 
-    single_bias_location = location_df[location_df['MULTIPLE_BIAS'] == 'S']
+    sb_location_path = os.path.join(_CACHE_DIR, 'sb_location.csv')
+    if use_cache and os.path.exists(sb_location_path):
+        single_bias_location = pd.read_csv(sb_location_path)
+    else:
+        single_bias_location = location_df[location_df['MULTIPLE_BIAS'] == 'S']
+        single_bias_location.to_csv(sb_location_path, index=False)
     df_dict['single_bias_location'] = single_bias_location
 
-    single_bias_victim = victim_df[victim_df['MULTIPLE_BIAS'] == 'S']
+    sb_victim_path = os.path.join(_CACHE_DIR, 'sb_victim.csv')
+    if use_cache and os.path.exists(sb_victim_path):
+        single_bias_victim = pd.read_csv(sb_victim_path)
+    else:
+        single_bias_victim = victim_df[victim_df['MULTIPLE_BIAS'] == 'S']
+        single_bias_victim.to_csv(sb_victim_path, index=False)
     df_dict['single_bias_victim'] = single_bias_victim
 
-    known_offender = incident_df[incident_df['OFFENDER_CATEGORY'] == 'KnownOffender']
+    known_offender_path = os.path.join(_CACHE_DIR, 'known_offender.csv')
+    if use_cache and os.path.exists(known_offender_path):
+        known_offender = pd.read_csv(known_offender_path)
+    else:
+        known_offender = incident_df[incident_df['OFFENDER_CATEGORY'] == 'KnownOffender']
+        known_offender.to_csv(known_offender_path, index=False)
     df_dict['known_offender'] = known_offender
 
-    offense_single_victimtype_df = offense_df[offense_df['MULTIPLE_VICTIM_TYPE'] == 'S']
+    os_victimtype_path = os.path.join(_CACHE_DIR, 'os_victimtype.csv')
+    if use_cache and os.path.exists(os_victimtype_path):
+        offense_single_victimtype_df = pd.read_csv(os_victimtype_path)
+    else:
+        offense_single_victimtype_df = offense_df[offense_df['MULTIPLE_VICTIM_TYPE'] == 'S']
+        offense_single_victimtype_df.to_csv(os_victimtype_path, index=False)
     df_dict['offense_single_victimtype_df'] = offense_single_victimtype_df
 
-    offense_multiple_victimtype_df = offense_df[offense_df['MULTIPLE_VICTIM_TYPE'] == 'M']
+    om_victimtype_path = os.path.join(_CACHE_DIR, 'om_victimtype.csv')
+    if use_cache and os.path.exists(om_victimtype_path):
+        offense_multiple_victimtype_df = pd.read_csv(om_victimtype_path)
+    else:
+        offense_multiple_victimtype_df = offense_df[offense_df['MULTIPLE_VICTIM_TYPE'] == 'M']
+        offense_multiple_victimtype_df.to_csv(om_victimtype_path, index=False)
     df_dict['offense_multiple_victimtype_df'] = offense_multiple_victimtype_df
     
     return df_dict
@@ -1438,6 +1481,12 @@ def _gen_statvar_mcf(df: pd.DataFrame,
     df_copy['StatVar'] = statvar_dcid_list
     return df_copy, statvar_list
 
+def is_quantity_range(val: str) -> bool:
+    """Checks if [] are present in val.
+    """
+    if '[' in val and ']' in val:
+        return True
+    return False
 
 def _write_statvar_mcf(statvar_list: list, f):
     """Writes statvars to a file.
@@ -1456,7 +1505,10 @@ def _write_statvar_mcf(statvar_list: list, f):
         dcid_set.add(dcid)
         for p, v in sv.items():
             if p != 'Node':
-                statvar_mcf_list.append(f'{p}: dcs:{v}')
+                if is_quantity_range(v):
+                    statvar_mcf_list.append(f'{p}: {v}')
+                else:
+                    statvar_mcf_list.append(f'{p}: dcs:{v}')
         statvar_mcf = 'Node: dcid:' + dcid + '\n' + '\n'.join(statvar_mcf_list)
         final_mcf += statvar_mcf + '\n\n'
 
@@ -1520,7 +1572,7 @@ if __name__ == '__main__':
     with open('config.json', 'r') as f:
         config = json.load(f)
 
-    df_dict = _create_df_dict(df)
+    df_dict = _create_df_dict(df, True)
 
     # Incidents by StatVar
     df_dict['incident_df'], statvar_list = _gen_statvar_mcf(

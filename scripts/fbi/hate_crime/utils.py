@@ -73,7 +73,8 @@ def flatten_by_column(df: pd.DataFrame,
 def make_time_place_aggregation(dataframe,
                                 groupby_cols=None,
                                 agg_dict=None,
-                                multi_index=False):
+                                multi_index=False,
+                                country=False):
     """Utility function where different aggregations of the hate crime dataset
     is done, by year and geo type (country, state, and city).
 
@@ -86,6 +87,7 @@ def make_time_place_aggregation(dataframe,
         agg_dict: dictionary where the key is the column to aggregate on and
           it's value is the aggregation method. Defaults to {}
         multi_index: Flag if set returns multi-index dataframe.
+        country: Set to true to generate country level aggregations
 
     Returns:
         A list whose elements are dataframes aggregated at a country, state,
@@ -95,12 +97,16 @@ def make_time_place_aggregation(dataframe,
         groupby_cols = []
     if agg_dict is None:
         agg_dict = {}
-    # Year + Country
-    agg_country = agg_hate_crime_df(dataframe,
-                                    groupby_cols=(['DATA_YEAR'] + groupby_cols),
-                                    agg_dict=agg_dict,
-                                    multi_index=multi_index)
-    agg_country['Place'] = 'country/USA'
+    agg_list = []
+    
+    if country == True:
+        # Year + Country
+        agg_country = agg_hate_crime_df(dataframe,
+                                        groupby_cols=(['DATA_YEAR'] + groupby_cols),
+                                        agg_dict=agg_dict,
+                                        multi_index=multi_index)
+        agg_country['Place'] = 'country/USA'
+        agg_list.append(agg_country)
 
     # Year + State
     agg_state = agg_hate_crime_df(dataframe,
@@ -111,6 +117,7 @@ def make_time_place_aggregation(dataframe,
     agg_state['Place'] = agg_state.apply(
         lambda row: state_to_dcid(row['STATE_ABBR']), axis=1)
     agg_state.drop(columns=['STATE_ABBR'], inplace=True)
+    agg_list.append(agg_state)
 
     # Year + City
     city_df = dataframe[dataframe['AGENCY_TYPE_NAME'] == 'City']
@@ -124,5 +131,6 @@ def make_time_place_aggregation(dataframe,
         lambda row: city_to_dcid(row['STATE_ABBR'], row['PUB_AGENCY_NAME']),
         axis=1)
     agg_city.drop(columns=['PUB_AGENCY_NAME', 'STATE_ABBR'], inplace=True)
+    agg_list.append(agg_city)
 
-    return [agg_country, agg_state, agg_city]
+    return agg_list

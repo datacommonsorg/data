@@ -416,6 +416,9 @@
         },
         "CrimeAgainstSociety": {
             "crimeType": "CrimeAgainstSociety"
+        },
+        "Not Specified": {
+            "crimeType": "UCR_NotSpecified"
         }
     },
     "OFFENDER_CATEGORY": {

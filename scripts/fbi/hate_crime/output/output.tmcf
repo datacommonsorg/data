@@ -3,5 +3,5 @@ typeOf: dcs:StatVarObservation
 observationAbout: C:FBI_HateCrime->Place
 observationDate: C:FBI_HateCrime->DATA_YEAR
 variableMeasured: C:FBI_HateCrime->StatVar
-value: C:FBI_HateCrime->INCIDENT_ID
+value: C:FBI_HateCrime->Value
 observationPeriod: "P1Y"

@@ -39,6 +39,30 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = 'Median_Income_Person'
         self.assertEqual(dcid, expected_dcid)
 
+    def test_double_underscore(self):
+        statvar_dict1 = {
+            'typeOf': 'StatisticalVariable',
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'CriminalIncidents',
+            'locationOfCrime': 'Park__Playground',
+            'crimeType': 'UCR_OtherCrimeAgainstProperty'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict1)
+        expected_dcid = 'Count_CriminalIncidents_OtherCrimeAgainstProperty_LocationOfCrimeParkOrPlayground'
+        self.assertEqual(dcid, expected_dcid)
+
+        statvar_dict2 = {
+            'typeOf': 'StatisticalVariable',
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'HateCrimeIncidents',
+            "victimType": "UCR_OtherVictimType__UCR_UnknownVictimType__MultipleVictimType",
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict2)
+        expected_dcid = 'Count_HateCrimeIncidents_OtherVictimTypeOrUnknownVictimTypeOrMultipleVictimType'
+        self.assertEqual(dcid, expected_dcid)
+
     def test_namespace_removal(self):
         statvar_dict = {
             'typeOf': 'StatisticalVariable',

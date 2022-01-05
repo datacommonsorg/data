@@ -244,15 +244,21 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'targetedReligion': {
         'prepend': 'TargetedReligion'
-    },
+    },    
     'targetedSexualOrientation': {
         'prepend': 'TargetedSexualOrientation'
-    },
+    },    
     'targetedDisabilityStatus': {
         'prepend': 'TargetedDisabilityStatus'
     },
     'targetedGender': {
         'prepend': 'TargetedGender'
+    },
+    'locationOfCrime': {
+        'prepend': 'LocationOfCrime'
+    },
+    'victimType': {
+        'prepend': 'VictimType'
     }
 }
 
@@ -298,8 +304,12 @@ def _capitalize_process(word: str) -> str:
         # Removing namespaces
         word = word[word.find(':') + 1:]
 
-        # Removing constraint prefixes
-        word = _CONSTRAINT_PREFIX_REGEX.sub(r'\g<ucase_uscore>', word)
+        # Removing constraint prefixes and replacing __ (double underscore) with
+        # 'Or'
+        word_list = word.split('__')
+        for idx, w in enumerate(word_list):
+            word_list[idx] =  _CONSTRAINT_PREFIX_REGEX.sub(r'\g<ucase_uscore>', w)
+        word = 'Or'.join(word_list)
 
         # Removing all underscores
         word = word.replace('_', '')
@@ -448,7 +458,7 @@ def _prepend_append_replace(word,
         append: A string literal to append to word.
         replace: A string literal that represents a substring in word to be
           replaced.
-        replacement: A string literal. In word, all occurrence of replace will
+        replacement: A string literal. In word, all occurrences of replace will
           be changed to replacement.
     Returns:
         A string after appending, prepending and replacing to word.
