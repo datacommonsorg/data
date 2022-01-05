@@ -42,6 +42,7 @@ class S2303SubjectTableDataLoader(SubjectTableDataLoaderBase):
         year = filename.split(f'ACSST{self.estimate_period}Y')[1][:4]
         print(f"Processing: {filename}", end=" |  ", flush=True)
 
+        # Process only at a country, state, county and place level
         df = df[~((df['id'].str.startswith('950')) |
                   (df['id'].str.startswith('960')) |
                   (df['id'].str.startswith('970')))]
