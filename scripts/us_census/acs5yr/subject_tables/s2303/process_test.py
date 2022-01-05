@@ -16,7 +16,7 @@ _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 from generate_col_map import process_zip_file
-from process import S2303SubjectTableDataLoader
+from .process import S2303SubjectTableDataLoader
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
 
