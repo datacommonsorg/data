@@ -244,10 +244,10 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'targetedReligion': {
         'prepend': 'TargetedReligion'
-    },    
+    },
     'targetedSexualOrientation': {
         'prepend': 'TargetedSexualOrientation'
-    },    
+    },
     'targetedDisabilityStatus': {
         'prepend': 'TargetedDisabilityStatus'
     },
@@ -308,7 +308,8 @@ def _capitalize_process(word: str) -> str:
         # 'Or'
         word_list = word.split('__')
         for idx, w in enumerate(word_list):
-            word_list[idx] =  _CONSTRAINT_PREFIX_REGEX.sub(r'\g<ucase_uscore>', w)
+            word_list[idx] = _CONSTRAINT_PREFIX_REGEX.sub(
+                r'\g<ucase_uscore>', w)
         word = 'Or'.join(word_list)
 
         # Removing all underscores

@@ -53,11 +53,16 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         self.assertEqual(dcid, expected_dcid)
 
         statvar_dict2 = {
-            'typeOf': 'StatisticalVariable',
-            'statType': 'measuredValue',
-            'measuredProperty': 'count',
-            'populationType': 'HateCrimeIncidents',
-            "victimType": "UCR_OtherVictimType__UCR_UnknownVictimType__MultipleVictimType",
+            'typeOf':
+                'StatisticalVariable',
+            'statType':
+                'measuredValue',
+            'measuredProperty':
+                'count',
+            'populationType':
+                'HateCrimeIncidents',
+            "victimType":
+                "UCR_OtherVictimType__UCR_UnknownVictimType__MultipleVictimType",
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict2)
         expected_dcid = 'Count_HateCrimeIncidents_OtherVictimTypeOrUnknownVictimTypeOrMultipleVictimType'
