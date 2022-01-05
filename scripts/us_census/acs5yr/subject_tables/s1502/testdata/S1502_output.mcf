@@ -1,0 +1,1368 @@
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfScienceAndEngineeringMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfScienceAndEngineeringRelatedMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfBusinessMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfBusinessMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfEducationMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfEducationMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfBusinessMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfBusinessMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfEducationMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfEducationMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfBusinessMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfBusinessMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfEducationMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfEducationMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfBusinessMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfBusinessMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfEducationMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfEducationMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfScienceAndEngineeringMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfBusinessMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfBusinessMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfEducationMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfEducationMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfBusinessMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfBusinessMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfEducationMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfEducationMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfBusinessMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfBusinessMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfEducationMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfEducationMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfBusinessMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfBusinessMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfEducationMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfEducationMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Male
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfScienceAndEngineeringMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfBusinessMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfBusinessMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfEducationMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfEducationMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfBusinessMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfBusinessMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfEducationMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfEducationMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [25 39 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfBusinessMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfBusinessMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfEducationMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfEducationMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [40 64 Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ScienceAndEngineeringRelatedMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfBusinessMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfBusinessMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:BusinessMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfEducationMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfEducationMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:EducationMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+age: [65 - Years]
+populationType: schema:Person
+gender: dcs:Female
+bachelorsDegreeMajor: dcs:ArtsHumanitiesAndOtherMajor
+typeOf: dcs:StatisticalVariable
+
