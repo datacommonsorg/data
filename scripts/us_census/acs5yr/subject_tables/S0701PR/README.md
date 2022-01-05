@@ -14,3 +14,9 @@ The data is sliced by following properties:
 - marital status
 - poverty status
 - owner/renter occupancy
+
+## Notes
+- Total Population 15 years and above appears 2 times, once with marital status, once with income, one of it is ignored to prevent duplication
+- For Puerto Rico, Municipio is considered to be equivalent of County, and Puerto Rico itself as a state
+- Percent Allocated, Percent Imputed sections are ignored.
+- Some Median Values appear as a Range rather than single value
