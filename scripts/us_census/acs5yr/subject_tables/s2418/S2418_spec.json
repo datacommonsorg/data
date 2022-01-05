@@ -1,0 +1,168 @@
+{
+    "populationType": {
+        "_DEFAULT": "schema:Person"
+    },
+    "measurement": {
+        "Women's earnings as a percentage of men's earning": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "gender": "Female",
+            "scalingFactor": "100",
+            "unit": "Percent"
+        },
+        "Median earnings (dollars)": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear"
+        },
+        "Median earnings (dollars) for male": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "gender": "Male",
+            "unit": "InflationAdjustedUSD_CurrentYear"
+        },
+        "Median earnings (dollars) for female": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "gender": "Female",
+            "unit": "InflationAdjustedUSD_CurrentYear"
+        }
+    },
+    "enumSpecializations": {},
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "establishmentOwnership": {
+            "Private for-profit wage and salary workers": "PrivatelyOwnedForProfit",
+            "Private for-profit wage and salary workers:": "PrivatelyOwnedForProfit",
+            "Employee of private company workers": "PrivatelyOwnedForProfit",
+            "Self-employed in own incorporated business workers": "PrivatelyOwnedForProfit",
+            "Private not-for-profit wage and salary workers": "PrivatelyOwnedNotForProfit",
+            "Local government workers": "LocalGovernmentOwned",
+            "State government workers": "StateGovernmentOwned",
+            "Federal government workers": "FederalGovernmentOwned",
+            "Self-employed in own not incorporated business workers and unpaid family workers": "PrivatelyOwned"
+        },
+        "workerClassification": {
+            "Private for-profit wage and salary workers": "PaidWorker",
+            "Private for-profit wage and salary workers:": "PaidWorker",
+            "Employee of private company workers": "PaidEmployee",
+            "Self-employed in own incorporated business workers": "IncorporatedBusinessOwner",
+            "Private not-for-profit wage and salary workers": "PaidWorker",
+            "Local government workers": "Worker",
+            "State government workers": "Worker",
+            "Federal government workers": "Worker",
+            "Self-employed in own not incorporated business workers and unpaid family workers": "UnincorporatedBusinessOwnerOrUnpaidFamilyWorker"
+        },
+        "employment": {
+            "Civilian employed population 16 years and over with earnings": "BLS_Employed"
+        },
+        "age": {
+            "Civilian employed population 16 years and over with earnings": "[16 - Years]"
+        },
+        "armedForcesStatus": {
+            "Civilian employed population 16 years and over with earnings": "Civilian"
+        },
+        "incomeStatus": {
+            "Civilian employed population 16 years and over with earnings": "WithEarnings"
+        }
+    },
+    "inferredSpec": {
+        "workerClassification": {
+            "age": "[16 - Years]",
+            "armedForcesStatus": "Civilian",
+            "employment": "BLS_Employed"
+        }
+    },
+    "universePVs": [
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "armedForcesStatus"
+            ],
+            "dependentPVs": {
+                "age": "[16 - Years]"
+            }
+        },
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "workerClassification",
+                "establishmentOwnership"
+            ],
+            "dependentPVs": {
+                "age": "[16 - Years]",
+                "employment": "BLS_Employed",
+                "armedForcesStatus": "Civilian"
+            }
+        },
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [],
+            "obs_props": { "mprop": "earnings"},
+            "dependentPVs": {
+                "age": "[16 - Years]",
+                "incomeStatus": "WithEarnings"
+            }
+        },
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "workerClassification",
+                "establishmentOwnership"
+            ],
+            "obs_props": { "mprop": "earnings"},
+            "dependentPVs": {
+                "age": "[16 - Years]",
+                "employment": "BLS_Employed",
+                "armedForcesStatus": "Civilian",
+                "incomeStatus": "WithEarnings"
+            }
+        }
+    ],
+    "overwrite_dcids": {
+        "Median_Earnings_Person_Civilian_Employed_Female_AsAFractionOf_Median_Earnings_Person_Civilian_Employed_Male": "Median_Earnings_Female_AsAFractionOf_Male_Civilian_Employed",
+        "Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidWorker_AsAFractionOf_Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidWorker": "Median_Earnings_Female_AsAFractionOf_Male_PrivatelyOwnedForProfitEstablishment_PaidWorker",
+        "Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidEmployee_AsAFractionOf_Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidEmployee": "Median_Earnings_Female_AsAFractionOf_Male_PrivatelyOwnedForProfitEstablishment_PaidEmployee",
+        "Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Female_IncorporatedBusinessOwner_AsAFractionOf_Median_Earnings_Person_PrivatelyOwnedForProfitEstablishment_Male_IncorporatedBusinessOwner": "Median_Earnings_Female_AsAFractionOf_Male_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner",
+        "Median_Earnings_Person_PrivatelyOwnedNotForProfitEstablishment_Female_PaidWorker_AsAFractionOf_Median_Earnings_Person_PrivatelyOwnedNotForProfitEstablishment_Male_PaidWorker": "Median_Earnings_Female_AsAFractionOf_Male_PrivatelyOwnedNotForProfitEstablishment_PaidWorker",
+        "Median_Earnings_Person_LocalGovernmentOwnedEstablishment_Female_Worker_AsAFractionOf_Median_Earnings_Person_LocalGovernmentOwnedEstablishment_Male_Worker": "Median_Earnings_Female_AsAFractionOf_Male_LocalGovernmentOwnedEstablishment_Worker",
+        "Median_Earnings_Person_StateGovernmentOwnedEstablishment_Female_Worker_AsAFractionOf_Median_Earnings_Person_StateGovernmentOwnedEstablishment_Male_Worker": "Median_Earnings_Female_AsAFractionOf_Male_StateGovernmentOwnedEstablishment_Worker",
+        "Median_Earnings_Person_FederalGovernmentOwnedEstablishment_Female_Worker_AsAFractionOf_Median_Earnings_Person_FederalGovernmentOwnedEstablishment_Male_Worker": "Median_Earnings_Female_AsAFractionOf_Male_FederalGovernmentOwnedEstablishment_Worker",
+        "Median_Earnings_Person_PrivatelyOwnedEstablishment_Female_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker_AsAFractionOf_Median_Earnings_Person_PrivatelyOwnedEstablishment_Male_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker": "Median_Earnings_Female_AsAFractionOf_Male_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker"
+    },
+    "measurementDenominator": {
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers:!!Employee of private company workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers:!!Employee of private company workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers:!!Self-employed in own incorporated business workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers:!!Self-employed in own incorporated business workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Private not-for-profit wage and salary workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Private not-for-profit wage and salary workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Local government workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Local government workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!State government workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!State government workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Federal government workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Federal government workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Self-employed in own not incorporated business workers and unpaid family workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Self-employed in own not incorporated business workers and unpaid family workers",
+        "Women's earnings as a percentage of men's earning!!Estimate!!Civilian employed population 16 years and over with earnings": "Median earnings (dollars) for male!!Estimate!!Civilian employed population 16 years and over with earnings",
+        "Women's earnings as a percentage of men's earning!!Estimate!!Private for-profit wage and salary workers": "Median earnings (dollars) for male!!Estimate!!Private for-profit wage and salary workers",
+        "Women's earnings as a percentage of men's earning!!Estimate!!Private for-profit wage and salary workers!!Employee of private company workers": "Median earnings (dollars) for male!!Estimate!!Private for-profit wage and salary workers!!Employee of private company workers",
+        "Women's earnings as a percentage of men's earning!!Estimate!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers": "Median earnings (dollars) for male!!Estimate!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers",
+        "Women's earnings as a percentage of men's earning!!Estimate!!Private not-for-profit wage and salary workers": "Median earnings (dollars) for male!!Estimate!!Private not-for-profit wage and salary workers",
+        "Women's earnings as a percentage of men's earning!!Estimate!!Local government workers": "Median earnings (dollars) for male!!Estimate!!Local government workers",
+        "Women's earnings as a percentage of men's earning!!Estimate!!State government workers": "Median earnings (dollars) for male!!Estimate!!State government workers",
+        "Women's earnings as a percentage of men's earning!!Estimate!!Federal government workers": "Median earnings (dollars) for male!!Estimate!!Federal government workers",
+        "Women's earnings as a percentage of men's earning!!Estimate!!Self-employed in own not incorporated business workers and unpaid family workers": "Median earnings (dollars) for male!!Estimate!!Self-employed in own not incorporated business workers and unpaid family workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers:": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers:",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers!!Employee of private company workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers!!Employee of private company workers",
+        "Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers"
+    },
+    "denominators": {},
+    "ignoreColumns": [
+        "id",
+        "Geographic Area Name",
+        "Margin of Error"
+    ]
+}
