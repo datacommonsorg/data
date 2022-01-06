@@ -51,6 +51,7 @@ INDIA_STATES_ISO_CODES = {
     "WEST BENGAL": "IN-WB",
     "ANDAMAN AND NICOBAR ISLANDS": "IN-AN",
     "ANDAMAN & NICOBAR ISLANDS": "IN-AN",
+    "ANDAMAN & NICOBAR": "IN-AN",
     "A & N ISLANDS": "IN-AN",
     "ANDAMAN & N. ISLAND": "IN-AN",
     "CHANDIGARH": "IN-CH",
@@ -117,6 +118,7 @@ INDIA_STATES_CENSUS2001_CODES = {
     "PUDUCHERY": "34",
     "ANDAMAN & NICOBAR ISLANDS": "35",
     "ANDAMAN AND NICOBAR ISLANDS": "35",
+    "ANDAMAN & NICOBAR": "35",
     "A & N ISLANDS": "35",
     "ANDAMAN & N. ISLAND": "35"
 }
@@ -166,6 +168,7 @@ INDIA_STATES_LGD_CODES = {
     "ANDAMAN AND NICOBAR ISLANDS": "35",
     "A & N ISLANDS": "35",
     "ANDAMAN & N. ISLAND": "35",
+    "ANDAMAN & NICOBAR": "35",
     "TELANGANA": "36",
     "LADAKH": "37",
     "DADRA AND NAGAR HAVELI AND DAMAN AND DIU": "38",
@@ -255,4 +258,5 @@ class IndiaStatesMapper:
             return INDIA_STATES_LGD_CODES[state_name]
         else:
             raise Exception(
-                "State name is not found in the INDIA_STATES_LGD_CODES mapping")
+                "State name - {state_name} is not found in the INDIA_STATES_LGD_CODES mapping"
+                .format(state_name=state_name))
