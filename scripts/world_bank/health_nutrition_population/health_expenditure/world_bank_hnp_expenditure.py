@@ -12,7 +12,7 @@ flags.DEFINE_integer("per_page", 32, "rows per page")
 flags.DEFINE_string("output_csv", "WorldBankHNP_Expenditure_Tests.csv", "Path of final csv")
 
 
-def get_df(serieses):
+def get_df(per_page, country):
     '''gets df from json webpage'''
     df2 = pd.DataFrame(columns = ['Series Name', 'Series Code', 'Country Code',
                                   'Country', 'Year', 'Value'])
@@ -22,8 +22,8 @@ def get_df(serieses):
               'SH.XPD.EHEX.EH.ZS', 'SH.XPD.PVTD.PP.CD', 'SH.XPD.PVTD.CH.ZS',
               'SH.XPD.PVTD.PC.CD', 'SH.XPD.GHED.PP.CD']
     for current_series in list(serieses):
-        url = "https://api.worldbank.org/v2/country/all/indicator/"
-        url = url + f"{current_series}?format=JSON&per_page=17000"
+        url = f"https://api.worldbank.org/v2/country/{country}/indicator/"
+        url = url + f"{current_series}?format=JSON&per_page={per_page}"
         response = requests.get(url)
         response = response.json()
         print(response[1][0]['indicator']['value'])
@@ -56,7 +56,7 @@ def from_mcf(mcf):
 			print(end = '')
 	return desc_var_dict
 
-def get_csv(input_df):
+def get_csv(input_df, out_path = "WorldBankHealthcareExpenditure.csv"):
     '''
     create csv according to tmcf
     '''
@@ -73,7 +73,7 @@ def get_csv(input_df):
 
             df2.loc[len(df2.index)]=list(row.values())
     print(df2.head(len(df2)))
-    df2.to_csv("WorldBankHealthcareExpenditure.csv")
+    df2.to_csv(out_path)
 
 def main(argv):
     df = get_df(FLAGS.per_page, FLAGS.country)
