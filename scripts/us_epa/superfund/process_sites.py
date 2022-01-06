@@ -32,15 +32,8 @@ import csv
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../'))  # for utils
-from superfund.utils import write_tmcf, make_list_of_geos_to_resolve, resolve_with_recon
-
-FLAGS = flags.FLAGS
-flags.DEFINE_string('input_path', './',
-                    'Path to the directory with input files')
-flags.DEFINE_string(
-    'output_path', './',
-    'Path to the directory where generated files are to be stored.')
+sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for utils
+from us_epa.util.superfund_helper import write_tmcf, make_list_of_geos_to_resolve, resolve_with_recon
 
 _SITE_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:SuperfundSite
@@ -52,10 +45,11 @@ containedInPlace: C:SuperfundSite->containedInPlace
 location: C:SuperfundSite->location
 establishmentOwnership: C:SuperfundSite->establishmentOwnership
 """
-
 ## Load the map with geos resolved using the DC Recon API from lat/long
 try:
-    f = open("./resolved_superfund_site_geoIds.json", 'r')
+    resolved_geo_path = os.path.join(_SCRIPT_PATH,
+                                     "./resolved_superfund_site_geoIds.json")
+    f = open(resolved_geo_path, 'r')
     _GEO_MAP = json.load(f)
     f.close()
 except:
@@ -65,9 +59,12 @@ except:
         flush=True)
 
     ## Data on the superfund sites on the NPL
-    site_geos = pd.read_csv(
-        "./data/Superfund National Priorities List (NPL) Sites with Status Information.csv",
-        usecols=['Latitude', 'Longitude'])
+    site_geos_csv_path = os.path.join(
+        _SCRIPT_PATH,
+        "./data/Superfund National Priorities List (NPL) Sites with Status Information.csv"
+    )
+    site_geos = pd.read_csv(site_geos_csv_path,
+                            usecols=['Latitude', 'Longitude'])
 
     site_geos.apply(lambda row: make_list_of_geos_to_resolve(
         row['Latitude'], row['Longitude'])
@@ -148,6 +145,12 @@ def process_sites(input_path: str, output_path: str) -> int:
 
 
 def main(_) -> None:
+    FLAGS = flags.FLAGS
+    flags.DEFINE_string('input_path', './',
+                        'Path to the directory with input files')
+    flags.DEFINE_string(
+        'output_path', './',
+        'Path to the directory where generated files are to be stored.')
     site_count = process_sites(FLAGS.input_path, FLAGS.output_path)
     print(f"Processing of {site_count} superfund sites is complete.")
 

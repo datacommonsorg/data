@@ -12,7 +12,6 @@ class ProcessTest(unittest.TestCase):
     def test_e2e(self):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
-        print("Processing superfund sites funding data...")
         processed_count = process_site_funding(base_path, '')
         self.assertEqual(_EXPECTED_SITE_COUNT, processed_count)
 
