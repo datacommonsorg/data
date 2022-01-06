@@ -1,0 +1,108 @@
+Node: dcid:SuperfundFundingStatus_SuperfundSite
+description: "This statistical variable tracks the date when a superfund site has a change in the NPL Status"
+measuredProperty: dcs:superfundFundingStatus
+populationType: dcs:SuperfundSite
+statType: dcs:measurementResult
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_TornadoEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:TornadoEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_HurricaneEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:HurricaneEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_FloodEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:FloodEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_CoastalFloodEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:CoastalFloodEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_EarthquakeEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:EarthquakeEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_WildfireEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:WildfireEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_DroughtEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:DroughtEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_HighWindEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:HighWindEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_HailEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:HailEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_LandslideEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:LandslideEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_ExtremeColdWindChillEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:ExtremeColdWindChillEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite_ExcessiveHeatEvent
+measuredProperty: dcid:naturalHazardRiskScore
+naturalHazardType: dcid:ExcessiveHeatEvent
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:NaturalHazardRiskScore_SuperfundSite
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:naturalHazardRiskScore
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+
+Node: dcid:NaturalHazardExposureScore_SuperfundSite
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:naturalHazardExposureScore
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue
+
+Node: dcid:CrsiScore_SuperfundSite
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:crsiScore
+populationType: dcs:SuperfundSite
+statType: dcs:measuredValue

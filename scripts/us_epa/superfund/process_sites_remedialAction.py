@@ -30,6 +30,10 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for utils
 from us_epa.util.superfund_helper import write_tmcf
 
+sys.path.append(os.path.join(_SCRIPT_PATH,
+                             '../../../util/'))  # for statvar_dcid_generator
+from statvar_dcid_generator import get_statvar_dcid
+
 _TEMPALTE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->observationAbout
@@ -583,7 +587,16 @@ def write_sv_to_file(row, file_obj):
         remedial_action = _REMEDIAL_ACTION_DCID_MAP[row['Remedy Component']]
         contaminated_thing = _CONTAMINATED_THING_DCID_MAP[row['Media']]
 
-        node_str = f"Node: dcid:RemedialAction_{remedial_action}_Contaminanted{contaminated_thing}\n"
+        sv_dict = {
+            "contaminatedThing": f"{contaminated_thing}",
+            "measuredProperty": "remedialAction",
+            "remedialAction": f"{remedial_action}"
+        }
+
+        dcid_str = get_statvar_dcid(sv_dict)
+        print(dcid_str)
+
+        node_str = f"Node: dcid:{dcid_str}\n"
         node_str += "typeOf: dcs:StatisticalVariable\n"
         node_str += "populationType: dcs:Thing\n"
         node_str += "statType: dcs:measurementResult\n"
@@ -592,8 +605,7 @@ def write_sv_to_file(row, file_obj):
         node_str += f"remedialAction: dcid:{remedial_action}\n\n"
         file_obj.write(node_str)
 
-        dcid = f"dcid:RemedialAction_{remedial_action}_Contaminanted{contaminated_thing}"
-        row['dcid'] = dcid
+        row['dcid'] = dcid_str
         row['Remedy Component'] = remedial_action
         return row
 

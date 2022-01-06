@@ -33,105 +33,105 @@ _RISK_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_HurricaneEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_HurricaneEvent
 value: C:SuperfundSite->HURR_EXP
 
 Node: E:SuperfundSite->E1
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_TornadoEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_TornadoEvent
 value: C:SuperfundSite->TORN_EXP
 
 Node: E:SuperfundSite->E2
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_LandslideEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_LandslideEvent
 value: C:SuperfundSite->LSLD_EXP
 
 Node: E:SuperfundSite->E3
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_ExtremeColdWindChillEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_ExtremeColdWindChillEvent
 value: C:SuperfundSite->LTMP_EXP
 
 Node: E:SuperfundSite->E4
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_ExcessiveHeatEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_ExcessiveHeatEvent
 value: C:SuperfundSite->HTMP_EXP
 
 Node: E:SuperfundSite->E5
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_HailEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_HailEvent
 value: C:SuperfundSite->HAIL_EXP
 
 Node: E:SuperfundSite->E6
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_WildfireEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_WildfireEvent
 value: C:SuperfundSite->FIRE_EXP
 
 Node: E:SuperfundSite->E7
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_EarthquakeEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_EarthquakeEvent
 value: C:SuperfundSite->EQ_EXP
 
 Node: E:SuperfundSite->E8
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_DroughtEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_DroughtEvent
 value: C:SuperfundSite->DRGH_EXP
 
 Node: E:SuperfundSite->E9
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_FloodEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_FloodEvent
 value: C:SuperfundSite->IFLD_EXP
 
 Node: E:SuperfundSite->E10
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_CoastalFloodEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_CoastalFloodEvent
 value: C:SuperfundSite->CFLD_EXP
 
 Node: E:SuperfundSite->E11
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite_HighWindEvent
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite_HighWindEvent
 value: C:SuperfundSite->WIND_EXP
 
 Node: E:SuperfundSite->E12
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:ExposureScore_SuperfundSite
+variableMeasured: dcid:NaturalHazardExposureScore_SuperfundSite
 value: C:SuperfundSite->EXPOSURE_SCORE
 
 Node: E:SuperfundSite->E13
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:RiskScore_SuperfundSite
+variableMeasured: dcid:NaturalHazardRiskScore_SuperfundSite
 value: C:SuperfundSite->RISK_SCORE
 
 Node: E:SuperfundSite->E14
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID
 observationDate: C:SuperfundSite->observationDate
-variableMeasured: dcid:CRSIScore_SuperfundSite
+variableMeasured: dcid:CrsiScore_SuperfundSite
 value: C:SuperfundSite->CRSI_SCORE
 """
 

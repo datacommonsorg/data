@@ -54,7 +54,7 @@ def add_rows_to_status_csv(row):
         {
             'observationAbout': 'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
             'observationDate': '2021',
-            'variableMeasured': 'dcid:FundingStatus_SuperfundSite',
+            'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
             'value': _STATUS_SCHEMA_MAP[row['Status']]
         },
         ignore_index=True)
@@ -68,7 +68,7 @@ def add_rows_to_status_csv(row):
                 'observationDate':
                     row['Proposed Date'],
                 'variableMeasured':
-                    'dcid:FundingStatus_SuperfundSite',
+                    'dcid:SuperfundFundingStatus_SuperfundSite',
                 'value':
                     'dcid:ProposedNPLSite'
             },
@@ -82,7 +82,7 @@ def add_rows_to_status_csv(row):
                 'observationDate':
                     row['Listing Date'],
                 'variableMeasured':
-                    'dcid:FundingStatus_SuperfundSite',
+                    'dcid:SuperfundFundingStatus_SuperfundSite',
                 'value':
                     'dcid:FinalNPLSite'
             },
@@ -96,7 +96,7 @@ def add_rows_to_status_csv(row):
                 'observationDate':
                     row['Deletion Date'],
                 'variableMeasured':
-                    'dcid:FundingStatus_SuperfundSite',
+                    'dcid:SuperfundFundingStatus_SuperfundSite',
                 'value':
                     'dcid:DeletedNPLSite'
             },
