@@ -13,7 +13,7 @@ import numpy as np
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 
-from data_loader import SubjectTableDataLoaderBase # commit hash - aee443ee
+from data_loader import SubjectTableDataLoaderBase  # commit hash - aee443ee
 from resolve_geo_id import convert_to_place_dcid
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
@@ -23,6 +23,7 @@ class S1603SubjectTableDataLoader(SubjectTableDataLoaderBase):
     """
     A child class for the S1603 import.
     """
+
     def _process_dataframe(self, df, filename):
         """processes a dataframe read from a csv file"""
         df = self._replace_ignore_values_with_nan(
