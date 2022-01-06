@@ -1,4 +1,4 @@
-mport filecmp
+import filecmp
 import os
 import sys
 import unittest
@@ -15,12 +15,7 @@ import population
 class TestWBPopulation(unittest.TestCase):
 
     def test_wb_population_process(self):
-        """Test the process() function for WB population data set.
-        Generates output files for the test_data input and compares it to the
-        expected output files.
-        """
         data_input = os.path.join(module_dir_, 'tests/population_test.csv')
-        # create a tmp output directory
         tmp_dir = os.path.join(module_dir_, 'tmp')
         if not os.path.exists(tmp_dir):
             os.mkdir(tmp_dir)
@@ -28,9 +23,7 @@ class TestWBPopulation(unittest.TestCase):
         expected_output = os.path.join(module_dir_,
                                        'tests/wb_population_output')
         print(f'test file path: {data_input}, output: {test_output}')
-
         test_counters = population.process(26, test_output, 10000, "wb_hnp_pop_test.csv")
-        
         for output in ['.csv', '.mcf']:
             self.assertTrue(
                 filecmp.cmp(test_output + output, expected_output + output))
