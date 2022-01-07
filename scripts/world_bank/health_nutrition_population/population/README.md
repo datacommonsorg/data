@@ -5,21 +5,13 @@ About the Dataset
 The world bank HNP dataset contains information about population, nutrition and health statistics of all countries, updated annually from all countries and marked special regions 
 The dataset from 1960 onwards is available online. For this import, the series selected are all population statistics – male and female, age 00 to 25.
 
-
 Size: 5447kb
-
 Format: Json (access is directly from browser)
-
 Time period: Annual, from 1960
-
 Granularity: Country level
-
 Variables: 
-
 Age: 26
-      
 Gender:2
-
 
 Population
 265 per age per gender
@@ -46,15 +38,7 @@ measuredProperty: dcs:count
 gender: dcs:Female
 statType: dcs:measuredValue
 age: [Years 5]
-
 ##age and gender will be replaced as needed
-
-
-
-
-
-
-
 
 StatVarObservation
 The import process output will be a CSV with the following columns:
@@ -66,37 +50,14 @@ Age
 StatVar
 Population
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 The following tMCF will be used with the csv output:
 
 Node: E: WorldBankPopulation ->E0
-
 typeOf: dcs:StatVarObservation
-
 variableMeasured: C: WorldBankPopulation ->StatVar
-
 observationAbout: C:WorldBankPopulation ->Country
-
 observationDate: C:WorldBankPopulation->Year
-
 value: C: WorldBankPopulation ->Population
-
-
-
 
 License
 https://datacatalog.worldbank.org/public-licenses 
-
