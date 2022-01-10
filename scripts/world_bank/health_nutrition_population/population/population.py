@@ -1,3 +1,4 @@
+
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-gets pupolation (age 0 to 25) data for all world bank countries, and makes a csv acording to TMCF
+gets population (age 0 to 25) data for all world bank countries, and makes a csv acording to TMCF
 '''
 
 import requests
@@ -68,7 +69,7 @@ def get_statvars(gender, age):
                      'populationType': 'dcs:Person', 'measuredProperty':
                      'dcs:count','gender': 'dcs:{gender}',
                      'statType': 'dcs:measuredValue', 'age': '[Years {age}]'}
-    dcid = statvar_dcid_generator.get_stat_var_dcid(property_dict)
+    dcid = statvar_dcid_generator.get_statvar_dcid(property_dict)
     return (dcid)
 
 def get_csv(df_in, df_out_path):
@@ -111,24 +112,18 @@ def get_mcf(series_lst, path = "World_bank_hnp_population.mcf"):
             nodes.append(node)
             property_dict['node'] = node
             
-            for i in range(len(poperty_dict.keys())):
-                mcf = mcf + f'{property_dict.keys[i]}:'
-                + ' {property_dict[property_dict.keys()[i]}\n'
+            for i in property_dict:
+                mcf = mcf + f'{i}' + ' {property_dict[i]}\n'
         file.write(mcf)
-    
-def process(country, max_age, per_page, path):
-    series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(max_age)
-               for gender in ['MA', 'FE']]
-    get_mcf(series, (path.split(".")[0] + ".mcf"))
-    df = get_df(series, per_page, country)
-    get_csv(df, path)
 
 def main(argv):
+    print(FLAGS.per_page, FLAGS.output_csv,FLAGS.country)
     series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(FLAGS.age)
                for gender in (FLAGS.gender)]
     get_mcf(series)
     df = get_df(series, FLAGS.per_page, FLAGS.country)
-    get_csv(df, FLAGS.path)
+    get_csv(df, FLAGS.output_csv)
+    
 
 if __name__ == '__main__':
     app.run(main)
