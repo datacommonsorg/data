@@ -76,18 +76,18 @@ def resolve_with_recon(output_path: str,
 
     # manual resolution for the missing geoIds
     ## resolution for zip code done by lookups at https://www.zipdatamaps.com/ & GMaps based on location name
-    resolved_geos_map["40.464589,-74.258017"] = 'zip/08879'
-    resolved_geos_map["47.583889,-122.3625"] = 'zip/98106'
-    resolved_geos_map["43.749444,-87.70075"] = 'zip/53081'
-    resolved_geos_map["35.29445,-81.0"] = 'zip/28214'
-    resolved_geos_map["33.75,-118.0"] = 'zip/92683'
-    resolved_geos_map["38.049444,-122.0"] = 'zip/94565'
-    resolved_geos_map["39.716669,-105.0"] = 'zip/80223'
-    resolved_geos_map["45.0,-92.966669"] = 'zip/55128'
-    resolved_geos_map["45.0,-92.833333"] = 'zip/55042'
-    resolved_geos_map["34.125,-118.0"] = 'zip/91016'
-    resolved_geos_map["41.266669,-112.0"] = 'zip/84404'
-    resolved_geos_map["40.75,-75.0"] = 'zip/07882'
+    resolved_geos_map["40.464589,-74.258017"] = ['zip/08879', 'geoId/3465790', 'geoId/34023', 'geoId/34']
+    resolved_geos_map["47.583889,-122.3625"] = ['zip/98106', 'geoId/5363000', 'geoId/53033', 'geoId/53']
+    resolved_geos_map["43.749444,-87.70075"] = ['zip/53081', 'geoId/5572975', 'geoId/55117', 'geoId/55']
+    resolved_geos_map["35.29445,-81.0"] = resolved_geos_map["35.29445,-81"]
+    resolved_geos_map["33.75,-118.0"] = resolved_geos_map["33.75,-118"]
+    resolved_geos_map["38.049444,-122.0"] = resolved_geos_map["38.049444,-122"]
+    resolved_geos_map["39.716669,-105.0"] = resolved_geos_map["39.716669,-105"]
+    resolved_geos_map["45.0,-92.966669"] = resolved_geos_map["45,-92.966669"]
+    resolved_geos_map["45.0,-92.833333"] = resolved_geos_map["45,-92.833333"]
+    resolved_geos_map["34.125,-118.0"] = resolved_geos_map["34.125,-118"]
+    resolved_geos_map["41.266669,-112.0"] = resolved_geos_map["41.266669,-112"]
+    resolved_geos_map["40.75,-75.0"] = resolved_geos_map["40.75,-75"]
 
     # write resolved geo map to file
     f = open(f"{output_path}/resolved_superfund_site_geoIds.json", "w")

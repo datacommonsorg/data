@@ -80,7 +80,7 @@ def get_geoId(row: str, geo_map: dict = _GEO_MAP) -> str:
   """
     loc = f"{str(row['Latitude'])},{str(row['Longitude'])}"
     try:
-        return ','.join(geo_map[loc])
+        return ', '.join(geo_map[loc])
     except:
         print(f"{loc} -- does not exist in the map")
 
@@ -130,6 +130,7 @@ def process_sites(input_path: str, output_path: str) -> int:
     },
                     inplace=True)
     site_csv = pd.merge(site_csv, site_ownership, on='epaId', how='left')
+    site_csv['siteName'] = site_csv['siteName'].str.replace(', Inc.', ' Inc.')
     site_csv.drop_duplicates(inplace=True)
 
     # Save file only when output_path is non-null / non-empty
