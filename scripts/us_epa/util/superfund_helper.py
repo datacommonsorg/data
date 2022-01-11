@@ -11,10 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""TODO(sharadshriram): DO NOT SUBMIT without one-line documentation for utils.
+"""Helper functions used in the superfund data processing"""
 
-TODO(sharadshriram): DO NOT SUBMIT without a detailed description of utils.
-"""
 import numpy as np
 import pandas as pd
 import json
@@ -43,7 +41,7 @@ def make_list_of_geos_to_resolve(latitude: np.float64,
 
 def resolve_with_recon(output_path: str,
                        coords_list: list = _GEO_COORDS,
-                       batch_size: int = 50) -> None:
+                       batch_size: int = 50) -> dict:
     """
     ABout this function
     """
@@ -65,8 +63,8 @@ def resolve_with_recon(output_path: str,
             try:
                 place_dcid = [
                     x for x in response_elem["placeDcids"]
-                    if 'zip' in x or 'geoId' in x
-                ][0]
+                    if 'zip' in x or ('geoId' in x and 'geoId/sch' not in x)
+                ]
                 resolved_geos_map[(
                     str(response_elem["latitude"]) + ',' +
                     str(response_elem["longitude"]))] = place_dcid
@@ -96,14 +94,4 @@ def resolve_with_recon(output_path: str,
     json.dump(resolved_geos_map, f, indent=4)
     f.close()
 
-
-# from typing import Sequence
-
-# from absl import app
-
-# def main(argv: Sequence[str]) -> None:
-#   if len(argv) > 1:
-#     raise app.UsageError('Too many command-line arguments.')
-
-# if __name__ == '__main__':
-#   app.run(main)
+    return resolved_geos_map

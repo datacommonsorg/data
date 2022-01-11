@@ -37,9 +37,9 @@ value: C:SuperfundSite->value
 """
 
 _STATUS_SCHEMA_MAP = {
-    'NPL Site': 'dcid:FinalNPLSite',
-    'Deleted NPL Site': 'dcid:DeletedNPLSite',
-    'Proposed NPL Site': 'dcid:ProposedNPLSite'
+    'NPL Site': 'dcs:FinalNPLSite',
+    'Deleted NPL Site': 'dcs:DeletedNPLSite',
+    'Proposed NPL Site': 'dcs:ProposedNPLSite'
 }
 
 
@@ -52,7 +52,7 @@ def add_rows_to_status_csv(row):
     ## add observation to current status StatVar
     df = df.append(
         {
-            'observationAbout': 'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
+            'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
             'observationDate': '2021',
             'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
             'value': _STATUS_SCHEMA_MAP[row['Status']]
@@ -64,13 +64,13 @@ def add_rows_to_status_csv(row):
         df = df.append(
             {
                 'observationAbout':
-                    'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
+                    'epaSuperfundSiteId/' + row['Site EPA ID'],
                 'observationDate':
                     row['Proposed Date'],
                 'variableMeasured':
                     'dcid:SuperfundFundingStatus_SuperfundSite',
                 'value':
-                    'dcid:ProposedNPLSite'
+                    'dcs:ProposedNPLSite'
             },
             ignore_index=True)
 
@@ -78,13 +78,13 @@ def add_rows_to_status_csv(row):
         df = df.append(
             {
                 'observationAbout':
-                    'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
+                    'epaSuperfundSiteId/' + row['Site EPA ID'],
                 'observationDate':
                     row['Listing Date'],
                 'variableMeasured':
                     'dcid:SuperfundFundingStatus_SuperfundSite',
                 'value':
-                    'dcid:FinalNPLSite'
+                    'dcs:FinalNPLSite'
             },
             ignore_index=True)
 
@@ -92,13 +92,13 @@ def add_rows_to_status_csv(row):
         df = df.append(
             {
                 'observationAbout':
-                    'dcid:epaSuperfundSiteId/' + row['Site EPA ID'],
+                    'epaSuperfundSiteId/' + row['Site EPA ID'],
                 'observationDate':
                     row['Deletion Date'],
                 'variableMeasured':
                     'dcid:SuperfundFundingStatus_SuperfundSite',
                 'value':
-                    'dcid:DeletedNPLSite'
+                    'dcs:DeletedNPLSite'
             },
             ignore_index=True)
     return df

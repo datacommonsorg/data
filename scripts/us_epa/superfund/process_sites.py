@@ -70,7 +70,7 @@ except:
         row['Latitude'], row['Longitude'])
                     if not pd.isna(row['Latitude']) else '',
                     axis=1)
-    resolve_with_recon(output_path='./')
+    _GEO_MAP = resolve_with_recon(output_path='./')
     print(" Done!", flush=True)
 
 
@@ -80,7 +80,7 @@ def get_geoId(row: str, geo_map: dict = _GEO_MAP) -> str:
   """
     loc = f"{str(row['Latitude'])},{str(row['Longitude'])}"
     try:
-        return geo_map[loc]
+        return ','.join(geo_map[loc])
     except:
         print(f"{loc} -- does not exist in the map")
 
