@@ -113,3 +113,7 @@ def dict_list_to_mcf_file(dict_list:list, mcf_file_path: str, sort_keys=False):
     os.makedirs(os.path.dirname(mcf_file_path), exist_ok=True)
     with open(mcf_file_path, 'w') as fp:
         fp.write(dict_list_to_mcf(dict_list, sort_keys))
+
+# TODO wrapper function to rename a list of properties
+# TODO wrapper function to rename value of a given property
+# TODO wrapper function to rename scope
