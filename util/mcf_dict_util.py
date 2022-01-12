@@ -38,10 +38,10 @@ def mcf_to_dict_list(mcf_str: str) -> list:
             raise ValueError(
                 'Each node must start with Node: <name>".')
         # add each pv to ordered dict
-        # TODO detect comments in between node decleration
+        # TODO detect and store comments in between and at end of node decleration
         for pv_str in node_str_list:
             pv_str = pv_str.strip()
-            if pv_str:
+            if pv_str and not pv_str.startswith('#'):
                 # find p, prefix, v
                 pv = pv_str.split(':')
                 if pv_str.count(':') == 1:
@@ -74,16 +74,16 @@ def mcf_to_dict_list(mcf_str: str) -> list:
 
 def mcf_file_to_dict_list(mcf_file_path: str) -> list:
     mcf_file_path = os.path.expanduser(mcf_file_path)
-    os.makedirs(mcf_file_path, exist_ok=True)
     # read all
     with open(mcf_file_path, 'r') as fp:
         mcf_str = fp.read().strip()
     
     return mcf_to_dict_list(mcf_str)
 
-def dict_list_to_mcf(dict_list:list, mcf_file_path: str, sort_keys=False) -> str:
+def dict_list_to_mcf(dict_list:list, sort_keys=False) -> str:
     ret_str = ''
-    for cur_node in dict_list:
+    for _node in dict_list:
+        cur_node = _node.copy()
         # TODO other validations if required
         if 'Node' not in cur_node:
             raise ValueError(
@@ -94,7 +94,7 @@ def dict_list_to_mcf(dict_list:list, mcf_file_path: str, sort_keys=False) -> str
         cur_node.pop('__comment', None)
         
         # Keep Node: first
-        ret_str += f"{'Node'}: {cur_node['Node']['scope']+': ' if cur_node['Node']['scope'] else ''}{cur_node['Node']['value']}"
+        ret_str += f"{'Node'}: {cur_node['Node']['scope']+':' if cur_node['Node']['scope'] else ''}{cur_node['Node']['value']}"
         ret_str += '\n'
         cur_node.pop('Node', None)
         
@@ -103,10 +103,13 @@ def dict_list_to_mcf(dict_list:list, mcf_file_path: str, sort_keys=False) -> str
         if sort_keys:
             prop_list = sorted(prop_list)
         for prop in prop_list:
-            ret_str += f"{prop}: {cur_node[prop]['scope']+': ' if cur_node[prop]['scope'] else ''}{cur_node[prop]['value']}"
+            ret_str += f"{prop}: {cur_node[prop]['scope']+':' if cur_node[prop]['scope'] else ''}{cur_node[prop]['value']}"
             ret_str += '\n'
+        ret_str += '\n'
+    return ret_str
 
 def dict_list_to_mcf_file(dict_list:list, mcf_file_path: str, sort_keys=False):
     mcf_file_path = os.path.expanduser(mcf_file_path)
+    os.makedirs(os.path.dirname(mcf_file_path), exist_ok=True)
     with open(mcf_file_path, 'w') as fp:
-        fp.write()
+        fp.write(dict_list_to_mcf(dict_list, sort_keys))
