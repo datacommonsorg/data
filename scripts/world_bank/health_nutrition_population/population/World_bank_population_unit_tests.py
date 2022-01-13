@@ -19,19 +19,20 @@ class TestWBPopulation(unittest.TestCase):
         Generates output files for the test_data input and compares it to the
         expected output files.
         """
-        data_input = os.path.join(module_dir_, 'tests/population_test.csv')
+        data_input = os.path.join(module_dir_, 'WorldBankHNP_Population_Tests.csv')
         # create a tmp output directory
         tmp_dir = os.path.join(module_dir_, 'tmp')
         if not os.path.exists(tmp_dir):
             os.mkdir(tmp_dir)
-        test_output = os.path.join(tmp_dir, 'wb_population_test_output')
+        test_output = os.path.join(tmp_dir, 'WorldBankHNP_Population_Tests')
         expected_output = os.path.join(module_dir_,
-                                       'tests/wb_population_output')
+                                       'WorldBankHNP_Population_Tests')
         print(f'test file path: {data_input}, output: {test_output}')
 
-        test_counters = population.process(26, test_output, 10000, "wb_hnp_pop_test.csv")
+        test_counters = population.process(2, test_output,32)
         
-        for output in ['.csv', '.mcf']:
+        for output in ['.csv']:
+            print(filecmp.cmp(test_output + output, expected_output + output))
             self.assertTrue(
                 filecmp.cmp(test_output + output, expected_output + output))
 
