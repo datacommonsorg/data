@@ -30,7 +30,7 @@ flags.DEFINE_list("gender", ["FE", "MA"], "Gender: FE for female, MA for male")
 flags.DEFINE_string("country", "USA", "Country codes")
 #maximum the API Can display is 32767
 flags.DEFINE_integer("per_page", 32, "rows per page")
-flags.DEFINE_string("output_csv", "WorldBankHNP_Population_Tests.csv", "Path of final csv")
+flags.DEFINE_string("output_csv", "WorldBankHNP_Population_Tests", "Path of final csv")
 
 
 
@@ -67,14 +67,14 @@ def get_statvars(gender, age):
     property_dict = {'typeOf': 'dcs:StatisticalVariable',
                      'description': f'Age population, {gender}, Age {age}, interpolated',
                      'populationType': 'dcs:Person', 'measuredProperty':
-                     'dcs:count','gender': 'dcs:{gender}',
-                     'statType': 'dcs:measuredValue', 'age': '[Years {age}]'}
+                     'dcs:count','gender': f'dcs:{gender}',
+                     'statType': 'dcs:measuredValue', 'age': f'[Years {age}]'}
     dcid = statvar_dcid_generator.get_statvar_dcid(property_dict)
     return (dcid)
 
 def get_csv(df_in, df_out_path):
     """Creation of csv according to tmcf:"""
-    df2 = pd.DataFrame(columns = ['observationAbout', 'Year', "StatVar", 'Population'])
+    df2 = pd.DataFrame(columns = ['observationAbout', 'observationDate', "StatisticalVariable", 'value'])
     for line in range(len(df_in)):
         gender, statvar = '', ''
         gender = df_in['Series Name'][line].split(',')[-2].strip()
@@ -85,6 +85,7 @@ def get_csv(df_in, df_out_path):
                                    df_in['Value'][line]]
         df2.loc[len(df2.index)] = addto_df2
     df2.to_csv(df_out_path)
+    print(df2.head())
     
 def get_mcf(series_lst, path = "World_bank_hnp_population.mcf"):
     '''
@@ -105,23 +106,31 @@ def get_mcf(series_lst, path = "World_bank_hnp_population.mcf"):
             property_dict = {'typeOf': 'dcs:StatisticalVariable',
                      'description': f'Age population, {gender}, Age {age}, interpolated',
                      'populationType': 'dcs:Person', 'measuredProperty':
-                     'dcs:count','gender': 'dcs:{gender}',
-                     'statType': 'dcs:measuredValue', 'age': '[Years {age}]'}
+                     'dcs:count','gender': f'dcs:{gender}',
+                     'statType': 'dcs:measuredValue', 'age': f'[Years {age}]'}
             node = get_statvars(gender, age)
             desc = f'Age population, age {age}, {gender.lower()}, interpolated'
             nodes.append(node)
             property_dict['node'] = node
             
             for i in property_dict:
-                mcf = mcf + f'{i}' + ' {property_dict[i]}\n'
+                mcf = mcf + f'{i}:' + f' {property_dict[i]}\n'
         file.write(mcf)
 
 def main(argv):
-    print(FLAGS.per_page, FLAGS.output_csv,FLAGS.country)
     series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(FLAGS.age)
                for gender in (FLAGS.gender)]
     get_mcf(series)
     df = get_df(series, FLAGS.per_page, FLAGS.country)
     get_csv(df, FLAGS.output_csv)
+
+def process(max_age, out_file, per_page = 17, country = 'USA'):
+    series  = [f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(max_age)
+               for gender in ['FE', 'MA']]
+    print(series)
+    get_mcf(series, "WorldBankHNP_Population_Tests.mcf")
+    df = get_df(series, per_page, country)
+    get_csv(df, out_file)
+    
 if __name__ == '__main__':
     app.run(main)
