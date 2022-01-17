@@ -45,7 +45,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'statType': 'measuredValue',
             'measuredProperty': 'count',
             'populationType': 'CriminalIncidents',
-            'locationOfCrime': 'Park__Playground',
+            'locationOfCrime': 'Park&Playground',
             'crimeType': 'UCR_OtherCrimeAgainstProperty'
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict1)
@@ -65,7 +65,7 @@ class TestStatVarDcidGenerator(unittest.TestCase):
                 "UCR_OtherVictimType__UCR_UnknownVictimType__MultipleVictimType",
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict2)
-        expected_dcid = 'Count_HateCrimeIncidents_OtherVictimTypeOrUnknownVictimTypeOrMultipleVictimType'
+        expected_dcid = 'Count_HateCrimeIncidents_VictimTypeOtherVictimTypeOrUnknownVictimTypeOrMultipleVictimType'
         self.assertEqual(dcid, expected_dcid)
 
     def test_namespace_removal(self):
