@@ -312,6 +312,13 @@ def _capitalize_process(word: str) -> str:
                 r'\g<ucase_uscore>', w)
         word = 'Or'.join(word_list)
 
+        # Removing constraint prefixes and replacing & with 'Or'
+        word_list = word.split('&')
+        for idx, w in enumerate(word_list):
+            word_list[idx] = _CONSTRAINT_PREFIX_REGEX.sub(
+                r'\g<ucase_uscore>', w)
+        word = 'Or'.join(word_list)
+
         # Removing all underscores
         word = word.replace('_', '')
 
