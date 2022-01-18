@@ -61,13 +61,13 @@ def mcf_to_dict_list(mcf_str: str) -> list:
                 cur_node[p] = {}
                 cur_node[p]['value'] = v
                 if prefix:
-                    cur_node[p]['scope'] = prefix
+                    cur_node[p]['namespace'] = prefix
                 else:
-                    cur_node[p]['scope'] = ''
-                # if p == 'Node' and cur_node[p]['scope'] == 'dcid':
+                    cur_node[p]['namespace'] = ''
+                # if p == 'Node' and cur_node[p]['namespace'] == 'dcid':
                 #     cur_node['dcid'] = {}
                 #     cur_node['dcid']['value'] = v
-                #     cur_node['dcid']['scope'] = ''
+                #     cur_node['dcid']['namespace'] = ''
         ret_list.append(cur_node)
     
     return ret_list
@@ -94,7 +94,7 @@ def dict_list_to_mcf(dict_list:list, sort_keys=False) -> str:
         cur_node.pop('__comment', None)
         
         # Keep Node: first
-        ret_str += f"{'Node'}: {cur_node['Node']['scope']+':' if cur_node['Node']['scope'] else ''}{cur_node['Node']['value']}"
+        ret_str += f"{'Node'}: {cur_node['Node']['namespace']+':' if cur_node['Node']['namespace'] else ''}{cur_node['Node']['value']}"
         ret_str += '\n'
         cur_node.pop('Node', None)
         
@@ -103,7 +103,7 @@ def dict_list_to_mcf(dict_list:list, sort_keys=False) -> str:
         if sort_keys:
             prop_list = sorted(prop_list)
         for prop in prop_list:
-            ret_str += f"{prop}: {cur_node[prop]['scope']+':' if cur_node[prop]['scope'] else ''}{cur_node[prop]['value']}"
+            ret_str += f"{prop}: {cur_node[prop]['namespace']+':' if cur_node[prop]['namespace'] else ''}{cur_node[prop]['value']}"
             ret_str += '\n'
         ret_str += '\n'
     return ret_str
@@ -115,5 +115,7 @@ def dict_list_to_mcf_file(dict_list:list, mcf_file_path: str, sort_keys=False):
         fp.write(dict_list_to_mcf(dict_list, sort_keys))
 
 # TODO wrapper function to rename a list of properties
+# if 'race' in cur_node:
+    # cur_node = OrderedDict([('targetedRace', v) if k == 'race' else (k, v) for k, v in cur_node.items()])
 # TODO wrapper function to rename value of a given property
-# TODO wrapper function to rename scope
+# TODO wrapper function to rename namespace
