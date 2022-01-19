@@ -1,4 +1,4 @@
-# Representing Statistics in Data Commons
+# Representing statistics in Data Commons
 
 > Note: this document assumes familiarity with the
 [Schema.org Data Model](https://schema.org/docs/datamodel.html) and
@@ -61,7 +61,7 @@ Where `Median_Age_Person` is a `StatisticalVariable` schema node that only needs
 defined once:
 
 ```
-Node: dcid:Median_Age_Person	
+Node: dcid:Median_Age_Person
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:age
 populationType: schema:Person
@@ -125,7 +125,7 @@ in each place and year with an `Observation`, that information is encoded once i
 `StatisticalVariable`.
 
 The `StatisticalVariable` also makes consuming Data Commons data
-[very simple](http://docs.datacommons.org/api/sheets/get_variable.html).
+[very simple](https://docs.datacommons.org/api/sheets/get_variable.html).
 
 Due to these benefits, in this data contribution repository, we recommend expressing graph
 triples using this `StatisticalVariable` and `StatVarObservation` format.
