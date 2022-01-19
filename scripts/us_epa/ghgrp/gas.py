@@ -117,7 +117,6 @@ def append_sv_mcf(fp):
                                    source_type=source_type))
 
 
-
 if __name__ == '__main__':
     with open(os.path.join('import_data', 'gas_node.mcf'), 'w') as fp:
         append_gas_mcf(fp)

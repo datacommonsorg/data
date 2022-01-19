@@ -107,13 +107,6 @@ def append_sv_mcf(fp):
                                    source_dcid=_name_to_dcid(source)))
 
 
-def append_sv_mcf(fp):
-    for source in SOURCE_COLS:
-        fp.write(
-            SV_MCF_TEMPLATE.format(sv_dcid=col_to_sv(source),
-                                   source_dcid=_name_to_dcid(source)))
-
-
 if __name__ == '__main__':
     with open(os.path.join('import_data', 'sources_node.mcf'), 'w') as fp:
         append_source_mcf(fp)
