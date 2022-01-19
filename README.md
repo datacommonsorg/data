@@ -15,8 +15,10 @@ Botanical Garden, Opportunity Insights, and more. However, Data Commons is meant
 to be for community, by the community. We're excited to work with you to make
 public data accessible to everyone.
 
-To see the extent of data we have today, browse the graph using our
-[browser](https://browser.datacommons.org/).
+To see the extent of data we have today, [browse the graph](https://datacommons.org/browser).
+
+To get started, take a look at the resources [in the docs directory](docs/) and
+the [list of pending imports](https://github.com/orgs/datacommonsorg/projects/10).
 
 ## License
 
