@@ -17,8 +17,9 @@ public data accessible to everyone.
 
 To see the extent of data we have today, [browse the graph](https://datacommons.org/browser).
 
-To get started, take a look at the resources [in the docs directory](docs/) and
-the [list of pending imports](https://github.com/orgs/datacommonsorg/projects/10).
+We welcome contributions to the graph! To get started, take a look at the
+resources [in the docs directory](docs/) and the [list of pending
+imports](https://github.com/orgs/datacommonsorg/projects/10).
 
 ## License
 
