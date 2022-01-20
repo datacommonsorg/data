@@ -152,7 +152,7 @@ def process_site_hazards(input_path: str, output_path: str) -> int:
 
     risk_score[
         'Site_EPA_ID'] = 'epaSuperfundSiteId/' + risk_score['Site_EPA_ID']
-    risk_score['observationDate'] = '2021'
+    risk_score['observationDate'] = 2021
 
     if output_path:
         risk_score.to_csv(os.path.join(output_path,
