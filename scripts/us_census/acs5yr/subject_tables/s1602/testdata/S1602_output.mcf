@@ -1,0 +1,146 @@
+Node: dcid:Count_Household
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_SpanishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+languageSpokenAtHome: dcs:Spanish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_SpanishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+languageSpokenAtHome: dcs:Spanish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_OtherIndoEuropeanLanguagesSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+languageSpokenAtHome: dcs:OtherIndoEuropeanLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_OtherIndoEuropeanLanguagesSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+languageSpokenAtHome: dcs:OtherIndoEuropeanLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_AsianAndPacificIslandLanguagesSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+languageSpokenAtHome: dcs:AsianAndPacificIslandLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_AsianAndPacificIslandLanguagesSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+languageSpokenAtHome: dcs:AsianAndPacificIslandLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_OtherLanguagesSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+languageSpokenAtHome: dcs:OtherLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_OtherLanguagesSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+languageSpokenAtHome: dcs:OtherLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold_SpanishSpokenAtHome
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+languageSpokenAtHome: dcs:Spanish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold_SpanishSpokenAtHome
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+languageSpokenAtHome: dcs:Spanish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold_OtherIndoEuropeanLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+languageSpokenAtHome: dcs:OtherIndoEuropeanLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold_OtherIndoEuropeanLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+languageSpokenAtHome: dcs:OtherIndoEuropeanLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold_AsianAndPacificIslandLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+languageSpokenAtHome: dcs:AsianAndPacificIslandLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold_AsianAndPacificIslandLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+languageSpokenAtHome: dcs:AsianAndPacificIslandLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_LimitedEnglishSpeakingHousehold_OtherLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+languageSpokenAtHome: dcs:OtherLanguages
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold_OtherLanguagesSpokenAtHome
+abilityToSpeakEnglish: dcs:LimitedEnglishSpeakingHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+languageSpokenAtHome: dcs:OtherLanguages
+typeOf: dcs:StatisticalVariable
+

@@ -86,8 +86,8 @@ if __name__ == "__main__":
                                  "UDISEIndia_School_Dropout_Rate.mcf")
     if path.exists(csv_file_path):
         os.remove(csv_file_path)
-    # if path.exists(mcf_file_path):
-    #     os.remove(mcf_file_path)
+    if path.exists(mcf_file_path):
+        os.remove(mcf_file_path)
     base = UDISESchoolDropoutRate(api_report_code,
                                   data_folder,
                                   csv_file_path,

@@ -42,6 +42,7 @@ INDIA_STATES_ISO_CODES = {
     "RAJASTHAN": "IN-RJ",
     "SIKKIM": "IN-SK",
     "TAMIL NADU": "IN-TN",
+    "TAMILNADU": "IN-TN",
     "TELENGANA": "IN-TG",
     "TELANGANA": "IN-TG",
     "TRIPURA": "IN-TR",
@@ -50,6 +51,9 @@ INDIA_STATES_ISO_CODES = {
     "WEST BENGAL": "IN-WB",
     "ANDAMAN AND NICOBAR ISLANDS": "IN-AN",
     "ANDAMAN & NICOBAR ISLANDS": "IN-AN",
+    "ANDAMAN & NICOBAR": "IN-AN",
+    "A & N ISLANDS": "IN-AN",
+    "ANDAMAN & N. ISLAND": "IN-AN",
     "CHANDIGARH": "IN-CH",
     "DADRA AND NAGAR HAVELI": "IN-DN",
     "DADRA & NAGAR HAVELI": "IN-DN",
@@ -64,9 +68,11 @@ INDIA_STATES_ISO_CODES = {
     "LAKSHWADEEP": "IN-LD",
     "PONDICHERRY": "IN-PY",
     "PUDUCHERRY": "IN-PY",
+    "PUDUCHERY": "IN-PY",
     "DADRA AND NAGAR HAVELI AND DAMAN AND DIU": "IN-DH",
     "TELANGANA": "IN-TG",
-    "ALL INDIA": "IN"
+    "ALL INDIA": "IN",
+    "ALL-INDIA": "IN"
 }
 
 INDIA_STATES_CENSUS2001_CODES = {
@@ -106,9 +112,67 @@ INDIA_STATES_CENSUS2001_CODES = {
     "LAKSHADWEEP": "31",
     "KERALA": "32",
     "TAMIL NADU": "33",
+    "TAMILNADU": "33",
+    "PONDICHERRY": "34",
     "PUDUCHERRY": "34",
+    "PUDUCHERY": "34",
     "ANDAMAN & NICOBAR ISLANDS": "35",
-    "ANDAMAN AND NICOBAR ISLANDS": "35"
+    "ANDAMAN AND NICOBAR ISLANDS": "35",
+    "ANDAMAN & NICOBAR": "35",
+    "A & N ISLANDS": "35",
+    "ANDAMAN & N. ISLAND": "35"
+}
+
+INDIA_STATES_LGD_CODES = {
+    "JAMMU AND KASHMIR": "01",
+    "HIMACHAL PRADESH": "02",
+    "PUNJAB": "03",
+    "CHANDIGARH": "04",
+    "UTTARANCHAL": "05",
+    "HARYANA": "06",
+    "DELHI": "07",
+    "RAJASTHAN": "08",
+    "UTTAR PRADESH": "09",
+    "BIHAR": "10",
+    "SIKKIM": "11",
+    "ARUNACHAL PRADESH": "12",
+    "NAGALAND": "13",
+    "MANIPUR": "14",
+    "MIZORAM": "15",
+    "TRIPURA": "16",
+    "MEGHALAYA": "17",
+    "ASSAM": "18",
+    "WEST BENGAL": "19",
+    "JHARKHAND": "20",
+    "ODISHA": "21",
+    "CHHATTISGARH": "22",
+    "MADHYA PRADESH": "23",
+    "GUJARAT": "24",
+    "DAMAN & DIU": "25",
+    "DAMAN AND DIU": "25",
+    "DADRA & NAGAR HAVELI": "26",
+    "DADRA AND NAGAR HAVELI": "26",
+    "MAHARASTRA": "27",
+    "MAHARASHTRA": "27",
+    "ANDHRA PRADESH": "28",
+    "KARNATAKA": "29",
+    "GOA": "30",
+    "LAKSHADWEEP": "31",
+    "KERALA": "32",
+    "TAMIL NADU": "33",
+    "TAMILNADU": "33",
+    "PONDICHERRY": "34",
+    "PUDUCHERRY": "34",
+    "PUDUCHERY": "34",
+    "ANDAMAN & NICOBAR ISLANDS": "35",
+    "ANDAMAN AND NICOBAR ISLANDS": "35",
+    "A & N ISLANDS": "35",
+    "ANDAMAN & N. ISLAND": "35",
+    "ANDAMAN & NICOBAR": "35",
+    "TELANGANA": "36",
+    "LADAKH": "37",
+    "DADRA AND NAGAR HAVELI AND DAMAN AND DIU": "38",
+    "THE DADRA AND NAGAR HAVELI AND DAMAN AND DIU": "38"
 }
 
 
@@ -128,7 +192,8 @@ class IndiaStatesMapper:
             return INDIA_STATES_ISO_CODES[state_name]
         else:
             raise Exception(
-                "State name is not found in the INDIA_STATES_ISO_CODES mapping")
+                "State name - {state_name} is not found in the INDIA_STATES_ISO_CODES mapping"
+                .format(state_name=state_name))
 
     @staticmethod
     def get_state_name_to_census2001_code_mapping(state_name,
@@ -175,3 +240,23 @@ class IndiaStatesMapper:
             raise Exception(
                 "State name is not found in the INDIA_STATES_CENSUS2001_CODES mapping"
             )
+
+    @staticmethod
+    def get_state_name_to_lgd_code_mapping(state_name):
+        """
+        Static function to get the LGD state code for a given state or UT
+        
+        Args:
+            state_name :  Indian State or UT name
+        """
+        state_name = state_name.upper().strip()
+        #  Uttarakhand and Uttaranchal are same.
+        if state_name == "UTTARAKHAND":
+            state_name = "UTTARANCHAL"
+
+        if state_name in INDIA_STATES_LGD_CODES:
+            return INDIA_STATES_LGD_CODES[state_name]
+        else:
+            raise Exception(
+                "State name - {state_name} is not found in the INDIA_STATES_LGD_CODES mapping"
+                .format(state_name=state_name))

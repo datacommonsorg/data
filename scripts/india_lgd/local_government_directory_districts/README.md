@@ -39,6 +39,27 @@ The WikiData dataset has the following columns
 - census2011Code - Census 2011 Code
 
 
+#### Clean CSV
+
+- LGDDistrictCode - District code as per LGD
+- LGDDistrictName - District name as per LGD
+- LGDStateCode - State code as per LGD
+- LGDStateName - State name as per LGD
+- LGDCensus2001Code - Formatted Census 2001 Code 
+- LGDCensus2011Code - Formatted Census 2001 Code
+- district -  WikiData district item URL
+- districtLabel - WikiData label of the district item
+- districtDescription - WikiData Description of the district item
+- state -  WikiData state item URL
+- stateLabel - WikiData label of the state item
+- stateDescription - WikiData Description of the state item
+- census2011Code - WikiData Census 2011 code
+- WikiDataId - District WikiDataId
+- LGDDistrictNameTitleCase - Formatted LGD District Name
+- districtLabelTitleCase - WikiData district label in title case
+- closestDistrictLabel - Matched WikidData `districtLabel`. Matching is based on the algorithm defined in the function `get_closest_district_label`. So in a clean and valid CSV the value of this column will be same as `districtLabel`.
+
+
 #### Template MCFs
 - [LocalGovernmentDirectory_Districts.tmcf](LocalGovernmentDirectory_Districts.tmcf).
 
@@ -56,6 +77,12 @@ The WikiData dataset has the following columns
 
 ```bash
 python3 -m unittest discover -v -s scripts/ -p *_test.py
+```
+
+Run only the test cases related to this import
+
+```bash
+python3 -m unittest india_lgd.local_government_directory_districts.preprocess_test.TestPreprocess
 ```
 
 ### Import Procedure

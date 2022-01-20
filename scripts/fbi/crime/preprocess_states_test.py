@@ -16,9 +16,7 @@ import filecmp
 import os
 import tempfile
 import unittest
-from preprocess_states import create_formatted_csv_file
-from preprocess_states import calculate_crimes
-from preprocess_states import create_tmcf_file
+from .preprocess_states import *
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -27,6 +25,7 @@ module_dir_ = os.path.dirname(__file__)
 class CleanCrimeFileTest(unittest.TestCase):
 
     def test_clean_crime_file(self):
+        in_test()
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_csv_file = os.path.join(module_dir_,
                                          'test_data/test_state_data_basic.csv')
@@ -44,6 +43,7 @@ class CleanCrimeFileTest(unittest.TestCase):
             os.remove(result_csv_file)
 
     def test_calculate_crimes(self):
+        in_test()
         crime = {
             'Year': 2019,
             'State': 'WISCONSIN',
@@ -77,6 +77,7 @@ class CleanCrimeFileTest(unittest.TestCase):
             })
 
     def test_create_tmcf(self):
+        in_test()
         with tempfile.TemporaryDirectory() as tmp_dir:
             expected_tmcf_file = os.path.join(
                 module_dir_, 'test_data/expected_fbi_state_crime.tmcf')
