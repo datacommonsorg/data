@@ -5,3 +5,5 @@ This import is based on the characteristics of the population living in occupied
 This directory contains the artefacts required to regenerate the files used for the subject table, namely:
 - The JSON Spec
 - Testdata (for quick validation with US-level data and expected output files)
+
+**NOTE:** This dataset has statistics represented as percentages between 2010 - 2016
