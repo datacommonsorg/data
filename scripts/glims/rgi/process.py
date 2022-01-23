@@ -72,6 +72,10 @@ def _process_file(in_fp, in_file, country_gj, continent_map, writer):
     for irow in reader:
         _strip(irow)
 
+        # Keep only large-ish glaciers
+        if float(irow['Area']) < 50:
+            continue
+
         lat = float('%.4f' % float(irow['CenLat']))
         lon = float('%.4f' % float(irow['CenLon']))
         cips = _get_contained_in_places(lat, lon, country_gj, continent_map)
