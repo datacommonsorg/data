@@ -86,16 +86,16 @@ def _process_file(in_fp, in_file, country_gj, continent_map, writer):
             year = '2017'  # Default is date of RGI release
 
         orow = {
-                'rgiId': _quote(irow['RGIId']),
-                'glimsId': _quote(irow['GLIMSId']),
-                'dcid': _quote('rgiId/' + irow['RGIId']),
-                'name': _quote(irow['Name']) if irow['Name'] else '',
-                'latitude': _quote(lat),
-                'longitude': _quote(lon),
-                'containedInPlace': _refs(cips),
-                'observationAbout': 'dcid:rgiId/' + irow['RGIId'],
-                'observationDate': _quote(year),
-                'value': irow['Area'],
+            'rgiId': _quote(irow['RGIId']),
+            'glimsId': _quote(irow['GLIMSId']),
+            'dcid': _quote('rgiId/' + irow['RGIId']),
+            'name': _quote(irow['Name']) if irow['Name'] else '',
+            'latitude': _quote(lat),
+            'longitude': _quote(lon),
+            'containedInPlace': _refs(cips),
+            'observationAbout': 'dcid:rgiId/' + irow['RGIId'],
+            'observationDate': _quote(year),
+            'value': irow['Area'],
         }
         writer.writerow(orow)
 
@@ -103,16 +103,17 @@ def _process_file(in_fp, in_file, country_gj, continent_map, writer):
 def _process(in_pattern, out_dir, country_gj, continent_map):
     with open(os.path.join(out_dir, 'rgi6_glaciers.csv'), 'w') as out_fp:
         writer = csv.DictWriter(out_fp,
-                                fieldnames=['rgiId', 'glimsId', 'dcid',
-                                            'name', 'latitude', 'longitude',
-                                            'observationAbout',
-                                            'observationDate', 'value',
-                                            'containedInPlace'],
+                                fieldnames=[
+                                    'rgiId', 'glimsId', 'dcid', 'name',
+                                    'latitude', 'longitude', 'observationAbout',
+                                    'observationDate', 'value',
+                                    'containedInPlace'
+                                ],
                                 doublequote=False,
                                 escapechar='\\')
         writer.writeheader()
         for fpath in glob.glob(in_pattern):
-            with open(fpath, 'r', encoding = 'ISO-8859-1') as in_fp:
+            with open(fpath, 'r', encoding='ISO-8859-1') as in_fp:
                 print('Processing ' + fpath)
                 _process_file(in_fp, fpath, country_gj, continent_map, writer)
 
@@ -120,8 +121,8 @@ def _process(in_pattern, out_dir, country_gj, continent_map):
 def main(_):
     assert FLAGS.rgi_input_csv_pattern and FLAGS.rgi_output_dir
     country_gj, continent_map = _load_geojsons()
-    _process(FLAGS.rgi_input_csv_pattern, FLAGS.rgi_output_dir,
-             country_gj, continent_map)
+    _process(FLAGS.rgi_input_csv_pattern, FLAGS.rgi_output_dir, country_gj,
+             continent_map)
 
 
 if __name__ == "__main__":
