@@ -6,6 +6,9 @@ data into DC.
 The downloaded CSVs are available
 [here](https://www.glims.org/RGI/rgi60_files/00_rgi60_attribs.zip).
 
+NOTE: Given the constraint of plotting glaciers within continent maps, we
+restrict the glaciers to only the large-ish ones (>=50 sqkm).
+
 ## Run
 
 1. Download the files to `scratch/`.
