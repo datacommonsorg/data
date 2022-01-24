@@ -1,0 +1,3 @@
+rgiId,glimsId,dcid,name,latitude,longitude,observationAbout,observationDate,value,containedInPlace
+\"RGI60-01.00013\",\"G213316E63499N\",\"rgiId/RGI60-01.00013\",\"Susitna Glacier\",\"63.4993\",\"-146.6841\",dcid:rgiId/RGI60-01.00013,\"2017\",209.630,
+\"RGI60-13.54431\",\"G072234E38780N\",\"rgiId/RGI60-13.54431\",\"SU5X14308A001 Fedchenko\",\"38.7802\",\"72.2339\",dcid:rgiId/RGI60-13.54431,\"2017\",663.729,
