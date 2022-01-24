@@ -39,8 +39,8 @@ def write_combined_df(config_path: str):
     # get a list of files
     for cur_exp in conf['input_files']:
         # TODO cd to config path to get abs path
-        cur_exp = os.path.expanduser(cur_exp)
-        matching_files = glob.glob(cur_exp, recursive=True)
+        _exp = os.path.expanduser(cur_exp)
+        matching_files = glob.glob(_exp, recursive=True)
         for cur_file in matching_files:
             # set of files
             if cur_file not in conf['input_files_expanded']:
