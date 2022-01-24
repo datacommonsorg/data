@@ -1,0 +1,1949 @@
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_DepartmentOfEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_DepartmentOfEducation
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_TribalWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_TribalWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_LocalBody
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_LocalBody
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_GovernmentAided
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_GovernmentAided
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_PrivateUnaidedButRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_PrivateUnaidedButRecognized
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_SocialWelfareDepartment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_SocialWelfareDepartment
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_KendriyaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_KendriyaVidyalaya
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_MadrasaUnrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_MadrasaUnrecognized
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+
+Node: dcid:Count_School_HasInternet
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_JawaharNavodayaVidyalaya
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_JawaharNavodayaVidyalaya
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_MadrasaRecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_MadrasaRecognized
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_OtherCentralGovernmentSchools
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_OtherCentralGovernmentSchools
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_OtherGovernmentManaged
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_OtherGovernmentManaged
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_Unrecognized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_Unrecognized
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_RailwaySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_RailwaySchool
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_MinistryOfLabor
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_MinistryOfLabor
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_SainikSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_SainikSchool
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_CentralTibetanSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_CentralTibetanSchool
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_CentralGovernment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_CentralGovernment
+
+Node: dcid:Count_School_HasInternet_PrimarySchool_Grade1To5_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_PrimarySchool_Grade1To5
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade1To8_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade1To8
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade1To12_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade1To12
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To8_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To8
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_UpperPrimarySchool_Grade6To12_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_UpperPrimarySchool_Grade6To12
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade1To10_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade1To10
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade6To10_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade6To10
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_SeniorSecondarySchool_Grade9To10_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_SeniorSecondarySchool_Grade9To10
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade9To12_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade9To12
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_HigherSecondarySchool_Grade11To12_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+levelOfSchool: dcs:UDISE_HigherSecondarySchool_Grade11To12
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
+Node: dcid:Count_School_HasInternet_UnknownSchoolManagement
+typeOf: dcs:StatisticalVariable
+populationType: dcs:School
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+amenityFeature: dcs:Internet
+schoolManagement: dcs:UDISE_UnknownSchoolManagement
+
