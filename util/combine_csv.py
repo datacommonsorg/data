@@ -4,8 +4,13 @@ import pandas as pd
 import os
 import json
 import glob
+from absl import app
+from absl import flags
 
-# TODO commandline flags
+# commandline flags
+FLAGS = flags.FLAGS
+flags.DEFINE_string('config_path', None,
+                    'Path to json file containing config for combining files')
 
 # get updated df from file path
 def get_df_from_file(file_path: str, col_map: dict, output_columns: dict):
@@ -48,3 +53,9 @@ def write_combined_df(config_path: str):
     # write to output
     df.to_csv(conf['output_file'], index=False)
 
+def main(argv):
+    write_combined_df(FLAGS.config_path)
+
+if __name__ == '__main__':
+  flags.mark_flags_as_required(['config_path'])
+  app.run(main)
