@@ -26,12 +26,11 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))
 
 from common.data_loader import process_subject_tables
-from .process import set_column_map
+from process import set_column_map
 
 # These directories are excluded from testing
 _EXCLUDE_DIRS = [
-    'common', 'S0701', 'S0701PR', 's2201', 's0902', 's1201', 'S1810', 's2201',
-    'S2601A', 'S2601APR', 'S2602', 'S2602PR', 'S2603', '__pycache__', '~'
+    'common', 's2201', 's0902', 's1201', '__pycache__', '~'
 ]
 
 
