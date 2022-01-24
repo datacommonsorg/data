@@ -51,7 +51,9 @@ def write_combined_df(config_path: str):
         df = pd.concat([df, cur_df])
     
     # write to output
-    os.makedirs(os.path.dirname(conf['output_file']), exist_ok=True)
+    output_path = conf['output_file']
+    output_path = os.path.expanduser(output_path)
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_csv(conf['output_file'], index=False)
 
 def main(argv):
