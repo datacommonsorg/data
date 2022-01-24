@@ -17,6 +17,8 @@ import os
 import sys
 import tempfile
 import unittest
+import pandas as pd
+from pandas.testing import assert_frame_equal
 
 # Allows the unittest to access table directories in relative path. Also used to
 # import modules for generating cleaned CSV, MCF and Column Map
@@ -27,7 +29,10 @@ from common.data_loader import process_subject_tables
 from .process import set_column_map
 
 # These directories are excluded from testing
-_EXCLUDE_DIRS = ['common', 's2201', '__pycache__']
+_EXCLUDE_DIRS = [
+    'common', 'S0701', 'S0701PR', 's2201', 's0902', 's1201', 'S1810', 's2201',
+    'S2601A', 'S2601APR', 'S2602', 'S2602PR', 'S2603', '__pycache__', '~'
+]
 
 
 def _get_paths(table_dir):
@@ -75,6 +80,13 @@ def _read_files(test_path, expected_path):
     with open(expected_path, 'r') as expected_f:
         expected_result = expected_f.read()
     return test_result, expected_result
+
+
+def _read_csv_files(test_path, expected_path, precision=3):
+    test_df = pd.read_csv(test_path).round(precision)
+    expected_df = pd.read_csv(expected_path).round(precision)
+
+    return test_df, expected_df
 
 
 class TestSubjectTable(unittest.TestCase):
@@ -133,6 +145,6 @@ class TestSubjectTable(unittest.TestCase):
                     self.assertEqual(test_cmap, expected_cmap)
 
                     # Test CSV
-                    test_csv, expected_csv = _read_files(
+                    test_df, expected_df = _read_csv_files(
                         test_csv_path, paths['csv'])
-                    self.assertEqual(test_csv, expected_csv)
+                    assert_frame_equal(test_df, expected_df)
