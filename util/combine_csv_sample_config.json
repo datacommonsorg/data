@@ -1,0 +1,30 @@
+{
+	"output_columns": {
+		"Date" : {
+            "required": true
+        },
+        "Place" : {
+            "required": true
+        },
+        "StatVar" : {
+            "required": true
+        },
+        "Value" : {
+            "required": true
+        },
+        "Period" : {
+            "required": false,
+            "default_value": "P1Y"
+        },
+        "Unit" : {
+            "required": false,
+            "default_value": ""
+        }
+	},
+	"output_file": "~/Documents/cleaned.csv",
+	"input_files": {
+        "file_name": {
+            "": ""
+        }
+    }
+}
