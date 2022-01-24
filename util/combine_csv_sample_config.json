@@ -1,30 +1,50 @@
 {
 	"output_columns": {
 		"Date" : {
-            "required": true
-        },
-        "Place" : {
-            "required": true
-        },
-        "StatVar" : {
-            "required": true
-        },
-        "Value" : {
-            "required": true
-        },
-        "Period" : {
-            "required": false,
-            "default_value": "P1Y"
-        },
-        "Unit" : {
-            "required": false,
-            "default_value": ""
-        }
+		    "required": true
+		},
+		"Place" : {
+		    "required": true
+		},
+		"StatVar" : {
+		    "required": true
+		},
+		"Value" : {
+		    "required": true
+		},
+		"Period" : {
+		    "required": false,
+		    "default_value": "P1Y"
+		},
+		"Unit" : {
+		    "required": false,
+		    "default_value": ""
+		}
 	},
-	"output_file": "~/Documents/cleaned.csv",
+	"output_file": "~/Documents/csv_combine/cleaned.csv",
 	"input_files": {
-        "file_name": {
-            "": ""
-        }
-    }
+		"~/Documents/csv_combine/nhm/*.csv": {
+		    "wikidataId": "Place",
+		    "value": "Value"
+		},
+		"~/Documents/csv_combine/agriculture/*.csv": {
+		    "wikidataId": "Place",
+		    "value": "Value",
+		    "unit": "Unit"
+		},
+		"~/Documents/csv_combine/aqi/*.csv": {
+		    "dcid": "Place",
+		    "median": "Value"
+		},
+		"~/Documents/csv_combine/crime/*.csv": {
+		    "Geo": "Place",
+		    "Quantity": "Value",
+		    "ObsPeriod": "Period",
+		    "ObsDate": "Date"
+		},
+		"~/Documents/csv_combine/gdl/*.csv": {
+		    "wikidataId": "Place",
+		    "value": "Value"
+		}
+	}
 }
