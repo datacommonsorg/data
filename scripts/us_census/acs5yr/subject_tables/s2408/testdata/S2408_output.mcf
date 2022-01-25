@@ -20,176 +20,176 @@ Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_PaidWorker
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_PaidWorker
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_PaidEmployee
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_IncorporatedBusinessOwner
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_LocalGovernmentOwnedEstablishment_Worker
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:LocalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_LocalGovernmentOwnedEstablishment_Worker
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:LocalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_StateGovernmentOwnedEstablishment_Worker
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:StateGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_StateGovernmentOwnedEstablishment_Worker
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:StateGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_FederalGovernmentOwnedEstablishment_Worker
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:FederalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_FederalGovernmentOwnedEstablishment_Worker
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:FederalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwned
 workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwned
 workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_Civilian_Employed_Male
@@ -217,11 +217,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidWorker
@@ -229,11 +229,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidEmployee
@@ -241,11 +241,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Male_PaidEmployee
@@ -253,11 +253,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Male_IncorporatedBusinessOwner
@@ -265,11 +265,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Male_IncorporatedBusinessOwner
@@ -277,11 +277,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_Male_PaidWorker
@@ -289,11 +289,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_Male_PaidWorker
@@ -301,11 +301,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_LocalGovernmentOwnedEstablishment_Male_Worker
@@ -313,11 +313,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:LocalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_LocalGovernmentOwnedEstablishment_Male_Worker
@@ -325,11 +325,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:LocalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_StateGovernmentOwnedEstablishment_Male_Worker
@@ -337,11 +337,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:StateGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_StateGovernmentOwnedEstablishment_Male_Worker
@@ -349,11 +349,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:StateGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_FederalGovernmentOwnedEstablishment_Male_Worker
@@ -361,11 +361,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:FederalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_FederalGovernmentOwnedEstablishment_Male_Worker
@@ -373,11 +373,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:FederalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_Male_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -385,11 +385,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwned
 workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_Male_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -397,11 +397,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Male
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwned
 workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_Civilian_Employed_Female
@@ -429,11 +429,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidWorker
@@ -441,11 +441,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidEmployee
@@ -453,11 +453,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Female_PaidEmployee
@@ -465,11 +465,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:PaidEmployee
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedForProfitEstablishment_Female_IncorporatedBusinessOwner
@@ -477,11 +477,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedForProfitEstablishment_Female_IncorporatedBusinessOwner
@@ -489,11 +489,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedForProfit
 workerClassification: dcs:IncorporatedBusinessOwner
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedNotForProfitEstablishment_Female_PaidWorker
@@ -501,11 +501,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedNotForProfitEstablishment_Female_PaidWorker
@@ -513,11 +513,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwnedNotForProfit
 workerClassification: dcs:PaidWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_LocalGovernmentOwnedEstablishment_Female_Worker
@@ -525,11 +525,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:LocalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_LocalGovernmentOwnedEstablishment_Female_Worker
@@ -537,11 +537,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:LocalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_StateGovernmentOwnedEstablishment_Female_Worker
@@ -549,11 +549,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:StateGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_StateGovernmentOwnedEstablishment_Female_Worker
@@ -561,11 +561,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:StateGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_FederalGovernmentOwnedEstablishment_Female_Worker
@@ -573,11 +573,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:FederalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_FederalGovernmentOwnedEstablishment_Female_Worker
@@ -585,11 +585,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:FederalGovernmentOwned
 workerClassification: dcs:Worker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_PrivatelyOwnedEstablishment_Female_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -597,11 +597,11 @@ measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwned
 workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_PrivatelyOwnedEstablishment_Female_UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
@@ -609,11 +609,11 @@ measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: schema:Person
 gender: dcs:Female
-employment: dcs:BLS_Employed
-age: [16 - Years]
-armedForcesStatus: dcs:Civilian
 establishmentOwnership: dcs:PrivatelyOwned
 workerClassification: dcs:UnincorporatedBusinessOwnerOrUnpaidFamilyWorker
+age: [16 - Years]
+employment: dcs:BLS_Employed
+armedForcesStatus: dcs:Civilian
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Median_Earnings_Person_Civilian_Employed
