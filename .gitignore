@@ -1,6 +1,5 @@
 *.pyc
 __pycache__/
-.pylint.d/
 *.DS_Store
 .vscode/settings.json
 .env/
