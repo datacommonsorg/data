@@ -26,6 +26,7 @@ This file can be downloaded with the [direct link](https://semspub.epa.gov/work/
     ```shell
     python3 process_sites_fundingStatus.py
     ```
+    The `fundingStatus` dataset requires a StatisticalVariable definition, which is found in the [statvar.mcf](statvar.mcf) file.
 
     > using the argument `--help` with any of the above commands lists the different command line arguments that is expected.
 
