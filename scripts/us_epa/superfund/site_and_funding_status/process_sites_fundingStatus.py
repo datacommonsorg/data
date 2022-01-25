@@ -23,11 +23,6 @@ import os
 import sys
 import pandas as pd
 
-# Allows the following module imports to work when running as a script
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))  # for utils
-from us_epa.util.superfund_helper import write_tmcf
-
 _DATASET_NAME = "./Superfund National Priorities List (NPL) Sites with Status Information.csv"
 
 _STATUS_TEMPALTE_MCF = """Node: E:SuperfundSite->E0
@@ -110,6 +105,11 @@ def process_site_funding(input_path: str, output_path: str) -> int:
     """
     Process input files to generate clean csv and tmcf files
     """
+    ## Create output directory if not present
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
+    ## Data on National Priority List (NPL) status for superfund sites
     npl_site_status_path = os.path.join(
         input_path, _DATASET_NAME
     )
@@ -137,13 +137,12 @@ def process_site_funding(input_path: str, output_path: str) -> int:
 
     status_csv = pd.concat(df_list, ignore_index=True)
 
-    if output_path:
-        status_csv.to_csv(os.path.join(output_path,
-                                       "superfund_fundingStatus.csv"),
-                          index=False)
-        f = open(os.path.join(output_path, "superfund_fundingStatus.tmcf"), "w")
-        f.write(_STATUS_TEMPALTE_MCF)
-        f.close()
+    status_csv.to_csv(os.path.join(output_path,
+                                    "superfund_fundingStatus.csv"),
+                        index=False)
+    f = open(os.path.join(output_path, "superfund_fundingStatus.tmcf"), "w")
+    f.write(_STATUS_TEMPALTE_MCF)
+    f.close()
 
     site_count = len(status_csv['observationAbout'].unique())
     return int(site_count)
@@ -154,7 +153,7 @@ def main(_) -> None:
     flags.DEFINE_string('input_path', './data',
                         'Path to the directory with input files')
     flags.DEFINE_string(
-        'output_path', './',
+        'output_path', './data/output',
         'Path to the directory where generated files are to be stored.')
     site_count = process_site_funding(FLAGS.input_path, FLAGS.output_path)
     print(f"Processing of {site_count} superfund sites is complete.")

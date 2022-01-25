@@ -45,39 +45,36 @@ containedInPlace: C:SuperfundSite->containedInPlace
 location: C:SuperfundSite->location
 establishmentOwnership: C:SuperfundSite->establishmentOwnership
 """
- 
+
+_SITE_DATA = "./Superfund National Priorities List (NPL) Sites with Status Information.csv"
+
+_OWNERSHIP_DATA = "./401063.xlsx"
+
+_COL_NAME_MAP = {
+        'Site Name': 'siteName',
+        'Site EPA ID': 'epaId',
+        'Region ID': 'regionCode',
+        'Site Score': 'siteScore'
+}
+
 def check_geo_resolution()->dict:
     """
-    Load the map with geos resolved using the DC Recon API from lat/long
+    Get a map with geoIds resolved using the DC Recon API from lat/long.
     """
-    try:
-        resolved_geo_path = os.path.join(_SCRIPT_PATH,
-                                        "./data/resolved_superfund_site_geoIds.json")
-        f = open(resolved_geo_path, 'r')
-        geo_map = json.load(f)
-        f.close()
-        return geo_map
-    except:
-        print(
-            "Pre-mapped list of geoIds is not available.\n Generating the map now.",
-            end=" .... ",
-            flush=True)
+    ## Data on the superfund sites on the NPL
+    site_geos_csv_path = os.path.join(
+        _SCRIPT_PATH,
+        "./data/Superfund National Priorities List (NPL) Sites with Status Information.csv"
+    )
+    site_geos = pd.read_csv(site_geos_csv_path,
+                            usecols=['Latitude', 'Longitude'])
 
-        ## Data on the superfund sites on the NPL
-        site_geos_csv_path = os.path.join(
-            _SCRIPT_PATH,
-            "./data/Superfund National Priorities List (NPL) Sites with Status Information.csv"
-        )
-        site_geos = pd.read_csv(site_geos_csv_path,
-                                usecols=['Latitude', 'Longitude'])
-
-        site_geos.apply(lambda row: make_list_of_geos_to_resolve(
-            row['Latitude'], row['Longitude'])
-                        if not pd.isna(row['Latitude']) else '',
-                        axis=1)
-        geo_map = resolve_with_recon(output_path='./data/')
-        print(" Done!", flush=True)
-        return geo_map
+    site_geos.apply(lambda row: make_list_of_geos_to_resolve(
+        row['Latitude'], row['Longitude'])
+                    if not pd.isna(row['Latitude']) else '',
+                    axis=1)
+    geo_map = resolve_with_recon(output_path='')
+    return geo_map
 
 
 def get_geoId(row: str, geo_map: dict) -> str:
@@ -95,11 +92,12 @@ def process_sites(input_path: str, output_path: str, geo_map:dict) -> int:
     """
     Process the input files and create clean csv + tmcf files.
     """
+    ## Create output directory if not present
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
     ## Data on superfund sites on the National Priority List (NPL)
-    npl_sites_path = os.path.join(
-        input_path,
-        "./Superfund National Priorities List (NPL) Sites with Status Information.csv"
-    )
+    npl_sites_path = os.path.join(input_path, _SITE_DATA)
     npl_sites = pd.read_csv(npl_sites_path,
                             usecols=[
                                 'Site Name', 'Site Score', 'Site EPA ID',
@@ -107,7 +105,7 @@ def process_sites(input_path: str, output_path: str, geo_map:dict) -> int:
                             ])
 
     ## Data on superfund sites based on clean-up operations done
-    site_ownership_path = os.path.join(input_path, "./401063.xlsx")
+    site_ownership_path = os.path.join(input_path, _OWNERSHIP_DATA)
     site_ownership = pd.read_excel(site_ownership_path,
                                    header=1,
                                    usecols=['EPA ID', 'Federal Facility'])
@@ -116,6 +114,8 @@ def process_sites(input_path: str, output_path: str, geo_map:dict) -> int:
         np.where(site_ownership['establishmentOwnership'].values == 'Y',
                  'FederalGovernmentOwned', 'PrivatelyOwned'),
         site_ownership.index)
+    # The way we used this dataset, we have a lot of duplicates
+    site_ownership.drop_duplicates(inplace=True)
 
     site_csv = npl_sites[[
         'Site Name', 'Site EPA ID', 'Site Score', 'Region ID', 'Latitude',
@@ -128,26 +128,19 @@ def process_sites(input_path: str, output_path: str, geo_map:dict) -> int:
         axis=1)
     site_csv['containedInPlace'] = site_csv.apply(get_geoId, args=(geo_map,), axis=1)
     site_csv.drop(columns=['Latitude', 'Longitude'], inplace=True)
-    site_csv.rename(columns={
-        'Site Name': 'siteName',
-        'Site EPA ID': 'epaId',
-        'Region ID': 'regionCode',
-        'Site Score': 'siteScore'
-    },
-                    inplace=True)
+    site_csv.rename(columns=_COL_NAME_MAP, inplace=True)
+    # We processed 1,715 superfund sites -- initially all of them did not have `establishmentOwnership`.
+    # After the merge, we have 1,317 PrivatelyOwned sites, 158 FederalGovernmentOwned sites and 240 sites do not have a value for the establishmentOwnership property.
     site_csv = pd.merge(site_csv, site_ownership, on='epaId', how='left')
     site_csv['siteName'] = site_csv['siteName'].str.replace(', Inc.', ' Inc.')
-    site_csv.drop_duplicates(inplace=True)
 
     # Save file only when output_path is non-null / non-empty
-    if output_path:
-        site_csv.to_csv(os.path.join(output_path, "superfund_sites.csv"),
-                        index=False,
-                        quoting=csv.QUOTE_NONNUMERIC)
-        f = open(os.path.join(output_path, "superfund_sites.tmcf"), 'w')
-        f.write(_SITE_TEMPLATE_MCF)
-        f.close()
-
+    site_csv.to_csv(os.path.join(output_path, "superfund_sites.csv"),
+                    index=False,
+                    quoting=csv.QUOTE_NONNUMERIC)
+    f = open(os.path.join(output_path, "superfund_sites.tmcf"), 'w')
+    f.write(_SITE_TEMPLATE_MCF)
+    f.close()
 
     site_count = len(site_csv['dcid'].unique())
     return int(site_count)
@@ -155,10 +148,10 @@ def process_sites(input_path: str, output_path: str, geo_map:dict) -> int:
 
 def main(_) -> None:
     FLAGS = flags.FLAGS
-    flags.DEFINE_string('input_path', './',
+    flags.DEFINE_string('input_path', './data',
                         'Path to the directory with input files')
     flags.DEFINE_string(
-        'output_path', './',
+        'output_path', './data/output',
         'Path to the directory where generated files are to be stored.')
     geo_map = check_geo_resolution()
     site_count = process_sites(FLAGS.input_path, FLAGS.output_path, geo_map)

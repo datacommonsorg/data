@@ -21,21 +21,11 @@ import requests
 _GEO_COORDS = []
 _DC_RECON_API = "https://autopush.recon.datacommons.org/coordinate/resolve"
 
-
-def write_tmcf(tmcf_str: str, output_file: str) -> None:
-    """
-  Utility function that writes a tmcf file contents to file
-  """
-    f = open(output_file, 'w')
-    f.write(tmcf_str)
-    f.close()
-
-
 def make_list_of_geos_to_resolve(latitude: np.float64,
                                  longitude: np.float64) -> None:
     """
-  Utility function that adds a pair of latitiude and longitude to a list
-  """
+    Utility function that adds a pair of latitiude and longitude to a list
+    """
     _GEO_COORDS.append({"latitude": str(latitude), "longitude": str(longitude)})
 
 
@@ -43,7 +33,7 @@ def resolve_with_recon(output_path: str,
                        coords_list: list = _GEO_COORDS,
                        batch_size: int = 50) -> dict:
     """
-    ABout this function
+    Calls the Recon API for every 50 location pairs and builds a map of resolved geoIds
     """
     # divide the list into non-overlapping chunk of batch_size
     coords_chunk_list = [
@@ -89,9 +79,9 @@ def resolve_with_recon(output_path: str,
     resolved_geos_map["41.266669,-112.0"] = resolved_geos_map["41.266669,-112"]
     resolved_geos_map["40.75,-75.0"] = resolved_geos_map["40.75,-75"]
 
-    # write resolved geo map to file
-    f = open(f"{output_path}/resolved_superfund_site_geoIds.json", "w")
-    json.dump(resolved_geos_map, f, indent=4)
-    f.close()
-
+    # write resolved geo map to file, if output_path is specified
+    if output_path:
+        f = open(f"{output_path}/resolved_superfund_site_geoIds.json", "w")
+        json.dump(resolved_geos_map, f, indent=4)
+        f.close()
     return resolved_geos_map
