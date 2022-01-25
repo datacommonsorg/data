@@ -60,42 +60,30 @@ def add_rows_to_status_csv(row):
     if not pd.isnull(row['Proposed Date']):
         df = df.append(
             {
-                'observationAbout':
-                    'epaSuperfundSiteId/' + row['Site EPA ID'],
-                'observationDate':
-                    row['Proposed Date'],
-                'variableMeasured':
-                    'dcid:SuperfundFundingStatus_SuperfundSite',
-                'value':
-                    'dcs:ProposedNPLSite'
+                'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
+                'observationDate': row['Proposed Date'],
+                'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
+                'value': 'dcs:ProposedNPLSite'
             },
             ignore_index=True)
 
     if not pd.isnull(row['Listing Date']):
         df = df.append(
             {
-                'observationAbout':
-                    'epaSuperfundSiteId/' + row['Site EPA ID'],
-                'observationDate':
-                    row['Listing Date'],
-                'variableMeasured':
-                    'dcid:SuperfundFundingStatus_SuperfundSite',
-                'value':
-                    'dcs:FinalNPLSite'
+                'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
+                'observationDate': row['Listing Date'],
+                'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
+                'value': 'dcs:FinalNPLSite'
             },
             ignore_index=True)
 
     if not pd.isnull(row['Deletion Date']):
         df = df.append(
             {
-                'observationAbout':
-                    'epaSuperfundSiteId/' + row['Site EPA ID'],
-                'observationDate':
-                    row['Deletion Date'],
-                'variableMeasured':
-                    'dcid:SuperfundFundingStatus_SuperfundSite',
-                'value':
-                    'dcs:DeletedNPLSite'
+                'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
+                'observationDate': row['Deletion Date'],
+                'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
+                'value': 'dcs:DeletedNPLSite'
             },
             ignore_index=True)
     return df
@@ -110,9 +98,7 @@ def process_site_funding(input_path: str, output_path: str) -> int:
         os.makedirs(output_path)
 
     ## Data on National Priority List (NPL) status for superfund sites
-    npl_site_status_path = os.path.join(
-        input_path, _DATASET_NAME
-    )
+    npl_site_status_path = os.path.join(input_path, _DATASET_NAME)
     npl_sites = pd.read_csv(npl_site_status_path,
                             usecols=[
                                 'Site EPA ID', 'Status', 'Proposed Date',
@@ -137,9 +123,8 @@ def process_site_funding(input_path: str, output_path: str) -> int:
 
     status_csv = pd.concat(df_list, ignore_index=True)
 
-    status_csv.to_csv(os.path.join(output_path,
-                                    "superfund_fundingStatus.csv"),
-                        index=False)
+    status_csv.to_csv(os.path.join(output_path, "superfund_fundingStatus.csv"),
+                      index=False)
     f = open(os.path.join(output_path, "superfund_fundingStatus.tmcf"), "w")
     f.write(_STATUS_TEMPALTE_MCF)
     f.close()

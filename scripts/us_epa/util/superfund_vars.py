@@ -1,4 +1,3 @@
-
 _CHEM_MAP = {
     "Methane": "dcid:methane",
     "Carbonate": "dcid:carbonate",

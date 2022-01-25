@@ -32,7 +32,6 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../../../../util/'))  # for statvar_dcid_generator
 from statvar_dcid_generator import get_statvar_dcid
 
-
 _TEMPLATE_MCF = """
 Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation
@@ -44,25 +43,36 @@ value: C:SuperfundSite->value
 
 _DATASET_NAME = "./401062.xlsx"
 _COL_NAME_MAP = {
-    'EPA ID': 'observationAbout', 
+    'EPA ID': 'observationAbout',
     'Actual Completion Date': 'observationDate'
 }
 
-def make_contamination_svobs(df:pd.DataFrame, output_path:str)->pd.DataFrame:
+
+def make_contamination_svobs(df: pd.DataFrame,
+                             output_path: str) -> pd.DataFrame:
     """
     Function makes SVObs of contaminated medium at the site concatenated with '&' as the observed value.
     """
     df = df.drop_duplicates()
     df['Media'] = df['Media'].apply(lambda x: _CONTAMINATED_THING_DCID_MAP[x])
-    df = df.groupby(['EPA ID', 'Actual Completion Date'], as_index=False)['Media'].apply('&'.join).reset_index()
+    df = df.groupby(['EPA ID', 'Actual Completion Date'],
+                    as_index=False)['Media'].apply('&'.join).reset_index()
     df['Media'] = 'dcs:' + df['Media']
     df.drop(columns='index', inplace=True)
     df['variableMeasured'] = 'dcs:ContaminatedThing_SuperfundSite'
-    df.rename(columns={'EPA ID': 'observationAbout', 'Actual Completion Date': 'observationDate', 'Media': 'value'}, inplace=True)
-    df = df[['observationAbout', 'observationDate', 'variableMeasured', 'value']]
+    df.rename(columns={
+        'EPA ID': 'observationAbout',
+        'Actual Completion Date': 'observationDate',
+        'Media': 'value'
+    },
+              inplace=True)
+    df = df[[
+        'observationAbout', 'observationDate', 'variableMeasured', 'value'
+    ]]
 
     ## write or create the statvar.mcf file
-    f = open(os.path.join(output_path, "superfund_sites_contamination.mcf"), "w")
+    f = open(os.path.join(output_path, "superfund_sites_contamination.mcf"),
+             "w")
     node_str = f"Node: dcid:ContaminatedThing_SuperfundSite\n"
     node_str += "typeOf: dcs:StatisticalVariable\n"
     node_str += "populationType: dcs:SuperfundSite\n"
@@ -72,6 +82,7 @@ def make_contamination_svobs(df:pd.DataFrame, output_path:str)->pd.DataFrame:
     f.close()
 
     return df
+
 
 def write_sv_to_file(row, file_obj):
     """
@@ -108,42 +119,60 @@ def write_sv_to_file(row, file_obj):
         row['value'] = None
         return row
 
-def process_site_contamination(input_path:str, output_path:str)->int:
+
+def process_site_contamination(input_path: str, output_path: str) -> int:
     """
     Function to process the raw dataset and generate clean csv + tmcf files.
     """
     contamination_data_path = os.path.join(input_path, _DATASET_NAME)
 
-    contamination_data = pd.read_excel(contamination_data_path, header=1, usecols=['EPA ID', 'Actual Completion Date', 'Media', 'Contaminant Name'])
-    contamination_data['Actual Completion Date'] = pd.to_datetime(contamination_data['Actual Completion Date']).dt.strftime('%Y-%m-%d')
-    contamination_data['EPA ID'] = 'epaSuperfundSiteId/' + contamination_data['EPA ID']
+    contamination_data = pd.read_excel(contamination_data_path,
+                                       header=1,
+                                       usecols=[
+                                           'EPA ID', 'Actual Completion Date',
+                                           'Media', 'Contaminant Name'
+                                       ])
+    contamination_data['Actual Completion Date'] = pd.to_datetime(
+        contamination_data['Actual Completion Date']).dt.strftime('%Y-%m-%d')
+    contamination_data[
+        'EPA ID'] = 'epaSuperfundSiteId/' + contamination_data['EPA ID']
 
     clean_csv = pd.DataFrame()
-    df = make_contamination_svobs(contamination_data[['EPA ID', 'Actual Completion Date', 'Media']], output_path)
+    df = make_contamination_svobs(
+        contamination_data[['EPA ID', 'Actual Completion Date', 'Media']],
+        output_path)
     clean_csv = pd.concat([clean_csv, df], ignore_index=True)
     del df
 
     c = contamination_data[['Media', 'Contaminant Name']]
     c = c.drop_duplicates()
     c = c.dropna()
-    f = open(os.path.join(output_path,"superfund_sites_contamination.mcf"), "a")
+    f = open(os.path.join(output_path, "superfund_sites_contamination.mcf"),
+             "a")
     c = c.apply(write_sv_to_file, args=(f,), axis=1)
     f.close()
 
     c = c.dropna(subset=['variableMeasured', 'value'])
 
-    contamination_data = pd.merge(contamination_data, c, on=['Media', 'Contaminant Name'], how='inner')
+    contamination_data = pd.merge(contamination_data,
+                                  c,
+                                  on=['Media', 'Contaminant Name'],
+                                  how='inner')
     contamination_data.drop(columns=['Media', 'Contaminant Name'], inplace=True)
     contamination_data.rename(columns=_COL_NAME_MAP, inplace=True)
 
     clean_csv = pd.concat([clean_csv, contamination_data], ignore_index=True)
-    clean_csv.to_csv(os.path.join(output_path, "superfund_sites_contamination.csv"), index=False)
-    f = open(os.path.join(output_path, "superfund_sites_contamination.tmcf"), 'w')
+    clean_csv.to_csv(os.path.join(output_path,
+                                  "superfund_sites_contamination.csv"),
+                     index=False)
+    f = open(os.path.join(output_path, "superfund_sites_contamination.tmcf"),
+             'w')
     f.write(_TEMPLATE_MCF)
     f.close()
 
     site_count = len(clean_csv['observationAbout'].unique())
     return int(site_count)
+
 
 def main(_) -> None:
     FLAGS = flags.FLAGS

@@ -21,6 +21,7 @@ import requests
 _GEO_COORDS = []
 _DC_RECON_API = "https://autopush.recon.datacommons.org/coordinate/resolve"
 
+
 def make_list_of_geos_to_resolve(latitude: np.float64,
                                  longitude: np.float64) -> None:
     """
@@ -66,9 +67,15 @@ def resolve_with_recon(output_path: str,
 
     # manual resolution for the missing geoIds
     ## resolution for zip code done by lookups at https://www.zipdatamaps.com/ & GMaps based on location name
-    resolved_geos_map["40.464589,-74.258017"] = ['zip/08879', 'geoId/3465790', 'geoId/34023', 'geoId/34']
-    resolved_geos_map["47.583889,-122.3625"] = ['zip/98106', 'geoId/5363000', 'geoId/53033', 'geoId/53']
-    resolved_geos_map["43.749444,-87.70075"] = ['zip/53081', 'geoId/5572975', 'geoId/55117', 'geoId/55']
+    resolved_geos_map["40.464589,-74.258017"] = [
+        'zip/08879', 'geoId/3465790', 'geoId/34023', 'geoId/34'
+    ]
+    resolved_geos_map["47.583889,-122.3625"] = [
+        'zip/98106', 'geoId/5363000', 'geoId/53033', 'geoId/53'
+    ]
+    resolved_geos_map["43.749444,-87.70075"] = [
+        'zip/53081', 'geoId/5572975', 'geoId/55117', 'geoId/55'
+    ]
     resolved_geos_map["35.29445,-81.0"] = resolved_geos_map["35.29445,-81"]
     resolved_geos_map["33.75,-118.0"] = resolved_geos_map["33.75,-118"]
     resolved_geos_map["38.049444,-122.0"] = resolved_geos_map["38.049444,-122"]

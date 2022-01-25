@@ -131,7 +131,12 @@ value: C:SuperfundSite->CRSI_SCORE
 
 _DATASET_NAME = "./SF_CRSI_OLEM.xlsx"
 
-_DATA_COLS = [ 'Site_EPA_ID', 'CFLD_EXP', 'IFLD_EXP', 'DRGH_EXP', 'EQ_EXP', 'FIRE_EXP', 'HAIL_EXP', 'HTMP_EXP', 'LTMP_EXP', 'HURR_EXP','LSLD_EXP', 'TORN_EXP', 'WIND_EXP', 'EXPOSURE_SCORE', 'RISK_SCORE', 'CRSI_SCORE']
+_DATA_COLS = [
+    'Site_EPA_ID', 'CFLD_EXP', 'IFLD_EXP', 'DRGH_EXP', 'EQ_EXP', 'FIRE_EXP',
+    'HAIL_EXP', 'HTMP_EXP', 'LTMP_EXP', 'HURR_EXP', 'LSLD_EXP', 'TORN_EXP',
+    'WIND_EXP', 'EXPOSURE_SCORE', 'RISK_SCORE', 'CRSI_SCORE'
+]
+
 
 def process_site_hazards(input_path: str, output_path: str) -> int:
     """
@@ -140,13 +145,15 @@ def process_site_hazards(input_path: str, output_path: str) -> int:
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
-    risk_score = pd.read_excel(os.path.join(input_path, _DATASET_NAME),usecols=_DATA_COLS)
+    risk_score = pd.read_excel(os.path.join(input_path, _DATASET_NAME),
+                               usecols=_DATA_COLS)
 
     risk_score[
         'Site_EPA_ID'] = 'epaSuperfundSiteId/' + risk_score['Site_EPA_ID']
     risk_score['observationDate'] = 2021
 
-    risk_score.to_csv(os.path.join(output_path, 'superfund_hazardExposure.csv'),index=False)
+    risk_score.to_csv(os.path.join(output_path, 'superfund_hazardExposure.csv'),
+                      index=False)
 
     f = open(os.path.join(output_path, 'superfund_hazardExposure.tmcf'), 'w')
     f.write(_RISK_TEMPLATE_MCF)

@@ -51,13 +51,14 @@ _SITE_DATA = "./Superfund National Priorities List (NPL) Sites with Status Infor
 _OWNERSHIP_DATA = "./401063.xlsx"
 
 _COL_NAME_MAP = {
-        'Site Name': 'siteName',
-        'Site EPA ID': 'epaId',
-        'Region ID': 'regionCode',
-        'Site Score': 'siteScore'
+    'Site Name': 'siteName',
+    'Site EPA ID': 'epaId',
+    'Region ID': 'regionCode',
+    'Site Score': 'siteScore'
 }
 
-def check_geo_resolution()->dict:
+
+def check_geo_resolution(input_path: str) -> dict:
     """
     Get a map with geoIds resolved using the DC Recon API from lat/long.
     """
@@ -88,7 +89,7 @@ def get_geoId(row: str, geo_map: dict) -> str:
         print(f"{loc} -- does not exist in the map")
 
 
-def process_sites(input_path: str, output_path: str, geo_map:dict) -> int:
+def process_sites(input_path: str, output_path: str) -> int:
     """
     Process the input files and create clean csv + tmcf files.
     """
@@ -103,6 +104,9 @@ def process_sites(input_path: str, output_path: str, geo_map:dict) -> int:
                                 'Site Name', 'Site Score', 'Site EPA ID',
                                 'Region ID', 'Latitude', 'Longitude'
                             ])
+
+    ## Resolve the (latitude, longitude) coords of site to DC geoId
+    geo_map = check_geo_resolution(npl_sites_path)
 
     ## Data on superfund sites based on clean-up operations done
     site_ownership_path = os.path.join(input_path, _OWNERSHIP_DATA)
@@ -126,7 +130,9 @@ def process_sites(input_path: str, output_path: str, geo_map:dict) -> int:
         lambda row: f"[latLong {row['Latitude']} {row['Longitude']}]"
         if not pd.isna(row['Latitude']) else '',
         axis=1)
-    site_csv['containedInPlace'] = site_csv.apply(get_geoId, args=(geo_map,), axis=1)
+    site_csv['containedInPlace'] = site_csv.apply(get_geoId,
+                                                  args=(geo_map,),
+                                                  axis=1)
     site_csv.drop(columns=['Latitude', 'Longitude'], inplace=True)
     site_csv.rename(columns=_COL_NAME_MAP, inplace=True)
     # We processed 1,715 superfund sites -- initially all of them did not have `establishmentOwnership`.
@@ -153,8 +159,7 @@ def main(_) -> None:
     flags.DEFINE_string(
         'output_path', './data/output',
         'Path to the directory where generated files are to be stored.')
-    geo_map = check_geo_resolution()
-    site_count = process_sites(FLAGS.input_path, FLAGS.output_path, geo_map)
+    site_count = process_sites(FLAGS.input_path, FLAGS.output_path)
     print(f"Processing of {site_count} superfund sites is complete.")
 
 

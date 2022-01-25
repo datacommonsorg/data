@@ -31,10 +31,12 @@ class ProcessTest(unittest.TestCase):
         base_path = os.path.join(base_path, './data/test_data')
         processed_count = process_site_funding(base_path, base_path)
         self.assertEqual(_EXPECTED_SITE_COUNT, processed_count)
-        
+
         ## validate the csvs
-        test_df = pd.read_csv(os.path.join(base_path, 'superfund_fundingStatus.csv'))
-        expected_df = pd.read_csv(os.path.join(base_path, 'superfund_fundingStatus_expected.csv'))
+        test_df = pd.read_csv(
+            os.path.join(base_path, 'superfund_fundingStatus.csv'))
+        expected_df = pd.read_csv(
+            os.path.join(base_path, 'superfund_fundingStatus_expected.csv'))
         assert_frame_equal(test_df, expected_df)
 
         ## clean up
