@@ -11,16 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tests for process_sites_fundingStatus.py"""
+"""Tests for process_sites_hazards.py"""
 
 import os
 import unittest
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
-from .process_sites_fundingStatus import process_site_funding
+from .process_sites_hazards import process_site_hazards
 
-_EXPECTED_SITE_COUNT = 1
+_EXPECTED_SITE_COUNT = 4
 
 
 class ProcessTest(unittest.TestCase):
@@ -29,17 +29,17 @@ class ProcessTest(unittest.TestCase):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
         base_path = os.path.join(base_path, './data/test_data')
-        processed_count = process_site_funding(base_path, base_path)
+        processed_count = process_site_hazards(base_path, base_path)
         self.assertEqual(_EXPECTED_SITE_COUNT, processed_count)
         
         ## validate the csvs
-        test_df = pd.read_csv(os.path.join(base_path, 'superfund_fundingStatus.csv'))
-        expected_df = pd.read_csv(os.path.join(base_path, 'superfund_fundingStatus_expected.csv'))
+        test_df = pd.read_csv(os.path.join(base_path, 'superfund_hazardExposure.csv'))
+        expected_df = pd.read_csv(os.path.join(base_path, 'superfund_hazardExposure_expected.csv'))
         assert_frame_equal(test_df, expected_df)
 
         ## clean up
-        os.remove(os.path.join(base_path, 'superfund_fundingStatus.csv'))
-        os.remove(os.path.join(base_path, 'superfund_fundingStatus.tmcf'))
+        os.remove(os.path.join(base_path, 'superfund_hazardExposure.csv'))
+        os.remove(os.path.join(base_path, 'superfund_hazardExposure.tmcf'))
 
 
 if __name__ == '__main__':
