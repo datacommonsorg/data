@@ -16,7 +16,7 @@ FLAGS = flags.FLAGS
 # Params:
 # -------
 # {
-#   "s2lvl": 10,
+#   "s2lvls": [10],
 #   "aggrfunc": "sum" | "mean" | "max" | "min",
 #   "latcol": <col-name>,
 #   "lngcol": <col-name>,
@@ -53,7 +53,7 @@ class Processor:
     def __init__(self, in_params, in_csv, out_dir):
         with open(in_params, 'r') as fp:
             self._params = ast.literal_eval(fp.read())
-        self._level = self._params['s2lvl']
+        self._levels = self._params['s2lvls']
         self._aggr_func = self._params['aggrfunc']
         fname = os.path.basename(in_csv).split('.')[0]
         self._in_cfp = open(in_csv, 'r')
@@ -82,49 +82,50 @@ class Processor:
                 num_nans += 1
                 continue
 
-            # Compute S2Cell
-            cell = self._latlng2cell(lat, lng)
-            cid = _cellid(cell)
+            for lvl in self._levels:
+                # Compute S2Cell
+                cell = self._latlng2cell(lat, lng, lvl)
+                cid = _cellid(cell)
 
-            # Maybe emit S2Cell entity
-            if cid not in emitted_cids:
-                self._out_mfp.write(self._s2mcf(cid, cell))
-                emitted_cids.add(cid)
+                # Maybe emit S2Cell entity
+                if cid not in emitted_cids:
+                    self._out_mfp.write(self._s2mcf(cid, cell, lvl))
+                    emitted_cids.add(cid)
 
-            # Update date
-            if 'datefmt' in self._params:
-                fmt = self._params['datefmt']
-            else:
-                fmt = '%Y'
-            # Append values for aggregation
-            akey = (cid, date.strftime(fmt))
-            if akey not in self._aggr_map:
-                self._aggr_map[akey] = []
-            self._aggr_map[akey].append(val)
+                # Update date
+                if 'datefmt' in self._params:
+                    fmt = self._params['datefmt']
+                else:
+                    fmt = '%Y'
+                # Append values for aggregation
+                akey = (cid, date.strftime(fmt))
+                if akey not in self._aggr_map:
+                    self._aggr_map[akey] = []
+                self._aggr_map[akey].append(val)
 
-            num_processed += 1
-            if num_processed % 100000 == 0:
-                print('Rows processed so far:', num_processed,
-                      ':: bad-fmt:', num_bad_fmt, ':: nans:', num_nans)
+                num_processed += 1
+                if num_processed % 100000 == 0:
+                    print('Rows processed so far:', num_processed,
+                          ':: bad-fmt:', num_bad_fmt, ':: nans:', num_nans)
 
         print('Rows processed so far:', num_processed,
               ':: bad-fmt:', num_bad_fmt, ':: nans:', num_nans)
         self._aggr_and_write()
         self._close()
 
-    def _latlng2cell(self, lat, lng):
-        assert self._level >= 0 and self._level <= 30
+    def _latlng2cell(self, lat, lng, lvl):
+        assert lvl >= 0 and lvl <= 30
         ll = s2sphere.LatLng.from_degrees(lat, lng)
         cell = s2sphere.CellId.from_lat_lng(ll)
-        if self._level < 30:
-            cell = cell.parent(self._level)
+        if lvl < 30:
+            cell = cell.parent(lvl)
         return cell
 
-    def _s2mcf(self, cid, cell):
+    def _s2mcf(self, cid, cell, lvl):
         latlng = cell.to_lat_lng()
-        typeof = 'S2CellLevel' + str(self._level)
+        typeof = 'S2CellLevel' + str(lvl)
         mcf_str = _MCF_FORMAT.format(cid=cid,
-                                     level=self._level,
+                                     level=lvl,
                                      typeof=typeof,
                                      lat=_llformat(latlng.lat().degrees),
                                      lng=_llformat(latlng.lng().degrees))
