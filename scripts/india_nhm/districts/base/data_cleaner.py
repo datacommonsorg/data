@@ -36,7 +36,7 @@ MCF_NODES = """Node: dcid:{statvar}
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:count
+measuredProperty: dcid:{statvar}
 statType: dcs:measuredValue
 
 """
