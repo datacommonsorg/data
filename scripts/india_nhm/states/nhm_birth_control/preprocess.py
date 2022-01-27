@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-
-sys.path.append("..")
+import os
+os.chdir('../../../')
 
 from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.states.base.readme_generator import ReadMeGen
@@ -60,9 +59,10 @@ cols_to_nodes = {
 
 if __name__ == '__main__':
     dataset_name = "NHM_BirthControl"
+    data_path = os.path.join(os.path.dirname(__file__), '../data/')
 
     # Preprocess files; Generate CSV; Generate TMCF file
-    loader = NHMDataLoaderBase(data_folder='../data/',
+    loader = NHMDataLoaderBase(data_folder=data_path,
                                dataset_name=dataset_name,
                                cols_dict=cols_to_nodes,
                                final_csv_path="{}.csv".format(dataset_name))

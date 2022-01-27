@@ -84,7 +84,7 @@ isoCode: C:{dataset_name}->isoCode
 TMCF_NODES = """
 Node: E:{dataset_name}->E{index}
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:indianNHM/{statvar}
+variableMeasured: dcs:{statvar}
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
@@ -92,11 +92,11 @@ observationPeriod: "P1Y"
 value: C:{dataset_name}->{statvar}
 """
 
-MCF_NODES = """Node: dcid:indianNHM/{statvar}
+MCF_NODES = """Node: dcid:{statvar}
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/{statvar}
+measuredProperty: dcs:{statvar}
 statType: dcs:measuredValue
 """
 
@@ -141,17 +141,20 @@ class NHMDataLoaderBase(object):
         for file in os.listdir(self.data_folder):
             fname, fext = os.path.splitext(
                 file)  # fname contains year of the file
+            print(fname)
             date = ''.join(['20', fname[-2:],
                             '-03'])  # date is set as March of every year
 
-            if fext == '.xls':
+            if fname=='2018-19' and fext == '.xls':
                 # Reading .xls file as html and preprocessing multiindex
                 self.raw_df = pd.read_html(os.path.join(self.data_folder,
                                                         file))[0]
                 self.raw_df.columns = self.raw_df.columns.droplevel()
+                self.raw_df = self.raw_df.drop_duplicates().reset_index(drop=True)
+                print(self.raw_df.index)
 
                 cleaned_df = pd.DataFrame()
-                cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']
+                cleaned_df['State'] = self.raw_df['Indicators']
                 cleaned_df['isoCode'] = cleaned_df['State'].map(INDIA_ISO_CODES)
                 cleaned_df['Date'] = date
 

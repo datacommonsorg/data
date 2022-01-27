@@ -4,7 +4,6 @@ lgdCode: C:NHM_MaternalHealth->lgdCode
 
 Node: E:NHM_MaternalHealth->E1
 typeOf: dcs:StatVarObservation
-<<<<<<< HEAD:scripts/india_nhm/states/nhm_maternal_health/NHM_MaternalHealth.tmcf
 variableMeasured: dcs:indianNHM/Count_PregnancyEvent
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:NHM_MaternalHealth->E0
@@ -14,8 +13,6 @@ value: C:NHM_MaternalHealth->Count_PregnancyEvent
 
 Node: E:NHM_MaternalHealth->E2
 typeOf: dcs:StatVarObservation
-=======
->>>>>>> nhm_district_others:scripts/india_nhm/districts/nhm_maternal_health/NHM_MaternalHealth.tmcf
 variableMeasured: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:NHM_MaternalHealth->E0
