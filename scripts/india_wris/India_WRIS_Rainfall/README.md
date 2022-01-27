@@ -16,6 +16,8 @@ Node properties can be found in the [mcf](./India_WRIS_Rainfall.mcf) and [tmcf](
 - Observation Period - Monthly
 - Data availability - 2011 to 2021
 
+Note: Since the number of StatVars are very few in this dataset and no preprocessing is required, preprocessing and test scripts are omitted and the mcf/tmcf files are generated manually.
+
 ### Raw data download
 
 Source link: [https://indiawris.gov.in/wris/#/DataDownload](https://indiawris.gov.in/wris/#/DataDownload)

@@ -72,7 +72,7 @@ measuredProperty: dcs:{dcid}
 value: C:{dataset_name}->{name}
 """
 
-UNIT = """unit: {unit}
+UNIT = """unit: dcid:{unit}
 
 """
 

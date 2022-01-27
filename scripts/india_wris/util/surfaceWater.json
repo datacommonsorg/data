@@ -4,99 +4,99 @@
             {
                 "name": "Aluminium (Al)",
                 "statvar": "Aluminium",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Arsenic (As)",
                 "statvar": "Arsenic",
-                "unit": "dcid:MicrogramsPerLitre"
+                "unit": "MicrogramsPerLitre"
             },
             {
                 "name": "cyanides (CN)",
                 "statvar": "Cyanide",
-                "unit": "dcid:MicrogramsPerLitre"
+                "unit": "MicrogramsPerLitre"
             },
             {
                 "name": "Carbonate (CO3)",
                 "statvar": "Carbonate",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Calcium (Ca)",
                 "statvar": "Calcium",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Chloride (Cl)",
                 "statvar": "Chloride",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Fluorine (F)",
                 "statvar": "Fluorine",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Iron (Fe)",
                 "statvar": "Iron",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Hydrogencarbonate (HCO3)",
                 "statvar": "HydrogenCarbonate",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Mercury (Hg)",
                 "statvar": "Mercury",
-                "unit": "dcid:MicrogramsPerLitre"
+                "unit": "MicrogramsPerLitre"
             },
             {
                 "name": "Potassium (K)",
                 "statvar": "Potassium",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Magnesium (Mg)",
                 "statvar": "Magnesium",
-                "unit": "dcid:MilligramsPerLitre",
+                "unit": "MilligramsPerLitre",
                 "property": "Pollutant"
             },
             {
                 "name": "ammonia (NH3)",
                 "statvar": "Ammonia",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Nitrate (NO3)",
                 "statvar": "Nitrate",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Lead (Pb)",
                 "statvar": "Lead",
-                "unit": "dcid:MicrogramsPerLitre",
+                "unit": "MicrogramsPerLitre",
                 "property": "Pollutant"
             },
             {
                 "name": "Silver (Ag)",
                 "statvar": "Silver",
-                "unit": "dcid:MicrogramsPerLitre"
+                "unit": "MicrogramsPerLitre"
             },
             {
                 "name": "Sulfate (SO4)",
                 "statvar": "Sulfate",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Silicon dioxide (SiO2)",
                 "statvar": "SiliconDioxide",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Zinc (Zn)",
                 "statvar": "Zinc",
-                "unit": "dcid:MicrogramsPerLitre"
+                "unit": "MicrogramsPerLitre"
             }
         ]
     },
@@ -105,7 +105,7 @@
             {
                 "name": "Disolved Oxygen (DO)",
                 "statvar": "DissolvedOxygen",
-                "unit": "dcid:MilligramsPerLitre",
+                "unit": "MilligramsPerLitre",
                 "dcid": "dissolvedOxygen"
             },
             {
@@ -117,13 +117,13 @@
             {
                 "name": "Hardness Total",
                 "statvar": "WaterHardness",
-                "unit": "dcid:MilligramsCaCO3PerLitre",
+                "unit": "MilligramsCaCO3PerLitre",
                 "dcid": "waterHardness"
             },
             {
                 "name": "Alkalinity Total",
                 "statvar": "WaterAlkalinity",
-                "unit": "dcid:MilligramsCaCO3PerLitre",
+                "unit": "MilligramsCaCO3PerLitre",
                 "dcid": "waterAlkalinity"
             },
             {
@@ -141,7 +141,7 @@
             {
                 "name": "Total Dissolved Solids",
                 "statvar": "TotalDissolvedSolids",
-                "unit": "dcid:MilligramsPerLitre",
+                "unit": "MilligramsPerLitre",
                 "dcid": "totalDissolvedSolids"
             },
             {

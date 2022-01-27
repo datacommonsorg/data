@@ -4,32 +4,32 @@
             {
                 "name": "Arsenic (As)",
                 "statvar": "Arsenic",
-                "unit": "dcid:MicrogramsPerLitre"
+                "unit": "MicrogramsPerLitre"
             },
             {
                 "name": "carbonate (CO3)",
                 "statvar": "Carbonate",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Calcium (Ca)",
                 "statvar": "Calcium",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Chloride (Cl)",
                 "statvar": "Chloride",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Fluorine (F)",
                 "statvar": "Fluorine",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Iron (Fe)",
                 "statvar": "Iron",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Hydrogencarbonate (HCO3)",
@@ -39,12 +39,12 @@
             {
                 "name": "Potassium (K)",
                 "statvar": "Potassium",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Magnesium (Mg)",
                 "statvar": "Magnesium",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Nitrate (NO3)",
@@ -54,7 +54,7 @@
             {
                 "name": "Sodium (Na)",
                 "statvar": "Sodium",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Phosphate Ion (PO4)",
@@ -64,12 +64,12 @@
             {
                 "name": "Sulfate (SO4)",
                 "statvar": "Sulfate",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             },
             {
                 "name": "Silicon dioxide (SiO2)",
                 "statvar": "SiliconDioxide",
-                "unit": "dcid:MilligramsPerLitre"
+                "unit": "MilligramsPerLitre"
             }
         ]    
     },
@@ -96,19 +96,19 @@
             {
                 "name": "Hardness Total",
                 "statvar": "WaterHardness",
-                "unit": "dcid:MilligramsCaCO3PerLitre",
+                "unit": "MilligramsCaCO3PerLitre",
                 "dcid": "waterHardness"
             },
             {
                 "name": "Alkalinity Total",
                 "statvar": "WaterAlkalinity",
-                "unit": "dcid:MilligramsCaCO3PerLitre",
+                "unit": "MilligramsCaCO3PerLitre",
                 "dcid": "waterAlkalinity"
             },
             {
                 "name": "Total Dissolved Solids",
                 "statvar": "TotalDissolvedSolids",
-                "unit": "dcid:MilligramsPerLitre",
+                "unit": "MilligramsPerLitre",
                 "dcid": "totalDissolvedSolids"
             },
             {

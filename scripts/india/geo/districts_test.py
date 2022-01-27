@@ -42,3 +42,8 @@ class TestPreprocess(unittest.TestCase):
         district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
             "tamilnadu", "thoothukudi")
         self.assertEqual(district_lgd_code, "594")
+        
+        # test case for closest name alternatives
+        district_lgd_code = mapper.get_district_name_to_lgd_code_mapping(
+            "andhra pradesh", "sri potti sri ramulu nellore")
+        self.assertEqual(district_lgd_code, "515")

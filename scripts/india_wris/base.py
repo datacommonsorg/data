@@ -27,11 +27,22 @@ class WaterQualityBase():
         self.module_dir = os.path.dirname(__file__)
 
         self.solute_mcf = template_strings['solute_mcf']
+        self.assertTrue(self.solute_mcf)
+        
         self.solute_tmcf = template_strings['solute_tmcf']
+        self.assertTrue(self.solute_tmcf)
+        
         self.chemprop_mcf = template_strings['chemprop_mcf']
+        self.assertTrue(self.chemprop_mcf)
+        
         self.chemprop_tmcf = template_strings['chemprop_tmcf']
+        self.assertTrue(self.chemprop_tmcf)
+        
         self.site_dcid = template_strings['site_dcid']
+        self.assertTrue(self.site_dcid)
+        
         self.unit_node = template_strings['unit_node']
+        self.assertTrue(self.unit_node)
 
     def create_dcids_in_csv(self):
         """
