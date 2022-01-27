@@ -124,6 +124,10 @@ def process_site_contamination(input_path: str, output_path: str) -> int:
     """
     Function to process the raw dataset and generate clean csv + tmcf files.
     """
+    ## Create output directory if not present
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
     contamination_data_path = os.path.join(input_path, _DATASET_NAME)
 
     contamination_data = pd.read_excel(contamination_data_path,

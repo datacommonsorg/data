@@ -35,6 +35,6 @@ The `fundingStatus` dataset requires a StatisticalVariable definition, which is 
 #### Notes
 1. We have another [EPA Superfund Applet](https://epa.maps.arcgis.com/apps/mapviewer/index.html?layers=c2b7cdff579c41bbba4898400aa38815) that lists more superfund sites but we had difficulties finding a means to export this data to csv.
 2. The first run of `python3 process_sites.py` will take a few minutes to run, since the place mapping through the Data Commons recon API takes place first.
-
+3. The dataset we export as csv from the [EPA Arcgis appliet](https://epa.maps.arcgis.com/apps/webappviewer/index.html?id=33cebcdfdd1b4c3a8b51d416956c41f1) has a site score column, which can be considered as a Statistical Variable in a future refresh of the dataset. The site score is computed based on the EPA Hazard Ranking System.
 
 

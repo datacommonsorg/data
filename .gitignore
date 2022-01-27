@@ -9,4 +9,6 @@ __pycache__/
 scripts/india_udise/udise_school_dropout_rate/data/*.json
 scripts/india_udise/common/data/3061_*.json
 scripts/india_udise/common/data/1003_*.json
-site_and_funding_status/data/output/
+scripts/us_epa/superfund/site_and_funding_status/data/output
+scripts/us_epa/superfund/site_contamination/data/output
+scripts/us_epa/superfund/site_hazards/data/output
