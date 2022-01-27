@@ -90,7 +90,7 @@ clean_names = {
     'Condom pieces distributed':
         'Condom pieces distributed',
 }
-    
+
 if __name__ == '__main__':
     dataset_name = "NHM_BirthControl"
     data_path = os.path.join(os.path.dirname(__file__), '../data/')

@@ -42,7 +42,7 @@ cols_to_nodes = {
     '% Safe deliveries to Total Reported Deliveries':
         'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
-    
+
 clean_names = {
     'State':
         'State',

@@ -48,7 +48,7 @@ cols_to_nodes = {
     'Total Number of Infant Deaths reported':
         'Count_Death_Infant'
 }
-    
+
 clean_names = {
     'State':
         'State',

@@ -149,7 +149,8 @@ class NHMDataLoaderBase(object):
                 self.raw_df = pd.read_html(os.path.join(self.data_folder,
                                                         file))[0]
                 self.raw_df.columns = self.raw_df.columns.droplevel()
-                self.raw_df = self.raw_df.drop_duplicates().reset_index(drop=True)
+                self.raw_df = self.raw_df.drop_duplicates().reset_index(
+                    drop=True)
 
                 cleaned_df = pd.DataFrame()
                 cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']

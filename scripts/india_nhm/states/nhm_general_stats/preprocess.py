@@ -38,7 +38,7 @@ cols_to_nodes = {
     'Ayush OPD (Number)':
         'Count_OutPatient_Ayush',
 }
-    
+
 clean_names = {
     'State':
         'State',
