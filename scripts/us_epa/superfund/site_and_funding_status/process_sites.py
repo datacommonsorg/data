@@ -63,9 +63,7 @@ def check_geo_resolution(input_path: str) -> dict:
     Get a map with geoIds resolved using the DC Recon API from lat/long.
     """
     ## Data on the superfund sites on the NPL
-    site_geos_csv_path = os.path.join(input_path)
-    site_geos = pd.read_csv(site_geos_csv_path,
-                            usecols=['Latitude', 'Longitude'])
+    site_geos = pd.read_csv(input_path, usecols=['Latitude', 'Longitude'])
 
     site_geos.apply(lambda row: make_list_of_geos_to_resolve(
         row['Latitude'], row['Longitude'])

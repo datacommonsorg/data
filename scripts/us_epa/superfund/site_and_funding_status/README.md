@@ -19,11 +19,13 @@ This file can be downloaded with the [direct link](https://semspub.epa.gov/work/
 
 #### Script to generate the clean_csv + tmcf:
     For creating the nodes for superfund sites,
+    
     ```shell
     python3 process_sites.py
     ```
 
     For adding Statistical Variable Observations on the status of the site on the NPL
+
     ```shell
     python3 process_sites_fundingStatus.py
     ```

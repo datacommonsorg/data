@@ -11,7 +11,8 @@ This dataset is associated with the following publication: Summers, K., A. Lamap
 To download the dataset, visit [catalog.data.gov](https://catalog.data.gov/dataset/intersection-of-natural-hazard-vulnerability-and-superfund-site-location) and you will be able to find the dataset in excel format under the Downloads section under `SF_CRSI_OLEM.xlsx` filename.
 
 #### Script to generate the clean_csv + tmcf:
-    For creating tmcf + clean csv for Statistical Variable Observations 
+    For creating tmcf + clean csv for Statistical Variable Observations
+    a
     ```shell
     python3 process_sites_hazards.py
     ```
