@@ -38,6 +38,29 @@ cols_to_nodes = {
     'Ayush OPD (Number)':
         'Count_OutPatient_Ayush',
 }
+    
+clean_names = {
+    'State':
+        'State',
+    'isoCode':
+        'isoCode',
+    'Date':
+        'Date',
+    'IPD (Number)':
+        'Number of In-Patients',
+    'OPD (Number)':
+        'Number of Out-Patients',
+    'OPD (Allopathic)':
+        'Number of Out-Patients',
+    'Number of Major Operations':
+        'Number of Major Surgeries',
+    'Number of Minor Operations':
+        'Number of Minor Surgeries',
+    '% Inpatient Deaths to Total IPD':
+        'Percent of In-patient Deaths to Total In-patients',
+    'Ayush OPD (Number)':
+        'Number of Out-Patients (AYUSH)',
+}
 
 if __name__ == '__main__':
     dataset_name = "NHM_GeneralStats"
@@ -54,5 +77,6 @@ if __name__ == '__main__':
     readme_gen = ReadMeGen(dataset_name=dataset_name,
                            dataset_description="General Health Statistics Data",
                            data_level="State level",
-                           cols_dict=cols_to_nodes)
+                           cols_dict=cols_to_nodes,
+                           clean_names=clean_names)
     readme_gen.gen_readme()

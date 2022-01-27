@@ -1,42 +1,36 @@
-Node: dcid:indianNHM/Count_InPatient
-description: "Number of In-patients"
+Node: dcid:Count_InPatient
+description: "Ipd (number)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_InPatient
+measuredProperty: dcs:Count_InPatient
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_OutPatient
-description: "Number of Out-patients"
+Node: dcid:Count_OutPatient
+description: "Opd (number)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_OutPatient
+measuredProperty: dcs:Count_OutPatient
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_SurgicalProcedure_Major
+Node: dcid:Count_SurgicalProcedure_Major
 description: "Number of major operations"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_SurgicalProcedure_Major
+measuredProperty: dcs:Count_SurgicalProcedure_Major
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_SurgicalProcedure_Minor
+Node: dcid:Count_SurgicalProcedure_Minor
 description: "Number of minor operations"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_SurgicalProcedure_Minor
+measuredProperty: dcs:Count_SurgicalProcedure_Minor
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_InPatient_Deceased_AsFractionOf_Count_InPatient
-description: "Percent of In-patient deaths to total In-patients"
+Node: dcid:Count_InPatient_Deceased_AsFractionOf_Count_InPatient
+description: "% inpatient deaths to total ipd"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_InPatient_Deceased_AsFractionOf_Count_InPatient
+measuredProperty: dcs:Count_InPatient_Deceased_AsFractionOf_Count_InPatient
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_OutPatient_Ayush
-description: "Ayush outpatients"
+Node: dcid:Count_OutPatient_Ayush
+description: "Ayush opd (number)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_OutPatient_Ayush
+measuredProperty: dcs:Count_OutPatient_Ayush
 statType: dcs:measuredValue
-

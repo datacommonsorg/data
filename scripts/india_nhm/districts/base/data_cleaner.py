@@ -24,7 +24,7 @@ lgdCode: C:{dataset_name}->lgdCode
 TMCF_NODES = """
 Node: E:{dataset_name}->E{index}
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:indianNHM/{statvar}
+variableMeasured: dcs:{statvar}
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: C:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
@@ -32,11 +32,11 @@ observationPeriod: "P1Y"
 value: C:{dataset_name}->{statvar}
 """
 
-MCF_NODES = """Node: dcid:indianNHM/{statvar}
+MCF_NODES = """Node: dcid:{statvar}
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/{statvar}
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
 """

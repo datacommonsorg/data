@@ -20,7 +20,7 @@ The dataset contains key performance indicators of Maternal Health Data for the 
 The cleaned csv has the following columns:
 
 - District: District
-- DistrictCode: lgdCode
+- lgdCode: lgdCode
 - Date: Date
 - Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women registered for Antenatal Care
 - Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of pregnant women registered for Antenatal Care within first trimester

@@ -141,20 +141,18 @@ class NHMDataLoaderBase(object):
         for file in os.listdir(self.data_folder):
             fname, fext = os.path.splitext(
                 file)  # fname contains year of the file
-            print(fname)
             date = ''.join(['20', fname[-2:],
                             '-03'])  # date is set as March of every year
 
-            if fname=='2018-19' and fext == '.xls':
+            if fext == '.xls':
                 # Reading .xls file as html and preprocessing multiindex
                 self.raw_df = pd.read_html(os.path.join(self.data_folder,
                                                         file))[0]
                 self.raw_df.columns = self.raw_df.columns.droplevel()
                 self.raw_df = self.raw_df.drop_duplicates().reset_index(drop=True)
-                print(self.raw_df.index)
 
                 cleaned_df = pd.DataFrame()
-                cleaned_df['State'] = self.raw_df['Indicators']
+                cleaned_df['State'] = self.raw_df['Indicators']['Indicators.1']
                 cleaned_df['isoCode'] = cleaned_df['State'].map(INDIA_ISO_CODES)
                 cleaned_df['Date'] = date
 

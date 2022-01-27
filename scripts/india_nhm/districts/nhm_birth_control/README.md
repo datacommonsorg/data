@@ -20,7 +20,7 @@ The dataset contains key performance indicators of Birth Control Data for the pa
 The cleaned csv has the following columns:
 
 - District: District
-- DistrictCode: lgdCode
+- lgdCode: lgdCode
 - Date: Date
 - Count_BirthControlEvent_Vasectomy: Number of Vasectomies Conducted (Public and Private Institutions)
 - Count_BirthControlEvent_Vasectomy: Number of Vasectomies Conducted (Public and Private Institutions)

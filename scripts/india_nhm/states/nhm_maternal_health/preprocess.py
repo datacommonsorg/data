@@ -42,6 +42,33 @@ cols_to_nodes = {
     '% Safe deliveries to Total Reported Deliveries':
         'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
+    
+clean_names = {
+    'State':
+        'State',
+    'isoCode':
+        'isoCode',
+    'Date':
+        'Date',
+    'Estimated Number of Annual Pregnancies #':
+        'Total number of Annual Pregnancies',
+    'Total number of pregnant women Registered for ANC':
+        'Total number of pregnant women registered for Antenatal Care',
+    'Number of Pregnant women registered within first trimester':
+        'Number of pregnant women registered for Antenatal Care within first trimester',
+    'Total reported deliveries':
+        'Total reported child deliveries',
+    'Institutional deliveries (Public Insts.+Pvt. Insts.)':
+        'Institutional deliveries (includes public and private institutions)',
+    'Deliveries Conducted at Public Institutions':
+        'Deliveries conducted at public institutions',
+    'Number of Home deliveries':
+        'Number of home deliveries',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
+        'Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)',
+    '% Safe deliveries to Total Reported Deliveries':
+        'Percentage of safe deliveries to total reported deliveries'
+}
 
 if __name__ == '__main__':
     dataset_name = "NHM_MaternalHealth"
@@ -58,5 +85,6 @@ if __name__ == '__main__':
     readme_gen = ReadMeGen(dataset_name=dataset_name,
                            dataset_description="Maternal Health Data",
                            data_level="State level",
-                           cols_dict=cols_to_nodes)
+                           cols_dict=cols_to_nodes,
+                           clean_names=clean_names)
     readme_gen.gen_readme()

@@ -8,7 +8,7 @@ Source: Health Information Management System (HIMS), Ministry of Health and Fami
 ### Download URL
 Available for download as xls and zip files.
 
-[Performance of Key Indicators in HIMS (District level)](https://nrhm-mis.nic.in/hmisreports/frmstandard_reports.aspx)
+[Performance of Key Indicators in HIMS (State level)](https://nrhm-mis.nic.in/hmisreports/frmstandard_reports.aspx)
 
 ### Overview
 Maternal Health Data is available for financial year starting from 2008. The xls files are under 'data/' folder.
@@ -19,10 +19,10 @@ The dataset contains key performance indicators of Maternal Health Data for the 
 
 The cleaned csv has the following columns:
 
-- District: District
-- DistrictCode: lgdCode
+- State: State
+- isoCode: isoCode
 - Date: Date
-- Count_PregnancyEvent: Estimated Number of Annual Pregnancies
+- Count_PregnancyEvent: Total number of Annual Pregnancies
 - Count_PregnantWomen_RegisteredForAntenatalCare: Total number of pregnant women registered for Antenatal Care
 - Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester: Number of pregnant women registered for Antenatal Care within first trimester
 - Count_ChildDeliveryEvent: Total reported child deliveries

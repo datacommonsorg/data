@@ -22,18 +22,18 @@ The cleaned csv has the following columns:
 - State: State
 - isoCode: isoCode
 - Date: Date
-- Count_BirthEvent_LiveBirth: Total Number of reported live births
-- Count_BirthEvent_StillBirth: Total Number of reported Still Births
-- Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent: % Total Reported Live Births to Total Deliveries
-- Count_Infant_VaccineAdministered_BCG: Number of Infants given BCG
-- Count_Infant_VaccineAdministered_OPV: Number of Infants given OPV 0 (Birth Dose)
-- Count_Infant_VaccineAdministered_DPTDose1: Number of Infants given DPT1
-- Count_Infant_VaccineAdministered_DPTDose2: Number of Infants given DPT2
-- Count_Infant_VaccineAdministered_DPTDose3: Number of Infants given DPT3
-- Count_ChildVaccinationEvent_MMR: Number of Infants given Measles
-- Count_Infant_VaccineSideEffect_Adverse_Deaths: Adverse Events Following Imunisation (Deaths)
-- Count_Infant_VaccineSideEffect_Adverse_Others: Adverse Events Following Imunisation (Others)
-- Count_Death_Infant: Total Number of Infant Deaths reported
+- Count_BirthEvent_LiveBirth: Total number of reported live births
+- Count_BirthEvent_StillBirth: Total number of reported still births
+- Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent: Percent of total reported live births to total deliveries
+- Count_Infant_VaccineAdministered_BCG: Number of infants given BCG vaccine
+- Count_Infant_VaccineAdministered_OPV: Number of infants given OPV 0 Vaccine (Birth Dose)
+- Count_Infant_VaccineAdministered_DPTDose1: Number of infants given DPT Vaccine Dose 1
+- Count_Infant_VaccineAdministered_DPTDose2: Number of infants given DPT Vaccine Dose 2
+- Count_Infant_VaccineAdministered_DPTDose3: Number of infants given DPT Vaccine Dose 3
+- Count_ChildVaccinationEvent_MMR: Number of infants given MMR Vaccine
+- Count_Infant_VaccineSideEffect_Adverse_Deaths: Adverse events following immunization (Deaths)
+- Count_Infant_VaccineSideEffect_Adverse_Others: Adverse events following immunization (Others)
+- Count_Death_Infant: Total number of infant deaths reported
 
 #### TMCF
 - [NHM_ChildHealth.tmcf](NHM_ChildHealth.tmcf)

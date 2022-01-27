@@ -22,13 +22,13 @@ The cleaned csv has the following columns:
 - State: State
 - isoCode: isoCode
 - Date: Date
-- Count_InPatient: Number of In-patients
-- Count_OutPatient: Number of Out-patients
-- Count_OutPatient: Number of Out-patients (Allopathic)
-- Count_SurgicalProcedure_Major: Number of Major Operations
-- Count_SurgicalProcedure_Minor: Number of Minor Operations
-- Count_InPatient_Deceased_AsFractionOf_Count_InPatient: Percent of Inpatient Deaths to Total Inpatients
-- Count_OutPatient_Ayush: Number of AYUSH outpatients
+- Count_InPatient: Number of In-Patients
+- Count_OutPatient: Number of Out-Patients
+- Count_OutPatient: Number of Out-Patients
+- Count_SurgicalProcedure_Major: Number of Major Surgeries
+- Count_SurgicalProcedure_Minor: Number of Minor Surgeries
+- Count_InPatient_Deceased_AsFractionOf_Count_InPatient: Percent of In-patient Deaths to Total In-patients
+- Count_OutPatient_Ayush: Number of Out-Patients (AYUSH)
 
 #### TMCF
 - [NHM_GeneralStats.tmcf](NHM_GeneralStats.tmcf)

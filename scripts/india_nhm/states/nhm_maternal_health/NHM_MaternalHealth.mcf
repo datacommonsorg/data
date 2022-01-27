@@ -1,63 +1,54 @@
-Node: dcid:indianNHM/Count_PregnancyEvent
-description: "Estimated number of annual pregnancies"
+Node: dcid:Count_PregnancyEvent
+description: "Estimated number of annual pregnancies #"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_PregnancyEvent
+measuredProperty: dcs:Count_PregnancyEvent
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
-description: "Total number of pregnant women registered for Antenatal Care"
+Node: dcid:Count_PregnantWomen_RegisteredForAntenatalCare
+description: "Total number of pregnant women registered for anc"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCare
+measuredProperty: dcs:Count_PregnantWomen_RegisteredForAntenatalCare
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
-description: "Number of pregnant women registered for Antenatal Care within first trimester"
+Node: dcid:Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
+description: "Number of pregnant women registered within first trimester"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
+measuredProperty: dcs:Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_ChildDeliveryEvent
-description: "Total reported child deliveries"
+Node: dcid:Count_ChildDeliveryEvent
+description: "Total reported deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent
+measuredProperty: dcs:Count_ChildDeliveryEvent
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_ChildDeliveryEvent_InAnInstitution
-description: "Institutional deliveries (includes public and private institutions)"
+Node: dcid:Count_ChildDeliveryEvent_InAnInstitution
+description: "Institutional deliveries (public insts.+pvt. insts.)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_InAnInstitution
+measuredProperty: dcs:Count_ChildDeliveryEvent_InAnInstitution
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_ChildDeliveryEvent_InPublicInstitution
+Node: dcid:Count_ChildDeliveryEvent_InPublicInstitution
 description: "Deliveries conducted at public institutions"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_InPublicInstitution
+measuredProperty: dcs:Count_ChildDeliveryEvent_InPublicInstitution
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_ChildDeliveryEvent_AtHome
+Node: dcid:Count_ChildDeliveryEvent_AtHome
 description: "Number of home deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_AtHome
+measuredProperty: dcs:Count_ChildDeliveryEvent_AtHome
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_ChildDeliveryEvent_AtHome_WithStandByAssist
-description: "Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)"
+Node: dcid:Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+description: "Number of home deliveries attended by sba trained (doctor/nurse/anm)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+measuredProperty: dcs:Count_ChildDeliveryEvent_AtHome_WithStandByAssist
 statType: dcs:measuredValue
-
-Node: dcid:indianNHM/Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
-description: "Percentage of safe deliveries to total reported deliveries"
+Node: dcid:Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
+description: "% safe deliveries to total reported deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
+measuredProperty: dcs:Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
 statType: dcs:measuredValue
-

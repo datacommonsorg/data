@@ -20,7 +20,7 @@ The dataset contains key performance indicators of Child Health Data for the par
 The cleaned csv has the following columns:
 
 - District: District
-- DistrictCode: lgdCode
+- lgdCode: lgdCode
 - Date: Date
 - Count_BirthEvent_LiveBirth: Total number of reported live births
 - Count_BirthEvent_StillBirth: Total number of reported still births

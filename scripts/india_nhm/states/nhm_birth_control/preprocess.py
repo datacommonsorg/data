@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-os.chdir('../../../')
-
 from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.states.base.readme_generator import ReadMeGen
 
@@ -57,6 +54,43 @@ cols_to_nodes = {
         'Count_ContraceptiveDistribution_Condom',
 }
 
+clean_names = {
+    'State':
+        'State',
+    'isoCode':
+        'isoCode',
+    'Date':
+        'Date',
+    'Number of Vasectomies Conducted (Public + Pvt.)':
+        'Number of Vasectomies Conducted (Public and Private Institutions)',
+    'Number of Vasectomies Conducted':
+        'Number of Vasectomies Conducted (Public and Private Institutions)',
+    'Number of Tubectomies Conducted (Public + Pvt.)':
+        'Number of Tubectomies Conducted (Public and Private Institutions)',
+    'Number of Tubectomies Conducted':
+        'Number of Tubectomies Conducted (Public and Private Institutions)',
+    'Total Sterilisation Conducted':
+        'Total Sterilisation Conducted',
+    '% Male Sterlisation (Vasectomies) to Total sterilisation':
+        'Percent of Male Sterlisation (Vasectomies) to Total sterilisation',
+    'Total cases of deaths following Sterlisation ( Male + Female)':
+        'Total cases of deaths following Sterilisation (Male and Female)',
+    'Total IUCD Insertions done(public+private)':
+        'Total IUCD Insertions done',
+    'Total Interval IUCD Insertions done':
+        'Total IUCD Insertions done',
+    '% IUCD insertions in public plus private institutions to all family planning methods ( IUCD plus permanent)':
+        'Percent of IUCD insertions to all family planning methods',
+    '% IUCD insertions to all family planning methods ( IUCD plus permanent)':
+        'Percent of IUCD insertions to all family planning methods',
+    'Oral Pills distributed':
+        'Oral Pills distributed',
+    'Combined Oral Pills distributed':
+        'Combined Oral Pills distributed',
+    'Condom pieces distributed':
+        'Condom pieces distributed',
+}
+    
 if __name__ == '__main__':
     dataset_name = "NHM_BirthControl"
     data_path = os.path.join(os.path.dirname(__file__), '../data/')
@@ -73,5 +107,6 @@ if __name__ == '__main__':
     readme_gen = ReadMeGen(dataset_name=dataset_name,
                            dataset_description="Birth Control Data",
                            data_level="State level",
-                           cols_dict=cols_to_nodes)
+                           cols_dict=cols_to_nodes,
+                           clean_names=clean_names)
     readme_gen.gen_readme()

@@ -48,6 +48,39 @@ cols_to_nodes = {
     'Total Number of Infant Deaths reported':
         'Count_Death_Infant'
 }
+    
+clean_names = {
+    'State':
+        'State',
+    'isoCode':
+        'isoCode',
+    'Date':
+        'Date',
+    'Total Number of reported live births':
+        'Total number of reported live births',
+    'Total Number of reported Still Births':
+        'Total number of reported still births',
+    '% Total Reported Live Births to Total Deliveries':
+        'Percent of total reported live births to total deliveries',
+    'Number of Infants given BCG':
+        'Number of infants given BCG vaccine',
+    'Number of Infants given OPV 0 (Birth Dose)':
+        'Number of infants given OPV 0 Vaccine (Birth Dose)',
+    'Number of Infants given DPT1':
+        'Number of infants given DPT Vaccine Dose 1',
+    'Number of Infants given DPT2':
+        'Number of infants given DPT Vaccine Dose 2',
+    'Number of Infants given DPT3':
+        'Number of infants given DPT Vaccine Dose 3',
+    'Number of Infants given Measles':
+        'Number of infants given MMR Vaccine',
+    'Adverse Events Following Imunisation (Deaths)':
+        'Adverse events following immunization (Deaths)',
+    'Adverse Events Following Imunisation (Others)':
+        'Adverse events following immunization (Others)',
+    'Total Number of Infant Deaths reported':
+        'Total number of infant deaths reported'
+}
 
 if __name__ == '__main__':
     dataset_name = "NHM_ChildHealth"
@@ -64,5 +97,6 @@ if __name__ == '__main__':
     readme_gen = ReadMeGen(dataset_name=dataset_name,
                            dataset_description="Child Health Data",
                            data_level="State level",
-                           cols_dict=cols_to_nodes)
+                           cols_dict=cols_to_nodes,
+                           clean_names=clean_names)
     readme_gen.gen_readme()

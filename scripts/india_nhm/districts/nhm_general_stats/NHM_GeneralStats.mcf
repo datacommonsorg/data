@@ -1,42 +1,42 @@
-Node: dcid:indianNHM/Count_InPatient
+Node: dcid:Count_InPatient
 description: "Number of In-Patients"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_InPatient
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:indianNHM/Count_OutPatient
+Node: dcid:Count_OutPatient
 description: "Number of Out-Patients"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_OutPatient
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:indianNHM/Count_SurgicalProcedure_Major
+Node: dcid:Count_SurgicalProcedure_Major
 description: "Number of Major Surgeries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_SurgicalProcedure_Major
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:indianNHM/Count_SurgicalProcedure_Minor
+Node: dcid:Count_SurgicalProcedure_Minor
 description: "Number of Minor Surgeries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_SurgicalProcedure_Minor
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:indianNHM/Count_InPatient_Deceased_AsFractionOf_Count_InPatient
+Node: dcid:Count_InPatient_Deceased_AsFractionOf_Count_InPatient
 description: "Percent of In-patient Deaths to Total In-patients"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_InPatient_Deceased_AsFractionOf_Count_InPatient
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
-Node: dcid:indianNHM/Count_OutPatient_Ayush
+Node: dcid:Count_OutPatient_Ayush
 description: "Number of Out-Patients (AYUSH)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:indianNHM/Count_OutPatient_Ayush
+measuredProperty: dcs:count
 statType: dcs:measuredValue
 
