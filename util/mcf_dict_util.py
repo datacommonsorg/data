@@ -17,37 +17,58 @@ from collections import OrderedDict
 
 prefix_list = ['dcs', 'dcid', 'l', 'schema']
 
+    # read mcf files
+        # get list of files
+        # file to list
+        # update counters
+    # add path
+    # get list of files
+    # get dict list
+    # update dict list
+    # check duplicates
+    # remove duplicates
+    # same dcid different statvar
+    # different dcid same statvar
+
+# TODO wrapper function to rename a list of properties
+# if 'race' in cur_node:
+    # cur_node = OrderedDict([('targetedRace', v) if k == 'race' else (k, v) for k, v in cur_node.items()])
+# TODO wrapper function to rename value of a given property
+# TODO wrapper function to rename namespace
+
 def mcf_to_dict_list(mcf_str: str) -> list:
     # split by \n\n
     nodes_str_list = mcf_str.split('\n\n')
     # each node
-    ret_list = []
+    node_list = []
+    dcid_list = []
+    
     for node in nodes_str_list:
         node = node.strip()
         # check for comments
         node_str_list = node.split('\n')
         cur_node = OrderedDict()
-        i = 0
-        while node_str_list[i].strip().startswith('#'):
-            if '__comment' not in cur_node:
-                cur_node['__comment'] = ''
-            cur_node['__comment'] += node_str_list[i].strip() + '\n'
-            i += 1
-        # check if it starts with node
-        if not node_str_list[i].strip().startswith('Node: '):
-            raise ValueError(
-                'Each node must start with Node: <name>".')
+        
+        comment_ctr = 0
+        is_first_prop = True
         # add each pv to ordered dict
-        # TODO detect and store comments in between and at end of node decleration
         for pv_str in node_str_list:
             pv_str = pv_str.strip()
+            if pv_str.startswith('#'):
+                cur_node[f'__comment{comment_ctr}'] = pv_str
+                comment_ctr += 1
+            elif is_first_prop:
+                is_first_prop = False
+                if not pv_str.startswith('Node: '):
+                    raise ValueError(
+                        'Each node must start with Node: <name>".')
             if pv_str and not pv_str.startswith('#'):
                 # find p, prefix, v
                 pv = pv_str.split(':')
                 if pv_str.count(':') == 1:
                     p = pv[0].strip()
+                    prefix = ''
                     v = pv[1].strip()
-                    prefix = None
                 elif pv_str.count(':') == 2:
                     p = pv[0].strip()
                     prefix = pv[1].strip()
@@ -60,17 +81,33 @@ def mcf_to_dict_list(mcf_str: str) -> list:
                         # prefix = 'dcs'
                 cur_node[p] = {}
                 cur_node[p]['value'] = v
-                if prefix:
-                    cur_node[p]['namespace'] = prefix
-                else:
-                    cur_node[p]['namespace'] = ''
-                # if p == 'Node' and cur_node[p]['namespace'] == 'dcid':
-                #     cur_node['dcid'] = {}
-                #     cur_node['dcid']['value'] = v
-                #     cur_node['dcid']['namespace'] = ''
-        ret_list.append(cur_node)
+                cur_node[p]['namespace'] = prefix
+                
+        node_list.append(cur_node)
+        if 'dcid' in cur_node:
+            dcid_list.append(cur_node['dcid']['value'])
+        elif cur_node['Node']['namespace'] == 'dcid':
+            dcid_list.append(cur_node['dcid']['value'])
+        else:
+            dcid_list.append('')
     
-    return ret_list
+    ret_dict = {}
+    ret_dict['nodes'] = node_list
+    ret_dict['dcid'] = dcid_list
+    return ret_dict
+
+def add_path(path: str, existing_dict = None) -> dict:
+    if not existing_dict:
+        existing_dict = {}
+    # if is dir add **/*.mcf
+    # get list of files
+        # to list and store in dict
+        # warn reopen
+    return existing_dict
+
+# TODO same dcid/node check
+
+# TODO de dupe
 
 def mcf_file_to_dict_list(mcf_file_path: str) -> list:
     mcf_file_path = os.path.expanduser(mcf_file_path)
@@ -88,11 +125,12 @@ def dict_list_to_mcf(dict_list:list, sort_keys=False) -> str:
         if 'Node' not in cur_node:
             raise ValueError(
                 'Each node must have Node: <name>".')
-        # preserve comments
+        # TODO preserve comments
         if '__comment' in cur_node:
             ret_str += cur_node['__comment']
         cur_node.pop('__comment', None)
-        
+        # TODO add comments till node
+        # TODO add inline and end comments
         # Keep Node: first
         ret_str += f"{'Node'}: {cur_node['Node']['namespace']+':' if cur_node['Node']['namespace'] else ''}{cur_node['Node']['value']}"
         ret_str += '\n'
@@ -114,8 +152,3 @@ def dict_list_to_mcf_file(dict_list:list, mcf_file_path: str, sort_keys=False):
     with open(mcf_file_path, 'w') as fp:
         fp.write(dict_list_to_mcf(dict_list, sort_keys))
 
-# TODO wrapper function to rename a list of properties
-# if 'race' in cur_node:
-    # cur_node = OrderedDict([('targetedRace', v) if k == 'race' else (k, v) for k, v in cur_node.items()])
-# TODO wrapper function to rename value of a given property
-# TODO wrapper function to rename namespace
