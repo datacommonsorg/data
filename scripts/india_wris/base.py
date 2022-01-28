@@ -20,6 +20,19 @@ from india.geo.districts import IndiaDistrictsMapper
 
 
 class WaterQualityBase():
+    """
+    Base class to import and preprocess data files, generate
+    mcf and tmcf files for Ground Water and Surface Water quality
+    datasets.
+    
+    Args:
+        dataset_name (str): name of the dataset import
+        util_names (str): name of the corresponding data csv and json file
+        template_strings (dict): dictionary with mcf/tmcf node templates
+        
+    Attributes:
+        dataset_name, util_names, module_dir, template_strings
+    """
 
     def __init__(self, dataset_name, util_names, template_strings):
         self.dataset_name = dataset_name
@@ -27,22 +40,36 @@ class WaterQualityBase():
         self.module_dir = os.path.dirname(__file__)
 
         self.solute_mcf = template_strings['solute_mcf']
-        self.assertTrue(self.solute_mcf)
-        
+        assert self.solute_mcf != ""
+
         self.solute_tmcf = template_strings['solute_tmcf']
-        self.assertTrue(self.solute_tmcf)
-        
+        assert self.solute_tmcf != ""
+
         self.chemprop_mcf = template_strings['chemprop_mcf']
-        self.assertTrue(self.chemprop_mcf)
-        
+        assert self.chemprop_mcf != ""
+
         self.chemprop_tmcf = template_strings['chemprop_tmcf']
-        self.assertTrue(self.chemprop_tmcf)
-        
+        assert self.chemprop_tmcf != ""
+
         self.site_dcid = template_strings['site_dcid']
-        self.assertTrue(self.site_dcid)
-        
+        assert self.site_dcid != ""
+
         self.unit_node = template_strings['unit_node']
-        self.assertTrue(self.unit_node)
+        assert self.unit_node != ""
+
+    def _drop_all_empty_rows(self, df):
+        """
+        Helper method to drop rows with all empty values.
+        
+        Some rows in df can have just place names and latlong without any
+        water quality data. Those rows are dropped here.
+        """
+
+        # Calculating maximum number of empty values in a row
+        max_na = self.df.notnull().sum(axis=1).min()
+        max_na += 2  # to account for empty lat and long columns
+
+        return df.dropna(thresh=max_na)
 
     def create_dcids_in_csv(self):
         """
@@ -58,8 +85,7 @@ class WaterQualityBase():
         self.df = pd.read_csv(
             os.path.join(self.module_dir,
                          'data/{}.csv'.format(self.util_names)))
-        # Dropping rows with all data missing
-        self.df.dropna(thresh=11, inplace=True)
+        self.df = self._drop_all_empty_rows(self.df)
 
         # Mapping district names to LGD Codes
         mapper = IndiaDistrictsMapper()

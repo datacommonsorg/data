@@ -58,7 +58,7 @@ containedIn: E:{dataset_name}->E1
 observationPeriod: "P1M"
 variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_{variable}
 measuredProperty: dcs:concentration
-value: C:{dataset_name}->{name}
+value: C:{dataset_name}->"{name}"
 """
 
 CHEMPROP_TMCF_NODES = """Node: E:{dataset_name}->E{index}
@@ -69,7 +69,7 @@ containedIn: E:{dataset_name}->E1
 observationPeriod: "P1M"
 variableMeasured: dcid:WaterQuality_SurfaceWater_{variable}
 measuredProperty: dcs:{dcid}
-value: C:{dataset_name}->{name}
+value: C:{dataset_name}->"{name}"
 """
 
 UNIT = """unit: dcid:{unit}
