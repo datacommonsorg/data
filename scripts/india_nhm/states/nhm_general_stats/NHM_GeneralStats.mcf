@@ -1,0 +1,36 @@
+Node: dcid:Count_InPatient
+description: "Ipd (number)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_InPatient
+statType: dcs:measuredValue
+Node: dcid:Count_OutPatient
+description: "Opd (number)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_OutPatient
+statType: dcs:measuredValue
+Node: dcid:Count_SurgicalProcedure_Major
+description: "Number of major operations"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_SurgicalProcedure_Major
+statType: dcs:measuredValue
+Node: dcid:Count_SurgicalProcedure_Minor
+description: "Number of minor operations"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_SurgicalProcedure_Minor
+statType: dcs:measuredValue
+Node: dcid:Count_InPatient_Deceased_AsFractionOf_Count_InPatient
+description: "% inpatient deaths to total ipd"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_InPatient_Deceased_AsFractionOf_Count_InPatient
+statType: dcs:measuredValue
+Node: dcid:Count_OutPatient_Ayush
+description: "Ayush opd (number)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_OutPatient_Ayush
+statType: dcs:measuredValue
