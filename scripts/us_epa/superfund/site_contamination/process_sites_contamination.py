@@ -59,8 +59,13 @@ def make_contamination_svobs(df: pd.DataFrame,
     df['Media'] = df['Media'].apply(lambda x: _CONTAMINATED_THING_DCID_MAP[x])
     df = df.groupby(['EPA ID', 'Actual Completion Date'],
                     as_index=False)['Media'].apply('&'.join).reset_index()
+    # The groupby is handled differently in Python3.7 and Pytohn3.9, hence we have this check. In python3.9, the column is preserved but in 3.7 the column name in groupby is replaced with 0
+    if 'Media' not in df.columns and 0 in df.columns:
+        df.columns = ['EPA ID', 'Actual Completion Date', 'Media']
+    else:
+        df.drop(columns='index', inplace=True)
+
     df['Media'] = 'dcs:' + df['Media']
-    df.drop(columns='index', inplace=True)
     df['variableMeasured'] = 'dcs:ContaminatedThing_SuperfundSite'
     df.rename(columns={
         'EPA ID': 'observationAbout',
