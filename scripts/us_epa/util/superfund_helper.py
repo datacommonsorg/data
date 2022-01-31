@@ -76,15 +76,7 @@ def resolve_with_recon(output_path: str,
     resolved_geos_map["43.749444,-87.70075"] = [
         'zip/53081', 'geoId/5572975', 'geoId/55117', 'geoId/55'
     ]
-    resolved_geos_map["35.29445,-81.0"] = resolved_geos_map["35.29445,-81"]
-    resolved_geos_map["33.75,-118.0"] = resolved_geos_map["33.75,-118"]
-    resolved_geos_map["38.049444,-122.0"] = resolved_geos_map["38.049444,-122"]
-    resolved_geos_map["39.716669,-105.0"] = resolved_geos_map["39.716669,-105"]
-    resolved_geos_map["45.0,-92.966669"] = resolved_geos_map["45,-92.966669"]
-    resolved_geos_map["45.0,-92.833333"] = resolved_geos_map["45,-92.833333"]
-    resolved_geos_map["34.125,-118.0"] = resolved_geos_map["34.125,-118"]
-    resolved_geos_map["41.266669,-112.0"] = resolved_geos_map["41.266669,-112"]
-    resolved_geos_map["40.75,-75.0"] = resolved_geos_map["40.75,-75"]
+
 
     # write resolved geo map to file, if output_path is specified
     if output_path:
