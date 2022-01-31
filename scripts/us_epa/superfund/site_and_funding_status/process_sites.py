@@ -73,12 +73,10 @@ def check_geo_resolution(input_path: str) -> dict:
     return geo_map
 
 
-def get_geoId(row: str, geo_map: dict, precision: int = 6) -> str:
+def get_geoId(row: str, geo_map: dict) -> str:
     """
     Dataframe utility function to map DC geoId based on latitude, longitude 
     """
-    row['Latitude'] = round(row['Latitude'], precision)
-    row['Longitude'] = round(row['Longitude'], precision)
     loc = f"{str(row['Latitude'])},{str(row['Longitude'])}"
     try:
         return ', '.join(geo_map[loc])
@@ -86,7 +84,7 @@ def get_geoId(row: str, geo_map: dict, precision: int = 6) -> str:
         print(f"{loc} -- does not exist in the map")
 
 
-def process_sites(input_path: str, output_path: str) -> int:
+def process_sites(input_path: str, output_path: str, precision: int = 6) -> int:
     """
     Process the input files and create clean csv + tmcf files.
     """
@@ -124,7 +122,8 @@ def process_sites(input_path: str, output_path: str) -> int:
     ]]
     site_csv['dcid'] = 'epaSuperfundSiteId/' + site_csv['Site EPA ID']
     site_csv['location'] = site_csv.apply(
-        lambda row: f"[latLong {row['Latitude']} {row['Longitude']}]"
+        lambda row:
+        f"[latLong {round(row['Latitude'], precision)} {round(row['Longitude'], precision)}]"
         if not pd.isna(row['Latitude']) else '',
         axis=1)
     site_csv['containedInPlace'] = site_csv.apply(get_geoId,
