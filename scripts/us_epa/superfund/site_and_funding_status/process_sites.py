@@ -73,10 +73,12 @@ def check_geo_resolution(input_path: str) -> dict:
     return geo_map
 
 
-def get_geoId(row: str, geo_map: dict) -> str:
+def get_geoId(row: str, geo_map: dict, precision: int = 6) -> str:
     """
     Dataframe utility function to map DC geoId based on latitude, longitude 
     """
+    row['Latitude'] = round(row['Latitude'], precision)
+    row['Longitude'] = round(row['Longitude'], precision)
     loc = f"{str(row['Latitude'])},{str(row['Longitude'])}"
     try:
         return ', '.join(geo_map[loc])

@@ -54,8 +54,8 @@ def make_contamination_svobs(df: pd.DataFrame,
     Function makes SVObs of contaminated medium at the site concatenated with '&' as the observed value.
     """
     df = df.drop_duplicates()
-    df = df.dropna(
-    )  # there are some rows where contaminatedThing is nan, which we drop
+    # there are some rows where contaminatedThing is nan, which we drop
+    df = df.dropna()
     df['Media'] = df['Media'].apply(lambda x: _CONTAMINATED_THING_DCID_MAP[x])
     df = df.groupby(['EPA ID', 'Actual Completion Date'],
                     as_index=False)['Media'].apply('&'.join).reset_index()

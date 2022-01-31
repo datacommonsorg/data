@@ -77,7 +77,6 @@ def resolve_with_recon(output_path: str,
         'zip/53081', 'geoId/5572975', 'geoId/55117', 'geoId/55'
     ]
 
-
     # write resolved geo map to file, if output_path is specified
     if output_path:
         f = open(f"{output_path}/resolved_superfund_site_geoIds.json", "w")
