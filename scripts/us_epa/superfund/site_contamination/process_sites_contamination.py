@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Remedial action by contaminated thing dataset for superfund sites import
+"""Contaminant of concern dataset for superfund sites import
 
 This import uses the dataset:
 - ./data/401062.xlsx
