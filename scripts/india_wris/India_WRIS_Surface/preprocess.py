@@ -13,6 +13,8 @@
 # limitations under the License.
 
 import os
+
+os.chdir('../../')
 from india_wris.base import WaterQualityBase
 
 DATASET_NAME = 'India_WRIS_Surface'
@@ -25,8 +27,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:{variable}
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 """
 
@@ -35,8 +37,8 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:{dcid}
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 """
 

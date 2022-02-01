@@ -4,8 +4,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Aluminium
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Arsenic
 typeOf: dcs:StatisticalVariable
@@ -13,8 +13,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Arsenic
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Cyanide
 typeOf: dcs:StatisticalVariable
@@ -22,8 +22,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Cyanide
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Carbonate
 typeOf: dcs:StatisticalVariable
@@ -31,8 +31,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Carbonate
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Calcium
 typeOf: dcs:StatisticalVariable
@@ -40,8 +40,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Calcium
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Chloride
 typeOf: dcs:StatisticalVariable
@@ -49,8 +49,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Chloride
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Fluorine
 typeOf: dcs:StatisticalVariable
@@ -58,8 +58,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Fluorine
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Iron
 typeOf: dcs:StatisticalVariable
@@ -67,8 +67,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Iron
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_HydrogenCarbonate
 typeOf: dcs:StatisticalVariable
@@ -76,8 +76,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:HydrogenCarbonate
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Mercury
 typeOf: dcs:StatisticalVariable
@@ -85,8 +85,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Mercury
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Potassium
 typeOf: dcs:StatisticalVariable
@@ -94,8 +94,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Potassium
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Magnesium
 typeOf: dcs:StatisticalVariable
@@ -103,8 +103,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Magnesium
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Ammonia
 typeOf: dcs:StatisticalVariable
@@ -112,8 +112,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Ammonia
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Nitrate
 typeOf: dcs:StatisticalVariable
@@ -121,8 +121,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Nitrate
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Lead
 typeOf: dcs:StatisticalVariable
@@ -130,8 +130,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Lead
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Silver
 typeOf: dcs:StatisticalVariable
@@ -139,8 +139,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Silver
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Sulfate
 typeOf: dcs:StatisticalVariable
@@ -148,8 +148,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Sulfate
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_SiliconDioxide
 typeOf: dcs:StatisticalVariable
@@ -157,8 +157,8 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:SiliconDioxide
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_Concentration_SurfaceWater_Zinc
 typeOf: dcs:StatisticalVariable
@@ -166,70 +166,70 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:Zinc
 measuredProperty: dcs:concentration
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_SurfaceWater_DissolvedOxygen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:dissolvedOxygen
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_SurfaceWater_ElectricalConductivity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:electricalConductivity
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_SurfaceWater_WaterHardness
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:waterHardness
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_SurfaceWater_WaterAlkalinity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:waterAlkalinity
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_SurfaceWater_ResidualSodiumCarbonate
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:residualSodiumCarbonate
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_SurfaceWater_SodiumAbsorptionRatio
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:sodiumAbsorptionRatio
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_SurfaceWater_TotalDissolvedSolids
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:totalDissolvedSolids
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 
 Node: dcid:WaterQuality_SurfaceWater_PotentialOfHydrogen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:potentialOfHydrogen
-measurementMethod: WRIS_India
-statType: measuredValue
+measurementMethod: dcs:WRIS_India
+statType: dcs:measuredValue
 

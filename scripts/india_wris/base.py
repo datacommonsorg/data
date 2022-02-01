@@ -71,6 +71,12 @@ class WaterQualityBase():
 
         return df.dropna(thresh=max_na)
 
+    def _map_district_to_lgdcodes(self, mapper, state, district):
+        try:
+            return mapper.get_district_name_to_lgd_code_mapping(state, district)
+        except Exception:
+            return district
+
     def create_dcids_in_csv(self):
         """
         Method to map the district names to LGD District Codes
@@ -91,9 +97,10 @@ class WaterQualityBase():
         mapper = IndiaDistrictsMapper()
         df_map = self.df[['StateName',
                           'DistrictName']].drop_duplicates().dropna()
+
         df_map['DistrictCode'] = df_map.apply(
-            lambda x: mapper.get_district_name_to_lgd_code_mapping(
-                x['StateName'], x['DistrictName']),
+            lambda x: self._map_district_to_lgdcodes(mapper, x['StateName'], x[
+                'DistrictName']),
             axis=1)
 
         # Merging LGD codes with original df and creating dcids
