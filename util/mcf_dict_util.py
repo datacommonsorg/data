@@ -59,7 +59,7 @@ def mcf_to_dict_list(mcf_str: str) -> list:
                 comment_ctr += 1
             elif is_first_prop:
                 is_first_prop = False
-                if not pv_str.startswith('Node: '):
+                if pv_str and not pv_str.startswith('Node: '):
                     raise ValueError(
                         'Each node must start with Node: <name>".')
             if pv_str and not pv_str.startswith('#'):
@@ -87,7 +87,7 @@ def mcf_to_dict_list(mcf_str: str) -> list:
         if 'dcid' in cur_node:
             dcid_list.append(cur_node['dcid']['value'])
         elif cur_node['Node']['namespace'] == 'dcid':
-            dcid_list.append(cur_node['dcid']['value'])
+            dcid_list.append(cur_node['Node']['namespace'])
         else:
             dcid_list.append('')
     
@@ -105,9 +105,12 @@ def add_path(path: str, existing_dict = None) -> dict:
         # warn reopen
     return existing_dict
 
-# TODO same dcid/node check
-
+# TODO get dcid list from list of dict
+# TODO get dcid list subset of key values
+# TODO list dupe
 # TODO de dupe
+
+# TODO same dcid/node check
 
 def mcf_file_to_dict_list(mcf_file_path: str) -> list:
     mcf_file_path = os.path.expanduser(mcf_file_path)
@@ -148,7 +151,8 @@ def dict_list_to_mcf(dict_list:list, sort_keys=False) -> str:
 
 def dict_list_to_mcf_file(dict_list:list, mcf_file_path: str, sort_keys=False):
     mcf_file_path = os.path.expanduser(mcf_file_path)
-    os.makedirs(os.path.dirname(mcf_file_path), exist_ok=True)
+    if os.path.dirname(mcf_file_path):
+        os.makedirs(os.path.dirname(mcf_file_path), exist_ok=True)
     with open(mcf_file_path, 'w') as fp:
         fp.write(dict_list_to_mcf(dict_list, sort_keys))
 
