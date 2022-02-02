@@ -1,3 +1,17 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import ast
 import csv
 import math
@@ -9,7 +23,6 @@ from absl import app
 from absl import flags
 from datetime import datetime
 from dateutil import parser
-
 
 FLAGS = flags.FLAGS
 
@@ -28,7 +41,6 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('in_params', '', 'Input param file')
 flags.DEFINE_string('in_csv', '', 'Input CSV file')
 flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
-
 
 _MCF_FORMAT = """
 Node: dcid:s2CellId/{cid}
@@ -50,6 +62,7 @@ def _cellid(cell):
 
 
 class Processor:
+
     def __init__(self, in_params, in_csv, out_dir):
         with open(in_params, 'r') as fp:
             self._params = ast.literal_eval(fp.read())
@@ -108,8 +121,8 @@ class Processor:
                     print('Rows processed so far:', num_processed,
                           ':: bad-fmt:', num_bad_fmt, ':: nans:', num_nans)
 
-        print('Rows processed so far:', num_processed,
-              ':: bad-fmt:', num_bad_fmt, ':: nans:', num_nans)
+        print('Rows processed so far:', num_processed, ':: bad-fmt:',
+              num_bad_fmt, ':: nans:', num_nans)
         self._aggr_and_write()
         self._close()
 
