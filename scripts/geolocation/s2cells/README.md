@@ -1,5 +1,5 @@
 `s2_mapper` tool maps any CSV that identifies the {lat, lng, date, value} into
-S2 cells of a chosen level and aggregates the values (per the chosen aggregate
+S2 cells of a chosen levels and aggregates the values (per the chosen aggregate
 function).
 
 The input is a CSV and a dict of params:
@@ -7,7 +7,7 @@ The input is a CSV and a dict of params:
 ```
 {
   # Specifies S2 level
-  "s2lvl": 10,
+  "s2lvls": [10],
   # Specifies the aggregation function to use
   "aggrfunc": "sum" | "mean" | "max" | "min",
   # Specifies the column names for lat, lng, date, val
