@@ -10,5 +10,5 @@ All the datasets in this directory and sub-directories are manually downloaded u
 |`site_and_funding_status`|Lists the superfund sites on the National Priority List (NPL) with the site's NPL status information on the|[more info](site_and_funding_status/README.md)|
 |`site_contamination`|Describes the different contaminants and contaminated media at different superfund sites|[more info](site_contamination/README.md)|
 |`site_hazards`|Lists the risk and exposure score to 12 natural hazards with a few more metrics|[more info](site_hazards/README.md)|
-|`site_remedial_action`|**[TBA] :**Lists the different remedial actions carried out different superfund sites based on the contaminated media between 1982 to 2017.|[more info](site_remedial_action/README.md)|
-|`tar_creek`|**[TBA] :**Dataset of the contamination measurements made at the [Tar Creek](https://en.wikipedia.org/wiki/Tar_Creek_Superfund_site) superfund site|[more info](tar_creek/README.md)|
+|`site_remedial_action`|**[#TODO] :**Lists the different remedial actions carried out different superfund sites based on the contaminated media between 1982 to 2017.|[more info](site_remedial_action/README.md)|
+|`tar_creek`|**[WIP] :**Dataset of the contamination measurements made at the [Tar Creek](https://en.wikipedia.org/wiki/Tar_Creek_Superfund_site) superfund site|[more info](tar_creek/README.md)|

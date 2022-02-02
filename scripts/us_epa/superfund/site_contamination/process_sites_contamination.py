@@ -110,7 +110,7 @@ def write_sv_to_file(row, file_obj):
         node_str += "typeOf: dcs:StatisticalVariable\n"
         node_str += "populationType: dcs:SuperfundSite\n"
         node_str += "statType: dcs:measurementResult\n"
-        node_str += f"contaminant: {contaminant}\n"
+        node_str += f"contaminant: dcs:{contaminant}\n"
         node_str += f"contaminatedThing: dcs:{contaminated_thing}\n"
         node_str += "measuredProperty: dcs:isContaminated\n\n"
 
