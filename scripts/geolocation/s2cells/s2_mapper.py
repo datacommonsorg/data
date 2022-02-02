@@ -131,7 +131,7 @@ class Processor:
                                      lng=_llformat(latlng.lng().degrees))
         if 'containedIn' in self._params:
             cip = 'containedInPlace: dcid:' + self._params['containedIn']
-            mcf_str = cip + '\n'
+            mcf_str += cip + '\n'
         return mcf_str
 
     def _aggr(self, vals, cid, date):
