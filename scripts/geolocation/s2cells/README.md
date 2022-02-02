@@ -23,4 +23,4 @@ The input is a CSV and a dict of params:
 Run it as:
 
 ```
-python3 s2_mapper.py --in_params=<json> --in_csv=<csv> --out_dir=scratch/
+python3 s2_mapper.py --in_params=<json> --in_csv=<csv> --out_dir=tmp/
