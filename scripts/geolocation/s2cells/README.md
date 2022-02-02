@@ -1,5 +1,5 @@
 `s2_mapper` tool maps any CSV that identifies the {lat, lng, date, value} into
-S2 cells of a chosen levels and aggregates the values (per the chosen aggregate
+S2 cells of chosen levels and aggregates the values (per the chosen aggregate
 function).
 
 The input is a CSV and a dict of params:
