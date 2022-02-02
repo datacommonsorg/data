@@ -48,6 +48,7 @@ def state_alpha2_to_dcid(alpha2: object) -> str:
 
 def zip_to_dcid(zip: object) -> str:
     if pd_types.is_number(zip):
+        # Specify 0 decimal places in the float->str conversion
         return f'dcid:zip/{zip:0>5.0f}'
     return ''
 
@@ -58,16 +59,15 @@ def build_address(row: pd.Series) -> str:
     """
     zip = row["Zip"]
     if pd_types.is_number(zip):
-        print('zip is number {} {}', zip, f'{zip:0>5.0f}')
+        # Specify 0 decimal places in the float->str conversion
         zip = f'{zip:0>5.0f}'
-    else:
-        print('zip is not number {}', zip)
     return escape_value(
         f'{row["StreetAddress"]}, {row["City"]}, {row["State"]} {zip}')
 
 
 def utility_id_to_str(utility_id: object) -> str:
     if pd_types.is_number(utility_id):
+        # Specify 0 decimal places in the float->str conversion
         return f'{utility_id:.0f}'
     return utility_id
 
@@ -81,6 +81,7 @@ def utility_id_to_dcid(utility_id: object, prefix_dcid=False) -> str:
 
 def plant_code_to_str(plant_code: object) -> str:
     if pd_types.is_number(plant_code):
+        # Specify 0 decimal places in the float->str conversion
         return f'{plant_code:.0f}'
     return plant_code
 
