@@ -17,6 +17,7 @@ pytest
 rdp==0.8
 requests==2.24.0
 retry==0.9.2
+s2sphere==0.2.5
 shapely==1.7
 urllib3==1.26.5
 xlrd==1.2.0
