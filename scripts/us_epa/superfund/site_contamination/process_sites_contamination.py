@@ -59,7 +59,7 @@ def make_contamination_svobs(df: pd.DataFrame,
     df['Media'] = df['Media'].apply(lambda x: _CONTAMINATED_THING_DCID_MAP[x])
     df = df.groupby(['EPA ID', 'Actual Completion Date'],
                     as_index=False)['Media'].apply('&'.join).reset_index()
-    # The groupby is handled differently in Python3.7 and Pytohn3.9, hence we have this check. In python3.9, the column is preserved but in 3.7 the column name in groupby is replaced with 0
+    # NOTE: The following check is put in place to resolve pandas version issues that affects the returning dataframe of the `groupby` method. Without this check, the tests in cloud-build where the container uses Python3.7 with pandas==1.0.4 replaces the columns after group by with 0-based indices. In this case, the column name `Media` is replaced as 0. Whereas in pandas==1.3.4 in Python3.9 environment the column name is preserved after groupby.
     if 'Media' not in df.columns and 0 in df.columns:
         df.columns = ['EPA ID', 'Actual Completion Date', 'Media']
     else:
