@@ -34,10 +34,8 @@ Reference:
 2. https://mcdc.missouri.edu/geography/sumlevs/
 """
 
-import re
-
 # Note 1: The summary level codes 950, 960, 970 which broadly belong to school districts  have duplicates. The duplicates are for places that are represented as "Remainder of <US State>" for which we do not have node on the KG.
-# Note 2: For places that are named in the subject table as "Remainder of <US State>" the length of the FIPS code matches for the summary level of school districts by they occur with a pattern that looks like `XX99999` where XX is the two digit state FIPS code. Since we know that this yields duplicate rows, we do not return the resolved geoIds for places containing `XX99999` pattern
+# Note 2: For places that are named in the subject table as "Remainder of <US State>" the length of the FIPS code matches for the summary level of school districts and the FIPS code ends with 5-`9`s. Since we know that this yields duplicate rows, we return an empty string for all FIPS code that ends with 5-`9`s
 
 # Map for summary levels with expected geo prefix
 _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
@@ -89,10 +87,8 @@ def convert_to_place_dcid(geoid_str):
         if fips_code in _US_GEO_CODE_UPDATE_MAP:
             fips_code = _US_GEO_CODE_UPDATE_MAP[fips_code]
 
-        ## Skip resolving geoIds for "Remainder of <US State>" school districts
-        pattern = "[0-9][0-9]99999"  #check for the pattern XX9999
-        matched = re.match(pattern, fips_code)
-        if bool(matched):
+        ## Skip resolving geoIds for "Remainder of <US State>" school districts that ends with 5-(9)'s
+        if fips_code.endswith('99999'):
             return ''
         return _US_SUMMARY_LEVEL_GEO_PREFIX_MAP[summary_level] + fips_code
     else:
