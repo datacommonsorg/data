@@ -89,6 +89,7 @@ def _to_assoc_enum(code: str, dcid) -> str:
 def _update_frames(raw_df: pd.DataFrame) -> pd.DataFrame:
     """Updates data frame to include columns required for tmcf"""
     raw_df = raw_df.replace(np.nan, '')
+    raw_df['UtilityId'] = raw_df['UtilityId'].apply(utils.utility_id_to_str)
     raw_df['Dcid'] = raw_df['UtilityId'].apply(utils.utility_id_to_dcid)
     raw_df['Name'] = raw_df['Name'].apply(utils.escape_value)
     raw_df['Address'] = raw_df.apply(utils.build_address, axis=1)
