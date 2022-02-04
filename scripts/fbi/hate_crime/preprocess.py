@@ -18,13 +18,14 @@ import sys
 import json
 import pandas as pd
 import numpy as np
+import copy
 from utils import flatten_by_column, make_time_place_aggregation
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 
-from statvar_dcid_generator import get_statvar_dcid
+from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
 
@@ -173,55 +174,9 @@ _AGGREGATIONS = {
             'agg_dict': {
                 'INCIDENT_ID': 'nunique'
             },
-            'population_type': 'HateCrimeIncidents'
+            'population_type': 'CriminalIncidents'
         }
     }],
-    'offenses.csv': [{  # Total Criminal Offenses
-        'df': 'offense_df',
-        'args': {
-            'groupby_cols': [],
-            'agg_dict': {
-                'INCIDENT_ID': 'count'
-            },
-            'population_type': 'HateCrimeIncidents',
-            'measurement_qualifier': 'Offense'
-        }
-    }],
-    'victims.csv': [{  # Total Victims
-        'df': 'incident_df',
-        'args': {
-            'groupby_cols': [],
-            'agg_dict': {
-                'VICTIM_COUNT': 'sum'
-            },
-            'population_type': 'HateCrimeIncidents',
-            'measurement_qualifier': 'Victim'
-        }
-    }],
-    'offenders.csv': [
-        {  # Total Offenders
-            'df': 'incident_df',
-            'args': {
-                'groupby_cols': [],
-                'agg_dict': {
-                    'TOTAL_OFFENDER_COUNT': 'sum'
-                },
-                'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Offender'
-            }
-        },
-        {  # Total known and unknown Offenders
-            'df': 'incident_df',
-            'args': {
-                'groupby_cols': ['OFFENDER_CATEGORY'],
-                'agg_dict': {
-                    'TOTAL_OFFENDER_COUNT': 'sum'
-                },
-                'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Offender'
-            }
-        }
-    ],
     'incidents_bias.csv': [
         {  # Incidents grouped by bias motivation (anti-white, ...)
             'df': 'single_bias_incidents',
@@ -230,7 +185,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents grouped into single bias / multiple bias
@@ -240,7 +195,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents grouped by bias category (race,religion, gender, ...)
@@ -250,7 +205,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         }
     ],
@@ -262,7 +217,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by crime category
@@ -272,7 +227,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         }
     ],
@@ -284,7 +239,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents grouped by crime type and single bias / multiple bias
@@ -294,7 +249,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents grouped by crime type and bias category
@@ -304,7 +259,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by crime type and bias motivation
@@ -314,7 +269,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents grouped by crime type and single bias / multiple bias
@@ -324,7 +279,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents grouped by crime type and bias category
@@ -334,7 +289,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         }
     ],
@@ -345,7 +300,7 @@ _AGGREGATIONS = {
             'agg_dict': {
                 'INCIDENT_ID': 'count'
             },
-            'population_type': 'HateCrimeIncidents'
+            'population_type': 'CriminalIncidents'
         }
     }],
     'incidents_offenderethnicity.csv':
@@ -356,7 +311,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         }],
     'incidents_offenderrace_bias.csv': [
@@ -367,7 +322,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by offender race and single bias / multiple bias
@@ -377,7 +332,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by offender race and bias category
@@ -387,7 +342,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         }
     ],
@@ -399,7 +354,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by offender ethnicity and single bias / multiple bias
@@ -409,7 +364,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by offender ethnicity and bias category
@@ -419,7 +374,53 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
+            }
+        }
+    ],
+    'offenses.csv': [{  # Total Criminal Offenses
+        'df': 'offense_df',
+        'args': {
+            'groupby_cols': [],
+            'agg_dict': {
+                'INCIDENT_ID': 'count'
+            },
+            'population_type': 'CriminalIncidents',
+            'measurement_qualifier': 'Offense'
+        }
+    }],
+    'victims.csv': [{  # Total Victims
+        'df': 'incident_df',
+        'args': {
+            'groupby_cols': [],
+            'agg_dict': {
+                'VICTIM_COUNT': 'sum'
+            },
+            'population_type': 'CriminalIncidents',
+            'measurement_qualifier': 'Victim'
+        }
+    }],
+    'offenders.csv': [
+        {  # Total Offenders
+            'df': 'incident_df',
+            'args': {
+                'groupby_cols': [],
+                'agg_dict': {
+                    'TOTAL_OFFENDER_COUNT': 'sum'
+                },
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offender'
+            }
+        },
+        {  # Total known and unknown Offenders
+            'df': 'incident_df',
+            'args': {
+                'groupby_cols': ['OFFENDER_CATEGORY'],
+                'agg_dict': {
+                    'TOTAL_OFFENDER_COUNT': 'sum'
+                },
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offender'
             }
         }
     ],
@@ -431,7 +432,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by victim type and bias motivation
@@ -441,7 +442,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by victim type and single bias / multiple bias
@@ -451,7 +452,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by victim type and bias category
@@ -461,7 +462,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         }
     ],
@@ -473,7 +474,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by location of crime and single bias / multiple bias
@@ -483,7 +484,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
             }
         },
         {  # Incidents by location of crime and bias category
@@ -493,7 +494,39 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'nunique'
                 },
-                'population_type': 'HateCrimeIncidents'
+                'population_type': 'CriminalIncidents'
+            }
+        }
+    ],
+    'incidents_multiple_location_bias.csv': [
+        {  # Incidents by location of crime
+            'df': 'location_df',
+            'args': {
+                'groupby_cols': ['MULTIPLE_LOCATION_NAME'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'nunique'
+                },
+                'population_type': 'CriminalIncidents'
+            }
+        },
+        {  # Incidents by location of crime and single bias / multiple bias
+            'df': 'location_df',
+            'args': {
+                'groupby_cols': ['MULTIPLE_LOCATION_NAME', 'MULTIPLE_BIAS'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'nunique'
+                },
+                'population_type': 'CriminalIncidents'
+            }
+        },
+        {  # Incidents by location of crime and bias category
+            'df': 'single_bias_location',
+            'args': {
+                'groupby_cols': ['MULTIPLE_LOCATION_NAME', 'BIAS_CATEGORY'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'nunique'
+                },
+                'population_type': 'CriminalIncidents'
             }
         }
     ],
@@ -505,7 +538,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -516,7 +549,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -527,7 +560,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -540,7 +573,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -551,7 +584,20 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offense'
+            }
+        }
+    ],
+    'offense_victimtype.csv': [
+        {  # Offenses grouped by offense type
+            'df': 'offense_victim_df',
+            'args': {
+                'groupby_cols': ['VICTIM_TYPES'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'count'
+                },
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -564,7 +610,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -575,7 +621,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -588,7 +634,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -599,7 +645,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -612,7 +658,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -623,7 +669,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -636,7 +682,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -647,7 +693,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -660,7 +706,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -671,7 +717,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -684,7 +730,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -695,7 +741,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -706,7 +752,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -717,7 +763,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -728,7 +774,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -739,7 +785,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -752,7 +798,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -763,7 +809,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -774,7 +820,18 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offense'
+            }
+        },
+        {  # Offenses by offender race and bias category
+            'df': 'single_bias_offenses',
+            'args': {
+                'groupby_cols': ['OFFENDER_RACE'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'count'
+                },
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -787,7 +844,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -798,7 +855,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -809,7 +866,18 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offense'
+            }
+        },
+        {  # Offenses by offender ethnicity
+            'df': 'single_bias_offenses',
+            'args': {
+                'groupby_cols': ['OFFENDER_ETHNICITY'],
+                'agg_dict': {
+                    'INCIDENT_ID': 'count'
+                },
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -822,7 +890,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -833,7 +901,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         },
@@ -844,7 +912,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'INCIDENT_ID': 'count'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offense'
             }
         }
@@ -857,7 +925,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         },
@@ -868,7 +936,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         },
@@ -879,7 +947,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         }
@@ -892,7 +960,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'ADULT_VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim',
                 'common_pvs': {
                     'victimAge': '[18 - Years]'
@@ -906,7 +974,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'ADULT_VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim',
                 'common_pvs': {
                     'victimAge': '[18 - Years]'
@@ -920,7 +988,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'ADULT_VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim',
                 'common_pvs': {
                     'victimAge': '[18 - Years]'
@@ -936,7 +1004,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'JUVENILE_VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim',
                 'common_pvs': {
                     'victimAge': '[- 17 Years]'
@@ -950,7 +1018,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'JUVENILE_VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim',
                 'common_pvs': {
                     'victimAge': '[- 17 Years]'
@@ -964,7 +1032,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'JUVENILE_VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim',
                 'common_pvs': {
                     'victimAge': '[- 17 Years]'
@@ -980,19 +1048,18 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         },
         {  # Victims by crime category
-            # TODO double counting
-            'df': 'offense_df',
+            'df': 'unq_offense_df',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         }
@@ -1005,7 +1072,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         },
@@ -1016,55 +1083,51 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         },
         {  # Offenses grouped by crime type and bias category
-            # TODO double counting
             'df': 'single_bias_offenses',
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_NAME'],
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         },
         {  # Offenses by crime type and bias motivation
-            # TODO double counting
-            'df': 'single_bias_offenses',
+            'df': 'unq_single_bias_offenses',
             'args': {
                 'groupby_cols': ['BIAS_DESC', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         },
         {  # Offenses grouped by crime type and single bias / multiple bias
-            # TODO double counting
-            'df': 'offense_df',
+            'df': 'unq_offense_df',
             'args': {
                 'groupby_cols': ['MULTIPLE_BIAS', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         },
         {  # Offenses grouped by crime type and bias category
-            # TODO double counting
-            'df': 'single_bias_offenses',
+            'df': 'unq_single_bias_offenses',
             'args': {
                 'groupby_cols': ['BIAS_CATEGORY', 'OFFENSE_CATEGORY'],
                 'agg_dict': {
                     'VICTIM_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Victim'
             }
         }
@@ -1077,7 +1140,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         },
@@ -1088,7 +1151,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         },
@@ -1099,7 +1162,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         }
@@ -1112,7 +1175,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         },
@@ -1123,7 +1186,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         },
@@ -1134,7 +1197,7 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         }
@@ -1147,19 +1210,18 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         },
         {  # Offenders by crime category
-            # TODO double counting
-            'df': 'offense_df',
+            'df': 'unq_offense_df',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY'],
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         }
@@ -1172,24 +1234,51 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         },
         {  # Offenders by crime category
-            # TODO double counting
-            'df': 'offense_df',
+            'df': 'unq_offense_df',
             'args': {
                 'groupby_cols': ['OFFENSE_CATEGORY', 'OFFENDER_CATEGORY'],
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender'
             }
         }
     ],
     'offenders_offenderrace.csv': [
+        {  # Offenders grouped into single bias / multiple bias
+            'df': 'known_offender_race',
+            'args': {
+                'groupby_cols': [],
+                'agg_dict': {
+                    'TOTAL_OFFENDER_COUNT': 'sum'
+                },
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offender',
+                'common_pvs': {
+                    'offenderType': 'KnownOffenderRace'
+                }
+            }
+        },
+        {  # Offenders grouped into single bias / multiple bias
+            'df': 'known_offender_age',
+            'args': {
+                'groupby_cols': [],
+                'agg_dict': {
+                    'TOTAL_OFFENDER_COUNT': 'sum'
+                },
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offender',
+                'common_pvs': {
+                    'offenderType': 'KnownOffenderAge'
+                }
+            }
+        },
         {  # Offenders grouped into single bias / multiple bias
             'df': 'known_offender',
             'args': {
@@ -1197,12 +1286,29 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Offender'
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offender',
+                'common_pvs': {
+                    'offenderType': 'KnownOffenderRace'
+                }
             }
         }
     ],
     'offenders_offenderethnicity.csv': [
+        {  # Offenders grouped into single bias / multiple bias
+            'df': 'known_offender_ethnicity',
+            'args': {
+                'groupby_cols': [],
+                'agg_dict': {
+                    'TOTAL_OFFENDER_COUNT': 'sum'
+                },
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offender',
+                'common_pvs': {
+                    'offenderType': 'KnownOffenderEthnicity'
+                }
+            }
+        },
         {  # Offenders grouped into single bias / multiple bias
             'df': 'known_offender',
             'args': {
@@ -1210,8 +1316,11 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'TOTAL_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
-                'measurement_qualifier': 'Offender'
+                'population_type': 'CriminalIncidents',
+                'measurement_qualifier': 'Offender',
+                'common_pvs': {
+                    'offenderType': 'KnownOffenderEthnicity'
+                }
             }
         }
     ],
@@ -1223,10 +1332,11 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'ADULT_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender',
                 'common_pvs': {
-                    'offenderAge': '[18 - Years]'
+                    'offenderAge': '[18 - Years]',
+                    'offenderType': 'KnownOffenderAge'
                 }
             }
         }
@@ -1239,14 +1349,16 @@ _AGGREGATIONS = {
                 'agg_dict': {
                     'JUVENILE_OFFENDER_COUNT': 'sum'
                 },
-                'population_type': 'HateCrimeIncidents',
+                'population_type': 'CriminalIncidents',
                 'measurement_qualifier': 'Offender',
                 'common_pvs': {
-                    'offenderAge': '[- 17 Years]'
+                    'offenderAge': '[- 17 Years]',
+                    'offenderType': 'KnownOffenderAge'
                 }
             }
         }
-    ]
+    ],
+    
 }
 
 
@@ -1279,6 +1391,7 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
         incident_df = df.apply(_add_bias_category, axis=1)
         incident_df = incident_df.apply(_add_offender_category, axis=1)
         incident_df = incident_df.apply(_add_multiple_victims, axis=1)
+        incident_df = incident_df.apply(_add_multiple_locations, axis=1)
         incident_df.to_csv(incident_path, index=False)
     df_dict['incident_df'] = incident_df
 
@@ -1306,6 +1419,14 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
         victim_df = flatten_by_column(incident_df, 'VICTIM_TYPES')
         victim_df.to_csv(victim_path, index=False)
     df_dict['victim_df'] = victim_df
+
+    offense_victim_path = os.path.join(_CACHE_DIR, 'offense_victim.csv')
+    if use_cache and os.path.exists(offense_victim_path):
+        offense_victim_df = pd.read_csv(offense_victim_path)
+    else:
+        offense_victim_df = flatten_by_column(offense_df, 'VICTIM_TYPES')
+        offense_victim_df.to_csv(victim_path, index=False)
+    df_dict['offense_victim_df'] = offense_victim_df
 
     sb_incidents_path = os.path.join(_CACHE_DIR, 'sb_incidents.csv')
     if use_cache and os.path.exists(sb_incidents_path):
@@ -1347,6 +1468,9 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
                                      'KnownOffender']
         known_offender.to_csv(known_offender_path, index=False)
     df_dict['known_offender'] = known_offender
+    df_dict['known_offender_race'] = known_offender[(df['OFFENDER_RACE']!=np.nan) & (df['OFFENDER_RACE']!='Unknown')]
+    df_dict['known_offender_ethnicity'] = known_offender[(df['OFFENDER_ETHNICITY']!=np.nan) & (df['OFFENDER_ETHNICITY']!='Unknown')]
+    df_dict['known_offender_age'] = known_offender[(df['JUVENILE_OFFENDER_COUNT']!=np.nan) | (df['ADULT_OFFENDER_COUNT']!=np.nan)]
 
     os_victimtype_path = os.path.join(_CACHE_DIR, 'os_victimtype.csv')
     if use_cache and os.path.exists(os_victimtype_path):
@@ -1365,6 +1489,24 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
             offense_df['MULTIPLE_VICTIM_TYPE'] == 'M']
         offense_multiple_victimtype_df.to_csv(om_victimtype_path, index=False)
     df_dict['offense_multiple_victimtype_df'] = offense_multiple_victimtype_df
+
+    unq_offense_path = os.path.join(_CACHE_DIR, 'unq_offense.csv')
+    if use_cache and os.path.exists(unq_offense_path):
+        unq_offense_df = pd.read_csv(unq_offense_path)
+    else:
+        unq_offense_df = offense_df.drop_duplicates(
+            subset=['INCIDENT_ID', 'OFFENSE_CATEGORY'])
+        unq_offense_df.to_csv(unq_offense_path, index=False)
+    df_dict['unq_offense_df'] = unq_offense_df
+
+    unq_sb_offenses_path = os.path.join(_CACHE_DIR, 'unq_sb_offenses.csv')
+    if use_cache and os.path.exists(unq_sb_offenses_path):
+        unq_single_bias_offenses = pd.read_csv(unq_sb_offenses_path)
+    else:
+        unq_single_bias_offenses = single_bias_offenses.drop_duplicates(
+            subset=['INCIDENT_ID', 'OFFENSE_CATEGORY'])
+        unq_single_bias_offenses.to_csv(unq_sb_offenses_path, index=False)
+    df_dict['unq_single_bias_offenses'] = unq_single_bias_offenses
 
     return df_dict
 
@@ -1394,9 +1536,7 @@ def _add_offender_category(row):
 
     # If offender's age, race or ethnicity is known, then it is a known offender
     if (row['ADULT_OFFENDER_COUNT'] !=
-            np.nan) or (row['JUVENILE_OFFENDER_COUNT'] != np.nan) or (
-                row['OFFENDER_RACE'] != np.nan) or (row['OFFENDER_ETHNICITY'] !=
-                                                    np.nan):
+            np.nan) or (row['JUVENILE_OFFENDER_COUNT'] != np.nan) or ((row['OFFENDER_RACE'] != np.nan) and (row['OFFENDER_RACE'] != 'Unknown')) or ((row['OFFENDER_ETHNICITY'] != np.nan) and (row['OFFENDER_ETHNICITY'] != 'Unknown')):
         row['OFFENDER_CATEGORY'] = 'KnownOffender'
     return row
 
@@ -1408,6 +1548,15 @@ def _add_multiple_victims(row):
         row['MULTIPLE_VICTIM_TYPE'] = 'M'
     else:
         row['MULTIPLE_VICTIM_TYPE'] = 'S'
+    return row
+
+def _add_multiple_locations(row):
+    """A function to add the victim types. To be used with
+    pandas.DataFrame.apply()."""
+    if ';' in row['LOCATION_NAME']:
+        row['MULTIPLE_LOCATION_NAME'] = 'M'
+    else:
+        row['MULTIPLE_LOCATION_NAME'] = 'S'
     return row
 
 
@@ -1574,44 +1723,63 @@ if __name__ == '__main__':
     source_data_path = os.path.join(_SCRIPT_PATH, 'source_data',
                                     'hate_crime.csv')
     df = pd.read_csv(source_data_path, usecols=_INPUT_COLUMNS)
-
+    
     with open('config.json', 'r') as f:
         config = json.load(f)
+    
+    config_old = copy.deepcopy(config)
+    config_old['_COMMON_']['isHateCrime'] = 'True'
+    config_old['BIAS_CATEGORY']['TransgenderOrGenderNonConforming'] = {'biasMotivation':'TransgenderOrGenderNonConforming'}
+    config_old['_DPV_'] = []
 
-    df_dict = _create_df_dict(df, True)
+    _PREPEND_APPEND_REPLACE_MAP.pop('targetedRace', None)
+    _PREPEND_APPEND_REPLACE_MAP.pop('targetedEthnicity', None)
+    _PREPEND_APPEND_REPLACE_MAP.pop('targetedReligion', None)
+    _PREPEND_APPEND_REPLACE_MAP.pop('targetedSexualOrientation', None)
+    _PREPEND_APPEND_REPLACE_MAP.pop('targetedDisabilityStatus', None)
+    _PREPEND_APPEND_REPLACE_MAP.pop('targetedGender', None)
+
+    df_dict = _create_df_dict(df, False)
 
     # Incidents by StatVar
-    df_dict['incident_df'], statvar_list = _gen_statvar_mcf(
-        df_dict['incident_df'], config, population_type='HateCrimeIncidents')
+    # df_dict['incident_df'], statvar_list = _gen_statvar_mcf(
+    #     df_dict['incident_df'], config, population_type='HateCrimeIncidents')
 
-    incident_by_statvar = make_time_place_aggregation(
-        df_dict['incident_df'],
-        groupby_cols=['StatVar'],
-        agg_dict={'INCIDENT_ID': 'count'},
-        multi_index=False)
-    output_csv_path = os.path.join(_SCRIPT_PATH, 'output', 'output.csv')
-    _write_to_csv(pd.concat(incident_by_statvar), output_csv_path)
+    # incident_by_statvar = make_time_place_aggregation(
+    #     df_dict['incident_df'],
+    #     groupby_cols=['StatVar'],
+    #     agg_dict={'INCIDENT_ID': 'count'},
+    #     multi_index=False)
+    # output_csv_path = os.path.join(_SCRIPT_PATH, 'output', 'output.csv')
+    # _write_to_csv(pd.concat(incident_by_statvar), output_csv_path)
 
-    output_mcf_path = os.path.join(_SCRIPT_PATH, 'output', 'output.mcf')
-    with open(output_mcf_path, 'w') as f:
-        _write_statvar_mcf(statvar_list, f)
+    # output_mcf_path = os.path.join(_SCRIPT_PATH, 'output', 'output.mcf')
+    # with open(output_mcf_path, 'w') as f:
+    #     _write_statvar_mcf(statvar_list, f)
 
     # Aggregations
     statvar_list = []
+    final_columns = ['DATA_YEAR', 'Place', 'StatVar', 'Value']
     if not os.path.exists(os.path.join(_SCRIPT_PATH, 'aggregations')):
         os.mkdir(os.path.join(_SCRIPT_PATH, 'aggregations'))
 
+    all_aggr = []
     for file_name, aggregations in _AGGREGATIONS.items():
+        print(file_name)
         aggr_list = []
         for aggr_map in aggregations:
             aggr_df = df_dict[aggr_map['df']]
             if 'query' in aggr_map:
                 aggr_df = df_dict[aggr_map['df']].query(aggr_map['query'])
-            aggr = _create_aggr(aggr_df, config, statvar_list,
+            aggr = _create_aggr(aggr_df, config_old, statvar_list,
                                 **aggr_map['args'])
             aggr_list.extend(aggr)
+            all_aggr.extend(aggr)
         aggr_csv_path = os.path.join(_SCRIPT_PATH, 'aggregations', file_name)
-        _write_to_csv(pd.concat(aggr_list), aggr_csv_path)
+        _write_to_csv(pd.concat(aggr_list)[final_columns], aggr_csv_path)
+    
+    all_aggr_csv_path = os.path.join(_SCRIPT_PATH, 'aggregations', 'aggregation.csv')
+    _write_to_csv(pd.concat(all_aggr)[final_columns], all_aggr_csv_path)
 
     aggr_mcf_path = os.path.join(_SCRIPT_PATH, 'aggregations',
                                  'aggregation.mcf')

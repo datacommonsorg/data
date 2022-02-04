@@ -269,7 +269,7 @@ _BOOLEAN_PROPS = [
     'isGenomeRepresentationFull', 'isGift', 'isInternetUser',
     'isLiquefiedNaturalGasStored', 'isLiveBroadcast', 'isNaturalGasStored',
     'isPharmacodynamicRelationship', 'isPharmacokineticRelationship',
-    'isRefSeqGenBankAssembliesIdentical'
+    'isRefSeqGenBankAssembliesIdentical', 'isHateCrime'
 ]
 
 # To map stat vars which do not follow the conventions of stat var dcid naming
