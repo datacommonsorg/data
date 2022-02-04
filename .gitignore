@@ -1,11 +1,12 @@
 *.pyc
 __pycache__/
-.pylint.d/
 *.DS_Store
 .vscode/settings.json
 .env/
 .vscode/
 .idea/
 *.iml
-scripts/india_udise/udise_schools_with_functional_toilet/data/3061_*.json
-scripts/india_udise/udise_schools/data/1003_*.json
+scripts/india_udise/udise_school_dropout_rate/data/*.json
+scripts/india_udise/common/data/3061_*.json
+scripts/india_udise/common/data/1003_*.json
+**/tmp/
