@@ -1,0 +1,10 @@
+{
+  "s2lvls": [7, 8, 9],
+  "latcol": "latitude",
+  "lngcol": "longitude",
+  "valcol": "analysed_sst",
+  "datecol": "time",
+  "datefmt": "%Y-%m-%d",
+  "aggrfunc": "mean",
+  "containedIn": "europe"
+}
