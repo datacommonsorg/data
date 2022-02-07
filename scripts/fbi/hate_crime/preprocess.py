@@ -589,19 +589,17 @@ _AGGREGATIONS = {
             }
         }
     ],
-    'offense_victimtype.csv': [
-        {  # Offenses grouped by offense type
-            'df': 'offense_victim_df',
-            'args': {
-                'groupby_cols': ['VICTIM_TYPES'],
-                'agg_dict': {
-                    'INCIDENT_ID': 'count'
-                },
-                'population_type': 'CriminalIncidents',
-                'measurement_qualifier': 'Offense'
-            }
+    'offense_victimtype.csv': [{  # Offenses grouped by offense type
+        'df': 'offense_victim_df',
+        'args': {
+            'groupby_cols': ['VICTIM_TYPES'],
+            'agg_dict': {
+                'INCIDENT_ID': 'count'
+            },
+            'population_type': 'CriminalIncidents',
+            'measurement_qualifier': 'Offense'
         }
-    ],
+    }],
     'offense_offensetype_victimtype.csv': [
         {  # Offenses grouped by offense type
             'df': 'offense_single_victimtype_df',
@@ -1358,7 +1356,6 @@ _AGGREGATIONS = {
             }
         }
     ],
-    
 }
 
 
@@ -1468,9 +1465,14 @@ def _create_df_dict(df: pd.DataFrame, use_cache: bool = False) -> dict:
                                      'KnownOffender']
         known_offender.to_csv(known_offender_path, index=False)
     df_dict['known_offender'] = known_offender
-    df_dict['known_offender_race'] = known_offender[(df['OFFENDER_RACE']!=np.nan) & (df['OFFENDER_RACE']!='Unknown')]
-    df_dict['known_offender_ethnicity'] = known_offender[(df['OFFENDER_ETHNICITY']!=np.nan) & (df['OFFENDER_ETHNICITY']!='Unknown')]
-    df_dict['known_offender_age'] = known_offender[(df['JUVENILE_OFFENDER_COUNT']!=np.nan) | (df['ADULT_OFFENDER_COUNT']!=np.nan)]
+    df_dict['known_offender_race'] = known_offender[
+        (df['OFFENDER_RACE'] != np.nan) & (df['OFFENDER_RACE'] != 'Unknown')]
+    df_dict['known_offender_ethnicity'] = known_offender[
+        (df['OFFENDER_ETHNICITY'] != np.nan) &
+        (df['OFFENDER_ETHNICITY'] != 'Unknown')]
+    df_dict['known_offender_age'] = known_offender[
+        (df['JUVENILE_OFFENDER_COUNT'] != np.nan) |
+        (df['ADULT_OFFENDER_COUNT'] != np.nan)]
 
     os_victimtype_path = os.path.join(_CACHE_DIR, 'os_victimtype.csv')
     if use_cache and os.path.exists(os_victimtype_path):
@@ -1536,7 +1538,11 @@ def _add_offender_category(row):
 
     # If offender's age, race or ethnicity is known, then it is a known offender
     if (row['ADULT_OFFENDER_COUNT'] !=
-            np.nan) or (row['JUVENILE_OFFENDER_COUNT'] != np.nan) or ((row['OFFENDER_RACE'] != np.nan) and (row['OFFENDER_RACE'] != 'Unknown')) or ((row['OFFENDER_ETHNICITY'] != np.nan) and (row['OFFENDER_ETHNICITY'] != 'Unknown')):
+            np.nan) or (row['JUVENILE_OFFENDER_COUNT'] != np.nan) or (
+                (row['OFFENDER_RACE'] != np.nan) and
+                (row['OFFENDER_RACE'] != 'Unknown')) or (
+                    (row['OFFENDER_ETHNICITY'] != np.nan) and
+                    (row['OFFENDER_ETHNICITY'] != 'Unknown')):
         row['OFFENDER_CATEGORY'] = 'KnownOffender'
     return row
 
@@ -1549,6 +1555,7 @@ def _add_multiple_victims(row):
     else:
         row['MULTIPLE_VICTIM_TYPE'] = 'S'
     return row
+
 
 def _add_multiple_locations(row):
     """A function to add the victim types. To be used with
@@ -1723,13 +1730,15 @@ if __name__ == '__main__':
     source_data_path = os.path.join(_SCRIPT_PATH, 'source_data',
                                     'hate_crime.csv')
     df = pd.read_csv(source_data_path, usecols=_INPUT_COLUMNS)
-    
+
     with open('config.json', 'r') as f:
         config = json.load(f)
-    
+
     config_old = copy.deepcopy(config)
     config_old['_COMMON_']['isHateCrime'] = 'True'
-    config_old['BIAS_CATEGORY']['TransgenderOrGenderNonConforming'] = {'biasMotivation':'TransgenderOrGenderNonConforming'}
+    config_old['BIAS_CATEGORY']['TransgenderOrGenderNonConforming'] = {
+        'biasMotivation': 'TransgenderOrGenderNonConforming'
+    }
     config_old['_DPV_'] = []
 
     _PREPEND_APPEND_REPLACE_MAP.pop('targetedRace', None)
@@ -1777,8 +1786,9 @@ if __name__ == '__main__':
             all_aggr.extend(aggr)
         aggr_csv_path = os.path.join(_SCRIPT_PATH, 'aggregations', file_name)
         _write_to_csv(pd.concat(aggr_list)[final_columns], aggr_csv_path)
-    
-    all_aggr_csv_path = os.path.join(_SCRIPT_PATH, 'aggregations', 'aggregation.csv')
+
+    all_aggr_csv_path = os.path.join(_SCRIPT_PATH, 'aggregations',
+                                     'aggregation.csv')
     _write_to_csv(pd.concat(all_aggr)[final_columns], all_aggr_csv_path)
 
     aggr_mcf_path = os.path.join(_SCRIPT_PATH, 'aggregations',
