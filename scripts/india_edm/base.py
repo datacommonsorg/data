@@ -79,8 +79,8 @@ class EnergyIndiaBase():
 
     def _load_data(self):
         """
-        Method to collate all csv files under the data/{category}/ and return
-        a single dataframe
+        Method to collate all csv files under the data/{category}/ directory 
+	and return a single dataframe
         """
 
         data_path = os.path.join(module_dir, 'data/{}/'.format(self.cat))
@@ -101,8 +101,8 @@ class EnergyIndiaBase():
         Method to identify periodicity of the StatVar and fill the
         measurementQualifier (mQual) column.
         
-        Then, the date columns are combined to form one column 'Date'.
-        'Date' column will have YYYY-MM-DD format.
+        Then, the date, month and year columns are combined to form 
+	one column 'Date'. 'Date' column will have YYYY-MM-DD format.
         """
 
         # Month and Year are combined to 'Date' if Month is present
@@ -128,7 +128,7 @@ class EnergyIndiaBase():
 
     def _create_helper_columns(self, df, statvar):
         """
-        Method to create helper columns which in turn create the name of StatVar.
+        Method to create helper columns which in turn creates the name of StatVar.
         
         Five helper columns are created based on the data available:
             'mProp' has value of measuredProperty
@@ -141,6 +141,7 @@ class EnergyIndiaBase():
         corresponding dcids here.
         """
 
+	# Copying json entries to df as columns
         df['mProp'] = self.js_statvars[self.cat][statvar]['property']
         df['popType'] = self.js_statvars[self.cat][statvar]['popType']
         df['unit'] = self.js_statvars[self.cat][statvar]['unit']

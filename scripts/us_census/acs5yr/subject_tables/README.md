@@ -104,7 +104,26 @@ for data import
 test_s2702_summary.json # summary stats of data processing year-wise
 ```
 
-### Example Use cases (TBA):
-- Using the code module as-is : [S2702 import]()
+### Example Use cases:
+- Using the code module as-is : [S2702 import](s2702/)
 - Over-riding methods of the module to customize for specific tables [S1702
-  import]()
+  import](s1702/)
+
+## Resolving Census Place GeoID strings to DataCommons dcids
+There are different census summary levels at which subject table data are available. We use the [resolve_geo_id.py](common/resolve_geo_id.py) module to resolve the place dcids from the US census GeoID strings using the FIPS code.
+
+The summary levels that are now supported by the module include:
+|Summary level code|Summary level name|
+|--------------------|---------------------|
+|010|US Country-level|
+|040|State-level|
+|050|County-level|
+|060|State-County-County Subdivision|
+|140|Census tract|
+|150|Block group|
+|160|City/ Places|
+|500|Congressional district [111th]|
+|860|ZCTA|
+|950,960,970|School districts|
+
+The summary levels that are not mentioned in this table are currently not supported. In case, you come across more summary-levels to be added, please file an issue.

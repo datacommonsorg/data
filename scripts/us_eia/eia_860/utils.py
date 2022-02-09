@@ -48,7 +48,8 @@ def state_alpha2_to_dcid(alpha2: object) -> str:
 
 def zip_to_dcid(zip: object) -> str:
     if pd_types.is_number(zip):
-        return f'dcid:zip/{zip:0>5}'
+        # Specify 0 decimal places in the float->str conversion
+        return f'dcid:zip/{zip:0>5.0f}'
     return ''
 
 
@@ -58,28 +59,45 @@ def build_address(row: pd.Series) -> str:
     """
     zip = row["Zip"]
     if pd_types.is_number(zip):
-        zip = f'{zip:0>5}'
+        # Specify 0 decimal places in the float->str conversion
+        zip = f'{zip:0>5.0f}'
     return escape_value(
         f'{row["StreetAddress"]}, {row["City"]}, {row["State"]} {zip}')
 
 
+def utility_id_to_str(utility_id: object) -> str:
+    if pd_types.is_number(utility_id):
+        # Specify 0 decimal places in the float->str conversion
+        return f'{utility_id:.0f}'
+    return utility_id
+
+
 def utility_id_to_dcid(utility_id: object, prefix_dcid=False) -> str:
-    dcid = f'eia/u/{utility_id}'
+    dcid = f'eia/u/{utility_id_to_str(utility_id)}'
     if prefix_dcid:
         return f'dcid:{dcid}'
     return dcid
 
 
+def plant_code_to_str(plant_code: object) -> str:
+    if pd_types.is_number(plant_code):
+        # Specify 0 decimal places in the float->str conversion
+        return f'{plant_code:.0f}'
+    return plant_code
+
+
 def plant_code_to_dcid(plant_code: object) -> str:
-    return f'eia/pp/{plant_code}'
+    return f'eia/pp/{plant_code_to_str(plant_code)}'
 
 
 def naics_to_dcid(naics: object) -> str:
-    return f'NAICS/{naics}'
+    return f'NAICS/{naics:.0f}'
 
 
 def escape_value(value: object) -> str:
     """values that could include commas need to be escaped"""
+    if pd_types.is_number(value):
+        value = f'{value:.0f}'
     if value == '':
         return ''
     return f'\"{value}\"'
