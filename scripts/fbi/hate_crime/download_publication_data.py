@@ -1,3 +1,17 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""A script to scrape and download FBI Hate Crime table publications data."""
 import requests
 import os
 from bs4 import BeautifulSoup
@@ -15,14 +29,14 @@ flags.DEFINE_integer('start_year',
 flags.DEFINE_integer('end_year', 2019, 'End year(Min. 2005)', lower_bound=2005)
 flags.DEFINE_boolean('force_fetch', True,
                      'forces api query and not return cached result')
-flags.DEFINE_string('store_path', './source_data', 'Path to store the output')
-flags.DEFINE_string('cache_path', './source_data/.cache_html/',
+flags.DEFINE_string('store_path', './tmp', 'Path to store the output')
+flags.DEFINE_string('cache_path', './tmp/.cache_html/',
                     'Path to store the cached html files')
 flags.DEFINE_string('base_url', 'https://ucr.fbi.gov/hate-crime',
                     'The base url containing list of URLs for each year')
 
-# TODO store http errors
-# TODO log no access URL found
+# TODO(issue id here) store http errors
+# TODO(issue id here) log no access URL found
 
 # Headers to make request
 _HEADERS = {
@@ -38,7 +52,7 @@ years_with_no_table0 list help make this correction.
 _YEARS_WITH_NO_TABLE0 = ('2004', '2005', '2006', '2007')
 
 # dictionary to access status across method calls
-# TODO remove this as global variable
+# TODO(issue id here) remove this as global variable
 _STATUS_DICT = {
     'year_list': [str(x) for x in range(2005, 2020)],
     'output_dir': './source_data',
@@ -54,7 +68,7 @@ _STATUS_DICT = {
 }
 
 
-def get_abs_url(base_url: str, cur_url: str) -> str:
+def _get_abs_url(base_url: str, cur_url: str) -> str:
     """Convert relative URL to absolute URL.
   """
     ret_url = cur_url
@@ -66,8 +80,15 @@ def get_abs_url(base_url: str, cur_url: str) -> str:
     return ret_url
 
 
-def request_html_soup(cur_session, url: str):
+def request_html_soup(cur_session, url: str) -> tuple:
     """Get html text and bs4 object of the html from URL.
+    Args:
+        cur_session: requests session object which should be used to make url call.
+        url: The URL to be fetched.
+    Returns:
+        A tuple:
+            resp_html: The response HTML page text version.
+            resp_soup: BeautifulSoup object of the response HTML.
   """
     req = cur_session.get(url)
     if req.status_code == requests.codes.ok:
@@ -81,8 +102,13 @@ def request_html_soup(cur_session, url: str):
     return resp_html, resp_soup
 
 
-def find_year_url(html_soup, year_str: str) -> str:
+def _find_year_url(html_soup, year_str: str) -> str:
     """Find the URL for a given year from the base HTML list of URL for all years.
+    Args:
+        html_soup: BeautifulSoup object of the HTML page with year URL.
+        year_str: string version of the year for which the URL is to be found.
+    Returns:
+        URL to the page for the data of particular year.
   """
     year_url = None
     base_a_list = html_soup.find(id='content-core').find_all('a')
@@ -94,10 +120,12 @@ def find_year_url(html_soup, year_str: str) -> str:
     return year_url
 
 
-def find_access_tables_url() -> str:
+def _find_access_tables_url() -> str:
     """Find the URL to 'Access Tables' in the given HTML for the year.
   
   The method uses status variables set in the status_dict for context.
+    Returns:
+        URL to the page with list of all the tables for a particular year.
   """
     global _STATUS_DICT
     # fetch or return from cache
@@ -117,7 +145,7 @@ def find_access_tables_url() -> str:
             year_html = fp.read()
             year_soup = BeautifulSoup(year_html, features="html.parser")
 
-    # some year pages contain and iframe which has the actual html content, 
+    # some year pages contain and iframe which has the actual html content,
     # 1st iframe is used if multiple are found
     year_iframe_list = year_soup.find_all('iframe')
     if len(year_iframe_list) > 0:
@@ -144,7 +172,7 @@ def find_access_tables_url() -> str:
                     if not access_tables_found:
                         if cur2_a.string and 'access' in cur2_a.string.lower():
                             access_tables_found = True
-                            access_url = get_abs_url(
+                            access_url = _get_abs_url(
                                 _STATUS_DICT['cur_year_url'], access_url)
                         else:
                             all_b = cur2_a.find_all('b')
@@ -152,17 +180,19 @@ def find_access_tables_url() -> str:
                                 if not access_tables_found:
                                     if 'access' in cur_b.string.lower():
                                         access_tables_found = True
-                                        access_url = get_abs_url(
+                                        access_url = _get_abs_url(
                                             _STATUS_DICT['cur_year_url'],
                                             access_url)
     _STATUS_DICT['cur_access_url'] = access_url
     return access_url
 
 
-def find_table_html_url():
+def _find_table_html_url() -> list:
     """Find the URL list of HTML version of all the tables.
   
   The method uses status variables set in the status_dict for context.
+  Returns:
+        A list of URLs to the HTML page for all the tables for a particular year.
   """
     global _STATUS_DICT
     # fetch or return from cache
@@ -197,13 +227,15 @@ def find_table_html_url():
         _STATUS_DICT['table_html_url_list'] = []
     for i, cur_table_a in enumerate(tables_a_all):
         table_html_url = cur_table_a.get('href')
-        table_html_url = get_abs_url(_STATUS_DICT['cur_access_url'],
-                                     table_html_url)
+        table_html_url = _get_abs_url(_STATUS_DICT['cur_access_url'],
+                                      table_html_url)
         _STATUS_DICT['table_html_url_list'].append(table_html_url)
     return _STATUS_DICT['table_html_url_list']
 
 
-def find_table_xls_url():
+def _find_table_xls_url():
+    """Find the URL list of XLS version of all the tables and download them.
+  """
     global _STATUS_DICT
     for table_i, table_html_url in enumerate(
             _STATUS_DICT['table_html_url_list']):
@@ -238,7 +270,7 @@ def find_table_xls_url():
                 if cur_table_html_a.string and 'excel' in cur_table_html_a.string.lower(
                 ):
                     table_xls_url = cur_table_html_a.get('href')
-                    table_xls_url = get_abs_url(table_html_url, table_xls_url)
+                    table_xls_url = _get_abs_url(table_html_url, table_xls_url)
 
                     print(table_xls_url)
                     # store list of urls
@@ -260,6 +292,9 @@ def find_table_xls_url():
 
 
 def scrape_yearwise():
+    """The function controls the scrape flow and calls relevant functions for each stage.
+    Response from each stage is stored in the status_dict to be used for the next stage.
+    """
     global _STATUS_DICT
 
     session = requests.Session()
@@ -289,21 +324,22 @@ def scrape_yearwise():
 
     for cur_year in _STATUS_DICT['year_list']:
         _STATUS_DICT['cur_year'] = cur_year
-        year_url = find_year_url(base_soup, cur_year)
+        year_url = _find_year_url(base_soup, cur_year)
         if year_url:
             print(year_url)
             _STATUS_DICT['cur_year_url'] = year_url
-            output_path = os.path.join(_STATUS_DICT['output_dir'], f"{cur_year}")
+            output_path = os.path.join(_STATUS_DICT['output_dir'],
+                                       f"{cur_year}")
             if not os.path.exists(output_path):
                 os.makedirs(output_path, exist_ok=True)
             _STATUS_DICT['download_urls'][cur_year] = []
 
-            access_url = find_access_tables_url()
+            access_url = _find_access_tables_url()
 
             if access_url:
                 print(access_url)
-                find_table_html_url()
-                find_table_xls_url()
+                _find_table_html_url()
+                _find_table_xls_url()
             else:
                 print('No access tables url')
 
@@ -313,7 +349,7 @@ def scrape_yearwise():
 def main(argv):
     global _STATUS_DICT
     _STATUS_DICT['year_list'] = [
-        str(x) for x in range(FLAGS.start_year, FLAGS.end_year+1)
+        str(x) for x in range(FLAGS.start_year, FLAGS.end_year + 1)
     ]
     _STATUS_DICT['force_fetch'] = FLAGS.force_fetch
     _STATUS_DICT['output_dir'] = FLAGS.store_path
