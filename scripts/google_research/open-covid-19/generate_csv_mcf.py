@@ -425,8 +425,8 @@ def generate_geo_mcfs(observation_abouts: pd.Series) -> List[str]:
     """Generates node MCFs for geos that do not come with DCIDs
     for local resolution."""
     mcfs = []
-    template = ('Node: {iso}\n' 
-				'typeOf: schema:Place\n' 
+    template = ('Node: {iso}\n'
+				'typeOf: schema:Place\n'
 				'isoCode: "{iso}"\n')
     for value in observation_abouts.unique():
         if value.startswith('l:'):
