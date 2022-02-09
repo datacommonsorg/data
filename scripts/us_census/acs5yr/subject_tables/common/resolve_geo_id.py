@@ -96,11 +96,11 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     # Congressional district [111th] (fips_code length=4)
     '500': 'geoId/',
     # State Legislative District (Upper) (fips_code length=5)
-   '610': 'geoId/',
+    '610': 'geoId/',
     # State Legislative District (Lower) (fips_code length=5)
-   '620': 'geoId/',
+    '620': 'geoId/',
     # PUMA (public use microdata area) (fips_code length=?)
-   '795': '',
+    '795': '',
     # 5-Digit ZIP code Tabulation Area (fips_code length=5)
     '860': 'zip/',
     # State-School District [Elementary](fips_code length=7)
