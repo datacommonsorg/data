@@ -141,7 +141,7 @@ class EnergyIndiaBase():
         corresponding dcids here.
         """
 
-	# Copying json entries to df as columns
+        # Copying json entries to df as columns
         df['mProp'] = self.js_statvars[self.cat][statvar]['property']
         df['popType'] = self.js_statvars[self.cat][statvar]['popType']
         df['unit'] = self.js_statvars[self.cat][statvar]['unit']
