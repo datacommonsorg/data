@@ -1,0 +1,11 @@
+Node: E:IndiaEnergy_Coal->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaEnergy_Coal->StatVar
+observationDate: C:IndiaEnergy_Coal->Date
+observationAbout: E:IndiaEnergy_Coal->E1
+value: C:IndiaEnergy_Coal->value
+unit: C:IndiaEnergy_Coal->unit
+
+Node: E:IndiaEnergy_Coal->E1
+typeOf: schema:Place
+isoCode: C:IndiaEnergy_Coal->StateCode
