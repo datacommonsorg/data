@@ -39,6 +39,8 @@ Reference:
 
 # Map for summary levels with expected geo prefix
 _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
+    # Country-level, fips_code is expected to be empty string(fips_code length=1)
+    '010': 'country/USA',
     # State-level (fips_code length=2)
     '040': 'geoId/',
     # County-level (fips_code length=5)
@@ -51,6 +53,8 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     '150': 'geoId/',
     # City/ Places (fips_code length=7)
     '160': 'geoId/',
+    # Metropolitan and Micropolitan statistical area (fips_code length=?)
+    '310': 'geoId/C',
     # Congressional district [111th] (fips_code length=4)
     '500': 'geoId/',
     # 5-Digit ZIP code Tabulation Area (fips_code length=5)
@@ -60,9 +64,7 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     # State-School District [Secondary](fips_code length=7)
     '960': 'geoId/sch',
     # State-School District [Unified](fips_code length=7)
-    '970': 'geoId/sch',
-    # Country-level, fips_code is expected to be empty string(fips_code length=1)
-    '010': 'country/USA'
+    '970': 'geoId/sch'
 }
 
 _US_GEO_CODE_UPDATE_MAP = {
