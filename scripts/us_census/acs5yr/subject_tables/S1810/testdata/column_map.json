@@ -1,0 +1,1880 @@
+{
+    "2019": {
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population": {
+            "Node": "dcid:Count_Person_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!SEX!!Male": {
+            "Node": "dcid:Count_Person_WithDisability_Male",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!SEX!!Male": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_Male",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!SEX!!Female": {
+            "Node": "dcid:Count_Person_WithDisability_Female",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!SEX!!Female": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_Female",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone": {
+            "Node": "dcid:Count_Person_WithDisability_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone": {
+            "Node": "dcid:Count_Person_WithDisability_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone": {
+            "Node": "dcid:Count_Person_WithDisability_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone": {
+            "Node": "dcid:Count_Person_WithDisability_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone": {
+            "Node": "dcid:Count_Person_WithDisability_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone": {
+            "Node": "dcid:Count_Person_WithDisability_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:Count_Person_WithDisability_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:Count_Person_WithDisability_WhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_WhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)": {
+            "Node": "dcid:Count_Person_WithDisability_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!AGE!!Under 5 years": {
+            "Node": "dcid:Count_Person_5OrLessYears_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!AGE!!Under 5 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!AGE!!5 to 17 years": {
+            "Node": "dcid:Count_Person_5To17Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!AGE!!5 to 17 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!AGE!!18 to 34 years": {
+            "Node": "dcid:Count_Person_18To34Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!AGE!!18 to 34 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To34Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!AGE!!35 to 64 years": {
+            "Node": "dcid:Count_Person_35To64Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!AGE!!35 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_35To64Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!AGE!!65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!AGE!!65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!AGE!!75 years and over": {
+            "Node": "dcid:Count_Person_75OrMoreYears_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!AGE!!75 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_75OrMoreYears_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty": {
+            "Node": "dcid:Count_Person_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population under 18 years": {
+            "Node": "dcid:Count_Person_18OrLessYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population under 18 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18OrLessYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population under 18 years!!Population under 5 years": {
+            "Node": "dcid:Count_Person_5OrLessYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population under 18 years!!Population under 5 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population under 18 years!!Population 5 to 17 years": {
+            "Node": "dcid:Count_Person_5To17Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population under 18 years!!Population 5 to 17 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:Count_Person_18To64Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:Count_Person_18To34Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To34Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:Count_Person_35To64Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_35To64Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 65 years and over": {
+            "Node": "dcid:Count_Person_65OrMoreYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 65 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:Count_Person_75OrMoreYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a hearing difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_75OrMoreYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty": {
+            "Node": "dcid:Count_Person_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population under 18 years": {
+            "Node": "dcid:Count_Person_18OrLessYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population under 18 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18OrLessYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population under 18 years!!Population under 5 years": {
+            "Node": "dcid:Count_Person_5OrLessYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population under 18 years!!Population under 5 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population under 18 years!!Population 5 to 17 years": {
+            "Node": "dcid:Count_Person_5To17Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population under 18 years!!Population 5 to 17 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:Count_Person_18To64Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:Count_Person_18To34Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To34Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:Count_Person_35To64Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_35To64Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 65 years and over": {
+            "Node": "dcid:Count_Person_65OrMoreYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 65 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:Count_Person_75OrMoreYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a vision difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_75OrMoreYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty": {
+            "Node": "dcid:Count_Person_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population under 18 years": {
+            "Node": "dcid:Count_Person_18OrLessYears_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population under 18 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18OrLessYears_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:Count_Person_18To64Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:Count_Person_18To34Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To34Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:Count_Person_35To64Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_35To64Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 65 years and over": {
+            "Node": "dcid:Count_Person_65OrMoreYears_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 65 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:Count_Person_75OrMoreYears_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a cognitive difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_75OrMoreYears_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty": {
+            "Node": "dcid:Count_Person_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population under 18 years": {
+            "Node": "dcid:Count_Person_18OrLessYears_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population under 18 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18OrLessYears_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:Count_Person_18To64Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:Count_Person_18To34Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To34Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:Count_Person_35To64Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_35To64Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 65 years and over": {
+            "Node": "dcid:Count_Person_65OrMoreYears_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 65 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:Count_Person_75OrMoreYears_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an ambulatory difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_75OrMoreYears_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty": {
+            "Node": "dcid:Count_Person_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population under 18 years": {
+            "Node": "dcid:Count_Person_18OrLessYears_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population under 18 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18OrLessYears_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[- 18 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:Count_Person_18To64Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:Count_Person_18To34Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To34Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:Count_Person_35To64Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_35To64Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 65 years and over": {
+            "Node": "dcid:Count_Person_65OrMoreYears_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 65 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:Count_Person_75OrMoreYears_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With a self-care difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_75OrMoreYears_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty": {
+            "Node": "dcid:Count_Person_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:Count_Person_18To64Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 18 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:Count_Person_18To34Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 18 to 64 years!!Population 18 to 34 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To34Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[18 34 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:Count_Person_35To64Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 18 to 64 years!!Population 35 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_35To64Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[35 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 65 years and over": {
+            "Node": "dcid:Count_Person_65OrMoreYears_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 65 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 65 years and over!!Population 65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:Count_Person_75OrMoreYears_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!With a disability!!Total civilian noninstitutionalized population!!DISABILITY TYPE BY DETAILED AGE!!With an independent living difficulty!!Population 65 years and over!!Population 75 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_75OrMoreYears_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[75 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2013": {
+        "With a disability!!Estimate!!Total civilian noninstitutionalized population": {
+            "Node": "dcid:Count_Person_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Total civilian noninstitutionalized population": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population under 5 years": {
+            "Node": "dcid:Count_Person_5OrLessYears_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population under 5 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population under 5 years!!With a hearing difficulty": {
+            "Node": "dcid:Count_Person_5OrLessYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population under 5 years!!With a hearing difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population under 5 years!!With a vision difficulty": {
+            "Node": "dcid:Count_Person_5OrLessYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population under 5 years!!With a vision difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 5 to 17 years": {
+            "Node": "dcid:Count_Person_5To17Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 5 to 17 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 5 to 17 years!!With a hearing difficulty": {
+            "Node": "dcid:Count_Person_5To17Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 5 to 17 years!!With a hearing difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 5 to 17 years!!With a vision difficulty": {
+            "Node": "dcid:Count_Person_5To17Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 5 to 17 years!!With a vision difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 5 to 17 years!!With a cognitive difficulty": {
+            "Node": "dcid:Count_Person_5To17Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 5 to 17 years!!With a cognitive difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 5 to 17 years!!With an ambulatory difficulty": {
+            "Node": "dcid:Count_Person_5To17Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 5 to 17 years!!With an ambulatory difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 5 to 17 years!!With a self-care difficulty": {
+            "Node": "dcid:Count_Person_5To17Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 5 to 17 years!!With a self-care difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 18 to 64 years": {
+            "Node": "dcid:Count_Person_18To64Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 18 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 18 to 64 years!!With a hearing difficulty": {
+            "Node": "dcid:Count_Person_18To64Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 18 to 64 years!!With a hearing difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 18 to 64 years!!With a vision difficulty": {
+            "Node": "dcid:Count_Person_18To64Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 18 to 64 years!!With a vision difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 18 to 64 years!!With a cognitive difficulty": {
+            "Node": "dcid:Count_Person_18To64Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 18 to 64 years!!With a cognitive difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 18 to 64 years!!With an ambulatory difficulty": {
+            "Node": "dcid:Count_Person_18To64Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 18 to 64 years!!With an ambulatory difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 18 to 64 years!!With a self-care difficulty": {
+            "Node": "dcid:Count_Person_18To64Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 18 to 64 years!!With a self-care difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 18 to 64 years!!With an independent living difficulty": {
+            "Node": "dcid:Count_Person_18To64Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 18 to 64 years!!With an independent living difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_18To64Years_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[18 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 65 years and over": {
+            "Node": "dcid:Count_Person_65OrMoreYears_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 65 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_WithDisability",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 65 years and over!!With a hearing difficulty": {
+            "Node": "dcid:Count_Person_65OrMoreYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 65 years and over!!With a hearing difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_HearingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:HearingDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 65 years and over!!With a vision difficulty": {
+            "Node": "dcid:Count_Person_65OrMoreYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 65 years and over!!With a vision difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_VisionDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:VisionDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 65 years and over!!With a cognitive difficulty": {
+            "Node": "dcid:Count_Person_65OrMoreYears_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 65 years and over!!With a cognitive difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_CognitiveDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:CognitiveDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 65 years and over!!With an ambulatory difficulty": {
+            "Node": "dcid:Count_Person_65OrMoreYears_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 65 years and over!!With an ambulatory difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_AmbulatoryDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:AmbulatoryDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 65 years and over!!With a self-care difficulty": {
+            "Node": "dcid:Count_Person_65OrMoreYears_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 65 years and over!!With a self-care difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_SelfCareDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:SelfCareDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Population 65 years and over!!With an independent living difficulty": {
+            "Node": "dcid:Count_Person_65OrMoreYears_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Population 65 years and over!!With an independent living difficulty": {
+            "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_IndependentLivingDifficulty",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:IndependentLivingDifficulty",
+            "age": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!SEX!!Male": {
+            "Node": "dcid:Count_Person_WithDisability_Male",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!SEX!!Male": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_Male",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!SEX!!Female": {
+            "Node": "dcid:Count_Person_WithDisability_Female",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!SEX!!Female": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_Female",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race": {
+            "Node": "dcid:Count_Person_WithDisability_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!White alone": {
+            "Node": "dcid:Count_Person_WithDisability_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!White alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!Black or African American alone": {
+            "Node": "dcid:Count_Person_WithDisability_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!Black or African American alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!American Indian and Alaska Native alone": {
+            "Node": "dcid:Count_Person_WithDisability_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!American Indian and Alaska Native alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!Asian alone": {
+            "Node": "dcid:Count_Person_WithDisability_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!Asian alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!Native Hawaiian and Other Pacific Islander alone": {
+            "Node": "dcid:Count_Person_WithDisability_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!Native Hawaiian and Other Pacific Islander alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!Some other race alone": {
+            "Node": "dcid:Count_Person_WithDisability_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One Race!!Some other race alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:Count_Person_WithDisability_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:Count_Person_WithDisability_WhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_WhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Estimate!!Hispanic or Latino (of any race)": {
+            "Node": "dcid:Count_Person_WithDisability_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "With a disability!!Margin of Error!!Hispanic or Latino (of any race)": {
+            "Node": "dcid:MarginOfError_Count_Person_WithDisability_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "disabilityStatus": "dcs:WithDisability",
+            "race": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    }
+}
