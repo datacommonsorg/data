@@ -41,66 +41,22 @@ Reference:
 _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     # Country-level, fips_code is expected to be empty string(fips_code length=1)
     '010': 'country/USA',
-    # Region (fips_code length=?)
-    '020': '',
-    # Division (fips_code length=?)
-    '030': '',
     # State-level (fips_code length=2)
     '040': 'geoId/',
     # County-level (fips_code length=5)
     '050': 'geoId/',
     # State-County-County Subdivision (fips_code length=10)
     '060': 'geoId/',
-    # State-County-County Subdivision-Subminor Civil Division (fips_code length=?)
-    '067': '',
     # Census tract (fips_code length=11)
     '140': 'geoId/',
     # Block group (fips_code length=12)
     '150': 'geoId/',
     # City/ Places (fips_code length=7)
     '160': 'geoId/',
-    # State consolidated city (fips_code length=?)
-    '170': '',
-    # Alaska native regional corporation (fips_code length=?)
-    '230': '',
-    # American Indian Area/Alaska Native Area/Hawaiian Home Land (fips_code length=?)
-    '250': '',
-    # American Indian Area-Tribal Subdivision/Remainder (fips_code length=?)
-    '251': '',
-    # American Indian Area/Alaska Native Area (fips_code length=?)
-    '252': '',
-    # American Indian Area (Off-Reservation Trust Land Only)/Hawaiian Home Land (fips_code length=?)
-    '254': '',
-    # American Indian Area-Tribal Census Tract (fips_code length=?)
-    '256': '',
-    # American Indian Area/Alaska Native Area/Hawaiian Home Land-State (fips_code length=?)
-    '260': '',
     # Metropolitan and Micropolitan statistical area (fips_code length=?)
-    '310': '',
-    # Principal City (or part) within State within Metro/Micro Statistical Area (fips_code length=?)
-    '312': '',
-    # Metropolitan Division within Metropolitan Statistical Area (fips_code length=?)
-    '314': '',
-    # Combined Statistical Area (fips_code length=?)
-    '330': '',
-    # Combined New England City and Town Area  (fips_code length=?)
-    '335': '',
-    # New England City and Town Area (fips_code length=?)
-    '350': '',
-    # New England City and Town Area-State-Principal City (fips_code length=?)
-    '352': '',
-    # New England City and Town Area (NECTA)-NECTA Division (fips_code length=?)
-    '355': '',
-    # Urban Area (fips_code length=?)
-    '400': '',
+    '310': 'geoId/C',
     # Congressional district [111th] (fips_code length=4)
     '500': 'geoId/',
-    # State Legislative District (Upper) (fips_code length=5)
-    '610': 'geoId/',
-    # State Legislative District (Lower) (fips_code length=5)
-    '620': 'geoId/',
-    # PUMA (public use microdata area) (fips_code length=?)
-    '795': '',
     # 5-Digit ZIP code Tabulation Area (fips_code length=5)
     '860': 'zip/',
     # State-School District [Elementary](fips_code length=7)
