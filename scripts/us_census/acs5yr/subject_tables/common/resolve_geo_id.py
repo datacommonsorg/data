@@ -51,6 +51,8 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     '150': 'geoId/',
     # City/ Places (fips_code length=7)
     '160': 'geoId/',
+    # Metropolitan and Micropolitan statistical area (fips_code length=?)
+    '310': 'geoId/C',
     # Congressional district [111th] (fips_code length=4)
     '500': 'geoId/',
     # 5-Digit ZIP code Tabulation Area (fips_code length=5)
