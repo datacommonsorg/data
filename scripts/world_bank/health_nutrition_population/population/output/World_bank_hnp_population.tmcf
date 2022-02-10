@@ -1,0 +1,7 @@
+Node: E: WorldBankPopulation ->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C: WorldBankPopulation ->StatVar
+observationAbout: C:WorldBankPopulation ->Country
+observationDate: C:WorldBankPopulation->Year
+value: C: WorldBankPopulation ->Population
+unit: dcs:count
