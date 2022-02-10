@@ -1,4 +1,4 @@
-"""Tests for process.py. for S2201"""
+"""Tests for py. for S2201"""
 
 import csv
 import json
@@ -9,8 +9,8 @@ import unittest
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
-sys.path.insert(1, os.path.join(_CODEDIR, '..'))
-from common import process
+sys.path.insert(1, os.path.join(_CODEDIR, '.'))
+from .process import *
 
 _FEATURES = os.path.join(_CODEDIR, 'features.json')
 _STAT_VAR_LIST = os.path.join(_CODEDIR, 'stat_vars.csv')
@@ -25,11 +25,11 @@ class ProcessTest(unittest.TestCase):
         features = json.load(f)
         f.close()
         self.assertEqual(
-            process.convert_column_to_stat_var(
+            convert_column_to_stat_var(
                 'Estimate!!Households receiving food stamps/SNAP!!Households',
                 features), 'Count_Household_WithFoodStampsInThePast12Months')
         self.assertEqual(
-            process.convert_column_to_stat_var(
+            convert_column_to_stat_var(
                 'Margin of Error!!' +
                 'Households receiving food stamps/SNAP!!Households!!' +
                 'No children under 18 years!!Other family:!!' +
@@ -37,7 +37,7 @@ class ProcessTest(unittest.TestCase):
             'MarginOfError_Count_Household_WithFoodStampsInThePast12Months_' +
             'WithoutChildrenUnder18_SingleFatherFamilyHousehold')
         self.assertEqual(
-            process.convert_column_to_stat_var(
+            convert_column_to_stat_var(
                 'Estimate!!Households receiving food stamps/SNAP!!Households!!'
                 + 'HOUSEHOLD INCOME IN THE PAST 12 MONTHS' +
                 '(IN 2019 INFLATION-ADJUSTED DOLLARS)!!Median income (dollars)',
@@ -53,13 +53,12 @@ class ProcessTest(unittest.TestCase):
         f.close()
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_csv = os.path.join(tmp_dir, 'test_csv.csv')
-            process.create_csv(test_csv, stat_vars)
+            create_csv(test_csv, stat_vars)
             for year in range(2010, 2020):
                 filename = f'testACSST5Y{year}.csv'
                 with open(os.path.join(_TEST_DATA, filename)) as f:
                     reader = csv.DictReader(f)
-                    process.write_csv(filename, reader, test_csv, features,
-                                      stat_vars)
+                    write_csv(filename, reader, test_csv, features, stat_vars)
             with open(test_csv) as f_result:
                 test_result = f_result.read()
                 with open(os.path.join(_TEST_DATA, 'expected.csv')) as f_test:
@@ -76,7 +75,7 @@ class ProcessTest(unittest.TestCase):
         f.close()
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
-            process.create_tmcf(test_tmcf, features, stat_vars)
+            create_tmcf(test_tmcf, features, stat_vars)
             with open(test_tmcf) as f_result:
                 test_result = f_result.read()
                 with open(_EXPECTED_TMCF) as f_test:
