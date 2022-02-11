@@ -33,7 +33,7 @@ To date, all our util libraries cater to writing MCF.
 
 -   `statvar_dcid_generator`: This library helps to generate the dcid for
     statistical variables.
- 
+
 ### Testing libraries
 
 #### Testing `mcf_template_filler`

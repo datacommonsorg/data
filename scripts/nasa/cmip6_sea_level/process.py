@@ -15,7 +15,6 @@
 import csv
 import glob
 import os
-import requests
 import sys
 
 import xarray
@@ -151,54 +150,6 @@ def parse_sv_info(file_path):
 ###
 ### Recon helpers. Consider moving this to a common util.
 ###
-
-_RECON_ROOT = 'https://staging.recon.datacommons.org/coordinate/resolve'
-_RECON_COORD_BATCH_SIZE = 50
-
-
-def _call_resolve_coordinates(id2latlon, filter_fn):
-    revmap = {}
-    coords = []
-    for dcid, (lat, lon) in id2latlon.items():
-        coords.append({'latitude': lat, 'longitude': lon})
-        revmap[(lat, lon)] = dcid
-    result = {}
-    print('Calling recon API with a lat/lon list of', len(id2latlon))
-    resp = requests.post(_RECON_ROOT, json={'coordinates': coords})
-    resp.raise_for_status()
-    print('Got successful recon API response')
-    for coord in resp.json()['placeCoordinates']:
-        # Zero lat/lons are missing
-        # (https://github.com/datacommonsorg/mixer/issues/734)
-        if 'latitude' not in coord:
-            coord['latitude'] = 0.0
-        if 'longitude' not in coord:
-            coord['longitude'] = 0.0
-        key = (coord['latitude'], coord['longitude'])
-        assert key in revmap, key
-        cips = []
-        if 'placeDcids' in coord:
-            cips = coord['placeDcids']
-        if filter_fn:
-            result[revmap[key]] = filter_fn(cips)
-        else:
-            result[revmap[key]] = cips
-    return result
-
-
-def get_places_in(id2latlon, filter_fn=None):
-    batch = {}
-    result = {}
-    for dcid, (lat, lon) in id2latlon.items():
-        batch[dcid] = (lat, lon)
-        if len(batch) == _RECON_COORD_BATCH_SIZE:
-            result.update(_call_resolve_coordinates(batch, filter_fn))
-            batch = {}
-    if len(batch) > 0:
-        result.update(_call_resolve_coordinates(batch, filter_fn))
-    return result
-
-
 ###
 ### Code specific to SeaLevel NC files
 ###
