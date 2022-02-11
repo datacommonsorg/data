@@ -163,7 +163,7 @@ def _call_resolve_coordinates(id2latlon, filter_fn):
         coords.append({'latitude': lat, 'longitude': lon})
         revmap[(lat, lon)] = dcid
     result = {}
-    print('Calling recon API with a lat/lon list of ', len(id2latlon))
+    print('Calling recon API with a lat/lon list of', len(id2latlon))
     resp = requests.post(_RECON_ROOT, json={'coordinates': coords})
     resp.raise_for_status()
     print('Got successful recon API response')
