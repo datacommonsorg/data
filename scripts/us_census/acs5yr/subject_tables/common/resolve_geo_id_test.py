@@ -40,9 +40,11 @@ _TEST_GEOIDS = {
     '400C100US22069': '',  # Dalton, GA Urbanized Area (2010)[400C100US22069] 
     '1600000US1377652': 'geoId/1377652',  # Tucker city, Georgia 
     '1600000US1377625': 'geoId/1377652',  # Tucker city, Georgia
-    '9700000US0699999': '',  #Remainder of California for summary level code-970
-    '9600000US0699999': '',  #Remainder of California for summary level code-960
-    '9500000US0699999': ''  #Remainder of California for summary level code-950
+    '9700000US0699999':
+        '',  # Remainder of California for summary level code-970
+    '9600000US0699999':
+        '',  # Remainder of California for summary level code-960
+    '9500000US0699999': ''  # Remainder of California for summary level code-950
 }
 
 

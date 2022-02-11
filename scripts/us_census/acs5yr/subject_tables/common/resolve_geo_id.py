@@ -34,14 +34,11 @@ Reference:
 2. https://mcdc.missouri.edu/geography/sumlevs/
 """
 
-import re
-
 # Note 1: The summary level codes 950, 960, 970 which broadly belong to school districts  have duplicates. The duplicates are for places that are represented as "Remainder of <US State>" for which we do not have node on the KG.
-# Note 2: For places that are named in the subject table as "Remainder of <US State>" the length of the FIPS code matches for the summary level of school districts by they occur with a pattern that looks like `XX99999` where XX is the two digit state FIPS code. Since we know that this yields duplicate rows, we do not return the resolved geoIds for places containing `XX99999` pattern
+# Note 2: For places that are named in the subject table as "Remainder of <US State>" the length of the FIPS code matches for the summary level of school districts and the FIPS code ends with 5-`9`s. Since we know that this yields duplicate rows, we return an empty string for all FIPS code that ends with 5-`9`s
 
 # Map for summary levels with expected geo prefix
 _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
-    # TODO: For the inital release, geos are restricted to state/county/places.
     # State-level (fips_code length=2)
     '040': 'geoId/',
     # County-level (fips_code length=5)
@@ -71,7 +68,7 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
 _US_GEO_CODE_UPDATE_MAP = {
     # Replacing/Updating GeoID given in the data. Required in case of wrong geoid mentioned in the data.
     # Reference : https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2017/geography-changes.html
-    # Invalid fips code for Tucker City 1377625 replaced by 1377652
+    # Invalid FIPS code for Tucker City 1377625 replaced by 1377652
     '1377625': '1377652'
 }
 
@@ -84,8 +81,9 @@ def convert_to_place_dcid(geoid_str):
 
     summary_level = geographic_component[:3]
 
-    ## Based on summary level, generate place dcid
+    ## Based on summary level and FIPS code generate place dcid
     if summary_level in _US_SUMMARY_LEVEL_GEO_PREFIX_MAP:
+<<<<<<< HEAD
         ## Update FIPS code if it was changed
         if fips_code in _US_GEO_CODE_UPDATE_MAP:
             fips_code = _US_GEO_CODE_UPDATE_MAP[fips_code]
@@ -95,6 +93,15 @@ def convert_to_place_dcid(geoid_str):
         if bool(matched):
             return ''
         ## Return resolved geoId
+=======
+        ## Update FIPS code
+        if fips_code in _US_GEO_CODE_UPDATE_MAP:
+            fips_code = _US_GEO_CODE_UPDATE_MAP[fips_code]
+
+        ## Skip resolving geoIds for "Remainder of <US State>" school districts that ends with 5-(9)'s
+        if fips_code.endswith('99999'):
+            return ''
+>>>>>>> f42d091b4d43ce17b821e9ba6f91d70d58b29f61
         return _US_SUMMARY_LEVEL_GEO_PREFIX_MAP[summary_level] + fips_code
     else:
         ## if not an interesting summary level
