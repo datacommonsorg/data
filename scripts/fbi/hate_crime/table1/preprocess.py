@@ -24,7 +24,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../../../../util/'))  # for statvar_dcid_generator
 
-from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
+from statvar_dcid_generator import get_statvar_dcid
 
 YEAR_INDEX = 0
 
@@ -173,14 +173,14 @@ YEARWISE_CONFIG = {
 }
 
 
-def _create_csv_mcf(csv_files: list, cleaned_csv_path: str,
+def _create_csv_mcf(csv_file_list: list, final_csv_path: str,
                     config: dict) -> list:
-    """Creates StatVars according to values in csv_files and write the final
+    """Creates StatVars according to values in csv_file_list and write the final
     output to a csv.
 
     Args:
-        csv_files: A list of CSV file paths to process.
-        cleaned_csv_path: Path of the final cleaned CSV file.
+        csv_file_list: A list of CSV file paths to process.
+        final_cleaned_csv_path: Path of the final cleaned CSV file.
         config: A dict which maps constraint props to the statvar based on
           values in the CSV. See scripts/fbi/hate_crime/table1/config.json for
           an example.
@@ -189,12 +189,12 @@ def _create_csv_mcf(csv_files: list, cleaned_csv_path: str,
         A list of statvars.
     """
     statvars = []
-    with open(cleaned_csv_path, 'w') as output_f:
+    with open(final_csv_path, 'w', encoding='utf8') as output_f:
         writer = csv.DictWriter(output_f, fieldnames=OUTPUT_COLUMNS)
         writer.writeheader()
 
-        for csv_file in csv_files:
-            with open(csv_file, 'r') as input_f:
+        for csv_file in csv_file_list:
+            with open(csv_file, 'r', encoding='utf8') as input_f:
                 reader = csv.DictReader(input_f)
                 statvars_list = _write_output_csv(reader, writer, config)
                 statvars.extend(statvars_list)
@@ -314,7 +314,7 @@ def _create_mcf(stat_vars: list, mcf_file_path: str):
         statvar_mcf = 'Node: dcid:' + dcid + '\n' + '\n'.join(statvar_mcf_list)
         final_mcf += statvar_mcf + '\n\n'
 
-    with open(mcf_file_path, 'w') as f:
+    with open(mcf_file_path, 'w', encoding='utf8') as f:
         f.write(final_mcf)
 
 
@@ -350,7 +350,7 @@ if __name__ == '__main__':
             csv_files.append(csv_file_path)
 
         config_path = os.path.join(_SCRIPT_PATH, 'config.json')
-        with open(config_path, 'r') as f:
+        with open(config_path, 'r', encoding='utf8') as f:
             config = json.load(f)
 
         cleaned_csv_path = os.path.join(_SCRIPT_PATH, 'cleaned.csv')
