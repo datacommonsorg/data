@@ -85,17 +85,6 @@ def convert_to_place_dcid(geoid_str):
 
     ## Based on summary level and FIPS code generate place dcid
     if summary_level in _US_SUMMARY_LEVEL_GEO_PREFIX_MAP:
-<<<<<<< HEAD
-        ## Update FIPS code if it was changed
-        if fips_code in _US_GEO_CODE_UPDATE_MAP:
-            fips_code = _US_GEO_CODE_UPDATE_MAP[fips_code]
-        ## Resolve FIPS code for Remainder of a <US State> with empty geoId
-        pattern = "[0-9][0-9]99999$"  # FIPS code of pattern XX99999
-        matched = re.match(pattern, fips_code)
-        if bool(matched):
-            return ''
-        ## Return resolved geoId
-=======
         ## Update FIPS code
         if fips_code in _US_GEO_CODE_UPDATE_MAP:
             fips_code = _US_GEO_CODE_UPDATE_MAP[fips_code]
@@ -103,7 +92,6 @@ def convert_to_place_dcid(geoid_str):
         ## Skip resolving geoIds for "Remainder of <US State>" school districts that ends with 5-(9)'s
         if fips_code.endswith('99999'):
             return ''
->>>>>>> f42d091b4d43ce17b821e9ba6f91d70d58b29f61
         return _US_SUMMARY_LEVEL_GEO_PREFIX_MAP[summary_level] + fips_code
     else:
         ## if not an interesting summary level
