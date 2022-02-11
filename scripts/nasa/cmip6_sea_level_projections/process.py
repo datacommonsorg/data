@@ -36,9 +36,10 @@ flags.DEFINE_string('generate_what', 'stat',
 
 
 ## Fields for the config
+_MMETHOD = 'mmethod'  # Value is the measurement method
+_NCVAR = 'ncvar'  # Value is variable name in NetCDF4 file
 _PV = 'pv'  # Value is a list of PVs in MCF format
 _SVID = 'svid'  # Value is a pair of (SV ID part, rank)
-_NCVAR = 'ncvar'  # Value is variable name in NetCDF4 file
 _UNIT = 'unit'  # Value is DC unit
 
 #
@@ -92,12 +93,10 @@ _SV_CONFIG = {
         _SVID: ('SSP585', 2),
     },
     'low': {
-        _PV: ['ipccConfidenceLevel: dcs:IPCC_LowConfidence'],
-        _SVID: ('LowConfidence', 3),
+        _MMETHOD: 'IPCC_LowConfidence',
     },
     'medium': {
-        _PV: ['ipccConfidenceLevel: dcs:IPCC_MediumConfidence'],
-        _SVID: ('MediumConfidence', 3),
+        _MMETHOD: 'IPCC_MediumConfidence',
     },
 }
 
@@ -117,18 +116,25 @@ def parse_sv_info(file_path):
             continue
         part_info = _SV_CONFIG[part]
 
-        sv_info[_PV].extend(part_info[_PV])
+        if _PV in part_info:
+            sv_info[_PV].extend(part_info[_PV])
 
-        id_pair = part_info[_SVID]
-        assert id_pair[1] not in sv_id_parts, sv_id_parts
-        sv_id_parts[id_pair[1]] = id_pair[0]
+        if _SVID in part_info:
+            id_pair = part_info[_SVID]
+            assert id_pair[1] not in sv_id_parts, sv_id_parts
+            sv_id_parts[id_pair[1]] = id_pair[0]
 
         if _NCVAR in part_info:
             assert _NCVAR not in sv_info
             sv_info[_NCVAR] = part_info[_NCVAR]
+
         if _UNIT in part_info:
             assert _UNIT not in sv_info
             sv_info[_UNIT] = part_info[_UNIT]
+
+        if _MMETHOD in part_info:
+            assert _MMETHOD not in sv_info
+            sv_info[_MMETHOD] = part_info[_MMETHOD]
 
     assert _NCVAR in sv_info, 'Could not map to an ncvar for: ' + fname
     sv_info[_SVID] = '_'.join([sv_id_parts[i] for i in sorted(sv_id_parts)])
@@ -155,6 +161,12 @@ def _call_resolve_coordinates(id2latlon, filter_fn):
     resp.raise_for_status()
     print('Got successful recon API response')
     for coord in resp.json()['placeCoordinates']:
+        # Zero lat/lons are missing
+        # (https://github.com/datacommonsorg/mixer/issues/734)
+        if 'latitude' not in coord:
+            coord['latitude'] = 0.0
+        if 'longitude' not in coord:
+            coord['longitude'] = 0.0
         key = (coord['latitude'], coord['longitude'])
         assert key in revmap, key
         cips = []
@@ -177,7 +189,6 @@ def get_places_in(id2latlon, filter_fn=None):
             batch = {}
     if len(batch) > 0:
         result.update(_call_resolve_coordinates(batch, filter_fn))
-    print(result)
     return result
 
 
@@ -239,21 +250,24 @@ def to_sv(quantile, sv_info):
     return 'dcid:' + prefix + '_' + sv_info[_SVID]
 
 
-def process_statvars(in_file, out_fp):
+def process_statvars(in_file, out_fp, added_svs):
     sv_info = parse_sv_info(in_file)
     out_fp.write('# From file ' + _fname(in_file) + '\n\n')
     for prop, prefix in [('maxValue', 'Max'), ('minValue', 'Min'),
                          ('medianValue', 'Median'),
                          ('percentile10', 'Percentile10'),
-                         ('percentile10', 'Percentile90')]:
+                         ('percentile90', 'Percentile90')]:
         sv_id = prefix + '_' + sv_info[_SVID]
         prefix_parts = [
             'Node: dcid:' + sv_id,
             'typeOf: dcs:StatisticalVariable',
             'statType: dcs:' + prop
         ]
+        if sv_id in added_svs:
+            continue
         out_fp.write('\n'.join(prefix_parts + sv_info[_PV]))
         out_fp.write('\n\n')
+        added_svs.add(sv_id)
 
 
 def process_stats(in_file, out_dir):
@@ -272,7 +286,9 @@ def process_stats(in_file, out_dir):
     df['observationDate'] = df['years'].astype(str)
     df['value'] = df[ncvar]
     if _UNIT in sv_info:
-        df[_UNIT] = 'dcs:' + sv_info[_UNIT]
+        df['unit'] = 'dcs:' + sv_info[_UNIT]
+    if _MMETHOD in sv_info:
+        df['measurementMethod'] = 'dcs:' + sv_info[_MMETHOD]
     df.drop(['locations', 'years', 'quantiles', ncvar], axis=1, inplace=True)
     print(df.head())
     df.to_csv(os.path.join(out_dir, _fname(in_file) + '.csv'), index=False)
@@ -306,10 +322,10 @@ def process_places(in_file, out_dir):
     df.to_csv(os.path.join(out_dir, 'sea_level_places.csv'), index=False)
 
 
-def process(in_pattern, func, arg):
+def process(in_pattern, func, *args):
     for file in glob.glob(in_pattern):
         print('Processing file:', file)
-        func(file, arg)
+        func(file, *args)
 
 
 def main(_):
@@ -320,7 +336,8 @@ def main(_):
     elif FLAGS.generate_what == 'sv':
         out_file = os.path.join(FLAGS.out_dir, 'sea_level_stat_vars.mcf')
         with open(out_file, 'w') as fp:
-            process(FLAGS.in_pattern, process_statvars, fp)
+            added_svs = set()
+            process(FLAGS.in_pattern, process_statvars, fp, added_svs)
     else:
         process(FLAGS.in_pattern, process_stats, FLAGS.out_dir)
 

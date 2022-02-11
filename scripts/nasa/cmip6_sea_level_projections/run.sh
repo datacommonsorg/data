@@ -7,14 +7,6 @@ python3 process.py \
   --in_pattern=scratch/Regional/*/ssp*/total_*.nc \
   --out_dir=scratch
 
-# Generate Places (one file is sufficient!)
-python3 process.py \
-  --generate_what=place \
-  --in_pattern=scratch/Regional/medium_confidence/ssp245/total_ssp245_medium_confidence_values.nc \
-  --out_dir=scratch
-
-exit
-
 # Generate Global Stats
 mkdir -p scratch/Global/generated
 python3 process.py \
@@ -29,3 +21,9 @@ python3 process.py \
   --generate_what=stat \
   --in_pattern=scratch/Regional/medium_confidence/ssp*/total_*.nc \
   --out_dir=scratch/Regional/generated
+
+# Generate Places (one file is sufficient!)
+python3 process.py \
+  --generate_what=place \
+  --in_pattern=scratch/Regional/medium_confidence/ssp245/total_ssp245_medium_confidence_values.nc \
+  --out_dir=scratch
