@@ -29,11 +29,9 @@ flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
 flags.DEFINE_string('generate_what', 'stat',
                     'What to generate: place, sv, stat')
 
-
 ###
 ### Potentially general NetCDF4 processing config/code
 ###
-
 
 ## Fields for the config
 _MMETHOD = 'mmethod'  # Value is the measurement method
@@ -51,45 +49,54 @@ _UNIT = 'unit'  # Value is DC unit
 #
 _SV_CONFIG = {
     'values': {
-        _PV: ['populationType: dcs:SeaBodyOfWater',
-               'measuredProperty: dcs:surfaceLevel',
-               'measurementQualifier: dcs:DifferenceRelativeToBaseDate',
-               'baseDate: dcs:CMIP6ReferencePeriod'],
+        _PV: [
+            'populationType: dcs:SeaBodyOfWater',
+            'measuredProperty: dcs:surfaceLevel',
+            'measurementQualifier: dcs:DifferenceRelativeToBaseDate',
+            'baseDate: dcs:CMIP6ReferencePeriod'
+        ],
         _SVID: ('DifferenceRelativeToCMIP6ReferenceDate_SeaLevel', 1),
         _NCVAR: 'sea_level_change',
         _UNIT: 'Meter',
     },
     'rates': {
-        _PV: ['populationType: dcs:SeaBodyOfWater',
-               'measuredProperty: dcs:surfaceLevel',
-               'measurementQualifier: dcs:RateOfChange'],
+        _PV: [
+            'populationType: dcs:SeaBodyOfWater',
+            'measuredProperty: dcs:surfaceLevel',
+            'measurementQualifier: dcs:RateOfChange'
+        ],
         _SVID: ('RateOfChange_SeaLevel', 1),
         _NCVAR: 'sea_level_change_rate',
         _UNIT: 'MillimeterPerYear',
     },
     'ssp119': {
-        _PV: ['socioeconomicScenario: dcs:SSP1',
-               'emissionsScenario: dcs:RCP1.9'],
+        _PV: [
+            'socioeconomicScenario: dcs:SSP1', 'emissionsScenario: dcs:RCP1.9'
+        ],
         _SVID: ('SSP119', 2),
     },
     'ssp126': {
-        _PV: ['socioeconomicScenario: dcs:SSP1',
-               'emissionsScenario: dcs:RCP2.6'],
+        _PV: [
+            'socioeconomicScenario: dcs:SSP1', 'emissionsScenario: dcs:RCP2.6'
+        ],
         _SVID: ('SSP126', 2),
     },
     'ssp245': {
-        _PV: ['socioeconomicScenario: dcs:SSP2',
-               'emissionsScenario: dcs:RCP4.5'],
+        _PV: [
+            'socioeconomicScenario: dcs:SSP2', 'emissionsScenario: dcs:RCP4.5'
+        ],
         _SVID: ('SSP245', 2),
     },
     'ssp370': {
-        _PV: ['socioeconomicScenario: dcs:SSP3',
-               'emissionsScenario: dcs:RCP7.0'],
+        _PV: [
+            'socioeconomicScenario: dcs:SSP3', 'emissionsScenario: dcs:RCP7.0'
+        ],
         _SVID: ('SSP370', 2),
     },
     'ssp585': {
-        _PV: ['socioeconomicScenario: dcs:SSP5',
-               'emissionsScenario: dcs:RCP8.5'],
+        _PV: [
+            'socioeconomicScenario: dcs:SSP5', 'emissionsScenario: dcs:RCP8.5'
+        ],
         _SVID: ('SSP585', 2),
     },
     'low': {
@@ -145,9 +152,9 @@ def parse_sv_info(file_path):
 ### Recon helpers. Consider moving this to a common util.
 ###
 
-
 _RECON_ROOT = 'https://staging.recon.datacommons.org/coordinate/resolve'
 _RECON_COORD_BATCH_SIZE = 50
+
 
 def _call_resolve_coordinates(id2latlon, filter_fn):
     revmap = {}
@@ -259,8 +266,7 @@ def process_statvars(in_file, out_fp, added_svs):
                          ('percentile90', 'Percentile90')]:
         sv_id = prefix + '_' + sv_info[_SVID]
         prefix_parts = [
-            'Node: dcid:' + sv_id,
-            'typeOf: dcs:StatisticalVariable',
+            'Node: dcid:' + sv_id, 'typeOf: dcs:StatisticalVariable',
             'statType: dcs:' + prop
         ]
         if sv_id in added_svs:
@@ -300,8 +306,8 @@ def process_places(in_file, out_dir):
     df_lon = ds['lon'].to_dataframe()
     df = df_lat.join(df_lon)
     df = df.reset_index()
-    df['latitude'] = df['lat'].apply(lambda x: float('%.4f'%(x)))
-    df['longitude'] = df['lon'].apply(lambda x: float('%.4f'%(x)))
+    df['latitude'] = df['lat'].apply(lambda x: float('%.4f' % (x)))
+    df['longitude'] = df['lon'].apply(lambda x: float('%.4f' % (x)))
     df['typeOf'] = df['locations'].apply(to_place_type)
     df['dcid'] = df['locations'].apply(to_place_dcid)
 
@@ -312,8 +318,8 @@ def process_places(in_file, out_dir):
             id2latlon[row['dcid']] = (row['latitude'], row['longitude'])
 
     # Filter out just countries and include Earth.
-    id2cip = get_places_in(
-        id2latlon, lambda l: [x for x in l if 'country/' in x])
+    id2cip = get_places_in(id2latlon,
+                           lambda l: [x for x in l if 'country/' in x])
 
     df['containedInPlace'] = df['locations'].apply(
         lambda x: to_contained_places(x, id2cip))
