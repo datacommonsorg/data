@@ -59,9 +59,9 @@ _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
 _CONSTRAINT_PREFIX_REGEX = re.compile(
     r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED|UCR))(?P<ucase_uscore>[A-Z_])')
 
-# Mutliple values can be assigned to a property by separating each value with 
+# Mutliple values can be assigned to a property by separating each value with
 # '__' or '&'. To represent ParkOrPlayground for location of crime, we can have
-# p=locationOfCrime and v=Park__Playground or v=Park&Playground. 
+# p=locationOfCrime and v=Park__Playground or v=Park&Playground.
 # In the dcid, this will be represented as 'ParkOrPlayground'.
 _MULTIPLE_VALUE_SEPARATOR_REGEX = re.compile(r'__|&')
 
