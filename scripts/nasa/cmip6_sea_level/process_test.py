@@ -57,10 +57,11 @@ class ProcessTest(unittest.TestCase):
         input_pattern = os.path.join(_TESTDIR, 'input/*.nc')
         with tempfile.TemporaryDirectory() as tmp_dir:
             process.process_main('stat', input_pattern, tmp_dir)
-            for fname in ['total_ssp119_medium_confidence_values',
-                          'total_ssp119_medium_confidence_rates']:
+            for fname in [
+                    'total_ssp119_medium_confidence_values',
+                    'total_ssp119_medium_confidence_rates'
+            ]:
                 with open(os.path.join(_TESTDIR,
                                        'expected/' + fname + '.csv')) as wantf:
                     with open(os.path.join(tmp_dir, fname + '.csv')) as gotf:
                         self.assertEqual(gotf.read(), wantf.read())
-

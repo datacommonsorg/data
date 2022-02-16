@@ -29,7 +29,6 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))  # for recon util
 import latlng_recon_service
 import latlng_recon_geojson
 
-
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('in_pattern', '', 'Input NetCDF4 file(s).')
