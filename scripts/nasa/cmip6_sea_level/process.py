@@ -17,6 +17,7 @@ import glob
 import os
 import sys
 
+import numpy as np
 import xarray
 from absl import app
 from absl import flags
@@ -261,6 +262,8 @@ def process_places(in_file, out_dir):
     df_lat = ds['lat'].to_dataframe()
     df_lon = ds['lon'].to_dataframe()
     df = df_lat.join(df_lon)
+    df.replace([np.inf, -np.inf], np.nan, inplace=True)
+    df = df.dropna()
     df = df.reset_index()
     df['latitude'] = df['lat'].apply(lambda x: float('%.4f' % (x)))
     df['longitude'] = df['lon'].apply(lambda x: float('%.4f' % (x)))
@@ -288,18 +291,22 @@ def process(in_pattern, func, *args):
         func(file, *args)
 
 
-def main(_):
-    if FLAGS.generate_what == 'place':
-        assert len(glob.glob(FLAGS.in_pattern)) == 1, \
+def process_main(generate_what, in_pattern, out_dir):
+    if generate_what == 'place':
+        assert len(glob.glob(in_pattern)) == 1, \
             '--generate_what=place needs 1 file'
-        process(FLAGS.in_pattern, process_places, FLAGS.out_dir)
-    elif FLAGS.generate_what == 'sv':
-        out_file = os.path.join(FLAGS.out_dir, 'sea_level_stat_vars.mcf')
+        process(in_pattern, process_places, out_dir)
+    elif generate_what == 'sv':
+        out_file = os.path.join(out_dir, 'sea_level_stat_vars.mcf')
         with open(out_file, 'w') as fp:
             added_svs = set()
-            process(FLAGS.in_pattern, process_statvars, fp, added_svs)
+            process(in_pattern, process_statvars, fp, added_svs)
     else:
-        process(FLAGS.in_pattern, process_stats, FLAGS.out_dir)
+        process(in_pattern, process_stats, out_dir)
+
+
+def main(_):
+    process_main(FLAGS.generate_what, FLAGS.in_pattern, FLAGS.out_dir)
 
 
 if __name__ == "__main__":
