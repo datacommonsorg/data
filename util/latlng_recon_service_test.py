@@ -29,6 +29,7 @@ class LatlngReconServiceTest(unittest.TestCase):
     def test_basic(self):
         idmap_in = {
             'cascal_mtv': (37.391, -122.081),
+            'besant_beach_chennai': (12.998, 80.272),
             'farallon_islands': (37.700, -123.015)
         }
         idmap_out = latlng_recon_service.latlng2places(idmap_in)
@@ -37,6 +38,10 @@ class LatlngReconServiceTest(unittest.TestCase):
             'geoId/sch0626280', 'geoId/0649670', 'geoId/0618',
             'geoId/0608592830', 'geoId/06085509600', 'geoId/06085', 'geoId/06',
             'country/USA'
+        ])
+        self.assertEqual(idmap_out['besant_beach_chennai'], [
+            'wikidataId/Q15116', 'wikidataId/Q1445', 'ipcc_50/12.75_80.25_IND',
+            'country/IND'
         ])
         self.assertEqual(idmap_out['farallon_islands'], [])
 
