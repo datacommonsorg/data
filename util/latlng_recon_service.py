@@ -11,7 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""A library that uses the recon service to map lat/lng to DC places."""
+"""A library that uses the recon service to map lat/lng to DC places.
+
+See latlng_recon_service_test.py for usage example.
+"""
 
 import requests
 

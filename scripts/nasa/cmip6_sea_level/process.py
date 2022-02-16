@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Code for processing CMIP6 Sea-level rise projections in netcdf4 format.
+
 import csv
 import glob
 import os
@@ -44,6 +46,8 @@ flags.DEFINE_string('generate_what', 'stat',
 _MMETHOD = 'mmethod'  # Value is the measurement method
 _NCVAR = 'ncvar'  # Value is variable name in NetCDF4 file
 _PV = 'pv'  # Value is a list of PVs in MCF format
+# The rank determines the order in which the SV ID part shows up in the
+# constructed StatVar DCID (lower rank => ordered earlier).
 _SVID = 'svid'  # Value is a pair of (SV ID part, rank)
 _UNIT = 'unit'  # Value is DC unit
 
@@ -159,11 +163,14 @@ def parse_sv_info(file_path):
 ### Code specific to SeaLevel NC files
 ###
 
+# Per README: "A simple filter would be IDs greater than 10^9 are global grid
+#              locations. IDs less than 10^9 are tide gauges."
+_PSMSL_ID_THRESHOLD = 1000000000
 
 def to_place_dcid(location, prefix=''):
     if location == -1:
         return prefix + 'Earth'
-    elif location < 1000000000:
+    elif location < _PSMSL_ID_THRESHOLD:
         return prefix + 'psmslId/' + str(location)
     else:
         # Global grid location IDs are formatted “10MMM0NNN0” where MMM and NNN
@@ -198,6 +205,13 @@ def to_place_type(location):
 
 
 def to_sv(quantile, sv_info):
+    """Constructs a StatVAR DCID for a given quantile value.
+    Args:
+       quantile: Quantile value from netcdf4
+       sv_info: A map returned from parse_sv_info based on file-names.
+    Returns:
+       Namespace-prefixed StatVar DCID.
+    """
     if quantile == 0.0:
         prefix = 'Min'
     elif quantile == 0.1:
@@ -251,7 +265,8 @@ def process_stats(in_file, out_dir):
         df['unit'] = 'dcs:' + sv_info[_UNIT]
     if _MMETHOD in sv_info:
         df['measurementMethod'] = 'dcs:' + sv_info[_MMETHOD]
-    df.drop(['locations', 'years', 'quantiles', ncvar], axis=1, inplace=True)
+    df = df[['observationAbout', 'variableMeasured', 'observationDate',
+             'value', 'unit', 'measurementMethod']]
     print(df.head())
     df.to_csv(os.path.join(out_dir, _fname(in_file) + '.csv'), index=False)
 
@@ -273,7 +288,7 @@ def process_places(in_file, out_dir):
     id2cip = {}
     ll2p = latlng_recon_geojson.LatLng2Places()
     for index, row in df.iterrows():
-        id2cip[row['dcid']] = ll2p.do(row['latitude'], row['longitude'])
+        id2cip[row['dcid']] = ll2p.resolve(row['latitude'], row['longitude'])
         if len(id2cip) % 1000 == 0:
             print('Mapped', len(id2cip), 'lat/lngs')
 
@@ -281,11 +296,12 @@ def process_places(in_file, out_dir):
         lambda x: to_contained_places(x, id2cip))
 
     df.drop(['locations', 'lat', 'lon'], axis=1, inplace=True)
+    df = df[['latitude', 'longitude', 'typeOf', 'dcid', 'containedInPlace']]
     df.to_csv(os.path.join(out_dir, 'sea_level_places.csv'), index=False)
 
 
 def process(in_pattern, func, *args):
-    for file in glob.glob(in_pattern):
+    for file in sorted(glob.glob(in_pattern)):
         print('Processing file:', file)
         func(file, *args)
 

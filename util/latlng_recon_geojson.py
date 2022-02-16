@@ -11,7 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""A library that uses the GeoJSONs to map lat/lng to DC places."""
+"""A library that uses the GeoJSONs (from DC KG) to map lat/lng to DC places.
+
+See latlng_recon_geojson_test.py for usage example.
+"""
 
 import datacommons as dc
 import json
@@ -57,7 +60,7 @@ class LatLng2Places:
               len(self._country_geojsons) + len(self._us_state_geojsons),
               'geojsons!')
 
-    def do(self, lat, lon):
+    def resolve(self, lat, lon):
         """Given a lat/long returns a list of place DCIDs that contain it."""
 
         point = geometry.Point(lon, lat)

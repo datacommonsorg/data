@@ -52,13 +52,13 @@ class LatlngReconGeojsonTest(unittest.TestCase):
 
         ll2p = latlng_recon_geojson.LatLng2Places()
         # Cascal in MTV exists in both "state" (94041) and "country" (SC county)
-        self.assertEqual(ll2p.do(37.391, -122.081),
+        self.assertEqual(ll2p.resolve(37.391, -122.081),
                          ['geoId/06', 'country/USA', 'northamerica'])
         # Zareen's doesn't exist in the "state".
-        self.assertEqual(ll2p.do(37.419, -122.079),
+        self.assertEqual(ll2p.resolve(37.419, -122.079),
                          ['country/USA', 'northamerica'])
         # Bi-rite creamery in SF exists in neither.
-        self.assertEqual(ll2p.do(37.762, -122.426), [])
+        self.assertEqual(ll2p.resolve(37.762, -122.426), [])
 
 
 if __name__ == '__main__':
