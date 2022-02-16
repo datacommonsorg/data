@@ -71,7 +71,11 @@ The WikiData dataset has the following columns
 
 
 #### Scripts
-- [preprocess.py](preprocess.py): Clean up and import script.
+Clean up and import script.
+
+```bash
+python3 -m india_lgd.local_government_directory_districts.preprocess
+```
 
 ### Running Tests
 

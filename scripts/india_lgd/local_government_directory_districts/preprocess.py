@@ -119,9 +119,9 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         # if there are NA values then replace it with '' character
         self.lgd_df = pd.read_csv(self.lgd_csv, dtype=str)
         self.lgd_df.fillna('', inplace=True)
-        # Drop title rows in the top and empty rows after 740.
-        # The actual data is between 2nd and 740th row. So keep only them.
-        self.lgd_df = self.lgd_df.iloc[1:739]
+        # Drop title rows in the top and empty rows after 741.
+        # The actual data is between 2nd and 741th row. So keep only them.
+        self.lgd_df = self.lgd_df.iloc[1:741]
         # Take the the header row and set it as column header
         self.lgd_df = self.lgd_df[1:]
         self.lgd_df.columns = [
