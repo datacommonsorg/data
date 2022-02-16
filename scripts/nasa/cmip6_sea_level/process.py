@@ -167,6 +167,7 @@ def parse_sv_info(file_path):
 #              locations. IDs less than 10^9 are tide gauges."
 _PSMSL_ID_THRESHOLD = 1000000000
 
+
 def to_place_dcid(location, prefix=''):
     if location == -1:
         return prefix + 'Earth'
@@ -265,8 +266,10 @@ def process_stats(in_file, out_dir):
         df['unit'] = 'dcs:' + sv_info[_UNIT]
     if _MMETHOD in sv_info:
         df['measurementMethod'] = 'dcs:' + sv_info[_MMETHOD]
-    df = df[['observationAbout', 'variableMeasured', 'observationDate',
-             'value', 'unit', 'measurementMethod']]
+    df = df[[
+        'observationAbout', 'variableMeasured', 'observationDate', 'value',
+        'unit', 'measurementMethod'
+    ]]
     print(df.head())
     df.to_csv(os.path.join(out_dir, _fname(in_file) + '.csv'), index=False)
 
