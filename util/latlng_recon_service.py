@@ -1,7 +1,19 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """A library that uses the recon service to map lat/lng to DC places."""
 
 import requests
-
 
 _RECON_ROOT = 'https://staging.recon.datacommons.org/coordinate/resolve'
 _RECON_COORD_BATCH_SIZE = 50
@@ -60,9 +72,8 @@ def latlng2places(id2latlon, filter_fn=None, verbose=False):
     for dcid, (lat, lon) in id2latlon.items():
         batch[dcid] = (lat, lon)
         if len(batch) == _RECON_COORD_BATCH_SIZE:
-            result.update(_call_resolve_coordinates(batch, filter_fn))
+            result.update(_call_resolve_coordinates(batch, filter_fn, verbose))
             batch = {}
     if len(batch) > 0:
-        result.update(_call_resolve_coordinates(batch, filter_fn))
+        result.update(_call_resolve_coordinates(batch, filter_fn, verbose))
     return result
-

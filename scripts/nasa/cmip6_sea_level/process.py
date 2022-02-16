@@ -21,6 +21,14 @@ import xarray
 from absl import app
 from absl import flags
 
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))  # for recon util
+
+import latlng_recon_service
+import latlng_recon_geojson
+
+
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('in_pattern', '', 'Input NetCDF4 file(s).')
@@ -56,7 +64,7 @@ _SV_CONFIG = {
         ],
         _SVID: ('DifferenceRelativeToCMIP6ReferenceDate_SeaLevel', 1),
         _NCVAR: 'sea_level_change',
-        _UNIT: 'Meter',
+        _UNIT: 'Millimeter',
     },
     'rates': {
         _PV: [
@@ -147,9 +155,6 @@ def parse_sv_info(file_path):
     return sv_info
 
 
-###
-### Recon helpers. Consider moving this to a common util.
-###
 ###
 ### Code specific to SeaLevel NC files
 ###
@@ -263,14 +268,12 @@ def process_places(in_file, out_dir):
     df['dcid'] = df['locations'].apply(to_place_dcid)
 
     # Collect lat/lng
-    id2latlon = {}
+    id2cip = {}
+    ll2p = latlng_recon_geojson.LatLng2Places()
     for index, row in df.iterrows():
-        if row['dcid'].startswith('psmslId/'):
-            id2latlon[row['dcid']] = (row['latitude'], row['longitude'])
-
-    # Filter out just countries and include Earth.
-    id2cip = get_places_in(id2latlon,
-                           lambda l: [x for x in l if 'country/' in x])
+        id2cip[row['dcid']] = ll2p.do(row['latitude'], row['longitude'])
+        if len(id2cip) % 1000 == 0:
+            print('Mapped', len(id2cip), 'lat/lngs')
 
     df['containedInPlace'] = df['locations'].apply(
         lambda x: to_contained_places(x, id2cip))
