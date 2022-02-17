@@ -1,0 +1,332 @@
+Node: dcid:geoId/reg1
+typeOf: dcs:CensusRegion
+geoId: "reg1"
+name: "Northeast Region"
+containedIn: dcid:country/USA
+
+Node: dcid:geoId/div1
+typeOf: dcs:CensusDivision
+geoId: "div1"
+name: "New England Division"
+containedIn: dcid:geoId/reg1
+
+#: State: Connecticut
+Node: dcid:geoId/09
+typeOf: dcs:State
+containedIn: dcid:geoId/div1
+
+#: State: Maine
+Node: dcid:geoId/23
+typeOf: dcs:State
+containedIn: dcid:geoId/div1
+
+#: State: Massachusetts
+Node: dcid:geoId/25
+typeOf: dcs:State
+containedIn: dcid:geoId/div1
+
+#: State: New Hampshire
+Node: dcid:geoId/33
+typeOf: dcs:State
+containedIn: dcid:geoId/div1
+
+#: State: Rhode Island
+Node: dcid:geoId/44
+typeOf: dcs:State
+containedIn: dcid:geoId/div1
+
+#: State: Vermont
+Node: dcid:geoId/50
+typeOf: dcs:State
+containedIn: dcid:geoId/div1
+
+Node: dcid:geoId/div2
+typeOf: dcs:CensusDivision
+geoId: "div2"
+name: "Middle Atlantic Division"
+containedIn: dcid:geoId/reg1
+
+#: State: New Jersey
+Node: dcid:geoId/34
+typeOf: dcs:State
+containedIn: dcid:geoId/div2
+
+#: State: New York
+Node: dcid:geoId/36
+typeOf: dcs:State
+containedIn: dcid:geoId/div2
+
+#: State: Pennsylvania
+Node: dcid:geoId/42
+typeOf: dcs:State
+containedIn: dcid:geoId/div2
+
+Node: dcid:geoId/reg2
+typeOf: dcs:CensusRegion
+geoId: "reg2"
+name: "Midwest Region"
+containedIn: dcid:country/USA
+
+Node: dcid:geoId/div3
+typeOf: dcs:CensusDivision
+geoId: "div3"
+name: "East North Central Division"
+containedIn: dcid:geoId/reg2
+
+#: State: Illinois
+Node: dcid:geoId/17
+typeOf: dcs:State
+containedIn: dcid:geoId/div3
+
+#: State: Indiana
+Node: dcid:geoId/18
+typeOf: dcs:State
+containedIn: dcid:geoId/div3
+
+#: State: Michigan
+Node: dcid:geoId/26
+typeOf: dcs:State
+containedIn: dcid:geoId/div3
+
+#: State: Ohio
+Node: dcid:geoId/39
+typeOf: dcs:State
+containedIn: dcid:geoId/div3
+
+#: State: Wisconsin
+Node: dcid:geoId/55
+typeOf: dcs:State
+containedIn: dcid:geoId/div3
+
+Node: dcid:geoId/div4
+typeOf: dcs:CensusDivision
+geoId: "div4"
+name: "West North Central Division"
+containedIn: dcid:geoId/reg2
+
+#: State: Iowa
+Node: dcid:geoId/19
+typeOf: dcs:State
+containedIn: dcid:geoId/div4
+
+#: State: Kansas
+Node: dcid:geoId/20
+typeOf: dcs:State
+containedIn: dcid:geoId/div4
+
+#: State: Minnesota
+Node: dcid:geoId/27
+typeOf: dcs:State
+containedIn: dcid:geoId/div4
+
+#: State: Missouri
+Node: dcid:geoId/29
+typeOf: dcs:State
+containedIn: dcid:geoId/div4
+
+#: State: Nebraska
+Node: dcid:geoId/31
+typeOf: dcs:State
+containedIn: dcid:geoId/div4
+
+#: State: North Dakota
+Node: dcid:geoId/38
+typeOf: dcs:State
+containedIn: dcid:geoId/div4
+
+#: State: South Dakota
+Node: dcid:geoId/46
+typeOf: dcs:State
+containedIn: dcid:geoId/div4
+
+Node: dcid:geoId/reg3
+typeOf: dcs:CensusRegion
+geoId: "reg3"
+name: "South Region"
+containedIn: dcid:country/USA
+
+Node: dcid:geoId/div5
+typeOf: dcs:CensusDivision
+geoId: "div5"
+name: "South Atlantic Division"
+containedIn: dcid:geoId/reg3
+
+#: State: Delaware
+Node: dcid:geoId/10
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+#: State: District of Columbia
+Node: dcid:geoId/11
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+#: State: Florida
+Node: dcid:geoId/12
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+#: State: Georgia
+Node: dcid:geoId/13
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+#: State: Maryland
+Node: dcid:geoId/24
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+#: State: North Carolina
+Node: dcid:geoId/37
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+#: State: South Carolina
+Node: dcid:geoId/45
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+#: State: Virginia
+Node: dcid:geoId/51
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+#: State: West Virginia
+Node: dcid:geoId/54
+typeOf: dcs:State
+containedIn: dcid:geoId/div5
+
+Node: dcid:geoId/div6
+typeOf: dcs:CensusDivision
+geoId: "div6"
+name: "East South Central Division"
+containedIn: dcid:geoId/reg3
+
+#: State: Alabama
+Node: dcid:geoId/01
+typeOf: dcs:State
+containedIn: dcid:geoId/div6
+
+#: State: Kentucky
+Node: dcid:geoId/21
+typeOf: dcs:State
+containedIn: dcid:geoId/div6
+
+#: State: Mississippi
+Node: dcid:geoId/28
+typeOf: dcs:State
+containedIn: dcid:geoId/div6
+
+#: State: Tennessee
+Node: dcid:geoId/47
+typeOf: dcs:State
+containedIn: dcid:geoId/div6
+
+Node: dcid:geoId/div7
+typeOf: dcs:CensusDivision
+geoId: "div7"
+name: "West South Central Division"
+containedIn: dcid:geoId/reg3
+
+#: State: Arkansas
+Node: dcid:geoId/05
+typeOf: dcs:State
+containedIn: dcid:geoId/div7
+
+#: State: Louisiana
+Node: dcid:geoId/22
+typeOf: dcs:State
+containedIn: dcid:geoId/div7
+
+#: State: Oklahoma
+Node: dcid:geoId/40
+typeOf: dcs:State
+containedIn: dcid:geoId/div7
+
+#: State: Texas
+Node: dcid:geoId/48
+typeOf: dcs:State
+containedIn: dcid:geoId/div7
+
+Node: dcid:geoId/reg4
+typeOf: dcs:CensusRegion
+geoId: "reg4"
+name: "West Region"
+containedIn: dcid:country/USA
+
+Node: dcid:geoId/div8
+typeOf: dcs:CensusDivision
+geoId: "div8"
+name: "Mountain Division"
+containedIn: dcid:geoId/reg4
+
+#: State: Arizona
+Node: dcid:geoId/04
+typeOf: dcs:State
+containedIn: dcid:geoId/div8
+
+#: State: Colorado
+Node: dcid:geoId/08
+typeOf: dcs:State
+containedIn: dcid:geoId/div8
+
+#: State: Idaho
+Node: dcid:geoId/16
+typeOf: dcs:State
+containedIn: dcid:geoId/div8
+
+#: State: Montana
+Node: dcid:geoId/30
+typeOf: dcs:State
+containedIn: dcid:geoId/div8
+
+#: State: Nevada
+Node: dcid:geoId/32
+typeOf: dcs:State
+containedIn: dcid:geoId/div8
+
+#: State: New Mexico
+Node: dcid:geoId/35
+typeOf: dcs:State
+containedIn: dcid:geoId/div8
+
+#: State: Utah
+Node: dcid:geoId/49
+typeOf: dcs:State
+containedIn: dcid:geoId/div8
+
+#: State: Wyoming
+Node: dcid:geoId/56
+typeOf: dcs:State
+containedIn: dcid:geoId/div8
+
+Node: dcid:geoId/div9
+typeOf: dcs:CensusDivision
+geoId: "div9"
+name: "Pacific Division"
+containedIn: dcid:geoId/reg4
+
+#: State: Alaska
+Node: dcid:geoId/02
+typeOf: dcs:State
+containedIn: dcid:geoId/div9
+
+#: State: California
+Node: dcid:geoId/06
+typeOf: dcs:State
+containedIn: dcid:geoId/div9
+
+#: State: Hawaii
+Node: dcid:geoId/15
+typeOf: dcs:State
+containedIn: dcid:geoId/div9
+
+#: State: Oregon
+Node: dcid:geoId/41
+typeOf: dcs:State
+containedIn: dcid:geoId/div9
+
+#: State: Washington
+Node: dcid:geoId/53
+typeOf: dcs:State
+containedIn: dcid:geoId/div9
