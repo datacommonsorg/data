@@ -1,0 +1,4 @@
+site_and_funding_status/data/401063.xlsx filter=lfs diff=lfs merge=lfs -text
+site_and_funding_status/data/resolved_superfund_site_geoIds.json filter=lfs diff=lfs merge=lfs -text
+site_and_funding_status/data/Superfund[[:space:]]National[[:space:]]Priorities[[:space:]]List[[:space:]](NPL)[[:space:]]Sites[[:space:]]with[[:space:]]Status[[:space:]]Information.csv filter=lfs diff=lfs merge=lfs -text
+site_contamination/data/401062.xlsx filter=lfs diff=lfs merge=lfs -text
