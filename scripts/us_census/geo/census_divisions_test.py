@@ -22,6 +22,9 @@ import unittest
 # relative to scripts/
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# module_dir_ is the path to where this test is running from.
+module_dir_ = os.path.dirname(__file__)
+
 import census_divisions
 
 
@@ -30,14 +33,16 @@ class TestProcess(unittest.TestCase):
     def test_process(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             mcf_file = os.path.join(tmp_dir, 'test_output.mcf')
-            census_divisions.process('census_region_geocodes.csv', mcf_file)
+            csv_file = os.path.join(module_dir_, 'census_region_geocodes.csv')
+            census_divisions.process(csv_file, mcf_file)
 
-            with open(mcf_file) as f:
+            with open(mcf_file, 'r') as f:
                 actual_mcf = f.read()
 
             os.remove(mcf_file)
 
-            with open('geo_CensusDivision.mcf') as f:
+            expected_file = os.path.join(module_dir_, 'geo_CensusDivision.mcf')
+            with open(expected_file, 'r') as f:
                 expected_mcf = f.read()
 
             self.assertEqual(expected_mcf, actual_mcf)

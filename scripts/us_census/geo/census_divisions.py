@@ -12,9 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Generate Place nodes for US Census divisions and regions.
-using data from:
+Generate MCF nodes for US Census Divisions and Regions
+
+To run, download the codes from
 https://www2.census.gov/programs-surveys/popest/geographies/2018/state-geocodes-v2018.xlsx
+and save it as a csv file: 'geocodes.csv'.
+Then run 'python3 census_divisions.py --census_divisions_csv=geocodes.csv'
+to generate the mcf nodes in 'geo_CensusDivision.mcf'.
 '''
 
 import csv
@@ -37,6 +41,11 @@ _COLUMNS = [
 ]
 
 _OUTPUT_PROPERTIES = ['#', 'Node', 'typeOf', 'geoId', 'name', 'containedIn']
+
+
+def _get_state_dcid(code: int) -> str:
+    '''Returns the DCID for the state.'''
+    return f'dcid:geoId/{code:02}'
 
 
 def _get_region_dcid(code: int) -> str:
@@ -70,9 +79,10 @@ def _generate_mcf(region: int, division: int, state: int, name: str) -> str:
     mcf = []
     if state > 0:
         # Generate a contained in node for state.
+        dcid = _get_state_dcid(state)
         return _get_mcf_for_dict({
             '#': f'State: {name}',
-            'Node': f'dcid:geoId/{state:02}',
+            'Node': dcid,
             'typeOf': 'dcs:State',
             'containedIn': _get_division_dcid(division),
         })
@@ -136,8 +146,10 @@ def process(csv_filename: str, output_filename: str):
         out_mcf.write('\n\n'.join(mcf))
     print(f'Generated {len(mcf)} nodes in "{output_filename}"')
 
+
 def main(_):
-  process(FLAGS.census_divisions_csv, FLAGS.output_mcf)
+    process(FLAGS.census_divisions_csv, FLAGS.output_mcf)
+
 
 if __name__ == '__main__':
     app.run(main)
