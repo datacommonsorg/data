@@ -40,7 +40,12 @@ _COLUMNS = [
     'Name',
 ]
 
-_OUTPUT_PROPERTIES = ['#', 'Node', 'typeOf', 'geoId', 'name', 'containedIn']
+_OUTPUT_PROPERTIES = ['#', 'Node', 'typeOf', 'name', 'fipsCode', 'containedIn']
+
+
+def _to_camelcase(text: str) -> str:
+    '''Returns the text in CamelCase with spaces removed.'''
+    return ''.join([x.capitalize() for x in text.split(' ')])
 
 
 def _get_state_dcid(code: int) -> str:
@@ -48,14 +53,20 @@ def _get_state_dcid(code: int) -> str:
     return f'dcid:geoId/{code:02}'
 
 
-def _get_region_dcid(code: int) -> str:
-    '''Returns the DCID for the region.'''
-    return f'dcid:geoId/reg{code}'
+def _get_region_dcid(code: int, name: str, dcid_map: dict) -> str:
+    '''Returns the DCID for the region and also adds it to the dcid_map.'''
+    if name != '':
+        name_str = _to_camelcase(name)
+        dcid_map[f'r{code}'] = f'dcid:US{name_str}'
+    return dcid_map[f'r{code}']
 
 
-def _get_division_dcid(code: int) -> str:
-    '''Returns the DCID for the region.'''
-    return f'dcid:geoId/div{code}'
+def _get_division_dcid(code: int, name: str, dcid_map: dict) -> str:
+    '''Returns the DCID for the region and also adds it to the dcid map.'''
+    if name != '':
+        name_str = _to_camelcase(name)
+        dcid_map[f'd{code}'] = f'dcid:US{name_str}'
+    return dcid_map[f'd{code}']
 
 
 def _get_mcf_for_dict(node: dict) -> str:
@@ -73,10 +84,12 @@ def _get_mcf_for_dict(node: dict) -> str:
     return '\n'.join(mcf)
 
 
-def _generate_mcf(region: int, division: int, state: int, name: str) -> str:
-    '''Returns the MCF nodes for the given codes.
+def _generate_mcf(region: int, division: int, state: int, name: str,
+                  dcid_map: dict) -> str:
+    '''Returns the MCF nodes for the given codes and also adds the dcid to the map.
     '''
     mcf = []
+    name = name.replace('Region', '').replace('Division', '').strip()
     if state > 0:
         # Generate a contained in node for state.
         dcid = _get_state_dcid(state)
@@ -84,29 +97,27 @@ def _generate_mcf(region: int, division: int, state: int, name: str) -> str:
             '#': f'State: {name}',
             'Node': dcid,
             'typeOf': 'dcs:State',
-            'containedIn': _get_division_dcid(division),
+            'containedIn': _get_division_dcid(division, '', dcid_map),
         })
     if division > 0:
         # Generate a node for the division.
-        dcid = _get_division_dcid(division)
-        geoid = dcid.split('/')[1]
+        dcid = _get_division_dcid(division, name, dcid_map)
         return _get_mcf_for_dict({
             'Node': dcid,
             'typeOf': 'dcs:CensusDivision',
-            'geoId': f'"{geoid}"',
-            'containedIn': _get_region_dcid(region),
-            'name': f'"{name}"',
+            'fipsCode': division,
+            'containedIn': _get_region_dcid(region, '', dcid_map),
+            'name': f'"US Division {division}: {name}"',
         })
     if region > 0:
         # Generate a node for census region.
-        dcid = _get_region_dcid(region)
-        geoid = dcid.split('/')[1]
+        dcid = _get_region_dcid(region, name, dcid_map)
         return _get_mcf_for_dict({
             'Node': dcid,
             'typeOf': 'dcs:CensusRegion',
-            'geoId': f'"{geoid}"',
+            'fipsCode': region,
             'containedIn': 'dcid:country/USA',
-            'name': f'"{name}"',
+            'name': f'"US Region {region}: {name}"',
         })
     return ''
 
@@ -127,6 +138,7 @@ def process(csv_filename: str, output_filename: str):
     with open(csv_filename, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
         header = {}
+        dcid_map = {}
         for row in csv_reader:
             # Skip header rows until the data.
             if len(header) == 0:
@@ -140,7 +152,7 @@ def process(csv_filename: str, output_filename: str):
             division = int(row[header['Division']])
             state = int(row[header['State (FIPS)']])
             name = row[header['Name']]
-            mcf.append(_generate_mcf(region, division, state, name))
+            mcf.append(_generate_mcf(region, division, state, name, dcid_map))
 
     with open(output_filename, 'w') as out_mcf:
         out_mcf.write('\n\n'.join(mcf))
