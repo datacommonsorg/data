@@ -1,1008 +1,1008 @@
 Node: dcid:Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_EnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInSchool
+schoolEnrollment: dcs:EnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_EnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInSchool
+schoolEnrollment: dcs:EnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_EnrolledInPublicSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPublicSchool
+schoolEnrollment: dcs:EnrolledInPublicSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_EnrolledInPublicSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPublicSchool
+schoolEnrollment: dcs:EnrolledInPublicSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_EnrolledInPrivateSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPrivateSchool
+schoolEnrollment: dcs:EnrolledInPrivateSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_EnrolledInPrivateSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPrivateSchool
+schoolEnrollment: dcs:EnrolledInPrivateSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
+schoolEnrollment: dcs:NotEnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
+schoolEnrollment: dcs:NotEnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Male_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Male
+gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Male_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Male
+gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Male_EverMarried_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Male
-maritalStatus: dcid:EverMarried
+gender: dcs:Male
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Male_EverMarried_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Male
-maritalStatus: dcid:EverMarried
+gender: dcs:Male
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Female_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
+gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Female_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
+gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Female_EverMarried_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
-maritalStatus: dcid:EverMarried
+gender: dcs:Female
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Female_EverMarried_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
-maritalStatus: dcid:EverMarried
+gender: dcs:Female
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BirthInThePast12Months_Female_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
-birthEventStatus: dcid:BirthInThePast12Months
+gender: dcs:Female
+birthEventStatus: dcs:BirthInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BirthInThePast12Months_Female_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
-birthEventStatus: dcid:BirthInThePast12Months
+gender: dcs:Female
+birthEventStatus: dcs:BirthInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
+residenceType: dcs:Household
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
+residenceType: dcs:Household
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_MarriedCoupleFamilyHousehold_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:MarriedCoupleFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_MarriedCoupleFamilyHousehold_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:MarriedCoupleFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_SingleFatherFamilyHousehold_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleFatherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleFatherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_SingleFatherFamilyHousehold_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleFatherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleFatherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_SingleMotherFamilyHousehold_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleMotherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_SingleMotherFamilyHousehold_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleMotherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_NonfamilyHousehold_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:NonfamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:NonfamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_NonfamilyHousehold_WhiteAloneNotHispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:NonfamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:NonfamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [16 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [16 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_NotInLaborForce_WhiteAloneNotHispanicOrLatino_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [16 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
-employmentStatus: dcid:BLS_NotInLaborForce
+schoolEnrollment: dcs:NotEnrolledInSchool
+employmentStatus: dcs:BLS_NotInLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_NotInLaborForce_WhiteAloneNotHispanicOrLatino_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [16 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
-employmentStatus: dcid:BLS_NotInLaborForce
+schoolEnrollment: dcs:NotEnrolledInSchool
+employmentStatus: dcs:BLS_NotInLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_InLaborForce_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [16 19 Years]
-employmentStatus: dcid:BLS_InLaborForce
+employmentStatus: dcs:BLS_InLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_InLaborForce_WhiteAloneNotHispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:WhiteAloneNotHispanicOrLatino
 age: [16 19 Years]
-employmentStatus: dcid:BLS_InLaborForce
+employmentStatus: dcs:BLS_InLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BlackOrAfricanAmericanAlone_EnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInSchool
+schoolEnrollment: dcs:EnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BlackOrAfricanAmericanAlone_EnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInSchool
+schoolEnrollment: dcs:EnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BlackOrAfricanAmericanAlone_EnrolledInPublicSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPublicSchool
+schoolEnrollment: dcs:EnrolledInPublicSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BlackOrAfricanAmericanAlone_EnrolledInPublicSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPublicSchool
+schoolEnrollment: dcs:EnrolledInPublicSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BlackOrAfricanAmericanAlone_EnrolledInPrivateSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPrivateSchool
+schoolEnrollment: dcs:EnrolledInPrivateSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BlackOrAfricanAmericanAlone_EnrolledInPrivateSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPrivateSchool
+schoolEnrollment: dcs:EnrolledInPrivateSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BlackOrAfricanAmericanAlone_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
+schoolEnrollment: dcs:NotEnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BlackOrAfricanAmericanAlone_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
+schoolEnrollment: dcs:NotEnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Male_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Male
+gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Male_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Male
+gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Male_EverMarried_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Male
-maritalStatus: dcid:EverMarried
+gender: dcs:Male
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Male_EverMarried_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Male
-maritalStatus: dcid:EverMarried
+gender: dcs:Male
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Female_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Female
+gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Female_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Female
+gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Female_EverMarried_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Female
-maritalStatus: dcid:EverMarried
+gender: dcs:Female
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Female_EverMarried_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Female
-maritalStatus: dcid:EverMarried
+gender: dcs:Female
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BirthInThePast12Months_Female_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Female
-birthEventStatus: dcid:BirthInThePast12Months
+gender: dcs:Female
+birthEventStatus: dcs:BirthInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BirthInThePast12Months_Female_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-gender: dcid:Female
-birthEventStatus: dcid:BirthInThePast12Months
+gender: dcs:Female
+birthEventStatus: dcs:BirthInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
+residenceType: dcs:Household
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
+residenceType: dcs:Household
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_MarriedCoupleFamilyHousehold_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:MarriedCoupleFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_MarriedCoupleFamilyHousehold_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:MarriedCoupleFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_SingleFatherFamilyHousehold_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleFatherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleFatherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_SingleFatherFamilyHousehold_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleFatherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleFatherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_SingleMotherFamilyHousehold_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleMotherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_SingleMotherFamilyHousehold_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleMotherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_NonfamilyHousehold_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:NonfamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:NonfamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_NonfamilyHousehold_BlackOrAfricanAmericanAlone_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:NonfamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:NonfamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [16 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [16 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_NotInLaborForce_BlackOrAfricanAmericanAlone_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [16 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
-employmentStatus: dcid:BLS_NotInLaborForce
+schoolEnrollment: dcs:NotEnrolledInSchool
+employmentStatus: dcs:BLS_NotInLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_NotInLaborForce_BlackOrAfricanAmericanAlone_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [16 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
-employmentStatus: dcid:BLS_NotInLaborForce
+schoolEnrollment: dcs:NotEnrolledInSchool
+employmentStatus: dcs:BLS_NotInLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_InLaborForce_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [16 19 Years]
-employmentStatus: dcid:BLS_InLaborForce
+employmentStatus: dcs:BLS_InLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_InLaborForce_BlackOrAfricanAmericanAlone
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
 age: [16 19 Years]
-employmentStatus: dcid:BLS_InLaborForce
+employmentStatus: dcs:BLS_InLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_HispanicOrLatino_EnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInSchool
+schoolEnrollment: dcs:EnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_HispanicOrLatino_EnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInSchool
+schoolEnrollment: dcs:EnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_HispanicOrLatino_EnrolledInPublicSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPublicSchool
+schoolEnrollment: dcs:EnrolledInPublicSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_HispanicOrLatino_EnrolledInPublicSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPublicSchool
+schoolEnrollment: dcs:EnrolledInPublicSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_HispanicOrLatino_EnrolledInPrivateSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPrivateSchool
+schoolEnrollment: dcs:EnrolledInPrivateSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_HispanicOrLatino_EnrolledInPrivateSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:EnrolledInPrivateSchool
+schoolEnrollment: dcs:EnrolledInPrivateSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_HispanicOrLatino_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
+schoolEnrollment: dcs:NotEnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_HispanicOrLatino_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
+schoolEnrollment: dcs:NotEnrolledInSchool
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Male_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Male
+gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Male_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Male
+gender: dcs:Male
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Male_EverMarried_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Male
-maritalStatus: dcid:EverMarried
+gender: dcs:Male
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Male_EverMarried_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Male
-maritalStatus: dcid:EverMarried
+gender: dcs:Male
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Female_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
+gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Female_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
+gender: dcs:Female
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_Female_EverMarried_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
-maritalStatus: dcid:EverMarried
+gender: dcs:Female
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_Female_EverMarried_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
-maritalStatus: dcid:EverMarried
+gender: dcs:Female
+maritalStatus: dcs:EverMarried
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_BirthInThePast12Months_Female_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
-birthEventStatus: dcid:BirthInThePast12Months
+gender: dcs:Female
+birthEventStatus: dcs:BirthInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_BirthInThePast12Months_Female_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-gender: dcid:Female
-birthEventStatus: dcid:BirthInThePast12Months
+gender: dcs:Female
+birthEventStatus: dcs:BirthInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
+residenceType: dcs:Household
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
+residenceType: dcs:Household
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_MarriedCoupleFamilyHousehold_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:MarriedCoupleFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_MarriedCoupleFamilyHousehold_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:MarriedCoupleFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_SingleFatherFamilyHousehold_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleFatherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleFatherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_SingleFatherFamilyHousehold_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleFatherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleFatherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_SingleMotherFamilyHousehold_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleMotherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_SingleMotherFamilyHousehold_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:SingleMotherFamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_15To19Years_NonfamilyHousehold_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:NonfamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:NonfamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_15To19Years_NonfamilyHousehold_HispanicOrLatino_ResidesInHousehold
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [15 19 Years]
-residenceType: dcid:Household
-householdType: dcid:NonfamilyHousehold
+residenceType: dcs:Household
+householdType: dcs:NonfamilyHousehold
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [16 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [16 19 Years]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_NotInLaborForce_HispanicOrLatino_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [16 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
-employmentStatus: dcid:BLS_NotInLaborForce
+schoolEnrollment: dcs:NotEnrolledInSchool
+employmentStatus: dcs:BLS_NotInLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_NotInLaborForce_HispanicOrLatino_NotEnrolledInSchool
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [16 19 Years]
-schoolEnrollment: dcid:NotEnrolledInSchool
-employmentStatus: dcid:BLS_NotInLaborForce
+schoolEnrollment: dcs:NotEnrolledInSchool
+employmentStatus: dcs:BLS_NotInLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_16To19Years_InLaborForce_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [16 19 Years]
-employmentStatus: dcid:BLS_InLaborForce
+employmentStatus: dcs:BLS_InLaborForce
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Person_16To19Years_InLaborForce_HispanicOrLatino
-measuredProperty: dcid:count
-statType: dcid:marginOfError
-populationType: dcid:Person
-race: dcid:HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+race: dcs:HispanicOrLatino
 age: [16 19 Years]
-employmentStatus: dcid:BLS_InLaborForce
+employmentStatus: dcs:BLS_InLaborForce
 typeOf: dcs:StatisticalVariable
 
