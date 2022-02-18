@@ -13,16 +13,15 @@
 # limitations under the License.
 
 import os
-
-from sys import path
-
-module_dir_ = os.path.dirname(os.path.realpath(__file__))
-path.insert(1, os.path.join(module_dir_, '../../../'))
+import sys
 
 from os import remove, path as ospath
-from csv import DictReader
+from csv import DictReader, DictWriter
 from urllib.request import urlopen
 
+# For finding util
+_CODE_DIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, os.path.join(_CODE_DIR, '../../../'))
 import util.name_to_alpha2 as name_to_alpha2
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.county_to_dcid as county_to_dcid
@@ -30,7 +29,8 @@ import util.county_to_dcid as county_to_dcid
 # Dictionary that maps a row name in the CSV file is mapped to a Schema place.
 # key = CSV's row name
 # value = Schema.org place
-from .config import PLACE_CATEGORIES
+sys.path.append(os.path.join(_CODE_DIR, '../../'))
+from google_covid.mobility.config import PLACE_CATEGORIES
 
 USSTATE_TO_ALPHA2 = name_to_alpha2.USSTATE_MAP
 COUNTRY_MAP = alpha2_to_dcid.COUNTRY_MAP
@@ -38,8 +38,8 @@ USSTATE_MAP = alpha2_to_dcid.USSTATE_MAP
 COUNTY_MAP = county_to_dcid.COUNTY_MAP
 
 
-def covid_mobility(input_path: str = 'data.csv',
-                   output_path='covid_mobility_output.mcf') -> None:
+def covid_mobility(input_path: str = 'downloaded_data.csv',
+                   output_path='covid_mobility.csv') -> None:
     """Main method for the covid_mobility script.
 
     Args:
@@ -75,18 +75,20 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
     # Input file.
     f_input = open(input_path, 'r')
     # Output file.
-    f_output = open(output_path, 'a+')
+    f_output = open(output_path, 'w')
 
     csv_reader: DictReader = DictReader(f_input)
-
+    csv_writer: DictWriter = DictWriter(f_output,
+                                        fieldnames=[
+                                            'observationAbout',
+                                            'variableMeasured',
+                                            'observationDate',
+                                            'value'
+                                        ],
+                                        doublequote=False,
+                                        escapechar='\\')
+    csv_writer.writeheader()
     for row in csv_reader:
-        # When this script was written, there were 14 columns.
-        # If there aren't exactly 14 columns, fail.
-        if len(row) != 14:
-            raise Exception("Incompatible Google Mobility CSV file. " +
-                            "There must be exactly 14 columns in file. " +
-                            "Script must be updated!")
-
         # Get the region names.
         # If the column doesn't exist, skip the row.
         try:
@@ -97,7 +99,7 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
             country_code: str = row['country_region_code']
             date = row['date']
         except KeyError:
-            continue
+            raise Exception('One of the expected columns is non-existent!')
 
         # Convert the region name to a dcid/geoId.
         region_dcid: str = _get_region_dcid(sub_region2, sub_region1,
@@ -116,41 +118,23 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
             # Type of place using Schema notation.
             schema_place = PLACE_CATEGORIES[place]
 
-            population_id = f"{region_dcid}_{schema_place}"
-            population_id = convert_to_ascii(population_id)
-
-            observation_id = f"{population_id}_{date}"
-
             try:
                 # Get the value for the current place.
                 value = row[place]
             except KeyError:
-                continue
+                raise Exception('One of the expected columns is non-existent!')
 
-            # If this is the first time vieweing this dcid.
-            # Write the population node for the place.
-            if region_dcid not in visited_dcids:
-                f_output.write(f"Node: {population_id}\n"
-                               "typeOf: schema:StatisticalPopulation\n"
-                               f"location: dcid:{region_dcid}\n"
-                               "populationType: dcs:PlaceVisitEvent\n"
-                               f"placeCategory: dcs:{schema_place}\n\n")
-
-            # If the value is None, skip the place.
             if not value:
                 continue
 
-            # Write observation node for value.
-            f_output.write(f"Node: {observation_id}\n"
-                           "typeOf: schema:Observation\n"
-                           f"observedNode: l:{population_id}\n"
-                           f'observationDate: "{date}"\n'
-                           "measuredProperty: dcs:covid19MobilityTrend\n"
-                           f"measuredValue: {value}\n"
-                           "unit: dcs:Percent\n\n")
-
-        # Add dcid to the list of visited.
-        visited_dcids.add(region_dcid)
+            sv_dcid = 'Covid19MobilityTrend_' + schema_place
+            orow = {
+                'observationAbout': 'dcid:' + region_dcid,
+                'variableMeasured': 'dcid:' + sv_dcid,
+                'observationDate': date,
+                'value': value,
+            }
+            csv_writer.writerow(orow)
 
     f_input.close()
     f_output.close()

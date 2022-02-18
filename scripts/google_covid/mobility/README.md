@@ -85,5 +85,5 @@ python3 covidmobility.py
 To run the unit tests for CovidMobility.py run:
 
 ```bash
-python3 TestCovidMobility.py
+python3 -m unittest covidmobility_test.py
 ```

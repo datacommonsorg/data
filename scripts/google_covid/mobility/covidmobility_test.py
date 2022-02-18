@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+import sys
 import unittest
-from .covidmobility import csv_to_mcf
-from os import path
+
+# Allows the following module imports to work when running as a script
+_CODE_DIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, os.path.join(_CODE_DIR, '../../'))
+from google_covid.mobility import covidmobility
 
 
 class TestCovidMobility(unittest.TestCase):
@@ -49,18 +54,18 @@ class TestCovidMobility(unittest.TestCase):
             str: expected output == actual output.
         """
 
-        module_dir = path.dirname(path.realpath(__file__))
-        input_path = path.join(module_dir, dir_path, "data.csv")
-        output_path = path.join(module_dir, dir_path, "output.mcf")
-        expected_path = path.join(module_dir, dir_path, "expected.mcf")
+        module_dir = os.path.dirname(os.path.realpath(__file__))
+        input_path = os.path.join(module_dir, dir_path, "data.csv")
+        output_path = os.path.join(module_dir, dir_path, "output.mcf")
+        expected_path = os.path.join(module_dir, dir_path, "expected.mcf")
 
-        if not path.exists(input_path):
+        if not os.path.exists(input_path):
             self.fail(input_path + " doesn't exist!")
-        if not path.exists(expected_path):
+        if not os.path.exists(expected_path):
             self.fail(expected_path + " doesn't exist!")
 
         # Generate the output mcf file.
-        csv_to_mcf(input_path, output_path)
+        covidmobility.csv_to_mcf(input_path, output_path)
 
         # Get the content from the MCF file.
         actual_f = open(output_path, 'r+')

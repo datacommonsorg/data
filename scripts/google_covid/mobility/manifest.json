@@ -13,7 +13,8 @@
             ],
             "import_inputs": [
                 {
-                    "node_mcf": "covid_mobility_output.mcf"
+                    "template_mcf": "covid_mobility.tmcf",
+                    "cleaned_csv": "covid_mobility.csv"
                 }
             ],
             "cron_schedule": "30 11 * * *"
