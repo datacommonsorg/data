@@ -35,7 +35,7 @@ class TestCovidMobility(unittest.TestCase):
             self._test_csv_output(os.path.join(_TESTDIR, d))
 
     def _test_csv_output(self, dir_path: str):
-        """Generates an MCF file, given an input data file.
+        """Generates a cleaned CSV file, given an input data file.
         Compares the expected.csv to the output.csv file
         to make sure the function is performing as designed.
 
@@ -57,10 +57,10 @@ class TestCovidMobility(unittest.TestCase):
             if not os.path.exists(expected_path):
                 self.fail(expected_path + " doesn't exist!")
 
-            # Generate the output mcf file.
+            # Generate the output csv file.
             covidmobility.clean_csv(input_path, output_path)
 
-            # Get the content from the MCF file.
+            # Get the content from the actual file.
             actual_f = open(output_path, 'r+')
             actual: str = actual_f.read()
             actual_f.close()

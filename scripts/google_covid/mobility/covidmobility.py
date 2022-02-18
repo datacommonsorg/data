@@ -54,16 +54,16 @@ def covid_mobility(input_path: str = 'downloaded_data.csv',
     # Download CSV data from url.
     _download_data(url=url, download_as=input_path)
 
-    # Convert the CSV data to MCF.
+    # Clean CSV file.
     clean_csv(input_path, output_path)
 
 
 def clean_csv(input_path: str, output_path: str) -> None:
-    """Converts the Mobility data to MCF.
+    """Converts the Mobility data to cleaned CSV
 
     Args:
         input_path (str): The path to the CSV file containing the data.
-        output_path (str): The path to write the output MCF file.
+        output_path (str): The path to write the output CSV file.
     """
 
     visited_dcids: set = set()
