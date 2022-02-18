@@ -35,19 +35,19 @@ _COLUMNS = [
 _TEMPLATE_CENSUS_REGION = """Node: {dcid}
 typeOf: dcs:CensusRegion
 censusRegionId: "{region}"
-containedIn: dcid:country/USA
+containedInPlace: dcid:country/USA
 """
 
 _TEMPLATE_CENSUS_DIVISION = """Node: {dcid}
 typeOf: dcs:CensusDivision
 censusDivisionId: "{division}"
-containedIn: {region_dcid}
+containedInPlace: {region_dcid}
 """
 
 _TEMPLATE_STATE = """# State: {name}
 Node: {dcid}
 typeOf: dcs:State
-containedIn: {division_dcid}
+containedInPlace: {division_dcid}
 """
 
 
