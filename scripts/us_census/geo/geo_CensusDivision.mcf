@@ -1,332 +1,319 @@
-Node: dcid:USNortheast
+Node: dcid:USNortheastRegion
 typeOf: dcs:CensusRegion
-name: "US Region 1: Northeast"
-fipsCode: 1
+censusRegionId: "1"
 containedIn: dcid:country/USA
 
-Node: dcid:USNewEngland
+Node: dcid:USNewEnglandDivision
 typeOf: dcs:CensusDivision
-name: "US Division 1: New England"
-fipsCode: 1
-containedIn: dcid:USNortheast
+censusDivisionId: "1"
+containedIn: dcid:USNortheastRegion
 
-#: State: Connecticut
+# State: Connecticut
 Node: dcid:geoId/09
 typeOf: dcs:State
-containedIn: dcid:USNewEngland
+containedIn: dcid:USNewEnglandDivision
 
-#: State: Maine
+# State: Maine
 Node: dcid:geoId/23
 typeOf: dcs:State
-containedIn: dcid:USNewEngland
+containedIn: dcid:USNewEnglandDivision
 
-#: State: Massachusetts
+# State: Massachusetts
 Node: dcid:geoId/25
 typeOf: dcs:State
-containedIn: dcid:USNewEngland
+containedIn: dcid:USNewEnglandDivision
 
-#: State: New Hampshire
+# State: New Hampshire
 Node: dcid:geoId/33
 typeOf: dcs:State
-containedIn: dcid:USNewEngland
+containedIn: dcid:USNewEnglandDivision
 
-#: State: Rhode Island
+# State: Rhode Island
 Node: dcid:geoId/44
 typeOf: dcs:State
-containedIn: dcid:USNewEngland
+containedIn: dcid:USNewEnglandDivision
 
-#: State: Vermont
+# State: Vermont
 Node: dcid:geoId/50
 typeOf: dcs:State
-containedIn: dcid:USNewEngland
+containedIn: dcid:USNewEnglandDivision
 
-Node: dcid:USMiddleAtlantic
+Node: dcid:USMiddleAtlanticDivision
 typeOf: dcs:CensusDivision
-name: "US Division 2: Middle Atlantic"
-fipsCode: 2
-containedIn: dcid:USNortheast
+censusDivisionId: "2"
+containedIn: dcid:USNortheastRegion
 
-#: State: New Jersey
+# State: New Jersey
 Node: dcid:geoId/34
 typeOf: dcs:State
-containedIn: dcid:USMiddleAtlantic
+containedIn: dcid:USMiddleAtlanticDivision
 
-#: State: New York
+# State: New York
 Node: dcid:geoId/36
 typeOf: dcs:State
-containedIn: dcid:USMiddleAtlantic
+containedIn: dcid:USMiddleAtlanticDivision
 
-#: State: Pennsylvania
+# State: Pennsylvania
 Node: dcid:geoId/42
 typeOf: dcs:State
-containedIn: dcid:USMiddleAtlantic
+containedIn: dcid:USMiddleAtlanticDivision
 
-Node: dcid:USMidwest
+Node: dcid:USMidwestRegion
 typeOf: dcs:CensusRegion
-name: "US Region 2: Midwest"
-fipsCode: 2
+censusRegionId: "2"
 containedIn: dcid:country/USA
 
-Node: dcid:USEastNorthCentral
+Node: dcid:USEastNorthCentralDivision
 typeOf: dcs:CensusDivision
-name: "US Division 3: East North Central"
-fipsCode: 3
-containedIn: dcid:USMidwest
+censusDivisionId: "3"
+containedIn: dcid:USMidwestRegion
 
-#: State: Illinois
+# State: Illinois
 Node: dcid:geoId/17
 typeOf: dcs:State
-containedIn: dcid:USEastNorthCentral
+containedIn: dcid:USEastNorthCentralDivision
 
-#: State: Indiana
+# State: Indiana
 Node: dcid:geoId/18
 typeOf: dcs:State
-containedIn: dcid:USEastNorthCentral
+containedIn: dcid:USEastNorthCentralDivision
 
-#: State: Michigan
+# State: Michigan
 Node: dcid:geoId/26
 typeOf: dcs:State
-containedIn: dcid:USEastNorthCentral
+containedIn: dcid:USEastNorthCentralDivision
 
-#: State: Ohio
+# State: Ohio
 Node: dcid:geoId/39
 typeOf: dcs:State
-containedIn: dcid:USEastNorthCentral
+containedIn: dcid:USEastNorthCentralDivision
 
-#: State: Wisconsin
+# State: Wisconsin
 Node: dcid:geoId/55
 typeOf: dcs:State
-containedIn: dcid:USEastNorthCentral
+containedIn: dcid:USEastNorthCentralDivision
 
-Node: dcid:USWestNorthCentral
+Node: dcid:USWestNorthCentralDivision
 typeOf: dcs:CensusDivision
-name: "US Division 4: West North Central"
-fipsCode: 4
-containedIn: dcid:USMidwest
+censusDivisionId: "4"
+containedIn: dcid:USMidwestRegion
 
-#: State: Iowa
+# State: Iowa
 Node: dcid:geoId/19
 typeOf: dcs:State
-containedIn: dcid:USWestNorthCentral
+containedIn: dcid:USWestNorthCentralDivision
 
-#: State: Kansas
+# State: Kansas
 Node: dcid:geoId/20
 typeOf: dcs:State
-containedIn: dcid:USWestNorthCentral
+containedIn: dcid:USWestNorthCentralDivision
 
-#: State: Minnesota
+# State: Minnesota
 Node: dcid:geoId/27
 typeOf: dcs:State
-containedIn: dcid:USWestNorthCentral
+containedIn: dcid:USWestNorthCentralDivision
 
-#: State: Missouri
+# State: Missouri
 Node: dcid:geoId/29
 typeOf: dcs:State
-containedIn: dcid:USWestNorthCentral
+containedIn: dcid:USWestNorthCentralDivision
 
-#: State: Nebraska
+# State: Nebraska
 Node: dcid:geoId/31
 typeOf: dcs:State
-containedIn: dcid:USWestNorthCentral
+containedIn: dcid:USWestNorthCentralDivision
 
-#: State: North Dakota
+# State: North Dakota
 Node: dcid:geoId/38
 typeOf: dcs:State
-containedIn: dcid:USWestNorthCentral
+containedIn: dcid:USWestNorthCentralDivision
 
-#: State: South Dakota
+# State: South Dakota
 Node: dcid:geoId/46
 typeOf: dcs:State
-containedIn: dcid:USWestNorthCentral
+containedIn: dcid:USWestNorthCentralDivision
 
-Node: dcid:USSouth
+Node: dcid:USSouthRegion
 typeOf: dcs:CensusRegion
-name: "US Region 3: South"
-fipsCode: 3
+censusRegionId: "3"
 containedIn: dcid:country/USA
 
-Node: dcid:USSouthAtlantic
+Node: dcid:USSouthAtlanticDivision
 typeOf: dcs:CensusDivision
-name: "US Division 5: South Atlantic"
-fipsCode: 5
-containedIn: dcid:USSouth
+censusDivisionId: "5"
+containedIn: dcid:USSouthRegion
 
-#: State: Delaware
+# State: Delaware
 Node: dcid:geoId/10
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-#: State: District of Columbia
+# State: District of Columbia
 Node: dcid:geoId/11
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-#: State: Florida
+# State: Florida
 Node: dcid:geoId/12
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-#: State: Georgia
+# State: Georgia
 Node: dcid:geoId/13
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-#: State: Maryland
+# State: Maryland
 Node: dcid:geoId/24
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-#: State: North Carolina
+# State: North Carolina
 Node: dcid:geoId/37
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-#: State: South Carolina
+# State: South Carolina
 Node: dcid:geoId/45
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-#: State: Virginia
+# State: Virginia
 Node: dcid:geoId/51
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-#: State: West Virginia
+# State: West Virginia
 Node: dcid:geoId/54
 typeOf: dcs:State
-containedIn: dcid:USSouthAtlantic
+containedIn: dcid:USSouthAtlanticDivision
 
-Node: dcid:USEastSouthCentral
+Node: dcid:USEastSouthCentralDivision
 typeOf: dcs:CensusDivision
-name: "US Division 6: East South Central"
-fipsCode: 6
-containedIn: dcid:USSouth
+censusDivisionId: "6"
+containedIn: dcid:USSouthRegion
 
-#: State: Alabama
+# State: Alabama
 Node: dcid:geoId/01
 typeOf: dcs:State
-containedIn: dcid:USEastSouthCentral
+containedIn: dcid:USEastSouthCentralDivision
 
-#: State: Kentucky
+# State: Kentucky
 Node: dcid:geoId/21
 typeOf: dcs:State
-containedIn: dcid:USEastSouthCentral
+containedIn: dcid:USEastSouthCentralDivision
 
-#: State: Mississippi
+# State: Mississippi
 Node: dcid:geoId/28
 typeOf: dcs:State
-containedIn: dcid:USEastSouthCentral
+containedIn: dcid:USEastSouthCentralDivision
 
-#: State: Tennessee
+# State: Tennessee
 Node: dcid:geoId/47
 typeOf: dcs:State
-containedIn: dcid:USEastSouthCentral
+containedIn: dcid:USEastSouthCentralDivision
 
-Node: dcid:USWestSouthCentral
+Node: dcid:USWestSouthCentralDivision
 typeOf: dcs:CensusDivision
-name: "US Division 7: West South Central"
-fipsCode: 7
-containedIn: dcid:USSouth
+censusDivisionId: "7"
+containedIn: dcid:USSouthRegion
 
-#: State: Arkansas
+# State: Arkansas
 Node: dcid:geoId/05
 typeOf: dcs:State
-containedIn: dcid:USWestSouthCentral
+containedIn: dcid:USWestSouthCentralDivision
 
-#: State: Louisiana
+# State: Louisiana
 Node: dcid:geoId/22
 typeOf: dcs:State
-containedIn: dcid:USWestSouthCentral
+containedIn: dcid:USWestSouthCentralDivision
 
-#: State: Oklahoma
+# State: Oklahoma
 Node: dcid:geoId/40
 typeOf: dcs:State
-containedIn: dcid:USWestSouthCentral
+containedIn: dcid:USWestSouthCentralDivision
 
-#: State: Texas
+# State: Texas
 Node: dcid:geoId/48
 typeOf: dcs:State
-containedIn: dcid:USWestSouthCentral
+containedIn: dcid:USWestSouthCentralDivision
 
-Node: dcid:USWest
+Node: dcid:USWestRegion
 typeOf: dcs:CensusRegion
-name: "US Region 4: West"
-fipsCode: 4
+censusRegionId: "4"
 containedIn: dcid:country/USA
 
-Node: dcid:USMountain
+Node: dcid:USMountainDivision
 typeOf: dcs:CensusDivision
-name: "US Division 8: Mountain"
-fipsCode: 8
-containedIn: dcid:USWest
+censusDivisionId: "8"
+containedIn: dcid:USWestRegion
 
-#: State: Arizona
+# State: Arizona
 Node: dcid:geoId/04
 typeOf: dcs:State
-containedIn: dcid:USMountain
+containedIn: dcid:USMountainDivision
 
-#: State: Colorado
+# State: Colorado
 Node: dcid:geoId/08
 typeOf: dcs:State
-containedIn: dcid:USMountain
+containedIn: dcid:USMountainDivision
 
-#: State: Idaho
+# State: Idaho
 Node: dcid:geoId/16
 typeOf: dcs:State
-containedIn: dcid:USMountain
+containedIn: dcid:USMountainDivision
 
-#: State: Montana
+# State: Montana
 Node: dcid:geoId/30
 typeOf: dcs:State
-containedIn: dcid:USMountain
+containedIn: dcid:USMountainDivision
 
-#: State: Nevada
+# State: Nevada
 Node: dcid:geoId/32
 typeOf: dcs:State
-containedIn: dcid:USMountain
+containedIn: dcid:USMountainDivision
 
-#: State: New Mexico
+# State: New Mexico
 Node: dcid:geoId/35
 typeOf: dcs:State
-containedIn: dcid:USMountain
+containedIn: dcid:USMountainDivision
 
-#: State: Utah
+# State: Utah
 Node: dcid:geoId/49
 typeOf: dcs:State
-containedIn: dcid:USMountain
+containedIn: dcid:USMountainDivision
 
-#: State: Wyoming
+# State: Wyoming
 Node: dcid:geoId/56
 typeOf: dcs:State
-containedIn: dcid:USMountain
+containedIn: dcid:USMountainDivision
 
-Node: dcid:USPacific
+Node: dcid:USPacificDivision
 typeOf: dcs:CensusDivision
-name: "US Division 9: Pacific"
-fipsCode: 9
-containedIn: dcid:USWest
+censusDivisionId: "9"
+containedIn: dcid:USWestRegion
 
-#: State: Alaska
+# State: Alaska
 Node: dcid:geoId/02
 typeOf: dcs:State
-containedIn: dcid:USPacific
+containedIn: dcid:USPacificDivision
 
-#: State: California
+# State: California
 Node: dcid:geoId/06
 typeOf: dcs:State
-containedIn: dcid:USPacific
+containedIn: dcid:USPacificDivision
 
-#: State: Hawaii
+# State: Hawaii
 Node: dcid:geoId/15
 typeOf: dcs:State
-containedIn: dcid:USPacific
+containedIn: dcid:USPacificDivision
 
-#: State: Oregon
+# State: Oregon
 Node: dcid:geoId/41
 typeOf: dcs:State
-containedIn: dcid:USPacific
+containedIn: dcid:USPacificDivision
 
-#: State: Washington
+# State: Washington
 Node: dcid:geoId/53
 typeOf: dcs:State
-containedIn: dcid:USPacific
+containedIn: dcid:USPacificDivision

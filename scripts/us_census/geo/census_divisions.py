@@ -42,10 +42,29 @@ _COLUMNS = [
 
 _OUTPUT_PROPERTIES = ['#', 'Node', 'typeOf', 'name', 'fipsCode', 'containedIn']
 
+_TEMPLATE_CENSUS_REGION = """Node: {dcid}
+typeOf: dcs:CensusRegion
+censusRegionId: "{region}"
+containedIn: dcid:country/USA
+"""
 
-def _to_camelcase(text: str) -> str:
+_TEMPLATE_CENSUS_DIVISION = """Node: {dcid}
+typeOf: dcs:CensusDivision
+censusDivisionId: "{division}"
+containedIn: {region_dcid}
+"""
+
+_TEMPLATE_STATE = """# State: {name}
+Node: {dcid}
+typeOf: dcs:State
+containedIn: {division_dcid}
+"""
+
+
+def _to_camelcase(name: str) -> str:
     '''Returns the text in CamelCase with spaces removed.'''
-    return ''.join([x.capitalize() for x in text.split(' ')])
+    name = name.strip()
+    return ''.join([x.capitalize() for x in name.split(' ')])
 
 
 def _get_state_dcid(code: int) -> str:
@@ -69,56 +88,32 @@ def _get_division_dcid(code: int, name: str, dcid_map: dict) -> str:
     return dcid_map[f'd{code}']
 
 
-def _get_mcf_for_dict(node: dict) -> str:
-    '''Returns an MCF node with all property values in the dict.'''
-    mcf = []
-    # Add output properties in order
-    node_props = list(node.keys())
-    for p in _OUTPUT_PROPERTIES:
-        if p in node:
-            mcf.append(f'{p}: {node[p]}')
-            node_props.remove(p)
-    # Add any remaining properties.
-    for p in node_props:
-        mcf.append(f'{p}: {node[p]}')
-    return '\n'.join(mcf)
-
-
 def _generate_mcf(region: int, division: int, state: int, name: str,
                   dcid_map: dict) -> str:
     '''Returns the MCF nodes for the given codes and also adds the dcid to the map.
     '''
     mcf = []
-    name = name.replace('Region', '').replace('Division', '').strip()
     if state > 0:
         # Generate a contained in node for state.
         dcid = _get_state_dcid(state)
-        return _get_mcf_for_dict({
-            '#': f'State: {name}',
-            'Node': dcid,
-            'typeOf': 'dcs:State',
-            'containedIn': _get_division_dcid(division, '', dcid_map),
-        })
+        return _TEMPLATE_STATE.format(name=name,
+                                      dcid=dcid,
+                                      division_dcid=_get_division_dcid(
+                                          division, '', dcid_map))
     if division > 0:
         # Generate a node for the division.
         dcid = _get_division_dcid(division, name, dcid_map)
-        return _get_mcf_for_dict({
-            'Node': dcid,
-            'typeOf': 'dcs:CensusDivision',
-            'fipsCode': division,
-            'containedIn': _get_region_dcid(region, '', dcid_map),
-            'name': f'"US Division {division}: {name}"',
-        })
+        return _TEMPLATE_CENSUS_DIVISION.format(name=name,
+                                                dcid=dcid,
+                                                division=division,
+                                                region_dcid=_get_region_dcid(
+                                                    region, '', dcid_map))
     if region > 0:
         # Generate a node for census region.
         dcid = _get_region_dcid(region, name, dcid_map)
-        return _get_mcf_for_dict({
-            'Node': dcid,
-            'typeOf': 'dcs:CensusRegion',
-            'fipsCode': region,
-            'containedIn': 'dcid:country/USA',
-            'name': f'"US Region {region}: {name}"',
-        })
+        return _TEMPLATE_CENSUS_REGION.format(name=name,
+                                              dcid=dcid,
+                                              region=region)
     return ''
 
 
@@ -155,7 +150,7 @@ def process(csv_filename: str, output_filename: str):
             mcf.append(_generate_mcf(region, division, state, name, dcid_map))
 
     with open(output_filename, 'w') as out_mcf:
-        out_mcf.write('\n\n'.join(mcf))
+        out_mcf.write('\n'.join(mcf))
     print(f'Generated {len(mcf)} nodes in "{output_filename}"')
 
 
