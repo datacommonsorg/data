@@ -11,15 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''
-Generate MCF nodes for US Census Divisions and Regions
-
-To run, download the codes from
-https://www2.census.gov/programs-surveys/popest/geographies/2018/state-geocodes-v2018.xlsx
-and save it as a csv file: 'geocodes.csv'.
-Then run 'python3 census_divisions.py --census_divisions_csv=geocodes.csv'
-to generate the mcf nodes in 'geo_CensusDivision.mcf'.
-'''
+'''Generate MCF nodes for US Census Divisions and Regions. '''
 
 import csv
 
@@ -39,8 +31,6 @@ _COLUMNS = [
     'State (FIPS)',
     'Name',
 ]
-
-_OUTPUT_PROPERTIES = ['#', 'Node', 'typeOf', 'name', 'fipsCode', 'containedIn']
 
 _TEMPLATE_CENSUS_REGION = """Node: {dcid}
 typeOf: dcs:CensusRegion
