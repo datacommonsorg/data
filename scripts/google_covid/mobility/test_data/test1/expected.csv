@@ -1,0 +1,17 @@
+observationAbout,variableMeasured,observationDate,value
+dcid:country/ARE,dcid:Covid19MobilityTrend_LocalBusiness,2020-02-15,0
+dcid:country/ARE,dcid:Covid19MobilityTrend_GroceryStoreAndPharmacy,2020-02-15,4
+dcid:country/ARE,dcid:Covid19MobilityTrend_Park,2020-02-15,5
+dcid:country/ARE,dcid:Covid19MobilityTrend_TransportHub,2020-02-15,0
+dcid:country/ARE,dcid:Covid19MobilityTrend_Workplace,2020-02-15,2
+dcid:country/ARE,dcid:Covid19MobilityTrend_Residence,2020-02-15,1
+dcid:country/ARE,dcid:Covid19MobilityTrend_GroceryStoreAndPharmacy,2020-02-16,4
+dcid:country/ARE,dcid:Covid19MobilityTrend_Park,2020-02-16,4
+dcid:country/ARE,dcid:Covid19MobilityTrend_TransportHub,2020-02-16,1
+dcid:country/ARE,dcid:Covid19MobilityTrend_Workplace,2020-02-16,2
+dcid:country/ARE,dcid:Covid19MobilityTrend_Residence,2020-02-16,1
+dcid:country/ARE,dcid:Covid19MobilityTrend_LocalBusiness,2020-02-17,-1
+dcid:country/ARE,dcid:Covid19MobilityTrend_GroceryStoreAndPharmacy,2020-02-17,1
+dcid:country/ARE,dcid:Covid19MobilityTrend_Park,2020-02-17,5
+dcid:country/ARE,dcid:Covid19MobilityTrend_Workplace,2020-02-17,2
+dcid:country/ARE,dcid:Covid19MobilityTrend_Residence,2020-02-17,1

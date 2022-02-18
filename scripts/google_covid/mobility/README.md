@@ -48,12 +48,8 @@ Type of Place
 ### Raw Data
 - `data.csv` gets downloaded.
 
-### MCF
-- `covid_mobility_output.mcf` gets generated.
-
-### Scripts
-- [CovidMobility.py](CovidMobility.py)
-- [TestCovidMobility.py](TestCovidMobility.py)
+### Cleaned CSV
+- `covid_mobility.csv` gets generated.
 
 ### Notes
 The geoIds of the U.S Counties was generated using the County's real FIPS code from:
@@ -75,14 +71,14 @@ For example:
 The reason for this is because the Google Mobility dataset uses an alternative name to refer to the same region.
 Any modifications to the names were duplicated.
 
-## Generating MCF
-To generate the output MCF `covid_mobility_output.mcf`, run
+## Generating Cleaned CSV
+To generate the output MCF `covid_mobility.csv`, run
 
 ``` bash
 python3 covidmobility.py
 ```
 
-To run the unit tests for CovidMobility.py run:
+To run the unit tests for covidmobility.py run:
 
 ```bash
 python3 -m unittest covidmobility_test.py

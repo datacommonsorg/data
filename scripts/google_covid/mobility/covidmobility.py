@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,8 +43,8 @@ def covid_mobility(input_path: str = 'downloaded_data.csv',
     """Main method for the covid_mobility script.
 
     Args:
-        path_to_store_data (str): Defaults to 'data.csv'.
-        export_to (str): Defaults to 'covid_mobility_output.mcf'.
+        path_to_store_data (str): Defaults to 'downloaded_data.csv'.
+        export_to (str): Defaults to 'covid_mobility.csv'.
     """
 
     # URL to download the data from Google Mobility site.
@@ -55,10 +55,10 @@ def covid_mobility(input_path: str = 'downloaded_data.csv',
     _download_data(url=url, download_as=input_path)
 
     # Convert the CSV data to MCF.
-    csv_to_mcf(input_path, output_path)
+    clean_csv(input_path, output_path)
 
 
-def csv_to_mcf(input_path: str, output_path: str) -> None:
+def clean_csv(input_path: str, output_path: str) -> None:
     """Converts the Mobility data to MCF.
 
     Args:
@@ -82,8 +82,7 @@ def csv_to_mcf(input_path: str, output_path: str) -> None:
                                         fieldnames=[
                                             'observationAbout',
                                             'variableMeasured',
-                                            'observationDate',
-                                            'value'
+                                            'observationDate', 'value'
                                         ],
                                         doublequote=False,
                                         escapechar='\\')

@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 
 import os
 import sys
+import tempfile
 import unittest
 
 # Allows the following module imports to work when running as a script
@@ -21,29 +22,21 @@ _CODE_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODE_DIR, '../../'))
 from google_covid.mobility import covidmobility
 
+_TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                        'test_data')
+
 
 class TestCovidMobility(unittest.TestCase):
     maxDiff = None
 
-    def test1(self):
-        """Simple test 1"""
-        self._test_mcf_output('./tests/test1')
+    def test_main(self):
+        for d in ['test1', 'test2', 'test3', 'test4']:
+            print('Running test', d)
+            self._test_csv_output(os.path.join(_TESTDIR, d))
 
-    def test2(self):
-        """Simple test 2"""
-        self._test_mcf_output('./tests/test2')
-
-    def test3(self):
-        """Tests a row with empty data."""
-        self._test_mcf_output('./tests/test3')
-
-    def test4(self):
-        """Tests a row with an empty date."""
-        self._test_mcf_output('./tests/test4')
-
-    def _test_mcf_output(self, dir_path: str):
+    def _test_csv_output(self, dir_path: str):
         """Generates an MCF file, given an input data file.
-        Compares the expected.mcf to the output.mcf file
+        Compares the expected.csv to the output.csv file
         to make sure the function is performing as designed.
 
         Args:
@@ -54,30 +47,30 @@ class TestCovidMobility(unittest.TestCase):
             str: expected output == actual output.
         """
 
-        module_dir = os.path.dirname(os.path.realpath(__file__))
-        input_path = os.path.join(module_dir, dir_path, "data.csv")
-        output_path = os.path.join(module_dir, dir_path, "output.mcf")
-        expected_path = os.path.join(module_dir, dir_path, "expected.mcf")
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_path = os.path.join(dir_path, "data.csv")
+            expected_path = os.path.join(dir_path, "expected.csv")
+            output_path = os.path.join(tmp_dir, "output.csv")
 
-        if not os.path.exists(input_path):
-            self.fail(input_path + " doesn't exist!")
-        if not os.path.exists(expected_path):
-            self.fail(expected_path + " doesn't exist!")
+            if not os.path.exists(input_path):
+                self.fail(input_path + " doesn't exist!")
+            if not os.path.exists(expected_path):
+                self.fail(expected_path + " doesn't exist!")
 
-        # Generate the output mcf file.
-        covidmobility.csv_to_mcf(input_path, output_path)
+            # Generate the output mcf file.
+            covidmobility.clean_csv(input_path, output_path)
 
-        # Get the content from the MCF file.
-        actual_f = open(output_path, 'r+')
-        actual: str = actual_f.read()
-        actual_f.close()
+            # Get the content from the MCF file.
+            actual_f = open(output_path, 'r+')
+            actual: str = actual_f.read()
+            actual_f.close()
 
-        # Get the content of the expected output.
-        expected_f = open(expected_path, 'r+')
-        expected = expected_f.read()
-        expected_f.close()
+            # Get the content of the expected output.
+            expected_f = open(expected_path, 'r+')
+            expected: str = expected_f.read()
+            expected_f.close()
 
-        self.assertEqual(actual, expected)
+            self.assertEqual(actual, expected)
 
 
 if __name__ == '__main__':
