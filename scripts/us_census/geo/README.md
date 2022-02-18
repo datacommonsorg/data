@@ -3,7 +3,6 @@
 ## Census Regions and Divisions
 The states in the USA are grouped into nine Census Divisions with ids [1-9].
 The divisions are further grouped into four Census Regions with ids [1-4].
-
 The grouping are illustrated in [this
 page](https://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf).
 
@@ -12,12 +11,15 @@ the script `census_divisions.py`.
 
 ### Download data
 
-The states and the respective region and divisions has been downloaded from [this
-spreadsheet](https://www2.census.gov/programs-surveys/popest/geographies/2018/state-geocodes-v2018.xlsx) and saved as a csv file `census_region_geocodes.csv`.
+The states and the respective region and divisions has been downloaded from
+https://www2.census.gov/programs-surveys/popest/geographies/2018/state-geocodes-v2018.xlsx and saved as a csv file `census_region_geocodes.csv`.
 
 ### Import procedure
 
 To generate the MCF nodes for US census regions and divisions:
-download the codes and save it as a csv file: 'geocodes.csv'.
-Then run `python3 census_divisions.py --census_divisions_csv=geocodes.csv`
-to generate the mcf nodes in `geo_CensusDivision.mcf`.
+
+Download the codes and save it as a csv file: 'geocodes.csv'.
+
+Run the following command to generate the mcf nodes in `geo_CensusDivision.mcf`:
+
+`python3 census_divisions.py --census_divisions_csv=geocodes.csv`
