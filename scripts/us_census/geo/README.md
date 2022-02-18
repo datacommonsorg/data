@@ -18,8 +18,8 @@ https://www2.census.gov/programs-surveys/popest/geographies/2018/state-geocodes-
 
 To generate the MCF nodes for US census regions and divisions:
 
-Download the codes and save it as a csv file: 'geocodes.csv'.
-
-Run the following command to generate the mcf nodes in `geo_CensusDivision.mcf`:
+1. Download the
+   [codes](https://www2.census.gov/programs-surveys/popest/geographies/2018/state-geocodes-v2018.xlsx) and save it as a csv file: 'geocodes.csv'.
+2. Run the following command to generate the mcf nodes in `geo_CensusDivision.mcf`:
 
 `python3 census_divisions.py --census_divisions_csv=geocodes.csv`
