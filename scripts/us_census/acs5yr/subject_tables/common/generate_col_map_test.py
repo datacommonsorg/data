@@ -19,10 +19,6 @@ import unittest
 
 from .generate_col_map import generate_stat_var_map, process_zip_file
 
-
-# TODO: use a smaller spec which exercises all functions in the module
-# TODO: Add smaller unittests for each class / function in the module
-# TODO: Update tests to use smaller input / expected files for end-to-end test.
 class GenerateColMapTest(unittest.TestCase):
     """ Test Cases for checking the generation of column map from JSON Spec"""
 

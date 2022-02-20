@@ -15,12 +15,10 @@
 Module to generate a column map to their corresponding statistical variable defintions.
 """
 import os
-import io
 import sys
 import logging
 import json
-import re
-import csv
+import pandas as pd
 from zipfile import ZipFile
 from collections import OrderedDict
 
@@ -54,55 +52,49 @@ _JSON_KEYS = [
 ]
 
 
-# TODO: Extend support to csv file and input directory
-# TODO - add typing hints and document the format of inputs
-def process_zip_file(zip_file_path,
-                     spec_path,
-                     write_output=True,
-                     output_dir_path='./',
-                     delimiter='!!',
-                     header_row=1):
-    """Given a zip file of datasets in csv format, the function builds a column map for each year
-  Args:
-    zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
-    spec_path: File path where the JSON specification to be used for generating the column map is present
-    write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
-    output_dir_path: File path to the directory where column map is to be saved (default=./)
-    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
-    header: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+def process_csv_file(csv_file_path: str,
+                     spec_path: str,
+                     write_output: bool = True,
+                     output_dir_path: str = './',
+                     delimiter: str = '!!',
+                     header_row: int = 1) -> dict:
+    """
+    Given a csv census data file, the function builds a column map for each year
+    
+      Args:
+        csv_file_path: input zip file with data files in csv format, file     naming expected to be consistent with data.census.gov
+        spec_path: File path where the JSON specification to be used for generating the column map is present
+        write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+        output_dir_path: File path to the directory where column map is to be saved (default=./)
+        delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+        header_row: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
 
-  Returns:
-    A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
-    Example:
-      "2016": {
-        "Total Civilian population": {
-          "populationType": "Person",
-          "statType": "measuredValue",
-          "measuredProperty": "Count Person"
-          "armedForceStatus": "Civilian"
-        },
-        "<column-name-2>": {}, .....,
-      }
-  """
+      Returns:
+        A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+        Example:
+          "2016": {
+            "Total Civilian population": {
+              "populationType": "Person",
+              "statType": "measuredValue",
+              "measuredProperty": "Count Person"
+              "armedForceStatus": "Civilian"
+            },
+            "<column-name-2>": {}, .....,
+          }
+    """
     f = open(spec_path, 'r')
     spec_dict = json.load(f)
     f.close()
 
     column_map = {}
-    counter_dict = {}
+    filename = csv_file_path
 
-    with ZipFile(zip_file_path) as zf:
-        for filename in zf.namelist():
-            if 'data_with_overlays' in filename:
-                with io.TextIOWrapper(zf.open(filename, 'r')) as csv_file:
-                    csv_reader = csv.reader(csv_file)
-                    for index, line in enumerate(csv_reader):
-                        if index == header_row:
-                            year = filename.split(f'ACSST5Y')[1][:4]
-                            column_map[year] = generate_stat_var_map(
-                                spec_dict, line, delimiter)
-                            break
-                        continue
+    if 'data_with_overlays' in filename:
+        df = pd.read_csv(filename, header=header_row, low_memory=False)
+        year = filename.split(f'ACSST5Y')[1][:4]
+        column_map[year] = generate_stat_var_map(spec_dict, df.columns.tolist(),
+                                                 delimiter)
+
     ## save the column_map
     if write_output:
         f = open(f'{output_dir_path}/column_map.json', 'w')
@@ -111,12 +103,118 @@ def process_zip_file(zip_file_path,
     return column_map
 
 
-def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
+def process_input_directory(input_path: str,
+                            spec_path: str,
+                            write_output: bool = True,
+                            output_dir_path: str = './',
+                            delimiter: str = '!!',
+                            header_row: int = 1) -> dict:
+    """
+    Given a directory of input files, the function builds a column map for each year
+  
+    Args:
+        input_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
+        spec_path: File path where the JSON specification to be used for generating the column map is present
+        write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+        output_dir_path: File path to the directory where column map is to be saved (default=./)
+        delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+        header_row: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+
+      Returns:
+        A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+        Example:
+          "2016": {
+            "Total Civilian population": {
+              "populationType": "Person",
+              "statType": "measuredValue",
+              "measuredProperty": "Count Person"
+              "armedForceStatus": "Civilian"
+            },
+            "<column-name-2>": {}, .....,
+          }
+    """
+    f = open(spec_path, 'r')
+    spec_dict = json.load(f)
+    f.close()
+
+    column_map = {}
+    for filename in sorted(os.listdir(input_path)):
+        if 'data_with_overlays' in filename:
+            df = pd.read_csv(filename, header=header_row, low_memory=False)
+            year = filename.split(f'ACSST5Y')[1][:4]
+            column_map[year] = generate_stat_var_map(spec_dict,
+                                                     df.columns.tolist(),
+                                                     delimiter)
+
+    ## save the column_map
+    if write_output:
+        f = open(f'{output_dir_path}/column_map.json', 'w')
+        json.dump(column_map, f, indent=4)
+        f.close()
+    return column_map
+
+
+def process_zip_file(zip_file_path: str,
+                     spec_path: str,
+                     write_output: bool = True,
+                     output_dir_path: str = './',
+                     delimiter: str = '!!',
+                     header_row: int = 1) -> dict:
+    """Given a zip file of datasets in csv format, the function builds a column map for each year
+      Args:
+        zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
+        spec_path: File path where the JSON specification to be used for generating the column map is present
+        write_output: Boolean to allow saving the generated column map to an out_dir_path. (default = False)
+        output_dir_path: File path to the directory where column map is to be saved (default=./)
+        delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
+        header_row: specify the index of the row where the column names are found in the csv files (default=1, for subject tables)
+
+      Returns:
+        A dictionary mapping each year with the corresponding column_map from generate_stat_var_map()
+        Example:
+          "2016": {
+            "Total Civilian population": {
+              "populationType": "Person",
+              "statType": "measuredValue",
+              "measuredProperty": "Count Person"
+              "armedForceStatus": "Civilian"
+            },
+            "<column-name-2>": {}, .....,
+          }
+    """
+    f = open(spec_path, 'r')
+    spec_dict = json.load(f)
+    f.close()
+
+    column_map = {}
+    zf = ZipFile(zip_file_path)
+    for filename in sorted(zf.namelist()):
+        if 'data_with_overlays' in filename:
+            df = pd.read_csv(zf.open(filename, 'r'),
+                             header=header_row,
+                             low_memory=False)
+            year = filename.split(f'ACSST5Y')[1][:4]
+            column_map[year] = generate_stat_var_map(spec_dict,
+                                                     df.columns.tolist(),
+                                                     delimiter)
+
+    ## save the column_map
+    if write_output:
+        f = open(f'{output_dir_path}/column_map.json', 'w')
+        json.dump(column_map, f, indent=4)
+        f.close()
+    return column_map
+
+
+def generate_stat_var_map(spec_dict: dict,
+                          column_list: list[str],
+                          delimiter: str = '!!'):
     """Wrapper function for generateColMapBase class to generate column map.
 
   Args:
-    specDict: A dictionary containing specifications for the different properties of the statistical variable.
-    columnList: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
+    spec_dict: A dictionary containing specifications for the different properties of the statistical variable.
+    column_list: A list of column names for which the column map needs to be generated. This is typically the column header in the dataset.
+    delimiter: specify the string delimiter used in the column names. (default=!!, for subject tables)
 
   Returns:
     A dictionary mapping each column to their respective stat_var node definitions.
@@ -145,27 +243,30 @@ class GenerateColMapBase:
     delimiter: The delimiting string that is used for tokenising the column name
   """
 
-    # TODO - add typing hints and document the format.
-    def __init__(self, spec_dict={}, column_list=[], delimiter='!!'):
+    def __init__(self,
+                 spec_dict: dict = {},
+                 column_list: list[str] = [],
+                 delimiter: str = '!!') -> None:
         """module init"""
         self.features = spec_dict
         self.column_list = column_list
         self.column_map = {}
         self.delimiter = delimiter
-        # TODO: Add a dictionary of counters with summary stats of number of
-        # columns, number of statvars generated, statvars of differnt population
-        # types, errors or warnings,
-        #
+        self.counter_dict = {
+            'num_col': 0,
+            'num_sv': 0,
+            'num_sv_popType': 0,
+            'gen_errors': []
+        }
         # fill missing keys in JSON spec with empty values
         for key in _JSON_KEYS:
             if key not in self.features:
-                # TODO: initialize UniversePVs as empty list
-                if key == 'ignoreColumns':
+                if key == 'ignoreColumns' or key == 'universePVs':
                     self.features[key] = []
                 else:
                     self.features[key] = {}
 
-    def _find_and_replace_column_names(self, column):
+    def _find_and_replace_column_names(self, column: str) -> str:
         """
         if spec has find_and_replace defined, this function updates column names
         """
@@ -177,15 +278,20 @@ class GenerateColMapBase:
                 return find_and_replace_dict[column]
             # replace a token in the column name
             else:
-                # TODO: Support the find_and_replace of more than one token
                 part_list = column.split(self.delimiter)
-                for idx, part in enumerate(part_list):
-                    if part in find_and_replace_dict:
-                        part_list[idx] = find_and_replace_dict[part]
+                for key, val in find_and_replace_dict.items():
+                    # check if one or more token is a subset of the column
+                    if set(key.split(self.delimiter)).issubset(set(part_list)):
+                        # we find the elements that contains the tokens to replace
+                        # and update the part_list (tokenized column name) with the
+                        # replacement token
+                        for change in key.split(self.delimiter):
+                            idx = part_list.index(change)
+                            part_list[idx] = val
                         return self.delimiter.join(part_list)
         return column
 
-    def _generate_stat_vars_from_spec(self):
+    def _generate_stat_vars_from_spec(self) -> dict:
         """generates stat_var nodes for each column in column list and 
         returns a dictionary of columns with their respective stat_var nodes
 
@@ -199,33 +305,20 @@ class GenerateColMapBase:
           "<column-name-2>": {}, .....
         }"""
         # for each column generate the definition of their respective statistical variable node
-        # TODO: This code block can be simplified to the following:
-        # if col in self.features['ignoreColumns'] or
-        # len((set(self.features['ignoreColumns']) &
-        # set(col.split(self.delimiter)) > 0:
         for col in self.column_list:
-            # TODO: Replace the type of ignore_token_count to boolean
-            ignore_token_count = 0
-            for part in col.split(self.delimiter):
-                for token in self.features['ignoreColumns']:
-                    if part == token:
-                        ignore_token_count = 1
-                    if token == col:
-                        ignore_token_count = 1
-
+            ignore_token_flag = False
+            # if ignoreColumn token is a single token in the column name or the
+            # entire column name, set ignore_token_flag
+            if col in self.features['ignoreColumns'] or len(
+                    set(self.features['ignoreColumns']) &
+                    set(col.split(self.delimiter))) > 0:
+                ignore_token_flag = True
+            # NOTE: If multiple tokens of a column name are used to set ignore_token_flag, please overload this method, as shown in ../s0503/process.py
             # if no tokens of the columns are in ignoreColumns of the spec
-            if ignore_token_count == 0:
+            if not ignore_token_flag:
                 renamed_col = self._find_and_replace_column_names(col)
-                # TODO: Before calling the column_to_statvar method,
-                # remove the base class or generalization token in the
-                # column name from the enumSpecialization section of the
-                # spec.
                 # TODO: Should we generate an error _column_to_statvar() returns an empty statvar?
                 self.column_map[col] = self._column_to_statvar(renamed_col)
-
-        # TODO: Deprecate this function, since enumSpecialization are used to
-        # remove the generalized token from the column name
-        self._keep_only_enum_specializations()
 
         # TODO: Before returning the column map, call self._isvalid_column_map()
         # where we check of the same statvar is generated for more than one column?
@@ -242,7 +335,7 @@ class GenerateColMapBase:
                 return True
         return False
 
-    def _column_to_statvar(self, column):
+    def _column_to_statvar(self, column: str) -> dict:
         """generates a dictionary statistical variable with all properties specified in the JSON spec for a single column"""
         measurement_assigned = False
         stat_var = {}
@@ -339,6 +432,9 @@ class GenerateColMapBase:
                 if len(elem['constraintProperties']) == 0:
                     stat_var.update(elem['dependentPVs'])
 
+        if 'scalingFactor' in stat_var:
+            dependent_properties.append('scalingFactor')
+
         # add inferred properties if applicable
         for p in list(stat_var):
             if p in self.features['inferredSpec']:
@@ -359,9 +455,14 @@ class GenerateColMapBase:
         stat_var['Node'] = 'dcid:' + stat_var_dcid
 
         #Move the dcid to begining of the dict, uses OrderedDict
-        stat_var = OrderedDict(stat_var)
-        stat_var.move_to_end('Node', last=False)
-        stat_var = json.loads(json.dumps(stat_var))
+        try:
+            stat_var = OrderedDict(stat_var)
+            stat_var.move_to_end('Node', last=False)
+            stat_var = json.loads(json.dumps(stat_var))
+        except:
+            logger.warning(
+                f"The 'Node' is not found for that statvar node generated with dcid={stat_var_dcid}"
+            )
 
         #prefix the values if they are not QuantityRanges with dcs:
         stat_var = self._format_stat_var_node(stat_var)
@@ -377,54 +478,26 @@ class GenerateColMapBase:
                     f'One or more mandatory properties of the stat_var is missing. \n Dump of the stat_var:: {stat_var}'
                 )
 
-    def _keep_only_enum_specializations(self):
-        """removes generalization token from column name.
+    def _keep_only_specializations(self, part_list: list) -> list:
+        """
+      While generating the stat-var node for the column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years will rename the column to keep only the specialization, which will mean the stat-var node generated will be for the column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 6 years.
 
-      Example: if the enumSpecicalization is defined as
-      {
-        "Under 6 years": "Under 19 years, Under 18 years",
-        "6 to 18 years": "Under 19 years",
-      }
-      It means that "Under 6 years" and "6 to 18 years" are specializations of "Under 19 years".
-      Example: If the column was Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years and we had defined
-      a stat_var for Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years which is the broader class. This function would
-      delete the stat_var node generated for vEstimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years and will preserve only
-      the stat_var node generated for column Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years. Since,
-      Under 6 years is defined as the specialization of Under 19 years.
+      There can also be a case where the specialization appears with more than one base class. For instance "Under 6 years" occurs with both "Under 18 years" and "Under 19 years". In this case, the base classes are comma-space separated (since that makes the JSON more humnan-readable)
       """
-        # TODO: Re-define this function, since enumSpecializations are used to remove the base class token in the column name and does not affect the stat var defined.
-        # The current implementation of the function removes the statVar node for the base class and keeps the specialization, which is not the desired output
-        # In the above example if both 6 to 18 years and Under 19 years appear as tokens in the column name, we remove Under 19 years from the column name and not remove the StatVarNode which describes the population  Under 19 years.
-        column_map = self.column_map.copy()
-        for column_name, stat_var in column_map.items():
-            part_list = column_name.split(self.delimiter)
-            ## The assumption of using the last token of the column as the specialization holds for ACS Subject tables.
-            # TODO: This assumption might break for other tables, we might need to thing of removing this assumption
-            last_column_token = part_list[-1]
-            if last_column_token in self.features['enumSpecializations']:
-                base_class = self.features['enumSpecializations'][
-                    last_column_token]
-                for base in base_class.split(', '):
-                    if base in part_list:
-                        col_name = self.delimiter.join(part_list[:-1])
-                        try:
-                            del self.column_map[col_name]
-                            logger.info(
-                                f"Removing the base class column: {col_name} from the column map based on enumSpecialization of the spec"
-                            )
-                        except KeyError:
-                            logger.info(
-                                f"Attempted removal of base class column: {col_name} failed. It might be already removed."
-                            )
+        for _, base_classes in self.features['enumSpecializations'].items():
+            for base in base_classes.split(", "):
+                part_list.remove(
+                    base)  #removes the base class from the column tokens
+        return part_list
 
-    def _isvalid_stat_var(self, stat_var):
+    def _isvalid_stat_var(self, stat_var: dict) -> bool:
         """method validates if stat_var has mandatory properties, specified in _MANDATORY_PROPS"""
         if set(_MANDATORY_PROPS).issubset(set(list(stat_var.keys()))):
             return True
         else:
             return False
 
-    def _format_stat_var_node(self, stat_var):
+    def _format_stat_var_node(self, stat_var: dict) -> dict:
         """utility to format the stat_var dict values to ensure they conform to the specifications of StatVar"""
         # add typeOf property to the node if undefined
         if 'typeOf' not in stat_var:
@@ -456,7 +529,7 @@ class GenerateColMapBase:
         ## 4. check if column map matches with the spec
         pass
 
-    def _get_population_type(self, part_list):
+    def _get_population_type(self, part_list: list) -> str:
         """From tokenized column name, find the most relevant populationType from the JSON Spec """
         # if 'populationType' in self.features:
         for k, v in self.features['populationType'].items():
