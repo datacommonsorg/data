@@ -658,7 +658,6 @@ amherst ne,3101290
 amherst nh,3301101300
 amherst ny,3602902000
 amherst oh,3901798
-amherst town ny,3602902000
 amherst township ia,1903590063
 amherst township mn,2704501396
 amherst township oh,3909301812
@@ -765,7 +764,6 @@ angelica village ny,3602176
 angelica wi,5511501975
 angelo wi,5508102025
 angels ca,0602112
-angels camp ca,0602112
 angie la,2202165
 angier nc,3701400
 angleton tx,4803264
@@ -1225,7 +1223,6 @@ athens village ny,3602902
 athens vt,5002501900
 athens wi,5503550
 athens wv,5403292
-athens-clarke county ga,1303440
 athensville township il,1706102700
 atherton ca,0603092
 atherton township mn,2716702620
@@ -1405,7 +1402,6 @@ austin township mn,2709902926
 austin township nd,3806103900
 austin tx,4805000
 austinburg township oh,3900703156
-austintown oh,3903184
 austintown township oh,3909903198
 austwell tx,4805036
 autaugaville al,0103220
@@ -1732,7 +1728,6 @@ barney township nd,3807704980
 barnhill oh,3903940
 barnhill township il,1719103753
 barnsdall ok,4004250
-barnstable ma,2503690
 barnstable town ma,2503690
 barnstead nh,3300103220
 barnum ia,1904645
@@ -2224,7 +2219,6 @@ belleville ar,0504960
 belleville il,1704845
 belleville ks,2005600
 belleville mi,2607020
-belleville nj,3401304695
 belleville township ks,2015705625
 belleville township nj,3401304695
 belleville wi,5506300
@@ -2590,7 +2584,6 @@ bethlehem ga,1307612
 bethlehem nh,3300905460
 bethlehem ny,3600106354
 bethlehem pa,4206088
-bethlehem town ny,3600106354
 bethlehem township in,1801905122
 bethlehem township mo,2908305140
 bethlehem township nj,3401905650
@@ -2633,7 +2626,6 @@ bicknell in,1805176
 bicknell ut,4905490
 biddeford me,2304860
 bienville la,2207205
-big bear ca,0606406
 big bear lake ca,0606434
 big beaver borough pa,4206240
 big bend township ks,2015706550
@@ -2825,7 +2817,6 @@ blackhawk township il,1716106301
 blackhoof township mn,2701706328
 blacklick township pa,4202106736
 blackman charter township mi,2607508760
-blackman township mi,2607508760
 blackpipe township sd,4609505820
 blacksburg sc,4506400
 blacksburg va,5107784
@@ -2941,7 +2932,6 @@ bloomfield in,1805716
 bloomfield ky,2107516
 bloomfield mo,2906382
 bloomfield ne,3105455
-bloomfield nj,3401306260
 bloomfield nm,3507880
 bloomfield ny,3606945
 bloomfield township ia,1919190273
@@ -3120,7 +3110,6 @@ bois blanc township mi,2609709500
 bois d'arc township il,1713507107
 boise city id,1608830
 boise city ok,4007300
-boise id,1608830
 bokchito ok,4007350
 bokescreek township oh,3909107552
 bokoshe ok,4007450
@@ -3406,7 +3395,6 @@ braidwood il,1707770
 brainard ne,3106120
 brainard township sd,4601306700
 brainerd mn,2707300
-braintree ma,2507740
 braintree town ma,2507740
 braintree vt,5001707600
 braintrim township pa,4213108176
@@ -3614,7 +3602,6 @@ brighton mi,2610620
 brighton ny,3605508246
 brighton plantation me,2302507380
 brighton tn,4708500
-brighton town ny,3608257
 brighton township ia,1918390339
 brighton township il,1711708277
 brighton township mi,2609310640
@@ -3679,7 +3666,6 @@ broadland sd,4607420
 broadland township sd,4600507460
 broadlands il,1708420
 broadlawn township nd,3809109620
-broadmoor ca,0608338
 broadus mt,3009700
 broadview heights oh,3909064
 broadview il,1708446
@@ -3866,7 +3852,6 @@ brownstown charter township mi,2616311220
 brownstown il,1708992
 brownstown in,1808470
 brownstown township in,1807108488
-brownstown township mi,2611220
 brownsville borough pa,4209432
 brownsville ky,2110324
 brownsville mn,2708218
@@ -4517,7 +4502,6 @@ cambridge vt,5011425
 cambridge wi,5512225
 camden al,0111512
 camden ar,0510720
-camden county police department nj,3410000
 camden de,1010760
 camden il,1710695
 camden in,1809910
@@ -4686,7 +4670,6 @@ canton sd,4609500
 canton township ia,1901190465
 canton township il,1705711020
 canton township ks,2011310500
-canton township mi,2613120
 canton township mn,2704509820
 canton township oh,3915112014
 canton township pa,4212511176
@@ -4803,11 +4786,9 @@ carlyle township il,1702711241
 carlyle township ks,2000110725
 carlyle township sd,4600509980
 carman township il,1707111280
-carmel ca,0611250
 carmel in,1810342
 carmel me,2301910670
 carmel ny,3607912529
-carmel town ny,3607912529
 carmel township mi,2604513380
 carmel-by-the-sea ca,0611250
 carmen ok,4012000
@@ -5411,7 +5392,6 @@ charlotte township il,1710512606
 charlotte township mo,2901313384
 charlotte tx,4814404
 charlotte vt,5000713300
-charlotte-mecklenburg nc,3712000
 charlottesville va,5114968
 charlton ma,2502712715
 charlton ny,3609113926
@@ -5472,7 +5452,6 @@ chebeague island me,2300512300
 cheboygan mi,2615000
 checotah ok,4013650
 cheektowaga ny,3602915011
-cheektowaga town ny,3615000
 cheever township ks,2004112700
 chefornak ak,0212680
 chehalis wa,5311475
@@ -5869,7 +5848,6 @@ clarkston mi,2682450
 clarkston ut,4913190
 clarkston wa,5312630
 clarkstown ny,3608715968
-clarkstown town ny,3608715968
 clarksville ar,0514140
 clarksville borough pa,4213896
 clarksville city tx,4815172
@@ -6420,7 +6398,6 @@ colona township il,1707315677
 colonial beach va,5118400
 colonial heights va,5118448
 colonie ny,3617332
-colonie town ny,3617332
 colony al,0116684
 colony ks,2014950
 colony ok,4016400
@@ -6526,7 +6503,6 @@ commerce city co,0816495
 commerce ga,1319112
 commerce mo,2915760
 commerce ok,4016500
-commerce township mi,2612517640
 commerce tx,4816240
 commercial point oh,3918070
 commercial township nj,3401114710
@@ -7615,7 +7591,6 @@ de funiak springs fl,1216800
 de graff mn,2715418
 de graff oh,3921378
 de groat township nd,3807118740
-de kalb il,1719161
 de kalb mo,2918946
 de kalb ms,2818340
 de kalb ny,3608920038
@@ -9738,7 +9713,6 @@ esmond nd,3824780
 esmond township nd,3800524820
 esmond township sd,4607719940
 esopus ny,3611124691
-espanola nm,3525170
 española nm,3525170
 espelie township mn,2708919736
 esperance ny,3624713
@@ -10470,7 +10444,6 @@ flint hill mo,2924688
 flint mi,2629000
 flint river township ia,1905791347
 flint township il,1714926415
-flint township mi,2629020
 flint township nd,3809326740
 flippin ar,0524010
 flom township mn,2710721320
@@ -10889,7 +10862,6 @@ franklin ky,2128918
 franklin la,2227155
 franklin lakes borough nj,3424990
 franklin lakes nj,3424990
-franklin ma,2525172
 franklin me,2300926350
 franklin mi,2630340
 franklin mn,2722364
@@ -11047,7 +11019,6 @@ freeport township il,1717727897
 freeport township oh,3906728812
 freeport township pa,4205927800
 freeport tx,4827420
-freeport village ny,3627485
 freer tx,4827432
 freetown ma,2500525240
 freetown ny,3602327496
@@ -12114,7 +12085,6 @@ grand beach mi,2633260
 grand beach/michiana mi,2633260
 grand blanc charter township mi,2604933300
 grand blanc mi,2633280
-grand blanc township mi,2633300
 grand cane la,2230690
 grand chute wi,5508730075
 grand coteau la,2230760
@@ -12354,7 +12324,6 @@ great scott township mn,2713725550
 great valley ny,3600930257
 greatstone township nd,3805532940
 greece ny,3605530290
-greece town ny,3630279
 greeley center ne,3120050
 greeley co,0832155
 greeley ia,1932610
@@ -12416,7 +12385,6 @@ green valley township mn,2700525820
 green valley township ne,3108920155
 green valley township sd,4609726020
 green valley wi,5511531500
-greenacres city fl,1227322
 greenacres fl,1227322
 greenback tn,4730880
 greenbelt md,2434775
@@ -12424,7 +12392,6 @@ greenbrier ar,0528510
 greenbrier tn,4730960
 greenbrier township ia,1907391746
 greenburgh ny,3611930367
-greenburgh town ny,3611930367
 greenbush me,2301929185
 greenbush mn,2725604
 greenbush township il,1718731277
@@ -12710,7 +12677,6 @@ guernsey wy,5634320
 gueydan la,2232055
 guide rock ne,3120365
 guilderland ny,3600131104
-guilderland town ny,3600131104
 guildhall vt,5000930775
 guilford ct,0900934950
 guilford me,2302130095
@@ -13440,7 +13406,6 @@ haverhill ma,2529405
 haverhill nh,3300934820
 haverhill township mn,2710927692
 haverstraw ny,3632754
-haverstraw town ny,3608732765
 haviland ks,2030825
 haviland oh,3934552
 havre de grace md,2437600
@@ -13661,7 +13626,6 @@ hempfield township pa,4212933792
 hemphill tx,4833188
 hempstead ny,3633139
 hempstead tx,4833200
-hempstead village ny,3633139
 henagar al,0134096
 henden township sd,4609728060
 henderson ia,1935715
@@ -14280,7 +14244,6 @@ honey grove tx,4834700
 honey point township il,1711735996
 honeyville ut,4936290
 honner township mn,2712730068
-honolulu hi,1571550
 honor mi,2639080
 hood river or,4134900
 hooker ok,4036000
@@ -14408,7 +14371,6 @@ houghton ia,1937335
 houghton mi,2639360
 houghton township mi,2608339380
 houlton me,2300333980
-houma la,2236255
 hounsfield ny,3604535782
 house nm,3533710
 houston acres ky,2138170
@@ -14770,7 +14732,6 @@ independence town ny,3600337297
 independence township ia,1914792025
 independence township il,1716537205
 independence township ks,2020133950
-independence township mi,2612540400
 independence township mo,2914735036
 independence township nj,3404133930
 independence township oh,3916737268
@@ -14818,7 +14779,6 @@ indiana pa,4236816
 indiana township ia,1912592028
 indiana township ks,2006534000
 indiana township pa,4200336808
-indianapolis in,1836003
 indianfields township mi,2615740440
 indianola ia,1938280
 indianola il,1737348
@@ -14950,7 +14910,6 @@ irondale mo,2935396
 irondale oh,3937422
 irondale township mn,2703531202
 irondequoit ny,3605537726
-irondequoit town ny,3637737
 ironton mn,2731274
 ironton mo,2935468
 ironton oh,3937464
@@ -14976,7 +14935,6 @@ irving tx,4837000
 irving wi,5505337275
 irvington il,1737777
 irvington ky,2139664
-irvington nj,3401334450
 irvington ny,3637803
 irvington township ia,1910992082
 irvington township il,1718937790
@@ -15699,7 +15657,6 @@ kensal township nd,3809342220
 kensett ar,0536430
 kensett ia,1940665
 kensett township ia,1919592310
-kensington ca,0638086
 kensington ks,2036550
 kensington md,2443500
 kensington mn,2732768
@@ -16124,7 +16081,6 @@ la barge wy,5643455
 la belle mo,2939512
 la belle township sd,4609134500
 la bolt sd,4634540
-la canada flintridge ca,0639003
 la cañada flintridge ca,0639003
 la center ky,2143336
 la center wa,5336710
@@ -16584,7 +16540,6 @@ lancaster ny,3641135
 lancaster oh,3941720
 lancaster pa,4241216
 lancaster sc,4539895
-lancaster town ny,3641135
 lancaster township il,1717741885
 lancaster township in,1817941958
 lancaster township ks,2000538350
@@ -16708,7 +16663,6 @@ larsen bay ak,0243040
 larwill in,1842282
 las animas co,0843660
 las cruces nm,3539380
-las vegas metropolitan police department nv,3240000
 las vegas nm,3539940
 las vegas nv,3240000
 lasalle il,1742184
@@ -17172,7 +17126,6 @@ lexa ar,0539670
 lexington al,0142640
 lexington ga,1346188
 lexington il,1743094
-lexington ky,2146027
 lexington ma,2501735215
 lexington mi,2647280
 lexington mn,2736836
@@ -17826,7 +17779,6 @@ lorraine ny,3604543544
 lorraine township nd,3802148140
 lorton ne,3129175
 los alamitos ca,0643224
-los alamos nm,3542320
 los altos ca,0643280
 los altos hills ca,0643294
 los angeles ca,0644000
@@ -17876,7 +17828,6 @@ louisville co,0846355
 louisville ga,1347560
 louisville il,1744927
 louisville ks,2042925
-louisville metro ky,2148006
 louisville ms,2842280
 louisville ne,3129260
 louisville ny,3608943588
@@ -19519,7 +19470,6 @@ meridian ny,3646646
 meridian ok,4047800
 meridian township il,1702748476
 meridian township ks,2011345975
-meridian township mi,2606553140
 meridian tx,4847760
 merigold ms,2846720
 merino co,0850040
@@ -19579,7 +19529,6 @@ metamora township mi,2608753360
 metcalf il,1748632
 metcalfe ms,2846880
 meteor wi,5511351425
-methuen ma,2540710
 methuen town ma,2540710
 metolius or,4147750
 metomen wi,5503951450
@@ -20289,7 +20238,6 @@ montana township ks,2009947850
 montana wi,5501153850
 montcalm township mi,2611755140
 montclair ca,0648788
-montclair nj,3401347500
 montclair township nj,3401347500
 monte sereno ca,0648956
 monte vista co,0851635
@@ -20762,7 +20710,6 @@ mount kisco ny,3648890
 mount kisco village ny,3648890
 mount laurel township nj,3400549020
 mount lebanon la,2252740
-mount lebanon pa,4200351696
 mount lebanon township pa,4200351696
 mount leonard mo,2950510
 mount moriah mo,2950528
@@ -21086,7 +21033,6 @@ nashville ga,1354264
 nashville il,1751700
 nashville in,1852038
 nashville ks,2049400
-nashville metropolitan tn,4752006
 nashville mi,2656680
 nashville nc,3746000
 nashville oh,3953634
@@ -21627,7 +21573,6 @@ newburgh heights oh,3954250
 newburgh in,1852650
 newburgh me,2301948505
 newburgh ny,3650034
-newburgh town ny,3650045
 newburgh township nd,3809156060
 newbury ma,2500945175
 newbury nh,3301350900
@@ -22871,7 +22816,6 @@ orange beach al,0157144
 orange ca,0653980
 orange city fl,1251825
 orange city ia,1959475
-orange city nj,3401313045
 orange cove ca,0654008
 orange ct,0900957600
 orange grove tx,4854168
@@ -22897,7 +22841,6 @@ orange vt,5001753425
 orange wi,5505760150
 orangeburg sc,4553080
 orangetown ny,3608755211
-orangetown town ny,3608755211
 orangeville area pa,4256912
 orangeville borough pa,4256912
 orangeville il,1756341
@@ -22915,7 +22858,6 @@ orchard lake mi,2661020
 orchard lake village mi,2661020
 orchard ne,3137210
 orchard park ny,3655266
-orchard park town ny,3602955277
 orchard township il,1719156367
 orchard tx,4854192
 orchid fl,1252175
@@ -22954,7 +22896,6 @@ orinda ca,0654232
 orion charter township mi,2612561100
 orion il,1756601
 orion township il,1705756588
-orion township mi,2612561100
 orion township mn,2710948526
 orion wi,5510360350
 oriska nd,3859660
@@ -23593,7 +23534,6 @@ pasadena tx,4856000
 pascagoula ms,2855360
 pasco wa,5353545
 pascola mo,2956432
-paso robles ca,0622300
 pass christian ms,2855400
 passadumkeag me,2301957045
 passaic mo,2956468
@@ -24314,7 +24254,6 @@ pittsfield me,2302559005
 pittsfield nh,3301361940
 pittsfield ny,3607758343
 pittsfield township il,1714960235
-pittsfield township mi,2616164560
 pittsfield township oh,3909362960
 pittsfield township pa,4212361040
 pittsfield vt,5002155450
@@ -24592,7 +24531,6 @@ pocasset ok,4059700
 pocatello id,1664090
 pocola ok,4059750
 pocomoke city md,2462475
-pocono mountain regional pa,4251912
 pocono township pa,4208961728
 pocopson township pa,4202961800
 poe township ia,1915993432
@@ -24735,7 +24673,6 @@ port byron village ny,3659212
 port carbon borough pa,4262128
 port carbon pa,4262128
 port chester ny,3659223
-port chester village ny,3659223
 port clinton borough pa,4262136
 port clinton oh,3964150
 port deposit md,2463075
@@ -24758,7 +24695,6 @@ port lavaca tx,4858916
 port leyden ny,3659454
 port lions ak,0263610
 port louisa township ia,1911593465
-port mansfield tx,4858928
 port matilda borough pa,4262280
 port neches tx,4858940
 port orange fl,1258575
@@ -25307,7 +25243,6 @@ ralston ne,3140605
 ralston ok,4061650
 ramah co,0862660
 ramapo ny,3608760510
-ramapo town ny,3608760510
 ramer tn,4761520
 rames township sd,4612352820
 ramey borough pa,4263360
@@ -25553,7 +25488,6 @@ redfield ny,3607560873
 redfield sd,4653460
 redfield township sd,4611553500
 redford charter township mi,2616367625
-redford township mi,2616367625
 redgranite wi,5566625
 redings mill mo,2960986
 redington beach fl,1259725
@@ -26575,7 +26509,6 @@ rothsay mn,2756014
 rothschild wi,5569725
 rothville mo,2963236
 rotterdam ny,3609363935
-rotterdam town ny,3663924
 roubidoux township mo,2921563290
 roulette township pa,4210566416
 round grove township il,1710565988
@@ -26874,7 +26807,6 @@ sageville ia,1969690
 saginaw charter township mi,2614570540
 saginaw mi,2670520
 saginaw mo,2963902
-saginaw township mi,2614570540
 saginaw tx,4864112
 sago township mn,2706156644
 sagola township mi,2604370600
@@ -27129,7 +27061,6 @@ sanilac township mi,2615171580
 sankertown borough pa,4267920
 sankertown pa,4267920
 sansom park tx,4865660
-sansom park village tx,4865660
 santa ana ca,0669000
 santa anna township il,1703967639
 santa anna tx,4865672
@@ -28618,7 +28549,6 @@ south woodbury township pa,4200972656
 south zanesville oh,3973894
 southampton ma,2501562745
 southampton ny,3668462
-southampton town ny,3668462
 southampton township nj,3400568610
 southampton township pa,4211171920
 southampton village ny,3668462
@@ -28857,8 +28787,6 @@ spring valley township mn,2704562122
 spring valley township nd,3802175140
 spring valley township oh,3905774223
 spring valley township sd,4612561140
-spring valley tx,4869830
-spring valley village ny,3670420
 spring valley village tx,4869830
 spring valley wi,5576300
 springbank township ne,3105146415
@@ -31449,7 +31377,6 @@ venice township il,1711977486
 venice township mi,2615581880
 venice township oh,3914779674
 ventnor city nj,3475620
-ventura ca,0665042
 ventura ia,1980580
 venturia nd,3881700
 venus tx,4875236
@@ -32155,7 +32082,6 @@ washington ar,0573370
 washington borough nj,3477270
 washington court house oh,3981718
 washington ct,0900579720
-washington dc,1150000
 washington ga,1380704
 washington grove md,2481675
 washington ia,1982335
@@ -32239,7 +32165,6 @@ waterford ny,3678520
 waterford town and village ny,3678520
 waterford township ia,1904594593
 waterford township il,1705779137
-waterford township mi,2612584240
 waterford township mn,2703768530
 waterford township nd,3810183780
 waterford township nj,3400777630
@@ -32269,7 +32194,6 @@ waterproof la,2279940
 watersmeet township mi,2605384380
 watertown charter township mi,2603784400
 watertown ct,0900580490
-watertown ma,2573440
 watertown mn,2768548
 watertown ny,3678608
 watertown sd,4669300
@@ -32486,7 +32410,6 @@ webster ny,3678960
 webster plantation me,2301981055
 webster sd,4669780
 webster springs wv,5400364
-webster town and village ny,3678960
 webster township ia,1918794632
 webster township in,1817782160
 webster township ks,2020576300
@@ -32663,7 +32586,6 @@ west bethlehem township pa,4212582512
 west blocton al,0180928
 west bloomfield charter township mi,2612585480
 west bloomfield ny,3606979356
-west bloomfield township mi,2612585480
 west blue township ne,3105952190
 west boone township mo,2901378604
 west bountiful ut,4982840
@@ -32837,7 +32759,6 @@ west norway township nd,3810385100
 west nottingham township pa,4202983712
 west okoboji ia,1984450
 west ontario township nd,3810385120
-west orange nj,3401379800
 west orange township nj,3401379800
 west orange tx,4877752
 west palm beach fl,1276600
@@ -32889,7 +32810,6 @@ west salem oh,3984196
 west salem township pa,4208583976
 west salem wi,5586275
 west seneca ny,3602980918
-west seneca town ny,3680907
 west shenango township pa,4203984008
 west side township ia,1904794701
 west siloam ok,4080350
@@ -32927,7 +32847,6 @@ west unity oh,3984308
 west university place tx,4877956
 west valley city ut,4983470
 west valley township mn,2708969772
-west valley ut,4983470
 west view borough pa,4284144
 west view pa,4284144
 west vincent township pa,4202984160
@@ -33113,7 +33032,6 @@ wexford township mi,2616586500
 weyauwega wi,5586400
 weybridge vt,5000183275
 weyerhaeuser wi,5586450
-weymouth ma,2578972
 weymouth town ma,2578972
 weymouth township nj,3400180330
 whalan mn,2769808
@@ -33214,7 +33132,6 @@ white house tn,4780200
 white lake charter township mi,2612586860
 white lake nc,3773300
 white lake sd,4671180
-white lake township mi,2612586860
 white lake township nd,3808785620
 white lake township sd,4600371220
 white lake wi,5586750
@@ -34231,7 +34148,6 @@ yorkshire oh,3987164
 yorktown ia,1987420
 yorktown in,1886084
 yorktown ny,3611984077
-yorktown town ny,3611984077
 yorktown township il,1707384012
 yorktown township nd,3802187940
 yorktown tx,4880584
