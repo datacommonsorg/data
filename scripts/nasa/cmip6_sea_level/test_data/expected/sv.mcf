@@ -1,0 +1,99 @@
+# From file total_ssp119_medium_confidence_rates
+
+Node: dcid:Max_RateOfChange_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:maxValue
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:RateOfChange
+
+Node: dcid:Min_RateOfChange_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:minValue
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:RateOfChange
+
+Node: dcid:Median_RateOfChange_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:medianValue
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:RateOfChange
+
+Node: dcid:Percentile10_RateOfChange_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:percentile10
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:RateOfChange
+
+Node: dcid:Percentile90_RateOfChange_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:percentile90
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:RateOfChange
+
+# From file total_ssp119_medium_confidence_values
+
+Node: dcid:Max_DifferenceRelativeToCMIP6ReferenceDate_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:maxValue
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:DifferenceRelativeToBaseDate
+baseDate: dcs:CMIP6ReferencePeriod
+
+Node: dcid:Min_DifferenceRelativeToCMIP6ReferenceDate_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:minValue
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:DifferenceRelativeToBaseDate
+baseDate: dcs:CMIP6ReferencePeriod
+
+Node: dcid:Median_DifferenceRelativeToCMIP6ReferenceDate_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:medianValue
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:DifferenceRelativeToBaseDate
+baseDate: dcs:CMIP6ReferencePeriod
+
+Node: dcid:Percentile10_DifferenceRelativeToCMIP6ReferenceDate_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:percentile10
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:DifferenceRelativeToBaseDate
+baseDate: dcs:CMIP6ReferencePeriod
+
+Node: dcid:Percentile90_DifferenceRelativeToCMIP6ReferenceDate_SeaLevel_SSP119
+typeOf: dcs:StatisticalVariable
+statType: dcs:percentile90
+socioeconomicScenario: dcs:SSP1
+emissionsScenario: dcs:RCP1.9
+populationType: dcs:SeaBodyOfWater
+measuredProperty: dcs:surfaceLevel
+measurementQualifier: dcs:DifferenceRelativeToBaseDate
+baseDate: dcs:CMIP6ReferencePeriod
+
