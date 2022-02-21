@@ -17,12 +17,13 @@ from .geo_id_resolver import *
 
 
 class GeoIdResolverTest(unittest.TestCase):
+
     def test_georesolver_state(self):
         state = 'CA'
         geoId = convert_to_place_dcid(state, geo_type='State')
         self.assertEqual(geoId, 'geoId/06')
 
-        state = 'GM' # Testing _US_GEO_CODE_UPDATE_MAP
+        state = 'GM'  # Testing _US_GEO_CODE_UPDATE_MAP
         geoId = convert_to_place_dcid(state, geo_type='State')
         self.assertEqual(geoId, 'geoId/66')
 
@@ -33,8 +34,11 @@ class GeoIdResolverTest(unittest.TestCase):
 
     def test_georesolver_county(self):
         # AL (Alabama), Autauga County has dcid geoId/01001
-        geoId = convert_to_place_dcid('AL', geo='Autauga County', geo_type='County')
+        geoId = convert_to_place_dcid('AL',
+                                      geo='Autauga County',
+                                      geo_type='County')
         self.assertEqual(geoId, 'geoId/01001')
+
 
 if __name__ == '__main__':
     unittest.main()
