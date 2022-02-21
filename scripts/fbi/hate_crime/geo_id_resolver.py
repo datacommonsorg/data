@@ -37,6 +37,7 @@ _IGNORE_STATE_ABBR = ['FS']  # Ignoring federal codes
 _IGNORE_CITIES = ['abington township pa',
                   'lone tree co']  # ignoring cities which have duplicates
 
+# A mapping from city name to the dcid.
 _CITY = {
     'las vegas metropolitan police department nv': '3240000',
     'honolulu hi': '1571550',
