@@ -29,7 +29,10 @@ class ProcessTest(unittest.TestCase):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
         base_path = os.path.join(base_path, './data/test_data')
-        processed_count = process_site_contamination(base_path, base_path)
+        contaminant_path = os.path.join(base_path, '../')
+        processed_count = process_site_contamination(base_path,
+                                                     contaminant_path,
+                                                     base_path)
         self.assertEqual(_EXPECTED_SITE_COUNT, processed_count)
 
         ## validate the csvs

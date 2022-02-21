@@ -100,7 +100,8 @@ def write_sv_to_file(row, contaminant_df, file_obj):
     """
     try:
         contaminated_thing = _CONTAMINATED_THING_DCID_MAP[row['Media']]
-        contaminant_series = contaminant_df[contaminant_df['CommonName'] == row['Contaminant Name']]
+        contaminant_series = contaminant_df[contaminant_df['CommonName'] ==
+                                            row['Contaminant Name']]
         # NOTE: Currently, the script does not handle isotopes and cases where
         # there are multiple node dcids mapping to the same element/compund's
         # commonName -- hence we take the first occurance of this name
@@ -135,7 +136,8 @@ def write_sv_to_file(row, contaminant_df, file_obj):
         return row
 
 
-def process_site_contamination(input_path: str, output_path: str) -> int:
+def process_site_contamination(input_path: str, contaminant_csv_path: str,
+                               output_path: str) -> int:
     """
     Function to process the raw dataset and generate clean csv + tmcf files.
     """
@@ -143,9 +145,14 @@ def process_site_contamination(input_path: str, output_path: str) -> int:
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     ## contaminant to csv mapping
-    contaminant_csv = pd.read_csv(os.path.join(input_path, _CONTAMINANTS_MAP), sep='|', usecols=['dcid', 'CommonName'])
-    contaminant_csv = contaminant_csv.loc[~pd.isnull(contaminant_csv['dcid'])] # drop rows with empty dcid
-    contaminant_csv['CommonName'] = contaminant_csv['CommonName'].str.replace('[^\w\s]', '_', regex=True) #replace all non-alphanumeric with `_`
+    contaminant_csv = pd.read_csv(os.path.join(contaminant_csv_path,
+                                               _CONTAMINANTS_MAP),
+                                  sep='|',
+                                  usecols=['dcid', 'CommonName'])
+    contaminant_csv = contaminant_csv.loc[~pd.isnull(
+        contaminant_csv['dcid'])]  # drop rows with empty dcid
+    contaminant_csv['CommonName'] = contaminant_csv['CommonName'].str.replace(
+        '[^\w\s]', '_', regex=True)  #replace all non-alphanumeric with `_`
     ## contamination at superfund sites
     contamination_data_path = os.path.join(input_path, _DATASET_NAME)
     contamination_data = pd.read_excel(contamination_data_path,
@@ -171,7 +178,10 @@ def process_site_contamination(input_path: str, output_path: str) -> int:
     c = c.dropna()
     f = open(os.path.join(output_path, "superfund_sites_contamination.mcf"),
              "a")
-    c = c.apply(write_sv_to_file, args=(contaminant_csv, f,), axis=1)
+    c = c.apply(write_sv_to_file, args=(
+        contaminant_csv,
+        f,
+    ), axis=1)
     f.close()
 
     c = c.dropna(subset=['variableMeasured', 'value'])
@@ -200,10 +210,14 @@ def main(_) -> None:
     FLAGS = flags.FLAGS
     flags.DEFINE_string('input_path', './data',
                         'Path to the directory with input files')
+    flags.DEFINE_string('contaminant_csv', './data',
+                        'Path to the contaminant.csv file')
     flags.DEFINE_string(
         'output_path', './data/output',
         'Path to the directory where generated files are to be stored.')
-    site_count = process_site_contamination(FLAGS.input_path, FLAGS.output_path)
+    site_count = process_site_contamination(FLAGS.input_path,
+                                            FLAGS.contaminant_csv,
+                                            FLAGS.output_path)
     print(f"Processing of {site_count} superfund sites is complete.")
 
 
