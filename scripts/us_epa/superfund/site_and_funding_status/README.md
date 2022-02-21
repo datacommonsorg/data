@@ -13,6 +13,10 @@ To download this dataset, please head to the [EPA Arcgis appliet](https://epa.ma
 
 We also use the remedial action dataset to add info on the ownership of these sites, which is discussed in a subsequent section.
 
+Once the file is downloaded, please rename the filename from `'Superfund
+National Priorities List (NPL) Sites with Status Information.csv'` to
+`superfund_sites_with_status.csv`
+
 Additionally, we use the [Remedy Component Data for Decision Documents by Media, FYs 1982-2017](https://semspub.epa.gov/work/HQ/401063.xlsx) dataset that lists the different remedial actions carried out different superfund sites based on the contaminated media between 1982 to 2017. In this script, this dataset is used to map the ownership type (government-owned, privately-owned) of the site. 
 
 This file can be downloaded with the [direct link](https://semspub.epa.gov/work/HQ/401063.xlsx) or by finding the dataset by name in the [EPA Superfund page](https://www.epa.gov/superfund/superfund-data-and-reports)

@@ -16,6 +16,8 @@
 This import uses the dataset:
 - ./data/401062.xlsx
     This file describes Contaminant of concern data from Superfund decision documents issued in fiscal years 1982-2017. Includes sites 1) final or deleted on the National Priorities List (NPL); and 2) sites with a Superfund Alternative Approach (SAA) Agreement in place. The only sites included that are 1) not on the NPL; 2) proposed for NPL; or 3) removed from proposed NPL, are those with an SAA Agreement in place.
+- ./data/contaminants.csv
+    This file is a curated list of contaminant names and their respective ids on the Data Commons knowledge graph
 """
 
 from absl import app, flags
@@ -25,8 +27,8 @@ import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))  # for utils
-from us_epa.util.superfund_vars import _CONTAMINATED_THING_DCID_MAP, _CHEM_MAP
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))  # for superfund_vars
+from us_epa.util.superfund_vars import _CONTAMINATED_THING_DCID_MAP
 
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../../../../util/'))  # for statvar_dcid_generator
@@ -41,6 +43,7 @@ variableMeasured: C:SuperfundSite->variableMeasured
 value: C:SuperfundSite->value
 """
 
+_CONTAMINANTS_MAP = './contaminants.csv'
 _DATASET_NAME = "./401062.xlsx"
 _COL_NAME_MAP = {
     'EPA ID': 'observationAbout',
@@ -91,18 +94,23 @@ def make_contamination_svobs(df: pd.DataFrame,
     return df
 
 
-def write_sv_to_file(row, file_obj):
+def write_sv_to_file(row, contaminant_df, file_obj):
     """
     Function generates Statistical Variables for the contaminant + contaminatedThing as properites. The value observed for the generated Statistical Variables is a boolean, and is always True
     """
     try:
         contaminated_thing = _CONTAMINATED_THING_DCID_MAP[row['Media']]
-        contaminant = _CHEM_MAP[row['Contaminant Name'].title()]
+        contaminant_series = contaminant_df[contaminant_df['CommonName'] == row['Contaminant Name']]
+        # NOTE: Currently, the script does not handle isotopes and cases where
+        # there are multiple node dcids mapping to the same element/compund's
+        # commonName -- hence we take the first occurance of this name
+        # TODO: Handle isotopes and different compound names
+        contaminant_series = contaminant_series.iloc[0]
 
         sv_dict = {
             "contaminatedThing": f"{contaminated_thing}",
             "measuredProperty": "isContaminated",
-            "contaminant": f"{contaminant}"
+            "contaminant": f"{contaminant_series['CommonName'].title()}"
         }
         dcid_str = get_statvar_dcid(sv_dict)
 
@@ -110,7 +118,7 @@ def write_sv_to_file(row, file_obj):
         node_str += "typeOf: dcs:StatisticalVariable\n"
         node_str += "populationType: dcs:SuperfundSite\n"
         node_str += "statType: dcs:measurementResult\n"
-        node_str += f"contaminant: dcs:{contaminant}\n"
+        node_str += f"contaminant: dcs:{contaminant_series['dcid']}\n"
         node_str += f"contaminatedThing: dcs:{contaminated_thing}\n"
         node_str += "measuredProperty: dcs:isContaminated\n\n"
 
@@ -121,7 +129,7 @@ def write_sv_to_file(row, file_obj):
         row['value'] = True
         return row
 
-    except KeyError:
+    except:
         row['variableMeasured'] = None
         row['value'] = None
         return row
@@ -134,9 +142,12 @@ def process_site_contamination(input_path: str, output_path: str) -> int:
     ## Create output directory if not present
     if not os.path.exists(output_path):
         os.makedirs(output_path)
-
+    ## contaminant to csv mapping
+    contaminant_csv = pd.read_csv(os.path.join(input_path, _CONTAMINANTS_MAP), sep='|', usecols=['dcid', 'CommonName'])
+    contaminant_csv = contaminant_csv.loc[~pd.isnull(contaminant_csv['dcid'])] # drop rows with empty dcid
+    contaminant_csv['CommonName'] = contaminant_csv['CommonName'].str.replace('[^\w\s]', '_', regex=True) #replace all non-alphanumeric with `_`
+    ## contamination at superfund sites
     contamination_data_path = os.path.join(input_path, _DATASET_NAME)
-
     contamination_data = pd.read_excel(contamination_data_path,
                                        header=1,
                                        usecols=[
@@ -160,7 +171,7 @@ def process_site_contamination(input_path: str, output_path: str) -> int:
     c = c.dropna()
     f = open(os.path.join(output_path, "superfund_sites_contamination.mcf"),
              "a")
-    c = c.apply(write_sv_to_file, args=(f,), axis=1)
+    c = c.apply(write_sv_to_file, args=(contaminant_csv, f,), axis=1)
     f.close()
 
     c = c.dropna(subset=['variableMeasured', 'value'])

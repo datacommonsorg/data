@@ -15,7 +15,7 @@
 
 About this script:
 This script processes data from:
-- ./data/Superfund National Priorities List (NPL) Sites with Status Information.csv
+- ./data/superfund_sites_with_status.csv
   This file lists all superfund sites on the NPL with a note on the site's status on the NPL. This file also provides different dates when the NPL status of a site changed. This dataset is exported from the data view in  https://epa.maps.arcgis.com/apps/webappviewer/index.html?id=33cebcdfdd1b4c3a8b51d416956c41f1
 """
 from absl import app, flags
@@ -23,7 +23,7 @@ import os
 import sys
 import pandas as pd
 
-_DATASET_NAME = "./Superfund National Priorities List (NPL) Sites with Status Information.csv"
+_DATASET_NAME = "./superfund_sites_with_status.csv"
 
 _STATUS_TEMPALTE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation

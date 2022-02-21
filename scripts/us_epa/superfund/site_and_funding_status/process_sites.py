@@ -16,7 +16,7 @@
 About this script:
 This script processes data from two files namely:
 
-- ./data/Superfund National Priorities List (NPL) Sites with Status Information.csv
+- ./data/superfund_sites_with_status.csv
   This file lists all superfund sites on the NPL with a note on the site's status on the NPL. This file also provides the location of the superfund site with latitude and longitude. This dataset is exported from the data view in  https://epa.maps.arcgis.com/apps/webappviewer/index.html?id=33cebcdfdd1b4c3a8b51d416956c41f1
 
 - ./data/401063.xlsx
@@ -46,7 +46,7 @@ location: C:SuperfundSite->location
 establishmentOwnership: C:SuperfundSite->establishmentOwnership
 """
 
-_SITE_DATA = "./Superfund National Priorities List (NPL) Sites with Status Information.csv"
+_SITE_DATA = "./superfund_sites_with_status.csv"
 
 _OWNERSHIP_DATA = "./401063.xlsx"
 
