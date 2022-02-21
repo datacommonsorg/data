@@ -46,7 +46,9 @@ _TEST_GEOIDS = {
         '',  # Remainder of California for summary level code-960
     '9500000US0699999':
         '',  # Remainder of California for summary level code-950
-    '310M500US49820': 'geoId/C49820'  # Zapata, TX Micro Area
+    '310M500US49820': 'geoId/C49820',  # Zapata, TX Micro Area
+    '0300000US1': 'USNewEnglandDivision',  # Census division in region 1
+    '0300000US10': '',  # Invalid census division code
 }
 
 

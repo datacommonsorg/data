@@ -41,6 +41,8 @@ Reference:
 _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     # Country-level, fips_code is expected to be empty string(fips_code length=1)
     '010': 'country/USA',
+    # Census Divisions (code_length=1)
+    '030': 'US',
     # State-level (fips_code length=2)
     '040': 'geoId/',
     # County-level (fips_code length=5)
@@ -67,6 +69,22 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
     '970': 'geoId/sch'
 }
 
+_US_CENSUS_DIVISIONS_MAP = {
+    # USNortheastRegion
+    '1': 'USNewEnglandDivision',
+    '2': 'USMiddleAtlanticDivision,',
+    # USMidwestRegion
+    '3': 'USEastNorthCentralDivision',
+    '4': 'USWestNorthCentralDivision',
+    # USSouthRegion',
+    '5': 'USSouthAtlanticDivision',
+    '6': 'USEastSouthCentralDivision',
+    '7': 'USWestSouthCentralDivision',
+    # USWestRegion',
+    '8': 'USMountainDivision',
+    '9': 'USPacificDivision',
+}
+
 _US_GEO_CODE_UPDATE_MAP = {
     # Replacing/Updating GeoID given in the data. Required in case of wrong geoid mentioned in the data.
     # Reference : https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2017/geography-changes.html
@@ -85,6 +103,13 @@ def convert_to_place_dcid(geoid_str):
 
     ## Based on summary level and FIPS code generate place dcid
     if summary_level in _US_SUMMARY_LEVEL_GEO_PREFIX_MAP:
+        if summary_level == '030':
+            # Census Divisions are not prefix based fips codes. Lookup map.
+            if fips_code in _US_CENSUS_DIVISIONS_MAP:
+                return _US_CENSUS_DIVISIONS_MAP[fips_code]
+            else:
+                # Invalid division code.
+                return ''
         ## Update FIPS code
         if fips_code in _US_GEO_CODE_UPDATE_MAP:
             fips_code = _US_GEO_CODE_UPDATE_MAP[fips_code]
