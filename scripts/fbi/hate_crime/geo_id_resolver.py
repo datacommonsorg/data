@@ -11,10 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-Resolving place dcid given the Pub_agency_name, Agency_type_name, State_Abbr
-from FBI hate crime dataset
-"""
+"""Resolving place dcid from FBI hate crime dataset."""
 
 import os
 import sys
@@ -28,10 +25,7 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 from alpha2_to_dcid import USSTATE_MAP
 from county_to_dcid import COUNTY_MAP
 
-city_geocodes_csv_path = os.path.join(_SCRIPT_PATH,
-                                      '../crime/city_geocodes.csv')
-manual_city_geocodes_csv_path = os.path.join(_SCRIPT_PATH,
-                                             '../crime/manual_geocodes.csv')
+_CITY_GEOCODES_PATH = os.path.join(_SCRIPT_PATH, '../crime/city_geocodes.csv')
 
 _US_GEO_CODE_UPDATE_MAP = {
     # Mapping geos in data to geos in csv / map
@@ -43,14 +37,24 @@ _IGNORE_STATE_ABBR = ['FS']  # Ignoring federal codes
 _IGNORE_CITIES = ['abington township pa',
                   'lone tree co']  # ignoring cities which have duplicates
 
-city = {}
-with open(os.path.join(city_geocodes_csv_path), encoding='utf8') as csvfile:
+_CITY = {}
+with open(os.path.join(_CITY_GEOCODES_PATH), encoding='utf8') as csvfile:
     csv_reader = csv.reader(csvfile)
     for a in csv_reader:
-        city[a[0]] = a[1]
+        _CITY[a[0]] = a[1]
 
 
-def state_to_dcid(state_code):
+def _state_to_dcid(state_code: str) -> str:
+    """
+    Takes in the state alpha2 code and returns the dcid.
+
+    Args:
+        state_code: The alpha2 code of the state.
+
+    Returns:
+        The dcid of the state in DC. Returns an empty string if the state is not
+        found.
+    """
     if state_code in _IGNORE_STATE_ABBR:
         return ''
 
@@ -63,7 +67,16 @@ def state_to_dcid(state_code):
         return ''
 
 
-def get_county_variants(county):
+def _get_county_variants(county: str) -> list:
+    """
+    Given a county, returns a list of the possible variants of the county name.
+
+    Args:
+        county: A string literal that represents the county name.
+
+    Returns:
+        A list of the possible variants of the county name.
+    """
     county = county.replace(' County Police Department', ' County')
     county_variants = [
         county, county + ' County', county + ' Parish', county + ' Borough'
@@ -71,14 +84,26 @@ def get_county_variants(county):
     return county_variants
 
 
-def county_to_dcid(state_abbr, county):
+def _county_to_dcid(state_abbr: str, county: str) -> str:
+    """
+    Takes the county name and the state code it's contained in, the dcid of the
+    county is returned.
+
+    Args: 
+        state_abbr: The alpha2 code of the state.
+        county: The county name.
+
+    Returns:
+        The dcid of the county in DC. Returns an empty string if the county is
+        not found.
+    """
     if state_abbr in _IGNORE_STATE_ABBR:
         return ''
 
     if state_abbr in _US_GEO_CODE_UPDATE_MAP:
         state_abbr = _US_GEO_CODE_UPDATE_MAP[state_abbr]
 
-    county_valid_names = get_county_variants(county)
+    county_valid_names = _get_county_variants(county)
 
     if state_abbr in COUNTY_MAP:
         for county in county_valid_names:
@@ -89,7 +114,19 @@ def county_to_dcid(state_abbr, county):
         return ''
 
 
-def city_to_dcid(state_abbr, city_name):
+def _city_to_dcid(state_abbr: str, city_name: str) -> str:
+    """
+    Takes the city name and the alpha2 code of the state it is contained in, the
+    dcid of the city is returned.
+
+    Args:
+        state_abbr:  The alpha2 code of the state.
+        city_name: The city name.
+
+    Returns:
+        The dcid of the city in DC. Returns an empty string if the city is not
+        found.
+    """
     if state_abbr in _IGNORE_STATE_ABBR:
         return ''
     elif state_abbr in _US_GEO_CODE_UPDATE_MAP:
@@ -102,15 +139,26 @@ def city_to_dcid(state_abbr, city_name):
     elif city_state in _US_GEO_CODE_UPDATE_MAP:
         city_state = _US_GEO_CODE_UPDATE_MAP[city_state]
 
-    if city_state in city:
-        return 'geoId/' + city[city_state]
+    if city_state in _CITY:
+        return 'geoId/' + _CITY[city_state]
     else:
         return ''
 
 
-def convert_to_place_dcid(state_abbr, geo_name='', geo_type='State'):
-    """resolves GEOID based on the FBI Hate crime dataset Agency Type and Name. 
+def convert_to_place_dcid(state_abbr: str,
+                          geo: str = '',
+                          geo_type: str = 'State') -> str:
+    """
+    Resolves the geoId based on the FBI Hate crime dataset Agency Type and Name. 
     If a geoId could not be resolved, the function returns an empty string ('').
+
+    Args:
+        state_abbr: The alpha2 code of the state.
+        geo: The name of the geo.
+        geo_type: The type of the geo. Can be 'State', 'County' or 'City'
+
+    Returns:
+        The dcid of the geo. Returns an empty string if the geo is not found.
     """
     if state_abbr in _IGNORE_STATE_ABBR:
         return ''
@@ -119,13 +167,13 @@ def convert_to_place_dcid(state_abbr, geo_name='', geo_type='State'):
         state_abbr = _US_GEO_CODE_UPDATE_MAP[state_abbr]
 
     if geo_type == 'State':
-        return state_to_dcid(state_abbr)
+        return _state_to_dcid(state_abbr)
 
     elif geo_type == 'County':
-        return county_to_dcid(state_abbr, geo_name)
+        return _county_to_dcid(state_abbr, geo)
 
     elif geo_type == 'City':
-        return city_to_dcid(state_abbr, geo_name)
+        return _city_to_dcid(state_abbr, geo)
 
     else:
         # geo type currently not handled
