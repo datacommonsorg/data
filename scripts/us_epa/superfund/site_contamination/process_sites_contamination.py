@@ -145,8 +145,8 @@ def process_site_contamination(input_path: str, contaminant_csv_path: str,
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     ## contaminant to csv mapping
-    contaminant_csv = pd.read_csv(os.path.join(contaminant_csv_path,
-                                               _CONTAMINANTS_MAP),
+    con_csv_path = os.path.join(contaminant_csv_path, _CONTAMINANTS_MAP)
+    contaminant_csv = pd.read_csv(con_csv_path,
                                   sep='|',
                                   usecols=['dcid', 'CommonName'])
     contaminant_csv = contaminant_csv.loc[~pd.isnull(
