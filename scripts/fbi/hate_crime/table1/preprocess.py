@@ -19,21 +19,32 @@ import csv
 import json
 import pandas as pd
 
+from absl import app
+from absl import flags
+
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH,
-                             '../../../../util/'))  # for statvar_dcid_generator
+sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
 
-from statvar_dcid_generator import get_statvar_dcid
+import utils
 
-YEAR_INDEX = 0
+flags.DEFINE_string(
+    'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
+    'MCF. Default behaviour is to write the artifacts in the current working'
+    'directory.')
+flags.DEFINE_bool(
+    'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
+    'to not generate the MCF file.')
+_FLAGS = flags.FLAGS
+
+_YEAR_INDEX = 0
 
 # Columns in final cleaned CSV
-OUTPUT_COLUMNS = ['Year', 'StatVar', 'Quantity']
+_OUTPUT_COLUMNS = ['Year', 'StatVar', 'Quantity']
 
 # A config that maps the year to corresponding xls file with args to be used
 # with pandas.read_excel()
-YEARWISE_CONFIG = {
+_YEARWISE_CONFIG = {
     '2020': {
         'type': 'xls',
         'path': '../source_data/2020/table_1.xlsx',
@@ -173,84 +184,15 @@ YEARWISE_CONFIG = {
 }
 
 
-def _create_csv_mcf(csv_file_list: list, final_csv_path: str,
-                    config: dict) -> list:
-    """Creates StatVars according to values in csv_file_list and write the final
-    output to a csv.
-
-    Args:
-        csv_file_list: A list of CSV file paths to process.
-        final_cleaned_csv_path: Path of the final cleaned CSV file.
-        config: A dict which maps constraint props to the statvar based on
-          values in the CSV. See scripts/fbi/hate_crime/table1/config.json for
-          an example.
-
-    Returns:
-        A list of statvars.
-    """
-    statvars = []
-    with open(final_csv_path, 'w', encoding='utf8') as output_f:
-        writer = csv.DictWriter(output_f, fieldnames=OUTPUT_COLUMNS)
-        writer.writeheader()
-
-        for csv_file in csv_file_list:
-            with open(csv_file, 'r', encoding='utf8') as input_f:
-                reader = csv.DictReader(input_f)
-                statvars_list = _write_output_csv(reader, writer, config)
-                statvars.extend(statvars_list)
-    return statvars
-
-
-def _update_statvars(statvar_list: list, key_value: dict):
-    """Given a list of statvars and a key:value pair, this functions adds the
-    key value pair to each statvar.
-    """
-    for d in statvar_list:
-        d.update(key_value)
-
-
-def _update_statvar_dcids(statvar_list: list, config: dict):
-    """Given a list of statvars, generates the dcid for each statvar after
-    accounting for dependent PVs.
-    """
-    for d in statvar_list:
-        ignore_props = _get_dpv(d, config)
-        dcid = get_statvar_dcid(d, ignore_props=ignore_props)
-        d['Node'] = dcid
-
-
 def _write_row(year: int, statvar_dcid: str, quantity: str,
                writer: csv.DictWriter):
-    """A wrapper to write data to the cleaned CSV."""
+    """A wrapper to write data to the CSV."""
     processed_dict = {
         'Year': year,
         'StatVar': statvar_dcid,
         'Quantity': quantity
     }
     writer.writerow(processed_dict)
-
-
-def _get_dpv(statvar: dict, config: dict) -> list:
-    """A function that goes through the statvar dict and the config and returns
-    a list of properties to ignore when generating the dcid.
-
-    Args:
-        statvar: A dictionary of prop:values of the statvar
-        config: A dict which maps constraint props to the statvar based on
-          values in the CSV. See scripts/fbi/hate_crime/config.json for
-          an example. The 'dpv' key is used to identify dependent properties.
-
-    Returns:
-        A list of properties to ignore when generating the dcid
-    """
-    ignore_props = []
-    for spec in config['dpv']:
-        if spec['cprop'] in statvar:
-            dpv_prop = spec['dpv']['prop']
-            dpv_val = spec['dpv']['val']
-            if dpv_val == statvar.get(dpv_prop, None):
-                ignore_props.append(dpv_prop)
-    return ignore_props
 
 
 def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
@@ -263,7 +205,7 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
         reader: CSV dict reader.
         writer: CSV dict writer of final cleaned CSV.
         config: A dict which maps constraint props to the statvar based on
-          values in the CSV. See scripts/fbi/hate_crime/config.json for
+          values in the CSV. See scripts/fbi/hate_crime/table1/config.json for
           an example.
 
     Returns:
@@ -281,8 +223,8 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
         ]
         bias_motivation = crime['bias motivation']
         bias_key_value = config['pvs'][bias_motivation]
-        _update_statvars(statvar_list, bias_key_value)
-        _update_statvar_dcids(statvar_list, config)
+        utils.update_statvars(statvar_list, bias_key_value)
+        utils.update_statvar_dcids(statvar_list, config)
 
         _write_row(crime['Year'], incident_statvar['Node'], crime['incidents'],
                    writer)
@@ -298,28 +240,8 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
     return statvars
 
 
-def _create_mcf(stat_vars: list, mcf_file_path: str):
-    """Writes all statvars to a .mcf file."""
-    dcid_set = set()
-    final_mcf = ''
-    for sv in stat_vars:
-        statvar_mcf_list = []
-        dcid = sv['Node']
-        if dcid in dcid_set:
-            continue
-        dcid_set.add(dcid)
-        for p, v in sv.items():
-            if p != 'Node':
-                statvar_mcf_list.append(f'{p}: dcs:{v}')
-        statvar_mcf = 'Node: dcid:' + dcid + '\n' + '\n'.join(statvar_mcf_list)
-        final_mcf += statvar_mcf + '\n\n'
-
-    with open(mcf_file_path, 'w', encoding='utf8') as f:
-        f.write(final_mcf)
-
-
-def _clean_dataframe(df: pd.DataFrame):
-    """Clean the column names and bias motivation values in a dataframe."""
+def _clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """Clean the column names and bias motivation values in the dataframe."""
     df.columns = df.columns.str.replace(r'\n', ' ', regex=True)
     df.columns = df.columns.str.replace(r'\s+', ' ', regex=True)
     df.columns = df.columns.str.replace(r'\d+', '', regex=True)
@@ -336,25 +258,31 @@ def _clean_dataframe(df: pd.DataFrame):
     return df
 
 
-if __name__ == '__main__':
+def main(argv):
     csv_files = []
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in YEARWISE_CONFIG.items():
+        for year, config in _YEARWISE_CONFIG.items():
             xls_file_path = os.path.join(_SCRIPT_PATH, config['path'])
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
 
             read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file)
-            read_file.insert(YEAR_INDEX, 'Year', year)
+            read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, index=None, header=True)
             csv_files.append(csv_file_path)
 
         config_path = os.path.join(_SCRIPT_PATH, 'config.json')
-        with open(config_path, 'r', encoding='utf8') as f:
+        with open(config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
 
-        cleaned_csv_path = os.path.join(_SCRIPT_PATH, 'cleaned.csv')
-        statvars = _create_csv_mcf(csv_files, cleaned_csv_path, config)
+        cleaned_csv_path = os.path.join(_FLAGS.output_dir, 'cleaned.csv')
+        statvars = utils.create_csv_mcf(csv_files, cleaned_csv_path, config,
+                                        _OUTPUT_COLUMNS, _write_output_csv)
 
-        mcf_path = os.path.join(_SCRIPT_PATH, 'output.mcf')
-        _create_mcf(statvars, mcf_path)
+        if _FLAGS.gen_statvar_mcf:
+            mcf_path = os.path.join(_FLAGS.output_dir, 'output.mcf')
+            utils.create_mcf(statvars, mcf_path)
+
+
+if __name__ == '__main__':
+    app.run(main)
