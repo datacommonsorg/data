@@ -117,13 +117,8 @@ class LocalGovermentDirectoryDistrictsDataLoader:
     def _load_and_format_lgd(self):
         # Load the lgd districts data and set the type of columns to str
         # if there are NA values then replace it with '' character
-        self.lgd_df = pd.read_csv(self.lgd_csv, dtype=str)
+        self.lgd_df = pd.read_csv(self.lgd_csv, dtype=str,  header=2, skip_blank_lines=True)
         self.lgd_df.fillna('', inplace=True)
-        # Drop title rows in the top and empty rows after 741.
-        # The actual data is between 2nd and 741st row. So keep only them.
-        self.lgd_df = self.lgd_df.iloc[1:741]
-        # Take the the header row and set it as column header
-        self.lgd_df = self.lgd_df[1:]
         self.lgd_df.columns = [
             "LGDDistrictCode", "LGDDistrictName", "LGDStateCode",
             "LGDStateName", "LGDCensus2001Code", "LGDCensus2011Code"
