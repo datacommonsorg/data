@@ -117,7 +117,10 @@ class LocalGovermentDirectoryDistrictsDataLoader:
     def _load_and_format_lgd(self):
         # Load the lgd districts data and set the type of columns to str
         # if there are NA values then replace it with '' character
-        self.lgd_df = pd.read_csv(self.lgd_csv, dtype=str,  header=2, skip_blank_lines=True)
+        self.lgd_df = pd.read_csv(self.lgd_csv,
+                                  dtype=str,
+                                  header=2,
+                                  skip_blank_lines=True)
         self.lgd_df.fillna('', inplace=True)
         self.lgd_df.columns = [
             "LGDDistrictCode", "LGDDistrictName", "LGDStateCode",
