@@ -525,6 +525,24 @@ def _process_constraint_property(prop: str, value: str) -> str:
 def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     """Generates the dcid given a statistical variable.
 
+    The generated dcid will follow the pattern
+    <statType>_<measuredProp>_<populationType>_<constraintVal1>_<constraintVal2>
+
+    1. measurementQualifier is added as a prefix to the dcid.
+    2. statType is included when it is not measuredValue.
+    3. measurementDenominator is added as a suffix to the dcid.
+    4. constraints are sorted alphabetically based on the prop and values are
+         added to the dcid.
+    5. NAICS and SOC codes are replaced with their industry and occupation names
+         respectively.
+    6. Boolean constraints are replaced by their populations. For example,
+         p=isInternetUser and v=True/False becomes v=isInternetUser/
+         notInternetUser.
+    7. Quantities and Quantity Ranges are changed into a name to be used in the
+         dcid. For example p=age and v=[10 20 Years] becomes v=10To20Years.
+    8. Certain variables have text prepended or appended to their constraints to
+         improve readability. See _PREPEND_APPEND_REPLACE_MAP for more details.
+
     Args:
         stat_var_dict: A dictionary with property: value of the statistical
           variable as key-value pairs.
@@ -548,6 +566,12 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
 
     Returns:
         A string representing the dcid of the statistical variable.
+
+    Caveats: 
+        1. Currently, there is no support for renaming ICD10 cause of death
+             values and DEA drug names.
+        2. MeasuredProp=InsuredUnemploymentRate is not changed to 
+             Rate_InsuredUnemployment.
     """
 
     # TODO: Renaming cause of death properties
