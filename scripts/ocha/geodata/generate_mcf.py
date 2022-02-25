@@ -73,7 +73,6 @@ _FILE_METADATA = {
         ('ADM2', 'Prefecture', 'China', 'AdministrativeArea2'),
 }
 
-
 # Threshold to DP level map, from
 # scripts/us_census/geojsons_low_res/generate_mcf.py
 _DP_LEVEL_MAP = {1: 0.01, 2: 0.03, 3: 0.05}
@@ -115,18 +114,21 @@ def _process_file(in_fp, md, args):
                 print('Missing DCID for ' + pcode_val)
                 continue
             dcid = args['id_map'][pcode_val]
-            gj_mcf.write(_GJ_MCF.format(dcid=dcid, place_type=place_type,
-                                        gj_prop='geoJsonCoordinates',
-                                        gj_val=gj))
+            gj_mcf.write(
+                _GJ_MCF.format(dcid=dcid,
+                               place_type=place_type,
+                               gj_prop='geoJsonCoordinates',
+                               gj_val=gj))
 
             poly = geometry.shape(f['geometry'])
             for dp, tolerance in _DP_LEVEL_MAP.items():
                 spoly = poly.simplify(tolerance)
                 gjs = json.dumps(json.dumps(geometry.mapping(spoly)))
-                simplified_gj_mcf.write(_GJ_MCF.format(
-                    dcid=dcid, place_type=place_type,
-                    gj_prop='geoJsonCoordinatesDP' + str(dp),
-                    gj_val=gjs))
+                simplified_gj_mcf.write(
+                    _GJ_MCF.format(dcid=dcid,
+                                   place_type=place_type,
+                                   gj_prop='geoJsonCoordinatesDP' + str(dp),
+                                   gj_val=gjs))
 
             # Write PCode and containment
             pcode_parent = pcode_val[:-2]
