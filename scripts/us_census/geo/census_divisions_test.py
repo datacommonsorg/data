@@ -20,10 +20,12 @@ import unittest
 
 # Allows the following module imports to work when running as a script
 # relative to data/scripts/
-sys.path.append('/'.join([
-    '..' for x in filter(lambda x: x == '/',
-                         os.path.abspath(__file__).split('data/scripts/')[1])
-]))
+sys.path.append(
+    os.path.sep.join([
+        '..'
+        for x in filter(lambda x: x == os.path.sep,
+                        os.path.abspath(__file__).split('data/scripts/')[1])
+    ]))
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -43,7 +45,7 @@ class TestProcess(unittest.TestCase):
                 expected_str = expected_f.read()
             self.assertEqual(
                 actual_str, expected_str,
-                f'Mismatched actual:{actual_files[i]} expected:{expected_files[i]}'
+                f'Mismatched files:\nactual:{actual_files[i]}\nexpected:{expected_files[i]}'
             )
 
     def test_process(self):
