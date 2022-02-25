@@ -531,16 +531,20 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     1. measurementQualifier is added as a prefix to the dcid.
     2. statType is included when it is not measuredValue.
     3. measurementDenominator is added as a suffix to the dcid.
-    4. constraints are sorted alphabetically based on the prop and values are
+    4. Constraints are sorted alphabetically based on the prop and values are
          added to the dcid.
-    5. NAICS and SOC codes are replaced with their industry and occupation names
-         respectively.
-    6. Boolean constraints are replaced by their populations. For example,
+    5. Existing dcids may not follow the above conventions. The _LEGACY_MAP maps
+         generated dcids to their existing dcid.
+    6. NAICS and SOC codes are replaced with their industry and occupation names
+         respectively. See _NAICS_MAP and util/soc_codes_names.py for the
+         mapping.
+    7. Boolean constraints are replaced by their populations. For example,
          p=isInternetUser and v=True/False becomes v=isInternetUser/
-         notInternetUser.
-    7. Quantities and Quantity Ranges are changed into a name to be used in the
+         notInternetUser. See _BOOLEAN_PROPS for the properties that are
+         considered for this renaming.
+    8. Quantities and Quantity Ranges are changed into a name to be used in the
          dcid. For example p=age and v=[10 20 Years] becomes v=10To20Years.
-    8. Certain variables have text prepended or appended to their constraints to
+    9. Certain variables have text prepended or appended to their constraints to
          improve readability. See _PREPEND_APPEND_REPLACE_MAP for more details.
 
     Args:
@@ -567,11 +571,21 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     Returns:
         A string representing the dcid of the statistical variable.
 
-    Caveats: 
+    Caveats:
         1. Currently, there is no support for renaming ICD10 cause of death
              values and DEA drug names.
-        2. MeasuredProp=InsuredUnemploymentRate is not changed to 
+        2. MeasuredProp=InsuredUnemploymentRate is not changed to
              Rate_InsuredUnemployment.
+        3. The generated dcids can get too long due to the large number of
+             constraint props. In such cases, manual generation or the
+             ignore_props arg can be used to exclude a few props from the
+             generation process. It is recommended to limit the length of
+             statvar dcids to 80 characters or less.
+        4. This function does not differentiate between property names and only
+             uses the values to generate the dcid. Two props having the same
+             value, say p1=fuel, v1=Coal and p2=energy, v2=Coal will result in
+             the same dcid. The _PREPEND_APPEND_REPLACE_MAP can be modified to
+             disambiguate in this case.
     """
 
     # TODO: Renaming cause of death properties
