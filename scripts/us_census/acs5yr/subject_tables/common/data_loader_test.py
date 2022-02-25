@@ -21,9 +21,8 @@ import unittest
 # relative to data/scripts/
 sys.path.append(
     os.path.sep.join([
-        '..'
-        for x in filter(lambda x: x == os.path.sep,
-                        os.path.abspath(__file__).split('data/scripts/')[1])
+        '..' for x in filter(lambda x: x == os.path.sep,
+                             os.path.abspath(__file__).split('scripts/')[1])
     ]))
 
 from data_loader import process_subject_tables
