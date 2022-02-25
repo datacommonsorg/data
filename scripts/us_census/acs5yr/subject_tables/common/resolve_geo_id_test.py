@@ -19,10 +19,12 @@ import unittest
 
 # Allows the following module imports to work when running as a script
 # relative to data/scripts/
-sys.path.append(os.path.sep.join([
-    '..' for x in filter(lambda x: x == os.path.sep,
-                         os.path.abspath(__file__).split('data/scripts/')[1])
-]))
+sys.path.append(
+    os.path.sep.join([
+        '..'
+        for x in filter(lambda x: x == os.path.sep,
+                        os.path.abspath(__file__).split('data/scripts/')[1])
+    ]))
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
