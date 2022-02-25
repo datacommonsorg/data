@@ -55,18 +55,22 @@ containedInPlace: dcid:{parent}
 """
 
 _FILE_METADATA = {
-    'bgd_admbnda_adm1_bbs_20201113.geojson':
+    'bgd_admbnda_adm1_bbs_20201113':
         ('ADM1', 'Division', 'Bangladesh', 'AdministrativeArea1'),
-    'bgd_admbnda_adm2_bbs_20201113.geojson':
+    'bgd_admbnda_adm2_bbs_20201113':
         ('ADM2', 'District', 'Bangladesh', 'AdministrativeArea2'),
-    'npl_admbnda_adm1_nd_20201117.geojson':
+    'npl_admbnda_adm1_nd_20201117':
         ('ADM1', 'Province', 'Nepal', 'AdministrativeArea1'),
-    'npl_admbnda_districts_nd_20201117.geojson':
+    'npl_admbnda_districts_nd_20201117':
         ('DIST', 'District', 'Nepal', 'AdministrativeArea2'),
-    'pak_admbnda_adm1_ocha_pco_gaul_20181218.geojson':
+    'pak_admbnda_adm1_ocha_pco_gaul_20181218':
         ('ADM1', 'Province', 'Pakistan', 'AdministrativeArea1'),
-    'pak_admbnda_adm2_ocha_pco_gaul_20181218.geojson':
+    'pak_admbnda_adm2_ocha_pco_gaul_20181218':
         ('ADM2', 'District', 'Pakistan', 'AdministrativeArea3'),
+    'chn_admbnda_adm1_ocha_2020':
+        ('ADM1', 'Province', 'China', 'AdministrativeArea1'),
+    'chn_admbnda_adm2_ocha_2020':
+        ('ADM2', 'Prefecture', 'China', 'AdministrativeArea2'),
 }
 
 
@@ -147,7 +151,7 @@ def _process_file(in_fp, md, args):
 
 def _process(in_pattern, args):
     for fpath in glob.glob(in_pattern):
-        fname = os.path.basename(fpath)
+        fname = os.path.basename(fpath).split('.')[0]
         if fname not in _FILE_METADATA:
             continue
         print('Processing ' + fname)
