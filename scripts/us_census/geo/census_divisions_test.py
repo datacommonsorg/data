@@ -19,8 +19,11 @@ import tempfile
 import unittest
 
 # Allows the following module imports to work when running as a script
-# relative to scripts/
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# relative to data/scripts/
+sys.path.append('/'.join([
+    '..' for x in filter(lambda x: x == '/',
+                         os.path.abspath(__file__).split('data/scripts/')[1])
+]))
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -30,18 +33,33 @@ import census_divisions
 
 class TestProcess(unittest.TestCase):
 
+    def compare_files(self, actual_files: list, expected_files: list):
+        '''Raise a test failure if actual and expected files differ.'''
+        self.assertEqual(len(actual_files), len(expected_files))
+        for i in range(0, len(actual_files)):
+            with open(actual_files[i], 'r') as actual_f:
+                actual_str = actual_f.read()
+            with open(expected_files[i], 'r') as expected_f:
+                expected_str = expected_f.read()
+            self.assertEqual(
+                actual_str, expected_str,
+                f'Mismatched actual:{actual_files[i]} expected:{expected_files[i]}'
+            )
+
     def test_process(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             mcf_file = os.path.join(tmp_dir, 'test_output.mcf')
             csv_file = os.path.join(module_dir_, 'census_region_geocodes.csv')
             census_divisions.process(csv_file, mcf_file)
+            expected_file = os.path.join(module_dir_, 'geo_CensusDivision.mcf')
+            self.compare_files(actual_files=[mcf_file],
+                               expected_files=[expected_file])
 
             with open(mcf_file, 'r') as f:
                 actual_mcf = f.read()
 
             os.remove(mcf_file)
 
-            expected_file = os.path.join(module_dir_, 'geo_CensusDivision.mcf')
             with open(expected_file, 'r') as f:
                 expected_mcf = f.read()
 

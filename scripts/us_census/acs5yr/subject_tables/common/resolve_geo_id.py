@@ -70,19 +70,19 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
 }
 
 _US_CENSUS_DIVISIONS_MAP = {
-    # USNortheastRegion
-    '1': 'USNewEnglandDivision',
-    '2': 'USMiddleAtlanticDivision,',
-    # USMidwestRegion
-    '3': 'USEastNorthCentralDivision',
-    '4': 'USWestNorthCentralDivision',
-    # USSouthRegion',
-    '5': 'USSouthAtlanticDivision',
-    '6': 'USEastSouthCentralDivision',
-    '7': 'USWestSouthCentralDivision',
-    # USWestRegion',
-    '8': 'USMountainDivision',
-    '9': 'USPacificDivision',
+    # usc/NortheastRegion
+    '1': 'usc/NewEnglandDivision',
+    '2': 'usc/MiddleAtlanticDivision,',
+    # usc/MidwestRegion
+    '3': 'usc/EastNorthCentralDivision',
+    '4': 'usc/WestNorthCentralDivision',
+    # usc/SouthRegion',
+    '5': 'usc/SouthAtlanticDivision',
+    '6': 'usc/EastSouthCentralDivision',
+    '7': 'usc/WestSouthCentralDivision',
+    # usc/WestRegion',
+    '8': 'usc/MountainDivision',
+    '9': 'usc/PacificDivision',
 }
 
 _US_GEO_CODE_UPDATE_MAP = {

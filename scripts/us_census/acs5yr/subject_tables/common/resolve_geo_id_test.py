@@ -13,8 +13,21 @@
 # limitations under the License.
 """Tests for resolve_geo_id."""
 
+import os
+import sys
 import unittest
-from .resolve_geo_id import convert_to_place_dcid
+
+# Allows the following module imports to work when running as a script
+# relative to data/scripts/
+sys.path.append('/'.join([
+    '..' for x in filter(lambda x: x == '/',
+                         os.path.abspath(__file__).split('data/scripts/')[1])
+]))
+
+# module_dir_ is the path to where this test is running from.
+module_dir_ = os.path.dirname(__file__)
+
+from resolve_geo_id import convert_to_place_dcid
 
 _TEST_GEOIDS = {
     '0100000US': 'country/USA',  # Country (US)
@@ -47,7 +60,7 @@ _TEST_GEOIDS = {
     '9500000US0699999':
         '',  # Remainder of California for summary level code-950
     '310M500US49820': 'geoId/C49820',  # Zapata, TX Micro Area
-    '0300000US1': 'USNewEnglandDivision',  # Census division in region 1
+    '0300000US1': 'usc/NewEnglandDivision',  # Census division in region 1
     '0300000US10': '',  # Invalid census division code
 }
 

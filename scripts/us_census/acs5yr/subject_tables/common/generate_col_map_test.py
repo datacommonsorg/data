@@ -12,12 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for generateColMap."""
-import os
+
 import csv
 import json
+import os
+import sys
 import unittest
 
-from .generate_col_map import generate_stat_var_map, process_zip_file
+# Allows the following module imports to work when running as a script
+# relative to data/scripts/
+sys.path.append('/'.join([
+    '..' for x in filter(lambda x: x == '/',
+                         os.path.abspath(__file__).split('data/scripts/')[1])
+]))
+
+from generate_col_map import generate_stat_var_map, process_zip_file
 
 
 # TODO: use a smaller spec which exercises all functions in the module

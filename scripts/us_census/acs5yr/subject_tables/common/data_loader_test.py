@@ -12,9 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ Test for the data loader for the subject tables"""
-import unittest
+
 import os
-from .data_loader import process_subject_tables
+import sys
+import unittest
+
+# Allows the following module imports to work when running as a script
+# relative to data/scripts/
+sys.path.append('/'.join([
+    '..' for x in filter(lambda x: x == '/',
+                         os.path.abspath(__file__).split('data/scripts/')[1])
+]))
+
+from data_loader import process_subject_tables
 
 base_path = os.path.dirname(__file__)
 
