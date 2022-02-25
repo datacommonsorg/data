@@ -34,12 +34,14 @@ _COLUMNS = [
 
 _TEMPLATE_CENSUS_REGION = """Node: {dcid}
 typeOf: dcs:CensusRegion
+name: "{name}"
 censusRegionId: "{region}"
 containedInPlace: dcid:country/USA
 """
 
 _TEMPLATE_CENSUS_DIVISION = """Node: {dcid}
 typeOf: dcs:CensusDivision
+name: "{name}"
 censusDivisionId: "{division}"
 containedInPlace: {region_dcid}
 """
@@ -66,7 +68,7 @@ def _get_region_dcid(code: int, name: str, dcid_map: dict) -> str:
     '''Returns the DCID for the region and also adds it to the dcid_map.'''
     if name != '':
         name_str = _to_camelcase(name)
-        dcid_map[f'r{code}'] = f'dcid:US{name_str}'
+        dcid_map[f'r{code}'] = f'dcid:usc/{name_str}'
     return dcid_map[f'r{code}']
 
 
@@ -74,7 +76,7 @@ def _get_division_dcid(code: int, name: str, dcid_map: dict) -> str:
     '''Returns the DCID for the region and also adds it to the dcid map.'''
     if name != '':
         name_str = _to_camelcase(name)
-        dcid_map[f'd{code}'] = f'dcid:US{name_str}'
+        dcid_map[f'd{code}'] = f'dcid:usc/{name_str}'
     return dcid_map[f'd{code}']
 
 
