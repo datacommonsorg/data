@@ -220,6 +220,7 @@ def add_path_exp_mcf_dicts(new_path: str, existing_dict:Optional[dict] = None, r
     matching_files = glob.glob(new_path, recursive=True)
     for cur_file in matching_files:
         # set of files
+        print(cur_file)
         if cur_file not in existing_dict or reopen:
             existing_dict[cur_file] = mcf_file_to_dict_list(cur_file)
     
