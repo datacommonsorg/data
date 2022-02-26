@@ -245,11 +245,18 @@ def dict_list_to_mcf_str(dict_list:list, sort_keys: bool = False, regen_complex_
     ret_str = ''
     for _node in dict_list:
         cur_node = _node.copy()
+
+        is_comment_block = True
+        for prop in cur_node:
+            if not prop.startswith('__comment'):
+                is_comment_block = False
         # TODO other validations if required
-        if 'Node' not in cur_node:
-            raise ValueError(
-                'Each node must have Node: <name>".')
-        # TODO preserve comments
+        if not is_comment_block:
+            if 'Node' not in cur_node:
+                raise ValueError(
+                    'Each node must have Node: <name>".')
+
+        # preserve comments
         if '__comment' in cur_node:
             ret_str += cur_node['__comment']
         cur_node.pop('__comment', None)
@@ -260,10 +267,12 @@ def dict_list_to_mcf_str(dict_list:list, sort_keys: bool = False, regen_complex_
             ret_str += cur_node[prop_list[i]]
             cur_node.pop(prop_list[i], None)
             i += 1
-        # Keep Node: first
-        ret_str += f"{'Node'}: {cur_node['Node']['namespace']+':' if cur_node['Node']['namespace'] else ''}{cur_node['Node']['value']}"
-        ret_str += '\n'
-        cur_node.pop('Node', None)
+        
+        if not is_comment_block:
+            # Keep Node: first
+            ret_str += f"{'Node'}: {cur_node['Node']['namespace']+':' if cur_node['Node']['namespace'] else ''}{cur_node['Node']['value']}"
+            ret_str += '\n'
+            cur_node.pop('Node', None)
         
         prop_list = list(cur_node.keys())
         # sort keys if flag raised
