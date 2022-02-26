@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import ast
-import copy
 import glob
 import os
 import re
@@ -71,6 +70,7 @@ def dc_check_existence(dcid_list: list, use_autopush: bool = True, max_items: in
     return ret_dict
 
 def mcf_to_dict_list(mcf_str: str) -> list:
+    # TODO preserve empty lines if required
     # split by \n\n
     nodes_str_list = mcf_str.split('\n\n')
     # each node
@@ -85,6 +85,7 @@ def mcf_to_dict_list(mcf_str: str) -> list:
         is_first_prop = True
         # add each pv to ordered dict
         for pv_str in node_str_list:
+            # TODO handle multiple occurrences of same property within a node
             pv_str = pv_str.strip()
             if pv_str.startswith('#'):
                 cur_node[f'__comment{comment_ctr}'] = pv_str
