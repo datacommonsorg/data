@@ -284,6 +284,7 @@ def dict_list_to_mcf_file(dict_list:list, mcf_file_path: str, sort_keys=False, r
     mcf_file_path = os.path.expanduser(mcf_file_path)
     if os.path.dirname(mcf_file_path):
         os.makedirs(os.path.dirname(mcf_file_path), exist_ok=True)
+    print('Writing file', mcf_file_path)
     with open(mcf_file_path, 'w') as fp:
         fp.write(dict_list_to_mcf_str(dict_list, sort_keys=sort_keys, regen_complex_vals=regen_complex_vals))
 
