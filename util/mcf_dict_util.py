@@ -34,7 +34,13 @@ The format of dict would be as follows:
 Functions are provided to read or write single/multiple files.
 When multiple files are read, a dict object is created with a list above
     described dict like objects corresponding to each file.
-Some basic editing utilities are provided as functions.
+Functions to edit mcf files include:
+- Change property name.
+- Change value of given property.
+- Change namespace.
+- Check existence of dcids in DC.
+- Check existence of dcid in other set of nodes.
+- Drop a list of nodes with given list dcid.
 """
 
 import ast
