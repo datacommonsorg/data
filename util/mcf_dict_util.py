@@ -265,6 +265,7 @@ def dict_list_to_mcf_str(dict_list:list, sort_keys: bool = False, regen_complex_
         ret_str += '\n'
         cur_node.pop('Node', None)
         
+        prop_list = list(cur_node.keys())
         # sort keys if flag raised
         if sort_keys:
             prop_list = sorted(prop_list)
