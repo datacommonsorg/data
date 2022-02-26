@@ -263,7 +263,7 @@ def dict_list_to_mcf_str(dict_list:list, sort_keys: bool = False, regen_complex_
         # add comments till node
         prop_list = list(cur_node.keys())
         i = 0
-        while prop_list[i].startswith('__comment') and i < len(prop_list):
+        while i < len(prop_list) and prop_list[i].startswith('__comment'):
             ret_str += cur_node[prop_list[i]]
             cur_node.pop(prop_list[i], None)
             i += 1
