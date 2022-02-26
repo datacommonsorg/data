@@ -106,8 +106,12 @@ def mcf_to_dict_list(mcf_str: str) -> list:
                     prefix = pv[1].strip()
                     v = pv[2].strip()
                 else:
+                    p = pv[0].strip()
+                    prefix = pv[1].strip()
+                    v = ':'.join(pv[1:]).strip()
                     # TODO detect colon within a str(for e.g. descriptionURL)
-                    print(f"Warning - unexpected number of ':' found, {pv_str} will be ignored")
+                    print(f"Warning - unexpected number of ':' found in {pv_str}")
+
                 # TODO (optional) if not prefix
                     # if not complex value and p != 'dcid'
                         # prefix = 'dcs'
@@ -115,6 +119,17 @@ def mcf_to_dict_list(mcf_str: str) -> list:
                 cur_node[p]['value'] = v
                 if v.startswith('[') and v.endswith(']'):
                     cur_node[p]['complexValue'] = re.sub(' +', ' ', v)[1:-1].split(' ')
+                if v.count(':') > 0 and ',' in v:
+                    cur_node[p]['multiple_values'] = []
+                    vals = v.split(',')
+                    for cur_v in vals:
+                        temp_dict = {}
+                        if ':' in cur_v:
+                            temp_dict['prefix'] = cur_v[:cur_v.index(':')].strip()
+                            temp_dict['value'] = cur_v[cur_v.index(':')+1:].strip()
+                        else:
+                            temp_dict['prefix'] = ''
+                            temp_dict['value'] = cur_v
                 cur_node[p]['namespace'] = prefix
         node_list.append(cur_node)
     return node_list
