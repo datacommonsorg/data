@@ -287,7 +287,7 @@ def dict_list_to_mcf_str(dict_list:list, sort_keys: bool = False, regen_complex_
                 ret_str += f"{prop}: {cur_node[prop]['namespace']+':' if cur_node[prop]['namespace'] else ''}{cur_node[prop]['value']}"
             ret_str += '\n'
         ret_str += '\n'
-    return ret_str
+    return ''.join(ret_str.rsplit('\n', 1))
 
 def dict_list_to_mcf_file(dict_list:list, mcf_file_path: str, sort_keys=False, regen_complex_vals: bool = False):
     mcf_file_path = os.path.expanduser(mcf_file_path)
