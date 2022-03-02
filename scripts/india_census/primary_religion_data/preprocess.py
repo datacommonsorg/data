@@ -467,7 +467,6 @@ if __name__ == '__main__':
         "RL-2500", "RL-2600", "RL-2700", "RL-2800", "RL-2900", "RL-3000",
         "RL-3100", "RL-3200", "RL-3300", "RL-3400", "RL-3500"
     ]
-    state_data_files = ["RL-0100", "RL-0200", "RL-0300"]
     tmp_dir = tempfile.gettempdir()
 
     # we dont need to redefine the tmcf file and mcf file
