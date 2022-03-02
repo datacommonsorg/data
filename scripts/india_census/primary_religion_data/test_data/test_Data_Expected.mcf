@@ -1,5 +1,4 @@
-Node: dcid:Count_Person_Hindu
-name: "Total Population - Hindu"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu
 description: "Total Population - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7,8 +6,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Hinduism
 
-Node: dcid:Count_Person_Muslim
-name: "Total Population - Muslim"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim
 description: "Total Population - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -16,8 +14,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Islam
 
-Node: dcid:Count_Person_Christian
-name: "Total Population - Christian"
+Node: dcid:indianCensus/Count_Person_Religion_Christian
 description: "Total Population - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -25,8 +22,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Christianity
 
-Node: dcid:Count_Person_Sikh
-name: "Total Population - Sikh"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh
 description: "Total Population - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -34,8 +30,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Sikhism
 
-Node: dcid:Count_Person_Buddhist
-name: "Total Population - Buddhist"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist
 description: "Total Population - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -43,8 +38,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Buddhism
 
-Node: dcid:Count_Person_Jain
-name: "Total Population - Jain"
+Node: dcid:indianCensus/Count_Person_Religion_Jain
 description: "Total Population - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -52,8 +46,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Jainism
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions
-name: "Total Population - Other religions and persuasions"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions
 description: "Total Population - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -61,8 +54,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 
-Node: dcid:Count_Person_ReligionNotStated
-name: "Total Population - Religion not stated"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated
 description: "Total Population - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -70,8 +62,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
 
-Node: dcid:Count_Person_Hindu_Urban
-name: "Total Population - Hindu - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban
 description: "Total Population - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -80,8 +71,7 @@ measuredProperty: dcs:count
 religion: dcs:Hinduism
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Count_Person_Muslim_Urban
-name: "Total Population - Muslim - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban
 description: "Total Population - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -90,8 +80,7 @@ measuredProperty: dcs:count
 religion: dcs:Islam
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Count_Person_Christian_Urban
-name: "Total Population - Christian - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban
 description: "Total Population - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -100,8 +89,7 @@ measuredProperty: dcs:count
 religion: dcs:Christianity
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Count_Person_Sikh_Urban
-name: "Total Population - Sikh - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban
 description: "Total Population - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -110,8 +98,7 @@ measuredProperty: dcs:count
 religion: dcs:Sikhism
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Count_Person_Buddhist_Urban
-name: "Total Population - Buddhist - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban
 description: "Total Population - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -120,8 +107,7 @@ measuredProperty: dcs:count
 religion: dcs:Buddhism
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Count_Person_Jain_Urban
-name: "Total Population - Jain - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban
 description: "Total Population - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -130,8 +116,7 @@ measuredProperty: dcs:count
 religion: dcs:Jainism
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_Urban
-name: "Total Population - Other religions and persuasions - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban
 description: "Total Population - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -140,8 +125,7 @@ measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Count_Person_ReligionNotStated_Urban
-name: "Total Population - Religion not stated - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban
 description: "Total Population - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -150,8 +134,7 @@ measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Count_Person_Hindu_Rural
-name: "Total Population - Hindu - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural
 description: "Total Population - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -160,8 +143,7 @@ measuredProperty: dcs:count
 religion: dcs:Hinduism
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_Muslim_Rural
-name: "Total Population - Muslim - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural
 description: "Total Population - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -170,8 +152,7 @@ measuredProperty: dcs:count
 religion: dcs:Islam
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_Christian_Rural
-name: "Total Population - Christian - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural
 description: "Total Population - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -180,8 +161,7 @@ measuredProperty: dcs:count
 religion: dcs:Christianity
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_Sikh_Rural
-name: "Total Population - Sikh - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural
 description: "Total Population - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -190,8 +170,7 @@ measuredProperty: dcs:count
 religion: dcs:Sikhism
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_Buddhist_Rural
-name: "Total Population - Buddhist - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural
 description: "Total Population - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -200,8 +179,7 @@ measuredProperty: dcs:count
 religion: dcs:Buddhism
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_Jain_Rural
-name: "Total Population - Jain - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural
 description: "Total Population - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -210,8 +188,7 @@ measuredProperty: dcs:count
 religion: dcs:Jainism
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_Rural
-name: "Total Population - Other religions and persuasions - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural
 description: "Total Population - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -220,8 +197,7 @@ measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_ReligionNotStated_Rural
-name: "Total Population - Religion not stated - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural
 description: "Total Population - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -230,8 +206,7 @@ measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_Hindu_Male
-name: "Total Males - Hindu"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Male
 description: "Total Males - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -240,8 +215,7 @@ measuredProperty: dcs:count
 religion: dcs:Hinduism
 gender: schema:Male
 
-Node: dcid:Count_Person_Muslim_Male
-name: "Total Males - Muslim"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Male
 description: "Total Males - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -250,8 +224,7 @@ measuredProperty: dcs:count
 religion: dcs:Islam
 gender: schema:Male
 
-Node: dcid:Count_Person_Christian_Male
-name: "Total Males - Christian"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Male
 description: "Total Males - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -260,8 +233,7 @@ measuredProperty: dcs:count
 religion: dcs:Christianity
 gender: schema:Male
 
-Node: dcid:Count_Person_Sikh_Male
-name: "Total Males - Sikh"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Male
 description: "Total Males - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -270,8 +242,7 @@ measuredProperty: dcs:count
 religion: dcs:Sikhism
 gender: schema:Male
 
-Node: dcid:Count_Person_Buddhist_Male
-name: "Total Males - Buddhist"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Male
 description: "Total Males - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -280,8 +251,7 @@ measuredProperty: dcs:count
 religion: dcs:Buddhism
 gender: schema:Male
 
-Node: dcid:Count_Person_Jain_Male
-name: "Total Males - Jain"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Male
 description: "Total Males - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -290,8 +260,7 @@ measuredProperty: dcs:count
 religion: dcs:Jainism
 gender: schema:Male
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_Male
-name: "Total Males - Other religions and persuasions"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Male
 description: "Total Males - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -300,8 +269,7 @@ measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 gender: schema:Male
 
-Node: dcid:Count_Person_ReligionNotStated_Male
-name: "Total Males - Religion not stated"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Male
 description: "Total Males - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -310,8 +278,7 @@ measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
 gender: schema:Male
 
-Node: dcid:Count_Person_Hindu_Urban_Male
-name: "Total Males - Hindu - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban_Male
 description: "Total Males - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -321,8 +288,7 @@ religion: dcs:Hinduism
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Muslim_Urban_Male
-name: "Total Males - Muslim - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban_Male
 description: "Total Males - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -332,8 +298,7 @@ religion: dcs:Islam
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Christian_Urban_Male
-name: "Total Males - Christian - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban_Male
 description: "Total Males - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -343,8 +308,7 @@ religion: dcs:Christianity
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Sikh_Urban_Male
-name: "Total Males - Sikh - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban_Male
 description: "Total Males - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -354,8 +318,7 @@ religion: dcs:Sikhism
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Buddhist_Urban_Male
-name: "Total Males - Buddhist - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban_Male
 description: "Total Males - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -365,8 +328,7 @@ religion: dcs:Buddhism
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Jain_Urban_Male
-name: "Total Males - Jain - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban_Male
 description: "Total Males - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -376,8 +338,7 @@ religion: dcs:Jainism
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_Urban_Male
-name: "Total Males - Other religions and persuasions - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Male
 description: "Total Males - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -387,8 +348,7 @@ religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_ReligionNotStated_Urban_Male
-name: "Total Males - Religion not stated - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Male
 description: "Total Males - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -398,8 +358,7 @@ religion: dcs:ReligionNotStated
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Hindu_Rural_Male
-name: "Total Males - Hindu - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural_Male
 description: "Total Males - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -409,8 +368,7 @@ religion: dcs:Hinduism
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Muslim_Rural_Male
-name: "Total Males - Muslim - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural_Male
 description: "Total Males - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -420,8 +378,7 @@ religion: dcs:Islam
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Christian_Rural_Male
-name: "Total Males - Christian - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural_Male
 description: "Total Males - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -431,8 +388,7 @@ religion: dcs:Christianity
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Sikh_Rural_Male
-name: "Total Males - Sikh - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural_Male
 description: "Total Males - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -442,8 +398,7 @@ religion: dcs:Sikhism
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Buddhist_Rural_Male
-name: "Total Males - Buddhist - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural_Male
 description: "Total Males - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -453,8 +408,7 @@ religion: dcs:Buddhism
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Jain_Rural_Male
-name: "Total Males - Jain - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural_Male
 description: "Total Males - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -464,8 +418,7 @@ religion: dcs:Jainism
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_Rural_Male
-name: "Total Males - Other religions and persuasions - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Male
 description: "Total Males - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -475,8 +428,7 @@ religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_ReligionNotStated_Rural_Male
-name: "Total Males - Religion not stated - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Male
 description: "Total Males - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -486,8 +438,7 @@ religion: dcs:ReligionNotStated
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Hindu_Female
-name: "Total Females - Hindu"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Female
 description: "Total Females - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -496,8 +447,7 @@ measuredProperty: dcs:count
 religion: dcs:Hinduism
 gender: schema:Female
 
-Node: dcid:Count_Person_Muslim_Female
-name: "Total Females - Muslim"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Female
 description: "Total Females - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -506,8 +456,7 @@ measuredProperty: dcs:count
 religion: dcs:Islam
 gender: schema:Female
 
-Node: dcid:Count_Person_Christian_Female
-name: "Total Females - Christian"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Female
 description: "Total Females - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -516,8 +465,7 @@ measuredProperty: dcs:count
 religion: dcs:Christianity
 gender: schema:Female
 
-Node: dcid:Count_Person_Sikh_Female
-name: "Total Females - Sikh"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Female
 description: "Total Females - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -526,8 +474,7 @@ measuredProperty: dcs:count
 religion: dcs:Sikhism
 gender: schema:Female
 
-Node: dcid:Count_Person_Buddhist_Female
-name: "Total Females - Buddhist"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Female
 description: "Total Females - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -536,8 +483,7 @@ measuredProperty: dcs:count
 religion: dcs:Buddhism
 gender: schema:Female
 
-Node: dcid:Count_Person_Jain_Female
-name: "Total Females - Jain"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Female
 description: "Total Females - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -546,8 +492,7 @@ measuredProperty: dcs:count
 religion: dcs:Jainism
 gender: schema:Female
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_Female
-name: "Total Females - Other religions and persuasions"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Female
 description: "Total Females - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -556,8 +501,7 @@ measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 gender: schema:Female
 
-Node: dcid:Count_Person_ReligionNotStated_Female
-name: "Total Females - Religion not stated"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Female
 description: "Total Females - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -566,8 +510,7 @@ measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
 gender: schema:Female
 
-Node: dcid:Count_Person_Hindu_Urban_Female
-name: "Total Females - Hindu - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Urban_Female
 description: "Total Females - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -577,8 +520,7 @@ religion: dcs:Hinduism
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Muslim_Urban_Female
-name: "Total Females - Muslim - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Urban_Female
 description: "Total Females - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -588,8 +530,7 @@ religion: dcs:Islam
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Christian_Urban_Female
-name: "Total Females - Christian - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Urban_Female
 description: "Total Females - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -599,8 +540,7 @@ religion: dcs:Christianity
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Sikh_Urban_Female
-name: "Total Females - Sikh - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Urban_Female
 description: "Total Females - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -610,8 +550,7 @@ religion: dcs:Sikhism
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Buddhist_Urban_Female
-name: "Total Females - Buddhist - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Urban_Female
 description: "Total Females - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -621,8 +560,7 @@ religion: dcs:Buddhism
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Jain_Urban_Female
-name: "Total Females - Jain - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Urban_Female
 description: "Total Females - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -632,8 +570,7 @@ religion: dcs:Jainism
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_Urban_Female
-name: "Total Females - Other religions and persuasions - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Urban_Female
 description: "Total Females - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -643,8 +580,7 @@ religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_ReligionNotStated_Urban_Female
-name: "Total Females - Religion not stated - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Urban_Female
 description: "Total Females - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -654,8 +590,7 @@ religion: dcs:ReligionNotStated
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Hindu_Rural_Female
-name: "Total Females - Hindu - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_Rural_Female
 description: "Total Females - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -665,8 +600,7 @@ religion: dcs:Hinduism
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Muslim_Rural_Female
-name: "Total Females - Muslim - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_Rural_Female
 description: "Total Females - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -676,8 +610,7 @@ religion: dcs:Islam
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Christian_Rural_Female
-name: "Total Females - Christian - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_Rural_Female
 description: "Total Females - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -687,8 +620,7 @@ religion: dcs:Christianity
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Sikh_Rural_Female
-name: "Total Females - Sikh - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_Rural_Female
 description: "Total Females - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -698,8 +630,7 @@ religion: dcs:Sikhism
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Buddhist_Rural_Female
-name: "Total Females - Buddhist - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_Rural_Female
 description: "Total Females - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -709,8 +640,7 @@ religion: dcs:Buddhism
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Jain_Rural_Female
-name: "Total Females - Jain - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_Rural_Female
 description: "Total Females - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -720,8 +650,7 @@ religion: dcs:Jainism
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_Rural_Female
-name: "Total Females - Other religions and persuasions - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_Rural_Female
 description: "Total Females - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -731,8 +660,7 @@ religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_ReligionNotStated_Rural_Female
-name: "Total Females - Religion not stated - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_Rural_Female
 description: "Total Females - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -742,8 +670,7 @@ religion: dcs:ReligionNotStated
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Hindu_NonWorker_Male
-name: "Male Non-Workers - Hindu"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Male
 description: "Male Non-Workers - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -753,8 +680,7 @@ religion: dcs:Hinduism
 workerStatus: dcs:NonWorker
 gender: schema:Male
 
-Node: dcid:Count_Person_Muslim_NonWorker_Male
-name: "Male Non-Workers - Muslim"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Male
 description: "Male Non-Workers - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -764,8 +690,7 @@ religion: dcs:Islam
 workerStatus: dcs:NonWorker
 gender: schema:Male
 
-Node: dcid:Count_Person_Christian_NonWorker_Male
-name: "Male Non-Workers - Christian"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Male
 description: "Male Non-Workers - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -775,8 +700,7 @@ religion: dcs:Christianity
 workerStatus: dcs:NonWorker
 gender: schema:Male
 
-Node: dcid:Count_Person_Sikh_NonWorker_Male
-name: "Male Non-Workers - Sikh"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Male
 description: "Male Non-Workers - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -786,8 +710,7 @@ religion: dcs:Sikhism
 workerStatus: dcs:NonWorker
 gender: schema:Male
 
-Node: dcid:Count_Person_Buddhist_NonWorker_Male
-name: "Male Non-Workers - Buddhist"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Male
 description: "Male Non-Workers - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -797,8 +720,7 @@ religion: dcs:Buddhism
 workerStatus: dcs:NonWorker
 gender: schema:Male
 
-Node: dcid:Count_Person_Jain_NonWorker_Male
-name: "Male Non-Workers - Jain"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Male
 description: "Male Non-Workers - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -808,8 +730,7 @@ religion: dcs:Jainism
 workerStatus: dcs:NonWorker
 gender: schema:Male
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_NonWorker_Male
-name: "Male Non-Workers - Other religions and persuasions"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Male
 description: "Male Non-Workers - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -819,8 +740,7 @@ religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 workerStatus: dcs:NonWorker
 gender: schema:Male
 
-Node: dcid:Count_Person_ReligionNotStated_NonWorker_Male
-name: "Male Non-Workers - Religion not stated"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Male
 description: "Male Non-Workers - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -830,8 +750,7 @@ religion: dcs:ReligionNotStated
 workerStatus: dcs:NonWorker
 gender: schema:Male
 
-Node: dcid:Count_Person_Hindu_NonWorker_Urban_Male
-name: "Male Non-Workers - Hindu - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Urban_Male
 description: "Male Non-Workers - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -842,8 +761,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Muslim_NonWorker_Urban_Male
-name: "Male Non-Workers - Muslim - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Urban_Male
 description: "Male Non-Workers - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -854,8 +772,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Christian_NonWorker_Urban_Male
-name: "Male Non-Workers - Christian - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Urban_Male
 description: "Male Non-Workers - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -866,8 +783,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Sikh_NonWorker_Urban_Male
-name: "Male Non-Workers - Sikh - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Urban_Male
 description: "Male Non-Workers - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -878,8 +794,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Buddhist_NonWorker_Urban_Male
-name: "Male Non-Workers - Buddhist - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Urban_Male
 description: "Male Non-Workers - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -890,8 +805,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Jain_NonWorker_Urban_Male
-name: "Male Non-Workers - Jain - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Urban_Male
 description: "Male Non-Workers - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -902,8 +816,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_NonWorker_Urban_Male
-name: "Male Non-Workers - Other religions and persuasions - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Urban_Male
 description: "Male Non-Workers - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -914,8 +827,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_ReligionNotStated_NonWorker_Urban_Male
-name: "Male Non-Workers - Religion not stated - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Urban_Male
 description: "Male Non-Workers - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -926,8 +838,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
-Node: dcid:Count_Person_Hindu_NonWorker_Rural_Male
-name: "Male Non-Workers - Hindu - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Rural_Male
 description: "Male Non-Workers - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -938,8 +849,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Muslim_NonWorker_Rural_Male
-name: "Male Non-Workers - Muslim - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Rural_Male
 description: "Male Non-Workers - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -950,8 +860,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Christian_NonWorker_Rural_Male
-name: "Male Non-Workers - Christian - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Rural_Male
 description: "Male Non-Workers - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -962,8 +871,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Sikh_NonWorker_Rural_Male
-name: "Male Non-Workers - Sikh - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Rural_Male
 description: "Male Non-Workers - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -974,8 +882,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Buddhist_NonWorker_Rural_Male
-name: "Male Non-Workers - Buddhist - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Rural_Male
 description: "Male Non-Workers - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -986,8 +893,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Jain_NonWorker_Rural_Male
-name: "Male Non-Workers - Jain - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Rural_Male
 description: "Male Non-Workers - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -998,8 +904,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_NonWorker_Rural_Male
-name: "Male Non-Workers - Other religions and persuasions - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Rural_Male
 description: "Male Non-Workers - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1010,8 +915,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_ReligionNotStated_NonWorker_Rural_Male
-name: "Male Non-Workers - Religion not stated - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Rural_Male
 description: "Male Non-Workers - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1022,8 +926,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
-Node: dcid:Count_Person_Hindu_NonWorker_Female
-name: "Female Non-Workers - Hindu"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Female
 description: "Female Non-Workers - Hindu"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1033,8 +936,7 @@ religion: dcs:Hinduism
 workerStatus: dcs:NonWorker
 gender: schema:Female
 
-Node: dcid:Count_Person_Muslim_NonWorker_Female
-name: "Female Non-Workers - Muslim"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Female
 description: "Female Non-Workers - Muslim"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1044,8 +946,7 @@ religion: dcs:Islam
 workerStatus: dcs:NonWorker
 gender: schema:Female
 
-Node: dcid:Count_Person_Christian_NonWorker_Female
-name: "Female Non-Workers - Christian"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Female
 description: "Female Non-Workers - Christian"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1055,8 +956,7 @@ religion: dcs:Christianity
 workerStatus: dcs:NonWorker
 gender: schema:Female
 
-Node: dcid:Count_Person_Sikh_NonWorker_Female
-name: "Female Non-Workers - Sikh"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Female
 description: "Female Non-Workers - Sikh"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1066,8 +966,7 @@ religion: dcs:Sikhism
 workerStatus: dcs:NonWorker
 gender: schema:Female
 
-Node: dcid:Count_Person_Buddhist_NonWorker_Female
-name: "Female Non-Workers - Buddhist"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Female
 description: "Female Non-Workers - Buddhist"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1077,8 +976,7 @@ religion: dcs:Buddhism
 workerStatus: dcs:NonWorker
 gender: schema:Female
 
-Node: dcid:Count_Person_Jain_NonWorker_Female
-name: "Female Non-Workers - Jain"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Female
 description: "Female Non-Workers - Jain"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1088,8 +986,7 @@ religion: dcs:Jainism
 workerStatus: dcs:NonWorker
 gender: schema:Female
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_NonWorker_Female
-name: "Female Non-Workers - Other religions and persuasions"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Female
 description: "Female Non-Workers - Other religions and persuasions"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1099,8 +996,7 @@ religion: dcs:IndiaCensus_OtherReligionAndPersuasions
 workerStatus: dcs:NonWorker
 gender: schema:Female
 
-Node: dcid:Count_Person_ReligionNotStated_NonWorker_Female
-name: "Female Non-Workers - Religion not stated"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Female
 description: "Female Non-Workers - Religion not stated"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1110,8 +1006,7 @@ religion: dcs:ReligionNotStated
 workerStatus: dcs:NonWorker
 gender: schema:Female
 
-Node: dcid:Count_Person_Hindu_NonWorker_Urban_Female
-name: "Female Non-Workers - Hindu - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Urban_Female
 description: "Female Non-Workers - Hindu - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1122,8 +1017,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Muslim_NonWorker_Urban_Female
-name: "Female Non-Workers - Muslim - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Urban_Female
 description: "Female Non-Workers - Muslim - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1134,8 +1028,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Christian_NonWorker_Urban_Female
-name: "Female Non-Workers - Christian - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Urban_Female
 description: "Female Non-Workers - Christian - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1146,8 +1039,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Sikh_NonWorker_Urban_Female
-name: "Female Non-Workers - Sikh - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Urban_Female
 description: "Female Non-Workers - Sikh - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1158,8 +1050,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Buddhist_NonWorker_Urban_Female
-name: "Female Non-Workers - Buddhist - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Urban_Female
 description: "Female Non-Workers - Buddhist - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1170,8 +1061,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Jain_NonWorker_Urban_Female
-name: "Female Non-Workers - Jain - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Urban_Female
 description: "Female Non-Workers - Jain - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1182,8 +1072,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_NonWorker_Urban_Female
-name: "Female Non-Workers - Other religions and persuasions - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Urban_Female
 description: "Female Non-Workers - Other religions and persuasions - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1194,8 +1083,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_ReligionNotStated_NonWorker_Urban_Female
-name: "Female Non-Workers - Religion not stated - Urban"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Urban_Female
 description: "Female Non-Workers - Religion not stated - Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1206,8 +1094,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
-Node: dcid:Count_Person_Hindu_NonWorker_Rural_Female
-name: "Female Non-Workers - Hindu - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Rural_Female
 description: "Female Non-Workers - Hindu - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1218,8 +1105,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Muslim_NonWorker_Rural_Female
-name: "Female Non-Workers - Muslim - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Rural_Female
 description: "Female Non-Workers - Muslim - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1230,8 +1116,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Christian_NonWorker_Rural_Female
-name: "Female Non-Workers - Christian - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Rural_Female
 description: "Female Non-Workers - Christian - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1242,8 +1127,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Sikh_NonWorker_Rural_Female
-name: "Female Non-Workers - Sikh - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Rural_Female
 description: "Female Non-Workers - Sikh - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1254,8 +1138,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Buddhist_NonWorker_Rural_Female
-name: "Female Non-Workers - Buddhist - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Rural_Female
 description: "Female Non-Workers - Buddhist - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1266,8 +1149,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_Jain_NonWorker_Rural_Female
-name: "Female Non-Workers - Jain - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Rural_Female
 description: "Female Non-Workers - Jain - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1278,8 +1160,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_OtherReligionsAndPersuasions_NonWorker_Rural_Female
-name: "Female Non-Workers - Other religions and persuasions - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Rural_Female
 description: "Female Non-Workers - Other religions and persuasions - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1290,8 +1171,7 @@ workerStatus: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
-Node: dcid:Count_Person_ReligionNotStated_NonWorker_Rural_Female
-name: "Female Non-Workers - Religion not stated - Rural"
+Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Rural_Female
 description: "Female Non-Workers - Religion not stated - Rural"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
