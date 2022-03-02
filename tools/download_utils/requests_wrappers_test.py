@@ -15,9 +15,6 @@
 import unittest
 from requests_wrappers import *
 
-request_url_json
-request_post_json
-
 class TestCommonUtil(unittest.TestCase):
     def test_request_url_json(self):
         self.assertEqual(request_url_json('https://httpbin.org/get?a=1')['args'], {'a': '1'})
