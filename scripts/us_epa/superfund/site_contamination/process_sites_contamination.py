@@ -130,7 +130,9 @@ def write_sv_to_file(row, contaminant_df, file_obj):
         row['value'] = True
         return row
 
-    except:
+    except KeyError:
+        ## when no matching contaminatedThing or contaminant is found.
+        print("No matching contaminatedThing or contaminant is found")
         row['variableMeasured'] = None
         row['value'] = None
         return row
@@ -149,10 +151,11 @@ def process_site_contamination(input_path: str, contaminant_csv_path: str,
     contaminant_csv = pd.read_csv(con_csv_path,
                                   sep='|',
                                   usecols=['dcid', 'CommonName'])
-    contaminant_csv = contaminant_csv.loc[~pd.isnull(
-        contaminant_csv['dcid'])]  # drop rows with empty dcid
+    ## drop rows with empty dcid
+    contaminant_csv = contaminant_csv.loc[~pd.isnull(contaminant_csv['dcid'])]
+    ## replace all non-alphanumeric with `_`
     contaminant_csv['CommonName'] = contaminant_csv['CommonName'].str.replace(
-        '[^\w\s]', '_', regex=True)  #replace all non-alphanumeric with `_`
+        '[^\w\s]', '_', regex=True)
     ## contamination at superfund sites
     contamination_data_path = os.path.join(input_path, _DATASET_NAME)
     contamination_data = pd.read_excel(contamination_data_path,
