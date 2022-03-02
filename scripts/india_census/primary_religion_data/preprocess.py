@@ -211,15 +211,17 @@ class CensusPrimaryReligiousDataLoader():
 
         # Export it as CSV. It will have the following columns
         # Name,TRU,columnName,value,StatisticalVariable,Year
+        self.raw_df["source"] = self.data_file_path
         if path.exists(self.csv_file_path):
             self.raw_df.drop_duplicates(inplace = True)
             self.raw_df.to_csv(self.csv_file_path,
+                               quoting=csv.QUOTE_ALL,
                                mode='a',
                                index=False,
                                header=False)
         else:
             self.raw_df.drop_duplicates(inplace = True)
-            self.raw_df.to_csv(self.csv_file_path, index=False, header=True)
+            self.raw_df.to_csv(self.csv_file_path,quoting=csv.QUOTE_ALL, index=False, header=True)
 
     def _get_base_name(self, row):
         # To make the name meaningful add Religion to the
@@ -485,6 +487,12 @@ if __name__ == '__main__':
         loader.process()
 
     # Remove duplicates if any
-    data = pd.read_csv(csv_file_path)
+    dtype = {
+        'census_location_id': str,
+        'TRU': str,
+        'columnName': str,
+        "StatisticalVariable": str
+    }
+    data = pd.read_csv(csv_file_path, dtype=dtype)
     data.drop_duplicates(inplace = True)
-    data.to_csv(csv_file_path, index=False, header=True)
+    data.to_csv(csv_file_path, quoting=csv.QUOTE_ALL, index=False, header=True)
