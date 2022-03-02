@@ -1,0 +1,212 @@
+TABLE 8. Population Denominators for Rate Calculations, United States and U.S. Territories, 2019 
+
+column labels in same order that data fields appears in each record below:
+Reporting Area
+Total Resident Population
+US Resident Population by Age Subgroup, Population ( Age &lt;1 year)*
+US Resident Population by Age Subgroup, Population (Age &lt;24 months)&dagger;.
+US Resident Population by Age Subgroup, Population (Age &lt;36 months)&sect;
+US Resident Population by Age Subgroup, Population ( Age &lt;5 years)&para;
+US Resident Population by Age Subgroup, Population (Age &lt;18 years)**
+Live Births in Year 2019 &sect;&sect;
+
+tab delimited data:
+United States	328,239,523	3,783,052	7,612,651	11,534,695	19,576,683	73,039,150	3,747,540
+New England	14,845,063	145,600	293,082	443,012	749,794	2,902,835	142,529
+Connecticut	3,565,287	34,625	70,167	106,513	181,710	727,440	34,258
+Maine	1,344,212	12,035	24,390	37,101	63,537	248,842	11,779
+Massachusetts	6,892,503	70,791	141,610	212,910	357,362	1,352,800	69,117
+New Hampshire	1,359,711	12,052	24,346	37,205	63,621	255,253	11,839
+Rhode Island	1,059,361	10,518	21,432	32,224	54,521	204,495	10,175
+Vermont	623,989	5,579	11,137	17,059	29,043	114,005	5,361
+Middle Atlantic	41,137,740	458,101	921,084	1,389,118	2,339,615	8,601,490	455,354
+New Jersey	8,882,190	99,459	201,051	304,425	514,690	1,938,578	99,585
+New York (excluding New York City)	11,116,744	115,307	233,718	354,272	603,283	2,311,536	116,136
+New York City	8,336,817	108,623	214,201	318,754	523,718	1,716,763	105,403
+Pennsylvania	12,801,989	134,712	272,114	411,667	697,924	2,634,613	134,230
+East North Central	46,902,431	529,950	1,069,584	1,620,889	2,753,040	10,374,398	526,604
+Illinois	12,671,821	143,723	289,659	439,163	746,934	2,817,875	140,128
+Indiana	6,732,219	80,356	162,694	245,929	418,340	1,567,974	80,859
+Michigan	9,986,857	109,018	219,873	333,798	566,442	2,143,933	107,886
+Ohio	11,689,100	133,487	269,734	407,786	690,828	2,578,019	134,461
+Wisconsin	5,822,434	63,366	127,624	194,213	330,496	1,266,597	63,270
+West North Central	21,426,573	259,226	522,104	793,303	1,346,817	4,974,179	257,856
+Iowa	3,155,070	37,540	75,836	115,022	195,636	726,841	37,649
+Kansas	2,913,314	35,325	71,362	108,683	185,331	700,250	35,395
+Minnesota	5,639,632	67,629	135,987	206,911	351,622	1,303,157	66,027
+Missouri	6,137,428	71,012	143,146	217,232	368,080	1,370,585	72,127
+Nebraska	1,934,408	25,252	50,631	76,974	130,880	476,074	24,755
+North Dakota	762,062	10,483	21,030	32,084	54,101	180,171	10,454
+South Dakota	884,659	11,985	24,112	36,397	61,167	217,101	11,449
+South Atlantic	65,784,817	729,332	1,469,560	2,222,538	3,759,068	14,032,550	727,520
+Delaware	973,764	10,618	21,289	32,350	54,719	203,572	10,562
+District of Columbia	705,749	9,552	18,764	27,800	45,368	128,168	9,079
+Florida	21,477,737	221,463	445,834	674,612	1,139,742	4,229,929	220,002
+Georgia	10,617,423	127,141	255,907	387,551	656,566	2,503,881	126,371
+Maryland	6,045,680	69,926	141,584	213,893	361,937	1,334,687	70,178
+North Carolina	10,488,084	118,891	239,468	361,132	609,770	2,300,715	118,725
+South Carolina	5,148,714	56,122	113,292	171,715	292,464	1,111,183	57,038
+Virginia	8,535,519	97,864	197,689	299,132	505,477	1,860,848	97,429
+West Virginia	1,792,147	17,755	35,733	54,353	93,025	359,567	18,136
+East South Central	19,176,181	225,348	455,032	686,905	1,159,050	4,299,811	228,770
+Alabama	4,903,185	56,901	115,191	174,264	294,357	1,088,306	58,615
+Kentucky	4,467,673	53,154	107,266	161,730	272,610	1,002,871	53,069
+Mississippi	2,976,149	35,518	71,756	108,721	183,478	698,583	36,636
+Tennessee	6,829,174	79,775	160,819	242,190	408,605	1,510,051	80,450
+West South Central	40,619,450	520,613	1,049,868	1,599,275	2,736,357	10,139,833	522,247
+Arkansas	3,017,804	36,355	73,361	110,933	188,464	700,155	36,564
+Louisiana	4,648,794	58,010	116,986	178,015	301,469	1,087,630	58,941
+Oklahoma	3,956,971	48,442	97,927	149,364	255,533	952,238	49,143
+Texas	28,995,881	377,806	761,594	1,160,963	1,990,891	7,399,810	377,599
+Mountain	24,854,998	294,108	589,803	894,954	1,528,640	5,809,939	286,809
+Arizona	7,278,717	81,929	164,994	250,720	429,788	1,640,236	79,375
+Colorado	5,758,736	64,561	129,428	195,726	332,201	1,259,519	62,869
+Idaho	1,787,065	22,106	44,473	67,530	116,200	448,201	22,063
+Montana	1,068,778	11,659	23,199	35,545	61,156	228,588	11,079
+Nevada	3,080,156	35,701	71,555	108,839	185,575	692,639	35,072
+New Mexico	2,096,829	23,014	46,353	70,297	120,986	475,838	22,960
+Utah	3,205,958	48,566	96,527	145,948	247,803	931,184	46,826
+Wyoming	578,759	6,572	13,274	20,349	34,931	133,734	6,565
+Pacific	53,492,270	620,774	1,242,534	1,884,701	3,204,302	11,904,115	599,851
+Alaska	731,545	9,978	19,990	30,176	51,080	179,983	9,822
+California	39,512,223	462,589	925,302	1,402,624	2,383,716	8,894,641	446,479
+Hawaii	1,415,872	16,800	33,517	50,561	85,219	299,868	16,797
+Oregon	4,217,737	43,312	87,338	132,800	227,811	866,562	41,858
+Washington	7,614,893	88,095	176,387	268,540	456,476	1,663,061	84,895
+U.S. Territories	3,672,195	31,808	63,546	95,354	162,350	706,775	25,155
+American Samoa	50,826	917	1,843	2,780	4,650	17,418	—
+Commonwealth of Northern Mariana Islands	51,994	763	1,517	2,268	3,755	16,004	566
+Guam	167,772	3,181	6,362	9,552	15,921	54,170	3,165
+Puerto Rico	3,294,626	25,634	51,171	76,736	131,230	594,123	21,424
+U.S. Virgin Islands	106,977	1,313	2,653	4,018	6,794	25,060	—
+
+
+* Use this population for Zika virus disease, congenital; Zika virus infection, congenital; Infant botulism; and Congenital rubella syndrome.
+
+† Use this population for Perinatal Hepatitis B infection.  
+
+§ Use this population for Perinatal Hepatitis C infection.  
+
+¶ Use this population for Haemophilus influenzae, invasive disease and invasive pneumococcal disease. 
+
+** Use this population for Influenza associated pediatric mortality. 
+
+†† Use this population for Congenital Syphilis. Please also  see note 7 .
+
+
+Notes:
+
+	These are annual cases of selected infectious 
+	national notifiable diseases from the National Notifiable Diseases Surveillance System (NNDSS). 
+	NNDSS data reported by the 50 states, New York City, the District of Columbia, and the U.S. territories are 
+	collated and published. Cases are reported by state health departments to CDC weekly. Because source datasets 
+	may be updated as additional information is received, statistics in publications based on that source data may 
+	differ from what is presented in these tables. 
+
+	The list of national notifiable infectious diseases and conditions for 2019 and their national surveillance case definitions are 
+	available by navigating to the https://ndc.services.cdc.gov/, Surveillance Case Definitions | CDC  web page, selecting 
+	"2019" for the notifiable condition list year, checking "infectious" conditions, and clicking "Get Notifiable List by Year".
+  This list incorporates the Council of State and Territorial Epidemiologists (CSTE) position statements approved in 2018 by CSTE for 
+  national surveillance that were implemented in January 2019.  Candida auris, clinical became a new national notifiable condition,
+  and revised case definitions were implemented for the following conditions: diphtheria, acute hepatitis A, listeriosis, yellow fever, 
+  Salmonella Paratyphi infection and Salmonella Typhi infection. Salmonella Paratyphi infection 
+  and Salmonella Typhi infection replaced Paratyphoid fever and Typhoid fever, respectively, as national notifiable 
+  conditions. Salmonellosis (excluding S. Typhi infection and S. Paratyphi infection) replaced Salmonellosis (excluding paratyphoid fever and typhoid fever) as a national notifiable condition. 
+  In addition, Carbapenemase Producing Carbapenem-Resistant Enterobacteriaceae (CP-CRE) represents a consolidation of CP-CRE species 
+   Klebsiella spp, CP-CRE E. coli, and CP-CRE Enterobacter spp.  Publication criteria for the finalized 2019 data are available at 
+	https://wonder.cdc.gov/nndss/documents/2019_NNDSS _Publication_Criteria_01212021.pdf, https://wonder.cdc.gov/nndss/documents/2019_NNDSS _Publication_Criteria_01212021.pdf.   
+	See also https://www.cdc.gov/nndss/docs/Readers-Guide-WONDER-Tables-20210421-508.pdf, 
+	Guide to Interpreting Provisional and Finalized NNDSS Data. 
+	Population estimates for incidence rates are July 1st, 2019, estimates obtained from the National Center for Health Statistics (NCHS) 
+	postcensal estimates of the resident population of the United States for April 1, 2010, to July 1, 2019, by year, county, single year 
+	of age (range: 0 to 85 years), bridged-race (white, black or African American, American Indian or Alaska Native, Asian, 
+	or Pacific Islander), Hispanic ethnicity (not Hispanic or Latino, Hispanic or Latino), and sex (Vintage 2019), 
+	prepared under a collaborative arrangement with the U.S. Census Bureau. Population estimates for states released 
+	July 9, 2020, are available at 
+	https://www.cdc.gov/nchs/nvss/bridged_race/data_documentation.htm, https://www.cdc.gov/nchs/nvss/bridged_race/data_documentation.htm. 
+	Population estimates for territories are the 2019 mid-year estimates from the U.S. Census Bureau International Data Base, accessed on 
+	August 6, 2020, at  
+	https://www.census.gov/data-tools/demo/idb/#/country?YR_ANIM=2021, https://www.census.gov/data-tools/demo/idb/#/country?YR_ANIM=2021. 
+	The choice of population denominators for incidence is based on the availability of population data at the time of publication preparation. 
+
+	Annual tables for 2016 and later years are available on https://wonder.cdc.gov/nndss/nndss_annual_tables_menu.asp, CDC WONDER.
+
+	Annual summary reports from 1993&#8211;2015 are available as published in the 
+	https://www.cdc.gov/mmwr/mmwr_nd/index.html, Morbidity and Mortality Weekly Report.
+
+	NNDSS annual tables since 1952 are available at https://stacks.cdc.gov/nndss, CDC Stacks
+	(once in CDC Stacks, select "Annual Reports" in the "Genre" box to the left).  
+
+	For most conditions, national incidence rates are calculated as the number of reported cases for each infectious 
+	disease or condition divided by the U.S. resident population for the specified demographic population or the total U.S. 
+	resident population, multiplied by 100,000. When a national notifiable infectious condition is associated with a 
+	specific age restriction, the same restriction was applied to the population in the denominator of the incidence rate 
+	calculation. In addition, population data from reporting jurisdictions in which the disease or condition was not reportable 
+	or not available were excluded from the denominator of the incidence rate calculations.
+	
+		Age restrictions in the numerator and denominator are applied for the following childhood conditions:
+		
+		
+			Zika virus disease, congenital (age restriction in numerator and denominator is <1 year)
+		
+			Zika virus infection, congenital (age restriction in numerator and denominator is <1 year)
+		
+			Haemophilus influenzae, invasive disease <5 years (age restriction in numerator and denominator is <5 years) 
+		
+			Invasive pneumococcal disease <5 years (age restriction in numerator and denominator is <5 years) 
+		
+			Influenza associated pediatric mortality (age restriction in numerator and denominator is <18 years)
+		
+			Infant botulism (age restriction in numerator and denominator is <1 year) 
+		
+			Congenital rubella syndrome (age restriction in numerator and denominator is  <1 year)
+		
+			Perinatal Hepatitis B infection (age restriction in numerator is &le;24 months, denominator is <24 months) 
+		
+			Perinatal Hepatitis C infection (age restriction in numerator is &le;36 months, denominator is <36 months). 
+		
+	
+	
+			
+			Data for congenital syphilis are aggregated by the infant's year of birth.  The rate for congenital syphilis is based upon the 
+			number of reported cases per 100,000 live births, using  natality data for 2019 (National Center for Health Statistics https://wonder.cdc.gov/natality.html, Natality 2019, as compiled from data
+			provided by the Vital Statistics Cooperative Program).  
+			The mother's race and ethnicity are used for race- and ethnicity-specific rates of congenital syphilis cases.  Congenital syphilis 
+			data are published in Syphilis Statistics in the sexually transmitted diseases (STD) surveillance 
+			report (https://www.cdc.gov/std/syphilis/stats.htm, https://www.cdc.gov/std/syphilis/stats.htm) and in the historical archives of the STD surveillance 
+			report (https://www.cdc.gov/std/stats/archive.htm, https://www.cdc.gov/std/stats/archive.htm). The STD surveillance 
+			report (https://www.cdc.gov/std/syphilis/stats.htm, https://www.cdc.gov/std/syphilis/stats.htm) updates congenital syphilis cases and rates over time.    
+			
+
+	Surveillance data reported by other CDC programs might vary from data reported in these tables because of differences in
+	 1) the date used to aggregate the data, 2) the timing of reports, 3) the source of the data, 4) surveillance case definitions, 
+	 and 5) policies regarding case jurisdiction (i.e., which jurisdiction should submit the case notification to CDC).
+	
+
+
+	The following 24 jurisdictions may have incomplete data, due to the coronavirus disease 2019 (COVID-19) pandemic:  Alaska, California, Connecticut, Delaware, District of Columbia,
+	Florida, Idaho, Indiana, Kansas, Massachusetts, Minnesota, Missouri, Montana, Nebraska, New Hampshire, New York 
+  (excluding New York City), New York City, North Dakota, Ohio, Oklahoma, South Carolina, Tennessee, Texas,  and West Virginia. 
+	In addition, the following 2 U.S. Territories may have incomplete data due to the COVID-19 pandemic: American Samoa and the 
+	U.S. Virgin Islands.
+
+Suggested Citation:
+
+	Centers for Disease Control and Prevention. National Notifiable Diseases Surveillance System, 2019 Annual Tables of Infectious Disease Data. 
+	Atlanta, GA. CDC Division of Health Informatics and Surveillance, 2021. 
+	Available at: https://www.cdc.gov/nndss/data-statistics/infectious-tables/index.html, https://www.cdc.gov/nndss/data-statistics/infectious-tables/index.html.
+
+Acknowledgment:
+
+	CDC acknowledges the local, state, and territorial health departments that collected the data from a range of case ascertainment 
+	sources (e.g., healthcare providers, hospitals, laboratories) and reported these data to 
+	CDC's National Notifiable Diseases Surveillance System.
+
+
+
+https://www.cdc.gov/nndss/, National Notifiable Diseases Surveillance System
+
+Provided by https://wonder.cdc.gov, CDC WONDER
+
+
+

@@ -1,0 +1,237 @@
+TABLE 6. Reported cases of notifiable diseases and rates per 100,000, by race*, excluding U.S. territories - - United States, 2016
+
+column labels in same order that data fields appears in each record below:
+Disease
+American Indian or</br>Alaska Native, No.
+American Indian or</br>Alaska Native, Rate
+Asian or Pacific</br>Islander, No.
+Asian or Pacific</br>Islander, Rate
+Black, No.
+Black, Rate
+White, No.
+White, Rate
+Other Race, No.
+Race not stated, No.
+Total
+
+tab delimited data:
+Anthrax 	—	—	—	—	—	—	—	—	—	—	—
+Arboviral diseases, Chikungunya virus disease 	—	—	65	0.32	14	0.03	79	0.03	18	71	247
+Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive 	S	S	S	S	S	S	S	S	S	S	7
+Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive 	—	—	—	—	—	—	—	—	—	—	—
+Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive 	S	S	S	S	S	S	S	S	S	S	7
+Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive 	S	S	S	S	S	S	S	S	S	S	8
+Arboviral diseases, La Crosse  virus disease, Neuroinvasive 	—	—	—	—	—	—	25	0.01	—	6	31
+Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive 	S	S	S	S	S	S	S	S	S	S	4
+Arboviral diseases, Powassan virus disease, Neuroinvasive 	S	S	S	S	S	S	S	S	S	S	21
+Arboviral diseases, Powassan virus disease, Non-neuroinvasive 	S	S	S	S	S	S	S	S	S	S	1
+Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive 	S	S	S	S	S	S	S	S	S	S	7
+Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive 	S	S	S	S	S	S	S	S	S	S	1
+Arboviral diseases, West Nile virus disease, Neuroinvasive 	11	0.24	12	0.06	63	0.14	920	0.36	35	267	1,308
+Arboviral diseases, West Nile virus disease, Non-neuroinvasive 	5	0.11	6	0.03	21	0.05	600	0.24	11	198	841
+Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive 	—	—	—	—	—	—	—	—	—	—	—
+Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive 	—	—	—	—	—	—	—	—	—	—	—
+Babesiosis, Total 	7	0.26	44	0.28	41	0.14	1,150	0.63	19	649	1,910
+Babesiosis, Confirmed 	4	0.15	44	0.28	36	0.12	947	0.52	16	538	1,585
+Babesiosis, Probable 	3	0.11	—	—	5	0.02	203	0.11	3	111	325
+Botulism, Total 	5	0.11	9	0.04	19	0.04	123	0.05	3	42	201
+Botulism, Foodborne 	3	0.06	2	0.01	12	0.03	9	0.00	—	5	31
+Botulism, Infant †	1	1.29	7	2.80	5	0.73	96	3.24	3	32	144
+Botulism, Other (wound & unspecified) 	1	0.02	—	—	2	0.00	18	0.01	—	5	26
+Brucellosis 	2	0.04	4	0.02	3	0.01	85	0.03	15	18	127
+Campylobacteriosis 	479	10.35	1,582	7.72	2,721	6.01	36,747	14.54	3,189	15,402	60,120
+Chancroid §	S	S	S	S	S	S	S	S	S	S	7
+Chlamydia trachomatis infection §	18,735	404.63	25,594	124.92	452,165	998.00	519,401	205.54	80,410	502,049	1,598,354
+Cholera 	S	S	S	S	S	S	S	S	S	S	15
+Coccidioidomycosis ¶	167	7.03	332	3.45	431	3.02	3,659	3.49	542	6,698	11,829
+Cryptosporidiosis, Total 	106	2.29	154	0.75	1,283	2.83	9,052	3.58	471	2,387	13,453
+Cryptosporidiosis, Confirmed 	75	1.62	101	0.49	864	1.91	5,663	2.24	306	1,628	8,637
+Cryptosporidiosis, Probable 	31	0.67	53	0.26	419	0.92	3,389	1.34	165	759	4,816
+Cyclosporiasis 	1	0.03	14	0.07	14	0.03	370	0.16	28	110	537
+Dengue virus infections, Dengue **	1	0.02	161	0.79	60	0.13	396	0.16	57	228	903
+Dengue virus infections, Dengue-like illness **	—	—	6	0.03	2	0.00	13	0.01	8	11	40
+Dengue virus infections, Severe dengue **	S	S	S	S	S	S	S	S	S	S	10
+Diphtheria 	—	—	—	—	—	—	—	—	—	—	—
+Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection 	35	0.85	29	0.15	17	0.04	2,686	1.10	36	1,348	4,151
+Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection 	8	0.19	4	0.02	24	0.05	963	0.40	18	360	1,377
+Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection 	S	S	S	S	S	S	S	S	S	S	22
+Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis 	2	0.05	2	0.01	1	0.00	131	0.05	7	57	200
+Giardiasis 	93	2.60	430	2.45	1,333	3.89	8,049	4.06	728	5,677	16,310
+Gonorrhea §	6,059	130.86	6,208	30.30	192,977	425.93	144,335	57.12	20,565	98,370	468,514
+Haemophilus influenzae, invasive disease, All ages, all serotypes 	62	1.34	75	0.37	671	1.48	3,183	1.26	144	760	4,895
+Haemophilus influenzae, invasive disease, Age <5 years, Serotype b ††	5	1.30	—	—	1	0.03	19	0.13	1	4	30
+Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype ††	15	3.89	3	0.23	38	1.11	79	0.53	3	21	159
+Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable ††	4	1.04	4	0.31	36	1.06	111	0.75	9	32	196
+Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype ††	7	1.81	9	0.70	31	0.91	96	0.65	15	29	187
+Hansen's disease 	—	—	12	0.06	5	0.01	36	0.02	1	24	78
+Hantavirus infection, non-hantavirus pulmonary syndrome 	S	S	S	S	S	S	S	S	S	S	6
+Hantavirus pulmonary syndrome 	8	0.18	—	—	—	—	19	0.01	1	3	31
+Hemolytic uremic syndrome post-diarrheal 	2	0.04	7	0.04	7	0.02	239	0.10	21	31	307
+Hepatitis, A, acute §§	3	0.06	301	1.47	141	0.31	1,073	0.42	142	347	2,007
+Hepatitis, B, acute §§	15	0.33	56	0.27	389	0.87	2,187	0.87	131	440	3,218
+Hepatitis, B, perinatal infection §§,¶¶	—	—	18	3.54	4	0.29	1	0.02	1	8	32
+Hepatitis, C, acute §§	71	1.77	25	0.13	135	0.31	2,221	0.93	82	408	2,942
+Human immunodeficiency virus diagnoses 	219	4.73	801	3.91	15,632	34.50	9,398	3.72	8,725	—	34,775
+Influenza-associated pediatric mortality ***	1	0.07	6	0.13	9	0.07	55	0.10	1	10	82
+Invasive pneumococcal disease, All ages 	309	10.75	218	1.84	2,821	7.58	10,403	5.51	457	3,418	17,626
+Invasive pneumococcal disease, All ages, Confirmed 	308	10.71	218	1.84	2,817	7.57	10,388	5.50	457	3,415	17,603
+Invasive pneumococcal disease, All ages, Probable 	S	S	S	S	S	S	S	S	S	S	23
+Invasive pneumococcal disease, Age <5 years ††	18	0.53	41	0.32	223	0.56	591	0.29	42	227	1,142
+Invasive pneumococcal disease, Age <5 years, Confirmed ††	17	5.85	41	4.93	222	7.42	589	4.98	42	226	1,137
+Invasive pneumococcal disease, Age <5 years, Probable ††	S	S	S	S	S	S	S	S	S	S	5
+Legionellosis 	26	0.56	99	0.48	1,068	2.36	3,891	1.54	242	815	6,141
+Leptospirosis 	—	—	8	0.05	1	0.00	38	0.02	13	18	78
+Listeriosis 	9	0.19	70	0.34	68	0.15	533	0.21	20	86	786
+Lyme disease, Total 	81	1.75	303	1.55	298	0.66	18,841	7.47	990	15,916	36,429
+Lyme disease, Confirmed 	57	1.23	210	1.07	205	0.45	13,381	5.30	776	11,574	26,203
+Lyme disease, Probable 	24	0.52	93	0.48	93	0.21	5,460	2.16	214	4,342	10,226
+Malaria 	6	0.13	91	0.44	1,052	2.32	248	0.10	67	491	1,955
+Measles, Total 	—	—	8	0.04	5	0.01	37	0.01	1	34	85
+Measles, Indigenous 	—	—	2	0.01	2	0.00	32	0.01	—	32	68
+Measles, Imported 	S	S	S	S	S	S	S	S	S	S	17
+Meningococcal disease, All serogroups 	9	0.19	12	0.06	60	0.13	229	0.09	15	50	375
+Meningococcal disease, Serogroups ACWY 	7	0.15	4	0.02	22	0.05	70	0.03	6	17	126
+Meningococcal disease, Serogroup B 	1	0.02	1	0.00	15	0.03	58	0.02	2	9	86
+Meningococcal disease, Other serogroups 	S	S	S	S	S	S	S	S	S	S	21
+Meningococcal disease, Unknown serogroup 	1	0.02	6	0.03	19	0.04	90	0.04	6	20	142
+Mumps 	20	0.43	2,140	10.45	220	0.49	2,980	1.18	135	874	6,369
+Novel Influenza A virus infections 	S	S	S	S	S	S	S	S	S	S	23
+Pertussis 	123	2.66	312	1.52	775	1.71	11,694	4.63	649	4,419	17,972
+Plague 	S	S	S	S	S	S	S	S	S	S	4
+Poliomyelitis, paralytic 	—	—	—	—	—	—	—	—	—	—	—
+Poliovirus infection, nonparalytic 	—	—	—	—	—	—	—	—	—	—	—
+Psittacosis 	S	S	S	S	S	S	S	S	S	S	12
+Q fever, Total 	1	0.02	3	0.01	7	0.02	99	0.04	10	44	164
+Q fever, Acute 	1	0.02	2	0.01	6	0.01	83	0.03	8	32	132
+Q fever, Chronic 	—	—	1	0.00	1	0.00	16	0.01	2	12	32
+Rabies, Human 	—	—	—	—	—	—	—	—	—	—	—
+Rubella 	S	S	S	S	S	S	S	S	S	S	1
+Rubella, congenital syndrome †	S	S	S	S	S	S	S	S	S	S	2
+Salmonellosis 	532	11.49	1,671	8.16	4,401	9.71	34,546	13.67	2,456	10,244	53,850
+Severe acute respiratory syndrome-associated coronavirus disease 	—	—	—	—	—	—	—	—	—	—	—
+Shiga toxin-producing Escherichia coli †††	58	1.25	174	0.85	341	0.75	5,563	2.20	361	1,672	8,169
+Shigellosis 	320	6.91	328	1.60	3,982	8.79	11,547	4.57	1,039	3,881	21,097
+Smallpox 	—	—	—	—	—	—	—	—	—	—	—
+Spotted fever rickettsiosis, Total 	42	0.93	16	0.08	112	0.25	2,927	1.16	62	1,110	4,269
+Spotted fever rickettsiosis, Confirmed 	3	0.07	—	—	8	0.02	98	0.04	4	41	154
+Spotted fever rickettsiosis, Probable 	39	0.87	16	0.08	104	0.23	2,829	1.12	58	1,069	4,115
+Streptococcal toxic shock syndrome 	1	0.04	6	0.06	43	0.14	194	0.12	14	25	283
+Syphilis, Total, all stages §,§§§	613	13.24	2,353	11.49	30,820	68.02	41,719	16.51	6,062	6,475	88,042
+Syphilis, Congenital †	12	15.49	26	10.39	261	38.32	281	9.49	14	34	628
+Syphilis, Primary and secondary §	219	4.73	768	3.75	9,341	20.62	14,103	5.58	1,673	1,710	27,814
+Tetanus 	—	—	1	0.00	3	0.01	21	0.01	2	7	34
+Toxic shock syndrome (other than Streptococcal) 	—	—	1	0.01	1	0.00	25	0.01	2	11	40
+Trichinellosis 	5	0.11	8	0.04	2	0.00	8	0.00	—	3	26
+Tuberculosis 	127	2.74	3,212	15.68	2,026	4.47	3,676	1.45	132	99	9,272
+Tularemia 	23	0.50	—	—	5	0.01	152	0.06	7	43	230
+Typhoid fever 	4	0.09	185	0.90	31	0.07	61	0.02	29	66	376
+Vancomycin-intermediate Staphylococcus aureus 	1	0.03	2	0.02	23	0.06	61	0.03	6	15	108
+Vancomycin-resistant Staphylococcus aureus 	—	—	—	—	—	—	—	—	—	—	—
+Varicella morbidity 	84	2.40	404	2.31	556	1.51	5,583	2.77	375	1,951	8,953
+Varicella mortality 	U	U	U	U	U	U	U	U	U	U	U
+Vibriosis, Total 	9	0.20	45	0.22	76	0.17	856	0.34	36	251	1,273
+Vibriosis, Confirmed 	9	0.20	42	0.21	71	0.16	837	0.34	36	246	1,241
+Vibriosis, Probable 	—	—	3	0.01	5	0.01	19	0.01	—	5	32
+Viral hemorrhagic fevers, Crimean-Congo hemorrhagic fever virus 	—	—	—	—	—	—	—	—	—	—	—
+Viral hemorrhagic fevers, Ebola virus 	—	—	—	—	—	—	—	—	—	—	—
+Viral hemorrhagic fevers, Guanarito virus 	—	—	—	—	—	—	—	—	—	—	—
+Viral hemorrhagic fevers, Junin virus 	—	—	—	—	—	—	—	—	—	—	—
+Viral hemorrhagic fevers, Lassa virus 	—	—	—	—	—	—	—	—	—	—	—
+Viral hemorrhagic fevers, Lujo virus 	—	—	—	—	—	—	—	—	—	—	—
+Viral hemorrhagic fevers, Machupo virus 	—	—	—	—	—	—	—	—	—	—	—
+Viral hemorrhagic fevers, Marburg virus 	—	—	—	—	—	—	—	—	—	—	—
+Viral hemorrhagic fevers, Sabia virus 	—	—	—	—	—	—	—	—	—	—	—
+Yellow fever 	S	S	S	S	S	S	S	S	S	S	1
+Zika virus, Zika virus disease, congenital †,¶¶¶	—	—	—	—	3	0.44	5	0.17	6	16	30
+Zika virus, Zika virus disease, non-congenital 	7	0.15	77	0.38	432	0.95	2,516	1.00	492	1,608	5,132
+Zika virus, Zika virus infection, congenital †,¶¶¶	—	—	—	—	1	0.15	4	0.14	8	32	45
+Zika virus, Zika virus infection, non-congenital 	—	—	27	0.13	218	0.48	240	0.09	120	306	911
+
+—: No reported cases - The reporting jurisdiction did not submit any cases to CDC.
+U: Unavailable - The data are unavailable.
+S: Suppressed
+
+* Conditions with <25 cases reported in the year were not broken down by race. 
+
+† The rate is calculated using population less than 1 year  of age.
+
+§ Race data were collected using current Office of Management and Budget (OMB) standards for race/ethnicity data and were mapped to bridged race categories.
+
+¶ Reportable in <25 states.
+
+** Total number of reported laboratory-positive dengue cases, including all confirmed cases [by anti-dengue virus (DENV) molecular diagnostic methods or seroconversion of anti-DENV IgM] and all probable cases (by a single, positive anti-DENV IgM).
+
+†† The rate is calculated using population less than 5 years of age.
+
+§§ Chronic hepatitis B and C data are not included in NNDSS tables but reported case counts are included in the annual Summary of Viral Hepatitis, published online by CDC's Division of Viral Hepatitis, available at https://www.cdc.gov/hepatitis/statistics/2015surveillance/index.htm.
+
+¶¶ The rate is calculated using population less than 2 years of age.
+
+*** The rate is calculated using population less than 18 years of age.
+
+††† Includes Escherichia coli O157:H7; shiga toxin-positive, serogroup non-O157; and shiga toxin positive, not serogrouped.
+
+§§§ Includes syphilis of all stages, including cases where stage of syphilis is not stated.
+
+¶¶¶ Data reported to ArboNET using the national surveillance case definition for congenital Zika virus disease or infection (CSTE Position Statement 16-ID-01).  Additional data reported to the US Zika Pregnancy Registry for outcomes of pregnancies with laboratory evidence of possible Zika virus infection are available at https://www.cdc.gov/zika/reporting/pregnancy-outcomes.html.  Cases reported to the US Zika Pregnancy Registry might not meet the national surveillance case definition for congenital Zika virus disease or infection.
+
+
+Notes:
+
+	These are annual cases of selected infectious 
+	national notifiable diseases from the 
+	National Notifiable Diseases Surveillance System (NNDSS).  
+	NNDSS data reported by the 50 states, New York City, the District of Columbia, 
+	and the U.S. territories are collated and published. 
+	Cases are reported by state health departments to CDC weekly.  
+	Because source datasets may be updated as additional information is received, statistics in publications 
+	based on that source data may differ from what is presented in these tables. 
+
+	The list of nationally notifiable infectious diseases and conditions for 2016 and their national surveillance case definitions are 
+	available by navigating to the https://ndc.services.cdc.gov/, Surveillance Case Definitions | CDC  web page, selecting 
+	"2016" for the notifiable condition list year, checking "infectious" conditions, and clicking "Get Notifiable List by Year".
+	This list incorporates the Council of State and Territorial Epidemiologists (CSTE) position 
+	statements approved in 2015 by CSTE for national surveillance, that were implemented in 
+	January 2016, including updated surveillance case definitions for acute hepatitis C and chronic 
+	hepatitis C virus infections.  2016 data are reported through June 30, 2017.  
+	Publication criteria for the finalized 2016 data are available at https://wonder.cdc.gov/nndss/documents/2016_NNDSS_Publication_Criteria.pdf, /nndss/documents/2016_NNDSS_Publication_Criteria.pdf.
+	See also https://ndc.services.cdc.gov/wp-content/uploads/Users_guide_WONDER_tables_cleared_final.pdf, 
+	Guide to Interpreting Provisional and Finalized NNDSS Data. 
+
+
+	Population estimates for incidence rates are July 1st, 2016 estimates
+	obtained from the National Center for Health Statistics (NCHS) 
+	postcensal estimates of the resident population of the United States for July 1, 2011 - July 1, 2016, 
+	by year, county, single year of age (range: 0 to 85 years), bridged-race 
+	(white, black or African American, American Indian or Alaska Native, Asian, or Pacific Islander), 
+	Hispanic ethnicity (not Hispanic or Latino, Hispanic or Latino),  and sex 
+	(Vintage 2016), prepared under a collaborative arrangement with the U.S. Census Bureau.
+	Population estimates for states as of June 26, 2017 are available at 
+	 https://www.cdc.gov/nchs/nvss/bridged_race/data_documentation.htm, https://www.cdc.gov/nchs/nvss/bridged_race/data_documentation.htm.  
+	 Population estimates for territories are the 2016 mid-year estimates from the U.S. Census Bureau 
+	 International Data Base accessed on July 24, 2017 at 
+	 https://www.census.gov/population/international/data/idb/informationGateway.php, https://www.census.gov/population/international/data/idb/informationGateway.php. 
+	 The choice of population denominators for incidence is based on the availability of population 
+	 data at the time of publication preparation.  
+
+	Annual tables for 2016 and later years are available on https://wonder.cdc.gov/nndss/nndss_annual_tables_menu.asp, CDC WONDER.
+
+	Annual summary reports from 1993-2015 are available as published in the 
+	https://www.cdc.gov/mmwr/mmwr_nd/index.html, MMWR.
+
+	NNDSS annual tables since 1952 are available at https://stacks.cdc.gov/nndss, CDC Stacks
+	(once in CDC Stacks select "Annual Reports" in the "Genre" box to the left).  
+	
+Suggested Citation:
+
+	Centers for Disease Control and Prevention. National Notifiable Diseases Surveillance System, 
+	2016 Annual Tables of Infectious Disease Data. Atlanta, GA. CDC Division of Health Informatics and Surveillance, 2017. 
+	Available at: https://www.cdc.gov/nndss/data-statistics/infectious-tables/index.html, https://www.cdc.gov/nndss/data-statistics/infectious-tables/index.html.
+
+
+https://www.cdc.gov/nndss/, National Notifiable Diseases Surveillance System
+
+Provided by https://wonder.cdc.gov, CDC WONDER
+
+
+
