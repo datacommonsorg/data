@@ -37,7 +37,10 @@ _IGNORE_STATE_ABBR = ['FS']  # Ignoring federal codes
 _IGNORE_CITIES = ['abington township pa',
                   'lone tree co']  # ignoring cities which have duplicates
 
-# A mapping from city name to the dcid.
+# A mapping from city name to the dcid. This dictionary is initialised with 84
+# cities whose mappings differ from scripts/fbi/crime/manual_geocodes.csv. These
+# initialised city mappings are local to the hate crime import and may not apply
+# to other imports.
 _CITY = {
     'las vegas metropolitan police department nv': '3240000',
     'honolulu hi': '1571550',
