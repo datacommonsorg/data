@@ -44,8 +44,7 @@ _RELIGION_DCID_MAPPING = {
         "dcs:ReligionNotStated"
 }
 
-TEMPLATE_STAT_VAR = """Node: dcid:{name}
-name: "{description}"
+TEMPLATE_STAT_VAR = """Node: {StatisticalVariable}
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{populationType}
@@ -223,7 +222,7 @@ class CensusPrimaryReligiousDataLoader():
     def _get_base_name(self, row):
         # To make the name meaningful add Religion to the
         # the name of the stat var
-        name = "Count_" + row["populationType"]
+        name = "Count_" + row["populationType"] + "_Religion"
         return name
 
     def _get_base_constraints(self, row):
@@ -231,7 +230,7 @@ class CensusPrimaryReligiousDataLoader():
         return constraints
 
     def _get_stat_var_name(self, name):
-        return "dcid:{}".format(name)
+        return "dcid:indianCensus/{}".format(name)
 
     def _get_measured_property_name(self, name):
         return "count"
@@ -456,7 +455,7 @@ if __name__ == '__main__':
         "RL-2500", "RL-2600", "RL-2700", "RL-2800", "RL-2900", "RL-3000",
         "RL-3100", "RL-3200", "RL-3300", "RL-3400", "RL-3500"
     ]
-    state_data_files = ["RL-0100", "RL-0200", "RL-0300"]
+
     tmp_dir = tempfile.gettempdir()
 
     # we dont need to redefine the tmcf file and mcf file
