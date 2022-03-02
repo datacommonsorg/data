@@ -36,9 +36,9 @@ _CONTAMINATED_THING_DCID_MAP = {
 
 ### Map for the different sampling wells in Tar Creek to dcids
 _TAR_CREEK_WELL_MAP = {
-    'Picher #d - MW': 'epaSuperfundSiteWellId/OKD980629844/Picher_5MW',
-    'Picher #5 - MW': 'epaSuperfundSiteWellId/OKD980629844/Picher_5MW',
-    'Picher #7 - MW': 'epaSuperfundSiteWellId/OKD980629844/Picher_7MW',
-    'Quapaw#4': 'epaSuperfundSiteWellId/OKD980629844/Quapaw_4',
-    'Commerce#S': 'epaSuperfundSiteWellId/OKD980629844/Commerce_5'
+    'Picher #d - MW': 'epaSuperfundMeasurementSite/OKD980629844/Picher_5MW',
+    'Picher #5 - MW': 'epaSuperfundMeasurementSite/OKD980629844/Picher_5MW',
+    'Picher #7 - MW': 'epaSuperfundMeasurementSite/OKD980629844/Picher_7MW',
+    'Quapaw#4': 'epaSuperfundMeasurementSite/OKD980629844/Quapaw_4',
+    'Commerce#S': 'epaSuperfundMeasurementSite/OKD980629844/Commerce_5'
 }

@@ -206,7 +206,6 @@ def process_intermediate_csv(input_path: str, output_path: str) -> None:
     clean_csv = clean_csv[~(clean_csv['value'] == '.') &
                           ~(clean_csv['value'] == 'na') &
                           ~(clean_csv['value'] == 'n .a .')]
-    clean_csv.to_csv('unclean_tar.csv', index=False)
     clean_csv['value'] = clean_csv['value'].astype(float)
     # there are multiple samples taken during the same day from the same well. For these cases, we aggregate the values to the maxValue
     clean_csv['value'] = clean_csv.groupby(
