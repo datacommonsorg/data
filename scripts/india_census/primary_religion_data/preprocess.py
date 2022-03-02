@@ -212,11 +212,13 @@ class CensusPrimaryReligiousDataLoader():
         # Export it as CSV. It will have the following columns
         # Name,TRU,columnName,value,StatisticalVariable,Year
         if path.exists(self.csv_file_path):
+            self.raw_df.drop_duplicates(inplace = True)
             self.raw_df.to_csv(self.csv_file_path,
                                mode='a',
                                index=False,
                                header=False)
         else:
+            self.raw_df.drop_duplicates(inplace = True)
             self.raw_df.to_csv(self.csv_file_path, index=False, header=True)
 
     def _get_base_name(self, row):
@@ -455,7 +457,7 @@ if __name__ == '__main__':
         "RL-2500", "RL-2600", "RL-2700", "RL-2800", "RL-2900", "RL-3000",
         "RL-3100", "RL-3200", "RL-3300", "RL-3400", "RL-3500"
     ]
-
+    state_data_files = ["RL-0100", "RL-0200", "RL-0300"]
     tmp_dir = tempfile.gettempdir()
 
     # we dont need to redefine the tmcf file and mcf file
@@ -481,3 +483,8 @@ if __name__ == '__main__':
             data_categories=data_categories,
             data_category_column="Religion")
         loader.process()
+
+    # Remove duplicates if any
+    data = pd.read_csv(csv_file_path)
+    data.drop_duplicates(inplace = True)
+    data.to_csv(csv_file_path, index=False, header=True)
