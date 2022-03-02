@@ -1,0 +1,9 @@
+observationAbout,observationDate,variableMeasured,value,units
+epaSuperfundSiteWellId/OKD980629844/Picher_5MW,2019-07-17,dcid:ElectricalConductivity_BodyOfWater_GroundWater,2000.0,dcs:MicroseimensPerCentimeter
+epaSuperfundSiteWellId/OKD980629844/Picher_5MW,2019-07-17,dcid:Temperature_BodyOfWater_GroundWater,19.4,dcs:Celsius
+epaSuperfundSiteWellId/OKD980629844/Picher_5MW,2019-07-17,dcid:PotentialOfHydrogen_BodyOfWater_GroundWater,6.4,
+epaSuperfundSiteWellId/OKD980629844/Picher_5MW,2019-07-17,dcid:Concentration_Iron_BodyOfWater_GroundWater,19.9,dcs:MilligramsPerLitre
+epaSuperfundSiteWellId/OKD980629844/Picher_5MW,2019-07-17,dcid:Concentration_Lead_BodyOfWater_GroundWater,0.0,dcs:MilligramsPerLitre
+epaSuperfundSiteWellId/OKD980629844/Picher_5MW,2019-07-17,dcid:Concentration_Zinc_BodyOfWater_GroundWater,3.49,dcs:MilligramsPerLitre
+epaSuperfundSiteWellId/OKD980629844/Picher_5MW,2019-07-17,dcid:Concentration_Cadmium_BodyOfWater_GroundWater,0.0,dcs:MilligramsPerLitre
+epaSuperfundSiteWellId/OKD980629844/Picher_5MW,2019-07-17,dcid:Concentration_Sulfate_BodyOfWater_GroundWater,1180.0,dcs:MilligramsPerLitre
