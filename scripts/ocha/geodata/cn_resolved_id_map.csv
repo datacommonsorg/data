@@ -43,7 +43,7 @@ CN065130,"Shihezi Prefecture, China",wikidataId/Q848680,,,wikidata.org/wiki/Q848
 CN015120,"Xilingol League Prefecture, China",wikidataId/Q573124,,,wikidata.org/wiki/Q573124
 CN021020,"Benxi Prefecture, China",wikidataId/Q75091,,,wikidata.org/wiki/Q75091
 CN062040,"Jiayuguan Prefecture, China",wikidataId/Q532560,,,wikidata.org/wiki/Q532560
-CN037070,"Laiwu Prefecture, China",wikidataId/Q1198335,,,wikidata.org/wiki/Q1198335
+CN037070,"Laiwu Prefecture, China",wikidataId/Q373234,,Fixed (was mapped to district...),wikidata.org/wiki/Q373234
 CN042080,"Shennongjia Forestry District Prefecture, China",wikidataId/Q1359055,,,wikidata.org/wiki/Q1359055
 CN042110,"Tianmen Prefecture, China",wikidataId/Q71468,,,wikidata.org/wiki/Q71468
 CN042020,"Ezhou Prefecture, China",wikidataId/Q71305,,,wikidata.org/wiki/Q71305
@@ -215,7 +215,7 @@ CN035070,"Sanming Prefecture, China",wikidataId/Q68614,,,wikidata.org/wiki/Q6861
 CN035030,"Nanping Prefecture, China",wikidataId/Q68534,,,wikidata.org/wiki/Q68534
 CN036010,"Fuzhou Prefecture, China",wikidataId/Q363391,"Wiki says this is a capital city. The others say it is a ""prefecture level city"" but not for this.",,wikidata.org/wiki/Q363391
 CN036110,"Yingtan Prefecture, China",wikidataId/Q363076,,,wikidata.org/wiki/Q363076
-CN036030,"Ji'an Prefecture, China",wikidataId/Q1016720,"Wiki says this is a county level city. The others say it is a ""prefecture level city"" but not for this.",,wikidata.org/wiki/Q1016720
+CN036030,"Ji'an Prefecture, China",wikidataId/Q363262,"Wiki says this is a county level city. The others say it is a ""prefecture level city"" but not for this.",Fixed (from county-level city to prefecture-level city),wikidata.org/wiki/Q363262
 CN036020,"Ganzhou Prefecture, China",wikidataId/Q363166,,,wikidata.org/wiki/Q363166
 CN043030,"Chenzhou Prefecture, China",wikidataId/Q416748,,,wikidata.org/wiki/Q416748
 CN036090,"Xinyu Prefecture, China",wikidataId/Q362959,,,wikidata.org/wiki/Q362959

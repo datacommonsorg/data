@@ -38,7 +38,8 @@ This includes geojsons for the following countries:
      --maps_api_key=<KEY>
    ```
 
-4. Manually validate and fix-up the `resolved_id_map.csv`
+4. Manually validate and fix-up the `resolved_id_map.csv` and add it to this
+   directory.
 
 5. Generate the MCFs
 
@@ -46,7 +47,7 @@ This includes geojsons for the following countries:
    python3 generate_mcf.py \
       --ocha_input_geojson_pattern="scratch/$COUNTRY/*.geojson" \
       --ocha_output_dir="$OUTDIR" \
-      --ocha_resolved_id_map="$OUTDIR"/resolved_id_map.csv
+      --ocha_resolved_id_map=<resolved_id_map>
    ```
 
 ## Testing
