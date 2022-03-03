@@ -1,8 +1,4 @@
-ochaPCode,name,dcid,errors,"How To: Find place's wikipedia page and confirm if  wikidata ID
-matches DCID (http://screenshot/BW6VF8mpiDKySS4)
-
-Validation in-progress
-(uncolored rows available for validation)",wikidata url attempt
+ochaPCode,name,dcid,errors,"Validation in-progress (uncolored rows available for validation)",wikidata url attempt
 CN061,"Shaanxi Province Province, China",wikidataId/Q47974,,"Fixed (it was mapped to ""Shanxi Province"")",wikidata.org/wiki/Q47974
 CN031,"Shanghai Municipality Province, China",wikidataId/Q8686,,[Done] Blue block validated by shanth@,wikidata.org/wiki/Q8686
 CN050,"Chongqing Municipality Province, China",wikidataId/Q11725,,,wikidata.org/wiki/Q11725
