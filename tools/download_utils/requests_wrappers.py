@@ -19,8 +19,9 @@ import requests
 import json
 import time
 
+
 def request_url_json(url: str) -> dict:
-  """Get JSON object version of reponse to GET request to given URL.
+    """Get JSON object version of reponse to GET request to given URL.
 
   Args:
     url: URL to make the GET request.
@@ -29,28 +30,29 @@ def request_url_json(url: str) -> dict:
     JSON decoded response from the GET call.
       Empty dict is returned in case the call fails.
   """
-  print(url)
-  try:
-    req = requests.get(url)
-    # print(req.url)
-  except requests.exceptions.ReadTimeout:
-    print('Timeout occoured, retrying after 10s.')
-    time.sleep(10)
+    print(url)
     try:
-      req = requests.get(url)
+        req = requests.get(url)
+        # print(req.url)
     except requests.exceptions.ReadTimeout:
-      print('Timeout occoured, request failed.')
-      return {}
+        print('Timeout occoured, retrying after 10s.')
+        time.sleep(10)
+        try:
+            req = requests.get(url)
+        except requests.exceptions.ReadTimeout:
+            print('Timeout occoured, request failed.')
+            return {}
 
-  if req.status_code == requests.codes.ok:
-    response_data = req.json()
-  else:
-    response_data = {'http_err_code': req.status_code}
-    print('HTTP status code: ' + str(req.status_code))
-  return response_data
+    if req.status_code == requests.codes.ok:
+        response_data = req.json()
+    else:
+        response_data = {'http_err_code': req.status_code}
+        print('HTTP status code: ' + str(req.status_code))
+    return response_data
+
 
 def request_post_json(url: str, data_: dict) -> dict:
-  """Get JSON object version of reponse to POST request to given URL.
+    """Get JSON object version of reponse to POST request to given URL.
 
   Args:
     url: URL to make the POST request.
@@ -60,13 +62,13 @@ def request_post_json(url: str, data_: dict) -> dict:
     JSON decoded response from the POST call.
       Empty dict is returned in case the call fails.
   """
-  headers = {'Content-Type': 'application/json'}
-  req = requests.post(url, data=json.dumps(data_), headers=headers)
-  print(req.request.url)
-  
-  if req.status_code == requests.codes.ok:
-    response_data = req.json()
-  else:
-    response_data = {'http_err_code': req.status_code}
-    print('HTTP status code: ' + str(req.status_code))
-  return response_data
+    headers = {'Content-Type': 'application/json'}
+    req = requests.post(url, data=json.dumps(data_), headers=headers)
+    print(req.request.url)
+
+    if req.status_code == requests.codes.ok:
+        response_data = req.json()
+    else:
+        response_data = {'http_err_code': req.status_code}
+        print('HTTP status code: ' + str(req.status_code))
+    return response_data

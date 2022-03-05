@@ -22,6 +22,7 @@ import base64
 
 _VALID_STATUS = ['pending', 'ok', 'fail', 'fail_http']
 
+
 def url_to_download(url_dict: dict) -> bool:
     """Check if the URL needs be requested.
 
@@ -32,18 +33,20 @@ def url_to_download(url_dict: dict) -> bool:
             Boolean value which is set if URL needs to be requested.
     """
     url_fix_status(url_dict)
-    
-    if url_dict['status'] == 'pending' or url_dict['status'].startswith('fail') or url_dict['force_fetch']:
+
+    if url_dict['status'] == 'pending' or url_dict['status'].startswith(
+            'fail') or url_dict['force_fetch']:
         return True
     else:
         return False
+
 
 def url_fix_status(url_dict):
     if 'status' not in url_dict:
         url_dict['status'] = 'pending'
     if 'force_fetch' not in url_dict:
         url_dict['force_fetch'] = False
-    
+
     if not url_dict['force_fetch'] and os.path.isfile(url_dict['store_path']):
         url_dict['status'] = 'ok'
     elif not url_dict['status'].startswith('fail'):
@@ -51,7 +54,9 @@ def url_fix_status(url_dict):
 
 
 # read status file, reconcile url list
-def read_update_status(filename: str, url_list: list, force_fetch_all: bool = False) -> list:
+def read_update_status(filename: str,
+                       url_list: list,
+                       force_fetch_all: bool = False) -> list:
     """Read a status file and sync it with the given url list.
         Sync checks if the file still exists, force fetch, new store path and
             updates the status according to those conditions.
@@ -65,7 +70,7 @@ def read_update_status(filename: str, url_list: list, force_fetch_all: bool = Fa
             List of URL with metadata dict objects.
     """
     filename = os.path.expanduser(filename)
-    
+
     if filename and os.path.isfile(filename):
         prev_status = json.load(open(filename))
     else:
@@ -74,10 +79,11 @@ def read_update_status(filename: str, url_list: list, force_fetch_all: bool = Fa
         for cur_url in url_list:
             cur_url['force_fetch'] = True
     final_list = sync_status_list(prev_status, url_list)
-    
+
     # write back to the log file
     json.dump(final_list, open(filename, 'w'), indent=2)
     return final_list
+
 
 # add urls or sync 2 url list
 # TODO optimise the implementation, takes more than 10 hours if both lists are ~600k
@@ -97,7 +103,7 @@ def sync_status_list(log_list: list, new_list: list) -> list:
         #     cur_url['url'] = url_add_data(cur_url['url'], cur_url['data'])
         elif 'data' not in cur_url:
             cur_url['data'] = None
-       
+
         # store_path default value, expand user and abs
         if 'store_path' not in cur_url:
             # add file name
@@ -107,7 +113,7 @@ def sync_status_list(log_list: list, new_list: list) -> list:
         cur_url['store_path'] = os.path.expanduser(cur_url['store_path'])
         cur_url['store_path'] = os.path.abspath(cur_url['store_path'])
         os.makedirs(os.path.dirname(cur_url['store_path']), exist_ok=True)
-        
+
         # search in status
         url_found = False
         for i, log_url in enumerate(log_list):
@@ -125,15 +131,16 @@ def sync_status_list(log_list: list, new_list: list) -> list:
                         # TODO check, handle case when data is None
                         elif cur_url['method'].casefold() == 'get':
                             is_same = True
-                        elif cur_url['method'].casefold() != 'get' and 'data' not in cur_url and 'data' not in log_url:
+                        elif cur_url['method'].casefold(
+                        ) != 'get' and 'data' not in cur_url and 'data' not in log_url:
                             is_same = True
-                        
+
                 if is_same:
                     url_found = True
                     # copy the related data
                     if 'http_code' in log_url:
                         cur_url['http_code'] = log_url['http_code']
-                    if 'force_fetch' not in cur_url: 
+                    if 'force_fetch' not in cur_url:
                         cur_url['force_fetch'] = False
                     if cur_url['force_fetch']:
                         cur_url['status'] = 'pending'
@@ -143,28 +150,31 @@ def sync_status_list(log_list: list, new_list: list) -> list:
                         if os.path.isfile(cur_url['store_path']):
                             cur_url['status'] = 'ok'
                         # copy file if store_path is different and status ok
-                        elif os.path.isfile(log_url['store_path']) and log_url['status'] == 'ok':
+                        elif os.path.isfile(log_url['store_path']
+                                           ) and log_url['status'] == 'ok':
                             copy2(log_url['store_path'], cur_url['store_path'])
                             cur_url['status'] = 'ok'
-                        elif log_url['status'] == 'fail_http' or log_url['status'] == 'fail':
+                        elif log_url['status'] == 'fail_http' or log_url[
+                                'status'] == 'fail':
                             cur_url['status'] = log_url['status']
                         else:
                             cur_url['status'] = 'pending'
                             cur_url.pop('http_code', None)
                     ret_list[i] = cur_url
-                    
+
         if not url_found:
             # force fetch
             url_fix_status(cur_url)
             cur_url.pop('http_code', None)
             ret_list.append(cur_url)
-        
+
         if 'status' not in cur_url:
             cur_url['status'] = 'pending'
         if cur_url['status'] not in _VALID_STATUS:
             print('Warning: Found invalid status for', cur_url['url'])
             cur_url['status'] = 'pending'
     return ret_list
+
 
 # get to be downloaded urls
 def get_pending_url_list(url_list: list) -> list:
@@ -183,6 +193,7 @@ def get_pending_url_list(url_list: list) -> list:
             pending_url_list.append(cur_url)
     return pending_url_list
 
+
 def get_failed_url_list(url_list: list) -> list:
     """Filters URLs with failed(any kind) status.
 
@@ -198,6 +209,7 @@ def get_failed_url_list(url_list: list) -> list:
         if cur_url['status'].startswith('fail'):
             pending_url_list.append(cur_url)
     return pending_url_list
+
 
 def get_failed_http_url_list(url_list: list) -> list:
     """Filters URLs with HTTP failure status.
@@ -215,6 +227,7 @@ def get_failed_http_url_list(url_list: list) -> list:
             pending_url_list.append(cur_url)
     return pending_url_list
 
+
 def get_pending_or_fail_url_list(url_list: list) -> list:
     """Filters URLs with pending or failed status.
 
@@ -227,6 +240,7 @@ def get_pending_or_fail_url_list(url_list: list) -> list:
     pending_url_list = []
     for cur_url in url_list:
         url_fix_status(cur_url)
-        if cur_url['status'] == 'pending' or cur_url['status'].startswith('fail'):
+        if cur_url['status'] == 'pending' or cur_url['status'].startswith(
+                'fail'):
             pending_url_list.append(cur_url)
     return pending_url_list
