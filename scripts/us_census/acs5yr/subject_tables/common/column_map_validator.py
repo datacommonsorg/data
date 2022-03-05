@@ -21,10 +21,7 @@ import sys
 from absl import app
 from absl import flags
 
-module_dir_ = os.path.dirname(__file__)
-sys.path.append(os.path.join(module_dir_, '..'))
-
-from common_utils.common_util import *
+from .common_util import *
 
 FLAGS = flags.FLAGS
 

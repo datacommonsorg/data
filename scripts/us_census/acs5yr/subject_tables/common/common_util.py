@@ -15,11 +15,11 @@
 Common utilities helpful for processing US census data.
 """
 
-import json
-import zipfile
 import csv
 import io
+import json
 import os
+import zipfile
 from absl import app
 from absl import flags
 

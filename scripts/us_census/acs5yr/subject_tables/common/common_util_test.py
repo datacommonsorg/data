@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from operator import imod
 import unittest
-from common_util import *
+from operator import imod
+
+from .common_util import *
 
 class TestCommonUtil(unittest.TestCase):
     def test_token_in_list(self):

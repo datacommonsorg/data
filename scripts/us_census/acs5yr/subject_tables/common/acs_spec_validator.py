@@ -15,20 +15,17 @@
 Perform sanity checks on the JSON specification of import configuration.
 """
 
-import zipfile
+import copy
 import csv
 import io
 import json
-import sys
 import os
+import sys
+import zipfile
 from absl import app
 from absl import flags
-import copy
 
-module_dir_ = os.path.dirname(__file__)
-sys.path.append(os.path.join(module_dir_, '..'))
-
-from common_utils.common_util import *
+from .common_util import *
 
 FLAGS = flags.FLAGS
 

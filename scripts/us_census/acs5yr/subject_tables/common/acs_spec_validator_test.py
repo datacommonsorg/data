@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from operator import imod
 import unittest
+from operator import imod
+
 from acs_spec_validator import *
 
 class TestCommonUtil(unittest.TestCase):
