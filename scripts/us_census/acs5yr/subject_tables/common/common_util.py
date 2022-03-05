@@ -46,11 +46,12 @@ flags.DEFINE_boolean('is_metadata', False,
 flags.DEFINE_string('delimiter', '!!',
                     'The delimiter to extract tokens from column name')
 
+
 def get_tokens_list_from_zip(zip_file_path: str,
                              check_metadata: bool = False,
                              print_details: bool = False,
                              delimiter: str = '!!') -> list:
-  """Function to get list of all tokens given a zip file downloaded from the data.census.gov site.
+    """Function to get list of all tokens given a zip file downloaded from the data.census.gov site.
 
     Args:
       zip_file_path: Path of the zip file downloaded from the data.census.gov site
@@ -64,45 +65,48 @@ def get_tokens_list_from_zip(zip_file_path: str,
     Returns:
       List of tokens present in the csv files within the zip file.
   """
-  zip_file_path = os.path.expanduser(zip_file_path)
-  tokens = []
-  with zipfile.ZipFile(zip_file_path) as zf:
-    for filename in zf.namelist():
-      temp_flag = False
-      if check_metadata:
-        if '_metadata_' in filename:
-          temp_flag = True
-      elif '_data_' in filename:
-        temp_flag = True
-      if temp_flag:
-        if print_details:
-          print('----------------------------------------------------')
-          print(filename)
-          print('----------------------------------------------------')
-        with zf.open(filename, 'r') as data_f:
-          csv_reader = csv.reader(io.TextIOWrapper(data_f, 'utf-8'))
-          for row in csv_reader:
+    zip_file_path = os.path.expanduser(zip_file_path)
+    tokens = []
+    with zipfile.ZipFile(zip_file_path) as zf:
+        for filename in zf.namelist():
+            temp_flag = False
             if check_metadata:
-              for tok in row[1].split(delimiter):
-                # tokens.add(tok)
-                if tok not in tokens:
-                  tokens.append(tok)
-                  if print_details:
-                    print(tok)
-            else:
-              if csv_reader.line_num == 2:
-                for column_name in row:
-                  for tok in column_name.split(delimiter):
-                    # tokens.add(tok)
-                    if tok not in tokens:
-                      tokens.append(tok)
-                      if print_details:
-                        print(tok)
+                if '_metadata_' in filename:
+                    temp_flag = True
+            elif '_data_' in filename:
+                temp_flag = True
+            if temp_flag:
+                if print_details:
+                    print(
+                        '----------------------------------------------------')
+                    print(filename)
+                    print(
+                        '----------------------------------------------------')
+                with zf.open(filename, 'r') as data_f:
+                    csv_reader = csv.reader(io.TextIOWrapper(data_f, 'utf-8'))
+                    for row in csv_reader:
+                        if check_metadata:
+                            for tok in row[1].split(delimiter):
+                                # tokens.add(tok)
+                                if tok not in tokens:
+                                    tokens.append(tok)
+                                    if print_details:
+                                        print(tok)
+                        else:
+                            if csv_reader.line_num == 2:
+                                for column_name in row:
+                                    for tok in column_name.split(delimiter):
+                                        # tokens.add(tok)
+                                        if tok not in tokens:
+                                            tokens.append(tok)
+                                            if print_details:
+                                                print(tok)
 
-  return tokens
+    return tokens
+
 
 def token_in_list_ignore_case(token: str, list_check: list) -> bool:
-  """Function that checks if the given token is in the list of tokens ignoring the case.
+    """Function that checks if the given token is in the list of tokens ignoring the case.
 
     Args:
       token: Token to be searched in the list.
@@ -113,15 +117,16 @@ def token_in_list_ignore_case(token: str, list_check: list) -> bool:
         True if token is present in the list.
         False if token is not present in the list.
   """
-  for tok in list_check:
-    if tok.lower() == token.lower():
-      return True
-  return False
+    for tok in list_check:
+        if tok.lower() == token.lower():
+            return True
+    return False
+
 
 def column_to_be_ignored(column_name: str,
                          spec_dict: dict,
                          delimiter: str = '!!') -> bool:
-  """Function that checks if the given column is to be ignored according to the spec.
+    """Function that checks if the given column is to be ignored according to the spec.
     Column is considered to be ignored if there is a full match or if `ignoreColumns`
       contains token which is present within the column name.
 
@@ -135,21 +140,22 @@ def column_to_be_ignored(column_name: str,
         True if the column is to be ignored accoring to the spec.
         False if column is not to be ignored accoring to the spec.
   """
-  ret_value = False
-  if 'ignoreColumns' in spec_dict:
-    for ignore_token in spec_dict['ignoreColumns']:
-      if delimiter in ignore_token and ignore_token.lower() == column_name.lower():
-        ret_value = True
-      elif token_in_list_ignore_case(ignore_token,
-                                     column_name.split(delimiter)):
-        ret_value = True
-  return ret_value
+    ret_value = False
+    if 'ignoreColumns' in spec_dict:
+        for ignore_token in spec_dict['ignoreColumns']:
+            if delimiter in ignore_token and ignore_token.lower(
+            ) == column_name.lower():
+                ret_value = True
+            elif token_in_list_ignore_case(ignore_token,
+                                           column_name.split(delimiter)):
+                ret_value = True
+    return ret_value
 
 
 def remove_columns_to_be_ignored(column_name_list: list,
                                  spec_dict: dict,
                                  delimiter: str = '!!') -> list:
-  """Function that removes columns to be ignored from a given list of columns.
+    """Function that removes columns to be ignored from a given list of columns.
 
     Args:
       column_name_list: The list of column name strings.
@@ -160,17 +166,17 @@ def remove_columns_to_be_ignored(column_name_list: list,
       A list of filtered column names, with the column names to be ignored
         removed from the input list.
   """
-  ret_list = []
-  for column_name in column_name_list:
-    if not column_to_be_ignored(column_name, spec_dict, delimiter):
-      ret_list.append(column_name)
-  return ret_list
+    ret_list = []
+    for column_name in column_name_list:
+        if not column_to_be_ignored(column_name, spec_dict, delimiter):
+            ret_list.append(column_name)
+    return ret_list
 
 
 def ignored_columns(column_name_list: list,
                     spec_dict: dict,
                     delimiter: str = '!!') -> list:
-  """Function that returns list of columns to be ignored from a given list of columns.
+    """Function that returns list of columns to be ignored from a given list of columns.
 
     Args:
       column_name_list: The list of column name strings.
@@ -181,15 +187,16 @@ def ignored_columns(column_name_list: list,
       A list of column names that will be ignored according to the spec_dict.
   """
 
-  ret_list = []
-  for column_name in column_name_list:
-    if column_to_be_ignored(column_name, spec_dict, delimiter):
-      ret_list.append(column_name)
-  return ret_list
+    ret_list = []
+    for column_name in column_name_list:
+        if column_to_be_ignored(column_name, spec_dict, delimiter):
+            ret_list.append(column_name)
+    return ret_list
+
 
 def get_tokens_list_from_column_list(column_name_list: list,
                                      delimiter: str = '!!') -> list:
-  """Function that returns list of tokens present in the list of column names.
+    """Function that returns list of tokens present in the list of column names.
 
     Args:
       column_name_list: The list of column name strings.
@@ -199,16 +206,16 @@ def get_tokens_list_from_column_list(column_name_list: list,
       A list of tokens present in the list of column names.
   """
 
-  tokens = []
-  for column_name in column_name_list:
-    for tok in column_name.split(delimiter):
-      if tok not in tokens:
-        tokens.append(tok)
-  return tokens
+    tokens = []
+    for column_name in column_name_list:
+        for tok in column_name.split(delimiter):
+            if tok not in tokens:
+                tokens.append(tok)
+    return tokens
 
 
 def get_spec_token_list(spec_dict: dict, delimiter: str = '!!') -> dict:
-  """Function that returns list of tokens present in the import configuration spec.
+    """Function that returns list of tokens present in the import configuration spec.
 
     Args:
       spec_dict: Dict obj containing configurations for the import.
@@ -219,71 +226,71 @@ def get_spec_token_list(spec_dict: dict, delimiter: str = '!!') -> dict:
         token_list: list of tokens present in the spec_dict.
         repeated_list: list of tokens that appear multiple times within the spec.
   """
-  ret_list = []
-  repeated_list = []
-  # check if the token appears in any of the pvs
-  for prop in spec_dict['pvs'].keys():
-    for token in spec_dict['pvs'][prop]:
-      if token in ret_list and not token.startswith('_'):
-        repeated_list.append(token)
-      elif not token.startswith('_'):
-        ret_list.append(token)
+    ret_list = []
+    repeated_list = []
+    # check if the token appears in any of the pvs
+    for prop in spec_dict['pvs'].keys():
+        for token in spec_dict['pvs'][prop]:
+            if token in ret_list and not token.startswith('_'):
+                repeated_list.append(token)
+            elif not token.startswith('_'):
+                ret_list.append(token)
 
-  # check if the token appears in any of the population type
-  if 'populationType' in spec_dict:
-    for token in spec_dict['populationType'].keys():
-      if token in ret_list and not token.startswith('_'):
-        repeated_list.append(token)
-      elif not token.startswith('_'):
-        ret_list.append(token)
+    # check if the token appears in any of the population type
+    if 'populationType' in spec_dict:
+        for token in spec_dict['populationType'].keys():
+            if token in ret_list and not token.startswith('_'):
+                repeated_list.append(token)
+            elif not token.startswith('_'):
+                ret_list.append(token)
 
-  # check if the token appears in measurement
-  if 'measurement' in spec_dict:
-    for token in spec_dict['measurement'].keys():
-      if token in ret_list and not token.startswith('_'):
-        repeated_list.append(token)
-      elif not token.startswith('_'):
-        ret_list.append(token)
+    # check if the token appears in measurement
+    if 'measurement' in spec_dict:
+        for token in spec_dict['measurement'].keys():
+            if token in ret_list and not token.startswith('_'):
+                repeated_list.append(token)
+            elif not token.startswith('_'):
+                ret_list.append(token)
 
-  #check if the token is to be ignored
-  if 'ignoreTokens' in spec_dict:
-    for token in spec_dict['ignoreTokens']:
-      if token in ret_list and not token.startswith('_'):
-        repeated_list.append(token)
-      elif not token.startswith('_'):
-        ret_list.append(token)
+    #check if the token is to be ignored
+    if 'ignoreTokens' in spec_dict:
+        for token in spec_dict['ignoreTokens']:
+            if token in ret_list and not token.startswith('_'):
+                repeated_list.append(token)
+            elif not token.startswith('_'):
+                ret_list.append(token)
 
-  #check if the column name appears as ignore column or if a token appears in ignoreColumns
-  if 'ignoreColumns' in spec_dict:
-    for token in spec_dict['ignoreColumns']:
-      if token in ret_list and not token.startswith('_'):
-        repeated_list.append(token)
-      elif not token.startswith('_'):
-        ret_list.append(token)
+    #check if the column name appears as ignore column or if a token appears in ignoreColumns
+    if 'ignoreColumns' in spec_dict:
+        for token in spec_dict['ignoreColumns']:
+            if token in ret_list and not token.startswith('_'):
+                repeated_list.append(token)
+            elif not token.startswith('_'):
+                ret_list.append(token)
 
-  #check if the token appears on any side of the enumspecialisation
-  if 'enumSpecializations' in spec_dict:
-    for token in spec_dict['enumSpecializations'].keys():
-      ret_list.append(token)
-      ret_list.append(spec_dict['enumSpecializations'][token])
+    #check if the token appears on any side of the enumspecialisation
+    if 'enumSpecializations' in spec_dict:
+        for token in spec_dict['enumSpecializations'].keys():
+            ret_list.append(token)
+            ret_list.append(spec_dict['enumSpecializations'][token])
 
-  #check if the total clomn is present and tokens in right side of denominator appear
-  if 'denominators' in spec_dict:
-    for column in spec_dict['denominators']:
-      ret_list.append(column)
-      for token in spec_dict['denominators'][column]:
-        ret_list.append(token)
+    #check if the total clomn is present and tokens in right side of denominator appear
+    if 'denominators' in spec_dict:
+        for column in spec_dict['denominators']:
+            ret_list.append(column)
+            for token in spec_dict['denominators'][column]:
+                ret_list.append(token)
 
-  return {
-      'token_list': list(set(ret_list)),
-      'repeated_list': list(set(repeated_list))
-  }
+    return {
+        'token_list': list(set(ret_list)),
+        'repeated_list': list(set(repeated_list))
+    }
 
 
 def find_missing_tokens(token_list: list,
                         spec_dict: dict,
                         delimiter: str = '!!') -> list:
-  """Find tokens missing in the import configuration spec given a list of tokens.
+    """Find tokens missing in the import configuration spec given a list of tokens.
 
   Args:
     token_list: List of tokens expected to appear in the spec. 
@@ -294,17 +301,17 @@ def find_missing_tokens(token_list: list,
   Returns:
     List of tokens that are missing in the spec.
   """
-  spec_tokens = get_spec_token_list(spec_dict, delimiter)['token_list']
-  tokens_copy = token_list.copy()
-  for token in token_list:
-    if token_in_list_ignore_case(token, spec_tokens):
-      tokens_copy.remove(token)
-  return tokens_copy
+    spec_tokens = get_spec_token_list(spec_dict, delimiter)['token_list']
+    tokens_copy = token_list.copy()
+    for token in token_list:
+        if token_in_list_ignore_case(token, spec_tokens):
+            tokens_copy.remove(token)
+    return tokens_copy
 
 
 # assumes metadata file or data with overlays file
 def columns_from_CSVreader(csv_reader, is_metadata_file: bool = False) -> list:
-  """Function to get list of all columns given a csv reader object.
+    """Function to get list of all columns given a csv reader object.
 
     Args:
       csv_reader: csv reader object of the file to extract data from.
@@ -318,20 +325,20 @@ def columns_from_CSVreader(csv_reader, is_metadata_file: bool = False) -> list:
       List of columns present in the csv reader object.
   """
 
-  column_name_list = []
-  for row in csv_reader:
-    if is_metadata_file:
-      if len(row) > 1:
-        column_name_list.append(row[1])
-    else:
-      if csv_reader.line_num == 2:
-        column_name_list = row.copy()
-  return column_name_list
+    column_name_list = []
+    for row in csv_reader:
+        if is_metadata_file:
+            if len(row) > 1:
+                column_name_list.append(row[1])
+        else:
+            if csv_reader.line_num == 2:
+                column_name_list = row.copy()
+    return column_name_list
 
 
 # assumes metadata file or data with overlays file
 def columns_from_CSVfile(csv_path: str, is_metadata_file: bool = False) -> list:
-  """Function to get list of all columns given a csv file downloaded from the data.census.gov site.
+    """Function to get list of all columns given a csv file downloaded from the data.census.gov site.
 
     Args:
       csv_path: List of paths of the csv file downloaded from the data.census.gov site
@@ -344,17 +351,17 @@ def columns_from_CSVfile(csv_path: str, is_metadata_file: bool = False) -> list:
       List of columns present in the csv file.
   """
 
-  csv_path = os.path.expanduser(csv_path)
-  csv_reader = csv.reader(open(csv_path, 'r'))
-  all_columns = columns_from_CSVreader(csv_reader, is_metadata_file)
+    csv_path = os.path.expanduser(csv_path)
+    csv_reader = csv.reader(open(csv_path, 'r'))
+    all_columns = columns_from_CSVreader(csv_reader, is_metadata_file)
 
-  return all_columns
+    return all_columns
 
 
 # assumes metadata file or data with overlays file
-def columns_from_CSVfile_list(csv_path_list: list,
-                              is_metadata: list = (False)) -> list:
-  """Function to get list of all columns given a list of csv files downloaded from the data.census.gov site.
+def columns_from_CSVfile_list(
+    csv_path_list: list, is_metadata: list = (False)) -> list:
+    """Function to get list of all columns given a list of csv files downloaded from the data.census.gov site.
 
     Args:
       csv_path_list: List of paths of the csv file downloaded from the data.census.gov site
@@ -366,30 +373,30 @@ def columns_from_CSVfile_list(csv_path_list: list,
     Returns:
       List of columns present in the list of csv files.
   """
-  all_columns = []
+    all_columns = []
 
-  if type(is_metadata) != type([]):
-    is_metadata = list(is_metadata)
+    if type(is_metadata) != type([]):
+        is_metadata = list(is_metadata)
 
-  if len(is_metadata) < len(csv_path_list):
-    for i in range(0, (len(csv_path_list) - len(is_metadata))):
-      is_metadata.append(False)
+    if len(is_metadata) < len(csv_path_list):
+        for i in range(0, (len(csv_path_list) - len(is_metadata))):
+            is_metadata.append(False)
 
-  for i, cur_file in enumerate(csv_path_list):
-    # create csv reader
-    cur_file = os.path.expanduser(cur_file)
-    csv_reader = csv.reader(open(cur_file, 'r'))
-    cur_columns = columns_from_CSVreader(csv_reader, is_metadata[i])
-    all_columns.extend(cur_columns)
+    for i, cur_file in enumerate(csv_path_list):
+        # create csv reader
+        cur_file = os.path.expanduser(cur_file)
+        csv_reader = csv.reader(open(cur_file, 'r'))
+        cur_columns = columns_from_CSVreader(csv_reader, is_metadata[i])
+        all_columns.extend(cur_columns)
 
-  all_columns = list(set(all_columns))
+    all_columns = list(set(all_columns))
 
-  return all_columns
+    return all_columns
 
 
 # assumes metadata file or data with overlays file
 def columns_from_zip_file(zip_path: str, check_metadata: bool = False) -> list:
-  """Function to get list of all columns given a zip file downloaded from the data.census.gov site.
+    """Function to get list of all columns given a zip file downloaded from the data.census.gov site.
 
     Args:
       zip_path: Path of the zip file downloaded from the data.census.gov site
@@ -402,30 +409,31 @@ def columns_from_zip_file(zip_path: str, check_metadata: bool = False) -> list:
       List of columns present in the csv files within the zip file.
   """
 
-  zip_path = os.path.expanduser(zip_path)
-  all_columns = []
+    zip_path = os.path.expanduser(zip_path)
+    all_columns = []
 
-  with zipfile.ZipFile(zip_path) as zf:
-    for filename in zf.namelist():
-      temp_flag = False
-      if check_metadata:
-        if '_metadata_' in filename:
-          temp_flag = True
-      elif '_data_' in filename:
-        temp_flag = True
-      if temp_flag:
-        with zf.open(filename, 'r') as data_f:
-          csv_reader = csv.reader(io.TextIOWrapper(data_f, 'utf-8'))
-          cur_columns = columns_from_CSVreader(csv_reader, check_metadata)
-          all_columns.extend(cur_columns)
+    with zipfile.ZipFile(zip_path) as zf:
+        for filename in zf.namelist():
+            temp_flag = False
+            if check_metadata:
+                if '_metadata_' in filename:
+                    temp_flag = True
+            elif '_data_' in filename:
+                temp_flag = True
+            if temp_flag:
+                with zf.open(filename, 'r') as data_f:
+                    csv_reader = csv.reader(io.TextIOWrapper(data_f, 'utf-8'))
+                    cur_columns = columns_from_CSVreader(
+                        csv_reader, check_metadata)
+                    all_columns.extend(cur_columns)
 
-  all_columns = list(set(all_columns))
+    all_columns = list(set(all_columns))
 
-  return all_columns
+    return all_columns
 
 
 def get_spec_dict_from_path(spec_path: str) -> dict:
-  """Read .json file containing the import configuration
+    """Read .json file containing the import configuration
 
   Args:
     spec_path: Path to the JSON file containing the configuration.
@@ -433,61 +441,62 @@ def get_spec_dict_from_path(spec_path: str) -> dict:
   Returns:
     dict obj of the configuration spec.
   """
-  spec_path = os.path.expanduser(spec_path)
-  with open(spec_path, 'r') as fp:
-    spec_dict = json.load(fp)
-  return spec_dict
+    spec_path = os.path.expanduser(spec_path)
+    with open(spec_path, 'r') as fp:
+        spec_dict = json.load(fp)
+    return spec_dict
 
 
 def main(argv):
-  if not FLAGS.spec_path:
-    if FLAGS.ignore_columns:
-      print('ERROR: Path to spec JSON required to ignore columns')
-      return
-  else:
-    spec_dict = get_spec_dict_from_path(FLAGS.spec_path)
-
-  all_columns = []
-  print_columns = []
-  if FLAGS.zip_path:
-    all_columns = columns_from_zip_file(FLAGS.zip_path, FLAGS.is_metadata)
-    if FLAGS.ignore_columns:
-      print_columns = remove_columns_to_be_ignored(all_columns, spec_dict,
-                                                   FLAGS.delimiter)
+    if not FLAGS.spec_path:
+        if FLAGS.ignore_columns:
+            print('ERROR: Path to spec JSON required to ignore columns')
+            return
     else:
-      print_columns = all_columns
-  elif FLAGS.csv_path:
-    all_columns = columns_from_CSVfile(FLAGS.csv_path, FLAGS.is_metadata)
-    if FLAGS.ignore_columns:
-      print_columns = remove_columns_to_be_ignored(all_columns, spec_dict,
-                                                   FLAGS.delimiter)
-    else:
-      print_columns = all_columns
-  elif FLAGS.csv_list:
-    all_columns = columns_from_CSVfile_list(FLAGS.csv_list, [FLAGS.is_metadata])
-    if FLAGS.ignore_columns:
-      print_columns = remove_columns_to_be_ignored(all_columns, spec_dict,
-                                                   FLAGS.delimiter)
-    else:
-      print_columns = all_columns
+        spec_dict = get_spec_dict_from_path(FLAGS.spec_path)
 
-  if FLAGS.get_tokens:
-    print(
-        json.dumps(
-            get_tokens_list_from_column_list(print_columns, FLAGS.delimiter),
-            indent=2))
+    all_columns = []
+    print_columns = []
+    if FLAGS.zip_path:
+        all_columns = columns_from_zip_file(FLAGS.zip_path, FLAGS.is_metadata)
+        if FLAGS.ignore_columns:
+            print_columns = remove_columns_to_be_ignored(
+                all_columns, spec_dict, FLAGS.delimiter)
+        else:
+            print_columns = all_columns
+    elif FLAGS.csv_path:
+        all_columns = columns_from_CSVfile(FLAGS.csv_path, FLAGS.is_metadata)
+        if FLAGS.ignore_columns:
+            print_columns = remove_columns_to_be_ignored(
+                all_columns, spec_dict, FLAGS.delimiter)
+        else:
+            print_columns = all_columns
+    elif FLAGS.csv_list:
+        all_columns = columns_from_CSVfile_list(FLAGS.csv_list,
+                                                [FLAGS.is_metadata])
+        if FLAGS.ignore_columns:
+            print_columns = remove_columns_to_be_ignored(
+                all_columns, spec_dict, FLAGS.delimiter)
+        else:
+            print_columns = all_columns
 
-  if FLAGS.get_columns:
-    print(json.dumps(print_columns, indent=2))
+    if FLAGS.get_tokens:
+        print(
+            json.dumps(get_tokens_list_from_column_list(print_columns,
+                                                        FLAGS.delimiter),
+                       indent=2))
 
-  if FLAGS.get_ignored_columns:
-    print(
-        json.dumps(
-            list(set(ignored_columns(all_columns, spec_dict, FLAGS.delimiter))),
-            indent=2))
+    if FLAGS.get_columns:
+        print(json.dumps(print_columns, indent=2))
+
+    if FLAGS.get_ignored_columns:
+        print(
+            json.dumps(list(
+                set(ignored_columns(all_columns, spec_dict, FLAGS.delimiter))),
+                       indent=2))
 
 
 if __name__ == '__main__':
-  flags.mark_flags_as_mutual_exclusive(['zip_path', 'csv_path', 'csv_list'],
-                                       required=True)
-  app.run(main)
+    flags.mark_flags_as_mutual_exclusive(['zip_path', 'csv_path', 'csv_list'],
+                                         required=True)
+    app.run(main)

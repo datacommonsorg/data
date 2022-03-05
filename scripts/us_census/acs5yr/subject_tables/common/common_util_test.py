@@ -17,7 +17,9 @@ from operator import imod
 
 from .common_util import *
 
+
 class TestCommonUtil(unittest.TestCase):
+
     def test_token_in_list(self):
         self.assertTrue(token_in_list_ignore_case('a', ['a', 'b']))
         self.assertTrue(token_in_list_ignore_case('a', ['A', 'b']))
@@ -26,13 +28,7 @@ class TestCommonUtil(unittest.TestCase):
         self.assertFalse(token_in_list_ignore_case('C', ['a', 'b']))
 
     def test_column_ignore(self):
-        spec_dict = {
-            'ignoreColumns': [
-                'a',
-                'B',
-                'C!!d!!e'
-            ]
-        }
+        spec_dict = {'ignoreColumns': ['a', 'B', 'C!!d!!e']}
         # token
         self.assertTrue(column_to_be_ignored('a!!e', spec_dict))
         self.assertTrue(column_to_be_ignored('A!!e', spec_dict))
@@ -50,16 +46,20 @@ class TestCommonUtil(unittest.TestCase):
         self.assertFalse(column_to_be_ignored('d!!E', spec_dict))
 
     def test_tokens_from_column_list(self):
-        self.assertEqual(sorted(get_tokens_list_from_column_list(['a!!b', 'a!!c', 'd!!e'])), sorted(['a', 'b', 'c', 'd', 'e']))
+        self.assertEqual(
+            sorted(get_tokens_list_from_column_list(['a!!b', 'a!!c', 'd!!e'])),
+            sorted(['a', 'b', 'c', 'd', 'e']))
 
     # TODO test columns_from_CSVreader
     def test_columns_from_CSVreader(self):
         with open('testdata/test1.csv') as fp:
             r = csv.reader(fp)
-            self.assertEqual(sorted(columns_from_CSVreader(r, True)), sorted(['a!!b','c!!d','e!!f','g!!h','i!!j']))
+            self.assertEqual(sorted(columns_from_CSVreader(r, True)),
+                             sorted(['a!!b', 'c!!d', 'e!!f', 'g!!h', 'i!!j']))
         with open('testdata/test2.csv') as fp:
             r = csv.reader(fp)
-            self.assertEqual(sorted(columns_from_CSVreader(r, False)), sorted(['a!!b','c!!d','e!!f','g!!h','i!!j']))
+            self.assertEqual(sorted(columns_from_CSVreader(r, False)),
+                             sorted(['a!!b', 'c!!d', 'e!!f', 'g!!h', 'i!!j']))
 
     def test_get_spec_token_list(self):
         spec = {
@@ -83,17 +83,14 @@ class TestCommonUtil(unittest.TestCase):
                 'f': 'm1',
                 'e': 'm2'
             },
-            'ignoreTokens': [
-                'j'
-            ],
-            'ignoreColumns': [
-                'k'
-            ]
+            'ignoreTokens': ['j'],
+            'ignoreColumns': ['k']
         }
         ret = get_spec_token_list(spec)
-        self.assertEqual(sorted(ret['token_list']), sorted(['a', 'b', 'c', 'd', 'e', 'f', 'j', 'k']))
+        self.assertEqual(sorted(ret['token_list']),
+                         sorted(['a', 'b', 'c', 'd', 'e', 'f', 'j', 'k']))
         self.assertEqual(sorted(ret['repeated_list']), sorted(['b', 'c', 'e']))
-    
+
     def test_find_missing_tokens(self):
         spec = {
             'pvs': {
@@ -116,19 +113,15 @@ class TestCommonUtil(unittest.TestCase):
                 'f': 'm1',
                 'e': 'm2'
             },
-            'ignoreTokens': [
-                'j'
-            ],
-            'ignoreColumns': [
-                'k'
-            ]
+            'ignoreTokens': ['j'],
+            'ignoreColumns': ['k']
         }
-        ret = find_missing_tokens(['a', 'b', 'c', 'd', 'e', 'f', 'j', 'k', 'm', 'n'], spec)
+        ret = find_missing_tokens(
+            ['a', 'b', 'c', 'd', 'e', 'f', 'j', 'k', 'm', 'n'], spec)
         self.assertEqual(sorted(ret), sorted(['m', 'n']))
         ret = find_missing_tokens(['a', 'b', 'c', 'd', 'm', 'n'], spec)
         self.assertEqual(sorted(ret), sorted(['m', 'n']))
 
-    
 
 if __name__ == '__main__':
     unittest.main()
