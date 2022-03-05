@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-from requests_wrappers import *
+from .requests_wrappers import *
 
 
 class TestCommonUtil(unittest.TestCase):
