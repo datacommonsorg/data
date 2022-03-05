@@ -41,6 +41,7 @@ from tools.download_utils.status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 
+
 def url_add_api_key(url_dict: dict, api_key: str) -> str:
     """Attaches the api key to a given url
 
