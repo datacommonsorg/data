@@ -26,13 +26,11 @@ class TestCommonUtil(unittest.TestCase):
             },
             {
                 'url': 'https://httpbin.org/get?b=2',
-                'store_path': './tmp/2.json',
-                'status': 'pending'
+                'store_path': './tmp/2.json'
             },
             {
                 'url': 'https://httpbin.org/status/204',
-                'store_path': './tmp/3.json',
-                'status': 'pending'
+                'store_path': './tmp/3.json'
             },
             {
                 'url': 'https://httpbin.org/status/404',
