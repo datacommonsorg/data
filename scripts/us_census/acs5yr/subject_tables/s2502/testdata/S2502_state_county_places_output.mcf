@@ -1,0 +1,1398 @@
+Node: dcid:Count_HousingUnit_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceWhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceBlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceBlackOrAfricanAmericanAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceAsianAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceAsianAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceSomeOtherRaceAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceSomeOtherRaceAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceTwoOrMoreRaces
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceTwoOrMoreRaces
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceHispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceHispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceWhiteAloneNotHispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAloneNotHispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge35OrLessYears_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [- 35 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge35OrLessYears_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [- 35 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge35To44Years_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge35To44Years_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge45To54Years_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge45To54Years_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge55To64Years_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge55To64Years_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge65To74Years_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge65To74Years_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge75To84Years_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [75 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge75To84Years_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [75 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge85OrMoreYears_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge85OrMoreYears_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2017OrLater_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2017 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2017OrLater_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2017 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2015To2016_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2016 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2016_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2016 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2014_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2014 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2014_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2014 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2000To2009_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2000 2009 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2000To2009_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2000 2009 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate1990To1999_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [1990 1999 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate1990To1999_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [1990 1999 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate1989OrEarlier_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [- 1989 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate1989OrEarlier_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [- 1989 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceWhiteAlone_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAlone_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceBlackOrAfricanAmericanAlone_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceBlackOrAfricanAmericanAlone_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceAsianAlone_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceAsianAlone_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceSomeOtherRaceAlone_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceSomeOtherRaceAlone_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceTwoOrMoreRaces_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceTwoOrMoreRaces_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceHispanicOrLatino_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceHispanicOrLatino_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceWhiteAloneNotHispanicOrLatino_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAloneNotHispanicOrLatino_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge35OrLessYears_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [- 35 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge35OrLessYears_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [- 35 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge35To44Years_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge35To44Years_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge45To54Years_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge45To54Years_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge55To64Years_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge55To64Years_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge65To74Years_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge65To74Years_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge75To84Years_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [75 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge75To84Years_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [75 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge85OrMoreYears_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge85OrMoreYears_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2017OrLater_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2017 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2017OrLater_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2017 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2015To2016_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2016 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2016_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2016 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2014_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2014 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2014_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2014 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2000To2009_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2000 2009 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2000To2009_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2000 2009 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate1990To1999_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [1990 1999 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate1990To1999_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [1990 1999 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate1989OrEarlier_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [- 1989 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate1989OrEarlier_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [- 1989 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceWhiteAlone_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAlone_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceBlackOrAfricanAmericanAlone_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceBlackOrAfricanAmericanAlone_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceAsianAlone_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceAsianAlone_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceSomeOtherRaceAlone_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceSomeOtherRaceAlone_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceTwoOrMoreRaces_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceTwoOrMoreRaces_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceHispanicOrLatino_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceHispanicOrLatino_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderRaceWhiteAloneNotHispanicOrLatino_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAloneNotHispanicOrLatino_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge35OrLessYears_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [- 35 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge35OrLessYears_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [- 35 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge35To44Years_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge35To44Years_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge45To54Years_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge45To54Years_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge55To64Years_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge55To64Years_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge65To74Years_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge65To74Years_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge75To84Years_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [75 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge75To84Years_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [75 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderAge85OrMoreYears_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderAge85OrMoreYears_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderAge: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2017OrLater_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2017 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2017OrLater_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2017 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2015To2016_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2016 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2016_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2016 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2014_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2014 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2014_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2014 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2000To2009_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2000 2009 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2000To2009_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2000 2009 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate1990To1999_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [1990 1999 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate1990To1999_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [1990 1999 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate1989OrEarlier_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [- 1989 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate1989OrEarlier_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [- 1989 Date]
+typeOf: dcs:StatisticalVariable
+
