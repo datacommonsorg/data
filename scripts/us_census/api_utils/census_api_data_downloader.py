@@ -41,10 +41,6 @@ from tools.download_utils.status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('force_fetch_data', False,
-                     'Force download of all data from API')
-
-
 def url_add_api_key(url_dict: dict, api_key: str) -> str:
     """Attaches the api key to a given url
 

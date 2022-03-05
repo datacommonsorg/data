@@ -45,6 +45,8 @@ flags.DEFINE_string(
 )
 flags.DEFINE_boolean('all_summaries', None,
                      'Download data for all available summary levels')
+flags.DEFINE_boolean('force_fetch_data', False,
+                     'Force download of all data from API')
 """TODO
     - Add support for specific geos. e.g. a particular state.
     - Accept a config to create data sample download. (A set of specific geos from each summary level)
@@ -267,7 +269,8 @@ def main(argv):
                                   out_path,
                                   FLAGS.api_key,
                                   s_level_list=s_list,
-                                  force_fetch=FLAGS.force_fetch_config)
+                                  force_fetch_config=FLAGS.force_fetch_config,
+                                  force_fetch_data=FLAGS.force_fetch_data)
     os.makedirs(os.path.join(out_path, FLAGS.table_id), exist_ok=True)
     print('Writing URLs to file')
     with open(os.path.join(out_path, FLAGS.table_id, 'download_status.json'),

@@ -19,12 +19,12 @@ API key to access the data can be [requested](https://api.census.gov/data/key_si
 This file is the top level module needed to be called to download the actual data.
 
 ```
-python census_api_data_downloader.py --dataset=acs/acs5/subject --table_id=S0101 --start_year=2012 --end_year=2015 --summary_levels=010,030,040,050,060,140,160,310,500,860,950,960,970 --output_path=~/us_census
+python census_api_data_downloader.py --dataset=acs/acs5/subject --table_id=S0101 --start_year=2012 --end_year=2015 --summary_levels=010,030,040,050,060,140,160,310,500,860,950,960,970 --output_path=~/us_census --api_key=<YOUR API Key>
 ```
 
 To download data for all available summary levels:
 ```
-python census_api_data_downloader.py --dataset=acs/acs5/subject --table_id=S0101 --start_year=2012 --end_year=2015 --all_summaries --output_path=~/us_census
+python census_api_data_downloader.py --dataset=acs/acs5/subject --table_id=S0101 --start_year=2012 --end_year=2015 --all_summaries --output_path=~/us_census --api_key=<YOUR API Key>
 ```
 
 ## census_api_config_fetcher.py
@@ -75,14 +75,12 @@ Functions useful for creating list of all URL calls required to be made to downl
 NOTE: Output path will have subdirectories for dataset and groups created within it for download. 
 
 ```
-python url_list_compiler.py --dataset=acs/acs5/subject --table_id=S0101 --start_year=2012 --end_year=2015 --summary_levels=010,030,040,050,060,140,160,310,500,860,950,960,970 --output_path=~/us_census
+python url_list_compiler.py --dataset=acs/acs5/subject --table_id=S0101 --start_year=2012 --end_year=2015 --summary_levels=010,030,040,050,060,140,160,310,500,860,950,960,970 --output_path=~/us_census --api_key=<YOUR API Key>
 ```
 
 To download data for all available summary levels:
 ```
-python url_list_compiler.py --dataset=acs/acs5/subject --table_id=S0101 --start_year=2012 --end_year=2015 --all_summaries --output_path=~/us_census
+python url_list_compiler.py --dataset=acs/acs5/subject --table_id=S0101 --start_year=2012 --end_year=2015 --all_summaries --output_path=~/us_census --api_key=<YOUR API Key>
 ```
-
-NOTE: `--api_key=<YOUR API Key>` would need to be added when running for first time to ensure that all required geo IDs are downloaded.
 
 NOTE: In case the script hangs due to heacy URL list sync, it might be helpful to delete `download_status.json` file in the destination folder to speed up the process.
