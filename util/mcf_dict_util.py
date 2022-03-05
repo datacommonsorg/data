@@ -375,7 +375,7 @@ def node_list_check_existence_node_list(node_list: list,
 
 
 # drop dcid list
-def drop_nodes(node_list: list, dcid_list: list) -> dict:
+def drop_nodes(node_list: list, dcid_list: list) -> list:
     """Drops the node from list of nodes if it's dcid is present in the dcid list.
 
     Args:
