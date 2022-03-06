@@ -78,7 +78,7 @@ class GeoIdResolverTest(unittest.TestCase):
         self.assertEqual(geo_id, 'geoId/22003')
 
         # GM (Guam), Guam County has dcid geoId/66010
-        # The alpha code GM is changed to GU from _US_GEO_CODE_UPDATE_MAP
+        # The alpha code GM is changed to GU from _US_ALPHA_CODE_UPDATE_MAP
         geo_id = geo_id_resolver.convert_to_place_dcid('GM',
                                                        geo='Guam County',
                                                        geo_type='County')
