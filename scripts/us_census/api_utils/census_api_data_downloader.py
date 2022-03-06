@@ -121,7 +121,8 @@ def url_filter(url_list: list) -> list:
         if cur_url['status'] == 'pending' or cur_url['status'].startswith(
                 'fail'):
             if 'http_code' in cur_url:
-                if cur_url['http_code'] != '204':
+                if cur_url['http_code'] != '204' and cur_url[
+                        'http_code'] != '500':
                     ret_list.append(cur_url)
             else:
                 ret_list.append(cur_url)
