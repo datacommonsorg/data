@@ -72,8 +72,9 @@ class GeoIdResolverTest(unittest.TestCase):
         self.assertEqual(geo_id, 'geoId/02020')
 
         # LA (Louisiana), Allen Parish has dcid geoId/22003
+        # Suffix 'Parish' will be added by _get_county_variants function
         geo_id = geo_id_resolver.convert_to_place_dcid('LA',
-                                                       geo='Allen Parish',
+                                                       geo='Allen',
                                                        geo_type='County')
         self.assertEqual(geo_id, 'geoId/22003')
 
