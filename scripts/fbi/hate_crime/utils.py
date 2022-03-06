@@ -86,21 +86,18 @@ def get_dpv(statvar: dict, config: dict) -> list:
 def create_mcf(stat_vars: list, mcf_file_path: str):
     """Writes all statvars to a .mcf file."""
     dcid_set = set()
-    final_mcf = ''
-    for sv in stat_vars:
-        statvar_mcf_list = []
-        dcid = sv['Node']
-        if dcid in dcid_set:
-            continue
-        dcid_set.add(dcid)
-        for p, v in sv.items():
-            if p != 'Node':
-                statvar_mcf_list.append(f'{p}: dcs:{v}')
-        statvar_mcf = 'Node: dcid:' + dcid + '\n' + '\n'.join(statvar_mcf_list)
-        final_mcf += statvar_mcf + '\n\n'
-
     with open(mcf_file_path, 'w', encoding='utf-8') as f:
-        f.write(final_mcf)
+        for sv in stat_vars:
+            dcid = sv['Node']
+            if dcid in dcid_set:
+                continue
+            dcid_set.add(dcid)
+            statvar_mcf_list = [f'Node: dcid:{dcid}']
+            for p, v in sv.items():
+                if p != 'Node':
+                    statvar_mcf_list.append(f'{p}: dcs:{v}')
+            statvar_mcf = '\n'.join(statvar_mcf_list) + '\n\n'
+            f.write(statvar_mcf)
 
 
 def update_statvar_dcids(statvar_list: list, config: dict):

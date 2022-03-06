@@ -13,6 +13,7 @@ python3 preprocess.py
 ### Data Caveats:
 - New Jersey is missing data for year 2012 in publications 11 and 12
 - Data for a few locations of crime (publication 10) are missing for certain years
+- The output MCF generated from these files is not used due to the change in populationType from 'CriminalIncidents' to 'HateCrimeIncidents' and removal of the 'isHateCrime' property in the statvar definitions. The definitions for the statvars come from the hate crime aggregation scripts.
 
 ## Download Publication Tables
 The `download_publication_data.py` script helps download xls files from the [UCR base url for hate crime](https://ucr.fbi.gov/hate-crime). 
