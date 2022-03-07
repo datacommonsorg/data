@@ -23,11 +23,9 @@ import os
 import sys
 from absl import app
 from absl import flags
+from sys import path
 
 FLAGS = flags.FLAGS
-
-_MODULE_DIR = os.path.dirname(__file__)
-sys.path.append(os.path.join(_MODULE_DIR, '..'))
 
 flags.DEFINE_string('dcid', None, 'dcid of the node to query')
 flags.DEFINE_string('dc_output_path', './prefetched_outputs/',
@@ -35,7 +33,10 @@ flags.DEFINE_string('dc_output_path', './prefetched_outputs/',
 flags.DEFINE_boolean('force_fetch', False,
                      'forces api query and not return cached result')
 
-from common_utils.common_util import requests_post_json
+_MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
+path.insert(1, os.path.join(_MODULE_DIR, '..'))
+
+from download_utils.requests_wrappers import request_post_json
 
 # logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from requests
 # logging.getLogger().setLevel(logging.DEBUG)
@@ -127,7 +128,7 @@ def fetch_dcid_properties_enums(class_dcid: str,
     data_["property"] = "domainIncludes"
     data_["direction"] = "in"
     # print(data_)
-    population_props = requests_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
+    population_props = request_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
     dc_population_pvs = population_props['payload']
     dc_population_pvs = ast.literal_eval(dc_population_pvs)
 
@@ -154,7 +155,7 @@ def fetch_dcid_properties_enums(class_dcid: str,
     data_['property'] = 'rangeIncludes'
     data_['direction'] = 'out'
     if data_['dcids']:
-      population_props_types = requests_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
+      population_props_types = request_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
       population_props_types = ast.literal_eval(population_props_types['payload'])
       for property_name in population_props_types:
         # print(property_name)
@@ -191,7 +192,7 @@ def fetch_dcid_properties_enums(class_dcid: str,
           data_['dcids'] = [type_name]
           data_['property'] = 'typeOf'
           data_['direction'] = 'in'
-          enum_values = requests_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
+          enum_values = request_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
           enum_values = ast.literal_eval(enum_values['payload'])
           if enum_values[type_name]:
             for temp_dict in enum_values[type_name]['in']:
