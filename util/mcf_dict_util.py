@@ -113,7 +113,8 @@ def dc_check_existence(dcid_list: list,
         for cur_dcid in resp_dicts:
             if not resp_dicts[cur_dcid]:
                 ret_dict[cur_dcid] = False
-            elif not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[cur_dcid]['outLabels']:
+            elif not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[
+                    cur_dcid]['outLabels']:
                 ret_dict[cur_dcid] = False
             else:
                 ret_dict[cur_dcid] = True
@@ -188,8 +189,8 @@ def mcf_to_dict_list(mcf_str: str) -> list:
                     for cur_v in vals:
                         temp_dict = {}
                         if ':' in cur_v:
-                            temp_dict['namespace'] = cur_v[:cur_v.index(':'
-                                                                    )].strip()
+                            temp_dict['namespace'] = cur_v[:cur_v.
+                                                           index(':')].strip()
                             temp_dict['value'] = cur_v[cur_v.index(':') +
                                                        1:].strip()
                         else:

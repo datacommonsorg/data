@@ -17,7 +17,9 @@ import unittest
 
 from mcf_dict_util import *
 
+
 class TestMCFDict(unittest.TestCase):
+
     def test_mcf_to_dict_list(self):
         node1_str = """Node: node1
         a: v1
@@ -27,12 +29,30 @@ class TestMCFDict(unittest.TestCase):
         e:   dcid: v5
         """
         node1_dict = OrderedDict({
-            'Node': {'value': 'node1', 'namespace': ''},
-            'a': {'value': 'v1', 'namespace': ''},
-            'b': {'value': 'v2', 'namespace': 'dcs'},
-            'c': {'value': 'v3', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'schema'},
-            'e': {'value': 'v5', 'namespace': 'dcid'}
+            'Node': {
+                'value': 'node1',
+                'namespace': ''
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'b': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            'c': {
+                'value': 'v3',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            }
         })
 
         node2_str = """Node: dcid:node2
@@ -43,12 +63,30 @@ class TestMCFDict(unittest.TestCase):
         e:   dcid: v5
         """
         node2_dict = OrderedDict({
-            'Node': {'value': 'node2', 'namespace': 'dcid'},
-            'a': {'value': 'v1', 'namespace': ''},
-            'b': {'value': 'v2', 'namespace': 'dcs'},
-            'c': {'value': 'v3', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'schema'},
-            'e': {'value': 'v5', 'namespace': 'dcid'}
+            'Node': {
+                'value': 'node2',
+                'namespace': 'dcid'
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'b': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            'c': {
+                'value': 'v3',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            }
         })
 
         node3_str = """Node: node3
@@ -60,18 +98,42 @@ class TestMCFDict(unittest.TestCase):
         dcid: node3
         """
         node3_dict = OrderedDict({
-            'Node': {'value': 'node3', 'namespace': ''},
-            'a': {'value': 'v1', 'namespace': ''},
-            'b': {'value': 'v2', 'namespace': 'dcs'},
-            'c': {'value': 'v3', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'schema'},
-            'e': {'value': 'v5', 'namespace': 'dcid'},
-            'dcid': {'value': 'node3', 'namespace': ''},
+            'Node': {
+                'value': 'node3',
+                'namespace': ''
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'b': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            'c': {
+                'value': 'v3',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            },
+            'dcid': {
+                'value': 'node3',
+                'namespace': ''
+            },
         })
 
-        self.assertEqual(list(mcf_to_dict_list(node1_str)[0].values()), list(node1_dict.values()))
-        self.assertEqual(list(mcf_to_dict_list(node2_str)[0].values()), list(node2_dict.values()))
-        self.assertEqual(list(mcf_to_dict_list(node3_str)[0].values()), list(node3_dict.values()))
+        self.assertEqual(list(mcf_to_dict_list(node1_str)[0].values()),
+                         list(node1_dict.values()))
+        self.assertEqual(list(mcf_to_dict_list(node2_str)[0].values()),
+                         list(node2_dict.values()))
+        self.assertEqual(list(mcf_to_dict_list(node3_str)[0].values()),
+                         list(node3_dict.values()))
 
     def test_mcf_dict_rename_prop(self):
         node1_str = """Node: node1
@@ -82,12 +144,30 @@ class TestMCFDict(unittest.TestCase):
         e:   dcid: v5
         """
         node1_dict = OrderedDict({
-            'Node': {'value': 'node1', 'namespace': ''},
-            'a': {'value': 'v1', 'namespace': ''},
-            'b2': {'value': 'v2', 'namespace': 'dcs'},
-            'c': {'value': 'v3', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'schema'},
-            'e': {'value': 'v5', 'namespace': 'dcid'}
+            'Node': {
+                'value': 'node1',
+                'namespace': ''
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'b2': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            'c': {
+                'value': 'v3',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            }
         })
         node_list = mcf_to_dict_list(node1_str)
         ret_node = mcf_dict_rename_prop(node_list[0], 'b', 'b2')
@@ -102,12 +182,30 @@ class TestMCFDict(unittest.TestCase):
         e:   dcid: v5
         """
         node1_dict = OrderedDict({
-            'Node': {'value': 'node1', 'namespace': ''},
-            'a': {'value': 'v1', 'namespace': ''},
-            'b': {'value': 'v2', 'namespace': 'dcs'},
-            'c': {'value': 'v3', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'dcs'},
-            'e': {'value': 'v5', 'namespace': 'dcid'}
+            'Node': {
+                'value': 'node1',
+                'namespace': ''
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'b': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            'c': {
+                'value': 'v3',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'dcs'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            }
         })
         node_list = mcf_to_dict_list(node1_str)
         ret_node = mcf_dict_rename_namespace(node_list[0], 'schema', 'dcs')
@@ -122,17 +220,35 @@ class TestMCFDict(unittest.TestCase):
         e:   dcid: v5
         """
         node1_dict = OrderedDict({
-            'Node': {'value': 'node1', 'namespace': ''},
-            'a': {'value': 'v1', 'namespace': ''},
-            'b': {'value': 'v22', 'namespace': 'dcs'},
-            'c': {'value': 'v2', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'schema'},
-            'e': {'value': 'v5', 'namespace': 'dcid'}
+            'Node': {
+                'value': 'node1',
+                'namespace': ''
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'b': {
+                'value': 'v22',
+                'namespace': 'dcs'
+            },
+            'c': {
+                'value': 'v2',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            }
         })
         node_list = mcf_to_dict_list(node1_str)
         ret_node = mcf_dict_rename_prop_value(node_list[0], 'b', 'v2', 'v22')
         self.assertEqual(list(ret_node.values()), list(node1_dict.values()))
-    
+
     def test_get_dcid_node(self):
         node1_str = """Node: node1
 a: v1
@@ -156,7 +272,7 @@ d: schema:  v4
 e:   dcid: v5
 dcid: node3
 """
-        
+
         node_list = mcf_to_dict_list(node1_str)
         self.assertEqual(get_dcid_node(node_list[0]), '')
         self.assertEqual(get_dcid_node(node_list[1]), 'node2')
@@ -185,10 +301,10 @@ dcid: node3
     e:   dcid: v5
     dcid: node3
     """
-            
+
         node_list = mcf_to_dict_list(node1_str)
         node_list2 = drop_nodes(node_list, ['node2', 'node3'])
-        
+
         self.assertEqual(node_list2, [node_list[0]])
 
     def test_node_list_check_existence_dc(self):
@@ -214,11 +330,15 @@ dcid: node3
     e:   dcid: v5
     dcid: Person
     """
-            
+
         node_list = mcf_to_dict_list(node1_str)
         node_list2 = node_list_check_existence_dc(node_list)
-        
-        self.assertEqual(node_list2, {'node1': False, 'Person': True, 'Count_Person': True})
+
+        self.assertEqual(node_list2, {
+            'node1': False,
+            'Person': True,
+            'Count_Person': True
+        })
 
     def test_node_list_check_existence_node_list(self):
         node1_str = """Node: dcid:node1
@@ -243,7 +363,7 @@ dcid: node3
     e:   dcid: v5
     dcid: Person
     """
-    
+
         node2_str = """Node: Person
     a: v1
     b: dcs:v2
@@ -252,12 +372,16 @@ dcid: node3
     e:   dcid: v5
     dcid: Person
     """
-            
+
         node_list = mcf_to_dict_list(node1_str)
         node_list2 = mcf_to_dict_list(node2_str)
         node_list3 = node_list_check_existence_node_list(node_list, node_list2)
-        
-        self.assertEqual(node_list3, {'node1': False, 'Person': True, 'Count_Person': False})
+
+        self.assertEqual(node_list3, {
+            'node1': False,
+            'Person': True,
+            'Count_Person': False
+        })
 
     def test_dict_list_to_mcf_str(self):
         node1_str = """Node: node1
@@ -269,12 +393,30 @@ e: dcid:v5
 
 """
         node1_dict = OrderedDict({
-            'Node': {'value': 'node1', 'namespace': ''},
-            'a': {'value': 'v1', 'namespace': ''},
-            'b': {'value': 'v2', 'namespace': 'dcs'},
-            'c': {'value': 'v3', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'schema'},
-            'e': {'value': 'v5', 'namespace': 'dcid'}
+            'Node': {
+                'value': 'node1',
+                'namespace': ''
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'b': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            'c': {
+                'value': 'v3',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            }
         })
 
         node2_str = """Node: dcid:node2
@@ -286,12 +428,30 @@ e: dcid:v5
 
 """
         node2_dict = OrderedDict({
-            'Node': {'value': 'node2', 'namespace': 'dcid'},
-            'a': {'value': 'v1', 'namespace': ''},
-            'c': {'value': 'v3', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'schema'},
-            'b': {'value': 'v2', 'namespace': 'dcs'},
-            'e': {'value': 'v5', 'namespace': 'dcid'}
+            'Node': {
+                'value': 'node2',
+                'namespace': 'dcid'
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'c': {
+                'value': 'v3',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'b': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            }
         })
 
         node3_str = """Node: node3
@@ -304,18 +464,43 @@ dcid: node3
 
 """
         node3_dict = OrderedDict({
-            'Node': {'value': 'node3', 'namespace': ''},
-            'a': {'value': '[v1 v6 v7]', 'namespace': '', 'complexValue': ['v1', 'v8', 'v7']},
-            'b': {'value': 'v2', 'namespace': 'dcs'},
-            'c': {'value': 'v3', 'namespace': 'l'},
-            'd': {'value': 'v4', 'namespace': 'schema'},
-            'e': {'value': 'v5', 'namespace': 'dcid'},
-            'dcid': {'value': 'node3', 'namespace': ''},
+            'Node': {
+                'value': 'node3',
+                'namespace': ''
+            },
+            'a': {
+                'value': '[v1 v6 v7]',
+                'namespace': '',
+                'complexValue': ['v1', 'v8', 'v7']
+            },
+            'b': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            'c': {
+                'value': 'v3',
+                'namespace': 'l'
+            },
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            },
+            'dcid': {
+                'value': 'node3',
+                'namespace': ''
+            },
         })
-        
+
         self.assertEqual(dict_list_to_mcf_str([node1_dict]), node1_str)
-        self.assertEqual(dict_list_to_mcf_str([node2_dict], sort_keys=True), node2_str)
-        self.assertEqual(dict_list_to_mcf_str([node3_dict], regen_complex_vals=True), node3_str)
+        self.assertEqual(dict_list_to_mcf_str([node2_dict], sort_keys=True),
+                         node2_str)
+        self.assertEqual(
+            dict_list_to_mcf_str([node3_dict], regen_complex_vals=True),
+            node3_str)
 
 
 if __name__ == '__main__':
