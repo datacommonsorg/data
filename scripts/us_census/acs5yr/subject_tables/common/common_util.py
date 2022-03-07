@@ -31,7 +31,7 @@ flags.DEFINE_string('csv_path', None,
                     'Path to csv file downloaded from US Census')
 flags.DEFINE_list('csv_list', None,
                   'List of paths to csv files downloaded from US Census')
-flags.DEFINE_string('spec_path', None, 'Path to config spec JSON file')
+flags.DEFINE_string('spec', None, 'Path to config spec JSON file')
 flags.DEFINE_boolean('get_tokens', False,
                      'Produce a list of tokens from the input file/s')
 flags.DEFINE_boolean('get_columns', False,
@@ -448,12 +448,12 @@ def get_spec_dict_from_path(spec_path: str) -> dict:
 
 
 def main(argv):
-    if not FLAGS.spec_path:
+    if not FLAGS.spec:
         if FLAGS.ignore_columns:
             print('ERROR: Path to spec JSON required to ignore columns')
             return
     else:
-        spec_dict = get_spec_dict_from_path(FLAGS.spec_path)
+        spec_dict = get_spec_dict_from_path(FLAGS.spec)
 
     all_columns = []
     print_columns = []

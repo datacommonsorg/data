@@ -830,15 +830,15 @@ def test_column_list(column_list_path: str,
 
 def main(argv):
     if FLAGS.csv_list:
-        test_CSVfile_list(FLAGS.csv_list, FLAGS.spec_path, FLAGS.tests,
+        test_CSVfile_list(FLAGS.csv_list, FLAGS.spec, FLAGS.tests,
                           FLAGS.validator_output, False, False,
                           [FLAGS.is_metadata], FLAGS.delimiter)
     if FLAGS.zip_list:
-        test_zip_file_list(FLAGS.zip_list, FLAGS.spec_path, FLAGS.tests,
+        test_zip_file_list(FLAGS.zip_list, FLAGS.spec, FLAGS.tests,
                            FLAGS.validator_output, False, False,
                            FLAGS.is_metadata, FLAGS.delimiter)
     if FLAGS.column_list_path:
-        test_column_list(FLAGS.column_list_path, FLAGS.spec_path, FLAGS.tests,
+        test_column_list(FLAGS.column_list_path, FLAGS.spec, FLAGS.tests,
                          FLAGS.validator_output, FLAGS.delimiter)
 
 

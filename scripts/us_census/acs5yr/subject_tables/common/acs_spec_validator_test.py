@@ -18,7 +18,7 @@ from operator import imod
 from .acs_spec_validator import *
 
 
-class TestCommonUtil(unittest.TestCase):
+class TestSpecValidator(unittest.TestCase):
 
     def test_find_extra_tokens(self):
         spec1 = {'pvs': {'p1': {'a': 'v1', 'b': 'v2'}, 'p2': {'c': 'v3'}}}

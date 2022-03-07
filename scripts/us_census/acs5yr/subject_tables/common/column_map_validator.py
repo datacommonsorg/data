@@ -227,7 +227,7 @@ def check_column_map(column_map_path: str,
 
 
 def main(argv):
-    check_column_map(FLAGS.column_map, FLAGS.yearwise_columns, FLAGS.spec_path,
+    check_column_map(FLAGS.column_map, FLAGS.yearwise_columns, FLAGS.spec,
                      FLAGS.colmap_validation_output, FLAGS.delimiter)
 
 
