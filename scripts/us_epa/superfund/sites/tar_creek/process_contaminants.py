@@ -65,7 +65,7 @@ _BASE_SV_MAP = {
     "Zinc": {
         "populationType": "BodyOfWater",
         "contaminatedThing": "GroundWater",
-        "contaminant": "Zinc",
+        "contaminant": "zinc",
         "measuredProperty": "concentration"
     },
     "Cadmium": {
