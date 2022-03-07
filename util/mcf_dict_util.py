@@ -32,8 +32,8 @@ The format of dict would be as follows:
     ...
 }
 Functions are provided to read or write single/multiple files.
-When multiple files are read, a dict object is created with a list above
-    described dict like objects corresponding to each file.
+When multiple files are read, a dict object is created with a list similar to
+    above described dict like objects corresponding to each file.
 Functions to edit mcf files include:
 - Change property name.
 - Change value of given property.
@@ -111,8 +111,9 @@ def dc_check_existence(dcid_list: list,
         resp_dicts = req['payload']
         resp_dicts = ast.literal_eval(resp_dicts)
         for cur_dcid in resp_dicts:
-            if not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[
-                    cur_dcid]['outLabels']:
+            if not resp_dicts[cur_dcid]:
+                ret_dict[cur_dcid] = False
+            elif not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[cur_dcid]['outLabels']:
                 ret_dict[cur_dcid] = False
             else:
                 ret_dict[cur_dcid] = True
@@ -187,12 +188,12 @@ def mcf_to_dict_list(mcf_str: str) -> list:
                     for cur_v in vals:
                         temp_dict = {}
                         if ':' in cur_v:
-                            temp_dict['prefix'] = cur_v[:cur_v.index(':'
+                            temp_dict['namespace'] = cur_v[:cur_v.index(':'
                                                                     )].strip()
                             temp_dict['value'] = cur_v[cur_v.index(':') +
                                                        1:].strip()
                         else:
-                            temp_dict['prefix'] = ''
+                            temp_dict['namespace'] = ''
                             temp_dict['value'] = cur_v
                 cur_node[p]['namespace'] = prefix
         node_list.append(cur_node)
@@ -277,6 +278,7 @@ def mcf_dict_rename_namespace(node_dict: Union[dict, OrderedDict], old_ns: str,
         if not (k == 'Node' and v['namespace'] == 'dcid'):
             if v['namespace'] == old_ns:
                 v['namespace'] = new_ns
+    return node_dict
 
 
 def get_dcid_node(node_dict: Union[dict, OrderedDict]) -> str:
