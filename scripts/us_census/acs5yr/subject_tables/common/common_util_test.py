@@ -52,11 +52,11 @@ class TestCommonUtil(unittest.TestCase):
 
     # TODO test columns_from_CSVreader
     def test_columns_from_CSVreader(self):
-        with open('testdata/test1.csv') as fp:
+        with open('./testdata/test1.csv') as fp:
             r = csv.reader(fp)
             self.assertEqual(sorted(columns_from_CSVreader(r, True)),
                              sorted(['a!!b', 'c!!d', 'e!!f', 'g!!h', 'i!!j']))
-        with open('testdata/test2.csv') as fp:
+        with open('./testdata/test2.csv') as fp:
             r = csv.reader(fp)
             self.assertEqual(sorted(columns_from_CSVreader(r, False)),
                              sorted(['a!!b', 'c!!d', 'e!!f', 'g!!h', 'i!!j']))
