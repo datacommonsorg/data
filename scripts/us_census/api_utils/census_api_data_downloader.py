@@ -175,7 +175,7 @@ def download_table(dataset: str,
     url_list = sync_status_list(log_list, url_list)
     with open(status_path, 'w') as fp:
         json.dump(url_list, fp, indent=2)
-    
+
     logging.info("Compiled a list of %d URLs", len(url_list))
 
     start = time.time()
